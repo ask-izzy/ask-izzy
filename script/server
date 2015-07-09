@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -eu
+bash -c 'sleep 1; open http://localhost:8080' &
+./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors --content-base dist

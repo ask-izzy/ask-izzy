@@ -1,0 +1,10 @@
+[ignore]
+.*dist.*
+.*invalidPackageJson/package.json
+
+[include]
+
+[libs]
+
+[options]
+module.system=node
