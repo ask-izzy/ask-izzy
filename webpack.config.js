@@ -11,11 +11,11 @@ module.exports = {
                 loader: "style!css"
             }, {
                 test: /\.jsx$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules)/,
                 loaders: ['babel-loader']
             }, {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules)/,
                 loaders: ['babel-loader']
             }
         ]
