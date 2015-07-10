@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
-set -eu
+set -euo pipefail
+IFS=$'\n\t'
+
 bash -c 'sleep 1; open http://localhost:8080' &
 ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors --content-base dist

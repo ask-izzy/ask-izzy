@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
 
 if ! which flow ; then
     echo "You need 'flow' installed (available via brew on osx)"
