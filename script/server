@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 IFS=$'\n\t'
+PATH=$PATH:`npm bin`
 
-bash -c 'sleep 1; open http://localhost:8080' &
+if which xdg-open; then
+    OPEN=xdg-open
+else
+    OPEN=open
+fi
+
+(sleep 1; $OPEN http://localhost:8080) &
 ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors --content-base dist
