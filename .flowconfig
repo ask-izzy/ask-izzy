@@ -1,6 +1,7 @@
 [ignore]
 .*dist.*
 .*invalidPackageJson/package.json
+.*/node_modules/flow-bin/vendor/examples/.*
 
 [include]
 
