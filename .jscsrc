@@ -1,13 +1,17 @@
 {
     "preset": "airbnb",
+
     "fileExtensions": [".js", ".jsx"],
     "excludeFiles": ["node_modules/**"],
+
+    "esprima": "./node_modules/babel-jscs",
+
+    "disallowMultipleVarDecl": true,
     "maximumLineLength": {
         "value": 78,
         "allowUrlComments": true
     },
-    "validateIndentation": 4,
-    "validateQuoteMarks": null,
     "requireMultipleVarDecl": null,
-    "disallowMultipleVarDecl": true
+    "validateIndentation": 4,
+    "validateQuoteMarks": null
 }
