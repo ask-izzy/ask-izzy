@@ -8,11 +8,11 @@ const Yadda = require('yadda');
 
 module.exports = (function() {
     return Yadda.localisation.English.library()
-        .when('I visit $URL', url => {
-            console.log("Visiting", url);
+        .when('I visit $URL', function(url) {
+            this.driver.get('http://localhost:8000/' + url);
         })
 
-        .then('I should see "$STRING"', expected => {
+        .then('I should see "$STRING"', function(expected) {
             console.log("Do I see", expected);
         })
 })();

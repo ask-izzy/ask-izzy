@@ -21,19 +21,11 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
         before(done => {
             executeInFlow(() => {
 
-                let builder = new Webdriver.Builder()
-                    .forBrowser('firefox');
+                driver = new Webdriver.Builder()
+                    /* Overridden by SELENIUM_BROWSER */
+                    .forBrowser('firefox')
+                    .build();
 
-                if (process.env.SAUCE_USERNAME) {
-                    builder = builder
-                        /* requires Sauce Connect */
-                        .usingServer('http://localhost:4445')
-                        .withCapabilities({
-                            'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
-                        })
-                }
-
-                driver = builder.build();
                 driver.manage().timeouts().implicitlyWait(10000);
             }, done);
         });
