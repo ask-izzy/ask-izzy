@@ -1,0 +1,13 @@
+{
+    "preset": "airbnb",
+    "fileExtensions": [".js", ".jsx"],
+    "excludeFiles": ["node_modules/**"],
+    "maximumLineLength": {
+        "value": 78,
+        "allowUrlComments": true
+    },
+    "validateIndentation": 4,
+    "validateQuoteMarks": null,
+    "requireMultipleVarDecl": null,
+    "disallowMultipleVarDecl": true
+}
