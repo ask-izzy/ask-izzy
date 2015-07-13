@@ -9,9 +9,9 @@ require("!style!css!./styles/style.css");
 // Will have to read up a bit.
 window.onload = function() {
     var React = require("react");
-    var container = document.getElementById('main')
+    var container = document.body.parentElement;
     React.render(
-        require("./components/test.jsx"),
+        require("./index"),
         container
     );
 }

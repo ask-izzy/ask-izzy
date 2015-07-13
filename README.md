@@ -15,6 +15,8 @@ If you're working on this codebase, some understanding of the following will hel
 
     git clone git@github.com:ask-izzy/ask-izzy.git
     cd ask-izzy
+    npm install -g forever
+    npm install -g jsxhint
     npm install
     ./script/typecheck
     ./script/server
