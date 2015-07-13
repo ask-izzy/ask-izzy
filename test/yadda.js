@@ -5,6 +5,7 @@
 
 const Yadda = require('yadda');
 const Webdriver = require('selenium-webdriver');
+const fs = require('fs');
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
@@ -24,18 +25,19 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
                     .forBrowser('firefox');
 
                 if (process.env.SAUCE_USERNAME) {
+                    let url = 'http://' +
+                        process.env.SAUCE_USERNAME + ':' +
+                        process.env.SAUCE_ACCESS_KEY +
+                        '@ondemand.saucelabs.com:80/wd/hub';
+
                     builder = builder
-                        .usingServer(
-                            'http://' +
-                            process.env.SAUCE_USERNAME + ':' +
-                            process.env.SAUCE_ACCESS_KEY +
-                            '@ondemand.saucelabs.com:80/wd/hub')
+                        .usingServer(url)
                         .withCapabilities({
                             'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
                         })
                 }
 
-                driver = builder.build()
+                driver = builder.build();
                 driver.manage().timeouts().implicitlyWait(10000);
             }, done);
         });
