@@ -16,12 +16,17 @@
     "path": "*",
     "react": "^0.13.3",
     "react-tap-event-plugin": "^0.1.7",
-    "style-loader": "^0.12.3"
+    "style-loader": "^0.12.3",
+    "babel-runtime": "~5.6.18"
   },
   "devDependencies": {
+    "babel-jscs": "~2.0.0",
     "flow-bin": "~0.13.1",
-    "jsxcs": "~0.2.1",
+    "jscs": "~1.13.1",
     "jsxhint": "~0.15.1",
-    "webpack-dev-server": "^1.10.1"
+    "mocha": "~2.2.5",
+    "mocha-babel": "~3.0.0",
+    "webpack-dev-server": "^1.10.1",
+    "yadda": "~0.12.0"
   }
 }
