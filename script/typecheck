@@ -9,4 +9,5 @@ if ! which flow ; then
 fi
 
 jsxhint
+jsxcs .
 flow

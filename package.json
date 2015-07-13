@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "flow-bin": "~0.13.1",
+    "jsxcs": "~0.2.1",
     "jsxhint": "~0.15.1",
     "webpack-dev-server": "^1.10.1"
   }
