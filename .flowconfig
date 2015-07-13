@@ -1,7 +1,8 @@
 [ignore]
 .*dist.*
 .*invalidPackageJson/package.json
-.*/node_modules/flow-bin/vendor/examples/.*
+.*/node_modules/.*/examples/.*
+.*/node_modules/.*/test/.*
 
 [include]
 
