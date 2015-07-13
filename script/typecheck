@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 IFS=$'\n\t'
-PATH=$PATH:`npm bin`
+PATH=`npm bin`:$PATH
 
 BOLD=$(tput bold)
 END=$(tput sgr0)
@@ -9,6 +9,6 @@ END=$(tput sgr0)
 echo "${BOLD}jsxhint${END}"
 jsxhint && echo "Good"
 echo "${BOLD}jscs${END}"
-jscs .
+jscs . && echo "Good"
 echo "${BOLD}flow${END}"
-flow
+flow && echo "Good"

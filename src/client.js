@@ -1,17 +1,39 @@
-require("!style!css!./styles/style.css");
+import React from "react";
 
-// TODO: This will need to map server-rendered bits
-// to client-rendered bits or nothing will really work
-// properly.
-// Or can it use virtualdom diffing to avoid that?
-// Maybe that's why you have to pass in the existing
-// DOM to the renderer - lets it do a partial update.
-// Will have to read up a bit.
-window.onload = function() {
-    var React = require("react");
-    var container = document.getElementById('main')
-    React.render(
-        require("./components/test.jsx"),
-        container
-    );
+// Add promise support for browser not supporting it
+import es6Promise from "es6-promise";
+es6Promise.polyfill();
+
+window.debug = require("debug");
+
+const debug = window.debug("isomorphic500");
+
+const mountNode = document.getElementById("root");
+const dehydratedState = window.App;
+function renderApp() {
+
+    const app = require("./app");
+
+    debug("Rehydrating state...", dehydratedState);
+
+    app.rehydrate(dehydratedState, (err, context) => {
+        if (err) {
+            throw err;
+        }
+
+        debug("State has been rehydrated");
+
+        const Application = app.getComponent();
+
+        React.render(
+            <Application
+                context={context.getComponentContext()}
+            />,
+            mountNode,
+            () => {
+                debug("Application has been mounted");
+            },
+
+        );
+    });
 }

@@ -9,5 +9,7 @@ else
     OPEN=open
 fi
 
-(sleep 1; $OPEN http://localhost:8080) &
-./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors --content-base dist
+export PORT=${PORT-8080}
+
+(sleep 1; $OPEN http://localhost:$PORT) &
+npm run-script dev

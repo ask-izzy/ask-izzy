@@ -3,11 +3,10 @@
  */
 "use strict";
 
-const Yadda = require('yadda');
+import Yadda from "yadda";
+import library from './steps/steps';
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
-
-const library = require('./steps/steps');
 
 new Yadda.FeatureFileSearch('./test/features').each(file => {
     featureFile(file, feature => {
