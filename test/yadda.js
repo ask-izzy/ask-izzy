@@ -24,6 +24,14 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
                 driver = new Webdriver.Builder()
                     /* Overridden by SELENIUM_BROWSER */
                     .forBrowser('firefox')
+                    .withCapabilities({
+                        tags: [
+                            process.env.TRAVIS_PULL_REQUEST,
+                            process.env.TRAVIS_BRANCH
+                        ],
+                        build: process.env.TRAVIS_BUILD_NUMBER,
+                        tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
+                    })
                     .build();
 
                 driver.manage().timeouts().implicitlyWait(10000);
