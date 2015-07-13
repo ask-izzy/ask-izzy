@@ -13,23 +13,30 @@ const library = require('./steps/steps');
 
 new Yadda.FeatureFileSearch('./test/features').each(file => {
     featureFile(file, feature => {
-        let driver;
-        let yadda = Yadda.createInstance(library, {
-            drivers: driver
-        });
+        var driver;
 
-        before(done => {
+        before(function(done) {
+            /* increase the timeout to set up Selenium */
+            this.timeout(30000);
+
             executeInFlow(() => {
+                let branch = process.env.TRAVIS_BRANCH || "Manual";
 
                 driver = new Webdriver.Builder()
-                    /* Overridden by SELENIUM_BROWSER */
+                    /* This is the default. Overridden by SELENIUM_BROWSER */
                     .forBrowser('firefox')
+                    /* These are used by Sauce Labs
+                     * You should also pass SELENIUM_REMOTE_URL to connect
+                     * via Selenium Grid */
                     .withCapabilities({
+                        username: process.env.SAUCE_USERNAME,
+                        accessKey: process.env.SAUCE_ACCESS_KEY,
+                        name: "Ask Izzy " + branch,
                         tags: [
-                            process.env.TRAVIS_PULL_REQUEST,
-                            process.env.TRAVIS_BRANCH
+                            process.env.TRAVIS_PULL_REQUEST || "Manual",
+                            branch
                         ],
-                        build: process.env.TRAVIS_BUILD_NUMBER,
+                        build: process.env.TRAVIS_BUILD_NUMBER || "Manual",
                         tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
                     })
                     .build();
@@ -41,7 +48,9 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
         scenarios(feature.scenarios, scenario => {
             steps(scenario.steps, (step, done) => {
                 executeInFlow(() => {
-                    yadda.run(step);
+                    Yadda.createInstance(library, {
+                        driver: driver
+                    }).run(step);
                 }, done);
             });
         });

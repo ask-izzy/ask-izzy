@@ -38,3 +38,14 @@ Run the linters:
 Running the tests:
 
     ./script/test
+
+Pass `SELENIUM_BROWSER=...` to choose a browser to test with. Format is
+`browser[:version[:platform]]`.
+You can pass `SELENIUM_REMOTE_URL` to connect to Selenium Grid.
+
+You can test on Sauce Labs using:
+
+    SELENIUM_REMOTE_URL=ondemand.saucelabs.com:80/wd/hub \
+        SAUCE_USERNAME=ask_izzy \
+        SAUCE_ACCESS_KEY=... \
+        ./script/test
