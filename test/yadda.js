@@ -24,11 +24,15 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
                     .forBrowser('firefox');
 
                 if (process.env.SAUCE_USERNAME) {
-                    builder = builder.usingServer(
-                        'http://' +
-                        process.env.SAUCE_USERNAME +
-                        process.env.SAUCE_ACCESS_KEY +
-                        '@ondemand.saucelabs.com:80/wd/hub')
+                    builder = builder
+                        .usingServer(
+                            'http://' +
+                            process.env.SAUCE_USERNAME + ':' +
+                            process.env.SAUCE_ACCESS_KEY +
+                            '@ondemand.saucelabs.com:80/wd/hub')
+                        .withCapabilities({
+                            'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
+                        })
                 }
 
                 driver = builder.build()
