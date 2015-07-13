@@ -13,10 +13,14 @@ If you're working on this codebase, some understanding of the following will hel
 
 ## Running the code
 
-```
-git clone git@github.com:ask-izzy/ask-izzy.git
-cd ask-izzy
-npm install
-./script/typecheck
-./script/server
-```
+    git clone git@github.com:ask-izzy/ask-izzy.git
+    cd ask-izzy
+    npm install
+    ./script/typecheck
+    ./script/server
+
+## Hacking
+
+Link up the git hooks:
+
+    ln -s ../.githooks .git/hooks

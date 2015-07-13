@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 IFS=$'\n\t'
+PATH=$PATH:`npm bin`
 
 if ! which flow ; then
     echo "You need 'flow' installed (available via brew on osx)"
     exit 1
 fi
 
+jsxhint
 flow
