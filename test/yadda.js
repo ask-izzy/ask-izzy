@@ -25,13 +25,9 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
                     .forBrowser('firefox');
 
                 if (process.env.SAUCE_USERNAME) {
-                    let url = 'http://' +
-                        process.env.SAUCE_USERNAME + ':' +
-                        process.env.SAUCE_ACCESS_KEY +
-                        '@ondemand.saucelabs.com:80/wd/hub';
-
                     builder = builder
-                        .usingServer(url)
+                        /* requires Sauce Connect */
+                        .usingServer('http://localhost:4445')
                         .withCapabilities({
                             'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
                         })
