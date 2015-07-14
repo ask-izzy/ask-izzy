@@ -1,13 +1,12 @@
-import React, { PropTypes } from "react";
+/* @flow */
+import React from "react";
 
 class ErrorPage extends React.Component {
 
-    static propTypes = {
-        err: PropTypes.object,
-    }
+    props: { err: { message: string } };
 
-    render() {
-        const { err } = this.props;
+    render(): React.Element {
+        var { err } = this.props;
         return (
             <div>
                 <h1>Error displaying this page</h1>
