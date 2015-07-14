@@ -3,4 +3,4 @@ set -euo pipefail
 IFS=$'\n\t'
 PATH=`npm bin`:$PATH
 
-mocha --compilers js:mocha-babel test/*.js
+webpack --stats --progress --config ./webpack/prod.load.js

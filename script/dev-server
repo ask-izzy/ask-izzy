@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+PATH=`npm bin`:$PATH
+
+if which xdg-open; then
+    OPEN=xdg-open
+else
+    OPEN=open
+fi
+
+export PORT=${PORT-8000}
+export NODE_ENV=development
+export DEBUG=false
+
+(sleep 3; $OPEN http://localhost:$PORT) &
+nodemon index

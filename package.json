@@ -38,11 +38,6 @@
     "yadda": "~0.12.0"
   },
   "scripts": {
-    "dev": "NODE_ENV=development DEBUG=true nodemon index",
-    "build": "webpack --stats --progress --config ./webpack/prod.load.js",
-    "postinstall": "npm run build",
-    "lint": "eslint src",
-    "prod": "NODE_ENV=production PORT=8080 DEBUG=false node index",
-    "start": "NODE_ENV=production node index"
+    "postinstall": "./script/build-assets"
   }
 }
