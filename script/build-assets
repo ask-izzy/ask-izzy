@@ -3,4 +3,14 @@ set -euo pipefail
 IFS=$'\n\t'
 PATH=`npm bin`:$PATH
 
-webpack --stats --progress --config ./webpack/prod.load.js
+if [ -e node_modules/path ]; then
+    BOLD=$(tput bold)
+    END=$(tput sgr0)
+
+    echo "You have 'path' in your node_modules, but it's not in package.json anymore."
+    echo "Having 'path' installed causes an issue with webpack builds."
+    echo "Try ${BOLD}npm prune${END} to remove packages not present in package.json"
+    exit 1
+fi
+
+webpack --display-error-details --stats --progress --config ./webpack/prod.load.js
