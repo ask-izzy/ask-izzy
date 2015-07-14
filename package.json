@@ -29,6 +29,7 @@
     "babel-jscs": "~2.0.0",
     "flow-bin": "~0.13.1",
     "jscs": "jscs-dev/node-jscs#master",
+    "jsonlint": "^1.6.2",
     "jsxhint": "~0.15.1",
     "mocha": "~2.2.5",
     "mocha-babel": "~3.0.0",

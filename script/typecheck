@@ -6,6 +6,8 @@ PATH=`npm bin`:$PATH
 BOLD=$(tput bold)
 END=$(tput sgr0)
 
+echo "${BOLD}jsonlint${END}"
+jsonlint package.json > /dev/null && echo "Good"
 echo "${BOLD}jsxhint${END}"
 jsxhint && echo "Good"
 echo "${BOLD}jscs${END}"
