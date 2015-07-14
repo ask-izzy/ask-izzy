@@ -11,7 +11,7 @@ fi
 
 export PORT=${PORT-8000}
 export NODE_ENV=development
-export DEBUG=false
+export DEBUG=web
 
 (sleep 3; $OPEN http://localhost:$PORT) &
 nodemon index

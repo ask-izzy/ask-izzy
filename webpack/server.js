@@ -7,7 +7,7 @@ import webpack from "webpack";
 import config from "./dev.config";
 import debuglib from "debug";
 
-const debug = debuglib("ask-izzy");
+const debug = debuglib("web");
 
 const WEBPACK_HOST = process.env.HOST || "localhost";
 const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
