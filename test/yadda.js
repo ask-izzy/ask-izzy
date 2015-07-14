@@ -3,13 +3,13 @@
  */
 "use strict";
 
-const Yadda = require('yadda');
-const Webdriver = require('selenium-webdriver');
-const fs = require('fs');
+import Yadda from 'yadda';
+import Webdriver from 'selenium-webdriver';
+import fs from 'fs';
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
-const library = require('./steps/steps');
+import library from './steps/steps';
 
 new Yadda.FeatureFileSearch('./test/features').each(file => {
     featureFile(file, feature => {

@@ -4,7 +4,7 @@
 
 "use strict";
 
-const Yadda = require('yadda');
+import Yadda from 'yadda';
 
 module.exports = (function() {
     return Yadda.localisation.English.library()
