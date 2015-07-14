@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+/* @flow */
+import React from "react";
 import { NavLink } from "fluxible-router";
 
-class Footer extends Component {
+class Footer extends React.Component {
 
-    render() {
+    render(): React.Element {
         return (
             <div className="Footer">
                 <div className="Footer-disclaimer">
