@@ -1,5 +1,10 @@
 import React, { PropTypes, Component } from "react";
+
+// Wrap Application with the fluxible context and stores.
 import { provideContext, connectToStores } from "fluxible-addons-react";
+
+// Wrap with fluxible-router's history handler (required for routing)
+// This also passes `currentRoute` as prop to the component
 import { handleHistory } from "fluxible-router";
 
 import Page from "./components/Page";
@@ -9,20 +14,11 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ErrorPage from "./pages/ErrorPage";
 import LoadingPage from "./pages/LoadingPage";
 
-// Wrap Application with the fluxible context.
-// PS. new to this syntax? Those are called "decorators", see
-// https://babeljs.io/docs/usage/experimental/
 @provideContext
-
-// Wrap with fluxible-router's history handler (required for routing)
-// This also passes `currentRoute` as prop to the component
 @handleHistory
-
-// Listen to HtmlHeadStore and pass the document title to the component
 @connectToStores(["HtmlHeadStore"], (context) =>
   ({ documentTitle: context.getStore("HtmlHeadStore").getTitle() })
 )
-
 class Application extends Component {
 
     static propTypes = {
