@@ -12,7 +12,7 @@ class ErrorPage extends React.Component {
             <div>
                 <h1>Error displaying this page</h1>
 
-                { process.env.NODE_ENV === "development" && err &&
+                { process.env.DEBUG && err &&
                     <pre align="center">
                         { err.message }
                     </pre>
