@@ -10,6 +10,7 @@ const debug = window.debug("isomorphic500");
 
 const mountNode = document.getElementById("root");
 const dehydratedState = window.App;
+
 function renderApp() {
 
     const app = require("./app");
