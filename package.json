@@ -13,7 +13,7 @@
     "debug": "^2.2.0",
     "es6-promise": "^2.3.0",
     "express": "^4.13.1",
-    "extract-text-webpack-plugin": "^0.8.2",
+    "file-loader": "^0.8.4",
     "fluxible-addons-react": "^0.1.6",
     "fluxible-router": "^0.2.0",
     "immutable": "^3.7.4",
