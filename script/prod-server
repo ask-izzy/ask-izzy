@@ -3,4 +3,7 @@ set -euo pipefail
 IFS=$'\n\t'
 PATH=`npm bin`:$PATH
 
-mocha --compilers js:mocha-babel test/*.js
+export PORT=${PORT-8000}
+export NODE_ENV=production
+
+nodemon index

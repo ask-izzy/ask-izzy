@@ -2,7 +2,7 @@
     "preset": "airbnb",
 
     "fileExtensions": [".js", ".jsx"],
-    "excludeFiles": ["node_modules/**"],
+    "excludeFiles": ["node_modules/**", "public/assets/**"],
 
     "esprima": "./node_modules/babel-jscs",
 

@@ -14,5 +14,5 @@ module.exports = (function() {
 
         .then('I should see "$STRING"', function(expected) {
             console.log("Do I see", expected);
-        })
+        });
 })();

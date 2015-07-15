@@ -49,3 +49,9 @@ You can test on Sauce Labs using:
         SAUCE_USERNAME=ask_izzy \
         SAUCE_ACCESS_KEY=... \
         ./script/test
+
+## Attribution
+
+Substantial amounts of the repo setup were based on
+https://github.com/gpbl/isomorphic500 @ 413c6533ae23
+under the MIT licence

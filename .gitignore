@@ -1,2 +1,5 @@
 .*.sw?
 /node_modules/
+/src/server/webpack-stats.json
+/public/assets/*
+npm-debug.log
