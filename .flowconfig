@@ -10,3 +10,4 @@
 
 [options]
 module.system=node
+suppress_type=$FlowIssue
