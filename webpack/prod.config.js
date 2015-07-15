@@ -5,12 +5,8 @@
 import path              from "path";
 import webpack           from "webpack";
 import writeStats        from "./utils/write-stats";
-import ExtractTextPlugin from "extract-text-webpack-plugin";
 import strip             from "strip-loader";
-var prefixer = ExtractTextPlugin.extract(
-    "style",
-    "css!autoprefixer?browsers=last 2 version!sass",
-);
+
 var assetsPath = path.join(__dirname, "../public/assets");
 
 module.exports = {
@@ -26,20 +22,17 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.(jpe?g|png|gif|svg)$/, loader: "file" },
+            { test: /\.(jpe?g|png|gif|svg|css)$/, loader: "file" },
+            { test: /\.css$/, loader: "style!css" },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loaders: [strip.loader("debug"), "babel"],
             },
-            { test: /\.scss$/, loader: prefixer },
         ],
     },
     progress: true,
     plugins: [
-
-        // css files from the extract-text-plugin loader
-        new ExtractTextPlugin("[name]-[chunkhash].css"),
 
         // ignore dev config
         new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),

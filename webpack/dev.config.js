@@ -33,18 +33,11 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.(jpe?g|png|gif|svg)$/, loader: "file" },
+            { test: /\.css$/, loader: "style!css" },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loaders: ["react-hot", "babel?cacheDirectory"],
-            },
-            {
-                test: /\.scss$/,
-                loader: "style!css!autoprefixer" +
-                    "?browsers=last 2 version!sass" +
-                    "?outputStyle=expanded" +
-                    "&sourceMap=true" +
-                    "&sourceMapContents=true",
             },
         ],
     },
