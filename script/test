@@ -3,4 +3,4 @@ set -euo pipefail
 IFS=$'\n\t'
 PATH=`npm bin`:$PATH
 
-NODE_ENV=production mocha --compilers js:mocha-babel test/*.js
+NODE_ENV=production mocha -t 0 --compilers js:mocha-babel test/*.js

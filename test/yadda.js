@@ -17,10 +17,7 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
     featureFile(file, feature => {
         var driver;
 
-        before(function(done) {
-            /* increase the timeout to set up Selenium */
-            this.timeout(30000);
-
+        before(done => {
             executeInFlow(() => {
                 let branch = process.env.TRAVIS_BRANCH || "Manual";
 
@@ -57,9 +54,7 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
             });
         });
 
-        /* IMPORTANT: needs the correct 'this' */
-        afterEach(function() {
-            this.timeout(30000);
+        afterEach(function() {  // IMPORTANT: needs the correct 'this'
             takeScreenshotOnFailure(this.currentTest, driver);
         });
 
