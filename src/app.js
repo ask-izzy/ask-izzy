@@ -1,3 +1,8 @@
+// Support material-ui until react 1.0
+// see http://material-ui.com/#/get-started
+import injectTapEventPlugin from "react-tap-event-plugin";
+injectTapEventPlugin();
+
 import Fluxible from "fluxible";
 import { RouteStore } from "fluxible-router";
 

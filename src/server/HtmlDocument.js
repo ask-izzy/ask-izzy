@@ -3,8 +3,12 @@ import React, { PropTypes } from "react";
 
 import { trackingId } from "../config";
 import { provideContext, connectToStores } from "fluxible-addons-react";
+import mui from "material-ui";
+var ThemeManager = new mui.Styles.ThemeManager();
 
-@provideContext()
+@provideContext({
+    muiTheme: ThemeManager.getCurrentTheme(),
+})
 @connectToStores([], (context) => {
     const htmlHeadStore = context.getStore("HtmlHeadStore");
     return {
@@ -12,7 +16,7 @@ import { provideContext, connectToStores } from "fluxible-addons-react";
         description: htmlHeadStore.getDescription(),
         siteName: htmlHeadStore.getSiteName(),
         currentUrl: htmlHeadStore.getCurrentUrl(),
-        images: htmlHeadStore.getImages()
+        images: htmlHeadStore.getImages(),
     };
 })
 class HtmlDocument extends React.Component {
@@ -81,6 +85,12 @@ class HtmlDocument extends React.Component {
                 <meta
                     property="og:url"
                     content={ currentUrl }
+                />
+
+                <link
+                    href='http://fonts.googleapis.com/css?family=Roboto'
+                    rel='stylesheet'
+                    type='text/css'
                 />
 
                 { images.map(url =>
