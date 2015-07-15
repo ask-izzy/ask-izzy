@@ -1,6 +1,6 @@
 
 import { BaseStore } from "fluxible/addons";
-import Actions from "../constants/Actions";
+import Actions from "../constants/actions";
 
 const SITE_NAME = "Ask Izzy";
 const BASE_URL = "https://askizzy.org.au";

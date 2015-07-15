@@ -13,4 +13,5 @@ if [ -e node_modules/path ]; then
     exit 1
 fi
 
-webpack --display-error-details --stats --progress --config ./webpack/prod.load.js
+webpack --display-error-details --stats --progress --bail \
+    --config ./webpack/prod.load.js
