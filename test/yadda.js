@@ -11,6 +11,8 @@ Yadda.plugins.mocha.StepLevelPlugin.init();
 
 import library from './steps/steps';
 
+import _ from '../src/server';
+
 new Yadda.FeatureFileSearch('./test/features').each(file => {
     featureFile(file, feature => {
         var driver;
@@ -23,8 +25,6 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
                 let branch = process.env.TRAVIS_BRANCH || "Manual";
 
                 driver = new Webdriver.Builder()
-                    /* This is the default. Overridden by SELENIUM_BROWSER */
-                    .forBrowser('firefox')
                     /* These are used by Sauce Labs
                      * You should also pass SELENIUM_REMOTE_URL to connect
                      * via Selenium Grid */
@@ -34,11 +34,13 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
                         name: "Ask Izzy " + branch,
                         tags: [
                             process.env.TRAVIS_PULL_REQUEST || "Manual",
-                            branch
+                            branch,
                         ],
                         build: process.env.TRAVIS_BUILD_NUMBER || "Manual",
-                        tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
+                        tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
                     })
+                    /* This is the default. Overridden by SELENIUM_BROWSER */
+                    .forBrowser('firefox')
                     .build();
 
                 driver.manage().timeouts().implicitlyWait(10000);
@@ -49,7 +51,7 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
             steps(scenario.steps, (step, done) => {
                 executeInFlow(() => {
                     Yadda.createInstance(library, {
-                        driver: driver
+                        driver: driver,
                     }).run(step);
                 }, done);
             });
@@ -57,7 +59,8 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
 
         /* IMPORTANT: needs the correct 'this' */
         afterEach(function() {
-            takeScreenshotOnFailure(this.currentTest);
+            this.timeout(30000);
+            takeScreenshotOnFailure(this.currentTest, driver);
         });
 
         after(done => {
@@ -72,10 +75,9 @@ function executeInFlow(fn, done) {
     }, done);
 }
 
-function takeScreenshotOnFailure(test) {
+function takeScreenshotOnFailure(test, driver) {
     if (test.state != 'passed') {
-        var path = 'screenshots/' +
-            test.title.replace(/\W+/g, '_').toLowerCase() + '.png';
+        var path = test.title.replace(/\W+/g, '_').toLowerCase() + '.png';
 
         driver.takeScreenshot().then(function(data) {
             fs.writeFileSync(path, data, 'base64');
