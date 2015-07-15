@@ -11,3 +11,6 @@
 [options]
 module.system=node
 suppress_type=$FlowIssue
+
+[version]
+0.13.1
