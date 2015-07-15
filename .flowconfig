@@ -1,5 +1,5 @@
 [ignore]
-.*dist.*
+.*public/assets.*
 .*invalidPackageJson/package.json
 .*/node_modules/.*/examples/.*
 .*/node_modules/.*/test/.*
