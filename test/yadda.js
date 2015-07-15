@@ -9,7 +9,7 @@ import fs from 'fs';
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
-import library from './steps/steps';
+import libraries from './steps/steps';
 
 import _ from '../src/server';
 
@@ -50,7 +50,7 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
         scenarios(feature.scenarios, scenario => {
             steps(scenario.steps, (step, done) => {
                 executeInFlow(() => {
-                    Yadda.createInstance(library, {
+                    Yadda.createInstance(libraries, {
                         driver: driver,
                     }).run(step);
                 }, done);
