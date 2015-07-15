@@ -39,8 +39,19 @@ Running the tests:
 
     ./script/test
 
+Pass `SELENIUM_BROWSER=...` to choose a browser to test with. Format is
+`browser[:version[:platform]]`.
+You can pass `SELENIUM_REMOTE_URL` to connect to Selenium Grid.
+
+You can test on Sauce Labs using:
+
+    SELENIUM_REMOTE_URL=ondemand.saucelabs.com:80/wd/hub \
+        SAUCE_USERNAME=ask_izzy \
+        SAUCE_ACCESS_KEY=... \
+        ./script/test
+
 ## Attribution
 
-Substantial amounts of the repo setup were based on 
+Substantial amounts of the repo setup were based on
 https://github.com/gpbl/isomorphic500 @ 413c6533ae23
 under the MIT licence
