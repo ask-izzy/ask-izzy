@@ -8,9 +8,16 @@ END=$(tput sgr0)
 
 echo "${BOLD}jsonlint${END}"
 jsonlint package.json > /dev/null
+echo "Good"
+
 echo "${BOLD}jsxhint${END}"
 jsxhint
+echo "Good"
+
 echo "${BOLD}jscs${END}"
 jscs .
+echo "Good"
+
 echo "${BOLD}flow${END}"
 flow
+echo "Good"
