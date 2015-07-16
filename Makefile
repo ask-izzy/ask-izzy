@@ -22,31 +22,14 @@ build:
 	@echo "Successfully built $(REPO):$(TAG)..."
 	@echo "make test push"
 
-dockerpush:
+push:
 	docker push $(REPO):$(TAG)
-
-push: dockerpush
-	@if git describe --exact-match 2> /dev/null; then \
-		for remote in `git remote`; do git push $$remote $(TAG); done; \
-	fi
 
 test:
 	$(FORKLIFT) $(FORKLIFT_FLAGS) -- $(REPO):$(TAG) test $(TEST_FLAGS)
 
 localtest:
 	RUN_AS_USER=true $(FORKLIFT) $(FORKLIFT_FLAGS) -- ./invoke test $(TEST_FLAGS)
-
-ci:
-	@echo RUNNING ON `hostname`
-	@echo RUNNING AS `whoami`
-	@echo FORKLIFT VERSION `forklift --version`
-	@if git describe --exact-match 2>/dev/null; then \
-		echo "Testing and releasing $(TAG)"; \
-		$(MAKE) build test dockerpush release-test FORKLIFT_FLAGS=$(CI_FORKLIFT_FLAGS) TEST_FLAGS=$(CI_TEST_FLAGS); \
-	else \
-		echo "Only testing, because $(TAG) is not tagged"; \
-		$(MAKE) build test FORKLIFT_FLAGS=$(CI_FORKLIFT_FLAGS) TEST_FLAGS=$(CI_TEST_FLAGS); \
-	fi
 
 deploy:
 	$(FORKLIFT) -- $(REPO):$(TAG) deploy
@@ -64,7 +47,7 @@ define release
 
 	rm -rf tags_repo && \
 		INSTANCE=`echo $@ | sed s/release-//g` && \
-		APPNAME=`echo $(APP)$$INSTANCE | sed 's/staging$$/_staging/g;s/uat$$/_uat/g;s/s2xprod$$/hsnet_referral/g'` && \
+		APPNAME=`echo $(APP)$$INSTANCE | sed 's/staging$$/_staging/g;s/uat$$/_uat/g;s/prod$$//g'` && \
 		git clone \
 			git@gitlab.office.infoxchange.net.au:devops/tags.git tags_repo --depth 1 && \
 		cd tags_repo && \
@@ -90,5 +73,5 @@ release-uat:
 release-prod:
 	$(release)
 
-.PHONY: build push test test-basic deploy serve ci \
-	release-dev release-test release-staging release-uat
+.PHONY: build push test deploy serve \
+	release-dev release-test release-staging release-uat release-prod
