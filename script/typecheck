@@ -7,10 +7,14 @@ BOLD=$(tput bold)
 END=$(tput sgr0)
 
 echo "${BOLD}jsonlint${END}"
-jsonlint package.json > /dev/null && echo "Good"
+jsonlint package.json > /dev/null
+echo "Good"
 echo "${BOLD}jsxhint${END}"
-jsxhint && echo "Good"
+jsxhint
+echo "Good"
 echo "${BOLD}jscs${END}"
-jscs . && echo "Good"
+jscs .
+echo "Good"
 echo "${BOLD}flow${END}"
-flow && echo "Good"
+flow
+echo "Good"
