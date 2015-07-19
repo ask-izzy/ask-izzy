@@ -4,6 +4,9 @@ import React from "react";
 import es6Promise from "es6-promise";
 es6Promise.polyfill();
 
+// Import normalized CSS
+import "!style!css!./utils/normalize.css";
+
 window.debug = require("debug");
 
 const debug = window.debug("isomorphic500");
