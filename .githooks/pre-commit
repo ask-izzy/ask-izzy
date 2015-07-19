@@ -39,10 +39,15 @@ EOF
 	exit 1
 fi
 
+READ_TWO_CHARS="-N2"
+if uname -a | grep Darwin > /dev/null ; then
+    READ_TWO_CHARS="-n2"
+fi
+
 # Check for bogusly executable files
 for file in $(git ls-files); do
     if test -x "$file"; then
-        read -N2 hashbash < $file
+        read "$READ_TWO_CHARS" hashbash < $file
         if test "x$hashbash" != 'x#!'; then
             cat << EOF
 $file is marked executable but does not start #!
