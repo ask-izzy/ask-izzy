@@ -1,0 +1,19 @@
+# Continuous deployment configuration
+# See http://doc.gitlab.com/ci/builds_configuration/README.html
+
+# CI is carried out on Travis. See .travis.yml
+
+# Master is built and pushed directly to staging
+staging:
+    type: deploy
+    script: make build push # release-staging
+    only:
+        - master
+
+
+# Tags are released to production
+production:
+    type: deploy
+    script: make build push # release-prod
+    only:
+        - tags

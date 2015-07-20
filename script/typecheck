@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 IFS=$'\n\t'
-PATH=`npm bin`:$PATH
-
+export PATH=`npm bin`:$PATH
 BOLD=$(tput bold)
 END=$(tput sgr0)
 
-echo "${BOLD}jsonlint${END}"
-jsonlint package.json > /dev/null
-echo "${BOLD}jsxhint${END}"
-jsxhint
-echo "${BOLD}jscs${END}"
-jscs .
-echo "${BOLD}flow${END}"
-flow
+function check {
+    echo "${BOLD}$1${END}"
+    bash -c "$1"
+    echo "Good"
+}
+
+check "jsonlint package.json > /dev/null"
+check "jsxhint"
+check "jscs ."
+check "flow"
