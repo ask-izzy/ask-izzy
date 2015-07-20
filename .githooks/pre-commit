@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 echo "Running pre-commit hook"
+set -euo pipefail
 
 if git rev-parse --verify HEAD >/dev/null 2>&1
 then
@@ -10,7 +11,7 @@ else
 fi
 
 # If you want to allow non-ASCII filenames set this variable to true.
-allownonascii=$(git config --bool hooks.allownonascii)
+allownonascii=$(git config --bool hooks.allownonascii || echo "false")
 
 # Redirect output to stderr.
 exec 1>&2
@@ -39,6 +40,7 @@ EOF
     exit 1
 fi
 
+IFS=$'\n\t'
 # Check for bogusly executable files
 for file in $(git ls-files); do
     if test -x "$file"; then
