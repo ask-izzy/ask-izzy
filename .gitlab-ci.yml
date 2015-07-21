@@ -6,7 +6,7 @@
 # Master is built and pushed directly to staging
 staging:
     type: deploy
-    script: make build push # release-staging
+    script: make build push release-staging
     only:
         - master
 
