@@ -37,7 +37,7 @@ deploy:
 serve:
 	$(FORKLIFT) -- $(REPO):$(TAG) serve
 
-define release
+release:
 	@if ! git describe --exact-match 2>/dev/null; then \
 		while [ -z "$$CONTINUE" ]; do \
 			read -r -p "Release not tagged. Release anyway? y/N " CONTINUE; \
@@ -45,33 +45,22 @@ define release
 		[ $$CONTINUE = "y" ] || [ $$CONTINUE = "Y" ] || (echo "Exiting."; exit 1;) \
 	fi
 
-	rm -rf tags_repo && \
-		INSTANCE=`echo $@ | sed s/release-//g` && \
-		APPNAME=`echo $(APP)$$INSTANCE | sed 's/staging$$/_staging/g;s/uat$$/_uat/g;s/prod$$//g'` && \
-		git clone \
-			git@gitlab.office.infoxchange.net.au:devops/tags.git tags_repo --depth 1 && \
-		cd tags_repo && \
-		./update_tag $$APPNAME $(TAG) && \
-		git commit -a -m "Release $(APP) $$INSTANCE $(TAG)" && \
-		git push && \
-		cd - && \
-		rm -rf tags_repo
-endef
-
-release-dev:
-	$(release)
-
-release-test:
-	$(release)
+	rm -rf tags_repo
+	git clone \
+		--single-branch \
+		--depth 1 \
+		git@gitlab.office.infoxchange.net.au:devops/tags.git tags_repo
+	cd tags_repo && \
+		./update_tag $(APPNAME) $(TAG) && \
+		git commit -am "Release $(APP) $(TAG) to $(TAG)" &&\
+		git push
+	rm -rf tags_repo
 
 release-staging:
-	$(release)
-
-release-uat:
-	$(release)
+	$(MAKE) release APPNAME=askizzy-staging.infoxchangeapps.net.au
 
 release-prod:
-	$(release)
+	$(MAKE) release APPNAME=FIXME
 
 .PHONY: build push test deploy serve \
-	release-dev release-test release-staging release-uat release-prod
+	release release-staging release-prod
