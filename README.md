@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ask-izzy/ask-izzy.svg?branch=master)](https://travis-ci.org/ask-izzy/ask-izzy)
+
 # Ask Izzy
 
 ## Dependencies
