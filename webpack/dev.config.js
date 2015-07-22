@@ -8,6 +8,8 @@ import path        from "path";
 import webpack     from "webpack";
 import writeStats  from "./utils/write-stats";
 import notifyStats from "./utils/notify-stats";
+import env         from "./env";
+import progress    from "./progress";
 
 var assetsPath = path.resolve(__dirname, "../public/assets");
 
@@ -42,16 +44,7 @@ module.exports = {
 
         new webpack.NoErrorsPlugin(),
 
-        new webpack.DefinePlugin({
-            "process.env": {
-                NODE_ENV: JSON.stringify("development"),
-
-                // Mainly used to require CSS files with webpack,
-                // which can happen only on browser
-                // Used as `if (process.env.BROWSER)...`
-                BROWSER: JSON.stringify(true),
-            },
-        }),
+        env("development"),
 
         // stats
         function() {
@@ -62,18 +55,7 @@ module.exports = {
             this.plugin("done", writeStats);
         },
 
-        // print a webpack progress
-        new webpack.ProgressPlugin(function(percentage, message) {
-            var MOVE_LEFT = new Buffer("1b5b3130303044", "hex").toString();
-            var CLEAR_LINE = new Buffer("1b5b304b", "hex").toString();
-            process.stdout.write(
-                CLEAR_LINE +
-                Math.round(percentage * 100) +
-                "% :" +
-                message +
-                MOVE_LEFT
-            );
-        }),
+        progress(),
 
     ],
 };
