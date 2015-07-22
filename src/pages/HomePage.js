@@ -1,13 +1,14 @@
 /* @flow */
 
 import React from "react";
+import NavBar from "../components/NavBar";
 
 class HomePage extends React.Component {
 
     render(): React.Element {
         return (
             <div>
-                home page
+                <NavBar />
             </div>
         );
     }

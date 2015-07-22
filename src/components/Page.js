@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from "react";
 
-import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
 class Page extends Component {
-
     static propTypes = {
         footer: PropTypes.bool,
     }
@@ -18,9 +16,6 @@ class Page extends Component {
 
         return (
             <div className="Page">
-                <div className="Page-header">
-                    <NavBar />
-                </div>
 
                 <div className="Page-body">
                     { this.props.children }
@@ -29,7 +24,8 @@ class Page extends Component {
                 { footer &&
                     <div className="Page-footer">
                         <Footer />
-                    </div> }
+                    </div>
+                }
 
             </div>
         );
