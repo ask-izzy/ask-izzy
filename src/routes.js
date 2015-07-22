@@ -1,34 +1,26 @@
 /* @flow */
 
-import InitActions from "./pages/InitActions";
-import categories from "./constants/categories";
+import React from "react";
+import Router from 'react-router';
+
 import HomePage from "./pages/HomePage";
+import ErrorPage from "./pages/HomePage";
 import CategoryPage from "./pages/CategoryPage";
 
-var categoryRoutes = Object
-    .keys(categories)
-    .map((k) => categories[k])
-    .join("|");
-
-export default {
-
-    home: {
-        path: "/",
-        method: "get",
-        handler: HomePage,
-    },
-
-    category: {
-        path: `/categories/:category(${categoryRoutes})`,
-        method: "get",
-        handler: CategoryPage,
-        action: InitActions.categoryPage,
-    },
-
-    // This route doesn't point to any handler.
-    bad: {
-        path: "/bad",
-        method: "get",
-        action: InitActions.badPage,
-    },
-};
+export default <Router.Route
+        name="home"
+        path="/"
+        handler={HomePage}
+    >
+        <Router.Route
+            name="category"
+            path=":categoryName"
+            handler={CategoryPage}
+        />
+        <Router.Route
+            name="homelink"
+            path="home"
+            handler={HomePage}
+        />
+        <Router.DefaultRoute handler={ErrorPage}/>
+    </Router.Route>;

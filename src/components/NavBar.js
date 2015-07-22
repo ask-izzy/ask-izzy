@@ -1,43 +1,31 @@
+/* @flow */
 
-import React, { PropTypes, Component } from "react";
-import { connectToStores } from "fluxible-addons-react";
-import { NavLink } from "fluxible-router";
+import React from "react";
+import { Link } from "react-router";
 
 import categories from "../constants/categories";
 
-@connectToStores([], (context) =>
-    ({ route: context.getStore("RouteStore").getCurrentRoute() })
-)
-class NavBar extends Component {
+class NavBar extends React.Component {
 
-    static PropTypes = {
-        route: PropTypes.object.isRequired,
-    }
-
-    render() {
-        const { route } = this.props;
-        const currentCategory =
-            route ? route.getIn(["params", "category"]) : null;
+    render(): React.Component {
         return (
             <div className="NavBar">
                 <div className="NavBar-title">
-                    <NavLink href="/">
-                    </NavLink>
+                    <Link to="home"></Link>
                 </div>
                 <div className="NavBar-links">
                     {
                         Object.keys(categories).map(category => {
                             return (
-                                <NavLink
+                                <Link
+                                    to="category"
                                     key={category}
-                                    className="NavBar-link"
-                                    activeClass="NavBar-link--selected"
-                                    routeName="category"
-                                    navParams={{
-                                        category: categories[category],
-                                    }}>
+                                    params={{
+                                        categoryName: categories[category],
+                                    }}
+                                >
                                     {category}
-                                </NavLink>
+                                </Link>
                             );
                         })
                     }

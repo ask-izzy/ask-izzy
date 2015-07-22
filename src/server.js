@@ -2,7 +2,6 @@
 
 import path from "path";
 import express from "express";
-import app from "./app";
 import config from "./config";
 import render from "./server/render";
 

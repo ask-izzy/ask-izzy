@@ -1,6 +1,5 @@
 /* @flow */
 import React from "react";
-import { NavLink } from "fluxible-router";
 
 class Footer extends React.Component {
 
