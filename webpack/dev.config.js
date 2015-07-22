@@ -16,13 +16,9 @@ var WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
 var webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
 
 module.exports = {
-    devtool: "#cheap-module-eval-source-map",
+    devtool: "#source-map",
     entry: {
-        main: [
-            "webpack-dev-server/client?" + webpackUrl,
-            "webpack/hot/only-dev-server",
-            "./src/client-entry.js",
-        ],
+        main: "./src/client-entry.js",
     },
     output: {
         path: assetsPath,
@@ -37,15 +33,13 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loaders: ["react-hot", "babel?cacheDirectory"],
+                loaders: ["babel?cacheDirectory"],
             },
         ],
     },
     progress: true,
     plugins: [
 
-        // hot reload
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
 
         new webpack.DefinePlugin({
