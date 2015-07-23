@@ -11,7 +11,7 @@ import notifyStats from "./utils/notify-stats";
 import env         from "./env";
 import progress    from "./progress";
 
-var assetsPath = path.resolve(__dirname, "../public/assets");
+var assetsPath = path.resolve(__dirname, "../public/static");
 
 var WEBPACK_HOST = "localhost";
 var WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
@@ -26,7 +26,7 @@ module.exports = {
         path: assetsPath,
         filename: "[name]-[hash].js",
         chunkFilename: "[name]-[chunkhash].js",
-        publicPath: webpackUrl + "/assets/",
+        publicPath: webpackUrl + "/static/",
     },
     module: {
         loaders: [

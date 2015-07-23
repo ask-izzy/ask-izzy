@@ -9,10 +9,10 @@ import render from "./server/render";
 
 var server = express();
 
-// On production, use the public directory for static files
-// This directory is created by webpack at build time.
+// In production, nginx will serve these files so
+// we won't actually recieve requests for them.
 server.use(express.static(path.resolve(__dirname, "../public"), {
-    maxAge: config.staticAssetMaxAge,
+    maxAge: 0,
 }));
 
 // On development, serve the static files from the webpack dev server.
