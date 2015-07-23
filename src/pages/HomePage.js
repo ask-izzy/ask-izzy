@@ -15,7 +15,7 @@ class HomePage extends React.Component {
                 </div>
 
                 <div className="Page-body">
-                    HomePagehomepage
+                    Ask Izzy
                     <Router.RouteHandler />
                 </div>
 
