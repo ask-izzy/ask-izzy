@@ -6,6 +6,7 @@ import path              from "path";
 import webpack           from "webpack";
 import writeStats        from "./utils/write-stats";
 import strip             from "strip-loader";
+import env               from "./env";
 
 var assetsPath = path.join(__dirname, "../public/assets");
 
@@ -22,8 +23,14 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.(jpe?g|png|gif|svg|css)$/, loader: "file" },
-            { test: /\.css$/, loader: "style!css" },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/,
+                loader: "file",
+            },
+            {
+                test: /\.css$/,
+                loader: "style!css",
+            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
@@ -38,19 +45,7 @@ module.exports = {
         new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
 
         // set global vars
-        new webpack.DefinePlugin({
-            "process.env": {
-
-                // Mainly used to require CSS files with webpack,
-                // which can happen only on browser
-                // Used as `if (process.env.BROWSER)...`
-                BROWSER: JSON.stringify(true),
-
-                // Reduce the size of client-side libraries,
-                // e.g. react by allowing dead code to be removed
-                NODE_ENV: JSON.stringify("production"),
-            },
-        }),
+        env("production"),
 
         // optimizations
         new webpack.optimize.DedupePlugin(),
