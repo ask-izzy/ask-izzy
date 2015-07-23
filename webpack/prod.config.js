@@ -8,7 +8,7 @@ import writeStats        from "./utils/write-stats";
 import strip             from "strip-loader";
 import env               from "./env";
 
-var assetsPath = path.join(__dirname, "../public/assets");
+var assetsPath = path.join(__dirname, "../public/static");
 
 module.exports = {
     devtool: "source-map",
@@ -19,7 +19,7 @@ module.exports = {
         path: assetsPath,
         filename: "[name]-[hash].js",
         chunkFilename: "[name]-[chunkhash].js",
-        publicPath: "/assets/",
+        publicPath: "/static/",
     },
     module: {
         loaders: [

@@ -1,6 +1,6 @@
 .*.sw?
 /node_modules/
 /src/server/webpack-stats.json
-/public/assets/*
+/public/static/*
 npm-debug.log
 .env

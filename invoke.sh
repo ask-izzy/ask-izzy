@@ -38,7 +38,7 @@ else
         deploy)
             shift 1
 
-            exec echo "FIXME: copy assets to /static"
+            cp -r ./public/static/ /static/
             ;;
 
         serve)
