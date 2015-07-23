@@ -96,6 +96,70 @@ class HtmlDocument extends React.Component {
                     />)
                 }
 
+                <link
+                    rel="apple-touch-icon"
+                    sizes="57x57"
+                    href="/assets/favicons/apple-touch-icon-57x57.png"
+                />
+                <link
+                    rel="apple-touch-icon"
+                    sizes="60x60"
+                    href="/assets/favicons/apple-touch-icon-60x60.png"
+                />
+                <link
+                    rel="apple-touch-icon"
+                    sizes="72x72"
+                    href="/assets/favicons/apple-touch-icon-72x72.png"
+                />
+                <link
+                    rel="apple-touch-icon"
+                    sizes="76x76"
+                    href="/assets/favicons/apple-touch-icon-76x76.png"
+                />
+                <link
+                    rel="icon"
+                    type="image/png"
+                    href="/assets/favicons/favicon-32x32.png" sizes="32x32"
+                />
+                <link
+                    rel="icon"
+                    type="image/png"
+                    href="/assets/favicons/favicon-96x96.png" sizes="96x96"
+                />
+                <link
+                    rel="icon"
+                    type="image/png"
+                    href="/assets/favicons/favicon-16x16.png" sizes="16x16"
+                />
+                <link
+                    rel="manifest"
+                    href="/assets/favicons/manifest.json"
+                />
+                <link
+                    rel="shortcut icon"
+                    href="/assets/favicons/favicon.ico"
+                />
+                <meta
+                    name="apple-mobile-web-app-title"
+                    content="Ask Izzy"
+                />
+                <meta
+                    name="application-name"
+                    content="Ask Izzy"
+                />
+                <meta
+                    name="msapplication-TileColor"
+                    content="#da532c"
+                />
+                <meta
+                    name="msapplication-config"
+                    content="/assets/favicons/browserconfig.xml"
+                />
+                <meta
+                    name="theme-color"
+                    content="#ffffff"
+                />
+
             </head>
 
             <body>

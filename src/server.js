@@ -12,11 +12,9 @@ var server = express();
 
 // On production, use the public directory for static files
 // This directory is created by webpack at build time.
-if (server.get("env") === "production") {
-    server.use(express.static(path.resolve(__dirname, "../public"), {
-        maxAge: 365 * 24 * 60 * 60,
-    }));
-}
+server.use(express.static(path.resolve(__dirname, "../public"), {
+    maxAge: config.staticAssetMaxAge,
+}));
 
 // On development, serve the static files from the webpack dev server.
 if (server.get("env") === "development") {
