@@ -1,7 +1,10 @@
 language: node_js
 
+# We need to retry `npm install` because
+# for some reason the network between travis
+# and the npm registry fails frequently.
 install:
-    - npm install
+    - npm install || npm install || npm install
     - script/build-assets
 
 script:
