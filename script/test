@@ -3,4 +3,6 @@ set -euo pipefail
 IFS=$'\n\t'
 PATH=`npm bin`:$PATH
 
-NODE_ENV=production mocha -t 0 --compilers js:mocha-babel test/*.js
+export NODE_ENV=production
+
+mocha -t 0 --compilers js:babel/register test/*.js

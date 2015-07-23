@@ -1,4 +1,5 @@
 /* @flow */
+
 import React from "react";
 
 class ErrorPage extends React.Component {

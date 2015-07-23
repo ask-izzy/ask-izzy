@@ -1,43 +1,30 @@
 import React from "react";
+import Router from "react-router";
+import routes from "./routes";
 
 // Add promise support for browser not supporting it
 import es6Promise from "es6-promise";
 es6Promise.polyfill();
 
 // Import normalized CSS
+// TODO: normalize.css should not be javascript-ed
 import "!style!css!./utils/normalize.css";
 
 window.debug = require("debug");
-
-const debug = window.debug("isomorphic500");
-
+const debug = window.debug("ask-izzy");
 const mountNode = document.getElementById("root");
-const dehydratedState = window.App;
 
-function renderApp() {
-
-    const app = require("./app");
-
-    debug("Rehydrating state...", dehydratedState);
-
-    app.rehydrate(dehydratedState, (err, context) => {
-        if (err) {
-            throw err;
-        }
-
-        debug("State has been rehydrated");
-
-        const Application = app.getComponent();
-
+Router.run(
+    routes,
+    Router.HistoryLocation,
+    function routeMatched(Root, state) {
+        debug("Route change begins");
         React.render(
-            <Application
-                context={context.getComponentContext()}
-            />,
+            <Root/>,
             mountNode,
-            () => {
-                debug("Application has been mounted");
-            },
+            () => { debug("Route change rendered"); },
 
         );
-    });
-}
+    },
+
+);

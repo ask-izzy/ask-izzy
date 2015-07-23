@@ -1,25 +1,9 @@
 
 import React, { PropTypes } from "react";
 
-import { trackingId } from "../config";
-import { provideContext, connectToStores } from "fluxible-addons-react";
-
-@provideContext()
-@connectToStores([], (context) => {
-    const htmlHeadStore = context.getStore("HtmlHeadStore");
-    return {
-        title: htmlHeadStore.getTitle(),
-        description: htmlHeadStore.getDescription(),
-        siteName: htmlHeadStore.getSiteName(),
-        currentUrl: htmlHeadStore.getCurrentUrl(),
-        images: htmlHeadStore.getImages()
-    };
-})
 class HtmlDocument extends React.Component {
 
     static propTypes = {
-        context: PropTypes.object.isRequired,
-        state: PropTypes.string.isRequired,
         markup: PropTypes.string.isRequired,
         script: PropTypes.arrayOf(PropTypes.string),
         css: PropTypes.arrayOf(PropTypes.string),
@@ -29,7 +13,6 @@ class HtmlDocument extends React.Component {
         description: PropTypes.string,
         siteName: PropTypes.string,
         currentUrl: PropTypes.string,
-        images: PropTypes.array,
     }
 
     static defaultProps = {
@@ -82,10 +65,6 @@ class HtmlDocument extends React.Component {
                     property="og:url"
                     content={ currentUrl }
                 />
-
-                { images.map(url =>
-                    <meta property="og:image" content={ url } />
-                ) }
 
                 { css.map((href, k) =>
                     <link
