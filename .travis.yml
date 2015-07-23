@@ -1,18 +1,19 @@
 language: node_js
 
-# We need to retry `npm install` because
-# for some reason the network between travis
-# and the npm registry fails frequently.
 install:
-    - npm install || npm install || npm install
-    - script/build-assets
+  - npm install
+  - script/build-assets
+
+cache:
+  directories:
+    - node_modules
 
 script:
-    - script/typecheck
-    - script/test
+  - script/typecheck
+  - script/test
 
 addons:
-    sauce_connect: true
+  sauce_connect: true
 
 env:
   global:
