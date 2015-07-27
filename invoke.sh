@@ -38,7 +38,7 @@ else
         deploy)
             shift 1
 
-            cp -r ./public/static/ /static/
+            cp -r ./public/static/* /static/
             ;;
 
         serve)
