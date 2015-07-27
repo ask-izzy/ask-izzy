@@ -9,7 +9,7 @@ import { By } from 'selenium-webdriver';
 
 module.exports = (function() {
     return Yadda.localisation.English.library()
-        .when('I visit $URL', function(url, next) {
+        .when('I visit $URL', function(url) {
             return this.driver.get(`http://localhost:8000${url}`);
         })
 
