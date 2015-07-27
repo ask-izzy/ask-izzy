@@ -14,6 +14,6 @@ staging:
 # Tags are released to production
 production:
     type: deploy
-    script: make build push # release-prod
+    script: make build push release-prod
     only:
         - tags

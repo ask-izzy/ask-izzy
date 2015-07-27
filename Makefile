@@ -51,8 +51,8 @@ release:
 		--depth 1 \
 		git@gitlab.office.infoxchange.net.au:devops/tags.git tags_repo
 	cd tags_repo && \
-		./update_tag $(APPNAME) $(TAG) && \
-		git commit -am "Release $(APP) $(TAG) to $(TAG)" &&\
+		./update_tag "$(APPNAME)" "$(TAG)" && \
+		git commit -am "Release $(APP) $(TAG) to $(APPNAME)" &&\
 		git push
 	rm -rf tags_repo
 
@@ -60,7 +60,7 @@ release-staging:
 	$(MAKE) release APPNAME=askizzy-staging.infoxchangeapps.net.au
 
 release-prod:
-	$(MAKE) release APPNAME=FIXME
+	$(MAKE) release APPNAME=askizzy.org.au
 
 .PHONY: build push test deploy serve \
 	release release-staging release-prod
