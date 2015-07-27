@@ -10,7 +10,7 @@ import { By } from 'selenium-webdriver';
 module.exports = (function() {
     return Yadda.localisation.English.library()
         .when('I visit $URL', function(url, next) {
-            this.driver.get(`http://localhost:8000${url}`);
+            return this.driver.get(`http://localhost:8000${url}`);
         })
 
         .then('I should see "$STRING"', function(expected) {
