@@ -57,7 +57,7 @@ release:
 	rm -rf tags_repo
 
 release-staging:
-	$(MAKE) release APPNAME=askizzy-staging.infoxchangeapps.net.au
+	$(MAKE) release APPNAME=askizzy-staging.infoxchangeapps.net.au CONTINUE=y
 
 release-prod:
 	$(MAKE) release APPNAME=askizzy.org.au
