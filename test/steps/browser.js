@@ -14,10 +14,18 @@ module.exports = (function() {
         })
 
         .then('I should see "$STRING"', function(expected) {
-            // FIXME: this is wrong because it doesn't check the element
-            // returned is visible
-            this.driver.findElement(By.xpath(
+            const element = this.driver.findElement(By.xpath(
               `//*[normalize-space(text()) = normalize-space('${expected}')]`
             ));
+            async function checkVisible() {
+                const visible = await element.isDisplayed();
+                if (!visible) {
+                    throw new Error(
+                        `Text ${expected} was present but not visible`
+                    );
+                }
+            }
+
+            return checkVisible();
         });
 })();
