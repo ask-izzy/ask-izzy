@@ -22,7 +22,7 @@ help:
 
 ## Running the dev server
 
-    ./script/server
+    ./script/dev-server
 
 
 ## Hacking
