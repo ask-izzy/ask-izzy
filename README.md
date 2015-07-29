@@ -52,6 +52,6 @@ You can test on Sauce Labs using:
 
 ## Attribution
 
-Substantial amounts of the repo setup were based on
+Bits of the repo setup were based on
 https://github.com/gpbl/isomorphic500 @ 413c6533ae23
 under the MIT licence
