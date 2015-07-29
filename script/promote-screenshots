@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+PATH=`npm bin`:$PATH
+
+for f in $( find src/components/ -iname '*-new.png' )
+do
+  baseFile=$( echo $f | sed s/-new.png$/.png/)
+  mv "$f" "$baseFile"
+done

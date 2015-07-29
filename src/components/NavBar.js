@@ -4,6 +4,7 @@ import React from "react";
 import { Link } from "react-router";
 
 import categories from "../constants/categories";
+import CategoryListItem from "./CategoryListItem";
 
 class NavBar extends React.Component {
 
@@ -17,15 +18,11 @@ class NavBar extends React.Component {
                     {
                         Object.keys(categories).map(category => {
                             return (
-                                <Link
-                                    to="category"
+                                <CategoryListItem
+                                    categoryKey={categories[category]}
                                     key={category}
-                                    params={{
-                                        categoryName: categories[category],
-                                    }}
-                                >
-                                    {category}
-                                </Link>
+                                    description={category}
+                                />
                             );
                         })
                     }

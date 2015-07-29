@@ -1,6 +1,24 @@
 
 import Webdriver from 'selenium-webdriver';
 
+function browserName() {
+    if (process.env.SELENIUM_BROWSER) {
+        return process.env.SELENIUM_BROWSER;
+    }
+
+    return "firefox";
+}
+
+export async function seleniumBrowser(driver) {
+    var wnd = new Webdriver.WebDriver.Window(driver);
+    var {width, height} = await wnd.getSize();
+    var capabilities = await driver.getCapabilities();
+    var res = capabilities.caps_;
+    res.width = width;
+    res.height = height;
+    return res;
+};
+
 export function executeInFlow(fn, done) {
     Webdriver.promise.controlFlow().execute(fn).then(function() {
         done();

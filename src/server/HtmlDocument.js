@@ -76,6 +76,11 @@ class HtmlDocument extends React.Component {
         }
 
         <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
+
+        <link
             rel="apple-touch-icon"
             sizes="57x57"
             href="/static/favicons/apple-touch-icon-57x57.png"
