@@ -5,4 +5,4 @@ PATH=`npm bin`:$PATH
 
 export NODE_ENV=production
 
-mocha -t 0 --compilers js:babel/register test/*.js
+mocha --timeout 0 --compilers js:babel/register test/*.js "$@"
