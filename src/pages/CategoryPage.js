@@ -2,15 +2,36 @@
 
 import React from "react";
 import Router from 'react-router';
+import iss from '../services/iss';
 
 class CategoryPage extends React.Component {
     constructor(props: Object) {
         super(props);
-        this.state = {};
+        this.state = {
+            loaded: "Loading...",
+        };
     }
 
     componentDidMount(): void {
-        this.setState({ categoryKey: this.props.params.categoryName });
+        var foo = iss('housing');
+        foo.then(
+                (data) => {
+                    this.setState({
+                        data: data,
+                        loaded: "Complete",
+                    });
+                }
+
+            );
+        foo.catch(
+            (error) => {
+                this.setState({
+                    error: error,
+                    loaded: "Failed",
+                });
+            }
+
+        );
     }
 
     componentWillReceiveProps(nextProps: Object): void {
@@ -22,6 +43,15 @@ class CategoryPage extends React.Component {
             <div>
                 category page for {this.state.categoryKey}
                 <Router.RouteHandler />
+                <p>
+                    { this.state.error }
+                </p>
+                <p>
+                    { JSON.stringify(this.state.data) }
+                </p>
+                <p>
+                    { this.state.loaded }
+                </p>
             </div>
         );
     }

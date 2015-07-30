@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from "react";
 import Router, {RouteHandler} from 'react-router';
 import NavBar from "../components/NavBar";

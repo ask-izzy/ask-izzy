@@ -21,7 +21,15 @@ module.exports = {
         chunkFilename: "[name]-[chunkhash].js",
         publicPath: "/static/",
     },
+    resolve: {
+        alias: {
+            "node-fetch": "whatwg-fetch",
+        },
+    },
     module: {
+        postLoaders: [
+          { test: /\.js$/, loader: "transform?envify" },
+        ],
         loaders: [
             {
                 test: /\.(jpe?g|png|gif|svg)$/,

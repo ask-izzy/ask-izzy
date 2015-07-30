@@ -29,9 +29,12 @@ module.exports = {
         publicPath: webpackUrl + "/static/",
     },
     module: {
+        postLoaders: [
+          { test: /\.js$/, loader: "transform?envify" },
+        ],
         loaders: [
             {
-                test: /\.(jpe?g|png|gif|svg)$/,
+                test: /\.(jpe?g|png|gif|svg|json)$/,
                 loader: "file",
             },
             {
@@ -51,6 +54,11 @@ module.exports = {
         new webpack.NoErrorsPlugin(),
 
         env("development"),
+
+        // polyfill window.fetch et al client-side
+        new webpack.ProvidePlugin({
+            'es6-promise': 'es6-promise',
+        }),
 
         // stats
         function() {
