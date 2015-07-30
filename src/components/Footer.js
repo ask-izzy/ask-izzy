@@ -7,8 +7,8 @@ class Footer extends React.Component {
         return (
             <div className="Footer">
                 <div className="Footer-disclaimer">
-                    Data copyright
-                    <a href="https://www.infoxchange.net.au/">infoXchange</a>
+                    <span>Data copyright </span>
+                    <a href="https://www.infoxchange.net.au/">infoxchange</a>
                 </div>
             </div>
         );
