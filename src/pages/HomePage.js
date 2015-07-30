@@ -4,6 +4,7 @@ import React from "react";
 import Router, {RouteHandler} from 'react-router';
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import mui from "material-ui";
 
 class HomePage extends React.Component {
 
@@ -11,12 +12,14 @@ class HomePage extends React.Component {
         return (
             <div className="Page">
                 <div className="Page-header">
-                    <NavBar />
+                    <mui.AppBar
+                        showMenuIconButton={false}
+                        title="Ask Izzy"
+                    />
                 </div>
 
                 <div className="Page-body">
-                    Ask Izzy
-                    <Router.RouteHandler />
+                    <NavBar />
                 </div>
 
                 <div className="Page-footer">
