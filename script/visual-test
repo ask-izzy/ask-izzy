@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+PATH=`npm bin`:$PATH
+
+export NODE_ENV=production
+
+./script/build-assets
+
+mocha --timeout 0 --compilers js:babel/register test/visual/visual_test.js "$@"
