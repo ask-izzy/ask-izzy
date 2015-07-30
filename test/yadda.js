@@ -4,7 +4,7 @@
 "use strict";
 
 import Yadda from 'yadda';
-import Webdriver from 'selenium-webdriver';
+import webDriverInstance, { executeInFlow } from './support/webdriver';
 import fs from 'fs';
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
@@ -19,28 +19,7 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
 
         before(done => {
             executeInFlow(() => {
-                let branch = process.env.TRAVIS_BRANCH || "Manual";
-
-                driver = new Webdriver.Builder()
-                    /* These are used by Sauce Labs
-                     * You should also pass SELENIUM_REMOTE_URL to connect
-                     * via Selenium Grid */
-                    .withCapabilities({
-                        username: process.env.SAUCE_USERNAME,
-                        accessKey: process.env.SAUCE_ACCESS_KEY,
-                        name: "Ask Izzy " + branch,
-                        tags: [
-                            process.env.TRAVIS_PULL_REQUEST || "Manual",
-                            branch,
-                        ],
-                        build: process.env.TRAVIS_BUILD_NUMBER || "Manual",
-                        tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
-                    })
-                    /* This is the default. Overridden by SELENIUM_BROWSER */
-                    .forBrowser('firefox')
-                    .build();
-
-                driver.manage().timeouts().implicitlyWait(10000);
+                driver = webDriverInstance();
             }, done);
         });
 
@@ -63,12 +42,6 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
         });
     });
 });
-
-function executeInFlow(fn, done) {
-    Webdriver.promise.controlFlow().execute(fn).then(function() {
-        done();
-    }, done);
-}
 
 function takeScreenshotOnFailure(test, driver) {
     if (test.state != 'passed') {
