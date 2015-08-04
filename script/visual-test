@@ -18,6 +18,6 @@ JS
 )
 
 for BROWSER in "$BROWSERS"; do
-    bash -c "$BROWSER mocha --bail --timeout 15 --compilers js:babel/register test/visual/visual_test.js"
+    bash -c "$BROWSER mocha --bail --timeout 0 --compilers js:babel/register test/visual/visual_test.js"
 done
 
