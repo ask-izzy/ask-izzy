@@ -4,6 +4,11 @@ import config from "../config";
 
 export default function search(query) {
     var query = `/api/v3/search/?q=${query}&format=json`;
-    console.log(config.issUrl);
-    return fetch(config.issUrl + query);
+    return fetch(config.iss.url + query, {
+        mode: "cors",
+        credentials: 'include',
+        headers: {
+            Authorization: "Basic " + config.iss.digest,
+        }
+    });
 }
