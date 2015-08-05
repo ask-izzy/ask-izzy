@@ -2,9 +2,9 @@ import React from "react";
 import Router from "react-router";
 import routes from "./routes";
 
-// Import normalized CSS
-// TODO: normalize.css should not be javascript-ed
-import "!style!css!./utils/normalize.css";
+// Import CSS
+// TODO: styles should not be javascript-dependant
+import "!style!css!./styles/normalize.css";
 
 window.debug = require("debug");
 const debug = window.debug("ask-izzy");

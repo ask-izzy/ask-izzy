@@ -31,12 +31,16 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.(jpe?g|png|gif|svg)$/,
+                test: /\.(jpe?g|png|gif|svg|json)$/,
                 loader: "file",
             },
             {
                 test: /\.css$/,
                 loader: "style!css",
+            },
+            {
+                test: /\.scss$/,
+                loader: "style!css!sass",
             },
             {
                 test: /\.js$/,
