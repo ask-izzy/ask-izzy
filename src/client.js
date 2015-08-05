@@ -3,9 +3,10 @@ import Router from "react-router";
 import routes from "./routes";
 import fetch from "whatwg-fetch";
 
-// Import normalized CSS
-// TODO: normalize.css should not be javascript-ed
-import "!style!css!./utils/normalize.css";
+// Import CSS
+// TODO: styles should not be javascript-dependant
+import "!style!css!./styles/normalize.css";
+import "!style!css!sass!./components/HeaderBar.scss";
 
 window.debug = require("debug");
 

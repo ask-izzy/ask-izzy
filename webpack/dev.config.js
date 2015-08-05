@@ -39,7 +39,11 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: "style!css",
+                loader: "style!css!sass",
+            },
+            {
+                test: /\.scss$/,
+                loader: "style!css!sass",
             },
             {
                 test: /\.js$/,
