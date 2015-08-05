@@ -38,6 +38,8 @@
     "react-hot-loader": "^1.2.8",
     "selenium-webdriver": "~2.46.1",
     "webpack-dev-server": "^1.10.1",
+    "webpack": "^1.10.1",
+    "node-libs-browser": "^0.6.0",
     "yadda": "~0.12.0"
   }
 }
