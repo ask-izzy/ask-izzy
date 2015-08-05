@@ -11,26 +11,28 @@ import components from '../../src/components';
 import { exec } from 'child-process-promise';
 
 describe("Visual Components", function() {
+    var baseUrl = "http://localhost:8000";
+    var driver;
+    var cfg;
+
+    before(beforeAll);
+    after(afterAll);
+
+    async function beforeAll(done) {
+        driver = webDriverInstance();
+        cfg = await seleniumBrowser(driver);
+        done();
+    }
+
+    async function afterAll(done) {
+        await driver.quit();
+        done();
+    }
+
     Object.keys(components).forEach(function(name) {
         describe(name, function() {
-            var baseUrl = "http://localhost:8000";
-            var driver;
-            var cfg;
 
-            before(beforeAll);
-            after(afterAll);
             it("looks right", checkAppearance);
-
-            async function beforeAll(done) {
-                driver = webDriverInstance();
-                cfg = await seleniumBrowser(driver);
-                done();
-            }
-
-            async function afterAll(done) {
-                await driver.quit();
-                done();
-            }
 
             async function checkAppearance() {
                 var description = `${cfg.browserName}-${cfg.version} ` +

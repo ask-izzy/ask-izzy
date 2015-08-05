@@ -1,4 +1,3 @@
-
 import Webdriver from 'selenium-webdriver';
 
 export async function seleniumBrowser(driver) {
@@ -20,7 +19,6 @@ export function executeInFlow(fn, done) {
 
 export default function webDriverInstance() {
     let branch = process.env.TRAVIS_BRANCH || "Manual";
-
     let baseCaps = {
         username: process.env.SAUCE_USERNAME,
         accessKey: process.env.SAUCE_ACCESS_KEY,
@@ -33,8 +31,10 @@ export default function webDriverInstance() {
         build: process.env.TRAVIS_BUILD_NUMBER || "Manual",
         tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
     };
+
     if (process.env.SELENIUM_DEVICE) {
         baseCaps.deviceName = process.env.SELENIUM_DEVICE;
+        baseCaps.emulator = true;
     }
 
     if (process.env.SELENIUM_ORIENTATION) {
