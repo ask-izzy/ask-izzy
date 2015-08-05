@@ -4,7 +4,7 @@ IFS=$'\n\t'
 export PATH=`npm bin`:$PATH
 export NODE_ENV=production
 
-./script/build-assets
+# ./script/build-assets
 
 BROWSERS=$( node <<JS
     var fs = require('fs');
@@ -16,7 +16,8 @@ BROWSERS=$( node <<JS
     }
 JS
 )
-
-for BROWSER in "$BROWSERS"; do
+for BROWSER in $BROWSERS; do
+    echo "STarting with $BROWSER"
     bash -c "$BROWSER mocha --timeout 0 --compilers js:babel/register test/visual/visual_test.js"
+    echo "Finished with $BROWSER"
 done

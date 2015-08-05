@@ -6,7 +6,7 @@ export async function seleniumBrowser(driver) {
     var {width, height} = await wnd.getSize();
     var capabilities = await driver.getCapabilities();
     var res = capabilities.caps_;
-    res.version ||= res.platformVersion; // mobile safari
+    res.version = res.version || res.platformVersion; // mobile safari
     res.width = width;
     res.height = height;
     console.log(JSON.stringify(res))
