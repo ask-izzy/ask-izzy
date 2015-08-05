@@ -3,7 +3,7 @@ import Router from "react-router";
 import mui from "material-ui";
 import Chevron from "./Chevron";
 
-export default class CategoryListItem extends React.Component {
+export default class HeaderWithChevron extends React.Component {
 
     render(): React.Element {
         return (
