@@ -1,16 +1,15 @@
 import React from "react";
 import Router from "react-router";
 import routes from "./routes";
+import fetch from "whatwg-fetch";
 
-// Add promise support for browser not supporting it
-import es6Promise from "es6-promise";
-es6Promise.polyfill();
-
-// Import normalized CSS
-// TODO: normalize.css should not be javascript-ed
-import "!style!css!./utils/normalize.css";
+// Import CSS
+// TODO: styles should not be javascript-dependant
+import "!style!css!./styles/normalize.css";
+import "!style!css!sass!./components/HeaderBar.scss";
 
 window.debug = require("debug");
+
 const debug = window.debug("ask-izzy");
 const mountNode = document.getElementById("root");
 

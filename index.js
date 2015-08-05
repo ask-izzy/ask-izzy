@@ -10,4 +10,5 @@ if (!process.env.NODE_ENV) {
 require("babel/register");
 
 // Start the server app
+require('isomorphic-fetch');
 require("./src/server");

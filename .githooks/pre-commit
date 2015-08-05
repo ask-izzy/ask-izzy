@@ -57,4 +57,6 @@ done
 # If there are whitespace errors, print the offending file names and fail.
 git diff-index --check --cached $against --
 
+npm shrinkwrap --dev
+
 ./script/typecheck

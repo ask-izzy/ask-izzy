@@ -4,6 +4,7 @@ import path from "path";
 import express from "express";
 import config from "./config";
 import render from "./server/render";
+import proxy from "express-http-proxy";
 
 // Initialize express server
 
@@ -22,6 +23,7 @@ if (server.get("env") === "development") {
 
 // Render the app server-side and send it as response
 server.use(render);
+
 
 // Generic server errors (e.g. not caught by components)
 server.use((err, req, res, next) => {  // eslint-disable-line no-unused-vars

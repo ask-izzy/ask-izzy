@@ -4,4 +4,5 @@
 export default {
     // Google Analytics tracking id (skipped on dev)
     trackingId: "",
+    issUrl: process.env.ISS_URL,
 };
