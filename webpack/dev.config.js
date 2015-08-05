@@ -52,6 +52,11 @@ module.exports = {
 
         env("development"),
 
+        // polyfill window.fetch et al client-side
+        new webpack.ProvidePlugin({
+            'es6-promise': 'es6-promise',
+        }),
+
         // stats
         function() {
             this.plugin("done", notifyStats);

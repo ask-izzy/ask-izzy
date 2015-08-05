@@ -47,6 +47,11 @@ module.exports = {
         // set global vars
         env("production"),
 
+        // polyfill window.fetch et al client-side
+        new webpack.ProvidePlugin({
+            'es6-promise': 'es6-promise',
+        }),
+
         // optimizations
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
