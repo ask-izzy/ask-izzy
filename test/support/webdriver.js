@@ -27,6 +27,7 @@ export default function webDriverInstance() {
             process.env.TRAVIS_PULL_REQUEST || "Manual",
             branch,
         ],
+        screenResolution: "1024x768",
         build: process.env.TRAVIS_BUILD_NUMBER || "Manual",
         tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
     };
