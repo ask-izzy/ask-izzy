@@ -7,6 +7,12 @@ export async function seleniumBrowser(driver) {
     var res = capabilities.caps_;
     res.version = res.version || res.platformVersion; // mobile safari
     res.width = width;
+    if ((res.browserName == "safari") && (res.version == "7.1")) {
+        // Safari 7 has a wierd issue where the height is reported strangely.
+        console.log("Fixing safari 7 height");
+        height = 460;
+    }
+
     res.height = height;
     return res;
 };
