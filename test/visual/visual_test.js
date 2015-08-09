@@ -37,6 +37,12 @@ describe("Visual Components", function() {
             async function checkAppearance() {
                 var description = `${cfg.browserName}-${cfg.version} ` +
                     `${cfg.width}x${cfg.height}`;
+                var orig = `src/components/${name}/${description}.png`;
+
+                // Enable just generating the missing images
+                if (process.env.ONLY_NEW && fs.existsSync(orig)) {
+                    return;
+                }
 
                 // Load styleguide page
                 var addr = `${baseUrl}/styleGuide/component/${name}`;
@@ -49,7 +55,6 @@ describe("Visual Components", function() {
                 fs.writeFileSync(path, imageData, 'base64');
 
                 // Compare screenshot to original
-                var orig = `src/components/${name}/${description}.png`;
                 var diff = `src/components/${name}/${description}-diff.png`;
                 var script =
                     `compare -metric AE '${orig}' '${path}' '${diff}'`;
