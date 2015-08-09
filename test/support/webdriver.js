@@ -34,6 +34,10 @@ export default function webDriverInstance() {
             branch,
         ],
         screenResolution: "1024x768",
+        captureHtml: true,
+        timeZone: "Melbourne",
+        avoidProxy: true, // No SSL for these tests
+        public: "public",
         build: process.env.TRAVIS_BUILD_NUMBER || "Manual",
         tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
     };
