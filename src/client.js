@@ -5,6 +5,7 @@ import routes from "./routes";
 // Import CSS
 // TODO: styles should not be javascript-dependant
 import "!style!css!./styles/normalize.css";
+import "!style!css!sass!./components/HeaderBar.scss";
 
 window.debug = require("debug");
 const debug = window.debug("ask-izzy");

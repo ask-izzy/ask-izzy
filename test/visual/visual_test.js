@@ -11,30 +11,38 @@ import components from '../../src/components';
 import { exec } from 'child-process-promise';
 
 describe("Visual Components", function() {
+    var baseUrl = "http://localhost:8000";
+    var driver;
+    var cfg;
+
+    before(beforeAll);
+    after(afterAll);
+
+    async function beforeAll(done) {
+        driver = webDriverInstance();
+        cfg = await seleniumBrowser(driver);
+        done();
+    }
+
+    async function afterAll(done) {
+        await driver.quit();
+        done();
+    }
+
     Object.keys(components).forEach(function(name) {
         describe(name, function() {
-            var baseUrl = "http://localhost:8000";
-            var driver;
-            var cfg;
 
-            before(beforeAll);
-            after(afterAll);
             it("looks right", checkAppearance);
-
-            async function beforeAll(done) {
-                driver = webDriverInstance();
-                cfg = await seleniumBrowser(driver);
-                done();
-            }
-
-            async function afterAll(done) {
-                await driver.quit();
-                done();
-            }
 
             async function checkAppearance() {
                 var description = `${cfg.browserName}-${cfg.version} ` +
                     `${cfg.width}x${cfg.height}`;
+                var orig = `src/components/${name}/${description}.png`;
+
+                // Enable just generating the missing images
+                if (process.env.ONLY_NEW && fs.existsSync(orig)) {
+                    return;
+                }
 
                 // Load styleguide page
                 var addr = `${baseUrl}/styleGuide/component/${name}`;
@@ -47,7 +55,6 @@ describe("Visual Components", function() {
                 fs.writeFileSync(path, imageData, 'base64');
 
                 // Compare screenshot to original
-                var orig = `src/components/${name}/${description}.png`;
                 var diff = `src/components/${name}/${description}-diff.png`;
                 var script =
                     `compare -metric AE '${orig}' '${path}' '${diff}'`;

@@ -1,0 +1,44 @@
+@import '../styles/colors.scss';
+
+.headerbar-container {
+    text-align: center;
+    color: white;
+
+    .branding-container {
+        background-color: $brand-pane-light;
+
+        .branding-icon {
+            width: 50%;
+            margin-bottom: -2em;
+        }
+        .branding-copy {
+            width: 80%;
+            margin: auto;
+            padding-bottom: 1em;
+        }
+    }
+
+    .search-container {
+        background-color: $brand-pane-dark;
+
+        .search-heading {
+            font-size: 200%;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+        }
+
+        .search-byline {
+            padding-bottom: 1em;
+        }
+
+        .headerbar-search {
+            width:100%;
+            padding-top: 1em;
+            padding-bottom: 1em;
+            input {
+                width: 90%;
+            }
+        }
+    }
+
+}

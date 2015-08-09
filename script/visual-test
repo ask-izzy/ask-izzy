@@ -16,8 +16,12 @@ BROWSERS=$( node <<JS
     }
 JS
 )
+
+set +e
+
 for BROWSER in $BROWSERS; do
-    echo "STarting with $BROWSER"
-    bash -c "$BROWSER mocha --timeout 0 --compilers js:babel/register test/visual/visual_test.js"
+    # TODO: Move the platform iteration into visual_test.js so we only need one server to go in parallel
+    echo "Starting with $BROWSER"
+    bash -c "$BROWSER mocha --timeout 0 --compilers js:babel/register test/visual/visual_test.js" $@
     echo "Finished with $BROWSER"
 done
