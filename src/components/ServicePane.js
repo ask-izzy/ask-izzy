@@ -39,7 +39,7 @@ export default class ServicePane extends React.Component {
         },],
     }
 
-    renderOtherService(service): React.Element {
+    renderOtherService(service, idx): React.Element {
         var dateInfo;
         if (service.dates) {
             dateInfo = (
@@ -48,7 +48,7 @@ export default class ServicePane extends React.Component {
         }
 
         return (
-            <li style={{listStyleType: "none"}}>
+            <li key={idx} style={{listStyleType: "none"}}>
                 <span>{service.name} </span>
                 <span style={{
                     backgroundColor: palette.accent2Color,
