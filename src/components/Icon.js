@@ -14,8 +14,10 @@ export default class Icon extends React.Component {
                 style={{
                     marginLeft: "auto",
                 }}
+                dangerouslySetInnerHTML={{
+                    __html: codes[this.props.iconName],
+                }}
             >
-                { codes[this.props.iconName] }
             </i>
         );
     }
