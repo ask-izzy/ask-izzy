@@ -53,25 +53,6 @@ describe("Visual Components", function() {
 
                 var imageData = await driver.takeScreenshot();
                 fs.writeFileSync(path, imageData, 'base64');
-
-                // Compare screenshot to original
-                var diff = `src/components/${name}/${description}-diff.png`;
-                var script =
-                    `compare -metric AE '${orig}' '${path}' '${diff}'`;
-                var comparison = await exec(script);
-                var errorPx = parseInt(comparison.stderr);
-                if (errorPx) {
-                    console.log(`
-                        comparing images failed (${errorPx}): ${script}`
-                    );
-                    console.log(`Base64 PNG data :${imageData}:`);
-                    console.log("Diff image:");
-                    var diffData = fs.readFileSync(diff).toString('base64');
-                    console.log(`Base64 PNG data :${diffData}:`);
-                    throw new Error(
-                        `${errorPx} pixels difference between screenshots.`
-                    );
-                }
             }
         });
     });
