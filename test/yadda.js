@@ -25,11 +25,9 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
 
         scenarios(feature.scenarios, scenario => {
             steps(scenario.steps, (step, done) => {
-                executeInFlow(() => {
-                    Yadda.createInstance(libraries, {
-                        driver: driver,
-                    }).run(step);
-                }, done);
+                Yadda.createInstance(libraries, {
+                    driver: driver,
+                }).run(step, done);
             });
         });
 
