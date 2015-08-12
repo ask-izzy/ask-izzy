@@ -10925,9 +10925,9 @@
       }
     },
     "yadda": {
-      "version": "0.12.0",
-      "from": "yadda@>=0.12.0 <0.13.0",
-      "resolved": "https://registry.npmjs.org/yadda/-/yadda-0.12.0.tgz"
+      "version": "0.15.2",
+      "from": "yadda@*",
+      "resolved": "https://registry.npmjs.org/yadda/-/yadda-0.15.2.tgz"
     }
   }
 }
