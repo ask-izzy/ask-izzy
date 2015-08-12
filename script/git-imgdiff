@@ -1,0 +1,7 @@
+#!/bin/bash
+base=$( basename "$1" )-$( basename $(dirname "$1") )
+echo $1
+echo $base
+DIFF=$( mktemp -d -t "git-imgdiff")"/${base}-diff.png"
+compare -metric AE "$2" "$1" png:- | montage -geometry +4+4 "$2" - "$1" png:- > "$DIFF"
+open -a Preview "$DIFF"
