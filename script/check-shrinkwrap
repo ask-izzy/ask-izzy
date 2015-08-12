@@ -15,7 +15,10 @@ var shrinkwrapDeps = Object.keys(shrinkwrapJSON.dependencies).sort();
 
 // All deps in node_modules
 var node_modules = fs.readdirSync("node_modules").sort();
-node_modules.splice(0, 1); // Remove '.bin' - everything else in node_modules is a module.
+while (node_modules[0][0] === ".") {
+    // Remove dotfiles - everything else in node_modules is a module.
+    node_modules.splice(0, 1);
+}
 
 // Compare the sets of dependencies
 compare(shrinkwrapDeps, "npm-shrinkwrap.json", packageDeps, "package.json");
