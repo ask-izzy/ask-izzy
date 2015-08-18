@@ -9,5 +9,6 @@ module.exports = (function() {
     // include libraries here
     return [
         require('./browser.js'),
+        require('./branding.js'),
     ];
 })();

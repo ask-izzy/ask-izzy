@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Link } from "react-router";
+import mui from "material-ui";
 
 import categories from "../constants/categories";
 import CategoryListItem from "./CategoryListItem";
@@ -14,19 +15,19 @@ class NavBar extends React.Component {
                 <div className="NavBar-title">
                     <Link to="home"></Link>
                 </div>
-                <div className="NavBar-links">
+                <mui.List className="NavBar-links">
                     {
-                        Object.keys(categories).map(category => {
+                        categories.map(category => {
                             return (
                                 <CategoryListItem
-                                    categoryKey={categories[category]}
-                                    key={category}
-                                    description={category}
+                                    category={category}
+                                    key={category.key}
                                 />
                             );
                         })
                     }
-                </div>
+                    <mui.ListDivider />
+                </mui.List>
                 <div className="NavBar-locales">
                 </div>
             </div>

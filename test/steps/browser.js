@@ -7,6 +7,7 @@
 import Yadda from 'yadda';
 import { By } from 'selenium-webdriver';
 import unpromisify from "../support/yadda-promise";
+import * as page from '../support/page-assertions';
 
 module.exports = (function() {
     return Yadda.localisation.English.library()
@@ -20,13 +21,5 @@ async function visitUrl(url) {
 }
 
 async function thenISee(expected) {
-    const element = await this.driver.findElement(By.xpath(
-      `//*[normalize-space(text()) = normalize-space('${expected}')]`
-    ));
-    const visible = await element.isDisplayed();
-    if (!visible) {
-        throw new Error(
-            `Text ${expected} was present but not visible`
-        );
-    }
+    await assert.textIsVisible(this.driver, expected);
 }

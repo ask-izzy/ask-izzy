@@ -1,47 +1,61 @@
 import React from "react";
-import Router from "react-router";
+import Router, { Link } from "react-router";
 import mui from "material-ui";
-import HeaderWithChevron from "./HeaderWithChevron";
+import icons from "../icons";
 
 export default class CategoryListItem extends React.Component {
 
-    render(): React.Element {
-        return (
-            <Router.Link
-                to="category"
-                params={{
-                    categoryName: this.props.categoryKey,
-                }}
-                style={{
-                    textDecoration: "none",
-                    fontSize: 24,
-                }}
-            >
-                <mui.Paper
-                    zDepth={1}
-                    style={{padding: 10}}
-                >
-                    <HeaderWithChevron>
-                        <i
-                            className="material-icons"
-                        >
-                            {/* FIXME: This is hardcoded */}
-                            {/* icon: store_mall_directory */}
-                            &#xE563;
-                        </i>
-                        <span>{ this.props.description }</span>
-                    </HeaderWithChevron>
-                </mui.Paper>
-
-            </Router.Link>
-
+    href(): string {
+        return this.context.router.makeHref(
+            "category",
+            {categoryName: this.props.category.key},
+            {}
         );
     }
 
+    render(): React.Element {
+        var Icon = this.props.category.icon || icons.House;
+
+        return (
+            <mui.ListItem
+                className="CategoryListItem"
+                href={this.href()}
+                primaryText={this.props.category.name}
+                secondaryText={this.props.category.byline}
+                secondaryTextLines={2}
+                leftAvatar={
+                    <mui.Avatar
+                        className="colored-icon"
+                        backgroundColor={mui.Styles.Colors.transparent}
+                        icon={
+                            <Icon />
+                        }
+                        style={{borderRadius: 0}}
+                    />
+                }
+                rightAvatar={
+                    <mui.Avatar
+                        className="colored-icon"
+                        backgroundColor={mui.Styles.Colors.transparent}
+                        icon={
+                            <icons.Chevron />
+                        }
+                        style={{borderRadius: 0}}
+                    />
+                }
+            >
+            </mui.ListItem>
+        );
+    }
 }
+
 CategoryListItem.sampleProps = {
-    categoryKey: "material-aid",
-    description: "Material Aid",
-    byline: "Clothes and other goods",
-    iconUrl: "",
+    category: {
+        key: "material-aid",
+        name: "Material Aid",
+        byline: "Clothes and other goods",
+        icon: icons.Things,
+    },
 };
+
+CategoryListItem.contextTypes = Link.contextTypes;

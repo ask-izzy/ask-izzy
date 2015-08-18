@@ -49,10 +49,8 @@ describe("Visual Components", function() {
                 await driver.get(addr);
 
                 // Write screenshot
-                var path = `src/components/${name}/${description}-new.png`;
-
                 var imageData = await driver.takeScreenshot();
-                fs.writeFileSync(path, imageData, 'base64');
+                fs.writeFileSync(orig, imageData, 'base64');
             }
         });
     });
