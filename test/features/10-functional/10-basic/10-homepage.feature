@@ -5,7 +5,25 @@ Feature: Landing page
     # I want to see a landing page with information and a link to click through
     # So that I can understand what Ask Izzy provides
 
-
     Scenario: Visit home page
         When I visit /
-        Then I should see "Ask Izzy"
+        Then I should see the branding header
+         And I should see the search bar
+         And I should see the list of categories
+        ---------------
+        Housing
+        Food
+        Everyday things
+        Legal
+        Money Help
+        Health
+        Addiction
+        Support and counselling
+        Life skills & education
+        Finding work
+        Centrelink
+        Something to do
+        Facilities
+        Technology
+        ---------------
+         And I should see the branding footer

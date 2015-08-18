@@ -1,0 +1,7 @@
+@import '../styles/colors.scss';
+
+.CategoryListItem {
+    .colored-icon path {
+        fill: $icon-fg-color;
+    }
+}

@@ -1,7 +1,6 @@
 import React from "react";
 import Router from "react-router";
 import mui from "material-ui";
-import HeaderWithChevron from "./HeaderWithChevron";
 
 import colors from "../constants/theme";
 var palette = colors.getPalette();
@@ -63,23 +62,21 @@ export default class ServicePane extends React.Component {
                 zDepth={1}
             >
                 <div style={{padding:10}}>
-                    <HeaderWithChevron >
-                        <div>
-                            <div style={{
-                                float: "left",
-                                clear: "both",
-                            }}>
-                                { this.props.title }
-                            </div>
-                            <div style={{
-                                color: palette.secondaryTextColor,
-                                float: "left",
-                                clear: "both",
-                            }}>
-                                { this.props.byline }
-                            </div>
+                    <div>
+                        <div style={{
+                            float: "left",
+                            clear: "both",
+                        }}>
+                            { this.props.title }
                         </div>
-                    </HeaderWithChevron>
+                        <div style={{
+                            color: palette.secondaryTextColor,
+                            float: "left",
+                            clear: "both",
+                        }}>
+                            { this.props.byline }
+                        </div>
+                    </div>
 
                     <div style={{paddingTop: 10}}>
                         <div style={{width: "50%", display: 'inline-block'}}>
