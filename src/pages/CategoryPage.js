@@ -4,32 +4,10 @@ import http from 'iso-http';
 import mui from "material-ui";
 import React from 'react';
 import Router from 'react-router';
-import url from 'url';
 
+import iss from '../iss';
 import categories from '../constants/categories';
 import ResultTile from '../components/ResultTile';
-
-declare var ISS_URL: string;
-
-/**
- * request:
- * obj: data passed to http.request
- *
- * Wraps the http request code in a promise.
- *
- * Returns: a promise for the request
- */
-function request(obj) {
-    return new Promise((resolve, reject) => {
-        http.request(obj, response => {
-            if (response.status == 200) {
-                resolve(response);
-            } else {
-                reject(response);
-            }
-        });
-    });
-}
 
 class CategoryPage extends React.Component {
     constructor(props: Object) {
@@ -59,39 +37,12 @@ class CategoryPage extends React.Component {
         throw "No such category " + this.props.params.page;
     }
 
-    /**
-     * search:
-     * Do a search in ISS
-     *
-     * Returns: a promise to an object of data from ISS.
-     */
-    async search(): Object {
-        var url_: string = ISS_URL || process.env.ISS_URL;
-
-        var urlobj: Object = url.parse(url_);
-        var auth = urlobj.auth;
-
-        urlobj.auth = null;
-        urlobj.pathname = '/api/v3/search/';
-        url_ = url.format(urlobj);
-
-        var response = await request({
-            url: url_,
-            contentType: 'application/json',
-            withCredentials: true,
-            data: {
-                q: this.category.search,
-                key: auth,
-                type: 'service',
-                limit: 3,
-            },
-        });
-
-        return JSON.parse(response.text);
-    }
-
     componentDidMount(): void {
-        this.search()
+        iss('search/', {
+            q: this.category.search,
+            type: 'service',
+            limit: 3,
+        })
             .then(data => {
                 this.setState({
                     meta: data.meta,

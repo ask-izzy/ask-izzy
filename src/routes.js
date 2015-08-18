@@ -7,6 +7,8 @@ import BasePage from "./pages/BasePage";
 import HomePage from "./pages/HomePage";
 import ErrorPage from "./pages/ErrorPage";
 import CategoryPage from "./pages/CategoryPage";
+import ServicePage from "./pages/ServicePage";
+
 import StyleGuideList from "./pages/StyleGuideList";
 import StyleGuideItem from "./pages/StyleGuideItem";
 
@@ -38,7 +40,7 @@ export default <Router.Route
         <Router.Route
             name="service"
             path="/service/:id"
-            handler={ErrorPage}  // FIXME
+            handler={ServicePage}
         />
 
         <Router.DefaultRoute handler={ErrorPage}/>
