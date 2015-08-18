@@ -1,9 +1,12 @@
 /* @flow */
 
 import http from 'iso-http';
+import mui from "material-ui";
 import React from 'react';
 import Router from 'react-router';
 import url from 'url';
+
+import ResultTile from '../components/ResultTile';
 
 class CategoryPage extends React.Component {
     constructor(props: Object) {
@@ -38,7 +41,7 @@ class CategoryPage extends React.Component {
                     objects: data.objects,
                 });
             } else {
-                console.log("SOMETHING BAD HAPPENED")
+                console.log("SOMETHING BAD HAPPENED");
                 console.log(response);
             }
         });
@@ -58,10 +61,13 @@ class CategoryPage extends React.Component {
         return (
             <div>
                 <Router.RouteHandler />
+                <mui.AppBar title={this.props.params.categoryName} />
 
-                {(this.state.objects || []).map(object => {
-                    return <div>{object.name} {object.location.suburb}</div>;
-                })}
+                <mui.List>{
+                    (this.state.objects || []).map((object, index) => {
+                        return <ResultTile object={object} key={index} />;
+                    })
+                }</mui.List>
             </div>
         );
     }
