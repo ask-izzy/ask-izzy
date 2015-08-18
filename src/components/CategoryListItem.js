@@ -8,7 +8,7 @@ export default class CategoryListItem extends React.Component {
     href(): string {
         return this.context.router.makeHref(
             "category",
-            {categoryName: this.props.category.key},
+            {page: this.props.category.key},
             {}
         );
     }

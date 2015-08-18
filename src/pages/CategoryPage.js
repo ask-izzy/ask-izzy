@@ -22,7 +22,7 @@ class CategoryPage extends React.Component {
      */
 
     // flow:disable not supported yet
-    get category(): Object {
+    get category(): categories.Category {
         if (this._category) {
             return this._category;
         }
