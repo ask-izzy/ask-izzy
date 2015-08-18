@@ -1,0 +1,82 @@
+#!/usr/bin/env ruby
+# TODO: This should be ported to JS, but it only took me a few minutes
+# in ruby and has no dependencies outside the stdlib.
+require 'rexml/document'
+include REXML
+
+def titleize(name)
+    name[0] = name[0].upcase
+    name.gsub(/-(.)/) {|match| match[1].upcase}
+end
+
+def icon_js(name, view_box, paths)
+    paths = paths.map {|p| "<path d='#{p}' />"}
+    return <<-JS
+/* @flow */
+/* jscs: disable */
+import React from "react";
+import mui from "material-ui";
+
+export default class SvgIcon#{name} extends React.Component {
+
+    render(): React.Component {
+        return (
+            <mui.SvgIcon
+                {...this.props}
+                viewBox="#{view_box}"
+            >
+            #{paths.join("\n            ")}
+            </mui.SvgIcon>
+        );
+    }
+
+}
+JS
+end
+
+def view_box(doc)
+    XPath.first(doc, '//svg').attributes.get_attribute('viewBox').value
+end
+
+def paths(doc)
+    nodes = XPath.each(doc, '//path').to_a
+    nodes.map do |node|
+        path = node.attributes.get_attribute('d').value
+        path.gsub(/[\t\n]/, ' ')
+    end
+end
+
+def class_name(source_path)
+    titleize(File.basename(source_path).
+        gsub("askizzy-icon-", '').
+        gsub(/.svg$/, '')
+    )
+end
+
+source_dir = ARGV[0] || "../designs/icons/"
+dest_dir = ARGV[1] || "./src/icons/"
+
+source_icons = Dir.glob(source_dir + '/askizzy-icon-*.svg')
+source_icons.each do |source_path|
+    class_name = class_name(source_path)
+    doc = Document.new(File.read(source_path))
+    viewBox = view_box(doc)
+    paths = paths(doc)
+    File.open("#{dest_dir}/#{class_name}.js", 'w') do |out|
+        out.write icon_js(class_name, viewBox, paths)
+    end
+end
+
+File.open('src/icons/index.js', 'w') do |f|
+    source_icons.each do |source_path|
+        class_name = class_name(source_path)
+        f.write "import SvgIcon#{class_name} from './#{class_name}.js';\n"
+    end
+    f.write "\nexport default {\n"
+    source_icons.each do |source_path|
+        class_name = class_name(source_path)
+        f.write "    #{class_name}: SvgIcon#{class_name},\n"
+    end
+    f.write "};\n"
+end
+
