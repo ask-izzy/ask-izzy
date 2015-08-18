@@ -8,22 +8,46 @@ import url from 'url';
 
 import ResultTile from '../components/ResultTile';
 
+declare var ISS_URL: string;
+
+/**
+ * request:
+ * obj: data passed to http.request
+ *
+ * Wraps the http request code in a promise.
+ *
+ * Returns: a promise for the request
+ */
+function request(obj) {
+    return new Promise((resolve, reject) => {
+        http.request(obj, response => {
+            if (response.status == 200) {
+                resolve(response);
+            } else {
+                reject(response);
+            }
+        });
+    });
+}
+
 class CategoryPage extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {};
     }
 
-    search(callback): void {
+    async search(): Object {
         /* issue a search to ISS */
-        let url_ = url.parse(ISS_URL || process.env.ISS_URL);
-        let auth = url_.auth;
+        var url_: string = ISS_URL || process.env.ISS_URL;
 
-        url_.auth = null;
-        url_.pathname = '/api/v3/search/';
-        url_ = url.format(url_);
+        var urlobj: Object = url.parse(url_);
+        var auth = urlobj.auth;
 
-        http.request({
+        urlobj.auth = null;
+        urlobj.pathname = '/api/v3/search/';
+        url_ = url.format(urlobj);
+
+        var response = await request({
             url: url_,
             contentType: 'application/json',
             withCredentials: true,
@@ -33,28 +57,19 @@ class CategoryPage extends React.Component {
                 type: 'service',
                 limit: 3,
             },
-        }, response => {
-            if (response.status == 200) {
-                let data = JSON.parse(response.text);
+        });
+
+        return JSON.parse(response.text);
+    }
+
+    componentDidMount(): void {
+        this.search()
+            .then(data => {
                 this.setState({
                     meta: data.meta,
                     objects: data.objects,
                 });
-            } else {
-                console.log("SOMETHING BAD HAPPENED");
-                console.log(response);
-            }
-        });
-    }
-
-    componentDidMount(): void {
-        this.search(state => {
-            this.setState(state);
-        });
-    }
-
-    componentWillReceiveProps(nextProps: Object): void {
-        this.setState({ categoryName: nextProps.params.categoryName });
+            });
     }
 
     render(): React.Element {

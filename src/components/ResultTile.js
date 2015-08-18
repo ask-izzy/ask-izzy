@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, { PropTypes } from "react";
 import mui from "material-ui";
 
@@ -6,13 +8,14 @@ var palette = colors.getPalette();
 
 import OpeningTimes from "./OpeningTimes";
 
-export default class ResultTile extends React.Component {
-    static propTypes: {
+class ResultTile extends React.Component {
+    // flow:disable not supported yet
+    static propTypes = {
         object: PropTypes.object.isRequired,
-    }
+    };
 
     render(): React.Element {
-        const {
+        var {
             object,
         } = this.props;
 
@@ -28,5 +31,6 @@ export default class ResultTile extends React.Component {
             </mui.ListItem>
         );
     }
-
 }
+
+export default ResultTile;

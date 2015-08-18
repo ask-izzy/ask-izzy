@@ -1,16 +1,19 @@
+/* @flow */
+
 import React, { PropTypes } from "react";
 import mui from "material-ui";
 
 import colors from "../constants/theme";
 var palette = colors.getPalette();
 
-export default class OpeningTimes extends React.Component {
-    static propTypes: {
+class OpeningTimes extends React.Component {
+    // flow:disable not supported yet
+    static propTypes = {
         object: PropTypes.object.isRequired,
-    }
+    };
 
     render(): React.Element {
-        const {
+        var {
             object,
         } = this.props;
 
@@ -29,5 +32,6 @@ export default class OpeningTimes extends React.Component {
         }
 
     }
-
 }
+
+export default OpeningTimes;
