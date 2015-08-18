@@ -1,13 +1,15 @@
 /** normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
 /**
- * 1. Set default font family to sans-serif.
+ * 1. Set default font family to Gotham Round.
  * 2. Prevent iOS and IE text size adjust after device orientation change,
  *    without disabling user zoom.
  */
 
 html {
-  font-family: sans-serif; /* 1 */
+  font-family: "Gotham Rounded A", "Gotham Rounded B", "sans-serif"; /* 1 */
+  font-style: normal;
+  font-weight: 400;
   -ms-text-size-adjust: 100%; /* 2 */
   -webkit-text-size-adjust: 100%; /* 2 */
 }
