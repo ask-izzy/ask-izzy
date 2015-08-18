@@ -32,8 +32,14 @@ export default <Router.Route
         />
         <Router.Route
             name="category"
-            path=":categoryName"
+            path="/:page"
             handler={CategoryPage}
         />
+        <Router.Route
+            name="service"
+            path="/service/:id"
+            handler={ErrorPage}  // FIXME
+        />
+
         <Router.DefaultRoute handler={ErrorPage}/>
     </Router.Route>;

@@ -6,6 +6,7 @@ import React from 'react';
 import Router from 'react-router';
 import url from 'url';
 
+import categories from '../constants/categories';
 import ResultTile from '../components/ResultTile';
 
 declare var ISS_URL: string;
@@ -36,8 +37,35 @@ class CategoryPage extends React.Component {
         this.state = {};
     }
 
+    /**
+     * category:
+     *
+     * Return category information.
+     */
+
+    // flow:disable not supported yet
+    get category(): Object {
+        if (this._category) {
+            return this._category;
+        }
+
+        for (var category of categories) {
+            if (category.key == this.props.params.page) {
+                this._category = category;
+                return category;
+            }
+        }
+
+        throw "No such category " + this.props.params.page;
+    }
+
+    /**
+     * search:
+     * Do a search in ISS
+     *
+     * Returns: a promise to an object of data from ISS.
+     */
     async search(): Object {
-        /* issue a search to ISS */
         var url_: string = ISS_URL || process.env.ISS_URL;
 
         var urlobj: Object = url.parse(url_);
@@ -52,7 +80,7 @@ class CategoryPage extends React.Component {
             contentType: 'application/json',
             withCredentials: true,
             data: {
-                q: this.props.params.categoryName,
+                q: this.category.search,
                 key: auth,
                 type: 'service',
                 limit: 3,
@@ -70,13 +98,15 @@ class CategoryPage extends React.Component {
                     objects: data.objects,
                 });
             });
+
+        // FIXME: display error
     }
 
     render(): React.Element {
         return (
             <div>
                 <Router.RouteHandler />
-                <mui.AppBar title={this.props.params.categoryName} />
+                <mui.AppBar title={this.category.name} />
 
                 <mui.List>{
                     // FIXME: crisis tiles
