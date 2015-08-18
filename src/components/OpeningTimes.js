@@ -16,11 +16,15 @@ export default class OpeningTimes extends React.Component {
 
         if (object.now_open.now_open) {  // jscs:disable
             return (
-                <span>Now open</span>
+                <div>
+                    <span>Now open</span>
+                </div>
             );
         } else {
             return (
-                <span>Currently closed</span>
+                <div>
+                    <span>Currently closed</span>
+                </div>
             );
         }
 

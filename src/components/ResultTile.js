@@ -16,17 +16,15 @@ export default class ResultTile extends React.Component {
             object,
         } = this.props;
 
+        console.log(object);
+
         return (
-            <mui.ListItem
-                secondaryText={
-                    <div>
-                        <span>{object.site.name}</span><br />
-                        <OpeningTimes object={object} />
-                    </div>
-                }
-                secondaryTextLines={2}
-            >
-                {object.name}
+            <mui.ListItem>
+                <div>{object.name}</div>
+                <div>{object.site.name}</div>
+                <OpeningTimes object={object} />
+                <div>FIXME transport time</div>
+                <div>{object.service_types[0] /* jscs:disable */}</div>
             </mui.ListItem>
         );
     }
