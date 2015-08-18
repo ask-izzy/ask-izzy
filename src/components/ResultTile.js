@@ -57,7 +57,7 @@ class ResultTile extends React.Component {
                 <div>{object.site.name}</div>
                 <OpeningTimes object={object} />
                 <div>FIXME transport time</div>
-                <div>{object.service_types[0] /* jscs:disable */}</div>
+                <div>{object.service_types[0]}</div>
             </mui.ListItem>
         );
     }

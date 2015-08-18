@@ -13,5 +13,6 @@
     },
     "requireMultipleVarDecl": null,
     "validateIndentation": 4,
-    "validateQuoteMarks": null
+    "validateQuoteMarks": null,
+    "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties"
 }

@@ -3089,6 +3089,11 @@
       "from": "iso-http@",
       "resolved": "https://registry.npmjs.org/iso-http/-/iso-http-0.0.5.tgz"
     },
+    "moment": {
+      "version": "2.10.6",
+      "from": "moment@",
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.10.6.tgz"
+    },
     "mocha-babel": {
       "version": "3.0.0",
       "from": "mocha-babel@~3.0.0"
