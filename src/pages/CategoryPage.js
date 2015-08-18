@@ -64,6 +64,7 @@ class CategoryPage extends React.Component {
                 <mui.AppBar title={this.props.params.categoryName} />
 
                 <mui.List>{
+                    // FIXME: crisis tiles
                     (this.state.objects || []).map((object, index) => {
                         return <ResultTile object={object} key={index} />;
                     })

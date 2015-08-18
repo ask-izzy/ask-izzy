@@ -4,8 +4,10 @@ import mui from "material-ui";
 import colors from "../constants/theme";
 var palette = colors.getPalette();
 
-export default class ServicePane extends React.Component {
-    static propTypes = {
+import OpeningTimes from "./OpeningTimes";
+
+export default class ResultTile extends React.Component {
+    static propTypes: {
         object: PropTypes.object.isRequired,
     }
 
@@ -15,7 +17,15 @@ export default class ServicePane extends React.Component {
         } = this.props;
 
         return (
-            <mui.ListItem>
+            <mui.ListItem
+                secondaryText={
+                    <div>
+                        <span>{object.site.name}</span><br />
+                        <OpeningTimes object={object} />
+                    </div>
+                }
+                secondaryTextLines={2}
+            >
                 {object.name}
             </mui.ListItem>
         );
