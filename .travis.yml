@@ -25,6 +25,3 @@ env:
   matrix:
     - SELENIUM_BROWSER="firefox:39:Windows 7"
     - SELENIUM_BROWSER="internet explorer:11.0:Windows 7"
-    - SELENIUM_BROWSER="iphone:8.4:OS X 10.10" SELENIUM_DEVICE="iPhone Simulator"           SELENIUM_ORIENTATION="portrait"
-    - SELENIUM_BROWSER="iphone:7.1:OS X 10.10" SELENIUM_DEVICE="iPhone Simulator"           SELENIUM_ORIENTATION="portrait"
-    - SELENIUM_BROWSER="android:4.2:Linux" SELENIUM_DEVICE="LG Nexus 4 Emulator"            SELENIUM_ORIENTATION="portrait"
