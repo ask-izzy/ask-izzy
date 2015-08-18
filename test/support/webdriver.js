@@ -2,15 +2,18 @@ import Webdriver from 'selenium-webdriver';
 
 export async function seleniumBrowser(driver) {
     var wnd = new Webdriver.WebDriver.Window(driver);
-    var {width, height} = await wnd.getSize();
+    try {
+        var {width, height} = await wnd.getSize();
+    } catch (e) {
+        // Width and height aren't supported on android
+        width = 0;
+        height = 0;
+    }
+
     var capabilities = await driver.getCapabilities();
     var res = capabilities.caps_;
-    res.version = res.version || res.platformVersion; // mobile safari
+    res.version = res.version || res.platformVersion;
     res.width = width;
-    if ((res.browserName == "safari") && (res.version == "7.1")) {
-        // Safari 7 has a wierd issue where the height is reported strangely.
-        height = 460;
-    }
 
     res.height = height;
     return res;
@@ -35,14 +38,21 @@ export default function webDriverInstance() {
         screenResolution: "1024x768",
         captureHtml: true,
         timeZone: "Melbourne",
-        avoidProxy: true, // No SSL for these tests
         public: "public",
         build: process.env.TRAVIS_BUILD_NUMBER || "Manual",
         tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
     };
 
     if (process.env.SELENIUM_DEVICE) {
+        baseCaps.appiumVersion = "1.4.10";
         baseCaps.deviceName = process.env.SELENIUM_DEVICE;
+
+        // From selenium-webdriver - we need to
+        // fill in some extra fields for appium
+        var browser = process.env.SELENIUM_BROWSER.split(/:/, 3);
+        var _;
+        [_, baseCaps.platformVersion, baseCaps.platformName] = browser;
+
         baseCaps.emulator = true;
     }
 
