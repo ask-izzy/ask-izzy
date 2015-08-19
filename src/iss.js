@@ -38,6 +38,7 @@ async function iss(path: string, data: ?Object): Object {
     var response = await request({
         url: url_,
         contentType: 'application/json',
+        headers: {Accept: 'application/json'},
         withCredentials: true,
         data: data,
     });

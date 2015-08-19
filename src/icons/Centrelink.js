@@ -3,7 +3,7 @@
 import React from "react";
 import mui from "material-ui";
 
-export default class SvgIconCenterlink extends React.Component {
+export default class SvgIconCentrelink extends React.Component {
 
     render(): React.Component {
         return (

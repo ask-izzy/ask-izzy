@@ -18,7 +18,7 @@ Feature: Landing page
         Money Help
         Health
         Addiction
-        Support and counselling
+        Support & counselling
         Life skills & education
         Finding work
         Centrelink
