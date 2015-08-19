@@ -6,12 +6,14 @@
 import Yadda from 'yadda';
 import webDriverInstance, { executeInFlow } from './support/webdriver';
 import fs from 'fs';
+import Webdriver from 'selenium-webdriver';
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
 import libraries from './steps/steps';
 
-import _ from '../src/server';
+import server from '../src/server';
+import mockISS from './support/iss';
 
 new Yadda.FeatureFileSearch('./test/features').each(file => {
     featureFile(file, feature => {
@@ -35,9 +37,7 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
             takeScreenshotOnFailure(this.currentTest, driver);
         });
 
-        after(done => {
-            driver.quit().then(done);
-        });
+        after(done => driver.quit().then(done));
     });
 });
 

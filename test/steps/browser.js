@@ -4,10 +4,11 @@
 
 "use strict";
 
-import Yadda from 'yadda';
-import { By } from 'selenium-webdriver';
-import unpromisify from "../support/yadda-promise";
 import * as assert from '../support/page-assertions';
+import Yadda from 'yadda';
+import readline from 'readline';
+import unpromisify from "../support/yadda-promise";
+import { By } from 'selenium-webdriver';
 
 module.exports = (function() {
     return Yadda.localisation.English.library()

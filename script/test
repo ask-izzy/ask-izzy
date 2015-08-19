@@ -4,6 +4,9 @@ IFS=$'\n\t'
 PATH=`npm bin`:$PATH
 
 export NODE_ENV=production
-export ISS_URL="http://example.org/"
+export ISS_URL=http://localhost:5000/
+
+# build assets if this isn't Travis (which has already)
+${CI:=false} || ./script/build-assets
 
 mocha --timeout 0 --compilers js:babel/register test/*.js "$@"

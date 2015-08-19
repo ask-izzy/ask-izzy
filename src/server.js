@@ -46,4 +46,3 @@ server.listen(server.get("port"), () => {
         `Express ${env} server listening on ${port}`
     );
 });
-
