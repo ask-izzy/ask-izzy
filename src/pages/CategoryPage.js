@@ -41,6 +41,7 @@ class CategoryPage extends React.Component {
         iss('search/', {
             q: this.category.search,
             type: 'service',
+            area: 'melbourne vic',  // FIXME: get real location
             limit: 3,
         })
             .then(data => {
