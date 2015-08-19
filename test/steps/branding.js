@@ -6,7 +6,9 @@
 
 import Yadda from 'yadda';
 import { By } from 'selenium-webdriver';
+
 import unpromisify from "../support/yadda-promise";
+import dictionary from "../support/dictionary";
 import * as assert from '../support/page-assertions';
 import { within } from '../support/selectors';
 
@@ -71,13 +73,6 @@ module.exports = (function() {
         );
     }
 
-    async function lines(str, cb) {
-        cb(null, str.split("\n"));
-    }
-
-    var dictionary = new Yadda.Dictionary()
-        .define('categories', /([^\u0000]*)/, lines);
-
     return Yadda.localisation.English.library(dictionary)
 
         .then(
@@ -91,7 +86,7 @@ module.exports = (function() {
         )
 
         .then(
-            'I should see the list of categories\n$categories',
+            'I should see the list of categories\n$lines',
             unpromisify(seeTheCategoryList)
         )
 
