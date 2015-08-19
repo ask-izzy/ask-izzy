@@ -1,3 +1,5 @@
+"use strict";
+
 import assert from "assert";
 import { By } from 'selenium-webdriver';
 import selectors from './selectors';

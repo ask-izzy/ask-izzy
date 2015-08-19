@@ -9,8 +9,10 @@ Feature: Category page
         When I visit /housing
         Then I should see "Housing"
         And I should see the results
-        --------------------------------------
-        Service Name    | Site Name
-        ======================================
-        Housing Service | Some Housing Service
-        --------------------------------------
+        -------------------------------------------
+        Service Name (name) | Site Name (site_name)
+        ===========================================
+        Housing Service     | My Housing Service
+        Emergency Accom     | Youth Support Net
+        Womens Refuge       | Susan's House
+        -------------------------------------------
