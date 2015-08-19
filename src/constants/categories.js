@@ -90,7 +90,7 @@ var categories:Array<Category> = [
     new Category({
         name: "Centrelink",
         byline: "Find Centrelink near you",
-        icon: icons.Centerlink,
+        icon: icons.Centrelink,
         search: 'centrelink',
     }),
     new Category({

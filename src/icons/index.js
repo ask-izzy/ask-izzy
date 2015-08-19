@@ -1,6 +1,6 @@
 import SvgIconAddiction from './Addiction.js';
 import SvgIconAdvocacy from './Advocacy.js';
-import SvgIconCenterlink from './Centerlink.js';
+import SvgIconCentrelink from './Centrelink.js';
 import SvgIconCheckboxSelected from './CheckboxSelected.js';
 import SvgIconCheckboxUnselected from './CheckboxUnselected.js';
 import SvgIconChevron from './Chevron.js';
@@ -25,6 +25,7 @@ import SvgIconMoney from './Money.js';
 import SvgIconPrint from './Print.js';
 import SvgIconRadioSelected from './RadioSelected.js';
 import SvgIconRadioUnselected from './RadioUnselected.js';
+import SvgIconSearch from './Search.js';
 import SvgIconSkills from './Skills.js';
 import SvgIconSupport from './Support.js';
 import SvgIconTech from './Tech.js';
@@ -36,7 +37,7 @@ import SvgIconWalk from './Walk.js';
 export default {
     Addiction: SvgIconAddiction,
     Advocacy: SvgIconAdvocacy,
-    Centerlink: SvgIconCenterlink,
+    Centrelink: SvgIconCentrelink,
     CheckboxSelected: SvgIconCheckboxSelected,
     CheckboxUnselected: SvgIconCheckboxUnselected,
     Chevron: SvgIconChevron,
@@ -61,6 +62,7 @@ export default {
     Print: SvgIconPrint,
     RadioSelected: SvgIconRadioSelected,
     RadioUnselected: SvgIconRadioUnselected,
+    Search: SvgIconSearch,
     Skills: SvgIconSkills,
     Support: SvgIconSupport,
     Tech: SvgIconTech,
