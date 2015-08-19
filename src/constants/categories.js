@@ -46,7 +46,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Legal",
-        byline: "Help with law, police and transport officers",
+        byline: "Help with law, police & transport officers",
         icon: icons.Legal,
         search: 'legal aid',
     }),
@@ -65,19 +65,19 @@ var categories:Array<Category> = [
     new Category({
         name: "Addiction",
         byline:
-        "Help dealing with drugs & alcohol, harm minimisation, gambling etc",
+        "Help dealing with drugs & alcohol, harm minimisation, gambling etc.",
         icon: icons.Addiction,
         search: 'additional',
     }),
     new Category({
-        name: "Support and counselling",
-        byline: "Someone to help and talk to",
+        name: "Support & counselling",
+        byline: "Someone to help & talk to",
         icon: icons.Mental,
         search: 'mental health',
     }),
     new Category({
         name: "Life skills & education",
-        byline: "Developing everyday living skills and more",
+        byline: "Developing everyday living skills etc.",
         icon: icons.Skills,
         search: 'life skills',
     }),
@@ -89,7 +89,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Centrelink",
-        byline: "Find Centerlink near you",
+        byline: "Find Centrelink near you",
         icon: icons.Centerlink,
         search: 'centrelink',
     }),
@@ -101,7 +101,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Facilities",
-        byline: "Public toilets, libraries, etc",
+        byline: "Public toilets, libraries, etc.",
         icon: icons.Facilaties,
         search: 'facilities',
     }),
