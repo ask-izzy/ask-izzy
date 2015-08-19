@@ -18,8 +18,8 @@ class Category {
         this.byline = props.byline;
         this.icon = props.icon;
         this.key = this.name
-            .replace(' ', '-')
-            .replace('&', '-and-')
+            .replace(/&/g, 'and')
+            .replace(/[^A-Za-z0-9-_]+/g, '-')
             .toLowerCase();
         this.search = props.search;
     }
