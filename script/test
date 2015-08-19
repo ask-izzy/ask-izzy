@@ -4,5 +4,6 @@ IFS=$'\n\t'
 PATH=`npm bin`:$PATH
 
 export NODE_ENV=production
+export ISS_URL="http://example.org/"
 
 mocha --timeout 0 --compilers js:babel/register test/*.js "$@"

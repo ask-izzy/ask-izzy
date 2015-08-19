@@ -7,6 +7,11 @@ import render from "./server/render";
 
 // Initialize express server
 
+if (!process.env.ISS_URL) {
+    console.error("Must set ISS_URL");
+    process.exit(1);
+}
+
 var server = express();
 
 // In production, nginx will serve these files so
