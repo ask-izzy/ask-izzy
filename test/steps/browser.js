@@ -7,7 +7,7 @@
 import Yadda from 'yadda';
 import { By } from 'selenium-webdriver';
 import unpromisify from "../support/yadda-promise";
-import * as page from '../support/page-assertions';
+import * as assert from '../support/page-assertions';
 
 module.exports = (function() {
     return Yadda.localisation.English.library()

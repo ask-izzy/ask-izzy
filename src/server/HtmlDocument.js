@@ -31,6 +31,8 @@ class HtmlDocument extends React.Component {
             images
         } = this.props;
         const vp = "width=device-width, initial-scale=1.0, user-scalable=no";
+        let issconfig = 'var ISS_URL = "' + process.env.ISS_URL + '";';
+
         return (
 <html >
     <head>
@@ -153,9 +155,7 @@ class HtmlDocument extends React.Component {
 
     <body>
       <div id="root" dangerouslySetInnerHTML={{__html: markup}} />
-
-      <script dangerouslySetInnerHTML={{__html: state}} />
-
+      <script dangerouslySetInnerHTML={{__html: issconfig}} />
       { script.map((src, k) => <script key={k} src={src} />) }
 
     </body>

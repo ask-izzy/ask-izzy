@@ -11,6 +11,8 @@
 [options]
 module.system=node
 suppress_type=$FlowIssue
+suppress_comment= \\(.\\|\n\\)*\\flow:disable
+strip_root=true
 
 [version]
 0.14.0

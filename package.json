@@ -26,7 +26,9 @@
     "sass-loader": "^1.0.4",
     "serialize-javascript": "^1.0.0",
     "strip-loader": "^0.1.0",
-    "style-loader": "^0.12.3"
+    "style-loader": "^0.12.3",
+    "iso-http": "0.0.5",
+    "moment": "~2.10.6"
   },
   "devDependencies": {
     "babel-jscs": "~2.0.0",
