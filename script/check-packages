@@ -2,16 +2,12 @@
 
 var fs = require('fs');
 var packageJSON = require('../package.json');
-var shrinkwrapJSON = require('../npm-shrinkwrap.json');
 
 // Build up an array of dependencies present in each source
 
 // All deps in package.json
 var packageDevDeps = Object.keys(packageJSON.devDependencies);
 var packageDeps = Object.keys(packageJSON.dependencies).concat(packageDevDeps).sort();
-
-// All deps in npm-shrinkwrap.json
-var shrinkwrapDeps = Object.keys(shrinkwrapJSON.dependencies).sort();
 
 // All deps in node_modules
 var node_modules = fs.readdirSync("node_modules").sort();
@@ -21,8 +17,6 @@ while (node_modules[0][0] === ".") {
 }
 
 // Compare the sets of dependencies
-compare(shrinkwrapDeps, "npm-shrinkwrap.json", packageDeps, "package.json");
-compare(shrinkwrapDeps, "npm-shrinkwrap.json", node_modules, "node_modules");
 compare(packageDeps, "package.json", node_modules, "node_modules");
 
 function fail(package, present, missing) {
