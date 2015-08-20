@@ -1,6 +1,7 @@
 /* @flow */
 
-import http from 'iso-http';
+"use strict";
+
 import mui from "material-ui";
 import React from 'react';
 import Router from 'react-router';

@@ -1,0 +1,30 @@
+.HomePage {
+    text-align: center;
+    color: white;
+
+    // FIXME: check all of these alignments
+    .branding-container {
+        background-color: $brand-pane-light;
+
+        .branding-icon {
+            width: 50%;
+            margin-bottom: -3em;
+            max-width: 250px;
+        }
+
+        .branding-copy {
+            width: 80%;
+            margin: auto;
+            font-size: 200%;
+            padding-bottom: 2em;
+        }
+    }
+
+    .search {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        padding: 5px;
+    }
+}
