@@ -13,7 +13,7 @@ Yadda.plugins.mocha.StepLevelPlugin.init();
 import libraries from './steps/steps';
 
 import server from '../src/server';
-import mockISS from './support/iss';
+import mockISS from './support/mock_iss/server';
 
 new Yadda.FeatureFileSearch('./test/features').each(file => {
     featureFile(file, feature => {
