@@ -11,5 +11,6 @@ module.exports = (function() {
         require('./browser.js'),
         require('./branding.js'),
         require('./results.js'),
+        require('./search.js'),
     ];
 })();

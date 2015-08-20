@@ -1,0 +1,24 @@
+
+/**
+* Setting the div to set the search icon
+**/
+.search {
+    position: relative;
+    top:10px;
+    border: 2px dotted #FCFCFA;
+    background-color: #FCFCFA;
+    width: 80%;
+    left: 10%;
+}
+
+/**
+* Setting the layout of the search textbox with search icon
+**/
+#search-box {
+    width: 90%;
+    height: 30px;
+    background-size: 22px 27px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 0px;
+}
