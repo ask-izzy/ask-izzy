@@ -1,3 +1,7 @@
+/* @flow */
+
+"use strict";
+
 import http from 'iso-http';
 import url from 'url';
 

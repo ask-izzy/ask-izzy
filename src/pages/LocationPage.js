@@ -5,12 +5,23 @@
 import mui from "material-ui";
 import React from 'react';
 
+import Maps from '../maps';
 import HeaderBar from '../components/HeaderBar';
+
+async function locateMe(): Promise {
+    var maps = await Maps();
+}
 
 class LocationPage extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {};
+    }
+
+    componentDidMount(): void {
+        locateMe()
+            .then(() => {
+            });
     }
 
     render(): React.Element {

@@ -160,6 +160,11 @@ class HtmlDocument extends React.Component {
       <script dangerouslySetInnerHTML={{__html: issconfig}} />
       { script.map((src, k) => <script key={k} src={src} />) }
 
+      <script
+        src="//maps.googleapis.com/maps/api/js?key=API_KEY">  // FIXME
+      </script>
+
+
     </body>
 </html>
         );
