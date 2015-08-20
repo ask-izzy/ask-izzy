@@ -4,7 +4,6 @@
 
 import mui from "material-ui";
 import React from 'react';
-import Router from 'react-router';
 
 import HeaderBar from '../components/HeaderBar';
 
@@ -17,7 +16,6 @@ class LocationPage extends React.Component {
     render(): React.Element {
         return (
             <div>
-                <Router.RouteHandler />
                 <mui.AppBar title="Personalise" />
                 <HeaderBar
                     primaryText="Where are you?"
