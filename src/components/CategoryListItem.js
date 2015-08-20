@@ -5,6 +5,16 @@ import icons from "../icons";
 
 export default class CategoryListItem extends React.Component {
 
+    // flow:disable not supported yet
+    static sampleProps = {
+        category: {
+            key: "material-aid",
+            name: "Material Aid",
+            byline: "Clothes and other goods",
+            icon: icons.Things,
+        },
+    };
+
     href(): string {
         return this.context.router.makeHref(
             "category",
@@ -48,14 +58,5 @@ export default class CategoryListItem extends React.Component {
         );
     }
 }
-
-CategoryListItem.sampleProps = {
-    category: {
-        key: "material-aid",
-        name: "Material Aid",
-        byline: "Clothes and other goods",
-        icon: icons.Things,
-    },
-};
 
 CategoryListItem.contextTypes = Link.contextTypes;

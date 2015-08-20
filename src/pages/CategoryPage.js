@@ -51,13 +51,26 @@ class CategoryPage extends React.Component {
                 this.setState({
                     meta: data.meta,
                     objects: data.objects,
+                    error: undefined,
+                });
+            }).catch(error => {
+
+                this.setState({
+                    error: error,
                 });
             });
 
-        // FIXME: display error
     }
 
     render(): React.Element {
+        if (this.state.error) {
+            return (
+                <div>
+                    { this.state.error }
+                </div>
+            );
+        }
+
         return (
             <div>
                 <mui.AppBar title={this.category.name} />

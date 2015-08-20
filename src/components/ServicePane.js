@@ -1,108 +1,51 @@
 import React from "react";
 import Router from "react-router";
 import mui from "material-ui";
+import fixtures from "../../fixtures/services";
+import OpeningTimes from "../components/OpeningTimes";
+import Address from "../components/Address";
+import Eligibility from "../components/Eligibility";
+import CollapsedPhones from "../components/CollapsedPhones";
 
 import colors from "../constants/theme";
 var palette = colors.getPalette();
 
 export default class ServicePane extends React.Component {
 
-    static sampleProps = {
-        title: "Frontyard Youth Services",
-        byline: "Melbourne City Mission",
-        services: [
-            {
-                name: "Accommodation referral",
-                relevance: "primary",
-            }, {
-                name: "Centerlink",
-            }, {
-                name: "Youth connections",
-            }, {
-                name: "Podiatrist",
-                dates: ["16/06/15"],
-            }, {
-                name: "Legal advice",
-            }, {
-                name: "Health services",
-            }, {
-                name: "Family reconciliation and mediation",
-            }, {
-                name: "Assessment and referral",
-            }, {
-                name: "Dentistry",
-                relevance: "newService",
-            }, {
-                name: "Young & Pregnant Parenting",
-            }, {
-                name: "Job Services Australia",
-            },
-        ],
-    }
-
-    renderOtherService(service, idx): React.Element {
-        var dateInfo;
-        if (service.dates) {
-            dateInfo = (
-                "only on " + service.dates.join(" and ")
-            );
-        }
-
-        return (
-            <li key={idx} style={{listStyleType: "none"}}>
-                <span>{service.name} </span>
-                <span style={{
-                    backgroundColor: palette.accent2Color,
-                }}>{dateInfo}</span>
-            </li>
-        );
-    }
+    // flow:disable not supported yet
+    static sampleProps = {service: fixtures.youthSupportNet};
 
     render(): React.Element {
+        var object = this.props.service;
         return (
-            <mui.Paper
-                zDepth={1}
-            >
-                <div style={{padding:10}}>
-                    <div>
-                        <div style={{
-                            float: "left",
-                            clear: "both",
-                        }}>
-                            { this.props.title }
-                        </div>
-                        <div style={{
-                            color: palette.secondaryTextColor,
-                            float: "left",
-                            clear: "both",
-                        }}>
-                            { this.props.byline }
-                        </div>
-                    </div>
+            <div>
 
-                    <div style={{paddingTop: 10}}>
-                        <div style={{width: "50%", display: 'inline-block'}}>
-                            {/* icon: alarm */}
-                            <i className="material-icons">&#xE855;</i>
-                            Open now
-                        </div>
-                        <div style={{width: "50%", display: 'inline-block'}}>
-                            {/* icon: directions_transit */}
-                            <i className="material-icons">&#xE535;</i>
-                            15 mins
-                        </div>
-                    </div>
-                </div>
-                <div style={{
-                    padding:10,
-                    backgroundColor: palette.accent1Color,
-                }}>
-                    <ul style={{padding:0}} >
-                        {this.props.services.map(this.renderOtherService)}
-                    </ul>
-                </div>
-            </mui.Paper>
+                <mui.AppBar title={object.site.name} />
+                <mui.Paper>
+                    <p>
+                        {object.name}
+                    </p>
+                    <p>
+                        {object.description}
+                    </p>
+                </mui.Paper>
+                <mui.Paper>
+                    <OpeningTimes object={object} />
+                </mui.Paper>
+                <mui.Paper>
+                    <Address {...object.location} />
+                </mui.Paper>
 
+                <CollapsedPhones phones={object.phones} />
+
+                <mui.Paper>
+                    <Eligibility
+                        catchment={object.catchment}
+                        eligibility_info={object.eligibility_info}
+                        ineligibility_info={object.ineligibility_info}
+                    />
+                </mui.Paper>
+            </div>
         );
     }
 

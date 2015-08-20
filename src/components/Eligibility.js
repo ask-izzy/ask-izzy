@@ -1,0 +1,55 @@
+/* @flow */
+import React from "react";
+import fixtures from "../../fixtures/services";
+
+class Eligibility extends React.Component {
+
+    // flow:disable not supported yet
+    static sampleProps = fixtures.ixa;
+
+    eligibility(eligibility:string): Array<React.Element> {
+        return eligibility.split("\n").map(
+            (line, idx) => <li key={idx}>{line}</li>
+        );
+    }
+
+    render(): React.Element {
+        var catchment = this.props.catchment;
+        var eligibilityInfo = this.props.eligibility_info;
+        var ineligibilityInfo = this.props.ineligibility_info;
+        var eligibleMarkup;
+        var ineligibleMarkup;
+
+        if (eligibilityInfo || catchment) {
+            eligibleMarkup = (
+                <div class="eligibility">
+                    <h3>To receive this service you must be</h3>
+                    <ul>
+                        <li>Located in { catchment}</li>
+                        { this.eligibility(eligibilityInfo) }
+                    </ul>
+                </div>
+            );
+        }
+
+        if (ineligibilityInfo) {
+            ineligibleMarkup = (
+                <div class="ineligibility">
+                    <h3>You are ineligible if</h3>
+                    <ul>
+                        { this.eligibility(ineligibilityInfo) }
+                    </ul>
+                </div>
+            );
+        }
+
+        return (
+            <div className="Eligibility">
+                {eligibleMarkup}
+                {ineligibleMarkup}
+            </div>
+        );
+    }
+
+}
+export default Eligibility;

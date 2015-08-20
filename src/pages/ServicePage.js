@@ -2,17 +2,14 @@
 
 import mui from "material-ui";
 import React from 'react';
+import ServicePane from "../components/ServicePane";
 
 import iss from '../iss';
 
 class CategoryPage extends React.Component {
     constructor(props: Object) {
         super(props);
-        this.state = {
-            object: {
-                site: {},
-            },
-        };
+        this.state = {};
     }
 
     /**
@@ -30,22 +27,18 @@ class CategoryPage extends React.Component {
                 });
             });
 
-        // FIXME: display error
+        // FIXME: display error on failure to connect
     }
 
     render(): React.Element {
         var {
             object,
         } = this.state;
-
-        return (
+        if (!object) {
+            return <div/>;
+        } else return (
             <div>
-                <mui.AppBar title={object.name} />
-                <mui.Paper>
-                    <p>
-                        {object.site.name}
-                    </p>
-                </mui.Paper>
+                <ServicePane service={object}/>
             </div>
         );
     }
