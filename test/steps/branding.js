@@ -15,7 +15,7 @@ import { within } from '../support/selectors';
 module.exports = (function() {
     async function seeTheBrandingHeader() {
         const container = within(
-            "//*[@class='branding-header-container']"
+            "//*[@class='branding-container']"
         );
 
         await assert.imageIsVisible(this.driver, "Ask Izzy", container);
@@ -28,7 +28,7 @@ module.exports = (function() {
 
     async function seeTheSearchBar() {
         const container = within(
-            "//*[@class='search-container']"
+            "//*[@class='HeaderBar']"
         );
         await assert.textIsVisible(
             this.driver,

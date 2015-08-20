@@ -2,7 +2,6 @@
 
 import mui from "material-ui";
 import React from 'react';
-import Router from 'react-router';
 
 import iss from '../iss';
 
@@ -41,7 +40,6 @@ class CategoryPage extends React.Component {
 
         return (
             <div>
-                <Router.RouteHandler />
                 <mui.AppBar title={object.name} />
                 <mui.Paper>
                     <p>

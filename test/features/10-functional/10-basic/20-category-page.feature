@@ -6,7 +6,7 @@ Feature: Category page
     # So that I can choose a service
 
     Scenario: Visit housing category
-        When I visit /housing
+        When I visit /category/housing
         Then I should see "Housing"
         And I should see the results
         -------------------------------------------

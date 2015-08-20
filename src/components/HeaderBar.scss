@@ -1,46 +1,20 @@
-.branding-header-container {
-    text-align: center;
+.HeaderBar {
+    background-color: $brand-pane-dark;
     color: white;
 
-    .branding-container {
-        background-color: $brand-pane-light;
+    // FIXME check these
+    padding-left: 20px;
+    padding-right: 20px;
 
-        .branding-icon {
-            width: 50%;
-            margin-bottom: -3em;
-            max-width: 250px;
-        }
-
-        .branding-copy {
-            width: 80%;
-            margin: auto;
-            font-size: 200%;
-            padding-bottom: 2em;
-        }
+    .primary {
+        font-size: 250%;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
     }
 
-    .search-container {
-        background-color: $brand-pane-dark;
-
-        .search-heading {
-            font-size: 250%;
-            padding-top: 0.5em;
-            padding-bottom: 0.5em;
-        }
-
-        .search-byline {
-            font-size: 150%;
-            padding-bottom: 1em;
-        }
-
-        .headerbar-search {
-            width:100%;
-            padding-top: 1em;
-            padding-bottom: 1em;
-            input {
-                width: 90%;
-            }
-        }
+    .secondary {
+        font-size: 150%;
+        padding-bottom: 1em;
     }
 
 }

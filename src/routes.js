@@ -4,9 +4,10 @@ import React from "react";
 import Router from 'react-router';
 
 import BasePage from "./pages/BasePage";
-import HomePage from "./pages/HomePage";
-import ErrorPage from "./pages/ErrorPage";
 import CategoryPage from "./pages/CategoryPage";
+import ErrorPage from "./pages/ErrorPage";
+import HomePage from "./pages/HomePage";
+import LocationPage from "./pages/LocationPage";
 import ServicePage from "./pages/ServicePage";
 
 import StyleGuideList from "./pages/StyleGuideList";
@@ -34,13 +35,18 @@ export default <Router.Route
         />
         <Router.Route
             name="category"
-            path="/:page"
+            path="/category/:page"
             handler={CategoryPage}
         />
         <Router.Route
             name="service"
             path="/service/:id"
             handler={ServicePage}
+        />
+        <Router.Route
+            name="location"
+            path="/personalise/location"
+            handler={LocationPage}
         />
 
         <Router.DefaultRoute handler={ErrorPage}/>

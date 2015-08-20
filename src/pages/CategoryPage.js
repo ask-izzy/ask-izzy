@@ -1,9 +1,9 @@
 /* @flow */
 
-import http from 'iso-http';
+"use strict";
+
 import mui from "material-ui";
 import React from 'react';
-import Router from 'react-router';
 import _ from 'underscore';
 
 import iss from '../iss';
@@ -60,7 +60,6 @@ class CategoryPage extends React.Component {
     render(): React.Element {
         return (
             <div>
-                <Router.RouteHandler />
                 <mui.AppBar title={this.category.name} />
 
                 <mui.List>{
