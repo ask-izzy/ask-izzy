@@ -8,9 +8,13 @@ class Eligibility extends React.Component {
     static sampleProps = fixtures.ixa;
 
     eligibility(eligibility:string): Array<React.Element> {
-        return eligibility.split("\n").map(
-            (line, idx) => <li key={idx}>{line}</li>
-        );
+        if (eligibility) {
+            return eligibility.split("\n").map(
+                (line, idx) => <li key={idx}>{line}</li>
+            );
+        }
+
+        return [];
     }
 
     render(): React.Element {
