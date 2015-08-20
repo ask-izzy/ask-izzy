@@ -10,5 +10,6 @@ module.exports = (function() {
     return [
         require('./browser.js'),
         require('./branding.js'),
+        require('./results.js'),
     ];
 })();

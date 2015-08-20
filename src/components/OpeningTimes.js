@@ -24,11 +24,11 @@ class OpeningTimes extends React.Component {
 
         var todayOpen = object.opening_hours[
             moment().day()
-        ];
+        ] || {};
 
         var nextOpen = object.opening_hours[
             (moment().day() + 1) % object.opening_hours.length
-        ];
+        ] || {};
 
         console.log(todayOpen);
         console.log(nextOpen);

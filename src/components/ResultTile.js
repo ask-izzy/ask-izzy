@@ -53,11 +53,11 @@ class ResultTile extends React.Component {
                     />
                 }
             >
-                <div>{object.name}</div>
-                <div>{object.site.name}</div>
-                <OpeningTimes object={object} />
+                <div className="name">{object.name}</div>
+                <div className="site_name">{object.site.name}</div>
+                <OpeningTimes className="opening_hours" object={object} />
                 <div>FIXME transport time</div>
-                <div>{object.service_types[0]}</div>
+                <div className="service_type">{object.service_types[0]}</div>
             </mui.ListItem>
         );
     }

@@ -4,6 +4,7 @@ import http from 'iso-http';
 import mui from "material-ui";
 import React from 'react';
 import Router from 'react-router';
+import _ from 'underscore';
 
 import iss from '../iss';
 import categories from '../constants/categories';
@@ -27,14 +28,16 @@ class CategoryPage extends React.Component {
             return this._category;
         }
 
-        for (var category of categories) {
-            if (category.key == this.props.params.page) {
-                this._category = category;
-                return category;
-            }
+        var category = _.findWhere(categories, {
+            key: this.props.params.page,
+        });
+
+        if (category === undefined) {
+            throw "No such category " + this.props.params.page;
         }
 
-        throw "No such category " + this.props.params.page;
+        this._category = category;
+        return category;
     }
 
     componentDidMount(): void {

@@ -39,7 +39,6 @@ async function iss(path: string, data: ?Object): Object {
         url: url_,
         contentType: 'application/json',
         headers: {Accept: 'application/json'},
-        withCredentials: true,
         data: data,
     });
 
