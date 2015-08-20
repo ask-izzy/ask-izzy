@@ -5,15 +5,19 @@
 import mui from "material-ui";
 import React from 'react';
 
+import Location from '../geolocation';
 import Maps from '../maps';
 import HeaderBar from '../components/HeaderBar';
 
 async function locateMe(): Promise {
     var maps = await Maps();
+    var location = await Location();
 
-    console.log("example", await maps.geocode({
-        address: '33 Elizabeth St Richmond',
-    }));
+    console.log(location);
+
+    // console.log("example", await maps.geocode({
+    //     address: '33 Elizabeth St Richmond',
+    // }));
 }
 
 class LocationPage extends React.Component {

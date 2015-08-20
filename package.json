@@ -29,7 +29,8 @@
     "style-loader": "0.12.3",
     "iso-http": "0.0.5",
     "moment": "2.10.6",
-    "underscore": "1.8.3"
+    "underscore": "1.8.3",
+    "browser-location": "1.0.0"
   },
   "devDependencies": {
     "babel-jscs": "2.0.3",

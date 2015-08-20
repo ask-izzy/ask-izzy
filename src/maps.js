@@ -37,7 +37,7 @@ class MapsApi {
                 if (status === this.api.GeocoderStatus.OK) {
                     resolve(results);
                 } else {
-                    reject(results);
+                    reject(status, results);
                 }
             }));
     }
