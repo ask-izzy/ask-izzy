@@ -29,7 +29,7 @@ app.get('/api/v3/search/', (req, res) => {
                 id: 222,
                 name: "Emergency Accom",
                 site: {
-                    name: "My Housing Service",
+                    name: "Youth Support Net",
                 },
                 service_types: ['Accommodation'],
                 now_open: {
@@ -40,7 +40,7 @@ app.get('/api/v3/search/', (req, res) => {
                 id: 333,
                 name: "Womens Refuge",
                 site: {
-                    name: "My Housing Service",
+                    name: "Susan's House",
                 },
                 service_types: ['Refuge'],
                 now_open: {

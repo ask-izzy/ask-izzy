@@ -17,12 +17,14 @@ module.exports = (function() {
             var class_ = key.match(/[(](.*)[)]/)[1];
 
             var expected = table.map(obj => obj[key]);
-            var actual =
-                (await this.driver.findElements(By.css(`.${class_}`)))
-                    .map(element => element.getText());
+            var actual = await Promise.all((
+                await this.driver.findElements(By.css(`.${class_}`))
+            )
+                .map(element => element.getText())
+            );
 
-            assert.equal(actual, expected,
-                        `${key} is not correct`);
+            assert.deepEqual(actual, expected,
+                             `${key} is not correct`);
 
         }
     }
