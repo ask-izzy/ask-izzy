@@ -39,6 +39,11 @@ describe("Visual Components", function() {
                     `${cfg.width}x${cfg.height}`;
                 var orig = `src/components/${name}/${description}.png`;
 
+                // Try to create the output dir.
+                try {
+                    fs.mkdirSync(`src/components/${name}`);
+                } catch (e) {}
+
                 // Enable just generating the missing images
                 if (process.env.ONLY_NEW && fs.existsSync(orig)) {
                     return;
