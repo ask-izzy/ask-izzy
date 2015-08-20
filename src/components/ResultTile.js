@@ -3,7 +3,7 @@
 import React, { PropTypes } from "react";
 import Router, { Link } from "react-router";
 import mui from "material-ui";
-
+import fixtures from "../../fixtures/services";
 import colors from "../constants/theme";
 var palette = colors.getPalette();
 
@@ -15,6 +15,9 @@ class ResultTile extends React.Component {
     static propTypes = {
         object: PropTypes.object.isRequired,
     };
+
+    // flow:disable not supported yet
+    static sampleProps = {object: fixtures.ixa};
 
     // flow:disable not supported yet
     static contextTypes = Link.contextTypes;

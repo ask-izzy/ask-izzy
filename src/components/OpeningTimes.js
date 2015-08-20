@@ -4,6 +4,7 @@ import moment from "moment";
 import mui from "material-ui";
 import React, { PropTypes } from "react";
 
+import fixtures from "../../fixtures/services";
 import colors from "../constants/theme";
 var palette = colors.getPalette();
 
@@ -16,6 +17,9 @@ class OpeningTimes extends React.Component {
     static propTypes = {
         object: PropTypes.object.isRequired,
     };
+
+    // flow:disable not supported yet
+    static sampleProps = {object: fixtures.ixa};
 
     render(): React.Element {
         var {
