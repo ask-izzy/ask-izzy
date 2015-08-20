@@ -19,7 +19,7 @@ export default class BasePage extends React.Component {
 
     render(): React.Element {
         return (
-            <Router.RouteHandler key={this.context.router.getCurrentPath()} />
+            <Router.RouteHandler />
         );
     }
 
