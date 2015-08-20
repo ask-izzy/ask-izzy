@@ -26,7 +26,6 @@ class CategoryPage extends React.Component {
     componentDidMount(): void {
         iss(`service/${this.props.params.id}/`)
             .then(data => {
-                console.log(data);
                 this.setState({
                     object: data,
                 });

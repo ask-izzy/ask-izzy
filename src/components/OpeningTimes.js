@@ -34,9 +34,6 @@ class OpeningTimes extends React.Component {
             (moment().day() + 1) % object.opening_hours.length
         ] || {};
 
-        console.log(todayOpen);
-        console.log(nextOpen);
-
         if (object.now_open.now_open) {
             // get closing time
             return (
