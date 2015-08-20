@@ -10,6 +10,10 @@ import HeaderBar from '../components/HeaderBar';
 
 async function locateMe(): Promise {
     var maps = await Maps();
+
+    console.log("example", await maps.geocode({
+        address: '33 Elizabeth St Richmond',
+    }));
 }
 
 class LocationPage extends React.Component {
