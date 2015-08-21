@@ -10,31 +10,6 @@ import Location from '../geolocation';
 import Maps from '../maps';
 import HeaderBar from '../components/HeaderBar';
 
-async function locateMe(): Promise<Object> {
-    var maps = await Maps();
-    var location = await Location();
-    var possibleLocations = await maps.geocode({
-        location: {
-            lat: location.coords.latitude,
-            lng: location.coords.longitude,
-        },
-    });
-
-    for (var geocodedLocation of possibleLocations) {
-        if (_.contains(geocodedLocation.types, 'locality')) {
-            console.log(geocodedLocation.formatted_address);
-            console.log(geocodedLocation.place_id);
-            return {
-                // FIXME: we don't want the Australia
-                location: geocodedLocation.formatted_address,
-                place_id: geocodedLocation.place_id,
-            };
-        }
-    }
-
-    throw "Unable to locate";
-}
-
 class LocationPage extends React.Component {
     constructor(props: Object) {
         super(props);
@@ -43,8 +18,33 @@ class LocationPage extends React.Component {
         };
     }
 
+    async locateMe(): Promise<Object> {
+        var maps = await Maps();
+        var location = await Location();
+        var possibleLocations = await maps.geocode({
+            location: {
+                lat: location.coords.latitude,
+                lng: location.coords.longitude,
+            },
+        });
+
+        for (var geocodedLocation of possibleLocations) {
+            if (_.contains(geocodedLocation.types, 'locality')) {
+                console.log(geocodedLocation.formatted_address);
+                console.log(geocodedLocation.place_id);
+                return {
+                    // FIXME: we don't want the Australia
+                    location: geocodedLocation.formatted_address,
+                    place_id: geocodedLocation.place_id,
+                };
+            }
+        }
+
+        throw "Unable to locate";
+    }
+
     componentDidMount(): void {
-        locateMe()
+        this.locateMe()
             .then(data => {
                 data.done = true;
                 this.setState(data);
