@@ -8,7 +8,6 @@ import Webdriver, { By } from 'selenium-webdriver';
 import fs from 'fs';
 import webDriverInstance, {seleniumBrowser} from '../support/webdriver';
 import components from '../../src/components';
-import { exec } from 'child-process-promise';
 
 describe("Visual Components", function() {
     var baseUrl = "http://localhost:8000";
