@@ -122,8 +122,7 @@ class LocationPage extends React.Component {
                         value={this.state.locationName}
                     />
                 </div>
-                <mui.List>
-                {
+                <mui.List>{
                     this.state.geolocation == GeoLocationState.NOT_STARTED ?
                         <mui.ListItem
                             onTouchTap={this.onGeolocationTouchTap.bind(this)}
@@ -135,24 +134,21 @@ class LocationPage extends React.Component {
                             }
                         />
                     : ''
-                }
-                {
+                }{
                     this.state.geolocation == GeoLocationState.RUNNING ?
                         <mui.ListItem
                             primaryText="Locating you..."
                             secondaryText="Please permit us to use your GPS"
                         />
                     : ''
-                }
-                {
+                }{
                     this.state.geolocation == GeoLocationState.COMPLETE ?
                         <mui.ListItem
                             primaryText="Found your location"
                             leftIcon={<icons.Tick />}
                         />
                     : ''
-                }
-                {
+                }{
                     this.state.geolocation == GeoLocationState.FAILED ?
                         <mui.ListItem
                             primaryText="Failed to find your location"
@@ -160,12 +156,13 @@ class LocationPage extends React.Component {
                             leftIcon={<icons.Cross />}
                         />
                     : ''
-                }
-                </mui.List>
-                <mui.FlatButton
-                    label="Done"
-                    onTouchTap={this.onTouchDoneButton.bind(this)}
-                />
+                }</mui.List>
+                <div className="done-button">
+                    <mui.FlatButton
+                        label="Done"
+                        onTouchTap={this.onTouchDoneButton.bind(this)}
+                    />
+                </div>
 
             </div>
         );
