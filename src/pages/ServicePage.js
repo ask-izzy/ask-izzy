@@ -12,7 +12,7 @@ import reactMixin from "react-mixin";
 
 import iss from '../iss';
 
-@reactMixin.decorate(Router.Navigation)
+/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class ServicePage extends React.Component {
     constructor(props: Object) {
         super(props);

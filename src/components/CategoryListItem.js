@@ -9,7 +9,7 @@ import mui from "material-ui";
 
 import icons from "../icons";
 
-@reactMixin.decorate(Router.Navigation)
+/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class CategoryListItem extends React.Component {
 
     // flow:disable not supported yet
@@ -22,7 +22,7 @@ class CategoryListItem extends React.Component {
         },
     };
 
-    onTouchTap(): string {
+    onTouchTap(): void {
         this.transitionTo('category', {page: this.props.category.key});
     }
 

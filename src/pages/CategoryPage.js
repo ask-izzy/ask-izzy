@@ -15,7 +15,7 @@ import iss from '../iss';
 import categories from '../constants/categories';
 import ResultTile from '../components/ResultTile';
 
-@reactMixin.decorate(Router.Navigation)
+/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class CategoryPage extends React.Component {
     constructor(props: Object) {
         super(props);

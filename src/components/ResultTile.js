@@ -12,7 +12,7 @@ import OpeningTimes from "./OpeningTimes";
 
 var palette = colors.getPalette();
 
-@reactMixin.decorate(Router.Navigation)
+/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class ResultTile extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
