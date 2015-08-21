@@ -3,8 +3,13 @@
 "use strict";
 
 import React from 'react';
+import Router from "react-router";
+import NavigationArrowBack from
+    "material-ui/lib/svg-icons/navigation/arrow-back";
 import _ from 'underscore';
 import mui from "material-ui";
+import reactMixin from "react-mixin";
+import sessionstorage from "sessionstorage";
 
 import Location from '../geolocation';
 import Maps from '../maps';
@@ -18,6 +23,8 @@ var GeoLocationState = {
     FAILED: 3,
 };
 
+/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
+/*::`*/@reactMixin.decorate(Router.State)/*::`;*/
 class LocationPage extends React.Component {
     constructor(props: Object) {
         super(props);
@@ -80,13 +87,27 @@ class LocationPage extends React.Component {
             });
     }
 
+    onTouchDoneButton(): void {
+        sessionstorage.setItem('location', this.refs.search.props.value);
+        this.replaceWith(this.getQuery().next);
+    }
+
     componentDidMount(): void {
     }
 
     render(): React.Element {
         return (
             <div className="LocationPage">
-                <mui.AppBar title="Personalise" />
+                <mui.AppBar
+                    title="Personalise"
+                    iconElementLeft={
+                        <mui.IconButton
+                            onTouchTap={this.goBack.bind(this)}
+                        >
+                            <NavigationArrowBack />
+                        </mui.IconButton>
+                    }
+                />
                 <HeaderBar
                     primaryText="Where are you?"
                     secondaryText={
@@ -95,6 +116,7 @@ class LocationPage extends React.Component {
                 />
                 <div className="search">
                     <input
+                        ref="search"
                         type="search"
                         placeholder="Enter a suburb or postcode"
                         value={this.state.locationName}
@@ -140,6 +162,11 @@ class LocationPage extends React.Component {
                     : ''
                 }
                 </mui.List>
+                <mui.FlatButton
+                    label="Done"
+                    onTouchTap={this.onTouchDoneButton.bind(this)}
+                />
+
             </div>
         );
     }

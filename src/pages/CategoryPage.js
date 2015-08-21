@@ -9,6 +9,7 @@ import NavigationArrowBack from
 import _ from 'underscore';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
+import sessionstorage from "sessionstorage";
 
 import icons from '../icons';
 import iss from '../iss';
@@ -16,6 +17,7 @@ import categories from '../constants/categories';
 import ResultTile from '../components/ResultTile';
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
+/*::`*/@reactMixin.decorate(Router.State)/*::`;*/
 class CategoryPage extends React.Component {
     constructor(props: Object) {
         super(props);
@@ -47,10 +49,18 @@ class CategoryPage extends React.Component {
     }
 
     componentDidMount(): void {
+        var location = sessionstorage.getItem('location');
+
+        if (!location) {
+            console.log("Need location");
+            this.replaceWith('location', null,
+                             {next: this.getPath()});
+        }
+
         iss('search/', {
             q: this.category.search,
             type: 'service',
-            area: 'melbourne vic',  // FIXME: get real location
+            area: location || 'melbourne vic',
             limit: 3,
         })
             .then(data => {

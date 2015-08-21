@@ -5,7 +5,7 @@
 # Set RUN_AS_USER=true to run without reexec-ing as the `app' user. Useful
 # if running outside of Docker.
 
-APP="s2x_project"
+APP="ask_izzy"
 APP_USER="app"
 
 : "${WEB_CONCURRENCY:=1}"
