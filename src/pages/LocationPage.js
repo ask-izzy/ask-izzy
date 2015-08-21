@@ -88,11 +88,22 @@ class LocationPage extends React.Component {
     }
 
     onTouchDoneButton(): void {
-        sessionstorage.setItem('location', this.refs.search.props.value);
+        sessionstorage.setItem('location', this.state.locationName);
         this.replaceWith(this.getQuery().next);
     }
 
+    onSearchChange(event: Event): void {
+        if (event.target instanceof HTMLInputElement) {
+            this.setState({
+                locationName: event.target.value,
+            });
+        }
+    }
+
     componentDidMount(): void {
+        this.setState({
+            locationName: sessionstorage.getItem('location'),
+        });
     }
 
     render(): React.Element {
@@ -116,10 +127,10 @@ class LocationPage extends React.Component {
                 />
                 <div className="search">
                     <input
-                        ref="search"
                         type="search"
                         placeholder="Enter a suburb or postcode"
                         value={this.state.locationName}
+                        onChange={this.onSearchChange.bind(this)}
                     />
                 </div>
                 <mui.List>{

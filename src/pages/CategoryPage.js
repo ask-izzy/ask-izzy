@@ -69,23 +69,26 @@ class CategoryPage extends React.Component {
                     objects: data.objects,
                     error: undefined,
                 });
-            }).catch(error => {
+            })
 
-                this.setState({
-                    error: error,
-                });
+            .catch(response => {
+                try {
+                    var data = JSON.parse(response.text);
+                    this.setState({
+                        error: data.error_message,
+                    });
+                } catch (e) {
+                    this.setState({
+                        error: `An error occurred (${response.status})`,
+                    });
+                }
+
             });
 
     }
 
     render(): React.Element {
-        if (this.state.error) {
-            return (
-                <div>
-                    { this.state.error }
-                </div>
-            );
-        }
+        var location = sessionstorage.getItem('location');
 
         return (
             <div>
@@ -99,6 +102,24 @@ class CategoryPage extends React.Component {
                         </mui.IconButton>
                     }
                 />
+
+                <div>
+                    Searching for <b>{this.category.name}</b> in
+                    <b> {location} </b>
+                    (<Router.Link
+                        to="location"
+                        query={{
+                            next: this.getPath(),
+                        }}
+                     >Change</Router.Link>).
+                </div>
+
+                {this.state.error ?
+                    <div>
+                        {this.state.error}
+                    </div>
+                : ''
+                }
 
                 <mui.List>{
                     // FIXME: crisis tiles
