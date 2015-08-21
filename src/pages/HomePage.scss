@@ -1,9 +1,13 @@
 .HomePage {
-    text-align: center;
-    color: white;
+    .HeaderBar {
+        text-align: center;
+        color: white;
+    }
 
     // FIXME: check all of these alignments
     .branding-container {
+        text-align: center;
+        color: white;
         background-color: $brand-pane-light;
 
         .branding-icon {
