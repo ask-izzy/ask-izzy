@@ -1,15 +1,18 @@
 /* @flow */
 
 import React, { PropTypes } from "react";
-import Router, { Link } from "react-router";
-import mui from "material-ui";
-import fixtures from "../../fixtures/services";
+import Router from "react-router";
 import colors from "../constants/theme";
-var palette = colors.getPalette();
+import fixtures from "../../fixtures/services";
+import mui from "material-ui";
+import reactMixin from "react-mixin";
 
 import icons from "../icons";
 import OpeningTimes from "./OpeningTimes";
 
+var palette = colors.getPalette();
+
+@reactMixin.decorate(Router.Navigation)
 class ResultTile extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
@@ -19,19 +22,12 @@ class ResultTile extends React.Component {
     // flow:disable not supported yet
     static sampleProps = {object: fixtures.ixa};
 
-    // flow:disable not supported yet
-    static contextTypes = Link.contextTypes;
-
     href(): string {
         var {
             object,
         } = this.props;
 
-        return this.context.router.makeHref(
-            "service",
-            {id: object.id},
-            {}
-        );
+        return this.makeHref('service', {id: object.id});
     }
 
     render(): React.Element {
