@@ -1,12 +1,19 @@
 /* @flow */
 
+"use strict";
+
 import mui from "material-ui";
+import NavigationArrowBack from
+    "material-ui/lib/svg-icons/navigation/arrow-back";
 import React from 'react';
+import Router from "react-router";
 import ServicePane from "../components/ServicePane";
+import reactMixin from "react-mixin";
 
 import iss from '../iss';
 
-class CategoryPage extends React.Component {
+@reactMixin.decorate(Router.Navigation)
+class ServicePage extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {};
@@ -36,13 +43,25 @@ class CategoryPage extends React.Component {
         } = this.state;
         if (!object) {
             return <div/>;
-        } else return (
-            <div>
-                <ServicePane service={object}/>
-            </div>
-        );
+        } else {
+            return (
+                <div>
+                    <mui.AppBar
+                        title={object.site.name}
+                        iconElementLeft={
+                            <mui.IconButton
+                                onTouchTap={this.goBack.bind(this)}
+                            >
+                                <NavigationArrowBack />
+                            </mui.IconButton>
+                        }
+                    />
+                    <ServicePane service={object}/>
+                </div>
+            );
+        }
     }
 
 }
 
-export default CategoryPage;
+export default ServicePage;
