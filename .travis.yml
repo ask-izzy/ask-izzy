@@ -1,12 +1,16 @@
 language: node_js
+node_js:
+  - "0.12"
 
 install:
+  - npm config set cache ./node_modules_cache
   - npm install
   - script/build-assets
 
 cache:
   directories:
-    - node_modules
+    - node_modules_cache
+    - ~/.nvm/versions/
 
 script:
   - script/typecheck
