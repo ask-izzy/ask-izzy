@@ -2,14 +2,20 @@
 
 "use strict";
 
-import mui from "material-ui";
 import React from 'react';
+import Router from "react-router";
+import NavigationArrowBack from
+    "material-ui/lib/svg-icons/navigation/arrow-back";
 import _ from 'underscore';
+import mui from "material-ui";
+import reactMixin from "react-mixin";
 
+import icons from '../icons';
 import iss from '../iss';
 import categories from '../constants/categories';
 import ResultTile from '../components/ResultTile';
 
+/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class CategoryPage extends React.Component {
     constructor(props: Object) {
         super(props);
@@ -73,7 +79,16 @@ class CategoryPage extends React.Component {
 
         return (
             <div>
-                <mui.AppBar title={this.category.name} />
+                <mui.AppBar
+                    title={this.category.name}
+                    iconElementLeft={
+                        <mui.IconButton
+                            onTouchTap={this.goBack.bind(this)}
+                        >
+                            <NavigationArrowBack />
+                        </mui.IconButton>
+                    }
+                />
 
                 <mui.List>{
                     // FIXME: crisis tiles

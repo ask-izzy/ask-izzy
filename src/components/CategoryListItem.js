@@ -1,9 +1,16 @@
+/* @flow */
+
+"use strict";
+
 import React from "react";
-import Router, { Link } from "react-router";
+import Router from "react-router";
+import reactMixin from "react-mixin";
 import mui from "material-ui";
+
 import icons from "../icons";
 
-export default class CategoryListItem extends React.Component {
+/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
+class CategoryListItem extends React.Component {
 
     // flow:disable not supported yet
     static sampleProps = {
@@ -15,12 +22,8 @@ export default class CategoryListItem extends React.Component {
         },
     };
 
-    href(): string {
-        return this.context.router.makeHref(
-            "category",
-            {page: this.props.category.key},
-            {}
-        );
+    onTouchTap(): void {
+        this.transitionTo('category', {page: this.props.category.key});
     }
 
     render(): React.Element {
@@ -28,7 +31,7 @@ export default class CategoryListItem extends React.Component {
 
         return (
             <mui.ListItem
-                href={this.href()}
+                onTouchTap={this.onTouchTap.bind(this)}
                 primaryText={this.props.category.name}
                 secondaryText={this.props.category.byline}
                 secondaryTextLines={2}
@@ -44,4 +47,4 @@ export default class CategoryListItem extends React.Component {
     }
 }
 
-CategoryListItem.contextTypes = Link.contextTypes;
+export default CategoryListItem;
