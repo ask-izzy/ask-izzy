@@ -105,7 +105,7 @@ class LocationPage extends React.Component {
             });
     }
 
-    onTouchDoneButton(): void {
+    onTouchDoneButton(event: Event): void {
         sessionstorage.setItem('location', this.state.locationName);
         this.replaceWith(this.getQuery().next);
     }
@@ -143,14 +143,17 @@ class LocationPage extends React.Component {
                         "This will let me find the services closest to you"
                     }
                 />
-                <div className="search">
+                <form
+                    className="search"
+                    onSubmit={this.onTouchDoneButton.bind(this)}
+                >
                     <input
                         type="search"
                         placeholder="Enter a suburb or postcode"
                         value={this.state.locationName}
                         onChange={this.onSearchChange.bind(this)}
                     />
-                </div>
+                </form>
                 <mui.List>{
                     this.state.geolocation == GeoLocationState.NOT_STARTED ?
                         <mui.ListItem
