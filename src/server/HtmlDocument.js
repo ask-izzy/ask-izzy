@@ -1,3 +1,6 @@
+/* @flow */
+
+"use strict";
 
 import React, { PropTypes } from "react";
 
@@ -14,26 +17,27 @@ class HtmlDocument extends React.Component {
         description: PropTypes.string,
         siteName: PropTypes.string,
         currentUrl: PropTypes.string,
-    }
+    };
 
     // flow:disable not supported yet
     static defaultProps = {
         script: [],
         css: [],
         meta: {},
-    }
+    };
 
-    render() {
-        const { state, markup, script, css, lang } = this.props;
-        const {
+    render(): React.Element {
+        var { state, markup, script, css, lang } = this.props;
+        var {
             title,
             description,
             siteName,
             currentUrl,
             images
         } = this.props;
-        const vp = "width=device-width, initial-scale=1.0, user-scalable=no";
-        let issconfig = 'var ISS_URL = "' + process.env.ISS_URL + '";';
+        var vp = "width=device-width, initial-scale=1.0, user-scalable=no";
+        var issconfig = 'var ISS_URL = "' + process.env.ISS_URL + '";';
+        var GOOGLE_KEY = process.env.GOOGLE_KEY;
 
         return (
 <html >
@@ -161,7 +165,7 @@ class HtmlDocument extends React.Component {
       { script.map((src, k) => <script key={k} src={src} />) }
 
       <script
-        src="//maps.googleapis.com/maps/api/js?key=API_KEY">  // FIXME
+        src={`//maps.googleapis.com/maps/api/js?key=${GOOGLE_KEY}`}>
       </script>
 
 
