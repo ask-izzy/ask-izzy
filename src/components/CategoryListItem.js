@@ -28,30 +28,15 @@ export default class CategoryListItem extends React.Component {
 
         return (
             <mui.ListItem
-                className="CategoryListItem"
                 href={this.href()}
                 primaryText={this.props.category.name}
                 secondaryText={this.props.category.byline}
                 secondaryTextLines={2}
-                leftAvatar={
-                    <mui.Avatar
-                        className="colored-icon"
-                        backgroundColor={mui.Styles.Colors.transparent}
-                        icon={
-                            <Icon />
-                        }
-                        style={{borderRadius: 0}}
-                    />
+                leftIcon={
+                    <Icon className="ColoredIcon icon-fg-color" />
                 }
-                rightAvatar={
-                    <mui.Avatar
-                        className="colored-icon"
-                        backgroundColor={mui.Styles.Colors.transparent}
-                        icon={
-                            <icons.Chevron />
-                        }
-                        style={{borderRadius: 0}}
-                    />
+                rightIcon={
+                    <icons.Chevron className="ColoredIcon icon-fg-color" />
                 }
             >
             </mui.ListItem>

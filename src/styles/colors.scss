@@ -13,3 +13,9 @@ $icon-fg-color: $brand-pane-alt-light;
 
 $max-width: 800px;
 $desktop-side-column-color: #eeeeee;
+
+.ColoredIcon {
+    &.icon-fg-color path {
+        fill: $icon-fg-color;
+    }
+}
