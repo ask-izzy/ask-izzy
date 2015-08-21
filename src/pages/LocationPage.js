@@ -44,23 +44,39 @@ class LocationPage extends React.Component {
             },
         });
 
+        /* return true if the types includes one of our interesting
+         * component types */
+        function interestingComponent(types: Array<string>): boolean {
+            return !_.isEmpty(_.intersection(
+                types,
+                ['locality', 'administrative_area_level_1']
+            ));
+        }
+
         for (var geocodedLocation of possibleLocations) {
             if (_.contains(geocodedLocation.types, 'locality')) {
+                /* build a location name from the address components specified
+                 * in interestingComponent. We do this because we don't want
+                 * to show all the parts of Google's formatted_address */
+                var name = [
+                    /*::`*/
+                    for (component of geocodedLocation.address_components)
+                    if (interestingComponent(component.types))
+                        component.short_name
+                    /*::`*/
+                ].join(' ');
+
                 return {
                     location: location,
-
-                    // FIXME: we don't want the Australia, instead we
-                    // want a postcode
-                    name: geocodedLocation.formatted_address,
+                    name: name,
                 };
             }
         }
 
-        throw "Unable to locate";
+        throw "Unable to determine your suburb";
     }
 
     onGeolocationTouchTap(): void {
-        console.log(this);
         if (this.state.geolocation != GeoLocationState.NOT_STARTED) {
             return;
         }
@@ -80,9 +96,11 @@ class LocationPage extends React.Component {
                 });
             })
 
-            .catch(() => {
+            .catch((e) => {
+                console.error(e);
                 this.setState({
                     geolocation: GeoLocationState.FAILED,
+                    error: e.message,
                 });
             });
     }
@@ -163,7 +181,7 @@ class LocationPage extends React.Component {
                     this.state.geolocation == GeoLocationState.FAILED ?
                         <mui.ListItem
                             primaryText="Failed to find your location"
-                            secondaryText="FIXME REASON"
+                            secondaryText={this.state.error}
                             leftIcon={<icons.Cross />}
                         />
                     : ''
