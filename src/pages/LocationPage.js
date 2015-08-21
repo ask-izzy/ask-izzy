@@ -10,11 +10,19 @@ import Location from '../geolocation';
 import Maps from '../maps';
 import HeaderBar from '../components/HeaderBar';
 
+var GeoLocationState = {
+    NOT_STARTED: 0,
+    RUNNING: 1,
+    COMPLETE: 2,
+    FAILED: 3,
+};
+
 class LocationPage extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {
-            done: false,
+            geolocation: GeoLocationState.NOT_STARTED,
+            locationName: '',
         };
     }
 
@@ -30,12 +38,12 @@ class LocationPage extends React.Component {
 
         for (var geocodedLocation of possibleLocations) {
             if (_.contains(geocodedLocation.types, 'locality')) {
-                console.log(geocodedLocation.formatted_address);
-                console.log(geocodedLocation.place_id);
                 return {
-                    // FIXME: we don't want the Australia
-                    location: geocodedLocation.formatted_address,
-                    place_id: geocodedLocation.place_id,
+                    location: location,
+
+                    // FIXME: we don't want the Australia, instead we
+                    // want a postcode
+                    name: geocodedLocation.formatted_address,
                 };
             }
         }
@@ -43,17 +51,43 @@ class LocationPage extends React.Component {
         throw "Unable to locate";
     }
 
-    componentDidMount(): void {
+    onGeolocationTouchTap(): void {
+        console.log(this);
+        if (this.state.geolocation != GeoLocationState.NOT_STARTED) {
+            return;
+        }
+
+        this.setState({
+            geolocation: GeoLocationState.RUNNING,
+        });
+
         this.locateMe()
-            .then(data => {
-                data.done = true;
-                this.setState(data);
+            .then(params => {
+                var { location, name } = params;
+
+                console.log("Promise resolved", params);
+                console.log(this);
+
+                this.setState({
+                    geolocation: GeoLocationState.COMPLETE,
+                    locationName: name,
+                    locationCoords: location,
+                });
+            })
+
+            .catch(() => {
+                this.setState({
+                    geolocation: GeoLocationState.FAILED,
+                });
             });
+    }
+
+    componentDidMount(): void {
     }
 
     render(): React.Element {
         return (
-            <div>
+            <div className="LocationPage">
                 <mui.AppBar title="Personalise" />
                 <HeaderBar
                     primaryText="Where are you?"
@@ -61,10 +95,46 @@ class LocationPage extends React.Component {
                         "This will let me find the services closest to you"
                     }
                 />
-                {this.state.done ?
-                    <div>It looks like you're in {this.state.location}.</div>
-                :
-                    <div>Locating you...</div>}
+                <div className="search">
+                    <input
+                        type="search"
+                        placeholder="Enter a suburb or postcode"
+                        value={this.state.locationName}
+                    />
+                </div>
+                <mui.List>
+                {
+                    this.state.geolocation == GeoLocationState.NOT_STARTED ?
+                        <mui.ListItem
+                            onTouchTap={this.onGeolocationTouchTap.bind(this)}
+                            primaryText="Get current location"
+                        />
+                    : ''
+                }
+                {
+                    this.state.geolocation == GeoLocationState.RUNNING ?
+                        <mui.ListItem
+                            primaryText="Locating you..."
+                            secondaryText="Please permit us to use your GPS"
+                        />
+                    : ''
+                }
+                {
+                    this.state.geolocation == GeoLocationState.COMPLETE ?
+                        <mui.ListItem
+                            primaryText="Found your location"
+                        />
+                    : ''
+                }
+                {
+                    this.state.geolocation == GeoLocationState.FAILED ?
+                        <mui.ListItem
+                            primaryText="Failed to find your location"
+                            secondaryText="FIXME REASON"
+                        />
+                    : ''
+                }
+                </mui.List>
             </div>
         );
     }
