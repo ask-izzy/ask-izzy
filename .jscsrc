@@ -3,8 +3,7 @@
 
     "fileExtensions": [".js", ".jsx"],
     "excludeFiles": ["node_modules/**", "public/static/**"],
-
-    "esprima": "./node_modules/babel-jscs",
+    "esnext": true,
 
     "disallowMultipleVarDecl": true,
     "maximumLineLength": {
