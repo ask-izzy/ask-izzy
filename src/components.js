@@ -11,6 +11,7 @@ import OpeningTimes from './components/OpeningTimes';
 import Phone from './components/Phone';
 import ResultTile from './components/ResultTile';
 import ServicePane from './components/ServicePane';
+import TransportTime from './components/TransportTime';
 
 export default {
     Address: Address,
@@ -25,4 +26,5 @@ export default {
     Phone: Phone,
     ResultTile: ResultTile,
     ServicePane: ServicePane,
+    TransportTime: TransportTime,
 };

@@ -9,6 +9,7 @@ import _ from 'underscore';
 import iss from '../iss';
 import categories from '../constants/categories';
 import ResultTile from '../components/ResultTile';
+import HeaderBar from '../components/HeaderBar';
 
 class CategoryPage extends React.Component {
     constructor(props: Object) {
@@ -74,6 +75,11 @@ class CategoryPage extends React.Component {
         return (
             <div>
                 <mui.AppBar title={this.category.name} />
+
+                <HeaderBar
+                    primaryText={this.category.name}
+                    secondaryText={<a href="#">Try a different search</a>}
+                />
 
                 <mui.List>{
                     // FIXME: crisis tiles
