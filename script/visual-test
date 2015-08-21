@@ -4,7 +4,8 @@ IFS=$'\n\t'
 export PATH=`npm bin`:$PATH
 export NODE_ENV=production
 
-./script/build-assets
+# build assets if this isn't Travis (which has already)
+${CI:=false} || ./script/build-assets
 
 BROWSERS=$( node <<JS
     var fs = require('fs');
