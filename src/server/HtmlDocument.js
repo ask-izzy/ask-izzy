@@ -3,6 +3,7 @@ import React, { PropTypes } from "react";
 
 class HtmlDocument extends React.Component {
 
+    // flow:disable not supported yet
     static propTypes = {
         markup: PropTypes.string.isRequired,
         script: PropTypes.arrayOf(PropTypes.string),
@@ -15,6 +16,7 @@ class HtmlDocument extends React.Component {
         currentUrl: PropTypes.string,
     }
 
+    // flow:disable not supported yet
     static defaultProps = {
         script: [],
         css: [],
