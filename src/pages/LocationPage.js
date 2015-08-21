@@ -9,6 +9,7 @@ import mui from "material-ui";
 import Location from '../geolocation';
 import Maps from '../maps';
 import HeaderBar from '../components/HeaderBar';
+import icons from '../icons';
 
 var GeoLocationState = {
     NOT_STARTED: 0,
@@ -65,9 +66,6 @@ class LocationPage extends React.Component {
             .then(params => {
                 var { location, name } = params;
 
-                console.log("Promise resolved", params);
-                console.log(this);
-
                 this.setState({
                     geolocation: GeoLocationState.COMPLETE,
                     locationName: name,
@@ -108,6 +106,11 @@ class LocationPage extends React.Component {
                         <mui.ListItem
                             onTouchTap={this.onGeolocationTouchTap.bind(this)}
                             primaryText="Get current location"
+                            leftIcon={
+                                <icons.Location
+                                    className="ColoredIcon icon-fg-color"
+                                />
+                            }
                         />
                     : ''
                 }
@@ -123,6 +126,7 @@ class LocationPage extends React.Component {
                     this.state.geolocation == GeoLocationState.COMPLETE ?
                         <mui.ListItem
                             primaryText="Found your location"
+                            leftIcon={<icons.Tick />}
                         />
                     : ''
                 }
@@ -131,6 +135,7 @@ class LocationPage extends React.Component {
                         <mui.ListItem
                             primaryText="Failed to find your location"
                             secondaryText="FIXME REASON"
+                            leftIcon={<icons.Cross />}
                         />
                     : ''
                 }
