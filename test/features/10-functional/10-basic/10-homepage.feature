@@ -8,8 +8,8 @@ Feature: Landing page
     Scenario: Visit home page
         When I visit /
         Then I should see the branding header
-         And I should see the search bar
-         And I should see the list of categories
+        And I should see the search bar
+        And I should see the list of categories
         ---------------
         Housing
         Food
@@ -26,4 +26,10 @@ Feature: Landing page
         Facilities
         Technology
         ---------------
-         And I should see the branding footer
+        And I should see the branding footer
+
+    Scenario: Navigate to a category
+        When I visit /
+        And I click on "Housing"
+        Then I should be at /category/housing
+        And I should see "Housing"
