@@ -2,13 +2,16 @@
  * Step definitions for Selenium/browser related steps
  */
 
+/* @flow */
+
 "use strict";
 
-import * as assert from '../support/page-assertions';
 import Yadda from 'yadda';
-import readline from 'readline';
-import unpromisify from "../support/yadda-promise";
 import { By } from 'selenium-webdriver';
+
+import * as assert from '../support/page-assertions';
+import unpromisify from '../support/yadda-promise';
+import { gotoUrl } from '../support/webdriver';
 
 module.exports = (function() {
     return Yadda.localisation.English.library()
@@ -16,11 +19,10 @@ module.exports = (function() {
         .then('I should see "$STRING"', unpromisify(thenISee));
 })();
 
-async function visitUrl(url) {
-    var port = process.env.PORT || 8000;
-    return this.driver.get(`http://localhost:${port}${url}`);
+async function visitUrl(url: string): Promise {
+    await gotoUrl(this.driver, url);
 }
 
-async function thenISee(expected) {
+async function thenISee(expected: string): Promise {
     await assert.textIsVisible(this.driver, expected);
 }
