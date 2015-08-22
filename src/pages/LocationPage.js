@@ -171,6 +171,13 @@ class LocationPage extends React.Component {
                         <mui.ListItem
                             primaryText="Locating you..."
                             secondaryText="Please permit us to use your GPS"
+                            leftIcon={
+                                <mui.CircularProgress
+                                    className="ProgressIcon"
+                                    mode="indeterminate"
+                                    size={0.5}
+                                />
+                            }
                         />
                     : ''
                 }{

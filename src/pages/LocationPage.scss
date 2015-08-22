@@ -13,6 +13,12 @@
         }
     }
 
+    .ProgressIcon {
+        // works around alignment of CircularProgress inside ListItem
+        margin-top: -20px !important;
+        margin-left: -15px !important;
+    }
+
     .done-button {
         width: 100%;
 
