@@ -6,8 +6,18 @@ declare class GoogleMapsGeocoder {
     geocode(obj: Object, callback: Function): void;
 }
 
+declare class GoogleAutocompleteService {
+    getPlacePredictions(obj: Object, callback: Function): void;
+}
+
+declare class GooglePlaces {
+    AutocompleteService(): GoogleAutocompleteService;
+    PlacesServiceStatus: Object;
+}
+
 declare class GoogleMaps {
     Geocoder(): GoogleMapsGeocoder;
+    places: GooglePlaces;
 }
 
 declare class Google {
@@ -35,6 +45,20 @@ class MapsApi {
         return new Promise((resolve, reject) =>
             geocoder.geocode(params, (results, status) => {
                 if (status === this.api.GeocoderStatus.OK) {
+                    resolve(results);
+                } else {
+                    reject(status, results);
+                }
+            }));
+    }
+
+    autocompletePlaces(params: Object): Promise<Array<Object>> {
+        var autocompleter = new this.api.places.AutocompleteService();
+
+        return new Promise((resolve, reject) =>
+            autocompleter.getPlacePredictions(params, (results, status) => {
+
+                if (status == this.api.places.PlacesServiceStatus.OK) {
                     resolve(results);
                 } else {
                     reject(status, results);

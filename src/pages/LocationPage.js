@@ -10,6 +10,7 @@ import _ from 'underscore';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
 import sessionstorage from "sessionstorage";
+import { debounce } from "core-decorators";
 
 import Location from '../geolocation';
 import Maps from '../maps';
@@ -31,6 +32,8 @@ class LocationPage extends React.Component {
         this.state = {
             geolocation: GeoLocationState.NOT_STARTED,
             locationName: '',
+            locationCoords: {},
+            autocompletions: [],
         };
     }
 
@@ -110,11 +113,70 @@ class LocationPage extends React.Component {
         this.replaceWith(this.getQuery().next);
     }
 
+    /**
+     * autoCompleteSuburb:
+     * Take a search string and (optionally) the user's current location
+     * and return a promise for an array of possible matches.
+     */
+    async autoCompleteSuburb(input: string, location: ?Object):
+        Promise<Array<Object>>
+    {
+        var request = {
+            input: input,
+            types: ['geocode'],
+            componentRestrictions: {
+                country: 'au',
+            },
+        };
+
+        // FIXME: use a LatLng
+        // try {
+        //     request.location = {
+        //         lat: location.coords.latitude,
+        //         lng: location.coords.longitude,
+        //     };
+        //     request.radius = 10000;  /* 10 km */
+        // } catch (e) {
+        // }
+
+        console.log("Autocompleting", request);
+
+        var maps = await Maps();
+        var completions = await maps.autocompletePlaces(request);
+
+        return [
+            /*::{_:`*/
+            for (completion of completions)
+            if (_.contains(completion.types, 'locality'))
+            {
+                suburb: completion.terms[0].value,
+                state: completion.terms[1].value,
+            }
+            /*::`}*/
+        ];
+    }
+
+    /**
+     * triggerAutocomplete:
+     *
+     * Trigger an autocomplete after a 500ms debounce.
+     */
+    /*::__(){`*/@debounce(500)/*::`}*/
+    triggerAutocomplete(input: string): void {
+        this.autoCompleteSuburb(input, this.state.locationCoords)
+            .then(results => {
+                console.log("Done", results);
+                this.setState({autocompletions: results});
+            });
+    }
+
     onSearchChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {
             this.setState({
                 locationName: event.target.value,
             });
+
+            this.triggerAutocomplete(this.state.locationName);
         }
     }
 
@@ -155,6 +217,7 @@ class LocationPage extends React.Component {
                     />
                 </form>
                 <mui.List>{
+                    /* lists of the possible autocompletion states */
                     this.state.geolocation == GeoLocationState.NOT_STARTED ?
                         <mui.ListItem
                             onTouchTap={this.onGeolocationTouchTap.bind(this)}
@@ -188,6 +251,27 @@ class LocationPage extends React.Component {
                             leftIcon={<icons.Cross />}
                         />
                     : ''
+                }{
+                    /* any autocompletions we currently have */
+                    this.state.autocompletions.map((result, index) =>
+                        <mui.ListItem
+                            key={index}
+                            primaryText={result.suburb}
+                            secondaryText={result.state}
+                            onTouchTap={(event) => {
+                                /* set the text box to this value
+                                 * and remove the autocompletions */
+                                var locationName =
+                                    `${result.suburb}, ${result.state}`;
+
+                                this.setState({
+                                    locationName: locationName,
+                                    autocompletions: [],
+                                });
+                            }}
+
+                        />
+                    )
                 }</mui.List>
                 <div className="done-button">
                     <mui.FlatButton
