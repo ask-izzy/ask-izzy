@@ -61,7 +61,7 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
     function shouldInclude(annotations: Object): boolean {
         var includes = (process.env.ONLY || '').split(',');
 
-        if (_.isEmpty(includes)) {
+        if (includes.length == 1 && includes[0] == '') {
             return true;  // no specific includes specified
         }
 
