@@ -22,14 +22,6 @@ class ResultTile extends React.Component {
     // flow:disable not supported yet
     static sampleProps = {object: fixtures.ixa};
 
-    onTouchTap(): void {
-        var {
-            object,
-        } = this.props;
-
-        return this.transitionTo('service', {id: object.id});
-    }
-
     render(): React.Element {
         var {
             object,
@@ -40,7 +32,11 @@ class ResultTile extends React.Component {
         return (
             <mui.ListItem
                 className="ResultTile"
-                onTouchTap={this.onTouchTap.bind(this)}
+                href={this.makeHref('service', {id: object.id})}
+                onTouchTap={(event) => {
+                    this.transitionTo('service', {id: object.id});
+                }}
+
                 rightAvatar={
                     <mui.Avatar
                         className="colored-icon"
