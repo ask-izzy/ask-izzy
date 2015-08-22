@@ -155,6 +155,8 @@ class LocationPage extends React.Component {
                     />
                 </form>
                 <mui.List>{
+                    /* if the browser supports geolocation */
+                    require('has-geolocation') &&
                     this.state.geolocation == GeoLocationState.NOT_STARTED ?
                         <mui.ListItem
                             onTouchTap={this.onGeolocationTouchTap.bind(this)}
