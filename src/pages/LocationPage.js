@@ -65,9 +65,9 @@ class LocationPage extends React.Component {
                     /*::`*/
                     for (component of geocodedLocation.address_components)
                     if (interestingComponent(component.types))
-                        component.short_name
+                        component.long_name
                     /*::`*/
-                ].join(' ');
+                ].join(', ');
 
                 return {
                     location: location,
