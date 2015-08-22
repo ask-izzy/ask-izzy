@@ -33,7 +33,8 @@
     "browser-location": "1.0.0",
     "has-geolocation": "1.0.0",
     "react-mixin": "1.7.0",
-    "sessionstorage": "0.0.0"
+    "sessionstorage": "0.0.0",
+    "core-decorators": "0.2.0"
   },
   "devDependencies": {
     "babel-jscs": "2.0.3",

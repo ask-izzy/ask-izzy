@@ -165,7 +165,8 @@ class HtmlDocument extends React.Component {
       { script.map((src, k) => <script key={k} src={src} />) }
 
       <script
-        src={`//maps.googleapis.com/maps/api/js?key=${GOOGLE_KEY}`}>
+        /* jscs:disable */
+        src={`//maps.googleapis.com/maps/api/js?key=${GOOGLE_KEY}&libraries=places`}>
       </script>
 
 
