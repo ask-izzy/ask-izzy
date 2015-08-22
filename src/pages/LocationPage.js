@@ -24,6 +24,11 @@ var GeoLocationState = {
     FAILED: 3,
 };
 
+var AutocompleteState = {
+    NOT_SEARCHING: 0,
+    SEARCHING: 1,
+};
+
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
 class LocationPage extends React.Component {
@@ -31,6 +36,7 @@ class LocationPage extends React.Component {
         super(props);
         this.state = {
             geolocation: GeoLocationState.NOT_STARTED,
+            autocompletion: AutocompleteState.NOT_SEARCHING,
             locationName: '',
             locationCoords: {},
             autocompletions: [],
@@ -166,7 +172,16 @@ class LocationPage extends React.Component {
         this.autoCompleteSuburb(input, this.state.locationCoords)
             .then(results => {
                 console.log("Done", results);
-                this.setState({autocompletions: results});
+                this.setState({
+                    autocompletions: results,
+                    autocompletion: AutocompleteState.NOT_SEARCHING,
+                });
+            })
+
+            .catch(() => {
+                this.setState({
+                    autocompletion: AutocompleteState.NOT_SEARCHING,
+                });
             });
     }
 
@@ -174,6 +189,7 @@ class LocationPage extends React.Component {
         if (event.target instanceof HTMLInputElement) {
             this.setState({
                 locationName: event.target.value,
+                autocompletion: AutocompleteState.SEARCHING,
             });
 
             this.triggerAutocomplete(this.state.locationName);
@@ -273,6 +289,15 @@ class LocationPage extends React.Component {
                         />
                     )
                 }</mui.List>
+                {
+                    this.state.autocompletion == AutocompleteState.SEARCHING ?
+                        <div className="progress">
+                            <mui.CircularProgress
+                                mode="indeterminate"
+                            />
+                        </div>
+                    : ''
+                }
                 <div className="done-button">
                     <mui.FlatButton
                         label="Done"
