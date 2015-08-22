@@ -15,8 +15,32 @@ module.exports = (function() {
     return Yadda.localisation.English.library()
         .given("I'm at (\\d+.\\d+[NS]) (\\d+.\\d+[EW])",
                unpromisify(setLocationFromCoords))
+        .given('I deny access to geolocation',
+               unpromisify(disableGeolocation))
         .given('my location is "$STRING"', unpromisify(setLocation));
 })();
+
+function mockGeolocation(driver: Webdriver.WebDriver): Promise {
+    return driver.executeScript(`
+    /* taken from mock-geolocation */
+    window.changeGeolocation = function(object) {
+        console.log("Mocking geolocation with", object);
+        if (Object.defineProperty) {
+            Object.defineProperty(navigator, 'geolocation', {
+                get: function() {
+                    return object;
+                }
+            });
+        } else if (navigator.__defineGetter__) {
+            navigator.__defineGetter__('geolocation', function() {
+                return object;
+            });
+        } else {
+            throw new Error('Cannot change navigator.geolocation method');
+        }
+    };
+    `);
+}
 
 /**
  * setLocationFromCoords:
@@ -40,26 +64,8 @@ async function setLocationFromCoords(latitude: string,
 
     longitude = parseFloat(longitude);
 
-    /* mock geonavigation */
+    await mockGeolocation(this.driver);
     await this.driver.executeScript(`
-    /* taken from mock-geolocation */
-    var changeGeolocation = function(object) {
-        console.log("Mocking geolocation with", object);
-        if (Object.defineProperty) {
-            Object.defineProperty(navigator, 'geolocation', {
-                get: function() {
-                    return object;
-                }
-            });
-        } else if (navigator.__defineGetter__) {
-            navigator.__defineGetter__('geolocation', function() {
-                return object;
-            });
-        } else {
-            throw new Error('Cannot change navigator.geolocation method');
-        }
-    };
-
     changeGeolocation({
         getCurrentPosition: function(success, error, opt) {
             /* simulate aquiring GPS lock */
@@ -84,5 +90,21 @@ async function setLocation(location: string): Promise {
     await gotoUrl(this.driver, '/');  // go anywhere to start the session
     await this.driver.executeScript(`
     sessionStorage.setItem("location", "${location}");
+    `);
+}
+
+async function disableGeolocation(): Promise {
+    await mockGeolocation(this.driver);
+    await this.driver.executeScript(`
+    changeGeolocation({
+        getCurrentPosition: function(success, error, opt) {
+            /* simulate aquiring GPS lock */
+            setTimeout(function () {
+                error({
+                    message: "User denied access"
+                });
+            }, 1000);
+        }
+    });
     `);
 }

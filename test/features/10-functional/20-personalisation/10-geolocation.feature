@@ -1,4 +1,3 @@
-@wip
 Feature: Geolocation
 
     # As a user
@@ -6,7 +5,6 @@ Feature: Geolocation
     # I want to use my current location for searches
     # So that I get personalised results without typing anything
 
-    @wip
     Scenario: Use geolocation to find the user
         When I visit /personalise/location
         Then I should see "Where are you?"
@@ -19,3 +17,13 @@ Feature: Geolocation
         And I should see "Found your location"
 
         And search box should contain "Richmond VIC"
+
+    Scenario: User denies geolocation access
+        When I visit /personalise/location
+
+        Given I deny access to geolocation
+
+        When I click on "Get current location"
+        Then I should see "Locating you..."
+        And I should see "Failed to find your location"
+        And I should see "User denied access"
