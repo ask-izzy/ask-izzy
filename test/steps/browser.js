@@ -19,7 +19,9 @@ module.exports = (function() {
         .when('I visit $URL', unpromisify(visitUrl))
         .when('I click on "$STRING"', unpromisify(clickLink))
         .then('I should be at $URL', unpromisify(checkURL))
-        .then('I should see "$STRING"', unpromisify(thenISee));
+        .then('I should see "$STRING"', unpromisify(thenISee))
+        .then('search box should contain "$STRING"',
+              unpromisify(searchContains));
 })();
 
 async function visitUrl(url: string): Promise {
@@ -44,4 +46,14 @@ async function checkURL(expected: string): Promise {
 
 async function thenISee(expected: string): Promise {
     await assert.textIsVisible(this.driver, expected);
+}
+
+async function searchContains(expected: string): Promise {
+    var element = await this.driver.findElement(By.css(
+        'input[type=search]'
+    ));
+
+    var value = await element.getAttribute('value');
+
+    assert.equal(value, expected);
 }
