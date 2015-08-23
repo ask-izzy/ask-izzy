@@ -28,11 +28,22 @@ async function visitUrl(url: string): Promise {
     await gotoUrl(this.driver, url);
 }
 
+/**
+ * clickLink:
+ *
+ * Click a link or button with the text @link.
+ *
+ * Returns: a promise that resolves when the link is identified and
+ * clicked.
+ */
 async function clickLink(link: string): Promise {
     var element = await this.driver.findElement(By.xpath(
         /* any 'a' element who has a descendent text node containing
          * the link text */
-        `//a[normalize-space(.//text()) = normalize-space('${link}')]`
+        ['a', 'button'].map(tag =>
+        `//${tag}
+           [normalize-space(.//text()) = normalize-space('${link}')]`
+                           ).join('|')
     ));
 
     await element.click();

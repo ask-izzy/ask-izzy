@@ -76,7 +76,7 @@ async function setLocationFromCoords(latitude: string,
                         longitude: ${longitude}
                     }
                 });
-            }, 1000);
+            }, 1500);
         }
     });
     `);

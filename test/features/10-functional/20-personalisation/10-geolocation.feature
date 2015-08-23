@@ -14,8 +14,8 @@ Feature: Geolocation
 
         When I click on "Get current location"
         Then I should see "Locating you..."
-        And I should see "Found your location"
 
+        Then I should see "Found your location"
         And search box should contain "Richmond VIC"
 
     Scenario: User denies geolocation access
