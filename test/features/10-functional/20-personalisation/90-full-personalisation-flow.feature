@@ -13,8 +13,6 @@ Feature: Personalisation
 
         Given I'm at 37.823S 144.998E
         When I click on "Get current location"
-        Then I should see "Locating you..."
-
         Then I should see "Found your location"
         And search box should contain "Richmond VIC"
 

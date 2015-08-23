@@ -37,16 +37,15 @@ async function visitUrl(url: string): Promise {
  * clicked.
  */
 async function clickLink(link: string): Promise {
-    var element = await this.driver.findElement(By.xpath(
+    await this.driver.findElement(By.xpath(
         /* any 'a' element who has a descendent text node containing
          * the link text */
         ['a', 'button'].map(tag =>
         `//${tag}
            [normalize-space(.//text()) = normalize-space('${link}')]`
                            ).join('|')
-    ));
-
-    await element.click();
+    ))
+        .click();
 }
 
 async function checkURL(expected: string): Promise {
@@ -60,11 +59,10 @@ async function thenISee(expected: string): Promise {
 }
 
 async function searchContains(expected: string): Promise {
-    var element = await this.driver.findElement(By.css(
+    var value = await this.driver.findElement(By.css(
         'input[type=search]'
-    ));
-
-    var value = await element.getAttribute('value');
+    ))
+        .getAttribute('value');
 
     assert.equal(value, expected);
 }

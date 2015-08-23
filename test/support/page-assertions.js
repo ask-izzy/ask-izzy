@@ -1,5 +1,7 @@
 "use strict";
 
+/* @flow */
+
 import assert from "assert";
 import { By } from 'selenium-webdriver';
 import selectors from './selectors';
@@ -8,24 +10,26 @@ function rootSelector(child) {
     return "//" + child;
 }
 
+// flow:disable
 // jscs: disable
 assert.imageIsVisible = async function(driver, altText, within=rootSelector) {
-    const element = await driver.findElement(By.xpath(
+    var visible = await driver.findElement(By.xpath(
         within(`img[@alt = '${altText}']`)
-    ));
-    const visible = await element.isDisplayed();
+    ))
+        .isDisplayed();
+
     assert(visible, `${altText} image was present but not visible`);
-    return element;
 };
 
+// flow:disable
 // jscs: disable
 assert.textIsVisible = async function(driver, text, within=rootSelector) {
-    const element = await driver.findElement(By.xpath(
+    var visible = await driver.findElement(By.xpath(
         within(`*[normalize-space(text()) = normalize-space('${text}')]`)
-    ));
-    const visible = await element.isDisplayed();
+    ))
+        .isDisplayed();
+
     assert(visible, `Text ${text} was present but not visible`);
-    return element;
 };
 
 export default assert;
