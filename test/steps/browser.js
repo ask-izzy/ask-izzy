@@ -15,6 +15,7 @@ module.exports = (function() {
     return Yadda.localisation.English.library()
         .when('I visit $URL', unpromisify(visitUrl))
         .when('I click on "$STRING"', unpromisify(clickLink))
+        .when('I pause for debugging', unpromisify(pauseToDebug))
         .then('I should be at $URL', unpromisify(checkURL))
         .then('I should see "$STRING"', unpromisify(thenISee));
 })();
@@ -32,6 +33,23 @@ async function clickLink(link) {
     ));
 
     await element.click();
+}
+
+function pauseToDebug() {
+    return new Promise((resolve, reject) => {
+        console.log("Paused. Press any key to continue...");
+        var stdin = process.stdin;
+
+        stdin.setRawMode(true);
+        stdin.on('data', (key) => {
+            stdin.setRawMode(false);
+            if (key === '\u0003') {  // Ctrl-C
+                reject();
+            } else {
+                resolve();
+            }
+        });
+    });
 }
 
 async function checkURL(expected) {
