@@ -20,26 +20,35 @@ module.exports = (function() {
         .given('my location is "$STRING"', unpromisify(setLocation));
 })();
 
+/**
+ * mockGeolocation:
+ *
+ * Install geolocation mock.
+ *
+ * Returns: a promise that resolves when the mock is installed
+ */
 function mockGeolocation(driver: Webdriver.WebDriver): Promise {
-    return driver.executeScript(`
-    /* taken from mock-geolocation */
-    window.changeGeolocation = function(object) {
-        console.log("Mocking geolocation with", object);
-        if (Object.defineProperty) {
-            Object.defineProperty(navigator, 'geolocation', {
-                get: function() {
+    return driver.executeScript(() => {
+        /* taken from mock-geolocation */
+        window.changeGeolocation = (object) => {
+            console.log("Mocking geolocation with", object);
+            if (Object.defineProperty) {
+                Object.defineProperty(navigator, 'geolocation', {
+                    get: () => {
+                        return object;
+                    },
+                });
+            } else if (navigator.__defineGetter__) {
+                navigator.__defineGetter__('geolocation', () => {
                     return object;
-                }
-            });
-        } else if (navigator.__defineGetter__) {
-            navigator.__defineGetter__('geolocation', function() {
-                return object;
-            });
-        } else {
-            throw new Error('Cannot change navigator.geolocation method');
-        }
-    };
-    `);
+                });
+            } else {
+                throw new Error(
+                    'Cannot change navigator.geolocation method'
+                );
+            }
+        };
+    });
 }
 
 /**
@@ -65,21 +74,21 @@ async function setLocationFromCoords(latitude: string,
     longitude = parseFloat(longitude);
 
     await mockGeolocation(this.driver);
-    await this.driver.executeScript(`
-    changeGeolocation({
-        getCurrentPosition: function(success, error, opt) {
-            /* simulate aquiring GPS lock */
-            setTimeout(function () {
-                success({
-                    coords: {
-                        latitude: ${latitude},
-                        longitude: ${longitude}
-                    }
-                });
-            }, 1500);
-        }
+    await this.driver.executeScript((obj) => {
+        changeGeolocation({
+            getCurrentPosition: (success, error, opt) => {
+                /* simulate aquiring GPS lock */
+                setTimeout(() => success(obj), 1500);
+            },
+        });
+    },
+
+    {
+        coords: {
+            latitude: latitude,
+            longitude: longitude,
+        },
     });
-    `);
 }
 
 /**
@@ -88,23 +97,24 @@ async function setLocationFromCoords(latitude: string,
  */
 async function setLocation(location: string): Promise {
     await gotoUrl(this.driver, '/');  // go anywhere to start the session
-    await this.driver.executeScript(`
-    sessionStorage.setItem("location", "${location}");
-    `);
+    await this.driver.executeScript((location) => {
+        sessionStorage.setItem("location", location);
+    }, location);
 }
 
 async function disableGeolocation(): Promise {
     await mockGeolocation(this.driver);
-    await this.driver.executeScript(`
-    changeGeolocation({
-        getCurrentPosition: function(success, error, opt) {
-            /* simulate aquiring GPS lock */
-            setTimeout(function () {
-                error({
-                    message: "User denied access"
-                });
-            }, 1000);
-        }
+    await this.driver.executeScript((obj) => {
+        changeGeolocation({
+            getCurrentPosition: function(success, error, opt) {
+                /* simulate aquiring GPS lock */
+                setTimeout(() => error(obj), 1500);
+            },
+        });
+
+    },
+
+    {
+        message: "User denied access",
     });
-    `);
 }
