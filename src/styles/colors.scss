@@ -10,6 +10,8 @@ $brand-highlight-alt:  #fc7753;
 
 
 $icon-fg-color: $brand-pane-alt-light;
+$icon-chevron-color: $brand-bg-mid;
+
 
 $max-width: 800px;
 $desktop-side-column-color: #eeeeee;
@@ -19,7 +21,21 @@ $desktop-side-column-color: #eeeeee;
         fill: $icon-fg-color;
     }
 
+    &.icon-chevron-color path {
+        fill: $icon-chevron-color;
+    }
+
     &.brand-bg-dark path {
         fill: $brand-bg-dark;
+    }
+
+    &.size-30 {
+        height: 30px;
+        width: auto;
+    }
+
+    &.size-14 {
+        height: 14px;
+        width: auto;
     }
 }
