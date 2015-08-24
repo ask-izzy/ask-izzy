@@ -1,0 +1,31 @@
+$padding: 15px;
+
+.ServicePane {
+    padding: $padding;
+
+    & > main {
+        margin: -$padding;
+        padding: $padding;
+
+        background-color: $brand-bg-light;
+    }
+
+    hr {
+        margin-left: -$padding;
+        margin-right: -$padding;
+
+        border-bottom: 1px solid lighten($brand-bg-light, 30%);
+    }
+
+    .name {
+        font-size: 160%;
+        font-weight: normal;
+        line-height: 1;
+        margin: 0;
+    }
+
+    .description {
+        color: $brand-bg-mid;
+        font-weight: normal;
+    }
+}
