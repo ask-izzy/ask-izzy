@@ -10,6 +10,7 @@ module.exports = (function() {
     return [
         require('./browser.js'),
         require('./branding.js'),
+        require('./geolocation.js'),
         require('./results.js'),
     ];
 })();

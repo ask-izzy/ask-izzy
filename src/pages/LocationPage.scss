@@ -1,0 +1,37 @@
+.LocationPage {
+    .search {
+        width: 100%;
+
+        input {
+            display: block;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 5px;
+        }
+    }
+
+    .ProgressIcon {
+        // works around alignment of CircularProgress inside ListItem
+        margin-top: -20px !important;
+        margin-left: -15px !important;
+    }
+
+    .done-button {
+        width: 100%;
+
+        button {
+            color: white !important;
+            background-color: $icon-fg-color !important;
+
+            display: block !important;
+            width: 90%;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-top: 20px !important;
+            margin-bottom: 20px !important;
+        }
+    }
+}

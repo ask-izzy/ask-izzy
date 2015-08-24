@@ -29,6 +29,7 @@ Feature: Landing page
         And I should see the branding footer
 
     Scenario: Navigate to a category
+        Given my location is "Melbourne VIC"
         When I visit /
         And I click on "Housing"
         Then I should be at /category/housing

@@ -9,6 +9,7 @@ import NavigationArrowBack from
 import _ from 'underscore';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
+import sessionstorage from "sessionstorage";
 
 import icons from '../icons';
 import iss from '../iss';
@@ -16,6 +17,7 @@ import categories from '../constants/categories';
 import ResultTile from '../components/ResultTile';
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
+/*::`*/@reactMixin.decorate(Router.State)/*::`;*/
 class CategoryPage extends React.Component {
     constructor(props: Object) {
         super(props);
@@ -47,10 +49,18 @@ class CategoryPage extends React.Component {
     }
 
     componentDidMount(): void {
+        var location = sessionstorage.getItem('location');
+
+        if (!location) {
+            console.log("Need location");
+            this.replaceWith('location', null,
+                             {next: this.getPath()});
+        }
+
         iss('search/', {
             q: this.category.search,
             type: 'service',
-            area: 'melbourne vic',  // FIXME: get real location
+            area: location || 'melbourne vic',
             limit: 3,
         })
             .then(data => {
@@ -59,23 +69,26 @@ class CategoryPage extends React.Component {
                     objects: data.objects,
                     error: undefined,
                 });
-            }).catch(error => {
+            })
 
-                this.setState({
-                    error: error,
-                });
+            .catch(response => {
+                try {
+                    var data = JSON.parse(response.text);
+                    this.setState({
+                        error: data.error_message,
+                    });
+                } catch (e) {
+                    this.setState({
+                        error: `An error occurred (${response.status})`,
+                    });
+                }
+
             });
 
     }
 
     render(): React.Element {
-        if (this.state.error) {
-            return (
-                <div>
-                    { this.state.error }
-                </div>
-            );
-        }
+        var location = sessionstorage.getItem('location');
 
         return (
             <div>
@@ -89,6 +102,24 @@ class CategoryPage extends React.Component {
                         </mui.IconButton>
                     }
                 />
+
+                <div>
+                    Searching for <b>{this.category.name}</b> in
+                    <b> {location} </b>
+                    (<Router.Link
+                        to="location"
+                        query={{
+                            next: this.getPath(),
+                        }}
+                     >Change</Router.Link>).
+                </div>
+
+                {this.state.error ?
+                    <div>
+                        {this.state.error}
+                    </div>
+                : ''
+                }
 
                 <mui.List>{
                     // FIXME: crisis tiles

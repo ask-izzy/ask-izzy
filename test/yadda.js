@@ -1,12 +1,14 @@
 /*
  * Enable Yadda in Mocha
  */
+/* @flow */
 "use strict";
 
 import Yadda from 'yadda';
 import webDriverInstance, { executeInFlow } from './support/webdriver';
 import fs from 'fs';
 import Webdriver from 'selenium-webdriver';
+import _ from 'underscore';
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
@@ -19,6 +21,9 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
     featureFile(file, feature => {
         var driver;
 
+        if (shouldSkip(feature.annotations)) return;
+        if (!shouldInclude(feature.annotations)) return;
+
         before(done => {
             executeInFlow(() => {
                 driver = webDriverInstance();
@@ -26,6 +31,9 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
         });
 
         scenarios(feature.scenarios, scenario => {
+            if (shouldSkip(scenario.annotations)) return;
+            if (!shouldInclude(scenario.annotations)) return;
+
             steps(scenario.steps, (step, done) => {
                 Yadda.createInstance(libraries, {
                     driver: driver,
@@ -39,6 +47,30 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
 
         after(done => driver.quit().then(done));
     });
+
+    function shouldSkip(annotations: Object): boolean {
+        var skips = (process.env.SKIP || '').split(',');
+
+        for (var skip of skips) {
+            if (annotations[skip]) return true;
+        }
+
+        return false;
+    }
+
+    function shouldInclude(annotations: Object): boolean {
+        var includes = (process.env.ONLY || '').split(',');
+
+        if (includes.length == 1 && includes[0] == '') {
+            return true;  // no specific includes specified
+        }
+
+        for (var include of includes) {
+            if (annotations[include]) return true;
+        }
+
+        return false;
+    }
 });
 
 function takeScreenshotOnFailure(test, driver) {

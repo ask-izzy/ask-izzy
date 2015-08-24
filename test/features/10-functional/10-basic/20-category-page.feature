@@ -6,6 +6,7 @@ Feature: Category page
     # So that I can choose a service
 
     Scenario: Visit housing category
+        Given my location is "Melbourne VIC"
         When I visit /category/housing
         Then I should see "Housing"
         And I should see the results

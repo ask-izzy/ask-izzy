@@ -1,6 +1,10 @@
+/* @flow */
+
+"use strict";
+
 import Webdriver from 'selenium-webdriver';
 
-export async function seleniumBrowser(driver) {
+export async function seleniumBrowser(driver: Webdriver.WebDriver): Object {
     var wnd = new Webdriver.WebDriver.Window(driver);
     try {
         var {width, height} = await wnd.getSize();
@@ -19,15 +23,20 @@ export async function seleniumBrowser(driver) {
     return res;
 };
 
-export function executeInFlow(fn, done) {
+export function executeInFlow(fn: Function, done: Function): void {
     Webdriver.promise.controlFlow().execute(fn).then(function() {
         done();
     }, done);
 }
 
-export default function webDriverInstance() {
-    let branch = process.env.TRAVIS_BRANCH || "Manual";
-    let baseCaps = {
+export function gotoUrl(driver: Webdriver.WebDriver, url: string): Promise {
+    var port = process.env.PORT || 8000;
+    return driver.get(`http://localhost:${port}${url}`);
+}
+
+export default function webDriverInstance(): Webdriver.WebDriver {
+    var branch = process.env.TRAVIS_BRANCH || "Manual";
+    var baseCaps: Webdriver.Capabilities = {
         username: process.env.SAUCE_USERNAME,
         accessKey: process.env.SAUCE_ACCESS_KEY,
         name: "Ask Izzy " + branch,
@@ -51,6 +60,7 @@ export default function webDriverInstance() {
         // fill in some extra fields for appium
         var browser = process.env.SELENIUM_BROWSER.split(/:/, 3);
         var _;
+        /* flow:disable unsupported by flow */
         [_, baseCaps.platformVersion, baseCaps.platformName] = browser;
 
         baseCaps.emulator = true;
