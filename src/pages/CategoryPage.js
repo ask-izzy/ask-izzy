@@ -15,6 +15,7 @@ import icons from '../icons';
 import iss from '../iss';
 import categories from '../constants/categories';
 import ResultTile from '../components/ResultTile';
+import HeaderBar from '../components/HeaderBar';
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
@@ -120,6 +121,11 @@ class CategoryPage extends React.Component {
                     </div>
                 : ''
                 }
+
+                <HeaderBar
+                    primaryText={this.category.name}
+                    secondaryText={<a href="#">Try a different search</a>}
+                />
 
                 <mui.List>{
                     // FIXME: crisis tiles

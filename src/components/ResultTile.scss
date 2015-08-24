@@ -1,0 +1,23 @@
+.ResultTile {
+    .site_name {
+        color: $brand-pane-alt-light;
+        font-size: 160%;
+        font-weight: normal;
+        line-height: 1;
+        margin: 0 0 12px;
+    }
+
+    .site_name {
+        color: $brand-bg-mid;
+        line-height: 1.2;
+        margin-bottom: 16px;
+    }
+
+    .service_type {
+        margin: 0;
+        padding: 0 0 0 22px;
+        li {
+            padding: 3px 0;
+        }
+    }
+}

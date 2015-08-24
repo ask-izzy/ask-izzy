@@ -1,0 +1,23 @@
+.TransportTime {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 16px;
+
+    .coloured-icon {
+        position: absolute;
+        top: -5px;
+        left: -2px;
+        path {
+            fill: $brand-bg-dark;
+        }
+    }
+
+    .time {
+        color: $brand-bg-dark;
+        font-weight: bold;
+    }
+
+    .location {
+        color: $brand-bg-mid;
+    }
+}
