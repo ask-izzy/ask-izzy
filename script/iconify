@@ -9,8 +9,8 @@ def titleize(name)
     name.gsub(/-(.)/) {|match| match[1].upcase}
 end
 
-def icon_js(name, view_box, paths)
-    paths = paths.map {|p| "<path d='#{p}' />"}
+def icon_js(name, view_box, nodes)
+    nodes = nodes.map {|node| "#{node}"}
     return <<-JS
 /* @flow */
 /* jscs: disable */
@@ -27,7 +27,7 @@ export default class SvgIcon#{name} extends React.Component {
                 {...this.props}
                 viewBox="#{view_box}"
             >
-            #{paths.join("\n            ")}
+            #{nodes.join("\n            ")}
             </mui.SvgIcon>
         );
     }
@@ -40,12 +40,19 @@ def view_box(doc)
     XPath.first(doc, '//svg').attributes.get_attribute('viewBox').value
 end
 
-def paths(doc)
-    nodes = XPath.each(doc, '//path').to_a
-    nodes.map do |node|
-        path = node.attributes.get_attribute('d').value
-        path.gsub(/[\t\n]/, ' ')
+def nodes(doc)
+    n = XPath.each(doc, '//path|//circle').to_a
+    n.map do |node|
+        # remove style elements as we don't want them
+        node.attributes.delete('style')
+        # remove tabs and newlines
+        node.attributes.each{|name, value|
+            value = value.gsub(/[\t\n]/, ' ')
+            node.add_attribute(name, value)
+        }
     end
+
+    return n
 end
 
 def class_name(source_path)
@@ -63,9 +70,9 @@ source_icons.each do |source_path|
     class_name = class_name(source_path)
     doc = Document.new(File.read(source_path))
     viewBox = view_box(doc)
-    paths = paths(doc)
+    nodes = nodes(doc)
     File.open("#{dest_dir}/#{class_name}.js", 'w') do |out|
-        out.write icon_js(class_name, viewBox, paths)
+        out.write icon_js(class_name, viewBox, nodes)
     end
 end
 
