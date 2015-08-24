@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { PropTypes } from "react";
+import React from "react";
 import Router from "react-router";
 import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
@@ -17,7 +17,7 @@ var palette = colors.getPalette();
 class ResultTile extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
-        object: PropTypes.object.isRequired,
+        object: React.PropTypes.object.isRequired,
     };
 
     // flow:disable not supported yet

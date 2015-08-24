@@ -2,7 +2,7 @@
 
 import moment from "moment";
 import mui from "material-ui";
-import React, { PropTypes } from "react";
+import React from "react";
 
 import fixtures from "../../fixtures/services";
 import colors from "../constants/theme";
@@ -17,7 +17,7 @@ function formatTime(in_): string {
 class OpeningTimes extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
-        object: PropTypes.object.isRequired,
+        object: React.PropTypes.object.isRequired,
     };
 
     // flow:disable not supported yet

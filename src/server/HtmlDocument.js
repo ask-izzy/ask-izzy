@@ -2,21 +2,21 @@
 
 "use strict";
 
-import React, { PropTypes } from "react";
+import React from "react";
 
 class HtmlDocument extends React.Component {
 
     // flow:disable not supported yet
     static propTypes = {
-        markup: PropTypes.string.isRequired,
-        script: PropTypes.arrayOf(PropTypes.string),
-        css: PropTypes.arrayOf(PropTypes.string),
+        markup: React.PropTypes.string.isRequired,
+        script: React.PropTypes.arrayOf(React.PropTypes.string),
+        css: React.PropTypes.arrayOf(React.PropTypes.string),
 
         // meta tags, title, etc.
-        title: PropTypes.string,
-        description: PropTypes.string,
-        siteName: PropTypes.string,
-        currentUrl: PropTypes.string,
+        title: React.PropTypes.string,
+        description: React.PropTypes.string,
+        siteName: React.PropTypes.string,
+        currentUrl: React.PropTypes.string,
     };
 
     // flow:disable not supported yet
