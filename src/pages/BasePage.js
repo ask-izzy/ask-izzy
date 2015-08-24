@@ -5,7 +5,6 @@ import React from "react";
 import Router from 'react-router';
 import mui from "material-ui";
 
-import Footer from "../components/Footer";
 import theme from "../constants/theme";
 
 var ThemeManager = new mui.Styles.ThemeManager();
@@ -15,6 +14,11 @@ ThemeManager.contentFontFamily =
 
 export default class BasePage extends React.Component {
 
+    // flow:disable
+    static childContextTypes = {
+        muiTheme: React.PropTypes.object,
+    };
+
     getChildContext(): Object {
         return {
             muiTheme: ThemeManager.getCurrentTheme(),
@@ -23,18 +27,20 @@ export default class BasePage extends React.Component {
 
     render(): React.Element {
         return (
-            <div>
+            <div className="BasePage">
                 <DocumentTitle title="Ask Izzy" />
-                <Router.RouteHandler />
-                <div className="footer">
-                    <Footer />
-                </div>
+                <main>
+                    <Router.RouteHandler />
+                </main>
+                <footer className="branding-footer-container">
+                    <div>
+                        <a href="#">About Ask Izzy</a>
+                    </div>
+                    <div>
+                        Supported by
+                    </div>
+                </footer>
             </div>
         );
     }
-
 }
-
-BasePage.childContextTypes = {
-    muiTheme: React.PropTypes.object,
-};

@@ -4,7 +4,6 @@ import CategoryListItem from './components/CategoryListItem';
 import CollapsedPhones from './components/CollapsedPhones';
 import Collapser from './components/Collapser';
 import Eligibility from './components/Eligibility';
-import Footer from './components/Footer';
 import HeaderBar from './components/HeaderBar';
 import NavBar from './components/NavBar';
 import OpeningTimes from './components/OpeningTimes';
@@ -19,7 +18,6 @@ export default {
     CollapsedPhones: CollapsedPhones,
     Collapser: Collapser,
     Eligibility: Eligibility,
-    Footer: Footer,
     HeaderBar: HeaderBar,
     NavBar: NavBar,
     OpeningTimes: OpeningTimes,

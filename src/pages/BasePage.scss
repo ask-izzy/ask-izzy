@@ -1,0 +1,26 @@
+.BasePage {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+
+    & > main {
+        flex: 1;
+        background-color: white;
+    }
+
+    & > footer {
+        color: $brand-bg-mid;
+        background-color: $brand-bg-dark;
+
+        padding: 10px 0;
+
+        & > div {
+            margin: 5px 15px;
+        }
+
+        a {
+           color: white;
+           text-decoration: none;
+        }
+    }
+}
