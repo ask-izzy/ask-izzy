@@ -28,4 +28,8 @@ app.get('/api/v3/search/', (req, res) => {
     });
 });
 
+app.get('/api/v3/service/111/', (req, res) => {
+    res.json(services.housingService);
+});
+
 app.listen(5000);
