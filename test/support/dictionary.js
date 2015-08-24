@@ -1,14 +1,32 @@
+/* @flow */
+
 "use strict";
 
 import assert from 'assert';
 import Yadda from 'yadda';
 import _ from 'underscore';
 
-function linesConverter(str, cb) {
-    cb(null, str.split("\n"));
+function latitudeConverter(latitude: string, done: Function): void {
+    latitude = latitude
+        .replace(/N$/, '')
+        .replace(/(.+)S$/, '-$1');
+
+    done(null, parseFloat(latitude));
 }
 
-function tableConverter(str, cb) {
+function longitudeConverter(longitude: string, done: Function): void {
+    longitude = longitude
+        .replace(/E$/, '')
+        .replace(/(.+)W$/, '-$1');
+
+    done(null, parseFloat(longitude));
+}
+
+function linesConverter(str: string, done: Function): void {
+    done(null, str.split("\n"));
+}
+
+function tableConverter(str: string, done: Function): void {
     /* Tables have format
      * Header | Header | Header
      * ========================
@@ -22,16 +40,18 @@ function tableConverter(str, cb) {
 
     lines.shift();
 
-    cb(null, lines.map(
-        line => _.object(header,
-                         line
-                            .split('|')
-                            .map(cell => cell.trim())
-                        )
+    done(null, lines.map(
+         line => _.object(header,
+                          line
+                             .split('|')
+                             .map(cell => cell.trim())
+                         )
     ));
 }
 
 var dictionary = new Yadda.Dictionary()
+    .define('LATITUDE', /(\d+.\d+[NS])/, latitudeConverter)
+    .define('LONGITUDE', /(\d+.\d+[EW])/, longitudeConverter)
     .define('lines', /([^\u0000]*)/, linesConverter)
     .define('table', /([^\u0000]*)/, tableConverter);
 
