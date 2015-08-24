@@ -1,9 +1,13 @@
 /* @flow */
 
+import DocumentTitle from "react-document-title";
 import React from "react";
 import Router from 'react-router';
 import mui from "material-ui";
+
+import Footer from "../components/Footer";
 import theme from "../constants/theme";
+
 var ThemeManager = new mui.Styles.ThemeManager();
 ThemeManager.setTheme(theme);
 ThemeManager.contentFontFamily =
@@ -19,7 +23,13 @@ export default class BasePage extends React.Component {
 
     render(): React.Element {
         return (
-            <Router.RouteHandler />
+            <div>
+                <DocumentTitle title="Ask Izzy" />
+                <Router.RouteHandler />
+                <div className="footer">
+                    <Footer />
+                </div>
+            </div>
         );
     }
 
