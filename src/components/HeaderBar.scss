@@ -1,6 +1,9 @@
 .HeaderBar {
     background-color: $brand-pane-dark;
-    color: white;
+
+    &, & a {
+       color: white;
+    }
 
     // FIXME check these
     padding-left: 20px;

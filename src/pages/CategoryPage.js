@@ -62,6 +62,7 @@ class CategoryPage extends React.Component {
             q: this.category.search,
             type: 'service',
             area: location || 'melbourne vic',
+            catchment: true,
             limit: 3,
         })
             .then(data => {
@@ -103,16 +104,30 @@ class CategoryPage extends React.Component {
                     }
                 />
 
-                <div>
-                    Searching for <b>{this.category.name}</b> in
-                    <b> {location} </b>
-                    (<Router.Link
-                        to="location"
-                        query={{
-                            next: this.getPath(),
-                        }}
-                     >Change</Router.Link>).
-                </div>
+                {
+                    this.state.meta ? <HeaderBar
+                        primaryText={
+                            <div>
+                                I found {this.state.meta.total_count}{' '}
+                                {this.category.name.toLocaleLowerCase()}{' '}
+                                services serving{' '}
+                                {this.state.meta.location.name},{' '}
+                                {this.state.meta.location.state}.
+                            </div>
+                        }
+                        secondaryText={
+                            <Router.Link
+                                to="location"
+                                query={{
+                                    next: this.getPath(),
+                                }}
+                             >Change what you need</Router.Link>
+                        } />
+                    : <div>
+                        // FIXME
+                        Loading...
+                    </div>
+                }
 
                 {this.state.error ?
                     <div>
@@ -120,10 +135,6 @@ class CategoryPage extends React.Component {
                     </div>
                 : ''
                 }
-
-                <HeaderBar
-                    primaryText={this.category.name}
-                />
 
                 <mui.List>{
                     // FIXME: crisis tiles
