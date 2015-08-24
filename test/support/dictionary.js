@@ -6,7 +6,9 @@ import assert from 'assert';
 import Yadda from 'yadda';
 import _ from 'underscore';
 
-function latitudeConverter(latitude: string, done: Function): void {
+type callback = (err: ?Error, val: any) => void;
+
+function latitudeConverter(latitude: string, done: callback): void {
     latitude = latitude
         .replace(/N$/, '')
         .replace(/(.+)S$/, '-$1');
@@ -14,7 +16,7 @@ function latitudeConverter(latitude: string, done: Function): void {
     done(null, parseFloat(latitude));
 }
 
-function longitudeConverter(longitude: string, done: Function): void {
+function longitudeConverter(longitude: string, done: callback): void {
     longitude = longitude
         .replace(/E$/, '')
         .replace(/(.+)W$/, '-$1');
@@ -22,11 +24,11 @@ function longitudeConverter(longitude: string, done: Function): void {
     done(null, parseFloat(longitude));
 }
 
-function linesConverter(str: string, done: Function): void {
+function linesConverter(str: string, done: callback): void {
     done(null, str.split("\n"));
 }
 
-function tableConverter(str: string, done: Function): void {
+function tableConverter(str: string, done: callback): void {
     /* Tables have format
      * Header | Header | Header
      * ========================

@@ -2,12 +2,14 @@
 
 "use strict";
 
+type callback = (results: Object, status: number) => void;
+
 declare class GoogleMapsGeocoder {
-    geocode(obj: Object, callback: Function): void;
+    geocode(obj: Object, callback: callback): void;
 }
 
 declare class GoogleAutocompleteService {
-    getPlacePredictions(obj: Object, callback: Function): void;
+    getPlacePredictions(obj: Object, callback: callback): void;
 }
 
 declare class GooglePlaces {

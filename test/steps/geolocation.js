@@ -67,7 +67,7 @@ async function mockGeolocation(): Promise<void> {
  *
  * Navigating to a new URL undoes the mock.
  */
-async function sendCoords(latitude: Number, longitude: Number): Promise<void>
+async function sendCoords(latitude: number, longitude: number): Promise<void>
 {
     await this.driver.executeScript((obj) => {
         mockGeolocationSuccess(obj);
