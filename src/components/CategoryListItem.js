@@ -27,6 +27,7 @@ class CategoryListItem extends React.Component {
 
         return (
             <mui.ListItem
+                className="CategoryListItem"
                 containerElement={
                     <Router.Link
                         to="category"

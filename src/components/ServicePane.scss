@@ -2,6 +2,12 @@ $padding: 15px;
 
 .ServicePane {
     padding: $padding;
+    font-size: 14px !important;
+    font-weight: light !important;
+
+    h1, h2, h3, h4, h5, h6 {
+       font-weight: normal !important;
+    }
 
     & > main {
         margin: -$padding;
@@ -18,14 +24,11 @@ $padding: 15px;
     }
 
     .name {
-        font-size: 160%;
-        font-weight: normal;
-        line-height: 1;
+        font-size: 24px !important;
         margin: 0;
     }
 
     .description {
         color: $brand-bg-mid;
-        font-weight: normal;
     }
 }

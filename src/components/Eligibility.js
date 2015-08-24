@@ -27,7 +27,7 @@ class Eligibility extends React.Component {
         if (eligibilityInfo || catchment) {
             eligibleMarkup = (
                 <div className="eligibility">
-                    <h3>To receive this service you must be</h3>
+                    <h3>To receive this service you must be:</h3>
                     <ul>
                         <li>Located in { catchment}</li>
                         { this.eligibility(eligibilityInfo) }
@@ -39,7 +39,7 @@ class Eligibility extends React.Component {
         if (ineligibilityInfo) {
             ineligibleMarkup = (
                 <div className="ineligibility">
-                    <h3>You are ineligible if</h3>
+                    <h3>You are ineligible if:</h3>
                     <ul>
                         { this.eligibility(ineligibilityInfo) }
                     </ul>
