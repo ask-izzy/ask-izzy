@@ -26,5 +26,5 @@ Feature: Geolocation
         Then I should see "Locating you..."
 
         When I deny access to geolocation
-        Then I should see "Failed to find your location"
-        And I should see "User denied access"
+        Then I should see "Unable to get your location"
+        And I should see "Please enter your location above (User denied access)"

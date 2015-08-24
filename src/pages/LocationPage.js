@@ -193,8 +193,9 @@ class LocationPage extends React.Component {
                 }{
                     this.state.geolocation == GeoLocationState.FAILED ?
                         <mui.ListItem
-                            primaryText="Failed to find your location"
-                            secondaryText={this.state.error}
+                            primaryText="Unable to get your location"
+                            secondaryText={`Please enter your location above
+                                (${this.state.error})`}
                             leftIcon={<icons.Cross />}
                         />
                     : ''
