@@ -45,14 +45,9 @@ class ResultTile extends React.Component {
             <mui.ListItem
                 className="ResultTile"
                 href={this.href()}
-                rightAvatar={
-                    <mui.Avatar
-                        className="colored-icon"
-                        backgroundColor={mui.Styles.Colors.transparent}
-                        icon={
-                            <icons.Chevron />
-                        }
-                        style={{borderRadius: 0}}
+                rightIcon={
+                    <icons.Chevron
+                        className="ColoredIcon icon-fg-color"
                     />
                 }
             >
