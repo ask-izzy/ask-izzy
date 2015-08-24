@@ -8,6 +8,8 @@ import fixtures from "../../fixtures/services";
 import colors from "../constants/theme";
 var palette = colors.getPalette();
 
+import icons from '../icons';
+
 function formatTime(in_): string {
     return moment(in_, 'HH:mm:ss').format('h:mm A');
 }
@@ -35,21 +37,24 @@ class OpeningTimes extends React.Component {
         ] || {};
 
         if (object.now_open.now_open) {
-            // get closing time
             return (
-                <div>
-                    <span>Now open</span>&nbsp;
-                    <span>Closes {formatTime(todayOpen.close)}</span>
+                <div className="OpeningTimes">
+                    <icons.Clock className="ColoredIcon brand-bg-dark" />
+                    <span className="open">Open now</span>&nbsp;
+                    <span className="until">
+                        until {formatTime(todayOpen.close)}
+                    </span>
                 </div>
             );
         } else {
             return (
-                <div>
-                    <span>Currently closed</span>&nbsp;
+                <div className="OpeningTimes">
+                    <icons.Clock className="ColoredIcon brand-bg-dark" />
+                    <span className="closed">Closed</span>&nbsp;
                     {
                         nextOpen ?
-                            <span>
-                                Opens {nextOpen.day}&nbsp;
+                            <span className="until">
+                                until {nextOpen.day}&nbsp;
                                 {formatTime(nextOpen.open)}
                             </span> :
                             <span></span>
