@@ -26,7 +26,7 @@ export default class ServicePane extends React.Component {
                 <main>
                     <h2 className="name">{object.name}</h2>
                     <h3 className="description">
-                        {object.description.split('.')[0]}.
+                        {object.description.split('.')[0] + '.'}
                     </h3>
 
                     <hr />

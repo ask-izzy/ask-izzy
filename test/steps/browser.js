@@ -18,6 +18,8 @@ module.exports = (function() {
     return Yadda.localisation.English.library()
         .when('I visit $URL', unpromisify(visitUrl))
         .when('I click on "$STRING"', unpromisify(clickLink))
+        .when('I click back from the title bar',
+              unpromisify(clickBack))
         .then('I should be at $URL', unpromisify(checkURL))
         .then('I should see "$STRING"', unpromisify(thenISee))
         .then('search box should contain "$STRING"',
@@ -44,6 +46,13 @@ async function clickLink(link: string): Promise {
         `//${tag}
            [normalize-space(.//text()) = normalize-space('${link}')]`
                            ).join('|')
+    ))
+        .click();
+}
+
+async function clickBack() {
+    await this.driver.findElement(By.css(
+        'button.BackButton'
     ))
         .click();
 }

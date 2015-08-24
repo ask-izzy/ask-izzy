@@ -28,9 +28,13 @@ Feature: Landing page
         ---------------
         And I should see the branding footer
 
-    Scenario: Navigate to a category
+    Scenario: Navigate to a category and back to the homepage
         Given my location is "Melbourne VIC"
         When I visit /
         And I click on "Housing"
         Then I should be at /category/housing
         And I should see "Housing"
+
+        When I click back from the title bar
+        Then I should see the branding header
+        And I should be at /
