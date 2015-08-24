@@ -63,12 +63,12 @@ module.exports = (function() {
 
     async function seeTheBrandingFooter() {
         const container = within(
-            "//*[@class='branding-footer-container']"
+            "//footer"
         );
 
         await assert.textIsVisible(
             this.driver,
-            "Data copyright",
+            "About Ask Izzy",
             container
         );
     }
