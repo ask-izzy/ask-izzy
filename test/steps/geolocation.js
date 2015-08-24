@@ -13,11 +13,12 @@ import { gotoUrl } from '../support/webdriver';
 
 module.exports = (function() {
     return Yadda.localisation.English.library()
+        .given("control of geolocation", unpromisify(mockGeolocation))
         .given("I'm at (\\d+.\\d+[NS]) (\\d+.\\d+[EW])",
                unpromisify(setLocationFromCoords))
-        .given('I deny access to geolocation',
-               unpromisify(disableGeolocation))
-        .given('my location is "$STRING"', unpromisify(setLocation));
+        .given('my location is "$STRING"', unpromisify(setLocation))
+        .when('I deny access to geolocation',
+              unpromisify(disableGeolocation));
 })();
 
 /**
@@ -27,10 +28,10 @@ module.exports = (function() {
  *
  * Returns: a promise that resolves when the mock is installed
  */
-function mockGeolocation(driver: Webdriver.WebDriver): Promise {
-    return driver.executeScript(() => {
+async function mockGeolocation(): Promise<void> {
+    await this.driver.executeScript(() => {
         /* taken from mock-geolocation */
-        window.changeGeolocation = (object) => {
+        function mockGeolocation_(object) {
             console.log("Mocking geolocation with", object);
             if (Object.defineProperty) {
                 Object.defineProperty(navigator, 'geolocation', {
@@ -48,6 +49,14 @@ function mockGeolocation(driver: Webdriver.WebDriver): Promise {
                 );
             }
         };
+
+        /* install a mock that stores the success and error methods */
+        mockGeolocation_({
+            getCurrentPosition: (success, error, opt) => {
+                window.mockGeolocationSuccess = success;
+                window.mockGeolocationError = error;
+            },
+        });
     });
 }
 
@@ -59,7 +68,7 @@ function mockGeolocation(driver: Webdriver.WebDriver): Promise {
  * Navigating to a new URL undoes the mock.
  */
 async function setLocationFromCoords(latitude: string,
-                                     longitude: string): Promise {
+                                     longitude: string): Promise<void> {
 
     latitude = latitude
         .replace(/N$/, '')
@@ -73,14 +82,8 @@ async function setLocationFromCoords(latitude: string,
 
     longitude = parseFloat(longitude);
 
-    await mockGeolocation(this.driver);
     await this.driver.executeScript((obj) => {
-        changeGeolocation({
-            getCurrentPosition: (success, error, opt) => {
-                /* simulate aquiring GPS lock */
-                setTimeout(() => success(obj), 1500);
-            },
-        });
+        mockGeolocationSuccess(obj);
     },
 
     {
@@ -95,7 +98,7 @@ async function setLocationFromCoords(latitude: string,
  * setLocation:
  * Set the user's location in the browser's session
  */
-async function setLocation(location: string): Promise {
+async function setLocation(location: string): Promise<void> {
     await gotoUrl(this.driver, '/');  // go anywhere to start the session
     await this.driver.executeScript((location) => {
         sessionStorage.setItem("location", location);
@@ -103,15 +106,8 @@ async function setLocation(location: string): Promise {
 }
 
 async function disableGeolocation(): Promise {
-    await mockGeolocation(this.driver);
     await this.driver.executeScript((obj) => {
-        changeGeolocation({
-            getCurrentPosition: function(success, error, opt) {
-                /* simulate aquiring GPS lock */
-                setTimeout(() => error(obj), 1500);
-            },
-        });
-
+        mockGeolocationError(obj);
     },
 
     {

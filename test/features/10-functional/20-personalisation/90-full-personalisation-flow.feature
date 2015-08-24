@@ -11,8 +11,10 @@ Feature: Personalisation
         And I click on "Housing"
         Then I should see "Where are you?"
 
-        Given I'm at 37.823S 144.998E
+        Given control of geolocation
         When I click on "Get current location"
+
+        Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond VIC"
 
