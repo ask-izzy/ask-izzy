@@ -3,7 +3,7 @@
     padding-left: 24px;
     margin-bottom: 6px;
 
-    .coloured-icon {
+    .ColoredIcon {
         // override mui.SvgIcon's inline styles
         height: 50px !important;
         width: 50px !important;
@@ -11,9 +11,6 @@
         position: absolute;
         top: -17px;
         left: -16px;
-        path {
-            fill: $brand-bg-dark;
-        }
     }
 
     .open {

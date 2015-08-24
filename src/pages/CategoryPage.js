@@ -124,7 +124,6 @@ class CategoryPage extends React.Component {
 
                 <HeaderBar
                     primaryText={this.category.name}
-                    secondaryText={<a href="#">Try a different search</a>}
                 />
 
                 <mui.List>{

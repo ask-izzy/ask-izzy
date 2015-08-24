@@ -3,13 +3,10 @@
     padding-left: 24px;
     margin-bottom: 16px;
 
-    .coloured-icon {
+    .ColoredIcon {
         position: absolute;
         top: -5px;
         left: -2px;
-        path {
-            fill: $brand-bg-dark;
-        }
     }
 
     .time {

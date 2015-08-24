@@ -18,4 +18,8 @@ $desktop-side-column-color: #eeeeee;
     &.icon-fg-color path {
         fill: $icon-fg-color;
     }
+
+    &.brand-bg-dark path {
+        fill: $brand-bg-dark;
+    }
 }
