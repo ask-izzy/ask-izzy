@@ -91,7 +91,7 @@ class CategoryPage extends React.Component {
 
     render(): React.Element {
         return (
-            <div>
+            <div className="CategoryPage">
                 <mui.AppBar
                     className="AppBar"
                     title={this.category.name}
@@ -104,9 +104,9 @@ class CategoryPage extends React.Component {
                     }
                 />
 
-                {
-                    this.state.meta ? <HeaderBar
-                        primaryText={
+                <HeaderBar
+                    primaryText={
+                        this.state.meta ?
                             <div>
                                 I found {this.state.meta.total_count}{' '}
                                 {this.category.name.toLocaleLowerCase()}{' '}
@@ -114,21 +114,27 @@ class CategoryPage extends React.Component {
                                 {this.state.meta.location.name},{' '}
                                 {this.state.meta.location.state}.
                             </div>
-                        }
-                        secondaryText={
-                            <div>
-                                <Router.Link
-                                    to="location"
-                                    query={{
-                                        next: this.getPath(),
-                                    }}
-                                 >Change what you need</Router.Link>
-                                 <icons.LogoLight className="Logo push-up" />
-                             </div>
-                        } />
-                    : <div>
-                        // FIXME
-                        Loading...
+                        :
+                            <div>Searching...</div>
+                    }
+                    secondaryText={
+                        <div>
+                            <Router.Link
+                                to="location"
+                                query={{
+                                    next: this.getPath(),
+                                }}
+                             >Change what you need</Router.Link>
+                             <icons.LogoLight className="Logo push-up" />
+                         </div>
+                    }
+                />
+
+                {this.state.meta ?
+                    ''
+                :
+                    <div className="progress">
+                        <mui.CircularProgress mode="indeterminate" />
                     </div>
                 }
 
