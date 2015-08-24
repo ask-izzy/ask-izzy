@@ -41,10 +41,11 @@ class ResultTile extends React.Component {
                 }
 
                 rightIcon={
-                    <icons.Chevron
-                        className="ColoredIcon icon-fg-color"
-                    />
+                    <icons.Chevron className="ColoredIcon icon-fg-color" />
                 }
+
+                disableFocusRipple={true}
+                disableTouchRipple={true}
             >
                 <h2 className="name">{object.name}</h2>
                 <div className="site_name">{object.site.name}</div>

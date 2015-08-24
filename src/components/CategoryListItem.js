@@ -36,15 +36,17 @@ class CategoryListItem extends React.Component {
 
                 primaryText={this.props.category.name}
                 secondaryText={this.props.category.byline}
-                secondaryTextLines={2}
+                secondaryTextLines={1}
                 leftIcon={
                     <Icon className="ColoredIcon icon-fg-color" />
                 }
                 rightIcon={
                     <icons.Chevron className="ColoredIcon icon-fg-color" />
                 }
-            >
-            </mui.ListItem>
+
+                disableFocusRipple={true}
+                disableTouchRipple={true}
+            />
         );
     }
 }
