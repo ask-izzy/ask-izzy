@@ -1,13 +1,17 @@
-import React from "react";
-import Router from "react-router";
-import mui from "material-ui";
-import fixtures from "../../fixtures/services";
-import OpeningTimes from "../components/OpeningTimes";
-import Address from "../components/Address";
-import Eligibility from "../components/Eligibility";
-import CollapsedPhones from "../components/CollapsedPhones";
+/* @flow */
 
+"use strict";
+
+import React from "react";
+import mui from "material-ui";
+
+import Address from "../components/Address";
+import CollapsedPhones from "../components/CollapsedPhones";
+import Eligibility from "../components/Eligibility";
+import OpeningTimes from "../components/OpeningTimes";
 import colors from "../constants/theme";
+import fixtures from "../../fixtures/services";
+
 var palette = colors.getPalette();
 
 export default class ServicePane extends React.Component {
@@ -19,8 +23,6 @@ export default class ServicePane extends React.Component {
         var object = this.props.service;
         return (
             <div>
-
-                <mui.AppBar title={object.site.name} />
                 <mui.Paper>
                     <p>
                         {object.name}
