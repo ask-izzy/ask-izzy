@@ -128,6 +128,7 @@ class LocationPage extends React.Component {
         return (
             <div className="LocationPage">
                 <mui.AppBar
+                    className="AppBar"
                     title="Personalise"
                     iconElementLeft={
                         <mui.IconButton

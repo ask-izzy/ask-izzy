@@ -89,11 +89,10 @@ class CategoryPage extends React.Component {
     }
 
     render(): React.Element {
-        var location = sessionstorage.getItem('location');
-
         return (
             <div>
                 <mui.AppBar
+                    className="AppBar"
                     title={this.category.name}
                     iconElementLeft={
                         <mui.IconButton
