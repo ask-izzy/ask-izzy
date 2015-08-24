@@ -17,6 +17,7 @@ module.exports = (function() {
         .given("control of geolocation", unpromisify(mockGeolocation))
         .given("I'm at $LATITUDE $LONGITUDE", unpromisify(sendCoords))
         .given('my location is "$STRING"', unpromisify(setLocation))
+        .given('my location is $LATITUDE $LONGITUDE', unpromisify(setCoords))
         .when('I deny access to geolocation',
               unpromisify(disableGeolocation));
 })();
@@ -90,6 +91,22 @@ async function setLocation(location: string): Promise<void> {
     await this.driver.executeScript((location) => {
         sessionStorage.setItem("location", location);
     }, location);
+}
+
+/**
+ * setCoords:
+ * Set the user's coordinates in the browser's session
+ */
+async function setCoords(latitude: number, longitude: number): Promise<void> {
+    await gotoUrl(this.driver, '/');  // go anywhere to start the session
+    await this.driver.executeScript((coords) => {
+        sessionStorage.setItem("coordinates", JSON.stringify(coords));
+    },
+
+    {
+        latitude: latitude,
+        longitude: longitude,
+    });
 }
 
 async function disableGeolocation(): Promise {

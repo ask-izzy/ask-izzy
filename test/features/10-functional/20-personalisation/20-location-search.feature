@@ -6,6 +6,7 @@ Feature: Location search
     # So that I get personalised results for the area I'm interested in
 
     Scenario: Search for a suburb
+        Given my location is 37.823S 144.998E
         When I visit /personalise/location
         Then I should see "Where are you?"
 

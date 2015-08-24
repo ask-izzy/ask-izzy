@@ -52,6 +52,13 @@ class LocationPage extends React.Component {
                 lng: location.coords.longitude,
             },
         });
+        /* store these coordinates for the session so we can use them to
+         * provide additional info for autocomplete, distances, ISS search
+         * weighting, etc. */
+        sessionstorage.setItem('coordinates', JSON.stringify({
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+        }));
 
         /* return true if the types includes one of our interesting
          * component types */
@@ -127,27 +134,28 @@ class LocationPage extends React.Component {
     async autoCompleteSuburb(input: string, location: ?Object):
         Promise<Array<Object>>
     {
+        var maps = await Maps();
         var request = {
             input: input,
             types: ['geocode'],
             componentRestrictions: {
                 country: 'au',
             },
+            location: null,
+            radius: null,
         };
 
-        // FIXME: use a LatLng
-        // try {
-        //     request.location = {
-        //         lat: location.coords.latitude,
-        //         lng: location.coords.longitude,
-        //     };
-        //     request.radius = 10000;  /* 10 km */
-        // } catch (e) {
-        // }
+        /* If the user has coordinates set in this session, use them */
+        try {
+            var location = JSON.parse(sessionstorage.getItem('coordinates'));
+            request.location = new maps.api.LatLng(location.latitude,
+                                                   location.longitude);
+            request.radius = 10000;  /* 10 km */
+        } catch (e) {
+        }
 
         console.log("Autocompleting", request);
 
-        var maps = await Maps();
         var completions = await maps.autocompletePlaces(request);
 
         return [
@@ -281,14 +289,14 @@ class LocationPage extends React.Component {
                         <mui.ListItem
                             key={index}
                             primaryText={
-                                <span className="suburb">
+                                <div className="suburb">
                                     {result.suburb}
-                                </span>
+                                </div>
                             }
                             secondaryText={
-                                <span className="state">
+                                <div className="state">
                                     {result.state}
-                                </span>
+                                </div>
                             }
                             onTouchTap={(event) => {
                                 /* set the text box to this value

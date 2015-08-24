@@ -8,6 +8,9 @@ declare class GoogleMapsGeocoder {
     geocode(obj: Object, callback: callback): void;
 }
 
+declare class GoogleMapsLatLng {
+}
+
 declare class GoogleAutocompleteService {
     getPlacePredictions(obj: Object, callback: callback): void;
 }
@@ -19,6 +22,7 @@ declare class GooglePlaces {
 
 declare class GoogleMaps {
     Geocoder(): GoogleMapsGeocoder;
+    LatLng(lat: number, lon: number, noWrap: ?boolean): GoogleMapsLatLng;
     places: GooglePlaces;
 }
 
