@@ -139,7 +139,12 @@ class LocationPage extends React.Component {
                     }
                 />
                 <HeaderBar
-                    primaryText="Where are you?"
+                    primaryText={
+                        <div>
+                            Where are you?
+                            <icons.LogoLight className="Logo" />
+                        </div>
+                    }
                     secondaryText={
                         "This will let me find the services closest to you"
                     }

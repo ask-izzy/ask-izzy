@@ -116,12 +116,15 @@ class CategoryPage extends React.Component {
                             </div>
                         }
                         secondaryText={
-                            <Router.Link
-                                to="location"
-                                query={{
-                                    next: this.getPath(),
-                                }}
-                             >Change what you need</Router.Link>
+                            <div>
+                                <Router.Link
+                                    to="location"
+                                    query={{
+                                        next: this.getPath(),
+                                    }}
+                                 >Change what you need</Router.Link>
+                                 <icons.LogoLight className="Logo push-up" />
+                             </div>
                         } />
                     : <div>
                         // FIXME
