@@ -27,12 +27,12 @@ class CategoryListItem extends React.Component {
 
         return (
             <mui.ListItem
-                href={this.makeHref('category',
-                                    {page: this.props.category.key})}
-                onTouchTap={(event) => {
-                    this.transitionTo('category',
-                                      {page: this.props.category.key});
-                }}
+                containerElement={
+                    <Router.Link
+                        to="category"
+                        params={{page: this.props.category.key}}
+                    />
+                }
 
                 primaryText={this.props.category.name}
                 secondaryText={this.props.category.byline}

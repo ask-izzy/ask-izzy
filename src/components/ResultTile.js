@@ -33,10 +33,12 @@ class ResultTile extends React.Component {
         return (
             <mui.ListItem
                 className="ResultTile"
-                href={this.makeHref('service', {id: object.id})}
-                onTouchTap={(event) => {
-                    this.transitionTo('service', {id: object.id});
-                }}
+                containerElement={
+                    <Router.Link
+                        to="service"
+                        params={{id: object.id}}
+                    />
+                }
 
                 rightIcon={
                     <icons.Chevron

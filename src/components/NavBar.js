@@ -12,9 +12,6 @@ class NavBar extends React.Component {
     render(): React.Component {
         return (
             <div className="NavBar">
-                <div className="NavBar-title">
-                    <Link to="home"></Link>
-                </div>
                 <mui.List className="NavBar-links">
                     {
                         categories.map(category => {
