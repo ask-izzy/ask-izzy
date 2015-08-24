@@ -3,6 +3,7 @@
 import moment from "moment";
 import mui from "material-ui";
 import React from "react";
+import _ from "underscore";
 
 import fixtures from "../../fixtures/services";
 import colors from "../constants/theme";
@@ -28,13 +29,13 @@ class OpeningTimes extends React.Component {
             object,
         } = this.props;
 
-        var todayOpen = object.opening_hours[
-            moment().day()
-        ] || {};
+        var todayOpen = _.findWhere(object.opening_hours,
+                                    {day: moment().format('dddd')}
+                                   ) || {};
 
-        var nextOpen = object.opening_hours[
-            (moment().day() + 1) % object.opening_hours.length
-        ] || {};
+        var nextOpen = _.findWhere(object.opening_hours,
+                                   {day: moment().add(1, 'd').format('dddd')}
+                                  ) || {};
 
         if (object.now_open.now_open) {
             return (
