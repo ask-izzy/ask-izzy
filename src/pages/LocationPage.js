@@ -280,8 +280,16 @@ class LocationPage extends React.Component {
                     this.state.autocompletions.map((result, index) =>
                         <mui.ListItem
                             key={index}
-                            primaryText={result.suburb}
-                            secondaryText={result.state}
+                            primaryText={
+                                <span className="suburb">
+                                    {result.suburb}
+                                </span>
+                            }
+                            secondaryText={
+                                <span className="state">
+                                    {result.state}
+                                </span>
+                            }
                             onTouchTap={(event) => {
                                 /* set the text box to this value
                                  * and remove the autocompletions */
