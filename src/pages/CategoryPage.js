@@ -123,7 +123,7 @@ class CategoryPage extends React.Component {
                             <div>
                                 I found {this.state.meta.total_count}{' '}
                                 {this.category.name.toLocaleLowerCase()}{' '}
-                                services serving{' '}
+                                services for{' '}
                                 {this.state.meta.location.name},{' '}
                                 {this.state.meta.location.state}.
                             </div>
