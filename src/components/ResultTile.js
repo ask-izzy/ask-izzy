@@ -28,8 +28,6 @@ class ResultTile extends React.Component {
             object,
         } = this.props;
 
-        console.log(object);
-
         return (
             <mui.ListItem
                 className="ResultTile"
