@@ -25,6 +25,7 @@ export default class SvgIcon#{name} extends React.Component {
         return (
             <mui.SvgIcon
                 {...this.props}
+                className={ this.props.className + " #{name}"}
                 viewBox="#{view_box}"
             >
             #{nodes.join("\n            ")}
