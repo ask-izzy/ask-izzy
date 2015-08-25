@@ -158,7 +158,7 @@ class CategoryPage extends React.Component {
                 : ''
                 }
 
-                <mui.List>{
+                <mui.List className="List results">{
                     // FIXME: crisis tiles
                     (this.state.objects || []).map((object, index) => {
                         return <ResultTile object={object} key={index} />;
