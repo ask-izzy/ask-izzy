@@ -1,0 +1,27 @@
+.Infobox {
+    color: $brand-text-dark;
+
+    padding: 15px;
+    border-bottom: 1px solid $list-item-hairline;
+
+    .secondary {
+        color: $brand-text-mid;
+        margin: 15px 0;
+    }
+
+    &, .Link {
+        font-size: 14px !important;
+        font-weight: 400 !important;
+    }
+
+    .Link {
+        color: $icon-fg-color !important;
+        display: block !important;
+
+        text-align: center;
+        width: 90%;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}

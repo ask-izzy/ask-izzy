@@ -5,6 +5,7 @@ import CollapsedPhones from './components/CollapsedPhones';
 import Collapser from './components/Collapser';
 import Eligibility from './components/Eligibility';
 import HeaderBar from './components/HeaderBar';
+import Infobox from './components/Infobox';
 import NavBar from './components/NavBar';
 import OpeningTimes from './components/OpeningTimes';
 import Phone from './components/Phone';
@@ -19,6 +20,7 @@ export default {
     Collapser: Collapser,
     Eligibility: Eligibility,
     HeaderBar: HeaderBar,
+    Infobox: Infobox,
     NavBar: NavBar,
     OpeningTimes: OpeningTimes,
     Phone: Phone,
