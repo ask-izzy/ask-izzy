@@ -1,6 +1,7 @@
 /* @flow */
 import React from "react";
 import fixtures from "../../fixtures/services";
+import icons from "../icons";
 
 class Address extends React.Component {
 
@@ -19,6 +20,7 @@ class Address extends React.Component {
     render(): React.Element {
         return (
             <div className="Address">
+                <icons.Map />
                 <div className="street">
                     {this.describe('level', 'Level')}
                     {' '}
