@@ -49,6 +49,24 @@ class CategoryPage extends React.Component {
         return category;
     }
 
+    // flow:disable not supported yet
+    get title(): string {
+        if (this.props.params.page) {
+            return this.category.name;
+        } else if (this.props.params.search) {
+            return `"${this.props.params.search}"`;
+        }
+    }
+
+    // flow:disable not supported yet
+    get search(): string {
+        if (this.props.params.page) {
+            return this.category.search;
+        } else if (this.props.params.search) {
+            return this.props.params.search;
+        }
+    }
+
     componentDidMount(): void {
         var location = sessionstorage.getItem('location');
 
@@ -59,7 +77,7 @@ class CategoryPage extends React.Component {
         }
 
         var request = {
-            q: this.category.search,
+            q: this.search,
             type: 'service',
             area: location,
             location: null,
@@ -106,7 +124,7 @@ class CategoryPage extends React.Component {
             <div className="CategoryPage">
                 <mui.AppBar
                     className="AppBar"
-                    title={this.category.name}
+                    title={this.title}
                     iconElementLeft={
                         <mui.IconButton
                             className="BackButton"
@@ -122,7 +140,7 @@ class CategoryPage extends React.Component {
                         this.state.meta ?
                             <div>
                                 I found {this.state.meta.total_count}{' '}
-                                {this.category.name.toLocaleLowerCase()}{' '}
+                                {this.title.toLocaleLowerCase()}{' '}
                                 services for{' '}
                                 {this.state.meta.location.name},{' '}
                                 {this.state.meta.location.state}.
