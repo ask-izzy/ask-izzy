@@ -18,6 +18,14 @@ Feature: Category page
         Womens Refuge       | Susan's House
         -------------------------------------------
 
+        And I should see an info box in position 2
+        And the info box should contain
+        ---------------------------------------------------------------------
+        It's important to act early on housing. These services can help to find a place to stay, or rental assistance to help you stay in your current house.
+        Find out more
+        HOUSING INFORMATION
+        ---------------------------------------------------------------------
+
     Scenario: Navigate to a service and back to a category
         Given my location is "Melbourne VIC"
         When I visit /category/housing

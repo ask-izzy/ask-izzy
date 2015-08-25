@@ -29,7 +29,34 @@ module.exports = (function() {
         }
     }
 
+    async function seeAnInfobox(position: number): Promise<void> {
+        var elements = await this.driver.findElements(
+            By.css('.ResultTile, .Infobox')
+        );
+
+        var classes = await Promise.all(elements.map(
+            element => element.getAttribute('class')
+        ));
+
+        var infoboxes = classes.map(
+            class_ => _.contains(class_.split(' '), 'Infobox')
+        );
+
+        assert.equal(_.indexOf(infoboxes, true) + 1, position);
+    }
+
+    async function checkInfobox(lines: Array<string>): Promise<void> {
+        var text = await this.driver.findElement(By.css('.Infobox'))
+            .getText();
+
+        assert.equal(text, lines.join('\n'));
+    }
+
     return Yadda.localisation.English.library(dictionary)
         .then('I should see the results\n$table',
-              unpromisify(seeTheResults));
+              unpromisify(seeTheResults))
+        .then('I should see an info box in position $NUM',
+              unpromisify(seeAnInfobox))
+        .then('the info box should contain\n$lines',
+              unpromisify(checkInfobox));
 })();
