@@ -15,7 +15,7 @@ Feature: Landing page
         Food
         Everyday things
         Legal
-        Money Help
+        Money help
         Health
         Addiction
         Support & counselling

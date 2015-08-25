@@ -1,2 +1,13 @@
 .CategoryListItem {
+    border-bottom: 1px solid $list-item-hairline !important;
+
+    .primaryText {
+        font-size: 18px !important;
+        line-height: 18px !important;
+        font-weight: 500 !important;
+    }
+
+    & > div {
+        padding-left: 58px !important;
+    }
 }

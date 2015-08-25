@@ -51,8 +51,8 @@ var categories:Array<Category> = [
         search: 'legal aid',
     }),
     new Category({
-        name: "Money Help",
-        byline: "Help with emergency funds, loans, bills or budgeting",
+        name: "Money help",
+        byline: "Emergency funds, bills or budgeting",
         icon: icons.Money,
         search: 'financial aid',
     }),
@@ -64,8 +64,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Addiction",
-        byline:
-        "Help dealing with drugs & alcohol, harm minimisation, gambling etc.",
+        byline: "Dealing with drugs & alcohol, gambling etc.",
         icon: icons.Addiction,
         search: 'additional',
     }),

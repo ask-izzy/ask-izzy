@@ -4,31 +4,54 @@
         color: white;
     }
 
-    // FIXME: check all of these alignments
     .branding-container {
         text-align: center;
         color: white;
         background-color: $brand-pane-light;
 
         .branding-icon {
-            width: 50%;
-            margin-bottom: -3em;
-            max-width: 250px;
+            height: 120px;
+            width: auto;
+            padding: 0;
+            padding-top: 25px;
         }
 
         .branding-copy {
             width: 80%;
             margin: auto;
-            font-size: 200%;
-            padding-bottom: 2em;
+            font-size: 24px;
+            font-weight: 400;
+            padding: 0;
+            padding-top: 15px;
+            padding-bottom: 25px;
         }
     }
 
     .search {
-        width: 90%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 20px;
-        padding: 5px;
+        width: 100%;
+        padding-bottom: 25px;
+
+        position: relative;
+
+        input {
+            color: $brand-text-dark;
+
+            display: block;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 5px;
+
+            border-radius: 3px;
+            border: none;
+        }
+
+        .icon {
+            position: absolute;
+            top: 0;
+            right: 5%;
+            width: 28px !important;
+            height: auto !important;
+        }
     }
 }

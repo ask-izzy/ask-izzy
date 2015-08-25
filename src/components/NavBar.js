@@ -12,7 +12,7 @@ class NavBar extends React.Component {
     render(): React.Component {
         return (
             <div className="NavBar">
-                <mui.List className="NavBar-links">
+                <mui.List className="List categories">
                     {
                         categories.map(category => {
                             return (
@@ -25,8 +25,6 @@ class NavBar extends React.Component {
                     }
                     <mui.ListDivider />
                 </mui.List>
-                <div className="NavBar-locales">
-                </div>
             </div>
         );
     }

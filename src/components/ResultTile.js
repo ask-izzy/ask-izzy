@@ -41,7 +41,7 @@ class ResultTile extends React.Component {
                 }
 
                 rightIcon={
-                    <icons.Chevron className="ColoredIcon icon-fg-color" />
+                    <icons.Chevron className="Chevron" />
                 }
 
                 disableFocusRipple={true}

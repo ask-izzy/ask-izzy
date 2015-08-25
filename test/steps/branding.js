@@ -2,6 +2,8 @@
  * Step definitions for branding / design related steps
  */
 
+/* @flow */
+
 "use strict";
 
 import Yadda from 'yadda';
@@ -9,11 +11,11 @@ import { By } from 'selenium-webdriver';
 
 import unpromisify from "../support/yadda-promise";
 import dictionary from "../support/dictionary";
-import * as assert from '../support/page-assertions';
+import assert from '../support/page-assertions';
 import { within } from '../support/selectors';
 
 module.exports = (function() {
-    async function seeTheBrandingHeader() {
+    async function seeTheBrandingHeader(): Promise<void> {
         const container = within(
             "//*[@class='branding-container']"
         );
@@ -26,7 +28,7 @@ module.exports = (function() {
         );
     }
 
-    async function seeTheSearchBar() {
+    async function seeTheSearchBar(): Promise<void> {
         const container = within(
             "//*[@class='HeaderBar']"
         );
@@ -46,11 +48,12 @@ module.exports = (function() {
     // if you get the order of the categories list wrong.
     // Would be better to find the element then assert its position
     // but selenium doesn't give me much to work with.
-    async function seeTheCategoryList(categories) {
-
+    async function seeTheCategoryList(categories: Array<string>):
+        Promise<void>
+    {
         for (var idx = 0; idx < categories.length; idx++) {
-            const container = within(
-                `//*[@class='NavBar-links']/div[position()=${idx + 1}]`
+            var container = within(
+                `//*[@class='List categories']/div[position()=${idx + 1}]`
             );
             var el = await assert.textIsVisible(
                 this.driver,
@@ -58,10 +61,9 @@ module.exports = (function() {
                 container
             );
         }
-
     }
 
-    async function seeTheBrandingFooter() {
+    async function seeTheBrandingFooter(): Promise<void> {
         const container = within(
             "//footer"
         );

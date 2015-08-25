@@ -35,14 +35,18 @@ class CategoryListItem extends React.Component {
                     />
                 }
 
-                primaryText={this.props.category.name}
+                primaryText={
+                    <div className="primaryText">
+                        {this.props.category.name}
+                    </div>
+                }
                 secondaryText={this.props.category.byline}
                 secondaryTextLines={1}
                 leftIcon={
-                    <Icon className="ColoredIcon icon-fg-color" />
+                    <Icon className="ColoredIcon icon-fg-color size-30" />
                 }
                 rightIcon={
-                    <icons.Chevron className="ColoredIcon icon-fg-color" />
+                    <icons.Chevron className="Chevron" />
                 }
 
                 disableFocusRipple={true}

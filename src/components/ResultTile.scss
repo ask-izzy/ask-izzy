@@ -1,16 +1,20 @@
 .ResultTile {
     font-size: 14px !important;
-    font-weight: light !important;
+    font-weight: 400 !important;
+
+    border-bottom: 1px solid $list-item-hairline !important;
 
     .name {
-        color: $brand-pane-alt-light;
-        font-size: 16px !important;
-        font-weight: normal;
+        color: $brand-pane-alt-dark;
+        font-size: 18px !important;
+        line-height: 125%;
+        font-weight: 500;
         margin: 0;
+        margin-bottom: 3px;
     }
 
     .site_name {
-        color: $brand-bg-mid;
+        color: $brand-text-mid;
         margin-bottom: 16px;
     }
 
@@ -24,7 +28,7 @@
 
     .OpeningTimes {
         .until {
-            color: $brand-bg-mid;
+            color: $brand-text-mid;
         }
     }
 }

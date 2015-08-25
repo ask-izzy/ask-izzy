@@ -49,6 +49,24 @@ class CategoryPage extends React.Component {
         return category;
     }
 
+    // flow:disable not supported yet
+    get title(): string {
+        if (this.props.params.page) {
+            return this.category.name;
+        } else if (this.props.params.search) {
+            return `"${this.props.params.search}"`;
+        }
+    }
+
+    // flow:disable not supported yet
+    get search(): string {
+        if (this.props.params.page) {
+            return this.category.search;
+        } else if (this.props.params.search) {
+            return this.props.params.search;
+        }
+    }
+
     componentDidMount(): void {
         var location = sessionstorage.getItem('location');
 
@@ -59,7 +77,7 @@ class CategoryPage extends React.Component {
         }
 
         var request = {
-            q: this.category.search,
+            q: this.search,
             type: 'service',
             area: location,
             location: null,
@@ -106,7 +124,7 @@ class CategoryPage extends React.Component {
             <div className="CategoryPage">
                 <mui.AppBar
                     className="AppBar"
-                    title={this.category.name}
+                    title={this.title}
                     iconElementLeft={
                         <mui.IconButton
                             className="BackButton"
@@ -122,10 +140,11 @@ class CategoryPage extends React.Component {
                         this.state.meta ?
                             <div>
                                 I found {this.state.meta.total_count}{' '}
-                                {this.category.name.toLocaleLowerCase()}{' '}
-                                services serving{' '}
+                                {this.title.toLocaleLowerCase()}{' '}
+                                services for{' '}
                                 {this.state.meta.location.name},{' '}
                                 {this.state.meta.location.state}.
+                                <icons.LogoLight className="Logo" />
                             </div>
                         :
                             <div>Searching...</div>
@@ -137,13 +156,12 @@ class CategoryPage extends React.Component {
                                 query={{
                                     next: this.getPath(),
                                 }}
-                             >Change what you need</Router.Link>
-                             <icons.LogoLight className="Logo push-up" />
+                            >Change what you need</Router.Link>
                          </div>
                     }
                 />
 
-                {this.state.meta ?
+                {this.state.meta || this.state.error ?
                     ''
                 :
                     <div className="progress">
@@ -158,7 +176,7 @@ class CategoryPage extends React.Component {
                 : ''
                 }
 
-                <mui.List>{
+                <mui.List className="List results">{
                     // FIXME: crisis tiles
                     (this.state.objects || []).map((object, index) => {
                         return <ResultTile object={object} key={index} />;
