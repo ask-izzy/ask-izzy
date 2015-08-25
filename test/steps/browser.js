@@ -27,7 +27,11 @@ module.exports = (function() {
         .then('I should be at $URL', unpromisify(checkURL))
         .then('I should see "$STRING"', unpromisify(thenISee))
         .then('search box should contain "$STRING"',
-              unpromisify(searchContains));
+              unpromisify(searchContains))
+        .then('the button "$STRING" should be disabled',
+              unpromisify(checkDisabled))
+        .then('the button "$STRING" should be enabled',
+              unpromisify(checkEnabled));
 })();
 
 async function visitUrl(url: string): Promise {
@@ -104,4 +108,25 @@ async function searchContains(expected: string): Promise<void> {
 async function clickSearchIcon(): Promise<void> {
     await this.driver.findElement(By.css('.search .icon'))
         .click();
+}
+
+async function getButtonState(driver: Webdriver.WebDriver, text: string):
+    Promise<boolean>
+{
+    return await driver.findElement(By.xpath(
+        `//button[normalize-space(.//text()) = normalize-space('${text}')]`
+    ))
+        .isEnabled();
+}
+
+async function checkDisabled(text: string): Promise<void> {
+    var enabled = await getButtonState(this.driver, text);
+
+    assert.equal(enabled, false);
+}
+
+async function checkEnabled(text: string): Promise<void> {
+    var enabled = await getButtonState(this.driver, text);
+
+    assert.equal(enabled, true);
 }

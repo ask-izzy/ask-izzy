@@ -9,6 +9,7 @@ Feature: Geolocation
         When I visit /personalise/location
         Then I should see "Where are you?"
         And I should see "Get current location"
+        And the button "Done" should be disabled
 
         Given control of geolocation
         When I click on "Get current location"
@@ -17,6 +18,7 @@ Feature: Geolocation
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, Victoria"
+        And the button "Done" should be enabled
 
     Scenario: User denies geolocation access
         When I visit /personalise/location
@@ -28,3 +30,4 @@ Feature: Geolocation
         When I deny access to geolocation
         Then I should see "Unable to get your location"
         And I should see "Please enter your location above (User denied access)"
+        And the button "Done" should be disabled

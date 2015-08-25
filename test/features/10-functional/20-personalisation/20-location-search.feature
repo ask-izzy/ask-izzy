@@ -21,3 +21,4 @@ Feature: Location search
 
         When I click on "Carlton"
         Then search box should contain "Carlton, Victoria"
+        And the button "Done" should be enabled

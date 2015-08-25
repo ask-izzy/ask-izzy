@@ -197,7 +197,7 @@ class LocationPage extends React.Component {
     onSearchChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {
             this.setState({
-                locationName: event.target.value,
+                locationName: event.target.value.trim(),
                 autocompletion: AutocompleteState.SEARCHING,
             });
 
@@ -333,6 +333,7 @@ class LocationPage extends React.Component {
                 <div className="done-button">
                     <mui.FlatButton
                         label="Done"
+                        disabled={(!this.state.locationName)}
                         onTouchTap={this.onTouchDoneButton.bind(this)}
                     />
                 </div>
