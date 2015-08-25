@@ -2,6 +2,7 @@ import React from "react";
 
 import HeaderBar from "../components/HeaderBar";
 import NavBar from "../components/NavBar";
+import icons from "../icons";
 
 class HomePage extends React.Component {
 
@@ -28,6 +29,7 @@ class HomePage extends React.Component {
                                 type="search"
                                 placeholder="Search; e.g. pets, utility bills"
                             />
+                            <icons.Search className="icon" />
                         </form>
                     </HeaderBar>
                 </div>

@@ -31,6 +31,8 @@
         width: 100%;
         padding-bottom: 25px;
 
+        position: relative;
+
         input {
             color: $brand-text-dark;
 
@@ -42,6 +44,14 @@
 
             border-radius: 3px;
             border: none;
+        }
+
+        .icon {
+            position: absolute;
+            top: 0;
+            right: 20px;  // width - padding
+            width: 28px !important;
+            height: auto !important;
         }
     }
 }
