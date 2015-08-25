@@ -20,7 +20,9 @@ $padding: 15px;
         margin-left: -$padding;
         margin-right: -$padding;
 
-        border-bottom: 1px solid lighten($brand-bg-light, 30%);
+        border: 0;
+        height: 1px;
+        background-color: $brand-spacer;
     }
 
     .name {
