@@ -26,3 +26,8 @@ Feature: Search
         And I search for "pet food"
         And I click on the search icon
         Then I should be at /search/pet%20food
+
+    Scenario: Search on blank does not search
+        When I visit /
+        And I click on the search icon
+        Then I should be at /

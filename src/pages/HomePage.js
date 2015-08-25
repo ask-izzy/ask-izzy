@@ -17,6 +17,12 @@ class HomePage extends React.Component {
         event.preventDefault();
 
         var search =  this.refs.search.getDOMNode().value;
+
+        if (search == "") {
+            /* FIXME: should this give some user feedback? */
+            return;
+        }
+
         this.transitionTo('search', {search: search});
     }
 
@@ -47,7 +53,10 @@ class HomePage extends React.Component {
                                 type="search"
                                 placeholder="Search; e.g. pets, utility bills"
                             />
-                            <icons.Search className="icon" />
+                            <icons.Search
+                                className="icon"
+                                onTouchTap={this.onSearchSubmit.bind(this)}
+                            />
                         </form>
                     </HeaderBar>
                 </div>
