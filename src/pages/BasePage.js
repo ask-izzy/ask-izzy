@@ -1,6 +1,5 @@
 /* @flow */
 
-import DocumentTitle from "react-document-title";
 import React from "react";
 import Router from 'react-router';
 import mui from "material-ui";
@@ -28,18 +27,9 @@ export default class BasePage extends React.Component {
     render(): React.Element {
         return (
             <div className="BasePage">
-                <DocumentTitle title="Ask Izzy" />
                 <main>
                     <Router.RouteHandler />
                 </main>
-                <footer className="branding-footer-container">
-                    <div>
-                        <a href="#">About Ask Izzy</a>
-                    </div>
-                    <div>
-                        Supported by
-                    </div>
-                </footer>
             </div>
         );
     }
