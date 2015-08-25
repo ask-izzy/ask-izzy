@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { PropTypes } from "react";
+import React from "react";
 import Router from "react-router";
 import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
@@ -9,6 +9,7 @@ import reactMixin from "react-mixin";
 
 import icons from "../icons";
 import OpeningTimes from "./OpeningTimes";
+import TransportTime from "./TransportTime";
 
 var palette = colors.getPalette();
 
@@ -16,7 +17,7 @@ var palette = colors.getPalette();
 class ResultTile extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
-        object: PropTypes.object.isRequired,
+        object: React.PropTypes.object.isRequired,
     };
 
     // flow:disable not supported yet
@@ -43,11 +44,15 @@ class ResultTile extends React.Component {
                     />
                 }
             >
-                <div className="name">{object.name}</div>
+                <h2 className="name">{object.name}</h2>
                 <div className="site_name">{object.site.name}</div>
                 <OpeningTimes className="opening_hours" object={object} />
-                <div>FIXME transport time</div>
-                <div className="service_type">{object.service_types[0]}</div>
+                <TransportTime object={object} />
+                <ul className="service_type">{
+                    (object.service_types || []).map(
+                        service => <li>{service}</li>
+                    )
+                }</ul>
             </mui.ListItem>
         );
     }

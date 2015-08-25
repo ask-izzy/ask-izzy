@@ -1,15 +1,15 @@
 /* @flow */
 "use strict";
 
-import React, { PropTypes } from "react";
+import React from "react";
 import Router from "react-router";
 import mui from "material-ui";
 
 class HeaderBar extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
-        primaryText: PropTypes.string.isRequired,
-        secondaryText: PropTypes.string,
+        primaryText: React.PropTypes.node.isRequired,
+        secondaryText: React.PropTypes.node,
 
         // FIXME: icon
     };

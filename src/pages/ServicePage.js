@@ -47,6 +47,7 @@ class ServicePage extends React.Component {
             return (
                 <div>
                     <mui.AppBar
+                        className="AppBar"
                         title={object.site.name}
                         iconElementLeft={
                             <mui.IconButton

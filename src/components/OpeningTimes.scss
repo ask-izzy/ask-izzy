@@ -1,0 +1,29 @@
+.OpeningTimes {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 6px;
+
+    .ColoredIcon {
+        // override mui.SvgIcon's inline styles
+        height: 50px !important;
+        width: 50px !important;
+
+        position: absolute;
+        top: -17px;
+        left: -16px;
+    }
+
+    .open {
+        color: $brand-bg-dark;
+        font-weight: bold;
+    }
+
+    .closed {
+        color: $brand-highlight;
+        font-weight: bold;
+    }
+
+    .until {
+        color: $brand-bg-mid;
+    }
+}

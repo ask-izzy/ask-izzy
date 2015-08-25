@@ -1,0 +1,11 @@
+.CategoryPage {
+    .progress {
+        width: 100%;
+
+        & > * {
+            display: block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+    }
+}

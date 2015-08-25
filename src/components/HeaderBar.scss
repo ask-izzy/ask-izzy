@@ -1,6 +1,9 @@
 .HeaderBar {
     background-color: $brand-pane-dark;
-    color: white;
+
+    &, & a {
+       color: white;
+    }
 
     // FIXME check these
     padding-left: 20px;
@@ -15,6 +18,22 @@
     .secondary {
         font-size: 150%;
         padding-bottom: 1em;
+    }
+
+    .Logo {
+        width: 90px !important;
+        height: 90px !important;
+        float: right;
+
+        transform: rotate(5deg);
+
+        path, circle {
+            fill: white;
+        }
+
+        &.push-up {
+            margin-top: -45px;
+        }
     }
 
 }

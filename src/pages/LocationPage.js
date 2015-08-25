@@ -214,6 +214,7 @@ class LocationPage extends React.Component {
         return (
             <div className="LocationPage">
                 <mui.AppBar
+                    className="AppBar"
                     title="Personalise"
                     iconElementLeft={
                         <mui.IconButton
@@ -224,7 +225,12 @@ class LocationPage extends React.Component {
                     }
                 />
                 <HeaderBar
-                    primaryText="Where are you?"
+                    primaryText={
+                        <div>
+                            Where are you?
+                            <icons.LogoLight className="Logo" />
+                        </div>
+                    }
                     secondaryText={
                         "This will let me find the services closest to you"
                     }
@@ -278,8 +284,9 @@ class LocationPage extends React.Component {
                 }{
                     this.state.geolocation == GeoLocationState.FAILED ?
                         <mui.ListItem
-                            primaryText="Failed to find your location"
-                            secondaryText={this.state.error}
+                            primaryText="Unable to get your location"
+                            secondaryText={`Please enter your location above
+                                (${this.state.error})`}
                             leftIcon={<icons.Cross />}
                         />
                     : ''

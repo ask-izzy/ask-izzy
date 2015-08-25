@@ -15,6 +15,7 @@ import icons from '../icons';
 import iss from '../iss';
 import categories from '../constants/categories';
 import ResultTile from '../components/ResultTile';
+import HeaderBar from '../components/HeaderBar';
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
@@ -62,6 +63,7 @@ class CategoryPage extends React.Component {
             type: 'service',
             area: location,
             location: null,
+            catchment: true,
             limit: 3,
         };
 
@@ -100,11 +102,10 @@ class CategoryPage extends React.Component {
     }
 
     render(): React.Element {
-        var location = sessionstorage.getItem('location');
-
         return (
-            <div>
+            <div className="CategoryPage">
                 <mui.AppBar
+                    className="AppBar"
                     title={this.category.name}
                     iconElementLeft={
                         <mui.IconButton
@@ -115,16 +116,39 @@ class CategoryPage extends React.Component {
                     }
                 />
 
-                <div>
-                    Searching for <b>{this.category.name}</b> in
-                    <b> {location} </b>
-                    (<Router.Link
-                        to="location"
-                        query={{
-                            next: this.getPath(),
-                        }}
-                     >Change</Router.Link>).
-                </div>
+                <HeaderBar
+                    primaryText={
+                        this.state.meta ?
+                            <div>
+                                I found {this.state.meta.total_count}{' '}
+                                {this.category.name.toLocaleLowerCase()}{' '}
+                                services serving{' '}
+                                {this.state.meta.location.name},{' '}
+                                {this.state.meta.location.state}.
+                            </div>
+                        :
+                            <div>Searching...</div>
+                    }
+                    secondaryText={
+                        <div>
+                            <Router.Link
+                                to="location"
+                                query={{
+                                    next: this.getPath(),
+                                }}
+                             >Change what you need</Router.Link>
+                             <icons.LogoLight className="Logo push-up" />
+                         </div>
+                    }
+                />
+
+                {this.state.meta ?
+                    ''
+                :
+                    <div className="progress">
+                        <mui.CircularProgress mode="indeterminate" />
+                    </div>
+                }
 
                 {this.state.error ?
                     <div>
