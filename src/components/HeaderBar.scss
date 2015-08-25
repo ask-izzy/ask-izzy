@@ -19,13 +19,16 @@
     .secondary {
         font-weight: 400;
         font-size: 18px;
-        padding-bottom: 1em;
+        padding-bottom: 25px;
     }
 
     .Logo {
         width: auto !important;
         height: 64px !important;
         float: right;
+
+        position: relative;
+        top: -5px;
 
         transform: rotate(5deg);
 

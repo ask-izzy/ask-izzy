@@ -126,6 +126,7 @@ class CategoryPage extends React.Component {
                                 services for{' '}
                                 {this.state.meta.location.name},{' '}
                                 {this.state.meta.location.state}.
+                                <icons.LogoLight className="Logo" />
                             </div>
                         :
                             <div>Searching...</div>
@@ -137,13 +138,12 @@ class CategoryPage extends React.Component {
                                 query={{
                                     next: this.getPath(),
                                 }}
-                             >Change what you need</Router.Link>
-                             <icons.LogoLight className="Logo push-up" />
+                            >Change what you need</Router.Link>
                          </div>
                     }
                 />
 
-                {this.state.meta ?
+                {this.state.meta || this.state.error ?
                     ''
                 :
                     <div className="progress">
