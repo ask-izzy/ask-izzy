@@ -14,6 +14,7 @@ import sessionstorage from "sessionstorage";
 import icons from '../icons';
 import iss from '../iss';
 import categories from '../constants/categories';
+import Infobox from '../components/Infobox';
 import ResultTile from '../components/ResultTile';
 import HeaderBar from '../components/HeaderBar';
 
@@ -65,6 +66,32 @@ class CategoryPage extends React.Component {
         } else if (this.props.params.search) {
             return this.props.params.search;
         }
+    }
+
+    // flow:disable not supported yet
+    get results(): Array<Object> {
+        var objects;
+
+        if (this.state.objects) {
+            objects = Array.from(this.state.objects);
+        } else {
+            objects = [];
+        }
+
+        /* splice in an info box if it exists */
+        try {
+            var infobox = this.category.info;
+
+            if (infobox) {
+                objects.splice(1, 0, {
+                    infobox: true,
+                    node: infobox,
+                });
+            }
+        } catch (e) {
+        }
+
+        return objects;
     }
 
     componentDidMount(): void {
@@ -177,10 +204,14 @@ class CategoryPage extends React.Component {
                 }
 
                 <mui.List className="List results">{
-                    // FIXME: crisis tiles
-                    (this.state.objects || []).map((object, index) => {
-                        return <ResultTile object={object} key={index} />;
-                    })
+                    this.results.map((object, index) =>
+                        object.infobox ?
+                            <div key={index}>
+                                {React.addons.cloneWithProps(object.node)}
+                            </div>
+                        :
+                            <ResultTile object={object} key={index} />
+                    )
                 }</mui.List>
             </div>
         );

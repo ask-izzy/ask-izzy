@@ -1,4 +1,7 @@
 /* @flow */
+import React from "react";
+
+import Infobox from "../components/Infobox";
 import icons from "../icons";
 
 class Category {
@@ -7,12 +10,14 @@ class Category {
     byline: string;
     icon: ReactComponent;
     search: string;
+    info: ?ReactElement;
 
     constructor(props: {
         name: string,
         byline: string,
         icon: ReactComponent,
-        search: string
+        search: string,
+        info?: ReactElement,
     }) {
         this.name = props.name;
         this.byline = props.byline;
@@ -22,6 +27,7 @@ class Category {
             .replace(/[^A-Za-z0-9-_]+/g, '-')
             .toLowerCase();
         this.search = props.search;
+        this.info = props.info;
     }
 }
 
@@ -31,6 +37,13 @@ var categories:Array<Category> = [
         byline: "Find a place to stay",
         icon: icons.House,
         search: 'housing',
+        info: (
+            <Infobox href="#" linkText="Housing information">
+                It's important to act early on housing. These services can
+                help to find a place to stay, or rental assistance to
+                help you stay in your current house.
+            </Infobox>
+        ),
     }),
     new Category({
         name: "Food",
