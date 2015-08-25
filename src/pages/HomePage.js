@@ -23,10 +23,12 @@ class HomePage extends React.Component {
                         primaryText="What do you need?"
                         secondaryText="Select a category or search below"
                     >
-                        <input
-                            className="search"
-                            type="search"
-                            placeholder="Blankets"></input>
+                        <form className="search">
+                            <input
+                                type="search"
+                                placeholder="Search; e.g. pets, utility bills"
+                            />
+                        </form>
                     </HeaderBar>
                 </div>
 
