@@ -9,8 +9,9 @@ install:
 
 cache:
   directories:
-    - node_modules_cache
+    - node_modules_cache/
     - ~/.nvm/versions/
+    - node_modules/flow-bin/
 
 script:
   - script/typecheck
