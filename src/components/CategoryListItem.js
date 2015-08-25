@@ -35,7 +35,11 @@ class CategoryListItem extends React.Component {
                     />
                 }
 
-                primaryText={this.props.category.name}
+                primaryText={
+                    <div className="primaryText">
+                        {this.props.category.name}
+                    </div>
+                }
                 secondaryText={this.props.category.byline}
                 secondaryTextLines={1}
                 leftIcon={
