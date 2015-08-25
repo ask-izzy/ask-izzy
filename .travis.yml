@@ -12,6 +12,7 @@ cache:
     - node_modules_cache/
     - ~/.nvm/versions/
     - node_modules/flow-bin/
+    - node_modules/.bin/flow
 
 script:
   - script/typecheck
