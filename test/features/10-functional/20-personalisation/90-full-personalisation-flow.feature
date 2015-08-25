@@ -16,7 +16,7 @@ Feature: Personalisation
 
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
-        And search box should contain "Richmond VIC"
+        And search box should contain "Richmond, Victoria"
 
         When I click on "Done"
         # FIXME: more personalisation steps go in here

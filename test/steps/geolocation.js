@@ -8,15 +8,16 @@
 
 import Yadda from 'yadda';
 
+import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
 import { gotoUrl } from '../support/webdriver';
 
 module.exports = (function() {
-    return Yadda.localisation.English.library()
+    return Yadda.localisation.English.library(dictionary)
         .given("control of geolocation", unpromisify(mockGeolocation))
-        .given("I'm at (\\d+.\\d+[NS]) (\\d+.\\d+[EW])",
-               unpromisify(setLocationFromCoords))
+        .given("I'm at $LATITUDE $LONGITUDE", unpromisify(sendCoords))
         .given('my location is "$STRING"', unpromisify(setLocation))
+        .given('my location is $LATITUDE $LONGITUDE', unpromisify(setCoords))
         .when('I deny access to geolocation',
               unpromisify(disableGeolocation));
 })();
@@ -61,27 +62,14 @@ async function mockGeolocation(): Promise<void> {
 }
 
 /**
- * setLocationFromCoords:
+ * sendCoords:
  *
  * Mock geolocation to set coordinates.
  *
  * Navigating to a new URL undoes the mock.
  */
-async function setLocationFromCoords(latitude: string,
-                                     longitude: string): Promise<void> {
-
-    latitude = latitude
-        .replace(/N$/, '')
-        .replace(/(.+)S$/, '-$1');
-
-    latitude = parseFloat(latitude);
-
-    longitude = longitude
-        .replace(/E$/, '')
-        .replace(/(.+)W$/, '-$1');
-
-    longitude = parseFloat(longitude);
-
+async function sendCoords(latitude: number, longitude: number): Promise<void>
+{
     await this.driver.executeScript((obj) => {
         mockGeolocationSuccess(obj);
     },
@@ -103,6 +91,22 @@ async function setLocation(location: string): Promise<void> {
     await this.driver.executeScript((location) => {
         sessionStorage.setItem("location", location);
     }, location);
+}
+
+/**
+ * setCoords:
+ * Set the user's coordinates in the browser's session
+ */
+async function setCoords(latitude: number, longitude: number): Promise<void> {
+    await gotoUrl(this.driver, '/');  // go anywhere to start the session
+    await this.driver.executeScript((coords) => {
+        sessionStorage.setItem("coordinates", JSON.stringify(coords));
+    },
+
+    {
+        latitude: latitude,
+        longitude: longitude,
+    });
 }
 
 async function disableGeolocation(): Promise {

@@ -10,6 +10,7 @@ import _ from 'underscore';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
 import sessionstorage from "sessionstorage";
+import { debounce } from "core-decorators";
 
 import Location from '../geolocation';
 import Maps from '../maps';
@@ -23,6 +24,11 @@ var GeoLocationState = {
     FAILED: 3,
 };
 
+var AutocompleteState = {
+    NOT_SEARCHING: 0,
+    SEARCHING: 1,
+};
+
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
 class LocationPage extends React.Component {
@@ -30,7 +36,10 @@ class LocationPage extends React.Component {
         super(props);
         this.state = {
             geolocation: GeoLocationState.NOT_STARTED,
+            autocompletion: AutocompleteState.NOT_SEARCHING,
             locationName: '',
+            locationCoords: {},
+            autocompletions: [],
         };
     }
 
@@ -43,6 +52,13 @@ class LocationPage extends React.Component {
                 lng: location.coords.longitude,
             },
         });
+        /* store these coordinates for the session so we can use them to
+         * provide additional info for autocomplete, distances, ISS search
+         * weighting, etc. */
+        sessionstorage.setItem('coordinates', JSON.stringify({
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+        }));
 
         /* return true if the types includes one of our interesting
          * component types */
@@ -62,9 +78,9 @@ class LocationPage extends React.Component {
                     /*::`*/
                     for (component of geocodedLocation.address_components)
                     if (interestingComponent(component.types))
-                        component.short_name
+                        component.long_name
                     /*::`*/
-                ].join(' ');
+                ].join(', ');
 
                 return {
                     location: location,
@@ -110,11 +126,81 @@ class LocationPage extends React.Component {
         this.replaceWith(this.getQuery().next);
     }
 
+    /**
+     * autoCompleteSuburb:
+     * Take a search string and (optionally) the user's current location
+     * and return a promise for an array of possible matches.
+     */
+    async autoCompleteSuburb(input: string, location: ?Object):
+        Promise<Array<Object>>
+    {
+        var maps = await Maps();
+        var request = {
+            input: input,
+            types: ['geocode'],
+            componentRestrictions: {
+                country: 'au',
+            },
+            location: null,
+            radius: null,
+        };
+
+        /* If the user has coordinates set in this session, use them */
+        try {
+            var location = JSON.parse(sessionstorage.getItem('coordinates'));
+            request.location = new maps.api.LatLng(location.latitude,
+                                                   location.longitude);
+            request.radius = 10000;  /* 10 km */
+        } catch (e) {
+        }
+
+        console.log("Autocompleting", request);
+
+        var completions = await maps.autocompletePlaces(request);
+
+        return [
+            /*::{_:`*/
+            for (completion of completions)
+            if (_.contains(completion.types, 'locality'))
+            {
+                suburb: completion.terms[0].value,
+                state: completion.terms[1].value,
+            }
+            /*::`}*/
+        ];
+    }
+
+    /**
+     * triggerAutocomplete:
+     *
+     * Trigger an autocomplete after a 500ms debounce.
+     */
+    /*::__(){`*/@debounce(500)/*::`}*/
+    triggerAutocomplete(input: string): void {
+        this.autoCompleteSuburb(input, this.state.locationCoords)
+            .then(results => {
+                console.log("Done", results);
+                this.setState({
+                    autocompletions: results,
+                    autocompletion: AutocompleteState.NOT_SEARCHING,
+                });
+            })
+
+            .catch(() => {
+                this.setState({
+                    autocompletion: AutocompleteState.NOT_SEARCHING,
+                });
+            });
+    }
+
     onSearchChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {
             this.setState({
                 locationName: event.target.value,
+                autocompletion: AutocompleteState.SEARCHING,
             });
+
+            this.triggerAutocomplete(this.state.locationName);
         }
     }
 
@@ -197,7 +283,45 @@ class LocationPage extends React.Component {
                             leftIcon={<icons.Cross />}
                         />
                     : ''
+                }{
+                    /* any autocompletions we currently have */
+                    this.state.autocompletions.map((result, index) =>
+                        <mui.ListItem
+                            key={index}
+                            primaryText={
+                                <div className="suburb">
+                                    {result.suburb}
+                                </div>
+                            }
+                            secondaryText={
+                                <div className="state">
+                                    {result.state}
+                                </div>
+                            }
+                            onTouchTap={(event) => {
+                                /* set the text box to this value
+                                 * and remove the autocompletions */
+                                var locationName =
+                                    `${result.suburb}, ${result.state}`;
+
+                                this.setState({
+                                    locationName: locationName,
+                                    autocompletions: [],
+                                });
+                            }}
+
+                        />
+                    )
                 }</mui.List>
+                {
+                    this.state.autocompletion == AutocompleteState.SEARCHING ?
+                        <div className="progress">
+                            <mui.CircularProgress
+                                mode="indeterminate"
+                            />
+                        </div>
+                    : ''
+                }
                 <div className="done-button">
                     <mui.FlatButton
                         label="Done"

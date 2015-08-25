@@ -19,6 +19,16 @@
         margin-left: -15px !important;
     }
 
+    .progress {
+        width: 100%;
+
+        & > * {
+            display: block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+    }
+
     .done-button {
         width: 100%;
 

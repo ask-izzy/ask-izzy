@@ -12,7 +12,7 @@ import unpromisify from "../support/yadda-promise";
 
 module.exports = (function() {
 
-    async function seeTheResults(table) {
+    async function seeTheResults(table: Array<Object>): Promise<void> {
         for (var key of _.keys(table[0])) {
             var class_ = key.match(/[(](.*)[)]/)[1];
 

@@ -57,12 +57,24 @@ class CategoryPage extends React.Component {
                              {next: this.getPath()});
         }
 
-        iss('search/', {
+        var request = {
             q: this.category.search,
             type: 'service',
-            area: location || 'melbourne vic',
+            area: location,
+            location: null,
             limit: 3,
-        })
+        };
+
+        /* if we have coordinates add them to the request */
+        try {
+            var coordinates =
+                JSON.parse(sessionstorage.getItem('coordinates'));
+            request.location =
+                `${coordinates.longitude}E${coordinates.latitude}N`;
+        } catch (e) {
+        }
+
+        iss('search/', request)
             .then(data => {
                 this.setState({
                     meta: data.meta,

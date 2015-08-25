@@ -18,6 +18,7 @@ module.exports = (function() {
     return Yadda.localisation.English.library()
         .when('I visit $URL', unpromisify(visitUrl))
         .when('I click on "$STRING"', unpromisify(clickLink))
+        .when('I search for "$STRING"', unpromisify(doSearch))
         .then('I should be at $URL', unpromisify(checkURL))
         .then('I should see "$STRING"', unpromisify(thenISee))
         .then('search box should contain "$STRING"',
@@ -36,7 +37,7 @@ async function visitUrl(url: string): Promise {
  * Returns: a promise that resolves when the link is identified and
  * clicked.
  */
-async function clickLink(link: string): Promise {
+async function clickLink(link: string): Promise<void> {
     await this.driver.findElement(By.xpath(
         /* any 'a' element who has a descendent text node containing
          * the link text */
@@ -48,20 +49,36 @@ async function clickLink(link: string): Promise {
         .click();
 }
 
-async function checkURL(expected: string): Promise {
+async function checkURL(expected: string): Promise<void> {
     var browserPath = Url.parse(await this.driver.getCurrentUrl()).path;
 
     assert.equal(browserPath, expected);
 }
 
-async function thenISee(expected: string): Promise {
+async function thenISee(expected: string): Promise<void> {
     await assert.textIsVisible(this.driver, expected);
 }
 
-async function searchContains(expected: string): Promise {
-    var value = await this.driver.findElement(By.css(
+/**
+ * getSearchElement:
+ *
+ * Get a search element.
+ */
+function getSearchElement(driver: Webdriver.WebDriver):
+    Promise<Webdriver.WebElement>
+{
+    return driver.findElement(By.css(
         'input[type=search]'
-    ))
+    ));
+}
+
+async function doSearch(search: string): Promise<void> {
+    await getSearchElement(this.driver)
+        .sendKeys(search);
+}
+
+async function searchContains(expected: string): Promise<void> {
+    var value = await getSearchElement(this.driver)
         .getAttribute('value');
 
     assert.equal(value, expected);
