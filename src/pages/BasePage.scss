@@ -8,19 +8,4 @@
         background-color: white;
     }
 
-    & > footer {
-        color: $brand-text-mid;
-        background-color: $brand-bg-dark;
-
-        padding: 10px 0;
-
-        & > div {
-            margin: 5px 15px;
-        }
-
-        a {
-           color: white;
-           text-decoration: none;
-        }
-    }
 }
