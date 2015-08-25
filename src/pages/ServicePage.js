@@ -51,6 +51,7 @@ class ServicePage extends React.Component {
                         title={object.site.name}
                         iconElementLeft={
                             <mui.IconButton
+                                className="BackButton"
                                 onTouchTap={this.goBack.bind(this)}
                             >
                                 <NavigationArrowBack />

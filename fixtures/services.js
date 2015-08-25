@@ -6,11 +6,16 @@ module.exports = {
         site: {
             name: "My Housing Service",
         },
+        description: "A housing service for people.",
+        catchment: "Carlton",
+        eligibility_info: "",
+        ineligibility_info: "",
         service_types: ['Housing Service'],
         now_open: {
             now_open: false,
         },
         opening_hours: [],
+        phones: [],
     },
     youthSupportNet: {
         id: 222,

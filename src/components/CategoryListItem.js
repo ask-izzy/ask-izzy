@@ -27,24 +27,27 @@ class CategoryListItem extends React.Component {
 
         return (
             <mui.ListItem
-                href={this.makeHref('category',
-                                    {page: this.props.category.key})}
-                onTouchTap={(event) => {
-                    this.transitionTo('category',
-                                      {page: this.props.category.key});
-                }}
+                className="CategoryListItem"
+                containerElement={
+                    <Router.Link
+                        to="category"
+                        params={{page: this.props.category.key}}
+                    />
+                }
 
                 primaryText={this.props.category.name}
                 secondaryText={this.props.category.byline}
-                secondaryTextLines={2}
+                secondaryTextLines={1}
                 leftIcon={
                     <Icon className="ColoredIcon icon-fg-color" />
                 }
                 rightIcon={
                     <icons.Chevron className="ColoredIcon icon-fg-color" />
                 }
-            >
-            </mui.ListItem>
+
+                disableFocusRipple={true}
+                disableTouchRipple={true}
+            />
         );
     }
 }

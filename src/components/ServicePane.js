@@ -22,31 +22,27 @@ export default class ServicePane extends React.Component {
     render(): React.Element {
         var object = this.props.service;
         return (
-            <div>
-                <mui.Paper>
-                    <p>
-                        {object.name}
-                    </p>
-                    <p>
-                        {object.description}
-                    </p>
-                </mui.Paper>
-                <mui.Paper>
+            <div className="ServicePane">
+                <main>
+                    <h2 className="name">{object.name}</h2>
+                    <h3 className="description">
+                        {object.description.split('.')[0] + '.'}
+                    </h3>
+
+                    <hr />
+
                     <OpeningTimes object={object} />
-                </mui.Paper>
-                <mui.Paper>
+                    <hr />
                     <Address {...object.location} />
-                </mui.Paper>
+                    <hr />
+                    <CollapsedPhones phones={object.phones} />
+                </main>
 
-                <CollapsedPhones phones={object.phones} />
-
-                <mui.Paper>
-                    <Eligibility
-                        catchment={object.catchment}
-                        eligibility_info={object.eligibility_info}
-                        ineligibility_info={object.ineligibility_info}
-                    />
-                </mui.Paper>
+                <Eligibility
+                    catchment={object.catchment}
+                    eligibility_info={object.eligibility_info}
+                    ineligibility_info={object.ineligibility_info}
+                />
             </div>
         );
     }

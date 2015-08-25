@@ -13,12 +13,23 @@ app.use(cors());
 
 app.get('/api/v3/search/', (req, res) => {
     res.json({
+        meta: {
+            total_count: 3,
+            location: {
+                suburb: "Richmond",
+                state: "VIC",
+            },
+        },
         objects: [
             services.housingService,
             services.youthSupportNet,
             services.susansHouse,
         ],
     });
+});
+
+app.get('/api/v3/service/111/', (req, res) => {
+    res.json(services.housingService);
 });
 
 app.listen(5000);

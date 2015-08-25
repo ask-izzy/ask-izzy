@@ -33,16 +33,19 @@ class ResultTile extends React.Component {
         return (
             <mui.ListItem
                 className="ResultTile"
-                href={this.makeHref('service', {id: object.id})}
-                onTouchTap={(event) => {
-                    this.transitionTo('service', {id: object.id});
-                }}
-
-                rightIcon={
-                    <icons.Chevron
-                        className="ColoredIcon icon-fg-color"
+                containerElement={
+                    <Router.Link
+                        to="service"
+                        params={{id: object.id}}
                     />
                 }
+
+                rightIcon={
+                    <icons.Chevron className="ColoredIcon icon-fg-color" />
+                }
+
+                disableFocusRipple={true}
+                disableTouchRipple={true}
             >
                 <h2 className="name">{object.name}</h2>
                 <div className="site_name">{object.site.name}</div>

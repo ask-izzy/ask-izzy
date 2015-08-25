@@ -17,3 +17,13 @@ Feature: Category page
         Emergency Accom     | Youth Support Net
         Womens Refuge       | Susan's House
         -------------------------------------------
+
+    Scenario: Navigate to a service and back to a category
+        Given my location is "Melbourne VIC"
+        When I visit /category/housing
+        And I click on "Housing Service"
+        Then I should see "A housing service for people."
+
+        When I click back from the title bar
+        Then I should see "Emergency Accom"
+        And I should be at /category/housing

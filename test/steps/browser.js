@@ -19,6 +19,8 @@ module.exports = (function() {
         .when('I visit $URL', unpromisify(visitUrl))
         .when('I click on "$STRING"', unpromisify(clickLink))
         .when('I search for "$STRING"', unpromisify(doSearch))
+        .when('I click back from the title bar',
+              unpromisify(clickBack))
         .then('I should be at $URL', unpromisify(checkURL))
         .then('I should see "$STRING"', unpromisify(thenISee))
         .then('search box should contain "$STRING"',
@@ -45,6 +47,13 @@ async function clickLink(link: string): Promise<void> {
         `//${tag}
            [normalize-space(.//text()) = normalize-space('${link}')]`
                            ).join('|')
+    ))
+        .click();
+}
+
+async function clickBack(): Promise<void> {
+    await this.driver.findElement(By.css(
+        'button.BackButton'
     ))
         .click();
 }

@@ -109,6 +109,7 @@ class CategoryPage extends React.Component {
                     title={this.category.name}
                     iconElementLeft={
                         <mui.IconButton
+                            className="BackButton"
                             onTouchTap={this.goBack.bind(this)}
                         >
                             <NavigationArrowBack />

@@ -32,10 +32,10 @@ class CollapsedPhones extends React.Component {
             }
 
             return (
-                <mui.Paper>
+                <div>
                     <Phone {...first} />
                     {extras}
-                </mui.Paper>
+                </div>
             );
 
         } else {

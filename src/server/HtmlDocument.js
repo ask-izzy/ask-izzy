@@ -83,11 +83,6 @@ class HtmlDocument extends React.Component {
             />)
         }
 
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        />
-
         <link rel="stylesheet"
             type="text/css"
             href="//cloud.typography.com/7948374/730248/css/fonts.css"
