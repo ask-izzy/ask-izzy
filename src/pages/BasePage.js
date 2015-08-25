@@ -32,14 +32,6 @@ export default class BasePage extends React.Component {
                 <main>
                     <Router.RouteHandler />
                 </main>
-                <footer className="branding-footer-container">
-                    <div>
-                        <a href="#">About Ask Izzy</a>
-                    </div>
-                    <div>
-                        Supported by
-                    </div>
-                </footer>
             </div>
         );
     }

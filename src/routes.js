@@ -19,11 +19,6 @@ export default <Router.Route
         handler={BasePage}
     >
         <Router.Route
-            name="home"
-            path="/"
-            handler={HomePage}
-        />
-        <Router.Route
             name="styleguideItem"
             path="/styleGuide/component/:componentName"
             handler={StyleGuideItem}
@@ -34,25 +29,31 @@ export default <Router.Route
             handler={StyleGuideList}
         />
         <Router.Route
-            name="category"
-            path="/category/:page"
-            handler={CategoryPage}
-        />
-        <Router.Route
-            name="search"
-            path="/search/:search"
-            handler={CategoryPage}
-        />
-        <Router.Route
-            name="service"
-            path="/service/:id"
-            handler={ServicePage}
-        />
-        <Router.Route
-            name="location"
-            path="/personalise/location"
-            handler={LocationPage}
-        />
+            name="home"
+            path="/"
+            handler={HomePage}
+        >
+            <Router.Route
+                name="category"
+                path="/category/:page"
+                handler={CategoryPage}
+            />
+            <Router.Route
+                name="search"
+                path="/search/:search"
+                handler={CategoryPage}
+            />
+            <Router.Route
+                name="service"
+                path="/service/:id"
+                handler={ServicePage}
+            />
+            <Router.Route
+                name="location"
+                path="/personalise/location"
+                handler={LocationPage}
+            />
 
-        <Router.DefaultRoute handler={ErrorPage}/>
+            <Router.DefaultRoute handler={ErrorPage}/>
+        </Router.Route>
     </Router.Route>;

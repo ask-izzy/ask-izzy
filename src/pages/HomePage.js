@@ -64,6 +64,15 @@ class HomePage extends React.Component {
                 <div className="body">
                     <NavBar />
                 </div>
+
+                <footer className="branding-footer-container">
+                    <div>
+                        <a href="#">About Ask Izzy</a>
+                    </div>
+                    <div>
+                        Supported by
+                    </div>
+                </footer>
             </div>
         );
     }
