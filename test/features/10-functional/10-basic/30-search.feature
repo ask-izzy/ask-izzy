@@ -5,7 +5,7 @@ Feature: Search
     # I want to see those search results
     # So that I can search for things not in the category list
 
-    Scenario: Search for "pets"
+    Scenario: Search for "pets" using keyboard
         Given my location is "Melbourne VIC"
         When I visit /
         And I search for "pet food" and press enter
@@ -19,3 +19,10 @@ Feature: Search
         Emergency Accom     | Youth Support Net
         Womens Refuge       | Susan's House
         -------------------------------------------
+
+    Scenario: Search for pets using keyboard and mouse
+        Given my location is "Melbourne VIC"
+        When I visit /
+        And I search for "pet food"
+        And I click on the search icon
+        Then I should be at /search/pet%20food
