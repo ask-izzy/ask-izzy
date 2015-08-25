@@ -9,7 +9,7 @@
 import assert from '../support/page-assertions';
 import Url from 'url';
 import Yadda from 'yadda';
-import { By } from 'selenium-webdriver';
+import { By, Key } from 'selenium-webdriver';
 
 import unpromisify from '../support/yadda-promise';
 import { gotoUrl } from '../support/webdriver';
@@ -19,6 +19,8 @@ module.exports = (function() {
         .when('I visit $URL', unpromisify(visitUrl))
         .when('I click on "$STRING"', unpromisify(clickLink))
         .when('I search for "$STRING"', unpromisify(doSearch))
+        .when('I search for "$STRING" and press enter',
+              unpromisify(doSearchAndEnter))
         .when('I click back from the title bar',
               unpromisify(clickBack))
         .then('I should be at $URL', unpromisify(checkURL))
@@ -84,6 +86,11 @@ function getSearchElement(driver: Webdriver.WebDriver):
 async function doSearch(search: string): Promise<void> {
     await getSearchElement(this.driver)
         .sendKeys(search);
+}
+
+async function doSearchAndEnter(search: string): Promise<void> {
+    await getSearchElement(this.driver)
+        .sendKeys(search + Key.ENTER);
 }
 
 async function searchContains(expected: string): Promise<void> {

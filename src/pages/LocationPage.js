@@ -122,6 +122,7 @@ class LocationPage extends React.Component {
     }
 
     onTouchDoneButton(event: Event): void {
+        event.preventDefault();
         sessionstorage.setItem('location', this.state.locationName);
         this.replaceWith(this.getQuery().next);
     }

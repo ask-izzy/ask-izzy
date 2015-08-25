@@ -1,10 +1,24 @@
+/* @flow */
+
+"use strict";
+
 import React from "react";
+import Router from "react-router";
+import reactMixin from "react-mixin";
 
 import HeaderBar from "../components/HeaderBar";
 import NavBar from "../components/NavBar";
 import icons from "../icons";
 
+/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class HomePage extends React.Component {
+
+    onSearchSubmit(event: Event): void {
+        event.preventDefault();
+
+        var search =  this.refs.search.getDOMNode().value;
+        this.transitionTo('search', {search: search});
+    }
 
     render(): React.Element {
         return (
@@ -24,8 +38,12 @@ class HomePage extends React.Component {
                         primaryText="What do you need?"
                         secondaryText="Select a category or search below"
                     >
-                        <form className="search">
+                        <form
+                            className="search"
+                            onSubmit={this.onSearchSubmit.bind(this)}
+                        >
                             <input
+                                ref="search"
                                 type="search"
                                 placeholder="Search; e.g. pets, utility bills"
                             />

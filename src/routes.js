@@ -39,6 +39,11 @@ export default <Router.Route
             handler={CategoryPage}
         />
         <Router.Route
+            name="search"
+            path="/search/:search"
+            handler={CategoryPage}
+        />
+        <Router.Route
             name="service"
             path="/service/:id"
             handler={ServicePage}
