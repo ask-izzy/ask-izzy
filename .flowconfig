@@ -3,6 +3,7 @@
 .*invalidPackageJson/package.json
 .*/node_modules/.*/examples/.*
 .*/node_modules/.*/test/.*
+.*/node_modules/fbjs/.*
 
 [include]
 

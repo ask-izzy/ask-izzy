@@ -39,8 +39,10 @@
     "underscore.string": "3.2.0"
   },
   "devDependencies": {
+    "autoprefixer-loader": "^2.0.0",
     "babel-jscs": "2.0.3",
     "cors": "2.7.1",
+    "extract-text-webpack-plugin": "0.8.2",
     "flow-bin": "0.14.0",
     "jscs": "2.1.0",
     "jscs-jsdoc": "1.1.0",
@@ -53,7 +55,7 @@
     "optimist": "0.6.0",
     "selenium-webdriver": "2.46.1",
     "supports-color": "1.2.0",
-    "webpack": "1.10.1",
+    "webpack": "1.12.0",
     "webpack-dev-server": "1.10.1",
     "yadda": "0.15.2"
   }

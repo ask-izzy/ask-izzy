@@ -10,6 +10,7 @@ import writeStats  from "./utils/write-stats";
 import notifyStats from "./utils/notify-stats";
 import env         from "./env";
 import progress    from "./progress";
+import extractText from "./extract-text";
 
 var assetsPath = path.resolve(__dirname, "../public/static");
 
@@ -20,7 +21,10 @@ var webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
 module.exports = {
     devtool: "#source-map",
     entry: {
-        main: "./src/client-entry.js",
+        main: [
+            "./src/client-entry.js",
+            "./src/styles/bundle.scss",
+        ],
     },
     output: {
         path: assetsPath,
@@ -35,12 +39,9 @@ module.exports = {
                 loader: "file",
             },
             {
-                test: /\.css$/,
-                loader: "style!css",
-            },
-            {
                 test: /\.scss$/,
-                loader: "style!css!sass",
+                exclude: /node_modules/,
+                loader: extractText.loaders,
             },
             {
                 test: /\.js$/,
@@ -51,7 +52,6 @@ module.exports = {
     },
     progress: true,
     plugins: [
-
         new webpack.NoErrorsPlugin(),
 
         env("development"),
@@ -60,6 +60,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             'es6-promise': 'es6-promise',
         }),
+
+        extractText.plugin,
 
         // stats
         function() {
