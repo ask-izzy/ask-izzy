@@ -1,5 +1,6 @@
 /* @flow */
 import React from "react";
+import { slugify } from "underscore.string";
 
 import Infobox from "../components/Infobox";
 import icons from "../icons";
@@ -22,10 +23,7 @@ class Category {
         this.name = props.name;
         this.byline = props.byline;
         this.icon = props.icon;
-        this.key = this.name
-            .replace(/&/g, 'and')
-            .replace(/[^A-Za-z0-9-_]+/g, '-')
-            .toLowerCase();
+        this.key = slugify(this.name);
         this.search = props.search;
         this.info = props.info;
     }

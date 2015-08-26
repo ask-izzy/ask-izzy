@@ -42,6 +42,7 @@
             margin-right: auto;
             padding: 5px;
 
+            -webkit-appearance: none;
             border-radius: 3px;
             border: none;
         }
@@ -51,7 +52,7 @@
             top: 0;
             right: 5%;
             width: 28px !important;
-            height: auto !important;
+            height: 28px !important;
         }
     }
 }

@@ -22,7 +22,7 @@ class OpeningTimes extends React.Component {
 
         return (
             <div className="TransportTime">
-                <icons.Walk className="ColoredIcon brand-bg-dark" />
+                <icons.Walk className="ColoredIcon brand-text-dark" />
                 <span className="time">FIXME</span>&nbsp;
                 <span className="location">transport time</span>
             </div>

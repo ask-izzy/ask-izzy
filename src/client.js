@@ -8,14 +8,6 @@ import injectTapEventPlugin from "react-tap-event-plugin";
 
 import routes from "./routes";
 
-// Import CSS
-// TODO: styles should not be javascript-dependant
-/* ::` */
-import "!style!css!./styles/normalize.css";
-import "!style!css!sass!./styles/responsive.scss";
-import "!style!css!sass!./styles/components.scss";
-/* ::`; */
-
 // For onTouchTap: see https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
 

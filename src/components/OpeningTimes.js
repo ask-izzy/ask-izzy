@@ -40,7 +40,7 @@ class OpeningTimes extends React.Component {
         if (object.now_open.now_open) {
             return (
                 <div className="OpeningTimes">
-                    <icons.Clock className="ColoredIcon brand-bg-dark" />
+                    <icons.Clock className="ColoredIcon brand-text-dark" />
                     <span className="open">Open now</span>&nbsp;
                     <span className="until">
                         until {formatTime(todayOpen.close)}
@@ -50,7 +50,7 @@ class OpeningTimes extends React.Component {
         } else {
             return (
                 <div className="OpeningTimes">
-                    <icons.Clock className="ColoredIcon brand-bg-dark" />
+                    <icons.Clock className="ColoredIcon brand-text-dark" />
                     <span className="closed">Closed</span>&nbsp;
                     {
                         nextOpen ?
