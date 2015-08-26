@@ -39,7 +39,7 @@ export default function webDriverInstance(): Webdriver.WebDriver {
     var baseCaps: Webdriver.Capabilities = {
         username: process.env.SAUCE_USERNAME,
         accessKey: process.env.SAUCE_ACCESS_KEY,
-        name: `Ask Izzy ${branch} {process.env.TRAVIS_PULL_REQUEST}`,
+        name: `Ask Izzy ${branch} ${process.env.TRAVIS_PULL_REQUEST || ""}`,
         tags: [
             process.env.TRAVIS_PULL_REQUEST || "Manual",
             branch,
