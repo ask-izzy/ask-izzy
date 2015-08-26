@@ -1,0 +1,25 @@
+
+.ColoredIcon {
+    &.icon-fg-color path {
+        fill: $icon-fg-color;
+    }
+
+    &.brand-bg-dark path {
+        fill: $brand-bg-dark;
+    }
+
+    &.size-30 {
+        height: 30px;
+        width: auto;
+    }
+}
+
+.Chevron {
+    padding-right: 0 !important;
+    height: 14px;
+    width: auto;
+
+    path {
+        fill: $icon-chevron-color;
+    }
+}
