@@ -22,3 +22,8 @@ Feature: Location search
         When I click on "Carlton"
         Then search box should contain "Carlton, Victoria"
         And the button "Done" should be enabled
+
+    Scenario: Suburb search normalises spaces
+        When I visit /personalise/location
+        And I search for "  north melbourne"
+        Then search box should contain "north melbourne"

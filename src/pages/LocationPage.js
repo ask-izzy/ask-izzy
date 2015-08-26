@@ -9,6 +9,7 @@ import NavigationArrowBack from
 import _ from 'underscore';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
+import { ltrim } from "underscore.string";
 import sessionstorage from "sessionstorage";
 import { debounce } from "core-decorators";
 
@@ -197,7 +198,7 @@ class LocationPage extends React.Component {
     onSearchChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {
             this.setState({
-                locationName: event.target.value.trim(),
+                locationName: ltrim(event.target.value),
                 autocompletion: AutocompleteState.SEARCHING,
             });
 

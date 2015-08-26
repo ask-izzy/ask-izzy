@@ -34,14 +34,10 @@
     "sessionstorage": "0.0.0",
     "strip-loader": "0.1.0",
     "style-loader": "0.12.3",
-    "iso-http": "0.0.5",
-    "moment": "2.10.6",
     "underscore": "1.8.3",
-    "browser-location": "1.0.0",
-    "has-geolocation": "1.0.0",
-    "react-mixin": "1.7.0",
-    "sessionstorage": "0.0.0",
-    "core-decorators": "0.2.0"
+    "core-decorators": "0.2.0",
+    "install": "~0.1.8",
+    "underscore.string": "3.2.0"
   },
   "devDependencies": {
     "babel-jscs": "2.0.3",
