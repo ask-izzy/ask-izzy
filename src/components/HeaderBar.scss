@@ -11,9 +11,9 @@
 
     .primary {
         font-weight: 500;
-        font-size: 32px;
-        padding-top: 0.5em;
-        padding-bottom: 0.5em;
+        font-size: 23px;
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
 
     .secondary {
@@ -26,9 +26,6 @@
         width: auto !important;
         height: 64px !important;
         float: right;
-
-        position: relative;
-        top: -5px;
 
         transform: rotate(5deg);
 
