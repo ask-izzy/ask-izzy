@@ -39,6 +39,16 @@ export default class BasePage extends React.Component {
                     <div>
                         Supported by
                     </div>
+                    <div className="logos">
+                        <img src="/static/infoxchange.png"
+                        alt="Infoxchange" />
+                        <img src="/static/google.png" alt="Google" />
+                    </div>
+                    <div className="logos">
+                        <img src="/static/rea.png" alt="REA Group" />
+                        <img src="/static/newscorp.png"
+                             alt="News Corp Australia" />
+                    </div>
                 </footer>
             </div>
         );

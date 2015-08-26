@@ -13,6 +13,9 @@
         color: $brand-text-mid;
         background-color: $brand-bg-dark;
 
+        font-size: 14px !important;
+        font-weight: 400 !important;
+
         padding: 10px 0;
 
         & > div {
@@ -22,6 +25,19 @@
         a {
            color: white;
            text-decoration: none;
+        }
+
+        .logos {
+            text-align: center;
+            margin: 10px;
+
+            img {
+                margin-left: 10px;
+                margin-right: 10px;
+
+                height: 25px;
+                width: auto;
+            }
         }
     }
 }
