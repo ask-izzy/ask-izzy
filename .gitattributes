@@ -1,0 +1,2 @@
+src/components.js merge=component-code-generation
+src/styles/bundle.scss merge=scss-code-generation
