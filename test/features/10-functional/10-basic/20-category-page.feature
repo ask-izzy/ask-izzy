@@ -18,6 +18,15 @@ Feature: Category page
         Womens Refuge       | Susan's House
         -------------------------------------------
 
+        And I should see the results
+        -----------------------------
+        Related services (related)
+        =============================
+        Transitional Housing Service
+        -
+        -
+        -----------------------------
+
         And I should see an info box in position 2
         And the info box should contain
         ---------------------------------------------------------------------

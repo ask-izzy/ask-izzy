@@ -5,6 +5,7 @@ module.exports = {
         name: "Housing Service",
         site: {
             name: "My Housing Service",
+            id: 111,
         },
         description: "A housing service for people.",
         catchment: "Carlton",
@@ -16,6 +17,16 @@ module.exports = {
         },
         opening_hours: [],
         phones: [],
+        location: {
+            suburb: 'Richmond',
+        },
+    },
+    housingServiceSibling: {
+        id: 112,
+        name: "Transitional Housing Service",
+        location: {
+            suburb: 'Richmond',
+        },
     },
     youthSupportNet: {
         id: 222,
@@ -28,6 +39,9 @@ module.exports = {
             now_open: true,
         },
         opening_hours: [],
+        location: {
+            suburb: 'Richmond',
+        },
     },
     susansHouse: {
         id: 333,
@@ -40,6 +54,9 @@ module.exports = {
             now_open: true,
         },
         opening_hours: [],
+        location: {
+            suburb: 'Richmond',
+        },
     },
     ixa: {
         "abn": "",
