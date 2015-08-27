@@ -4,10 +4,10 @@ import React from "react";
 import Router from 'react-router';
 
 import BasePage from "./pages/BasePage";
-import CategoryPage from "./pages/CategoryPage";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import LocationPage from "./pages/LocationPage";
+import ResultsListPage from "./pages/ResultsListPage";
 import ServicePage from "./pages/ServicePage";
 
 import StyleGuideList from "./pages/StyleGuideList";
@@ -36,12 +36,12 @@ export default <Router.Route
         <Router.Route
             name="category"
             path="/category/:page"
-            handler={CategoryPage}
+            handler={ResultsListPage}
         />
         <Router.Route
             name="search"
             path="/search/:search"
-            handler={CategoryPage}
+            handler={ResultsListPage}
         />
         <Router.Route
             name="service"
