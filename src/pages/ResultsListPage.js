@@ -71,7 +71,30 @@ class ResultsListPage extends BaseResultsPage {
                 : ''
                 }
 
-                <mui.List className="List results">{
+                <mui.List className="List results">
+                {
+                    this.state.objects ?
+                        <mui.ListItem
+                            className="ViewOnMap"
+                            primaryText="View on a map"
+                            containerElement={
+                                <Router.Link
+                                    to={this.getPathname() + '/map'}
+                                />
+                            }
+                            leftIcon={
+                                <icons.Map />
+                            }
+                            rightIcon={
+                                <icons.Chevron />
+                            }
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
+                        />
+                    :
+                        ''
+                }
+                {
                     this.results.map((object, index) =>
                         object.infobox ?
                             <div key={index}>
