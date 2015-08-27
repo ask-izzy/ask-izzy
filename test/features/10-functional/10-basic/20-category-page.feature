@@ -23,8 +23,8 @@ Feature: Category page
         Related services (related)
         =============================
         Transitional Housing Service
-        -
-        -
+        (nada)
+        (nada)
         -----------------------------
 
         And I should see an info box in position 2
