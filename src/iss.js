@@ -50,6 +50,12 @@ export async function search(
     return await iss('search/', request);
 }
 
+export async function getService(
+    id: number
+): Promise<issService> {
+    return await iss(`service/${id}/`);
+}
+
 async function iss(path: string, data: ?Object): Object {
     var url_: string = ISS_URL || process.env.ISS_URL;
 
