@@ -10,13 +10,13 @@ Feature: Category page
         When I visit /category/housing
         Then I should see "Housing"
         And I should see the results
-        -------------------------------------------
-        Service Name (name) | Site Name (site_name)
-        ===========================================
-        Housing Service     | My Housing Service
-        Emergency Accom     | Youth Support Net
-        Womens Refuge       | Susan's House
-        -------------------------------------------
+        --------------------------------------------------------------------------
+        Service Name (name) | Site Name (site_name) | Related services (related)
+        ==========================================================================
+        Housing Service     | My Housing Service    | Transitional Housing Service
+        Emergency Accom     | Youth Support Net     | (nada)
+        Womens Refuge       | Susan's House         | (nada)
+        --------------------------------------------------------------------------
 
         And I should see an info box in position 2
         And the info box should contain

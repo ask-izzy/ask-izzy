@@ -23,6 +23,10 @@ module.exports = (function() {
                 .map(element => element.getText())
             );
 
+            // replace single hyphen with an empty string (to represent
+            // an empty line)
+            expected = expected.map(text => text == '(nada)' ? '' : text);
+
             assert.deepEqual(actual, expected,
                              `${key} is not correct`);
 
