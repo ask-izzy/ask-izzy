@@ -82,7 +82,6 @@ class ResultsMapPage extends BaseResultsPage {
     }
 
     onMarkerClick(service: Object): void {
-        console.log("service clicked", service);
         this.setState({selectedService: service});
         this.getMap().then(map => {
             map.setCenter({
@@ -108,8 +107,6 @@ class ResultsMapPage extends BaseResultsPage {
             }
         } catch (e) {
         }
-
-        console.log("map height", mapHeight);
 
         return (
             <div className="ResultsMapPage">
