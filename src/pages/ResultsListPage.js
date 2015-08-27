@@ -12,7 +12,7 @@ import reactMixin from "react-mixin";
 import sessionstorage from "sessionstorage";
 
 import icons from '../icons';
-import iss, {search} from '../iss';
+import * as iss from '../iss';
 import categories from '../constants/categories';
 import Infobox from '../components/Infobox';
 import ResultListItem from '../components/ResultListItem';
@@ -110,7 +110,7 @@ class ResultsListPage extends React.Component {
         } catch (e) {
         }
 
-        search(location, coordinates, this.search)
+        iss.search(location, coordinates, this.search)
             .then(data => {
                 this.setState({
                     meta: data.meta,
