@@ -21,10 +21,11 @@ import mui from "material-ui";
 
 export default class SvgIcon#{name} extends React.Component {
 
-    render(): React.Component {
+    render(): React.Element {
         return (
             <mui.SvgIcon
                 {...this.props}
+                className={ this.props.className + " #{name}"}
                 viewBox="#{view_box}"
             >
             #{nodes.join("\n            ")}
@@ -65,7 +66,7 @@ end
 source_dir = ARGV[0] || "../designs/icons/"
 dest_dir = ARGV[1] || "./src/icons/"
 
-source_icons = Dir.glob(source_dir + '/askizzy-icon-*.svg')
+source_icons = Dir.glob(source_dir + '/askizzy-icon-*.svg').sort
 source_icons.each do |source_path|
     class_name = class_name(source_path)
     doc = Document.new(File.read(source_path))

@@ -39,7 +39,7 @@ class ResultTile extends React.Component {
                 }
 
                 rightIcon={
-                    <icons.Chevron className="Chevron" />
+                    <icons.Chevron />
                 }
 
                 disableFocusRipple={true}

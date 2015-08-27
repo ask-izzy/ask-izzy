@@ -46,7 +46,7 @@ class CategoryListItem extends React.Component {
                     <Icon className="ColoredIcon icon-fg-color size-30" />
                 }
                 rightIcon={
-                    <icons.Chevron className="Chevron" />
+                    <icons.Chevron />
                 }
 
                 disableFocusRipple={true}
