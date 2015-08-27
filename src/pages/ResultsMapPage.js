@@ -2,7 +2,7 @@
 
 "use strict";
 
-import { GoogleMap, Marker } from "react-google-maps";
+import { GoogleMap, Marker, InfoWindow } from "react-google-maps";
 import React from 'react';
 import Router from "react-router";
 import NavigationArrowBack from
@@ -46,24 +46,71 @@ class ResultsMapPage extends BaseResultsPage {
         });
     }
 
+    /**
+     * showWholeMap:
+     * Adjust the bounds to show the whole map
+     */
+    showWholeMap(): void {
+        /* update the map bounds */
+        var maps = this.state.maps.api;
+        var bounds = new maps.LatLngBounds;
+
+        for (var object of this.state.objects) {
+            bounds.extend(new maps.LatLng(object.location.point.lat,
+                                          object.location.point.lon));
+        }
+
+        this.getMap().then(map => {
+            map.fitBounds(bounds);
+        });
+    }
+
     componentDidUpdate(prevProps: Object, prevState: Object) {
-        if (this.state.maps && this.state.objects.length) {
-            /* update the map bounds */
-            var maps = this.state.maps.api;
-            var bounds = new maps.LatLngBounds;
-
-            for (var object of this.state.objects) {
-                bounds.extend(new maps.LatLng(object.location.point.lat,
-                                              object.location.point.lon));
-            }
-
-            this.getMap().then(map => {
-                map.fitBounds(bounds);
-            });
+        if (this.state.maps &&
+            this.state.objects &&
+            this.state.objects.length)
+        {
+            this.showWholeMap();
         }
     }
 
+    onMapClick(): void {
+        if (this.state.selectedService) {
+            this.setState({selectedService: null});
+            this.showWholeMap();
+        }
+    }
+
+    onMarkerClick(service: Object): void {
+        console.log("service clicked", service);
+        this.setState({selectedService: service});
+        this.getMap().then(map => {
+            map.setCenter({
+                lat: service.location.point.lat,
+                lng: service.location.point.lon,
+            });
+            map.setZoom(18);
+        });
+    }
+
     render(): React.Element {
+        var mapHeight = 0;
+
+        try {
+            /* calculate the height of the map */
+            mapHeight =
+                document.querySelector('.BrandedPage').offsetHeight -
+                document.querySelector('.AppBar').offsetHeight;
+
+            if (mapHeight > 700) {
+                /* we have space for the footer */
+                mapHeight -= document.querySelector('footer').offsetHeight;
+            }
+        } catch (e) {
+        }
+
+        console.log("map height", mapHeight);
+
         return (
             <div className="ResultsMapPage">
                 <mui.AppBar
@@ -78,29 +125,44 @@ class ResultsMapPage extends BaseResultsPage {
                         </mui.IconButton>
                     }
                 />
-                <div className="Map">{
-                    /* we can't create the map component until the API promise
+                {   /* we can't create the map component until the API promise
                      * resolves */
                     this.state.maps ?
                         <GoogleMap
                             ref="map"
+                            containerProps={{
+                                style: {
+                                    height: mapHeight,
+                                },
+                            }}
                             defaultCenter={{
                                 lat: -34.397,
                                 lng: 150.644,
                             }}
                             defaultZoom={4}
+                            onClick={this.onMapClick.bind(this)}
                         >
-                            {this.state.objects.map(
-                                object => <Marker
+                            {(this.state.objects || []).map(
+                                /* FIXME: need to combine markers at same
+                                 * coordinates */
+                                (object, index) => <Marker
+                                    key={index}
                                     position={{
                                         lat: object.location.point.lat,
                                         lng: object.location.point.lon,
                                     }}
+                                    onClick={this.onMarkerClick.bind(this,
+                                                                     object)}
                                 />
                             )}
                         </GoogleMap>
                     : ''
-                }</div>
+                }
+                <mui.List className="List">{
+                    this.state.selectedService ?
+                        <ResultListItem object={this.state.selectedService} />
+                    : ''
+                }</mui.List>
             </div>
         );
     }

@@ -95,6 +95,7 @@ class BaseResultsPage extends React.Component {
             console.log("Need location");
             this.replaceWith('location', null,
                              {next: this.getPath()});
+            return;
         }
 
         var request = {
