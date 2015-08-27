@@ -20,9 +20,13 @@ declare class GooglePlaces {
     PlacesServiceStatus: Object;
 }
 
+declare class GoogleMap {
+}
+
 declare class GoogleMaps {
     Geocoder(): GoogleMapsGeocoder;
     LatLng(lat: number, lon: number, noWrap: ?boolean): GoogleMapsLatLng;
+    Map(node: Element, obj: Object): GoogleMap;
     places: GooglePlaces;
 }
 
