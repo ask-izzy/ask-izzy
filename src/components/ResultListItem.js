@@ -38,8 +38,7 @@ class ResultListItem extends React.Component {
      */
     /* flow:disable */
     get relatedServices(): Array<Object> {
-        return _.reject(this.state.relatedServices,
-                        service => service.id == this.props.object.id)
+        return this.state.relatedServices
             .slice(0, 4);
     }
 
@@ -50,7 +49,6 @@ class ResultListItem extends React.Component {
     /* flow:disable */
     get nMoreRelatedServices(): number {
         return Math.max(0, this.state.relatedServices.length
-            - 1 /* for ourselves */
             - 4 /* for the relatedServices above */
         );
     }
@@ -62,7 +60,11 @@ class ResultListItem extends React.Component {
             type: 'service',
         })
             .then(data => {
-                this.setState({relatedServices: data.objects});
+                /* remove ourselves */
+                var relatedServices =
+                    _.reject(data.objects,
+                             service => service.id == this.props.object.id);
+                this.setState({relatedServices: relatedServices});
             });
     }
 
