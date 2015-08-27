@@ -2,7 +2,7 @@
 
 "use strict";
 
-import { GoogleMap } from "react-google-maps";
+import { GoogleMap, Marker } from "react-google-maps";
 import React from 'react';
 import Router from "react-router";
 import NavigationArrowBack from
@@ -19,9 +19,25 @@ class ResultsMapPage extends BaseResultsPage {
         super.componentDidMount();
 
         /* request the Google Maps API */
-        Maps().then(() => {
-            this.setState({mapsLoaded: true});
+        Maps().then((maps) => {
+            this.setState({maps: maps});
         });
+    }
+
+    componentDidUpdate(prevProps: Object, prevState: Object) {
+        if (this.state.maps && this.state.objects.length) {
+            /* update the map bounds */
+            var maps = this.state.maps.api;
+            var bounds = new maps.LatLngBounds;
+
+            for (var object of this.state.objects) {
+                bounds.extend(new maps.LatLng(object.location.point.lat,
+                                              object.location.point.lon));
+            }
+
+            // FIXME: racy
+            this.refs.map.fitBounds(bounds);
+        }
     }
 
     render(): React.Element {
@@ -42,14 +58,23 @@ class ResultsMapPage extends BaseResultsPage {
                 <div className="Map">{
                     /* we can't create the map component until the API promise
                      * resolves */
-                    this.state.mapsLoaded ?
+                    this.state.maps ?
                         <GoogleMap
+                            ref="map"
                             defaultCenter={{
                                 lat: -34.397,
                                 lng: 150.644,
                             }}
                             defaultZoom={4}
                         >
+                            {this.state.objects.map(
+                                object => <Marker
+                                    position={{
+                                        lat: object.location.point.lat,
+                                        lng: object.location.point.lon,
+                                    }}
+                                />
+                            )}
                         </GoogleMap>
                     : ''
                 }</div>
