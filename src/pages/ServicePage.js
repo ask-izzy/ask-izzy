@@ -10,7 +10,7 @@ import Router from "react-router";
 import ServicePane from "../components/ServicePane";
 import reactMixin from "react-mixin";
 
-import iss from '../iss';
+import * as iss from '../iss';
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class ServicePage extends React.Component {
@@ -27,7 +27,7 @@ class ServicePage extends React.Component {
      */
 
     componentDidMount(): void {
-        iss(`service/${this.props.params.id}/`)
+        iss.getService(this.props.params.id)
             .then(data => {
                 this.setState({
                     object: data,
