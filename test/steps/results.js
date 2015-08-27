@@ -31,7 +31,7 @@ module.exports = (function() {
 
     async function seeAnInfobox(position: number): Promise<void> {
         var elements = await this.driver.findElements(
-            By.css('.ResultTile, .Infobox')
+            By.css('.ResultListItem, .Infobox')
         );
 
         var classes = await Promise.all(elements.map(

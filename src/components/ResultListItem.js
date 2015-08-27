@@ -14,7 +14,7 @@ import TransportTime from "./TransportTime";
 var palette = colors.getPalette();
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
-class ResultTile extends React.Component {
+class ResultListItem extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
         object: React.PropTypes.object.isRequired,
@@ -30,7 +30,7 @@ class ResultTile extends React.Component {
 
         return (
             <mui.ListItem
-                className="ResultTile"
+                className="ResultListItem"
                 containerElement={
                     <Router.Link
                         to="service"
@@ -59,4 +59,4 @@ class ResultTile extends React.Component {
     }
 }
 
-export default ResultTile;
+export default ResultListItem;

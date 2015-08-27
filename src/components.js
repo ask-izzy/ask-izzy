@@ -9,7 +9,7 @@ import Infobox from './components/Infobox';
 import NavBar from './components/NavBar';
 import OpeningTimes from './components/OpeningTimes';
 import Phone from './components/Phone';
-import ResultTile from './components/ResultTile';
+import ResultListItem from './components/ResultListItem';
 import ServicePane from './components/ServicePane';
 import TransportTime from './components/TransportTime';
 
@@ -24,7 +24,7 @@ export default {
     NavBar: NavBar,
     OpeningTimes: OpeningTimes,
     Phone: Phone,
-    ResultTile: ResultTile,
+    ResultListItem: ResultListItem,
     ServicePane: ServicePane,
     TransportTime: TransportTime,
 };
