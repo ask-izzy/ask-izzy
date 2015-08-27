@@ -3,5 +3,7 @@
 /src/server/webpack-stats.json
 /public/static/*.js
 /public/static/*.js.map
+/public/static/*.css
+/public/static/*.css.map
 npm-debug.log
 .env
