@@ -12,7 +12,7 @@ import reactMixin from "react-mixin";
 import sessionstorage from "sessionstorage";
 
 import icons from '../icons';
-import iss from '../iss';
+import iss, {search} from '../iss';
 import categories from '../constants/categories';
 import Infobox from '../components/Infobox';
 import ResultListItem from '../components/ResultListItem';
@@ -103,25 +103,14 @@ class ResultsListPage extends React.Component {
                              {next: this.getPath()});
         }
 
-        var request = {
-            q: this.search,
-            type: 'service',
-            area: location,
-            location: null,
-            catchment: true,
-            limit: 3,
-        };
-
         /* if we have coordinates add them to the request */
+        var coordinates = null;
         try {
-            var coordinates =
-                JSON.parse(sessionstorage.getItem('coordinates'));
-            request.location =
-                `${coordinates.longitude}E${coordinates.latitude}N`;
+            coordinates = JSON.parse(sessionstorage.getItem('coordinates'));
         } catch (e) {
         }
 
-        iss('search/', request)
+        search(location, coordinates, this.search)
             .then(data => {
                 this.setState({
                     meta: data.meta,
