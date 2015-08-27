@@ -1,5 +1,5 @@
 /* @flow */
-import webpack           from "webpack";
+import webpack from "webpack";
 
 module.exports = function(env: string) {
     return new webpack.DefinePlugin({

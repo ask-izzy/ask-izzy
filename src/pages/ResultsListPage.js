@@ -15,12 +15,12 @@ import icons from '../icons';
 import iss from '../iss';
 import categories from '../constants/categories';
 import Infobox from '../components/Infobox';
-import ResultTile from '../components/ResultTile';
+import ResultListItem from '../components/ResultListItem';
 import HeaderBar from '../components/HeaderBar';
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
-class CategoryPage extends React.Component {
+class ResultsListPage extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {};
@@ -148,7 +148,7 @@ class CategoryPage extends React.Component {
 
     render(): React.Element {
         return (
-            <div className="CategoryPage">
+            <div className="ResultsListPage">
                 <mui.AppBar
                     className="AppBar"
                     title={this.title}
@@ -210,7 +210,7 @@ class CategoryPage extends React.Component {
                                 {React.addons.cloneWithProps(object.node)}
                             </div>
                         :
-                            <ResultTile object={object} key={index} />
+                            <ResultListItem object={object} key={index} />
                     )
                 }</mui.List>
             </div>
@@ -219,4 +219,4 @@ class CategoryPage extends React.Component {
 
 }
 
-export default CategoryPage;
+export default ResultsListPage;

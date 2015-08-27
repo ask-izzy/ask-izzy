@@ -11,6 +11,7 @@ export default class SvgIconHouse extends React.Component {
         return (
             <mui.SvgIcon
                 {...this.props}
+                className={ this.props.className + " House"}
                 viewBox="0 0 64 64"
             >
             <path d='     M43.362,58'/>

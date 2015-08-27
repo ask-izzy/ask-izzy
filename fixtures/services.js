@@ -31,6 +31,7 @@ module.exports = {
     youthSupportNet: {
         id: 222,
         name: "Emergency Accom",
+        description: "A place to stay if you need it. Open to all u25",
         site: {
             name: "Youth Support Net",
         },
