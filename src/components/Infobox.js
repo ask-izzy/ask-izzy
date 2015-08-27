@@ -22,11 +22,10 @@ class Infobox extends React.Component {
         linkText: React.PropTypes.string,
     };
 
-    getDefaultProps(): Object {
-        return {
-            linkText: "More information",
-        };
-    }
+    // flow:disable
+    static defaultProps = {
+        linkText: "More information",
+    };
 
     render(): React.Element {
         var {
