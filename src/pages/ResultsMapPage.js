@@ -24,6 +24,28 @@ class ResultsMapPage extends BaseResultsPage {
         });
     }
 
+    /**
+     * fitBounds:
+     *
+     * Fit the map to bounds.
+     * This is requires a lot of things, so return a promise when it is done.
+     */
+    getMap(): Promise<Object> {  // FIXME: use actual type
+        var map = this.refs.map;
+
+        return new Promise((resolve, reject) => {
+            function checkMaps() {
+                if (map.state.map) {
+                    resolve(map.state.map);
+                } else {
+                    setTimeout(checkMaps, 500);
+                }
+            }
+
+            checkMaps();
+        });
+    }
+
     componentDidUpdate(prevProps: Object, prevState: Object) {
         if (this.state.maps && this.state.objects.length) {
             /* update the map bounds */
@@ -35,8 +57,9 @@ class ResultsMapPage extends BaseResultsPage {
                                               object.location.point.lon));
             }
 
-            // FIXME: racy
-            this.refs.map.fitBounds(bounds);
+            this.getMap().then(map => {
+                map.fitBounds(bounds);
+            });
         }
     }
 
