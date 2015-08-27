@@ -27,10 +27,16 @@ class ResultListItem extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
         object: React.PropTypes.object.isRequired,
+        nRelatedServices: React.PropTypes.number,
     };
 
     // flow:disable not supported yet
     static sampleProps = {object: fixtures.ixa};
+
+    // flow:disable
+    static defaultProps =  {
+        nRelatedServices: 4,
+    };
 
     /**
      * relatedServices:
@@ -39,7 +45,7 @@ class ResultListItem extends React.Component {
     /* flow:disable */
     get relatedServices(): Array<Object> {
         return this.state.relatedServices
-            .slice(0, 4);
+            .slice(0, this.props.nMoreRelatedServices);
     }
 
     /**
@@ -48,9 +54,9 @@ class ResultListItem extends React.Component {
      */
     /* flow:disable */
     get nMoreRelatedServices(): number {
-        return Math.max(0, this.state.relatedServices.length
-            - 4 /* for the relatedServices above */
-        );
+        return Math.max(0,
+                        this.state.relatedServices.length -
+                            this.props.nMoreRelatedServices);
     }
 
     componentDidMount(): void {
