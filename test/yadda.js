@@ -4,11 +4,12 @@
 /* @flow */
 "use strict";
 
-import Yadda from 'yadda';
-import webDriverInstance from './support/webdriver';
-import fs from 'fs';
+import SauceLabs from 'saucelabs';
 import Webdriver from 'selenium-webdriver';
+import Yadda from 'yadda';
 import _ from 'underscore';
+import fs from 'fs';
+import webDriverInstance from './support/webdriver';
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
@@ -19,11 +20,28 @@ import mockISS from './support/mock_iss/server';
 
 /* create the webdriver, we will reuse this promise multiple times */
 var driverPromise = webDriverInstance();
+var sessionId;  // used to talk to Sauce
 var driver;
 
-process.on('exit', () => {
+process.on('exit', (code) => {
+    /* Important, event loop has ended, no async */
     if (driver) {
         driver.quit();
+    }
+
+    /* Send an update to Sauce Labs with our status */
+    if (sessionId &&
+        process.env.SAUCE_USERNAME &&
+        process.env.SAUCE_ACCESS_KEY)
+    {
+        var api = new SauceLabs({
+            username: process.env.SAUCE_USERNAME,
+            password: process.env.SAUCE_ACCESS_KEY,
+        });
+
+        api.updateJob(sessionId, {
+            passed: code == 0,
+        });
     }
 });
 
@@ -33,21 +51,21 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
         if (shouldSkip(feature.annotations)) return;
         if (!shouldInclude(feature.annotations)) return;
 
-        before(done => {
-            driverPromise.then(driver_ => {
-                driver = driver_;
+        // jscs:disable
+        before(async function(done) {
+            driver = await driverPromise;
+            sessionId = (await driver .getSession())
+                .getId();
 
-                /* reset the browser */
-                driver
-                    .executeScript(() => {
-                        try {
-                            sessionStorage.clear();
-                        } catch (e) {
-                        }
-                    })
+            await driver
+                .executeScript(() => {
+                    try {
+                        sessionStorage.clear();
+                    } catch (e) {
+                    }
+                });
 
-                    .then(done);
-            });
+            done();
         });
 
         scenarios(feature.scenarios, scenario => {
