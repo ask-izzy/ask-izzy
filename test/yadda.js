@@ -5,7 +5,7 @@
 "use strict";
 
 import Yadda from 'yadda';
-import webDriverInstance, { executeInFlow } from './support/webdriver';
+import webDriverInstance from './support/webdriver';
 import fs from 'fs';
 import Webdriver from 'selenium-webdriver';
 import _ from 'underscore';
@@ -17,17 +17,37 @@ import libraries from './steps/steps';
 import server from '../src/server';
 import mockISS from './support/mock_iss/server';
 
+/* create the webdriver, we will reuse this promise multiple times */
+var driverPromise = webDriverInstance();
+var driver;
+
+process.on('exit', () => {
+    if (driver) {
+        driver.quit();
+    }
+});
+
 new Yadda.FeatureFileSearch('./test/features').each(file => {
     featureFile(file, feature => {
-        var driver;
 
         if (shouldSkip(feature.annotations)) return;
         if (!shouldInclude(feature.annotations)) return;
 
         before(done => {
-            executeInFlow(() => {
-                driver = webDriverInstance();
-            }, done);
+            driverPromise.then(driver_ => {
+                driver = driver_;
+
+                /* reset the browser */
+                driver
+                    .executeScript(() => {
+                        try {
+                            sessionStorage.clear();
+                        } catch (e) {
+                        }
+                    })
+
+                    .then(done);
+            });
         });
 
         scenarios(feature.scenarios, scenario => {
@@ -44,8 +64,6 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
         afterEach(function() {  // IMPORTANT: needs the correct 'this'
             takeScreenshotOnFailure(this.currentTest, driver);
         });
-
-        after(done => driver.quit().then(done));
     });
 
     function shouldSkip(annotations: Object): boolean {
