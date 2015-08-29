@@ -20,30 +20,9 @@ import mockISS from './support/mock_iss/server';
 
 /* create the webdriver, we will reuse this promise multiple times */
 var driverPromise = webDriverInstance();
-var sessionId;  // used to talk to Sauce
-var driver;
-
-process.on('exit', (code) => {
-    /* Important, event loop has ended, no async */
-    if (driver) {
-        driver.quit();
-    }
-
-    /* Send an update to Sauce Labs with our status */
-    if (sessionId &&
-        process.env.SAUCE_USERNAME &&
-        process.env.SAUCE_ACCESS_KEY)
-    {
-        var api = new SauceLabs({
-            username: process.env.SAUCE_USERNAME,
-            password: process.env.SAUCE_ACCESS_KEY,
-        });
-
-        api.updateJob(sessionId, {
-            passed: code == 0,
-        });
-    }
-});
+var sessionId: string;  // used to talk to Sauce
+var driver: Webdriver.WebDriver;
+var passed = true;
 
 new Yadda.FeatureFileSearch('./test/features').each(file => {
     featureFile(file, feature => {
@@ -79,8 +58,17 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
             });
         });
 
-        afterEach(function() {  // IMPORTANT: needs the correct 'this'
-            takeScreenshotOnFailure(this.currentTest, driver);
+        afterEach(async function(done) {
+            if (this.currentTest.state != 'passed') {
+                passed = false;
+
+                var title = this.currentTest.title.replace(/\W+/g, '_');
+                var data = await driver.takeScreenshot();
+
+                fs.writeFileSync(`Test-${title}.png`, data, 'base64');
+            }
+
+            done();
         });
     });
 
@@ -109,12 +97,34 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
     }
 });
 
-function takeScreenshotOnFailure(test, driver) {
-    if (test.state != 'passed') {
-        var path = test.title.replace(/\W+/g, '_').toLowerCase() + '.png';
+// jscs:disable
+after(async function(done) {
+    if (driver) {
+        await driver.quit();
+    }
 
-        driver.takeScreenshot().then(function(data) {
-            fs.writeFileSync(path, data, 'base64');
+    /* Send an update to Sauce Labs with our status */
+    if (sessionId &&
+        process.env.SAUCE_USERNAME &&
+        process.env.SAUCE_ACCESS_KEY)
+    {
+        await new Promise((resolve, reject) => {
+            var api = new SauceLabs({
+                username: process.env.SAUCE_USERNAME,
+                password: process.env.SAUCE_ACCESS_KEY,
+            });
+
+            api.updateJob(sessionId, {
+                passed: passed,
+            }, (err, res) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(res);
+                }
+            });
         });
     }
-}
+
+    done();
+});
