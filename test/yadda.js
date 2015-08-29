@@ -4,6 +4,7 @@
 /* @flow */
 "use strict";
 
+import Github from 'github';
 import SauceLabs from 'saucelabs';
 import Webdriver from 'selenium-webdriver';
 import Yadda from 'yadda';
@@ -116,6 +117,43 @@ after(async function(done) {
 
             api.updateJob(sessionId, {
                 passed: passed,
+            }, (err, res) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(res);
+                }
+            });
+        });
+    }
+
+    /* post the screenshot and video of this test run to Github */
+    if (sessionId &&
+        process.env.SAUCE_USERNAME &&
+        process.env.TRAVIS_PULL_REQUEST &&
+        process.env.TRAVIS_REPO_SLUG &&
+        process.env.GITHUB_USERNAME &&
+        process.env.GITHUB_KEY)
+    {
+        var user, repo = process.env.TRAVIS_REPO_SLUG.split('/');
+
+        await new Promise((resolve, reject) => {
+            Github.authenticate({
+                type: 'basic',
+                username: process.env.GITHUB_USERNAME,
+                password: process.env.GITHUB_KEY,
+            });
+            Github.issues.createComment({
+                user: user,
+                repo: repo,
+                number: process.env.TRAVIS_PULL_REQUEST,
+                body: `
+                Browser: ${process.env.SELENIUM_BROWSER}
+
+                Build: ${process.env.TRAVIS_BUILD_NUMBER}
+
+                [https://saucelabs.com/rest/v1/${process.env.SAUCE_USERNAME}/jobs/${sessionId}/assets/final_screenshot.png](https://saucelabs.com/rest/v1/${process.env.SAUCE_USERNAME}/jobs/${sessionId}/assets/video.flv)
+                `,
             }, (err, res) => {
                 if (err) {
                     reject(err);

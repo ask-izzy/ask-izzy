@@ -44,10 +44,12 @@ export default async function webDriverInstance():
     Promise<Webdriver.WebDriver>
 {
     var branch = process.env.TRAVIS_BRANCH || "Manual";
+    var pr = process.env.TRAVIS_PULL_REQUEST || "false";
+
     var baseCaps: Webdriver.Capabilities = {
         username: process.env.SAUCE_USERNAME,
         accessKey: process.env.SAUCE_ACCESS_KEY,
-        name: `Ask Izzy ${branch} ${process.env.TRAVIS_PULL_REQUEST || ""}`,
+        name: `Ask Izzy - ${branch} - PR ${pr}`,
         tags: [
             process.env.TRAVIS_PULL_REQUEST || "Manual",
             branch,
