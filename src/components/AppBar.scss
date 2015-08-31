@@ -1,6 +1,7 @@
 .AppBar {
     & > div {
         display: inline-block;
+        z-index: 2;
     }
 
     h1 {
