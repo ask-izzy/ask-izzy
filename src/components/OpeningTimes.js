@@ -42,9 +42,14 @@ class OpeningTimes extends React.Component {
                 <div className="OpeningTimes">
                     <icons.Clock className="ColoredIcon brand-text-dark" />
                     <span className="open">Open now</span>&nbsp;
-                    <span className="until">
-                        until {formatTime(todayOpen.close)}
-                    </span>
+                    {
+                        !(_.isEmpty(todayOpen)) ?
+                            <span className="until">
+                                until {formatTime(todayOpen.close)}
+                            </span>
+                        :
+                            ''
+                    }
                 </div>
             );
         } else {
@@ -53,12 +58,13 @@ class OpeningTimes extends React.Component {
                     <icons.Clock className="ColoredIcon brand-text-dark" />
                     <span className="closed">Closed</span>&nbsp;
                     {
-                        nextOpen ?
+                        !(_.isEmpty(nextOpen)) ?
                             <span className="until">
                                 until {nextOpen.day}&nbsp;
                                 {formatTime(nextOpen.open)}
-                            </span> :
-                            <span></span>
+                            </span>
+                        :
+                            ''
                     }
                 </div>
             );
