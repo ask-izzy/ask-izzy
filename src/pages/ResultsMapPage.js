@@ -8,6 +8,7 @@ import Router from "react-router";
 import NavigationArrowBack from
     "material-ui/lib/svg-icons/navigation/arrow-back";
 import mui from "material-ui";
+import _ from "underscore";
 
 import BaseResultsPage from "./BaseResultsPage";
 import HeaderBar from '../components/HeaderBar';
@@ -75,21 +76,35 @@ class ResultsMapPage extends BaseResultsPage {
     }
 
     onMapClick(): void {
-        if (this.state.selectedService) {
-            this.setState({selectedService: null});
+        if (this.state.selectedServices) {
+            this.setState({selectedServices: []});
             this.showWholeMap();
         }
     }
 
-    onMarkerClick(service: Object): void {
-        this.setState({selectedService: service});
+    onMarkerClick(services: Array<Object>): void {
+        console.log('services', services);
+        this.setState({selectedServices: services});
         this.getMap().then(map => {
             map.setCenter({
-                lat: service.location.point.lat,
-                lng: service.location.point.lon,
+                lat: services[0].location.point.lat,
+                lng: services[0].location.point.lon,
             });
             map.setZoom(18);
         });
+    }
+
+    // flow:disable
+    get sites(): Array<Object> {
+        if (!this.state.objects) {
+            return [];
+        } else if (this._sites) {
+            return this._sites;
+        } else {
+            this._sites = _.values(_.groupBy(this.state.objects,
+                                             obj => obj.site.id));
+            return this._sites;
+        }
     }
 
     render(): React.Element {
@@ -139,26 +154,26 @@ class ResultsMapPage extends BaseResultsPage {
                             defaultZoom={4}
                             onClick={this.onMapClick.bind(this)}
                         >
-                            {(this.state.objects || []).map(
+                            {this.sites.map(
                                 /* FIXME: need to combine markers at same
                                  * coordinates */
-                                (object, index) => <Marker
+                                (objects, index) => <Marker
                                     key={index}
                                     position={{
-                                        lat: object.location.point.lat,
-                                        lng: object.location.point.lon,
+                                        lat: objects[0].location.point.lat,
+                                        lng: objects[0].location.point.lon,
                                     }}
                                     onClick={this.onMarkerClick.bind(this,
-                                                                     object)}
+                                                                     objects)}
                                 />
                             )}
                         </GoogleMap>
                     : ''
                 }
                 <mui.List className="List">{
-                    this.state.selectedService ?
-                        <ResultListItem object={this.state.selectedService} />
-                    : ''
+                    (this.state.selectedServices || []).map((object, index) =>
+                        <ResultListItem key={index} object={object} />
+                    )
                 }</mui.List>
             </div>
         );
