@@ -50,3 +50,16 @@ Feature: Category page
         Given my location is "Melbourne VIC"
         When I visit /category/housing
         Then I should not see "Invalid date"
+
+    # FIXME: how do we mock time?
+    # Scenario: Can show opening time tomorrow
+        # Given my location is "Melbourne VIC"
+        # And today is a Tuesday
+        # When I visit /category/food
+        # Then I should see "Closed until tomorrow 9:00 AM"
+
+    # Scenario: Can show opening time 2 days hence
+        # Given my location is "Melbourne VIC"
+        # And today is a Monday
+        # When I visit /category/food
+        # Then I should see "Closed until Wednesday 9:00 AM"
