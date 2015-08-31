@@ -27,6 +27,35 @@ function request(obj) {
     });
 }
 
+export async function search(
+    location: string,
+    coords: ?{longitude: number, latitude: number},
+    query: string
+): Promise<{
+    objects: Array<issService>,
+    meta: string,
+}> {
+    var request = {
+        q: query,
+        type: 'service',
+        area: location,
+        location: null,
+        catchment: true,
+        limit: 3,
+    };
+    if (coords) {
+        request.location = `${coords.longitude}E${coords.latitude}N`;
+    }
+
+    return await iss('search/', request);
+}
+
+export async function getService(
+    id: number
+): Promise<issService> {
+    return await iss(`service/${id}/`);
+}
+
 async function iss(path: string, data: ?Object): Object {
     var url_: string = ISS_URL || process.env.ISS_URL;
 

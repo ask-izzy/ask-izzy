@@ -18,7 +18,7 @@ describe("Visual Components", function() {
     after(afterAll);
 
     async function beforeAll(done) {
-        driver = webDriverInstance();
+        driver = await webDriverInstance();
         cfg = await seleniumBrowser(driver);
         done();
     }

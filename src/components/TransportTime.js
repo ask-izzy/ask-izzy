@@ -1,8 +1,11 @@
 /* @flow */
 
+"use strict";
+
 import moment from "moment";
 import mui from "material-ui";
 import React from "react";
+import { titleize } from "underscore.string";
 
 import colors from "../constants/theme";
 var palette = colors.getPalette();
@@ -23,8 +26,10 @@ class OpeningTimes extends React.Component {
         return (
             <div className="TransportTime">
                 <icons.Walk className="ColoredIcon brand-text-dark" />
-                <span className="time">FIXME</span>&nbsp;
-                <span className="location">transport time</span>
+                <span className="time">? mins</span>&nbsp;
+                <span className="location">
+                    {titleize(this.props.object.location.suburb)}
+                </span>
             </div>
         );
     }

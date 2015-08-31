@@ -7,3 +7,4 @@
 /public/static/*.css.map
 npm-debug.log
 .env
+/Test-*.png

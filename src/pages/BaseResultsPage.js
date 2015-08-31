@@ -9,7 +9,7 @@ import mui from "material-ui";
 import reactMixin from "react-mixin";
 import sessionstorage from "sessionstorage";
 
-import iss from '../iss';
+import * as iss from '../iss';
 import categories from '../constants/categories';
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
@@ -95,28 +95,16 @@ class BaseResultsPage extends React.Component {
             console.log("Need location");
             this.replaceWith('location', null,
                              {next: this.getPath()});
-            return;
         }
 
-        var request = {
-            q: this.search,
-            type: 'service',
-            area: location,
-            location: null,
-            catchment: true,
-            limit: 3,
-        };
-
         /* if we have coordinates add them to the request */
+        var coordinates = null;
         try {
-            var coordinates =
-                JSON.parse(sessionstorage.getItem('coordinates'));
-            request.location =
-                `${coordinates.longitude}E${coordinates.latitude}N`;
+            coordinates = JSON.parse(sessionstorage.getItem('coordinates'));
         } catch (e) {
         }
 
-        iss('search/', request)
+        iss.search(location, coordinates, this.search)
             .then(data => {
                 this.setState({
                     meta: data.meta,
@@ -138,7 +126,6 @@ class BaseResultsPage extends React.Component {
                 }
 
             });
-
     }
 }
 
