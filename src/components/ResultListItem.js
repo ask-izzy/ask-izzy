@@ -45,7 +45,7 @@ class ResultListItem extends React.Component {
     /* flow:disable */
     get relatedServices(): Array<Object> {
         return this.state.relatedServices
-            .slice(0, this.props.nMoreRelatedServices);
+            .slice(0, this.props.nRelatedServices);
     }
 
     /**
@@ -56,7 +56,7 @@ class ResultListItem extends React.Component {
     get nMoreRelatedServices(): number {
         return Math.max(0,
                         this.state.relatedServices.length -
-                            this.props.nMoreRelatedServices);
+                            this.props.nRelatedServices);
     }
 
     componentDidMount(): void {
@@ -109,7 +109,7 @@ class ResultListItem extends React.Component {
                     <div>
                         {this.nMoreRelatedServices} more{' '}
                         {this.nMoreRelatedServices == 1 ?
-                            'service' : 'services'}...
+                            'service' : 'services'}…
                     </div>
                 :
                     ''

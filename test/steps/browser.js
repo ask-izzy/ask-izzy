@@ -24,8 +24,10 @@ module.exports = (function() {
         .when('I click on the search icon', unpromisify(clickSearchIcon))
         .when('I click back from the title bar',
               unpromisify(clickBack))
+        .when('I pause for debugging', unpromisify(pauseToDebug))
         .then('I should be at $URL', unpromisify(checkURL))
         .then('I should see "$STRING"', unpromisify(thenISee))
+        .then('I should not see "$STRING"', unpromisify(thenIDontSee))
         .then('search box should contain "$STRING"',
               unpromisify(searchContains))
         .then('the button "$STRING" should be disabled',
@@ -65,6 +67,23 @@ async function clickBack(): Promise<void> {
         .click();
 }
 
+function pauseToDebug() {
+    return new Promise((resolve, reject) => {
+        console.log("Paused. Press any key to continue...");
+        var stdin = process.stdin;
+
+        stdin.setRawMode(true);
+        stdin.on('data', (key) => {
+            stdin.setRawMode(false);
+            if (key === '\u0003') {  // Ctrl-C
+                reject();
+            } else {
+                resolve();
+            }
+        });
+    });
+}
+
 async function checkURL(expected: string): Promise<void> {
     var browserPath = Url.parse(await this.driver.getCurrentUrl()).path;
 
@@ -73,6 +92,16 @@ async function checkURL(expected: string): Promise<void> {
 
 async function thenISee(expected: string): Promise<void> {
     await assert.textIsVisible(this.driver, expected);
+}
+
+async function thenIDontSee(expected: string): Promise<void> {
+    try {
+        await assert.textIsVisible(this.driver, expected);
+    } catch (e) {
+        return;
+    }
+
+    throw new Error("Text was seen!");
 }
 
 /**

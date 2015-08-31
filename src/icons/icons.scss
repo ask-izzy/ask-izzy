@@ -9,15 +9,13 @@
     }
 
     &.size-30 {
-        height: 30px;
-        width: auto;
+        height: 30px !important;
+        width: auto !important;
     }
 }
 
 .Chevron {
     padding-right: 0 !important;
-    height: 14px;
-    width: auto;
 
     path {
         fill: $icon-chevron-color;

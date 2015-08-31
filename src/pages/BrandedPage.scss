@@ -29,7 +29,12 @@
 
         .logos {
             text-align: center;
-            margin: 10px;
+
+            & > div {
+                display: inline-block;
+
+                margin: 10px;
+            }
 
             img {
                 margin-left: 10px;
