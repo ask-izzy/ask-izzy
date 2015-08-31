@@ -19,6 +19,10 @@ module.exports = {
         phones: [],
         location: {
             suburb: 'Richmond',
+            point: {
+                lat: -37.8228,
+                lon: 144.998,
+            },
         },
     },
     housingServiceSibling: {
@@ -33,6 +37,7 @@ module.exports = {
         name: "Emergency Accom",
         description: "A place to stay if you need it. Open to all u25",
         site: {
+            id: 111,
             name: "Youth Support Net",
         },
         service_types: ['Accommodation'],
@@ -42,12 +47,17 @@ module.exports = {
         opening_hours: [],
         location: {
             suburb: 'Richmond',
+            point: {
+                lat: -37.8228,
+                lon: 144.998,
+            },
         },
     },
     susansHouse: {
         id: 333,
         name: "Womens Refuge",
         site: {
+            id: 333,
             name: "Susan's House",
         },
         service_types: ['Refuge'],
@@ -57,6 +67,10 @@ module.exports = {
         opening_hours: [],
         location: {
             suburb: 'Richmond',
+            point: {
+                lat: -37.8237,
+                lon: 144.985,
+            },
         },
     },
     ixa: {
