@@ -4,7 +4,9 @@
 
 import Webdriver from 'selenium-webdriver';
 
-export async function seleniumBrowser(driver: Webdriver.WebDriver): Object {
+export async function seleniumBrowser(driver: Webdriver.WebDriver):
+    Promise<Object>
+{
     var wnd = new Webdriver.WebDriver.Window(driver);
     try {
         var {width, height} = await wnd.getSize();
@@ -23,18 +25,24 @@ export async function seleniumBrowser(driver: Webdriver.WebDriver): Object {
     return res;
 };
 
-export function executeInFlow(fn: Function, done: Function): void {
-    Webdriver.promise.controlFlow().execute(fn).then(function() {
-        done();
-    }, done);
-}
-
+/**
+ * gotoUrl:
+ *
+ * Visit the given URL on the running Express server.
+ */
 export function gotoUrl(driver: Webdriver.WebDriver, url: string): Promise {
     var port = process.env.PORT || 8000;
     return driver.get(`http://localhost:${port}${url}`);
 }
 
-export default function webDriverInstance(): Webdriver.WebDriver {
+/**
+ * webDriverInstance:
+ *
+ * Build a webdriver.
+ */
+export default async function webDriverInstance():
+    Promise<Webdriver.WebDriver>
+{
     var branch = process.env.TRAVIS_BRANCH || "Manual";
     var baseCaps: Webdriver.Capabilities = {
         username: process.env.SAUCE_USERNAME,
@@ -79,6 +87,10 @@ export default function webDriverInstance(): Webdriver.WebDriver {
         .forBrowser('firefox')
         .build();
 
-    driver.manage().timeouts().implicitlyWait(10000);
+    await driver
+        .manage()
+        .timeouts()
+        .implicitlyWait(10000);
+
     return driver;
 }
