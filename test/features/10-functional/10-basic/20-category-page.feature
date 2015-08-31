@@ -45,3 +45,8 @@ Feature: Category page
         And I should see "Crisis Accommodation"
         And I should see "Centrelink Services"
         And I should not see "Drug & Alcohol Counselling"
+
+    Scenario: I should never see "invalid time"
+        Given my location is "Melbourne VIC"
+        When I visit /category/housing
+        Then I should not see "Invalid date"

@@ -83,7 +83,7 @@ async function thenIDontSee(expected: string): Promise<void> {
         return;
     }
 
-    throw new AssertionError("Text was seen!");
+    throw new Error("Text was seen!");
 }
 
 /**
