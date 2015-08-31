@@ -22,14 +22,16 @@ export default class BasePage extends React.Component {
                         Supported by
                     </div>
                     <div className="logos">
-                        <img src="/static/infoxchange.png"
-                        alt="Infoxchange" />
-                        <img src="/static/google.png" alt="Google" />
-                    </div>
-                    <div className="logos">
-                        <img src="/static/rea.png" alt="REA Group" />
-                        <img src="/static/newscorp.png"
-                             alt="News Corp Australia" />
+                        <div>
+                            <img src="/static/infoxchange.png"
+                            alt="Infoxchange" />
+                            <img src="/static/google.png" alt="Google" />
+                        </div>
+                        <div>
+                            <img src="/static/rea.png" alt="REA Group" />
+                            <img src="/static/newscorp.png"
+                                 alt="News Corp Australia" />
+                        </div>
                     </div>
                 </footer>
             </div>
