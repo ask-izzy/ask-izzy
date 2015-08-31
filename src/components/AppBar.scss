@@ -1,5 +1,16 @@
 .AppBar {
+    & > div {
+        display: inline-block;
+    }
+
     h1 {
+        position: absolute;
+        width: 90%;
+        top: 0;
+        left: 5% !important;
+
+        text-overflow: ellipsis !important;
+
         text-align: center;
         font-size: 18px !important;
     }
