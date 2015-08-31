@@ -29,13 +29,27 @@ class OpeningTimes extends React.Component {
             object,
         } = this.props;
 
+        var includeDay = false;
+
         var todayOpen = _.findWhere(object.opening_hours,
                                     {day: moment().format('dddd')}
                                    ) || {};
 
-        var nextOpen = _.findWhere(object.opening_hours,
-                                   {day: moment().add(1, 'd').format('dddd')}
-                                  ) || {};
+        for (var day = 1; day < 7; day++) {
+            /* look for the next day the service is open */
+            var nextOpen = _.findWhere(object.opening_hours,
+                                       {day: moment()
+                                           .add(day, 'd')
+                                           .format('dddd')}
+                                      ) || {};
+            if (!_.isEmpty(nextOpen)) {
+                if (day > 1) {
+                    includeDay = true;
+                }
+
+                break;
+            }
+        }
 
         if (object.now_open.now_open) {
             return (
@@ -43,7 +57,7 @@ class OpeningTimes extends React.Component {
                     <icons.Clock className="ColoredIcon brand-text-dark" />
                     <span className="open">Open now</span>&nbsp;
                     {
-                        !(_.isEmpty(todayOpen)) ?
+                        !_.isEmpty(todayOpen) ?
                             <span className="until">
                                 until {formatTime(todayOpen.close)}
                             </span>
@@ -58,7 +72,7 @@ class OpeningTimes extends React.Component {
                     <icons.Clock className="ColoredIcon brand-text-dark" />
                     <span className="closed">Closed</span>&nbsp;
                     {
-                        !(_.isEmpty(nextOpen)) ?
+                        !_.isEmpty(nextOpen) ?
                             <span className="until">
                                 until {nextOpen.day}&nbsp;
                                 {formatTime(nextOpen.open)}
