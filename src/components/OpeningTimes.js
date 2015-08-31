@@ -38,9 +38,11 @@ class OpeningTimes extends React.Component {
         for (var day = 1; day < 7; day++) {
             /* look for the next day the service is open */
             var nextOpen = _.findWhere(object.opening_hours,
-                                       {day: moment()
-                                           .add(day, 'd')
-                                           .format('dddd')}
+                                       {
+                                           day: moment()
+                                               .add(day, 'd')
+                                               .format('dddd'),
+                                       }
                                       ) || {};
             if (!_.isEmpty(nextOpen)) {
                 if (day > 1) {
