@@ -1,11 +1,11 @@
 .BrandedPage {
     display: flex;
-
-    min-height: 100vh;
     flex-direction: column;
+    min-height: 100vh;
 
     & > main {
         flex: 1;
+        -ms-flex-preferred-size: auto;  // Needed for IE10
         background-color: white;
     }
 
