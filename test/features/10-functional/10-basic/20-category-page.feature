@@ -35,3 +35,13 @@ Feature: Category page
         When I click back from the title bar
         Then I should see "Emergency Accom"
         And I should be at /category/housing
+
+    Scenario: A service with 5 related services only shows 4
+        Given my location is "Melbourne VIC"
+        When I visit /category/food
+
+        Then I should see "Material Aid"
+        And I should see "Community Outreach"
+        And I should see "Crisis Accommodation"
+        And I should see "Centrelink Services"
+        And I should not see "Drug & Alcohol Counselling"

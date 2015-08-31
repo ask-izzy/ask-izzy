@@ -26,6 +26,7 @@ module.exports = (function() {
               unpromisify(clickBack))
         .then('I should be at $URL', unpromisify(checkURL))
         .then('I should see "$STRING"', unpromisify(thenISee))
+        .then('I should not see "$STRING"', unpromisify(thenIDontSee))
         .then('search box should contain "$STRING"',
               unpromisify(searchContains))
         .then('the button "$STRING" should be disabled',
@@ -73,6 +74,16 @@ async function checkURL(expected: string): Promise<void> {
 
 async function thenISee(expected: string): Promise<void> {
     await assert.textIsVisible(this.driver, expected);
+}
+
+async function thenIDontSee(expected: string): Promise<void> {
+    try {
+        await assert.textIsVisible(this.driver, expected);
+    } catch (e) {
+        return;
+    }
+
+    throw new AssertionError("Text was seen!");
 }
 
 /**
