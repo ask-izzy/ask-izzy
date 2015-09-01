@@ -9,7 +9,7 @@ import debuglib from "debug";
 
 const debug = debuglib("web");
 
-const WEBPACK_HOST = process.env.HOST || "localhost";
+const WEBPACK_HOST = process.env.HOST || "0.0.0.0";
 const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
 
 const serverOptions = {
