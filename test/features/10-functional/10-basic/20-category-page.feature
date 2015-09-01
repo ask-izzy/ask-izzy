@@ -50,27 +50,3 @@ Feature: Category page
         Given my location is "Melbourne VIC"
         When I visit /category/housing
         Then I should not see "Invalid date"
-
-    Scenario: Can show opening time tomorrow
-        Given my location is "Melbourne VIC"
-        And today is a Tuesday
-        # Navigating will undo the mocked time
-        When I click on "Food"
-        Then I should see the results
-        ------------------------------
-        Opening hours (OpeningTimes)
-        ==============================
-        Closed until tomorrow 9:00 AM
-        ------------------------------
-
-    Scenario: Can show opening time 2 days hence
-        Given my location is "Melbourne VIC"
-        And today is a Monday
-        # Navigating will undo the mocked time
-        When I click on "Food"
-        Then I should see the results
-        ------------------------------
-        Opening hours (OpeningTimes)
-        ==============================
-        Closed until Wednesday 9:00 AM
-        ------------------------------

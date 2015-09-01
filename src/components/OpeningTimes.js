@@ -29,12 +29,12 @@ class OpeningTimes extends React.Component {
             object,
         } = this.props;
 
-        var tomorrow = true;
+        var when;
         var todayOpen = _.findWhere(object.opening_hours,
                                     {day: moment().format('dddd')}
                                    ) || {};
 
-        for (var day = 1; day < 7; day++) {
+        for (var day = 1; day <= 7; day++) {
             /* look for the next day the service is open */
             var nextOpen = _.findWhere(object.opening_hours,
                                        {
@@ -44,8 +44,12 @@ class OpeningTimes extends React.Component {
                                        }
                                       ) || {};
             if (!_.isEmpty(nextOpen)) {
-                if (day > 1) {
-                    tomorrow = false;
+                if (day == 1) {
+                    when = 'tomorrow';
+                } else if (day <= 7) {
+                    when = 'nextWeek';
+                } else {
+                    when = 'thisWeek';
                 }
 
                 break;
@@ -77,7 +81,17 @@ class OpeningTimes extends React.Component {
                     {
                         !_.isEmpty(nextOpen) ?
                             <span className="until">
-                                until {tomorrow ? 'tomorrow' : nextOpen.day}
+                                until
+                                {' '}
+                                {
+                                    (when == 'tomorrow') ?
+                                        'tomorrow'
+                                    : ((when == 'thisWeek') ?
+                                        nextOpen.day
+                                    :
+                                        `next ${nextOpen.day}`
+                                      )
+                                }
                                 {' '}
                                 {formatTime(nextOpen.open)}
                             </span>
