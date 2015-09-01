@@ -21,6 +21,11 @@ export default class ServicePane extends React.Component {
     // flow:disable not supported yet
     static sampleProps = {service: fixtures.youthSupportNet};
 
+    // flow:disable
+    get description(): string {
+        return this.props.service.description.split('.', 1)[0] + '.';
+    }
+
     /**
      * serviceProvisions:
      *
@@ -54,7 +59,7 @@ export default class ServicePane extends React.Component {
                 <main>
                     <h2 className="name">{object.name}</h2>
                     <h3 className="description">
-                        {object.description.split('.')[0] + '.'}
+                        {this.description}
                     </h3>
 
                     <hr />
