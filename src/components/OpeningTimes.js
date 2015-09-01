@@ -46,7 +46,7 @@ class OpeningTimes extends React.Component {
             if (!_.isEmpty(nextOpen)) {
                 if (day == 1) {
                     when = 'tomorrow';
-                } else if (day <= 7) {
+                } else if (day == 7) {
                     when = 'nextWeek';
                 } else {
                     when = 'thisWeek';
@@ -86,11 +86,10 @@ class OpeningTimes extends React.Component {
                                 {
                                     (when == 'tomorrow') ?
                                         'tomorrow'
-                                    : ((when == 'thisWeek') ?
-                                        nextOpen.day
-                                    :
+                                    : (when == 'nextWeek') ?
                                         `next ${nextOpen.day}`
-                                      )
+                                    :
+                                        nextOpen.day
                                 }
                                 {' '}
                                 {formatTime(nextOpen.open)}
