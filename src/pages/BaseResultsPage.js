@@ -63,7 +63,7 @@ class BaseResultsPage extends React.Component {
     }
 
     // flow:disable not supported yet
-    get results(): Array<Object> {
+    get results(): Array<iss.issService> {
         var objects;
 
         if (this.state.objects) {
@@ -104,7 +104,7 @@ class BaseResultsPage extends React.Component {
         } catch (e) {
         }
 
-        iss.search(location, coordinates, this.search)
+        iss.search(this.search, location, coordinates)
             .then(data => {
                 this.setState({
                     meta: data.meta,

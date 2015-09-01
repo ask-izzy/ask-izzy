@@ -9,7 +9,7 @@ import reactMixin from "react-mixin";
 import _ from "underscore";
 
 import icons from "../icons";
-import iss from '../iss';
+import * as iss from '../iss';
 import OpeningTimes from "./OpeningTimes";
 import TransportTime from "./TransportTime";
 
@@ -61,7 +61,7 @@ class ResultListItem extends React.Component {
 
     componentDidMount(): void {
         /* request our sibling services */
-        iss('search/', {
+        iss.search({
             site_id: this.props.object.site.id,
             type: 'service',
         })

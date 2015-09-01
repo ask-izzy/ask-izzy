@@ -2,44 +2,6 @@
 
 "use strict";
 
-type callback = (results: Object, status: number) => void;
-
-declare class GoogleMapsGeocoder {
-    geocode(obj: Object, callback: callback): void;
-}
-
-declare class GoogleMapsLatLng {
-}
-
-declare class GoogleMapsLatLngBounds {
-    extend(point: GoogleMapsLatLng): GoogleMapsLatLngBounds;
-}
-
-declare class GoogleAutocompleteService {
-    getPlacePredictions(obj: Object, callback: callback): void;
-}
-
-declare class GooglePlaces {
-    AutocompleteService(): GoogleAutocompleteService;
-    PlacesServiceStatus: Object;
-}
-
-declare class GoogleMap {
-}
-
-declare class GoogleMaps {
-    Geocoder(): GoogleMapsGeocoder;
-    LatLng(lat: number, lon: number, noWrap: ?boolean): GoogleMapsLatLng;
-    LatLngBounds(sw?: GoogleMapsLatLng,
-                 ne?: GoogleMapsLatLng): GoogleMapsLatLngBounds;
-    Map(node: Element, obj: Object): GoogleMap;
-    places: GooglePlaces;
-}
-
-declare class Google {
-    maps: GoogleMaps;
-}
-
 declare var google: Google;
 
 class MapsApi {
@@ -55,7 +17,7 @@ class MapsApi {
      *
      * Returns: a Promise containing the geocode
      */
-    geocode(params: Object): Promise<Array<Object>> {
+    geocode(params: GeocoderRequest): Promise<Array<GeocoderResult>> {
         var geocoder = new this.api.Geocoder;
 
         return new Promise((resolve, reject) =>
@@ -68,7 +30,9 @@ class MapsApi {
             }));
     }
 
-    autocompletePlaces(params: Object): Promise<Array<Object>> {
+    autocompletePlaces(params: AutocompletionRequest):
+        Promise<Array<AutocompletePrediction>>
+    {
         var autocompleter = new this.api.places.AutocompleteService();
 
         return new Promise((resolve, reject) =>
