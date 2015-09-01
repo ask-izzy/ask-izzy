@@ -137,14 +137,12 @@ class LocationPage extends React.Component {
         Promise<Array<Object>>
     {
         var maps = await Maps();
-        var request = {
+        var request: AutocompletionRequest = {
             input: input,
             types: ['geocode'],
             componentRestrictions: {
                 country: 'au',
             },
-            location: null,
-            radius: null,
         };
 
         /* If the user has coordinates set in this session, use them */

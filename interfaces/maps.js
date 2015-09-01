@@ -1,8 +1,18 @@
 
 type callback = (results: Object, status: number) => void;
 
+type LatLngLiteral = {
+    lat: number,
+    lng: number,
+};
+
+type GeocoderRequest = {
+    address?: string,
+    location?: LatLng | LatLngLiteral,
+};
+
 declare class Geocoder {
-    geocode(obj: Object, callback: callback): void;
+    geocode(obj: GeocoderRequest, callback: callback): void;
 }
 
 declare class LatLng {
@@ -12,8 +22,20 @@ declare class LatLngBounds {
     extend(point: LatLng): LatLngBounds;
 }
 
+type ComponentRestrictions = {
+    country?: string,
+};
+
+type AutocompletionRequest = {
+    input: string,
+    location?: LatLng,
+    radius?: number,
+    componentRestrictions?: ComponentRestrictions,
+    types?: Array<string>,
+};
+
 declare class AutocompleteService {
-    getPlacePredictions(obj: Object, callback: callback): void;
+    getPlacePredictions(obj: AutocompletionRequest, callback: callback): void;
 }
 
 declare class Places {

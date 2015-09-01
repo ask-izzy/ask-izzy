@@ -17,7 +17,7 @@ class MapsApi {
      *
      * Returns: a Promise containing the geocode
      */
-    geocode(params: Object): Promise<Array<Object>> {
+    geocode(params: GeocoderRequest): Promise<Array<Object>> {
         var geocoder = new this.api.Geocoder;
 
         return new Promise((resolve, reject) =>
@@ -30,7 +30,9 @@ class MapsApi {
             }));
     }
 
-    autocompletePlaces(params: Object): Promise<Array<Object>> {
+    autocompletePlaces(params: AutocompletionRequest):
+        Promise<Array<Object>>
+    {
         var autocompleter = new this.api.places.AutocompleteService();
 
         return new Promise((resolve, reject) =>
