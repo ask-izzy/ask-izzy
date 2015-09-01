@@ -14,6 +14,7 @@ import BaseResultsPage from "./BaseResultsPage";
 import HeaderBar from '../components/HeaderBar';
 import ResultListItem from '../components/ResultListItem';
 import Maps from '../maps';
+import * as iss from '../iss';
 
 class ResultsMapPage extends BaseResultsPage {
     componentDidMount(): void {
@@ -95,7 +96,7 @@ class ResultsMapPage extends BaseResultsPage {
     }
 
     // flow:disable
-    get sites(): Array<Object> {
+    get sites(): Array<Array<iss.issService>> {
         if (!this.state.objects) {
             return [];
         } else if (this._sites) {

@@ -7,6 +7,21 @@ import url from 'url';
 
 declare var ISS_URL: string;
 
+export type searchRequest = {
+    q?: string,
+    service_types?: string | Array<string>,  // jscs:disable
+    site_id?: number,  // jscs:disable
+
+    area?: string,
+    location?: string,
+    type?: string,
+
+    catchment?: boolean,
+
+    limit?: number,
+    key?: string,
+};
+
 /**
  * request:
  * obj: data passed to http.request
@@ -27,22 +42,43 @@ function request(obj) {
     });
 }
 
+/**
+ * search:
+ * @query: either a query string, or an object of search parameters
+ * @location: (optional but recommended) a search area
+ * @coords: (optional) the user's coordinates
+ *
+ * Execute a search against ISS.
+ */
 export async function search(
-    location: string,
+    query: Object | string,
+    location: ?string,
     coords: ?{longitude: number, latitude: number},
-    query: string
 ): Promise<{
     objects: Array<issService>,
-    meta: string,
+    meta: Object,
 }> {
-    var request = {
-        q: query,
+
+    var request: searchRequest = {
         type: 'service',
-        area: location,
-        location: null,
         catchment: true,
         limit: 3,
     };
+
+    if (query instanceof String) {
+        Object.assign(request, {
+            q: query,
+        });
+    } else if (query instanceof Object) {
+        Object.assign(request, query);
+    } else {
+        throw new Error("query can only be string or object");
+    }
+
+    if (location) {
+        request.area = location;
+    }
+
     if (coords) {
         request.location = `${coords.longitude}E${coords.latitude}N`;
     }
@@ -56,7 +92,7 @@ export async function getService(
     return await iss(`service/${id}/`);
 }
 
-async function iss(path: string, data: ?Object): Object {
+async function iss(path: string, data: ?searchRequest): Object {
     var url_: string = ISS_URL || process.env.ISS_URL;
 
     data = data || {};

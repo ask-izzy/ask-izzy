@@ -4,20 +4,21 @@ import { slugify } from "underscore.string";
 
 import Infobox from "../components/Infobox";
 import icons from "../icons";
+import * as iss from "../iss";
 
 class Category {
     key: string;
     name: string;
     byline: string;
     icon: ReactComponent;
-    search: string;
+    search: iss.searchRequest;
     info: ?ReactElement;
 
     constructor(props: {
         name: string,
         byline: string,
         icon: ReactComponent,
-        search: string,
+        search: iss.searchRequest,
         info?: ReactElement,
     }) {
         this.name = props.name;
