@@ -11,6 +11,17 @@ type GeocoderRequest = {
     location?: LatLng | LatLngLiteral,
 };
 
+type GeocoderAddressComponent = {
+    long_name: string,
+    short_name: string,
+    types: Array<string>,
+};
+
+type GeocoderResult = {
+    address_components: Array<GeocoderAddressComponent>,
+    types: Array<string>,
+};
+
 declare class Geocoder {
     geocode(obj: GeocoderRequest, callback: callback): void;
 }
@@ -32,6 +43,12 @@ type AutocompletionRequest = {
     radius?: number,
     componentRestrictions?: ComponentRestrictions,
     types?: Array<string>,
+};
+
+type AutocompletePrediction = {
+    description: string,
+    place_id: string,
+    types: Array<string>,
 };
 
 declare class AutocompleteService {
