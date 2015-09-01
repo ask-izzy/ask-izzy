@@ -29,8 +29,7 @@ class OpeningTimes extends React.Component {
             object,
         } = this.props;
 
-        var includeDay = false;
-
+        var tomorrow = true;
         var todayOpen = _.findWhere(object.opening_hours,
                                     {day: moment().format('dddd')}
                                    ) || {};
@@ -46,7 +45,7 @@ class OpeningTimes extends React.Component {
                                       ) || {};
             if (!_.isEmpty(nextOpen)) {
                 if (day > 1) {
-                    includeDay = true;
+                    tomorrow = false;
                 }
 
                 break;
@@ -57,7 +56,8 @@ class OpeningTimes extends React.Component {
             return (
                 <div className="OpeningTimes">
                     <icons.Clock className="ColoredIcon brand-text-dark" />
-                    <span className="open">Open now</span>&nbsp;
+                    <span className="open">Open now</span>
+                    {' '}
                     {
                         !_.isEmpty(todayOpen) ?
                             <span className="until">
@@ -72,11 +72,13 @@ class OpeningTimes extends React.Component {
             return (
                 <div className="OpeningTimes">
                     <icons.Clock className="ColoredIcon brand-text-dark" />
-                    <span className="closed">Closed</span>&nbsp;
+                    <span className="closed">Closed</span>
+                    {' '}
                     {
                         !_.isEmpty(nextOpen) ?
                             <span className="until">
-                                until {nextOpen.day}&nbsp;
+                                until {tomorrow ? 'tomorrow' : nextOpen.day}
+                                {' '}
                                 {formatTime(nextOpen.open)}
                             </span>
                         :
