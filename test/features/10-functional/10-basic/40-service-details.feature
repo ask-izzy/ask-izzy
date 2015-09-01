@@ -8,3 +8,7 @@ Feature: Service details page
         When I visit /service/13841
         Then I should see "A service."
         And I should not see "Provides free legal advice to people."
+
+    Scenario: The description is limited to a set of dot points
+        When I visit /service/13841
+        Then I should see "Advice on legal matters"
