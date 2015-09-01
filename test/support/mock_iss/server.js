@@ -107,4 +107,28 @@ app.get('/api/v3/service/111/', (req, res) => {
     res.json(services.housingService);
 });
 
+app.get('/api/v3/service/13841/', (req, res) => {
+    res.json({
+        id: 13841,
+        name: "Legal Service",
+        description: "A service. Provides free legal advice to people.",
+        site: {
+            name: "Service.com",
+            id: 999,
+        },
+        catchment: "Carlton",
+        eligibility_info: "",
+        ineligibility_info: "",
+        service_types: ['Legal'],
+        now_open: {
+            now_open: false,
+        },
+        opening_hours: [],
+        phones: [],
+        location: {
+            suburb: 'Carlton',
+        },
+    });
+});
+
 app.listen(5000);
