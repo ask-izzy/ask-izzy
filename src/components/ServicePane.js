@@ -4,6 +4,7 @@
 
 import React from "react";
 import mui from "material-ui";
+import _ from "underscore";
 
 import Address from "../components/Address";
 import CollapsedPhones from "../components/CollapsedPhones";
@@ -11,6 +12,7 @@ import Eligibility from "../components/Eligibility";
 import OpeningTimes from "../components/OpeningTimes";
 import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
+import serviceProvisions from "../constants/service-provisions";
 
 var palette = colors.getPalette();
 
@@ -18,6 +20,32 @@ export default class ServicePane extends React.Component {
 
     // flow:disable not supported yet
     static sampleProps = {service: fixtures.youthSupportNet};
+
+    /**
+     * serviceProvisions:
+     *
+     * An array of things this service provides built using a bucket-of-words
+     * approach from the service's full description */
+    /* flow:disable */
+    get serviceProvisions(): Array<string> {
+        if (this._serviceProvisions) {
+            return this._serviceProvisions;
+        }
+
+        var service = this.props.service;
+        this._serviceProvisions = [];
+
+        for (var provision of serviceProvisions) {
+            var forms = [provision.cname].concat(provision.forms || []);
+
+            if (_.some(forms.map(form => new RegExp(form, 'i')),
+                       form => service.description.match(form))) {
+                this._serviceProvisions.push(provision.cname);
+            }
+        }
+
+        return this._serviceProvisions;
+    }
 
     render(): React.Element {
         var object = this.props.service;
@@ -43,6 +71,13 @@ export default class ServicePane extends React.Component {
                     eligibility_info={object.eligibility_info}
                     ineligibility_info={object.ineligibility_info}
                 />
+
+                <h2>What you can get here</h2>
+                <ul>
+                    {this.serviceProvisions.map(
+                        (provision, index) => <li key={index}>{provision}</li>
+                    )}
+                </ul>
             </div>
         );
     }

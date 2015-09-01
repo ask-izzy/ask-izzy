@@ -1,4 +1,7 @@
 /* @flow */
+
+"use strict";
+
 import React from "react";
 import { slugify } from "underscore.string";
 
