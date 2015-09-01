@@ -30,7 +30,7 @@ help:
 Link up the git hooks:
 
     ln -s ../.githooks .git/hooks
-    
+
 Add the git merge strategies to `.git/config`:
 
     [include]

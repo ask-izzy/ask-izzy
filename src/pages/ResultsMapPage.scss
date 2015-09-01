@@ -1,0 +1,14 @@
+.ResultsMapPage {
+    .List {
+        padding: 0 !important;
+        bottom: 0;
+
+        position: absolute;
+        width: 100%;
+    }
+
+    .ResultListItem {
+        min-height: 150px;
+        background-color: white !important;
+    }
+}

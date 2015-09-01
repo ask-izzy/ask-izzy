@@ -9,6 +9,7 @@ import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import LocationPage from "./pages/LocationPage";
 import ResultsListPage from "./pages/ResultsListPage";
+import ResultsMapPage from "./pages/ResultsMapPage";
 import ServicePage from "./pages/ServicePage";
 
 import StyleGuideList from "./pages/StyleGuideList";
@@ -46,9 +47,19 @@ export default <Router.Route
                 handler={ResultsListPage}
             />
             <Router.Route
+                name="category_map"
+                path="/category/:page/map"
+                handler={ResultsMapPage}
+            />
+            <Router.Route
                 name="search"
                 path="/search/:search"
                 handler={ResultsListPage}
+            />
+            <Router.Route
+                name="search_map"
+                path="/search/:search/map"
+                handler={ResultsMapPage}
             />
             <Router.Route
                 name="service"
