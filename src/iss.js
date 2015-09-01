@@ -65,10 +65,8 @@ export async function search(
         limit: 3,
     };
 
-    if (query instanceof String) {
-        Object.assign(request, {
-            q: query,
-        });
+    if (typeof query === 'string') {
+        request.q = query;
     } else if (query instanceof Object) {
         Object.assign(request, query);
     } else {
