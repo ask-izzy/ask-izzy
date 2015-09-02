@@ -12,6 +12,7 @@ import BaseResultsPage from "./BaseResultsPage";
 import HeaderBar from '../components/HeaderBar';
 import ResultListItem from '../components/ResultListItem';
 import Maps from '../maps';
+import icons from '../icons';
 import * as iss from '../iss';
 
 class ResultsMapPage extends BaseResultsPage {
