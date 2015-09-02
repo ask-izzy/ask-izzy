@@ -235,6 +235,67 @@ class LocationPage extends React.Component {
                         "This will let me find the services closest to you"
                     }
                 />
+                <mui.List className="List">{
+                    /* if the browser supports geolocation */
+                    require('has-geolocation') &&
+                    this.state.geolocation == GeoLocationState.NOT_STARTED ?
+                        <mui.ListItem
+                            className="taller ListItem"
+                            onTouchTap={this.onGeolocationTouchTap.bind(this)}
+                            primaryText="Get current location"
+                            leftIcon={
+                                <icons.Location
+                                    className="ColoredIcon icon-fg-color"
+                                />
+                            }
+
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
+                        />
+                    : ''
+                }{
+                    this.state.geolocation == GeoLocationState.RUNNING ?
+                        <mui.ListItem
+                            className="ListItem"
+                            primaryText="Locating you..."
+                            secondaryText="Please permit us to use your GPS"
+                            leftIcon={
+                                <mui.CircularProgress
+                                    className="ProgressIcon"
+                                    mode="indeterminate"
+                                    size={0.5}
+                                />
+                            }
+
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
+                        />
+                    : ''
+                }{
+                    this.state.geolocation == GeoLocationState.COMPLETE ?
+                        <mui.ListItem
+                            className="taller ListItem"
+                            primaryText="Found your location"
+                            leftIcon={<icons.Tick />}
+
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
+                        />
+                    : ''
+                }{
+                    this.state.geolocation == GeoLocationState.FAILED ?
+                        <mui.ListItem
+                            className="ListItem"
+                            primaryText="Unable to get your location"
+                            secondaryText={`Please enter your location above
+                                (${this.state.error})`}
+                            leftIcon={<icons.Cross />}
+
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
+                        />
+                    : ''
+                }
                 <form
                     className="search"
                     onSubmit={this.onTouchDoneButton.bind(this)}
@@ -246,54 +307,11 @@ class LocationPage extends React.Component {
                         onChange={this.onSearchChange.bind(this)}
                     />
                 </form>
-                <mui.List>{
-                    /* if the browser supports geolocation */
-                    require('has-geolocation') &&
-                    this.state.geolocation == GeoLocationState.NOT_STARTED ?
-                        <mui.ListItem
-                            onTouchTap={this.onGeolocationTouchTap.bind(this)}
-                            primaryText="Get current location"
-                            leftIcon={
-                                <icons.Location
-                                    className="ColoredIcon icon-fg-color"
-                                />
-                            }
-                        />
-                    : ''
-                }{
-                    this.state.geolocation == GeoLocationState.RUNNING ?
-                        <mui.ListItem
-                            primaryText="Locating you..."
-                            secondaryText="Please permit us to use your GPS"
-                            leftIcon={
-                                <mui.CircularProgress
-                                    className="ProgressIcon"
-                                    mode="indeterminate"
-                                    size={0.5}
-                                />
-                            }
-                        />
-                    : ''
-                }{
-                    this.state.geolocation == GeoLocationState.COMPLETE ?
-                        <mui.ListItem
-                            primaryText="Found your location"
-                            leftIcon={<icons.Tick />}
-                        />
-                    : ''
-                }{
-                    this.state.geolocation == GeoLocationState.FAILED ?
-                        <mui.ListItem
-                            primaryText="Unable to get your location"
-                            secondaryText={`Please enter your location above
-                                (${this.state.error})`}
-                            leftIcon={<icons.Cross />}
-                        />
-                    : ''
-                }{
+                {
                     /* any autocompletions we currently have */
                     this.state.autocompletions.map((result, index) =>
                         <mui.ListItem
+                            className="ListItem"
                             key={index}
                             primaryText={
                                 <div className="suburb">
@@ -305,6 +323,7 @@ class LocationPage extends React.Component {
                                     {result.state}
                                 </div>
                             }
+                            leftIcon={<icons.RadioUnselected />}
                             onTouchTap={(event) => {
                                 /* set the text box to this value
                                  * and remove the autocompletions */
@@ -317,6 +336,8 @@ class LocationPage extends React.Component {
                                 });
                             }}
 
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
                         />
                     )
                 }</mui.List>

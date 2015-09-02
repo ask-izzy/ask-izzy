@@ -10,26 +10,26 @@
         background-color: $brand-pane-light;
 
         .branding-icon {
-            height: 120px;
+            height: 90px;
             width: auto;
             padding: 0;
-            padding-top: 25px;
+            padding-top: 20px;
         }
 
         .branding-copy {
             width: 80%;
             margin: auto;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 400;
             padding: 0;
-            padding-top: 15px;
-            padding-bottom: 25px;
+            padding-top: 10px;
+            padding-bottom: 20px;
         }
     }
 
     .search {
         width: 100%;
-        padding-bottom: 25px;
+        padding-bottom: 20px;
 
         position: relative;
 
