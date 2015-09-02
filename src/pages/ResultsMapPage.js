@@ -75,11 +75,15 @@ class ResultsMapPage extends BaseResultsPage {
         }
     }
 
-    onMapClick(): void {
+    clearSelection(): void {
         if (this.state.selectedServices) {
             this.setState({selectedServices: []});
             this.showWholeMap();
         }
+    }
+
+    onMapClick(): void {
+        this.clearSelection();
     }
 
     onMarkerClick(services: Array<Object>): void {
@@ -92,6 +96,14 @@ class ResultsMapPage extends BaseResultsPage {
             });
             map.setZoom(18);
         });
+    }
+
+    onBackClick(): void {
+        if (_.isEmpty(this.state.selectedServices)) {
+            this.goBack();
+        } else {
+            this.clearSelection();
+        }
     }
 
     // flow:disable
@@ -131,7 +143,7 @@ class ResultsMapPage extends BaseResultsPage {
                     iconElementLeft={
                         <mui.IconButton
                             className="BackButton"
-                            onTouchTap={this.goBack.bind(this)}
+                            onTouchTap={this.onBackClick.bind(this)}
                         >
                             <icons.ChevronBack />
                         </mui.IconButton>
