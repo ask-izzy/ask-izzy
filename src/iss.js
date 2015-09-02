@@ -28,7 +28,7 @@ type searchResultsLocation = {
     state: string,
     lat: number,
     lon: number,
-}
+};
 
 type searchResultsMeta = {
     total_count: number,
