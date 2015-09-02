@@ -5,8 +5,6 @@
 import { GoogleMap, Marker, InfoWindow } from "react-google-maps";
 import React from 'react';
 import Router from "react-router";
-import NavigationArrowBack from
-    "material-ui/lib/svg-icons/navigation/arrow-back";
 import mui from "material-ui";
 import _ from "underscore";
 
@@ -14,6 +12,7 @@ import BaseResultsPage from "./BaseResultsPage";
 import HeaderBar from '../components/HeaderBar';
 import ResultListItem from '../components/ResultListItem';
 import Maps from '../maps';
+import icons from '../icons';
 import * as iss from '../iss';
 
 class ResultsMapPage extends BaseResultsPage {
@@ -134,7 +133,7 @@ class ResultsMapPage extends BaseResultsPage {
                             className="BackButton"
                             onTouchTap={this.goBack.bind(this)}
                         >
-                            <NavigationArrowBack />
+                            <icons.ChevronBack />
                         </mui.IconButton>
                     }
                 />

@@ -6,13 +6,23 @@
 
     h1 {
         position: absolute;
-        width: 90%;
+        width: 70%;
         top: 0;
-        left: 5% !important;
+        left: 15% !important;
 
         text-overflow: ellipsis !important;
 
         text-align: center;
         font-size: 18px !important;
+    }
+
+    .BackButton {
+        svg {
+            width: 44px !important;
+            height: 44px !important;
+
+            margin-left: -18px;
+            margin-top: -11px;
+        }
     }
 }
