@@ -77,7 +77,13 @@ app.get('/api/v3/search/', (req, res) => {
                     now_open: {
                         now_open: false,
                     },
-                    opening_hours: [],
+                    opening_hours: [
+                        {
+                            day: 'Wednesday',
+                            open: '9:00:00',
+                            close: '17:00:00',
+                        },
+                    ],
                     location: {
                         suburb: 'Richmond',
                     },

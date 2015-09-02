@@ -8,9 +8,10 @@ module.exports = (function() {
 
     // include libraries here
     return [
-        require('./browser.js'),
-        require('./branding.js'),
-        require('./geolocation.js'),
-        require('./results.js'),
+        require('./browser'),
+        require('./branding'),
+        require('./datetime'),
+        require('./geolocation'),
+        require('./results'),
     ];
 })();

@@ -29,13 +29,12 @@ class OpeningTimes extends React.Component {
             object,
         } = this.props;
 
-        var includeDay = false;
-
+        var when;
         var todayOpen = _.findWhere(object.opening_hours,
                                     {day: moment().format('dddd')}
                                    ) || {};
 
-        for (var day = 1; day < 7; day++) {
+        for (var day = 1; day <= 7; day++) {
             /* look for the next day the service is open */
             var nextOpen = _.findWhere(object.opening_hours,
                                        {
@@ -45,8 +44,12 @@ class OpeningTimes extends React.Component {
                                        }
                                       ) || {};
             if (!_.isEmpty(nextOpen)) {
-                if (day > 1) {
-                    includeDay = true;
+                if (day == 1) {
+                    when = 'tomorrow';
+                } else if (day == 7) {
+                    when = 'nextWeek';
+                } else {
+                    when = 'thisWeek';
                 }
 
                 break;
@@ -57,7 +60,8 @@ class OpeningTimes extends React.Component {
             return (
                 <div className="OpeningTimes">
                     <icons.Clock className="ColoredIcon brand-text-dark" />
-                    <span className="open">Open now</span>&nbsp;
+                    <span className="open">Open now</span>
+                    {' '}
                     {
                         !_.isEmpty(todayOpen) ?
                             <span className="until">
@@ -72,11 +76,22 @@ class OpeningTimes extends React.Component {
             return (
                 <div className="OpeningTimes">
                     <icons.Clock className="ColoredIcon brand-text-dark" />
-                    <span className="closed">Closed</span>&nbsp;
+                    <span className="closed">Closed</span>
+                    {' '}
                     {
                         !_.isEmpty(nextOpen) ?
                             <span className="until">
-                                until {nextOpen.day}&nbsp;
+                                until
+                                {' '}
+                                {
+                                    (when == 'tomorrow') ?
+                                        'tomorrow'
+                                    : (when == 'nextWeek') ?
+                                        `next ${nextOpen.day}`
+                                    :
+                                        nextOpen.day
+                                }
+                                {' '}
                                 {formatTime(nextOpen.open)}
                             </span>
                         :
