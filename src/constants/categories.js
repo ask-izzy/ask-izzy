@@ -40,7 +40,8 @@ var categories:Array<Category> = [
         icon: icons.House,
         search: {
             q: 'housing',
-            service_type: 'housing',
+
+            // service_type: 'housing',
         },
         info: (
             <Infobox href="#" linkText="Housing information">
