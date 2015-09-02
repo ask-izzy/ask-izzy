@@ -3,14 +3,13 @@
 "use strict";
 
 import mui from "material-ui";
-import NavigationArrowBack from
-    "material-ui/lib/svg-icons/navigation/arrow-back";
 import React from 'react';
 import Router from "react-router";
 import ServicePane from "../components/ServicePane";
 import reactMixin from "react-mixin";
 
 import * as iss from '../iss';
+import icons from "../icons";
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class ServicePage extends React.Component {
@@ -54,7 +53,7 @@ class ServicePage extends React.Component {
                                 className="BackButton"
                                 onTouchTap={this.goBack.bind(this)}
                             >
-                                <NavigationArrowBack />
+                                <icons.ChevronBack />
                             </mui.IconButton>
                         }
                     />

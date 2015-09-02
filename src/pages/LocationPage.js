@@ -4,8 +4,6 @@
 
 import React from 'react';
 import Router from "react-router";
-import NavigationArrowBack from
-    "material-ui/lib/svg-icons/navigation/arrow-back";
 import _ from 'underscore';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
@@ -220,7 +218,7 @@ class LocationPage extends React.Component {
                         <mui.IconButton
                             onTouchTap={this.goBack.bind(this)}
                         >
-                            <NavigationArrowBack />
+                            <icons.ChevronBack />
                         </mui.IconButton>
                     }
                 />

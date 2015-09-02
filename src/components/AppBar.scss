@@ -15,4 +15,14 @@
         text-align: center;
         font-size: 18px !important;
     }
+
+    .BackButton {
+        svg {
+            width: 44px !important;
+            height: 44px !important;
+
+            margin-left: -18px;
+            margin-top: -11px;
+        }
+    }
 }
