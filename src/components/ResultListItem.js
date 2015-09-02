@@ -60,15 +60,17 @@ class ResultListItem extends React.Component {
     }
 
     componentDidMount(): void {
-        /* request our sibling services */
-        iss.getSiteChildren(this.props.object.site.id)
-            .then(data => {
-                /* remove ourselves */
-                var relatedServices =
-                    _.reject(data.objects,
-                             service => service.id == this.props.object.id);
-                this.setState({relatedServices: relatedServices});
-            });
+        if (this.props.nRelatedServices > 0) {
+            /* request our sibling services */
+            iss.getSiteChildren(this.props.object.site.id)
+                .then(data => {
+                    /* remove ourselves */
+                    var relatedServices =
+                        _.reject(data.objects, service =>
+                                 service.id == this.props.object.id);
+                    this.setState({relatedServices: relatedServices});
+                });
+        }
     }
 
     render(): React.Element {
@@ -97,17 +99,22 @@ class ResultListItem extends React.Component {
                 <div className="site_name">{object.site.name}</div>
                 <OpeningTimes className="opening_hours" object={object} />
                 <TransportTime object={object} />
-                <ul className="related">{
-                    this.relatedServices.map((service, index) =>
-                        <li key={index}>{service.name}</li>
-                    )
-                }</ul>
-                {this.nMoreRelatedServices > 0 ?
+                { this.props.nRelatedServices > 0 ?
                     <div>
-                        {this.nMoreRelatedServices} more{' '}
-                        {this.nMoreRelatedServices == 1 ?
-                            'service' : 'services'}…
-                    </div>
+                    <ul className="related">{
+                        this.relatedServices.map((service, index) =>
+                            <li key={index}>{service.name}</li>
+                        )
+                    }</ul>
+                    {this.nMoreRelatedServices > 0 ?
+                        <div>
+                            {this.nMoreRelatedServices} more{' '}
+                            {this.nMoreRelatedServices == 1 ?
+                                'service' : 'services'}…
+                        </div>
+                    :
+                        ''
+                    }</div>
                 :
                     ''
                 }
