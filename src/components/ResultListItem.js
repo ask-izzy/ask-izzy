@@ -61,10 +61,7 @@ class ResultListItem extends React.Component {
 
     componentDidMount(): void {
         /* request our sibling services */
-        iss.search({
-            site_id: this.props.object.site.id,
-            type: 'service',
-        })
+        iss.getSiteChildren(this.props.object.site.id)
             .then(data => {
                 /* remove ourselves */
                 var relatedServices =
