@@ -22,6 +22,31 @@ export type searchRequest = {
     key?: string,
 };
 
+type searchResultsLocation = {
+    name: string,
+    suburb: string,
+    state: string,
+    lat: number,
+    lon: number,
+};
+
+type searchResultsMeta = {
+    total_count: number,
+    available_count: number,
+    limit: number,
+    offset: number,
+
+    previous: ?string,
+    next: ?string,
+
+    location: searchResultsLocation,
+};
+
+export type searchResults = {
+    meta: searchResultsMeta,
+    objects: Array<issService>,
+};
+
 /**
  * request:
  * obj: data passed to http.request
@@ -54,10 +79,7 @@ export async function search(
     query: Object | string,
     location: ?string,
     coords: ?{longitude: number, latitude: number},
-): Promise<{
-    objects: Array<issService>,
-    meta: Object,
-}> {
+): Promise<searchResults> {
 
     var request: searchRequest = {
         type: 'service',
@@ -88,6 +110,17 @@ export async function getService(
     id: number
 ): Promise<issService> {
     return await iss(`service/${id}/`);
+}
+
+export async function getSiteChildren(
+    siteId: number
+): Promise<searchResults> {
+    var request: searchRequest = {
+        site_id: siteId,
+        type: 'service',
+    };
+
+    return await iss('search/', request);
 }
 
 async function iss(path: string, data: ?searchRequest): Object {
