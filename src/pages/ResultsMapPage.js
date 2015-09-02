@@ -121,18 +121,32 @@ class ResultsMapPage extends BaseResultsPage {
 
     render(): React.Element {
         var mapHeight = 0;
+        var selectedServices = this.state.selectedServices || [];
 
         try {
             /* calculate the height of the map */
             mapHeight =
-                document.querySelector('.BrandedPage').offsetHeight -
+                window.innerHeight -
                 document.querySelector('.AppBar').offsetHeight;
 
-            if (mapHeight > 700) {
-                /* we have space for the footer */
-                mapHeight -= document.querySelector('footer').offsetHeight;
+            if (mapHeight > 900) {
+                /* we have space for the footer, resize the map to either fit
+                 * the footer or the selected results */
+                mapHeight -= Math.max(
+                    document.querySelector('footer').offsetHeight,
+                    150 * selectedServices.length
+                );
+            } else {
+                /* no space for the footer, but resize the map to make room
+                 * for the selected results */
+                mapHeight -= 150 * selectedServices.length;
             }
+
+            /* limit minimum height to 1/3 of the screen realestate */
+            mapHeight = Math.max(mapHeight,
+                                 window.innerHeight / 3);
         } catch (e) {
+            console.error(e);
         }
 
         return (
@@ -183,8 +197,12 @@ class ResultsMapPage extends BaseResultsPage {
                     : ''
                 }
                 <mui.List className="List">{
-                    (this.state.selectedServices || []).map((object, index) =>
-                        <ResultListItem key={index} object={object} />
+                    selectedServices.map((object, index) =>
+                        <ResultListItem
+                            key={index}
+                            object={object}
+                            nRelatedServices={0}
+                        />
                     )
                 }</mui.List>
             </div>
