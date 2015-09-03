@@ -4,43 +4,18 @@
 
 import React from 'react';
 import Router from "react-router";
-import _ from 'underscore';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
 
 import * as iss from '../iss';
-import categories from '../constants/categories';
+import BaseCategoriesPage from './BaseCategoriesPage';
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
-class BaseResultsPage extends React.Component {
+class BaseResultsPage extends BaseCategoriesPage {
     constructor(props: Object) {
         super(props);
         this.state = {};
-    }
-
-    /**
-     * category:
-     *
-     * Return category information.
-     */
-
-    // flow:disable not supported yet
-    get category(): categories.Category {
-        if (this._category) {
-            return this._category;
-        }
-
-        var category = _.findWhere(categories, {
-            key: this.props.params.page,
-        });
-
-        if (category === undefined) {
-            throw "No such category " + this.props.params.page;
-        }
-
-        this._category = category;
-        return category;
     }
 
     // flow:disable not supported yet
