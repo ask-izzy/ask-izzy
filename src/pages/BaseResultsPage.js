@@ -91,10 +91,13 @@ class BaseResultsPage extends React.Component {
     componentDidMount(): void {
         var location = sessionstorage.getItem('location');
 
+        /* Determine if we need to show the personalisation. This requires
+         * access to session storage so cannot happen in willTransitionTo */
         if (!location) {
             console.log("Need location");
             this.replaceWith('location', null,
                              {next: this.getPath()});
+            return;
         }
 
         /* if we have coordinates add them to the request */
