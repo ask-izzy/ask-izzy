@@ -41,14 +41,24 @@ class LocationPage extends React.Component {
                     primaryText={
                         <div>
                             <icons.LogoLight className="Logo" />
+                            These services can help you
+                            {' '}
+                            {this.context.controller.category.byline
+                                .toLocaleLowerCase()}.
+                        </div>
+                    }
+                    secondaryText={
+                        <div>
                             I'll ask you a few questions to help you you
                             find the right places.
                         </div>
                     }
-                    secondaryText={
-                        "All of your answers are private and anonymous."
-                    }
                 />
+                <div className="padded">
+                    All of your answers are private and anonymous and are
+                    never stored anywhere. When you close I will forget them.
+                </div>
+
                 <div className="done-button">
                     <mui.FlatButton
                         label="Okay"

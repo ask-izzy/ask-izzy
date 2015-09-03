@@ -39,15 +39,25 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         </div>
                     }
                 />
-                <mui.List>{
+                <mui.List className="List">{
                     this.personalisationComponents.map(
                         (component, index) => <mui.ListItem
                             key={index}
+                            className="ListItem"
+
                             primaryText={component.summaryLabel}
                             secondaryText={component.summaryValue}
+
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
                         />
                     )
                 }</mui.List>
+
+                <div className="padded">
+                    All of your answers are private and anonymous and are
+                    never stored anywhere. When you close I will forget them.
+                </div>
             </div>
         );
     }
