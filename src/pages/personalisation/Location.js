@@ -16,6 +16,7 @@ import Maps from '../../maps';
 import Personalisation from '../../mixins/Personalisation';
 import components from '../../components';
 import icons from '../../icons';
+import * as iss from '../../iss';
 
 var GeoLocationState = {
     NOT_STARTED: 0,
@@ -42,6 +43,18 @@ class LocationPage extends React.Component {
             locationCoords: {},
             autocompletions: [],
         };
+    }
+
+    static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+        var location = sessionstorage.getItem('location');
+
+        if (location) {
+            return Object.assign(request, {
+                area: location,
+            });
+        } else {
+            return null;
+        }
     }
 
     async locateMe(): Promise<Object> {

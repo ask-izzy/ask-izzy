@@ -10,6 +10,7 @@ import reactMixin from "react-mixin";
 import Personalisation from '../../mixins/Personalisation';
 import components from '../../components';
 import icons from '../../icons';
+import * as iss from '../../iss';
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
@@ -19,6 +20,10 @@ class LocationPage extends React.Component {
         super(props);
         this.state = {
         };
+    }
+
+    static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+        return request;
     }
 
     onTouchDoneButton(event: Event): void {

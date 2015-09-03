@@ -88,23 +88,29 @@ class BaseResultsPage extends React.Component {
         return objects;
     }
 
-    static willTransitionTo(transition, params, query) {
-        console.log("Transitioning to", transition);
-        console.log(this);
-        console.log(BaseResultsPage);
-    }
-
     componentDidMount(): void {
-        var location = sessionstorage.getItem('location');
+        var request = this.search;
+
+        // Build the search request
+        // If we don't have enough information to build the search request
+        // trigger the personalisation.
+        for (var item of this.category.personalisation) {
+            request = item.getSearch(request);
+
+            if (!request) {
+                this.replaceWith(this.getPath() + '/personalise');
+            }
+        }
 
         /* if we have coordinates add them to the request */
+        /* FIXME: make this part of Location.getSearch() */
         var coordinates = null;
         try {
             coordinates = JSON.parse(sessionstorage.getItem('coordinates'));
         } catch (e) {
         }
 
-        iss.search(this.search, location, coordinates)
+        iss.search(this.search, null, coordinates)
             .then(data => {
                 this.setState({
                     meta: data.meta,
