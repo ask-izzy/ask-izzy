@@ -37,7 +37,7 @@ module.exports = {
         name: "Emergency Accom",
         description: "A place to stay if you need it. Open to all u25",
         site: {
-            id: 111,
+            id: 333,
             name: "Youth Support Net",
         },
         service_types: ['Accommodation'],
@@ -48,8 +48,8 @@ module.exports = {
         location: {
             suburb: 'Richmond',
             point: {
-                lat: -37.8228,
-                lon: 144.998,
+                lat: -37.8237,
+                lon: 144.985,
             },
         },
     },

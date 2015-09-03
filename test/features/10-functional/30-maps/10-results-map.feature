@@ -17,8 +17,8 @@ Feature: See results on a map
         --------------------------------------------------
         Title              | Label | Latitude | Longitude
         ==================================================
-        Susan's House      | 1     | -37.8237 | 144.985
-        My Housing Service | 2     | -37.8228 | 144.998
+        My Housing Service | 1     | -37.8228 | 144.998
+        Youth Support Net  | 2     | -37.8237 | 144.985
         --------------------------------------------------
 
     Scenario: Clicking a marker shows services at that site and clicking on map returns to full map
@@ -28,13 +28,13 @@ Feature: See results on a map
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
         When I click on "View on a map"
-        And I click marker titled "My Housing Service"
+        And I click marker titled "Youth Support Net"
         Then I should see the results
         ---------------------
         ServiceName (name)
         =====================
-        Housing Service
         Emergency Accom
+        Womens Refuge
         ---------------------
 
         When I click on the map
