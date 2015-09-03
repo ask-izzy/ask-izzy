@@ -46,6 +46,17 @@ class LocationPage extends React.Component {
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+        /* Coordinates are optional */
+        try {
+            var coords =
+                JSON.parse(sessionstorage.getItem('coordinates'));
+            request = Object.assign(request, {
+                location: `${coords.longitude}E${coords.latitude}N`,
+            });
+        } catch (e) {
+        }
+
+        /* Location/Area is required */
         var location = sessionstorage.getItem('location');
 
         if (location) {

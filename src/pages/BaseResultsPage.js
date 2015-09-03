@@ -7,7 +7,6 @@ import Router from "react-router";
 import _ from 'underscore';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
-import sessionstorage from "sessionstorage";
 
 import * as iss from '../iss';
 import categories from '../constants/categories';
@@ -50,15 +49,35 @@ class BaseResultsPage extends React.Component {
             return this.category.name;
         } else if (this.props.params.search) {
             return `"${this.props.params.search}"`;
+        } else {
+            throw new Error("Unexpected");
         }
     }
 
     // flow:disable not supported yet
-    get search(): string {
+    get search(): iss.searchRequest {
         if (this.props.params.page) {
             return this.category.search;
         } else if (this.props.params.search) {
-            return this.props.params.search;
+            return {
+                q: this.props.params.search,
+            };
+        } else {
+            throw new Error("Unexpected");
+        }
+    }
+
+    // flow:disable
+    get personalisationComponents(): Array<React.Component> {
+        if (this.props.params.page) {
+            return this.category.personalisation;
+        } else if (this.props.params.search) {
+            return [
+                require('./personalisation/Intro'),
+                require('./personalisation/Location'),
+            ];
+        } else {
+            throw new Error("Unexpected");
         }
     }
 
@@ -89,12 +108,17 @@ class BaseResultsPage extends React.Component {
     }
 
     componentDidMount(): void {
+        // Build the search request.
+        //
+        // If we don't have enough information to build the search request
+        // trigger the personalisation wizard.
+        //
+        // We have to do this once the component is mounted (instead of
+        // in willTransitionTo because the personalisation components will
+        // inspect the session).
         var request = this.search;
 
-        // Build the search request
-        // If we don't have enough information to build the search request
-        // trigger the personalisation.
-        for (var item of this.category.personalisation) {
+        for (var item of this.personalisationComponents) {
             request = item.getSearch(request);
 
             if (!request) {
@@ -102,15 +126,7 @@ class BaseResultsPage extends React.Component {
             }
         }
 
-        /* if we have coordinates add them to the request */
-        /* FIXME: make this part of Location.getSearch() */
-        var coordinates = null;
-        try {
-            coordinates = JSON.parse(sessionstorage.getItem('coordinates'));
-        } catch (e) {
-        }
-
-        iss.search(this.search, null, coordinates)
+        iss.search(request)
             .then(data => {
                 this.setState({
                     meta: data.meta,
