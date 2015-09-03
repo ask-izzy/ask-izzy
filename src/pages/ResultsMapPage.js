@@ -22,6 +22,10 @@ class ResultsMapPage extends BaseResultsPage {
         /* request the Google Maps API */
         Maps().then((maps) => {
             this.setState({maps: maps});
+
+            // disable infowindows
+            maps.api.InfoWindow.prototype.set = function() {};
+
         });
     }
 

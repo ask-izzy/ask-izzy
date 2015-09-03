@@ -60,11 +60,16 @@ declare class Places {
     PlacesServiceStatus: Object;
 }
 
+declare class InfoWindow {
+    set(key: string, value: any): void;
+}
+
 declare class Map {
 }
 
 declare class GoogleMaps {
     Geocoder(): Geocoder;
+    InfoWindow(opts?: Object): InfoWindow;
     LatLng(lat: number, lon: number, noWrap: ?boolean): LatLng;
     LatLngBounds(sw?: LatLng, ne?: LatLng): LatLngBounds;
     Map(node: Element, obj: Object): Map;
