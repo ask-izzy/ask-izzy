@@ -42,20 +42,6 @@ class BaseResultsPage extends BaseCategoriesPage {
         }
     }
 
-    // flow:disable
-    get personalisationComponents(): Array<React.Component> {
-        if (this.props.params.page) {
-            return this.category.personalisation;
-        } else if (this.props.params.search) {
-            return [
-                require('./personalisation/Intro'),
-                require('./personalisation/Location'),
-            ];
-        } else {
-            throw new Error("Unexpected");
-        }
-    }
-
     // flow:disable not supported yet
     get results(): Array<iss.issService> {
         var objects;

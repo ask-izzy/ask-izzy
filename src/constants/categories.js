@@ -56,7 +56,6 @@ var categories:Array<Category> = [
             </Infobox>
         ),
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),
@@ -68,7 +67,6 @@ var categories:Array<Category> = [
             q: 'food',
         },
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),
@@ -80,7 +78,6 @@ var categories:Array<Category> = [
             q: 'recreation',
         },
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),
@@ -92,7 +89,6 @@ var categories:Array<Category> = [
             q: 'legal aid',
         },
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),
@@ -104,7 +100,6 @@ var categories:Array<Category> = [
             q: 'financial aid',
         },
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),
@@ -116,7 +111,6 @@ var categories:Array<Category> = [
             q: 'physical health',
         },
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),
@@ -128,7 +122,6 @@ var categories:Array<Category> = [
             q: 'addiction',
         },
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),
@@ -140,7 +133,6 @@ var categories:Array<Category> = [
             q: 'mental health',
         },
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),
@@ -152,7 +144,6 @@ var categories:Array<Category> = [
             q: 'life skills',
         },
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),
@@ -164,7 +155,6 @@ var categories:Array<Category> = [
             q: 'employment',
         },
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),
@@ -176,7 +166,6 @@ var categories:Array<Category> = [
             q: 'centrelink',
         },
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),
@@ -188,7 +177,6 @@ var categories:Array<Category> = [
             q: 'recreation',
         },
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),
@@ -200,7 +188,6 @@ var categories:Array<Category> = [
             q: 'libraries toilets',
         },
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),
@@ -212,7 +199,6 @@ var categories:Array<Category> = [
             q: 'computers wifi',
         },
         personalisation: [
-            personalisation.Intro,
             personalisation.Location,
         ],
     }),

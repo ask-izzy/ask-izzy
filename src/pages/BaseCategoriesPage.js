@@ -30,6 +30,25 @@ class BaseCategoriesPage extends React.Component {
         this._category = category;
         return category;
     }
+
+    /**
+     * personalisationComponents:
+     *
+     * An array of components required to personalise this category.
+     */
+    /* flow:disable */
+    get personalisationComponents(): Array<React.Component> {
+        if (this.props.params.page) {
+            return this.category.personalisation;
+        } else if (this.props.params.search) {
+            return [
+                require('./personalisation/Location'),
+            ];
+        } else {
+            throw new Error("Unexpected");
+        }
+    }
+
 };
 
 export default BaseCategoriesPage;
