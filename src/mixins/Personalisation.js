@@ -4,11 +4,11 @@
 
 import React from 'react';
 
-import PersonalisationPage from '../pages/PersonalisationPage';
+import BasePersonalisationPage from '../pages/BasePersonalisationPage';
 
 var Personalisation = {
     contextTypes: {
-        controller: React.PropTypes.instanceOf(PersonalisationPage),
+        controller: React.PropTypes.instanceOf(BasePersonalisationPage),
     },
 
     nextStep: function nextStep(): void {
