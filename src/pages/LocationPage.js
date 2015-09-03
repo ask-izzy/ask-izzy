@@ -285,7 +285,7 @@ class LocationPage extends React.Component {
                         <mui.ListItem
                             className="ListItem"
                             primaryText="Unable to get your location"
-                            secondaryText={`Please enter your location above
+                            secondaryText={`Please enter your location below
                                 (${this.state.error})`}
                             leftIcon={<icons.Cross />}
 

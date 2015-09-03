@@ -22,6 +22,10 @@ class ResultsMapPage extends BaseResultsPage {
         /* request the Google Maps API */
         Maps().then((maps) => {
             this.setState({maps: maps});
+
+            // disable infowindows
+            maps.api.InfoWindow.prototype.set = function() {};
+
         });
     }
 
@@ -75,11 +79,15 @@ class ResultsMapPage extends BaseResultsPage {
         }
     }
 
-    onMapClick(): void {
+    clearSelection(): void {
         if (this.state.selectedServices) {
             this.setState({selectedServices: []});
             this.showWholeMap();
         }
+    }
+
+    onMapClick(): void {
+        this.clearSelection();
     }
 
     onMarkerClick(services: Array<Object>): void {
@@ -92,6 +100,14 @@ class ResultsMapPage extends BaseResultsPage {
             });
             map.setZoom(18);
         });
+    }
+
+    onBackClick(): void {
+        if (_.isEmpty(this.state.selectedServices)) {
+            this.goBack();
+        } else {
+            this.clearSelection();
+        }
     }
 
     // flow:disable
@@ -109,18 +125,32 @@ class ResultsMapPage extends BaseResultsPage {
 
     render(): React.Element {
         var mapHeight = 0;
+        var selectedServices = this.state.selectedServices || [];
 
         try {
             /* calculate the height of the map */
             mapHeight =
-                document.querySelector('.BrandedPage').offsetHeight -
+                window.innerHeight -
                 document.querySelector('.AppBar').offsetHeight;
 
-            if (mapHeight > 700) {
-                /* we have space for the footer */
-                mapHeight -= document.querySelector('footer').offsetHeight;
+            if (mapHeight > 900) {
+                /* we have space for the footer, resize the map to either fit
+                 * the footer or the selected results */
+                mapHeight -= Math.max(
+                    document.querySelector('footer').offsetHeight,
+                    150 * selectedServices.length
+                );
+            } else {
+                /* no space for the footer, but resize the map to make room
+                 * for the selected results */
+                mapHeight -= 150 * selectedServices.length;
             }
+
+            /* limit minimum height to 1/3 of the screen realestate */
+            mapHeight = Math.max(mapHeight,
+                                 window.innerHeight / 3);
         } catch (e) {
+            console.error(e);
         }
 
         return (
@@ -131,7 +161,7 @@ class ResultsMapPage extends BaseResultsPage {
                     iconElementLeft={
                         <mui.IconButton
                             className="BackButton"
-                            onTouchTap={this.goBack.bind(this)}
+                            onTouchTap={this.onBackClick.bind(this)}
                         >
                             <icons.ChevronBack />
                         </mui.IconButton>
@@ -159,6 +189,8 @@ class ResultsMapPage extends BaseResultsPage {
                                  * coordinates */
                                 (objects, index) => <Marker
                                     key={index}
+                                    label={String(objects.length)}
+                                    title={objects[0].site.name}
                                     position={{
                                         lat: objects[0].location.point.lat,
                                         lng: objects[0].location.point.lon,
@@ -171,8 +203,12 @@ class ResultsMapPage extends BaseResultsPage {
                     : ''
                 }
                 <mui.List className="List">{
-                    (this.state.selectedServices || []).map((object, index) =>
-                        <ResultListItem key={index} object={object} />
+                    selectedServices.map((object, index) =>
+                        <ResultListItem
+                            key={index}
+                            object={object}
+                            nRelatedServices={0}
+                        />
                     )
                 }</mui.List>
             </div>
