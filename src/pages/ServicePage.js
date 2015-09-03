@@ -9,6 +9,7 @@ import ServicePane from "../components/ServicePane";
 import reactMixin from "react-mixin";
 
 import * as iss from '../iss';
+import components from '../components';
 import icons from "../icons";
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
@@ -45,17 +46,9 @@ class ServicePage extends React.Component {
         } else {
             return (
                 <div>
-                    <mui.AppBar
-                        className="AppBar"
+                    <components.AppBar
                         title={object.site.name}
-                        iconElementLeft={
-                            <mui.IconButton
-                                className="BackButton"
-                                onTouchTap={this.goBack.bind(this)}
-                            >
-                                <icons.ChevronBack />
-                            </mui.IconButton>
-                        }
+                        onBackTouchTap={this.goBack.bind(this)}
                     />
                     <ServicePane service={object}/>
                 </div>

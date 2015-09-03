@@ -13,7 +13,7 @@ import { debounce } from "core-decorators";
 
 import Location from '../geolocation';
 import Maps from '../maps';
-import HeaderBar from '../components/HeaderBar';
+import components from '../components';
 import icons from '../icons';
 
 var GeoLocationState = {
@@ -211,18 +211,11 @@ class LocationPage extends React.Component {
     render(): React.Element {
         return (
             <div className="LocationPage">
-                <mui.AppBar
-                    className="AppBar"
+                <components.AppBar
                     title="Personalise"
-                    iconElementLeft={
-                        <mui.IconButton
-                            onTouchTap={this.goBack.bind(this)}
-                        >
-                            <icons.ChevronBack />
-                        </mui.IconButton>
-                    }
+                    onBackTouchTap={this.goBack.bind(this)}
                 />
-                <HeaderBar
+                <components.HeaderBar
                     primaryText={
                         <div>
                             Where are you?
