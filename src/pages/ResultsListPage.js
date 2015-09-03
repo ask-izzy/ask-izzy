@@ -39,6 +39,13 @@ class ResultsListPage extends BaseResultsPage {
                             <Router.Link
                                 to="category_personalisation"
                                 params={this.getParams()}
+                                onClick={event => {
+                                    event.preventDefault();
+                                    this.replaceWith(
+                                        'category_personalisation',
+                                        this.getParams());
+                                }}
+
                             >Change what you need</Router.Link>
                          </div>
                     }

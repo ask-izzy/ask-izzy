@@ -8,6 +8,7 @@ import BrandedPage from "./pages/BrandedPage";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
+import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
 import ResultsListPage from "./pages/ResultsListPage";
 import ResultsMapPage from "./pages/ResultsMapPage";
 import ServicePage from "./pages/ServicePage";
@@ -59,7 +60,7 @@ export default <Router.Route
             <Router.Route
                 name="category_personalisation"
                 path="/category/:page/personalise/summary"
-                handler={PersonalisationWizardPage}
+                handler={PersonalisationSummaryPage}
             />
             <Router.Route
                 name="search"

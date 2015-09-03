@@ -33,7 +33,7 @@ var AutocompleteState = {
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
-class LocationPage extends React.Component {
+class LocationPersonalisation extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {
@@ -66,6 +66,14 @@ class LocationPage extends React.Component {
         } else {
             return null;
         }
+    }
+
+    // flow:disable
+    static summaryLabel = "Where are you?";
+
+    // flow:disable
+    static get summaryValue(): string {
+        return sessionstorage.getItem('location');
     }
 
     async locateMe(): Promise<Object> {
@@ -377,4 +385,4 @@ class LocationPage extends React.Component {
 
 }
 
-export default LocationPage;
+export default LocationPersonalisation;

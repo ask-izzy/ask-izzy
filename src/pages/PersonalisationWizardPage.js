@@ -4,9 +4,6 @@
 
 import React from 'react';
 import Router from "react-router";
-import mui from "material-ui";
-import reactMixin from "react-mixin";
-import _ from "underscore";
 
 import BasePersonalisationPage from './BasePersonalisationPage';
 import Intro from './personalisation/Intro';
