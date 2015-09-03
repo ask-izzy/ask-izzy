@@ -12,6 +12,11 @@ Feature: See results on a map
         # We can't change URL else we'll remove the maps instrumentation
         When I click on "View on a map"
         Then I should see a map
-        And I should see 2 markers
-        And a marker should have position 37.8237S 144.985E
-        And a marker should have position 37.8228S 144.998E
+        # There are 2 sites
+        And I should see markers
+        --------------------------------------------------
+        Title              | Label | Latitude | Longitude
+        ==================================================
+        Susan's House      | 1     | -37.8237 | 144.985
+        My Housing Service | 2     | -37.8228 | 144.998
+        --------------------------------------------------

@@ -18,9 +18,7 @@ module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .given("I'm watching map events", unpromisify(instrumentMap))
         .then('I should see a map', unpromisify(assertMap))
-        .then('I should see $NUM markers?', unpromisify(assertMarkers))
-        .then('a marker should have position $LATITUDE $LONGITUDE',
-              unpromisify(assertMarkerCoords))
+        .then('I should see markers?\n$table', unpromisify(assertMarkers))
         ;
 })();
 
@@ -76,31 +74,27 @@ async function assertMap(): Promise<void> {
     assert.equal(visible, true);
 }
 
-async function assertMarkers(num: number): Promise<void> {
-    var nMaps = await this.driver.executeScript(
-        () => google.maps.markers.length
-    );
-    assert.equal(nMaps, num);
-}
-
-async function assertMarkerCoords(lat: number, lng: number): Promise<void> {
+async function assertMarkers(table: Array<Object>): Promise<void> {
     var markers = await this.driver.executeScript(
-        () => google.maps.markers
-            .map(marker => {
-                var position = marker.getPosition();
+        () => google.maps.markers.map(marker => {
+            var position = marker.getPosition();
 
-                return {
-                    /* Be aware of floating point precision, we're
-                     * comparing to a precision of 6 significant figures */
-                    lat: position.lat().toPrecision(6),
-                    lng: position.lng().toPrecision(6),
-                };
-            })
+            return {
+                Title: marker.getTitle(),
+                Label: marker.getLabel(),
+                /* Be aware of floating point precision, we're
+                 * comparing to a precision of 6 significant figures */
+                Latitude: position.lat().toPrecision(6),
+                Longitude: position.lng().toPrecision(6),
+            };
+        })
     );
 
-    assert(_.findWhere(markers,
-                       {
-                           lat: lat.toPrecision(6),
-                           lng: lng.toPrecision(6),
-                       }));
+    /* Sort tables by title for comparison */
+    function cmp(a, b) {
+        return a.Title.localeCompare(b.Title);
+    }
+
+    assert.deepEqual(markers.sort(cmp),
+                     table.sort(cmp));
 }
