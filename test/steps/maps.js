@@ -17,6 +17,7 @@ import unpromisify from "../support/yadda-promise";
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .given("I'm watching map events", unpromisify(instrumentMap))
+        .when('I click on the map', unpromisify(clickMap))
         .when('I click marker titled "$STRING"', unpromisify(clickMarker))
         .then('I should see a map', unpromisify(assertMap))
         .then('I should see markers?\n$table', unpromisify(assertMarkers))
@@ -59,6 +60,12 @@ async function instrumentMap(): Promise<void> {
         google.maps.Marker.prototype.recordMarker = function() {
             google.maps.markers.push(this);
         };
+    });
+}
+
+async function clickMap(): Promise<void> {
+    await this.driver.executeScript(() => {
+        google.maps.event.trigger(google.maps.maps[0], 'click');
     });
 }
 

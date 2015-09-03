@@ -21,7 +21,7 @@ Feature: See results on a map
         My Housing Service | 2     | -37.8228 | 144.998
         --------------------------------------------------
 
-    Scenario: Clicking a marker show services at that site
+    Scenario: Clicking a marker shows services at that site and clicking on map returns to full map
         Given my location is "Melbourne VIC"
         When I visit /category/housing
 
@@ -36,3 +36,20 @@ Feature: See results on a map
         Housing Service
         Emergency Accom
         ---------------------
+
+        When I click on the map
+        Then I should not see "Housing Service"
+
+    Scenario: Clicking a marker shows services at that site and clicking back returns to full map
+        Given my location is "Melbourne VIC"
+        When I visit /category/housing
+
+        Given I'm watching map events
+        # We can't change URL else we'll remove the maps instrumentation
+        When I click on "View on a map"
+        And I click marker titled "My Housing Service"
+        Then I should see "Housing Service"
+
+        When I click back from the title bar
+        Then I should see a map
+        And I should not see "Housing Service"
