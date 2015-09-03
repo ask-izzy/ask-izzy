@@ -9,6 +9,8 @@ import Infobox from "../components/Infobox";
 import icons from "../icons";
 import * as iss from "../iss";
 
+import personalisation from '../pages/personalisation';
+
 class Category {
     key: string;
     name: string;
@@ -16,6 +18,7 @@ class Category {
     icon: ReactComponent;
     search: iss.searchRequest;
     info: ?ReactElement;
+    personalisation: Array<React.Component>;
 
     constructor(props: {
         name: string,
@@ -23,6 +26,7 @@ class Category {
         icon: ReactComponent,
         search: iss.searchRequest,
         info?: ReactElement,
+        personalisation: Array<React.Component>,
     }) {
         this.name = props.name;
         this.byline = props.byline;
@@ -30,6 +34,7 @@ class Category {
         this.key = slugify(this.name);
         this.search = props.search;
         this.info = props.info;
+        this.personalisation = props.personalisation;
     }
 }
 
@@ -50,6 +55,10 @@ var categories:Array<Category> = [
                 help you stay in your current house.
             </Infobox>
         ),
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
     new Category({
         name: "Food",
@@ -58,6 +67,10 @@ var categories:Array<Category> = [
         search: {
             q: 'food',
         },
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
     new Category({
         name: "Everyday things",
@@ -66,6 +79,10 @@ var categories:Array<Category> = [
         search: {
             q: 'recreation',
         },
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
     new Category({
         name: "Legal",
@@ -74,6 +91,10 @@ var categories:Array<Category> = [
         search: {
             q: 'legal aid',
         },
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
     new Category({
         name: "Money help",
@@ -82,6 +103,10 @@ var categories:Array<Category> = [
         search: {
             q: 'financial aid',
         },
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
     new Category({
         name: "Health",
@@ -90,6 +115,10 @@ var categories:Array<Category> = [
         search: {
             q: 'physical health',
         },
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
     new Category({
         name: "Addiction",
@@ -98,6 +127,10 @@ var categories:Array<Category> = [
         search: {
             q: 'addiction',
         },
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
     new Category({
         name: "Support & counselling",
@@ -106,6 +139,10 @@ var categories:Array<Category> = [
         search: {
             q: 'mental health',
         },
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
     new Category({
         name: "Life skills & education",
@@ -114,6 +151,10 @@ var categories:Array<Category> = [
         search: {
             q: 'life skills',
         },
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
     new Category({
         name: "Finding work",
@@ -122,6 +163,10 @@ var categories:Array<Category> = [
         search: {
             q: 'employment',
         },
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
     new Category({
         name: "Centrelink",
@@ -130,6 +175,10 @@ var categories:Array<Category> = [
         search: {
             q: 'centrelink',
         },
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
     new Category({
         name: "Something to do",
@@ -138,6 +187,10 @@ var categories:Array<Category> = [
         search: {
             q: 'recreation',
         },
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
     new Category({
         name: "Facilities",
@@ -146,6 +199,10 @@ var categories:Array<Category> = [
         search: {
             q: 'libraries toilets',
         },
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
     new Category({
         name: "Technology",
@@ -154,6 +211,10 @@ var categories:Array<Category> = [
         search: {
             q: 'computers wifi',
         },
+        personalisation: [
+            personalisation.Intro,
+            personalisation.Location,
+        ],
     }),
 ];
 

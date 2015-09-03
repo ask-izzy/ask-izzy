@@ -37,10 +37,8 @@ class ResultsListPage extends BaseResultsPage {
                     secondaryText={
                         <div>
                             <Router.Link
-                                to="location"
-                                query={{
-                                    next: this.getPath(),
-                                }}
+                                to="category_personalisation"
+                                params={this.getParams()}
                             >Change what you need</Router.Link>
                          </div>
                     }

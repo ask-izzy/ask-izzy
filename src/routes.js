@@ -7,7 +7,7 @@ import BasePage from "./pages/BasePage";
 import BrandedPage from "./pages/BrandedPage";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
-import LocationPage from "./pages/LocationPage";
+import PersonalisationPage from "./pages/PersonalisationPage";
 import ResultsListPage from "./pages/ResultsListPage";
 import ResultsMapPage from "./pages/ResultsMapPage";
 import ServicePage from "./pages/ServicePage";
@@ -52,6 +52,11 @@ export default <Router.Route
                 handler={ResultsMapPage}
             />
             <Router.Route
+                name="category_personalisation"
+                path="/category/:page/personalise"
+                handler={PersonalisationPage}
+            />
+            <Router.Route
                 name="search"
                 path="/search/:search"
                 handler={ResultsListPage}
@@ -65,11 +70,6 @@ export default <Router.Route
                 name="service"
                 path="/service/:id"
                 handler={ServicePage}
-            />
-            <Router.Route
-                name="location"
-                path="/personalise/location"
-                handler={LocationPage}
             />
 
             <Router.DefaultRoute handler={ErrorPage}/>

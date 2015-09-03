@@ -7,14 +7,15 @@ import Router from "react-router";
 import _ from 'underscore';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
-import { ltrim } from "underscore.string";
 import sessionstorage from "sessionstorage";
 import { debounce } from "core-decorators";
+import { ltrim } from "underscore.string";
 
-import Location from '../geolocation';
-import Maps from '../maps';
-import components from '../components';
-import icons from '../icons';
+import Location from '../../geolocation';
+import Maps from '../../maps';
+import Personalisation from '../../mixins/Personalisation';
+import components from '../../components';
+import icons from '../../icons';
 
 var GeoLocationState = {
     NOT_STARTED: 0,
@@ -30,6 +31,7 @@ var AutocompleteState = {
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
+/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class LocationPage extends React.Component {
     constructor(props: Object) {
         super(props);
@@ -123,7 +125,7 @@ class LocationPage extends React.Component {
     onTouchDoneButton(event: Event): void {
         event.preventDefault();
         sessionstorage.setItem('location', this.state.locationName);
-        this.replaceWith(this.getQuery().next);
+        this.nextStep();
     }
 
     /**
@@ -210,11 +212,7 @@ class LocationPage extends React.Component {
 
     render(): React.Element {
         return (
-            <div className="LocationPage">
-                <components.AppBar
-                    title="Personalise"
-                    onBackTouchTap={this.goBack.bind(this)}
-                />
+            <div>
                 <components.HeaderBar
                     primaryText={
                         <div>
