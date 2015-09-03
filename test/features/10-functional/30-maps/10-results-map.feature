@@ -20,3 +20,19 @@ Feature: See results on a map
         Susan's House      | 1     | -37.8237 | 144.985
         My Housing Service | 2     | -37.8228 | 144.998
         --------------------------------------------------
+
+    Scenario: Clicking a marker show services at that site
+        Given my location is "Melbourne VIC"
+        When I visit /category/housing
+
+        Given I'm watching map events
+        # We can't change URL else we'll remove the maps instrumentation
+        When I click on "View on a map"
+        And I click marker titled "My Housing Service"
+        Then I should see the results
+        ---------------------
+        ServiceName (name)
+        =====================
+        Housing Service
+        Emergency Accom
+        ---------------------
