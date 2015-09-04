@@ -157,7 +157,7 @@ class ResultsMapPage extends BaseResultsPage {
             <div className="ResultsMapPage">
                 <components.AppBar
                     title={this.title}
-                    onBackTouchTap={this.goBack.bind(this)}
+                    onBackTouchTap={this.onBackClick.bind(this)}
                 />
                 {   /* we can't create the map component until the API promise
                      * resolves */
