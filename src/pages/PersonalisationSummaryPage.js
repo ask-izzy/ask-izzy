@@ -84,6 +84,12 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                             are never stored anywhere. When you close I will
                             forget them.
                         </div>
+                        <div className="done-button">
+                            <mui.FlatButton
+                                label="Okay"
+                                onTouchTap={this.previousStep.bind(this)}
+                            />
+                        </div>
                     </div>
                 }
             </div>
