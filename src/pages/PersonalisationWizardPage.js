@@ -53,7 +53,6 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
 
     render(): React.Element {
         var subpage = this.personalisationComponents[this.state.subpage];
-        console.log(subpage);
 
         return (
             <div className="PersonalisationPage">

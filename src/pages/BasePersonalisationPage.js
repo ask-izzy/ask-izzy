@@ -6,6 +6,7 @@ import React from 'react';
 import Router from "react-router";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
+import _ from "underscore";
 
 import BaseCategoriesPage from './BaseCategoriesPage';
 import components from '../components';
@@ -36,6 +37,14 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     }
 
     nextStep(): void {
+    }
+
+    componentDidMount(): void {
+        /* Set the subpage if it was requested.
+         * This is only used for testing. */
+        if (_.has(this.props.query, 'subpage')) {
+            this.setState({subpage: this.props.query.subpage});
+        }
     }
 }
 
