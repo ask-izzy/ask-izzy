@@ -4,6 +4,7 @@
 
 import React from 'react';
 import mui from "material-ui";
+import _ from 'underscore';
 
 import BasePersonalisationPage from './BasePersonalisationPage';
 import components from '../components';
@@ -13,7 +14,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
 
     previousStep(): void {
         if (this.state.subpage == 0) {
-            console.log("FIXME: return to category page");
+            this.goBack();
         } else {
             console.log("FIXME: close component");
         }
@@ -45,8 +46,12 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                             key={index}
                             className="ListItem"
 
-                            primaryText={component.summaryLabel}
-                            secondaryText={component.summaryValue}
+                            primaryText={<span className="primaryText">{
+                                component.summaryLabel
+                            }</span>}
+                            secondaryText={<span className="secondaryText">{
+                                component.summaryValue
+                            }</span>}
 
                             disableFocusRipple={true}
                             disableTouchRipple={true}
