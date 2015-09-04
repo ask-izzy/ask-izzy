@@ -118,8 +118,10 @@ function getSearchElement(driver: Webdriver.WebDriver):
 }
 
 async function doSearch(search: string): Promise<void> {
-    await getSearchElement(this.driver)
-        .sendKeys(search);
+    var element = await getSearchElement(this.driver);
+
+    await element.clear();
+    await element.sendKeys(search);
 }
 
 async function doSearchAndEnter(search: string): Promise<void> {

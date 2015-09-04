@@ -21,3 +21,20 @@ Feature: Change your personalisation settings
 
         When I click back from the title bar
         Then I should be at /
+
+    Scenario: Edit my location setting
+        Given my location is "Melbourne VIC"
+        When I visit /category/housing/personalise/summary
+        And I click on "Where are you?"
+        Then I should see "Get current location"
+
+        When I search for "carlt"
+        And I click on "Carlton"
+        And I click on "Done"
+
+        Then I should see the results
+        ------------------------------------------------
+        Question (primaryText) | Answer (secondaryText)
+        ================================================
+        Where are you?         | Carlton, Victoria
+        ------------------------------------------------
