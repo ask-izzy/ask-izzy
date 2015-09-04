@@ -26,6 +26,18 @@ class LocationPage extends React.Component {
         return request;
     }
 
+    // flow:disable
+    get seekingHelpWith(): string {
+        try {
+            var category = this.context.controller.category;
+            return category.byline.toLocaleLowerCase() ||
+                `with ${category.name.toLocaleLowerCase()}`;
+        } catch (e) {
+            var search = this.context.controller.props.params.search;
+            return `with ${search.toLocaleLowerCase()}`;
+        }
+    }
+
     onTouchDoneButton(event: Event): void {
         event.preventDefault();
         this.nextStep();
@@ -42,9 +54,7 @@ class LocationPage extends React.Component {
                         <div>
                             <icons.LogoLight className="Logo" />
                             These services can help you
-                            {' '}
-                            {this.context.controller.category.byline
-                                .toLocaleLowerCase()}.
+                            {' '}{this.seekingHelpWith}.
                         </div>
                     }
                     secondaryText={

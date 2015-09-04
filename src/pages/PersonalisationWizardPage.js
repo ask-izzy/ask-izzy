@@ -4,6 +4,7 @@
 
 import React from 'react';
 import Router from "react-router";
+import _ from 'underscore';
 
 import BasePersonalisationPage from './BasePersonalisationPage';
 import Intro from './personalisation/Intro';
@@ -35,7 +36,16 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         var subpage = this.state.subpage + 1;
 
         if (subpage == this.personalisationComponents.length) {
-            this.replaceWith('category', this.getParams());
+            var params = this.getParams();
+
+            if (_.has(params, 'page')) {
+                this.replaceWith('category', params);
+            } else if (_.has(params, 'search')) {
+                this.replaceWith('search', params);
+            } else {
+                throw new Error("Unexpected");
+            }
+
         } else {
             this.setState({subpage: subpage});
         }

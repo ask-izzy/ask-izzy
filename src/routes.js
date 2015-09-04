@@ -42,6 +42,7 @@ export default <Router.Route
                 path="/"
                 handler={HomePage}
             />
+
             <Router.Route
                 name="category"
                 path="/category/:page"
@@ -62,6 +63,7 @@ export default <Router.Route
                 path="/category/:page/personalise/summary"
                 handler={PersonalisationSummaryPage}
             />
+
             <Router.Route
                 name="search"
                 path="/search/:search"
@@ -72,6 +74,17 @@ export default <Router.Route
                 path="/search/:search/map"
                 handler={ResultsMapPage}
             />
+            <Router.Route
+                name="search_personalisation_wizard"
+                path="/search/:search/personalise"
+                handler={PersonalisationWizardPage}
+            />
+            <Router.Route
+                name="search_personalisation"
+                path="/search/:search/personalise/summary"
+                handler={PersonalisationSummaryPage}
+            />
+
             <Router.Route
                 name="service"
                 path="/service/:id"

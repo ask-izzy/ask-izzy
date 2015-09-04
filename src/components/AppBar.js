@@ -20,6 +20,7 @@ class AppBar extends React.Component {
                 title={this.props.title}
                 iconElementLeft={
                     <mui.IconButton
+                        className="BackButton"
                         onTouchTap={this.props.onBackTouchTap}
                     >
                         <icons.ChevronBack />

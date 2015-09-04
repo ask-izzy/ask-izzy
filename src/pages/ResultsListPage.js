@@ -37,13 +37,16 @@ class ResultsListPage extends BaseResultsPage {
                     secondaryText={
                         <div>
                             <Router.Link
-                                to="category_personalisation"
-                                params={this.getParams()}
+                                to={`${this.getPath()}/personalise/summary`}
+                                /* We don't want this link to appear in our
+                                 * back history */
                                 onClick={event => {
                                     event.preventDefault();
+
+                                    var path = this.getPath();
                                     this.replaceWith(
-                                        'category_personalisation',
-                                        this.getParams());
+                                        `${path}/personalise/summary`
+                                    );
                                 }}
 
                             >Change what you need</Router.Link>

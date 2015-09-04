@@ -84,6 +84,7 @@ class BaseResultsPage extends BaseCategoriesPage {
 
             if (!request) {
                 this.replaceWith(this.getPath() + '/personalise');
+                return;
             }
         }
 

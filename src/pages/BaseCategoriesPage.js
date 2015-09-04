@@ -24,7 +24,7 @@ class BaseCategoriesPage extends React.Component {
         });
 
         if (category === undefined) {
-            throw "No such category " + this.props.params.page;
+            throw new Error(`No such category as ${this.props.params.page}`);
         }
 
         this._category = category;
