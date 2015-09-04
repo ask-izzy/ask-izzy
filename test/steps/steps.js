@@ -12,6 +12,7 @@ module.exports = (function() {
         require('./branding'),
         require('./datetime'),
         require('./geolocation'),
+        require('./maps'),
         require('./results'),
     ];
 })();

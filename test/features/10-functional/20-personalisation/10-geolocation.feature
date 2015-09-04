@@ -29,5 +29,5 @@ Feature: Geolocation
 
         When I deny access to geolocation
         Then I should see "Unable to get your location"
-        And I should see "Please enter your location above (User denied access)"
+        And I should see "Please enter your location below (User denied access)"
         And the button "Done" should be disabled
