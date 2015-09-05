@@ -61,8 +61,10 @@ class ResultsMapPage extends BaseResultsPage {
         var bounds = new maps.LatLngBounds;
 
         for (var object of this.state.objects) {
-            bounds.extend(new maps.LatLng(object.location.point.lat,
-                                          object.location.point.lon));
+            if (object.location.point) {
+                bounds.extend(new maps.LatLng(object.location.point.lat,
+                                              object.location.point.lon));
+            }
         }
 
         this.getMap().then(map => {
@@ -124,8 +126,42 @@ class ResultsMapPage extends BaseResultsPage {
     }
 
     render(): React.Element {
-        var mapHeight = 0;
         var selectedServices = this.state.selectedServices || [];
+
+        return (
+            <div className="ResultsMapPage">
+                <mui.AppBar
+                    className="AppBar"
+                    title={this.title}
+                    iconElementLeft={
+                        <mui.IconButton
+                            className="BackButton"
+                            onTouchTap={this.onBackClick.bind(this)}
+                        >
+                            <icons.ChevronBack />
+                        </mui.IconButton>
+                    }
+                />
+                {   /* we can't create the map component until the API promise
+                     * resolves */
+                    this.state.maps ? this.renderMap() : ''
+                }
+                <mui.List className="List">{
+                    selectedServices.map((object, index) =>
+                        <ResultListItem
+                            key={index}
+                            object={object}
+                            nRelatedServices={0}
+                        />
+                    )
+                }</mui.List>
+            </div>
+        );
+    }
+
+    renderMap(): React.Element {
+        var selectedServices = this.state.selectedServices || [];
+        var mapHeight = 0;
 
         try {
             /* calculate the height of the map */
@@ -154,64 +190,37 @@ class ResultsMapPage extends BaseResultsPage {
         }
 
         return (
-            <div className="ResultsMapPage">
-                <mui.AppBar
-                    className="AppBar"
-                    title={this.title}
-                    iconElementLeft={
-                        <mui.IconButton
-                            className="BackButton"
-                            onTouchTap={this.onBackClick.bind(this)}
-                        >
-                            <icons.ChevronBack />
-                        </mui.IconButton>
-                    }
-                />
-                {   /* we can't create the map component until the API promise
-                     * resolves */
-                    this.state.maps ?
-                        <GoogleMap
-                            ref="map"
-                            containerProps={{
-                                style: {
-                                    height: mapHeight,
-                                },
-                            }}
-                            defaultCenter={{
-                                lat: -34.397,
-                                lng: 150.644,
-                            }}
-                            defaultZoom={4}
-                            onClick={this.onMapClick.bind(this)}
-                        >
-                            {this.sites.map(
-                                /* FIXME: need to combine markers at same
-                                 * coordinates */
-                                (objects, index) => <Marker
-                                    key={index}
-                                    label={String(objects.length)}
-                                    title={objects[0].site.name}
-                                    position={{
-                                        lat: objects[0].location.point.lat,
-                                        lng: objects[0].location.point.lon,
-                                    }}
-                                    onClick={this.onMarkerClick.bind(this,
-                                                                     objects)}
-                                />
-                            )}
-                        </GoogleMap>
-                    : ''
-                }
-                <mui.List className="List">{
-                    selectedServices.map((object, index) =>
-                        <ResultListItem
+            <GoogleMap
+                ref="map"
+                containerProps={{
+                    style: {
+                        height: mapHeight,
+                    },
+                }}
+                defaultCenter={{
+                    lat: -34.397,
+                    lng: 150.644,
+                }}
+                defaultZoom={4}
+                onClick={this.onMapClick.bind(this)}
+            >
+                {this.sites.map((objects, index) =>
+                    /* the site must have a public location */
+                    objects[0].location.point ?
+                        <Marker
                             key={index}
-                            object={object}
-                            nRelatedServices={0}
+                            label={String(objects.length)}
+                            title={objects[0].site.name}
+                            position={{
+                                lat: objects[0].location.point.lat,
+                                lng: objects[0].location.point.lon,
+                            }}
+                            onClick={this.onMarkerClick.bind(this, objects)}
                         />
-                    )
-                }</mui.List>
-            </div>
+                    :
+                        ''
+                )}
+            </GoogleMap>
         );
     }
 
