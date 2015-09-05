@@ -111,6 +111,40 @@ class BaseResultsPage extends BaseCategoriesPage {
 
             });
     }
+
+    loadMore(): void {
+        if (!this.state.meta && this.state.meta.next) {
+            return;
+        }
+
+        var next = this.state.meta.next;
+
+        /* reenable the search spinner */
+        this.setState({meta: null});
+
+        iss.default(next)
+            .then(data => {
+                this.setState({
+                    meta: data.meta,
+                    objects: this.state.objects.concat(data.objects),
+                    error: undefined,
+                });
+            })
+
+            .catch(response => {
+                try {
+                    var data = JSON.parse(response.text);
+                    this.setState({
+                        error: data.error_message,
+                    });
+                } catch (e) {
+                    this.setState({
+                        error: `An error occurred (${response.status})`,
+                    });
+                }
+
+            });
+    }
 }
 
 export default BaseResultsPage;

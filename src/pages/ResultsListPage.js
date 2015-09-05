@@ -43,14 +43,6 @@ class ResultsListPage extends BaseResultsPage {
                     }
                 />
 
-                {this.state.meta || this.state.error ?
-                    ''
-                :
-                    <div className="progress">
-                        <mui.CircularProgress mode="indeterminate" />
-                    </div>
-                }
-
                 {this.state.error ?
                     <div>
                         {this.state.error}
@@ -90,7 +82,29 @@ class ResultsListPage extends BaseResultsPage {
                         :
                             <ResultListItem object={object} key={index} />
                     )
-                }</mui.List>
+                }
+                {
+                    this.state.meta && this.state.meta.next ?
+                        <mui.ListItem
+                            primaryText="Get more results"
+                            onTouchTap={this.loadMore.bind(this)}
+
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
+                        />
+                    :
+                        ''
+                }
+                </mui.List>
+
+                {this.state.meta || this.state.error ?
+                    ''
+                :
+                    <div className="progress">
+                        <mui.CircularProgress mode="indeterminate" />
+                    </div>
+                }
+
             </div>
         );
     }
