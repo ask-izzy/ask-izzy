@@ -70,6 +70,11 @@
 
     .SummaryItem {
         background-color: $brand-bg-light !important;
+        border-bottom: 1px solid darken($list-item-hairline, 15%) !important;
+
+        &:hover, &:focus {
+            background-color: darken($brand-bg-light, 10%) !important;
+        }
 
         .primaryText {
             color: $brand-text-mid !important;
