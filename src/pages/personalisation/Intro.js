@@ -15,7 +15,7 @@ import * as iss from '../../iss';
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
-class LocationPage extends React.Component {
+class Intro extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {
@@ -82,4 +82,4 @@ class LocationPage extends React.Component {
 
 }
 
-export default LocationPage;
+export default Intro;
