@@ -56,8 +56,8 @@ var categories:Array<Category> = [
             </Infobox>
         ),
         personalisation: [
-            personalisation.Location,
             personalisation.Questions.SleepTonight,
+            personalisation.Location,
         ],
     }),
     new Category({
