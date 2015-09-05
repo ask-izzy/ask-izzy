@@ -43,7 +43,16 @@ class BasePersonalisationPage extends BaseCategoriesPage {
         /* Set the subpage if it was requested.
          * This is only used for testing. */
         if (_.has(this.props.query, 'subpage')) {
-            this.setState({subpage: this.props.query.subpage});
+            var subpage = this.props.query.subpage;
+            var subpageIndex = this.personalisationComponents.findIndex(
+                component => component.defaultProps.name == subpage
+            );
+
+            if (subpageIndex == -1) {
+                throw new Error(`No such page: ${subpage}`);
+            } else {
+                this.setState({subpage: subpageIndex});
+            }
         }
     }
 }

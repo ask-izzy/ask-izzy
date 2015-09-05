@@ -22,6 +22,11 @@ class Intro extends React.Component {
         };
     }
 
+    // flow:disable
+    static defaultProps = {
+        name: 'intro',
+    };
+
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         return request;
     }

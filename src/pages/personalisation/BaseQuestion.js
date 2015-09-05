@@ -10,6 +10,7 @@ import sessionstorage from "sessionstorage";
 import Personalisation from '../../mixins/Personalisation';
 import components from '../../components';
 import icons from '../../icons';
+import * as iss from '../../iss';
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class BaseQuestion extends React.Component {
@@ -32,23 +33,22 @@ class BaseQuestion extends React.Component {
         return this.defaultProps.question;
     }
 
-    constructor(props: Object) {
-        super(props);
-        this.state = {};
-    };
-
     // flow:disable
     static get summaryValue(): string {
-        return sessionstorage.getItem(this.name);
+        return sessionstorage.getItem(this.defaultProps.name);
+    }
+
+    static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+        return request;
     }
 
     onAnswerTouchTap(answer: string): void {
-        sessionstorage.setItem(this.constructor.name, answer);
+        sessionstorage.setItem(this.props.name, answer);
         this.nextStep();
     }
 
     render(): React.Element {
-        var selected = sessionstorage.getItem(this.constructor.name);
+        var selected = sessionstorage.getItem(this.props.name);
 
         return (
             <div>

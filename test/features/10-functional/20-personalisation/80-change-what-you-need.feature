@@ -10,11 +10,12 @@ Feature: Change your personalisation settings
         When I click on "Housing"
         And I click on "Change what you need"
         Then I should see the results
-        ------------------------------------------------
-        Question (primaryText) | Answer (secondaryText)
-        ================================================
-        Where are you?         | Melbourne VIC
-        ------------------------------------------------
+        ----------------------------------------------------------------
+        Question (primaryText)                  | Answer (secondaryText)
+        ================================================================
+        Do you have somewhere to sleep tonight? |
+        Where are you?                          | Melbourne VIC
+        ----------------------------------------------------------------
 
         When I click back from the title bar
         Then I should be at /category/housing
@@ -33,8 +34,9 @@ Feature: Change your personalisation settings
         And I click on "Done"
 
         Then I should see the results
-        ------------------------------------------------
-        Question (primaryText) | Answer (secondaryText)
-        ================================================
-        Where are you?         | Carlton, Victoria
-        ------------------------------------------------
+        ----------------------------------------------------------------
+        Question (primaryText)                  | Answer (secondaryText)
+        ================================================================
+        Do you have somewhere to sleep tonight? |
+        Where are you?                          | Carlton, Victoria
+        ----------------------------------------------------------------

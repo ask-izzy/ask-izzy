@@ -11,6 +11,10 @@ var Personalisation = {
         controller: React.PropTypes.instanceOf(BasePersonalisationPage),
     },
 
+    propTypes: {
+        name: React.PropTypes.string.isRequired,
+    },
+
     nextStep: function nextStep(): void {
         this.context.controller.nextStep();
     },
