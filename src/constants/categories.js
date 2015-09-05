@@ -57,6 +57,7 @@ var categories:Array<Category> = [
         ),
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.SleepTonight,
         ],
     }),
     new Category({
