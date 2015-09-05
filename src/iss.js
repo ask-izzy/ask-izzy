@@ -136,9 +136,6 @@ async function iss(path: string, data: ?searchRequest): Object {
     urlobj.auth = urlobj.search = urlobj.querystring = urlobj.query = null;
     url_ = url.format(urlobj);
 
-    console.log("URL", url_);
-    console.log("Data", data);
-
     var response = await request({
         url: url_,
         contentType: 'application/json',
