@@ -19,3 +19,9 @@ $list-item-hairline: $brand-bg-light;
 
 $max-width: 800px;
 $desktop-side-column-color: #eeeeee;
+
+$link-text-color: $brand-pane-alt-dark;
+
+a {
+    color: $link-text-color;
+}
