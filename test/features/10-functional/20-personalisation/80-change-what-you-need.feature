@@ -5,9 +5,11 @@ Feature: Change your personalisation settings
     # I want to change my previously answered personalisation questions
     # So that I can refine my search
 
-    Scenario: View personalisation settings and return to search
+    Background:
         Given my location is "Melbourne VIC"
         And I have somewhere to sleep tonight
+
+    Scenario: View personalisation settings and return to search
         When I click on "Housing"
         And I click on "Change what you need"
         Then I should see the results
@@ -25,8 +27,6 @@ Feature: Change your personalisation settings
         Then I should be at /
 
     Scenario: Edit my location setting
-        Given my location is "Melbourne VIC"
-        And I have nowhere to sleep tonight
         When I visit /category/housing/personalise/summary
         And I click on "Where are you?"
         Then I should see "Get current location"
@@ -39,6 +39,18 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                  | Answer (secondaryText)
         ================================================================
-        Do you have somewhere to sleep tonight? | No
+        Do you have somewhere to sleep tonight? | Yes
         Where are you?                          | Carlton, Victoria
+        ----------------------------------------------------------------
+
+    Scenario: Edit whether I have somewhere to sleep tonight
+        When I visit /category/housing/personalise/summary
+        And I click on "Do you have somewhere to sleep tonight?"
+        And I click on "No"
+        Then I should see the results
+        ----------------------------------------------------------------
+        Question (primaryText)                  | Answer (secondaryText)
+        ================================================================
+        Do you have somewhere to sleep tonight? | No
+        Where are you?                          | Melbourne VIC
         ----------------------------------------------------------------
