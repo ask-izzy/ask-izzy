@@ -27,22 +27,8 @@
            text-decoration: none;
         }
 
-        .logos {
+        .supporters {
             text-align: center;
-
-            & > div {
-                display: inline-block;
-
-                margin: 10px;
-            }
-
-            img {
-                margin-left: 10px;
-                margin-right: 10px;
-
-                height: 25px;
-                width: auto;
-            }
         }
     }
 }
