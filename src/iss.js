@@ -84,7 +84,7 @@ export async function search(
     var request: searchRequest = {
         type: 'service',
         catchment: true,
-        limit: 3,
+        limit: 5,
     };
 
     if (typeof query === 'string') {
@@ -103,13 +103,13 @@ export async function search(
         request.location = `${coords.longitude}E${coords.latitude}N`;
     }
 
-    return await iss('search/', request);
+    return await iss('/api/v3/search/', request);
 }
 
 export async function getService(
     id: number
 ): Promise<issService> {
-    return await iss(`service/${id}/`);
+    return await iss(`/api/v3/service/${id}/`);
 }
 
 export async function getSiteChildren(
@@ -120,19 +120,20 @@ export async function getSiteChildren(
         type: 'service',
     };
 
-    return await iss('search/', request);
+    return await iss('/api/v3/search/', request);
 }
 
 async function iss(path: string, data: ?searchRequest): Object {
     var url_: string = ISS_URL || process.env.ISS_URL;
+    var urlobj: url.urlObj = url.parse(url.resolve(url_, path), true);
 
-    data = data || {};
-
-    var urlobj: Object = url.parse(url_);
+    /* data overrides anything passed in via the URL.
+     * Passing query args via the URL needs to be supported for requesting
+     * meta.next */
+    data = Object.assign({}, urlobj.query, data);
     data.key = urlobj.auth;
 
-    urlobj.auth = null;
-    urlobj.pathname = `/api/v3/${path}`;
+    urlobj.auth = urlobj.search = urlobj.querystring = urlobj.query = null;
     url_ = url.format(urlobj);
 
     var response = await request({

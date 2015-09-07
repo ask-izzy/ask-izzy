@@ -12,6 +12,7 @@ Feature: Category page
     Scenario: Visit housing category
         When I visit /category/housing
         Then I should see "Housing"
+        And I should see "I found 3 housing services for Richmond, VIC."
         And I should see the results
         --------------------------------------------------------------------------
         Service Name (name) | Site Name (site_name) | Related services (related)
@@ -28,6 +29,9 @@ Feature: Category page
         Find out more
         HOUSING INFORMATION
         ---------------------------------------------------------------------
+
+        # The housing category has 3 results
+        And I should not see "Get more results"
 
     Scenario: Navigate to a service and back to a category
         When I visit /category/housing
@@ -50,3 +54,24 @@ Feature: Category page
     Scenario: I should never see "invalid date"
         When I visit /category/housing
         Then I should not see "Invalid date"
+
+    Scenario: Visit a category with more than 5 services
+        When I visit /category/everyday-things
+        Then I should see "Get more results"
+
+        When I click on "Get more results"
+        Then I should see the results
+        --------------------
+        Service Name (name)
+        ====================
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        --------------------
