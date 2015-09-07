@@ -76,7 +76,7 @@ var categories:Array<Category> = [
         byline: "Things you might need",
         icon: icons.Things,
         search: {
-            q: 'recreation',
+            q: 'material aid',
         },
         personalisation: [
             personalisation.Location,

@@ -90,6 +90,46 @@ app.get('/api/v3/search/', (req, res) => {
                 },
             ],
         });
+    } else if (req.query.q == 'material aid') {
+        var object = {
+            id: 444,
+            name: "Community Lunch",
+            site: {
+                id: 444,
+                name: "Youth Support Net",
+            },
+            now_open: {
+                now_open: false,
+            },
+            opening_hours: [
+                {
+                    day: 'Wednesday',
+                    open: '9:00:00',
+                    close: '17:00:00',
+                },
+            ],
+            location: {
+                suburb: 'Richmond',
+            },
+        };
+
+        res.json({
+            meta: {
+                total_count: 8,
+                location: {
+                    suburb: "Richmond",
+                    state: "VIC",
+                },
+                next: req.originalUrl,
+            },
+            objects: [
+                object,
+                object,
+                object,
+                object,
+                object,
+            ],
+        });
     } else {
         /* conventional search */
         res.json({
