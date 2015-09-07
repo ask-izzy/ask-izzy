@@ -11,7 +11,7 @@ export default class SvgIconFeedback extends React.Component {
         return (
             <mui.SvgIcon
                 {...this.props}
-                className={ `${this.props.className || ''} Feedback` }
+                className={ `${this.props.className || ''} FeedbackIcon` }
                 viewBox="0 0 64 64"
             >
             <path d='M34.233,47.42c-8.813,0-15.983-7.17-15.983-15.983c0-8.814,7.17-15.984,15.983-15.984     c8.814,0,15.984,7.17,15.984,15.984C50.217,40.25,43.047,47.42,34.233,47.42z M34.233,17.651     c-7.601,0-13.784,6.185-13.784,13.785S26.632,45.22,34.233,45.22s13.785-6.184,13.785-13.784S41.833,17.651,34.233,17.651z'/>

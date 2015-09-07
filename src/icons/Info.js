@@ -11,7 +11,7 @@ export default class SvgIconInfo extends React.Component {
         return (
             <mui.SvgIcon
                 {...this.props}
-                className={ `${this.props.className || ''} Info` }
+                className={ `${this.props.className || ''} InfoIcon` }
                 viewBox="0 0 64 64"
             >
             <path d='M31.812,46.003c-8.814,0-15.984-7.17-15.984-15.983c0-8.814,7.17-15.984,15.984-15.984     c8.813,0,15.983,7.17,15.983,15.984C47.796,38.833,40.626,46.003,31.812,46.003z M31.812,16.235     c-7.601,0-13.785,6.185-13.785,13.785s6.185,13.784,13.785,13.784s13.784-6.184,13.784-13.784S39.413,16.235,31.812,16.235z'/>
