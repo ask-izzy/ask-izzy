@@ -27,7 +27,7 @@ class ServicePage extends React.Component {
      */
 
     componentDidMount(): void {
-        iss.getService(this.id())
+        iss.getService(this.id)
             .then(data => {
                 this.setState({
                     object: data,
@@ -38,10 +38,14 @@ class ServicePage extends React.Component {
     }
 
     /**
-     * Pull out the ID from the slug
+     * Pull out the ID (leading digits) from the slug
      */
-    id(): number {
-        return parseInt(this.props.params.id);
+
+    // flow:disable not supported yet
+    get id(): number {
+        var leadingDigits = /^\d+/;
+        var slug = this.props.params.id;
+        return parseInt(slug.match(leadingDigits)[0]);
     }
 
     render(): React.Element {
