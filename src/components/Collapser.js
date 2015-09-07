@@ -44,7 +44,6 @@ class Collapser extends React.Component {
                 onclick={this.handleClick}
             >
                 <a
-                    href="#"
                     alt="Show more"
                     onClick={this.handleClick}
                 >{this.props.message}</a>
