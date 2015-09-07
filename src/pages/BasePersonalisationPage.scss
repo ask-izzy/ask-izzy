@@ -1,4 +1,4 @@
-.LocationPage {
+.PersonalisationPage {
     .search {
         width: 100%;
         border-bottom: 1px solid $list-item-hairline !important;
@@ -66,5 +66,27 @@
         }
 
         border-bottom: 1px solid $list-item-hairline !important;
+    }
+
+    .SummaryItem {
+        background-color: $brand-bg-light !important;
+
+        .primaryText {
+            color: $brand-text-mid !important;
+        }
+
+        .secondaryText {
+            float: right;
+            margin: 0 !important;
+
+            color: $icon-fg-color !important;
+
+            font-size: 16px !important;
+            text-decoration: underline;
+        }
+    }
+
+    .padded {
+        margin: 20px !important;
     }
 }

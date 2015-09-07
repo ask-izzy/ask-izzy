@@ -4,17 +4,13 @@
 
 import assert from "assert";
 import { By } from 'selenium-webdriver';
-import selectors from './selectors';
-
-function rootSelector(child) {
-    return "//" + child;
-}
+import { deepestPossible } from './selectors';
 
 // flow:disable
 // jscs: disable
-assert.imageIsVisible = async function(driver, altText, within=rootSelector) {
+assert.imageIsVisible = async function(driver, altText) {
     var visible = await driver.findElement(By.xpath(
-        within(`img[@alt = '${altText}']`)
+        `//img[@alt = '${altText}']`
     ))
         .isDisplayed();
 
@@ -23,9 +19,9 @@ assert.imageIsVisible = async function(driver, altText, within=rootSelector) {
 
 // flow:disable
 // jscs: disable
-assert.textIsVisible = async function(driver, text, within=rootSelector) {
+assert.textIsVisible = async function(driver, text) {
     var visible = await driver.findElement(By.xpath(
-        within(`*[normalize-space(text()) = normalize-space('${text}')]`)
+        deepestPossible(`normalize-space(.) = normalize-space('${text}')`)
     ))
         .isDisplayed();
 

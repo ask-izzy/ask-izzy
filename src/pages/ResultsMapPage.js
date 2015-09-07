@@ -8,12 +8,12 @@ import Router from "react-router";
 import mui from "material-ui";
 import _ from "underscore";
 
-import BaseResultsPage from "./BaseResultsPage";
-import HeaderBar from '../components/HeaderBar';
-import ResultListItem from '../components/ResultListItem';
-import Maps from '../maps';
-import icons from '../icons';
 import * as iss from '../iss';
+import BaseResultsPage from "./BaseResultsPage";
+import Maps from '../maps';
+import ResultListItem from '../components/ResultListItem';
+import components from '../components';
+import icons from '../icons';
 
 class ResultsMapPage extends BaseResultsPage {
     componentDidMount(): void {
@@ -155,17 +155,9 @@ class ResultsMapPage extends BaseResultsPage {
 
         return (
             <div className="ResultsMapPage">
-                <mui.AppBar
-                    className="AppBar"
+                <components.AppBar
                     title={this.title}
-                    iconElementLeft={
-                        <mui.IconButton
-                            className="BackButton"
-                            onTouchTap={this.onBackClick.bind(this)}
-                        >
-                            <icons.ChevronBack />
-                        </mui.IconButton>
-                    }
+                    onBackTouchTap={this.onBackClick.bind(this)}
                 />
                 {   /* we can't create the map component until the API promise
                      * resolves */

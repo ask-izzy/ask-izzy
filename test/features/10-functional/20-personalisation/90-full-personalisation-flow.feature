@@ -9,6 +9,9 @@ Feature: Personalisation
     Scenario: Search for housing with personalised results
         When I visit /
         And I click on "Housing"
+        Then I should see "These services can help you find a place to stay."
+
+        When I click on "Okay"
         Then I should see "Where are you?"
 
         Given control of geolocation

@@ -7,7 +7,8 @@ import BasePage from "./pages/BasePage";
 import BrandedPage from "./pages/BrandedPage";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
-import LocationPage from "./pages/LocationPage";
+import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
+import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
 import ResultsListPage from "./pages/ResultsListPage";
 import ResultsMapPage from "./pages/ResultsMapPage";
 import ServicePage from "./pages/ServicePage";
@@ -41,6 +42,7 @@ export default <Router.Route
                 path="/"
                 handler={HomePage}
             />
+
             <Router.Route
                 name="category"
                 path="/category/:page"
@@ -52,6 +54,17 @@ export default <Router.Route
                 handler={ResultsMapPage}
             />
             <Router.Route
+                name="category_personalisation_wizard"
+                path="/category/:page/personalise"
+                handler={PersonalisationWizardPage}
+            />
+            <Router.Route
+                name="category_personalisation"
+                path="/category/:page/personalise/summary"
+                handler={PersonalisationSummaryPage}
+            />
+
+            <Router.Route
                 name="search"
                 path="/search/:search"
                 handler={ResultsListPage}
@@ -62,14 +75,20 @@ export default <Router.Route
                 handler={ResultsMapPage}
             />
             <Router.Route
+                name="search_personalisation_wizard"
+                path="/search/:search/personalise"
+                handler={PersonalisationWizardPage}
+            />
+            <Router.Route
+                name="search_personalisation"
+                path="/search/:search/personalise/summary"
+                handler={PersonalisationSummaryPage}
+            />
+
+            <Router.Route
                 name="service"
                 path="/service/:id"
                 handler={ServicePage}
-            />
-            <Router.Route
-                name="location"
-                path="/personalise/location"
-                handler={LocationPage}
             />
 
             <Router.DefaultRoute handler={ErrorPage}/>
