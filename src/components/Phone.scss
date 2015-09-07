@@ -2,11 +2,8 @@ a.Phone {
     position: relative;
     padding-left: 24px;
 
-    .Phone-wrapper {
-        display: inline-block;
-        color: $brand-text-dark;
+    .kind{
         font-weight: 500;
-        width: 100%;
     }
 
     .PhoneIcon {
