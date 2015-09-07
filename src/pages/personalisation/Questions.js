@@ -17,6 +17,14 @@ class SleepTonight extends BaseQuestion {
             "No",
         ],
     };
+
+    static getSearchForAnswer(request, answer) {
+        if (answer == "No") {
+            request.q = "crisis housing";
+        }
+
+        return request;
+    }
 }
 
 export default {

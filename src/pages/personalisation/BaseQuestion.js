@@ -23,7 +23,7 @@ class BaseQuestion extends React.Component {
     // flow:disable
     static defaultProps = {
         /* The question asked of the user */
-        question: '',
+        question: null,
         /* possible answers to the question */
         answers: [],
     };
@@ -39,6 +39,18 @@ class BaseQuestion extends React.Component {
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+        var value = sessionstorage.getItem(this.defaultProps.name);
+
+        if (value) {
+            return this.getSearchForAnswer(request, value);
+        } else {
+            // this question can't been answered
+            return null;
+        }
+    }
+
+    static getSearchForAnswer(request: iss.searchRequest, answer: string):
+        ?iss.searchRequest {
         return request;
     }
 

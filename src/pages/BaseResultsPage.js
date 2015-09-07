@@ -32,7 +32,7 @@ class BaseResultsPage extends BaseCategoriesPage {
     // flow:disable not supported yet
     get search(): iss.searchRequest {
         if (this.props.params.page) {
-            return this.category.search;
+            return Object.assign({}, this.category.search);
         } else if (this.props.params.search) {
             return {
                 q: this.props.params.search,
