@@ -27,7 +27,7 @@ class ServicePage extends React.Component {
      */
 
     componentDidMount(): void {
-        iss.getService(this.props.params.id)
+        iss.getService(this.id())
             .then(data => {
                 this.setState({
                     object: data,
@@ -35,6 +35,13 @@ class ServicePage extends React.Component {
             });
 
         // FIXME: display error on failure to connect
+    }
+
+    /**
+     * Pull out the ID from the slug
+     */
+    id(): number {
+        return parseInt(this.props.params.id);
     }
 
     render(): React.Element {
