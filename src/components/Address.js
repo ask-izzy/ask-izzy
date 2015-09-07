@@ -2,6 +2,7 @@
 import React from "react";
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
+import { titleize } from "underscore.string";
 
 class Address extends React.Component {
 
@@ -18,32 +19,35 @@ class Address extends React.Component {
     }
 
     render(): React.Element {
+
         return (
             <div className="Address">
                 <icons.Map />
-                <div className="street">
-                    {this.describe('level', 'Level')}
-                    {' '}
-                    {this.describe('unit', 'Unit')}
-                    {' '}
-                    {this.describe('building', '')}
-                    {' '}
-                    {this.props.street_number}
-                    {' '}
-                    {this.props.street_name}
-                    {' '}
-                    {this.props.street_type}
-                    {' '}
-                    {this.props.street_suffix}
-                </div>
-                <div className="suburb">
-                    {this.props.suburb}
-                    {' '}
-                    {this.props.state}
-                    {' '}
-                    {this.props.postcode}
-                </div>
+                <div className="Address-wrapper">
 
+                    <div className="street">
+                        { this.describe('level', 'Level') }
+                        {' '}
+                        { this.describe('unit', 'Unit') }
+                        {' '}
+                        { this.describe('building', '') }
+                        {' '}
+                        { titleize(this.props.street_number) }
+                        {' '}
+                        { titleize(this.props.street_name) }
+                        {' '}
+                        { titleize(this.props.street_type) }
+                        {' '}
+                        { titleize(this.props.street_suffix) }
+                    </div>
+                    <div className="suburb">
+                        { titleize(this.props.suburb) }
+                        {' '}
+                        { titleize(this.props.state) }
+                        {' '}
+                        { titleize(this.props.postcode) }
+                    </div>
+                </div>
             </div>
         );
     }
