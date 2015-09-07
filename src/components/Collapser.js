@@ -22,6 +22,7 @@ class Collapser extends React.Component {
     }
 
     handleClick(event: SyntheticInputEvent): void {
+        event.preventDefault();
         this.setState({collapsed: !this.state.collapsed});
     }
 
@@ -44,6 +45,7 @@ class Collapser extends React.Component {
                 onclick={this.handleClick}
             >
                 <a
+                    href="#"
                     alt="Show more"
                     onClick={this.handleClick}
                 >{this.props.message}</a>
