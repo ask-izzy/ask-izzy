@@ -64,7 +64,7 @@ class Intro extends React.Component {
                     }
                     secondaryText={
                         <div>
-                            I'll ask you a few questions to help you you
+                            I'll ask you a few questions to help you
                             find the right places.
                         </div>
                     }
