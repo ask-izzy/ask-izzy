@@ -7,13 +7,14 @@ Feature: Change your personalisation settings
 
     Scenario: View personalisation settings and return to search
         Given my location is "Melbourne VIC"
+        And I have somewhere to sleep tonight
         When I click on "Housing"
         And I click on "Change what you need"
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                  | Answer (secondaryText)
         ================================================================
-        Do you have somewhere to sleep tonight? |
+        Do you have somewhere to sleep tonight? | Yes
         Where are you?                          | Melbourne VIC
         ----------------------------------------------------------------
 
@@ -25,6 +26,7 @@ Feature: Change your personalisation settings
 
     Scenario: Edit my location setting
         Given my location is "Melbourne VIC"
+        And I have nowhere to sleep tonight
         When I visit /category/housing/personalise/summary
         And I click on "Where are you?"
         Then I should see "Get current location"
@@ -37,6 +39,6 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                  | Answer (secondaryText)
         ================================================================
-        Do you have somewhere to sleep tonight? |
+        Do you have somewhere to sleep tonight? | No
         Where are you?                          | Carlton, Victoria
         ----------------------------------------------------------------

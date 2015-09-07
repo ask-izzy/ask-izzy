@@ -14,5 +14,6 @@ module.exports = (function() {
         require('./geolocation'),
         require('./maps'),
         require('./results'),
+        require('./questions'),
     ];
 })();
