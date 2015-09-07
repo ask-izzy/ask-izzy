@@ -7,11 +7,11 @@ import mui from "material-ui";
 
 export default class SvgIconLogoShadow extends React.Component {
 
-    render(): React.Component {
+    render(): React.Element {
         return (
             <mui.SvgIcon
                 {...this.props}
-                className={ this.props.className + " LogoShadow"}
+                className={ `${this.props.className || ''} LogoShadow` }
                 viewBox="0 0 64 64"
             >
             
