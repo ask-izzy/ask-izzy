@@ -5,7 +5,7 @@
 
     & > main {
         flex: 1;
-        -ms-flex-preferred-size: auto;  // Needed for IE10
+        -ms-flex-preferred-size: auto;  /* Needed for IE10 */
         background-color: white;
     }
 
