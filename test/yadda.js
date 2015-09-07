@@ -108,23 +108,28 @@ after(async function(done) {
         process.env.SAUCE_USERNAME &&
         process.env.SAUCE_ACCESS_KEY)
     {
-        await new Promise((resolve, reject) => {
-            var api = new SauceLabs({
-                username: process.env.SAUCE_USERNAME,
-                password: process.env.SAUCE_ACCESS_KEY,
-            });
+        try {
+            await new Promise((resolve, reject) => {
+                var api = new SauceLabs({
+                    username: process.env.SAUCE_USERNAME,
+                    password: process.env.SAUCE_ACCESS_KEY,
+                });
 
-            api.updateJob(sessionId, {
-                passed: passed,
-            }, (err, res) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(res);
-                }
+                api.updateJob(sessionId, {
+                    passed: passed,
+                }, (err, res) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(res);
+                    }
+                });
             });
-        });
+        } catch (e) {
+            console.log("Failed updating saucelabs status");
+            console.log(e);
+        }
+
     }
-
     done();
 });
