@@ -125,7 +125,7 @@ export async function getSiteChildren(
 
 async function iss(path: string, data: ?searchRequest): Object {
     var url_: string = ISS_URL || process.env.ISS_URL;
-    var urlobj: url.urlObj = url.parse(url_ + path, true);
+    var urlobj: url.urlObj = url.parse(url.resolve(url_, path), true);
 
     /* data overrides anything passed in via the URL.
      * Passing query args via the URL needs to be supported for requesting
