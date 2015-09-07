@@ -6,29 +6,21 @@ import React from 'react';
 import Router from "react-router";
 import mui from "material-ui";
 
-import icons from '../icons';
-import ResultListItem from '../components/ResultListItem';
-import HeaderBar from '../components/HeaderBar';
 import BaseResultsPage from "./BaseResultsPage";
+import ResultListItem from '../components/ResultListItem';
+import components from '../components';
+import icons from '../icons';
 
 class ResultsListPage extends BaseResultsPage {
     render(): React.Element {
         return (
             <div className="ResultsListPage">
-                <mui.AppBar
-                    className="AppBar"
+                <components.AppBar
                     title={this.title}
-                    iconElementLeft={
-                        <mui.IconButton
-                            className="BackButton"
-                            onTouchTap={this.goBack.bind(this)}
-                        >
-                            <icons.ChevronBack />
-                        </mui.IconButton>
-                    }
+                    onBackTouchTap={this.goBack.bind(this)}
                 />
 
-                <HeaderBar
+                <components.HeaderBar
                     primaryText={
                         this.state.meta ?
                             <div>
@@ -45,10 +37,7 @@ class ResultsListPage extends BaseResultsPage {
                     secondaryText={
                         <div>
                             <Router.Link
-                                to="location"
-                                query={{
-                                    next: this.getPath(),
-                                }}
+                                to={`${this.getPath()}/personalise/summary`}
                             >Change what you need</Router.Link>
                          </div>
                     }

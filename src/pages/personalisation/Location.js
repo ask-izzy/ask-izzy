@@ -7,14 +7,16 @@ import Router from "react-router";
 import _ from 'underscore';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
-import { ltrim } from "underscore.string";
 import sessionstorage from "sessionstorage";
 import { debounce } from "core-decorators";
+import { ltrim } from "underscore.string";
 
-import Location from '../geolocation';
-import Maps from '../maps';
-import HeaderBar from '../components/HeaderBar';
-import icons from '../icons';
+import Location from '../../geolocation';
+import Maps from '../../maps';
+import Personalisation from '../../mixins/Personalisation';
+import components from '../../components';
+import icons from '../../icons';
+import * as iss from '../../iss';
 
 var GeoLocationState = {
     NOT_STARTED: 0,
@@ -30,7 +32,8 @@ var AutocompleteState = {
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
-class LocationPage extends React.Component {
+/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
+class LocationPersonalisation extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {
@@ -40,6 +43,37 @@ class LocationPage extends React.Component {
             locationCoords: {},
             autocompletions: [],
         };
+    }
+
+    static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+        /* Coordinates are optional */
+        try {
+            var coords =
+                JSON.parse(sessionstorage.getItem('coordinates'));
+            request = Object.assign(request, {
+                location: `${coords.longitude}E${coords.latitude}N`,
+            });
+        } catch (e) {
+        }
+
+        /* Location/Area is required */
+        var location = sessionstorage.getItem('location');
+
+        if (location) {
+            return Object.assign(request, {
+                area: location,
+            });
+        } else {
+            return null;
+        }
+    }
+
+    // flow:disable
+    static summaryLabel = "Where are you?";
+
+    // flow:disable
+    static get summaryValue(): string {
+        return sessionstorage.getItem('location');
     }
 
     async locateMe(): Promise<Object> {
@@ -123,7 +157,7 @@ class LocationPage extends React.Component {
     onTouchDoneButton(event: Event): void {
         event.preventDefault();
         sessionstorage.setItem('location', this.state.locationName);
-        this.replaceWith(this.getQuery().next);
+        this.nextStep();
     }
 
     /**
@@ -210,19 +244,8 @@ class LocationPage extends React.Component {
 
     render(): React.Element {
         return (
-            <div className="LocationPage">
-                <mui.AppBar
-                    className="AppBar"
-                    title="Personalise"
-                    iconElementLeft={
-                        <mui.IconButton
-                            onTouchTap={this.goBack.bind(this)}
-                        >
-                            <icons.ChevronBack />
-                        </mui.IconButton>
-                    }
-                />
-                <HeaderBar
+            <div>
+                <components.HeaderBar
                     primaryText={
                         <div>
                             Where are you?
@@ -362,4 +385,4 @@ class LocationPage extends React.Component {
 
 }
 
-export default LocationPage;
+export default LocationPersonalisation;

@@ -1,2 +1,3 @@
 src/components.js merge=component-code-generation
+src/pages/personalisation.js merge=component-code-generation
 src/styles/bundle.scss merge=scss-code-generation
