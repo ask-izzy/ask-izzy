@@ -32,7 +32,7 @@ class CollapsedPhones extends React.Component {
             }
 
             return (
-                <div>
+                <div className="CollapsedPhones">
                     <Phone {...first} />
                     {extras}
                 </div>
