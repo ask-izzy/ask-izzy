@@ -62,6 +62,7 @@ app.get('/api/v3/search/', (req, res) => {
             meta: {
                 total_count: 1,
                 location: {
+                    name: "Richmond",
                     suburb: "Richmond",
                     state: "VIC",
                 },
@@ -117,6 +118,7 @@ app.get('/api/v3/search/', (req, res) => {
             meta: {
                 total_count: 8,
                 location: {
+                    name: "Richmond",
                     suburb: "Richmond",
                     state: "VIC",
                 },
@@ -136,6 +138,7 @@ app.get('/api/v3/search/', (req, res) => {
             meta: {
                 total_count: 3,
                 location: {
+                    name: "Richmond",
                     suburb: "Richmond",
                     state: "VIC",
                 },
