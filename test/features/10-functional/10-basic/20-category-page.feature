@@ -5,8 +5,11 @@ Feature: Category page
     # I want to see relevant results
     # So that I can choose a service
 
-    Scenario: Visit housing category
+    Background:
         Given my location is "Melbourne VIC"
+        And I have somewhere to sleep tonight
+
+    Scenario: Visit housing category
         When I visit /category/housing
         Then I should see "Housing"
         And I should see the results
@@ -27,7 +30,6 @@ Feature: Category page
         ---------------------------------------------------------------------
 
     Scenario: Navigate to a service and back to a category
-        Given my location is "Melbourne VIC"
         When I visit /category/housing
         And I click on "Housing Service"
         Then I should see "A housing service for people."
@@ -37,7 +39,6 @@ Feature: Category page
         And I should be at /category/housing
 
     Scenario: A service with 5 related services only shows 4
-        Given my location is "Melbourne VIC"
         When I visit /category/food
 
         Then I should see "Material Aid"
@@ -47,6 +48,5 @@ Feature: Category page
         And I should not see "Drug & Alcohol Counselling"
 
     Scenario: I should never see "invalid date"
-        Given my location is "Melbourne VIC"
         When I visit /category/housing
         Then I should not see "Invalid date"

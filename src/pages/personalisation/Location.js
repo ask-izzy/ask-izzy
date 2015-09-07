@@ -11,7 +11,7 @@ import sessionstorage from "sessionstorage";
 import { debounce } from "core-decorators";
 import { ltrim } from "underscore.string";
 
-import Location from '../../geolocation';
+import Geolocation from '../../geolocation';
 import Maps from '../../maps';
 import Personalisation from '../../mixins/Personalisation';
 import components from '../../components';
@@ -33,7 +33,7 @@ var AutocompleteState = {
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
-class LocationPersonalisation extends React.Component {
+class Location extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {
@@ -44,6 +44,11 @@ class LocationPersonalisation extends React.Component {
             autocompletions: [],
         };
     }
+
+    // flow:disable
+    static defaultProps = {
+        name: 'location',
+    };
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         /* Coordinates are optional */
@@ -78,7 +83,7 @@ class LocationPersonalisation extends React.Component {
 
     async locateMe(): Promise<Object> {
         var maps = await Maps();
-        var location = await Location();
+        var location = await Geolocation();
         var possibleLocations = await maps.geocode({
             location: {
                 lat: location.coords.latitude,
@@ -385,4 +390,4 @@ class LocationPersonalisation extends React.Component {
 
 }
 
-export default LocationPersonalisation;
+export default Location;

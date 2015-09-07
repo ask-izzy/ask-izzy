@@ -12,6 +12,9 @@ Feature: Personalisation
         Then I should see "These services can help you find a place to stay."
 
         When I click on "Okay"
+        Then I should see "Do you have somewhere to sleep tonight?"
+
+        When I click on "Yes"
         Then I should see "Where are you?"
 
         Given control of geolocation

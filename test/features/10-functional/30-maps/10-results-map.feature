@@ -4,8 +4,11 @@ Feature: See results on a map
     # I want to view category/search results on a map
     # So that I can see where they're located relative to me
 
-    Scenario: View results on a map
+    Background:
         Given my location is "Melbourne VIC"
+        And I have somewhere to sleep tonight
+
+    Scenario: View results on a map
         When I visit /category/housing
 
         Given I'm watching map events
@@ -22,7 +25,6 @@ Feature: See results on a map
         --------------------------------------------------
 
     Scenario: Clicking a marker shows services at that site and clicking on map returns to full map
-        Given my location is "Melbourne VIC"
         When I visit /category/housing
 
         Given I'm watching map events
@@ -41,7 +43,6 @@ Feature: See results on a map
         Then I should not see "Housing Service"
 
     Scenario: Clicking a marker shows services at that site and clicking back returns to full map
-        Given my location is "Melbourne VIC"
         When I visit /category/housing
 
         Given I'm watching map events
