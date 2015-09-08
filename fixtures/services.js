@@ -1,5 +1,36 @@
+
 /* jscs:disable */
 module.exports = {
+    phoneableService: {
+        id: 5551234,
+        name: "Phoneable service",
+        description: "",
+        site: {id: 333, name: "phoneable"},
+        now_open: { now_open: false },
+        phones: [
+            {
+                "comment": "",
+                "kind": "phone",
+                "number": "(03) 3333 3333"
+            },
+            {
+                "comment": "",
+                "kind": "fax",
+                "number": "(03) 5555 5555"
+            },
+            {
+                "comment": "",
+                "kind": "mobile",
+                "number": "0477 777 777"
+            },
+            {
+                "comment": "",
+                "kind": "freecall",
+                "number": "1300 111 111"
+            },
+        ],
+        location: {},
+    },
     housingService: {
         id: 111,
         name: "Housing Service",
@@ -238,5 +269,26 @@ module.exports = {
         "target_gender": "u",
         "type": "service",
         "web": "http://www.serviceseeker.com.au"
+    },
+    legal: {
+        id: 13841,
+        name: "Legal Service",
+        description: "A service. Provides free legal advice to people.",
+        site: {
+            name: "Service.com",
+            id: 999,
+        },
+        catchment: "Carlton",
+        eligibility_info: "",
+        ineligibility_info: "",
+        service_types: ['Legal'],
+        now_open: {
+            now_open: false,
+        },
+        opening_hours: [],
+        phones: [],
+        location: {
+            suburb: 'Carlton',
+        },
     },
 }
