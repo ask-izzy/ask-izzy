@@ -1,5 +1,36 @@
+
 /* jscs:disable */
 module.exports = {
+    phoneableService: {
+        id: 5551234,
+        name: "Phoneable service",
+        description: "",
+        site: {id: 333, name: "phoneable"},
+        now_open: { now_open: false },
+        phones: [
+            {
+                "comment": "",
+                "kind": "phone",
+                "number": "(03) 3333 3333"
+            },
+            {
+                "comment": "",
+                "kind": "fax",
+                "number": "(03) 5555 5555"
+            },
+            {
+                "comment": "",
+                "kind": "mobile",
+                "number": "0477 777 777"
+            },
+            {
+                "comment": "",
+                "kind": "freecall",
+                "number": "1300 111 111"
+            },
+        ],
+        location: {},
+    },
     housingService: {
         id: 111,
         name: "Housing Service",

@@ -18,14 +18,15 @@ Feature: Service details page
         Then I can get to google maps by clicking "33 Elizabeth Street Richmond Vic 3121"
 
     Scenario: The phone numbers (without fax) are available
-        When I visit /service/866464
+        When I visit /service/5551234
         Then I should see the phone numbers
         -------------------------------------------
-        Phone (03) 9418 7447
+        Freecall 1300 111 111
         -------------------------------------------
         When I click on "Other contact options"
         Then I should see the phone numbers
         -------------------------------------------
-        Phone (03) 9418 7447
-        Phone 1300 306 645
+        Freecall 1300 111 111
+        Phone (03) 3333 3333
+        Mobile 0477 777 777
         -------------------------------------------
