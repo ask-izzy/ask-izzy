@@ -16,16 +16,14 @@ import * as iss from '../../iss';
 class BaseQuestion extends React.Component {
     // flow:disable
     static propTypes = {
+        /* The question asked of the user */
         question: React.PropTypes.string.isRequired,
+        /* possible answers to the question */
         answers: React.PropTypes.arrayOf(React.PropTypes.node).isRequired,
     };
 
     // flow:disable
     static defaultProps = {
-        /* The question asked of the user */
-        question: null,
-        /* possible answers to the question */
-        answers: [],
     };
 
     // flow:disable
@@ -54,7 +52,7 @@ class BaseQuestion extends React.Component {
         return request;
     }
 
-    onAnswerTouchTap(answer: string): void {
+    onAnswerTouchTap(answer: string, ...rest: any): void {
         storage.setItem(this.props.name, answer);
         this.nextStep();
     }
