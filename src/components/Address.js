@@ -42,25 +42,28 @@ class Address extends React.Component {
         var query = encodeURIComponent(`${street} ${suburb}`);
 
         return (
-            <a
-                className="Address"
-                target="_blank"
-                href={`https://maps.google.com/?q=${query}`}
-            >
+            <div className="Address">
                 <ScreenReader>
                     <h4>Address</h4>
                 </ScreenReader>
-                <icons.Map />
-                <div className="Address-wrapper">
-                    <div className="street">
-                        { street }
+                <a
+                    target="_blank"
+                    href={`https://maps.google.com/?q=${query}`}
+                >
+                    <icons.Map />
+                    <div className="Address-wrapper">
+                        {' '}
+                        <div className="street">
+                            { street }
+                        </div>
+                        {' '}
+                        <div className="suburb">
+                            { suburb }
+                        </div>
                     </div>
-                    {' ' /* so tests can use normalize-whitespace */}
-                    <div className="suburb">
-                        { suburb }
-                    </div>
-                </div>
-            </a>
+                </a>
+            </div>
+
         );
     }
 
