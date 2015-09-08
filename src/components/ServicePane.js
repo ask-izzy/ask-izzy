@@ -54,6 +54,8 @@ export default class ServicePane extends React.Component {
 
     render(): React.Element {
         var object = this.props.service;
+        var phones = _.filter(object.phones, (p) => p.kind != 'fax');
+
         return (
             <div className="ServicePane">
                 <main>
@@ -68,7 +70,7 @@ export default class ServicePane extends React.Component {
                     <hr />
                     <Address {...object.location} />
                     <hr />
-                    <CollapsedPhones phones={object.phones} />
+                    <CollapsedPhones phones={phones} />
                 </main>
 
                 <Eligibility

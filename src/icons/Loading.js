@@ -7,11 +7,11 @@ import mui from "material-ui";
 
 export default class SvgIconLoading extends React.Component {
 
-    render(): React.Component {
+    render(): React.Element {
         return (
             <mui.SvgIcon
                 {...this.props}
-                className={ this.props.className + " Loading"}
+                className={ `${this.props.className || ''} LoadingIcon` }
                 viewBox="0 0 64 64"
             >
             <path d='M32.001,21.933c-0.607,0-1.1-0.492-1.1-1.1v-7c0-0.607,0.492-1.1,1.1-1.1s1.1,0.492,1.1,1.1v7    C33.101,21.44,32.608,21.933,32.001,21.933z'/>
