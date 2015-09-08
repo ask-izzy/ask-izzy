@@ -9,10 +9,13 @@ import { By } from 'selenium-webdriver';
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
+import { documentReady } from "./browser";
 
 module.exports = (function() {
 
     async function seeTheResults(table: Array<Object>): Promise<void> {
+        await this.driver.wait(documentReady(this.driver), 10000);
+
         for (var key of _.keys(table[0])) {
             var class_ = key.match(/[(](.*)[)]/)[1];
 
