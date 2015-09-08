@@ -21,3 +21,17 @@
         fill: $icon-chevron-color;
     }
 }
+
+.CheckboxSelected,
+.CheckboxUnselected,
+.RadioSelected,
+.RadioUnselected {
+    height: 30px !important;
+    width: 30px !important;
+
+    top: -4px !important;
+
+    path {
+        fill: $brand-text-dark;
+    }
+}

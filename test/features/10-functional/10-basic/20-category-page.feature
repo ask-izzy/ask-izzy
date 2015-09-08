@@ -8,6 +8,7 @@ Feature: Category page
     Background:
         Given my location is "Melbourne VIC"
         And I have somewhere to sleep tonight
+        And I need nothing for housing
 
     Scenario: Visit housing category
         When I visit /category/housing

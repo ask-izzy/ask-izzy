@@ -7,6 +7,7 @@ Feature: See results on a map
     Background:
         Given my location is "Melbourne VIC"
         And I have somewhere to sleep tonight
+        And I need nothing for housing
 
     Scenario: View results on a map
         When I visit /category/housing

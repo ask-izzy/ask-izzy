@@ -8,6 +8,7 @@ Feature: Change your personalisation settings
     Background:
         Given my location is "Melbourne VIC"
         And I have somewhere to sleep tonight
+        And I need nothing for housing
 
     Scenario: View personalisation settings and return to search
         When I click on "Housing"
@@ -17,6 +18,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                  | Answer (secondaryText)
         ================================================================
         Do you have somewhere to sleep tonight? | Yes
+        Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
         ----------------------------------------------------------------
 
@@ -40,6 +42,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                  | Answer (secondaryText)
         ================================================================
         Do you have somewhere to sleep tonight? | Yes
+        Do you need any of these?               | 0 selected
         Where are you?                          | Carlton, Victoria
         ----------------------------------------------------------------
 
@@ -52,5 +55,41 @@ Feature: Change your personalisation settings
         Question (primaryText)                  | Answer (secondaryText)
         ================================================================
         Do you have somewhere to sleep tonight? | No
+        Do you need any of these?               | 0 selected
+        Where are you?                          | Melbourne VIC
+        ----------------------------------------------------------------
+
+    Scenario: Edit housing subcategory items
+        Given I need the following for housing
+        -------------------------------
+        Help finding somewhere to live
+        -------------------------------
+
+        When I visit /category/housing/personalise/summary
+        Then I should see the results
+        ----------------------------------------------------------------
+        Question (primaryText)                  | Answer (secondaryText)
+        ================================================================
+        Do you have somewhere to sleep tonight? | Yes
+        Do you need any of these?               | 1 selected
+        Where are you?                          | Melbourne VIC
+        ----------------------------------------------------------------
+
+        When I click on "Do you need any of these?"
+        Then "Help finding somewhere to live" should be checked
+        And "Help with paying rent" should not be checked
+        And "Help with paying utility bills" should not be checked
+        And "Help with a legal issue" should not be checked
+
+        When I click on "Help finding somewhere to live"
+        And I click on "Help with paying utility bills"
+        And I click on "Help with a legal issue"
+        And I click on "Done"
+        Then I should see the results
+        ----------------------------------------------------------------
+        Question (primaryText)                  | Answer (secondaryText)
+        ================================================================
+        Do you have somewhere to sleep tonight? | Yes
+        Do you need any of these?               | 2 selected
         Where are you?                          | Melbourne VIC
         ----------------------------------------------------------------

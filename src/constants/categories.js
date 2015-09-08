@@ -57,6 +57,7 @@ var categories:Array<Category> = [
         ),
         personalisation: [
             personalisation.Questions.SleepTonight,
+            personalisation.Questions.HousingSubcategories,
             personalisation.Location,
         ],
     }),
