@@ -25,25 +25,22 @@ class OpeningTimes extends React.Component {
     // flow:disable not supported yet
     static sampleProps = {object: fixtures.ixa};
 
+    findOpeningHours(day = moment()): Object {
+        return _.findWhere(this.props.object.opening_hours,
+                    {day: day.format('dddd')}
+                   ) || {};
+    }
+
     render(): React.Element {
-        var {
-            object,
-        } = this.props;
+        var object = this.props.object;
 
         var when;
-        var todayOpen = _.findWhere(object.opening_hours,
-                                    {day: moment().format('dddd')}
-                                   ) || {};
+        var todayOpen = this.findOpeningHours();
 
         for (var day = 1; day <= 7; day++) {
             /* look for the next day the service is open */
-            var nextOpen = _.findWhere(object.opening_hours,
-                                       {
-                                           day: moment()
-                                               .add(day, 'd')
-                                               .format('dddd'),
-                                       }
-                                      ) || {};
+            var nextOpen = this.findOpeningHours(moment().add(day, 'd'));
+
             if (!_.isEmpty(nextOpen)) {
                 if (day == 1) {
                     when = 'tomorrow';
