@@ -11,6 +11,7 @@ import NavBar from './components/NavBar';
 import OpeningTimes from './components/OpeningTimes';
 import Phone from './components/Phone';
 import ResultListItem from './components/ResultListItem';
+import ScreenReader from './components/ScreenReader';
 import ServicePane from './components/ServicePane';
 import TransportTime from './components/TransportTime';
 
@@ -27,6 +28,7 @@ export default {
     OpeningTimes: OpeningTimes,
     Phone: Phone,
     ResultListItem: ResultListItem,
+    ScreenReader: ScreenReader,
     ServicePane: ServicePane,
     TransportTime: TransportTime,
 };

@@ -6,6 +6,7 @@ import React from "react";
 import _ from "underscore";
 
 import fixtures from "../../fixtures/services";
+import ScreenReader from "./ScreenReader";
 import colors from "../constants/theme";
 var palette = colors.getPalette();
 
@@ -59,6 +60,9 @@ class OpeningTimes extends React.Component {
         if (object.now_open.now_open) {
             return (
                 <div className="OpeningTimes">
+                    <ScreenReader>
+                        <h4>Opening times</h4>
+                    </ScreenReader>
                     <icons.Clock className="ColoredIcon brand-text-dark" />
                     <span className="open">Open now</span>
                     {' '}
@@ -75,6 +79,9 @@ class OpeningTimes extends React.Component {
         } else {
             return (
                 <div className="OpeningTimes">
+                    <ScreenReader>
+                        <h3>Opening times</h3>
+                    </ScreenReader>
                     <icons.Clock className="ColoredIcon brand-text-dark" />
                     <span className="closed">Closed</span>
                     {' '}
