@@ -5,6 +5,7 @@ import Phone from "./Phone";
 import Icons from "../icons";
 import mui from "material-ui";
 import fixtures from "../../fixtures/services";
+import ScreenReader from "./ScreenReader";
 
 class CollapsedPhones extends React.Component {
 
@@ -33,6 +34,10 @@ class CollapsedPhones extends React.Component {
 
             return (
                 <div className="CollapsedPhones">
+
+                    <ScreenReader>
+                        <h4>Phone numbers</h4>
+                    </ScreenReader>
                     <Phone {...first} />
                     {extras}
                 </div>
