@@ -34,7 +34,11 @@ module.exports = (function() {
         .then('the button "$STRING" should be disabled',
               unpromisify(checkDisabled))
         .then('the button "$STRING" should be enabled',
-              unpromisify(checkEnabled));
+              unpromisify(checkEnabled))
+        .then('"$STRING" should be checked', unpromisify(assertItemChecked))
+        .then('"$STRING" should not be checked',
+              unpromisify(assertItemNotChecked))
+        ;
 })();
 
 async function visitUrl(url: string): Promise {
