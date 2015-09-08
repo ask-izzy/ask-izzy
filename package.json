@@ -45,6 +45,7 @@
     "babel-jscs": "2.0.3",
     "cors": "2.7.1",
     "flow-bin": "0.14.0",
+    "github": "0.2.4",
     "jscs": "2.1.0",
     "jscs-jsdoc": "1.1.0",
     "jsonlint": "1.6.2",
