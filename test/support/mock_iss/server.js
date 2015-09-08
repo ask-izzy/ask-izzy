@@ -159,6 +159,9 @@ app.get('/api/v3/service/111/', (req, res) => {
 app.get('/api/v3/service/13841/', (req, res) => {
     res.json(services.legal);
 });
+
+app.get('/api/v3/service/866464/', (req, res) => {
+    res.json(services.ixa);
 });
 
 app.listen(5000);

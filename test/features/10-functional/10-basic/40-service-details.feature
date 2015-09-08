@@ -12,3 +12,7 @@ Feature: Service details page
     Scenario: The description is limited to a set of dot points
         When I visit /service/13841
         Then I should see "Advice on legal matters"
+
+    Scenario: The address is a link to google maps
+        When I visit /service/866464
+        Then I can get to google maps by clicking "33 Elizabeth Street Richmond Vic 3121"

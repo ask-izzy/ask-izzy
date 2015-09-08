@@ -28,5 +28,21 @@ assert.textIsVisible = async function(driver, text) {
     assert(visible, `Text ${text} was present but not visible`);
 };
 
-export default assert;
+// flow:disable
+// jscs: disable
+assert.linkIsVisible = async function(driver, title, expectedTarget) {
+    var link = await driver.findElement(By.xpath(
+        `//a[normalize-space(.) = normalize-space('${title}')]`
+    ));
+    var visible = await link.isDisplayed();
+    var href = await link.getAttribute('href');
 
+    console.log(href);
+    console.log(expectedTarget);
+    console.log(visible);
+
+    assert(visible, `Link '${title}' was present but not visible`);
+    assert.equal(href, expectedTarget);
+};
+
+export default assert;
