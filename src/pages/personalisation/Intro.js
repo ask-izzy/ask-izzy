@@ -57,7 +57,7 @@ class Intro extends React.Component {
                 <components.HeaderBar
                     primaryText={
                         <div>
-                            <icons.LogoLight className="Logo" />
+                            <icons.LogoLight />
                             These services can help you
                             {' '}{this.seekingHelpWith}.
                         </div>

@@ -29,7 +29,7 @@ class ResultsListPage extends BaseResultsPage {
                                 services for{' '}
                                 {this.state.meta.location.name},{' '}
                                 {this.state.meta.location.state}.
-                                <icons.LogoLight className="Logo" />
+                                <icons.LogoLight />
                             </div>
                         :
                             <div>Searching...</div>
