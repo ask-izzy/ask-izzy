@@ -11,6 +11,7 @@ import Url from 'url';
 import Yadda from 'yadda';
 import { By, Key } from 'selenium-webdriver';
 
+import { elementWithText } from '../support/selectors';
 import unpromisify from '../support/yadda-promise';
 import { gotoUrl } from '../support/webdriver';
 
@@ -52,10 +53,9 @@ async function clickLink(link: string): Promise<void> {
     await this.driver.findElement(By.xpath(
         /* any 'a' element who has a descendent text node containing
          * the link text */
-        ['a', 'button'].map(tag =>
-        `//${tag}
-           [normalize-space(.//text()) = normalize-space('${link}')]`
-                           ).join('|')
+        ['a', 'button', 'label']
+            .map(tag => elementWithText(tag, link))
+            .join('|')
     ))
         .click();
 }
@@ -144,9 +144,8 @@ async function clickSearchIcon(): Promise<void> {
 async function getButtonState(driver: Webdriver.WebDriver, text: string):
     Promise<boolean>
 {
-    return await driver.findElement(By.xpath(
-        `//button[normalize-space(.//text()) = normalize-space('${text}')]`
-    ))
+    return await driver
+        .findElement(By.xpath(elementWithText('button', text)))
         .isEnabled();
 }
 
@@ -160,4 +159,24 @@ async function checkEnabled(text: string): Promise<void> {
     var enabled = await getButtonState(this.driver, text);
 
     assert.equal(enabled, true);
+}
+
+async function assertItemChecked(label: string): Promise<void> {
+    var labelXPath = elementWithText('label', label);
+    var checked = await this.driver.findElement(By.xpath(
+        `${labelXPath}//input`
+    ))
+        .getAttribute('checked');
+
+    assert.equal(checked, "true");
+}
+
+async function assertItemNotChecked(label: string): Promise<void> {
+    var labelXPath = elementWithText('label', label);
+    var checked = await this.driver.findElement(By.xpath(
+        `${labelXPath}//input`
+    ))
+        .getAttribute('checked');
+
+    assert.equal(checked, null);
 }
