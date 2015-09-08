@@ -13,6 +13,7 @@ import _ from 'underscore';
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
+import { linkIsVisible } from "../support/page-assertions";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
@@ -21,6 +22,9 @@ module.exports = (function() {
         .when('I click marker titled "$STRING"', unpromisify(clickMarker))
         .then('I should see a map', unpromisify(assertMap))
         .then('I should see markers?\n$table', unpromisify(assertMarkers))
+        .then('I can get to google maps by clicking "$STRING"',
+            unpromisify(assertGoogleMapsLink)
+        )
         ;
 })();
 
@@ -93,6 +97,14 @@ async function assertMap(): Promise<void> {
                     .isDisplayed();
 
     assert.equal(visible, true);
+}
+
+async function assertGoogleMapsLink(linkText: string) {
+    await linkIsVisible(
+        this.driver,
+        linkText,
+        `https://maps.google.com/?q=${encodeURIComponent(linkText)}`,
+    );
 }
 
 async function assertMarkers(table: Array<Object>): Promise<void> {

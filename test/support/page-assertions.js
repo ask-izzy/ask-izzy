@@ -1,14 +1,18 @@
 "use strict";
-
 /* @flow */
 
 import assert from "assert";
-import { By } from 'selenium-webdriver';
+import Webdriver, { By } from 'selenium-webdriver';
 import { deepestPossible } from './selectors';
 
-// flow:disable
-// jscs: disable
-assert.imageIsVisible = async function(driver, altText) {
+// Flow complains about adding properties directly
+// to 'assert'; need a type specifier.
+var a: Object = assert;
+a.imageIsVisible = imageIsVisible;
+export async function imageIsVisible(
+    driver: Webdriver.WebDriver,
+    altText: string
+): Promise<void> {
     var visible = await driver.findElement(By.xpath(
         `//img[@alt = '${altText}']`
     ))
@@ -17,9 +21,11 @@ assert.imageIsVisible = async function(driver, altText) {
     assert(visible, `${altText} image was present but not visible`);
 };
 
-// flow:disable
-// jscs: disable
-assert.textIsVisible = async function(driver, text) {
+a.textIsVisible = textIsVisible;
+export async function textIsVisible(
+    driver: Webdriver.WebDriver,
+    text: string
+): Promise<void> {
     var visible = await driver.findElement(By.xpath(
         deepestPossible(`normalize-space(.) = normalize-space('${text}')`)
     ))
@@ -28,5 +34,20 @@ assert.textIsVisible = async function(driver, text) {
     assert(visible, `Text ${text} was present but not visible`);
 };
 
-export default assert;
+a.linkIsVisible = linkIsVisible;
+export async function linkIsVisible(
+    driver: Webdriver.WebDriver,
+    title: string,
+    expectedTarget: string
+): Promise<void> {
+    var link = await driver.findElement(By.xpath(
+        `//a[normalize-space(.) = normalize-space('${title}')]`
+    ));
+    var visible = await link.isDisplayed();
+    assert(visible, `Link '${title}' was present but not visible`);
 
+    var href = await link.getAttribute('href');
+    assert.equal(href, expectedTarget);
+};
+
+export default a;

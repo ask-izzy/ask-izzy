@@ -65,7 +65,7 @@ class BaseQuestion extends React.Component {
                 <components.HeaderBar
                     primaryText={
                         <div>
-                            <icons.LogoLight className="Logo" />
+                            <icons.LogoLight />
                             {this.props.question}
                         </div>
                     }

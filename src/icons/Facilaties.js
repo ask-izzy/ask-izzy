@@ -7,11 +7,11 @@ import mui from "material-ui";
 
 export default class SvgIconFacilaties extends React.Component {
 
-    render(): React.Component {
+    render(): React.Element {
         return (
             <mui.SvgIcon
                 {...this.props}
-                className={ this.props.className + " Facilaties"}
+                className={ `${this.props.className || ''} FacilatiesIcon` }
                 viewBox="0 0 64 64"
             >
             <path d='M15.934,20.571c-2.703,0-4.902-2.199-4.902-4.902s2.199-4.902,4.902-4.902     s4.902,2.199,4.902,4.902S18.637,20.571,15.934,20.571z M15.934,13.766c-1.049,0-1.902,0.854-1.902,1.902     s0.854,1.902,1.902,1.902s1.902-0.854,1.902-1.902S16.983,13.766,15.934,13.766z'/>

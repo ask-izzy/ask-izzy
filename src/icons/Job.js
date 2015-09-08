@@ -7,11 +7,11 @@ import mui from "material-ui";
 
 export default class SvgIconJob extends React.Component {
 
-    render(): React.Component {
+    render(): React.Element {
         return (
             <mui.SvgIcon
                 {...this.props}
-                className={ this.props.className + " Job"}
+                className={ `${this.props.className || ''} JobIcon` }
                 viewBox="0 0 64 64"
             >
             <path d='M54.051,56.34h-47.5c-0.812,0-1.476-0.646-1.5-1.456L4.074,21.383     c-0.012-0.405,0.141-0.798,0.423-1.089c0.283-0.291,0.671-0.455,1.076-0.455h49.455c0.405,0,0.794,0.164,1.076,0.455     s0.435,0.684,0.423,1.089L55.55,54.884C55.526,55.695,54.862,56.34,54.051,56.34z M8.008,53.34h44.586l0.891-30.501H7.118     L8.008,53.34z'/>

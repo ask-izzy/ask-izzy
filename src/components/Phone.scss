@@ -1,0 +1,18 @@
+a.Phone {
+    position: relative;
+    padding-left: 24px;
+
+    .kind{
+        font-weight: 500;
+    }
+
+    .PhoneIcon {
+        /* override mui.SvgIcon's inline styles */
+        height: 40px !important;
+        width: 40px !important;
+
+        position: absolute;
+        top: -10px;
+        left: -10px;
+    }
+}

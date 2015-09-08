@@ -44,7 +44,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         <components.HeaderBar
                             primaryText={
                                 <div>
-                                    <icons.LogoLight className="Logo" />
+                                    <icons.LogoLight />
                                     This is what I think I know about you.
                                     Change your answers here.
                                 </div>

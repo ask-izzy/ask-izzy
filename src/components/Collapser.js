@@ -13,7 +13,6 @@ class Collapser extends React.Component {
 
     constructor(props: Object) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
 
         // This component renders
         // open on the server, then
@@ -22,6 +21,7 @@ class Collapser extends React.Component {
     }
 
     handleClick(event: SyntheticInputEvent): void {
+        event.preventDefault();
         this.setState({collapsed: !this.state.collapsed});
     }
 
@@ -41,12 +41,12 @@ class Collapser extends React.Component {
         return (
             <div
                 className="Collapser"
-                onclick={this.handleClick}
+                onclick={this.handleClick.bind(this)}
             >
                 <a
                     href="#"
                     alt="Show more"
-                    onClick={this.handleClick}
+                    onClick={this.handleClick.bind(this)}
                 >{this.props.message}</a>
                 <div
                     className={ this.hiddenClass() }

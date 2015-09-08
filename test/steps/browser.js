@@ -184,3 +184,14 @@ async function assertItemNotChecked(label: string): Promise<void> {
 
     assert.equal(checked, null);
 }
+
+/**
+ * documentReady:
+ *
+ * Returns: true if the document is readyState is complete
+ */
+module.exports.documentReady = function documentReady(
+    driver: Webdriver.WebDriver
+): Promise<boolean> {
+    return driver.executeScript(() => document.readyState == 'complete');
+};
