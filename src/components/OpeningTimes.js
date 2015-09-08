@@ -77,7 +77,7 @@ class OpeningTimes extends React.Component {
             return (
                 <div className="OpeningTimes">
                     <ScreenReader>
-                        <h3>Opening times</h3>
+                        <h4>Opening times</h4>
                     </ScreenReader>
                     <icons.Clock className="ColoredIcon brand-text-dark" />
                     <span className="closed">Closed</span>
