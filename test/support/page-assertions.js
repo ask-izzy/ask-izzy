@@ -13,7 +13,6 @@ export async function imageIsVisible(
     driver: Webdriver.WebDriver,
     altText: string
 ): Promise<void> {
-    // jscs: disable
     var visible = await driver.findElement(By.xpath(
         `//img[@alt = '${altText}']`
     ))
@@ -27,7 +26,6 @@ export async function textIsVisible(
     driver: Webdriver.WebDriver,
     text: string
 ): Promise<void> {
-    // jscs: disable
     var visible = await driver.findElement(By.xpath(
         deepestPossible(`normalize-space(.) = normalize-space('${text}')`)
     ))
@@ -42,7 +40,6 @@ export async function linkIsVisible(
     title: string,
     expectedTarget: string
 ): Promise<void> {
-    // jscs: disable
     var link = await driver.findElement(By.xpath(
         `//a[normalize-space(.) = normalize-space('${title}')]`
     ));
