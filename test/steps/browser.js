@@ -161,3 +161,14 @@ async function checkEnabled(text: string): Promise<void> {
 
     assert.equal(enabled, true);
 }
+
+/**
+ * documentReady:
+ *
+ * Returns: true if the document is readyState is complete
+ */
+module.exports.documentReady = function documentReady(
+    driver: Webdriver.WebDriver
+): Promise<boolean> {
+    return driver.executeScript(() => document.readyState == 'complete');
+};
