@@ -7,7 +7,6 @@ import Router from "react-router";
 import _ from 'underscore';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
-import sessionstorage from "sessionstorage";
 import { debounce } from "core-decorators";
 import { ltrim } from "underscore.string";
 
@@ -16,6 +15,7 @@ import Maps from '../../maps';
 import Personalisation from '../../mixins/Personalisation';
 import components from '../../components';
 import icons from '../../icons';
+import storage from "../../storage";
 import * as iss from '../../iss';
 
 var GeoLocationState = {
@@ -52,17 +52,15 @@ class Location extends React.Component {
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         /* Coordinates are optional */
-        try {
-            var coords =
-                JSON.parse(sessionstorage.getItem('coordinates'));
+        var coords = storage.getJSON('coordinates');
+        if (coords) {
             request = Object.assign(request, {
                 location: `${coords.longitude}E${coords.latitude}N`,
             });
-        } catch (e) {
         }
 
         /* Location/Area is required */
-        var location = sessionstorage.getItem('location');
+        var location = storage.getItem('location');
 
         if (location) {
             return Object.assign(request, {
@@ -78,7 +76,7 @@ class Location extends React.Component {
 
     // flow:disable
     static get summaryValue(): string {
-        return sessionstorage.getItem('location');
+        return storage.getItem('location');
     }
 
     async locateMe(): Promise<Object> {
@@ -93,10 +91,10 @@ class Location extends React.Component {
         /* store these coordinates for the session so we can use them to
          * provide additional info for autocomplete, distances, ISS search
          * weighting, etc. */
-        sessionstorage.setItem('coordinates', JSON.stringify({
+        storage.setJSON('coordinates', {
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
-        }));
+        });
 
         /* return true if the types includes one of our interesting
          * component types */
@@ -161,7 +159,7 @@ class Location extends React.Component {
 
     onTouchDoneButton(event: Event): void {
         event.preventDefault();
-        sessionstorage.setItem('location', this.state.locationName);
+        storage.setItem('location', this.state.locationName);
         this.nextStep();
     }
 
@@ -183,12 +181,11 @@ class Location extends React.Component {
         };
 
         /* If the user has coordinates set in this session, use them */
-        try {
-            var location = JSON.parse(sessionstorage.getItem('coordinates'));
+        var location = storage.getJSON('coordinates');
+        if (location) {
             request.location = new maps.api.LatLng(location.latitude,
                                                    location.longitude);
             request.radius = 10000;  /* 10 km */
-        } catch (e) {
         }
 
         console.log("Autocompleting", request);
@@ -243,7 +240,7 @@ class Location extends React.Component {
 
     componentDidMount(): void {
         this.setState({
-            locationName: sessionstorage.getItem('location'),
+            locationName: storage.getItem('location'),
         });
     }
 

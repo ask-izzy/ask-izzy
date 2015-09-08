@@ -5,11 +5,11 @@
 import React from 'react';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
-import sessionstorage from "sessionstorage";
 
 import Personalisation from '../../mixins/Personalisation';
 import components from '../../components';
 import icons from '../../icons';
+import storage from '../../storage';
 import * as iss from '../../iss';
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
@@ -35,11 +35,11 @@ class BaseQuestion extends React.Component {
 
     // flow:disable
     static get summaryValue(): string {
-        return sessionstorage.getItem(this.defaultProps.name);
+        return storage.getItem(this.defaultProps.name);
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
-        var value = sessionstorage.getItem(this.defaultProps.name);
+        var value = storage.getItem(this.defaultProps.name);
 
         if (value) {
             return this.getSearchForAnswer(request, value);
@@ -55,12 +55,12 @@ class BaseQuestion extends React.Component {
     }
 
     onAnswerTouchTap(answer: string): void {
-        sessionstorage.setItem(this.props.name, answer);
+        storage.setItem(this.props.name, answer);
         this.nextStep();
     }
 
     render(): React.Element {
-        var selected = sessionstorage.getItem(this.props.name);
+        var selected = storage.getItem(this.props.name);
 
         return (
             <div>
