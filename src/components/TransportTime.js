@@ -8,15 +8,20 @@ import React from "react";
 import { titleize } from "underscore.string";
 
 import colors from "../constants/theme";
+import fixtures from "../../fixtures/services";
+
 var palette = colors.getPalette();
 
 import icons from '../icons';
 
-class OpeningTimes extends React.Component {
+class TransportTime extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
         object: React.PropTypes.object.isRequired,
     };
+
+    // flow:disable not supported yet
+    static sampleProps = {object: fixtures.ixa};
 
     render(): React.Element {
         var {
@@ -35,4 +40,4 @@ class OpeningTimes extends React.Component {
     }
 }
 
-export default OpeningTimes;
+export default TransportTime;
