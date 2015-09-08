@@ -2,8 +2,8 @@ Feature: Personalisation
 
     # As a user
     # When I do a search
-    # I want to have my results personalised with my current location
-    # And ...
+    # I want to answer personalisation questions around my demographics
+    # and needs; and have my results personalised with my current location
     # So that I get personalised results
 
     Scenario: Search for housing with personalised results
@@ -15,6 +15,9 @@ Feature: Personalisation
         Then I should see "Do you have somewhere to sleep tonight?"
 
         When I click on "Yes"
+        Then I should see "Do you need any of these?"
+
+        When I click on "Done"
         Then I should see "Where are you?"
 
         Given control of geolocation

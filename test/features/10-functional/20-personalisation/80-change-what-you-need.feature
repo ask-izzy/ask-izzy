@@ -8,6 +8,7 @@ Feature: Change your personalisation settings
     Background:
         Given my location is "Melbourne VIC"
         And I have somewhere to sleep tonight
+        And I need nothing for housing
 
     Scenario: View personalisation settings and return to search
         When I click on "Housing"
@@ -17,6 +18,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                  | Answer (secondaryText)
         ================================================================
         Do you have somewhere to sleep tonight? | Yes
+        Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
         ----------------------------------------------------------------
 
@@ -40,6 +42,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                  | Answer (secondaryText)
         ================================================================
         Do you have somewhere to sleep tonight? | Yes
+        Do you need any of these?               | 0 selected
         Where are you?                          | Carlton, Victoria
         ----------------------------------------------------------------
 
@@ -52,5 +55,6 @@ Feature: Change your personalisation settings
         Question (primaryText)                  | Answer (secondaryText)
         ================================================================
         Do you have somewhere to sleep tonight? | No
+        Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
         ----------------------------------------------------------------

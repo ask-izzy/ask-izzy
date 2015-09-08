@@ -26,9 +26,21 @@ class BaseMultiQuestion extends BaseQuestion {
         return `${nSelected} selected`;
     }
 
-    static getSearchForAnswer(request: iss.searchRequest, answer: string):
-        ?iss.searchRequest
-    {
+    static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+        var value = storage.getJSON(this.defaultProps.name);
+
+        if (value != null) {
+            return this.getSearchForAnswers(request, value);
+        } else {
+            // this question can't been answered
+            return null;
+        }
+    }
+
+    static getSearchForAnswers(
+        request: iss.searchRequest,
+        answers: Array<string>
+    ): ?iss.searchRequest {
         return request;
     }
 
