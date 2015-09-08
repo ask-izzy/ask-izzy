@@ -15,7 +15,7 @@ Feature: Service details page
 
     Scenario: The address is a link to google maps
         When I visit /service/866464
-        Then I can get to google maps by clicking "33 Elizabeth Street Richmond Vic 3121"
+        Then I can get to google maps by clicking "33 Elizabeth Street Richmond VIC 3121"
 
     Scenario: The phone numbers (without fax) are available
         When I visit /service/5551234

@@ -35,7 +35,7 @@ class Address extends React.Component {
 
         var suburb = [
             titleize(this.props.suburb),
-            titleize(this.props.state),
+            this.props.state,
             titleize(this.props.postcode),
         ].join(' ').trim();
 
