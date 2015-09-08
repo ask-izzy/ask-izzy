@@ -16,3 +16,16 @@ Feature: Service details page
     Scenario: The address is a link to google maps
         When I visit /service/866464
         Then I can get to google maps by clicking "33 Elizabeth Street Richmond Vic 3121"
+
+    Scenario: The phone numbers (without fax) are available
+        When I visit /service/866464
+        Then I should see the phone numbers
+        -------------------------------------------
+        Phone (03) 9418 7447
+        -------------------------------------------
+        When I click on "Other contact options"
+        Then I should see the phone numbers
+        -------------------------------------------
+        Phone (03) 9418 7447
+        Phone 1300 306 645
+        -------------------------------------------
