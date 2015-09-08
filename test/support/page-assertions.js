@@ -49,10 +49,6 @@ export async function linkIsVisible(
     var visible = await link.isDisplayed();
     var href = await link.getAttribute('href');
 
-    console.log(href);
-    console.log(expectedTarget);
-    console.log(visible);
-
     assert(visible, `Link '${title}' was present but not visible`);
     assert.equal(href, expectedTarget);
 };
