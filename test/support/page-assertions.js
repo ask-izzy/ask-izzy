@@ -47,9 +47,9 @@ export async function linkIsVisible(
         `//a[normalize-space(.) = normalize-space('${title}')]`
     ));
     var visible = await link.isDisplayed();
-    var href = await link.getAttribute('href');
-
     assert(visible, `Link '${title}' was present but not visible`);
+
+    var href = await link.getAttribute('href');
     assert.equal(href, expectedTarget);
 };
 
