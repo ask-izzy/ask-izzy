@@ -9,6 +9,10 @@ class Address extends React.Component {
     // flow:disable not supported yet
     static sampleProps = fixtures.ixa.location;
 
+    /*
+     * Convert a property to a description
+     * (eg `level: 1` -> "Level 1")
+     */
     describe(property: string, description: string): string {
         if (this.props[property]) {
             return `${description} ${this.props[property]}`;
