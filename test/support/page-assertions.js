@@ -3,7 +3,7 @@
 
 import assert from "assert";
 import Webdriver, { By } from 'selenium-webdriver';
-import { deepestPossible } from './selectors';
+import { deepestPossible, escapeXPathString } from './selectors';
 
 // Flow complains about adding properties directly
 // to 'assert'; need a type specifier.
@@ -26,8 +26,10 @@ export async function textIsVisible(
     driver: Webdriver.WebDriver,
     text: string
 ): Promise<void> {
+    text = escapeXPathString(text);
+
     var visible = await driver.findElement(By.xpath(
-        deepestPossible(`normalize-space(.) = normalize-space('${text}')`)
+        deepestPossible(`normalize-space(.) = normalize-space(${text})`)
     ))
         .isDisplayed();
 
