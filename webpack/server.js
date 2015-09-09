@@ -21,6 +21,6 @@ const compiler = webpack(config);
 const webpackDevServer = new WebpackDevServer(compiler, serverOptions);
 
 webpackDevServer.listen(WEBPACK_PORT, WEBPACK_HOST, () => {
-    console.info(`Webpack development server listening on` +
+    console.info(`Webpack development server listening on ` +
                  `${WEBPACK_HOST}:${WEBPACK_PORT}`);
 });

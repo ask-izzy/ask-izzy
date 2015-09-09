@@ -9,5 +9,11 @@ if (!process.env.NODE_ENV) {
 // Register babel to have ES6 support on the server
 require("babel/register");
 
+if (process.env.NEW_RELIC_KEY) {
+    require('newrelic');
+} else {
+    console.warn("NEW_RELIC_KEY not set");
+}
+
 // Start the server app
 require("./src/server");
