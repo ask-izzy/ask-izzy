@@ -44,7 +44,7 @@ type searchResultsMeta = {
 
 export type searchResults = {
     meta: searchResultsMeta,
-    objects: Array<issService>,
+    objects: Array<Service>,
 };
 
 /**
@@ -65,6 +65,89 @@ function request(obj) {
             }
         });
     });
+}
+
+export class Service {
+    abn: string;
+    accessibility: issAccessibility;
+    accessibility_details: string;
+    accreditation: Array<string>;
+    age_groups: Array<issAgeGroup>;
+    also_known_as: Array<string>;
+    assessment_criteria: string;
+    availability: string;
+    billing_method: string;
+    capacity: {
+        status: string;
+        status_text: string;
+    };
+    catchment: string;
+    cost: string;
+    crisis: boolean;
+    description: string;
+    eligibility_info: string;
+    emails: Array<{
+        comment: string;
+        email: email,
+    }>;
+    endpoints: Array<endpoint>;
+    funding_body: string;
+    healthcare_card_holders: boolean;
+    id: number;
+    ineligibility_info: string;
+    intake_info: string;
+    intake_point: string;
+    is_bulk_billing: boolean;
+    languages: Array<string>;
+    last_updated: ymdWithDashesDate;
+    location: {
+        building: string,
+        flat_unit: string,
+        level: string,
+        point: {
+            lat: number,
+            lon: number,
+        },
+        postcode: string,
+        state: state,
+        street_name: string,
+        street_number: string,
+        street_suffix: string,
+        street_type: string,
+        suburb: string,
+    };
+    name: string;
+    ndis_approved: boolean;
+    now_open: {
+        local_time: hmsWithColonsTime,
+        notes: string,
+        now_open: boolean,
+    };
+    opening_hours: issOpeningHours;
+    parking_info: string;
+    phones: Array<phone>;
+    postal_address: Array<{
+        line1: string,
+        line2: string,
+        postcode: string,
+        state: state,
+        suburb: string,
+    }>;
+    public_transport_info: string;
+    referral_info: string;
+    service_types: Array<string>;
+    site: {
+        id: number,
+        name: string,
+        organisation: {
+            id: number,
+            name: string,
+        },
+    };
+    special_requirements: string;
+    target_gender: issGender;
+    type: issEntityType;
+    web: urlString;
 }
 
 /**
@@ -103,13 +186,19 @@ export async function search(
         request.location = `${coords.longitude}E${coords.latitude}N`;
     }
 
-    return await iss('/api/v3/search/', request);
+    var response = await iss('/api/v3/search/', request);
+
+    // convert objects to ISS search results
+    response.objects.map(object => Object.assign(new Service, object));
+    return response;
 }
 
 export async function getService(
     id: number
-): Promise<issService> {
-    return await iss(`/api/v3/service/${id}/`);
+): Promise<Service> {
+    var response = await iss(`/api/v3/service/${id}/`);
+
+    return Object.assign(new Service, response);
 }
 
 export async function getSiteChildren(
@@ -120,7 +209,11 @@ export async function getSiteChildren(
         type: 'service',
     };
 
-    return await iss('/api/v3/search/', request);
+    var response = await iss('/api/v3/search/', request);
+
+    // convert objects to ISS search results
+    response.objects.map(object => Object.assign(new Service, object));
+    return response;
 }
 
 async function iss(path: string, data: ?searchRequest): Object {
@@ -139,7 +232,9 @@ async function iss(path: string, data: ?searchRequest): Object {
     var response = await request({
         url: url_,
         contentType: 'application/json',
-        headers: {Accept: 'application/json'},
+        headers: {
+            Accept: 'application/json',
+        },
         data: data,
     });
 
