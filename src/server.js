@@ -30,9 +30,9 @@ server.use(render);
 
 // Generic server errors (e.g. not caught by components)
 server.use((err, req, res, next) => {  // eslint-disable-line no-unused-vars
-    console.log("Error on request %s %s", req.method, req.url);
-    console.log(err);
-    console.log(err.stack);
+    console.error("Error on request %s %s", req.method, req.url);
+    console.error(err);
+    console.error(err.stack);
     res.status(500).send("Something bad happened");
 });
 
@@ -42,7 +42,7 @@ server.set("port", process.env.PORT || 8000);
 server.listen(server.get("port"), () => {
     var env = server.get("env");
     var port = server.get("port");
-    console.log(
+    console.info(
         `Express ${env} server listening on ${port}`
     );
 });
