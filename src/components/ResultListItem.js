@@ -10,7 +10,7 @@ import _ from "underscore";
 import { slugify } from "underscore.string";
 
 import icons from "../icons";
-import * as iss from '../iss';
+import iss from '../iss';
 import OpeningTimes from "./OpeningTimes";
 import TransportTime from "./TransportTime";
 

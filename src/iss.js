@@ -50,26 +50,6 @@ export type searchResults = {
     objects: Array<Service>,
 };
 
-/**
- * request:
- * obj: data passed to http.request
- *
- * Wraps the http request code in a promise.
- *
- * Returns: a promise for the request
- */
-function request(obj) {
-    return new Promise((resolve, reject) => {
-        http.request(obj, response => {
-            if (response.status == 200) {
-                resolve(response);
-            } else {
-                reject(response);
-            }
-        });
-    });
-}
-
 export class Service {
     abn: string;
     accessibility: issAccessibility;
@@ -180,12 +160,12 @@ export class Service {
     }
 
     async getSiblingServices(): Promise<searchResults> {
-        var request: searchRequest = {
+        var request_: searchRequest = {
             site_id: this.site.id,
             type: 'service',
         };
 
-        var response = await iss('/api/v3/search/', request);
+        var response = await request('/api/v3/search/', request_);
 
         // convert objects to ISS search results
         response.objects = response.objects.map(
@@ -209,29 +189,29 @@ export async function search(
     coords: ?{longitude: number, latitude: number},
 ): Promise<searchResults> {
 
-    var request: searchRequest = {
+    var request_: searchRequest = {
         type: 'service',
         catchment: true,
         limit: 5,
     };
 
     if (typeof query === 'string') {
-        request.q = query;
+        request_.q = query;
     } else if (query instanceof Object) {
-        Object.assign(request, query);
+        Object.assign(request_, query);
     } else {
         throw new Error("query can only be string or object");
     }
 
     if (location) {
-        request.area = location;
+        request_.area = location;
     }
 
     if (coords) {
-        request.location = `${coords.longitude}E${coords.latitude}N`;
+        request_.location = `${coords.longitude}E${coords.latitude}N`;
     }
 
-    var response = await iss('/api/v3/search/', request);
+    var response = await request('/api/v3/search/', request_);
 
     // convert objects to ISS search results
     response.objects = response.objects.map(
@@ -243,12 +223,32 @@ export async function search(
 export async function getService(
     id: number
 ): Promise<Service> {
-    var response = await iss(`/api/v3/service/${id}/`);
+    var response = await request(`/api/v3/service/${id}/`);
 
     return Object.assign(new Service, response);
 }
 
-async function iss(path: string, data: ?searchRequest): Object {
+/**
+ * _request:
+ * obj: data passed to http.request
+ *
+ * Wraps the http request code in a promise.
+ *
+ * Returns: a promise for the request
+ */
+function _request(obj) {
+    return new Promise((resolve, reject) => {
+        http.request(obj, response => {
+            if (response.status == 200) {
+                resolve(response);
+            } else {
+                reject(response);
+            }
+        });
+    });
+}
+
+export async function request(path: string, data: ?searchRequest): Object {
     var url_: string = ISS_URL || process.env.ISS_URL;
     var urlobj: url.urlObj = url.parse(url.resolve(url_, path), true);
 
@@ -261,7 +261,7 @@ async function iss(path: string, data: ?searchRequest): Object {
     urlobj.auth = urlobj.search = urlobj.querystring = urlobj.query = null;
     url_ = url.format(urlobj);
 
-    var response = await request({
+    var response = await _request({
         url: url_,
         contentType: 'application/json',
         headers: {
@@ -273,4 +273,8 @@ async function iss(path: string, data: ?searchRequest): Object {
     return JSON.parse(response.text);
 }
 
-export default iss;
+export default {
+    search: search,
+    getService: getService,
+    request: request,
+};

@@ -8,7 +8,7 @@ import Router from "react-router";
 import mui from "material-ui";
 import _ from "underscore";
 
-import * as iss from '../iss';
+import iss from '../iss';
 import BaseResultsPage from "./BaseResultsPage";
 import Maps from '../maps';
 import ResultListItem from '../components/ResultListItem';

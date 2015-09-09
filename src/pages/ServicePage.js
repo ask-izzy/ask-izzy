@@ -8,7 +8,7 @@ import Router from "react-router";
 import ServicePane from "../components/ServicePane";
 import reactMixin from "react-mixin";
 
-import * as iss from '../iss';
+import iss from '../iss';
 import components from '../components';
 import icons from "../icons";
 
