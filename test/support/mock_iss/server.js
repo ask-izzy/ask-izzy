@@ -132,6 +132,19 @@ app.get('/api/v3/search/', (req, res) => {
                 object,
             ],
         });
+    } else if (req.query.q == 'zero results') {
+        res.json({
+            meta: {
+                total_count: 0,
+            },
+            objects: [],
+        });
+    } else if (req.query.q == 'cause error') {
+        res
+            .status(402)
+            .json({
+                error_message: "You have specifically asked for an error.",
+            });
     } else {
         /* conventional search */
         res.json({

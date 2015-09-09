@@ -13,6 +13,8 @@ import icons from '../icons';
 
 class ResultsListPage extends BaseResultsPage {
     render(): React.Element {
+        var personaliseLink = `${this.getPath()}/personalise/summary`;
+
         return (
             <div className="ResultsListPage">
                 <components.AppBar
@@ -23,79 +25,53 @@ class ResultsListPage extends BaseResultsPage {
                 <components.HeaderBar
                     primaryText={
                         this.state.meta ?
+                            this.state.meta.total_count > 0 ?
+                                <div>
+                                    I found {this.state.meta.total_count}{' '}
+                                    {this.title.toLocaleLowerCase()}{' '}
+                                    services for{' '}
+                                    {this.state.meta.location.name},{' '}
+                                    {this.state.meta.location.state}.
+                                    <icons.LogoLight />
+                                </div>
+                            :
+                                <div>
+                                    Sorry, I couldn't find any results
+                                    for {this.title.toLocaleLowerCase()}.
+                                </div>
+                        : this.state.error ?
                             <div>
-                                I found {this.state.meta.total_count}{' '}
-                                {this.title.toLocaleLowerCase()}{' '}
-                                services for{' '}
-                                {this.state.meta.location.name},{' '}
-                                {this.state.meta.location.state}.
                                 <icons.LogoLight />
+                                Sorry, I couldn't do this search.
                             </div>
                         :
                             <div>Searching...</div>
                     }
                     secondaryText={
-                        <div>
-                            <Router.Link
-                                to={`${this.getPath()}/personalise/summary`}
-                            >Change what you need</Router.Link>
-                         </div>
+                        this.state.meta ?
+                            <div>
+                                <Router.Link
+                                    to={personaliseLink}
+                                >Change what you need</Router.Link>
+                            </div>
+                        : this.state.error ?
+                            <div>
+                                <p>
+                                    {this.state.error}
+                                </p>
+                                <p>
+                                    <Router.Link to='home'>
+                                        Go back
+                                    </Router.Link>
+                                </p>
+
+                            </div>
+                        :
+                            ''
                     }
                 />
 
-                {this.state.error ?
-                    <div>
-                        {this.state.error}
-                    </div>
-                : ''
-                }
-
-                <mui.List className="List results">
-                {
-                    this.state.objects ?
-                        <mui.ListItem
-                            className="ViewOnMap"
-                            primaryText="View on a map"
-                            containerElement={
-                                <Router.Link
-                                    to={this.getPathname() + '/map'}
-                                />
-                            }
-                            leftIcon={
-                                <icons.Map />
-                            }
-                            rightIcon={
-                                <icons.Chevron />
-                            }
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
-                        />
-                    :
-                        ''
-                }
-                {
-                    this.results.map((object, index) =>
-                        object.infobox ?
-                            <div key={index}>
-                                {React.addons.cloneWithProps(object.node)}
-                            </div>
-                        :
-                            <ResultListItem object={object} key={index} />
-                    )
-                }
-                {
-                    this.state.meta && this.state.meta.next ?
-                        <mui.ListItem
-                            primaryText="Get more results"
-                            onTouchTap={this.loadMore.bind(this)}
-
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
-                        />
-                    :
-                        ''
-                }
-                </mui.List>
+                {this.renderResults()}
 
                 {this.state.meta || this.state.error ?
                     ''
@@ -106,6 +82,58 @@ class ResultsListPage extends BaseResultsPage {
                 }
 
             </div>
+        );
+    }
+
+    renderResults(): React.Element {
+
+        return (
+            <mui.List className="List results">
+            {
+                this.state.objects ?
+                    <mui.ListItem
+                        className="ViewOnMap"
+                        primaryText="View on a map"
+                        containerElement={
+                            <Router.Link
+                                to={this.getPathname() + '/map'}
+                            />
+                        }
+                        leftIcon={
+                            <icons.Map />
+                        }
+                        rightIcon={
+                            <icons.Chevron />
+                        }
+                        disableFocusRipple={true}
+                        disableTouchRipple={true}
+                    />
+                :
+                    ''
+            }
+            {
+                this.results.map((object, index) =>
+                    object.infobox ?
+                        <div key={index}>
+                            {React.addons.cloneWithProps(object.node)}
+                        </div>
+                    :
+                        <ResultListItem object={object} key={index} />
+                )
+            }
+            {
+                this.state.meta && this.state.meta.next ?
+                    <mui.ListItem
+                        primaryText="Get more results"
+                        onTouchTap={this.loadMore.bind(this)}
+
+                        disableFocusRipple={true}
+                        disableTouchRipple={true}
+                    />
+                :
+                    ''
+            }
+            </mui.List>
         );
     }
 

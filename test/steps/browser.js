@@ -11,12 +11,13 @@ import Url from 'url';
 import Yadda from 'yadda';
 import { By, Key } from 'selenium-webdriver';
 
-import { elementWithText } from '../support/selectors';
+import dictionary from "../support/dictionary";
 import unpromisify from '../support/yadda-promise';
+import { elementWithText } from '../support/selectors';
 import { gotoUrl } from '../support/webdriver';
 
 module.exports = (function() {
-    return Yadda.localisation.English.library()
+    return Yadda.localisation.English.library(dictionary)
         .when('I visit $URL', unpromisify(visitUrl))
         .when('I click on "$STRING"', unpromisify(clickLink))
         .when('I search for "$STRING"', unpromisify(doSearch))
@@ -28,6 +29,7 @@ module.exports = (function() {
         .when('I pause for debugging', unpromisify(pauseToDebug))
         .then('I should be at $URL', unpromisify(checkURL))
         .then('I should see "$STRING"', unpromisify(thenISee))
+        .then('I should see\n$STRING', unpromisify(thenISee))
         .then('I should not see "$STRING"', unpromisify(thenIDontSee))
         .then('search box should contain "$STRING"',
               unpromisify(searchContains))
