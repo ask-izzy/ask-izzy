@@ -25,14 +25,20 @@ class ResultsListPage extends BaseResultsPage {
                 <components.HeaderBar
                     primaryText={
                         this.state.meta ?
-                            <div>
-                                I found {this.state.meta.total_count}{' '}
-                                {this.title.toLocaleLowerCase()}{' '}
-                                services for{' '}
-                                {this.state.meta.location.name},{' '}
-                                {this.state.meta.location.state}.
-                                <icons.LogoLight />
-                            </div>
+                            this.state.meta.total_count > 0 ?
+                                <div>
+                                    I found {this.state.meta.total_count}{' '}
+                                    {this.title.toLocaleLowerCase()}{' '}
+                                    services for{' '}
+                                    {this.state.meta.location.name},{' '}
+                                    {this.state.meta.location.state}.
+                                    <icons.LogoLight />
+                                </div>
+                            :
+                                <div>
+                                    Sorry, I couldn't find any results
+                                    for {this.title.toLocaleLowerCase()}.
+                                </div>
                         : this.state.error ?
                             <div>
                                 <icons.LogoLight />
