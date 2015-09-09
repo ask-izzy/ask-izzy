@@ -5,10 +5,11 @@ Feature: Search
     # I want to see those search results
     # So that I can search for things not in the category list
 
-    Scenario: Search for "pets" using keyboard
+    Background:
         Given my location is "Melbourne VIC"
-        When I visit /
-        And I search for "pet food" and press enter
+
+    Scenario: Search for "pets" using keyboard
+        When I search for "pet food" and press enter
         Then I should be at /search/pet%20food
         # FIXME: make the mock produce more meaningful results
         And I should see the results
@@ -21,13 +22,22 @@ Feature: Search
         -------------------------------------------
 
     Scenario: Search for pets using keyboard and mouse
-        Given my location is "Melbourne VIC"
-        When I visit /
-        And I search for "pet food"
+        When I search for "pet food"
         And I click on the search icon
         Then I should be at /search/pet%20food
 
     Scenario: Search on blank does not search
-        When I visit /
-        And I click on the search icon
+        When I click on the search icon
         Then I should be at /
+
+    Scenario: Search with zero results displays a different sentence
+        When I search for "zero results" and press enter
+        Then I should see
+        ---------------------------------------------------------
+        Sorry, I couldn't find any results for "zero results".
+        ---------------------------------------------------------
+
+    Scenario: Search returning an error returns a nice sentence
+        When I search for "cause error" and press enter
+        Then I should see "Sorry, I couldn't do this search."
+        And I should see "You have specifically asked for an error."
