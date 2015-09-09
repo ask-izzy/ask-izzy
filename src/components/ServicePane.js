@@ -20,11 +20,25 @@ export default class ServicePane extends React.Component {
     // flow:disable not supported yet
     static sampleProps = {service: fixtures.youthSupportNet};
 
+    constructor(props: Object) {
+        super(props);
+        this.state = {
+            siblings: null,
+        };
+    }
+
     // flow:disable
     get description(): string {
         return this.props.service.description.split('.', 1)[0] + '.';
     }
 
+    async getSiblingServices(): Promise<void> {
+        var response = await this.props.service.getSiblingServices();
+        this.setState({siblings: response.objects});
+    }
+
+    componentDidMount(): void {
+        this.getSiblingServices();
     }
 
     render(): React.Element {
@@ -62,6 +76,17 @@ export default class ServicePane extends React.Component {
                         (provision, index) => <li key={index}>{provision}</li>
                     )}
                 </ul>
+
+                <h2>Other services at this location</h2>
+                {this.state.siblings ?
+                    <ul>
+                        {this.state.siblings.map((service, index) =>
+                            <li key={index}>{service.name}</li>
+                        )}
+                    </ul>
+                :
+                    'Loading...'
+                }
             </div>
         );
     }

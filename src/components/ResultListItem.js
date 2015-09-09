@@ -27,8 +27,8 @@ class ResultListItem extends React.Component {
 
     // flow:disable not supported yet
     static propTypes = {
-        object: React.PropTypes.object.isRequired,
-        nRelatedServices: React.PropTypes.number,
+        object: React.PropTypes.instanceOf(iss.Service).isRequired,
+        nServiceProvisions: React.PropTypes.number,
     };
 
     // flow:disable not supported yet
@@ -36,7 +36,7 @@ class ResultListItem extends React.Component {
 
     // flow:disable
     static defaultProps =  {
-        nRelatedServices: 4,
+        nServiceProvisions: 4,
     };
 
     /**
@@ -46,18 +46,18 @@ class ResultListItem extends React.Component {
     /* flow:disable */
     get relatedServices(): Array<Object> {
         return this.state.relatedServices
-            .slice(0, this.props.nRelatedServices);
+            .slice(0, this.props.nServiceProvisions);
     }
 
     /**
-     * nMoreRelatedServices:
+     * nMoreServiceProvisions:
      * The number of related services minus the 4 relatedServices.
      */
     /* flow:disable */
-    get nMoreRelatedServices(): number {
+    get nMoreServiceProvisions(): number {
         return Math.max(0,
                         this.state.relatedServices.length -
-                            this.props.nRelatedServices);
+                            this.props.nServiceProvisions);
     }
 
     render(): React.Element {
@@ -87,17 +87,17 @@ class ResultListItem extends React.Component {
                 <div className="site_name">{object.site.name}</div>
                 <OpeningTimes className="opening_hours" object={object} />
                 <TransportTime object={object} />
-                { this.props.nRelatedServices > 0 ?
+                { this.props.nServiceProvisions > 0 ?
                     <div>
                     <ul className="related">{
-                        this.relatedServices.map((service, index) =>
-                            <li key={index}>{service.name}</li>
+                        object.serviceProvisions.map((service, index) =>
+                            <li key={index}>{service}</li>
                         )
                     }</ul>
-                    {this.nMoreRelatedServices > 0 ?
+                    {this.nMoreServiceProvisions > 0 ?
                         <div>
-                            {this.nMoreRelatedServices} more{' '}
-                            {this.nMoreRelatedServices == 1 ?
+                            {this.nMoreServiceProvisions} more{' '}
+                            {this.nMoreServiceProvisions == 1 ?
                                 'service' : 'services'}…
                         </div>
                     :

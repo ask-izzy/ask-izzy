@@ -188,7 +188,9 @@ export class Service {
         var response = await iss('/api/v3/search/', request);
 
         // convert objects to ISS search results
-        response.objects.map(object => Object.assign(new Service, object));
+        response.objects = response.objects.map(
+            object => Object.assign(new Service, object)
+        );
         return response;
     }
 }
@@ -232,7 +234,9 @@ export async function search(
     var response = await iss('/api/v3/search/', request);
 
     // convert objects to ISS search results
-    response.objects.map(object => Object.assign(new Service, object));
+    response.objects = response.objects.map(
+        object => Object.assign(new Service, object)
+    );
     return response;
 }
 

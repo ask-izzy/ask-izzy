@@ -143,7 +143,7 @@ class ResultsMapPage extends BaseResultsPage {
                         <ResultListItem
                             key={index}
                             object={object}
-                            nRelatedServices={0}
+                            nServiceProvisions={0}
                         />
                     )
                 }</mui.List>
