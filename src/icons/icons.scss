@@ -1,11 +1,17 @@
+// @media print {
+    .LogotypeIcon path {
+        width: auto;
+        height: auto;
+    }
+// }
 
 .ColoredIcon {
     &.icon-fg-color path {
-        fill: $icon-fg-color;
+        fill: $icon-fg-color !important;
     }
 
     &.brand-bg-dark path {
-        fill: $brand-bg-dark;
+        fill: $brand-bg-dark !important;
     }
 
     &.size-30 {
@@ -18,7 +24,7 @@
     padding-right: 0 !important;
 
     path {
-        fill: $icon-chevron-color;
+        fill: $icon-chevron-color !important;
     }
 }
 
@@ -32,6 +38,6 @@
     top: -4px !important;
 
     path {
-        fill: $brand-text-dark;
+        fill: $brand-text-dark !important;
     }
 }
