@@ -12,6 +12,10 @@ if (!process.env.ISS_URL) {
     process.exit(1);
 }
 
+if (!process.env.GOOGLE_KEY) {
+    console.warn("GOOGLE_KEY not set");
+}
+
 var server = express();
 
 // In production, nginx will serve these files so
