@@ -50,52 +50,7 @@ class ResultsListPage extends BaseResultsPage {
                 : ''
                 }
 
-                <mui.List className="List results">
-                {
-                    this.state.objects ?
-                        <mui.ListItem
-                            className="ViewOnMap"
-                            primaryText="View on a map"
-                            containerElement={
-                                <Router.Link
-                                    to={this.getPathname() + '/map'}
-                                />
-                            }
-                            leftIcon={
-                                <icons.Map />
-                            }
-                            rightIcon={
-                                <icons.Chevron />
-                            }
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
-                        />
-                    :
-                        ''
-                }
-                {
-                    this.results.map((object, index) =>
-                        object.infobox ?
-                            <div key={index}>
-                                {React.addons.cloneWithProps(object.node)}
-                            </div>
-                        :
-                            <ResultListItem object={object} key={index} />
-                    )
-                }
-                {
-                    this.state.meta && this.state.meta.next ?
-                        <mui.ListItem
-                            primaryText="Get more results"
-                            onTouchTap={this.loadMore.bind(this)}
-
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
-                        />
-                    :
-                        ''
-                }
-                </mui.List>
+                {this.renderResults()}
 
                 {this.state.meta || this.state.error ?
                     ''
@@ -106,6 +61,58 @@ class ResultsListPage extends BaseResultsPage {
                 }
 
             </div>
+        );
+    }
+
+    renderResults(): React.Element {
+
+        return (
+            <mui.List className="List results">
+            {
+                this.state.objects ?
+                    <mui.ListItem
+                        className="ViewOnMap"
+                        primaryText="View on a map"
+                        containerElement={
+                            <Router.Link
+                                to={this.getPathname() + '/map'}
+                            />
+                        }
+                        leftIcon={
+                            <icons.Map />
+                        }
+                        rightIcon={
+                            <icons.Chevron />
+                        }
+                        disableFocusRipple={true}
+                        disableTouchRipple={true}
+                    />
+                :
+                    ''
+            }
+            {
+                this.results.map((object, index) =>
+                    object.infobox ?
+                        <div key={index}>
+                            {React.addons.cloneWithProps(object.node)}
+                        </div>
+                    :
+                        <ResultListItem object={object} key={index} />
+                )
+            }
+            {
+                this.state.meta && this.state.meta.next ?
+                    <mui.ListItem
+                        primaryText="Get more results"
+                        onTouchTap={this.loadMore.bind(this)}
+
+                        disableFocusRipple={true}
+                        disableTouchRipple={true}
+                    />
+                :
+                    ''
+            }
+            </mui.List>
         );
     }
 
