@@ -10,7 +10,10 @@ import ScreenReader from "./ScreenReader";
 class CollapsedPhones extends React.Component {
 
     // flow:disable not supported yet
-    static sampleProps = {phones: fixtures.ixa.phones};
+    static sampleProps = {
+        default: {phones: fixtures.ixa.phones},
+        open: {phones: fixtures.ixa.phones, expanded: true}
+    };
 
     render(): React.Element {
         var phones = this.props.phones;

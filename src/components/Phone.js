@@ -7,7 +7,7 @@ import { titleize } from "underscore.string";
 class Phone extends React.Component {
 
     // flow:disable not supported yet
-    static sampleProps = fixtures.ixa.phones[0];
+    static sampleProps = {default: fixtures.ixa.phones[0]};
 
     // flow:disable not supported yet
     get href(): string {

@@ -8,7 +8,7 @@ import ScreenReader from "./ScreenReader";
 class Address extends React.Component {
 
     // flow:disable not supported yet
-    static sampleProps = fixtures.ixa.location;
+    static sampleProps = {default: fixtures.ixa.location};
 
     /*
      * Convert a property to a description

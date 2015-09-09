@@ -23,7 +23,7 @@ class OpeningTimes extends React.Component {
     };
 
     // flow:disable not supported yet
-    static sampleProps = {object: fixtures.ixa};
+    static sampleProps = {default: {object: fixtures.ixa}};
 
     findOpeningHours(day = moment()): Object {
         return _.findWhere(this.props.object.opening_hours,
