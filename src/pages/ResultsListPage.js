@@ -13,6 +13,8 @@ import icons from '../icons';
 
 class ResultsListPage extends BaseResultsPage {
     render(): React.Element {
+        var personaliseLink = `${this.getPath()}/personalise/summary`;
+
         return (
             <div className="ResultsListPage">
                 <components.AppBar
@@ -31,24 +33,37 @@ class ResultsListPage extends BaseResultsPage {
                                 {this.state.meta.location.state}.
                                 <icons.LogoLight />
                             </div>
+                        : this.state.error ?
+                            <div>
+                                <icons.LogoLight />
+                                Sorry, I couldn't do this search.
+                            </div>
                         :
                             <div>Searching...</div>
                     }
                     secondaryText={
-                        <div>
-                            <Router.Link
-                                to={`${this.getPath()}/personalise/summary`}
-                            >Change what you need</Router.Link>
-                         </div>
+                        this.state.meta ?
+                            <div>
+                                <Router.Link
+                                    to={personaliseLink}
+                                >Change what you need</Router.Link>
+                            </div>
+                        : this.state.error ?
+                            <div>
+                                <p>
+                                    {this.state.error}
+                                </p>
+                                <p>
+                                    <Router.Link to='home'>
+                                        Go back
+                                    </Router.Link>
+                                </p>
+
+                            </div>
+                        :
+                            ''
                     }
                 />
-
-                {this.state.error ?
-                    <div>
-                        {this.state.error}
-                    </div>
-                : ''
-                }
 
                 {this.renderResults()}
 
