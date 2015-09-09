@@ -60,20 +60,6 @@ class ResultListItem extends React.Component {
                             this.props.nRelatedServices);
     }
 
-    componentDidMount(): void {
-        if (this.props.nRelatedServices > 0) {
-            /* request our sibling services */
-            iss.getSiteChildren(this.props.object.site.id)
-                .then(data => {
-                    /* remove ourselves */
-                    var relatedServices =
-                        _.reject(data.objects, service =>
-                                 service.id == this.props.object.id);
-                    this.setState({relatedServices: relatedServices});
-                });
-        }
-    }
-
     render(): React.Element {
         var {
             object,

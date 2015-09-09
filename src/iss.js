@@ -4,6 +4,9 @@
 
 import http from 'iso-http';
 import url from 'url';
+import _ from 'underscore';
+
+import serviceProvisions from "./constants/service-provisions";
 
 declare var ISS_URL: string;
 
@@ -148,6 +151,46 @@ export class Service {
     target_gender: issGender;
     type: issEntityType;
     web: urlString;
+
+    _serviceProvisions: Array<string>;
+
+    /**
+     * serviceProvisions:
+     *
+     * An array of things this service provides built using a bucket-of-words
+     * approach from the service's full description */
+    /* flow:disable */
+    get serviceProvisions(): Array<string> {
+        if (this._serviceProvisions) {
+            return this._serviceProvisions;
+        }
+
+        this._serviceProvisions = [];
+
+        for (var provision of serviceProvisions) {
+            var forms = [provision.cname].concat(provision.forms || []);
+
+            if (_.some(forms.map(form => new RegExp(form, 'i')),
+                       form => this.description.match(form))) {
+                this._serviceProvisions.push(provision.cname);
+            }
+        }
+
+        return this._serviceProvisions;
+    }
+
+    async getSiblingServices(): Promise<searchResults> {
+        var request: searchRequest = {
+            site_id: this.site.id,
+            type: 'service',
+        };
+
+        var response = await iss('/api/v3/search/', request);
+
+        // convert objects to ISS search results
+        response.objects.map(object => Object.assign(new Service, object));
+        return response;
+    }
 }
 
 /**
@@ -199,21 +242,6 @@ export async function getService(
     var response = await iss(`/api/v3/service/${id}/`);
 
     return Object.assign(new Service, response);
-}
-
-export async function getSiteChildren(
-    siteId: number
-): Promise<searchResults> {
-    var request: searchRequest = {
-        site_id: siteId,
-        type: 'service',
-    };
-
-    var response = await iss('/api/v3/search/', request);
-
-    // convert objects to ISS search results
-    response.objects.map(object => Object.assign(new Service, object));
-    return response;
 }
 
 async function iss(path: string, data: ?searchRequest): Object {
