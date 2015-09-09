@@ -5,7 +5,6 @@
 import path              from "path";
 import webpack           from "webpack";
 import writeStats        from "./utils/write-stats";
-import strip             from "strip-loader";
 import env               from "./env";
 import extractText       from "./extract-text";
 
@@ -39,7 +38,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loaders: [strip.loader("debug"), "babel"],
+                loaders: ["babel"],
             },
         ],
     },
