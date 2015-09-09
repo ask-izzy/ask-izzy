@@ -27,10 +27,47 @@ var serviceProvisions: Array<ServiceProvision> = [
             "legal advice",
         ],
     }, {
+        cname: "Civil law advice",
+        forms: [
+            /civil (law|matters)/,
+        ],
+    }, {
+        cname: "Criminal law advice",
+        forms: [
+            /criminal (law|matters)/,
+        ],
+    }, {
+        cname: "Crisis accommodation",
+        forms: [
+            /(crisis|emergency) (accommodation|housing|shelter)/,
+            "housing crisis",
+            "refuge accommodation",  // N.B. not refugee
+        ],
+    }, {
+        cname: "Family law advice",
+        forms: [
+            /family (law|matters)/,
+        ],
+    }, {
         cname: "Legal assistance to help you pay for a lawyer",
         forms: [
             "legal aid",
             "legal representation",
+        ],
+    }, {
+        cname: "Long-term accommodation",
+        forms: [
+            /long[ -]term (housing|accommodation)/,
+        ],
+    }, {
+        cname: "Short-term accommodation",
+        forms: [
+            /short[ -]term (housing|accommodation)/,
+        ],
+    }, {
+        cname: "Transitional accommodation",
+        forms: [
+            'transitional housing',
         ],
     },
 ];
