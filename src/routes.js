@@ -3,6 +3,12 @@
 import React from "react";
 import Router from 'react-router';
 
+// If you import these after the others,
+// babel decides the navbar doesn't really
+// need to be loaded.
+import StyleGuideList from "./pages/StyleGuideList";
+import StyleGuideItem from "./pages/StyleGuideItem";
+
 import BasePage from "./pages/BasePage";
 import BrandedPage from "./pages/BrandedPage";
 import ErrorPage from "./pages/ErrorPage";
@@ -12,9 +18,6 @@ import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
 import ResultsListPage from "./pages/ResultsListPage";
 import ResultsMapPage from "./pages/ResultsMapPage";
 import ServicePage from "./pages/ServicePage";
-
-import StyleGuideList from "./pages/StyleGuideList";
-import StyleGuideItem from "./pages/StyleGuideItem";
 
 export default <Router.Route
         name="_root"
