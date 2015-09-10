@@ -182,6 +182,7 @@ export class Service {
         var request_: searchRequest = {
             site_id: this.site.id,
             type: 'service',
+            limit: 0,
         };
 
         this._siblingServices = await requestObjects('/api/v3/search/',
