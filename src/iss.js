@@ -145,15 +145,19 @@ export class Service {
             return this._serviceProvisions;
         }
 
-        this._serviceProvisions = [];
+        try {
+            this._serviceProvisions = [];
 
-        for (var provision of serviceProvisions) {
-            var forms = [provision.cname].concat(provision.forms || []);
+            for (var provision of serviceProvisions) {
+                var forms = [provision.cname].concat(provision.forms || []);
 
-            if (_.some(forms.map(form => new RegExp(form, 'i')),
-                       form => this.description.match(form))) {
-                this._serviceProvisions.push(provision.cname);
+                if (_.some(forms.map(form => new RegExp(form, 'i')),
+                           form => this.description.match(form))) {
+                    this._serviceProvisions.push(provision.cname);
+                }
             }
+        } catch (e) {
+            console.error("Failed to determine service provisions", e);
         }
 
         return this._serviceProvisions;
@@ -277,4 +281,5 @@ export default {
     search: search,
     getService: getService,
     request: request,
+    Service: Service,
 };
