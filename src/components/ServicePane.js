@@ -14,6 +14,7 @@ import OpeningTimes from "../components/OpeningTimes";
 import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
+import iss from "../iss";
 
 var palette = colors.getPalette();
 
@@ -29,6 +30,11 @@ export default class ServicePane extends React.Component {
         };
     }
 
+    // flow:disable not supported yet
+    static propTypes = {
+        service: React.PropTypes.instanceOf(iss.Service).isRequired,
+    };
+
     async getSiblingServices(): Promise<void> {
         var response = await this.props.service.getSiblingServices();
         this.setState({siblings: response.objects});
@@ -36,6 +42,12 @@ export default class ServicePane extends React.Component {
 
     componentDidMount(): void {
         this.getSiblingServices();
+    }
+
+    componentDidUpdate(prevProps: Object, prevState: Object): void {
+        if (prevProps.service != this.props.service) {
+            this.getSiblingServices();
+        }
     }
 
     render(): React.Element {
