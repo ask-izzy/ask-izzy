@@ -134,6 +134,7 @@ export class Service {
     web: urlString;
 
     _serviceProvisions: Array<string>;
+    _siblingServices: searchResults;
 
     /**
      * shortDescription:
@@ -174,14 +175,25 @@ export class Service {
     }
 
     async getSiblingServices(): Promise<searchResults> {
+        if (this._siblingServices) {
+            return this._siblingServices;
+        }
+
         var request_: searchRequest = {
             site_id: this.site.id,
             type: 'service',
         };
 
-        var response = await requestObjects('/api/v3/search/', request_);
+        this._siblingServices = await requestObjects('/api/v3/search/',
+                                                     request_);
 
-        return response;
+        this._siblingServices.objects =
+            this._siblingServices.objects.filter(
+                service => service.id != this.id
+        );
+
+
+        return this._siblingServices;
     }
 
     /* flow:disable */
