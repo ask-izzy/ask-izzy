@@ -62,22 +62,38 @@ export default class ServicePane extends React.Component {
                 </main>
 
                 <Eligibility
+                    className="padded"
                     catchment={object.catchment}
                     eligibility_info={object.eligibility_info}
                     ineligibility_info={object.ineligibility_info}
                 />
 
-                <h3>What you can get here</h3>
-                <ul>
-                    {object.serviceProvisions.map(
-                        (provision, index) => <li key={index}>{provision}</li>
-                    )}
-                </ul>
+                <div className="padded">
+                    <h3>What you can get here</h3>
+                    <ul>
+                        {object.serviceProvisions.map((provision, index) =>
+                            <li key={index}>{provision}</li>
+                        )}
+                    </ul>
+                </div>
 
-                <h3>Other services at this location</h3>
+                {this.renderSiblings()}
+            </div>
+        );
+    }
+
+    renderSiblings(): React.Element {
+        if (!this.state.siblings) {
+            return '';
+        }
+
+        return (
+            <div>
+                <h3 className="padded">
+                    Other services at this location
+                </h3>
                 <mui.List className="List">
-                {this.state.siblings ?
-                    this.state.siblings.map((service, index) =>
+                    {this.state.siblings.map((service, index) =>
                         <mui.ListItem className="ListItem"
                             key={index}
                             primaryText={service.name}
@@ -96,13 +112,9 @@ export default class ServicePane extends React.Component {
                             disableFocusRipple={true}
                             disableTouchRipple={true}
                         />
-                    )
-                :
-                    'Loading...'
-                }
+                    )}
                 </mui.List>
             </div>
         );
     }
-
 }

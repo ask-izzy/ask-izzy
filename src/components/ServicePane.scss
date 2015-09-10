@@ -6,11 +6,11 @@ $padding: 15px;
     font-size: 14px !important;
     font-weight: light !important;
 
-    & > * {
+    .padded, .Eligibility {
         margin: $padding;
     }
 
-    & > main {
+    main {
         margin: 0;
         padding: $padding;
 
@@ -19,7 +19,7 @@ $padding: 15px;
 
     h1, h2, h3, h4, h5, h6 {
        font-weight: 500 !important;
-       margin-bottom: 0px;
+       margin-bottom: 0px !important;
     }
 
     hr {
@@ -42,18 +42,11 @@ $padding: 15px;
     }
 
     .List {
-        margin: 0;
-        padding: 0;
-
         .ListItem {
             font-size: 14px !important;
             font-weight: 400 !important;
 
             border-bottom: 1px solid $list-item-hairline !important;
-        }
-
-        .ListItem:first-child {
-            border-top: 1px solid $list-item-hairline !important;
         }
     }
 }
