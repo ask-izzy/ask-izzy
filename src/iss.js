@@ -5,6 +5,7 @@
 import http from 'iso-http';
 import url from 'url';
 import _ from 'underscore';
+import { slugify } from 'underscore.string';
 
 import serviceProvisions from "./constants/service-provisions";
 
@@ -135,6 +136,15 @@ export class Service {
     _serviceProvisions: Array<string>;
 
     /**
+     * shortDescription:
+     *
+     * First sentence of the description.
+     */
+    /* flow:disable */
+    get shortDescription(): string {
+        return this.description.split('.', 1)[0] + '.';
+    }
+    /**
      * serviceProvisions:
      *
      * An array of things this service provides built using a bucket-of-words
@@ -172,6 +182,11 @@ export class Service {
         var response = await requestObjects('/api/v3/search/', request_);
 
         return response;
+    }
+
+    /* flow:disable */
+    get slug(): string {
+        return slugify(`${this.id}-${this.site.name}`);
     }
 }
 

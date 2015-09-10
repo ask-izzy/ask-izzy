@@ -3,6 +3,7 @@
 "use strict";
 
 import React from "react";
+import Router from "react-router";
 import mui from "material-ui";
 import _ from "underscore";
 
@@ -12,6 +13,7 @@ import Eligibility from "../components/Eligibility";
 import OpeningTimes from "../components/OpeningTimes";
 import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
+import icons from "../icons";
 
 var palette = colors.getPalette();
 
@@ -25,11 +27,6 @@ export default class ServicePane extends React.Component {
         this.state = {
             siblings: null,
         };
-    }
-
-    // flow:disable
-    get description(): string {
-        return this.props.service.description.split('.', 1)[0] + '.';
     }
 
     async getSiblingServices(): Promise<void> {
@@ -52,7 +49,7 @@ export default class ServicePane extends React.Component {
                 <main>
                     <h2 className="name">{object.name}</h2>
                     <h3 className="description">
-                        {this.description}
+                        {object.shortDescription}
                     </h3>
 
                     <hr />
@@ -78,15 +75,32 @@ export default class ServicePane extends React.Component {
                 </ul>
 
                 <h2>Other services at this location</h2>
+                <mui.List>
                 {this.state.siblings ?
-                    <ul>
-                        {this.state.siblings.map((service, index) =>
-                            <li key={index}>{service.name}</li>
-                        )}
-                    </ul>
+                    this.state.siblings.map((service, index) =>
+                        <mui.ListItem
+                            key={index}
+                            primaryText={service.name}
+                            secondaryText={service.shortDescription}
+                            containerElement={
+                                <Router.Link
+                                    to="service"
+                                    params={{id: service.slug}}
+                                />
+                            }
+
+                            rightIcon={
+                                <icons.Chevron />
+                            }
+
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
+                        />
+                    )
                 :
                     'Loading...'
                 }
+                </mui.List>
             </div>
         );
     }

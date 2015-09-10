@@ -7,7 +7,6 @@ import fixtures from "../../fixtures/services";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
 import _ from "underscore";
-import { slugify } from "underscore.string";
 
 import icons from "../icons";
 import iss from '../iss';
@@ -64,7 +63,6 @@ class ResultListItem extends React.Component {
         var {
             object,
         } = this.props;
-        var slug = slugify(`${object.id}-${object.site.name}`);
 
         return (
             <mui.ListItem
@@ -72,7 +70,7 @@ class ResultListItem extends React.Component {
                 containerElement={
                     <Router.Link
                         to="service"
-                        params={{id: slug}}
+                        params={{id: object.slug}}
                     />
                 }
 
