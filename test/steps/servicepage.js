@@ -21,7 +21,7 @@ async function asyncFilter(arr, check) {
 module.exports = (function() {
 
     async function checkPhoneNumbers(lines: Array<string>): Promise<void> {
-        var phoneElems = await this.driver.findElements(By.css('a.Phone'));
+        var phoneElems = await this.driver.findElements(By.css('.Phone'));
         var visiblePhoneElems = await asyncFilter(
             phoneElems,
             (e) => e.isDisplayed()

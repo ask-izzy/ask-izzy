@@ -24,9 +24,19 @@ module.exports = {
                 "number": "0477 777 777"
             },
             {
+                "comment": "(really a mobile)",
+                "kind": "phone",
+                "number": "0477 777 777"
+            },
+            {
                 "comment": "",
                 "kind": "freecall",
                 "number": "1300 111 111"
+            },
+            {
+                "comment": "",
+                "kind": "tty",
+                "number": "(03) 9999 9999"
             },
         ],
         location: {},

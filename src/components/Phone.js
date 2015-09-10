@@ -16,11 +16,14 @@ class Phone extends React.Component {
 
     render(): React.Element {
         return (
-            <a className="Phone" href={this.href}>
-                <Icons.Phone />
-                <span className="kind">{ titleize(this.props.kind) } </span>
-                { this.props.number }
-            </a>
+            <div className="Phone">
+                <a href={this.href}>
+                    <Icons.Phone />
+                    <span className="kind">
+                        { titleize(this.props.kind) }
+                    </span> { this.props.number } { this.props.comment }
+                </a>
+            </div>
         );
     }
 
