@@ -18,10 +18,11 @@ class CollapsedPhones extends React.Component {
         if (phones && phones.length) {
             var first = phones.shift();
             var extras = null;
-            if (phones.length) {
+            if (phones.length > 1) {
                 extras = (
                     <Collapser
                         message="Other contact options"
+                        expanded={this.props.expanded}
                     >
                         {
                             phones.map((phone, idx) =>
@@ -30,6 +31,8 @@ class CollapsedPhones extends React.Component {
                         }
                     </Collapser>
                 );
+            } else if (phones.length == 1) {
+                extras = <Phone {...phones[0] } key="second" />;
             }
 
             return (
@@ -38,7 +41,7 @@ class CollapsedPhones extends React.Component {
                     <ScreenReader>
                         <h4>Phone numbers</h4>
                     </ScreenReader>
-                    <Phone {...first} />
+                    <Phone {...first} key="first" />
                     {extras}
                 </div>
             );

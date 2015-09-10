@@ -7,7 +7,7 @@ import { titleize } from "underscore.string";
 class Phone extends React.Component {
 
     // flow:disable not supported yet
-    static sampleProps = fixtures.ixa.phones[0];
+    static sampleProps = {default: fixtures.ixa.phones[0]};
 
     // flow:disable not supported yet
     get href(): string {
@@ -16,11 +16,13 @@ class Phone extends React.Component {
 
     render(): React.Element {
         return (
-            <a className="Phone" href={this.href}>
-                <Icons.Phone />
-                <span className="kind">{ titleize(this.props.kind) } </span>
-                { this.props.number }
-            </a>
+            <div className="Phone">
+                <a href={this.href}>
+                    <Icons.Phone />
+                    <span className="kind">{ titleize(this.props.kind) } </span>
+                    { this.props.number } { this.props.comment }
+                </a>
+            </div>
         );
     }
 

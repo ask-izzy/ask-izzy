@@ -54,9 +54,11 @@ export default class ServicePane extends React.Component {
 
     render(): React.Element {
         var object = this.props.service;
-        var phones = _.filter(object.phones, (p) => p.kind != 'fax');
+        var filteredPhoneKinds = _(['fax', 'tty']);
         var phoneOrder = ['freecall', 'phone', 'mobile'];
+        var phones = _.filter(object.phones, (p) => !filteredPhoneKinds.contains(p.kind));
         phones = _(phones).sortBy((p) => phoneOrder.indexOf(p.kind));
+        phones = _(phones).uniq((p) => p.number);
 
         return (
             <div className="ServicePane">
