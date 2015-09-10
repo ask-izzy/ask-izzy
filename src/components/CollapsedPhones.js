@@ -11,8 +11,12 @@ class CollapsedPhones extends React.Component {
 
     // flow:disable not supported yet
     static sampleProps = {
-        default: {phones: fixtures.ixa.phones},
-        open: {phones: fixtures.ixa.phones, expanded: true}
+        default: {phones: fixtures.ixa.phones, expanded: false},
+        open: {phones: fixtures.ixa.phones, expanded: true},
+        "two numbers": {phones: [
+            {kind: "phone", number: "(03) 3333 3333"},
+            {kind: "phone", number: "(03) 5555 5555"},
+        ],},
     };
 
     render(): React.Element {
