@@ -1,9 +1,13 @@
-// @media print {
-    .LogotypeIcon path {
-        width: auto;
-        height: auto;
+@media print {
+    path {
+        fill: black !important;
     }
-// }
+}
+
+.LogotypeIcon path {
+    width: auto;
+    height: auto;
+}
 
 .ColoredIcon {
     &.icon-fg-color path {
