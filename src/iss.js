@@ -169,12 +169,8 @@ export class Service {
             type: 'service',
         };
 
-        var response = await request('/api/v3/search/', request_);
+        var response = await requestObjects('/api/v3/search/', request_);
 
-        // convert objects to ISS search results
-        response.objects = response.objects.map(
-            object => Object.assign(new Service, object)
-        );
         return response;
     }
 }
@@ -215,12 +211,8 @@ export async function search(
         request_.location = `${coords.longitude}E${coords.latitude}N`;
     }
 
-    var response = await request('/api/v3/search/', request_);
+    var response = await requestObjects('/api/v3/search/', request_);
 
-    // convert objects to ISS search results
-    response.objects = response.objects.map(
-        object => Object.assign(new Service, object)
-    );
     return response;
 }
 
@@ -277,9 +269,23 @@ export async function request(path: string, data: ?searchRequest): Object {
     return JSON.parse(response.text);
 }
 
+export async function requestObjects(
+    path: string, data: ?searchRequest
+): Promise<searchResults> {
+    var response = await request(path, data);
+
+    // convert objects to ISS search results
+    response.objects = response.objects.map(
+        object => Object.assign(new Service, object)
+    );
+
+    return response;
+}
+
 export default {
     search: search,
     getService: getService,
     request: request,
+    requestObjects: requestObjects,
     Service: Service,
 };

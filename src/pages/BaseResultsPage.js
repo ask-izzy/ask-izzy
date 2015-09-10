@@ -123,7 +123,7 @@ class BaseResultsPage extends BaseCategoriesPage {
         this.setState({meta: null});
 
         try {
-            var data = await iss.request(next);
+            var data = await iss.requestObjects(next);
             this.setState({
                 meta: data.meta,
                 objects: this.state.objects.concat(data.objects),
