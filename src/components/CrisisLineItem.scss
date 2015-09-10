@@ -1,0 +1,47 @@
+.CrisisLineItem {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+
+    border-bottom: 1px solid $list-item-hairline !important;
+    margin-top: 10px;
+
+    .crisisItem{
+        position: relative;
+        border: 2px solid;
+        border-color: $brand-pane-alt-light;
+        border-radius: 3px;
+        width: 70%;
+        margin-left: 5%;
+        margin-bottom: 10px;
+        margin-right: 5%;
+        height: 32px;
+        padding-bottom: 20px;
+        font-size: 24px !important;
+        padding-left: 15%;
+        padding-top: 17px;
+        color: $brand-pane-alt-light;
+
+
+    }
+
+    .phoneIcon{
+            position: absolute;
+            width: 45px !important;
+            height: 30px !important;
+            padding: 0;
+            padding-top: 20px;
+            padding-right: 0%;
+            margin-left: 9%;
+            color: $brand-pane-alt-light;
+
+        }
+    .crisisName{
+        color: $brand-text-mid;
+        margin-left:5% ;
+        font-size: 18px !important;
+        margin-bottom: 8px;
+
+
+    }
+
+}

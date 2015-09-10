@@ -22,12 +22,12 @@ module.exports = (function() {
         .when('I search for "$STRING" and press enter',
               unpromisify(doSearchAndEnter))
         .when('I click on the search icon', unpromisify(clickSearchIcon))
-        .when('I click back from the title bar',
-              unpromisify(clickBack))
+        .when('I click back from the title bar', unpromisify(clickBack))
         .when('I pause for debugging', unpromisify(pauseToDebug))
         .then('I should be at $URL', unpromisify(checkURL))
         .then('I should see "$STRING"', unpromisify(thenISee))
         .then('I should not see "$STRING"', unpromisify(thenIDontSee))
+        .then('I should see phone number $NUM', unpromisify(crisisLineItem))
         .then('search box should contain "$STRING"',
               unpromisify(searchContains))
         .then('the button "$STRING" should be disabled',
@@ -159,3 +159,11 @@ async function checkEnabled(text: string): Promise<void> {
 
     assert.equal(enabled, true);
 }
+
+async function crisisLineItem(expected: number): Promise<void> {
+        var value = await this.driver.findElement(By.css(
+            '.CrisisLineItem .crisisItem'))
+            .getText();
+
+        assert.equal(value, expected);
+    }

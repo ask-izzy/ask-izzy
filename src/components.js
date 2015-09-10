@@ -12,6 +12,7 @@ import Phone from './components/Phone';
 import ResultListItem from './components/ResultListItem';
 import ServicePane from './components/ServicePane';
 import TransportTime from './components/TransportTime';
+import CrisisLineItem from './components/CrisisLineItem';
 
 export default {
     Address: Address,
@@ -27,4 +28,5 @@ export default {
     ResultListItem: ResultListItem,
     ServicePane: ServicePane,
     TransportTime: TransportTime,
+    CrisisLineItem: CrisisLineItem,
 };

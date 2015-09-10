@@ -16,6 +16,7 @@ import * as iss from '../iss';
 import categories from '../constants/categories';
 import Infobox from '../components/Infobox';
 import ResultListItem from '../components/ResultListItem';
+import CrisisLineItem from '../components/CrisisLineItem';
 import HeaderBar from '../components/HeaderBar';
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
@@ -116,6 +117,7 @@ class ResultsListPage extends React.Component {
                     meta: data.meta,
                     objects: data.objects,
                     error: undefined,
+
                 });
             })
 
@@ -135,7 +137,7 @@ class ResultsListPage extends React.Component {
 
     }
 
-    render(): React.Element {
+render(): React.Element {
         return (
             <div className="ResultsListPage">
                 <mui.AppBar
@@ -177,6 +179,7 @@ class ResultsListPage extends React.Component {
                     }
                 />
 
+
                 {this.state.meta || this.state.error ?
                     ''
                 :
@@ -198,10 +201,17 @@ class ResultsListPage extends React.Component {
                             <div key={index}>
                                 {React.addons.cloneWithProps(object.node)}
                             </div>
+                        : object.crisis ?
+
+                             <CrisisLineItem object={object} key={index} />
                         :
-                            <ResultListItem object={object} key={index} />
+
+                             <ResultListItem object={object} key={index} />
                     )
                 }</mui.List>
+
+
+
             </div>
         );
     }
