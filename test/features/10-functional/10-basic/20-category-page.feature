@@ -16,11 +16,11 @@ Feature: Category page
         And I should see "I found 3 housing services for Richmond, VIC."
         And I should see the results
         --------------------------------------------------------------------------
-        Service Name (name) | Site Name (site_name) | Related services (related)
+        Service Name (name) | Site Name (site_name) | Service provisions (related)
         ==========================================================================
-        Housing Service     | My Housing Service    | Transitional Housing Service
+        Housing Service     | My Housing Service    | (nada)
         Emergency Accom     | Youth Support Net     | (nada)
-        Womens Refuge       | Susan's House         | (nada)
+        Womens Refuge       | Susan's House         | Crisis accommodation
         --------------------------------------------------------------------------
 
         And I should see an info box in position 2
@@ -43,14 +43,17 @@ Feature: Category page
         Then I should see "Emergency Accom"
         And I should be at /category/housing
 
-    Scenario: A service with 5 related services only shows 4
-        When I visit /category/food
+    # FIXME: This test is no longer relevant because we show service provisions
+    # not related services.
+    #
+    # Scenario: A service with 5 related services only shows 4
+        # When I visit /category/food
 
-        Then I should see "Material Aid"
-        And I should see "Community Outreach"
-        And I should see "Crisis Accommodation"
-        And I should see "Centrelink Services"
-        And I should not see "Drug & Alcohol Counselling"
+        # Then I should see "Material Aid"
+        # And I should see "Community Outreach"
+        # And I should see "Crisis Accommodation"
+        # And I should see "Centrelink Services"
+        # And I should not see "Drug & Alcohol Counselling"
 
     Scenario: I should never see "invalid date"
         When I visit /category/housing

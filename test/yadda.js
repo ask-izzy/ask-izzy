@@ -44,6 +44,10 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
                     }
                 });
 
+            // Flush any logs from previous tests
+            var logger = new Webdriver.WebDriver.Logs(driver);
+            await logger.get('browser');
+
             done();
         });
 

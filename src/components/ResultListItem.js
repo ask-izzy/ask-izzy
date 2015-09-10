@@ -96,9 +96,7 @@ class ResultListItem extends React.Component {
                     }</ul>
                     {this.nMoreServiceProvisions > 0 ?
                         <div>
-                            {this.nMoreServiceProvisions} more{' '}
-                            {this.nMoreServiceProvisions == 1 ?
-                                'service' : 'services'}…
+                            {this.nMoreServiceProvisions} more…
                         </div>
                     :
                         ''
