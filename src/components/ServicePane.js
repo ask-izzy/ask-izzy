@@ -67,18 +67,18 @@ export default class ServicePane extends React.Component {
                     ineligibility_info={object.ineligibility_info}
                 />
 
-                <h2>What you can get here</h2>
+                <h3>What you can get here</h3>
                 <ul>
                     {object.serviceProvisions.map(
                         (provision, index) => <li key={index}>{provision}</li>
                     )}
                 </ul>
 
-                <h2>Other services at this location</h2>
-                <mui.List>
+                <h3>Other services at this location</h3>
+                <mui.List className="List">
                 {this.state.siblings ?
                     this.state.siblings.map((service, index) =>
-                        <mui.ListItem
+                        <mui.ListItem className="ListItem"
                             key={index}
                             primaryText={service.name}
                             secondaryText={service.shortDescription}

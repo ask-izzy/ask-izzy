@@ -1,19 +1,25 @@
 $padding: 15px;
 
 .ServicePane {
-    padding: $padding;
+    color: $brand-text-dark;
+
     font-size: 14px !important;
     font-weight: light !important;
 
-    h1, h2, h3, h4, h5, h6 {
-       font-weight: normal !important;
+    & > * {
+        margin: $padding;
     }
 
     & > main {
-        margin: -$padding;
+        margin: 0;
         padding: $padding;
 
         background-color: $brand-bg-light;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+       font-weight: 500 !important;
+       margin-bottom: 0px;
     }
 
     hr {
@@ -32,5 +38,22 @@ $padding: 15px;
 
     .description {
         color: $brand-text-mid;
+        font-weight: 400 !important;
+    }
+
+    .List {
+        margin: 0;
+        padding: 0;
+
+        .ListItem {
+            font-size: 14px !important;
+            font-weight: 400 !important;
+
+            border-bottom: 1px solid $list-item-hairline !important;
+        }
+
+        .ListItem:first-child {
+            border-top: 1px solid $list-item-hairline !important;
+        }
     }
 }
