@@ -14,6 +14,12 @@ class HeaderBar extends React.Component {
         // FIXME: icon
     };
 
+    // flow:disable not supported yet
+    static sampleProps = {default: {
+        primaryText: "Primary Text",
+        secondaryText: "Secondary Text",
+    },};
+
     render(): React.Element {
         return (
             <div className="HeaderBar">

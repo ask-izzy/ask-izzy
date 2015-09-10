@@ -32,7 +32,7 @@ class ResultListItem extends React.Component {
     };
 
     // flow:disable not supported yet
-    static sampleProps = {object: fixtures.ixa};
+    static sampleProps = {default: {object: fixtures.ixa}};
 
     // flow:disable
     static defaultProps =  {

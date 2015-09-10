@@ -13,6 +13,12 @@ class AppBar extends React.Component {
         onBackTouchTap: React.PropTypes.func.isRequired,
     };
 
+    // flow:disable not supported yet
+    static sampleProps = {default: {
+        title: "App bar",
+        onBackTouchTap: function() {},
+    },};
+
     render(): React.Element {
         return (
             <mui.AppBar

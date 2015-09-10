@@ -19,7 +19,7 @@ var palette = colors.getPalette();
 export default class ServicePane extends React.Component {
 
     // flow:disable not supported yet
-    static sampleProps = {service: fixtures.youthSupportNet};
+    static sampleProps = {default: {service: fixtures.youthSupportNet}};
 
     // flow:disable
     get description(): string {
