@@ -160,10 +160,14 @@ export class Service {
             this._serviceProvisions = [];
 
             for (var provision of serviceProvisions) {
-                var forms = [provision.cname].concat(provision.forms || []);
+                var forms = provision.forms || [provision.cname];
+                var anti_forms = provision.anti_forms || [];
 
                 if (_.some(forms.map(form => new RegExp(form, 'i')),
-                           form => this.description.match(form))) {
+                           form => this.description.match(form)) &&
+                   !_.some(anti_forms.map(form => new RegExp(form, 'i')),
+                           form => this.description.match(form))
+                ) {
                     this._serviceProvisions.push(provision.cname);
                 }
             }

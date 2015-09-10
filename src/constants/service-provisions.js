@@ -8,68 +8,183 @@
 
 "use strict";
 
-type ServiceProvision = {
-    /* canonical name for the service provision
-     * (this is the one we display) */
-    cname: string;
-    /* a description of what this service provision is */
-    description?: string;
-    /* other forms for this service provision
-     * (implicitly includes the cname) */
-    forms?: Array<RegExp|string>
-};
+import {
+    ServiceProvision,
+    allOf,
+    anyOf,
+    keywords,
+    not,
+    provides,
+} from '../ServiceProvisions';
 
-/* Please keep this sorted */
+/* Please keep this grouped */
 var serviceProvisions: Array<ServiceProvision> = [
-    {
-        cname: "Advice on legal matters",
-        forms: [
-            "legal advice",
-        ],
-    }, {
-        cname: "Civil law advice",
-        forms: [
-            /civil (law|matters)/,
-        ],
-    }, {
-        cname: "Criminal law advice",
-        forms: [
-            /criminal (law|matters)/,
-        ],
-    }, {
-        cname: "Crisis accommodation",
-        forms: [
-            /(crisis|emergency) (accommodation|housing|shelter)/,
-            "housing crisis",
-            "refuge accommodation",  // N.B. not refugee
-        ],
-    }, {
-        cname: "Family law advice",
-        forms: [
-            /family (law|matters)/,
-        ],
-    }, {
-        cname: "Legal assistance to help you pay for a lawyer",
-        forms: [
-            "legal aid",
-            "legal representation",
-        ],
-    }, {
-        cname: "Long-term accommodation",
-        forms: [
-            /long[ -]term (housing|accommodation)/,
-        ],
-    }, {
-        cname: "Short-term accommodation",
-        forms: [
-            /short[ -]term (housing|accommodation)/,
-        ],
-    }, {
-        cname: "Transitional accommodation",
-        forms: [
-            'transitional housing',
-        ],
-    },
+    /* General */
+    provides({
+        name: "Advice",
+        form: allOf(
+            'advice',
+            not('legal'),
+        ),
+    }),
+
+    /* Legal advice */
+    provides({
+        name: "Advice on legal matters",
+        form: "legal advice",
+    }),
+    provides({
+        name: "Civil law advice",
+        form: keywords('civil', /law|matters/),
+    }),
+    provides({
+        name: "Criminal law advice",
+        form: keywords('criminal', /law|matters/),
+    }),
+    provides({
+        name: "Family law advice",
+        form: keywords('family', /law|matters/),
+    }),
+
+    /* Food */
+    provides({
+        name: "Breakfast",
+        form: keywords('free', 'breakfast'),
+    }),
+    provides({
+        name: "Lunch",
+        form: keywords('free', 'lunch'),
+    }),
+    provides({
+        name: "Dinner",
+        form: keywords('free', /dinner|evening meal/),
+    }),
+
+    /* Accommodation */
+    provides({
+        name: "Family accommodation",
+        form: keywords('accommodation', 'for', 'families'),
+    }),
+    provides({
+        name: "Crisis accommodation",
+        form: anyOf(
+            keywords(/crisis|emergency/, /accommodation|housing|shelter/),
+            keywords('housing', 'crisis'),
+            keywords('refuge', 'accommodation'),  // N.B. not refugee
+        ),
+    }),
+
+    /* Case management */
+    provides({
+        name: "Case management",
+        form: allOf(
+            'case-management',
+            not(
+                'long-term',
+                'short-term',
+                'medium-term',
+            ),
+        ),
+    }),
+    provides({
+        name: "Short-term case management",
+        form: keywords('short', 'term', 'case management'),
+    }),
+    provides({
+        name: "Medium-term case management",
+        form: keywords('medium', 'term', 'case management'),
+    }),
+    provides({
+        name: "Long-term case management",
+        form: keywords('long', 'term', 'case management'),
+    }),
+
+    /* Material aid */
+    provides({
+        name: "Clothing",
+        form: 'clothing',
+    }),
+
+    /* Referrals */
+    provides({
+        name: "Drug & alcohol referrals",
+        form: keywords(/referrals?/, 'for', /drugs?/, 'alcohol'),
+    }),
+    provides({
+        name: "Referrals for financial counselling",
+        form: anyOf(
+            keywords(/referrals?/, 'for', 'financial', 'counselling'),
+            keywords(/referrals?/, 'to', 'financial', 'counsellors'),
+        ),
+    }),
+
+    // }, {
+        // cname: "Food parcels",
+        // forms: [
+            // "food (?!vouchers)",
+            // "food hampers",
+            // "food parcels",
+        // ],
+    // }, {
+        // ],
+    // }, {
+        // cname: "Housing information",
+        // forms: [
+            // /housing([^.]*) information/,
+            // /information([^.]*) housing/,
+        // ],
+    // }, {
+        // cname: "Housing referrals",
+        // forms: [
+            // /housing([^.]*) referrals?/,
+            // /referrals?([^.]*) housing/,
+        // ],
+    // }, {
+        // cname: "Legal assistance to help you pay for a lawyer",
+        // forms: [
+            // "legal aid",
+            // "legal representation",
+        // ],
+    // }, {
+        // cname: "Referrals for legal services",
+        // forms: [
+            // /referrals? for([^.]*) legal services/,
+        // ],
+    // }, {
+        // cname: "Long-term accommodation",
+        // forms: [
+            // /long[ -]term(.* and [^.]+)? (housing|accommodation)/,
+        // ],
+    // }, {
+        // cname: "Mental health referrals",
+        // forms: [
+            // /referrals? for([^.]*) mental health/,
+        // ],
+    // }, {
+        // cname: "Public transport cards",
+        // forms: [
+            // "Met cards",
+            // "Myki cards",
+        // ],
+    // }, {
+        // cname: "Short-term accommodation",
+        // forms: [
+            // /short[ -]term(.* and [^.]+)? (housing|accommodation)/,
+        // ],
+    // }, {
+        // cname: "Tenancy information",
+        // forms: [
+            // /tenancy([^.]*) information/,
+            // /information([^.]*) tenancy/,
+        // ],
+    // }, {
+        // cname: "Toiletries",
+    // }, {
+        // cname: "Transitional accommodation",
+        // forms: [
+            // /transitional(.* and [^.]+)? (housing|accommodation)/,
+        // ],
+    // },
 ];
 
 export default serviceProvisions;
