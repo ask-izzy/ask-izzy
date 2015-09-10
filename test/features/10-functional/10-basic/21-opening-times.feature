@@ -7,7 +7,7 @@ Feature: Opening times
 
     Scenario: Can show opening time tomorrow
         Given my location is "Melbourne VIC"
-        And today is a Tuesday
+        And it is late on Tuesday
         # Navigating will undo the mocked time
         When I click on "Food"
         Then I should see the results
@@ -19,7 +19,7 @@ Feature: Opening times
 
     Scenario: Can show opening time 2 days hence
         Given my location is "Melbourne VIC"
-        And today is a Monday
+        And it is late on Monday
         # Navigating will undo the mocked time
         When I click on "Food"
         Then I should see the results
@@ -31,7 +31,7 @@ Feature: Opening times
 
     Scenario: Can show opening time next week
         Given my location is "Melbourne VIC"
-        And today is a Wednesday
+        And it is late on Wednesday
         # Navigating will undo the mocked time
         When I click on "Food"
         Then I should see the results
