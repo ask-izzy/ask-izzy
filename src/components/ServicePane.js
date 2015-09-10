@@ -62,7 +62,6 @@ export default class ServicePane extends React.Component {
                 </main>
 
                 <Eligibility
-                    className="padded"
                     catchment={object.catchment}
                     eligibility_info={object.eligibility_info}
                     ineligibility_info={object.ineligibility_info}
@@ -101,7 +100,7 @@ export default class ServicePane extends React.Component {
                             containerElement={
                                 <Router.Link
                                     to="service"
-                                    params={{id: service.slug}}
+                                    params={{slug: service.slug}}
                                 />
                             }
 

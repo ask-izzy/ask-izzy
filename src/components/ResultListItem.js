@@ -70,7 +70,7 @@ class ResultListItem extends React.Component {
                 containerElement={
                     <Router.Link
                         to="service"
-                        params={{id: object.slug}}
+                        params={{slug: object.slug}}
                     />
                 }
 
