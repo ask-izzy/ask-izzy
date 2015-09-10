@@ -3,6 +3,7 @@
 "use strict";
 
 import React from "react";
+import Router from "react-router";
 import mui from "material-ui";
 import _ from "underscore";
 
@@ -12,7 +13,7 @@ import Eligibility from "../components/Eligibility";
 import OpeningTimes from "../components/OpeningTimes";
 import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
-import serviceProvisions from "../constants/service-provisions";
+import icons from "../icons";
 
 var palette = colors.getPalette();
 
@@ -21,35 +22,20 @@ export default class ServicePane extends React.Component {
     // flow:disable not supported yet
     static sampleProps = {default: {service: fixtures.youthSupportNet}};
 
-    // flow:disable
-    get description(): string {
-        return this.props.service.description.split('.', 1)[0] + '.';
+    constructor(props: Object) {
+        super(props);
+        this.state = {
+            siblings: null,
+        };
     }
 
-    /**
-     * serviceProvisions:
-     *
-     * An array of things this service provides built using a bucket-of-words
-     * approach from the service's full description */
-    /* flow:disable */
-    get serviceProvisions(): Array<string> {
-        if (this._serviceProvisions) {
-            return this._serviceProvisions;
-        }
+    async getSiblingServices(): Promise<void> {
+        var response = await this.props.service.getSiblingServices();
+        this.setState({siblings: response.objects});
+    }
 
-        var service = this.props.service;
-        this._serviceProvisions = [];
-
-        for (var provision of serviceProvisions) {
-            var forms = [provision.cname].concat(provision.forms || []);
-
-            if (_.some(forms.map(form => new RegExp(form, 'i')),
-                       form => service.description.match(form))) {
-                this._serviceProvisions.push(provision.cname);
-            }
-        }
-
-        return this._serviceProvisions;
+    componentDidMount(): void {
+        this.getSiblingServices();
     }
 
     render(): React.Element {
@@ -68,7 +54,7 @@ export default class ServicePane extends React.Component {
                 <main>
                     <h2 className="name">{object.name}</h2>
                     <h3 className="description">
-                        {this.description}
+                        {object.shortDescription}
                     </h3>
 
                     <hr />
@@ -88,10 +74,38 @@ export default class ServicePane extends React.Component {
 
                 <h2>What you can get here</h2>
                 <ul>
-                    {this.serviceProvisions.map(
+                    {object.serviceProvisions.map(
                         (provision, index) => <li key={index}>{provision}</li>
                     )}
                 </ul>
+
+                <h2>Other services at this location</h2>
+                <mui.List>
+                {this.state.siblings ?
+                    this.state.siblings.map((service, index) =>
+                        <mui.ListItem
+                            key={index}
+                            primaryText={service.name}
+                            secondaryText={service.shortDescription}
+                            containerElement={
+                                <Router.Link
+                                    to="service"
+                                    params={{id: service.slug}}
+                                />
+                            }
+
+                            rightIcon={
+                                <icons.Chevron />
+                            }
+
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
+                        />
+                    )
+                :
+                    'Loading...'
+                }
+                </mui.List>
             </div>
         );
     }

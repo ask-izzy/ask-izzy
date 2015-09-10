@@ -22,7 +22,27 @@ help:
 
 ## Running the dev server
 
-    ./script/dev-server
+You will need API keys for [ISS](https://api.serviceseeker.com.au/) and
+Google.
+
+    ISS_URL=... GOOGLE_KEY=... ./script/dev-server
+
+### Forklift
+
+If you're using [forklift](https://github.com/infoxchange/docker-forklift)
+then you can add a config file `~/.config/forklift/ask-izzy.yaml`:
+
+    environment:
+        ISS_URL: ...
+        # ISS_URL: http://localhost:5000
+        GOOGLE_KEY: ...
+
+And run:
+
+    forklift ./script/dev-server
+
+There's also a mock ISS server available as `./script/mock-iss`. This will
+start a server on `localhost:5000`.
 
 
 ## Hacking
@@ -54,6 +74,9 @@ You can test on Sauce Labs using:
         SAUCE_USERNAME=ask_izzy \
         SAUCE_ACCESS_KEY=... \
         ./script/test
+
+You can pass `BROWSER_LOGS=yes` to dump logs from the browser. Be aware not
+all browsers support this.
 
 ## Attribution
 

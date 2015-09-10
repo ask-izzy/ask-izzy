@@ -44,6 +44,12 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
                     }
                 });
 
+            if (process.env.BROWSER_LOGS) {
+                // Flush any logs from previous tests
+                var logger = new Webdriver.WebDriver.Logs(driver);
+                await logger.get('browser');
+            }
+
             done();
         });
 
@@ -66,6 +72,18 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
                 var data = await driver.takeScreenshot();
 
                 fs.writeFileSync(`Test-${title}.png`, data, 'base64');
+
+                if (process.env.BROWSER_LOGS) {
+                    var logger = new Webdriver.WebDriver.Logs(driver);
+
+                    // N.B: iterating this causes problems but map works...
+                    // very strange
+                    console.log(
+                        (await logger.get('browser')).map(
+                            entry => `${entry.level.name}: ${entry.message}`
+                        ).join('\n')
+                    );
+                }
             }
 
             done();

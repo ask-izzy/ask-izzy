@@ -69,6 +69,7 @@ module.exports = {
     housingServiceSibling: {
         id: 112,
         name: "Transitional Housing Service",
+        description: "Transitional housing service",
         location: {
             suburb: 'Richmond',
         },
@@ -97,6 +98,7 @@ module.exports = {
     susansHouse: {
         id: 333,
         name: "Womens Refuge",
+        description: "Crisis accommodation for women",
         site: {
             id: 333,
             name: "Susan's House",

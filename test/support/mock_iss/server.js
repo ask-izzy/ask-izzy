@@ -71,6 +71,7 @@ app.get('/api/v3/search/', (req, res) => {
                 {
                     id: 444,
                     name: "Community Lunch",
+                    description: "A weekly lunch.",
                     site: {
                         id: 444,
                         name: "Youth Support Net",
@@ -95,6 +96,7 @@ app.get('/api/v3/search/', (req, res) => {
         var object = {
             id: 444,
             name: "Community Lunch",
+            description: "A weekly lunch.",
             site: {
                 id: 444,
                 name: "Youth Support Net",

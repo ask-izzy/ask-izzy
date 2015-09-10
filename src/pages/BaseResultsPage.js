@@ -7,7 +7,7 @@ import Router from "react-router";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
 
-import * as iss from '../iss';
+import iss from '../iss';
 import BaseCategoriesPage from './BaseCategoriesPage';
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
@@ -123,7 +123,7 @@ class BaseResultsPage extends BaseCategoriesPage {
         this.setState({meta: null});
 
         try {
-            var data = await iss.default(next);
+            var data = await iss.requestObjects(next);
             this.setState({
                 meta: data.meta,
                 objects: this.state.objects.concat(data.objects),
