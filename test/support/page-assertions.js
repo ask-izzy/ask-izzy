@@ -21,21 +21,6 @@ export async function imageIsVisible(
     assert(visible, `${altText} image was present but not visible`);
 };
 
-a.svgIsVisible = svgIsVisible;
-export async function svgIsVisible(
-    driver: Webdriver.WebDriver,
-    altText: string
-): Promise<void> {
-    // svg has a namespace in firefox, which makes xpath queries
-    // to pull them out tricky, so I've used css.
-    var visible = await driver.findElement(By.css(
-        `svg[aria-label='${altText}']`
-    ))
-        .isDisplayed();
-
-    assert(visible, `${altText} svg was present but not visible`);
-};
-
 a.textIsVisible = textIsVisible;
 export async function textIsVisible(
     driver: Webdriver.WebDriver,

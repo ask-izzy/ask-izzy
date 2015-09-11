@@ -20,7 +20,7 @@ module.exports = (function() {
             "//*[@class='branding-container']"
         );
 
-        await assert.svgIsVisible(this.driver, "Ask Izzy", container);
+        await assert.imageIsVisible(this.driver, "Ask Izzy", container);
         await assert.textIsVisible(
             this.driver,
             "The A to Z directory of homeless help information",

@@ -31,11 +31,11 @@ class HomePage extends React.Component {
             <div className="HomePage">
                 <div className="header">
                     <div className="branding-container">
-                        <icons.Logotype
-                            role="img"
-                            aria-label="Ask Izzy"
-                        />
-
+                        <img
+                            className="branding-icon"
+                            src="/static/askizzy-icon-logotype.svg"
+                            alt="Ask Izzy"
+                        ></img>
                         <p className="branding-copy">
                             The A to Z directory of homeless help information
                         </p>
