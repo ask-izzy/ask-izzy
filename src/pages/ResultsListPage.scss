@@ -31,4 +31,11 @@
             padding-left: 58px !important;
         }
     }
+
+    .MoreResultsButton {
+        border-top: 10px solid $brand-bg-light !important;
+        border-bottom: 10px solid $brand-bg-light !important;
+        text-align: center;
+        font-size: 14px !important;
+    }
 }
