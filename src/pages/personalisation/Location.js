@@ -378,6 +378,8 @@ class Location extends React.Component {
                         label="Done"
                         disabled={(!this.state.locationName)}
                         onTouchTap={this.onTouchDoneButton.bind(this)}
+                        disableFocusRipple={true}
+                        disableTouchRipple={true}
                     />
                 </div>
 

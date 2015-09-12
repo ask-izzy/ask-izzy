@@ -101,6 +101,8 @@ class BaseMultiQuestion extends BaseQuestion {
                     <mui.FlatButton
                         label="Done"
                         onTouchTap={this.onDoneTouchTap.bind(this)}
+                        disableFocusRipple={true}
+                        disableTouchRipple={true}
                     />
                 </div>
             </div>

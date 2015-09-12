@@ -41,12 +41,21 @@
             color: white !important;
             background-color: $icon-fg-color !important;
 
+            font-size: 18px !important;
+            font-weight: 400 !important;
+            text-transform: none !important;
+
             display: block !important;
             width: 90%;
             margin-left: auto !important;
             margin-right: auto !important;
             margin-top: 20px !important;
             margin-bottom: 20px !important;
+
+            &:hover, &:focus {
+                background-color: lighten($icon-fg-color, 10%) !important;
+            }
+
         }
 
         button[disabled] {
