@@ -155,9 +155,14 @@ class Keywords extends RegexpForm {
     }
 
     match(input) {
-        /* FIXME: This is a hack to handle the fact that word tokenizing regex
-         * needs two spaces between consecutive terms */
-        input = input.replace(/\s+/g, '  ');
+        input = input
+            /* FIXME: This is a hack to handle the fact that word tokenizing
+             * regex needs two spaces between consecutive terms */
+            .replace(/\s+/g, '  ')
+            /* And that a keyword at the send of a sentence needs a word
+             * breaker before the fullstop -- we don't add full-stop as a word
+             * break because it's already a sentence break */
+            .replace(/\./g, ' . ');
 
         return super.match(input);
     }
