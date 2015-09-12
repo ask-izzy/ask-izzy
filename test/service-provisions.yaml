@@ -23,6 +23,8 @@ tests:
       provides:
           - Case management
           - Referrals for financial counselling
+          - Housing referrals
+          - Mental health referrals
 
     - description: |
         Provides accommodation and support services for families experiencing
