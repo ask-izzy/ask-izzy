@@ -44,3 +44,12 @@ tests:
       provides:
           - Family accommodation
           - Support services
+
+    - description: |
+        Provides short-term crisis accommodation for Aboriginal women and
+        children who are survivors of family violence. Non-indigenous women
+        with children of Aboriginal partners are accepted.
+      provides:
+          - Crisis accommodation for women fleeing domestic violence
+          - Crisis accommodation
+          - Short-term accommodation

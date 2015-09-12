@@ -21,6 +21,11 @@ import {
 var serviceProvisions: Array<ServiceProvision> = [
     /* Accommodation */
     provides({
+        name: "Crisis accommodation for women fleeing domestic violence",
+        form: keywords(/crisis|emergency|refuge/, 'accommodation',
+                       'women', /family|domestic/, 'violence'),
+    }),
+    provides({
         name: "Family accommodation",
         form: keywords('accommodation', 'for', 'families'),
     }),
@@ -43,6 +48,17 @@ var serviceProvisions: Array<ServiceProvision> = [
     provides({
         name: "Transitional accommodation",
         form: keywords('transitional', /housing|accommodation/),
+    }),
+    provides({
+        name: "Public housing",
+        form: keywords("public", /housing|accommodation/),
+    }),
+    provides({
+        name: "Community housing",
+        form: allOf(
+            keywords(/community|social/, 'housing'),
+            not(/community|social/, 'housing tenants'),
+        ),
     }),
 
     /* Case management */
