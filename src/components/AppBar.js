@@ -28,6 +28,9 @@ class AppBar extends React.Component {
                     <mui.IconButton
                         className="BackButton"
                         onTouchTap={this.props.onBackTouchTap}
+
+                        disableFocusRipple={true}
+                        disableTouchRipple={true}
                     >
                         <icons.ChevronBack />
                     </mui.IconButton>

@@ -92,7 +92,7 @@ class ResultsListPage extends BaseResultsPage {
             {
                 this.state.objects ?
                     <mui.ListItem
-                        className="ViewOnMap"
+                        className="ViewOnMapButton"
                         primaryText="View on a map"
                         containerElement={
                             <Router.Link
@@ -124,7 +124,8 @@ class ResultsListPage extends BaseResultsPage {
             {
                 this.state.meta && this.state.meta.next ?
                     <mui.ListItem
-                        primaryText="Get more results"
+                        className="MoreResultsButton"
+                        primaryText="Load more results…"
                         onTouchTap={this.loadMore.bind(this)}
 
                         disableFocusRipple={true}

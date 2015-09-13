@@ -32,7 +32,7 @@ Feature: Category page
         ---------------------------------------------------------------------
 
         # The housing category has 3 results
-        And I should not see "Get more results"
+        And I should not see "Load more results…"
 
     Scenario: Navigate to a service and back to a category
         When I visit /category/housing
@@ -61,9 +61,9 @@ Feature: Category page
 
     Scenario: Visit a category with more than 5 services
         When I visit /category/everyday-things
-        Then I should see "Get more results"
+        Then I should see "Load more results…"
 
-        When I click on "Get more results"
+        When I click on "Load more results…"
         Then I should see the results
         --------------------
         Service Name (name)

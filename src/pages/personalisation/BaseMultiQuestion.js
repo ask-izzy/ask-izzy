@@ -79,7 +79,9 @@ class BaseMultiQuestion extends BaseQuestion {
                         </div>
                     }
                 />
+                <mui.List className="List">
                 {this.props.answers.map((answer, index) =>
+                    <div className="ListItem">
                     <mui.ListItem
                         key={index}
                         primaryText={answer}
@@ -95,12 +97,16 @@ class BaseMultiQuestion extends BaseQuestion {
                         }
                         disableFocusRipple={true}
                         disableTouchRipple={true}
-                    />)}
+                    />
+                    </div>)}
+                </mui.List>
 
                 <div className="done-button">
                     <mui.FlatButton
                         label="Done"
                         onTouchTap={this.onDoneTouchTap.bind(this)}
+                        disableFocusRipple={true}
+                        disableTouchRipple={true}
                     />
                 </div>
             </div>

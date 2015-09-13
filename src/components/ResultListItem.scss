@@ -5,7 +5,7 @@
     border-bottom: 1px solid $list-item-hairline !important;
 
     .name {
-        color: $brand-pane-alt-dark;
+        color: $brand-text-dark;
         font-size: 18px !important;
         line-height: 125%;
         font-weight: 500;
@@ -36,5 +36,7 @@
         .until {
             color: $brand-text-mid;
         }
+
+        margin-bottom: 7px;
     }
 }

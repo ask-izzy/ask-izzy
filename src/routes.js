@@ -90,7 +90,7 @@ export default <Router.Route
 
             <Router.Route
                 name="service"
-                path="/service/:id"
+                path="/service/:slug"
                 handler={ServicePage}
             />
 

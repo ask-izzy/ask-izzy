@@ -70,8 +70,10 @@ class BaseQuestion extends React.Component {
                         </div>
                     }
                 />
+                <mui.List className="List">
                 {this.props.answers.map((answer, index) =>
                     <mui.ListItem
+                        className="ListItem"
                         key={index}
                         primaryText={answer}
                         leftIcon={
@@ -84,6 +86,7 @@ class BaseQuestion extends React.Component {
                         disableTouchRipple={true}
                         onTouchTap={this.onAnswerTouchTap.bind(this, answer)}
                     />)}
+                </mui.List>
 
             </div>
         );
