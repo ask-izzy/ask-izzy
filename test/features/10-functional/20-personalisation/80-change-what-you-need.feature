@@ -9,6 +9,7 @@ Feature: Change your personalisation settings
         Given my location is "Melbourne VIC"
         And I have somewhere to sleep tonight
         And I need nothing for housing
+        And my gender is female
         And I am not part of any relevant demographics
 
     Scenario: View personalisation settings and return to search
@@ -21,6 +22,7 @@ Feature: Change your personalisation settings
         Do you have somewhere to sleep tonight? | Yes
         Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
+        How do you identify?                    | Female
         Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
@@ -46,6 +48,7 @@ Feature: Change your personalisation settings
         Do you have somewhere to sleep tonight? | Yes
         Do you need any of these?               | 0 selected
         Where are you?                          | Carlton, Victoria
+        How do you identify?                    | Female
         Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
@@ -60,6 +63,7 @@ Feature: Change your personalisation settings
         Do you have somewhere to sleep tonight? | No
         Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
+        How do you identify?                    | Female
         Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
@@ -77,6 +81,7 @@ Feature: Change your personalisation settings
         Do you have somewhere to sleep tonight? | Yes
         Do you need any of these?               | 1 selected
         Where are you?                          | Melbourne VIC
+        How do you identify?                    | Female
         Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
@@ -97,6 +102,7 @@ Feature: Change your personalisation settings
         Do you have somewhere to sleep tonight? | Yes
         Do you need any of these?               | 2 selected
         Where are you?                          | Melbourne VIC
+        How do you identify?                    | Female
         Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
@@ -115,6 +121,7 @@ Feature: Change your personalisation settings
         Do you have somewhere to sleep tonight? | Yes
         Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
+        How do you identify?                    | Female
         Do any of these apply to you?           | 2 selected
         ----------------------------------------------------------------
 
@@ -128,5 +135,6 @@ Feature: Change your personalisation settings
         Do you have somewhere to sleep tonight? | Yes
         Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
+        How do you identify?                    | Female
         Do any of these apply to you?           | 1 selected
         ----------------------------------------------------------------

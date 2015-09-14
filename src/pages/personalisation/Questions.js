@@ -8,7 +8,6 @@ import BaseQuestion from './BaseQuestion';
 import BaseMultiQuestion from './BaseMultiQuestion';
 
 class SleepTonight extends BaseQuestion {
-
     // flow:disable
     static defaultProps = {
         name: "sleep-tonight",
@@ -40,10 +39,21 @@ class HousingSubcategories extends BaseMultiQuestion {
             "Help with a legal issue",
         ],
     };
+}
 
-    static getSearchForAnswer(request, answer) {
-        return request;
-    }
+class Gender extends BaseQuestion {
+    // flow:disable
+    static defaultProps = {
+        name: "gender",
+        question: "Do you identify as…",
+        answers: [
+            "Female",
+            "Male",
+            "Neither/Both/Something else",
+        ],
+    };
+
+    static summaryLabel = "How do you identify?";
 }
 
 class Demographics extends BaseMultiQuestion {
@@ -61,14 +71,11 @@ class Demographics extends BaseMultiQuestion {
             "On parole or recently released from prison",
         ],
     };
-
-    static getSearchForAnswer(request, answer) {
-        return request;
-    }
 }
 
 export default {
     Demographics: Demographics,
+    Gender: Gender,
     HousingSubcategories: HousingSubcategories,
     SleepTonight: SleepTonight,
 };

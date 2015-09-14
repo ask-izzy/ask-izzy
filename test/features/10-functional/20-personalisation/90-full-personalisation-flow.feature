@@ -28,6 +28,9 @@ Feature: Personalisation
         And search box should contain "Richmond, Victoria"
 
         When I click on "Done"
+        Then I should see "Do you identify as…"
+
+        When I click on "Female"
         Then I should see "Do any of these apply to you?"
 
         When I click on "Done"

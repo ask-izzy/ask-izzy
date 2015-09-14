@@ -7,6 +7,7 @@
 "use strict";
 
 import Yadda from 'yadda';
+import { titleize } from 'underscore.string';
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
@@ -24,6 +25,7 @@ module.exports = (function() {
                unpromisify(setDemographicsNone))
         .given('I am part of the following demographics\n$lines',
                unpromisify(setDemographics))
+        .given('my gender is $STRING', unpromisify(setGender))
         ;
 })();
 
@@ -66,4 +68,11 @@ async function setDemographics(items: Array<string>):
 
 async function setDemographicsNone(): Promise<void> {
     return setDemographics.bind(this)([]);
+}
+
+async function setGender(gender: string): Promise<void> {
+    await gotoUrl(this.driver, '/');  // go anywhere to start the session
+    await this.driver.executeScript(gender => {
+        sessionStorage.setItem('gender', gender);
+    }, titleize(gender));
 }

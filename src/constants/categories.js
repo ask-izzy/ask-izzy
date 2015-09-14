@@ -59,6 +59,7 @@ var categories:Array<Category> = [
             personalisation.Questions.SleepTonight,
             personalisation.Questions.HousingSubcategories,
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -71,6 +72,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -83,6 +85,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -95,6 +98,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -107,6 +111,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -119,6 +124,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -131,6 +137,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -143,6 +150,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -155,6 +163,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -167,6 +176,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -179,6 +189,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -191,6 +202,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -203,6 +215,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -215,6 +228,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Gender,
             personalisation.Questions.Demographics,
         ],
     }),

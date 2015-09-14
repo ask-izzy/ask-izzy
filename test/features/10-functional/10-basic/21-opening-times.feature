@@ -7,6 +7,7 @@ Feature: Opening times
 
     Background:
         Given my location is "Melbourne VIC"
+        And my gender is female
         And I am not part of any relevant demographics
 
     Scenario: Can show opening time tomorrow
