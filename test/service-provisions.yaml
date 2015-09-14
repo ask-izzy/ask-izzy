@@ -1,0 +1,55 @@
+tests:
+    # This example is used in functional tests.
+    - description: |
+        A weekly free lunch for those in need.  Referrals for mental health and
+        housing are also available as is advice and a range of support services.
+      provides:
+          - Lunch
+          - Advice
+          - Support services
+          - Housing referrals
+          - Mental health referrals
+
+    - description: |
+        Short to medium term case management support and advocacy for social
+        housing tenants and housing applicants most in need.
+      provides:
+          - Short-term case management
+          - Medium-term case management
+
+    - description: |
+        Provides comprehensive and ongoing support and advocacy for social
+        housing tenants and housing applicants most in need. Case-management
+        services available to help social housing tenants maintain their
+        tenancies include development of plans for repayment of rent arrears &
+        referral to financial counsellors where required; referral to
+        specialist services for problems relating to family breakdown or mental
+        health; disability support; and assistance to overcome literacy &
+        language difficulties that may present barriers to communication with
+        the Office of Housing. Advocacy services for social housing tenants
+        focus on complex housing problems and may deal with issues such as
+        neighbourhood disputes, complaints about the Office of Housing, housing
+        appeals and Victorian Civil & Administrative Tribunal (VCAT) hearings.
+        Referral services are provided for those with less complex needs.
+      provides:
+          - Case management
+          - Referrals for financial counselling
+          - Housing referrals
+          - Mental health referrals
+
+    - description: |
+        Provides accommodation and support services for families experiencing
+        homelessness, with a focus on those families living in rooming house
+        accommodation.
+      provides:
+          - Family accommodation
+          - Support services
+
+    - description: |
+        Provides short-term crisis accommodation for Aboriginal women and
+        children who are survivors of family violence. Non-indigenous women
+        with children of Aboriginal partners are accepted.
+      provides:
+          - Crisis accommodation for women fleeing domestic violence
+          - Crisis accommodation
+          - Short-term accommodation

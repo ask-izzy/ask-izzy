@@ -17,13 +17,6 @@ var palette = colors.getPalette();
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class ResultListItem extends React.Component {
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-            relatedServices: [],  // includes us, use this.relatedServices
-        };
-    }
-
     // flow:disable not supported yet
     static propTypes = {
         object: React.PropTypes.instanceOf(iss.Service).isRequired,
@@ -39,23 +32,13 @@ class ResultListItem extends React.Component {
     };
 
     /**
-     * relatedServices:
-     * A list of related services, limited to 4
-     */
-    /* flow:disable */
-    get relatedServices(): Array<Object> {
-        return this.state.relatedServices
-            .slice(0, this.props.nServiceProvisions);
-    }
-
-    /**
      * nMoreServiceProvisions:
      * The number of related services minus the 4 relatedServices.
      */
     /* flow:disable */
     get nMoreServiceProvisions(): number {
         return Math.max(0,
-                        this.state.relatedServices.length -
+                        this.props.object.serviceProvisions.length -
                             this.props.nServiceProvisions);
     }
 
@@ -87,18 +70,25 @@ class ResultListItem extends React.Component {
                 <TransportTime object={object} />
                 { this.props.nServiceProvisions > 0 ?
                     <div>
-                    <ul className="related">{
-                        object.serviceProvisions.map((service, index) =>
-                            <li key={index}>{service}</li>
-                        )
-                    }</ul>
-                    {this.nMoreServiceProvisions > 0 ?
-                        <div>
-                            {this.nMoreServiceProvisions} more…
-                        </div>
-                    :
-                        ''
-                    }</div>
+                        <ul className="related">{
+                            object.serviceProvisions
+                                .slice(0, this.props.nServiceProvisions)
+                                .map((service, index) =>
+                                    <li className="provision"
+                                        key={index}
+                                    >
+                                        {service}
+                                    </li>
+                                )
+                        }</ul>
+                        { this.nMoreServiceProvisions > 0 ?
+                            <div>
+                                {this.nMoreServiceProvisions} more…
+                            </div>
+                        :
+                            ''
+                        }
+                    </div>
                 :
                     ''
                 }

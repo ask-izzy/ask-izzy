@@ -157,16 +157,13 @@ export class Service {
         }
 
         try {
-            this._serviceProvisions = [];
-
-            for (var provision of serviceProvisions) {
-                var forms = [provision.cname].concat(provision.forms || []);
-
-                if (_.some(forms.map(form => new RegExp(form, 'i')),
-                           form => this.description.match(form))) {
-                    this._serviceProvisions.push(provision.cname);
-                }
-            }
+            this._serviceProvisions = [
+                /*::`*/
+                for (provision of serviceProvisions)
+                if (provision.match(this.description))
+                provision.name
+                /*::`*/
+            ];
         } catch (e) {
             console.error("Failed to determine service provisions", e);
         }
