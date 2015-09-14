@@ -20,6 +20,10 @@ module.exports = (function() {
                unpromisify(setSubcategoryItemsNone))
         .given('I need the following for $STRING\n$lines',
                unpromisify(setSubcategoryItems))
+        .given('I am not part of any relevant demographics',
+               unpromisify(setDemographicsNone))
+        .given('I am part of the following demographics\n$lines',
+               unpromisify(setDemographics))
         ;
 })();
 
@@ -49,4 +53,17 @@ async function setSubcategoryItems(category: string, items: Array<string>):
 
 async function setSubcategoryItemsNone(category: string): Promise<void> {
     return setSubcategoryItems.bind(this)(category, []);
+}
+
+async function setDemographics(items: Array<string>):
+    Promise<void>
+{
+    await gotoUrl(this.driver, '/');  // go anywhere to start the session
+    await this.driver.executeScript(items => {
+        sessionStorage.setItem('demographics', JSON.stringify(items));
+    }, items);
+}
+
+async function setDemographicsNone(): Promise<void> {
+    return setDemographics.bind(this)([]);
 }

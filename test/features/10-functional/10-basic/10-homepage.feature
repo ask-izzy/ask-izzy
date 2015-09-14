@@ -32,6 +32,8 @@ Feature: Landing page
         Given my location is "Melbourne VIC"
         And I have somewhere to sleep tonight
         And I need nothing for housing
+        And I am not part of any relevant demographics
+
         When I visit /
         And I click on "Housing"
         Then I should be at /category/housing
