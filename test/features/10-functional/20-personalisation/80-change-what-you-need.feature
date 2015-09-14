@@ -138,3 +138,18 @@ Feature: Change your personalisation settings
         How do you identify?                    | Female
         Do any of these apply to you?           | 1 selected
         ----------------------------------------------------------------
+
+    Scenario: Edit gender
+        When I visit /category/housing/personalise/summary
+        And I click on "How do you identify?"
+        And I click on "Male"
+        Then I should see the results
+        ----------------------------------------------------------------
+        Question (primaryText)                  | Answer (secondaryText)
+        ================================================================
+        Do you have somewhere to sleep tonight? | Yes
+        Do you need any of these?               | 0 selected
+        Where are you?                          | Melbourne VIC
+        How do you identify?                    | Male
+        Do any of these apply to you?           | 0 selected
+        ----------------------------------------------------------------
