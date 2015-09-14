@@ -5,7 +5,7 @@
 
     & > main {
         flex: 1;
-        -ms-flex-preferred-size: auto;  // Needed for IE10
+        -ms-flex-preferred-size: auto;  /* Needed for IE10 */
         background-color: white;
     }
 
@@ -27,22 +27,8 @@
            text-decoration: none;
         }
 
-        .logos {
+        .supporters {
             text-align: center;
-
-            & > div {
-                display: inline-block;
-
-                margin: 10px;
-            }
-
-            img {
-                margin-left: 10px;
-                margin-right: 10px;
-
-                height: 25px;
-                width: auto;
-            }
         }
     }
 }

@@ -3,6 +3,11 @@ set -euo pipefail
 IFS=$'\n\t'
 PATH=`npm bin`:$PATH
 
+if [ -z "${ISS_URL:=}" ] ; then
+    echo "ISS_URL not set; cannot run."
+    exit 1
+fi
+
 if which xdg-open; then
     OPEN=xdg-open
 else

@@ -1,16 +1,26 @@
+@media print {
+    path {
+        fill: black !important;
+    }
+}
+
+.LogotypeIcon path {
+    width: auto;
+    height: auto;
+}
 
 .ColoredIcon {
     &.icon-fg-color path {
-        fill: $icon-fg-color;
+        fill: $icon-fg-color !important;
     }
 
     &.brand-bg-dark path {
-        fill: $brand-bg-dark;
+        fill: $brand-bg-dark !important;
     }
 
     &.size-30 {
         height: 30px !important;
-        width: auto !important;
+        width: 30px !important;
     }
 }
 
@@ -18,6 +28,20 @@
     padding-right: 0 !important;
 
     path {
-        fill: $icon-chevron-color;
+        fill: $icon-chevron-color !important;
+    }
+}
+
+.CheckboxSelected,
+.CheckboxUnselected,
+.RadioSelected,
+.RadioUnselected {
+    height: 30px !important;
+    width: 30px !important;
+
+    top: -4px !important;
+
+    path {
+        fill: $brand-text-dark !important;
     }
 }

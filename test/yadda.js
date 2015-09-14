@@ -44,6 +44,12 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
                     }
                 });
 
+            if (process.env.BROWSER_LOGS) {
+                // Flush any logs from previous tests
+                var logger = new Webdriver.WebDriver.Logs(driver);
+                await logger.get('browser');
+            }
+
             done();
         });
 
@@ -66,6 +72,18 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
                 var data = await driver.takeScreenshot();
 
                 fs.writeFileSync(`Test-${title}.png`, data, 'base64');
+
+                if (process.env.BROWSER_LOGS) {
+                    var logger = new Webdriver.WebDriver.Logs(driver);
+
+                    // N.B: iterating this causes problems but map works...
+                    // very strange
+                    console.log(
+                        (await logger.get('browser')).map(
+                            entry => `${entry.level.name}: ${entry.message}`
+                        ).join('\n')
+                    );
+                }
             }
 
             done();
@@ -108,23 +126,28 @@ after(async function(done) {
         process.env.SAUCE_USERNAME &&
         process.env.SAUCE_ACCESS_KEY)
     {
-        await new Promise((resolve, reject) => {
-            var api = new SauceLabs({
-                username: process.env.SAUCE_USERNAME,
-                password: process.env.SAUCE_ACCESS_KEY,
-            });
+        try {
+            await new Promise((resolve, reject) => {
+                var api = new SauceLabs({
+                    username: process.env.SAUCE_USERNAME,
+                    password: process.env.SAUCE_ACCESS_KEY,
+                });
 
-            api.updateJob(sessionId, {
-                passed: passed,
-            }, (err, res) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(res);
-                }
+                api.updateJob(sessionId, {
+                    passed: passed,
+                }, (err, res) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(res);
+                    }
+                });
             });
-        });
+        } catch (e) {
+            console.log("Failed updating saucelabs status");
+            console.log(e);
+        }
+
     }
-
     done();
 });

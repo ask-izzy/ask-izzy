@@ -6,7 +6,7 @@ Feature: Geolocation
     # So that I get personalised results without typing anything
 
     Scenario: Use geolocation to find the user
-        When I visit /personalise/location
+        When I visit /category/housing/personalise?subpage=location
         Then I should see "Where are you?"
         And I should see "Get current location"
         And the button "Done" should be disabled
@@ -21,7 +21,7 @@ Feature: Geolocation
         And the button "Done" should be enabled
 
     Scenario: User denies geolocation access
-        When I visit /personalise/location
+        When I visit /category/housing/personalise?subpage=location
 
         Given control of geolocation
         When I click on "Get current location"
@@ -29,5 +29,5 @@ Feature: Geolocation
 
         When I deny access to geolocation
         Then I should see "Unable to get your location"
-        And I should see "Please enter your location above (User denied access)"
+        And I should see "Please enter your location below (User denied access)"
         And the button "Done" should be disabled

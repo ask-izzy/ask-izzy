@@ -23,7 +23,7 @@ class HomePage extends React.Component {
             return;
         }
 
-        this.transitionTo('search', {search: search});
+        this.transitionTo('search', {search: encodeURIComponent(search)});
     }
 
     render(): React.Element {

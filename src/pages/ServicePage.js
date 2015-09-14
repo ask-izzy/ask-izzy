@@ -3,14 +3,14 @@
 "use strict";
 
 import mui from "material-ui";
-import NavigationArrowBack from
-    "material-ui/lib/svg-icons/navigation/arrow-back";
 import React from 'react';
 import Router from "react-router";
 import ServicePane from "../components/ServicePane";
 import reactMixin from "react-mixin";
 
-import * as iss from '../iss';
+import iss from '../iss';
+import components from '../components';
+import icons from "../icons";
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class ServicePage extends React.Component {
@@ -27,7 +27,7 @@ class ServicePage extends React.Component {
      */
 
     componentDidMount(): void {
-        iss.getService(this.props.params.id)
+        iss.getService(this.id)
             .then(data => {
                 this.setState({
                     object: data,
@@ -35,6 +35,17 @@ class ServicePage extends React.Component {
             });
 
         // FIXME: display error on failure to connect
+    }
+
+    /**
+     * Pull out the ID (leading digits) from the slug
+     */
+
+    // flow:disable not supported yet
+    get id(): number {
+        var leadingDigits = /^\d+/;
+        var slug = this.props.params.id;
+        return parseInt(slug.match(leadingDigits)[0]);
     }
 
     render(): React.Element {
@@ -46,17 +57,9 @@ class ServicePage extends React.Component {
         } else {
             return (
                 <div>
-                    <mui.AppBar
-                        className="AppBar"
+                    <components.AppBar
                         title={object.site.name}
-                        iconElementLeft={
-                            <mui.IconButton
-                                className="BackButton"
-                                onTouchTap={this.goBack.bind(this)}
-                            >
-                                <NavigationArrowBack />
-                            </mui.IconButton>
-                        }
+                        onBackTouchTap={this.goBack.bind(this)}
                     />
                     <ServicePane service={object}/>
                 </div>

@@ -13,14 +13,14 @@ import icons from "../icons";
 class CategoryListItem extends React.Component {
 
     // flow:disable not supported yet
-    static sampleProps = {
+    static sampleProps = {default: {
         category: {
             key: "material-aid",
             name: "Material Aid",
             byline: "Clothes and other goods",
             icon: icons.Things,
         },
-    };
+    },};
 
     render(): React.Element {
         var Icon = this.props.category.icon || icons.House;

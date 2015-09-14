@@ -25,10 +25,11 @@ export default class SvgIcon#{name} extends React.Component {
         return (
             <mui.SvgIcon
                 {...this.props}
-                className={ this.props.className + " #{name}"}
+                className={ `${this.props.className || ''} #{name}Icon` }
                 viewBox="#{view_box}"
+                dangerouslySetInnerHTML={{__html: `#{nodes.join("")}`}}
             >
-            #{nodes.join("\n            ")}
+
             </mui.SvgIcon>
         );
     }
@@ -44,8 +45,6 @@ end
 def nodes(doc)
     n = XPath.each(doc, '//path|//circle').to_a
     n.map do |node|
-        # remove style elements as we don't want them
-        node.attributes.delete('style')
         # remove tabs and newlines
         node.attributes.each{|name, value|
             value = value.gsub(/[\t\n]/, ' ')

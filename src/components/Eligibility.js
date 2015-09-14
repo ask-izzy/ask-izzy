@@ -5,7 +5,7 @@ import fixtures from "../../fixtures/services";
 class Eligibility extends React.Component {
 
     // flow:disable not supported yet
-    static sampleProps = fixtures.ixa;
+    static sampleProps = {default: fixtures.ixa};
 
     eligibility(eligibility:string): Array<React.Element> {
         if (eligibility) {

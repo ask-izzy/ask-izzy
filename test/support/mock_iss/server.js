@@ -62,6 +62,7 @@ app.get('/api/v3/search/', (req, res) => {
             meta: {
                 total_count: 1,
                 location: {
+                    name: "Richmond",
                     suburb: "Richmond",
                     state: "VIC",
                 },
@@ -70,6 +71,7 @@ app.get('/api/v3/search/', (req, res) => {
                 {
                     id: 444,
                     name: "Community Lunch",
+                    description: "A weekly lunch.",
                     site: {
                         id: 444,
                         name: "Youth Support Net",
@@ -77,7 +79,13 @@ app.get('/api/v3/search/', (req, res) => {
                     now_open: {
                         now_open: false,
                     },
-                    opening_hours: [],
+                    opening_hours: [
+                        {
+                            day: 'Wednesday',
+                            open: '9:00:00',
+                            close: '17:00:00',
+                        },
+                    ],
                     location: {
                         suburb: 'Richmond',
                     },
@@ -167,12 +175,68 @@ app.get('/api/v3/search/', (req, res) => {
                 },
             ],
         });
+    } else if (req.query.q == 'material aid') {
+        var object = {
+            id: 444,
+            name: "Community Lunch",
+            description: "A weekly lunch.",
+            site: {
+                id: 444,
+                name: "Youth Support Net",
+            },
+            now_open: {
+                now_open: false,
+            },
+            opening_hours: [
+                {
+                    day: 'Wednesday',
+                    open: '9:00:00',
+                    close: '17:00:00',
+                },
+            ],
+            location: {
+                suburb: 'Richmond',
+            },
+        };
+
+        res.json({
+            meta: {
+                total_count: 8,
+                location: {
+                    name: "Richmond",
+                    suburb: "Richmond",
+                    state: "VIC",
+                },
+                next: req.originalUrl,
+            },
+            objects: [
+                object,
+                object,
+                object,
+                object,
+                object,
+            ],
+        });
+    } else if (req.query.q == 'zero results') {
+        res.json({
+            meta: {
+                total_count: 0,
+            },
+            objects: [],
+        });
+    } else if (req.query.q == 'cause error') {
+        res
+            .status(402)
+            .json({
+                error_message: "You have specifically asked for an error.",
+            });
     } else {
         /* conventional search */
         res.json({
             meta: {
                 total_count: 3,
                 location: {
+                    name: "Richmond",
                     suburb: "Richmond",
                     state: "VIC",
                 },
@@ -188,6 +252,18 @@ app.get('/api/v3/search/', (req, res) => {
 
 app.get('/api/v3/service/111/', (req, res) => {
     res.json(services.housingService);
+});
+
+app.get('/api/v3/service/13841/', (req, res) => {
+    res.json(services.legal);
+});
+
+app.get('/api/v3/service/866464/', (req, res) => {
+    res.json(services.ixa);
+});
+
+app.get('/api/v3/service/5551234/', (req, res) => {
+    res.json(services.phoneableService);
 });
 
 app.listen(5000);

@@ -30,6 +30,8 @@ Feature: Landing page
 
     Scenario: Navigate to a category and back to the homepage
         Given my location is "Melbourne VIC"
+        And I have somewhere to sleep tonight
+        And I need nothing for housing
         When I visit /
         And I click on "Housing"
         Then I should be at /category/housing

@@ -6,6 +6,7 @@ import React from "react";
 import _ from "underscore";
 
 import fixtures from "../../fixtures/services";
+import ScreenReader from "./ScreenReader";
 import colors from "../constants/theme";
 var palette = colors.getPalette();
 
@@ -22,31 +23,31 @@ class OpeningTimes extends React.Component {
     };
 
     // flow:disable not supported yet
-    static sampleProps = {object: fixtures.ixa};
+    static sampleProps = {default: {object: fixtures.ixa}};
+
+    findOpeningHours(day = moment()): Object {
+        return _.findWhere(this.props.object.opening_hours,
+                    {day: day.format('dddd')}
+                   ) || {};
+    }
 
     render(): React.Element {
-        var {
-            object,
-        } = this.props;
+        var object = this.props.object;
 
-        var includeDay = false;
+        var when;
+        var todayOpen = this.findOpeningHours();
 
-        var todayOpen = _.findWhere(object.opening_hours,
-                                    {day: moment().format('dddd')}
-                                   ) || {};
-
-        for (var day = 1; day < 7; day++) {
+        for (var day = 1; day <= 7; day++) {
             /* look for the next day the service is open */
-            var nextOpen = _.findWhere(object.opening_hours,
-                                       {
-                                           day: moment()
-                                               .add(day, 'd')
-                                               .format('dddd'),
-                                       }
-                                      ) || {};
+            var nextOpen = this.findOpeningHours(moment().add(day, 'd'));
+
             if (!_.isEmpty(nextOpen)) {
-                if (day > 1) {
-                    includeDay = true;
+                if (day == 1) {
+                    when = 'tomorrow';
+                } else if (day == 7) {
+                    when = `next ${nextOpen.day}`;
+                } else {
+                    when = nextOpen.day;
                 }
 
                 break;
@@ -56,8 +57,12 @@ class OpeningTimes extends React.Component {
         if (object.now_open.now_open) {
             return (
                 <div className="OpeningTimes">
+                    <ScreenReader>
+                        <h4>Opening times</h4>
+                    </ScreenReader>
                     <icons.Clock className="ColoredIcon brand-text-dark" />
-                    <span className="open">Open now</span>&nbsp;
+                    <span className="open">Open now</span>
+                    {' '}
                     {
                         !_.isEmpty(todayOpen) ?
                             <span className="until">
@@ -71,12 +76,19 @@ class OpeningTimes extends React.Component {
         } else {
             return (
                 <div className="OpeningTimes">
+                    <ScreenReader>
+                        <h4>Opening times</h4>
+                    </ScreenReader>
                     <icons.Clock className="ColoredIcon brand-text-dark" />
-                    <span className="closed">Closed</span>&nbsp;
+                    <span className="closed">Closed</span>
+                    {' '}
                     {
                         !_.isEmpty(nextOpen) ?
                             <span className="until">
-                                until {nextOpen.day}&nbsp;
+                                until
+                                {' '}
+                                {when}
+                                {' '}
                                 {formatTime(nextOpen.open)}
                             </span>
                         :

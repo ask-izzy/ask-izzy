@@ -4,19 +4,19 @@
 
 import React from 'react';
 import Router from "react-router";
-import NavigationArrowBack from
-    "material-ui/lib/svg-icons/navigation/arrow-back";
 import _ from 'underscore';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
-import { ltrim } from "underscore.string";
-import sessionstorage from "sessionstorage";
 import { debounce } from "core-decorators";
+import { ltrim } from "underscore.string";
 
-import Location from '../geolocation';
-import Maps from '../maps';
-import HeaderBar from '../components/HeaderBar';
-import icons from '../icons';
+import Geolocation from '../../geolocation';
+import Maps from '../../maps';
+import Personalisation from '../../mixins/Personalisation';
+import components from '../../components';
+import icons from '../../icons';
+import storage from "../../storage";
+import * as iss from '../../iss';
 
 var GeoLocationState = {
     NOT_STARTED: 0,
@@ -32,7 +32,8 @@ var AutocompleteState = {
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
-class LocationPage extends React.Component {
+/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
+class Location extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {
@@ -44,9 +45,43 @@ class LocationPage extends React.Component {
         };
     }
 
+    // flow:disable
+    static defaultProps = {
+        name: 'location',
+    };
+
+    static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+        /* Coordinates are optional */
+        var coords = storage.getJSON('coordinates');
+        if (coords) {
+            request = Object.assign(request, {
+                location: `${coords.longitude}E${coords.latitude}N`,
+            });
+        }
+
+        /* Location/Area is required */
+        var location = storage.getItem('location');
+
+        if (location) {
+            return Object.assign(request, {
+                area: location,
+            });
+        } else {
+            return null;
+        }
+    }
+
+    // flow:disable
+    static summaryLabel = "Where are you?";
+
+    // flow:disable
+    static get summaryValue(): string {
+        return storage.getItem('location');
+    }
+
     async locateMe(): Promise<Object> {
         var maps = await Maps();
-        var location = await Location();
+        var location = await Geolocation();
         var possibleLocations = await maps.geocode({
             location: {
                 lat: location.coords.latitude,
@@ -56,10 +91,10 @@ class LocationPage extends React.Component {
         /* store these coordinates for the session so we can use them to
          * provide additional info for autocomplete, distances, ISS search
          * weighting, etc. */
-        sessionstorage.setItem('coordinates', JSON.stringify({
+        storage.setJSON('coordinates', {
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
-        }));
+        });
 
         /* return true if the types includes one of our interesting
          * component types */
@@ -124,8 +159,8 @@ class LocationPage extends React.Component {
 
     onTouchDoneButton(event: Event): void {
         event.preventDefault();
-        sessionstorage.setItem('location', this.state.locationName);
-        this.replaceWith(this.getQuery().next);
+        storage.setItem('location', this.state.locationName);
+        this.nextStep();
     }
 
     /**
@@ -137,23 +172,20 @@ class LocationPage extends React.Component {
         Promise<Array<Object>>
     {
         var maps = await Maps();
-        var request = {
+        var request: AutocompletionRequest = {
             input: input,
             types: ['geocode'],
             componentRestrictions: {
                 country: 'au',
             },
-            location: null,
-            radius: null,
         };
 
         /* If the user has coordinates set in this session, use them */
-        try {
-            var location = JSON.parse(sessionstorage.getItem('coordinates'));
+        var location = storage.getJSON('coordinates');
+        if (location) {
             request.location = new maps.api.LatLng(location.latitude,
                                                    location.longitude);
             request.radius = 10000;  /* 10 km */
-        } catch (e) {
         }
 
         console.log("Autocompleting", request);
@@ -208,35 +240,85 @@ class LocationPage extends React.Component {
 
     componentDidMount(): void {
         this.setState({
-            locationName: sessionstorage.getItem('location'),
+            locationName: storage.getItem('location'),
         });
     }
 
     render(): React.Element {
         return (
-            <div className="LocationPage">
-                <mui.AppBar
-                    className="AppBar"
-                    title="Personalise"
-                    iconElementLeft={
-                        <mui.IconButton
-                            onTouchTap={this.goBack.bind(this)}
-                        >
-                            <NavigationArrowBack />
-                        </mui.IconButton>
-                    }
-                />
-                <HeaderBar
+            <div>
+                <components.HeaderBar
                     primaryText={
                         <div>
                             Where are you?
-                            <icons.LogoLight className="Logo" />
+                            <icons.LogoLight />
                         </div>
                     }
                     secondaryText={
                         "This will let me find the services closest to you"
                     }
                 />
+                <mui.List className="List">{
+                    /* if the browser supports geolocation */
+                    require('has-geolocation') &&
+                    this.state.geolocation == GeoLocationState.NOT_STARTED ?
+                        <mui.ListItem
+                            className="taller ListItem"
+                            onTouchTap={this.onGeolocationTouchTap.bind(this)}
+                            primaryText="Get current location"
+                            leftIcon={
+                                <icons.Location
+                                    className="ColoredIcon icon-fg-color"
+                                />
+                            }
+
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
+                        />
+                    : ''
+                }{
+                    this.state.geolocation == GeoLocationState.RUNNING ?
+                        <mui.ListItem
+                            className="ListItem"
+                            primaryText="Locating you..."
+                            secondaryText="Please permit us to use your GPS"
+                            leftIcon={
+                                <mui.CircularProgress
+                                    className="ProgressIcon"
+                                    mode="indeterminate"
+                                    size={0.5}
+                                />
+                            }
+
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
+                        />
+                    : ''
+                }{
+                    this.state.geolocation == GeoLocationState.COMPLETE ?
+                        <mui.ListItem
+                            className="taller ListItem"
+                            primaryText="Found your location"
+                            leftIcon={<icons.Tick />}
+
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
+                        />
+                    : ''
+                }{
+                    this.state.geolocation == GeoLocationState.FAILED ?
+                        <mui.ListItem
+                            className="ListItem"
+                            primaryText="Unable to get your location"
+                            secondaryText={`Please enter your location below
+                                (${this.state.error})`}
+                            leftIcon={<icons.Cross />}
+
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
+                        />
+                    : ''
+                }
                 <form
                     className="search"
                     onSubmit={this.onTouchDoneButton.bind(this)}
@@ -248,54 +330,11 @@ class LocationPage extends React.Component {
                         onChange={this.onSearchChange.bind(this)}
                     />
                 </form>
-                <mui.List>{
-                    /* if the browser supports geolocation */
-                    require('has-geolocation') &&
-                    this.state.geolocation == GeoLocationState.NOT_STARTED ?
-                        <mui.ListItem
-                            onTouchTap={this.onGeolocationTouchTap.bind(this)}
-                            primaryText="Get current location"
-                            leftIcon={
-                                <icons.Location
-                                    className="ColoredIcon icon-fg-color"
-                                />
-                            }
-                        />
-                    : ''
-                }{
-                    this.state.geolocation == GeoLocationState.RUNNING ?
-                        <mui.ListItem
-                            primaryText="Locating you..."
-                            secondaryText="Please permit us to use your GPS"
-                            leftIcon={
-                                <mui.CircularProgress
-                                    className="ProgressIcon"
-                                    mode="indeterminate"
-                                    size={0.5}
-                                />
-                            }
-                        />
-                    : ''
-                }{
-                    this.state.geolocation == GeoLocationState.COMPLETE ?
-                        <mui.ListItem
-                            primaryText="Found your location"
-                            leftIcon={<icons.Tick />}
-                        />
-                    : ''
-                }{
-                    this.state.geolocation == GeoLocationState.FAILED ?
-                        <mui.ListItem
-                            primaryText="Unable to get your location"
-                            secondaryText={`Please enter your location above
-                                (${this.state.error})`}
-                            leftIcon={<icons.Cross />}
-                        />
-                    : ''
-                }{
+                {
                     /* any autocompletions we currently have */
                     this.state.autocompletions.map((result, index) =>
                         <mui.ListItem
+                            className="ListItem"
                             key={index}
                             primaryText={
                                 <div className="suburb">
@@ -307,6 +346,7 @@ class LocationPage extends React.Component {
                                     {result.state}
                                 </div>
                             }
+                            leftIcon={<icons.RadioUnselected />}
                             onTouchTap={(event) => {
                                 /* set the text box to this value
                                  * and remove the autocompletions */
@@ -319,6 +359,8 @@ class LocationPage extends React.Component {
                                 });
                             }}
 
+                            disableFocusRipple={true}
+                            disableTouchRipple={true}
                         />
                     )
                 }</mui.List>
@@ -345,4 +387,4 @@ class LocationPage extends React.Component {
 
 }
 
-export default LocationPage;
+export default Location;

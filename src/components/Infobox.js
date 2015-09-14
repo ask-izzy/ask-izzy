@@ -22,6 +22,13 @@ class Infobox extends React.Component {
         linkText: React.PropTypes.string,
     };
 
+    // flow:disable not supported yet
+    static sampleProps = {default: {
+        linkText: "Housing information",
+        href: "#",
+        children: "It's important to act early on housing.",
+    },};
+
     // flow:disable
     static defaultProps = {
         linkText: "More information",

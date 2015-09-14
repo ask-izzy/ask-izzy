@@ -5,15 +5,23 @@ class Collapser extends React.Component {
 
     // flow:disable not supported yet
     static sampleProps = {
-        message: "Click to expand",
-        children: (
-            <div>Hidden content</div>
-        ),
+        default: {
+            message: "Click to expand",
+            children: (
+                <div>Hidden content</div>
+            ),
+        },
+        expanded: {
+            expanded: true,
+            message: "Click to expand",
+            children: (
+                <div>Expanded content</div>
+            ),
+        },
     };
 
     constructor(props: Object) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
 
         // This component renders
         // open on the server, then
@@ -21,12 +29,13 @@ class Collapser extends React.Component {
         this.state = {collapsed: false};
     }
 
-    handleClick(event: SyntheticInputEvent): void {
-        this.setState({collapsed: !this.state.collapsed});
+    componentDidMount(): void {
+        this.setState({collapsed: !this.props.expanded});
     }
 
-    componentDidMount(): void {
-        this.setState({collapsed: true});
+    handleClick(event: SyntheticInputEvent): void {
+        event.preventDefault();
+        this.setState({collapsed: !this.state.collapsed});
     }
 
     hiddenClass(): string {
@@ -41,12 +50,12 @@ class Collapser extends React.Component {
         return (
             <div
                 className="Collapser"
-                onclick={this.handleClick}
+                onclick={this.handleClick.bind(this)}
             >
                 <a
                     href="#"
                     alt="Show more"
-                    onClick={this.handleClick}
+                    onClick={this.handleClick.bind(this)}
                 >{this.props.message}</a>
                 <div
                     className={ this.hiddenClass() }

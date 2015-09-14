@@ -5,11 +5,8 @@
 import WebpackDevServer from "webpack-dev-server";
 import webpack from "webpack";
 import config from "./dev.config";
-import debuglib from "debug";
 
-const debug = debuglib("web");
-
-const WEBPACK_HOST = process.env.HOST || "localhost";
+const WEBPACK_HOST = process.env.HOST || "0.0.0.0";
 const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
 
 const serverOptions = {
@@ -24,9 +21,6 @@ const compiler = webpack(config);
 const webpackDevServer = new WebpackDevServer(compiler, serverOptions);
 
 webpackDevServer.listen(WEBPACK_PORT, WEBPACK_HOST, () => {
-    debug(
-        "Webpack development server listening on %s:%s",
-        WEBPACK_HOST,
-        WEBPACK_PORT
-    );
+    console.info(`Webpack development server listening on ` +
+                 `${WEBPACK_HOST}:${WEBPACK_PORT}`);
 });

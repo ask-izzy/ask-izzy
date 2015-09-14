@@ -1,36 +1,55 @@
 "use strict";
-
 /* @flow */
 
 import assert from "assert";
-import { By } from 'selenium-webdriver';
-import selectors from './selectors';
+import Webdriver, { By } from 'selenium-webdriver';
+import { deepestPossible, escapeXPathString } from './selectors';
 
-function rootSelector(child) {
-    return "//" + child;
-}
-
-// flow:disable
-// jscs: disable
-assert.imageIsVisible = async function(driver, altText, within=rootSelector) {
+// Flow complains about adding properties directly
+// to 'assert'; need a type specifier.
+var a: Object = assert;
+a.imageIsVisible = imageIsVisible;
+export async function imageIsVisible(
+    driver: Webdriver.WebDriver,
+    altText: string
+): Promise<void> {
     var visible = await driver.findElement(By.xpath(
-        within(`img[@alt = '${altText}']`)
+        `//img[@alt = '${altText}']`
     ))
         .isDisplayed();
 
     assert(visible, `${altText} image was present but not visible`);
 };
 
-// flow:disable
-// jscs: disable
-assert.textIsVisible = async function(driver, text, within=rootSelector) {
+a.textIsVisible = textIsVisible;
+export async function textIsVisible(
+    driver: Webdriver.WebDriver,
+    text: string
+): Promise<void> {
+    text = escapeXPathString(text);
+
     var visible = await driver.findElement(By.xpath(
-        within(`*[normalize-space(text()) = normalize-space('${text}')]`)
+        deepestPossible(`normalize-space(.) = normalize-space(${text})`)
     ))
         .isDisplayed();
 
     assert(visible, `Text ${text} was present but not visible`);
 };
 
-export default assert;
+a.linkIsVisible = linkIsVisible;
+export async function linkIsVisible(
+    driver: Webdriver.WebDriver,
+    title: string,
+    expectedTarget: string
+): Promise<void> {
+    var link = await driver.findElement(By.xpath(
+        `//a[normalize-space(.) = normalize-space('${title}')]`
+    ));
+    var visible = await link.isDisplayed();
+    assert(visible, `Link '${title}' was present but not visible`);
 
+    var href = await link.getAttribute('href');
+    assert.equal(href, expectedTarget);
+};
+
+export default a;

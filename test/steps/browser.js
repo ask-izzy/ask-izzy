@@ -11,11 +11,13 @@ import Url from 'url';
 import Yadda from 'yadda';
 import { By, Key } from 'selenium-webdriver';
 
+import dictionary from "../support/dictionary";
 import unpromisify from '../support/yadda-promise';
+import { elementWithText } from '../support/selectors';
 import { gotoUrl } from '../support/webdriver';
 
 module.exports = (function() {
-    return Yadda.localisation.English.library()
+    return Yadda.localisation.English.library(dictionary)
         .when('I visit $URL', unpromisify(visitUrl))
         .when('I click on "$STRING"', unpromisify(clickLink))
         .when('I search for "$STRING"', unpromisify(doSearch))
@@ -26,6 +28,7 @@ module.exports = (function() {
         .when('I pause for debugging', unpromisify(pauseToDebug))
         .then('I should be at $URL', unpromisify(checkURL))
         .then('I should see "$STRING"', unpromisify(thenISee))
+        .then('I should see\n$STRING', unpromisify(thenISee))
         .then('I should not see "$STRING"', unpromisify(thenIDontSee))
         .then('I should see phone number $NUM', unpromisify(crisisLineItem))
         .then('search box should contain "$STRING"',
@@ -33,7 +36,11 @@ module.exports = (function() {
         .then('the button "$STRING" should be disabled',
               unpromisify(checkDisabled))
         .then('the button "$STRING" should be enabled',
-              unpromisify(checkEnabled));
+              unpromisify(checkEnabled))
+        .then('"$STRING" should be checked', unpromisify(assertItemChecked))
+        .then('"$STRING" should not be checked',
+              unpromisify(assertItemNotChecked))
+        ;
 })();
 
 async function visitUrl(url: string): Promise {
@@ -52,10 +59,9 @@ async function clickLink(link: string): Promise<void> {
     await this.driver.findElement(By.xpath(
         /* any 'a' element who has a descendent text node containing
          * the link text */
-        ['a', 'button'].map(tag =>
-        `//${tag}
-           [normalize-space(.//text()) = normalize-space('${link}')]`
-                           ).join('|')
+        ['a', 'button', 'label']
+            .map(tag => elementWithText(tag, link))
+            .join('|')
     ))
         .click();
 }
@@ -118,8 +124,10 @@ function getSearchElement(driver: Webdriver.WebDriver):
 }
 
 async function doSearch(search: string): Promise<void> {
-    await getSearchElement(this.driver)
-        .sendKeys(search);
+    var element = await getSearchElement(this.driver);
+
+    await element.clear();
+    await element.sendKeys(search);
 }
 
 async function doSearchAndEnter(search: string): Promise<void> {
@@ -142,9 +150,8 @@ async function clickSearchIcon(): Promise<void> {
 async function getButtonState(driver: Webdriver.WebDriver, text: string):
     Promise<boolean>
 {
-    return await driver.findElement(By.xpath(
-        `//button[normalize-space(.//text()) = normalize-space('${text}')]`
-    ))
+    return await driver
+        .findElement(By.xpath(elementWithText('button', text)))
         .isEnabled();
 }
 
@@ -161,9 +168,40 @@ async function checkEnabled(text: string): Promise<void> {
 }
 
 async function crisisLineItem(expected: number): Promise<void> {
-        var value = await this.driver.findElement(By.css(
-            '.CrisisLineItem .crisisItem'))
-            .getText();
+    var value = await this.driver.findElement(By.css(
+        '.CrisisLineItem .crisisItem'))
+        .getText();
 
-        assert.equal(value, expected);
-    }
+    assert.equal(value, expected);
+}
+
+async function assertItemChecked(label: string): Promise<void> {
+    var labelXPath = elementWithText('label', label);
+    var checked = await this.driver.findElement(By.xpath(
+        `${labelXPath}//input`
+    ))
+        .getAttribute('checked');
+
+    assert.equal(checked, "true");
+}
+
+async function assertItemNotChecked(label: string): Promise<void> {
+    var labelXPath = elementWithText('label', label);
+    var checked = await this.driver.findElement(By.xpath(
+        `${labelXPath}//input`
+    ))
+        .getAttribute('checked');
+
+    assert.equal(checked, null);
+}
+
+/**
+ * documentReady:
+ *
+ * Returns: true if the document is readyState is complete
+ */
+module.exports.documentReady = function documentReady(
+    driver: Webdriver.WebDriver
+): Promise<boolean> {
+    return driver.executeScript(() => document.readyState == 'complete');
+};
