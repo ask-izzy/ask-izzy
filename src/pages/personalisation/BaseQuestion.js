@@ -5,6 +5,7 @@
 import React from 'react';
 import mui from "material-ui";
 import reactMixin from "react-mixin";
+import { debounce } from "core-decorators";
 
 import Personalisation from '../../mixins/Personalisation';
 import components from '../../components';
@@ -14,6 +15,13 @@ import * as iss from '../../iss';
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class BaseQuestion extends React.Component {
+    constructor(props: Object) {
+        super(props);
+        this.state = {
+            selected: null,  // set when the user makes a choice
+        };
+    }
+
     // flow:disable
     static propTypes = {
         /* The question asked of the user */
@@ -52,13 +60,25 @@ class BaseQuestion extends React.Component {
         return request;
     }
 
-    onAnswerTouchTap(answer: string, ...rest: any): void {
-        storage.setItem(this.props.name, answer);
+    /**
+     * triggerNext:
+     *
+     * Trigger next page after a 500ms debounce.
+     */
+    /*::__(){`*/@debounce(500)/*::`}*/
+    triggerNext(): void {
+        storage.setItem(this.props.name, this.state.selected);
         this.nextStep();
     }
 
+    onAnswerTouchTap(answer: string, ...rest: any): void {
+        this.setState({selected: answer});
+        this.triggerNext();
+    }
+
     render(): React.Element {
-        var selected = storage.getItem(this.props.name);
+        var selected =
+            this.state.selected || storage.getItem(this.props.name);
 
         return (
             <div>
@@ -76,15 +96,18 @@ class BaseQuestion extends React.Component {
                         className="ListItem"
                         key={index}
                         primaryText={answer}
-                        leftIcon={
-                            answer == selected ?
-                                <icons.RadioSelected />
-                            :
-                                <icons.RadioUnselected />
+                        leftCheckbox={
+                            <mui.RadioButton
+                                checked={answer == selected}
+                                value={answer}
+                                onCheck={this.onAnswerTouchTap.bind(
+                                    this, answer)}
+                                disableFocusRipple={true}
+                                disableTouchRipple={true}
+                            />
                         }
                         disableFocusRipple={true}
                         disableTouchRipple={true}
-                        onTouchTap={this.onAnswerTouchTap.bind(this, answer)}
                     />)}
                 </mui.List>
 

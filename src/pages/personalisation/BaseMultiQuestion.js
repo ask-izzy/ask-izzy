@@ -93,6 +93,8 @@ class BaseMultiQuestion extends BaseQuestion {
                                 onCheck={this.onAnswerTouchTap.bind(
                                     this, answer, !selected.has(answer)
                                 )}
+                                disableFocusRipple={true}
+                                disableTouchRipple={true}
                             />
                         }
                         disableFocusRipple={true}
