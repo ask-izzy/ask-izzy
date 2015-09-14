@@ -13,6 +13,7 @@ import { By, Key } from 'selenium-webdriver';
 
 import dictionary from "../support/dictionary";
 import unpromisify from '../support/yadda-promise';
+import pauseToDebug from '../support/debug';
 import { elementWithText } from '../support/selectors';
 import { gotoUrl } from '../support/webdriver';
 
@@ -71,23 +72,6 @@ async function clickBack(): Promise<void> {
         'button.BackButton'
     ))
         .click();
-}
-
-function pauseToDebug() {
-    return new Promise((resolve, reject) => {
-        console.log("Paused. Press any key to continue...");
-        var stdin = process.stdin;
-
-        stdin.setRawMode(true);
-        stdin.on('data', (key) => {
-            stdin.setRawMode(false);
-            if (key === '\u0003') {  // Ctrl-C
-                reject();
-            } else {
-                resolve();
-            }
-        });
-    });
 }
 
 async function checkURL(expected: string): Promise<void> {
