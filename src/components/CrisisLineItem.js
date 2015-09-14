@@ -2,6 +2,7 @@
 
 import React from "react";
 import Router from "react-router";
+import Phone from "./Phone";
 import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
 import mui from "material-ui";
@@ -40,19 +41,11 @@ class CrisisLineItem extends React.Component {
                 }
 
                 return (
-
-                        <mui
-                            className="CrisisLineItem"
-                            >
-
-                                <div className="crisisName"> {object.name}
-                                </div>
-
-                                <icons.Phone className="phoneIcon" />
-                                <div className="crisisItem">
-                                 {crisisType} {phone.number}</div>
-
-                        </mui>
+                    <mui className="CrisisLineItem">
+                        <div className="crisisName"> {object.name}
+                        </div>
+			<Phone {...phone} />
+                    </mui>
                     );
             }
         }

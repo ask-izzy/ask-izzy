@@ -169,7 +169,7 @@ async function checkEnabled(text: string): Promise<void> {
 
 async function crisisLineItem(expected: number): Promise<void> {
     var value = await this.driver.findElement(By.css(
-        '.CrisisLineItem .crisisItem'))
+        '.CrisisLineItem .Phone'))
         .getText();
 
     assert.equal(value, expected);
