@@ -19,4 +19,3 @@ Scenario: Search for helpline phone numbers for food
         And I click on the search icon
         Then I should be at /search/food
         And I should see phone number 0311111111
-
