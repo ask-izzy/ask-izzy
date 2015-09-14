@@ -46,7 +46,29 @@ class HousingSubcategories extends BaseMultiQuestion {
     }
 }
 
+class Demographics extends BaseMultiQuestion {
+    // flow:disable
+    static defaultProps = {
+        name: "demographics",
+        question: "Do any of these apply to you?",
+        answers: [
+            "Aboriginal or Torres Strait Islander",
+            "LGBTIQ",
+            "Asylum seeker",
+            "Have a disability",
+            "Have children",
+            "Have pets",
+            "On parole or recently released from prison",
+        ],
+    };
+
+    static getSearchForAnswer(request, answer) {
+        return request;
+    }
+}
+
 export default {
+    Demographics: Demographics,
     HousingSubcategories: HousingSubcategories,
     SleepTonight: SleepTonight,
 };

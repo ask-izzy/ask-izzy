@@ -59,6 +59,7 @@ var categories:Array<Category> = [
             personalisation.Questions.SleepTonight,
             personalisation.Questions.HousingSubcategories,
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -70,6 +71,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -81,6 +83,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -92,6 +95,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -103,6 +107,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -114,6 +119,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -125,6 +131,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -136,6 +143,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -147,6 +155,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -158,6 +167,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -169,6 +179,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -180,6 +191,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -191,6 +203,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -202,6 +215,7 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Questions.Demographics,
         ],
     }),
 ];
