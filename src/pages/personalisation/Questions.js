@@ -7,7 +7,7 @@ import React from 'react';
 import BaseQuestion from './BaseQuestion';
 import BaseMultiQuestion from './BaseMultiQuestion';
 
-class SleepTonight extends BaseQuestion {
+export class SleepTonight extends BaseQuestion {
     // flow:disable
     static defaultProps = {
         name: "sleep-tonight",
@@ -27,7 +27,7 @@ class SleepTonight extends BaseQuestion {
     }
 }
 
-class HousingSubcategories extends BaseMultiQuestion {
+export class HousingSubcategories extends BaseMultiQuestion {
     // flow:disable
     static defaultProps = {
         name: "sub-housing",
@@ -41,7 +41,7 @@ class HousingSubcategories extends BaseMultiQuestion {
     };
 }
 
-class Gender extends BaseQuestion {
+export class Gender extends BaseQuestion {
     // flow:disable
     static defaultProps = {
         name: "gender",
@@ -53,10 +53,11 @@ class Gender extends BaseQuestion {
         ],
     };
 
+    // flow:disable
     static summaryLabel = "How do you identify?";
 }
 
-class Demographics extends BaseMultiQuestion {
+export class Demographics extends BaseMultiQuestion {
     // flow:disable
     static defaultProps = {
         name: "demographics",
