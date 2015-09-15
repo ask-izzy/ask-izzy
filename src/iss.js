@@ -142,7 +142,8 @@ export class Service {
      *
      * The service opening hours
      */
-    open(): (ServiceOpening) {
+    /* flow:disable */
+    get open(): (ServiceOpening) {
         return new ServiceOpening(this);
     }
 
