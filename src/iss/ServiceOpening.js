@@ -32,6 +32,7 @@ export default class ServiceOpening {
     now_open: ?boolean;
     _opening_times: Array<serviceOpeningHours>;
     _closing_times: Array<serviceOpeningHours>;
+
     constructor(properties: props, now=moment) {
         this.now_open = properties.now_open.now_open;
 
