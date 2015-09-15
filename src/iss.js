@@ -6,7 +6,7 @@ import http from 'iso-http';
 import url from 'url';
 import _ from 'underscore';
 import { slugify } from 'underscore.string';
-
+import ServiceOpening from './iss/ServiceOpening';
 import serviceProvisions from "./constants/service-provisions";
 
 declare var ISS_URL: string;
@@ -105,9 +105,9 @@ export class Service {
     now_open: {
         local_time: hmsWithColonsTime,
         notes: string,
-        now_open: boolean,
+        now_open: ?boolean,
     };
-    opening_hours: issOpeningHours;
+    opening_hours: Array<issOpeningHours>;
     parking_info: string;
     phones: Array<phone>;
     postal_address: Array<{
@@ -135,6 +135,16 @@ export class Service {
 
     _serviceProvisions: Array<string>;
     _siblingServices: searchResults;
+
+
+    /**
+     * open:
+     *
+     * The service opening hours
+     */
+    open(): (ServiceOpening) {
+        return new ServiceOpening(this);
+    }
 
     /**
      * shortDescription:
