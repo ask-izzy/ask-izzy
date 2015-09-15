@@ -28,15 +28,29 @@ class TransportTime extends React.Component {
             object,
         } = this.props;
 
-        return (
-            <div className="TransportTime">
-                <icons.Walk className="ColoredIcon brand-text-dark" />
-                <span className="time">? mins</span>&nbsp;
-                <span className="location">
-                    {titleize(this.props.object.location.suburb)}
-                </span>
-            </div>
-        );
+        if (object.location.point) {
+            return (
+                <div className="TransportTime">
+                    <icons.Walk className="ColoredIcon brand-text-dark" />
+                    <span className="time">? mins</span>&nbsp;
+                    <span className="location">
+                        {titleize(this.props.object.location.suburb)}
+                    </span>
+                </div>
+            );
+        } else {
+            /* This is a confidential location, we can't show any
+             * transport time*/
+            return (
+                <div className="TransportTime">
+                    <icons.Phone className="ColoredIcon brand-text-dark" />
+                    <span className="time">Confidential location</span>&nbsp;
+                    <span className="location">
+                        {titleize(this.props.object.location.suburb)}
+                    </span>
+                </div>
+            );
+        }
     }
 }
 

@@ -2,7 +2,8 @@
     color: $brand-text-dark;
 
     padding: 15px;
-    border-bottom: 1px solid $list-item-hairline;
+    border-top: 10px solid $brand-bg-light;
+    border-bottom: 10px solid $brand-bg-light;
 
     .secondary {
         color: $brand-text-mid;
