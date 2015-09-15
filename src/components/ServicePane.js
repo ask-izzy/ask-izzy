@@ -14,6 +14,7 @@ import OpeningTimes from "../components/OpeningTimes";
 import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
+import iss from "../iss";
 
 var palette = colors.getPalette();
 
@@ -29,6 +30,11 @@ export default class ServicePane extends React.Component {
         };
     }
 
+    // flow:disable not supported yet
+    static propTypes = {
+        service: React.PropTypes.instanceOf(iss.Service).isRequired,
+    };
+
     async getSiblingServices(): Promise<void> {
         var response = await this.props.service.getSiblingServices();
         this.setState({siblings: response.objects});
@@ -36,6 +42,12 @@ export default class ServicePane extends React.Component {
 
     componentDidMount(): void {
         this.getSiblingServices();
+    }
+
+    componentDidUpdate(prevProps: Object, prevState: Object): void {
+        if (prevProps.service != this.props.service) {
+            this.getSiblingServices();
+        }
     }
 
     render(): React.Element {
@@ -72,25 +84,40 @@ export default class ServicePane extends React.Component {
                     ineligibility_info={object.ineligibility_info}
                 />
 
-                <h2>What you can get here</h2>
-                <ul>
-                    {object.serviceProvisions.map(
-                        (provision, index) => <li key={index}>{provision}</li>
-                    )}
-                </ul>
+                <div className="padded">
+                    <h3>What you can get here</h3>
+                    <ul>
+                        {object.serviceProvisions.map((provision, index) =>
+                            <li key={index}>{provision}</li>
+                        )}
+                    </ul>
+                </div>
 
-                <h2>Other services at this location</h2>
-                <mui.List>
-                {this.state.siblings ?
-                    this.state.siblings.map((service, index) =>
-                        <mui.ListItem
+                {this.renderSiblings()}
+            </div>
+        );
+    }
+
+    renderSiblings(): React.Element {
+        if (!this.state.siblings) {
+            return '';
+        }
+
+        return (
+            <div>
+                <h3 className="padded">
+                    Other services at this location
+                </h3>
+                <mui.List className="List">
+                    {this.state.siblings.map((service, index) =>
+                        <mui.ListItem className="ListItem"
                             key={index}
                             primaryText={service.name}
                             secondaryText={service.shortDescription}
                             containerElement={
                                 <Router.Link
                                     to="service"
-                                    params={{id: service.slug}}
+                                    params={{slug: service.slug}}
                                 />
                             }
 
@@ -101,13 +128,9 @@ export default class ServicePane extends React.Component {
                             disableFocusRipple={true}
                             disableTouchRipple={true}
                         />
-                    )
-                :
-                    'Loading...'
-                }
+                    )}
                 </mui.List>
             </div>
         );
     }
-
 }

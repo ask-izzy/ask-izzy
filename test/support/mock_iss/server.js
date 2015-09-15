@@ -71,7 +71,11 @@ app.get('/api/v3/search/', (req, res) => {
                 {
                     id: 444,
                     name: "Community Lunch",
-                    description: "A weekly lunch.",
+                    description:
+                        "A weekly free lunch for those in need. " +
+                        "Referrals for mental health and housing are also " +
+                        "available as is advice and a range of support " +
+                        "services.",
                     site: {
                         id: 444,
                         name: "Youth Support Net",

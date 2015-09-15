@@ -9,6 +9,8 @@ Feature: Category page
         Given my location is "Melbourne VIC"
         And I have somewhere to sleep tonight
         And I need nothing for housing
+        And my gender is female
+        And I am not part of any relevant demographics
 
     Scenario: Visit housing category
         When I visit /category/housing
@@ -32,7 +34,7 @@ Feature: Category page
         ---------------------------------------------------------------------
 
         # The housing category has 3 results
-        And I should not see "Get more results"
+        And I should not see "Load more results…"
 
     Scenario: Navigate to a service and back to a category
         When I visit /category/housing
@@ -43,17 +45,21 @@ Feature: Category page
         Then I should see "Emergency Accom"
         And I should be at /category/housing
 
-    # FIXME: This test is no longer relevant because we show service provisions
-    # not related services.
-    #
-    # Scenario: A service with 5 related services only shows 4
-        # When I visit /category/food
+    Scenario: A service with 5 related services only shows 4
+        When I visit /category/food
 
-        # Then I should see "Material Aid"
-        # And I should see "Community Outreach"
-        # And I should see "Crisis Accommodation"
-        # And I should see "Centrelink Services"
-        # And I should not see "Drug & Alcohol Counselling"
+        Then I should see the results
+        ------------------------------
+        Service Provisions (provision)
+        ==============================
+        Lunch
+        Advice
+        Support services
+        Housing referrals
+        ------------------------------
+
+        And I should not see "Mental health referrals"
+        And I should see "1 more…"
 
     Scenario: I should never see "invalid date"
         When I visit /category/housing
@@ -61,9 +67,9 @@ Feature: Category page
 
     Scenario: Visit a category with more than 5 services
         When I visit /category/everyday-things
-        Then I should see "Get more results"
+        Then I should see "Load more results…"
 
-        When I click on "Get more results"
+        When I click on "Load more results…"
         Then I should see the results
         --------------------
         Service Name (name)

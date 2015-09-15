@@ -70,14 +70,15 @@ class Intro extends React.Component {
                     }
                 />
                 <div className="padded">
-                    All of your answers are private and anonymous and are
-                    never stored anywhere. When you close I will forget them.
+                    All of your answers are private and anonymous.
                 </div>
 
                 <div className="done-button">
                     <mui.FlatButton
                         label="Okay"
                         onTouchTap={this.onTouchDoneButton.bind(this)}
+                        disableFocusRipple={true}
+                        disableTouchRipple={true}
                     />
                 </div>
 

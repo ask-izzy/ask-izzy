@@ -9,6 +9,8 @@ Feature: Change your personalisation settings
         Given my location is "Melbourne VIC"
         And I have somewhere to sleep tonight
         And I need nothing for housing
+        And my gender is female
+        And I am not part of any relevant demographics
 
     Scenario: View personalisation settings and return to search
         When I click on "Housing"
@@ -20,6 +22,8 @@ Feature: Change your personalisation settings
         Do you have somewhere to sleep tonight? | Yes
         Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
+        How do you identify?                    | Female
+        Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
         When I click back from the title bar
@@ -44,6 +48,8 @@ Feature: Change your personalisation settings
         Do you have somewhere to sleep tonight? | Yes
         Do you need any of these?               | 0 selected
         Where are you?                          | Carlton, Victoria
+        How do you identify?                    | Female
+        Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
     Scenario: Edit whether I have somewhere to sleep tonight
@@ -57,6 +63,8 @@ Feature: Change your personalisation settings
         Do you have somewhere to sleep tonight? | No
         Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
+        How do you identify?                    | Female
+        Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
     Scenario: Edit housing subcategory items
@@ -73,6 +81,8 @@ Feature: Change your personalisation settings
         Do you have somewhere to sleep tonight? | Yes
         Do you need any of these?               | 1 selected
         Where are you?                          | Melbourne VIC
+        How do you identify?                    | Female
+        Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
         When I click on "Do you need any of these?"
@@ -92,4 +102,54 @@ Feature: Change your personalisation settings
         Do you have somewhere to sleep tonight? | Yes
         Do you need any of these?               | 2 selected
         Where are you?                          | Melbourne VIC
+        How do you identify?                    | Female
+        Do any of these apply to you?           | 0 selected
+        ----------------------------------------------------------------
+
+    Scenario: Edit demographics items
+        Given I am part of the following demographics
+        --------------------------------------
+        Aboriginal or Torres Strait Islander
+        LGBTIQ
+        --------------------------------------
+
+        When I visit /category/housing/personalise/summary
+        Then I should see the results
+        ----------------------------------------------------------------
+        Question (primaryText)                  | Answer (secondaryText)
+        ================================================================
+        Do you have somewhere to sleep tonight? | Yes
+        Do you need any of these?               | 0 selected
+        Where are you?                          | Melbourne VIC
+        How do you identify?                    | Female
+        Do any of these apply to you?           | 2 selected
+        ----------------------------------------------------------------
+
+        When I click on "Do any of these apply to you?"
+        And I click on "Aboriginal or Torres Strait Islander"
+        And I click on "Done"
+        Then I should see the results
+        ----------------------------------------------------------------
+        Question (primaryText)                  | Answer (secondaryText)
+        ================================================================
+        Do you have somewhere to sleep tonight? | Yes
+        Do you need any of these?               | 0 selected
+        Where are you?                          | Melbourne VIC
+        How do you identify?                    | Female
+        Do any of these apply to you?           | 1 selected
+        ----------------------------------------------------------------
+
+    Scenario: Edit gender
+        When I visit /category/housing/personalise/summary
+        And I click on "How do you identify?"
+        And I click on "Male"
+        Then I should see the results
+        ----------------------------------------------------------------
+        Question (primaryText)                  | Answer (secondaryText)
+        ================================================================
+        Do you have somewhere to sleep tonight? | Yes
+        Do you need any of these?               | 0 selected
+        Where are you?                          | Melbourne VIC
+        How do you identify?                    | Male
+        Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------

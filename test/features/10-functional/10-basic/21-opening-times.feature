@@ -5,9 +5,13 @@ Feature: Opening times
     # I want to see the opening times of results
     # So that I can choose a service
 
-    Scenario: Can show opening time tomorrow
+    Background:
         Given my location is "Melbourne VIC"
-        And today is a Tuesday
+        And my gender is female
+        And I am not part of any relevant demographics
+
+    Scenario: Can show opening time tomorrow
+        Given today is a Tuesday
         # Navigating will undo the mocked time
         When I click on "Food"
         Then I should see the results
@@ -18,8 +22,7 @@ Feature: Opening times
         ------------------------------
 
     Scenario: Can show opening time 2 days hence
-        Given my location is "Melbourne VIC"
-        And today is a Monday
+        Given today is a Monday
         # Navigating will undo the mocked time
         When I click on "Food"
         Then I should see the results
@@ -30,8 +33,7 @@ Feature: Opening times
         ------------------------------
 
     Scenario: Can show opening time next week
-        Given my location is "Melbourne VIC"
-        And today is a Wednesday
+        Given today is a Wednesday
         # Navigating will undo the mocked time
         When I click on "Food"
         Then I should see the results

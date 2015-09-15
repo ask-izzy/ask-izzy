@@ -15,4 +15,4 @@ fi
 # build assets if this isn't Travis (which has already)
 ${CI:=false} || ./script/build-assets
 
-mocha --timeout 0 --compilers js:babel/register test/*.js "$@"
+mocha --timeout 0 --compilers js:babel/register $@

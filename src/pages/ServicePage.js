@@ -20,32 +20,31 @@ class ServicePage extends React.Component {
     }
 
     /**
-     * search:
-     * Do a search in ISS
-     *
-     * Returns: a promise to an object of data from ISS.
-     */
-
-    componentDidMount(): void {
-        iss.getService(this.id)
-            .then(data => {
-                this.setState({
-                    object: data,
-                });
-            });
-
-        // FIXME: display error on failure to connect
-    }
-
-    /**
      * Pull out the ID (leading digits) from the slug
      */
-
-    // flow:disable not supported yet
+    /* flow:disable not supported yet */
     get id(): number {
         var leadingDigits = /^\d+/;
-        var slug = this.props.params.id;
+        var slug = this.props.params.slug;
         return parseInt(slug.match(leadingDigits)[0]);
+    }
+
+    async loadService(): Promise<void> {
+        var service = await iss.getService(this.id);
+
+        this.setState({
+            object: service,
+        });
+    }
+
+    componentDidUpdate(prevProps: Object, prevState: Object): void {
+        if (prevProps.params.slug != this.props.params.slug) {
+            this.loadService();
+        }
+    }
+
+    componentDidMount(): void {
+        this.loadService();
     }
 
     render(): React.Element {

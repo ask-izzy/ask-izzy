@@ -32,14 +32,21 @@
     }
 }
 
-.CheckboxSelected,
-.CheckboxUnselected,
-.RadioSelected,
-.RadioUnselected {
-    height: 30px !important;
-    width: 30px !important;
+.ChevronBackIcon {
+    path {
+        fill: white !important;
+    }
+}
 
-    top: -4px !important;
+.CheckboxSelectedIcon,
+.CheckboxUnselectedIcon,
+.RadioSelectedIcon,
+.RadioUnselectedIcon {
+    height: 40px !important;
+    width: 40px !important;
+
+    top: -8px !important;
+    left: -6px !important;
 
     path {
         fill: $brand-text-dark !important;
