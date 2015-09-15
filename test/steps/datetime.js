@@ -15,12 +15,15 @@ import { gotoUrl } from '../support/webdriver';
 
 module.exports = (function() {
     return Yadda.localisation.English.library()
-        .given('today is a $STRING', unpromisify(changeDay));
+        .given('it is late on $STRING', unpromisify(changeDay));
 })();
 
 async function changeDay(day: string): Promise<void> {
-    var time = moment().day(day).valueOf();
-    console.log(time);
+    var time = moment()
+        .day(day)
+        .startOf('day')
+        .add(18, 'h')
+        .valueOf();
     var script = fs.readFileSync(`${__dirname}/../support/timeshift.js`,
                                  {encoding: 'utf-8'});
 
