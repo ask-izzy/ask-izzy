@@ -41,11 +41,11 @@ class CrisisLineItem extends React.Component {
                 }
 
                 return (
-                    <mui className="CrisisLineItem">
+                    <div className="CrisisLineItem">
                         <div className="crisisName"> {object.name}
                         </div>
 			<Phone {...phone} />
-                    </mui>
+                    </div>
                     );
             }
         }

@@ -1,47 +1,43 @@
 .CrisisLineItem {
-    border-bottom: 1px solid $list-item-hairline !important;
-
-    a {
+    .Phone > a {
+        font-size: 18px !important;
         text-decoration: none;
-	color: $brand-pane-alt-light;
-        .PhoneIcon {
-            fill: $brand-pane-alt-light !important;
-        }
-    }
+	color: $brand-pane-alt-dark;
 
-    .Phone {
+        display: block;
         position: relative;
-        border: 2px solid;
-        border-color: $brand-pane-alt-light;
+	width: auto;
+
+        border: 1px solid;
+        border-color: $brand-pane-alt-dark;
         border-radius: 3px;
-        width: 90%;
-        height: 32px;
-        color: $brand-pane-alt-light;
-        fill: $brand-pane-alt-light;
-        font-size: 24px !important;
-    padding-left: 26px;
-    padding-right: 16px;
-    padding-bottom: 16px;
-    padding-top: 16px;
-    margin-left: 16px;
-    margin-right: 16px;
-    padding-bottom: 16px;
-    padding-top: 16px;
-    a .PhoneIcon {
-        top: -5px;
+
+	padding: 6px;
+        margin-left: 16px;
+        margin-right: 16px;
+
+        &:hover, &:focus {
+            background-color: $brand-bg-light;
         }
-    a .kind {
-        padding-left: 16px;
+
+        .PhoneIcon {
+            fill: $brand-pane-alt-dark !important;
+	    left: 0 !important;
+	    top: -2px !important;
+        }
+
+        .kind {
+            padding-left: 30px;
         }
     }
 
     .crisisName {
-        font-size: 18px !important;
+        font-size: 16px !important;
         color: $brand-text-mid;
+
 	padding-left: 16px;
 	padding-right: 16px;
-        padding-bottom: 16px;
+        padding-bottom: 6px;
         padding-top: 16px;
     }
-
 }
