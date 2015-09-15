@@ -28,7 +28,7 @@ Feature: Category page
         ---------------------------------------------------------------------
         It's important to act early on housing. These services can help to find a place to stay, or rental assistance to help you stay in your current house.
         Find out more
-        HOUSING INFORMATION
+        Housing information
         ---------------------------------------------------------------------
 
         # The housing category has 3 results
