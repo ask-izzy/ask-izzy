@@ -43,14 +43,13 @@ export default class ServiceOpening {
         // and only find moment()s which are in the future
         var openingTimes = [];
         var closingTimes = [];
-        for (var i = 0; i < properties.opening_hours.length; i++) {
-            var oh: issOpeningHours = properties.opening_hours[i];
 
+        for (var openingHours of properties.opening_hours) {
             // Convert (eg) 'Monday' to a Moment()
             var day = moment(now());
-            day = day.day(oh.day);
-            var close = timeOfDay(day, oh.close);
-            var open = timeOfDay(day, oh.open);
+            day = day.day(openingHours.day);
+            var close = timeOfDay(day, openingHours.close);
+            var open = timeOfDay(day, openingHours.open);
 
             // split opening / closing hours into separate arrays?
             if (close.isBefore(moment(now()))) {
@@ -64,7 +63,7 @@ export default class ServiceOpening {
             var serviceOpeningHours = Object.assign({}, {
                 start: open,
                 end: close,
-            }, oh);
+            }, openingHours);
 
             openingTimes[open.diff(now(), 'days')] = serviceOpeningHours;
             closingTimes[close.diff(now(), 'days')] = serviceOpeningHours;
