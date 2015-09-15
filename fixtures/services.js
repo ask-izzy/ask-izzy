@@ -7,6 +7,7 @@ module.exports = {
         description: "",
         site: {id: 333, name: "phoneable"},
         now_open: { now_open: false },
+        opening_hours: [],
         phones: [
             {
                 "comment": "",
