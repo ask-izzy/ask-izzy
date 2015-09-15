@@ -14,6 +14,14 @@
             width: auto !important;
             padding: 0 !important;
             padding-top: 20px !important;
+
+            .Ask {
+                fill: white !important;
+            }
+
+            .Izzy {
+                fill: $brand-pane-alt-light;
+            }
         }
 
         .branding-copy {
