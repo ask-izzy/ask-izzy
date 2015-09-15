@@ -20,7 +20,12 @@ type serviceOpeningHours = {
     "start": Moment,
 }
 
-function timeOfDay(day: Moment, time: string): Moment {
+/*
+ * Return a new moment on the same day as `day`, but
+ * with the time set to `time` which is formatted 'hh:mm:ss'
+ */
+function timeOfDay(day: Moment, time: hmsWithColonsTime): Moment {
+    // Can't just map(parseInt) as parseInt has an optional radix param
     var [h, m, s] = time.split(":").map((s) => parseInt(s));
 
     var t = moment(day);
