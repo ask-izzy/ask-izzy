@@ -29,22 +29,15 @@ class CrisisLineItem extends React.Component {
             object,
         } = this.props;
 
-        var crisisType = "";
-
         for (var kind of ['freecall', 'phone', 'mobile']) {
             var phone = _.findWhere(object.phones, {kind: kind});
 
             if (phone) {
-
-                if (kind == "freecall") {
-                    var crisisType = "Freecall";
-                }
-
                 return (
                     <div className="CrisisLineItem">
                         <div className="crisisName"> {object.name}
                         </div>
-			<Phone {...phone} />
+                        <Phone {...phone} />
                     </div>
                     );
             }

@@ -1,4 +1,8 @@
 .CrisisLineItem {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 6px;
+
     .Phone > a {
         font-size: 18px !important;
         text-decoration: none;
@@ -13,8 +17,6 @@
         border-radius: 3px;
 
 	padding: 6px;
-        margin-left: 16px;
-        margin-right: 16px;
 
         &:hover, &:focus {
             background-color: $brand-bg-light;
@@ -32,12 +34,10 @@
     }
 
     .crisisName {
-        font-size: 16px !important;
+        font-size: 14px !important;
         color: $brand-text-mid;
 
-	padding-left: 16px;
-	padding-right: 16px;
         padding-bottom: 6px;
-        padding-top: 16px;
+        padding-top: 6px;
     }
 }
