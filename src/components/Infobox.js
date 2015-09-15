@@ -51,19 +51,18 @@ class Infobox extends React.Component {
                             <div className="secondary">
                                 Find out more
                             </div>
-                            <mui.FlatButton
-                                label={linkText}
-                                containerElement={
-                                    this.props.href ?
-                                        <a className="Link" {...other} />
-                                    :
-                                        <Router.Link
-                                            className="Link"
-                                            {...other}
-                                        />
-                                }
-                            >
-                            </mui.FlatButton>
+                            {this.props.href ?
+                                    <a className="Link" {...other}>
+                                        {linkText}
+                                    </a>
+                                :
+                                    <Router.Link
+                                        className="Link"
+                                        {...other}
+                                    >
+                                        {linkText}
+                                    </Router.Link>
+                            }
                         </div>
                     :
                         ''
