@@ -142,14 +142,15 @@ class OpeningTimes extends React.Component {
             var nextOpen = this.props.object.nextOpeningTimes.start;
 
             var daysAway = nextOpen.diff(this.props.moment(), 'days');
+            var dayName = nextOpen.format('dddd');
             if (daysAway == 0) {
                 day = this.ifTime`today ${nextOpen}`;
             } else if (daysAway == 1) {
                 day = this.ifTime`tomorrow ${nextOpen}`;
             } else if (daysAway >= 6) {
-                day = this.ifTime`next ${nextOpen.format('dddd')} ${nextOpen}`;
+                day = this.ifTime`next ${dayName} ${nextOpen}`;
             } else {
-                day = this.ifTime`${nextOpen.format('dddd')} ${nextOpen}`;
+                day = this.ifTime`${dayName} ${nextOpen}`;
             }
         }
 
@@ -171,6 +172,7 @@ class OpeningTimes extends React.Component {
                 </span>
             );
         }
+
         var start = this.ifTime`from ${open.start}`;
         var end = this.ifTime`until ${open.end}`;
         return (
