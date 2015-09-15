@@ -53,6 +53,9 @@ class OpeningTimes extends React.Component {
         moment: moment,
     };
 
+    // Lots of permutations here because this component has
+    // lots of complex logic. Should probably be split into
+    // CurrentlyOpen/CurrentlyClosed components to simplify.
     // flow:disable not supported yet
     static sampleProps = {
         open: fixture(true,  [{
@@ -82,6 +85,11 @@ class OpeningTimes extends React.Component {
         "Open later today": fixture(false, [{
             day: "Wednesday",
             open: "14:30:00",
+            close: "15:00:00",
+        },]),
+        "Open tomorrow morning": fixture(false, [{
+            day: "Thursday",
+            open: "09:30:00",
             close: "15:00:00",
         },]),
         "Closed earlier today": fixture(false, [{
@@ -159,7 +167,10 @@ class OpeningTimes extends React.Component {
         if (this.props.object.nextOpeningTimes) {
             var nextOpen = this.props.object.nextOpeningTimes.start;
 
-            var daysAway = nextOpen.diff(this.props.moment(), 'days');
+            var startToday = this.props.moment().startOf('day');
+            var daysAway = moment(nextOpen)
+                .startOf('day')
+                .diff(startToday, 'days');
             var dayName = nextOpen.format('dddd');
             if (daysAway == 0) {
                 day = this.ifTime`today ${nextOpen}`;
