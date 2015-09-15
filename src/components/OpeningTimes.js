@@ -12,6 +12,9 @@ var palette = colors.getPalette();
 
 import icons from '../icons';
 
+/*
+ * Used to generate sample datum for the Style Guide
+ */
 function fixture(
     nowOpen: ?boolean,
     openingHours: Array<issOpeningHours>,
@@ -103,6 +106,15 @@ class OpeningTimes extends React.Component {
         },]),
     };
 
+    /*
+     * String templating macro to
+     * - Convert moment values to strings
+     * - Ensure we aren't displaying invalid or undefined dates
+     *
+     * If any dates are undefined or invalid, the whole string
+     * comes back empty.
+     *
+     */
     ifTime(strings: Array<string>, ...values: Array<any>): string {
         if (_(values).contains(undefined)) {
             return "";
@@ -124,6 +136,9 @@ class OpeningTimes extends React.Component {
         return String.raw(strings, ...timeValues);
     }
 
+    /*
+     * Render the opening hours if ISS says it's open
+     */
     renderOpen(): React.Element {
         var closesAt = this.props.object.nextCloses;
         return (
@@ -135,6 +150,9 @@ class OpeningTimes extends React.Component {
         );
     }
 
+    /*
+     * Render the opening hours if ISS says it's closed
+     */
     renderClosed(): React.Element {
         var day = "";
 
@@ -163,6 +181,10 @@ class OpeningTimes extends React.Component {
         );
     }
 
+    /*
+     * Render the opening hours if ISS isn't sure whether
+     * the place is currently open.
+     */
     renderUnsure(): React.Element {
         var open = this.props.object.nextOpeningTimes;
         if (!open) {
