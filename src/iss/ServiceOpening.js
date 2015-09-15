@@ -21,11 +21,13 @@ type serviceOpeningHours = {
 }
 
 function timeOfDay(day: Moment, time: string): Moment {
-    return moment(
-        day.format("YYYY-MM-DD") +
-        ' ' + time,
-        'YYYY-MM-DD HH:mm:ss'
-    );
+    var [h, m, s] = time.split(":").map((s) => parseInt(s));
+
+    var t = moment(day);
+    t.set('hour', h);
+    t.set('minute', m);
+    t.set('second', s);
+    return t;
 }
 
 export default class ServiceOpening {
