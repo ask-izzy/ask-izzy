@@ -7,9 +7,6 @@ import Router from "react-router";
 import mui from "material-ui";
 
 import BaseResultsPage from "./BaseResultsPage";
-import ResultListItem from '../components/ResultListItem';
-import CrisisLineItem from '../components/CrisisLineItem';
-import HeaderBar from '../components/HeaderBar';
 import components from '../components';
 import icons from '../icons';
 
@@ -120,9 +117,15 @@ class ResultsListPage extends BaseResultsPage {
                             {React.addons.cloneWithProps(object.node)}
                         </div>
                     : object.crisis ?
-                        <CrisisLineItem object={object} key={index} />
+                        <components.CrisisLineItem
+                            object={object}
+                            key={index}
+                        />
                     :
-                        <ResultListItem object={object} key={index} />
+                        <components.ResultListItem
+                            object={object}
+                            key={index}
+                        />
                 )
             }
             {

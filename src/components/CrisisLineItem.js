@@ -2,18 +2,17 @@
 
 import React from "react";
 import Router from "react-router";
-import Phone from "./Phone";
-import colors from "../constants/theme";
-import fixtures from "../../fixtures/services";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
 import _ from "underscore";
+
+import colors from "../constants/theme";
+import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import iss from '../iss';
 
-var palette = colors.getPalette();
+import Phone from "./Phone";
 
-/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class CrisisLineItem extends React.Component {
 
     // flow:disable not supported yet
@@ -35,8 +34,8 @@ class CrisisLineItem extends React.Component {
             if (phone) {
                 return (
                     <div className="CrisisLineItem">
-                        <div className="crisisName"> {object.name}
-                        </div>
+                        <h3 className="crisisName"> {object.name}
+                        </h3>
                         <Phone {...phone} />
                     </div>
                     );
