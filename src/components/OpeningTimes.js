@@ -185,11 +185,13 @@ class OpeningTimes extends React.Component {
     render(): React.Element {
         var open = this.props.object.now_open;
 
-        var renderMethod = this.renderUnsure;
+        var renderMethod: ?Function;
         if (open === true) {
             renderMethod = this.renderOpen;
         } else if (open === false) {
             renderMethod = this.renderClosed;
+        } else {
+            renderMethod = this.renderUnsure;
         }
 
         return (
