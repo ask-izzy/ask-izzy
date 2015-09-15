@@ -61,8 +61,7 @@ export default class ServiceOpening {
                 open.add(1, 'weeks');
             }
 
-            /* flow:disable */
-            var serviceOpeningHours = Object.assign({
+            var serviceOpeningHours = Object.assign({}, {
                 start: open,
                 end: close,
             }, oh);
