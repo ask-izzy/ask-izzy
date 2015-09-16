@@ -19,13 +19,12 @@ export default class BasePage extends React.Component {
                         <a href="#">About Ask Izzy</a>
                     </div>
                     <div>
-                        Supported by
-                    </div>
-                    <div className="supporters">
-                        Infoxchange |
-                        Google |
-                        REA Group |
-                        News Corp Australia
+                        Supported by <ul className="supporters">
+                            <li className="supporter">Infoxchange</li>
+                            <li className="supporter">Google</li>
+                            <li className="supporter">REA Group</li>
+                            <li className="supporter">News Corp Australia</li>
+                        </ul>
                     </div>
                 </footer>
             </div>

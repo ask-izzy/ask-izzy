@@ -28,7 +28,18 @@
         }
 
         .supporters {
-            text-align: center;
+            text-align: left;
+            display: inline;
+            padding: 0;
+        }
+
+        .supporter {
+            display: inline-block;
+            list-style-type: none;
+        }
+
+        .supporter + .supporter::before {
+            content: "\00a0|\00a0"
         }
     }
 }
