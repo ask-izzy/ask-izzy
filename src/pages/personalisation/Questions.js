@@ -27,6 +27,23 @@ export class SleepTonight extends BaseQuestion {
     }
 }
 
+export class Age extends BaseQuestion {
+    // flow:disable
+    static defaultProps = {
+        name: "age",
+        question: "How old are you?",
+        answers: [
+            "26 or younger",
+            "26 to 54",
+            "55 or older",
+        ],
+    };
+
+    static getSearchForAnswer(request, answer) {
+        return request;
+    }
+}
+
 export class HousingSubcategories extends BaseMultiQuestion {
     // flow:disable
     static defaultProps = {
@@ -162,6 +179,7 @@ export class Demographics extends BaseMultiQuestion {
 export default {
     Demographics: Demographics,
     Gender: Gender,
+    Age: Age,
     HousingSubcategories: HousingSubcategories,
     SleepTonight: SleepTonight,
 };

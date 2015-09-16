@@ -60,6 +60,7 @@ var categories:Array<Category> = [
             personalisation.Questions.HousingSubcategories,
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -73,6 +74,7 @@ var categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -86,6 +88,7 @@ var categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -99,6 +102,7 @@ var categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -112,6 +116,7 @@ var categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -125,6 +130,7 @@ var categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -138,6 +144,7 @@ var categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -151,6 +158,7 @@ var categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -164,6 +172,7 @@ var categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -177,6 +186,7 @@ var categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -190,6 +200,7 @@ var categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -203,6 +214,7 @@ var categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -216,6 +228,7 @@ var categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),
@@ -229,6 +242,7 @@ var categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.Questions.Gender,
+            personalisation.Questions.Age,
             personalisation.Questions.Demographics,
         ],
     }),

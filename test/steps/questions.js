@@ -26,6 +26,7 @@ module.exports = (function() {
         .given('I am part of the following demographics\n$lines',
                unpromisify(setDemographics))
         .given('my gender is $STRING', unpromisify(setGender))
+        .given('I am 27 years old', unpromisify(setAgeToMiddle))
         ;
 })();
 
@@ -68,6 +69,13 @@ async function setDemographics(items: Array<string>):
 
 async function setDemographicsNone(): Promise<void> {
     return setDemographics.bind(this)([]);
+}
+
+async function setAgeToMiddle(): Promise<void> {
+    await gotoUrl(this.driver, '/');  // go anywhere to start the session
+    await this.driver.executeScript(age => {
+        sessionStorage.setItem('age', age);
+    }, "26 to 54");
 }
 
 async function setGender(gender: string): Promise<void> {

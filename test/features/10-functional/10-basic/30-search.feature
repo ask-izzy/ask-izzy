@@ -8,6 +8,7 @@ Feature: Search
     Background:
         Given my location is "Melbourne VIC"
         And my gender is female
+        And I am 27 years old
         And I am not part of any relevant demographics
 
     Scenario: Search for "pets" using keyboard
