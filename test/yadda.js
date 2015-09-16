@@ -41,6 +41,7 @@ new Yadda.FeatureFileSearch('./test/features').each(file => {
                     try {
                         sessionStorage.clear();
                     } catch (e) {
+                        console.error(e);
                     }
                 });
 

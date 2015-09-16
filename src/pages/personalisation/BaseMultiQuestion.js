@@ -27,7 +27,7 @@ class BaseMultiQuestion extends BaseQuestion {
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
-        var value = storage.getJSON(this.defaultProps.name);
+        var value = this.answer;
 
         if (value != null) {
             return this.getSearchForAnswers(request, value);

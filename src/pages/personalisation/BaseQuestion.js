@@ -41,16 +41,28 @@ class BaseQuestion extends React.Component {
 
     // flow:disable
     static get summaryValue(): string {
+        return this.answer;
+    }
+
+    // flow:disable
+    static get answer(): string {
         return storage.getItem(this.defaultProps.name);
     }
 
+    /**
+     * getSearch:
+     *
+     * Modify the search query with the answers to the question. Or return
+     * `null` if we don't have an answer (this will cause the question to
+     * be shown).
+     */
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
-        var value = storage.getItem(this.defaultProps.name);
+        var value = this.answer;
 
         if (value) {
             return this.getSearchForAnswer(request, value);
         } else {
-            // this question can't been answered
+            // this question hasn't been answered
             return null;
         }
     }
@@ -58,6 +70,15 @@ class BaseQuestion extends React.Component {
     static getSearchForAnswer(request: iss.searchRequest, answer: string):
         ?iss.searchRequest {
         return request;
+    }
+
+    /**
+     * showQuestion:
+     *
+     * Determines whether or not to show the question.
+     */
+    static showQuestion(): boolean {
+        return true;
     }
 
     /**

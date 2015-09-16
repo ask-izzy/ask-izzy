@@ -20,7 +20,7 @@ export class SleepTonight extends BaseQuestion {
 
     static getSearchForAnswer(request, answer) {
         if (answer == "No") {
-            request.q = "crisis housing";
+            request.q = "crisis accommodation";
         }
 
         return request;
@@ -39,6 +39,11 @@ export class HousingSubcategories extends BaseMultiQuestion {
             "Help with a legal issue",
         ],
     };
+
+    static showQuestion() {
+        /* only show this question if the user has someone to sleep tonight */
+        return (SleepTonight.answer == 'Yes');
+    }
 }
 
 export class Gender extends BaseQuestion {
