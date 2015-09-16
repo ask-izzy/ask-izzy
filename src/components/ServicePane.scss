@@ -62,4 +62,16 @@ $padding: 15px;
             border-bottom: 1px solid $list-item-hairline !important;
         }
     }
+
+    .siblings {
+        .List > :first-child {
+            border-top: 1px solid $list-item-hairline;
+        }
+
+        .ChevronIcon {
+            width: 35px !important;
+            height: 35px !important;
+            top: 2px !important;
+        }
+    }
 }
