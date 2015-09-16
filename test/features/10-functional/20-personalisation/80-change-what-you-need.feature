@@ -61,7 +61,6 @@ Feature: Change your personalisation settings
         Question (primaryText)                  | Answer (secondaryText)
         ================================================================
         Do you have somewhere to sleep tonight? | No
-        Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
         How do you identify?                    | Female
         Do any of these apply to you?           | 0 selected
