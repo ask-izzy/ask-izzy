@@ -51,8 +51,8 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                             }
                         />
                         <mui.List className="List">{
-                            this.personalisationComponents.map(
-                                (component, index) =>
+                            this.personalisationComponents
+                                .map((component, index) =>
                                     <mui.ListItem
                                         key={index}
                                         className="ListItem SummaryItem"

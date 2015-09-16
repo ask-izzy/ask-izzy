@@ -44,13 +44,26 @@ class BaseQuestion extends React.Component {
         return storage.getItem(this.defaultProps.name);
     }
 
+    /**
+     * getSearch:
+     *
+     * Modify the search query with the answers to the question. Or return
+     * `null` if we don't have an answer (this will cause the question to
+     * be shown).
+     */
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+        if (!this.showQuestion()) {
+            /* If we don't want to show the question, return an unmodified
+             * request. */
+            return request;
+        }
+
         var value = storage.getItem(this.defaultProps.name);
 
         if (value) {
             return this.getSearchForAnswer(request, value);
         } else {
-            // this question can't been answered
+            // this question hasn't been answered
             return null;
         }
     }
@@ -58,6 +71,15 @@ class BaseQuestion extends React.Component {
     static getSearchForAnswer(request: iss.searchRequest, answer: string):
         ?iss.searchRequest {
         return request;
+    }
+
+    /**
+     * showQuestion:
+     *
+     * Determines whether or not to show the question.
+     */
+    static showQuestion(): boolean {
+        return true;
     }
 
     /**

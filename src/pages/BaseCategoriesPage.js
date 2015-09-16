@@ -38,10 +38,12 @@ class BaseCategoriesPage extends React.Component {
      */
     /* flow:disable */
     get personalisationComponents(): Array<React.Component> {
+        var components = [];
+
         if (this.props.params.page) {
-            return this.category.personalisation;
+            components = this.category.personalisation;
         } else if (this.props.params.search) {
-            return [
+            components = [
                 require('./personalisation/Location'),
                 require('./personalisation/Questions').Gender,
                 require('./personalisation/Questions').Demographics,
@@ -49,6 +51,8 @@ class BaseCategoriesPage extends React.Component {
         } else {
             throw new Error("Unexpected");
         }
+
+        return components.filter(component => component.showQuestion());
     }
 
 };
