@@ -6,6 +6,7 @@ import React from 'react';
 import Router from "react-router";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
+import _ from 'underscore';
 
 import iss from '../iss';
 import BaseCategoriesPage from './BaseCategoriesPage';
@@ -45,6 +46,7 @@ class BaseResultsPage extends BaseCategoriesPage {
     // flow:disable not supported yet
     get results(): Array<iss.issService> {
         var objects;
+        var index;
 
         if (this.state.objects) {
             objects = Array.from(this.state.objects);
@@ -52,17 +54,40 @@ class BaseResultsPage extends BaseCategoriesPage {
             objects = [];
         }
 
-        /* splice in an info box if it exists */
+        /* splice in an infobox (if it exists) after the first non-crisis
+         * service */
         try {
             var infobox = this.category.info;
+            index = _.findIndex(objects,
+                                object => !object.crisis && !object.infobox);
 
-            if (infobox) {
-                objects.splice(1, 0, {
+            if (infobox && index != -1) {
+                objects.splice(index + 1, 0, {
                     infobox: true,
                     node: infobox,
                 });
             }
         } catch (e) {
+        }
+
+        /* splice a header before the first crisis service */
+        index = _.findIndex(objects, object => object.crisis);
+        if (index != -1) {
+            /* count hotlines */
+            var nhotlines = _.where(objects, {crisis:true}).length;
+
+            objects.splice(index, 0, {
+                infobox: true,
+                node: (
+                    <h3 className="CrisisHeader">
+                    {nhotlines == 1 ?
+                        'If you need urgent help call this number'
+                    :
+                        'If you need urgent help call one of these numbers'
+                    }
+                    </h3>
+                ),
+            });
         }
 
         return objects;

@@ -1,7 +1,5 @@
 .CrisisLineItem {
-    margin-left: 16px;
-    margin-right: 16px;
-    margin-bottom: 6px;
+    margin: 6px 16px;
 
     .Phone > a {
         font-size: 18px !important;
@@ -46,6 +44,14 @@
         text-decoration: none;
 
         margin-bottom: 6px;
-        padding-top: 6px;
     }
+}
+
+.CrisisHeader {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: -6px;
+
+    font-size: 18px !important;
+    font-weight: 500 !important;
 }
