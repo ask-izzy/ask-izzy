@@ -73,11 +73,18 @@ class BaseResultsPage extends BaseCategoriesPage {
         /* splice a header before the first crisis service */
         index = _.findIndex(objects, object => object.crisis);
         if (index != -1) {
+            /* count hotlines */
+            var nhotlines = _.where(objects, {crisis:true}).length;
+
             objects.splice(index, 0, {
                 infobox: true,
                 node: (
                     <h3 className="CrisisHeader">
-                        If you need urgent help call one of these numbers
+                    {nhotlines == 1 ?
+                        'If you need urgent help call this number'
+                    :
+                        'If you need urgent help call one of these numbers'
+                    }
                     </h3>
                 ),
             });
