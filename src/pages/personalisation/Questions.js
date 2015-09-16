@@ -20,7 +20,7 @@ export class SleepTonight extends BaseQuestion {
 
     static getSearchForAnswer(request, answer) {
         if (answer == "No") {
-            request.q = "crisis housing";
+            request.q = "crisis accommodation";
         }
 
         return request;
