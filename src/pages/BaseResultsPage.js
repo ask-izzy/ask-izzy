@@ -70,6 +70,19 @@ class BaseResultsPage extends BaseCategoriesPage {
         } catch (e) {
         }
 
+        /* splice a header before the first crisis service */
+        index = _.findIndex(objects, object => object.crisis);
+        if (index != -1) {
+            objects.splice(index, 0, {
+                infobox: true,
+                node: (
+                    <h3 className="CrisisHeader">
+                        If you need urgent help call one of these numbers
+                    </h3>
+                ),
+            });
+        }
+
         return objects;
     }
 
