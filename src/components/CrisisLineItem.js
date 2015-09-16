@@ -34,7 +34,13 @@ class CrisisLineItem extends React.Component {
             if (phone) {
                 return (
                     <div className="CrisisLineItem">
-                        <h3 className="crisisName"> {object.name}
+                        <h3>
+                            <Router.Link
+                                to='service'
+                                params={{slug: object.slug}}
+                            >
+                                {object.site.name} {object.name}
+                            </Router.Link>
                         </h3>
                         <Phone {...phone} />
                     </div>
