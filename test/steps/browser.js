@@ -19,6 +19,7 @@ import { gotoUrl } from '../support/webdriver';
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
+        .given('a fresh session', unpromisify(cleanSession))
         .when('I visit $URL', unpromisify(visitUrl))
         .when('I click on "$STRING"', unpromisify(clickLink))
         .when('I search for "$STRING"', unpromisify(doSearch))
@@ -168,6 +169,16 @@ async function assertItemNotChecked(label: string): Promise<void> {
         .getAttribute('checked');
 
     assert.equal(checked, null);
+}
+
+async function cleanSession(): Promise<void> {
+    await this.driver.executeScript(() => {
+        try {
+            sessionStorage.clear();
+        } catch (e) {
+            console.error(e);
+        }
+    });
 }
 
 /**
