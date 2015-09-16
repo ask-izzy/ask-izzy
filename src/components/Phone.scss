@@ -5,8 +5,12 @@
         position: relative;
         padding-left: 24px;
 
-        .kind{
+        .kind {
             font-weight: 500;
+        }
+
+        .number {
+            white-space: nowrap;
         }
 
         .PhoneIcon {

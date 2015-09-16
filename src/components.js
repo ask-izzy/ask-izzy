@@ -4,6 +4,7 @@ import AppBar from './components/AppBar';
 import CategoryListItem from './components/CategoryListItem';
 import CollapsedPhones from './components/CollapsedPhones';
 import Collapser from './components/Collapser';
+import CrisisLineItem from './components/CrisisLineItem';
 import Eligibility from './components/Eligibility';
 import HeaderBar from './components/HeaderBar';
 import Infobox from './components/Infobox';
@@ -21,6 +22,7 @@ export default {
     CategoryListItem: CategoryListItem,
     CollapsedPhones: CollapsedPhones,
     Collapser: Collapser,
+    CrisisLineItem: CrisisLineItem,
     Eligibility: Eligibility,
     HeaderBar: HeaderBar,
     Infobox: Infobox,

@@ -59,11 +59,27 @@ module.exports = (function() {
         assert.equal(text, lines.join('\n'));
     }
 
+    async function hotlinePositionAndText(expectedPos: number,
+            expectedText: string): Promise<void> {
+        var elements = await this.driver.findElements(
+                By.css('.CrisisLineItem, .ResultListItem, .Infobox')
+            );
+        var crisisLine = elements[expectedPos - 1];
+        assert.equal(await crisisLine.getAttribute('class'),
+                     'CrisisLineItem');
+
+        var phone = await crisisLine.findElement(By.css('.Phone'));
+        assert.equal(await phone.getText(), expectedText);
+    }
+
     return Yadda.localisation.English.library(dictionary)
         .then('I should see the results\n$table',
               unpromisify(seeTheResults))
         .then('I should see an info box in position $NUM',
               unpromisify(seeAnInfobox))
         .then('the info box should contain\n$lines',
-              unpromisify(checkInfobox));
+              unpromisify(checkInfobox))
+        .then('I should see a hotline in position $NUM which says "$STRING"',
+              unpromisify(hotlinePositionAndText))
+        ;
 })();

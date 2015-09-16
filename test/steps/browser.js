@@ -25,8 +25,7 @@ module.exports = (function() {
         .when('I search for "$STRING" and press enter',
               unpromisify(doSearchAndEnter))
         .when('I click on the search icon', unpromisify(clickSearchIcon))
-        .when('I click back from the title bar',
-              unpromisify(clickBack))
+        .when('I click back from the title bar', unpromisify(clickBack))
         .when('I pause for debugging', unpromisify(pauseToDebug))
         .then('I should be at $URL', unpromisify(checkURL))
         .then('I should see "$STRING"', unpromisify(thenISee))

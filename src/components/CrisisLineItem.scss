@@ -1,0 +1,51 @@
+.CrisisLineItem {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 6px;
+
+    .Phone > a {
+        font-size: 18px !important;
+        text-decoration: none;
+        color: $brand-pane-alt-dark;
+
+        display: block;
+        position: relative;
+        width: auto;
+
+        border: 1px solid;
+        border-color: $brand-pane-alt-dark;
+        border-radius: 3px;
+
+        padding: 6px;
+
+        &:hover, &:focus {
+            color: white;
+            background-color: $brand-pane-alt-dark;
+
+            .PhoneIcon {
+                fill: white !important;
+            }
+        }
+
+        .PhoneIcon {
+            transition: none !important;
+            fill: $brand-pane-alt-dark !important;
+            left: 0 !important;
+            top: -2px !important;
+        }
+
+        .kind {
+            padding-left: 30px;
+        }
+    }
+
+    h3, h3 a {
+        font-size: 14px !important;
+        font-weight: normal;
+        color: $brand-text-mid;
+        text-decoration: none;
+
+        margin-bottom: 6px;
+        padding-top: 6px;
+    }
+}
