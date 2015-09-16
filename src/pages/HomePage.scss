@@ -9,18 +9,24 @@
         color: white;
         background-color: $brand-bg-dark;
 
+        .logo {
+            width: auto !important;
+            padding-top: 20px !important;
+        }
+
         .LogotypeIcon {
             height: 90px !important;
             width: auto !important;
             padding: 0 !important;
-            padding-top: 20px !important;
 
-            .Ask {
+            // Ask
+            path {
                 fill: white !important;
             }
 
-            .Izzy {
-                fill: $brand-pane-alt-light;
+            // Izzy
+            path + path {
+                fill: $brand-pane-alt-light !important;
             }
         }
 
