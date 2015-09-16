@@ -11,7 +11,7 @@ Feature: Opening times
         And I am not part of any relevant demographics
 
     Scenario: Can show opening time tomorrow
-        Given today is a Tuesday
+        Given it is late on Tuesday
         # Navigating will undo the mocked time
         When I click on "Food"
         Then I should see the results
@@ -22,7 +22,7 @@ Feature: Opening times
         ------------------------------
 
     Scenario: Can show opening time 2 days hence
-        Given today is a Monday
+        Given it is late on Monday
         # Navigating will undo the mocked time
         When I click on "Food"
         Then I should see the results
@@ -33,7 +33,7 @@ Feature: Opening times
         ------------------------------
 
     Scenario: Can show opening time next week
-        Given today is a Wednesday
+        Given it is late on Wednesday
         # Navigating will undo the mocked time
         When I click on "Food"
         Then I should see the results

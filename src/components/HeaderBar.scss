@@ -1,8 +1,8 @@
 .HeaderBar {
-    background-color: $brand-pane-dark;
+    background-color: $brand-pane-alt-light;
 
     &, & a {
-       color: white;
+       color: white !important;
     }
 
     /* FIXME check these */

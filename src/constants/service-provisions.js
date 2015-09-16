@@ -15,7 +15,7 @@ import {
     keywords,
     not,
     provides,
-} from '../ServiceProvisions';
+} from '../iss/ServiceProvisions';
 
 /* Please keep this grouped and the groups sorted */
 var serviceProvisions: Array<ServiceProvision> = [

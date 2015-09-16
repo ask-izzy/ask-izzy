@@ -7,6 +7,7 @@ module.exports = {
         description: "",
         site: {id: 333, name: "phoneable"},
         now_open: { now_open: false },
+        opening_hours: [],
         phones: [
             {
                 "comment": "",
@@ -84,7 +85,7 @@ module.exports = {
         },
         service_types: ['Accommodation'],
         now_open: {
-            now_open: true,
+            now_open: null,
         },
         opening_hours: [],
         location: {
@@ -105,7 +106,7 @@ module.exports = {
         },
         service_types: ['Refuge'],
         now_open: {
-            now_open: true,
+            now_open: null,
         },
         opening_hours: [],
         location: {

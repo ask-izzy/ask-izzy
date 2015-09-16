@@ -24,12 +24,12 @@ type ymdWithDashesDate = string;
 type hmsWithColonsTime = string;
 type state = string; /* enum */
 type dayOfWeek = string; /* enum('Monday', 'Friday', etc) */
-type issOpeningHours = Array<{
+type issOpeningHours = {
     "close": hmsWithColonsTime,
     "day": dayOfWeek,
     "note": string,
     "open": hmsWithColonsTime,
-}>;
+};
 type phone = {
     "comment": string,
     "kind": string,

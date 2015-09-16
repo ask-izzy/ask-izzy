@@ -71,7 +71,7 @@ export default class ServicePane extends React.Component {
 
                     <hr />
 
-                    <OpeningTimes object={object} />
+                    <OpeningTimes object={object.open} />
                     <hr />
                     <Address {...object.location} />
                     <hr />
