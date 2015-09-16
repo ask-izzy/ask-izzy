@@ -234,6 +234,20 @@ app.get('/api/v3/search/', (req, res) => {
             .json({
                 error_message: "You have specifically asked for an error.",
             });
+    } else if (req.query.q == 'domestic violence') {
+        res.json({
+            meta: {
+                total_count: 1,
+                location: {
+                    name: "Richmond",
+                    suburb: "Richmond",
+                    state: "VIC",
+                },
+            },
+            objects: [
+                services.domesticviolence,
+            ],
+        });
     } else {
         /* conventional search */
         res.json({

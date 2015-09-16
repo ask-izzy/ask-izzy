@@ -5,7 +5,6 @@ Feature: Crisis Line
     # I want to see results including the crisis phone numbers
     # So that I can use the number to get help
 
-
     Background:
         Given my location is "Melbourne VIC"
         And my gender is female
@@ -21,4 +20,4 @@ Feature: Crisis Line
         When I visit /
         And I search for "domestic violence"
         And I click on the search icon
-        Then I should see a hotline in position 2 which says Mobile 0311111111
+        Then I should see a hotline in position 1 which says Freecall 1800 737 732
