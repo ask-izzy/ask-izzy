@@ -58,11 +58,11 @@ class BaseResultsPage extends BaseCategoriesPage {
          * service */
         try {
             var infobox = this.category.info;
+            index = _.findIndex(objects,
+                                object => !object.crisis && !object.infobox);
 
-            if (infobox) {
-                index = _.findIndex(objects, object => !object.crisis) + 1;
-
-                objects.splice(index, 0, {
+            if (infobox && index != -1) {
+                objects.splice(index + 1, 0, {
                     infobox: true,
                     node: infobox,
                 });
