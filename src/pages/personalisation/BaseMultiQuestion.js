@@ -81,9 +81,11 @@ class BaseMultiQuestion extends BaseQuestion {
                 />
                 <mui.List className="List">
                 {this.props.answers.map((answer, index) =>
-                    <div className="ListItem">
-                    <mui.ListItem
+                    <div
+                        className="ListItem"
                         key={index}
+                    >
+                    <mui.ListItem
                         primaryText={answer}
                         leftCheckbox={
                             <mui.Checkbox
