@@ -23,7 +23,7 @@
 
         .kind {
             font-weight: 500;
-            padding-left: 40px;
+            padding-left: 30px;
         }
 
         .number {
@@ -45,6 +45,8 @@
             width: 40px !important;
             position: absolute;
 
+            top: -2px;
+            left: 0px;
             fill: $brand-pane-alt-dark !important;
         }
     }
