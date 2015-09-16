@@ -39,6 +39,11 @@ export class HousingSubcategories extends BaseMultiQuestion {
             "Help with a legal issue",
         ],
     };
+
+    static showQuestion() {
+        /* only show this question if the user has someone to sleep tonight */
+        return (SleepTonight.answer == 'Yes');
+    }
 }
 
 export class Gender extends BaseQuestion {

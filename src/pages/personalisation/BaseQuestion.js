@@ -41,6 +41,11 @@ class BaseQuestion extends React.Component {
 
     // flow:disable
     static get summaryValue(): string {
+        return this.answer;
+    }
+
+    // flow:disable
+    static get answer(): string {
         return storage.getItem(this.defaultProps.name);
     }
 
@@ -52,13 +57,7 @@ class BaseQuestion extends React.Component {
      * be shown).
      */
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
-        if (!this.showQuestion()) {
-            /* If we don't want to show the question, return an unmodified
-             * request. */
-            return request;
-        }
-
-        var value = storage.getItem(this.defaultProps.name);
+        var value = this.answer;
 
         if (value) {
             return this.getSearchForAnswer(request, value);

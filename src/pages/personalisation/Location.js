@@ -79,6 +79,10 @@ class Location extends React.Component {
         return storage.getItem('location');
     }
 
+    static showQuestion(): boolean {
+        return true;
+    }
+
     async locateMe(): Promise<Object> {
         var maps = await Maps();
         var location = await Geolocation();
