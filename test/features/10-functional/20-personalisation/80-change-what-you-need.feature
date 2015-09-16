@@ -10,6 +10,7 @@ Feature: Change your personalisation settings
         And I have somewhere to sleep tonight
         And I need nothing for housing
         And my gender is female
+        And I am 27 years old
         And I am not part of any relevant demographics
 
     Scenario: View personalisation settings and return to search

@@ -46,6 +46,7 @@ class BaseCategoriesPage extends React.Component {
             components = [
                 require('./personalisation/Location'),
                 require('./personalisation/Questions').Gender,
+                require('./personalisation/Questions').Age,
                 require('./personalisation/Questions').Demographics,
             ];
         } else {
