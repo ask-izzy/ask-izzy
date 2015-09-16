@@ -67,6 +67,7 @@ class BaseQuestion extends React.Component {
         }
     }
 
+    // flow:disable
     static getSearchForAnswer(request: iss.searchRequest, answer: string):
         ?iss.searchRequest {
         return request;

@@ -57,7 +57,7 @@ app.get('/api/v3/search/', (req, res) => {
             meta: {},
             objects: [],  // FIXME: should return ourselves
         });
-    } else if (req.query.q == 'food') {
+    } else if (req.query.q.match(/food/) && !req.query.q.match(/pet/)) {
         res.json({
             meta: {
                 total_count: 1,
@@ -179,7 +179,7 @@ app.get('/api/v3/search/', (req, res) => {
                 },
             ],
         });
-    } else if (req.query.q == 'material aid') {
+    } else if (req.query.q.match(/material aid/)) {
         var object = {
             id: 444,
             name: "Community Lunch",
@@ -221,20 +221,20 @@ app.get('/api/v3/search/', (req, res) => {
                 object,
             ],
         });
-    } else if (req.query.q == 'zero results') {
+    } else if (req.query.q.match(/zero results/)) {
         res.json({
             meta: {
                 total_count: 0,
             },
             objects: [],
         });
-    } else if (req.query.q == 'cause error') {
+    } else if (req.query.q.match(/cause error/)) {
         res
             .status(402)
             .json({
                 error_message: "You have specifically asked for an error.",
             });
-    } else if (req.query.q == 'domestic violence') {
+    } else if (req.query.q.match(/domestic violence/)) {
         res.json({
             meta: {
                 total_count: 1,

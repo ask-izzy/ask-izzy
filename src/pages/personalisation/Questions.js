@@ -40,6 +40,31 @@ export class HousingSubcategories extends BaseMultiQuestion {
         ],
     };
 
+    static getSearchForAnswer(request, answers) {
+        if (!request.q) {
+            // flow needs to be sure request.q exists
+            throw new Error("Unexpected");
+        } else {
+            var q = request.q;
+        }
+
+        if (answers.has("Help with paying rent")) {
+            q += " rental assistance";
+        }
+
+        if (answers.has("Help with paying utility bills")) {
+            q += " utility bills";
+        }
+
+        if (answers.has("Help with a legal issue")) {
+            q += " tenancy";
+        }
+
+        request.q = q;
+
+        return request;
+    }
+
     static showQuestion() {
         /* only show this question if the user has someone to sleep tonight */
         return (SleepTonight.answer == 'Yes');
@@ -57,6 +82,19 @@ export class Gender extends BaseQuestion {
             "Neither/Both/Something else",
         ],
     };
+
+    static getSearchForAnswer(request, answer) {
+        if (!request.q) {
+            // flow needs to be sure request.q exists
+            throw new Error("Unexpected");
+        } else if (answer == "Male") {
+            request.q += " -female";
+        } else if (answer == "Female") {
+            request.q += " -male";
+        }
+
+        return request;
+    }
 
     // flow:disable
     static summaryLabel = "How do you identify?";
@@ -77,6 +115,48 @@ export class Demographics extends BaseMultiQuestion {
             "On parole or recently released from prison",
         ],
     };
+
+    static getSearchForAnswer(request, answers) {
+        if (!request.q) {
+            // flow needs to be sure request.q exists
+            throw new Error("Unexpected");
+        } else {
+            var q = request.q;
+        }
+
+        if (answers.has("Aboriginal or Torres Strait Islander")) {
+            q += " indigenous";
+        }
+
+        // Broken
+        // if (answers.has("LGBTIQ")) {
+        //     q += " lgbt";
+        // }
+
+        if (answers.has("Asylum seeker")) {
+            q += " refugee";
+        }
+
+        if (answers.has("Have a disability")) {
+            q += " disability";
+        }
+
+        if (answers.has("Have children")) {
+            q += " family";
+        }
+
+        if (answers.has("Have pets")) {
+            q += " pets";
+        }
+
+        if (answers.has("On parole or recently released from prison")) {
+            q += " parole";
+        }
+
+        request.q = q;
+
+        return request;
+    }
 }
 
 export default {
