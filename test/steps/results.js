@@ -72,6 +72,20 @@ module.exports = (function() {
         assert.equal(await phone.getText(), expectedText);
     }
 
+    async function assertHotlineHeading(text: string): Promise<void> {
+        var elements = await this.driver.findElements(
+            By.css('.CrisisLineItem, .CrisisHeader')
+        );
+
+        var classes = [
+            await elements[0].getAttribute('class'),
+            await elements[1].getAttribute('class'),
+        ];
+
+        assert.deepEqual(classes, ['CrisisHeader', 'CrisisLineItem']);
+        assert.equal(await elements[0].getText(), text);
+    }
+
     return Yadda.localisation.English.library(dictionary)
         .then('I should see the results\n$table',
               unpromisify(seeTheResults))
@@ -81,5 +95,7 @@ module.exports = (function() {
               unpromisify(checkInfobox))
         .then('I should see a hotline in position $NUM which says "$STRING"',
               unpromisify(hotlinePositionAndText))
+        .then('I should see "$STRING" before first hotline',
+              unpromisify(assertHotlineHeading))
         ;
 })();
