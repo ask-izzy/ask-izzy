@@ -48,6 +48,7 @@ class Address extends React.Component {
                 </ScreenReader>
                 <a
                     target="_blank"
+                    aria-label="Open Google Maps in a new tab"
                     href={`https://maps.google.com/?q=${query}`}
                 >
                     <icons.Map />
