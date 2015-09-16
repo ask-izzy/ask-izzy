@@ -123,13 +123,14 @@ class ResultsListPage extends BaseResultsPage {
                             object={object}
                         />;
 
+                    var klass = el.type.name || "other";
                     return <div
                         key={index}
                         className={
-                            `resultContainer resultContainer-${el.type.name || "other"}`
+                            `resultContainer resultContainer-${klass}`
                         }>
                         {el}
-                    </div>
+                    </div>;
                 })
             }</div>
             {
