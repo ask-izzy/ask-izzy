@@ -40,6 +40,18 @@ $padding: 15px;
     .description {
         color: $brand-text-mid;
         font-weight: 400 !important;
+        padding-bottom: 10px;
+    }
+
+    .OpeningTimes, .Address {
+        svg {
+            top: -6px !important;
+        }
+    }
+
+    .OpeningTimes, .Address, .CollapsedPhones {
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
     .List {
