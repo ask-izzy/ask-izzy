@@ -14,10 +14,10 @@ Feature: Crisis Line
         When I visit /
         And I click on "Food"
         Then I should be at /category/food
-        And I should see a hotline in position 2 which says Mobile 0311111111
+        And I should see a hotline in position 2 which says "Mobile 0311111111"
 
     Scenario: Search for helpline phone numbers for domestic violence
         When I visit /
         And I search for "domestic violence"
         And I click on the search icon
-        Then I should see a hotline in position 1 which says Freecall 1800 737 732
+        Then I should see a hotline in position 1 which says "Freecall 1800 737 732"

@@ -28,5 +28,5 @@ Feature: Service details page
         -------------------------------------------
         Freecall 1300 111 111
         Phone (03) 3333 3333
-        Phone 0477 777 777 (really a mobile)
+        (really a mobile) 0477 777 777
         -------------------------------------------

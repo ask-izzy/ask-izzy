@@ -31,8 +31,6 @@ module.exports = (function() {
         .then('I should see "$STRING"', unpromisify(thenISee))
         .then('I should see\n$STRING', unpromisify(thenISee))
         .then('I should not see "$STRING"', unpromisify(thenIDontSee))
-        .then('I should see a hotline in position $NUM which says $STRING',
-              unpromisify(hotlinePositionAndText))
         .then('search box should contain "$STRING"',
               unpromisify(searchContains))
         .then('the button "$STRING" should be disabled',
@@ -150,18 +148,6 @@ async function checkEnabled(text: string): Promise<void> {
     var enabled = await getButtonState(this.driver, text);
 
     assert.equal(enabled, true);
-}
-
-async function hotlinePositionAndText(expectedPos: number,
-        expectedText: string): Promise<void> {
-    var elements = await this.driver.findElements(
-            By.css('.CrisisLineItem, .ResultListItem, .Infobox')
-        );
-    var crisisLine = elements[expectedPos - 1];
-    assert.equal(await crisisLine.getAttribute('class'), 'CrisisLineItem');
-
-    var phone = await crisisLine.findElement(By.css('.Phone'));
-    assert.equal(await phone.getText(), expectedText);
 }
 
 async function assertItemChecked(label: string): Promise<void> {
