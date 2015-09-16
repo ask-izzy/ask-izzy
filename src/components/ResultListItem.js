@@ -12,7 +12,6 @@ import icons from "../icons";
 import iss from '../iss';
 import OpeningTimes from "./OpeningTimes";
 import TransportTime from "./TransportTime";
-
 var palette = colors.getPalette();
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
@@ -24,7 +23,12 @@ class ResultListItem extends React.Component {
     };
 
     // flow:disable not supported yet
-    static sampleProps = {default: {object: fixtures.ixa}};
+    static sampleProps = {default: {
+        object: Object.assign(
+            new iss.Service,
+            fixtures.ixa
+        ),},
+    };
 
     // flow:disable
     static defaultProps =  {
