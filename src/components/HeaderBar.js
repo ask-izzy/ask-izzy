@@ -25,11 +25,9 @@ class HeaderBar extends React.Component {
             <div className="HeaderBar">
                 <div className="primary">
                     {this.props.primaryText}
-                    &nbsp;
                 </div>
                 <div className="secondary">
                     {this.props.secondaryText}
-                    &nbsp;
                 </div>
                 {this.props.children}
             </div>
