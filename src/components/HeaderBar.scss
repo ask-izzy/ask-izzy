@@ -2,7 +2,7 @@
     background-color: $brand-pane-alt-light;
 
     &, & a {
-       color: white !important;
+       color: $brand-text-dark !important;
     }
 
     /* FIXME check these */
@@ -31,7 +31,7 @@
         transform: rotate(5deg);
 
         path, circle {
-            fill: white;
+            fill: $brand-text-dark;
         }
     }
 
