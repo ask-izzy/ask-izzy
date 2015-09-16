@@ -34,7 +34,7 @@ export class Age extends BaseQuestion {
         question: "How old are you?",
         answers: [
             "26 or younger",
-            "26 to 54",
+            "27 to 54",
             "55 or older",
         ],
     };
