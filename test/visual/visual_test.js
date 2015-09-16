@@ -10,7 +10,7 @@ import webDriverInstance, {seleniumBrowser} from '../support/webdriver';
 import components from '../../src/components';
 
 describe("Visual Components", function() {
-    var baseUrl = "http://localhost:8000";
+    var baseUrl = "http://localhost:" + process.env.PORT;
     var driver;
     var cfg;
 
