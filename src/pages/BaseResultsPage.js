@@ -6,6 +6,7 @@ import React from 'react';
 import Router from "react-router";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
+import _ from 'underscore';
 
 import iss from '../iss';
 import BaseCategoriesPage from './BaseCategoriesPage';
@@ -45,6 +46,7 @@ class BaseResultsPage extends BaseCategoriesPage {
     // flow:disable not supported yet
     get results(): Array<iss.issService> {
         var objects;
+        var index;
 
         if (this.state.objects) {
             objects = Array.from(this.state.objects);
@@ -52,12 +54,15 @@ class BaseResultsPage extends BaseCategoriesPage {
             objects = [];
         }
 
-        /* splice in an info box if it exists */
+        /* splice in an infobox (if it exists) after the first non-crisis
+         * service */
         try {
             var infobox = this.category.info;
 
             if (infobox) {
-                objects.splice(1, 0, {
+                index = _.findIndex(objects, object => !object.crisis) + 1;
+
+                objects.splice(index, 0, {
                     infobox: true,
                     node: infobox,
                 });
