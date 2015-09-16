@@ -1,7 +1,7 @@
-@import './colors.scss';
+@import './colors';
 
 body {
-    max-width: $max-width;
-    margin: auto;
     background-color: $desktop-side-column-color;
+    margin: auto;
+    max-width: $max-width;
 }
