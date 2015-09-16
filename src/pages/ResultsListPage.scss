@@ -1,3 +1,23 @@
+.resultContainer {
+    border-top: 10px solid $brand-bg-light;
+}
+
+.resultContainer:first-child {
+    border-top: none;
+}
+
+.resultContainer-other + .resultContainer {
+    border-top: none;
+}
+
+.resultContainer-CrisisLineItem + .resultContainer-CrisisLineItem {
+    border-top: none;
+}
+
+.resultContainer-ResultListItem + .resultContainer-ResultListItem {
+    border-top: 1px solid $list-item-hairline;
+}
+
 .ResultsListPage {
     .progress {
         width: 100%;

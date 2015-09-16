@@ -13,6 +13,7 @@ $padding: 15px;
     main {
         margin: 0;
         padding: $padding;
+        padding-bottom: 7px;
 
         background-color: $brand-bg-light;
     }
@@ -39,6 +40,18 @@ $padding: 15px;
     .description {
         color: $brand-text-mid;
         font-weight: 400 !important;
+        padding-bottom: 10px;
+    }
+
+    .OpeningTimes, .Address {
+        svg {
+            top: -6px !important;
+        }
+    }
+
+    .OpeningTimes, .Address, .CollapsedPhones {
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
     .List {
@@ -47,6 +60,18 @@ $padding: 15px;
             font-weight: 400 !important;
 
             border-bottom: 1px solid $list-item-hairline !important;
+        }
+    }
+
+    .siblings {
+        .List > :first-child {
+            border-top: 1px solid $list-item-hairline;
+        }
+
+        .ChevronIcon {
+            width: 35px !important;
+            height: 35px !important;
+            top: 2px !important;
         }
     }
 }

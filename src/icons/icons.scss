@@ -4,6 +4,10 @@
     }
 }
 
+.Icon {
+    transition: none !important;
+}
+
 .LogotypeIcon path {
     width: auto;
     height: auto;
@@ -24,7 +28,7 @@
     }
 }
 
-.Chevron {
+.ChevronIcon {
     padding-right: 0 !important;
 
     path {

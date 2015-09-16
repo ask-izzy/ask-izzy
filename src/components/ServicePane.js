@@ -109,9 +109,9 @@ export default class ServicePane extends React.Component {
         }
 
         return (
-            <div>
+            <div className="siblings">
                 <h3 className="padded">
-                    Other services at this location
+                    Also at this location
                 </h3>
                 <mui.List className="List">
                     {this.state.siblings.map((service, index) =>

@@ -2,7 +2,7 @@
     background-color: $brand-pane-alt-light;
 
     &, & a {
-       color: white !important;
+       color: $brand-text-dark !important;
     }
 
     /* FIXME check these */
@@ -14,12 +14,15 @@
         font-size: 22px;
         padding-top: 15px;
         padding-bottom: 15px;
+        min-height: 1em;
     }
 
     .secondary {
         font-weight: 400;
-        font-size: 18px;
+        font-size: 14px;
+        line-height: 1.4;
         padding-bottom: 20px;
+        min-height: 1em;
     }
 
     .LogoLightIcon {
@@ -30,7 +33,7 @@
         transform: rotate(5deg);
 
         path, circle {
-            fill: white;
+            fill: $brand-text-dark;
         }
     }
 

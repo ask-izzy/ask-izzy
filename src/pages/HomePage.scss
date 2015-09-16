@@ -33,8 +33,9 @@
         .branding-copy {
             width: 80%;
             margin: auto;
-            font-size: 22px;
+            font-size: 14px;
             font-weight: 400;
+            line-height: 1.4;
             padding: 0;
             padding-top: 10px;
             padding-bottom: 20px;
@@ -54,7 +55,7 @@
             width: 90%;
             margin-left: auto;
             margin-right: auto;
-            padding: 5px;
+            padding: 10px;
 
             -webkit-appearance: none;
             border-radius: 3px;
@@ -63,7 +64,7 @@
 
         .icon {
             position: absolute;
-            top: 0;
+            top: 6px !important;
             right: 5%;
             width: 28px !important;
             height: 28px !important;

@@ -11,7 +11,7 @@ export default class SvgIconLogoShadow extends React.Component {
         return (
             <mui.SvgIcon
                 {...this.props}
-                className={ `${this.props.className || ''} LogoShadowIcon` }
+                className={ `${this.props.className || ''} LogoShadowIcon Icon` }
                 viewBox="0 0 64 64"
                 dangerouslySetInnerHTML={{__html: ``}}
             >

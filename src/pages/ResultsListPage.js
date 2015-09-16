@@ -110,24 +110,29 @@ class ResultsListPage extends BaseResultsPage {
                 :
                     ''
             }
-            {
-                this.results.map((object, index) =>
-                    object.infobox ?
-                        <div key={index}>
-                            {React.addons.cloneWithProps(object.node)}
-                        </div>
+            <div className="resultsContainer">{
+                this.results.map((object, index) => {
+                    var el = object.infobox ?
+                        React.addons.cloneWithProps(object.node)
                     : object.crisis ?
                         <components.CrisisLineItem
                             object={object}
-                            key={index}
                         />
                     :
                         <components.ResultListItem
                             object={object}
-                            key={index}
-                        />
-                )
-            }
+                        />;
+
+                    var klass = el.type.name || "other";
+                    return <div
+                        key={index}
+                        className={
+                            `resultContainer resultContainer-${klass}`
+                        }>
+                        {el}
+                    </div>;
+                })
+            }</div>
             {
                 this.state.meta && this.state.meta.next ?
                     <mui.ListItem
