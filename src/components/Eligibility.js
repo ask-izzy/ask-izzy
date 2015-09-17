@@ -8,6 +8,13 @@ class Eligibility extends React.Component {
     // flow:disable not supported yet
     static sampleProps = {default: fixtures.ixa};
 
+    // flow:disable not supported yet
+    static propTypes = {
+        catchment: React.PropTypes.String,
+        eligibility_info: React.PropTypes.String,
+        ineligibility_info: React.PropTypes.String,
+    };
+
     eligibility(eligibility: string): Array<React.Element> {
         if (eligibility) {
             return eligibility.split("\n").map(
@@ -19,9 +26,9 @@ class Eligibility extends React.Component {
     }
 
     render(): React.Element {
-        var catchment = this.props.catchment;
-        var eligibilityInfo = this.props.eligibility_info;
-        var ineligibilityInfo = this.props.ineligibility_info;
+        var catchment: string = this.props.catchment;
+        var eligibilityInfo: string = this.props.eligibility_info;
+        var ineligibilityInfo: string = this.props.ineligibility_info;
         var eligibleMarkup;
         var ineligibleMarkup;
 
