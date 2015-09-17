@@ -7,8 +7,6 @@ import _ from "underscore";
 
 import ScreenReader from "./ScreenReader";
 import ServiceOpening from "../iss/ServiceOpening";
-import colors from "../constants/theme";
-var palette = colors.getPalette();
 
 import icons from '../icons';
 
