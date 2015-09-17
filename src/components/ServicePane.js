@@ -9,7 +9,7 @@ import _ from "underscore";
 
 import Address from "../components/Address";
 import CollapsedOpeningTimes from "../components/CollapsedOpeningTimes";
-import CollapsedPhones from "../components/CollapsedPhones";
+import ContactMethods from "../components/ContactMethods";
 import Eligibility from "../components/Eligibility";
 import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
@@ -80,7 +80,7 @@ export default class ServicePane extends React.Component {
                     <hr />
                     <Address {...object.location} />
                     <hr />
-                    <CollapsedPhones phones={phones} />
+                    <ContactMethods object={object} />
                 </main>
 
                 <Eligibility

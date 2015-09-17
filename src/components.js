@@ -3,8 +3,8 @@ import Address from './components/Address';
 import AppBar from './components/AppBar';
 import CategoryListItem from './components/CategoryListItem';
 import CollapsedOpeningTimes from './components/CollapsedOpeningTimes';
-import CollapsedPhones from './components/CollapsedPhones';
 import Collapser from './components/Collapser';
+import ContactMethods from './components/ContactMethods';
 import CrisisLineItem from './components/CrisisLineItem';
 import Eligibility from './components/Eligibility';
 import HeaderBar from './components/HeaderBar';
@@ -22,8 +22,8 @@ export default {
     AppBar: AppBar,
     CategoryListItem: CategoryListItem,
     CollapsedOpeningTimes: CollapsedOpeningTimes,
-    CollapsedPhones: CollapsedPhones,
     Collapser: Collapser,
+    ContactMethods: ContactMethods,
     CrisisLineItem: CrisisLineItem,
     Eligibility: Eligibility,
     HeaderBar: HeaderBar,
