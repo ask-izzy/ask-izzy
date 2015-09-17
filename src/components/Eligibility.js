@@ -1,4 +1,5 @@
 /* @flow */
+
 import React from "react";
 import fixtures from "../../fixtures/services";
 
@@ -7,7 +8,7 @@ class Eligibility extends React.Component {
     // flow:disable not supported yet
     static sampleProps = {default: fixtures.ixa};
 
-    eligibility(eligibility:string): Array<React.Element> {
+    eligibility(eligibility: string): Array<React.Element> {
         if (eligibility) {
             return eligibility.split("\n").map(
                 (line, idx) => <li key={idx}>{line}</li>
@@ -29,7 +30,7 @@ class Eligibility extends React.Component {
                 <div className="eligibility">
                     <h3>To use this service you should be</h3>
                     <ul>
-                        <li>Located in { catchment}</li>
+                        <li>Located in { catchment }</li>
                         { this.eligibility(eligibilityInfo) }
                     </ul>
                 </div>
