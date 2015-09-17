@@ -300,7 +300,7 @@ export async function request(path: string, data: ?searchRequest): Object {
      * https://github.com/jedmao/iso-http/issues/2
      * No flow until comprehensions are supported
     */
-    var serialized = ""
+    var serialized = "";
     if (data) {
         // Flow can't tell that `data` isn't null inside a closure
         var _data = data;
