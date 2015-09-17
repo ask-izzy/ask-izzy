@@ -2,7 +2,7 @@
     "preset": "airbnb",
 
     "fileExtensions": [".js", ".jsx"],
-    "excludeFiles": ["node_modules/**", "public/static/**"],
+    "excludeFiles": ["node_modules/**", "public/static/**", "interfaces/*"],
     "esnext": true,
 
     "disallowMultipleVarDecl": true,
