@@ -75,7 +75,7 @@ async function setAgeToMiddle(): Promise<void> {
     await gotoUrl(this.driver, '/');  // go anywhere to start the session
     await this.driver.executeScript(age => {
         sessionStorage.setItem('age', age);
-    }, "27 to 54");
+    }, "26 to 64");
 }
 
 async function setGender(gender: string): Promise<void> {

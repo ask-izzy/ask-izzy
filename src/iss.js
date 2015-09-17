@@ -19,6 +19,7 @@ export type searchRequest = {
     area?: string,
     location?: string,
     type?: string,
+    age_groups?: Array<string>,
 
     catchment?: boolean,
 
@@ -292,6 +293,35 @@ export async function request(path: string, data: ?searchRequest): Object {
 
     urlobj.auth = urlobj.search = urlobj.querystring = urlobj.query = null;
     url_ = url.format(urlobj);
+
+    /*
+     * Encode data into the URI ourselves
+     * until we can work around
+     * https://github.com/jedmao/iso-http/issues/2
+     * No flow until comprehensions are supported
+    */
+    var serialized = ""
+    if (data) {
+        // Flow can't tell that `data` isn't null inside a closure
+        var _data = data;
+        serialized = Object.keys(data).map(function (key) {
+            if (!_data[key]) {
+                throw new Error(`Invalid value specified for ${key}`);
+            }
+            /* ::` */
+            if (_data[key][Symbol.iterator]) {
+                return [
+                    for (v of _data[key])
+                        key + '=' + encodeURIComponent(v)
+                ].join('&');
+            }
+            /* ::` */
+            return `${key}=${encodeURIComponent(_data[key])}`;
+        }).join('&');
+    }
+
+    var joiner = (url_.indexOf('?') > -1) ? '&' : '?';
+    url_ = url_ + joiner + serialized;
 
     var response = await _request({
         url: url_,
