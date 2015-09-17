@@ -76,7 +76,7 @@ class ResultsListPage extends BaseResultsPage {
                     ''
                 :
                     <div className="progress">
-                        <mui.CircularProgress mode="indeterminate" />
+                        <icons.Loading />
                     </div>
                 }
 
