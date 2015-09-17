@@ -304,7 +304,7 @@ export async function request(path: string, data: ?searchRequest): Object {
     if (data) {
         // Flow can't tell that `data` isn't null inside a closure
         var _data = data;
-        serialized = Object.keys(data).map(function (key) {
+        serialized = Object.keys(_data).map(function (key) {
             if (!_data[key]) {
                 throw new Error(`Invalid value specified for ${key}`);
             }
