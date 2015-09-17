@@ -1,11 +1,15 @@
 /* @flow */
+
+"use strict";
+
 import React from "react";
-import Collapser from "./Collapser";
-import Phone from "./Phone";
-import Icons from "../icons";
 import mui from "material-ui";
-import fixtures from "../../fixtures/services";
+
+import Collapser from "./Collapser";
+import Icons from "../icons";
+import Phone from "./Phone";
 import ScreenReader from "./ScreenReader";
+import fixtures from "../../fixtures/services";
 
 class CollapsedPhones extends React.Component {
 

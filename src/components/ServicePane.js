@@ -8,9 +8,9 @@ import mui from "material-ui";
 import _ from "underscore";
 
 import Address from "../components/Address";
+import CollapsedOpeningTimes from "../components/CollapsedOpeningTimes";
 import CollapsedPhones from "../components/CollapsedPhones";
 import Eligibility from "../components/Eligibility";
-import OpeningTimes from "../components/OpeningTimes";
 import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
@@ -76,7 +76,7 @@ export default class ServicePane extends React.Component {
 
                     <hr />
 
-                    <OpeningTimes object={object.open} />
+                    <CollapsedOpeningTimes object={object} />
                     <hr />
                     <Address {...object.location} />
                     <hr />
