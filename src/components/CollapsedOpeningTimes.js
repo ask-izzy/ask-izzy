@@ -22,6 +22,7 @@ export default class CollapsedOpeningTimes extends React.Component {
                 <OpeningTimes object={this.props.object.open} />
                 {openingHours.length > 1 ?
                     <Collapser
+                        className="CollapsedOpeningTimes"
                         message="All times"
                     >
                     <ul>
@@ -29,9 +30,11 @@ export default class CollapsedOpeningTimes extends React.Component {
                         <li>
                             {record.day}
                             {' '}
-                            {formatTime(record.open)}
-                            &ndash;
-                            {formatTime(record.close)}
+                            <span className="time">
+                                {formatTime(record.open)}
+                                &ndash;
+                                {formatTime(record.close)}
+                            </span>
                         </li>
                     )}
                     </ul>
