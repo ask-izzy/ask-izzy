@@ -311,8 +311,7 @@ export async function request(path: string, data: ?searchRequest): Object {
             /* ::` */
             if (_data[key][Symbol.iterator]) {
                 return [
-                    for (v of _data[key])
-                        key + '=' + encodeURIComponent(v)
+                    for (v of _data[key]) key + '=' + encodeURIComponent(v)
                 ].join('&');
             }
             /* ::` */
