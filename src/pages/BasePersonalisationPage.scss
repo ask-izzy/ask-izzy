@@ -18,12 +18,6 @@
         }
     }
 
-    .ProgressIcon {
-        /* works around alignment of CircularProgress inside ListItem */
-        margin-top: -20px !important;
-        margin-left: -15px !important;
-    }
-
     .progress {
         width: 100%;
 
@@ -31,6 +25,9 @@
             display: block !important;
             margin-left: auto !important;
             margin-right: auto !important;
+
+            width: 60px !important;
+            height: 60px !important;
         }
     }
 
@@ -77,6 +74,16 @@
         }
 
         border-bottom: 1px solid $list-item-hairline !important;
+
+        .Icon {
+            top: -12px !important;
+            height: 48px !important;
+            width: 48px !important;
+        }
+
+        .LoadingIcon, .RadioUnselectedIcon, .RadioSelectedIcon {
+            top: -2px !important;
+        }
     }
 
     .SummaryItem {
