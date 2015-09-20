@@ -2,7 +2,6 @@
 
 import React from "react";
 import Router from "react-router";
-import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
@@ -12,7 +11,6 @@ import icons from "../icons";
 import iss from '../iss';
 import OpeningTimes from "./OpeningTimes";
 import TransportTime from "./TransportTime";
-var palette = colors.getPalette();
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class ResultListItem extends React.Component {

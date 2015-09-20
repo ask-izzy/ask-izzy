@@ -11,12 +11,9 @@ import Address from "../components/Address";
 import CollapsedPhones from "../components/CollapsedPhones";
 import Eligibility from "../components/Eligibility";
 import OpeningTimes from "../components/OpeningTimes";
-import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import iss from "../iss";
-
-var palette = colors.getPalette();
 
 export default class ServicePane extends React.Component {
 
