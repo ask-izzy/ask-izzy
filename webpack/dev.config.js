@@ -9,7 +9,7 @@ import webpack     from "webpack";
 import writeStats  from "./utils/write-stats";
 import notifyStats from "./utils/notify-stats";
 import env         from "./env";
-import progress    from "./progress";
+import progress    from "./utils/progress";
 import extractText from "./extract-text";
 
 var assetsPath = path.resolve(__dirname, "../public/static");
