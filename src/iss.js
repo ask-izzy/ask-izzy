@@ -305,16 +305,16 @@ export async function request(path: string, data: ?searchRequest): Object {
         // Flow can't tell that `data` isn't null inside a closure
         var _data = data;
         serialized = Object.keys(_data).map(function (key) {
-            var kv = (v) => `${key}=${encodeURIComponent(v)}`;
+            var serializeValue = (v) => `${key}=${encodeURIComponent(v)}`;
 
             if (!_data[key]) {
                 throw new Error(`Invalid value specified for ${key}`);
             }
 
             if (Array.isArray(_data[key])) {
-                return _data[key].map(kv).join('&');
+                return _data[key].map(serializeValue).join('&');
             } else
-                return kv(_data[key]);
+                return serializeValue(_data[key]);
         }).join('&');
     }
 
