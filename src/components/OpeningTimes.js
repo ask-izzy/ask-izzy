@@ -210,7 +210,8 @@ class OpeningTimes extends React.Component {
         var end = this.ifTime`until ${open.end}`;
         return (
             <span className="when">
-                { open.day } { start } { end } ({ open.note })
+                { open.day } { start } { end }
+                { open.note ? ` (${open.note})` : ''}
             </span>
         );
     }
