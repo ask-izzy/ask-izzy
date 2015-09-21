@@ -7,9 +7,11 @@ import mui from "material-ui";
 import _ from "underscore";
 
 import Collapser from "./Collapser";
+import Email from "./Email";
 import Icons from "../icons";
 import Phone from "./Phone";
 import ScreenReader from "./ScreenReader";
+import Web from "./Web";
 import fixtures from "../../fixtures/services";
 
 class ContactMethods extends React.Component {
@@ -33,8 +35,8 @@ class ContactMethods extends React.Component {
 
         var contacts = [].concat(
             phones.map(phone => Object.assign({ component: Phone }, phone)),
-            emails.map(email => Object.assign({ component: null }, email)),
-            [{ component: null, url: web }],
+            emails.map(email => Object.assign({ component: Email }, email)),
+            [{ component: Web, url: web }],
         );
 
         if (contacts.length > 2) {
@@ -66,14 +68,8 @@ class ContactMethods extends React.Component {
     }
 
     renderContactMethod(record: Object, idx: number): React.Element {
-        console.log(record);
-        if (record.component) {
-            return React.createElement(record.component, record);
-        } else {
-            return (
-                <div>Unhandled {record}</div>
-            );
-        }
+        Object.assign(record, {key: idx});
+        return React.createElement(record.component, record);
     }
 }
 

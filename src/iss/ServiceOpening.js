@@ -80,6 +80,7 @@ export default class ServiceOpening {
         this._closing_times = _.compact(closingTimes);
     }
 
+    // flow:disable
     get openingTimes(): Array<openingHours> {
         return this._opening_times;
     }
