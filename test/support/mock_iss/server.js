@@ -248,6 +248,12 @@ app.get('/api/v3/search/', (req, res) => {
                 services.domesticviolence,
             ],
         });
+    } else if (req.query.q.match(/elasticsearch/)) {
+        res
+            .status(503)
+            .json({
+                error_message: 'The Elasticsearch service is unavailable.',
+            });
     } else if (req.query.area == "carlt") {
         res
             .status(402)
