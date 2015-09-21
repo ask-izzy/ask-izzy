@@ -1,6 +1,6 @@
 @media print {
     path {
-        fill: black !important;
+        fill: $black !important;
     }
 }
 
@@ -23,8 +23,8 @@
     }
 
     &.size-30 {
-        height: 30px !important;
         width: 30px !important;
+        height: 30px !important;
     }
 }
 
@@ -38,7 +38,7 @@
 
 .ChevronBackIcon {
     path {
-        fill: white !important;
+        fill: $white !important;
     }
 }
 
@@ -46,11 +46,11 @@
 .CheckboxUnselectedIcon,
 .RadioSelectedIcon,
 .RadioUnselectedIcon {
-    height: 40px !important;
-    width: 40px !important;
-
     top: -8px !important;
     left: -6px !important;
+
+    width: 40px !important;
+    height: 40px !important;
 
     path {
         fill: $brand-text-dark !important;
@@ -61,7 +61,12 @@
     animation: rotation 3s infinite linear;
 
     @keyframes rotation {
-        from {transform: rotate(0deg);}
-        to   {transform: rotate(359deg);}
+        from {
+            transform: rotate(0deg);
+        }
+
+        to   {
+            transform: rotate(359deg);
+        }
     }
 }

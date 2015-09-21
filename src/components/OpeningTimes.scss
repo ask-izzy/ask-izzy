@@ -4,12 +4,12 @@
 
     .ColoredIcon {
         /* override mui.SvgIcon's inline styles */
-        height: 50px !important;
-        width: 50px !important;
-
         position: absolute;
         top: -17px;
         left: -16px;
+
+        width: 50px !important;
+        height: 50px !important;
     }
 
     .open {
