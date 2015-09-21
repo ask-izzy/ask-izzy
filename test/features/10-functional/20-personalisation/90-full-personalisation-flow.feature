@@ -36,7 +36,7 @@ Feature: Personalisation
         When I click on "Female"
         Then I should see "How old are you?"
 
-        When I click on "26 or younger"
+        When I click on "25 or younger"
         Then I should see "Do any of these apply to you?"
 
         When I click on "Done"
@@ -66,7 +66,7 @@ Feature: Personalisation
         When I click on "Female"
         Then I should see "How old are you?"
 
-        When I click on "26 or younger"
+        When I click on "25 or younger"
         Then I should see "Do any of these apply to you?"
 
         When I click on "Done"
