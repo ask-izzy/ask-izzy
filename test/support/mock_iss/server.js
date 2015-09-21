@@ -57,6 +57,12 @@ app.get('/api/v3/search/', (req, res) => {
             meta: {},
             objects: [],  // FIXME: should return ourselves
         });
+    } else if (req.query.area == "carlt") {
+        res
+            .status(402)
+            .json({
+                error_message: 'Could not find a location matching "carlt"',
+            });
     } else if (req.query.q.match(/food/) && !req.query.q.match(/pet/)) {
         res.json({
             meta: {
@@ -248,17 +254,11 @@ app.get('/api/v3/search/', (req, res) => {
                 services.domesticviolence,
             ],
         });
-    } else if (req.query.q.match(/elasticsearch/)) {
+    } else if (req.query.q.match(/elasticsearch unavailable/)) {
         res
             .status(503)
             .json({
                 error_message: 'The Elasticsearch service is unavailable.',
-            });
-    } else if (req.query.area == "carlt") {
-        res
-            .status(402)
-            .json({
-                error_message: 'Could not find a location matching "carlt"',
             });
     } else {
         /* conventional search */

@@ -13,7 +13,7 @@ Feature: Error information
         And I am not part of any relevant demographics
 
     Scenario: Search error
-        When I search for "elasticsearch" and press enter
+        When I search for "elasticsearch unavailable" and press enter
         Then I should see "Sorry, I couldn't do this search."
         And I should see "The Elasticsearch service is unavailable."
         And I should see "Go back"

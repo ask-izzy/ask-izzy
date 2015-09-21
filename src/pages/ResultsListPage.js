@@ -47,19 +47,19 @@ class ResultsListPage extends BaseResultsPage {
                     secondaryText={
                         this.state.statusCode == 402 ?
                             <div>
-                                { this.errorMessage() }
-                                { this.homeLink() }
+                                {this.errorMessage()}
+                                {this.homeLink()}
                                 {' '}
-                                { this.personalisationLink() }
+                                {this.personalisationLink()}
                             </div>
                         : this.state.error ?
                             <div>
-                                { this.errorMessage() }
-                                { this.homeLink() }
+                                {this.errorMessage()}
+                                {this.homeLink()}
                             </div>
                         :
                             <div>
-                                { this.personalisationLink() }
+                                {this.personalisationLink()}
                             </div>
                     }
                 />
@@ -79,11 +79,13 @@ class ResultsListPage extends BaseResultsPage {
     }
 
     errorMessage(): React.Element {
+
         var message = this.state.error;
         return <p className="errorMessage">{ message }</p>;
     }
 
     homeLink(): React.Element {
+
         var linkText = "Go back";
         return <Router.Link
                    className="homeLink"
@@ -92,6 +94,7 @@ class ResultsListPage extends BaseResultsPage {
     }
 
     personalisationLink(): React.Element {
+
         var personaliseLink = `${this.getPath()}/personalise/summary`;
         return <Router.Link
                    className="personalisationLink"
