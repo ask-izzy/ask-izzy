@@ -33,6 +33,13 @@ class ContactMethods extends React.Component {
             web,
         } = this.props.object;
 
+        var filteredPhoneKinds = new Set(['fax', 'tty']);
+        var phoneOrder = ['freecall', 'phone', 'mobile'];
+
+        phones = _.filter(phones, p => !filteredPhoneKinds.has(p.kind));
+        phones = _(phones).sortBy(p => phoneOrder.indexOf(p.kind));
+        phones = _(phones).uniq(p => p.number);
+
         var contacts = [].concat(
             phones.map(phone => Object.assign({ component: Phone }, phone)),
             emails.map(email => Object.assign({ component: Email }, email)),
