@@ -327,7 +327,6 @@ export async function request(path: string, data: ?searchRequest): Object {
         headers: {
             Accept: 'application/json',
         },
-        data: data,
     });
 
     return JSON.parse(response.text);
