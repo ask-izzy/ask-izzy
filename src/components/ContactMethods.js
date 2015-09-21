@@ -18,12 +18,32 @@ class ContactMethods extends React.Component {
 
     // flow:disable not supported yet
     static sampleProps = {
-        default: {object: {phones: fixtures.ixa.phones, expanded: false}},
-        open: {object: {phones: fixtures.ixa.phones, expanded: true}},
-        "two numbers": {object: {phones: [
-            {kind: "phone", number: "(03) 3333 3333"},
-            {kind: "phone", number: "(03) 5555 5555"},
-        ],},},
+        default: {
+            object: {
+                phones: fixtures.ixa.phones,
+                emails: [],
+                web: null,
+                expanded: false,
+            },
+        },
+        open: {
+            object: {
+                phones: fixtures.ixa.phones,
+                emails: [],
+                web: null,
+                expanded: true,
+            },
+        },
+        "two numbers": {
+            object: {
+                phones: [
+                    {kind: "phone", number: "(03) 3333 3333"},
+                    {kind: "phone", number: "(03) 5555 5555"},
+                ],
+                emails: [],
+                web: null,
+            },
+        },
     };
 
     render(): React.Element {
