@@ -248,6 +248,12 @@ app.get('/api/v3/search/', (req, res) => {
                 services.domesticviolence,
             ],
         });
+    } else if (req.query.area == "carlt") {
+        res
+            .status(402)
+            .json({
+                error_message: 'Could not find a location matching "carlt"',
+            });
     } else {
         /* conventional search */
         res.json({
