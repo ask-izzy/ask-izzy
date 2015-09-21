@@ -126,6 +126,11 @@ class OpeningTimes extends React.Component {
             return "";
         }
 
+        // Reject invalid dates
+        if (_(values).any((v) => moment.isMoment(v) && !v.isValid())) {
+            return "";
+        }
+
         var timeValues = values.map(function(v) {
             if (moment.isMoment(v)) {
                 return v.format('h:mm A');
@@ -133,10 +138,6 @@ class OpeningTimes extends React.Component {
 
             return v;
         });
-
-        if (_(timeValues).contains('Invalid date')) {
-            return "";
-        }
 
         // flow:disable doesn't know about raw
         return String.raw(strings, ...timeValues);
