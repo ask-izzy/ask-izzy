@@ -128,10 +128,12 @@ class BaseResultsPage extends BaseCategoriesPage {
                     var data = JSON.parse(response.text);
                     this.setState({
                         error: data.error_message,
+                        statusCode: response.status,
                     });
                 } catch (e) {
                     this.setState({
                         error: `An error occurred (${response.status})`,
+                        statusCode: response.status,
                     });
                 }
 
