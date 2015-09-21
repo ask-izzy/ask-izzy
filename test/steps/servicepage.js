@@ -21,7 +21,7 @@ async function asyncFilter(arr, check) {
 module.exports = (function() {
 
     async function checkPhoneNumbers(lines: Array<string>): Promise<void> {
-        var phoneElems = await this.driver.findElements(By.css('.Phone'));
+        var phoneElems = await this.driver.findElements(By.css('.Contact'));
         var visiblePhoneElems = await asyncFilter(
             phoneElems,
             (e) => e.isDisplayed()
@@ -36,6 +36,7 @@ module.exports = (function() {
     }
 
     return Yadda.localisation.English.library(dictionary)
-        .then('I should see the phone numbers\n$lines',
-              unpromisify(checkPhoneNumbers));
+        .then('I should see the contacts\n$lines',
+              unpromisify(checkPhoneNumbers))
+        ;
 })();

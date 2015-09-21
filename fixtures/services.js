@@ -7,7 +7,44 @@ module.exports = {
         description: "",
         site: {id: 333, name: "phoneable"},
         now_open: { now_open: false },
-        opening_hours: [],
+        opening_hours: [
+            {
+                "close": "17:00:00",
+                "day": "Monday",
+                "note": "",
+                "open": "09:00:00"
+            },
+            {
+                "close": "17:00:00",
+                "day": "Tuesday",
+                "note": "",
+                "open": "09:00:00"
+            },
+            {
+                "close": "17:00:00",
+                "day": "Tuesday",
+                "note": "",
+                "open": "09:00:00"
+            },
+            {
+                "close": "17:00:00",
+                "day": "Wednesday",
+                "note": "",
+                "open": "08:00:00"
+            },
+            {
+                "close": "17:00:00",
+                "day": "Thursday",
+                "note": "",
+                "open": "09:00:00"
+            },
+            {
+                "close": "17:00:00",
+                "day": "Friday",
+                "note": "",
+                "open": "09:00:00"
+            }
+        ],
         phones: [
             {
                 "comment": "",
@@ -40,6 +77,8 @@ module.exports = {
                 "number": "(03) 9999 9999"
             },
         ],
+        emails: [],
+        web: null,
         location: {},
     },
     housingService: {
@@ -59,6 +98,8 @@ module.exports = {
         },
         opening_hours: [],
         phones: [],
+        emails: [],
+        web: null,
         location: {
             suburb: 'Richmond',
             point: {
@@ -300,6 +341,8 @@ module.exports = {
         },
         opening_hours: [],
         phones: [],
+        emails: [],
+        web: null,
         location: {
             suburb: 'Carlton',
         },

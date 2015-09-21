@@ -1,0 +1,25 @@
+.CollapsedOpeningTimes {
+    position: relative;
+
+    & > a {
+        position: absolute;
+
+        top: -26px;
+        right: 16px;
+    }
+
+    ul {
+        margin: 0;
+        margin-left: 25px;
+        padding: 0;
+
+        & > li {
+            list-style-type: none;
+        }
+
+        .time {
+            position: absolute;
+            left: 33%;
+        }
+    }
+}

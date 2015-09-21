@@ -5,35 +5,31 @@ import { titleize } from "underscore.string";
 import Icons from "../icons";
 import fixtures from "../../fixtures/services";
 
-class Phone extends React.Component {
+export default class Email extends React.Component {
 
     // flow:disable not supported yet
-    static sampleProps = {default: fixtures.ixa.phones[0]};
-
-    // flow:disable not supported yet
-    get href(): string {
-        return "tel:" + this.props.number.replace(/[^0-9\+]/g, '');
-    }
+    static sampleProps = {default: fixtures.ixa.emails[0]};
 
     render(): React.Element {
+        var {
+            email,
+            comment,
+        } = this.props;
+
         return (
-            <div className="Contact Phone">
-                <a href={this.href}>
-                    <Icons.Phone />
+            <div className="Contact Email">
+                <a href={`mailto:${email}`}>
                     <span className="kind">
                         { this.props.comment ?
                             this.props.comment
                         :
-                            titleize(this.props.kind)
+                            "Email"
                         }
                     </span>
                     {' '}
-                    <span className="number">{this.props.number}</span>
+                    <span className="email">{email}</span>
                 </a>
             </div>
         );
     }
-
 }
-
-export default Phone;
