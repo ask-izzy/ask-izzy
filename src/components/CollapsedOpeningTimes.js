@@ -4,6 +4,7 @@
 
 import React from "react";
 import moment from "moment";
+import _ from "underscore";
 
 import ServiceOpening from "../iss/ServiceOpening";
 import Collapser from "./Collapser";
@@ -63,7 +64,19 @@ export default class CollapsedOpeningTimes extends React.Component {
     };
 
     render(): React.Element {
-        var openingHours = this.props.object.openingTimes;
+        var order = [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+            "Public Holiday",
+        ];
+
+        var openingHours = _(this.props.object.openingTimes)
+            .sortBy(p => order.indexOf(p.day));
 
         return (
             <div>
@@ -77,7 +90,7 @@ export default class CollapsedOpeningTimes extends React.Component {
                     <ul>
                     {openingHours.map((record, idx) =>
                         <li key={idx} >
-                            {record.day}
+                            <span className="day">{record.day}</span>
                             {' '}
                             <span className="time">
                                 {formatTime(record.open)}

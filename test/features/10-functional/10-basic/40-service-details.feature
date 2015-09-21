@@ -19,14 +19,29 @@ Feature: Service details page
 
     Scenario: The phone numbers (without fax) are available
         When I visit /service/5551234
-        Then I should see the phone numbers
+        Then I should see the contacts
         -------------------------------------------
         Freecall 1300 111 111
         -------------------------------------------
         When I click on "Other contact options"
-        Then I should see the phone numbers
+        Then I should see the contacts
         -------------------------------------------
         Freecall 1300 111 111
         Phone (03) 3333 3333
         (really a mobile) 0477 777 777
         -------------------------------------------
+
+    Scenario: Can view all opening times
+        When I visit /service/5551234
+        And I click on "All times"
+
+        Then I should see the results
+        ----------------------------
+        Day (day) | Time (time)
+        ============================
+        Monday    | 9:00 AM–5:00 PM
+        Tuesday   | 9:00 AM–5:00 PM
+        Wednesday | 8:00 AM–5:00 PM
+        Thursday  | 9:00 AM–5:00 PM
+        Friday    | 9:00 AM–5:00 PM
+        ----------------------------
