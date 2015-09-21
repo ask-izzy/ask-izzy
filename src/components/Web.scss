@@ -3,37 +3,39 @@
 }
 
 .Web {
-    width: 100%;
     display: block;
+    width: 100%;
 
     a {
-        font-size: 18px !important;
-        text-decoration: none;
-        color: $brand-pane-alt-dark;
-
         display: block;
         position: relative;
         width: auto;
 
-        border: 1px solid;
-        border-color: $brand-pane-alt-dark;
-        border-radius: 3px;
-
         padding: 6px;
 
-        overflow: hidden;
+        border: 1px solid;
+        border-radius: 3px;
+        border-color: $brand-pane-alt-dark;
+
+        color: $brand-pane-alt-dark;
+        font-size: 18px !important;
+        text-decoration: none;
+
         text-overflow: ellipsis;
+        overflow: hidden;
 
         .web {
             white-space: nowrap;
         }
 
-        &:hover, &:focus {
-            color: white;
+        &:hover,
+        &:focus {
             background-color: $brand-pane-alt-dark;
 
+            color: $white;
+
             .PhoneIcon {
-                fill: white !important;
+                fill: $white !important;
             }
         }
     }
