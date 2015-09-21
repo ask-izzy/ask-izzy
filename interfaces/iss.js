@@ -61,7 +61,7 @@ type issService = {
     },
     "catchment": string,
     "cost": string,
-    "crisis": Boolean,
+    "crisis": boolean,
     "description": string,
     "eligibility_info": string,
     "emails": Array<{
@@ -70,12 +70,12 @@ type issService = {
     }>,
     "endpoints": Array<endpoint>,
     "funding_body": string,
-    "healthcare_card_holders": Boolean,
+    "healthcare_card_holders": boolean,
     "id": number,
     "ineligibility_info": string,
     "intake_info": string,
     "intake_point": string,
-    "is_bulk_billing": Boolean,
+    "is_bulk_billing": boolean,
     "languages": Array<string>,
     "last_updated": ymdWithDashesDate,
     "location": {
@@ -95,13 +95,13 @@ type issService = {
         "suburb": string
     },
     "name": string,
-    "ndis_approved": Boolean,
+    "ndis_approved": boolean,
     "now_open": {
         "local_time": hmsWithColonsTime,
         "notes": string,
-        "now_open": boolean
+        "now_open": ?boolean
     },
-    "opening_hours": issOpeningHours,
+    "opening_hours": Array<issOpeningHours>,
     "parking_info": string,
     "phones": Array<phone>,
     "postal_address": Array<{

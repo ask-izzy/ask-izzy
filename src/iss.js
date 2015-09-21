@@ -114,6 +114,10 @@ export async function requestObjects(
 }
 
 export class Service {
+    constructor(props: issService) {
+        Object.assign(this, props);
+    }
+
     abn: string;
     accessibility: issAccessibility;
     accessibility_details: string;
@@ -316,7 +320,7 @@ export async function getService(
 ): Promise<Service> {
     var response = await request(`/api/v3/service/${id}/`);
 
-    return Object.assign(new Service(), response);
+    return new Service(response);
 }
 
 export default {

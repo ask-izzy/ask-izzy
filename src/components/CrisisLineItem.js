@@ -18,11 +18,8 @@ class CrisisLineItem extends React.Component {
 
     // flow:disable not supported yet
     static sampleProps = {default: {
-        object: Object.assign(
-            new iss.Service(),
-            fixtures.domesticviolence
-        )},
-    };
+        object: new iss.Service(fixtures.domesticviolence),
+    }};
 
     render(): ReactElement {
         var {
