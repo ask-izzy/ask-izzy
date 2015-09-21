@@ -1,12 +1,7 @@
-#########################
-## Sample Sass Lint File
-#########################
-# Linter Options
 options:
 files:
     include: 'src/**/*.s+(a|c)ss'
     ignore: 'src/styles/normalize.scss'
-
 rules:
     border-zero: 2
     clean-import-paths: 2
