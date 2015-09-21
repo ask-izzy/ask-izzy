@@ -36,8 +36,11 @@ class ContactMethods extends React.Component {
         var contacts = [].concat(
             phones.map(phone => Object.assign({ component: Phone }, phone)),
             emails.map(email => Object.assign({ component: Email }, email)),
-            [{ component: Web, url: web }],
         );
+
+        if (web) {
+            contacts.push({ component: Web, url: web });
+        }
 
         if (contacts.length > 2) {
             /* render one contact method and then put the rest in a
@@ -58,7 +61,7 @@ class ContactMethods extends React.Component {
             /* render 2 contact methods */
             return (
                 <div className="ContactMethods">
-                    {contacts.map(this.renderContactMethod)};
+                    {contacts.map(this.renderContactMethod)}
                 </div>
             );
         } else {

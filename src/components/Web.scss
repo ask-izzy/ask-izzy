@@ -21,6 +21,9 @@
 
         padding: 6px;
 
+        overflow: hidden;
+        text-overflow: ellipsis;
+
         .web {
             white-space: nowrap;
         }

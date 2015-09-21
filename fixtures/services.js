@@ -40,6 +40,8 @@ module.exports = {
                 "number": "(03) 9999 9999"
             },
         ],
+        emails: [],
+        web: null,
         location: {},
     },
     housingService: {
@@ -59,6 +61,8 @@ module.exports = {
         },
         opening_hours: [],
         phones: [],
+        emails: [],
+        web: null,
         location: {
             suburb: 'Richmond',
             point: {
@@ -300,6 +304,8 @@ module.exports = {
         },
         opening_hours: [],
         phones: [],
+        emails: [],
+        web: null,
         location: {
             suburb: 'Carlton',
         },

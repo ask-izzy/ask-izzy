@@ -21,6 +21,9 @@
 
         padding: 6px;
 
+        overflow: hidden;
+        text-overflow: ellipsis;
+
         .kind {
             font-weight: 500;
         }
