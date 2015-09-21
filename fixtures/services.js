@@ -527,4 +527,25 @@ module.exports = {
         "type": "service",
         "web": "http://www.1800respect.org.au"
     },
+    unhelpful: {
+        id: 13844,
+        name: "Unhelpful Service",
+        description: "Doesnt do a thing",
+        site: {
+            name: "Unhelpful.com",
+            id: 994,
+        },
+        catchment: "Carlton",
+        eligibility_info: "",
+        ineligibility_info: "",
+        service_types: [],
+        now_open: {
+            now_open: false,
+        },
+        opening_hours: [],
+        phones: [],
+        location: {
+            suburb: 'Carlton',
+        },
+    },
 }

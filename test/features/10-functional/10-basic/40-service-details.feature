@@ -13,6 +13,22 @@ Feature: Service details page
         When I visit /service/13841
         Then I should see "Advice on legal matters"
 
+    Scenario: Service provisions header is present if there are any
+        When I visit /service/111
+        Then I should see "What you can get here"
+
+    Scenario: Service provisions header is absent if there are none
+        When I visit /service/13844
+        Then I should not see "What you can get here"
+
+    Scenario: Ineligibility is present if there are criteria
+        When I visit /service/111
+        Then I should see "You are ineligible if"
+
+    Scenario: Ineligibility is absent if there are no criteria
+        When I visit /service/13844
+        Then I should not see "You are ineligible if"
+
     Scenario: The address is a link to google maps
         When I visit /service/866464
         Then I can get to google maps by clicking "33 Elizabeth Street Richmond VIC 3121"
