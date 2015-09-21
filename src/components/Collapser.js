@@ -46,7 +46,7 @@ class Collapser extends React.Component {
         return "";
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         return (
             <div
                 className={`Collapser ${this.props.className}`}

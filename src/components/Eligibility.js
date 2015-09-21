@@ -25,7 +25,7 @@ class Eligibility extends React.Component {
         return [];
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         var catchment: string = this.props.catchment;
         var eligibilityInfo: string = this.props.eligibility_info;
         var ineligibilityInfo: string = this.props.ineligibility_info;

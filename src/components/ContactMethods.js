@@ -46,7 +46,7 @@ class ContactMethods extends React.Component {
         },
     };
 
-    render(): React.Element {
+    render(): ReactElement {
         var {
             phones,
             emails,
@@ -92,7 +92,7 @@ class ContactMethods extends React.Component {
                 </div>
             );
         } else {
-            return null;
+            return <span />;
         }
 
     }

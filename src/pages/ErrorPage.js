@@ -6,7 +6,7 @@ class ErrorPage extends React.Component {
 
     props: { err: { message: string } };
 
-    render(): React.Element {
+    render(): ReactElement {
         var { err } = this.props;
         return (
             <div>

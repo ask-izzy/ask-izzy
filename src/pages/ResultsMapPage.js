@@ -125,7 +125,7 @@ class ResultsMapPage extends BaseResultsPage {
         }
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         var selectedServices = this.state.selectedServices || [];
 
         return (
@@ -151,7 +151,7 @@ class ResultsMapPage extends BaseResultsPage {
         );
     }
 
-    renderMap(): React.Element {
+    renderMap(): ReactElement {
         var selectedServices = this.state.selectedServices || [];
         var mapHeight = 0;
 

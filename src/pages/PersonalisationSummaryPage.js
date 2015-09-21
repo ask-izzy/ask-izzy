@@ -24,7 +24,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         this.setState({subpage: 0});
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         var subpage;
 
         if (this.state.subpage > 0) {

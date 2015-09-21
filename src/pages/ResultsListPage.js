@@ -11,7 +11,7 @@ import components from '../components';
 import icons from '../icons';
 
 class ResultsListPage extends BaseResultsPage {
-    render(): React.Element {
+    render(): ReactElement {
         var personaliseLink = `${this.getPath()}/personalise/summary`;
 
         return (
@@ -84,7 +84,7 @@ class ResultsListPage extends BaseResultsPage {
         );
     }
 
-    renderResults(): React.Element {
+    renderResults(): ReactElement {
 
         return (
             <mui.List className="List results">

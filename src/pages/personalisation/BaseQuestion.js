@@ -98,7 +98,7 @@ class BaseQuestion extends React.Component {
         this.triggerNext();
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         var selected =
             this.state.selected || storage.getItem(this.props.name);
 

@@ -47,7 +47,7 @@ class ServicePage extends React.Component {
         this.loadService();
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         var {
             object,
         } = this.state;

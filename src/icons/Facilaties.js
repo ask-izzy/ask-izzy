@@ -7,7 +7,7 @@ import mui from "material-ui";
 
 export default class SvgIconFacilaties extends React.Component {
 
-    render(): React.Element {
+    render(): ReactElement {
         return (
             <mui.SvgIcon
                 {...this.props}
