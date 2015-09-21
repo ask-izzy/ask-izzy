@@ -307,10 +307,6 @@ export async function request(path: string, data: ?searchRequest): Object {
         serialized = Object.keys(_data).map(function (key) {
             var serializeValue = (v) => `${key}=${encodeURIComponent(v)}`;
 
-            if (!_data[key]) {
-                throw new Error(`Invalid value specified for ${key}`);
-            }
-
             if (Array.isArray(_data[key])) {
                 return _data[key].map(serializeValue).join('&');
             } else
