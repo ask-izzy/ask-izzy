@@ -10,7 +10,7 @@ class ScreenReader extends React.Component {
         ),
     },};
 
-    render(): React.Element {
+    render(): ReactElement {
         return (
             <div
                 className="ScreenReader"

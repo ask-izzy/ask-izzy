@@ -27,7 +27,7 @@ class CrisisLineItem extends React.Component {
         ),},
     };
 
-    render(): React.Element {
+    render(): ReactElement {
         var {
             object,
         } = this.props;
@@ -48,11 +48,11 @@ class CrisisLineItem extends React.Component {
                         </h3>
                         <Phone {...phone} />
                     </div>
-                    );
+                );
             }
         }
 
-        return null;
+        return <span />;
     }
 }
 

@@ -34,7 +34,7 @@ class Infobox extends React.Component {
         linkText: "More information",
     };
 
-    render(): React.Element {
+    render(): ReactElement {
         var {
             linkText,
             ...other

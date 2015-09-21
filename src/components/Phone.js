@@ -15,7 +15,7 @@ class Phone extends React.Component {
         return "tel:" + this.props.number.replace(/[^0-9\+]/g, '');
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         return (
             <div className="Contact Phone">
                 <a href={this.href}>

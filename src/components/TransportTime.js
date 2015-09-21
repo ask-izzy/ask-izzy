@@ -20,7 +20,7 @@ class TransportTime extends React.Component {
     // flow:disable not supported yet
     static sampleProps = {default: {object: fixtures.ixa}};
 
-    render(): React.Element {
+    render(): ReactElement {
         var {
             object,
         } = this.props;

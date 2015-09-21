@@ -22,7 +22,7 @@ class Address extends React.Component {
         return "";
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         var street = [
             this.describe('level', 'Level'),
             this.describe('unit', 'Unit'),

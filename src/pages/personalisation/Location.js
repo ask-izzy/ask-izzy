@@ -248,7 +248,7 @@ class Location extends React.Component {
         });
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         return (
             <div>
                 <components.HeaderBar

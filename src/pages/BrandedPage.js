@@ -6,7 +6,7 @@ import Router from 'react-router';
 
 export default class BasePage extends React.Component {
 
-    render(): React.Element {
+    render(): ReactElement {
         return (
             <div className="BrandedPage">
                 <DocumentTitle title="Ask Izzy" />

@@ -52,7 +52,7 @@ export default class ServicePane extends React.Component {
         }
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         var object = this.props.service;
 
         return (

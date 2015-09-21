@@ -71,7 +71,7 @@ class BaseMultiQuestion extends BaseQuestion {
         this.nextStep();
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         var selected = this.state.answers;
 
         return (
