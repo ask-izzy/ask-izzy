@@ -127,7 +127,7 @@ class OpeningTimes extends React.Component {
         }
 
         // Reject invalid dates
-        if (_(values).any((v) => moment.isMoment(v) & !moment.isValid(v))) {
+        if (_(values).any((v) => moment.isMoment(v) && !v.isValid())) {
             return "";
         }
 
