@@ -58,6 +58,9 @@ echo "" >> $target
 
 for f in $( find src -name '*.scss' -not -path 'src/styles/*.scss' | sort )
 do
-    import=$( echo "$f" | sed s/^src\\//..\\// | sed s/\.scss$// )
+    import=$( echo "$f" | sed \
+        -e 's&^src/&../&' \
+        -e 's&\.scss$&&'
+    )
     echo "@import '${import}';" >> $target
 done

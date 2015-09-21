@@ -3,17 +3,17 @@
     font-weight: 400 !important;
 
     .name {
-        color: $brand-text-dark;
-        font-size: 18px !important;
-        line-height: 125%;
-        font-weight: 500;
         margin: 0;
         margin-bottom: 3px;
+        color: $brand-text-dark;
+        font-size: 18px !important;
+        font-weight: 500;
+        line-height: 125%;
     }
 
     .site_name {
-        color: $brand-text-mid;
         margin-bottom: 16px;
+        color: $brand-text-mid;
     }
 
     .related {
@@ -26,8 +26,8 @@
     }
 
     .related + div {
-        color: $brand-text-mid;
         padding: 3px 0;
+        color: $brand-text-mid;
         text-decoration: underline;
     }
 

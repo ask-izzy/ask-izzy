@@ -5,32 +5,33 @@
 
     & > main {
         flex: 1;
+        background-color: $white;
+        /* FIXME: autoprefixer should be taking care of this */
         -ms-flex-preferred-size: auto;  /* Needed for IE10 */
-        background-color: white;
     }
 
     & > footer {
-        color: $brand-text-mid;
+        padding: 10px 0;
+
         background-color: $brand-bg-dark;
+        color: $brand-text-mid;
 
         font-size: 14px !important;
         font-weight: 400 !important;
-
-        padding: 10px 0;
 
         & > div {
             margin: 5px 15px;
         }
 
         a {
-            color: white;
+            color: $white;
             text-decoration: none;
         }
 
         .supporters {
-            text-align: left;
             display: inline;
             padding: 0;
+            text-align: left;
         }
 
         .supporter {
@@ -39,7 +40,7 @@
         }
 
         .supporter + .supporter::before {
-            content: "\00a0|\00a0"
+            content: '\00a0|\00a0';
         }
     }
 }

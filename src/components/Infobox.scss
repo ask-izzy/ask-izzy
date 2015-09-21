@@ -1,34 +1,34 @@
 .Infobox {
+    padding: 15px;
     color: $brand-text-dark;
     font-size: 16px !important;
-    padding: 15px;
 
     .secondary {
-        color: $brand-text-mid;
         margin: 7px 0;
+        color: $brand-text-mid;
     }
 
-    &, .Link {
+    &,
+    .Link {
         font-weight: 400 !important;
     }
 
     .Link {
-        color: $icon-fg-color !important;
-        text-decoration: none;
-        text-align: left;
-        font-size: 18px !important;
-
         display: block !important;
-
         margin: 7px 0;
         padding: 8px;
-
         border: 1px solid $icon-fg-color;
         border-radius: 3px;
 
-        &:hover, &:focus {
-            color: white !important;
+        color: $icon-fg-color !important;
+        font-size: 18px !important;
+        text-align: left;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
             background-color: $icon-fg-color;
+            color: $white !important;
         }
     }
 }

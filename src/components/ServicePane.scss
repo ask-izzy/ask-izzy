@@ -6,7 +6,8 @@ $padding: 15px;
     font-size: 14px !important;
     font-weight: light !important;
 
-    .padded, .Eligibility {
+    .padded,
+    .Eligibility {
         margin: $padding;
     }
 
@@ -18,48 +19,56 @@ $padding: 15px;
         background-color: $brand-bg-light;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-bottom: 0 !important;
         font-weight: 500 !important;
-        margin-bottom: 0px !important;
     }
 
     hr {
-        margin-left: -$padding;
+        height: 1px;
         margin-right: -$padding;
+        margin-left: -$padding;
 
         border: 0;
-        height: 1px;
         background-color: $brand-spacer;
     }
 
     .name {
-        font-size: 24px !important;
         margin: 0;
+        font-size: 24px !important;
     }
 
     .description {
+        padding-bottom: 10px;
         color: $brand-text-mid;
         font-weight: 400 !important;
-        padding-bottom: 10px;
     }
 
-    .OpeningTimes, .Address {
+    .OpeningTimes,
+    .Address {
         svg {
             top: -6px !important;
         }
     }
 
-    .OpeningTimes, .Address, .CollapsedPhones {
+    .OpeningTimes,
+    .Address,
+    .CollapsedPhones {
         padding-top: 10px;
         padding-bottom: 10px;
     }
 
     .List {
         .ListItem {
+            border-bottom: 1px solid $list-item-hairline !important;
+
             font-size: 14px !important;
             font-weight: 400 !important;
-
-            border-bottom: 1px solid $list-item-hairline !important;
         }
     }
 
@@ -69,9 +78,9 @@ $padding: 15px;
         }
 
         .ChevronIcon {
+            top: 2px !important;
             width: 35px !important;
             height: 35px !important;
-            top: 2px !important;
         }
     }
 }
