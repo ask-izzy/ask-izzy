@@ -6,22 +6,16 @@
         input {
             display: block;
             width: 90%;
-            margin-left: auto;
-            margin-right: auto;
             margin-top: 20px;
+            margin-right: auto;
             margin-bottom: 20px;
+            margin-left: auto;
             padding: 5px;
 
-            border-radius: 3px;
             border: 1px solid $brand-bg-mid;
+            border-radius: 3px;
             -webkit-appearance: none;
         }
-    }
-
-    .ProgressIcon {
-        /* works around alignment of CircularProgress inside ListItem */
-        margin-top: -20px !important;
-        margin-left: -15px !important;
     }
 
     .progress {
@@ -29,8 +23,11 @@
 
         & > * {
             display: block !important;
-            margin-left: auto !important;
+            width: 60px !important;
+            height: 60px !important;
+
             margin-right: auto !important;
+            margin-left: auto !important;
         }
     }
 
@@ -38,21 +35,24 @@
         width: 100%;
 
         button {
-            color: white !important;
+            display: block !important;
+            width: 90%;
+
+            margin-top: 20px !important;
+            margin-right: auto !important;
+            margin-bottom: 20px !important;
+            margin-left: auto !important;
+
             background-color: $icon-fg-color !important;
+            color: $white !important;
 
             font-size: 18px !important;
             font-weight: 400 !important;
             text-transform: none !important;
 
-            display: block !important;
-            width: 90%;
-            margin-left: auto !important;
-            margin-right: auto !important;
-            margin-top: 20px !important;
-            margin-bottom: 20px !important;
 
-            &:hover, &:focus {
+            &:hover,
+            &:focus {
                 background-color: lighten($icon-fg-color, 10%) !important;
             }
 
@@ -68,7 +68,7 @@
     }
 
     .ListItem {
-
+        border-bottom: 1px solid $list-item-hairline !important;
         font-size: 18px !important;
 
         &.taller {
@@ -76,14 +76,25 @@
             padding-bottom: 10px !important;
         }
 
-        border-bottom: 1px solid $list-item-hairline !important;
+        .Icon {
+            top: -12px !important;
+            width: 48px !important;
+            height: 48px !important;
+        }
+
+        .LoadingIcon,
+        .RadioUnselectedIcon,
+        .RadioSelectedIcon {
+            top: -2px !important;
+        }
     }
 
     .SummaryItem {
-        background-color: $brand-bg-light !important;
         border-bottom: 1px solid darken($list-item-hairline, 15%) !important;
+        background-color: $brand-bg-light !important;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             background-color: darken($brand-bg-light, 10%) !important;
         }
 
@@ -92,8 +103,8 @@
         }
 
         .secondaryText {
-            float: right;
             margin: 0 !important;
+            float: right;
 
             color: $icon-fg-color !important;
 

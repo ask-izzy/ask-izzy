@@ -7,10 +7,7 @@ import mui from "material-ui";
 import React from "react";
 import { titleize } from "underscore.string";
 
-import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
-
-var palette = colors.getPalette();
 
 import icons from '../icons';
 

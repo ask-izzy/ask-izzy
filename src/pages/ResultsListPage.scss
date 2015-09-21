@@ -3,15 +3,15 @@
 }
 
 .resultContainer:first-child {
-    border-top: none;
+    border-top: 0;
 }
 
 .resultContainer-other + .resultContainer {
-    border-top: none;
+    border-top: 0;
 }
 
 .resultContainer-CrisisLineItem + .resultContainer-CrisisLineItem {
-    border-top: none;
+    border-top: 0;
 }
 
 .resultContainer-ResultListItem + .resultContainer-ResultListItem {
@@ -24,8 +24,11 @@
 
         & > * {
             display: block !important;
-            margin-left: auto !important;
+            width: 60px !important;
+            height: 60px !important;
+
             margin-right: auto !important;
+            margin-left: auto !important;
         }
     }
 
@@ -37,14 +40,15 @@
         background-color: $brand-bg-light !important;
         color: $brand-text-mid !important;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             background-color: darken($brand-bg-light, 10%) !important;
         }
 
         .primaryText {
             font-size: 18px !important;
-            line-height: 18px !important;
             font-weight: 500 !important;
+            line-height: 18px !important;
         }
 
         & > div {
@@ -55,7 +59,7 @@
     .MoreResultsButton {
         border-top: 10px solid $brand-bg-light !important;
         border-bottom: 10px solid $brand-bg-light !important;
-        text-align: center;
         font-size: 14px !important;
+        text-align: center;
     }
 }

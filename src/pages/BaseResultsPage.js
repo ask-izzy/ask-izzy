@@ -124,6 +124,7 @@ class BaseResultsPage extends BaseCategoriesPage {
 
             .catch(response => {
                 try {
+                    console.error(response);
                     var data = JSON.parse(response.text);
                     this.setState({
                         error: data.error_message,

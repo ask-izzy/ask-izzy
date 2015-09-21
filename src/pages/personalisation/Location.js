@@ -287,11 +287,7 @@ class Location extends React.Component {
                             primaryText="Locating you..."
                             secondaryText="Please permit us to use your GPS"
                             leftIcon={
-                                <mui.CircularProgress
-                                    className="ProgressIcon"
-                                    mode="indeterminate"
-                                    size={0.5}
-                                />
+                                <icons.Loading />
                             }
 
                             disableFocusRipple={true}
@@ -371,9 +367,7 @@ class Location extends React.Component {
                 {
                     this.state.autocompletion == AutocompleteState.SEARCHING ?
                         <div className="progress">
-                            <mui.CircularProgress
-                                mode="indeterminate"
-                            />
+                            <icons.Loading />
                         </div>
                     : ''
                 }

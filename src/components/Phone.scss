@@ -3,50 +3,50 @@
 }
 
 .Phone {
-    width: 100%;
     display: block;
+    width: 100%;
 
     a {
-        font-size: 18px !important;
-        text-decoration: none;
-        color: $brand-pane-alt-dark;
-
         display: block;
         position: relative;
         width: auto;
 
-        border: 1px solid;
-        border-color: $brand-pane-alt-dark;
-        border-radius: 3px;
-
         padding: 6px;
+        border: 1px solid;
+        border-radius: 3px;
+        border-color: $brand-pane-alt-dark;
+
+        color: $brand-pane-alt-dark;
+        font-size: 18px !important;
+        text-decoration: none;
 
         .kind {
-            font-weight: 500;
             padding-left: 30px;
+            font-weight: 500;
         }
 
         .number {
             white-space: nowrap;
         }
 
-        &:hover, &:focus {
-            color: white;
+        &:hover,
+        &:focus {
             background-color: $brand-pane-alt-dark;
+            color: $white;
 
             .PhoneIcon {
-                fill: white !important;
+                fill: $white !important;
             }
         }
 
-        .Icon {
-            /* override mui.SvgIcon's inline styles */
-            height: 40px !important;
-            width: 40px !important;
+        .PhoneIcon {
             position: absolute;
-
             top: -2px;
-            left: 0px;
+            left: 0;
+
+            width: 40px !important;
+            height: 40px !important;
+
             fill: $brand-pane-alt-dark !important;
         }
     }

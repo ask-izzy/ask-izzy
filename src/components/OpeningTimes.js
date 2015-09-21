@@ -7,8 +7,6 @@ import _ from "underscore";
 
 import ScreenReader from "./ScreenReader";
 import ServiceOpening from "../iss/ServiceOpening";
-import colors from "../constants/theme";
-var palette = colors.getPalette();
 
 import icons from '../icons';
 
@@ -210,7 +208,8 @@ class OpeningTimes extends React.Component {
         var end = this.ifTime`until ${open.end}`;
         return (
             <span className="when">
-                { open.day } { start } { end } ({ open.note })
+                { open.day } { start } { end }
+                { open.note ? ` (${open.note})` : ''}
             </span>
         );
     }

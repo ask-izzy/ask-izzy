@@ -6,7 +6,6 @@ import mui from "material-ui";
 import reactMixin from "react-mixin";
 import _ from "underscore";
 
-import colors from "../constants/theme";
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import iss from '../iss';
