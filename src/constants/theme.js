@@ -1,6 +1,6 @@
 // Override colors & themes here
 export default {
-    contentFontFamily: 'Gotham Rounded A,Gotham Rounded B,sans-serif',
+    contentFontFamily: "Gotham Rounded A,Gotham Rounded B,sans-serif",
 
     getPalette: function() {
         return {

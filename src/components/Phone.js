@@ -12,7 +12,7 @@ class Phone extends React.Component {
 
     // flow:disable not supported yet
     get href(): string {
-        return "tel:" + this.props.number.replace(/[^0-9\+]/g, '');
+        return "tel:" + this.props.number.replace(/[^0-9\+]/g, "");
     }
 
     render(): ReactElement {
@@ -21,11 +21,8 @@ class Phone extends React.Component {
                 <a href={this.href}>
                     <Icons.Phone />
                     <span className="kind">
-                        { this.props.comment ?
-                            this.props.comment
-                        :
-                            titleize(this.props.kind)
-                        }
+                        {this.props.comment ? this.props.comment
+                        : titleize(this.props.kind)}
                     </span>
                     {' '}
                     <span className="number">{this.props.number}</span>

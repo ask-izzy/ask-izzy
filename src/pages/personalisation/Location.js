@@ -1,22 +1,20 @@
 /* @flow */
 
-"use strict";
-
-import React from 'react';
+import React from "react";
 import Router from "react-router";
-import _ from 'underscore';
+import _ from "underscore";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
 import { debounce } from "core-decorators";
 import { ltrim } from "underscore.string";
 
-import Geolocation from '../../geolocation';
-import Maps from '../../maps';
-import Personalisation from '../../mixins/Personalisation';
-import components from '../../components';
-import icons from '../../icons';
+import Geolocation from "../../geolocation";
+import Maps from "../../maps";
+import Personalisation from "../../mixins/Personalisation";
+import components from "../../components";
+import icons from "../../icons";
 import storage from "../../storage";
-import * as iss from '../../iss';
+import * as iss from "../../iss";
 
 var GeoLocationState = {
     NOT_STARTED: 0,
@@ -34,25 +32,32 @@ var AutocompleteState = {
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Location extends React.Component {
+    // flow:disable
+    static defaultProps = {
+        name: "location",
+    };
+
     constructor(props: Object) {
         super(props);
         this.state = {
             geolocation: GeoLocationState.NOT_STARTED,
             autocompletion: AutocompleteState.NOT_SEARCHING,
-            locationName: '',
+            locationName: "",
             locationCoords: {},
             autocompletions: [],
         };
     }
 
-    // flow:disable
-    static defaultProps = {
-        name: 'location',
-    };
+    componentDidMount(): void {
+        this.setState({
+            locationName: storage.getItem("location"),
+        });
+    }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         /* Coordinates are optional */
-        var coords = storage.getJSON('coordinates');
+        var coords = storage.getJSON("coordinates");
+
         if (coords) {
             request = Object.assign(request, {
                 location: `${coords.longitude}E${coords.latitude}N`,
@@ -60,7 +65,7 @@ class Location extends React.Component {
         }
 
         /* Location/Area is required */
-        var location = storage.getItem('location');
+        var location = storage.getItem("location");
 
         if (location) {
             return Object.assign(request, {
@@ -76,7 +81,7 @@ class Location extends React.Component {
 
     // flow:disable
     static get summaryValue(): string {
-        return storage.getItem('location');
+        return storage.getItem("location");
     }
 
     static showQuestion(): boolean {
@@ -92,10 +97,11 @@ class Location extends React.Component {
                 lng: location.coords.longitude,
             },
         });
+
         /* store these coordinates for the session so we can use them to
          * provide additional info for autocomplete, distances, ISS search
          * weighting, etc. */
-        storage.setJSON('coordinates', {
+        storage.setJSON("coordinates", {
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
         });
@@ -105,12 +111,12 @@ class Location extends React.Component {
         function interestingComponent(types: Array<string>): boolean {
             return !_.isEmpty(_.intersection(
                 types,
-                ['locality', 'administrative_area_level_1']
+                ["locality", "administrative_area_level_1"]
             ));
         }
 
         for (var geocodedLocation of possibleLocations) {
-            if (_.contains(geocodedLocation.types, 'locality')) {
+            if (_.contains(geocodedLocation.types, "locality")) {
                 /* build a location name from the address components specified
                  * in interestingComponent. We do this because we don't want
                  * to show all the parts of Google's formatted_address */
@@ -120,7 +126,7 @@ class Location extends React.Component {
                     if (interestingComponent(component.types))
                         component.long_name
                     /*::`*/
-                ].join(', ');
+                ].join(", ");
 
                 return {
                     location: location,
@@ -132,60 +138,29 @@ class Location extends React.Component {
         throw "Unable to determine your suburb";
     }
 
-    onGeolocationTouchTap(): void {
-        if (this.state.geolocation != GeoLocationState.NOT_STARTED) {
-            return;
-        }
-
-        this.setState({
-            geolocation: GeoLocationState.RUNNING,
-        });
-
-        this.locateMe()
-            .then(params => {
-                var { location, name } = params;
-
-                this.setState({
-                    geolocation: GeoLocationState.COMPLETE,
-                    locationName: name,
-                    locationCoords: location,
-                });
-            })
-
-            .catch((e) => {
-                console.error(e);
-                this.setState({
-                    geolocation: GeoLocationState.FAILED,
-                    error: e.message,
-                });
-            });
-    }
-
-    onTouchDoneButton(event: Event): void {
-        event.preventDefault();
-        storage.setItem('location', this.state.locationName);
-        this.nextStep();
-    }
-
     /**
-     * autoCompleteSuburb:
      * Take a search string and (optionally) the user's current location
      * and return a promise for an array of possible matches.
+     *
+     * @param {string} input - input text
+     * @param {?Object} location - location information
+     * @returns {Promise<Array<Object>>} array of possible locations
      */
-    async autoCompleteSuburb(input: string, location: ?Object):
-        Promise<Array<Object>>
-    {
+    async autoCompleteSuburb(
+        input: string,
+        location: ?Object,
+    ): Promise<Array<Object>> {
         var maps = await Maps();
         var request: AutocompletionRequest = {
             input: input,
-            types: ['geocode'],
+            types: ["geocode"],
             componentRestrictions: {
-                country: 'au',
+                country: "au",
             },
         };
 
         /* If the user has coordinates set in this session, use them */
-        var location = storage.getJSON('coordinates');
+        location = storage.getJSON("coordinates");
         if (location) {
             request.location = new maps.api.LatLng(location.latitude,
                                                    location.longitude);
@@ -199,7 +174,7 @@ class Location extends React.Component {
         return [
             /*::{_:`*/
             for (completion of completions)
-            if (_.contains(completion.types, 'locality'))
+            if (_.contains(completion.types, "locality"))
             {
                 suburb: completion.terms[0].value,
                 state: completion.terms[1].value,
@@ -231,6 +206,41 @@ class Location extends React.Component {
             });
     }
 
+    onGeolocationTouchTap(): void {
+        if (this.state.geolocation != GeoLocationState.NOT_STARTED) {
+            return;
+        }
+
+        this.setState({
+            geolocation: GeoLocationState.RUNNING,
+        });
+
+        this.locateMe()
+            .then(params => {
+                var { location, name } = params;
+
+                this.setState({
+                    geolocation: GeoLocationState.COMPLETE,
+                    locationName: name,
+                    locationCoords: location,
+                });
+            })
+
+            .catch(error => {
+                console.error(error);
+                this.setState({
+                    geolocation: GeoLocationState.FAILED,
+                    error: error.message,
+                });
+            });
+    }
+
+    onTouchDoneButton(event: Event): void {
+        event.preventDefault();
+        storage.setItem("location", this.state.locationName);
+        this.nextStep();
+    }
+
     onSearchChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {
             this.setState({
@@ -240,12 +250,6 @@ class Location extends React.Component {
 
             this.triggerAutocomplete(this.state.locationName);
         }
-    }
-
-    componentDidMount(): void {
-        this.setState({
-            locationName: storage.getItem('location'),
-        });
     }
 
     render(): ReactElement {
@@ -264,7 +268,7 @@ class Location extends React.Component {
                 />
                 <mui.List className="List">{
                     /* if the browser supports geolocation */
-                    require('has-geolocation') &&
+                    require("has-geolocation") &&
                     this.state.geolocation == GeoLocationState.NOT_STARTED ?
                         <mui.ListItem
                             className="taller ListItem"
@@ -279,7 +283,7 @@ class Location extends React.Component {
                             disableFocusRipple={true}
                             disableTouchRipple={true}
                         />
-                    : ''
+                    : ""
                 }{
                     this.state.geolocation == GeoLocationState.RUNNING ?
                         <mui.ListItem
@@ -293,7 +297,7 @@ class Location extends React.Component {
                             disableFocusRipple={true}
                             disableTouchRipple={true}
                         />
-                    : ''
+                    : ""
                 }{
                     this.state.geolocation == GeoLocationState.COMPLETE ?
                         <mui.ListItem
@@ -304,7 +308,7 @@ class Location extends React.Component {
                             disableFocusRipple={true}
                             disableTouchRipple={true}
                         />
-                    : ''
+                    : ""
                 }{
                     this.state.geolocation == GeoLocationState.FAILED ?
                         <mui.ListItem
@@ -317,7 +321,7 @@ class Location extends React.Component {
                             disableFocusRipple={true}
                             disableTouchRipple={true}
                         />
-                    : ''
+                    : ""
                 }
                 <form
                     className="search"
@@ -347,7 +351,7 @@ class Location extends React.Component {
                                 </div>
                             }
                             leftIcon={<icons.RadioUnselected />}
-                            onTouchTap={(event) => {
+                            onTouchTap={() => {
                                 /* set the text box to this value
                                  * and remove the autocompletions */
                                 var locationName =
@@ -369,7 +373,7 @@ class Location extends React.Component {
                         <div className="progress">
                             <icons.Loading />
                         </div>
-                    : ''
+                    : ""
                 }
                 <div className="done-button">
                     <mui.FlatButton

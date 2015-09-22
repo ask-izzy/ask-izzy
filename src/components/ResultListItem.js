@@ -5,10 +5,9 @@ import Router from "react-router";
 import fixtures from "../../fixtures/services";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
-import _ from "underscore";
 
 import icons from "../icons";
-import iss from '../iss';
+import iss from "../iss";
 import OpeningTimes from "./OpeningTimes";
 import TransportTime from "./TransportTime";
 
@@ -20,18 +19,16 @@ class ResultListItem extends React.Component {
         nServiceProvisions: React.PropTypes.number,
     };
 
-    // flow:disable not supported yet
-    static sampleProps = {default: {
-        object: Object.assign(
-            new iss.Service,
-            fixtures.ixa
-        ),},
-    };
-
     // flow:disable
-    static defaultProps =  {
+    static defaultProps = {
         nServiceProvisions: 4,
     };
+
+    // flow:disable not supported yet
+    static sampleProps = {default: {
+        object: new iss.Service(fixtures.ixa),
+    }};
+
 
     /**
      * nMoreServiceProvisions:
@@ -73,7 +70,7 @@ class ResultListItem extends React.Component {
                     object={object.open}
                 />
                 <TransportTime object={object} />
-                { this.props.nServiceProvisions > 0 ?
+                {this.props.nServiceProvisions > 0 ?
                     <div>
                         <ul className="related">{
                             object.serviceProvisions
@@ -86,17 +83,14 @@ class ResultListItem extends React.Component {
                                     </li>
                                 )
                         }</ul>
-                        { this.nMoreServiceProvisions > 0 ?
+
+                        {this.nMoreServiceProvisions > 0 ?
                             <div>
                                 {this.nMoreServiceProvisions} more…
                             </div>
-                        :
-                            ''
-                        }
+                        : ""}
                     </div>
-                :
-                    ''
-                }
+                : ""}
             </mui.ListItem>
         );
     }

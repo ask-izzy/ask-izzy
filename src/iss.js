@@ -1,15 +1,19 @@
+/**
+ * ISS API functions.
+ *
+ * @module iss
+ */
 /* @flow */
 
-"use strict";
-
-import http from 'iso-http';
-import url from 'url';
-import _ from 'underscore';
-import { slugify } from 'underscore.string';
-import ServiceOpening from './iss/ServiceOpening';
+import http from "iso-http";
+import url from "url";
+import { slugify } from "underscore.string";
+import ServiceOpening from "./iss/ServiceOpening";
 import serviceProvisions from "./constants/service-provisions";
 
 declare var ISS_URL: string;
+
+/* eslint-disable no-use-before-define */
 
 export type searchRequest = {
     q?: string,
@@ -52,7 +56,68 @@ export type searchResults = {
     objects: Array<Service>,
 };
 
+/**
+ * Wraps the http request code in a promise.
+ *
+ * @param {Object} obj - data passed to http.request.
+ *
+ * @returns {Promise<Object>} a promise for the request.
+ */
+function _request(obj) {
+    return new Promise((resolve, reject) => {
+        http.request(obj, response => {
+            if (response.status == 200) {
+                resolve(response);
+            } else {
+                reject(response);
+            }
+        });
+    });
+}
+
+export async function request(path: string, data: ?searchRequest): Object {
+    var url_: string = ISS_URL || process.env.ISS_URL;
+    var urlobj: url.urlObj = url.parse(url.resolve(url_, path), true);
+
+    /* data overrides anything passed in via the URL.
+     * Passing query args via the URL needs to be supported for requesting
+     * meta.next */
+    data = Object.assign({}, urlobj.query, data);
+    data.key = urlobj.auth;
+
+    urlobj.auth = urlobj.search = urlobj.querystring = urlobj.query = null;
+    url_ = url.format(urlobj);
+
+    var response = await _request({
+        url: url_,
+        contentType: "application/json",
+        headers: {
+            Accept: "application/json",
+        },
+        data: data,
+    });
+
+    return JSON.parse(response.text);
+}
+
+export async function requestObjects(
+    path: string, data: ?searchRequest
+): Promise<searchResults> {
+    var response = await request(path, data);
+
+    // convert objects to ISS search results
+    response.objects = response.objects.map(
+        object => Object.assign(new Service(), object)
+    );
+
+    return response;
+}
+
 export class Service {
+    constructor(props: issService) {
+        Object.assign(this, props);
+    }
+
     abn: string;
     accessibility: issAccessibility;
     accessibility_details: string;
@@ -139,8 +204,6 @@ export class Service {
 
 
     /**
-     * open:
-     *
      * The service opening hours
      */
     /* flow:disable */
@@ -149,17 +212,13 @@ export class Service {
     }
 
     /**
-     * shortDescription:
-     *
      * First sentence of the description.
      */
     /* flow:disable */
     get shortDescription(): string {
-        return this.description.split('.', 1)[0] + '.';
+        return this.description.split(".", 1)[0] + ".";
     }
     /**
-     * serviceProvisions:
-     *
      * An array of things this service provides built using a bucket-of-words
      * approach from the service's full description */
     /* flow:disable */
@@ -176,8 +235,8 @@ export class Service {
                 provision.name
                 /*::`*/
             ];
-        } catch (e) {
-            console.error("Failed to determine service provisions", e);
+        } catch (error) {
+            console.error("Failed to determine service provisions", error);
         }
 
         return this._serviceProvisions;
@@ -190,11 +249,11 @@ export class Service {
 
         var request_: searchRequest = {
             site_id: this.site.id,
-            type: 'service',
+            type: "service",
             limit: 0,
         };
 
-        this._siblingServices = await requestObjects('/api/v3/search/',
+        this._siblingServices = await requestObjects("/api/v3/search/",
                                                      request_);
 
         this._siblingServices.objects =
@@ -213,12 +272,14 @@ export class Service {
 }
 
 /**
- * search:
- * @query: either a query string, or an object of search parameters
- * @location: (optional but recommended) a search area
- * @coords: (optional) the user's coordinates
- *
  * Execute a search against ISS.
+ *
+ * @param {searchRequest} query - either a query string, or an object of
+ * search parameters.
+ * @param {?string} location (optional but recommended) - a search area.
+ * @param {?Object} coords (optional) - the user's coordinates.
+ *
+ * @returns {Promise<searchResults>} search results from ISS.
  */
 export async function search(
     query: Object | string,
@@ -227,12 +288,13 @@ export async function search(
 ): Promise<searchResults> {
 
     var request_: searchRequest = {
-        type: 'service',
+        type: "service",
         catchment: true,
         limit: 5,
     };
 
-    if (typeof query === 'string') {
+    if (typeof query === "string") {
+        /* eslint-disable id-length */
         request_.q = query;
     } else if (query instanceof Object) {
         Object.assign(request_, query);
@@ -248,7 +310,7 @@ export async function search(
         request_.location = `${coords.longitude}E${coords.latitude}N`;
     }
 
-    var response = await requestObjects('/api/v3/search/', request_);
+    var response = await requestObjects("/api/v3/search/", request_);
 
     return response;
 }
@@ -258,87 +320,7 @@ export async function getService(
 ): Promise<Service> {
     var response = await request(`/api/v3/service/${id}/`);
 
-    return Object.assign(new Service, response);
-}
-
-/**
- * _request:
- * obj: data passed to http.request
- *
- * Wraps the http request code in a promise.
- *
- * Returns: a promise for the request
- */
-function _request(obj) {
-    return new Promise((resolve, reject) => {
-        http.request(obj, response => {
-            if (response.status == 200) {
-                resolve(response);
-            } else {
-                reject(response);
-            }
-        });
-    });
-}
-
-export async function request(path: string, data: ?searchRequest): Object {
-    var url_: string = ISS_URL || process.env.ISS_URL;
-    var urlobj: url.urlObj = url.parse(url.resolve(url_, path), true);
-
-    /* data overrides anything passed in via the URL.
-     * Passing query args via the URL needs to be supported for requesting
-     * meta.next */
-    data = Object.assign({}, urlobj.query, data);
-    data.key = urlobj.auth;
-
-    urlobj.auth = urlobj.search = urlobj.querystring = urlobj.query = null;
-    url_ = url.format(urlobj);
-
-    /*
-     * Encode data into the URI ourselves
-     * until we can work around
-     * https://github.com/jedmao/iso-http/issues/2
-     * No flow until comprehensions are supported
-    */
-    var serialized = "";
-    if (data) {
-        // Flow can't tell that `data` isn't null inside a closure
-        var _data = data;
-        serialized = Object.keys(_data).map(function (key) {
-            var serializeValue = (v) => `${key}=${encodeURIComponent(v)}`;
-
-            if (Array.isArray(_data[key])) {
-                return _data[key].map(serializeValue).join('&');
-            } else
-                return serializeValue(_data[key]);
-        }).join('&');
-    }
-
-    var joiner = (url_.indexOf('?') > -1) ? '&' : '?';
-    url_ = url_ + joiner + serialized;
-
-    var response = await _request({
-        url: url_,
-        contentType: 'application/json',
-        headers: {
-            Accept: 'application/json',
-        },
-    });
-
-    return JSON.parse(response.text);
-}
-
-export async function requestObjects(
-    path: string, data: ?searchRequest
-): Promise<searchResults> {
-    var response = await request(path, data);
-
-    // convert objects to ISS search results
-    response.objects = response.objects.map(
-        object => Object.assign(new Service, object)
-    );
-
-    return response;
+    return new Service(response);
 }
 
 export default {

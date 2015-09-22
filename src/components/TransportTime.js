@@ -1,15 +1,10 @@
 /* @flow */
 
-"use strict";
-
-import moment from "moment";
-import mui from "material-ui";
 import React from "react";
 import { titleize } from "underscore.string";
 
 import fixtures from "../../fixtures/services";
-
-import icons from '../icons';
+import icons from "../icons";
 
 class TransportTime extends React.Component {
     // flow:disable not supported yet

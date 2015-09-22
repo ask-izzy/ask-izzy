@@ -1,19 +1,15 @@
 /* @flow */
 
-"use strict";
-
-import { GoogleMap, Marker, InfoWindow } from "react-google-maps";
-import React from 'react';
-import Router from "react-router";
-import mui from "material-ui";
+import React from "react";
 import _ from "underscore";
+import mui from "material-ui";
+import { GoogleMap, Marker } from "react-google-maps";
 
-import iss from '../iss';
+import iss from "../iss";
 import BaseResultsPage from "./BaseResultsPage";
-import Maps from '../maps';
-import ResultListItem from '../components/ResultListItem';
-import components from '../components';
-import icons from '../icons';
+import Maps from "../maps";
+import ResultListItem from "../components/ResultListItem";
+import components from "../components";
 
 class ResultsMapPage extends BaseResultsPage {
     componentDidMount(): void {
@@ -29,11 +25,26 @@ class ResultsMapPage extends BaseResultsPage {
         });
     }
 
+    componentDidUpdate(prevProps: Object, prevState: Object) {
+        if (this.state.maps &&
+            this.state.objects &&
+            this.state.objects.length) {
+
+            this.showWholeMap();
+        }
+    }
+
+    clearSelection(): void {
+        if (this.state.selectedServices) {
+            this.setState({selectedServices: []});
+            this.showWholeMap();
+        }
+    }
+
     /**
-     * fitBounds:
+     * Get the Google Maps object.
      *
-     * Fit the map to bounds.
-     * This is requires a lot of things, so return a promise when it is done.
+     * @returns {Promise} the Google Maps object.
      */
     getMap(): Promise<Object> {  // FIXME: use actual type
         var map = this.refs.map;
@@ -51,14 +62,28 @@ class ResultsMapPage extends BaseResultsPage {
         });
     }
 
+    // flow:disable
+    get sites(): Array<Array<iss.issService>> {
+        if (!this.state.objects) {
+            return [];
+        } else if (this._sites) {
+            return this._sites;
+        } else {
+            this._sites = _.values(_.groupBy(this.state.objects,
+                                             obj => obj.site.id));
+            return this._sites;
+        }
+    }
+
     /**
-     * showWholeMap:
      * Adjust the bounds to show the whole map
+     *
+     * @returns {void}
      */
     showWholeMap(): void {
         /* update the map bounds */
         var maps = this.state.maps.api;
-        var bounds = new maps.LatLngBounds;
+        var bounds = new maps.LatLngBounds();
 
         for (var object of this.state.objects) {
             if (object.location.point) {
@@ -72,28 +97,12 @@ class ResultsMapPage extends BaseResultsPage {
         });
     }
 
-    componentDidUpdate(prevProps: Object, prevState: Object) {
-        if (this.state.maps &&
-            this.state.objects &&
-            this.state.objects.length)
-        {
-            this.showWholeMap();
-        }
-    }
-
-    clearSelection(): void {
-        if (this.state.selectedServices) {
-            this.setState({selectedServices: []});
-            this.showWholeMap();
-        }
-    }
-
     onMapClick(): void {
         this.clearSelection();
     }
 
     onMarkerClick(services: Array<Object>): void {
-        console.log('services', services);
+        console.log("services", services);
         this.setState({selectedServices: services});
         this.getMap().then(map => {
             map.setCenter({
@@ -112,19 +121,6 @@ class ResultsMapPage extends BaseResultsPage {
         }
     }
 
-    // flow:disable
-    get sites(): Array<Array<iss.issService>> {
-        if (!this.state.objects) {
-            return [];
-        } else if (this._sites) {
-            return this._sites;
-        } else {
-            this._sites = _.values(_.groupBy(this.state.objects,
-                                             obj => obj.site.id));
-            return this._sites;
-        }
-    }
-
     render(): ReactElement {
         var selectedServices = this.state.selectedServices || [];
 
@@ -136,7 +132,7 @@ class ResultsMapPage extends BaseResultsPage {
                 />
                 {   /* we can't create the map component until the API promise
                      * resolves */
-                    this.state.maps ? this.renderMap() : ''
+                    this.state.maps ? this.renderMap() : ""
                 }
                 <mui.List className="List">{
                     selectedServices.map((object, index) =>
@@ -159,13 +155,13 @@ class ResultsMapPage extends BaseResultsPage {
             /* calculate the height of the map */
             mapHeight =
                 window.innerHeight -
-                document.querySelector('.AppBar').offsetHeight;
+                document.querySelector(".AppBar").offsetHeight;
 
             if (mapHeight > 900) {
                 /* we have space for the footer, resize the map to either fit
                  * the footer or the selected results */
                 mapHeight -= Math.max(
-                    document.querySelector('footer').offsetHeight,
+                    document.querySelector("footer").offsetHeight,
                     150 * selectedServices.length
                 );
             } else {
@@ -177,8 +173,8 @@ class ResultsMapPage extends BaseResultsPage {
             /* limit minimum height to 1/3 of the screen realestate */
             mapHeight = Math.max(mapHeight,
                                  window.innerHeight / 3);
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(error);
         }
 
         return (
@@ -209,13 +205,11 @@ class ResultsMapPage extends BaseResultsPage {
                             }}
                             onClick={this.onMarkerClick.bind(this, objects)}
                         />
-                    :
-                        ''
+                    : ""
                 )}
             </GoogleMap>
         );
     }
-
 }
 
 export default ResultsMapPage;

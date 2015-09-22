@@ -2,18 +2,18 @@
 /**
  * ISS mock using Express */
 
-"use strict";
-
-import cors from 'cors';
-import express from 'express';
-import services from '../../../fixtures/services';
+import cors from "cors";
+import express from "express";
+import services from "../../../fixtures/services";
 var app = express();
 
 app.use(cors());
 
-app.get('/api/v3/search/', (req, res) => {
+/* eslint-disable complexity */
+/* FIXME: refactor */
+app.get("/api/v3/search/", (req, res) => {
 
-    if (req.query.site_id == '111') {
+    if (req.query.site_id == "111") {
         /* related services search for housingService */
         res.json({
             meta: {
@@ -24,7 +24,7 @@ app.get('/api/v3/search/', (req, res) => {
                 services.housingServiceSibling,
             ],
         });
-    } else if (req.query.site_id == '444') {
+    } else if (req.query.site_id == "444") {
         res.json({
             meta: {
                 total_count: 6,
@@ -32,22 +32,22 @@ app.get('/api/v3/search/', (req, res) => {
             objects: [
                 {
                     id: 444,  // ourselves
-                    name: 'Community Lunch',
+                    name: "Community Lunch",
                 }, {
                     id: 445,
-                    name: 'Material Aid',
+                    name: "Material Aid",
                 }, {
                     id: 446,
-                    name: 'Community Outreach',
+                    name: "Community Outreach",
                 }, {
                     id: 447,
-                    name: 'Crisis Accommodation',
+                    name: "Crisis Accommodation",
                 }, {
                     id: 448,
-                    name: 'Centrelink Services',
+                    name: "Centrelink Services",
                 }, {
                     id: 449,
-                    name: 'Drug & Alcohol Counselling',
+                    name: "Drug & Alcohol Counselling",
                 },
             ],
         });
@@ -91,13 +91,13 @@ app.get('/api/v3/search/', (req, res) => {
                     },
                     opening_hours: [
                         {
-                            day: 'Wednesday',
-                            open: '9:00:00',
-                            close: '17:00:00',
+                            day: "Wednesday",
+                            open: "9:00:00",
+                            close: "17:00:00",
                         },
                     ],
                     location: {
-                        suburb: 'Richmond',
+                        suburb: "Richmond",
                     },
 
                 },
@@ -113,19 +113,19 @@ app.get('/api/v3/search/', (req, res) => {
                     },
                     opening_hours: [],
                     location: {
-                        suburb: 'Richmond',
+                        suburb: "Richmond",
                     },
                     crisis: true,
                     phones: [{
-                        comment: '',
-                        number: '0312345601',
-                        kind: 'fax',
+                        comment: "",
+                        number: "0312345601",
+                        kind: "fax",
                     },
 
                     {
-                        comment: '',
-                        number: '0311111111',
-                        kind: 'mobile',
+                        comment: "",
+                        number: "0311111111",
+                        kind: "mobile",
                     },
                     ],
                 },
@@ -141,23 +141,23 @@ app.get('/api/v3/search/', (req, res) => {
                     },
                     opening_hours: [],
                     location: {
-                        suburb: 'Richmond',
+                        suburb: "Richmond",
                     },
                     crisis: true,
                     phones: [{
-                        comment: '',
-                        number: '0322221122',
-                        kind: '',
+                        comment: "",
+                        number: "0322221122",
+                        kind: "",
                     },
                     {
-                        comment: '',
-                        number: '0345671234',
-                        kind: 'phone',
+                        comment: "",
+                        number: "0345671234",
+                        kind: "phone",
                     },
                     {
-                        comment: '',
-                        number: '0345671259',
-                        kind: 'freecall',
+                        comment: "",
+                        number: "0345671259",
+                        kind: "freecall",
                     },
                     ],
                 },
@@ -173,13 +173,13 @@ app.get('/api/v3/search/', (req, res) => {
                     },
                     opening_hours: [],
                     location: {
-                        suburb: 'Richmond',
+                        suburb: "Richmond",
                     },
                     crisis: true,
                     phones: [{
-                        comment: '',
-                        number: '0345671234',
-                        kind: 'phone',
+                        comment: "",
+                        number: "0345671234",
+                        kind: "phone",
                     },
                     ],
                 },
@@ -199,13 +199,13 @@ app.get('/api/v3/search/', (req, res) => {
             },
             opening_hours: [
                 {
-                    day: 'Wednesday',
-                    open: '9:00:00',
-                    close: '17:00:00',
+                    day: "Wednesday",
+                    open: "9:00:00",
+                    close: "17:00:00",
                 },
             ],
             location: {
-                suburb: 'Richmond',
+                suburb: "Richmond",
             },
         };
 
@@ -258,7 +258,7 @@ app.get('/api/v3/search/', (req, res) => {
         res
             .status(503)
             .json({
-                error_message: 'The Elasticsearch service is unavailable.',
+                error_message: "The Elasticsearch service is unavailable.",
             });
     } else {
         /* conventional search */
@@ -280,20 +280,33 @@ app.get('/api/v3/search/', (req, res) => {
     }
 });
 
-app.get('/api/v3/service/111/', (req, res) => {
+app.get("/api/v3/service/111/", (req, res) => {
     res.json(services.housingService);
 });
 
-app.get('/api/v3/service/13841/', (req, res) => {
+app.get("/api/v3/service/13841/", (req, res) => {
     res.json(services.legal);
 });
 
-app.get('/api/v3/service/866464/', (req, res) => {
+app.get("/api/v3/service/866464/", (req, res) => {
     res.json(services.ixa);
 });
 
-app.get('/api/v3/service/5551234/', (req, res) => {
+app.get("/api/v3/service/5551234/", (req, res) => {
     res.json(services.phoneableService);
 });
 
 app.listen(5000);
+
+var mocks = {};
+
+export function mock(service: Object): void {
+    if (mocks[service.id]) {
+        throw new Error(`Service ID ${service.id} is already mocked`);
+    }
+
+    mocks[service.id] = service;
+    app.get(`/api/v3/service/${service.id}`, (req, res) => {
+        res.json(service);
+    });
+}

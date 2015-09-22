@@ -2,12 +2,11 @@
 
 /* @flow */
 
-"use strict";
-import BaseMultiQuestion from './personalisation/BaseMultiQuestion';
-import BaseQuestion from './personalisation/BaseQuestion';
-import Intro from './personalisation/Intro';
-import Location from './personalisation/Location';
-import Questions from './personalisation/Questions';
+import BaseMultiQuestion from "./personalisation/BaseMultiQuestion";
+import BaseQuestion from "./personalisation/BaseQuestion";
+import Intro from "./personalisation/Intro";
+import Location from "./personalisation/Location";
+import Questions from "./personalisation/Questions";
 
 export default {
     BaseMultiQuestion: BaseMultiQuestion,

@@ -1,10 +1,8 @@
 /* @flow */
 
-"use strict";
+import React from "react";
 
-import React from 'react';
-
-import BasePersonalisationPage from '../pages/BasePersonalisationPage';
+import BasePersonalisationPage from "../pages/BasePersonalisationPage";
 
 var Personalisation = {
     contextTypes: {

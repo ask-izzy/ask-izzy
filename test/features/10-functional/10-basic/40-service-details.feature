@@ -17,8 +17,25 @@ Feature: Service details page
         When I visit /service/866464
         Then I can get to google maps by clicking "33 Elizabeth Street Richmond VIC 3121"
 
-    Scenario: The phone numbers (without fax) are available
-        When I visit /service/5551234
+    Scenario: The contact methods are available except fax and tty
+       Given A service with:
+        ----------------------------------------------
+        * Phones
+            kind     | number         | comment
+            ==============================================
+            phone    | (03) 3333 3333 |
+            fax      | (03) 5555 5555 |
+            mobile   | 0477 777 777   |
+            phone    | 0477 777 777   | (really a mobile)
+            freecall | 1300 111 111   |
+            tty      | (03) 9999 9999 |
+        * Emails
+            email                 | comment
+            ==============================================
+            reception@service.org | Reception
+        * Web: https://service.org
+        ----------------------------------------------
+        When I navigate to the service page
         Then I should see the contacts
         -------------------------------------------
         Freecall 1300 111 111
@@ -29,6 +46,8 @@ Feature: Service details page
         Freecall 1300 111 111
         Phone (03) 3333 3333
         (really a mobile) 0477 777 777
+        Reception reception@service.org
+        service.org
         -------------------------------------------
 
     Scenario: Can view all opening times

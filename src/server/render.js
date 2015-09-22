@@ -2,9 +2,8 @@
 // to the client
 
 import React from "react";
-import Router, {DefaultRoute, Link, Route, RouteHandler} from 'react-router';
+import Router from "react-router";
 import routes from "../routes";
-import serialize from "serialize-javascript";
 
 import HtmlDocument from "./HtmlDocument";
 
@@ -16,31 +15,28 @@ if (process.env.NODE_ENV === "production") {
 
 export default function render(req, res, next) {
     try {
-
         // In development, reload webpack stats file on every request
         if (process.env.NODE_ENV === "development") {
             webpackStats = require("./webpack-stats.json");
             delete require.cache[require.resolve("./webpack-stats.json")];
         }
 
-        Router.run(routes, req.path, function routeMatched(Root, state) {
+        Router.run(routes, req.path, Root => {
             const markup = React.renderToString(<Root/>);
-
             // The application component is rendered to static markup
             // and sent as response.
             const html = React.renderToStaticMarkup(
               <HtmlDocument
-                markup={markup}
-                script={webpackStats.script}
-                css={webpackStats.css}
+                  markup={markup}
+                  script={webpackStats.script}
+                  css={webpackStats.css}
               />
             );
             const doctype = "<!DOCTYPE html>";
+
             res.send(doctype + html);
         });
-
-    }
-    catch (e) {
-        next(e);
+    } catch (error) {
+        next(error);
     }
 }

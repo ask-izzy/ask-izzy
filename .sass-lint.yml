@@ -41,7 +41,9 @@ rules:
     property-sort-order:
         - 2
         - order: smacss
-    quotes: 2
+    quotes:
+        - 2
+        - style: double
     single-line-per-selector: 2
     space-after-bang: 2
     space-after-colon: 2
