@@ -1,8 +1,9 @@
 /* @flow */
 
-import { GoogleMap, Marker } from "react-google-maps";
 import React from "react";
 import _ from "underscore";
+import mui from "material-ui";
+import { GoogleMap, Marker } from "react-google-maps";
 
 import iss from "../iss";
 import BaseResultsPage from "./BaseResultsPage";
