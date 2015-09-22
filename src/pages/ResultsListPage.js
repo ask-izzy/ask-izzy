@@ -10,7 +10,6 @@ import icons from "../icons";
 
 class ResultsListPage extends BaseResultsPage {
     render(): ReactElement {
-        var personaliseLink = `${this.getPath()}/personalise/summary`;
 
         return (
             <div className="ResultsListPage">
@@ -43,25 +42,21 @@ class ResultsListPage extends BaseResultsPage {
                         : <div>Searching...</div>
                     }
                     secondaryText={
-                        this.state.meta ?
+                        this.state.statusCode == 402 ?
                             <div>
-                                <Router.Link
-                                    to={personaliseLink}
-                                >Change what you need</Router.Link>
+                                {this.renderErrorMessage()}
+                                {this.renderHomeLink()}
+                                {' '}
+                                {this.renderPersonalisationLink()}
                             </div>
                         : this.state.error ?
                             <div>
-                                <p>
-                                    {this.state.error}
-                                </p>
-                                <p>
-                                    <Router.Link to="home">
-                                        Go back
-                                    </Router.Link>
-                                </p>
-
+                                {this.renderErrorMessage()}
+                                {this.renderHomeLink()}
                             </div>
-                        : ""
+                        : <div>
+                              {this.renderPersonalisationLink()}
+                          </div>
                     }
                 />
 
@@ -75,6 +70,33 @@ class ResultsListPage extends BaseResultsPage {
 
             </div>
         );
+    }
+
+    renderErrorMessage(): ReactElement {
+
+        var message = this.state.error;
+
+        return (<p className="errorMessage">{message}</p>);
+    }
+
+    renderHomeLink(): ReactElement {
+
+        var linkText = "Go back";
+
+        return (<Router.Link
+            className="homeLink"
+            to="home"
+                >{linkText}</Router.Link>);
+    }
+
+    renderPersonalisationLink(): ReactElement {
+
+        var personaliseLink = `${this.getPath()}/personalise/summary`;
+
+        return (<Router.Link
+            className="personalisationLink"
+            to={personaliseLink}
+                >Change what you need</Router.Link>);
     }
 
     renderResults(): ReactElement {

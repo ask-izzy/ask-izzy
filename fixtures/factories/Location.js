@@ -47,4 +47,3 @@ export function PostalAddress(props: ?Object) {
         suburb: "Richmond",
     }, props);
 }
-

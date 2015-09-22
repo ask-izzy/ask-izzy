@@ -126,10 +126,12 @@ class BaseResultsPage extends BaseCategoriesPage {
 
                     this.setState({
                         error: data.error_message,
+                        statusCode: response.status,
                     });
                 } catch (error) {
                     this.setState({
                         error: `An error occurred (${response.status})`,
+                        statusCode: response.status,
                     });
                 }
 
