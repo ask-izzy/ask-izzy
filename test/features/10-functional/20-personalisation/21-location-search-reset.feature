@@ -21,6 +21,8 @@ Feature: Location search
         When I click on "Change what you need"
         And I click on "Where are you?"
         And I search for "carlt"
+        # The following step is needed for test to pass on IE
+        # It means the ajax for autocomplete suggestions has finished
         Then I should see "Carlton"
         And I click on "Done"
         Then I should see "carlt"
