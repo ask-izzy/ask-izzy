@@ -22,7 +22,7 @@ class CategoryListItem extends React.Component {
         },
     },};
 
-    render(): React.Element {
+    render(): ReactElement {
         var Icon = this.props.category.icon || icons.House;
 
         return (

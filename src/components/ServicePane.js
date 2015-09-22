@@ -8,9 +8,9 @@ import mui from "material-ui";
 import _ from "underscore";
 
 import Address from "../components/Address";
-import CollapsedPhones from "../components/CollapsedPhones";
+import CollapsedOpeningTimes from "../components/CollapsedOpeningTimes";
+import ContactMethods from "../components/ContactMethods";
 import Eligibility from "../components/Eligibility";
-import OpeningTimes from "../components/OpeningTimes";
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import iss from "../iss";
@@ -52,16 +52,8 @@ export default class ServicePane extends React.Component {
         }
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         var object = this.props.service;
-        var filteredPhoneKinds = new Set(['fax', 'tty']);
-        var phoneOrder = ['freecall', 'phone', 'mobile'];
-        var phones = _.filter(
-            object.phones,
-            (p) => !filteredPhoneKinds.has(p.kind)
-        );
-        phones = _(phones).sortBy((p) => phoneOrder.indexOf(p.kind));
-        phones = _(phones).uniq((p) => p.number);
 
         return (
             <div className="ServicePane">
@@ -73,11 +65,11 @@ export default class ServicePane extends React.Component {
 
                     <hr />
 
-                    <OpeningTimes object={object.open} />
+                    <CollapsedOpeningTimes object={object.open} />
                     <hr />
                     <Address {...object.location} />
                     <hr />
-                    <CollapsedPhones phones={phones} />
+                    <ContactMethods object={object} />
                 </main>
 
                 <Eligibility

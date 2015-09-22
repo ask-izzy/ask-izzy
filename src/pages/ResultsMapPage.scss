@@ -1,13 +1,13 @@
 .ResultsMapPage {
     .List {
-        padding: 0 !important;
-
         width: 100%;
         max-width: $max-width;
+
+        padding: 0 !important;
     }
 
     .ResultListItem {
-        background-color: white !important;
         min-height: 150px !important;
+        background-color: $white !important;
     }
 }

@@ -1,0 +1,46 @@
+.Contact + .Email {
+    padding-top: 7px;
+}
+
+.Email {
+    display: block;
+    width: 100%;
+
+    a {
+        display: block;
+        position: relative;
+        width: auto;
+
+        padding: 6px;
+
+        border: 1px solid;
+        border-radius: 3px;
+        border-color: $brand-pane-alt-dark;
+
+        color: $brand-pane-alt-dark;
+        font-size: 18px !important;
+        text-decoration: none;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        .kind {
+            font-weight: 500;
+        }
+
+        .email {
+            white-space: nowrap;
+        }
+
+        &:hover,
+        &:focus {
+            background-color: $brand-pane-alt-dark;
+
+            color: $white;
+
+            .PhoneIcon {
+                fill: $white !important;
+            }
+        }
+    }
+}

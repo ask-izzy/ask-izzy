@@ -126,6 +126,11 @@ class OpeningTimes extends React.Component {
             return "";
         }
 
+        // Reject invalid dates
+        if (_(values).any((v) => moment.isMoment(v) && !v.isValid())) {
+            return "";
+        }
+
         var timeValues = values.map(function(v) {
             if (moment.isMoment(v)) {
                 return v.format('h:mm A');
@@ -134,10 +139,6 @@ class OpeningTimes extends React.Component {
             return v;
         });
 
-        if (_(timeValues).contains('Invalid date')) {
-            return "";
-        }
-
         // flow:disable doesn't know about raw
         return String.raw(strings, ...timeValues);
     }
@@ -145,7 +146,7 @@ class OpeningTimes extends React.Component {
     /*
      * Render the opening hours if ISS says it's open
      */
-    renderOpen(): React.Element {
+    renderOpen(): ReactElement {
         var closesAt = this.props.object.nextCloses;
         return (
             <span className="until">
@@ -159,7 +160,7 @@ class OpeningTimes extends React.Component {
     /*
      * Render the opening hours if ISS says it's closed
      */
-    renderClosed(): React.Element {
+    renderClosed(): ReactElement {
         var day = "";
 
         if (this.props.object.nextOpeningTimes) {
@@ -194,7 +195,7 @@ class OpeningTimes extends React.Component {
      * Render the opening hours if ISS isn't sure whether
      * the place is currently open.
      */
-    renderUnsure(): React.Element {
+    renderUnsure(): ReactElement {
         var open = this.props.object.nextOpeningTimes;
         if (!open) {
             return (
@@ -214,7 +215,7 @@ class OpeningTimes extends React.Component {
         );
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         var open = this.props.object.now_open;
 
         var renderMethod: ?Function;

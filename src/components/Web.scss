@@ -1,0 +1,42 @@
+.Contact + .Web {
+    padding-top: 7px;
+}
+
+.Web {
+    display: block;
+    width: 100%;
+
+    a {
+        display: block;
+        position: relative;
+        width: auto;
+
+        padding: 6px;
+
+        border: 1px solid;
+        border-radius: 3px;
+        border-color: $brand-pane-alt-dark;
+
+        color: $brand-pane-alt-dark;
+        font-size: 18px !important;
+        text-decoration: none;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        .web {
+            white-space: nowrap;
+        }
+
+        &:hover,
+        &:focus {
+            background-color: $brand-pane-alt-dark;
+
+            color: $white;
+
+            .PhoneIcon {
+                fill: $white !important;
+            }
+        }
+    }
+}

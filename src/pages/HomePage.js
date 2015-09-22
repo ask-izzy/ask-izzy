@@ -26,7 +26,7 @@ class HomePage extends React.Component {
         this.transitionTo('search', {search: encodeURIComponent(search)});
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         return (
             <div className="HomePage">
                 <div className="header">

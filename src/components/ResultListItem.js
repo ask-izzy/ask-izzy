@@ -44,7 +44,7 @@ class ResultListItem extends React.Component {
                             this.props.nServiceProvisions);
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         var {
             object,
         } = this.props;

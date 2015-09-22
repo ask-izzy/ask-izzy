@@ -19,7 +19,7 @@ class AppBar extends React.Component {
         onBackTouchTap: function() {},
     },};
 
-    render(): React.Element {
+    render(): ReactElement {
         return (
             <mui.AppBar
                 className="AppBar"

@@ -26,7 +26,7 @@ class HtmlDocument extends React.Component {
         meta: {},
     };
 
-    render(): React.Element {
+    render(): ReactElement {
         var { state, markup, script, css, lang } = this.props;
         var {
             title,

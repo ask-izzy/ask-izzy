@@ -5,7 +5,7 @@ import Router from 'react-router';
 import components from '../components';
 
 export default class StyleGuideList extends React.Component {
-    li(componentName: string): React.Element {
+    li(componentName: string): ReactElement {
         return (
             <Router.Link
                 to="styleguideItem"
@@ -16,7 +16,7 @@ export default class StyleGuideList extends React.Component {
         );
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         return (
             <ul>
                 { Object.keys(components).sort().map(this.li) }

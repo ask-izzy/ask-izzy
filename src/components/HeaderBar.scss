@@ -1,28 +1,31 @@
 .HeaderBar {
+    /* FIXME check these */
+    padding-right: 20px;
+    padding-left: 20px;
+
     background-color: $brand-pane-alt-light;
 
-    &, & a {
-       color: $brand-text-dark !important;
+    &,
+    & a {
+        color: $brand-text-dark !important;
     }
 
-    /* FIXME check these */
-    padding-left: 20px;
-    padding-right: 20px;
-
     .primary {
-        font-weight: 500;
-        font-size: 22px;
+        min-height: 1em;
         padding-top: 15px;
         padding-bottom: 15px;
-        min-height: 1em;
+
+        font-size: 22px;
+        font-weight: 500;
     }
 
     .secondary {
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 1.4;
-        padding-bottom: 20px;
         min-height: 1em;
+        padding-bottom: 20px;
+
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.4;
     }
 
     .LogoLightIcon {
@@ -32,7 +35,8 @@
 
         transform: rotate(5deg);
 
-        path, circle {
+        path,
+        circle {
             fill: $brand-text-dark;
         }
     }

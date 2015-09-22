@@ -27,19 +27,43 @@ export class SleepTonight extends BaseQuestion {
     }
 }
 
+// Can't see a way to cross-reference static properties :/
+var ageGroups = {
+    "25 or younger": [
+        "prenatal",
+        "baby",
+        "toddler",
+        "preschool",
+        "schoolage",
+        "earlyadolescent",
+        "midadolescent",
+        "lateadolescent",
+        "youngadult",
+    ],
+    "26 to 64": [
+        "adult",
+        "middleageadult",
+    ],
+    "65 or older": [
+        "preretirementage",
+        "agedpersons",
+    ],
+};
+
 export class Age extends BaseQuestion {
+
+    // flow:disable
+    static ageGroups = ageGroups;
+
     // flow:disable
     static defaultProps = {
         name: "age",
         question: "How old are you?",
-        answers: [
-            "26 or younger",
-            "27 to 54",
-            "55 or older",
-        ],
+        answers: Object.keys(ageGroups),
     };
 
     static getSearchForAnswer(request, answer) {
+        request.age_groups = ageGroups[answer];
         return request;
     }
 }

@@ -51,7 +51,7 @@ class Intro extends React.Component {
     componentDidMount(): void {
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         return (
             <div>
                 <components.HeaderBar

@@ -1,8 +1,9 @@
 /* @flow */
 import React from "react";
+import { titleize } from "underscore.string";
+
 import Icons from "../icons";
 import fixtures from "../../fixtures/services";
-import { titleize } from "underscore.string";
 
 class Phone extends React.Component {
 
@@ -14,9 +15,9 @@ class Phone extends React.Component {
         return "tel:" + this.props.number.replace(/[^0-9\+]/g, '');
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         return (
-            <div className="Phone">
+            <div className="Contact Phone">
                 <a href={this.href}>
                     <Icons.Phone />
                     <span className="kind">

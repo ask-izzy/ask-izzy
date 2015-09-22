@@ -24,7 +24,7 @@ Feature: Change your personalisation settings
         Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
         How do you identify?                    | Female
-        How old are you?                        | 27 to 54
+        How old are you?                        | 26 to 64
         Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
@@ -51,7 +51,7 @@ Feature: Change your personalisation settings
         Do you need any of these?               | 0 selected
         Where are you?                          | Carlton, Victoria
         How do you identify?                    | Female
-        How old are you?                        | 27 to 54
+        How old are you?                        | 26 to 64
         Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
@@ -66,7 +66,7 @@ Feature: Change your personalisation settings
         Do you have somewhere to sleep tonight? | No
         Where are you?                          | Melbourne VIC
         How do you identify?                    | Female
-        How old are you?                        | 27 to 54
+        How old are you?                        | 26 to 64
         Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
@@ -85,7 +85,7 @@ Feature: Change your personalisation settings
         Do you need any of these?               | 1 selected
         Where are you?                          | Melbourne VIC
         How do you identify?                    | Female
-        How old are you?                        | 27 to 54
+        How old are you?                        | 26 to 64
         Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
@@ -107,7 +107,7 @@ Feature: Change your personalisation settings
         Do you need any of these?               | 2 selected
         Where are you?                          | Melbourne VIC
         How do you identify?                    | Female
-        How old are you?                        | 27 to 54
+        How old are you?                        | 26 to 64
         Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------
 
@@ -127,7 +127,7 @@ Feature: Change your personalisation settings
         Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
         How do you identify?                    | Female
-        How old are you?                        | 27 to 54
+        How old are you?                        | 26 to 64
         Do any of these apply to you?           | 2 selected
         ----------------------------------------------------------------
 
@@ -142,7 +142,7 @@ Feature: Change your personalisation settings
         Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
         How do you identify?                    | Female
-        How old are you?                        | 27 to 54
+        How old are you?                        | 26 to 64
         Do any of these apply to you?           | 1 selected
         ----------------------------------------------------------------
 
@@ -158,6 +158,6 @@ Feature: Change your personalisation settings
         Do you need any of these?               | 0 selected
         Where are you?                          | Melbourne VIC
         How do you identify?                    | Male
-        How old are you?                        | 27 to 54
+        How old are you?                        | 26 to 64
         Do any of these apply to you?           | 0 selected
         ----------------------------------------------------------------

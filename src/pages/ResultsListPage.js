@@ -11,7 +11,8 @@ import components from '../components';
 import icons from '../icons';
 
 class ResultsListPage extends BaseResultsPage {
-    render(): React.Element {
+    render(): ReactElement {
+
         return (
             <div className="ResultsListPage">
                 <components.AppBar
@@ -78,13 +79,13 @@ class ResultsListPage extends BaseResultsPage {
         );
     }
 
-    errorMessage(): React.Element {
+    errorMessage(): ReactElement {
 
         var message = this.state.error;
         return <p className="errorMessage">{ message }</p>;
     }
 
-    homeLink(): React.Element {
+    homeLink(): ReactElement {
 
         var linkText = "Go back";
         return <Router.Link
@@ -93,7 +94,7 @@ class ResultsListPage extends BaseResultsPage {
                >{ linkText }</Router.Link>;
     }
 
-    personalisationLink(): React.Element {
+    personalisationLink(): ReactElement {
 
         var personaliseLink = `${this.getPath()}/personalise/summary`;
         return <Router.Link
@@ -102,7 +103,7 @@ class ResultsListPage extends BaseResultsPage {
                >Change what you need</Router.Link>;
     }
 
-    renderResults(): React.Element {
+    renderResults(): ReactElement {
 
         return (
             <mui.List className="List results">

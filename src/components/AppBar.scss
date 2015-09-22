@@ -2,8 +2,8 @@
     height: 40px !important;
     min-height: auto !important;
 
-    box-shadow: none !important;
     background-color: $brand-bg-dark !important;
+    box-shadow: none !important;
 
     & > div {
         display: inline-block;
@@ -12,34 +12,34 @@
 
     h1 {
         position: absolute;
-        width: 70%;
         top: 0;
         left: 15% !important;
+        width: 70%;
 
-        text-overflow: ellipsis !important;
-
-        text-align: center;
         font-size: 18px !important;
         font-weight: 500 !important;
         line-height: 44px !important;
+        text-align: center;
+        text-overflow: ellipsis !important;
     }
 
     .BackButton {
         margin-top: -24px;
         margin-left: -24px;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
 
             svg {
-                background-color: fade-out(white, 0.8) !important;
                 border-radius: 24px;
+                background-color: fade-out($white, 0.8) !important;
             }
         }
     }
 
     .ChevronBackIcon {
-        height: 48px !important;
         width: 48px !important;
+        height: 48px !important;
 
         margin: 0;
         padding: 0;

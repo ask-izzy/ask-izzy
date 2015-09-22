@@ -18,7 +18,7 @@ export default class StyleGuideItem extends React.Component {
         return components[this.getComponentName()];
     }
 
-    render(): React.Element {
+    render(): ReactElement {
         var Component = this.getComponent();
         if (!Component) {
             return (
