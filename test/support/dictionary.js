@@ -71,12 +71,27 @@ function serviceConverter(str: string, done: callback): void {
         currentTable,      // the lines which constitute a table
         line;              // The line we're currently parsing
 
-    var lineIsValueRegexp = /^\s*\* ([^\s:]+): ([^\s]*)$/;
+    var lineIsValueRegexp = /^\s*\* ([^:]+): (.*)$/;
     var lineIsTableHeaderRegexp = /^\s*\* ([^\s:]+)$/;
+
+    function sanitizeKey(key: string): string {
+        return key.toLowerCase().replace(" ", "_");
+    }
+
+    function sanitizeValue(value: string): string {
+        if (value == "(nada)") {
+            return "";
+        }
+        return value;
+    }
 
     function nextTable(newTableKey: ?string): void {
         if (currentTable && currentTableLines) {
             serviceProps[currentTable] = parseTable(currentTableLines);
+        }
+
+        if (newTableKey) {
+            newTableKey = sanitizeKey(newTableKey);
         }
 
         currentTable = newTableKey;
@@ -88,9 +103,9 @@ function serviceConverter(str: string, done: callback): void {
         var isTableHeader = line.match(lineIsTableHeaderRegexp);
 
         if (isValue) {
-            serviceProps[isValue[1].toLowerCase()] = isValue[2];
+            serviceProps[sanitizeKey(isValue[1])] = sanitizeValue(isValue[2]);
         } else if (isTableHeader) {
-            nextTable(isTableHeader[1].toLowerCase());
+            nextTable(isTableHeader[1]);
             currentTableLines = [];
         } else if (currentTableLines) {
             // Table row

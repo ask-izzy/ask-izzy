@@ -5,28 +5,52 @@ Feature: Service details page
     # So that I know if this service meets my needs
 
     Scenario: Description is limited to one sentence
-        When I visit /service/13841
-        Then I should see "A service."
-        And I should not see "Provides free legal advice to people."
+       Given A service with:
+        ----------------------------------------------
+        * Description: There is a service here. Also we have penguins
+        ----------------------------------------------
+        When I navigate to the service page
+        Then I should see "There is a service here."
+        And I should not see "Also we have penguins"
 
-    Scenario: The description is limited to a set of dot points
-        When I visit /service/13841
+    Scenario: The service provisions is limited to a set of dot points
+       Given A service with:
+        ----------------------------------------------
+        * Description: "legal advice"
+        ----------------------------------------------
+        When I navigate to the service page
         Then I should see "Advice on legal matters"
 
     Scenario: Service provisions header is present if there are any
-        When I visit /service/111
+       Given A service with:
+        ----------------------------------------------
+        * Description: "legal advice"
+        ----------------------------------------------
+        When I navigate to the service page
         Then I should see "What you can get here"
 
     Scenario: Service provisions header is absent if there are none
-        When I visit /service/13844
+       Given A service with:
+        ----------------------------------------------
+        * Description: a service is here
+        ----------------------------------------------
+        When I navigate to the service page
         Then I should not see "What you can get here"
 
     Scenario: Ineligibility is present if there are criteria
-        When I visit /service/111
+       Given A service with:
+        ----------------------------------------------
+        * Ineligibility info: no penguins allowed
+        ----------------------------------------------
+        When I navigate to the service page
         Then I should see "You are ineligible if"
 
     Scenario: Ineligibility is absent if there are no criteria
-        When I visit /service/13844
+       Given A service with:
+        ----------------------------------------------
+        * Ineligibility info: (nada)
+        ----------------------------------------------
+        When I navigate to the service page
         Then I should not see "You are ineligible if"
 
     Scenario: The address is a link to google maps
