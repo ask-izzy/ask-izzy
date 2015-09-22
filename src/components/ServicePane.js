@@ -13,10 +13,6 @@ import icons from "../icons";
 import iss from "../iss";
 
 export default class ServicePane extends React.Component {
-    // flow:disable not supported yet
-    static propTypes = {
-        service: React.PropTypes.instanceOf(iss.Service).isRequired,
-    };
 
     constructor(props: Object) {
         super(props);
@@ -37,11 +33,8 @@ export default class ServicePane extends React.Component {
 
     // flow:disable not supported yet
     static sampleProps = {default: {
-        service: Object.assign(
-            new iss.Service(),
-            fixtures.youthSupportNet
-        )},
-    };
+        service: new iss.Service(fixtures.youthSupportNet),
+    }};
 
     async getSiblingServices(): Promise<void> {
         var response = await this.props.service.getSiblingServices();

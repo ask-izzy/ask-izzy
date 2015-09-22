@@ -26,11 +26,9 @@ class ResultListItem extends React.Component {
 
     // flow:disable not supported yet
     static sampleProps = {default: {
-        object: Object.assign(
-            new iss.Service(),
-            fixtures.ixa
-        )},
-    };
+        object: new iss.Service(fixtures.ixa),
+    }};
+
 
     /**
      * nMoreServiceProvisions:

@@ -11,7 +11,7 @@ import webDriverInstance from "./support/webdriver";
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
-import libraries from "./steps/steps";
+import libraries from "./steps";
 
 /* eslint-disable no-unused-vars */
 import server from "../src/server";
