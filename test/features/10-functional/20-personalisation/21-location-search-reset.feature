@@ -21,6 +21,7 @@ Feature: Location search
         When I click on "Change what you need"
         And I click on "Where are you?"
         And I search for "carlt"
+        Then I should see "Carlton"
         And I click on "Done"
         Then I should see "carlt"
 
