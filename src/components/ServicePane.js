@@ -89,9 +89,9 @@ export default class ServicePane extends React.Component {
         );
     }
 
-    renderSiblings(): React.Element {
+    renderSiblings(): ReactElement {
         if (!this.state.siblings) {
-            return "";
+            return <span />;
         }
 
         return (

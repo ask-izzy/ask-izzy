@@ -15,7 +15,7 @@ class Eligibility extends React.Component {
     // flow:disable not supported yet
     static sampleProps = {default: fixtures.ixa};
 
-    eligibility(eligibility: string): Array<React.Element> {
+    eligibility(eligibility: string): Array<ReactElement> {
         if (eligibility) {
             return eligibility.split("\n").map(
                 (line, idx) => <li key={idx}>{line}</li>

@@ -90,10 +90,9 @@ class ContactMethods extends React.Component {
         } else {
             return <span />;
         }
-
     }
 
-    renderContactMethod(record: Object, idx: number): React.Element {
+    renderContactMethod(record: Object, idx: number): ReactElement {
         Object.assign(record, {key: idx});
         return React.createElement(record.component, record);
     }
