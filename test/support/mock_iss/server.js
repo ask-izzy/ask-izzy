@@ -283,3 +283,16 @@ app.get("/api/v3/service/5551234/", (req, res) => {
 });
 
 app.listen(5000);
+
+var mocks = {};
+
+export function mock(service: Object): void {
+    if (mocks[service.id]) {
+        throw new Error(`Service ID ${service.id} is already mocked`);
+    }
+
+    mocks[service.id] = service;
+    app.get(`/api/v3/service/${service.id}`, (req, res) => {
+        res.json(service);
+    });
+}

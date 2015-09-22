@@ -13,5 +13,6 @@ module.exports = (function() {
         require("./results"),
         require("./servicepage"),
         require("./questions"),
+        require("./mocks"),
     ];
 })();
