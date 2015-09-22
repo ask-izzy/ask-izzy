@@ -11,7 +11,7 @@ class NavBar extends React.Component {
     // flow:disable not supported yet
     static sampleProps = {default: {}};
 
-    render(): React.Component {
+    render(): ReactElement {
         return (
             <div className="NavBar">
                 <mui.List className="List categories">
