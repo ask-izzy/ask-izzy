@@ -27,7 +27,7 @@ export default class StyleGuideItem extends React.Component {
         }
 
         var variantNames = Object.keys(Component.sampleProps);
-        var variants = variantNames.map(function(key) {
+        var variants = variantNames.map(key => {
             var heading;
 
             if (variantNames.length > 1) {

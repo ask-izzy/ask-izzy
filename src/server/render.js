@@ -21,7 +21,7 @@ export default function render(req, res, next) {
             delete require.cache[require.resolve("./webpack-stats.json")];
         }
 
-        Router.run(routes, req.path, function routeMatched(Root) {
+        Router.run(routes, req.path, Root => {
             const markup = React.renderToString(<Root/>);
             // The application component is rendered to static markup
             // and sent as response.

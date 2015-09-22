@@ -132,7 +132,7 @@ class OpeningTimes extends React.Component {
             return "";
         }
 
-        var timeValues = values.map(function(value) {
+        var timeValues = values.map(value => {
             if (moment.isMoment(value)) {
                 return value.format("h:mm A");
             }

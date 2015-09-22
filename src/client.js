@@ -12,7 +12,7 @@ injectTapEventPlugin();
 Router.run(
     routes,
     Router.HistoryLocation,
-    function routeMatched(Root) {
+    Root => {
         React.render(
             <Root/>,
             document.getElementById("root"),
