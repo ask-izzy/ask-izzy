@@ -36,7 +36,7 @@ class Intro extends React.Component {
 
             return category.byline.toLocaleLowerCase() ||
                 `with ${category.name.toLocaleLowerCase()}`;
-        } catch (e) {
+        } catch (error) {
             var search = this.context.controller.props.params.search;
 
             return `with ${search.toLocaleLowerCase()}`;

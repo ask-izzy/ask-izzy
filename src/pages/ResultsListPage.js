@@ -104,7 +104,7 @@ class ResultsListPage extends BaseResultsPage {
             }
             <div className="resultsContainer">{
                 this.results.map((object, index) => {
-                    var el = object.infobox ?
+                    var elem = object.infobox ?
                         React.addons.cloneWithProps(object.node)
                     : object.crisis ?
                         <components.CrisisLineItem
@@ -114,7 +114,7 @@ class ResultsListPage extends BaseResultsPage {
                         object={object}
                       />;
 
-                    var klass = el.type.name || "other";
+                    var klass = elem.type.name || "other";
 
                     return (
                         <div
@@ -123,7 +123,7 @@ class ResultsListPage extends BaseResultsPage {
                                 `resultContainer resultContainer-${klass}`
                             }
                         >
-                            {el}
+                            {elem}
                         </div>);
                 })
             }</div>

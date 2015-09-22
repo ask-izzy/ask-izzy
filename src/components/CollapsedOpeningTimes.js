@@ -74,7 +74,7 @@ export default class CollapsedOpeningTimes extends React.Component {
         ];
 
         var openingHours = _(this.props.object.openingTimes)
-            .sortBy(p => order.indexOf(p.day));
+            .sortBy(record => order.indexOf(record.day));
 
         return (
             <div>

@@ -15,7 +15,6 @@ if (process.env.NODE_ENV === "production") {
 
 export default function render(req, res, next) {
     try {
-
         // In development, reload webpack stats file on every request
         if (process.env.NODE_ENV === "development") {
             webpackStats = require("./webpack-stats.json");
@@ -37,8 +36,7 @@ export default function render(req, res, next) {
 
             res.send(doctype + html);
         });
-
-    } catch (e) {
-        next(e);
+    } catch (error) {
+        next(error);
     }
 }

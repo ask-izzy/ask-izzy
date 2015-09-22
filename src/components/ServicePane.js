@@ -56,11 +56,11 @@ export default class ServicePane extends React.Component {
         var phoneOrder = ["freecall", "phone", "mobile"];
         var phones = _.filter(
             object.phones,
-            (p) => !filteredPhoneKinds.has(p.kind)
+            phone => !filteredPhoneKinds.has(phone.kind)
         );
 
-        phones = _(phones).sortBy((p) => phoneOrder.indexOf(p.kind));
-        phones = _(phones).uniq((p) => p.number);
+        phones = _(phones).sortBy(phone => phoneOrder.indexOf(phone.kind));
+        phones = _(phones).uniq(phone => phone.number);
 
         return (
             <div className="ServicePane">

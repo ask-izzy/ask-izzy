@@ -27,17 +27,17 @@ export default class StyleGuideItem extends React.Component {
         }
 
         var variantNames = Object.keys(Component.sampleProps);
-        var variants = variantNames.map(function(k) {
+        var variants = variantNames.map(function(key) {
             var heading;
 
             if (variantNames.length > 1) {
-                heading = <h1>{_s.titleize(k)}</h1>;
+                heading = <h1>{_s.titleize(key)}</h1>;
             }
 
             return (
-                <div key={k}>
+                <div key={key}>
                     {heading}
-                    <Component {...Component.sampleProps[k]} />
+                    <Component {...Component.sampleProps[key]} />
                 </div>
             );
         });

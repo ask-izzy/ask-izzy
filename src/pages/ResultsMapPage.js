@@ -172,8 +172,8 @@ class ResultsMapPage extends BaseResultsPage {
             /* limit minimum height to 1/3 of the screen realestate */
             mapHeight = Math.max(mapHeight,
                                  window.innerHeight / 3);
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(error);
         }
 
         return (

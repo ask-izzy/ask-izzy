@@ -55,7 +55,7 @@ function maps(): Promise<MapsApi> {
             try {
                 google.maps;
                 resolve(new MapsApi(google.maps));
-            } catch (e) {
+            } catch (error) {
                 /* try again in 500ms */
                 setTimeout(checkLoaded, 500);
             }

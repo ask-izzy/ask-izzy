@@ -64,7 +64,7 @@ class BaseResultsPage extends BaseCategoriesPage {
                     node: infobox,
                 });
             }
-        } catch (e) {
+        } catch (error) {
             // pass
         }
 
@@ -127,7 +127,7 @@ class BaseResultsPage extends BaseCategoriesPage {
                     this.setState({
                         error: data.error_message,
                     });
-                } catch (e) {
+                } catch (error) {
                     this.setState({
                         error: `An error occurred (${response.status})`,
                     });
@@ -162,7 +162,7 @@ class BaseResultsPage extends BaseCategoriesPage {
                 this.setState({
                     error: data.error_message,
                 });
-            } catch (e) {
+            } catch (error) {
                 this.setState({
                     error: `An error occurred (${response.status})`,
                 });

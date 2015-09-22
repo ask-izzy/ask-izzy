@@ -2,8 +2,8 @@
 
 import _ from "underscore";
 
-function escapeRegex(s) {
-    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+function escapeRegex(str) {
+    return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
 }
 
 class Form {
@@ -15,9 +15,9 @@ class Form {
 class RegexpForm extends Form {
     form: RegExp;
 
-    constructor(re: RegExp|string) {
+    constructor(regex: RegExp|string) {
         super();
-        this.form = new RegExp(re, "i");
+        this.form = new RegExp(regex, "i");
     }
 
     match(input) {

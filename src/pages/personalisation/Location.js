@@ -223,11 +223,11 @@ class Location extends React.Component {
                 });
             })
 
-            .catch((e) => {
-                console.error(e);
+            .catch(error => {
+                console.error(error);
                 this.setState({
                     geolocation: GeoLocationState.FAILED,
-                    error: e.message,
+                    error: error.message,
                 });
             });
     }

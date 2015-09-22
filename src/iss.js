@@ -233,8 +233,8 @@ export class Service {
                 provision.name
                 /*::`*/
             ];
-        } catch (e) {
-            console.error("Failed to determine service provisions", e);
+        } catch (error) {
+            console.error("Failed to determine service provisions", error);
         }
 
         return this._serviceProvisions;
@@ -290,6 +290,7 @@ export async function search(
     };
 
     if (typeof query === "string") {
+        /* eslint-disable id-length */
         request_.q = query;
     } else if (query instanceof Object) {
         Object.assign(request_, query);

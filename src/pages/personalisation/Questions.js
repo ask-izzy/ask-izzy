@@ -16,6 +16,7 @@ export class SleepTonight extends BaseQuestion {
 
     static getSearchForAnswer(request, answer) {
         if (answer == "No") {
+            /* eslint-disable id-length */
             request.q = "crisis accommodation";
         }
 

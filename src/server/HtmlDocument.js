@@ -32,7 +32,8 @@ class HtmlDocument extends React.Component {
             siteName,
             currentUrl,
         } = this.props;
-        var vp = "width=device-width, initial-scale=1.0, user-scalable=no";
+        var viewport =
+            "width=device-width, initial-scale=1.0, user-scalable=no";
         var issconfig = 'var ISS_URL = "' + process.env.ISS_URL + '";';
         var GOOGLE_KEY = process.env.GOOGLE_KEY;
 
@@ -45,7 +46,7 @@ class HtmlDocument extends React.Component {
     <head>
         <meta
             name="viewport"
-            content={vp}
+            content={viewport}
         />
 
         <title>{title}</title>
@@ -75,9 +76,9 @@ class HtmlDocument extends React.Component {
             content={currentUrl}
         />
 
-        {css.map((href, k) =>
+        {css.map((href, idx) =>
             <link
-                key={k}
+                key={idx}
                 rel="stylesheet"
                 type="text/css"
                 href={href}
@@ -229,9 +230,9 @@ class HtmlDocument extends React.Component {
             dangerouslySetInnerHTML={{__html: markup}}
         />
         <script dangerouslySetInnerHTML={{__html: issconfig}} />
-        {script.map((src, k) =>
+        {script.map((src, idx) =>
             <script
-                key={k}
+                key={idx}
                 src={src}
             />
         )}

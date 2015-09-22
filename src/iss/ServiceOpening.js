@@ -26,14 +26,15 @@ type serviceOpeningHours = {
  */
 function timeOfDay(day: Moment, time: hmsWithColonsTime): Moment {
     // Can't just map(parseInt) as parseInt has an optional radix param
-    var [h, m, s] = time.split(":").map((s) => parseInt(s));
+    var [hour, mins, secs] = time.split(":").map(str => parseInt(str));
 
-    var t = moment(day);
+    var time_ = moment(day);
 
-    t.set("hour", h);
-    t.set("minute", m);
-    t.set("second", s);
-    return t;
+    time_.set("hour", hour);
+    time_.set("minute", mins);
+    time_.set("second", secs);
+
+    return time_;
 }
 
 export default class ServiceOpening {
