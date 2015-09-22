@@ -1,7 +1,5 @@
 /* @flow */
 
-"use strict";
-
 import React from "react";
 import Router from "react-router";
 import reactMixin from "react-mixin";
@@ -16,14 +14,14 @@ class HomePage extends React.Component {
     onSearchSubmit(event: Event): void {
         event.preventDefault();
 
-        var search =  this.refs.search.getDOMNode().value;
+        var search = this.refs.search.getDOMNode().value;
 
         if (search == "") {
             /* FIXME: should this give some user feedback? */
             return;
         }
 
-        this.transitionTo('search', {search: encodeURIComponent(search)});
+        this.transitionTo("search", {search: encodeURIComponent(search)});
     }
 
     render(): ReactElement {

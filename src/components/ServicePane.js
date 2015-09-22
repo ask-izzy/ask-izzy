@@ -1,11 +1,8 @@
 /* @flow */
 
-"use strict";
-
 import React from "react";
 import Router from "react-router";
 import mui from "material-ui";
-import _ from "underscore";
 
 import Address from "../components/Address";
 import CollapsedOpeningTimes from "../components/CollapsedOpeningTimes";
@@ -16,13 +13,9 @@ import icons from "../icons";
 import iss from "../iss";
 
 export default class ServicePane extends React.Component {
-
     // flow:disable not supported yet
-    static sampleProps = {default: {
-        service: Object.assign(
-            new iss.Service,
-            fixtures.youthSupportNet
-        ),},
+    static propTypes = {
+        service: React.PropTypes.instanceOf(iss.Service).isRequired,
     };
 
     constructor(props: Object) {
@@ -30,16 +23,6 @@ export default class ServicePane extends React.Component {
         this.state = {
             siblings: null,
         };
-    }
-
-    // flow:disable not supported yet
-    static propTypes = {
-        service: React.PropTypes.instanceOf(iss.Service).isRequired,
-    };
-
-    async getSiblingServices(): Promise<void> {
-        var response = await this.props.service.getSiblingServices();
-        this.setState({siblings: response.objects});
     }
 
     componentDidMount(): void {
@@ -50,6 +33,20 @@ export default class ServicePane extends React.Component {
         if (prevProps.service != this.props.service) {
             this.getSiblingServices();
         }
+    }
+
+    // flow:disable not supported yet
+    static sampleProps = {default: {
+        service: Object.assign(
+            new iss.Service(),
+            fixtures.youthSupportNet
+        )},
+    };
+
+    async getSiblingServices(): Promise<void> {
+        var response = await this.props.service.getSiblingServices();
+
+        this.setState({siblings: response.objects});
     }
 
     render(): ReactElement {
@@ -92,9 +89,9 @@ export default class ServicePane extends React.Component {
         );
     }
 
-    renderSiblings(): React.Element {
+    renderSiblings(): ReactElement {
         if (!this.state.siblings) {
-            return '';
+            return <span />;
         }
 
         return (

@@ -1,4 +1,4 @@
-"use strict";
+/* @flow */
 
 require("babel/register");
 require("./server");

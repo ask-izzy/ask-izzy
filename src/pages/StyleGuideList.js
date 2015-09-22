@@ -1,11 +1,19 @@
 /* @flow */
 
-import React from 'react';
-import Router from 'react-router';
-import components from '../components';
+import React from "react";
+import Router from "react-router";
+import components from "../components";
 
 export default class StyleGuideList extends React.Component {
-    li(componentName: string): ReactElement {
+    render(): ReactElement {
+        return (
+            <ul>
+                {Object.keys(components).sort().map(this.renderItem)}
+            </ul>
+        );
+    }
+
+    renderItem(componentName: string): ReactElement {
         return (
             <Router.Link
                 to="styleguideItem"
@@ -15,13 +23,4 @@ export default class StyleGuideList extends React.Component {
             >{componentName}</Router.Link>
         );
     }
-
-    render(): ReactElement {
-        return (
-            <ul>
-                { Object.keys(components).sort().map(this.li) }
-            </ul>
-        );
-    }
-
 }

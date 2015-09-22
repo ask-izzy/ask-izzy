@@ -3,8 +3,6 @@
  */
 /* @flow */
 
-"use strict";
-
 import sessionstorage from "sessionstorage";
 
 class Storage {
@@ -20,8 +18,8 @@ class Storage {
     static getJSON(key: string): ?(Object|Array) {
         try {
             return JSON.parse(this.getItem(key));
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(error);
             return null;
         }
     }

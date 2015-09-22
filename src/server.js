@@ -2,7 +2,6 @@
 
 import path from "path";
 import express from "express";
-import config from "./config";
 import render from "./server/render";
 
 // Initialize express server
@@ -46,7 +45,6 @@ server.set("port", process.env.PORT || 8000);
 server.listen(server.get("port"), () => {
     var env = server.get("env");
     var port = server.get("port");
-    console.info(
-        `Express ${env} server listening on ${port}`
-    );
+
+    console.info(`Express ${env} server listening on ${port}`);
 });

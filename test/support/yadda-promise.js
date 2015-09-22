@@ -1,12 +1,10 @@
 /* @flow */
 
-"use strict";
+import pauseToDebug from "./debug";
 
-import pauseToDebug from './debug';
-
-function unpromisify(fn: (...args: any) => Promise<void>): Function {
-    function stripArgs(fn) {
-        return () => fn();
+function unpromisify(func: (...args: any) => Promise<void>): Function {
+    function stripArgs(func) {
+        return () => func();
     }
 
     return function promisified(...args) {
@@ -14,9 +12,11 @@ function unpromisify(fn: (...args: any) => Promise<void>): Function {
         // but there's no success value, so we just strip
         // all arguments on success.
         var done = args.splice(args.length - 1, 1)[0];
-        var errorHandler = function(e) {
-            var report = () => done(e);
-            console.log("Error", e);
+        var errorHandler = function(error) {
+            var report = () => done(error);
+
+            console.log("Error", error);
+
             if (process.env.PAUSE_ON_ERROR) {
                 pauseToDebug().then(report).catch(report);
             } else {
@@ -25,11 +25,11 @@ function unpromisify(fn: (...args: any) => Promise<void>): Function {
         };
 
         try {
-            fn.apply(this, args)
+            func.apply(this, args)
                 .then(stripArgs(done))
                 .catch(errorHandler);
-        } catch (e) {
-            errorHandler(e);
+        } catch (error) {
+            errorHandler(error);
         }
     };
 }

@@ -1,7 +1,5 @@
 /* @flow */
 
-"use strict";
-
 import React from "react";
 import { slugify } from "underscore.string";
 
@@ -9,7 +7,7 @@ import Infobox from "../components/Infobox";
 import icons from "../icons";
 import * as iss from "../iss";
 
-import personalisation from '../pages/personalisation';
+import personalisation from "../pages/personalisation";
 
 class Category {
     key: string;
@@ -44,12 +42,15 @@ var categories:Array<Category> = [
         byline: "Find a place to stay",
         icon: icons.House,
         search: {
-            q: 'housing',
+            q: "housing",
 
             // service_type: 'housing',
         },
         info: (
-            <Infobox href="#" linkText="Housing information">
+            <Infobox
+                href="#"
+                linkText="Housing information"
+            >
                 It's important to act early on housing. These services can
                 help to find a place to stay, or rental assistance to
                 help you stay in your current house.
@@ -69,7 +70,7 @@ var categories:Array<Category> = [
         byline: "Find something to eat",
         icon: icons.Food,
         search: {
-            q: 'food',
+            q: "food",
         },
         personalisation: [
             personalisation.Location,
@@ -83,7 +84,7 @@ var categories:Array<Category> = [
         byline: "Things you might need",
         icon: icons.Things,
         search: {
-            q: 'material aid',
+            q: "material aid",
         },
         personalisation: [
             personalisation.Location,
@@ -97,7 +98,7 @@ var categories:Array<Category> = [
         byline: "Help with law, police & transport officers",
         icon: icons.Legal,
         search: {
-            q: 'legal aid',
+            q: "legal aid",
         },
         personalisation: [
             personalisation.Location,
@@ -111,7 +112,7 @@ var categories:Array<Category> = [
         byline: "Emergency funds, bills or budgeting",
         icon: icons.Money,
         search: {
-            q: 'financial aid',
+            q: "financial aid",
         },
         personalisation: [
             personalisation.Location,
@@ -125,7 +126,7 @@ var categories:Array<Category> = [
         byline: "Physical, mental & emotional health",
         icon: icons.Health,
         search: {
-            q: 'physical health',
+            q: "physical health",
         },
         personalisation: [
             personalisation.Location,
@@ -139,7 +140,7 @@ var categories:Array<Category> = [
         byline: "Dealing with drugs & alcohol, gambling etc.",
         icon: icons.Addiction,
         search: {
-            q: 'addiction',
+            q: "addiction",
         },
         personalisation: [
             personalisation.Location,
@@ -153,7 +154,7 @@ var categories:Array<Category> = [
         byline: "Someone to help & talk to",
         icon: icons.Mental,
         search: {
-            q: 'mental health',
+            q: "mental health",
         },
         personalisation: [
             personalisation.Location,
@@ -167,7 +168,7 @@ var categories:Array<Category> = [
         byline: "Developing everyday living skills etc.",
         icon: icons.Skills,
         search: {
-            q: 'life skills',
+            q: "life skills",
         },
         personalisation: [
             personalisation.Location,
@@ -181,7 +182,7 @@ var categories:Array<Category> = [
         byline: "Making money or volunteering",
         icon: icons.Job,
         search: {
-            q: 'employment',
+            q: "employment",
         },
         personalisation: [
             personalisation.Location,
@@ -195,7 +196,7 @@ var categories:Array<Category> = [
         byline: "Find Centrelink near you",
         icon: icons.Centrelink,
         search: {
-            q: 'centrelink',
+            q: "centrelink",
         },
         personalisation: [
             personalisation.Location,
@@ -209,7 +210,7 @@ var categories:Array<Category> = [
         byline: "Meet people, try an activity or just hang out",
         icon: icons.Entertainment,
         search: {
-            q: 'recreation',
+            q: "recreation",
         },
         personalisation: [
             personalisation.Location,
@@ -223,7 +224,7 @@ var categories:Array<Category> = [
         byline: "Public toilets, libraries, etc.",
         icon: icons.Facilaties,
         search: {
-            q: 'libraries toilets',
+            q: "libraries toilets",
         },
         personalisation: [
             personalisation.Location,
@@ -237,7 +238,7 @@ var categories:Array<Category> = [
         byline: "Computers, mobiles, free wifi or charging",
         icon: icons.Tech,
         search: {
-            q: 'computers wifi',
+            q: "computers wifi",
         },
         personalisation: [
             personalisation.Location,

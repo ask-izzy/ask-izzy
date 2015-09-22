@@ -1,9 +1,6 @@
 /* @flow */
-"use strict";
 
 import React from "react";
-import Router from "react-router";
-import mui from "material-ui";
 
 class HeaderBar extends React.Component {
     // flow:disable not supported yet
@@ -18,7 +15,7 @@ class HeaderBar extends React.Component {
     static sampleProps = {default: {
         primaryText: "Primary Text",
         secondaryText: "Secondary Text",
-    },};
+    }};
 
     render(): ReactElement {
         return (

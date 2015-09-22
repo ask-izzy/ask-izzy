@@ -3,23 +3,6 @@ import React from "react";
 
 class Collapser extends React.Component {
 
-    // flow:disable not supported yet
-    static sampleProps = {
-        default: {
-            message: "Click to expand",
-            children: (
-                <div>Hidden content</div>
-            ),
-        },
-        expanded: {
-            expanded: true,
-            message: "Click to expand",
-            children: (
-                <div>Expanded content</div>
-            ),
-        },
-    };
-
     constructor(props: Object) {
         super(props);
 
@@ -38,6 +21,23 @@ class Collapser extends React.Component {
         this.setState({collapsed: !this.state.collapsed});
     }
 
+    // flow:disable not supported yet
+    static sampleProps = {
+        default: {
+            message: "Click to expand",
+            children: (
+                <div>Hidden content</div>
+            ),
+        },
+        expanded: {
+            expanded: true,
+            message: "Click to expand",
+            children: (
+                <div>Expanded content</div>
+            ),
+        },
+    };
+
     hiddenClass(): string {
         if (this.state.collapsed) {
             return "collapsed";
@@ -50,7 +50,7 @@ class Collapser extends React.Component {
         return (
             <div
                 className={`Collapser ${this.props.className}`}
-                onclick={this.handleClick.bind(this)}
+                onClick={this.handleClick.bind(this)}
             >
                 <a
                     href="#"
@@ -58,7 +58,7 @@ class Collapser extends React.Component {
                     onClick={this.handleClick.bind(this)}
                 >{this.props.message}</a>
                 <div
-                    className={ this.hiddenClass() }
+                    className={this.hiddenClass()}
                 >
                     {this.props.children}
                 </div>

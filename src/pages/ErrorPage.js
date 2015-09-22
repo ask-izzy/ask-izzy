@@ -8,13 +8,14 @@ class ErrorPage extends React.Component {
 
     render(): ReactElement {
         var { err } = this.props;
+
         return (
             <div>
                 <h1>Error displaying this page</h1>
 
-                { process.env.DEBUG && err &&
+                {process.env.DEBUG && err &&
                     <pre align="center">
-                        { err.message }
+                        {err.message}
                     </pre>
                 }
 

@@ -1,13 +1,10 @@
 /* @flow */
 
 import React from "react";
+
 import fixtures from "../../fixtures/services";
 
 class Eligibility extends React.Component {
-
-    // flow:disable not supported yet
-    static sampleProps = {default: fixtures.ixa};
-
     // flow:disable not supported yet
     static propTypes = {
         catchment: React.PropTypes.String,
@@ -15,7 +12,10 @@ class Eligibility extends React.Component {
         ineligibility_info: React.PropTypes.String,
     };
 
-    eligibility(eligibility: string): Array<React.Element> {
+    // flow:disable not supported yet
+    static sampleProps = {default: fixtures.ixa};
+
+    eligibility(eligibility: string): Array<ReactElement> {
         if (eligibility) {
             return eligibility.split("\n").map(
                 (line, idx) => <li key={idx}>{line}</li>
@@ -29,16 +29,15 @@ class Eligibility extends React.Component {
         var catchment: string = this.props.catchment;
         var eligibilityInfo: string = this.props.eligibility_info;
         var ineligibilityInfo: string = this.props.ineligibility_info;
-        var eligibleMarkup;
-        var ineligibleMarkup;
+        var eligibleMarkup, ineligibleMarkup;
 
         if (eligibilityInfo || catchment) {
             eligibleMarkup = (
                 <div className="eligibility">
                     <h3>To use this service you should be</h3>
                     <ul>
-                        <li>Located in { catchment }</li>
-                        { this.eligibility(eligibilityInfo) }
+                        <li>Located in {catchment}</li>
+                        {this.eligibility(eligibilityInfo)}
                     </ul>
                 </div>
             );
@@ -49,7 +48,7 @@ class Eligibility extends React.Component {
                 <div className="ineligibility">
                     <h3>You are ineligible if</h3>
                     <ul>
-                        { this.eligibility(ineligibilityInfo) }
+                        {this.eligibility(ineligibilityInfo)}
                     </ul>
                 </div>
             );

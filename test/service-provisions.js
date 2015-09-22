@@ -3,18 +3,18 @@
  */
 
 /* @flow */
+/* eslint-env node, mocha */
+/* eslint-disable prefer-arrow-callback */
 
-"use strict";
+import assert from "assert";
+import fs from "fs";
+import yaml from "js-yaml";
 
-import assert from 'assert';
-import fs from 'fs';
-import yaml from 'js-yaml';
-
-import serviceProvisions from '../src/constants/service-provisions';
+import serviceProvisions from "../src/constants/service-provisions";
 
 // import the test cases
 var tests = yaml.safeLoad(
-    fs.readFileSync('./test/service-provisions.yaml', 'utf8')
+    fs.readFileSync("./test/service-provisions.yaml", "utf8")
 );
 
 describe("Service Provisions", function() {

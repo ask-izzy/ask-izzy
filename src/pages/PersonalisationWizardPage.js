@@ -1,16 +1,11 @@
 /* @flow */
 
-"use strict";
+import React from "react";
+import _ from "underscore";
 
-import React from 'react';
-import Router from "react-router";
-import _ from 'underscore';
-
-import BasePersonalisationPage from './BasePersonalisationPage';
-import Intro from './personalisation/Intro';
-import categories from '../constants/categories';
-import components from '../components';
-import icons from '../icons';
+import BasePersonalisationPage from "./BasePersonalisationPage";
+import Intro from "./personalisation/Intro";
+import components from "../components";
 
 class PersonalisationWizardPage extends BasePersonalisationPage {
 
@@ -38,10 +33,10 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         if (subpage == this.personalisationComponents.length) {
             var params = this.getParams();
 
-            if (_.has(params, 'page')) {
-                this.replaceWith('category', params);
-            } else if (_.has(params, 'search')) {
-                this.replaceWith('search', params);
+            if (_.has(params, "page")) {
+                this.replaceWith("category", params);
+            } else if (_.has(params, "search")) {
+                this.replaceWith("search", params);
             } else {
                 throw new Error("Unexpected");
             }

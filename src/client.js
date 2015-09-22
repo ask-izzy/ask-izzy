@@ -1,7 +1,5 @@
 /* @flow */
 
-"use strict";
-
 import React from "react";
 import Router from "react-router";
 import injectTapEventPlugin from "react-tap-event-plugin";
@@ -14,7 +12,7 @@ injectTapEventPlugin();
 Router.run(
     routes,
     Router.HistoryLocation,
-    function routeMatched(Root, state) {
+    Root => {
         React.render(
             <Root/>,
             document.getElementById("root"),

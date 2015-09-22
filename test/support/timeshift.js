@@ -5,7 +5,7 @@
  * Released under the MIT license
  */
 
-// jscs:disable
+/* eslint-disable */
 
 (function() {
 
@@ -13,7 +13,7 @@
     var OriginalDate = root.Date;
 
     var TimeShift;
-    if (typeof exports !== 'undefined') {
+    if (typeof exports !== "undefined") {
         TimeShift = exports;
     } else {
         TimeShift = root.TimeShift = {};
@@ -31,13 +31,13 @@
     }
 
     function realLocalToUtc(realLocal) {
-        return new OriginalDate(realLocal.getTime() - realLocal.getTimezoneOffset()*60*1000 + timezoneOffset*60*1000);
+        return new OriginalDate(realLocal.getTime() - realLocal.getTimezoneOffset() * 60 * 1000 + timezoneOffset * 60 * 1000);
     }
     function utcToLocal(utc) {
-        return new OriginalDate(utc.getTime() - timezoneOffset*60*1000);
+        return new OriginalDate(utc.getTime() - timezoneOffset * 60 * 1000);
     }
     function localToUtc(local) {
-        return new OriginalDate(local.getTime() + timezoneOffset*60*1000);
+        return new OriginalDate(local.getTime() + timezoneOffset * 60 * 1000);
     }
     function twoDigit(n) {
         if (n < 10) {
@@ -56,7 +56,7 @@
         } else {
             return zone;
         }
-        return zone + twoDigit(Math.floor(offset/60)) + twoDigit(offset%60);
+        return zone + twoDigit(Math.floor(offset / 60)) + twoDigit(offset % 60);
     }
 
     /**
@@ -195,7 +195,7 @@
         var d = utcToLocal(this.utc);
         // Mon Mar 05 2012 06:07:08 GMT+0500
         return wkdays[d.getUTCDay()] + " " + months[d.getUTCMonth()] + " " + twoDigit(d.getUTCDate()) + " " + d.getUTCFullYear()
-            " " + twoDigit(d.getUTCHours()) + ":" + twoDigit(d.getUTCMinutes()) + ":" + twoDigit(d.getUTCSeconds()) + " " + timezoneName();
+        " " + twoDigit(d.getUTCHours()) + ":" + twoDigit(d.getUTCMinutes()) + ":" + twoDigit(d.getUTCSeconds()) + " " + timezoneName();
     }
     TimeShift.Date.prototype.toLocaleString = function() { return this.toString(); }  // Wrong
     TimeShift.Date.prototype.toLocaleTimeString = function() { return this.toString(); }  // Wrong

@@ -1,27 +1,18 @@
 /* @flow */
 
-"use strict";
-
-import React from 'react';
+import React from "react";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
 import { debounce } from "core-decorators";
 
-import Personalisation from '../../mixins/Personalisation';
-import components from '../../components';
-import icons from '../../icons';
-import storage from '../../storage';
-import * as iss from '../../iss';
+import Personalisation from "../../mixins/Personalisation";
+import components from "../../components";
+import icons from "../../icons";
+import storage from "../../storage";
+import * as iss from "../../iss";
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class BaseQuestion extends React.Component {
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-            selected: null,  // set when the user makes a choice
-        };
-    }
-
     // flow:disable
     static propTypes = {
         /* The question asked of the user */
@@ -33,6 +24,13 @@ class BaseQuestion extends React.Component {
     // flow:disable
     static defaultProps = {
     };
+
+    constructor(props: Object) {
+        super(props);
+        this.state = {
+            selected: null,  // set when the user makes a choice
+        };
+    }
 
     // flow:disable
     static get summaryLabel(): string {
@@ -50,11 +48,12 @@ class BaseQuestion extends React.Component {
     }
 
     /**
-     * getSearch:
-     *
      * Modify the search query with the answers to the question. Or return
      * `null` if we don't have an answer (this will cause the question to
      * be shown).
+     *
+     * @param {iss.searchRequest} request - current ISS search request.
+     * @returns {iss.searchRequest} modified ISS search request.
      */
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         var value = this.answer;
@@ -68,23 +67,20 @@ class BaseQuestion extends React.Component {
     }
 
     // flow:disable
-    static getSearchForAnswer(request: iss.searchRequest, answer: string):
-        ?iss.searchRequest {
+    static getSearchForAnswer(request) {
         return request;
     }
 
     /**
-     * showQuestion:
-     *
      * Determines whether or not to show the question.
+     *
+     * @returns {boolean} true if we should show this question.
      */
     static showQuestion(): boolean {
         return true;
     }
 
     /**
-     * triggerNext:
-     *
      * Trigger next page after a 500ms debounce.
      */
     /*::__(){`*/@debounce(500)/*::`}*/

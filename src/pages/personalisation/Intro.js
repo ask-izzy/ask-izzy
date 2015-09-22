@@ -1,31 +1,29 @@
 /* @flow */
 
-"use strict";
-
-import React from 'react';
+import React from "react";
 import Router from "react-router";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
 
-import Personalisation from '../../mixins/Personalisation';
-import components from '../../components';
-import icons from '../../icons';
-import * as iss from '../../iss';
+import Personalisation from "../../mixins/Personalisation";
+import components from "../../components";
+import icons from "../../icons";
+import * as iss from "../../iss";
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Intro extends React.Component {
+    // flow:disable
+    static defaultProps = {
+        name: "intro",
+    };
+
     constructor(props: Object) {
         super(props);
         this.state = {
         };
     }
-
-    // flow:disable
-    static defaultProps = {
-        name: 'intro',
-    };
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         return request;
@@ -35,10 +33,12 @@ class Intro extends React.Component {
     get seekingHelpWith(): string {
         try {
             var category = this.context.controller.category;
+
             return category.byline.toLocaleLowerCase() ||
                 `with ${category.name.toLocaleLowerCase()}`;
-        } catch (e) {
+        } catch (error) {
             var search = this.context.controller.props.params.search;
+
             return `with ${search.toLocaleLowerCase()}`;
         }
     }
@@ -46,9 +46,6 @@ class Intro extends React.Component {
     onTouchDoneButton(event: Event): void {
         event.preventDefault();
         this.nextStep();
-    }
-
-    componentDidMount(): void {
     }
 
     render(): ReactElement {

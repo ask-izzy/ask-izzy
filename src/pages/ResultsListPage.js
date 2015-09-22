@@ -1,14 +1,12 @@
 /* @flow */
 
-"use strict";
-
-import React from 'react';
+import React from "react";
 import Router from "react-router";
 import mui from "material-ui";
 
 import BaseResultsPage from "./BaseResultsPage";
-import components from '../components';
-import icons from '../icons';
+import components from "../components";
+import icons from "../icons";
 
 class ResultsListPage extends BaseResultsPage {
     render(): ReactElement {
@@ -33,18 +31,16 @@ class ResultsListPage extends BaseResultsPage {
                                     {this.state.meta.location.state}.
                                     <icons.LogoLight />
                                 </div>
-                            :
-                                <div>
-                                    Sorry, I couldn't find any results
-                                    for {this.title.toLocaleLowerCase()}.
-                                </div>
+                            : <div>
+                                 Sorry, I couldn't find any results
+                                 for {this.title.toLocaleLowerCase()}.
+                             </div>
                         : this.state.error ?
                             <div>
                                 <icons.LogoLight />
                                 Sorry, I couldn't do this search.
                             </div>
-                        :
-                            <div>Searching...</div>
+                        : <div>Searching...</div>
                     }
                     secondaryText={
                         this.state.meta ?
@@ -59,25 +55,22 @@ class ResultsListPage extends BaseResultsPage {
                                     {this.state.error}
                                 </p>
                                 <p>
-                                    <Router.Link to='home'>
+                                    <Router.Link to="home">
                                         Go back
                                     </Router.Link>
                                 </p>
 
                             </div>
-                        :
-                            ''
+                        : ""
                     }
                 />
 
                 {this.renderResults()}
 
-                {this.state.meta || this.state.error ?
-                    ''
-                :
-                    <div className="progress">
-                        <icons.Loading />
-                    </div>
+                {this.state.meta || this.state.error ? ""
+                : <div className="progress">
+                      <icons.Loading />
+                  </div>
                 }
 
             </div>
@@ -95,7 +88,7 @@ class ResultsListPage extends BaseResultsPage {
                         primaryText="View on a map"
                         containerElement={
                             <Router.Link
-                                to={this.getPathname() + '/map'}
+                                to={this.getPathname() + "/map"}
                             />
                         }
                         leftIcon={
@@ -107,30 +100,31 @@ class ResultsListPage extends BaseResultsPage {
                         disableFocusRipple={true}
                         disableTouchRipple={true}
                     />
-                :
-                    ''
+                : ""
             }
             <div className="resultsContainer">{
                 this.results.map((object, index) => {
-                    var el = object.infobox ?
+                    var elem = object.infobox ?
                         React.addons.cloneWithProps(object.node)
                     : object.crisis ?
                         <components.CrisisLineItem
                             object={object}
                         />
-                    :
-                        <components.ResultListItem
-                            object={object}
-                        />;
+                    : <components.ResultListItem
+                        object={object}
+                      />;
 
-                    var klass = el.type.name || "other";
-                    return <div
-                        key={index}
-                        className={
-                            `resultContainer resultContainer-${klass}`
-                        }>
-                        {el}
-                    </div>;
+                    var klass = elem.type.name || "other";
+
+                    return (
+                        <div
+                            key={index}
+                            className={
+                                `resultContainer resultContainer-${klass}`
+                            }
+                        >
+                            {elem}
+                        </div>);
                 })
             }</div>
             {
@@ -143,13 +137,11 @@ class ResultsListPage extends BaseResultsPage {
                         disableFocusRipple={true}
                         disableTouchRipple={true}
                     />
-                :
-                    ''
+                : ""
             }
             </mui.List>
         );
     }
-
 }
 
 export default ResultsListPage;

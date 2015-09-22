@@ -1,16 +1,11 @@
 /* @flow */
 
-"use strict";
-
 import React from "react";
-import mui from "material-ui";
 import _ from "underscore";
 
 import Collapser from "./Collapser";
 import Email from "./Email";
-import Icons from "../icons";
 import Phone from "./Phone";
-import ScreenReader from "./ScreenReader";
 import Web from "./Web";
 import fixtures from "../../fixtures/services";
 
@@ -53,12 +48,13 @@ class ContactMethods extends React.Component {
             web,
         } = this.props.object;
 
-        var filteredPhoneKinds = new Set(['fax', 'tty']);
-        var phoneOrder = ['freecall', 'phone', 'mobile'];
+        var filteredPhoneKinds = new Set(["fax", "tty"]);
+        var phoneOrder = ["freecall", "phone", "mobile"];
 
-        phones = _.filter(phones, p => !filteredPhoneKinds.has(p.kind));
-        phones = _(phones).sortBy(p => phoneOrder.indexOf(p.kind));
-        phones = _(phones).uniq(p => p.number);
+        phones = _.filter(phones,
+                          phone => !filteredPhoneKinds.has(phone.kind));
+        phones = _(phones).sortBy(phone => phoneOrder.indexOf(phone.kind));
+        phones = _(phones).uniq(phone => phone.number);
 
         var contacts = [].concat(
             phones.map(phone => Object.assign({ component: Phone }, phone)),
@@ -94,10 +90,9 @@ class ContactMethods extends React.Component {
         } else {
             return <span />;
         }
-
     }
 
-    renderContactMethod(record: Object, idx: number): React.Element {
+    renderContactMethod(record: Object, idx: number): ReactElement {
         Object.assign(record, {key: idx});
         return React.createElement(record.component, record);
     }

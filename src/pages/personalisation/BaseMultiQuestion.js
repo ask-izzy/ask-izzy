@@ -1,15 +1,13 @@
 /* @flow */
 
-"use strict";
-
-import React from 'react';
+import React from "react";
 import mui from "material-ui";
 
-import BaseQuestion from './BaseQuestion';
-import components from '../../components';
-import icons from '../../icons';
-import storage from '../../storage';
-import * as iss from '../../iss';
+import BaseQuestion from "./BaseQuestion";
+import components from "../../components";
+import icons from "../../icons";
+import storage from "../../storage";
+import * as iss from "../../iss";
 
 class BaseMultiQuestion extends BaseQuestion {
     constructor(props: Object) {
@@ -19,10 +17,17 @@ class BaseMultiQuestion extends BaseQuestion {
         };
     }
 
+    componentDidMount(): void {
+        var answers = new Set(storage.getJSON(this.props.name));
+
+        this.setState({answers: answers});
+    }
+
     // flow:disable
     static get summaryValue(): string {
         var nSelected =
             (storage.getJSON(this.defaultProps.name) || []).length;
+
         return `${nSelected} selected`;
     }
 
@@ -47,11 +52,6 @@ class BaseMultiQuestion extends BaseQuestion {
         answers: Set<string>
     ): ?iss.searchRequest {
         return request;
-    }
-
-    componentDidMount(): void {
-        var answers = new Set(storage.getJSON(this.props.name));
-        this.setState({answers: answers});
     }
 
     onAnswerTouchTap(answer: string, enabled: boolean): void {
