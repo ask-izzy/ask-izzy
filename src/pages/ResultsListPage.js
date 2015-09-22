@@ -114,7 +114,7 @@ class ResultsListPage extends BaseResultsPage {
                         object={object}
                       />;
 
-                    var klass = elem.type.name || "other";
+                    var klass = elem.displayName || "other";
 
                     return (
                         <div
