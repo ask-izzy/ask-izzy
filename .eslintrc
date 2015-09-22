@@ -73,7 +73,6 @@
         "operator-linebreak": [2, "after", { "overrides": { ":": "before" }}],
         "prefer-arrow-callback": 2,
         "prefer-spread": 2,
-        /* "prefer-template": 2, */
         "quotes": [2, "double", "avoid-escape"],
         /* "require-jsdoc": 2, */
         "space-after-keywords": 2,
@@ -85,7 +84,7 @@
         /* Doesn't support flow annotations */
         /* "spaced-comment": [2, "always"], */
         "strict": [2, "global"],
-        /* "valid-jsdoc": 2, */
+        "valid-jsdoc": 2,
 
         "react/jsx-boolean-value": [2, "always"],
         "react/jsx-closing-bracket-location": 2,

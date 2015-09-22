@@ -139,9 +139,12 @@ class Location extends React.Component {
     }
 
     /**
-     * autoCompleteSuburb:
      * Take a search string and (optionally) the user's current location
      * and return a promise for an array of possible matches.
+     *
+     * @param {string} input - input text
+     * @param {?Object} location - location information
+     * @returns {Promise<Array<Object>>} array of possible locations
      */
     async autoCompleteSuburb(
         input: string,

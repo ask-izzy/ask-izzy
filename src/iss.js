@@ -1,3 +1,8 @@
+/**
+ * ISS API functions.
+ *
+ * @module iss
+ */
 /* @flow */
 
 import http from "iso-http";
@@ -52,12 +57,11 @@ export type searchResults = {
 };
 
 /**
- * _request:
- * obj: data passed to http.request
- *
  * Wraps the http request code in a promise.
  *
- * Returns: a promise for the request
+ * @param {Object} obj - data passed to http.request.
+ *
+ * @returns {Promise<Object>} a promise for the request.
  */
 function _request(obj) {
     return new Promise((resolve, reject) => {
@@ -196,8 +200,6 @@ export class Service {
 
 
     /**
-     * open:
-     *
      * The service opening hours
      */
     /* flow:disable */
@@ -206,8 +208,6 @@ export class Service {
     }
 
     /**
-     * shortDescription:
-     *
      * First sentence of the description.
      */
     /* flow:disable */
@@ -215,8 +215,6 @@ export class Service {
         return this.description.split(".", 1)[0] + ".";
     }
     /**
-     * serviceProvisions:
-     *
      * An array of things this service provides built using a bucket-of-words
      * approach from the service's full description */
     /* flow:disable */
@@ -270,12 +268,14 @@ export class Service {
 }
 
 /**
- * search:
- * @query: either a query string, or an object of search parameters
- * @location: (optional but recommended) a search area
- * @coords: (optional) the user's coordinates
- *
  * Execute a search against ISS.
+ *
+ * @param {searchRequest} query - either a query string, or an object of
+ * search parameters.
+ * @param {?string} location (optional but recommended) - a search area.
+ * @param {?Object} coords (optional) - the user's coordinates.
+ *
+ * @returns {Promise<searchResults>} search results from ISS.
  */
 export async function search(
     query: Object | string,

@@ -27,9 +27,9 @@ module.exports = (function() {
 })();
 
 /**
- * instrumentMap:
- *
  * Instrument Google map so we can poke around in it in tests.
+ *
+ * @returns {Promise} promise that resolves when the script executes.
  */
 async function instrumentMap(): Promise<void> {
     await this.driver.executeScript(() => {

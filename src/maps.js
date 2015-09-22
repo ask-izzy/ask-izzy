@@ -10,10 +10,11 @@ class MapsApi {
     }
 
     /**
-     * geocode:
-     * params: an object of params per the Google Maps JS API
+     * @param {GeocoderRequest} params - an object of params per the Google
+     * Maps JS API.
      *
-     * Returns: a Promise containing the geocode
+     * @returns {Promise<Array<GeocoderResult>>} a Promise containing the
+     * geocode results.
      */
     geocode(params: GeocoderRequest): Promise<Array<GeocoderResult>> {
         var geocoder = new this.api.Geocoder();
@@ -46,8 +47,14 @@ class MapsApi {
 }
 
 /**
- * Maps:
- * Returns a promise that will resolve to the Google Maps API
+ * Request the Google Maps API.
+ *
+ * Google Maps API is asynchronously loaded from Google. This promise will
+ * resolve when it's available. Unfortunately, on problem, instead of being
+ * rejected, the user will see an alert.
+ *
+ * @returns {Promise<MapsApi>} a Promise that will resolve to the Google Maps
+ * API, when available.
  */
 function maps(): Promise<MapsApi> {
     return new Promise((resolve, reject) => {

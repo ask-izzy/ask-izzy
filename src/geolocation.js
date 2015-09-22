@@ -1,11 +1,18 @@
+/**
+ * Geolocation functions.
+ *
+ * @module geolocation
+ */
 /* @flow */
 
 import location from "browser-location";
 
 /**
- * locate:
+ * Returns a promise to get the user's geolocation from the browser.
  *
- * Returns a promise to get the users geolocation from the browser.
+ * @param {?PositionOptions} options - position options.
+ *
+ * @returns {Promise<Position>} the user's position.
  */
 function locate(options: ?PositionOptions): Promise<Position> {
     return new Promise((resolve, reject) => {

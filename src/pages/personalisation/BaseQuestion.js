@@ -48,11 +48,12 @@ class BaseQuestion extends React.Component {
     }
 
     /**
-     * getSearch:
-     *
      * Modify the search query with the answers to the question. Or return
      * `null` if we don't have an answer (this will cause the question to
      * be shown).
+     *
+     * @param {iss.searchRequest} request - current ISS search request.
+     * @returns {iss.searchRequest} modified ISS search request.
      */
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         var value = this.answer;
@@ -71,17 +72,15 @@ class BaseQuestion extends React.Component {
     }
 
     /**
-     * showQuestion:
-     *
      * Determines whether or not to show the question.
+     *
+     * @returns {boolean} true if we should show this question.
      */
     static showQuestion(): boolean {
         return true;
     }
 
     /**
-     * triggerNext:
-     *
      * Trigger next page after a 500ms debounce.
      */
     /*::__(){`*/@debounce(500)/*::`}*/

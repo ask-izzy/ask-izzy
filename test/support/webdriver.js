@@ -26,9 +26,12 @@ export async function seleniumBrowser(
 }
 
 /**
- * gotoUrl:
- *
  * Visit the given URL on the running Express server.
+ *
+ * @param {Webdriver.Webdriver} driver - Selenium webdriver.
+ * @param {string} url - URL to visit.
+ *
+ * @return {Promise} - return value from Selenium Webdriver.get.
  */
 export function gotoUrl(driver: Webdriver.WebDriver, url: string): Promise {
     var port = process.env.PORT || 8000;
@@ -37,9 +40,9 @@ export function gotoUrl(driver: Webdriver.WebDriver, url: string): Promise {
 }
 
 /**
- * webDriverInstance:
- *
  * Build a webdriver.
+ *
+ * @return {Promise<Webdriver.Webdriver>} requested webdriver.
  */
 export default async function webDriverInstance(
 ): Promise<Webdriver.WebDriver> {

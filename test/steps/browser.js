@@ -48,11 +48,10 @@ async function visitUrl(url: string): Promise {
 }
 
 /**
- * clickLink:
- *
  * Click a link or button with the text @link.
  *
- * Returns: a promise that resolves when the link is identified and
+ * @param {string} link - link text to click on.
+ * @returns {Promise} a promise that resolves when the link is identified and
  * clicked.
  */
 async function clickLink(link: string): Promise<void> {
@@ -94,9 +93,10 @@ async function thenIDontSee(expected: string): Promise<void> {
 }
 
 /**
- * getSearchElement:
- *
  * Get a search element.
+ *
+ * @param {Webdriver.WebDriver} driver - Selenium webdriver.
+ * @returns {Promise<Webdriver.WebElement>} the search element.
  */
 function getSearchElement(
     driver: Webdriver.WebDriver,
@@ -182,9 +182,10 @@ async function cleanSession(): Promise<void> {
 }
 
 /**
- * documentReady:
+ * Wait for the document to be ready (including completing any AJAX requests).
  *
- * Returns: true if the document is readyState is complete
+ * @param {Webdriver.WebDriver} driver - Selenium webdriver.
+ * @returns {Promise<boolean>} true if the document is readyState is complete.
  */
 module.exports.documentReady = function documentReady(
     driver: Webdriver.WebDriver

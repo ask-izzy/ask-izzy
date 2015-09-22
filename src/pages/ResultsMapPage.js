@@ -42,10 +42,9 @@ class ResultsMapPage extends BaseResultsPage {
     }
 
     /**
-     * getMap:
+     * Get the Google Maps object.
      *
-     * Fit the map to bounds.
-     * This is requires a lot of things, so return a promise when it is done.
+     * @returns {Promise} the Google Maps object.
      */
     getMap(): Promise<Object> {  // FIXME: use actual type
         var map = this.refs.map;
@@ -77,8 +76,9 @@ class ResultsMapPage extends BaseResultsPage {
     }
 
     /**
-     * showWholeMap:
      * Adjust the bounds to show the whole map
+     *
+     * @returns {void}
      */
     showWholeMap(): void {
         /* update the map bounds */

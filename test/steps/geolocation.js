@@ -22,11 +22,9 @@ module.exports = (function() {
 })();
 
 /**
- * mockGeolocation:
- *
  * Install geolocation mock.
  *
- * Returns: a promise that resolves when the mock is installed
+ * @returns {Promise} a promise that resolves when the mock is installed.
  */
 async function mockGeolocation(): Promise<void> {
     await this.driver.executeScript(() => {
@@ -61,11 +59,13 @@ async function mockGeolocation(): Promise<void> {
 }
 
 /**
- * sendCoords:
- *
  * Mock geolocation to set coordinates.
  *
  * Navigating to a new URL undoes the mock.
+ *
+ * @param {number} latitude - latitude.
+ * @param {number} longitude - longitude.
+ * @returns {Promise} promise that resolves when the mock is installed.
  */
 async function sendCoords(
     latitude: number,
@@ -83,8 +83,10 @@ async function sendCoords(
 }
 
 /**
- * setLocation:
- * Set the user's location in the browser's session
+ * Set the user's location in the browser's session.
+ *
+ * @param {string} location - user's location (e.g. Richmond)
+ * @returns {Promise} promise that resolves when the value is set.
  */
 async function setLocation(location: string): Promise<void> {
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
@@ -94,8 +96,11 @@ async function setLocation(location: string): Promise<void> {
 }
 
 /**
- * setCoords:
- * Set the user's coordinates in the browser's session
+ * Set the user's coordinates in the browser's session.
+ *
+ * @param {number} latitude - latitude.
+ * @param {number} longitude - longitude.
+ * @returns {Promise} promise that resolves when the value is set.
  */
 async function setCoords(latitude: number, longitude: number): Promise<void> {
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
