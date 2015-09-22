@@ -3,6 +3,7 @@
 import React from "react";
 import Router from "react-router";
 import mui from "material-ui";
+import _ from "underscore";
 
 import Address from "../components/Address";
 import CollapsedOpeningTimes from "../components/CollapsedOpeningTimes";
@@ -68,22 +69,36 @@ export default class ServicePane extends React.Component {
                     ineligibility_info={object.ineligibility_info}
                 />
 
-                <div className="padded">
-                    <h3>What you can get here</h3>
-                    <ul>
-                        {object.serviceProvisions.map((provision, index) =>
-                            <li key={index}>{provision}</li>
-                        )}
-                    </ul>
-                </div>
-
+                {this.renderServiceProvisions()}
                 {this.renderSiblings()}
             </div>
         );
     }
 
+    renderServiceProvisions(): ReactElement {
+        var object = this.props.service;
+
+        if (_.isEmpty(object.serviceProvisions)) {
+            return <div />;
+        }
+
+        return (
+            <div className="padded">
+                <h3 className="serviceProvisions-header">
+                    What you can get here
+                </h3>
+                <ul>
+                    {object.serviceProvisions.map(
+                        (provision, index) =>
+                        <li key={index}>{provision}</li>
+                    )}
+                </ul>
+            </div>
+        );
+    }
+
     renderSiblings(): ReactElement {
-        if (!this.state.siblings) {
+        if (_.isEmpty(this.state.siblings)) {
             return <span />;
         }
 

@@ -26,12 +26,12 @@ class Eligibility extends React.Component {
     }
 
     render(): ReactElement {
-        var catchment: string = this.props.catchment;
-        var eligibilityInfo: string = this.props.eligibility_info;
-        var ineligibilityInfo: string = this.props.ineligibility_info;
+        var catchment: string = this.props.catchment || "";
+        var eligibilityInfo: string = this.props.eligibility_info || "";
+        var ineligibilityInfo: string = this.props.ineligibility_info || "";
         var eligibleMarkup, ineligibleMarkup;
 
-        if (eligibilityInfo || catchment) {
+        if (eligibilityInfo.length || catchment.length) {
             eligibleMarkup = (
                 <div className="eligibility">
                     <h3>To use this service you should be</h3>
@@ -43,7 +43,7 @@ class Eligibility extends React.Component {
             );
         }
 
-        if (ineligibilityInfo) {
+        if (ineligibilityInfo.length) {
             ineligibleMarkup = (
                 <div className="ineligibility">
                     <h3>You are ineligible if</h3>
