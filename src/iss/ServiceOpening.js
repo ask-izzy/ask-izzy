@@ -29,9 +29,10 @@ function timeOfDay(day: Moment, time: hmsWithColonsTime): Moment {
     var [h, m, s] = time.split(":").map((s) => parseInt(s));
 
     var t = moment(day);
-    t.set('hour', h);
-    t.set('minute', m);
-    t.set('second', s);
+
+    t.set("hour", h);
+    t.set("minute", m);
+    t.set("second", s);
     return t;
 }
 
@@ -40,10 +41,8 @@ export default class ServiceOpening {
     _opening_times: Array<serviceOpeningHours>;
     _closing_times: Array<serviceOpeningHours>;
 
-    constructor(properties: props, now=moment) {
+    constructor(properties: props, now = moment) {
         this.now_open = properties.now_open.now_open;
-
-        var startOfToday = moment(now()).startOf('day');
 
         // Turn opening_hours into a sorted list
         // so that we can scan forwards from the first one
@@ -53,18 +52,18 @@ export default class ServiceOpening {
 
         for (var openingHours of properties.opening_hours) {
             // Convert (eg) 'Monday' to a Moment()
-            var day = moment(now());
-            day = day.day(openingHours.day);
+            var day = moment(now())
+                .day(openingHours.day);
             var close = timeOfDay(day, openingHours.close);
             var open = timeOfDay(day, openingHours.open);
 
             // split opening / closing hours into separate arrays?
             if (close.isBefore(moment(now()))) {
-                close.add(1, 'weeks');
+                close.add(1, "weeks");
             }
 
             if (open.isBefore(moment(now()))) {
-                open.add(1, 'weeks');
+                open.add(1, "weeks");
             }
 
             var serviceOpeningHours = Object.assign({}, {
@@ -72,8 +71,8 @@ export default class ServiceOpening {
                 end: close,
             }, openingHours);
 
-            openingTimes[open.diff(now(), 'days')] = serviceOpeningHours;
-            closingTimes[close.diff(now(), 'days')] = serviceOpeningHours;
+            openingTimes[open.diff(now(), "days")] = serviceOpeningHours;
+            closingTimes[close.diff(now(), "days")] = serviceOpeningHours;
         }
 
         this._opening_times = _.compact(openingTimes);

@@ -24,20 +24,20 @@ class Address extends React.Component {
 
     render(): ReactElement {
         var street = [
-            this.describe('level', 'Level'),
-            this.describe('unit', 'Unit'),
-            this.describe('building', ''),
+            this.describe("level", "Level"),
+            this.describe("unit", "Unit"),
+            this.describe("building", ""),
             titleize(this.props.street_number),
             titleize(this.props.street_name),
             titleize(this.props.street_type),
             titleize(this.props.street_suffix),
-        ].join(' ').trim();
+        ].join(" ").trim();
 
         var suburb = [
             titleize(this.props.suburb),
             this.props.state,
             titleize(this.props.postcode),
-        ].join(' ').trim();
+        ].join(" ").trim();
 
         var query = encodeURIComponent(`${street} ${suburb}`);
 
@@ -55,11 +55,11 @@ class Address extends React.Component {
                     <div className="Address-wrapper">
                         {' '}
                         <div className="street">
-                            { street }
+                            {street}
                         </div>
                         {' '}
                         <div className="suburb">
-                            { suburb }
+                            {suburb}
                         </div>
                     </div>
                 </a>

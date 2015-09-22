@@ -1,7 +1,5 @@
 /* @flow */
 
-"use strict";
-
 declare var google: Google;
 
 class MapsApi {
@@ -18,7 +16,7 @@ class MapsApi {
      * Returns: a Promise containing the geocode
      */
     geocode(params: GeocoderRequest): Promise<Array<GeocoderResult>> {
-        var geocoder = new this.api.Geocoder;
+        var geocoder = new this.api.Geocoder();
 
         return new Promise((resolve, reject) =>
             geocoder.geocode(params, (results, status) => {
@@ -30,9 +28,9 @@ class MapsApi {
             }));
     }
 
-    autocompletePlaces(params: AutocompletionRequest):
-        Promise<Array<AutocompletePrediction>>
-    {
+    autocompletePlaces(
+        params: AutocompletionRequest
+    ): Promise<Array<AutocompletePrediction>> {
         var autocompleter = new this.api.places.AutocompleteService();
 
         return new Promise((resolve, reject) =>

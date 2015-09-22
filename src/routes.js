@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import Router from 'react-router';
+import Router from "react-router";
 
 // If you import these after the others,
 // babel decides the navbar doesn't really
@@ -19,7 +19,8 @@ import ResultsListPage from "./pages/ResultsListPage";
 import ResultsMapPage from "./pages/ResultsMapPage";
 import ServicePage from "./pages/ServicePage";
 
-export default <Router.Route
+export default (
+    <Router.Route
         name="_root"
         path="/"
         handler={BasePage}
@@ -96,4 +97,5 @@ export default <Router.Route
 
             <Router.DefaultRoute handler={ErrorPage}/>
         </Router.Route>
-    </Router.Route>;
+    </Router.Route>
+);

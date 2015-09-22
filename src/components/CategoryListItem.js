@@ -1,7 +1,5 @@
 /* @flow */
 
-"use strict";
-
 import React from "react";
 import Router from "react-router";
 import reactMixin from "react-mixin";
@@ -20,7 +18,7 @@ class CategoryListItem extends React.Component {
             byline: "Clothes and other goods",
             icon: icons.Things,
         },
-    },};
+    }};
 
     render(): ReactElement {
         var Icon = this.props.category.icon || icons.House;

@@ -1,22 +1,20 @@
 /* @flow */
 
-"use strict";
-
 import React from "react";
 
 class HtmlDocument extends React.Component {
 
     // flow:disable not supported yet
     static propTypes = {
+        css: React.PropTypes.arrayOf(React.PropTypes.string),
         markup: React.PropTypes.string.isRequired,
         script: React.PropTypes.arrayOf(React.PropTypes.string),
-        css: React.PropTypes.arrayOf(React.PropTypes.string),
 
         // meta tags, title, etc.
-        title: React.PropTypes.string,
+        currentUrl: React.PropTypes.string,
         description: React.PropTypes.string,
         siteName: React.PropTypes.string,
-        currentUrl: React.PropTypes.string,
+        title: React.PropTypes.string,
     };
 
     // flow:disable not supported yet
@@ -27,31 +25,34 @@ class HtmlDocument extends React.Component {
     };
 
     render(): ReactElement {
-        var { state, markup, script, css, lang } = this.props;
+        var { markup, script, css } = this.props;
         var {
             title,
             description,
             siteName,
             currentUrl,
-            images
         } = this.props;
         var vp = "width=device-width, initial-scale=1.0, user-scalable=no";
         var issconfig = 'var ISS_URL = "' + process.env.ISS_URL + '";';
         var GOOGLE_KEY = process.env.GOOGLE_KEY;
+
+        /* eslint-disable max-len */
+        var gmapsApi = `//maps.googleapis.com/maps/api/js?key=${GOOGLE_KEY}&libraries=places`;
+        /* eslint-enable max-len */
 
         return (
 <html >
     <head>
         <meta
             name="viewport"
-            content={ vp }
+            content={vp}
         />
 
-        <title>{ title }</title>
+        <title>{title}</title>
 
         <meta
             name="description"
-            content={ description }
+            content={description}
         />
         <meta
             property="og:type"
@@ -59,22 +60,22 @@ class HtmlDocument extends React.Component {
         />
         <meta
             property="og:site_name"
-            content={ siteName }
+            content={siteName}
         />
         <meta
             property="og:title"
-            content={ title }
+            content={title}
         />
         <meta
             property="og:description"
-            content={ description }
+            content={description}
         />
         <meta
             property="og:url"
-            content={ currentUrl }
+            content={currentUrl}
         />
 
-        { css.map((href, k) =>
+        {css.map((href, k) =>
             <link
                 key={k}
                 rel="stylesheet"
@@ -161,27 +162,32 @@ class HtmlDocument extends React.Component {
         <link
             rel="icon"
             type="image/png"
-            href="/static/favicons/favicon-32x32.png" sizes="32x32"
+            href="/static/favicons/favicon-32x32.png"
+            sizes="32x32"
         />
         <link
             rel="icon"
             type="image/png"
-            href="/static/favicons/favicon-96x96.png" sizes="96x96"
+            href="/static/favicons/favicon-96x96.png"
+            sizes="96x96"
         />
         <link
             rel="icon"
             type="image/png"
-            href="/static/favicons/favicon-16x16.png" sizes="16x16"
+            href="/static/favicons/favicon-16x16.png"
+            sizes="16x16"
         />
         <link
             rel="icon"
             type="image/png"
-            href="/static/favicons/android-chrome-192x192.png" sizes="192x192"
+            href="/static/favicons/android-chrome-192x192.png"
+            sizes="192x192"
         />
         <link
             rel="icon"
             type="image/png"
-            href="/static/favicons/android-chrome-192x192.png" sizes="192x192"
+            href="/static/favicons/android-chrome-192x192.png"
+            sizes="192x192"
         />
         <link
             rel="manifest"
@@ -218,16 +224,20 @@ class HtmlDocument extends React.Component {
     </head>
 
     <body>
-      <div id="root" dangerouslySetInnerHTML={{__html: markup}} />
-      <script dangerouslySetInnerHTML={{__html: issconfig}} />
-      { script.map((src, k) => <script key={k} src={src} />) }
+        <div
+            id="root"
+            dangerouslySetInnerHTML={{__html: markup}}
+        />
+        <script dangerouslySetInnerHTML={{__html: issconfig}} />
+        {script.map((src, k) =>
+            <script
+                key={k}
+                src={src}
+            />
+        )}
 
-      <script
-        /* jscs:disable */
-        src={`//maps.googleapis.com/maps/api/js?key=${GOOGLE_KEY}&libraries=places`}>
-      </script>
-
-
+        <script src={gmapsApi}>
+        </script>
     </body>
 </html>
         );

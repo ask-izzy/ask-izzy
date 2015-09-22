@@ -1,27 +1,18 @@
 /* @flow */
 
-"use strict";
-
-import React from 'react';
+import React from "react";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
 import { debounce } from "core-decorators";
 
-import Personalisation from '../../mixins/Personalisation';
-import components from '../../components';
-import icons from '../../icons';
-import storage from '../../storage';
-import * as iss from '../../iss';
+import Personalisation from "../../mixins/Personalisation";
+import components from "../../components";
+import icons from "../../icons";
+import storage from "../../storage";
+import * as iss from "../../iss";
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class BaseQuestion extends React.Component {
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-            selected: null,  // set when the user makes a choice
-        };
-    }
-
     // flow:disable
     static propTypes = {
         /* The question asked of the user */
@@ -33,6 +24,13 @@ class BaseQuestion extends React.Component {
     // flow:disable
     static defaultProps = {
     };
+
+    constructor(props: Object) {
+        super(props);
+        this.state = {
+            selected: null,  // set when the user makes a choice
+        };
+    }
 
     // flow:disable
     static get summaryLabel(): string {
@@ -68,8 +66,7 @@ class BaseQuestion extends React.Component {
     }
 
     // flow:disable
-    static getSearchForAnswer(request: iss.searchRequest, answer: string):
-        ?iss.searchRequest {
+    static getSearchForAnswer(request) {
         return request;
     }
 

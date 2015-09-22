@@ -1,7 +1,5 @@
 /* @flow */
 
-"use strict";
-
 import React from "react";
 import moment from "moment";
 import _ from "underscore";
@@ -11,7 +9,7 @@ import Collapser from "./Collapser";
 import OpeningTimes from "./OpeningTimes";
 
 function formatTime(str: string): string {
-    return moment(str, 'HH:mm:ss').format('h:mm A');
+    return moment(str, "HH:mm:ss").format("h:mm A");
 }
 
 /*
@@ -24,7 +22,7 @@ function fixture(
 ): Object {
     // Moment is fixed to Wednesday 15/9/2015 at 1pm
     time = time || moment("2015-09-09 1pm", "YYYY-MM-DD ha");
-    var timeFn = function() {return moment(time);};
+    var timeFn = () => moment(time);
 
     return {
         object: new ServiceOpening(
@@ -47,20 +45,20 @@ export default class CollapsedOpeningTimes extends React.Component {
 
     // flow:disable not supported yet
     static sampleProps = {
-        "One opening time": fixture(true,  [{
+        "One opening time": fixture(true, [{
             day: "Wednesday",
             open: "10:30:00",
             close: "15:00:00",
-        },]),
+        }]),
         "Two opening times": fixture(true, [{
             day: "Wednesday",
             open: "00:00:00",
             close: "24:00:00",
-        },{
+        }, {
             day: "Thursday",
             open: "00:00:00",
             close: "23:00:00",
-        },]),
+        }]),
     };
 
     render(): React.Element {
@@ -101,9 +99,7 @@ export default class CollapsedOpeningTimes extends React.Component {
                     )}
                     </ul>
                     </Collapser>
-                :
-                    ''
-                }
+                : ""}
             </div>
         );
     }

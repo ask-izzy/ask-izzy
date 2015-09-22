@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import { Link } from "react-router";
 import mui from "material-ui";
 
 import categories from "../constants/categories";

@@ -1,16 +1,11 @@
 /* @flow */
 
-"use strict";
-
-import React from 'react';
+import React from "react";
 import Router from "react-router";
-import mui from "material-ui";
 import reactMixin from "react-mixin";
 import _ from "underscore";
 
-import BaseCategoriesPage from './BaseCategoriesPage';
-import components from '../components';
-import icons from '../icons';
+import BaseCategoriesPage from "./BaseCategoriesPage";
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
@@ -42,7 +37,7 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     componentDidMount(): void {
         /* Set the subpage if it was requested.
          * This is only used for testing. */
-        if (_.has(this.props.query, 'subpage')) {
+        if (_.has(this.props.query, "subpage")) {
             var subpage = this.props.query.subpage;
             var subpageIndex = this.personalisationComponents.findIndex(
                 component => component.defaultProps.name == subpage

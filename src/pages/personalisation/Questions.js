@@ -1,11 +1,7 @@
 /* @flow */
 
-"use strict";
-
-import React from 'react';
-
-import BaseQuestion from './BaseQuestion';
-import BaseMultiQuestion from './BaseMultiQuestion';
+import BaseQuestion from "./BaseQuestion";
+import BaseMultiQuestion from "./BaseMultiQuestion";
 
 export class SleepTonight extends BaseQuestion {
     // flow:disable
@@ -82,11 +78,13 @@ export class HousingSubcategories extends BaseMultiQuestion {
     };
 
     static getSearchForAnswer(request, answers) {
+        var q;
+
         if (!request.q) {
             // flow needs to be sure request.q exists
             throw new Error("Unexpected");
         } else {
-            var q = request.q;
+            q = request.q;
         }
 
         if (answers.has("Help with paying rent")) {
@@ -108,7 +106,7 @@ export class HousingSubcategories extends BaseMultiQuestion {
 
     static showQuestion() {
         /* only show this question if the user has someone to sleep tonight */
-        return (SleepTonight.answer == 'Yes');
+        return (SleepTonight.answer == "Yes");
     }
 }
 
@@ -158,11 +156,13 @@ export class Demographics extends BaseMultiQuestion {
     };
 
     static getSearchForAnswer(request, answers) {
+        var q;
+
         if (!request.q) {
             // flow needs to be sure request.q exists
             throw new Error("Unexpected");
         } else {
-            var q = request.q;
+            q = request.q;
         }
 
         if (answers.has("Aboriginal or Torres Strait Islander")) {

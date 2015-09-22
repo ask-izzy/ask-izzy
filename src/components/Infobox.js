@@ -1,20 +1,11 @@
 /* @flow */
-"use strict";
 
 import React from "react";
 import Router from "react-router";
-import mui from "material-ui";
 import reactMixin from "react-mixin";
-
-import icons from "../icons";
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class Infobox extends React.Component {
-    constructor(props: Object) {
-        super(props);
-        this.state = {};
-    }
-
     // flow:disable not supported yet
     static propTypes = {
         href: React.PropTypes.string,
@@ -22,22 +13,27 @@ class Infobox extends React.Component {
         linkText: React.PropTypes.string,
     };
 
-    // flow:disable not supported yet
-    static sampleProps = {default: {
-        linkText: "Housing information",
-        href: "#",
-        children: "It's important to act early on housing.",
-    },};
-
     // flow:disable
     static defaultProps = {
         linkText: "More information",
     };
 
+    constructor(props: Object) {
+        super(props);
+        this.state = {};
+    }
+
+    // flow:disable not supported yet
+    static sampleProps = {default: {
+        linkText: "Housing information",
+        href: "#",
+        children: "It's important to act early on housing.",
+    }};
+
     render(): ReactElement {
         var {
             linkText,
-            ...other
+            ...other,
         } = this.props;
 
         return (
@@ -52,20 +48,21 @@ class Infobox extends React.Component {
                                 Find out more
                             </div>
                             {this.props.href ?
-                                    <a className="Link" {...other}>
-                                        {linkText}
-                                    </a>
-                                :
-                                    <Router.Link
+                                    <a
                                         className="Link"
                                         {...other}
                                     >
                                         {linkText}
-                                    </Router.Link>
+                                    </a>
+                                : <Router.Link
+                                    className="Link"
+                                    {...other}
+                                  >
+                                    {linkText}
+                                </Router.Link>
                             }
                         </div>
-                    :
-                        ''
+                    : ""
                 }
             </div>
         );

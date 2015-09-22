@@ -6,8 +6,6 @@
 
 /* @flow */
 
-"use strict";
-
 import {
     ServiceProvision,
     allOf,
@@ -15,39 +13,39 @@ import {
     keywords,
     not,
     provides,
-} from '../iss/ServiceProvisions';
+} from "../iss/ServiceProvisions";
 
 /* Please keep this grouped and the groups sorted */
 var serviceProvisions: Array<ServiceProvision> = [
     /* Accommodation */
     provides({
         name: "Crisis accommodation for women fleeing domestic violence",
-        form: keywords(/crisis|emergency|refuge/, 'accommodation',
-                       'women', /family|domestic/, 'violence'),
+        form: keywords(/crisis|emergency|refuge/, "accommodation",
+                       "women", /family|domestic/, "violence"),
     }),
     provides({
         name: "Family accommodation",
-        form: keywords('accommodation', 'for', 'families'),
+        form: keywords("accommodation", "for", "families"),
     }),
     provides({
         name: "Crisis accommodation",
         form: anyOf(
             keywords(/crisis|emergency/, /accommodation|housing|shelter/),
-            keywords('housing', 'crisis'),
-            keywords('refuge', 'accommodation'),  // N.B. not refugee
+            keywords("housing", "crisis"),
+            keywords("refuge", "accommodation"),  // N.B. not refugee
         ),
     }),
     provides({
         name: "Short-term accommodation",
-        form: keywords('short-term', /housing|accommodation/),
+        form: keywords("short-term", /housing|accommodation/),
     }),
     provides({
         name: "Long-term accommodation",
-        form: keywords('long-term', /housing|accommodation/),
+        form: keywords("long-term", /housing|accommodation/),
     }),
     provides({
         name: "Transitional accommodation",
-        form: keywords('transitional', /housing|accommodation/),
+        form: keywords("transitional", /housing|accommodation/),
     }),
     provides({
         name: "Public housing",
@@ -56,8 +54,8 @@ var serviceProvisions: Array<ServiceProvision> = [
     provides({
         name: "Community housing",
         form: allOf(
-            keywords(/community|social/, 'housing'),
-            not(/community|social/, 'housing tenants'),
+            keywords(/community|social/, "housing"),
+            not(/community|social/, "housing tenants"),
         ),
     }),
 
@@ -65,67 +63,67 @@ var serviceProvisions: Array<ServiceProvision> = [
     provides({
         name: "Case management",
         form: allOf(
-            'case-management',
+            "case-management",
             not(
-                'long-term',
-                'short-term',
-                'medium-term',
+                "long-term",
+                "short-term",
+                "medium-term",
             ),
         ),
     }),
     provides({
         name: "Short-term case management",
-        form: keywords('short', 'term', 'case management'),
+        form: keywords("short", "term", "case management"),
     }),
     provides({
         name: "Medium-term case management",
-        form: keywords('medium', 'term', 'case management'),
+        form: keywords("medium", "term", "case management"),
     }),
     provides({
         name: "Long-term case management",
-        form: keywords('long', 'term', 'case management'),
+        form: keywords("long", "term", "case management"),
     }),
 
     /* Food */
     provides({
         name: "Breakfast",
-        form: keywords('free', 'breakfast'),
+        form: keywords("free", "breakfast"),
     }),
     provides({
         name: "Lunch",
-        form: keywords('free', 'lunch'),
+        form: keywords("free", "lunch"),
     }),
     provides({
         name: "Dinner",
-        form: keywords('free', /dinner|evening meal/),
+        form: keywords("free", /dinner|evening meal/),
     }),
 
     /* General */
     provides({
         name: "Advice",
         form: allOf(
-            'advice',
-            not('legal'),
+            "advice",
+            not("legal"),
         ),
     }),
     provides({
         name: "Support services",
-        form: 'support services',
+        form: "support services",
     }),
 
     /* Information */
     provides({
         name: "Housing information",
         form: anyOf(
-            keywords('housing', 'information'),
-            keywords('information', 'housing'),
+            keywords("housing", "information"),
+            keywords("information", "housing"),
         ),
     }),
     provides({
         name: "Tenancy information",
         form: anyOf(
-            keywords('tenancy', 'information'),
-            keywords('information', 'tenancy'),
+            keywords("tenancy", "information"),
+            keywords("information", "tenancy"),
         ),
     }),
 
@@ -136,15 +134,15 @@ var serviceProvisions: Array<ServiceProvision> = [
     }),
     provides({
         name: "Civil law advice",
-        form: keywords('civil', /law|matters/),
+        form: keywords("civil", /law|matters/),
     }),
     provides({
         name: "Criminal law advice",
-        form: keywords('criminal', /law|matters/),
+        form: keywords("criminal", /law|matters/),
     }),
     provides({
         name: "Family law advice",
-        form: keywords('family', /law|matters/),
+        form: keywords("family", /law|matters/),
     }),
 
     /* Legal aid */
@@ -159,44 +157,44 @@ var serviceProvisions: Array<ServiceProvision> = [
     /* Material aid */
     provides({
         name: "Clothing",
-        form: 'clothing',
+        form: "clothing",
     }),
     provides({
         name: "Food parcels",
-        form: keywords('food', /hampers|parcels/),
+        form: keywords("food", /hampers|parcels/),
     }),
     provides({
         name: "Public transport cards",
-        form: keywords(/met|myki|public transport/, 'cards'),
+        form: keywords(/met|myki|public transport/, "cards"),
     }),
     provides({
         name: "Toiletries",
-        form: 'toiletries',
+        form: "toiletries",
     }),
 
     /* Referrals */
     provides({
         name: "Drug & alcohol referrals",
-        form: keywords(/referrals?/, 'for', /drugs?/, 'alcohol'),
+        form: keywords(/referrals?/, "for", /drugs?/, "alcohol"),
     }),
     provides({
         name: "Referrals for financial counselling",
-        form: keywords(/referrals?/, /for|to/, 'financial', /counsell\w+/),
+        form: keywords(/referrals?/, /for|to/, "financial", /counsell\w+/),
     }),
     provides({
         name: "Referrals for legal services",
-        form: keywords(/referrals?/, 'for', 'legal services'),
+        form: keywords(/referrals?/, "for", "legal services"),
     }),
     provides({
         name: "Housing referrals",
         form: anyOf(
-            keywords('housing', /referrals?/),
-            keywords(/referrals?/, 'for', 'housing'),
+            keywords("housing", /referrals?/),
+            keywords(/referrals?/, "for", "housing"),
         ),
     }),
     provides({
         name: "Mental health referrals",
-        form: keywords(/referrals?/, 'for', 'mental health'),
+        form: keywords(/referrals?/, "for", "mental health"),
     }),
 ];
 

@@ -1,9 +1,7 @@
 /* @flow */
 
-"use strict";
-
-import React from 'react';
-import _ from 'underscore';
+import React from "react";
+import _ from "underscore";
 
 import categories from "../constants/categories";
 
@@ -44,10 +42,10 @@ class BaseCategoriesPage extends React.Component {
             components = this.category.personalisation;
         } else if (this.props.params.search) {
             components = [
-                require('./personalisation/Location'),
-                require('./personalisation/Questions').Gender,
-                require('./personalisation/Questions').Age,
-                require('./personalisation/Questions').Demographics,
+                require("./personalisation/Location"),
+                require("./personalisation/Questions").Gender,
+                require("./personalisation/Questions").Age,
+                require("./personalisation/Questions").Demographics,
             ];
         } else {
             throw new Error("Unexpected");
@@ -56,6 +54,6 @@ class BaseCategoriesPage extends React.Component {
         return components.filter(component => component.showQuestion());
     }
 
-};
+}
 
 export default BaseCategoriesPage;

@@ -1,15 +1,12 @@
 /* @flow */
 
-"use strict";
-
-import React from 'react';
+import React from "react";
 import Router from "react-router";
-import mui from "material-ui";
 import reactMixin from "react-mixin";
-import _ from 'underscore';
+import _ from "underscore";
 
-import iss from '../iss';
-import BaseCategoriesPage from './BaseCategoriesPage';
+import iss from "../iss";
+import BaseCategoriesPage from "./BaseCategoriesPage";
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 /*::`*/@reactMixin.decorate(Router.State)/*::`;*/
@@ -45,8 +42,7 @@ class BaseResultsPage extends BaseCategoriesPage {
 
     // flow:disable not supported yet
     get results(): Array<iss.issService> {
-        var objects;
-        var index;
+        var objects, index;
 
         if (this.state.objects) {
             objects = Array.from(this.state.objects);
@@ -58,6 +54,7 @@ class BaseResultsPage extends BaseCategoriesPage {
          * service */
         try {
             var infobox = this.category.info;
+
             index = _.findIndex(objects,
                                 object => !object.crisis && !object.infobox);
 
@@ -68,23 +65,22 @@ class BaseResultsPage extends BaseCategoriesPage {
                 });
             }
         } catch (e) {
+            // pass
         }
 
         /* splice a header before the first crisis service */
         index = _.findIndex(objects, object => object.crisis);
         if (index != -1) {
             /* count hotlines */
-            var nhotlines = _.where(objects, {crisis:true}).length;
+            var nhotlines = _.where(objects, {crisis: true}).length;
 
             objects.splice(index, 0, {
                 infobox: true,
                 node: (
                     <h3 className="CrisisHeader">
                     {nhotlines == 1 ?
-                        'If you need urgent help call this number'
-                    :
-                        'If you need urgent help call one of these numbers'
-                    }
+                      "If you need urgent help call this number"
+                    : "If you need urgent help call one of these numbers"}
                     </h3>
                 ),
             });
@@ -108,7 +104,7 @@ class BaseResultsPage extends BaseCategoriesPage {
             request = item.getSearch(request);
 
             if (!request) {
-                this.replaceWith(this.getPath() + '/personalise');
+                this.replaceWith(this.getPath() + "/personalise");
                 return;
             }
         }
@@ -125,7 +121,9 @@ class BaseResultsPage extends BaseCategoriesPage {
             .catch(response => {
                 try {
                     console.error(response);
+
                     var data = JSON.parse(response.text);
+
                     this.setState({
                         error: data.error_message,
                     });
@@ -144,12 +142,14 @@ class BaseResultsPage extends BaseCategoriesPage {
         }
 
         var next = this.state.meta.next;
+        var data;
 
         /* reenable the search spinner */
         this.setState({meta: null});
 
         try {
-            var data = await iss.requestObjects(next);
+            data = await iss.requestObjects(next);
+
             this.setState({
                 meta: data.meta,
                 objects: this.state.objects.concat(data.objects),
@@ -158,7 +158,7 @@ class BaseResultsPage extends BaseCategoriesPage {
 
         } catch (response) {
             try {
-                var data = JSON.parse(response.text);
+                data = JSON.parse(response.text);
                 this.setState({
                     error: data.error_message,
                 });

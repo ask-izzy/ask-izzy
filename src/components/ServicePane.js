@@ -1,7 +1,5 @@
 /* @flow */
 
-"use strict";
-
 import React from "react";
 import Router from "react-router";
 import mui from "material-ui";
@@ -16,13 +14,9 @@ import icons from "../icons";
 import iss from "../iss";
 
 export default class ServicePane extends React.Component {
-
     // flow:disable not supported yet
-    static sampleProps = {default: {
-        service: Object.assign(
-            new iss.Service,
-            fixtures.youthSupportNet
-        ),},
+    static propTypes = {
+        service: React.PropTypes.instanceOf(iss.Service).isRequired,
     };
 
     constructor(props: Object) {
@@ -30,16 +24,6 @@ export default class ServicePane extends React.Component {
         this.state = {
             siblings: null,
         };
-    }
-
-    // flow:disable not supported yet
-    static propTypes = {
-        service: React.PropTypes.instanceOf(iss.Service).isRequired,
-    };
-
-    async getSiblingServices(): Promise<void> {
-        var response = await this.props.service.getSiblingServices();
-        this.setState({siblings: response.objects});
     }
 
     componentDidMount(): void {
@@ -52,8 +36,31 @@ export default class ServicePane extends React.Component {
         }
     }
 
+    // flow:disable not supported yet
+    static sampleProps = {default: {
+        service: Object.assign(
+            new iss.Service(),
+            fixtures.youthSupportNet
+        )},
+    };
+
+    async getSiblingServices(): Promise<void> {
+        var response = await this.props.service.getSiblingServices();
+
+        this.setState({siblings: response.objects});
+    }
+
     render(): ReactElement {
         var object = this.props.service;
+        var filteredPhoneKinds = new Set(["fax", "tty"]);
+        var phoneOrder = ["freecall", "phone", "mobile"];
+        var phones = _.filter(
+            object.phones,
+            (p) => !filteredPhoneKinds.has(p.kind)
+        );
+
+        phones = _(phones).sortBy((p) => phoneOrder.indexOf(p.kind));
+        phones = _(phones).uniq((p) => p.number);
 
         return (
             <div className="ServicePane">
@@ -94,7 +101,7 @@ export default class ServicePane extends React.Component {
 
     renderSiblings(): React.Element {
         if (!this.state.siblings) {
-            return '';
+            return "";
         }
 
         return (

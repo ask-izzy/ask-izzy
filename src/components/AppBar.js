@@ -1,5 +1,4 @@
 /* @flow */
-"use strict";
 
 import React from "react";
 import mui from "material-ui";
@@ -17,7 +16,7 @@ class AppBar extends React.Component {
     static sampleProps = {default: {
         title: "App bar",
         onBackTouchTap: function() {},
-    },};
+    }};
 
     render(): ReactElement {
         return (

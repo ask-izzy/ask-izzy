@@ -3,8 +3,6 @@
  */
 /* @flow */
 
-"use strict";
-
 import sessionstorage from "sessionstorage";
 
 class Storage {

@@ -1,8 +1,8 @@
 /* @flow */
 
-import React from 'react';
-import Router from 'react-router';
-import components from '../components';
+import React from "react";
+import Router from "react-router";
+import components from "../components";
 
 export default class StyleGuideList extends React.Component {
     li(componentName: string): ReactElement {
@@ -19,7 +19,7 @@ export default class StyleGuideList extends React.Component {
     render(): ReactElement {
         return (
             <ul>
-                { Object.keys(components).sort().map(this.li) }
+                {Object.keys(components).sort().map(this.li)}
             </ul>
         );
     }

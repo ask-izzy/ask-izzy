@@ -4,8 +4,6 @@
 
 /* @flow */
 
-"use strict";
-
 import Yadda from 'yadda';
 import { titleize } from 'underscore.string';
 
