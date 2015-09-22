@@ -3,7 +3,6 @@
 import React from "react";
 import Router from "react-router";
 import mui from "material-ui";
-import _ from "underscore";
 
 import Address from "../components/Address";
 import CollapsedOpeningTimes from "../components/CollapsedOpeningTimes";
@@ -52,15 +51,6 @@ export default class ServicePane extends React.Component {
 
     render(): ReactElement {
         var object = this.props.service;
-        var filteredPhoneKinds = new Set(["fax", "tty"]);
-        var phoneOrder = ["freecall", "phone", "mobile"];
-        var phones = _.filter(
-            object.phones,
-            phone => !filteredPhoneKinds.has(phone.kind)
-        );
-
-        phones = _(phones).sortBy(phone => phoneOrder.indexOf(phone.kind));
-        phones = _(phones).uniq(phone => phone.number);
 
         return (
             <div className="ServicePane">
