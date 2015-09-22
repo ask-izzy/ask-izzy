@@ -12,6 +12,6 @@ function check {
 }
 
 check "jsonlint package.json > /dev/null"
-check "eslint src/"
+check "eslint src/ test/"
 check "sass-lint -v"
 check "flow"

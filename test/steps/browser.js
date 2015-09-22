@@ -3,34 +3,33 @@
  */
 
 /* @flow */
+/* eslint-disable no-use-before-define */
 
-"use strict";
-
-import assert from '../support/page-assertions';
-import Url from 'url';
-import Yadda from 'yadda';
-import { By, Key } from 'selenium-webdriver';
+import assert from "../support/page-assertions";
+import Url from "url";
+import Yadda from "yadda";
+import { By, Key } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
-import unpromisify from '../support/yadda-promise';
-import pauseToDebug from '../support/debug';
-import { elementWithText } from '../support/selectors';
-import { gotoUrl } from '../support/webdriver';
+import unpromisify from "../support/yadda-promise";
+import pauseToDebug from "../support/debug";
+import { elementWithText } from "../support/selectors";
+import { gotoUrl } from "../support/webdriver";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
-        .given('a fresh session', unpromisify(cleanSession))
-        .when('I visit $URL', unpromisify(visitUrl))
+        .given("a fresh session", unpromisify(cleanSession))
+        .when("I visit $URL", unpromisify(visitUrl))
         .when('I click on "$STRING"', unpromisify(clickLink))
         .when('I search for "$STRING"', unpromisify(doSearch))
         .when('I search for "$STRING" and press enter',
               unpromisify(doSearchAndEnter))
-        .when('I click on the search icon', unpromisify(clickSearchIcon))
-        .when('I click back from the title bar', unpromisify(clickBack))
-        .when('I pause for debugging', unpromisify(pauseToDebug))
-        .then('I should be at $URL', unpromisify(checkURL))
+        .when("I click on the search icon", unpromisify(clickSearchIcon))
+        .when("I click back from the title bar", unpromisify(clickBack))
+        .when("I pause for debugging", unpromisify(pauseToDebug))
+        .then("I should be at $URL", unpromisify(checkURL))
         .then('I should see "$STRING"', unpromisify(thenISee))
-        .then('I should see\n$STRING', unpromisify(thenISee))
+        .then("I should see\n$STRING", unpromisify(thenISee))
         .then('I should not see "$STRING"', unpromisify(thenIDontSee))
         .then('search box should contain "$STRING"',
               unpromisify(searchContains))
@@ -60,16 +59,16 @@ async function clickLink(link: string): Promise<void> {
     await this.driver.findElement(By.xpath(
         /* any 'a' element who has a descendent text node containing
          * the link text */
-        ['a', 'button', 'label']
+        ["a", "button", "label"]
             .map(tag => elementWithText(tag, link))
-            .join('|')
+            .join("|")
     ))
         .click();
 }
 
 async function clickBack(): Promise<void> {
     await this.driver.findElement(By.css(
-        'button.BackButton'
+        "button.BackButton"
     ))
         .click();
 }
@@ -87,7 +86,7 @@ async function thenISee(expected: string): Promise<void> {
 async function thenIDontSee(expected: string): Promise<void> {
     try {
         await assert.textIsVisible(this.driver, expected);
-    } catch (e) {
+    } catch (error) {
         return;
     }
 
@@ -99,11 +98,11 @@ async function thenIDontSee(expected: string): Promise<void> {
  *
  * Get a search element.
  */
-function getSearchElement(driver: Webdriver.WebDriver):
-    Promise<Webdriver.WebElement>
-{
+function getSearchElement(
+    driver: Webdriver.WebDriver,
+): Promise<Webdriver.WebElement> {
     return driver.findElement(By.css(
-        'input[type=search]'
+        "input[type=search]"
     ));
 }
 
@@ -121,21 +120,22 @@ async function doSearchAndEnter(search: string): Promise<void> {
 
 async function searchContains(expected: string): Promise<void> {
     var value = await getSearchElement(this.driver)
-        .getAttribute('value');
+        .getAttribute("value");
 
     assert.equal(value, expected);
 }
 
 async function clickSearchIcon(): Promise<void> {
-    await this.driver.findElement(By.css('.search .icon'))
+    await this.driver.findElement(By.css(".search .icon"))
         .click();
 }
 
-async function getButtonState(driver: Webdriver.WebDriver, text: string):
-    Promise<boolean>
-{
+async function getButtonState(
+    driver: Webdriver.WebDriver,
+    text: string,
+): Promise<boolean> {
     return await driver
-        .findElement(By.xpath(elementWithText('button', text)))
+        .findElement(By.xpath(elementWithText("button", text)))
         .isEnabled();
 }
 
@@ -152,21 +152,21 @@ async function checkEnabled(text: string): Promise<void> {
 }
 
 async function assertItemChecked(label: string): Promise<void> {
-    var labelXPath = elementWithText('label', label);
+    var labelXPath = elementWithText("label", label);
     var checked = await this.driver.findElement(By.xpath(
         `${labelXPath}//input`
     ))
-        .getAttribute('checked');
+        .getAttribute("checked");
 
     assert.equal(checked, "true");
 }
 
 async function assertItemNotChecked(label: string): Promise<void> {
-    var labelXPath = elementWithText('label', label);
+    var labelXPath = elementWithText("label", label);
     var checked = await this.driver.findElement(By.xpath(
         `${labelXPath}//input`
     ))
-        .getAttribute('checked');
+        .getAttribute("checked");
 
     assert.equal(checked, null);
 }
@@ -175,8 +175,8 @@ async function cleanSession(): Promise<void> {
     await this.driver.executeScript(() => {
         try {
             sessionStorage.clear();
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(error);
         }
     });
 }
@@ -189,5 +189,5 @@ async function cleanSession(): Promise<void> {
 module.exports.documentReady = function documentReady(
     driver: Webdriver.WebDriver
 ): Promise<boolean> {
-    return driver.executeScript(() => document.readyState == 'complete');
+    return driver.executeScript(() => document.readyState == "complete");
 };

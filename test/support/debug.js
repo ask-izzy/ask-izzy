@@ -6,9 +6,9 @@ function pauseToDebug(): Promise<void> {
         var stdin = process.stdin;
 
         stdin.setRawMode(true);
-        stdin.on('data', (key) => {
+        stdin.on("data", (key) => {
             stdin.setRawMode(false);
-            if (key === '\u0003') {  // Ctrl-C
+            if (key === "\u0003") {  // Ctrl-C
                 reject();
             } else {
                 resolve();

@@ -1,29 +1,29 @@
 /* @flow */
 
-"use strict";
+import Webdriver from "selenium-webdriver";
 
-import Webdriver from 'selenium-webdriver';
-
-export async function seleniumBrowser(driver: Webdriver.WebDriver):
-    Promise<Object>
-{
+export async function seleniumBrowser(
+    driver: Webdriver.WebDriver,
+): Promise<Object> {
     var wnd = new Webdriver.WebDriver.Window(driver);
-    try {
-        var {width, height} = await wnd.getSize();
-    } catch (e) {
-        // Width and height aren't supported on android
-        width = 0;
-        height = 0;
-    }
-
     var capabilities = await driver.getCapabilities();
     var res = capabilities.caps_;
-    res.version = res.version || res.platformVersion;
-    res.width = width;
 
-    res.height = height;
+    res.version = res.version || res.platformVersion;
+
+    try {
+        var { width, height } = await wnd.getSize();
+
+        res.width = width;
+        res.height = height;
+    } catch (error) {
+        // Width and height aren't supported on android
+        res.width = 0;
+        res.height = 0;
+    }
+
     return res;
-};
+}
 
 /**
  * gotoUrl:
@@ -32,6 +32,7 @@ export async function seleniumBrowser(driver: Webdriver.WebDriver):
  */
 export function gotoUrl(driver: Webdriver.WebDriver, url: string): Promise {
     var port = process.env.PORT || 8000;
+
     return driver.get(`http://localhost:${port}${url}`);
 }
 
@@ -40,9 +41,8 @@ export function gotoUrl(driver: Webdriver.WebDriver, url: string): Promise {
  *
  * Build a webdriver.
  */
-export default async function webDriverInstance():
-    Promise<Webdriver.WebDriver>
-{
+export default async function webDriverInstance(
+): Promise<Webdriver.WebDriver> {
     var branch = process.env.TRAVIS_BRANCH || "Manual";
     var baseCaps: Webdriver.Capabilities = {
         username: process.env.SAUCE_USERNAME,
@@ -67,7 +67,7 @@ export default async function webDriverInstance():
         // From selenium-webdriver - we need to
         // fill in some extra fields for appium
         var browser = process.env.SELENIUM_BROWSER.split(/:/, 3);
-        var _;
+
         /* flow:disable unsupported by flow */
         [_, baseCaps.platformVersion, baseCaps.platformName] = browser;
 
@@ -84,7 +84,7 @@ export default async function webDriverInstance():
          * via Selenium Grid */
         .withCapabilities(baseCaps)
         /* This is the default. Overridden by SELENIUM_BROWSER */
-        .forBrowser('firefox')
+        .forBrowser("firefox")
         .build();
 
     await driver

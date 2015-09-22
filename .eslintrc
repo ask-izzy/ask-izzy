@@ -32,7 +32,7 @@
         "id-length": [2, {
             "min": 3,
             "properties": "never",
-            "exceptions": ["x", "y", "z", "_", "_s", "id"]
+            "exceptions": ["x", "y", "z", "_", "_s", "id", "fs"]
         }],
         "indent": [2, 4],
         "jsx-quotes": 2,
@@ -82,11 +82,11 @@
         "space-in-parens": [2, "never"],
         "space-infix-ops": 2,
         "space-unary-ops": [2, { "words": true, "nonwords": false }],
+        /* Doesn't support flow annotations */
         /* "spaced-comment": [2, "always"], */
         "strict": [2, "global"],
         /* "valid-jsdoc": 2, */
 
-        /* "react/display-name": 2, */
         "react/jsx-boolean-value": [2, "always"],
         "react/jsx-closing-bracket-location": 2,
         "react/jsx-curly-spacing": 2,

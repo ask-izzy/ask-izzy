@@ -1,14 +1,13 @@
-"use strict";
 /* @flow */
 
 import assert from "assert";
-import Webdriver, { By } from 'selenium-webdriver';
-import { deepestPossible, escapeXPathString } from './selectors';
+import Webdriver, { By } from "selenium-webdriver";
+import { deepestPossible, escapeXPathString } from "./selectors";
 
 // Flow complains about adding properties directly
 // to 'assert'; need a type specifier.
-var a: Object = assert;
-a.imageIsVisible = imageIsVisible;
+var assert_: Object = assert;
+
 export async function imageIsVisible(
     driver: Webdriver.WebDriver,
     altText: string
@@ -19,9 +18,10 @@ export async function imageIsVisible(
         .isDisplayed();
 
     assert(visible, `${altText} image was present but not visible`);
-};
+}
 
-a.svgIsVisible = svgIsVisible;
+assert_.imageIsVisible = imageIsVisible;
+
 export async function svgIsVisible(
     driver: Webdriver.WebDriver,
     altText: string
@@ -34,9 +34,10 @@ export async function svgIsVisible(
         .isDisplayed();
 
     assert(visible, `${altText} svg was present but not visible`);
-};
+}
 
-a.textIsVisible = textIsVisible;
+assert_.svgIsVisible = svgIsVisible;
+
 export async function textIsVisible(
     driver: Webdriver.WebDriver,
     text: string
@@ -49,9 +50,10 @@ export async function textIsVisible(
         .isDisplayed();
 
     assert(visible, `Text ${text} was present but not visible`);
-};
+}
 
-a.linkIsVisible = linkIsVisible;
+assert_.textIsVisible = textIsVisible;
+
 export async function linkIsVisible(
     driver: Webdriver.WebDriver,
     title: string,
@@ -61,10 +63,14 @@ export async function linkIsVisible(
         `//a[normalize-space(.) = normalize-space('${title}')]`
     ));
     var visible = await link.isDisplayed();
+
     assert(visible, `Link '${title}' was present but not visible`);
 
-    var href = await link.getAttribute('href');
-    assert.equal(href, expectedTarget);
-};
+    var href = await link.getAttribute("href");
 
-export default a;
+    assert.equal(href, expectedTarget);
+}
+
+assert_.linkIsVisible = linkIsVisible;
+
+export default assert_;

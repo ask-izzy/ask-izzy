@@ -1,18 +1,18 @@
 /*
  * Record snapshots of each component
  */
-"use strict";
 
-import _ from '../../src/server';
-import Webdriver, { By } from 'selenium-webdriver';
-import fs from 'fs';
-import webDriverInstance, {seleniumBrowser} from '../support/webdriver';
-import components from '../../src/components';
+/* eslint-env node, mocha */
+/* eslint-disable no-use-before-define, prefer-arrow-callback */
+
+import fs from "fs";
+
+import components from "../../src/components";
+import webDriverInstance, {seleniumBrowser} from "../support/webdriver";
 
 describe("Visual Components", function() {
     var baseUrl = "http://localhost:" + process.env.PORT;
-    var driver;
-    var cfg;
+    var driver, cfg;
 
     before(beforeAll);
     after(afterAll);
@@ -41,7 +41,9 @@ describe("Visual Components", function() {
                 // Try to create the output dir.
                 try {
                     fs.mkdirSync(`src/components/${name}`);
-                } catch (e) {}
+                } catch (error) {
+                    // pass
+                }
 
                 // Enable just generating the missing images
                 if (process.env.ONLY_NEW && fs.existsSync(orig)) {
@@ -50,18 +52,22 @@ describe("Visual Components", function() {
 
                 // Load styleguide page
                 var addr = `${baseUrl}/styleGuide/component/${name}`;
+
                 await driver.get(addr);
 
                 // Write screenshot
                 var imageData = await driver.takeScreenshot();
-                fs.writeFileSync(orig, imageData, 'base64');
+
+                fs.writeFileSync(orig, imageData, "base64");
             }
         });
     });
 });
 
-var screenshots = Object.keys(components).map(screenshot);
+Object.keys(components).map(screenshot);
+
 async function screenshot(componentName, path) {
     var imageData = await driver.takeScreenshot();
-    fs.writeFileSync(path, imageData, 'base64');
+
+    fs.writeFileSync(path, imageData, "base64");
 }
