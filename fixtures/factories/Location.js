@@ -13,13 +13,13 @@ export function Location(props: ?Object): issLocation {
             lat: 33.54,
             lon: -141.23,
         },
-        postcode: "3121",
-        state: "Victoria",
-        street_name: "Church",
+        postcode: "",
+        state: "",
+        street_name: "",
         street_number: streetNo(),
-        street_suffix: "South",
-        street_type: "St",
-        suburb: "Richmond",
+        street_suffix: "",
+        street_type: "",
+        suburb: "",
     }, props);
 }
 
