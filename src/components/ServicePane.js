@@ -9,6 +9,7 @@ import Address from "../components/Address";
 import CollapsedOpeningTimes from "../components/CollapsedOpeningTimes";
 import ContactMethods from "../components/ContactMethods";
 import Eligibility from "../components/Eligibility";
+import TransportTime from "../components/TransportTime";
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import iss from "../iss";
@@ -60,6 +61,12 @@ export default class ServicePane extends React.Component {
                     <hr />
                     <Address {...object.location} />
                     <hr />
+                    {!object.isConfidential ?
+                         <div>
+                             <TransportTime object={object} />
+                             <hr />
+                        </div>
+                     : ""}
                     <ContactMethods object={object} />
                 </main>
 
