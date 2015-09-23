@@ -46,7 +46,7 @@ class Address extends React.Component {
             titleize(this.props.postcode),
         ].join(" ").trim();
 
-        var query = encodeURIComponent(`${streetParts} ${street} ${suburb}`);
+        var query = encodeURIComponent(`${streetParts}${street} ${suburb}`);
 
         return (
             <div className="Address">
