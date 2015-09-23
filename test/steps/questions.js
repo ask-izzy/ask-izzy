@@ -7,6 +7,7 @@
 
 import Yadda from "yadda";
 import { titleize } from "underscore.string";
+import _ from "underscore";
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
@@ -25,7 +26,12 @@ module.exports = (function() {
         .given("I am part of the following demographics\n$lines",
                unpromisify(setDemographics))
         .given("my gender is $STRING", unpromisify(setGender))
-        .given("I am 27 years old", unpromisify(setAgeToMiddle))
+        .given("I am 17 years old",
+               unpromisify(_.partial(setAgeTo, "25 or younger")))
+        .given("I am 27 years old",
+               unpromisify(_.partial(setAgeTo, "26 to 64")))
+        .given("I am 77 years old",
+               unpromisify(_.partial(setAgeTo, "65 or older")))
         ;
 })();
 
@@ -71,11 +77,11 @@ async function setDemographicsNone(): Promise<void> {
     return setDemographics.bind(this)([]);
 }
 
-async function setAgeToMiddle(): Promise<void> {
+async function setAgeTo(option: string): Promise<void> {
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript(age => {
         sessionStorage.setItem("age", age);
-    }, "26 to 64");
+    }, option);
 }
 
 async function setGender(gender: string): Promise<void> {

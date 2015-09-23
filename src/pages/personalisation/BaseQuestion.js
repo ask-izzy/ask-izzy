@@ -42,6 +42,12 @@ class BaseQuestion extends React.Component {
         return this.answer;
     }
 
+    /** Provide a string to be used in the search results heading. */
+    // flow:disable
+    static get headingValue(): string {
+        return "";
+    }
+
     // flow:disable
     static get answer(): string {
         return storage.getItem(this.defaultProps.name);

@@ -22,14 +22,7 @@ class ResultsListPage extends BaseResultsPage {
                     primaryText={
                         this.state.meta ?
                             this.state.meta.total_count > 0 ?
-                                <div>
-                                    I found {this.state.meta.total_count}{' '}
-                                    {this.title.toLocaleLowerCase()}{' '}
-                                    services for{' '}
-                                    {this.state.meta.location.name},{' '}
-                                    {this.state.meta.location.state}.
-                                    <icons.LogoLight />
-                                </div>
+                                this.renderHeaderSuccess()
                             : <div>
                                  Sorry, I couldn't find any results
                                  for {this.title.toLocaleLowerCase()}.
@@ -70,6 +63,26 @@ class ResultsListPage extends BaseResultsPage {
 
             </div>
         );
+    }
+
+    renderHeaderSuccess(): ReactElement {
+
+        /* We are relying on the order being preserved as
+           gender before age, which is not ideal
+         */
+        var heading = this.personalisationComponents
+            .map(question => question.headingValue)
+            .filter(Boolean)
+            .join(" ");
+
+        return (
+                <div>
+                    I found {this.state.meta.total_count}{' '}
+                    {this.title.toLocaleLowerCase()} services {heading}{' '}
+                    in {this.state.meta.location.name},{' '}
+                    {this.state.meta.location.state}.
+                    <icons.LogoLight />
+                </div>);
     }
 
     renderErrorMessage(): ReactElement {
