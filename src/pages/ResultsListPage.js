@@ -67,11 +67,10 @@ class ResultsListPage extends BaseResultsPage {
 
     renderHeaderSuccess(): ReactElement {
 
-        var questions = this.personalisationComponents;
         /* We are relying on the order being preserved as
            gender before age, which is not ideal
          */
-        var heading = questions
+        var heading = this.personalisationComponents
             .map(question => question.headingValue)
             .filter(Boolean)
             .join(" ");
