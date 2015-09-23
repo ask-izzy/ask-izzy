@@ -128,6 +128,7 @@ module.exports = {
         now_open: {
             now_open: null,
         },
+        emails: [],
         opening_hours: [],
         location: {
             suburb: 'Richmond',

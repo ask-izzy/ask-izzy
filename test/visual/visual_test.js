@@ -4,11 +4,13 @@
 
 /* eslint-env node, mocha */
 /* eslint-disable no-use-before-define, prefer-arrow-callback */
-
 import fs from "fs";
 
 import components from "../../src/components";
 import webDriverInstance, {seleniumBrowser} from "../support/webdriver";
+
+/* eslint-disable no-unused-vars */
+import startServer from "../../src/server";
 
 describe("Visual Components", function() {
     var baseUrl = "http://localhost:" + process.env.PORT;
