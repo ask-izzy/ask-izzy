@@ -20,7 +20,7 @@ class TransportTime extends React.Component {
             object,
         } = this.props;
 
-        if (object.location.point) {
+        if (!object.isConfidential) {
             return (
                 <div className="TransportTime">
                     <icons.Walk className="ColoredIcon brand-text-dark" />

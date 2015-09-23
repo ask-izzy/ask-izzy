@@ -269,6 +269,13 @@ export class Service {
     get slug(): string {
         return slugify(`${this.id}-${this.site.name}`);
     }
+
+    /** If there is no point value, that means it's being suppressed */
+    /* flow:disable */
+    get isConfidential(): Boolean {
+        return !Boolean(this.location.point);
+    }
+
 }
 
 /**
