@@ -59,7 +59,10 @@ export default class ServicePane extends React.Component {
 
                     <CollapsedOpeningTimes object={object.open} />
                     <hr />
-                    <Address {...object.location} />
+                    <Address
+                        isConfidential={object.isConfidential}
+                        {...object.location}
+                    />
                     <hr />
                     {!object.isConfidential ?
                          <div>

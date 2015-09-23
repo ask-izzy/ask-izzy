@@ -6,6 +6,17 @@ import { titleize } from "underscore.string";
 import ScreenReader from "./ScreenReader";
 
 class Address extends React.Component {
+    // flow:disable not supported yet
+    static propTypes = {
+        street_number: React.PropTypes.String,
+        street_name: React.PropTypes.String,
+        street_type: React.PropTypes.String,
+        street_suffix: React.PropTypes.String,
+        suburb: React.PropTypes.String,
+        state: React.PropTypes.String,
+        postcode: React.PropTypes.String,
+        isConfidential: React.PropTypes.Boolean,
+    };
 
     // flow:disable not supported yet
     static sampleProps = {default: fixtures.ixa.location};
@@ -23,6 +34,35 @@ class Address extends React.Component {
     }
 
     render(): ReactElement {
+
+        var suburb = [
+            titleize(this.props.suburb),
+            this.props.state,
+            titleize(this.props.postcode),
+        ].join(" ").trim();
+
+        if (this.props.isConfidential) {
+            return (
+                    <div className="Address">
+                        <ScreenReader>
+                            <h4>Address</h4>
+                        </ScreenReader>
+                        <div className="Address-wrapper">
+                            {' '}
+                            <div className="street">
+                                Confidential location
+                            </div>
+                            {' '}
+                            <div className="suburb">
+                                {suburb}
+                            </div>
+                        </div>
+                    </div>
+                    );
+        }
+
+        // Not confidential - describe street & have link to map
+
         var street = [
             this.describe("level", "Level"),
             this.describe("unit", "Unit"),
@@ -31,12 +71,6 @@ class Address extends React.Component {
             titleize(this.props.street_name),
             titleize(this.props.street_type),
             titleize(this.props.street_suffix),
-        ].join(" ").trim();
-
-        var suburb = [
-            titleize(this.props.suburb),
-            this.props.state,
-            titleize(this.props.postcode),
         ].join(" ").trim();
 
         var query = encodeURIComponent(`${street} ${suburb}`);
