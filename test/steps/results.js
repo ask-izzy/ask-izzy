@@ -81,7 +81,12 @@ async function hotlinePositionAndText(
             By.css(".CrisisLineItem, .ResultListItem, .Infobox")
         );
     var crisisLine = elements[expectedPos - 1];
-
+    if (!crisisLine) {
+        throw new Error(
+            `Expected crisis line at position ${expectedPos},
+             but there were only ${elements.length} lines.`
+        );
+    }
     assert.equal(await crisisLine.getAttribute("class"),
                  "CrisisLineItem");
 
