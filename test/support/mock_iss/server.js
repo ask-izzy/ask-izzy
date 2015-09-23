@@ -5,7 +5,7 @@
 import cors from "cors";
 import express from "express";
 import services from "../../../fixtures/services";
-import ServiceFactory from "../../../fixtures/factories/service";
+import ServiceFactory from "../../../fixtures/factories/Service";
 var app = express();
 
 app.use(cors());
