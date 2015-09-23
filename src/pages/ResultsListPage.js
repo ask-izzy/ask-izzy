@@ -67,22 +67,22 @@ class ResultsListPage extends BaseResultsPage {
 
     renderHeaderSuccess(): ReactElement {
 
-        var questions = this.state.personalisation;
+        var questions = this.personalisationComponents;
         /* We are relying on the order being preserved as
            gender before age, which is not ideal
          */
-        var headingValues = questions
+        var heading = questions
             .map(question => question.headingValue)
-            .filter(Boolean);
-        var header = headingValues.join(" ");
+            .filter(Boolean)
+            .join(" ");
 
-        return (<div>
-                I found {this.state.meta.total_count}{' '}
-                {this.title.toLocaleLowerCase()}{' '}
-                services{' '}{header}{' '}
-                in{' '}{this.state.meta.location.name},{' '}
-                {this.state.meta.location.state}.
-                <icons.LogoLight />
+        return (
+                <div>
+                    I found {this.state.meta.total_count}{' '}
+                    {this.title.toLocaleLowerCase()} services {heading}{' '}
+                    in {this.state.meta.location.name},{' '}
+                    {this.state.meta.location.state}.
+                    <icons.LogoLight />
                 </div>);
     }
 
