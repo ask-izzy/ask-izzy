@@ -13,6 +13,10 @@ import TransportTime from "./TransportTime";
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class ResultListItem extends React.Component {
+
+    // flow:disable not supported yet
+    static displayName = "ResultListItem";
+
     // flow:disable not supported yet
     static propTypes = {
         object: React.PropTypes.instanceOf(iss.Service).isRequired,
