@@ -2,12 +2,10 @@
 import React from "react";
 import URL from "url";
 
-import fixtures from "../../fixtures/services";
-
 export default class Web extends React.Component {
 
     // flow:disable not supported yet
-    static sampleProps = {default: fixtures.ixa.emails[0]};
+    static sampleProps = {default: {url: "https://example.com/landingPage"}};
 
     render(): ReactElement {
         var url = URL.parse(this.props.url);

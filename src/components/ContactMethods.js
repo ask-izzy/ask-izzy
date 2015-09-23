@@ -13,7 +13,7 @@ class ContactMethods extends React.Component {
 
     // flow:disable not supported yet
     static sampleProps = {
-        default: {
+        closed: {
             object: {
                 phones: fixtures.ixa.phones,
                 emails: [],
