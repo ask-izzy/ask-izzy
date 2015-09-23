@@ -69,10 +69,10 @@ class TransportTime extends React.Component {
     }
 
     render(): ReactElement {
-        if (this.props.point) {
-            return this.renderPublic()
-        } else {
+        if (this.props.isConfidential()) {
             return this.renderConfidential()
+        } else {
+            return this.renderPublic()
         }
     }
 }

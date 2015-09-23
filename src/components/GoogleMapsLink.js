@@ -17,6 +17,14 @@ class GoogleMapsLink extends React.Component {
 
 
     render(): ReactElement {
+        if (this.props.location.isConfidential()) {
+            return (
+                <span {...this.props} >
+                    {this.props.children}
+                </span>
+            );
+        }
+
         return (
             <a
                 target="_blank"

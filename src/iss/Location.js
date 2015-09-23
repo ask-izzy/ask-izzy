@@ -17,7 +17,16 @@ export default class Location {
         return `https://maps.google.com/?q=${query}`;
     }
 
+    /* If there is no point value, that means it's being suppressed */
+    isConfidential(): boolean {
+        return !Boolean(this.props.point);
+    }
+
     streetAddressLine1(): string {
+        if (this.isConfidential()) {
+            return "Confidential location";
+        }
+
         var addrDescriptors = [
             this.props.flat_unit,
             this.props.level,
