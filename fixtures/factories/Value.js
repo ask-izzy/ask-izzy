@@ -45,9 +45,27 @@ export function Sequence(): () => number {
 }
 
 export function Merge(defaults: Object, props: ?Object): Object {
+
+    // Only allow overriding keys on objects if the sample object is empty.
+    if (props && Object.keys(defaults).length) {
+        for (var key of Object.keys(props)) {
+            if (defaults[key] === undefined) {
+                throw new Error(`Supplied unsupported key ${key}`)
+            }
+        }
+    }
+
     for (var key of Object.keys(defaults)) {
         if (props && props[key] != undefined) {
-            defaults[key] = props[key];
+            if ((typeof defaults[key] == "object") && !Array.isArray(defaults[key])) {
+                try {
+                    defaults[key] = Merge(defaults[key], props[key]);
+                } catch (e) {
+                    throw new Error(`Error processing '${key}: ${e.message}.`)
+                }
+            } else {
+                defaults[key] = props[key];
+            }
         }
     }
 

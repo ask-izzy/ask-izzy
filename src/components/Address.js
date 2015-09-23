@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import fixtures from "../../fixtures/services";
+import _ from "underscore";
 import icons from "../icons";
 import { titleize } from "underscore.string";
 import ScreenReader from "./ScreenReader";
@@ -8,38 +8,46 @@ import ScreenReader from "./ScreenReader";
 class Address extends React.Component {
 
     // flow:disable not supported yet
-    static sampleProps = {default: fixtures.ixa.location};
-
-    /*
-     * Convert a property to a description
-     * (eg `level: 1` -> "Level 1")
-     */
-    describe(property: string, description: string): string {
-        if (this.props[property]) {
-            return `${description} ${this.props[property]}`;
-        }
-
-        return "";
-    }
+    static sampleProps = {
+        complex: {
+            "building": "Hamy building",
+            "flat_unit": "Room 35",
+            "level": "Level 3",
+            "postcode": "3121",
+            "state": "VIC",
+            "street_name": "Elizabeth",
+            "street_number": "33",
+            "street_suffix": "",
+            "street_type": "St",
+            "suburb": "RICHMOND",
+        },
+    };
 
     render(): ReactElement {
+        var streetParts = [
+            this.props.flat_unit,
+            this.props.level,
+            this.props.building,
+        ].map(text => text.trim());
+
+        streetParts = _(streetParts)
+            .compact()
+            .map(part => `${part}, `)
+            .join("");
+
         var street = [
-            this.describe("level", "Level"),
-            this.describe("unit", "Unit"),
-            this.describe("building", ""),
             titleize(this.props.street_number),
             titleize(this.props.street_name),
             titleize(this.props.street_type),
             titleize(this.props.street_suffix),
         ].join(" ").trim();
-
         var suburb = [
             titleize(this.props.suburb),
             this.props.state,
             titleize(this.props.postcode),
         ].join(" ").trim();
 
-        var query = encodeURIComponent(`${street} ${suburb}`);
+        var query = encodeURIComponent(`${streetParts}${street} ${suburb}`);
 
         return (
             <div className="Address">
@@ -55,6 +63,7 @@ class Address extends React.Component {
                     <div className="Address-wrapper">
                         {' '}
                         <div className="street">
+                            {streetParts}
                             {street}
                         </div>
                         {' '}

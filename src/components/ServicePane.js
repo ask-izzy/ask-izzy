@@ -10,8 +10,8 @@ import CollapsedOpeningTimes from "../components/CollapsedOpeningTimes";
 import ContactMethods from "../components/ContactMethods";
 import Eligibility from "../components/Eligibility";
 import fixtures from "../../fixtures/services";
+import ServiceFactory from "../../fixtures/factories/Service";
 import icons from "../icons";
-import iss from "../iss";
 
 export default class ServicePane extends React.Component {
 
@@ -34,7 +34,7 @@ export default class ServicePane extends React.Component {
 
     // flow:disable not supported yet
     static sampleProps = {default: {
-        service: new iss.Service(fixtures.youthSupportNet),
+        service: ServiceFactory(fixtures.youthSupportNet),
     }};
 
     async getSiblingServices(): Promise<void> {

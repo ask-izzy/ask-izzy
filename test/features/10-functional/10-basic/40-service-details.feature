@@ -54,8 +54,21 @@ Feature: Service details page
         Then I should not see "You are ineligible if"
 
     Scenario: The address is a link to google maps
-        When I visit /service/866464
-        Then I can get to google maps by clicking "33 Elizabeth Street Richmond VIC 3121"
+       Given A service with:
+        ----------------------------------------------
+        * Location
+            Building      | Hany Building
+            Flat/Unit     | Unit 5
+            Level         | Level 3
+            Street Number | 33
+            Street Name   | Elizabeth
+            Street Type   | Street
+            Suburb        | Richmond
+            State         | VIC
+            Postcode      | 3121
+        ----------------------------------------------
+        When I navigate to the service page
+        Then I can get to google maps by clicking "Unit 5, Level 3, Hany Building, 33 Elizabeth Street Richmond VIC 3121"
 
     Scenario: The contact methods are available except fax and tty
        Given A service with:
