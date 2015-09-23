@@ -36,7 +36,8 @@
 
         button {
             display: block !important;
-            width: 90%;
+
+            width: calc(100% - 40px);
 
             margin-top: 20px !important;
             margin-right: auto !important;
@@ -49,7 +50,6 @@
             font-size: 18px !important;
             font-weight: 400 !important;
             text-transform: none !important;
-
 
             &:hover,
             &:focus {
