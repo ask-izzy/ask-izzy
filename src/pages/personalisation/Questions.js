@@ -63,6 +63,11 @@ export class Age extends BaseQuestion {
         request.age_groups = ageGroups[answer];
         return request;
     }
+
+    // flow:disable
+    static get headingValue() {
+        return "aged " + this.answer;
+    }
 }
 
 export class HousingSubcategories extends BaseMultiQuestion {
@@ -138,6 +143,19 @@ export class Gender extends BaseQuestion {
 
     // flow:disable
     static summaryLabel = "How do you identify?";
+
+    // flow:disable
+    static get headingValue() {
+        if (this.answer == "Male") {
+            return "for men";
+        } else if (this.answer == "Female") {
+            return "for women";
+        }
+        // important to not return "" here because it will
+        // be followed by the age string and otherwise would
+        // say "42 services aged 26 or younger"
+        return "for people";
+    }
 }
 
 export class Demographics extends BaseMultiQuestion {

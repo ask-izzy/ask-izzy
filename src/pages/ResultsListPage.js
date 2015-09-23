@@ -22,7 +22,7 @@ class ResultsListPage extends BaseResultsPage {
                     primaryText={
                         this.state.meta ?
                             this.state.meta.total_count > 0 ?
-                                this.renderHeader()
+                                this.renderHeaderSuccess()
                             : <div>
                                  Sorry, I couldn't find any results
                                  for {this.title.toLocaleLowerCase()}.
@@ -65,37 +65,21 @@ class ResultsListPage extends BaseResultsPage {
         );
     }
 
-    renderHeader(): ReactElement {
-    /*
-    age_groups
-    25 or younger => midadolescent,lateadolescent,youngadult
-    26 to 64 => adult, middleageadult
-    65 or older => preretirementage,agedpersons
-    q: -male => for women
-    q: -female => for men
-    */
+    renderHeaderSuccess(): ReactElement {
 
-        var genderAudience = "for people";
+        var questions = this.state.personalisation;
+        /* We are relying on the order being preserved as
+           gender before age, which is not ideal
+         */
+        var headingValues = questions
+            .map(question => question.headingValue)
+            .filter(Boolean);
+        var header = headingValues.join(" ");
 
-        if (this.state.request.q.match(/-female/)) {
-            genderAudience = "for men";
-        } else if (this.state.request.q.match(/-male/)) {
-            genderAudience = "for women";
-        }
-
-        var ageAudience = "";
-
-        if (this.state.request.age_groups.includes("youngadult")) {
-            ageAudience = "aged 25 or younger";
-        } else if (this.state.request.age_groups.includes("adult")) {
-            ageAudience = "aged 26 to 54";
-        } else {
-            ageAudience = "aged 65 or older";
-        }
         return (<div>
                 I found {this.state.meta.total_count}{' '}
                 {this.title.toLocaleLowerCase()}{' '}
-                services{' '}{genderAudience}{' '}{ageAudience}{' '}
+                services{' '}{header}{' '}
                 in{' '}{this.state.meta.location.name},{' '}
                 {this.state.meta.location.state}.
                 <icons.LogoLight />
