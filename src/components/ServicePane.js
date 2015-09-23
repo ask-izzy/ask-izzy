@@ -12,7 +12,6 @@ import Eligibility from "../components/Eligibility";
 import fixtures from "../../fixtures/services";
 import ServiceFactory from "../../fixtures/factories/Service";
 import icons from "../icons";
-import iss from "../iss";
 
 export default class ServicePane extends React.Component {
 

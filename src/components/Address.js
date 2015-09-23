@@ -29,6 +29,7 @@ class Address extends React.Component {
             this.props.level,
             this.props.building,
         ].map(text => text.trim());
+
         streetParts = _(streetParts)
             .compact()
             .map(part => `${part}, `)
