@@ -112,6 +112,7 @@ class BaseResultsPage extends BaseCategoriesPage {
         iss.search(request)
             .then(data => {
                 this.setState({
+                    request: request,
                     meta: data.meta,
                     objects: data.objects,
                     error: undefined,

@@ -66,11 +66,37 @@ class ResultsListPage extends BaseResultsPage {
     }
 
     renderHeader(): ReactElement {
+    /*
+    age_groups
+    25 or younger => midadolescent,lateadolescent,youngadult
+    26 to 64 => adult, middleageadult
+    65 or older => preretirementage,agedpersons
+    q: -male => for women
+    q: -female => for men
+    */
+
+        var genderAudience = "for people";
+
+        if (this.state.request.q.match(/-female/)) {
+            genderAudience = "for men";
+        } else if (this.state.request.q.match(/-male/)) {
+            genderAudience = "for women";
+        }
+
+        var ageAudience = "";
+
+        if (this.state.request.age_groups.includes("youngadult")) {
+            ageAudience = "aged 25 or younger";
+        } else if (this.state.request.age_groups.includes("adult")) {
+            ageAudience = "aged 26 to 54";
+        } else {
+            ageAudience = "aged 65 or older";
+        }
         return (<div>
                 I found {this.state.meta.total_count}{' '}
                 {this.title.toLocaleLowerCase()}{' '}
-                services for{' '}
-                {this.state.meta.location.name},{' '}
+                services{' '}{genderAudience}{' '}{ageAudience}{' '}
+                in{' '}{this.state.meta.location.name},{' '}
                 {this.state.meta.location.state}.
                 <icons.LogoLight />
                 </div>);
