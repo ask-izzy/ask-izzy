@@ -51,12 +51,21 @@ function parseObject(lines: Array<string>): Object {
     );
 }
 
-function parseTable(lines: Array<string>): Array<Object> {
+function parseTable(lines: Array<string>): Array<Object> | Object {
     /* Tables have format
      * Header | Header | Header
      * ========================
      * Cell   | Cell   | Cell
+     *
+     * If the line of '============='
+     * is absent, we have an object
+     * rather than a table.
      */
+
+    if (!lines[1].trim().match(/^=+$/)) {
+        return parseObject(lines);
+    }
+
     var header = lines
         .shift()
         .split("|")
@@ -94,12 +103,10 @@ function serviceConverter(str: string, done: callback): void {
     var serviceProps = {};
     var currentTableLines, // eg "Emails"
         currentTable,      // the lines which constitute a table
-        parseFn,// how should currentTableLines be parsed
         line;              // The line we're currently parsing
 
     var lineIsValueRegexp = /^\s*\* ([^:]+): (.*)$/;
     var lineIsTableHeaderRegexp = /^\s*\* ([^\s:]+)$/;
-    var lineIsObjectHeaderRegexp = /^\s*\* ([^\s:]+){}$/;
 
     function sanitizeValue(value: string): string {
         if (value == "(nada)") {
@@ -108,39 +115,33 @@ function serviceConverter(str: string, done: callback): void {
         return value;
     }
 
-    function startBlock(newParser: Function, newTableKey: ?string): void {
+    function startBlock(newTableKey: ?string): void {
         if (newTableKey) {
             newTableKey = sanitizeKey(newTableKey);
         }
 
         currentTable = newTableKey;
-        parseFn = newParser;
         currentTableLines = [];
     }
 
     function endBlock(): void {
-        if (currentTable && currentTableLines && parseFn) {
-            serviceProps[currentTable] = parseFn(currentTableLines);
+        if (currentTable && currentTableLines) {
+            serviceProps[currentTable] = parseTable(currentTableLines);
         }
 
         currentTable = undefined;
-        parseFn = undefined;
         currentTableLines = undefined;
     }
 
     for (line of lines) {
         var isValue = line.match(lineIsValueRegexp);
         var isTableHeader = line.match(lineIsTableHeaderRegexp);
-        var isObjectHeader = line.match(lineIsObjectHeaderRegexp);
 
         if (isValue) {
             serviceProps[sanitizeKey(isValue[1])] = sanitizeValue(isValue[2]);
-        } else if (isObjectHeader) {
-            endBlock();
-            startBlock(parseObject, isObjectHeader[1].toLowerCase());
         } else if (isTableHeader) {
             endBlock();
-            startBlock(parseTable, isTableHeader[1]);
+            startBlock(isTableHeader[1]);
         } else if (currentTableLines) {
             currentTableLines.push(line); // Add table row
         } else {

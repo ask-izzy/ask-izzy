@@ -56,7 +56,7 @@ Feature: Service details page
     Scenario: The address is a link to google maps
        Given A service with:
         ----------------------------------------------
-        * Location{}
+        * Location
             Building      | Hany Building
             Flat/Unit     | Unit 5
             Level         | Level 3
