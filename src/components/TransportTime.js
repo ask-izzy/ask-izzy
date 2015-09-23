@@ -9,24 +9,21 @@ import icons from "../icons";
 class TransportTime extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
-        object: React.PropTypes.object.isRequired,
+        point: React.PropTypes.object,
+        suburb: React.PropTypes.string.isRequired,
     };
 
     // flow:disable not supported yet
-    static sampleProps = {default: {object: fixtures.ixa}};
+    static sampleProps = {default: fixtures.ixa.location};
 
     render(): ReactElement {
-        var {
-            object,
-        } = this.props;
-
-        if (object.location.point) {
+        if (this.props.point) {
             return (
                 <div className="TransportTime">
                     <icons.Walk className="ColoredIcon brand-text-dark" />
                     <span className="time">? mins</span>&nbsp;
                     <span className="location">
-                        {titleize(this.props.object.location.suburb)}
+                        {titleize(this.props.suburb)}
                     </span>
                 </div>
             );
@@ -38,7 +35,7 @@ class TransportTime extends React.Component {
                     <icons.Phone className="ColoredIcon brand-text-dark" />
                     <span className="time">Confidential location</span>&nbsp;
                     <span className="location">
-                        {titleize(this.props.object.location.suburb)}
+                        {titleize(this.props.suburb)}
                     </span>
                 </div>
             );
