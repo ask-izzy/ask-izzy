@@ -44,10 +44,8 @@ function parseObject(lines: Array<string>): Object {
 
     return _.object(
         lines.map(
-            line => line.split("|").map(
-                cell => cell.trim()
-            )
-        ).map(downcaseKey)
+            line => downcaseKey(line.split("|").map(cell => cell.trim()))
+        )
     );
 }
 
