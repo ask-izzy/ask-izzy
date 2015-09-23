@@ -26,7 +26,37 @@ function linesConverter(str: string, done: callback): void {
     done(null, str.split("\n"));
 }
 
+// Converts a key from the format used in features to an object key
+function sanitizeKey(key: string): string {
+    return key
+        .toLowerCase()
+        .replace(" ", "_")
+        .replace("/", "_");
+}
+
+function parseObject(lines: Array<string>): Object {
+    /* Objects have format
+     * Key | Value
+     * Key | Value
+     * Key | Value
+     */
+    var downcaseKey = arr => [sanitizeKey(arr[0]), arr[1]];
+
+    return _.object(
+        lines.map(
+            line => line.split("|").map(
+                cell => cell.trim()
+            )
+        ).map(downcaseKey)
+    );
+}
+
 function parseTable(lines: Array<string>): Array<Object> {
+    /* Tables have format
+     * Header | Header | Header
+     * ========================
+     * Cell   | Cell   | Cell
+     */
     var header = lines
         .shift()
         .split("|")
@@ -43,11 +73,6 @@ function parseTable(lines: Array<string>): Array<Object> {
 }
 
 function tableConverter(str: string, done: callback): void {
-    /* Tables have format
-     * Header | Header | Header
-     * ========================
-     * Cell   | Cell   | Cell
-     */
     var lines = str.split("\n");
 
     done(null, parseTable(lines));
@@ -69,14 +94,12 @@ function serviceConverter(str: string, done: callback): void {
     var serviceProps = {};
     var currentTableLines, // eg "Emails"
         currentTable,      // the lines which constitute a table
+        parseFn,// how should currentTableLines be parsed
         line;              // The line we're currently parsing
 
     var lineIsValueRegexp = /^\s*\* ([^:]+): (.*)$/;
     var lineIsTableHeaderRegexp = /^\s*\* ([^\s:]+)$/;
-
-    function sanitizeKey(key: string): string {
-        return key.toLowerCase().replace(" ", "_");
-    }
+    var lineIsObjectHeaderRegexp = /^\s*\* ([^\s:]+){}$/;
 
     function sanitizeValue(value: string): string {
         if (value == "(nada)") {
@@ -85,37 +108,47 @@ function serviceConverter(str: string, done: callback): void {
         return value;
     }
 
-    function nextTable(newTableKey: ?string): void {
-        if (currentTable && currentTableLines) {
-            serviceProps[currentTable] = parseTable(currentTableLines);
-        }
-
+    function startBlock(newParser: Function, newTableKey: ?string): void {
         if (newTableKey) {
             newTableKey = sanitizeKey(newTableKey);
         }
 
         currentTable = newTableKey;
+        parseFn = newParser;
+        currentTableLines = [];
+    }
+
+    function endBlock(): void {
+        if (currentTable && currentTableLines && parseFn) {
+            serviceProps[currentTable] = parseFn(currentTableLines);
+        }
+
+        currentTable = undefined;
+        parseFn = undefined;
         currentTableLines = undefined;
     }
 
     for (line of lines) {
         var isValue = line.match(lineIsValueRegexp);
         var isTableHeader = line.match(lineIsTableHeaderRegexp);
+        var isObjectHeader = line.match(lineIsObjectHeaderRegexp);
 
         if (isValue) {
             serviceProps[sanitizeKey(isValue[1])] = sanitizeValue(isValue[2]);
+        } else if (isObjectHeader) {
+            endBlock();
+            startBlock(parseObject, isObjectHeader[1].toLowerCase());
         } else if (isTableHeader) {
-            nextTable(isTableHeader[1]);
-            currentTableLines = [];
+            endBlock();
+            startBlock(parseTable, isTableHeader[1]);
         } else if (currentTableLines) {
-            // Table row
-            currentTableLines.push(line);
+            currentTableLines.push(line); // Add table row
         } else {
             done(new Error(`Could not understand table line: "${line}"`));
             return;
         }
     }
-    nextTable();
+    endBlock();
 
     done(null, Service(serviceProps));
 }
