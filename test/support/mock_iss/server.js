@@ -5,6 +5,7 @@
 import cors from "cors";
 import express from "express";
 import services from "../../../fixtures/services";
+import ServiceFactory from "../../../fixtures/factories/service";
 var app = express();
 
 app.use(cors());
@@ -20,8 +21,8 @@ app.get("/api/v3/search/", (req, res) => {
                 total_count: 2,
             },
             objects: [
-                services.housingService,
-                services.housingServiceSibling,
+                ServiceFactory(services.housingService),
+                ServiceFactory(services.housingServiceSibling),
             ],
         });
     } else if (req.query.site_id == "444") {
@@ -251,7 +252,7 @@ app.get("/api/v3/search/", (req, res) => {
                 },
             },
             objects: [
-                services.domesticviolence,
+                ServiceFactory(services.domesticviolence),
             ],
         });
     } else if (req.query.q.match(/elasticsearch unavailable/)) {
@@ -272,32 +273,32 @@ app.get("/api/v3/search/", (req, res) => {
                 },
             },
             objects: [
-                services.housingService,
-                services.youthSupportNet,
-                services.susansHouse,
+                ServiceFactory(services.housingService),
+                ServiceFactory(services.youthSupportNet),
+                ServiceFactory(services.susansHouse),
             ],
         });
     }
 });
 
 app.get("/api/v3/service/111/", (req, res) => {
-    res.json(services.housingService);
+    res.json(ServiceFactory(services.housingService));
 });
 
 app.get("/api/v3/service/13841/", (req, res) => {
-    res.json(services.legal);
+    res.json(ServiceFactory(services.legal));
 });
 
 app.get("/api/v3/service/866464/", (req, res) => {
-    res.json(services.ixa);
+    res.json(ServiceFactory(services.ixa));
 });
 
 app.get("/api/v3/service/13844/", (req, res) => {
-    res.json(services.unhelpful);
+    res.json(ServiceFactory(services.unhelpful));
 });
 
 app.get("/api/v3/service/5551234/", (req, res) => {
-    res.json(services.phoneableService);
+    res.json(ServiceFactory(services.phoneableService));
 });
 
 app.listen(5000);
