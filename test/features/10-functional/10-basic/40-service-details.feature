@@ -58,7 +58,7 @@ Feature: Service details page
         ----------------------------------------------
         * Location{}
             Building      | Hany Building
-            Flat/Unit     | 5
+            Flat/Unit     | Unit 5
             Level         | Level 3
             Street Number | 33
             Street Name   | Elizabeth
@@ -68,7 +68,7 @@ Feature: Service details page
             Postcode      | 3121
         ----------------------------------------------
         When I navigate to the service page
-        Then I can get to google maps by clicking "Level 3, Unit 5, Hany Building, 33 Elizabeth Street Richmond VIC 3121"
+        Then I can get to google maps by clicking "Unit 5, Level 3, Hany Building, 33 Elizabeth Street Richmond VIC 3121"
 
     Scenario: The contact methods are available except fax and tty
        Given A service with:
