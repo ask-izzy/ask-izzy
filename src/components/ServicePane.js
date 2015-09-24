@@ -66,7 +66,10 @@ export default class ServicePane extends React.Component {
                     <hr />
                     {!object.isConfidential ?
                          <div>
-                             <TransportTime object={object} />
+                             <TransportTime
+                                 object={object}
+                                 linkDirections={true}
+                             />
                              <hr />
                         </div>
                      : ""}

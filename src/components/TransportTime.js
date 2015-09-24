@@ -10,19 +10,25 @@ class TransportTime extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
         object: React.PropTypes.object.isRequired,
+        linkDirections: React.PropTypes.Boolean,
     };
 
     // flow:disable not supported yet
-    static sampleProps = {default: {object: fixtures.ixa}};
+    static defaultProps = {
+        linkDirections: true,
+    };
+
+    // flow:disable not supported yet
+    static sampleProps = {default: {
+        object: fixtures.ixa,
+        linkDirections: false,
+    }};
 
     render(): ReactElement {
-        var {
-            object,
-        } = this.props;
 
-        /* NB: We use CSS to suppress TransportTime.location in detail view,
-         * and GetDirectionsLink in results listing view
-         */
+        var object = this.props.object;
+
+        /* NB We use CSS to suppress location in ServicePane */
         if (!object.isConfidential) {
 
             var point = encodeURIComponent(
@@ -37,9 +43,11 @@ class TransportTime extends React.Component {
                     <span className="location">
                         {titleize(this.props.object.location.suburb)}
                     </span>
-                    <div className="GetDirectionsLink">
-                        <a href={url}>Get directions</a>
-                    </div>
+                    {this.props.linkDirections ?
+                        <div className="GetDirectionsLink">
+                            <a href={url}>Get directions</a>
+                        </div>
+                    : ""}
                 </div>
             );
         } else {
