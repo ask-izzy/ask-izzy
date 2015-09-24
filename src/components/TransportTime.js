@@ -30,7 +30,9 @@ class TransportTime extends React.Component {
                 className={`TransportTime ${this.compactClass}`}
             >
                 <icons.Phone className="ColoredIcon brand-text-dark" />
-                <span className="time">Confidential location</span>&nbsp;
+                <span className="travel-time">
+                    Confidential location
+                </span>&nbsp;
                 <span className="location">
                     {titleize(this.props.suburb)}
                 </span>
@@ -55,7 +57,9 @@ class TransportTime extends React.Component {
                 className={`TransportTime ${this.compactClass}`}
             >
                 <icons.Walk className="ColoredIcon" />
-                <span className="time">? mins</span>&nbsp;
+                <span className="travel-time">
+                    ? mins
+                </span>&nbsp;
                 <span className="location">
                     {titleize(this.props.suburb)}
                 </span>
