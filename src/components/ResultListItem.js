@@ -73,7 +73,10 @@ class ResultListItem extends React.Component {
                     className="opening_hours"
                     object={object.open}
                 />
-                <TransportTime {...object.location} />
+                <TransportTime
+                    compact={true}
+                    {...object.location}
+                />
                 {this.props.nServiceProvisions > 0 ?
                     <div>
                         <ul className="related">{

@@ -9,6 +9,8 @@ import Address from "../components/Address";
 import CollapsedOpeningTimes from "../components/CollapsedOpeningTimes";
 import ContactMethods from "../components/ContactMethods";
 import Eligibility from "../components/Eligibility";
+import TransportTime from "../components/TransportTime";
+import GoogleMapsLink from "./GoogleMapsLink";
 import fixtures from "../../fixtures/services";
 import ServiceFactory from "../../fixtures/factories/Service";
 import icons from "../icons";
@@ -61,6 +63,13 @@ export default class ServicePane extends React.Component {
                     <Address location={object.Location()} />
                     <hr />
                     <ContactMethods object={object} />
+                    <hr />
+                    <GoogleMapsLink
+                        className="plain-text"
+                        location={object.Location()}
+                    >
+                        <TransportTime {...object.location}/>
+                    </GoogleMapsLink>
                 </main>
 
                 <Eligibility

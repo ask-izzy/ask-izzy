@@ -1,14 +1,20 @@
 .TransportTime {
+    display: block;
     position: relative;
-    margin-bottom: 16px;
     padding-left: 24px;
-
     font-size: 14px !important;
-    text-decoration: none;
 
-    .ColoredIcon {
+    &.compact {
+        margin-bottom: 16px;
+
+        .Icon {
+            top: -5px;
+        }
+    }
+
+    .Icon {
         position: absolute;
-        top: -5px;
+        top: 5px;
         left: -2px;
     }
 
@@ -19,5 +25,10 @@
 
     .location {
         color: $brand-text-mid;
+    }
+
+    .getDirections {
+        float: right;
+        text-decoration: underline;
     }
 }
