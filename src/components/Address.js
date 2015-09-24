@@ -9,18 +9,20 @@ class Address extends React.Component {
 
     // flow:disable not supported yet
     static sampleProps = {
-        complex: {location: new Location({
-            "building": "Hamy building",
-            "flat_unit": "Room 35",
-            "level": "Level 3",
-            "postcode": "3121",
-            "state": "VIC",
-            "street_name": "Elizabeth",
-            "street_number": "33",
-            "street_suffix": "",
-            "street_type": "St",
-            "suburb": "RICHMOND",
-        })},
+        complex: {
+            location: new Location({
+                "building": "Hamy building",
+                "flat_unit": "Room 35",
+                "level": "Level 3",
+                "postcode": "3121",
+                "state": "VIC",
+                "street_name": "Elizabeth",
+                "street_number": "33",
+                "street_suffix": "",
+                "street_type": "St",
+                "suburb": "RICHMOND",
+            }),
+        },
     };
 
     render(): ReactElement {
