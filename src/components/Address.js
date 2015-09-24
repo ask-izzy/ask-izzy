@@ -47,6 +47,7 @@ class Address extends React.Component {
                         <ScreenReader>
                             <h4>Address</h4>
                         </ScreenReader>
+                        <icons.Map />
                         <div className="Address-wrapper">
                             {' '}
                             <div className="street">
