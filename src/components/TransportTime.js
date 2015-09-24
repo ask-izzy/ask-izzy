@@ -20,10 +20,16 @@ class TransportTime extends React.Component {
             object,
         } = this.props;
 
-        /* NB: We use CSS to suppress the location in detail view, and the
-         * get directions link in results listing view
+        /* NB: We use CSS to suppress TransportTime.location in detail view,
+         * and GetDirectionsLink in results listing view
          */
         if (!object.isConfidential) {
+
+            var point = encodeURIComponent(
+                `${this.props.object.location.point.lat},
+                ${this.props.object.location.point.lon}`);
+            var url = `https://maps.google.com/?saddr=Current+Location&daddr=${point}`;
+
             return (
                 <div className="TransportTime">
                     <icons.Walk className="ColoredIcon brand-text-dark" />
@@ -32,7 +38,7 @@ class TransportTime extends React.Component {
                         {titleize(this.props.object.location.suburb)}
                     </span>
                     <div className="GetDirectionsLink">
-                        <a href="#">Get directions</a>
+                        <a href={url}>Get directions</a>
                     </div>
                 </div>
             );
