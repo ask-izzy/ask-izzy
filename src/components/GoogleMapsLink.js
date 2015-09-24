@@ -11,13 +11,22 @@ class GoogleMapsLink extends React.Component {
             children: (
                 <div>Link text</div>
             ),
-            location: new Location(fixtures.ixa.location),
+            to: new Location(fixtures.ixa.location),
         },
     };
 
+    googleMapsUrl(): string {
+        var toAddr = this.props.to;
+        var start = "Current+Location";
+        var query = encodeURIComponent(
+            `${toAddr.streetAddressLine1()} ${toAddr.streetAddressLine2()}`
+        );
+
+        return `https://maps.google.com/?saddr=${start}&addr=${query}`;
+    }
 
     render(): ReactElement {
-        if (this.props.location.isConfidential()) {
+        if (this.props.to.isConfidential()) {
             return (
                 <span {...this.props} >
                     {this.props.children}
@@ -29,7 +38,7 @@ class GoogleMapsLink extends React.Component {
             <a
                 target="_blank"
                 aria-label="Open Google Maps in a new tab"
-                href={this.props.location.googleMapsUrl()}
+                href={this.googleMapsUrl()}
                 {...this.props}
             >
                     {this.props.children}

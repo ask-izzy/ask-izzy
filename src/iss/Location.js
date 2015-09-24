@@ -9,14 +9,6 @@ export default class Location {
         this.props = props;
     }
 
-    googleMapsUrl(): string {
-        var query = encodeURIComponent(
-            `${this.streetAddressLine1()} ${this.streetAddressLine2()}`
-        );
-
-        return `https://maps.google.com/?q=${query}`;
-    }
-
     /* If there is no point value, that means it's being suppressed */
     isConfidential(): boolean {
         return !Boolean(this.props.point);

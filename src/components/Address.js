@@ -43,7 +43,7 @@ class Address extends React.Component {
                 <ScreenReader>
                     <h4>Address</h4>
                 </ScreenReader>
-                <GoogleMapsLink location={location}>
+                <GoogleMapsLink to={location}>
                     <icons.Map />
                     <div className="Address-wrapper">
                         {' '}
