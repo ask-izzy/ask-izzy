@@ -1,5 +1,9 @@
 .resultContainer {
     border-top: 10px solid $brand-bg-light;
+
+    .GetDirectionsLink {
+        display: none;
+    }
 }
 
 .resultContainer:first-child {

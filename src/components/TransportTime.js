@@ -20,6 +20,9 @@ class TransportTime extends React.Component {
             object,
         } = this.props;
 
+        /* NB: We use CSS to suppress the location in detail view, and the
+         * get directions link in results listing view
+         */
         if (!object.isConfidential) {
             return (
                 <div className="TransportTime">
@@ -28,6 +31,9 @@ class TransportTime extends React.Component {
                     <span className="location">
                         {titleize(this.props.object.location.suburb)}
                     </span>
+                    <div className="GetDirectionsLink">
+                        <a href="#">Get directions</a>
+                    </div>
                 </div>
             );
         } else {

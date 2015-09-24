@@ -50,6 +50,7 @@ $padding: 15px;
     }
 
     .OpeningTimes,
+    .TransportTime,
     .Address {
         svg {
             top: -6px !important;
@@ -58,9 +59,14 @@ $padding: 15px;
 
     .OpeningTimes,
     .Address,
+    .TransportTime,
     .CollapsedPhones {
         padding-top: 10px;
         padding-bottom: 10px;
+    }
+
+    .TransportTime .location {
+        display: none;
     }
 
     .List {
