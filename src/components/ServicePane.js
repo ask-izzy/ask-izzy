@@ -58,7 +58,7 @@ export default class ServicePane extends React.Component {
 
                     <CollapsedOpeningTimes object={object.open} />
                     <hr />
-                    <Address {...object.location} />
+                    <Address location={object.Location()} />
                     <hr />
                     <ContactMethods object={object} />
                 </main>
