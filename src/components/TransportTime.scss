@@ -1,11 +1,16 @@
 .TransportTime {
     display: block;
     position: relative;
+    padding-top: 10px;
+    padding-bottom: 10px;
     padding-left: 24px;
+
     font-size: 14px !important;
 
     &.compact {
         margin-bottom: 16px;
+        padding-top: 0;
+        padding-bottom: 0;
 
         .Icon {
             top: -5px;
