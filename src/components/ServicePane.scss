@@ -50,7 +50,6 @@ $padding: 15px;
     }
 
     .OpeningTimes,
-    .TransportTime,
     .Address {
         svg {
             top: -6px !important;
@@ -65,8 +64,14 @@ $padding: 15px;
         padding-bottom: 10px;
     }
 
-    .TransportTime .location {
-        display: none;
+    .TransportTime {
+        .location {
+            display: none;
+        }
+
+        .ColoredIcon {
+            top: 6px;
+        }
     }
 
     .List {
