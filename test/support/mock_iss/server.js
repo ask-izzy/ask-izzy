@@ -292,6 +292,10 @@ app.get("/api/v3/service/866464/", (req, res) => {
     res.json(services.ixa);
 });
 
+app.get("/api/v3/service/537512/", (req, res) => {
+    res.json(services.domesticviolence);
+});
+
 app.get("/api/v3/service/13844/", (req, res) => {
     res.json(services.unhelpful);
 });
