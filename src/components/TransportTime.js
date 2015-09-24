@@ -5,17 +5,26 @@ import { titleize } from "underscore.string";
 
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
+import Location from "../iss/Location";
 
 class TransportTime extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
-        point: React.PropTypes.object,
-        suburb: React.PropTypes.string.isRequired,
-        compact: React.PropTypes.boolean,
+        compact: React.PropTypes.bool.isRequired,
+        location: React.PropTypes.object.isRequired,
     };
 
     // flow:disable not supported yet
-    static sampleProps = {default: fixtures.ixa.location};
+    static sampleProps = {
+        compact: {
+            location: new Location(fixtures.ixa.location),
+            compact: true,
+        },
+        expanded: {
+            location: new Location(fixtures.ixa.location),
+            compact: false,
+        },
+    };
 
     // flow:disable not supported yet
     get compactClass(): string {
@@ -34,7 +43,7 @@ class TransportTime extends React.Component {
                     Confidential location
                 </span>&nbsp;
                 <span className="location">
-                    {titleize(this.props.suburb)}
+                    {titleize(this.props.location.suburb)}
                 </span>
             </div>
         );
@@ -61,7 +70,7 @@ class TransportTime extends React.Component {
                     ? mins
                 </span>&nbsp;
                 <span className="location">
-                    {titleize(this.props.suburb)}
+                    {titleize(this.props.location.suburb)}
                 </span>
                 {this.renderDirections()}
             </div>
@@ -69,7 +78,7 @@ class TransportTime extends React.Component {
     }
 
     render(): ReactElement {
-        if (this.props.isConfidential()) {
+        if (this.props.location.isConfidential()) {
             return this.renderConfidential()
         } else {
             return this.renderPublic()

@@ -75,7 +75,7 @@ class ResultListItem extends React.Component {
                 />
                 <TransportTime
                     compact={true}
-                    {...object.location}
+                    location={object.Location()}
                 />
                 {this.props.nServiceProvisions > 0 ?
                     <div>

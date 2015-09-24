@@ -68,7 +68,7 @@ export default class ServicePane extends React.Component {
                         className="plain-text"
                         location={object.Location()}
                     >
-                        <TransportTime {...object.location}/>
+                        <TransportTime location={object.Location()}/>
                     </GoogleMapsLink>
                 </main>
 
