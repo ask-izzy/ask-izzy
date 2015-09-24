@@ -73,7 +73,7 @@ Feature: Service details page
     Scenario: There is travel information for non-confidential services
         When I visit /service/866464
         Then I should see "? mins"
-        And I click on "Get directions"
+        Then I can get to google maps by clicking "Get directions"
 
     Scenario: There is no travel information for confidential services
         When I visit /service/537512

@@ -53,7 +53,7 @@ class TransportTime extends React.Component {
         if (!this.props.compact) {
             return (
                 <div className="getDirections">
-                    Get Directions
+                    Get directions
                 </div>
             );
         }
