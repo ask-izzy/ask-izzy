@@ -5,6 +5,7 @@
 import path              from "path";
 import webpack           from "webpack";
 import writeStats        from "./utils/write-stats";
+import commons           from "./utils/commons";
 import env               from "./env";
 import extractText       from "./extract-text";
 
@@ -17,6 +18,7 @@ module.exports = {
             "./src/client-entry.js",
             "./src/styles/bundle.scss",
         ],
+        vendor: ["react", "material-ui", "core-decorators", "material-ui", "moment", "react-google-maps", "react-router", "react-tap-event-plugin", "react", "underscore.string", "underscore"],
     },
     output: {
         path: assetsPath,
@@ -66,9 +68,11 @@ module.exports = {
                 warnings: false,
             },
         }),
+        commons,
 
         // stats
         function() { this.plugin("done", writeStats); },
 
     ],
 };
+
