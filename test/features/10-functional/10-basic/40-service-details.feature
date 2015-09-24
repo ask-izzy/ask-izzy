@@ -70,6 +70,16 @@ Feature: Service details page
         When I navigate to the service page
         Then I can get to google maps by clicking "Unit 5, Level 3, Hany Building, 33 Elizabeth Street Richmond VIC 3121"
 
+    Scenario: There is travel information for non-confidential services
+        When I visit /service/866464
+        Then I should see "? mins"
+        And I click on "Get directions"
+
+    Scenario: There is no travel information for confidential services
+        When I visit /service/537512
+        Then I should see "Confidential location"
+        And I should not see "Get directions"
+
     Scenario: The contact methods are available except fax and tty
        Given A service with:
         ----------------------------------------------
