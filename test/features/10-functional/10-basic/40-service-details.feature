@@ -68,7 +68,8 @@ Feature: Service details page
             Postcode      | 3121
         ----------------------------------------------
         When I navigate to the service page
-        Then I can get to google maps by clicking "Unit 5, Level 3, Hany Building, 33 Elizabeth Street Richmond VIC 3121"
+        Then I can get to google maps by clicking "Unit 5, Level 3, Hany Building, 33 Elizabeth Street"
+         And I can get to google maps by clicking "Richmond VIC 3121"
 
     Scenario: There is travel information for non-confidential services
         When I visit /service/866464

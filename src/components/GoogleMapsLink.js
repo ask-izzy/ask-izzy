@@ -26,22 +26,38 @@ class GoogleMapsLink extends React.Component {
     }
 
     render(): ReactElement {
+        var {
+            className,
+            children,
+            ...rest,
+        } = this.props;
+
+        if (className) {
+            className = `GoogleMapsLink ${className}`;
+        } else {
+            className = "GoogleMapsLink";
+        }
+
         if (this.props.to.isConfidential()) {
             return (
-                <span {...this.props} >
-                    {this.props.children}
+                <span
+                    className={className}
+                    {...rest}
+                >
+                    {children}
                 </span>
             );
         }
 
         return (
             <a
+                className={className}
                 target="_blank"
                 aria-label="Open Google Maps in a new tab"
                 href={this.googleMapsUrl()}
-                {...this.props}
+                {...rest}
             >
-                    {this.props.children}
+                    {children}
             </a>
         );
     }

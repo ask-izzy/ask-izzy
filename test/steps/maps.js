@@ -11,7 +11,6 @@ import { By } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
-import { linkIsVisible } from "../support/page-assertions";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
@@ -101,11 +100,15 @@ async function assertMap(): Promise<void> {
 }
 
 async function assertGoogleMapsLink(linkText: string) {
-    await linkIsVisible(
-        this.driver,
-        linkText,
-        `https://maps.google.com/?q=${encodeURIComponent(linkText)}`,
-    );
+    var link = await this.driver.findElement(By.partialLinkText(linkText));
+    var visible = await link.isDisplayed();
+
+    assert(visible, `Link '${linkText}' was present but not visible`);
+
+    var href = await link.getAttribute("href");
+    var sel = /^https:\/\/maps.google.com\/.*/;
+
+    assert(href.match(sel), "Expected a link to google maps");
 }
 
 async function assertMarkers(table: Array<Object>): Promise<void> {
