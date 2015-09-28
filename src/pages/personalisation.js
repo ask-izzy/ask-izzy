@@ -2,16 +2,24 @@
 
 /* @flow */
 
+import Age from "./personalisation/Age";
 import BaseMultiQuestion from "./personalisation/BaseMultiQuestion";
 import BaseQuestion from "./personalisation/BaseQuestion";
+import Demographics from "./personalisation/Demographics";
+import Gender from "./personalisation/Gender";
+import HousingSubcategories from "./personalisation/HousingSubcategories";
 import Intro from "./personalisation/Intro";
 import Location from "./personalisation/Location";
-import Questions from "./personalisation/Questions";
+import SleepTonight from "./personalisation/SleepTonight";
 
 export default {
+    Age: Age,
     BaseMultiQuestion: BaseMultiQuestion,
     BaseQuestion: BaseQuestion,
+    Demographics: Demographics,
+    Gender: Gender,
+    HousingSubcategories: HousingSubcategories,
     Intro: Intro,
     Location: Location,
-    Questions: Questions,
+    SleepTonight: SleepTonight,
 };

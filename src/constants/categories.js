@@ -57,12 +57,12 @@ var categories:Array<Category> = [
             </Infobox>
         ),
         personalisation: [
-            personalisation.Questions.SleepTonight,
-            personalisation.Questions.HousingSubcategories,
+            personalisation.SleepTonight,
+            personalisation.HousingSubcategories,
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
+            personalisation.Gender,
+            personalisation.Age,
+            personalisation.Demographics,
         ],
     }),
     new Category({
