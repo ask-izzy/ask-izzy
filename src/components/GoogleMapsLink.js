@@ -17,6 +17,8 @@ class GoogleMapsLink extends React.Component {
 
     googleMapsUrl(): string {
         var toAddr = this.props.to;
+
+        // FIXME: this.props.from
         var start = "Current+Location";
         var query = encodeURIComponent(
             `${toAddr.streetAddressLine1()} ${toAddr.streetAddressLine2()}`

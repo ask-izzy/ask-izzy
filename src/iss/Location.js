@@ -25,6 +25,7 @@ export default class Location {
             this.props.building,
         ].map(text => text.trim());
 
+        // FIXME: find a way to make this way clearer
         addrDescriptors = _(addrDescriptors)
             .compact()
             .map(part => `${part}, `)
