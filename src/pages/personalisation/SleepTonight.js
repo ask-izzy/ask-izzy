@@ -6,7 +6,7 @@ export default class SleepTonight extends BaseQuestion {
     // flow:disable
     static defaultProps = {
         name: "sleep-tonight",
-        question: "Do you have somewhere to sleep tonight?",
+        question: "Do you have somewhere safe to sleep tonight?",
         answers: [
             "Yes",
             "No",

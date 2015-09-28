@@ -18,14 +18,14 @@ Feature: Change your personalisation settings
         And I click on "Change what you need"
         Then I should see the results
         ----------------------------------------------------------------
-        Question (primaryText)                  | Answer (secondaryText)
+        Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Do you have somewhere to sleep tonight? | Yes
-        Do you need any of these?               | 0 selected
-        Where are you?                          | Melbourne VIC
-        How do you identify?                    | Female
-        How old are you?                        | 26 to 64
-        Do any of these apply to you?           | 0 selected
+        Do you have somewhere safe to sleep tonight? | Yes
+        Do you need any of these?                    | 0 selected
+        Where are you?                               | Melbourne VIC
+        How do you identify?                         | Female
+        How old are you?                             | 26 to 64
+        Do any of these apply to you?                | 0 selected
         ----------------------------------------------------------------
 
         When I click back from the title bar
@@ -45,29 +45,29 @@ Feature: Change your personalisation settings
 
         Then I should see the results
         ----------------------------------------------------------------
-        Question (primaryText)                  | Answer (secondaryText)
+        Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Do you have somewhere to sleep tonight? | Yes
-        Do you need any of these?               | 0 selected
-        Where are you?                          | Carlton, Victoria
-        How do you identify?                    | Female
-        How old are you?                        | 26 to 64
-        Do any of these apply to you?           | 0 selected
+        Do you have somewhere safe to sleep tonight? | Yes
+        Do you need any of these?                    | 0 selected
+        Where are you?                               | Carlton, Victoria
+        How do you identify?                         | Female
+        How old are you?                             | 26 to 64
+        Do any of these apply to you?                | 0 selected
         ----------------------------------------------------------------
 
     Scenario: Edit whether I have somewhere to sleep tonight
         When I visit /category/housing/personalise/summary
-        And I click on "Do you have somewhere to sleep tonight?"
+        And I click on "Do you have somewhere safe to sleep tonight?"
         And I click on "No"
         Then I should see the results
         ----------------------------------------------------------------
-        Question (primaryText)                  | Answer (secondaryText)
+        Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Do you have somewhere to sleep tonight? | No
-        Where are you?                          | Melbourne VIC
-        How do you identify?                    | Female
-        How old are you?                        | 26 to 64
-        Do any of these apply to you?           | 0 selected
+        Do you have somewhere safe to sleep tonight? | No
+        Where are you?                               | Melbourne VIC
+        How do you identify?                         | Female
+        How old are you?                             | 26 to 64
+        Do any of these apply to you?                | 0 selected
         ----------------------------------------------------------------
 
     Scenario: Edit housing subcategory items
@@ -79,14 +79,14 @@ Feature: Change your personalisation settings
         When I visit /category/housing/personalise/summary
         Then I should see the results
         ----------------------------------------------------------------
-        Question (primaryText)                  | Answer (secondaryText)
+        Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Do you have somewhere to sleep tonight? | Yes
-        Do you need any of these?               | 1 selected
-        Where are you?                          | Melbourne VIC
-        How do you identify?                    | Female
-        How old are you?                        | 26 to 64
-        Do any of these apply to you?           | 0 selected
+        Do you have somewhere safe to sleep tonight? | Yes
+        Do you need any of these?                    | 1 selected
+        Where are you?                               | Melbourne VIC
+        How do you identify?                         | Female
+        How old are you?                             | 26 to 64
+        Do any of these apply to you?                | 0 selected
         ----------------------------------------------------------------
 
         When I click on "Do you need any of these?"
@@ -101,14 +101,14 @@ Feature: Change your personalisation settings
         And I click on "Done"
         Then I should see the results
         ----------------------------------------------------------------
-        Question (primaryText)                  | Answer (secondaryText)
+        Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Do you have somewhere to sleep tonight? | Yes
-        Do you need any of these?               | 2 selected
-        Where are you?                          | Melbourne VIC
-        How do you identify?                    | Female
-        How old are you?                        | 26 to 64
-        Do any of these apply to you?           | 0 selected
+        Do you have somewhere safe to sleep tonight? | Yes
+        Do you need any of these?                    | 2 selected
+        Where are you?                               | Melbourne VIC
+        How do you identify?                         | Female
+        How old are you?                             | 26 to 64
+        Do any of these apply to you?                | 0 selected
         ----------------------------------------------------------------
 
     Scenario: Edit demographics items
@@ -121,14 +121,14 @@ Feature: Change your personalisation settings
         When I visit /category/housing/personalise/summary
         Then I should see the results
         ----------------------------------------------------------------
-        Question (primaryText)                  | Answer (secondaryText)
+        Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Do you have somewhere to sleep tonight? | Yes
-        Do you need any of these?               | 0 selected
-        Where are you?                          | Melbourne VIC
-        How do you identify?                    | Female
-        How old are you?                        | 26 to 64
-        Do any of these apply to you?           | 2 selected
+        Do you have somewhere safe to sleep tonight? | Yes
+        Do you need any of these?                    | 0 selected
+        Where are you?                               | Melbourne VIC
+        How do you identify?                         | Female
+        How old are you?                             | 26 to 64
+        Do any of these apply to you?                | 2 selected
         ----------------------------------------------------------------
 
         When I click on "Do any of these apply to you?"
@@ -136,14 +136,14 @@ Feature: Change your personalisation settings
         And I click on "Done"
         Then I should see the results
         ----------------------------------------------------------------
-        Question (primaryText)                  | Answer (secondaryText)
+        Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Do you have somewhere to sleep tonight? | Yes
-        Do you need any of these?               | 0 selected
-        Where are you?                          | Melbourne VIC
-        How do you identify?                    | Female
-        How old are you?                        | 26 to 64
-        Do any of these apply to you?           | 1 selected
+        Do you have somewhere safe to sleep tonight? | Yes
+        Do you need any of these?                    | 0 selected
+        Where are you?                               | Melbourne VIC
+        How do you identify?                         | Female
+        How old are you?                             | 26 to 64
+        Do any of these apply to you?                | 1 selected
         ----------------------------------------------------------------
 
     Scenario: Edit gender
@@ -152,12 +152,12 @@ Feature: Change your personalisation settings
         And I click on "Male"
         Then I should see the results
         ----------------------------------------------------------------
-        Question (primaryText)                  | Answer (secondaryText)
+        Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Do you have somewhere to sleep tonight? | Yes
-        Do you need any of these?               | 0 selected
-        Where are you?                          | Melbourne VIC
-        How do you identify?                    | Male
-        How old are you?                        | 26 to 64
-        Do any of these apply to you?           | 0 selected
+        Do you have somewhere safe to sleep tonight? | Yes
+        Do you need any of these?                    | 0 selected
+        Where are you?                               | Melbourne VIC
+        How do you identify?                         | Male
+        How old are you?                             | 26 to 64
+        Do any of these apply to you?                | 0 selected
         ----------------------------------------------------------------

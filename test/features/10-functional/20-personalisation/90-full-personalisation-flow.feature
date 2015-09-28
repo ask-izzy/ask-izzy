@@ -15,7 +15,7 @@ Feature: Personalisation
         Then I should see "These services can help you find a place to stay."
 
         When I click on "Okay"
-        Then I should see "Do you have somewhere to sleep tonight?"
+        Then I should see "Do you have somewhere safe to sleep tonight?"
 
         When I click on "Yes"
         Then I should see "Do you need any of these?"
@@ -48,7 +48,7 @@ Feature: Personalisation
         Then I should see "These services can help you find a place to stay."
 
         When I click on "Okay"
-        Then I should see "Do you have somewhere to sleep tonight?"
+        Then I should see "Do you have somewhere safe to sleep tonight?"
 
         When I click on "No"
         Then I should see "Where are you?"
