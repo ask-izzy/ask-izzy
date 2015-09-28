@@ -74,9 +74,6 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -88,9 +85,6 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -102,9 +96,6 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -116,9 +107,6 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -130,9 +118,6 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -144,9 +129,6 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -158,9 +140,6 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -172,9 +151,6 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -186,9 +162,6 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -200,9 +173,6 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -214,9 +184,6 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -228,9 +195,6 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
         ],
     }),
     new Category({
@@ -242,9 +206,6 @@ var categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
         ],
     }),
 ];
