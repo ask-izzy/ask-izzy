@@ -13,6 +13,10 @@ import TransportTime from "./TransportTime";
 
 /*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
 class ResultListItem extends React.Component {
+
+    // flow:disable not supported yet
+    static displayName = "ResultListItem";
+
     // flow:disable not supported yet
     static propTypes = {
         object: React.PropTypes.instanceOf(iss.Service).isRequired,
@@ -69,7 +73,10 @@ class ResultListItem extends React.Component {
                     className="opening_hours"
                     object={object.open}
                 />
-                <TransportTime object={object} />
+                <TransportTime
+                    compact={true}
+                    location={object.Location()}
+                />
                 {this.props.nServiceProvisions > 0 ?
                     <div>
                         <ul className="related">{

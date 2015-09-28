@@ -1,79 +1,63 @@
 /* @flow */
 import React from "react";
-import _ from "underscore";
 import icons from "../icons";
-import { titleize } from "underscore.string";
 import ScreenReader from "./ScreenReader";
+import GoogleMapsLink from "./GoogleMapsLink";
+import Location from "../iss/Location";
 
 class Address extends React.Component {
+    // flow:disable not supported yet
+    static propTypes = {
+        street_number: React.PropTypes.String,
+        street_name: React.PropTypes.String,
+        street_type: React.PropTypes.String,
+        street_suffix: React.PropTypes.String,
+        suburb: React.PropTypes.String,
+        state: React.PropTypes.String,
+        postcode: React.PropTypes.String,
+    };
 
     // flow:disable not supported yet
     static sampleProps = {
         complex: {
-            "building": "Hamy building",
-            "flat_unit": "Room 35",
-            "level": "Level 3",
-            "postcode": "3121",
-            "state": "VIC",
-            "street_name": "Elizabeth",
-            "street_number": "33",
-            "street_suffix": "",
-            "street_type": "St",
-            "suburb": "RICHMOND",
+            location: new Location({
+                "building": "Hamy building",
+                "flat_unit": "Room 35",
+                "level": "Level 3",
+                "postcode": "3121",
+                "state": "VIC",
+                "street_name": "Elizabeth",
+                "street_number": "33",
+                "street_suffix": "",
+                "street_type": "St",
+                "suburb": "RICHMOND",
+            }),
         },
     };
 
     render(): ReactElement {
-        var streetParts = [
-            this.props.flat_unit,
-            this.props.level,
-            this.props.building,
-        ].map(text => text.trim());
+        var location = this.props.location;
 
-        streetParts = _(streetParts)
-            .compact()
-            .map(part => `${part}, `)
-            .join("");
-
-        var street = [
-            titleize(this.props.street_number),
-            titleize(this.props.street_name),
-            titleize(this.props.street_type),
-            titleize(this.props.street_suffix),
-        ].join(" ").trim();
-        var suburb = [
-            titleize(this.props.suburb),
-            this.props.state,
-            titleize(this.props.postcode),
-        ].join(" ").trim();
-
-        var query = encodeURIComponent(`${streetParts}${street} ${suburb}`);
-
+        // FIXME: GoogleMapsLink should be a slide out static map
         return (
             <div className="Address">
                 <ScreenReader>
                     <h4>Address</h4>
                 </ScreenReader>
-                <a
-                    target="_blank"
-                    aria-label="Open Google Maps in a new tab"
-                    href={`https://maps.google.com/?q=${query}`}
-                >
+                <GoogleMapsLink to={location}>
                     <icons.Map />
                     <div className="Address-wrapper">
                         {' '}
                         <div className="street">
-                            {streetParts}
-                            {street}
+                            {location.streetAddressLine1()}
                         </div>
                         {' '}
                         <div className="suburb">
-                            {suburb}
+                            {location.streetAddressLine2()}
                         </div>
                     </div>
-                </a>
+                </GoogleMapsLink>
             </div>
-
         );
     }
 

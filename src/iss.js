@@ -9,6 +9,7 @@ import http from "iso-http";
 import url from "url";
 import { slugify } from "underscore.string";
 import ServiceOpening from "./iss/ServiceOpening";
+import Location from "./iss/Location";
 import serviceProvisions from "./constants/service-provisions";
 
 declare var ISS_URL: string;
@@ -116,6 +117,10 @@ export async function requestObjects(
 export class Service {
     constructor(props: issService) {
         Object.assign(this, props);
+    }
+
+    Location(): Location {
+        return new Location(this.location);
     }
 
     abn: string;

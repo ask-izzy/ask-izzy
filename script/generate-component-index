@@ -70,6 +70,15 @@ cat << EOF > $target
 
 EOF
 
+for f in $( find src/styles/shared -name '*.scss' | sort )
+do
+    import=$( echo "$f" | sed \
+        -e 's&^src/&../&' \
+        -e 's&\.scss$&&'
+    )
+    echo "@import \"${import}\";" >> $target
+done
+
 for f in $( find src -name '*.scss' -not -path 'src/styles/*.scss' | sort )
 do
     import=$( echo "$f" | sed \
