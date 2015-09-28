@@ -76,26 +76,68 @@ function _request(obj) {
     });
 }
 
-export async function request(path: string, data: ?searchRequest): Object {
-    var url_: string = ISS_URL || process.env.ISS_URL;
-    var urlobj: url.urlObj = url.parse(url.resolve(url_, path), true);
+
+/**
+ * Add anything in data to the URL query params,
+ * and convert auth to `&key=value` form.
+ *
+ * @param {string} url_ - The URL to add to.
+ * @param {Object} data - data passed to http.request.
+ *
+ * @returns {Promise<Object>} a promise for the request.
+ */
+export function mungeUrlQuery(url_: string, data: Object): string {
+    var urlObj = url.parse(url_, true);
 
     /* data overrides anything passed in via the URL.
      * Passing query args via the URL needs to be supported for requesting
      * meta.next */
-    data = Object.assign({}, urlobj.query, data);
-    data.key = urlobj.auth;
+    data = Object.assign({}, urlObj.query, data);
+    if (urlObj.auth) {
+        data.key = urlObj.auth;
+    }
 
-    urlobj.auth = urlobj.search = urlobj.querystring = urlobj.query = null;
-    url_ = url.format(urlobj);
+    urlObj.auth = urlObj.search = urlObj.querystring = urlObj.query = null;
+    url_ = url.format(urlObj);
 
+    /*
+     * Encode data into the URI ourselves
+     * until we can work around
+     * https://github.com/jedmao/iso-http/issues/2
+    */
+    var serialized = "";
+
+    if (data) {
+        // Flow can't tell that `data` isn't null inside a closure
+        var _data = data;
+
+        serialized = Object.keys(_data).map(key => {
+            var serializeValue = (value) =>
+                `${key}=${encodeURIComponent(value)}`;
+
+            if (Array.isArray(_data[key])) {
+                return _data[key].map(serializeValue).join("&");
+            } else {
+                return serializeValue(_data[key]);
+            }
+        }).join("&");
+    }
+
+    var joiner = (url_.indexOf("?") > -1) ? "&" : "?";
+
+    return url_ + joiner + serialized;
+}
+
+export async function request(path: string, data: ?searchRequest): Object {
+    var url_: string = ISS_URL || process.env.ISS_URL;
+
+    url_ = mungeUrlQuery(url.resolve(url_, path), data);
     var response = await _request({
         url: url_,
         contentType: "application/json",
         headers: {
             Accept: "application/json",
         },
-        data: data,
     });
 
     return JSON.parse(response.text);
