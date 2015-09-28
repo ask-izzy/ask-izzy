@@ -10,12 +10,14 @@ export default class HousingSubcategories extends BaseMultiQuestion {
     // flow:disable
     static defaultProps = {
         name: "sub-housing",
-        question: "Do any of these apply to you?",
+        question: "Is this your situation?",
         answers: [
-            "Help finding somewhere to live",
-            "Help with paying rent",
-            "Help with paying utility bills",
-            "Help with a legal issue",
+            "On the street",
+            "Couch surfing",
+            "In a rooming house",
+            "Private rental",
+            "Public housing",
+            "Mortgaged housing",
         ],
     };
 

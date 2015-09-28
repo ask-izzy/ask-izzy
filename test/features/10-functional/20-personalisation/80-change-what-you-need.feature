@@ -21,7 +21,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Do you have somewhere safe to sleep tonight? | Yes
-        Do you need any of these?                    | 0 selected
+        Is this your situation?                        | 0 selected
         Where are you?                               | Melbourne VIC
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -48,7 +48,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Do you have somewhere safe to sleep tonight? | Yes
-        Do you need any of these?                    | 0 selected
+        Is this your situation?                        | 0 selected
         Where are you?                               | Carlton, Victoria
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -73,7 +73,7 @@ Feature: Change your personalisation settings
     Scenario: Edit housing subcategory items
         Given I need the following for housing
         -------------------------------
-        Help finding somewhere to live
+        In a rooming house
         -------------------------------
 
         When I visit /category/housing/personalise/summary
@@ -82,29 +82,31 @@ Feature: Change your personalisation settings
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Do you have somewhere safe to sleep tonight? | Yes
-        Do you need any of these?                    | 1 selected
+        Is this your situation?                      | 1 selected
         Where are you?                               | Melbourne VIC
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected
         ----------------------------------------------------------------
 
-        When I click on "Do you need any of these?"
-        Then "Help finding somewhere to live" should be checked
-        And "Help with paying rent" should not be checked
-        And "Help with paying utility bills" should not be checked
-        And "Help with a legal issue" should not be checked
+        When I click on "Is this your situation?"
+        Then "On the street" should not be checked
+        And "Couch surfing" should not be checked
+        And "In a rooming house" should be checked
+        And "Private rental" should not be checked
+        And "Public housing" should not be checked
+        And "Mortgaged housing" should not be checked
 
-        When I click on "Help finding somewhere to live"
-        And I click on "Help with paying utility bills"
-        And I click on "Help with a legal issue"
+        When I click on "In a rooming house"
+        And I click on "Private rental"
+        And I click on "Mortgaged housing"
         And I click on "Done"
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Do you have somewhere safe to sleep tonight? | Yes
-        Do you need any of these?                    | 2 selected
+        Is this your situation?                      | 2 selected
         Where are you?                               | Melbourne VIC
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -124,7 +126,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Do you have somewhere safe to sleep tonight? | Yes
-        Do you need any of these?                    | 0 selected
+        Is this your situation?                      | 0 selected
         Where are you?                               | Melbourne VIC
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -139,7 +141,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Do you have somewhere safe to sleep tonight? | Yes
-        Do you need any of these?                    | 0 selected
+        Is this your situation?                      | 0 selected
         Where are you?                               | Melbourne VIC
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -155,7 +157,7 @@ Feature: Change your personalisation settings
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Do you have somewhere safe to sleep tonight? | Yes
-        Do you need any of these?                    | 0 selected
+        Is this your situation?                      | 0 selected
         Where are you?                               | Melbourne VIC
         How do you identify?                         | Male
         How old are you?                             | 26 to 64

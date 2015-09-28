@@ -18,7 +18,7 @@ Feature: Personalisation
         Then I should see "Do you have somewhere safe to sleep tonight?"
 
         When I click on "Yes"
-        Then I should see "Do you need any of these?"
+        Then I should see "Is this your situation?"
 
         When I click on "Done"
         Then I should see "Where are you?"
