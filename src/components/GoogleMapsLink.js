@@ -6,24 +6,29 @@ import Location from "../iss/Location";
 class GoogleMapsLink extends React.Component {
 
     // flow:disable not supported yet
+    static defaultProps = {
+        from: "", // Empty string makes the maps app use your current location
+    };
+
+    // flow:disable not supported yet
     static sampleProps = {
         default: {
             children: (
                 <div>Link text</div>
             ),
             to: new Location(fixtures.ixa.location),
-            from: "",
         },
     };
 
     googleMapsUrl(): string {
         var toAddr = this.props.to;
 
-        var start = encodeURIComponent(this.props.from || "");
+        var start = encodeURIComponent(this.props.from);
         var query = encodeURIComponent(
             `${toAddr.streetAddressLine1()} ${toAddr.streetAddressLine2()}`
         );
 
+        // FIXME: Choose directionsmode based on expected travel time.
         return `https://maps.google.com/?directionsmode=walking&saddr=${start}&daddr=${query}`;
     }
 
