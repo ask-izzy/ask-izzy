@@ -12,6 +12,7 @@ Feature: Category page
         And my gender is female
         And I am 27 years old
         And I am not part of any relevant demographics
+        And I am not interested in any subcategory
 
     Scenario: Visit housing category
         When I visit /category/housing
