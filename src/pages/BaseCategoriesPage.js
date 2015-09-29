@@ -50,7 +50,6 @@ class BaseCategoriesPage extends React.Component {
         } else {
             throw new Error("Unexpected");
         }
-
         return components.filter(component => component.showQuestion());
     }
 
