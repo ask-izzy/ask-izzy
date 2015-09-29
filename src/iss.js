@@ -17,7 +17,7 @@ declare var ISS_URL: string;
 /* eslint-disable no-use-before-define */
 
 export type searchRequest = {
-    q?: string,
+    q: string,
     service_types?: string | Array<string>,  // jscs:disable
     site_id?: number,  // jscs:disable
 
