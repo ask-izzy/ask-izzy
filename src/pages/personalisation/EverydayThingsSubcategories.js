@@ -12,7 +12,7 @@ export default class EverydayThingsSubcategories extends BaseMultiQuestion {
         answers: [
             "Food packages/parcels/vouchers",
             "Transport",
-            "Keeping warm eg: swags",
+            "Keeping warm e.g. swags",
             "Clothes",
             "Showers",
             "Personal products",
