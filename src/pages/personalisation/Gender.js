@@ -1,31 +1,22 @@
 /* @flow */
 
 import BaseQuestion from "./BaseQuestion";
+import { SearchByMap } from "./mixins";
 
+var questions = {
+    "Female": "-male",
+    "Male": " -female",
+    "Neither/Both/Something else": "",
+};
+
+/*::`*/@SearchByMap(questions)/*::`;*/
 export default class Gender extends BaseQuestion {
     // flow:disable
     static defaultProps = {
         name: "gender",
         question: "Do you identify as…",
-        answers: [
-            "Female",
-            "Male",
-            "Neither/Both/Something else",
-        ],
+        answers: Object.keys(questions),
     };
-
-    static getSearchForAnswer(request, answer) {
-        if (!request.q) {
-            // flow needs to be sure request.q exists
-            throw new Error("Unexpected");
-        } else if (answer == "Male") {
-            request.q += " -female";
-        } else if (answer == "Female") {
-            request.q += " -male";
-        }
-
-        return request;
-    }
 
     // flow:disable
     static summaryLabel = "How do you identify?";
