@@ -23,6 +23,8 @@ module.exports = (function() {
                unpromisify(setSubcategoryItems))
         .given("I am not part of any relevant demographics",
                unpromisify(setDemographicsNone))
+        .given("I am not interested in any subcategory",
+               unpromisify(setSubcategoriesNone))
         .given("I am part of the following demographics\n$lines",
                unpromisify(setDemographics))
         .given("my gender is $STRING", unpromisify(setGender))
@@ -75,6 +77,24 @@ async function setDemographics(
 
 async function setDemographicsNone(): Promise<void> {
     return setDemographics.bind(this)([]);
+}
+
+async function setSubcategoriesNone(
+    items: Array<string>,
+): Promise<void> {
+    await gotoUrl(this.driver, "/");  // go anywhere to start the session
+    await this.driver.executeScript(() => {
+        sessionStorage.setItem("sub-addiction", "[]");
+        sessionStorage.setItem("sub-counselling", "[]");
+        sessionStorage.setItem("sub-everyday-things", "[]");
+        sessionStorage.setItem("sub-health", "[]");
+        sessionStorage.setItem("sub-housing", "[]");
+        sessionStorage.setItem("sub-job", "[]");
+        sessionStorage.setItem("sub-legal", "[]");
+        sessionStorage.setItem("sub-life-skills", "[]");
+        sessionStorage.setItem("sub-money", "[]");
+        sessionStorage.setItem("sub-technology", "[]");
+    });
 }
 
 async function setAgeTo(option: string): Promise<void> {

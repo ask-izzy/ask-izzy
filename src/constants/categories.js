@@ -57,12 +57,12 @@ var categories:Array<Category> = [
             </Infobox>
         ),
         personalisation: [
-            personalisation.Questions.SleepTonight,
-            personalisation.Questions.HousingSubcategories,
+            personalisation.SleepTonight,
+            personalisation.HousingSubcategories,
             personalisation.Location,
-            personalisation.Questions.Gender,
-            personalisation.Questions.Age,
-            personalisation.Questions.Demographics,
+            personalisation.Gender,
+            personalisation.Age,
+            personalisation.Demographics,
         ],
     }),
     new Category({
@@ -84,6 +84,7 @@ var categories:Array<Category> = [
             q: "material aid",
         },
         personalisation: [
+            personalisation.EverydayThingsSubcategories,
             personalisation.Location,
         ],
     }),
@@ -95,6 +96,7 @@ var categories:Array<Category> = [
             q: "legal aid",
         },
         personalisation: [
+            personalisation.LegalSubcategories,
             personalisation.Location,
         ],
     }),
@@ -106,6 +108,7 @@ var categories:Array<Category> = [
             q: "financial aid",
         },
         personalisation: [
+            personalisation.MoneySubcategories,
             personalisation.Location,
         ],
     }),
@@ -117,6 +120,7 @@ var categories:Array<Category> = [
             q: "physical health",
         },
         personalisation: [
+            personalisation.HealthSubcategories,
             personalisation.Location,
         ],
     }),
@@ -128,6 +132,7 @@ var categories:Array<Category> = [
             q: "addiction",
         },
         personalisation: [
+            personalisation.AddictionSubcategories,
             personalisation.Location,
         ],
     }),
@@ -139,6 +144,7 @@ var categories:Array<Category> = [
             q: "mental health",
         },
         personalisation: [
+            personalisation.CounsellingSubcategories,
             personalisation.Location,
         ],
     }),
@@ -150,6 +156,7 @@ var categories:Array<Category> = [
             q: "life skills",
         },
         personalisation: [
+            personalisation.LifeSkillsSubcategories,
             personalisation.Location,
         ],
     }),
@@ -161,6 +168,7 @@ var categories:Array<Category> = [
             q: "employment",
         },
         personalisation: [
+            personalisation.JobSubcategories,
             personalisation.Location,
         ],
     }),
@@ -205,6 +213,7 @@ var categories:Array<Category> = [
             q: "computers wifi",
         },
         personalisation: [
+            personalisation.TechnologySubcategories,
             personalisation.Location,
         ],
     }),
