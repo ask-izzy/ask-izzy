@@ -1,8 +1,8 @@
+/* @flow */
 /*
  * Step definitions for creating a mocked service
  */
 
-/* @flow */
 
 import Yadda from "yadda";
 

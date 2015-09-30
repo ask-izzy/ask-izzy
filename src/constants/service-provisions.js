@@ -1,10 +1,11 @@
+/* @flow */
+
 /**
  * List of service provisions, aka What we provide here
  *
  * These are phrases extracted from the description of a service to
  * show dot points for what a service provides */
 
-/* @flow */
 
 import {
     ServiceProvision,

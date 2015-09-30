@@ -1,7 +1,9 @@
+/* @flow */
+
 /*
  * Enable Yadda in Mocha
  */
-/* @flow */
+
 
 import SauceLabs from "saucelabs";
 import Webdriver from "selenium-webdriver";

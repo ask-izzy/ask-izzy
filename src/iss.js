@@ -1,9 +1,9 @@
+/* @flow */
 /**
  * ISS API functions.
  *
  * @module iss
  */
-/* @flow */
 
 import http from "iso-http";
 import url from "url";

@@ -1,8 +1,8 @@
+/* @flow */
 /*
  * Step definitions for date/time related steps
  */
 
-/* @flow */
 /* eslint-disable no-use-before-define, no-native-reassign */
 
 import Yadda from "yadda";

@@ -1,8 +1,8 @@
+/* @flow */
 /*
  * Step definitions for branding / design related steps
  */
 
-/* @flow */
 /* eslint-disable no-use-before-define */
 
 import Yadda from "yadda";

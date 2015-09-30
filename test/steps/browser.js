@@ -1,8 +1,8 @@
+/* @flow */
 /*
  * Step definitions for Selenium/browser related steps
  */
 
-/* @flow */
 /* eslint-disable no-use-before-define */
 
 import assert from "../support/page-assertions";

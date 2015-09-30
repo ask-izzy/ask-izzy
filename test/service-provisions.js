@@ -1,8 +1,8 @@
+/* @flow */
 /**
  * Test service provisions
  */
 
-/* @flow */
 /* eslint-env node, mocha */
 /* eslint-disable prefer-arrow-callback */
 

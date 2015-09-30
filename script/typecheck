@@ -11,6 +11,24 @@ function check {
     echo "Good"
 }
 
+badFlow=$( grep '@flow' -n -r src test | grep -v :1: | sed s/:.*// || echo "" )
+
+if [ ! -z "$badFlow" ] ; then
+    cat <<HERE
+${BOLD}The following files have @flow not on the first line.${END}
+
+This causes flow to ignore those files, but it looks
+like they should be type checked.
+
+HERE
+
+    for file in $badFlow ; do
+        echo "$file"
+    done
+
+    exit 1
+fi
+
 check "jsonlint package.json > /dev/null"
 check "eslint src/ test/"
 check "sass-lint -v"

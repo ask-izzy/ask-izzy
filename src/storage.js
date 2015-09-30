@@ -1,7 +1,7 @@
+/* @flow */
 /**
  * Polyfill some more methods onto storage
  */
-/* @flow */
 
 import sessionstorage from "sessionstorage";
 

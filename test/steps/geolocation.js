@@ -1,8 +1,8 @@
+/* @flow */
 /*
  * Definitions for Geolocation related steps
  */
 
-/* @flow */
 /* eslint-disable no-use-before-define */
 
 import Yadda from "yadda";

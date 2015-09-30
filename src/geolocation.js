@@ -1,9 +1,9 @@
+/* @flow */
 /**
  * Geolocation functions.
  *
  * @module geolocation
  */
-/* @flow */
 
 import location from "browser-location";
 
