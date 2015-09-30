@@ -8,7 +8,7 @@
 import assert from "../support/page-assertions";
 import Url from "url";
 import Yadda from "yadda";
-import { By, Key } from "selenium-webdriver";
+import Webdriver, { By, Key } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
@@ -114,12 +114,12 @@ async function doSearch(search: string): Promise<void> {
 }
 
 async function doSearchAndEnter(search: string): Promise<void> {
-    await getSearchElement(this.driver)
+    await (await getSearchElement(this.driver))
         .sendKeys(search + Key.ENTER);
 }
 
 async function searchContains(expected: string): Promise<void> {
-    var value = await getSearchElement(this.driver)
+    var value = await (await getSearchElement(this.driver))
         .getAttribute("value");
 
     assert.equal(value, expected);

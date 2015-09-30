@@ -38,7 +38,7 @@ module.exports = (function() {
 })();
 
 async function seeTheBrandingHeader(): Promise<void> {
-    const container = within(
+    var container = within(
         "//*[@class='branding-container']"
     );
 
@@ -88,7 +88,7 @@ async function seeTheCategoryList(
 }
 
 async function seeTheBrandingFooter(): Promise<void> {
-    const container = within(
+    var container = within(
         "//footer"
     );
 

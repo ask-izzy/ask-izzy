@@ -1,4 +1,3 @@
-/* @flow */
 /*
  * Definitions for Geolocation related steps
  */
@@ -11,6 +10,8 @@ import { By } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
+
+declare var google: Google;
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)

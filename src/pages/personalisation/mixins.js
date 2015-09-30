@@ -62,3 +62,8 @@ export function SearchByMap(validAnswers: Object): Function {
         klass.getSearchForAnswer = getSearchForAnswerMap;
     }
 }
+
+export default {
+    SearchByMap: SearchByMap,
+    SearchOnSubcategoryText: SearchOnSubcategoryText,
+}

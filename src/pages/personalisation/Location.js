@@ -58,7 +58,7 @@ class Location extends React.Component {
         /* Coordinates are optional */
         var coords = storage.getJSON("coordinates");
 
-        if (coords) {
+        if (coords && coords.latitude && coords.longitude) {
             request = Object.assign(request, {
                 location: `${coords.longitude}E${coords.latitude}N`,
             });
@@ -67,7 +67,7 @@ class Location extends React.Component {
         /* Location/Area is required */
         var location = storage.getItem("location");
 
-        if (location) {
+        if (typeof location == "string") {
             return Object.assign(request, {
                 area: location,
             });
@@ -161,7 +161,7 @@ class Location extends React.Component {
 
         /* If the user has coordinates set in this session, use them */
         location = storage.getJSON("coordinates");
-        if (location) {
+        if (location && location.latitude && location.longitude) {
             request.location = new maps.api.LatLng(location.latitude,
                                                    location.longitude);
             request.radius = 10000;  /* 10 km */

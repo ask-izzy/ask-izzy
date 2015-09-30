@@ -87,6 +87,7 @@ function _request(obj) {
  * @returns {Promise<Object>} a promise for the request.
  */
 export function mungeUrlQuery(url_: string, data: Object): string {
+    /* flow:disable url module does something truly bizarre to flow */
     var urlObj = url.parse(url_, true);
 
     /* data overrides anything passed in via the URL.
@@ -128,9 +129,13 @@ export function mungeUrlQuery(url_: string, data: Object): string {
     return url_ + joiner + serialized;
 }
 
-export async function request(path: string, data: ?searchRequest): Object {
+export async function request(
+    path: string,
+    data: ?searchRequest
+): Promise<Object> {
     var url_: string = ISS_URL || process.env.ISS_URL;
 
+    /* flow:disable url module does something truly bizarre to flow */
     url_ = mungeUrlQuery(url.resolve(url_, path), data);
     var response = await _request({
         url: url_,
@@ -150,7 +155,7 @@ export async function requestObjects(
 
     // convert objects to ISS search results
     response.objects = response.objects.map(
-        object => Object.assign(new Service(), object)
+        object => new Service(object)
     );
 
     return response;
@@ -295,6 +300,7 @@ export class Service {
         }
 
         var request_: searchRequest = {
+            q: "",
             site_id: this.site.id,
             type: "service",
             limit: 0,
@@ -335,6 +341,7 @@ export async function search(
 ): Promise<searchResults> {
 
     var request_: searchRequest = {
+        q: "",
         type: "service",
         catchment: true,
         limit: 5,

@@ -28,9 +28,9 @@ async function changeDay(day: string): Promise<void> {
 
     await this.driver.executeScript(script);
     await this.driver.executeScript((time, offset) => {
-        Date = TimeShift.Date;
-        TimeShift.setTimezoneOffset(offset);
-        TimeShift.setTime(time);
+        Date = window.TimeShift.Date;
+        window.TimeShift.setTimezoneOffset(offset);
+        window.TimeShift.setTime(time);
         console.log("Mocked time to", new Date());
     }, time, offset);
 }

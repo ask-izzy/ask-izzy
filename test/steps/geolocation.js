@@ -1,4 +1,4 @@
-/* @flow */
+
 /*
  * Definitions for Geolocation related steps
  */
@@ -31,7 +31,7 @@ async function mockGeolocation(): Promise<void> {
         /* taken from mock-geolocation */
         function mockGeolocation_(object) {
             console.log("Mocking geolocation with", object);
-            if (Object.defineProperty) {
+            if (typeof Object.defineProperty == "function") {
                 Object.defineProperty(navigator, "geolocation", {
                     get: () => {
                         return object;
@@ -72,7 +72,7 @@ async function sendCoords(
     longitude: number,
 ): Promise<void> {
     await this.driver.executeScript((obj) => {
-        mockGeolocationSuccess(obj);
+        window.mockGeolocationSuccess(obj);
     },
         {
             coords: {
@@ -116,7 +116,7 @@ async function setCoords(latitude: number, longitude: number): Promise<void> {
 
 async function disableGeolocation(): Promise {
     await this.driver.executeScript((obj) => {
-        mockGeolocationError(obj);
+        window.mockGeolocationError(obj);
     },
 
         {
