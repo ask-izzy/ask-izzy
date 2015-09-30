@@ -26,7 +26,8 @@ function unpromisify(func: (...args: any) => Promise<void>): Function {
         };
 
         try {
-            timeout(15000, func.apply(this, args))
+            // Saucelabs borks itself after 90 seconds.
+            timeout(80000, func.apply(this, args))
                 .then(stripArgs(done))
                 .catch(errorHandler);
         } catch (error) {
