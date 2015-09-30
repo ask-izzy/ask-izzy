@@ -24,7 +24,7 @@ Feature: Personalisation
         Then I should see "Where are you?"
 
         Given control of geolocation
-        When I click on "Get current location"
+        When I click on "Can we have your location?"
 
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
@@ -54,7 +54,7 @@ Feature: Personalisation
         Then I should see "Where are you?"
 
         Given control of geolocation
-        When I click on "Get current location"
+        When I click on "Can we have your location?"
 
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"

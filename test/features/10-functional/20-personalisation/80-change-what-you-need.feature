@@ -37,7 +37,7 @@ Feature: Change your personalisation settings
     Scenario: Edit my location setting
         When I visit /category/housing/personalise/summary
         And I click on "Where are you?"
-        Then I should see "Get current location"
+        Then I should see "Can we have your location?"
 
         When I search for "carlt"
         And I click on "Carlton"

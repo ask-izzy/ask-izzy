@@ -8,11 +8,11 @@ Feature: Geolocation
     Scenario: Use geolocation to find the user
         When I visit /category/housing/personalise?subpage=location
         Then I should see "Where are you?"
-        And I should see "Get current location"
+        And I should see "Can we have your location?"
         And the button "Done" should be disabled
 
         Given control of geolocation
-        When I click on "Get current location"
+        When I click on "Can we have your location?"
         Then I should see "Locating you..."
 
         Given I'm at 37.823S 144.998E
@@ -24,7 +24,7 @@ Feature: Geolocation
         When I visit /category/housing/personalise?subpage=location
 
         Given control of geolocation
-        When I click on "Get current location"
+        When I click on "Can we have your location?"
         Then I should see "Locating you..."
 
         When I deny access to geolocation
