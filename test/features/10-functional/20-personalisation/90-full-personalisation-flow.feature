@@ -42,6 +42,17 @@ Feature: Personalisation
         When I click on "Done"
         Then I should see "Housing"
 
+        When I click back from the title bar
+         And I click on "Everyday things"
+        Then I should see "These services can help you things you might need."
+
+        When I click on "Okay"
+        Then I should see "What things do you need?"
+
+        When I click on "Done"
+
+        Then I should see "I found 8 everyday things services in Richmond, VIC."
+
     Scenario: Search for emergency accommodation
         When I visit /
         And I click on "Housing"
