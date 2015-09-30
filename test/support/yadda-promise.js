@@ -1,6 +1,7 @@
 /* @flow */
 
 import pauseToDebug from "./debug";
+import timeout from "../../src/timeout";
 
 function unpromisify(func: (...args: any) => Promise<void>): Function {
     function stripArgs(func) {
@@ -25,7 +26,7 @@ function unpromisify(func: (...args: any) => Promise<void>): Function {
         };
 
         try {
-            func.apply(this, args)
+            timeout(15000, func.apply(this, args))
                 .then(stripArgs(done))
                 .catch(errorHandler);
         } catch (error) {
