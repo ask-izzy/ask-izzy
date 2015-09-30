@@ -22,7 +22,7 @@ describe("timeout", () => {
                 await Timeout(50, blocksForever());
                 assert(false, "Should have timed out");
             } catch (error) {
-                assert.equal("Timed out after 50ms", error);
+                assert.equal("Timed out after 50ms", error.message);
             }
         });
     });
