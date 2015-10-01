@@ -20,10 +20,10 @@ export DEBUG=web
 
 (sleep 3; $OPEN http://localhost:$PORT) &
 
-node index.js webpack/server &
+nodemon --watch webpack/ index.js webpack/server &
 WEBPACK_PID="$!"
 
-nodemon index &
+nodemon --watch src/ index &
 NODEMON_PID="$!"
 
 trap "kill $NODEMON_PID 2> /dev/null; kill $WEBPACK_PID 2> /dev/null" EXIT
@@ -32,3 +32,6 @@ while (kill -0 $NODEMON_PID 2> /dev/null) && (kill -0 $WEBPACK_PID 2> /dev/null)
 do
     sleep 1
 done
+
+kill $NODEMON_PID 2> /dev/null
+kill $WEBPACK_PID 2> /dev/null

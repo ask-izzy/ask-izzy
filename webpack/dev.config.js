@@ -22,6 +22,10 @@ var webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
 module.exports = {
     devtool: "#source-map",
     entry: {
+        hotload: [
+            "webpack-dev-server/client?http://localhost:8001",
+            "webpack/hot/only-dev-server",
+        ],
         main: [
             "./src/client-entry.js",
             "./src/styles/bundle.scss",
@@ -54,9 +58,9 @@ module.exports = {
     },
     progress: true,
     plugins: [
-        new webpack.NoErrorsPlugin(),
-
         env("development"),
+
+        new webpack.HotModuleReplacementPlugin(),
 
         // polyfill window.fetch et al client-side
         new webpack.ProvidePlugin({

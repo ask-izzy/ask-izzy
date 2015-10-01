@@ -47,7 +47,7 @@ module.exports = function writeStats(stats) {
         }
         return chunks;
     }
-    var script = getChunks("js", ["runtime", "vendor"]);
+    var script = getChunks("js", ["runtime", "hotload", "vendor", "main"]);
     var css = getChunks("css", []);
 
     var content = {
