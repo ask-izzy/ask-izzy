@@ -19,4 +19,16 @@ export NODE_ENV=development
 export DEBUG=web
 
 (sleep 3; $OPEN http://localhost:$PORT) &
-nodemon index
+
+node index.js webpack/server &
+WEBPACK_PID="$!"
+
+nodemon index &
+NODEMON_PID="$!"
+
+trap "kill $NODEMON_PID 2> /dev/null; kill $WEBPACK_PID 2> /dev/null" EXIT
+
+while (kill -0 $NODEMON_PID 2> /dev/null) && (kill -0 $WEBPACK_PID 2> /dev/null)
+do
+    sleep 1
+done

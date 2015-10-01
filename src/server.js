@@ -23,11 +23,6 @@ server.use(express.static(path.resolve(__dirname, "../public"), {
     maxAge: 0,
 }));
 
-// On development, serve the static files from the webpack dev server.
-if (server.get("env") === "development") {
-    require("../webpack/server");
-}
-
 // Render the app server-side and send it as response
 server.use(render);
 
