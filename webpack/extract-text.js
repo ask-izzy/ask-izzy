@@ -5,10 +5,6 @@ var cssExtractor = new ExtractTextPlugin(
     {allChunks: true},
 );
 
-module.exports = {
+export default {
     plugin: cssExtractor,
-    loaders: cssExtractor.extract(
-        "style-loader",
-        "css-loader!autoprefixer-loader?browsers=last 3 versions!sass-loader"
-    ),
 };
