@@ -15,5 +15,13 @@ if (process.env.NEW_RELIC_KEY) {
     console.warn("NEW_RELIC_KEY not set");
 }
 
-// Start the server app
-require("./src/server");
+if (process.argv[3]) {
+    throw new Error("Too many arguments");
+}
+
+if (process.argv[2] && (process.argv[2] != "index.js")) {
+    require("./" + process.argv[2]);
+} else {
+    // Start the server app
+    require("./src/server");
+}

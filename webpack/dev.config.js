@@ -11,7 +11,7 @@ import notifyStats from "./utils/notify-stats";
 import commons     from "./utils/commons";
 import env         from "./env";
 import progress    from "./utils/progress";
-import extractText from "./extract-text";
+import cssLoaders  from "./css-loaders";
 
 var assetsPath = path.resolve(__dirname, "../public/static");
 
@@ -22,6 +22,10 @@ var webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
 module.exports = {
     devtool: "#source-map",
     entry: {
+        hotload: [
+            "webpack-dev-server/client?http://localhost:8001",
+            "webpack/hot/only-dev-server",
+        ],
         main: [
             "./src/client-entry.js",
             "./src/styles/bundle.scss",
@@ -43,7 +47,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                loader: extractText.loaders,
+                loaders: cssLoaders,
             },
             {
                 test: /\.js$/,
@@ -54,16 +58,14 @@ module.exports = {
     },
     progress: true,
     plugins: [
-        new webpack.NoErrorsPlugin(),
-
         env("development"),
+
+        new webpack.HotModuleReplacementPlugin(),
 
         // polyfill window.fetch et al client-side
         new webpack.ProvidePlugin({
             'es6-promise': 'es6-promise',
         }),
-
-        extractText.plugin,
 
         commons,
 

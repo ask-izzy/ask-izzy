@@ -13,7 +13,7 @@ const serverOptions = {
     contentBase: `http://${WEBPACK_HOST}:${WEBPACK_PORT}`,
     quiet: true,
     noInfo: true,
-    hot: true,
+    inline: true,
     publicPath: config.output.publicPath,
 };
 
