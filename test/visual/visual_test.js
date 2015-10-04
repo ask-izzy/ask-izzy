@@ -1,3 +1,5 @@
+/* @flow */
+
 /*
  * Record snapshots of each component
  */
@@ -19,15 +21,13 @@ describe("Visual Components", function() {
     before(beforeAll);
     after(afterAll);
 
-    async function beforeAll(done) {
+    async function beforeAll() {
         driver = await webDriverInstance();
         cfg = await seleniumBrowser(driver);
-        done();
     }
 
-    async function afterAll(done) {
+    async function afterAll() {
         await driver.quit();
-        done();
     }
 
     Object.keys(components).forEach(function(name) {
