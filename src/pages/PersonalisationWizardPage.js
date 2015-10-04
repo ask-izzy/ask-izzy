@@ -30,7 +30,15 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     nextStep(): void {
         var subpage = this.state.subpage + 1;
 
-        if (subpage == this.personalisationComponents.length) {
+        // Advance until we find an unanswered question.
+        while (
+            this.personalisationComponents[subpage] &&
+            this.personalisationComponents[subpage].getSearch({})
+        ) {
+            subpage += 1;
+        }
+
+        if (subpage >= this.personalisationComponents.length) {
             var params = this.getParams();
 
             if (_.has(params, "page")) {
