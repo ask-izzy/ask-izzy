@@ -9,7 +9,7 @@ export default class HousingSubcategories extends BaseMultiQuestion {
     // flow:disable
     static defaultProps = {
         name: "sub-housing",
-        question: "Is this your situation?",
+        question: "Which situation is most like yours?",
         answers: [
             "On the street",
             "Couch surfing",

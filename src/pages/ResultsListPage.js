@@ -69,10 +69,7 @@ class ResultsListPage extends BaseResultsPage {
     renderHeaderSuccess(): ReactElement {
         return (
                 <div>
-                    I found {this.state.meta.total_count}{' '}
-                    {this.title.toLocaleLowerCase()} services {heading}{' '}
-                    in {this.state.meta.location.name},{' '}
-                    {this.state.meta.location.state}.
+                    I found these services for you
                     <icons.LogoLight />
                 </div>);
     }

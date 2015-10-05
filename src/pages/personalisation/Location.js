@@ -273,7 +273,7 @@ class Location extends React.Component {
                         <mui.ListItem
                             className="taller ListItem"
                             onTouchTap={this.onGeolocationTouchTap.bind(this)}
-                            primaryText="Can we have your location?"
+                            primaryText="Automatically detect your location"
                             leftIcon={
                                 <icons.Location
                                     className="ColoredIcon icon-fg-color"

@@ -57,7 +57,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Food",
-        byline: "Find something to eat",
+        byline: "Something to eat",
         icon: icons.Food,
         search: {
             q: "food",
@@ -80,7 +80,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Legal",
-        byline: "Help with law, police & transport officers",
+        byline: "Police, law & fines",
         icon: icons.Legal,
         search: {
             q: "legal aid",
@@ -92,7 +92,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Money help",
-        byline: "Emergency funds, bills or budgeting",
+        byline: "Emergency funds, bills etc",
         icon: icons.Money,
         search: {
             q: "financial aid",
@@ -104,7 +104,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Health",
-        byline: "Physical, mental & emotional health",
+        byline: "Physical, mental, emotional",
         icon: icons.Health,
         search: {
             q: "physical health",
@@ -116,7 +116,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Addiction",
-        byline: "Dealing with drugs & alcohol, gambling etc.",
+        byline: "Drugs, alcohol & gambling",
         icon: icons.Addiction,
         search: {
             q: "addiction",
@@ -128,7 +128,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Support & counselling",
-        byline: "Someone to help & talk to",
+        byline: "Someone to help",
         icon: icons.Mental,
         search: {
             q: "mental health",
@@ -140,7 +140,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Life skills & education",
-        byline: "Developing everyday living skills etc.",
+        byline: "Everyday skills & training",
         icon: icons.Skills,
         search: {
             q: "life skills",
@@ -152,7 +152,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Finding work",
-        byline: "Making money or volunteering",
+        byline: "Earning & volunteering",
         icon: icons.Job,
         search: {
             q: "employment",
@@ -164,7 +164,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Centrelink",
-        byline: "Find Centrelink near you",
+        byline: "Access to services",
         icon: icons.Centrelink,
         search: {
             q: "centrelink",
@@ -175,7 +175,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Something to do",
-        byline: "Meet people, try an activity or just hang out",
+        byline: "Near you",
         icon: icons.Entertainment,
         search: {
             q: "recreation",
@@ -186,7 +186,7 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Facilities",
-        byline: "Public toilets, libraries, etc.",
+        byline: "Toilets, libraries etc",
         icon: icons.Facilaties,
         search: {
             q: "libraries toilets",
@@ -197,10 +197,10 @@ var categories:Array<Category> = [
     }),
     new Category({
         name: "Technology",
-        byline: "Computers, mobiles, free wifi or charging",
+        byline: "Wifi, charging etc",
         icon: icons.Tech,
         search: {
-            q: "computers wifi",
+            q: "computers wifi charging",
         },
         personalisation: [
             personalisation.TechnologySubcategories,
