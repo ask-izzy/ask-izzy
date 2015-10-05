@@ -7,6 +7,9 @@ import Router from "react-router";
 export default class BasePage extends React.Component {
 
     render(): ReactElement {
+        var domain = process.env.SITE_DOMAIN || "ask-izzy.org.au";
+        var mailLink = `mailto:support@${domain}`;
+
         return (
             <div className="BrandedPage">
                 <DocumentTitle title="Ask Izzy" />
@@ -15,8 +18,15 @@ export default class BasePage extends React.Component {
                 </main>
 
                 <footer className="branding-footer-container">
-                    <div>
+                    <div className="about">
                         <a href="#">About Ask Izzy</a>
+                    </div>
+                    <div className="feedback">
+                        <a
+                            href={mailLink}
+                        >
+                        Feedback
+                        </a>
                     </div>
                     <div>
                         Supported by <ul className="supporters">
