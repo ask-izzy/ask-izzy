@@ -16,7 +16,7 @@ Feature: Location search
 
     Scenario: Reset bad location
         When I visit /category/housing
-        Then I should see "I found 3 housing services for women aged 26 to 64 in Richmond, VIC."
+        Then I should see "I found these services for you"
 
         When I click on "Change what you need"
         And I click on "Where are you?"

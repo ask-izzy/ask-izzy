@@ -3,7 +3,6 @@
 import React from "react";
 import { slugify } from "underscore.string";
 
-import Infobox from "../components/Infobox";
 import icons from "../icons";
 import * as iss from "../iss";
 
@@ -15,7 +14,7 @@ class Category {
     byline: string;
     icon: ReactClass;
     search: iss.searchRequest;
-    info: ?ReactElement;
+    info: ?string|ReactElement;
     personalisation: Array<React.Component>;
 
     constructor(props: {
@@ -23,7 +22,7 @@ class Category {
         byline: string,
         icon: ReactClass,
         search: iss.searchRequest,
-        info?: ReactElement,
+        info?: string|ReactElement,
         personalisation: Array<React.Component>,
     }) {
         this.name = props.name;
@@ -46,16 +45,7 @@ var categories:Array<Category> = [
 
             // service_type: 'housing',
         },
-        info: (
-            <Infobox
-                href="#"
-                linkText="Housing information"
-            >
-                It's important to act early on housing. These services can
-                help to find a place to stay, or rental assistance to
-                help you stay in your current house.
-            </Infobox>
-        ),
+        info: "It's important to act early on housing",
         personalisation: [
             personalisation.SleepTonight,
             personalisation.HousingSubcategories,

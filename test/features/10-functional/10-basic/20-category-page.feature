@@ -17,7 +17,8 @@ Feature: Category page
     Scenario: Visit housing category
         When I visit /category/housing
         Then I should see "Housing"
-        And I should see "I found 3 housing services for women aged 26 to 64 in Richmond, VIC."
+        And I should see "I found these services for you"
+        And I should see "It's important to act early on housing"
         And I should see the results
         --------------------------------------------------------------------------
         Service Name (name) | Site Name (site_name) | Service provisions (related)
@@ -26,14 +27,6 @@ Feature: Category page
         Emergency Accom     | Youth Support Net     | (nada)
         Womens Refuge       | Susan's House         | Crisis accommodation
         --------------------------------------------------------------------------
-
-        And I should see an info box in position 2
-        And the info box should contain
-        ---------------------------------------------------------------------
-        It's important to act early on housing. These services can help to find a place to stay, or rental assistance to help you stay in your current house.
-        Find out more
-        Housing information
-        ---------------------------------------------------------------------
 
         # The housing category has 3 results
         And I should not see "Load more results…"
