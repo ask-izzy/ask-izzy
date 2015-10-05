@@ -1,17 +1,29 @@
 /* @flow */
 import _ from "underscore";
 import { titleize } from "underscore.string";
-
 export default class Location {
-    props: issLocation;
+    building: string;
+    flat_unit: string;
+    level: string;
+    point: {
+        "lat": number,
+        "lon": number
+    };
+    postcode: string;
+    state: state;
+    street_name: string;
+    street_number: string;
+    street_suffix: string;
+    street_type: string;
+    suburb: string;
 
     constructor(props: issLocation) {
-        this.props = props;
+        Object.assign(this, props);
     }
 
     /* If there is no point value, that means it's being suppressed */
     isConfidential(): boolean {
-        return !Boolean(this.props.point);
+        return !Boolean(this.point);
     }
 
     streetAddressLine1(): string {
@@ -20,9 +32,9 @@ export default class Location {
         }
 
         var addrDescriptors = [
-            this.props.flat_unit,
-            this.props.level,
-            this.props.building,
+            this.flat_unit,
+            this.level,
+            this.building,
         ].map(text => text.trim());
 
         // FIXME: find a way to make this way clearer
@@ -32,10 +44,10 @@ export default class Location {
             .join("");
 
         var street = [
-            titleize(this.props.street_number),
-            titleize(this.props.street_name),
-            titleize(this.props.street_type),
-            titleize(this.props.street_suffix),
+            titleize(this.street_number),
+            titleize(this.street_name),
+            titleize(this.street_type),
+            titleize(this.street_suffix),
         ].join(" ").trim();
 
         return addrDescriptors + street;
@@ -43,9 +55,9 @@ export default class Location {
 
     streetAddressLine2(): string {
         return [
-            titleize(this.props.suburb),
-            this.props.state,
-            titleize(this.props.postcode),
+            titleize(this.suburb),
+            this.state,
+            titleize(this.postcode),
         ].join(" ").trim();
     }
 

@@ -15,14 +15,21 @@ import { Service } from "../../src/iss";
 
 var mockedService: ?Service;
 
-async function visitMockedService(url: string): Promise {
+async function searchMockedService() {
+    if (!mockedService) {
+        throw new Error("Must set mockedService before visiting a service");
+    }
+    await gotoUrl(this.driver, `/search/${mockedService.id}`);
+}
+
+async function visitMockedService() {
     if (!mockedService) {
         throw new Error("Must set mockedService before visiting a service");
     }
     await gotoUrl(this.driver, `/service/${mockedService.id}`);
 }
 
-async function mockService(service: Service): Promise<void> {
+async function mockService(service: Service) {
     mockedService = service;
     mock(service);
 }
@@ -33,5 +40,7 @@ module.exports = (function() {
             unpromisify(mockService))
         .when("I navigate to the service page",
             unpromisify(visitMockedService))
+        .when("I search for the service",
+            unpromisify(searchMockedService))
         ;
 })();
