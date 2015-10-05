@@ -9,6 +9,7 @@ import commons           from "./utils/commons";
 import env               from "./env";
 import extractText       from "./extract-text";
 import cssLoaders        from "./css-loaders";
+import vendor      from "./utils/vendor";
 
 var assetsPath = path.join(__dirname, "../public/static");
 
@@ -19,7 +20,7 @@ module.exports = {
             "./src/client-entry.js",
             "./src/styles/bundle.scss",
         ],
-        vendor: ["react", "material-ui", "core-decorators", "material-ui", "moment", "react-google-maps", "react-router", "react-tap-event-plugin", "react", "underscore.string", "underscore"],
+        vendor: vendor,
     },
     output: {
         path: assetsPath,
