@@ -104,11 +104,15 @@
 
         .primaryText {
             color: $brand-text-mid !important;
+            line-height: 150%;
+            width: 70%;
         }
 
         .secondaryText {
             margin: 0 !important;
+            padding-top: 0.5em !important;
             float: right;
+            line-height: 150%;
 
             color: $icon-fg-color !important;
 
