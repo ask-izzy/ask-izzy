@@ -75,7 +75,7 @@ class BaseResultsPage extends BaseCategoriesPage {
             var nhotlines = _.where(objects, {crisis: true}).length;
 
             objects.splice(index, 0, {
-                infobox: true,
+                staticText: true,
                 node: (
                     <h3 className="CrisisHeader">
                     {nhotlines == 1 ?

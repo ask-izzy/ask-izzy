@@ -139,7 +139,7 @@ class ResultsListPage extends BaseResultsPage {
             }
             <div className="resultsContainer">{
                 this.results.map((object, index) => {
-                    var elem = object.infobox ?
+                    var elem = object.staticText ?
                         React.addons.cloneWithProps(object.node)
                     : object.crisis ?
                         <components.CrisisLineItem
