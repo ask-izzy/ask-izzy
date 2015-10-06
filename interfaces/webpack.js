@@ -6,6 +6,8 @@ declare class webpackJson {
     assetsByChunkName: {
         runtime: Array<string>,
         vendor: Array<string>,
+        hotload: Array<string>,
+        main: Array<string>,
     };
     warnings: Array<string>;
     errors: Array<string>;
