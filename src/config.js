@@ -1,3 +1,5 @@
+/* @flow */
+
 // Load different configs for production or development
 
 let configFile = "dev.js";

@@ -1,4 +1,4 @@
-// scenarios, steps, featureFile
+/* @flow */
 
 declare class Yadda {
     FeatureFileSearch(): void;

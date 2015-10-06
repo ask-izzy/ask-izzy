@@ -13,7 +13,7 @@ class Category {
     key: string;
     name: string;
     byline: string;
-    icon: ReactComponent;
+    icon: ReactClass;
     search: iss.searchRequest;
     info: ?ReactElement;
     personalisation: Array<React.Component>;
@@ -21,7 +21,7 @@ class Category {
     constructor(props: {
         name: string,
         byline: string,
-        icon: ReactComponent,
+        icon: ReactClass,
         search: iss.searchRequest,
         info?: ReactElement,
         personalisation: Array<React.Component>,

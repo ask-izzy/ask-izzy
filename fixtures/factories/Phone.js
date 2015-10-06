@@ -1,3 +1,5 @@
+/* @flow */
+
 import { PhoneNumber, Merge } from "./Value";
 
 export function Phone(props: ?Object) {

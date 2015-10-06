@@ -1,3 +1,5 @@
+/* @flow */
+
 import { Merge } from "./Value";
 
 export function NowOpen(props: ?Object) {

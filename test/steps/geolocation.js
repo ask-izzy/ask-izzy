@@ -1,3 +1,4 @@
+/* @flow */
 
 /*
  * Definitions for Geolocation related steps
@@ -32,6 +33,7 @@ async function mockGeolocation(): Promise<void> {
         function mockGeolocation_(object) {
             console.log("Mocking geolocation with", object);
             if (typeof Object.defineProperty == "function") {
+                /* flow:disable */
                 Object.defineProperty(navigator, "geolocation", {
                     get: () => {
                         return object;

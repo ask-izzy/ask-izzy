@@ -1,3 +1,4 @@
+/* @flow */
 
 type email = string;
 type issAgeGroup = string; /* enum(

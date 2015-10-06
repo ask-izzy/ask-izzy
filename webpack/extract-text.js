@@ -1,3 +1,5 @@
+/* @flow */
+
 import ExtractTextPlugin from "extract-text-webpack-plugin";
 
 var cssExtractor = new ExtractTextPlugin(

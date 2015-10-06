@@ -21,12 +21,15 @@ describe("Visual Components", function() {
     before(beforeAll);
     after(afterAll);
 
-    async function beforeAll() {
+    async function beforeAll(): Promise<void> {
         driver = await webDriverInstance();
         cfg = await seleniumBrowser(driver);
     }
 
-    async function afterAll() {
+    async function afterAll(): Promise<void> {
+        if (!driver) {
+            return
+        }
         await driver.quit();
     }
 
@@ -36,6 +39,16 @@ describe("Visual Components", function() {
             it("looks right", checkAppearance);
 
             async function checkAppearance() {
+                if (!cfg) {
+                    throw new Error(
+                        "Selenium browser config must be set in beforeAll."
+                    );
+                }
+                if (!driver) {
+                    throw new Error(
+                        "Driver must be setup in beforeAll"
+                    );
+                }
                 var description = `${cfg.browserName}-${cfg.version} ` +
                     `${cfg.width}x${cfg.height}`;
                 var orig = `src/components/${name}/${description}.png`;
@@ -65,11 +78,3 @@ describe("Visual Components", function() {
         });
     });
 });
-
-Object.keys(components).map(screenshot);
-
-async function screenshot(componentName, path) {
-    var imageData = await driver.takeScreenshot();
-
-    fs.writeFileSync(path, imageData, "base64");
-}

@@ -1,5 +1,6 @@
 [ignore]
 .*public/static.*
+.*webpack-stats\.json.*
 .*invalidPackageJson/package.json
 .*/node_modules/.*/examples/.*
 .*/node_modules/.*/test/.*
@@ -14,7 +15,7 @@ interfaces/
 module.system=node
 suppress_type=$FlowIssue
 suppress_comment= \\(.\\|\n\\)*\\flow:disable
-strip_root=true
+strip_root=false
 
 [version]
-0.14.0
+0.16.0

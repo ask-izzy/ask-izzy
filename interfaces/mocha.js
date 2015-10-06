@@ -1,3 +1,5 @@
+/* @flow */
+
 declare function describe(message: string, impl: () => void): void;
 declare function xdescribe(message: string, impl: () => void): void;
 

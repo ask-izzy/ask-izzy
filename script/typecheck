@@ -11,21 +11,23 @@ function check {
     echo "Good"
 }
 
-badFlow=$( grep '@flow' -n -r src test | grep -v :1: | sed s/:.*// || echo "" )
+echo "${BOLD}Checking for missing @flow comments${END}"
+echo "Good"
 
-if [ ! -z "$badFlow" ] ; then
-    cat <<HERE
-${BOLD}The following files have @flow not on the first line.${END}
+missingflow=""
+for file in $( git ls-files '**/*.js' ); do
+    read flowtype < "$file"
+    if test "x$flowtype" = 'x/* flow:disable */'; then
+        echo "Skipping disabled file $file" > /dev/null
+    elif test "x$flowtype" != 'x/* @flow */'; then
+        missingflow="true"
+        cat << EOF
+$file is not annotated for flowtype (must be the first line)! - got "$flowtype"
+EOF
+    fi
+done
 
-This causes flow to ignore those files, but it looks
-like they should be type checked.
-
-HERE
-
-    for file in $badFlow ; do
-        echo "$file"
-    done
-
+if [ "$missingflow" = "true" ] ; then
     exit 1
 fi
 

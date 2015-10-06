@@ -1,8 +1,9 @@
+/* @flow */
 // Override colors & themes here
 export default {
     contentFontFamily: "Gotham Rounded A,Gotham Rounded B,sans-serif",
 
-    getPalette: function() {
+    getPalette: function(): Object {
         return {
             accent1Color: "#EEEEEE",
             accent2Color: "#999999",
@@ -11,7 +12,7 @@ export default {
         };
     },
 
-    getComponentThemes(palette) {
+    getComponentThemes(palette: any): Object {
         return {};
     },
 };

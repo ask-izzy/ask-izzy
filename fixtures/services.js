@@ -1,6 +1,7 @@
+/* @flow */
 
 /* jscs:disable */
-module.exports = {
+var objects: Object = {
     phoneableService: {
         id: 5551234,
         name: "Phoneable service",
@@ -550,3 +551,5 @@ module.exports = {
         },
     },
 }
+
+module.exports = objects;
