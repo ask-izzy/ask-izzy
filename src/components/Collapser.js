@@ -17,8 +17,10 @@ class Collapser extends React.Component {
     }
 
     handleClick(event: SyntheticInputEvent): void {
-        event.preventDefault();
-        this.setState({collapsed: !this.state.collapsed});
+        if (this.state.collapsed) {
+            event.preventDefault();
+            this.setState({collapsed: false});
+        }
     }
 
     // flow:disable not supported yet

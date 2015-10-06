@@ -97,7 +97,7 @@ Feature: Service details page
             email                 | comment
             ==============================================
             reception@service.org | Reception
-        * Web: https://service.org
+        * Web: https://example.org
         ----------------------------------------------
         When I navigate to the service page
         Then I should see the contacts
@@ -111,8 +111,10 @@ Feature: Service details page
         Phone (03) 3333 3333
         (really a mobile) 0477 777 777
         Reception reception@service.org
-        service.org
+        example.org
         -------------------------------------------
+        When I click on "example.org"
+        Then I should be at https://example.org/
 
     Scenario: Can view all opening times
         When I visit /service/5551234
