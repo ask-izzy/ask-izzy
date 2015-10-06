@@ -73,9 +73,13 @@ async function clickBack(): Promise<void> {
 }
 
 async function checkURL(expected: string): Promise<void> {
-    var browserPath = Url.parse(await this.driver.getCurrentUrl()).path;
+    var url = await this.driver.getCurrentUrl();
 
-    assert.equal(browserPath, expected);
+    if (expected.startsWith("/")) {
+        url = Url.parse(url).path
+    }
+
+    assert.equal(url, expected);
 }
 
 async function thenISee(expected: string): Promise<void> {
