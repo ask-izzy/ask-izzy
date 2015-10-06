@@ -2,7 +2,7 @@
 
 import path from "path";
 import express from "express";
-import render from "./server/render";
+import render from "./render";
 
 declare var GLOBAL: Object;
 
