@@ -14,20 +14,20 @@ function check {
 echo "${BOLD}Checking for missing @flow comments${END}"
 echo "Good"
 
-missingflow=""
+HAVE_FLOW=true
 for file in $( git ls-files '**/*.js' ); do
     read flowtype < "$file"
     if test "x$flowtype" = 'x/* flow:disable */'; then
         echo "Skipping disabled file $file" > /dev/null
     elif test "x$flowtype" != 'x/* @flow */'; then
-        missingflow="true"
+        HAVE_FLOW=false
         cat << EOF
 $file is not annotated for flowtype (must be the first line)! - got "$flowtype"
 EOF
     fi
 done
 
-if [ "$missingflow" = "true" ] ; then
+if ! $HAVE_FLOW ; then
     exit 1
 fi
 

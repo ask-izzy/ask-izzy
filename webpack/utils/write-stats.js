@@ -28,23 +28,25 @@ module.exports = function writeStats(stats: webpackStats) {
         var unorderedChunks = _(allChunkNames).difference(chunkOrdering);
         var sortedChunkNames = chunkOrdering.concat(unorderedChunks);
 
-        for (var name of sortedChunkNames) if (json.assetsByChunkName[name]) {
-            var chunk = json.assetsByChunkName[name];
+        for (var name of sortedChunkNames) {
+            if (json.assetsByChunkName[name]) {
+                var chunk = json.assetsByChunkName[name];
 
-            // a chunk could be a string or an array, so make sure it is an array
-            if (!(Array.isArray(chunk))) {
-                chunk = [chunk];
+                // a chunk could be a string or an array, so make sure it is an array
+                if (!(Array.isArray(chunk))) {
+                    chunk = [chunk];
+                }
+
+                chunks = chunks.concat(chunk
+                     // filter by extension
+                    .filter(function(chunkName) {
+                        return path.extname(chunkName) === "." + ext;
+                    })
+                    .map(function(chunkName) {
+                        return publicPath + chunkName;
+                    })
+                );
             }
-
-            chunks = chunks.concat(chunk
-                 // filter by extension
-                .filter(function(chunkName) {
-                    return path.extname(chunkName) === "." + ext;
-                })
-                .map(function(chunkName) {
-                    return publicPath + chunkName;
-                })
-            );
         }
         return chunks;
     }
