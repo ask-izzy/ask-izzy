@@ -10,11 +10,37 @@ var app = express();
 
 app.use(cors());
 
+var mocks = {};
+
+export function mock(service: Object): void {
+    if (mocks[service.id]) {
+        throw new Error(`Service ID ${service.id} is already mocked`);
+    }
+
+    mocks[service.id] = service;
+    app.get(`/api/v3/service/${service.id}`, (req, res) => {
+        res.json(service);
+    });
+}
+
 /* eslint-disable complexity */
 /* FIXME: refactor */
 app.get("/api/v3/search/", (req, res) => {
+    var mockId = parseInt(req.query.q);
 
-    if (req.query.site_id == "111") {
+    if (mocks[mockId]) {
+        res.json({
+            meta: {
+                total_count: 1,
+                location: {
+                    name: "Richmond",
+                    suburb: "Richmond",
+                    state: "VIC",
+                },
+            },
+            objects: [mocks[mockId]],
+        });
+    } else if (req.query.site_id == "111") {
         /* related services search for housingService */
         res.json({
             meta: {
@@ -306,19 +332,6 @@ app.get("/api/v3/service/5551234/", (req, res) => {
 });
 
 app.listen(5000);
-
-var mocks = {};
-
-export function mock(service: Object): void {
-    if (mocks[service.id]) {
-        throw new Error(`Service ID ${service.id} is already mocked`);
-    }
-
-    mocks[service.id] = service;
-    app.get(`/api/v3/service/${service.id}`, (req, res) => {
-        res.json(service);
-    });
-}
 
 export default {
     mock: mock,

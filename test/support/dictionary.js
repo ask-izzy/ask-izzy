@@ -60,7 +60,7 @@ function parseTable(lines: Array<string>): Array<Object> | Object {
      * rather than a table.
      */
 
-    if (!lines[1].trim().match(/^=+$/)) {
+    if (!lines[1] || !lines[1].trim().match(/^=+$/)) {
         return parseObject(lines);
     }
 

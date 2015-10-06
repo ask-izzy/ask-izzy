@@ -1,4 +1,5 @@
 /* @flow */
+// FIXME: Test for transport time showing suburb
 
 import React from "react";
 import { titleize } from "underscore.string";
