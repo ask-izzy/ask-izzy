@@ -12,19 +12,19 @@ Feature: Personalisation
     Scenario: Search for housing with personalised results
         When I visit /
         And I click on "Housing"
-        Then I should see "These services can help you find a place to stay."
+        Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on "Okay"
         Then I should see "Do you have somewhere safe to sleep tonight?"
 
         When I click on "Yes"
-        Then I should see "Is this your situation?"
+        Then I should see "Which situation is most like yours?"
 
         When I click on "Done"
         Then I should see "Where are you?"
 
         Given control of geolocation
-        When I click on "Can we have your location?"
+        When I click on "Automatically detect your location"
 
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
@@ -44,19 +44,19 @@ Feature: Personalisation
 
         When I click back from the title bar
          And I click on "Everyday things"
-        Then I should see "These services can help you things you might need."
+        Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on "Okay"
         Then I should see "What things do you need?"
 
         When I click on "Done"
 
-        Then I should see "I found 8 everyday things services in Richmond, VIC."
+        Then I should see "I found these services for you"
 
     Scenario: Search for emergency accommodation
         When I visit /
         And I click on "Housing"
-        Then I should see "These services can help you find a place to stay."
+        Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on "Okay"
         Then I should see "Do you have somewhere safe to sleep tonight?"
@@ -65,7 +65,7 @@ Feature: Personalisation
         Then I should see "Where are you?"
 
         Given control of geolocation
-        When I click on "Can we have your location?"
+        When I click on "Automatically detect your location"
 
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"

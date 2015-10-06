@@ -20,6 +20,7 @@ export default class EverydayThingsSubcategories extends BaseMultiQuestion {
             "Household goods",
             "Storage lockers",
             "Mail",
+            "Help with pets",
         ],
     };
 

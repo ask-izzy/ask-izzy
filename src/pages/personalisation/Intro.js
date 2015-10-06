@@ -55,20 +55,16 @@ class Intro extends React.Component {
                     primaryText={
                         <div>
                             <icons.LogoLight />
-                            These services can help you
-                            {' '}{this.seekingHelpWith}.
+                            To help me find the right services
+                            I'll ask you a few questions
                         </div>
                     }
                     secondaryText={
                         <div>
-                            I'll ask you a few questions to help you
-                            find the right places.
+                            All of your answers are private and anonymous.
                         </div>
                     }
                 />
-                <div className="padded">
-                    All of your answers are private and anonymous.
-                </div>
 
                 <div className="done-button">
                     <mui.FlatButton

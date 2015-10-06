@@ -19,6 +19,10 @@
 }
 
 .ResultsListPage {
+    .personalisationLink {
+        color: $link-text-color !important;
+    }
+
     .progress {
         width: 100%;
 

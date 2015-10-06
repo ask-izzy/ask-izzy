@@ -51,7 +51,7 @@ class HomePage extends React.Component {
                             <input
                                 ref="search"
                                 type="search"
-                                placeholder="Search; e.g. pets, utility bills"
+                                placeholder="Search"
                             />
                             <icons.Search
                                 className="icon"

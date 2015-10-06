@@ -50,8 +50,12 @@ class BaseResultsPage extends BaseCategoriesPage {
             objects = [];
         }
 
-        /* splice in an infobox (if it exists) after the first non-crisis
-         * service */
+        // Infoboxes are no longer inline (moved to headers). Keeping this
+        // code as @danni pointed out it's not likely to revert cleanly.
+        //
+        // /* splice in an infobox (if it exists) after the first non-crisis
+        //  * service */
+        /*
         try {
             var infobox = this.category.info;
 
@@ -67,7 +71,7 @@ class BaseResultsPage extends BaseCategoriesPage {
         } catch (error) {
             // pass
         }
-
+        */
         /* splice a header before the first crisis service */
         index = _.findIndex(objects, object => object.crisis);
         if (index != -1) {
@@ -75,7 +79,7 @@ class BaseResultsPage extends BaseCategoriesPage {
             var nhotlines = _.where(objects, {crisis: true}).length;
 
             objects.splice(index, 0, {
-                infobox: true,
+                staticText: true,
                 node: (
                     <h3 className="CrisisHeader">
                     {nhotlines == 1 ?

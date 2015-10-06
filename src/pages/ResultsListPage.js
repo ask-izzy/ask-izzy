@@ -48,7 +48,8 @@ class ResultsListPage extends BaseResultsPage {
                                 {this.renderHomeLink()}
                             </div>
                         : <div>
-                              {this.renderPersonalisationLink()}
+                            {this.renderInfo()}
+                            {this.renderPersonalisationLink()}
                           </div>
                     }
                 />
@@ -66,21 +67,9 @@ class ResultsListPage extends BaseResultsPage {
     }
 
     renderHeaderSuccess(): ReactElement {
-
-        /* We are relying on the order being preserved as
-           gender before age, which is not ideal
-         */
-        var heading = this.personalisationComponents
-            .map(question => question.headingValue)
-            .filter(Boolean)
-            .join(" ");
-
         return (
                 <div>
-                    I found {this.state.meta.total_count}{' '}
-                    {this.title.toLocaleLowerCase()} services {heading}{' '}
-                    in {this.state.meta.location.name},{' '}
-                    {this.state.meta.location.state}.
+                    I found these services for you
                     <icons.LogoLight />
                 </div>);
     }
@@ -100,6 +89,17 @@ class ResultsListPage extends BaseResultsPage {
             className="homeLink"
             to="home"
                 >{linkText}</Router.Link>);
+    }
+
+    renderInfo(): ?ReactElement {
+        // this.category is a getter which can
+        // throw an exception if category is not
+        // set
+        try {
+            return <div>{this.category.info}</div>;
+        } catch (error) {
+            return undefined;
+        }
     }
 
     renderPersonalisationLink(): ReactElement {
@@ -139,7 +139,7 @@ class ResultsListPage extends BaseResultsPage {
             }
             <div className="resultsContainer">{
                 this.results.map((object, index) => {
-                    var elem = object.infobox ?
+                    var elem = object.staticText ?
                         React.addons.cloneWithProps(object.node)
                     : object.crisis ?
                         <components.CrisisLineItem

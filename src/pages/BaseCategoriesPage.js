@@ -43,9 +43,6 @@ class BaseCategoriesPage extends React.Component {
         } else if (this.props.params.search) {
             components = [
                 require("./personalisation/Location"),
-                require("./personalisation/Gender"),
-                require("./personalisation/Age"),
-                require("./personalisation/Demographics"),
             ];
         } else {
             throw new Error("Unexpected");
