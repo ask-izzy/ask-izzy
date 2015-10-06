@@ -17,7 +17,7 @@ describe("timeout", () => {
     }
 
     describe("when the operation times out", () => {
-        it("rejects the promise", async function() {
+        it("rejects the promise", async function(): Promise<void> {
             try {
                 await Timeout(50, blocksForever());
                 assert(false, "Should have timed out");
@@ -28,7 +28,7 @@ describe("timeout", () => {
     });
 
     describe("when the operation does not time out", () => {
-        it("resolves the promise", async function() {
+        it("resolves the promise", async function(): Promise<void> {
             assert.equal(
                 "foo",
                 await Timeout(50, alwaysSucceeds("foo")),
