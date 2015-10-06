@@ -1,7 +1,7 @@
+/* @flow */
 /**
  * Polyfill some more methods onto storage
  */
-/* @flow */
 
 import sessionstorage from "sessionstorage";
 
@@ -15,16 +15,23 @@ class Storage {
         sessionstorage.setItem(key, obj);
     }
 
-    static getJSON(key: string): ?(Object|Array) {
+    static getJSON(key: string): any {
+        var item = this.getItem(key);
+
+        if (typeof item != "string") {
+            console.error("Cannot getJSON with non-string ");
+            return null;
+        }
+
         try {
-            return JSON.parse(this.getItem(key));
+            return JSON.parse(item);
         } catch (error) {
             console.error(error);
             return null;
         }
     }
 
-    static setJSON(key: string, obj: Object|Array): void {
+    static setJSON(key: string, obj: mixed): void {
         this.setItem(key, JSON.stringify(obj));
     }
 

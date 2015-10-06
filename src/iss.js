@@ -1,9 +1,9 @@
+/* @flow */
 /**
  * ISS API functions.
  *
  * @module iss
  */
-/* @flow */
 
 import http from "iso-http";
 import url from "url";
@@ -17,7 +17,7 @@ declare var ISS_URL: string;
 /* eslint-disable no-use-before-define */
 
 export type searchRequest = {
-    q: string,
+    q?: string,
     service_types?: string | Array<string>,  // jscs:disable
     site_id?: number,  // jscs:disable
 
@@ -87,6 +87,7 @@ function _request(obj) {
  * @returns {Promise<Object>} a promise for the request.
  */
 export function mungeUrlQuery(url_: string, data: Object): string {
+    /* flow:disable https://github.com/facebook/flow/issues/908 */
     var urlObj = url.parse(url_, true);
 
     /* data overrides anything passed in via the URL.
@@ -97,7 +98,7 @@ export function mungeUrlQuery(url_: string, data: Object): string {
         data.key = urlObj.auth;
     }
 
-    urlObj.auth = urlObj.search = urlObj.querystring = urlObj.query = null;
+    urlObj.auth = urlObj.search = urlObj.query = null;
     url_ = url.format(urlObj);
 
     /*
@@ -128,9 +129,13 @@ export function mungeUrlQuery(url_: string, data: Object): string {
     return url_ + joiner + serialized;
 }
 
-export async function request(path: string, data: ?searchRequest): Object {
+export async function request(
+    path: string,
+    data: ?searchRequest
+): Promise<Object> {
     var url_: string = ISS_URL || process.env.ISS_URL;
 
+    /* flow:disable https://github.com/facebook/flow/issues/908 */
     url_ = mungeUrlQuery(url.resolve(url_, path), data);
     var response = await _request({
         url: url_,
@@ -150,7 +155,7 @@ export async function requestObjects(
 
     // convert objects to ISS search results
     response.objects = response.objects.map(
-        object => Object.assign(new Service(), object)
+        object => new Service(object)
     );
 
     return response;
@@ -335,6 +340,7 @@ export async function search(
 ): Promise<searchResults> {
 
     var request_: searchRequest = {
+        q: "",
         type: "service",
         catchment: true,
         limit: 5,

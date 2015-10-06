@@ -1,8 +1,8 @@
+/* @flow */
 /*
  * Step definitions for creating a mocked service
  */
 
-/* @flow */
 
 import Yadda from "yadda";
 
@@ -11,10 +11,14 @@ import unpromisify from "../support/yadda-promise";
 import { gotoUrl } from "../support/webdriver";
 
 import { mock } from "../support/mock_iss/server";
+import { Service } from "../../src/iss";
 
 var mockedService: ?Service;
 
 async function visitMockedService(url: string): Promise {
+    if (!mockedService) {
+        throw new Error("Must set mockedService before visiting a service");
+    }
     await gotoUrl(this.driver, `/service/${mockedService.id}`);
 }
 

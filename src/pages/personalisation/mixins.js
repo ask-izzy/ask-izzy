@@ -1,4 +1,3 @@
-
 /* @flow */
 
 /* eslint-disable id-length */ // request.q has to be that short.
@@ -62,4 +61,9 @@ export function SearchByMap(validAnswers: Object): Function {
     return function(klass: Function): void {
         klass.getSearchForAnswer = getSearchForAnswerMap;
     }
+}
+
+export default {
+    SearchByMap: SearchByMap,
+    SearchOnSubcategoryText: SearchOnSubcategoryText,
 }

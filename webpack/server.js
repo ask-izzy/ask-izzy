@@ -1,3 +1,5 @@
+/* @flow */
+
 // This file from https://github.com/gpbl/isomorphic500 @ 413c6533ae23
 
 // Starts a webpack dev server for dev environments

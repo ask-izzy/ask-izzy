@@ -1,3 +1,5 @@
+/* @flow */
+
 /*
  * Step definitions for BDD tests
  */

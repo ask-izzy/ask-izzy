@@ -1,3 +1,4 @@
+/* @flow */
 
 type callback = (results: Object, status: number) => void;
 

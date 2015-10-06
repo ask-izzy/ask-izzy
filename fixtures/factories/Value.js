@@ -1,29 +1,29 @@
 /* @flow */
 import { pad } from "underscore.string";
 
-/* flow:disable cannot export polymorphic function */
+/* flow:disable https://github.com/facebook/flow/issues/846 */
 export var Abn = SequenceCb(function Abn(idx: number): string {
     return pad(idx.toString(), 8, '0');
 });
 
-/* flow:disable cannot export polymorphic function */
+/* flow:disable https://github.com/facebook/flow/issues/846 */
 export var PhoneNumber = SequenceCb(
     function PhoneNumber(idx: number): string {
         return pad(idx.toString(), 8, '0');
     }
 );
 
-/* flow:disable cannot export polymorphic function */
+/* flow:disable https://github.com/facebook/flow/issues/846 */
 export var Email = SequenceCb(function Email(idx: number): string {
     return `email${idx}@dhs.gov.vic.au`;
 });
 
-/* flow:disable cannot export polymorphic function */
+/* flow:disable https://github.com/facebook/flow/issues/846 */
 export var Id = SequenceCb(function Id(idx: number): string {
     return idx.toString();
 });
 
-/* flow:disable cannot export polymorphic function */
+/* flow:disable https://github.com/facebook/flow/issues/846 */
 export var Url = SequenceCb(function Url(idx: number): string {
     return `https://${idx}.example.org`;
 });

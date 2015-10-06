@@ -1,3 +1,5 @@
+/* @flow */
+
 import webpack from "webpack";
 
 // Show build progress in development

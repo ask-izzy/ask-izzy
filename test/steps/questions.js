@@ -1,8 +1,8 @@
+/* @flow */
 /*
  * Definitions for Geolocation related steps
  */
 
-/* @flow */
 /* eslint-disable no-use-before-define */
 
 import Yadda from "yadda";
@@ -62,7 +62,7 @@ async function setSubcategoryItems(
     }, category, items);
 }
 
-async function setSubcategoryItemsNone(category: string): Promise<void> {
+function setSubcategoryItemsNone(category: string): Promise<void> {
     return setSubcategoryItems.bind(this)(category, []);
 }
 
@@ -75,7 +75,7 @@ async function setDemographics(
     }, items);
 }
 
-async function setDemographicsNone(): Promise<void> {
+function setDemographicsNone(): Promise<void> {
     return setDemographics.bind(this)([]);
 }
 

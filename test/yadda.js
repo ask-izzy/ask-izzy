@@ -1,7 +1,9 @@
+/* @flow */
+
 /*
  * Enable Yadda in Mocha
  */
-/* @flow */
+
 
 import SauceLabs from "saucelabs";
 import Webdriver from "selenium-webdriver";
@@ -20,7 +22,7 @@ import mockISS from "./support/mock_iss/server";
 
 /* create the webdriver, we will reuse this promise multiple times */
 var driverPromise = webDriverInstance();
-var sessionId: string, driver: Webdriver.WebDriver;
+var sessionId: ?string, driver: Webdriver.WebDriver;
 var passed = true;
 
 new Yadda.FeatureFileSearch("./test/features").each(file => {
@@ -62,9 +64,9 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
         }
 
         // jscs:disable
-        before(async function(done) {
+        before(async function(): Promise<void> {
             driver = await driverPromise;
-            sessionId = (await driver .getSession())
+            sessionId = (await driver.getSession())
                 .getId();
 
             await driver
@@ -83,7 +85,6 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
                 await logger.get("browser");
             }
 
-            done();
         });
 
         scenarios(feature.scenarios, scenario => {
@@ -102,7 +103,7 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
             });
         });
 
-        afterEach(async function(done) {
+        afterEach(async function(): Promise<void> {
             if (this.currentTest.state != "passed") {
                 passed = false;
 
@@ -123,14 +124,12 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
                     );
                 }
             }
-
-            done();
         });
     });
 });
 
 // jscs:disable
-after(async function(done) {
+after(async function(): Promise<void> {
     if (driver) {
         await driver.quit();
     }
@@ -163,5 +162,4 @@ after(async function(done) {
         }
 
     }
-    done();
 });

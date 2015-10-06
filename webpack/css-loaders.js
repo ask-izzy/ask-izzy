@@ -1,3 +1,5 @@
+/* @flow */
+
 export default [
     "style-loader",
     "css-loader",

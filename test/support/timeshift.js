@@ -1,3 +1,4 @@
+/* flow:disable */
 /*!
  * TimeShift.js version 20130811
  *

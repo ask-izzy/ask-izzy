@@ -319,3 +319,7 @@ export function mock(service: Object): void {
         res.json(service);
     });
 }
+
+export default {
+    mock: mock,
+}

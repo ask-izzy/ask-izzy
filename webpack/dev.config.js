@@ -1,3 +1,5 @@
+/* @flow */
+
 // This file from https://github.com/gpbl/isomorphic500 @ 413c6533ae23
 
 // This is the webpack config to use during development.

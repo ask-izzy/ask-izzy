@@ -1,3 +1,5 @@
+/* @flow */
+
 // This file from https://github.com/gpbl/isomorphic500 @ 413c6533ae23
 
 // A webpack plugin to write webpack stats that can be consumed when rendering
@@ -13,7 +15,7 @@ var filepath = path.resolve(__dirname, "../../src/server/webpack-stats.json");
 
 // Write only a relevant subset of the stats and attach the public path to it
 
-module.exports = function writeStats(stats) {
+module.exports = function writeStats(stats: webpackStats) {
 
     var publicPath = this.options.output.publicPath;
 
@@ -27,23 +29,24 @@ module.exports = function writeStats(stats) {
         var sortedChunkNames = chunkOrdering.concat(unorderedChunks);
 
         for (var name of sortedChunkNames) {
+            if (json.assetsByChunkName[name]) {
+                var chunk = json.assetsByChunkName[name];
 
-            var chunk = json.assetsByChunkName[name];
+                // a chunk could be a string or an array, so make sure it is an array
+                if (!(Array.isArray(chunk))) {
+                    chunk = [chunk];
+                }
 
-            // a chunk could be a string or an array, so make sure it is an array
-            if (!(Array.isArray(chunk))) {
-                chunk = [chunk];
+                chunks = chunks.concat(chunk
+                     // filter by extension
+                    .filter(function(chunkName) {
+                        return path.extname(chunkName) === "." + ext;
+                    })
+                    .map(function(chunkName) {
+                        return publicPath + chunkName;
+                    })
+                );
             }
-
-            chunks = chunks.concat(chunk
-                 // filter by extension
-                .filter(function(chunkName) {
-                    return path.extname(chunkName) === "." + ext;
-                })
-                .map(function(chunkName) {
-                    return publicPath + chunkName;
-                })
-            );
         }
         return chunks;
     }
@@ -55,6 +58,6 @@ module.exports = function writeStats(stats) {
         css: css,
     };
 
-    fs.writeFileSync(filepath, JSON.stringify(content, 0, 4));
+    fs.writeFileSync(filepath, JSON.stringify(content, undefined, 4));
 
 };
