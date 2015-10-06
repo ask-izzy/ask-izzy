@@ -135,7 +135,7 @@ export async function request(
 ): Promise<Object> {
     var url_: string = ISS_URL || process.env.ISS_URL;
 
-    /* flow:disable url module does something truly bizarre to flow */
+    /* flow:disable https://github.com/facebook/flow/issues/908 */
     url_ = mungeUrlQuery(url.resolve(url_, path), data);
     var response = await _request({
         url: url_,
