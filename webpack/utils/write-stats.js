@@ -28,12 +28,8 @@ module.exports = function writeStats(stats: webpackStats) {
         var unorderedChunks = _(allChunkNames).difference(chunkOrdering);
         var sortedChunkNames = chunkOrdering.concat(unorderedChunks);
 
-        for (var name of sortedChunkNames) {
-
+        for (var name of sortedChunkNames) if (json.assetsByChunkName[name]) {
             var chunk = json.assetsByChunkName[name];
-            if (!chunk) {
-                throw new Error(`Expected chunk ${name} to exist!`)
-            }
 
             // a chunk could be a string or an array, so make sure it is an array
             if (!(Array.isArray(chunk))) {
