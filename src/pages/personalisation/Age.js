@@ -3,7 +3,7 @@
 import BaseQuestion from "./BaseQuestion";
 
 // Can't see a way to cross-reference static properties :/
-var ageGroups = {
+const ageGroups = {
     "25 or younger": [
         "prenatal",
         "baby",
@@ -37,7 +37,7 @@ export default class Age extends BaseQuestion {
         answers: Object.keys(ageGroups),
     };
 
-    static getSearchForAnswer(request, answer) {
+    static getSearchForAnswer(request, answer: string) {
         request.age_groups = ageGroups[answer];
         return request;
     }

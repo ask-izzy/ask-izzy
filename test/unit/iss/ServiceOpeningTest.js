@@ -12,16 +12,26 @@ function time(now: string): Moment {
     return moment(now, "YYYY-MM-DD ha");
 }
 
-function assertEqualTime(expected: Moment, actual: Moment): void {
+function assertEqualTime(actual: ?Moment, expected: Moment): void {
+
     assert(
         expected.isSame(actual),
         `Expected
-        ${actual.format("dddd ha")} to be
+        ${actual ? actual.format("dddd ha") : "(falsy)"} to be
         ${expected.format("dddd ha")}`
     );
 }
 
-var days = [
+function nextOpeningTimes(service: ServiceOpening): nextOpeningTimes {
+    const times = service.nextOpeningTimes;
+    if (!times) {
+        throw new Error("Service should have nextOpeningTimes")
+    }
+
+    return times;
+}
+
+const days = [
     "Monday",
     "Tuesday",
     "Wednesday",
@@ -53,19 +63,19 @@ function serviceFactory(openingHours) {
 
 describe("ServiceOpening", function() {
     describe("open 24*7 except public holidays", function() {
-        var service = serviceFactory(days.map(
+        const service = serviceFactory(days.map(
             function(day) {
                 return {day: day, open: "00:00:00", close: "24:00:00"};
             }
         ));
 
         xit("never opens or closes", function() {
-            var service_ = service(true, "2015-09-09 1pm");
+            const service_ = service(true, "2015-09-09 1pm");
 
             assert.equal(service_.open, true);
             assertEqualTime(service_.nextCloses, time("2015-09-09 5pm"));
             assertEqualTime(
-                service_.nextOpeningTimes.start,
+                nextOpeningTimes(service_).start,
                 time("2015-09-11 9am")
             );
         });
@@ -73,7 +83,7 @@ describe("ServiceOpening", function() {
     });
 
     describe("open from 9am to 5pm on Wed/Fri", function() {
-        var service = serviceFactory([
+        const service = serviceFactory([
             {
                 day: "Wednesday",
                 open: "09:00:00",
@@ -86,7 +96,7 @@ describe("ServiceOpening", function() {
         ]);
 
         describe("when it's 1pm on Wednesday", function() {
-            var service_ = () => service(true, "2015-09-09 1pm");
+            const service_ = () => service(true, "2015-09-09 1pm");
 
             it("is open", function() {
                 assert.equal(service_().open, true);
@@ -101,14 +111,14 @@ describe("ServiceOpening", function() {
 
             it("next opens on friday", function() {
                 assertEqualTime(
-                    service_().nextOpeningTimes.start,
+                    nextOpeningTimes(service_()).start,
                     time("2015-09-11 9am")
                 );
             });
         });
 
         describe("when it's 7am on Wednesday", function() {
-            var service_ = () => service(false, "2015-09-09 7am");
+            const service_ = () => service(false, "2015-09-09 7am");
 
             it("is closed", function() {
                 assert.equal(service_().open, false);
@@ -123,7 +133,7 @@ describe("ServiceOpening", function() {
 
             it("next opens at 9am", function() {
                 assertEqualTime(
-                    service_().nextOpeningTimes.start,
+                    nextOpeningTimes(service_()).start,
                     time("2015-09-09 9am")
                 );
             });
@@ -131,7 +141,7 @@ describe("ServiceOpening", function() {
         });
 
         describe("when it's 7pm on Wednesday", function() {
-            var service_ = () => service(false, "2015-09-09 7pm");
+            const service_ = () => service(false, "2015-09-09 7pm");
 
             it("is closed", function() {
                 assert.equal(service_().open, false);
@@ -146,7 +156,7 @@ describe("ServiceOpening", function() {
 
             it("next opens on Friday 9am", function() {
                 assertEqualTime(
-                    service_().nextOpeningTimes.start,
+                    nextOpeningTimes(service_()).start,
                     time("2015-09-11 9am")
                 );
             });
