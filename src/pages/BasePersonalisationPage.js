@@ -1,14 +1,13 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import { History } from "react-router";
 import reactMixin from "react-mixin";
 import _ from "underscore";
 
 import BaseCategoriesPage from "./BaseCategoriesPage";
 
-/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
-/*::`*/@reactMixin.decorate(Router.State)/*::`;*/
+/*::`*/@reactMixin.decorate(History)/*::`;*/
 class BasePersonalisationPage extends BaseCategoriesPage {
     constructor(props: Object) {
         super(props);
@@ -37,8 +36,8 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     componentDidMount(): void {
         /* Set the subpage if it was requested.
          * This is only used for testing. */
-        if (_.has(this.props.query, "subpage")) {
-            var subpage = this.props.query.subpage;
+        if (_.has(this.props.location.query, "subpage")) {
+            var subpage = this.props.location.query.subpage;
             var subpageIndex = this.personalisationComponents.findIndex(
                 component => component.defaultProps.name == subpage
             );

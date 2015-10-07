@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import {Link} from "react-router";
 import _ from "underscore";
 
 import fixtures from "../../fixtures/services";
@@ -36,12 +36,11 @@ class CrisisLineItem extends React.Component {
                 return (
                     <div className="CrisisLineItem">
                         <h3>
-                            <Router.Link
-                                to="service"
-                                params={{slug: object.slug}}
+                            <Link
+                                to={`/service/${object.slug}`}
                             >
                                 {object.site.name} {object.name}
-                            </Router.Link>
+                            </Link>
                         </h3>
                         <Phone {...phone} />
                     </div>

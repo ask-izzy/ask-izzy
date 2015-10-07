@@ -2,7 +2,6 @@
 
 import DocumentTitle from "react-document-title";
 import React from "react";
-import Router from "react-router";
 
 export default class BasePage extends React.Component {
 
@@ -14,7 +13,7 @@ export default class BasePage extends React.Component {
             <div className="BrandedPage">
                 <DocumentTitle title="Ask Izzy" />
                 <main>
-                    <Router.RouteHandler />
+                    {this.props.children}
                 </main>
 
                 <footer className="branding-footer-container">

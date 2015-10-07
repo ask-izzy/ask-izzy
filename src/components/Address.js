@@ -31,6 +31,15 @@ class Address extends React.Component {
                 "street_suffix": "",
                 "street_type": "St",
                 "suburb": "RICHMOND",
+                "point": {},
+            }),
+        },
+        hidden: {
+            location: new Location({
+                "postcode": "3121",
+                "state": "VIC",
+                "suburb": "RICHMOND",
+                "point": undefined,
             }),
         },
     };

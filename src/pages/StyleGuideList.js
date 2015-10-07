@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import { Link } from "react-router";
 import components from "../components";
 
 export default class StyleGuideList extends React.Component {
@@ -15,12 +15,11 @@ export default class StyleGuideList extends React.Component {
 
     renderItem(componentName: string): ReactElement {
         return (
-            <Router.Link
-                to="styleguideItem"
+            <Link
+                to={`/styleGuide/component/${componentName}`}
                 key={componentName}
-                params={{componentName: componentName}}
                 style={{clear: "both", float: "left"}}
-            >{componentName}</Router.Link>
+            >{componentName}</Link>
         );
     }
 }

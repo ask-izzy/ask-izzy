@@ -3,7 +3,8 @@
 // to the client
 
 import React from "react";
-import Router from "react-router";
+import { match, RoutingContext } from "react-router";
+import url from "url";
 import routes from "../routes";
 
 import HtmlDocument from "./HtmlDocument";
@@ -22,21 +23,38 @@ export default function render(req, res, next) {
             delete require.cache[require.resolve("./webpack-stats.json")];
         }
 
-        Router.run(routes, req.path, Root => {
-            const markup = React.renderToString(<Root/>);
-            // The application component is rendered to static markup
-            // and sent as response.
-            const html = React.renderToStaticMarkup(
-              <HtmlDocument
-                  markup={markup}
-                  script={webpackStats.script}
-                  css={webpackStats.css}
-              />
-            );
-            const doctype = "<!DOCTYPE html>";
+        match(
+            { routes, location: url.parse(req.url) },
+            (error, redirectLocation, renderProps) => {
+                if (error) {
+                    next(error);
+                } else if (redirectLocation) {
+                    res.redirect(
+                        302,
+                        redirectLocation.pathname +
+                        redirectLocation.search
+                    );
+                } else if (renderProps) {
+                    const markup = React.renderToString(
+                        <RoutingContext {...renderProps} />
+                    );
+                    // The application component is rendered to static markup
+                    // and sent as response.
+                    const html = React.renderToStaticMarkup(
+                      <HtmlDocument
+                          markup={markup}
+                          script={webpackStats.script}
+                          css={webpackStats.css}
+                      />
+                    );
+                    const doctype = "<!DOCTYPE html>";
 
-            res.send(doctype + html);
-        });
+                    res.send(doctype + html);
+                } else {
+                    res.status(404).send("Not found");
+                }
+            }
+        )
     } catch (error) {
         next(error);
     }

@@ -1,13 +1,13 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import { History, Link } from "react-router";
 import reactMixin from "react-mixin";
 import mui from "material-ui";
 
 import icons from "../icons";
 
-/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
+/*::`*/@reactMixin.decorate(History)/*::`;*/
 class CategoryListItem extends React.Component {
 
     // flow:disable not supported yet
@@ -27,9 +27,8 @@ class CategoryListItem extends React.Component {
             <mui.ListItem
                 className="CategoryListItem"
                 containerElement={
-                    <Router.Link
-                        to="category"
-                        params={{page: this.props.category.key}}
+                    <Link
+                        to={`/category/${this.props.category.key}`}
                     />
                 }
 

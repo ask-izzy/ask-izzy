@@ -11,7 +11,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
 
     previousStep(): void {
         if (this.state.subpage == 0) {
-            this.goBack();
+            this.props.history.goBack();
         } else {
             this.setState({subpage: 0});
         }

@@ -1,15 +1,14 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import { History } from "react-router";
 import reactMixin from "react-mixin";
 import _ from "underscore";
 
 import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
 
-/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
-/*::`*/@reactMixin.decorate(Router.State)/*::`;*/
+/*::`*/@reactMixin.decorate(History)/*::`;*/
 class BaseResultsPage extends BaseCategoriesPage {
     constructor(props: Object) {
         super(props);
@@ -108,7 +107,12 @@ class BaseResultsPage extends BaseCategoriesPage {
             request = item.getSearch(request);
 
             if (!request) {
-                this.replaceWith(this.getPath() + "/personalise");
+                this.history.replaceState(
+                    null,
+                    this.props.location.pathname + "/personalise",
+                    ""
+                );
+
                 return;
             }
         }

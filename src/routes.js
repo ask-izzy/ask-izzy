@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import { Route } from "react-router";
 
 // If you import these after the others,
 // babel decides the navbar doesn't really
@@ -11,7 +11,6 @@ import StyleGuideItem from "./pages/StyleGuideItem";
 
 import BasePage from "./pages/BasePage";
 import BrandedPage from "./pages/BrandedPage";
-import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
@@ -20,82 +19,63 @@ import ResultsMapPage from "./pages/ResultsMapPage";
 import ServicePage from "./pages/ServicePage";
 
 export default (
-    <Router.Route
-        name="_root"
-        path="/"
-        handler={BasePage}
+    <Route
+        path=""
+        component={BasePage}
     >
-        <Router.Route
-            name="styleguideItem"
+        <Route
             path="/styleGuide/component/:componentName"
-            handler={StyleGuideItem}
+            component={StyleGuideItem}
         />
-        <Router.Route
-            name="styleguideList"
+        <Route
             path="/styleGuide*"
-            handler={StyleGuideList}
+            component={StyleGuideList}
         />
 
-        <Router.Route
-            name="_branded"
-            path="/"
-            handler={BrandedPage}
+        <Route
+            path=""
+            component={BrandedPage}
         >
-            <Router.Route
-                name="home"
+            <Route
                 path="/"
-                handler={HomePage}
+                component={HomePage}
             />
-
-            <Router.Route
-                name="category"
+            <Route
                 path="/category/:page"
-                handler={ResultsListPage}
+                component={ResultsListPage}
             />
-            <Router.Route
-                name="category_map"
+            <Route
                 path="/category/:page/map"
-                handler={ResultsMapPage}
+                component={ResultsMapPage}
             />
-            <Router.Route
-                name="category_personalisation_wizard"
+            <Route
                 path="/category/:page/personalise"
-                handler={PersonalisationWizardPage}
+                component={PersonalisationWizardPage}
             />
-            <Router.Route
-                name="category_personalisation"
+            <Route
                 path="/category/:page/personalise/summary"
-                handler={PersonalisationSummaryPage}
+                component={PersonalisationSummaryPage}
             />
-
-            <Router.Route
-                name="search"
+            <Route
                 path="/search/:search"
-                handler={ResultsListPage}
+                component={ResultsListPage}
             />
-            <Router.Route
-                name="search_map"
+            <Route
                 path="/search/:search/map"
-                handler={ResultsMapPage}
+                component={ResultsMapPage}
             />
-            <Router.Route
-                name="search_personalisation_wizard"
+            <Route
                 path="/search/:search/personalise"
-                handler={PersonalisationWizardPage}
+                component={PersonalisationWizardPage}
             />
-            <Router.Route
-                name="search_personalisation"
+            <Route
                 path="/search/:search/personalise/summary"
-                handler={PersonalisationSummaryPage}
+                component={PersonalisationSummaryPage}
             />
-
-            <Router.Route
-                name="service"
+            <Route
                 path="/service/:slug"
-                handler={ServicePage}
+                component={ServicePage}
             />
-
-            <Router.DefaultRoute handler={ErrorPage}/>
-        </Router.Route>
-    </Router.Route>
+        </Route>
+    </Route>
 );

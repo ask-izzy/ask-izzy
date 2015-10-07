@@ -115,7 +115,7 @@ class ResultsMapPage extends BaseResultsPage {
 
     onBackClick(): void {
         if (_.isEmpty(this.state.selectedServices)) {
-            this.goBack();
+            this.props.history.goBack();
         } else {
             this.clearSelection();
         }

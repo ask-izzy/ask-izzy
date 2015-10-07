@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import {Link} from "react-router";
 import mui from "material-ui";
 
 import BaseResultsPage from "./BaseResultsPage";
@@ -10,12 +10,13 @@ import icons from "../icons";
 
 class ResultsListPage extends BaseResultsPage {
     render(): ReactElement {
+        let history = this.props.history;
 
         return (
             <div className="ResultsListPage">
                 <components.AppBar
                     title={this.title}
-                    onBackTouchTap={this.goBack.bind(this)}
+                    onBackTouchTap={history.goBack.bind(history)}
                 />
 
                 <components.HeaderBar
@@ -85,10 +86,10 @@ class ResultsListPage extends BaseResultsPage {
 
         var linkText = "Go back";
 
-        return (<Router.Link
+        return (<Link
             className="homeLink"
             to="home"
-                >{linkText}</Router.Link>);
+                >{linkText}</Link>);
     }
 
     renderInfo(): ?ReactElement {
@@ -103,13 +104,10 @@ class ResultsListPage extends BaseResultsPage {
     }
 
     renderPersonalisationLink(): ReactElement {
-
-        var personaliseLink = `${this.getPath()}/personalise/summary`;
-
-        return (<Router.Link
+        return (<Link
             className="personalisationLink"
-            to={personaliseLink}
-                >Change what you need</Router.Link>);
+            to={`/category/${this.props.params.page}/personalise/summary`}
+                >Change what you need</Link>);
     }
 
     renderResults(): ReactElement {
@@ -122,8 +120,8 @@ class ResultsListPage extends BaseResultsPage {
                         className="ViewOnMapButton"
                         primaryText="View on a map"
                         containerElement={
-                            <Router.Link
-                                to={this.getPathname() + "/map"}
+                            <Link
+                                to={this.props.location.pathname + "/map"}
                             />
                         }
                         leftIcon={

@@ -1,10 +1,10 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import { History, Link } from "react-router";
 import reactMixin from "react-mixin";
 
-/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
+/*::`*/@reactMixin.decorate(History)/*::`;*/
 class Infobox extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
@@ -54,12 +54,12 @@ class Infobox extends React.Component {
                                     >
                                         {linkText}
                                     </a>
-                                : <Router.Link
+                                : <Link
                                     className="Link"
                                     {...other}
                                   >
                                     {linkText}
-                                </Router.Link>
+                                </Link>
                             }
                         </div>
                     : ""

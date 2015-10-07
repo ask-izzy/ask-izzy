@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import { Link } from "react-router";
 import mui from "material-ui";
 import _ from "underscore";
 
@@ -123,9 +123,8 @@ export default class ServicePane extends React.Component {
                             primaryText={service.name}
                             secondaryText={service.shortDescription}
                             containerElement={
-                                <Router.Link
-                                    to="service"
-                                    params={{slug: service.slug}}
+                                <Link
+                                    to={`/service/${object.slug}`}
                                 />
                             }
 
