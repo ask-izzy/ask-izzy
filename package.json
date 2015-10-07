@@ -48,7 +48,7 @@
     "jsonlint": "1.6.2",
     "mocha": "2.3.3",
     "mocha-babel": "3.0.0",
-    "node-libs-browser": "0.5.2",
+    "node-libs-browser": "0.5.3",
     "nodemon": "1.7.1",
     "optimist": "0.6.1",
     "sass-lint": "1.2.3",
