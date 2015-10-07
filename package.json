@@ -33,7 +33,7 @@
     "react-mixin": "3.0.0",
     "react-tap-event-plugin": "0.1.8",
     "sass-loader": "3.0.0",
-    "serialize-javascript": "1.0.0",
+    "serialize-javascript": "1.1.2",
     "sessionstorage": "0.0.1",
     "style-loader": "0.12.4",
     "underscore": "1.8.3",
