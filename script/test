@@ -16,4 +16,4 @@ fi
 ${CI:=false} || ./script/build-assets
 
 # Saucelabs bails after 90 seconds inactivity
-mocha --timeout 80 --compilers js:babel/register $@
+mocha --timeout 80000 --compilers js:babel/register $@
