@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import { History } from "react-router";
 import _ from "underscore";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
@@ -28,8 +28,7 @@ var AutocompleteState = {
     SEARCHING: 1,
 };
 
-/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
-/*::`*/@reactMixin.decorate(Router.State)/*::`;*/
+/*::`*/@reactMixin.decorate(History)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Location extends React.Component {
     // flow:disable

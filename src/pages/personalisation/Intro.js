@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import { History } from "react-router";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
 
@@ -10,8 +10,7 @@ import components from "../../components";
 import icons from "../../icons";
 import * as iss from "../../iss";
 
-/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
-/*::`*/@reactMixin.decorate(Router.State)/*::`;*/
+/*::`*/@reactMixin.decorate(History)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Intro extends React.Component {
     // flow:disable

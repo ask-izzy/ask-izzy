@@ -1,14 +1,14 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import { History } from "react-router";
 import reactMixin from "react-mixin";
 
 import HeaderBar from "../components/HeaderBar";
 import NavBar from "../components/NavBar";
 import icons from "../icons";
 
-/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
+/*::`*/@reactMixin.decorate(History)/*::`;*/
 class HomePage extends React.Component {
 
     onSearchSubmit(event: Event): void {
@@ -21,7 +21,11 @@ class HomePage extends React.Component {
             return;
         }
 
-        this.transitionTo("search", {search: encodeURIComponent(search)});
+        this.props.history.pushState(
+            null,
+            `/search/${encodeURIComponent(search)}`,
+            {}
+        );
     }
 
     render(): ReactElement {

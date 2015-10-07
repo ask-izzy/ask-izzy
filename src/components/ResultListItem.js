@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import { History, Link } from "react-router";
 import fixtures from "../../fixtures/services";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
@@ -11,7 +11,7 @@ import iss from "../iss";
 import OpeningTimes from "./OpeningTimes";
 import TransportTime from "./TransportTime";
 
-/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
+/*::`*/@reactMixin.decorate(History)/*::`;*/
 class ResultListItem extends React.Component {
 
     // flow:disable not supported yet
@@ -54,9 +54,8 @@ class ResultListItem extends React.Component {
             <mui.ListItem
                 className="ResultListItem"
                 containerElement={
-                    <Router.Link
-                        to="service"
-                        params={{slug: object.slug}}
+                    <Link
+                        to={`/service/${object.slug}`}
                     />
                 }
 

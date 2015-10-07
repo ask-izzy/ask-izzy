@@ -21,7 +21,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         var subpage = this.state.subpage - 1;
 
         if (subpage < 0) {
-            this.goBack();
+            this.props.history.goBack();
         } else {
             this.setState({subpage: subpage});
         }
@@ -39,12 +39,20 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         }
 
         if (subpage >= this.personalisationComponents.length) {
-            var params = this.getParams();
+            var params = this.props.params;
 
             if (_.has(params, "page")) {
-                this.replaceWith("category", params);
+                this.history.replaceState(
+                    null,
+                    `/category/${params.page}`,
+                    {}
+                );
             } else if (_.has(params, "search")) {
-                this.replaceWith("search", params);
+                this.history.replaceState(
+                    null,
+                    `/search/${params.search}`,
+                    {}
+                );
             } else {
                 throw new Error("Unexpected");
             }

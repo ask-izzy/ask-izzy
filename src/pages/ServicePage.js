@@ -1,14 +1,14 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
+import { History } from "react-router";
 import ServicePane from "../components/ServicePane";
 import reactMixin from "react-mixin";
 
 import iss from "../iss";
 import components from "../components";
 
-/*::`*/@reactMixin.decorate(Router.Navigation)/*::`;*/
+/*::`*/@reactMixin.decorate(History)/*::`;*/
 class ServicePage extends React.Component {
     constructor(props: Object) {
         super(props);
@@ -52,11 +52,13 @@ class ServicePage extends React.Component {
         if (!object) {
             return <div/>;
         } else {
+            let history = this.props.history;
+
             return (
                 <div>
                     <components.AppBar
                         title={object.site.name}
-                        onBackTouchTap={this.goBack.bind(this)}
+                        onBackTouchTap={history.goBack.bind(history)}
                     />
                     <ServicePane service={object}/>
                 </div>

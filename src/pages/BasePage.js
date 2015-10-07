@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import Router from "react-router";
 import ThemeManager from "material-ui/lib/styles/theme-manager";
 
 import theme from "../constants/theme";
@@ -26,7 +25,7 @@ export default class BasePage extends React.Component {
         return (
             <div className="BasePage">
                 <main>
-                    <Router.RouteHandler />
+                    {this.props.children}
                 </main>
             </div>
         );
