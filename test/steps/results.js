@@ -8,7 +8,6 @@ import { By } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
-import timeout from "../../src/timeout";
 import { documentReady } from "./browser";
 
 module.exports = (function() {
@@ -31,13 +30,10 @@ async function seeTheResults(table: Array<Object>): Promise<void> {
         var class_ = key.match(/[(](.*)[)]/)[1];
 
         var expected = _.pluck(table, key);
-        var actual = await timeout(
-            500,
-            Promise.all(
-                (
-                    await this.driver.findElements(By.css(`.${class_}`))
-                ).map(getText)
-            )
+        var actual = await Promise.all(
+            (
+                await this.driver.findElements(By.css(`.${class_}`))
+            ).map(getText)
         );
 
         // replace single hyphen with an empty string (to represent

@@ -1,7 +1,6 @@
 /* @flow */
 
 import pauseToDebug from "./debug";
-import timeout from "../../src/timeout";
 
 function unpromisify(func: (...args: any) => Promise<void>): Function {
     function stripArgs(func) {
@@ -26,8 +25,7 @@ function unpromisify(func: (...args: any) => Promise<void>): Function {
         };
 
         try {
-            // Saucelabs borks itself after 90 seconds.
-            timeout(80000, func.apply(this, args))
+            func.apply(this, args)
                 .then(stripArgs(done))
                 .catch(errorHandler);
         } catch (error) {
