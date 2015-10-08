@@ -24,6 +24,7 @@ function assertEqualTime(actual: ?Moment, expected: Moment): void {
 
 function nextOpeningTimes(service: ServiceOpening): nextOpeningTimes {
     const times = service.nextOpeningTimes;
+
     if (!times) {
         throw new Error("Service should have nextOpeningTimes")
     }
