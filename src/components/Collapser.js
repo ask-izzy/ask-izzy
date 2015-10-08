@@ -1,7 +1,13 @@
 /* @flow */
 import React from "react";
+import ScreenReader from "./ScreenReader";
 
 class Collapser extends React.Component {
+
+    // flow:disable not supported yet
+    static defaultProps = {
+        screenReaderMessage: "Click to show",
+    };
 
     constructor(props: Object) {
         super(props);
@@ -18,14 +24,14 @@ class Collapser extends React.Component {
 
     static sampleProps = {
         default: {
-            message: "Click to expand",
+            message: "Expand all",
             children: (
                 <div>Hidden content</div>
             ),
         },
         expanded: {
             expanded: true,
-            message: "Click to expand",
+            message: "Expand all",
             children: (
                 <div>Expanded content</div>
             ),
@@ -67,7 +73,11 @@ class Collapser extends React.Component {
                     alt="Show more"
                     className="collapser-message"
                     onClick={this.onMessageClick.bind(this)}
-                >{this.props.message}</a>
+                >
+                    <ScreenReader
+                        children={this.props.screenReaderMessage}
+                    /> {this.props.message}
+                </a>
                 <div
                     className={this.hiddenClass()}
                 >
