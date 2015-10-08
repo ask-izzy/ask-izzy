@@ -87,7 +87,6 @@ function _request(obj) {
  * @returns {Promise<Object>} a promise for the request.
  */
 export function mungeUrlQuery(url_: string, data: Object): string {
-    /* flow:disable https://github.com/facebook/flow/issues/908 */
     var urlObj = url.parse(url_, true);
 
     /* data overrides anything passed in via the URL.
@@ -99,6 +98,7 @@ export function mungeUrlQuery(url_: string, data: Object): string {
     }
 
     urlObj.auth = urlObj.search = urlObj.query = null;
+    /* flow:disable https://github.com/facebook/flow/issues/908 */
     url_ = url.format(urlObj);
 
     /*
