@@ -17,7 +17,7 @@ function assertEqualTime(actual: ?Moment, expected: Moment): void {
     assert(
         expected.isSame(actual),
         `Expected
-        ${actual ? actual.format("dddd ha") : "(falsy)"} to be
+        ${actual ? actual.format("dddd ha") : actual} to be
         ${expected.format("dddd ha")}`
     );
 }
