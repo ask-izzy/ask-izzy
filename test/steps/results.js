@@ -30,10 +30,10 @@ async function seeTheResults(table: Array<Object>): Promise<void> {
         var class_ = key.match(/[(](.*)[)]/)[1];
 
         var expected = _.pluck(table, key);
-        var actual = await Promise.all((
-            await this.driver.findElements(By.css(`.${class_}`))
-        )
-            .map(getText)
+        var actual = await Promise.all(
+            (
+                await this.driver.findElements(By.css(`.${class_}`))
+            ).map(getText)
         );
 
         // replace single hyphen with an empty string (to represent

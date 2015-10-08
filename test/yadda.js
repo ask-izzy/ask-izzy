@@ -108,9 +108,17 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
                 passed = false;
 
                 var title = this.currentTest.title.replace(/\W+/g, "_");
-                var data = await driver.takeScreenshot();
 
-                fs.writeFileSync(`Test-${title}.png`, data, "base64");
+                if (process.env.SCREENSHOT_FAILURES) {
+                    try {
+                        var data = await driver.takeScreenshot();
+
+                        fs.writeFileSync(`Test-${title}.png`, data, "base64");
+                    } catch (err) {
+                        console.log("Failed to take screenshot");
+                        console.log(err);
+                    }
+                }
 
                 if (process.env.BROWSER_LOGS) {
                     var logger = new Webdriver.WebDriver.Logs(driver);
