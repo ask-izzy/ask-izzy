@@ -31,15 +31,6 @@ Feature: Category page
         # The housing category has 3 results
         And I should not see "Load more results…"
 
-    Scenario: Navigate to a service and back to a category
-        When I visit /category/housing
-        And I click on "Housing Service"
-        Then I should see "A housing service for people."
-
-        When I click back from the title bar
-        Then I should see "Emergency Accom"
-        And I should be at /category/housing
-
     Scenario: A service with 5 related services only shows 4
         When I visit /category/food
 

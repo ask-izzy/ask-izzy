@@ -3,7 +3,6 @@
 import React from "react";
 import { History } from "react-router";
 import reactMixin from "react-mixin";
-import _ from "underscore";
 
 import BaseCategoriesPage from "./BaseCategoriesPage";
 
@@ -11,9 +10,6 @@ import BaseCategoriesPage from "./BaseCategoriesPage";
 class BasePersonalisationPage extends BaseCategoriesPage {
     constructor(props: Object) {
         super(props);
-        this.state = {
-            subpage: 0,
-        };
     }
 
     // flow:disable
@@ -28,27 +24,36 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     }
 
     previousStep(): void {
+        this.props.history.goBack();
     }
 
     nextStep(): void {
     }
 
-    componentDidMount(): void {
-        /* Set the subpage if it was requested.
-         * This is only used for testing. */
-        if (_.has(this.props.location.query, "subpage")) {
-            var subpage = this.props.location.query.subpage;
-            var subpageIndex = this.personalisationComponents.findIndex(
-                component => component.defaultProps.name == subpage
-            );
+    navigate(subpath: string): void {
+        const parts = this.props.location.pathname.split("/");
 
-            if (subpageIndex == -1) {
-                throw new Error(`No such page: ${subpage}`);
-            } else {
-                this.setState({subpage: subpageIndex});
-            }
-        }
+        // Maintain (eg) '/category/foo' or '/search/badger'
+        // prefix when navigating within personalisation
+        this.props.history.pushState(
+            null,
+            `/${parts[1]}/${parts[2]}/${subpath}`,
+            {}
+        );
     }
+
+    // flow:disable
+    get currentComponent(): ?ReactComponent {
+        return this.personalisationComponents[this.currentComponentIdx];
+    }
+
+    // flow:disable
+    get currentComponentIdx(): number {
+        return this.personalisationComponents.findIndex(component =>
+            component.defaultProps.name == this.props.params.subpage
+        );
+    }
+
 }
 
 export default BasePersonalisationPage;
