@@ -72,7 +72,38 @@ async function clickBack(): Promise<void> {
         .click();
 }
 
+/**
+ * Wait for the document to be ready (including completing any AJAX requests).
+ *
+ * @param {Webdriver.WebDriver} driver - Selenium webdriver.
+ * @returns {Promise<boolean>} true if the document is readyState is complete.
+ */
+module.exports.documentReady = function documentReady(
+    driver: Webdriver.WebDriver
+): Promise<boolean> {
+    return driver.executeScript(() => document.readyState == "complete");
+};
+
+async function urlIs(
+    driver: Webdriver.WebDriver,
+    expected: string
+): Promise<boolean> {
+    var url = await driver.getCurrentUrl();
+
+    if (expected.startsWith("/")) {
+        url = Url.parse(url).path
+    }
+
+    return url == expected;
+}
+
 async function checkURL(expected: string): Promise<void> {
+    await this.driver.wait(
+        urlIs(this.driver, expected),
+        10000,
+        `URL should be #{expected}`,
+    );
+
     var url = await this.driver.getCurrentUrl();
 
     if (expected.startsWith("/")) {
@@ -184,15 +215,3 @@ async function cleanSession(): Promise<void> {
         }
     });
 }
-
-/**
- * Wait for the document to be ready (including completing any AJAX requests).
- *
- * @param {Webdriver.WebDriver} driver - Selenium webdriver.
- * @returns {Promise<boolean>} true if the document is readyState is complete.
- */
-module.exports.documentReady = function documentReady(
-    driver: Webdriver.WebDriver
-): Promise<boolean> {
-    return driver.executeScript(() => document.readyState == "complete");
-};
