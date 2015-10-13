@@ -17,18 +17,44 @@ injectTapEventPlugin();
 
 function History() {
     let history = createBrowserHistory();
+    let historyLength = 0;
 
     function goBack() {
-        if (window.history.length == 1) {
-            history.pushState(null, "/");
-        } else {
+        if (historyLength > 0) {
+            historyLength--;
             history.goBack();
+        } else {
+            history.pushState(null, "/");
         }
+    }
+
+    function goForward() {
+        historyLength++;
+        history.goForward();
+    }
+
+    function pushState() {
+        historyLength++;
+        history.pushState(...arguments);
+    }
+
+    /* eslint-disable id-length */
+    function go(num: number) {
+        historyLength += num;
+        history.go(num);
+    }
+
+    window._clear_history_testing = () => {
+        history.go(-historyLength);
+        historyLength = 0;
     }
 
     return {
         ...history,
         goBack,
+        goForward,
+        pushState,
+        go,
     };
 }
 

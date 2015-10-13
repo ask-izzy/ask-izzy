@@ -6,7 +6,7 @@ Feature: History navigation
 
     Scenario: Bookmark a service page and press back to reach home page
         Given a fresh session
-        When I visit /service/111-my-housing-service
+         And I visit /service/111-my-housing-service
          And I click back from the title bar
         Then I should see the branding header
         Then I should be at /

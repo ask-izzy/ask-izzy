@@ -229,7 +229,7 @@ async function cleanSession(): Promise<void> {
     await this.driver.executeScript(() => {
         try {
             sessionStorage.clear();
-            history.go(-history.length);
+            window._clear_history_testing();
         } catch (error) {
             console.error(error);
         }
