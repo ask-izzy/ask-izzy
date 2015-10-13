@@ -8,6 +8,7 @@ Feature: History navigation
         Given a fresh session
         When I visit /service/111-my-housing-service
          And I click back from the top bar
+        Then I should see the branding header
         Then I should be at /
 
     Scenario: Navigate via category to a service and back to the home page
