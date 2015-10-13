@@ -13,8 +13,12 @@ injectTapEventPlugin();
 /*
  * If at any point there isn't a meaningful 'back',
  * go to the app homepage instead.
+ *
+ * We use a function instead of subclassing because
+ * the builtins of `history` check that you're
+ * calling them on the right object and bail
+ * otherwise.
  */
-
 function History() {
     let history = createBrowserHistory();
     let historyLength = 0;
