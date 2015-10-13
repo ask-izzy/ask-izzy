@@ -130,3 +130,8 @@ Feature: Service details page
         Thursday  | 9:00 AM–5:00 PM
         Friday    | 9:00 AM–5:00 PM
         ----------------------------
+
+    Scenario: Show other services at this location
+        When I visit /service/111
+        Then I should see "Also at this location"
+         And I should see "Transitional Housing Service"

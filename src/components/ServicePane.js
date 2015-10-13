@@ -124,7 +124,7 @@ export default class ServicePane extends React.Component {
                             secondaryText={service.shortDescription}
                             containerElement={
                                 <Link
-                                    to={`/service/${object.slug}`}
+                                    to={`/service/${service.slug}`}
                                 />
                             }
 
