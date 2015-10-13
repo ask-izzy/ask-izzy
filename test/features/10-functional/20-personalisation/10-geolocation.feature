@@ -6,7 +6,7 @@ Feature: Geolocation
     # So that I get personalised results without typing anything
 
     Scenario: Use geolocation to find the user
-        When I visit /category/housing/personalise/location
+        When I visit /category/housing/personalise/page/location
         Then I should see "Where are you?"
         And I should see "Automatically detect your location"
         And the button "Done" should be disabled
@@ -21,7 +21,7 @@ Feature: Geolocation
         And the button "Done" should be enabled
 
     Scenario: User denies geolocation access
-        When I visit /category/housing/personalise/location
+        When I visit /category/housing/personalise/page/location
 
         Given control of geolocation
         When I click on "Automatically detect your location"
