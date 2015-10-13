@@ -115,7 +115,7 @@ class BaseResultsPage extends BaseCategoriesPage {
 
                 this.history.replaceState(
                     null,
-                    this.props.location.pathname + sep + "personalise",
+                    `${this.props.location.pathname}${sep}personalise`,
                     ""
                 );
 
