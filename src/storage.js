@@ -18,6 +18,10 @@ class Storage {
     static getJSON(key: string): any {
         var item = this.getItem(key);
 
+        if (!item) {
+            return null;
+        }
+
         if (typeof item != "string") {
             console.error("Cannot getJSON with non-string ");
             return null;
