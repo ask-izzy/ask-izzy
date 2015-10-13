@@ -14,18 +14,25 @@ injectTapEventPlugin();
  * If at any point there isn't a meaningful 'back',
  * go to the app homepage instead.
  */
-let history = createBrowserHistory();
-const goBack = history.goBack;
 
-history.goBack = () => {
-    if (window.history.length == 1) {
-        history.pushState(null, "/");
-    } else {
-        goBack.apply(history);
+function History() {
+    let history = createBrowserHistory();
+
+    function goBack() {
+        if (window.history.length == 1) {
+            history.pushState(null, "/");
+        } else {
+            history.goBack();
+        }
     }
+
+    return {
+        ...history,
+        goBack,
+    };
 }
 
 React.render(
-    <Router history={history}>{routes}</Router>,
+    <Router history={History()}>{routes}</Router>,
     document.getElementById("root")
 )
