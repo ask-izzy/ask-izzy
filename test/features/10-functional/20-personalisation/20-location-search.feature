@@ -7,7 +7,7 @@ Feature: Location search
 
     Scenario: Search for a suburb
         Given my location is 37.823S 144.998E
-        When I visit /category/housing/personalise?subpage=location
+        When I visit /category/housing/personalise/page/location
         Then I should see "Where are you?"
 
         When I search for "carlt"
@@ -24,6 +24,6 @@ Feature: Location search
         And the button "Done" should be enabled
 
     Scenario: Suburb search normalises spaces
-        When I visit /category/housing/personalise?subpage=location
+        When I visit /category/housing/personalise/page/location
         And I search for "  north melbourne"
         Then search box should contain "north melbourne"

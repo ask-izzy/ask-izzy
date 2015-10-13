@@ -10,23 +10,15 @@ import icons from "../icons";
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
     previousStep(): void {
-        if (this.state.subpage == 0) {
-            this.props.history.goBack();
-        } else {
-            this.setState({subpage: 0});
-        }
+        this.props.history.goBack();
     }
 
     nextStep(): void {
-        this.setState({subpage: 0});
+        this.props.history.goBack();
     }
 
     render(): ReactElement {
-        var subpage;
-
-        if (this.state.subpage > 0) {
-            subpage = this.personalisationComponents[this.state.subpage - 1];
-        }
+        var subpage = this.currentComponent;
 
         return (
             <div className="PersonalisationPage">
@@ -53,9 +45,11 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                                     key={index}
                                     className="ListItem SummaryItem"
                                     onTouchTap={event => {
-                                        this.setState({
-                                            subpage: index + 1,
-                                        });
+                                        this.navigate(
+                                            `personalise/summary/${
+                                                component.defaultProps.name
+                                            }`
+                                        );
                                     }}
 
                                     primaryText={

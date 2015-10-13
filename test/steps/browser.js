@@ -26,6 +26,11 @@ module.exports = (function() {
               unpromisify(doSearchAndEnter))
         .when("I click on the search icon", unpromisify(clickSearchIcon))
         .when("I click back from the title bar", unpromisify(clickBack))
+        .when(
+            "I click back from the browser UI",
+            unpromisify(clickBrowserBack),
+        )
+        .when("I reload the page", unpromisify(reloadPage))
         .when("I pause for debugging", unpromisify(pauseToDebug))
         .then("I should be at $URL", unpromisify(checkURL))
         .then('I should see "$STRING"', unpromisify(thenISee))
@@ -63,6 +68,20 @@ async function clickLink(link: string): Promise<void> {
             .join("|")
     ))
         .click();
+}
+
+function navigator(
+    driver: Webdriver.WebDriver
+): Webdriver.WebDriver.Navigation {
+    return new Webdriver.WebDriver.Navigation(driver);
+}
+
+async function reloadPage(): Promise<void> {
+    await navigator(this.driver).refresh();
+}
+
+async function clickBrowserBack(): Promise<void> {
+    await navigator(this.driver).back();
 }
 
 async function clickBack(): Promise<void> {
@@ -210,6 +229,7 @@ async function cleanSession(): Promise<void> {
     await this.driver.executeScript(() => {
         try {
             sessionStorage.clear();
+            window._clear_history_testing();
         } catch (error) {
             console.error(error);
         }

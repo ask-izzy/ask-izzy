@@ -27,20 +27,3 @@ Feature: Landing page
         Technology
         ---------------
         And I should see the branding footer
-
-    Scenario: Navigate to a category and back to the homepage
-        Given my location is "Melbourne VIC"
-        And I have somewhere to sleep tonight
-        And I need nothing for housing
-        And my gender is female
-        And I am 27 years old
-        And I am not part of any relevant demographics
-
-        When I visit /
-        And I click on "Housing"
-        Then I should be at /category/housing
-        And I should see "Housing"
-
-        When I click back from the title bar
-        Then I should see the branding header
-        And I should be at /

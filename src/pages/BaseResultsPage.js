@@ -107,9 +107,15 @@ class BaseResultsPage extends BaseCategoriesPage {
             request = item.getSearch(request);
 
             if (!request) {
+                const sep = this
+                    .props
+                    .location
+                    .pathname
+                    .endsWith("/") ? "" : "/";
+
                 this.history.replaceState(
                     null,
-                    this.props.location.pathname + "/personalise",
+                    `${this.props.location.pathname}${sep}personalise`,
                     ""
                 );
 

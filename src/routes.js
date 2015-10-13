@@ -53,7 +53,15 @@ export default (
                 component={PersonalisationWizardPage}
             />
             <Route
+                path="/category/:page/personalise/page/:subpage"
+                component={PersonalisationWizardPage}
+            />
+            <Route
                 path="/category/:page/personalise/summary"
+                component={PersonalisationSummaryPage}
+            />
+            <Route
+                path="/category/:page/personalise/summary/:subpage"
                 component={PersonalisationSummaryPage}
             />
             <Route
