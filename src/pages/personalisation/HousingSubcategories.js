@@ -2,22 +2,21 @@
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
 import SleepTonight from "./SleepTonight";
-import { SearchOnSubcategoryText } from "./mixins";
+import { append } from "./BaseQuestion";
 
-/*::`*/@SearchOnSubcategoryText/*::`;*/
 export default class HousingSubcategories extends BaseMultiQuestion {
     // flow:disable
     static defaultProps = {
         name: "sub-housing",
         question: "Which situation is most like yours?",
-        answers: [
-            "On the street",
-            "Couch surfing",
-            "In a rooming house",
-            "Private rental",
-            "Public housing",
-            "Mortgaged housing",
-        ],
+        answers: {
+            "On the street": append(""),
+            "Couch surfing": append(""),
+            "In a rooming house": append(""),
+            "Private rental": append(""),
+            "Public housing": append(""),
+            "Mortgaged housing": append(""),
+        },
     };
 
     static showQuestion() {

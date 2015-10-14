@@ -119,7 +119,7 @@ var categories:Array<Category> = [
         byline: "Drugs, alcohol & gambling",
         icon: icons.Addiction,
         search: {
-            q: "addiction",
+            q: "substance abuse gambling",
         },
         personalisation: [
             personalisation.AddictionSubcategories,

@@ -1,24 +1,22 @@
 /* @flow */
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
-import { SearchOnSubcategoryText } from "./mixins";
+import { append } from "./BaseQuestion";
 
-/*::`*/@SearchOnSubcategoryText/*::`;*/
 export default class CounsellingSubcategories extends BaseMultiQuestion {
     // flow:disable
     static defaultProps = {
         name: "sub-counselling",
         question: "What issues are you dealing with?",
-        answers: [
-            "Family violence",
-            "Sexual identity",
-            "Asylum seeker or refugee",
-            "Family or relationships",
-            "Disability support",
-            "Money matters eg: gambling",
-            "Out of prison",
-            "Pets & vet care",
-        ],
+        answers: {
+            "Family violence": append("family violence"),
+            "Sexual identity": append("sexuality"),
+            "Asylum seeker or refugee": append("refugee"),
+            "Family or relationships": append("relationship"),
+            "Disability support": append("disabilities"),
+            "Money matters e.g.: gambling": append("financial"),
+            "Out of prison": append("parole"),
+            "Pets & vet care": append("pets"),
+        },
     };
-
 }
