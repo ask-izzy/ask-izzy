@@ -1,7 +1,7 @@
 /* @flow */
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
-import { replace } from "./BaseQuestion";
+import { append, replace, remove } from "./BaseQuestion";
 
 export default class AddictionSubcategories extends BaseMultiQuestion {
     // flow:disable
@@ -9,8 +9,8 @@ export default class AddictionSubcategories extends BaseMultiQuestion {
         name: "sub-addiction",
         question: "What sort of help?",
         answers: {
-            "Detox": "",
-            "Rehab": "",
+            "Detox": remove("gambling").chain(append("detox")),
+            "Rehab": remove("gambling").chain(append("rehab")),
             "Needle exchange": replace("needle exchange"),
         },
     };

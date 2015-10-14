@@ -56,10 +56,10 @@ class BaseMultiQuestion extends BaseQuestion {
 
         if (answers instanceof Set) {
             for (let answer of answers) {
-                search = super.getSearchForAnswer(request, answer) || {};
+                search = super.getSearchForAnswer(search || {}, answer);
             }
         } else {
-            search = super.getSearchForAnswer(request, answers) || {};
+            search = super.getSearchForAnswer(search || {}, answers);
         }
 
         return search;

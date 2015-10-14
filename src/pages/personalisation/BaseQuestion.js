@@ -17,6 +17,7 @@ import * as iss from "../../iss";
  */
 class Search {
     search: iss.searchRequest;
+    _chain: Search;
 
     constructor(search: string|iss.searchRequest) {
         if (typeof search === "string") {
@@ -27,8 +28,20 @@ class Search {
     }
 
     compose(search: iss.searchRequest): iss.searchRequest {
-        // Default behaviour is to completely replace the search
-        throw new Error("Not implemented");
+        // Default behaviour is to do nothing but chain up
+        search = Object.assign({}, search);
+
+        if (this._chain) {
+            search = this._chain.compose(search);
+        }
+
+        return search;
+    }
+
+    chain(search: Search): Search {
+        this._chain = search;
+
+        return this;
     }
 }
 
@@ -37,7 +50,7 @@ class Search {
  */
 class AppendToSearch extends Search {
     compose(search) {
-        search = Object.assign({}, search);
+        search = super.compose(search);
         search.q = (search.q || "") + " " + (this.search.q || "");
         search.age_groups = (search.age_groups || [])
             .concat(this.search.age_groups || []);
@@ -55,12 +68,29 @@ export function append(search: string|iss.searchRequest): AppendToSearch {
  */
 class ReplaceSearch extends Search {
     compose(search) {
-        return this.search;
+        return super.compose(this.search);
     }
 }
 
 export function replace(search: string|iss.searchRequest): ReplaceSearch {
     return new ReplaceSearch(search);
+}
+
+/**
+ * Subclass for removing a search term.
+ */
+class RemoveSearch extends Search {
+    compose(search) {
+        search = super.compose(search);
+
+        search.q = (search.q || "").replace(this.search.q || "", "");
+
+        return search;
+    }
+}
+
+export function remove(search: string|iss.searchRequest): RemoveSearch {
+    return new RemoveSearch(search);
 }
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
