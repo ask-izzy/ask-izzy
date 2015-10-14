@@ -4,7 +4,6 @@ IFS=$'\n\t'
 PATH=`npm bin`:$PATH
 
 export NODE_ENV=production
-export PORT=8010
 export ISS_URL=http://localhost:5000/
 
 if [ -z "${GOOGLE_KEY:=}" ] ; then
@@ -14,6 +13,9 @@ fi
 
 # build assets if this isn't Travis (which has already)
 ${CI:=false} || ./script/build-assets
+# Avoid 8000 locally so it doesn't collide with the dev server
+# (we require 8000 for testing else Sauce won't proxy our requests in Safari)
+${CI:=false} || export PORT=8010
 
 # Saucelabs bails after 90 seconds inactivity
 mocha --timeout 80000 --compilers js:babel/register $@

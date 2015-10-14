@@ -33,5 +33,6 @@ env:
     - SELENIUM_REMOTE_URL="http://localhost:4445/wd/hub"
 
   matrix:
-    - SELENIUM_BROWSER="firefox:39:Windows 7"
-    - SELENIUM_BROWSER="internet explorer:11.0:Windows 7"
+    - SELENIUM_BROWSER="internet explorer:10.0:Windows 7"
+    - SELENIUM_BROWSER="safari:8"
+    - SELENIUM_BROWSER="chrome:44:Windows 8"
