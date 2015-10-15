@@ -116,6 +116,7 @@ async function seeTheStaticMap() {
 
 async function cannotSeeTheStaticMap() {
     var map;
+
     try {
         map = await this.driver.findElement(By.css(".StaticMap"));
     } catch (error) {

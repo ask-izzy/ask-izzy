@@ -52,8 +52,12 @@ export function elementWithText(element: string, text: string): string {
  * @param {string} text - Text we're searching for.
  * @returns {string} XPath query.
  */
-export function elementWithChildText(elem: string, text: string): string {
-    const child = `${elem}//*`;
+export function elementWithChildText(element: string, text: string): string {
+    const child = `${element}//*`;
 
-    return `${elementWithText(elem, text)}|${elementWithText(child, text)}`;
+    return `${
+        elementWithText(element, text)
+    }|${
+        elementWithText(child, text)
+    }`;
 }
