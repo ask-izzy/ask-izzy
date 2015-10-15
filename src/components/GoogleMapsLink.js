@@ -21,10 +21,10 @@ class GoogleMapsLink extends React.Component {
     };
 
     googleMapsUrl(): string {
-        var toAddr = this.props.to;
+        let toAddr = this.props.to;
 
-        var start = encodeURIComponent(this.props.from);
-        var query = encodeURIComponent(
+        let start = encodeURIComponent(this.props.from);
+        let query = encodeURIComponent(
             `${toAddr.streetAddressLine1()} ${toAddr.streetAddressLine2()}`
         );
 
@@ -33,7 +33,7 @@ class GoogleMapsLink extends React.Component {
     }
 
     render(): ReactElement {
-        var {
+        let {
             className,
             children,
             ...rest,

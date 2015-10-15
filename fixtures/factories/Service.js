@@ -1,18 +1,9 @@
 /* @flow */
 
 import { Service } from "../../src/iss";
-import { Abn, Email, Url, Id, Merge } from "./Value";
-import { Location, Site, PostalAddress } from "./Location";
-import { NowOpen, OpeningHours } from "./OpeningTime";
-import { Phone } from "./Phone";
-
-export function ServiceParams(opts: ?Object) {
-    return Merge(defaults(), opts);
-}
-
-export default function ServiceFactory(opts: ?Object) {
-    return new Service(ServiceParams(opts));
-}
+import { Abn, Id, Merge } from "./Value";
+import { Location, Site } from "./Location";
+import { NowOpen } from "./OpeningTime";
 
 function defaults() {
     return {
@@ -70,8 +61,17 @@ function defaults() {
         service_types: [],
         site: Site(),
         special_requirements: "",
-        target_gender: 'u',
+        target_gender: "u",
         type: "service",
         web: "",
     };
-};
+}
+
+export function ServiceParams(opts: ?Object) {
+    return Merge(defaults(), opts);
+}
+
+export default function ServiceFactory(opts: ?Object) {
+    return new Service(ServiceParams(opts));
+}
+

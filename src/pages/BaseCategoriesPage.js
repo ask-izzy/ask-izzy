@@ -17,7 +17,7 @@ class BaseCategoriesPage extends React.Component {
             return this._category;
         }
 
-        var category = _.findWhere(categories, {
+        let category = _.findWhere(categories, {
             key: this.props.params.page,
         });
 
@@ -36,7 +36,7 @@ class BaseCategoriesPage extends React.Component {
      */
     /* flow:disable */
     get personalisationComponents(): Array<React.Component> {
-        var components = [];
+        let components = [];
 
         if (this.props.params.page) {
             components = this.category.personalisation;

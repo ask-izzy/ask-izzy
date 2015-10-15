@@ -17,7 +17,7 @@ import {
 } from "../iss/ServiceProvisions";
 
 /* Please keep this grouped and the groups sorted */
-var serviceProvisions: Array<ServiceProvision> = [
+const serviceProvisions: Array<ServiceProvision> = [
     /* Accommodation */
     provides({
         name: "Crisis accommodation for women fleeing domestic violence",

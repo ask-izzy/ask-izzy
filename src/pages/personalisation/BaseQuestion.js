@@ -171,7 +171,7 @@ class BaseQuestion extends React.Component {
      * @returns {iss.searchRequest} modified ISS search request.
      */
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
-        var value = this.answer;
+        let value = this.answer;
 
         if (value) {
             return this.getSearchForAnswer(request, value);
@@ -239,7 +239,7 @@ class BaseQuestion extends React.Component {
     }
 
     render(): ReactElement {
-        var selected =
+        let selected =
             this.state.selected || storage.getItem(this.props.name);
 
         return (

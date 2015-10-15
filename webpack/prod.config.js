@@ -4,15 +4,15 @@
 
 // Webpack config for creating the production bundle.
 
-import path              from "path";
-import webpack           from "webpack";
-import writeStats        from "./utils/write-stats";
-import commons           from "./utils/commons";
-import env               from "./env";
-import extractText       from "./extract-text";
-import cssLoaders        from "./css-loaders";
+import path from "path";
+import webpack from "webpack";
+import writeStats from "./utils/write-stats";
+import commons from "./utils/commons";
+import env from "./env";
+import extractText from "./extract-text";
+import cssLoaders from "./css-loaders";
 
-var assetsPath = path.join(__dirname, "../public/static");
+const assetsPath = path.join(__dirname, "../public/static");
 
 module.exports = {
     devtool: "source-map",
@@ -21,7 +21,17 @@ module.exports = {
             "./src/client-entry.js",
             "./src/styles/bundle.scss",
         ],
-        vendor: ["react", "material-ui", "core-decorators", "material-ui", "moment", "react-google-maps", "react-router", "react-tap-event-plugin", "react", "underscore.string", "underscore"],
+        vendor: [
+            "core-decorators",
+            "material-ui",
+            "moment",
+            "react",
+            "react-google-maps",
+            "react-router",
+            "react-tap-event-plugin",
+            "underscore",
+            "underscore.string",
+        ],
     },
     output: {
         path: assetsPath,
@@ -58,7 +68,7 @@ module.exports = {
 
         // polyfill window.fetch et al client-side
         new webpack.ProvidePlugin({
-            'es6-promise': 'es6-promise',
+            "es6-promise": "es6-promise",
         }),
 
         extractText.plugin,
@@ -74,8 +84,9 @@ module.exports = {
         commons,
 
         // stats
-        function() { this.plugin("done", writeStats); },
-
+        function() {
+            this.plugin("done", writeStats);
+        },
     ],
 };
 

@@ -35,7 +35,7 @@ class Category {
     }
 }
 
-var categories:Array<Category> = [
+const categories:Array<Category> = [
     new Category({
         name: "Housing",
         byline: "Find a place to stay",

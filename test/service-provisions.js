@@ -13,14 +13,14 @@ import yaml from "js-yaml";
 import serviceProvisions from "../src/constants/service-provisions";
 
 // import the test cases
-var tests = yaml.safeLoad(
+const tests = yaml.safeLoad(
     fs.readFileSync("./test/service-provisions.yaml", "utf8")
 );
 
 describe("Service Provisions", function() {
     tests.tests.forEach(
         test => it(test.description, () => {
-            var provides = [
+            let provides = [
                 /*::`*/
                 for (provision of serviceProvisions)
                 if (provision.match(test.description))

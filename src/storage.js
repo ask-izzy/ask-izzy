@@ -16,7 +16,7 @@ class Storage {
     }
 
     static getJSON(key: string): any {
-        var item = this.getItem(key);
+        let item = this.getItem(key);
 
         if (!item) {
             return null;

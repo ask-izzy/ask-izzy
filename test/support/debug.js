@@ -3,7 +3,7 @@
 function pauseToDebug(): Promise<void> {
     return new Promise((resolve, reject) => {
         console.log("Paused. Press any key to continue...");
-        var stdin = process.stdin;
+        const stdin = process.stdin;
 
         stdin.setRawMode(true);
         stdin.on("data", (key) => {

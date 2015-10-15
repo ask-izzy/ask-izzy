@@ -16,14 +16,14 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 
-var GeoLocationState = {
+const GeoLocationState = {
     NOT_STARTED: 0,
     RUNNING: 1,
     COMPLETE: 2,
     FAILED: 3,
 };
 
-var AutocompleteState = {
+const AutocompleteState = {
     NOT_SEARCHING: 0,
     SEARCHING: 1,
 };
@@ -55,7 +55,7 @@ class Location extends React.Component {
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         /* Coordinates are optional */
-        var coords = storage.getJSON("coordinates");
+        let coords = storage.getJSON("coordinates");
 
         if (coords && coords.latitude && coords.longitude) {
             request = Object.assign(request, {
@@ -64,7 +64,7 @@ class Location extends React.Component {
         }
 
         /* Location/Area is required */
-        var location = storage.getItem("location");
+        let location = storage.getItem("location");
 
         if (typeof location == "string") {
             return Object.assign(request, {
@@ -88,9 +88,9 @@ class Location extends React.Component {
     }
 
     async locateMe(): Promise<Object> {
-        var maps = await Maps();
-        var location = await Geolocation();
-        var possibleLocations = await maps.geocode({
+        const maps = await Maps();
+        let location = await Geolocation();
+        let possibleLocations = await maps.geocode({
             location: {
                 lat: location.coords.latitude,
                 lng: location.coords.longitude,
@@ -114,12 +114,12 @@ class Location extends React.Component {
             ));
         }
 
-        for (var geocodedLocation of possibleLocations) {
+        for (let geocodedLocation of possibleLocations) {
             if (_.contains(geocodedLocation.types, "locality")) {
                 /* build a location name from the address components specified
                  * in interestingComponent. We do this because we don't want
                  * to show all the parts of Google's formatted_address */
-                var name = [
+                let name = [
                     /*::`*/
                     for (component of geocodedLocation.address_components)
                     if (interestingComponent(component.types))
@@ -149,8 +149,8 @@ class Location extends React.Component {
         input: string,
         location: ?Object,
     ): Promise<Array<Object>> {
-        var maps = await Maps();
-        var request: AutocompletionRequest = {
+        const maps = await Maps();
+        let request: AutocompletionRequest = {
             input: input,
             types: ["geocode"],
             componentRestrictions: {
@@ -168,7 +168,7 @@ class Location extends React.Component {
 
         console.log("Autocompleting", request);
 
-        var completions = await maps.autocompletePlaces(request);
+        let completions = await maps.autocompletePlaces(request);
 
         return [
             /*::{_:`*/
@@ -216,7 +216,7 @@ class Location extends React.Component {
 
         this.locateMe()
             .then(params => {
-                var { location, name } = params;
+                let { location, name } = params;
 
                 this.setState({
                     geolocation: GeoLocationState.COMPLETE,
@@ -353,7 +353,7 @@ class Location extends React.Component {
                             onTouchTap={() => {
                                 /* set the text box to this value
                                  * and remove the autocompletions */
-                                var locationName =
+                                let locationName =
                                     `${result.suburb}, ${result.state}`;
 
                                 this.setState({

@@ -20,15 +20,15 @@ import mockISS from "./support/mock_iss/server";
 /* eslint-enable no-unused-vars */
 
 /* create the webdriver, we will reuse this promise multiple times */
-var driverPromise = webDriverInstance();
-var sessionId: ?string, driver: Webdriver.WebDriver;
-var passed = true;
+const driverPromise = webDriverInstance();
+let sessionId: ?string, driver: Webdriver.WebDriver;
+let passed = true;
 
 new Yadda.FeatureFileSearch("./test/features").each(file => {
     function shouldSkip(annotations: Object): boolean {
-        var skips = (process.env.SKIP || "").split(",");
+        let skips = (process.env.SKIP || "").split(",");
 
-        for (var skip of skips) {
+        for (let skip of skips) {
             if (annotations[skip]) {
                 return true;
             }
@@ -38,13 +38,13 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
     }
 
     function shouldInclude(annotations: Object): boolean {
-        var includes = (process.env.ONLY || "").split(",");
+        let includes = (process.env.ONLY || "").split(",");
 
         if (includes.length == 1 && includes[0] == "") {
             return true;  // no specific includes specified
         }
 
-        for (var include of includes) {
+        for (let include of includes) {
             if (annotations[include]) {
                 return true;
             }
@@ -79,7 +79,7 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
 
             if (process.env.BROWSER_LOGS) {
                 // Flush any logs from previous tests
-                var logger = new Webdriver.WebDriver.Logs(driver);
+                let logger = new Webdriver.WebDriver.Logs(driver);
 
                 await logger.get("browser");
             }
@@ -106,11 +106,11 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
             if (this.currentTest.state != "passed") {
                 passed = false;
 
-                var title = this.currentTest.title.replace(/\W+/g, "_");
+                let title = this.currentTest.title.replace(/\W+/g, "_");
 
                 if (process.env.SCREENSHOT_FAILURES) {
                     try {
-                        var data = await driver.takeScreenshot();
+                        let data = await driver.takeScreenshot();
 
                         fs.writeFileSync(`Test-${title}.png`, data, "base64");
                     } catch (err) {
@@ -120,7 +120,7 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
                 }
 
                 if (process.env.BROWSER_LOGS) {
-                    var logger = new Webdriver.WebDriver.Logs(driver);
+                    let logger = new Webdriver.WebDriver.Logs(driver);
 
                     // N.B: iterating this causes problems but map works...
                     // very strange
@@ -148,7 +148,7 @@ after(async function(): Promise<void> {
 
         try {
             await new Promise((resolve, reject) => {
-                var api = new SauceLabs({
+                let api = new SauceLabs({
                     username: process.env.SAUCE_USERNAME,
                     password: process.env.SAUCE_ACCESS_KEY,
                 });

@@ -31,12 +31,12 @@ class Intro extends React.Component {
     // flow:disable
     get seekingHelpWith(): string {
         try {
-            var category = this.context.controller.category;
+            const category = this.context.controller.category;
 
             return category.byline.toLocaleLowerCase() ||
                 `with ${category.name.toLocaleLowerCase()}`;
         } catch (error) {
-            var search = this.context.controller.props.params.search;
+            const search = this.context.controller.props.params.search;
 
             return `with ${search.toLocaleLowerCase()}`;
         }

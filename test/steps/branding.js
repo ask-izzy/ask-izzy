@@ -38,7 +38,7 @@ module.exports = (function() {
 })();
 
 async function seeTheBrandingHeader(): Promise<void> {
-    var container = within(
+    const container = within(
         "//*[@class='branding-container']"
     );
 
@@ -51,7 +51,7 @@ async function seeTheBrandingHeader(): Promise<void> {
 }
 
 async function seeTheSearchBar(): Promise<void> {
-    var container = within(
+    const container = within(
         "//*[@class='HeaderBar']"
     );
 
@@ -74,8 +74,8 @@ async function seeTheSearchBar(): Promise<void> {
 async function seeTheCategoryList(
     categories: Array<string>,
 ): Promise<void> {
-    for (var idx = 0; idx < categories.length; idx++) {
-        var container = within(
+    for (let idx = 0; idx < categories.length; idx++) {
+        let container = within(
             `//*[@class='List categories']/div[position()=${idx + 1}]`
         );
 
@@ -88,7 +88,7 @@ async function seeTheCategoryList(
 }
 
 async function seeTheBrandingFooter(): Promise<void> {
-    var container = within(
+    const container = within(
         "//footer"
     );
 

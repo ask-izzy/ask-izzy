@@ -11,7 +11,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     nextStep(): void {
         // Start from the beginning in case an earlier question
         // was not answered (eg we landed here via a bookmark)
-        var nextSubpageIdx = 0;
+        let nextSubpageIdx = 0;
 
         // Advance until we find an unanswered question.
         while (
@@ -35,7 +35,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     }
 
     render(): ReactElement {
-        var subpage = this.currentComponent;
+        const subpage = this.currentComponent;
 
         return (
             <div className="PersonalisationPage">

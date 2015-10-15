@@ -2,7 +2,7 @@
 
 import { Sequence, Merge } from "./Value";
 
-var streetNo = Sequence();
+const streetNo = Sequence();
 
 export function Location(props: ?Object): issLocation {
     return Merge({
@@ -23,10 +23,12 @@ export function Location(props: ?Object): issLocation {
     }, props);
 }
 
-var siteId = Sequence();
+const siteId = Sequence();
+
 export function Site(props: ?Object) {
-    var sId = siteId();
-    var oId = siteId();
+    const sId = siteId();
+    const oId = siteId();
+
     return Merge({
         id: sId,
         name: `Home of ${sId}`,
@@ -37,7 +39,8 @@ export function Site(props: ?Object) {
     }, props);
 }
 
-var poBox = Sequence();
+const poBox = Sequence();
+
 export function PostalAddress(props: ?Object) {
     return Merge({
         line1: `PO box ${poBox()}`,

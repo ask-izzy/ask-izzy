@@ -38,7 +38,7 @@ class Address extends React.Component {
     };
 
     render(): ReactElement {
-        var location = this.props.location;
+        let location = this.props.location;
 
         // FIXME: GoogleMapsLink should be a slide out static map
         return (

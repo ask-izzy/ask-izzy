@@ -47,7 +47,7 @@ class ResultsMapPage extends BaseResultsPage {
      * @returns {Promise} the Google Maps object.
      */
     getMap(): Promise<Object> {  // FIXME: use actual type
-        var map = this.refs.map;
+        const map = this.refs.map;
 
         return new Promise((resolve, reject) => {
             function checkMaps() {
@@ -82,10 +82,10 @@ class ResultsMapPage extends BaseResultsPage {
      */
     showWholeMap(): void {
         /* update the map bounds */
-        var maps = this.state.maps.api;
-        var bounds = new maps.LatLngBounds();
+        const maps = this.state.maps.api;
+        let bounds = new maps.LatLngBounds();
 
-        for (var object of this.state.objects) {
+        for (let object of this.state.objects) {
             if (object.location.point) {
                 bounds.extend(new maps.LatLng(object.location.point.lat,
                                               object.location.point.lon));
@@ -122,7 +122,7 @@ class ResultsMapPage extends BaseResultsPage {
     }
 
     render(): ReactElement {
-        var selectedServices = this.state.selectedServices || [];
+        let selectedServices = this.state.selectedServices || [];
 
         return (
             <div className="ResultsMapPage">
@@ -148,8 +148,8 @@ class ResultsMapPage extends BaseResultsPage {
     }
 
     renderMap(): ReactElement {
-        var selectedServices = this.state.selectedServices || [];
-        var mapHeight = 0;
+        let selectedServices = this.state.selectedServices || [];
+        let mapHeight = 0;
 
         try {
             /* calculate the height of the map */

@@ -1,7 +1,7 @@
 /* @flow */
 
-/* jscs:disable */
-var objects: Object = {
+/* eslint-disable max-len */
+const objects: Object = {
     phoneableService: {
         id: 5551234,
         name: "Phoneable service",
@@ -13,69 +13,69 @@ var objects: Object = {
                 "close": "17:00:00",
                 "day": "Monday",
                 "note": "",
-                "open": "09:00:00"
+                "open": "09:00:00",
             },
             {
                 "close": "17:00:00",
                 "day": "Tuesday",
                 "note": "",
-                "open": "09:00:00"
+                "open": "09:00:00",
             },
             {
                 "close": "17:00:00",
                 "day": "Tuesday",
                 "note": "",
-                "open": "09:00:00"
+                "open": "09:00:00",
             },
             {
                 "close": "17:00:00",
                 "day": "Wednesday",
                 "note": "",
-                "open": "08:00:00"
+                "open": "08:00:00",
             },
             {
                 "close": "17:00:00",
                 "day": "Thursday",
                 "note": "",
-                "open": "09:00:00"
+                "open": "09:00:00",
             },
             {
                 "close": "17:00:00",
                 "day": "Friday",
                 "note": "",
-                "open": "09:00:00"
-            }
+                "open": "09:00:00",
+            },
         ],
         phones: [
             {
                 "comment": "",
                 "kind": "phone",
-                "number": "(03) 3333 3333"
+                "number": "(03) 3333 3333",
             },
             {
                 "comment": "",
                 "kind": "fax",
-                "number": "(03) 5555 5555"
+                "number": "(03) 5555 5555",
             },
             {
                 "comment": "",
                 "kind": "mobile",
-                "number": "0477 777 777"
+                "number": "0477 777 777",
             },
             {
                 "comment": "(really a mobile)",
                 "kind": "phone",
-                "number": "0477 777 777"
+                "number": "0477 777 777",
             },
             {
                 "comment": "",
                 "kind": "freecall",
-                "number": "1300 111 111"
+                "number": "1300 111 111",
             },
             {
                 "comment": "",
                 "kind": "tty",
-                "number": "(03) 9999 9999"
+                "number": "(03) 9999 9999",
             },
         ],
         emails: [],
@@ -93,7 +93,7 @@ var objects: Object = {
         catchment: "Carlton",
         eligibility_info: "",
         ineligibility_info: "",
-        service_types: ['Housing Service'],
+        service_types: ["Housing Service"],
         now_open: {
             now_open: false,
         },
@@ -102,7 +102,7 @@ var objects: Object = {
         emails: [],
         web: null,
         location: {
-            suburb: 'Richmond',
+            suburb: "Richmond",
             point: {
                 lat: -37.8228,
                 lon: 144.998,
@@ -114,7 +114,7 @@ var objects: Object = {
         name: "Transitional Housing Service",
         description: "Transitional housing service",
         location: {
-            suburb: 'Richmond',
+            suburb: "Richmond",
         },
     },
     youthSupportNet: {
@@ -125,14 +125,14 @@ var objects: Object = {
             id: 333,
             name: "Youth Support Net",
         },
-        service_types: ['Accommodation'],
+        service_types: ["Accommodation"],
         now_open: {
             now_open: null,
         },
         emails: [],
         opening_hours: [],
         location: {
-            suburb: 'Richmond',
+            suburb: "Richmond",
             point: {
                 lat: -37.8237,
                 lon: 144.985,
@@ -147,13 +147,13 @@ var objects: Object = {
             id: 333,
             name: "Susan's House",
         },
-        service_types: ['Refuge'],
+        service_types: ["Refuge"],
         now_open: {
             now_open: null,
         },
         opening_hours: [],
         location: {
-            suburb: 'Richmond',
+            suburb: "Richmond",
             point: {
                 lat: -37.8237,
                 lon: 144.985,
@@ -172,7 +172,7 @@ var objects: Object = {
         "billing_method": "",
         "capacity": {
             "status": "undef",
-            "status_text": ""
+            "status_text": "",
         },
         "catchment": "Australia.",
         "cost": "",
@@ -180,27 +180,27 @@ var objects: Object = {
         "datasets": {
             "ISS VIC": {
                 "appears": true,
-                "external_id": "30879"
-            }
+                "external_id": "30879",
+            },
         },
         "description": "An Australia-wide listing of over 340,000 records of support services and agencies in the areas of care, disabilities, education, employment, finance, health, housing, law, material aid and recreation.  Information can be sought by a free-text search, with alternative searches by agency name, service name, keyword searching or according to the category or focus of the service.\r\nA real-time accommodation vacancy register and a respite planner are also available.  The vacancies on these registers are updated directly by the agency providing the service.\r\nCustomised directories or data management services using the Infoxchange Service Seeker as the source are also available.",
         "eligibility_info": "",
         "emails": [
             {
                 "comment": "",
-                "email": "database@infoxchange.net.au"
-            }
+                "email": "database@infoxchange.net.au",
+            },
         ],
         "endpoints": [
             {
                 "description": "",
                 "forms": [
-                    "hsnet"
+                    "hsnet",
                 ],
                 "priority": 10,
                 "scheme": "s2x+https",
-                "uri": "s2x+https://s2x-staging.infoxchangeapps.net.au/api/v1/service/866464/"
-            }
+                "uri": "s2x+https://s2x-staging.infoxchangeapps.net.au/api/v1/service/866464/",
+            },
         ],
         "funding_body": "Self-funding",
         "healthcare_card_holders": false,
@@ -217,7 +217,7 @@ var objects: Object = {
             "level": "",
             "point": {
                 "lat": -37.800753,
-                "lon": 145.000404
+                "lon": 145.000404,
             },
             "postcode": "3121",
             "state": "VIC",
@@ -225,81 +225,81 @@ var objects: Object = {
             "street_number": "33",
             "street_suffix": "",
             "street_type": "Street",
-            "suburb": "RICHMOND"
+            "suburb": "RICHMOND",
         },
         "name": "Infoxchange Service Seeker (ISS) Online Databases",
         "ndis_approved": false,
         "now_open": {
             "local_time": "11:02:00",
             "notes": "",
-            "now_open": true
+            "now_open": true,
         },
         "opening_hours": [
             {
                 "close": "17:00:00",
                 "day": "Monday",
                 "note": "",
-                "open": "09:00:00"
+                "open": "09:00:00",
             },
             {
                 "close": "17:00:00",
                 "day": "Tuesday",
                 "note": "",
-                "open": "09:00:00"
+                "open": "09:00:00",
             },
             {
                 "close": "17:00:00",
                 "day": "Tuesday",
                 "note": "",
-                "open": "09:00:00"
+                "open": "09:00:00",
             },
             {
                 "close": "17:00:00",
                 "day": "Wednesday",
                 "note": "",
-                "open": "09:00:00"
+                "open": "09:00:00",
             },
             {
                 "close": "17:00:00",
                 "day": "Wednesday",
                 "note": "",
-                "open": "09:00:00"
+                "open": "09:00:00",
             },
             {
                 "close": "17:00:00",
                 "day": "Thursday",
                 "note": "",
-                "open": "09:00:00"
+                "open": "09:00:00",
             },
             {
                 "close": "17:00:00",
                 "day": "Friday",
                 "note": "",
-                "open": "09:00:00"
-            }
+                "open": "09:00:00",
+            },
         ],
         "parking_info": "Street parking available",
         "phones": [
             {
                 "comment": "Service Seeker Manager, Robyn Karlsen",
                 "kind": "phone",
-                "number": "(03) 9418 7447"
+                "number": "(03) 9418 7447",
             },
             {
                 "comment": "Local call cost",
                 "kind": "phone",
-                "number": "1300 306 645"
+                "number": "1300 306 645",
             },
             {
                 "comment": "",
                 "kind": "fax",
-                "number": "(03) 9486 9344"
+                "number": "(03) 9486 9344",
             },
             {
                 "comment": "",
                 "kind": "fax",
-                "number": "(03) 9486 9344"
-            }
+                "number": "(03) 9486 9344",
+            },
         ],
         "postal_address": [
             {
@@ -307,8 +307,8 @@ var objects: Object = {
                 "line2": "",
                 "postcode": "",
                 "state": "",
-                "suburb": ""
-            }
+                "suburb": "",
+            },
         ],
         "public_transport_info": "Nearest train station, North Richmond; Bus 246, 250; Tram 24, 109 to stop 19",
         "referral_info": "",
@@ -318,13 +318,13 @@ var objects: Object = {
             "name": "Infoxchange",
             "organisation": {
                 "id": 793818,
-                "name": "Infoxchange"
-            }
+                "name": "Infoxchange",
+            },
         },
         "special_requirements": "",
         "target_gender": "u",
         "type": "service",
-        "web": "http://www.serviceseeker.com.au"
+        "web": "http://www.serviceseeker.com.au",
     },
     legal: {
         id: 13841,
@@ -337,7 +337,7 @@ var objects: Object = {
         catchment: "Carlton",
         eligibility_info: "",
         ineligibility_info: "",
-        service_types: ['Legal'],
+        service_types: ["Legal"],
         now_open: {
             now_open: false,
         },
@@ -346,7 +346,7 @@ var objects: Object = {
         emails: [],
         web: null,
         location: {
-            suburb: 'Carlton',
+            suburb: "Carlton",
         },
     },
     domesticviolence: {
@@ -361,7 +361,7 @@ var objects: Object = {
         "billing_method": "",
         "capacity": {
             "status": "undef",
-            "status_text": ""
+            "status_text": "",
         },
         "catchment": "Australia.",
         "cost": "Nil.",
@@ -369,36 +369,36 @@ var objects: Object = {
         "datasets": {
             "ISS ACT": {
                 "appears": true,
-                "external_id": "22597"
+                "external_id": "22597",
             },
             "ISS NSW": {
                 "appears": true,
-                "external_id": "203514"
+                "external_id": "203514",
             },
             "ISS NT": {
                 "appears": true,
-                "external_id": "26642"
+                "external_id": "26642",
             },
             "ISS QLD": {
                 "appears": true,
-                "external_id": "52853"
+                "external_id": "52853",
             },
             "ISS SA": {
                 "appears": true,
-                "external_id": "30834"
+                "external_id": "30834",
             },
             "ISS TAS": {
                 "appears": true,
-                "external_id": "24001"
+                "external_id": "24001",
             },
             "ISS VIC": {
                 "appears": true,
-                "external_id": "156525"
+                "external_id": "156525",
             },
             "ISS WA": {
                 "appears": true,
-                "external_id": "28306"
-            }
+                "external_id": "28306",
+            },
         },
         "description": "Provides free twenty-four hours, seven days a week telephone and online counselling, support and referral for people affected by sexual assault, domestic or family violence in Australia.\r\nOnline counselling can be accessed via www.1800respect.org.au",
         "details": "",
@@ -406,8 +406,8 @@ var objects: Object = {
         "emails": [
             {
                 "comment": "",
-                "email": "info@rape-dvservices.org.au"
-            }
+                "email": "info@rape-dvservices.org.au",
+            },
         ],
         "endpoints": [],
         "funding_body": "Department of Social Services",
@@ -422,87 +422,87 @@ var objects: Object = {
         "location": {
             "postcode": "2041",
             "state": "NSW",
-            "suburb": "BALMAIN"
+            "suburb": "BALMAIN",
         },
         "name": "1800RESPECT",
         "ndis_approved": false,
         "now_open": {
             "local_time": null,
             "notes": "Timezone could not be determined",
-            "now_open": null
+            "now_open": null,
         },
         "opening_hours": [
             {
                 "close": "00:00:00",
                 "day": "Monday",
                 "note": "",
-                "open": "00:00:00"
+                "open": "00:00:00",
             },
             {
                 "close": "00:00:00",
                 "day": "Tuesday",
                 "note": "",
-                "open": "00:00:00"
+                "open": "00:00:00",
             },
             {
                 "close": "00:00:00",
                 "day": "Wednesday",
                 "note": "",
-                "open": "00:00:00"
+                "open": "00:00:00",
             },
             {
                 "close": "00:00:00",
                 "day": "Thursday",
                 "note": "",
-                "open": "00:00:00"
+                "open": "00:00:00",
             },
             {
                 "close": "00:00:00",
                 "day": "Friday",
                 "note": "",
-                "open": "00:00:00"
+                "open": "00:00:00",
             },
             {
                 "close": "00:00:00",
                 "day": "Saturday",
                 "note": "",
-                "open": "00:00:00"
+                "open": "00:00:00",
             },
             {
                 "close": "00:00:00",
                 "day": "Sunday",
                 "note": "",
-                "open": "00:00:00"
+                "open": "00:00:00",
             },
             {
                 "close": "00:00:00",
                 "day": "Public Holiday",
                 "note": "",
-                "open": "00:00:00"
-            }
+                "open": "00:00:00",
+            },
         ],
         "parking_info": "",
         "phones": [
             {
                 "comment": "Counsellor, free call",
                 "kind": "phone",
-                "number": "1800 737 732"
+                "number": "1800 737 732",
             },
             {
                 "comment": "Administration",
                 "kind": "phone",
-                "number": "(02) 8585 0333"
+                "number": "(02) 8585 0333",
             },
             {
                 "comment": "",
                 "kind": "fax",
-                "number": "(02) 9555 5911"
+                "number": "(02) 9555 5911",
             },
             {
                 "comment": "",
                 "kind": "freecall",
-                "number": "1800 737 732"
-            }
+                "number": "1800 737 732",
+            },
         ],
         "postal_address": [
             {
@@ -510,8 +510,8 @@ var objects: Object = {
                 "line2": "",
                 "postcode": "1470",
                 "state": "NSW",
-                "suburb": "DRUMMOYNE"
-            }
+                "suburb": "DRUMMOYNE",
+            },
         ],
         "public_transport_info": "",
         "referral_info": "Self.",
@@ -521,13 +521,13 @@ var objects: Object = {
             "name": "Rape & Domestic Violence Services Australia",
             "organisation": {
                 "id": 163539,
-                "name": "Rape & Domestic Violence Services Australia"
-            }
+                "name": "Rape & Domestic Violence Services Australia",
+            },
         },
         "special_requirements": "",
         "target_gender": "u",
         "type": "service",
-        "web": "http://www.1800respect.org.au"
+        "web": "http://www.1800respect.org.au",
     },
     unhelpful: {
         id: 13844,
@@ -547,7 +547,7 @@ var objects: Object = {
         opening_hours: [],
         phones: [],
         location: {
-            suburb: 'Carlton',
+            suburb: "Carlton",
         },
     },
 }

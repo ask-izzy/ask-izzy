@@ -6,8 +6,8 @@ import React from "react";
 export default class BasePage extends React.Component {
 
     render(): ReactElement {
-        var domain = process.env.SITE_DOMAIN || "ask-izzy.org.au";
-        var mailLink = `mailto:support@${domain}`;
+        const domain = process.env.SITE_DOMAIN || "ask-izzy.org.au";
+        const mailLink = `mailto:support@${domain}`;
 
         return (
             <div className="BrandedPage">

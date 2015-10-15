@@ -31,7 +31,7 @@ class Infobox extends React.Component {
     }};
 
     render(): ReactElement {
-        var {
+        let {
             linkText,
             ...other,
         } = this.props;

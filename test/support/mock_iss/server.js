@@ -6,11 +6,11 @@ import cors from "cors";
 import express from "express";
 import services from "../../../fixtures/services";
 import ServiceFactory from "../../../fixtures/factories/Service";
-var app = express();
+const app = express();
 
 app.use(cors());
 
-var mocks = {};
+let mocks = {};
 
 export function mock(service: Object): void {
     if (mocks[service.id]) {
@@ -26,7 +26,7 @@ export function mock(service: Object): void {
 /* eslint-disable complexity */
 /* FIXME: refactor */
 app.get("/api/v3/search/", (req, res) => {
-    var mockId = parseInt(req.query.q);
+    let mockId = parseInt(req.query.q);
 
     if (mocks[mockId]) {
         res.json({
@@ -213,7 +213,7 @@ app.get("/api/v3/search/", (req, res) => {
             ],
         });
     } else if (req.query.q.match(/material aid/)) {
-        var object = {
+        const object = {
             id: 444,
             name: "Community Lunch",
             description: "A weekly lunch.",

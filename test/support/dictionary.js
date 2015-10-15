@@ -40,7 +40,7 @@ function parseObject(lines: Array<string>): Object {
      * Key | Value
      * Key | Value
      */
-    var downcaseKey = arr => [sanitizeKey(arr[0]), arr[1]];
+    let downcaseKey = arr => [sanitizeKey(arr[0]), arr[1]];
 
     return _.object(
         lines.map(
@@ -64,7 +64,7 @@ function parseTable(lines: Array<string>): Array<Object> | Object {
         return parseObject(lines);
     }
 
-    var header = lines
+    let header = lines
         .shift()
         .split("|")
         .map(cell => cell.trim());
@@ -80,7 +80,7 @@ function parseTable(lines: Array<string>): Array<Object> | Object {
 }
 
 function tableConverter(str: string, done: callback): void {
-    var lines = str.split("\n");
+    let lines = str.split("\n");
 
     done(null, parseTable(lines));
 }
@@ -96,15 +96,15 @@ function serviceConverter(str: string, done: callback): void {
      *     Cell   | Cell   | Cell
      * * FieldName (eg `Web`): <value>
      */
-    var lines = str.split("\n");
+    let lines = str.split("\n");
 
-    var serviceProps = {};
-    var currentTableLines, // eg "Emails"
+    let serviceProps = {};
+    let currentTableLines, // eg "Emails"
         currentTable,      // the lines which constitute a table
         line;              // The line we're currently parsing
 
-    var lineIsValueRegexp = /^\s*\* ([^:]+): (.*)$/;
-    var lineIsTableHeaderRegexp = /^\s*\* ([^\s:]+)$/;
+    let lineIsValueRegexp = /^\s*\* ([^:]+): (.*)$/;
+    let lineIsTableHeaderRegexp = /^\s*\* ([^\s:]+)$/;
 
     function sanitizeValue(value: string): string {
         if (value == "(nada)") {
@@ -132,8 +132,8 @@ function serviceConverter(str: string, done: callback): void {
     }
 
     for (line of lines) {
-        var isValue = line.match(lineIsValueRegexp);
-        var isTableHeader = line.match(lineIsTableHeaderRegexp);
+        let isValue = line.match(lineIsValueRegexp);
+        let isTableHeader = line.match(lineIsTableHeaderRegexp);
 
         if (isValue) {
             serviceProps[sanitizeKey(isValue[1])] = sanitizeValue(isValue[2]);
@@ -152,7 +152,7 @@ function serviceConverter(str: string, done: callback): void {
     done(null, Service(serviceProps));
 }
 
-var dictionary = new Yadda.Dictionary()
+const dictionary = new Yadda.Dictionary()
     .define("LATITUDE", /(\d+.\d+[NS])/, latitudeConverter)
     .define("LONGITUDE", /(\d+.\d+[EW])/, longitudeConverter)
     .define("lines", /([^\u0000]*)/, linesConverter)

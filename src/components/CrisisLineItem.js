@@ -25,12 +25,12 @@ class CrisisLineItem extends React.Component {
     }};
 
     render(): ReactElement {
-        var {
+        let {
             object,
         } = this.props;
 
-        for (var kind of ["freecall", "phone", "mobile"]) {
-            var phone = _.findWhere(object.phones, {kind: kind});
+        for (let kind of ["freecall", "phone", "mobile"]) {
+            let phone = _.findWhere(object.phones, {kind: kind});
 
             if (phone) {
                 return (

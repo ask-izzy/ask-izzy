@@ -2,8 +2,8 @@
 
 import ExtractTextPlugin from "extract-text-webpack-plugin";
 
-var cssExtractor = new ExtractTextPlugin(
-    '[name]-[chunkhash].css',
+const cssExtractor = new ExtractTextPlugin(
+    "[name]-[chunkhash].css",
     {allChunks: true},
 );
 

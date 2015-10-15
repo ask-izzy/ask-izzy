@@ -42,7 +42,7 @@ export default class ServicePane extends React.Component {
     }};
 
     async getSiblingServices(): Promise<void> {
-        var response = await this.props.service.getSiblingServices();
+        let response = await this.props.service.getSiblingServices();
 
         this.setState({siblings: response.objects});
     }
@@ -96,7 +96,7 @@ export default class ServicePane extends React.Component {
     }
 
     renderServiceProvisions(): ReactElement {
-        var object = this.props.service;
+        let object = this.props.service;
 
         if (_.isEmpty(object.serviceProvisions)) {
             return <div />;
