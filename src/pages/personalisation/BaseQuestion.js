@@ -17,7 +17,7 @@ import * as iss from "../../iss";
  */
 class Search {
     search: iss.searchRequest;
-    _chain: Search;
+    chain: Search;
 
     constructor(search: string|iss.searchRequest) {
         if (typeof search === "string") {
@@ -31,18 +31,35 @@ class Search {
         // Default behaviour is to do nothing but chain up
         search = Object.assign({}, search);
 
-        if (this._chain) {
-            search = this._chain.compose(search);
+        if (this.chain) {
+            search = this.chain.compose(search);
         }
 
         return search;
     }
 
-    chain(search: Search): Search {
-        this._chain = search;
+    /* eslint-disable no-use-before-define */
+    append(search: string|iss.searchRequest): AppendToSearch {
+        let next = append(search);
 
-        return this;
+        next.chain = this;
+        return next;
     }
+
+    replace(search: string|iss.searchRequest): ReplaceSearch {
+        let next = replace(search);
+
+        next.chain = this;
+        return next;
+    }
+
+    remove(search: string|iss.searchRequest): RemoveSearch {
+        let next = remove(search);
+
+        next.chain = this;
+        return next;
+    }
+    /* eslint-enable no-use-before-define */
 }
 
 /**
