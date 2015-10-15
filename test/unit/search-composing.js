@@ -70,4 +70,19 @@ describe("Compose personalisation search terms", function() {
             q: "substance abuse  detox rehab",  // FIXME: normalise space
         });
     });
+
+    it("Replace search phrase entirely", function() {
+        const pages = require("../../src/pages/personalisation");
+        let request = {
+            q: "substance abuse gambling",
+        };
+
+        // flow:disable -- flow is confused about exports
+        request = pages.AddictionSubcategories.getSearchForAnswer(
+            request, new Set(["Needle exchange"])
+        );
+        assert.deepEqual(request, {
+            q: "needle exchange",
+        });
+    });
 });
