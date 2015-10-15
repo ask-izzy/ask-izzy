@@ -2,7 +2,6 @@
 import React from "react";
 import icons from "../icons";
 import ScreenReader from "./ScreenReader";
-import GoogleMapsLink from "./GoogleMapsLink";
 import Location from "../iss/Location";
 
 class Address extends React.Component {
@@ -47,19 +46,17 @@ class Address extends React.Component {
                 <ScreenReader>
                     <h4>Address</h4>
                 </ScreenReader>
-                <GoogleMapsLink to={location}>
-                    <icons.Map />
-                    <div className="Address-wrapper">
-                        {' '}
-                        <div className="street">
-                            {location.streetAddressLine1()}
-                        </div>
-                        {' '}
-                        <div className="suburb">
-                            {location.streetAddressLine2()}
-                        </div>
+                <icons.Map />
+                <div className="Address-wrapper">
+                    {' '}
+                    <div className="street">
+                        {location.streetAddressLine1()}
                     </div>
-                </GoogleMapsLink>
+                    {' '}
+                    <div className="suburb">
+                        {location.streetAddressLine2()}
+                    </div>
+                </div>
             </div>
         );
     }
