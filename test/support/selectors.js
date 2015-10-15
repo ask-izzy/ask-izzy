@@ -44,3 +44,16 @@ export function elementWithText(element: string, text: string): string {
     return `//${element}` +
         `[normalize-space(.//text()) = normalize-space(${text})]`;
 }
+
+/**
+ * Return any element with the given text.
+ *
+ * @param {string} element - Element type we're looking for.
+ * @param {string} text - Text we're searching for.
+ * @returns {string} XPath query.
+ */
+export function elementWithChildText(elem: string, text: string): string {
+    const child = `${elem}//*`;
+
+    return `${elementWithText(elem, text)}|${elementWithText(child, text)}`;
+}
