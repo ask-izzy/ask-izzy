@@ -51,9 +51,14 @@ class Search {
 class AppendToSearch extends Search {
     compose(search) {
         search = super.compose(search);
-        search.q = (search.q || "") + " " + (this.search.q || "");
-        search.age_groups = (search.age_groups || [])
-            .concat(this.search.age_groups || []);
+        if (this.search.q) {
+            search.q = (search.q || "") + " " + this.search.q;
+        }
+
+        if (this.search.age_groups) {
+            search.age_groups = (search.age_groups || [])
+                .concat(this.search.age_groups);
+        }
 
         return search;
     }
@@ -83,7 +88,9 @@ class RemoveSearch extends Search {
     compose(search) {
         search = super.compose(search);
 
-        search.q = (search.q || "").replace(this.search.q || "", "");
+        if (this.search.q) {
+            search.q = (search.q || "").replace(this.search.q, "");
+        }
 
         return search;
     }
