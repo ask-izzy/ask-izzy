@@ -105,8 +105,8 @@ class RemoveSearch extends Search {
     compose(search) {
         search = super.compose(search);
 
-        if (this.search.q) {
-            search.q = (search.q || "").replace(this.search.q, "");
+        if (search.q && this.search.q) {
+            search.q = search.q.replace(this.search.q, "");
         }
 
         return search;
