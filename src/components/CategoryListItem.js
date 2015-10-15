@@ -21,7 +21,7 @@ class CategoryListItem extends React.Component {
     }};
 
     render(): ReactElement {
-        var Icon = this.props.category.icon || icons.House;
+        let Icon = this.props.category.icon || icons.House;
 
         return (
             <mui.ListItem

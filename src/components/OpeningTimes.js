@@ -19,7 +19,8 @@ function fixture(
 ): Object {
     // Moment is fixed to Wednesday 15/9/2015 at 1pm
     time = time || moment("2015-09-09 1pm", "YYYY-MM-DD ha");
-    var timeFn = () => moment(time);
+
+    const timeFn = () => moment(time);
 
     return {
         object: new ServiceOpening(
@@ -132,7 +133,7 @@ class OpeningTimes extends React.Component {
             return "";
         }
 
-        var timeValues = values.map(value => {
+        let timeValues = values.map(value => {
             if (moment.isMoment(value)) {
                 return value.format("h:mm A");
             }
@@ -145,8 +146,8 @@ class OpeningTimes extends React.Component {
     }
 
     render(): ReactElement {
-        var open = this.props.object.now_open;
-        var renderMethod: ?Function;
+        let open = this.props.object.now_open;
+        let renderMethod: ?Function;
 
         if (open === true) {
             renderMethod = this.renderOpen;
@@ -173,7 +174,7 @@ class OpeningTimes extends React.Component {
      * Render the opening hours if ISS says it's open
      */
     renderOpen(): ReactElement {
-        var closesAt = this.props.object.nextCloses;
+        let closesAt = this.props.object.nextCloses;
 
         return (
             <span className="until">
@@ -188,15 +189,15 @@ class OpeningTimes extends React.Component {
      * Render the opening hours if ISS says it's closed
      */
     renderClosed(): ReactElement {
-        var day = "";
+        let day = "";
 
         if (this.props.object.nextOpeningTimes) {
-            var nextOpen = this.props.object.nextOpeningTimes.start;
-            var startToday = this.props.moment().startOf("day");
-            var daysAway = moment(nextOpen)
+            let nextOpen = this.props.object.nextOpeningTimes.start;
+            let startToday = this.props.moment().startOf("day");
+            let daysAway = moment(nextOpen)
                 .startOf("day")
                 .diff(startToday, "days");
-            var dayName = nextOpen.format("dddd");
+            let dayName = nextOpen.format("dddd");
 
             if (daysAway == 0) {
                 day = this.ifTime`today ${nextOpen}`;
@@ -223,7 +224,7 @@ class OpeningTimes extends React.Component {
      * the place is currently open.
      */
     renderUnsure(): ReactElement {
-        var open = this.props.object.nextOpeningTimes;
+        let open = this.props.object.nextOpeningTimes;
 
         if (!open) {
             return (
@@ -233,8 +234,8 @@ class OpeningTimes extends React.Component {
             );
         }
 
-        var start = this.ifTime`from ${open.start}`;
-        var end = this.ifTime`until ${open.end}`;
+        let start = this.ifTime`from ${open.start}`;
+        let end = this.ifTime`until ${open.end}`;
 
         return (
             <span className="when">

@@ -32,6 +32,6 @@ if ! $HAVE_FLOW ; then
 fi
 
 check "jsonlint package.json > /dev/null"
-check "eslint src/ test/"
+check "eslint src/ test/ fixtures/ webpack/"
 check "sass-lint -v"
 check "flow"

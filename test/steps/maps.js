@@ -36,10 +36,10 @@ module.exports = (function() {
 async function instrumentMap(): Promise<void> {
     await this.driver.executeScript(() => {
         /* Instrument Map */
-        var RealMap = google.maps.Map;
+        let RealMap = google.maps.Map;
 
         google.maps.Map = function() {
-            var map = RealMap.apply(this, arguments);
+            let map = RealMap.apply(this, arguments);
 
             this.recordMap();
             return map;
@@ -52,11 +52,11 @@ async function instrumentMap(): Promise<void> {
         };
 
         /* Instrument Marker */
-        var RealMarker = google.maps.Marker;
+        let RealMarker = google.maps.Marker;
 
         google.maps.markers = [];
         google.maps.Marker = function() {
-            var marker = RealMarker.apply(this, arguments);
+            let marker = RealMarker.apply(this, arguments);
 
             this.recordMarker();
             return marker;
@@ -77,7 +77,7 @@ async function clickMap(): Promise<void> {
 
 async function clickMarker(title: string): Promise<void> {
     await this.driver.executeScript(title => {
-        for (var marker of google.maps.markers) {
+        for (let marker of google.maps.markers) {
             if (title == marker.getTitle()) {
                 google.maps.event.trigger(marker, "click", {
                     latLng: marker.getPosition(),
@@ -89,13 +89,13 @@ async function clickMarker(title: string): Promise<void> {
 }
 
 async function assertMap(): Promise<void> {
-    var nMaps = await this.driver.executeScript(
+    let nMaps = await this.driver.executeScript(
         () => google.maps.maps.length
     );
 
     assert.equal(nMaps, 1);
 
-    var visible = await this.driver
+    let visible = await this.driver
                     .findElement(By.css(".gm-style"))
                     .isDisplayed();
 
@@ -103,21 +103,21 @@ async function assertMap(): Promise<void> {
 }
 
 async function assertGoogleMapsLink(linkText: string) {
-    var link = await this.driver.findElement(By.partialLinkText(linkText));
-    var visible = await link.isDisplayed();
+    let link = await this.driver.findElement(By.partialLinkText(linkText));
+    let visible = await link.isDisplayed();
 
     assert(visible, `Link '${linkText}' was present but not visible`);
 
-    var href = await link.getAttribute("href");
-    var sel = /^https:\/\/maps.google.com\/.*/;
+    let href = await link.getAttribute("href");
+    let sel = /^https:\/\/maps.google.com\/.*/;
 
     assert(href.match(sel), "Expected a link to google maps");
 }
 
 async function assertMarkers(table: Array<Object>): Promise<void> {
-    var markers = await this.driver.executeScript(
+    let markers = await this.driver.executeScript(
         () => google.maps.markers.map(marker => {
-            var position = marker.getPosition();
+            let position = marker.getPosition();
 
             return {
                 Title: marker.getTitle(),

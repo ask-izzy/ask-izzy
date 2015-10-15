@@ -76,15 +76,13 @@ class ResultsListPage extends BaseResultsPage {
     }
 
     renderErrorMessage(): ReactElement {
-
-        var message = this.state.error;
+        let message = this.state.error;
 
         return (<p className="errorMessage">{message}</p>);
     }
 
     renderHomeLink(): ReactElement {
-
-        var linkText = "Go back";
+        let linkText = "Go back";
 
         return (<Link
             className="homeLink"
@@ -137,7 +135,7 @@ class ResultsListPage extends BaseResultsPage {
             }
             <div className="resultsContainer">{
                 this.results.map((object, index) => {
-                    var elem = object.staticText ?
+                    let elem = object.staticText ?
                         React.addons.cloneWithProps(object.node)
                     : object.crisis ?
                         <components.CrisisLineItem
@@ -147,7 +145,7 @@ class ResultsListPage extends BaseResultsPage {
                         object={object}
                       />;
 
-                    var klass = elem.type.displayName || "other";
+                    let klass = elem.type.displayName || "other";
 
                     return (
                         <div

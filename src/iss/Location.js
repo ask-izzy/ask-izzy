@@ -1,6 +1,7 @@
 /* @flow */
 import _ from "underscore";
 import { titleize } from "underscore.string";
+
 export default class Location {
     building: string;
     flat_unit: string;
@@ -31,7 +32,7 @@ export default class Location {
             return "Confidential location";
         }
 
-        var addrDescriptors = [
+        let addrDescriptors = [
             this.flat_unit,
             this.level,
             this.building,
@@ -43,7 +44,7 @@ export default class Location {
             .map(part => `${part}, `)
             .join("");
 
-        var street = [
+        let street = [
             titleize(this.street_number),
             titleize(this.street_name),
             titleize(this.street_type),
@@ -60,5 +61,4 @@ export default class Location {
             titleize(this.postcode),
         ].join(" ").trim();
     }
-
 }

@@ -22,7 +22,8 @@ function fixture(
 ): Object {
     // Moment is fixed to Wednesday 15/9/2015 at 1pm
     time = time || moment("2015-09-09 1pm", "YYYY-MM-DD ha");
-    var timeFn = () => moment(time);
+
+    const timeFn = () => moment(time);
 
     return {
         object: new ServiceOpening(
@@ -62,7 +63,7 @@ export default class CollapsedOpeningTimes extends React.Component {
     };
 
     render(): ReactElement {
-        var order = [
+        const order = [
             "Monday",
             "Tuesday",
             "Wednesday",
@@ -73,7 +74,7 @@ export default class CollapsedOpeningTimes extends React.Component {
             "Public Holiday",
         ];
 
-        var openingHours = _(this.props.object.openingTimes)
+        let openingHours = _(this.props.object.openingTimes)
             .sortBy(record => order.indexOf(record.day));
 
         return (

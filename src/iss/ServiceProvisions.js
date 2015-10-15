@@ -34,12 +34,12 @@ class Keywords extends RegexpForm {
          * boundaries
          * FIXME: requires consecutive keywords to have 2 spaces between
          */
-        var wordTerminator = /(?:^|$|[\s,;"])/
+        const wordTerminator = /(?:^|$|[\s,;"])/
             .source;
 
         /* a regular expression of all the keywords, surrounded by word
          * terminators. And in the order given. */
-        var joinedForm = forms
+        let joinedForm = forms
             .map(form => {
                 if (form instanceof RegExp) {
                     form = form.source

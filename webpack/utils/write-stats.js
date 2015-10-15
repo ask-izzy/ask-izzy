@@ -11,49 +11,48 @@ import fs from "fs";
 import path from "path";
 import _ from "underscore";
 
-var filepath = path.resolve(__dirname, "../../src/server/webpack-stats.json");
+const filepath = path.resolve(__dirname,
+                              "../../src/server/webpack-stats.json");
 
 // Write only a relevant subset of the stats and attach the public path to it
 
 module.exports = function writeStats(stats: webpackStats) {
 
-    var publicPath = this.options.output.publicPath;
-
-    var json = stats.toJson();
+    const publicPath = this.options.output.publicPath;
+    const json = stats.toJson();
 
     // get chunks by name and extensions
     function getChunks(ext, chunkOrdering) {
-        var chunks = [];
-        var allChunkNames = Object.keys(json.assetsByChunkName);
-        var unorderedChunks = _(allChunkNames).difference(chunkOrdering);
-        var sortedChunkNames = chunkOrdering.concat(unorderedChunks);
+        let chunks = [];
+        let allChunkNames = Object.keys(json.assetsByChunkName);
+        let unorderedChunks = _(allChunkNames).difference(chunkOrdering);
+        let sortedChunkNames = chunkOrdering.concat(unorderedChunks);
 
-        for (var name of sortedChunkNames) {
+        for (let name of sortedChunkNames) {
             if (json.assetsByChunkName[name]) {
-                var chunk = json.assetsByChunkName[name];
+                let chunk = json.assetsByChunkName[name];
 
-                // a chunk could be a string or an array, so make sure it is an array
+                // a chunk could be a string or an array, so make sure it is
+                // an array
                 if (!(Array.isArray(chunk))) {
                     chunk = [chunk];
                 }
 
-                chunks = chunks.concat(chunk
-                     // filter by extension
-                    .filter(function(chunkName) {
-                        return path.extname(chunkName) === "." + ext;
-                    })
-                    .map(function(chunkName) {
-                        return publicPath + chunkName;
-                    })
-                );
+                chunks = chunks.concat([
+                    /*::`*/
+                    for (chunkName of chunk)
+                    if (path.extname(chunkName) === "." + ext)
+                    publicPath + chunkName
+                    /*::`*/
+                ]);
             }
         }
         return chunks;
     }
-    var script = getChunks("js", ["runtime", "hotload", "vendor", "main"]);
-    var css = getChunks("css", []);
 
-    var content = {
+    const script = getChunks("js", ["runtime", "hotload", "vendor", "main"]);
+    const css = getChunks("css", []);
+    const content = {
         script: script,
         css: css,
     };

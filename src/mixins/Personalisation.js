@@ -4,7 +4,7 @@ import React from "react";
 
 import BasePersonalisationPage from "../pages/BasePersonalisationPage";
 
-var Personalisation = {
+const Personalisation = {
     contextTypes: {
         controller: React.PropTypes.instanceOf(BasePersonalisationPage),
     },

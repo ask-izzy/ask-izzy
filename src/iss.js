@@ -87,7 +87,7 @@ function _request(obj) {
  * @returns {Promise<Object>} a promise for the request.
  */
 export function mungeUrlQuery(url_: string, data: Object): string {
-    var urlObj = url.parse(url_, true);
+    let urlObj = url.parse(url_, true);
 
     /* data overrides anything passed in via the URL.
      * Passing query args via the URL needs to be supported for requesting
@@ -106,14 +106,14 @@ export function mungeUrlQuery(url_: string, data: Object): string {
      * until we can work around
      * https://github.com/jedmao/iso-http/issues/2
     */
-    var serialized = "";
+    let serialized = "";
 
     if (data) {
         // Flow can't tell that `data` isn't null inside a closure
-        var _data = data;
+        let _data = data;
 
         serialized = Object.keys(_data).map(key => {
-            var serializeValue = (value) =>
+            let serializeValue = (value) =>
                 `${key}=${encodeURIComponent(value)}`;
 
             if (Array.isArray(_data[key])) {
@@ -124,7 +124,7 @@ export function mungeUrlQuery(url_: string, data: Object): string {
         }).join("&");
     }
 
-    var joiner = (url_.indexOf("?") > -1) ? "&" : "?";
+    let joiner = (url_.indexOf("?") > -1) ? "&" : "?";
 
     return url_ + joiner + serialized;
 }
@@ -133,11 +133,11 @@ export async function request(
     path: string,
     data: ?searchRequest
 ): Promise<Object> {
-    var url_: string = ISS_URL || process.env.ISS_URL;
+    let url_: string = ISS_URL || process.env.ISS_URL;
 
     /* flow:disable https://github.com/facebook/flow/issues/908 */
     url_ = mungeUrlQuery(url.resolve(url_, path), data);
-    var response = await _request({
+    let response = await _request({
         url: url_,
         contentType: "application/json",
         headers: {
@@ -151,7 +151,7 @@ export async function request(
 export async function requestObjects(
     path: string, data: ?searchRequest
 ): Promise<searchResults> {
-    var response = await request(path, data);
+    let response = await request(path, data);
 
     // convert objects to ISS search results
     response.objects = response.objects.map(
@@ -299,7 +299,7 @@ export class Service {
             return this._siblingServices;
         }
 
-        var request_: searchRequest = {
+        let request_: searchRequest = {
             site_id: this.site.id,
             type: "service",
             limit: 0,
@@ -339,7 +339,7 @@ export async function search(
     coords: ?{longitude: number, latitude: number},
 ): Promise<searchResults> {
 
-    var request_: searchRequest = {
+    let request_: searchRequest = {
         q: "",
         type: "service",
         catchment: true,
@@ -363,7 +363,7 @@ export async function search(
         request_.location = `${coords.longitude}E${coords.latitude}N`;
     }
 
-    var response = await requestObjects("/api/v3/search/", request_);
+    let response = await requestObjects("/api/v3/search/", request_);
 
     return response;
 }
@@ -371,7 +371,7 @@ export async function search(
 export async function getService(
     id: number
 ): Promise<Service> {
-    var response = await request(`/api/v3/service/${id}/`);
+    let response = await request(`/api/v3/service/${id}/`);
 
     return new Service(response);
 }

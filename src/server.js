@@ -15,7 +15,7 @@ if (!process.env.GOOGLE_KEY) {
     console.warn("GOOGLE_KEY not set");
 }
 
-var server = express();
+const server = express();
 
 // In production, nginx will serve these files so
 // we won't actually recieve requests for them.
@@ -38,8 +38,8 @@ server.use((err, req, res, next) => {  // eslint-disable-line no-unused-vars
 server.set("port", process.env.PORT || 8000);
 
 server.listen(server.get("port"), () => {
-    var env = server.get("env");
-    var port = server.get("port");
+    const env = server.get("env");
+    const port = server.get("port");
 
     console.info(`Express ${env} server listening on ${port}`);
 });

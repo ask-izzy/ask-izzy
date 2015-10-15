@@ -5,14 +5,14 @@ import Webdriver from "selenium-webdriver";
 export async function seleniumBrowser(
     driver: Webdriver.WebDriver,
 ): Promise<Object> {
-    var wnd = new Webdriver.WebDriver.Window(driver);
-    var capabilities = await driver.getCapabilities();
-    var res = capabilities.caps_;
+    const wnd = new Webdriver.WebDriver.Window(driver);
+    const capabilities = await driver.getCapabilities();
+    const res = capabilities.caps_;
 
     res.version = res.version || res.platformVersion;
 
     try {
-        var { width, height } = await wnd.getSize();
+        const { width, height } = await wnd.getSize();
 
         res.width = width;
         res.height = height;
@@ -34,7 +34,7 @@ export async function seleniumBrowser(
  * @return {Promise} - return value from Selenium Webdriver.get.
  */
 export function gotoUrl(driver: Webdriver.WebDriver, url: string): Promise {
-    var port = process.env.PORT || 8000;
+    const port = process.env.PORT || 8000;
 
     return driver.get(`http://localhost:${port}${url}`);
 }
@@ -46,8 +46,8 @@ export function gotoUrl(driver: Webdriver.WebDriver, url: string): Promise {
  */
 export default async function webDriverInstance(
 ): Promise<Webdriver.WebDriver> {
-    var branch = process.env.TRAVIS_BRANCH || "Manual";
-    var baseCaps: Webdriver.Capabilities = {
+    const branch = process.env.TRAVIS_BRANCH || "Manual";
+    const baseCaps: Webdriver.Capabilities = {
         username: process.env.SAUCE_USERNAME,
         accessKey: process.env.SAUCE_ACCESS_KEY,
         name: `Ask Izzy ${branch} ${process.env.TRAVIS_PULL_REQUEST || ""}`,
@@ -69,7 +69,7 @@ export default async function webDriverInstance(
 
         // From selenium-webdriver - we need to
         // fill in some extra fields for appium
-        var browser = process.env.SELENIUM_BROWSER.split(/:/, 3);
+        const browser = process.env.SELENIUM_BROWSER.split(/:/, 3);
 
         /* flow:disable unsupported by flow */
         [_, baseCaps.platformVersion, baseCaps.platformName] = browser;
@@ -81,7 +81,7 @@ export default async function webDriverInstance(
         baseCaps.deviceOrientation = process.env.SELENIUM_ORIENTATION;
     }
 
-    var driver = new Webdriver.Builder()
+    const driver = new Webdriver.Builder()
         /* These are used by Sauce Labs
          * You should also pass SELENIUM_REMOTE_URL to connect
          * via Selenium Grid */

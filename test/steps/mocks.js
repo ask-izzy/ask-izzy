@@ -13,7 +13,7 @@ import { gotoUrl } from "../support/webdriver";
 import { mock } from "../support/mock_iss/server";
 import { Service } from "../../src/iss";
 
-var mockedService: ?Service;
+let mockedService: ?Service;
 
 async function searchMockedService() {
     if (!mockedService) {

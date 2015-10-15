@@ -26,14 +26,14 @@ async function checkTransportTimeLines(time: Array<string>): Promise<void> {
 }
 
 async function checkTransportTime(time: string): Promise<void> {
-    var allTransports = await this.driver.findElements(
+    let allTransports = await this.driver.findElements(
         By.css(".TransportTime")
     );
-    var visibleTransports = await asyncFilter(
+    let visibleTransports = await asyncFilter(
         allTransports,
         elem => elem.isDisplayed()
     );
-    var text = await Promise.all(visibleTransports.map(
+    let text = await Promise.all(visibleTransports.map(
         elem => elem.getText()
     ));
 
@@ -43,7 +43,7 @@ async function checkTransportTime(time: string): Promise<void> {
 }
 
 async function asyncFilter(arr, check) {
-    var results = arr.map(check);
+    let results = arr.map(check);
 
     results = await Promise.all(results);
 
@@ -53,12 +53,12 @@ async function asyncFilter(arr, check) {
 }
 
 async function checkPhoneNumbers(lines: Array<string>): Promise<void> {
-    var phoneElems = await this.driver.findElements(By.css(".Contact"));
-    var visiblePhoneElems = await asyncFilter(
+    let phoneElems = await this.driver.findElements(By.css(".Contact"));
+    let visiblePhoneElems = await asyncFilter(
         phoneElems,
         elem => elem.isDisplayed()
     );
-    var text = await Promise.all(visiblePhoneElems.map(
+    let text = await Promise.all(visiblePhoneElems.map(
         elem => elem.getText()
     ));
 

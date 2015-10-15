@@ -30,14 +30,14 @@ class ServicePage extends React.Component {
      */
     /* flow:disable not supported yet */
     get id(): number {
-        var leadingDigits = /^\d+/;
-        var slug = this.props.params.slug;
+        const leadingDigits = /^\d+/;
+        let slug = this.props.params.slug;
 
         return parseInt(slug.match(leadingDigits)[0]);
     }
 
     async loadService(): Promise<void> {
-        var service = await iss.getService(this.id);
+        let service = await iss.getService(this.id);
 
         this.setState({
             object: service,
@@ -45,7 +45,7 @@ class ServicePage extends React.Component {
     }
 
     render(): ReactElement {
-        var {
+        let {
             object,
         } = this.state;
 

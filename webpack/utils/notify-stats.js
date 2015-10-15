@@ -14,7 +14,8 @@ function notifyWarning(warning) {
 }
 
 module.exports = function notifyStats(stats: webpackStats) {
-    var json = stats.toJson();
+    const json = stats.toJson();
+
     if (json.errors.length > 0) {
         json.errors.forEach(notifyError);
     } else if (json.warnings.length > 0) {

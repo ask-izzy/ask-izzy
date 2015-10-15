@@ -9,7 +9,7 @@ export default class Email extends React.Component {
     static sampleProps = {default: fixtures.ixa.emails[0]};
 
     render(): ReactElement {
-        var {
+        let {
             email,
         } = this.props;
 

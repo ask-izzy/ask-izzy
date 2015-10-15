@@ -25,20 +25,20 @@ class HtmlDocument extends React.Component {
     };
 
     render(): ReactElement {
-        var { markup, script, css } = this.props;
-        var {
+        const { markup, script, css } = this.props;
+        const {
             title,
             description,
             siteName,
             currentUrl,
         } = this.props;
-        var viewport =
+        const viewport =
             "width=device-width, initial-scale=1.0, user-scalable=no";
-        var issconfig = 'var ISS_URL = "' + process.env.ISS_URL + '";';
-        var GOOGLE_KEY = process.env.GOOGLE_KEY;
+        const issconfig = 'var ISS_URL = "' + process.env.ISS_URL + '";';
+        const GOOGLE_KEY = process.env.GOOGLE_KEY;
 
         /* eslint-disable max-len */
-        var gmapsApi = `//maps.googleapis.com/maps/api/js?key=${GOOGLE_KEY}&libraries=places`;
+        const gmapsApi = `//maps.googleapis.com/maps/api/js?key=${GOOGLE_KEY}&libraries=places`;
         /* eslint-enable max-len */
 
         return (

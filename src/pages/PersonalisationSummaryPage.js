@@ -18,7 +18,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
     }
 
     render(): ReactElement {
-        var subpage = this.currentComponent;
+        const subpage = this.currentComponent;
 
         return (
             <div className="PersonalisationPage">

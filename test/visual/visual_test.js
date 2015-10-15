@@ -15,8 +15,8 @@ import webDriverInstance, {seleniumBrowser} from "../support/webdriver";
 import startServer from "../../src/server";
 
 describe("Visual Components", function() {
-    var baseUrl = "http://localhost:" + process.env.PORT;
-    var driver, cfg;
+    const baseUrl = "http://localhost:" + process.env.PORT;
+    let driver, cfg;
 
     before(beforeAll);
     after(afterAll);
@@ -49,9 +49,9 @@ describe("Visual Components", function() {
                         "Driver must be setup in beforeAll"
                     );
                 }
-                var description = `${cfg.browserName}-${cfg.version} ` +
+                let description = `${cfg.browserName}-${cfg.version} ` +
                     `${cfg.width}x${cfg.height}`;
-                var orig = `src/components/${name}/${description}.png`;
+                let orig = `src/components/${name}/${description}.png`;
 
                 // Try to create the output dir.
                 try {
@@ -66,12 +66,12 @@ describe("Visual Components", function() {
                 }
 
                 // Load styleguide page
-                var addr = `${baseUrl}/styleGuide/component/${name}`;
+                let addr = `${baseUrl}/styleGuide/component/${name}`;
 
                 await driver.get(addr);
 
                 // Write screenshot
-                var imageData = await driver.takeScreenshot();
+                let imageData = await driver.takeScreenshot();
 
                 fs.writeFileSync(orig, imageData, "base64");
             }

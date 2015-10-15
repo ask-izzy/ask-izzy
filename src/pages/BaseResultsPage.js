@@ -41,7 +41,7 @@ class BaseResultsPage extends BaseCategoriesPage {
 
     // flow:disable not supported yet
     get results(): Array<iss.issService> {
-        var objects, index;
+        let objects, index;
 
         if (this.state.objects) {
             objects = Array.from(this.state.objects);
@@ -56,7 +56,7 @@ class BaseResultsPage extends BaseCategoriesPage {
         //  * service */
         /*
         try {
-            var infobox = this.category.info;
+            let infobox = this.category.info;
 
             index = _.findIndex(objects,
                                 object => !object.crisis && !object.infobox);
@@ -75,7 +75,7 @@ class BaseResultsPage extends BaseCategoriesPage {
         index = _.findIndex(objects, object => object.crisis);
         if (index != -1) {
             /* count hotlines */
-            var nhotlines = _.where(objects, {crisis: true}).length;
+            let nhotlines = _.where(objects, {crisis: true}).length;
 
             objects.splice(index, 0, {
                 staticText: true,
@@ -101,9 +101,9 @@ class BaseResultsPage extends BaseCategoriesPage {
         // We have to do this once the component is mounted (instead of
         // in willTransitionTo because the personalisation components will
         // inspect the session).
-        var request = this.search;
+        let request = this.search;
 
-        for (var item of this.personalisationComponents) {
+        for (let item of this.personalisationComponents) {
             request = item.getSearch(request);
 
             if (!request) {
@@ -136,7 +136,7 @@ class BaseResultsPage extends BaseCategoriesPage {
                 try {
                     console.error(response);
 
-                    var data = JSON.parse(response.text);
+                    let data = JSON.parse(response.text);
 
                     this.setState({
                         error: data.error_message,
@@ -157,8 +157,8 @@ class BaseResultsPage extends BaseCategoriesPage {
             return;
         }
 
-        var next = this.state.meta.next;
-        var data;
+        let next = this.state.meta.next;
+        let data;
 
         /* reenable the search spinner */
         this.setState({meta: null});

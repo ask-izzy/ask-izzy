@@ -26,10 +26,10 @@ class Eligibility extends React.Component {
     }
 
     render(): ReactElement {
-        var catchment: string = this.props.catchment || "";
-        var eligibilityInfo: string = this.props.eligibility_info || "";
-        var ineligibilityInfo: string = this.props.ineligibility_info || "";
-        var eligibleMarkup, ineligibleMarkup;
+        let catchment: string = this.props.catchment || "";
+        let eligibilityInfo: string = this.props.eligibility_info || "";
+        let ineligibilityInfo: string = this.props.ineligibility_info || "";
+        let eligibleMarkup, ineligibleMarkup;
 
         if (eligibilityInfo.length || catchment.length) {
             eligibleMarkup = (

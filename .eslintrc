@@ -32,7 +32,7 @@
         "id-length": [2, {
             "min": 3,
             "properties": "never",
-            "exceptions": ["x", "y", "z", "_", "_s", "id", "fs", "q"]
+            "exceptions": ["x", "y", "z", "_", "_s", "id", "fs", "q", "Id"]
         }],
         "indent": [2, 4],
         "jsx-quotes": 2,
@@ -69,6 +69,7 @@
             "uninitialized": "always",
             "initialized": "never"
         }],
+        "no-var": 2,
         "operator-assignment": [2, "always"],
         "operator-linebreak": [2, "after", { "overrides": { ":": "before" }}],
         "prefer-arrow-callback": 2,

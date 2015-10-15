@@ -24,13 +24,13 @@ module.exports = (function() {
 async function seeTheResults(table: Array<Object>): Promise<void> {
     await this.driver.wait(documentReady(this.driver), 10000);
 
-    var getText = element => element.getText();
+    let getText = element => element.getText();
 
-    for (var key of _.keys(table[0])) {
-        var class_ = key.match(/[(](.*)[)]/)[1];
+    for (let key of _.keys(table[0])) {
+        let class_ = key.match(/[(](.*)[)]/)[1];
 
-        var expected = _.pluck(table, key);
-        var actual = await Promise.all(
+        let expected = _.pluck(table, key);
+        let actual = await Promise.all(
             (
                 await this.driver.findElements(By.css(`.${class_}`))
             ).map(getText)
@@ -50,10 +50,10 @@ async function hotlinePositionAndText(
     expectedPos: number,
     expectedText: string,
 ): Promise<void> {
-    var elements = await this.driver.findElements(
+    let elements = await this.driver.findElements(
             By.css(".CrisisLineItem, .ResultListItem, .Infobox")
         );
-    var crisisLine = elements[expectedPos - 1];
+    let crisisLine = elements[expectedPos - 1];
 
     if (!crisisLine) {
         throw new Error(
@@ -64,17 +64,17 @@ async function hotlinePositionAndText(
     assert.equal(await crisisLine.getAttribute("class"),
                  "CrisisLineItem");
 
-    var phone = await crisisLine.findElement(By.css(".Phone"));
+    let phone = await crisisLine.findElement(By.css(".Phone"));
 
     assert.equal(await phone.getText(), expectedText);
 }
 
 async function assertHotlineHeading(text: string): Promise<void> {
-    var elements = await this.driver.findElements(
+    let elements = await this.driver.findElements(
         By.css(".CrisisLineItem, .CrisisHeader")
     );
 
-    var classes = [
+    let classes = [
         await elements[0].getAttribute("class"),
         await elements[1].getAttribute("class"),
     ];

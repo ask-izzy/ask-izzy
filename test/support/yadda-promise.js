@@ -11,9 +11,9 @@ function unpromisify(func: (...args: any) => Promise<void>): Function {
         // The last argument is a callback(error, result)
         // but there's no success value, so we just strip
         // all arguments on success.
-        var done = args.splice(args.length - 1, 1)[0];
-        var errorHandler = function(error) {
-            var report = () => done(error);
+        const done = args.splice(args.length - 1, 1)[0];
+        const errorHandler = function(error) {
+            const report = () => done(error);
 
             console.log("Error", error);
 

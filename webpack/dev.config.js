@@ -6,20 +6,20 @@
 // It enables the hot module replacement,
 // the source maps and inline CSS styles.
 
-import path        from "path";
-import webpack     from "webpack";
-import writeStats  from "./utils/write-stats";
+import path from "path";
+import webpack from "webpack";
+import writeStats from "./utils/write-stats";
 import notifyStats from "./utils/notify-stats";
-import commons     from "./utils/commons";
-import env         from "./env";
-import progress    from "./utils/progress";
-import cssLoaders  from "./css-loaders";
+import commons from "./utils/commons";
+import env from "./env";
+import progress from "./utils/progress";
+import cssLoaders from "./css-loaders";
 
-var assetsPath = path.resolve(__dirname, "../public/static");
+const assetsPath = path.resolve(__dirname, "../public/static");
 
-var WEBPACK_HOST = "localhost";
-var WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
-var webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
+const WEBPACK_HOST = "localhost";
+const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
+const webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
 
 module.exports = {
     devtool: "#source-map",
@@ -32,7 +32,17 @@ module.exports = {
             "./src/client-entry.js",
             "./src/styles/bundle.scss",
         ],
-        vendor: ["react", "material-ui", "core-decorators", "material-ui", "moment", "react-google-maps", "react-router", "react-tap-event-plugin", "react", "underscore.string", "underscore"],
+        vendor: [
+            "core-decorators",
+            "material-ui",
+            "moment",
+            "react",
+            "react-google-maps",
+            "react-router",
+            "react-tap-event-plugin",
+            "underscore",
+            "underscore.string",
+        ],
     },
     output: {
         path: assetsPath,
@@ -66,7 +76,7 @@ module.exports = {
 
         // polyfill window.fetch et al client-side
         new webpack.ProvidePlugin({
-            'es6-promise': 'es6-promise',
+            "es6-promise": "es6-promise",
         }),
 
         commons,

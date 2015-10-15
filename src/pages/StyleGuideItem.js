@@ -18,7 +18,7 @@ export default class StyleGuideItem extends React.Component {
     }
 
     render(): ReactElement {
-        var Component = this.getComponent();
+        let Component = this.getComponent();
 
         if (!Component) {
             return (
@@ -26,9 +26,9 @@ export default class StyleGuideItem extends React.Component {
             );
         }
 
-        var variantNames = Object.keys(Component.sampleProps);
-        var variants = variantNames.map(key => {
-            var heading;
+        let variantNames = Object.keys(Component.sampleProps);
+        let variants = variantNames.map(key => {
+            let heading;
 
             if (variantNames.length > 1) {
                 heading = <h1>{_s.titleize(key)}</h1>;

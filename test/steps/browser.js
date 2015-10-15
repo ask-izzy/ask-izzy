@@ -107,7 +107,7 @@ async function urlIs(
     driver: Webdriver.WebDriver,
     expected: string
 ): Promise<boolean> {
-    var url = await driver.getCurrentUrl();
+    let url = await driver.getCurrentUrl();
 
     if (expected.startsWith("/")) {
         url = Url.parse(url).path
@@ -123,7 +123,7 @@ async function checkURL(expected: string): Promise<void> {
         `URL should be #{expected}`,
     );
 
-    var url = await this.driver.getCurrentUrl();
+    let url = await this.driver.getCurrentUrl();
 
     if (expected.startsWith("/")) {
         url = Url.parse(url).path
@@ -161,7 +161,7 @@ function getSearchElement(
 }
 
 async function doSearch(search: string): Promise<void> {
-    var element = await getSearchElement(this.driver);
+    let element = await getSearchElement(this.driver);
 
     await element.clear();
     await element.sendKeys(search);
@@ -173,7 +173,7 @@ async function doSearchAndEnter(search: string): Promise<void> {
 }
 
 async function searchContains(expected: string): Promise<void> {
-    var value = await (await getSearchElement(this.driver))
+    let value = await (await getSearchElement(this.driver))
         .getAttribute("value");
 
     assert.equal(value, expected);
@@ -194,20 +194,20 @@ async function getButtonState(
 }
 
 async function checkDisabled(text: string): Promise<void> {
-    var enabled = await getButtonState(this.driver, text);
+    let enabled = await getButtonState(this.driver, text);
 
     assert.equal(enabled, false);
 }
 
 async function checkEnabled(text: string): Promise<void> {
-    var enabled = await getButtonState(this.driver, text);
+    let enabled = await getButtonState(this.driver, text);
 
     assert.equal(enabled, true);
 }
 
 async function assertItemChecked(label: string): Promise<void> {
-    var labelXPath = elementWithText("label", label);
-    var checked = await this.driver.findElement(By.xpath(
+    let labelXPath = elementWithText("label", label);
+    let checked = await this.driver.findElement(By.xpath(
         `${labelXPath}//input`
     ))
         .getAttribute("checked");
@@ -216,8 +216,8 @@ async function assertItemChecked(label: string): Promise<void> {
 }
 
 async function assertItemNotChecked(label: string): Promise<void> {
-    var labelXPath = elementWithText("label", label);
-    var checked = await this.driver.findElement(By.xpath(
+    let labelXPath = elementWithText("label", label);
+    let checked = await this.driver.findElement(By.xpath(
         `${labelXPath}//input`
     ))
         .getAttribute("checked");

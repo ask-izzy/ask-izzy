@@ -42,21 +42,21 @@ class ContactMethods extends React.Component {
     };
 
     render(): ReactElement {
-        var {
+        let {
             phones,
             emails,
             web,
         } = this.props.object;
 
-        var filteredPhoneKinds = new Set(["fax", "tty"]);
-        var phoneOrder = ["freecall", "phone", "mobile"];
+        const filteredPhoneKinds = new Set(["fax", "tty"]);
+        const phoneOrder = ["freecall", "phone", "mobile"];
 
         phones = _.filter(phones,
                           phone => !filteredPhoneKinds.has(phone.kind));
         phones = _(phones).sortBy(phone => phoneOrder.indexOf(phone.kind));
         phones = _(phones).uniq(phone => phone.number);
 
-        var contacts = [].concat(
+        let contacts = [].concat(
             phones.map(phone => Object.assign({ component: Phone }, phone)),
             emails.map(email => Object.assign({ component: Email }, email)),
         );

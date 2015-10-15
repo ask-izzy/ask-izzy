@@ -26,9 +26,9 @@ type serviceOpeningHours = {
  */
 function timeOfDay(day: Moment, time: hmsWithColonsTime): Moment {
     // Can't just map(parseInt) as parseInt has an optional radix param
-    var [hour, mins, secs] = time.split(":").map(str => parseInt(str));
+    let [hour, mins, secs] = time.split(":").map(str => parseInt(str));
 
-    var time_ = moment(day);
+    let time_ = moment(day);
 
     time_.set("hour", hour);
     time_.set("minute", mins);
@@ -48,15 +48,15 @@ export default class ServiceOpening {
         // Turn opening_hours into a sorted list
         // so that we can scan forwards from the first one
         // and only find moment()s which are in the future
-        var openingTimes = [];
-        var closingTimes = [];
+        let openingTimes = [];
+        let closingTimes = [];
 
-        for (var openingHours of properties.opening_hours) {
+        for (let openingHours of properties.opening_hours) {
             // Convert (eg) 'Monday' to a Moment()
-            var day = moment(now())
+            let day = moment(now())
                 .day(openingHours.day);
-            var close = timeOfDay(day, openingHours.close);
-            var open = timeOfDay(day, openingHours.open);
+            let close = timeOfDay(day, openingHours.close);
+            let open = timeOfDay(day, openingHours.open);
 
             // split opening / closing hours into separate arrays?
             if (close.isBefore(moment(now()))) {
@@ -67,7 +67,7 @@ export default class ServiceOpening {
                 open.add(1, "weeks");
             }
 
-            var serviceOpeningHours = Object.assign({}, {
+            let serviceOpeningHours = Object.assign({}, {
                 start: open,
                 end: close,
             }, openingHours);

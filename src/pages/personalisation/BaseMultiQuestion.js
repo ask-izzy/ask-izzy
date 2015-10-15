@@ -18,14 +18,14 @@ class BaseMultiQuestion extends BaseQuestion {
     }
 
     componentDidMount(): void {
-        var answers = new Set(storage.getJSON(this.props.name));
+        let answers = new Set(storage.getJSON(this.props.name));
 
         this.setState({answers: answers});
     }
 
     // flow:disable
     static get summaryValue(): string {
-        var nSelected =
+        let nSelected =
             (storage.getJSON(this.defaultProps.name) || []).length;
 
         return `${nSelected} selected`;
@@ -37,7 +37,7 @@ class BaseMultiQuestion extends BaseQuestion {
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
-        var value = this.answer;
+        let value = this.answer;
 
         if (value != null) {
             return this.getSearchForAnswer(request, new Set(value));
@@ -52,7 +52,7 @@ class BaseMultiQuestion extends BaseQuestion {
         answers: Set<string>|string,
     ): ?iss.searchRequest {
 
-        var search: ?iss.searchRequest = request;
+        let search: ?iss.searchRequest = request;
 
         if (answers instanceof Set) {
             for (let answer of answers) {
@@ -66,7 +66,7 @@ class BaseMultiQuestion extends BaseQuestion {
     }
 
     onAnswerTouchTap(answer: string, enabled: boolean): void {
-        var answers = this.state.answers;
+        let answers = this.state.answers;
 
         if (enabled) {
             answers.add(answer);
@@ -83,7 +83,7 @@ class BaseMultiQuestion extends BaseQuestion {
     }
 
     render(): ReactElement {
-        var selected = this.state.answers;
+        let selected = this.state.answers;
 
         return (
             <div>

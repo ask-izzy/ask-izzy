@@ -8,7 +8,7 @@ export default class Web extends React.Component {
     static sampleProps = {default: {url: "https://example.com/landingPage"}};
 
     render(): ReactElement {
-        var url = URL.parse(this.props.url);
+        let url = URL.parse(this.props.url);
 
         return (
             <div className="Contact Web">
