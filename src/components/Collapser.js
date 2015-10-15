@@ -16,6 +16,15 @@ class Collapser extends React.Component {
         this.setState({collapsed: !this.props.expanded});
     }
 
+    handleMessageClick(event: SyntheticInputEvent): void {
+        if (this.props.allowReclosing) {
+            event.preventDefault();
+            this.setState({collapsed: !this.state.collapsed});
+        } else {
+            this.handleClick(event);
+        }
+    }
+
     handleClick(event: SyntheticInputEvent): void {
         if (this.state.collapsed) {
             event.preventDefault();
@@ -58,7 +67,7 @@ class Collapser extends React.Component {
                     href="#"
                     alt="Show more"
                     className="collapser-message"
-                    onClick={this.handleClick.bind(this)}
+                    onClick={this.handleMessageClick.bind(this)}
                 >{this.props.message}</a>
                 <div
                     className={this.hiddenClass()}
