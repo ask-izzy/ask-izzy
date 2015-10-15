@@ -16,13 +16,6 @@ class Collapser extends React.Component {
         this.setState({collapsed: !this.props.expanded});
     }
 
-    handleClick(event: SyntheticInputEvent): void {
-        if (this.state.collapsed) {
-            event.preventDefault();
-            this.setState({collapsed: false});
-        }
-    }
-
     // flow:disable not supported yet
     static sampleProps = {
         default: {
@@ -48,17 +41,33 @@ class Collapser extends React.Component {
         return "";
     }
 
+    onClick(event: SyntheticInputEvent): void {
+        if (this.state.collapsed) {
+            event.preventDefault();
+            this.setState({collapsed: false});
+        }
+    }
+
+    onMessageClick(event: SyntheticInputEvent): void {
+        if (this.props.allowReclosing) {
+            event.preventDefault();
+            this.setState({collapsed: !this.state.collapsed});
+        } else {
+            this.onClick(event);
+        }
+    }
+
     render(): ReactElement {
         return (
             <div
-                className={`Collapser ${this.props.className}`}
-                onClick={this.handleClick.bind(this)}
+                className={`Collapser ${this.props.className || ""}`}
+                onClick={this.onClick.bind(this)}
             >
                 <a
                     href="#"
                     alt="Show more"
                     className="collapser-message"
-                    onClick={this.handleClick.bind(this)}
+                    onClick={this.onMessageClick.bind(this)}
                 >{this.props.message}</a>
                 <div
                     className={this.hiddenClass()}

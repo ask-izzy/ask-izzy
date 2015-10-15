@@ -20,6 +20,7 @@ import Phone from "./components/Phone";
 import ResultListItem from "./components/ResultListItem";
 import ScreenReader from "./components/ScreenReader";
 import ServicePane from "./components/ServicePane";
+import StaticMap from "./components/StaticMap";
 import TransportTime from "./components/TransportTime";
 import Web from "./components/Web";
 
@@ -42,6 +43,7 @@ export default {
     ResultListItem: ResultListItem,
     ScreenReader: ScreenReader,
     ServicePane: ServicePane,
+    StaticMap: StaticMap,
     TransportTime: TransportTime,
     Web: Web,
 };

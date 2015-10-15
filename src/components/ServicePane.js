@@ -5,11 +5,13 @@ import { Link } from "react-router";
 import mui from "material-ui";
 import _ from "underscore";
 
-import Address from "../components/Address";
-import CollapsedOpeningTimes from "../components/CollapsedOpeningTimes";
-import ContactMethods from "../components/ContactMethods";
-import Eligibility from "../components/Eligibility";
-import TransportTime from "../components/TransportTime";
+import Address from "./Address";
+import CollapsedOpeningTimes from "./CollapsedOpeningTimes";
+import ContactMethods from "./ContactMethods";
+import Eligibility from "./Eligibility";
+import TransportTime from "./TransportTime";
+import StaticMap from "./StaticMap";
+import Collapser from "./Collapser";
 import GoogleMapsLink from "./GoogleMapsLink";
 import fixtures from "../../fixtures/services";
 import ServiceFactory from "../../fixtures/factories/Service";
@@ -46,7 +48,7 @@ export default class ServicePane extends React.Component {
     }
 
     render(): ReactElement {
-        var object = this.props.service;
+        const object = this.props.service;
 
         return (
             <div className="ServicePane">
@@ -60,7 +62,16 @@ export default class ServicePane extends React.Component {
 
                     <CollapsedOpeningTimes object={object.open} />
                     <hr />
-                    <Address location={object.Location()} />
+
+                    <Collapser
+                        message={<Address location={object.Location()} />}
+                        allowReclosing={true}
+                    >
+                        <StaticMap
+                            location={object.Location()}
+                        />
+                    </Collapser>
+
                     <hr />
                     <ContactMethods object={object} />
                     <hr />

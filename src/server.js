@@ -4,7 +4,7 @@ import path from "path";
 import express from "express";
 import render from "./server/render";
 
-// Initialize express server
+declare var GLOBAL: Object;
 
 if (!process.env.ISS_URL) {
     console.error("Must set ISS_URL");
@@ -15,6 +15,13 @@ if (!process.env.GOOGLE_KEY) {
     console.warn("GOOGLE_KEY not set");
 }
 
+// On the client, we set these variables on `window`
+// Making them globals on the server means the same
+// code can be used.
+GLOBAL.ISS_URL = process.env.ISS_URL;
+GLOBAL.GOOGLE_KEY = process.env.GOOGLE_KEY;
+
+// Initialize express server
 var server = express();
 
 // In production, nginx will serve these files so

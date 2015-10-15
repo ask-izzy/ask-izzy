@@ -133,7 +133,7 @@ export async function request(
     path: string,
     data: ?searchRequest
 ): Promise<Object> {
-    var url_: string = ISS_URL || process.env.ISS_URL;
+    var url_: string = ISS_URL;
 
     /* flow:disable https://github.com/facebook/flow/issues/908 */
     url_ = mungeUrlQuery(url.resolve(url_, path), data);
