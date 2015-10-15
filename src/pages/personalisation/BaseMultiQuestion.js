@@ -49,9 +49,20 @@ class BaseMultiQuestion extends BaseQuestion {
 
     static getSearchForAnswer(
         request: iss.searchRequest,
-        answers: Set<string>
+        answers: Set<string>|string,
     ): ?iss.searchRequest {
-        return request;
+
+        var search: ?iss.searchRequest = request;
+
+        if (answers instanceof Set) {
+            for (let answer of answers) {
+                search = super.getSearchForAnswer(search || {}, answer);
+            }
+        } else {
+            search = super.getSearchForAnswer(search || {}, answers);
+        }
+
+        return search;
     }
 
     onAnswerTouchTap(answer: string, enabled: boolean): void {
@@ -85,7 +96,7 @@ class BaseMultiQuestion extends BaseQuestion {
                     }
                 />
                 <mui.List className="List">
-                {this.props.answers.map((answer, index) =>
+                {this.answers.map((answer, index) =>
                     <div
                         className="ListItem"
                         key={index}

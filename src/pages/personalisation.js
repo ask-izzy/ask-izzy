@@ -22,7 +22,6 @@ import Location from "./personalisation/Location";
 import MoneySubcategories from "./personalisation/MoneySubcategories";
 import SleepTonight from "./personalisation/SleepTonight";
 import TechnologySubcategories from "./personalisation/TechnologySubcategories";
-import mixins from "./personalisation/mixins";
 
 export default {
     AddictionSubcategories: AddictionSubcategories,
@@ -43,5 +42,4 @@ export default {
     MoneySubcategories: MoneySubcategories,
     SleepTonight: SleepTonight,
     TechnologySubcategories: TechnologySubcategories,
-    mixins: mixins,
 };

@@ -1,21 +1,17 @@
 /* @flow */
 
-import BaseQuestion from "./BaseQuestion";
-import { SearchByMap } from "./mixins";
+import BaseQuestion, { append } from "./BaseQuestion";
 
-var questions = {
-    "Female": "-male",
-    "Male": " -female",
-    "Neither/Both/Something else": "",
-};
-
-/*::`*/@SearchByMap(questions)/*::`;*/
 export default class Gender extends BaseQuestion {
     // flow:disable
     static defaultProps = {
         name: "gender",
         question: "Do you identify as…",
-        answers: Object.keys(questions),
+        answers: {
+            "Female": append("-male"),
+            "Male": append("-female"),
+            "Neither/Both/Something else": "",
+        },
     };
 
     // flow:disable

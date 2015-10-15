@@ -4,12 +4,118 @@ import React from "react";
 import mui from "material-ui";
 import reactMixin from "react-mixin";
 import { debounce } from "core-decorators";
+import _ from "underscore";
 
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
+
+/**
+ * Base class for composing search terms.
+ */
+class Search {
+    search: iss.searchRequest;
+    chain: Search;
+
+    constructor(search: string|iss.searchRequest) {
+        if (typeof search === "string") {
+            this.search = { q: search };
+        } else {
+            this.search = search;
+        }
+    }
+
+    compose(search: iss.searchRequest): iss.searchRequest {
+        // Default behaviour is to do nothing but chain up
+        search = Object.assign({}, search);
+
+        if (this.chain) {
+            search = this.chain.compose(search);
+        }
+
+        return search;
+    }
+
+    /* eslint-disable no-use-before-define */
+    append(search: string|iss.searchRequest): AppendToSearch {
+        let next = append(search);
+
+        next.chain = this;
+        return next;
+    }
+
+    replace(search: string|iss.searchRequest): ReplaceSearch {
+        let next = replace(search);
+
+        next.chain = this;
+        return next;
+    }
+
+    remove(search: string|iss.searchRequest): RemoveSearch {
+        let next = remove(search);
+
+        next.chain = this;
+        return next;
+    }
+    /* eslint-enable no-use-before-define */
+}
+
+/**
+ * Subclass for combining searches together.
+ */
+class AppendToSearch extends Search {
+    compose(search) {
+        search = super.compose(search);
+        if (this.search.q) {
+            search.q = (search.q || "") + " " + this.search.q;
+        }
+
+        if (this.search.age_groups) {
+            search.age_groups = (search.age_groups || [])
+                .concat(this.search.age_groups);
+        }
+
+        return search;
+    }
+}
+
+export function append(search: string|iss.searchRequest): AppendToSearch {
+    return new AppendToSearch(search);
+}
+
+/**
+ * Subclass for completely replacing search terms.
+ */
+class ReplaceSearch extends Search {
+    compose(search) {
+        return super.compose(this.search);
+    }
+}
+
+export function replace(search: string|iss.searchRequest): ReplaceSearch {
+    return new ReplaceSearch(search);
+}
+
+/**
+ * Subclass for removing a search term.
+ */
+class RemoveSearch extends Search {
+    compose(search) {
+        search = super.compose(search);
+
+        if (search.q && this.search.q) {
+            search.q = search.q.replace(this.search.q, "");
+        }
+
+        return search;
+    }
+}
+
+export function remove(search: string|iss.searchRequest): RemoveSearch {
+    return new RemoveSearch(search);
+}
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class BaseQuestion extends React.Component {
@@ -18,7 +124,10 @@ class BaseQuestion extends React.Component {
         /* The question asked of the user */
         question: React.PropTypes.string.isRequired,
         /* possible answers to the question */
-        answers: React.PropTypes.arrayOf(React.PropTypes.node).isRequired,
+        answers: React.PropTypes.oneOfType([
+            React.PropTypes.arrayOf(React.PropTypes.node),
+            React.PropTypes.objectOf(React.PropTypes.node),
+        ]).isRequired,
     };
 
     // flow:disable
@@ -72,9 +181,38 @@ class BaseQuestion extends React.Component {
         }
     }
 
+    static getSearchForAnswer(
+        request: iss.searchRequest,
+        answer: string,
+    ): ?iss.searchRequest {
+
+        let answerComposer;
+
+        /* the answers are a map of answers to search terms */
+        if (_.isObject(this.defaultProps.answers) &&
+            this.defaultProps.answers[answer] instanceof Search) {
+
+            answerComposer = this.defaultProps.answers[answer];
+        } else {
+            // Default behaviour for strings is to append
+            answerComposer = append(answer);
+        }
+
+        return answerComposer.compose(request);
+    }
+
+    /**
+     * Return the answers from the answers property element.
+     *
+     * @returns {Array<nodes>} an array of React nodes.
+     */
     // flow:disable
-    static getSearchForAnswer(request) {
-        return request;
+    get answers(): Array<ReactElement> {
+        if (_.isArray(this.props.answers)) {
+            return this.props.answers;
+        } else {
+            return Object.keys(this.props.answers);
+        }
     }
 
     /**
@@ -115,7 +253,7 @@ class BaseQuestion extends React.Component {
                     }
                 />
                 <mui.List className="List">
-                {this.props.answers.map((answer, index) =>
+                {this.answers.map((answer, index) =>
                     <mui.ListItem
                         className="ListItem"
                         key={index}

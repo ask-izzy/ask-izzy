@@ -1,24 +1,15 @@
 /* @flow */
 
-import BaseQuestion from "./BaseQuestion";
+import BaseQuestion, { replace, append } from "./BaseQuestion";
 
 export default class SleepTonight extends BaseQuestion {
     // flow:disable
     static defaultProps = {
         name: "sleep-tonight",
         question: "Do you have somewhere safe to sleep tonight?",
-        answers: [
-            "Yes",
-            "No",
-        ],
+        answers: {
+            "Yes": append(""),
+            "No": replace("crisis accommodation"),
+        },
     };
-
-    static getSearchForAnswer(request, answer) {
-        if (answer == "No") {
-            /* eslint-disable id-length */
-            request.q = "crisis accommodation";
-        }
-
-        return request;
-    }
 }

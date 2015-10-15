@@ -1,9 +1,7 @@
 /* @flow */
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
-import { SearchOnSubcategoryText } from "./mixins";
 
-/*::`*/@SearchOnSubcategoryText/*::`;*/
 export default class EverydayThingsSubcategories extends BaseMultiQuestion {
     // flow:disable
     static defaultProps = {
@@ -23,5 +21,4 @@ export default class EverydayThingsSubcategories extends BaseMultiQuestion {
             "Help with pets",
         ],
     };
-
 }
