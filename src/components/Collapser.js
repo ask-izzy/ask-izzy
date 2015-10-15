@@ -33,13 +33,6 @@ class Collapser extends React.Component {
         },
     };
 
-    handleClick(event: SyntheticInputEvent): void {
-        if (this.state.collapsed) {
-            event.preventDefault();
-            this.setState({collapsed: false});
-        }
-    }
-
     hiddenClass(): string {
         if (this.state.collapsed) {
             return "collapsed";
@@ -48,19 +41,27 @@ class Collapser extends React.Component {
         return "";
     }
 
+    onClick(event: SyntheticInputEvent): void {
+        if (this.state.collapsed) {
+            event.preventDefault();
+            this.setState({collapsed: false});
+        }
+    }
+
     onMessageClick(event: SyntheticInputEvent): void {
         if (this.props.allowReclosing) {
             event.preventDefault();
             this.setState({collapsed: !this.state.collapsed});
         } else {
-            this.handleClick(event);
+            this.onClick(event);
         }
     }
+
     render(): ReactElement {
         return (
             <div
                 className={`Collapser ${this.props.className || ""}`}
-                onClick={this.handleClick.bind(this)}
+                onClick={this.onClick.bind(this)}
             >
                 <a
                     href="#"
