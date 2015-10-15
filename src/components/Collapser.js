@@ -60,7 +60,7 @@ class Collapser extends React.Component {
     render(): ReactElement {
         return (
             <div
-                className={`Collapser ${this.props.className}`}
+                className={`Collapser ${this.props.className || ""}`}
                 onClick={this.handleClick.bind(this)}
             >
                 <a
