@@ -13,7 +13,7 @@ import Webdriver, { By, Key } from "selenium-webdriver";
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
 import pauseToDebug from "../support/debug";
-import { elementWithText } from "../support/selectors";
+import { elementWithText, elementWithChildText } from "../support/selectors";
 import { gotoUrl } from "../support/webdriver";
 
 module.exports = (function() {
@@ -64,7 +64,7 @@ async function clickLink(link: string): Promise<void> {
         /* any 'a' element who has a descendent text node containing
          * the link text */
         ["a", "button", "label"]
-            .map(tag => elementWithText(tag, link))
+            .map(tag => elementWithChildText(tag, link))
             .join("|")
     ))
         .click();

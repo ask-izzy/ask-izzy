@@ -2,6 +2,9 @@
 
 import React from "react";
 
+declare var GOOGLE_KEY: string;
+declare var ISS_URL: string;
+
 class HtmlDocument extends React.Component {
 
     // flow:disable not supported yet
@@ -34,8 +37,10 @@ class HtmlDocument extends React.Component {
         } = this.props;
         const viewport =
             "width=device-width, initial-scale=1.0, user-scalable=no";
-        const issconfig = 'var ISS_URL = "' + process.env.ISS_URL + '";';
-        const GOOGLE_KEY = process.env.GOOGLE_KEY;
+        const envConfig = `
+            var ISS_URL = ${JSON.stringify(ISS_URL)};
+            var GOOGLE_KEY = ${JSON.stringify(GOOGLE_KEY)};
+        `;
 
         /* eslint-disable max-len */
         const gmapsApi = `//maps.googleapis.com/maps/api/js?key=${GOOGLE_KEY}&libraries=places`;
@@ -229,7 +234,7 @@ class HtmlDocument extends React.Component {
             id="root"
             dangerouslySetInnerHTML={{__html: markup}}
         />
-        <script dangerouslySetInnerHTML={{__html: issconfig}} />
+        <script dangerouslySetInnerHTML={{__html: envConfig}} />
         {script.map((src, idx) =>
             <script
                 key={idx}

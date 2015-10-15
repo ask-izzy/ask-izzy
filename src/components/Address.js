@@ -2,19 +2,12 @@
 import React from "react";
 import icons from "../icons";
 import ScreenReader from "./ScreenReader";
-import GoogleMapsLink from "./GoogleMapsLink";
 import Location from "../iss/Location";
 
 class Address extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
-        street_number: React.PropTypes.String,
-        street_name: React.PropTypes.String,
-        street_type: React.PropTypes.String,
-        street_suffix: React.PropTypes.String,
-        suburb: React.PropTypes.String,
-        state: React.PropTypes.String,
-        postcode: React.PropTypes.String,
+        location: React.PropTypes.object,
     };
 
     // flow:disable not supported yet
@@ -53,19 +46,17 @@ class Address extends React.Component {
                 <ScreenReader>
                     <h4>Address</h4>
                 </ScreenReader>
-                <GoogleMapsLink to={location}>
-                    <icons.Map />
-                    <div className="Address-wrapper">
-                        {' '}
-                        <div className="street">
-                            {location.streetAddressLine1()}
-                        </div>
-                        {' '}
-                        <div className="suburb">
-                            {location.streetAddressLine2()}
-                        </div>
+                <icons.Map />
+                <div className="Address-wrapper">
+                    {' '}
+                    <div className="street">
+                        {location.streetAddressLine1()}
                     </div>
-                </GoogleMapsLink>
+                    {' '}
+                    <div className="suburb">
+                        {location.streetAddressLine2()}
+                    </div>
+                </div>
             </div>
         );
     }

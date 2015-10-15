@@ -4,7 +4,6 @@
  * Enable Yadda in Mocha
  */
 
-
 import SauceLabs from "saucelabs";
 import Webdriver from "selenium-webdriver";
 import Yadda from "yadda";
