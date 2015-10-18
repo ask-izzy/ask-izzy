@@ -95,7 +95,7 @@ const categories:Array<Category> = [
         byline: "Emergency funds, bills etc",
         icon: icons.Money,
         search: {
-            q: "financial aid",
+            q: "finance gambling",
         },
         personalisation: [
             personalisation.MoneySubcategories,
