@@ -22,6 +22,7 @@ import ResultListItem from "./components/ResultListItem";
 import ScreenReader from "./components/ScreenReader";
 import ServicePane from "./components/ServicePane";
 import StaticMap from "./components/StaticMap";
+import SvgIcon from "./components/SvgIcon";
 import TransportTime from "./components/TransportTime";
 import Web from "./components/Web";
 
@@ -46,6 +47,7 @@ export default {
     ScreenReader: ScreenReader,
     ServicePane: ServicePane,
     StaticMap: StaticMap,
+    SvgIcon: SvgIcon,
     TransportTime: TransportTime,
     Web: Web,
 };
