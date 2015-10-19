@@ -35,11 +35,12 @@ async function checkTransportTime(time: string): Promise<void> {
     );
     let text = await Promise.all(visibleTransports.map(
         elem => elem.getText()
-    ));
+    ))
 
-    if (text.indexOf(time) === -1) {
-        assert(false, `Expected '${text.join("\n")}' to include '${time}'`);
-    }
+    text = text.join("\n");
+
+    assert(text.indexOf(time) !== -1,
+           `Expected '${text}' to include '${time}'`);
 }
 
 async function asyncFilter(arr, check) {

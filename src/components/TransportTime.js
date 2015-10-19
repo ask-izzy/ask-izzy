@@ -56,6 +56,7 @@ class TransportTime extends React.Component {
                 <span className="travel-time">
                     Confidential location
                 </span>&nbsp;
+                {this.renderSuburb()}
             </div>
         );
     }
@@ -87,17 +88,11 @@ class TransportTime extends React.Component {
     }
 
     renderSuburb(): ReactElement {
-        if (this.props.compact) {
-            return (
-                <span className="location">
-                    {titleize(this.props.location.suburb)}
-                </span>
-            );
-        } else {
-            return (
-                <span></span>
-            )
-        }
+        return (
+            <span className="location">
+                {titleize(this.props.location.suburb)}
+            </span>
+        );
     }
 }
 
