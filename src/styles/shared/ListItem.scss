@@ -13,6 +13,7 @@
 
     .primaryText {
         font-size: 16px;
+        color: $brand-text-dark;
     }
 
     .secondaryText {
@@ -23,6 +24,14 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+    }
+
+    .SvgIcon {
+        padding: 12px;
+    }
+
+    .SvgIcon.leftIcon {
+        left: 4px;
     }
 
     .leftIcon {
@@ -47,7 +56,7 @@
         position: absolute;
 
         top: 2px;
-        right: 8px;
+        right: 4px;
 
         height: 44px;
     }

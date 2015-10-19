@@ -24,31 +24,26 @@ class CategoryListItem extends React.Component {
         let Icon = this.props.category.icon || icons.House;
 
         return (
-            <mui.ListItem
-                className="CategoryListItem"
-                containerElement={
-                    <Link
-                        to={`/category/${this.props.category.key}`}
-                    />
-                }
-
-                primaryText={
-                    <div className="primaryText">
-                        {this.props.category.name}
+            <Link
+                className="plain-text"
+                to={`/category/${this.props.category.key}`}
+            >
+                <div
+                    className="CategoryListItem ListItem has-left-icon has-right-icon"
+                    secondaryTextLines={1}
+                >
+                    <div>
+                        <Icon className="leftIcon ColoredIcon icon-fg-color size-30" />
+                        <icons.Chevron className="rightIcon" />
+                        <div className="primaryText">
+                            {this.props.category.name}
+                        </div>
+                        <div className="secondaryText oneline">
+                            {this.props.category.byline}
+                        </div>
                     </div>
-                }
-                secondaryText={this.props.category.byline}
-                secondaryTextLines={1}
-                leftIcon={
-                    <Icon className="ColoredIcon icon-fg-color size-30" />
-                }
-                rightIcon={
-                    <icons.Chevron />
-                }
-
-                disableFocusRipple={true}
-                disableTouchRipple={true}
-            />
+                </div>
+            </Link>
         );
     }
 }
