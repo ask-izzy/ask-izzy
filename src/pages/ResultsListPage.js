@@ -160,13 +160,10 @@ class ResultsListPage extends BaseResultsPage {
             }</div>
             {
                 this.state.meta && this.state.meta.next ?
-                    <mui.ListItem
+                    <components.ButtonListItem
                         className="MoreResultsButton"
                         primaryText="Load more results…"
                         onTouchTap={this.loadMore.bind(this)}
-
-                        disableFocusRipple={true}
-                        disableTouchRipple={true}
                     />
                 : ""
             }

@@ -17,13 +17,14 @@
         color: $brand-text-dark;
 
         font-size: 16px;
-        color: $brand-text-dark;
+        line-height: 150%;
     }
 
     .secondaryText {
         color: $brand-text-mid;
 
         font-size: 14px;
+        line-height: 150%;
 
         text-overflow: ellipsis;
         white-space: nowrap;

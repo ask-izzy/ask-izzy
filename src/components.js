@@ -18,6 +18,7 @@ import HeaderBar from "./components/HeaderBar";
 import IconButton from "./components/IconButton";
 import Infobox from "./components/Infobox";
 import InputListItem from "./components/InputListItem";
+import LinkListItem from "./components/LinkListItem";
 import NavBar from "./components/NavBar";
 import OpeningTimes from "./components/OpeningTimes";
 import Phone from "./components/Phone";
@@ -46,6 +47,7 @@ export default {
     IconButton: IconButton,
     Infobox: Infobox,
     InputListItem: InputListItem,
+    LinkListItem: LinkListItem,
     NavBar: NavBar,
     OpeningTimes: OpeningTimes,
     Phone: Phone,

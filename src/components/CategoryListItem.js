@@ -1,10 +1,10 @@
 /* @flow */
 
 import React from "react";
-import { History, Link } from "react-router";
+import { History } from "react-router";
 import reactMixin from "react-mixin";
-import mui from "material-ui";
 
+import components from "../components";
 import icons from "../icons";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
@@ -24,26 +24,18 @@ class CategoryListItem extends React.Component {
         let Icon = this.props.category.icon || icons.House;
 
         return (
-            <Link
-                className="plain-text"
+            <components.LinkListItem
+                className="CategoryListItem"
                 to={`/category/${this.props.category.key}`}
-            >
-                <div
-                    className="CategoryListItem ListItem has-left-icon has-right-icon"
-                    secondaryTextLines={1}
-                >
-                    <div>
-                        <Icon className="leftIcon ColoredIcon icon-fg-color size-30" />
-                        <icons.Chevron className="rightIcon" />
-                        <div className="primaryText">
-                            {this.props.category.name}
-                        </div>
-                        <div className="secondaryText oneline">
-                            {this.props.category.byline}
-                        </div>
-                    </div>
-                </div>
-            </Link>
+                leftIcon={
+                    <Icon className="ColoredIcon icon-fg-color size-30" />
+                }
+                rightIcon={<icons.Chevron />}
+                primaryText={this.props.category.name}
+                secondaryText={<div className="oneline">
+                    {this.props.category.byline}
+                </div>}
+            />
         );
     }
 }
