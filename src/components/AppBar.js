@@ -1,8 +1,8 @@
 /* @flow */
 
 import React from "react";
-import mui from "material-ui";
 
+import components from "../components";
 import icons from "../icons";
 
 class AppBar extends React.Component {
@@ -22,15 +22,12 @@ class AppBar extends React.Component {
         return (
             <div className="AppBar">
                 <div className="left">
-                    <mui.IconButton
+                    <components.IconButton
                         className="BackButton"
                         onTouchTap={this.props.onBackTouchTap}
-
-                        disableFocusRipple={true}
-                        disableTouchRipple={true}
                     >
                         <icons.ChevronBack />
-                    </mui.IconButton>
+                    </components.IconButton>
                 </div>
                 <h1>{this.props.title}</h1>
             </div>

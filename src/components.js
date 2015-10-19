@@ -13,6 +13,7 @@ import Eligibility from "./components/Eligibility";
 import Email from "./components/Email";
 import GoogleMapsLink from "./components/GoogleMapsLink";
 import HeaderBar from "./components/HeaderBar";
+import IconButton from "./components/IconButton";
 import Infobox from "./components/Infobox";
 import NavBar from "./components/NavBar";
 import OpeningTimes from "./components/OpeningTimes";
@@ -36,6 +37,7 @@ export default {
     Email: Email,
     GoogleMapsLink: GoogleMapsLink,
     HeaderBar: HeaderBar,
+    IconButton: IconButton,
     Infobox: Infobox,
     NavBar: NavBar,
     OpeningTimes: OpeningTimes,
