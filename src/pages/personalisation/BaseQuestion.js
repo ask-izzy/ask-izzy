@@ -252,7 +252,7 @@ class BaseQuestion extends React.Component {
                         </div>
                     }
                 />
-                <mui.List className="List">
+                <div className="List">
                 {this.answers.map((answer, index) =>
                     <mui.ListItem
                         className="ListItem"
@@ -271,7 +271,7 @@ class BaseQuestion extends React.Component {
                         disableFocusRipple={true}
                         disableTouchRipple={true}
                     />)}
-                </mui.List>
+                </div>
 
             </div>
         );

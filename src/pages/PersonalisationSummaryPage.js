@@ -38,7 +38,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                             </div>
                         }
                     />
-                    <mui.List className="List">{
+                    <div className="List">{
                         this.personalisationComponents
                             .map((component, index) =>
                                 <mui.ListItem
@@ -67,7 +67,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                                     disableTouchRipple={true}
                                 />
                         )
-                    }</mui.List>
+                    }</div>
 
                     <div className="padded">
                         All of your answers are private and anonymous.

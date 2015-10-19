@@ -111,7 +111,7 @@ class ResultsListPage extends BaseResultsPage {
     renderResults(): ReactElement {
 
         return (
-            <mui.List className="List results">
+            <div className="List results">
             {
                 this.state.objects ?
                     <mui.ListItem
@@ -170,7 +170,7 @@ class ResultsListPage extends BaseResultsPage {
                     />
                 : ""
             }
-            </mui.List>
+            </div>
         );
     }
 }

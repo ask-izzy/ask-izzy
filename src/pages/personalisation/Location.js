@@ -265,7 +265,7 @@ class Location extends React.Component {
                         "This will let me find the services closest to you"
                     }
                 />
-                <mui.List className="List">{
+                <div className="List">{
                     /* if the browser supports geolocation */
                     require("has-geolocation") &&
                     this.state.geolocation == GeoLocationState.NOT_STARTED ?
@@ -366,7 +366,7 @@ class Location extends React.Component {
                             disableTouchRipple={true}
                         />
                     )
-                }</mui.List>
+                }</div>
                 {
                     this.state.autocompletion == AutocompleteState.SEARCHING ?
                         <div className="progress">

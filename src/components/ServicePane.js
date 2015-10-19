@@ -127,7 +127,7 @@ export default class ServicePane extends React.Component {
                 <h3 className="padded">
                     Also at this location
                 </h3>
-                <mui.List className="List">
+                <div className="List">
                     {this.state.siblings.map((service, index) =>
                         <mui.ListItem className="ListItem"
                             key={index}
@@ -147,7 +147,7 @@ export default class ServicePane extends React.Component {
                             disableTouchRipple={true}
                         />
                     )}
-                </mui.List>
+                </div>
             </div>
         );
     }

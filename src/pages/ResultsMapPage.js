@@ -2,7 +2,6 @@
 
 import React from "react";
 import _ from "underscore";
-import mui from "material-ui";
 import { GoogleMap, Marker } from "react-google-maps";
 
 import iss from "../iss";
@@ -134,7 +133,7 @@ class ResultsMapPage extends BaseResultsPage {
                      * resolves */
                     this.state.maps ? this.renderMap() : ""
                 }
-                <mui.List className="List">{
+                <div className="List">{
                     selectedServices.map((object, index) =>
                         <ResultListItem
                             key={index}
@@ -142,7 +141,7 @@ class ResultsMapPage extends BaseResultsPage {
                             nServiceProvisions={0}
                         />
                     )
-                }</mui.List>
+                }</div>
             </div>
         );
     }
