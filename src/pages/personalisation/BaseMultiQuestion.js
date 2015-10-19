@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import mui from "material-ui";
 
 import BaseQuestion from "./BaseQuestion";
 import components from "../../components";
@@ -97,28 +96,19 @@ class BaseMultiQuestion extends BaseQuestion {
                 />
                 <div className="List">
                 {this.answers.map((answer, index) =>
-                    <div
-                        className="ListItem"
+                    <components.InputListItem
                         key={index}
-                    >
-                    <mui.ListItem
                         primaryText={answer}
-                        leftCheckbox={
-                            <mui.Checkbox
-                                checked={selected.has(answer)}
-                                checkedIcon={<icons.CheckboxSelected />}
-                                unCheckedIcon={<icons.CheckboxUnselected />}
-                                onCheck={this.onAnswerTouchTap.bind(
-                                    this, answer, !selected.has(answer)
-                                )}
-                                disableFocusRipple={true}
-                                disableTouchRipple={true}
-                            />
-                        }
-                        disableFocusRipple={true}
-                        disableTouchRipple={true}
+
+                        type="checkbox"
+                        checked={selected.has(answer)}
+                        checkedIcon={<icons.CheckboxSelected />}
+                        uncheckedIcon={<icons.CheckboxUnselected />}
+                        onChange={this.onAnswerTouchTap.bind(
+                            this, answer, !selected.has(answer)
+                        )}
                     />
-                    </div>)}
+                )}
                 </div>
 
                 <div className="done-button">
