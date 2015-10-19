@@ -6,7 +6,7 @@ import { Link } from "react-router";
 export default class LinkListItem extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
-        primaryText: React.PropTypes.node.isRequired,
+        primaryText: React.PropTypes.node,
         secondaryText: React.PropTypes.node,
 
         leftIcon: React.PropTypes.node,
