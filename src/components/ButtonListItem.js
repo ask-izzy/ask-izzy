@@ -2,18 +2,14 @@
 
 import React from "react";
 
-export default class InputListItem extends React.Component {
+export default class ButtonListItem extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
-        type: React.PropTypes.string.isRequired,
-        checked: React.PropTypes.bool,
-        value: React.PropTypes.string,
-
         primaryText: React.PropTypes.node.isRequired,
         secondaryText: React.PropTypes.node,
 
-        checkedIcon: React.PropTypes.node,
-        uncheckedIcon: React.PropTypes.node,
+        leftIcon: React.PropTypes.node,
+        rightIcon: React.PropTypes.node,
     };
 
     // flow:disable not supported yet
@@ -26,20 +22,33 @@ export default class InputListItem extends React.Component {
             className,
             primaryText,
             secondaryText,
-            checkedIcon,
-            uncheckedIcon,
+            leftIcon,
+            rightIcon,
             ...rest,
         } = this.props;
 
+        let classes = [
+            "ListItem",
+            className,
+        ];
+
+        if (leftIcon) {
+            classes.push("has-left-icon");
+        }
+
+        if (rightIcon) {
+            classes.push("has-right-icon");
+        }
+
         return (
-            <label
-                className={`ListItem has-left-icon ${className}`}
+            <a
+                aria-role="button"
+                className={classes.join(" ")}
+                {...rest}
             >
                 <div>
                     <div className="leftIcon">
-                        {this.props.checked ? checkedIcon
-                        : uncheckedIcon}
-                        <input {...rest} />
+                        {leftIcon}
                     </div>
                     <div className="primaryText">
                         {primaryText}
@@ -47,8 +56,11 @@ export default class InputListItem extends React.Component {
                     <div className="secondaryText">
                         {secondaryText}
                     </div>
+                    <div className="rightIcon">
+                        {rightIcon}
+                    </div>
                 </div>
-            </label>
+            </a>
         )
     }
 }

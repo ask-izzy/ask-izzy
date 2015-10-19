@@ -4,6 +4,7 @@
 
 import Address from "./components/Address";
 import AppBar from "./components/AppBar";
+import ButtonListItem from "./components/ButtonListItem";
 import CategoryListItem from "./components/CategoryListItem";
 import CollapsedOpeningTimes from "./components/CollapsedOpeningTimes";
 import Collapser from "./components/Collapser";
@@ -31,6 +32,7 @@ import Web from "./components/Web";
 export default {
     Address: Address,
     AppBar: AppBar,
+    ButtonListItem: ButtonListItem,
     CategoryListItem: CategoryListItem,
     CollapsedOpeningTimes: CollapsedOpeningTimes,
     Collapser: Collapser,
