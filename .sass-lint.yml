@@ -32,7 +32,6 @@ rules:
     no-empty-rulesets: 2
     no-extends: 2
     no-ids: 2
-    # We need !important to override material-ui
     no-important: 0
     no-invalid-hex: 2
     no-warn: 2

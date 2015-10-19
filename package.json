@@ -22,7 +22,6 @@
     "immutable": "3.7.5",
     "iso-http": "0.0.5",
     "js-yaml": "3.4.2",
-    "material-ui": "0.12.2",
     "moment": "2.10.6",
     "newrelic": "1.22.1",
     "node-jsx": "0.13.3",
