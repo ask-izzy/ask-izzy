@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Link } from "react-router";
-import mui from "material-ui";
 import _ from "underscore";
 
 import Address from "./Address";
@@ -129,23 +128,25 @@ export default class ServicePane extends React.Component {
                 </h3>
                 <div className="List">
                     {this.state.siblings.map((service, index) =>
-                        <mui.ListItem className="ListItem"
-                            key={index}
-                            primaryText={service.name}
-                            secondaryText={service.shortDescription}
-                            containerElement={
-                                <Link
-                                    to={`/service/${service.slug}`}
-                                />
-                            }
-
-                            rightIcon={
-                                <icons.Chevron />
-                            }
-
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
-                        />
+                        <Link
+                            className="plain-text"
+                            to={`/service/${service.slug}`}
+                        >
+                            <div
+                                className="ListItem"
+                                key={index}
+                            >
+                                <div>
+                                    <icons.Chevron className="rightIcon" />
+                                    <div className="primaryText">
+                                        {service.name}
+                                    </div>
+                                    <div className="secondaryText">
+                                        {service.shortDescription}
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
                     )}
                 </div>
             </div>

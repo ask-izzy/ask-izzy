@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import mui from "material-ui";
 
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import components from "../components";
@@ -41,7 +40,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                     <div className="List">{
                         this.personalisationComponents
                             .map((component, index) =>
-                                <mui.ListItem
+                                <div
                                     key={index}
                                     className="ListItem SummaryItem"
                                     onTouchTap={event => {
@@ -51,21 +50,14 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                                             }`
                                         );
                                     }}
-
-                                    primaryText={
-                                        <span className="primaryText">
-                                            {component.summaryLabel}
-                                        </span>
-                                    }
-                                    secondaryText={
-                                        <span className="secondaryText">
-                                            {component.summaryValue}
-                                        </span>
-                                    }
-
-                                    disableFocusRipple={true}
-                                    disableTouchRipple={true}
-                                />
+                                ><div>
+                                    <div className="primaryText">
+                                        {component.summaryLabel}
+                                    </div>
+                                    <div className="secondaryText">
+                                        {component.summaryValue}
+                                    </div>
+                                </div></div>
                         )
                     }</div>
 
