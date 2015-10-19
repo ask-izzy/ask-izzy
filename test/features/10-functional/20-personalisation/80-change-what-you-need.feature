@@ -16,6 +16,7 @@ Feature: Change your personalisation settings
     Scenario: View personalisation settings and return to search
         When I click on "Housing"
         And I click on "Change what you need"
+        Then I should see "This is what I think I know about you. Change your answers here."
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
@@ -43,6 +44,7 @@ Feature: Change your personalisation settings
         And I click on "Carlton"
         And I click on "Done"
 
+        Then I should see "This is what I think I know about you. Change your answers here."
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
@@ -59,6 +61,7 @@ Feature: Change your personalisation settings
         When I visit /category/housing/personalise/summary
         And I click on "Do you have somewhere safe to sleep tonight?"
         And I click on "No"
+        Then I should see "This is what I think I know about you. Change your answers here."
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
@@ -77,6 +80,7 @@ Feature: Change your personalisation settings
         -------------------------------
 
         When I visit /category/housing/personalise/summary
+        Then I should see "This is what I think I know about you. Change your answers here."
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
@@ -101,6 +105,7 @@ Feature: Change your personalisation settings
         And I click on "Private rental"
         And I click on "Mortgaged housing"
         And I click on "Done"
+        Then I should see "This is what I think I know about you. Change your answers here."
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
@@ -121,6 +126,7 @@ Feature: Change your personalisation settings
         --------------------------------------
 
         When I visit /category/housing/personalise/summary
+        Then I should see "This is what I think I know about you. Change your answers here."
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
@@ -136,6 +142,7 @@ Feature: Change your personalisation settings
         When I click on "Do any of these apply to you?"
         And I click on "Aboriginal or Torres Strait Islander"
         And I click on "Done"
+        Then I should see "This is what I think I know about you. Change your answers here."
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
@@ -152,6 +159,7 @@ Feature: Change your personalisation settings
         When I visit /category/housing/personalise/summary
         And I click on "How do you identify?"
         And I click on "Male"
+        Then I should see "This is what I think I know about you. Change your answers here."
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
