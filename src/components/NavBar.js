@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import mui from "material-ui";
 
 import categories from "../constants/categories";
 import CategoryListItem from "./CategoryListItem";
@@ -14,7 +13,7 @@ class NavBar extends React.Component {
     render(): ReactElement {
         return (
             <div className="NavBar">
-                <mui.List className="List categories">
+                <div className="List categories">
                     {
                         categories.map(category => {
                             return (
@@ -25,8 +24,7 @@ class NavBar extends React.Component {
                             );
                         })
                     }
-                    <mui.ListDivider />
-                </mui.List>
+                </div>
             </div>
         );
     }
