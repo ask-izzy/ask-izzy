@@ -5,18 +5,26 @@ import React from "react";
 export default class FlatButton extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
+        disabled: React.PropTypes.boolean,
         label: React.PropTypes.string.isRequired,
         onTouchTap: React.PropTypes.func,
     };
 
     render(): ReactElement {
+        let {
+            className,
+            children,
+            label,
+            ...rest,
+        } = this.props;
+
         return (
             <button
-                className={`FlatButton ${this.props.className}`}
-                onTouchTap={this.props.onTouchTap}
+                className={`FlatButton ${className}`}
+                {...rest}
             >
-                {this.props.label}
-                {this.props.children}
+                {label}
+                {children}
             </button>
         )
     }
