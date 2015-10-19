@@ -20,10 +20,8 @@ class AppBar extends React.Component {
 
     render(): ReactElement {
         return (
-            <mui.AppBar
-                className="AppBar"
-                title={this.props.title}
-                iconElementLeft={
+            <div className="AppBar">
+                <div className="left">
                     <mui.IconButton
                         className="BackButton"
                         onTouchTap={this.props.onBackTouchTap}
@@ -33,8 +31,9 @@ class AppBar extends React.Component {
                     >
                         <icons.ChevronBack />
                     </mui.IconButton>
-                }
-            />
+                </div>
+                <h1>{this.props.title}</h1>
+            </div>
         );
     }
 }
