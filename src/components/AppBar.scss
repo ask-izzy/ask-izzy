@@ -23,9 +23,14 @@
 
         font-size: 18px;
         font-weight: 500;
+        letter-spacing: 0;
+
         line-height: 44px;
         text-align: center;
         text-overflow: ellipsis;
+
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     .BackButton {
