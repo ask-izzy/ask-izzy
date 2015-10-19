@@ -36,14 +36,6 @@
     .BackButton {
         margin-top: -5px;
         margin-left: -5px;
-
-        &:hover,
-        &:focus {
-            svg {
-                border-radius: 24px;
-                background-color: fade-out($white, 0.8) !important;
-            }
-        }
     }
 
     .ChevronBackIcon {

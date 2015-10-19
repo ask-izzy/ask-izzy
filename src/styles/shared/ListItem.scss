@@ -12,14 +12,14 @@
     & > div {
         padding: 16px;
 
-        > .primaryText {
+        & > .primaryText {
             color: $brand-text-dark;
 
             font-size: 16px;
             line-height: 150%;
         }
 
-        > .secondaryText {
+        & > .secondaryText {
             color: $brand-text-mid;
 
             font-size: 14px;
@@ -30,18 +30,18 @@
             overflow: hidden;
         }
 
-        > .SvgIcon {
+        & > .SvgIcon {
             padding: 12px;
         }
 
-        > .SvgIcon.leftIcon {
+        & > .SvgIcon.leftIcon {
             left: 4px;
         }
 
-        > .leftIcon {
+        & > .leftIcon {
             position: absolute;
 
-            top: 2px;
+            top: 12px;
             left: 8px;
 
             height: 44px;
@@ -56,18 +56,13 @@
             }
         }
 
-        > .rightIcon {
+        & > .rightIcon {
             position: absolute;
 
-            top: 2px;
+            top: 12px;
             right: 4px;
 
             height: 44px;
         }
-    }
-
-    &:focus {
-        background-color: $brand-bg-mid;
-
     }
 }

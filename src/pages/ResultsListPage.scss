@@ -44,17 +44,13 @@
         background-color: $brand-bg-light;
         color: $brand-text-mid;
 
-        &:focus {
-            background-color: darken($brand-bg-light, 10%);
-        }
-
         .primaryText {
             font-size: 18px;
             line-height: 18px;
         }
 
         .rightIcon {
-            top: -6px;
+            top: 6px;
         }
 
         & > div {
@@ -67,10 +63,6 @@
         border-bottom: 10px solid $brand-bg-light;
         font-size: 14px;
         text-align: center;
-
-        &:focus {
-            background-color: darken($brand-bg-light, 10%);
-        }
     }
 }
 
