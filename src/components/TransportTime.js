@@ -28,8 +28,21 @@ class TransportTime extends React.Component {
     };
 
     // flow:disable not supported yet
+    static defaultProps = {
+        compact: false,
+    };
+
+    // flow:disable not supported yet
     get compactClass(): string {
         return this.props.compact ? "compact" : "";
+    }
+
+    render(): ReactElement {
+        if (this.props.location.isConfidential()) {
+            return this.renderConfidential()
+        } else {
+            return this.renderPublic()
+        }
     }
 
     renderConfidential(): ReactElement {
@@ -43,9 +56,21 @@ class TransportTime extends React.Component {
                 <span className="travel-time">
                     Confidential location
                 </span>&nbsp;
-                <span className="location">
-                    {titleize(this.props.location.suburb)}
-                </span>
+            </div>
+        );
+    }
+
+    renderPublic(): ReactElement {
+        return (
+            <div
+                className={`TransportTime ${this.compactClass}`}
+            >
+                <icons.Walk className="ColoredIcon" />
+                <span className="travel-time">
+                    ? mins
+                </span>&nbsp;
+                {this.renderSuburb()}
+                {this.renderDirections()}
             </div>
         );
     }
@@ -61,28 +86,17 @@ class TransportTime extends React.Component {
         return <span />;
     }
 
-    renderPublic(): ReactElement {
-        return (
-            <div
-                className={`TransportTime ${this.compactClass}`}
-            >
-                <icons.Walk className="ColoredIcon" />
-                <span className="travel-time">
-                    ? mins
-                </span>&nbsp;
+    renderSuburb(): ReactElement {
+        if (this.props.compact) {
+            return (
                 <span className="location">
                     {titleize(this.props.location.suburb)}
                 </span>
-                {this.renderDirections()}
-            </div>
-        );
-    }
-
-    render(): ReactElement {
-        if (this.props.location.isConfidential()) {
-            return this.renderConfidential()
+            );
         } else {
-            return this.renderPublic()
+            return (
+                <span></span>
+            )
         }
     }
 }
