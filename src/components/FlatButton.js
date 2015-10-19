@@ -10,6 +10,13 @@ export default class FlatButton extends React.Component {
         onTouchTap: React.PropTypes.func,
     };
 
+    // flow:disable not supported yet
+    static sampleProps = {
+        default: {
+            label: "Button Text",
+        },
+    };
+
     render(): ReactElement {
         let {
             className,

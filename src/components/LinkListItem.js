@@ -18,6 +18,15 @@ export default class LinkListItem extends React.Component {
         className: "",
     };
 
+    // flow:disable not supported yet
+    static sampleProps = {
+        default: {
+            primaryText: "Link Text",
+            secondaryText: "Secondary Text",
+            to: "example.com",
+        },
+    };
+
     render(): ReactElement {
         let {
             className,
@@ -42,15 +51,6 @@ export default class LinkListItem extends React.Component {
             classes.push("has-right-icon");
         }
 
-        const text = this.props.children || [
-            <div className="primaryText">
-                {primaryText}
-            </div>,
-            <div className="secondaryText">
-                {secondaryText}
-            </div>,
-        ];
-
         return (
             <Link
                 className={classes.join(" ")}
@@ -60,7 +60,17 @@ export default class LinkListItem extends React.Component {
                     <div className="leftIcon">
                         {leftIcon}
                     </div>
-                    {text}
+                    {this.props.children ? null
+                        : <div className="primaryText">
+                            {primaryText}
+                        </div>
+                    }
+                    {this.props.children ? null
+                        : <div className="secondaryText">
+                            {secondaryText}
+                        </div>
+                    }
+                    {this.props.children}
                     <div className="rightIcon">
                         {rightIcon}
                     </div>

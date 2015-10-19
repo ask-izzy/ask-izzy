@@ -9,6 +9,10 @@ class SvgIcon extends React.Component {
         viewBox: "0 0 24 24",
     };
 
+    // flow:disable not supported yet
+    static sampleProps = {
+    };
+
     render(): ReactElement {
         const {
             children,

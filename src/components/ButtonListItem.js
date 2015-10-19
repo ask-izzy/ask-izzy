@@ -17,6 +17,14 @@ export default class ButtonListItem extends React.Component {
         className: "",
     };
 
+    // flow:disable not supported yet
+    static sampleProps = {
+        default: {
+            primaryText: "Primary Text",
+            secondaryText: "Secondary Text",
+        },
+    };
+
     render(): ReactElement {
         let {
             className,

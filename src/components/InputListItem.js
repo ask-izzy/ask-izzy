@@ -21,6 +21,15 @@ export default class InputListItem extends React.Component {
         className: "",
     };
 
+    // flow:disable not supported yet
+    static sampleProps = {
+        default: {
+            primaryText: "Primary Text",
+            secondaryText: "Secondary Text",
+            type: "radio",
+        },
+    };
+
     render(): ReactElement {
         let {
             className,
