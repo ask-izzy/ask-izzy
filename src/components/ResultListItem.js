@@ -3,7 +3,6 @@
 import React from "react";
 import { History, Link } from "react-router";
 import fixtures from "../../fixtures/services";
-import mui from "material-ui";
 import reactMixin from "react-mixin";
 
 import icons from "../icons";
@@ -51,53 +50,49 @@ class ResultListItem extends React.Component {
         } = this.props;
 
         return (
-            <mui.ListItem
-                className="ResultListItem"
-                containerElement={
-                    <Link
-                        to={`/service/${object.slug}`}
-                    />
-                }
-
-                rightIcon={
-                    <icons.Chevron />
-                }
-
-                disableFocusRipple={true}
-                disableTouchRipple={true}
+            <Link
+                className="plain-text"
+                to={`/service/${object.slug}`}
             >
-                <h2 className="name">{object.name}</h2>
-                <div className="site_name">{object.site.name}</div>
-                <OpeningTimes
-                    className="opening_hours"
-                    object={object.open}
-                />
-                <TransportTime
-                    compact={true}
-                    location={object.Location()}
-                />
-                {this.props.nServiceProvisions > 0 ?
-                    <div>
-                        <ul className="related">{
-                            object.serviceProvisions
-                                .slice(0, this.props.nServiceProvisions)
-                                .map((service, index) =>
-                                    <li className="provision"
-                                        key={index}
-                                    >
-                                        {service}
-                                    </li>
-                                )
-                        }</ul>
+                <div
+                    className="ResultListItem ListItem has-right-icon"
+                ><div>
+                    <icons.Chevron className="rightIcon" />
+                    <h2 className="name">{object.name}</h2>
+                    <div className="site_name">{object.site.name}</div>
+                    <OpeningTimes
+                        className="opening_hours"
+                        object={object.open}
+                    />
+                    <TransportTime
+                        compact={true}
+                        location={object.Location()}
+                    />
+                    {this.props.nServiceProvisions > 0 ?
+                        <div>
+                            <ul className="related">{
+                                object.serviceProvisions
+                                    .slice(0, this.props.nServiceProvisions)
+                                    .map((service, index) =>
+                                        <li className="provision"
+                                            key={index}
+                                        >
+                                            {service}
+                                        </li>
+                                    )
+                            }</ul>
 
-                        {this.nMoreServiceProvisions > 0 ?
-                            <div>
-                                {this.nMoreServiceProvisions} more…
-                            </div>
-                        : ""}
-                    </div>
-                : ""}
-            </mui.ListItem>
+                            {this.nMoreServiceProvisions > 0 ?
+                                <div>
+                                    {this.nMoreServiceProvisions} more…
+                                </div>
+                            : ""}
+                        </div>
+                    : ""}
+
+                </div></div>
+            </Link>
+
         );
     }
 }
