@@ -3,10 +3,12 @@
 import DocumentTitle from "react-document-title";
 import React from "react";
 
+declare var SITE_DOMAIN: string;
+
 export default class BasePage extends React.Component {
 
     render(): ReactElement {
-        const domain = process.env.SITE_DOMAIN || "ask-izzy.org.au";
+        const domain = SITE_DOMAIN;
         const mailLink = `mailto:support@${domain}`;
 
         return (

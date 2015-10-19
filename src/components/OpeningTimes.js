@@ -43,7 +43,7 @@ class OpeningTimes extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
         object: React.PropTypes.object.isRequired,
-        moment: React.PropTypes.function,
+        moment: React.PropTypes.func,
     };
 
     // flow:disable

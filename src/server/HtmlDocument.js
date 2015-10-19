@@ -4,6 +4,7 @@ import React from "react";
 
 declare var GOOGLE_KEY: string;
 declare var ISS_URL: string;
+declare var SITE_DOMAIN: string;
 
 class HtmlDocument extends React.Component {
 
@@ -40,6 +41,7 @@ class HtmlDocument extends React.Component {
         const envConfig = `
             var ISS_URL = ${JSON.stringify(ISS_URL)};
             var GOOGLE_KEY = ${JSON.stringify(GOOGLE_KEY)};
+            var SITE_DOMAIN = ${JSON.stringify(SITE_DOMAIN)};
         `;
 
         /* eslint-disable max-len */
