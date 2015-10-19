@@ -11,6 +11,7 @@ import ContactMethods from "./components/ContactMethods";
 import CrisisLineItem from "./components/CrisisLineItem";
 import Eligibility from "./components/Eligibility";
 import Email from "./components/Email";
+import FlatButton from "./components/FlatButton";
 import GoogleMapsLink from "./components/GoogleMapsLink";
 import HeaderBar from "./components/HeaderBar";
 import IconButton from "./components/IconButton";
@@ -36,6 +37,7 @@ export default {
     CrisisLineItem: CrisisLineItem,
     Eligibility: Eligibility,
     Email: Email,
+    FlatButton: FlatButton,
     GoogleMapsLink: GoogleMapsLink,
     HeaderBar: HeaderBar,
     IconButton: IconButton,

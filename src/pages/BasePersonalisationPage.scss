@@ -35,31 +35,14 @@
         width: 100%;
 
         button {
-            display: block !important;
+            display: block;
 
             width: calc(100% - 40px);
 
-            margin-top: 20px !important;
-            margin-right: auto !important;
-            margin-bottom: 20px !important;
-            margin-left: auto !important;
-
-            background-color: $icon-fg-color !important;
-            color: $white !important;
-
-            font-size: 18px !important;
-            font-weight: 400 !important;
-            text-transform: none !important;
-
-            &:hover,
-            &:focus {
-                background-color: lighten($icon-fg-color, 10%) !important;
-            }
-
-        }
-
-        button[disabled] {
-            background-color: $brand-bg-mid !important;
+            margin-top: 20px;
+            margin-right: auto;
+            margin-bottom: 20px;
+            margin-left: auto;
         }
     }
 

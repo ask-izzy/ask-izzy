@@ -73,11 +73,9 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         All of your answers are private and anonymous.
                     </div>
                     <div className="done-button">
-                        <mui.FlatButton
+                        <components.FlatButton
                             label="Okay"
                             onTouchTap={this.previousStep.bind(this)}
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
                         />
                     </div>
                 </div>}

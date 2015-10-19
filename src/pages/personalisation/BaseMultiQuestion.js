@@ -122,11 +122,9 @@ class BaseMultiQuestion extends BaseQuestion {
                 </mui.List>
 
                 <div className="done-button">
-                    <mui.FlatButton
+                    <components.FlatButton
                         label="Done"
                         onTouchTap={this.onDoneTouchTap.bind(this)}
-                        disableFocusRipple={true}
-                        disableTouchRipple={true}
                     />
                 </div>
             </div>

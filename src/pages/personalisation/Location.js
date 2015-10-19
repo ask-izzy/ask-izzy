@@ -375,12 +375,10 @@ class Location extends React.Component {
                     : ""
                 }
                 <div className="done-button">
-                    <mui.FlatButton
+                    <components.FlatButton
                         label="Done"
                         disabled={(!this.state.locationName)}
                         onTouchTap={this.onTouchDoneButton.bind(this)}
-                        disableFocusRipple={true}
-                        disableTouchRipple={true}
                     />
                 </div>
 

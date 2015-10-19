@@ -5,11 +5,10 @@
 
     font-size: 18px;
     font-weight: 400;
-    text-transform: none;
     line-height: 36px;
 
     -webkit-appearance: button;
-    
+
     &:hover,
     &:focus {
         background-color: lighten($icon-fg-color, 10%);
