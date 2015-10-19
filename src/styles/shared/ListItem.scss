@@ -5,64 +5,64 @@
 
     cursor: pointer;
 
-    & > div {
-        padding: 16px;
-    }
-
     &.has-left-icon > div {
         padding-left: 72px;
     }
 
-    .primaryText {
-        color: $brand-text-dark;
+    & > div {
+        padding: 16px;
 
-        font-size: 16px;
-        line-height: 150%;
-    }
+        > .primaryText {
+            color: $brand-text-dark;
 
-    .secondaryText {
-        color: $brand-text-mid;
+            font-size: 16px;
+            line-height: 150%;
+        }
 
-        font-size: 14px;
-        line-height: 150%;
+        > .secondaryText {
+            color: $brand-text-mid;
 
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
+            font-size: 14px;
+            line-height: 150%;
 
-    .SvgIcon {
-        padding: 12px;
-    }
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
 
-    .SvgIcon.leftIcon {
-        left: 4px;
-    }
+        > .SvgIcon {
+            padding: 12px;
+        }
 
-    .leftIcon {
-        position: absolute;
+        > .SvgIcon.leftIcon {
+            left: 4px;
+        }
 
-        top: 2px;
-        left: 8px;
-
-        height: 44px;
-
-        input {
+        > .leftIcon {
             position: absolute;
 
-            top: 16px;
-            left: 16px;
+            top: 2px;
+            left: 8px;
 
-            z-index: -99;
+            height: 44px;
+
+            input {
+                position: absolute;
+
+                top: 16px;
+                left: 16px;
+
+                z-index: -99;
+            }
         }
-    }
 
-    .rightIcon {
-        position: absolute;
+        > .rightIcon {
+            position: absolute;
 
-        top: 2px;
-        right: 4px;
+            top: 2px;
+            right: 4px;
 
-        height: 44px;
+            height: 44px;
+        }
     }
 }
