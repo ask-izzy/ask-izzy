@@ -4,6 +4,7 @@
 @import "./colors";
 @import "./responsive";
 
+@import "../styles/shared/ListItem";
 @import "../styles/shared/plain-text";
 @import "../components/Address";
 @import "../components/AppBar";
@@ -17,6 +18,7 @@
 @import "../components/HeaderBar";
 @import "../components/IconButton";
 @import "../components/Infobox";
+@import "../components/InputListItem";
 @import "../components/NavBar";
 @import "../components/OpeningTimes";
 @import "../components/Phone";

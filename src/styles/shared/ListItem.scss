@@ -1,0 +1,54 @@
+.ListItem {
+
+    display: block;
+    position: relative;
+
+    & > div {
+        padding: 16px;
+    }
+
+    &.has-left-icon > div {
+        padding-left: 72px;
+    }
+
+    .primaryText {
+        font-size: 16px;
+    }
+
+    .secondaryText {
+        color: $brand-text-mid;
+
+        font-size: 14px;
+
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .leftIcon {
+        position: absolute;
+
+        top: 0;
+        left: 8px;
+
+        height: 44px;
+
+        input {
+            position: absolute;
+
+            top: 16px;
+            left: 16px;
+
+            z-index: -99;
+        }
+    }
+
+    .rightIcon {
+        position: absolute;
+
+        top: 2px;
+        right: 8px;
+
+        height: 44px;
+    }
+}

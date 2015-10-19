@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import mui from "material-ui";
 import reactMixin from "react-mixin";
 import { debounce } from "core-decorators";
 import _ from "underscore";
@@ -254,22 +253,17 @@ class BaseQuestion extends React.Component {
                 />
                 <div className="List">
                 {this.answers.map((answer, index) =>
-                    <mui.ListItem
-                        className="ListItem"
+                    <components.InputListItem
                         key={index}
                         primaryText={answer}
-                        leftCheckbox={
-                            <mui.RadioButton
-                                checked={answer == selected}
-                                value={answer}
-                                onCheck={this.onAnswerTouchTap.bind(
-                                    this, answer)}
-                                disableFocusRipple={true}
-                                disableTouchRipple={true}
-                            />
-                        }
-                        disableFocusRipple={true}
-                        disableTouchRipple={true}
+
+                        type="radio"
+                        checked={answer == selected}
+                        value={answer}
+                        onChange={this.onAnswerTouchTap.bind(this, answer)}
+
+                        checkedIcon={<icons.RadioSelected />}
+                        uncheckedIcon={<icons.RadioUnselected />}
                     />)}
                 </div>
 

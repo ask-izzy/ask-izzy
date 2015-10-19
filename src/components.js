@@ -16,6 +16,7 @@ import GoogleMapsLink from "./components/GoogleMapsLink";
 import HeaderBar from "./components/HeaderBar";
 import IconButton from "./components/IconButton";
 import Infobox from "./components/Infobox";
+import InputListItem from "./components/InputListItem";
 import NavBar from "./components/NavBar";
 import OpeningTimes from "./components/OpeningTimes";
 import Phone from "./components/Phone";
@@ -42,6 +43,7 @@ export default {
     HeaderBar: HeaderBar,
     IconButton: IconButton,
     Infobox: Infobox,
+    InputListItem: InputListItem,
     NavBar: NavBar,
     OpeningTimes: OpeningTimes,
     Phone: Phone,
