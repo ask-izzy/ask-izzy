@@ -27,44 +27,50 @@
         width: 100%;
 
         & > * {
-            display: block !important;
-            width: 60px !important;
-            height: 60px !important;
+            display: block;
+            width: 60px;
+            height: 60px;
 
-            margin-right: auto !important;
-            margin-left: auto !important;
+            margin-right: auto;
+            margin-left: auto;
         }
     }
 
     .List {
-        padding: 0 !important;
+        padding: 0;
     }
 
     .ViewOnMapButton {
-        background-color: $brand-bg-light !important;
-        color: $brand-text-mid !important;
+        background-color: $brand-bg-light;
+        color: $brand-text-mid;
 
-        &:hover,
         &:focus {
-            background-color: darken($brand-bg-light, 10%) !important;
+            background-color: darken($brand-bg-light, 10%);
         }
 
         .primaryText {
-            font-size: 18px !important;
-            font-weight: 500 !important;
-            line-height: 18px !important;
+            font-size: 18px;
+            line-height: 18px;
+        }
+
+        .rightIcon {
+            top: -6px;
         }
 
         & > div {
-            padding-left: 58px !important;
+            padding-left: 58px;
         }
     }
 
     .MoreResultsButton {
-        border-top: 10px solid $brand-bg-light !important;
-        border-bottom: 10px solid $brand-bg-light !important;
-        font-size: 14px !important;
+        border-top: 10px solid $brand-bg-light;
+        border-bottom: 10px solid $brand-bg-light;
+        font-size: 14px;
         text-align: center;
+
+        &:focus {
+            background-color: darken($brand-bg-light, 10%);
+        }
     }
 }
 

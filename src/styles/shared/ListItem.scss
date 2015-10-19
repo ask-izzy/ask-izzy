@@ -65,4 +65,9 @@
             height: 44px;
         }
     }
+
+    &:focus {
+        background-color: $brand-bg-mid;
+
+    }
 }

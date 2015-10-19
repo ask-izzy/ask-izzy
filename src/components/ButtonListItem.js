@@ -43,6 +43,7 @@ export default class ButtonListItem extends React.Component {
         return (
             <a
                 aria-role="button"
+                tabIndex="0"
                 className={classes.join(" ")}
                 {...rest}
             >

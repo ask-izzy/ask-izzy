@@ -79,7 +79,6 @@
         border-bottom: 1px solid darken($list-item-hairline, 15%);
         background-color: $brand-bg-light !important;
 
-        &:hover,
         &:focus {
             background-color: darken($brand-bg-light, 10%);
         }

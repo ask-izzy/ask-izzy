@@ -2,7 +2,6 @@
 
 import React from "react";
 import {Link} from "react-router";
-import mui from "material-ui";
 
 import BaseResultsPage from "./BaseResultsPage";
 import components from "../components";
@@ -114,22 +113,16 @@ class ResultsListPage extends BaseResultsPage {
             <div className="List results">
             {
                 this.state.objects ?
-                    <mui.ListItem
+                    <components.LinkListItem
                         className="ViewOnMapButton"
+                        to={this.props.location.pathname + "/map"}
                         primaryText="View on a map"
-                        containerElement={
-                            <Link
-                                to={this.props.location.pathname + "/map"}
-                            />
-                        }
                         leftIcon={
                             <icons.Map />
                         }
                         rightIcon={
                             <icons.Chevron />
                         }
-                        disableFocusRipple={true}
-                        disableTouchRipple={true}
                     />
                 : ""
             }
