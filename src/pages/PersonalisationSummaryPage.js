@@ -40,24 +40,17 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                     <div className="List">{
                         this.personalisationComponents
                             .map((component, index) =>
-                                <div
+                                <components.LinkListItem
                                     key={index}
-                                    className="ListItem SummaryItem"
-                                    onTouchTap={event => {
-                                        this.navigate(
-                                            `personalise/summary/${
-                                                component.defaultProps.name
-                                            }`
-                                        );
-                                    }}
-                                ><div>
-                                    <div className="primaryText">
-                                        {component.summaryLabel}
-                                    </div>
-                                    <div className="secondaryText">
-                                        {component.summaryValue}
-                                    </div>
-                                </div></div>
+                                    className="SummaryItem"
+                                    to={this.urlFor(
+                                        `personalise/summary/${
+                                            component.defaultProps.name
+                                        }`
+                                    )}
+                                    primaryText={component.summaryLabel}
+                                    secondaryText={component.summaryValue}
+                                />
                         )
                     }</div>
 

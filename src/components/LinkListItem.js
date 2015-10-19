@@ -42,6 +42,15 @@ export default class LinkListItem extends React.Component {
             classes.push("has-right-icon");
         }
 
+        const text = this.props.children || [
+            <div className="primaryText">
+                {primaryText}
+            </div>,
+            <div className="secondaryText">
+                {secondaryText}
+            </div>,
+        ];
+
         return (
             <Link
                 className={classes.join(" ")}
@@ -51,12 +60,7 @@ export default class LinkListItem extends React.Component {
                     <div className="leftIcon">
                         {leftIcon}
                     </div>
-                    <div className="primaryText">
-                        {primaryText}
-                    </div>
-                    <div className="secondaryText">
-                        {secondaryText}
-                    </div>
+                    {text}
                     <div className="rightIcon">
                         {rightIcon}
                     </div>
