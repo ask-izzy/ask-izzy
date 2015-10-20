@@ -8,10 +8,10 @@ Feature: Personalisation
 
     Background:
         Given a fresh session
+        And I visit /
 
     Scenario: Search for housing with personalised results
-        When I visit /
-        And I click on "Housing"
+        When I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on "Okay"
@@ -54,8 +54,7 @@ Feature: Personalisation
         Then I should see "I found these services for you"
 
     Scenario: Search for emergency accommodation
-        When I visit /
-        And I click on "Housing"
+        When I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on "Okay"
@@ -82,3 +81,20 @@ Feature: Personalisation
 
         When I click on "Done"
         Then I should see "Housing"
+
+    Scenario: Do a search
+        When I search for "find a meal" and press enter
+        Then I should see "To help me find the right services I'll ask you a few questions"
+
+        When I click on "Okay"
+        Then I should see "Where are you?"
+
+        Given control of geolocation
+        When I click on "Automatically detect your location"
+
+        Given I'm at 37.823S 144.998E
+        Then I should see "Found your location"
+        And search box should contain "Richmond, Victoria"
+
+        When I click on "Done"
+        Then I should see "I found these services for you"

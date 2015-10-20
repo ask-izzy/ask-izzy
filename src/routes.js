@@ -77,7 +77,15 @@ export default (
                 component={PersonalisationWizardPage}
             />
             <Route
+                path="/search/:search/personalise/page/:subpage"
+                component={PersonalisationWizardPage}
+            />
+            <Route
                 path="/search/:search/personalise/summary"
+                component={PersonalisationSummaryPage}
+            />
+            <Route
+                path="/search/:search/personalise/summary/:subpage"
                 component={PersonalisationSummaryPage}
             />
             <Route
