@@ -30,14 +30,18 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     nextStep(): void {
     }
 
-    navigate(subpath: string): void {
-        const parts = this.props.location.pathname.split("/");
-
+    urlFor(subpath: string): string {
         // Maintain (eg) '/category/foo' or '/search/badger'
         // prefix when navigating within personalisation
+        const parts = this.props.location.pathname.split("/");
+
+        return `/${parts[1]}/${parts[2]}/${subpath}`
+    }
+
+    navigate(subpath: string): void {
         this.props.history.pushState(
             null,
-            `/${parts[1]}/${parts[2]}/${subpath}`,
+            this.urlFor(subpath),
             {}
         );
     }

@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import mui from "material-ui";
 
 import BaseQuestion from "./BaseQuestion";
 import components from "../../components";
@@ -95,38 +94,27 @@ class BaseMultiQuestion extends BaseQuestion {
                         </div>
                     }
                 />
-                <mui.List className="List">
+                <div className="List">
                 {this.answers.map((answer, index) =>
-                    <div
-                        className="ListItem"
+                    <components.InputListItem
                         key={index}
-                    >
-                    <mui.ListItem
                         primaryText={answer}
-                        leftCheckbox={
-                            <mui.Checkbox
-                                checked={selected.has(answer)}
-                                checkedIcon={<icons.CheckboxSelected />}
-                                unCheckedIcon={<icons.CheckboxUnselected />}
-                                onCheck={this.onAnswerTouchTap.bind(
-                                    this, answer, !selected.has(answer)
-                                )}
-                                disableFocusRipple={true}
-                                disableTouchRipple={true}
-                            />
-                        }
-                        disableFocusRipple={true}
-                        disableTouchRipple={true}
+
+                        type="checkbox"
+                        checked={selected.has(answer)}
+                        checkedIcon={<icons.CheckboxSelected />}
+                        uncheckedIcon={<icons.CheckboxUnselected />}
+                        onChange={this.onAnswerTouchTap.bind(
+                            this, answer, !selected.has(answer)
+                        )}
                     />
-                    </div>)}
-                </mui.List>
+                )}
+                </div>
 
                 <div className="done-button">
-                    <mui.FlatButton
+                    <components.FlatButton
                         label="Done"
                         onTouchTap={this.onDoneTouchTap.bind(this)}
-                        disableFocusRipple={true}
-                        disableTouchRipple={true}
                     />
                 </div>
             </div>

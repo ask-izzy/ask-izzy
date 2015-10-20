@@ -3,6 +3,7 @@
 // to the client
 
 import React from "react";
+import ReactDOMServer from "react-dom/server";
 import { match, RoutingContext } from "react-router";
 import url from "url";
 import routes from "../routes";
@@ -35,12 +36,12 @@ export default function render(req, res, next) {
                         redirectLocation.search
                     );
                 } else if (renderProps) {
-                    const markup = React.renderToString(
+                    const markup = ReactDOMServer.renderToString(
                         <RoutingContext {...renderProps} />
                     );
                     // The application component is rendered to static markup
                     // and sent as response.
-                    const html = React.renderToStaticMarkup(
+                    const html = ReactDOMServer.renderToStaticMarkup(
                       <HtmlDocument
                           markup={markup}
                           script={webpackStats.script}

@@ -2,7 +2,6 @@
 
 import React from "react";
 import {Link} from "react-router";
-import mui from "material-ui";
 
 import BaseResultsPage from "./BaseResultsPage";
 import components from "../components";
@@ -111,32 +110,26 @@ class ResultsListPage extends BaseResultsPage {
     renderResults(): ReactElement {
 
         return (
-            <mui.List className="List results">
+            <div className="List results">
             {
                 this.state.objects ?
-                    <mui.ListItem
+                    <components.LinkListItem
                         className="ViewOnMapButton"
+                        to={this.props.location.pathname + "/map"}
                         primaryText="View on a map"
-                        containerElement={
-                            <Link
-                                to={this.props.location.pathname + "/map"}
-                            />
-                        }
                         leftIcon={
                             <icons.Map />
                         }
                         rightIcon={
                             <icons.Chevron />
                         }
-                        disableFocusRipple={true}
-                        disableTouchRipple={true}
                     />
                 : ""
             }
             <div className="resultsContainer">{
                 this.results.map((object, index) => {
                     let elem = object.staticText ?
-                        React.addons.cloneWithProps(object.node)
+                        React.cloneElement(object.node)
                     : object.crisis ?
                         <components.CrisisLineItem
                             object={object}
@@ -160,17 +153,14 @@ class ResultsListPage extends BaseResultsPage {
             }</div>
             {
                 this.state.meta && this.state.meta.next ?
-                    <mui.ListItem
+                    <components.ButtonListItem
                         className="MoreResultsButton"
                         primaryText="Load more results…"
                         onTouchTap={this.loadMore.bind(this)}
-
-                        disableFocusRipple={true}
-                        disableTouchRipple={true}
                     />
                 : ""
             }
-            </mui.List>
+            </div>
         );
     }
 }

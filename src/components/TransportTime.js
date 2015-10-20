@@ -11,7 +11,7 @@ import Location from "../iss/Location";
 class TransportTime extends React.Component {
     // flow:disable not supported yet
     static propTypes = {
-        compact: React.PropTypes.bool.isRequired,
+        compact: React.PropTypes.bool,
         location: React.PropTypes.object.isRequired,
     };
 
@@ -28,8 +28,21 @@ class TransportTime extends React.Component {
     };
 
     // flow:disable not supported yet
+    static defaultProps = {
+        compact: false,
+    };
+
+    // flow:disable not supported yet
     get compactClass(): string {
         return this.props.compact ? "compact" : "";
+    }
+
+    render(): ReactElement {
+        if (this.props.location.isConfidential()) {
+            return this.renderConfidential()
+        } else {
+            return this.renderPublic()
+        }
     }
 
     renderConfidential(): ReactElement {
@@ -43,9 +56,22 @@ class TransportTime extends React.Component {
                 <span className="travel-time">
                     Confidential location
                 </span>&nbsp;
-                <span className="location">
-                    {titleize(this.props.location.suburb)}
-                </span>
+                {this.renderSuburb()}
+            </div>
+        );
+    }
+
+    renderPublic(): ReactElement {
+        return (
+            <div
+                className={`TransportTime ${this.compactClass}`}
+            >
+                <icons.Walk className="ColoredIcon" />
+                <span className="travel-time">
+                    ? mins
+                </span>&nbsp;
+                {this.renderSuburb()}
+                {this.renderDirections()}
             </div>
         );
     }
@@ -61,29 +87,12 @@ class TransportTime extends React.Component {
         return <span />;
     }
 
-    renderPublic(): ReactElement {
+    renderSuburb(): ReactElement {
         return (
-            <div
-                className={`TransportTime ${this.compactClass}`}
-            >
-                <icons.Walk className="ColoredIcon" />
-                <span className="travel-time">
-                    ? mins
-                </span>&nbsp;
-                <span className="location">
-                    {titleize(this.props.location.suburb)}
-                </span>
-                {this.renderDirections()}
-            </div>
+            <span className="location">
+                {titleize(this.props.location.suburb)}
+            </span>
         );
-    }
-
-    render(): ReactElement {
-        if (this.props.location.isConfidential()) {
-            return this.renderConfidential()
-        } else {
-            return this.renderPublic()
-        }
     }
 }
 

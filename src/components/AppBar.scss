@@ -1,9 +1,13 @@
 .AppBar {
-    height: 40px !important;
-    min-height: auto !important;
+    position: relative;
 
-    background-color: $brand-bg-dark !important;
-    box-shadow: none !important;
+    height: 40px;
+    min-height: auto;
+
+    background-color: $brand-bg-dark;
+    color: $white;
+
+    box-shadow: none;
 
     & > div {
         display: inline-block;
@@ -13,28 +17,27 @@
     h1 {
         position: absolute;
         top: 0;
-        left: 15% !important;
+        left: 15%;
         width: 70%;
 
-        font-size: 18px !important;
-        font-weight: 500 !important;
-        line-height: 44px !important;
+        margin: 0;
+        padding: 0;
+
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 0;
+
+        line-height: 44px;
         text-align: center;
-        text-overflow: ellipsis !important;
+        text-overflow: ellipsis;
+
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     .BackButton {
-        margin-top: -24px;
-        margin-left: -24px;
-
-        &:hover,
-        &:focus {
-
-            svg {
-                border-radius: 24px;
-                background-color: fade-out($white, 0.8) !important;
-            }
-        }
+        margin-top: -5px;
+        margin-left: -5px;
     }
 
     .ChevronBackIcon {

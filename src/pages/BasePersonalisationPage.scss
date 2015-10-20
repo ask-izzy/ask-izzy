@@ -22,12 +22,12 @@
         width: 100%;
 
         & > * {
-            display: block !important;
-            width: 60px !important;
-            height: 60px !important;
+            display: block;
+            width: 60px;
+            height: 60px;
 
-            margin-right: auto !important;
-            margin-left: auto !important;
+            margin-right: auto;
+            margin-left: auto;
         }
     }
 
@@ -35,93 +35,70 @@
         width: 100%;
 
         button {
-            display: block !important;
+            display: block;
 
             width: calc(100% - 40px);
 
-            margin-top: 20px !important;
-            margin-right: auto !important;
-            margin-bottom: 20px !important;
-            margin-left: auto !important;
-
-            background-color: $icon-fg-color !important;
-            color: $white !important;
-
-            font-size: 18px !important;
-            font-weight: 400 !important;
-            text-transform: none !important;
-
-            &:hover,
-            &:focus {
-                background-color: lighten($icon-fg-color, 10%) !important;
-            }
-
-        }
-
-        button[disabled] {
-            background-color: $brand-bg-mid !important;
+            margin-top: 20px;
+            margin-right: auto;
+            margin-bottom: 20px;
+            margin-left: auto;
         }
     }
 
     .List {
-        padding: 0 !important;
+        padding: 0;
     }
 
     .ListItem {
-        border-bottom: 1px solid $list-item-hairline !important;
-        font-size: 18px !important;
+        border-bottom: 1px solid $list-item-hairline;
+        font-size: 18px;
 
         &.taller {
-            padding-top: 10px !important;
-            padding-bottom: 10px !important;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
 
         .Icon {
-            top: -12px !important;
-            width: 48px !important;
-            height: 48px !important;
+            width: 48px;
+            height: 48px;
         }
 
         .CrossIcon {
-            top: -6px !important;
+            top: -6px;
         }
 
         .LoadingIcon,
         .RadioUnselectedIcon,
         .RadioSelectedIcon {
-            top: -2px !important;
+            top: -2px;
         }
     }
 
     .SummaryItem {
-        border-bottom: 1px solid darken($list-item-hairline, 15%) !important;
+        border-bottom: 1px solid darken($list-item-hairline, 15%);
         background-color: $brand-bg-light !important;
 
-        &:hover,
         &:focus {
-            background-color: darken($brand-bg-light, 10%) !important;
+            background-color: darken($brand-bg-light, 10%);
         }
 
         .primaryText {
+            display: inline-block;
             width: 70%;
-            color: $brand-text-mid !important;
-            line-height: 150%;
+            color: $brand-text-mid;
         }
 
         .secondaryText {
-            margin: 0 !important;
-            padding-top: 0.5em !important;
+            display: inline-block;
             float: right;
-
             color: $icon-fg-color !important;
-
-            font-size: 16px !important;
-            line-height: 150%;
+            font-size: 16px;
             text-decoration: underline;
         }
     }
 
     .padded {
-        margin: 20px !important;
+        margin: 20px;
     }
 }

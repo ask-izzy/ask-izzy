@@ -29,7 +29,7 @@ class GoogleMapsLink extends React.Component {
         );
 
         // FIXME: Choose directionsmode based on expected travel time.
-        return `https://maps.google.com/?directionsmode=walking&saddr=${start}&daddr=${query}`;
+        return `https://maps.google.com/?dirflg=w&saddr=${start}&daddr=${query}`;
     }
 
     render(): ReactElement {

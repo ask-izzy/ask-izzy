@@ -20,6 +20,7 @@ if (!process.env.GOOGLE_KEY) {
 // code can be used.
 GLOBAL.ISS_URL = process.env.ISS_URL;
 GLOBAL.GOOGLE_KEY = process.env.GOOGLE_KEY;
+GLOBAL.SITE_DOMAIN = process.env.SITE_DOMAIN;
 
 // Initialize express server
 const server = express();

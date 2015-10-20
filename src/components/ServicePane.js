@@ -1,8 +1,6 @@
 /* @flow */
 
 import React from "react";
-import { Link } from "react-router";
-import mui from "material-ui";
 import _ from "underscore";
 
 import Address from "./Address";
@@ -13,6 +11,7 @@ import TransportTime from "./TransportTime";
 import StaticMap from "./StaticMap";
 import Collapser from "./Collapser";
 import GoogleMapsLink from "./GoogleMapsLink";
+import LinkListItem from "./LinkListItem";
 import fixtures from "../../fixtures/services";
 import ServiceFactory from "../../fixtures/factories/Service";
 import icons from "../icons";
@@ -77,6 +76,7 @@ export default class ServicePane extends React.Component {
                     <hr />
                     <GoogleMapsLink
                         className="plain-text"
+                        from="Current Location"
                         to={object.Location()}
                     >
                         <TransportTime location={object.Location()}/>
@@ -127,27 +127,18 @@ export default class ServicePane extends React.Component {
                 <h3 className="padded">
                     Also at this location
                 </h3>
-                <mui.List className="List">
+                <div className="List">
                     {this.state.siblings.map((service, index) =>
-                        <mui.ListItem className="ListItem"
+                        <LinkListItem
+                            className="plain-text"
+                            to={`/service/${service.slug}`}
                             key={index}
                             primaryText={service.name}
                             secondaryText={service.shortDescription}
-                            containerElement={
-                                <Link
-                                    to={`/service/${service.slug}`}
-                                />
-                            }
-
-                            rightIcon={
-                                <icons.Chevron />
-                            }
-
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
+                            rightIcon={<icons.Chevron />}
                         />
                     )}
-                </mui.List>
+                </div>
             </div>
         );
     }

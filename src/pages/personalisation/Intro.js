@@ -2,7 +2,6 @@
 
 import React from "react";
 import { History } from "react-router";
-import mui from "material-ui";
 import reactMixin from "react-mixin";
 
 import Personalisation from "../../mixins/Personalisation";
@@ -66,11 +65,9 @@ class Intro extends React.Component {
                 />
 
                 <div className="done-button">
-                    <mui.FlatButton
+                    <components.FlatButton
                         label="Okay"
                         onTouchTap={this.onTouchDoneButton.bind(this)}
-                        disableFocusRipple={true}
-                        disableTouchRipple={true}
                     />
                 </div>
 

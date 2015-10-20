@@ -23,7 +23,6 @@ module.exports = {
         ],
         vendor: [
             "core-decorators",
-            "material-ui",
             "moment",
             "react",
             "react-google-maps",

@@ -3,7 +3,6 @@
 import React from "react";
 import { History } from "react-router";
 import _ from "underscore";
-import mui from "material-ui";
 import reactMixin from "react-mixin";
 import { debounce } from "core-decorators";
 import { ltrim } from "underscore.string";
@@ -265,12 +264,12 @@ class Location extends React.Component {
                         "This will let me find the services closest to you"
                     }
                 />
-                <mui.List className="List">{
+                <div className="List">{
                     /* if the browser supports geolocation */
                     require("has-geolocation") &&
                     this.state.geolocation == GeoLocationState.NOT_STARTED ?
-                        <mui.ListItem
-                            className="taller ListItem"
+                        <components.ButtonListItem
+                            className="taller"
                             onTouchTap={this.onGeolocationTouchTap.bind(this)}
                             primaryText="Automatically detect your location"
                             leftIcon={
@@ -278,47 +277,33 @@ class Location extends React.Component {
                                     className="ColoredIcon icon-fg-color"
                                 />
                             }
-
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
                         />
                     : ""
                 }{
                     this.state.geolocation == GeoLocationState.RUNNING ?
-                        <mui.ListItem
-                            className="ListItem"
+                        <components.ButtonListItem
                             primaryText="Locating you..."
                             secondaryText="Please permit us to use your GPS"
                             leftIcon={
                                 <icons.Loading />
                             }
-
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
                         />
                     : ""
                 }{
                     this.state.geolocation == GeoLocationState.COMPLETE ?
-                        <mui.ListItem
-                            className="taller ListItem"
+                        <components.ButtonListItem
+                            className="taller"
                             primaryText="Found your location"
                             leftIcon={<icons.Tick />}
-
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
                         />
                     : ""
                 }{
                     this.state.geolocation == GeoLocationState.FAILED ?
-                        <mui.ListItem
-                            className="ListItem"
+                        <components.ButtonListItem
                             primaryText="Unable to get your location"
                             secondaryText={`Please enter your location below
                                 (${this.state.error})`}
                             leftIcon={<icons.Cross />}
-
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
                         />
                     : ""
                 }
@@ -336,8 +321,7 @@ class Location extends React.Component {
                 {
                     /* any autocompletions we currently have */
                     this.state.autocompletions.map((result, index) =>
-                        <mui.ListItem
-                            className="ListItem"
+                        <components.InputListItem
                             key={index}
                             primaryText={
                                 <div className="suburb">
@@ -349,8 +333,10 @@ class Location extends React.Component {
                                     {result.state}
                                 </div>
                             }
-                            leftIcon={<icons.RadioUnselected />}
-                            onTouchTap={() => {
+                            type="radio"
+                            uncheckedIcon={<icons.RadioUnselected />}
+                            checkedIcon={<icons.RadioSelected />}
+                            onChange={() => {
                                 /* set the text box to this value
                                  * and remove the autocompletions */
                                 let locationName =
@@ -361,12 +347,9 @@ class Location extends React.Component {
                                     autocompletions: [],
                                 });
                             }}
-
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
                         />
                     )
-                }</mui.List>
+                }</div>
                 {
                     this.state.autocompletion == AutocompleteState.SEARCHING ?
                         <div className="progress">
@@ -375,12 +358,10 @@ class Location extends React.Component {
                     : ""
                 }
                 <div className="done-button">
-                    <mui.FlatButton
+                    <components.FlatButton
                         label="Done"
                         disabled={(!this.state.locationName)}
                         onTouchTap={this.onTouchDoneButton.bind(this)}
-                        disableFocusRipple={true}
-                        disableTouchRipple={true}
                     />
                 </div>
 

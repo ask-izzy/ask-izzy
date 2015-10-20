@@ -17,20 +17,18 @@ def icon_js(name, view_box, nodes)
 /* eslint-disable max-len */
 
 import React from "react";
-import mui from "material-ui";
+import SvgIcon from "../components/SvgIcon";
 
 export default class SvgIcon#{name} extends React.Component {
 
     render(): ReactElement {
         return (
-            <mui.SvgIcon
+            <SvgIcon
                 {...this.props}
                 className={`${this.props.className || ""} #{name}Icon Icon`}
                 viewBox="#{view_box}"
                 dangerouslySetInnerHTML={{__html: `#{nodes.join("")}`}}
-            >
-
-            </mui.SvgIcon>
+            />
         );
     }
 

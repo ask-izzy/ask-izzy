@@ -1,19 +1,15 @@
-.CategoryListItem {
-    border-bottom: 1px solid $list-item-hairline !important;
+.CategoryListItem.ListItem {
+    border-bottom: 1px solid $list-item-hairline;
 
     .primaryText {
-        font-size: 18px !important;
-        font-weight: 500 !important;
-        line-height: 18px !important;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 18px;
     }
 
     & > div {
-        padding-top: 11px !important;
-        padding-bottom: 11px !important;
-        padding-left: 58px !important;
-    }
-
-    .Icon {
-        top: 2px !important;
+        padding-top: 11px;
+        padding-bottom: 11px;
+        padding-left: 58px;
     }
 }

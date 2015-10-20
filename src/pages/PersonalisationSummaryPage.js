@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import mui from "material-ui";
 
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import components from "../components";
@@ -38,46 +37,30 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                             </div>
                         }
                     />
-                    <mui.List className="List">{
+                    <div className="List">{
                         this.personalisationComponents
                             .map((component, index) =>
-                                <mui.ListItem
+                                <components.LinkListItem
                                     key={index}
-                                    className="ListItem SummaryItem"
-                                    onTouchTap={event => {
-                                        this.navigate(
-                                            `personalise/summary/${
-                                                component.defaultProps.name
-                                            }`
-                                        );
-                                    }}
-
-                                    primaryText={
-                                        <span className="primaryText">
-                                            {component.summaryLabel}
-                                        </span>
-                                    }
-                                    secondaryText={
-                                        <span className="secondaryText">
-                                            {component.summaryValue}
-                                        </span>
-                                    }
-
-                                    disableFocusRipple={true}
-                                    disableTouchRipple={true}
+                                    className="SummaryItem"
+                                    to={this.urlFor(
+                                        `personalise/summary/${
+                                            component.defaultProps.name
+                                        }`
+                                    )}
+                                    primaryText={component.summaryLabel}
+                                    secondaryText={component.summaryValue}
                                 />
                         )
-                    }</mui.List>
+                    }</div>
 
                     <div className="padded">
                         All of your answers are private and anonymous.
                     </div>
                     <div className="done-button">
-                        <mui.FlatButton
+                        <components.FlatButton
                             label="Okay"
                             onTouchTap={this.previousStep.bind(this)}
-                            disableFocusRipple={true}
-                            disableTouchRipple={true}
                         />
                     </div>
                 </div>}

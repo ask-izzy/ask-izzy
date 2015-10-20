@@ -3,20 +3,18 @@
 /* eslint-disable max-len */
 
 import React from "react";
-import mui from "material-ui";
+import SvgIcon from "../components/SvgIcon";
 
 export default class SvgIconLogoShadow extends React.Component {
 
     render(): ReactElement {
         return (
-            <mui.SvgIcon
+            <SvgIcon
                 {...this.props}
                 className={`${this.props.className || ""} LogoShadowIcon Icon`}
                 viewBox="0 0 64 64"
                 dangerouslySetInnerHTML={{__html: ``}}
-            >
-
-            </mui.SvgIcon>
+            />
         );
     }
 

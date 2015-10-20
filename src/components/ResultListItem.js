@@ -1,14 +1,14 @@
 /* @flow */
 
 import React from "react";
-import { History, Link } from "react-router";
+import { History } from "react-router";
 import fixtures from "../../fixtures/services";
-import mui from "material-ui";
 import reactMixin from "react-mixin";
 
 import icons from "../icons";
 import iss from "../iss";
 import OpeningTimes from "./OpeningTimes";
+import LinkListItem from "./LinkListItem";
 import TransportTime from "./TransportTime";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
@@ -51,20 +51,10 @@ class ResultListItem extends React.Component {
         } = this.props;
 
         return (
-            <mui.ListItem
-                className="ResultListItem"
-                containerElement={
-                    <Link
-                        to={`/service/${object.slug}`}
-                    />
-                }
-
-                rightIcon={
-                    <icons.Chevron />
-                }
-
-                disableFocusRipple={true}
-                disableTouchRipple={true}
+            <LinkListItem
+                className="plain-text ResultListItem"
+                to={`/service/${object.slug}`}
+                rightIcon={<icons.Chevron />}
             >
                 <h2 className="name">{object.name}</h2>
                 <div className="site_name">{object.site.name}</div>
@@ -97,7 +87,8 @@ class ResultListItem extends React.Component {
                         : ""}
                     </div>
                 : ""}
-            </mui.ListItem>
+            </LinkListItem>
+
         );
     }
 }

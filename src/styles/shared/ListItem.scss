@@ -1,0 +1,68 @@
+.ListItem {
+
+    display: block;
+    position: relative;
+
+    cursor: pointer;
+
+    &.has-left-icon > div {
+        padding-left: 72px;
+    }
+
+    & > div {
+        padding: 16px;
+
+        & > .primaryText {
+            color: $brand-text-dark;
+
+            font-size: 16px;
+            line-height: 150%;
+        }
+
+        & > .secondaryText {
+            color: $brand-text-mid;
+
+            font-size: 14px;
+            line-height: 150%;
+
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        & > .SvgIcon {
+            padding: 12px;
+        }
+
+        & > .SvgIcon.leftIcon {
+            left: 4px;
+        }
+
+        & > .leftIcon {
+            position: absolute;
+
+            top: 12px;
+            left: 8px;
+
+            height: 44px;
+
+            input {
+                position: absolute;
+
+                top: 16px;
+                left: 16px;
+
+                z-index: -99;
+            }
+        }
+
+        & > .rightIcon {
+            position: absolute;
+
+            top: 12px;
+            right: 4px;
+
+            height: 44px;
+        }
+    }
+}

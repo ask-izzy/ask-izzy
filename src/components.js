@@ -4,6 +4,7 @@
 
 import Address from "./components/Address";
 import AppBar from "./components/AppBar";
+import ButtonListItem from "./components/ButtonListItem";
 import CategoryListItem from "./components/CategoryListItem";
 import CollapsedOpeningTimes from "./components/CollapsedOpeningTimes";
 import Collapser from "./components/Collapser";
@@ -11,9 +12,13 @@ import ContactMethods from "./components/ContactMethods";
 import CrisisLineItem from "./components/CrisisLineItem";
 import Eligibility from "./components/Eligibility";
 import Email from "./components/Email";
+import FlatButton from "./components/FlatButton";
 import GoogleMapsLink from "./components/GoogleMapsLink";
 import HeaderBar from "./components/HeaderBar";
+import IconButton from "./components/IconButton";
 import Infobox from "./components/Infobox";
+import InputListItem from "./components/InputListItem";
+import LinkListItem from "./components/LinkListItem";
 import NavBar from "./components/NavBar";
 import OpeningTimes from "./components/OpeningTimes";
 import Phone from "./components/Phone";
@@ -21,12 +26,14 @@ import ResultListItem from "./components/ResultListItem";
 import ScreenReader from "./components/ScreenReader";
 import ServicePane from "./components/ServicePane";
 import StaticMap from "./components/StaticMap";
+import SvgIcon from "./components/SvgIcon";
 import TransportTime from "./components/TransportTime";
 import Web from "./components/Web";
 
 export default {
     Address: Address,
     AppBar: AppBar,
+    ButtonListItem: ButtonListItem,
     CategoryListItem: CategoryListItem,
     CollapsedOpeningTimes: CollapsedOpeningTimes,
     Collapser: Collapser,
@@ -34,9 +41,13 @@ export default {
     CrisisLineItem: CrisisLineItem,
     Eligibility: Eligibility,
     Email: Email,
+    FlatButton: FlatButton,
     GoogleMapsLink: GoogleMapsLink,
     HeaderBar: HeaderBar,
+    IconButton: IconButton,
     Infobox: Infobox,
+    InputListItem: InputListItem,
+    LinkListItem: LinkListItem,
     NavBar: NavBar,
     OpeningTimes: OpeningTimes,
     Phone: Phone,
@@ -44,6 +55,7 @@ export default {
     ScreenReader: ScreenReader,
     ServicePane: ServicePane,
     StaticMap: StaticMap,
+    SvgIcon: SvgIcon,
     TransportTime: TransportTime,
     Web: Web,
 };
