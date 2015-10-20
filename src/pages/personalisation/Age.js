@@ -9,6 +9,7 @@ export default class Age extends BaseQuestion {
         question: "How old are you?",
         answers: {
             "25 or younger": append({
+                q: "youth",
                 age_groups: [
                     "prenatal",
                     "baby",

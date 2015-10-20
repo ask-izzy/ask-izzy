@@ -42,10 +42,9 @@ const categories:Array<Category> = [
         icon: icons.House,
         search: {
             q: "housing",
-
-            // service_type: 'housing',
+            service_type: "housing",
         },
-        info: "It's important to act early on housing",
+        info: "It's important to act early on housing.",
         personalisation: [
             personalisation.SleepTonight,
             personalisation.HousingSubcategories,
@@ -95,7 +94,7 @@ const categories:Array<Category> = [
         byline: "Emergency funds, bills etc",
         icon: icons.Money,
         search: {
-            q: "finance gambling",
+            q: "financial aid",
         },
         personalisation: [
             personalisation.MoneySubcategories,
