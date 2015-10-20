@@ -207,6 +207,22 @@ const categories:Array<Category> = [
             personalisation.Location,
         ],
     }),
+    new Category({
+        name: "Have your say",
+        byline:
+            "You have a right to be heard and lots of people can help you",
+        icon: icons.Advocacy,
+        search: {
+            q: "advocacy",
+        },
+        personalisation: [
+            personalisation.AdvocacySubcategories,
+            personalisation.ComplaintSubcategories,
+            personalisation.AdvocacySituation,
+            personalisation.Location,
+        ],
+    }),
+
 ];
 
 export default categories;

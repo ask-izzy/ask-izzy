@@ -5,9 +5,12 @@
 /* eslint-disable max-len */
 
 import AddictionSubcategories from "./personalisation/AddictionSubcategories";
+import AdvocacySituation from "./personalisation/AdvocacySituation";
+import AdvocacySubcategories from "./personalisation/AdvocacySubcategories";
 import Age from "./personalisation/Age";
 import BaseMultiQuestion from "./personalisation/BaseMultiQuestion";
 import BaseQuestion from "./personalisation/BaseQuestion";
+import ComplaintSubcategories from "./personalisation/ComplaintSubcategories";
 import CounsellingSubcategories from "./personalisation/CounsellingSubcategories";
 import Demographics from "./personalisation/Demographics";
 import EverydayThingsSubcategories from "./personalisation/EverydayThingsSubcategories";
@@ -22,12 +25,16 @@ import Location from "./personalisation/Location";
 import MoneySubcategories from "./personalisation/MoneySubcategories";
 import SleepTonight from "./personalisation/SleepTonight";
 import TechnologySubcategories from "./personalisation/TechnologySubcategories";
+import TextEntryQuestion from "./personalisation/TextEntryQuestion";
 
 export default {
     AddictionSubcategories: AddictionSubcategories,
+    AdvocacySituation: AdvocacySituation,
+    AdvocacySubcategories: AdvocacySubcategories,
     Age: Age,
     BaseMultiQuestion: BaseMultiQuestion,
     BaseQuestion: BaseQuestion,
+    ComplaintSubcategories: ComplaintSubcategories,
     CounsellingSubcategories: CounsellingSubcategories,
     Demographics: Demographics,
     EverydayThingsSubcategories: EverydayThingsSubcategories,
@@ -42,4 +49,5 @@ export default {
     MoneySubcategories: MoneySubcategories,
     SleepTonight: SleepTonight,
     TechnologySubcategories: TechnologySubcategories,
+    TextEntryQuestion: TextEntryQuestion,
 };
