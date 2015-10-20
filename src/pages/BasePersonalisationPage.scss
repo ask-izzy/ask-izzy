@@ -76,6 +76,8 @@
     }
 
     .SummaryItem {
+        @include clearfix;
+
         border-bottom: 1px solid darken($list-item-hairline, 15%);
         background-color: $brand-bg-light !important;
 
@@ -85,7 +87,12 @@
 
         .primaryText {
             display: inline-block;
-            width: 70%;
+
+            width: auto;
+            max-width: 70%;
+
+            margin-right: 0.75ex;  /* leave one character spacing */
+
             color: $brand-text-mid;
         }
 
