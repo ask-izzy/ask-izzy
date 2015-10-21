@@ -9,6 +9,7 @@ import { By } from "selenium-webdriver";
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
 import { documentReady } from "./browser";
+import { matchClass, escapeXPathString } from "../support/selectors";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
@@ -18,13 +19,15 @@ module.exports = (function() {
               unpromisify(hotlinePositionAndText))
         .then('I should see "$STRING" before first hotline',
               unpromisify(assertHotlineHeading))
+        .then("my results should not contain\n$table",
+              unpromisify(assertNoSuchResults))
         ;
 })();
 
 async function seeTheResults(table: Array<Object>): Promise<void> {
     await this.driver.wait(documentReady(this.driver), 10000);
 
-    let getText = element => element.getText();
+    const getText = element => element.getText();
 
     for (let key of _.keys(table[0])) {
         let class_ = key.match(/[(](.*)[)]/)[1];
@@ -81,4 +84,42 @@ async function assertHotlineHeading(text: string): Promise<void> {
 
     assert.deepEqual(classes, ["CrisisHeader", "CrisisLineItem"]);
     assert.equal(await elements[0].getText(), text);
+}
+
+async function assertNoSuchResults(table: Array<Object>): Promise<void> {
+    // Determine the CSS class for each column
+    const getCssClass = key => key.match(/[(](.*)[)]/)[1];
+    let elements = [];
+
+    for (let row of table) {
+        // Build a list of classes and text nodes that should match
+        const predicates = [
+            /*::`*/
+            for ([key, value] of _.pairs(row))
+            /*::`, function(key, value){*/
+            `.//*[${matchClass(getCssClass(key))} and ` +
+            `normalize-space(text()) = ${escapeXPathString(value)}]`
+            /*::}*/
+        ];
+
+        // Find the ResultListItem that also matches all of these predicates
+        const xpath = `//*[${matchClass("ResultListItem")} and ` +
+            `${predicates.join(" and ")}]`;
+
+        elements = elements.concat(
+            await this.driver.findElements(By.xpath(xpath))
+        );
+    }
+
+    let elementsHtml = [];
+
+    // Limit to visible elements on the screen
+    // FIXME: how can I use await functionally
+    for (let element of elements) {
+        if (await element.isDisplayed()) {
+            elementsHtml.push(await element.getText());
+        }
+    }
+
+    assert.deepEqual(elementsHtml, []);
 }

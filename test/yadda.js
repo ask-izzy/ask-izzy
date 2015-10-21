@@ -4,6 +4,8 @@
  * Enable Yadda in Mocha
  */
 
+declare var GLOBAL;
+
 import SauceLabs from "saucelabs";
 import Webdriver from "selenium-webdriver";
 import Yadda from "yadda";
@@ -19,49 +21,15 @@ import server from "../src/server";
 import mockISS from "./support/mock_iss/server";
 /* eslint-enable no-unused-vars */
 
+const ISS_URL = process.env.ISS_URL;
+
 /* create the webdriver, we will reuse this promise multiple times */
 const driverPromise = webDriverInstance();
 let sessionId: ?string, driver: Webdriver.WebDriver;
 let passed = true;
 
 new Yadda.FeatureFileSearch("./test/features").each(file => {
-    function shouldSkip(annotations: Object): boolean {
-        let skips = (process.env.SKIP || "").split(",");
-
-        for (let skip of skips) {
-            if (annotations[skip]) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    function shouldInclude(annotations: Object): boolean {
-        let includes = (process.env.ONLY || "").split(",");
-
-        if (includes.length == 1 && includes[0] == "") {
-            return true;  // no specific includes specified
-        }
-
-        for (let include of includes) {
-            if (annotations[include]) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     featureFile(file, feature => {
-        if (shouldSkip(feature.annotations)) {
-            return;
-        }
-
-        if (!shouldInclude(feature.annotations)) {
-            return;
-        }
-
         // jscs:disable
         before(async function(): Promise<void> {
             driver = await driverPromise;
@@ -84,17 +52,16 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
                 await logger.get("browser");
             }
 
+            // Set up ISS correctly for this test
+            // Integration tests should be tagged @integration
+            if (feature.annotations.integration) {
+                GLOBAL.ISS_URL = ISS_URL;
+            } else {
+                GLOBAL.ISS_URL = "http://localhost:5000/";
+            }
         });
 
         scenarios(feature.scenarios, scenario => {
-            if (shouldSkip(scenario.annotations)) {
-                return;
-            }
-
-            if (!shouldInclude(scenario.annotations)) {
-                return;
-            }
-
             steps(scenario.steps, (step, done) => {
                 Yadda.createInstance(libraries, {
                     driver: driver,

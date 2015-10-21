@@ -343,7 +343,7 @@ export async function search(
         q: "",
         type: "service",
         catchment: true,
-        limit: 5,
+        limit: 10,
     };
 
     if (typeof query === "string") {
