@@ -25,43 +25,7 @@ let sessionId: ?string, driver: Webdriver.WebDriver;
 let passed = true;
 
 new Yadda.FeatureFileSearch("./test/features").each(file => {
-    function shouldSkip(annotations: Object): boolean {
-        let skips = (process.env.SKIP || "").split(",");
-
-        for (let skip of skips) {
-            if (annotations[skip]) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    function shouldInclude(annotations: Object): boolean {
-        let includes = (process.env.ONLY || "").split(",");
-
-        if (includes.length == 1 && includes[0] == "") {
-            return true;  // no specific includes specified
-        }
-
-        for (let include of includes) {
-            if (annotations[include]) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     featureFile(file, feature => {
-        if (shouldSkip(feature.annotations)) {
-            return;
-        }
-
-        if (!shouldInclude(feature.annotations)) {
-            return;
-        }
-
         // jscs:disable
         before(async function(): Promise<void> {
             driver = await driverPromise;
@@ -87,14 +51,6 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
         });
 
         scenarios(feature.scenarios, scenario => {
-            if (shouldSkip(scenario.annotations)) {
-                return;
-            }
-
-            if (!shouldInclude(scenario.annotations)) {
-                return;
-            }
-
             steps(scenario.steps, (step, done) => {
                 Yadda.createInstance(libraries, {
                     driver: driver,
