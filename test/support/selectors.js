@@ -61,3 +61,8 @@ export function elementWithChildText(element: string, text: string): string {
         elementWithText(child, text)
     }`;
 }
+
+export function matchClass(className: string): string {
+    return `contains(concat(' ', normalize-space(@class), ' '), ` +
+        `' ${className} ')`;
+}
