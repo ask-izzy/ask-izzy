@@ -1,6 +1,6 @@
 Feature: Search for housing services
 
-    Scenario: youth woman in Wheelers Hill
+    Scenario: Teenaged woman in Wheelers Hill
         Given my location is "Wheelers Hill, Victoria"
         And I have somewhere to sleep tonight
         And my gender is female
@@ -10,9 +10,11 @@ Feature: Search for housing services
 
         When I visit /category/housing
 
+        # These are services for the aged...
         Then my results should not contain
-        --------------------------------------------------------
-        Service Name (name) | Site Name (site_name)
-        ========================================================
-        Homeshare           | UnitingCare lifeAssist, Homeshare
-        --------------------------------------------------------
+        ----------------------------------
+        Site Name (site_name)
+        ==================================
+        UnitingCare lifeAssist, Homeshare
+        Lifeview, The Willows
+        ----------------------------------

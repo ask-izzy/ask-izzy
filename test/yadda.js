@@ -4,6 +4,8 @@
  * Enable Yadda in Mocha
  */
 
+declare var GLOBAL;
+
 import SauceLabs from "saucelabs";
 import Webdriver from "selenium-webdriver";
 import Yadda from "yadda";
@@ -18,6 +20,8 @@ import libraries from "./steps";
 import server from "../src/server";
 import mockISS from "./support/mock_iss/server";
 /* eslint-enable no-unused-vars */
+
+const ISS_URL = process.env.ISS_URL;
 
 /* create the webdriver, we will reuse this promise multiple times */
 const driverPromise = webDriverInstance();
@@ -48,6 +52,13 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
                 await logger.get("browser");
             }
 
+            // Set up ISS correctly for this test
+            // Integration tests should be tagged @integration
+            if (feature.annotations.integration) {
+                GLOBAL.ISS_URL = ISS_URL;
+            } else {
+                GLOBAL.ISS_URL = "http://localhost:5000/";
+            }
         });
 
         scenarios(feature.scenarios, scenario => {
