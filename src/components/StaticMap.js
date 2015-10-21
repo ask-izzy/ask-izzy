@@ -13,12 +13,6 @@ class Address extends React.Component {
     };
 
     // flow:disable not supported yet
-    static defaultProps = {
-        width: "640",
-        height: "640",
-    };
-
-    // flow:disable not supported yet
     static sampleProps = {
         default: {
             location: new Location(factory.Location({
@@ -41,9 +35,18 @@ class Address extends React.Component {
         } ${
             this.props.location.streetAddressLine2()
         }`;
+
+        let size;
+
+        try {
+            size = Math.min(window.innerWidth, 800) - 30;
+        } catch (error) {
+            size = 640;
+        }
+
         const options = {
             markers: address,
-            size: `${this.props.width}x${this.props.height}`,
+            size: `${size}x${size}`,
             key: apiKey,
             scale: "2",
         };

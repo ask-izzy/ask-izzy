@@ -1,7 +1,7 @@
 .PersonalisationPage {
     .search {
         width: 100%;
-        border-bottom: 1px solid $list-item-hairline !important;
+        border-bottom: 1px solid $list-item-hairline;
 
         input {
             display: block;
@@ -79,7 +79,7 @@
         @include clearfix;
 
         border-bottom: 1px solid darken($list-item-hairline, 15%);
-        background-color: $brand-bg-light !important;
+        background-color: $brand-bg-light;
 
         &:focus {
             background-color: darken($brand-bg-light, 10%);
@@ -99,7 +99,7 @@
         .secondaryText {
             display: inline-block;
             float: right;
-            color: $icon-fg-color !important;
+            color: $icon-fg-color;
             font-size: 16px;
             text-decoration: underline;
         }

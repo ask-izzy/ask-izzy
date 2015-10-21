@@ -18,7 +18,7 @@
         border-color: $brand-pane-alt-dark;
 
         color: $brand-pane-alt-dark;
-        font-size: 18px !important;
+        font-size: 18px;
         text-decoration: none;
 
         text-overflow: ellipsis;
@@ -33,10 +33,6 @@
             background-color: $brand-pane-alt-dark;
 
             color: $white;
-
-            .PhoneIcon {
-                fill: $white !important;
-            }
         }
     }
 }

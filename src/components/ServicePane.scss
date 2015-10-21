@@ -3,8 +3,8 @@ $padding: 15px;
 .ServicePane {
     color: $brand-text-dark;
 
-    font-size: 14px !important;
-    font-weight: light !important;
+    font-size: 14px;
+    font-weight: light;
 
     .padded,
     .Eligibility {
@@ -25,8 +25,8 @@ $padding: 15px;
     h4,
     h5,
     h6 {
-        margin-bottom: 0 !important;
-        font-weight: 500 !important;
+        margin-bottom: 0;
+        font-weight: 500;
     }
 
     hr {
@@ -40,19 +40,19 @@ $padding: 15px;
 
     .name {
         margin: 0;
-        font-size: 24px !important;
+        font-size: 24px;
     }
 
     .description {
         padding-bottom: 10px;
         color: $brand-text-mid;
-        font-weight: 400 !important;
+        font-weight: 400;
     }
 
     .OpeningTimes,
     .Address {
         svg {
-            top: -6px !important;
+            top: -6px;
         }
     }
 
@@ -64,14 +64,11 @@ $padding: 15px;
     }
 
     .List {
-        margin-top: 8px;
-        margin-bottom: 8px;
-
         .ListItem {
-            border-bottom: 1px solid $list-item-hairline !important;
+            border-bottom: 1px solid $list-item-hairline;
 
-            font-size: 14px !important;
-            font-weight: 400 !important;
+            font-size: 14px;
+            font-weight: 400;
         }
     }
 

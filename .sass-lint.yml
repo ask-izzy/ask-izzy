@@ -32,7 +32,9 @@ rules:
     no-empty-rulesets: 2
     no-extends: 2
     no-ids: 2
-    no-important: 0
+    # We want this, but there's no way to disable it where it's absolutely
+    # required
+    no-important: 1
     no-invalid-hex: 2
     no-warn: 2
     one-declaration-per-line: 2

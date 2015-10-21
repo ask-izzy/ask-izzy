@@ -1,6 +1,5 @@
 .HomePage {
     .HeaderBar {
-        color: $white;
         text-align: center;
     }
 
@@ -10,23 +9,23 @@
         text-align: center;
 
         .logo {
-            width: auto !important;
-            padding-top: 20px !important;
+            width: auto;
+            padding-top: 20px;
         }
 
         .LogotypeIcon {
-            width: auto !important;
-            height: 90px !important;
-            padding: 0 !important;
+            width: auto;
+            height: 90px;
+            padding: 0;
 
             // Ask
             path {
-                fill: $white !important;
+                fill: $white;
             }
 
             // Izzy
             path + path {
-                fill: $brand-pane-alt-light !important;
+                fill: $brand-pane-alt-light;
             }
         }
 
@@ -66,10 +65,10 @@
 
         .icon {
             position: absolute;
-            top: 6px !important;
+            top: 6px;
             right: 5%;
-            width: 28px !important;
-            height: 28px !important;
+            width: 28px;
+            height: 28px;
         }
     }
 }

@@ -17,7 +17,7 @@
         border-color: $brand-pane-alt-dark;
 
         color: $brand-pane-alt-dark;
-        font-size: 18px !important;
+        font-size: 18px;
         text-decoration: none;
 
         .kind {
@@ -35,7 +35,7 @@
             color: $white;
 
             .PhoneIcon {
-                fill: $white !important;
+                fill: $white;
             }
         }
 
@@ -44,10 +44,10 @@
             top: -2px;
             left: 0;
 
-            width: 40px !important;
-            height: 40px !important;
+            width: 40px;
+            height: 40px;
 
-            fill: $brand-pane-alt-dark !important;
+            fill: $brand-pane-alt-dark;
         }
     }
 }

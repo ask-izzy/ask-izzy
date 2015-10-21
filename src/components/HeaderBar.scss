@@ -4,11 +4,7 @@
     padding-left: 20px;
 
     background-color: $brand-pane-alt-light;
-
-    &,
-    & a {
-        color: $brand-text-dark !important;
-    }
+    color: $brand-text-dark;
 
     .primary {
         min-height: 1em;
@@ -29,8 +25,8 @@
     }
 
     .LogoLightIcon {
-        width: 64px !important;
-        height: 64px !important;
+        width: 64px;
+        height: 64px;
         float: right;
 
         transform: rotate(5deg);
