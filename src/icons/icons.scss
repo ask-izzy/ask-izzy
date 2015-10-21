@@ -1,3 +1,6 @@
+/* N.B. !important here is required to override styles coming from
+ * the SVG icons. */
+
 @media print {
     path {
         fill: $black !important;
@@ -23,16 +26,16 @@
     }
 
     &.size-30 {
-        width: 30px !important;
-        height: 30px !important;
+        width: 30px;
+        height: 30px;
     }
 }
 
 .ChevronIcon {
-    top: 2px !important;
-    width: 35px !important;
-    height: 35px !important;
-    padding-right: 0 !important;
+    top: 2px;
+    width: 35px;
+    height: 35px;
+    padding-right: 0;
 
     path {
         fill: $icon-chevron-color !important;
@@ -49,11 +52,7 @@
 .CheckboxUnselectedIcon,
 .RadioSelectedIcon,
 .RadioUnselectedIcon {
-    top: -8px !important;
-    left: -6px !important;
-
-    width: 40px !important;
-    height: 40px !important;
+    margin-top: -8px;
 
     path {
         fill: $brand-text-dark !important;
