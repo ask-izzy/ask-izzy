@@ -62,14 +62,7 @@ export default class ServicePane extends React.Component {
                     <CollapsedOpeningTimes object={object.open} />
                     <hr />
 
-                    <Collapser
-                        message={<Address location={object.Location()} />}
-                        allowReclosing={true}
-                    >
-                        <StaticMap
-                            location={object.Location()}
-                        />
-                    </Collapser>
+                    {this.renderAddress()}
 
                     <hr />
                     <ContactMethods object={object} />
@@ -93,6 +86,27 @@ export default class ServicePane extends React.Component {
                 {this.renderSiblings()}
             </div>
         );
+    }
+
+    renderAddress(): ReactElement {
+        const location = this.props.service.Location();
+
+        if (location.isConfidential()) {
+            return (
+                <Address location={location} />
+            );
+        } else {
+            return (
+                <Collapser
+                    message={<Address location={location} />}
+                    allowReclosing={true}
+                >
+                    <StaticMap
+                        location={location}
+                    />
+                </Collapser>
+            );
+        }
     }
 
     renderServiceProvisions(): ReactElement {
