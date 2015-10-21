@@ -27,7 +27,7 @@ export default class SvgIcon#{name} extends React.Component {
                 {...this.props}
                 className={`${this.props.className || ""} #{name}Icon Icon`}
                 viewBox="#{view_box}"
-                dangerouslySetInnerHTML={{__html: `#{nodes.join("")}`}}
+                dangerouslySetInnerHTML={{__html: `#{nodes.join("").gsub(/(fill|stroke)[^;"']+;?/, '')}`}}
             />
         );
     }
@@ -46,7 +46,7 @@ def nodes(doc)
         # remove tabs and newlines
         node.attributes.each{|name, value|
             value = value.gsub(/[\t\n]/, ' ')
-            node.add_attribute(name, value)
+            node.add_attribute(name, value) unless value.empty?
         }
     end
 
