@@ -39,7 +39,7 @@ class Address extends React.Component {
         let size;
 
         try {
-            size = window.innerWidth - 30;
+            size = Math.min(window.innerWidth, 800) - 30;
         } catch (error) {
             size = 640;
         }
