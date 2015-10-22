@@ -9,7 +9,6 @@ import icons from "../icons";
 import iss from "../iss";
 import OpeningTimes from "./OpeningTimes";
 import LinkListItem from "./LinkListItem";
-import TransportTime from "./TransportTime";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 class ResultListItem extends React.Component {
@@ -61,10 +60,6 @@ class ResultListItem extends React.Component {
                 <OpeningTimes
                     className="opening_hours"
                     object={object.open}
-                />
-                <TransportTime
-                    compact={true}
-                    location={object.Location()}
                 />
                 {this.props.nServiceProvisions > 0 ?
                     <div>
