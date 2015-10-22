@@ -184,6 +184,9 @@ const categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
+            personalisation.Gender,
+            personalisation.Age,
+            personalisation.Demographics,
         ],
     }),
     new Category({
