@@ -1,14 +1,12 @@
-/* N.B. !important here is required to override styles coming from
- * the SVG icons. */
 
 @media print {
     path {
-        fill: $black !important;
+        fill: $black;
     }
 }
 
 .Icon {
-    transition: none !important;
+    transition: none;
 }
 
 .LogotypeIcon path {
@@ -18,11 +16,11 @@
 
 .ColoredIcon {
     &.icon-fg-color path {
-        fill: $icon-fg-color !important;
+        fill: $icon-fg-color;
     }
 
     &.brand-bg-dark path {
-        fill: $brand-bg-dark !important;
+        fill: $brand-bg-dark;
     }
 
     &.size-30 {
@@ -38,13 +36,13 @@
     padding-right: 0;
 
     path {
-        fill: $icon-chevron-color !important;
+        fill: $icon-chevron-color;
     }
 }
 
 .ChevronBackIcon {
     path {
-        fill: $white !important;
+        fill: $white;
     }
 }
 
@@ -55,7 +53,7 @@
     margin-top: -8px;
 
     path {
-        fill: $brand-text-dark !important;
+        fill: $brand-text-dark;
     }
 }
 
