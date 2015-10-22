@@ -11,7 +11,7 @@ Feature: History navigation
         Then I should see the branding header
         Then I should be at /
 
-    Scenario: Navigate via category to a service and back to the home page
+    Scenario: Navigate via category to a service and back to the personalisation page
         Given a fresh session
         And my location is "Melbourne VIC"
         And I have somewhere to sleep tonight
@@ -59,9 +59,9 @@ Feature: History navigation
 
         When I reload the page
         And I click back from the browser UI
+
         Then I should be at /category/housing/
         And I should see "I found these services for you"
 
         When I click back from the browser UI
-        Then I should be at /
-        And I should see the branding header
+        Then I should see "How old are you?"

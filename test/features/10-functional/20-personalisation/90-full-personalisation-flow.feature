@@ -43,6 +43,28 @@ Feature: Personalisation
         Then I should see "Housing"
 
         When I click back from the title bar
+        Then I should see "Do any of these apply to you?"
+
+        When I click back from the title bar
+        Then I should see "How old are you?"
+
+        When I click back from the title bar
+        Then I should see "Do you identify as…"
+
+        When I click back from the title bar
+        Then I should see "Where are you?"
+
+        When I click back from the title bar
+        Then I should see "Which situation is most like yours?"
+
+        When I click back from the title bar
+        Then I should see "Do you have somewhere safe to sleep tonight?"
+
+        When I click back from the title bar
+        Then I should see "To help me find the right services I'll ask you a few questions"
+
+        When I click back from the title bar
+
          And I click on "Everyday things"
         Then I should see "To help me find the right services I'll ask you a few questions"
 

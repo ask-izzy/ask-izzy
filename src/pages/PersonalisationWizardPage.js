@@ -22,9 +22,6 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         }
 
         if (nextSubpageIdx >= this.personalisationComponents.length) {
-            // We have answered all the questions
-            // Remove ourselves from history
-            this.props.history.replaceState({}, "/");
             // Go on to the category page
             this.navigate("");
         } else {
