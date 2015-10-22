@@ -23,13 +23,16 @@
         text-overflow: ellipsis;
         overflow: hidden;
 
-        .kind {
+        .Contact-text {
             padding-left: 30px;
-            font-weight: 500;
-        }
 
-        .value {
-            white-space: nowrap;
+            .kind {
+                font-weight: 500;
+            }
+
+            .value {
+                white-space: nowrap;
+            }
         }
 
         &:hover,

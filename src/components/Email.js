@@ -16,12 +16,14 @@ export default class Email extends React.Component {
         return (
             <div className="Contact Email">
                 <a href={`mailto:${email}`}>
-                    <span className="kind">
-                        {this.props.comment ? this.props.comment
-                        : "Email"}
-                    </span>
-                    {' '}
-                    <span className="email value">{email}</span>
+                    <div className="Contact-text">
+                        <span className="kind">
+                            {this.props.comment ? this.props.comment
+                            : "Email"}
+                        </span>
+                        {' '}
+                        <span className="email value">{email}</span>
+                    </div>
                 </a>
             </div>
         );
