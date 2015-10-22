@@ -103,7 +103,7 @@ class ResultsListPage extends BaseResultsPage {
     renderPersonalisationLink(): ReactElement {
         return (
             <Link to={this.props.location.pathname + "/personalise/summary"}>
-                Change what you need
+                Change what I'm looking for
             </Link>
         );
     }

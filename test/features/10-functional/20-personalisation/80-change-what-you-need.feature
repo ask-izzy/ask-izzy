@@ -15,7 +15,7 @@ Feature: Change your personalisation settings
 
     Scenario: View personalisation settings and return to search
         When I click on "Housing"
-        And I click on "Change what you need"
+        And I click on "Change what I'm looking for"
         Then I should see "This is what I think I know about you. Change your answers here."
         Then I should see the results
         ----------------------------------------------------------------
