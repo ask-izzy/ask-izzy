@@ -162,9 +162,6 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.JobSubcategories,
             personalisation.Location,
-            personalisation.Gender,
-            personalisation.Age,
-            personalisation.Demographics,
         ],
     }),
     new Category({
