@@ -214,8 +214,7 @@ const categories:Array<Category> = [
     }),
     new Category({
         name: "Have your say",
-        byline:
-            "You have a right to be heard and lots of people can help you",
+        byline: "Complaints and advocacy",
         icon: icons.Advocacy,
         search: {
             q: "advocacy",
