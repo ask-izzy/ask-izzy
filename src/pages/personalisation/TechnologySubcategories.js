@@ -11,7 +11,6 @@ export default class TechnologySubcategories extends BaseMultiQuestion {
             "Finding wifi",
             "Finding a computer",
             "Help to use a computer",
-            "Somewhere to charge",
         ],
     };
 }
