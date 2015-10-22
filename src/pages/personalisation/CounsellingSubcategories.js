@@ -15,6 +15,7 @@ export default class CounsellingSubcategories extends BaseMultiQuestion {
             "Family or relationships": append("relationship"),
             "Disability support": append("disabilities"),
             "Money matters e.g.: gambling": append("financial"),
+            "Veterans": append("veterans"),
             "Out of prison": append("parole"),
             "Pets & vet care": append("pets"),
         },
