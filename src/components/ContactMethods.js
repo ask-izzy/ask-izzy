@@ -44,7 +44,7 @@ class ContactMethods extends React.Component {
     get phones(): Array<Object> {
         const filteredPhoneKinds = new Set(["fax", "tty"]);
         const phoneOrder = ["freecall", "phone", "mobile"];
-        let phones = this.props.object.phones;
+        let phones = this.props.object.phones || [];
 
         phones = _.filter(phones,
                           phone => !filteredPhoneKinds.has(phone.kind));
@@ -53,26 +53,30 @@ class ContactMethods extends React.Component {
         return phones;
     }
 
+    get emails(): Array<Object> {
+        return this.props.object.emails || [];
+    }
+
     render(): ReactElement {
         let assignComponent = (component) =>
             (record) =>
                 Object.assign({ component: component }, record);
-        let { web } = this.props.object;
         let phones = this.phones.map(assignComponent(Phone));
-        let emails = this.props.object.emails.map(assignComponent(Email));
+        let emails = this.emails.map(assignComponent(Email));
         let contacts = [].concat(
             _.rest(phones),
             _.rest(emails),
         );
-        let beforeFoldContacts = [].concat(
+
+        let beforeFoldContacts = _.compact([].concat(
             _.first(phones),
             _.first(emails),
-        );
+        ));
 
-        if (web) {
+        if (this.props.object.web) {
             beforeFoldContacts = beforeFoldContacts.concat({
                 component: Web,
-                url: web,
+                url: this.props.object.web,
             });
         }
 
