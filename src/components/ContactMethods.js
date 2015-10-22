@@ -41,50 +41,61 @@ class ContactMethods extends React.Component {
         },
     };
 
-    render(): ReactElement {
-        let {
-            phones,
-            emails,
-            web,
-        } = this.props.object;
-
+    get phones(): Array<Object> {
         const filteredPhoneKinds = new Set(["fax", "tty"]);
         const phoneOrder = ["freecall", "phone", "mobile"];
+        let phones = this.props.object.phones;
 
         phones = _.filter(phones,
                           phone => !filteredPhoneKinds.has(phone.kind));
         phones = _(phones).sortBy(phone => phoneOrder.indexOf(phone.kind));
         phones = _(phones).uniq(phone => phone.number);
+        return phones;
+    }
 
+    render(): ReactElement {
+        let assignComponent = (component) =>
+            (record) =>
+                Object.assign({ component: component }, record);
+        let { web } = this.props.object;
+        let phones = this.phones.map(assignComponent(Phone));
+        let emails = this.props.object.emails.map(assignComponent(Email));
         let contacts = [].concat(
-            phones.map(phone => Object.assign({ component: Phone }, phone)),
-            emails.map(email => Object.assign({ component: Email }, email)),
+            _.rest(phones),
+            _.rest(emails),
+        );
+        let beforeFoldContacts = [].concat(
+            _.first(phones),
+            _.first(emails),
         );
 
         if (web) {
-            contacts.push({ component: Web, url: web });
+            beforeFoldContacts = beforeFoldContacts.concat({
+                component: Web,
+                url: web,
+            });
         }
 
-        if (contacts.length > 2) {
-            /* render one contact method and then put the rest in a
-             * collapser */
+        if (contacts.length > 0) {
+            /* render one contact method per type and
+             * then put the rest in a collapser */
             return (
                 <div className="ContactMethods">
-                    {this.renderContactMethod(_.first(contacts), 0)}
+                    {beforeFoldContacts.map(this.renderContactMethod)}
                     <Collapser
                         message="Other contact options"
                         expanded={this.props.expanded}
                     >
-                        {_.rest(contacts).map(this.renderContactMethod)}
+                        {contacts.map(this.renderContactMethod)}
                     </Collapser>
                 </div>
             );
 
-        } else if (contacts.length > 0) {
-            /* render 2 contact methods */
+        } else if (beforeFoldContacts.length > 0) {
+            /* render 1 contact method of each type */
             return (
                 <div className="ContactMethods">
-                    {contacts.map(this.renderContactMethod)}
+                    {beforeFoldContacts.map(this.renderContactMethod)}
                 </div>
             );
         } else {

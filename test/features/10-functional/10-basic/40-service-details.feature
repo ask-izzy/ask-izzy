@@ -106,6 +106,8 @@ Feature: Service details page
         Then I should see the contacts
         -------------------------------------------
         Freecall 1300 111 111
+        Reception reception@service.org
+        example.org
         -------------------------------------------
         When I click on "Other contact options"
         Then I should see the contacts
