@@ -25,7 +25,7 @@ class Phone extends React.Component {
                         : titleize(this.props.kind)}
                     </span>
                     {' '}
-                    <span className="number">{this.props.number}</span>
+                    <span className="number value">{this.props.number}</span>
                 </a>
             </div>
         );

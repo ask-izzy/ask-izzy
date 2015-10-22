@@ -21,7 +21,7 @@ export default class Email extends React.Component {
                         : "Email"}
                     </span>
                     {' '}
-                    <span className="email">{email}</span>
+                    <span className="email value">{email}</span>
                 </a>
             </div>
         );

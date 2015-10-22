@@ -69,6 +69,7 @@ cat << EOF > $target
 @import "./normalize";
 @import "./colors";
 @import "./responsive";
+@import "./mixins";
 
 EOF
 
