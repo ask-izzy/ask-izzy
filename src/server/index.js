@@ -27,7 +27,7 @@ const server = express();
 
 // In production, nginx will serve these files so
 // we won't actually recieve requests for them.
-server.use(express.static(path.resolve(__dirname, "../public"), {
+server.use(express.static(path.resolve(__dirname, "../../public"), {
     maxAge: 0,
 }));
 
