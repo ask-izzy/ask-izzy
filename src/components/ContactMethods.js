@@ -41,6 +41,7 @@ class ContactMethods extends React.Component {
         },
     };
 
+    // flow:disable not supported yet
     get phones(): Array<Object> {
         const filteredPhoneKinds = new Set(["fax", "tty"]);
         const phoneOrder = ["freecall", "phone", "mobile"];
@@ -53,6 +54,7 @@ class ContactMethods extends React.Component {
         return phones;
     }
 
+    // flow:disable not supported yet
     get emails(): Array<Object> {
         return this.props.object.emails || [];
     }
