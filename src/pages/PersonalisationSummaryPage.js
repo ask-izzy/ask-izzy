@@ -32,7 +32,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         primaryText={
                             <div>
                                 <icons.LogoLight />
-                                This is what I think I know about you.
+                                This is what you said you need.
                                 Change your answers here.
                             </div>
                         }
