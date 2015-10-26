@@ -101,8 +101,11 @@ class ResultsListPage extends BaseResultsPage {
     }
 
     renderPersonalisationLink(): ReactElement {
+        const current = this.props.location.pathname;
+        const separator = current.endsWith("/") ? "" : "/";
+
         return (
-            <Link to={this.props.location.pathname + "/personalise/summary"}>
+            <Link to={`${current}${separator}personalise/summary`}>
                 Change what I'm looking for
             </Link>
         );
