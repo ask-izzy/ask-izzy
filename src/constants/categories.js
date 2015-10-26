@@ -38,7 +38,7 @@ class Category {
 const categories:Array<Category> = [
     new Category({
         name: "Housing",
-        byline: "Find a place to stay",
+        byline: "A place to stay",
         icon: icons.House,
         search: {
             q: "housing",
@@ -67,7 +67,7 @@ const categories:Array<Category> = [
     }),
     new Category({
         name: "Everyday things",
-        byline: "Things you might need",
+        byline: "Swags, Clothes, etc",
         icon: icons.Things,
         search: {
             q: "material aid",
