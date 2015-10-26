@@ -85,7 +85,7 @@ class BaseMultiQuestion extends BaseQuestion {
         let selected = this.state.answers;
 
         return (
-            <div>
+            <div className="BaseMultiQuestion">
                 <components.HeaderBar
                     primaryText={
                         <div>
