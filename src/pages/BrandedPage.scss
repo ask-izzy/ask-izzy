@@ -20,15 +20,12 @@
         font-weight: 400;
 
         & > div {
+            display: inline-block;
             margin: 5px 15px;
         }
 
         .about {
             float: left;
-        }
-
-        .feedback {
-            float: right;
         }
 
         a {

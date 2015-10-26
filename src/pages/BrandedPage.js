@@ -9,7 +9,6 @@ export default class BasePage extends React.Component {
 
     render(): ReactElement {
         const domain = SITE_DOMAIN;
-        const mailLink = `mailto:support@${domain}`;
 
         return (
             <div className="BrandedPage">
@@ -21,13 +20,6 @@ export default class BasePage extends React.Component {
                 <footer className="branding-footer-container">
                     <div className="about">
                         <a href="#">About Ask Izzy</a>
-                    </div>
-                    <div className="feedback">
-                        <a
-                            href={mailLink}
-                        >
-                        Feedback
-                        </a>
                     </div>
                     <div>
                         Supported by <ul className="supporters">
