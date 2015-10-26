@@ -125,7 +125,7 @@ class BaseQuestion extends React.Component {
         /* possible answers to the question */
         answers: React.PropTypes.oneOfType([
             React.PropTypes.arrayOf(React.PropTypes.node),
-            React.PropTypes.objectOf(React.PropTypes.node),
+            React.PropTypes.objectOf(React.PropTypes.string),
         ]).isRequired,
     };
 
