@@ -13,10 +13,15 @@ export default class Web extends React.Component {
         return (
             <div className="Contact Web">
                 <a href={url.href}>
-                    <span className="web">
-                        {url.hostname}
-                        {url.path == "/" ? "" : url.path}
-                    </span>
+                    <div className="Contact-text">
+                        <span className="kind">
+                        {' '}
+                        </span>
+                        <span className="web value">
+                            {url.hostname}
+                            {url.path == "/" ? "" : url.path}
+                        </span>
+                    </div>
                 </a>
             </div>
         );

@@ -1,8 +1,8 @@
-.Contact + .Email {
+.Contact + .Contact {
     padding-top: 7px;
 }
 
-.Email {
+.Contact {
     display: block;
     width: 100%;
 
@@ -19,17 +19,20 @@
 
         color: $brand-pane-alt-dark;
         font-size: 18px;
-        text-decoration: none;
 
         text-overflow: ellipsis;
         overflow: hidden;
 
-        .kind {
-            font-weight: 500;
-        }
+        .Contact-text {
+            padding-left: 30px;
 
-        .email {
-            white-space: nowrap;
+            .kind {
+                font-weight: 500;
+            }
+
+            .value {
+                white-space: nowrap;
+            }
         }
 
         &:hover,
@@ -37,6 +40,21 @@
             background-color: $brand-pane-alt-dark;
 
             color: $white;
+
+            .Icon {
+                fill: $white;
+            }
+        }
+
+        .Icon {
+            position: absolute;
+            top: -2px;
+            left: 0;
+
+            width: 40px;
+            height: 40px;
+
+            fill: $brand-pane-alt-dark;
         }
     }
 }

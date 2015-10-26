@@ -20,12 +20,16 @@ class Phone extends React.Component {
             <div className="Contact Phone">
                 <a href={this.href}>
                     <Icons.Phone />
-                    <span className="kind">
-                        {this.props.comment ? this.props.comment
-                        : titleize(this.props.kind)}
-                    </span>
-                    {' '}
-                    <span className="number">{this.props.number}</span>
+                    <div className="Contact-text">
+                        <span className="kind">
+                            {this.props.comment ? this.props.comment
+                            : titleize(this.props.kind)}
+                        </span>
+                        {' '}
+                        <span className="number value">
+                            {this.props.number}
+                        </span>
+                    </div>
                 </a>
             </div>
         );

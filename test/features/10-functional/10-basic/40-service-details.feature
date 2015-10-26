@@ -106,15 +106,17 @@ Feature: Service details page
         Then I should see the contacts
         -------------------------------------------
         Freecall 1300 111 111
+        Reception reception@service.org
+        example.org
         -------------------------------------------
         When I click on "Other contact options"
         Then I should see the contacts
         -------------------------------------------
         Freecall 1300 111 111
-        Phone (03) 3333 3333
-        (really a mobile) 0477 777 777
         Reception reception@service.org
         example.org
+        Phone (03) 3333 3333
+        (really a mobile) 0477 777 777
         -------------------------------------------
         When I click on "example.org"
         Then I should be at https://example.org/
