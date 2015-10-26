@@ -2,6 +2,11 @@ language: node_js
 node_js:
   - "0.12"
 
+before_install:
+- env
+- export TZ=Australia/Melbourne
+- date
+
 install:
   - npm config set cache ./node_modules_cache
   - npm install
