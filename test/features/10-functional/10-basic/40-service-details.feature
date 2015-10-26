@@ -74,11 +74,6 @@ Feature: Service details page
         When I click on "Unit 5, Level 3, Hany Building, 33 Elizabeth Street"
         Then I should not see the static google map
 
-    Scenario: There is travel information for non-confidential services
-        When I visit /service/866464
-        Then I should see "? mins"
-        Then I can get to google maps by clicking "Get directions"
-
     Scenario: There is no travel information for confidential services
         When I visit /service/537512
         Then I should see "Confidential location"
@@ -120,7 +115,19 @@ Feature: Service details page
         Then I should be at https://example.org/
 
     Scenario: Can view all opening times
-        When I visit /service/5551234
+       Given A service with:
+        --------------------------------------------------
+        * Opening Hours
+            day       | open     | close    | note
+            ==============================================
+            Monday    | 09:00:00 | 17:00:00 | (nada)
+            Tuesday   | 09:00:00 | 17:00:00 | (nada)
+            Wednesday | 08:00:00 | 17:00:00 | (nada)
+            Thursday  | 09:00:00 | 17:00:00 | (nada)
+            Friday    | 09:00:00 | 17:00:00 | (nada)
+        --------------------------------------------------
+
+        When I navigate to the service page
         And I click on "All times"
 
         Then I should see the results
