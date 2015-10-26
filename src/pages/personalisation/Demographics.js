@@ -4,7 +4,6 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { append } from "./BaseQuestion";
 
 export default class Demographics extends BaseMultiQuestion {
-    // flow:disable
     static defaultProps = {
         name: "demographics",
         question: "Do any of these apply to you?",

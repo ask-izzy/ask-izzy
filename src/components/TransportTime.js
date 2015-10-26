@@ -9,13 +9,11 @@ import icons from "../icons";
 import Location from "../iss/Location";
 
 class TransportTime extends React.Component {
-    // flow:disable not supported yet
     static propTypes = {
         compact: React.PropTypes.bool,
         location: React.PropTypes.object.isRequired,
     };
 
-    // flow:disable not supported yet
     static sampleProps = {
         compact: {
             location: new Location(fixtures.ixa.location),
@@ -27,7 +25,6 @@ class TransportTime extends React.Component {
         },
     };
 
-    // flow:disable not supported yet
     static defaultProps = {
         compact: false,
     };

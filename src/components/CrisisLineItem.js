@@ -11,15 +11,12 @@ import Phone from "./Phone";
 
 class CrisisLineItem extends React.Component {
 
-    // flow:disable not supported yet
     static displayName = "CrisisLineItem";
 
-    // flow:disable not supported yet
     static propTypes = {
         object: React.PropTypes.object.isRequired,
     };
 
-    // flow:disable not supported yet
     static sampleProps = {default: {
         object: new iss.Service(fixtures.domesticviolence),
     }};

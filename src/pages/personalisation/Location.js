@@ -30,7 +30,6 @@ const AutocompleteState = {
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Location extends React.Component {
-    // flow:disable
     static defaultProps = {
         name: "location",
     };
@@ -74,7 +73,6 @@ class Location extends React.Component {
         }
     }
 
-    // flow:disable
     static summaryLabel = "Where are you?";
 
     // flow:disable

@@ -12,7 +12,6 @@ class BasePersonalisationPage extends BaseCategoriesPage {
         super(props);
     }
 
-    // flow:disable
     static childContextTypes = {
         controller: React.PropTypes.instanceOf(BasePersonalisationPage),
     };

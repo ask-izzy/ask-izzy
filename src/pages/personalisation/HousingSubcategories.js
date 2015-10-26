@@ -5,7 +5,6 @@ import SleepTonight from "./SleepTonight";
 import { append } from "./BaseQuestion";
 
 export default class HousingSubcategories extends BaseMultiQuestion {
-    // flow:disable
     static defaultProps = {
         name: "sub-housing",
         question: "Which situation is most like yours?",

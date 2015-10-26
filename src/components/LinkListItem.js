@@ -4,7 +4,6 @@ import React from "react";
 import { Link } from "react-router";
 
 export default class LinkListItem extends React.Component {
-    // flow:disable not supported yet
     static propTypes = {
         primaryText: React.PropTypes.node,
         secondaryText: React.PropTypes.node,
@@ -13,12 +12,10 @@ export default class LinkListItem extends React.Component {
         rightIcon: React.PropTypes.node,
     };
 
-    // flow:disable not supported yet
     static defaultProps = {
         className: "",
     };
 
-    // flow:disable not supported yet
     static sampleProps = {
         default: {
             primaryText: "Link Text",

@@ -5,12 +5,10 @@ import ScreenReader from "./ScreenReader";
 import Location from "../iss/Location";
 
 class Address extends React.Component {
-    // flow:disable not supported yet
     static propTypes = {
         location: React.PropTypes.object,
     };
 
-    // flow:disable not supported yet
     static sampleProps = {
         complex: {
             location: new Location({

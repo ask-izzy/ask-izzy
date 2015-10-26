@@ -3,7 +3,6 @@
 import BaseMultiQuestion from "./BaseMultiQuestion";
 
 export default class LegalSubcategories extends BaseMultiQuestion {
-    // flow:disable
     static defaultProps = {
         name: "sub-legal",
         question: "What's happening?",

@@ -5,7 +5,6 @@ import fixtures from "../../fixtures/services";
 
 export default class Email extends React.Component {
 
-    // flow:disable not supported yet
     static sampleProps = {default: fixtures.ixa.emails[0]};
 
     render(): ReactElement {

@@ -16,7 +16,6 @@ class Collapser extends React.Component {
         this.setState({collapsed: !this.props.expanded});
     }
 
-    // flow:disable not supported yet
     static sampleProps = {
         default: {
             message: "Click to expand",

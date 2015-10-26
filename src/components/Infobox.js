@@ -6,14 +6,12 @@ import reactMixin from "react-mixin";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 class Infobox extends React.Component {
-    // flow:disable not supported yet
     static propTypes = {
         href: React.PropTypes.string,
         to: React.PropTypes.string,
         linkText: React.PropTypes.string,
     };
 
-    // flow:disable
     static defaultProps = {
         linkText: "More information",
     };
@@ -23,7 +21,6 @@ class Infobox extends React.Component {
         this.state = {};
     }
 
-    // flow:disable not supported yet
     static sampleProps = {default: {
         linkText: "Housing information",
         href: "#",

@@ -3,7 +3,6 @@
 import BaseMultiQuestion from "./BaseMultiQuestion";
 
 export default class JobSubcategories extends BaseMultiQuestion {
-    // flow:disable
     static defaultProps = {
         name: "sub-job",
         question: "Where do you want to start?",
