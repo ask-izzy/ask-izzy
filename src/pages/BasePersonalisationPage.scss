@@ -31,6 +31,16 @@
         }
     }
 
+    .skip-button {
+        width: 100%;
+        padding-bottom: 20px;
+
+        button {
+            display: block;
+            width: 100%;
+        }
+    }
+
     .done-button {
         width: 100%;
 
@@ -45,6 +55,7 @@
             margin-left: auto;
         }
     }
+
 
     .List {
         padding: 0;

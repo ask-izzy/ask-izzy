@@ -93,7 +93,14 @@ class BaseMultiQuestion extends BaseQuestion {
                             {this.props.question}
                         </div>
                     }
-                />
+                >
+                    <div className="skip-button">
+                        <components.FlatButton
+                            label="Skip"
+                            onTouchTap={this.onDoneTouchTap.bind(this)}
+                        />
+                    </div>
+                </components.HeaderBar>
                 <div className="List">
                     {this.answers.map((answer, index) =>
                         <components.InputListItem

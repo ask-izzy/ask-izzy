@@ -33,7 +33,7 @@ Feature: Personalisation
         When I click on "Done"
         Then I should see "Do you identify as…"
 
-        When I click on "Female"
+        When I click on "Skip"
         Then I should see "How old are you?"
 
         When I click on "25 or younger"
