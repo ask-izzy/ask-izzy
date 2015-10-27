@@ -1,3 +1,4 @@
+@integration
 Feature: Search for housing services
 
     Scenario: Teenaged woman in Wheelers Hill

@@ -145,7 +145,7 @@ const categories:Array<Category> = [
         byline: "Everyday skills & training",
         icon: icons.Skills,
         search: {
-            q: "life skills",
+            q: "life skills education",
         },
         personalisation: [
             personalisation.LifeSkillsSubcategories,
