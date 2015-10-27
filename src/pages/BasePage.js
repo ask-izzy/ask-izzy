@@ -4,7 +4,6 @@ import React from "react";
 
 export default class BasePage extends React.Component {
 
-    // flow:disable
     static childContextTypes = {};
 
     getChildContext(): Object {

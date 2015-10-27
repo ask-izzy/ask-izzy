@@ -4,7 +4,6 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { append } from "./BaseQuestion";
 
 export default class AdvocacySubcategories extends BaseMultiQuestion {
-    // flow:disable
     static defaultProps = {
         name: "sub-advocacy",
         question: "Have you been treated badly?" +

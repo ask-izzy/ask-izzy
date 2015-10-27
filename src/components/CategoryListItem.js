@@ -10,7 +10,6 @@ import icons from "../icons";
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 class CategoryListItem extends React.Component {
 
-    // flow:disable not supported yet
     static sampleProps = {default: {
         category: {
             key: "material-aid",

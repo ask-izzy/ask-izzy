@@ -3,7 +3,6 @@
 import React from "react";
 
 class HeaderBar extends React.Component {
-    // flow:disable not supported yet
     static propTypes = {
         primaryText: React.PropTypes.node.isRequired,
         secondaryText: React.PropTypes.node,
@@ -11,7 +10,6 @@ class HeaderBar extends React.Component {
         // FIXME: icon
     };
 
-    // flow:disable not supported yet
     static sampleProps = {default: {
         primaryText: "Primary Text",
         secondaryText: "Secondary Text",

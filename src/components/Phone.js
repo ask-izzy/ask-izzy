@@ -7,7 +7,6 @@ import fixtures from "../../fixtures/services";
 
 class Phone extends React.Component {
 
-    // flow:disable not supported yet
     static sampleProps = {default: fixtures.ixa.phones[0]};
 
     // flow:disable not supported yet

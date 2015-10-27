@@ -12,7 +12,6 @@ import * as iss from "../../iss";
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Intro extends React.Component {
-    // flow:disable
     static defaultProps = {
         name: "intro",
     };

@@ -5,12 +5,10 @@ import Location from "../iss/Location";
 
 class GoogleMapsLink extends React.Component {
 
-    // flow:disable not supported yet
     static defaultProps = {
         from: "", // Empty string makes the maps app use your current location
     };
 
-    // flow:disable not supported yet
     static sampleProps = {
         default: {
             children: (

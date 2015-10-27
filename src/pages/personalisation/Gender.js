@@ -3,7 +3,6 @@
 import BaseQuestion, { append } from "./BaseQuestion";
 
 export default class Gender extends BaseQuestion {
-    // flow:disable
     static defaultProps = {
         name: "gender",
         question: "Do you identify as…",
@@ -14,7 +13,6 @@ export default class Gender extends BaseQuestion {
         },
     };
 
-    // flow:disable
     static summaryLabel = "How do you identify?";
 
     // flow:disable

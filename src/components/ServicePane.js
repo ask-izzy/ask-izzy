@@ -35,7 +35,6 @@ export default class ServicePane extends React.Component {
         }
     }
 
-    // flow:disable not supported yet
     static sampleProps = {default: {
         service: ServiceFactory(fixtures.youthSupportNet),
     }};

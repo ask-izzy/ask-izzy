@@ -3,7 +3,6 @@
 import BaseQuestion, { replace, append } from "./BaseQuestion";
 
 export default class SleepTonight extends BaseQuestion {
-    // flow:disable
     static defaultProps = {
         name: "sleep-tonight",
         question: "Do you have somewhere safe to sleep tonight?",

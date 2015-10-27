@@ -44,7 +44,6 @@ function fixture(
 
 export default class CollapsedOpeningTimes extends React.Component {
 
-    // flow:disable not supported yet
     static sampleProps = {
         "One opening time": fixture(true, [{
             day: "Wednesday",

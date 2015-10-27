@@ -40,13 +40,11 @@ function fixture(
 
 class OpeningTimes extends React.Component {
 
-    // flow:disable not supported yet
     static propTypes = {
         object: React.PropTypes.object.isRequired,
         moment: React.PropTypes.func,
     };
 
-    // flow:disable
     static defaultProps = {
         moment: moment,
     };
@@ -54,7 +52,6 @@ class OpeningTimes extends React.Component {
     // Lots of permutations here because this component has
     // lots of complex logic. Should probably be split into
     // CurrentlyOpen/CurrentlyClosed components to simplify.
-    // flow:disable not supported yet
     static sampleProps = {
         open: fixture(true, [{
             day: "Wednesday",

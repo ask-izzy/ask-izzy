@@ -4,7 +4,6 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { append, remove } from "./BaseQuestion";
 
 export default class MoneySubcategories extends BaseMultiQuestion {
-    // flow:disable
     static defaultProps = {
         name: "sub-money",
         question: "What do you need?",

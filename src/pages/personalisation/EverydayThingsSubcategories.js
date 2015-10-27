@@ -3,7 +3,6 @@
 import BaseMultiQuestion from "./BaseMultiQuestion";
 
 export default class EverydayThingsSubcategories extends BaseMultiQuestion {
-    // flow:disable
     static defaultProps = {
         name: "sub-everyday-things",
         question: "What things do you need?",

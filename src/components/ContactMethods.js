@@ -11,7 +11,6 @@ import fixtures from "../../fixtures/services";
 
 class ContactMethods extends React.Component {
 
-    // flow:disable not supported yet
     static sampleProps = {
         closed: {
             object: {

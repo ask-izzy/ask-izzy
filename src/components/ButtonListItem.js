@@ -3,7 +3,6 @@
 import React from "react";
 
 export default class ButtonListItem extends React.Component {
-    // flow:disable not supported yet
     static propTypes = {
         primaryText: React.PropTypes.node.isRequired,
         secondaryText: React.PropTypes.node,
@@ -12,12 +11,10 @@ export default class ButtonListItem extends React.Component {
         rightIcon: React.PropTypes.node,
     };
 
-    // flow:disable not supported yet
     static defaultProps = {
         className: "",
     };
 
-    // flow:disable not supported yet
     static sampleProps = {
         default: {
             primaryText: "Primary Text",

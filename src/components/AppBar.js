@@ -6,13 +6,11 @@ import components from "../components";
 import icons from "../icons";
 
 class AppBar extends React.Component {
-    // flow:disable not supported yet
     static propTypes = {
         title: React.PropTypes.string.isRequired,
         onBackTouchTap: React.PropTypes.func.isRequired,
     };
 
-    // flow:disable not supported yet
     static sampleProps = {default: {
         title: "App bar",
         onBackTouchTap: function() {},

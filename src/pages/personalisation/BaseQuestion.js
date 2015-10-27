@@ -118,7 +118,6 @@ export function remove(search: string|iss.searchRequest): RemoveSearch {
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class BaseQuestion extends React.Component {
-    // flow:disable
     static propTypes = {
         /* The question asked of the user */
         question: React.PropTypes.string.isRequired,
@@ -129,7 +128,6 @@ class BaseQuestion extends React.Component {
         ]).isRequired,
     };
 
-    // flow:disable
     static defaultProps = {
     };
 

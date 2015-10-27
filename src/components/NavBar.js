@@ -7,7 +7,6 @@ import CategoryListItem from "./CategoryListItem";
 
 class NavBar extends React.Component {
 
-    // flow:disable not supported yet
     static sampleProps = {default: {}};
 
     render(): ReactElement {

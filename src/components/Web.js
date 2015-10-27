@@ -4,7 +4,6 @@ import URL from "url";
 
 export default class Web extends React.Component {
 
-    // flow:disable not supported yet
     static sampleProps = {default: {url: "https://example.com/landingPage"}};
 
     render(): ReactElement {

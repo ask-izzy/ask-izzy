@@ -10,7 +10,6 @@ import icons from "../../icons";
 
 export default class TextEntryQuestion extends BaseQuestion {
 
-    // flow:disable
     static defaultProps = {
         type: "text",
         placeholder: "",

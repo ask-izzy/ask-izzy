@@ -8,7 +8,6 @@ declare var SITE_DOMAIN: string;
 
 class HtmlDocument extends React.Component {
 
-    // flow:disable not supported yet
     static propTypes = {
         css: React.PropTypes.arrayOf(React.PropTypes.string),
         markup: React.PropTypes.string.isRequired,
@@ -21,7 +20,6 @@ class HtmlDocument extends React.Component {
         title: React.PropTypes.string,
     };
 
-    // flow:disable not supported yet
     static defaultProps = {
         script: [],
         css: [],

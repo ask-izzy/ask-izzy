@@ -3,7 +3,6 @@
 import React from "react";
 
 export default class InputListItem extends React.Component {
-    // flow:disable not supported yet
     static propTypes = {
         type: React.PropTypes.string.isRequired,
         checked: React.PropTypes.bool,
@@ -16,12 +15,10 @@ export default class InputListItem extends React.Component {
         uncheckedIcon: React.PropTypes.node,
     };
 
-    // flow:disable not supported yet
     static defaultProps = {
         className: "",
     };
 
-    // flow:disable not supported yet
     static sampleProps = {
         default: {
             primaryText: "Primary Text",

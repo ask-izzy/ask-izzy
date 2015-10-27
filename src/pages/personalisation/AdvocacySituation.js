@@ -3,7 +3,6 @@
 import TextEntryQuestion from "./TextEntryQuestion";
 
 export default class AdvocacySituation extends TextEntryQuestion {
-    // flow:disable
     static defaultProps = {
         name: "advocacy-situation",
         question: "What situation do you need help with?",
@@ -12,6 +11,5 @@ export default class AdvocacySituation extends TextEntryQuestion {
         answers: [],
     };
 
-    // flow:disable
     static summaryLabel = "Your situation";
 }

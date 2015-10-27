@@ -14,21 +14,17 @@ import TransportTime from "./TransportTime";
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 class ResultListItem extends React.Component {
 
-    // flow:disable not supported yet
     static displayName = "ResultListItem";
 
-    // flow:disable not supported yet
     static propTypes = {
         object: React.PropTypes.instanceOf(iss.Service).isRequired,
         nServiceProvisions: React.PropTypes.number,
     };
 
-    // flow:disable
     static defaultProps = {
         nServiceProvisions: 4,
     };
 
-    // flow:disable not supported yet
     static sampleProps = {default: {
         object: new iss.Service(fixtures.ixa),
     }};

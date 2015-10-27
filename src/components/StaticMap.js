@@ -7,12 +7,10 @@ import GoogleMapsLink from "./GoogleMapsLink";
 declare var GOOGLE_KEY: string;
 
 class Address extends React.Component {
-    // flow:disable not supported yet
     static propTypes = {
         location: React.PropTypes.object,
     };
 
-    // flow:disable not supported yet
     static sampleProps = {
         default: {
             location: new Location(factory.Location({

@@ -3,7 +3,6 @@
 import BaseQuestion, { append } from "./BaseQuestion";
 
 export default class Age extends BaseQuestion {
-    // flow:disable
     static defaultProps = {
         name: "age",
         question: "How old are you?",

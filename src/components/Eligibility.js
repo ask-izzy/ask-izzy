@@ -5,14 +5,12 @@ import React from "react";
 import fixtures from "../../fixtures/services";
 
 class Eligibility extends React.Component {
-    // flow:disable not supported yet
     static propTypes = {
         catchment: React.PropTypes.string,
         eligibility_info: React.PropTypes.string,
         ineligibility_info: React.PropTypes.string,
     };
 
-    // flow:disable not supported yet
     static sampleProps = {default: fixtures.ixa};
 
     eligibility(eligibility: string): Array<ReactElement> {
