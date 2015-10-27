@@ -85,7 +85,7 @@ class BaseMultiQuestion extends BaseQuestion {
         let selected = this.state.answers;
 
         return (
-            <div>
+            <div className="BaseMultiQuestion">
                 <components.HeaderBar
                     primaryText={
                         <div>
@@ -95,20 +95,20 @@ class BaseMultiQuestion extends BaseQuestion {
                     }
                 />
                 <div className="List">
-                {this.answers.map((answer, index) =>
-                    <components.InputListItem
-                        key={index}
-                        primaryText={answer}
+                    {this.answers.map((answer, index) =>
+                        <components.InputListItem
+                            key={index}
+                            primaryText={answer}
 
-                        type="checkbox"
-                        checked={selected.has(answer)}
-                        checkedIcon={<icons.CheckboxSelected />}
-                        uncheckedIcon={<icons.CheckboxUnselected />}
-                        onChange={this.onAnswerTouchTap.bind(
-                            this, answer, !selected.has(answer)
-                        )}
-                    />
-                )}
+                            type="checkbox"
+                            checked={selected.has(answer)}
+                            checkedIcon={<icons.CheckboxSelected />}
+                            uncheckedIcon={<icons.CheckboxUnselected />}
+                            onChange={this.onAnswerTouchTap.bind(
+                                this, answer, !selected.has(answer)
+                            )}
+                        />
+                    )}
                 </div>
 
                 <div className="done-button">

@@ -18,12 +18,12 @@
             height: 90px;
             padding: 0;
 
-            // Ask
+            /* Ask */
             path {
                 fill: $white;
             }
 
-            // Izzy
+            /* Izzy */
             path + path {
                 fill: $brand-pane-alt-light;
             }
