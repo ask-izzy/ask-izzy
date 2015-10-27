@@ -76,6 +76,10 @@ class AppendToSearch extends Search {
                 .concat(this.search.age_groups);
         }
 
+        if (this.search.bulk_billing) {
+            search.bulk_billing = this.search.bulk_billing;
+        }
+
         return search;
     }
 }
@@ -124,7 +128,7 @@ class BaseQuestion extends React.Component {
         /* possible answers to the question */
         answers: React.PropTypes.oneOfType([
             React.PropTypes.arrayOf(React.PropTypes.node),
-            React.PropTypes.objectOf(React.PropTypes.node),
+            React.PropTypes.objectOf(React.PropTypes.string),
         ]).isRequired,
     };
 

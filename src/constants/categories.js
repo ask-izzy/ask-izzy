@@ -59,7 +59,7 @@ const categories:Array<Category> = [
         byline: "Something to eat",
         icon: icons.Food,
         search: {
-            q: "food",
+            q: "free food -health",
         },
         personalisation: [
             personalisation.Location,
@@ -172,7 +172,8 @@ const categories:Array<Category> = [
         byline: "Access to services",
         icon: icons.Centrelink,
         search: {
-            q: "centrelink",
+            q: '"centrelink"',
+            name: "centrelink",
         },
         personalisation: [
             personalisation.Location,

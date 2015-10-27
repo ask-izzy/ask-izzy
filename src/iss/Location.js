@@ -17,6 +17,7 @@ export default class Location {
     street_suffix: string;
     street_type: string;
     suburb: string;
+    details: string;
 
     constructor(props: issLocation) {
         Object.assign(this, props);
