@@ -235,6 +235,10 @@ class Location extends React.Component {
 
     onTouchDoneButton(event: Event): void {
         event.preventDefault();
+        if (!this.state.locationName) {
+            return;
+        }
+
         storage.setItem("location", this.state.locationName);
         this.nextStep();
     }
