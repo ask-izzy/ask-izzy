@@ -89,17 +89,17 @@ export default class LinkListItem extends React.Component {
                 <div className="leftIcon">
                     {leftIcon}
                 </div>
-                {this.props.children ? null
+                {children ? null
                     : <div className="primaryText">
                         {primaryText}
                     </div>
                 }
-                {this.props.children ? null
+                {children ? null
                     : <div className="secondaryText">
                         {secondaryText}
                     </div>
                 }
-                {this.props.children}
+                {children}
                 <div className="rightIcon">
                     {rightIcon}
                 </div>

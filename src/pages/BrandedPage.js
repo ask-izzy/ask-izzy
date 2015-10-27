@@ -3,13 +3,9 @@
 import DocumentTitle from "react-document-title";
 import React from "react";
 
-declare var SITE_DOMAIN: string;
-
 export default class BasePage extends React.Component {
 
     render(): ReactElement {
-        const domain = SITE_DOMAIN;
-
         return (
             <div className="BrandedPage">
                 <DocumentTitle title="Ask Izzy" />
