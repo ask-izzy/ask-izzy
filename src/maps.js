@@ -10,6 +10,34 @@ class MapsApi {
     }
 
     /**
+     * @param {DirectionsRequest} params - an object of params per the Google
+     * Maps JS API.
+     *
+     * @returns {Promise<string>} a Promise containing a description
+     * of the travel time.
+     */
+    travelTime(params: DirectionsRequest): Promise<string> {
+        let directionsService = new this.api.DirectionsService();
+
+        return new Promise((resolve, reject) =>
+            directionsService.route(params, (response, status) => {
+                console.log(response);
+                if (status == this.api.DirectionsStatus.OK) {
+                    resolve(
+                        response.routes[0].legs.map(
+                            (leg) => leg.duration.text
+                        ).reduce(
+                            (memo, text) => `${memo} then ${text}`
+                        )
+                    );
+                } else {
+                    reject(status);
+                }
+            })
+        );
+    }
+
+    /**
      * @param {GeocoderRequest} params - an object of params per the Google
      * Maps JS API.
      *

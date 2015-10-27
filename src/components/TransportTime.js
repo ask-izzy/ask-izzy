@@ -7,8 +7,7 @@ import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import Location from "../iss/Location";
 import storage from "../storage";
-
-declare var google: Google;
+import Maps from "../maps";
 
 class TransportTime extends React.Component {
     static propTypes = {
@@ -41,7 +40,8 @@ class TransportTime extends React.Component {
         return this.props.compact ? "compact" : "";
     }
 
-    loadTime(): void {
+    async loadTime(): Promise<void> {
+        const maps = await Maps();
         const destPoint = this.props.location.point;
         const coords = storage.getJSON("coordinates");
         let location = storage.getItem("location");
@@ -55,23 +55,12 @@ class TransportTime extends React.Component {
         const options = {
             origin: `${location}`,
             destination: `${destPoint.lat},${destPoint.lon}`,
-            travelMode: google.maps.DirectionsTravelMode.WALKING,
-            unitSystem: google.maps.UnitSystem.METRIC,
+            travelMode: maps.api.DirectionsTravelMode.WALKING,
+            unitSystem: maps.api.UnitSystem.METRIC,
             language: "en-AU",
         };
 
-        let directionsService = new google.maps.DirectionsService();
-
-        directionsService.route(options, (response, status) => {
-            if (status == google.maps.DirectionsStatus.OK) {
-                this.setState({time: response.routes[0].legs.map(
-                    (leg) => leg.duration.text
-                ).reduce(
-                    (memo, text) => `${memo} then ${text}`
-                )});
-            }
-        })
-
+        this.setState({time: await maps.travelTime(options)});
     }
 
     render(): ReactElement {

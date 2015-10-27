@@ -68,8 +68,16 @@ declare class InfoWindow {
 declare class Map {
 }
 
+type DirectionsRequest = {
+    origin: string,
+    destination: string,
+    travelMode?: string,
+    unitSystem?: string,
+    language?: string,
+};
+
 declare class DirectionsService {
-    route(options: Object, callback: Function): void;
+    route(options: DirectionsRequest, callback: Function): void;
 }
 
 declare class GoogleMaps {
