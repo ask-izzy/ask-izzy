@@ -2,6 +2,7 @@
 
 import DocumentTitle from "react-document-title";
 import React from "react";
+import { Link } from "react-router";
 
 declare var SITE_DOMAIN: string;
 
@@ -20,7 +21,7 @@ export default class BasePage extends React.Component {
 
                 <footer className="branding-footer-container">
                     <div className="about">
-                        <a href="#">About Ask Izzy</a>
+                        <Link to="/about">About Ask Izzy</Link>
                     </div>
                     <div className="feedback">
                         <a
