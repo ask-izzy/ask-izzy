@@ -59,7 +59,7 @@ const categories:Array<Category> = [
         byline: "Something to eat",
         icon: icons.Food,
         search: {
-            q: "free breakfast lunch dinner",
+            q: "free food -health",
         },
         personalisation: [
             personalisation.Location,
