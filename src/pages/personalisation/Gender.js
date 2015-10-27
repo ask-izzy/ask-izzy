@@ -10,7 +10,7 @@ export default class Gender extends BaseQuestion {
         answers: {
             "Female": append("-male"),
             "Male": append("-female"),
-            "Neither/Both/Something else": "",
+            "Neither/Both/Something else": append(""),
         },
     };
 

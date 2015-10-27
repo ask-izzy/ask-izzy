@@ -27,6 +27,7 @@ export type searchRequest = {
     age_groups?: Array<string>,
 
     catchment?: boolean,
+    bulk_billing?: boolean,
 
     limit?: number,
     key?: string,
