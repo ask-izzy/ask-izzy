@@ -15,8 +15,7 @@ class NavBar extends React.Component {
     static sampleProps = {default: {}};
 
     render(): ReactElement {
-        const domain = SITE_DOMAIN;
-        const mailLink = `mailto:support@${domain}`;
+        const mailLink = `mailto:support@${SITE_DOMAIN}`;
 
         return (
             <div className="NavBar">
@@ -34,7 +33,7 @@ class NavBar extends React.Component {
 
                     <LinkListItem
                         className="CategoryListItem"
-                        to={mailLink}
+                        href={mailLink}
                         leftIcon={
                             <icons.Logo className="ColoredIcon icon-fg-color size-30" />
                         }

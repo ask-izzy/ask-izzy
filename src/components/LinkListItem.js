@@ -50,13 +50,14 @@ export default class LinkListItem extends React.Component {
             classes.push("has-right-icon");
         }
 
-        if (this.props.to.startsWith('mailto')) {
+        if (this.props.href) {
             // FIXME: react-router's <Link> can't handle the
             // 'mailto' scheme, because it tries to use pushstate.
+            // To work around this, set 'href' instead of 'to'
+            // to get an <a> instead of a <Link>
             return (
                 <a
                     className={classes.join(" ")}
-                    href={this.props.to}
                     {...rest}
                 >
                     {this.renderContent()}
