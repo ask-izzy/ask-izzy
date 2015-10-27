@@ -56,6 +56,10 @@ class Address extends React.Component {
                     <div className="suburb">
                         {location.streetAddressLine2()}
                     </div>
+                    {' '}
+                    <div className="details">
+                        {location.details}
+                    </div>
                 </div>
             </div>
         );
