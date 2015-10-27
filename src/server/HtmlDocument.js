@@ -235,6 +235,9 @@ class HtmlDocument extends React.Component {
             dangerouslySetInnerHTML={{__html: markup}}
         />
         <script dangerouslySetInnerHTML={{__html: envConfig}} />
+
+        <script src={gmapsApi}>
+        </script>
         {script.map((src, idx) =>
             <script
                 key={idx}
@@ -242,8 +245,6 @@ class HtmlDocument extends React.Component {
             />
         )}
 
-        <script src={gmapsApi}>
-        </script>
     </body>
 </html>
         );

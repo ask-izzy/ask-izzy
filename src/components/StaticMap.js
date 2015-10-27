@@ -26,7 +26,7 @@ class Address extends React.Component {
     };
 
     render(): ReactElement {
-        const baseUrl = "//maps.googleapis.com/maps/api/staticmap";
+        const baseUrl = "https://maps.googleapis.com/maps/api/staticmap";
         const apiKey = GOOGLE_KEY;
         const address = `${
             this.props.location.streetAddressLine1()

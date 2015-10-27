@@ -68,6 +68,10 @@ declare class InfoWindow {
 declare class Map {
 }
 
+declare class DirectionsService {
+    route(options: Object, callback: Function): void;
+}
+
 declare class GoogleMaps {
     Geocoder(): Geocoder;
     InfoWindow(opts?: Object): InfoWindow;
@@ -75,6 +79,10 @@ declare class GoogleMaps {
     LatLngBounds(sw?: LatLng, ne?: LatLng): LatLngBounds;
     Map(node: Element, obj: Object): Map;
     places: Places;
+    DirectionsTravelMode: {WALKING: string};
+    DirectionsStatus: {OK: string};
+    UnitSystem: {METRIC: string};
+    DirectionsService(): DirectionsService;
 }
 
 declare class Google {

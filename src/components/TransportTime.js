@@ -1,5 +1,4 @@
 /* @flow */
-// FIXME: Test for transport time showing suburb
 
 import React from "react";
 import { titleize } from "underscore.string";
@@ -7,6 +6,9 @@ import { titleize } from "underscore.string";
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import Location from "../iss/Location";
+import storage from "../storage";
+
+declare var google: Google;
 
 class TransportTime extends React.Component {
     static propTypes = {
@@ -29,12 +31,52 @@ class TransportTime extends React.Component {
         compact: false,
     };
 
+    constructor() {
+        super();
+        this.state = {};
+    }
+
     // flow:disable not supported yet
     get compactClass(): string {
         return this.props.compact ? "compact" : "";
     }
 
+    loadTime(): void {
+        const destPoint = this.props.location.point;
+        const coords = storage.getJSON("coordinates");
+        let location = storage.getItem("location");
+
+        if (coords && coords.latitude && coords.longitude) {
+            location = `${coords.latitude},${coords.longitude}`;
+        }
+        // FIXME: check google.maps.DirectionsTravelMode.TRANSIT
+        // once we expand beyond VIC (or transit is implemented in VIC).
+
+        const options = {
+            origin: `${location}`,
+            destination: `${destPoint.lat},${destPoint.lon}`,
+            travelMode: google.maps.DirectionsTravelMode.WALKING,
+            unitSystem: google.maps.UnitSystem.METRIC,
+            language: "en-AU",
+        };
+
+        let directionsService = new google.maps.DirectionsService();
+
+        directionsService.route(options, (response, status) => {
+            if (status == google.maps.DirectionsStatus.OK) {
+                this.setState({time: response.routes[0].legs.map(
+                    (leg) => leg.duration.text
+                ).reduce(
+                    (memo, text) => `${memo} then ${text}`
+                )});
+            }
+        })
+
+    }
+
     render(): ReactElement {
+        this.loadTime();
+
         if (this.props.location.isConfidential()) {
             return this.renderConfidential()
         } else {
@@ -65,7 +107,7 @@ class TransportTime extends React.Component {
             >
                 <icons.Walk className="ColoredIcon" />
                 <span className="travel-time">
-                    ? mins
+                    {this.state.time}
                 </span>&nbsp;
                 {this.renderSuburb()}
                 {this.renderDirections()}
