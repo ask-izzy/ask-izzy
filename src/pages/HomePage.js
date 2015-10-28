@@ -6,6 +6,7 @@ import reactMixin from "react-mixin";
 
 import HeaderBar from "../components/HeaderBar";
 import NavBar from "../components/NavBar";
+import BrandedFooter from "../components/BrandedFooter";
 import icons from "../icons";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
@@ -68,6 +69,8 @@ class HomePage extends React.Component {
                 <div className="body">
                     <NavBar />
                 </div>
+
+                <BrandedFooter />
             </div>
         );
     }

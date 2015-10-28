@@ -4,6 +4,7 @@
 
 import Address from "./components/Address";
 import AppBar from "./components/AppBar";
+import BrandedFooter from "./components/BrandedFooter";
 import ButtonListItem from "./components/ButtonListItem";
 import CategoryListItem from "./components/CategoryListItem";
 import CollapsedOpeningTimes from "./components/CollapsedOpeningTimes";
@@ -34,6 +35,7 @@ import Web from "./components/Web";
 export default {
     Address: Address,
     AppBar: AppBar,
+    BrandedFooter: BrandedFooter,
     ButtonListItem: ButtonListItem,
     CategoryListItem: CategoryListItem,
     CollapsedOpeningTimes: CollapsedOpeningTimes,

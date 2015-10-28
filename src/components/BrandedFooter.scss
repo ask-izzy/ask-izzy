@@ -1,0 +1,38 @@
+.branding-footer-container {
+    padding: 10px 0;
+
+    background-color: $brand-bg-dark;
+    color: $brand-text-mid;
+
+    font-size: 14px;
+    font-weight: 400;
+
+    & > div {
+        display: inline-block;
+        margin: 5px 15px;
+    }
+
+    .about {
+        float: left;
+    }
+
+    a {
+        color: $white;
+        text-decoration: none;
+    }
+
+    .supporters {
+        display: inline;
+        padding: 0;
+        text-align: left;
+    }
+
+    .supporter {
+        display: inline-block;
+        list-style-type: none;
+    }
+
+    .supporter + .supporter::before {
+        content: "\00a0|\00a0";
+    }
+}
