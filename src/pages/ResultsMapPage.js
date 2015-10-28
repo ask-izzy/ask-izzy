@@ -152,9 +152,9 @@ class ResultsMapPage extends BaseResultsPage {
              * for the selected results */
             mapHeight -= 150 * selectedServices.length;
 
-            /* limit minimum height to 1/3 of the screen realestate */
+            /* limit minimum height to 1/2 of the screen realestate */
             mapHeight = Math.max(mapHeight,
-                                 window.innerHeight / 3);
+                                 window.innerHeight / 2);
         } catch (error) {
             console.error(error);
         }
