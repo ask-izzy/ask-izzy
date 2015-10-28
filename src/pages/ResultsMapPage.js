@@ -171,6 +171,7 @@ class ResultsMapPage extends BaseResultsPage {
                     lat: -34.397,
                     lng: 150.644,
                 }}
+                options={{disableDefaultUI: true}}
                 defaultZoom={4}
                 onClick={this.onMapClick.bind(this)}
             >
