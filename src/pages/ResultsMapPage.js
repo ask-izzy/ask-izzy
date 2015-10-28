@@ -103,13 +103,6 @@ class ResultsMapPage extends BaseResultsPage {
     onMarkerClick(services: Array<Object>): void {
         console.log("services", services);
         this.setState({selectedServices: services});
-        this.getMap().then(map => {
-            map.setCenter({
-                lat: services[0].location.point.lat,
-                lng: services[0].location.point.lon,
-            });
-            map.setZoom(18);
-        });
     }
 
     onBackClick(): void {
