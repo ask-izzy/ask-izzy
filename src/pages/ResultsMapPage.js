@@ -7,7 +7,6 @@ import { GoogleMap, Marker } from "react-google-maps";
 import iss from "../iss";
 import BaseResultsPage from "./BaseResultsPage";
 import Maps from "../maps";
-import ResultListItem from "../components/ResultListItem";
 import components from "../components";
 
 class ResultsMapPage extends BaseResultsPage {
@@ -125,15 +124,9 @@ class ResultsMapPage extends BaseResultsPage {
                      * resolves */
                     this.state.maps ? this.renderMap() : ""
                 }
-                <div className="List">{
-                    selectedServices.map((object, index) =>
-                        <ResultListItem
-                            key={index}
-                            object={object}
-                            nServiceProvisions={0}
-                        />
-                    )
-                }</div>
+                <components.ResultList
+                    results={selectedServices}
+                />
             </div>
         );
     }

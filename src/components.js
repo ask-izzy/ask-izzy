@@ -23,6 +23,7 @@ import LinkListItem from "./components/LinkListItem";
 import NavBar from "./components/NavBar";
 import OpeningTimes from "./components/OpeningTimes";
 import Phone from "./components/Phone";
+import ResultList from "./components/ResultList";
 import ResultListItem from "./components/ResultListItem";
 import ScreenReader from "./components/ScreenReader";
 import ServicePane from "./components/ServicePane";
@@ -54,6 +55,7 @@ export default {
     NavBar: NavBar,
     OpeningTimes: OpeningTimes,
     Phone: Phone,
+    ResultList: ResultList,
     ResultListItem: ResultListItem,
     ScreenReader: ScreenReader,
     ServicePane: ServicePane,

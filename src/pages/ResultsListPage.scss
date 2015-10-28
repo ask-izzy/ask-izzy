@@ -1,22 +1,3 @@
-.resultContainer {
-    border-top: 10px solid $brand-bg-light;
-}
-
-.resultContainer:first-child {
-    border-top: 0;
-}
-
-.resultContainer-other + .resultContainer {
-    border-top: 0;
-}
-
-.resultContainer-CrisisLineItem + .resultContainer-CrisisLineItem {
-    border-top: 0;
-}
-
-.resultContainer-ResultListItem + .resultContainer-ResultListItem {
-    border-top: 1px solid $list-item-hairline;
-}
 
 .ResultsListPage {
     .progress {
