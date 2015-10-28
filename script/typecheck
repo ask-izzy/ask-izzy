@@ -31,6 +31,7 @@ if ! $HAVE_FLOW ; then
     exit 1
 fi
 
+(./node_modules/.bin/flow start &>/dev/null) & # Pre-start flow server
 check "jsonlint package.json > /dev/null"
 check "eslint src/ test/ fixtures/ webpack/"
 check "sass-lint -v"
