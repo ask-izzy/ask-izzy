@@ -101,7 +101,6 @@ class ResultsMapPage extends BaseResultsPage {
     }
 
     onMarkerClick(services: Array<Object>): void {
-        console.log("services", services);
         this.setState({selectedServices: services});
     }
 
