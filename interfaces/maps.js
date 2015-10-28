@@ -80,6 +80,20 @@ declare class DirectionsService {
     route(options: DirectionsRequest, callback: Function): void;
 }
 
+type DistanceMatrixRequest = {
+    travelMode: string,
+    unitSystem: string,
+    origins: Array<string>,
+    destinations: Array<string>,
+}
+
+declare class DistanceMatrixService {
+    getDistanceMatrix(
+        params: DistanceMatrixRequest,
+        callback: Function
+    ): void,
+}
+
 declare class GoogleMaps {
     Geocoder(): Geocoder;
     InfoWindow(opts?: Object): InfoWindow;
@@ -88,9 +102,11 @@ declare class GoogleMaps {
     Map(node: Element, obj: Object): Map;
     places: Places;
     DirectionsTravelMode: {WALKING: string};
+    TravelMode: {WALKING: string};
     DirectionsStatus: {OK: string};
     UnitSystem: {METRIC: string};
     DirectionsService(): DirectionsService;
+    DistanceMatrixService(): DistanceMatrixService;
 }
 
 declare class Google {

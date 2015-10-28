@@ -2,39 +2,63 @@
 
 declare var google: Google;
 
+import {decorateDebounceWithPromise} from "./debounce-with-promise";
+import storage from "./storage";
+
 class MapsApi {
     api: GoogleMaps;
 
     constructor(api: Object) {
         this.api = api;
+    };
+
+    // Mixin converts arguments into Array<Array<arguments>>
+    // FIXME: Mixin should instead convert into Array<arg1>, Array<arg2>
+    @decorateDebounceWithPromise(10, false)
+    batchDirectionsRequest(requests: Array<Array<string>>|string): Promise<Object> {
+        if (typeof requests == 'string') {
+            throw new Error("Expected mixin to convert string to array")
+        }
+        const destinations = requests.map((args) => args[0]);
+        let directionsService = new this.api.DistanceMatrixService();
+
+        const coords = storage.getJSON("coordinates");
+        let origin = storage.getItem("location");
+
+        if (coords && coords.latitude && coords.longitude) {
+            origin = `${coords.latitude},${coords.longitude}`;
+        }
+
+        let params = {
+            travelMode: this.api.TravelMode.WALKING,
+            unitSystem: this.api.UnitSystem.METRIC,
+            origins: [`${origin}`],
+            destinations: destinations,
+        }
+
+        return new Promise((resolve, reject) => {
+            directionsService.getDistanceMatrix(
+                params,
+                (response, status) => {
+                    if (status == this.api.DirectionsStatus.OK) {
+                        resolve(response.rows[0].elements)
+                    } else {
+                        reject([status, response])
+                    }
+                },
+            )
+        });
     }
 
     /**
-     * @param {DirectionsRequest} params - an object of params per the Google
-     * Maps JS API.
+     * @param {string} destination - The address you want travel time to
      *
-     * @returns {Promise<string>} a Promise containing a description
+     * @returns {Promise<Object>} a Promise containing a description
      * of the travel time.
+     // FIXME: Check walking and transit and return the better one
      */
-    travelTime(params: DirectionsRequest): Promise<string> {
-        let directionsService = new this.api.DirectionsService();
-
-        return new Promise((resolve, reject) =>
-            directionsService.route(params, (response, status) => {
-                console.log(response);
-                if (status == this.api.DirectionsStatus.OK) {
-                    resolve(
-                        response.routes[0].legs.map(
-                            (leg) => leg.duration.text
-                        ).reduce(
-                            (memo, text) => `${memo} then ${text}`
-                        )
-                    );
-                } else {
-                    reject(status);
-                }
-            })
-        );
+    async travelTime(destination: string): Promise<Object> {
+        return await this.batchDirectionsRequest(destination);
     }
 
     /**

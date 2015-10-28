@@ -248,6 +248,10 @@ class Location extends React.Component {
                 autocompletion: AutocompleteState.SEARCHING,
             });
 
+            // Forget the users coordinates if they change
+            // the location we detected
+            storage.setJSON("coordinates", null);
+
             this.triggerAutocomplete(this.state.locationName);
         }
     }

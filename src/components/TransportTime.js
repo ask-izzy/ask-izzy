@@ -6,7 +6,6 @@ import { titleize } from "underscore.string";
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import Location from "../iss/Location";
-import storage from "../storage";
 import Maps from "../maps";
 
 class TransportTime extends React.Component {
@@ -32,7 +31,7 @@ class TransportTime extends React.Component {
 
     constructor() {
         super();
-        this.state = {};
+        this.state = {time: {}};
     }
 
     // flow:disable not supported yet
@@ -40,31 +39,35 @@ class TransportTime extends React.Component {
         return this.props.compact ? "compact" : "";
     }
 
+    componentDidMount(): void {
+        this.loadTime();
+    }
+
+    componentWillReceiveProps(nextProps: Object): void {
+        if (nextProps.location != this.props.location) {
+            this.setState({time: {}});
+            // FIXME: Cancel existing attempt to load travel time if any.
+            this.loadTime();
+        }
+    }
+
     async loadTime(): Promise<void> {
         const maps = await Maps();
         const destPoint = this.props.location.point;
-        const coords = storage.getJSON("coordinates");
-        let location = storage.getItem("location");
 
-        if (coords && coords.latitude && coords.longitude) {
-            location = `${coords.latitude},${coords.longitude}`;
+        if (!destPoint) {
+            return;
         }
-        // FIXME: check google.maps.DirectionsTravelMode.TRANSIT
-        // once we expand beyond VIC (or transit is implemented in VIC).
 
-        const options = {
-            origin: `${location}`,
-            destination: `${destPoint.lat},${destPoint.lon}`,
-            travelMode: maps.api.DirectionsTravelMode.WALKING,
-            unitSystem: maps.api.UnitSystem.METRIC,
-            language: "en-AU",
-        };
-
-        this.setState({time: await maps.travelTime(options)});
+        this.setState({
+            time: await maps.travelTime(`${destPoint.lat},${destPoint.lon}`),
+        });
     }
 
     render(): ReactElement {
-        this.loadTime();
+        if (!this.state.time) {
+            this.loadTime();
+        }
 
         if (this.props.location.isConfidential()) {
             return this.renderConfidential()
@@ -96,7 +99,10 @@ class TransportTime extends React.Component {
             >
                 <icons.Walk className="ColoredIcon" />
                 <span className="travel-time">
-                    {this.state.time}
+                    {
+                        this.state.time.duration &&
+                        this.state.time.duration.text
+                    }
                 </span>&nbsp;
                 {this.renderSuburb()}
                 {this.renderDirections()}
