@@ -63,16 +63,16 @@ export default class LinkListItem extends React.Component {
                     {this.renderContent()}
                 </a>
             );
+        } else {
+            return (
+                <Link
+                    className={classes.join(" ")}
+                    {...rest}
+                >
+                    {this.renderContent()}
+                </Link>
+            );
         }
-
-        return (
-            <Link
-                className={classes.join(" ")}
-                {...rest}
-            >
-                {this.renderContent()}
-            </Link>
-        );
     }
 
     renderContent(): ReactElement {
