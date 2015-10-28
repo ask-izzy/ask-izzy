@@ -148,18 +148,9 @@ class ResultsMapPage extends BaseResultsPage {
                 window.innerHeight -
                 document.querySelector(".AppBar").offsetHeight;
 
-            if (mapHeight > 900) {
-                /* we have space for the footer, resize the map to either fit
-                 * the footer or the selected results */
-                mapHeight -= Math.max(
-                    document.querySelector("footer").offsetHeight,
-                    150 * selectedServices.length
-                );
-            } else {
-                /* no space for the footer, but resize the map to make room
-                 * for the selected results */
-                mapHeight -= 150 * selectedServices.length;
-            }
+            /* resize the map to make room
+             * for the selected results */
+            mapHeight -= 150 * selectedServices.length;
 
             /* limit minimum height to 1/3 of the screen realestate */
             mapHeight = Math.max(mapHeight,
