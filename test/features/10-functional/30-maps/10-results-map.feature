@@ -12,6 +12,14 @@ Feature: See results on a map
         And I am 27 years old
         And I am not part of any relevant demographics
 
+    Scenario: Bookmark the map page
+        When I visit /category/everyday-things/map
+        Given I'm watching map events
+        Then I should see "To help me find the right services I'll ask you a few questions"
+        When I click on "Okay"
+        When I click on "Done"
+        Then I should see a map
+
     Scenario: View results on a map
         When I visit /category/housing
 

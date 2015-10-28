@@ -54,6 +54,22 @@ export default (
                 component={ResultsMapPage}
             />
             <Route
+                path="/category/:page/map/personalise"
+                component={PersonalisationWizardPage}
+            />
+            <Route
+                path="/category/:page/map/personalise/page/:subpage"
+                component={PersonalisationWizardPage}
+            />
+            <Route
+                path="/category/:page/map/personalise/summary"
+                component={PersonalisationSummaryPage}
+            />
+            <Route
+                path="/category/:page/map/personalise/summary/:subpage"
+                component={PersonalisationSummaryPage}
+            />
+            <Route
                 path="/category/:page/personalise"
                 component={PersonalisationWizardPage}
             />
