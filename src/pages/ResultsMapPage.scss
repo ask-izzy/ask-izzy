@@ -10,4 +10,9 @@
         min-height: 150px;
         background-color: $white;
     }
+
+    .ResultListItem + .ResultListItem {
+        border-top: 10px solid $brand-bg-light;
+    }
+
 }
