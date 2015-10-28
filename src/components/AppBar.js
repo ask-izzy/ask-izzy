@@ -27,16 +27,6 @@ class AppBar extends React.Component {
                         <icons.ChevronBack />
                     </components.IconButton>
                 </div>
-                <a
-                    href="/"
-                    className="left"
-                >
-                    <components.IconButton
-                        className="HomeButton"
-                    >
-                        <icons.House />
-                    </components.IconButton>
-                </a>
                 <h1>{this.props.title}</h1>
             </div>
         );

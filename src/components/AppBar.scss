@@ -15,14 +15,15 @@
 
     z-index: 2;
 
-    & > div,
-    & > a,
-    & > h1 {
+    & > div {
         display: inline-block;
         z-index: 2;
     }
 
     h1 {
+        position: absolute;
+        top: 0;
+        left: 15%;
         width: 70%;
 
         margin: 0;
@@ -45,21 +46,7 @@
         margin-left: -5px;
     }
 
-    .HomeButton {
-        margin-top: -5px;
-        margin-left: -5px;
-
-        .HouseIcon {
-            width: 26px;
-
-            path {
-                fill: $white;
-            }
-        }
-
-    }
-
-    .Icon {
+    .ChevronBackIcon {
         width: 48px;
         height: 48px;
 
