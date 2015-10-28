@@ -21,12 +21,12 @@ Feature: See results on a map
         Then I should see a map
         # There are 2 sites
         And I should see markers
-        --------------------------------------------------
-        Title              | Label | Latitude | Longitude
-        ==================================================
-        My Housing Service | 1     | -37.8228 | 144.998
-        Youth Support Net  | 2     | -37.8237 | 144.985
-        --------------------------------------------------
+        ------------------------------------------
+        Title              | Latitude | Longitude
+        ==========================================
+        My Housing Service | -37.8228 | 144.998
+        Youth Support Net  | -37.8237 | 144.985
+        ------------------------------------------
 
     Scenario: Clicking a marker shows services at that site and clicking on map returns to full map
         When I visit /category/housing

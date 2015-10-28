@@ -196,7 +196,6 @@ class ResultsMapPage extends BaseResultsPage {
                     objects[0].location.point ?
                         <Marker
                             key={index}
-                            label={String(objects.length)}
                             title={objects[0].site.name}
                             position={{
                                 lat: objects[0].location.point.lat,
