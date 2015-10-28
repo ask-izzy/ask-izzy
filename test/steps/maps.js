@@ -147,7 +147,6 @@ async function assertMarkers(table: Array<Object>): Promise<void> {
 
             return {
                 Title: marker.getTitle(),
-                Label: marker.getLabel(),
                 /* Be aware of floating point precision, we're
                  * comparing to a precision of 6 significant figures */
                 Latitude: position.lat().toPrecision(6),
