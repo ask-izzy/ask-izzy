@@ -116,7 +116,7 @@ class ResultsListPage extends BaseResultsPage {
         return (
             <div className="List results">
             {
-                this.state.objects ?
+                (this.state.objects && this.state.objects.length) ?
                     <components.LinkListItem
                         className="ViewOnMapButton"
                         to={this.props.location.pathname + "/map"}
