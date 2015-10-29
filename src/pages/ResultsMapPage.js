@@ -7,7 +7,6 @@ import { GoogleMap, Marker } from "react-google-maps";
 import iss from "../iss";
 import BaseResultsPage from "./BaseResultsPage";
 import Maps from "../maps";
-import ResultListItem from "../components/ResultListItem";
 import components from "../components";
 
 class ResultsMapPage extends BaseResultsPage {
@@ -101,15 +100,7 @@ class ResultsMapPage extends BaseResultsPage {
     }
 
     onMarkerClick(services: Array<Object>): void {
-        console.log("services", services);
         this.setState({selectedServices: services});
-        this.getMap().then(map => {
-            map.setCenter({
-                lat: services[0].location.point.lat,
-                lng: services[0].location.point.lon,
-            });
-            map.setZoom(18);
-        });
     }
 
     onBackClick(): void {
@@ -133,15 +124,9 @@ class ResultsMapPage extends BaseResultsPage {
                      * resolves */
                     this.state.maps ? this.renderMap() : ""
                 }
-                <div className="List">{
-                    selectedServices.map((object, index) =>
-                        <ResultListItem
-                            key={index}
-                            object={object}
-                            nServiceProvisions={0}
-                        />
-                    )
-                }</div>
+                <components.ResultList
+                    results={selectedServices}
+                />
             </div>
         );
     }
@@ -156,22 +141,13 @@ class ResultsMapPage extends BaseResultsPage {
                 window.innerHeight -
                 document.querySelector(".AppBar").offsetHeight;
 
-            if (mapHeight > 900) {
-                /* we have space for the footer, resize the map to either fit
-                 * the footer or the selected results */
-                mapHeight -= Math.max(
-                    document.querySelector("footer").offsetHeight,
-                    150 * selectedServices.length
-                );
-            } else {
-                /* no space for the footer, but resize the map to make room
-                 * for the selected results */
-                mapHeight -= 150 * selectedServices.length;
-            }
+            /* resize the map to make room
+             * for the selected results */
+            mapHeight -= 150 * selectedServices.length;
 
-            /* limit minimum height to 1/3 of the screen realestate */
+            /* limit minimum height to 1/2 of the screen realestate */
             mapHeight = Math.max(mapHeight,
-                                 window.innerHeight / 3);
+                                 window.innerHeight / 2);
         } catch (error) {
             console.error(error);
         }
@@ -188,6 +164,7 @@ class ResultsMapPage extends BaseResultsPage {
                     lat: -34.397,
                     lng: 150.644,
                 }}
+                options={{disableDefaultUI: true}}
                 defaultZoom={4}
                 onClick={this.onMapClick.bind(this)}
             >
@@ -196,7 +173,6 @@ class ResultsMapPage extends BaseResultsPage {
                     objects[0].location.point ?
                         <Marker
                             key={index}
-                            label={String(objects.length)}
                             title={objects[0].site.name}
                             position={{
                                 lat: objects[0].location.point.lat,

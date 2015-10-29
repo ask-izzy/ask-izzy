@@ -10,7 +10,6 @@ import StyleGuideList from "./pages/StyleGuideList";
 import StyleGuideItem from "./pages/StyleGuideItem";
 
 import BasePage from "./pages/BasePage";
-import BrandedPage from "./pages/BrandedPage";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
@@ -32,71 +31,81 @@ export default (
             path="/styleGuide*"
             component={StyleGuideList}
         />
-
         <Route
-            path=""
-            component={BrandedPage}
-        >
-            <Route
-                path="/"
-                component={HomePage}
-            />
-            <Route
-                path="/about"
-                component={AboutPage}
-            />
-            <Route
-                path="/category/:page"
-                component={ResultsListPage}
-            />
-            <Route
-                path="/category/:page/map"
-                component={ResultsMapPage}
-            />
-            <Route
-                path="/category/:page/personalise"
-                component={PersonalisationWizardPage}
-            />
-            <Route
-                path="/category/:page/personalise/page/:subpage"
-                component={PersonalisationWizardPage}
-            />
-            <Route
-                path="/category/:page/personalise/summary"
-                component={PersonalisationSummaryPage}
-            />
-            <Route
-                path="/category/:page/personalise/summary/:subpage"
-                component={PersonalisationSummaryPage}
-            />
-            <Route
-                path="/search/:search"
-                component={ResultsListPage}
-            />
-            <Route
-                path="/search/:search/map"
-                component={ResultsMapPage}
-            />
-            <Route
-                path="/search/:search/personalise"
-                component={PersonalisationWizardPage}
-            />
-            <Route
-                path="/search/:search/personalise/page/:subpage"
-                component={PersonalisationWizardPage}
-            />
-            <Route
-                path="/search/:search/personalise/summary"
-                component={PersonalisationSummaryPage}
-            />
-            <Route
-                path="/search/:search/personalise/summary/:subpage"
-                component={PersonalisationSummaryPage}
-            />
-            <Route
-                path="/service/:slug"
-                component={ServicePage}
-            />
-        </Route>
+            path="/"
+            component={HomePage}
+        />
+        <Route
+            path="/about"
+            component={AboutPage}
+        />
+        <Route
+            path="/category/:page"
+            component={ResultsListPage}
+        />
+        <Route
+            path="/category/:page/map"
+            component={ResultsMapPage}
+        />
+        <Route
+            path="/category/:page/map/personalise"
+            component={PersonalisationWizardPage}
+        />
+        <Route
+            path="/category/:page/map/personalise/page/:subpage"
+            component={PersonalisationWizardPage}
+        />
+        <Route
+            path="/category/:page/map/personalise/summary"
+            component={PersonalisationSummaryPage}
+        />
+        <Route
+            path="/category/:page/map/personalise/summary/:subpage"
+            component={PersonalisationSummaryPage}
+        />
+        <Route
+            path="/category/:page/personalise"
+            component={PersonalisationWizardPage}
+        />
+        <Route
+            path="/category/:page/personalise/page/:subpage"
+            component={PersonalisationWizardPage}
+        />
+        <Route
+            path="/category/:page/personalise/summary"
+            component={PersonalisationSummaryPage}
+        />
+        <Route
+            path="/category/:page/personalise/summary/:subpage"
+            component={PersonalisationSummaryPage}
+        />
+        <Route
+            path="/search/:search"
+            component={ResultsListPage}
+        />
+        <Route
+            path="/search/:search/map"
+            component={ResultsMapPage}
+        />
+        <Route
+            path="/search/:search/personalise"
+            component={PersonalisationWizardPage}
+        />
+        <Route
+            path="/search/:search/personalise/page/:subpage"
+            component={PersonalisationWizardPage}
+        />
+        <Route
+            path="/search/:search/personalise/summary"
+            component={PersonalisationSummaryPage}
+        />
+        <Route
+            path="/search/:search/personalise/summary/:subpage"
+            component={PersonalisationSummaryPage}
+        />
+        <Route
+            path="/service/:slug"
+            component={ServicePage}
+        />
     </Route>
 );

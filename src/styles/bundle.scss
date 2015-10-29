@@ -9,6 +9,7 @@
 @import "../styles/shared/plain-text";
 @import "../components/Address";
 @import "../components/AppBar";
+@import "../components/BrandedFooter";
 @import "../components/CategoryListItem";
 @import "../components/CollapsedOpeningTimes";
 @import "../components/Collapser";
@@ -22,6 +23,7 @@
 @import "../components/InputListItem";
 @import "../components/NavBar";
 @import "../components/OpeningTimes";
+@import "../components/ResultList";
 @import "../components/ResultListItem";
 @import "../components/ScreenReader";
 @import "../components/ServicePane";
@@ -30,8 +32,9 @@
 @import "../components/TextInputListItem";
 @import "../components/TransportTime";
 @import "../icons/icons";
+@import "../pages/AboutPage";
+@import "../pages/BasePage";
 @import "../pages/BasePersonalisationPage";
-@import "../pages/BrandedPage";
 @import "../pages/HomePage";
 @import "../pages/ResultsListPage";
 @import "../pages/ResultsMapPage";

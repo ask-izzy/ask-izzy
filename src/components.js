@@ -4,6 +4,7 @@
 
 import Address from "./components/Address";
 import AppBar from "./components/AppBar";
+import BrandedFooter from "./components/BrandedFooter";
 import ButtonListItem from "./components/ButtonListItem";
 import CategoryListItem from "./components/CategoryListItem";
 import CollapsedOpeningTimes from "./components/CollapsedOpeningTimes";
@@ -22,6 +23,7 @@ import LinkListItem from "./components/LinkListItem";
 import NavBar from "./components/NavBar";
 import OpeningTimes from "./components/OpeningTimes";
 import Phone from "./components/Phone";
+import ResultList from "./components/ResultList";
 import ResultListItem from "./components/ResultListItem";
 import ScreenReader from "./components/ScreenReader";
 import ServicePane from "./components/ServicePane";
@@ -34,6 +36,7 @@ import Web from "./components/Web";
 export default {
     Address: Address,
     AppBar: AppBar,
+    BrandedFooter: BrandedFooter,
     ButtonListItem: ButtonListItem,
     CategoryListItem: CategoryListItem,
     CollapsedOpeningTimes: CollapsedOpeningTimes,
@@ -52,6 +55,7 @@ export default {
     NavBar: NavBar,
     OpeningTimes: OpeningTimes,
     Phone: Phone,
+    ResultList: ResultList,
     ResultListItem: ResultListItem,
     ScreenReader: ScreenReader,
     ServicePane: ServicePane,

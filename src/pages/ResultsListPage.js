@@ -116,7 +116,7 @@ class ResultsListPage extends BaseResultsPage {
         return (
             <div className="List results">
             {
-                this.state.objects ?
+                (this.state.objects && this.state.objects.length) ?
                     <components.LinkListItem
                         className="ViewOnMapButton"
                         to={this.props.location.pathname + "/map"}
@@ -130,31 +130,9 @@ class ResultsListPage extends BaseResultsPage {
                     />
                 : ""
             }
-            <div className="resultsContainer">{
-                this.results.map((object, index) => {
-                    let elem = object.staticText ?
-                        React.cloneElement(object.node)
-                    : object.crisis ?
-                        <components.CrisisLineItem
-                            object={object}
-                        />
-                    : <components.ResultListItem
-                        object={object}
-                      />;
-
-                    let klass = elem.type.displayName || "other";
-
-                    return (
-                        <div
-                            key={index}
-                            className={
-                                `resultContainer resultContainer-${klass}`
-                            }
-                        >
-                            {elem}
-                        </div>);
-                })
-            }</div>
+            <components.ResultList
+                results={this.results}
+            />
             {
                 this.state.meta && this.state.meta.next ?
                     <components.ButtonListItem

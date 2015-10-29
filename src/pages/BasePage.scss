@@ -1,0 +1,13 @@
+.BasePage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    & > main {
+        flex: 1;
+        background-color: $white;
+        /* FIXME: autoprefixer should be taking care of this */
+        -ms-flex-preferred-size: auto;  /* Needed for IE10 */
+    }
+
+}
