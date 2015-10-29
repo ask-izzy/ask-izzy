@@ -25,10 +25,9 @@ export default class LinkListItem extends React.Component {
     };
 
     render(): ReactElement {
+
         let {
             className,
-            primaryText,
-            secondaryText,
             leftIcon,
             rightIcon,
             ...rest,
@@ -48,31 +47,60 @@ export default class LinkListItem extends React.Component {
             classes.push("has-right-icon");
         }
 
+        if (this.props.href) {
+            // FIXME: react-router's <Link> can't handle the
+            // 'mailto' scheme, because it tries to use pushstate.
+            // To work around this, set 'href' instead of 'to'
+            // to get an <a> instead of a <Link>
+            return (
+                <a
+                    className={classes.join(" ")}
+                    {...rest}
+                >
+                    {this.renderContent()}
+                </a>
+            );
+        } else {
+            return (
+                <Link
+                    className={classes.join(" ")}
+                    {...rest}
+                >
+                    {this.renderContent()}
+                </Link>
+            );
+        }
+    }
+
+    renderContent(): ReactElement {
+        let {
+            children,
+            leftIcon,
+            rightIcon,
+            primaryText,
+            secondaryText,
+        } = this.props;
+
         return (
-            <Link
-                className={classes.join(" ")}
-                {...rest}
-            >
-                <div>
-                    <div className="leftIcon">
-                        {leftIcon}
-                    </div>
-                    {this.props.children ? null
-                        : <div className="primaryText">
-                            {primaryText}
-                        </div>
-                    }
-                    {this.props.children ? null
-                        : <div className="secondaryText">
-                            {secondaryText}
-                        </div>
-                    }
-                    {this.props.children}
-                    <div className="rightIcon">
-                        {rightIcon}
-                    </div>
+            <div>
+                <div className="leftIcon">
+                    {leftIcon}
                 </div>
-            </Link>
+                {children ? null
+                    : <div className="primaryText">
+                        {primaryText}
+                    </div>
+                }
+                {children ? null
+                    : <div className="secondaryText">
+                        {secondaryText}
+                    </div>
+                }
+                {children}
+                <div className="rightIcon">
+                    {rightIcon}
+                </div>
+            </div>
         )
     }
 }
