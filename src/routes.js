@@ -10,6 +10,7 @@ import StyleGuideList from "./pages/StyleGuideList";
 import StyleGuideItem from "./pages/StyleGuideItem";
 
 import BasePage from "./pages/BasePage";
+import BrandedFooter from "./components/BrandedFooter";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
@@ -33,7 +34,10 @@ export default (
         />
         <Route
             path="/"
-            component={HomePage}
+            components={{
+                main: HomePage,
+                footer: BrandedFooter,
+            }}
         />
         <Route
             path="/about"
