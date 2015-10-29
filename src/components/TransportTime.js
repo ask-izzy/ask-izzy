@@ -6,7 +6,6 @@ import { titleize } from "underscore.string";
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import Location from "../iss/Location";
-import Maps from "../maps";
 
 class TransportTime extends React.Component {
     static propTypes = {
@@ -51,24 +50,7 @@ class TransportTime extends React.Component {
         }
     }
 
-    async loadTime(): Promise<void> {
-        const maps = await Maps();
-        const destPoint = this.props.location.point;
-
-        if (!destPoint) {
-            return;
-        }
-
-        this.setState({
-            time: await maps.travelTime(`${destPoint.lat},${destPoint.lon}`),
-        });
-    }
-
     render(): ReactElement {
-        if (!this.state.time) {
-            this.loadTime();
-        }
-
         if (this.props.location.isConfidential()) {
             return this.renderConfidential()
         } else {
@@ -93,6 +75,8 @@ class TransportTime extends React.Component {
     }
 
     renderPublic(): ReactElement {
+        const {travelTime} = this.props.location;
+
         return (
             <div
                 className={`TransportTime ${this.compactClass}`}
@@ -100,8 +84,9 @@ class TransportTime extends React.Component {
                 <icons.Walk className="ColoredIcon" />
                 <span className="travel-time">
                     {
-                        this.state.time.duration &&
-                        this.state.time.duration.text
+                        travelTime &&
+                        travelTime.duration &&
+                        travelTime.duration.text
                     }
                 </span>&nbsp;
                 {this.renderSuburb()}

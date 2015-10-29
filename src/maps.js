@@ -2,7 +2,6 @@
 
 declare var google: Google;
 
-import {decorateDebounceWithPromise} from "./debounce-with-promise";
 import storage from "./storage";
 
 class MapsApi {
@@ -10,18 +9,10 @@ class MapsApi {
 
     constructor(api: Object) {
         this.api = api;
-    };
+    }
 
-    // Mixin converts arguments into Array<Array<arguments>>
-    // FIXME: Mixin should instead convert into Array<arg1>, Array<arg2>
-    @decorateDebounceWithPromise(10, false)
-    batchDirectionsRequest(requests: Array<Array<string>>|string): Promise<Object> {
-        if (typeof requests == 'string') {
-            throw new Error("Expected mixin to convert string to array")
-        }
-        const destinations = requests.map((args) => args[0]);
+    batchDirectionsRequest(destinations: Array<string>): Promise<Object> {
         let directionsService = new this.api.DistanceMatrixService();
-
         const coords = storage.getJSON("coordinates");
         let origin = storage.getItem("location");
 
@@ -48,17 +39,6 @@ class MapsApi {
                 },
             )
         });
-    }
-
-    /**
-     * @param {string} destination - The address you want travel time to
-     *
-     * @returns {Promise<Object>} a Promise containing a description
-     * of the travel time.
-     // FIXME: Check walking and transit and return the better one
-     */
-    async travelTime(destination: string): Promise<Object> {
-        return await this.batchDirectionsRequest(destination);
     }
 
     /**

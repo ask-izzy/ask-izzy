@@ -11,6 +11,7 @@ import { slugify } from "underscore.string";
 import ServiceOpening from "./iss/ServiceOpening";
 import Location from "./iss/Location";
 import serviceProvisions from "./constants/service-provisions";
+import Maps from "./maps";
 
 declare var ISS_URL: string;
 
@@ -152,14 +153,29 @@ export async function request(
 }
 
 export async function requestObjects(
-    path: string, data: ?searchRequest
+    path: string,
+    data: ?searchRequest,
 ): Promise<searchResults> {
     let response = await request(path, data);
+    const maps = await Maps();
+    let travelTimes = await maps.batchDirectionsRequest(
+        response.objects.map((service: Service) =>
+            (service.location && service.location.point) ?
+                `${service.location.point.lat},${service.location.point.lon}`
+                : null
+        )
+    );
 
     // convert objects to ISS search results
-    response.objects = response.objects.map(
-        object => new Service(object)
+    const objects = response.objects.map(
+        (object: issService): Service => new Service(object)
     );
+
+    for (let service: Service of objects) {
+        service.travelTime = travelTimes.shift();
+    }
+
+    response.objects = objects;
 
     return response;
 }
@@ -205,21 +221,10 @@ export class Service {
     is_bulk_billing: boolean;
     languages: Array<string>;
     last_updated: ymdWithDashesDate;
-    location: {
-        building: string,
-        flat_unit: string,
-        level: string,
-        point: {
-            lat: number,
-            lon: number,
-        },
-        postcode: string,
-        state: state,
-        street_name: string,
-        street_number: string,
-        street_suffix: string,
-        street_type: string,
-        suburb: string,
+    location: issLocation;
+    travelTime: ?{
+        duration: {text: string, value: number},
+        distance: {text: string, value: number},
     };
     name: string;
     ndis_approved: boolean;

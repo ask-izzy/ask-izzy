@@ -39,7 +39,7 @@ type issLocation = {
     "street_number": string,
     "street_suffix": string,
     "street_type": string,
-    "suburb": string
+    "suburb": string,
 };
 type issSite = {
     "id": number,
