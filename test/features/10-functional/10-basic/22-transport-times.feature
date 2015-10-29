@@ -14,17 +14,18 @@ Feature: Transport times
     Scenario: Show transport times
        Given A service with:
         ----------------------------------------------
-        * Location
-            Suburb        | Richmond
+        location:
+            suburb: Richmond
+            point:
+                lat: -37.8578706
+                lon: 144.5192432
         ----------------------------------------------
-
         When I search for the service
-        Then I should see a transport time of "? mins Richmond"
+        Then I should see a transport time of "9 hours 21 mins Richmond"
 
         When I navigate to the service page
         Then I should see a transport time of
         ------------------------------------------
-        ? mins Richmond
+        9 hours 21 mins Richmond
         Get directions
         ------------------------------------------
-

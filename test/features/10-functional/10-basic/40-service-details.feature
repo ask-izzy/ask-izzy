@@ -7,7 +7,7 @@ Feature: Service details page
     Scenario: Description is limited to one sentence
        Given A service with:
         ----------------------------------------------
-        * Description: There is a service here. Also we have penguins
+        description: There is a service here. Also we have penguins
         ----------------------------------------------
         When I navigate to the service page
         Then I should see "There is a service here."
@@ -16,7 +16,7 @@ Feature: Service details page
     Scenario: The service provisions is limited to a set of dot points
        Given A service with:
         ----------------------------------------------
-        * Description: "legal advice"
+        description: "legal advice"
         ----------------------------------------------
         When I navigate to the service page
         Then I should see "Advice on legal matters"
@@ -24,7 +24,7 @@ Feature: Service details page
     Scenario: Service provisions header is present if there are any
        Given A service with:
         ----------------------------------------------
-        * Description: "legal advice"
+        description: "legal advice"
         ----------------------------------------------
         When I navigate to the service page
         Then I should see "What you can get here"
@@ -32,7 +32,7 @@ Feature: Service details page
     Scenario: Service provisions header is absent if there are none
        Given A service with:
         ----------------------------------------------
-        * Description: a service is here
+        description: a service is here
         ----------------------------------------------
         When I navigate to the service page
         Then I should not see "What you can get here"
@@ -40,7 +40,7 @@ Feature: Service details page
     Scenario: Ineligibility is present if there are criteria
        Given A service with:
         ----------------------------------------------
-        * Ineligibility info: no penguins allowed
+        ineligibility_info: no penguins allowed
         ----------------------------------------------
         When I navigate to the service page
         Then I should see "You are ineligible if"
@@ -48,7 +48,7 @@ Feature: Service details page
     Scenario: Ineligibility is absent if there are no criteria
        Given A service with:
         ----------------------------------------------
-        * Ineligibility info: (nada)
+        ineligibility_info:
         ----------------------------------------------
         When I navigate to the service page
         Then I should not see "You are ineligible if"
@@ -56,16 +56,16 @@ Feature: Service details page
     Scenario: The address is a link to google maps
        Given A service with:
         ----------------------------------------------
-        * Location
-            Building      | Hany Building
-            Flat/Unit     | Unit 5
-            Level         | Level 3
-            Street Number | 33
-            Street Name   | Elizabeth
-            Street Type   | Street
-            Suburb        | Richmond
-            State         | VIC
-            Postcode      | 3121
+        location:
+            building: Hany Building
+            flat_unit: Unit 5
+            level: Level 3
+            street_number: 33
+            street_name: Elizabeth
+            street_type: Street
+            suburb: Richmond
+            state: VIC
+            postcode: 3121
         ----------------------------------------------
         When I navigate to the service page
          And I click on "Unit 5, Level 3, Hany Building, 33 Elizabeth Street"
@@ -75,8 +75,9 @@ Feature: Service details page
         Then I should not see the static google map
 
     Scenario: There is travel information for non-confidential services
+       Given my location is "Melbourne VIC"
         When I visit /service/866464
-        Then I should see "? mins"
+        Then I should see "59 mins"
         Then I can get to google maps by clicking "Get directions"
 
     Scenario: There is no travel information for confidential services
@@ -87,20 +88,29 @@ Feature: Service details page
     Scenario: The contact methods are available except fax and tty
        Given A service with:
         ----------------------------------------------
-        * Phones
-            kind     | number         | comment
-            ==============================================
-            phone    | (03) 3333 3333 |
-            fax      | (03) 5555 5555 |
-            mobile   | 0477 777 777   |
-            phone    | 0477 777 777   | (really a mobile)
-            freecall | 1300 111 111   |
-            tty      | (03) 9999 9999 |
-        * Emails
-            email                 | comment
-            ==============================================
-            reception@service.org | Reception
-        * Web: https://example.org
+        phones:
+            - kind        : phone
+              number      : (03) 3333 3333
+              comment     :
+            - kind        : fax
+              number      : (03) 5555 5555
+              comment     :
+            - kind        : mobile
+              number      : 0477 777 777
+              comment     :
+            - kind        : phone
+              number      : 0477 777 777
+              comment     : (really a mobile)
+            - kind        : freecall
+              number      : 1300 111 111
+              comment     :
+            - kind        : tty
+              number      : (03) 9999 9999
+              comment     :
+        emails:
+            - email       : reception@service.org
+              comment     : Reception
+        web: https://example.org
         ----------------------------------------------
         When I navigate to the service page
         Then I should see the contacts

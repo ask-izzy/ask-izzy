@@ -152,31 +152,48 @@ export async function request(
     return JSON.parse(response.text);
 }
 
+/*
+ * Loads the transportTime property from google
+ * and adds it to the given Service instances
+ */
+async function attachTransportTimes(
+    services: Array<Service>
+): Promise<Array<Service>> {
+    let formatPoint = (point) => `${point.lat},${point.lon}`;
+    const maps = await Maps();
+    let service: ?Service;
+    let travelTimes = await maps.travelTime(
+        [
+            /*::`*/
+            for (service of services)
+                if (!service.Location().isConfidential())
+                    formatPoint(service.location.point)
+            /*::`*/
+        ]
+    );
+
+    /*::`*/
+    for (service of services)
+        if (!service.Location().isConfidential()) {
+            service.travelTime = travelTimes.shift();
+        }
+    /*::`*/
+
+    return services;
+}
+
 export async function requestObjects(
     path: string,
     data: ?searchRequest,
 ): Promise<searchResults> {
     let response = await request(path, data);
-    const maps = await Maps();
-    let travelTimes = await maps.batchDirectionsRequest(
-        response.objects.map((service: Service) =>
-            (service.location && service.location.point) ?
-                `${service.location.point.lat},${service.location.point.lon}`
-                : null
-        )
-    );
 
     // convert objects to ISS search results
     const objects = response.objects.map(
         (object: issService): Service => new Service(object)
     );
 
-    for (let service: Service of objects) {
-        service.travelTime = travelTimes.shift();
-    }
-
-    response.objects = objects;
-
+    response.objects = await attachTransportTimes(objects);
     return response;
 }
 
@@ -186,7 +203,7 @@ export class Service {
     }
 
     Location(): Location {
-        return new Location(this.location);
+        return new Location(this.location, this.travelTime);
     }
 
     abn: string;
@@ -222,10 +239,7 @@ export class Service {
     languages: Array<string>;
     last_updated: ymdWithDashesDate;
     location: issLocation;
-    travelTime: ?{
-        duration: {text: string, value: number},
-        distance: {text: string, value: number},
-    };
+    travelTime: ?travelTime;
     name: string;
     ndis_approved: boolean;
     now_open: {
@@ -379,9 +393,11 @@ export async function search(
 export async function getService(
     id: number
 ): Promise<Service> {
-    let response = await request(`/api/v3/service/${id}/`);
+    const response = await request(`/api/v3/service/${id}/`);
+    const service = new Service(response);
 
-    return new Service(response);
+    await attachTransportTimes([service]);
+    return service;
 }
 
 export default {

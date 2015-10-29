@@ -12,15 +12,31 @@
         padding-top: 0;
         padding-bottom: 0;
 
-        .Icon {
+        .Icon.WalkIcon {
             top: -5px;
         }
+
+        .Icon.TramIcon {
+            top: -21px;
+        }
+
     }
 
     .Icon {
         position: absolute;
-        top: 5px;
-        left: -2px;
+
+        &.WalkIcon {
+            top: 5px;
+            left: -2px;
+        }
+
+        &.TramIcon {
+            top: -12px;
+            left: -23px;
+
+            width: 64px;
+            height: 64px;
+        }
     }
 
     .travel-time {

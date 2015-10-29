@@ -86,7 +86,10 @@ type DistanceMatrixRequest = {
     origins: Array<string>,
     destinations: Array<string>,
 }
-
+type TravelModes = {
+    WALKING: string,
+    TRANSIT: string,
+}
 declare class DistanceMatrixService {
     getDistanceMatrix(
         params: DistanceMatrixRequest,
@@ -101,8 +104,8 @@ declare class GoogleMaps {
     LatLngBounds(sw?: LatLng, ne?: LatLng): LatLngBounds;
     Map(node: Element, obj: Object): Map;
     places: Places;
-    DirectionsTravelMode: {WALKING: string};
-    TravelMode: {WALKING: string};
+    DirectionsTravelMode: TravelModes;
+    TravelMode: TravelModes;
     DirectionsStatus: {OK: string};
     UnitSystem: {METRIC: string};
     DirectionsService(): DirectionsService;

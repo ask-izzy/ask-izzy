@@ -6,8 +6,8 @@ Feature: Location search
     # So that I get personalised results for the area I'm interested in
 
     Scenario: Search for a suburb
-        Given my location is 37.823S 144.998E
         When I visit /category/housing/personalise/page/location
+       Given my location is 37.823S 144.998E
         Then I should see "Where are you?"
 
         When I search for "carlt"

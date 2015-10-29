@@ -105,7 +105,6 @@ async function setLocation(location: string): Promise<void> {
  * @returns {Promise} promise that resolves when the value is set.
  */
 async function setCoords(latitude: number, longitude: number): Promise<void> {
-    await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript((coords) => {
         sessionStorage.setItem("coordinates", JSON.stringify(coords));
     },

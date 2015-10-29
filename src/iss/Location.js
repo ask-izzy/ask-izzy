@@ -18,9 +18,11 @@ export default class Location {
     street_type: string;
     suburb: string;
     details: string;
+    travelTime: ?travelTime;
 
-    constructor(props: issLocation) {
+    constructor(props: issLocation, travelTime: ?travelTime) {
         Object.assign(this, props);
+        this.travelTime = travelTime;
     }
 
     /* If there is no point value, that means it's being suppressed */

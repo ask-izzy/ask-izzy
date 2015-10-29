@@ -15,11 +15,17 @@ class TransportTime extends React.Component {
 
     static sampleProps = {
         compact: {
-            location: new Location(fixtures.ixa.location),
+            location: new Location(fixtures.ixa.location, {
+                mode: "WALK",
+                duration: {text: "15 minutes"},
+            }),
             compact: true,
         },
         expanded: {
-            location: new Location(fixtures.ixa.location),
+            location: new Location(fixtures.ixa.location, {
+                mode: "TRANSIT",
+                duration: {text: "15 minutes"},
+            }),
             compact: false,
         },
     };
@@ -36,18 +42,6 @@ class TransportTime extends React.Component {
     // flow:disable not supported yet
     get compactClass(): string {
         return this.props.compact ? "compact" : "";
-    }
-
-    componentDidMount(): void {
-        this.loadTime();
-    }
-
-    componentWillReceiveProps(nextProps: Object): void {
-        if (nextProps.location != this.props.location) {
-            this.setState({time: {}});
-            // FIXME: Cancel existing attempt to load travel time if any.
-            this.loadTime();
-        }
     }
 
     render(): ReactElement {
@@ -81,7 +75,10 @@ class TransportTime extends React.Component {
             <div
                 className={`TransportTime ${this.compactClass}`}
             >
-                <icons.Walk className="ColoredIcon" />
+                {travelTime.mode === "TRANSIT" ?
+                <icons.Tram className="ColoredIcon" />
+                : <icons.Walk className="ColoredIcon" />
+                }
                 <span className="travel-time">
                     {
                         travelTime &&

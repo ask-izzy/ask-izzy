@@ -3,6 +3,7 @@
 declare var google: Google;
 
 import storage from "./storage";
+import _ from "underscore";
 
 class MapsApi {
     api: GoogleMaps;
@@ -11,7 +12,50 @@ class MapsApi {
         this.api = api;
     }
 
-    batchDirectionsRequest(destinations: Array<string>): Promise<Object> {
+    async travelTime(
+        destinations: Array<string>
+    ): Promise<Array<travelTime>> {
+        if (!destinations.length) {
+            return [];
+        }
+
+        const walkingRequest = this.batchDirectionsRequest(
+            destinations,
+            "WALKING",
+        );
+        const transitRequest = this.batchDirectionsRequest(
+            destinations,
+            "TRANSIT",
+        );
+        const walkingResults = await walkingRequest;
+        const transitResults = await transitRequest;
+
+        return _.zip(walkingResults, transitResults)
+            .map(([walking, transit]) => {
+                if (transit.status != "OK") {
+                    // Transit had no result; use walking directions
+                    return walking;
+                } else {
+                    if (walking.status != "OK") {
+                        // Walking had no result; use transit directions
+                        return transit;
+                    } else {
+                        // Both modes had results; return the faster one.
+                        if (walking.duration.value >
+                            transit.duration.value) {
+                            return transit;
+                        } else {
+                            return walking;
+                        }
+                    }
+                }
+            }
+        )
+    }
+
+    batchDirectionsRequest(
+        destinations: Array<string>, mode = "WALKING"
+    ): Promise<Array<travelTime>> {
         let directionsService = new this.api.DistanceMatrixService();
         const coords = storage.getJSON("coordinates");
         let origin = storage.getItem("location");
@@ -21,7 +65,7 @@ class MapsApi {
         }
 
         let params = {
-            travelMode: this.api.TravelMode.WALKING,
+            travelMode: this.api.TravelMode[mode],
             unitSystem: this.api.UnitSystem.METRIC,
             origins: [`${origin}`],
             destinations: destinations,
@@ -32,7 +76,12 @@ class MapsApi {
                 params,
                 (response, status) => {
                     if (status == this.api.DirectionsStatus.OK) {
-                        resolve(response.rows[0].elements)
+                        let times = response.rows[0].elements;
+
+                        times.forEach((transportTime) =>
+                            transportTime.mode = mode
+                        );
+                        resolve(times);
                     } else {
                         reject([status, response])
                     }
@@ -93,6 +142,12 @@ function maps(): Promise<MapsApi> {
         function checkLoaded() {
             try {
                 google.maps;
+                if (!google.maps.DistanceMatrixService) {
+                    throw new Error(
+                        "DistanceMatrixService comes in late",
+                    );
+                }
+
                 resolve(new MapsApi(google.maps));
             } catch (error) {
                 /* try again in 500ms */
