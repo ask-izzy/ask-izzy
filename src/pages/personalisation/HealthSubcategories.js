@@ -11,26 +11,28 @@ export default class HealthSubcategories extends BaseMultiQuestion {
             /* eslint-disable max-len */
             "Doctor or nurse": remove("health").append({
                 q: "doctor",
-                // No records are currently marked up as is_bulk_billing
-                // is_bulk_billing: true,
+                healthcare_card_holders: true,
             }),
             "Children": append({
                 q: "children",
-                // is_bulk_billing: true,
+                healthcare_card_holders: true,
             }),
             "Maternal & child health": append("maternal child health"),
             "Sexual stuff": remove("physical").append({
                 q: "sexual health",
-                // is_bulk_billing: true,
+                healthcare_card_holders: true,
             }),
-            "Dentist": remove("health").append("dentist health care card"),
+            "Dentist": remove("health").append({
+                q: "dentist",
+                healthcare_card_holders: true,
+            }),
             "Feet": remove("physical health").append({
                 q: "podiatrist",
-                // is_bulk_billing: true,
+                healthcare_card_holders: true,
             }),
             "Mental or emotional health e.g. depression": append({
                 q: "mental health",
-                // is_bulk_billing: true,
+                healthcare_card_holders: true,
             }),
             "Hospital": remove("health").append("hospital"),
         },
