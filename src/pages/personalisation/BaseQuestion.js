@@ -76,8 +76,13 @@ class AppendToSearch extends Search {
                 .concat(this.search.age_groups);
         }
 
-        if (this.search.bulk_billing) {
-            search.bulk_billing = this.search.bulk_billing;
+        if (this.search.client_gender) {
+            search.client_gender = (search.client_gender || [])
+                .concat(this.search.client_gender);
+        }
+
+        if (this.search.is_bulk_billing) {
+            search.is_bulk_billing = this.search.is_bulk_billing;
         }
 
         return search;

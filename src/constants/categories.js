@@ -106,7 +106,7 @@ const categories:Array<Category> = [
         byline: "Physical, mental, emotional",
         icon: icons.Health,
         search: {
-            q: "physical health",
+            q: "health",
         },
         personalisation: [
             personalisation.HealthSubcategories,
