@@ -9,7 +9,7 @@ export default class HealthSubcategories extends BaseMultiQuestion {
         question: "What sort of help do you need?",
         answers: {
             /* eslint-disable max-len */
-            "Doctor or nurse": remove("physical health").append({
+            "Doctor or nurse": remove("health").append({
                 q: "doctor",
                 bulk_billing: true,
             }),
@@ -17,21 +17,21 @@ export default class HealthSubcategories extends BaseMultiQuestion {
                 q: "children",
                 bulk_billing: true,
             }),
-            "Maternal & child health": remove("physical").append("maternal child health"),
+            "Maternal & child health": append("maternal child health"),
             "Sexual stuff": remove("physical").append({
                 q: "sexual health",
                 bulk_billing: true,
             }),
-            "Dentist": remove("physical health").append("dentist health care card"),
+            "Dentist": remove("health").append("dentist health care card"),
             "Feet": remove("physical health").append({
                 q: "podiatrist",
                 bulk_billing: true,
             }),
-            "Mental or emotional health e.g. depression": remove("physical").append({
+            "Mental or emotional health e.g. depression": append({
                 q: "mental health",
                 bulk_billing: true,
             }),
-            "Hospital": remove("physical health").append("hospital"),
+            "Hospital": remove("health").append("hospital"),
         },
     };
 }
