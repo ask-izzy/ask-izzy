@@ -3,17 +3,12 @@
 import React from "react";
 import { Link } from "react-router";
 
-declare var SITE_DOMAIN: string;
-
 class BrandedFooter extends React.Component {
     static sampleProps = {
         default: {},
     };
 
     render(): ReactElement {
-        const domain = SITE_DOMAIN;
-        const mailLink = `mailto:support@${domain}`;
-
         return (
             <footer className="branding-footer-container">
                 <div className="about">

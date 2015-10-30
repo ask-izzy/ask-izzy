@@ -16,8 +16,9 @@ export default class BasePage extends React.Component {
             <div className="BasePage">
                 <DocumentTitle title="Ask Izzy" />
                 <main>
-                    {this.props.children}
+                    {this.props.children.main || this.props.children}
                 </main>
+                {this.props.children.footer}
             </div>
         );
     }
