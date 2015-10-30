@@ -85,6 +85,11 @@ class AppendToSearch extends Search {
             search.is_bulk_billing = this.search.is_bulk_billing;
         }
 
+        if (this.search.healthcare_card_holders) {
+            search.healthcare_card_holders =
+                this.search.healthcare_card_holders;
+        }
+
         return search;
     }
 }

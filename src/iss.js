@@ -29,6 +29,7 @@ export type searchRequest = {
 
     catchment?: boolean,
     is_bulk_billing?: boolean,
+    healthcare_card_holders?: boolean,
 
     limit?: number,
     key?: string,
