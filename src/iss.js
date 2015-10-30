@@ -25,6 +25,7 @@ export type searchRequest = {
     location?: string,
     type?: string,
     age_groups?: Array<string>,
+    client_gender?: Array<string>,
 
     catchment?: boolean,
     bulk_billing?: boolean,
