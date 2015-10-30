@@ -28,7 +28,7 @@ export type searchRequest = {
     client_gender?: Array<string>,
 
     catchment?: boolean,
-    bulk_billing?: boolean,
+    is_bulk_billing?: boolean,
 
     limit?: number,
     key?: string,

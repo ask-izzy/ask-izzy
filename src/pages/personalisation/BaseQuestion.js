@@ -81,8 +81,8 @@ class AppendToSearch extends Search {
                 .concat(this.search.client_gender);
         }
 
-        if (this.search.bulk_billing) {
-            search.bulk_billing = this.search.bulk_billing;
+        if (this.search.is_bulk_billing) {
+            search.is_bulk_billing = this.search.is_bulk_billing;
         }
 
         return search;
