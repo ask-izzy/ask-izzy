@@ -46,7 +46,7 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     }
 
     // flow:disable
-    get currentComponent(): ?ReactComponent {
+    get currentComponent(): ?ReactClass {
         return this.personalisationComponents[this.currentComponentIdx];
     }
 
