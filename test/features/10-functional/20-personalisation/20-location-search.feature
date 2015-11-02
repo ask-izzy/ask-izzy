@@ -7,9 +7,15 @@ Feature: Location search
 
     Scenario: Search for a suburb
         When I visit /category/housing/personalise/page/location
-       Given my location is 37.823S 144.998E
         Then I should see "Where are you?"
 
+       Given googles suburb autocomplete will return
+        -------------------------------------------
+        suburb              | state
+        ===========================================
+        Carlton             | Victoria
+        Carlton North       | Victoria
+        -------------------------------------------
         When I search for "carlt"
         Then I should see the results
         -------------------------------------------
