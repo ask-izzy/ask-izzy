@@ -25,12 +25,22 @@ function History() {
     let historyLength = 0;
 
     function goBack() {
-        if (historyLength > 0) {
-            historyLength--;
-            history.goBack();
-        } else {
-            history.pushState(null, "/");
-        }
+        const currentUrl = location.toString();
+
+        historyLength--;
+        history.goBack();
+
+        // If going back doesn't change the location, we've
+        // run out of history. Send the user to the homepage
+        setTimeout(
+            () => {
+                if (location.toString() == currentUrl) {
+                    historyLength = 0;
+                    history.pushState(null, "/")
+                }
+            },
+            100,
+        );
     }
 
     function goForward() {

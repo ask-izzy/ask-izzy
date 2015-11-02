@@ -62,10 +62,26 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
         });
 
         scenarios(feature.scenarios, scenario => {
-            steps(scenario.steps, (step, done) => {
+            let currentDriverPromise = driverPromise;
+
+            if (scenario.annotations.newsession) {
+                currentDriverPromise = webDriverInstance();
+            }
+
+            steps(scenario.steps, async function(step, done) {
+                const currentDriver = await currentDriverPromise;
+                let doneWrapper = (callback) => callback;
+
+                if (scenario.annotations.newsession) {
+                    doneWrapper = (callback) => async function() {
+                        await currentDriver.quit();
+                        callback(arguments)
+                    }
+                }
+
                 Yadda.createInstance(libraries, {
-                    driver: driver,
-                }).run(step, done);
+                    driver: currentDriver,
+                }).run(step, doneWrapper(done));
             });
         });
 
