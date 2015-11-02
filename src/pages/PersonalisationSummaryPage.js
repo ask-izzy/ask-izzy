@@ -13,11 +13,12 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
     }
 
     nextStep(): void {
+        super.nextStep();
         this.props.history.goBack();
     }
 
     render(): ReactElement {
-        const subpage = this.currentComponent;
+        const Subpage = this.currentComponent;
 
         return (
             <div className="PersonalisationPage">
@@ -25,8 +26,16 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                     title="Personalise"
                     onBackTouchTap={this.previousStep.bind(this)}
                 />
-                {subpage ?
-                    React.createElement(subpage)
+                {Subpage ?
+                    <div>
+                        {<Subpage ref="subpage" />}
+                        <div className="done-button">
+                            <components.FlatButton
+                                label="Done"
+                                onTouchTap={this.nextStep.bind(this)}
+                            />
+                        </div>
+                    </div>
                 : <div>
                     <components.HeaderBar
                         primaryText={
@@ -57,7 +66,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                     <div className="padded">
                         All of your answers are private and anonymous.
                     </div>
-                    <div className="done-button">
+                    <div className="okay-button">
                         <components.FlatButton
                             label="Okay"
                             onTouchTap={this.previousStep.bind(this)}

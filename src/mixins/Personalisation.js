@@ -13,6 +13,10 @@ const Personalisation = {
         name: React.PropTypes.string.isRequired,
     },
 
+    setNextEnabled: function setNextEnabled(enabled: boolean): void {
+        this.context.controller.setState({nextDisabled: !enabled});
+    },
+
     nextStep: function nextStep(): void {
         this.context.controller.nextStep();
     },

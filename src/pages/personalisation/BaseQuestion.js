@@ -245,13 +245,11 @@ class BaseQuestion extends React.Component {
      */
     /*::__(){`*/@debounce(500)/*::`}*/
     triggerNext(): void {
-        storage.setItem(this.props.name, this.state.selected);
         this.nextStep();
     }
 
-    onSkip(): void {
-        this.setState({selected: "(skipped)"});
-        this.triggerNext();
+    onNextStep(): void {
+        storage.setItem(this.props.name, this.state.selected || "(skipped)");
     }
 
     onAnswerTouchTap(answer: string, ...rest: any): void {
@@ -273,12 +271,6 @@ class BaseQuestion extends React.Component {
                         </div>
                     }
                 >
-                    <div className="skip-button">
-                        <components.FlatButton
-                            label="Skip"
-                            onTouchTap={this.onSkip.bind(this)}
-                        />
-                    </div>
                 </components.HeaderBar>
                 <div className="List">
                 {this.answers.map((answer, index) =>

@@ -27,6 +27,10 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     }
 
     nextStep(): void {
+        // If our subpage has an onNextStep hook, call it.
+        this.refs.subpage &&
+        this.refs.subpage.onNextStep &&
+        this.refs.subpage.onNextStep();
     }
 
     urlFor(subpath: string): string {

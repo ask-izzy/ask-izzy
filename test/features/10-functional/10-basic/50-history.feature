@@ -25,7 +25,7 @@ Feature: History navigation
         Then I should see "To help me find the right services I'll ask you a few questions"
         And I should be at /category/housing/personalise
 
-        When I click on "Okay"
+        When I click on "Next"
         Then I should see "Do you identify as…"
 
         When I click on "Female"

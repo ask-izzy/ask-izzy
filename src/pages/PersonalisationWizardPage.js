@@ -8,18 +8,25 @@ import components from "../components";
 
 class PersonalisationWizardPage extends BasePersonalisationPage {
 
-    nextStep(): void {
-        // Start from the beginning in case an earlier question
-        // was not answered (eg we landed here via a bookmark)
-        let nextSubpageIdx = 0;
+    constructor(props: Object) {
+        super(props);
+        this.state = {};
+    }
 
-        // Advance until we find an unanswered question.
-        while (
-            this.personalisationComponents[nextSubpageIdx] &&
-            this.personalisationComponents[nextSubpageIdx].getSearch({})
-        ) {
-            nextSubpageIdx += 1;
+    previousStep(): void {
+        super.previousStep();
+        this.setState({nextDisabled: false});
+    }
+
+    nextStep(): void {
+        if (this.state.nextDisabled) {
+            return
         }
+
+        super.nextStep();
+        this.setState({nextDisabled: false});
+
+        const nextSubpageIdx = this.currentComponentIdx + 1;
 
         if (nextSubpageIdx >= this.personalisationComponents.length) {
             // Go on to the category page
@@ -32,17 +39,20 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     }
 
     render(): ReactElement {
-        const subpage = this.currentComponent;
+        const Subpage = this.currentComponent || Intro;
 
         return (
             <div className="PersonalisationPage">
                 <components.AppBar
                     title="Personalise"
                     onBackTouchTap={this.previousStep.bind(this)}
+                    onForwardTouchTap={this.nextStep.bind(this)}
+                    forwardMessage="Next"
+                    forwardEnabled={
+                        !this.state.nextDisabled
+                    }
                 />
-                {subpage ?
-                    React.createElement(subpage) : <Intro/>
-                }
+                <Subpage ref="subpage" />
             </div>
         );
     }

@@ -40,11 +40,6 @@ class Intro extends React.Component {
         }
     }
 
-    onTouchDoneButton(event: Event): void {
-        event.preventDefault();
-        this.nextStep();
-    }
-
     render(): ReactElement {
         return (
             <div>
@@ -62,13 +57,6 @@ class Intro extends React.Component {
                         </div>
                     }
                 />
-
-                <div className="done-button">
-                    <components.FlatButton
-                        label="Okay"
-                        onTouchTap={this.onTouchDoneButton.bind(this)}
-                    />
-                </div>
 
             </div>
         );

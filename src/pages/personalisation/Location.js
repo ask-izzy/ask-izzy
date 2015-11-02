@@ -163,8 +163,6 @@ class Location extends React.Component {
             request.radius = 10000;  /* 10 km */
         }
 
-        console.log("Autocompleting", request);
-
         let completions = await maps.autocompletePlaces(request);
 
         return [
@@ -188,7 +186,6 @@ class Location extends React.Component {
     triggerAutocomplete(input: string): void {
         this.autoCompleteSuburb(input, this.state.locationCoords)
             .then(results => {
-                console.log("Done", results);
                 this.setState({
                     autocompletions: results,
                     autocompletion: AutocompleteState.NOT_SEARCHING,
@@ -200,6 +197,15 @@ class Location extends React.Component {
                     autocompletion: AutocompleteState.NOT_SEARCHING,
                 });
             });
+    }
+
+    setState(state: Object): void {
+        super.setState(state);
+        if (state.locationName) {
+            this.setNextEnabled(true);
+        } else {
+            this.setNextEnabled(false);
+        }
     }
 
     onGeolocationTouchTap(): void {
@@ -231,14 +237,8 @@ class Location extends React.Component {
             });
     }
 
-    onTouchDoneButton(event: Event): void {
-        event.preventDefault();
-        if (!this.state.locationName) {
-            return;
-        }
-
+    onNextStep(): void {
         storage.setItem("location", this.state.locationName);
-        this.nextStep();
     }
 
     onSearchChange(event: Event): void {
@@ -315,7 +315,7 @@ class Location extends React.Component {
                 }
                 <form
                     className="search"
-                    onSubmit={this.onTouchDoneButton.bind(this)}
+                    onSubmit={this.nextStep.bind(this)}
                 >
                     <input
                         type="search"
@@ -363,13 +363,6 @@ class Location extends React.Component {
                         </div>
                     : ""
                 }
-                <div className="done-button">
-                    <components.FlatButton
-                        label="Done"
-                        disabled={(!this.state.locationName)}
-                        onTouchTap={this.onTouchDoneButton.bind(this)}
-                    />
-                </div>
 
             </div>
         );
