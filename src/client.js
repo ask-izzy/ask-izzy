@@ -22,12 +22,10 @@ injectTapEventPlugin();
  */
 function History() {
     let history = createBrowserHistory();
-    let historyLength = 0;
 
     function goBack() {
         const currentUrl = location.toString();
 
-        historyLength--;
         history.goBack();
 
         // If going back doesn't change the location, we've
@@ -35,7 +33,6 @@ function History() {
         setTimeout(
             () => {
                 if (location.toString() == currentUrl) {
-                    historyLength = 0;
                     history.pushState(null, "/")
                 }
             },
@@ -44,24 +41,16 @@ function History() {
     }
 
     function goForward() {
-        historyLength++;
         history.goForward();
     }
 
     function pushState() {
-        historyLength++;
         history.pushState(...arguments);
     }
 
     /* eslint-disable id-length */
     function go(num: number) {
-        historyLength += num;
         history.go(num);
-    }
-
-    window._clear_history_testing = () => {
-        history.go(-historyLength);
-        historyLength = 0;
     }
 
     return {
