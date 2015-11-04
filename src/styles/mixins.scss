@@ -12,7 +12,7 @@
 }
 
 @mixin debugging {
-    .explain {
+    .Debugging {
         @include clearfix;
         padding-left: 8px;
 
@@ -20,7 +20,7 @@
 
         font-size: 12px;
 
-        & > .explain {
+        & > .Debugging {
             margin-top: 5px;
 
             border-top: 1px solid $brand-text-mid;
@@ -33,7 +33,7 @@
 
         &:hover {
             &,
-            & > .explain {
+            & > .Debugging {
                 border-top-color: $brand-text-dark;
                 border-left-color: $brand-text-dark;
 

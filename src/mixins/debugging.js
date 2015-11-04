@@ -20,7 +20,7 @@ const Debugging = {
         }
 
         return (
-            <div className="explain">
+            <div className="Debugging">
                 <span className="description">{expl.description}</span>
                 <span className="score">{expl.value}</span>
                 {(expl.details || []).map(
