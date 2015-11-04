@@ -46,9 +46,9 @@ const categories:Array<Category> = [
         },
         info: "It's important to act early on housing.",
         personalisation: [
+            personalisation.Location,
             personalisation.SleepTonight,
             personalisation.HousingSubcategories,
-            personalisation.Location,
             personalisation.Gender,
             personalisation.Age,
             personalisation.Demographics,
@@ -73,8 +73,8 @@ const categories:Array<Category> = [
             q: "material aid",
         },
         personalisation: [
-            personalisation.EverydayThingsSubcategories,
             personalisation.Location,
+            personalisation.EverydayThingsSubcategories,
         ],
     }),
     new Category({
@@ -85,8 +85,8 @@ const categories:Array<Category> = [
             q: "legal aid",
         },
         personalisation: [
-            personalisation.LegalSubcategories,
             personalisation.Location,
+            personalisation.LegalSubcategories,
         ],
     }),
     new Category({
@@ -97,8 +97,8 @@ const categories:Array<Category> = [
             q: "financial aid",
         },
         personalisation: [
-            personalisation.MoneySubcategories,
             personalisation.Location,
+            personalisation.MoneySubcategories,
         ],
     }),
     new Category({
@@ -109,8 +109,8 @@ const categories:Array<Category> = [
             q: "health",
         },
         personalisation: [
-            personalisation.HealthSubcategories,
             personalisation.Location,
+            personalisation.HealthSubcategories,
             personalisation.Gender,
             personalisation.Age,
             personalisation.Demographics,
@@ -124,8 +124,8 @@ const categories:Array<Category> = [
             q: "substance abuse gambling",
         },
         personalisation: [
-            personalisation.AddictionSubcategories,
             personalisation.Location,
+            personalisation.AddictionSubcategories,
         ],
     }),
     new Category({
@@ -136,8 +136,8 @@ const categories:Array<Category> = [
             q: "mental health",
         },
         personalisation: [
-            personalisation.CounsellingSubcategories,
             personalisation.Location,
+            personalisation.CounsellingSubcategories,
         ],
     }),
     new Category({
@@ -148,8 +148,8 @@ const categories:Array<Category> = [
             q: "life skills education",
         },
         personalisation: [
-            personalisation.LifeSkillsSubcategories,
             personalisation.Location,
+            personalisation.LifeSkillsSubcategories,
         ],
     }),
     new Category({
@@ -160,8 +160,8 @@ const categories:Array<Category> = [
             q: "employment",
         },
         personalisation: [
-            personalisation.JobSubcategories,
             personalisation.Location,
+            personalisation.JobSubcategories,
             personalisation.Gender,
             personalisation.Age,
             personalisation.Demographics,
@@ -212,8 +212,8 @@ const categories:Array<Category> = [
             q: "computers wifi charging",
         },
         personalisation: [
-            personalisation.TechnologySubcategories,
             personalisation.Location,
+            personalisation.TechnologySubcategories,
         ],
     }),
     new Category({
@@ -224,10 +224,10 @@ const categories:Array<Category> = [
             q: "advocacy",
         },
         personalisation: [
+            personalisation.Location,
             personalisation.AdvocacySubcategories,
             personalisation.ComplaintSubcategories,
             personalisation.AdvocacySituation,
-            personalisation.Location,
         ],
     }),
 

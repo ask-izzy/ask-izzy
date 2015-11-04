@@ -15,12 +15,6 @@ Feature: Personalisation
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on "Next"
-        Then I should see "Do you have somewhere safe to sleep tonight?"
-
-        When I click on "Yes"
-        Then I should see "Which situation is most like yours?"
-
-        When I click on "Next"
         Then I should see "Where are you?"
 
         Given control of geolocation
@@ -29,6 +23,12 @@ Feature: Personalisation
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, Victoria"
+
+        When I click on "Next"
+        Then I should see "Do you have somewhere safe to sleep tonight?"
+
+        When I click on "Yes"
+        Then I should see "Which situation is most like yours?"
 
         When I click on "Next"
         Then I should see "Do you identify as…"
@@ -53,13 +53,13 @@ Feature: Personalisation
         Then I should see "Do you identify as…"
 
         When I click back from the title bar
-        Then I should see "Where are you?"
-
-        When I click back from the title bar
         Then I should see "Which situation is most like yours?"
 
         When I click back from the title bar
         Then I should see "Do you have somewhere safe to sleep tonight?"
+
+        When I click back from the title bar
+        Then I should see "Where are you?"
 
         When I click back from the title bar
         Then I should see "To help me find the right services I'll ask you a few questions"
@@ -70,10 +70,10 @@ Feature: Personalisation
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on "Next"
-        Then I should see "What do you need?"
+        Then I should see "Where are you?"
 
         When I click on "Next"
-        Then I should see "Where are you?"
+        Then I should see "What do you need?"
 
         When I click on "Next"
         Then I should see "I found these services for you"
@@ -83,9 +83,6 @@ Feature: Personalisation
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on "Next"
-        Then I should see "Do you have somewhere safe to sleep tonight?"
-
-        When I click on "No"
         Then I should see "Where are you?"
 
         Given control of geolocation
@@ -96,6 +93,9 @@ Feature: Personalisation
         And search box should contain "Richmond, Victoria"
 
         When I click on "Next"
+        Then I should see "Do you have somewhere safe to sleep tonight?"
+
+        When I click on "No"
         Then I should see "Do you identify as…"
 
         When I click on "Female"
