@@ -14,17 +14,25 @@ Feature: Transport times
     Scenario: Show transport times
        Given A service with:
         ----------------------------------------------
-        * Location
-            Suburb        | Richmond
+        name: "Transportable"
+        location:
+            suburb: Richmond
+            point:
+                lat: -37.8578706
+                lon: 144.5192432
+        ----------------------------------------------
+        When I search for the service
+       Given googles directions matrix will return
+        ----------------------------------------------
+        - status: OK
+          duration:
+              text: 8 hours 27 mins
+              value: 8000
         ----------------------------------------------
 
-        When I search for the service
-        Then I should see a transport time of "? mins Richmond"
-
-        When I navigate to the service page
+        When I click on "Transportable"
         Then I should see a transport time of
         ------------------------------------------
-        ? mins Richmond
+        8 hours 27 mins Richmond
         Get directions
         ------------------------------------------
-

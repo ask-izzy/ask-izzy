@@ -3,6 +3,7 @@
 import Yadda from "yadda";
 import _ from "underscore";
 import Service from "../../fixtures/factories/Service";
+import yaml from "js-yaml";
 
 type callback = (err: ?Error, val: any) => void;
 
@@ -89,67 +90,22 @@ function tableConverter(str: string, done: callback): void {
  * Parses a service description out of a yadda step
  */
 function serviceConverter(str: string, done: callback): void {
-    /* Services have format
-     * * ArrayFieldName (eg `Phones`)
-     *     Header | Header | Header
-     *     ========================
-     *     Cell   | Cell   | Cell
-     * * FieldName (eg `Web`): <value>
-     */
-    let lines = str.split("\n");
-
-    let serviceProps = {};
-    let currentTableLines, // eg "Emails"
-        currentTable,      // the lines which constitute a table
-        line;              // The line we're currently parsing
-
-    let lineIsValueRegexp = /^\s*\* ([^:]+): (.*)$/;
-    let lineIsTableHeaderRegexp = /^\s*\* ([^\s:]+)$/;
-
-    function sanitizeValue(value: string): string {
-        if (value == "(nada)") {
-            return "";
-        }
-        return value;
+    try {
+        done(null, Service(yaml.safeLoad(str)));
+    } catch (error) {
+        done(error)
     }
+}
 
-    function startBlock(newTableKey: ?string): void {
-        if (newTableKey) {
-            newTableKey = sanitizeKey(newTableKey);
-        }
-
-        currentTable = newTableKey;
-        currentTableLines = [];
+/*
+ * Parses arbitrary yaml out of a yadda step
+ */
+function yamlConverter(str: string, done: callback): void {
+    try {
+        done(null, yaml.safeLoad(str));
+    } catch (error) {
+        done(error)
     }
-
-    function endBlock(): void {
-        if (currentTable && currentTableLines) {
-            serviceProps[currentTable] = parseTable(currentTableLines);
-        }
-
-        currentTable = undefined;
-        currentTableLines = undefined;
-    }
-
-    for (line of lines) {
-        let isValue = line.match(lineIsValueRegexp);
-        let isTableHeader = line.match(lineIsTableHeaderRegexp);
-
-        if (isValue) {
-            serviceProps[sanitizeKey(isValue[1])] = sanitizeValue(isValue[2]);
-        } else if (isTableHeader) {
-            endBlock();
-            startBlock(isTableHeader[1]);
-        } else if (currentTableLines) {
-            currentTableLines.push(line); // Add table row
-        } else {
-            done(new Error(`Could not understand table line: "${line}"`));
-            return;
-        }
-    }
-    endBlock();
-
-    done(null, Service(serviceProps));
 }
 
 const dictionary = new Yadda.Dictionary()
@@ -158,6 +114,7 @@ const dictionary = new Yadda.Dictionary()
     .define("lines", /([^\u0000]*)/, linesConverter)
     .define("table", /([^\u0000]*)/, tableConverter)
     .define("service", /([^\u0000]*)/, serviceConverter)
+    .define("yaml", /([^\u0000]*)/, yamlConverter)
     ;
 
 export default dictionary;

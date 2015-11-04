@@ -235,6 +235,7 @@ class HtmlDocument extends React.Component {
             dangerouslySetInnerHTML={{__html: markup}}
         />
         <script dangerouslySetInnerHTML={{__html: envConfig}} />
+
         {script.map((src, idx) =>
             <script
                 key={idx}

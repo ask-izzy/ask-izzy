@@ -11,6 +11,7 @@ import { slugify } from "underscore.string";
 import ServiceOpening from "./iss/ServiceOpening";
 import Location from "./iss/Location";
 import serviceProvisions from "./constants/service-provisions";
+import Maps from "./maps";
 
 declare var ISS_URL: string;
 
@@ -151,16 +152,43 @@ export async function request(
     return JSON.parse(response.text);
 }
 
+/*
+ * Loads the transportTime property from google
+ * and adds it to the given Service instances
+ */
+async function attachTransportTimes(
+    services: Array<Service>
+): Promise<Array<Service>> {
+    let formatPoint = (point) => `${point.lat},${point.lon}`;
+    const maps = await Maps();
+    let service: ?Service;
+    let travelTimes = await maps.travelTime([/*::`*/
+        for (service of services)
+        if (!service.Location().isConfidential())
+        formatPoint(service.location.point)
+    /*::`*/]);
+
+    for (service of services) {
+        if (!service.Location().isConfidential()) {
+            service.travelTime = travelTimes.shift();
+        }
+    }
+
+    return services;
+}
+
 export async function requestObjects(
-    path: string, data: ?searchRequest
+    path: string,
+    data: ?searchRequest,
 ): Promise<searchResults> {
     let response = await request(path, data);
 
     // convert objects to ISS search results
-    response.objects = response.objects.map(
-        object => new Service(object)
+    const objects = response.objects.map(
+        (object: issService): Service => new Service(object)
     );
 
+    response.objects = await attachTransportTimes(objects);
     return response;
 }
 
@@ -170,7 +198,7 @@ export class Service {
     }
 
     Location(): Location {
-        return new Location(this.location);
+        return new Location(this.location, this.travelTime);
     }
 
     abn: string;
@@ -205,22 +233,8 @@ export class Service {
     is_bulk_billing: boolean;
     languages: Array<string>;
     last_updated: ymdWithDashesDate;
-    location: {
-        building: string,
-        flat_unit: string,
-        level: string,
-        point: {
-            lat: number,
-            lon: number,
-        },
-        postcode: string,
-        state: state,
-        street_name: string,
-        street_number: string,
-        street_suffix: string,
-        street_type: string,
-        suburb: string,
-    };
+    location: issLocation;
+    travelTime: ?travelTime; // From google travel times api
     name: string;
     ndis_approved: boolean;
     now_open: {
@@ -374,9 +388,11 @@ export async function search(
 export async function getService(
     id: number
 ): Promise<Service> {
-    let response = await request(`/api/v3/service/${id}/`);
+    const response = await request(`/api/v3/service/${id}/`);
+    const service = new Service(response);
 
-    return new Service(response);
+    await attachTransportTimes([service]);
+    return service;
 }
 
 export default {

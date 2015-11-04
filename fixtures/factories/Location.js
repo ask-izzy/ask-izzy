@@ -23,6 +23,15 @@ export function Location(props: ?Object): issLocation {
     }, props);
 }
 
+export function TransportTime(props: ?Object) {
+    return Merge({
+        mode: "WALKING",
+        status: "OK",
+        distance: {text: "100 metres", value: "100"},
+        duration: {text: "5 minutes", value: "300"},
+    }, props);
+}
+
 const siteId = Sequence();
 
 export function Site(props: ?Object) {

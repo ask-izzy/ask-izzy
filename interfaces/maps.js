@@ -68,6 +68,35 @@ declare class InfoWindow {
 declare class Map {
 }
 
+type DirectionsRequest = {
+    origin: string,
+    destination: string,
+    travelMode?: string,
+    unitSystem?: string,
+    language?: string,
+};
+
+declare class DirectionsService {
+    route(options: DirectionsRequest, callback: Function): void;
+}
+
+type DistanceMatrixRequest = {
+    travelMode: string,
+    unitSystem: string,
+    origins: Array<string>,
+    destinations: Array<string>,
+}
+type TravelModes = {
+    WALKING: string,
+    TRANSIT: string,
+}
+declare class DistanceMatrixService {
+    getDistanceMatrix(
+        params: DistanceMatrixRequest,
+        callback: Function
+    ): void,
+}
+
 declare class GoogleMaps {
     Geocoder(): Geocoder;
     InfoWindow(opts?: Object): InfoWindow;
@@ -75,6 +104,12 @@ declare class GoogleMaps {
     LatLngBounds(sw?: LatLng, ne?: LatLng): LatLngBounds;
     Map(node: Element, obj: Object): Map;
     places: Places;
+    DirectionsTravelMode: TravelModes;
+    TravelMode: TravelModes;
+    DirectionsStatus: {OK: string};
+    UnitSystem: {METRIC: string};
+    DirectionsService(): DirectionsService;
+    DistanceMatrixService(): DistanceMatrixService;
 }
 
 declare class Google {

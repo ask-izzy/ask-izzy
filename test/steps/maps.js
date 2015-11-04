@@ -18,6 +18,12 @@ declare var google: Google;
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .given("I'm watching map events", unpromisify(instrumentMap))
+        .given("googles suburb autocomplete will return\n$table",
+            unpromisify(instrumentAutocomplete)
+        )
+        .given("googles directions matrix will return\n$yaml",
+            unpromisify(instrumentDistanceMatrix)
+        )
         .when("I click on the map", unpromisify(clickMap))
         .when('I click marker titled "$STRING"', unpromisify(clickMarker))
         .then("I should see a map", unpromisify(assertMap))
@@ -32,6 +38,60 @@ module.exports = (function() {
             unpromisify(cannotSeeTheStaticMap))
         ;
 })();
+
+
+/**
+ * Stub google directions so we can get reliable results
+ *
+ * @param {results} results for autocomplete requests
+ *
+ * @returns {Promise} promise that resolves when the script executes.
+ */
+async function instrumentDistanceMatrix(
+    results: Array<{}>
+): Promise<void> {
+    await this.driver.executeScript((results) => {
+        google.maps.DistanceMatrixService = function() {
+            return {
+                getDistanceMatrix: function(params, callback) {
+                    return callback(
+                        {rows: [{elements: results}]},
+                        google.maps.DirectionsStatus.OK,
+                    );
+                },
+            };
+        };
+    }, results);
+}
+
+/**
+ * Stub google place suggest so we can get reliable results
+ *
+ * @param {results} results for autocomplete requests
+ *
+ * @returns {Promise} promise that resolves when the script executes.
+ */
+async function instrumentAutocomplete(
+    results: Array<{suburb: string, state: string}>
+): Promise<void> {
+    await this.driver.executeScript((results) => {
+        google.maps.places.AutocompleteService = function() {
+            return {
+                getPlacePredictions: function(params, callback) {
+                    return callback(
+                        results,
+                        google.maps.places.PlacesServiceStatus.OK,
+                    );
+                },
+            };
+        };
+    }, results.map((result) => {
+        return {
+            terms: [{value: result.suburb}, {value: result.state}],
+            types: ["locality"],
+        };
+    }));
+}
 
 /**
  * Instrument Google map so we can poke around in it in tests.

@@ -16,14 +16,16 @@ echo "Good"
 
 HAVE_FLOW=true
 for file in $( git ls-files '**/*.js' ); do
-    read flowtype < "$file"
-    if test "x$flowtype" = 'x/* flow:disable */'; then
-        echo "Skipping disabled file $file" > /dev/null
-    elif test "x$flowtype" != 'x/* @flow */'; then
-        HAVE_FLOW=false
-        cat << EOF
+    if [ -e "$file" ] ; then
+        read flowtype < "$file"
+        if test "x$flowtype" = 'x/* flow:disable */'; then
+            echo "Skipping disabled file $file" > /dev/null
+        elif test "x$flowtype" != 'x/* @flow */'; then
+            HAVE_FLOW=false
+            cat << EOF
 $file is not annotated for flowtype (must be the first line)! - got "$flowtype"
 EOF
+        fi
     fi
 done
 

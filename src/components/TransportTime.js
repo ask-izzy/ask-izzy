@@ -1,5 +1,4 @@
 /* @flow */
-// FIXME: Test for transport time showing suburb
 
 import React from "react";
 import { titleize } from "underscore.string";
@@ -16,11 +15,17 @@ class TransportTime extends React.Component {
 
     static sampleProps = {
         compact: {
-            location: new Location(fixtures.ixa.location),
+            location: new Location(fixtures.ixa.location, {
+                mode: "WALK",
+                duration: {text: "15 minutes"},
+            }),
             compact: true,
         },
         expanded: {
-            location: new Location(fixtures.ixa.location),
+            location: new Location(fixtures.ixa.location, {
+                mode: "TRANSIT",
+                duration: {text: "15 minutes"},
+            }),
             compact: false,
         },
     };
@@ -28,6 +33,11 @@ class TransportTime extends React.Component {
     static defaultProps = {
         compact: false,
     };
+
+    constructor() {
+        super();
+        this.state = {time: {}};
+    }
 
     // flow:disable not supported yet
     get compactClass(): string {
@@ -59,13 +69,22 @@ class TransportTime extends React.Component {
     }
 
     renderPublic(): ReactElement {
+        const {travelTime} = this.props.location;
+
         return (
             <div
                 className={`TransportTime ${this.compactClass}`}
             >
-                <icons.Walk className="ColoredIcon" />
+                {travelTime.mode === "TRANSIT" ?
+                <icons.Tram className="ColoredIcon" />
+                : <icons.Walk className="ColoredIcon" />
+                }
                 <span className="travel-time">
-                    ? mins
+                    {
+                        travelTime &&
+                        travelTime.duration &&
+                        travelTime.duration.text
+                    }
                 </span>&nbsp;
                 {this.renderSuburb()}
                 {this.renderDirections()}

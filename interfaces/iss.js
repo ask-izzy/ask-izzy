@@ -39,7 +39,13 @@ type issLocation = {
     "street_number": string,
     "street_suffix": string,
     "street_type": string,
-    "suburb": string
+    "suburb": string,
+};
+type travelTime = {
+    "duration": {"text": string, "value": number},
+    "distance": {"text": string, "value": number},
+    "mode": string,
+    "status": string,
 };
 type issSite = {
     "id": number,
