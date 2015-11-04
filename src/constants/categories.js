@@ -198,7 +198,7 @@ const categories:Array<Category> = [
         byline: "Toilets, libraries etc",
         icon: icons.Facilaties,
         search: {
-            q: "libraries toilets",
+            q: "toilets public libraries",
         },
         personalisation: [
             personalisation.Location,
