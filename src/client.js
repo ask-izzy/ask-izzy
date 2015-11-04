@@ -22,35 +22,42 @@ injectTapEventPlugin();
  */
 function History() {
     let history = createBrowserHistory();
+    let historyLength = parseInt(
+        sessionStorage.getItem("historyLength") || ""
+    ) || 0;
+
+    function setHistoryLength(newLength: number): void {
+        historyLength = newLength;
+        sessionStorage.setItem("historyLength", `${newLength}`);
+    }
 
     function goBack() {
-        const currentUrl = location.toString();
-
-        history.goBack();
-
-        // If going back doesn't change the location, we've
-        // run out of history. Send the user to the homepage
-        setTimeout(
-            () => {
-                if (location.toString() == currentUrl) {
-                    history.pushState(null, "/")
-                }
-            },
-            100,
-        );
+        if (historyLength > 0) {
+            setHistoryLength(historyLength - 1)
+            history.goBack();
+        } else {
+            history.pushState(null, "/");
+        }
     }
 
     function goForward() {
+        setHistoryLength(historyLength - 1);
         history.goForward();
     }
 
     function pushState() {
+        setHistoryLength(historyLength + 1);
         history.pushState(...arguments);
     }
 
     /* eslint-disable id-length */
     function go(num: number) {
+        setHistoryLength(historyLength + num);
         history.go(num);
+    }
+
+    window._clear_history_testing = () => {
+        history.go(-historyLength);
     }
 
     return {

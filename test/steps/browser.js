@@ -249,6 +249,12 @@ async function assertItemNotChecked(label: string): Promise<void> {
     assert.equal(checked, null);
 }
 
+/**
+ * Switch to a new tab in the current driver
+ *
+ * @returns {Promise<void>} resolves after we've switched to the new tab.
+ *
+ */
 async function newBrowser(): Promise<void> {
     const currentHandle = await this.driver.getWindowHandle();
 
