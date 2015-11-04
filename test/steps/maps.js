@@ -30,12 +30,6 @@ module.exports = (function() {
         .then("I should see markers?\n$table", unpromisify(assertMarkers))
         .then('I can get to google maps by clicking "$STRING"',
             unpromisify(assertGoogleMapsLink))
-        .then("I can get to google maps by clicking the static google map",
-            unpromisify(assertGoogleMapsLink))
-        .then("I should see the static google map",
-            unpromisify(seeTheStaticMap))
-        .then("I should not see the static google map",
-            unpromisify(cannotSeeTheStaticMap))
         ;
 })();
 
@@ -167,28 +161,8 @@ async function assertMap(): Promise<void> {
     assert.equal(visible, true);
 }
 
-async function seeTheStaticMap() {
-    const map = await this.driver.findElement(By.css(".StaticMap"));
-    const visible = await map.isDisplayed();
-
-    assert(visible, `Map was present but not visible`);
-}
-
-async function cannotSeeTheStaticMap() {
-    let map;
-
-    try {
-        map = await this.driver.findElement(By.css(".StaticMap"));
-    } catch (error) {
-        return;
-    }
-    const visible = await map.isDisplayed();
-
-    assert(!visible, `Map was visible`);
-}
-
-async function assertGoogleMapsLink(text: ?string) {
-    const selector = text ? By.partialLinkText(text) : By.css(".StaticMap");
+async function assertGoogleMapsLink(text: string) {
+    const selector = By.partialLinkText(text);
     let link = await this.driver.findElement(selector);
     let visible = await link.isDisplayed();
 

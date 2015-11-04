@@ -27,7 +27,6 @@ import ResultList from "./components/ResultList";
 import ResultListItem from "./components/ResultListItem";
 import ScreenReader from "./components/ScreenReader";
 import ServicePane from "./components/ServicePane";
-import StaticMap from "./components/StaticMap";
 import SvgIcon from "./components/SvgIcon";
 import TextInputListItem from "./components/TextInputListItem";
 import TransportTime from "./components/TransportTime";
@@ -59,7 +58,6 @@ export default {
     ResultListItem: ResultListItem,
     ScreenReader: ScreenReader,
     ServicePane: ServicePane,
-    StaticMap: StaticMap,
     SvgIcon: SvgIcon,
     TextInputListItem: TextInputListItem,
     TransportTime: TransportTime,
