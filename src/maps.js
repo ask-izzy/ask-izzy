@@ -56,7 +56,7 @@ class MapsApi {
     batchDirectionsRequest(
         destinations: Array<string>, mode = "WALKING"
     ): Promise<Array<travelTime>> {
-        let directionsService = new this.api.DistanceMatrixService();
+        const directionsService = new this.api.DistanceMatrixService();
         const coords = storage.getJSON("coordinates");
         let origin = storage.getItem("location");
 
@@ -64,7 +64,7 @@ class MapsApi {
             origin = `${coords.latitude},${coords.longitude}`;
         }
 
-        let params = {
+        const params = {
             travelMode: this.api.TravelMode[mode],
             unitSystem: this.api.UnitSystem.METRIC,
             origins: [`${origin}`],
@@ -141,12 +141,8 @@ function maps(): Promise<MapsApi> {
     return new Promise((resolve, reject) => {
         function checkLoaded() {
             try {
-                google.maps;
-                if (!google.maps.DistanceMatrixService) {
-                    throw new Error(
-                        "DistanceMatrixService comes in late",
-                    );
-                }
+                // Check that google maps has loaded
+                google.maps.DistanceMatrixService.name;
 
                 resolve(new MapsApi(google.maps));
             } catch (error) {

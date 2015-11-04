@@ -163,13 +163,11 @@ async function attachTransportTimes(
     const maps = await Maps();
     let service: ?Service;
     let travelTimes = await maps.travelTime(
-        [
-            /*::`*/
-            for (service of services)
-                if (!service.Location().isConfidential())
-                    formatPoint(service.location.point)
-            /*::`*/
-        ]
+        [/*::`*/
+        for (service of services)
+            if (!service.Location().isConfidential())
+                formatPoint(service.location.point)
+        /*::`*/]
     );
 
     /*::`*/
@@ -239,7 +237,7 @@ export class Service {
     languages: Array<string>;
     last_updated: ymdWithDashesDate;
     location: issLocation;
-    travelTime: ?travelTime;
+    travelTime: ?travelTime; // From google travel times api
     name: string;
     ndis_approved: boolean;
     now_open: {
