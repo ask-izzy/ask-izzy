@@ -162,20 +162,17 @@ async function attachTransportTimes(
     let formatPoint = (point) => `${point.lat},${point.lon}`;
     const maps = await Maps();
     let service: ?Service;
-    let travelTimes = await maps.travelTime(
-        [/*::`*/
+    let travelTimes = await maps.travelTime([/*::`*/
         for (service of services)
-            if (!service.Location().isConfidential())
-                formatPoint(service.location.point)
-        /*::`*/]
-    );
+        if (!service.Location().isConfidential())
+        formatPoint(service.location.point)
+    /*::`*/]);
 
-    /*::`*/
-    for (service of services)
+    for (service of services) {
         if (!service.Location().isConfidential()) {
             service.travelTime = travelTimes.shift();
         }
-    /*::`*/
+    }
 
     return services;
 }
