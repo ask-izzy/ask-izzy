@@ -257,7 +257,7 @@ class Location extends React.Component {
 
     render(): ReactElement {
         return (
-            <div>
+            <div className="Location">
                 <components.HeaderBar
                     primaryText={
                         <div>
