@@ -16,9 +16,8 @@ export default class TextEntryQuestion extends BaseQuestion {
         answers: [],
     };
 
-    onDoneTouchTap(): void {
+    onNextStep(): void {
         storage.setItem(this.props.name, this.refs.input.value || "");
-        this.nextStep();
     }
 
     render(): ReactElement {
@@ -39,13 +38,6 @@ export default class TextEntryQuestion extends BaseQuestion {
                         {...this.props}
                         defaultValue={this.constructor.answer}
                         ref="input"
-                    />
-                </div>
-
-                <div className="done-button">
-                    <components.FlatButton
-                        label="Done"
-                        onTouchTap={this.onDoneTouchTap.bind(this)}
                     />
                 </div>
             </div>

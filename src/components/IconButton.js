@@ -14,12 +14,20 @@ export default class IconButton extends React.Component {
     };
 
     render(): ReactElement {
+        const {
+            className,
+            onTouchTap,
+            children,
+            ...rest,
+        } = this.props;
+
         return (
             <button
-                className={`IconButton ${this.props.className}`}
-                onTouchTap={this.props.onTouchTap}
+                className={`IconButton ${className}`}
+                onTouchTap={onTouchTap}
+                {...rest}
             >
-                {this.props.children}
+                {children}
             </button>
         )
     }

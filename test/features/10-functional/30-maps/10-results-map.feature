@@ -16,8 +16,9 @@ Feature: See results on a map
         When I visit /category/everyday-things/map
         Given I'm watching map events
         Then I should see "To help me find the right services I'll ask you a few questions"
-        When I click on "Okay"
-        When I click on "Done"
+        When I click on "Next"
+        When I click on "Next"
+        When I click on "Next"
         Then I should see a map
 
     Scenario: View results on a map

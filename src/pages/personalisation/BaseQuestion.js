@@ -184,6 +184,11 @@ class BaseQuestion extends React.Component {
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         let value = this.answer;
 
+        if (value == "(skipped)") {
+            // This question has been skipped.
+            return request;
+        }
+
         if (value) {
             return this.getSearchForAnswer(request, value);
         } else {
@@ -240,8 +245,11 @@ class BaseQuestion extends React.Component {
      */
     /*::__(){`*/@debounce(500)/*::`}*/
     triggerNext(): void {
-        storage.setItem(this.props.name, this.state.selected);
         this.nextStep();
+    }
+
+    onNextStep(): void {
+        storage.setItem(this.props.name, this.state.selected || "(skipped)");
     }
 
     onAnswerTouchTap(answer: string, ...rest: any): void {
@@ -262,7 +270,8 @@ class BaseQuestion extends React.Component {
                             {this.props.question}
                         </div>
                     }
-                />
+                >
+                </components.HeaderBar>
                 <div className="List">
                 {this.answers.map((answer, index) =>
                     <components.InputListItem

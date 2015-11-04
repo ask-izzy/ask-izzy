@@ -31,7 +31,8 @@
         }
     }
 
-    .done-button {
+    .done-button,
+    .okay-button {
         width: 100%;
 
         button {
@@ -45,6 +46,7 @@
             margin-left: auto;
         }
     }
+
 
     .List {
         padding: 0;

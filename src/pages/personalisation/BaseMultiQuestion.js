@@ -76,9 +76,8 @@ class BaseMultiQuestion extends BaseQuestion {
         this.setState({answers: answers});
     }
 
-    onDoneTouchTap(): void {
+    onNextStep(): void {
         storage.setJSON(this.props.name, Array.from(this.state.answers));
-        this.nextStep();
     }
 
     render(): ReactElement {
@@ -93,7 +92,8 @@ class BaseMultiQuestion extends BaseQuestion {
                             {this.props.question}
                         </div>
                     }
-                />
+                >
+                </components.HeaderBar>
                 <div className="List">
                     {this.answers.map((answer, index) =>
                         <components.InputListItem
@@ -109,13 +109,6 @@ class BaseMultiQuestion extends BaseQuestion {
                             )}
                         />
                     )}
-                </div>
-
-                <div className="done-button">
-                    <components.FlatButton
-                        label="Done"
-                        onTouchTap={this.onDoneTouchTap.bind(this)}
-                    />
                 </div>
             </div>
         );

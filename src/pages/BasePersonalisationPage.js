@@ -27,6 +27,10 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     }
 
     nextStep(): void {
+        // If our subpage has an onNextStep hook, call it.
+        this.refs.subpage &&
+        this.refs.subpage.onNextStep &&
+        this.refs.subpage.onNextStep();
     }
 
     urlFor(subpath: string): string {
@@ -46,7 +50,7 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     }
 
     // flow:disable
-    get currentComponent(): ?ReactComponent {
+    get currentComponent(): ?ReactClass {
         return this.personalisationComponents[this.currentComponentIdx];
     }
 

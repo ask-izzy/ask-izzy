@@ -3,10 +3,12 @@
 }
 
 .AppBar {
+    display: flex;
     position: fixed;
+    flex-direction: row;
+
     width: 100%;
     max-width: 800px;
-
     height: 40px;
     min-height: auto;
 
@@ -15,18 +17,15 @@
 
     z-index: 2;
 
-    & > div {
-        display: inline-block;
+    & > .button-container {
+        flex: 1;
         z-index: 2;
     }
 
-    h1 {
-        position: absolute;
-        top: 0;
-        left: 15%;
-        width: 70%;
+    .title {
+        flex: 4;
 
-        margin: 0;
+        margin: auto;
         padding: 0;
 
         font-size: 18px;
@@ -41,17 +40,45 @@
         overflow: hidden;
     }
 
-    .BackButton {
-        margin-top: -5px;
-        margin-left: -5px;
+    .NextButton {
+        &[disabled] {
+            svg path {
+                fill: $brand-bg-mid;
+            }
+            color: $brand-bg-mid;
+        }
+
+        .next-label {
+            position: absolute;
+            top: 10px;
+            right: 50px;
+            line-height: 20px;
+        }
     }
 
-    .ChevronBackIcon {
-        width: 48px;
-        height: 48px;
+    .left {
+        float: left;
+    }
 
-        margin: 0;
-        padding: 0;
+    .right {
+        float: right;
+    }
 
+    .BackButton,
+    .NextButton {
+        margin-top: -5px;
+        margin-left: -5px;
+
+        .Icon {
+            width: 48px;
+            height: 48px;
+
+            margin: 0;
+            padding: 0;
+
+            path {
+                fill: $white;
+            }
+        }
     }
 }

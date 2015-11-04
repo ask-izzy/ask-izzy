@@ -35,7 +35,7 @@ class BaseCategoriesPage extends React.Component {
      * An array of components required to personalise this category.
      */
     /* flow:disable */
-    get personalisationComponents(): Array<React.Component> {
+    get personalisationComponents(): Array<ReactClass> {
         let components = [];
 
         if (this.props.params.page) {

@@ -46,9 +46,7 @@ class Location extends React.Component {
     }
 
     componentDidMount(): void {
-        this.setState({
-            locationName: storage.getItem("location"),
-        });
+        this.setLocationName(storage.getItem("location"));
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
@@ -163,8 +161,6 @@ class Location extends React.Component {
             request.radius = 10000;  /* 10 km */
         }
 
-        console.log("Autocompleting", request);
-
         let completions = await maps.autocompletePlaces(request);
 
         return [
@@ -188,7 +184,6 @@ class Location extends React.Component {
     triggerAutocomplete(input: string): void {
         this.autoCompleteSuburb(input, this.state.locationCoords)
             .then(results => {
-                console.log("Done", results);
                 this.setState({
                     autocompletions: results,
                     autocompletion: AutocompleteState.NOT_SEARCHING,
@@ -200,6 +195,15 @@ class Location extends React.Component {
                     autocompletion: AutocompleteState.NOT_SEARCHING,
                 });
             });
+    }
+
+    setLocationName(name: any): void {
+        this.setState({locationName: `${name || ""}`});
+        if (name) {
+            this.setNextEnabled(true);
+        } else {
+            this.setNextEnabled(false);
+        }
     }
 
     onGeolocationTouchTap(): void {
@@ -217,9 +221,9 @@ class Location extends React.Component {
 
                 this.setState({
                     geolocation: GeoLocationState.COMPLETE,
-                    locationName: name,
                     locationCoords: location,
                 });
+                this.setLocationName(name);
             })
 
             .catch(error => {
@@ -231,20 +235,15 @@ class Location extends React.Component {
             });
     }
 
-    onTouchDoneButton(event: Event): void {
-        event.preventDefault();
-        if (!this.state.locationName) {
-            return;
-        }
-
-        storage.setItem("location", this.state.locationName);
-        this.nextStep();
+    onNextStep(): void {
+        storage.setItem("location", this.state.locationName || "");
     }
 
     onSearchChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {
+            this.setLocationName(ltrim(event.target.value));
+
             this.setState({
-                locationName: ltrim(event.target.value),
                 autocompletion: AutocompleteState.SEARCHING,
             });
 
@@ -315,7 +314,7 @@ class Location extends React.Component {
                 }
                 <form
                     className="search"
-                    onSubmit={this.onTouchDoneButton.bind(this)}
+                    onSubmit={this.nextStep.bind(this)}
                 >
                     <input
                         type="search"
@@ -348,8 +347,8 @@ class Location extends React.Component {
                                 let locationName =
                                     `${result.suburb}, ${result.state}`;
 
+                                this.setLocationName(locationName);
                                 this.setState({
-                                    locationName: locationName,
                                     autocompletions: [],
                                 });
                             }}
@@ -363,13 +362,6 @@ class Location extends React.Component {
                         </div>
                     : ""
                 }
-                <div className="done-button">
-                    <components.FlatButton
-                        label="Done"
-                        disabled={(!this.state.locationName)}
-                        onTouchTap={this.onTouchDoneButton.bind(this)}
-                    />
-                </div>
 
             </div>
         );
