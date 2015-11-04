@@ -34,10 +34,11 @@ Feature: Search
         Then I should be at /
 
     Scenario: Search with zero results displays a different sentence
-        When I search for "zero results" and press enter
+        When I search for ""zero results"" and press enter
         Then I should see
         ---------------------------------------------------------
-        Sorry, I couldn't find any results for "zero results".
+        Sorry, I couldn't find any results for “zero results”.
+
         ---------------------------------------------------------
         And I should not see "View on a map"
 

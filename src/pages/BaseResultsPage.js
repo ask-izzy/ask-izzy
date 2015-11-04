@@ -20,7 +20,10 @@ class BaseResultsPage extends BaseCategoriesPage {
         if (this.props.params.page) {
             return this.category.name;
         } else if (this.props.params.search) {
-            return `"${this.props.params.search}"`;
+            const quote = new RegExp(`["']`, "g");
+            const search = this.props.params.search;
+
+            return `“${search.replace(quote, "")}”`;
         } else {
             throw new Error("Unexpected");
         }
