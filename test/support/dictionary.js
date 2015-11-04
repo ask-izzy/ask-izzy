@@ -97,12 +97,24 @@ function serviceConverter(str: string, done: callback): void {
     }
 }
 
+/*
+ * Parses arbitrary yaml out of a yadda step
+ */
+function yamlConverter(str: string, done: callback): void {
+    try {
+        done(null, yaml.safeLoad(str));
+    } catch (error) {
+        done(error)
+    }
+}
+
 const dictionary = new Yadda.Dictionary()
     .define("LATITUDE", /(\d+.\d+[NS])/, latitudeConverter)
     .define("LONGITUDE", /(\d+.\d+[EW])/, longitudeConverter)
     .define("lines", /([^\u0000]*)/, linesConverter)
     .define("table", /([^\u0000]*)/, tableConverter)
     .define("service", /([^\u0000]*)/, serviceConverter)
+    .define("yaml", /([^\u0000]*)/, yamlConverter)
     ;
 
 export default dictionary;

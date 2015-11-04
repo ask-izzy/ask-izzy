@@ -21,6 +21,9 @@ module.exports = (function() {
         .given("googles suburb autocomplete will return\n$table",
             unpromisify(instrumentAutocomplete)
         )
+        .given("googles directions matrix will return\n$yaml",
+            unpromisify(instrumentDistanceMatrix)
+        )
         .when("I click on the map", unpromisify(clickMap))
         .when('I click marker titled "$STRING"', unpromisify(clickMarker))
         .then("I should see a map", unpromisify(assertMap))
@@ -35,6 +38,31 @@ module.exports = (function() {
             unpromisify(cannotSeeTheStaticMap))
         ;
 })();
+
+
+/**
+ * Stub google directions so we can get reliable results
+ *
+ * @param {results} results for autocomplete requests
+ *
+ * @returns {Promise} promise that resolves when the script executes.
+ */
+async function instrumentDistanceMatrix(
+    results: Array<{}>
+): Promise<void> {
+    await this.driver.executeScript((results) => {
+        google.maps.DistanceMatrixService = function() {
+            return {
+                getDistanceMatrix: function(params, callback) {
+                    return callback(
+                        {rows: [{elements: results}]},
+                        google.maps.DirectionsStatus.OK,
+                    );
+                },
+            };
+        };
+    }, results);
+}
 
 /**
  * Stub google place suggest so we can get reliable results
@@ -64,6 +92,7 @@ async function instrumentAutocomplete(
         };
     }));
 }
+
 /**
  * Instrument Google map so we can poke around in it in tests.
  *
