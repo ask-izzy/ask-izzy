@@ -9,7 +9,6 @@ export default class HousingSubcategories extends BaseMultiQuestion {
         name: "sub-housing",
         question: "Which situation is most like yours?",
         answers: {
-            /* eslint-disable max-len */
             "On the street": append("homeless"),
             "Couch surfing": append("homeless"),
             "In a rooming house": append(""),
