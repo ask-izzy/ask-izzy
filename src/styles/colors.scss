@@ -25,6 +25,7 @@ $link-text-color: $brand-pane-alt-dark;
 $black: #000000;
 $white: #ffffff;
 
-a {
+a,
+.link-color {
     color: $link-text-color;
 }

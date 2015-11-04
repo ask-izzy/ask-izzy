@@ -46,7 +46,7 @@ class HomePage extends React.Component {
                     </div>
                     <HeaderBar
                         primaryText="What do you need?"
-                        secondaryText="Select a category or search below"
+                        secondaryText="Select a category or search"
                     >
                         <form
                             className="search"

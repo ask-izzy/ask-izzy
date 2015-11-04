@@ -176,7 +176,7 @@ class OpeningTimes extends React.Component {
         return (
             <span className="until">
                 <span className="open">
-                    Open
+                    Open now
                 </span> {this.ifTime`until ${closesAt}`}
             </span>
         );

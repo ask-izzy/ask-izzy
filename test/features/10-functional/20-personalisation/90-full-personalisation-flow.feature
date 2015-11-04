@@ -70,7 +70,7 @@ Feature: Personalisation
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on "Next"
-        Then I should see "What things do you need?"
+        Then I should see "What do you need?"
 
         When I click on "Next"
         Then I should see "Where are you?"

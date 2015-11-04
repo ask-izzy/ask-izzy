@@ -62,7 +62,7 @@ async function seeTheSearchBar(): Promise<void> {
     );
     await assert.textIsVisible(
         this.driver,
-        "Select a category or search below",
+        "Select a category or search",
         container
     );
 }

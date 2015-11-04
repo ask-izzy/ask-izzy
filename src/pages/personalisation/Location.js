@@ -257,7 +257,7 @@ class Location extends React.Component {
 
     render(): ReactElement {
         return (
-            <div>
+            <div className="Location">
                 <components.HeaderBar
                     primaryText={
                         <div>
@@ -276,7 +276,9 @@ class Location extends React.Component {
                         <components.ButtonListItem
                             className="taller"
                             onTouchTap={this.onGeolocationTouchTap.bind(this)}
-                            primaryText="Automatically detect your location"
+                            primaryText={<span className="link-color">
+                                Automatically detect your location
+                            </span>}
                             leftIcon={
                                 <icons.Location
                                     className="ColoredIcon icon-fg-color"
