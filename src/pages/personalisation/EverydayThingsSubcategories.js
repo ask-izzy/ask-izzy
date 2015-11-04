@@ -6,7 +6,7 @@ import { append } from "./BaseQuestion";
 export default class EverydayThingsSubcategories extends BaseMultiQuestion {
     static defaultProps = {
         name: "sub-everyday-things",
-        question: "What things do you need?",
+        question: "What do you need?",
         answers: {
             /* eslint-disable max-len */
             "Food packages/parcels/vouchers": append("food parcel voucher pack"),
