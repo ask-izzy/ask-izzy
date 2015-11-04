@@ -197,8 +197,8 @@ class Location extends React.Component {
             });
     }
 
-    setLocationName(name: string): void {
-        this.setState({locationName: name});
+    setLocationName(name: any): void {
+        this.setState({locationName: `${name || ""}`});
         if (name) {
             this.setNextEnabled(true);
         } else {
@@ -236,15 +236,16 @@ class Location extends React.Component {
     }
 
     onNextStep(): void {
-        storage.setItem("location", this.state.locationName);
+        storage.setItem("location", this.state.locationName || "");
     }
 
     onSearchChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {
+            this.setLocationName(ltrim(event.target.value));
+
             this.setState({
                 autocompletion: AutocompleteState.SEARCHING,
             });
-            this.setLocationName(ltrim(event.target.value));
 
             // Forget the users coordinates if they change
             // the location we detected

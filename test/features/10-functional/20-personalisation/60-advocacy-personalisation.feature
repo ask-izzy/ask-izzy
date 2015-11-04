@@ -34,6 +34,7 @@ Feature: Advocacy Personalisation
         Then I should see "What situation do you need help with?"
         When I fill in "eviction"
          And I click on "Next"
+         And I click on "Next"
 
         Then I should see "I found these services for you"
          And I should see "Eviction advocacy Richmond"

@@ -73,7 +73,9 @@ Feature: Personalisation
         Then I should see "What things do you need?"
 
         When I click on "Next"
+        Then I should see "Where are you?"
 
+        When I click on "Next"
         Then I should see "I found these services for you"
 
     Scenario: Search for emergency accommodation

@@ -16,13 +16,8 @@ export default class TextEntryQuestion extends BaseQuestion {
         answers: [],
     };
 
-    onDoneTouchTap(): void {
-        storage.setItem(this.props.name, this.refs.input.value || "");
-        this.nextStep();
-    }
-
     onNextStep(): void {
-        storage.setItem(this.props.name, this.state.selected || "");
+        storage.setItem(this.props.name, this.refs.input.value || "");
     }
 
     render(): ReactElement {
