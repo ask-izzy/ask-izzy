@@ -1,14 +1,16 @@
 /* @flow */
 
 import React from "react";
-import {Link} from "react-router";
 import _ from "underscore";
+import reactMixin from "react-mixin";
+import { Link } from "react-router";
 
+import Debugging from "../mixins/debugging";
+import Phone from "./Phone";
 import fixtures from "../../fixtures/services";
 import iss from "../iss";
 
-import Phone from "./Phone";
-
+/*::`*/@reactMixin.decorate(Debugging)/*::`;*/
 class CrisisLineItem extends React.Component {
 
     static displayName = "CrisisLineItem";
@@ -22,7 +24,7 @@ class CrisisLineItem extends React.Component {
     }};
 
     render(): ReactElement {
-        let {
+        const {
             object,
         } = this.props;
 
@@ -40,6 +42,7 @@ class CrisisLineItem extends React.Component {
                             </Link>
                         </h3>
                         <Phone {...phone} />
+                        {this.renderDebugging(object._explanation)}
                     </div>
                 );
             }
