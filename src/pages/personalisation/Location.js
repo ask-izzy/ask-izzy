@@ -46,9 +46,7 @@ class Location extends React.Component {
     }
 
     componentDidMount(): void {
-        this.setState({
-            locationName: storage.getItem("location"),
-        });
+        this.setLocationName(storage.getItem("location"));
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
@@ -199,9 +197,9 @@ class Location extends React.Component {
             });
     }
 
-    setState(state: Object): void {
-        super.setState(state);
-        if (state.locationName) {
+    setLocationName(name: string): void {
+        this.setState({locationName: name});
+        if (name) {
             this.setNextEnabled(true);
         } else {
             this.setNextEnabled(false);
@@ -223,9 +221,9 @@ class Location extends React.Component {
 
                 this.setState({
                     geolocation: GeoLocationState.COMPLETE,
-                    locationName: name,
                     locationCoords: location,
                 });
+                this.setLocationName(name);
             })
 
             .catch(error => {
@@ -244,9 +242,9 @@ class Location extends React.Component {
     onSearchChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {
             this.setState({
-                locationName: ltrim(event.target.value),
                 autocompletion: AutocompleteState.SEARCHING,
             });
+            this.setLocationName(ltrim(event.target.value));
 
             // Forget the users coordinates if they change
             // the location we detected
@@ -348,8 +346,8 @@ class Location extends React.Component {
                                 let locationName =
                                     `${result.suburb}, ${result.state}`;
 
+                                this.setLocationName(locationName);
                                 this.setState({
-                                    locationName: locationName,
                                     autocompletions: [],
                                 });
                             }}
