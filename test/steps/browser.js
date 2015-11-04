@@ -14,7 +14,11 @@ import _ from "underscore";
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
 import pauseToDebug from "../support/debug";
-import { elementWithText, elementWithChildText } from "../support/selectors";
+import {
+    elementWithText,
+    elementWithChildText,
+} from "../support/selectors";
+
 import { gotoUrl } from "../support/webdriver";
 
 module.exports = (function() {
@@ -62,15 +66,18 @@ async function visitUrl(url: string): Promise {
  * @returns {Promise} a promise that resolves when the link is identified and
  * clicked.
  */
-async function clickLink(link: string): Promise<void> {
-    await this.driver.findElement(By.xpath(
+async function clickLink(link: Array<string>): Promise<void> {
+    const elems = await this.driver.findElements(By.xpath(
         /* any 'a' element who has a descendent text node containing
          * the link text */
         ["a", "button", "label"]
-            .map(tag => elementWithChildText(tag, link))
+            .map(tag => elementWithChildText(tag, ...link))
             .join("|")
     ))
-        .click();
+
+    elems[0].click();
+
+    return;
 }
 
 function navigator(

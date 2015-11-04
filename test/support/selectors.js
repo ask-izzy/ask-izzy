@@ -38,11 +38,12 @@ export function deepestPossible(predicate: string): string {
  * @param {string} text - Text we're searching for.
  * @returns {string} XPath query.
  */
-export function elementWithText(element: string, text: string): string {
-    text = escapeXPathString(text);
-
-    return `//${element}` +
-        `[normalize-space(.//text()) = normalize-space(${text})]`;
+export function elementWithText(
+    element: string,
+    ...text: Array<string>
+): string {
+    text = text.map((line) => `.//text() = ${escapeXPathString(line)}`);
+    return `//${element}[${text.join(" and ")}]`;
 }
 
 /**
@@ -52,13 +53,16 @@ export function elementWithText(element: string, text: string): string {
  * @param {string} text - Text we're searching for.
  * @returns {string} XPath query.
  */
-export function elementWithChildText(element: string, text: string): string {
+export function elementWithChildText(
+    element: string,
+    ...text: Array<string>
+): string {
     const child = `${element}//*`;
 
     return `${
-        elementWithText(element, text)
+        elementWithText(element, ...text)
     }|${
-        elementWithText(child, text)
+        elementWithText(child, ...text)
     }`;
 }
 

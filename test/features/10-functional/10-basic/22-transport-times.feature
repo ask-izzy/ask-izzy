@@ -15,6 +15,7 @@ Feature: Transport times
        Given A service with:
         ----------------------------------------------
         name: "Transportable"
+        description: "A place you can get to by transit."
         location:
             suburb: Richmond
             point:
@@ -31,6 +32,7 @@ Feature: Transport times
         ----------------------------------------------
 
         When I click on "Transportable"
+        Then I should see "A place you can get to by transit."
         Then I should see a transport time of
         ------------------------------------------
         8 hours 27 mins Richmond
