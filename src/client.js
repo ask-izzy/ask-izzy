@@ -67,3 +67,10 @@ ReactDOM.render(
     <Router history={History()}>{routes}</Router>,
     document.getElementById("root")
 )
+
+const debugEvent = new Event("debug");
+
+window.pi = function() {
+    window.debugQueries = true;
+    window.dispatchEvent(debugEvent);
+}

@@ -1,4 +1,6 @@
 .CrisisLineItem {
+    @include debugging;
+
     margin: 6px 16px;
 
     h3,
