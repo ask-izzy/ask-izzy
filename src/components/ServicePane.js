@@ -75,11 +75,7 @@ export default class ServicePane extends React.Component {
                     </GoogleMapsLink>
                 </main>
 
-                <Eligibility
-                    catchment={object.catchment}
-                    eligibility_info={object.eligibility_info}
-                    ineligibility_info={object.ineligibility_info}
-                />
+                <Eligibility {...object} />
 
                 {this.renderServiceProvisions()}
                 {this.renderSiblings()}
