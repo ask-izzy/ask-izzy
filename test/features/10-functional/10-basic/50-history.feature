@@ -3,10 +3,9 @@ Feature: History navigation
     # As a user
     # When I visit a page
     # I want to be able to use the back button to navigate
-
     Scenario: Bookmark a service page and press back to reach home page
-        Given a fresh session
-         And I visit /service/111-my-housing-service
+       Given I open a new browser
+        When I visit /service/111-my-housing-service
          And I click back from the title bar
         Then I should see the branding header
         Then I should be at /

@@ -22,11 +22,18 @@ injectTapEventPlugin();
  */
 function History() {
     let history = createBrowserHistory();
-    let historyLength = 0;
+    let historyLength = parseInt(
+        sessionStorage.getItem("historyLength") || ""
+    ) || 0;
+
+    function setHistoryLength(newLength: number): void {
+        historyLength = newLength;
+        sessionStorage.setItem("historyLength", `${newLength}`);
+    }
 
     function goBack() {
         if (historyLength > 0) {
-            historyLength--;
+            setHistoryLength(historyLength - 1)
             history.goBack();
         } else {
             history.pushState(null, "/");
@@ -34,24 +41,23 @@ function History() {
     }
 
     function goForward() {
-        historyLength++;
+        setHistoryLength(historyLength - 1);
         history.goForward();
     }
 
     function pushState() {
-        historyLength++;
+        setHistoryLength(historyLength + 1);
         history.pushState(...arguments);
     }
 
     /* eslint-disable id-length */
     function go(num: number) {
-        historyLength += num;
+        setHistoryLength(historyLength + num);
         history.go(num);
     }
 
     window._clear_history_testing = () => {
         history.go(-historyLength);
-        historyLength = 0;
     }
 
     return {

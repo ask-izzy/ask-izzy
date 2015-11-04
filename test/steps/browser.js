@@ -9,6 +9,7 @@ import assert from "../support/page-assertions";
 import Url from "url";
 import Yadda from "yadda";
 import Webdriver, { By, Key } from "selenium-webdriver";
+import _ from "underscore";
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
@@ -19,6 +20,7 @@ import { gotoUrl } from "../support/webdriver";
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .given("a fresh session", unpromisify(cleanSession))
+        .given("I open a new browser", unpromisify(newBrowser))
         .when("I visit $URL", unpromisify(visitUrl))
         .when('I click on "$STRING"', unpromisify(clickLink))
         .when('I search for "$STRING"', unpromisify(doSearch))
@@ -247,11 +249,43 @@ async function assertItemNotChecked(label: string): Promise<void> {
     assert.equal(checked, null);
 }
 
+/**
+ * Switch to a new tab in the current driver
+ *
+ * @returns {Promise<void>} resolves after we've switched to the new tab.
+ *
+ */
+async function newBrowser(): Promise<void> {
+    const currentHandle = await this.driver.getWindowHandle();
+
+    await this.driver.executeScript(() => {
+        document.body.innerHTML = `<a
+            href="about:blank"
+            target="_blank"
+        >
+            Click Here
+        </a>`;
+    });
+    await clickLink.apply(this, ["Click Here"]);
+    const newHandles = _(await this.driver.getAllWindowHandles())
+        .without(currentHandle);
+
+    if (newHandles.length != 1) {
+        throw new Error(
+            `Expected opening a new tab to result in 1 window, got ${
+                newHandles.length
+            }.`
+        );
+    }
+
+    await new Webdriver.WebDriver.TargetLocator(this.driver)
+        .window(newHandles[0]);
+}
+
 async function cleanSession(): Promise<void> {
     await this.driver.executeScript(() => {
         try {
             sessionStorage.clear();
-            window._clear_history_testing();
         } catch (error) {
             console.error(error);
         }
