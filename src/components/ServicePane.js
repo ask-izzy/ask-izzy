@@ -8,8 +8,6 @@ import CollapsedOpeningTimes from "./CollapsedOpeningTimes";
 import ContactMethods from "./ContactMethods";
 import Eligibility from "./Eligibility";
 import TransportTime from "./TransportTime";
-import StaticMap from "./StaticMap";
-import Collapser from "./Collapser";
 import GoogleMapsLink from "./GoogleMapsLink";
 import LinkListItem from "./LinkListItem";
 import fixtures from "../../fixtures/services";
@@ -61,18 +59,17 @@ export default class ServicePane extends React.Component {
                     <CollapsedOpeningTimes object={object.open} />
                     <hr />
 
-                    {this.renderAddress()}
-
-                    <hr />
-                    <ContactMethods object={object} />
-                    <hr />
                     <GoogleMapsLink
                         className="plain-text"
                         from="Current Location"
                         to={object.Location()}
                     >
+                        <Address location={object.Location()} />
                         <TransportTime location={object.Location()}/>
                     </GoogleMapsLink>
+
+                    <hr />
+                    <ContactMethods object={object} />
                 </main>
 
                 <Eligibility {...object} />
@@ -81,27 +78,6 @@ export default class ServicePane extends React.Component {
                 {this.renderSiblings()}
             </div>
         );
-    }
-
-    renderAddress(): ReactElement {
-        const location = this.props.service.Location();
-
-        if (location.isConfidential()) {
-            return (
-                <Address location={location} />
-            );
-        } else {
-            return (
-                <Collapser
-                    message={<Address location={location} />}
-                    allowReclosing={true}
-                >
-                    <StaticMap
-                        location={location}
-                    />
-                </Collapser>
-            );
-        }
     }
 
     renderServiceProvisions(): ReactElement {
