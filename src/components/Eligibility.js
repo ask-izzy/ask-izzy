@@ -10,6 +10,7 @@ class Eligibility extends React.Component {
         catchment: React.PropTypes.string,
         eligibility_info: React.PropTypes.string,
         ineligibility_info: React.PropTypes.string,
+        referral_info: React.PropTypes.string,
     };
 
     static sampleProps = {default: fixtures.ixa};
@@ -20,7 +21,8 @@ class Eligibility extends React.Component {
 
         if (!_.isEmpty(this.props.eligibility_info) ||
             !_.isEmpty(this.props.special_requirements) ||
-            !_.isEmpty(this.props.catchment)
+            !_.isEmpty(this.props.catchment) ||
+            !_.isEmpty(this.props.referral_info)
         ) {
             eligibleMarkup = (
                 <div className="eligibility">
@@ -33,6 +35,7 @@ class Eligibility extends React.Component {
                         {this.renderEligibility(
                             this.props.special_requirements
                         )}
+                        {this.renderReferralInfo()}
                     </ul>
                 </div>
             );
@@ -60,7 +63,7 @@ class Eligibility extends React.Component {
     }
 
     renderCatchment(): ?ReactElement {
-        let catchment: string = this.props.catchment;
+        const catchment: string = this.props.catchment;
 
         if (catchment) {
             return (
@@ -79,6 +82,19 @@ class Eligibility extends React.Component {
         }
 
         return [];
+    }
+
+    renderReferralInfo(): ?ReactElement {
+        const referralInfo = (this.props.referral_info || "")
+            .toLocaleLowerCase();
+
+        if (!_.isEmpty(referralInfo)) {
+            return (
+                <li>Referred by {referralInfo}</li>
+            );
+        } else {
+            return null;
+        }
     }
 }
 
