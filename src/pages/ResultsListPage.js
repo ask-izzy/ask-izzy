@@ -29,7 +29,7 @@ class ResultsListPage extends BaseResultsPage {
                              </div>
                         : this.state.error ?
                             <div>
-                                <icons.LogoLight />
+                                <components.LogoWithShadow />
                                 Sorry, I couldn't do this search.
                             </div>
                         : <div>Searching...</div>
@@ -70,7 +70,7 @@ class ResultsListPage extends BaseResultsPage {
         return (
                 <div>
                     I found these services for you
-                    <icons.LogoLight />
+                    <components.LogoWithShadow />
                 </div>);
     }
 

@@ -262,7 +262,7 @@ class Location extends React.Component {
                     primaryText={
                         <div>
                             Where are you?
-                            <icons.LogoLight />
+                            <components.LogoWithShadow />
                         </div>
                     }
                     secondaryText={

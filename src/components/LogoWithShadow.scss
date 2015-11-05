@@ -1,0 +1,28 @@
+.LogoWithShadow {
+    position: relative;
+
+    width: 64px;
+    height: 64px;
+
+    .LogoLightIcon {
+        transform: rotate(5deg);
+    }
+
+    .LogoShadowIcon {
+        margin-top: 5px;
+        margin-left: -5px;
+    }
+
+    .LogoLightIcon,
+    .LogoShadowIcon {
+        position: absolute;
+
+        width: 64px;
+        height: 64px;
+
+        path,
+        circle {
+            fill: $brand-text-dark;
+        }
+    }
+}

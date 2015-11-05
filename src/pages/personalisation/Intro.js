@@ -6,7 +6,6 @@ import reactMixin from "react-mixin";
 
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
-import icons from "../../icons";
 import * as iss from "../../iss";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
@@ -46,7 +45,7 @@ class Intro extends React.Component {
                 <components.HeaderBar
                     primaryText={
                         <div>
-                            <icons.LogoLight />
+                            <components.LogoWithShadow />
                             To help me find the right services
                             I'll ask you a few questions
                         </div>

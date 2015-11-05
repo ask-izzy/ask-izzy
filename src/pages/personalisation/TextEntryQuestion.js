@@ -6,7 +6,6 @@ import BaseQuestion from "./BaseQuestion";
 
 import storage from "../../storage";
 import components from "../../components";
-import icons from "../../icons";
 
 export default class TextEntryQuestion extends BaseQuestion {
 
@@ -26,7 +25,7 @@ export default class TextEntryQuestion extends BaseQuestion {
                 <components.HeaderBar
                     primaryText={
                         <div>
-                            <icons.LogoLight />
+                            <components.LogoWithShadow />
                             {this.props.question}
                         </div>
                     }
