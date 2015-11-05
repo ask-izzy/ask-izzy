@@ -21,9 +21,9 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | 0 selected
-        Where are you?                               | Melbourne VIC
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected
@@ -46,9 +46,9 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        Where are you?                               | Carlton, Victoria
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | 0 selected
-        Where are you?                               | Carlton, Victoria
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected
@@ -63,8 +63,8 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Do you have somewhere safe to sleep tonight? | No
         Where are you?                               | Melbourne VIC
+        Do you have somewhere safe to sleep tonight? | No
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected
@@ -82,9 +82,9 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | 1 selected
-        Where are you?                               | Melbourne VIC
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected
@@ -107,9 +107,9 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | 2 selected
-        Where are you?                               | Melbourne VIC
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected
@@ -128,9 +128,9 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | 0 selected
-        Where are you?                               | Melbourne VIC
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 2 selected
@@ -144,9 +144,9 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | 0 selected
-        Where are you?                               | Melbourne VIC
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 1 selected
@@ -161,9 +161,9 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | 0 selected
-        Where are you?                               | Melbourne VIC
         How do you identify?                         | Male
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected

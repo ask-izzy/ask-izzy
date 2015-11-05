@@ -14,6 +14,8 @@ Feature: Advocacy Personalisation
         And I click on "Have your say"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
+        When I click on "Next" # Location
+
         When I click on "Next"
         Then I should see "Have you been treated badly? Did you have poor service? Do you want to tell someone?"
 
@@ -33,7 +35,6 @@ Feature: Advocacy Personalisation
 
         Then I should see "What situation do you need help with?"
         When I fill in "eviction"
-         And I click on "Next"
          And I click on "Next"
 
         Then I should see "I found these services for you"
