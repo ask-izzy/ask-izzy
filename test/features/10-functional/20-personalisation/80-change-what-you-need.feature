@@ -168,3 +168,19 @@ Feature: Change your personalisation settings
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected
         ----------------------------------------------------------------
+
+
+    Scenario: Clear my personalisation
+        When I visit /category/housing/personalise/summary
+         And I click on "Clear all"
+        Then I should see the results
+        ----------------------------------------------------------------
+        Question (primaryText)                       | Answer (secondaryText)
+        ================================================================
+        Where are you?                               |
+        Do you have somewhere safe to sleep tonight? |
+        Which situation is most like yours?          | 0 selected
+        How do you identify?                         |
+        How old are you?                             |
+        Do any of these apply to you?                | 0 selected
+        ----------------------------------------------------------------

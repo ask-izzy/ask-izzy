@@ -4,6 +4,7 @@ import React from "react";
 
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import components from "../components";
+import storage from "../storage";
 
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
@@ -14,6 +15,11 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
     nextStep(): void {
         super.nextStep();
         this.props.history.goBack();
+    }
+
+    clearAll(): void {
+        storage.clear();
+        this.forceUpdate();
     }
 
     render(): ReactElement {
@@ -43,6 +49,15 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                                 This is what you said you need.
                                 Change your answers here.
                             </div>
+                        }
+                        secondaryText={
+                            <a
+                                href="#"
+                                className="clickable"
+                                onTouchTap={this.clearAll.bind(this)}
+                            >
+                                Clear all
+                            </a>
                         }
                     />
                     <div className="List">{
