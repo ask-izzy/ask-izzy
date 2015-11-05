@@ -105,8 +105,11 @@ class ResultsListPage extends BaseResultsPage {
         const separator = current.endsWith("/") ? "" : "/";
 
         return (
-            <Link to={`${current}${separator}personalise/summary`}>
-                Change what I'm looking for
+            <Link
+                className="change-personalisation"
+                to={`${current}${separator}personalise/summary`}
+            >
+                Change your answers
             </Link>
         );
     }

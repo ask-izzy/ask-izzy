@@ -18,7 +18,7 @@ Feature: Location search
         When I visit /category/housing
         Then I should see "I found these services for you"
 
-        When I click on "Change what I'm looking for"
+        When I click on "Change your answers"
         And I click on "Where are you?"
         And I search for "carlt"
         # The following step is needed for test to pass on IE
@@ -33,4 +33,4 @@ Feature: Location search
         ------------------------------------------
         Could not find a location matching "carlt"
         ------------------------------------------
-        And I should see "Change what I'm looking for"
+        And I should see "Change your answers"
