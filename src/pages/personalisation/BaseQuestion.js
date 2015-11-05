@@ -45,13 +45,6 @@ class Search {
         return next;
     }
 
-    replace(search: string|iss.searchRequest): ReplaceSearch {
-        let next = replace(search);
-
-        next.chain = this;
-        return next;
-    }
-
     remove(search: string|iss.searchRequest): RemoveSearch {
         let next = remove(search);
 
@@ -96,19 +89,6 @@ class AppendToSearch extends Search {
 
 export function append(search: string|iss.searchRequest): AppendToSearch {
     return new AppendToSearch(search);
-}
-
-/**
- * Subclass for completely replacing search terms.
- */
-class ReplaceSearch extends Search {
-    compose(search) {
-        return super.compose(this.search);
-    }
-}
-
-export function replace(search: string|iss.searchRequest): ReplaceSearch {
-    return new ReplaceSearch(search);
 }
 
 /**

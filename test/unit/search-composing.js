@@ -84,7 +84,7 @@ describe("Compose personalisation search terms", function() {
             request, new Set(["Needle exchange"])
         );
         assert.deepEqual(request, {
-            q: "needle exchange",
+            q: " needle exchange",
         });
     });
 });
