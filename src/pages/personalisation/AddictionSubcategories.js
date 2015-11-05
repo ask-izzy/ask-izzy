@@ -1,7 +1,7 @@
 /* @flow */
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
-import { replace, remove, append } from "./BaseQuestion";
+import { remove, append } from "./BaseQuestion";
 
 export default class AddictionSubcategories extends BaseMultiQuestion {
     static defaultProps = {
@@ -12,7 +12,8 @@ export default class AddictionSubcategories extends BaseMultiQuestion {
             "Rehab": remove("gambling").append("rehab"),
             "Gambling": remove("substance abuse"),
             "Drugs or Alcohol": remove("gambling").append("drugs alcohol"),
-            "Needle exchange": replace("needle exchange"),
+            "Needle exchange": remove("substance abuse gambling")
+                .append("needle exchange"),
             "Speak to someone": append("counselling"),
         },
     };
