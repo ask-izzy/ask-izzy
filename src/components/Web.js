@@ -1,6 +1,7 @@
 /* @flow */
 import React from "react";
 import URL from "url";
+import icons from "../icons";
 
 export default class Web extends React.Component {
 
@@ -12,6 +13,7 @@ export default class Web extends React.Component {
         return (
             <div className="Contact Web">
                 <a href={url.href}>
+                    <icons.Website />
                     <div className="Contact-text">
                         <span className="kind">
                         {' '}

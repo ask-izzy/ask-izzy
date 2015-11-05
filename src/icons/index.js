@@ -9,6 +9,7 @@ import SvgIconChevronBack from "./ChevronBack.js";
 import SvgIconChevron from "./Chevron.js";
 import SvgIconClock from "./Clock.js";
 import SvgIconCross from "./Cross.js";
+import SvgIconEmail from "./Email.js";
 import SvgIconEntertainment from "./Entertainment.js";
 import SvgIconFacilaties from "./Facilaties.js";
 import SvgIconFeedback from "./Feedback.js";
@@ -39,6 +40,7 @@ import SvgIconThings from "./Things.js";
 import SvgIconTick from "./Tick.js";
 import SvgIconTram from "./Tram.js";
 import SvgIconWalk from "./Walk.js";
+import SvgIconWebsite from "./Website.js";
 
 export default {
     Addiction: SvgIconAddiction,
@@ -50,6 +52,7 @@ export default {
     Chevron: SvgIconChevron,
     Clock: SvgIconClock,
     Cross: SvgIconCross,
+    Email: SvgIconEmail,
     Entertainment: SvgIconEntertainment,
     Facilaties: SvgIconFacilaties,
     Feedback: SvgIconFeedback,
@@ -80,4 +83,5 @@ export default {
     Tick: SvgIconTick,
     Tram: SvgIconTram,
     Walk: SvgIconWalk,
+    Website: SvgIconWebsite,
 };

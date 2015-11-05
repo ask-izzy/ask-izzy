@@ -2,7 +2,7 @@
 import React from "react";
 import { titleize } from "underscore.string";
 
-import Icons from "../icons";
+import icons from "../icons";
 import fixtures from "../../fixtures/services";
 
 class Phone extends React.Component {
@@ -18,7 +18,7 @@ class Phone extends React.Component {
         return (
             <div className="Contact Phone">
                 <a href={this.href}>
-                    <Icons.Phone />
+                    <icons.Phone />
                     <div className="Contact-text">
                         <span className="kind">
                             {this.props.comment ? this.props.comment
