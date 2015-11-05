@@ -64,7 +64,14 @@ function History() {
 }
 
 ReactDOM.render(
-    <Router history={History()}>{routes}</Router>,
+    <Router
+        history={History()}
+        onUpdate={() => {
+            if (typeof window.ga == "function") {
+                window.ga("send", "pageview", window.location.toString());
+            }
+        }}
+    >{routes}</Router>,
     document.getElementById("root")
 )
 

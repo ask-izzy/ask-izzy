@@ -5,6 +5,7 @@ import React from "react";
 declare var GOOGLE_KEY: string;
 declare var ISS_URL: string;
 declare var SITE_DOMAIN: string;
+declare var GA_TRACKING_CODE: string;
 
 class HtmlDocument extends React.Component {
 
@@ -40,6 +41,7 @@ class HtmlDocument extends React.Component {
             var ISS_URL = ${JSON.stringify(ISS_URL)};
             var GOOGLE_KEY = ${JSON.stringify(GOOGLE_KEY)};
             var SITE_DOMAIN = ${JSON.stringify(SITE_DOMAIN)};
+            var GA_TRACKING_CODE = ${JSON.stringify(GA_TRACKING_CODE)};
         `;
 
         /* eslint-disable max-len */
@@ -227,6 +229,10 @@ class HtmlDocument extends React.Component {
             name="msapplication-TileImage"
             content="/static/favicons/mstile-144x144.png"
         />
+
+        <script dangerouslySetInnerHTML={{__html: envConfig}} />
+        {this.renderAnalyticsBlock()}
+
     </head>
 
     <body>
@@ -234,7 +240,6 @@ class HtmlDocument extends React.Component {
             id="root"
             dangerouslySetInnerHTML={{__html: markup}}
         />
-        <script dangerouslySetInnerHTML={{__html: envConfig}} />
 
         {script.map((src, idx) =>
             <script
@@ -245,10 +250,31 @@ class HtmlDocument extends React.Component {
 
         <script src={gmapsApi}>
         </script>
+
     </body>
 </html>
         );
     }
+
+    renderAnalyticsBlock(): ?Array<ReactElement> {
+        /* eslint-disable max-len */
+        const snippet = `
+            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+            ga('create', GA_TRACKING_CODE, 'auto');
+            ga('send', 'pageview');
+        `;
+
+        if (GA_TRACKING_CODE) {
+            return [
+                <script dangerouslySetInnerHTML={{__html: snippet}} />,
+                <script
+                    async={true}
+                    src="//www.google-analytics.com/analytics.js"
+                ></script>,
+            ];
+        }
+    }
+
 }
 
 export default HtmlDocument;

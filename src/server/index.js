@@ -21,6 +21,7 @@ if (!process.env.GOOGLE_KEY) {
 GLOBAL.ISS_URL = process.env.ISS_URL;
 GLOBAL.GOOGLE_KEY = process.env.GOOGLE_KEY;
 GLOBAL.SITE_DOMAIN = process.env.SITE_DOMAIN;
+GLOBAL.GA_TRACKING_CODE = process.env.GA_TRACKING_CODE;
 
 // Initialize express server
 const server = express();
