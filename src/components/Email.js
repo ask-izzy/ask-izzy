@@ -1,6 +1,7 @@
 /* @flow */
 import React from "react";
 
+import icons from "../icons";
 import fixtures from "../../fixtures/services";
 
 export default class Email extends React.Component {
@@ -15,6 +16,7 @@ export default class Email extends React.Component {
         return (
             <div className="Contact Email">
                 <a href={`mailto:${email}`}>
+                    <icons.Email />
                     <div className="Contact-text">
                         <span className="kind">
                             {this.props.comment ? this.props.comment
