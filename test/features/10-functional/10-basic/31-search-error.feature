@@ -17,4 +17,4 @@ Feature: Error information
         Then I should see "Sorry, I couldn't do this search."
         And I should see "The Elasticsearch service is unavailable."
         And I should see "Go back"
-        And I should not see "Change what I'm looking for"
+        And I should not see "Change your answers"
