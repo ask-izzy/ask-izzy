@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import _ from "underscore";
 import moment from "moment";
 
 import ScreenReader from "./ScreenReader";
@@ -109,38 +108,6 @@ class OpeningTimes extends React.Component {
         }]),
     };
 
-    /*
-     * String templating macro to
-     * - Convert moment values to strings
-     * - Ensure we aren't displaying invalid or undefined dates
-     *
-     * If any dates are undefined or invalid, the whole string
-     * comes back empty.
-     *
-     */
-    ifTime(strings: Array<string>, ...values: Array<any>): string {
-        if (_(values).contains(undefined)) {
-            return "";
-        }
-
-        // Reject invalid dates
-        if (_(values).any(
-            value => moment.isMoment(value) && !value.isValid())
-           ) {
-            return "";
-        }
-
-        let timeValues = values.map(value => {
-            if (moment.isMoment(value)) {
-                return value.format("h:mm A");
-            }
-
-            return value;
-        });
-
-        // flow:disable doesn't know about raw
-        return String.raw(strings, ...timeValues);
-    }
 
     render(): ReactElement {
         let open = this.props.object.now_open;
@@ -171,13 +138,11 @@ class OpeningTimes extends React.Component {
      * Render the opening hours if ISS says it's open
      */
     renderOpen(): ReactElement {
-        let closesAt = this.props.object.nextCloses;
-
         return (
             <span className="until">
                 <span className="open">
                     Open now
-                </span> {this.ifTime`until ${closesAt}`}
+                </span> {this.props.object.until}
             </span>
         );
     }
@@ -186,32 +151,11 @@ class OpeningTimes extends React.Component {
      * Render the opening hours if ISS says it's closed
      */
     renderClosed(): ReactElement {
-        let day = "";
-
-        if (this.props.object.nextOpeningTimes) {
-            let nextOpen = this.props.object.nextOpeningTimes.start;
-            let startToday = this.props.moment().startOf("day");
-            let daysAway = moment(nextOpen)
-                .startOf("day")
-                .diff(startToday, "days");
-            let dayName = nextOpen.format("dddd");
-
-            if (daysAway == 0) {
-                day = this.ifTime`today ${nextOpen}`;
-            } else if (daysAway == 1) {
-                day = this.ifTime`tomorrow ${nextOpen}`;
-            } else if (daysAway >= 6) {
-                day = this.ifTime`next ${dayName} ${nextOpen}`;
-            } else {
-                day = this.ifTime`${dayName} ${nextOpen}`;
-            }
-        }
-
         return (
             <span className="until">
                 <span className="closed">
                     Closed
-                </span> {day ? `until ${day}` : ""}
+                </span> {this.props.object.until}
             </span>
         );
     }
@@ -221,9 +165,9 @@ class OpeningTimes extends React.Component {
      * the place is currently open.
      */
     renderUnsure(): ReactElement {
-        let open = this.props.object.nextOpeningTimes;
+        const openTime = this.props.object.nextOpeningTimes;
 
-        if (!open) {
+        if (!openTime) {
             return (
                 <span className="when">
                     Contact for opening hours
@@ -231,13 +175,13 @@ class OpeningTimes extends React.Component {
             );
         }
 
-        let start = this.ifTime`from ${open.start}`;
-        let end = this.ifTime`until ${open.end}`;
+        const start = this.props.object.ifTime`from ${openTime.start}`;
+        const end = this.props.object.ifTime`until ${openTime.end}`;
 
         return (
             <span className="when">
-                {open.day} {start} {end}
-                {open.note ? ` (${open.note})` : ""}
+                {openTime.day} {start} {end}
+                {openTime.note ? ` (${openTime.note})` : ""}
             </span>
         );
     }

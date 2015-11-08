@@ -41,6 +41,7 @@ export default class ServiceOpening {
     now_open: ?boolean;
     _opening_times: Array<serviceOpeningHours>;
     _closing_times: Array<serviceOpeningHours>;
+    _now: Moment;
 
     constructor(properties: props, now = moment) {
         this.now_open = properties.now_open.now_open;
@@ -76,6 +77,7 @@ export default class ServiceOpening {
             closingTimes[close.diff(now(), "days")] = serviceOpeningHours;
         }
 
+        this._now = now();
         this._opening_times = _.compact(openingTimes);
         this._closing_times = _.compact(closingTimes);
     }
@@ -102,6 +104,82 @@ export default class ServiceOpening {
     /* flow:disable */
     get nextCloses(): ?Moment {
         return (this._closing_times[0] || {}).end;
+    }
+
+    // Describes how long the current open state will continue
+    /* flow:disable */
+    get until(): string {
+        if (this.now_open) {
+            // Service is open
+            return this.ifTime`until ${this.nextCloses}`
+        } else if (this.now_open === false) {
+            // Service is closed
+            if (!this.nextOpeningTimes) {
+                return "";
+            } else {
+                const nextOpen = this.nextOpeningTimes.start;
+                const startToday = this._now.startOf("day");
+                const daysAway = moment(nextOpen)
+                    .startOf("day")
+                    .diff(startToday, "days");
+                const dayName = nextOpen.format("dddd");
+
+                if (daysAway == 0) {
+                    return this.ifTime`until today ${nextOpen}`;
+                } else if (daysAway == 1) {
+                    return this.ifTime`until tomorrow ${nextOpen}`;
+                } else if (daysAway >= 6) {
+                    return this.ifTime`until next ${dayName} ${nextOpen}`;
+                } else {
+                    return this.ifTime`until ${dayName} ${nextOpen}`;
+                }
+            }
+        } else {
+            // ISS isn't sure whether it's open
+            const openTime = this.nextOpeningTimes;
+
+            if (openTime) {
+                const start = this.ifTime`from ${openTime.start}`;
+                const end = this.ifTime`until ${openTime.end}`;
+
+                return `${start} ${end}`;
+            }
+
+            return "";
+        }
+    }
+
+    /*
+     * String templating macro to
+     * - Convert moment values to strings
+     * - Ensure we aren't displaying invalid or undefined dates
+     *
+     * If any dates are undefined or invalid, the whole string
+     * comes back empty.
+     *
+     */
+    ifTime(strings: Array<string>, ...values: Array<any>): string {
+        if (_(values).contains(undefined)) {
+            return "";
+        }
+
+        // Reject invalid dates
+        if (_(values).any(
+            value => moment.isMoment(value) && !value.isValid())
+           ) {
+            return "";
+        }
+
+        let timeValues = values.map(value => {
+            if (moment.isMoment(value)) {
+                return value.format("h:mm A");
+            }
+
+            return value;
+        });
+
+        // flow:disable doesn't know about raw
+        return String.raw(strings, ...timeValues);
     }
 
 }
