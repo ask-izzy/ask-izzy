@@ -29,7 +29,7 @@ export async function svgIsVisible(
     // svg has a namespace in firefox, which makes xpath queries
     // to pull them out tricky, so I've used css.
     let visible = await driver.findElement(By.css(
-        `svg[aria-label='${altText}']`
+        `[aria-label='${altText}'] svg`
     ))
         .isDisplayed();
 

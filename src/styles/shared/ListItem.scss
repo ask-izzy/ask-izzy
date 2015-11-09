@@ -6,17 +6,23 @@
     cursor: pointer;
 
     &.has-left-icon > div {
-        padding-left: 72px;
+        padding-left: 50px;
     }
 
     & > div {
         padding: 16px;
 
         & > .primaryText {
+            position: relative; // allow icons to be nested in here
             color: $brand-text-dark;
 
             font-size: 16px;
             line-height: 150%;
+
+            .Icon {
+                width: 24px;
+                height: 24px;
+            }
         }
 
         & > .secondaryText {

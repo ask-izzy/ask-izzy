@@ -118,7 +118,8 @@ Feature: Change your personalisation settings
     Scenario: Edit demographics items
         Given I am part of the following demographics
         --------------------------------------
-        Aboriginal or Torres Strait Islander
+        Aboriginal
+        Torres Strait Islander
         LGBTIQ
         --------------------------------------
 
@@ -133,11 +134,11 @@ Feature: Change your personalisation settings
         Which situation is most like yours?          | 0 selected
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | 2 selected
+        Do any of these apply to you?                | 3 selected
         ----------------------------------------------------------------
 
         When I click on "Do any of these apply to you?"
-        And I click on "Aboriginal or Torres Strait Islander"
+        And I click on "Aboriginal"
         And I click on "Done"
         Then I should see "This is what you said you need. Change your answers here."
         Then I should see the results
@@ -149,7 +150,7 @@ Feature: Change your personalisation settings
         Which situation is most like yours?          | 0 selected
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | 1 selected
+        Do any of these apply to you?                | 2 selected
         ----------------------------------------------------------------
 
     Scenario: Edit gender

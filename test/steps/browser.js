@@ -14,7 +14,11 @@ import _ from "underscore";
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
 import pauseToDebug from "../support/debug";
-import { elementWithText, elementWithChildText } from "../support/selectors";
+import {
+    elementWithText,
+    elementWithChildText,
+    escapeXPathString,
+} from "../support/selectors";
 import { gotoUrl } from "../support/webdriver";
 
 module.exports = (function() {
@@ -229,24 +233,26 @@ async function checkEnabled(text: string): Promise<void> {
     assert.equal(enabled, true);
 }
 
-async function assertItemChecked(label: string): Promise<void> {
-    let labelXPath = elementWithText("label", label);
+async function assertItemCheckedIs(
+    label: string,
+    status: any
+): Promise<void> {
+    let labelXPath = `//label[.//*[text()=${escapeXPathString(label)}]]`;
+
     let checked = await this.driver.findElement(By.xpath(
         `${labelXPath}//input`
     ))
         .getAttribute("checked");
 
-    assert.equal(checked, "true");
+    assert.equal(checked, status);
+}
+
+async function assertItemChecked(label: string): Promise<void> {
+    await assertItemCheckedIs.bind(this)(label, "true");
 }
 
 async function assertItemNotChecked(label: string): Promise<void> {
-    let labelXPath = elementWithText("label", label);
-    let checked = await this.driver.findElement(By.xpath(
-        `${labelXPath}//input`
-    ))
-        .getAttribute("checked");
-
-    assert.equal(checked, null);
+    await assertItemCheckedIs.bind(this)(label, null);
 }
 
 /**
