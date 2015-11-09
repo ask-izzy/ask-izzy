@@ -24,17 +24,8 @@
         line-height: 1.4;
     }
 
-    .LogoLightIcon {
-        width: 64px;
-        height: 64px;
+    .LogoWithShadow {
         float: right;
-
-        transform: rotate(5deg);
-
-        path,
-        circle {
-            fill: $brand-text-dark;
-        }
     }
 
     p {

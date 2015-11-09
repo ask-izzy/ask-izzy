@@ -13,7 +13,7 @@ export default class SvgIconLogoShadow extends React.Component {
                 {...this.props}
                 className={`${this.props.className || ""} LogoShadowIcon Icon`}
                 viewBox="0 0 64 64"
-                dangerouslySetInnerHTML={{__html: ``}}
+                dangerouslySetInnerHTML={{__html: `<ellipse cx='32' cy='55.125' rx='26.875' ry='4.125' style=''/>`}}
             />
         );
     }

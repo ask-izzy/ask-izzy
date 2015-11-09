@@ -4,7 +4,6 @@ import React from "react";
 
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import components from "../components";
-import icons from "../icons";
 
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
@@ -40,7 +39,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                     <components.HeaderBar
                         primaryText={
                             <div>
-                                <icons.LogoLight />
+                                <components.LogoWithShadow />
                                 This is what you said you need.
                                 Change your answers here.
                             </div>
