@@ -9,17 +9,12 @@ import storage from "../../storage";
 import * as iss from "../../iss";
 
 class BaseMultiQuestion extends BaseQuestion {
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-            answers: new Set(),
-        };
-    }
 
-    componentDidMount(): void {
-        let answers = new Set(storage.getJSON(this.props.name));
-
-        this.setState({answers: answers});
+    // flow:disable
+    get selected(): Set<string> {
+        return this.state.answers || new Set(
+            storage.getJSON(this.props.name) || []
+        );
     }
 
     // flow:disable
@@ -65,7 +60,7 @@ class BaseMultiQuestion extends BaseQuestion {
     }
 
     onAnswerTouchTap(answer: string, enabled: boolean): void {
-        let answers = this.state.answers;
+        let answers = this.selected;
 
         if (enabled) {
             answers.add(answer);
@@ -77,11 +72,11 @@ class BaseMultiQuestion extends BaseQuestion {
     }
 
     onNextStep(): void {
-        storage.setJSON(this.props.name, Array.from(this.state.answers));
+        storage.setJSON(this.props.name, Array.from(this.selected));
     }
 
     render(): ReactElement {
-        let selected = this.state.answers;
+        let selected = this.selected;
 
         return (
             <div className="BaseMultiQuestion">

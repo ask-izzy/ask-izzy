@@ -27,6 +27,7 @@ Feature: History navigation
         When I click on "Next"
          And I click on "Next"
          And I click on "Next"
+         And I click on "Next"
 
         Then I should see "Do you identify as…"
 
