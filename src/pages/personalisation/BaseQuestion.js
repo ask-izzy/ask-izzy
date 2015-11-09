@@ -128,8 +128,13 @@ class BaseQuestion extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {
-            selected: null,  // set when the user makes a choice
+            selected: null, // set when the user makes a choice
         };
+    }
+
+    // flow:disable
+    get selected(): string {
+        return this.state.selected || storage.getItem(this.props.name)
     }
 
     // flow:disable
@@ -229,7 +234,7 @@ class BaseQuestion extends React.Component {
     }
 
     onNextStep(): void {
-        storage.setItem(this.props.name, this.state.selected || "(skipped)");
+        storage.setItem(this.props.name, this.selected || "(skipped)");
     }
 
     onAnswerTouchTap(answer: string, ...rest: any): void {
@@ -238,8 +243,7 @@ class BaseQuestion extends React.Component {
     }
 
     render(): ReactElement {
-        let selected =
-            this.state.selected || storage.getItem(this.props.name);
+        const selected = this.selected;
 
         return (
             <div>
