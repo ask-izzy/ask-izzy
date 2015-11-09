@@ -8,10 +8,13 @@ import iss from "../iss";
 import BaseResultsPage from "./BaseResultsPage";
 import Maps from "../maps";
 import components from "../components";
+import storage from "../storage";
 
 class ResultsMapPage extends BaseResultsPage {
     componentDidMount(): void {
         super.componentDidMount();
+
+        this.setState({coords: storage.getJSON("coordinates")});
 
         /* request the Google Maps API */
         Maps().then((maps) => {
@@ -168,6 +171,20 @@ class ResultsMapPage extends BaseResultsPage {
                 defaultZoom={4}
                 onClick={this.onMapClick.bind(this)}
             >
+                {this.state.coords ?
+                <Marker
+                    title="You are here"
+                    icon={{
+                        url: "/static/images/you-are-here.png",
+                        scaledSize: {width: 32, height: 32},
+                    }}
+                    position={{
+                        lat: this.state.coords.latitude,
+                        lng: this.state.coords.longitude,
+                    }}
+                />
+                : ""
+                }
                 {this.sites.map((objects, index) =>
                     /* the site must have a public location */
                     objects[0].location.point ?

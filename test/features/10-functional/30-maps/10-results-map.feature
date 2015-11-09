@@ -23,8 +23,8 @@ Feature: See results on a map
 
     Scenario: View results on a map
         When I visit /category/housing
-
-        Given I'm watching map events
+       Given my location is 37.822S 144.99E
+          And I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
         When I click on "View on a map"
         Then I should see a map
@@ -33,6 +33,7 @@ Feature: See results on a map
         ------------------------------------------
         Title              | Latitude | Longitude
         ==========================================
+        You are here       | -37.8220 | 144.990
         My Housing Service | -37.8228 | 144.998
         Youth Support Net  | -37.8237 | 144.985
         ------------------------------------------
