@@ -1,5 +1,6 @@
 .HeaderBar {
-    /* FIXME check these */
+    @include clearfix;
+
     padding-right: 20px;
     padding-left: 20px;
 
