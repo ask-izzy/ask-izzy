@@ -9,13 +9,8 @@
     transition: none;
 }
 
-.LogotypeIcon path {
-    width: auto;
-    height: auto;
-}
-
 .ColoredIcon {
-    &.icon-fg-color path {
+    &.icon-fg-color g path {
         fill: $icon-fg-color;
     }
 

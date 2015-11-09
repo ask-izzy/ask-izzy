@@ -37,6 +37,7 @@
     "serialize-javascript": "1.1.2",
     "sessionstorage": "0.0.1",
     "style-loader": "0.12.4",
+    "svg-inline-loader": "0.3.0",
     "underscore": "1.8.3",
     "underscore.string": "3.2.2"
   },

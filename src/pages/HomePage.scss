@@ -19,14 +19,10 @@
             padding: 0;
 
             /* Ask */
-            path {
+            g > g > path {
                 fill: $white;
             }
 
-            /* Izzy */
-            path + path {
-                fill: $brand-pane-alt-light;
-            }
         }
 
         .branding-copy {
