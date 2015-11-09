@@ -33,7 +33,7 @@ Feature: See results on a map
         ------------------------------------------
         Title              | Latitude | Longitude
         ==========================================
-        You are here       | -37.8220  | 144.990
+        You are here       | -37.8220 | 144.990
         My Housing Service | -37.8228 | 144.998
         Youth Support Net  | -37.8237 | 144.985
         ------------------------------------------
