@@ -13,10 +13,6 @@
 
         padding: 6px;
 
-        border: 1px solid;
-        border-radius: 3px;
-        border-color: $brand-pane-alt-dark;
-
         color: $brand-pane-alt-dark;
         font-size: 18px;
 
@@ -32,17 +28,6 @@
 
             .value {
                 white-space: nowrap;
-            }
-        }
-
-        &:hover,
-        &:focus {
-            background-color: $brand-pane-alt-dark;
-
-            color: $white;
-
-            .Icon {
-                fill: $white;
             }
         }
 
