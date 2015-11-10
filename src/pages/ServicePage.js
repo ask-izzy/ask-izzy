@@ -7,6 +7,7 @@ import reactMixin from "react-mixin";
 
 import iss from "../iss";
 import components from "../components";
+import icons from "../icons";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 class ServicePage extends React.Component {
@@ -59,6 +60,11 @@ class ServicePage extends React.Component {
                     <components.AppBar
                         title={object.site.name}
                         onBackTouchTap={history.goBack.bind(history)}
+                        onForwardTouchTap={
+                            (typeof window != "undefined") && window.print
+                        }
+                        forwardMessage="Print"
+                        forwardIcon={icons.Print}
                     />
                     <ServicePane service={object}/>
                 </div>
