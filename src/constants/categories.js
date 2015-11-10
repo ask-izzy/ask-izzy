@@ -131,7 +131,7 @@ const categories:Array<Category> = [
     new Category({
         name: "Support & counselling",
         byline: "Someone to help",
-        icon: icons.Mental,
+        icon: icons.Support,
         search: {
             q: "mental health",
         },
