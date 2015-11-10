@@ -23,6 +23,6 @@ export default class HousingSubcategories extends BaseMultiQuestion {
 
     static showQuestion() {
         /* only show this question if the user has someone to sleep tonight */
-        return (SleepTonight.answer == "Yes");
+        return (SleepTonight.answer != "No");
     }
 }

@@ -81,7 +81,12 @@ ReactDOM.render(
     document.getElementById("root")
 )
 
-const debugEvent = new Event("debug");
+// Can't use 'new Event' in IE
+const debugEvent = document.createEvent("CustomEvent");
+
+if (typeof debugEvent.initCustomEvent == "function") {
+    debugEvent.initCustomEvent("debug", false, false, undefined);
+}
 
 window.pi = function() {
     window.debugQueries = true;
