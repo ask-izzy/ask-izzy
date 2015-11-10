@@ -18,7 +18,7 @@ export default class EverydayThingsSubcategories extends BaseMultiQuestion {
             "Laundry": append("laundry facilities washing drying"),
             "Household goods": append("household goods"),
             "Storage lockers": append("storage lockers"),
-            "Mail": append("mail"),
+            "Mail": append("mail service"),
             "Help with pets": append("pets"),
         },
     };
