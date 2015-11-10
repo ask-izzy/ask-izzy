@@ -59,6 +59,14 @@ class BaseMultiQuestion extends BaseQuestion {
         return search;
     }
 
+    iconFor(answer: string): ?ReactElement {
+        if (this.props.icons && this.props.icons[answer]) {
+            const Icon = this.props.icons[answer];
+
+            return <Icon />
+        }
+    }
+
     onAnswerTouchTap(answer: string, enabled: boolean): void {
         let answers = this.selected;
 
@@ -93,7 +101,10 @@ class BaseMultiQuestion extends BaseQuestion {
                     {this.answers.map((answer, index) =>
                         <components.InputListItem
                             key={index}
-                            primaryText={answer}
+                            primaryText={<span>
+                                {this.iconFor(answer)}
+                                {answer}
+                            </span>}
 
                             type="checkbox"
                             checked={selected.has(answer)}

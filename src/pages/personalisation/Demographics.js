@@ -2,6 +2,7 @@
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
 import { append } from "./BaseQuestion";
+import icons from "../../icons";
 
 export default class Demographics extends BaseMultiQuestion {
     static defaultProps = {
@@ -9,7 +10,8 @@ export default class Demographics extends BaseMultiQuestion {
         question: "Do any of these apply to you?",
         answers: {
             /* eslint-disable max-len */
-            "Aboriginal or Torres Strait Islander": append("indigenous"),
+            "Aboriginal": append("indigenous"),
+            "Torres Strait Islander": append("indigenous"),
             "LGBTIQ": append("sexuality"),
             "Asylum seeker": append("refugee"),
             "Have a disability": append("disability"),
@@ -17,6 +19,16 @@ export default class Demographics extends BaseMultiQuestion {
             "Have pets": append("pets"),
             "On parole or recently released from prison": append("post-release"),
             "No": append(""),
+        },
+        icons: {
+            "Aboriginal": icons.DemographicAboriginal,
+            "Torres Strait Islander": icons.DemographicTorresStrait,
+            "LGBTIQ": icons.DemographicLgbtiq,
+            "Asylum seeker": icons.DemographicRecentlyArrived,
+            "Have a disability": icons.DemographicDisability,
+            "Have children": icons.DemographicChildren,
+            "Have pets": icons.DemographicPets,
+            "On parole or recently released from prison": icons.DemographicParole,
         },
     };
 

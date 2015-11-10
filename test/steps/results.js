@@ -39,7 +39,7 @@ async function seeTheResults(table: Array<Object>): Promise<void> {
             ).map(getText)
         );
 
-        // replace single hyphen with an empty string (to represent
+        // replace '(nada)' with an empty string (to represent
         // an empty line)
         expected = expected.map(text => text == "(nada)" ? "" : text);
 

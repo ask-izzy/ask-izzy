@@ -43,7 +43,7 @@ export default class InputListItem extends React.Component {
             >
                 <div>
                     <div className="leftIcon">
-                        {this.props.checked ? checkedIcon
+                        {rest.checked ? checkedIcon
                         : uncheckedIcon}
                         <input {...rest} />
                     </div>
