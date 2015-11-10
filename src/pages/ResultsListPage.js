@@ -16,6 +16,11 @@ class ResultsListPage extends BaseResultsPage {
                 <components.AppBar
                     title={this.title}
                     onBackTouchTap={history.goBack.bind(history)}
+                    onForwardTouchTap={
+                        (typeof window != "undefined") && window.print
+                    }
+                    forwardMessage="Print"
+                    forwardIcon={icons.Print}
                 />
 
                 <components.HeaderBar
