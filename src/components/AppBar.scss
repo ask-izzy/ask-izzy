@@ -82,3 +82,13 @@
         }
     }
 }
+
+@media print {
+    .AppBar + * {
+        padding-top: 0;
+    }
+
+    .AppBar {
+        display: none;
+    }
+}

@@ -3,42 +3,6 @@
         text-align: center;
     }
 
-    .branding-container {
-        background-color: $brand-bg-dark;
-        color: $white;
-        text-align: center;
-
-        .logo {
-            width: auto;
-            padding-top: 20px;
-        }
-
-        .LogotypeIcon {
-            width: auto;
-            height: 90px;
-            padding: 0;
-
-            /* Ask */
-            g > g > path {
-                fill: $white;
-            }
-
-        }
-
-        .branding-copy {
-            width: 80%;
-            margin: auto;
-
-            padding: 0;
-            padding-top: 10px;
-            padding-bottom: 20px;
-
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 1.4;
-        }
-    }
-
     .search {
         position: relative;
         width: 100%;

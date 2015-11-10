@@ -23,13 +23,22 @@
         padding: 0;
     }
 
-    .ViewOnMapButton {
+    .ViewOnMapButton,
+    .PrintContext {
         background-color: $brand-bg-light;
         color: $brand-text-mid;
+
+        .left-icon {
+            margin-left: 16px;
+        }
 
         .primaryText {
             font-size: 18px;
             line-height: 18px;
+        }
+
+        .title {
+            font-weight: bold;
         }
 
         .rightIcon {
