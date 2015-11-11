@@ -26,6 +26,17 @@ export async function seleniumBrowser(
 }
 
 /**
+ * Gets the base URL for this session
+ *
+ * @return {string} - Root url for the application under test.
+ */
+export function baseUrl(): string {
+    const port = process.env.PORT || 8000;
+
+    return `http://localhost:${port}`;
+}
+
+/**
  * Visit the given URL on the running Express server.
  *
  * @param {Webdriver.Webdriver} driver - Selenium webdriver.
@@ -34,9 +45,7 @@ export async function seleniumBrowser(
  * @return {Promise} - return value from Selenium Webdriver.get.
  */
 export function gotoUrl(driver: Webdriver.WebDriver, url: string): Promise {
-    const port = process.env.PORT || 8000;
-
-    return driver.get(`http://localhost:${port}${url}`);
+    return driver.get(baseUrl() + url);
 }
 
 /**

@@ -19,7 +19,7 @@ import {
     elementWithChildText,
     escapeXPathString,
 } from "../support/selectors";
-import { gotoUrl } from "../support/webdriver";
+import { gotoUrl, baseUrl } from "../support/webdriver";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
@@ -124,19 +124,17 @@ async function urlIs(
 }
 
 async function checkURL(expected: string): Promise<void> {
+    if (expected.startsWith("/")) {
+        expected = baseUrl() + expected;
+    }
+
     await this.driver.wait(
         urlIs(this.driver, expected),
         10000,
         `URL should be #{expected}`,
     );
 
-    let url = await this.driver.getCurrentUrl();
-
-    if (expected.startsWith("/")) {
-        url = Url.parse(url).path
-    }
-
-    assert.equal(url, expected);
+    assert.equal(await this.driver.getCurrentUrl(), expected);
 }
 
 async function thenISee(expected: string): Promise<void> {

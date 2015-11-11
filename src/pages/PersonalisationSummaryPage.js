@@ -19,7 +19,11 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
 
     clearAll(): void {
         storage.clear();
-        this.forceUpdate();
+        this.props.history.pushState(
+            null,
+            "/",
+            {}
+        );
     }
 
     render(): ReactElement {
