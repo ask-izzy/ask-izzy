@@ -5,6 +5,7 @@ import { History } from "react-router";
 import reactMixin from "react-mixin";
 
 import HeaderBar from "../components/HeaderBar";
+import BrandedHeader from "../components/BrandedHeader";
 import NavBar from "../components/NavBar";
 import icons from "../icons";
 
@@ -32,18 +33,7 @@ class HomePage extends React.Component {
         return (
             <div className="HomePage">
                 <div className="header">
-                    <div className="branding-container">
-                        <div className="logo">
-                            <icons.Logotype
-                                role="img"
-                                aria-label="Ask Izzy"
-                            />
-                        </div>
-
-                        <p className="branding-copy">
-                            The A to Z directory of homeless help information
-                        </p>
-                    </div>
+                    <BrandedHeader />
                     <HeaderBar
                         primaryText="What do you need?"
                         secondaryText="Select a category or search"

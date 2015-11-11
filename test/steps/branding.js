@@ -39,7 +39,7 @@ module.exports = (function() {
 
 async function seeTheBrandingHeader(): Promise<void> {
     const container = within(
-        "//*[@class='branding-container']"
+        "//*[@class='BrandedHeader']"
     );
 
     await assert.svgIsVisible(this.driver, "Ask Izzy", container);

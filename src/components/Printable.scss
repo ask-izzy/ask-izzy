@@ -1,0 +1,22 @@
+.Printable {
+    .PrintOnly {
+        display: none;
+    }
+
+    .ScreenOnly {
+        display: block;
+    }
+}
+
+@media print {
+    .Printable {
+        .PrintOnly {
+            display: block;
+        }
+
+        .ScreenOnly {
+            display: none;
+        }
+    }
+
+}

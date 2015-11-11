@@ -36,7 +36,7 @@ async function seeTheResults(table: Array<Object>): Promise<void> {
         let expected = _.pluck(table, key);
         let actual = await Promise.all(
             (
-                await this.driver.findElements(By.css(`.${class_}`))
+                await this.driver.findElements(By.css(`.ScreenOnly .${class_}`))
             ).map(getText)
         );
 

@@ -14,11 +14,13 @@
     }
 }
 
-.CrisisHeader {
-    margin-right: 16px;
-    margin-bottom: -6px;
-    margin-left: 16px;
+@media screen {
+    .CrisisHeader {
+        margin-right: 16px;
+        margin-bottom: -6px;
+        margin-left: 16px;
 
-    font-size: 18px;
-    font-weight: 500;
+        font-size: 18px;
+        font-weight: 500;
+    }
 }

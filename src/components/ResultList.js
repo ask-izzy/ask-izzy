@@ -15,17 +15,27 @@ class ResultsList extends React.Component {
     }
 
     renderResult(object: Object, index: number): ReactElement {
-        const elem = object.staticText ?
-            React.cloneElement(object.node)
-        : object.crisis ?
-            <components.CrisisLineItem
-                object={object}
-            />
-        : <components.ResultListItem
-            object={object}
-          />;
+        let elem: ?ReactElement;
+        let klass = "other";
 
-        const klass = elem.type.displayName || "other";
+        if (object.staticText) {
+            elem = React.cloneElement(object.node);
+        } else if (object.crisis) {
+            elem = (
+                <components.CrisisLineItem
+                    object={object}
+                />
+            );
+            klass = "CrisisLineItem";
+        } else {
+            elem = (
+                <components.Printable
+                    print={<components.ServicePane service={object} />}
+                    screen={<components.ResultListItem object={object} />}
+                />
+            );
+            klass = "ResultListItem";
+        }
 
         return (
             <div

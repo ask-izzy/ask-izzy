@@ -1,0 +1,61 @@
+.BrandedHeader {
+    background-color: $brand-bg-dark;
+    @media print {
+        background-color: $white; // don't waste ink
+    }
+
+    color: $white;
+    text-align: center;
+    @media print {
+        text-align: left;
+    }
+
+    .logo {
+        width: auto;
+        @media print {
+            display: inline-block;
+            width: 15%;
+            margin: 20px;
+            margin-top: 0;
+        }
+        padding-top: 20px;
+
+        .LogotypeIcon {
+            width: auto;
+            height: 90px;
+            padding: 0;
+
+            /* Ask */
+            g > g > path {
+                fill: $white;
+            }
+
+            @media print {
+                path,
+                g > g > path {
+                    fill: $black;
+                }
+            }
+        }
+    }
+
+    .branding-copy {
+        width: 80%;
+        margin: auto;
+
+        @media print {
+            display: inline-block;
+            width: initial;
+            margin: 0;
+            color: $black;
+        }
+
+        padding: 0;
+        padding-top: 10px;
+        padding-bottom: 20px;
+
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.4;
+    }
+}
