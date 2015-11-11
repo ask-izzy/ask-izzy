@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import classnames from "classnames";
+import ListItem from "./ListItem";
 
 export default class InputListItem extends React.Component {
     static propTypes = {
@@ -9,53 +9,37 @@ export default class InputListItem extends React.Component {
         checked: React.PropTypes.bool,
         value: React.PropTypes.string,
 
-        primaryText: React.PropTypes.node.isRequired,
-        secondaryText: React.PropTypes.node,
-
         checkedIcon: React.PropTypes.node,
         uncheckedIcon: React.PropTypes.node,
-    };
-
-    static defaultProps = {
-        className: "",
+        ...ListItem.propTypes,
     };
 
     static sampleProps = {
         default: {
-            primaryText: "Primary Text",
-            secondaryText: "Secondary Text",
             type: "radio",
+            ...ListItem.sampleProps,
         },
     };
 
     render(): ReactElement {
         let {
-            className,
-            primaryText,
-            secondaryText,
             checkedIcon,
             uncheckedIcon,
+            primaryText,
+            secondaryText,
             ...rest,
         } = this.props;
 
         return (
-            <label
-                className={classnames("ListItem", "has-left-icon", className)}
-            >
-                <div>
-                    <div className="leftIcon">
-                        {rest.checked ? checkedIcon
-                        : uncheckedIcon}
-                        <input {...rest} />
-                    </div>
-                    <div className="primaryText">
-                        {primaryText}
-                    </div>
-                    <div className="secondaryText">
-                        {secondaryText}
-                    </div>
-                </div>
-            </label>
-        )
+            <ListItem
+                rootElement="label"
+                {...{primaryText, secondaryText}}
+                leftIcon={[
+                    rest.checked ? checkedIcon : uncheckedIcon,
+                    <input {...rest} />,
+                ]}
+            />
+        );
+
     }
 }
