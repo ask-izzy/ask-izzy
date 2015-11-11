@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconRadioSelected extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `RadioSelectedIcon Icon SvgIcon ${className || ""}`;
+        const classes = `RadioSelectedIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

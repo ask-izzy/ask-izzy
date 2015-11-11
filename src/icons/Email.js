@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconEmail extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `EmailIcon Icon SvgIcon ${className || ""}`;
+        const classes = `EmailIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

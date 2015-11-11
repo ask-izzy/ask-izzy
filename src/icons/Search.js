@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconSearch extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `SearchIcon Icon SvgIcon ${className || ""}`;
+        const classes = `SearchIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

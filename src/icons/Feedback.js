@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconFeedback extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `FeedbackIcon Icon SvgIcon ${className || ""}`;
+        const classes = `FeedbackIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconCross extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `CrossIcon Icon SvgIcon ${className || ""}`;
+        const classes = `CrossIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconCheckboxSelected extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `CheckboxSelectedIcon Icon SvgIcon ${className || ""}`;
+        const classes = `CheckboxSelectedIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

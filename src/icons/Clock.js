@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconClock extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `ClockIcon Icon SvgIcon ${className || ""}`;
+        const classes = `ClockIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

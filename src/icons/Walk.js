@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconWalk extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `WalkIcon Icon SvgIcon ${className || ""}`;
+        const classes = `WalkIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

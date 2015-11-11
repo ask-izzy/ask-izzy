@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconPrint extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `PrintIcon Icon SvgIcon ${className || ""}`;
+        const classes = `PrintIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

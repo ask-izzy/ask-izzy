@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconLocation extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `LocationIcon Icon SvgIcon ${className || ""}`;
+        const classes = `LocationIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

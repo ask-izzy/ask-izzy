@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconTram extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `TramIcon Icon SvgIcon ${className || ""}`;
+        const classes = `TramIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

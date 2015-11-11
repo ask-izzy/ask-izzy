@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconMap extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `MapIcon Icon SvgIcon ${className || ""}`;
+        const classes = `MapIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

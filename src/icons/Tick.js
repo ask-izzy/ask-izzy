@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconTick extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `TickIcon Icon SvgIcon ${className || ""}`;
+        const classes = `TickIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

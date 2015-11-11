@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconDemographicDisability extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `DemographicDisabilityIcon Icon SvgIcon ${className || ""}`;
+        const classes = `DemographicDisabilityIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span

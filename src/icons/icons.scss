@@ -10,11 +10,12 @@
 }
 
 .ColoredIcon {
-    &.icon-fg-color g path {
+
+    &.allow-override-color.icon-fg-color g path {
         fill: $icon-fg-color;
     }
 
-    &.brand-bg-dark path {
+    &.allow-override-color.brand-bg-dark path {
         fill: $brand-bg-dark;
     }
 

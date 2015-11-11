@@ -8,7 +8,7 @@ import React from "react";
 export default class SvgIconHealth extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `HealthIcon Icon SvgIcon ${className || ""}`;
+        const classes = `HealthIcon allow-override-color Icon SvgIcon ${className || ""}`;
 
         return (
             <span
