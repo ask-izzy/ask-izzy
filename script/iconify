@@ -62,11 +62,18 @@ files.forEach((path) => {
     writeFileSync(outFile, `${fileHeader}
 
 import React from "react";
+import classnames from "classnames";
 
 export default class SvgIcon${className} extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = \`${className}Icon ${allowColoring} Icon SvgIcon \${className || ""}\`;
+        const classes = classnames(
+            \`${className}Icon\`,
+            "${allowColoring}",
+            "Icon",
+            "SvgIcon",
+            className
+        );
 
         return (
             <span
