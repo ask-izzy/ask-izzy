@@ -10,6 +10,7 @@ import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
 import { documentReady } from "./browser";
 import { matchClass, escapeXPathString } from "../support/selectors";
+import asyncFilter from "../support/async-filter";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
@@ -45,7 +46,6 @@ async function seeTheResults(table: Array<Object>): Promise<void> {
 
         assert.deepEqual(actual, expected,
                          `${key} is not correct`);
-
     }
 }
 
@@ -111,15 +111,11 @@ async function assertNoSuchResults(table: Array<Object>): Promise<void> {
         );
     }
 
-    let elementsHtml = [];
-
     // Limit to visible elements on the screen
-    // FIXME: how can I use await functionally
-    for (let element of elements) {
-        if (await element.isDisplayed()) {
-            elementsHtml.push(await element.getText());
-        }
-    }
+    let elementsHtml = await asyncFilter(
+        elements,
+        (element) => element.isDisplayed(),
+    );
 
     assert.deepEqual(elementsHtml, []);
 }
