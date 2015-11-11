@@ -4,11 +4,18 @@
 
 
 import React from "react";
+import classnames from "classnames";
 
 export default class SvgIconHealth extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `HealthIcon Icon SvgIcon ${className || ""}`;
+        const classes = classnames(
+            `HealthIcon`,
+            "allow-override-color",
+            "Icon",
+            "SvgIcon",
+            className
+        );
 
         return (
             <span

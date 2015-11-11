@@ -63,7 +63,11 @@ class BaseMultiQuestion extends BaseQuestion {
         if (this.props.icons && this.props.icons[answer]) {
             const Icon = this.props.icons[answer];
 
-            return <Icon />
+            return (
+                <Icon
+                    className="ColoredIcon size-30 icon-fg-color"
+                />
+            );
         }
     }
 
@@ -101,10 +105,8 @@ class BaseMultiQuestion extends BaseQuestion {
                     {this.answers.map((answer, index) =>
                         <components.InputListItem
                             key={index}
-                            primaryText={<span>
-                                {this.iconFor(answer)}
-                                {answer}
-                            </span>}
+                            leftIcon={this.iconFor(answer)}
+                            primaryText={answer}
 
                             type="checkbox"
                             checked={selected.has(answer)}

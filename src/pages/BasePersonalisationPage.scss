@@ -61,9 +61,17 @@
             padding-bottom: 10px;
         }
 
-        .Icon {
+        .CheckboxSelectedIcon,
+        .CheckboxUnselectedIcon,
+        .RadioSelectedIcon,
+        .RadioUnselectedIcon {
             width: 48px;
             height: 48px;
+
+            path {
+                fill: $icon-chevron-color;
+                stroke: $icon-chevron-color;
+            }
         }
 
         .CrossIcon {

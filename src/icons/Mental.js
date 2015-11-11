@@ -4,11 +4,18 @@
 
 
 import React from "react";
+import classnames from "classnames";
 
 export default class SvgIconMental extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
-        const classes = `MentalIcon Icon SvgIcon ${className || ""}`;
+        const classes = classnames(
+            `MentalIcon`,
+            "allow-override-color",
+            "Icon",
+            "SvgIcon",
+            className
+        );
 
         return (
             <span
