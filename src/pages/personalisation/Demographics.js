@@ -17,7 +17,10 @@ export default class Demographics extends BaseMultiQuestion {
             "Have a disability": append("disability"),
             "Have children": append("family"),
             "Have pets": append("pets"),
-            "On parole or recently released from prison": append("post-release"),
+            "On parole or recently released": append("post-release"),
+            "Veteran": append("veteran"),
+            "Escaping family violence": append("family violence"),
+            "Need an interpreter": append("interpreter"),
             "No": append(""),
         },
         icons: {

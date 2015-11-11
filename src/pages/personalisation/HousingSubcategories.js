@@ -15,9 +15,6 @@ export default class HousingSubcategories extends BaseMultiQuestion {
             "Private rental": append(""),
             "Public housing": append(""),
             "Mortgaged housing": append(""),
-            "Veteran": append("veteran"),
-            "Escaping family violence": append("family violence"),
-            "Need an interpreter": append(""),
         },
     };
 
