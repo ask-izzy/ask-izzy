@@ -27,14 +27,15 @@ export default class InputListItem extends React.Component {
             uncheckedIcon,
             primaryText,
             secondaryText,
+            leftIcon,
             ...rest,
         } = this.props;
 
         return (
             <ListItem
                 rootElement="label"
-                {...{primaryText, secondaryText}}
-                leftIcon={[
+                {...{primaryText, secondaryText, leftIcon}}
+                rightIcon={[
                     rest.checked ? checkedIcon : uncheckedIcon,
                     <input {...rest} />,
                 ]}

@@ -66,9 +66,18 @@
             position: absolute;
 
             top: 12px;
-            right: 4px;
+            right: 26px;
 
             height: 44px;
+
+            input {
+                position: absolute;
+
+                top: 16px;
+                left: 16px;
+
+                z-index: -99;
+            }
         }
     }
 }
