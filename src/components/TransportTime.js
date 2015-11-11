@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import classnames from "classnames";
 import { titleize } from "underscore.string";
 
 import fixtures from "../../fixtures/services";
@@ -39,11 +40,6 @@ class TransportTime extends React.Component {
         this.state = {time: {}};
     }
 
-    // flow:disable not supported yet
-    get compactClass(): string {
-        return this.props.compact ? "compact" : "";
-    }
-
     render(): ReactElement {
         if (this.props.location.isConfidential()) {
             return this.renderConfidential()
@@ -57,7 +53,10 @@ class TransportTime extends React.Component {
          * transport time*/
         return (
             <div
-                className={`TransportTime ${this.compactClass}`}
+                className={classnames(
+                    "TransportTime",
+                    {compact: this.props.compact}
+                )}
             >
                 <icons.Phone className="ColoredIcon brand-text-dark" />
                 <span className="travel-time">
@@ -73,7 +72,10 @@ class TransportTime extends React.Component {
 
         return (
             <div
-                className={`TransportTime ${this.compactClass}`}
+                className={classnames(
+                    "TransportTime",
+                    {compact: this.props.compact}
+                )}
             >
                 {travelTime.mode === "TRANSIT" ?
                 <icons.Tram className="ColoredIcon" />

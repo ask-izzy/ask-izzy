@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import classnames from "classnames";
 
 export default class TextInputListItem extends React.Component {
     static propTypes = {
@@ -33,7 +34,11 @@ export default class TextInputListItem extends React.Component {
 
         return (
             <label
-                className={`ListItem TextInputListItem ${className}`}
+                className={classnames(
+                    "ListItem",
+                    "TextInputListItem",
+                    className
+                )}
             >
                 <div>
                     <input

@@ -2,6 +2,7 @@
 import React from "react";
 import fixtures from "../../fixtures/services";
 import Location from "../iss/Location";
+import classnames from "classnames";
 
 class GoogleMapsLink extends React.Component {
 
@@ -31,22 +32,16 @@ class GoogleMapsLink extends React.Component {
     }
 
     render(): ReactElement {
-        let {
+        const {
             className,
             children,
             ...rest,
         } = this.props;
 
-        if (className) {
-            className = `GoogleMapsLink ${className}`;
-        } else {
-            className = "GoogleMapsLink";
-        }
-
         if (this.props.to.isConfidential()) {
             return (
                 <span
-                    className={className}
+                    className={classnames("GoogleMapsLink", className)}
                     {...rest}
                 >
                     {children}
@@ -56,7 +51,7 @@ class GoogleMapsLink extends React.Component {
 
         return (
             <a
-                className={className}
+                className={classnames("GoogleMapsLink", className)}
                 target="_blank"
                 aria-label="Open Google Maps in a new tab"
                 href={this.googleMapsUrl()}

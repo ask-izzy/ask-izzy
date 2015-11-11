@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import classnames from "classnames";
 
 export default class FlatButton extends React.Component {
     static propTypes = {
@@ -25,7 +26,7 @@ export default class FlatButton extends React.Component {
 
         return (
             <button
-                className={`FlatButton ${className}`}
+                className={classnames("FlatButton", className)}
                 {...rest}
             >
                 {label}

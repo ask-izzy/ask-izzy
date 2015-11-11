@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import classnames from "classnames";
 
 export default class InputListItem extends React.Component {
     static propTypes = {
@@ -39,7 +40,7 @@ export default class InputListItem extends React.Component {
 
         return (
             <label
-                className={`ListItem has-left-icon ${className}`}
+                className={classnames("ListItem", "has-left-icon", className)}
             >
                 <div>
                     <div className="leftIcon">

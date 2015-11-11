@@ -1,5 +1,6 @@
 /* @flow */
 import React from "react";
+import classnames from "classnames";
 
 class Collapser extends React.Component {
 
@@ -32,14 +33,6 @@ class Collapser extends React.Component {
         },
     };
 
-    hiddenClass(): string {
-        if (this.state.collapsed) {
-            return "collapsed";
-        }
-
-        return "";
-    }
-
     onClick(event: SyntheticInputEvent): void {
         if (this.state.collapsed) {
             event.preventDefault();
@@ -59,7 +52,7 @@ class Collapser extends React.Component {
     render(): ReactElement {
         return (
             <div
-                className={`Collapser ${this.props.className || ""}`}
+                className={classnames("Collapser", this.props.className)}
                 onClick={this.onClick.bind(this)}
             >
                 <a
@@ -69,7 +62,7 @@ class Collapser extends React.Component {
                     onClick={this.onMessageClick.bind(this)}
                 >{this.props.message}</a>
                 <div
-                    className={this.hiddenClass()}
+                    className={classnames({collapsed: this.state.collapsed})}
                 >
                     {this.props.children}
                 </div>
