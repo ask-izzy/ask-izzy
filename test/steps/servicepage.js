@@ -3,11 +3,11 @@
 
 import assert from "assert";
 import Yadda from "yadda";
-import _ from "underscore";
 import { By } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
+import asyncFilter from "../support/async-filter";
 
 module.exports = (function() {
 
@@ -41,16 +41,6 @@ async function checkTransportTime(time: string): Promise<void> {
 
     assert(text.indexOf(time) !== -1,
            `Expected '${text}' to include '${time}'`);
-}
-
-async function asyncFilter(arr, check) {
-    let results = arr.map(check);
-
-    results = await Promise.all(results);
-
-    return _.zip(results, arr)
-        .filter(elem => elem[0])
-        .map(elem => elem[1]);
 }
 
 async function checkPhoneNumbers(lines: Array<string>): Promise<void> {
