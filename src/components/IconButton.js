@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import classnames from "classnames";
 
 export default class IconButton extends React.Component {
     static propTypes = {
@@ -23,7 +24,7 @@ export default class IconButton extends React.Component {
 
         return (
             <button
-                className={`IconButton ${className}`}
+                className={classnames("IconButton", className)}
                 onTouchTap={onTouchTap}
                 {...rest}
             >

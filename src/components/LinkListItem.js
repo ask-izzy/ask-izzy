@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Link } from "react-router";
+import classnames from "classnames";
 
 export default class LinkListItem extends React.Component {
     static propTypes = {
@@ -26,26 +27,21 @@ export default class LinkListItem extends React.Component {
 
     render(): ReactElement {
 
-        let {
+        const {
             className,
             leftIcon,
             rightIcon,
             ...rest,
         } = this.props;
-
-        let classes = [
+        const classes = classnames(
             "ListItem",
             "plain-text",
             className,
-        ];
-
-        if (leftIcon) {
-            classes.push("has-left-icon");
-        }
-
-        if (rightIcon) {
-            classes.push("has-right-icon");
-        }
+            {
+                "has-right-icon": rightIcon,
+                "has-left-icon": leftIcon,
+            }
+        )
 
         if (this.props.href) {
             // FIXME: react-router's <Link> can't handle the
@@ -54,7 +50,7 @@ export default class LinkListItem extends React.Component {
             // to get an <a> instead of a <Link>
             return (
                 <a
-                    className={classes.join(" ")}
+                    className={classes}
                     {...rest}
                 >
                     {this.renderContent()}
@@ -63,7 +59,7 @@ export default class LinkListItem extends React.Component {
         } else {
             return (
                 <Link
-                    className={classes.join(" ")}
+                    className={classes}
                     {...rest}
                 >
                     {this.renderContent()}

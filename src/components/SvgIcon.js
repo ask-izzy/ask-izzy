@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import classnames from "classnames";
 
 class SvgIcon extends React.Component {
 
@@ -21,7 +22,7 @@ class SvgIcon extends React.Component {
 
         return (
             <svg
-                className={`SvgIcon ${className || ""}`}
+                className={classnames("SvgIcon", className)}
                 viewBox={viewBox}
                 {...other}
             >

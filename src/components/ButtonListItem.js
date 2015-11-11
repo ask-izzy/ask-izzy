@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import classnames from "classnames";
 
 export default class ButtonListItem extends React.Component {
     static propTypes = {
@@ -32,24 +33,18 @@ export default class ButtonListItem extends React.Component {
             ...rest,
         } = this.props;
 
-        let classes = [
-            "ListItem",
-            className,
-        ];
-
-        if (leftIcon) {
-            classes.push("has-left-icon");
-        }
-
-        if (rightIcon) {
-            classes.push("has-right-icon");
-        }
-
         return (
             <a
                 aria-role="button"
                 tabIndex="0"
-                className={classes.join(" ")}
+                className={classnames(
+                    "ListItem",
+                    className,
+                    {
+                        "has-right-icon": rightIcon,
+                        "has-left-icon": leftIcon,
+                    }
+                )}
                 {...rest}
             >
                 <div>
