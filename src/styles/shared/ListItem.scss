@@ -1,9 +1,15 @@
 .ListItem {
-
     display: block;
     position: relative;
-
+    border-bottom: 1px solid $list-item-hairline;
     cursor: pointer;
+
+    &.taller {
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        font-size: 18px;
+    }
 
     &.has-left-icon > div {
         padding-left: 50px;

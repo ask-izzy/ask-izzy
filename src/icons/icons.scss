@@ -9,19 +9,25 @@
     transition: none;
 }
 
-.ColoredIcon {
-
-    &.allow-override-color.icon-fg-color g path {
+svg.ColoredIcon {
+    &.allow-override-color.icon-fg-color path {
         fill: $icon-fg-color;
     }
 
     &.allow-override-color.brand-bg-dark path {
         fill: $brand-bg-dark;
     }
+}
 
-    &.size-30 {
+svg.Icon {
+    &.small {
         width: 30px;
         height: 30px;
+    }
+
+    &.big {
+        width: 48px;
+        height: 48px;
     }
 }
 
@@ -51,6 +57,16 @@
     path {
         fill: $brand-text-dark;
     }
+}
+
+.CrossIcon {
+    top: -6px;
+}
+
+.LoadingIcon,
+.RadioUnselectedIcon,
+.RadioSelectedIcon {
+    top: -2px;
 }
 
 .LoadingIcon {

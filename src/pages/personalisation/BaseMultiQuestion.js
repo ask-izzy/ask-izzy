@@ -65,7 +65,7 @@ class BaseMultiQuestion extends BaseQuestion {
 
             return (
                 <Icon
-                    className="ColoredIcon size-30 icon-fg-color"
+                    className="ColoredIcon small icon-fg-color"
                 />
             );
         }
@@ -110,8 +110,12 @@ class BaseMultiQuestion extends BaseQuestion {
 
                             type="checkbox"
                             checked={selected.has(answer)}
-                            checkedIcon={<icons.CheckboxSelected />}
-                            uncheckedIcon={<icons.CheckboxUnselected />}
+                            checkedIcon={
+                                <icons.CheckboxSelected className="big" />
+                            }
+                            uncheckedIcon={
+                                <icons.CheckboxUnselected className="big" />
+                            }
                             onChange={this.onAnswerTouchTap.bind(
                                 this, answer, !selected.has(answer)
                             )}

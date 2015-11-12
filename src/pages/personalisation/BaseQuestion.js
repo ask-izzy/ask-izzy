@@ -267,8 +267,12 @@ class BaseQuestion extends React.Component {
                         value={answer}
                         onChange={this.onAnswerTouchTap.bind(this, answer)}
 
-                        checkedIcon={<icons.RadioSelected />}
-                        uncheckedIcon={<icons.RadioUnselected />}
+                        checkedIcon={
+                            <icons.RadioSelected className="big" />
+                        }
+                        uncheckedIcon={
+                            <icons.RadioUnselected className="big" />
+                        }
                     />)}
                 </div>
 

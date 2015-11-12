@@ -20,6 +20,7 @@ import IconButton from "./components/IconButton";
 import Infobox from "./components/Infobox";
 import InputListItem from "./components/InputListItem";
 import LinkListItem from "./components/LinkListItem";
+import ListItem from "./components/ListItem";
 import LogoWithShadow from "./components/LogoWithShadow";
 import NavBar from "./components/NavBar";
 import OpeningTimes from "./components/OpeningTimes";
@@ -52,6 +53,7 @@ export default {
     Infobox: Infobox,
     InputListItem: InputListItem,
     LinkListItem: LinkListItem,
+    ListItem: ListItem,
     LogoWithShadow: LogoWithShadow,
     NavBar: NavBar,
     OpeningTimes: OpeningTimes,

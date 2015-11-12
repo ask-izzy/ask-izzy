@@ -35,7 +35,7 @@ class NavBar extends React.Component {
                         href={mailLink}
                         leftIcon={
                             <icons.Logo
-                                className="ColoredIcon icon-fg-color size-30"
+                                className="ColoredIcon icon-fg-color small"
                             />
                         }
                         primaryText="Ask Izzy feedback"
