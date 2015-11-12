@@ -31,9 +31,7 @@ class CategoryListItem extends React.Component {
                 }
                 rightIcon={<icons.Chevron />}
                 primaryText={this.props.category.name}
-                secondaryText={<div className="oneline">
-                    {this.props.category.byline}
-                </div>}
+                secondaryText={this.props.category.byline}
             />
         );
     }

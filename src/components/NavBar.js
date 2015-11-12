@@ -39,9 +39,7 @@ class NavBar extends React.Component {
                             />
                         }
                         primaryText="Ask Izzy feedback"
-                        secondaryText={<div className="oneline">
-                            Tell us what you think
-                        </div>}
+                        secondaryText={"Tell us what you think"}
                     />
 
                 </div>
