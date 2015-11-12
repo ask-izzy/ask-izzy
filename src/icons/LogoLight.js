@@ -10,7 +10,7 @@ export default class SvgIconLogoLight extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
         const classes = classnames(
-            `LogoLightIcon`,
+            "LogoLightIcon",
             "allow-override-color",
             "Icon",
             "SvgIcon",

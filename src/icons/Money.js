@@ -10,7 +10,7 @@ export default class SvgIconMoney extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
         const classes = classnames(
-            `MoneyIcon`,
+            "MoneyIcon",
             "allow-override-color",
             "Icon",
             "SvgIcon",

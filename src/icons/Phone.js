@@ -10,7 +10,7 @@ export default class SvgIconPhone extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
         const classes = classnames(
-            `PhoneIcon`,
+            "PhoneIcon",
             "allow-override-color",
             "Icon",
             "SvgIcon",

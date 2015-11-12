@@ -10,7 +10,7 @@ export default class SvgIconWalk extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
         const classes = classnames(
-            `WalkIcon`,
+            "WalkIcon",
             "allow-override-color",
             "Icon",
             "SvgIcon",

@@ -10,7 +10,7 @@ export default class SvgIconPrint extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
         const classes = classnames(
-            `PrintIcon`,
+            "PrintIcon",
             "allow-override-color",
             "Icon",
             "SvgIcon",

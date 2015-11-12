@@ -10,7 +10,7 @@ export default class SvgIconChevronBack extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
         const classes = classnames(
-            `ChevronBackIcon`,
+            "ChevronBackIcon",
             "allow-override-color",
             "Icon",
             "SvgIcon",
