@@ -124,10 +124,11 @@ class ResultsListPage extends React.Component {
 
     renderHeaderSuccess(): ReactElement {
         return (
-                <div>
-                    I found these services for you
-                    <components.LogoWithShadow />
-                </div>);
+            <div>
+                I found these services for you
+                <components.LogoWithShadow />
+            </div>
+        );
     }
 
     renderErrorMessage(): ReactElement {
