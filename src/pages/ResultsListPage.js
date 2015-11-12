@@ -104,12 +104,6 @@ class ResultsListPage extends React.Component {
 
                 {this.renderResults()}
 
-                {this.props.meta || this.props.error ? ""
-                : <div className="progress">
-                      <icons.Loading />
-                  </div>
-                }
-
             </div>
         );
     }
@@ -185,15 +179,7 @@ class ResultsListPage extends React.Component {
             <components.ResultList
                 results={this.results}
             />
-            {
-                this.props.meta && this.props.meta.next ?
-                    <components.ButtonListItem
-                        className="MoreResultsButton"
-                        primaryText="Load more results…"
-                        onTouchTap={this.props.loadMore}
-                    />
-                : ""
-            }
+            {this.props.loadMore}
             </div>
         );
     }

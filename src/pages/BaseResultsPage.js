@@ -9,6 +9,7 @@ import BaseCategoriesPage from "./BaseCategoriesPage";
 import ResultsListPage from "./ResultsListPage";
 import ResultsMapPage from "./ResultsMapPage";
 import components from "../components";
+import icons from "../icons";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 class BaseResultsPage extends BaseCategoriesPage {
@@ -164,10 +165,30 @@ class BaseResultsPage extends BaseCategoriesPage {
                 <Component
                     {...this.state}
                     {...this.props}
-                    loadMore={this.loadMore.bind(this)}
+                    loadMore={this.renderLoadMore()}
                 />
             </div>
         );
+    }
+
+    renderLoadMore(): ?ReactElement {
+        if (this.state.meta && this.state.meta.next) {
+            return (
+                <components.ButtonListItem
+                    className="MoreResultsButton"
+                    primaryText="Load more results…"
+                    onTouchTap={this.loadMore.bind(this)}
+                />
+            );
+        }
+
+        if (!(this.state.meta || this.state.error)) {
+            return (
+                <div className="progress">
+                    <icons.Loading />
+                </div>
+            );
+        }
     }
 
 }
