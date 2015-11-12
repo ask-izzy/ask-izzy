@@ -19,16 +19,10 @@
         padding: 16px;
 
         & > .primaryText {
-            position: relative; // allow icons to be nested in here
             color: $brand-text-dark;
 
             font-size: 16px;
             line-height: 150%;
-
-            .Icon {
-                width: 24px;
-                height: 24px;
-            }
         }
 
         & > .secondaryText {
