@@ -36,11 +36,11 @@
             overflow: hidden;
         }
 
-        & > .leftIcon {
+        & > .leftIcon,
+        & > .rightIcon {
             position: absolute;
 
             top: 12px;
-            left: 8px;
 
             height: 44px;
 
@@ -54,22 +54,12 @@
             }
         }
 
+        & > .leftIcon {
+            left: 8px;
+        }
+
         & > .rightIcon {
-            position: absolute;
-
-            top: 12px;
             right: 26px;
-
-            height: 44px;
-
-            input {
-                position: absolute;
-
-                top: 16px;
-                left: 16px;
-
-                z-index: -99;
-            }
         }
     }
 }
