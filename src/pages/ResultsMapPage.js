@@ -1,8 +1,6 @@
 /* @flow */
 
 import React from "react";
-import reactMixin from "react-mixin";
-import {History} from "react-router";
 import _ from "underscore";
 import { GoogleMap, Marker } from "react-google-maps";
 
@@ -11,7 +9,6 @@ import Maps from "../maps";
 import components from "../components";
 import storage from "../storage";
 
-/*::`*/@reactMixin.decorate(History)/*::`;*/
 class ResultsMapPage extends React.Component {
 
     constructor(props: Object) {
@@ -112,11 +109,10 @@ class ResultsMapPage extends React.Component {
         this.setState({selectedServices: services});
     }
 
-    onBackClick(): void {
-        if (_.isEmpty(this.state.selectedServices)) {
-            this.props.history.goBack();
-        } else {
+    onGoBack(event: SyntheticInputEvent): void {
+        if (!_.isEmpty(this.state.selectedServices)) {
             this.clearSelection();
+            event.preventDefault()
         }
     }
 
@@ -125,10 +121,6 @@ class ResultsMapPage extends React.Component {
 
         return (
             <div className="ResultsMapPage">
-                <components.AppBar
-                    title={this.props.title}
-                    onBackTouchTap={this.onBackClick.bind(this)}
-                />
                 {   /* we can't create the map component until the API promise
                      * resolves */
                     this.state.maps ? this.renderMap() : ""

@@ -1,14 +1,12 @@
 /* @flow */
 
 import React from "react";
-import {Link, History} from "react-router";
-import reactMixin from "react-mixin";
+import {Link} from "react-router";
 import _ from "underscore";
 
 import components from "../components";
 import icons from "../icons";
 
-/*::`*/@reactMixin.decorate(History)/*::`;*/
 class ResultsListPage extends React.Component {
 
     // flow:disable not supported yet
@@ -65,14 +63,8 @@ class ResultsListPage extends React.Component {
     }
 
     render(): ReactElement {
-        let history = this.props.history;
-
         return (
             <div className="ResultsListPage">
-                <components.AppBar
-                    title={this.props.title}
-                    onBackTouchTap={history.goBack.bind(history)}
-                />
 
                 <components.HeaderBar
                     primaryText={

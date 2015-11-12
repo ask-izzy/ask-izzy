@@ -8,6 +8,7 @@ import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import ResultsListPage from "./ResultsListPage";
 import ResultsMapPage from "./ResultsMapPage";
+import components from "../components";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 class BaseResultsPage extends BaseCategoriesPage {
@@ -138,6 +139,15 @@ class BaseResultsPage extends BaseCategoriesPage {
         }
     }
 
+    onBackClick(event: SyntheticInputEvent): void {
+        if (this.refs.component.onGoBack) {
+            this.refs.component.onGoBack(event)
+        }
+        if (!event.defaultPrevented) {
+            this.props.history.goBack();
+        }
+    }
+
     render(): ReactElement {
         const Component = this
             .props
@@ -147,10 +157,13 @@ class BaseResultsPage extends BaseCategoriesPage {
 
         return (
             <div className="BaseResultsPage">
+                <components.AppBar
+                    title={this.props.title}
+                    onBackTouchTap={this.onBackClick.bind(this)}
+                />
                 <Component
                     {...this.state}
                     {...this.props}
-                    title={this.title}
                     loadMore={this.loadMore.bind(this)}
                 />
             </div>
