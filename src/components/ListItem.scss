@@ -11,8 +11,22 @@
         font-size: 18px;
     }
 
+    &.hero {
+        & > div {
+            padding-top: 11px;
+            padding-bottom: 11px;
+            padding-left: 58px;
+        }
+
+        .primaryText {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 18px;
+        }
+    }
+
     &.has-left-icon > div {
-        padding-left: 50px;
+        padding-left: 58px;
     }
 
     & > div {

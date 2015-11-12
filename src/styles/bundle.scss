@@ -5,7 +5,6 @@
 @import "./responsive";
 @import "./mixins";
 
-@import "../styles/shared/ListItem";
 @import "../styles/shared/plain-text";
 @import "../components/Address";
 @import "../components/AppBar";
@@ -21,6 +20,7 @@
 @import "../components/IconButton";
 @import "../components/Infobox";
 @import "../components/InputListItem";
+@import "../components/ListItem";
 @import "../components/LogoWithShadow";
 @import "../components/NavBar";
 @import "../components/OpeningTimes";
