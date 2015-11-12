@@ -4,6 +4,7 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { append, remove } from "./BaseQuestion";
 
 export default class AdvocacySubcategories extends BaseMultiQuestion {
+    static propTypes = BaseMultiQuestion.propTypes;
     static defaultProps = {
         name: "sub-advocacy",
         question: "Have you been treated badly?" +

@@ -10,7 +10,7 @@ export default class SvgIconCentrelink extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
         const classes = classnames(
-            `CentrelinkIcon`,
+            "CentrelinkIcon",
             "allow-override-color",
             "Icon",
             "SvgIcon",

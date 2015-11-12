@@ -8,6 +8,7 @@ import storage from "../../storage";
 import components from "../../components";
 
 export default class TextEntryQuestion extends BaseQuestion {
+    static propTypes = BaseQuestion.propTypes;
 
     static defaultProps = {
         type: "text",

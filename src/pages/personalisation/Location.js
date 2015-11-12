@@ -281,7 +281,7 @@ class Location extends React.Component {
                             </span>}
                             leftIcon={
                                 <icons.Location
-                                    className="ColoredIcon icon-fg-color"
+                                    className="ColoredIcon icon-fg-color big"
                                 />
                             }
                         />
@@ -292,7 +292,7 @@ class Location extends React.Component {
                             primaryText="Locating you..."
                             secondaryText="Please permit us to use your GPS"
                             leftIcon={
-                                <icons.Loading />
+                                <icons.Loading className="big" />
                             }
                         />
                     : ""
@@ -301,7 +301,7 @@ class Location extends React.Component {
                         <components.ButtonListItem
                             className="taller"
                             primaryText="Found your location"
-                            leftIcon={<icons.Tick />}
+                            leftIcon={<icons.Tick className="big" />}
                         />
                     : ""
                 }{
@@ -310,7 +310,7 @@ class Location extends React.Component {
                             primaryText="Unable to get your location"
                             secondaryText={`Please enter your location below
                                 (${this.state.error})`}
-                            leftIcon={<icons.Cross />}
+                            leftIcon={<icons.Cross className="big" />}
                         />
                     : ""
                 }
@@ -341,8 +341,12 @@ class Location extends React.Component {
                                 </div>
                             }
                             type="radio"
-                            uncheckedIcon={<icons.RadioUnselected />}
-                            checkedIcon={<icons.RadioSelected />}
+                            uncheckedIcon={
+                                <icons.RadioUnselected className="big" />
+                            }
+                            checkedIcon={
+                                <icons.RadioSelected className="big" />
+                            }
                             onChange={() => {
                                 /* set the text box to this value
                                  * and remove the autocompletions */
@@ -360,7 +364,7 @@ class Location extends React.Component {
                 {
                     this.state.autocompletion == AutocompleteState.SEARCHING ?
                         <div className="progress">
-                            <icons.Loading />
+                            <icons.Loading className="big" />
                         </div>
                     : ""
                 }

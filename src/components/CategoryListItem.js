@@ -24,16 +24,14 @@ class CategoryListItem extends React.Component {
 
         return (
             <components.LinkListItem
-                className="CategoryListItem"
+                className="CategoryListItem hero"
                 to={`/category/${this.props.category.key}`}
                 leftIcon={
-                    <Icon className="ColoredIcon icon-fg-color size-30" />
+                    <Icon className="ColoredIcon icon-fg-color small" />
                 }
                 rightIcon={<icons.Chevron />}
                 primaryText={this.props.category.name}
-                secondaryText={<div className="oneline">
-                    {this.props.category.byline}
-                </div>}
+                secondaryText={this.props.category.byline}
             />
         );
     }

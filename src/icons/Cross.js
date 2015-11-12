@@ -10,7 +10,7 @@ export default class SvgIconCross extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
         const classes = classnames(
-            `CrossIcon`,
+            "CrossIcon",
             "allow-override-color",
             "Icon",
             "SvgIcon",

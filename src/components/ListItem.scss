@@ -1,28 +1,42 @@
 .ListItem {
-
     display: block;
     position: relative;
-
+    border-bottom: 1px solid $list-item-hairline;
     cursor: pointer;
 
+    &.taller {
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        font-size: 18px;
+    }
+
+    &.hero {
+        & > div {
+            padding-top: 11px;
+            padding-bottom: 11px;
+            padding-left: 58px;
+        }
+
+        .primaryText {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 18px;
+        }
+    }
+
     &.has-left-icon > div {
-        padding-left: 50px;
+        padding-left: 58px;
     }
 
     & > div {
         padding: 16px;
 
         & > .primaryText {
-            position: relative; // allow icons to be nested in here
             color: $brand-text-dark;
 
             font-size: 16px;
             line-height: 150%;
-
-            .Icon {
-                width: 24px;
-                height: 24px;
-            }
         }
 
         & > .secondaryText {
@@ -36,37 +50,11 @@
             overflow: hidden;
         }
 
-        & > .SvgIcon {
-            padding: 12px;
-        }
-
-        & > .SvgIcon.leftIcon {
-            left: 4px;
-        }
-
-        & > .leftIcon {
-            position: absolute;
-
-            top: 12px;
-            left: 8px;
-
-            height: 44px;
-
-            input {
-                position: absolute;
-
-                top: 16px;
-                left: 16px;
-
-                z-index: -99;
-            }
-        }
-
+        & > .leftIcon,
         & > .rightIcon {
             position: absolute;
 
             top: 12px;
-            right: 26px;
 
             height: 44px;
 
@@ -78,6 +66,14 @@
 
                 z-index: -99;
             }
+        }
+
+        & > .leftIcon {
+            left: 8px;
+        }
+
+        & > .rightIcon {
+            right: 26px;
         }
     }
 }

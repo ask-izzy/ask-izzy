@@ -10,7 +10,7 @@ export default class SvgIconSearch extends React.Component {
     render(): ReactElement {
         const {className, ...rest} = this.props;
         const classes = classnames(
-            `SearchIcon`,
+            "SearchIcon",
             "allow-override-color",
             "Icon",
             "SvgIcon",

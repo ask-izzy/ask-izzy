@@ -52,39 +52,6 @@
         padding: 0;
     }
 
-    .ListItem {
-        border-bottom: 1px solid $list-item-hairline;
-        font-size: 18px;
-
-        &.taller {
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-
-        .CheckboxSelectedIcon,
-        .CheckboxUnselectedIcon,
-        .RadioSelectedIcon,
-        .RadioUnselectedIcon {
-            width: 48px;
-            height: 48px;
-
-            path {
-                fill: $icon-chevron-color;
-                stroke: $icon-chevron-color;
-            }
-        }
-
-        .CrossIcon {
-            top: -6px;
-        }
-
-        .LoadingIcon,
-        .RadioUnselectedIcon,
-        .RadioSelectedIcon {
-            top: -2px;
-        }
-    }
-
     .SummaryItem {
         @include clearfix;
 

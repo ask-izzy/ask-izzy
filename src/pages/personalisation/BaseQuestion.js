@@ -118,7 +118,7 @@ class BaseQuestion extends React.Component {
         /* possible answers to the question */
         answers: React.PropTypes.oneOfType([
             React.PropTypes.arrayOf(React.PropTypes.node),
-            React.PropTypes.objectOf(React.PropTypes.string),
+            React.PropTypes.objectOf(React.PropTypes.object),
         ]).isRequired,
     };
 
@@ -267,8 +267,12 @@ class BaseQuestion extends React.Component {
                         value={answer}
                         onChange={this.onAnswerTouchTap.bind(this, answer)}
 
-                        checkedIcon={<icons.RadioSelected />}
-                        uncheckedIcon={<icons.RadioUnselected />}
+                        checkedIcon={
+                            <icons.RadioSelected className="big" />
+                        }
+                        uncheckedIcon={
+                            <icons.RadioUnselected className="big" />
+                        }
                     />)}
                 </div>
 
