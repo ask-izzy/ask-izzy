@@ -15,8 +15,7 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
-import ResultsListPage from "./pages/ResultsListPage";
-import ResultsMapPage from "./pages/ResultsMapPage";
+import BaseResultsPage from "./pages/BaseResultsPage";
 import ServicePage from "./pages/ServicePage";
 
 export default (
@@ -45,11 +44,11 @@ export default (
         />
         <Route
             path="/category/:page"
-            component={ResultsListPage}
+            component={BaseResultsPage}
         />
         <Route
             path="/category/:page/map"
-            component={ResultsMapPage}
+            component={BaseResultsPage}
         />
         <Route
             path="/category/:page/map/personalise"
@@ -85,11 +84,11 @@ export default (
         />
         <Route
             path="/search/:search"
-            component={ResultsListPage}
+            component={BaseResultsPage}
         />
         <Route
             path="/search/:search/map"
-            component={ResultsMapPage}
+            component={BaseResultsPage}
         />
         <Route
             path="/search/:search/personalise"

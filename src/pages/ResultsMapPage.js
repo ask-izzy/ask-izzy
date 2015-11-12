@@ -1,19 +1,25 @@
 /* @flow */
 
 import React from "react";
+import reactMixin from "react-mixin";
+import {History} from "react-router";
 import _ from "underscore";
 import { GoogleMap, Marker } from "react-google-maps";
 
 import iss from "../iss";
-import BaseResultsPage from "./BaseResultsPage";
 import Maps from "../maps";
 import components from "../components";
 import storage from "../storage";
 
-class ResultsMapPage extends BaseResultsPage {
-    componentDidMount(): void {
-        super.componentDidMount();
+/*::`*/@reactMixin.decorate(History)/*::`;*/
+class ResultsMapPage extends React.Component {
 
+    constructor(props: Object) {
+        super(props);
+        this.state = {};
+    }
+
+    componentDidMount(): void {
         this.setState({coords: storage.getJSON("coordinates")});
 
         /* request the Google Maps API */
@@ -28,8 +34,8 @@ class ResultsMapPage extends BaseResultsPage {
 
     componentDidUpdate(prevProps: Object, prevState: Object) {
         if (this.state.maps &&
-            this.state.objects &&
-            this.state.objects.length) {
+            this.props.objects &&
+            this.props.objects.length) {
 
             this.showWholeMap();
         }
@@ -65,12 +71,12 @@ class ResultsMapPage extends BaseResultsPage {
 
     // flow:disable
     get sites(): Array<Array<iss.issService>> {
-        if (!this.state.objects) {
+        if (!this.props.objects) {
             return [];
         } else if (this._sites) {
             return this._sites;
         } else {
-            this._sites = _.values(_.groupBy(this.state.objects,
+            this._sites = _.values(_.groupBy(this.props.objects,
                                              obj => obj.site.id));
             return this._sites;
         }
@@ -86,7 +92,7 @@ class ResultsMapPage extends BaseResultsPage {
         const maps = this.state.maps.api;
         let bounds = new maps.LatLngBounds();
 
-        for (let object of this.state.objects) {
+        for (let object of this.props.objects) {
             if (object.location.point) {
                 bounds.extend(new maps.LatLng(object.location.point.lat,
                                               object.location.point.lon));
@@ -120,7 +126,7 @@ class ResultsMapPage extends BaseResultsPage {
         return (
             <div className="ResultsMapPage">
                 <components.AppBar
-                    title={this.title}
+                    title={this.props.title}
                     onBackTouchTap={this.onBackClick.bind(this)}
                 />
                 {   /* we can't create the map component until the API promise

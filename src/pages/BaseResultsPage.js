@@ -3,96 +3,18 @@
 import React from "react";
 import { History } from "react-router";
 import reactMixin from "react-mixin";
-import _ from "underscore";
 
 import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
+import ResultsListPage from "./ResultsListPage";
+import ResultsMapPage from "./ResultsMapPage";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 class BaseResultsPage extends BaseCategoriesPage {
+
     constructor(props: Object) {
         super(props);
         this.state = {};
-    }
-
-    // flow:disable not supported yet
-    get title(): string {
-        if (this.props.params.page) {
-            return this.category.name;
-        } else if (this.props.params.search) {
-            const quote = new RegExp(`["']`, "g");
-            const search = this.props.params.search;
-
-            return `“${search.replace(quote, "")}”`;
-        } else {
-            throw new Error("Unexpected");
-        }
-    }
-
-    // flow:disable not supported yet
-    get search(): iss.searchRequest {
-        if (this.props.params.page) {
-            return Object.assign({}, this.category.search);
-        } else if (this.props.params.search) {
-            return {
-                q: this.props.params.search,
-            };
-        } else {
-            throw new Error("Unexpected");
-        }
-    }
-
-    // flow:disable not supported yet
-    get results(): Array<iss.issService> {
-        let objects, index;
-
-        if (this.state.objects) {
-            objects = Array.from(this.state.objects);
-        } else {
-            objects = [];
-        }
-
-        // Infoboxes are no longer inline (moved to headers). Keeping this
-        // code as @danni pointed out it's not likely to revert cleanly.
-        //
-        // /* splice in an infobox (if it exists) after the first non-crisis
-        //  * service */
-        /*
-        try {
-            let infobox = this.category.info;
-
-            index = _.findIndex(objects,
-                                object => !object.crisis && !object.infobox);
-
-            if (infobox && index != -1) {
-                objects.splice(index + 1, 0, {
-                    infobox: true,
-                    node: infobox,
-                });
-            }
-        } catch (error) {
-            // pass
-        }
-        */
-        /* splice a header before the first crisis service */
-        index = _.findIndex(objects, object => object.crisis);
-        if (index != -1) {
-            /* count hotlines */
-            let nhotlines = _.where(objects, {crisis: true}).length;
-
-            objects.splice(index, 0, {
-                staticText: true,
-                node: (
-                    <h3 className="CrisisHeader">
-                    {nhotlines == 1 ?
-                      "If you need urgent help call this number"
-                    : "If you need urgent help call one of these numbers"}
-                    </h3>
-                ),
-            });
-        }
-
-        return objects;
     }
 
     componentDidMount(): void {
@@ -155,6 +77,33 @@ class BaseResultsPage extends BaseCategoriesPage {
             });
     }
 
+    // flow:disable not supported yet
+    get search(): iss.searchRequest {
+        if (this.props.params.page) {
+            return Object.assign({}, this.category.search);
+        } else if (this.props.params.search) {
+            return {
+                q: this.props.params.search,
+            };
+        } else {
+            throw new Error("Unexpected");
+        }
+    }
+
+    // flow:disable not supported yet
+    get title(): string {
+        if (this.props.params.page) {
+            return this.category.name;
+        } else if (this.props.params.search) {
+            const quote = new RegExp(`["']`, "g");
+            const search = this.props.params.search;
+
+            return `“${search.replace(quote, "")}”`;
+        } else {
+            throw new Error("Unexpected");
+        }
+    }
+
     async loadMore(): Promise<void> {
         if (!this.state.meta && this.state.meta.next) {
             return;
@@ -188,6 +137,26 @@ class BaseResultsPage extends BaseCategoriesPage {
             }
         }
     }
+
+    render(): ReactElement {
+        const Component = this
+            .props
+            .location
+            .pathname
+            .match(/map(\/)?$/) ? ResultsMapPage : ResultsListPage;
+
+        return (
+            <div className="BaseResultsPage">
+                <Component
+                    {...this.state}
+                    {...this.props}
+                    title={this.title}
+                    loadMore={this.loadMore.bind(this)}
+                />
+            </div>
+        );
+    }
+
 }
 
 export default BaseResultsPage;

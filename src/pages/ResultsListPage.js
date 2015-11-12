@@ -1,33 +1,89 @@
 /* @flow */
 
 import React from "react";
-import {Link} from "react-router";
+import {Link, History} from "react-router";
+import reactMixin from "react-mixin";
+import _ from "underscore";
 
-import BaseResultsPage from "./BaseResultsPage";
 import components from "../components";
 import icons from "../icons";
 
-class ResultsListPage extends BaseResultsPage {
+/*::`*/@reactMixin.decorate(History)/*::`;*/
+class ResultsListPage extends React.Component {
+
+    // flow:disable not supported yet
+    get results(): Array<iss.issService> {
+        let objects, index;
+
+        if (this.props.objects) {
+            objects = Array.from(this.props.objects);
+        } else {
+            objects = [];
+        }
+
+        // Infoboxes are no longer inline (moved to headers). Keeping this
+        // code as @danni pointed out it's not likely to revert cleanly.
+        //
+        // /* splice in an infobox (if it exists) after the first non-crisis
+        //  * service */
+        /*
+        try {
+            let infobox = this.category.info;
+
+            index = _.findIndex(objects,
+                                object => !object.crisis && !object.infobox);
+
+            if (infobox && index != -1) {
+                objects.splice(index + 1, 0, {
+                    infobox: true,
+                    node: infobox,
+                });
+            }
+        } catch (error) {
+            // pass
+        }
+        */
+        /* splice a header before the first crisis service */
+        index = _.findIndex(objects, object => object.crisis);
+        if (index != -1) {
+            /* count hotlines */
+            let nhotlines = _.where(objects, {crisis: true}).length;
+
+            objects.splice(index, 0, {
+                staticText: true,
+                node: (
+                    <h3 className="CrisisHeader">
+                    {nhotlines == 1 ?
+                      "If you need urgent help call this number"
+                    : "If you need urgent help call one of these numbers"}
+                    </h3>
+                ),
+            });
+        }
+
+        return objects;
+    }
+
     render(): ReactElement {
         let history = this.props.history;
 
         return (
             <div className="ResultsListPage">
                 <components.AppBar
-                    title={this.title}
+                    title={this.props.title}
                     onBackTouchTap={history.goBack.bind(history)}
                 />
 
                 <components.HeaderBar
                     primaryText={
-                        this.state.meta ?
-                            this.state.meta.total_count > 0 ?
+                        this.props.meta ?
+                            this.props.meta.total_count > 0 ?
                                 this.renderHeaderSuccess()
                             : <div>
                                  Sorry, I couldn't find any results
                                  for {this.title.toLocaleLowerCase()}.
                              </div>
-                        : this.state.error ?
+                        : this.props.error ?
                             <div>
                                 <components.LogoWithShadow />
                                 Sorry, I couldn't do this search.
@@ -35,14 +91,14 @@ class ResultsListPage extends BaseResultsPage {
                         : <div>Searching...</div>
                     }
                     secondaryText={
-                        this.state.statusCode == 402 ?
+                        this.props.statusCode == 402 ?
                             <div>
                                 {this.renderErrorMessage()}
                                 {this.renderHomeLink()}
                                 {' '}
                                 {this.renderPersonalisationLink()}
                             </div>
-                        : this.state.error ?
+                        : this.props.error ?
                             <div>
                                 {this.renderErrorMessage()}
                                 {this.renderHomeLink()}
@@ -56,7 +112,7 @@ class ResultsListPage extends BaseResultsPage {
 
                 {this.renderResults()}
 
-                {this.state.meta || this.state.error ? ""
+                {this.props.meta || this.props.error ? ""
                 : <div className="progress">
                       <icons.Loading />
                   </div>
@@ -75,7 +131,7 @@ class ResultsListPage extends BaseResultsPage {
     }
 
     renderErrorMessage(): ReactElement {
-        let message = this.state.error;
+        let message = this.props.error;
 
         return (<p className="errorMessage">{message}</p>);
     }
@@ -119,7 +175,7 @@ class ResultsListPage extends BaseResultsPage {
         return (
             <div className="List results">
             {
-                (this.state.objects && this.state.objects.length) ?
+                (this.props.objects && this.props.objects.length) ?
                     <components.LinkListItem
                         className="ViewOnMapButton"
                         to={this.props.location.pathname + "/map"}
@@ -137,11 +193,11 @@ class ResultsListPage extends BaseResultsPage {
                 results={this.results}
             />
             {
-                this.state.meta && this.state.meta.next ?
+                this.props.meta && this.props.meta.next ?
                     <components.ButtonListItem
                         className="MoreResultsButton"
                         primaryText="Load more results…"
-                        onTouchTap={this.loadMore.bind(this)}
+                        onTouchTap={this.props.loadMore}
                     />
                 : ""
             }
