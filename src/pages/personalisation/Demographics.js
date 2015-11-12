@@ -5,6 +5,7 @@ import { append } from "./BaseQuestion";
 import icons from "../../icons";
 
 export default class Demographics extends BaseMultiQuestion {
+    static propTypes = BaseMultiQuestion.propTypes;
     static defaultProps = {
         name: "demographics",
         question: "Do any of these apply to you?",

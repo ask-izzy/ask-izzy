@@ -5,6 +5,7 @@ import SleepTonight from "./SleepTonight";
 import { append } from "./BaseQuestion";
 
 export default class HousingSubcategories extends BaseMultiQuestion {
+    static propTypes = BaseMultiQuestion.propTypes;
     static defaultProps = {
         name: "sub-housing",
         question: "Which situation is most like yours?",

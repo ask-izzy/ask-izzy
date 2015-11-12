@@ -6,7 +6,7 @@ import classnames from "classnames";
 export default class ListItem extends React.Component {
 
     static propTypes = {
-        rootElement: React.PropTypes.string,
+        rootElement: React.PropTypes.any,
         className: React.PropTypes.string,
 
         primaryText: React.PropTypes.node,

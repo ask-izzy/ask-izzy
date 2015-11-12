@@ -9,6 +9,7 @@ import storage from "../../storage";
 import * as iss from "../../iss";
 
 class BaseMultiQuestion extends BaseQuestion {
+    static propTypes = BaseQuestion.propTypes;
 
     // flow:disable
     get selected(): Set<string> {

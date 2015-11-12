@@ -3,6 +3,7 @@
 import BaseQuestion, { append } from "./BaseQuestion";
 
 export default class Gender extends BaseQuestion {
+    static propTypes = BaseQuestion.propTypes;
     static defaultProps = {
         name: "gender",
         question: "Do you identify as…",

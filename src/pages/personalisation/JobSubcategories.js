@@ -4,6 +4,7 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { remove, append } from "./BaseQuestion";
 
 export default class JobSubcategories extends BaseMultiQuestion {
+    static propTypes = BaseMultiQuestion.propTypes;
     static defaultProps = {
         name: "sub-job",
         question: "Where do you want to start?",

@@ -4,6 +4,7 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { append, remove } from "./BaseQuestion";
 
 export default class HealthSubcategories extends BaseMultiQuestion {
+    static propTypes = BaseMultiQuestion.propTypes;
     static defaultProps = {
         name: "sub-health",
         question: "What sort of help do you need?",
