@@ -21,10 +21,6 @@ class BaseCategoriesPage extends React.Component {
             key: this.props.params.page,
         });
 
-        if (category === undefined) {
-            throw new Error(`No such category as ${this.props.params.page}`);
-        }
-
         this._category = category;
         return category;
     }
@@ -38,7 +34,7 @@ class BaseCategoriesPage extends React.Component {
     get personalisationComponents(): Array<ReactClass> {
         let components = [];
 
-        if (this.props.params.page) {
+        if (this.category) {
             components = this.category.personalisation;
         } else if (this.props.params.search) {
             components = [

@@ -6,13 +6,16 @@ import reactMixin from "react-mixin";
 
 import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
-import ResultsListPage from "./ResultsListPage";
-import ResultsMapPage from "./ResultsMapPage";
-import components from "../components";
 import icons from "../icons";
 
+import AppBar from "../components/AppBar";
+import ButtonListItem from "../components/ButtonListItem";
+import ResultsMap from "../components/ResultsMap";
+import ResultsListPage from "./ResultsListPage";
+
+
 /*::`*/@reactMixin.decorate(History)/*::`;*/
-class BaseResultsPage extends BaseCategoriesPage {
+class ResultsPage extends BaseCategoriesPage {
 
     constructor(props: Object) {
         super(props);
@@ -81,7 +84,7 @@ class BaseResultsPage extends BaseCategoriesPage {
 
     // flow:disable not supported yet
     get search(): iss.searchRequest {
-        if (this.props.params.page) {
+        if (this.category) {
             return Object.assign({}, this.category.search);
         } else if (this.props.params.search) {
             return {
@@ -94,9 +97,9 @@ class BaseResultsPage extends BaseCategoriesPage {
 
     // flow:disable not supported yet
     get title(): string {
-        if (this.props.params.page) {
+        if (this.category) {
             return this.category.name;
-        } else if (this.props.params.search) {
+        } else if (this.search) {
             const quote = new RegExp(`["']`, "g");
             const search = this.props.params.search;
 
@@ -104,6 +107,11 @@ class BaseResultsPage extends BaseCategoriesPage {
         } else {
             throw new Error("Unexpected");
         }
+    }
+
+    // flow:disable not supported yet
+    get loading(): boolean {
+        return !(this.state.meta || this.state.error);
     }
 
     async loadMore(): Promise<void> {
@@ -154,18 +162,24 @@ class BaseResultsPage extends BaseCategoriesPage {
             .props
             .location
             .pathname
-            .match(/map(\/)?$/) ? ResultsMapPage : ResultsListPage;
+            .match(/map(\/)?$/) ? ResultsMap
+            : ResultsListPage;
 
         return (
-            <div className="BaseResultsPage">
-                <components.AppBar
-                    title={this.props.title}
+            <div className="ResultsPage">
+                <AppBar
+                    title={this.title}
                     onBackTouchTap={this.onBackClick.bind(this)}
                 />
                 <Component
+                    ref="component"
                     {...this.state}
                     {...this.props}
+                    category={this.category}
+                    search={this.props.params.search}
                     loadMore={this.renderLoadMore()}
+                    title={this.title}
+                    loading={this.loading}
                 />
             </div>
         );
@@ -174,7 +188,7 @@ class BaseResultsPage extends BaseCategoriesPage {
     renderLoadMore(): ?ReactElement {
         if (this.state.meta && this.state.meta.next) {
             return (
-                <components.ButtonListItem
+                <ButtonListItem
                     className="MoreResultsButton"
                     primaryText="Load more results…"
                     onTouchTap={this.loadMore.bind(this)}
@@ -182,7 +196,7 @@ class BaseResultsPage extends BaseCategoriesPage {
             );
         }
 
-        if (!(this.state.meta || this.state.error)) {
+        if (this.loading) {
             return (
                 <div className="progress">
                     <icons.Loading />
@@ -193,4 +207,4 @@ class BaseResultsPage extends BaseCategoriesPage {
 
 }
 
-export default BaseResultsPage;
+export default ResultsPage;

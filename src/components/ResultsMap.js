@@ -6,10 +6,10 @@ import { GoogleMap, Marker } from "react-google-maps";
 
 import iss from "../iss";
 import Maps from "../maps";
-import components from "../components";
+import ResultsList from "./ResultsList";
 import storage from "../storage";
 
-class ResultsMapPage extends React.Component {
+class ResultsMap extends React.Component {
 
     constructor(props: Object) {
         super(props);
@@ -117,15 +117,15 @@ class ResultsMapPage extends React.Component {
     }
 
     render(): ReactElement {
-        let selectedServices = this.state.selectedServices || [];
+        const selectedServices = this.state.selectedServices || [];
 
         return (
-            <div className="ResultsMapPage">
+            <div className="ResultsMap">
                 {   /* we can't create the map component until the API promise
                      * resolves */
                     this.state.maps ? this.renderMap() : ""
                 }
-                <components.ResultList
+                <ResultsList
                     results={selectedServices}
                 />
             </div>
@@ -202,4 +202,4 @@ class ResultsMapPage extends React.Component {
     }
 }
 
-export default ResultsMapPage;
+export default ResultsMap;
