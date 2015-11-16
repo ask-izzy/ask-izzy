@@ -5,7 +5,7 @@ import React from "react";
 declare var GOOGLE_KEY: string;
 declare var ISS_URL: string;
 declare var SITE_DOMAIN: string;
-declare var GA_TRACKING_CODE: string;
+declare var GOOGLE_ANALYTICS_ID: string;
 
 class HtmlDocument extends React.Component {
 
@@ -41,7 +41,7 @@ class HtmlDocument extends React.Component {
             var ISS_URL = ${JSON.stringify(ISS_URL)};
             var GOOGLE_KEY = ${JSON.stringify(GOOGLE_KEY)};
             var SITE_DOMAIN = ${JSON.stringify(SITE_DOMAIN)};
-            var GA_TRACKING_CODE = ${JSON.stringify(GA_TRACKING_CODE)};
+            var GOOGLE_ANALYTICS_ID = ${JSON.stringify(GOOGLE_ANALYTICS_ID)};
         `;
 
         /* eslint-disable max-len */
@@ -260,11 +260,11 @@ class HtmlDocument extends React.Component {
         /* eslint-disable max-len */
         const snippet = `
             window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-            ga('create', GA_TRACKING_CODE, 'auto');
+            ga('create', GOOGLE_ANALYTICS_ID, 'auto');
             ga('send', 'pageview');
         `;
 
-        if (GA_TRACKING_CODE) {
+        if (GOOGLE_ANALYTICS_ID) {
             return [
                 <script dangerouslySetInnerHTML={{__html: snippet}} />,
                 <script
