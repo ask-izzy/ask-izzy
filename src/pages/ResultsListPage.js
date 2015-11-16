@@ -23,7 +23,7 @@ class ResultsListPage extends React.Component {
         index = _.findIndex(objects, object => object.crisis);
         if (index != -1) {
             /* count hotlines */
-            let nhotlines = _.where(objects, {crisis: true}).length;
+            const nhotlines = _.where(objects, {crisis: true}).length;
 
             objects.splice(index, 0, {
                 staticText: true,
