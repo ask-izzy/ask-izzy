@@ -9,13 +9,11 @@ export default class LegalSubcategories extends BaseMultiQuestion {
         name: "sub-legal",
         question: "What's happening?",
         answers: {
-            "Fines": append("fines"),
-            "Criminal charges": append("criminal charge criminal law"),
-            "Driving charges": append("driving charges"),
-            "Victims of crime compensation": append("victims of crime"),
+            "Legal advice": append("advice"),
             "Family violence": append("family violence"),
-            "Debts": append("debts"),
             "Tenancy issues": append("tenancy law"),
+            "Victims of crime compensation": append("victims of crime"),
+            "Criminal charges": append("criminal charge criminal law"),
         },
     };
 }
