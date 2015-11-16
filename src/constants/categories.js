@@ -41,7 +41,7 @@ const categories:Array<Category> = [
         byline: "A place to stay",
         icon: icons.House,
         search: {
-            q: "housing",
+            q: "housing -(coordinating bodies)",
             service_type: "housing",
         },
         info: "It's important to act early on housing.",
@@ -59,7 +59,7 @@ const categories:Array<Category> = [
         byline: "Something to eat",
         icon: icons.Food,
         search: {
-            q: "free food -health",
+            q: "free food -health -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
@@ -70,7 +70,7 @@ const categories:Array<Category> = [
         byline: "Swags, Clothes, etc",
         icon: icons.Things,
         search: {
-            q: "material aid",
+            q: "material aid -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
@@ -82,7 +82,7 @@ const categories:Array<Category> = [
         byline: "Police, law & fines",
         icon: icons.Legal,
         search: {
-            q: "legal aid",
+            q: "legal aid -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
@@ -94,7 +94,7 @@ const categories:Array<Category> = [
         byline: "Emergency funds, bills etc",
         icon: icons.Money,
         search: {
-            q: "financial aid",
+            q: "financial aid -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
@@ -106,7 +106,7 @@ const categories:Array<Category> = [
         byline: "Physical, mental, emotional",
         icon: icons.Health,
         search: {
-            q: "health",
+            q: "health -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
@@ -121,7 +121,7 @@ const categories:Array<Category> = [
         byline: "Drugs, alcohol & gambling",
         icon: icons.Addiction,
         search: {
-            q: "substance abuse gambling",
+            q: "substance abuse gambling -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
@@ -133,7 +133,7 @@ const categories:Array<Category> = [
         byline: "Someone to help",
         icon: icons.Support,
         search: {
-            q: "mental health",
+            q: "mental health -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
@@ -145,7 +145,7 @@ const categories:Array<Category> = [
         byline: "Everyday skills & training",
         icon: icons.Skills,
         search: {
-            q: "life skills education",
+            q: "life skills education -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
@@ -157,7 +157,7 @@ const categories:Array<Category> = [
         byline: "Earning & volunteering",
         icon: icons.Job,
         search: {
-            q: "employment",
+            q: "employment -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
@@ -184,7 +184,7 @@ const categories:Array<Category> = [
         byline: "Near you",
         icon: icons.Entertainment,
         search: {
-            q: "recreation",
+            q: "recreation -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
@@ -198,7 +198,7 @@ const categories:Array<Category> = [
         byline: "Toilets, libraries etc",
         icon: icons.Facilaties,
         search: {
-            q: "toilets public libraries",
+            q: "toilets public libraries -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
@@ -221,7 +221,7 @@ const categories:Array<Category> = [
         byline: "Complaints and advocacy",
         icon: icons.Advocacy,
         search: {
-            q: "advocacy",
+            q: "advocacy -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
