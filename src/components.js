@@ -21,17 +21,20 @@ import Infobox from "./components/Infobox";
 import InputListItem from "./components/InputListItem";
 import LinkListItem from "./components/LinkListItem";
 import ListItem from "./components/ListItem";
+import LoadingResultsHeader from "./components/LoadingResultsHeader";
 import LogoWithShadow from "./components/LogoWithShadow";
 import NavBar from "./components/NavBar";
 import OpeningTimes from "./components/OpeningTimes";
 import Phone from "./components/Phone";
-import ResultList from "./components/ResultList";
 import ResultListItem from "./components/ResultListItem";
+import ResultsList from "./components/ResultsList";
+import ResultsMap from "./components/ResultsMap";
 import ScreenReader from "./components/ScreenReader";
 import ServicePane from "./components/ServicePane";
 import SvgIcon from "./components/SvgIcon";
 import TextInputListItem from "./components/TextInputListItem";
 import TransportTime from "./components/TransportTime";
+import ViewOnMapButton from "./components/ViewOnMapButton";
 import Web from "./components/Web";
 
 export default {
@@ -54,16 +57,19 @@ export default {
     InputListItem: InputListItem,
     LinkListItem: LinkListItem,
     ListItem: ListItem,
+    LoadingResultsHeader: LoadingResultsHeader,
     LogoWithShadow: LogoWithShadow,
     NavBar: NavBar,
     OpeningTimes: OpeningTimes,
     Phone: Phone,
-    ResultList: ResultList,
     ResultListItem: ResultListItem,
+    ResultsList: ResultsList,
+    ResultsMap: ResultsMap,
     ScreenReader: ScreenReader,
     ServicePane: ServicePane,
     SvgIcon: SvgIcon,
     TextInputListItem: TextInputListItem,
     TransportTime: TransportTime,
+    ViewOnMapButton: ViewOnMapButton,
     Web: Web,
 };

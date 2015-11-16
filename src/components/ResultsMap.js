@@ -5,15 +5,18 @@ import _ from "underscore";
 import { GoogleMap, Marker } from "react-google-maps";
 
 import iss from "../iss";
-import BaseResultsPage from "./BaseResultsPage";
 import Maps from "../maps";
-import components from "../components";
+import ResultsList from "./ResultsList";
 import storage from "../storage";
 
-class ResultsMapPage extends BaseResultsPage {
-    componentDidMount(): void {
-        super.componentDidMount();
+class ResultsMap extends React.Component {
 
+    constructor(props: Object) {
+        super(props);
+        this.state = {};
+    }
+
+    componentDidMount(): void {
         this.setState({coords: storage.getJSON("coordinates")});
 
         /* request the Google Maps API */
@@ -28,9 +31,7 @@ class ResultsMapPage extends BaseResultsPage {
 
     componentDidUpdate(prevProps: Object, prevState: Object) {
         if (this.state.maps &&
-            this.state.objects &&
-            this.state.objects.length) {
-
+            !_.isEmpty(this.props.objects)) {
             this.showWholeMap();
         }
     }
@@ -65,12 +66,12 @@ class ResultsMapPage extends BaseResultsPage {
 
     // flow:disable
     get sites(): Array<Array<iss.issService>> {
-        if (!this.state.objects) {
+        if (!this.props.objects) {
             return [];
         } else if (this._sites) {
             return this._sites;
         } else {
-            this._sites = _.values(_.groupBy(this.state.objects,
+            this._sites = _.values(_.groupBy(this.props.objects,
                                              obj => obj.site.id));
             return this._sites;
         }
@@ -86,7 +87,7 @@ class ResultsMapPage extends BaseResultsPage {
         const maps = this.state.maps.api;
         let bounds = new maps.LatLngBounds();
 
-        for (let object of this.state.objects) {
+        for (let object of this.props.objects) {
             if (object.location.point) {
                 bounds.extend(new maps.LatLng(object.location.point.lat,
                                               object.location.point.lon));
@@ -106,28 +107,23 @@ class ResultsMapPage extends BaseResultsPage {
         this.setState({selectedServices: services});
     }
 
-    onBackClick(): void {
-        if (_.isEmpty(this.state.selectedServices)) {
-            this.props.history.goBack();
-        } else {
+    onGoBack(event: SyntheticInputEvent): void {
+        if (!_.isEmpty(this.state.selectedServices)) {
             this.clearSelection();
+            event.preventDefault()
         }
     }
 
     render(): ReactElement {
-        let selectedServices = this.state.selectedServices || [];
+        const selectedServices = this.state.selectedServices || [];
 
         return (
-            <div className="ResultsMapPage">
-                <components.AppBar
-                    title={this.title}
-                    onBackTouchTap={this.onBackClick.bind(this)}
-                />
+            <div className="ResultsMap">
                 {   /* we can't create the map component until the API promise
                      * resolves */
                     this.state.maps ? this.renderMap() : ""
                 }
-                <components.ResultList
+                <ResultsList
                     results={selectedServices}
                 />
             </div>
@@ -204,4 +200,4 @@ class ResultsMapPage extends BaseResultsPage {
     }
 }
 
-export default ResultsMapPage;
+export default ResultsMap;

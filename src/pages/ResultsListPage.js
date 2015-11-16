@@ -1,153 +1,65 @@
 /* @flow */
 
 import React from "react";
-import {Link} from "react-router";
+import _ from "underscore";
 
-import BaseResultsPage from "./BaseResultsPage";
-import components from "../components";
-import icons from "../icons";
+import ResultsList from "../components/ResultsList";
+import LoadingResultsHeader from "../components/LoadingResultsHeader";
+import ViewOnMapButton from "../components/ViewOnMapButton";
 
-class ResultsListPage extends BaseResultsPage {
+class ResultsListPage extends React.Component {
+
+    // flow:disable not supported yet
+    get results(): Array<iss.issService> {
+        let objects, index;
+
+        if (this.props.objects) {
+            objects = Array.from(this.props.objects);
+        } else {
+            objects = [];
+        }
+
+        /* splice a header before the first crisis service */
+        index = _.findIndex(objects, object => object.crisis);
+        if (index != -1) {
+            /* count hotlines */
+            const nhotlines = _.where(objects, {crisis: true}).length;
+
+            objects.splice(index, 0, {
+                staticText: true,
+                node: (
+                    <h3 className="CrisisHeader">
+                    {nhotlines == 1 ?
+                      "If you need urgent help call this number"
+                    : "If you need urgent help call one of these numbers"}
+                    </h3>
+                ),
+            });
+        }
+
+        return objects;
+    }
+
     render(): ReactElement {
-        let history = this.props.history;
-
         return (
             <div className="ResultsListPage">
-                <components.AppBar
-                    title={this.title}
-                    onBackTouchTap={history.goBack.bind(history)}
-                />
-
-                <components.HeaderBar
-                    primaryText={
-                        this.state.meta ?
-                            this.state.meta.total_count > 0 ?
-                                this.renderHeaderSuccess()
-                            : <div>
-                                 Sorry, I couldn't find any results
-                                 for {this.title.toLocaleLowerCase()}.
-                             </div>
-                        : this.state.error ?
-                            <div>
-                                <components.LogoWithShadow />
-                                Sorry, I couldn't do this search.
-                            </div>
-                        : <div>Searching...</div>
+                <LoadingResultsHeader {...this.props} />
+                <div className="List results">
+                    {
+                        _.isEmpty(this.props.objects) ||
+                        <ViewOnMapButton
+                            to={this.props.location.pathname + "/map"}
+                        />
                     }
-                    secondaryText={
-                        this.state.statusCode == 402 ?
-                            <div>
-                                {this.renderErrorMessage()}
-                                {this.renderHomeLink()}
-                                {' '}
-                                {this.renderPersonalisationLink()}
-                            </div>
-                        : this.state.error ?
-                            <div>
-                                {this.renderErrorMessage()}
-                                {this.renderHomeLink()}
-                            </div>
-                        : <div>
-                            {this.renderInfo()}
-                            {this.renderPersonalisationLink()}
-                          </div>
-                    }
-                />
-
-                {this.renderResults()}
-
-                {this.state.meta || this.state.error ? ""
-                : <div className="progress">
-                      <icons.Loading />
-                  </div>
-                }
-
+                    <ResultsList
+                        results={this.results}
+                    />
+                    {this.props.loadMore}
+                </div>
             </div>
         );
     }
 
-    renderHeaderSuccess(): ReactElement {
-        return (
-                <div>
-                    I found these services for you
-                    <components.LogoWithShadow />
-                </div>);
-    }
-
-    renderErrorMessage(): ReactElement {
-        let message = this.state.error;
-
-        return (<p className="errorMessage">{message}</p>);
-    }
-
-    renderHomeLink(): ReactElement {
-        let linkText = "Go back";
-
-        return (<Link
-            className="homeLink"
-            to="home"
-                >{linkText}</Link>);
-    }
-
-    renderInfo(): ?ReactElement {
-        // this.category is a getter which can
-        // throw an exception if category is not
-        // set
-        try {
-            return <div>{this.category.info}</div>;
-        } catch (error) {
-            return undefined;
-        }
-    }
-
-    renderPersonalisationLink(): ReactElement {
-        const current = this.props.location.pathname;
-        const separator = current.endsWith("/") ? "" : "/";
-
-        return (
-            <Link
-                className="change-personalisation"
-                to={`${current}${separator}personalise/summary`}
-            >
-                Change your answers
-            </Link>
-        );
-    }
-
-    renderResults(): ReactElement {
-
-        return (
-            <div className="List results">
-            {
-                (this.state.objects && this.state.objects.length) ?
-                    <components.LinkListItem
-                        className="ViewOnMapButton"
-                        to={this.props.location.pathname + "/map"}
-                        primaryText="View on a map"
-                        leftIcon={
-                            <icons.Map />
-                        }
-                        rightIcon={
-                            <icons.Chevron />
-                        }
-                    />
-                : ""
-            }
-            <components.ResultList
-                results={this.results}
-            />
-            {
-                this.state.meta && this.state.meta.next ?
-                    <components.ButtonListItem
-                        className="MoreResultsButton"
-                        primaryText="Load more results…"
-                        onTouchTap={this.loadMore.bind(this)}
-                    />
-                : ""
-            }
-            </div>
-        );
-    }
 }
 
 export default ResultsListPage;
