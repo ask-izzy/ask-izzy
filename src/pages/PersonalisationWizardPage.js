@@ -5,6 +5,7 @@ import React from "react";
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import Intro from "./personalisation/Intro";
 import components from "../components";
+import Chevron from "../icons/Chevron";
 
 class PersonalisationWizardPage extends BasePersonalisationPage {
 
@@ -48,6 +49,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
                     onBackTouchTap={this.previousStep.bind(this)}
                     onForwardTouchTap={this.nextStep.bind(this)}
                     forwardMessage="Next"
+                    forwardIcon={<Chevron />}
                     forwardEnabled={
                         !this.state.nextDisabled
                     }

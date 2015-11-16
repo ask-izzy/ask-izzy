@@ -12,6 +12,13 @@ class AppBar extends React.Component {
         onForwardTouchTap: React.PropTypes.func,
         forwardMessage: React.PropTypes.string,
         forwardEnabled: React.PropTypes.bool,
+        forwardIcon: React.PropTypes.node,
+    };
+
+    static defaultProps = {
+        forwardEnabled: true,
+        forwardMessage: "",
+        forwardIcon: <icons.Chevron />,
     };
 
     static sampleProps = {default: {
@@ -46,7 +53,7 @@ class AppBar extends React.Component {
                         <span className="next-label">
                             {this.props.forwardMessage}
                         </span>
-                        <icons.Chevron />
+                        {this.props.forwardIcon}
                     </div>
                 </components.IconButton>
             )

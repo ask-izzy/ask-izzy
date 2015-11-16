@@ -26,6 +26,7 @@
         flex: 4;
 
         margin: auto;
+        margin-top: -3px;
         padding: 0;
 
         font-size: 18px;
@@ -70,15 +71,22 @@
         margin-left: -5px;
 
         .Icon {
-            width: 48px;
-            height: 48px;
-
             margin: 0;
             padding: 0;
 
             path {
                 fill: $white;
             }
+        }
+
+        .Icon.HouseIcon {
+            margin-top: 5px;
+        }
+
+        .ChevronIcon,
+        .ChevronBackIcon {
+            width: 48px;
+            height: 48px;
         }
     }
 }

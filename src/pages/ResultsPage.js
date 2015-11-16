@@ -13,7 +13,6 @@ import ButtonListItem from "../components/ButtonListItem";
 import ResultsMap from "../components/ResultsMap";
 import ResultsListPage from "./ResultsListPage";
 
-
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 class ResultsPage extends BaseCategoriesPage {
 
@@ -170,7 +169,16 @@ class ResultsPage extends BaseCategoriesPage {
                 <AppBar
                     title={this.title}
                     onBackTouchTap={this.onBackClick.bind(this)}
+                    onForwardTouchTap={() =>
+                        this.props.history.pushState(
+                            null,
+                            "/",
+                            {}
+                        )
+                    }
+                    forwardIcon={<icons.House className="small" />}
                 />
+
                 <Component
                     ref="component"
                     {...this.state}
