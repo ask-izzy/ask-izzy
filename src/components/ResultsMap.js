@@ -31,9 +31,7 @@ class ResultsMap extends React.Component {
 
     componentDidUpdate(prevProps: Object, prevState: Object) {
         if (this.state.maps &&
-            this.props.objects &&
-            this.props.objects.length) {
-
+            !_.isEmpty(this.props.objects)) {
             this.showWholeMap();
         }
     }

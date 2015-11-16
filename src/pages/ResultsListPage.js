@@ -46,11 +46,10 @@ class ResultsListPage extends React.Component {
                 <LoadingResultsHeader {...this.props} />
                 <div className="List results">
                     {
-                        (this.props.objects && this.props.objects.length) ?
-                            <ViewOnMapButton
-                                to={this.props.location.pathname + "/map"}
-                            />
-                        : ""
+                        _.isEmpty(this.props.objects) ||
+                        <ViewOnMapButton
+                            to={this.props.location.pathname + "/map"}
+                        />
                     }
                     <ResultsList
                         results={this.results}
