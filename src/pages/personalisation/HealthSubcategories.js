@@ -31,7 +31,7 @@ export default class HealthSubcategories extends BaseMultiQuestion {
                 q: "podiatrist",
                 healthcare_card_holders: true,
             }),
-            "Mental or emotional health e.g. depression": append({
+            "Mental or emotional health": append({
                 q: "mental health",
                 healthcare_card_holders: true,
             }),

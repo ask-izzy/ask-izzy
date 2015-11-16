@@ -12,7 +12,7 @@ export default class EverydayThingsSubcategories extends BaseMultiQuestion {
             /* eslint-disable max-len */
             "Food packages/parcels/vouchers": append("food parcel voucher pack"),
             "Transport": append("transport"),
-            "Keeping warm e.g. swags": append("swags blankets"),
+            "Keeping warm": append("swags blankets"),
             "Clothes": append("clothes"),
             "Showers": append("showers"),
             "Personal products": append("toiletries sanitary products"),

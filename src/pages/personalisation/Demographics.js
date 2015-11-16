@@ -22,7 +22,7 @@ export default class Demographics extends BaseMultiQuestion {
             "Veteran": append("veteran"),
             "Escaping family violence": append("family violence"),
             "Need an interpreter": append("interpreter"),
-            "No": append(""),
+            "None of the above": append(""),
         },
         icons: {
             "Aboriginal": icons.DemographicAboriginal,

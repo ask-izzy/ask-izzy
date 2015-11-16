@@ -14,13 +14,8 @@ export default class CounsellingSubcategories extends BaseMultiQuestion {
             "Sexual identity": append("sexuality"),
             "Asylum seeker or refugee": append("refugee"),
             "Family or relationships": append("relationship"),
-            "Disability support": append("disabilities"),
-            "Money matters e.g.: gambling": append("financial"),
-            "Veterans": append("veterans"),
-            "Out of prison": append("parole"),
-            "Pets & vet care": append("pets"),
-            "Work/school": append("employment education"),
-            "Health/illness": append("medical"),
+            "Money matters": append("financial"),
+            "Online": append("online"),
         },
     };
 }
