@@ -157,12 +157,7 @@ class ResultsPage extends BaseCategoriesPage {
     }
 
     render(): ReactElement {
-        const Component = this
-            .props
-            .location
-            .pathname
-            .match(/map(\/)?$/) ? ResultsMap
-            : ResultsListPage;
+        const Component = this.component();
 
         return (
             <div className="ResultsPage">
@@ -216,3 +211,17 @@ class ResultsPage extends BaseCategoriesPage {
 }
 
 export default ResultsPage;
+
+export class ResultsPageListing extends ResultsPage {
+    // flow:disable until flow can track inheritance for ReactComponent
+    component(): ReactComponent {
+        return ResultsListPage;
+    }
+}
+
+export class ResultsPageMap extends ResultsPage {
+    // flow:disable until flow can track inheritance for ReactComponent
+    component(): ReactComponent {
+        return ResultsMap;
+    }
+}
