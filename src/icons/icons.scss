@@ -38,7 +38,7 @@ svg.Icon {
     padding-right: 0;
 
     path {
-        fill: $icon-chevron-color;
+        fill: $interactive-icon;
     }
 }
 
@@ -54,8 +54,17 @@ svg.Icon {
 .RadioUnselectedIcon {
     margin-top: -8px;
 
+    path,
+    circle {
+        fill: $interactive-icon;
+    }
+}
+
+.CheckboxSelectedIcon {
     path {
-        fill: $brand-text-dark;
+        fill: $white;
+        stroke: $interactive-icon;
+        stroke-width: 2px;
     }
 }
 
