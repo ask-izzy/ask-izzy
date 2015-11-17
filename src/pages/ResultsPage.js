@@ -65,16 +65,16 @@ class ResultsPage extends BaseCategoriesPage {
                 try {
                     console.error(response);
 
-                    let data = JSON.parse(response.text);
+                    let data = JSON.parse(response.body);
 
                     this.setState({
                         error: data.error_message,
-                        statusCode: response.status,
+                        statusCode: response.statusCode,
                     });
                 } catch (error) {
                     this.setState({
-                        error: `An error occurred (${response.status})`,
-                        statusCode: response.status,
+                        error: `An error occurred (${response.statusCode})`,
+                        statusCode: response.statusCode,
                     });
                 }
 
@@ -135,7 +135,7 @@ class ResultsPage extends BaseCategoriesPage {
 
         } catch (response) {
             try {
-                data = JSON.parse(response.text);
+                data = JSON.parse(response.body);
                 this.setState({
                     error: data.error_message,
                 });

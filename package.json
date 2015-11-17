@@ -21,7 +21,6 @@
     "has-geolocation": "1.0.1",
     "history": "1.13.0",
     "immutable": "3.7.5",
-    "iso-http": "0.0.5",
     "js-yaml": "3.4.2",
     "moment": "2.10.6",
     "newrelic": "1.22.1",
@@ -40,7 +39,8 @@
     "style-loader": "0.12.4",
     "svg-inline-loader": "0.3.0",
     "underscore": "1.8.3",
-    "underscore.string": "3.2.2"
+    "underscore.string": "3.2.2",
+    "xhr": "^2.2.0"
   },
   "devDependencies": {
     "babel-eslint": "4.1.3",
