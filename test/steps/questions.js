@@ -8,6 +8,7 @@
 import Yadda from "yadda";
 import { titleize } from "underscore.string";
 import _ from "underscore";
+import Webdriver from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
@@ -21,6 +22,8 @@ module.exports = (function() {
                unpromisify(setSubcategoryItemsNone))
         .given("I need the following for $STRING\n$lines",
                unpromisify(setSubcategoryItems))
+        .given("I need the following for $STRING: $string",
+               unpromisify(setSubcategoryItem))
         .given("I am not part of any relevant demographics",
                unpromisify(setDemographicsNone))
         .given("I am not interested in any subcategory",
@@ -52,18 +55,47 @@ async function setSleepTonight(answer: string): Promise<void> {
     }, answer);
 }
 
+async function setStorageValue(
+    driver: Webdriver.WebDriver,
+    key: string,
+    value: string,
+): Promise<void> {
+    await gotoUrl(driver, "/");  // go anywhere to start the session
+    await driver.executeScript((key, value) => {
+        sessionStorage.setItem(key, value);
+    }, key, value);
+}
+
 async function setSubcategoryItems(
     category: string,
     items: Array<string>,
 ): Promise<void> {
-    await gotoUrl(this.driver, "/");  // go anywhere to start the session
-    await this.driver.executeScript((category, items) => {
-        sessionStorage.setItem(`sub-${category}`, JSON.stringify(items));
-    }, category, items);
+    await setStorageValue(
+        this.driver,
+        `sub-${category}`,
+        JSON.stringify(items)
+    );
 }
 
-function setSubcategoryItemsNone(category: string): Promise<void> {
-    return setSubcategoryItems.bind(this)(category, []);
+async function setSubcategoryItem(
+    category: string,
+    item: string,
+): Promise<void> {
+    await setStorageValue(
+        this.driver,
+        `sub-${category}`,
+        item
+    );
+}
+
+async function setSubcategoryItemsNone(category: string): Promise<void> {
+    const key = `sub-${category}`;
+
+    await setStorageValue(
+        this.driver,
+        key,
+        (category == "housing") ? "(skipped)" : JSON.stringify([])
+    );
 }
 
 async function setDemographics(
