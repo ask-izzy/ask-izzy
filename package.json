@@ -40,7 +40,7 @@
     "svg-inline-loader": "0.3.0",
     "underscore": "1.8.3",
     "underscore.string": "3.2.2",
-    "xhr": "^2.2.0"
+    "xhr": "2.2.0"
   },
   "devDependencies": {
     "babel-eslint": "4.1.3",
