@@ -172,7 +172,16 @@ class Location extends React.Component {
                 state: completion.terms[1].value,
             }
             /*::`}*/
-        ];
+        ].concat([
+            /*::{_:`*/
+            for (completion of completions)
+            if (_.contains(completion.types, "postal_code"))
+            {
+                state: completion.terms[0].value,
+                suburb: completion.terms[1].value,
+            }
+            /*::`}*/
+        ]);
     }
 
     /**
