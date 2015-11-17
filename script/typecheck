@@ -12,8 +12,6 @@ function check {
 }
 
 echo "${BOLD}Checking for missing @flow comments${END}"
-echo "Good"
-
 HAVE_FLOW=true
 for file in $( git ls-files '**/*.js' ); do
     if [ -e "$file" ] ; then
@@ -32,6 +30,11 @@ done
 if ! $HAVE_FLOW ; then
     exit 1
 fi
+echo "Good"
+
+echo "${BOLD}Checking for '^' or '~' in package.json${END}"
+grep '[\^\~]' package.json && exit 1
+echo "Good"
 
 (./node_modules/.bin/flow start &>/dev/null) & # Pre-start flow server
 check "jsonlint package.json > /dev/null"

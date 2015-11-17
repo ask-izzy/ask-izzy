@@ -5,7 +5,7 @@
  * @module iss
  */
 
-import http from "iso-http";
+import xhr from "xhr";
 import url from "url";
 import { slugify } from "underscore.string";
 import ServiceOpening from "./iss/ServiceOpening";
@@ -61,6 +61,21 @@ export type searchResults = {
     objects: Array<Service>,
 };
 
+type XhrOptions = {
+    useXDR?: boolean,
+    url: string,
+    method?: string,
+    timeout?: number,
+    headers?: Object,
+    body?: ?string,
+    json?: any,
+    username?: string,
+    password?: string,
+    withCredentials?: boolean,
+    responseType?: string,
+    beforeSend?: Function,
+};
+
 /**
  * Wraps the http request code in a promise.
  *
@@ -68,16 +83,16 @@ export type searchResults = {
  *
  * @returns {Promise<Object>} a promise for the request.
  */
-function _request(obj) {
-    return new Promise((resolve, reject) => {
-        http.request(obj, response => {
-            if (response.status == 200) {
+function _request(obj: XhrOptions) {
+    return new Promise((resolve, reject) =>
+        xhr(obj, (err, response, body) => {
+            if (response.statusCode == 200) {
                 resolve(response);
             } else {
                 reject(response);
             }
-        });
-    });
+        })
+    );
 }
 
 
@@ -142,14 +157,15 @@ export async function request(
     /* flow:disable https://github.com/facebook/flow/issues/908 */
     url_ = mungeUrlQuery(url.resolve(url_, path), data);
     let response = await _request({
+        useXDR: true,
         url: url_,
-        contentType: "application/json",
         headers: {
+            "Content-type": "application/json",
             Accept: "application/json",
         },
     });
 
-    return JSON.parse(response.text);
+    return JSON.parse(response.body);
 }
 
 /*

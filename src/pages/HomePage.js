@@ -14,7 +14,7 @@ class HomePage extends React.Component {
     onSearchSubmit(event: Event): void {
         event.preventDefault();
 
-        const search = this.refs.search.getDOMNode().value;
+        const search = this.refs.search.value;
 
         if (search == "") {
             /* FIXME: should this give some user feedback? */
