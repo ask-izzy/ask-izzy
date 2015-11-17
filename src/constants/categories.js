@@ -78,30 +78,6 @@ const categories:Array<Category> = [
         ],
     }),
     new Category({
-        name: "Legal",
-        byline: "Police, law & fines",
-        icon: icons.Legal,
-        search: {
-            q: "legal aid -(coordinating bodies)",
-        },
-        personalisation: [
-            personalisation.Location,
-            personalisation.LegalSubcategories,
-        ],
-    }),
-    new Category({
-        name: "Money help",
-        byline: "Emergency funds, bills etc",
-        icon: icons.Money,
-        search: {
-            q: "financial aid -(coordinating bodies)",
-        },
-        personalisation: [
-            personalisation.Location,
-            personalisation.MoneySubcategories,
-        ],
-    }),
-    new Category({
         name: "Health",
         byline: "Physical, mental, emotional",
         icon: icons.Health,
@@ -117,15 +93,27 @@ const categories:Array<Category> = [
         ],
     }),
     new Category({
-        name: "Addiction",
-        byline: "Drugs, alcohol & gambling",
-        icon: icons.Addiction,
+        name: "Centrelink",
+        byline: "Access to services",
+        icon: icons.Centrelink,
         search: {
-            q: "substance abuse gambling -(coordinating bodies)",
+            q: '"centrelink"',
+            name: "centrelink",
         },
         personalisation: [
             personalisation.Location,
-            personalisation.AddictionSubcategories,
+        ],
+    }),
+    new Category({
+        name: "Money help",
+        byline: "Emergency funds, bills etc",
+        icon: icons.Money,
+        search: {
+            q: "financial aid -(coordinating bodies)",
+        },
+        personalisation: [
+            personalisation.Location,
+            personalisation.MoneySubcategories,
         ],
     }),
     new Category({
@@ -138,6 +126,30 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.CounsellingSubcategories,
+        ],
+    }),
+    new Category({
+        name: "Legal",
+        byline: "Police, law & fines",
+        icon: icons.Legal,
+        search: {
+            q: "legal aid -(coordinating bodies)",
+        },
+        personalisation: [
+            personalisation.Location,
+            personalisation.LegalSubcategories,
+        ],
+    }),
+    new Category({
+        name: "Addiction",
+        byline: "Drugs, alcohol & gambling",
+        icon: icons.Addiction,
+        search: {
+            q: "substance abuse gambling -(coordinating bodies)",
+        },
+        personalisation: [
+            personalisation.Location,
+            personalisation.AddictionSubcategories,
         ],
     }),
     new Category({
@@ -168,12 +180,11 @@ const categories:Array<Category> = [
         ],
     }),
     new Category({
-        name: "Centrelink",
-        byline: "Access to services",
-        icon: icons.Centrelink,
+        name: "Facilities",
+        byline: "Toilets, libraries etc",
+        icon: icons.Facilaties,
         search: {
-            q: '"centrelink"',
-            name: "centrelink",
+            q: "toilets public libraries -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
@@ -191,17 +202,6 @@ const categories:Array<Category> = [
             personalisation.Gender,
             personalisation.Age,
             personalisation.Demographics,
-        ],
-    }),
-    new Category({
-        name: "Facilities",
-        byline: "Toilets, libraries etc",
-        icon: icons.Facilaties,
-        search: {
-            q: "toilets public libraries -(coordinating bodies)",
-        },
-        personalisation: [
-            personalisation.Location,
         ],
     }),
     new Category({

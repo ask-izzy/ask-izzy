@@ -14,16 +14,17 @@ Feature: Landing page
         Housing
         Food
         Everyday things
-        Legal
-        Money help
         Health
-        Addiction
+        Centrelink
+        Money help
         Support & counselling
+        Legal
+        Addiction
         Life skills & education
         Finding work
-        Centrelink
-        Something to do
         Facilities
+        Something to do
         Technology
+        Have your say
         ---------------
         And I should see the branding footer
