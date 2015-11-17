@@ -7,6 +7,7 @@ import reactMixin from "react-mixin";
 
 import iss from "../iss";
 import components from "../components";
+import Loading from "../icons/Loading";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 class ServicePage extends React.Component {
@@ -37,6 +38,9 @@ class ServicePage extends React.Component {
     }
 
     async loadService(): Promise<void> {
+        // Unload previous service
+        this.setState({object: undefined});
+
         let service = await iss.getService(this.id);
 
         this.setState({
@@ -48,14 +52,23 @@ class ServicePage extends React.Component {
         let {
             object,
         } = this.state;
+        let history = this.props.history;
 
         if (!object) {
-            return <div/>;
-        } else {
-            let history = this.props.history;
-
             return (
-                <div>
+                <div className="ServicePage">
+                    <components.AppBar
+                        title="Loading..."
+                        onBackTouchTap={history.goBack.bind(history)}
+                    />
+                    <div className="loading-indicator">
+                        <Loading />
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <div className="ServicePage">
                     <components.AppBar
                         title={object.site.name}
                         onBackTouchTap={history.goBack.bind(history)}
