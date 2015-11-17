@@ -16,7 +16,7 @@ export default class ComplaintSubcategories extends BaseMultiQuestion {
             "Disability": append("Disability"),
             "Finance": append("Finance"),
             "Public Transport": append("Public Transport"),
-            "Other": append("Other"),
+            "Other": append(""),
         },
     };
 
