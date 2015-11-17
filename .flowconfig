@@ -5,6 +5,7 @@
 .*/node_modules/.*/examples/.*
 .*/node_modules/.*/test/.*
 .*/node_modules/fbjs/.*
+.*/bower_components/.*
 
 [include]
 

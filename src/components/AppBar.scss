@@ -50,26 +50,16 @@
         }
 
         span {
+            @include slideInRight(0.5s, 0s, forwards);
+
             position: absolute;
             top: -5px;
-            right: -50px;
-            animation: slideIcon 0.5s forwards;
-            @keyframes slideIcon {
-                100% {
-                    right: 0;
-                }
-            }
+            right: 0;
 
             &.next-label {
                 top: 10px;
-                right: 0;
+                right: 50px;
                 line-height: 20px;
-                animation: slideLabel 0.5s forwards;
-                @keyframes slideLabel {
-                    100% {
-                        right: 50px;
-                    }
-                }
             }
         }
 
