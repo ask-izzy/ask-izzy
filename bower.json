@@ -3,7 +3,7 @@
   "description": "Ask Izzy webapp",
   "main": "src/client.js",
   "authors": [
-    "Daniel Heath <daniel@heath.cc>"
+    "Daniel Heath <daniel@heath.cc>",
     "Danielle Madeley <danielle@madeley.id.au>"
   ],
   "license": "GPL3",

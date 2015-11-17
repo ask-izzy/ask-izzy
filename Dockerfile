@@ -44,6 +44,8 @@ COPY package.json /app/
 RUN npm install && \
     npm cache clean
 
+RUN node_modules/.bin/bower install
+
 # Install and build the app
 ADD . /app
 RUN script/build-assets && \
