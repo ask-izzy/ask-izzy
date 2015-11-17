@@ -12,10 +12,10 @@ export default class CounsellingSubcategories extends BaseMultiQuestion {
             "Homelessness": append("homeless"),
             "Family violence": append("family violence"),
             "Sexual identity": append("sexuality"),
-            "Asylum seeker or refugee": append("refugee"),
             "Family or relationships": append("relationship"),
             "Money matters": append("financial"),
             "Online": append("online"),
+            "Other": append(""),
         },
     };
 }
