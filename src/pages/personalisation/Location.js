@@ -132,6 +132,21 @@ class Location extends React.Component {
         throw "Unable to determine your suburb";
     }
 
+    *filterCompletions(completions: Array<Object>): Iterable<Object> {
+        for (const completion of completions) {
+            if (_.contains(completion.types, "locality")) {
+                yield {
+                    suburb: completion.terms[0].value,
+                    state: completion.terms[1].value,
+                }
+            } else if (_.contains(completion.types, "postal_code")) {
+                yield {
+                    state: completion.terms[0].value,
+                    suburb: completion.terms[1].value,
+                }
+            }
+        }
+    }
     /**
      * Take a search string and (optionally) the user's current location
      * and return a promise for an array of possible matches.
@@ -165,12 +180,8 @@ class Location extends React.Component {
 
         return [
             /*::{_:`*/
-            for (completion of completions)
-            if (_.contains(completion.types, "locality"))
-            {
-                suburb: completion.terms[0].value,
-                state: completion.terms[1].value,
-            }
+            for (completion of this.filterCompletions(completions))
+                completion
             /*::`}*/
         ];
     }
