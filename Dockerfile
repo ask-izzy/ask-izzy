@@ -42,9 +42,8 @@ RUN echo "Disabling non-essential packages" && \
 # Install the npm deps
 COPY package.json /app/
 RUN npm install && \
-    npm cache clean
-
-RUN node_modules/.bin/bower install
+    npm cache clean && \
+    $(npm bin)/bower install
 
 # Install and build the app
 ADD . /app

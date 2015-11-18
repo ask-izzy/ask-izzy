@@ -10,7 +10,7 @@ before_install:
 install:
   - npm config set cache ./node_modules_cache
   - npm install
-  - node_modules/.bin/bower install
+  - $(npm bin)/bower install
   - script/build-assets
 
 cache:

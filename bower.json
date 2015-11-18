@@ -20,6 +20,6 @@
     "tests"
   ],
   "dependencies": {
-    "saffron": "~0.2.3"
+    "saffron": "0.2.3"
   }
 }
