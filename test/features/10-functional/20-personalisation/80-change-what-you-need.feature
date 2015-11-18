@@ -23,7 +23,7 @@ Feature: Change your personalisation settings
         ================================================================
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
-        Which situation is most like yours?          | 0 selected
+        Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected
@@ -48,7 +48,7 @@ Feature: Change your personalisation settings
         ================================================================
         Where are you?                               | Carlton, Victoria
         Do you have somewhere safe to sleep tonight? | Yes
-        Which situation is most like yours?          | 0 selected
+        Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected
@@ -71,10 +71,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
 
     Scenario: Edit housing subcategory items
-        Given I need the following for housing
-        -------------------------------
-        In a rooming house
-        -------------------------------
+        Given I need the following for housing: In a rooming house
 
         When I visit /category/housing/personalise/summary
         Then I should see "This is what you said you need. Change your answers here."
@@ -84,7 +81,7 @@ Feature: Change your personalisation settings
         ================================================================
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
-        Which situation is most like yours?          | 1 selected
+        Which situation is most like yours?          | In a rooming house
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected
@@ -98,10 +95,7 @@ Feature: Change your personalisation settings
         And "Public housing" should not be checked
         And "Mortgaged housing" should not be checked
 
-        When I click on "In a rooming house"
-        And I click on "Private rental"
-        And I click on "Mortgaged housing"
-        And I click on "Done"
+        When I click on "Private rental"
         Then I should see "This is what you said you need. Change your answers here."
         Then I should see the results
         ----------------------------------------------------------------
@@ -109,7 +103,7 @@ Feature: Change your personalisation settings
         ================================================================
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
-        Which situation is most like yours?          | 2 selected
+        Which situation is most like yours?          | Private rental
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected
@@ -131,7 +125,7 @@ Feature: Change your personalisation settings
         ================================================================
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
-        Which situation is most like yours?          | 0 selected
+        Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 3 selected
@@ -147,7 +141,7 @@ Feature: Change your personalisation settings
         ================================================================
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
-        Which situation is most like yours?          | 0 selected
+        Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 2 selected
@@ -164,7 +158,7 @@ Feature: Change your personalisation settings
         ================================================================
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
-        Which situation is most like yours?          | 0 selected
+        Which situation is most like yours?          | (skipped)
         How do you identify?                         | Male
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected

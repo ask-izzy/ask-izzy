@@ -47,7 +47,7 @@ Feature: Skip personalisation settings
         ================================================================
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
-        Which situation is most like yours?          | 0 selected
+        Which situation is most like yours?          | (skipped)
         How do you identify?                         | (skipped)
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | 0 selected

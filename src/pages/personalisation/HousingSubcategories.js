@@ -1,11 +1,10 @@
 /* @flow */
 
-import BaseMultiQuestion from "./BaseMultiQuestion";
 import SleepTonight from "./SleepTonight";
-import { append } from "./BaseQuestion";
+import BaseQuestion, { append } from "./BaseQuestion";
 
-export default class HousingSubcategories extends BaseMultiQuestion {
-    static propTypes = BaseMultiQuestion.propTypes;
+export default class HousingSubcategories extends BaseQuestion {
+    static propTypes = BaseQuestion.propTypes;
     static defaultProps = {
         name: "sub-housing",
         question: "Which situation is most like yours?",
