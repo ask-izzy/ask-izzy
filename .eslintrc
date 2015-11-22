@@ -54,6 +54,8 @@
         "no-native-reassign": 2,
         "no-proto": 2,
         "no-return-assign": 2,
+        /* Broken by an update to one of eslints dependencies */
+        "no-redeclare": 0,
         "no-spaced-func": 2,
         "no-trailing-spaces": 2,
         /* broken with flow interfaces
@@ -98,7 +100,7 @@
         "react/jsx-uses-vars": 2,
         "react/no-did-mount-set-state": 2,
         "react/no-did-update-set-state": 2,
-        "react/no-multi-comp": 2,
+        "react/no-multi-comp": 0, /* Composing components out of small pieces is a good thing */
         "react/no-unknown-property": 2,
         "react/no-did-mount-set-state": 0, /* ismorphic rendering does not play nice with this rule */
         /* "react/prop-types": 2, */
