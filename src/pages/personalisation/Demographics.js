@@ -32,7 +32,10 @@ export default class Demographics extends BaseMultiQuestion {
             "Have a disability": icons.DemographicDisability,
             "Have children": icons.DemographicChildren,
             "Have pets": icons.DemographicPets,
-            "On parole or recently released from prison": icons.DemographicParole,
+            "On parole or recently released": icons.DemographicParole,
+            "Veteran": icons.DemographicVeteran,
+            "Escaping family violence": icons.DemographicFamilyViolence,
+            "Need an interpreter": icons.DemographicNeedInterpreter,
         },
     };
 
