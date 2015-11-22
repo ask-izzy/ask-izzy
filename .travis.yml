@@ -10,6 +10,7 @@ before_install:
 install:
   - npm config set cache ./node_modules_cache
   - npm install
+  - $(npm bin)/bower install
   - script/build-assets
 
 cache:
@@ -18,6 +19,7 @@ cache:
     - ~/.nvm/versions/
     - node_modules/flow-bin/
     - node_modules/.bin/flow
+    - bower_components/
 
 script:
   - script/typecheck

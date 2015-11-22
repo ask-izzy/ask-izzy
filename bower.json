@@ -1,0 +1,25 @@
+{
+  "name": "ask-izzy",
+  "description": "Ask Izzy webapp",
+  "main": "src/client.js",
+  "authors": [
+    "Daniel Heath <daniel@heath.cc>",
+    "Danielle Madeley <danielle@madeley.id.au>"
+  ],
+  "license": "GPL3",
+  "homepage": "https://github.com/ask-izzy/ask-izzy",
+  "moduleType": [
+    "es6"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "saffron": "0.2.3"
+  }
+}

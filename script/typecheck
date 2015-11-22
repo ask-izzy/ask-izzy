@@ -36,6 +36,10 @@ echo "${BOLD}Checking for '^' or '~' in package.json${END}"
 grep '[\^\~]' package.json && exit 1
 echo "Good"
 
+echo "${BOLD}Checking for '^' or '~' in bower.json${END}"
+grep '[\^\~]' bower.json && exit 1
+echo "Good"
+
 (./node_modules/.bin/flow start &>/dev/null) & # Pre-start flow server
 check "jsonlint package.json > /dev/null"
 check "eslint src/ test/ fixtures/ webpack/"
