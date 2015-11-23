@@ -148,12 +148,13 @@ async function clickMarker(title: string): Promise<void> {
 }
 
 async function assertMap(): Promise<void> {
-    let nMaps = await this.driver.executeScript(
-        () => google.maps.maps.length
+    // Wait until the map appears
+    await this.driver.wait(() =>
+        this.driver.executeScript(
+            () => google.maps.maps.length
+        ),
+        10000,
     );
-
-    assert.equal(nMaps, 1);
-
     let visible = await this.driver
                     .findElement(By.css(".gm-style"))
                     .isDisplayed();

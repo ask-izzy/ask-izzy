@@ -153,9 +153,7 @@ export async function request(
     path: string,
     data: ?searchRequest
 ): Promise<Object> {
-    let url_: string = ISS_URL;
-
-    url_ = mungeUrlQuery(url.resolve(url_, path), data);
+    const url_ = mungeUrlQuery(url.resolve(ISS_URL, path), data);
 
     let response = await _request({
         useXDR: true,
@@ -201,9 +199,10 @@ export async function requestObjects(
     data: ?searchRequest,
 ): Promise<searchResults> {
     let url_ = mungeUrlQuery(path, data);
+    let hit = requestObjectsCache.exactHit(url_);
 
-    if (requestObjectsCache.exactHit(url_)) {
-        return requestObjectsCache.exactHit(url_);
+    if (hit) {
+        return hit;
     }
 
     let response = await request(path, data);

@@ -5,7 +5,6 @@
 
 import assert from "assert";
 import Cache from "../../../src/iss/Cache";
-import _ from "underscore";
 
 describe("ISS Caching", function() {
     let cache = new Cache(); // Keep flow happy
@@ -15,20 +14,20 @@ describe("ISS Caching", function() {
     })
 
     describe("A series of paginated requests", function() {
-        let urls = [
-            "/search/?area=Melbourne&limit=10",
-            "/search/?area=Melbourne&limit=10&offset=1",
-            "/search/?area=Melbourne&limit=10&offset=2",
-        ]
-        let responses = [
-            {meta: {next: urls[1]}, objects: [0]},
-            {meta: {next: urls[2]}, objects: [1]},
-            {meta: {}, objects: [2]},
-        ];
+        let urls = [];
+        let responses = [];
 
         beforeEach(function() {
-            urls = _.clone(urls);
-            responses = _.clone(responses);
+            urls = [
+                "/search/?area=Melbourne&limit=10",
+                "/search/?area=Melbourne&limit=10&offset=1",
+                "/search/?area=Melbourne&limit=10&offset=2",
+            ]
+            responses = [
+                {meta: {next: urls[1]}, objects: [0]},
+                {meta: {next: urls[2]}, objects: [1]},
+                {meta: {}, objects: [2]},
+            ];
         })
 
         it("Initially has no hit for the urls", function() {
