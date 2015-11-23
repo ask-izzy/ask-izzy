@@ -54,7 +54,7 @@
         "no-native-reassign": 2,
         "no-proto": 2,
         "no-return-assign": 2,
-        /* Broken by an update to one of eslints dependencies */
+        /* FIXME: Broken by an update to one of eslints dependencies */
         "no-redeclare": 0,
         "no-spaced-func": 2,
         "no-trailing-spaces": 2,
@@ -74,13 +74,13 @@
         "no-var": 2,
         "operator-assignment": [2, "always"],
         "operator-linebreak": [2, "after", { "overrides": { ":": "before" }}],
-        "prefer-arrow-callback": 0,
+        "prefer-arrow-callback": 0, /* FIXME: Broken by eslint dep */
         "prefer-spread": 2,
         "quotes": [2, "double", "avoid-escape"],
         /* "require-jsdoc": 2, */
         "space-after-keywords": 2,
         "space-before-blocks": [2, "always"],
-        "space-before-function-paren": [0],
+        "space-before-function-paren": [0], /* FIXME: Broken by eslint dep */
         "space-in-parens": [2, "never"],
         "space-infix-ops": 2,
         "space-unary-ops": [2, { "words": true, "nonwords": false }],
