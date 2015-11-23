@@ -22,8 +22,26 @@ Feature: See results on a map
         Then I should see a map
 
     Scenario: View results on a map
-        When I visit /category/housing
-       Given my location is 37.822S 144.99E
+       Given I am not interested in any subcategory
+         And my location is 37.822S 144.99E
+        When I visit /category/everyday-things
+        And I click on "Load more results…"
+        Then I should see the results
+        ---------------------
+        ServiceName (name)
+        =====================
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        ---------------------
+
           And I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
         When I click on "View on a map"
@@ -34,9 +52,24 @@ Feature: See results on a map
         Title              | Latitude | Longitude
         ==========================================
         You are here       | -37.8220 | 144.990
-        My Housing Service | -37.8228 | 144.998
-        Youth Support Net  | -37.8237 | 144.985
+        Youth Support Net  | -37.8228 | 144.998
         ------------------------------------------
+        And I click marker titled "Youth Support Net"
+        Then I should see the results
+        ---------------------
+        ServiceName (name)
+        =====================
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        Community Lunch
+        ---------------------
 
     Scenario: Clicking a marker shows services at that site and clicking on map returns to full map
         When I visit /category/housing

@@ -102,7 +102,7 @@ class ResultsPage extends BaseCategoriesPage {
 
             this.setState({
                 meta: data.meta,
-                objects: this.state.objects.concat(data.objects),
+                objects: data.objects,
                 error: undefined,
             });
 

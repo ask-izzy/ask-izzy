@@ -8,8 +8,10 @@
 import xhr from "xhr";
 import url from "url";
 import { slugify } from "underscore.string";
+
 import ServiceOpening from "./iss/ServiceOpening";
 import Location from "./iss/Location";
+import Cache from "./iss/Cache";
 import serviceProvisions from "./constants/service-provisions";
 import Maps from "./maps";
 
@@ -95,7 +97,6 @@ function _request(obj: XhrOptions) {
     );
 }
 
-
 /**
  * Add anything in data to the URL query params,
  * and convert auth to `&key=value` form.
@@ -105,7 +106,7 @@ function _request(obj: XhrOptions) {
  *
  * @returns {Promise<Object>} a promise for the request.
  */
-export function mungeUrlQuery(url_: string, data: Object): string {
+export function mungeUrlQuery(url_: string, data: ?Object): string {
     let urlObj = url.parse(url_, true);
 
     /* data overrides anything passed in via the URL.
@@ -131,7 +132,7 @@ export function mungeUrlQuery(url_: string, data: Object): string {
         // Flow can't tell that `data` isn't null inside a closure
         let _data = data;
 
-        serialized = Object.keys(_data).map(key => {
+        serialized = Object.keys(_data).sort().map(key => {
             let serializeValue = (value) =>
                 `${key}=${encodeURIComponent(value)}`;
 
@@ -154,8 +155,8 @@ export async function request(
 ): Promise<Object> {
     let url_: string = ISS_URL;
 
-    /* flow:disable https://github.com/facebook/flow/issues/908 */
     url_ = mungeUrlQuery(url.resolve(url_, path), data);
+
     let response = await _request({
         useXDR: true,
         url: url_,
@@ -193,10 +194,18 @@ async function attachTransportTimes(
     return services;
 }
 
+let requestObjectsCache = new Cache();
+
 export async function requestObjects(
     path: string,
     data: ?searchRequest,
 ): Promise<searchResults> {
+    let url_ = mungeUrlQuery(path, data);
+
+    if (requestObjectsCache.exactHit(url_)) {
+        return requestObjectsCache.exactHit(url_);
+    }
+
     let response = await request(path, data);
 
     // convert objects to ISS search results
@@ -205,6 +214,9 @@ export async function requestObjects(
     );
 
     response.objects = await attachTransportTimes(objects);
+
+    requestObjectsCache.revise(url_, response);
+
     return response;
 }
 
