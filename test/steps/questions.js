@@ -120,7 +120,7 @@ async function setSubcategoriesNone(
         sessionStorage.setItem("sub-counselling", "[]");
         sessionStorage.setItem("sub-everyday-things", "[]");
         sessionStorage.setItem("sub-health", "[]");
-        sessionStorage.setItem("sub-housing", "[]");
+        sessionStorage.setItem("sub-housing", "(skipped)");
         sessionStorage.setItem("sub-job", "[]");
         sessionStorage.setItem("sub-legal", "[]");
         sessionStorage.setItem("sub-life-skills", "[]");
