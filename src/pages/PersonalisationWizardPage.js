@@ -53,6 +53,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
                     forwardEnabled={
                         !this.state.nextDisabled
                     }
+                    slideForwardIn={true}
                 />
                 <Subpage ref="subpage" />
             </div>

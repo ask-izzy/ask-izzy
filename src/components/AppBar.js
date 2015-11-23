@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import classnames from "classnames";
 
 import components from "../components";
 import icons from "../icons";
@@ -45,7 +46,11 @@ class AppBar extends React.Component {
         if (this.props.onForwardTouchTap) {
             return (
                 <components.IconButton
-                    className="NextButton button-container"
+                    className={classnames(
+                        "NextButton",
+                        "button-container",
+                        {slideIn: this.props.slideForwardIn},
+                    )}
                     onTouchTap={this.props.onForwardTouchTap}
                     disabled={!this.props.forwardEnabled}
                 >

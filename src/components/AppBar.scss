@@ -49,9 +49,11 @@
             color: $brand-bg-mid;
         }
 
-        span {
+        &.slideIn span {
             @include slideInRight(0.5s, 0s, forwards);
+        }
 
+        span {
             position: absolute;
             top: -5px;
             right: 0;
@@ -88,7 +90,8 @@
         }
 
         .Icon.HouseIcon {
-            margin-top: 5px;
+            margin-top: 9px;
+            margin-right: 5px;
         }
 
         .ChevronIcon,
