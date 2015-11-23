@@ -33,10 +33,10 @@ describe("Compose personalisation search terms", function() {
         };
 
         // flow:disable -- flow is confused about exports
-        request = pages.Age.getSearchForAnswer(request, "26 to 64");
+        request = pages.Age.getSearchForAnswer(request, "26 to 40");
         assert.deepEqual(request, {
             q: "crisis accommodation",
-            age_groups: ["adult", "middleageadult"],
+            age_groups: ["adult"],
         });
     });
 
@@ -50,10 +50,10 @@ describe("Compose personalisation search terms", function() {
         // flow:disable -- flow is confused about exports
         request = pages.Gender.getSearchForAnswer(request, "Male");
         // flow:disable -- flow is confused about exports
-        request = pages.Age.getSearchForAnswer(request, "26 to 64");
+        request = pages.Age.getSearchForAnswer(request, "26 to 40");
         assert.deepEqual(request, {
             q: "crisis accommodation",
-            age_groups: ["adult", "middleageadult"],
+            age_groups: ["adult"],
             client_gender: ["m", "u"],
         });
     });
