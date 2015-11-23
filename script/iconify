@@ -60,7 +60,6 @@ files.forEach((path) => {
     }
 
     writeFileSync(outFile, `${fileHeader}
-
 import React from "react";
 import classnames from "classnames";
 

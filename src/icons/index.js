@@ -14,11 +14,14 @@ import SvgIconCross from "./Cross.js";
 import SvgIconDemographicAboriginal from "./DemographicAboriginal.js";
 import SvgIconDemographicChildren from "./DemographicChildren.js";
 import SvgIconDemographicDisability from "./DemographicDisability.js";
+import SvgIconDemographicFamilyViolence from "./DemographicFamilyViolence.js";
 import SvgIconDemographicLgbtiq from "./DemographicLgbtiq.js";
+import SvgIconDemographicNeedInterpreter from "./DemographicNeedInterpreter.js";
 import SvgIconDemographicParole from "./DemographicParole.js";
 import SvgIconDemographicPets from "./DemographicPets.js";
 import SvgIconDemographicRecentlyArrived from "./DemographicRecentlyArrived.js";
 import SvgIconDemographicTorresStrait from "./DemographicTorresStrait.js";
+import SvgIconDemographicVeteran from "./DemographicVeteran.js";
 import SvgIconEmail from "./Email.js";
 import SvgIconEntertainment from "./Entertainment.js";
 import SvgIconFacilaties from "./Facilaties.js";
@@ -65,11 +68,14 @@ export default {
     DemographicAboriginal: SvgIconDemographicAboriginal,
     DemographicChildren: SvgIconDemographicChildren,
     DemographicDisability: SvgIconDemographicDisability,
+    DemographicFamilyViolence: SvgIconDemographicFamilyViolence,
     DemographicLgbtiq: SvgIconDemographicLgbtiq,
+    DemographicNeedInterpreter: SvgIconDemographicNeedInterpreter,
     DemographicParole: SvgIconDemographicParole,
     DemographicPets: SvgIconDemographicPets,
     DemographicRecentlyArrived: SvgIconDemographicRecentlyArrived,
     DemographicTorresStrait: SvgIconDemographicTorresStrait,
+    DemographicVeteran: SvgIconDemographicVeteran,
     Email: SvgIconEmail,
     Entertainment: SvgIconEntertainment,
     Facilaties: SvgIconFacilaties,
