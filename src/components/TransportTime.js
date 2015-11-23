@@ -14,6 +14,15 @@ class TransportTime extends React.Component {
         location: React.PropTypes.object.isRequired,
     };
 
+    static defaultProps = {
+        compact: false,
+    };
+
+    constructor() {
+        super();
+        this.state = {time: {}};
+    }
+
     static sampleProps = {
         compact: {
             location: new Location(fixtures.ixa.location, {
@@ -30,15 +39,6 @@ class TransportTime extends React.Component {
             compact: false,
         },
     };
-
-    static defaultProps = {
-        compact: false,
-    };
-
-    constructor() {
-        super();
-        this.state = {time: {}};
-    }
 
     render(): ReactElement {
         if (this.props.location.isConfidential()) {
