@@ -39,7 +39,9 @@
             width: 40px;
             height: 40px;
 
-            fill: $brand-pane-alt-dark;
+            path {
+                fill: $brand-pane-alt-dark;
+            }
         }
     }
 }
