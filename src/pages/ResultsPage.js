@@ -164,14 +164,6 @@ class ResultsPage extends BaseCategoriesPage {
                 <AppBar
                     title={this.title}
                     onBackTouchTap={this.onBackClick.bind(this)}
-                    onForwardTouchTap={() =>
-                        this.props.history.pushState(
-                            null,
-                            "/",
-                            {}
-                        )
-                    }
-                    forwardIcon={<icons.House className="small" />}
                 />
 
                 <Component
