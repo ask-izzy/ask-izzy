@@ -3,16 +3,16 @@
  * Polyfill some more methods onto storage
  */
 
-import sessionstorage from "sessionstorage";
+import koekje from "koekje";
 
 class Storage {
 
     static getItem(key: string): ?(string|number|boolean) {
-        return sessionstorage.getItem(key);
+        return koekje.getItem(key);
     }
 
     static setItem(key: string, obj: string|number|boolean): void {
-        sessionstorage.setItem(key, obj);
+        koekje.setItem(key, obj);
     }
 
     static getJSON(key: string): any {
@@ -40,8 +40,12 @@ class Storage {
     }
 
     static clear(): void {
-        sessionstorage.clear();
+        koekje.clear();
     }
+}
+
+if (typeof window != "undefined") {
+    window.IzzyStorage = Storage
 }
 
 export default Storage;

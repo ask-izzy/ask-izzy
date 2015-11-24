@@ -10,7 +10,7 @@ import SauceLabs from "saucelabs";
 import Webdriver from "selenium-webdriver";
 import Yadda from "yadda";
 import fs from "fs";
-import webDriverInstance from "./support/webdriver";
+import webDriverInstance, {cleanDriverSession} from "./support/webdriver";
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
@@ -36,14 +36,7 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
             sessionId = (await driver.getSession())
                 .getId();
 
-            await driver
-                .executeScript(() => {
-                    try {
-                        sessionStorage.clear();
-                    } catch (error) {
-                        console.error(error);
-                    }
-                });
+            await cleanDriverSession(driver);
 
             if (process.env.BROWSER_LOGS) {
                 // Flush any logs from previous tests
