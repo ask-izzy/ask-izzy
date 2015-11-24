@@ -52,18 +52,7 @@ class TransportTime extends React.Component {
         /* This is a confidential location, we can't show any
          * transport time*/
         return (
-            <div
-                className={classnames(
-                    "TransportTime",
-                    {compact: this.props.compact}
-                )}
-            >
-                <icons.Phone className="ColoredIcon brand-text-dark" />
-                <span className="travel-time">
-                    Confidential location
-                </span>&nbsp;
-                {this.renderSuburb()}
-            </div>
+            <div />
         );
     }
 

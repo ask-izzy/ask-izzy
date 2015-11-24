@@ -58,13 +58,14 @@ export default class ServicePane extends React.Component {
 
                     <CollapsedOpeningTimes object={object.open} />
                     <hr />
-
+					
                     <GoogleMapsLink
                         className="plain-text"
                         from="Current Location"
                         to={object.Location()}
                     >
                         <Address location={object.Location()} />
+						<hr />
                         <TransportTime location={object.Location()}/>
                     </GoogleMapsLink>
 
