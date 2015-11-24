@@ -31,7 +31,7 @@ class NavBar extends React.Component {
                     }
 
                     <LinkListItem
-                        className="CategoryListItem"
+                        className="CategoryListItem FeedbackLink"
                         href={mailLink}
                         leftIcon={
                             <icons.Logo
