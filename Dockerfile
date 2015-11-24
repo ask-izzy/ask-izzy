@@ -40,7 +40,7 @@ RUN echo "Disabling non-essential packages" && \
     apt-get clean
 
 # Install the npm deps
-COPY package.json /app/
+COPY package.json bower.json /app/
 RUN npm install && \
     npm cache clean && \
     $(npm bin)/bower install --allow-root
