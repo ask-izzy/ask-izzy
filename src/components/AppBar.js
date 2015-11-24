@@ -45,18 +45,29 @@ class AppBar extends React.Component {
     render(): ReactElement {
         return (
             <div className="AppBar">
-                <components.IconButton
-                    className="BackButton button-container"
-                    onTouchTap={this.props.onBackTouchTap}
-                >
-                    <icons.ChevronBack className="left" />
-                </components.IconButton>
+				{this.renderBackButton()}
                 <h1 className="title">{this.props.title}</h1>
                 {this.renderForwardButton()}
             </div>
         );
     }
-
+	
+	renderBackButton(): ?ReactElement {
+		return (
+	        <components.IconButton
+	            className="BackButton button-container"
+	            onTouchTap={this.props.onBackTouchTap}
+	        >
+				<div className="left">
+		            <icons.ChevronBack />
+					<span className="back-label">
+						{this.props.backMessage}
+					</span>
+				</div>
+	        </components.IconButton>
+		)
+	}
+	
     renderForwardButton(): ?ReactElement {
         return (
             <components.IconButton
