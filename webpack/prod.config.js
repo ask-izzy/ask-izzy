@@ -60,7 +60,7 @@ module.exports = {
     plugins: [
 
         // ignore react-a11y in prod
-        new webpack.IgnorePlugin(/react-a11y/),
+        new webpack.NormalModuleReplacementPlugin(/react-a11y/, "./noop"),
 
         // set global vars
         env("production"),

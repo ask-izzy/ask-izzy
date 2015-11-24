@@ -49,7 +49,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
                     onBackTouchTap={this.previousStep.bind(this)}
                     onForwardTouchTap={this.nextStep.bind(this)}
                     forwardMessage="Next"
-                    forwardIcon={<Chevron />}
+                    forwardIcon={<Chevron alt="" />}
                     forwardEnabled={
                         !this.state.nextDisabled
                     }

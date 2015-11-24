@@ -13,6 +13,7 @@ class AppBar extends React.Component {
     static propTypes = {
         title: React.PropTypes.string.isRequired,
         onBackTouchTap: React.PropTypes.func.isRequired,
+        backMessage: React.PropTypes.string,
         onForwardTouchTap: React.PropTypes.func,
         forwardMessage: React.PropTypes.string,
         forwardEnabled: React.PropTypes.bool,
@@ -20,9 +21,15 @@ class AppBar extends React.Component {
     };
 
     static defaultProps = {
+        backMessage: "",
         forwardEnabled: true,
         forwardMessage: "",
-        forwardIcon: <icons.House className="small" />,
+        forwardIcon: (
+            <icons.House
+                aria-label="Home"
+                className="small"
+            />
+        ),
     };
 
     static sampleProps = {default: {
@@ -52,14 +59,14 @@ class AppBar extends React.Component {
         );
     }
 
-    renderBackButton(): ?ReactElement {
+    renderBackButton(): ReactElement {
         return (
             <components.IconButton
                 className="BackButton button-container"
                 onTouchTap={this.props.onBackTouchTap}
             >
                 <div className="left">
-                    <icons.ChevronBack />
+                    <icons.ChevronBack aria-label="Back" />
                     <span className="back-label">
                         {this.props.backMessage}
                     </span>
