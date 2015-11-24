@@ -12,6 +12,19 @@
             margin-left: auto;
         }
     }
+	
+	.MapIcon{
+		margin-top: -9px;
+		margin-left: -2px;
+		width: 40px;
+		height: 40px;
+	}
+	
+	.rightIcon {
+		top: 6px;
+		width: 40px;
+		height: 40px;
+	}
 
     .change-personalisation {
 		font-weight: 400;
@@ -41,7 +54,6 @@
     }
 
     .MoreResultsButton {
-        border-top: 10px solid $brand-bg-light;
         border-bottom: 10px solid $brand-bg-light;
         border-left: 10px solid $brand-bg-light;
         border-right: 10px solid $brand-bg-light;

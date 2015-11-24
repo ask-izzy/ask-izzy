@@ -3,7 +3,9 @@
 
     font-size: 14px;
     font-weight: 400;
-
+	
+	border-bottom: 10px solid $list-item-hairline;
+	
     .name {
         margin: 0;
         margin-bottom: 3px;
