@@ -44,7 +44,7 @@ Feature: See results on a map
 
        Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
-        When I click on "View on a map"
+        When I click the map link
         Then I should see a map
         # There are 2 sites
         And I should see markers
