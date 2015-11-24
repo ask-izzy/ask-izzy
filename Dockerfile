@@ -43,7 +43,7 @@ RUN echo "Disabling non-essential packages" && \
 COPY package.json /app/
 RUN npm install && \
     npm cache clean && \
-    $(npm bin)/bower install
+    $(npm bin)/bower install --allow-root
 
 # Install and build the app
 ADD . /app
