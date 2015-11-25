@@ -55,12 +55,7 @@ class Collapser extends React.Component {
                 className={classnames("Collapser", this.props.className)}
                 onClick={this.onClick.bind(this)}
             >
-                <a
-                    href="#"
-                    alt="Show more"
-                    className="collapser-message"
-                    onClick={this.onMessageClick.bind(this)}
-                >{this.props.message}</a>
+                {this.renderMessage()}
                 <div
                     className={classnames({collapsed: this.state.collapsed})}
                 >
@@ -69,6 +64,19 @@ class Collapser extends React.Component {
             </div>
         );
     }
+	
+	renderMessage(): ReactElement {
+		if ( this.state.collapsed ) {
+	        return(
+				<a
+		            href="#"
+		            alt="Show more"
+		            className="collapser-message"
+		            onClick={this.onMessageClick.bind(this)}
+		        >{this.props.message}</a>
+	        )
+		}
+	}
 
 }
 
