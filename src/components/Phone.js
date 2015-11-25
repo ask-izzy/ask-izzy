@@ -17,14 +17,13 @@ class Phone extends React.Component {
     render(): ReactElement {
         return (
             <div className="Contact Phone">
-                <a href={this.href}>
-                    <icons.Phone />
+		        <span className="kind">
+		            {this.props.comment ? this.props.comment
+		            : titleize(this.props.kind)}
+		        </span>
+                <a href={this.href} className="ContactButton">
                     <div className="Contact-text">
-                        <span className="kind">
-                            {this.props.comment ? this.props.comment
-                            : titleize(this.props.kind)}
-                        </span>
-                        {' '}
+	                    <icons.Phone />
                         <span className="number value">
                             {this.props.number}
                         </span>

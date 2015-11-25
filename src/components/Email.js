@@ -18,11 +18,10 @@ export default class Email extends React.Component {
                 <a href={`mailto:${email}`}>
                     <icons.Email />
                     <div className="Contact-text">
-                        <span className="kind">
-                            {this.props.comment ? this.props.comment
-                            : "Email"}
-                        </span>
-                        {' '}
+				        <span className="kind">
+				            {this.props.comment ? this.props.comment
+				            : ""}
+				        </span>
                         <span className="email value">{email}</span>
                     </div>
                 </a>
