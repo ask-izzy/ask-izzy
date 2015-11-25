@@ -54,15 +54,6 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                                 Change your answers here.
                             </div>
                         }
-                        secondaryText={
-                            <a
-                                href="#"
-                                className="clickable"
-                                onTouchTap={this.clearAll.bind(this)}
-                            >
-                                Clear all
-                            </a>
-                        }
                     />
                     <div className="List">{
                         this.personalisationComponents
@@ -81,15 +72,17 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         )
                     }</div>
 
-                    <div className="padded">
-                        All of your answers are private and anonymous.
+                    <div className="ClearResults">
+                        <div>Delete all data saved in Ask Izzy.</div>
+                        <div>This cannot be undone.</div>
+                        <div className="clear-button">
+                            <components.FlatButton
+                                label="Delete all data"
+                                onTouchTap={this.clearAll.bind(this)}
+                            />
+                        </div>
                     </div>
-                    <div className="okay-button">
-                        <components.FlatButton
-                            label="Okay"
-                            onTouchTap={this.previousStep.bind(this)}
-                        />
-                    </div>
+
                 </div>}
             </div>
         );
