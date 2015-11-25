@@ -107,7 +107,7 @@ class ResultsPage extends BaseCategoriesPage {
             throw new Error("Unexpected");
         }
     }
-	
+
     // flow:disable not supported yet
     get loading(): boolean {
         return !(this.state.meta || this.state.error);
@@ -162,7 +162,7 @@ class ResultsPage extends BaseCategoriesPage {
         return (
             <div className="ResultsPage">
                 <AppBar
-					backMessage="Categories"
+                    backMessage="Categories"
                     title={this.title}
                     onBackTouchTap={this.onBackClick.bind(this)}
                 />

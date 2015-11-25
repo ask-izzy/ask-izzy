@@ -3,19 +3,18 @@
         padding: 0;
     }
 }
-.FeedbackLink{
-	background: $brand-bg-light;
-	
-	> div{
-		padding-top: 11px;
-		padding-bottom: 11px;
-		
-	
-		.primaryText{
-			font-weight: 500;
-			font-size: 18px;
-			line-height: 18px;
-		}
-		
-	}
+
+.FeedbackLink {
+    background: $brand-bg-light;
+
+    & > div {
+        padding-top: 11px;
+        padding-bottom: 11px;
+
+        .primaryText {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 18px;
+        }
+    }
 }

@@ -74,8 +74,8 @@
     .right {
         float: right;
     }
-	
-	.BackButton {
+
+    .BackButton {
         span {
             position: absolute;
             top: -2px;
@@ -84,13 +84,12 @@
             &.back-label {
                 top: 9px;
                 left: 30px;
+                font-size: 14px;
                 line-height: 20px;
-				font-size: 14px;
             }
         }
-		
-	}
-	
+    }
+
     .BackButton,
     .NextButton {
         margin-top: -3px;

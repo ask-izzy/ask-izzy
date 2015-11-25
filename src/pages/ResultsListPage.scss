@@ -1,4 +1,3 @@
-
 .ResultsListPage {
     .progress {
         width: 100%;
@@ -12,23 +11,23 @@
             margin-left: auto;
         }
     }
-	
-	.MapIcon{
-		margin-top: -9px;
-		margin-left: -2px;
-		width: 40px;
-		height: 40px;
-	}
-	
-	.rightIcon {
-		top: 6px;
-		width: 40px;
-		height: 40px;
-	}
+
+    .MapIcon {
+        width: 40px;
+        height: 40px;
+        margin-top: -9px;
+        margin-left: -2px;
+    }
+
+    .rightIcon {
+        top: 6px;
+        width: 40px;
+        height: 40px;
+    }
 
     .change-personalisation {
-		font-weight: 400;
-		color: $white;
+        color: $white;
+        font-weight: 400;
     }
 
     .List {
@@ -54,9 +53,9 @@
     }
 
     .MoreResultsButton {
+        border-right: 10px solid $brand-bg-light;
         border-bottom: 10px solid $brand-bg-light;
         border-left: 10px solid $brand-bg-light;
-        border-right: 10px solid $brand-bg-light;
         font-size: 14px;
         text-align: center;
     }

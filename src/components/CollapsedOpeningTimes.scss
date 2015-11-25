@@ -2,18 +2,17 @@
     position: relative;
 
     & > a {
-       	position: absolute;
-		
+        position: absolute;
         top: -30px;
         right: 10px;
-		font-size: 16px;
+        font-size: 16px;
     }
 
     ul {
         margin: 0;
         margin-left: 32px;
         padding: 0;
-		padding-bottom: 10px;
+        padding-bottom: 10px;
 
         & > li {
             list-style-type: none;

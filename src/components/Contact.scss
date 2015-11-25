@@ -3,24 +3,23 @@
     display: block;
     width: 100%;
     padding-top: 6px;
-	
-	.kind{
-		font-weight: 400;
-		font-size: 14px;
+
+    .kind {
         color: $brand-text-mid;
-	}
-	
+        font-size: 14px;
+        font-weight: 400;
+    }
+
     a {
         display: block;
         position: relative;
         width: auto;
-		
-		margin-top: 5px;
+        
+        margin-top: 5px;
         padding: 6px;
 
         color: $brand-pane-alt-dark;
         font-size: 16px;
-
         text-overflow: ellipsis;
         overflow: hidden;
 
@@ -49,30 +48,30 @@
             }
         }
     }
-	
-	a.ContactButton{
-		
-		border: 1px solid $brand-pane-alt-dark;
-		text-align: center;
-		border-radius: 3px;
-		text-decoration: none;
+
+    .ContactButton {
+        border: 1px solid $brand-pane-alt-dark;
+        border-radius: 3px;
+
         font-size: 18px;
-		
+        text-align: center;
+        text-decoration: none;
+
         .Icon {
-           	position: absolute;
-			display: inline-block;
+            display: inline-block;
+            position: absolute;
             top: -2px;
             left: 30px;
-			
+
             path {
                 fill: $brand-pane-alt-dark;
             }
         }
-		
+
         .Contact-text {
-			padding: 0;
-		}
-		
-	}
-	
+            padding: 0;
+        }
+        
+    }
+    
 }

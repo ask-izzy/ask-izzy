@@ -142,11 +142,11 @@ class OpeningTimes extends React.Component {
             <span className="until">
                 <span className="open">
                     Open now
-                </span> 
-				{' '}
-				<span className="time">
-					{this.props.object.until}
-				</span>
+                </span>
+                {' '}
+                <span className="time">
+                    {this.props.object.until}
+                </span>
             </span>
         );
     }
@@ -160,10 +160,10 @@ class OpeningTimes extends React.Component {
                 <span className="closed">
                     Closed
                 </span>
-				{' '}
-				<span className="time">
-					{this.props.object.until}
-				</span>
+                {' '}
+                <span className="time">
+                    {this.props.object.until}
+                </span>
             </span>
         );
     }

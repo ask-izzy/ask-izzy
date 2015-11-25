@@ -46,16 +46,17 @@ $padding: 15px;
     .description {
         padding-bottom: 10px;
         color: $brand-text-mid;
+        font-size: 18px;
         font-weight: 400;
-		font-size: 18px;
-		line-height: 140%;
+        line-height: 140%;
     }
 
-    .OpeningTimes{
+    .OpeningTimes {
         svg {
             top: -4px;
         }
-	}
+    }
+
     .Address {
         svg {
             top: -2px;
@@ -65,41 +66,42 @@ $padding: 15px;
     .OpeningTimes,
     .Address,
     .CollapsedPhones,
-	.TransportTime {
+    .TransportTime {
         padding-top: 10px;
         padding-bottom: 10px;
-		padding-left: 32px;
-		font-size: 16px;
+        padding-left: 32px;
+        font-size: 16px;
     }
-	
-	.TransportTime > .location{
-		display: none;
-	}
+
+    .TransportTime > .location {
+        display: none;
+    }
 
     .List {
         .ListItem {
             font-size: 14px;
             font-weight: 400;
-			
-			> div{
-				& > .primaryText{
-					font-weight: 500;
-				}
-		        & > .secondaryText {
-		            text-overflow: ellipsis;
-		            white-space: normal;
-		            overflow: auto;
-		        }
-			}
-			
+
+            & > div {
+                & > .primaryText {
+                    font-weight: 500;
+                }
+
+                & > .secondaryText {
+                    text-overflow: ellipsis;
+                    white-space: normal;
+                    overflow: auto;
+                }
+            }
+            
         }
     }
 
     .siblings {
-		padding-top: 5px;
+        padding-top: 5px;
+
         .List > :first-child {
             border-top: 1px solid $list-item-hairline;
         }
-
     }
 }

@@ -2,13 +2,13 @@
     @include debugging;
 
     margin: 6px 16px;
-	padding-bottom: 10px;
+    padding-bottom: 10px;
 
     h3,
     h3 a {
-		margin-top: 2px;
-        margin-bottom: 0px;
-		
+        margin-top: 2px;
+        margin-bottom: 0;
+        
         color: $brand-text-dark;
         font-size: 14px;
         font-weight: 500;
@@ -18,7 +18,7 @@
 
 .CrisisHeader {
     margin-right: 16px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     margin-left: 16px;
 
     font-size: 18px;

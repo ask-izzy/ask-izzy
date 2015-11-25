@@ -58,16 +58,16 @@ export default class ServicePane extends React.Component {
 
                     <CollapsedOpeningTimes object={object.open} />
                     <hr />
-					
+
                     <GoogleMapsLink
                         className="plain-text"
                         from="Current Location"
                         to={object.Location()}
                     >
                         <Address location={object.Location()} />
-						<TransportTime location={object.Location()}/>
+                        <TransportTime location={object.Location()}/>
                     </GoogleMapsLink>
-					
+
                     <hr />
                     <ContactMethods object={object} />
                 </main>
@@ -79,8 +79,8 @@ export default class ServicePane extends React.Component {
             </div>
         );
     }
-	
-	renderServiceProvisions(): ReactElement {
+
+    renderServiceProvisions(): ReactElement {
         let object = this.props.service;
 
         if (_.isEmpty(object.serviceProvisions)) {
@@ -106,8 +106,7 @@ export default class ServicePane extends React.Component {
         if (_.isEmpty(this.state.siblings)) {
             return <span />;
         }
-
-        return (
+        return(
             <div className="siblings">
                 <h3 className="padded">
                     Also at this location
