@@ -22,17 +22,17 @@ export default class Age extends BaseQuestion {
                     "youngadult",
                 ],
             }),
-            "26 to 40": append({
+            "26 to 39": append({
                 age_groups: [
                     "adult",
                 ],
             }),
-            "40 to 55": append({
+            "40 to 54": append({
                 age_groups: [
                     "middleageadult",
                 ],
             }),
-            "55 to 65": append({
+            "55 to 64": append({
                 age_groups: [
                     "preretirementage",
                 ],

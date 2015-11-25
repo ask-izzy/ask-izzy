@@ -14,7 +14,7 @@ export default class HousingSubcategories extends BaseQuestion {
             "In a rooming house": append(""),
             "Private rental": append(""),
             "Public housing": append(""),
-            "Mortgaged housing": append(""),
+            "Trouble paying mortgage": append(""),
         },
     };
 
