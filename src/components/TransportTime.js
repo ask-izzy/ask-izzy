@@ -60,29 +60,42 @@ class TransportTime extends React.Component {
         const {travelTime} = this.props.location;
 
         return (
-            <div
-                className={classnames(
-                    "TransportTime",
-                    {compact: this.props.compact}
-                )}
-            >
-                {travelTime.mode === "TRANSIT" ?
-                <icons.Tram className="ColoredIcon" />
-                : <icons.Walk className="ColoredIcon" />
-                }
-                <span className="travel-time">
-                    {
-                        travelTime &&
-                        travelTime.duration &&
-                        travelTime.duration.text
-                    }
-                </span>&nbsp;
-                {this.renderSuburb()}
-                {this.renderDirections()}
-            </div>
+			<div>
+				{this.renderDivider()}
+		        <div
+		            className={classnames(
+		                "TransportTime",
+		                {compact: this.props.compact}
+		            )}
+		        >
+		            {travelTime.mode === "TRANSIT" ?
+		            <icons.Tram className="ColoredIcon" />
+		            : <icons.Walk className="ColoredIcon" />
+		            }
+		            <span className="travel-time">
+		                {
+		                    travelTime &&
+		                    travelTime.duration &&
+		                    travelTime.duration.text
+		                }
+		            </span>&nbsp;
+		            {this.renderSuburb()}
+		            {this.renderDirections()}
+		        </div>
+			</div>
+	        
+            
         );
     }
-
+	
+    renderDivider(): ReactElement {
+        if (!this.props.compact) {
+            return (
+                <hr/>
+            );
+        }
+    }
+	
     renderDirections(): ReactElement {
         if (!this.props.compact) {
             return (

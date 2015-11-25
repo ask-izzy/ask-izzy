@@ -77,7 +77,7 @@ export default class CollapsedOpeningTimes extends React.Component {
             .sortBy(record => order.indexOf(record.day));
 
         return (
-            <div>
+            <div className="OpeningTimesContainer">
                 <OpeningTimes object={this.props.object} />
                 {openingHours.length > 1 ?
                     <Collapser

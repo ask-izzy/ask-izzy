@@ -65,10 +65,9 @@ export default class ServicePane extends React.Component {
                         to={object.Location()}
                     >
                         <Address location={object.Location()} />
-						<hr />
-                        <TransportTime location={object.Location()}/>
+						<TransportTime location={object.Location()}/>
                     </GoogleMapsLink>
-
+					
                     <hr />
                     <ContactMethods object={object} />
                 </main>
@@ -80,8 +79,8 @@ export default class ServicePane extends React.Component {
             </div>
         );
     }
-
-    renderServiceProvisions(): ReactElement {
+	
+	renderServiceProvisions(): ReactElement {
         let object = this.props.service;
 
         if (_.isEmpty(object.serviceProvisions)) {
