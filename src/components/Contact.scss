@@ -61,7 +61,8 @@
             display: inline-block;
             position: absolute;
             top: -2px;
-            left: 30px;
+            left: 50%;
+            margin-left: -110px;
 
             path {
                 fill: $brand-pane-alt-dark;
