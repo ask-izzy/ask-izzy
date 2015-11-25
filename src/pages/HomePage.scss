@@ -1,6 +1,9 @@
 .HomePage {
     .HeaderBar {
         text-align: center;
+		.primary{
+			padding-top: 12px;
+		}
 		.secondary{
 			display: none;
 		}
@@ -13,12 +16,12 @@
 
         .logo {
             width: auto;
-            padding-top: 10px;
+            padding-top: 2px;
         }
 
         .LogotypeIcon {
             width: auto;
-            height: 90px;
+            height: 80px;
             padding: 0;
 			margin: 0;
 
@@ -31,13 +34,14 @@
         .branding-copy {
             margin: auto;
 
+			margin-top: -8px;
             padding: 0;
             padding-top: 0px;
-            padding-bottom: 20px;
-			padding-left: 20px;
-			padding-right: 20px;
+            padding-bottom: 13px;
+			padding-left: 10px;
+			padding-right: 10px;
 
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 400;
             line-height: 1.4;
         }
@@ -46,7 +50,7 @@
     .search {
         position: relative;
         width: 100%;
-        padding-bottom: 20px;
+        padding-bottom: 15px;
 
         input {
             display: block;
