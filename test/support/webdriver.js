@@ -109,10 +109,23 @@ export default async function webDriverInstance(
     return driver;
 }
 
+async function waitForStorage(
+    driver: Webdriver.WebDriver,
+): Promise<void> {
+    await gotoUrl(driver, "/");
+    await driver.wait(() =>
+        driver.executeScript(() =>
+            !!IzzyStorage
+        ),
+        10000
+    );
+}
+
 export async function setStorage(
     driver: Webdriver.WebDriver,
     value: string,
 ): Promise<void> {
+    await waitForStorage(driver);
     await driver.executeScript((value) =>
         IzzyStorage.setItem(value), value
     )
@@ -121,11 +134,8 @@ export async function setStorage(
 export async function cleanDriverSession(
     driver: Webdriver.WebDriver
 ): Promise<void> {
+    await waitForStorage(driver);
     await driver.executeScript(() => {
-        try {
-            IzzyStorage.clear();
-        } catch (error) {
-            console.error(error);
-        }
+        IzzyStorage.clear();
     });
 }

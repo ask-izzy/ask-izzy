@@ -30,13 +30,11 @@ let passed = true;
 
 new Yadda.FeatureFileSearch("./test/features").each(file => {
     featureFile(file, feature => {
-        // jscs:disable
+
         before(async function(): Promise<void> {
             driver = await driverPromise;
             sessionId = (await driver.getSession())
                 .getId();
-
-            await cleanDriverSession(driver);
 
             if (process.env.BROWSER_LOGS) {
                 // Flush any logs from previous tests
@@ -55,6 +53,10 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
         });
 
         scenarios(feature.scenarios, scenario => {
+            before(async function(): Promise<void> {
+                await cleanDriverSession(await driverPromise);
+            });
+
             steps(scenario.steps, (step, done) => {
                 Yadda.createInstance(libraries, {
                     driver: driver,
@@ -95,7 +97,6 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
     });
 });
 
-// jscs:disable
 after(async function(): Promise<void> {
     if (driver) {
         await driver.quit();
