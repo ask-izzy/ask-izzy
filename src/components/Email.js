@@ -22,6 +22,7 @@ export default class Email extends React.Component {
                             {this.props.comment ? this.props.comment
                             : ""}
                         </span>
+                        {" "}
                         <span className="email value">{email}</span>
                     </div>
                 </a>

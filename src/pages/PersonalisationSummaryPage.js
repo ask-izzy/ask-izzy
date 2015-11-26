@@ -17,7 +17,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         this.props.history.goBack();
     }
 
-    clearAll(event): void {
+    clearAll(event: SyntheticInputEvent): void {
         event.preventDefault();
         storage.clear();
         this.props.history.pushState(

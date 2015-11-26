@@ -37,10 +37,13 @@ async function checkTransportTime(time: string): Promise<void> {
         elem => elem.getText()
     ))
 
-    text = text.join("\n");
-
-    assert(text.indexOf(time) !== -1,
+    text = normalizeWhitespace(text.join("\n"))
+    assert(text.indexOf(normalizeWhitespace(time)) !== -1,
            `Expected '${text}' to include '${time}'`);
+}
+
+function normalizeWhitespace(text: string, resultingSpace = "\n"): string {
+    return text.replace(/\s+/g, resultingSpace)
 }
 
 async function checkPhoneNumbers(lines: Array<string>): Promise<void> {
@@ -53,5 +56,7 @@ async function checkPhoneNumbers(lines: Array<string>): Promise<void> {
         elem => elem.getText()
     ));
 
-    assert.deepEqual(text, lines);
+    assert.deepEqual(text.map(
+        (string) => string.replace("\n", " ")
+    ), lines);
 }
