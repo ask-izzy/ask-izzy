@@ -67,7 +67,7 @@ async function hotlinePositionAndText(
     assert.equal(await crisisLine.getAttribute("class"),
                  "CrisisLineItem");
 
-    let phone = await crisisLine.findElement(By.css(".Phone"));
+    let phone = await crisisLine.findElement(By.css(".Phone .ContactButton"));
 
     assert.equal(await phone.getText(), expectedText);
 }
