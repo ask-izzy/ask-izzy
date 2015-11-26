@@ -27,7 +27,7 @@ Feature: Location search
         And I click on "Done"
         Then I should see "carlt"
 
-        When I click on "Okay"
+        When I click back from the title bar
         Then I should see "Sorry, I couldn't do this search."
         And I should see
         ------------------------------------------

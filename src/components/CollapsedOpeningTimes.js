@@ -77,15 +77,14 @@ export default class CollapsedOpeningTimes extends React.Component {
             .sortBy(record => order.indexOf(record.day));
 
         return (
-            <div className="OpeningTimesContainer">
+            <div className="CollapsedOpeningTimes">
                 <OpeningTimes object={this.props.object} />
-                {openingHours.length > 1 ?
+                {openingHours.length > 0 ?
                     <Collapser
-                        className="CollapsedOpeningTimes"
                         message="All times"
                         expanded={this.props.expanded}
                     >
-                    <ul>
+                    <ul className="AllOpeningTimes">
                     {openingHours.map((record, idx) =>
                         <li key={idx} >
                             <span className="day">{record.day}</span>
