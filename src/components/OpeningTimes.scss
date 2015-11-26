@@ -19,4 +19,21 @@
     .closed {
         font-weight: 500;
     }
+
+    .until {
+        display: block;
+        max-height: 19px;
+        margin-right: 80px;
+        overflow: hidden;
+
+        .open, 
+        .closed {
+            white-space: nowrap;
+        }
+
+        .time {
+            white-space: nowrap;
+        }
+    }
+    
 }

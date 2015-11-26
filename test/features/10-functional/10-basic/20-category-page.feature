@@ -18,7 +18,6 @@ Feature: Category page
         When I visit /category/housing
         Then I should see "Housing"
         And I should see "I found these services for you"
-        And I should see "It's important to act early on housing."
         And I should see the results
         --------------------------------------------------------------------------
         Service Name (name) | Site Name (site_name) | Service provisions (related)

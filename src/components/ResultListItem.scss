@@ -1,12 +1,15 @@
 .ResultListItem {
     @include debugging;
 
+    border-bottom: 10px solid $list-item-hairline;
+
     font-size: 14px;
     font-weight: 400;
 
     .name {
         margin: 0;
-        margin-bottom: 3px;
+        margin-right: 20px;
+        margin-bottom: 5px;
         color: $link-text-color;
         font-size: 18px;
         font-weight: 500;

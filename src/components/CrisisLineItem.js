@@ -38,7 +38,7 @@ class CrisisLineItem extends React.Component {
                             <Link
                                 to={`/service/${object.slug}`}
                             >
-                                {object.site.name} {object.name}
+                                {object.site.name}
                             </Link>
                         </h3>
                         <Phone {...phone} />

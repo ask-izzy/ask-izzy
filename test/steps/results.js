@@ -16,6 +16,8 @@ module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .then("I should see the results\n$table",
               unpromisify(seeTheResults))
+        .then('I should see the results for "$string"\n$table',
+              unpromisify(seeTheResultsIn))
         .then('I should see a hotline in position $NUM which says "$STRING"',
               unpromisify(hotlinePositionAndText))
         .then('I should see "$STRING" before first hotline',
@@ -25,18 +27,23 @@ module.exports = (function() {
         ;
 })();
 
-async function seeTheResults(table: Array<Object>): Promise<void> {
+async function seeTheResultsIn(
+    label: string,
+    table: Array<Object>,
+): Promise<void> {
+    const getText = element => element.getText();
+    const keyToClass = (key) => key.match(/[(](.*)[)]/)[1];
+    const selector = label && `.${label.replace(/ /g, "")}`;
+
     await this.driver.wait(documentReady(this.driver), 10000);
 
-    const getText = element => element.getText();
-
     for (let key of _.keys(table[0])) {
-        let class_ = key.match(/[(](.*)[)]/)[1];
-
         let expected = _.pluck(table, key);
-        let actual = await Promise.all(
+        const actual = await Promise.all(
             (
-                await this.driver.findElements(By.css(`.${class_}`))
+                await this.driver.findElements(
+                    By.css(`${selector} .${keyToClass(key)}`)
+                )
             ).map(getText)
         );
 
@@ -47,6 +54,10 @@ async function seeTheResults(table: Array<Object>): Promise<void> {
         assert.deepEqual(actual, expected,
                          `${key} is not correct`);
     }
+}
+
+async function seeTheResults(table: Array<Object>): Promise<void> {
+    await seeTheResultsIn.bind(this)("", table);
 }
 
 async function hotlinePositionAndText(
@@ -67,7 +78,7 @@ async function hotlinePositionAndText(
     assert.equal(await crisisLine.getAttribute("class"),
                  "CrisisLineItem");
 
-    let phone = await crisisLine.findElement(By.css(".Phone"));
+    let phone = await crisisLine.findElement(By.css(".Phone .ContactButton"));
 
     assert.equal(await phone.getText(), expectedText);
 }

@@ -131,7 +131,7 @@ Feature: Service details page
         When I visit /service/5551234
         And I click on "All times"
 
-        Then I should see the results
+        Then I should see the results for "All Opening Times"
         ----------------------------
         Day (day) | Time (time)
         ============================

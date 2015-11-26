@@ -106,8 +106,7 @@ export default class ServicePane extends React.Component {
         if (_.isEmpty(this.state.siblings)) {
             return <span />;
         }
-
-        return (
+        return(
             <div className="siblings">
                 <h3 className="padded">
                     Also at this location

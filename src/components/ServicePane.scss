@@ -8,7 +8,7 @@ $padding: 15px;
 
     .padded,
     .Eligibility {
-        margin: $padding;
+        padding: $padding;
     }
 
     main {
@@ -40,40 +40,68 @@ $padding: 15px;
 
     .name {
         margin: 0;
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .description {
         padding-bottom: 10px;
         color: $brand-text-mid;
+        font-size: 18px;
         font-weight: 400;
+        line-height: 140%;
     }
 
-    .OpeningTimes,
+    .OpeningTimes {
+        svg {
+            top: -4px;
+        }
+    }
+
     .Address {
         svg {
-            top: -6px;
+            top: -2px;
         }
     }
 
     .OpeningTimes,
     .Address,
-    .CollapsedPhones {
+    .CollapsedPhones,
+    .TransportTime {
         padding-top: 10px;
         padding-bottom: 10px;
+        padding-left: 32px;
+        font-size: 16px;
+    }
+
+    .TransportTime > .location {
+        display: none;
     }
 
     .List {
         .ListItem {
             font-size: 14px;
             font-weight: 400;
+
+            & > div {
+                & > .primaryText {
+                    font-weight: 500;
+                }
+
+                & > .secondaryText {
+                    text-overflow: ellipsis;
+                    white-space: normal;
+                    overflow: auto;
+                }
+            }
+            
         }
     }
 
     .siblings {
+        padding-top: 5px;
+
         .List > :first-child {
             border-top: 1px solid $list-item-hairline;
         }
-
     }
 }

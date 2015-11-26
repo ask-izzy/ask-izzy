@@ -1,6 +1,14 @@
 .HomePage {
     .HeaderBar {
         text-align: center;
+
+        .primary {
+            padding-top: 12px;
+        }
+
+        .secondary {
+            display: none;
+        }
     }
 
     .branding-container {
@@ -10,28 +18,30 @@
 
         .logo {
             width: auto;
-            padding-top: 20px;
+            padding-top: 2px;
         }
 
         .LogotypeIcon {
             width: auto;
-            height: 90px;
+            height: 80px;
+            margin: 0;
             padding: 0;
 
             /* Ask */
             g > g > path {
                 fill: $white;
             }
-
         }
 
         .branding-copy {
-            width: 80%;
             margin: auto;
 
+            margin-top: -8px;
             padding: 0;
-            padding-top: 10px;
-            padding-bottom: 20px;
+            padding-top: 0;
+            padding-right: 10px;
+            padding-bottom: 13px;
+            padding-left: 10px;
 
             font-size: 14px;
             font-weight: 400;
@@ -42,7 +52,7 @@
     .search {
         position: relative;
         width: 100%;
-        padding-bottom: 20px;
+        padding-bottom: 15px;
 
         input {
             display: block;

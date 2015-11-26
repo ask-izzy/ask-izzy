@@ -163,6 +163,7 @@ class ResultsPage extends BaseCategoriesPage {
             <div className="ResultsPage">
                 <AppBar
                     title={this.title}
+                    backMessage="Categories"
                     onBackTouchTap={this.onBackClick.bind(this)}
                 />
 

@@ -32,7 +32,8 @@
     }
 
     .done-button,
-    .okay-button {
+    .okay-button,
+    .clear-button {
         width: 100%;
 
         button {
@@ -47,6 +48,11 @@
         }
     }
 
+    .clear-button {
+        button {
+            background-color: $brand-error;
+        }
+    }
 
     .List {
         padding: 0;
@@ -83,6 +89,21 @@
     }
 
     .padded {
-        margin: 20px;
+        padding: 20px;
     }
+
+    .ClearResults {
+        margin-top: 40px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        margin-left: 20px;
+        padding-top: 10px;
+        border-top: 1px solid $list-item-hairline;
+
+        color: $brand-text-mid;
+        font-size: 16px;
+        line-height: 140%;
+        text-align: center;
+    }
+
 }

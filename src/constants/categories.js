@@ -44,7 +44,6 @@ const categories:Array<Category> = [
             q: "housing -(coordinating bodies)",
             service_type: "housing",
         },
-        info: "It's important to act early on housing.",
         personalisation: [
             personalisation.Location,
             personalisation.SleepTonight,

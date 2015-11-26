@@ -40,58 +40,52 @@ class TransportTime extends React.Component {
         },
     };
 
-    render(): ReactElement {
-        if (this.props.location.isConfidential()) {
-            return this.renderConfidential()
-        } else {
+    render(): ?ReactElement {
+        if (!this.props.location.isConfidential()) {
             return this.renderPublic()
+        } else {
+            return null;
         }
-    }
-
-    renderConfidential(): ReactElement {
-        /* This is a confidential location, we can't show any
-         * transport time*/
-        return (
-            <div
-                className={classnames(
-                    "TransportTime",
-                    {compact: this.props.compact}
-                )}
-            >
-                <icons.Phone className="ColoredIcon brand-text-dark" />
-                <span className="travel-time">
-                    Confidential location
-                </span>&nbsp;
-                {this.renderSuburb()}
-            </div>
-        );
     }
 
     renderPublic(): ReactElement {
         const {travelTime} = this.props.location;
 
         return (
-            <div
-                className={classnames(
-                    "TransportTime",
-                    {compact: this.props.compact}
-                )}
-            >
-                {travelTime.mode === "TRANSIT" ?
-                <icons.Tram className="ColoredIcon" />
-                : <icons.Walk className="ColoredIcon" />
-                }
-                <span className="travel-time">
-                    {
-                        travelTime &&
-                        travelTime.duration &&
-                        travelTime.duration.text
+            <div>
+                {this.renderDivider()}
+                <div
+                    className={classnames(
+                        "TransportTime",
+                        {compact: this.props.compact}
+                    )}
+                >
+                    {travelTime.mode === "TRANSIT" ?
+                    <icons.Tram className="ColoredIcon" />
+                    : <icons.Walk className="ColoredIcon" />
                     }
-                </span>&nbsp;
-                {this.renderSuburb()}
-                {this.renderDirections()}
+                    <span className="travel-time">
+                        {
+                            travelTime &&
+                            travelTime.duration &&
+                            travelTime.duration.text
+                        }
+                    </span>&nbsp;
+                    {this.renderSuburb()}
+                    {this.renderDirections()}
+                </div>
             </div>
         );
+    }
+
+    renderDivider(): ?ReactElement {
+        if (!this.props.compact) {
+            return (
+                <hr/>
+            );
+        } else {
+            return null;
+        }
     }
 
     renderDirections(): ReactElement {

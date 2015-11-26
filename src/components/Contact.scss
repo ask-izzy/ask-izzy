@@ -1,21 +1,29 @@
-.Contact + .Contact {
-    padding-top: 7px;
-}
 
 .Contact {
+    @include clearfix;
+
     display: block;
     width: 100%;
+    padding-top: 6px;
+
+    .kind {
+        width: 100%;
+        max-width: 100px;
+        color: $brand-text-mid;
+        font-size: 14px;
+        font-weight: 400;
+    }
 
     a {
         display: block;
         position: relative;
         width: auto;
 
+        margin-top: 5px;
         padding: 6px;
 
         color: $brand-pane-alt-dark;
-        font-size: 18px;
-
+        font-size: 16px;
         text-overflow: ellipsis;
         overflow: hidden;
 
@@ -33,15 +41,46 @@
 
         .Icon {
             position: absolute;
-            top: -2px;
-            left: 0;
+            top: -5px;
+            left: -8px;
 
             width: 40px;
             height: 40px;
 
             path {
-                fill: $brand-pane-alt-dark;
+                fill: $brand-text-dark;
             }
         }
     }
+
+    .ContactButton {
+
+        max-width: 320px;
+        margin-bottom: 5px;
+
+        border: 1px solid $brand-pane-alt-dark;
+        border-radius: 3px;
+
+        font-size: 18px;
+        text-align: center;
+        text-decoration: none;
+
+        .Icon {
+            display: inline-block;
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            margin-left: -110px;
+
+            path {
+                fill: $brand-pane-alt-dark;
+            }
+        }
+
+        .Contact-text {
+            padding: 0;
+        }
+
+    }
+
 }
