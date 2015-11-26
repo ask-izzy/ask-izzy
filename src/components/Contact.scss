@@ -1,24 +1,24 @@
 
 .Contact {
     @include clearfix;
-    
+
     display: block;
     width: 100%;
     padding-top: 6px;
 
     .kind {
+        width: 100%;
+        max-width: 100px;
         color: $brand-text-mid;
         font-size: 14px;
         font-weight: 400;
-        width: 100%;
-        max-width: 100px;
     }
 
     a {
         display: block;
         position: relative;
         width: auto;
-        
+
         margin-top: 5px;
         padding: 6px;
 
@@ -54,10 +54,10 @@
     }
 
     .ContactButton {
-        
+
         max-width: 320px;
         margin-bottom: 5px;
-        
+
         border: 1px solid $brand-pane-alt-dark;
         border-radius: 3px;
 
@@ -80,7 +80,7 @@
         .Contact-text {
             padding: 0;
         }
-        
+
     }
-    
+
 }
