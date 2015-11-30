@@ -4,6 +4,7 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { remove } from "./BaseQuestion";
 
 export default class LifeSkillsSubcategories extends BaseMultiQuestion {
+    static title = "Life Skills";
     static propTypes = BaseMultiQuestion.propTypes;
     static defaultProps = {
         name: "sub-life-skills",

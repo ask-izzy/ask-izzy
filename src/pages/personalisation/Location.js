@@ -30,6 +30,8 @@ const AutocompleteState = {
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Location extends React.Component {
+    static title = "Location";
+
     static defaultProps = {
         name: "location",
     };

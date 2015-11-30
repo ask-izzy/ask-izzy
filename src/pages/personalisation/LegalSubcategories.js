@@ -4,6 +4,7 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { append } from "./BaseQuestion";
 
 export default class LegalSubcategories extends BaseMultiQuestion {
+    static title = "Legal";
     static propTypes = BaseMultiQuestion.propTypes;
     static defaultProps = {
         name: "sub-legal",

@@ -4,6 +4,7 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { append } from "./BaseQuestion";
 
 export default class EverydayThingsSubcategories extends BaseMultiQuestion {
+    static title = "Everyday things";
     static propTypes = BaseMultiQuestion.propTypes;
     static defaultProps = {
         name: "sub-everyday-things",
