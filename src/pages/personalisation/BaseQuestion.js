@@ -125,14 +125,14 @@ class BaseQuestion extends React.Component {
     static defaultProps = {
     };
 
-    static nextStepLabel = "Skip";
-
     constructor(props: Object) {
         super(props);
         this.state = {
             selected: null, // set when the user makes a choice
         };
     }
+
+    static nextStepLabel = "Skip";
 
     // flow:disable
     get selected(): string {

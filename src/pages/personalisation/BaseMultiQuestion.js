@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import _ from "underscore";
 
 import BaseQuestion from "./BaseQuestion";
 import components from "../../components";

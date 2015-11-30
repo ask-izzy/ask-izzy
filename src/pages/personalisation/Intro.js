@@ -11,8 +11,6 @@ import * as iss from "../../iss";
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Intro extends React.Component {
-    static title = "Intro";
-    static nextStepLabel = "Okay";
 
     static defaultProps = {
         name: "intro",
@@ -23,6 +21,9 @@ class Intro extends React.Component {
         this.state = {
         };
     }
+
+    static title = "Intro";
+    static nextStepLabel = "Okay";
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         return request;

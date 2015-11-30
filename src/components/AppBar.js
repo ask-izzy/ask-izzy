@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import classnames from "classnames";
 import { History } from "react-router";
 import reactMixin from "react-mixin";
 
