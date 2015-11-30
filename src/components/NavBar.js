@@ -42,6 +42,18 @@ class NavBar extends React.Component {
                         secondaryText={"Tell us what you think"}
                     />
 
+                    <LinkListItem
+                        className="CategoryListItem ReportBugLink"
+                        href={mailLink}
+                        leftIcon={
+                            <icons.Cross
+                                className="ColoredIcon icon-fg-color big"
+                            />
+                        }
+                        primaryText="Report an issue"
+                        secondaryText={"Help us improve"}
+                    />
+
                 </div>
             </div>
         );
