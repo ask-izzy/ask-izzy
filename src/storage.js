@@ -3,16 +3,22 @@
  * Polyfill some more methods onto storage
  */
 
-import koekje from "koekje";
-
 class Storage {
 
     static getItem(key: string): ?(string|number|boolean) {
-        return koekje.getItem(key);
+        if (typeof localStorage == "undefined") {
+            return null;
+        }
+
+        return localStorage.getItem(key);
     }
 
     static setItem(key: string, obj: string|number|boolean): void {
-        koekje.setItem(key, obj);
+        if (typeof localStorage == "undefined") {
+            return;
+        }
+
+        localStorage.setItem(key, `${obj}`);
     }
 
     static getJSON(key: string): any {
@@ -40,8 +46,13 @@ class Storage {
     }
 
     static clear(): void {
-        koekje.clear();
+        if (typeof localStorage == "undefined") {
+            return;
+        }
+
+        localStorage.clear();
     }
+
 }
 
 if (typeof window != "undefined") {
