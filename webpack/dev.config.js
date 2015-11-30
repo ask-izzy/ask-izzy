@@ -13,7 +13,7 @@ import notifyStats from "./utils/notify-stats";
 import commons from "./utils/commons";
 import env from "./env";
 import progress from "./utils/progress";
-import cssLoaders from "./css-loaders";
+import extractText from "./extract-text";
 
 const assetsPath = path.resolve(__dirname, "../public/static");
 
@@ -58,7 +58,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                loaders: cssLoaders,
+                loader: extractText.loader,
             },
             {
                 test: /\.js$/,
@@ -80,6 +80,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             "es6-promise": "es6-promise",
         }),
+
+        extractText.plugin,
 
         commons,
 
