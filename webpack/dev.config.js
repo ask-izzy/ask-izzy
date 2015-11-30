@@ -71,6 +71,9 @@ module.exports = {
     plugins: [
         env("development"),
 
+        // Only load the en-au moment.js config
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-au/),
+
         new webpack.HotModuleReplacementPlugin(),
 
         // polyfill window.fetch et al client-side

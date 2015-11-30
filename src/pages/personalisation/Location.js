@@ -303,7 +303,7 @@ class Location extends React.Component {
                     : ""
                 }{
                     this.state.geolocation == GeoLocationState.RUNNING ?
-                        <components.ButtonListItem
+                        <components.ListItem
                             primaryText="Locating you..."
                             secondaryText="Please permit us to use your GPS"
                             leftIcon={
@@ -313,7 +313,7 @@ class Location extends React.Component {
                     : ""
                 }{
                     this.state.geolocation == GeoLocationState.COMPLETE ?
-                        <components.ButtonListItem
+                        <components.ListItem
                             className="taller"
                             primaryText="Found your location"
                             leftIcon={<icons.Tick className="big" />}
@@ -321,7 +321,7 @@ class Location extends React.Component {
                     : ""
                 }{
                     this.state.geolocation == GeoLocationState.FAILED ?
-                        <components.ButtonListItem
+                        <components.ListItem
                             primaryText="Unable to get your location"
                             secondaryText={`Please enter your location below
                                 (${this.state.error})`}
@@ -335,6 +335,7 @@ class Location extends React.Component {
                 >
                     <input
                         type="search"
+                        aria-label="Enter a suburb or postcode"
                         placeholder="Enter a suburb or postcode"
                         value={this.state.locationName}
                         onChange={this.onSearchChange.bind(this)}

@@ -40,6 +40,7 @@ export default class InputListItem extends React.Component {
                         {rest.checked ? checkedIcon : uncheckedIcon}
                         <input
                             key="input"
+                            aria-label={primaryText}
                             {...rest}
                         />
                     </span>

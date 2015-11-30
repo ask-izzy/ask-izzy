@@ -13,6 +13,7 @@ export default class ButtonListItem extends React.Component {
             <ListItem
                 rootElement="a"
                 aria-role="button"
+                role="button"
                 tabIndex="0"
                 {...this.props}
             />
