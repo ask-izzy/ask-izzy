@@ -9,12 +9,16 @@ import storage from "../storage";
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
     previousStep(): void {
-        this.props.history.goBack();
+        if (this.currentComponent) {
+            this.navigate("personalise/summary");
+        } else {
+            this.navigate("");
+        }
     }
 
     nextStep(): void {
         super.nextStep();
-        this.props.history.goBack();
+        this.navigate("personalise/summary");
     }
 
     clearAll(event: SyntheticInputEvent): void {
@@ -29,12 +33,15 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
 
     render(): ReactElement {
         const Subpage = this.currentComponent;
+        const backMessage = Subpage ? "Saved Answers" : this.title;
+        const title = Subpage ? Subpage.name : "Saved Answers";
 
         return (
             <div className="PersonalisationPage">
                 <components.AppBar
-                    title="Personalise"
+                    title={title}
                     onBackTouchTap={this.previousStep.bind(this)}
+                    backMessage={backMessage}
                 />
                 {Subpage ?
                     <div>

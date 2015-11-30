@@ -41,26 +41,16 @@
         overflow: hidden;
     }
 
-    .NextButton {
-        &[disabled] {
-            svg path {
-                fill: $brand-bg-mid;
-            }
-            color: $brand-bg-mid;
-        }
-
-        &.slideIn span {
-            @include slideInRight(0.5s, 0s, forwards);
-        }
-
+    .BackButton {
         span {
             position: absolute;
-            top: -5px;
-            right: 0;
+            top: -1px;
+            left: -4px;
 
-            &.next-label {
-                top: 10px;
-                right: 50px;
+            &.back-label {
+                top: 9px;
+                left: 30px;
+                font-size: 14px;
                 line-height: 20px;
             }
         }
@@ -75,21 +65,6 @@
         float: right;
     }
 
-    .BackButton {
-        span {
-            position: absolute;
-            top: -2px;
-            left: -4px;
-
-            &.back-label {
-                top: 9px;
-                left: 30px;
-                font-size: 14px;
-                line-height: 20px;
-                text-transform: capitalize;
-            }
-        }
-    }
 
     .BackButton,
     .NextButton {
