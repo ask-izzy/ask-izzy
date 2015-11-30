@@ -11,6 +11,9 @@ import * as iss from "../../iss";
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Intro extends React.Component {
+    static title = "Intro";
+    static nextStepLabel = "Okay";
+
     static defaultProps = {
         name: "intro",
     };

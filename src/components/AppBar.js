@@ -14,15 +14,6 @@ class AppBar extends React.Component {
         title: React.PropTypes.string.isRequired,
         onBackTouchTap: React.PropTypes.func.isRequired,
         onForwardTouchTap: React.PropTypes.func,
-        forwardMessage: React.PropTypes.string,
-        forwardEnabled: React.PropTypes.bool,
-        forwardIcon: React.PropTypes.node,
-    };
-
-    static defaultProps = {
-        forwardEnabled: true,
-        forwardMessage: "",
-        forwardIcon: <icons.House className="small" />,
     };
 
     static sampleProps = {default: {
@@ -30,24 +21,12 @@ class AppBar extends React.Component {
         onBackTouchTap: function() {},
     }};
 
-    onForwardTouchTap(): void {
-        if (this.props.onForwardTouchTap) {
-            this.props.onForwardTouchTap();
-        } else {
-            this.history.pushState(
-                null,
-                "/",
-                {}
-            );
-        }
-    }
-
     render(): ReactElement {
         return (
             <div className="AppBar">
                 {this.renderBackButton()}
                 <h1 className="title">{this.props.title}</h1>
-                {this.renderForwardButton()}
+                <div className="button-container force-centering" />
             </div>
         );
     }
@@ -62,32 +41,14 @@ class AppBar extends React.Component {
                     <icons.ChevronBack />
                     <span className="back-label">
                         {this.props.backMessage}
+                        <br />
+                        {" "}
                     </span>
                 </div>
             </components.IconButton>
         )
     }
 
-    renderForwardButton(): ?ReactElement {
-        return (
-            <components.IconButton
-                className={classnames(
-                    "NextButton",
-                    "button-container",
-                    {slideIn: this.props.slideForwardIn},
-                )}
-                onTouchTap={this.onForwardTouchTap.bind(this)}
-                disabled={!this.props.forwardEnabled}
-            >
-                <div className="right">
-                    <span className="next-label">
-                        {this.props.forwardMessage}
-                    </span>
-                    {this.props.forwardIcon}
-                </div>
-            </components.IconButton>
-        )
-    }
 }
 
 export default AppBar;

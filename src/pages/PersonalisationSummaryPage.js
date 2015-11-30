@@ -8,7 +8,8 @@ import storage from "../storage";
 
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
-    previousStep(): void {
+    goBack(): void {
+        super.nextStep();
         if (this.currentComponent) {
             this.navigate("personalise/summary");
         } else {
@@ -17,8 +18,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
     }
 
     nextStep(): void {
-        super.nextStep();
-        this.navigate("personalise/summary");
+        this.goBack();
     }
 
     clearAll(event: SyntheticInputEvent): void {
@@ -33,25 +33,19 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
 
     render(): ReactElement {
         const Subpage = this.currentComponent;
-        const backMessage = Subpage ? "Saved Answers" : this.title;
-        const title = Subpage ? Subpage.name : "Saved Answers";
+        const backMessage = Subpage ? "Answers" : this.title;
+        const title = Subpage ? Subpage.title : "Answers";
 
         return (
             <div className="PersonalisationPage">
                 <components.AppBar
                     title={title}
-                    onBackTouchTap={this.previousStep.bind(this)}
+                    onBackTouchTap={this.goBack.bind(this)}
                     backMessage={backMessage}
                 />
                 {Subpage ?
                     <div>
                         {<Subpage ref="subpage" />}
-                        <div className="done-button">
-                            <components.FlatButton
-                                label="Done"
-                                onTouchTap={this.nextStep.bind(this)}
-                            />
-                        </div>
                     </div>
                 : <div>
                     <components.HeaderBar
@@ -85,7 +79,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         <div>This cannot be undone.</div>
                         <div className="clear-button">
                             <components.FlatButton
-                                label="Delete all data"
+                                label="Delete all answers"
                                 onTouchTap={this.clearAll.bind(this)}
                             />
                         </div>

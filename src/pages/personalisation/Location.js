@@ -51,6 +51,7 @@ class Location extends React.Component {
         this.setLocationName(storage.getItem("location"));
     }
 
+
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         /* Coordinates are optional */
         let coords = storage.getJSON("coordinates");
@@ -74,6 +75,7 @@ class Location extends React.Component {
     }
 
     static summaryLabel = "Where are you?";
+    static nextStepLabel = "Done";
 
     // flow:disable
     static get summaryValue(): string {

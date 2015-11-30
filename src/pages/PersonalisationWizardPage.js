@@ -73,13 +73,13 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         // first personalisation, should be 'Intro'
         const prevPage = this.prevSubPage()
         const backMessage = prevPage ?
-            prevPage.name
+            prevPage.title
             : "Categories";
 
         return (
             <div className="PersonalisationPage">
                 <components.AppBar
-                    title={Subpage.name || this.title}
+                    title={Subpage.title || this.title}
                     onBackTouchTap={this.previousStep.bind(this)}
                     backMessage={backMessage}
                     onForwardTouchTap={this.nextStep.bind(this)}
@@ -91,6 +91,15 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
                     slideForwardIn={true}
                 />
                 <Subpage ref="subpage" />
+                <div className="done-button">
+                    <components.FlatButton
+                        label={Subpage.nextStepLabel}
+                        // FIXME: Skip button should be less prominent
+                        onTouchTap={this.nextStep.bind(this)}
+                        disabled={this.state.nextDisabled}
+                    />
+                </div>
+
             </div>
         );
     }

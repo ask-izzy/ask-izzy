@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import _ from "underscore";
 
 import BaseQuestion from "./BaseQuestion";
 import components from "../../components";
@@ -12,6 +13,11 @@ class BaseMultiQuestion extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
 
     // flow:disable
+    static get nextStepLabel(): string {
+        return this.answer.length ? "Done" : "Skip"
+    }
+
+    // flow:disable
     get selected(): Set<string> {
         return this.state.answers || new Set(
             storage.getJSON(this.props.name) || []
@@ -20,15 +26,20 @@ class BaseMultiQuestion extends BaseQuestion {
 
     // flow:disable
     static get summaryValue(): string {
-        let nSelected =
-            (storage.getJSON(this.defaultProps.name) || []).length;
+        let nSelected = this.answer.length;
 
-        return `${nSelected} selected`;
+        if (nSelected == 0) {
+            return "None selected";
+        } else if (nSelected > 3) {
+            return `${nSelected} selected`;
+        } else {
+            return this.answer.join(", ")
+        }
     }
 
     // flow:disable
     static get answer(): Array<string> {
-        return storage.getJSON(this.defaultProps.name);
+        return storage.getJSON(this.defaultProps.name) || [];
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {

@@ -16,6 +16,7 @@
     color: $white;
 
     z-index: 2;
+    text-overflow: ellipsis;
 
     & > .button-container {
         flex: 1;
@@ -35,41 +36,16 @@
 
         line-height: 44px;
         text-align: center;
-        text-overflow: ellipsis;
 
         white-space: nowrap;
         overflow: hidden;
     }
 
     .BackButton {
-        span {
-            position: absolute;
-            top: -1px;
-            left: -4px;
-
-            &.back-label {
-                top: 9px;
-                left: 30px;
-                font-size: 14px;
-                line-height: 20px;
-            }
-        }
-
-    }
-
-    .left {
-        float: left;
-    }
-
-    .right {
-        float: right;
-    }
-
-
-    .BackButton,
-    .NextButton {
         margin-top: -3px;
         margin-left: -8px;
+        white-space: nowrap;
+        text-align: left;
 
         .Icon {
             margin: 0;
@@ -80,15 +56,19 @@
             }
         }
 
-        .Icon.HouseIcon {
-            margin-top: 9px;
-            margin-right: 5px;
-        }
-
-        .ChevronIcon,
         .ChevronBackIcon {
             width: 40px;
             height: 40px;
         }
+
+        span {
+            display: inline-block;
+
+            &.back-label {
+                font-size: 14px;
+                line-height: 14px;
+            }
+        }
     }
+
 }
