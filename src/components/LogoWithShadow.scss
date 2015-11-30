@@ -1,8 +1,8 @@
 .LogoWithShadow {
     position: relative;
 
-    width: 64px;
-    height: 64px;
+    width: 55px;
+    height: 48px;
 
     .LogoLightIcon {
         transform: rotate(5deg);
@@ -10,15 +10,19 @@
 
     .LogoShadowIcon {
         margin-top: 5px;
-        margin-left: -5px;
+        margin-left: -4px;
+        opacity: 0.2;
     }
 
     .LogoLightIcon,
     .LogoShadowIcon {
         position: absolute;
 
-        width: 64px;
-        height: 64px;
+        top: -4px;
+        right: -5px;
+
+        width: 48px;
+        height: 48px;
 
         path,
         circle {
@@ -26,7 +30,9 @@
         }
     }
 
-    .LogoShadowIcon {
-        opacity: 0.3;
+    &.animate {
+        @include teeter(0.6s, 0.1s, forwards);
+        -webkit-transform-origin: 60% 50%;
     }
+    
 }

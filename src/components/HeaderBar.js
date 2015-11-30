@@ -21,12 +21,20 @@ class HeaderBar extends React.Component {
                 <div className="primary">
                     {this.props.primaryText}
                 </div>
-                <div className="secondary">
-                    {this.props.secondaryText}
-                </div>
+                {this.renderSecondaryText()}
                 {this.props.children}
             </div>
         );
+    }
+
+    renderSecondaryText(): ?ReactElement {
+        if (this.props.secondaryText) {
+            return (
+                <div className="secondary">
+                    {this.props.secondaryText}
+                </div>
+            )
+        }
     }
 }
 
