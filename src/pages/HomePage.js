@@ -55,6 +55,7 @@ class HomePage extends React.Component {
                                 ref="search"
                                 type="search"
                                 placeholder="Search"
+                                aria-label="Search"
                             />
                             <icons.Search
                                 className="icon"

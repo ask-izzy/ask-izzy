@@ -31,3 +31,7 @@ a,
 .link-color {
     color: $link-text-color;
 }
+
+:focus {
+    outline: 1px $brand-pane-alt-light solid;
+}

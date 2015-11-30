@@ -55,6 +55,7 @@
     "node-libs-browser": "0.5.3",
     "nodemon": "1.7.1",
     "optimist": "0.6.1",
+    "react-a11y": "0.2.8",
     "sass-lint": "1.2.3",
     "saucelabs": "1.0.1",
     "selenium-webdriver": "2.47.0",

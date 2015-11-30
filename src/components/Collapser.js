@@ -53,7 +53,7 @@ class Collapser extends React.Component {
         return (
             <div
                 className={classnames("Collapser", this.props.className)}
-                onClick={this.onClick.bind(this)}
+                onTouchTap={this.onClick.bind(this)}
             >
                 {this.renderMessage()}
                 <div
@@ -67,18 +67,17 @@ class Collapser extends React.Component {
 
     renderMessage(): ?ReactElement {
         if (this.state.collapsed) {
-            return(
+            return (
                 <a
                     href="#"
                     alt="Show more"
                     className="collapser-message"
+                    role="button"
                     onClick={this.onMessageClick.bind(this)}
                 >
                     {this.props.message}
                 </a>
-            )
-        } else {
-            return null;
+            );
         }
     }
 

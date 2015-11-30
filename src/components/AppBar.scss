@@ -64,7 +64,6 @@
                 line-height: 20px;
             }
         }
-
     }
 
     .left {
@@ -103,6 +102,10 @@
             path {
                 fill: $white;
             }
+        }
+
+        &:focus .Icon path {
+            fill: $brand-pane-alt-light;
         }
 
         .Icon.HouseIcon {

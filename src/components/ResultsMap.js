@@ -165,7 +165,7 @@ class ResultsMap extends React.Component {
                 }}
                 options={{disableDefaultUI: true, zoomControl: true}}
                 defaultZoom={4}
-                onClick={this.onMapClick.bind(this)}
+                onTouchTap={this.onMapClick.bind(this)}
             >
                 {this.state.coords ?
                 <Marker
