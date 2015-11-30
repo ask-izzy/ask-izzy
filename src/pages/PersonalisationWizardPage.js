@@ -15,8 +15,39 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     }
 
     previousStep(): void {
-        super.previousStep();
+        const prevSubPage = this.prevSubPage();
+
         this.setState({nextDisabled: false});
+
+        if (prevSubPage) {
+            this.goToSubPage(prevSubPage);
+        } else {
+            this.props.history.pushState(
+                null,
+                "/",
+                {}
+            );
+        }
+    }
+
+    goToCategoryPage(): void {
+        this.navigate("");
+    }
+
+    goToSubPage(subpage: ReactClass): void {
+        this.navigate(`personalise/page/${subpage.defaultProps.name}`);
+    }
+
+    nextSubPage(): ?ReactClass {
+        const nextSubpageIdx = this.currentComponentIdx + 1;
+
+        return this.personalisationComponents[nextSubpageIdx];
+    }
+
+    prevSubPage(): ?ReactClass {
+        const nextSubpageIdx = this.currentComponentIdx - 1;
+
+        return this.personalisationComponents[nextSubpageIdx];
     }
 
     nextStep(): void {
@@ -27,26 +58,30 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         super.nextStep();
         this.setState({nextDisabled: false});
 
-        const nextSubpageIdx = this.currentComponentIdx + 1;
+        const nextPage = this.nextSubPage()
 
-        if (nextSubpageIdx >= this.personalisationComponents.length) {
-            // Go on to the category page
-            this.navigate("");
+        if (!nextPage) {
+            this.goToCategoryPage();
         } else {
-            const subpage = this.personalisationComponents[nextSubpageIdx];
-
-            this.navigate(`personalise/page/${subpage.defaultProps.name}`);
+            this.goToSubPage(nextPage);
         }
     }
 
     render(): ReactElement {
         const Subpage = this.currentComponent || Intro;
+        // FIXME: Back message is 'Categories' for the
+        // first personalisation, should be 'Intro'
+        const prevPage = this.prevSubPage()
+        const backMessage = prevPage ?
+            prevPage.name
+            : "Categories";
 
         return (
             <div className="PersonalisationPage">
                 <components.AppBar
-                    title="Personalise"
+                    title={Subpage.name || this.title}
                     onBackTouchTap={this.previousStep.bind(this)}
+                    backMessage={backMessage}
                     onForwardTouchTap={this.nextStep.bind(this)}
                     forwardMessage="Next"
                     forwardIcon={<Chevron />}
