@@ -39,12 +39,33 @@ const exactKey = _.memoize(_.partial(cacheKey, _, false));
 
 export default class Cache {
     _cache: Object;
+    _disposing: boolean;
 
     constructor() {
         this._cache = lru({
             max: 150, // Only track 150 keys in the cache
             maxAge: 1000 * 60 * 60, // Discard anything over 1 hour
+            dispose: this.onDispose.bind(this),
         });
+    }
+
+    onDispose(disposedKey: string, disposedValue: any): void {
+        if (this._disposing) {
+            return
+        }
+
+        try {
+            this._disposing = true
+            // We're storing the same thing under several keys.
+            // Remove all of them.
+            this._cache.forEach((value: string, key: any) =>
+                (key != disposedKey) &&
+                (value === disposedValue) &&
+                this._cache.del(key)
+            )
+        } finally {
+            this._disposing = false
+        }
     }
 
     exactHit(path: string): ?Object {

@@ -198,8 +198,8 @@ export async function requestObjects(
     path: string,
     data: ?searchRequest,
 ): Promise<searchResults> {
-    let url_ = mungeUrlQuery(path, data);
-    let hit = requestObjectsCache.exactHit(url_);
+    const url_ = mungeUrlQuery(path, data);
+    const hit = requestObjectsCache.exactHit(url_);
 
     if (hit) {
         return hit;
