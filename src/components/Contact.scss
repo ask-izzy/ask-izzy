@@ -35,7 +35,8 @@
             }
 
             .value {
-                white-space: nowrap;
+                display: inline-block;
+                word-break: break-all;
             }
         }
 
