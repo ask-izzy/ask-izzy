@@ -120,10 +120,7 @@ class BaseQuestion extends React.Component {
             React.PropTypes.arrayOf(React.PropTypes.node),
             React.PropTypes.objectOf(React.PropTypes.object),
         ]).isRequired,
-    };
-
-    static defaultProps = {
-        alwaysShowDoneButton: true,
+        onDoneTouchTap: React.PropTypes.func,
     };
 
     constructor(props: Object) {
@@ -282,7 +279,7 @@ class BaseQuestion extends React.Component {
     }
 
     renderDoneButton(): ?ReactElement {
-        if (this.props.alwaysShowDoneButton) {
+        if (!this.props.suppressDoneButton) {
             return (
                 <div>
                     <div className="done-button">
