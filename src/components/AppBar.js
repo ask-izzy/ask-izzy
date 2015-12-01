@@ -40,8 +40,6 @@ class AppBar extends React.Component {
                     <icons.ChevronBack />
                     <span className="back-label">
                         {this.props.backMessage}
-                        <br />
-                        {" "}
                     </span>
                 </div>
             </components.IconButton>
