@@ -102,12 +102,16 @@ class ResultsListPage extends React.Component {
             );
         }
 
+        const servicesWord = meta.total_count == 1 ?
+            "service"
+            : "services";
+
         return (
             <HeaderBar
                 primaryText={
                     meta.total_count > 0 ?
                         <LogoHeader>
-                            I found {meta.total_count} services{' '}
+                            I found {meta.total_count} {servicesWord}{' '}
                             {Gender.headingValue} {Age.headingValue}
                             {' '}in {Location.answer}
                         </LogoHeader>

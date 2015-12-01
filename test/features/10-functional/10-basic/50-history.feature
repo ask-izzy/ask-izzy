@@ -64,7 +64,8 @@ Feature: History navigation
         And I click back from the browser UI
 
         Then I should be at /category/housing/
-        And I should see "I found these services for you"
+
+        And I should see "I found 3 services for men aged 25 or younger in Melbourne VIC"
 
         When I click back from the browser UI
         Then I should see "Do any of these apply to you?"

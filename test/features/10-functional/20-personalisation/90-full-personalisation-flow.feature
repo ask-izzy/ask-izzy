@@ -122,4 +122,5 @@ Feature: Personalisation
         And search box should contain "Richmond, Victoria"
 
         When I click on "Next"
+
         Then I should see "I found 3 services for people in Richmond, Victoria"

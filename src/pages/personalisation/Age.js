@@ -47,8 +47,10 @@ export default class Age extends BaseQuestion {
 
     // flow:disable
     static get headingValue(): string {
-        return (this.answer && (this.answer == "(skipped)"))
-            ? ""
-            : `aged ${this.answer}`;
+        if (!this.answer || (this.answer == "(skipped)")) {
+            return "";
+        } else {
+            return `aged ${this.answer}`;
+        }
     }
 }
