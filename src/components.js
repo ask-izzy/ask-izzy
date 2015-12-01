@@ -21,7 +21,6 @@ import Infobox from "./components/Infobox";
 import InputListItem from "./components/InputListItem";
 import LinkListItem from "./components/LinkListItem";
 import ListItem from "./components/ListItem";
-import LoadingResultsHeader from "./components/LoadingResultsHeader";
 import LogoWithShadow from "./components/LogoWithShadow";
 import NavBar from "./components/NavBar";
 import OpeningTimes from "./components/OpeningTimes";
@@ -57,7 +56,6 @@ export default {
     InputListItem: InputListItem,
     LinkListItem: LinkListItem,
     ListItem: ListItem,
-    LoadingResultsHeader: LoadingResultsHeader,
     LogoWithShadow: LogoWithShadow,
     NavBar: NavBar,
     OpeningTimes: OpeningTimes,

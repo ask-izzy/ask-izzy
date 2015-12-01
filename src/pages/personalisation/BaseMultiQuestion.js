@@ -3,7 +3,10 @@
 import React from "react";
 
 import BaseQuestion from "./BaseQuestion";
-import components from "../../components";
+import InputListItem from "../../components/InputListItem";
+import HeaderBar from "../../components/HeaderBar";
+import LogoWithShadow from "../../components/LogoWithShadow";
+
 import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
@@ -93,18 +96,17 @@ class BaseMultiQuestion extends BaseQuestion {
 
         return (
             <div className="BaseMultiQuestion">
-                <components.HeaderBar
+                <HeaderBar
                     primaryText={
                         <div>
-                            <components.LogoWithShadow />
+                            <LogoWithShadow />
                             {this.props.question}
                         </div>
                     }
-                >
-                </components.HeaderBar>
+                />
                 <div className="List">
                     {this.answers.map((answer, index) =>
-                        <components.InputListItem
+                        <InputListItem
                             key={index}
                             leftIcon={this.iconFor(answer)}
                             primaryText={answer}

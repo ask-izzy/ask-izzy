@@ -6,7 +6,10 @@ import { debounce } from "core-decorators";
 import _ from "underscore";
 
 import Personalisation from "../../mixins/Personalisation";
-import components from "../../components";
+import HeaderBar from "../../components/HeaderBar";
+import LogoWithShadow from "../../components/LogoWithShadow";
+import InputListItem from "../../components/InputListItem";
+
 import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
@@ -247,18 +250,17 @@ class BaseQuestion extends React.Component {
 
         return (
             <div>
-                <components.HeaderBar
+                <HeaderBar
                     primaryText={
                         <div>
-                            <components.LogoWithShadow />
+                            <LogoWithShadow />
                             {this.props.question}
                         </div>
                     }
-                >
-                </components.HeaderBar>
+                />
                 <div className="List">
                 {this.answers.map((answer, index) =>
-                    <components.InputListItem
+                    <InputListItem
                         key={index}
                         primaryText={answer}
 

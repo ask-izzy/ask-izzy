@@ -3,7 +3,8 @@
 import React from "react";
 import {Link} from "react-router";
 
-import components from "../components";
+import LogoWithShadow from "../LogoWithShadow";
+import HeaderBar from "../HeaderBar";
 
 const HomeLink = (): ReactElement =>
     <Link
@@ -20,7 +21,7 @@ const InfoMessage = (category: ?Object): ?ReactElement =>
 const LogoHeader = ({children}: Object): ReactElement =>
     <div>
         {children}
-        <components.LogoWithShadow />
+        <LogoWithShadow />
     </div>;
 
 const trailingSlash = (path: string): string =>
@@ -49,7 +50,7 @@ class ResultsListPage extends React.Component {
 
         if (loading) {
             return (
-                <components.HeaderBar
+                <HeaderBar
                     primaryText="Searching..."
                     secondaryText={
                         <div>
@@ -70,7 +71,7 @@ class ResultsListPage extends React.Component {
 
             if (statusCode == 402) {
                 return (
-                    <components.HeaderBar
+                    <HeaderBar
                         primaryText={primaryText}
                         secondaryText={
                             <div>
@@ -85,7 +86,7 @@ class ResultsListPage extends React.Component {
             }
 
             return (
-                <components.HeaderBar
+                <HeaderBar
                     primaryText={primaryText}
                     secondaryText={
                         <div>
@@ -98,7 +99,7 @@ class ResultsListPage extends React.Component {
         }
 
         return (
-            <components.HeaderBar
+            <HeaderBar
                 primaryText={
                     meta.total_count > 0 ?
                         <LogoHeader>
