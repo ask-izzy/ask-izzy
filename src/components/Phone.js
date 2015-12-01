@@ -3,11 +3,15 @@ import React from "react";
 import { titleize } from "underscore.string";
 
 import icons from "../icons";
-import fixtures from "../../fixtures/services";
 
 class Phone extends React.Component {
 
-    static sampleProps = {default: fixtures.ixa.phones[0]};
+    static sampleProps = {default: {
+        "comment": "Here is a phone number with a long comment" +
+            ", like, a really long comment",
+        "kind": "phone",
+        "number": "(03) 3333 3333",
+    }};
 
     // flow:disable not supported yet
     get href(): string {
