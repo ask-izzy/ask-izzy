@@ -24,10 +24,10 @@ Feature: History navigation
         Then I should see "To help me find the right services I'll ask you a few questions"
         And I should be at /category/housing/personalise
 
-        When I click on "Next"
-         And I click on "Next"
-         And I click on "Next"
-         And I click on "Next"
+        When I click on "Okay"
+         And I click on "Done"
+         And I click on "Skip"
+         And I click on "Skip"
 
         Then I should see "Do you identify as…"
 
@@ -42,7 +42,7 @@ Feature: History navigation
         Then I should see "How old are you?"
 
         When I click on "25 or younger"
-        When I click on "Next"
+        When I click on "Done"
 
         Then I should see "I found these services for you"
         And I should see "Housing"

@@ -4,6 +4,7 @@ import React from "react";
 import classnames from "classnames";
 
 export default class TextInputListItem extends React.Component {
+
     static propTypes = {
         type: React.PropTypes.string.isRequired,
         placeholder: React.PropTypes.string,
@@ -13,6 +14,8 @@ export default class TextInputListItem extends React.Component {
     static defaultProps = {
         type: "text",
     };
+
+    static answeringTriggersNext = false;
 
     static sampleProps = {
         default: {

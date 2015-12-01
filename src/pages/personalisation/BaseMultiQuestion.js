@@ -10,11 +10,13 @@ import * as iss from "../../iss";
 
 class BaseMultiQuestion extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
+    static answeringTriggersNext = false;
 
     // flow:disable
     static get nextStepLabel(): string {
-        return this.answer.length ? "Done" : "None of these"
+        return (this.answer && this.answer.length) ? "Done" : "None of these"
     }
+
     static nextStepMode = "";
 
     // flow:disable
@@ -26,20 +28,24 @@ class BaseMultiQuestion extends BaseQuestion {
 
     // flow:disable
     static get summaryValue(): string {
-        let nSelected = this.answer.length;
-
-        if (nSelected == 0) {
+        if (!this.answer) {
             return "None selected";
-        } else if (nSelected > 3) {
-            return `${nSelected} selected`;
         } else {
-            return this.answer.join(", ")
+            const nSelected = this.answer.length;
+
+            if (nSelected == 0) {
+                return "None selected";
+            } else if (nSelected > 3) {
+                return `${nSelected} selected`;
+            } else {
+                return this.answer.join(", ")
+            }
         }
     }
 
     // flow:disable
-    static get answer(): Array<string> {
-        return storage.getJSON(this.defaultProps.name) || [];
+    static get answer(): ?Array<string> {
+        return storage.getJSON(this.defaultProps.name);
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {

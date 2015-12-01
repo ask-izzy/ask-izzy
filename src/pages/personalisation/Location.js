@@ -77,6 +77,7 @@ class Location extends React.Component {
     static summaryLabel = "Where are you?";
     static nextStepLabel = "Done";
     static nextStepMode = "";
+    static answeringTriggersNext = false;
 
     // flow:disable
     static get summaryValue(): string {

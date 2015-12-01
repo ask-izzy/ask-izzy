@@ -134,6 +134,7 @@ class BaseQuestion extends React.Component {
 
     static nextStepLabel = "Skip";
     static nextStepMode = "text-link";
+    static answeringTriggersNext = true;
 
     // flow:disable
     get selected(): string {

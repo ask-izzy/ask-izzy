@@ -26,11 +26,11 @@ Feature: Change your personalisation settings
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | 0 selected
+        Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
         When I click back from the title bar
-        Then I should be at /category/housing
+        Then I should be at /category/housing/
 
     Scenario: Edit my location setting
         When I visit /category/housing/personalise/summary
@@ -51,7 +51,7 @@ Feature: Change your personalisation settings
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | 0 selected
+        Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
     Scenario: Edit whether I have somewhere to sleep tonight
@@ -67,7 +67,7 @@ Feature: Change your personalisation settings
         Do you have somewhere safe to sleep tonight? | No
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | 0 selected
+        Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
     Scenario: Edit housing subcategory items
@@ -84,7 +84,7 @@ Feature: Change your personalisation settings
         Which situation is most like yours?          | In a rooming house
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | 0 selected
+        Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
         When I click on "Which situation is most like yours?"
@@ -106,7 +106,7 @@ Feature: Change your personalisation settings
         Which situation is most like yours?          | Private rental
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | 0 selected
+        Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
     Scenario: Edit demographics items
@@ -128,7 +128,7 @@ Feature: Change your personalisation settings
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | 3 selected
+        Do any of these apply to you?                | Aboriginal, Torres Strait Islander, LGBTIQ
         ----------------------------------------------------------------
 
         When I click on "Do any of these apply to you?"
@@ -144,7 +144,7 @@ Feature: Change your personalisation settings
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | 2 selected
+        Do any of these apply to you?                | Torres Strait Islander, LGBTIQ
         ----------------------------------------------------------------
 
     Scenario: Edit gender
@@ -161,15 +161,15 @@ Feature: Change your personalisation settings
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Male
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | 0 selected
+        Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
     Scenario: Clear my personalisation
         When I visit /category/housing/personalise/summary
-         And I click on "Delete all data"
+         And I click on "Delete all Answers"
         Then I should see the branding header
          And I should be at /
         When I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
-        When I click on "Next"
+        When I click on "Okay"
         Then I should not see "Melbourne VIC"

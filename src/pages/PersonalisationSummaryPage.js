@@ -46,6 +46,14 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                 {Subpage ?
                     <div>
                         {<Subpage ref="subpage" />}
+                        {Subpage.answeringTriggersNext ||
+                            <div className="done-button">
+                                <components.FlatButton
+                                    label="Done"
+                                    onTouchTap={this.nextStep.bind(this)}
+                                />
+                            </div>
+                        }
                     </div>
                 : <div>
                     <components.HeaderBar
