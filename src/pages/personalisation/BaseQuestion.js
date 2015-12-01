@@ -120,7 +120,6 @@ class BaseQuestion extends React.Component {
         question: React.PropTypes.string.isRequired,
         /* possible answers to the question */
         answers: React.PropTypes.oneOfType([
-            React.PropTypes.arrayOf(React.PropTypes.node),
             React.PropTypes.objectOf(React.PropTypes.object),
         ]).isRequired,
     };
@@ -208,10 +207,10 @@ class BaseQuestion extends React.Component {
     /**
      * Return the answers from the answers property element.
      *
-     * @returns {Array<nodes>} an array of React nodes.
+     * @returns {Array<string>} an array of the valid answers to this question.
      */
     // flow:disable
-    get answers(): Array<ReactElement> {
+    get answers(): Array<string> {
         if (_.isArray(this.props.answers)) {
             return this.props.answers;
         } else {
