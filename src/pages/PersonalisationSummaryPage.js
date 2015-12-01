@@ -47,7 +47,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                     <div>
                         <Subpage
                             ref="subpage"
-                            alwaysShowDoneButton={false}
+                            suppressDoneButton={true}
                             onDoneTouchTap={this.nextStep.bind(this)}
                         />
                     </div>
