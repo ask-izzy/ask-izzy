@@ -17,7 +17,7 @@ Feature: Category page
     Scenario: Visit housing category
         When I visit /category/housing
         Then I should see "Housing"
-        And I should see "I found these services for you"
+        And I should see "I found 3 services for women aged 26 to 64 in Melbourne VIC"
         And I should see the results
         --------------------------------------------------------------------------
         Service Name (name) | Site Name (site_name) | Service provisions (related)

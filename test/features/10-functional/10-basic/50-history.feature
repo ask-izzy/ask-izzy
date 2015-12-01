@@ -44,7 +44,7 @@ Feature: History navigation
         When I click on "25 or younger"
         When I click on "Next"
 
-        Then I should see "I found these services for you"
+        Then I should see "I found 3 services for men aged 25 or younger in Melbourne VIC"
         And I should see "Housing"
         And I should be at /category/housing/
         And I should see the results

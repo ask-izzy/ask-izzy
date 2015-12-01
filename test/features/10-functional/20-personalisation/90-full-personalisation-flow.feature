@@ -76,7 +76,7 @@ Feature: Personalisation
         Then I should see "What do you need?"
 
         When I click on "Next"
-        Then I should see "I found these services for you"
+        Then I should see "I found 8 services for people aged 25 or younger in Richmond, Victoria"
 
     Scenario: Search for emergency accommodation
         When I click on "Housing"
@@ -122,4 +122,4 @@ Feature: Personalisation
         And search box should contain "Richmond, Victoria"
 
         When I click on "Next"
-        Then I should see "I found these services for you"
+        Then I should see "I found 3 services for people in Richmond, Victoria"

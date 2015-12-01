@@ -6,6 +6,10 @@ import {Link} from "react-router";
 import LogoWithShadow from "../LogoWithShadow";
 import HeaderBar from "../HeaderBar";
 
+import Gender from "../../pages/personalisation/Gender";
+import Age from "../../pages/personalisation/Age";
+import Location from "../../pages/personalisation/Location";
+
 const HomeLink = (): ReactElement =>
     <Link
         className="homeLink"
@@ -103,7 +107,9 @@ class ResultsListPage extends React.Component {
                 primaryText={
                     meta.total_count > 0 ?
                         <LogoHeader>
-                            I found these services for you
+                            I found {meta.total_count} services{' '}
+                            {Gender.headingValue} {Age.headingValue}
+                            {' '}in {Location.answer}
                         </LogoHeader>
                     : <LogoHeader>
                          Sorry, I couldn't find any results
