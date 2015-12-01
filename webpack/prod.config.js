@@ -10,7 +10,6 @@ import writeStats from "./utils/write-stats";
 import commons from "./utils/commons";
 import env from "./env";
 import extractText from "./extract-text";
-import cssLoaders from "./css-loaders";
 
 const assetsPath = path.join(__dirname, "../public/static");
 
@@ -47,7 +46,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                loaders: cssLoaders,
+                loader: extractText.loader,
             },
             {
                 test: /\.js$/,
