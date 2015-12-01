@@ -173,7 +173,7 @@ class ResultsPage extends BaseCategoriesPage {
         if (this.loading) {
             return (
                 <div className="progress">
-                    <icons.Loading />
+                    <icons.Loading className="big" />
                 </div>
             );
         }

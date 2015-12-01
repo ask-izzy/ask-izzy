@@ -19,8 +19,8 @@ const InfoMessage = (category: ?Object): ?ReactElement =>
 
 const LogoHeader = ({children}: Object): ReactElement =>
     <div>
-        {children}
         <components.LogoWithShadow />
+        {children}
     </div>;
 
 const trailingSlash = (path: string): string =>
@@ -50,11 +50,10 @@ class ResultsListPage extends React.Component {
         if (loading) {
             return (
                 <components.HeaderBar
-                    primaryText="Searching..."
-                    secondaryText={
+                    primaryText={
                         <div>
-                            <InfoMessage {...category} />
-                            <PersonalisationLink {...location} />
+                            <components.LogoWithShadow />
+                            Loading results...
                         </div>
                     }
                 />
