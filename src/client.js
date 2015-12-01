@@ -6,7 +6,6 @@ import Router from "react-router";
 import createBrowserHistory from "history/lib/createBrowserHistory";
 import injectTapEventPlugin from "react-tap-event-plugin";
 import sessionstorage from "sessionstorage";
-import a11y from "react-a11y";
 
 import routes from "./routes";
 
@@ -69,10 +68,6 @@ function History() {
         pushState,
         go,
     };
-}
-
-if (a11y) {
-    a11y(React, {includeSrcNode: true});
 }
 
 ReactDOM.render(
