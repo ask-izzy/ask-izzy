@@ -91,17 +91,25 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
                     slideForwardIn={true}
                 />
                 <Subpage ref="subpage" />
+                {this.renderNextStepControls( Subpage )}
+            </div>
+        );
+    }
+
+    renderNextStepControls( Subpage ): ReactElement {
+        return ( 
+            <div>
                 <div className="done-button">
                     <components.FlatButton
+                        className={Subpage.nextStepMode ? Subpage.nextStepMode : ''}
                         label={Subpage.nextStepLabel}
-                        // FIXME: Skip button should be less prominent
+                        // FIXME: Tap-up is hitting the new questions on the next page
                         onTouchTap={this.nextStep.bind(this)}
                         disabled={this.state.nextDisabled}
                     />
                 </div>
-
             </div>
-        );
+        )
     }
 
 }

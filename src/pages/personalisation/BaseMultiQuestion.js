@@ -13,8 +13,9 @@ class BaseMultiQuestion extends BaseQuestion {
 
     // flow:disable
     static get nextStepLabel(): string {
-        return this.answer.length ? "Done" : "Skip"
+        return this.answer.length ? "Done" : "None of these"
     }
+    static nextStepMode = "";
 
     // flow:disable
     get selected(): Set<string> {

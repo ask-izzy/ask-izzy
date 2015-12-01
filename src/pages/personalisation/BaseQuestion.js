@@ -133,6 +133,7 @@ class BaseQuestion extends React.Component {
     }
 
     static nextStepLabel = "Skip";
+    static nextStepMode = "text-link";
 
     // flow:disable
     get selected(): string {

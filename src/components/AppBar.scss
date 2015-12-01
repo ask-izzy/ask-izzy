@@ -51,7 +51,7 @@
 
         &:focus {
             outline: none;
-            background: $black;
+            background-color: darken($brand-bg-dark, 10%);
         }
 
         .Icon {
