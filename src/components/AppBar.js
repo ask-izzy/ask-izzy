@@ -36,12 +36,10 @@ class AppBar extends React.Component {
                 className="BackButton button-container"
                 onTouchTap={this.props.onBackTouchTap}
             >
-                <div className="left">
-                    <icons.ChevronBack />
-                    <span className="back-label">
-                        {this.props.backMessage}
-                    </span>
-                </div>
+                <icons.ChevronBack />
+                <span className="back-label">
+                    {this.props.backMessage}
+                </span>
             </components.IconButton>
         )
     }

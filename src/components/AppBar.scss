@@ -19,16 +19,16 @@
     z-index: 2;
 
     & > .button-container {
-        flex: 1;
+        flex: 2;
         z-index: 2;
     }
 
     .title {
-        flex: 4;
+        flex: 3;
 
         margin: auto;
         padding: 0;
-
+        
         font-size: 16px;
         font-weight: 500;
         line-height: 38px;
@@ -48,10 +48,11 @@
         text-align: left;
         text-decoration: none;
         white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         &:focus {
-            outline: none;
-            background-color: darken($brand-bg-dark, 10%);
+            background-color: $brand-pane-alt-light-translucent;
         }
 
         .Icon {
