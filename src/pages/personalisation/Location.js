@@ -75,9 +75,6 @@ class Location extends React.Component {
     }
 
     static summaryLabel = "Where are you?";
-    static nextStepLabel = "Done";
-    static nextStepMode = "";
-    static answeringTriggersNext = false;
 
     // flow:disable
     static get summaryValue(): string {
@@ -386,9 +383,22 @@ class Location extends React.Component {
                         </div>
                     : ""
                 }
-
+                {this.renderDoneButton()}
             </div>
         );
+    }
+
+    renderDoneButton(): ?ReactElement {
+        return (
+            <div>
+                <div className="done-button">
+                    <components.FlatButton
+                        label="Done"
+                        onTouchTap={this.props.onDoneTouchTap}
+                    />
+                </div>
+            </div>
+        )
     }
 
 }

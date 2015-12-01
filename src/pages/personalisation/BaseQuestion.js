@@ -123,6 +123,7 @@ class BaseQuestion extends React.Component {
     };
 
     static defaultProps = {
+        alwaysShowDoneButton: true,
     };
 
     constructor(props: Object) {
@@ -131,10 +132,6 @@ class BaseQuestion extends React.Component {
             selected: null, // set when the user makes a choice
         };
     }
-
-    static nextStepLabel = "Skip";
-    static nextStepMode = "text-link";
-    static answeringTriggersNext = true;
 
     // flow:disable
     get selected(): string {
@@ -279,10 +276,27 @@ class BaseQuestion extends React.Component {
                         }
                     />)}
                 </div>
-
+                {this.renderDoneButton()}
             </div>
         );
     }
+
+    renderDoneButton(): ?ReactElement {
+        if (this.props.alwaysShowDoneButton) {
+            return (
+                <div>
+                    <div className="done-button">
+                        <components.FlatButton
+                            className="text-link"
+                            label="Skip"
+                            onTouchTap={this.props.onDoneTouchTap}
+                        />
+                    </div>
+                </div>
+            )
+        }
+    }
+
 }
 
 export default BaseQuestion;

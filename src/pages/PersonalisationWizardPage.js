@@ -90,26 +90,13 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
                     }
                     slideForwardIn={true}
                 />
-                <Subpage ref="subpage" />
-                {this.renderNextStepControls( Subpage )}
+                // FIXME: Tap-up is hitting the new questions on the next page
+                <Subpage
+                    ref="subpage"
+                    onDoneTouchTap={this.nextStep.bind(this)}
+                />
             </div>
         );
-    }
-
-    renderNextStepControls( Subpage ): ReactElement {
-        return ( 
-            <div>
-                <div className="done-button">
-                    <components.FlatButton
-                        className={Subpage.nextStepMode ? Subpage.nextStepMode : ''}
-                        label={Subpage.nextStepLabel}
-                        // FIXME: Tap-up is hitting the new questions on the next page
-                        onTouchTap={this.nextStep.bind(this)}
-                        disabled={this.state.nextDisabled}
-                    />
-                </div>
-            </div>
-        )
     }
 
 }

@@ -15,8 +15,6 @@ export default class TextInputListItem extends React.Component {
         type: "text",
     };
 
-    static answeringTriggersNext = false;
-
     static sampleProps = {
         default: {
             placeholder: "Placeholder Text",

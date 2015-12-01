@@ -10,14 +10,23 @@ import * as iss from "../../iss";
 
 class BaseMultiQuestion extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
-    static answeringTriggersNext = false;
 
-    // flow:disable
-    static get nextStepLabel(): string {
-        return (this.answer && this.answer.length) ? "Done" : "None of these"
+    renderDoneButton(): ?ReactElement {
+        const label = (this.selected.size) ?
+            "Done"
+            : "None of these";
+
+        return (
+            <div>
+                <div className="done-button">
+                    <components.FlatButton
+                        label={label}
+                        onTouchTap={this.props.onDoneTouchTap}
+                    />
+                </div>
+            </div>
+        )
     }
-
-    static nextStepMode = "";
 
     // flow:disable
     get selected(): Set<string> {
@@ -140,6 +149,7 @@ class BaseMultiQuestion extends BaseQuestion {
                         />
                     )}
                 </div>
+                {this.renderDoneButton()}
             </div>
         );
     }

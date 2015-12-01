@@ -23,7 +23,6 @@ class Intro extends React.Component {
     }
 
     static title = "Intro";
-    static nextStepLabel = "Okay";
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         return request;
@@ -60,9 +59,22 @@ class Intro extends React.Component {
                         </div>
                     }
                 />
-
+                {this.renderDoneButton()}
             </div>
         );
+    }
+
+    renderDoneButton(): ?ReactElement {
+        return (
+            <div>
+                <div className="done-button">
+                    <components.FlatButton
+                        label="Okay"
+                        onTouchTap={this.props.onDoneTouchTap}
+                    />
+                </div>
+            </div>
+        )
     }
 
 }
