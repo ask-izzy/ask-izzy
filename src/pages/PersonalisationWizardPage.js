@@ -76,6 +76,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
             prevPage.title
             : "Categories";
 
+        // FIXME: Tap-up is hitting the new questions on the next page
         return (
             <div className="PersonalisationPage">
                 <components.AppBar
@@ -90,7 +91,6 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
                     }
                     slideForwardIn={true}
                 />
-                // FIXME: Tap-up is hitting the new questions on the next page
                 <Subpage
                     ref="subpage"
                     onDoneTouchTap={this.nextStep.bind(this)}
