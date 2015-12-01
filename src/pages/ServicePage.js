@@ -61,8 +61,12 @@ class ServicePage extends React.Component {
                         title="Loading..."
                         onBackTouchTap={history.goBack.bind(history)}
                     />
-                    <div className="loading-indicator">
-                        <Loading />
+                    <div className="ServicePane">
+                        <main>
+                            <div className="progress">
+                                <Loading className="big" />
+                            </div>
+                        </main>
                     </div>
                 </div>
             );
