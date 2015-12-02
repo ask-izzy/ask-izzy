@@ -67,10 +67,28 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         }
     }
 
+    /**
+     * personalisationComponents:
+     *
+     * An array of components required to personalise this category.
+     */
+    /* flow:disable */
+    get personalisationComponents(): Array<ReactClass> {
+        return [Intro].concat(super.personalisationComponents);
+    }
+
+    // flow:disable
+    get currentComponentIdx(): number {
+        const sup = super.currentComponentIdx;
+        if (sup == -1) {
+            return 0;
+        } else {
+            return sup;
+        }
+    }
+
     render(): ReactElement {
-        const Subpage = this.currentComponent || Intro;
-        // FIXME: Back message is 'Categories' for the
-        // first personalisation, should be 'Intro'
+        const Subpage = this.currentComponent;
         const prevPage = this.prevSubPage()
         const backMessage = prevPage ?
             prevPage.title
