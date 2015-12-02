@@ -12,7 +12,6 @@ class AppBar extends React.Component {
     static propTypes = {
         title: React.PropTypes.string.isRequired,
         onBackTouchTap: React.PropTypes.func.isRequired,
-        onForwardTouchTap: React.PropTypes.func,
     };
 
     static sampleProps = {default: {
