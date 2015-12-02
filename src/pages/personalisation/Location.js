@@ -395,6 +395,7 @@ class Location extends React.Component {
                     <components.FlatButton
                         label="Done"
                         onTouchTap={this.props.onDoneTouchTap}
+                        disabled={!this.state.locationName}
                     />
                 </div>
             </div>

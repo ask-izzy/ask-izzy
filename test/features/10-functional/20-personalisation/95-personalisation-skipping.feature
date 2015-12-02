@@ -30,13 +30,13 @@ Feature: Skip personalisation settings
         Then I should see "Do you identify as…"
 
         # Didn't answer the question
-        When I click on "Done"
+        When I click on "Skip"
         Then I should see "How old are you?"
 
-        When I click on "Done"
+        When I click on "Skip"
         Then I should see "Do any of these apply to you?"
 
-        When I click on "Skip"
+        When I click on "None of these"
         Then I should see "Housing"
 
         When I click on "Change your answers"

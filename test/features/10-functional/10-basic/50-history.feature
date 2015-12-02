@@ -42,7 +42,7 @@ Feature: History navigation
         Then I should see "How old are you?"
 
         When I click on "25 or younger"
-        When I click on "Done"
+        When I click on "None of these"
 
         Then I should see "I found these services for you"
         And I should see "Housing"

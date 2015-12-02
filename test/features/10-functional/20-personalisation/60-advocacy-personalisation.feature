@@ -16,27 +16,19 @@ Feature: Advocacy Personalisation
 
         When I click on "Okay"
          And I click on "Done" # Location
-         And I click on "Skip"
 
-        Then I should see "Have you been treated badly? Did you have poor service? Do you want to tell someone?"
-
-        When I click on "Do you want someone to speak for you?"
-         And I click on "Done"
-
-        Then I should see "What situation do you need help with?"
-        When I click back from the title bar
-
-        Then I should see "Have you been treated badly? Did you have poor service? Do you want to tell someone?"
-        When I click on "Do you want to make a complaint?"
+        Then I should see "What do you want to do help with or advice about?"
+        When I click on "Making a complaint"
          And I click on "Done"
 
         Then I should see "What's not working?"
-        When I click on "Public Housing"
-         And I click on "Done"
 
-        Then I should see "What situation do you need help with?"
-        When I fill in "eviction"
+        When I click back from the title bar
+
+        Then I should see "What do you want to do help with or advice about?"
+        When I click on "Making a complaint"
+        When I click on "Someone to speak for you"
          And I click on "Done"
 
         Then I should see "I found these services for you"
-         And I should see "Eviction advocacy Richmond"
+         # And I should see "Eviction advocacy Richmond"

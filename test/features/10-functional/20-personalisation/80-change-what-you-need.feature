@@ -112,9 +112,7 @@ Feature: Change your personalisation settings
     Scenario: Edit demographics items
         Given I am part of the following demographics
         --------------------------------------
-        Aboriginal
-        Torres Strait Islander
-        LGBTIQ
+        Indigenous
         --------------------------------------
 
         When I visit /category/housing/personalise/summary
@@ -128,12 +126,12 @@ Feature: Change your personalisation settings
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | Aboriginal, Torres Strait Islander, LGBTIQ
+        Do any of these apply to you?                | Indigenous
         ----------------------------------------------------------------
 
         When I click on "Do any of these apply to you?"
-        And I click on "Aboriginal"
-        And I click on "Done"
+        And I click on "Indigenous"
+        And I click on "None of these"
         Then I should see "This is what you said you need. Change your answers here."
         Then I should see the results
         ----------------------------------------------------------------
@@ -144,7 +142,7 @@ Feature: Change your personalisation settings
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | Torres Strait Islander, LGBTIQ
+        Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
     Scenario: Edit gender
@@ -166,7 +164,7 @@ Feature: Change your personalisation settings
 
     Scenario: Clear my personalisation
         When I visit /category/housing/personalise/summary
-         And I click on "Delete all Answers"
+         And I click on "Delete all answers"
         Then I should see the branding header
          And I should be at /
         When I click on "Housing"

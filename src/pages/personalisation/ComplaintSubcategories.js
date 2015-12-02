@@ -20,14 +20,15 @@ export default class ComplaintSubcategories extends BaseMultiQuestion {
             "Other": append(""),
         },
     };
-
+    
     static showQuestion() {
         /* only show this question if the user is making a complaint */
         return (
             AdvocacySubcategories.answer &&
             AdvocacySubcategories.answer.includes(
-                "Do you want to make a complaint?"
+                "Making a complaint"
             )
         );
     }
+    
 }
