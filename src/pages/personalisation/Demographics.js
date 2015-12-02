@@ -13,9 +13,9 @@ export default class Demographics extends BaseMultiQuestion {
         answers: {
             /* eslint-disable max-len */
             "Indigenous": append("indigenous"),
-            "Have children": append("family"),
-            "With a partner": append("couples"),
-            "On parole or recently released": append("post-release"),
+            "Family with children": append("family"),
+            "In a couple": append("couples"),
+            "Parole / recently released": append("post-release"),
             "Have a disability": append("disability"),
             "Veteran": append("veteran"),
             "Asylum seeker": append("refugee"),
@@ -23,9 +23,9 @@ export default class Demographics extends BaseMultiQuestion {
         },
         icons: {
             "Indigenous": icons.DemographicAboriginal,
-            "Have children": icons.DemographicChildren,
-            "With a partner": null,
-            "On parole or recently released": icons.DemographicParole,
+            "Family with children": icons.DemographicChildren,
+            "In a couple": null,
+            "Parole / recently released": icons.DemographicParole,
             "Have a disability": icons.DemographicDisability,
             "Veteran": icons.DemographicVeteran,
             "Asylum seeker":  icons.DemographicRecentlyArrived,
