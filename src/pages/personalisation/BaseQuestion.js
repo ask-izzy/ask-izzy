@@ -207,7 +207,8 @@ class BaseQuestion extends React.Component {
     /**
      * Return the answers from the answers property element.
      *
-     * @returns {Array<string>} an array of the valid answers to this question.
+     * @returns {Array<string>} an array of the valid answers
+     * to this question.
      */
     // flow:disable
     get answers(): Array<string> {
