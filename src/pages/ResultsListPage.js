@@ -4,7 +4,8 @@ import React from "react";
 import _ from "underscore";
 
 import ResultsList from "../components/ResultsList";
-import LoadingResultsHeader from "../components/LoadingResultsHeader";
+import LoadingResultsHeader from
+    "../components/ResultsListPage/LoadingResultsHeader";
 import ViewOnMapButton from "../components/ViewOnMapButton";
 
 class ResultsListPage extends React.Component {

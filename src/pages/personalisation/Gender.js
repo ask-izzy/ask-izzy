@@ -23,8 +23,7 @@ export default class Gender extends BaseQuestion {
 
     static summaryLabel = "How do you identify?";
 
-    // flow:disable
-    static get headingValue() {
+    static headingValue(): string {
         switch (this.answer) {
         case "Male":
             return "for men";

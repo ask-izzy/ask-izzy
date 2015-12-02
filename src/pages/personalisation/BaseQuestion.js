@@ -6,7 +6,11 @@ import { debounce } from "core-decorators";
 import _ from "underscore";
 
 import Personalisation from "../../mixins/Personalisation";
-import components from "../../components";
+import HeaderBar from "../../components/HeaderBar";
+import LogoWithShadow from "../../components/LogoWithShadow";
+import InputListItem from "../../components/InputListItem";
+import FlatButton from "../../components/FlatButton";
+
 import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
@@ -117,7 +121,6 @@ class BaseQuestion extends React.Component {
         question: React.PropTypes.string.isRequired,
         /* possible answers to the question */
         answers: React.PropTypes.oneOfType([
-            React.PropTypes.arrayOf(React.PropTypes.node),
             React.PropTypes.objectOf(React.PropTypes.object),
         ]).isRequired,
         onDoneTouchTap: React.PropTypes.func,
@@ -145,9 +148,11 @@ class BaseQuestion extends React.Component {
         return this.answer;
     }
 
-    /** Provide a string to be used in the search results heading. */
-    // flow:disable
-    static get headingValue(): string {
+    /*
+     * How should this answer be represented
+     * @returns {string} A description of the question/answer
+    */
+    static headingValue(): string {
         return "";
     }
 
@@ -203,10 +208,11 @@ class BaseQuestion extends React.Component {
     /**
      * Return the answers from the answers property element.
      *
-     * @returns {Array<nodes>} an array of React nodes.
+     * @returns {Array<string>} an array of the valid answers
+     * to this question.
      */
     // flow:disable
-    get answers(): Array<ReactElement> {
+    get answers(): Array<string> {
         if (_.isArray(this.props.answers)) {
             return this.props.answers;
         } else {
@@ -245,18 +251,17 @@ class BaseQuestion extends React.Component {
 
         return (
             <div>
-                <components.HeaderBar
+                <HeaderBar
                     primaryText={
                         <div>
-                            <components.LogoWithShadow />
+                            <LogoWithShadow />
                             {this.props.question}
                         </div>
                     }
-                >
-                </components.HeaderBar>
+                />
                 <div className="List">
                 {this.answers.map((answer, index) =>
-                    <components.InputListItem
+                    <InputListItem
                         key={index}
                         primaryText={answer}
 
@@ -283,7 +288,7 @@ class BaseQuestion extends React.Component {
             return (
                 <div>
                     <div className="done-button">
-                        <components.FlatButton
+                        <FlatButton
                             className="text-link"
                             label="Skip"
                             onClick={this.props.onDoneTouchTap}

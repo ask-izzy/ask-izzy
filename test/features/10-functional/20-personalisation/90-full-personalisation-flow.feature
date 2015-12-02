@@ -40,7 +40,7 @@ Feature: Personalisation
         Then I should see "Do any of these apply to you?"
 
         When I click on "None of these"
-        Then I should see "Housing"
+        Then I should see "I found 3 services for people aged 25 or younger in Richmond, Victoria"
 
         When I click back from the title bar
         Then I should see "A directory of homeless help information"
@@ -89,4 +89,4 @@ Feature: Personalisation
         And search box should contain "Richmond, Victoria"
 
         When I click on "Done"
-        Then I should see "I found these services for you"
+        Then I should see "I found 3 services in Richmond, Victoria"

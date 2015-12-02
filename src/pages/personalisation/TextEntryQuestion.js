@@ -13,7 +13,7 @@ export default class TextEntryQuestion extends BaseQuestion {
     static defaultProps = {
         type: "text",
         placeholder: "",
-        answers: [],
+        answers: {},
     };
 
     onNextStep(): void {
