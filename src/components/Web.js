@@ -5,7 +5,7 @@ import icons from "../icons";
 
 export default class Web extends React.Component {
 
-    static sampleProps = {default: {url: "https://example.com/landingPage"}};
+    static sampleProps = {default: {url: "https://ExampleDomain.com/landingPage"}};
 
     render(): ReactElement {
         let url = URL.parse(this.props.url);

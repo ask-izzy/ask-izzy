@@ -10,6 +10,8 @@ import { titleize } from "underscore.string";
 import _ from "underscore";
 import Webdriver from "selenium-webdriver";
 
+declare var IzzyStorage: Object;
+
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
 import { gotoUrl } from "../support/webdriver";
@@ -51,7 +53,7 @@ async function setSleepTonight(answer: string): Promise<void> {
 
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript(answer => {
-        sessionStorage.setItem("sleep-tonight", answer);
+        IzzyStorage.setItem("sleep-tonight", answer);
     }, answer);
 }
 
@@ -62,7 +64,7 @@ async function setStorageValue(
 ): Promise<void> {
     await gotoUrl(driver, "/");  // go anywhere to start the session
     await driver.executeScript((key, value) => {
-        sessionStorage.setItem(key, value);
+        IzzyStorage.setItem(key, value);
     }, key, value);
 }
 
@@ -103,7 +105,7 @@ async function setDemographics(
 ): Promise<void> {
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript(items => {
-        sessionStorage.setItem("demographics", JSON.stringify(items));
+        IzzyStorage.setItem("demographics", JSON.stringify(items));
     }, items);
 }
 
@@ -116,29 +118,29 @@ async function setSubcategoriesNone(
 ): Promise<void> {
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript(() => {
-        sessionStorage.setItem("sub-addiction", "[]");
-        sessionStorage.setItem("sub-counselling", "[]");
-        sessionStorage.setItem("sub-everyday-things", "[]");
-        sessionStorage.setItem("sub-health", "[]");
-        sessionStorage.setItem("sub-housing", "[]");
-        sessionStorage.setItem("sub-job", "[]");
-        sessionStorage.setItem("sub-legal", "[]");
-        sessionStorage.setItem("sub-life-skills", "[]");
-        sessionStorage.setItem("sub-money", "[]");
-        sessionStorage.setItem("sub-technology", "[]");
+        IzzyStorage.setItem("sub-addiction", "[]");
+        IzzyStorage.setItem("sub-counselling", "[]");
+        IzzyStorage.setItem("sub-everyday-things", "[]");
+        IzzyStorage.setItem("sub-health", "[]");
+        IzzyStorage.setItem("sub-housing", "(skipped)");
+        IzzyStorage.setItem("sub-job", "[]");
+        IzzyStorage.setItem("sub-legal", "[]");
+        IzzyStorage.setItem("sub-life-skills", "[]");
+        IzzyStorage.setItem("sub-money", "[]");
+        IzzyStorage.setItem("sub-technology", "[]");
     });
 }
 
 async function setAgeTo(option: string): Promise<void> {
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript(age => {
-        sessionStorage.setItem("age", age);
+        IzzyStorage.setItem("age", age);
     }, option);
 }
 
 async function setGender(gender: string): Promise<void> {
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript(gender => {
-        sessionStorage.setItem("gender", gender);
+        IzzyStorage.setItem("gender", gender);
     }, titleize(gender));
 }

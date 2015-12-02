@@ -12,6 +12,8 @@ import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
 import { gotoUrl } from "../support/webdriver";
 
+declare var IzzyStorage: Object;
+
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .given("control of geolocation", unpromisify(mockGeolocation))
@@ -93,7 +95,7 @@ async function sendCoords(
 async function setLocation(location: string): Promise<void> {
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript((location) => {
-        sessionStorage.setItem("location", location);
+        IzzyStorage.setItem("location", location);
     }, location);
 }
 
@@ -106,7 +108,7 @@ async function setLocation(location: string): Promise<void> {
  */
 async function setCoords(latitude: number, longitude: number): Promise<void> {
     await this.driver.executeScript((coords) => {
-        sessionStorage.setItem("coordinates", JSON.stringify(coords));
+        IzzyStorage.setItem("coordinates", JSON.stringify(coords));
     },
 
         {
