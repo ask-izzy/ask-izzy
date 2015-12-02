@@ -37,5 +37,5 @@ Feature: Advocacy Personalisation
         When I fill in "eviction"
          And I click on "Next"
 
-        Then I should see "I found these services for you"
+        Then I should see "I found 1 service in Melbourne VIC"
          And I should see "Eviction advocacy Richmond"

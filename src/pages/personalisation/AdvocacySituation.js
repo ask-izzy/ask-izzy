@@ -9,7 +9,7 @@ export default class AdvocacySituation extends TextEntryQuestion {
         question: "What situation do you need help with?",
         placeholder: "Please describe the situation here " +
             "eg: housing, family violence, legal etc.",
-        answers: [],
+        answers: {},
     };
 
     static summaryLabel = "Your situation";

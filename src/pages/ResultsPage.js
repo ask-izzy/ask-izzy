@@ -176,6 +176,7 @@ class ResultsPage extends BaseCategoriesPage {
                     loadMore={this.renderLoadMore()}
                     title={this.title}
                     loading={this.loading}
+                    personalisationComponents={this.personalisationComponents}
                 />
             </div>
         );
