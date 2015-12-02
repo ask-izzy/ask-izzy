@@ -5,8 +5,8 @@ import ReactDOM from "react-dom";
 import Router from "react-router";
 import createBrowserHistory from "history/lib/createBrowserHistory";
 import injectTapEventPlugin from "react-tap-event-plugin";
-import sessionstorage from "sessionstorage";
 import a11y from "react-a11y";
+import storage from "./storage";
 
 import routes from "./routes";
 
@@ -25,12 +25,12 @@ injectTapEventPlugin();
 function History() {
     let history = createBrowserHistory();
     let historyLength = parseInt(
-        sessionstorage.getItem("historyLength") || ""
+        `${storage.getItem("historyLength") || ""}`
     ) || 0;
 
     function setHistoryLength(newLength: number): void {
         historyLength = newLength;
-        sessionstorage.setItem("historyLength", `${newLength}`);
+        storage.setItem("historyLength", `${newLength}`);
     }
 
     function goBack() {

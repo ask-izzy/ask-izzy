@@ -19,7 +19,7 @@ import {
     elementWithChildText,
     escapeXPathString,
 } from "../support/selectors";
-import { gotoUrl, baseUrl } from "../support/webdriver";
+import { gotoUrl, baseUrl, cleanDriverSession } from "../support/webdriver";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
@@ -287,11 +287,5 @@ async function newBrowser(): Promise<void> {
 }
 
 async function cleanSession(): Promise<void> {
-    await this.driver.executeScript(() => {
-        try {
-            sessionStorage.clear();
-        } catch (error) {
-            console.error(error);
-        }
-    });
+    await cleanDriverSession(this.driver);
 }

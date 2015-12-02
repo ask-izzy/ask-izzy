@@ -2,6 +2,8 @@
 
 import Webdriver from "selenium-webdriver";
 
+declare var IzzyStorage: Object;
+
 export async function seleniumBrowser(
     driver: Webdriver.WebDriver,
 ): Promise<Object> {
@@ -105,4 +107,35 @@ export default async function webDriverInstance(
         .implicitlyWait(10000);
 
     return driver;
+}
+
+async function waitForStorage(
+    driver: Webdriver.WebDriver,
+): Promise<void> {
+    await gotoUrl(driver, "/");
+    await driver.wait(() =>
+        driver.executeScript(() =>
+            !!IzzyStorage
+        ),
+        10000
+    );
+}
+
+export async function setStorage(
+    driver: Webdriver.WebDriver,
+    value: string,
+): Promise<void> {
+    await waitForStorage(driver);
+    await driver.executeScript((value) =>
+        IzzyStorage.setItem(value), value
+    )
+}
+
+export async function cleanDriverSession(
+    driver: Webdriver.WebDriver
+): Promise<void> {
+    await waitForStorage(driver);
+    await driver.executeScript(() => {
+        IzzyStorage.clear();
+    });
 }

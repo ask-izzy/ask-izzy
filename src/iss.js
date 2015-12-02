@@ -19,8 +19,8 @@ declare var ISS_URL: string;
 
 export type searchRequest = {
     q?: string,
-    service_types?: string | Array<string>,  // jscs:disable
-    site_id?: number,  // jscs:disable
+    service_types?: string | Array<string>,
+    site_id?: number,
 
     area?: string,
     location?: string,
