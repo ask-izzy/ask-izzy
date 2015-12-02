@@ -4,8 +4,7 @@
     }
 }
 
-.FeedbackLink,
-.ReportBugLink {
+.FeedbackLink {
     background: $brand-bg-light;
 
     & > div {
@@ -17,13 +16,5 @@
             font-weight: 500;
             line-height: 18px;
         }
-    }
-}
-
-.ReportBugLink {
-    .CrossIcon {
-        position: relative;
-        top: -5px;
-        left: -9px;
     }
 }
