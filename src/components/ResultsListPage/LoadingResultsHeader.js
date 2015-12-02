@@ -59,7 +59,7 @@ class LoadingResultsHeader extends React.Component {
                     primaryText="Searching..."
                     secondaryText={
                         <div>
-                            <components.LogoWithShadow />
+                            <LogoWithShadow />
                             Loading results...
                         </div>
                     }

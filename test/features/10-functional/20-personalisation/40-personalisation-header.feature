@@ -14,7 +14,7 @@ Feature: Personalisation header
         And I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
-        When I click on "Next" # Intro page
+        When I click on "Okay" # Intro page
          And I click on "Next" # Location
          And I click on "Next" # Somewhere safe to sleep
          And I click on "Next" # Subcategories
