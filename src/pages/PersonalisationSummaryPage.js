@@ -80,8 +80,8 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                     }</div>
 
                     <div className="ClearResults">
-                        <div>Delete all data saved in Ask Izzy.</div>
-                        <div>This cannot be undone.</div>
+                        <div>Delete all saved answers.<br/>
+                            This cannot be undone.</div>
                         <div className="clear-button">
                             <components.FlatButton
                                 label="Delete all answers"
