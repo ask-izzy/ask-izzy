@@ -49,6 +49,10 @@ class Location extends React.Component {
         this.setLocationName(storage.getItem("location"));
     }
 
+    static headingValue(): ?string {
+        return this.answer && `in ${this.answer}`
+    }
+
     // flow:disable
     static get answer(): string {
         return storage.getItem(this.defaultProps.name);

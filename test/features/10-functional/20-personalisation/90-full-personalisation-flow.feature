@@ -41,7 +41,7 @@ Feature: Personalisation
         Then I should see "Do any of these apply to you?"
 
         When I click on "Next"
-        Then I should see "Housing"
+        Then I should see "I found 3 services for people aged 25 or younger in Richmond, Victoria"
 
         When I click back from the title bar
         Then I should see "Do any of these apply to you?"
@@ -76,7 +76,7 @@ Feature: Personalisation
         Then I should see "What do you need?"
 
         When I click on "Next"
-        Then I should see "I found 8 services for people aged 25 or younger in Richmond, Victoria"
+        Then I should see "I found 8 services in Richmond, Victoria"
 
     Scenario: Search for emergency accommodation
         When I click on "Housing"
@@ -123,4 +123,4 @@ Feature: Personalisation
 
         When I click on "Next"
 
-        Then I should see "I found 3 services for people in Richmond, Victoria"
+        Then I should see "I found 3 services in Richmond, Victoria"

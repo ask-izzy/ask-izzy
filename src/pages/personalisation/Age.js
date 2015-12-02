@@ -45,8 +45,7 @@ export default class Age extends BaseQuestion {
         },
     };
 
-    // flow:disable
-    static get headingValue(): string {
+    static headingValue(): string {
         if (!this.answer || (this.answer == "(skipped)")) {
             return "";
         } else {

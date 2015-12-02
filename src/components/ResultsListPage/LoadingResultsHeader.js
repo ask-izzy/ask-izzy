@@ -39,7 +39,7 @@ const PersonalisationLink = ({pathname}: Object): ReactElement =>
         Change your answers
     </Link>;
 
-class ResultsListPage extends React.Component {
+class LoadingResultsHeader extends React.Component {
 
     render(): ReactElement {
         const {
@@ -55,6 +55,7 @@ class ResultsListPage extends React.Component {
         if (loading) {
             return (
                 <HeaderBar
+                    className="LoadingResultsHeader"
                     primaryText="Searching..."
                     secondaryText={
                         <div>
@@ -76,6 +77,7 @@ class ResultsListPage extends React.Component {
             if (statusCode == 402) {
                 return (
                     <HeaderBar
+                        className="LoadingResultsHeader"
                         primaryText={primaryText}
                         secondaryText={
                             <div>
@@ -91,6 +93,7 @@ class ResultsListPage extends React.Component {
 
             return (
                 <HeaderBar
+                    className="LoadingResultsHeader"
                     primaryText={primaryText}
                     secondaryText={
                         <div>
@@ -105,15 +108,23 @@ class ResultsListPage extends React.Component {
         const servicesWord = meta.total_count == 1 ?
             "service"
             : "services";
+        const personalisations = [
+            Gender,
+            Age,
+            Location,
+        ].filter((component) =>
+            this.props.personalisationComponents.includes(component)
+        )
+        .map((component) => component.headingValue())
 
         return (
             <HeaderBar
+                className="LoadingResultsHeader"
                 primaryText={
                     meta.total_count > 0 ?
                         <LogoHeader>
                             I found {meta.total_count} {servicesWord}{' '}
-                            {Gender.headingValue} {Age.headingValue}
-                            {' '}in {Location.answer}
+                            {personalisations.join(" ")}
                         </LogoHeader>
                     : <LogoHeader>
                          Sorry, I couldn't find any results
@@ -132,4 +143,4 @@ class ResultsListPage extends React.Component {
 
 }
 
-export default ResultsListPage;
+export default LoadingResultsHeader;

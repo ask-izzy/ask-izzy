@@ -149,9 +149,11 @@ class BaseQuestion extends React.Component {
         return this.answer;
     }
 
-    /** Provide a string to be used in the search results heading. */
-    // flow:disable
-    static get headingValue(): string {
+    /*
+     * How should this answer be represented
+     * @returns {string} A description of the question/answer
+    */
+    static headingValue(): string {
         return "";
     }
 
