@@ -166,7 +166,7 @@ class ResultsPage extends BaseCategoriesPage {
                 <ButtonListItem
                     className="MoreResultsButton"
                     primaryText="Load more results…"
-                    onTouchTap={this.loadMore.bind(this)}
+                    onClick={this.loadMore.bind(this)}
                 />
             );
         }

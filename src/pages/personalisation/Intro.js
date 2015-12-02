@@ -70,7 +70,7 @@ class Intro extends React.Component {
                 <div className="done-button">
                     <components.FlatButton
                         label="Okay"
-                        onTouchTap={this.props.onDoneTouchTap}
+                        onClick={this.props.onDoneTouchTap}
                     />
                 </div>
             </div>

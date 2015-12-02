@@ -4,13 +4,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Router from "react-router";
 import createBrowserHistory from "history/lib/createBrowserHistory";
-import injectTapEventPlugin from "react-tap-event-plugin";
 import storage from "./storage";
 
 import routes from "./routes";
-
-// For onTouchTap: see https://github.com/zilverline/react-tap-event-plugin
-injectTapEventPlugin();
 
 /*
  * If at any point there isn't a meaningful 'back',

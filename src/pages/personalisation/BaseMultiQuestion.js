@@ -21,7 +21,7 @@ class BaseMultiQuestion extends BaseQuestion {
                 <div className="done-button">
                     <components.FlatButton
                         label={label}
-                        onTouchTap={this.props.onDoneTouchTap}
+                        onClick={this.props.onDoneTouchTap}
                     />
                 </div>
             </div>

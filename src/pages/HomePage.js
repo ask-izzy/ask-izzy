@@ -59,7 +59,7 @@ class HomePage extends React.Component {
                             />
                             <icons.Search
                                 className="icon"
-                                onTouchTap={this.onSearchSubmit.bind(this)}
+                                onClick={this.onSearchSubmit.bind(this)}
                             />
                         </form>
                     </HeaderBar>

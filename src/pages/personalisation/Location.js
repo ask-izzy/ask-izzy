@@ -220,7 +220,7 @@ class Location extends React.Component {
         }
     }
 
-    onGeolocationTouchTap(): void {
+    onGeolocationClick(): void {
         if (this.state.geolocation != GeoLocationState.NOT_STARTED) {
             return;
         }
@@ -289,7 +289,7 @@ class Location extends React.Component {
                     this.state.geolocation == GeoLocationState.NOT_STARTED ?
                         <components.ButtonListItem
                             className="taller"
-                            onTouchTap={this.onGeolocationTouchTap.bind(this)}
+                            onClick={this.onGeolocationClick.bind(this)}
                             primaryText={<span className="link-color">
                                 Automatically detect your location
                             </span>}
@@ -394,7 +394,7 @@ class Location extends React.Component {
                 <div className="done-button">
                     <components.FlatButton
                         label="Done"
-                        onTouchTap={this.props.onDoneTouchTap}
+                        onClick={this.props.onDoneTouchTap}
                         disabled={!this.state.locationName}
                     />
                 </div>

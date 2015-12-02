@@ -85,7 +85,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         <div className="clear-button">
                             <components.FlatButton
                                 label="Delete all answers"
-                                onTouchTap={this.clearAll.bind(this)}
+                                onClick={this.clearAll.bind(this)}
                             />
                         </div>
                     </div>
