@@ -41,7 +41,7 @@ class HomePage extends React.Component {
                         </div>
 
                         <p className="branding-copy">
-                           A directory of homeless help information
+                           The A to Z directory of homeless help
                         </p>
                     </div>
                     <HeaderBar

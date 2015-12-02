@@ -43,7 +43,7 @@ Feature: Personalisation
         Then I should see "I found 3 services for people aged 25 or younger in Richmond, Victoria"
 
         When I click back from the title bar
-        Then I should see "A directory of homeless help information"
+        Then I should see "The A to Z directory of homeless help"
 
     Scenario: Search for emergency accommodation
         When I click on "Housing"
