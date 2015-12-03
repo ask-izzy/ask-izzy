@@ -125,7 +125,6 @@ class ResultsPage extends BaseCategoriesPage {
             this.refs.component.onGoBack(event)
         }
 
-        // FIXME: Convert back buttons to links
         if (!event.defaultPrevented) {
             this.props.history.pushState(
                 null,

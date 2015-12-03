@@ -108,9 +108,11 @@ class ResultsMap extends React.Component {
     }
 
     onGoBack(event: SyntheticInputEvent): void {
+        event.preventDefault()
         if (!_.isEmpty(this.state.selectedServices)) {
             this.clearSelection();
-            event.preventDefault()
+        } else {
+            this.props.history.goBack();
         }
     }
 
