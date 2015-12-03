@@ -80,6 +80,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     // flow:disable
     get currentComponentIdx(): number {
         const sup = super.currentComponentIdx;
+
         if (sup == -1) {
             return 0;
         } else {
@@ -93,6 +94,10 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         const backMessage = prevPage ?
             prevPage.title
             : "Categories";
+
+        if (!Subpage) {
+            throw new Error("Unexpected");
+        }
 
         // FIXME: Tap-up is hitting the new questions on the next page
         return (

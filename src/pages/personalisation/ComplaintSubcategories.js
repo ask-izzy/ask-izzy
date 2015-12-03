@@ -20,7 +20,7 @@ export default class ComplaintSubcategories extends BaseMultiQuestion {
             "Other": append(""),
         },
     };
-    
+
     static showQuestion() {
         /* only show this question if the user is making a complaint */
         return (
@@ -30,5 +30,5 @@ export default class ComplaintSubcategories extends BaseMultiQuestion {
             )
         );
     }
-    
+
 }

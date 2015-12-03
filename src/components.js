@@ -31,7 +31,6 @@ import ResultsMap from "./components/ResultsMap";
 import ScreenReader from "./components/ScreenReader";
 import ServicePane from "./components/ServicePane";
 import SvgIcon from "./components/SvgIcon";
-import TextInputListItem from "./components/TextInputListItem";
 import TransportTime from "./components/TransportTime";
 import ViewOnMapButton from "./components/ViewOnMapButton";
 import Web from "./components/Web";
@@ -66,7 +65,6 @@ export default {
     ScreenReader: ScreenReader,
     ServicePane: ServicePane,
     SvgIcon: SvgIcon,
-    TextInputListItem: TextInputListItem,
     TransportTime: TransportTime,
     ViewOnMapButton: ViewOnMapButton,
     Web: Web,
