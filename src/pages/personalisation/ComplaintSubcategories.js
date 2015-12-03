@@ -5,6 +5,7 @@ import { append } from "./BaseQuestion";
 import AdvocacySubcategories from "./AdvocacySubcategories";
 
 export default class ComplaintSubcategories extends BaseMultiQuestion {
+    static title = "Complaints & Advocacy";
     static propTypes = BaseMultiQuestion.propTypes;
     static defaultProps = {
         name: "sub-advocacy-complaints",
@@ -25,8 +26,9 @@ export default class ComplaintSubcategories extends BaseMultiQuestion {
         return (
             AdvocacySubcategories.answer &&
             AdvocacySubcategories.answer.includes(
-                "Do you want to make a complaint?"
+                "Making a complaint"
             )
         );
     }
+
 }

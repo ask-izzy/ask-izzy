@@ -82,33 +82,6 @@ class ResultsPage extends BaseCategoriesPage {
     }
 
     // flow:disable not supported yet
-    get search(): iss.searchRequest {
-        if (this.category) {
-            return Object.assign({}, this.category.search);
-        } else if (this.props.params.search) {
-            return {
-                q: this.props.params.search,
-            };
-        } else {
-            throw new Error("Unexpected");
-        }
-    }
-
-    // flow:disable not supported yet
-    get title(): string {
-        if (this.category) {
-            return this.category.name;
-        } else if (this.search) {
-            const quote = new RegExp(`["']`, "g");
-            const search = this.props.params.search;
-
-            return `“${search.replace(quote, "")}”`;
-        } else {
-            throw new Error("Unexpected");
-        }
-    }
-
-    // flow:disable not supported yet
     get loading(): boolean {
         return !(this.state.meta || this.state.error);
     }
@@ -151,8 +124,14 @@ class ResultsPage extends BaseCategoriesPage {
         if (this.refs.component.onGoBack) {
             this.refs.component.onGoBack(event)
         }
+
+        // FIXME: Convert back buttons to links
         if (!event.defaultPrevented) {
-            this.props.history.goBack();
+            this.props.history.pushState(
+                null,
+                "/",
+                {}
+            );
         }
     }
 
@@ -163,7 +142,7 @@ class ResultsPage extends BaseCategoriesPage {
             <div className="ResultsPage">
                 <AppBar
                     title={this.title}
-                    backMessage="Categories"
+                    backMessage={this.backButtonMessage()}
                     onBackTouchTap={this.onBackClick.bind(this)}
                 />
 
@@ -188,7 +167,7 @@ class ResultsPage extends BaseCategoriesPage {
                 <ButtonListItem
                     className="MoreResultsButton"
                     primaryText="Load more results…"
-                    onTouchTap={this.loadMore.bind(this)}
+                    onClick={this.loadMore.bind(this)}
                 />
             );
         }
@@ -196,7 +175,7 @@ class ResultsPage extends BaseCategoriesPage {
         if (this.loading) {
             return (
                 <div className="progress">
-                    <icons.Loading />
+                    <icons.Loading className="big" />
                 </div>
             );
         }
@@ -211,11 +190,20 @@ export class ResultsPageListing extends ResultsPage {
     component(): ReactComponent {
         return ResultsListPage;
     }
+
+    backButtonMessage(): string {
+        return "Categories"
+    }
 }
 
 export class ResultsPageMap extends ResultsPage {
     // flow:disable until flow can track inheritance for ReactComponent
     component(): ReactComponent {
         return ResultsMap;
+    }
+
+    backButtonMessage(): string {
+        // FIXME: Should be category name if no marker is selected
+        return ""
     }
 }

@@ -9,6 +9,7 @@ import Personalisation from "../../mixins/Personalisation";
 import HeaderBar from "../../components/HeaderBar";
 import LogoWithShadow from "../../components/LogoWithShadow";
 import InputListItem from "../../components/InputListItem";
+import FlatButton from "../../components/FlatButton";
 
 import icons from "../../icons";
 import storage from "../../storage";
@@ -122,9 +123,7 @@ class BaseQuestion extends React.Component {
         answers: React.PropTypes.oneOfType([
             React.PropTypes.objectOf(React.PropTypes.object),
         ]).isRequired,
-    };
-
-    static defaultProps = {
+        onDoneTouchTap: React.PropTypes.func,
     };
 
     constructor(props: Object) {
@@ -279,10 +278,27 @@ class BaseQuestion extends React.Component {
                         }
                     />)}
                 </div>
-
+                {this.renderDoneButton()}
             </div>
         );
     }
+
+    renderDoneButton(): ?ReactElement {
+        if (!this.props.suppressDoneButton) {
+            return (
+                <div>
+                    <div className="done-button">
+                        <FlatButton
+                            className="text-link"
+                            label="Skip"
+                            onClick={this.props.onDoneTouchTap}
+                        />
+                    </div>
+                </div>
+            )
+        }
+    }
+
 }
 
 export default BaseQuestion;

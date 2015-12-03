@@ -7,16 +7,15 @@ export default class AdvocacySubcategories extends BaseMultiQuestion {
     static propTypes = BaseMultiQuestion.propTypes;
     static defaultProps = {
         name: "sub-advocacy",
-        question: "Have you been treated badly?" +
-            " Did you have poor service? Do you want to tell someone?",
+        question: "What do you want to do help with or advice about?",
         answers: {
-            "Do you want to make a complaint?":
+            "Making a complaint":
                 remove("advocacy").append("ombudsman"),
-            "Do you want help to work out a problem with a service?":
+            "Help working out a problem with a service":
                 remove("advocacy").append("mediation"),
-            "Do you want to get advice on your rights?":
+            "Get advice on your rights":
                 remove("advocacy").append("rights advice"),
-            "Do you want someone to speak for you?": append(""),
+            "Someone to speak for you": append("advocacy"),
         },
     };
 }

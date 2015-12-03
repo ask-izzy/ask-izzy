@@ -15,8 +15,39 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     }
 
     previousStep(): void {
-        super.previousStep();
+        const prevSubPage = this.prevSubPage();
+
         this.setState({nextDisabled: false});
+
+        if (prevSubPage) {
+            this.goToSubPage(prevSubPage);
+        } else {
+            this.props.history.pushState(
+                null,
+                "/",
+                {}
+            );
+        }
+    }
+
+    goToCategoryPage(): void {
+        this.navigate("");
+    }
+
+    goToSubPage(subpage: ReactClass): void {
+        this.navigate(`personalise/page/${subpage.defaultProps.name}`);
+    }
+
+    nextSubPage(): ?ReactClass {
+        const nextSubpageIdx = this.currentComponentIdx + 1;
+
+        return this.personalisationComponents[nextSubpageIdx];
+    }
+
+    prevSubPage(): ?ReactClass {
+        const nextSubpageIdx = this.currentComponentIdx - 1;
+
+        return this.personalisationComponents[nextSubpageIdx];
     }
 
     nextStep(): void {
@@ -27,27 +58,54 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         super.nextStep();
         this.setState({nextDisabled: false});
 
-        const nextSubpageIdx = this.currentComponentIdx + 1;
+        const nextPage = this.nextSubPage()
 
-        if (nextSubpageIdx >= this.personalisationComponents.length) {
-            // Go on to the category page
-            this.navigate("");
+        if (!nextPage) {
+            this.goToCategoryPage();
         } else {
-            const subpage = this.personalisationComponents[nextSubpageIdx];
+            this.goToSubPage(nextPage);
+        }
+    }
 
-            this.navigate(`personalise/page/${subpage.defaultProps.name}`);
+    /**
+     * personalisationComponents:
+     *
+     * An array of components required to personalise this category.
+     */
+    /* flow:disable */
+    get personalisationComponents(): Array<ReactClass> {
+        return [Intro].concat(super.personalisationComponents);
+    }
+
+    // flow:disable
+    get currentComponentIdx(): number {
+        const sup = super.currentComponentIdx;
+
+        if (sup == -1) {
+            return 0;
+        } else {
+            return sup;
         }
     }
 
     render(): ReactElement {
-        const Subpage = this.currentComponent || Intro;
+        const Subpage = this.currentComponent;
+        const prevPage = this.prevSubPage()
+        const backMessage = prevPage ?
+            prevPage.title
+            : "Categories";
 
+        if (!Subpage) {
+            throw new Error("Unexpected");
+        }
+
+        // FIXME: Tap-up is hitting the new questions on the next page
         return (
             <div className="PersonalisationPage">
                 <components.AppBar
-                    title="Personalise"
+                    title={Subpage.title || this.title}
                     onBackTouchTap={this.previousStep.bind(this)}
-                    onForwardTouchTap={this.nextStep.bind(this)}
+                    backMessage={backMessage}
                     forwardMessage="Next"
                     forwardIcon={<Chevron alt="" />}
                     forwardEnabled={
@@ -55,7 +113,10 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
                     }
                     slideForwardIn={true}
                 />
-                <Subpage ref="subpage" />
+                <Subpage
+                    ref="subpage"
+                    onDoneTouchTap={this.nextStep.bind(this)}
+                />
             </div>
         );
     }

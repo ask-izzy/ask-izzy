@@ -30,7 +30,6 @@ module.exports = (function() {
         .when('I search for "$STRING"', unpromisify(doSearch))
         .when('I search for "$STRING" and press enter',
               unpromisify(doSearchAndEnter))
-        .when('I fill in "$STRING"', unpromisify(enterText))
         .when("I click on the search icon", unpromisify(clickSearchIcon))
         .when("I click back from the title bar", unpromisify(clickBack))
         .when(
@@ -184,13 +183,6 @@ async function doSearch(search: string): Promise<void> {
 
     await element.clear();
     await element.sendKeys(search);
-}
-
-async function enterText(text: string): Promise<void> {
-    let element = await getInputElement(this.driver);
-
-    await element.clear();
-    await element.sendKeys(text);
 }
 
 async function doSearchAndEnter(search: string): Promise<void> {

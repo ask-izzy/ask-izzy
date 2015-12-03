@@ -26,7 +26,6 @@ module.exports = {
             "react",
             "react-google-maps",
             "react-router",
-            "react-tap-event-plugin",
             "underscore",
             "underscore.string",
         ],

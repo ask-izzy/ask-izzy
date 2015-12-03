@@ -6,6 +6,7 @@ import BaseQuestion from "./BaseQuestion";
 import InputListItem from "../../components/InputListItem";
 import HeaderBar from "../../components/HeaderBar";
 import LogoWithShadow from "../../components/LogoWithShadow";
+import FlatButton from "../../components/FlatButton";
 
 import icons from "../../icons";
 import storage from "../../storage";
@@ -13,6 +14,23 @@ import * as iss from "../../iss";
 
 class BaseMultiQuestion extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
+
+    renderDoneButton(): ?ReactElement {
+        const label = (this.selected.size) ?
+            "Done"
+            : "None of these";
+
+        return (
+            <div>
+                <div className="done-button">
+                    <FlatButton
+                        label={label}
+                        onClick={this.props.onDoneTouchTap}
+                    />
+                </div>
+            </div>
+        )
+    }
 
     // flow:disable
     get selected(): Set<string> {
@@ -23,14 +41,23 @@ class BaseMultiQuestion extends BaseQuestion {
 
     // flow:disable
     static get summaryValue(): string {
-        let nSelected =
-            (storage.getJSON(this.defaultProps.name) || []).length;
+        if (!this.answer) {
+            return "None selected";
+        } else {
+            const nSelected = this.answer.length;
 
-        return `${nSelected} selected`;
+            if (nSelected == 0) {
+                return "None selected";
+            } else if (nSelected > 3) {
+                return `${nSelected} selected`;
+            } else {
+                return this.answer.join(", ")
+            }
+        }
     }
 
     // flow:disable
-    static get answer(): Array<string> {
+    static get answer(): ?Array<string> {
         return storage.getJSON(this.defaultProps.name);
     }
 
@@ -125,6 +152,7 @@ class BaseMultiQuestion extends BaseQuestion {
                         />
                     )}
                 </div>
+                {this.renderDoneButton()}
             </div>
         );
     }

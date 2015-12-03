@@ -8,13 +8,17 @@ import storage from "../storage";
 
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
-    previousStep(): void {
-        this.props.history.goBack();
+    goBack(): void {
+        super.nextStep();
+        if (this.currentComponent) {
+            this.navigate("personalise/summary");
+        } else {
+            this.navigate("");
+        }
     }
 
     nextStep(): void {
-        super.nextStep();
-        this.props.history.goBack();
+        this.goBack();
     }
 
     clearAll(event: SyntheticInputEvent): void {
@@ -29,23 +33,25 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
 
     render(): ReactElement {
         const Subpage = this.currentComponent;
+        const backMessage = Subpage ? "Answers" : this.title;
+        const title = Subpage ? Subpage.title : "Answers";
 
         return (
             <div className="PersonalisationPage">
                 <components.AppBar
-                    title="Personalise"
-                    onBackTouchTap={this.previousStep.bind(this)}
+                    title={title}
+                    onBackTouchTap={this.goBack.bind(this)}
+                    backMessage={backMessage}
                 />
                 {Subpage ?
                     <div>
-                        {<Subpage ref="subpage" />}
-                        <div className="done-button">
-                            <components.FlatButton
-                                label="Done"
-                                onTouchTap={this.nextStep.bind(this)}
-                            />
-                        </div>
+                        <Subpage
+                            ref="subpage"
+                            suppressDoneButton={true}
+                            onDoneTouchTap={this.nextStep.bind(this)}
+                        />
                     </div>
+
                 : <div>
                     <components.HeaderBar
                         primaryText={
@@ -74,12 +80,12 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                     }</div>
 
                     <div className="ClearResults">
-                        <div>Delete all data saved in Ask Izzy.</div>
-                        <div>This cannot be undone.</div>
+                        <div>Delete all saved answers.<br/>
+                            This cannot be undone.</div>
                         <div className="clear-button">
                             <components.FlatButton
-                                label="Delete all data"
-                                onTouchTap={this.clearAll.bind(this)}
+                                label="Delete all answers"
+                                onClick={this.clearAll.bind(this)}
                             />
                         </div>
                     </div>

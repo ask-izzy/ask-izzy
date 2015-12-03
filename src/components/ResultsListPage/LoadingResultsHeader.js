@@ -24,8 +24,8 @@ const InfoMessage = (category: ?Object): ?ReactElement =>
 
 const LogoHeader = ({children}: Object): ReactElement =>
     <div>
-        {children}
         <LogoWithShadow />
+        {children}
     </div>;
 
 const trailingSlash = (path: string): string =>
@@ -59,8 +59,8 @@ class LoadingResultsHeader extends React.Component {
                     primaryText="Searching..."
                     secondaryText={
                         <div>
-                            <InfoMessage {...category} />
-                            <PersonalisationLink {...location} />
+                            <LogoWithShadow />
+                            Loading results...
                         </div>
                     }
                 />

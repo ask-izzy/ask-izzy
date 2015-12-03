@@ -218,7 +218,6 @@ const categories:Array<Category> = [
             personalisation.Location,
             personalisation.AdvocacySubcategories,
             personalisation.ComplaintSubcategories,
-            personalisation.AdvocacySituation,
         ],
     }),
 

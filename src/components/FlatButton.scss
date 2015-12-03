@@ -17,4 +17,11 @@
     &[disabled] {
         background-color: $brand-bg-mid;
     }
+
+    &.text-link {
+        background-color: transparent;
+        color: $brand-text-mid;
+        text-decoration: underline;
+    }
+
 }

@@ -50,12 +50,17 @@
 
     .clear-button {
         button {
+            width: 100%;
             background-color: $brand-error;
         }
     }
 
     .List {
         padding: 0;
+    }
+
+    .List.floatingDoneButton {
+        padding-bottom: 60px;
     }
 
     .SummaryItem {
@@ -85,6 +90,7 @@
             color: $icon-fg-color;
             font-size: 16px;
             text-decoration: underline;
+            white-space: initial;
         }
     }
 

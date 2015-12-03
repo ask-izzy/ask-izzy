@@ -5,7 +5,7 @@ import classnames from "classnames";
 
 export default class IconButton extends React.Component {
     static propTypes = {
-        onTouchTap: React.PropTypes.func,
+        onClick: React.PropTypes.func,
     };
 
     static sampleProps = {
@@ -17,7 +17,7 @@ export default class IconButton extends React.Component {
     render(): ReactElement {
         const {
             className,
-            onTouchTap,
+            onClick,
             children,
             ...rest,
         } = this.props;
@@ -25,7 +25,7 @@ export default class IconButton extends React.Component {
         return (
             <button
                 className={classnames("IconButton", className)}
-                onTouchTap={onTouchTap}
+                onClick={onClick}
                 {...rest}
             >
                 {children}

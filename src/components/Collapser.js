@@ -53,7 +53,7 @@ class Collapser extends React.Component {
         return (
             <div
                 className={classnames("Collapser", this.props.className)}
-                onTouchTap={this.onClick.bind(this)}
+                onClick={this.onClick.bind(this)}
             >
                 {this.renderMessage()}
                 <div

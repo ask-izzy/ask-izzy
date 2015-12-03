@@ -6,6 +6,21 @@ $padding: 15px;
     font-size: 14px;
     font-weight: light;
 
+    .progress {
+        width: 100%;
+        padding-top: 60px;
+        padding-bottom: 400px;
+
+        & > * {
+            display: block;
+            width: 60px;
+            height: 60px;
+
+            margin-right: auto;
+            margin-left: auto;
+        }
+    }
+
     .padded,
     .Eligibility {
         padding: $padding;
@@ -93,7 +108,7 @@ $padding: 15px;
                     overflow: auto;
                 }
             }
-            
+
         }
     }
 

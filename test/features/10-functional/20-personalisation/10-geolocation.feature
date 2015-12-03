@@ -9,7 +9,7 @@ Feature: Geolocation
         When I visit /category/housing/personalise/page/location
         Then I should see "Where are you?"
         And I should see "Automatically detect your location"
-        And the button "Next" should be disabled
+        And the button "Done" should be disabled
 
         Given control of geolocation
         When I click on "Automatically detect your location"
@@ -18,7 +18,7 @@ Feature: Geolocation
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, Victoria"
-        And the button "Next" should be enabled
+        And the button "Done" should be enabled
 
     Scenario: User denies geolocation access
         When I visit /category/housing/personalise/page/location
@@ -30,4 +30,4 @@ Feature: Geolocation
         When I deny access to geolocation
         Then I should see "Unable to get your location"
         And I should see "Please enter your location below (User denied access)"
-        And the button "Next" should be disabled
+        And the button "Done" should be disabled

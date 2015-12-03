@@ -30,6 +30,7 @@ const AutocompleteState = {
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Location extends React.Component {
+
     static defaultProps = {
         name: "location",
     };
@@ -48,6 +49,8 @@ class Location extends React.Component {
     componentDidMount(): void {
         this.setLocationName(storage.getItem("location"));
     }
+
+    static title = "Location";
 
     static headingValue(): ?string {
         return this.answer && `in ${this.answer}`
@@ -226,7 +229,7 @@ class Location extends React.Component {
         }
     }
 
-    onGeolocationTouchTap(): void {
+    onGeolocationClick(): void {
         if (this.state.geolocation != GeoLocationState.NOT_STARTED) {
             return;
         }
@@ -295,7 +298,7 @@ class Location extends React.Component {
                     this.state.geolocation == GeoLocationState.NOT_STARTED ?
                         <components.ButtonListItem
                             className="taller"
-                            onTouchTap={this.onGeolocationTouchTap.bind(this)}
+                            onClick={this.onGeolocationClick.bind(this)}
                             primaryText={<span className="link-color">
                                 Automatically detect your location
                             </span>}
@@ -389,9 +392,23 @@ class Location extends React.Component {
                         </div>
                     : ""
                 }
-
+                {this.renderDoneButton()}
             </div>
         );
+    }
+
+    renderDoneButton(): ?ReactElement {
+        return (
+            <div>
+                <div className="done-button">
+                    <components.FlatButton
+                        label="Done"
+                        onClick={this.props.onDoneTouchTap}
+                        disabled={!this.state.locationName}
+                    />
+                </div>
+            </div>
+        )
     }
 
 }

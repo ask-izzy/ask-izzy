@@ -45,7 +45,7 @@ async function seeTheBrandingHeader(): Promise<void> {
     await assert.svgIsVisible(this.driver, "Ask Izzy", container);
     await assert.textIsVisible(
         this.driver,
-        "A directory of homeless help information",
+        "The A to Z directory of homeless help",
         container
     );
 }

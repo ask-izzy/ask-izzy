@@ -3,6 +3,8 @@
 import BaseQuestion, { remove, append } from "./BaseQuestion";
 
 export default class SleepTonight extends BaseQuestion {
+    static title = "Sleeping";
+
     static propTypes = BaseQuestion.propTypes;
 
     static defaultProps = {

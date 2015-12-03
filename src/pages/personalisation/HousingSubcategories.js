@@ -4,6 +4,7 @@ import SleepTonight from "./SleepTonight";
 import BaseQuestion, { append } from "./BaseQuestion";
 
 export default class HousingSubcategories extends BaseQuestion {
+    static title = "Housing";
     static propTypes = BaseQuestion.propTypes;
     static defaultProps = {
         name: "sub-housing",

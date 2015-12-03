@@ -5,7 +5,6 @@
 /* eslint-disable max-len */
 
 import AddictionSubcategories from "./personalisation/AddictionSubcategories";
-import AdvocacySituation from "./personalisation/AdvocacySituation";
 import AdvocacySubcategories from "./personalisation/AdvocacySubcategories";
 import Age from "./personalisation/Age";
 import BaseMultiQuestion from "./personalisation/BaseMultiQuestion";
@@ -25,11 +24,9 @@ import Location from "./personalisation/Location";
 import MoneySubcategories from "./personalisation/MoneySubcategories";
 import SleepTonight from "./personalisation/SleepTonight";
 import TechnologySubcategories from "./personalisation/TechnologySubcategories";
-import TextEntryQuestion from "./personalisation/TextEntryQuestion";
 
 export default {
     AddictionSubcategories: AddictionSubcategories,
-    AdvocacySituation: AdvocacySituation,
     AdvocacySubcategories: AdvocacySubcategories,
     Age: Age,
     BaseMultiQuestion: BaseMultiQuestion,
@@ -49,5 +46,4 @@ export default {
     MoneySubcategories: MoneySubcategories,
     SleepTonight: SleepTonight,
     TechnologySubcategories: TechnologySubcategories,
-    TextEntryQuestion: TextEntryQuestion,
 };

@@ -3,6 +3,7 @@
 import BaseQuestion, { append } from "./BaseQuestion";
 
 export default class Age extends BaseQuestion {
+    static title = "Age";
     static propTypes = BaseQuestion.propTypes;
     static defaultProps = {
         name: "age",

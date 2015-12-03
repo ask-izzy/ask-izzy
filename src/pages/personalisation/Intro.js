@@ -11,6 +11,7 @@ import * as iss from "../../iss";
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Intro extends React.Component {
+
     static defaultProps = {
         name: "intro",
     };
@@ -20,6 +21,8 @@ class Intro extends React.Component {
         this.state = {
         };
     }
+
+    static title = "Intro";
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         return request;
@@ -56,9 +59,22 @@ class Intro extends React.Component {
                         </div>
                     }
                 />
-
+                {this.renderDoneButton()}
             </div>
         );
+    }
+
+    renderDoneButton(): ?ReactElement {
+        return (
+            <div>
+                <div className="done-button">
+                    <components.FlatButton
+                        label="Okay"
+                        onClick={this.props.onDoneTouchTap}
+                    />
+                </div>
+            </div>
+        )
     }
 
 }

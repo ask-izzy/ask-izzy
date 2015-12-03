@@ -25,6 +25,33 @@ class BaseCategoriesPage extends React.Component {
         return category;
     }
 
+    // flow:disable not supported yet
+    get title(): string {
+        if (this.category) {
+            return this.category.name;
+        } else if (this.search) {
+            const quote = new RegExp(`["']`, "g");
+            const search = this.props.params.search;
+
+            return `“${search.replace(quote, "")}”`;
+        } else {
+            throw new Error("Unexpected");
+        }
+    }
+
+    // flow:disable not supported yet
+    get search(): iss.searchRequest {
+        if (this.category) {
+            return Object.assign({}, this.category.search);
+        } else if (this.props.params.search) {
+            return {
+                q: this.props.params.search,
+            };
+        } else {
+            throw new Error("Unexpected");
+        }
+    }
+
     /**
      * personalisationComponents:
      *
