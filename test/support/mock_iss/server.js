@@ -244,6 +244,10 @@ app.get("/api/v3/search/", (req, res) => {
             ],
             location: {
                 suburb: "Richmond",
+                point: {
+                    lat: -37.8228,
+                    lon: 144.998,
+                },
             },
         };
 
@@ -255,7 +259,7 @@ app.get("/api/v3/search/", (req, res) => {
                     suburb: "Richmond",
                     state: "VIC",
                 },
-                next: req.originalUrl,
+                next: req.originalUrl + "&offset=5",
             },
             objects: [
                 object,

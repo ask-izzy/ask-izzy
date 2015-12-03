@@ -26,6 +26,7 @@ module.exports = (function() {
         )
         .when("I click on the map", unpromisify(clickMap))
         .when('I click marker titled "$STRING"', unpromisify(clickMarker))
+        .when("I click the map link", unpromisify(clickMapLink))
         .then("I should see a map", unpromisify(assertMap))
         .then("I should see markers?\n$table", unpromisify(assertMarkers))
         .then('I can get to google maps by clicking "$STRING"',
@@ -56,6 +57,19 @@ async function instrumentDistanceMatrix(
             };
         };
     }, results);
+}
+
+/**
+ * Scroll to the map link and click it
+ *
+ * @returns {Promise} a promise that resolves when the link is identified and
+ * clicked.
+ */
+async function clickMapLink(): Promise<void> {
+    await this.driver.executeScript(() => window.scrollTo(0, 0))
+    await this.driver.findElement(
+        By.css(".ViewOnMapButton")
+    ).click();
 }
 
 /**
@@ -148,12 +162,13 @@ async function clickMarker(title: string): Promise<void> {
 }
 
 async function assertMap(): Promise<void> {
-    let nMaps = await this.driver.executeScript(
-        () => google.maps.maps.length
+    // Wait until the map appears
+    await this.driver.wait(() =>
+        this.driver.executeScript(
+            () => google.maps.maps.length
+        ),
+        10000,
     );
-
-    assert.equal(nMaps, 1);
-
     let visible = await this.driver
                     .findElement(By.css(".gm-style"))
                     .isDisplayed();
