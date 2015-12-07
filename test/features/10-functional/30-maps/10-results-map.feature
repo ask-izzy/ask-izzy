@@ -101,3 +101,6 @@ Feature: See results on a map
         When I click back from the title bar
         Then I should see a map
         And I should not see "Housing Service"
+
+        When I click back from the title bar
+        Then I should be at /category/housing
