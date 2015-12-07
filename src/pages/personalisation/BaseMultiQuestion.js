@@ -3,6 +3,8 @@
 import React from "react";
 import classnames from "classnames";
 
+import ReactDOM from "react-dom";
+
 import BaseQuestion from "./BaseQuestion";
 import InputListItem from "../../components/InputListItem";
 import HeaderBar from "../../components/HeaderBar";
@@ -128,7 +130,7 @@ class BaseMultiQuestion extends BaseQuestion {
 
     componentDidMount(): void {
         this.setState({windowHeight: window.innerHeight});
-        this.setState({rootHeight: React.findDOMNode(this).offsetHeight});
+        this.setState({rootHeight: ReactDOM.findDOMNode(this).offsetHeight});
     }
 
     render(): ReactElement {
