@@ -121,13 +121,6 @@ class BaseMultiQuestion extends BaseQuestion {
         storage.setJSON(this.props.name, Array.from(this.selected));
     }
 
-    shouldRenderFloatingDoneButton(): string {
-        if (this.state.windowHeight < this.state.rootHeight - 60) {
-            return "hasFloatingDoneButton";
-        }
-        return "";
-    }
-
     componentDidMount(): void {
         this.setState({windowHeight: window.innerHeight});
         this.setState({rootHeight: ReactDOM.findDOMNode(this).offsetHeight});
@@ -141,7 +134,8 @@ class BaseMultiQuestion extends BaseQuestion {
                 className={
                     classnames(
                         "BaseMultiQuestion",
-                        this.shouldRenderFloatingDoneButton()
+                        {"hasFloatingDoneButton":
+                        this.state.windowHeight < this.state.rootHeight - 60}
                     )
                 }
             >
