@@ -375,6 +375,7 @@ export class Service {
  * @param {?string} location (optional but recommended) - a search area.
  * @param {?Object} coords (optional) - the user's coordinates.
  *
+ * @returns {Promise<searchResults>} search results from ISS.
  */
 export async function search(
     query: Object | string,
