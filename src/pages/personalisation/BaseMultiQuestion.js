@@ -1,6 +1,9 @@
 /* @flow */
 
 import React from "react";
+import classnames from "classnames";
+
+import ReactDOM from "react-dom";
 
 import BaseQuestion from "./BaseQuestion";
 import InputListItem from "../../components/InputListItem";
@@ -118,11 +121,24 @@ class BaseMultiQuestion extends BaseQuestion {
         storage.setJSON(this.props.name, Array.from(this.selected));
     }
 
+    componentDidMount(): void {
+        this.setState({windowHeight: window.innerHeight});
+        this.setState({rootHeight: ReactDOM.findDOMNode(this).offsetHeight});
+    }
+
     render(): ReactElement {
         let selected = this.selected;
 
         return (
-            <div className="BaseMultiQuestion">
+            <div
+                className={
+                    classnames(
+                        "BaseMultiQuestion",
+                        {"hasFloatingDoneButton":
+                        this.state.windowHeight < this.state.rootHeight - 60}
+                    )
+                }
+            >
                 <HeaderBar
                     primaryText={
                         <div>
