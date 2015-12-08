@@ -60,6 +60,7 @@ const categories:Array<Category> = [
         search: {
             q: "free food -health -(coordinating bodies)" +
                 " -(hacc) -(food safety)",
+            service_type: "meals",
         },
         personalisation: [
             personalisation.Location,
