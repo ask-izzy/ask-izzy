@@ -13,6 +13,7 @@ import SvgIconClock from "./Clock.js";
 import SvgIconCross from "./Cross.js";
 import SvgIconDemographicAboriginal from "./DemographicAboriginal.js";
 import SvgIconDemographicChildren from "./DemographicChildren.js";
+import SvgIconDemographicCouple from "./DemographicCouple.js";
 import SvgIconDemographicDisability from "./DemographicDisability.js";
 import SvgIconDemographicFamilyViolence from "./DemographicFamilyViolence.js";
 import SvgIconDemographicLgbtiq from "./DemographicLgbtiq.js";
@@ -67,6 +68,7 @@ export default {
     Cross: SvgIconCross,
     DemographicAboriginal: SvgIconDemographicAboriginal,
     DemographicChildren: SvgIconDemographicChildren,
+    DemographicCouple: SvgIconDemographicCouple,
     DemographicDisability: SvgIconDemographicDisability,
     DemographicFamilyViolence: SvgIconDemographicFamilyViolence,
     DemographicLgbtiq: SvgIconDemographicLgbtiq,
