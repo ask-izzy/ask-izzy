@@ -88,7 +88,7 @@ export default class ServicePane extends React.Component {
         }
 
         return (
-            <div className="padded">
+            <div className="Provisions">
                 <h3 className="serviceProvisions-header">
                     What you can get here
                 </h3>

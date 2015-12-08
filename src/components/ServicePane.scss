@@ -21,10 +21,18 @@ $padding: 15px;
         }
     }
 
-    .padded,
-    .Eligibility {
-        padding: $padding;
+    .padded {
+        padding-right: $padding;
+        padding-left: $padding;
+        padding-bottom: $padding;
     }
+    .Eligibility,
+    .Provisions {
+        padding-right: $padding;
+        padding-left: $padding;
+    }
+
+    
 
     main {
         margin: 0;
