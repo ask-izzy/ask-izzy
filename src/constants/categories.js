@@ -98,7 +98,7 @@ const categories:Array<Category> = [
         icon: icons.Centrelink,
         search: {
             q: '"centrelink"',
-            name: "centrelink",
+            name: '"centrelink"',
         },
         personalisation: [
             personalisation.Location,
