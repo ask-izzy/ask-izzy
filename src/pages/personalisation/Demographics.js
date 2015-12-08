@@ -4,6 +4,8 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { append } from "./BaseQuestion";
 import icons from "../../icons";
 
+console.log(icons.DemographicCouple);
+
 export default class Demographics extends BaseMultiQuestion {
     static title = "Personal";
     static propTypes = BaseMultiQuestion.propTypes;
@@ -24,7 +26,7 @@ export default class Demographics extends BaseMultiQuestion {
         icons: {
             "Indigenous": icons.DemographicAboriginal,
             "Family with children": icons.DemographicChildren,
-            "In a couple": null,
+            "In a couple": icons.DemographicCouple,
             "Parole / recently released": icons.DemographicParole,
             "Have a disability": icons.DemographicDisability,
             "Veteran": icons.DemographicVeteran,
