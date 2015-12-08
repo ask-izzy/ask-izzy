@@ -67,7 +67,7 @@ const categories:Array<Category> = [
     }),
     new Category({
         name: "Everyday things",
-        byline: "Swags, Clothes, etc",
+        byline: "Swags, Clothes, Food Vouchers, etc",
         icon: icons.Things,
         search: {
             q: "material aid -(coordinating bodies)",
