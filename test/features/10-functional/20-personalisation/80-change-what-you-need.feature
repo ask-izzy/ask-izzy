@@ -93,7 +93,7 @@ Feature: Change your personalisation settings
         And "In a rooming house" should be checked
         And "Private rental" should not be checked
         And "Public housing" should not be checked
-        And "Trouble paying mortgage" should not be checked
+        And "Mortgaged housing" should not be checked
 
         When I click on "Private rental"
         Then I should see "This is what you said you need. Change your answers here."
