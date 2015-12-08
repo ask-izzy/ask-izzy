@@ -16,7 +16,7 @@ export default class Demographics extends BaseMultiQuestion {
             /* eslint-disable max-len */
             "Indigenous": append("indigenous"),
             "Family with children": append("family"),
-            "In a couple": append("couples"),
+            "Couples": append("couples"),
             "Parole / recently released": append("post-release"),
             "Have a disability": append("disability"),
             "Veteran": append("veteran"),
@@ -26,7 +26,7 @@ export default class Demographics extends BaseMultiQuestion {
         icons: {
             "Indigenous": icons.DemographicAboriginal,
             "Family with children": icons.DemographicChildren,
-            "In a couple": icons.DemographicCouple,
+            "Couples": icons.DemographicCouple,
             "Parole / recently released": icons.DemographicParole,
             "Have a disability": icons.DemographicDisability,
             "Veteran": icons.DemographicVeteran,
