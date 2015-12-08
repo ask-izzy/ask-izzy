@@ -14,7 +14,7 @@ export default class HousingSubcategories extends BaseQuestion {
             "Couch surfing": append("homeless"),
             "In a rooming house": append(""),
             "Private rental": append(""),
-            "Public housing": append(""),
+            "Public housing": append("social housing"),
             "Mortgaged housing": append(""),
         },
     };
