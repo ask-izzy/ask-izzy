@@ -15,7 +15,6 @@ Feature: Personalisation header
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on "Okay" # Intro page
-         And I click on "Done" # Location
          And I click on "Skip" # Somewhere safe to sleep
          And I click on "Skip" # Subcategories
          And I click on "Neither/Both/Something else"
