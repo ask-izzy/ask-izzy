@@ -19,10 +19,9 @@ export default class Email extends React.Component {
                     <icons.Email />
                     <div className="Contact-text">
                         <span className="kind">
-                            {this.props.comment ? this.props.comment
-                            : ""}
+                            {this.props.comment}
                         </span>
-                        {" "}
+                        {this.props.comment && " "}
                         <span className="email value">{email}</span>
                     </div>
                 </a>

@@ -88,7 +88,7 @@ export default class ServicePane extends React.Component {
         }
 
         return (
-            <div className="padded">
+            <div className="serviceProvisions-container">
                 <h3 className="serviceProvisions-header">
                     What you can get here
                 </h3>
@@ -107,8 +107,8 @@ export default class ServicePane extends React.Component {
             return <span />;
         }
         return(
-            <div className="siblings">
-                <h3 className="padded">
+            <div className="siblings-container">
+                <h3 className="siblings-header">
                     Also at this location
                 </h3>
                 <div className="List">
