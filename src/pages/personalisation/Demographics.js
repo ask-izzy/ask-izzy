@@ -12,6 +12,7 @@ export default class Demographics extends BaseMultiQuestion {
         question: "Do any of these apply to you?",
         answers: {
             /* eslint-disable max-len */
+            "Escaping family violence": append("family violence"),
             "Indigenous": append("indigenous"),
             "Family with children": append("family"),
             "Couples": append("couples"),
@@ -22,6 +23,7 @@ export default class Demographics extends BaseMultiQuestion {
             "Have pets": append("pets"),
         },
         icons: {
+            "Escaping family violence": icons.DemographicFamilyViolence,
             "Indigenous": icons.DemographicAboriginal,
             "Family with children": icons.DemographicChildren,
             "Couples": icons.DemographicCouple,
