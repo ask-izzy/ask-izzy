@@ -21,19 +21,13 @@ $padding: 15px;
         }
     }
 
-    .padded {
-        padding-right: $padding;
-        padding-bottom: $padding;
-        padding-left: $padding;
-    }
-
+    // FIXME: Modifying child component styles
     .Eligibility,
-    .Provisions {
+    .serviceProvisions-container {
         padding-right: $padding;
         padding-left: $padding;
     }
 
-    
 
     main {
         margin: 0;
@@ -121,8 +115,14 @@ $padding: 15px;
         }
     }
 
-    .siblings {
+    .siblings-container {
         padding-top: 5px;
+
+        .siblings-header {
+            padding-right: $padding;
+            padding-bottom: $padding;
+            padding-left: $padding;
+        }
 
         .List > :first-child {
             border-top: 1px solid $list-item-hairline;
