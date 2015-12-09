@@ -386,7 +386,6 @@ export async function search(
     let request_: searchRequest = {
         q: "",
         type: "service",
-        catchment: true,
         limit: 10,
     };
 
