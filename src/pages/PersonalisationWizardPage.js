@@ -39,9 +39,10 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     }
 
     nextSubPage(): ?ReactClass {
-        const nextSubpageIdx = this.currentComponentIdx + 1;
-
-        return this.personalisationComponents[nextSubpageIdx];
+        return this.personalisationComponents.find((component, idx) =>
+            (idx > this.currentComponentIdx) &&
+            (!component.getSearch({}))
+        );
     }
 
     prevSubPage(): ?ReactClass {

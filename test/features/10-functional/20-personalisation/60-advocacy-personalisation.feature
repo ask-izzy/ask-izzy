@@ -15,8 +15,6 @@ Feature: Advocacy Personalisation
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on "Okay" # Intro
-         And I click on "Done" # Location
-
         Then I should see "What do you want help with or advice about?"
 
         When I click on "Making a complaint"

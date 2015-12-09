@@ -24,25 +24,19 @@ Feature: History navigation
         Then I should see "To help me find the right services I'll ask you a few questions"
         And I should be at /category/housing/personalise
 
-        When I click on "Okay"
-         And I click on "Done"
-         And I click on "Skip"
-         And I click on "Skip"
-
+        When I click on "Okay" # Intro
         Then I should see "Do you identify as…"
 
         When I click on "Female"
         Then I should see "How old are you?"
 
-        When I reload the page
-        And I click back from the browser UI
+        When I click back from the title bar
         Then I should see "Do you identify as…"
 
         When I click on "Male"
         Then I should see "How old are you?"
 
         When I click on "25 or younger"
-        When I click on "None of these"
 
         Then I should see "I found 3 services for men aged 25 or younger in Melbourne VIC"
         And I should see "Housing"
@@ -68,4 +62,4 @@ Feature: History navigation
         And I should see "I found 3 services for men aged 25 or younger in Melbourne VIC"
 
         When I click back from the browser UI
-        Then I should see "Do any of these apply to you?"
+        Then I should see "How old are you?"
