@@ -17,7 +17,7 @@ Feature: Advocacy Personalisation
         When I click on "Okay" # Intro
          And I click on "Done" # Location
 
-        Then I should see "What do you want to do help with or advice about?"
+        Then I should see "What do you want help with or advice about?"
 
         When I click on "Making a complaint"
          And I click on "Someone to speak for you"
