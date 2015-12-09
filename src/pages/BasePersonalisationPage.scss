@@ -48,10 +48,23 @@
         }
     }
 
+    .ClearResults {
+        margin-top: 30px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        margin-left: 20px;
+        padding-top: 30px;
+        border-top: 1px solid $list-item-hairline;
+
+        color: $brand-text-mid;
+        font-size: 16px;
+        line-height: 140%;
+        text-align: center;
+    }
+
     .clear-button {
         button {
-            width: 100%;
-            background-color: $brand-error;
+            color: $brand-error;
         }
     }
 
@@ -96,20 +109,6 @@
 
     .padded {
         padding: 20px;
-    }
-
-    .ClearResults {
-        margin-top: 40px;
-        margin-right: 20px;
-        margin-bottom: 20px;
-        margin-left: 20px;
-        padding-top: 10px;
-        border-top: 1px solid $list-item-hairline;
-
-        color: $brand-text-mid;
-        font-size: 16px;
-        line-height: 140%;
-        text-align: center;
     }
 
     .hasFloatingDoneButton {
