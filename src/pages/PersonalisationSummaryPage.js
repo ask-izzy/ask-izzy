@@ -79,21 +79,23 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         )
                     }</div>
 
-                    <div className="ClearResults">
-                        <div className="done-button">
-                            <components.FlatButton
-                                label="Delete all answers"
-                                className="text-link"
-                                onClick={this.clearAll.bind(this)}
-                            />
-                        </div>
-                    </div>
-
                     <div className="Done">
                         <div className="done-button">
                             <components.FlatButton
                                 label="Done"
                                 onClick={this.goBack.bind(this)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="ClearResults">
+                        <div>Delete your saved answers here.<br/>
+                                This cannot be undone.</div>
+                        <div className="clear-button">
+                            <components.FlatButton
+                                className="text-link"
+                                label="Delete all answers"
+                                onClick={this.clearAll.bind(this)}
                             />
                         </div>
                     </div>
