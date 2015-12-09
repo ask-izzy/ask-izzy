@@ -23,9 +23,10 @@ $padding: 15px;
 
     .padded {
         padding-right: $padding;
-        padding-left: $padding;
         padding-bottom: $padding;
+        padding-left: $padding;
     }
+
     .Eligibility,
     .Provisions {
         padding-right: $padding;
