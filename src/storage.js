@@ -1,24 +1,22 @@
 /* @flow */
+
+import strategies from "./storage/strategies";
+
 /**
  * Polyfill some more methods onto storage
  */
+export default class PersistentStorage {
 
-class Storage {
+    static impl(): Storage {
+        return strategies.persistent;
+    }
 
     static getItem(key: string): ?(string|number|boolean) {
-        if (typeof localStorage == "undefined") {
-            return null;
-        }
-
-        return localStorage.getItem(key);
+        return this.impl().getItem(key);
     }
 
     static setItem(key: string, obj: string|number|boolean): void {
-        if (typeof localStorage == "undefined") {
-            return;
-        }
-
-        localStorage.setItem(key, `${obj}`);
+        this.impl().setItem(key, `${obj}`);
     }
 
     static getJSON(key: string): any {
@@ -46,17 +44,18 @@ class Storage {
     }
 
     static clear(): void {
-        if (typeof localStorage == "undefined") {
-            return;
-        }
-
-        localStorage.clear();
+        this.impl().clear();
     }
 
 }
 
-if (typeof window != "undefined") {
-    window.IzzyStorage = Storage
+export class SessionStorage extends PersistentStorage {
+    static impl(): Storage {
+        return strategies.session;
+    }
 }
 
-export default Storage;
+if (typeof window != "undefined") {
+    window.IzzyStorage = Storage
+    window.IzzySessionStorage = SessionStorage
+}
