@@ -1,6 +1,6 @@
 /* @flow */
 
-import strategies from "./storage/strategies";
+import strategies from "./storage/strategies/keyvalue";
 
 /**
  * Polyfill some more methods onto storage
@@ -56,6 +56,6 @@ export class SessionStorage extends PersistentStorage {
 }
 
 if (typeof window != "undefined") {
-    window.IzzyStorage = Storage
+    window.IzzyStorage = PersistentStorage
     window.IzzySessionStorage = SessionStorage
 }
