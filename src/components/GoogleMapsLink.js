@@ -20,10 +20,7 @@ class GoogleMapsLink extends React.Component {
         const toAddr = this.props.to;
         const {travelTime} = toAddr;
         const mode = travelTime && travelTime.mode == "TRANSIT" ? "r" : "w";
-        const coords = storage.getJSON("coordinates");
-        const start = encodeURIComponent(
-            coords ? "Current Location" : `${storage.getItem("location")}`
-        );
+        const start = encodeURIComponent("Current Location");
         const query = encodeURIComponent([
             toAddr.flat_unit,
             toAddr.street_number,
@@ -39,8 +36,8 @@ class GoogleMapsLink extends React.Component {
         );
 
         return `https://maps.google.com/?dirflg=${mode
-        }&saddr=${start
-        }&daddr=${query}`;
+            }&saddr=${start
+            }&daddr=${query}`;
     }
 
     render(): ReactElement {
