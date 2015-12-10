@@ -11,12 +11,12 @@ export default class MoneySubcategories extends BaseMultiQuestion {
         question: "What do you need?",
         answers: {
             /* eslint-disable max-len */
-            "Emergency aid": append("emergencies"),
+            "Emergency aid": append("emergency aid"),
             "Bond or rental assistance": append("bond assistance"),
             "Financial assistance e.g. utility bills": "",
             "No interest loans": append("nils"),
             "Gambling counselling": remove("financial aid").append("gambling counselling"),
-            "Financial counselling": remove("aid").append("counselling"),
+            "Financial counselling": remove("financial aid").append('financial counselling name:"financial counselling"'),
         },
     };
 }
