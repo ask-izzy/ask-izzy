@@ -16,7 +16,7 @@ export default class MoneySubcategories extends BaseMultiQuestion {
             "Financial assistance e.g. utility bills": "",
             "No interest loans": append("nils"),
             "Gambling counselling": remove("financial aid").append("gambling counselling"),
-            "Financial counselling": remove("aid").append("name:financial counselling"),
+            "Financial counselling": remove("financial aid").append('financial counselling name:"financial counselling"'),
         },
     };
 }
