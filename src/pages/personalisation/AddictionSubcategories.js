@@ -1,7 +1,7 @@
 /* @flow */
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
-import { append } from "./BaseQuestion";
+import { append, remove } from "./BaseQuestion";
 
 export default class AddictionSubcategories extends BaseMultiQuestion {
     static title = "Addiction";
@@ -10,11 +10,12 @@ export default class AddictionSubcategories extends BaseMultiQuestion {
         name: "sub-addiction",
         question: "What sort of help?",
         answers: {
-            "Detox": append("detox"),
-            "Rehab": append("rehab"),
+            "Detox": append("detoxification"),
+            "Rehab": append("rehabilitation"),
             "Gambling": append("gambling"),
-            "Drugs or Alcohol": append("drugs alcohol"),
-            "Needle exchange": append("needle exchange"),
+            "Drugs or Alcohol": append("substance abuse"),
+            "Needle exchange": remove("addiction").
+                append("needle exchange"),
             "Speak to someone": append("counselling"),
         },
     };
