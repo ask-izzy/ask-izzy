@@ -182,7 +182,7 @@ const categories:Array<Category> = [
         byline: "Toilets, libraries etc",
         icon: icons.Facilaties,
         search: {
-            q: "toilets public libraries -(coordinating bodies)",
+            q: "toilets public libraries pool -(coordinating bodies) -(hire of facilities)",
         },
         personalisation: [
             personalisation.Location,
