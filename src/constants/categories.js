@@ -71,6 +71,7 @@ const categories:Array<Category> = [
         icon: icons.Things,
         search: {
             q: "material aid -(coordinating bodies)",
+            service_type: "material aid",
         },
         personalisation: [
             personalisation.Location,
