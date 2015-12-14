@@ -13,13 +13,13 @@ export default class Demographics extends BaseMultiQuestion {
         answers: {
             /* eslint-disable max-len */
             "Escaping family violence": append("family violence"),
-            "Indigenous": append("indigenous"),
-            "Family with children": append("family"),
+            "Indigenous": append("Aboriginals & Torres Strait Islanders"),
+            "Family with children": append("families"),
             "Couples": append("couples"),
             "Parole / recently released": append("post-release"),
-            "Have a disability": append("disability"),
+            "Have a disability": append("disabilities"),
             "Veteran": append("veteran"),
-            "Asylum seeker": append("refugee"),
+            "Asylum seeker": append("refugees"),
             "Have pets": append("pets"),
         },
         icons: {
