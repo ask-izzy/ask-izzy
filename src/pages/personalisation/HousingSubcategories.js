@@ -17,7 +17,7 @@ export default class HousingSubcategories extends BaseQuestion {
                     "("bond scheme) (housing establishment fund) -(coordinating bodies)"),
             "Public housing": append("social housing"),
             "Mortgaged housing": append("(transitional housing) (transitional accommodation)" +
-                    "("bond scheme) (housing establishment fund) -(coordinating bodies)"),
+                    "(bond scheme) (housing establishment fund) -(coordinating bodies)"),
         },
     };
 
