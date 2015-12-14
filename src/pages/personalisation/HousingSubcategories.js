@@ -1,7 +1,7 @@
 /* @flow */
 
 import SleepTonight from "./SleepTonight";
-import BaseQuestion, { append } from "./BaseQuestion";
+import BaseQuestion, { append, remove } from "./BaseQuestion";
 
 export default class HousingSubcategories extends BaseQuestion {
     static title = "Housing";
