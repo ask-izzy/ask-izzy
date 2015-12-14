@@ -1,7 +1,7 @@
 /* @flow */
 
 import SleepTonight from "./SleepTonight";
-import BaseQuestion, { append } from "./BaseQuestion";
+import BaseQuestion, { append, remove } from "./BaseQuestion";
 
 export default class HousingSubcategories extends BaseQuestion {
     static title = "Housing";
@@ -12,10 +12,17 @@ export default class HousingSubcategories extends BaseQuestion {
         answers: {
             "On the street": append("homeless"),
             "Couch surfing": append("homeless"),
-            "In a rooming house": append(""),
-            "Private rental": append(""),
+            "In a rooming house": remove("housing")
+                .append("community housing"),
+            "Private rental": append("(transitional housing)")
+                .append("(transitional accommodation)")
+                .append("(bond scheme)")
+                .append("(housing establishment fund)"),
             "Public housing": append("social housing"),
-            "Mortgaged housing": append(""),
+            "Mortgaged housing": append("(transitional housing)")
+                .append("(transitional accommodation)")
+                .append("(bond scheme)")
+                .append("(housing establishment fund)"),
         },
     };
 
