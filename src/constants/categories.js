@@ -172,7 +172,7 @@ const categories:Array<Category> = [
         search: {
             q: "employment -(coordinating bodies)",
             service_type: "employment",
-            },
+        },
         personalisation: [
             personalisation.Location,
             personalisation.JobSubcategories,
