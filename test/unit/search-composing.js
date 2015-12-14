@@ -59,32 +59,17 @@ describe("Compose personalisation search terms", function() {
     });
 
     it("Remove words and add words from a search", function() {
-        const pages = require("../../src/pages/personalisation");
-        let request = {
+        const {
+            remove,
+        } = require("../../src/pages/personalisation/BaseQuestion");
+        const request = {
             q: "substance abuse gambling",
         };
+        const search = remove("gambling").append("needle exchange");
 
-        // flow:disable -- flow is confused about exports
-        request = pages.AddictionSubcategories.getSearchForAnswer(
-            request, new Set(["Detox", "Rehab"])
-        );
-        assert.deepEqual(request, {
-            q: "substance abuse  detox rehab",  // FIXME: normalise space
+        assert.deepEqual(search.compose(request), {
+            q: "substance abuse  needle exchange",
         });
     });
 
-    it("Replace search phrase entirely", function() {
-        const pages = require("../../src/pages/personalisation");
-        let request = {
-            q: "substance abuse gambling",
-        };
-
-        // flow:disable -- flow is confused about exports
-        request = pages.AddictionSubcategories.getSearchForAnswer(
-            request, new Set(["Needle exchange"])
-        );
-        assert.deepEqual(request, {
-            q: " needle exchange",
-        });
-    });
 });
