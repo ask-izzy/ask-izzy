@@ -38,7 +38,7 @@ class BaseMultiQuestion extends BaseQuestion {
     // flow:disable
     get selected(): Set<string> {
         return this.state.answers || new Set(
-            storage.getJSON(this.props.name) || []
+            storage[this.props.name]
         );
     }
 
@@ -61,7 +61,7 @@ class BaseMultiQuestion extends BaseQuestion {
 
     // flow:disable
     static get answer(): ?Array<string> {
-        return storage.getJSON(this.defaultProps.name);
+        return storage[this.defaultProps.name];
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
@@ -118,7 +118,7 @@ class BaseMultiQuestion extends BaseQuestion {
     }
 
     onNextStep(): void {
-        storage.setJSON(this.props.name, Array.from(this.selected));
+        storage[this.props.name] = Array.from(this.selected);
     }
 
     componentDidMount(): void {

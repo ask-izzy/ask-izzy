@@ -17,7 +17,7 @@ class ResultsMap extends React.Component {
     }
 
     componentDidMount(): void {
-        this.setState({coords: storage.getJSON("coordinates")});
+        this.setState({coords: storage.coordinates});
 
         /* request the Google Maps API */
         Maps().then((maps) => {

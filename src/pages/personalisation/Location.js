@@ -47,7 +47,7 @@ class Location extends React.Component {
     }
 
     componentDidMount(): void {
-        this.setLocationName(storage.getItem("location"));
+        this.setLocationName(storage.location);
     }
 
     /* eslint-disable react/sort-comp */
@@ -59,12 +59,12 @@ class Location extends React.Component {
 
     // flow:disable
     static get answer(): string {
-        return storage.getItem(this.defaultProps.name);
+        return storage[this.defaultProps.name];
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         /* Coordinates are optional */
-        let coords = storage.getJSON("coordinates");
+        let coords = storage.coordinates;
 
         if (coords && coords.latitude && coords.longitude) {
             request = Object.assign(request, {
@@ -73,7 +73,7 @@ class Location extends React.Component {
         }
 
         /* Location/Area is required */
-        let location = storage.getItem("location");
+        let location = storage.location;
 
         if (typeof location == "string") {
             return Object.assign(request, {
@@ -88,7 +88,7 @@ class Location extends React.Component {
 
     // flow:disable
     static get summaryValue(): string {
-        return storage.getItem("location");
+        return storage.location;
     }
 
     static showQuestion(): boolean {
@@ -108,10 +108,10 @@ class Location extends React.Component {
         /* store these coordinates for the session so we can use them to
          * provide additional info for autocomplete, distances, ISS search
          * weighting, etc. */
-        storage.setJSON("coordinates", {
+        storagecoordinates = {
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
-        });
+        };
 
         /* return true if the types includes one of our interesting
          * component types */
@@ -182,7 +182,7 @@ class Location extends React.Component {
         };
 
         /* If the user has coordinates set in this session, use them */
-        location = storage.getJSON("coordinates");
+        location = storage.coordinates;
         if (location && location.latitude && location.longitude) {
             request.location = new maps.api.LatLng(location.latitude,
                                                    location.longitude);
@@ -262,7 +262,7 @@ class Location extends React.Component {
     }
 
     onNextStep(): void {
-        storage.setItem("location", this.state.locationName || "");
+        storage.location = this.state.locationName || "";
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object): void {
@@ -290,7 +290,7 @@ class Location extends React.Component {
 
             // Forget the users coordinates if they change
             // the location we detected
-            storage.setJSON("coordinates", null);
+            storage.coordinates = null;
 
             this.triggerAutocomplete();
         }

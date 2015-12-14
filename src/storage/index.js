@@ -1,67 +1,36 @@
 /* @flow */
 
-import strategies from "./storage/strategies/keyvalue";
+import strategies from "./strategies/keyvalue";
+import storage, {
+    storeString,
+    storeLength,
+    storeJSON,
+} from "./dsl";
 
-let _store = {};
-
-function store(name: string, serializer: Object, store: Storage): void {
-    Object.defineProperty(_store, name, {
-        enumerable: true,
-        get: () => serializer.thaw(store.getItem(name)),
-        set: (value) => store.setItem(serializer.freeze(value)),
-    })
-}
-
-const length = {
-    freeze: (value) => `${value}`,
-    thaw: (frozen) => parseInt(frozen) || 0,
-}
-
-const string = {
-    freeze: (value) => value,
-    thaw: (value) => value,
-}
-
-const json = {
-    freeze: (value) => JSON.stringify(value),
-    thaw: (frozen) => JSON.parse(value)
-}
-
-store("historyLength", length, strategies.session);
-store("location",       string, strategies.session);
-store("coordinates",     json, strategies.session);
-
-{
-    "historyLength":           strategies.session,
-    "location":                strategies.session,
-    "coordinates":             strategies.session,
-
-    "age":                     strategies.persistent,
-    "demographics":            json, strategies.persistent,
-    "gender":                  strategies.persistent,
-    "sleep-tonight":           strategies.persistent,
-    "sub-addiction":           strategies.persistent,
-    "sub-advocacy":            strategies.persistent,
-    "sub-advocacy-complaints": strategies.persistent,
-    "sub-counselling":         strategies.persistent,
-    "sub-everyday-things":     strategies.persistent,
-    "sub-health":              strategies.persistent,
-    "sub-housing":             strategies.persistent,
-    "sub-job":                 strategies.persistent,
-    "sub-legal":               strategies.persistent,
-    "sub-life-skills":         strategies.persistent,
-    "sub-money":               strategies.persistent,
-    "sub-technology":          strategies.persistent,
-}
+storeLength("historyLength", strategies.session);
+storeString("location", strategies.session);
+storeJSON("coordinates", strategies.session);
+storeArray("demographics", strategies.persistent);
+storeString("age", strategies.persistent);
+storeString("gender", strategies.persistent);
+storeString("sleep-tonight", strategies.persistent);
+storeString("sub-housing", strategies.persistent);
+storeArray("sub-addiction", strategies.persistent);
+storeArray("sub-advocacy", strategies.persistent);
+storeArray("sub-advocacy-complaints", strategies.persistent);
+storeArray("sub-counselling", strategies.persistent);
+storeArray("sub-everyday-things", strategies.persistent);
+storeArray("sub-health", strategies.persistent);
+storeArray("sub-job", strategies.persistent);
+storeArray("sub-legal", strategies.persistent);
+storeArray("sub-life-skills", strategies.persistent);
+storeArray("sub-money", strategies.persistent);
+storeArray("sub-technology", strategies.persistent);
 
 export default {
-
-    get historyLength(): number {
-        return strategies.session.getItem("historyLength");
-    }
-
-    setHistoryLength(value: number): void {
-        strategies.session.setItem("historyLength", value);
-    }
-
-}
+    clear(): void {
+        strategies.persistent.clear();
+        strategies.session.clear();
+    },
+    ...storage,
+};

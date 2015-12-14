@@ -53,7 +53,7 @@ async function setSleepTonight(answer: string): Promise<void> {
 
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript(answer => {
-        IzzyStorage.setItem("sleep-tonight", answer);
+        IzzyStorage["sleep-tonight"] = answer;
     }, answer);
 }
 
@@ -64,7 +64,7 @@ async function setStorageValue(
 ): Promise<void> {
     await gotoUrl(driver, "/");  // go anywhere to start the session
     await driver.executeScript((key, value) => {
-        IzzyStorage.setItem(key, value);
+        IzzyStorage[key] = value;
     }, key, value);
 }
 
@@ -105,7 +105,7 @@ async function setDemographics(
 ): Promise<void> {
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript(items => {
-        IzzyStorage.setItem("demographics", JSON.stringify(items));
+        IzzyStorage.demographics = items;
     }, items);
 }
 
@@ -118,16 +118,16 @@ async function setSubcategoriesNone(
 ): Promise<void> {
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript(() => {
-        IzzyStorage.setItem("sub-addiction", "[]");
-        IzzyStorage.setItem("sub-counselling", "[]");
-        IzzyStorage.setItem("sub-everyday-things", "[]");
-        IzzyStorage.setItem("sub-health", "[]");
-        IzzyStorage.setItem("sub-housing", "(skipped)");
-        IzzyStorage.setItem("sub-job", "[]");
-        IzzyStorage.setItem("sub-legal", "[]");
-        IzzyStorage.setItem("sub-life-skills", "[]");
-        IzzyStorage.setItem("sub-money", "[]");
-        IzzyStorage.setItem("sub-technology", "[]");
+        IzzyStorage["sub-addiction"] = [];
+        IzzyStorage["sub-counselling"] = [];
+        IzzyStorage["sub-everyday-things"] = [];
+        IzzyStorage["sub-health"] = [];
+        IzzyStorage["sub-housing"] = "(skipped)";
+        IzzyStorage["sub-job"] = [];
+        IzzyStorage["sub-legal"] = [];
+        IzzyStorage["sub-life-skills"] = [];
+        IzzyStorage["sub-money"] = [];
+        IzzyStorage["sub-technology"] = [];
     });
 }
 

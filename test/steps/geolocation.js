@@ -95,7 +95,7 @@ async function sendCoords(
 async function setLocation(location: string): Promise<void> {
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript((location) => {
-        IzzyStorage.setItem("location", location);
+        IzzyStorage.location = location;
     }, location);
 }
 
@@ -107,14 +107,13 @@ async function setLocation(location: string): Promise<void> {
  * @returns {Promise} promise that resolves when the value is set.
  */
 async function setCoords(latitude: number, longitude: number): Promise<void> {
-    await this.driver.executeScript((coords) => {
-        IzzyStorage.setItem("coordinates", JSON.stringify(coords));
-    },
-
+    await this.driver.executeScript(
+        (coords) => IzzyStorage.coordinates = coords,
         {
             latitude: latitude,
             longitude: longitude,
-        });
+        }
+    );
 }
 
 async function disableGeolocation(): Promise {
