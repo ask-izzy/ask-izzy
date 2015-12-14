@@ -171,6 +171,7 @@ const categories:Array<Category> = [
         icon: icons.Job,
         search: {
             q: "employment -(coordinating bodies)",
+            service_type: "employment",
         },
         personalisation: [
             personalisation.Location,
