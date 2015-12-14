@@ -1,7 +1,7 @@
 /* @flow */
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
-import { remove, append } from "./BaseQuestion";
+import { remove } from "./BaseQuestion";
 
 export default class JobSubcategories extends BaseMultiQuestion {
     static title = "Jobs";
@@ -12,8 +12,12 @@ export default class JobSubcategories extends BaseMultiQuestion {
         answers: {
             /* eslint-disable max-len */
             "Employment": remove("employment").append("job searching"),
-            "Programs to help you into paid work": append("programmes"),
-            "Volunteering": remove("employment").append("volunteering"),
+            "Programs to help you into paid work":
+                remove("employment service_type:employment")
+                .append("(work skills) (vocational training) (employment program)"),
+            "Volunteering":
+                remove("employment service_type:employment")
+                .append("volunteering"),
         },
     };
 }
