@@ -1,7 +1,7 @@
 /* @flow */
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
-import { append } from "./BaseQuestion";
+import { append, remove } from "./BaseQuestion";
 
 export default class EverydayThingsSubcategories extends BaseMultiQuestion {
     static title = "Everyday things";
