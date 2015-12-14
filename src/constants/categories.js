@@ -58,9 +58,8 @@ const categories:Array<Category> = [
         byline: "Something to eat",
         icon: icons.Food,
         search: {
-            q: "free food -health -(coordinating bodies)" +
+            q: "free food meals -health -(coordinating bodies)" +
                 " -(hacc) -(food safety)",
-            service_type: "meals",
         },
         personalisation: [
             personalisation.Location,
@@ -72,6 +71,7 @@ const categories:Array<Category> = [
         icon: icons.Things,
         search: {
             q: "material aid -(coordinating bodies)",
+            service_type: "material aid",
         },
         personalisation: [
             personalisation.Location,
@@ -146,7 +146,7 @@ const categories:Array<Category> = [
         byline: "Drugs, alcohol & gambling",
         icon: icons.Addiction,
         search: {
-            q: "substance abuse gambling -(coordinating bodies)",
+            q: "addiction -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
