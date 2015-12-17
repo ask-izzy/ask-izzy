@@ -122,7 +122,7 @@ const categories:Array<Category> = [
         byline: "Someone to help",
         icon: icons.Support,
         search: {
-            q: "mental health -(coordinating bodies)",
+            q: "support counselling -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
