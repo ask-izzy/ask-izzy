@@ -134,7 +134,7 @@ const categories:Array<Category> = [
         byline: "Police, law & fines",
         icon: icons.Legal,
         search: {
-            q: "legal aid -(coordinating bodies)",
+            q: "law -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
