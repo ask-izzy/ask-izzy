@@ -3,7 +3,6 @@ import React from "react";
 import fixtures from "../../fixtures/services";
 import Location from "../iss/Location";
 import classnames from "classnames";
-import storage from "../storage";
 
 class GoogleMapsLink extends React.Component {
 
