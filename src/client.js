@@ -4,7 +4,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Router from "react-router";
 import createBrowserHistory from "history/lib/createBrowserHistory";
-import storage from "./storage";
 
 import routes from "./routes";
 
@@ -23,12 +22,12 @@ import routes from "./routes";
 function History() {
     let history = createBrowserHistory();
     let historyLength = parseInt(
-        `${storage.getItem("historyLength") || ""}`
+        `${sessionStorage.getItem("historyLength") || ""}`
     ) || 0;
 
     function setHistoryLength(newLength: number): void {
         historyLength = newLength;
-        storage.setItem("historyLength", `${newLength}`);
+        sessionStorage.setItem("historyLength", `${newLength}`);
     }
 
     function goBack() {
