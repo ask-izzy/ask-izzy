@@ -116,6 +116,7 @@ class LoadingResultsHeader extends React.Component {
             this.props.personalisationComponents.includes(component)
         )
         .map((component) => component.headingValue())
+        const count = meta.total_count > 20 ? "lots of" : meta.total_count;
 
         return (
             <HeaderBar
@@ -123,7 +124,7 @@ class LoadingResultsHeader extends React.Component {
                 primaryText={
                     meta.total_count > 0 ?
                         <LogoHeader>
-                            I found {meta.total_count} {servicesWord}{' '}
+                            I found {count} {servicesWord}{' '}
                             {personalisations.join(" ")}
                         </LogoHeader>
                     : <LogoHeader>
