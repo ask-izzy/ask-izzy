@@ -7,15 +7,13 @@ import LinkListItem from "./LinkListItem";
 import CategoryListItem from "./CategoryListItem";
 import icons from "../icons";
 
-declare var SITE_DOMAIN: string;
-
 class NavBar extends React.Component {
 
     static sampleProps = {default: {}};
 
     render(): ReactElement {
         const subject = "Ask Izzy - Feedback";
-        const mailLink = `mailto:support@${SITE_DOMAIN}?subject=${subject}`;
+        const mailLink = `mailto:support@askizzy.org.au?subject=${subject}`;
 
         return (
             <div className="NavBar">
