@@ -19,6 +19,7 @@ help:
     git clone git@github.com:ask-izzy/ask-izzy.git
     cd ask-izzy
     npm install
+    bower install
 
 ## Running the dev server
 
