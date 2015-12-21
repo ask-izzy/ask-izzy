@@ -11,6 +11,11 @@ import icons from "../icons";
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 class HomePage extends React.Component {
 
+    componentDidMount(): void {
+        // Make mobile browser hide the app bar
+        window.scrollTo(0, 1);
+    }
+
     onSearchSubmit(event: Event): void {
         event.preventDefault();
 
