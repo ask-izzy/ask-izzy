@@ -280,7 +280,7 @@ class HtmlDocument extends React.Component {
                         src={`//www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`}
                         height="0"
                         width="0"
-                        style="display:none;visibility:hidden"
+                        style={{display: 'none', visibility: 'hidden'}}
                     ></iframe>
                 </noscript>,
                 <script>{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
