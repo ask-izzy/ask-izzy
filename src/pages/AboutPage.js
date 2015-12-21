@@ -16,8 +16,15 @@ class AboutPage extends React.Component {
                 />
 
                 <div className="body">
-                    Ask Izzy is a guide to homeless
-                    support & prevention services.
+                    <p>
+                        Ask Izzy is a guide to homeless
+                        support &amp; prevention services.
+                    </p>
+                    <p>
+                        Ask Izzy was designed and built in Wurundjeri country.
+                        We pay respect to the elders past and present here and
+                        across Australia.
+                    </p>
                 </div>
             </div>
         );
