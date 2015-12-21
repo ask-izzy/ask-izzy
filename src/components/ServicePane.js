@@ -61,7 +61,6 @@ export default class ServicePane extends React.Component {
 
                     <GoogleMapsLink
                         className="plain-text"
-                        from="Current Location"
                         to={object.Location()}
                     >
                         <Address location={object.Location()} />
