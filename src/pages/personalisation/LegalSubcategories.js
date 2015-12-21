@@ -16,7 +16,8 @@ export default class LegalSubcategories extends BaseMultiQuestion {
             "Tenancy issues": append("tenancy"),
             "Victims of crime compensation": remove("law")
                 .append("victims of crime -police"),
-            "Criminal charges": append("criminal charge criminal law -police"),
+            "Criminal charges":
+                append("criminal charge criminal law -police"),
         },
     };
 }
