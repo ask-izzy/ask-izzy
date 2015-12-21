@@ -210,6 +210,10 @@ class HtmlDocument extends React.Component {
             href="/static/favicons/favicon.ico"
         />
         <meta
+            name="apple-mobile-web-app-capable"
+            content="yes"
+        />
+        <meta
             name="apple-mobile-web-app-title"
             content="Ask Izzy"
         />
