@@ -34,5 +34,4 @@ export default class Demographics extends BaseMultiQuestion {
             "Have pets": icons.DemographicPets,
         },
     };
-
 }
