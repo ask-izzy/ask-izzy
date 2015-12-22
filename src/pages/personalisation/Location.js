@@ -264,7 +264,7 @@ class Location extends React.Component {
         storage.setItem("location", this.state.locationName || "");
     }
 
-    componentDidUpdate(prevProps: object, prevState: object): void {
+    componentDidUpdate(prevProps: Object, prevState: Object): void {
         // After state updates, make sure you can see the input
         if (this.refs.search &&
             this.refs.search == document.activeElement &&
