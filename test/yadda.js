@@ -73,11 +73,16 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
                 if (process.env.SCREENSHOT_FAILURES) {
                     try {
                         let data = await driver.takeScreenshot();
+
                         if (process.env.SCREENSHOT_FAILURES == "base64") {
                             console.log(`Test-${title}.png`);
                             console.log(`Base64 PNG data :${data}`);
                         } else {
-                            fs.writeFileSync(`Test-${title}.png`, data, "base64");
+                            fs.writeFileSync(
+                                `Test-${title}.png`,
+                                data,
+                                "base64"
+                            );
                         }
                     } catch (err) {
                         console.log("Failed to take screenshot");
