@@ -204,7 +204,9 @@ class Location extends React.Component {
      * Trigger an autocomplete after a 500ms debounce.
      */
     /*::__(){`*/@debounce(500)/*::`}*/
-    triggerAutocomplete(input: string): void {
+    triggerAutocomplete(): void {
+        let input = this.state.locationName;
+
         this.autoCompleteSuburb(input, this.state.locationCoords)
             .then(results => {
                 this.setState({
@@ -262,6 +264,21 @@ class Location extends React.Component {
         storage.setItem("location", this.state.locationName || "");
     }
 
+    componentDidUpdate(prevProps: object, prevState: object): void {
+        // After state updates, make sure you can see the input
+        if (this.refs.search &&
+            this.refs.search == document.activeElement &&
+            prevState.autocompletions != this.state.autocompletions) {
+            this.scrollToSearchControl();
+        }
+    }
+
+    /*::__(){`*/@debounce(500)/*::`}*/
+    scrollToSearchControl(): void {
+        // Scroll the input to just under the appbar
+        window.scrollTo(0, this.refs.search.offsetTop - 40)
+    }
+
     onSearchChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {
             this.setLocationName(ltrim(event.target.value));
@@ -274,7 +291,7 @@ class Location extends React.Component {
             // the location we detected
             storage.setJSON("coordinates", null);
 
-            this.triggerAutocomplete(this.state.locationName);
+            this.triggerAutocomplete();
         }
     }
 
@@ -343,6 +360,8 @@ class Location extends React.Component {
                 >
                     <input
                         type="search"
+                        ref="search"
+                        onFocus={this.scrollToSearchControl.bind(this)}
                         aria-label="Enter a suburb or postcode"
                         placeholder="Enter a suburb or postcode"
                         value={this.state.locationName}
