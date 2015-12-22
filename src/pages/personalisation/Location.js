@@ -50,6 +50,7 @@ class Location extends React.Component {
         this.setLocationName(storage.getItem("location"));
     }
 
+    /* eslint-disable react/sort-comp */
     static title = "Location";
 
     static headingValue(): ?string {
