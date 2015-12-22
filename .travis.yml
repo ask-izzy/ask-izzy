@@ -44,4 +44,4 @@ env:
 
   matrix:
     - SELENIUM_BROWSER="firefox:39:Windows 7" SCREENSHOT_FAILURES=base64
-    - SELENIUM_BROWSER="internet explorer:11.0:Windows 7"
+    - SELENIUM_BROWSER="internet explorer:11.0:Windows 7" SCREENSHOT_FAILURES=base64
