@@ -9,8 +9,8 @@
 // ==/UserScript==
 function jqWrapCiImages($) {
   function viewCiImages() {
-    $('p:contains(\'Base64\')').each(function (idx, e) {
-      e.innerHTML = $(e).text().replace(/Base64 PNG data :([A-Za-z0-9\n\/\+=]+):/g, '<img src="data:image/png;base64,$1" ' +
+    jQuery('p:contains(\'Base64 PNG data\')').each(function (idx, e) {
+      e.innerHTML = e.textContent.replace(/Base64 PNG data :([A-Za-z0-9\n\/\+=]+)/g, '<img src="data:image/png;base64,$1" ' +
       'style="display:block; max-width:800px; width: auto; height: auto;" ' +
       '/>');
     });
