@@ -13,7 +13,7 @@ export default class MoneySubcategories extends BaseMultiQuestion {
             /* eslint-disable max-len */
             "Emergency aid": append("emergency aid"),
             "Bond or rental assistance": append("bond assistance"),
-            "Financial assistance e.g. utility bills": "",
+            "Financial assistance e.g. utility bills, petrol, food": "",
             "No interest loans": append("nils"),
             "Gambling counselling": remove("financial aid").append("gambling counselling"),
             "Financial counselling": remove("financial aid").append('financial counselling name:"financial counselling"'),
