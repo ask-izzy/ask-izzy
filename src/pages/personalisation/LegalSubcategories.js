@@ -1,7 +1,7 @@
 /* @flow */
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
-import { append } from "./BaseQuestion";
+import { append, remove } from "./BaseQuestion";
 
 export default class LegalSubcategories extends BaseMultiQuestion {
     static title = "Legal";
@@ -10,11 +10,14 @@ export default class LegalSubcategories extends BaseMultiQuestion {
         name: "sub-legal",
         question: "What's happening?",
         answers: {
-            "Legal advice": append("advice"),
-            "Family violence": append("family violence"),
-            "Tenancy issues": append("tenancy law"),
-            "Victims of crime compensation": append("victims of crime"),
-            "Criminal charges": append("criminal charge criminal law"),
+            "Legal advice": remove("law")
+                .append("legal advice"),
+            "Family violence": append("family violence -police"),
+            "Tenancy issues": append("tenancy"),
+            "Victims of crime compensation": remove("law")
+                .append("victims of crime -police"),
+            "Criminal charges":
+                append("criminal charge criminal law -police"),
         },
     };
 }
