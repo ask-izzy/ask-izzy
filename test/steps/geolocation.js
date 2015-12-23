@@ -108,7 +108,7 @@ async function setLocation(location: string): Promise<void> {
  */
 async function setCoords(latitude: number, longitude: number): Promise<void> {
     await this.driver.executeScript((coords) => {
-        IzzyStorage.setItem("coordinates", JSON.stringify(coords));
+        IzzyStorage.setCoordinates(coords);
     },
 
         {

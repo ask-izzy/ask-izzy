@@ -22,13 +22,11 @@ import routes from "./routes";
  */
 function History() {
     let history = createBrowserHistory();
-    let historyLength = parseInt(
-        `${storage.getItem("historyLength") || ""}`
-    ) || 0;
+    let historyLength = storage.getHistoryLength();
 
     function setHistoryLength(newLength: number): void {
         historyLength = newLength;
-        storage.setItem("historyLength", `${newLength}`);
+        storage.setHistoryLength(newLength);
     }
 
     function goBack() {

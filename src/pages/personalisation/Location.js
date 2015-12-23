@@ -64,7 +64,7 @@ class Location extends React.Component {
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         /* Coordinates are optional */
-        let coords = storage.getJSON("coordinates");
+        let coords = storage.getCoordinates();
 
         if (coords && coords.latitude && coords.longitude) {
             request = Object.assign(request, {
@@ -108,10 +108,7 @@ class Location extends React.Component {
         /* store these coordinates for the session so we can use them to
          * provide additional info for autocomplete, distances, ISS search
          * weighting, etc. */
-        storage.setJSON("coordinates", {
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
-        });
+        storage.setCoordinates(location.coords);
 
         /* return true if the types includes one of our interesting
          * component types */
@@ -182,7 +179,7 @@ class Location extends React.Component {
         };
 
         /* If the user has coordinates set in this session, use them */
-        location = storage.getJSON("coordinates");
+        location = storage.getCoordinates();
         if (location && location.latitude && location.longitude) {
             request.location = new maps.api.LatLng(location.latitude,
                                                    location.longitude);
@@ -290,7 +287,7 @@ class Location extends React.Component {
 
             // Forget the users coordinates if they change
             // the location we detected
-            storage.setJSON("coordinates", null);
+            storage.setCoordinates(null);
 
             this.triggerAutocomplete();
         }

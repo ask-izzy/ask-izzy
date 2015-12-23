@@ -57,7 +57,7 @@ class MapsApi {
         destinations: Array<string>, mode = "WALKING"
     ): Promise<Array<travelTime>> {
         const directionsService = new this.api.DistanceMatrixService();
-        const coords = storage.getJSON("coordinates");
+        const coords = storage.getCoordinates();
         let origin = storage.getItem("location");
 
         if (coords && coords.latitude && coords.longitude) {

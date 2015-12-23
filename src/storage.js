@@ -1,27 +1,43 @@
 /* @flow */
 /**
  * Polyfill some more methods onto storage
+ *
+ * DRH: I"ve deliberately chosen to be verbose instead of
+ * clever here, to get the benefits of static typing.
  */
 
-class Storage {
+import {
+    persistentStore,
+    sessionStore,
+} from "./storage/polyfill";
 
-    static getItem(key: string): ?(string|number|boolean) {
-        if (typeof localStorage == "undefined") {
-            return null;
-        }
+const Storage = {
 
-        return localStorage.getItem(key);
-    }
+    getHistoryLength(): number {
+        return parseInt(sessionStore.getItem("historyLength") || "") || 0
+    },
 
-    static setItem(key: string, obj: string|number|boolean): void {
-        if (typeof localStorage == "undefined") {
-            return;
-        }
+    setHistoryLength(length: number): void {
+        sessionStore.setItem("historyLength", `${length}`);
+    },
 
-        localStorage.setItem(key, `${obj}`);
-    }
+    getCoordinates(): ?Coordinates {
+        return JSON.parse(sessionStore.getItem("coordinates") || "null");
+    },
 
-    static getJSON(key: string): any {
+    setCoordinates(coords: ?Coordinates): void {
+        sessionStore.setItem("coordinates", JSON.stringify(coords));
+    },
+
+    getItem(key: string): ?(string|number|boolean) {
+        return persistentStore.getItem(key);
+    },
+
+    setItem(key: string, obj: string|number|boolean): void {
+        persistentStore.setItem(key, `${obj}`);
+    },
+
+    getJSON(key: string): any {
         let item = this.getItem(key);
 
         if (!item) {
@@ -39,19 +55,16 @@ class Storage {
             console.error(error);
             return null;
         }
-    }
+    },
 
-    static setJSON(key: string, obj: mixed): void {
+    setJSON(key: string, obj: mixed): void {
         this.setItem(key, JSON.stringify(obj));
-    }
+    },
 
-    static clear(): void {
-        if (typeof localStorage == "undefined") {
-            return;
-        }
-
-        localStorage.clear();
-    }
+    clear(): void {
+        persistentStore.clear();
+        sessionStore.clear();
+    },
 
 }
 
