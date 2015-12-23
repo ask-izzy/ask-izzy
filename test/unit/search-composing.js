@@ -20,7 +20,7 @@ describe("Compose personalisation search terms", function() {
         // flow:disable -- flow is confused about exports
         request = pages.Gender.getSearchForAnswer(request, "Female");
         assert.deepEqual(request, {
-            q: "crisis accommodation",
+            q: "crisis accommodation females",
             client_gender: ["f", "u"],
         });
     });
@@ -52,7 +52,7 @@ describe("Compose personalisation search terms", function() {
         // flow:disable -- flow is confused about exports
         request = pages.Age.getSearchForAnswer(request, "26 to 39");
         assert.deepEqual(request, {
-            q: "crisis accommodation adults",
+            q: "crisis accommodation males adults",
             age_groups: ["adult"],
             client_gender: ["m", "u"],
         });
