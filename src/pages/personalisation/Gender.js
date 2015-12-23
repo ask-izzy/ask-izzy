@@ -10,11 +10,11 @@ export default class Gender extends BaseQuestion {
         question: "Do you identify as…",
         answers: {
             "Female": append({
-                q: "females"
+                q: "females",
                 client_gender: ["f", "u"],
             }),
             "Male": append({
-                q: "males"
+                q: "males",
                 client_gender: ["m", "u"],
             }),
             "Neither/Both/Something else": append({
