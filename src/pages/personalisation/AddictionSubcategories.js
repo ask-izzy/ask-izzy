@@ -4,7 +4,7 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { append, remove } from "./BaseQuestion";
 
 export default class AddictionSubcategories extends BaseMultiQuestion {
-    static title = "Addiction";
+    static title = "Drugs & Alcohol";
     static propTypes = BaseMultiQuestion.propTypes;
     static defaultProps = {
         name: "sub-addiction",
@@ -12,7 +12,6 @@ export default class AddictionSubcategories extends BaseMultiQuestion {
         answers: {
             "Detox": append("detoxification"),
             "Rehab": append("rehabilitation"),
-            "Gambling": append("gambling"),
             "Drugs or Alcohol": append("substance abuse"),
             "Needle exchange": remove("addiction")
                 .append("needle exchange"),

@@ -19,7 +19,7 @@ Feature: Landing page
         Money help
         Support & counselling
         Legal
-        Addiction
+        Drugs & alcohol
         Life skills & education
         Finding work
         Facilities
