@@ -135,7 +135,7 @@ class BaseQuestion extends React.Component {
 
     // flow:disable
     get selected(): string {
-        return this.state.selected || storage.getItem(this.props.name)
+        return this.state.selected || storage[this.props.name]
     }
 
     // flow:disable
@@ -158,7 +158,7 @@ class BaseQuestion extends React.Component {
 
     // flow:disable
     static get answer(): string {
-        return storage.getItem(this.defaultProps.name);
+        return storage[this.defaultProps.name];
     }
 
     /**
@@ -238,7 +238,7 @@ class BaseQuestion extends React.Component {
     }
 
     onNextStep(): void {
-        storage.setItem(this.props.name, this.selected || "(skipped)");
+        storage[this.props.name] = this.selected || "(skipped)";
     }
 
     onAnswerTouchTap(answer: string, ...rest: any): void {
