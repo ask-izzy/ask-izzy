@@ -15,7 +15,8 @@ export default class CounsellingSubcategories extends BaseMultiQuestion {
             "Sexual identity": append("sexuality"),
             "Family or relationships": append("family relationship"),
             "Money matters": append("money matters"),
-            "Online": append("online"),
+            "Gambling": append("gambling"),
+            "Find online counselling": append("online"),
             "Other": append(""),
         },
     };
