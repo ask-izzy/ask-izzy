@@ -13,7 +13,7 @@ import Location from "../../pages/personalisation/Location";
 const HomeLink = (): ReactElement =>
     <Link
         className="homeLink"
-        to="home"
+        to="/"
     >Go back</Link>;
 
 const ErrorMessage = ({children}: Object): ReactElement =>
