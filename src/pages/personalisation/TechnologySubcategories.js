@@ -1,7 +1,7 @@
 /* @flow */
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
-import { append } from "./BaseQuestion";
+import { append, remove } from "./BaseQuestion";
 
 export default class TechnologySubcategories extends BaseMultiQuestion {
     static title = "Technology";
@@ -10,9 +10,11 @@ export default class TechnologySubcategories extends BaseMultiQuestion {
         name: "sub-technology",
         question: "What do you want help with?",
         answers: {
-            "Finding wifi": append("wifi"),
-            "Finding a computer": append("computer"),
-            "Help to use a computer": append("computer class"),
+            "Finding wifi": remove("computer classes"),
+            "Finding a computer": remove("wifi internet computer classes")
+                .append("computer internet kiosk"),
+            "Help to use a computer": remove("wifi internet")
+                .append("-employment -preschool -school"),
             "Somewhere to charge": append("charge"),
         },
     };
