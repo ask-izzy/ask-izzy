@@ -203,7 +203,7 @@ const categories:Array<Category> = [
         byline: "Wifi, charging etc",
         icon: icons.Tech,
         search: {
-            q: "wifi computer class",
+            q: "wifi internet computer class",
         },
         personalisation: [
             personalisation.Location,
