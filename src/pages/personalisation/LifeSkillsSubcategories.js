@@ -13,8 +13,10 @@ export default class LifeSkillsSubcategories extends BaseMultiQuestion {
             /* eslint-disable max-len */
             "Daily living": remove("life skills education").append("daily living skills"),
             "Personal": remove("life skills education").append("personal development"),
-            "School": remove("life skills education").append("school education -private -catholic -independent -care"),
-            "Training with support": remove("life skills education").append("supported training"),
+            "School": remove("life skills education").append("(school education) -private")
+                .append("-catholic -independent -care -recreation -pathways"),
+            "Training with support": remove("life skills education")
+                .append("supported vocational training"),
         },
     };
 }
