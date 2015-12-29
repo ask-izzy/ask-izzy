@@ -10,11 +10,16 @@ export default class LegalSubcategories extends BaseMultiQuestion {
         name: "sub-legal",
         question: "What's happening?",
         answers: {
-            "Legal advice": remove("law")
+            "Legal advice": remove("legal -(coordinating bodies) -permits")
+                .remove("-ceremonies -making -checks -electoral -taxation")
                 .append("legal advice"),
             "Family violence": append("family violence -police"),
-            "Tenancy issues": append("tenancy"),
-            "Victims of crime compensation": remove("law")
+            "Tenancy issues": remove("legal -(coordinating bodies) -permits")
+                .remove("-ceremonies -making -checks -electoral -taxation")
+                .append("tenancy law"),
+            "Victims of crime compensation": remove("legal -permits")
+                .remove("-(coordinating bodies) -ceremonies -making")
+                .remove("-checks -electoral -taxation")
                 .append("victims of crime -police"),
             "Criminal charges":
                 append("criminal charge criminal law -police"),
