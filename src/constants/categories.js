@@ -41,7 +41,8 @@ const categories:Array<Category> = [
         byline: "A place to stay",
         icon: icons.House,
         search: {
-            q: "housing -(coordinating bodies)",
+            q: "housing -(coordinating bodies) -(respite care) " +
+                "-(housing information) -hef",
             service_type: "housing",
         },
         personalisation: [
