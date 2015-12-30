@@ -18,7 +18,7 @@ export default class HousingSubcategories extends BaseQuestion {
             "Private rental": remove("housing -(respite care)")
                 .remove("-(housing information) -hef")
                 .remove(service_type: "housing")
-                .append("transitional accommodation")
+                .append("transitional accommodation"),
             "Public housing": remove("housing -(respite care)")
                 .remove("-(housing information) -hef")
                 .remove(service_type: "housing")
