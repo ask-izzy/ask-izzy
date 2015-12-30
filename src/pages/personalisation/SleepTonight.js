@@ -12,7 +12,9 @@ export default class SleepTonight extends BaseQuestion {
         question: "Do you have somewhere safe to sleep tonight?",
         answers: {
             "Yes": append(""),
-            "No": remove("housing").append("crisis accommodation"),
+            "No": remove("housing -(respite care)")
+                .remove("-(housing information) -hef")
+                .append("crisis accommodation"),
         },
     };
 }
