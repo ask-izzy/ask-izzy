@@ -61,7 +61,7 @@ const categories:Array<Category> = [
         search: {
             q: "food meals -health -(coordinating bodies)" +
                 " -(home care) -(food safety)" +
-                " -(meals on wheels)",
+                " -(meals on wheels) -(assistance with meals)",
         },
         personalisation: [
             personalisation.Location,
