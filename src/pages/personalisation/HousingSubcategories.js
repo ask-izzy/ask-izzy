@@ -12,17 +12,21 @@ export default class HousingSubcategories extends BaseQuestion {
         answers: {
             "On the street": append("homeless"),
             "Couch surfing": append("homeless"),
-            "In a rooming house": remove("housing")
+            "In a rooming house": remove("housing -(respite care)")
+                .remove("-(housing information) -hef")
                 .append("community housing"),
-            "Private rental": append("(transitional housing)")
-                .append("(transitional accommodation)")
-                .append("(bond scheme)")
-                .append("(housing establishment fund)"),
-            "Public housing": append("social housing"),
-            "Mortgaged housing": append("(transitional housing)")
-                .append("(transitional accommodation)")
-                .append("(bond scheme)")
-                .append("(housing establishment fund)"),
+            "Private rental": remove("housing -(respite care)")
+                .remove("-(housing information) -hef")
+                .remove("service_type:housing")
+                .append("transitional accommodation"),
+            "Public housing": remove("housing -(respite care)")
+                .remove("-(housing information) -hef")
+                .remove("service_type:housing")
+                .append("social housing"),
+            "Mortgaged housing": remove("housing -(respite care)")
+                .remove("-(housing information) -hef")
+                .remove("service_type:housing")
+                .append("transitional accommodation"),
         },
     };
 
