@@ -196,7 +196,7 @@ const categories:Array<Category> = [
         icon: icons.Entertainment,
         search: {
             q: "recreation -(coordinating bodies) -physiology " +
-                "-permit -hire -grants" +
+                "-permit -hire -grants " +
                 "-(sports medicine) -(sports physician)",
         },
         personalisation: [
