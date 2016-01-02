@@ -220,7 +220,7 @@ const categories:Array<Category> = [
         byline: "Complaints and advocacy",
         icon: icons.Advocacy,
         search: {
-            q: "consumer issues mediation discrimination" +
+            q: "consumer issues mediation discrimination " +
                 "disputes advocacy -research -(coordinating bodies)",
         },
         personalisation: [
