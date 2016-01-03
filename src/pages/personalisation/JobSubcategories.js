@@ -13,10 +13,10 @@ export default class JobSubcategories extends BaseMultiQuestion {
             /* eslint-disable max-len */
             "Employment": remove("employment").append("job searching"),
             "Programs to help you into paid work":
-                remove("employment service_type:employment")
+                remove("employment").remove({service_types: "employment"})
                 .append("(work skills) (vocational training) (employment program)"),
             "Volunteering":
-                remove("employment service_type:employment")
+                remove("employment").remove({service_types: "employment"})
                 .append("volunteering"),
         },
     };
