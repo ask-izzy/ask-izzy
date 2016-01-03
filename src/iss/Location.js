@@ -25,9 +25,26 @@ export default class Location {
         this.travelTime = travelTime;
     }
 
-    /* If there is no point value, that means it's being suppressed */
+    /* If there is no point value,
+     * that means it's being suppressed.
+     * Otherwise, check whether the data includes
+     * 'confidential', since older records
+     * aren't marked this way.
+     */
     isConfidential(): boolean {
-        return !Boolean(this.point);
+        return Boolean((
+            this.building +
+            this.flat_unit +
+            this.level +
+            this.postcode +
+            this.state +
+            this.street_name +
+            this.street_number +
+            this.street_suffix +
+            this.street_type +
+            this.suburb +
+            this.details
+        ).match(/confidential|secret/i) || !this.point);
     }
 
     streetAddressLine1(): string {
