@@ -44,7 +44,7 @@ export default class Location {
             this.street_type +
             this.suburb +
             this.details
-        ).match(/confidential|secret/i) || !this.point);
+        ).match(/confidential|secret|no street access/i) || !this.point);
     }
 
     streetAddressLine1(): string {
