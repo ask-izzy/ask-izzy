@@ -76,8 +76,19 @@ Feature: Service details page
         Then I should see "59 mins"
         Then I can get to google maps by clicking "Get directions"
 
-    Scenario: There is no travel information for confidential services
+    Scenario: There is no travel information for new-style confidential services
         When I visit /service/537512
+        Then I should see "Confidential location"
+        And I should not see "Get directions"
+
+    Scenario: There is no travel information for old-style confidential services
+       Given A service with:
+        ----------------------------------------------
+        location:
+            street_number: Confidential
+            street_name: secret
+        ----------------------------------------------
+        When I navigate to the service page
         Then I should see "Confidential location"
         And I should not see "Get directions"
 
