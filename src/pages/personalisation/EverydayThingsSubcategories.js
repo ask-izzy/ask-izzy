@@ -23,7 +23,7 @@ export default class EverydayThingsSubcategories extends BaseMultiQuestion {
             "Storage lockers": remove("material aid").append("storage lockers"),
             "Mail": append("mail service"),
             "Help with pets": remove("material aid")
-                .remove("service_type:material aid")
+                .remove({service_types: "material aid"})
                 .append("assistance pets -(animal control)"),
         },
     };
