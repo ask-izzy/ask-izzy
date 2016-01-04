@@ -74,6 +74,7 @@ async function seeTheCategoryList(
             `//*[@class='List categories']/div[position()=${idx + 1}]`
         );
 
+        // FIXME: textIsVisible doesn't have a 3rd argument
         await assert.textIsVisible(
             this.driver,
             categories[idx],
