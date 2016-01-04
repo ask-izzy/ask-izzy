@@ -10,12 +10,16 @@ export default class AdvocacySubcategories extends BaseMultiQuestion {
         question: "What do you want help with or advice about?",
         answers: {
             "Making a complaint":
-                remove("advocacy").append("ombudsman"),
+                remove("consumer issues mediation discrimination")
+                .remove("disputes advocacy")
+                .append("ombudsman complaint"),
             "Help working out a problem with a service":
-                remove("advocacy").append("mediation"),
+                remove("consumer issues discrimination disputes advocacy"),
             "Get advice on your rights":
-                remove("advocacy").append("rights advice"),
-            "Someone to speak for you": append("advocacy"),
+                remove("consumer issues discrimination disputes")
+                .remove("advocacy mediation").append("rights advice"),
+            "Someone to speak for you": 
+                remove("consumer issues mediation discrimination disputes"),
         },
     };
 }
