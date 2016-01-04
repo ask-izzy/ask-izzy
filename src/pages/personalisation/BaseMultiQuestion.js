@@ -10,6 +10,7 @@ import InputListItem from "../../components/InputListItem";
 import HeaderBar from "../../components/HeaderBar";
 import LogoWithShadow from "../../components/LogoWithShadow";
 import FlatButton from "../../components/FlatButton";
+import FloatFromBottom from "../../components/FloatFromBottom";
 
 import icons from "../../icons";
 import storage from "../../storage";
@@ -24,14 +25,14 @@ class BaseMultiQuestion extends BaseQuestion {
             : "None of these";
 
         return (
-            <div>
+            <FloatFromBottom>
                 <div className="done-button">
                     <FlatButton
                         label={label}
                         onClick={this.props.onDoneTouchTap}
                     />
                 </div>
-            </div>
+            </FloatFromBottom>
         )
     }
 
@@ -134,8 +135,7 @@ class BaseMultiQuestion extends BaseQuestion {
                 className={
                     classnames(
                         "BaseMultiQuestion",
-                        {"hasFloatingDoneButton":
-                        this.state.windowHeight < this.state.rootHeight - 60}
+                        this.props.classNames
                     )
                 }
             >
