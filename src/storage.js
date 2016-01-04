@@ -11,6 +11,8 @@ import {
     sessionStore,
 } from "./storage/polyfill";
 
+import sendEvent from "./google-tag-manager";
+
 const Storage = {
 
     getHistoryLength(): number {
@@ -34,6 +36,10 @@ const Storage = {
     },
 
     setItem(key: string, obj: string|number|boolean): void {
+        let event = {};
+
+        event[`custom-${key}`] = obj;
+        sendEvent(event);
         persistentStore.setItem(key, `${obj}`);
     },
 
