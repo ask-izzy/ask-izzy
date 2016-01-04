@@ -2,7 +2,7 @@
 
 export default function push(event: Object): void {
     if (
-        (typeof window != 'undefined') &&
+        (typeof window != "undefined") &&
         (window.dataLayer)
     ) {
         window.dataLayer.push(event);
