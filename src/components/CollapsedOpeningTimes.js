@@ -81,7 +81,7 @@ export default class CollapsedOpeningTimes extends React.Component {
                 <OpeningTimes object={this.props.object} />
                 {openingHours.length > 0 ?
                     <Collapser
-                        message="All times"
+                        message="Open Times"
                         expanded={this.props.expanded}
                     >
                     <ul className="AllOpeningTimes">
