@@ -146,7 +146,7 @@ const categories:Array<Category> = [
         byline: "Support & assistance",
         icon: icons.Addiction,
         search: {
-            q: "addiction -(coordinating bodies)",
+            q: "substance abuse -(coordinating bodies)",
         },
         personalisation: [
             personalisation.Location,
