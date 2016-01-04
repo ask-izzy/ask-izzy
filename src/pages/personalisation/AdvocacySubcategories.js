@@ -18,7 +18,7 @@ export default class AdvocacySubcategories extends BaseMultiQuestion {
             "Get advice on your rights":
                 remove("consumer issues discrimination disputes")
                 .remove("advocacy mediation").append("rights advice"),
-            "Someone to speak for you": 
+            "Someone to speak for you":
                 remove("consumer issues mediation discrimination disputes"),
         },
     };
