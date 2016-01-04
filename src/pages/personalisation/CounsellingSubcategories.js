@@ -1,7 +1,7 @@
 /* @flow */
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
-import { append } from "./BaseQuestion";
+import { append, remove } from "./BaseQuestion";
 
 export default class CounsellingSubcategories extends BaseMultiQuestion {
     static title = "Counselling";
@@ -16,7 +16,8 @@ export default class CounsellingSubcategories extends BaseMultiQuestion {
             "Family or relationships": append("family relationship"),
             "Money matters": append("money matters"),
             "Gambling": append("gambling"),
-            "Find online counselling": append("online"),
+            "Find online counselling": remove("support")
+                .append("online"),
             "Other": append(""),
         },
     };
