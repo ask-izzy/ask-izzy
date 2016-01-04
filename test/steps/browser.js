@@ -66,14 +66,18 @@ async function visitUrl(url: string): Promise {
  * clicked.
  */
 async function clickLink(link: string): Promise<void> {
-    await this.driver.findElement(By.xpath(
-        /* any 'a' element who has a descendent text node containing
-         * the link text */
+    /* any 'a' element who has a descendent text node
+     * containing the link text */
+    const locator = By.xpath(
         ["a", "button", "label"]
             .map(tag => elementWithChildText(tag, link))
             .join("|")
-    ))
-        .click();
+    );
+
+    while (!await this.driver.isElementPresent(locator)) {
+        console.log(`Looking for ${link}`)
+    }
+    await this.driver.findElement(locator).click();
 }
 
 function navigator(
