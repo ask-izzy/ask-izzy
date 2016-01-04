@@ -142,8 +142,8 @@ const categories:Array<Category> = [
         ],
     }),
     new Category({
-        name: "Addiction",
-        byline: "Drugs, alcohol & gambling",
+        name: "Drugs & alcohol",
+        byline: "Support & assistance",
         icon: icons.Addiction,
         search: {
             q: "addiction -(coordinating bodies)",
