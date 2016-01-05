@@ -58,7 +58,7 @@ class MapsApi {
     ): Promise<Array<travelTime>> {
         const directionsService = new this.api.DistanceMatrixService();
         const coords = storage.getCoordinates();
-        let origin = storage.getItem("location");
+        let origin = storage.getLocation();
 
         if (coords && coords.latitude && coords.longitude) {
             origin = `${coords.latitude},${coords.longitude}`;

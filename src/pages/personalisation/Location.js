@@ -47,7 +47,7 @@ class Location extends React.Component {
     }
 
     componentDidMount(): void {
-        this.setLocationName(storage.getItem("location"));
+        this.setLocationName(storage.getLocation());
     }
 
     /* eslint-disable react/sort-comp */
@@ -59,7 +59,7 @@ class Location extends React.Component {
 
     // flow:disable
     static get answer(): string {
-        return storage.getItem(this.defaultProps.name);
+        return storage.getLocation();
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
@@ -73,7 +73,7 @@ class Location extends React.Component {
         }
 
         /* Location/Area is required */
-        let location = storage.getItem("location");
+        let location = storage.getLocation();
 
         if (typeof location == "string") {
             return Object.assign(request, {
@@ -88,7 +88,7 @@ class Location extends React.Component {
 
     // flow:disable
     static get summaryValue(): string {
-        return storage.getItem("location");
+        return storage.getLocation();
     }
 
     static showQuestion(): boolean {
@@ -259,7 +259,8 @@ class Location extends React.Component {
     }
 
     onNextStep(): void {
-        storage.setItem("location", this.state.locationName || "");
+        storage.setLocation(this.state.locationName || "");
+
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object): void {
