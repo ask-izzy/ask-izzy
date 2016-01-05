@@ -14,6 +14,7 @@ import CrisisLineItem from "./components/CrisisLineItem";
 import Eligibility from "./components/Eligibility";
 import Email from "./components/Email";
 import FlatButton from "./components/FlatButton";
+import FloatFromBottom from "./components/FloatFromBottom";
 import GoogleMapsLink from "./components/GoogleMapsLink";
 import HeaderBar from "./components/HeaderBar";
 import IconButton from "./components/IconButton";
@@ -48,6 +49,7 @@ export default {
     Eligibility: Eligibility,
     Email: Email,
     FlatButton: FlatButton,
+    FloatFromBottom: FloatFromBottom,
     GoogleMapsLink: GoogleMapsLink,
     HeaderBar: HeaderBar,
     IconButton: IconButton,

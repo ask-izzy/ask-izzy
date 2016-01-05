@@ -31,6 +31,17 @@
         }
     }
 
+    .floatsFromBottom {
+        .done-button,
+        .okay-button,
+        .clear-button {
+            button {
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+        }
+    }
+
     .done-button,
     .okay-button,
     .clear-button {
@@ -49,11 +60,11 @@
     }
 
     .ClearResults {
-        margin-top: 30px;
+        margin-top: 10px;
         margin-right: 20px;
         margin-bottom: 20px;
         margin-left: 20px;
-        padding-top: 30px;
+        padding-top: 20px;
         border-top: 1px solid $list-item-hairline;
 
         color: $brand-text-mid;
@@ -109,26 +120,6 @@
 
     .padded {
         padding: 20px;
-    }
-
-    .hasFloatingDoneButton {
-        padding-bottom: 80px;
-
-        .done-button {
-            @include riseIn(1s, 0s, forwards);
-
-            position: fixed;
-            bottom: 0;
-            max-width: $max-width;
-            border-top: 1px solid $brand-bg-light;
-            background: $brand-bg-light;
-
-            > .FlatButton {
-                margin-top: 15px;
-                margin-bottom: 15px;
-            }
-        }
-
     }
 
 }
