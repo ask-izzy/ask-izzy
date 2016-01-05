@@ -114,7 +114,8 @@ class ResultsPage extends BaseCategoriesPage {
                 });
             } catch (error) {
                 this.setState({
-                    error: `An error occurred (${response.status})`,
+                    error: `An error occurred (${response.statusCode})`,
+                    statusCode: response.statusCode,
                 });
             }
         }
