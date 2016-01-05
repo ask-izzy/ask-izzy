@@ -40,15 +40,6 @@ class Collapser extends React.Component {
         }
     }
 
-    onMessageClick(event: SyntheticInputEvent): void {
-        if (this.props.allowReclosing) {
-            event.preventDefault();
-            this.setState({collapsed: !this.state.collapsed});
-        } else {
-            this.onClick(event);
-        }
-    }
-
     render(): ReactElement {
         return (
             <div
@@ -73,7 +64,6 @@ class Collapser extends React.Component {
                     alt="Show more"
                     className="collapser-message"
                     role="button"
-                    onClick={this.onMessageClick.bind(this)}
                 >
                     {this.props.message}
                 </a>
