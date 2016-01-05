@@ -75,7 +75,7 @@ class Location extends React.Component {
         /* Location/Area is required */
         let location = storage.getLocation();
 
-        if (typeof location == "string") {
+        if (location) {
             return Object.assign(request, {
                 area: location,
             });
