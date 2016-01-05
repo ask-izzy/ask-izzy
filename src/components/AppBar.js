@@ -19,6 +19,12 @@ class AppBar extends React.Component {
         onBackTouchTap: function() {},
     }};
 
+    componentWillReceiveProps(nextProps: Object): void {
+        if (typeof document != "undefined") {
+            document.title = `${nextProps.title} | Ask Izzy`;
+        }
+    }
+
     render(): ReactElement {
         return (
             <div className="AppBar">
