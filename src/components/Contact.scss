@@ -9,7 +9,12 @@
     .kind {
         width: 100%;
         max-width: 100px;
+
         color: $brand-text-mid;
+        @media print {
+            color: $black;
+        }
+
         font-size: 14px;
         font-weight: 400;
     }
@@ -23,6 +28,10 @@
         padding: 6px;
 
         color: $brand-pane-alt-dark;
+        @media print {
+            color: $black;
+        }
+
         font-size: 16px;
 
         .Contact-text {
@@ -42,6 +51,9 @@
 
             path {
                 fill: $brand-text-dark;
+                @media print {
+                    fill: $black;
+                }
             }
         }
     }
@@ -52,6 +64,10 @@
         margin-bottom: 5px;
 
         border: 1px solid $brand-pane-alt-dark;
+        @media print {
+            border: none;
+        }
+
         border-radius: 3px;
 
         font-size: 18px;
@@ -67,6 +83,9 @@
 
             path {
                 fill: $brand-pane-alt-dark;
+                @media print {
+                    fill: $black;
+                }
             }
         }
 
