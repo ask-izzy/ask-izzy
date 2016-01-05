@@ -14,16 +14,16 @@ class AppBar extends React.Component {
         onBackTouchTap: React.PropTypes.func.isRequired,
     };
 
-    static sampleProps = {default: {
-        title: "App bar",
-        onBackTouchTap: function() {},
-    }};
-
     componentWillReceiveProps(nextProps: Object): void {
         if (typeof document != "undefined") {
             document.title = `${nextProps.title} | Ask Izzy`;
         }
     }
+
+    static sampleProps = {default: {
+        title: "App bar",
+        onBackTouchTap: function() {},
+    }};
 
     render(): ReactElement {
         return (
