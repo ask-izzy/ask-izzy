@@ -22,11 +22,16 @@
 
     .until {
         display: block;
+
+        @media print {
+            display: none;
+        }
+
         max-height: 19px;
         margin-right: 80px;
         overflow: hidden;
 
-        .open, 
+        .open,
         .closed {
             white-space: nowrap;
         }
@@ -35,5 +40,5 @@
             white-space: nowrap;
         }
     }
-    
+
 }
