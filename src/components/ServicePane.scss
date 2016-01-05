@@ -144,6 +144,12 @@ $padding: 15px;
         display: none;
     }
 
+    @media print {
+        .TransportTime {
+            display: none;
+        }
+    }
+
     .List {
         .ListItem {
             font-size: 14px;
