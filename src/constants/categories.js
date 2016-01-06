@@ -59,7 +59,7 @@ const categories:Array<Category> = [
         byline: "Something to eat",
         icon: icons.Food,
         search: {
-            q: "meals -health -(coordinating bodies)" +
+            q: "meals -(coordinating bodies)" +
                 " -(home care) -(food safety)" +
                 " -(meals on wheels) -(assistance with meals)",
         },
