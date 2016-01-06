@@ -24,7 +24,7 @@ Feature: Skip personalisation settings
         When I click on "Skip"
 
         When I click on "Change your answers"
-        Then I should see "Change your answers here."
+        Then I should see "Change your answers here"
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
