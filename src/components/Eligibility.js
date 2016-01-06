@@ -30,9 +30,7 @@ class Eligibility extends React.Component {
                     <ul>
                         {this.renderCatchment()}
                         {this.renderEligibility(
-                            this.props.eligibility_info
-                        )}
-                        {this.renderEligibility(
+                            this.props.eligibility_info + "\n" +
                             this.props.special_requirements
                         )}
                         {this.renderReferralInfo()}
@@ -76,7 +74,7 @@ class Eligibility extends React.Component {
 
     renderEligibility(eligibility: string): Array<ReactElement> {
         if (!_.isEmpty(eligibility)) {
-            return eligibility.split("\n").map(
+            return _.uniq(eligibility.split("\n")).map(
                 (line, idx) => <li key={idx}>{line}</li>
             );
         }
