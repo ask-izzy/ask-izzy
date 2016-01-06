@@ -48,33 +48,42 @@ export default class ServicePane extends React.Component {
 
         return (
             <div className="ServicePane">
-                <main>
+                <div className="header">
                     <h2 className="name">{object.name}</h2>
                     <h3 className="description">
                         {object.shortDescription}
                     </h3>
 
+                </div>
+
+                <div className="header-practicalities-divider">
                     <hr />
+                </div>
 
-                    <CollapsedOpeningTimes object={object.open} />
-                    <hr />
+                <div className="practicalities">
+                    <div className="practicalities-container">
+                        <CollapsedOpeningTimes object={object.open} />
+                        <hr />
 
-                    <GoogleMapsLink
-                        className="plain-text"
-                        to={object.Location()}
-                    >
-                        <Address location={object.Location()} />
-                        <TransportTime location={object.Location()}/>
-                    </GoogleMapsLink>
+                        <GoogleMapsLink
+                            className="plain-text"
+                            to={object.Location()}
+                        >
+                            <Address location={object.Location()} />
+                            <TransportTime location={object.Location()}/>
+                        </GoogleMapsLink>
 
-                    <hr />
-                    <ContactMethods object={object} />
-                </main>
+                        <hr />
+                        <ContactMethods object={object} />
+                    </div>
+                </div>
 
-                <Eligibility {...object} />
+                <div className="provisions">
+                    <Eligibility {...object} />
 
-                {this.renderServiceProvisions()}
-                {this.renderSiblings()}
+                    {this.renderServiceProvisions()}
+                    {this.renderSiblings()}
+                </div>
             </div>
         );
     }

@@ -28,13 +28,62 @@ $padding: 15px;
         padding-left: $padding;
     }
 
-
-    main {
+    .header,
+    .practicalities {
         margin: 0;
         padding: $padding;
-        padding-bottom: 7px;
-
         background-color: $brand-bg-light;
+    }
+
+    .header {
+        padding-bottom: 1px;
+    }
+
+    .header-practicalities-divider {
+        padding-top: 7px;
+        padding-bottom: 7px;
+        background-color: $brand-bg-light;
+
+        hr {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+
+    .practicalities {
+        padding-top: 0;
+        padding-bottom: 7px;
+    }
+
+    @media ($tablet) {
+        .header {
+            width: 46%;
+            float: left;
+            background-color: $white;
+        }
+
+        .header-practicalities-divider {
+            display: none;
+        }
+
+        .practicalities {
+            width: 46%;
+            margin-top: 15px;
+            float: right;
+            background-color: $white;
+        }
+
+        .practicalities-container {
+            padding: 15px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background-color: $brand-bg-light;
+        }
+
+        .provisions {
+            width: 46%;
+            float: left;
+        }
     }
 
     h1,
@@ -93,6 +142,12 @@ $padding: 15px;
 
     .TransportTime > .location {
         display: none;
+    }
+
+    @media print {
+        .TransportTime {
+            display: none;
+        }
     }
 
     .List {

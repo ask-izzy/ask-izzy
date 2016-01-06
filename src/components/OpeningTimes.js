@@ -128,6 +128,7 @@ class OpeningTimes extends React.Component {
                 </ScreenReader>
                 <icons.Clock className="ColoredIcon brand-text-dark" />
                 {' '}
+                <span className="print-only">Open Times</span>
                 {renderMethod.apply(this)}
             </div>
         );
@@ -177,7 +178,7 @@ class OpeningTimes extends React.Component {
 
         if (!openTime) {
             return (
-                <span className="when">
+                <span className="until">
                     Contact for opening hours
                 </span>
             );
@@ -187,7 +188,7 @@ class OpeningTimes extends React.Component {
         const end = this.props.object.ifTime`until ${openTime.end}`;
 
         return (
-            <span className="when">
+            <span className="until">
                 {openTime.day} {start} {end}
                 {openTime.note ? ` (${openTime.note})` : ""}
             </span>

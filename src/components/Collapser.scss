@@ -1,5 +1,13 @@
 .Collapser {
-    .collapsed {
-        display: none;
+    @media screen {
+        .collapsed {
+            display: none;
+        }
+    }
+
+    @media print {
+        .collapser-message {
+            display: none;
+        }
     }
 }

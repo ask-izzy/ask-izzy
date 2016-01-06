@@ -1,11 +1,17 @@
 .AppBar + * {
-    padding-top: 40px;
+    @media screen {
+        padding-top: 40px;
+    }
 }
 
 .AppBar {
     display: flex;
     position: fixed;
     flex-direction: row;
+
+    @media print {
+        display: none;
+    }
 
     width: 100%;
     max-width: 800px;
@@ -42,7 +48,7 @@
 
     .BackButton {
         display: relative;
-        
+
         height: 40px;
         padding: 0;
 
@@ -81,11 +87,11 @@
 
             font-size: 14px;
             line-height: 38px;
-            
+
             text-overflow: ellipsis;
 
         }
-        
+
     }
 
 }
