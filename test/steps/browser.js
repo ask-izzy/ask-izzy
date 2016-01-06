@@ -110,7 +110,10 @@ async function clickBack(): Promise<void> {
 module.exports.documentReady = function documentReady(
     driver: Webdriver.WebDriver
 ): Promise<boolean> {
-    return driver.executeScript(() => document.readyState == "complete");
+    return driver.executeScript(() =>
+        ((!window.xhrCount) || (window.xhrCount() == 0)) &&
+        (document.readyState == "complete")
+    );
 };
 
 async function urlIs(

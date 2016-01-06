@@ -78,6 +78,12 @@ type XhrOptions = {
     beforeSend?: Function,
 };
 
+let xhrInProgress = 0;
+
+if (typeof window != "undefined") {
+    window.xhrCount = () => xhrInProgress;
+}
+
 /**
  * Wraps the http request code in a promise.
  *
@@ -86,15 +92,17 @@ type XhrOptions = {
  * @returns {Promise<Object>} a promise for the request.
  */
 function _request(obj: XhrOptions) {
-    return new Promise((resolve, reject) =>
+    return new Promise((resolve, reject) => {
+        xhrInProgress++;
         xhr(obj, (err, response, body) => {
+            xhrInProgress--;
             if (response.statusCode == 200) {
                 resolve(response);
             } else {
                 reject(response);
             }
         })
-    );
+    });
 }
 
 /**
