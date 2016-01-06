@@ -32,6 +32,10 @@ export default class HealthSubcategories extends BaseMultiQuestion {
                 q: "podiatrist",
                 healthcare_card_holders: true,
             }),
+            "Eye Care": remove("physical health").append({
+                q: "optometrist",
+                healthcare_card_holders: true,
+            }),
             "Mental or emotional health": append({
                 q: "mental health",
                 healthcare_card_holders: true,
