@@ -75,6 +75,10 @@ export default class Location {
     }
 
     streetAddressLine2(): string {
+        if (this.isConfidential()) {
+            return this.state;
+        }
+
         return [
             titleize(this.suburb),
             this.state,
