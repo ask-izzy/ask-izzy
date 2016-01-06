@@ -16,11 +16,19 @@ import sendEvent from "./google-tag-manager";
 const Storage = {
 
     getHistoryLength(): number {
-        return parseInt(sessionStore.getItem("historyLength") || "") || 0
+        return parseInt(sessionStore.getItem("historyLength") || "") || 0;
     },
 
     setHistoryLength(length: number): void {
         sessionStore.setItem("historyLength", `${length}`);
+    },
+
+    getLocation(): string {
+        return this.getItem("location") || "";
+    },
+
+    setLocation(location: string): void {
+        this.setItem("location", location);
     },
 
     getCoordinates(): ?Coordinates {
