@@ -42,6 +42,8 @@ class ResultsListPage extends React.Component {
     }
 
     render(): ReactElement {
+        const path = this.props.location.pathname.replace(/\/?$/, "/map");
+
         return (
             <div className="ResultsListPage">
                 <LoadingResultsHeader {...this.props} />
@@ -49,7 +51,7 @@ class ResultsListPage extends React.Component {
                     {
                         _.isEmpty(this.props.objects) ||
                         <ViewOnMapButton
-                            to={this.props.location.pathname + "/map"}
+                            to={path}
                         />
                     }
                     <ResultsList
