@@ -23,7 +23,7 @@ Feature: Advocacy Personalisation
 
         Then I should see "What's not working?"
 
-        When I click on "Public Housing"
+        When I click on "Housing"
          And I click on "Done"
 
         Then I should see "I found 1 service in Melbourne VIC"
