@@ -41,16 +41,20 @@ class ServicePage extends React.Component {
         // Unload previous service
         this.setState({object: undefined});
 
-        let service = await iss.getService(this.id);
+        try {
+            let object = await iss.getService(this.id);
 
-        this.setState({
-            object: service,
-        });
+            this.setState({object});
+        } catch (error) {
+            this.setState({error});
+        }
+
     }
 
     render(): ReactElement {
         let {
             object,
+            error,
         } = this.state;
         let history = this.props.history;
 
@@ -63,9 +67,16 @@ class ServicePage extends React.Component {
                     />
                     <div className="ServicePane">
                         <main>
-                            <div className="progress">
-                                <Loading className="big" />
-                            </div>
+                            {
+                                error ?
+                                <div className="error">
+                                    Whoops - something went wrong
+                                    (error {error.statusCode})
+                                </div>
+                                : <div className="progress">
+                                    <Loading className="big" />
+                                  </div>
+                            }
                         </main>
                     </div>
                 </div>
