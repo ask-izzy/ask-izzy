@@ -58,7 +58,6 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         primaryText={
                             <div>
                                 <components.LogoWithShadow />
-                                This is what you said you need.
                                 Change your answers here.
                             </div>
                         }
