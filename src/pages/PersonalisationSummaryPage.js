@@ -58,7 +58,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         primaryText={
                             <div>
                                 <components.LogoWithShadow />
-                                Change your answers here.
+                                Change your answers here
                             </div>
                         }
                     />
