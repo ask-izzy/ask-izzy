@@ -26,18 +26,18 @@ class AboutPage extends React.Component {
                     <h3>Ask Izzy:</h3>
                     <ul>
                         <li>
-                            is nationwide and free.
+                            is nationwide and free
                         </li>
                         <li>
                             can help you find housing, meals,
                             health services, counselling, legal help,
-                            addiction help and a whole lot more services.
+                            addiction help and a whole lot more services
                         </li>
                         <li>
-                            lists more than 340 000 different services.
+                            lists more than 340,000 different services
                         </li>
                         <li>
-                            is available on phones, tablets and computers.
+                            is available on phones, tablets and computers
                         </li>
                     </ul>
                     <p>
