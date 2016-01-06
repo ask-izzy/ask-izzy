@@ -69,7 +69,7 @@ const categories:Array<Category> = [
     }),
     new Category({
         name: "Everyday things",
-        byline: "Swags, Clothes, Food Vouchers, etc",
+        byline: "Swags, clothes, food vouchers etc",
         icon: icons.Things,
         search: {
             q: "material aid -(coordinating bodies)",
@@ -217,7 +217,7 @@ const categories:Array<Category> = [
     }),
     new Category({
         name: "Have your say",
-        byline: "Complaints and advocacy",
+        byline: "Complaints & advocacy",
         icon: icons.Advocacy,
         search: {
             q: "consumer issues mediation discrimination " +
