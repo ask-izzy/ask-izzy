@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+    <!---
+    TODO: add /in/location stuff for all the suburbs.
+    -->
+  <loc>https://askizzy.org.au/</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/housing</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/food</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/everyday-things</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/health</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/centrelink</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/money-help</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/support-counselling</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/legal</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/drugs-alcohol</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/life-skills-education</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/finding-work</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/facilities</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/something-to-do</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/technology</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/category/have-your-say</loc>
+</url>
+<url>
+  <loc>https://askizzy.org.au/about</loc>
+</url>
+</urlset>

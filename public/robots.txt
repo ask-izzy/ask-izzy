@@ -1,0 +1,7 @@
+User-Agent: *
+Disallow: /service/
+
+Sitemap: https://askizzy.org.au/sitemap.xml
+
+# Give them some hope of indexing a few URLs correctly.
+Crawl-delay: 90
