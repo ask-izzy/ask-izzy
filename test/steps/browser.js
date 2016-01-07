@@ -111,10 +111,12 @@ function navigator(
 
 async function reloadPage(): Promise<void> {
     await navigator(this.driver).refresh();
+    await module.exports.documentReady(this.driver);
 }
 
 async function clickBrowserBack(): Promise<void> {
     await navigator(this.driver).back();
+    await module.exports.documentReady(this.driver);
 }
 
 async function clickBack(): Promise<void> {
@@ -122,6 +124,7 @@ async function clickBack(): Promise<void> {
         "button.BackButton"
     ))
         .click();
+    await module.exports.documentReady(this.driver);
 }
 
 async function urlIs(
@@ -198,11 +201,14 @@ async function doSearch(search: string): Promise<void> {
 
     await element.clear();
     await element.sendKeys(search);
+
+    await module.exports.documentReady(this.driver);
 }
 
 async function doSearchAndEnter(search: string): Promise<void> {
     await (await getSearchElement(this.driver))
         .sendKeys(search + Key.ENTER);
+    await module.exports.documentReady(this.driver);
 }
 
 async function searchContains(expected: string): Promise<void> {
