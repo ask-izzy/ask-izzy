@@ -11,7 +11,7 @@ export default class ComplaintSubcategories extends BaseMultiQuestion {
         name: "sub-advocacy-complaints",
         question: "What's not working?",
         answers: {
-            "Public Housing": append("Public Housing"),
+            "Housing": append("Housing"),
             "Legal": append("Legal"),
             "Health": append("Health"),
             "Disability": append("Disability"),
