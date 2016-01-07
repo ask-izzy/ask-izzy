@@ -43,7 +43,8 @@ const categories:Array<Category> = [
         search: {
             q: "housing -(coordinating bodies) -(respite care) " +
                 "-(housing information) -hef",
-        },
+            service_type: "housing",
+            },
         personalisation: [
             personalisation.Location,
             personalisation.SleepTonight,
