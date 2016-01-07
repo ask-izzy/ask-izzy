@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Route } from "react-router";
+import { titleize } from "underscore.string";
 
 // If you import these after the others,
 // babel decides the navbar doesn't really
@@ -18,6 +19,16 @@ import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
 import {ResultsPageListing, ResultsPageMap} from "./pages/ResultsPage";
 import ServicePage from "./pages/ServicePage";
 
+export function makeTitle(template: ?string, params: Object): string {
+    let title = template || "";
+
+    Object.keys(params).forEach((key) =>
+        title = title.replace(`:${key}`, titleize(params[key]))
+    );
+
+    return title ? `${title} | Ask Izzy` : "Ask Izzy";
+}
+
 export default (
     <Route
         path=""
@@ -26,10 +37,12 @@ export default (
         <Route
             path="/styleGuide/component/:componentName"
             component={StyleGuideItem}
+            title="Styleguide"
         />
         <Route
             path="/styleGuide*"
             component={StyleGuideList}
+            title="Styleguide"
         />
         <Route
             path="/"
@@ -41,6 +54,7 @@ export default (
         <Route
             path="/about"
             component={AboutPage}
+            title="About"
         />
         {[
             "/category/:page",
@@ -51,10 +65,12 @@ export default (
             <Route
                 path={`${str}`}
                 component={ResultsPageListing}
+                title=":page in :suburb, :state | Ask Izzy"
             />,
             <Route
                 path={`${str}/map`}
                 component={ResultsPageMap}
+                title="Map of :page in :suburb, :state | Ask Izzy"
             />,
             <Route
                 path={`${str}/map/personalise`}

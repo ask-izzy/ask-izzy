@@ -16,7 +16,7 @@ class HtmlDocument extends React.Component {
         script: React.PropTypes.arrayOf(React.PropTypes.string),
 
         // meta tags, title, etc.
-        currentUrl: React.PropTypes.string,
+        currentUrl: React.PropTypes.object,
         description: React.PropTypes.string,
         siteName: React.PropTypes.string,
         title: React.PropTypes.string,
@@ -29,8 +29,10 @@ class HtmlDocument extends React.Component {
     };
 
     render(): ReactElement {
-        const { markup, script, css } = this.props;
         const {
+            markup,
+            script,
+            css,
             title,
             description,
             siteName,
@@ -84,7 +86,7 @@ class HtmlDocument extends React.Component {
         />
         <meta
             property="og:url"
-            content={currentUrl}
+            content={currentUrl.toString()}
         />
 
         {css.map((href, idx) =>
@@ -95,6 +97,11 @@ class HtmlDocument extends React.Component {
                 href={href}
             />)
         }
+
+        <link
+            rel="canonical"
+            href={`https://askizzy.org.au${currentUrl.pathname}`}
+        />
 
         <link rel="stylesheet"
             type="text/css"

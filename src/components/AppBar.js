@@ -1,24 +1,15 @@
 /* @flow */
 
 import React from "react";
-import { History } from "react-router";
-import reactMixin from "react-mixin";
 
 import components from "../components";
 import icons from "../icons";
 
-/*::`*/@reactMixin.decorate(History)/*::`;*/
 class AppBar extends React.Component {
     static propTypes = {
         title: React.PropTypes.string.isRequired,
         onBackTouchTap: React.PropTypes.func.isRequired,
     };
-
-    componentWillReceiveProps(nextProps: Object): void {
-        if (typeof document != "undefined") {
-            document.title = `${nextProps.title} | Ask Izzy`;
-        }
-    }
 
     static sampleProps = {default: {
         title: "App bar",

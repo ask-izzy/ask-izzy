@@ -6,7 +6,7 @@ import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { match, RoutingContext } from "react-router";
 import url from "url";
-import routes from "../routes";
+import routes, { makeTitle } from "../routes";
 
 import HtmlDocument from "./HtmlDocument";
 
@@ -38,8 +38,10 @@ export default function render(req, res, next) {
             webpackStats.css = webpackStats.css.map(replaceHostname);
         }
 
+        const reqUrl = url.parse(req.url);
+
         match(
-            { routes, location: url.parse(req.url) },
+            { routes, location: reqUrl },
             (error, redirectLocation, renderProps) => {
                 if (error) {
                     next(error);
@@ -50,6 +52,13 @@ export default function render(req, res, next) {
                         redirectLocation.search
                     );
                 } else if (renderProps) {
+                    const title = makeTitle(
+                        (
+                            renderProps.routes[1] &&
+                            renderProps.routes[1].title
+                        ),
+                        renderProps.params
+                    )
                     const markup = ReactDOMServer.renderToString(
                         <RoutingContext {...renderProps} />
                     );
@@ -57,9 +66,11 @@ export default function render(req, res, next) {
                     // and sent as response.
                     const html = ReactDOMServer.renderToStaticMarkup(
                       <HtmlDocument
+                          title={title}
                           markup={markup}
                           script={webpackStats.script}
                           css={webpackStats.css}
+                          currentUrl={reqUrl}
                       />
                     );
                     const doctype = "<!DOCTYPE html>";
