@@ -107,7 +107,9 @@ class ResultsPage extends BaseCategoriesPage {
                     });
                 } catch (error) {
                     this.setState({
-                        error: `An error occurred (${response.statusCode})`,
+                        error: `An error occurred (${
+                            response.statusCode || error
+                        })`,
                         statusCode: response.statusCode,
                     });
                 }
@@ -148,7 +150,9 @@ class ResultsPage extends BaseCategoriesPage {
                 });
             } catch (error) {
                 this.setState({
-                    error: `An error occurred (${response.statusCode})`,
+                    error: `An error occurred (${
+                        response.statusCode || error
+                    })`,
                     statusCode: response.statusCode,
                 });
             }
