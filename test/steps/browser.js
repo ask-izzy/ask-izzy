@@ -54,8 +54,31 @@ module.exports = (function() {
         ;
 })();
 
+/**
+ * Wait for the document to be ready (including completing any AJAX requests).
+ *
+ * @param {Webdriver.WebDriver} driver - Selenium webdriver.
+ * @returns {Promise<boolean>} true if the document is readyState is complete.
+ */
+module.exports.documentReady = function documentReady(
+    driver: Webdriver.WebDriver
+): Promise<boolean> {
+    return driver.executeScript(() =>
+        ((!window.xhrCount) || (window.xhrCount() == 0)) &&
+        (document.readyState == "complete")
+    );
+};
+
 async function visitUrl(url: string): Promise {
-    await gotoUrl(this.driver, url);
+    await module.exports.visitUrl(this.driver, url);
+}
+
+module.exports.visitUrl = async function visitUrl(
+    driver: Webdriver.WebDriver,
+    url: string
+): Promise<void> {
+    await gotoUrl(driver, url);
+    await module.exports.documentReady(driver);
 }
 
 /**
@@ -100,21 +123,6 @@ async function clickBack(): Promise<void> {
     ))
         .click();
 }
-
-/**
- * Wait for the document to be ready (including completing any AJAX requests).
- *
- * @param {Webdriver.WebDriver} driver - Selenium webdriver.
- * @returns {Promise<boolean>} true if the document is readyState is complete.
- */
-module.exports.documentReady = function documentReady(
-    driver: Webdriver.WebDriver
-): Promise<boolean> {
-    return driver.executeScript(() =>
-        ((!window.xhrCount) || (window.xhrCount() == 0)) &&
-        (document.readyState == "complete")
-    );
-};
 
 async function urlIs(
     driver: Webdriver.WebDriver,
