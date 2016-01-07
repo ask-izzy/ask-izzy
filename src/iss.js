@@ -396,7 +396,7 @@ export async function search(
     let request_: searchRequest = {
         q: "",
         type: "service",
-        minimum_must_match: "3>50%",
+        minimum_must_match: "3<50%",
         limit: 10,
     };
 
