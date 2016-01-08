@@ -11,25 +11,24 @@ export default class HousingSubcategories extends BaseQuestion {
         question: "Which situation is most like yours?",
         answers: {
             "On the street":
-                remove("housing").remove({service_types: "housing"})
-                .append("homeless accommodation"),
+                remove("housing -(respite care)")
+                .remove("-(housing information) -hef")
+                .append("crisis accommodation iap"),
             "Couch surfing":
-                remove("housing").remove({service_types: "housing"})
-                .append("homeless accommodation"),
+                remove("housing")
+                .append("homeless accommodation iap"),
             "In a rooming house": remove("housing -(respite care)")
                 .remove("-(housing information) -hef")
-                .append("community housing"),
+                .append("community housing -(rooming house)"),
             "Private rental": remove("housing -(respite care)")
                 .remove("-(housing information) -hef")
-                .remove({service_types: "housing"})
                 .append("transitional accommodation"),
             "Public housing": remove("housing -(respite care)")
                 .remove("-(housing information) -hef")
-                .remove({service_types: "housing"})
-                .append("social housing"),
+                .append("social housing ")
+                .append("-(public rental) -(public housing)"),
             "Mortgaged housing": remove("housing -(respite care)")
                 .remove("-(housing information) -hef")
-                .remove({service_types: "housing"})
                 .append("transitional accommodation"),
         },
     };
