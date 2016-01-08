@@ -11,11 +11,15 @@ export default class CounsellingSubcategories extends BaseMultiQuestion {
         question: "What issues are you dealing with?",
         answers: {
             "Homelessness": append("homeless"),
-            "Family violence": append("family violence"),
+            "Family violence": remove("support")
+                .append("family violence"),
             "Sexual identity": append("sexuality"),
-            "Family or relationships": append("family relationship"),
-            "Money matters": append("money matters"),
-            "Gambling": append("gambling"),
+            "Family or relationships": remove("support")
+                .append("family relationship"),
+            "Money matters": remove("support counselling")
+                .append("money matters"),
+            "Gambling": remove("support")
+                .append("gambling"),
             "Find online counselling": remove("support")
                 .append("online"),
             "Other": append(""),
