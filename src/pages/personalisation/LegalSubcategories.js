@@ -16,7 +16,7 @@ export default class LegalSubcategories extends BaseMultiQuestion {
             "Family violence": append("family violence -police"),
             "Tenancy issues": remove("legal -(coordinating bodies) -permits")
                 .remove("-ceremonies -making -checks -electoral -taxation")
-                .append("tenancy law"),
+                .append("tenancy law -research"),
             "Victims of crime compensation": remove("legal -permits")
                 .remove("-(coordinating bodies) -ceremonies -making")
                 .remove("-checks -electoral -taxation")
