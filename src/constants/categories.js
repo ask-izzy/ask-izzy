@@ -185,7 +185,8 @@ const categories:Array<Category> = [
         icon: icons.Facilaties,
         search: {
             q: "public facilities" +
-                " -(coordinating bodies) -(hire of facilities)",
+                " -(coordinating bodies) -(hire of facilities)" +
+                " -maintenance",
         },
         personalisation: [
             personalisation.Location,
