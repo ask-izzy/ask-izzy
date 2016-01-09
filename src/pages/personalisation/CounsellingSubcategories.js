@@ -17,7 +17,7 @@ export default class CounsellingSubcategories extends BaseMultiQuestion {
             "Family or relationships": remove("support")
                 .append("family relationship"),
             "Money matters": remove("support counselling")
-                .append("money matters"),
+                .append("(money matters)"),
             "Gambling": remove("support")
                 .append("gambling"),
             "Find online counselling": remove("support")
