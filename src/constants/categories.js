@@ -134,7 +134,8 @@ const categories:Array<Category> = [
         icon: icons.Legal,
         search: {
             q: "legal -(coordinating bodies) -permits -ceremonies " +
-                "-making -checks -electoral -taxation",
+                "-making -checks -electoral -taxation -centrelink " +
+                "-immigration -(hire of facilities)",
         },
         personalisation: [
             personalisation.Location,
