@@ -42,7 +42,8 @@ const categories:Array<Category> = [
         icon: icons.House,
         search: {
             q: "housing -(coordinating bodies) -(respite care) " +
-                "-(housing information) -hef",
+                "-(housing information) -hef " +
+                "-(holiday accommodation)",
             service_type: "housing",
         },
         personalisation: [
