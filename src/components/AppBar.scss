@@ -1,6 +1,6 @@
 .AppBar + * {
     @media screen {
-        padding-top: 40px;
+        padding-top: 44px;
     }
 }
 
@@ -15,7 +15,7 @@
 
     width: 100%;
     max-width: 800px;
-    height: 40px;
+    height: 44px;
     min-height: auto;
 
     background-color: $brand-bg-dark;
@@ -37,7 +37,7 @@
 
         font-size: 16px;
         font-weight: 500;
-        line-height: 38px;
+        line-height: 42px;
 
         text-align: center;
 
@@ -49,7 +49,9 @@
     .BackButton {
         display: relative;
 
-        height: 40px;
+        min-width: 44px;
+
+        height: 44px;
         padding: 0;
 
         color: $white;
@@ -72,8 +74,8 @@
         }
 
         .ChevronBackIcon {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
         }
 
         span {
@@ -83,10 +85,12 @@
 
         .back-label {
 
+            height: 44px;
+
             margin-top: 1px;
 
             font-size: 14px;
-            line-height: 38px;
+            line-height: 42px;
 
             text-overflow: ellipsis;
 
