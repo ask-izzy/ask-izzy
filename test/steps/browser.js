@@ -101,6 +101,7 @@ async function clickLink(link: string): Promise<void> {
         console.log(`Looking for ${link}`)
     }
     await this.driver.findElement(locator).click();
+    await module.exports.documentReady(this.driver);
 }
 
 function navigator(
