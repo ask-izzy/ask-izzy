@@ -135,7 +135,7 @@ const categories:Array<Category> = [
         search: {
             q: "legal -(coordinating bodies) -permits -ceremonies " +
                 "-making -checks -electoral -taxation -centrelink " +
-                "-(hire of facilities)",
+                "-immigration -(hire of facilities)",
         },
         personalisation: [
             personalisation.Location,
