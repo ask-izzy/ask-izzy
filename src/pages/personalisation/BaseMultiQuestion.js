@@ -25,7 +25,9 @@ class BaseMultiQuestion extends BaseQuestion {
             : "None of these";
 
         return (
-            <FloatFromBottom>
+            <FloatFromBottom
+                includeOffsetElement={true}
+            >
                 <div className="done-button">
                     <FlatButton
                         label={label}

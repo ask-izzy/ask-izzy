@@ -24,9 +24,13 @@ class FloatFromBottom extends React.Component {
         }
 
         this.setState({
-            containerHeight: containerHeight,
+            containerHeight: containerHeight + 20,
             elementScrolledOffscreen: elementScrolledOffscreen,
         });
+    }
+
+    containerHeight(): number {
+        return this.state.containerHeight || 0;
     }
 
     render(): ReactElement {
@@ -46,16 +50,19 @@ class FloatFromBottom extends React.Component {
                 >
                     {this.props.children}
                 </div>
-                {/*
-                  * The following makes the parent element
-                  * tall enough when floating the child elements
-                  * so that they don't prevent scrolling to the bottom.
-                  */}
-                <div
-                    style={{height: this.state.containerHeight}}
-                >
-                    &nbsp;
-                </div>
+                {  /*
+                    * The following makes the parent element
+                    * tall enough when floating the child elements
+                    * so that they don't prevent scrolling to the bottom.
+                    */
+                    this.props.includeOffsetElement && (
+                        <div
+                            style={{height: this.state.containerHeight + 10}}
+                        >
+                            &nbsp;
+                        </div>
+                    )
+                }
             </div>
         );
     }
