@@ -1,10 +1,12 @@
 $appbar-height: 44px;
 $appbar-text-line-height: 42px;
 
+.AppBarSpacer {
+    width: 100%;
+    height: $appbar-height;
 
-.AppBar + * {
-    @media screen {
-        padding-top: $appbar-height;
+    @media print {
+        display: none;
     }
 }
 
