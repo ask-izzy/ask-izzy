@@ -313,11 +313,13 @@ class Location extends React.Component {
                     require("has-geolocation") &&
                     this.state.geolocation == GeoLocationState.NOT_STARTED ?
                         <components.ButtonListItem
-                            className="taller"
+                            className="taller LocationButton"
                             onClick={this.onGeolocationClick.bind(this)}
-                            primaryText={<span className="link-color">
-                                Automatically detect your location
-                            </span>}
+                            primaryText={
+                                <span className="link-color link-text">
+                                    Get your current location
+                                </span>
+                            }
                             leftIcon={
                                 <icons.Location
                                     className="ColoredIcon icon-fg-color big"
@@ -357,15 +359,18 @@ class Location extends React.Component {
                     className="search"
                     onSubmit={this.nextStep.bind(this)}
                 >
-                    <input
-                        type="search"
-                        ref="search"
-                        onFocus={this.scrollToSearchControl.bind(this)}
-                        aria-label="Enter a suburb or postcode"
-                        placeholder="Enter a suburb or postcode"
-                        value={this.state.locationName}
-                        onChange={this.onSearchChange.bind(this)}
-                    />
+                    <div>
+                        <input
+                            type="search"
+                            ref="search"
+                            onFocus={this.scrollToSearchControl.bind(this)}
+                            aria-label="Search for a suburb or postcode"
+                            placeholder="Search for a suburb or postcode"
+                            value={this.state.locationName}
+                            onChange={this.onSearchChange.bind(this)}
+                        />
+                    </div>
+
                 </form>
                 {
                     /* any autocompletions we currently have */
