@@ -1,17 +1,26 @@
 .PersonalisationPage {
+
+    .link-text {
+        text-decoration: underline;
+    }
+
     .search {
         width: 100%;
+
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+
         border-bottom: 1px solid $list-item-hairline;
+        background-color: $brand-bg-light;
+
+        box-sizing: border-box;
 
         input {
             display: block;
-            width: 90%;
-            margin-top: 20px;
-            margin-right: auto;
-            margin-bottom: 20px;
-            margin-left: auto;
-            padding: 5px;
-
+            width: 96%;
+            padding: 10px 2%;
             border: 1px solid $brand-bg-mid;
             border-radius: 3px;
             -webkit-appearance: none;
@@ -44,7 +53,8 @@
 
     .done-button,
     .okay-button,
-    .clear-button {
+    .clear-button,
+    .location-button {
         width: 100%;
 
         button {
