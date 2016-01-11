@@ -12,8 +12,8 @@ export default class AddictionSubcategories extends BaseMultiQuestion {
         answers: {
             "Detox": remove("substance abuse").append("detoxification"),
             "Rehab": append("rehabilitation"),
-            "Drugs": append("drugs"),
-            "Alcohol": append("alcohol"),
+            "Drugs": remove("substance abuse").append("drugs"),
+            "Alcohol": remove("substance abuse").append("alcohol"),
             "Needle exchange": remove("substance abuse")
                 .append("needle exchange"),
             "Speak to someone": append("counselling"),
