@@ -36,7 +36,12 @@ const Storage = {
     },
 
     setCoordinates(coords: ?Coordinates): void {
-        sessionStore.setItem("coordinates", JSON.stringify(coords));
+        const {longitude, latitude} = coords || {};
+
+        sessionStore.setItem(
+            "coordinates",
+            JSON.stringify({longitude, latitude})
+        );
     },
 
     getItem(key: string): ?(string|number|boolean) {
