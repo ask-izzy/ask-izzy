@@ -79,7 +79,7 @@ function withRetries(other: Function): Function {
     let retries = 0;
     const retry = async function() {
         try {
-            return await other()
+            return await other(...arguments)
         } catch (error) {
             if (retries < 3) {
                 retries++;
