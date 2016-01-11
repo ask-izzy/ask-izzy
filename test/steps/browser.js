@@ -156,7 +156,7 @@ async function checkURL(expected: string): Promise<void> {
 }
 
 async function thenISee(expected: string): Promise<void> {
-    await assert.textIsVisible(this.driver, expected);
+    await assert.withRetries(assert.textIsVisible)(this.driver, expected);
 }
 
 async function thenIDontSee(expected: string): Promise<void> {

@@ -73,4 +73,25 @@ export async function linkIsVisible(
 
 assert_.linkIsVisible = linkIsVisible;
 
+// needs a way to retry up to a timeout.
+// Often getting stuff 'in the dom' but not visible yet.
+function withRetries(other: Function): Function {
+    let retries = 0;
+    const retry = async function() {
+        try {
+            return await other()
+        } catch (error) {
+            if (retries < 3) {
+                retries++;
+                await retry()
+            } else {
+                throw error;
+            }
+        }
+    }
+
+    return retry;
+}
+
+assert_.withRetries = withRetries;
 export default assert_;
