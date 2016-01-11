@@ -40,7 +40,7 @@ class Eligibility extends React.Component {
 
         let ineligibleItems = this.renderEligibility(
             this.props.ineligibility_info
-        )
+        );
 
         if (!_.isEmpty(ineligibleItems)) {
             ineligibleMarkup = (
@@ -71,7 +71,7 @@ class Eligibility extends React.Component {
 
     renderItem(text: string): ?ReactElement {
         if (text) {
-            return <li key={text}>{text}</li>
+            return (<li key={text}>{text}</li>);
         }
     }
 
@@ -90,7 +90,7 @@ class Eligibility extends React.Component {
             .toLocaleLowerCase().trim();
 
         if (!referralInfo.match(/^self\.?$/i)) {
-            return this.renderItem(`Referred by ${referralInfo}`)
+            return this.renderItem(`Referred by ${referralInfo}`);
         }
     }
 }
