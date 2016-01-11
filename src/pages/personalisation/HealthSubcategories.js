@@ -19,8 +19,9 @@ export default class HealthSubcategories extends BaseMultiQuestion {
                 q: "children",
                 healthcare_card_holders: true,
             }),
-            "Maternal & child health": append("maternal child health"),
-            "Sexual health": remove("physical").append({
+            "Maternal & child health": remove("health")
+                .append("maternal child health"),
+            "Sexual health": append({
                 q: "sexual health",
                 healthcare_card_holders: true,
             }),
@@ -28,16 +29,16 @@ export default class HealthSubcategories extends BaseMultiQuestion {
                 q: "dentist",
                 healthcare_card_holders: true,
             }),
-            "Foot problems": remove("physical health").append({
+            "Foot problems": remove("health").append({
                 q: "podiatrist",
                 healthcare_card_holders: true,
             }),
-            "Eye Care": remove("physical health").append({
+            "Eye Care": remove("health").append({
                 q: "optometrist",
                 healthcare_card_holders: true,
             }),
             "Mental or emotional health": append({
-                q: "mental health",
+                q: "mental",
                 healthcare_card_holders: true,
             }),
             "Hospital": remove("health").append("hospital"),

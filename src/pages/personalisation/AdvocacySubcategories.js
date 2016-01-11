@@ -14,12 +14,17 @@ export default class AdvocacySubcategories extends BaseMultiQuestion {
                 .remove("disputes advocacy")
                 .append("ombudsman complaint"),
             "Help working out a problem with a service":
-                remove("consumer issues discrimination disputes advocacy"),
+                remove("consumer issues mediation discrimination")
+                .remove("disputes advocacy")
+                .append("mediation"),
             "Get advice on your rights":
-                remove("consumer issues discrimination disputes")
-                .remove("advocacy mediation").append("rights advice"),
+                remove("consumer issues mediation discrimination")
+                .remove("disputes advocacy")
+                .append("rights advice"),
             "Someone to speak for you":
-                remove("consumer issues mediation discrimination disputes"),
+                remove("consumer issues mediation discrimination")
+                .remove("disputes advocacy")
+                .append("advocacy"),
         },
     };
 }

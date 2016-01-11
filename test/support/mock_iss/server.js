@@ -91,7 +91,7 @@ app.get("/api/v3/search/", (req, res) => {
                 error_message: 'Could not find a location matching "carlt"',
             });
     } else if (req.query.q.match(
-        /ombudsman complaint Housing/
+        /ombudsman complaint advocacy housing/i
     )) {
         res.json({
             meta: {
