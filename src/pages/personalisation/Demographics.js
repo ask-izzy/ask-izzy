@@ -14,7 +14,7 @@ export default class Demographics extends BaseMultiQuestion {
             /* eslint-disable max-len */
             "Escaping family violence": append("family violence"),
             "Indigenous": append("Aboriginals & Torres Strait Islanders"),
-            "Family with children": append("families"),
+            "Family with children": append("families -srs"),
             "Couples": append("couples"),
             "Parole / recently released": append("post-release"),
             "Have a disability": append("disabilities"),
