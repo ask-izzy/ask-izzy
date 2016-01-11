@@ -16,37 +16,38 @@ class Eligibility extends React.Component {
     static sampleProps = {default: fixtures.ixa};
 
     render(): ReactElement {
-        let ineligibilityInfo: string = this.props.ineligibility_info;
         let eligibleMarkup, ineligibleMarkup;
 
-        if (!_.isEmpty(this.props.eligibility_info) ||
-            !_.isEmpty(this.props.special_requirements) ||
-            !_.isEmpty(this.props.catchment) ||
-            !_.isEmpty(this.props.referral_info)
-        ) {
+        let eligibleItems = _.compact(_([
+            this.renderCatchment(),
+            this.renderEligibility(
+                this.props.eligibility_info + "\n" +
+                this.props.special_requirements
+            ),
+            this.renderReferralInfo(),
+        ]).flatten());
+
+        if (!_.isEmpty(eligibleItems)) {
             eligibleMarkup = (
                 <div className="eligibility">
                     <h3>To use this service you should be</h3>
                     <ul>
-                        {this.renderCatchment()}
-                        {this.renderEligibility(
-                            this.props.eligibility_info + "\n" +
-                            this.props.special_requirements
-                        )}
-                        {this.renderReferralInfo()}
+                        {eligibleItems}
                     </ul>
                 </div>
             );
         }
 
-        if (!_.isEmpty(ineligibilityInfo)) {
+        let ineligibleItems = this.renderEligibility(
+            this.props.ineligibility_info
+        );
+
+        if (!_.isEmpty(ineligibleItems)) {
             ineligibleMarkup = (
                 <div className="ineligibility">
                     <h3>You are ineligible if</h3>
                     <ul>
-                        {this.renderEligibility(
-                            this.props.ineligibility_info
-                        )}
+                        {ineligibleItems}
                     </ul>
                 </div>
             );
@@ -64,34 +65,32 @@ class Eligibility extends React.Component {
         const catchment: string = this.props.catchment;
 
         if (catchment) {
-            return (
-                <li>Located in {catchment}</li>
-            );
-        } else {
-            return null;
+            return this.renderItem(`Located in ${catchment}`);
         }
     }
 
-    renderEligibility(eligibility: string): Array<ReactElement> {
-        if (!_.isEmpty(eligibility)) {
-            return _.uniq(eligibility.split("\n")).map(
-                (line, idx) => <li key={idx}>{line}</li>
-            );
+    renderItem(text: string): ?ReactElement {
+        if (text) {
+            return (<li key={text}>{text}</li>);
         }
+    }
 
-        return [];
+    renderEligibility(eligibility: ?string): Array<?ReactElement> {
+        const eligibilities = _.uniq(
+            (eligibility || "")
+                .split("\n")
+                .map((str) => str.trim())
+        );
+
+        return _.compact(_(eligibilities).map(this.renderItem));
     }
 
     renderReferralInfo(): ?ReactElement {
         const referralInfo = (this.props.referral_info || "")
-            .toLocaleLowerCase();
+            .toLocaleLowerCase().trim();
 
-        if (!_.isEmpty(referralInfo)) {
-            return (
-                <li>Referred by {referralInfo}</li>
-            );
-        } else {
-            return null;
+        if (!referralInfo.match(/^self\.?$/i)) {
+            return this.renderItem(`Referred by ${referralInfo}`);
         }
     }
 }
