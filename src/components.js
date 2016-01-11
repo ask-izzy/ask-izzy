@@ -11,6 +11,9 @@ import CollapsedOpeningTimes from "./components/CollapsedOpeningTimes";
 import Collapser from "./components/Collapser";
 import ContactMethods from "./components/ContactMethods";
 import CrisisLineItem from "./components/CrisisLineItem";
+import DebugContainer from "./components/DebugContainer";
+import DebugQueryScore from "./components/DebugQueryScore";
+import DebugSearch from "./components/DebugSearch";
 import Eligibility from "./components/Eligibility";
 import Email from "./components/Email";
 import FlatButton from "./components/FlatButton";
@@ -46,6 +49,9 @@ export default {
     Collapser: Collapser,
     ContactMethods: ContactMethods,
     CrisisLineItem: CrisisLineItem,
+    DebugContainer: DebugContainer,
+    DebugQueryScore: DebugQueryScore,
+    DebugSearch: DebugSearch,
     Eligibility: Eligibility,
     Email: Email,
     FlatButton: FlatButton,

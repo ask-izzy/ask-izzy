@@ -10,35 +10,3 @@
         clear: both;
     }
 }
-
-@mixin debugging {
-    .Debugging {
-        @include clearfix;
-        padding-left: 8px;
-
-        color: $brand-text-mid;
-
-        font-size: 12px;
-
-        & > .Debugging {
-            margin-top: 5px;
-
-            border-top: 1px solid $brand-text-mid;
-            border-left: 5px solid $list-item-hairline;
-        }
-
-        .score {
-            float: right;
-        }
-
-        &:hover {
-            &,
-            & > .Debugging {
-                border-top-color: $brand-text-dark;
-                border-left-color: $brand-text-dark;
-
-                color: $icon-fg-color;
-            }
-        }
-    }
-}

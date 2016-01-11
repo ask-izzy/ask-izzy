@@ -1,0 +1,27 @@
+/* @flow */
+
+import React from "react";
+
+class DebugQueryScore extends React.Component {
+
+    render(): ReactElement {
+        const {search} = this.props;
+
+        return (
+            <div className="DebugSearch">
+                {Object.keys(search).map((key) =>
+                    <pre key={key}>
+                        <span className="key">
+                            {key}
+                        </span> = <span className="value">
+                            "{search[key]}"
+                        </span>
+                    </pre>
+                )}
+            </div>
+        );
+    }
+
+}
+
+export default DebugQueryScore;
