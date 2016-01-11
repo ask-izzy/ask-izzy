@@ -14,6 +14,7 @@ import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
+import suggest from "../../locationSuggestions";
 
 const GeoLocationState = {
     NOT_STARTED: 0,
@@ -142,60 +143,6 @@ class Location extends React.Component {
         throw "Unable to determine your suburb";
     }
 
-    *filterCompletions(completions: Array<Object>): Iterable<Object> {
-        for (const completion of completions) {
-            if (_.contains(completion.types, "locality")) {
-                yield {
-                    suburb: completion.terms[0].value,
-                    state: completion.terms[1].value,
-                }
-            } else if (_.contains(completion.types, "postal_code")) {
-                yield {
-                    state: completion.terms[0].value,
-                    suburb: completion.terms[1].value,
-                }
-            }
-        }
-    }
-    /**
-     * Take a search string and (optionally) the user's current location
-     * and return a promise for an array of possible matches.
-     *
-     * @param {string} input - input text
-     * @param {?Object} location - location information
-     * @returns {Promise<Array<Object>>} array of possible locations
-     */
-    async autoCompleteSuburb(
-        input: string,
-        location: ?Object,
-    ): Promise<Array<Object>> {
-        const maps = await Maps();
-        let request: AutocompletionRequest = {
-            input: input,
-            types: ["geocode"],
-            componentRestrictions: {
-                country: "au",
-            },
-        };
-
-        /* If the user has coordinates set in this session, use them */
-        location = storage.getCoordinates();
-        if (location && location.latitude && location.longitude) {
-            request.location = new maps.api.LatLng(location.latitude,
-                                                   location.longitude);
-            request.radius = 10000;  /* 10 km */
-        }
-
-        let completions = await maps.autocompletePlaces(request);
-
-        return [
-            /*::{_:`*/
-            for (completion of this.filterCompletions(completions))
-                completion
-            /*::`}*/
-        ];
-    }
-
     /**
      * triggerAutocomplete:
      *
@@ -205,7 +152,7 @@ class Location extends React.Component {
     triggerAutocomplete(): void {
         let input = this.state.locationName;
 
-        this.autoCompleteSuburb(input, this.state.locationCoords)
+        suggest(input, this.state.locationCoords)
             .then(results => {
                 this.setState({
                     autocompletions: results,
