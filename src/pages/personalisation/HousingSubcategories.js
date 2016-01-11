@@ -14,9 +14,9 @@ export default class HousingSubcategories extends BaseQuestion {
                 .remove("-(respite care)")
                 .remove("-(housing information)")
                 .remove("-hef")
-                .append("crisis accommodation iap"),
+                .append("crisis accommodation"),
             "Couch surfing": remove("housing")
-                .append("homeless accommodation iap"),
+                .append("homeless accommodation"),
             "In a rooming house": remove("housing")
                 .remove("-(respite care)")
                 .remove("-(housing information)")
