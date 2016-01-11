@@ -12,7 +12,7 @@ export default class HealthSubcategories extends BaseMultiQuestion {
         answers: {
             /* eslint-disable max-len */
             "Doctor or nurse": remove("health").append({
-                q: "doctor",
+                q: "doctor nurse (community health)",
                 healthcare_card_holders: true,
             }),
             "Children": append({
@@ -37,11 +37,11 @@ export default class HealthSubcategories extends BaseMultiQuestion {
                 q: "optometrist",
                 healthcare_card_holders: true,
             }),
-            "Mental or emotional health": append({
-                q: "mental",
+            "Mental or emotional health": remove("health").append({
+                q: "mental health",
                 healthcare_card_holders: true,
             }),
-            "Hospital": remove("health").append("hospital"),
+            "Hospital": remove("health").append("public hospitals"),
         },
     };
 }
