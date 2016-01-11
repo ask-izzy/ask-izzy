@@ -16,7 +16,7 @@ export default class SleepTonight extends BaseQuestion {
                 .remove("-(respite care)")
                 .remove("-(housing information)")
                 .remove("-hef")
-                .append("crisis accommodation iap"),
+                .append("crisis accommodation"),
         },
     };
 }
