@@ -13,7 +13,7 @@ Feature: Show location in url
         Then I should see "I found 3 services in Richmond, Victoria"
         When I click on "Change your answers"
         And I click on "Where are you?"
-        Then I should see "Automatically detect your location"
+        Then I should see "Get your current location"
         When I search for "carlt"
         And I click on "Carlton"
         And I click on "Done"
