@@ -23,7 +23,7 @@ const InfoMessage = (category: ?Object): ?ReactElement =>
     category && <div>{category.info}</div>;
 
 const LogoHeader = ({children}: Object): ReactElement =>
-    <div>
+    <div className="LogoHeader">
         <LogoWithShadow />
         {children}
     </div>;

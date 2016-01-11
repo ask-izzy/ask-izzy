@@ -108,6 +108,18 @@ function yamlConverter(str: string, done: callback): void {
     }
 }
 
+/*
+ * Parses a number out of a yadda step
+ */
+function numberConverter(str: string, done: callback): void {
+    console.log(str);
+    try {
+        done(null, parseInt(str));
+    } catch (error) {
+        done(error)
+    }
+}
+
 const dictionary = new Yadda.Dictionary()
     .define("LATITUDE", /(\d+.\d+[NS])/, latitudeConverter)
     .define("LONGITUDE", /(\d+.\d+[EW])/, longitudeConverter)
@@ -115,6 +127,7 @@ const dictionary = new Yadda.Dictionary()
     .define("table", /([^\u0000]*)/, tableConverter)
     .define("service", /([^\u0000]*)/, serviceConverter)
     .define("yaml", /([^\u0000]*)/, yamlConverter)
+    .define("NUMBER", /([^\u0000]*)/, numberConverter)
     ;
 
 export default dictionary;

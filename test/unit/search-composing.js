@@ -72,4 +72,19 @@ describe("Compose personalisation search terms", function() {
         });
     });
 
+    it("Remove service type from a search", function() {
+        const {
+            remove,
+        } = require("../../src/pages/personalisation/BaseQuestion");
+        const request = {
+            q: "help with addiction",
+            service_type: "addiction help",
+        };
+        const search = remove({service_type: "addiction help"});
+
+        assert.deepEqual(search.compose(request), {
+            q: "help with addiction",
+        });
+    });
+
 });

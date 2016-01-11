@@ -20,6 +20,13 @@ module.exports = (function() {
               unpromisify(seeTheResultsIn))
         .then('I should see a hotline in position $NUM which says "$STRING"',
               unpromisify(hotlinePositionAndText))
+        .then(
+            'I should see $NUMBER search results' +
+            'for "$STRING" in "$STRING"',
+            unpromisify(assertNumSearchResults))
+        .then(
+            'I should see $NUMBER search results in "$STRING"',
+            unpromisify(assertNumSearchResults))
         .then('I should see "$STRING" before first hotline',
               unpromisify(assertHotlineHeading))
         .then("my results should not contain\n$table",
@@ -81,6 +88,32 @@ async function hotlinePositionAndText(
     let phone = await crisisLine.findElement(By.css(".Phone .ContactButton"));
 
     assert.equal(await phone.getText(), expectedText);
+}
+
+async function assertNumSearchResults(
+    count: number,
+    target: string,
+    location: string
+): Promise<void> {
+    if (location) {
+        // 3 params
+        target = ` for ${target}`;
+    } else {
+        // Only two params - location is the right one
+        location = target;
+        target = "";
+    }
+
+    let element = await this.driver.findElement(
+        By.css(".LogoHeader")
+    );
+    let text = await element.getText();
+
+
+    assert.equal(
+        text,
+        `I found ${count} ${count != 1 ? "services" : "service"}${target} in ${location}`
+    );
 }
 
 async function assertHotlineHeading(text: string): Promise<void> {
