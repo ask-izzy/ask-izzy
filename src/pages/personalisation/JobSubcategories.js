@@ -11,12 +11,15 @@ export default class JobSubcategories extends BaseMultiQuestion {
         question: "Where do you want to start?",
         answers: {
             /* eslint-disable max-len */
-            "Employment": remove("employment").append("job searching"),
-            "Programs to help you into paid work":
-                remove("employment").remove({service_type: "employment"})
-                .append("(work skills) (vocational training) (employment program)"),
-            "Volunteering":
-                remove("employment").remove({service_type: "employment"})
+            "Employment": remove("employment")
+                .append("job searching"),
+            "Programs to help you into paid work": remove("employment")
+                .remove({service_type: "employment"})
+                .append("(work skills)")
+                .append("(vocational training)")
+                .append("(employment program)"),
+            "Volunteering": remove("employment")
+                .remove({service_type: "employment"})
                 .append("volunteering"),
         },
     };

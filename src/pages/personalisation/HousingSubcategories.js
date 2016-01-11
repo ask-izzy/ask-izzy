@@ -10,25 +10,34 @@ export default class HousingSubcategories extends BaseQuestion {
         name: "sub-housing",
         question: "Which situation is most like yours?",
         answers: {
-            "On the street":
-                remove("housing -(respite care)")
-                .remove("-(housing information) -hef")
+            "On the street": remove("housing")
+                .remove("-(respite care)")
+                .remove("-(housing information)")
+                .remove("-hef")
                 .append("crisis accommodation iap"),
-            "Couch surfing":
-                remove("housing")
+            "Couch surfing": remove("housing")
                 .append("homeless accommodation iap"),
-            "In a rooming house": remove("housing -(respite care)")
-                .remove("-(housing information) -hef")
+            "In a rooming house": remove("housing")
+                .remove("-(respite care)")
+                .remove("-(housing information)")
+                .remove("-hef")
                 .append("community housing -(rooming house)"),
-            "Private rental": remove("housing -(respite care)")
-                .remove("-(housing information) -hef")
+            "Private rental": remove("housing")
+                .remove("-(respite care)")
+                .remove("-(housing information)")
+                .remove("-hef")
                 .append("transitional accommodation"),
-            "Public housing": remove("housing -(respite care)")
-                .remove("-(housing information) -hef")
-                .append("social housing ")
-                .append("-(public rental) -(public housing)"),
-            "Mortgaged housing": remove("housing -(respite care)")
-                .remove("-(housing information) -hef")
+            "Public housing": remove("housing")
+                .remove("-(respite care)")
+                .remove("-(housing information)")
+                .remove("-hef")
+                .append("social housing")
+                .append("-(public rental)")
+                .append("-(public housing)"),
+            "Mortgaged housing": remove("housing")
+                .remove("-(respite care)")
+                .remove("-(housing information)")
+                .remove("-hef")
                 .append("transitional accommodation"),
         },
     };
