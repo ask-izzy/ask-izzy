@@ -1,6 +1,10 @@
+$appbar-height: 44px;
+$appbar-text-line-height: 42px;
+
+
 .AppBar + * {
     @media screen {
-        padding-top: 40px;
+        padding-top: $appbar-height;
     }
 }
 
@@ -15,7 +19,7 @@
 
     width: 100%;
     max-width: 800px;
-    height: 40px;
+    height: $appbar-height;
     min-height: auto;
 
     background-color: $brand-bg-dark;
@@ -37,7 +41,7 @@
 
         font-size: 16px;
         font-weight: 500;
-        line-height: 38px;
+        line-height: $appbar-text-line-height;
 
         text-align: center;
 
@@ -49,7 +53,9 @@
     .BackButton {
         display: relative;
 
-        height: 40px;
+        min-width: 44px;
+
+        height: $appbar-height;
         padding: 0;
 
         color: $white;
@@ -72,8 +78,8 @@
         }
 
         .ChevronBackIcon {
-            width: 40px;
-            height: 40px;
+            width: $appbar-height;
+            height: $appbar-height;
         }
 
         span {
@@ -83,10 +89,12 @@
 
         .back-label {
 
+            height: $appbar-height;
+
             margin-top: 1px;
 
             font-size: 14px;
-            line-height: 38px;
+            line-height: $appbar-text-line-height;
 
             text-overflow: ellipsis;
 
