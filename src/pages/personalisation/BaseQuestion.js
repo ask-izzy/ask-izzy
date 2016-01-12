@@ -108,7 +108,7 @@ class RemoveSearch extends Search {
         delete this.search.q;
 
         for (const key of Object.keys(this.search)) {
-            if (search[key] == this.search[key]) {
+            if (search[key] === this.search[key]) {
                 delete search[key];
             }
         }
