@@ -16,7 +16,7 @@ Feature: Location search
 
     Scenario: Reset bad location
         When I visit /category/housing
-        Then I should see "I found 3 services for women aged 26 to 64 in Richmond VIC"
+        Then I should see 3 search results for "women aged 26 to 64" in "Richmond VIC"
 
         When I click on "Change your answers"
         And I click on "Where are you?"

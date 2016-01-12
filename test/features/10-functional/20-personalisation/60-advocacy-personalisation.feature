@@ -26,5 +26,5 @@ Feature: Advocacy Personalisation
         When I click on "Housing"
          And I click on "Done"
 
-        Then I should see "I found 1 service in Melbourne VIC"
+        Then I should see 1 search results in "Melbourne VIC"
          And I should see "Eviction advocacy Richmond"
