@@ -64,7 +64,7 @@ class Eligibility extends React.Component {
     renderCatchment(): ?ReactElement {
         const catchment: string = this.props.catchment;
 
-        if (catchment) {
+        if (catchment && !catchment.match(/^open.?$/i)) {
             return this.renderItem(`Located in ${catchment}`);
         }
     }
