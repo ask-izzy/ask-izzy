@@ -12,6 +12,8 @@ import storage from "../storage";
 import AppBar from "../components/AppBar";
 import ButtonListItem from "../components/ButtonListItem";
 import ResultsMap from "../components/ResultsMap";
+import DebugContainer from "../components/DebugContainer";
+import DebugSearch from "../components/DebugSearch";
 import ResultsListPage from "./ResultsListPage";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
@@ -20,6 +22,28 @@ class ResultsPage extends BaseCategoriesPage {
     constructor(props: Object) {
         super(props);
         this.state = {};
+    }
+
+    issParams(): ?Object {
+        // Build the search request.
+        //
+        // If we don't have enough information to build the search request
+        // trigger the personalisation wizard.
+        //
+        // We have to do this once the component is mounted (instead of
+        // in willTransitionTo because the personalisation components will
+        // inspect the session).
+        let request = this.search;
+
+        for (let item of this.personalisationComponents) {
+            request = item.getSearch(request);
+
+            if (!request) {
+                return null;
+            }
+        }
+
+        return request;
     }
 
     componentDidMount(): void {
@@ -56,34 +80,22 @@ class ResultsPage extends BaseCategoriesPage {
             }
         }
 
-        // Build the search request.
-        //
-        // If we don't have enough information to build the search request
-        // trigger the personalisation wizard.
-        //
-        // We have to do this once the component is mounted (instead of
-        // in willTransitionTo because the personalisation components will
-        // inspect the session).
-        let request = this.search;
 
-        for (let item of this.personalisationComponents) {
-            request = item.getSearch(request);
+        const request = this.issParams();
 
-            if (!request) {
-                const sep = this
-                    .props
-                    .location
-                    .pathname
-                    .endsWith("/") ? "" : "/";
+        if (!request) {
+            const sep = this
+                .props
+                .location
+                .pathname
+                .endsWith("/") ? "" : "/";
 
-                this.history.replaceState(
-                    null,
-                    `${this.props.location.pathname}${sep}personalise`,
-                    ""
-                );
-
-                return;
-            }
+            this.history.replaceState(
+                null,
+                `${this.props.location.pathname}${sep}personalise`,
+                ""
+            );
+            return;
         }
 
         iss.search(request)
@@ -183,6 +195,9 @@ class ResultsPage extends BaseCategoriesPage {
                     backMessage={this.backButtonMessage()}
                     onBackTouchTap={this.onBackClick.bind(this)}
                 />
+                <DebugContainer>
+                    <DebugSearch search={this.issParams()} />
+                </DebugContainer>
 
                 <Component
                     ref="component"

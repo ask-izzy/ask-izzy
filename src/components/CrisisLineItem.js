@@ -2,15 +2,14 @@
 
 import React from "react";
 import _ from "underscore";
-import reactMixin from "react-mixin";
 import { Link } from "react-router";
 
-import Debugging from "../mixins/debugging";
 import Phone from "./Phone";
 import fixtures from "../../fixtures/services";
 import iss from "../iss";
+import DebugContainer from "./DebugContainer";
+import DebugQueryScore from "./DebugQueryScore";
 
-/*::`*/@reactMixin.decorate(Debugging)/*::`;*/
 class CrisisLineItem extends React.Component {
 
     static displayName = "CrisisLineItem";
@@ -42,7 +41,9 @@ class CrisisLineItem extends React.Component {
                             </Link>
                         </h3>
                         <Phone {...phone} />
-                        {this.renderDebugging(object._explanation)}
+                        <DebugContainer>
+                            <DebugQueryScore expl={object._explanation} />
+                        </DebugContainer>
                     </div>
                 );
             }

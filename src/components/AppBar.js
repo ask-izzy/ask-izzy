@@ -18,10 +18,13 @@ class AppBar extends React.Component {
 
     render(): ReactElement {
         return (
-            <div className="AppBar">
-                {this.renderBackButton()}
-                <h1 className="title">{this.props.title}</h1>
-                <div className="button-container force-centering" />
+            <div className="AppBarContainer">
+                <div className="AppBar">
+                    {this.renderBackButton()}
+                    <h1 className="title">{this.props.title}</h1>
+                    <div className="button-container force-centering" />
+                </div>
+                <div className="AppBarSpacer" />
             </div>
         );
     }

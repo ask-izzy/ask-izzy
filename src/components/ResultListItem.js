@@ -7,13 +7,14 @@ import reactMixin from "react-mixin";
 
 import icons from "../icons";
 import iss from "../iss";
-import Debugging from "../mixins/debugging";
+
+import DebugContainer from "./DebugContainer";
+import DebugQueryScore from "./DebugQueryScore";
 import OpeningTimes from "./OpeningTimes";
 import LinkListItem from "./LinkListItem";
 import TransportTime from "./TransportTime";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
-/*::`*/@reactMixin.decorate(Debugging)/*::`;*/
 class ResultListItem extends React.Component {
 
     static displayName = "ResultListItem";
@@ -84,7 +85,9 @@ class ResultListItem extends React.Component {
                         : ""}
                     </div>
                 : ""}
-                {this.renderDebugging(object._explanation)}
+                <DebugContainer>
+                    <DebugQueryScore expl={object._explanation} />
+                </DebugContainer>
             </LinkListItem>
 
         );
