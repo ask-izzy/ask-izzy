@@ -2,6 +2,10 @@
 import React from "react";
 import classnames from "classnames";
 
+// See FloatFromBottom.scss
+const floatAnimationDuration = 1000;
+const containerHeightPadding = 20;
+
 class FloatFromBottom extends React.Component {
 
     constructor(props: Object) {
@@ -25,8 +29,14 @@ class FloatFromBottom extends React.Component {
                 * makes scrolling to bottom of screen feel a bit nicer
                 * as you can see that there is definately no more content
                 * hidden under the button
+                *
+                * In addition, wait until animation is finished
+                * before updating height.
                 */
-                containerHeight = this.refs.container.offsetHeight + 20;
+                setTimeout(() => this.setState({
+                        containerHeight: this.refs.container.offsetHeight + containerHeightPadding
+                }), floatAnimationDuration )
+                containerHeight = this.refs.container.offsetHeight + containerHeightPadding;
             }
         }
 
