@@ -8,6 +8,7 @@ import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import icons from "../icons";
 import storage from "../storage";
+import sendEvent from "../google-tag-manager";
 
 import AppBar from "../components/AppBar";
 import ButtonListItem from "../components/ButtonListItem";
@@ -80,6 +81,12 @@ class ResultsPage extends BaseCategoriesPage {
             }
         }
 
+        sendEvent({
+            "event": "searchResults",
+            "searchQuery": this.props.params.search,
+            "searchPage": this.props.params.page,
+            "location": storage.getLocation(),
+        })
 
         const request = this.issParams();
 
