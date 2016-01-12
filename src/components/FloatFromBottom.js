@@ -4,6 +4,7 @@ import classnames from "classnames";
 
 // See FloatFromBottom.scss
 const floatAnimationDuration = 1000;
+// Pad the container so it's obvious that there's no content past the end.
 const containerHeightPadding = 20;
 
 class FloatFromBottom extends React.Component {
@@ -34,9 +35,11 @@ class FloatFromBottom extends React.Component {
                 * before updating height.
                 */
                 setTimeout(() => this.setState({
-                        containerHeight: this.refs.container.offsetHeight + containerHeightPadding
-                }), floatAnimationDuration )
-                containerHeight = this.refs.container.offsetHeight + containerHeightPadding;
+                    containerHeight: this.refs.container.offsetHeight +
+                        containerHeightPadding,
+                }), floatAnimationDuration)
+                containerHeight = this.refs.container.offsetHeight +
+                    containerHeightPadding;
             }
         }
 
