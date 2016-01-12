@@ -2,6 +2,11 @@
 import React from "react";
 import classnames from "classnames";
 
+// See FloatFromBottom.scss
+const floatAnimationDuration = 1000;
+// Pad the container so it's obvious that there's no content past the end.
+const containerHeightPadding = 20;
+
 class FloatFromBottom extends React.Component {
 
     constructor(props: Object) {
@@ -19,7 +24,22 @@ class FloatFromBottom extends React.Component {
 
             elementScrolledOffscreen = bottomOfScreen < topOfElement;
             if (elementScrolledOffscreen) {
-                containerHeight = this.refs.container.offsetHeight;
+                /*
+                * Set container height for adding padding to parent
+                * to slightly larger than the original object -
+                * makes scrolling to bottom of screen feel a bit nicer
+                * as you can see that there is definately no more content
+                * hidden under the button
+                *
+                * In addition, wait until animation is finished
+                * before updating height.
+                */
+                setTimeout(() => this.setState({
+                    containerHeight: this.refs.container.offsetHeight +
+                        containerHeightPadding,
+                }), floatAnimationDuration)
+                containerHeight = this.refs.container.offsetHeight +
+                    containerHeightPadding;
             }
         }
 
@@ -27,6 +47,10 @@ class FloatFromBottom extends React.Component {
             containerHeight: containerHeight,
             elementScrolledOffscreen: elementScrolledOffscreen,
         });
+    }
+
+    containerHeight(): number {
+        return this.state.containerHeight || 0;
     }
 
     render(): ReactElement {
@@ -46,16 +70,19 @@ class FloatFromBottom extends React.Component {
                 >
                     {this.props.children}
                 </div>
-                {/*
-                  * The following makes the parent element
-                  * tall enough when floating the child elements
-                  * so that they don't prevent scrolling to the bottom.
-                  */}
-                <div
-                    style={{height: this.state.containerHeight}}
-                >
-                    &nbsp;
-                </div>
+                {  /*
+                    * The following makes the parent element
+                    * tall enough when floating the child elements
+                    * so that they don't prevent scrolling to the bottom.
+                    */
+                    this.props.includeOffsetElement && (
+                        <div
+                            style={{height: this.state.containerHeight}}
+                        >
+                            &nbsp;
+                        </div>
+                    )
+                }
             </div>
         );
     }

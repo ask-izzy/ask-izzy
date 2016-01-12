@@ -9,6 +9,11 @@ import storage from "../storage";
 
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
+    constructor(props: Object) {
+        super(props);
+        this.state = {floatingContainerHeight: 0};
+    }
+
     goBack(): void {
         super.nextStep();
         if (this.currentComponent) {
@@ -30,6 +35,16 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
             "/",
             {}
         );
+    }
+
+    componentDidMount(): void {
+        if (this.refs.floatingDone &&
+            this.refs.floatingDone.containerHeight) {
+            this.setState({
+                floatingContainerHeight:
+                    this.refs.floatingDone.containerHeight(),
+            });
+        }
     }
 
     render(): ReactElement {
@@ -62,45 +77,67 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                             </div>
                         }
                     />
-                    <div className="List">{
-                        this.personalisationComponents
-                            .map((component, index) =>
-                                <components.LinkListItem
-                                    key={index}
-                                    className="SummaryItem"
-                                    to={this.urlFor(
-                                        `personalise/summary/${
-                                            component.defaultProps.name
-                                        }`
-                                    )}
-                                    primaryText={component.summaryLabel}
-                                    secondaryText={component.summaryValue}
-                                />
-                        )
-                    }</div>
 
-                    <FloatFromBottom>
-                        <div className="Done">
-                            <div className="done-button">
-                                <components.FlatButton
-                                    label="Done"
-                                    onClick={this.goBack.bind(this)}
-                                />
+                    <div className="List">
+                        {
+                            this.personalisationComponents
+                                .map((component, index) =>
+                                    <components.LinkListItem
+                                        key={index}
+                                        className="SummaryItem"
+                                        to={this.urlFor(
+                                            `personalise/summary/${
+                                                component.defaultProps.name
+                                            }`
+                                        )}
+                                        primaryText={component.summaryLabel}
+                                        secondaryText={component.summaryValue}
+                                    />
+                            )
+                        }
+
+                        <FloatFromBottom
+                            ref="floatingDone"
+                            includeOffsetElement={false}
+                        >
+                            <div className="Done">
+                                <div className="done-button">
+                                    <components.FlatButton
+                                        label="Done"
+                                        onClick={this.goBack.bind(this)}
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        </FloatFromBottom>
 
                         <div className="ClearResults">
-                            <div>Delete your saved answers here.<br/>
-                                    This cannot be undone.</div>
+                            <div>
+                                Want me to forget what I know about you?
+                            </div>
                             <div className="clear-button">
                                 <components.FlatButton
-                                    className="text-link"
                                     label="Delete all answers"
                                     onClick={this.clearAll.bind(this)}
                                 />
                             </div>
                         </div>
-                    </FloatFromBottom>
+
+                        {/*
+                          * The following makes the parent element
+                          * tall enough when floating the child elements
+                          * so that they don't prevent
+                          * scrolling to the bottom.
+                          */}
+                        <div
+                            style={{
+                                height: this.state.floatingContainerHeight,
+                            }}
+                        >
+                            &nbsp;
+                        </div>
+
+                    </div>
+
                 </div>}
             </div>
         );

@@ -70,11 +70,7 @@
     }
 
     .ClearResults {
-        margin-top: 10px;
-        margin-right: 20px;
-        margin-bottom: 20px;
-        margin-left: 20px;
-        padding-top: 20px;
+        padding: 20px;
         border-top: 1px solid $list-item-hairline;
 
         color: $brand-text-mid;
@@ -85,7 +81,8 @@
 
     .clear-button {
         button {
-            color: $brand-error;
+            background-color: $brand-error;
+            color: $white;
         }
     }
 
