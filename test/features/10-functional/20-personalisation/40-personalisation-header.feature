@@ -20,4 +20,4 @@ Feature: Personalisation header
          And I click on "Neither/Both/Something else"
          And I click on "26 to 39"
          And I click on "None of these" # Demographics
-        Then I should see "3" search results for "people aged 26 to 39" in "Melbourne VIC"
+        Then I should see 3 search results for "people aged 26 to 39" in "Melbourne VIC"

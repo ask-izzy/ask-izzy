@@ -40,7 +40,7 @@ Feature: Personalisation
         Then I should see "Do any of these apply to you?"
 
         When I click on "None of these"
-        Then I should see "3" search results for "people aged 25 or younger" in "Richmond, Victoria"
+        Then I should see 3 search results for "people aged 25 or younger" in "Richmond, Victoria"
 
         When I click back from the title bar
         Then I should see "The A to Z directory of homeless help"
