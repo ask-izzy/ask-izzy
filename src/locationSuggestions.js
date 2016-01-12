@@ -128,3 +128,6 @@ function *injectSuffixes(
         yield completion;
     }
 }
+
+export {injectSuffixes as injectSuffixes};
+export {filterCompletions as filterCompletions};
