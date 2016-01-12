@@ -20,11 +20,18 @@ import {ResultsPageListing, ResultsPageMap} from "./pages/ResultsPage";
 import ServicePage from "./pages/ServicePage";
 
 export function makeTitle(template: ?string, params: Object): string {
+    let unslug = (str) =>
+        str.replace("-", " ").split(" ").map(titleize).join(" ")
+
     let title = template || "";
 
-    Object.keys(params).forEach((key) =>
-        title = title.replace(`:${key}`, titleize(params[key]))
-    );
+    Object.keys(params).forEach((key) => {
+        // FIXME This is a hack. Rewrite it when we're not about to launch.
+        if (key == "search") {
+            title = title.replace(":page", unslug(params[key]));
+        }
+        title = title.replace(`:${key}`, unslug(params[key]));
+    });
 
     return title ? `${title} | Ask Izzy` : "Ask Izzy";
 }
@@ -65,12 +72,12 @@ export default (
             <Route
                 path={`${str}`}
                 component={ResultsPageListing}
-                title=":page in :suburb, :state | Ask Izzy"
+                title=":page in :suburb, :state"
             />,
             <Route
                 path={`${str}/map`}
                 component={ResultsPageMap}
-                title="Map of :page in :suburb, :state | Ask Izzy"
+                title="Map of :page in :suburb, :state"
             />,
             <Route
                 path={`${str}/map/personalise`}
