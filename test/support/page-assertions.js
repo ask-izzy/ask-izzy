@@ -83,7 +83,7 @@ function withRetries(other: Function): Function {
         } catch (error) {
             if (retries < 3) {
                 retries++;
-                await retry()
+                await retry(...arguments)
             } else {
                 throw error;
             }
