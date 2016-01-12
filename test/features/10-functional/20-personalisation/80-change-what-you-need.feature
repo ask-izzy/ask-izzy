@@ -39,7 +39,7 @@ Feature: Change your personalisation settings
 
         When I search for "carlt"
         And I click on "Carlton"
-        And I click on "Done"
+        And I click on the done button
 
         Then I should see "Change your answers here"
         Then I should see the results
@@ -131,7 +131,7 @@ Feature: Change your personalisation settings
 
         When I click on "Do any of these apply to you?"
         And I click on "Indigenous"
-        And I click on "None of these"
+        And I click on the done button
         Then I should see "Change your answers here"
         Then I should see the results
         ----------------------------------------------------------------
@@ -169,5 +169,5 @@ Feature: Change your personalisation settings
          And I should be at /
         When I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
-        When I click on "Okay"
+         And I click on the done button
         Then I should not see "Melbourne VIC"

@@ -17,11 +17,11 @@ Feature: Skip personalisation settings
         When I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
-        When I click on "Okay"
+        When I click on the done button
         Then I should see "Do you identify as…"
 
         # Didn't answer the question
-        When I click on "Skip"
+        When I click on the done button
 
         When I click on "Change your answers"
         Then I should see "Change your answers here"

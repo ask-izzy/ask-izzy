@@ -24,7 +24,7 @@ Feature: Location search
         # The following step is needed for test to pass on IE
         # It means the ajax for autocomplete suggestions has finished
         Then I should see "Carlton"
-        And I click on "Done"
+        When I click on the done button
         Then I should see "carlt"
 
         When I click back from the title bar
