@@ -112,7 +112,6 @@ function yamlConverter(str: string, done: callback): void {
  * Parses a number out of a yadda step
  */
 function numberConverter(str: string, done: callback): void {
-    console.log(str);
     try {
         done(null, parseInt(str));
     } catch (error) {

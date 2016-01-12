@@ -9,7 +9,7 @@ import Yadda from "yadda";
 import { titleize } from "underscore.string";
 import _ from "underscore";
 import Webdriver from "selenium-webdriver";
-
+import { documentReady } from "./browser";
 declare var IzzyStorage: Object;
 
 import dictionary from "../support/dictionary";
@@ -39,8 +39,20 @@ module.exports = (function() {
                unpromisify(_.partial(setAgeTo, "26 to 64")))
         .given("I am 77 years old",
                unpromisify(_.partial(setAgeTo, "65 or older")))
+        .when("I click on the done button",
+               unpromisify(clickDoneButton))
         ;
 })();
+
+async function clickDoneButton(): Promise<void> {
+    // Use JS for this because the element
+    // is animated and seleniums click events miss
+    await this.driver.executeScript(() => {
+        document.querySelector(".done-button button").click()
+    });
+
+    await documentReady(this.driver);
+}
 
 async function setSleepTonight(answer: string): Promise<void> {
     if (answer == "somewhere") {
