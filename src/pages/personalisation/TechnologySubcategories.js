@@ -14,7 +14,7 @@ export default class TechnologySubcategories extends BaseMultiQuestion {
             "Finding a computer": remove("wifi internet computer classes")
                 .append("computer internet kiosk"),
             "Help to use a computer": remove("wifi internet")
-                .append("-employment -"school" -preschool"),
+                .append('-employment -"school" -preschool'),
             "Somewhere to charge": remove("wifi internet computer classes")
                 .append("recharge -cardiac"),
         },
