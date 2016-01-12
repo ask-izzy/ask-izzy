@@ -19,12 +19,19 @@ class FloatFromBottom extends React.Component {
 
             elementScrolledOffscreen = bottomOfScreen < topOfElement;
             if (elementScrolledOffscreen) {
-                containerHeight = this.refs.container.offsetHeight;
+                /*
+                * Set container height for adding padding to parent
+                * to slightly larger than the original object -
+                * makes scrolling to bottom of screen feel a bit nicer
+                * as you can see that there is definately no more content
+                * hidden under the button
+                */
+                containerHeight = this.refs.container.offsetHeight + 20;
             }
         }
 
         this.setState({
-            containerHeight: containerHeight + 20,
+            containerHeight: containerHeight,
             elementScrolledOffscreen: elementScrolledOffscreen,
         });
     }
@@ -57,7 +64,7 @@ class FloatFromBottom extends React.Component {
                     */
                     this.props.includeOffsetElement && (
                         <div
-                            style={{height: this.state.containerHeight + 10}}
+                            style={{height: this.state.containerHeight}}
                         >
                             &nbsp;
                         </div>
