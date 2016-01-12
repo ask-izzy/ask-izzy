@@ -9,7 +9,7 @@ import Yadda from "yadda";
 import { titleize } from "underscore.string";
 import _ from "underscore";
 import Webdriver from "selenium-webdriver";
-import {documentReady} from "./browser";
+import { documentReady } from "./browser";
 declare var IzzyStorage: Object;
 
 import dictionary from "../support/dictionary";
