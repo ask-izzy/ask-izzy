@@ -4,7 +4,10 @@
 /* eslint-disable no-use-before-define, prefer-arrow-callback */
 
 import assert from "assert";
-import { injectSuffixes, filterCompletions } from "../../src/locationSuggestions";
+import {
+    injectSuffixes,
+    filterCompletions,
+} from "../../src/locationSuggestions";
 
 describe("Location suggestions", function() {
     describe("filtering completions", function() {
@@ -12,7 +15,7 @@ describe("Location suggestions", function() {
         function completion(
             types: Array<string>,
             terms: Array<string>
-        ): GoogleCompletion {
+        ): Object {
             return {
                 types,
                 terms: terms.map((value) => ({value})),
@@ -31,7 +34,10 @@ describe("Location suggestions", function() {
         });
 
         it("includes postcodes", function() {
-            const completions = [completion(["postal_code"], [state, suburb])];
+            const completions = [completion(
+                ["postal_code"],
+                [state, suburb]
+            )];
 
             assert.deepEqual(
                 Array.from(filterCompletions(completions)),
