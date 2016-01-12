@@ -2,6 +2,9 @@
 import React from "react";
 import classnames from "classnames";
 
+// See FloatFromBottom.scss
+const floatAnimationDuration = 1000;
+
 class FloatFromBottom extends React.Component {
 
     constructor(props: Object) {
@@ -19,12 +22,18 @@ class FloatFromBottom extends React.Component {
 
             elementScrolledOffscreen = bottomOfScreen < topOfElement;
             if (elementScrolledOffscreen) {
+                // Update the containerHeight after the animation completes.
+                setTimeout(() => this.setState({
+                        containerHeight: this.refs.container.offsetHeight
+                    }),
+                    floatAnimationDuration
+                )
                 containerHeight = this.refs.container.offsetHeight;
             }
         }
 
         this.setState({
-            containerHeight: containerHeight + 20,
+            containerHeight: containerHeight,
             elementScrolledOffscreen: elementScrolledOffscreen,
         });
     }
@@ -57,7 +66,7 @@ class FloatFromBottom extends React.Component {
                     */
                     this.props.includeOffsetElement && (
                         <div
-                            style={{height: this.state.containerHeight + 10}}
+                            style={{height: this.state.containerHeight}}
                         >
                             &nbsp;
                         </div>
