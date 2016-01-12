@@ -20,12 +20,10 @@ module.exports = (function() {
               unpromisify(seeTheResultsIn))
         .then('I should see a hotline in position $NUM which says "$STRING"',
               unpromisify(hotlinePositionAndText))
-        .then(
-            'I should see $NUMBER search results' +
+        .then("I should see $NUMBER search results " +
             'for "$STRING" in "$STRING"',
             unpromisify(assertNumSearchResults))
-        .then(
-            'I should see $NUMBER search results in "$STRING"',
+        .then('I should see $NUMBER search results in "$STRING"',
             unpromisify(assertNumSearchResults))
         .then('I should see "$STRING" before first hotline',
               unpromisify(assertHotlineHeading))
@@ -108,11 +106,11 @@ async function assertNumSearchResults(
         By.css(".LogoHeader")
     );
     let text = await element.getText();
-
+    let services = count != 1 ? "services" : "service"
 
     assert.equal(
         text,
-        `I found ${count} ${count != 1 ? "services" : "service"}${target} in ${location}`
+        `I found ${count} ${services}${target} in ${location}`
     );
 }
 
