@@ -21,7 +21,7 @@ import ServicePage from "./pages/ServicePage";
 
 export function makeTitle(template: ?string, params: Object): string {
     let unslug = (str) =>
-        str.replace("-", " ").split(" ").map(titleize).join(" ")
+        str.replace("-", " ").split(" ").map(titleize).join(" ");
 
     let title = template || "";
 
