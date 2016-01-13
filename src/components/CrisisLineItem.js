@@ -40,7 +40,10 @@ class CrisisLineItem extends React.Component {
                                 {object.site.name}
                             </Link>
                         </h3>
-                        <Phone {...phone} />
+                        <Phone
+                            {...phone}
+                            crisis={true}
+                        />
                         <DebugContainer>
                             <DebugQueryScore expl={object._explanation} />
                         </DebugContainer>

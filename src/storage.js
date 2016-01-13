@@ -51,7 +51,8 @@ const Storage = {
     setItem(key: string, obj: string|number|boolean): void {
         let event = {};
 
-        event[`custom-${key}`] = obj;
+        event[key] = obj;
+        event[`personalize-${key}`] = obj;
         sendEvent(event);
         persistentStore.setItem(key, `${obj}`);
     },
