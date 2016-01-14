@@ -9,6 +9,8 @@
 import {
     persistentStore,
     sessionStore,
+    switchToPrivateMode,
+    clearPrivateMode,
 } from "./storage/polyfill";
 
 import sendEvent from "./google-tag-manager";
@@ -57,6 +59,11 @@ const Storage = {
     },
 
     setItem(key: string, obj: string|number|boolean): void {
+        if ((key == "demographics") &&
+            `${obj}`.match(/Escaping family violence/)) {
+            switchToPrivateMode();
+        }
+
         let event = {};
 
         event[key] = obj;
@@ -92,6 +99,7 @@ const Storage = {
     clear(): void {
         persistentStore.clear();
         sessionStore.clear();
+        clearPrivateMode();
     },
 
 }
