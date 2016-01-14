@@ -2,6 +2,7 @@
 
 import React from "react";
 import _ from "underscore";
+import _string from "underscore.string";
 
 import fixtures from "../../fixtures/services";
 
@@ -78,8 +79,8 @@ class Eligibility extends React.Component {
     renderEligibility(eligibility: ?string): Array<?ReactElement> {
         const eligibilities = _.uniq(
             (eligibility || "")
-                .split("\n")
-                .map((str) => str.trim())
+                .split(/\n|;/g)
+                .map((str) => _string.capitalize(str.trim()))
         );
 
         return _.compact(_(eligibilities).map(this.renderItem));
