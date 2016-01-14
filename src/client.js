@@ -92,6 +92,7 @@ if (typeof debugEvent.initCustomEvent == "function") {
 }
 
 window.pi = function() {
-    window.debugQueries = true;
+    storage.setDebug(!storage.getDebug());
+
     window.dispatchEvent(debugEvent);
 }
