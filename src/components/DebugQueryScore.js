@@ -7,6 +7,10 @@ class DebugQueryScore extends React.Component {
     render(): ReactElement {
         const {expl} = this.props;
 
+        if (!expl) {
+            return <div className="DebugQueryScore" />
+        }
+
         return (
             <div className="DebugQueryScore">
                 <span className="description">{expl.description}</span>
