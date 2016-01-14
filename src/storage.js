@@ -15,6 +15,14 @@ import sendEvent from "./google-tag-manager";
 
 const Storage = {
 
+    getDebug(): boolean {
+        return this.getItem("debug") == "true";
+    },
+
+    setDebug(debug: boolean): void {
+        this.setItem("debug", debug);
+    },
+
     getHistoryLength(): number {
         return parseInt(sessionStore.getItem("historyLength") || "") || 0;
     },

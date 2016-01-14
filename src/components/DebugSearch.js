@@ -7,6 +7,10 @@ class DebugQueryScore extends React.Component {
     render(): ReactElement {
         const {search} = this.props;
 
+        if (!search) {
+            return <div className="DebugSearch"/>;
+        }
+
         return (
             <div className="DebugSearch">
                 {Object.keys(search).map((key) =>

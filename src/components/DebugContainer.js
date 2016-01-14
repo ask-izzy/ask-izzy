@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import storage from "../storage";
 
 class DebugContainer extends React.Component {
 
@@ -22,7 +23,7 @@ class DebugContainer extends React.Component {
     }
 
     render(): ReactElement {
-        if (!this.window().debugQueries) {
+        if (!storage.getDebug()) {
             return <span />;
         }
 
