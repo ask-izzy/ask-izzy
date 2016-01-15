@@ -1,7 +1,7 @@
 /* @flow */
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
-import { append, remove } from "./BaseQuestion";
+import { remove } from "./BaseQuestion";
 
 export default class HealthSubcategories extends BaseMultiQuestion {
     static title = "Health";
