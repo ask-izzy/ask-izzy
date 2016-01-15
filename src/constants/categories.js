@@ -111,7 +111,7 @@ const categories:Array<Category> = [
         byline: "Emergency funds, bills etc",
         icon: icons.Money,
         search: {
-            q: "financial aid -(coordinating bodies)",
+            q: "financial aid -(coordinating bodies) -grants",
         },
         personalisation: [
             personalisation.Location,
