@@ -10,7 +10,6 @@ export default class AddictionSubcategories extends BaseMultiQuestion {
         name: "sub-addiction",
         question: "What sort of help?",
         answers: {
-            "Detox": remove("substance abuse").append("detoxification"),
             "Rehab": append("rehabilitation"),
             "Drugs": remove("substance abuse").append("drugs"),
             "Alcohol": remove("substance abuse").append("alcohol"),
