@@ -7,7 +7,7 @@ import ReactDOMServer from "react-dom/server";
 import { match, RoutingContext } from "react-router";
 import url from "url";
 import routes, { makeTitle } from "../routes";
-
+import badRouteParams from "./not_found";
 import HtmlDocument from "./HtmlDocument";
 
 let webpackStats;
@@ -15,6 +15,7 @@ let webpackStats;
 if (process.env.NODE_ENV === "production") {
     webpackStats = require("./webpack-stats.json");
 }
+
 
 export default function render(req, res, next) {
     try {
@@ -82,6 +83,10 @@ export default function render(req, res, next) {
             }
         )
     } catch (error) {
+        if (error === badRouteParams) {
+            res.status(404).send("Not found");
+        }
+
         next(error);
     }
 }
