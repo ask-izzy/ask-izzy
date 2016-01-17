@@ -162,7 +162,8 @@ const categories:Array<Category> = [
         byline: "Everyday skills & training",
         icon: icons.Skills,
         search: {
-            q: "life skills education -(coordinating bodies)",
+            q: "life skills education -(coordinating bodies)" +
+                " -chsp -hacc",
         },
         personalisation: [
             personalisation.Location,
