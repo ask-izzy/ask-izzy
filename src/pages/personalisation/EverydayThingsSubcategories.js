@@ -18,7 +18,7 @@ export default class EverydayThingsSubcategories extends BaseMultiQuestion {
             "Clothes": remove("material aid").append("clothes"),
             "Showers": append("showers"),
             "Personal products":
-                append("toiletries sanitary products"),
+                append("toiletries sanitary products tampons"),
             "Laundry": append("laundry facilities washing drying"),
             "Household goods": append("household goods"),
             "Storage lockers": remove("material aid")
