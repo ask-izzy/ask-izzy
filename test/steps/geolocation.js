@@ -35,7 +35,7 @@ async function mockGeolocation(): Promise<void> {
         function mockGeolocation_(object) {
             console.log("Mocking geolocation with", object);
             if (typeof Object.defineProperty == "function") {
-                /* flow:disable */
+                // flow:disable
                 Object.defineProperty(navigator, "geolocation", {
                     get: () => {
                         return object;

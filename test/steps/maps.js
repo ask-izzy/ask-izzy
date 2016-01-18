@@ -13,8 +13,6 @@ import { By } from "selenium-webdriver";
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
 
-declare var google: Google;
-
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .given("I'm watching map events", unpromisify(instrumentMap))
@@ -42,9 +40,7 @@ module.exports = (function() {
  *
  * @returns {Promise} promise that resolves when the script executes.
  */
-async function instrumentDistanceMatrix(
-    results: Array<{}>
-): Promise<void> {
+async function instrumentDistanceMatrix(results) {
     await this.driver.executeScript((results) => {
         google.maps.DistanceMatrixService = function() {
             return {
@@ -65,7 +61,7 @@ async function instrumentDistanceMatrix(
  * @returns {Promise} a promise that resolves when the link is identified and
  * clicked.
  */
-async function clickMapLink(): Promise<void> {
+async function clickMapLink() {
     await this.driver.executeScript(() => window.scrollTo(0, 0))
     await this.driver.findElement(
         By.css(".ViewOnMapButton")
@@ -79,9 +75,7 @@ async function clickMapLink(): Promise<void> {
  *
  * @returns {Promise} promise that resolves when the script executes.
  */
-async function instrumentAutocomplete(
-    results: Array<{suburb: string, state: string}>
-): Promise<void> {
+async function instrumentAutocomplete(results) {
     await this.driver.executeScript((results) => {
         google.maps.places.AutocompleteService = function() {
             return {
@@ -106,7 +100,7 @@ async function instrumentAutocomplete(
  *
  * @returns {Promise} promise that resolves when the script executes.
  */
-async function instrumentMap(): Promise<void> {
+async function instrumentMap() {
     await this.driver.executeScript(() => {
         /* Instrument Map */
         let RealMap = google.maps.Map;
@@ -142,13 +136,13 @@ async function instrumentMap(): Promise<void> {
     });
 }
 
-async function clickMap(): Promise<void> {
+async function clickMap() {
     await this.driver.executeScript(() => {
         google.maps.event.trigger(google.maps.maps[0], "click");
     });
 }
 
-async function clickMarker(title: string): Promise<void> {
+async function clickMarker(title) {
     await this.driver.executeScript(title => {
         for (let marker of google.maps.markers) {
             if (title == marker.getTitle()) {
@@ -161,7 +155,7 @@ async function clickMarker(title: string): Promise<void> {
     }, title);
 }
 
-async function assertMap(): Promise<void> {
+async function assertMap() {
     // Wait until the map appears
     await this.driver.wait(() =>
         this.driver.executeScript(
@@ -176,7 +170,7 @@ async function assertMap(): Promise<void> {
     assert.equal(visible, true);
 }
 
-async function assertGoogleMapsLink(text: string) {
+async function assertGoogleMapsLink(text) {
     const selector = By.partialLinkText(text);
     let link = await this.driver.findElement(selector);
     let visible = await link.isDisplayed();
@@ -189,7 +183,7 @@ async function assertGoogleMapsLink(text: string) {
     assert(href.match(sel), "Expected a link to google maps");
 }
 
-async function assertMarkers(table: Array<Object>): Promise<void> {
+async function assertMarkers(table) {
     let markers = await this.driver.executeScript(
         () => google.maps.markers.map(marker => {
             let position = marker.getPosition();

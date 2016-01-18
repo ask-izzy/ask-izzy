@@ -10,8 +10,7 @@ import ViewOnMapButton from "../components/ViewOnMapButton";
 
 class ResultsListPage extends React.Component {
 
-    // flow:disable not supported yet
-    get results(): Array<iss.issService> {
+    get results(): Array<Object> {
         let objects, index;
 
         if (this.props.objects) {

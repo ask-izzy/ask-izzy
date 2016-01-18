@@ -64,8 +64,7 @@ class ResultsMap extends React.Component {
         });
     }
 
-    // flow:disable
-    get sites(): Array<Array<iss.issService>> {
+    get sites(): Array<Array<iss.Service>> {
         if (!this.props.objects) {
             return [];
         } else if (this._sites) {

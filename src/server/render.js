@@ -28,7 +28,7 @@ export default function render(req, res, next) {
             // 'localhost' to 'webpack-stats.json'. To enable use
             // from other domains, we rewrite these asset links
             // to use the same domain as the original request.
-            const replaceHostname = (assetUrl: string) => {
+            const replaceHostname = (assetUrl) => {
                 let _url = url.parse(assetUrl);
 
                 _url.host = `${req.hostname}:${_url.port || 80}`;

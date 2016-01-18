@@ -36,7 +36,6 @@ class ResultListItem extends React.Component {
      * nMoreServiceProvisions:
      * The number of related services minus the 4 relatedServices.
      */
-    /* flow:disable */
     get nMoreServiceProvisions(): number {
         return Math.max(0,
                         this.props.object.serviceProvisions.length -

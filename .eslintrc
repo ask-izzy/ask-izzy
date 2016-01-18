@@ -107,15 +107,6 @@
         "react/react-in-jsx-scope": 2,
         "react/require-extension": 2,
         "react/self-closing-comp": 2,
-        "react/sort-comp": [2, {
-            order: [
-                'lifecycle',
-                'everything-else',
-                '/^on.+$/',
-                'render',
-                '/render.+$/',
-            ],
-        }],
         "react/wrap-multilines": 2
     }
 }

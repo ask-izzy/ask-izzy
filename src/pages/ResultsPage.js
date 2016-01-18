@@ -37,10 +37,12 @@ class ResultsPage extends BaseCategoriesPage {
         let request = this.search;
 
         for (let item of this.personalisationComponents) {
-            request = item.getSearch(request);
+            if (typeof item.getSearch == "function") {
+                request = item.getSearch(request);
 
-            if (!request) {
-                return null;
+                if (!request) {
+                    return null;
+                }
             }
         }
 
@@ -136,7 +138,6 @@ class ResultsPage extends BaseCategoriesPage {
             });
     }
 
-    // flow:disable not supported yet
     get loading(): boolean {
         return !(this.state.meta || this.state.error);
     }
@@ -246,8 +247,8 @@ class ResultsPage extends BaseCategoriesPage {
 export default ResultsPage;
 
 export class ResultsPageListing extends ResultsPage {
-    // flow:disable until flow can track inheritance for ReactComponent
-    component(): ReactComponent {
+
+    component(): ReactClass {
         return ResultsListPage;
     }
 
@@ -257,8 +258,8 @@ export class ResultsPageListing extends ResultsPage {
 }
 
 export class ResultsPageMap extends ResultsPage {
-    // flow:disable until flow can track inheritance for ReactComponent
-    component(): ReactComponent {
+
+    component(): ReactClass {
         return ResultsMap;
     }
 

@@ -8,7 +8,7 @@ import * as iss from "../iss";
 
 import personalisation from "../pages/personalisation";
 
-class Category {
+export class Category {
     key: string;
     name: string;
     byline: string;

@@ -58,7 +58,6 @@ class Location extends React.Component {
         return this.answer && `in ${this.answer}`
     }
 
-    // flow:disable
     static get answer(): string {
         return storage.getLocation();
     }
@@ -87,7 +86,6 @@ class Location extends React.Component {
 
     static summaryLabel = "Where are you?";
 
-    // flow:disable
     static get summaryValue(): string {
         return storage.getLocation();
     }

@@ -16,7 +16,7 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 
-class BaseMultiQuestion extends BaseQuestion {
+class BaseMultiQuestion extends React.Component {
     static propTypes = BaseQuestion.propTypes;
 
     renderDoneButton(): ?ReactElement {
@@ -38,14 +38,12 @@ class BaseMultiQuestion extends BaseQuestion {
         )
     }
 
-    // flow:disable
     get selected(): Set<string> {
         return this.state.answers || new Set(
             storage.getJSON(this.props.name) || []
         );
     }
 
-    // flow:disable
     static get summaryValue(): string {
         if (!this.answer) {
             return "None selected";
@@ -62,9 +60,8 @@ class BaseMultiQuestion extends BaseQuestion {
         }
     }
 
-    // flow:disable
-    static get answer(): ?Array<string> {
-        return storage.getJSON(this.defaultProps.name);
+    static get answer(): Array<string> {
+        return storage.getJSON(this.defaultProps.name) || [];
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {

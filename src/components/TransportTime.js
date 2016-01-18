@@ -27,14 +27,18 @@ class TransportTime extends React.Component {
         compact: {
             location: new Location(fixtures.ixa.location, {
                 mode: "WALK",
-                duration: {text: "15 minutes"},
+                duration: {text: "15 minutes", value: 1},
+                distance: {text: "", value: 1},
+                status: "",
             }),
             compact: true,
         },
         expanded: {
             location: new Location(fixtures.ixa.location, {
                 mode: "TRANSIT",
-                duration: {text: "15 minutes"},
+                duration: {text: "15 minutes", value: 1},
+                distance: {text: "", value: 1},
+                status: "",
             }),
             compact: false,
         },

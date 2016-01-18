@@ -1,4 +1,4 @@
-/* @flow */
+/* flow:disable */
 
 // Load different configs for production or development
 

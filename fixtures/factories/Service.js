@@ -68,11 +68,11 @@ function defaults() {
     };
 }
 
-export function ServiceParams(opts: ?Object) {
+export function ServiceParams(opts: ?Object): Service {
     return Merge(defaults(), opts);
 }
 
-export default function ServiceFactory(opts: ?Object) {
+export default function ServiceFactory(opts: ?Object): Service {
     return new Service(ServiceParams(opts));
 }
 
