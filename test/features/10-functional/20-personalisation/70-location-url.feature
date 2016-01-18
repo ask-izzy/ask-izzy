@@ -16,6 +16,6 @@ Feature: Show location in url
         Then I should see "Get your current location"
         When I search for "carlt"
         And I click on "Carlton"
-        And I click on the done button
+        Then I should see "Change your answers here"
         And I click on the done button
         Then I should be at /search/housing/in/Carlton-Victoria/

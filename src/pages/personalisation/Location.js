@@ -194,6 +194,7 @@ class Location extends React.Component {
                     locationCoords: location,
                 });
                 this.setLocationName(name);
+                setTimeout(this.props.onDoneTouchTap, 200);
             })
 
             .catch(error => {
@@ -207,7 +208,6 @@ class Location extends React.Component {
 
     onNextStep(): void {
         storage.setLocation(this.state.locationName || "");
-
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object): void {
@@ -351,6 +351,7 @@ class Location extends React.Component {
                                 this.setState({
                                     autocompletions: [],
                                 });
+                                setTimeout(this.props.onDoneTouchTap, 200);
                             }}
                         />
                     )
@@ -362,23 +363,8 @@ class Location extends React.Component {
                         </div>
                     : ""
                 }
-                {this.renderDoneButton()}
             </div>
         );
-    }
-
-    renderDoneButton(): ?ReactElement {
-        return (
-            <div>
-                <div className="done-button">
-                    <components.FlatButton
-                        label="Done"
-                        onClick={this.props.onDoneTouchTap}
-                        disabled={!this.state.locationName}
-                    />
-                </div>
-            </div>
-        )
     }
 
 }

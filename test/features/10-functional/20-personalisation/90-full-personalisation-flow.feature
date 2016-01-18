@@ -21,10 +21,6 @@ Feature: Personalisation
         When I click on "Get your current location"
 
         Given I'm at 37.823S 144.998E
-        Then I should see "Found your location"
-        And search box should contain "Richmond, Victoria"
-
-        When I click on the done button
         Then I should see "Do you have somewhere safe to sleep tonight?"
 
         When I click on "Yes"
@@ -56,10 +52,6 @@ Feature: Personalisation
         When I click on "Get your current location"
 
         Given I'm at 37.823S 144.998E
-        Then I should see "Found your location"
-        And search box should contain "Richmond, Victoria"
-
-        When I click on the done button
         Then I should see "Do you have somewhere safe to sleep tonight?"
 
         When I click on "No"
@@ -85,8 +77,4 @@ Feature: Personalisation
         When I click on "Get your current location"
 
         Given I'm at 37.823S 144.998E
-        Then I should see "Found your location"
-        And search box should contain "Richmond, Victoria"
-
-        When I click on the done button
         Then I should see 3 search results in "Richmond, Victoria"
