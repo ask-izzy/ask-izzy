@@ -130,16 +130,16 @@ async function setSubcategoriesNone(
 ): Promise<void> {
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript(() => {
-        IzzyStorage.setItem("sub-addiction", "[]");
-        IzzyStorage.setItem("sub-counselling", "[]");
-        IzzyStorage.setItem("sub-everyday-things", "[]");
-        IzzyStorage.setItem("sub-health", "[]");
+        IzzyStorage.setItem("sub-addiction", "(skipped)");
+        IzzyStorage.setItem("sub-counselling", "(skipped)");
+        IzzyStorage.setItem("sub-everyday-things", "(skipped)");
+        IzzyStorage.setItem("sub-health", "(skipped)");
         IzzyStorage.setItem("sub-housing", "(skipped)");
-        IzzyStorage.setItem("sub-job", "[]");
-        IzzyStorage.setItem("sub-legal", "[]");
-        IzzyStorage.setItem("sub-life-skills", "[]");
-        IzzyStorage.setItem("sub-money", "[]");
-        IzzyStorage.setItem("sub-technology", "[]");
+        IzzyStorage.setItem("sub-job", "(skipped)");
+        IzzyStorage.setItem("sub-legal", "(skipped)");
+        IzzyStorage.setItem("sub-life-skills", "(skipped)");
+        IzzyStorage.setItem("sub-money", "(skipped)");
+        IzzyStorage.setItem("sub-technology", "(skipped)");
     });
 }
 

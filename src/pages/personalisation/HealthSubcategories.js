@@ -1,11 +1,10 @@
 /* @flow */
 
-import BaseMultiQuestion from "./BaseMultiQuestion";
-import { remove } from "./BaseQuestion";
+import BaseQuestion, { remove } from "./BaseQuestion";
 
-export default class HealthSubcategories extends BaseMultiQuestion {
+export default class HealthSubcategories extends BaseQuestion {
     static title = "Health";
-    static propTypes = BaseMultiQuestion.propTypes;
+    static propTypes = BaseQuestion.propTypes;
     static defaultProps = {
         name: "sub-health",
         question: "What sort of help do you need?",
