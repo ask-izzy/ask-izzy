@@ -66,7 +66,7 @@ const Storage = {
 
         let event = {};
 
-        event[key] = obj;
+        event.event = `set-${key}`;
         event[`personalize-${key}`] = obj;
         sendEvent(event);
         persistentStore.setItem(key, `${obj}`);
