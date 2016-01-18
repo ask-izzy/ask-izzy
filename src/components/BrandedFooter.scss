@@ -12,27 +12,30 @@
         margin: 5px 15px;
     }
 
-    .about {
-        float: left;
-    }
-
     a {
         color: $white;
         text-decoration: none;
     }
 
-    .supporters {
+    .footer-list {
         display: inline;
         padding: 0;
         text-align: left;
+
+        li {
+            display: inline-block;
+            list-style-type: none;
+
+            a {
+                padding: 10px 0;
+            }
+        }
+
+        li + li::before {
+            content: "\00a0|\00a0";
+        }
     }
 
-    .supporter {
-        display: inline-block;
-        list-style-type: none;
-    }
 
-    .supporter + .supporter::before {
-        content: "\00a0|\00a0";
-    }
+
 }

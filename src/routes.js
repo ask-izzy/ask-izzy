@@ -14,6 +14,7 @@ import BasePage from "./pages/BasePage";
 import BrandedFooter from "./components/BrandedFooter";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
+import TermsPage from "./pages/TermsPage";
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
 import {ResultsPageListing, ResultsPageMap} from "./pages/ResultsPage";
@@ -62,6 +63,11 @@ export default (
             path="/about"
             component={AboutPage}
             title="About"
+        />
+        <Route
+            path="/terms"
+            component={TermsPage}
+            title="Terms of use"
         />
         {[
             "/category/:page",
