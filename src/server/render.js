@@ -16,7 +16,6 @@ if (process.env.NODE_ENV === "production") {
     webpackStats = require("./webpack-stats.json");
 }
 
-
 export default function render(req, res, next) {
     try {
         // In development, reload webpack stats file on every request
@@ -54,10 +53,7 @@ export default function render(req, res, next) {
                     );
                 } else if (renderProps) {
                     const title = makeTitle(
-                        (
-                            renderProps.routes[1] &&
-                            renderProps.routes[1].title
-                        ),
+                        renderProps.routes,
                         renderProps.params
                     )
                     const markup = ReactDOMServer.renderToString(
