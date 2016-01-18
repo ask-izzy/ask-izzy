@@ -60,7 +60,7 @@ async function setSleepTonight(answer: string): Promise<void> {
     } else if (answer == "nowhere") {
         answer = "No";
     } else {
-        throw new Error("Unexpected");
+        throw new Error(`Expected ${answer} to be Yes or No`);
     }
 
     await gotoUrl(this.driver, "/");  // go anywhere to start the session

@@ -4,6 +4,7 @@ import React from "react";
 import _ from "underscore";
 
 import categories from "../constants/categories";
+import badRouteParams from "../server/not_found";
 
 class BaseCategoriesPage extends React.Component {
     /**
@@ -35,7 +36,7 @@ class BaseCategoriesPage extends React.Component {
 
             return `“${search.replace(quote, "")}”`;
         } else {
-            throw new Error("Unexpected");
+            throw badRouteParams;
         }
     }
 
@@ -48,7 +49,7 @@ class BaseCategoriesPage extends React.Component {
                 q: this.props.params.search,
             };
         } else {
-            throw new Error("Unexpected");
+            throw badRouteParams;
         }
     }
 
@@ -68,7 +69,7 @@ class BaseCategoriesPage extends React.Component {
                 require("./personalisation/Location"),
             ];
         } else {
-            throw new Error("Unexpected");
+            throw badRouteParams;
         }
         return components.filter(component => component.showQuestion());
     }
