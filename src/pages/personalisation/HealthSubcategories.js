@@ -13,11 +13,13 @@ export default class HealthSubcategories extends BaseMultiQuestion {
             /* eslint-disable max-len */
             "Children": remove("(community health)").append({
                 q: "health children",
-                healthcare_card_holders: true,
             }),
             "Maternal & child health": remove("(community health)")
+                .remove({healthcare_card_holders: true})
                 .append("maternal child health"),
-            "Hospital": remove("(community health)").append("public hospitals"),
+            "Hospital": remove("(community health)")
+                .remove({healthcare_card_holders: true})
+                .append("public hospitals"),
         },
     };
 }

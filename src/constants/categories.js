@@ -88,6 +88,7 @@ const categories:Array<Category> = [
         icon: icons.Health,
         search: {
             q: "(community health) -(coordinating bodies)",
+            healthcare_card_holders: true,
         },
         personalisation: [
             personalisation.Location,
