@@ -3,8 +3,10 @@
 import React from "react";
 import _ from "underscore";
 
-import categories from "../constants/categories";
+import categories, { Category } from "../constants/categories";
 import badRouteParams from "../server/not_found";
+import { searchRequest } from "../iss";
+import Location from "./personalisation/Location";
 
 class BaseCategoriesPage extends React.Component {
     /**
@@ -12,8 +14,7 @@ class BaseCategoriesPage extends React.Component {
      *
      * Return category information.
      */
-    /* flow:disable not supported yet */
-    get category(): categories.Category {
+    get category(): Category {
         if (this._category) {
             return this._category;
         }
@@ -26,7 +27,6 @@ class BaseCategoriesPage extends React.Component {
         return category;
     }
 
-    // flow:disable not supported yet
     get title(): string {
         if (this.category) {
             return this.category.name;
@@ -40,8 +40,7 @@ class BaseCategoriesPage extends React.Component {
         }
     }
 
-    // flow:disable not supported yet
-    get search(): iss.searchRequest {
+    get search(): searchRequest {
         if (this.category) {
             return Object.assign({}, this.category.search);
         } else if (this.props.params.search) {
@@ -58,7 +57,6 @@ class BaseCategoriesPage extends React.Component {
      *
      * An array of components required to personalise this category.
      */
-    /* flow:disable */
     get personalisationComponents(): Array<ReactClass> {
         let components = [];
 
@@ -66,12 +64,15 @@ class BaseCategoriesPage extends React.Component {
             components = this.category.personalisation;
         } else if (this.props.params.search) {
             components = [
-                require("./personalisation/Location"),
+                Location,
             ];
         } else {
             throw badRouteParams;
         }
-        return components.filter(component => component.showQuestion());
+        return components.filter(component =>
+            (typeof component.showQuestion == "function") &&
+            component.showQuestion()
+        );
     }
 
 }

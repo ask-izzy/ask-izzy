@@ -7,33 +7,29 @@
 /* eslint-disable prefer-arrow-callback */
 
 import assert from "assert";
+import Gender from "../../src/pages/personalisation/Gender";
+import Age from "../../src/pages/personalisation/Age";
 
 describe("Compose personalisation search terms", function() {
 
-    it("Add gender flags", function() {
-        // Can't import this globally as it triggers a circular dependency
-        const pages = require("../../src/pages/personalisation");
+    it("Adds gender flags", function() {
         let request = {
             q: "crisis accommodation",
         };
 
-        // flow:disable -- flow is confused about exports
-        request = pages.Gender.getSearchForAnswer(request, "Female");
+        request = Gender.getSearchForAnswer(request, "Female");
         assert.deepEqual(request, {
             q: "crisis accommodation females",
             client_gender: ["f", "u"],
         });
     });
 
-    it("Add age groups", function() {
-        // Can't import this globally as it triggers a circular dependency
-        const pages = require("../../src/pages/personalisation");
+    it("Adds age groups", function() {
         let request = {
             q: "crisis accommodation",
         };
 
-        // flow:disable -- flow is confused about exports
-        request = pages.Age.getSearchForAnswer(request, "26 to 39");
+        request = Age.getSearchForAnswer(request, "26 to 39");
         assert.deepEqual(request, {
             q: "crisis accommodation adults",
             age_groups: ["adult"],
@@ -41,16 +37,16 @@ describe("Compose personalisation search terms", function() {
     });
 
     it("Add age and gender", function() {
-        // Can't import this globally as it triggers a circular dependency
-        const pages = require("../../src/pages/personalisation");
         let request = {
             q: "crisis accommodation",
         };
 
-        // flow:disable -- flow is confused about exports
-        request = pages.Gender.getSearchForAnswer(request, "Male");
-        // flow:disable -- flow is confused about exports
-        request = pages.Age.getSearchForAnswer(request, "26 to 39");
+        request = Gender.getSearchForAnswer(request, "Male");
+        if (!request) {
+            throw new Error("unexpected");
+        }
+
+        request = Age.getSearchForAnswer(request, "26 to 39");
         assert.deepEqual(request, {
             q: "crisis accommodation males adults",
             age_groups: ["adult"],

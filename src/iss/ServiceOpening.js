@@ -43,7 +43,7 @@ export default class ServiceOpening {
     _closing_times: Array<serviceOpeningHours>;
     _now: Moment;
 
-    constructor(properties: props, now = moment) {
+    constructor(properties: props, now: () => Moment = moment) {
         this.now_open = properties.now_open.now_open;
 
         // Turn opening_hours into a sorted list
@@ -82,32 +82,27 @@ export default class ServiceOpening {
         this._closing_times = _.compact(closingTimes);
     }
 
-    // flow:disable
-    get openingTimes(): Array<openingHours> {
+    get openingTimes(): Array<serviceOpeningHours> {
         return this._opening_times;
     }
 
     // Is it open now?
     // null indicates "we don't know"
-    /* flow:disable */
     get open(): ?boolean {
         return this.now_open;
     }
 
     // When it next opens, when does it open/close?
-    /* flow:disable */
-    get nextOpeningTimes(): ?openingHours {
+    get nextOpeningTimes(): ?serviceOpeningHours {
         return this._opening_times[0];
     }
 
     // At what time will it next close?
-    /* flow:disable */
     get nextCloses(): ?Moment {
         return (this._closing_times[0] || {}).end;
     }
 
     // Describes how long the current open state will continue
-    /* flow:disable */
     get until(): string {
         if (this.now_open) {
             // Service is open

@@ -80,7 +80,7 @@ export default async function webDriverInstance(
 
         // From selenium-webdriver - we need to
         // fill in some extra fields for appium
-        const browser = process.env.SELENIUM_BROWSER.split(/:/, 3);
+        const browser = (process.env.SELENIUM_BROWSER || "").split(/:/, 3);
 
         /* flow:disable unsupported by flow */
         [_, baseCaps.platformVersion, baseCaps.platformName] = browser;

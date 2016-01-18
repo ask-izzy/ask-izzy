@@ -28,7 +28,6 @@ class Intro extends React.Component {
         return request;
     }
 
-    // flow:disable
     get seekingHelpWith(): string {
         try {
             const category = this.context.controller.category;

@@ -110,6 +110,12 @@ declare class GoogleMaps {
     UnitSystem: {METRIC: string};
     DirectionsService(): DirectionsService;
     DistanceMatrixService(): DistanceMatrixService;
+    Marker: Object;
+    markers: Array<Object>;
+    maps: Array<Map>;
+    event: {
+        trigger: function,
+    };
 }
 
 declare class Google {

@@ -15,7 +15,7 @@ import webDriverInstance, {seleniumBrowser} from "../support/webdriver";
 import startServer from "../../src/server";
 
 describe("Visual Components", function() {
-    const baseUrl = "http://localhost:" + process.env.PORT;
+    const baseUrl = "http://localhost:" + (process.env.PORT || "");
     let driver, cfg;
 
     before(beforeAll);

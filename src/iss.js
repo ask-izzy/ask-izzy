@@ -128,7 +128,6 @@ export function mungeUrlQuery(url_: string, data: ?Object): string {
     }
 
     urlObj.auth = urlObj.search = urlObj.query = null;
-    /* flow:disable https://github.com/facebook/flow/issues/908 */
     url_ = url.format(urlObj);
 
     /*
@@ -274,11 +273,7 @@ export class Service {
     travelTime: ?travelTime; // From google travel times api
     name: string;
     ndis_approved: boolean;
-    now_open: {
-        local_time: hmsWithColonsTime,
-        notes: string,
-        now_open: ?boolean,
-    };
+    now_open: issNowOpen;
     opening_hours: Array<issOpeningHours>;
     parking_info: string;
     phones: Array<phone>;
@@ -312,7 +307,6 @@ export class Service {
     /**
      * The service opening hours
      */
-    /* flow:disable */
     get open(): (ServiceOpening) {
         return new ServiceOpening(this);
     }
@@ -320,14 +314,12 @@ export class Service {
     /**
      * First sentence of the description.
      */
-    /* flow:disable */
     get shortDescription(): string {
         return this.description.split(".", 1)[0] + ".";
     }
     /**
      * An array of things this service provides built using a bucket-of-words
      * approach from the service's full description */
-    /* flow:disable */
     get serviceProvisions(): Array<string> {
         if (this._serviceProvisions) {
             return this._serviceProvisions;
@@ -371,7 +363,6 @@ export class Service {
         return this._siblingServices;
     }
 
-    /* flow:disable */
     get slug(): string {
         return slugify(`${this.id}-${this.site.name}`);
     }

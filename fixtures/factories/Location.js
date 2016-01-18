@@ -23,7 +23,7 @@ export function Location(props: ?Object): issLocation {
     }, props);
 }
 
-export function TransportTime(props: ?Object) {
+export function TransportTime(props: ?Object): travelTime {
     return Merge({
         mode: "WALKING",
         status: "OK",
@@ -34,7 +34,7 @@ export function TransportTime(props: ?Object) {
 
 const siteId = Sequence();
 
-export function Site(props: ?Object) {
+export function Site(props: ?Object): issSite {
     const sId = siteId();
     const oId = siteId();
 
@@ -50,7 +50,7 @@ export function Site(props: ?Object) {
 
 const poBox = Sequence();
 
-export function PostalAddress(props: ?Object) {
+export function PostalAddress(props: ?Object): issPostalAddress {
     return Merge({
         line1: `PO box ${poBox()}`,
         line2: "",

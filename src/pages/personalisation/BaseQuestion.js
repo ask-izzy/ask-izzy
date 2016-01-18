@@ -139,17 +139,14 @@ class BaseQuestion extends React.Component {
         };
     }
 
-    // flow:disable
     get selected(): string {
-        return this.state.selected || storage.getItem(this.props.name)
+        return this.state.selected || storage.getItem(this.props.name) || "";
     }
 
-    // flow:disable
     static get summaryLabel(): string {
         return this.defaultProps.question;
     }
 
-    // flow:disable
     static get summaryValue(): string {
         return this.answer;
     }
@@ -162,9 +159,14 @@ class BaseQuestion extends React.Component {
         return "";
     }
 
-    // flow:disable
     static get answer(): string {
-        return storage.getItem(this.defaultProps.name);
+        let answer = storage.getItem(this.defaultProps.name);
+
+        if (typeof answer != "string") {
+            return "";
+        }
+
+        return answer;
     }
 
     /**
@@ -217,7 +219,6 @@ class BaseQuestion extends React.Component {
      * @returns {Array<string>} an array of the valid answers
      * to this question.
      */
-    // flow:disable
     get answers(): Array<string> {
         if (_.isArray(this.props.answers)) {
             return this.props.answers;

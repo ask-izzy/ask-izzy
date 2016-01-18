@@ -29,7 +29,6 @@ class ServicePage extends React.Component {
     /**
      * Pull out the ID (leading digits) from the slug
      */
-    /* flow:disable not supported yet */
     get id(): number {
         const leadingDigits = /^\d+/;
         let slug = this.props.params.slug;

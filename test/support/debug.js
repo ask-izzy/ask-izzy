@@ -1,6 +1,6 @@
-/* @flow */
+/* flow:disable */
 
-function pauseToDebug(): Promise<void> {
+function pauseToDebug() {
     return new Promise((resolve, reject) => {
         console.log("Paused. Press any key to continue...");
         const stdin = process.stdin;

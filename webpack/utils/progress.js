@@ -3,7 +3,7 @@
 import webpack from "webpack";
 
 // Show build progress in development
-export default function() {
+export default function(): void {
     return new webpack.ProgressPlugin((percentage, message) => {
         const MOVE_LEFT = new Buffer("1b5b3130303044", "hex").toString();
         const CLEAR_LINE = new Buffer("1b5b304b", "hex").toString();

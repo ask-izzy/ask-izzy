@@ -9,7 +9,7 @@ import webpack from "webpack";
 import config from "./dev.config";
 
 const WEBPACK_HOST = process.env.HOST || "0.0.0.0";
-const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
+const WEBPACK_PORT = parseInt(process.env.PORT || "") + 1 || 3001;
 
 const serverOptions = {
     contentBase: `http://${WEBPACK_HOST}:${WEBPACK_PORT}`,

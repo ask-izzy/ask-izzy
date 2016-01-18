@@ -14,7 +14,6 @@ class Phone extends React.Component {
         "number": "(03) 3333 3333",
     }};
 
-    // flow:disable not supported yet
     get href(): string {
         return "tel:" + this.props.number.replace(/[^0-9\+]/g, "");
     }

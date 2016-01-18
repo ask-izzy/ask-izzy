@@ -49,12 +49,10 @@ class BasePersonalisationPage extends BaseCategoriesPage {
         );
     }
 
-    // flow:disable
     get currentComponent(): ?ReactClass {
         return this.personalisationComponents[this.currentComponentIdx];
     }
 
-    // flow:disable
     get currentComponentIdx(): number {
         return this.personalisationComponents.findIndex(component =>
             component.defaultProps.name == this.props.params.subpage

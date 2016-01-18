@@ -7,9 +7,8 @@ class ObjectStorage {
         this.clear();
     }
 
-    /* flow:disable */
     get length(): number {
-        Object.keys(this._store).length;
+        return Object.keys(this._store).length;
     }
 
     getItem(key: string): ?string {

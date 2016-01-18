@@ -73,12 +73,10 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
      *
      * An array of components required to personalise this category.
      */
-    /* flow:disable */
     get personalisationComponents(): Array<ReactClass> {
         return [Intro].concat(super.personalisationComponents);
     }
 
-    // flow:disable
     get currentComponentIdx(): number {
         const sup = super.currentComponentIdx;
 
