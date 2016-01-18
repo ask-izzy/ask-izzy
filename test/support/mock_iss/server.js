@@ -90,17 +90,6 @@ app.get("/api/v3/search/", (req, res) => {
             .json({
                 error_message: 'Could not find a location matching "carlt"',
             });
-    } else if (req.query.q.match(
-        /ombudsman complaint advocacy housing/i
-    )) {
-        res.json({
-            meta: {
-                total_count: 1,
-            },
-            objects: [
-                ServiceFactory({name: "Eviction advocacy Richmond"}),
-            ],
-        })
     } else if (req.query.q.match(/food/) && !req.query.q.match(/pet/)) {
         res.json({
             meta: {

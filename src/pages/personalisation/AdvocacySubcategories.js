@@ -13,10 +13,6 @@ export default class AdvocacySubcategories extends BaseMultiQuestion {
                 remove("consumer issues mediation discrimination")
                 .remove("disputes advocacy")
                 .append("ombudsman complaint"),
-            "Help working out a problem with a service":
-                remove("consumer issues mediation discrimination")
-                .remove("disputes advocacy")
-                .append("mediation"),
             "Get advice on your rights":
                 remove("consumer issues mediation discrimination")
                 .remove("disputes advocacy")

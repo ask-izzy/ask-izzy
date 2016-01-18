@@ -11,9 +11,6 @@ export default class LifeSkillsSubcategories extends BaseMultiQuestion {
         question: "Want to develop skills?",
         answers: {
             /* eslint-disable max-len */
-            "Daily living": remove("life skills education").append("daily living skills"),
-            "Personal": remove("life skills education").append("personal development")
-                .append("-vcal -grants"),
             "School": remove("life skills education").append("government schools"),
             "Training with support": remove("life skills education")
                 .append("supported vocational training"),

@@ -9,7 +9,6 @@ import AdvocacySubcategories from "./personalisation/AdvocacySubcategories";
 import Age from "./personalisation/Age";
 import BaseMultiQuestion from "./personalisation/BaseMultiQuestion";
 import BaseQuestion from "./personalisation/BaseQuestion";
-import ComplaintSubcategories from "./personalisation/ComplaintSubcategories";
 import CounsellingSubcategories from "./personalisation/CounsellingSubcategories";
 import Demographics from "./personalisation/Demographics";
 import EverydayThingsSubcategories from "./personalisation/EverydayThingsSubcategories";
@@ -23,7 +22,6 @@ import LifeSkillsSubcategories from "./personalisation/LifeSkillsSubcategories";
 import Location from "./personalisation/Location";
 import MoneySubcategories from "./personalisation/MoneySubcategories";
 import SleepTonight from "./personalisation/SleepTonight";
-import TechnologySubcategories from "./personalisation/TechnologySubcategories";
 
 export default {
     AddictionSubcategories: AddictionSubcategories,
@@ -31,7 +29,6 @@ export default {
     Age: Age,
     BaseMultiQuestion: BaseMultiQuestion,
     BaseQuestion: BaseQuestion,
-    ComplaintSubcategories: ComplaintSubcategories,
     CounsellingSubcategories: CounsellingSubcategories,
     Demographics: Demographics,
     EverydayThingsSubcategories: EverydayThingsSubcategories,
@@ -45,5 +42,4 @@ export default {
     Location: Location,
     MoneySubcategories: MoneySubcategories,
     SleepTonight: SleepTonight,
-    TechnologySubcategories: TechnologySubcategories,
 };

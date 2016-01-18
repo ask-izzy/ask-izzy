@@ -218,7 +218,6 @@ const categories:Array<Category> = [
         },
         personalisation: [
             personalisation.Location,
-            personalisation.TechnologySubcategories,
         ],
     }),
     new Category({
@@ -232,7 +231,6 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.AdvocacySubcategories,
-            personalisation.ComplaintSubcategories,
         ],
     }),
 
