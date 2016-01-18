@@ -3,6 +3,7 @@
 .*webpack-stats\.json.*
 .*invalidPackageJson/package.json
 .*/node_modules/.*/examples/.*
+.*/node_modules/.staging/.*
 .*/node_modules/.*/test/.*
 .*/node_modules/fbjs/.*
 .*/bower_components/.*
