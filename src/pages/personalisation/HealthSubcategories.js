@@ -11,13 +11,13 @@ export default class HealthSubcategories extends BaseMultiQuestion {
         question: "What sort of help do you need?",
         answers: {
             /* eslint-disable max-len */
-            "Children": remove("community").append({
-                q: "children",
+            "Children": remove("(community health)").append({
+                q: "health children",
                 healthcare_card_holders: true,
             }),
-            "Maternal & child health": remove("community health")
+            "Maternal & child health": remove("(community health)")
                 .append("maternal child health"),
-            "Hospital": remove("community health").append("public hospitals"),
+            "Hospital": remove("(community health)").append("public hospitals"),
         },
     };
 }
