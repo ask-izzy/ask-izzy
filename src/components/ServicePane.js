@@ -84,6 +84,27 @@ export default class ServicePane extends React.Component {
                     {this.renderServiceProvisions()}
                     {this.renderSiblings()}
                 </div>
+
+                <a
+                    className="suggestChange"
+                    href={
+                        "mailto:database@infoxchange.org" +
+                        "?subject=" +
+                        encodeURIComponent(`Ask Izzy changes: ${object.id}`) +
+                        "&body=" +
+                        encodeURIComponent(`Contact name:
+
+Contact number:
+
+Contact email:
+
+Details of change:
+
+                        `)
+                    }
+                >
+                    Update / remove service
+                </a>
             </div>
         );
     }
