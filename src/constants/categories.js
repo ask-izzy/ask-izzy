@@ -204,7 +204,8 @@ const categories:Array<Category> = [
         search: {
             q: "recreation -(coordinating bodies) -physiology " +
                 "-permit -hire -grants " +
-                "-(sports medicine) -(sports physician)",
+                "-(sports medicine) -(sports physician) " +
+                "-(sports psychology)",
         },
         personalisation: [
             personalisation.Location,
