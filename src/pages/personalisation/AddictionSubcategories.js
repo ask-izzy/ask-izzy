@@ -1,11 +1,10 @@
 /* @flow */
 
-import BaseMultiQuestion from "./BaseMultiQuestion";
-import { append, remove } from "./BaseQuestion";
+import BaseQuestion, { append, remove } from "./BaseQuestion";
 
-export default class AddictionSubcategories extends BaseMultiQuestion {
+export default class AddictionSubcategories extends BaseQuestion {
     static title = "Drugs & Alcohol";
-    static propTypes = BaseMultiQuestion.propTypes;
+    static propTypes = BaseQuestion.propTypes;
     static defaultProps = {
         name: "sub-addiction",
         question: "What sort of help?",

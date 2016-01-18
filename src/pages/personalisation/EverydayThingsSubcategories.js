@@ -1,11 +1,10 @@
 /* @flow */
 
-import BaseMultiQuestion from "./BaseMultiQuestion";
-import { append, remove } from "./BaseQuestion";
+import BaseQuestion, { append, remove } from "./BaseQuestion";
 
-export default class EverydayThingsSubcategories extends BaseMultiQuestion {
+export default class EverydayThingsSubcategories extends BaseQuestion {
     static title = "Everyday things";
-    static propTypes = BaseMultiQuestion.propTypes;
+    static propTypes = BaseQuestion.propTypes;
     static defaultProps = {
         name: "sub-everyday-things",
         question: "What do you need?",
