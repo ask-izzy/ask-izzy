@@ -66,8 +66,8 @@ class BaseMultiQuestion extends BaseQuestion {
     }
 
     // flow:disable we have the liskov substitution principle :(
-    static get answer(): Array<string> {
-        return storage.getJSON(this.defaultProps.name) || [];
+    static get answer(): ?Array<string> {
+        return storage.getJSON(this.defaultProps.name);
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
