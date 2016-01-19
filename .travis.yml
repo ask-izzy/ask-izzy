@@ -17,8 +17,6 @@ cache:
   directories:
     - node_modules_cache/
     - ~/.nvm/versions/
-    - node_modules/flow-bin/
-    - node_modules/.bin/flow
     - bower_components/
 
 script:
