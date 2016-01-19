@@ -28,7 +28,7 @@ RUN echo "Disabling non-essential packages" && \
     echo "Adding nodejs gpg key" && \
     curl -sL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
     echo "Adding nodejs repo" && \
-    echo 'deb https://deb.nodesource.com/node_4.x jessie main' > /etc/apt/sources.list.d/nodesource.list && \
+    echo 'deb https://deb.nodesource.com/node_5.x jessie main' > /etc/apt/sources.list.d/nodesource.list && \
     echo "Installing required packages" && \
     apt-get -qq update && \
     apt-get -qq install \
