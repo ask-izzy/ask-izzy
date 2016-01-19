@@ -1,6 +1,5 @@
 /* @flow */
 
-import React from "react";
 import { slugify } from "underscore.string";
 
 import icons from "../icons";
@@ -15,7 +14,7 @@ export class Category {
     icon: ReactClass;
     search: iss.searchRequest;
     info: ?string|ReactElement;
-    personalisation: Array<React.Component>;
+    personalisation: Array<ReactClass>;
 
     constructor(props: {
         name: string,
@@ -23,7 +22,7 @@ export class Category {
         icon: ReactClass,
         search: iss.searchRequest,
         info?: string|ReactElement,
-        personalisation: Array<React.Component>,
+        personalisation: Array<ReactClass>,
     }) {
         this.name = props.name;
         this.byline = props.byline;

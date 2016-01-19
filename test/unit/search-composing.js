@@ -1,4 +1,4 @@
-/* @flow */
+/* flow:disable */
 /**
  * Test search composing
  */
@@ -7,8 +7,6 @@
 /* eslint-disable prefer-arrow-callback */
 
 import assert from "assert";
-import Gender from "../../src/pages/personalisation/Gender";
-import Age from "../../src/pages/personalisation/Age";
 
 describe("Compose personalisation search terms", function() {
 
@@ -17,7 +15,8 @@ describe("Compose personalisation search terms", function() {
             q: "crisis accommodation",
         };
 
-        request = Gender.getSearchForAnswer(request, "Female");
+        request = require("../../src/pages/personalisation/Gender")
+            .getSearchForAnswer(request, "Female");
         assert.deepEqual(request, {
             q: "crisis accommodation females",
             client_gender: ["f", "u"],
@@ -29,7 +28,8 @@ describe("Compose personalisation search terms", function() {
             q: "crisis accommodation",
         };
 
-        request = Age.getSearchForAnswer(request, "26 to 39");
+        request = require("../../src/pages/personalisation/Age")
+            .getSearchForAnswer(request, "26 to 39");
         assert.deepEqual(request, {
             q: "crisis accommodation adults",
             age_groups: ["adult"],
@@ -41,12 +41,14 @@ describe("Compose personalisation search terms", function() {
             q: "crisis accommodation",
         };
 
-        request = Gender.getSearchForAnswer(request, "Male");
+        request = require("../../src/pages/personalisation/Gender")
+            .getSearchForAnswer(request, "Male");
         if (!request) {
             throw new Error("unexpected");
         }
 
-        request = Age.getSearchForAnswer(request, "26 to 39");
+        request = require("../../src/pages/personalisation/Age")
+            .getSearchForAnswer(request, "26 to 39");
         assert.deepEqual(request, {
             q: "crisis accommodation males adults",
             age_groups: ["adult"],

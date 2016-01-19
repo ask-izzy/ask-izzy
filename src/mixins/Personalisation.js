@@ -2,11 +2,12 @@
 
 import React from "react";
 
-import BasePersonalisationPage from "../pages/BasePersonalisationPage";
-
 const Personalisation = {
     contextTypes: {
-        controller: React.PropTypes.instanceOf(BasePersonalisationPage),
+        // Would be nice to specify type here,
+        // but we can't have cyclic imports.
+        // controller: React.PropTypes.instanceOf(BasePersonalisationPage),
+        controller: React.PropTypes.Any,
     },
 
     propTypes: {
