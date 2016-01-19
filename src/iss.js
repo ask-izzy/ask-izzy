@@ -204,6 +204,10 @@ async function attachTransportTimes(
 
 let requestObjectsCache = new Cache();
 
+if (typeof window != "undefined") {
+    window.IzzyRequestObjectsCache = requestObjectsCache;
+}
+
 export async function requestObjects(
     path: string,
     data: ?searchRequest,
@@ -351,15 +355,17 @@ export class Service {
             type: "service",
             limit: 0,
         };
-
-        this._siblingServices = await requestObjects("/api/v3/search/",
-                                                     request_);
-
-        this._siblingServices.objects =
-            this._siblingServices.objects.filter(
-                service => service.id != this.id
+        let {objects, meta} = await requestObjects(
+            "/api/v3/search/",
+            request_
         );
 
+        // Don't mutate what comes back from
+        // requestObjects - the objects are cached!
+        this._siblingServices = {
+            meta,
+            objects: objects.filter(service => service.id != this.id),
+        };
 
         return this._siblingServices;
     }
