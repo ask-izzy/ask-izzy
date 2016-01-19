@@ -51,24 +51,26 @@ class AboutPage extends React.Component {
                             "?subject=" +
                             encodeURIComponent("Ask Izzy add site/service") +
                             "&body=" +
-                            encodeURIComponent(`Service provider name:
+                            encodeURIComponent(
+                                `Service provider name:
 
-Service name:
+                                Service name:
 
-Suburb:
+                                Suburb:
 
-Postcode:
+                                Postcode:
 
-Phone numbers:
+                                Phone numbers:
 
-Email address:
+                                Email address:
 
-Description of service:
+                                Description of service:
 
-Availability:
+                                Availability:
 
-To contact me about this request, call:
-                            `)
+                                To contact me about this request, call:
+                                `.replace(/^ +/gm, "")
+                            )
                         }
                     >
                         Add new site / service
