@@ -117,7 +117,8 @@ function _request(obj: XhrOptions) {
  * @returns {Promise<Object>} a promise for the request.
  */
 export function mungeUrlQuery(url_: string, data: ?Object): string {
-    let urlObj = url.parse(url_, true);
+    /* https://github.com/facebook/flow/issues/908 */
+    let urlObj: any = /*::`*/url.parse(url_, true)/*::`*/;
 
     /* data overrides anything passed in via the URL.
      * Passing query args via the URL needs to be supported for requesting
