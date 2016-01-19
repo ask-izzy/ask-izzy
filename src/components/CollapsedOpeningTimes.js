@@ -45,19 +45,32 @@ function fixture(
 export default class CollapsedOpeningTimes extends React.Component {
 
     static sampleProps = {
-        "One opening time": fixture(true, [{
+        "between Twice in one day (@1pm wed)": fixture(false, [{
             day: "Wednesday",
-            open: "10:30:00",
-            close: "15:00:00",
-        }]),
-        "Two opening times": fixture(true, [{
-            day: "Wednesday",
-            open: "00:00:00",
-            close: "24:00:00",
+            open: "09:00:00",
+            close: "11:00:00",
         }, {
-            day: "Thursday",
-            open: "00:00:00",
-            close: "23:00:00",
+            day: "Wednesday",
+            open: "16:00:00",
+            close: "18:00:00",
+        }]),
+        "before Twice in one day (@1pm wed)": fixture(false, [{
+            day: "Wednesday",
+            open: "13:30:00",
+            close: "14:00:00",
+        }, {
+            day: "Wednesday",
+            open: "16:00:00",
+            close: "18:00:00",
+        }]),
+        "after Twice in one day (@1pm wed)": fixture(false, [{
+            day: "Wednesday",
+            open: "01:00:00",
+            close: "02:00:00",
+        }, {
+            day: "Wednesday",
+            open: "03:00:00",
+            close: "04:00:00",
         }]),
     };
 
@@ -74,7 +87,10 @@ export default class CollapsedOpeningTimes extends React.Component {
         ];
 
         let openingHours = _(this.props.object.openingTimes)
-            .sortBy(record => order.indexOf(record.day));
+            .sortBy(record =>
+                (order.indexOf(record.day) * 24) +
+                (parseInt(record.open))
+            );
 
         return (
             <div className="CollapsedOpeningTimes">

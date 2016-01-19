@@ -73,13 +73,15 @@ export default class ServiceOpening {
                 end: close,
             }, openingHours);
 
-            openingTimes[open.diff(now(), "days")] = serviceOpeningHours;
-            closingTimes[close.diff(now(), "days")] = serviceOpeningHours;
+            openingTimes.push(serviceOpeningHours)
+            closingTimes.push(serviceOpeningHours)
         }
 
         this._now = now();
-        this._opening_times = _.compact(openingTimes);
-        this._closing_times = _.compact(closingTimes);
+        this._opening_times = _.sortBy(openingTimes, ({start}) =>
+            start.diff(now(), "minutes"));
+        this._closing_times = _.sortBy(closingTimes, ({end}) =>
+            end.diff(now(), "minutes"));
     }
 
     get openingTimes(): Array<serviceOpeningHours> {
@@ -109,15 +111,17 @@ export default class ServiceOpening {
             return this.ifTime`until ${this.nextCloses}`
         } else if (this.now_open === false) {
             // Service is closed
-            if (!this.nextOpeningTimes) {
+            let nextOpeningTimes = this.nextOpeningTimes;
+
+            if (!nextOpeningTimes) {
                 return "";
             } else {
-                const nextOpen = this.nextOpeningTimes.start;
+                const nextOpen = nextOpeningTimes.start;
                 const startToday = this._now.startOf("day");
-                const daysAway = moment(nextOpen)
+                const daysAway = nextOpeningTimes.start.clone()
                     .startOf("day")
                     .diff(startToday, "days");
-                const dayName = nextOpen.format("dddd");
+                const dayName = nextOpeningTimes.start.format("dddd");
 
                 if (daysAway == 0) {
                     return this.ifTime`until today ${nextOpen}`;

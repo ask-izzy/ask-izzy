@@ -108,7 +108,6 @@ class OpeningTimes extends React.Component {
         }]),
     };
 
-
     render(): ReactElement {
         let open = this.props.object.now_open;
         let renderMethod: ?Function;

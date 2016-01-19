@@ -7,4 +7,5 @@ declare class Moment {
     add(amount: number, unit: string): Moment;
     isBefore(other: Moment): boolean;
     startOf(type: string): Moment;
+    clone(): Moment;
 }
