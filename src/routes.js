@@ -3,6 +3,7 @@
 import React from "react";
 import { Route } from "react-router";
 import { titleize } from "underscore.string";
+import _ from "underscore";
 
 // If you import these after the others,
 // babel decides the navbar doesn't really
@@ -20,7 +21,15 @@ import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
 import {ResultsPageListing, ResultsPageMap} from "./pages/ResultsPage";
 import ServicePage from "./pages/ServicePage";
 
-export function makeTitle(template: ?string, params: Object): string {
+export function makeTitle(
+    routes: Array<Object>,
+    params: Object
+): string {
+    const template = _.chain(routes)
+        .pluck("title")
+        .compact()
+        .last()
+        .value();
     let unslug = (str) =>
         str.replace("-", " ").split(" ").map(titleize).join(" ");
 

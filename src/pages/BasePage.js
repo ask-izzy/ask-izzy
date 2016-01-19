@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import _ from "underscore";
 import DocumentTitle from "react-document-title";
 import { History } from "react-router";
 import reactMixin from "react-mixin";
@@ -17,17 +16,11 @@ export default class BasePage extends React.Component {
     }
 
     render(): ReactElement {
-        const title = _.chain(this.props.routes)
-            .pluck("title")
-            .compact()
-            .last()
-            .value();
-
         return (
             <div className="BasePage">
                 <DocumentTitle
                     title={makeTitle(
-                        title,
+                        this.props.routes,
                         this.props.params
                     )}
                 />
