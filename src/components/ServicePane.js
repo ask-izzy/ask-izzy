@@ -92,15 +92,17 @@ export default class ServicePane extends React.Component {
                         "?subject=" +
                         encodeURIComponent(`Ask Izzy changes: ${object.id}`) +
                         "&body=" +
-                        encodeURIComponent(`Contact name:
+                        encodeURIComponent(
+                            `Contact name:
 
-Contact number:
+                            Contact number:
 
-Contact email:
+                            Contact email:
 
-Details of change:
+                            Details of change:
 
-                        `)
+                            `.replace(/^ +/gm, "")
+                        )
                     }
                 >
                     Update / remove service
