@@ -12,7 +12,7 @@ before_install:
 install:
   - npm config set cache ./node_modules_cache
   - npm install
-  - ./node_modules/.bin/flow version
+  - ./node_modules/.bin/flow coverage src/iss.js
   - $(npm bin)/bower install
   - script/build-assets
 
