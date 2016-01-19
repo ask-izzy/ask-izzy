@@ -6,8 +6,6 @@ before_install:
 - env
 - export TZ=Australia/Melbourne
 - date
-- rm -rf ./node_modules/.bin/flow
-- rm -rf ./node_modules/flow-bin
 
 install:
   - npm config set cache ./node_modules_cache
