@@ -16,7 +16,7 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 
-class BaseMultiQuestion extends React.Component {
+class BaseMultiQuestion extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
 
     renderDoneButton(): ?ReactElement {
@@ -38,10 +38,15 @@ class BaseMultiQuestion extends React.Component {
         )
     }
 
+    // flow:disable we have the liskov substitution principle :(
     get selected(): Set<string> {
         return this.state.answers || new Set(
             storage.getJSON(this.props.name) || []
         );
+    }
+
+    static showQuestion(): boolean {
+        return true;
     }
 
     static get summaryValue(): string {
@@ -60,6 +65,7 @@ class BaseMultiQuestion extends React.Component {
         }
     }
 
+    // flow:disable we have the liskov substitution principle :(
     static get answer(): Array<string> {
         return storage.getJSON(this.defaultProps.name) || [];
     }

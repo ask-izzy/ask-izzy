@@ -7,7 +7,7 @@ const Personalisation = {
         // Would be nice to specify type here,
         // but we can't have cyclic imports.
         // controller: React.PropTypes.instanceOf(BasePersonalisationPage),
-        controller: React.PropTypes.Any,
+        controller: React.PropTypes.object.isRequired,
     },
 
     propTypes: {
