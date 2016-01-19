@@ -45,6 +45,36 @@ class AboutPage extends React.Component {
                         land and pay our respects to their culture, their
                         people and elders past and present.
                     </p>
+                    <a
+                        href={
+                            "mailto:database@infoxchange.org" +
+                            "?subject=" +
+                            encodeURIComponent("Ask Izzy add site/service") +
+                            "&body=" +
+                            encodeURIComponent(
+                                `Service provider name:
+
+                                Service name:
+
+                                Suburb:
+
+                                Postcode:
+
+                                Phone numbers:
+
+                                Email address:
+
+                                Description of service:
+
+                                Availability:
+
+                                To contact me about this request, call:
+                                `.replace(/^ +/gm, "")
+                            )
+                        }
+                    >
+                        Add new site / service
+                    </a>
                 </div>
             </div>
         );
