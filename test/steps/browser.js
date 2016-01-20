@@ -149,7 +149,11 @@ async function checkURL(expected: string): Promise<void> {
     await this.driver.wait(
         urlIs(this.driver, expected),
         10000,
-        `URL should be #{expected}`,
+        `URL should be ${
+            expected
+        }, was ${
+            await this.driver.getCurrentUrl()
+        }`,
     );
 
     assert.equal(await this.driver.getCurrentUrl(), expected);
