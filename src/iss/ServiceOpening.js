@@ -73,8 +73,8 @@ export default class ServiceOpening {
                 end: close,
             }, openingHours);
 
-            openingTimes.push(serviceOpeningHours)
-            closingTimes.push(serviceOpeningHours)
+            openingTimes.push(serviceOpeningHours);
+            closingTimes.push(serviceOpeningHours);
         }
 
         this._now = now();
