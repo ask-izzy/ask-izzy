@@ -17,6 +17,14 @@ import sendEvent from "./google-tag-manager";
 
 const Storage = {
 
+    getSearch(): string {
+        return sessionStore.getItem("search") || "";
+    },
+
+    setSearch(search: string): void {
+        sessionStore.setItem("search", search);
+    },
+
     getDebug(): boolean {
         return this.getItem("debug") == "true";
     },
