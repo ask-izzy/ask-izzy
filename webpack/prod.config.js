@@ -57,9 +57,6 @@ module.exports = {
     progress: true,
     plugins: [
 
-        // ignore react-a11y in prod
-        new webpack.NormalModuleReplacementPlugin(/react-a11y/, "./noop"),
-
         // Only load the en-au moment.js config
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-au/),
 
