@@ -3,6 +3,7 @@
 import React from "react";
 import { History } from "react-router";
 import reactMixin from "react-mixin";
+import moment from "moment";
 
 import HeaderBar from "../components/HeaderBar";
 import NavBar from "../components/NavBar";
@@ -48,6 +49,16 @@ class HomePage extends React.Component {
                         <p className="branding-copy">
                            The A to Z directory of homeless help
                         </p>
+
+                        {
+                            moment().isBefore(moment("2015-01-29 10")) ||
+                            <p className="branding-copy">
+                               Pre-launch release embargoed until
+                               10:00am Friday 29 January
+                            </p>
+                        }
+
+
                     </div>
                     <HeaderBar
                         primaryText="What do you need?"
