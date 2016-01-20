@@ -8,8 +8,9 @@ import {search} from "../src/iss";
 import _ from "underscore";
 import storage from "../src/storage";
 
-const locations = {
-    "Richmond, Victoria": [-37.8193224, 145.0017382],
+window.testLocations = {
+    "Bungendore, NSW": [35.283755, 149.3764635],
+    "Benalla, VIC": [-36.5707514, 145.866721],
 }
 
 // Shamelessly copied from ResultsPage
@@ -59,7 +60,7 @@ function answerPermutations(personalisation: Object): Array<Object> {
 }
 
 function approxDistanceBetween(location, point): string {
-    const [startLat, startLon] = locations[location];
+    const [startLat, startLon] = window.testLocations[location];
     let distance = "unknown";
 
     if (point) {
@@ -146,7 +147,7 @@ async function testCategoryAndLocation(category, location) {
 const reverseCategories = [...Categories].reverse()
 
 async function startTest() {
-    for (const location of Object.keys(locations)) {
+    for (const location of Object.keys(window.testLocations)) {
         for (const category of reverseCategories) {
             await testCategoryAndLocation(category, location);
         }
