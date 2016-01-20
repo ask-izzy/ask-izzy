@@ -147,7 +147,8 @@ Feature: Service details page
         Day (day) | Time (time)
         ============================
         Monday    | 9:00 AM–5:00 PM
-        Tuesday   | 9:00 AM–5:00 PM
+        Tuesday   | 9:00 AM–1:00 PM
+        Tuesday   | 2:00 PM–5:00 PM
         Wednesday | 8:00 AM–5:00 PM
         Thursday  | 9:00 AM–5:00 PM
         Friday    | 9:00 AM–5:00 PM
