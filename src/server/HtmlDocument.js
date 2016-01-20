@@ -251,6 +251,7 @@ class HtmlDocument extends React.Component {
     </head>
 
     <body>
+        <div id="secretContainer" />
         <div
             id="root"
             dangerouslySetInnerHTML={{__html: markup}}

@@ -386,37 +386,35 @@ export class Service {
  * @returns {Promise<searchResults>} search results from ISS.
  */
 export async function search(
-    query: Object | string,
-    location: ?string,
-    coords: ?{longitude: number, latitude: number},
+    query: Object,
 ): Promise<searchResults> {
-
     let request_: searchRequest = {
         q: "",
         type: "service",
         limit: 10,
     };
 
-    if (typeof query === "string") {
-        /* eslint-disable id-length */
-        request_.q = query;
-    } else if (query instanceof Object) {
-        Object.assign(request_, query);
-    } else {
-        throw new Error("query can only be string or object");
+    Object.assign(request_, query);
+    try {
+        return await requestObjects("/api/v3/search/", request_);
+    } catch (error) {
+        if (error && error[0] == "OVER_QUERY_LIMIT") {
+            console.log("Rate limited by ISS - backing off for 4 seconds");
+            await wait(4000);
+            return search(query);
+        }
+        throw error;
     }
+}
 
-    if (location) {
-        request_.area = location;
-    }
-
-    if (coords) {
-        request_.location = `${coords.longitude}E${coords.latitude}N`;
-    }
-
-    let response = await requestObjects("/api/v3/search/", request_);
-
-    return response;
+function wait(
+    milliseconds: number,
+): Promise<void> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve()
+        }, milliseconds);
+    });
 }
 
 export async function getService(
