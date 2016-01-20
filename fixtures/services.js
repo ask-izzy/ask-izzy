@@ -16,7 +16,7 @@ const objects: Object = {
                 "open": "09:00:00",
             },
             {
-                "close": "17:00:00",
+                "close": "13:00:00",
                 "day": "Tuesday",
                 "note": "",
                 "open": "09:00:00",
@@ -25,7 +25,7 @@ const objects: Object = {
                 "close": "17:00:00",
                 "day": "Tuesday",
                 "note": "",
-                "open": "09:00:00",
+                "open": "14:00:00",
             },
             {
                 "close": "17:00:00",
