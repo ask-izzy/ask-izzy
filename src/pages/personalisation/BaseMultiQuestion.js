@@ -89,8 +89,13 @@ class BaseMultiQuestion extends BaseQuestion {
         let search: ?iss.searchRequest = request;
 
         if (answers instanceof Set) {
-            for (let answer of answers) {
-                search = super.getSearchForAnswer(search || {}, answer);
+            if (answers.size < 3) {
+                for (let answer of answers) {
+                    search = super.getSearchForAnswer(
+                        search || {},
+                        answer
+                    );
+                }
             }
         } else {
             search = super.getSearchForAnswer(search || {}, answers);
