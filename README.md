@@ -26,7 +26,7 @@ help:
 You will need API keys for [ISS](https://api.serviceseeker.com.au/) and
 Google.
 
-    ISS_URL=... GOOGLE_KEY=... ./script/dev-server
+    ISS_URL=... GOOGLE_API_KEY=... ./script/dev-server
 
 ### Forklift
 
@@ -36,7 +36,7 @@ then you can add a config file `~/.config/forklift/ask-izzy.yaml`:
     environment:
         ISS_URL: ...
         # ISS_URL: http://localhost:5000
-        GOOGLE_KEY: ...
+        GOOGLE_API_KEY: ...
 
 And run:
 

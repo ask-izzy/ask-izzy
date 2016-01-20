@@ -6,8 +6,8 @@ PATH=`npm bin`:$PATH
 export NODE_ENV=production
 export PORT=8010
 
-if [ -z "${GOOGLE_KEY:=}" ] ; then
-    echo "GOOGLE_KEY not set; tests will hang silently"
+if [ -z "${GOOGLE_API_KEY:=}" ] ; then
+    echo "GOOGLE_API_KEY not set; tests will hang silently"
     exit 1
 fi
 
