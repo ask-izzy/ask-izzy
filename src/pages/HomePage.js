@@ -8,6 +8,7 @@ import moment from "moment";
 import HeaderBar from "../components/HeaderBar";
 import NavBar from "../components/NavBar";
 import icons from "../icons";
+import storage from "../storage";
 
 /*::`*/@reactMixin.decorate(History)/*::`;*/
 class HomePage extends React.Component {
@@ -26,6 +27,8 @@ class HomePage extends React.Component {
             /* FIXME: should this give some user feedback? */
             return;
         }
+
+        storage.setSearch(search);
 
         this.props.history.pushState(
             null,
@@ -72,6 +75,7 @@ class HomePage extends React.Component {
                                 type="search"
                                 placeholder="Search"
                                 aria-label="Search"
+                                defaultValue={storage.getSearch()}
                             />
                             <icons.Search
                                 className="icon"
