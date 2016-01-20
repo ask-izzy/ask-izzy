@@ -5,8 +5,10 @@ import ReactDOM from "react-dom";
 import Router from "react-router";
 import createBrowserHistory from "history/lib/createBrowserHistory";
 import storage from "./storage";
-
 import routes from "./routes";
+import searchTest from "./search-test";
+
+window.searchTest = searchTest;
 
 /*
  * If at any point there isn't a meaningful 'back',
