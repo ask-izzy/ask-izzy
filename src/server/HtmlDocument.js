@@ -2,7 +2,7 @@
 
 import React from "react";
 
-declare var GOOGLE_KEY: string;
+declare var GOOGLE_API_KEY: string;
 declare var ISS_URL: string;
 declare var SITE_DOMAIN: string;
 declare var GOOGLE_ANALYTICS_ID: string;
@@ -42,7 +42,7 @@ class HtmlDocument extends React.Component {
             "width=device-width, initial-scale=1.0, user-scalable=no";
         const envConfig = `
             var ISS_URL = ${JSON.stringify(ISS_URL)};
-            var GOOGLE_KEY = ${JSON.stringify(GOOGLE_KEY)};
+            var GOOGLE_API_KEY = ${JSON.stringify(GOOGLE_API_KEY)};
             var SITE_DOMAIN = ${JSON.stringify(SITE_DOMAIN)};
             var GOOGLE_ANALYTICS_ID = ${JSON.stringify(GOOGLE_ANALYTICS_ID)};
             var GOOGLE_TAG_MANAGER_ID = ${
@@ -51,7 +51,7 @@ class HtmlDocument extends React.Component {
         `;
 
         /* eslint-disable max-len */
-        const gmapsApi = `//maps.googleapis.com/maps/api/js?key=${GOOGLE_KEY}&libraries=places`;
+        const gmapsApi = `//maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places`;
         /* eslint-enable max-len */
 
         return (
