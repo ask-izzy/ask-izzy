@@ -24,21 +24,21 @@ class AboutPage extends React.Component {
                         right now and nearby.
                     </p>
 
-                    <h3>Ask Izzy:</h3>
+                    <h3>Ask Izzy</h3>
                     <ul>
                         <li>
-                            is Australia wide and free
+                            Is Australia wide and free
                         </li>
                         <li>
-                            can help you find housing, meals,
+                            Can help you find housing, meals,
                             health services, counselling, legal help,
                             addiction help and a whole lot more services
                         </li>
                         <li>
-                            lists more than 340,000 different services
+                            Lists more than 340,000 different services
                         </li>
                         <li>
-                            is available on phones, tablets and computers
+                            Is available on phones, tablets and computers
                         </li>
                     </ul>
                     <p>
