@@ -3,10 +3,10 @@
 
 # CI is carried out on Travis. See .travis.yml
 
-# Master is built and pushed directly to staging
+# Master is built and pushed directly to test and staging
 staging:
     type: deploy
-    script: make build push release-staging
+    script: make build push release-test release-staging
     only:
         - master
 
