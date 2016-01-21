@@ -6,6 +6,7 @@ import Router from "react-router";
 import createBrowserHistory from "history/lib/createBrowserHistory";
 import storage from "./storage";
 import routes from "./routes";
+import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 
 window.searchTest = searchTest;
@@ -98,3 +99,13 @@ window.pi = function() {
 
     window.dispatchEvent(debugEvent);
 }
+
+// Report JS errors to google analytics
+window.addEventListener("error", function (e) {
+    sendEvent({
+        event: "exception",
+        exDescription: `JavaScript Error: ${e.message} ${e.filename}: ${
+            e.lineno
+        }`,
+    });
+});
