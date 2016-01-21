@@ -9,6 +9,7 @@ import xhr from "xhr";
 import url from "url";
 import { slugify } from "underscore.string";
 
+import sendEvent from "./google-tag-manager";
 import ServiceOpening from "./iss/ServiceOpening";
 import Location from "./iss/Location";
 import Cache from "./iss/Cache";
@@ -101,6 +102,10 @@ function _request(obj: XhrOptions) {
             if (response.statusCode == 200) {
                 resolve(response);
             } else {
+                sendEvent({
+                    event: "xhr_failed",
+                    statusCode: response.statusCode,
+                });
                 reject(response);
             }
         })
