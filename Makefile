@@ -56,6 +56,9 @@ release:
 		git push
 	rm -rf tags_repo
 
+release-test:
+	$(MAKE) release APPNAME=askizzy-test.docker.dev CONTINUE=y
+
 release-staging:
 	$(MAKE) release APPNAME=askizzy-staging.infoxchangeapps.net.au CONTINUE=y
 
