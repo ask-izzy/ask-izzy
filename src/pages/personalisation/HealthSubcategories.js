@@ -11,7 +11,6 @@ export default class HealthSubcategories extends BaseQuestion {
         answers: {
             /* eslint-disable max-len */
             "Doctor or nurse": append(""),
-            }),
             "Children": remove("(community health)").append({
                 q: "health children",
             }),
