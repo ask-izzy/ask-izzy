@@ -22,7 +22,7 @@ declare var ISS_URL: string;
 
 export type searchRequest = {
     q?: string,
-    service_types?: string | Array<string>,
+    service_type?: string | Array<string>,
     site_id?: number,
 
     minimum_must_match?: string,
