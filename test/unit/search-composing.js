@@ -32,7 +32,7 @@ describe("Compose personalisation search terms", function() {
             .getSearchForAnswer(request, "26 to 39");
         assert.deepEqual(request, {
             q: "crisis accommodation adults",
-            age_groups: ["adult"],
+            age_group: ["adult"],
         });
     });
 
@@ -51,7 +51,7 @@ describe("Compose personalisation search terms", function() {
             .getSearchForAnswer(request, "26 to 39");
         assert.deepEqual(request, {
             q: "crisis accommodation males adults",
-            age_groups: ["adult"],
+            age_group: ["adult"],
             client_gender: ["m", "u"],
         });
     });
