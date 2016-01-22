@@ -18,7 +18,7 @@ class TermsPage extends React.Component {
 
                 <div className="body">
                     <p><strong>Ask Izzy Application Terms of Use</strong></p>
-                    <p>Thank you for accessing the Ask Izzy application (<strong>App</strong>), which is operated by Infoxchange (ABN 74 457 506 140). Access to, and use of, this App is provided strictly subject to these terms of use. By  using this App, you accept these terms of use and our <a href="https://www.infoxchange.net.au/privacy-policy">Privacy Policy</a> (collectively the <strong>App Terms</strong>). Please only use this App if you have read, understood and agree to these terms of use.</p>
+                    <p>Thank you for accessing the Ask Izzy application (<strong>App</strong>), which is operated by Infoxchange (ABN 74 457 506 140). Access to, and use of, this App is provided strictly subject to these terms of use. By using this App, you accept these terms of use and our <a href="https://www.infoxchange.net.au/privacy-policy">Privacy Policy</a> (collectively the <strong>App Terms</strong>). Please only use this App if you have read, understood and agree to these terms of use.</p>
                     <p><strong>Use of the App</strong></p>
                     <p>You may only use this App to locate shelter, food, health providers, and other essential services that are listed in the directory.</p>
                     <p>Subject to these App Terms, Infoxchange grants you a limited, revocable, non-transferable and non-exclusive personal licence to access and use the App for non-commercial purposes.</p>
