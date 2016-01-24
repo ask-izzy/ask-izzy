@@ -44,7 +44,6 @@ const categories:Array<Category> = [
                 "-(housing information) -hef " +
                 "-(holiday accommodation)",
             service_type: "housing",
-            minimum_should_match: "3<30% 7<50%",
         },
         personalisation: [
             personalisation.Location,
