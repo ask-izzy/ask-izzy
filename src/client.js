@@ -7,8 +7,10 @@ import createBrowserHistory from "history/lib/createBrowserHistory";
 import storage from "./storage";
 import routes from "./routes";
 import searchTest from "./search-test";
+import categories from "./constants/categories";
 
 window.searchTest = searchTest;
+window.categories = categories;
 
 /*
  * If at any point there isn't a meaningful 'back',
