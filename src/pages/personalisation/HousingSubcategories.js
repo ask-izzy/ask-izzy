@@ -26,7 +26,7 @@ export default class HousingSubcategories extends BaseQuestion {
                 .remove("-(respite care)")
                 .remove("-(housing information)")
                 .remove("-hef")
-                .append("transitional accommodation"),
+                .append("transitional housing"),
             "Public housing": remove("housing")
                 .remove("-(respite care)")
                 .remove("-(housing information)")
@@ -38,7 +38,7 @@ export default class HousingSubcategories extends BaseQuestion {
                 .remove("-(respite care)")
                 .remove("-(housing information)")
                 .remove("-hef")
-                .append("transitional accommodation"),
+                .append("transitional housing"),
         },
     };
 
