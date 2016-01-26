@@ -105,7 +105,7 @@ export default class ServicePane extends React.Component {
                         )
                     }
                 >
-                    Update / remove service
+                    Report an error
                 </a>
             </div>
         );
