@@ -335,6 +335,13 @@ app.get("/api/v3/service/5551234/", (req, res) => {
     res.json(ServiceFactory(services.phoneableService));
 });
 
+function logErrors(err, req, res, next) {
+    console.error("err.stack", err, err && err.stack);
+    next(err);
+}
+
+app.use(logErrors);
+
 app.listen(5000);
 
 export default {
