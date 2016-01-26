@@ -122,14 +122,14 @@ Feature: Service details page
         When I navigate to the service page
         Then I should see the contacts
         -------------------------------------------
-        Freecall 1300 111 111
+        Free from landline 1300 111 111
         Reception reception@service.org
         example.org
         -------------------------------------------
         When I click on "Other contact options"
         Then I should see the contacts
         -------------------------------------------
-        Freecall 1300 111 111
+        Free from landline 1300 111 111
         Reception reception@service.org
         example.org
         Phone (03) 3333 3333
