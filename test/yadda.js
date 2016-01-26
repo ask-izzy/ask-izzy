@@ -90,6 +90,13 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
                     }
                 }
 
+                // This includes user actions, unhandled errors etc
+                console.log(
+                    await driver.executeScript(() =>
+                        JSON.stringify(window.dataLayer)
+                    )
+                );
+
                 if (process.env.BROWSER_LOGS) {
                     let logger = new Webdriver.WebDriver.Logs(driver);
 
