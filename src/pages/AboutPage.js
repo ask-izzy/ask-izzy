@@ -96,7 +96,7 @@ class AboutPage extends React.Component {
                         Google partners with organisations that see the potential of technology to have a scalable, positive impact on significant social issues. Infoxchange demonstrated this in spades and since our funding of Ask Izzy, our relationship has gone from strength to strength. We hope that the launch of Ask Izzy is just the first major milestone in a long and fruitful partnership.
                     </p>
 
-                    <a href="https://www.rea-group.com"><h4>REA Group</h4></a>
+                    <a href="http://www.rea-group.com"><h4>REA Group</h4></a>
                     <p>
                         REA Group, the company behind Australia’s number one property website realestate.com.au, exists to empower people by making the property process simple, efficient and stress free. That’s why our social mission is focused on homelessness in Australia, because we believe everyone should have a safe place to sleep - every night.
                     </p>
