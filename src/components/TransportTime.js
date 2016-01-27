@@ -7,6 +7,7 @@ import { titleize } from "underscore.string";
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import Location from "../iss/Location";
+import sendEvent from "../google-tag-manager";
 
 class TransportTime extends React.Component {
     static propTypes = {
@@ -92,10 +93,23 @@ class TransportTime extends React.Component {
         }
     }
 
+    recordClick(): void {
+        const {location} = this.props;
+
+        sendEvent({
+            event: "clickGetDirections",
+            addressLine1: location.streetAddressLine1(),
+            addressLine2: location.streetAddressLine2(),
+        })
+    }
+
     renderDirections(): ReactElement {
         if (!this.props.compact) {
             return (
-                <div className="getDirections">
+                <div
+                    className="getDirections"
+                    onClick={this.recordClick.bind(this)}
+                >
                     Get directions
                 </div>
             );

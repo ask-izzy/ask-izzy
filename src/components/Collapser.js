@@ -37,6 +37,7 @@ class Collapser extends React.Component {
         if (this.state.collapsed) {
             event.preventDefault();
             this.setState({collapsed: false});
+            this.props.onClick && this.props.onClick();
         }
     }
 
