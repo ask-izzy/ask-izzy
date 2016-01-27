@@ -8,6 +8,7 @@ import Email from "./Email";
 import Phone from "./Phone";
 import Web from "./Web";
 import fixtures from "../../fixtures/services";
+import sendEvent from "../google-tag-manager";
 
 class ContactMethods extends React.Component {
 
@@ -56,6 +57,12 @@ class ContactMethods extends React.Component {
         return this.props.object.emails || [];
     }
 
+    recordClick(): void {
+        sendEvent({
+            event: "clickOtherContactOptions",
+        })
+    }
+
     render(): ReactElement {
         let assignComponent = (component) =>
             (record) =>
@@ -88,6 +95,7 @@ class ContactMethods extends React.Component {
                     <Collapser
                         message="Other contact options"
                         expanded={this.props.expanded}
+                        onClick={this.recordClick.bind(this)}
                     >
                         {contacts.map(this.renderContactMethod)}
                     </Collapser>

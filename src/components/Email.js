@@ -3,10 +3,18 @@ import React from "react";
 
 import icons from "../icons";
 import fixtures from "../../fixtures/services";
+import sendEvent from "../google-tag-manager";
 
 export default class Email extends React.Component {
 
     static sampleProps = {default: fixtures.ixa.emails[0]};
+
+    recordClick(): void {
+        sendEvent({
+            event: "clickEmail",
+            address: this.props.email,
+        })
+    }
 
     render(): ReactElement {
         let {
@@ -15,7 +23,10 @@ export default class Email extends React.Component {
 
         return (
             <div className="Contact Email">
-                <a href={`mailto:${email}`}>
+                <a
+                    href={`mailto:${email}`}
+                    onClick={this.recordClick.bind(this)}
+                >
                     <icons.Email />
                     <div className="Contact-text">
                         <span className="kind">
