@@ -19,7 +19,7 @@ export default class HealthSubcategories extends BaseQuestion {
                 .append("maternal child health"),
             "Hospital": remove("(community health)")
                 .remove({healthcare_card_holders: true})
-                .append("(public hospital services) -pac"),
+                .append("public hospitals"),
         },
     };
 }
