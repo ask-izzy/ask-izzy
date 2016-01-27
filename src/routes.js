@@ -15,6 +15,7 @@ import BasePage from "./pages/BasePage";
 import BrandedFooter from "./components/BrandedFooter";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
+import AddServicePage from "./pages/AddServicePage";
 import TermsPage from "./pages/TermsPage";
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
@@ -77,6 +78,11 @@ export default (
             path="/terms"
             component={TermsPage}
             title="Terms of use"
+        />
+        <Route
+            path="/add-service"
+            component={AddServicePage}
+            title="Add a service"
         />
         {[
             "/category/:page",
