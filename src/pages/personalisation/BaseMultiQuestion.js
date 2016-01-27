@@ -2,6 +2,7 @@
 
 import React from "react";
 import classnames from "classnames";
+import _ from "underscore";
 
 import ReactDOM from "react-dom";
 
@@ -89,13 +90,17 @@ class BaseMultiQuestion extends BaseQuestion {
         let search: ?iss.searchRequest = request;
 
         if (answers instanceof Set) {
-            if (answers.size < 3) {
-                for (let answer of answers) {
-                    search = super.getSearchForAnswer(
-                        search || {},
-                        answer
-                    );
-                }
+            // Take the first two answers offered
+            const allowedAnswers = Object.keys(this.defaultProps.answers);
+            const sortedAnswers = _(Array.from(answers)).sortBy((elem) =>
+                allowedAnswers.indexOf(elem)
+            );
+
+            for (let answer of sortedAnswers.slice(0, 2)) {
+                search = super.getSearchForAnswer(
+                    search || {},
+                    answer
+                );
             }
         } else {
             search = super.getSearchForAnswer(search || {}, answers);
