@@ -18,7 +18,7 @@ const Personalisation = {
         this.context.controller.setState({nextDisabled: !enabled});
     },
 
-    getNextEnabled: function getNextEnabled(): boolean {
+    isNextEnabled: function isNextEnabled(): boolean {
         return !this.context.controller.state.nextDisabled;
     },
 
