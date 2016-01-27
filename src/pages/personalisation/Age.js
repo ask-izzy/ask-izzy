@@ -11,19 +11,41 @@ export default class Age extends BaseQuestion {
         answers: {
             "25 or younger": append({
                 q: "youth",
+                age_groups: [
+                    "prenatal",
+                    "baby",
+                    "toddler",
+                    "preschool",
+                    "schoolage",
+                    "earlyadolescent",
+                    "midadolescent",
+                    "lateadolescent",
+                    "youngadult",
+                ],
             }),
             "26 to 39": append({
-                q: "",
+                q: "adults",
+                age_groups: [
+                    "adult",
+                ],
             }),
             "40 to 54": append({
-                q: "",
+                q: "(middle-aged adults)",
+                age_groups: [
+                    "middleageadult",
+                ],
             }),
             "55 to 64": append({
-                q: "",
+                q: "(pre-retirement aged)",
+                age_groups: [
+                    "preretirementage",
+                ],
             }),
             "65 or older": append({
                 q: "aged",
-                minimum_should_match: "30%",
+                age_groups: [
+                    "agedpersons",
+                ],
             }),
         },
     };

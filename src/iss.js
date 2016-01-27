@@ -23,15 +23,15 @@ declare var ISS_URL: string;
 
 export type searchRequest = {
     q?: string,
-    service_type?: string | Array<string>,
+    service_types?: string | Array<string>,
     site_id?: number,
 
-    minimum_should_match?: string,
+    minimum_must_match?: string,
 
     area?: string,
     location?: string,
     type?: string,
-    age_group?: Array<string>,
+    age_groups?: Array<string>,
     client_gender?: Array<string>,
 
     catchment?: boolean,
