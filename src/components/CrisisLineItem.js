@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import _ from "underscore";
 import { Link } from "react-router";
 
 import Phone from "./Phone";
@@ -27,29 +26,25 @@ class CrisisLineItem extends React.Component {
             object,
         } = this.props;
 
-        for (let kind of ["freecall", "phone", "mobile"]) {
-            let phone = _.findWhere(object.phones, {kind: kind});
-
-            if (phone) {
-                return (
-                    <div className="CrisisLineItem">
-                        <h3>
-                            <Link
-                                to={`/service/${object.slug}`}
-                            >
-                                {object.site.name}
-                            </Link>
-                        </h3>
-                        <Phone
-                            {...phone}
-                            crisis={true}
-                        />
-                        <DebugContainer>
-                            <DebugQueryScore expl={object._explanation} />
-                        </DebugContainer>
-                    </div>
-                );
-            }
+        for (let phone of object.Phones()) {
+            return (
+                <div className="CrisisLineItem">
+                    <h3>
+                        <Link
+                            to={`/service/${object.slug}`}
+                        >
+                            {object.site.name}
+                        </Link>
+                    </h3>
+                    <Phone
+                        {...phone}
+                        crisis={true}
+                    />
+                    <DebugContainer>
+                        <DebugQueryScore expl={object._explanation} />
+                    </DebugContainer>
+                </div>
+            );
         }
 
         return <span />;

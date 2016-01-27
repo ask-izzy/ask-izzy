@@ -8,6 +8,7 @@
 import xhr from "xhr";
 import url from "url";
 import { slugify } from "underscore.string";
+import _ from "underscore";
 
 import sendEvent from "./google-tag-manager";
 import ServiceOpening from "./iss/ServiceOpening";
@@ -245,6 +246,27 @@ export class Service {
 
     Location(): Location {
         return new Location(this.location, this.travelTime);
+    }
+
+    Phones(): Array<phone> {
+        const phoneKinds = ["freecall", "phone", "mobile"];
+
+        return _(_(this.phones
+            .filter(({kind}) => phoneKinds.includes(kind))
+            .map(({comment, kind, number}) => {
+                // 13* lines are not free calls
+                if ((kind == "freecall") && (number.match(/^13/))) {
+                    kind = "phone";
+                }
+
+                return {
+                    comment: (comment || "").trim(),
+                    kind: (kind || "").trim(),
+                    number: (number || "").trim(),
+                }
+            }))
+            .sortBy((({kind}) => phoneKinds.indexOf(kind))))
+            .uniq(phone => phone.number);
     }
 
     abn: string;

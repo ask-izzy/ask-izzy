@@ -111,6 +111,9 @@ Feature: Service details page
             - kind        : freecall
               number      : 1300 111 111
               comment     :
+            - kind        : freecall
+              number      : 1800 111 111
+              comment     :
             - kind        : tty
               number      : (03) 9999 9999
               comment     :
@@ -122,18 +125,19 @@ Feature: Service details page
         When I navigate to the service page
         Then I should see the contacts
         -------------------------------------------
-        Freecall 1300 111 111
+        Freecall 1800 111 111
         Reception reception@service.org
         example.org
         -------------------------------------------
         When I click on "Other contact options"
         Then I should see the contacts
         -------------------------------------------
-        Freecall 1300 111 111
+        Freecall 1800 111 111
         Reception reception@service.org
         example.org
         Phone (03) 3333 3333
         (really a mobile) 0477 777 777
+        Phone 1300 111 111
         -------------------------------------------
         When I click on "example.org"
         Then I should be at https://example.org/
