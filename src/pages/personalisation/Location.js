@@ -48,7 +48,10 @@ class Location extends React.Component {
     }
 
     componentDidMount(): void {
-        this.setLocationName(storage.getLocation());
+        this.setLocationName(
+            storage.getLocation(),
+            storage.getLocation() != "" // valid location
+        );
     }
 
     /* eslint-disable react/sort-comp */
@@ -165,9 +168,11 @@ class Location extends React.Component {
             });
     }
 
-    setLocationName(name: any): void {
-        this.setState({locationName: `${name || ""}`});
-        if (name) {
+    setLocationName(name: any, validChoice: boolean): void {
+        this.setState({
+            locationName: `${name || ""}`,
+        });
+        if (name && validChoice) {
             this.setNextEnabled(true);
         } else {
             this.setNextEnabled(false);
@@ -191,7 +196,7 @@ class Location extends React.Component {
                     geolocation: GeoLocationState.COMPLETE,
                     locationCoords: location,
                 });
-                this.setLocationName(name);
+                this.setLocationName(name, true);
             })
 
             .catch(error => {
@@ -205,7 +210,6 @@ class Location extends React.Component {
 
     onNextStep(): void {
         storage.setLocation(this.state.locationName || "");
-
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object): void {
@@ -219,14 +223,15 @@ class Location extends React.Component {
 
     /*::__(){`*/@debounce(500)/*::`}*/
     scrollToSearchControl(): void {
-        // Scroll the input to just under the appbar
-        window.scrollTo(0, this.refs.search.offsetTop - 40)
+        if (this.refs.search) {
+            // Scroll the input to just under the appbar
+            window.scrollTo(0, this.refs.search.offsetTop - 40);
+        }
     }
 
     onSearchChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {
-            this.setLocationName(ltrim(event.target.value));
-
+            this.setLocationName(ltrim(event.target.value), false);
             this.setState({
                 autocompletion: AutocompleteState.SEARCHING,
             });
@@ -302,7 +307,7 @@ class Location extends React.Component {
                 }
                 <form
                     className="search"
-                    onSubmit={this.nextStep.bind(this)}
+                    onSubmit={this.props.onDoneTouchTap}
                 >
                     <div>
                         <input
@@ -345,7 +350,7 @@ class Location extends React.Component {
                                 let locationName =
                                     `${result.suburb}, ${result.state}`;
 
-                                this.setLocationName(locationName);
+                                this.setLocationName(locationName, true);
                                 this.setState({
                                     autocompletions: [],
                                 });
@@ -372,7 +377,7 @@ class Location extends React.Component {
                     <components.FlatButton
                         label="Done"
                         onClick={this.props.onDoneTouchTap}
-                        disabled={!this.state.locationName}
+                        disabled={!this.getNextEnabled()}
                     />
                 </div>
             </div>

@@ -18,6 +18,10 @@ const Personalisation = {
         this.context.controller.setState({nextDisabled: !enabled});
     },
 
+    getNextEnabled: function getNextEnabled(): boolean {
+        return !this.context.controller.state.nextDisabled;
+    },
+
     nextStep: function nextStep(): void {
         this.context.controller.nextStep();
     },
