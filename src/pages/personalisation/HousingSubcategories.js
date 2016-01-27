@@ -21,24 +21,24 @@ export default class HousingSubcategories extends BaseQuestion {
                 .remove("-(respite care)")
                 .remove("-(housing information)")
                 .remove("-hef")
-                .append("community housing -(rooming house)"),
+                .append("(community housing) -(rooming house)"),
             "Private rental": remove("housing")
                 .remove("-(respite care)")
                 .remove("-(housing information)")
                 .remove("-hef")
-                .append("transitional accommodation"),
+                .append("(transitional housing)"),
             "Public housing": remove("housing")
                 .remove("-(respite care)")
                 .remove("-(housing information)")
                 .remove("-hef")
-                .append("social housing")
+                .append("(social housing)")
                 .append("-(public rental)")
                 .append("-(public housing)"),
             "Mortgaged housing": remove("housing")
                 .remove("-(respite care)")
                 .remove("-(housing information)")
                 .remove("-hef")
-                .append("transitional accommodation"),
+                .append("(transitional housing)"),
         },
     };
 
