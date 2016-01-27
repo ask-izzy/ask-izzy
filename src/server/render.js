@@ -72,6 +72,10 @@ export default function render(req, res, next) {
                     );
                     const doctype = "<!DOCTYPE html>";
 
+                    if (process.env.NODE_ENV != "development") {
+                        res.set("Cache-Control", "max-age=60");
+                    }
+
                     res.send(doctype + html);
                 } else {
                     res.status(404).send("Not found");
