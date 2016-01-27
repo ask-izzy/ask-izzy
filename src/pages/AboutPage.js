@@ -2,6 +2,7 @@
 /* eslint-disable max-len */
 
 import React from "react";
+import { Link } from "react-router";
 import components from "../components";
 
 class AboutPage extends React.Component {
@@ -76,11 +77,9 @@ class AboutPage extends React.Component {
                         If you provide a community support service and would like to list your service in Ask Izzy, take action now. It's easy and there is no cost involved.
                     </p>
                     <p>
-                        <a
-                            href="http://www.serviceseeker.com.au/add/"
-                        >
+                        <Link to="/add-service">
                             Add a new site / service
-                        </a>.
+                        </Link>.
                     </p>
 
 
