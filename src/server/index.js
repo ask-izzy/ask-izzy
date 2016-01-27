@@ -33,6 +33,9 @@ server.use(express.static(path.resolve(__dirname, "../../public"), {
     maxAge: 0,
 }));
 
+// React pages aren't etag-friendly
+server.set("etag", false);
+
 // Render the app server-side and send it as response
 server.use(render);
 
