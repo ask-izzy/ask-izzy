@@ -23,6 +23,7 @@ export default class Age extends BaseQuestion {
             }),
             "65 or older": append({
                 q: "aged",
+                minimum_should_match: "30%",
             }),
         },
     };

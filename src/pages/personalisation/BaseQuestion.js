@@ -82,6 +82,10 @@ class AppendToSearch extends Search {
             search.is_bulk_billing = this.search.is_bulk_billing;
         }
 
+        if (this.search.minimum_should_match) {
+            search.minimum_should_match = this.search.minimum_should_match;
+        }
+
         if (this.search.healthcare_card_holders) {
             search.healthcare_card_holders =
                 this.search.healthcare_card_holders;

@@ -32,6 +32,7 @@ describe("Compose personalisation search terms", function() {
             .getSearchForAnswer(request, "65 or older");
         assert.deepEqual(request, {
             q: "crisis accommodation aged",
+            minimum_should_match: "30%",
         });
     });
 
@@ -50,6 +51,7 @@ describe("Compose personalisation search terms", function() {
             .getSearchForAnswer(request, "65 or older");
         assert.deepEqual(request, {
             q: "crisis accommodation aged",
+            minimum_should_match: "30%",
             client_gender: ["m", "u"],
         });
     });
