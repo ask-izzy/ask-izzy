@@ -24,6 +24,7 @@ RUN echo "Disabling non-essential packages" && \
         apt-transport-https \
         ca-certificates \
         curl \
+        supervisor \
         && \
     echo "Adding nodejs gpg key" && \
     curl -sL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \

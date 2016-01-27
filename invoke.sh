@@ -44,7 +44,8 @@ else
         serve)
             shift 1
 
-            exec ./script/prod-server
+            supervisord -c .supervisord.conf -n
+
             ;;
 
         env)
