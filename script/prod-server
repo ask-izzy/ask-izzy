@@ -6,4 +6,4 @@ PATH=`npm bin`:$PATH
 export PORT=${PORT-8000}
 export NODE_ENV=production
 
-node --max_old_space_size 1536 index
+node index
