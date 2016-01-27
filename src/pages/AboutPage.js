@@ -43,7 +43,7 @@ class AboutPage extends React.Component {
                     </ul>
                     <p>
                         For media enquiries or to find out more about
-                        Ask Izzy visit
+                        Ask Izzy visit{' '}
                         <a href="https://www.infoxchange.net.au/ask-izzy">
                             Infoxchange’s website
                         </a>
