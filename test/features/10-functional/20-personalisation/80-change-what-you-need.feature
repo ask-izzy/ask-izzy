@@ -39,6 +39,7 @@ Feature: Change your personalisation settings
 
         When I search for "carlt"
         And I click on "Carlton"
+        And I click on the done button
 
         Then I should see "Change your answers here"
         Then I should see the results

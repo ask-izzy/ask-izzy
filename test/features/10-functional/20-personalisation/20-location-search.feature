@@ -26,7 +26,8 @@ Feature: Location search
         -------------------------------------------
 
         When I click on "Carlton"
-        Then I should see "Do you have somewhere safe to sleep tonight?"
+        Then search box should contain "Carlton, Victoria"
+        And the button "Done" should be enabled
 
     Scenario: Suburb search normalises spaces
         When I visit /category/housing/personalise/page/location
