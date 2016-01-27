@@ -54,13 +54,12 @@ class HomePage extends React.Component {
                         </p>
 
                         {
-                            moment().isBefore(moment("2015-01-29 10")) ||
+                            moment().isBefore(moment("2015-01-28 23")) ||
                             <p className="branding-copy">
                                Pre-launch release embargoed until
                                10:00am Friday 29 January
                             </p>
                         }
-
 
                     </div>
                     <HeaderBar
