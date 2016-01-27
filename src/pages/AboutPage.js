@@ -27,7 +27,7 @@ class AboutPage extends React.Component {
                     <h3>Ask Izzy</h3>
                     <ul>
                         <li>
-                            Is Australia wide and free
+                            Is Australia wide, free and anonymous
                         </li>
                         <li>
                             Can help you find housing, meals,
@@ -35,20 +35,22 @@ class AboutPage extends React.Component {
                             addiction help and a whole lot more services
                         </li>
                         <li>
-                            Lists more than 340,000 different services
+                            Lists more than 350,000 different services
                         </li>
                         <li>
                             Is available on phones, tablets and computers
                         </li>
                     </ul>
                     <p>
-                        We acknowledge the traditional custodians of this
-                        land and pay our respects to their culture, their
-                        people and elders past and present.
+                        For media enquiries or to find out more about
+                        Ask Izzy visit
+                        <a href="https://www.infoxchange.net.au/ask-izzy">
+                            Infoxchange’s website
+                        </a>
                     </p>
 
                     <h3>
-                        Ask Izzy Service Provider Information
+                        Ask Izzy Service provider information
                     </h3>
                     <p>
                         Service information is constantly changing.
@@ -64,7 +66,7 @@ class AboutPage extends React.Component {
                         Adding your site or service
                     </h4>
                     <p>
-                        You are able to add your service details to Ask Izzy by clicking the button below and providing the requested information.  Information provided will be published on the Ask Izzy homelessness website and Infoxchange Service Seeker national directory. Please only provide information that you wish to be published. Please also note, correspondence for data maintenance purposes and updates regarding your listed service/s will be sent to your nominated contact email address.
+                        You are able to add your service details to Ask Izzy by clicking the button below and providing the requested information. Information provided will be published on the Ask Izzy homelessness website and Infoxchange Service Seeker national directory. Please only provide information that you wish to be published. Please also note, correspondence for data maintenance purposes and updates regarding your listed service/s will be sent to your nominated contact email address.
                     </p>
                     <p>
                         If you provide a community support service and would like to list your service in Ask Izzy, take action now. It's easy and there is no cost involved.
@@ -104,6 +106,12 @@ class AboutPage extends React.Component {
                     <a href="http://www.newscorpaustralia.com/"><h4>News Corp Australia</h4></a>
                     <p>
                         News Corp’s mission is to inspire, inform and advocate for a better Australia, which is why we are collaborating with REA Group, Google and Infoxchange on Ask Izzy. Each day we reach 7.1 million Australians through our newspapers and websites. We have an important role in communicating the value and existence of this critical social tool that will benefit the vulnerable in our society.
+                    </p>
+
+                    <p className="acknowledgement">
+                        We acknowledge the traditional custodians of this
+                        land and pay our respects to their culture, their
+                        people and elders past and present.
                     </p>
                 </div>
             </div>
