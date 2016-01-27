@@ -41,15 +41,7 @@ class ContactMethods extends React.Component {
     };
 
     get phones(): Array<Object> {
-        const filteredPhoneKinds = new Set(["fax", "tty"]);
-        const phoneOrder = ["freecall", "phone", "mobile"];
-        let phones = this.props.object.phones || [];
-
-        phones = _.filter(phones,
-                          phone => !filteredPhoneKinds.has(phone.kind));
-        phones = _(phones).sortBy(phone => phoneOrder.indexOf(phone.kind));
-        phones = _(phones).uniq(phone => phone.number);
-        return phones;
+        return this.props.object.Phones()
     }
 
     get emails(): Array<Object> {

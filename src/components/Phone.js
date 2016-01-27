@@ -26,22 +26,12 @@ class Phone extends React.Component {
         });
     }
 
-    kind(): string {
-        let result = titleize(this.props.kind);
-
-        if (result.match(/Free/)) {
-            result = "Free from landline"
-        }
-
-        return result;
-    }
-
     render(): ReactElement {
         return (
             <div className="Contact Phone">
                 <span className="kind">
                     {this.props.comment ? this.props.comment
-                    : this.kind()}
+                    : titleize(this.props.kind)}
                 </span>
                 <a
                     href={this.href}
