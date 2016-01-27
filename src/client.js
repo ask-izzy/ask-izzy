@@ -8,8 +8,10 @@ import storage from "./storage";
 import routes from "./routes";
 import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
+import categories from "./constants/categories";
 
 window.searchTest = searchTest;
+window.categories = categories;
 
 /*
  * If at any point there isn't a meaningful 'back',
