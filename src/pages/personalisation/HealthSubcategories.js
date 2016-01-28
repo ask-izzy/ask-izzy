@@ -1,6 +1,6 @@
 /* @flow */
 
-import BaseQuestion, { remove, append } from "./BaseQuestion";
+import BaseQuestion, { remove } from "./BaseQuestion";
 
 export default class HealthSubcategories extends BaseQuestion {
     static title = "Health";
@@ -9,10 +9,6 @@ export default class HealthSubcategories extends BaseQuestion {
         name: "sub-health",
         question: "What sort of help do you need?",
         answers: {
-            /* eslint-disable max-len */
-            "Doctor or nurse": append("(general medical practitioners)")
-                .append("nurse")
-                .append({minimum_should_match: "30%"}),
             "Children": remove("(community health)")
                 .append("health children"),
             "Maternal & child health": remove("(community health)")
