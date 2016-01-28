@@ -10,7 +10,7 @@ export default class EverydayThingsSubcategories extends BaseQuestion {
         question: "What do you need?",
         answers: {
             /* eslint-disable max-len */
-            "Food packages/parcels/vouchers": append("food parcel voucher pack"),
+            "Food packages/parcels/vouchers": append("food parcel"),
             "Transport": remove("material aid")
                 .append("transport")
                 .append("travel")
