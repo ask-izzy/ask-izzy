@@ -18,7 +18,7 @@ class DebugQueryScore extends React.Component {
                         <span className="key">
                             {key}
                         </span> = <span className="value">
-                            "{search[key]}"
+                            {JSON.stringify(search[key])}
                         </span>
                     </pre>
                 )}
