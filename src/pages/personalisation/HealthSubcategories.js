@@ -11,7 +11,8 @@ export default class HealthSubcategories extends BaseQuestion {
         answers: {
             /* eslint-disable max-len */
             "Doctor or nurse": append("(general medical practitioners)")
-                .append("nurse"),
+                .append("nurse")
+                .append({minimum_should_match: "30%"}),
             "Children": remove("(community health)")
                 .append("health children"),
             "Maternal & child health": remove("(community health)")
