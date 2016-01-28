@@ -29,10 +29,9 @@ describe("Compose personalisation search terms", function() {
         };
 
         request = require("../../src/pages/personalisation/Age")
-            .getSearchForAnswer(request, "26 to 39");
+            .getSearchForAnswer(request, "25 or younger");
         assert.deepEqual(request, {
-            q: "crisis accommodation adults",
-            age_groups: ["adult"],
+            q: "crisis accommodation youth",
         });
     });
 
@@ -48,10 +47,9 @@ describe("Compose personalisation search terms", function() {
         }
 
         request = require("../../src/pages/personalisation/Age")
-            .getSearchForAnswer(request, "26 to 39");
+            .getSearchForAnswer(request, "25 or younger");
         assert.deepEqual(request, {
-            q: "crisis accommodation males adults",
-            age_groups: ["adult"],
+            q: "crisis accommodation males youth",
             client_gender: ["m", "u"],
         });
     });
