@@ -11,7 +11,10 @@ export default class EverydayThingsSubcategories extends BaseQuestion {
         answers: {
             /* eslint-disable max-len */
             "Food packages/parcels/vouchers": append("food parcel voucher pack"),
-            "Transport": append("transport voucher taxi subsidy"),
+            "Transport": remove("material aid")
+                .append("transport")
+                .append("travel")
+                .append("-hacc"),
             "Keeping warm": remove("material aid")
                 .append("swags blankets"),
             "Clothes": remove("material aid").append("clothes"),
