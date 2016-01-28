@@ -3,9 +3,9 @@
 import React from "react";
 import { History } from "react-router";
 import reactMixin from "react-mixin";
-import moment from "moment";
 
 import HeaderBar from "../components/HeaderBar";
+import EmbargoMessage from "../components/EmbargoMessage";
 import NavBar from "../components/NavBar";
 import icons from "../icons";
 import storage from "../storage";
@@ -53,13 +53,7 @@ class HomePage extends React.Component {
                            The A to Z directory of homeless help
                         </p>
 
-                        {
-                            moment().isBefore(moment("2015-01-28 23")) ||
-                            <p className="branding-copy">
-                               Pre-launch release embargoed until
-                               10:00am Friday 29 January
-                            </p>
-                        }
+                        <EmbargoMessage />
 
                     </div>
                     <HeaderBar

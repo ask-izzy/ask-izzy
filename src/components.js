@@ -16,6 +16,7 @@ import DebugQueryScore from "./components/DebugQueryScore";
 import DebugSearch from "./components/DebugSearch";
 import Eligibility from "./components/Eligibility";
 import Email from "./components/Email";
+import EmbargoMessage from "./components/EmbargoMessage";
 import FlatButton from "./components/FlatButton";
 import FloatFromBottom from "./components/FloatFromBottom";
 import GoogleMapsLink from "./components/GoogleMapsLink";
@@ -54,6 +55,7 @@ export default {
     DebugSearch: DebugSearch,
     Eligibility: Eligibility,
     Email: Email,
+    EmbargoMessage: EmbargoMessage,
     FlatButton: FlatButton,
     FloatFromBottom: FloatFromBottom,
     GoogleMapsLink: GoogleMapsLink,
