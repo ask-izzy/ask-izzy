@@ -87,6 +87,11 @@ class AppendToSearch extends Search {
                 this.search.healthcare_card_holders;
         }
 
+        if (this.search.minimum_should_match) {
+            search.minimum_should_match =
+                this.search.minimum_should_match;
+        }
+
         return search;
     }
 }

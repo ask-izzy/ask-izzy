@@ -26,7 +26,7 @@ export type searchRequest = {
     service_types?: string | Array<string>,
     site_id?: number,
 
-    minimum_must_match?: string,
+    minimum_should_match?: string,
 
     area?: string,
     location?: string,
