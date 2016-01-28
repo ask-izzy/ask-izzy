@@ -12,9 +12,8 @@ export default class HealthSubcategories extends BaseQuestion {
             /* eslint-disable max-len */
             "Doctor or nurse": append("(general medical practitioners)")
                 .append("nurse"),
-            "Children": remove("(community health)").append({
-                q: "health children",
-            }),
+            "Children": remove("(community health)")
+                .append("health children"),
             "Maternal & child health": remove("(community health)")
                 .remove({healthcare_card_holders: true})
                 .append("maternal child health"),
