@@ -10,7 +10,8 @@ export default class HealthSubcategories extends BaseQuestion {
         question: "What sort of help do you need?",
         answers: {
             /* eslint-disable max-len */
-            "Doctor or nurse": append("(general medical practitioners)"),
+            "Doctor or nurse": append("(general medical practitioners)")
+                .append("nurse"),
             "Children": remove("(community health)").append({
                 q: "health children",
             }),
