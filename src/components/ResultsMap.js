@@ -31,7 +31,7 @@ class ResultsMap extends React.Component {
 
     componentDidUpdate(prevProps: Object, prevState: Object) {
         if (this.state.maps &&
-            !_.isEmpty(this.props.objects)) {
+            !_.isEmpty(this.services())) {
             this.showWholeMap();
         }
     }
@@ -64,16 +64,21 @@ class ResultsMap extends React.Component {
         });
     }
 
-    get sites(): Array<Array<iss.Service>> {
+    services(): Array<iss.Service> {
         if (!this.props.objects) {
             return [];
-        } else if (this._sites) {
-            return this._sites;
-        } else {
-            this._sites = _.values(_.groupBy(this.props.objects,
-                                             obj => obj.site.id));
-            return this._sites;
         }
+
+        return this.props.objects.filter(
+            (service) => !service.Location().isConfidential()
+        );
+    }
+
+    get sites(): Array<Array<iss.Service>> {
+        return _.values(_.groupBy(
+            this.services(),
+            obj => obj.site.id
+        ));
     }
 
     /**
@@ -86,7 +91,7 @@ class ResultsMap extends React.Component {
         const maps = this.state.maps.api;
         let bounds = new maps.LatLngBounds();
 
-        for (let object of this.props.objects) {
+        for (let object of this.services()) {
             if (object.location.point) {
                 bounds.extend(new maps.LatLng(object.location.point.lat,
                                               object.location.point.lon));
