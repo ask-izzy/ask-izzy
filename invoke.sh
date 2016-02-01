@@ -1,59 +1,35 @@
 #!/bin/bash
-# Fix the permissions of static volume, execute the management command as the
-# app user.
 
-# Set RUN_AS_USER=true to run without reexec-ing as the `app' user. Useful
-# if running outside of Docker.
+case "$1" in
+    test)
+        shift 1
 
-APP="ask_izzy"
-APP_USER="app"
+        echo "ISS server: $ISS_URL"
 
-: "${WEB_CONCURRENCY:=1}"
-: "${WORKER_CONCURRENCY:=1}"
-export APP APP_USER WEB_CONCURRENCY WORKER_CONCURRENCY
+        # install the dev deps
+        NODE_ENV=development npm install
 
-# export NEW_RELIC_ENVIRONMENT="$ENVIRONMENT"
-# export NEW_RELIC_CONFIG_FILE=./conf/newrelic.ini
+        exec ./script/test
+        ;;
 
-if [ "x$RUN_AS_USER" != "xtrue" ] && [ "x$(whoami)" != "x$APP_USER" ]; then
-    chown -R "$APP_USER" /static /storage
+    deploy)
+        shift 1
 
-    # Call back into ourselves as the app user. This saves a big, nasty, huge
-    # chunk of escaped quotes and figuring out bash arrays in all that mess
-    # (they are hard enough without escaping!)
-    exec sudo -sEH -u "$APP_USER" -- "$0" "$@"
-else
-    case "$1" in
-        test)
-            shift 1
+        cp -r ./public/static/* /static/
+        ;;
 
-            echo "ISS server: $ISS_URL"
+    serve)
+        shift 1
 
-            # install the dev deps
-            NODE_ENV=development npm install
+        exec ./script/prod-server
+        ;;
 
-            exec ./script/test
-            ;;
+    env)
+        shift 1
+        exec env $@
+        ;;
 
-        deploy)
-            shift 1
-
-            cp -r ./public/static/* /static/
-            ;;
-
-        serve)
-            shift 1
-
-            exec ./script/prod-server
-            ;;
-
-        env)
-            shift 1
-            exec env $@
-            ;;
-
-        *)
-            echo "Unknown command: $1"
-            ;;
-    esac
-fi
+    *)
+        echo "Unknown command: $1"
+        ;;
+esac
