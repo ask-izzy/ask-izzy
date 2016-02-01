@@ -62,8 +62,8 @@ release-test:
 release-staging:
 	$(MAKE) release APPNAME=askizzy-staging.infoxchangeapps.net.au CONTINUE=y
 
-release-prod:
-	$(MAKE) release APPNAME=askizzy.org.au
+# release-prod:
+# 	$(MAKE) release APPNAME=askizzy.org.au
 
 .PHONY: build push test deploy serve \
 	release release-staging release-prod
