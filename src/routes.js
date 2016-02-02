@@ -43,6 +43,8 @@ export function makeTitle(
         title = title.replace(`:${key}`, unslug(params[key]));
     });
 
+    title = title.replace(" in :suburb, :state", "").replace(/:[^\s]+/, "");
+
     return title ? `${title} | Ask Izzy` : "Ask Izzy";
 }
 
