@@ -16,4 +16,5 @@ fi
 webpack --display-error-details --stats --progress --bail \
     --config ./webpack/prod.load.js
 
+export NODE_ENV=${NODE_ENV:=development}
 node index.js src/server/render-static
