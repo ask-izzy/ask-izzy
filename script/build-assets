@@ -15,3 +15,5 @@ fi
 
 webpack --display-error-details --stats --progress --bail \
     --config ./webpack/prod.load.js
+
+node index.js src/server/render-static
