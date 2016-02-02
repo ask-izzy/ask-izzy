@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+conffile=$(mktemp -t nginxconf)
+
+sed "s%/app/public%$(pwd)/public%g" < conf/nginx.conf > "$conffile"
+
+nginx -c "$conffile"
