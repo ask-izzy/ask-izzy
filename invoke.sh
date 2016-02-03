@@ -15,13 +15,14 @@ case "$1" in
     deploy)
         shift 1
 
+        ./script/generate-env-vars > ./public/env.js
         cp -r ./public/static/* /static/
         ;;
 
     serve)
         shift 1
 
-        exec ./script/prod-server
+        exec ./script/run-nginx
         ;;
 
     env)
