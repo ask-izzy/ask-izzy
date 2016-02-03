@@ -4,7 +4,6 @@ import fs from "fs";
 import { dirname } from "path";
 import url from "url";
 
-import loadVars from "./vars";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { match, RoutingContext } from "react-router";
@@ -16,8 +15,6 @@ import HtmlDocument from "./HtmlDocument";
 // flow:disable
 import webpackStats from "./webpack-stats";
 import categories from "../constants/categories";
-
-loadVars();
 
 function renderPage(uri: string, path: string): void {
     const reqUrl = url.parse(uri);
