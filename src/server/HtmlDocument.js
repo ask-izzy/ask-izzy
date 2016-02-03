@@ -1,11 +1,7 @@
 /* @flow */
 
 import React from "react";
-
-declare var GOOGLE_API_KEY: string;
-declare var ISS_URL: string;
-declare var GOOGLE_ANALYTICS_ID: string;
-declare var GOOGLE_TAG_MANAGER_ID: string;
+import snippets from "../google-snippets";
 
 class HtmlDocument extends React.Component {
 
@@ -39,18 +35,6 @@ class HtmlDocument extends React.Component {
         } = this.props;
         const viewport =
             "width=device-width, initial-scale=1.0, user-scalable=no";
-        const envConfig = `
-            var ISS_URL = ${JSON.stringify(ISS_URL)};
-            var GOOGLE_API_KEY = ${JSON.stringify(GOOGLE_API_KEY)};
-            var GOOGLE_ANALYTICS_ID = ${JSON.stringify(GOOGLE_ANALYTICS_ID)};
-            var GOOGLE_TAG_MANAGER_ID = ${
-                JSON.stringify(GOOGLE_TAG_MANAGER_ID)
-            };
-        `;
-
-        /* eslint-disable max-len */
-        const gmapsApi = `//maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places`;
-        /* eslint-enable max-len */
 
         return (
 <html >
@@ -243,7 +227,8 @@ class HtmlDocument extends React.Component {
             content="/static/favicons/mstile-144x144.png"
         />
 
-        <script dangerouslySetInnerHTML={{__html: envConfig}} />
+        <script src="/env.js" />
+
         {this.renderAnalyticsBlock()}
 
     </head>
@@ -262,51 +247,33 @@ class HtmlDocument extends React.Component {
             />
         )}
 
-        <script src={gmapsApi}>
-        </script>
 
+        <script dangerouslySetInnerHTML={{__html: `
+            var gmapsApi = document.createElement("script");
+            gmapsApi.setAttribute(
+                "src",
+                "//maps.googleapis.com/maps/api/js?key=" +
+                window.GOOGLE_API_KEY +
+                "&libraries=places"
+            );
+            document.body.appendChild(gmapsApi);`}}
+        />
     </body>
 </html>
         );
     }
 
     renderAnalyticsBlock(): ?Array<ReactElement> {
-        /* eslint-disable max-len */
-        const snippet = `
-            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-            ga('create', GOOGLE_ANALYTICS_ID, 'auto');
-            ga('send', 'pageview');
-        `;
-
-        const tagManagerSnippet = `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer', GOOGLE_TAG_MANAGER_ID);
-        `;
-
-        if (GOOGLE_ANALYTICS_ID) {
+        if (process.env.NODE_ENV == "production") {
             return [
-                <script dangerouslySetInnerHTML={{__html: snippet}}
-                    key="google-analytics-1"
-                />,
+                <script
+                    dangerouslySetInnerHTML={{html: snippets.toString()}}
+                ></script>,
                 <script
                     async={true}
                     key="google-analytics-2"
                     src="//www.google-analytics.com/analytics.js"
                 ></script>,
-                <noscript key="google-tag-manager-noscript">
-                    <iframe
-                        src={`//www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`}
-                        height="0"
-                        width="0"
-                        style={{display: "none", visibility: "hidden"}}
-                    ></iframe>
-                </noscript>,
-                <script dangerouslySetInnerHTML={{__html: tagManagerSnippet}}
-                    key="google-tag-manager"
-                />,
             ];
         }
     }

@@ -16,12 +16,13 @@ case "$1" in
         shift 1
 
         cp -r ./public/static/* /static/
+        ./script/generate-env-vars > /static/env.js
         ;;
 
     serve)
         shift 1
 
-        exec ./script/prod-server
+        exec ./script/run-nginx
         ;;
 
     env)
