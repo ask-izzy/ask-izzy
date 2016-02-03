@@ -18,8 +18,6 @@ export default function loadVars() {
     // code can be used.
     GLOBAL.ISS_URL = process.env.ISS_URL;
     GLOBAL.GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
-    GLOBAL.SITE_DOMAIN = process.env.SITE_DOMAIN;
     GLOBAL.GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID;
     GLOBAL.GOOGLE_TAG_MANAGER_ID = process.env.GOOGLE_TAG_MANAGER_ID;
-
 }

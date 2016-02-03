@@ -4,7 +4,6 @@ import React from "react";
 
 declare var GOOGLE_API_KEY: string;
 declare var ISS_URL: string;
-declare var SITE_DOMAIN: string;
 declare var GOOGLE_ANALYTICS_ID: string;
 declare var GOOGLE_TAG_MANAGER_ID: string;
 
@@ -43,7 +42,6 @@ class HtmlDocument extends React.Component {
         const envConfig = `
             var ISS_URL = ${JSON.stringify(ISS_URL)};
             var GOOGLE_API_KEY = ${JSON.stringify(GOOGLE_API_KEY)};
-            var SITE_DOMAIN = ${JSON.stringify(SITE_DOMAIN)};
             var GOOGLE_ANALYTICS_ID = ${JSON.stringify(GOOGLE_ANALYTICS_ID)};
             var GOOGLE_TAG_MANAGER_ID = ${
                 JSON.stringify(GOOGLE_TAG_MANAGER_ID)
