@@ -27,12 +27,8 @@ function renderPage(uri: string, path: string): void {
         (error, redirectLocation, renderProps) => {
             if (error) {
                 throw error;
-            // } else if (redirectLocation) {
-            //     res.redirect(
-            //         302,
-            //         redirectLocation.pathname +
-            //         redirectLocation.search
-            //     );
+            } else if (redirectLocation) {
+                throw badRouteParams;
             } else if (!renderProps) {
                 throw badRouteParams;
             }
