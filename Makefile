@@ -59,6 +59,24 @@ release:
 release-test:
 	$(MAKE) release APPNAME=askizzy-test.docker.dev CONTINUE=y
 
+release-test1:
+	$(MAKE) release APPNAME=askizzy-test-1.docker.dev CONTINUE=y
+
+release-test2:
+	$(MAKE) release APPNAME=askizzy-test-2.docker.dev CONTINUE=y
+
+release-test3:
+	$(MAKE) release APPNAME=askizzy-test-3.docker.dev CONTINUE=y
+
+release-test4:
+	$(MAKE) release APPNAME=askizzy-test-4.docker.dev CONTINUE=y
+
+release-test5:
+	$(MAKE) release APPNAME=askizzy-test-5.docker.dev CONTINUE=y
+
+release-test6:
+	$(MAKE) release APPNAME=askizzy-test-6.docker.dev CONTINUE=y
+
 release-staging:
 	$(MAKE) release APPNAME=askizzy-staging.infoxchangeapps.net.au CONTINUE=y
 
