@@ -227,7 +227,7 @@ class HtmlDocument extends React.Component {
             content="/static/favicons/mstile-144x144.png"
         />
 
-        <script src="/env.js" />
+        <script src="/static/env.js" />
 
         {this.renderAnalyticsBlock()}
 
