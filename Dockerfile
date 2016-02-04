@@ -24,6 +24,8 @@ RUN echo "Disabling non-essential packages" && \
         apt-transport-https \
         ca-certificates \
         curl \
+        supervisor \
+
         && \
     echo "Adding nodejs gpg key" && \
     curl -sL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
@@ -34,10 +36,13 @@ RUN echo "Disabling non-essential packages" && \
     apt-get -qq install \
         git \
         nodejs \
+        python-pip \
         sudo \
         && \
     echo "Cleaning up" && \
     apt-get clean
+
+RUN pip install supervisor-logging
 
 # Install the npm deps
 COPY package.json bower.json /app/
