@@ -17,18 +17,28 @@ export let persistentStore = ObjectStorage();
 export let sessionStore = ObjectStorage();
 let privateModeStore: ?Object;
 
-if ((typeof sessionStorage != "undefined") &&
-    canUseStorageImpl(sessionStorage)) {
-    // sessionStorage is available
-    persistentStore = sessionStorage;
-    sessionStore = sessionStorage;
+try {
+    if ((typeof sessionStorage != "undefined") &&
+        canUseStorageImpl(sessionStorage)) {
+        // sessionStorage is available
+        persistentStore = sessionStorage;
+        sessionStore = sessionStorage;
+    }
+} catch (error) {
+    // Browser blocked access to sessionStorage
+    console.log(error)
 }
 
 // If we can use localStorage for a persistent store, do so.
-if ((typeof localStorage != "undefined") &&
-    canUseStorageImpl(localStorage)) {
-    // localStorage is available
-    persistentStore = localStorage;
+try {
+    if ((typeof localStorage != "undefined") &&
+        canUseStorageImpl(localStorage)) {
+        // localStorage is available
+        persistentStore = localStorage;
+    }
+} catch (error) {
+    // Browser blocked access to localStorage
+    console.log(error)
 }
 
 if (persistentStore.privateMode) {

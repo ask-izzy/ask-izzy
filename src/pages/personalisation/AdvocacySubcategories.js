@@ -3,6 +3,7 @@
 import BaseQuestion, { remove } from "./BaseQuestion";
 
 export default class AdvocacySubcategories extends BaseQuestion {
+    static title = "Advocacy";
     static propTypes = BaseQuestion.propTypes;
     static defaultProps = {
         name: "sub-advocacy",

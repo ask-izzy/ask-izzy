@@ -3,9 +3,13 @@ set -euo pipefail
 IFS=$'\n\t'
 PATH=`npm bin`:$PATH
 
-if [ -z "${ISS_URL:=}" ] ; then
-    echo "ISS_URL not set; cannot run."
-    exit 1
+if [ -f public/env.js ] ; then
+    if [ -z "${ISS_URL:=}" ] ; then
+        echo "ISS_URL not set and env.js not present; cannot run."
+        exit 1
+    fi
+
+    ./script/generate-env-vars > public/env.js
 fi
 
 if which xdg-open; then
