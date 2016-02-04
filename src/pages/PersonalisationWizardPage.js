@@ -11,7 +11,11 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
 
     constructor(props: Object) {
         super(props);
-        this.state = {};
+        this.state = {nextDisabled: false};
+    }
+
+    componentWillReceiveProps(nextProps: Object): void {
+        this.setState({nextDisabled: false});
     }
 
     previousStep(): void {
