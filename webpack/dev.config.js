@@ -17,7 +17,7 @@ import extractText from "./extract-text";
 
 const assetsPath = path.resolve(__dirname, "../public/static");
 
-const WEBPACK_HOST = "localhost";
+const WEBPACK_HOST = process.env.WEBPACK_HOST || "localhost";
 const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
 const webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
 
@@ -25,7 +25,7 @@ module.exports = {
     devtool: "#source-map",
     entry: {
         hotload: [
-            "webpack-dev-server/client?http://localhost:8001",
+            `webpack-dev-server/client?${webpackUrl}`,
             "webpack/hot/only-dev-server",
         ],
         main: [

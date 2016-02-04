@@ -73,7 +73,7 @@ class AboutPage extends React.Component {
                     </p>
                     <p>
                         <a
-                            href="http://www.serviceseeker.com.au/add/"
+                            href="/add-service"
                         >
                             Add a new site / service
                         </a>.
