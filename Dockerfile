@@ -41,8 +41,8 @@ RUN echo "Disabling non-essential packages" && \
 
 # Install the npm deps
 COPY package.json bower.json /app/
-RUN npm install && \
-    npm install --only=dev && \
+RUN npm install --no-progress && \
+    npm install --only=dev --no-progress && \
     npm cache clean && \
     $(npm bin)/bower install --allow-root
 
