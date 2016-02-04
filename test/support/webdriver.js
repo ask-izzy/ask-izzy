@@ -35,7 +35,7 @@ export async function seleniumBrowser(
 export function baseUrl(): string {
     const port = process.env.PORT || 8000;
 
-    return `http://localhost:${port}`;
+    return process.env.IZZY_TEST_URL || `http://localhost:${port}`;
 }
 
 /**
