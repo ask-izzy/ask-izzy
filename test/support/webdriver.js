@@ -98,7 +98,7 @@ export default async function webDriverInstance(
          * via Selenium Grid */
         .withCapabilities(baseCaps)
         /* This is the default. Overridden by SELENIUM_BROWSER */
-        .forBrowser("firefox")
+        .forBrowser("phantomjs")
         .build();
 
     await driver
