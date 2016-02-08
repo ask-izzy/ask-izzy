@@ -106,7 +106,10 @@ function renderRoute(
     let {path, children} = route.props;
 
     for (const expandedPath of expandRoutes(path)) {
-        renderPage(expandedPath, expandedPath + "/index.html");
+        renderPage(
+            expandedPath,
+            expandedPath.replace("/searchTerm", "") + "/index.html"
+        );
     }
 
     for (const child of (children || [])) {
