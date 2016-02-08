@@ -15,6 +15,7 @@ case "$1" in
     deploy)
         shift 1
 
+        set -x # Logs
         ./script/generate-env-vars > ./public/env.js
         cp -r ./public/static/* /static/
         ;;
