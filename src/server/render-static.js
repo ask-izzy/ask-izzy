@@ -19,7 +19,7 @@ import categories from "../constants/categories";
 function hasVersionFile(): boolean {
     try {
         /* flow:disable Flow doesn't know about F_OK */
-        fs.accessSync("public/VERSION", fs.F_OK) // Is there a version string?
+        fs.accessSync("public/VERSION", fs.F_OK); // Is there a version string?
         return true;
     } catch (error) {
         return false;
