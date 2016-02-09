@@ -5,7 +5,7 @@
  * @module iss
  */
 
-import xhr from "xhr";
+import xhr from "axios";
 import url from "url";
 import { slugify } from "underscore.string";
 import _ from "underscore";
@@ -68,7 +68,6 @@ export type searchResults = {
 };
 
 type XhrOptions = {
-    useXDR?: boolean,
     url: string,
     method?: string,
     timeout?: number,
@@ -95,22 +94,19 @@ if (typeof window != "undefined") {
  *
  * @returns {Promise<Object>} a promise for the request.
  */
-function _request(obj: XhrOptions) {
-    return new Promise((resolve, reject) => {
-        xhrInProgress++;
-        xhr(obj, (err, response, body) => {
-            xhrInProgress--;
-            if (response.statusCode == 200) {
-                resolve(response);
-            } else {
-                sendEvent({
-                    event: "xhr_failed",
-                    statusCode: response.statusCode,
-                });
-                reject(response);
-            }
-        })
-    });
+async function _request(obj: XhrOptions) {
+    xhrInProgress++;
+    try {
+        return await xhr(obj);
+    } catch (error) {
+        sendEvent({
+            event: "xhr_failed",
+            error: JSON.stringify(error),
+        });
+        throw error;
+    } finally {
+        xhrInProgress--;
+    }
 }
 
 /**
@@ -172,7 +168,6 @@ export async function request(
     const url_ = mungeUrlQuery(url.resolve(ISS_URL, path), data);
 
     let response = await _request({
-        useXDR: true,
         url: url_,
         headers: {
             "Content-type": "application/json",
@@ -180,7 +175,7 @@ export async function request(
         },
     });
 
-    return JSON.parse(response.body);
+    return response.data;
 }
 
 /*
@@ -190,6 +185,11 @@ export async function request(
 async function attachTransportTimes(
     services: Array<Service>
 ): Promise<Array<Service>> {
+    if (typeof window == "undefined") {
+        // Google maps api doesn't work outside the browser.
+        return services;
+    }
+
     let formatPoint = (point) => `${point.lat},${point.lon}`;
     const maps = await Maps();
     let service: ?Service;
