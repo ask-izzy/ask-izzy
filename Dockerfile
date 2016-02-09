@@ -45,7 +45,7 @@ RUN npm install && \
 ADD . /app
 
 RUN script/build-assets && \
-    echo "const VERSION = \"`git describe`\"" > public/_version.js && \
+    git describe > public/VERSION && \
     chown -R app .
 
 # forward request and error logs to docker log collector

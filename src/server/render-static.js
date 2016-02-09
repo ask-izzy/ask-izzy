@@ -16,6 +16,20 @@ import HtmlDocument from "./HtmlDocument";
 import webpackStats from "./webpack-stats";
 import categories from "../constants/categories";
 
+function hasVersionFile(): boolean {
+    try {
+        /* flow:disable Flow doesn't know about F_OK */
+        fs.accessSync("public/VERSION", fs.F_OK) // Is there a version string?
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+const version = hasVersionFile() ?
+    fs.readFileSync("public/VERSION", "utf-8").trim()
+    : "";
+
 function renderPage(uri: string, path: string): void {
     const reqUrl = url.parse(uri);
 
@@ -46,6 +60,9 @@ function renderPage(uri: string, path: string): void {
                   script={webpackStats.script}
                   css={webpackStats.css}
                   currentUrl={reqUrl}
+                  envPath={version ?
+                      `/static/env-${version}.js` : "/static/env.js"
+                  }
               />
             );
             const doctype = "<!DOCTYPE html>";

@@ -15,12 +15,14 @@ class HtmlDocument extends React.Component {
         description: React.PropTypes.string,
         siteName: React.PropTypes.string,
         title: React.PropTypes.string,
+        envPath: React.PropTypes.string,
     };
 
     static defaultProps = {
         script: [],
         css: [],
         meta: {},
+        envPath: "/static/env.js",
     };
 
     render(): ReactElement {
@@ -32,6 +34,7 @@ class HtmlDocument extends React.Component {
             description,
             siteName,
             currentUrl,
+            envPath,
         } = this.props;
         const viewport =
             "width=device-width, initial-scale=1.0, user-scalable=no";
@@ -227,7 +230,7 @@ class HtmlDocument extends React.Component {
             content="/static/favicons/mstile-144x144.png"
         />
 
-        <script src="/static/env.js" />
+        <script src={envPath} />
 
         {this.renderAnalyticsBlock()}
 

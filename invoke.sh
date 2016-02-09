@@ -16,7 +16,8 @@ case "$1" in
         shift 1
 
         set -x # Logs
-        ./script/generate-env-vars > ./public/env.js
+        ./script/generate-env-vars > ./public/static/env-$(cat public/VERSION).js
+
         cp -r ./public/static/* /static/
         ;;
 
