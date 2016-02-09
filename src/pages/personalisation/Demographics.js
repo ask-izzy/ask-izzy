@@ -15,6 +15,8 @@ export default class Demographics extends BaseMultiQuestion {
             "Escaping family violence": append("family violence").remove({service_type: "housing"}),
             "Indigenous": append("Aboriginals & Torres Strait Islanders"),
             "Family with children": append("families -srs"),
+            // TODO "Couples" might negate gendered search,
+            // until we reintroduce LGBTQI
             "Couples": append("couples"),
             "Parole / recently released": append("post-release"),
             "Have a disability": append("disabilities"),
