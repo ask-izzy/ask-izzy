@@ -4,9 +4,9 @@ import path from "path";
 import express from "express";
 import render from "./render";
 
-import loadVars from "./vars";
+import requireVars from "./require-vars";
 
-loadVars();
+requireVars();
 
 // Initialize express server
 const server = express();
