@@ -26,7 +26,10 @@ GLOBAL.GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID;
 GLOBAL.GOOGLE_TAG_MANAGER_ID = process.env.GOOGLE_TAG_MANAGER_ID;
 
 if (process.argv[2] && (process.argv[2] != "index.js")) {
-    require("./" + process.argv[2]);
+    var content = require("./" + process.argv[2]);
+    if (typeof content == "function") {
+        content();
+    }
 } else {
     // Start the server app
     require("./src/server");
