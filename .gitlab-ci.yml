@@ -10,7 +10,6 @@ staging:
     only:
         - master
 
-
 # Tags are released to production
 production:
     type: deploy
