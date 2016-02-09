@@ -8,9 +8,44 @@ import {search} from "../src/iss";
 import _ from "underscore";
 import storage from "../src/storage";
 
-window.testLocations = {
-    "Bungendore, NSW": [35.283755, 149.3764635],
-    "Benalla, VIC": [-36.5707514, 145.866721],
+const browser = typeof window != "undefined";
+let test = {search: {
+    locations: {
+        "Bungendore, NSW": [35.283755, 149.3764635],
+        "Benalla, VIC": [-36.5707514, 145.866721],
+    },
+    // Housing is first in the list, but takes *forever*.
+    categories: [...Categories].reverse(),
+    demographicPermutations: [
+        [],
+        ["Escaping family violence"],
+        ["Couples"],
+        ["Parole / recently released"],
+        ["Have pets"],
+        [
+            "Escaping family violence",
+            "Indigenous",
+            "Family with children",
+            "Parole / recently released",
+            "Have a disability",
+            "Have pets",
+        ],
+        [
+            "Couples",
+            "Family with children",
+            "Asylum seeker",
+        ],
+        [
+            "Veteran",
+            "Have a disability",
+            "Have pets",
+        ],
+    ],
+}};
+
+// exposed so we can interactively fiddle with it in the console
+if (browser) {
+    window.test = test;
 }
 
 // Shamelessly copied from ResultsPage
@@ -47,11 +82,9 @@ function answerPermutations(personalisation: Object): Array<Object> {
         return [];
     }
 
+    // Pick a single demographic at a time
     if (name == "demographics") {
-        return Object.keys(answers)
-            .concat([])
-            .map((elem) => JSON.stringify(elem))
-            .map(toObject);
+        return test.search.demographicPermutations.map(toObject);
     }
 
     return Object.keys(answers)
@@ -60,7 +93,7 @@ function answerPermutations(personalisation: Object): Array<Object> {
 }
 
 function approxDistanceBetween(location, point): string {
-    const [startLat, startLon] = window.testLocations[location];
+    const [startLat, startLon] = test.search.locations[location];
     let distance = "unknown";
 
     if (point) {
@@ -88,18 +121,24 @@ function formatTestResult(service, location): string {
 }
 
 function addResultsToDom(objects, category, query): void {
-    let row = document.createElement("pre");
-
-    row.textContent = JSON.stringify({
+    const content = {
         category: category.name,
         query: query,
         results: objects.map((service) =>
             formatTestResult(service, query.location)),
-    }, null, 4);
+    };
 
-    document
-        .getElementById("secretContainer")
-        .appendChild(row);
+    if (browser) {
+        let row = document.createElement("pre");
+
+        row.textContent = JSON.stringify(content, null, 4);
+
+        document
+            .getElementById("secretContainer")
+            .appendChild(row);
+    } else {
+        console.log(content)
+    }
 }
 
 // Add all search results for the given category/location to the DOM
@@ -143,12 +182,9 @@ async function testCategoryAndLocation(category, location) {
     }
 }
 
-// Housing is first in the list, but takes *forever*.
-const reverseCategories = [...Categories].reverse()
-
 async function startTest() {
-    for (const location of Object.keys(window.testLocations)) {
-        for (const category of reverseCategories) {
+    for (const location of Object.keys(test.search.locations)) {
+        for (const category of test.search.categories) {
             await testCategoryAndLocation(category, location);
         }
     }
@@ -157,6 +193,9 @@ async function startTest() {
 export default function testSearch() {
     startTest()
         .then(() => console.log("Tested all search permutations"))
-        .catch((error) => console.log("Error running test search", error))
+        .catch((error) => console.log(
+            "Error running test search",
+            error,
+            error.stack
+        ))
 }
-
