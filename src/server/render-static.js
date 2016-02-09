@@ -63,6 +63,12 @@ function renderPage(uri: string, path: string): void {
                   envPath={version ?
                       `/static/env-${version}.js` : "/static/env.js"
                   }
+                  siteName="Ask Izzy"
+                  description={
+                      `Ask Izzy helps people who are homeless ` +
+                      `or at risk of becoming homeless to find` +
+                      ` the services they need, right now and nearby.`
+                  }
               />
             );
             const doctype = "<!DOCTYPE html>";
