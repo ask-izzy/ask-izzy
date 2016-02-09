@@ -44,8 +44,8 @@ RUN npm install && \
 # Install and build the app
 ADD . /app
 
-RUN script/build-assets && \
-    git describe > public/VERSION && \
+RUN git describe > public/VERSION && \
+    script/build-assets && \
     chown -R app .
 
 # forward request and error logs to docker log collector
