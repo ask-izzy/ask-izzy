@@ -18,10 +18,6 @@ Feature: Skip personalisation settings
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
-        Then I should see "Do you identify as…"
-
-        # Didn't answer the question
-        When I click on the done button
 
         When I click on "Change your answers"
         Then I should see "Change your answers here"
@@ -32,7 +28,6 @@ Feature: Skip personalisation settings
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | (skipped)
-        How do you identify?                         | (skipped)
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------

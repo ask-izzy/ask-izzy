@@ -9,7 +9,6 @@ Feature: Category page
         Given my location is "Melbourne VIC"
         And I have somewhere to sleep tonight
         And I need nothing for housing
-        And my gender is female
         And I am 27 years old
         And I am not part of any relevant demographics
         And I am not interested in any subcategory
@@ -17,7 +16,7 @@ Feature: Category page
     Scenario: Visit housing category
         When I visit /category/housing
         Then I should see "Housing"
-        Then I should see 3 search results for "women aged 26 to 64" in "Melbourne VIC"
+        Then I should see 3 search results for "people aged 26 to 64" in "Melbourne VIC"
         And I should see the results
         --------------------------------------------------------------------------
         Service Name (name) | Site Name (site_name) | Service provisions (related)

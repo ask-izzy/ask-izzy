@@ -50,7 +50,6 @@ const categories:Array<Category> = [
             personalisation.Location,
             personalisation.SleepTonight,
             personalisation.HousingSubcategories,
-            personalisation.Gender,
             personalisation.Age,
             personalisation.Demographics,
         ],

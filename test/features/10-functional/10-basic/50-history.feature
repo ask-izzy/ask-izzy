@@ -25,20 +25,14 @@ Feature: History navigation
         And I should be at /category/housing/personalise
 
         When I click on the done button
-        Then I should see "Do you identify as…"
-
-        When I click on "Female"
         Then I should see "How old are you?"
 
         When I click back from the title bar
-        Then I should see "Do you identify as…"
-
-        When I click on "Male"
         Then I should see "How old are you?"
 
         When I click on "25 or younger"
 
-        Then I should see 3 search results for "men aged 25 or younger" in "Melbourne VIC"
+        Then I should see 3 search results for "people aged 25 or younger" in "Melbourne VIC"
         And I should see "Housing"
         And I should be at /category/housing/
         And I should see the results
@@ -59,7 +53,7 @@ Feature: History navigation
 
         Then I should be at /category/housing/
 
-        Then I should see 3 search results for "men aged 25 or younger" in "Melbourne VIC"
+        Then I should see 3 search results for "people aged 25 or younger" in "Melbourne VIC"
 
         When I click back from the browser UI
         Then I should see "How old are you?"
