@@ -1,22 +1,32 @@
 #!/usr/bin/env bash
 set -euxo pipefail
 IFS=$'\n\t'
-PATH=`npm bin`:$PATH
+PATH=$(npm bin):$PATH
 
 export NODE_ENV=production
 export PORT=8010
 
-if [ -z "${GOOGLE_API_KEY:=}" ] ; then
-    echo "GOOGLE_API_KEY not set; tests will hang silently"
-    exit 1
-fi
+# Point the app at the real ISS
+./script/recreate-dev-env-file
 
-if [ -z "${ISS_URL:=}" ] ; then
-    echo "ISS_URL not set; integration tests will fail"
-fi
+# Run the unit tests
+PAUSE_ON_ERROR= mocha --compilers js:babel/register test/unit.js $@
+
+# Run the search tests
+# We pause for 4000ms when ISS rate-limits us, so allow a timeout of 6 seconds
+PAUSE_ON_ERROR= mocha --compilers js:babel/register --timeout 6000 test/search.js $@
+
+# Point the app at our mock ISS
+ISS_URL="http://localhost:5000/" ./script/recreate-dev-env-file
 
 # build assets if this isn't Travis (which has already)
 ${CI:=false} || ./script/build-assets
 
-# Saucelabs bails after 90 seconds inactivity
-mocha --timeout 80000 --compilers js:babel/register $@
+# Saucelabs bails after 90 seconds inactivity,
+# but otherwise we want this quite high
+# as it makes debugging the tests easier
+INTERACTIVE_TIMEOUT="80000"
+mocha --compilers js:babel/register --timeout "$INTERACTIVE_TIMEOUT" test/yadda.js $@
+
+# Point the app back at the real ISS
+./script/recreate-dev-env-file

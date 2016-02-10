@@ -15,7 +15,7 @@ function unpromisify(func: (...args: any) => Promise<void>): Function {
         const errorHandler = function(error) {
             const report = () => done(error);
 
-            console.log("Error", error);
+            console.log("Error", error, error.stack);
 
             if (process.env.PAUSE_ON_ERROR) {
                 pauseToDebug().then(report).catch(report);
