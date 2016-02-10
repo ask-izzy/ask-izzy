@@ -127,10 +127,9 @@ class ResultsPage extends BaseCategoriesPage {
                         statusCode: response.statusCode,
                     });
                 } catch (error) {
+                    console.log(error)
                     this.setState({
-                        error: `An error occurred (${
-                            response.statusCode || error
-                        })`,
+                        error: `An error occurred. Please try again.`,
                         statusCode: response.statusCode,
                     });
                 }
