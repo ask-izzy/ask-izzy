@@ -84,7 +84,7 @@ export default function render(req, res, next) {
 
                     res.send(doctype + html);
                 } else {
-                    res.status(404).send("Not found");
+                    next();
                 }
             }
         )

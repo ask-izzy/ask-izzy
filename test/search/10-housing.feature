@@ -1,5 +1,6 @@
-@integration
 Feature: Search for housing services
+    Background:
+        Given I have deleted all answers
 
     Scenario: Teenaged woman in Wheelers Hill
         Given my location is "Wheelers Hill, Victoria"
@@ -8,13 +9,16 @@ Feature: Search for housing services
         And I am not part of any relevant demographics
         And I am not interested in any subcategory
 
-        When I visit /category/housing
-
         # These are services for the aged...
-        Then my results should not contain
+        Then my results for housing should not contain
+        ----------------------------------------------
+        - site:
+            name: UnitingCare lifeAssist, Homeshare
+        - site:
+            name: Lifeview, The Willows
         ----------------------------------
-        Site Name (site_name)
-        ==================================
-        UnitingCare lifeAssist, Homeshare
-        Lifeview, The Willows
+        And my results for housing should contain
+        ----------------------------------
+        - site:
+            name: Ermha, Prevention & Recovery Care
         ----------------------------------
