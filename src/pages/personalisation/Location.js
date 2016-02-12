@@ -65,6 +65,10 @@ class Location extends React.Component {
         return storage.getLocation();
     }
 
+    static shouldEnableCatchment(): boolean {
+        return storage.getLocation().includes("Tasmania");
+    }
+
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         /* Coordinates are optional */
         let coords = storage.getCoordinates();
@@ -81,6 +85,7 @@ class Location extends React.Component {
         if (location) {
             return Object.assign(request, {
                 area: location,
+                catchment: this.shouldEnableCatchment(),
             });
         } else {
             return null;
