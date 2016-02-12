@@ -10,6 +10,7 @@ Feature: Personalisation
         Given a fresh session
         And I visit /
 
+    @skipphantomjs
     Scenario: Search for housing with personalised results
         When I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
@@ -42,6 +43,7 @@ Feature: Personalisation
         When I click back from the title bar
         Then I should see "The A to Z directory of homeless help"
 
+    @skipphantomjs
     Scenario: Search for emergency accommodation
         When I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
@@ -68,6 +70,7 @@ Feature: Personalisation
         When I click on the done button
         Then I should see "Housing"
 
+    @skipphantomjs
     Scenario: Do a search
         When I search for "find a meal" and press enter
         Then I should see "To help me find the right services I'll ask you a few questions"
