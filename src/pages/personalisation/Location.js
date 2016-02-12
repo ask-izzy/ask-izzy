@@ -63,6 +63,14 @@ class Location extends React.Component {
         return storage.getLocation();
     }
 
+    static shouldEnableCatchment(): boolean {
+        let tasmaniaRegex = /TAS(mania)?$/i;
+        if (tasmaniaRegex.exec(storage.getLocation())) {
+            return true;
+        }
+        return false;
+    }
+
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         /* Coordinates are optional */
         let coords = storage.getCoordinates();
@@ -76,13 +84,17 @@ class Location extends React.Component {
         /* Location/Area is required */
         let location = storage.getLocation();
 
-        if (location) {
-            return Object.assign(request, {
-                area: location,
-            });
-        } else {
+        if (!location) {
             return null;
         }
+
+        request = Object.assign(request, {area: location});
+
+        if (this.shouldEnableCatchment()) {
+            request = Object.assign(request, {catchment: true});
+        }
+
+        return request;
     }
 
     static summaryLabel = "Where are you?";
