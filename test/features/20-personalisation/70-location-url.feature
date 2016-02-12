@@ -8,6 +8,7 @@ Feature: Show location in url
     Background:
         Given a fresh session
 
+    @skipphantomjs
     Scenario: Search via bookmark
         When I visit /search/housing/in/Richmond-Victoria
         Then I should see 3 search results in "Richmond, Victoria"

@@ -31,6 +31,7 @@ Feature: Change your personalisation settings
         When I click back from the title bar
         Then I should be at /category/housing/
 
+    @skipphantomjs
     Scenario: Edit my location setting
         When I visit /category/housing/personalise/summary
         And I click on "Where are you?"
