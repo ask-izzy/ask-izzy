@@ -24,7 +24,7 @@ module.exports = (function() {
                unpromisify(setSubcategoryItemsNone))
         .given("I need the following for $STRING\n$lines",
                unpromisify(setSubcategoryItems))
-        .given("I need the following for $STRING: $string",
+        .given("I need the following for $STRING: $STRING",
                unpromisify(setSubcategoryItem))
         .given("I am not part of any relevant demographics",
                unpromisify(setDemographicsNone))
