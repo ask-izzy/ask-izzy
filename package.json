@@ -46,7 +46,7 @@
     "cors": "2.7.1",
     "eslint": "1.10.3",
     "eslint-plugin-react": "3.15.0",
-    "flow-bin": "0.20.1",
+    "flow-bin": "0.21.0",
     "jsonlint": "1.6.2",
     "mkdirp": "0.5.1",
     "mocha": "2.3.4",

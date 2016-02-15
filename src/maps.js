@@ -8,7 +8,7 @@ import _ from "underscore";
 class MapsApi {
     api: GoogleMaps;
 
-    constructor(api: Object) {
+    constructor(api: GoogleMaps) {
         this.api = api;
     }
 

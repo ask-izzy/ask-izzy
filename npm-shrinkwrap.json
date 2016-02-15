@@ -3092,9 +3092,9 @@
       "resolved": "https://registry.npmjs.org/flatten/-/flatten-0.0.1.tgz"
     },
     "flow-bin": {
-      "version": "0.20.1",
-      "from": "flow-bin@0.20.1",
-      "resolved": "https://registry.npmjs.org/flow-bin/-/flow-bin-0.20.1.tgz"
+      "version": "0.21.0",
+      "from": "flow-bin@0.21.0",
+      "resolved": "https://registry.npmjs.org/flow-bin/-/flow-bin-0.21.0.tgz"
     },
     "follow-redirects": {
       "version": "0.0.7",
