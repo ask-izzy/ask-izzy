@@ -44,4 +44,4 @@ Feature: Search
     Scenario: Search returning an error returns a nice sentence
         When I search for "cause error" and press enter
         Then I should see "Sorry, I couldn't do this search."
-        And I should see "You have specifically asked for an error."
+        And I should see "An error occurred. Please try again."
