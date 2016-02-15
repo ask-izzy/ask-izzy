@@ -136,17 +136,22 @@ async function assertNoSuchResults(
     table: Array<Object>
 ): Promise<void> {
     let services = (await searchIss(category)).objects;
+    let errors = [];
 
     for (const banned of table) {
         services.forEach((service, index) => {
             if (objectMatches(banned, service)) {
-                throw new Error(`Expected ${
+                errors.push(`Expected ${
                     JSON.stringify(banned)
                 } not be present, but found it in service ${
                     service.id
-                }at position ${index}.`);
+                } at position ${index}.`);
             }
         })
+    }
+
+    if (errors.length) {
+        throw new Error(errors.join("\n"))
     }
 }
 
@@ -168,7 +173,10 @@ async function assertResults(
             JSON.stringify(missing, null, 4)
         } results but they were absent. ${
             JSON.stringify(found.map(service => service.id), null, 4)
-        } services did match.`);
+        } services did match. Results that did come back: ${
+            JSON.stringify(services.map(({id, site}) =>
+                `(${id}) ${site.name}`), null, 4)
+        }`);
     }
 }
 
