@@ -9,7 +9,6 @@ Feature: Skip personalisation settings
         Given my location is "Melbourne VIC"
         And I have somewhere to sleep tonight
         And I need nothing for housing
-        And I am 27 years old
         And I am not part of any relevant demographics
         And I visit /
 
@@ -28,6 +27,6 @@ Feature: Skip personalisation settings
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | (skipped)
-        How old are you?                             | 26 to 64
+        How old are you?                             | (skipped)
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
