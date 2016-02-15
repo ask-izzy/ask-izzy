@@ -128,7 +128,7 @@ async function searchIss(categoryName: string): Promise<searchResults> {
         } to generate a query`);
     }
 
-    return await search(Object.assign(request, {limit: 50}));
+    return await search(Object.assign(request, {limit: 20}));
 }
 
 async function assertNoSuchResults(
