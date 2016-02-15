@@ -2,7 +2,6 @@
 .env
 /Test-*.png
 /bower_components
-/newrelic_agent.log
 /node_modules/
 /npm-debug.log
 /public/static/*.css

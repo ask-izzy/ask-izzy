@@ -25,7 +25,6 @@
     "js-yaml": "3.5.2",
     "lru-cache": "2.7.0",
     "moment": "2.11.1",
-    "newrelic": "1.22.1",
     "node-jsx": "0.13.3",
     "node-sass": "3.4.2",
     "react": "0.14.0",
