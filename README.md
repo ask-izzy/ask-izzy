@@ -40,13 +40,13 @@ then you can add a config file `~/.config/forklift/ask-izzy.yaml`:
 
 And run:
 
-    forklift ./script/dev-server
+    forklift -- ./script/dev-server
 
 There's also a mock ISS server available as `./script/mock-iss`. This will
 start a server on `localhost:5000`.
 
 
-## Hacking
+## Contributing
 
 Link up the git hooks:
 
@@ -63,18 +63,13 @@ Run the linters:
 
 Running the tests:
 
-    ./script/test
+    forklift -- ./script/unit-test
+    forklift -- ./script/feature-test
+    forklift -- ./script/search-test
 
-Pass `SELENIUM_BROWSER=...` to choose a browser to test with. Format is
-`browser[:version[:platform]]`.
-You can pass `SELENIUM_REMOTE_URL` to connect to Selenium Grid.
-
-You can test on Sauce Labs using:
-
-    SELENIUM_REMOTE_URL=ondemand.saucelabs.com:80/wd/hub \
-        SAUCE_USERNAME=ask_izzy \
-        SAUCE_ACCESS_KEY=... \
-        ./script/test
+Pass `SELENIUM_BROWSER=...` to choose a browser to test with. Format
+is `browser[:version[:platform]]`, `browser` might be 'phantomjs',
+'firefox', etc.
 
 You can pass `BROWSER_LOGS=yes` to dump logs from the browser. Be aware not
 all browsers support this.
