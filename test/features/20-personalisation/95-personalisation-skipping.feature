@@ -6,7 +6,8 @@ Feature: Skip personalisation settings
     # And have my previous answers saved
 
     Background:
-        Given my location is "Melbourne VIC"
+        Given a fresh session
+        And my location is "Melbourne VIC"
         And I have somewhere to sleep tonight
         And I need nothing for housing
         And I am not part of any relevant demographics
