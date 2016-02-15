@@ -27,7 +27,8 @@ Feature: History navigation
         When I click on the done button
         Then I should see "How old are you?"
 
-        When I click back from the title bar
+        When I click on the done button
+        And I click back from the title bar
         Then I should see "How old are you?"
 
         When I click on "25 or younger"

@@ -17,7 +17,6 @@ Feature: Personalisation header
         When I click on the done button # Intro page
          And I click on the done button # Somewhere safe to sleep
          And I click on the done button # Subcategories
-         And I click on "Neither/Both/Something else"
          And I click on "26 to 39"
          And I click on the done button # Demographics
         Then I should see 3 search results for "people aged 26 to 39" in "Melbourne VIC"

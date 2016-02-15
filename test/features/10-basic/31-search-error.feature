@@ -15,6 +15,6 @@ Feature: Error information
     Scenario: Search error
         When I search for "elasticsearch unavailable" and press enter
         Then I should see "Sorry, I couldn't do this search."
-        And I should see "The Elasticsearch service is unavailable."
+        And I should see "An error occurred. Please try again."
         And I should see "Go back"
         And I should not see "Change your answers"
