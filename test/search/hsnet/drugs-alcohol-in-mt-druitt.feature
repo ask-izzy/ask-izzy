@@ -9,15 +9,18 @@ Feature: Search for drugs/alcohol help
         And I am not interested in any subcategory
         Then my results for drugs-alcohol should contain
         ----------------------------------
-        - id: 264379
-          site:
-            name: Aboriginal Catholic Social Services
         - id: 369282
           site:
             name: headspace, Mount Druitt
         - id: 224793
           site:
             name: Alcoholics Anonymous (AA), Mt Druitt
+        ----------------------------------
+        And my results for drugs-alcohol would ideally contain
+        ----------------------------------
+        - id: 264379
+          site:
+            name: Aboriginal Catholic Social Services
         - id: 106719
           site:
             name: Marrin Weejali Aboriginal Corporation
@@ -33,9 +36,6 @@ Feature: Search for drugs/alcohol help
         - id: 111505
           site:
             name: Alcoholics Anonymous (AA), Berrigan
-        ----------------------------------
-        And my results for housing would ideally contain
-        ----------------------------------
         - id: 1818376
           crisis: true
           site:

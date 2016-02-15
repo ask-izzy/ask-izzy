@@ -13,16 +13,40 @@ Feature: Search for alcohol counselling
           crisis: true
           site:
             name: Alcoholics Anonymous (AA), NSW Head Office
-        - id: 94317
-          crisis: true
-          site:
-            name: Alcohol & Drug Information Service (ADIS) NSW
         - id: 502664
           site:
             name: Manly Community Centre
         - id: 105653
           site:
             name: Manly Drug Education & Counselling Centre (MDECC)
+        - id: 965297
+          site:
+            name: Queenscliff Community Health Centre
+        - id: 111573
+          site:
+            name: Alcoholics Anonymous (AA), Cremorne
+        - id: 109709
+          site:
+            name: Alcoholics Anonymous (AA), Mosman
+        - id: 303858
+          site:
+            name: Royal North Shore Hospital, Drug & Alcohol Services
+        ----------------------------------
+        And my results for drugs-alcohol would ideally contain
+        ----------------------------------
+        - id: 647920
+          site:
+            name: Royal North Shore Hospital
+        - id: 94317
+          crisis: true
+          site:
+            name: Alcohol & Drug Information Service (ADIS) NSW
+        - id: 1173524
+          site:
+            name: Lower North Shore Community Drug & Alcohol Team
+        - id: 224799
+          site:
+            name: Alcoholics Anonymous (AA), Neutral Bay
         - id: 106537
           site:
             name: Manly Drug Education & Counselling Centre (MDECC)
@@ -35,9 +59,6 @@ Feature: Search for alcohol counselling
         - id: 224253
           site:
             name: Alcoholics Anonymous (AA), Manly/Fairlight
-        - id: 965297
-          site:
-            name: Queenscliff Community Health Centre
         - id: 392286
           site:
             name: South Pacific Private
@@ -50,9 +71,6 @@ Feature: Search for alcohol counselling
         - id: 228198
           site:
             name: Alcoholics Anonymous (AA), Seaforth
-        - id: 647920
-          site:
-            name: Royal North Shore Hospital
         - id: 511112
           site:
             name: Comitato Assistenza Italiani (Co As It) Italian Association of Assistance
@@ -71,15 +89,6 @@ Feature: Search for alcohol counselling
         - id: 1110183
           site:
             name: Frenchs Forest Community Health Centre
-        - id: 1789487
-          site:
-            name: Long Jetty Community Health Centre, Allied Health Services: Alcohol & Other Drug Service
-        - id: 111573
-          site:
-            name: Alcoholics Anonymous (AA), Cremorne
-        - id: 109709
-          site:
-            name: Alcoholics Anonymous (AA), Mosman
         - id: 1145384
           site:
             name: Nepean Hospital Outpatients Department Drug & Alcohol Outpatient Clinic
@@ -92,16 +101,10 @@ Feature: Search for alcohol counselling
         - id: 650686
           site:
             name: Lakehaven Community Health Centre
-        - id: 303858
-          site:
-            name: Royal North Shore Hospital, Drug & Alcohol Services
-        - id: 1173524
-          site:
-            name: Lower North Shore Community Drug & Alcohol Team
-        - id: 224799
-          site:
-            name: Alcoholics Anonymous (AA), Neutral Bay
         - id: 778845
           site:
             name: Northern Specialist Centre, Royal North Shore Hospital Drug & Alcohol Clinic
+        - id: 1789487
+          site:
+            name: "Long Jetty Community Health Centre, Allied Health Services: Alcohol & Other Drug Service"
         ----------------------------------
