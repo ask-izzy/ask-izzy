@@ -12,8 +12,10 @@ TEST_FLAGS ?=
 
 # Flags used by Forklift for CI (N.B. you must pass in ISS_URL)
 CI_FORKLIFT_FLAGS := $(FORKLIFT_FLAGS) \
-	-e ISS_URL="$(ISS_URL)" \
+	-e CI="$(CI)" \
 	-e GOOGLE_API_KEY="$(GOOGLE_API_KEY)" \
+	-e ISS_URL="$(ISS_URL)" \
+	-e SELENIUM_BROWSER="phantomjs" \
 	$(NULL)
 
 CI_TEST_FLAGS := $(TEST_FLAGS) \
@@ -40,11 +42,14 @@ push: dockerpush
 		for remote in `git remote`; do git push $$remote $(TAG); done; \
 	fi
 
-test:
-	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) test $(CI_TEST_FLAGS)
+unit-test:
+	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) unit-test $(CI_TEST_FLAGS)
 
-localtest:
-	RUN_AS_USER=true $(FORKLIFT) $(FORKLIFT_FLAGS) -- ./invoke test $(TEST_FLAGS)
+feature-test:
+	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) feature-test $(CI_TEST_FLAGS)
+
+search-test:
+	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) search-test $(CI_TEST_FLAGS)
 
 deploy:
 	$(FORKLIFT) -- $(REPO):$(TAG) deploy

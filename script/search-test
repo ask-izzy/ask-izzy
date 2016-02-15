@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euxo pipefail
+IFS=$'\n\t'
+PATH=$(npm bin):$PATH
+
+export NODE_ENV=production
+export PORT=8010
+
+./script/test-setup
+
+# We pause for 4000ms when ISS rate-limits us, so allow a timeout of 9
+# seconds
+PAUSE_ON_ERROR= mocha --compilers js:babel/register --timeout 9000 test/search.js $@

@@ -10,9 +10,17 @@ build:
     stage: build
     script: make build
 
-test:
+unit-test:
     stage: test
-    script: make test
+    script: make unit-test
+
+feature-test:
+    stage: test
+    script: make feature-test
+
+search-test:
+    stage: test
+    script: make search-test
 
 # Deploy to test environment when tagged
 deploy:
