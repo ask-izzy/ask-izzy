@@ -116,6 +116,7 @@ declare class GoogleMaps {
     event: {
         trigger: function,
     };
+    GeocoderStatus: {OK: string};
 }
 
 declare class Google {
