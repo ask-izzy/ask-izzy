@@ -13,8 +13,8 @@ export PORT=8010
 PAUSE_ON_ERROR= mocha --compilers js:babel/register test/unit.js $@
 
 # Run the search tests
-# We pause for 4000ms when ISS rate-limits us, so allow a timeout of 6 seconds
-PAUSE_ON_ERROR= mocha --compilers js:babel/register --timeout 6000 test/search.js $@
+# We pause for 4000ms when ISS rate-limits us, so allow a timeout of 9 seconds
+PAUSE_ON_ERROR= mocha --compilers js:babel/register --timeout 9000 test/search.js $@
 
 # Point the app at our mock ISS
 ISS_URL="http://localhost:5000/" ./script/recreate-dev-env-file
