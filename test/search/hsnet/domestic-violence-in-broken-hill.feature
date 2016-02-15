@@ -25,6 +25,7 @@ Feature: Search for housing services
             name: Wilcannia Women's Refuge
         ----------------------------------
         And my results for housing would ideally contain
+        ----------------------------------
         - id: 134721
           crisis: false
           site:
