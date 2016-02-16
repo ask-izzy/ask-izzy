@@ -101,7 +101,7 @@ window.pi = function() {
 }
 
 // Report JS errors to google analytics
-window.addEventListener("error", function (e) {
+window.addEventListener("error", (e) => {
     sendEvent({
         event: "exception",
         exDescription: `JavaScript Error: ${e.message} ${e.filename}: ${

@@ -10,10 +10,6 @@ const Personalisation = {
         controller: React.PropTypes.object.isRequired,
     },
 
-    propTypes: {
-        name: React.PropTypes.string.isRequired,
-    },
-
     setNextEnabled: function setNextEnabled(enabled: boolean): void {
         this.context.controller.setState({nextDisabled: !enabled});
     },
