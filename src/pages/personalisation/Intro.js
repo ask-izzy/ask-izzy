@@ -14,6 +14,11 @@ class Intro extends React.Component {
         name: "intro",
     };
 
+    static propTypes = {
+        name: React.PropTypes.string.isRequired,
+        onDoneTouchTap: React.PropTypes.func,
+    };
+
     constructor(props: Object) {
         super(props);
         this.state = {

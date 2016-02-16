@@ -78,9 +78,9 @@ class MapsApi {
                     if (status == this.api.DirectionsStatus.OK) {
                         let times = response.rows[0].elements;
 
-                        times.forEach((transportTime) =>
+                        times.forEach((transportTime) => {
                             transportTime.mode = mode
-                        );
+                        });
                         resolve(times);
                     } else {
                         reject([status, response])

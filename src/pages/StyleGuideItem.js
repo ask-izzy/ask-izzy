@@ -5,6 +5,10 @@ import components from "../components";
 import _s from "underscore.string";
 
 export default class StyleGuideItem extends React.Component {
+    static propTypes = {
+        params: React.PropTypes.object,
+    };
+
     constructor(props: Object) {
         super(props);
     }

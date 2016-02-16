@@ -9,6 +9,10 @@ import Loading from "../icons/Loading";
 
 class ServicePage extends React.Component {
 
+    static propTypes = {
+        params: React.PropTypes.object,
+    };
+
     static contextTypes = {
         router: React.PropTypes.object.isRequired,
     };

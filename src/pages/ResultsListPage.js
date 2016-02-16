@@ -10,6 +10,10 @@ import ViewOnMapButton from "../components/ViewOnMapButton";
 
 class ResultsListPage extends React.Component {
 
+    static propTypes = {
+        objects: React.PropTypes.array,
+    };
+
     get results(): Array<Object> {
         let objects, index;
 

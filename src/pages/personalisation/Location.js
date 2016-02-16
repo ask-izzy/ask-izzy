@@ -30,6 +30,11 @@ const AutocompleteState = {
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Location extends React.Component {
 
+    static propTypes = {
+        name: React.PropTypes.string.isRequired,
+        onDoneTouchTap: React.PropTypes.func,
+    };
+
     static defaultProps = {
         name: "location",
     };
