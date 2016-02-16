@@ -65,9 +65,11 @@ class Location extends React.Component {
 
     static shouldEnableCatchment(): boolean {
         let tasmaniaRegex = /TAS(mania)?$/i;
+
         if (tasmaniaRegex.exec(storage.getLocation())) {
             return true;
         }
+
         return false;
     }
 
