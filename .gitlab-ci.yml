@@ -10,6 +10,10 @@ build:
     stage: build
     script: make build
 
+lint:
+    stage: test
+    script: make lint
+
 unit-test:
     stage: test
     script: make unit-test

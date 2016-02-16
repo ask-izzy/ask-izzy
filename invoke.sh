@@ -1,6 +1,12 @@
 #!/bin/bash
 
 case "$1" in
+    lint)
+        shift 1
+
+        exec ./script/typecheck
+        ;;
+
     unit-test)
         shift 1
 

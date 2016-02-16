@@ -42,6 +42,9 @@ push: dockerpush
 		for remote in `git remote`; do git push $$remote $(TAG); done; \
 	fi
 
+lint:
+	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) lint
+
 unit-test:
 	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) unit-test $(CI_TEST_FLAGS)
 
