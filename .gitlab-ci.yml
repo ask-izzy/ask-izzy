@@ -1,19 +1,35 @@
 # Continuous deployment configuration
 # See http://doc.gitlab.com/ci/builds_configuration/README.html
 
-# CI is carried out on Travis. See .travis.yml
+before_script:
+    - hostname
+    - docker version
+    - docker info
 
-# Master is built and pushed directly to test and staging
-staging:
-    type: deploy
-    script: make build push release-test release-staging
-    only:
-        - master
+build:
+    stage: build
+    script: make build
 
-# Tags are released to production
-production:
-    type: deploy
-    script: make build push release-prod
+lint:
+    stage: test
+    script: make lint
+
+unit-test:
+    stage: test
+    script: make unit-test
+
+feature-test:
+    stage: test
+    script: make feature-test
+
+search-test:
+    stage: test
+    script: make search-test
+
+# Deploy to test environment when tagged
+deploy:
+    stage: deploy
+    script: make build push release-test
     only:
         - tags
 

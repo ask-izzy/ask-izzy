@@ -29,10 +29,21 @@ RUN \
         nginx \
         git \
         sudo \
-    && apt-get -y --purge autoremove \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /tmp/*
+        && \
+    # Required by node-gyp
+    apt-get -qq install \
+        build-essential \
+        python \
+        && \
+    # Required by flow (static type checker for JavaScript).
+    apt-get -qq install \
+        libelf-dev \
+        && \
+    echo "Cleaning up" && \
+    apt-get -y --purge autoremove && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/*
 
 # Install the npm deps
 COPY package.json bower.json /app/

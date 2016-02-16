@@ -92,13 +92,15 @@ export default async function webDriverInstance(
         baseCaps.deviceOrientation = process.env.SELENIUM_ORIENTATION;
     }
 
+    const browserName = (process.env.SELENIUM_BROWSER || "").split(/:/)[0];
+
     const driver = new Webdriver.Builder()
         /* These are used by Sauce Labs
          * You should also pass SELENIUM_REMOTE_URL to connect
          * via Selenium Grid */
         .withCapabilities(baseCaps)
-        /* This is the default. Overridden by SELENIUM_BROWSER */
-        .forBrowser("firefox")
+        /* Default to using phantom.js if `SELENIUM_BROWSER` not provided. */
+        .forBrowser(browserName || "phantomjs")
         .build();
 
     await driver

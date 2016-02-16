@@ -1,3 +1,4 @@
+@skipphantomjs
 Feature: Geolocation
 
     # As a user

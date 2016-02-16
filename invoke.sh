@@ -1,15 +1,31 @@
 #!/bin/bash
 
 case "$1" in
-    test)
+    lint)
+        shift 1
+
+        exec ./script/typecheck
+        ;;
+
+    unit-test)
         shift 1
 
         echo "ISS server: $ISS_URL"
+        exec ./script/unit-test
+        ;;
 
-        # install the dev deps
-        NODE_ENV=development npm install
+    feature-test)
+        shift 1
 
-        exec ./script/test
+        echo "ISS server: $ISS_URL"
+        exec ./script/feature-test
+        ;;
+
+    search-test)
+        shift 1
+
+        echo "ISS server: $ISS_URL"
+        exec ./script/search-test
         ;;
 
     deploy)
