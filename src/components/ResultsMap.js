@@ -34,8 +34,8 @@ class ResultsMap extends React.Component {
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object) {
-        if (this.state.maps &&
-            !_.isEmpty(this.services())) {
+        if ((this.state.maps != prevState.maps) ||
+            (this.props.objects != prevProps.objects)) {
             this.showWholeMap();
         }
     }
@@ -43,7 +43,6 @@ class ResultsMap extends React.Component {
     clearSelection(): void {
         if (this.state.selectedServices) {
             this.setState({selectedServices: []});
-            this.showWholeMap();
         }
     }
 
