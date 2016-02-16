@@ -11,6 +11,10 @@ import storage from "../storage";
 
 class ResultsMap extends React.Component {
 
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
+
     constructor(props: Object) {
         super(props);
         this.state = {};
@@ -53,7 +57,7 @@ class ResultsMap extends React.Component {
 
         return new Promise((resolve, reject) => {
             function checkMaps() {
-                if (map.state.map) {
+                if (map.state && map.state.map) {
                     resolve(map.state.map);
                 } else {
                     setTimeout(checkMaps, 500);
@@ -116,7 +120,7 @@ class ResultsMap extends React.Component {
         if (!_.isEmpty(this.state.selectedServices)) {
             this.clearSelection();
         } else {
-            this.props.history.goBack();
+            this.context.router.goBack();
         }
     }
 

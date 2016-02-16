@@ -1,10 +1,8 @@
 /* @flow */
 
 import React from "react";
-import { History, Link } from "react-router";
-import reactMixin from "react-mixin";
+import { Link } from "react-router";
 
-/*::`*/@reactMixin.decorate(History)/*::`;*/
 class Infobox extends React.Component {
     static propTypes = {
         href: React.PropTypes.string,

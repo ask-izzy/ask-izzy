@@ -1,13 +1,10 @@
 /* @flow */
 
 import React from "react";
-import { History } from "react-router";
-import reactMixin from "react-mixin";
 
 import components from "../components";
 import icons from "../icons";
 
-/*::`*/@reactMixin.decorate(History)/*::`;*/
 class CategoryListItem extends React.Component {
 
     static sampleProps = {default: {

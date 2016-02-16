@@ -1,8 +1,6 @@
 /* @flow */
 
 import React from "react";
-import { History } from "react-router";
-import reactMixin from "react-mixin";
 
 import HeaderBar from "../components/HeaderBar";
 import EmbargoMessage from "../components/EmbargoMessage";
@@ -10,8 +8,11 @@ import NavBar from "../components/NavBar";
 import icons from "../icons";
 import storage from "../storage";
 
-/*::`*/@reactMixin.decorate(History)/*::`;*/
 class HomePage extends React.Component {
+
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
 
     componentDidMount(): void {
         // Make mobile browser hide the app bar
@@ -30,10 +31,8 @@ class HomePage extends React.Component {
 
         storage.setSearch(search);
 
-        this.props.history.pushState(
-            null,
-            `/search/${encodeURIComponent(search)}`,
-            {}
+        this.context.router.push(
+            `/search/${encodeURIComponent(search)}`
         );
     }
 

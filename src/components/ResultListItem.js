@@ -1,9 +1,7 @@
 /* @flow */
 
 import React from "react";
-import { History } from "react-router";
 import fixtures from "../../fixtures/services";
-import reactMixin from "react-mixin";
 
 import icons from "../icons";
 import iss from "../iss";
@@ -14,7 +12,6 @@ import OpeningTimes from "./OpeningTimes";
 import LinkListItem from "./LinkListItem";
 import TransportTime from "./TransportTime";
 
-/*::`*/@reactMixin.decorate(History)/*::`;*/
 class ResultListItem extends React.Component {
 
     static displayName = "ResultListItem";

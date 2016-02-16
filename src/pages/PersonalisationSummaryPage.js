@@ -9,6 +9,10 @@ import storage from "../storage";
 
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
+
     constructor(props: Object) {
         super(props);
         this.state = {floatingContainerHeight: 0};
@@ -30,11 +34,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
     clearAll(event: SyntheticInputEvent): void {
         event.preventDefault();
         storage.clear();
-        this.props.history.pushState(
-            null,
-            "/",
-            {}
-        );
+        this.context.router.push("/");
     }
 
     componentDidMount(): void {

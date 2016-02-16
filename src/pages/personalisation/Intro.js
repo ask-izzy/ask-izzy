@@ -1,14 +1,12 @@
 /* @flow */
 
 import React from "react";
-import { History } from "react-router";
 import reactMixin from "react-mixin";
 
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import * as iss from "../../iss";
 
-/*::`*/@reactMixin.decorate(History)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Intro extends React.Component {
 

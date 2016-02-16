@@ -2,8 +2,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import Router from "react-router";
-import createBrowserHistory from "history/lib/createBrowserHistory";
+import {Router, browserHistory} from "react-router";
 import storage from "./storage";
 import routes from "./routes";
 import sendEvent from "./google-tag-manager";
@@ -26,7 +25,6 @@ window.categories = categories;
  * for tracking scroll position, remove window.scrollTo calls
  */
 function History() {
-    let history = createBrowserHistory();
     let historyLength = storage.getHistoryLength();
 
     function setHistoryLength(newLength: number): void {
@@ -37,42 +35,42 @@ function History() {
     function goBack() {
         if (historyLength > 0) {
             setHistoryLength(historyLength - 1)
-            history.goBack();
+            browserHistory.goBack();
         } else {
-            history.pushState(null, "/");
+            browserHistory.push("/");
         }
         window.scrollTo(0, 0);
     }
 
     function goForward() {
         setHistoryLength(historyLength - 1);
-        history.goForward();
+        browserHistory.goForward();
         window.scrollTo(0, 0);
     }
 
-    function pushState() {
+    function push() {
         setHistoryLength(historyLength + 1);
-        history.pushState(...arguments);
+        browserHistory.push(...arguments);
         window.scrollTo(0, 0);
     }
 
     /* eslint-disable id-length */
     function go(num: number) {
         setHistoryLength(historyLength + num);
-        history.go(num);
+        browserHistory.go(num);
         window.scrollTo(0, 0);
     }
 
     window._clear_history_testing = () => {
-        history.go(-historyLength);
+        browserHistory.go(-historyLength);
         window.scrollTo(0, 0);
     }
 
     return {
-        ...history,
+        ...browserHistory,
         goBack,
         goForward,
-        pushState,
+        push,
         go,
     };
 }

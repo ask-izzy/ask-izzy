@@ -2438,9 +2438,9 @@
       "resolved": "https://registry.npmjs.org/hawk/-/hawk-3.1.2.tgz"
     },
     "history": {
-      "version": "1.13.1",
-      "from": "history@1.13.1",
-      "resolved": "https://registry.npmjs.org/history/-/history-1.13.1.tgz"
+      "version": "2.0.0",
+      "from": "history@2.0.0",
+      "resolved": "https://registry.npmjs.org/history/-/history-2.0.0.tgz"
     },
     "hoek": {
       "version": "2.16.3",
@@ -4149,9 +4149,9 @@
       "resolved": "https://registry.npmjs.org/react-prop-types-element-of-type/-/react-prop-types-element-of-type-1.0.2.tgz"
     },
     "react-router": {
-      "version": "1.0.0",
-      "from": "react-router@1.0.0",
-      "resolved": "https://registry.npmjs.org/react-router/-/react-router-1.0.0.tgz"
+      "version": "2.0.0",
+      "from": "react-router@2.0.0",
+      "resolved": "https://registry.npmjs.org/react-router/-/react-router-2.0.0.tgz"
     },
     "react-side-effect": {
       "version": "1.0.2",
