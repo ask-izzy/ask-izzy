@@ -4380,9 +4380,9 @@
       "resolved": "https://registry.npmjs.org/sass-graph/-/sass-graph-2.0.1.tgz"
     },
     "sass-lint": {
-      "version": "1.4.0",
-      "from": "sass-lint@1.4.0",
-      "resolved": "https://registry.npmjs.org/sass-lint/-/sass-lint-1.4.0.tgz",
+      "version": "1.5.0",
+      "from": "sass-lint@1.5.0",
+      "resolved": "https://registry.npmjs.org/sass-lint/-/sass-lint-1.5.0.tgz",
       "dependencies": {
         "glob": {
           "version": "6.0.4",
