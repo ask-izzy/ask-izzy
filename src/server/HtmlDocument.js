@@ -232,7 +232,9 @@ class HtmlDocument extends React.Component {
 
         <script src={envPath} />
 
-        {this.renderAnalyticsBlock()}
+        <script
+            dangerouslySetInnerHTML={{__html: snippets.toString()}}
+        ></script>
 
     </head>
 
@@ -250,7 +252,6 @@ class HtmlDocument extends React.Component {
             />
         )}
 
-
         <script dangerouslySetInnerHTML={{__html: `
             var gmapsApi = document.createElement("script");
             gmapsApi.setAttribute(
@@ -264,14 +265,6 @@ class HtmlDocument extends React.Component {
     </body>
 </html>
         );
-    }
-
-    renderAnalyticsBlock(): ?Array<ReactElement> {
-        return [
-            <script
-                dangerouslySetInnerHTML={{__html: snippets.toString()}}
-            ></script>,
-        ];
     }
 
 }
