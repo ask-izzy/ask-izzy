@@ -6,6 +6,10 @@ import React from "react";
 import classnames from "classnames";
 
 export default class SvgIconDemographicNeedInterpreter extends React.Component {
+    static propTypes = {
+        className: React.PropTypes.string,
+    };
+
     render(): ReactElement {
         const {className, ...rest} = this.props;
         const classes = classnames(
