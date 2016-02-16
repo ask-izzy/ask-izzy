@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import { History } from "react-router";
 import _ from "underscore";
 import reactMixin from "react-mixin";
 import { debounce } from "core-decorators";
@@ -28,7 +27,6 @@ const AutocompleteState = {
     SEARCHING: 1,
 };
 
-/*::`*/@reactMixin.decorate(History)/*::`;*/
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Location extends React.Component {
 

@@ -4,7 +4,7 @@
 
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-import { match, RoutingContext } from "react-router";
+import { match, RouterContext } from "react-router";
 import url from "url";
 import routes, { makeTitle } from "../routes";
 import badRouteParams from "./not_found";
@@ -57,7 +57,7 @@ export default function render(req, res, next) {
                         renderProps.params
                     )
                     const markup = ReactDOMServer.renderToString(
-                        <RoutingContext {...renderProps} />
+                        <RouterContext {...renderProps} />
                     );
                     // The application component is rendered to static markup
                     // and sent as response.

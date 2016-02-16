@@ -6,7 +6,7 @@ import url from "url";
 
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-import { match, RoutingContext } from "react-router";
+import { match, RouterContext } from "react-router";
 import mkdirp from "mkdirp";
 
 import routes, { makeTitle } from "../routes";
@@ -49,7 +49,7 @@ function renderPage(uri: string, path: string): void {
                 renderProps.params
             )
             const markup = ReactDOMServer.renderToString(
-                <RoutingContext {...renderProps} />
+                <RouterContext {...renderProps} />
             );
 
             // The application component is rendered to static markup

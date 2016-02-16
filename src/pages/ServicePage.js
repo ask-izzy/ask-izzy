@@ -1,16 +1,18 @@
 /* @flow */
 
 import React from "react";
-import { History } from "react-router";
 import ServicePane from "../components/ServicePane";
-import reactMixin from "react-mixin";
 
 import iss from "../iss";
 import components from "../components";
 import Loading from "../icons/Loading";
 
-/*::`*/@reactMixin.decorate(History)/*::`;*/
 class ServicePage extends React.Component {
+
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
+
     constructor(props: Object) {
         super(props);
         this.state = {};
@@ -55,14 +57,14 @@ class ServicePage extends React.Component {
             object,
             error,
         } = this.state;
-        let history = this.props.history;
+        const back = () => this.context.router.goBack();
 
         if (!object) {
             return (
                 <div className="ServicePage">
                     <components.AppBar
                         title="Loading..."
-                        onBackTouchTap={history.goBack.bind(history)}
+                        onBackTouchTap={back}
                     />
                     <div className="ServicePane">
                         <main>
@@ -85,7 +87,7 @@ class ServicePage extends React.Component {
                 <div className="ServicePage">
                     <components.AppBar
                         title={object.site.name}
-                        onBackTouchTap={history.goBack.bind(history)}
+                        onBackTouchTap={back}
                     />
                     <ServicePane service={object}/>
                 </div>

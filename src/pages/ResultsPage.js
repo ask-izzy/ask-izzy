@@ -1,8 +1,6 @@
 /* @flow */
 
 import React from "react";
-import { History } from "react-router";
-import reactMixin from "react-mixin";
 
 import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
@@ -17,8 +15,11 @@ import DebugContainer from "../components/DebugContainer";
 import DebugSearch from "../components/DebugSearch";
 import ResultsListPage from "./ResultsListPage";
 
-/*::`*/@reactMixin.decorate(History)/*::`;*/
 class ResultsPage extends BaseCategoriesPage {
+
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
 
     constructor(props: Object) {
         super(props);
@@ -75,10 +76,8 @@ class ResultsPage extends BaseCategoriesPage {
                     parts.splice(3, 0, "in", newUrlLocation);
                 }
 
-                this.history.replaceState(
-                    null,
-                    parts.join("/"),
-                    ""
+                this.context.router.replace(
+                    parts.join("/")
                 );
             }
         }
@@ -99,10 +98,8 @@ class ResultsPage extends BaseCategoriesPage {
                 .pathname
                 .endsWith("/") ? "" : "/";
 
-            this.history.replaceState(
-                null,
-                `${this.props.location.pathname}${sep}personalise`,
-                ""
+            this.context.router.replace(
+                `${this.props.location.pathname}${sep}personalise`
             );
             return;
         }
@@ -184,10 +181,8 @@ class ResultsPage extends BaseCategoriesPage {
         }
 
         if (!event.defaultPrevented) {
-            this.props.history.pushState(
-                null,
+            this.context.router.push(
                 "/",
-                {}
             );
         }
     }

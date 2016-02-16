@@ -1,16 +1,18 @@
 /* @flow */
 
 import React from "react";
-import { History } from "react-router";
-import reactMixin from "react-mixin";
+import { browserHistory } from "react-router";
 
 import BaseCategoriesPage from "./BaseCategoriesPage";
 
-/*::`*/@reactMixin.decorate(History)/*::`;*/
 class BasePersonalisationPage extends BaseCategoriesPage {
     constructor(props: Object) {
         super(props);
     }
+
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
 
     static childContextTypes = {
         controller: React.PropTypes.instanceOf(BasePersonalisationPage),
@@ -23,7 +25,7 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     }
 
     previousStep(): void {
-        this.props.history.goBack();
+        browserHistory.goBack();
     }
 
     nextStep(): void {
@@ -42,10 +44,8 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     }
 
     navigate(subpath: string): void {
-        this.props.history.pushState(
-            null,
+        this.context.router.push(
             this.urlFor(subpath),
-            {}
         );
     }
 

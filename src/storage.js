@@ -49,8 +49,18 @@ const Storage = {
         this.setItem("location", location);
     },
 
-    getCoordinates(): ?Coordinates {
-        return JSON.parse(sessionStore.getItem("coordinates") || "null");
+    getCoordinates(): ?{latitude: number, longitude: number} {
+        const coords = JSON.parse(
+            sessionStore.getItem("coordinates") || "null"
+        );
+
+        if (coords &&
+            (typeof coords.latitude == "number") &&
+            (typeof coords.longitude == "number")) {
+            return coords;
+        }
+
+        return null;
     },
 
     setCoordinates(coords: ?Coordinates): void {

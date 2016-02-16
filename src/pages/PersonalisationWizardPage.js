@@ -9,6 +9,10 @@ import Chevron from "../icons/Chevron";
 
 class PersonalisationWizardPage extends BasePersonalisationPage {
 
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
+
     constructor(props: Object) {
         super(props);
         this.state = {nextDisabled: false};
@@ -26,11 +30,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         if (prevSubPage) {
             this.goToSubPage(prevSubPage);
         } else {
-            this.props.history.pushState(
-                null,
-                "/",
-                {}
-            );
+            this.context.router.push("/");
         }
     }
 
