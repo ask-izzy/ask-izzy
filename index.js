@@ -9,12 +9,6 @@ if (!process.env.NODE_ENV) {
 // Register babel to have ES6 support on the server
 require("babel/register");
 
-if (process.env.NEW_RELIC_KEY) {
-    require('newrelic');
-} else {
-    console.warn("NEW_RELIC_KEY not set");
-}
-
 if (process.argv[3]) {
     throw new Error("Too many arguments");
 }

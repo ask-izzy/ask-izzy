@@ -16,7 +16,8 @@ Feature: Skip personalisation settings
         When I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
-        When I click on the done button
+        When I click on the done button # Intro
+        And I click on the done button # Age
 
         When I click on "Change your answers"
         Then I should see "Change your answers here"

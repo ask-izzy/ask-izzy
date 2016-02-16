@@ -9,6 +9,10 @@ import assert from "../support/page-assertions";
 import Url from "url";
 import Yadda from "yadda";
 import Webdriver, { By, Key } from "selenium-webdriver";
+import {
+    TargetLocator,
+    Navigation,
+} from "selenium-webdriver/lib/webdriver";
 import _ from "underscore";
 
 import dictionary from "../support/dictionary";
@@ -106,8 +110,8 @@ async function clickLink(link: string): Promise<void> {
 
 function navigator(
     driver: Webdriver.WebDriver
-): Webdriver.WebDriver.Navigation {
-    return new Webdriver.WebDriver.Navigation(driver);
+): Navigation {
+    return new Navigation(driver);
 }
 
 async function reloadPage(): Promise<void> {
@@ -300,7 +304,7 @@ async function newBrowser(): Promise<void> {
         );
     }
 
-    await new Webdriver.WebDriver.TargetLocator(this.driver)
+    await new TargetLocator(this.driver)
         .window(newHandles[0]);
 }
 

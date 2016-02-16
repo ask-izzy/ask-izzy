@@ -13,7 +13,6 @@ Feature: History navigation
     Scenario: Navigate via category to a service and back to the personalisation page
         Given a fresh session
         And my location is "Melbourne VIC"
-        And I have somewhere to sleep tonight
         And I need nothing for housing
         And I am not part of any relevant demographics
         And I am not interested in any subcategory
@@ -24,10 +23,12 @@ Feature: History navigation
         Then I should see "To help me find the right services I'll ask you a few questions"
         And I should be at /category/housing/personalise
 
-        When I click on the done button
-        Then I should see "How old are you?"
+        When I click on the done button # Intro
 
-        When I click on the done button
+        Then I should see "Do you have somewhere safe to sleep tonight?"
+        When I click on "Yes" # somewhere to sleep tonight
+
+        And I click on the done button
         And I click back from the title bar
         Then I should see "How old are you?"
 
