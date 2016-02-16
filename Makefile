@@ -2,7 +2,7 @@ APP = ask_izzy
 REPO = contyard.office.infoxchange.net.au/$(APP)
 VERSION_TAG := $(shell git describe)
 TAG := $(shell if [ -z "$(CI)" ]; then echo $(VERSION_TAG); else echo "$(VERSION_TAG)-ci"; fi)
-FORKLIFT := docker run
+FORKLIFT := docker run -t
 
 NULL=
 
