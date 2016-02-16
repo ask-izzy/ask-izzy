@@ -35,6 +35,10 @@ RUN \
         build-essential \
         python \
         && \
+    # Required by flow (static type checker for JavaScript).
+    apt-get -qq install \
+        libelf-dev \
+        && \
     echo "Cleaning up" && \
     apt-get -y --purge autoremove && \
     apt-get clean && \
