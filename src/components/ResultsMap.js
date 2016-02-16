@@ -57,8 +57,8 @@ class ResultsMap extends React.Component {
 
         return new Promise((resolve, reject) => {
             function checkMaps() {
-                if (map.state && map.state.map) {
-                    resolve(map.state.map);
+                if (map.refs && map.refs.delegate) {
+                    resolve(map.refs.delegate);
                 } else {
                     setTimeout(checkMaps, 500);
                 }
