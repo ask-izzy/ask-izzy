@@ -4,6 +4,9 @@ VERSION_TAG := $(shell git describe)
 TAG := $(shell if [ -z "$(CI)" ]; then echo $(VERSION_TAG); else echo "$(VERSION_TAG)-ci"; fi)
 FORKLIFT := docker run -t
 
+# Allow multi-line assignments to include a `\` on the end of every
+# line (including the last one), which avoids the situation where you
+# have to touch two lines in order to add an item to the list.
 NULL=
 
 # Default flags for Forklift
