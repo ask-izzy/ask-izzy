@@ -27,7 +27,9 @@ let passed = true;
 new Yadda.FeatureFileSearch("./test/features").each(file => {
     featureFile(file, feature => {
 
-        const browserName = (process.env.SELENIUM_BROWSER || "").split(/:/)[0];
+        const browserName = (process.env.SELENIUM_BROWSER || "")
+            .split(/:/)[0];
+
         if ((browserName === "phantomjs") &&
             (feature.annotations.skipphantomjs)) {
             return;
