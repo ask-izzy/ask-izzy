@@ -6,14 +6,18 @@ import components from "../components";
 
 class AboutPage extends React.Component {
 
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
+
     render(): ReactElement {
-        let history = this.props.history;
+        let back = () => this.context.router.goBack();
 
         return (
             <div className="AboutPage">
                 <components.AppBar
                     title="About Ask Izzy"
-                    onBackTouchTap={history.goBack.bind(history)}
+                    onBackTouchTap={back}
                 />
 
                 <div className="body">
