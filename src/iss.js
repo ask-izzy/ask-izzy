@@ -343,12 +343,36 @@ export class Service {
         return new ServiceOpening(this);
     }
 
-    /**
-     * First sentence of the description.
-     */
-    get shortDescription(): string {
-        return this.description.split(".", 1)[0] + ".";
+    descriptionSentences(): Array<string> {
+        return this.description.split(".")
+            .filter(str => str.trim())
+            .map(str => str.trim() + ".")
     }
+    /**
+     * First part of the description.
+     */
+    get shortDescription(): Array<string> {
+        let sentences = this.descriptionSentences();
+        let description = [sentences.shift()];
+        let descriptionLength = () =>
+            description.reduce((memo, elem) => memo + elem.length, 0);
+
+        while (sentences.length && descriptionLength() < 250) {
+            description.push(sentences.shift());
+        }
+
+        return description;
+    }
+
+    /**
+     * Rest of the description after the shortDescription.
+     */
+    get descriptionRemainder(): Array<string> {
+        return this.descriptionSentences().slice(
+            this.shortDescription.length
+        );
+    }
+
     /**
      * An array of things this service provides built using a bucket-of-words
      * approach from the service's full description */

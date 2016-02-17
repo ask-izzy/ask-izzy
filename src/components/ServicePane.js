@@ -5,6 +5,7 @@ import _ from "underscore";
 
 import Address from "./Address";
 import CollapsedOpeningTimes from "./CollapsedOpeningTimes";
+import Collapser from "./Collapser";
 import ContactMethods from "./ContactMethods";
 import Eligibility from "./Eligibility";
 import TransportTime from "./TransportTime";
@@ -51,7 +52,14 @@ export default class ServicePane extends React.Component {
                 <div className="header">
                     <h2 className="name">{object.name}</h2>
                     <h3 className="description">
-                        {object.shortDescription}
+                        {object.shortDescription.map((sentence) =>
+                            <p>{sentence}</p>
+                        )}
+                        <Collapser message="Read more">
+                            {object.descriptionRemainder.map((sentence) =>
+                                <p>{sentence}</p>
+                            )}
+                        </Collapser>
                     </h3>
 
                 </div>
@@ -150,7 +158,7 @@ export default class ServicePane extends React.Component {
                             to={`/service/${service.slug}`}
                             key={index}
                             primaryText={service.name}
-                            secondaryText={service.shortDescription}
+                            secondaryText={service.shortDescription[0]}
                             rightIcon={<icons.Chevron />}
                         />
                     )}
