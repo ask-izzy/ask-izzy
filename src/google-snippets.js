@@ -30,6 +30,7 @@ export default function snippets(): void {
         script(`
             window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
             ga('create', window.GOOGLE_ANALYTICS_ID, 'auto');
+            ga('set', 'anonymizeIp', true);  // Anonymize IP addresses of all users.
             ga('send', 'pageview');
         `);
 
