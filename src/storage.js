@@ -77,8 +77,7 @@ const Storage = {
     },
 
     setItem(key: string, obj: string|number|boolean): void {
-        if ((key == "demographics") &&
-            `${obj}`.match(/family violence/i)) {
+        if (`${obj}`.match(/family violence/i)) {
             switchToPrivateMode();
         }
 
