@@ -128,6 +128,7 @@ export function remove(search: string|iss.searchRequest): RemoveSearch {
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class BaseQuestion extends React.Component {
     static propTypes = {
+        name: React.PropTypes.string.isRequired,
         /* The question asked of the user */
         question: React.PropTypes.string.isRequired,
         /* possible answers to the question */
@@ -135,6 +136,7 @@ class BaseQuestion extends React.Component {
             React.PropTypes.objectOf(React.PropTypes.object),
         ]).isRequired,
         onDoneTouchTap: React.PropTypes.func,
+        suppressDoneButton: React.PropTypes.bool,
     };
 
     constructor(props: Object) {

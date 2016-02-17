@@ -137,7 +137,8 @@ export default class ServicePane extends React.Component {
         if (_.isEmpty(this.state.siblings)) {
             return <span />;
         }
-        return(
+
+        return (
             <div className="siblings-container">
                 <h3 className="siblings-header">
                     Also at this location
