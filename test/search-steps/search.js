@@ -65,6 +65,10 @@ async function setSubcategoriesNone(
     storage.setItem("sub-technology", "(skipped)");
 }
 
+async function setSkipped(property: string): Promise<void> {
+    storage.setItem(property, "(skipped)");
+}
+
 async function setAge(age: number): Promise<void> {
     let description = "25 or younger";
 
@@ -188,6 +192,8 @@ module.exports = (function() {
             unpromisify(setSleepTonight))
         .given("I am $NUMBER years old",
             unpromisify(setAge))
+        .given("I have skipped setting my $STRING",
+            unpromisify(setSkipped))
         .given("I am not part of any relevant demographics",
             unpromisify(setDemographicsNone))
         .given("I am part of the following demographics\n$lines",

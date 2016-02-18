@@ -4,6 +4,39 @@ Feature: Search for housing services
         And I am not part of any relevant demographics
         And I am not interested in any subcategory
 
+    Scenario: Crisis in Taigum
+        Given my location is "Taigum, Queensland"
+        And I have nowhere to sleep tonight
+        And I have skipped setting my age
+        Then my results for housing should contain
+        ----------------------------------
+        - id: 1021720
+          crisis: true
+          site:
+            name: Homeless Hotline
+        - id: 645116
+          site:
+            name: Australian Community Safety & Research Organisation (ACRO)
+        - id: 894168
+          site:
+            name: Youth Emergency Services
+        - id: 798820
+          site:
+            name: Queensland Homicide Victims' Support Group
+        - id: 2752743
+          site:
+            name: Waimarie Queensland
+        ----------------------------------
+          And my results for housing would ideally contain
+        ----------------------------------
+        - id: 770140
+          site:
+            name: Integrated Family & Youth Service
+        - id: 878723
+          site:
+            name: Queensland Department of Housing & Public Works, Housing Service Centre, Chermside
+        ----------------------------------
+
     Scenario: Adult man in Geelong
         Given my location is "Geelong, Victoria"
         And I have somewhere to sleep tonight
