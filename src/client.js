@@ -79,7 +79,16 @@ ReactDOM.render(
     <Router
         history={History()}
         onUpdate={() => {
-            if (typeof window.ga == "function") {
+            // Don't inform Google Analytics if the user makes a
+            // search. This prevents us from recording the fact that a
+            // user has searched for e.g., "domestic violence" in
+            // Google Analytics. In turn, this should prevent Google
+            // from linking that fact with the user's profile. Since
+            // ISS3 logs all searches which are made, we still get
+            // insight into the what kind of searches users are
+            // performing.
+            if (!window.location.pathname.match("/search") &&
+                (typeof window.ga == "function")) {
                 window.ga("send", "pageview", window.location.toString());
             }
         }}

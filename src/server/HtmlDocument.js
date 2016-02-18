@@ -267,6 +267,21 @@ class HtmlDocument extends React.Component {
         );
     }
 
+    renderAnalyticsBlock(): ?Array<ReactElement> {
+        if (process.env.NODE_ENV == "production") {
+            return [
+                <script
+                    dangerouslySetInnerHTML={{__html: snippets.toString()}}
+                ></script>,
+                <script
+                    async={true}
+                    key="google-analytics-2"
+                    src="//www.google-analytics.com/analytics.js"
+                ></script>,
+            ];
+        }
+    }
+
 }
 
 export default HtmlDocument;
