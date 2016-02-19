@@ -29,7 +29,7 @@ search-test:
 # Deploy to test environment when tagged
 deploy:
     stage: deploy
-    script: make build push release-test
+    script: make build dockerpush release-test
     only:
         - tags
 
