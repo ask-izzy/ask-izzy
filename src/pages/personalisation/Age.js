@@ -21,7 +21,7 @@ export default class Age extends BaseQuestion {
         if (!this.answer || (this.answer == "(skipped)")) {
             return "";
         } else {
-            return `for people aged ${this.answer}`;
+            return `aged ${this.answer}`;
         }
     }
 }
