@@ -19,7 +19,12 @@ Feature: Skip personalisation settings
         When I click on the done button # Intro
         And I click on the done button # Age
 
-        When I click on "Change your answers"
+        Then I should see "Do you identify as…"
+
+        # Didn't answer the question
+        When I click on the done button
+
+        And I click on "Change your answers"
         Then I should see "Change your answers here"
         Then I should see the results
         ----------------------------------------------------------------
@@ -28,6 +33,7 @@ Feature: Skip personalisation settings
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | (skipped)
-        How old are you?                             | (skipped)
+        How do you identify?                         | (skipped)
+        How old are you?                             | 26 to 64
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
