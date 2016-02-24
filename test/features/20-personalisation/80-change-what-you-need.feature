@@ -24,6 +24,7 @@ Feature: Change your personalisation settings
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | (skipped)
+        How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
@@ -49,6 +50,7 @@ Feature: Change your personalisation settings
         Where are you?                               | Carlton, Victoria
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | (skipped)
+        How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
@@ -64,6 +66,7 @@ Feature: Change your personalisation settings
         ================================================================
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | No
+        How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
@@ -80,6 +83,7 @@ Feature: Change your personalisation settings
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | In a rooming house
+        How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
@@ -101,6 +105,7 @@ Feature: Change your personalisation settings
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | Private rental
+        How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
@@ -120,6 +125,7 @@ Feature: Change your personalisation settings
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | (skipped)
+        How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | Indigenous
         ----------------------------------------------------------------
@@ -135,6 +141,24 @@ Feature: Change your personalisation settings
         Where are you?                               | Melbourne VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | (skipped)
+        How do you identify?                         | Female
+        How old are you?                             | 26 to 64
+        Do any of these apply to you?                | None selected
+        ----------------------------------------------------------------
+
+    Scenario: Edit gender
+        When I visit /category/housing/personalise/summary
+        And I click on "How do you identify?"
+        And I click on "Male"
+        Then I should see "Change your answers here"
+        Then I should see the results
+        ----------------------------------------------------------------
+        Question (primaryText)                       | Answer (secondaryText)
+        ================================================================
+        Where are you?                               | Melbourne VIC
+        Do you have somewhere safe to sleep tonight? | Yes
+        Which situation is most like yours?          | (skipped)
+        How do you identify?                         | Male
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------

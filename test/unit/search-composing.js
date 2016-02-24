@@ -18,7 +18,7 @@ describe("Compose personalisation search terms", function() {
         request = require("../../src/pages/personalisation/Gender")
             .getSearchForAnswer(request, "Female");
         assert.deepEqual(request, {
-            q: "crisis accommodation females",
+            q: "crisis accommodation",
             client_gender: ["f", "u"],
         });
     });
@@ -49,7 +49,7 @@ describe("Compose personalisation search terms", function() {
         request = require("../../src/pages/personalisation/Age")
             .getSearchForAnswer(request, "25 or younger");
         assert.deepEqual(request, {
-            q: "crisis accommodation males youth",
+            q: "crisis accommodation youth",
             client_gender: ["m", "u"],
         });
     });

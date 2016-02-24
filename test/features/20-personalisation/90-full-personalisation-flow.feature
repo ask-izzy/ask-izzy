@@ -32,6 +32,9 @@ Feature: Personalisation
         Then I should see "Which situation is most like yours?"
 
         When I click on the done button
+        Then I should see "Do you identify as…"
+
+        When I click on the done button # Didn't answer the question
         Then I should see "How old are you?"
 
         When I click on "25 or younger"
@@ -62,6 +65,9 @@ Feature: Personalisation
         Then I should see "Do you have somewhere safe to sleep tonight?"
 
         When I click on "No"
+        Then I should see "Do you identify as…"
+
+        When I click on "Female"
         Then I should see "How old are you?"
 
         When I click on "25 or younger"

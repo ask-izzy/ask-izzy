@@ -8,6 +8,7 @@ Feature: Search for housing services
         Given my location is "Taigum, Queensland"
         And I have nowhere to sleep tonight
         And I have skipped setting my age
+        And I have skipped setting my gender
         Then my results for housing should contain
         ----------------------------------
         - id: 1021720
@@ -35,12 +36,14 @@ Feature: Search for housing services
         - id: 878723
           site:
             name: Queensland Department of Housing & Public Works, Housing Service Centre, Chermside
+
         ----------------------------------
 
     Scenario: Adult man in Geelong
         Given my location is "Geelong, Victoria"
         And I have somewhere to sleep tonight
         And I am 30 years old
+        And my gender is male
         Then my results for housing should contain
         ----------------------------------
         - id: 2721562
@@ -61,6 +64,7 @@ Feature: Search for housing services
         Given my location is "Wheelers Hill, Victoria"
         And I have somewhere to sleep tonight
         And I am 17 years old
+        And my gender is female
 
         # These are services for the aged...
         Then my results for housing should not contain

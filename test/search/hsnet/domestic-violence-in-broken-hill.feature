@@ -8,6 +8,7 @@ Feature: Search for housing services
         Given my location is "Broken Hill, NSW"
         And I have nowhere to sleep tonight
         And I am 30 years old
+        And I have skipped setting my gender
         And I am part of the following demographics
         --------------------------------------
         Escaping family violence

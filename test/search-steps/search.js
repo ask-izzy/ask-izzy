@@ -5,6 +5,7 @@
 
 import Yadda from "yadda";
 import _ from "underscore";
+import { titleize } from "underscore.string";
 
 import unpromisify from "../support/yadda-promise";
 import dictionary from "../support/dictionary";
@@ -89,6 +90,10 @@ async function setAge(age: number): Promise<void> {
     }
 
     storage.setItem("age", description);
+}
+
+async function setGender(gender: string): Promise<void> {
+    storage.setItem("gender", titleize(gender));
 }
 
 // Shamelessly copied from ResultsPage
@@ -192,6 +197,7 @@ module.exports = (function() {
             unpromisify(setSleepTonight))
         .given("I am $NUMBER years old",
             unpromisify(setAge))
+        .given("my gender is $STRING", unpromisify(setGender))
         .given("I have skipped setting my $STRING",
             unpromisify(setSkipped))
         .given("I am not part of any relevant demographics",
