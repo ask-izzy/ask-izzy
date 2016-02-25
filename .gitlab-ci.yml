@@ -26,10 +26,10 @@ search-test:
     stage: test
     script: make search-test
 
-# Deploy to test environment when tagged
+# Deploy to UAT environment when tagged
 deploy:
     stage: deploy
-    script: make build dockerpush release-test
+    script: make build dockerpush release-uat
     only:
         - tags
 
