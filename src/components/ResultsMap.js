@@ -23,27 +23,36 @@ class ResultsMap extends React.Component {
     componentDidMount(): void {
         this.setState({coords: storage.getCoordinates()});
 
+        // TODO: Use the react-google-maps ref-callback
+        // approach, so that
         /* request the Google Maps API */
         Maps().then((maps) => {
             this.setState({maps: maps});
-
             // disable infowindows
             maps.api.InfoWindow.prototype.set = function() {};
-
         });
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object) {
-        if (this.state.maps &&
-            !_.isEmpty(this.services())) {
-            this.showWholeMap();
+        if ((this.state.maps != prevState.maps) ||
+            (this.props.objects != prevProps.objects)) {
+            if (this.services().length) {
+                // N.B. getMap() returns a different promise each time, so
+                // there's no guarantee that the most recently set bounds
+                // will be the ones applied.
+                // As a result we need to check whether any services have
+                // loaded before setting bounds (so that only one attempt
+                // is made to set the bounds) - preventing a race condition.
+                // react-google-maps has a callback-based interface now,
+                // which avoids this issue.
+                this.showWholeMap();
+            }
         }
     }
 
     clearSelection(): void {
         if (this.state.selectedServices) {
             this.setState({selectedServices: []});
-            this.showWholeMap();
         }
     }
 
