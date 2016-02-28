@@ -71,7 +71,10 @@ class HtmlDocument extends React.Component {
         />
         <meta
             property="og:url"
-            content={currentUrl.toString()}
+            content={currentUrl.format ?
+                currentUrl.format()
+                : currentUrl.toString()
+            }
         />
 
         {css.map((href, idx) =>
