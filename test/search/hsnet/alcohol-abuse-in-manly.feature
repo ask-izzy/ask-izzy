@@ -28,9 +28,6 @@ Feature: Search for alcohol counselling
         - id: 109709
           site:
             name: Alcoholics Anonymous (AA), Mosman
-        - id: 303858
-          site:
-            name: Royal North Shore Hospital, Drug & Alcohol Services
         ----------------------------------
         And my results for drugs-alcohol would ideally contain
         ----------------------------------
