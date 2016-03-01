@@ -57,13 +57,13 @@
             g + g path {
                 fill: $brand-pane-alt-light;
             }
-            
+
             @media ($tablet) {
                 display: inline-block;
                 margin-bottom: -16px;
             }
-            
-            
+
+
         }
 
         .branding-copy {
@@ -111,6 +111,10 @@
             color: $brand-text-dark;
 
             -webkit-appearance: none;
+
+            &:focus {
+                outline: none;
+            }
         }
 
         .icon {

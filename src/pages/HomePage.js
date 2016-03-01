@@ -67,6 +67,7 @@ class HomePage extends React.Component {
                                 type="search"
                                 placeholder="Search"
                                 aria-label="Search"
+                                autoFocus={true}
                                 defaultValue={storage.getSearch()}
                             />
                             <icons.Search

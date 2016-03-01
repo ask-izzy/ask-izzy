@@ -177,7 +177,7 @@ class BaseMultiQuestion extends BaseQuestion {
                             uncheckedIcon={
                                 <icons.CheckboxUnselected className="big" />
                             }
-                            onChange={this.onAnswerTouchTap.bind(
+                            onClick={this.onAnswerTouchTap.bind(
                                 this, answer, !selected.has(answer)
                             )}
                         />
