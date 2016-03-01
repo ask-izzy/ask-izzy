@@ -143,6 +143,14 @@ async function searchIss(categoryName: string): Promise<searchResults> {
     return await search(Object.assign(request, {limit: 20}));
 }
 
+async function showResults(
+    category: string
+): Promise<void> {
+    let services = (await searchIss(category)).objects;
+
+    console.log(services.map(({id, name}) => `${id}: ${name}`))
+}
+
 async function assertNoSuchResults(
     category: string,
     table: Array<Object>
@@ -217,4 +225,7 @@ module.exports = (function() {
             unpromisify(assertResults))
         .then("my results for $STRING would ideally contain\n$yaml",
             unpromisify(assertNoSuchResults))
+        .then("show my results for $STRING",
+            unpromisify(showResults))
+
 })();
