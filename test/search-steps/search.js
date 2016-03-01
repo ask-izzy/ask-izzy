@@ -48,7 +48,10 @@ async function setSubcategoryItem(
     category: string,
     item: string,
 ): Promise<void> {
-    storage.setItem(`sub-${category}`, item);
+    storage.setItem(
+        `sub-${category.toLowerCase()}`,
+        item
+    );
 }
 
 async function setSubcategoriesNone(
