@@ -334,6 +334,7 @@ class Location extends React.Component {
                             aria-label="Search for a suburb or postcode"
                             placeholder="Search for a suburb or postcode"
                             value={this.state.locationName}
+                            autoFocus={true}
                             onChange={this.onSearchChange.bind(this)}
                         />
                     </div>
@@ -355,13 +356,14 @@ class Location extends React.Component {
                                 </div>
                             }
                             type="radio"
+                            tabIndex="0"
                             uncheckedIcon={
                                 <icons.RadioUnselected className="big" />
                             }
                             checkedIcon={
                                 <icons.RadioSelected className="big" />
                             }
-                            onChange={() => {
+                            onClick={() => {
                                 /* set the text box to this value
                                  * and remove the autocompletions */
                                 let locationName =

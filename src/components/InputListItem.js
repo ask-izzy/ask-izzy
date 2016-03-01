@@ -28,20 +28,28 @@ export default class InputListItem extends React.Component {
             primaryText,
             secondaryText,
             leftIcon,
+            tabIndex,
+            onClick,
             ...rest,
         } = this.props;
 
         return (
             <ListItem
-                rootElement="label"
-                {...{primaryText, secondaryText, leftIcon}}
+                className="InputListItem"
+                rootElement="a"
+                href="#"
+                tabIndex={tabIndex || 0}
+                {...{primaryText, secondaryText, leftIcon, onClick}}
                 rightIcon={
                     <span>
                         {rest.checked ? checkedIcon : uncheckedIcon}
                         <input
+                            ref="input"
                             key="input"
-                            aria-label={primaryText}
+                            // Avoid label of [object Object]
+                            // aria-label={primaryText}
                             {...rest}
+                            tabIndex="-1"
                         />
                     </span>
                 }

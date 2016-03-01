@@ -1,0 +1,5 @@
+.InputListItem {
+    &:focus {
+        outline: 2px dashed $brand-pane-alt-light;
+    }
+}

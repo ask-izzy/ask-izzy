@@ -257,7 +257,7 @@ async function assertItemCheckedIs(
     label: string,
     status: any
 ): Promise<void> {
-    let labelXPath = `//label[.//*[text()=${escapeXPathString(label)}]]`;
+    let labelXPath = `//a[.//*[text()=${escapeXPathString(label)}]]`;
 
     let checked = await this.driver.findElement(By.xpath(
         `${labelXPath}//input`

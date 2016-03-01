@@ -1,4 +1,12 @@
 .ResultList {
+    .resultContainer > a:focus {
+        outline: none;
+
+        > div {
+            outline: 1px dashed $brand-pane-alt-light;
+        }
+    }
+
     .resultContainer {
         border-top: 10px solid $brand-bg-light;
     }
