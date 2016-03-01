@@ -72,6 +72,7 @@ class Intro extends React.Component {
                 <div className="done-button">
                     <components.FlatButton
                         label="Okay"
+                        autoFocus={true}
                         onClick={this.props.onDoneTouchTap}
                     />
                 </div>

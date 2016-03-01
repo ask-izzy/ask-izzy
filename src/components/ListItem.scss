@@ -2,6 +2,7 @@
     display: block;
     position: relative;
     border-bottom: 1px solid $list-item-hairline;
+    text-decoration: none;
     cursor: pointer;
 
     &.taller {

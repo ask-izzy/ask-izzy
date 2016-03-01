@@ -282,7 +282,7 @@ class BaseQuestion extends React.Component {
                         type="radio"
                         checked={answer == selected}
                         value={answer}
-                        onChange={this.onAnswerTouchTap.bind(this, answer)}
+                        onClick={this.onAnswerTouchTap.bind(this, answer)}
 
                         checkedIcon={
                             <icons.RadioSelected className="big" />

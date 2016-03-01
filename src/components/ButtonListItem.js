@@ -15,6 +15,7 @@ export default class ButtonListItem extends React.Component {
                 aria-role="button"
                 role="button"
                 tabIndex="0"
+                href="#"
                 {...this.props}
             />
         );

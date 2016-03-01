@@ -9,6 +9,12 @@
     background-color: $brand-pane-alt-light;
     color: $brand-text-dark;
 
+    // The default focus style has an outline
+    // the same color as this background
+    :focus {
+        outline: 1px dashed $brand-bg-dark;
+    }
+
     .primary {
         min-height: 1em;
         padding-top: 15px;
