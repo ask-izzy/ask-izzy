@@ -98,7 +98,7 @@ class Location extends React.Component {
         request = Object.assign(request, {area: location});
 
         if (this.shouldEnableCatchment()) {
-            request = Object.assign(request, {catchment: true});
+            request = Object.assign(request, {catchment: "filter"});
         }
 
         return request;
