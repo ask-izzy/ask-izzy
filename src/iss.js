@@ -34,7 +34,7 @@ export type searchRequest = {
     age_groups?: Array<string>,
     client_gender?: Array<string>,
 
-    catchment?: boolean,
+    catchment?: boolean|string,
     is_bulk_billing?: boolean,
     healthcare_card_holders?: boolean,
 
