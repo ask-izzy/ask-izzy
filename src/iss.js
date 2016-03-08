@@ -344,10 +344,11 @@ export class Service {
     }
 
     descriptionSentences(): Array<string> {
-        return this.description.split(".")
+        return this.description.split(". ")
             .filter(str => str.trim())
-            .map(str => str.trim() + ".")
+            .map(str => (str.trim() + ".").replace("..", "."))
     }
+
     /**
      * First part of the description.
      */
