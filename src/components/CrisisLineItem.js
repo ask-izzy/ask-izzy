@@ -15,10 +15,9 @@ const crisisDescriptions = {
     // flow:disable numbers not supported as keys
     2721562: (service) => (
         <ul className="bonusCopy">
-            <li>If you are homeless or at risk of homelessness, 1800 825 955 will connect you with an Initial Assessment and Planning worker.</li>
-            <li>This call is free except from mobiles. If you are ringing from a mobile you can ask to be called back.</li>
-            <li>When you call this number during the day you will be connected to the nearest Homelessness Entry Service in your area.</li>
-            <li>At other times you will be connected to an After Hours service.</li>
+            <li>If you are homeless or at risk of homelessness, 1800 825 955 will connect you with an Initial Assessment and Planning worker</li>
+            <li>This call is free except from mobiles. If you are ringing from a mobile you can ask to be called back</li>
+            <li>When you call this number during the day you will be connected to the nearest Homelessness Entry Service in your area. At other times you will be connected to an After Hours service.</li>
         </ul>
     ),
     // NSW Link2home
