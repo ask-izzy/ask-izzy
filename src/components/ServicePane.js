@@ -90,6 +90,8 @@ export default class ServicePane extends React.Component {
                     </div>
                 </div>
 
+                <div className="header-provisions-divider"/>
+
                 <div className="provisions">
                     <Eligibility {...object} />
 

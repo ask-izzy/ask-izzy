@@ -56,6 +56,10 @@ $padding: 15px;
         }
     }
 
+    .header-provisions-divider {
+        display: none;
+    }
+
     .practicalities {
         padding-top: 0;
         padding-bottom: 7px;
@@ -70,6 +74,12 @@ $padding: 15px;
 
         .header-practicalities-divider {
             display: none;
+        }
+
+        .header-provisions-divider {
+            display: block;
+            width: 100%;
+            float: left;
         }
 
         .practicalities {
