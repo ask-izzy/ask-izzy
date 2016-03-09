@@ -79,7 +79,7 @@ async function waitForStorage(
     await gotoUrl(driver, "/");
     await driver.wait(() =>
         driver.executeScript(() =>
-            !!IzzyStorage
+            typeof IzzyStorage != "undefined"
         ),
         10000
     );

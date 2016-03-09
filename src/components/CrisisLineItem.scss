@@ -19,10 +19,11 @@
 
     .bonusCopy {
         padding: 0;
+        font-size: 14px;
 
         li {
             padding-bottom: 1em;
-            list-style-type: none;
+            list-style-position: inside;
         }
 
         li:last-child {
