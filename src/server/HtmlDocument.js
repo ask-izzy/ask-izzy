@@ -38,6 +38,7 @@ class HtmlDocument extends React.Component {
         } = this.props;
         const viewport =
             "width=device-width, initial-scale=1.0, user-scalable=no";
+        const canonicalUrl = `https://askizzy.org.au${currentUrl.pathname}`;
 
         return (
 <html >
@@ -71,10 +72,7 @@ class HtmlDocument extends React.Component {
         />
         <meta
             property="og:url"
-            content={currentUrl.format ?
-                currentUrl.format()
-                : currentUrl.toString()
-            }
+            content={canonicalUrl}
         />
 
         {css.map((href, idx) =>
@@ -88,7 +86,7 @@ class HtmlDocument extends React.Component {
 
         <link
             rel="canonical"
-            href={`https://askizzy.org.au${currentUrl.pathname}`}
+            href={canonicalUrl}
         />
 
         <link rel="stylesheet"
