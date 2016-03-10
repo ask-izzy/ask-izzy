@@ -6,6 +6,4 @@ PATH=$(npm bin):$PATH
 export NODE_ENV=production
 export PORT=8010
 
-./script/test-setup
-
 PAUSE_ON_ERROR= mocha --compilers js:babel/register test/unit.js $@
