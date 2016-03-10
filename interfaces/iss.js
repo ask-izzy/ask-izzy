@@ -1,7 +1,8 @@
 /* @flow */
 
 type email = string;
-type issAgeGroup = "prenatal" |
+type issAgeGroup = "unspecified" |
+    "prenatal" |
     "baby" |
     "toddler" |
     "preschool" |
