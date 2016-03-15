@@ -10,6 +10,7 @@ import CategoryListItem from "./components/CategoryListItem";
 import CollapsedOpeningTimes from "./components/CollapsedOpeningTimes";
 import Collapser from "./components/Collapser";
 import ContactMethods from "./components/ContactMethods";
+import CrisisHeader from "./components/CrisisHeader";
 import CrisisLineItem from "./components/CrisisLineItem";
 import DebugContainer from "./components/DebugContainer";
 import DebugQueryScore from "./components/DebugQueryScore";
@@ -50,6 +51,7 @@ export default {
     CollapsedOpeningTimes: CollapsedOpeningTimes,
     Collapser: Collapser,
     ContactMethods: ContactMethods,
+    CrisisHeader: CrisisHeader,
     CrisisLineItem: CrisisLineItem,
     DebugContainer: DebugContainer,
     DebugQueryScore: DebugQueryScore,
