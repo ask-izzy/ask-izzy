@@ -392,6 +392,7 @@ export class Service {
             ];
         } catch (error) {
             console.error("Failed to determine service provisions", error);
+            this._serviceProvisions = [];
         }
 
         return this._serviceProvisions;
