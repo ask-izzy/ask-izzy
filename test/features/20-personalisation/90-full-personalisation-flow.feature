@@ -10,15 +10,14 @@ Feature: Personalisation
         Given a fresh session
         And I visit /
 
-    @skipphantomjs
     Scenario: Search for housing with personalised results
+        Given control of geolocation
         When I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
         Then I should see "Where are you?"
 
-        Given control of geolocation
         When I click on "Get your current location"
 
         Given I'm at 37.823S 144.998E
@@ -46,15 +45,14 @@ Feature: Personalisation
         When I click back from the title bar
         Then I should see "The A to Z directory of homeless help"
 
-    @skipphantomjs
     Scenario: Search for emergency accommodation
+        Given control of geolocation
         When I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
         Then I should see "Where are you?"
 
-        Given control of geolocation
         When I click on "Get your current location"
 
         Given I'm at 37.823S 144.998E
@@ -76,15 +74,14 @@ Feature: Personalisation
         When I click on the done button
         Then I should see "Housing"
 
-    @skipphantomjs
     Scenario: Do a search
+        Given control of geolocation
         When I search for "find a meal" and press enter
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
         Then I should see "Where are you?"
 
-        Given control of geolocation
         When I click on "Get your current location"
 
         Given I'm at 37.823S 144.998E

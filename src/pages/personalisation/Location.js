@@ -6,7 +6,7 @@ import reactMixin from "react-mixin";
 import { debounce } from "core-decorators";
 import { ltrim } from "underscore.string";
 
-import Geolocation from "../../geolocation";
+import Geolocation, {geolocationAvailable} from "../../geolocation";
 import Maps from "../../maps";
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
@@ -277,7 +277,7 @@ class Location extends React.Component {
                 />
                 <div className="List">{
                     /* if the browser supports geolocation */
-                    require("has-geolocation") &&
+                    geolocationAvailable() &&
                     this.state.geolocation == GeoLocationState.NOT_STARTED ?
                         <components.ButtonListItem
                             className="taller LocationButton"

@@ -31,34 +31,7 @@ module.exports = (function() {
  */
 async function mockGeolocation(): Promise<void> {
     await this.driver.executeScript(() => {
-        /* taken from mock-geolocation */
-        function mockGeolocation_(object) {
-            console.log("Mocking geolocation with", object);
-            if (typeof Object.defineProperty == "function") {
-                // flow:disable
-                Object.defineProperty(navigator, "geolocation", {
-                    get: () => {
-                        return object;
-                    },
-                });
-            } else if (navigator.__defineGetter__) {
-                navigator.__defineGetter__("geolocation", () => {
-                    return object;
-                });
-            } else {
-                throw new Error(
-                    "Cannot change navigator.geolocation method"
-                );
-            }
-        }
-
-        /* install a mock that stores the success and error methods */
-        mockGeolocation_({
-            getCurrentPosition: (success, error, opt) => {
-                window.mockGeolocationSuccess = success;
-                window.mockGeolocationError = error;
-            },
-        });
+        IzzyStorage.setGeolocationMock(true, {wait: true})
     });
 }
 
@@ -76,14 +49,8 @@ async function sendCoords(
     longitude: number,
 ): Promise<void> {
     await this.driver.executeScript((obj) => {
-        window.mockGeolocationSuccess(obj);
-    },
-        {
-            coords: {
-                latitude: latitude,
-                longitude: longitude,
-            },
-        });
+        IzzyStorage.setGeolocationMock(true, obj)
+    }, {coords: {latitude, longitude}});
 }
 
 /**
@@ -95,7 +62,7 @@ async function sendCoords(
 async function setLocation(location: string): Promise<void> {
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript((location) => {
-        IzzyStorage.setItem("location", location);
+        IzzyStorage.setLocation(location);
     }, location);
 }
 
@@ -109,20 +76,14 @@ async function setLocation(location: string): Promise<void> {
 async function setCoords(latitude: number, longitude: number): Promise<void> {
     await this.driver.executeScript((coords) => {
         IzzyStorage.setCoordinates(coords);
-    },
-
-        {
-            latitude: latitude,
-            longitude: longitude,
-        });
+    }, {latitude, longitude});
 }
 
 async function disableGeolocation(): Promise {
-    await this.driver.executeScript((obj) => {
-        window.mockGeolocationError(obj);
-    },
-
-        {
-            message: "User denied access",
-        });
+    await this.driver.executeScript(() => {
+        IzzyStorage.setGeolocationMock(
+            false,
+            {message: "User denied access"},
+        )
+    });
 }

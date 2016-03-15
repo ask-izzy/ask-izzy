@@ -26,15 +26,6 @@ let passed = true;
 
 new Yadda.FeatureFileSearch("./test/features").each(file => {
     featureFile(file, feature => {
-
-        const browserName = (process.env.SELENIUM_BROWSER || "")
-            .split(/:/)[0];
-
-        if ((browserName === "phantomjs") &&
-            (feature.annotations.skipphantomjs)) {
-            return;
-        }
-
         before(async function(): Promise<void> {
             driver = await driverPromise;
             sessionId = (await driver.getSession())
@@ -50,10 +41,6 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
         });
 
         scenarios(feature.scenarios, scenario => {
-            if ((browserName === "phantomjs") &&
-                (scenario.annotations.skipphantomjs)) {
-                return;
-            }
 
             before(async function(): Promise<void> {
                 await cleanDriverSession(await driverPromise);

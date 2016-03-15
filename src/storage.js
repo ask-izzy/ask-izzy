@@ -113,6 +113,14 @@ const Storage = {
         this.setItem(key, JSON.stringify(obj));
     },
 
+    setGeolocationMock(success: boolean, result: any): void {
+        this.setJSON("mock-geolocation", {success, result});
+    },
+
+    getGeolocationMock(): any {
+        return this.getJSON("mock-geolocation");
+    },
+
     clear(): void {
         persistentStore.clear();
         sessionStore.clear();
