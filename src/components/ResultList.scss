@@ -1,37 +1,19 @@
 .ResultList {
-    .resultContainer > a:focus {
-        outline: none;
-
-        > div {
-            outline: 1px dashed $brand-pane-alt-light;
-        }
-    }
-
-    .resultContainer {
-        border-top: 10px solid $brand-bg-light;
-        vertical-align: top;
-    }
 
     .resultContainer:first-child {
         border-top: 0;
     }
 
-    .resultContainer-other + .resultContainer {
-        border-top: 0;
-    }
-
-    .resultContainer-CrisisLineItem + .resultContainer-CrisisLineItem {
-        border-top: 0;
-    }
-
-    .resultContainer-ResultListItem + .resultContainer-ResultListItem {
-        border-top: 1px solid $list-item-hairline;
+    .resultContainer-ResultListItem {
+        border-top: 10px solid $brand-bg-light;
     }
 
     @media ($tablet) {
         .resultContainer-CrisisLineItem {
             display: inline-block;
-            width: 48%;
+            width: 48%; // two columns
+            // when next to a taller element, align the tops
+            vertical-align: top;
         }
     }
 }
