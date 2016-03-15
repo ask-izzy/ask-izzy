@@ -7,6 +7,8 @@
 
 import location from "browser-location";
 import storage from "./storage";
+import _ from "underscore";
+import Maps from "./maps";
 
 /**
  * Returns a promise to get the user's geolocation from the browser.
@@ -61,4 +63,42 @@ export function geolocationAvailable(): boolean {
 
     return navigator.geolocation &&
         typeof navigator.geolocation.getCurrentPosition === 'function';
+}
+
+export async function guessSuburb(location: Position): Promise<string> {
+    const maps = await Maps();
+    let possibleLocations = await maps.geocode({
+        location: {
+            lat: location.coords.latitude,
+            lng: location.coords.longitude,
+        },
+    });
+
+    /* return true if the types includes one of our interesting
+     * component types */
+    function interestingComponent(types: Array<string>): boolean {
+        return !_.isEmpty(_.intersection(
+            types,
+            ["locality", "administrative_area_level_1"]
+        ));
+    }
+
+    for (let geocodedLocation of possibleLocations) {
+        if (_.contains(geocodedLocation.types, "locality")) {
+            /* build a location name from the address components specified
+             * in interestingComponent. We do this because we don't want
+             * to show all the parts of Google's formatted_address */
+            let name = [
+                /*::`*/
+                for (component of geocodedLocation.address_components)
+                if (interestingComponent(component.types))
+                    component.long_name
+                /*::`*/
+            ].join(", ");
+
+            return name;
+        }
+    }
+
+    throw "Unable to determine your suburb";
 }
