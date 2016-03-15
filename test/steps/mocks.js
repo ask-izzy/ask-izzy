@@ -8,7 +8,7 @@ import Yadda from "yadda";
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
-import { mock } from "../support/mock_iss/server";
+import { mock, mockSearch } from "../support/mock_iss/server";
 import { Service } from "../../src/iss";
 
 import { visitUrl } from "./browser";
@@ -34,6 +34,13 @@ async function mockService(service: Service) {
     mock(service);
 }
 
+async function mockSearchForServices(
+    search: string,
+    services: Array<Service>
+): Promise<void> {
+    mockSearch(search, services);
+}
+
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .given("A service with:\n$service",
@@ -42,5 +49,7 @@ module.exports = (function() {
             unpromisify(visitMockedService))
         .when("I search for the service",
             unpromisify(searchMockedService))
+        .given("A search for \"$string\" returns:\n$services",
+            unpromisify(mockSearchForServices))
         ;
 })();

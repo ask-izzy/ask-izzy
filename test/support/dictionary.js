@@ -98,6 +98,16 @@ function serviceConverter(str: string, done: callback): void {
 }
 
 /*
+ * Parses a service description out of a yadda step
+ */
+function servicesConverter(str: string, done: callback): void {
+    try {
+        done(null, yaml.safeLoad(str).map(Service));
+    } catch (error) {
+        done(error)
+    }
+}
+/*
  * Parses arbitrary yaml out of a yadda step
  */
 function yamlConverter(str: string, done: callback): void {
@@ -125,6 +135,7 @@ const dictionary = new Yadda.Dictionary()
     .define("lines", /([^\u0000]*)/, linesConverter)
     .define("table", /([^\u0000]*)/, tableConverter)
     .define("service", /([^\u0000]*)/, serviceConverter)
+    .define("services", /([^\u0000]*)/, servicesConverter)
     .define("yaml", /([^\u0000]*)/, yamlConverter)
     .define("NUMBER", /([^\u0000]*)/, numberConverter)
     ;
