@@ -132,11 +132,7 @@ class Location extends React.Component {
         this.setState({
             locationName: `${name || ""}`,
         });
-        if (name && validChoice) {
-            this.setNextEnabled(true);
-        } else {
-            this.setNextEnabled(false);
-        }
+        this.setState({nextDisabled: !(name && validChoice)});
     }
 
 
@@ -276,7 +272,7 @@ class Location extends React.Component {
                     <components.FlatButton
                         label="Done"
                         onClick={this.props.onDoneTouchTap}
-                        disabled={!this.isNextEnabled()}
+                        disabled={this.state.nextDisabled}
                     />
                 </div>
             </div>
