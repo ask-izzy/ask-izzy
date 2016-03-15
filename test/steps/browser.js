@@ -142,7 +142,7 @@ async function urlIs(
         url = Url.parse(url).path
     }
 
-    return url == expected;
+    return decodeURIComponent(url) == expected;
 }
 
 async function checkURL(expected: string): Promise<void> {
@@ -156,11 +156,14 @@ async function checkURL(expected: string): Promise<void> {
         `URL should be ${
             expected
         }, was ${
-            await this.driver.getCurrentUrl()
+            decodeURIComponent(await this.driver.getCurrentUrl())
         }`,
     );
 
-    assert.equal(await this.driver.getCurrentUrl(), expected);
+    assert.equal(
+        decodeURIComponent(await this.driver.getCurrentUrl()),
+        expected
+    );
 }
 
 async function thenISee(expected: string): Promise<void> {

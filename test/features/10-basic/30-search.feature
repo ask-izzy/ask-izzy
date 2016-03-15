@@ -13,7 +13,7 @@ Feature: Search
 
     Scenario: Search for "pets" using keyboard
         When I search for "pet food" and press enter
-        Then I should be at /search/pet%20food
+        Then I should be at /search/pet food
         # FIXME: make the mock produce more meaningful results
         And I should see the results
         -------------------------------------------
@@ -27,7 +27,7 @@ Feature: Search
     Scenario: Search for pets using keyboard and mouse
         When I search for "pet food"
         And I click on the search icon
-        Then I should be at /search/pet%20food
+        Then I should be at /search/pet food
 
     Scenario: Search on blank does not search
         When I click on the search icon
