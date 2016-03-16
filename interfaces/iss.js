@@ -25,14 +25,16 @@ type ymdWithDashesDate = string;
 type hmsWithColonsTime = string;
 type state = string; /* enum */
 type dayOfWeek = string; /* enum('Monday', 'Friday', etc) */
+type issPoint = {
+    "lat": number,
+    "lon": number
+};
+
 type issLocation = {
     "building": string,
     "flat_unit": string,
     "level": string,
-    "point": {
-        "lat": number,
-        "lon": number
-    },
+    "point": issPoint,
     "postcode": string,
     "state": state,
     "street_name": string,
