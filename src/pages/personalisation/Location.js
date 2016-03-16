@@ -1,26 +1,17 @@
 /* @flow */
 
 import React from "react";
-import _ from "underscore";
 import reactMixin from "react-mixin";
 import { debounce } from "core-decorators";
 import { ltrim } from "underscore.string";
 
-import Geolocation from "../../geolocation";
-import Maps from "../../maps";
+import {geolocationAvailable} from "../../geolocation";
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import suggest from "../../locationSuggestions";
-
-const GeoLocationState = {
-    NOT_STARTED: 0,
-    RUNNING: 1,
-    COMPLETE: 2,
-    FAILED: 3,
-};
 
 const AutocompleteState = {
     NOT_SEARCHING: 0,
@@ -42,7 +33,6 @@ class Location extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {
-            geolocation: GeoLocationState.NOT_STARTED,
             autocompletion: AutocompleteState.NOT_SEARCHING,
             locationName: "",
             locationCoords: {},
@@ -114,53 +104,6 @@ class Location extends React.Component {
         return true;
     }
 
-    async locateMe(): Promise<Object> {
-        const maps = await Maps();
-        let location = await Geolocation();
-        let possibleLocations = await maps.geocode({
-            location: {
-                lat: location.coords.latitude,
-                lng: location.coords.longitude,
-            },
-        });
-
-        /* store these coordinates for the session so we can use them to
-         * provide additional info for autocomplete, distances, ISS search
-         * weighting, etc. */
-        storage.setCoordinates(location.coords);
-
-        /* return true if the types includes one of our interesting
-         * component types */
-        function interestingComponent(types: Array<string>): boolean {
-            return !_.isEmpty(_.intersection(
-                types,
-                ["locality", "administrative_area_level_1"]
-            ));
-        }
-
-        for (let geocodedLocation of possibleLocations) {
-            if (_.contains(geocodedLocation.types, "locality")) {
-                /* build a location name from the address components specified
-                 * in interestingComponent. We do this because we don't want
-                 * to show all the parts of Google's formatted_address */
-                let name = [
-                    /*::`*/
-                    for (component of geocodedLocation.address_components)
-                    if (interestingComponent(component.types))
-                        component.long_name
-                    /*::`*/
-                ].join(", ");
-
-                return {
-                    location: location,
-                    name: name,
-                };
-            }
-        }
-
-        throw "Unable to determine your suburb";
-    }
-
     /**
      * triggerAutocomplete:
      *
@@ -189,41 +132,9 @@ class Location extends React.Component {
         this.setState({
             locationName: `${name || ""}`,
         });
-        if (name && validChoice) {
-            this.setNextEnabled(true);
-        } else {
-            this.setNextEnabled(false);
-        }
+        this.setState({nextDisabled: !(name && validChoice)});
     }
 
-    onGeolocationClick(): void {
-        if (this.state.geolocation != GeoLocationState.NOT_STARTED) {
-            return;
-        }
-
-        this.setState({
-            geolocation: GeoLocationState.RUNNING,
-        });
-
-        this.locateMe()
-            .then(params => {
-                let { location, name } = params;
-
-                this.setState({
-                    geolocation: GeoLocationState.COMPLETE,
-                    locationCoords: location,
-                });
-                this.setLocationName(name, true);
-            })
-
-            .catch(error => {
-                console.error(error);
-                this.setState({
-                    geolocation: GeoLocationState.FAILED,
-                    error: error.message,
-                });
-            });
-    }
 
     onNextStep(): void {
         storage.setLocation(this.state.locationName || "");
@@ -261,6 +172,11 @@ class Location extends React.Component {
         }
     }
 
+    onGeoLocationSuccess(params: {coords: Coordinates, name: string}): void {
+        storage.setCoordinates(params.coords);
+        this.setLocationName(params.name, true);
+    }
+
     render(): ReactElement {
         return (
             <div className="Location">
@@ -277,50 +193,10 @@ class Location extends React.Component {
                 />
                 <div className="List">{
                     /* if the browser supports geolocation */
-                    require("has-geolocation") &&
-                    this.state.geolocation == GeoLocationState.NOT_STARTED ?
-                        <components.ButtonListItem
-                            className="taller LocationButton"
-                            onClick={this.onGeolocationClick.bind(this)}
-                            primaryText={
-                                <span className="link-color link-text">
-                                    Get your current location
-                                </span>
-                            }
-                            leftIcon={
-                                <icons.Location
-                                    className="ColoredIcon icon-fg-color big"
-                                />
-                            }
-                        />
-                    : ""
-                }{
-                    this.state.geolocation == GeoLocationState.RUNNING ?
-                        <components.ListItem
-                            primaryText="Locating you..."
-                            secondaryText="Please permit us to use your GPS"
-                            leftIcon={
-                                <icons.Loading className="big" />
-                            }
-                        />
-                    : ""
-                }{
-                    this.state.geolocation == GeoLocationState.COMPLETE ?
-                        <components.ListItem
-                            className="taller"
-                            primaryText="Found your location"
-                            leftIcon={<icons.Tick className="big" />}
-                        />
-                    : ""
-                }{
-                    this.state.geolocation == GeoLocationState.FAILED ?
-                        <components.ListItem
-                            primaryText="Unable to get your location"
-                            secondaryText={`Please enter your location below
-                                (${this.state.error})`}
-                            leftIcon={<icons.Cross className="big" />}
-                        />
-                    : ""
+                    geolocationAvailable() &&
+                    <components.GeolocationButton
+                        onSuccess={this.onGeoLocationSuccess.bind(this)}
+                    />
                 }
                 <form
                     className="search"
@@ -396,7 +272,7 @@ class Location extends React.Component {
                     <components.FlatButton
                         label="Done"
                         onClick={this.props.onDoneTouchTap}
-                        disabled={!this.isNextEnabled()}
+                        disabled={this.state.nextDisabled}
                     />
                 </div>
             </div>

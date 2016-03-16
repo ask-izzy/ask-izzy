@@ -19,6 +19,7 @@ import Email from "./components/Email";
 import EmbargoMessage from "./components/EmbargoMessage";
 import FlatButton from "./components/FlatButton";
 import FloatFromBottom from "./components/FloatFromBottom";
+import GeolocationButton from "./components/GeolocationButton";
 import GoogleMapsLink from "./components/GoogleMapsLink";
 import HeaderBar from "./components/HeaderBar";
 import IconButton from "./components/IconButton";
@@ -58,6 +59,7 @@ export default {
     EmbargoMessage: EmbargoMessage,
     FlatButton: FlatButton,
     FloatFromBottom: FloatFromBottom,
+    GeolocationButton: GeolocationButton,
     GoogleMapsLink: GoogleMapsLink,
     HeaderBar: HeaderBar,
     IconButton: IconButton,
