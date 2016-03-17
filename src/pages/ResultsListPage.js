@@ -7,12 +7,23 @@ import ResultsList from "../components/ResultsList";
 import LoadingResultsHeader from
     "../components/ResultsListPage/LoadingResultsHeader";
 import ViewOnMapButton from "../components/ViewOnMapButton";
+import sendEvent from "../google-tag-manager";
+import storage from "../storage";
 
 class ResultsListPage extends React.Component {
 
     static propTypes = {
         objects: React.PropTypes.array,
     };
+
+    recordMapClick(): void {
+        sendEvent({
+            event: "ViewOnMap",
+            category: this.props.category,
+            search: this.props.search,
+            location: storage.getLocation(),
+        });
+    }
 
     render(): ReactElement {
         const path = this.props.location.pathname.replace(/\/?$/, "/map");
@@ -25,6 +36,7 @@ class ResultsListPage extends React.Component {
                         _.isEmpty(this.props.objects) ||
                         <ViewOnMapButton
                             to={path}
+                            onClick={this.recordMapClick.bind(this)}
                         />
                     }
                     <ResultsList

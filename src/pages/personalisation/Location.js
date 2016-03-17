@@ -136,7 +136,6 @@ class Location extends React.Component {
         this.setState({nextDisabled: !(name && validChoice)});
     }
 
-
     onNextStep(): void {
         storage.setLocation(this.state.locationName || "");
     }

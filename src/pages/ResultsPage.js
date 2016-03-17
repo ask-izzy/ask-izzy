@@ -83,10 +83,10 @@ class ResultsPage extends BaseCategoriesPage {
         }
 
         sendEvent({
-            "event": "searchResults",
-            "searchQuery": this.props.params.search,
-            "searchPage": this.props.params.page,
-            "location": storage.getLocation(),
+            event: "searchResults",
+            searchQuery: this.props.params.search,
+            searchPage: this.props.params.page,
+            location: storage.getLocation(),
         })
 
         const request = this.issParams();
@@ -139,6 +139,13 @@ class ResultsPage extends BaseCategoriesPage {
     }
 
     async loadMore(): Promise<void> {
+        sendEvent({
+            event: "LoadMoreSearchResults",
+            searchQuery: this.props.params.search,
+            searchPage: this.props.params.page,
+            location: storage.getLocation(),
+        });
+
         if (!this.state.meta && this.state.meta.next) {
             return;
         }
