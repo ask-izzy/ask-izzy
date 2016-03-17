@@ -10,7 +10,6 @@ import unpromisify from "../support/yadda-promise";
 import asyncFilter from "../support/async-filter";
 
 module.exports = (function() {
-
     return Yadda.localisation.English.library(dictionary)
         .then("I should see the contacts\n$lines",
               unpromisify(checkPhoneNumbers))
