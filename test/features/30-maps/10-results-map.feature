@@ -17,6 +17,7 @@ Feature: See results on a map
          And my location is 37.822S 144.99E
         When I visit /category/everyday-things
         And I click on "Load more results…"
+        And I wait for 10 results to load
         Then I should see the results
         ---------------------
         ServiceName (name)
