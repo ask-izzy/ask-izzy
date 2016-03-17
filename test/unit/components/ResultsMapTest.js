@@ -150,7 +150,7 @@ describe("ResultsMap", function() {
             });
         });
 
-        describe("with an odd number of points & some outliers", function() {
+        describe("with an outlier", function() {
             const points = [
                 {lat: 1, lon: 1},
                 {lat: 1.1, lon: 0.9},

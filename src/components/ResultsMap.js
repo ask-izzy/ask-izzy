@@ -279,7 +279,15 @@ export function expandCluster(
     // Recurse until we stop growing the cluster.
     if (!_.isEqual(newCluster, approxCluster)) {
         if (newCluster.length < approxCluster.length) {
-            throw new Error("Unexpected!")
+            if (process.env.NODE_ENV == "development") {
+                throw new Error("Assertion error: " +
+                    "expandCluster reduced the number of pins"
+                );
+            } else {
+                // If things go wrong in prod,
+                // give the user something reasonable.
+                return approxCluster;
+            }
         }
         return expandCluster(newCluster, points);
     } else {
@@ -289,7 +297,11 @@ export function expandCluster(
 
 export function centreOf(points: Array<issPoint>): issPoint {
     if (points.length == 0) {
-        throw new Error("Unexpected")
+        if (process.env.NODE_ENV == "development") {
+            throw new Error("Assertion error: " +
+                "no points passed to centreOf(points)"
+            );
+        }
     }
     let centre = {lat: 0, lon: 0};
 
