@@ -14,6 +14,8 @@ import asyncFilter from "../support/async-filter";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
+        .when("I wait for $NUMBER results to load",
+            unpromisify(waitForResultCount))
         .then("I should see the results\n$table",
             unpromisify(seeTheResults))
         .then('I should see the results for "$string"\n$table',
@@ -31,6 +33,21 @@ module.exports = (function() {
             unpromisify(assertNoSuchResults))
         ;
 })();
+
+async function waitForResultCount(
+    expected: number,
+): Promise<void> {
+    const selector = By.css(".ResultListItem, .CrisisLineItem");
+    const driver = this.driver;
+
+    async function enoughResults(): Promise<boolean> {
+        const actual = (await driver.findElements(selector)).length;
+
+        return actual === expected;
+    }
+
+    await driver.wait(enoughResults, 10000);
+}
 
 async function seeTheResultsIn(
     label: string,
