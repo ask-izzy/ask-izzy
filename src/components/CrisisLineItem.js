@@ -49,8 +49,9 @@ class CrisisLineItem extends React.Component {
         const {
             object,
         } = this.props;
+        const phone = object.Phones()[0];
 
-        for (let phone of object.Phones()) {
+        if (phone) {
             return (
                 <div className="CrisisLineItem">
                     <h3>
