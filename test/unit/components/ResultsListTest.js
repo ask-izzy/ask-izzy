@@ -13,26 +13,21 @@ describe("Results list", function() {
         };
 
         it("returns zero when there are none", function() {
-            assert.equal(
-                countCrisisResults([false, false, false].map(result)),
-                0
-            );
+            const results = [false, false, false].map(result);
+
+            assert.equal(countCrisisResults(results), 0);
         })
 
         it("returns the total when all are crisis lines", function() {
-            assert.equal(
-                countCrisisResults([true, true, true].map(result)),
-                3
-            );
+            const results = [true, true, true].map(result);
+
+            assert.equal(countCrisisResults(results), 3);
         })
 
         it("does not count crisis lines after a non-crisis", function() {
-            assert.equal(
-                countCrisisResults(
-                    [true, true, false, true, true].map(result)
-                ),
-                2
-            );
+            const results = [true, true, false, true, true].map(result);
+
+            assert.equal(countCrisisResults(results), 2);
         })
 
     })
