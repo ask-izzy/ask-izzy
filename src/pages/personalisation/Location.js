@@ -59,6 +59,7 @@ class Location extends React.Component {
     }
 
     static shouldEnableCatchment(): boolean {
+        // Currently only for locations in Tasmania.
         let tasmaniaRegex = /TAS(mania)?$/i;
 
         if (tasmaniaRegex.exec(storage.getLocation())) {
@@ -88,7 +89,7 @@ class Location extends React.Component {
         request = Object.assign(request, {area: location});
 
         if (this.shouldEnableCatchment()) {
-            request = Object.assign(request, {catchment: true});
+            request = Object.assign(request, {catchment: "prefer"});
         }
 
         return request;
