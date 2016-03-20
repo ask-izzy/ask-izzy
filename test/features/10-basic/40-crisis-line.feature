@@ -11,11 +11,25 @@ Feature: Crisis Line
         And I am 27 years old
         And I am not part of any relevant demographics
 
-    Scenario: Get helpline phone number for the food category
+    Scenario: Get helpline phone number
+       Given A search for "get helpline phone number" returns:
+        ----------------------------------------------
+        -   crisis: true
+            phones:
+                - kind        : phone
+                  number      : (03) 3333 3333
+                  comment     :
+        -   crisis: true
+            phones:
+                - kind        : phone
+                  number      : 03 1111 1111
+                  comment     :
+        ----------------------------------------------
         When I visit /
-        And I click on "Food"
-        Then I should be at /category/food
-        And I should see a hotline in position 2 which says "0311111111"
+        And I search for "get helpline phone number" and press enter
+        Then I should be at /search/get helpline phone number
+        And I should see a hotline in position 1 which says "(03) 3333 3333"
+        And I should see a hotline in position 2 which says "03 1111 1111"
         And I should see "If you need urgent help call one of these numbers" before first hotline
 
     Scenario: Search for helpline phone numbers for domestic violence

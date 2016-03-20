@@ -14,23 +14,40 @@ import asyncFilter from "../support/async-filter";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
+        .when("I wait for $NUMBER results to load",
+            unpromisify(waitForResultCount))
         .then("I should see the results\n$table",
-              unpromisify(seeTheResults))
+            unpromisify(seeTheResults))
         .then('I should see the results for "$string"\n$table',
-              unpromisify(seeTheResultsIn))
+            unpromisify(seeTheResultsIn))
         .then('I should see a hotline in position $NUM which says "$STRING"',
-              unpromisify(hotlinePositionAndText))
+            unpromisify(hotlinePositionAndText))
         .then("I should see $NUMBER search results " +
             'for "$STRING" in "$STRING"',
             unpromisify(assertNumSearchResults))
         .then('I should see $NUMBER search results in "$STRING"',
             unpromisify(assertNumSearchResults))
         .then('I should see "$STRING" before first hotline',
-              unpromisify(assertHotlineHeading))
+            unpromisify(assertHotlineHeading))
         .then("my results should not contain\n$table",
-              unpromisify(assertNoSuchResults))
+            unpromisify(assertNoSuchResults))
         ;
 })();
+
+async function waitForResultCount(
+    expected: number,
+): Promise<void> {
+    const selector = By.css(".ResultListItem, .CrisisLineItem");
+    const driver = this.driver;
+
+    async function enoughResults(): Promise<boolean> {
+        const actual = (await driver.findElements(selector)).length;
+
+        return actual === expected;
+    }
+
+    await driver.wait(enoughResults, 10000);
+}
 
 async function seeTheResultsIn(
     label: string,

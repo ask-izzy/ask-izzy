@@ -10,6 +10,31 @@ const app = express();
 
 app.use(cors());
 
+const legacyReservedSearches = [
+    /food/,
+    /pet/,
+    /material aid/,
+    /zero results/,
+    /cause error/,
+    /domestic violence/,
+    /elasticsearch unavailable/,
+]
+let searchMocks = {};
+
+export function mockSearch(search: string, services: Array<Object>): void {
+    if (searchMocks[search]) {
+        throw new Error(`Search ${search} is already mocked`);
+    }
+
+    // Prevent collisions with our awful legacy mocks.
+    // Looking forward to removing this.
+    if (legacyReservedSearches.some((regex) => search.match(regex))) {
+        throw new Error(`Search ${search} matches a legacy reserved format`);
+    }
+
+    searchMocks[search] = services;
+}
+
 let mocks = {};
 
 export function mock(service: Object): void {
@@ -24,7 +49,7 @@ export function mock(service: Object): void {
 }
 
 /* eslint-disable complexity */
-/* FIXME: refactor */
+/* FIXME: refactor to use mocks instead of these */
 app.get("/api/v3/search/", (req, res) => {
     let mockId = parseInt(req.query.q);
 
@@ -82,7 +107,7 @@ app.get("/api/v3/search/", (req, res) => {
         /* other related services search */
         res.json({
             meta: {},
-            objects: [],  // FIXME: should return ourselves
+            objects: [],
         });
     } else if (req.query.area == "carlt") {
         res
@@ -90,10 +115,22 @@ app.get("/api/v3/search/", (req, res) => {
             .json({
                 error_message: 'Could not find a location matching "carlt"',
             });
+    } else if (searchMocks[req.query.q]) {
+        res.json({
+            meta: {
+                total_count: searchMocks[req.query.q].length,
+                location: {
+                    name: "Richmond",
+                    suburb: "Richmond",
+                    state: "VIC",
+                },
+            },
+            objects: searchMocks[req.query.q],
+        });
     } else if (req.query.q.match(/food/) && !req.query.q.match(/pet/)) {
         res.json({
             meta: {
-                total_count: 1,
+                total_count: 4,
                 location: {
                     name: "Richmond",
                     suburb: "Richmond",
@@ -101,6 +138,34 @@ app.get("/api/v3/search/", (req, res) => {
                 },
             },
             objects: [
+                ServiceFactory({
+                    crisis: true,
+                    name: "Community Urgent",
+                    site: {name: "Youth Support Net"},
+                    phones: [{
+                        number: "0311111111",
+                        kind: "mobile",
+                    }],
+                }),
+                ServiceFactory({
+                    name: "Instant Service",
+                    site: {name: "Youth Support Net"},
+                    crisis: true,
+                    phones: [
+                        {
+                            number: "0322221122",
+                            kind: "",
+                        },
+                        {
+                            number: "0345671234",
+                            kind: "phone",
+                        },
+                        {
+                            number: "0345671259",
+                            kind: "freecall",
+                        },
+                    ],
+                }),
                 {
                     id: 444,
                     name: "Community Lunch",
@@ -126,67 +191,6 @@ app.get("/api/v3/search/", (req, res) => {
                     location: {
                         suburb: "Richmond",
                     },
-
-                },
-                {
-                    id: 445,
-                    name: "Community Urgent",
-                    site: {
-                        id: 445,
-                        name: "Youth Support Net",
-                    },
-                    now_open: {
-                        now_open: false,
-                    },
-                    opening_hours: [],
-                    location: {
-                        suburb: "Richmond",
-                    },
-                    crisis: true,
-                    phones: [{
-                        comment: "",
-                        number: "0312345601",
-                        kind: "fax",
-                    },
-
-                    {
-                        comment: "",
-                        number: "0311111111",
-                        kind: "mobile",
-                    },
-                    ],
-                },
-                {
-                    id: 446,
-                    name: "Instant Service",
-                    site: {
-                        id: 446,
-                        name: "Youth Support Net",
-                    },
-                    now_open: {
-                        now_open: false,
-                    },
-                    opening_hours: [],
-                    location: {
-                        suburb: "Richmond",
-                    },
-                    crisis: true,
-                    phones: [{
-                        comment: "",
-                        number: "0322221122",
-                        kind: "",
-                    },
-                    {
-                        comment: "",
-                        number: "0345671234",
-                        kind: "phone",
-                    },
-                    {
-                        comment: "",
-                        number: "0345671259",
-                        kind: "freecall",
-                    },
-                    ],
                 },
                 {
                     id: 446,
@@ -346,4 +350,5 @@ app.listen(5000);
 
 export default {
     mock: mock,
+    mockSearch: mockSearch,
 }
