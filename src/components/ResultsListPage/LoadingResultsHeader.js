@@ -9,11 +9,13 @@ import HeaderBar from "../HeaderBar";
 import Gender from "../../pages/personalisation/Gender";
 import Age from "../../pages/personalisation/Age";
 import Location from "../../pages/personalisation/Location";
+import storage from "../../storage";
 
 const HomeLink = (): ReactElement =>
     <Link
         className="homeLink"
         to="/"
+        onClick={storage.clear}
     >Go back</Link>;
 
 const ErrorMessage = ({children}: Object): ReactElement =>
