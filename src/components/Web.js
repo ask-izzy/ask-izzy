@@ -2,17 +2,28 @@
 import React from "react";
 import URL from "url";
 import icons from "../icons";
+import sendEvent from "../google-tag-manager";
 
 export default class Web extends React.Component {
 
     static sampleProps = {default: {url: "https://ExampleDomain.com/landingPage"}};
+
+    recordClick(): void {
+        sendEvent({
+            event: "clickServiceWebsite",
+            url: this.props.url,
+        });
+    }
 
     render(): ReactElement {
         let url = URL.parse(this.props.url);
 
         return (
             <div className="Contact Web">
-                <a href={url.href}>
+                <a
+                    href={url.href}
+                    onClick={this.recordClick.bind(this)}
+                >
                     <icons.Website />
                     <div className="Contact-text">
                         <span className="kind">

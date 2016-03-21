@@ -100,7 +100,7 @@ class TransportTime extends React.Component {
             event: "clickGetDirections",
             addressLine1: location.streetAddressLine1(),
             addressLine2: location.streetAddressLine2(),
-        })
+        });
     }
 
     renderDirections(): ReactElement {

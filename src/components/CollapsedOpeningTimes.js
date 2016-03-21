@@ -7,6 +7,7 @@ import _ from "underscore";
 import ServiceOpening from "../iss/ServiceOpening";
 import Collapser from "./Collapser";
 import OpeningTimes from "./OpeningTimes";
+import sendEvent from "../google-tag-manager";
 
 function formatTime(str: string): string {
     return moment(str, "HH:mm:ss").format("h:mm A");
@@ -74,6 +75,13 @@ export default class CollapsedOpeningTimes extends React.Component {
         }]),
     };
 
+    recordExpandOpeningTimes(): void {
+        sendEvent({
+            event: "expandOpeningTimes",
+            service: this.props.object.id,
+        })
+    }
+
     render(): ReactElement {
         const order = [
             "Monday",
@@ -99,6 +107,7 @@ export default class CollapsedOpeningTimes extends React.Component {
                     <Collapser
                         message="Open Times"
                         expanded={this.props.expanded}
+                        onClick={this.recordExpandOpeningTimes.bind(this)}
                     >
                     <ul className="AllOpeningTimes">
                     {openingHours.map((record, idx) =>

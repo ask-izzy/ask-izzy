@@ -5,6 +5,7 @@ import ButtonListItem from "./ButtonListItem";
 import ListItem from "./ListItem";
 import Geolocation, {guessSuburb} from "../geolocation";
 import icons from "../icons";
+import sendEvent from "../google-tag-manager";
 
 const GeoLocationState = {
     NOT_STARTED: 0,
@@ -100,13 +101,20 @@ class GeolocationButton extends React.Component {
         this.setState({
             geolocation: GeoLocationState.RUNNING,
         });
+        sendEvent({event: "geolocation-requested"});
 
         this.locateMe()
             .then((params) => {
                 this.setState({geolocation: GeoLocationState.COMPLETE});
+                sendEvent({event: "geolocation-success"});
+
                 this.props.onSuccess(params);
             })
             .catch(error => {
+                sendEvent({
+                    event: "geolocation-failed",
+                    message: error.message,
+                });
                 console.error(error);
                 this.setState({
                     geolocation: GeoLocationState.FAILED,

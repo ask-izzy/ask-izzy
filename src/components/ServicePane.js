@@ -14,6 +14,7 @@ import LinkListItem from "./LinkListItem";
 import fixtures from "../../fixtures/services";
 import ServiceFactory from "../../fixtures/factories/Service";
 import icons from "../icons";
+import sendEvent from "../google-tag-manager";
 
 export default class ServicePane extends React.Component {
 
@@ -42,6 +43,13 @@ export default class ServicePane extends React.Component {
         let response = await this.props.service.getSiblingServices();
 
         this.setState({siblings: response.objects});
+    }
+
+    recordSuggestChange(): void {
+        sendEvent({
+            event: "suggestServiceChange",
+            service: this.props.service.id,
+        });
     }
 
     render(): ReactElement {
@@ -99,6 +107,7 @@ export default class ServicePane extends React.Component {
 
                 <a
                     className="suggestChange"
+                    onClick={this.recordSuggestChange.bind(this)}
                     href={
                         "mailto:database@infoxchange.org" +
                         "?subject=" +
