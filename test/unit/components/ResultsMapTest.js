@@ -181,21 +181,48 @@ describe("ResultsMap", function() {
                 {lat: -37.868154, lon: 145.080613},
                 {lat: -37.86844, lon: 144.989821},
                 {lat: -37.919243, lon: 145.121501},
-                {lat: -37.862611, lon: 144.979909},
                 {lat: -37.8403411, lon: 144.9574317},
                 {lat: -37.851082, lon: 144.993268},
                 {lat: -37.814931, lon: 145.006317},
                 {lat: -37.814541, lon: 144.997582},
             ];
 
+            const duplicates = [
+                {lat: -37.862611, lon: 144.979909},
+            ];
+
             it("finds no outliers", function() {
                 assert.deepEqual(
-                    removeOutliers(points),
+                    removeOutliers(points.concat(duplicates)),
                     points
                 );
             });
 
         });
+
+        describe("realistic example (alcohol near Footscray)", function() {
+            const points = [
+                {lat: -37.7885597, lon: 144.882808},
+                {lat: -37.801611, lon: 144.906693},
+                {lat: -37.800023, lon: 144.894875},
+                {lat: -37.797653, lon: 144.900244},
+                {lat: -37.7904529, lon: 144.8858344},
+                {lat: -37.7904548, lon: 144.8858517},
+            ];
+            const duplicates = [
+                {lat: -37.7904529, lon: 144.8858344},
+                {lat: -37.7904548, lon: 144.8858517},
+                {lat: -37.7904548, lon: 144.8858517},
+                {lat: -37.7904548, lon: 144.8858517},
+            ]
+
+            it("finds no outliers", function() {
+                assert.deepEqual(
+                    removeOutliers(points.concat(duplicates)),
+                    points
+                );
+            });
+        })
 
     });
 });

@@ -231,6 +231,9 @@ export default ResultsMap;
 export function removeOutliers(
     points: Array<issPoint>
 ): Array<issPoint> {
+    // Remove duplicate points
+    points = _.uniq(points, false, ({lat, lon}) => `${lat}:${lon}`);
+
     // Outliers don't help if there are few points.
     if (points.length <= 2) {
         return points;
