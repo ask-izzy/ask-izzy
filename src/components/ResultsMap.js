@@ -103,12 +103,14 @@ class ResultsMap extends React.Component {
         /* update the map bounds */
         const maps = this.state.maps.api;
         let bounds = new maps.LatLngBounds();
+        const points = removeOutliers(
+            _.compact(this.services().map(
+                (service) => service.location.point
+            ))
+        )
 
-        for (let object of this.services()) {
-            if (object.location.point) {
-                bounds.extend(new maps.LatLng(object.location.point.lat,
-                                              object.location.point.lon));
-            }
+        for (let point of points) {
+            bounds.extend(new maps.LatLng(point.lat, point.lon));
         }
 
         this.getMap().then(map => {
@@ -220,3 +222,108 @@ class ResultsMap extends React.Component {
 }
 
 export default ResultsMap;
+
+// what I really want here is something to figure
+// out how far out to draw the bounding box.
+// one idea: grab the closest 50% of points,
+// then grow to include any 'nearby' (twice as far)
+// then repeat until no more are getting added.
+export function removeOutliers(
+    points: Array<issPoint>
+): Array<issPoint> {
+    // Remove duplicate points
+    points = _.uniq(points, false, ({lat, lon}) => `${lat}:${lon}`);
+
+    // Outliers don't help if there are few points.
+    if (points.length <= 2) {
+        return points;
+    }
+
+    points = points.map(normalizePoint);
+    // start with the 50% of the points closest to the centre
+    return expandCluster(
+        _(points)
+            .sortBy(distanceFrom(centreOf(points)))
+            .slice(0, Math.ceil(points.length / 2)),
+        points
+    ).map(denormalizePoint);
+}
+
+// Floating points are inaccurate for small differences between large numbers.
+// This function adjusts points in AU to reduce loss of accuracy.
+export function normalizePoint(point: issPoint): issPoint {
+    return {lat: point.lat + 25, lon: point.lon - 133}
+}
+
+export function denormalizePoint(point: issPoint): issPoint {
+    return {lat: point.lat - 25, lon: point.lon + 133}
+}
+
+export function expandCluster(
+    approxCluster: Array<issPoint>,
+    points: Array<issPoint>,
+): Array<issPoint> {
+    const approxClusterCentre = centreOf(approxCluster);
+
+    // The furthest-from-centre entry in approxCluster
+    // is a good starting distance to ensure we can't
+    // shrink the cluster
+    let initialDistance = distance(
+        approxClusterCentre,
+        _(_(approxCluster).sortBy(distanceFrom(approxClusterCentre))).last(),
+    );
+
+    // Add anything within 4x the distance (analagous to
+    // zooming out two levels on a webmercator map)
+    const newCluster = _(points).filter((point) =>
+        distance(approxClusterCentre, point) <= (initialDistance * 4)
+    )
+
+    // Recurse until we stop growing the cluster.
+    if (!_.isEqual(newCluster, approxCluster)) {
+        if (newCluster.length < approxCluster.length) {
+            if (process.env.NODE_ENV == "development") {
+                throw new Error("Assertion error: " +
+                    "expandCluster reduced the number of pins"
+                );
+            } else {
+                // If things go wrong in prod,
+                // give the user something reasonable.
+                return approxCluster;
+            }
+        }
+        return expandCluster(newCluster, points);
+    } else {
+        return approxCluster;
+    }
+}
+
+export function centreOf(points: Array<issPoint>): issPoint {
+    if (points.length == 0) {
+        if (process.env.NODE_ENV == "development") {
+            throw new Error("Assertion error: " +
+                "no points passed to centreOf(points)"
+            );
+        }
+    }
+    let centre = {lat: 0, lon: 0};
+
+    points.forEach(({lat, lon}) => {
+        centre.lat += lat / points.length;
+        centre.lon += lon / points.length;
+    });
+    return centre;
+}
+
+export function distance(start: issPoint, end: issPoint): number {
+    return Math.sqrt(
+        Math.pow(Math.abs(start.lat - end.lat), 2) +
+        Math.pow(Math.abs(start.lon - end.lon), 2)
+    );
+}
+
+export function distanceFrom(end: issPoint): Function {
+    return (start: issPoint) => {
+        return distance(start, end)
+    };
+}
