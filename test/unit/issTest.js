@@ -4,7 +4,7 @@
 /* eslint-disable no-use-before-define, prefer-arrow-callback */
 
 import assert from "assert";
-import { mungeUrlQuery } from "../../src/iss";
+import { mungeUrlQuery, countCrisisResults } from "../../src/iss";
 import Service from "../../fixtures/factories/Service";
 
 describe("iss service", function() {
@@ -87,4 +87,30 @@ describe("iss service", function() {
             );
         });
     });
+
+    describe("counting crisis results", function() {
+        const result = (crisis: boolean) => {
+            return Service({crisis: crisis})
+        };
+
+        it("returns zero when there are none", function() {
+            const results = [false, false, false].map(result);
+
+            assert.equal(countCrisisResults(results), 0);
+        })
+
+        it("returns the total when all are crisis lines", function() {
+            const results = [true, true, true].map(result);
+
+            assert.equal(countCrisisResults(results), 3);
+        })
+
+        it("does not count crisis lines after a non-crisis", function() {
+            const results = [true, true, false, true, true].map(result);
+
+            assert.equal(countCrisisResults(results), 2);
+        })
+
+    })
+
 });
