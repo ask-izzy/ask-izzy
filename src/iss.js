@@ -19,11 +19,14 @@ import Maps from "./maps";
 
 declare var ISS_URL: string;
 
-/* eslint-disable no-use-before-define */
+export type searchResultMerger = (
+    original: searchResults,
+    alternate: searchResults
+) => searchResults;
 
 export type searchRequest = {
     q?: string,
-    service_types?: string | Array<string>,
+    service_type?: Array<string>,
     site_id?: number,
 
     minimum_should_match?: string,

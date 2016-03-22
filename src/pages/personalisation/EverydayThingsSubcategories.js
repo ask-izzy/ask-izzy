@@ -12,7 +12,7 @@ export default class EverydayThingsSubcategories extends BaseQuestion {
         answers: {
             /* eslint-disable max-len */
             "Food packages/parcels/vouchers": append("food parcel")
-                .remove({service_type: "material aid"})
+                .remove({service_type: ["material aid"]})
                 .remove("material aid"),
             "Transport": remove("material aid")
                 .append("transport")
@@ -27,7 +27,7 @@ export default class EverydayThingsSubcategories extends BaseQuestion {
             "Laundry": append("laundry facilities washing drying"),
             "Household goods": append("household goods"),
             "Help with pets": remove("material aid")
-                .remove({service_type: "material aid"})
+                .remove({service_type: ["material aid"]})
                 .append("assistance pets")
                 .append("-(animal control)"),
         },

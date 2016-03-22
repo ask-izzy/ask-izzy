@@ -66,15 +66,20 @@ describe("Compose personalisation search terms", function() {
         });
     });
 
-    it("Remove service type from a search", function() {
+    it("Adds and removes service type from a search", function() {
         const request = {
             q: "help with addiction",
-            service_type: "addiction help",
+            service_type: ["addiction help"],
         };
-        const search = remove({service_type: "addiction help"});
+        const search = remove(
+            {service_type: ["addiction help", "missing type"]}
+        ).append(
+            {service_type: ["other help"]}
+        );
 
         assert.deepEqual(search.compose(request), {
             q: "help with addiction",
+            service_type: ["other help"],
         });
     });
 

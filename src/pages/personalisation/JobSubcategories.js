@@ -14,7 +14,7 @@ export default class JobSubcategories extends BaseQuestion {
             "Employment": remove("employment")
                 .append("job searching"),
             "Volunteering": remove("employment")
-                .remove({service_type: "employment"})
+                .remove({service_type: ["employment"]})
                 .append("volunteering"),
         },
     };

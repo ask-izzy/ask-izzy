@@ -43,7 +43,7 @@ const categories:Array<Category> = [
             q: "housing -(coordinating bodies) -(respite care) " +
                 "-(housing information) -hef " +
                 "-(holiday accommodation)",
-            service_type: "housing",
+            service_type: ["housing"],
             minimum_should_match: "3<30% 7<50%",
         },
         personalisation: [
@@ -75,7 +75,7 @@ const categories:Array<Category> = [
         icon: icons.Things,
         search: {
             q: "material aid -(coordinating bodies)",
-            service_type: "material aid",
+            service_type: ["material aid"],
         },
         personalisation: [
             personalisation.Location,
@@ -177,7 +177,7 @@ const categories:Array<Category> = [
         icon: icons.Job,
         search: {
             q: "employment -(coordinating bodies)",
-            service_type: "employment",
+            service_type: ["employment"],
         },
         personalisation: [
             personalisation.Location,

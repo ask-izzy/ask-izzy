@@ -56,6 +56,7 @@ export class Search {
  * Subclass for combining searches together.
  */
 export class AppendToSearch extends Search {
+    /* eslint-disable complexity*/
     compose(search: iss.searchRequest): iss.searchRequest {
         search = super.compose(search);
         if (this.search.q) {
@@ -70,6 +71,11 @@ export class AppendToSearch extends Search {
         if (this.search.client_gender) {
             search.client_gender = (search.client_gender || [])
                 .concat(this.search.client_gender);
+        }
+
+        if (this.search.service_types) {
+            search.service_types = (search.service_types || [])
+                .concat(this.search.service_types);
         }
 
         if (this.search.is_bulk_billing) {
@@ -102,7 +108,10 @@ export class RemoveSearch extends Search {
         }
 
         for (const key of Object.keys(this.search)) {
-            if (search[key] === this.search[key]) {
+            // Allow removing array items
+            if (_.isArray(this.search[key]) && _.isArray(search[key])) {
+                search[key] = _(search[key]).difference(this.search[key])
+            } else if (search[key] === this.search[key]) {
                 delete search[key];
             }
         }
