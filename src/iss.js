@@ -43,6 +43,11 @@ export type searchRequest = {
 
     limit?: number,
     key?: string,
+
+    _multi?: {
+        alternate: (x: searchRequest) => searchRequest,
+        merge: searchResultMerger,
+    }
 };
 
 type searchResultsLocation = {
@@ -456,8 +461,8 @@ export class Service {
  *
  * @returns {Promise<searchResults>} search results from ISS.
  */
-export async function search(
-    query: Object,
+async function _search(
+    query: searchRequest,
 ): Promise<searchResults> {
     let request_: searchRequest = {
         q: "",
@@ -475,6 +480,25 @@ export async function search(
             return search(query);
         }
         throw error;
+    }
+}
+
+export async function search(
+    query: searchRequest,
+): Promise<searchResults> {
+    if (query._multi) {
+        const multi = query._multi;
+
+        delete query._multi;
+        const base = _search(query);
+        const alternateQuery = _search(multi.alternate(query));
+
+        return multi.merge(
+            await base,
+            await alternateQuery
+        );
+    } else {
+        return await _search(query);
     }
 }
 

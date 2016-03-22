@@ -1,6 +1,7 @@
 /* @flow */
 
 import * as iss from "../iss";
+import _ from "underscore";
 
 export function append(search: string|iss.searchRequest): Search {
     return new AppendToSearch(search);
@@ -8,6 +9,13 @@ export function append(search: string|iss.searchRequest): Search {
 
 export function remove(search: string|iss.searchRequest): Search {
     return new RemoveSearch(search);
+}
+
+export function multiSearch(
+    search: iss.searchRequest,
+    merger: iss.searchResultMerger
+): Search {
+    return new MultiSearch(search, merger);
 }
 
 /**
@@ -50,6 +58,16 @@ export class Search {
         return next;
     }
 
+    multiSearch(
+        search: iss.searchRequest,
+        merger: iss.searchResultMerger
+    ): Search {
+        let next = multiSearch(search, merger);
+
+        next.chain = this;
+        return next;
+    }
+}
 
 /**
  * Subclass for combining searches together.
@@ -72,9 +90,9 @@ export class AppendToSearch extends Search {
                 .concat(this.search.client_gender);
         }
 
-        if (this.search.service_types) {
-            search.service_types = (search.service_types || [])
-                .concat(this.search.service_types);
+        if (this.search.service_type) {
+            search.service_type = (search.service_type || [])
+                .concat(this.search.service_type);
         }
 
         if (this.search.is_bulk_billing) {
@@ -113,6 +131,38 @@ export class RemoveSearch extends Search {
             } else if (search[key] === this.search[key]) {
                 delete search[key];
             }
+        }
+
+        return search;
+    }
+}
+
+/**
+ * Subclass for performing two searches and returning a unified resultset.
+ * This is an awful hack.
+ */
+export class MultiSearch extends Search {
+    merger: iss.searchResultMerger;
+
+    constructor(
+        search: string|iss.searchRequest,
+        merger: iss.searchResultMerger
+    ) {
+        super(search)
+        this.merger = merger;
+    }
+
+
+    compose(search: iss.searchRequest): iss.searchRequest {
+        search = super.compose(search);
+        if (search._multi) {
+            throw new Error("Cannot nest multi searches");
+        }
+
+        search._multi = {
+            alternate: (baseSearch) =>
+                append(this.search).compose(baseSearch),
+            merge: this.merger,
         }
 
         return search;
