@@ -36,7 +36,7 @@ describe("Compose personalisation search terms", function() {
         });
     });
 
-    it("Add age and gender", function() {
+    it("Adds age and gender", function() {
         let request = {
             q: "crisis accommodation",
         };
@@ -55,7 +55,7 @@ describe("Compose personalisation search terms", function() {
         });
     });
 
-    it("Remove words and add words from a search", function() {
+    it("Removes words and add words from a search", function() {
         const request = {
             q: "substance abuse gambling",
         };
