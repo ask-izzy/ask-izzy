@@ -1,6 +1,7 @@
 /* @flow */
 
-import BaseQuestion, { append, remove } from "./BaseQuestion";
+import BaseQuestion from "./BaseQuestion";
+import { append, remove } from "../../iss/Search";
 
 export default class AddictionSubcategories extends BaseQuestion {
     static title = "Drugs & Alcohol";

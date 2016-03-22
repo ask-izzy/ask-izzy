@@ -7,6 +7,7 @@
 /* eslint-disable prefer-arrow-callback */
 
 import assert from "assert";
+import { remove } from "../../src/iss/Search";
 
 describe("Compose personalisation search terms", function() {
 
@@ -55,9 +56,6 @@ describe("Compose personalisation search terms", function() {
     });
 
     it("Remove words and add words from a search", function() {
-        const {
-            remove,
-        } = require("../../src/pages/personalisation/BaseQuestion");
         const request = {
             q: "substance abuse gambling",
         };
@@ -69,9 +67,6 @@ describe("Compose personalisation search terms", function() {
     });
 
     it("Remove service type from a search", function() {
-        const {
-            remove,
-        } = require("../../src/pages/personalisation/BaseQuestion");
         const request = {
             q: "help with addiction",
             service_type: "addiction help",

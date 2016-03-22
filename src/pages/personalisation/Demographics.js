@@ -1,7 +1,8 @@
 /* @flow */
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
-import { append } from "./BaseQuestion";
+
+import { append } from "../../iss/Search";
 import icons from "../../icons";
 
 export default class Demographics extends BaseMultiQuestion {
