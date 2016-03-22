@@ -49,7 +49,6 @@ export class Search {
         next.chain = this;
         return next;
     }
-}
 
 
 /**
