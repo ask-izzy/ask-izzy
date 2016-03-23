@@ -82,7 +82,7 @@ release:
 		git push
 	rm -rf tags_repo
 
-release-uat:
+release-test:
 	$(MAKE) release APPNAME=askizzy-test.docker.dev CONTINUE=y
 
 release-test1:
@@ -110,5 +110,5 @@ release-prod:
 	$(MAKE) release APPNAME=askizzy.org.au
 
 .PHONY: build push test deploy serve \
-	release-test1 release-test2 release-test3 release-test4 release-test5 release-test6 \
-	release-uat release-staging release-prod
+	release-test release-test1 release-test2 release-test3 release-test4 release-test5 release-test6 \
+	release-staging release-prod

@@ -27,11 +27,17 @@ module.exports = (function() {
         .when("I click the map link", unpromisify(clickMapLink))
         .then("I should see a map", unpromisify(assertMap))
         .then("I should see markers?\n$table", unpromisify(assertMarkers))
+        .then('the fastest way to get there is "$STRING"',
+            unpromisify(assertTransitMethod))
         .then('I can get to google maps by clicking "$STRING"',
             unpromisify(assertGoogleMapsLink))
         ;
 })();
 
+async function assertTransitMethod(method) {
+    await assert.withRetries(assert.svgIsVisible)(this.driver, method);
+
+}
 
 /**
  * Stub google directions so we can get reliable results

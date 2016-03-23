@@ -26,10 +26,17 @@ search-test:
     stage: test
     script: make search-test
 
-# Deploy to UAT environment when tagged
+# Deploy to integration test environment on merge with master
 deploy:
     stage: deploy
-    script: make build dockerpush release-uat
+    script: make build dockerpush release-test
+    only:
+        - master
+
+# Deploy to staging environment when tagged
+deploy:
+    stage: deploy
+    script: make build dockerpush release-test
     only:
         - tags
 

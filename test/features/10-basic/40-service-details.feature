@@ -77,7 +77,7 @@ Feature: Service details page
     Scenario: There is travel information for non-confidential services
        Given my location is "Melbourne VIC"
         When I visit /service/866464
-        Then I should see "59 mins"
+        Then the fastest way to get there is "By public transport"
         Then I can get to google maps by clicking "Get directions"
 
     Scenario: There is no travel information for new-style confidential services
