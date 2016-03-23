@@ -126,8 +126,12 @@ export class RemoveSearch extends Search {
 
         for (const key of Object.keys(this.search)) {
             // Allow removing array items
-            if (_.isArray(this.search[key]) && _.isArray(search[key])) {
-                search[key] = _(search[key]).difference(this.search[key])
+            if (_.isArray(search[key])) {
+                if (_.isArray(this.search[key])) {
+                    search[key] = _(search[key]).difference(this.search[key])
+                } else {
+                    search[key] = _(search[key]).without(this.search[key])
+                }
             } else if (search[key] === this.search[key]) {
                 delete search[key];
             }

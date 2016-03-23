@@ -69,12 +69,14 @@ describe("Compose personalisation search terms", function() {
     it("Adds and removes service type from a search", function() {
         const request = {
             q: "help with addiction",
-            service_type: ["addiction help"],
+            service_type: ["addiction help", "addiction service"],
         };
         const search = remove(
             {service_type: ["addiction help", "missing type"]}
         ).append(
-            {service_type: ["other help"]}
+            {service_type: "other help"}
+        ).remove(
+            {service_type: "addiction service"}
         );
 
         assert.deepEqual(search.compose(request), {
