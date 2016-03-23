@@ -66,9 +66,16 @@ class TransportTime extends React.Component {
                     )}
                 >
                     {travelTime.mode === "TRANSIT" ?
-                    <icons.Tram className="ColoredIcon" />
-                    : <icons.Walk className="ColoredIcon" />
-                    }
+                        <icons.Tram
+                            className="ColoredIcon"
+                            aria-label="By public transport"
+                        />
+                    : (
+                        <icons.Walk
+                            className="ColoredIcon"
+                            aria-label="On foot"
+                        />
+                    )}
                     <span className="travel-time">
                         {
                             travelTime &&
