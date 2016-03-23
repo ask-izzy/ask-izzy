@@ -10,6 +10,12 @@ const app = express();
 
 app.use(cors());
 
+let seq = 1000050;
+
+function Seq(): number {
+    return seq++;
+}
+
 const legacyReservedSearches = [
     /food/,
     /pet/,
@@ -218,7 +224,6 @@ app.get("/api/v3/search/", (req, res) => {
         });
     } else if (req.query.q.match(/material aid/)) {
         const object = {
-            id: 444,
             name: "Community Lunch",
             description: "A weekly lunch.",
             site: {
@@ -255,11 +260,11 @@ app.get("/api/v3/search/", (req, res) => {
                 next: req.originalUrl + "&offset=5",
             },
             objects: [
-                object,
-                object,
-                object,
-                object,
-                object,
+                {...object, id: Seq()},
+                {...object, id: Seq()},
+                {...object, id: Seq()},
+                {...object, id: Seq()},
+                {...object, id: Seq()},
             ],
         });
     } else if (req.query.q.match(/zero results/)) {
