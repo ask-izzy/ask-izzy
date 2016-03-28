@@ -11,6 +11,9 @@ function check {
     echo "Good"
 }
 
+export -f check
+
+function checkFlowDefs {
 echo "${BOLD}Checking for missing @flow comments${END}"
 HAVE_FLOW=true
 for file in $( git ls-files '**/*.js' ); do
@@ -31,7 +34,11 @@ if ! $HAVE_FLOW ; then
     exit 1
 fi
 echo "Good"
+}
 
+export -f checkFlowDefs
+
+function checkPackageVersions {
 echo "${BOLD}Checking for '^' or '~' in package.json${END}"
 grep '[\^\~]' package.json && exit 1
 echo "Good"
@@ -39,9 +46,28 @@ echo "Good"
 echo "${BOLD}Checking for '^' or '~' in bower.json${END}"
 grep '[\^\~]' bower.json && exit 1
 echo "Good"
+}
 
-(./node_modules/.bin/flow start &>/dev/null) & # Pre-start flow server
-check "jsonlint package.json > /dev/null"
-check "eslint src/ test/ fixtures/ webpack/"
-check "sass-lint -v"
-check "flow"
+export -f checkPackageVersions
+
+if which parallel > /dev/null ; then
+    parallel ::: \
+        checkFlowDefs \
+        checkPackageVersions \
+        'check "jsonlint package.json > /dev/null"' \
+        'check "eslint src/ test/ fixtures/ webpack/"' \
+        'check "sass-lint -v"' \
+        'check "flow"' \
+
+else
+    (./node_modules/.bin/flow start &>/dev/null) & # Pre-start flow server
+
+    checkFlowDefs
+    checkPackageVersions
+
+    check "jsonlint package.json > /dev/null"
+    check "eslint src/ test/ fixtures/ webpack/"
+    check "sass-lint -v"
+    check "flow"
+fi
+
