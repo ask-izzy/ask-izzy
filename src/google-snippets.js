@@ -18,14 +18,6 @@ function script(content: ?string, src: ?string): void {
 export default function snippets(): void {
     if (typeof window != "undefined" &&
         typeof document != "undefined") {
-        // Google maps
-        script(
-            "",
-            "//maps.googleapis.com/maps/api/js?key=" +
-            window.GOOGLE_API_KEY +
-            "&libraries=places"
-        );
-
         // Analytics
         script(`
             window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;

@@ -233,10 +233,7 @@ class HtmlDocument extends React.Component {
 
         <script src={envPath} />
 
-        <script
-            dangerouslySetInnerHTML={{__html: snippets.toString()}}
-        ></script>
-
+        {this.renderAnalyticsBlock()}
     </head>
 
     <body>
