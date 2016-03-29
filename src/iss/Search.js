@@ -161,7 +161,6 @@ export class MultiSearch extends Search {
         this.merger = merger;
     }
 
-
     compose(search: iss.searchRequest): iss.searchRequest {
         search = super.compose(search);
         if (search._multi) {
