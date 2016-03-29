@@ -4,7 +4,6 @@
  * Enable Yadda in Mocha
  */
 
-import SauceLabs from "saucelabs";
 import Webdriver from "selenium-webdriver";
 import Yadda from "yadda";
 import fs from "fs";
@@ -105,34 +104,5 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
 after(async function(): Promise<void> {
     if (driver) {
         await driver.quit();
-    }
-
-    /* Send an update to Sauce Labs with our status */
-    if (sessionId &&
-        process.env.SAUCE_USERNAME &&
-        process.env.SAUCE_ACCESS_KEY) {
-
-        try {
-            await new Promise((resolve, reject) => {
-                let api = new SauceLabs({
-                    username: process.env.SAUCE_USERNAME,
-                    password: process.env.SAUCE_ACCESS_KEY,
-                });
-
-                api.updateJob(sessionId, {
-                    passed: passed,
-                }, (err, res) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(res);
-                    }
-                });
-            });
-        } catch (error) {
-            console.log("Failed updating saucelabs status");
-            console.log(error);
-        }
-
     }
 });
