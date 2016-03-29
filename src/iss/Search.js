@@ -109,6 +109,11 @@ export class AppendToSearch extends Search {
                 this.search.minimum_should_match;
         }
 
+        if (this.search.catchment) {
+            search.catchment =
+                this.search.catchment;
+        }
+
         return search;
     }
 }
