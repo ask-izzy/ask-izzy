@@ -36,11 +36,9 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
 
                 await logger.get("browser");
             }
-
         });
 
         scenarios(feature.scenarios, scenario => {
-
             before(async function(): Promise<void> {
                 await cleanDriverSession(await driverPromise);
             });
