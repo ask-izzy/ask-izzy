@@ -20,15 +20,12 @@ import mockISS from "./support/mock_iss/server";
 
 /* create the webdriver, we will reuse this promise multiple times */
 const driverPromise = webDriverInstance();
-let sessionId: ?string, driver: Webdriver.WebDriver;
-let passed = true;
+let driver: Webdriver.WebDriver;
 
 new Yadda.FeatureFileSearch("./test/features").each(file => {
     featureFile(file, feature => {
         before(async function(): Promise<void> {
             driver = await driverPromise;
-            sessionId = (await driver.getSession())
-                .getId();
 
             if (process.env.BROWSER_LOGS) {
                 // Flush any logs from previous tests
@@ -52,8 +49,6 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
 
         afterEach(async function(): Promise<void> {
             if (this.currentTest.state != "passed") {
-                passed = false;
-
                 let title = this.currentTest.title.replace(/\W+/g, "_");
 
                 if (process.env.SCREENSHOT_FAILURES) {

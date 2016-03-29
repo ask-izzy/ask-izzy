@@ -67,6 +67,9 @@ export default function render(req, res, next) {
                           markup={markup}
                           script={webpackStats.script}
                           css={webpackStats.css}
+                          envPath={
+                              process.env.ENVFILE_PATH || "/static/env.js"
+                          }
                           currentUrl={reqUrl}
                           siteName="Ask Izzy"
                           description={
