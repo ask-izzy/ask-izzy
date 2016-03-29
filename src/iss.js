@@ -487,14 +487,13 @@ export async function search(
     query: searchRequest,
 ): Promise<searchResults> {
     if (query._multi) {
-        const multi = query._multi;
+        const {_multi, ...base} = query;
 
-        delete query._multi;
-        const base = _search(query);
-        const alternateQuery = _search(multi.alternate(query));
+        const baseQuery = _search(base);
+        const alternateQuery = _search(_multi.alternate(base));
 
-        return multi.merge(
-            await base,
+        return _multi.merge(
+            await baseQuery,
             await alternateQuery
         );
     } else {

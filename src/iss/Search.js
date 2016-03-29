@@ -171,6 +171,7 @@ export class MultiSearch extends Search {
             alternate: (baseSearch) =>
                 append(this.search).compose(baseSearch),
             merge: this.merger,
+            _search: this.search,
         }
 
         return search;
