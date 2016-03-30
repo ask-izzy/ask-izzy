@@ -8,7 +8,7 @@ export function append(search: string|iss.searchRequest): Search {
 }
 
 export function remove(search: string|iss.searchRequest): Search {
-    return new RemoveSearch(search);
+    return new RemoveFromSearch(search);
 }
 
 export function multiSearch(
@@ -121,7 +121,7 @@ export class AppendToSearch extends Search {
 /**
  * Subclass for removing a search term.
  */
-export class RemoveSearch extends Search {
+export class RemoveFromSearch extends Search {
     compose(search: iss.searchRequest): iss.searchRequest {
         search = super.compose(search);
 
