@@ -106,6 +106,7 @@ class Location extends React.Component {
                 {
                     service_type: ["Homelessness Access Point"],
                     catchment: true,
+                    q: "(Homelessness Access Point)",
                 },
                 mergeAccessPoints
             ).compose(request)

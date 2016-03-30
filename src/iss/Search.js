@@ -162,14 +162,20 @@ export class MultiSearch extends Search {
     }
 
     compose(search: iss.searchRequest): iss.searchRequest {
+        const {q, ...rest} = this.search;
+
         search = super.compose(search);
         if (search._multi) {
             throw new Error("Cannot nest multi searches");
         }
 
         search._multi = {
-            alternate: (baseSearch) =>
-                append(this.search).compose(baseSearch),
+            alternate: (baseSearch) => {
+                return {
+                    ...(append(rest).compose(baseSearch)),
+                    q: q,
+                }
+            },
             merge: this.merger,
             _search: this.search,
         }
