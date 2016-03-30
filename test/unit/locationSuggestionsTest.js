@@ -33,6 +33,18 @@ describe("Location suggestions", function() {
             );
         });
 
+        it("includes sublocalities", function() {
+            const completions = [completion(
+                ["sublocality"],
+                [suburb, state]
+            )];
+
+            assert.deepEqual(
+                Array.from(filterCompletions(completions)),
+                [{suburb, state}]
+            );
+        });
+
         it("includes postcodes", function() {
             const completions = [completion(
                 ["postal_code"],
