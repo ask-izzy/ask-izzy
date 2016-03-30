@@ -55,7 +55,7 @@ describe("Compose personalisation search terms", function() {
         });
     });
 
-    it("Removes words and add words from a search", function() {
+    it("Removes words from, and adds words to, a search", function() {
         const request = {
             q: "substance abuse gambling",
         };
