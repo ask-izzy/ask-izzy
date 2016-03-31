@@ -87,8 +87,7 @@ class Eligibility extends React.Component {
     }
 
     renderReferralInfo(): ?ReactElement {
-        const referralInfo = (this.props.referral_info || "")
-            .toLocaleLowerCase().trim();
+        const referralInfo = (this.props.referral_info || "").trim();
 
         if (referralInfo && !referralInfo.match(/^self\.?$/i)) {
             return this.renderItem(`Referred by ${referralInfo}`);
