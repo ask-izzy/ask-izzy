@@ -27,6 +27,7 @@ RUN \
         ca-certificates \
         nodejs \
         nginx \
+        parallel \
         git \
         sudo \
         && \

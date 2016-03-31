@@ -346,7 +346,9 @@ function logErrors(err, req, res, next) {
 
 app.use(logErrors);
 
-app.listen(5000);
+app.listen(parseInt(
+    process.env.ISS_MOCK_PORT || ""
+) || 5000);
 
 export default {
     mock: mock,

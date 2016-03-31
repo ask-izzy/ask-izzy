@@ -2,18 +2,23 @@
 
 function pauseToDebug() {
     return new Promise((resolve, reject) => {
-        console.log("Paused. Press any key to continue...");
         const stdin = process.stdin;
 
-        stdin.setRawMode(true);
-        stdin.on("data", (key) => {
-            stdin.setRawMode(false);
-            if (key === "\u0003") {  // Ctrl-C
-                reject();
-            } else {
-                resolve();
-            }
-        });
+        if (stdin.setRawMode) {
+            console.log("Paused. Press any key to continue...");
+            stdin.setRawMode(true);
+            stdin.on("data", (key) => {
+                stdin.setRawMode(false);
+                if (key === "\u0003") {  // Ctrl-C
+                    reject();
+                } else {
+                    resolve();
+                }
+            });
+        } else {
+            console.log("Cannot capture STDIN; hanging forever.")
+        }
+
     });
 }
 

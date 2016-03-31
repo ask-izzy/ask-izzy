@@ -4,7 +4,6 @@
  * Enable Yadda in Mocha
  */
 
-import SauceLabs from "saucelabs";
 import Webdriver from "selenium-webdriver";
 import Yadda from "yadda";
 import fs from "fs";
@@ -21,15 +20,12 @@ import mockISS from "./support/mock_iss/server";
 
 /* create the webdriver, we will reuse this promise multiple times */
 const driverPromise = webDriverInstance();
-let sessionId: ?string, driver: Webdriver.WebDriver;
-let passed = true;
+let driver: Webdriver.WebDriver;
 
 new Yadda.FeatureFileSearch("./test/features").each(file => {
     featureFile(file, feature => {
         before(async function(): Promise<void> {
             driver = await driverPromise;
-            sessionId = (await driver.getSession())
-                .getId();
 
             if (process.env.BROWSER_LOGS) {
                 // Flush any logs from previous tests
@@ -37,11 +33,9 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
 
                 await logger.get("browser");
             }
-
         });
 
         scenarios(feature.scenarios, scenario => {
-
             before(async function(): Promise<void> {
                 await cleanDriverSession(await driverPromise);
             });
@@ -55,8 +49,6 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
 
         afterEach(async function(): Promise<void> {
             if (this.currentTest.state != "passed") {
-                passed = false;
-
                 let title = this.currentTest.title.replace(/\W+/g, "_");
 
                 if (process.env.SCREENSHOT_FAILURES) {
@@ -105,34 +97,5 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
 after(async function(): Promise<void> {
     if (driver) {
         await driver.quit();
-    }
-
-    /* Send an update to Sauce Labs with our status */
-    if (sessionId &&
-        process.env.SAUCE_USERNAME &&
-        process.env.SAUCE_ACCESS_KEY) {
-
-        try {
-            await new Promise((resolve, reject) => {
-                let api = new SauceLabs({
-                    username: process.env.SAUCE_USERNAME,
-                    password: process.env.SAUCE_ACCESS_KEY,
-                });
-
-                api.updateJob(sessionId, {
-                    passed: passed,
-                }, (err, res) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(res);
-                    }
-                });
-            });
-        } catch (error) {
-            console.log("Failed updating saucelabs status");
-            console.log(error);
-        }
-
     }
 });
