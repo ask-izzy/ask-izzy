@@ -11,7 +11,6 @@ export PORT=8010
 # Point the app at our mock ISS instance.
 ISS_URL="http://localhost:5000/" ./script/recreate-dev-env-file
 
-# Saucelabs bails after 90 seconds inactivity, but otherwise we want
-# this quite high as it makes debugging the tests easier.
+# we want this quite high as it makes debugging the tests easier.
 INTERACTIVE_TIMEOUT="80000"
 mocha --compilers js:babel/register --timeout "$INTERACTIVE_TIMEOUT" test/yadda.js $@
