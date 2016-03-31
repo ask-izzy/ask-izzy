@@ -241,7 +241,22 @@ export async function requestObjects(
 
 export class Service {
     constructor(props: issService) {
-        Object.assign(this, props);
+        const blankLocation = {
+            "building": "",
+            "flat_unit": "",
+            "level": "",
+            "postcode": "",
+            "state": "",
+            "street_name": "",
+            "street_number": "",
+            "street_suffix": "",
+            "street_type": "",
+            "suburb": "",
+        };
+
+        // until we upgrade past flow 0.22.1 and get refinement
+        // for missing properties: flow:disable
+        Object.assign(this, {blankLocation, ...props});
     }
 
     Location(): Location {

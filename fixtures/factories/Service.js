@@ -68,7 +68,7 @@ function defaults() {
     };
 }
 
-export function ServiceParams(opts: ?Object): Service {
+export function ServiceParams(opts: ?Object): issService {
     return Merge(defaults(), opts);
 }
 

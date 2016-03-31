@@ -202,20 +202,22 @@ class ResultsMap extends React.Component {
                 />
                 : ""
                 }
-                {this.sites.map((objects, index) =>
+                {this.sites.map((objects, index) => {
                     /* the site must have a public location */
-                    objects[0].location.point ?
+                    const point = objects[0].location.point;
+
+                    return point ?
                         <Marker
                             key={index}
                             title={objects[0].site.name}
                             position={{
-                                lat: objects[0].location.point.lat,
-                                lng: objects[0].location.point.lon,
+                                lat: point.lat,
+                                lng: point.lon,
                             }}
                             onClick={this.onMarkerClick.bind(this, objects)}
                         />
                     : ""
-                )}
+                })}
             </GoogleMap>
         );
     }
