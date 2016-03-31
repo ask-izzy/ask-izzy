@@ -29,7 +29,7 @@ export default async function suggest(
     const maps = await Maps();
     let request: AutocompletionRequest = {
         input: input,
-        types: ["geocode"],
+        types: ["(regions)"],
         componentRestrictions: {
             country: "au",
         },
@@ -59,6 +59,11 @@ function *filterCompletions(
 ): Iterable<LocationCompletion> {
     for (const completion of completions) {
         if (_.contains(completion.types, "locality")) {
+            yield {
+                suburb: completion.terms[0].value,
+                state: completion.terms[1].value,
+            }
+        } else if (_.contains(completion.types, "sublocality")) {
             yield {
                 suburb: completion.terms[0].value,
                 state: completion.terms[1].value,
