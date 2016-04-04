@@ -8,36 +8,38 @@ import Email from "./Email";
 import Phone from "./Phone";
 import Web from "./Web";
 import fixtures from "../../fixtures/services";
+import Service from "../../fixtures/factories/Service";
 import sendEvent from "../google-tag-manager";
 
 class ContactMethods extends React.Component {
 
     static sampleProps = {
         closed: {
-            object: {
+            object: Service({
                 phones: fixtures.ixa.phones,
                 emails: [],
                 web: null,
-                expanded: false,
-            },
+            }),
+            expanded: false,
         },
         open: {
-            object: {
+            object: Service({
                 phones: fixtures.ixa.phones,
                 emails: [],
                 web: null,
-                expanded: true,
-            },
+            }),
+            expanded: true,
         },
         "two numbers": {
-            object: {
+            object: Service({
                 phones: [
                     {kind: "phone", number: "(03) 3333 3333"},
                     {kind: "phone", number: "(03) 5555 5555"},
                 ],
                 emails: [],
                 web: null,
-            },
+            }),
+            expanded: false,
         },
     };
 
