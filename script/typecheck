@@ -51,6 +51,7 @@ echo "Good"
 export -f checkPackageVersions
 
 if which parallel > /dev/null ; then
+    export SHELL=/bin/bash
     parallel ::: \
         checkFlowDefs \
         checkPackageVersions \
