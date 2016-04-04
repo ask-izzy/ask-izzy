@@ -30,7 +30,10 @@ const serviceProvisions: Array<ServiceProvision> = [
     provides({
         name: "Crisis accommodation",
         form: anyOf(
-            keywords(/crisis|emergency/, /accommodation|housing|shelter/),
+            keywords(
+                /Provid(es|ing)? ((short|long)-term )?(crisis|emergency)/i,
+                /accommodation|housing|shelter/
+            ),
             keywords("housing", "crisis"),
             keywords("refuge", "accommodation"),  // N.B. not refugee
         ),

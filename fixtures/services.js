@@ -142,7 +142,7 @@ const objects: Object = {
     susansHouse: {
         id: 333,
         name: "Womens Refuge",
-        description: "Crisis accommodation for women",
+        description: "Provides crisis accommodation for women",
         site: {
             id: 333,
             name: "Susan's House",

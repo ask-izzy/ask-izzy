@@ -53,3 +53,8 @@ tests:
           - Crisis accommodation for women fleeing domestic violence
           - Crisis accommodation
           - Short-term accommodation
+
+    - description: |
+        A specialist nursing service providing outreach for people in
+        rooming houses, crisis housing, hotels, parks and on the streets.
+      provides: []
