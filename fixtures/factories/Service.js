@@ -2,7 +2,7 @@
 
 import { Service } from "../../src/iss";
 import { Abn, Id, Merge } from "./Value";
-import { Location, Site, TransportTime } from "./Location";
+import { Location, Site, TravelTime } from "./Location";
 import { NowOpen } from "./OpeningTime";
 
 function defaults() {
@@ -64,7 +64,7 @@ function defaults() {
         target_gender: "u",
         type: "service",
         web: "",
-        transportTime: TransportTime(),
+        travelTime: TravelTime(),
     };
 }
 
