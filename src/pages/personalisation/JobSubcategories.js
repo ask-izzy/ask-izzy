@@ -1,6 +1,7 @@
 /* @flow */
 
-import BaseQuestion, { remove } from "./BaseQuestion";
+import BaseQuestion from "./BaseQuestion";
+import { remove } from "../../iss/Search";
 
 export default class JobSubcategories extends BaseQuestion {
     static title = "Jobs";
@@ -13,7 +14,7 @@ export default class JobSubcategories extends BaseQuestion {
             "Employment": remove("employment")
                 .append("job searching"),
             "Volunteering": remove("employment")
-                .remove({service_type: "employment"})
+                .remove({service_type: ["employment"]})
                 .append("volunteering"),
         },
     };

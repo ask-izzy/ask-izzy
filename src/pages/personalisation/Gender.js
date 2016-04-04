@@ -1,6 +1,7 @@
 /* @flow */
 
-import BaseQuestion, { append } from "./BaseQuestion";
+import BaseQuestion from "./BaseQuestion";
+import { append } from "../../iss/Search";
 
 export default class Gender extends BaseQuestion {
     static title = "Gender";

@@ -1,7 +1,8 @@
 /* @flow */
 
 import SleepTonight from "./SleepTonight";
-import BaseQuestion, { remove } from "./BaseQuestion";
+import BaseQuestion from "./BaseQuestion";
+import { remove } from "../../iss/Search";
 
 export default class HousingSubcategories extends BaseQuestion {
     static title = "Situation";

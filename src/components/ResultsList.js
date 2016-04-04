@@ -5,6 +5,10 @@ import React from "react";
 import ResultListItem from "../components/ResultListItem";
 import CrisisLineItem from "../components/CrisisLineItem";
 import CrisisHeader from "../components/CrisisHeader";
+import {
+    crisisResults,
+    nonCrisisResults,
+} from "../iss";
 
 const StaticTextLine = ({object}) => React.cloneElement(object.node);
 
@@ -12,34 +16,14 @@ const className = (elem: {type: {displayName?: string}}) =>
     `resultContainer resultContainer-${
         elem.type.displayName || "other"}`
 
-export function countCrisisResults(results: Array<Object>): number {
-    const firstRegularServiceIdx = results.findIndex(
-        ({crisis}) => !crisis
-    )
-
-    if (firstRegularServiceIdx === -1) {
-        // No regular services found; everything is a crisis service
-        return results.length
-    } else {
-        // Anything after the first regular service is not a crisis result
-        return firstRegularServiceIdx;
-    }
-}
-
 class ResultsList extends React.Component {
 
     crisisResults(): Array<Object> {
-        return this.props.results.slice(
-            0,
-            countCrisisResults(this.props.results)
-        )
+        return crisisResults(this.props.results);
     }
 
     nonCrisisResults(): Array<Object> {
-        return this.props.results.slice(
-            countCrisisResults(this.props.results),
-            this.props.results.length
-        )
+        return nonCrisisResults(this.props.results);
     }
 
     render(): ReactElement {

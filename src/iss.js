@@ -19,11 +19,14 @@ import Maps from "./maps";
 
 declare var ISS_URL: string;
 
-/* eslint-disable no-use-before-define */
+export type searchResultMerger = (
+    original: searchResults,
+    alternate: searchResults
+) => searchResults;
 
 export type searchRequest = {
     q?: string,
-    service_types?: string | Array<string>,
+    service_type?: Array<string>,
     site_id?: number,
 
     minimum_should_match?: string,
@@ -40,6 +43,11 @@ export type searchRequest = {
 
     limit?: number,
     key?: string,
+
+    _multi?: {
+        alternate: (x: searchRequest) => searchRequest,
+        merge: searchResultMerger,
+    }
 };
 
 type searchResultsLocation = {
@@ -453,8 +461,8 @@ export class Service {
  *
  * @returns {Promise<searchResults>} search results from ISS.
  */
-export async function search(
-    query: Object,
+async function _search(
+    query: searchRequest,
 ): Promise<searchResults> {
     let request_: searchRequest = {
         q: "",
@@ -472,6 +480,24 @@ export async function search(
             return search(query);
         }
         throw error;
+    }
+}
+
+export async function search(
+    query: searchRequest,
+): Promise<searchResults> {
+    if (query._multi) {
+        const {_multi, ...base} = query;
+
+        const baseQuery = _search(base);
+        const alternateQuery = _search(_multi.alternate(base));
+
+        return _multi.merge(
+            await baseQuery,
+            await alternateQuery
+        );
+    } else {
+        return await _search(query);
     }
 }
 
@@ -495,6 +521,34 @@ export async function getService(
     return service;
 }
 
+export function countCrisisResults(results: Array<Service>): number {
+    const firstRegularServiceIdx = results.findIndex(
+        ({crisis}) => !crisis
+    )
+
+    if (firstRegularServiceIdx === -1) {
+        // No regular services found; everything is a crisis service
+        return results.length
+    } else {
+        // Anything after the first regular service is not a crisis result
+        return firstRegularServiceIdx;
+    }
+}
+
+export function crisisResults(results: Array<Service>): Array<Service> {
+    return results.slice(
+        0,
+        countCrisisResults(results)
+    );
+}
+
+export function nonCrisisResults(results: Array<Service>): Array<Service> {
+    return results.slice(
+        countCrisisResults(results),
+        results.length
+    )
+}
+
 export default {
     search: search,
     getService: getService,
@@ -502,3 +556,4 @@ export default {
     requestObjects: requestObjects,
     Service: Service,
 };
+

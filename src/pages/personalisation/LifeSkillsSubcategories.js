@@ -1,6 +1,7 @@
 /* @flow */
 
-import BaseQuestion, { remove } from "./BaseQuestion";
+import BaseQuestion from "./BaseQuestion";
+import { remove } from "../../iss/Search";
 
 export default class LifeSkillsSubcategories extends BaseQuestion {
     static title = "Life Skills";

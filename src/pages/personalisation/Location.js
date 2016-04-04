@@ -4,12 +4,14 @@ import React from "react";
 import reactMixin from "react-mixin";
 import { debounce } from "core-decorators";
 import { ltrim } from "underscore.string";
+import _ from "underscore";
 
 import {geolocationAvailable} from "../../geolocation";
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
+import { remove } from "../../iss/Search";
 import * as iss from "../../iss";
 import suggest from "../../locationSuggestions";
 
@@ -58,15 +60,18 @@ class Location extends React.Component {
         return storage.getLocation();
     }
 
+    static shouldInjectAccessPoints(): boolean {
+        // Currently only for locations in Victoria.
+        let victoriaRegex = /VIC(toria)?$/i;
+
+        return !!victoriaRegex.exec(storage.getLocation());
+    }
+
     static shouldEnableCatchment(): boolean {
         // Currently only for locations in Tasmania.
         let tasmaniaRegex = /TAS(mania)?$/i;
 
-        if (tasmaniaRegex.exec(storage.getLocation())) {
-            return true;
-        }
-
-        return false;
+        return !!tasmaniaRegex.exec(storage.getLocation());
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
@@ -90,6 +95,21 @@ class Location extends React.Component {
 
         if (this.shouldEnableCatchment()) {
             request = Object.assign(request, {catchment: "prefer"});
+        }
+
+        if (this.shouldInjectAccessPoints() &&
+            request.service_type &&
+            (request.service_type.indexOf("housing") > -1)) {
+            request = remove({
+                service_type: ["housing"],
+            }).multiSearch(
+                {
+                    service_type: ["Homelessness Access Point"],
+                    catchment: true,
+                    q: "(Homelessness Access Point)",
+                },
+                mergeAccessPoints
+            ).compose(request)
         }
 
         return request;
@@ -282,3 +302,28 @@ class Location extends React.Component {
 }
 
 export default Location;
+
+export function mergeAccessPoints(
+    original: iss.searchResults,
+    alternate: iss.searchResults
+): iss.searchResults {
+    const objects = iss.crisisResults(original.objects).concat(
+        alternate.objects,
+        iss.nonCrisisResults(original.objects)
+    )
+    const deduped = _.uniq(objects, false, ({id}) => id);
+    const removedCount = objects.length - deduped.length;
+
+    return {
+        meta: {
+            ...original.meta,
+            total_count: original.meta.total_count +
+                         alternate.meta.total_count -
+                         removedCount,
+            available_count: original.meta.available_count +
+                             alternate.meta.available_count -
+                             removedCount,
+        },
+        objects: deduped,
+    };
+}

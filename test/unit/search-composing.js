@@ -7,6 +7,7 @@
 /* eslint-disable prefer-arrow-callback */
 
 import assert from "assert";
+import { remove } from "../../src/iss/Search";
 
 describe("Compose personalisation search terms", function() {
 
@@ -35,7 +36,7 @@ describe("Compose personalisation search terms", function() {
         });
     });
 
-    it("Add age and gender", function() {
+    it("Adds age and gender", function() {
         let request = {
             q: "crisis accommodation",
         };
@@ -54,10 +55,7 @@ describe("Compose personalisation search terms", function() {
         });
     });
 
-    it("Remove words and add words from a search", function() {
-        const {
-            remove,
-        } = require("../../src/pages/personalisation/BaseQuestion");
+    it("Removes words from, and adds words to, a search", function() {
         const request = {
             q: "substance abuse gambling",
         };
@@ -68,18 +66,22 @@ describe("Compose personalisation search terms", function() {
         });
     });
 
-    it("Remove service type from a search", function() {
-        const {
-            remove,
-        } = require("../../src/pages/personalisation/BaseQuestion");
+    it("Adds and removes service type from a search", function() {
         const request = {
             q: "help with addiction",
-            service_type: "addiction help",
+            service_type: ["addiction help", "addiction service"],
         };
-        const search = remove({service_type: "addiction help"});
+        const search = remove(
+            {service_type: ["addiction help", "missing type"]}
+        ).append(
+            {service_type: "other help"}
+        ).remove(
+            {service_type: "addiction service"}
+        );
 
         assert.deepEqual(search.compose(request), {
             q: "help with addiction",
+            service_type: ["other help"],
         });
     });
 
