@@ -115,7 +115,7 @@ class ResultsPage extends BaseCategoriesPage {
 
             .catch(response => {
                 try {
-                    console.error(response);
+                    console.error(response, response.stack);
 
                     let data = JSON.parse(response.body);
 
