@@ -4,6 +4,7 @@ declare var google: Google;
 
 import storage from "./storage";
 import _ from "underscore";
+import checkInactive from "./inactiveTimeout";
 
 class MapsApi {
     api: GoogleMaps;
@@ -15,6 +16,13 @@ class MapsApi {
     async travelTime(
         destinations: Array<string>
     ): Promise<Array<travelTime>> {
+        // The google maps api authorization requests time out.
+        // We've had issues in test (and will likely have in the field)
+        // where people go out for lunch+meetings and come back
+        // to a non-working page.
+        // To resolve this, we reload the page if we've timed out.
+        checkInactive();
+
         if (!destinations.length) {
             return [];
         }
