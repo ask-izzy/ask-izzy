@@ -98,35 +98,40 @@
             float: right;
         }
 
-        input {
-            display: block;
+        .searchWrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
             width: 90%;
+            height: 19px;
 
-            margin-right: auto;
-            margin-left: auto;
-            padding: 10px;
+            margin: auto;
+            padding: 9px;
 
-            border: 0;
+            border: 1px $white solid;
             border-radius: 3px;
-            color: $brand-text-dark;
+            background-color: $white;
 
-            -webkit-appearance: none;
+            input {
+                width: 100%;
+                padding: 0;
+                border: 0;
+                color: $brand-text-dark;
 
-            &:focus {
-                outline: none;
+                -webkit-appearance: none;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            .icon {
+                width: 28px;
+                height: 28px;
+                vertical-align: middle;
             }
         }
 
-        .icon {
-            position: absolute;
-            top: 6px;
-            right: 5%;
-            width: 28px;
-            height: 28px;
-
-            @media ($tablet) {
-                top: 21px;
-            }
-        }
     }
 }
