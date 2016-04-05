@@ -13,16 +13,19 @@ function formatTime(str: string): string {
     return moment(str, "HH:mm:ss").format("h:mm A");
 }
 
+const sampleTime = moment("2015-09-09 1pm", "YYYY-MM-DD ha");
+
 /*
  * Used to generate sample datum for the Style Guide
  */
 function fixture(
     nowOpen: ?boolean,
     openingHours: Array<issOpeningHours>,
-    time: ?Moment
+    time: ?Moment,
+    expanded = true,
 ): Object {
     // Moment is fixed to Wednesday 15/9/2015 at 1pm
-    time = time || moment("2015-09-09 1pm", "YYYY-MM-DD ha");
+    time = time || sampleTime;
 
     const timeFn = () => moment(time);
 
@@ -39,7 +42,7 @@ function fixture(
             timeFn
         ),
         moment: timeFn,
-        expanded: true,
+        expanded: expanded,
     };
 }
 
@@ -73,6 +76,27 @@ export default class CollapsedOpeningTimes extends React.Component {
             open: "03:00:00",
             close: "04:00:00",
         }]),
+        "With many times": fixture(true, [{
+            day: "Wednesday",
+            open: "01:00:00",
+            close: "02:00:00",
+        }, {
+            day: "Thursday",
+            open: "03:00:00",
+            close: "04:00:00",
+        }, {
+            day: "Friday",
+            open: "03:00:00",
+            close: "04:00:00",
+        }, {
+            day: "Monday",
+            open: "03:00:00",
+            close: "04:00:00",
+        }, {
+            day: "Tuesday",
+            open: "03:00:00",
+            close: "04:00:00",
+        }], sampleTime, false),
     };
 
     recordExpandOpeningTimes(): void {

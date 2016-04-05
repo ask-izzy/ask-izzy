@@ -44,7 +44,11 @@ class Collapser extends React.Component {
     render(): ReactElement {
         return (
             <div
-                className={classnames("Collapser", this.props.className)}
+                className={classnames(
+                    "Collapser",
+                    this.props.className,
+                    {collapsed: this.state.collapsed}
+                )}
                 onClick={this.onClick.bind(this)}
             >
                 {this.renderMessage()}

@@ -17,10 +17,10 @@ export DEBUG=web
 
 (sleep 3; $OPEN http://localhost:$PORT) &
 
-nodemon --watch webpack/ index.js webpack/server &
+nodemon --ext js --watch webpack/ index.js webpack/server &
 WEBPACK_PID="$!"
 
-nodemon --watch src/ index &
+nodemon --ext js --watch src/ index &
 NODEMON_PID="$!"
 
 trap "kill $NODEMON_PID 2> /dev/null; kill $WEBPACK_PID 2> /dev/null" EXIT

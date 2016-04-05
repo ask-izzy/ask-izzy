@@ -23,7 +23,7 @@ export function Location(props: ?Object): issLocation {
     }, props);
 }
 
-export function TransportTime(props: ?Object): travelTime {
+export function TravelTime(props: ?Object): travelTime {
     return Merge({
         mode: "WALKING",
         status: "OK",
