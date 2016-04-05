@@ -62,18 +62,20 @@ class HomePage extends React.Component {
                             className="search"
                             onSubmit={this.onSearchSubmit.bind(this)}
                         >
-                            <input
-                                ref="search"
-                                type="search"
-                                placeholder="Search"
-                                aria-label="Search"
-                                autoFocus={true}
-                                defaultValue={storage.getSearch()}
-                            />
-                            <icons.Search
-                                className="icon"
-                                onClick={this.onSearchSubmit.bind(this)}
-                            />
+                            <div className="searchWrapper">
+                                <input
+                                    ref="search"
+                                    type="search"
+                                    placeholder="Search"
+                                    aria-label="Search"
+                                    autoFocus={true}
+                                    defaultValue={storage.getSearch()}
+                                />
+                                <icons.Search
+                                    className="icon"
+                                    onClick={this.onSearchSubmit.bind(this)}
+                                />
+                            </div>
                         </form>
                     </HeaderBar>
                 </div>
