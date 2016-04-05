@@ -13,6 +13,7 @@ import {
     keywords,
     not,
     provides,
+    referralsRegexp,
 } from "../iss/ServiceProvisions";
 
 /* Please keep this grouped and the groups sorted */
@@ -178,26 +179,26 @@ const serviceProvisions: Array<ServiceProvision> = [
     /* Referrals */
     provides({
         name: "Drug & alcohol referrals",
-        form: keywords(/referrals?/, "for", /drugs?/, "alcohol"),
+        form: keywords(referralsRegexp, "for", /drugs?/, "alcohol"),
     }),
     provides({
         name: "Referrals for financial counselling",
-        form: keywords(/referrals?/, /for|to/, "financial", /counsell\w+/),
+        form: keywords(referralsRegexp, /for|to/, "financial", /counsell\w+/),
     }),
     provides({
         name: "Referrals for legal services",
-        form: keywords(/referrals?/, "for", "legal services"),
+        form: keywords(referralsRegexp, "for", "legal services"),
     }),
     provides({
         name: "Housing referrals",
         form: anyOf(
-            keywords("housing", /referrals?/),
-            keywords(/referrals?/, "for", "housing"),
+            keywords("housing", referralsRegexp),
+            keywords(referralsRegexp, "for", "housing"),
         ),
     }),
     provides({
         name: "Mental health referrals",
-        form: keywords(/referrals?/, "for", "mental health"),
+        form: keywords(referralsRegexp, "for", "mental health"),
     }),
 ];
 

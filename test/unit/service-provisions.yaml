@@ -1,8 +1,10 @@
 tests:
     # This example is used in functional tests.
     - description: |
-        A weekly free lunch for those in need.  Referrals for mental health and
-        housing are also available as is advice and a range of support services.
+        A weekly free lunch for those in need.
+        Advice and a range of support services are provided.
+        Referrals for mental health and
+        housing are also available.
       provides:
           - Lunch
           - Advice
