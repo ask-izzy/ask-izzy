@@ -32,13 +32,16 @@ case "$1" in
         shift 1
 
         set -x # Logs
-        ./script/generate-env-vars > ./public/static/env-$(cat public/VERSION).js
-
-        cp -r ./public/static/* /static/
         ;;
 
     serve)
         shift 1
+
+        ./script/generate-env-vars > ./public/static/env-$(cat public/VERSION).js
+        cp -r ./public/static/* /static/
+
+        # Make analytics code available.
+        cp ./src/google-analytics.js /static/
 
         exec ./script/run-nginx
         ;;

@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import snippets from "../google-snippets";
 
 class HtmlDocument extends React.Component {
 
@@ -16,6 +15,7 @@ class HtmlDocument extends React.Component {
         siteName: React.PropTypes.string,
         title: React.PropTypes.string,
         envPath: React.PropTypes.string,
+        analyticsPath: React.PropTypes.string,
     };
 
     static defaultProps = {
@@ -23,7 +23,12 @@ class HtmlDocument extends React.Component {
         css: [],
         meta: {},
         envPath: "/static/env.js",
+        analyticsPath: "/static/google-analytics.js",
     };
+
+    renderAnalytics(): boolean {
+        return process.env.NODE_ENV == "production";
+    }
 
     render(): ReactElement {
         const {
@@ -35,6 +40,7 @@ class HtmlDocument extends React.Component {
             siteName,
             currentUrl,
             envPath,
+            analyticsPath,
         } = this.props;
         const viewport =
             "width=device-width, initial-scale=1.0, user-scalable=no";
@@ -233,7 +239,6 @@ class HtmlDocument extends React.Component {
 
         <script src={envPath} />
 
-        {this.renderAnalyticsBlock()}
     </head>
 
     <body>
@@ -250,6 +255,8 @@ class HtmlDocument extends React.Component {
             />
         )}
 
+        {this.renderAnalytics() ? <script src={analyticsPath} /> : null}
+
         <script dangerouslySetInnerHTML={{__html: `
             var gmapsApi = document.createElement("script");
             gmapsApi.setAttribute(
@@ -260,26 +267,11 @@ class HtmlDocument extends React.Component {
             );
             document.body.appendChild(gmapsApi);`}}
         />
+
     </body>
 </html>
         );
     }
-
-    renderAnalyticsBlock(): ?Array<ReactElement> {
-        if (process.env.NODE_ENV == "production") {
-            return [
-                <script
-                    dangerouslySetInnerHTML={{__html: snippets.toString()}}
-                ></script>,
-                <script
-                    async={true}
-                    key="google-analytics-2"
-                    src="//www.google-analytics.com/analytics.js"
-                ></script>,
-            ];
-        }
-    }
-
 }
 
 export default HtmlDocument;
