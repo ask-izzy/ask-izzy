@@ -4,7 +4,7 @@ import _ from "underscore";
 import Maps from "./maps";
 import storage from "./storage";
 
-type LocationCompletion = {
+export type LocationCompletion = {
     "suburb": string,
     "state": string,
 }

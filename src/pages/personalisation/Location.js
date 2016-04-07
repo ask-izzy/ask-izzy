@@ -14,6 +14,7 @@ import storage from "../../storage";
 import { remove } from "../../iss/Search";
 import * as iss from "../../iss";
 import suggest from "../../locationSuggestions";
+import type { LocationCompletion } from "../../locationSuggestions";
 
 const AutocompleteState = {
     NOT_SEARCHING: 0,
@@ -39,6 +40,7 @@ class Location extends React.Component {
             locationName: "",
             locationCoords: {},
             autocompletions: [],
+            nextDisabled: true,
         };
     }
 
@@ -114,6 +116,15 @@ class Location extends React.Component {
         return true;
     }
 
+    onDoneTouchTap(event: SyntheticInputEvent): void {
+        event.preventDefault();
+        if (!this.state.nextDisabled) {
+            this.props.onDoneTouchTap();
+        } else if (this.state.autocompletions[0]) {
+            this.selectAutocomplete(this.state.autocompletions[0]);
+        }
+    }
+
     /**
      * triggerAutocomplete:
      *
@@ -186,6 +197,18 @@ class Location extends React.Component {
         this.setLocationName(params.name, true);
     }
 
+    selectAutocomplete(result: LocationCompletion): void {
+        /* set the text box to this value
+         * and remove the autocompletions */
+        let locationName =
+            `${result.suburb}, ${result.state}`;
+
+        this.setLocationName(locationName, true);
+        this.setState({
+            autocompletions: [],
+        });
+    }
+
     render(): ReactElement {
         return (
             <div className="Location">
@@ -209,7 +232,7 @@ class Location extends React.Component {
                 }
                 <form
                     className="search"
-                    onSubmit={this.props.onDoneTouchTap}
+                    onSubmit={this.onDoneTouchTap.bind(this)}
                 >
                     <div>
                         <input
@@ -248,17 +271,9 @@ class Location extends React.Component {
                             checkedIcon={
                                 <icons.RadioSelected className="big" />
                             }
-                            onClick={() => {
-                                /* set the text box to this value
-                                 * and remove the autocompletions */
-                                let locationName =
-                                    `${result.suburb}, ${result.state}`;
-
-                                this.setLocationName(locationName, true);
-                                this.setState({
-                                    autocompletions: [],
-                                });
-                            }}
+                            onClick={
+                                this.selectAutocomplete.bind(this, result)
+                            }
                         />
                     )
                 }</div>
@@ -280,7 +295,7 @@ class Location extends React.Component {
                 <div className="done-button">
                     <components.FlatButton
                         label="Done"
-                        onClick={this.props.onDoneTouchTap}
+                        onClick={this.onDoneTouchTap.bind(this)}
                         disabled={this.state.nextDisabled}
                     />
                 </div>
