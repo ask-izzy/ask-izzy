@@ -471,6 +471,7 @@ async function _search(
         q: "",
         type: "service",
         limit: 10,
+        catchment: "prefer",
     };
 
     Object.assign(request_, query);
