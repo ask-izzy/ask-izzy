@@ -76,8 +76,6 @@ Feature: Search for housing services
         ----------------------------------
         And my results for housing should contain
         ----------------------------------
-        - site:
-            name: Ermha, Prevention & Recovery Care
         - id: 2721562
           crisis: true
           site:
