@@ -96,7 +96,7 @@ class AboutPage extends React.Component {
                         Infoxchange has used technology to tackle our community’s biggest social challenges for over 25 years. We wanted to make it easier for people experiencing homelessness to find the services they need, when they need them, so we developed Ask Izzy in partnership with Google, REA Group and News Corp Australia.
                     </p>
 
-                    <a href="https://www.google.com"><h4>Google</h4></a>
+                    <a href="https://www.google.org"><h4>Google</h4></a>
                     <p>
                         Google partners with organisations that see the potential of technology to have a scalable, positive impact on significant social issues. Infoxchange demonstrated this in spades and since our funding of Ask Izzy, our relationship has gone from strength to strength. We hope that the launch of Ask Izzy is just the first major milestone in a long and fruitful partnership.
                     </p>
@@ -106,7 +106,7 @@ class AboutPage extends React.Component {
                         REA Group, the company behind Australia’s number one property website realestate.com.au, exists to empower people by making the property process simple, efficient and stress free. That’s why our social mission is focused on homelessness in Australia, because we believe everyone should have a safe place to sleep - every night.
                     </p>
 
-                    <a href="http://www.newscorpaustralia.com/"><h4>News Corp Australia</h4></a>
+                    <a href="http://www.newscorpaustralia.com"><h4>News Corp Australia</h4></a>
                     <p>
                         News Corp’s mission is to inspire, inform and advocate for a better Australia, which is why we are collaborating with REA Group, Google and Infoxchange on Ask Izzy. Each day we reach 7.1 million Australians through our newspapers and websites. We have an important role in communicating the value and existence of this critical social tool that will benefit the vulnerable in our society.
                     </p>

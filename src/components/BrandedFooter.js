@@ -20,9 +20,9 @@ class BrandedFooter extends React.Component {
                 <div>
                     Supported by <ul className="footer-list supporters">
                         <li><a href="https://www.infoxchange.net.au/ask-izzy">Infoxchange</a></li>
-                        <li><a href="https://www.google.com">Google</a></li>
+                        <li><a href="https://www.google.org">Google</a></li>
                         <li><a href="http://www.rea-group.com">REA Group</a></li>
-                        <li><a href="http://www.newscorpaustralia.com/">News Corp Australia</a></li>
+                        <li><a href="http://www.newscorpaustralia.com">News Corp Australia</a></li>
                     </ul>
                 </div>
             </footer>
