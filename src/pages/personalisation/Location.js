@@ -67,13 +67,6 @@ class Location extends React.Component {
         return !!victoriaRegex.exec(storage.getLocation());
     }
 
-    static shouldEnableCatchment(): boolean {
-        // Currently only for locations in Tasmania.
-        let tasmaniaRegex = /TAS(mania)?$/i;
-
-        return !!tasmaniaRegex.exec(storage.getLocation());
-    }
-
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         /* Coordinates are optional */
         let coords = storage.getCoordinates();
@@ -92,10 +85,6 @@ class Location extends React.Component {
         }
 
         request = Object.assign(request, {area: location});
-
-        if (this.shouldEnableCatchment()) {
-            request = Object.assign(request, {catchment: "prefer"});
-        }
 
         if (this.shouldInjectAccessPoints() &&
             request.service_type &&
