@@ -18,8 +18,8 @@ const tests = yaml.safeLoad(
 );
 
 describe("Service Provisions", function() {
-    tests.tests.forEach(
-        test => it(test.description, () => {
+    tests.tests.forEach(test =>
+        it(test.description, () => {
             let provides = [
                 /*::`*/
                 for (provision of serviceProvisions)
@@ -29,5 +29,6 @@ describe("Service Provisions", function() {
             ];
 
             assert.deepEqual(provides, test.provides);
-        }));
+        })
+    );
 });
