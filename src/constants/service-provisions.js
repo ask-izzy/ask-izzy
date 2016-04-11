@@ -6,7 +6,6 @@
  * These are phrases extracted from the description of a service to
  * show dot points for what a service provides */
 
-
 import {
     ServiceProvision,
     allOf,
