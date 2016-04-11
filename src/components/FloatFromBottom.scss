@@ -7,5 +7,10 @@
         max-width: $max-width;
         border-top: 1px solid $brand-spacer;
         background: $brand-bg-light;
+
+        &.smartbarPadding {
+            padding-bottom: 20px;
+        }
+
     }
 }

@@ -14,6 +14,14 @@ class FloatFromBottom extends React.Component {
         this.state = {containerHeight: 0};
     }
 
+    needExtraPaddingForSmartBar(): boolean {
+        if (typeof window == "undefined") {
+            return false;
+        }
+
+        return window.navigator.userAgent.match(/iPad|iPhone|iPod/);
+    }
+
     componentDidMount(): void {
         let elementScrolledOffscreen = false;
         let containerHeight = 0;
@@ -66,6 +74,7 @@ class FloatFromBottom extends React.Component {
                     ref="container"
                     className={classnames({
                         floatsFromBottom: this.state.elementScrolledOffscreen,
+                        smartbarPadding: this.needExtraPaddingForSmartBar(),
                     })}
                 >
                     {this.props.children}
