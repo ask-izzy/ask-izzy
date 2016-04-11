@@ -60,3 +60,27 @@ tests:
         A specialist nursing service providing outreach for people in
         rooming houses, crisis housing, hotels, parks and on the streets.
       provides: []
+
+    - description: |
+        Provides material aid in the form of free hot nutritious meals,
+        blankets, beanies, clothing and food vouchers for people who are
+        experiencing homelessness or who are at risk of homeless,
+        including those who are experiencing a range of issues such as
+        social isolation, mental health problems and unemployment.
+        Referrals to other community service and government agencies
+        are also available.
+      provides:
+          - Meals
+          - Clothing
+          - Blankets
+          - Food vouchers
+
+    - description: |
+        A drop-in facility providing lunch, use of showers, laundry
+        facilities, a pool table, computers and tenancy advice & guidance.
+      provides:
+          - Lunch
+          - Tenancy advice
+          - Showers
+          - Computers
+          - Laundry
