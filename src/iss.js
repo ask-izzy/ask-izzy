@@ -9,6 +9,7 @@ import xhr from "axios";
 import url from "url";
 import { slugify } from "underscore.string";
 import _ from "underscore";
+import lru from "lru-cache";
 
 import sendEvent from "./google-tag-manager";
 import ServiceOpening from "./iss/ServiceOpening";
@@ -217,9 +218,14 @@ async function attachTransportTimes(
 }
 
 let requestObjectsCache = new Cache();
+let serviceCache = lru({
+    max: 150, // Only track 150 keys in the cache
+    maxAge: 1000 * 60 * 60, // Discard anything over 1 hour
+});
 
 if (typeof window != "undefined") {
     window.IzzyRequestObjectsCache = requestObjectsCache;
+    window.IzzyServiceCache = serviceCache;
 }
 
 export async function requestObjects(
@@ -242,6 +248,9 @@ export async function requestObjects(
 
     response.objects = await attachTransportTimes(objects);
 
+    response.objects.forEach((service) =>
+        serviceCache.set(service.id, service)
+    )
     requestObjectsCache.revise(url_, response);
 
     return response;
@@ -518,6 +527,12 @@ function wait(
 export async function getService(
     id: number
 ): Promise<Service> {
+    let cached = serviceCache.get(id);
+
+    if (cached) {
+        return cached;
+    }
+
     const response = await request(`/api/v3/service/${id}/`);
     const service = new Service(response);
 
