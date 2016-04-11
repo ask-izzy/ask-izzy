@@ -20,7 +20,7 @@ export DEBUG=web
 nodemon --ext js --watch webpack/ index.js webpack/server &
 WEBPACK_PID="$!"
 
-nodemon --ext js --watch src/ index &
+nodemon --ext js --watch src/server index &
 NODEMON_PID="$!"
 
 trap "kill $NODEMON_PID 2> /dev/null; kill $WEBPACK_PID 2> /dev/null" EXIT
