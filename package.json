@@ -51,7 +51,7 @@
     "mocha": "2.4.5",
     "nodemon": "1.8.1",
     "optimist": "0.6.1",
-    "phantomjs-prebuilt": "2.1.6",
+    "phantomjs-prebuilt": "2.1.7",
     "sass-lint": "1.5.0",
     "selenium-webdriver": "2.52.0",
     "supports-color": "3.1.2",
