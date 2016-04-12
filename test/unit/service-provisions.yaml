@@ -1,8 +1,10 @@
 tests:
     # This example is used in functional tests.
     - description: |
-        A weekly free lunch for those in need.  Referrals for mental health and
-        housing are also available as is advice and a range of support services.
+        A weekly free lunch for those in need.
+        Advice and a range of support services are provided.
+        Referrals for mental health and
+        housing are also available.
       provides:
           - Lunch
           - Advice
@@ -53,3 +55,31 @@ tests:
           - Crisis accommodation for women fleeing domestic violence
           - Crisis accommodation
           - Short-term accommodation
+
+    - description: |
+        A specialist nursing service providing outreach for people in
+        rooming houses, crisis housing, hotels, parks and on the streets.
+      provides: []
+
+    - description: |
+        Provides material aid in the form of free hot nutritious meals,
+        blankets, beanies, clothing and food vouchers for people who are
+        experiencing homelessness or who are at risk of homeless,
+        including those who are experiencing a range of issues such as
+        social isolation, mental health problems and unemployment.
+        Referrals to other community service and government agencies
+        are also available.
+      provides:
+          - Meals
+          - Clothing
+          - Blankets
+          - Food vouchers
+
+    - description: |
+        A drop-in facility providing lunch, use of showers, laundry
+        facilities, a pool table, computers and tenancy advice & guidance.
+      provides:
+          - Lunch
+          - Tenancy advice
+          - Showers
+          - Laundry

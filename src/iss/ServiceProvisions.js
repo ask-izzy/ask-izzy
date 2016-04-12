@@ -14,22 +14,27 @@ class Form {
 
 class RegexpForm extends Form {
     form: RegExp;
+    ignoreReferrals: boolean;
 
     constructor(regex: RegExp|string) {
         super();
         this.form = new RegExp(regex, "i");
     }
 
-    match(input) {
+    match(input: string) {
+        if (this.ignoreReferrals) {
+            // Remove any mention of referrals to other services
+            // if we aren't looking for referrals
+            input = input.replace(/referrals?[^.]*/gi, "");
+        }
+
         return this.form.test(input);
     }
 }
 
 class Keywords extends RegexpForm {
-    form: RegExp;
 
     constructor(...forms: Array<string|RegExp>) {
-
         /* a regular expression matching things that appear on word
          * boundaries
          * FIXME: requires consecutive keywords to have 2 spaces between
@@ -63,6 +68,8 @@ class Keywords extends RegexpForm {
             .join("[^.]*");
 
         super(joinedForm);
+
+        this.ignoreReferrals = !forms.includes(referralsRegexp)
     }
 
     match(input) {
@@ -169,3 +176,5 @@ export function provides(props: {
 }): ServiceProvision {
     return new ServiceProvision(props);
 }
+
+export const referralsRegexp = /referrals?/gi;

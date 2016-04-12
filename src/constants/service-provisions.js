@@ -6,7 +6,6 @@
  * These are phrases extracted from the description of a service to
  * show dot points for what a service provides */
 
-
 import {
     ServiceProvision,
     allOf,
@@ -14,6 +13,7 @@ import {
     keywords,
     not,
     provides,
+    referralsRegexp,
 } from "../iss/ServiceProvisions";
 
 /* Please keep this grouped and the groups sorted */
@@ -31,7 +31,10 @@ const serviceProvisions: Array<ServiceProvision> = [
     provides({
         name: "Crisis accommodation",
         form: anyOf(
-            keywords(/crisis|emergency/, /accommodation|housing|shelter/),
+            keywords(
+                /Provid(es|ing)? ((short|long)-term )?(crisis|emergency)/i,
+                /accommodation|housing|shelter/
+            ),
             keywords("housing", "crisis"),
             keywords("refuge", "accommodation"),  // N.B. not refugee
         ),
@@ -88,15 +91,19 @@ const serviceProvisions: Array<ServiceProvision> = [
     /* Food */
     provides({
         name: "Breakfast",
-        form: keywords("free", "breakfast"),
+        form: keywords("breakfast"),
     }),
     provides({
         name: "Lunch",
-        form: keywords("free", "lunch"),
+        form: keywords("lunch"),
     }),
     provides({
         name: "Dinner",
-        form: keywords("free", /dinner|evening meal/),
+        form: keywords(/dinner|evening meal/),
+    }),
+    provides({
+        name: "Meals",
+        form: keywords(/(hot|cold)?/, /nutritious?/, /meals?/),
     }),
 
     /* General */
@@ -105,6 +112,7 @@ const serviceProvisions: Array<ServiceProvision> = [
         form: allOf(
             "advice",
             not("legal"),
+            not("tenancy"),
         ),
     }),
     provides({
@@ -134,6 +142,10 @@ const serviceProvisions: Array<ServiceProvision> = [
         form: "legal advice",
     }),
     provides({
+        name: "Tenancy advice",
+        form: "tenancy advice",
+    }),
+    provides({
         name: "Civil law advice",
         form: keywords("civil", /law|matters/),
     }),
@@ -161,8 +173,24 @@ const serviceProvisions: Array<ServiceProvision> = [
         form: "clothing",
     }),
     provides({
+        name: "Blankets",
+        form: "blankets",
+    }),
+    provides({
+        name: "Showers",
+        form: "showers",
+    }),
+    provides({
+        name: "Laundry",
+        form: "laundry",
+    }),
+    provides({
         name: "Food parcels",
         form: keywords("food", /hampers|parcels/),
+    }),
+    provides({
+        name: "Food vouchers",
+        form: keywords("food vouchers"),
     }),
     provides({
         name: "Public transport cards",
@@ -176,26 +204,26 @@ const serviceProvisions: Array<ServiceProvision> = [
     /* Referrals */
     provides({
         name: "Drug & alcohol referrals",
-        form: keywords(/referrals?/, "for", /drugs?/, "alcohol"),
+        form: keywords(referralsRegexp, "for", /drugs?/, "alcohol"),
     }),
     provides({
         name: "Referrals for financial counselling",
-        form: keywords(/referrals?/, /for|to/, "financial", /counsell\w+/),
+        form: keywords(referralsRegexp, /for|to/, "financial", /counsell\w+/),
     }),
     provides({
         name: "Referrals for legal services",
-        form: keywords(/referrals?/, "for", "legal services"),
+        form: keywords(referralsRegexp, "for", "legal services"),
     }),
     provides({
         name: "Housing referrals",
         form: anyOf(
-            keywords("housing", /referrals?/),
-            keywords(/referrals?/, "for", "housing"),
+            keywords("housing", referralsRegexp),
+            keywords(referralsRegexp, "for", "housing"),
         ),
     }),
     provides({
         name: "Mental health referrals",
-        form: keywords(/referrals?/, "for", "mental health"),
+        form: keywords(referralsRegexp, "for", "mental health"),
     }),
 ];
 

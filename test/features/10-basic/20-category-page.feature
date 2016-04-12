@@ -30,8 +30,12 @@ Feature: Category page
         # The housing category has 3 results
         And I should not see "Load more results…"
 
-    Scenario: A service with 5 related services only shows 4
-        When I visit /category/food
+    Scenario: A service with 5 service provisions only shows 4
+       Given A service with:
+        ----------------------------------------------
+        description: "Lunch, Advice, Support services, referrals for housing, referrals for mental health"
+        ----------------------------------------------
+        When I search for the service
 
         Then I should see the results
         ------------------------------

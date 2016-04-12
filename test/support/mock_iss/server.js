@@ -107,7 +107,7 @@ app.get("/api/v3/search/", (req, res) => {
                     id: 449,
                     name: "Drug & Alcohol Counselling",
                 },
-            ],
+            ].map(ServiceFactory),
         });
     } else if (req.query.site_id) {
         /* other related services search */
@@ -144,7 +144,7 @@ app.get("/api/v3/search/", (req, res) => {
                 },
             },
             objects: [
-                ServiceFactory({
+                {
                     crisis: true,
                     name: "Community Urgent",
                     site: {name: "Youth Support Net"},
@@ -152,8 +152,7 @@ app.get("/api/v3/search/", (req, res) => {
                         number: "0311111111",
                         kind: "mobile",
                     }],
-                }),
-                ServiceFactory({
+                }, {
                     name: "Instant Service",
                     site: {name: "Youth Support Net"},
                     crisis: true,
@@ -171,8 +170,7 @@ app.get("/api/v3/search/", (req, res) => {
                             kind: "freecall",
                         },
                     ],
-                }),
-                {
+                }, {
                     id: 444,
                     name: "Community Lunch",
                     description:
@@ -217,10 +215,9 @@ app.get("/api/v3/search/", (req, res) => {
                         comment: "",
                         number: "0345671234",
                         kind: "phone",
-                    },
-                    ],
+                    }],
                 },
-            ],
+            ].map(ServiceFactory),
         });
     } else if (req.query.q.match(/material aid/)) {
         const object = {
@@ -260,11 +257,11 @@ app.get("/api/v3/search/", (req, res) => {
                 next: req.originalUrl + "&offset=5",
             },
             objects: [
-                {...object, id: Seq()},
-                {...object, id: Seq()},
-                {...object, id: Seq()},
-                {...object, id: Seq()},
-                {...object, id: Seq()},
+                ServiceFactory({...object, id: Seq()}),
+                ServiceFactory({...object, id: Seq()}),
+                ServiceFactory({...object, id: Seq()}),
+                ServiceFactory({...object, id: Seq()}),
+                ServiceFactory({...object, id: Seq()}),
             ],
         });
     } else if (req.query.q.match(/zero results/)) {
