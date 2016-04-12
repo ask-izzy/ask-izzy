@@ -181,10 +181,6 @@ const serviceProvisions: Array<ServiceProvision> = [
         form: "showers",
     }),
     provides({
-        name: "Computers",
-        form: "computers",
-    }),
-    provides({
         name: "Laundry",
         form: "laundry",
     }),
