@@ -47,7 +47,7 @@ RUN \
     rm -rf /tmp/*
 
 # Install the npm deps
-COPY package.json bower.json /app/
+COPY package.json npm-shrinkwrap.json bower.json /app/
 RUN npm install && \
     npm install --only=dev && \
     npm cache clean && \
