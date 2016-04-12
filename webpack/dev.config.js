@@ -62,7 +62,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loaders: ["babel?cacheDirectory"],
+                loaders: ["es3ify", "babel?cacheDirectory"],
             },
         ],
     },

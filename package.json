@@ -18,6 +18,7 @@
     "core-decorators": "0.11.0",
     "css-loader": "0.23.1",
     "es6-promise": "3.1.2",
+    "es3ify-loader": "0.2.0",
     "express": "4.13.4",
     "extract-text-webpack-plugin": "1.0.1",
     "has-geolocation": "1.0.1",
