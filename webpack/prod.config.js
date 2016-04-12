@@ -50,7 +50,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loaders: ["babel"],
+                loaders: ["es3ify", "babel"],
             },
         ],
     },
