@@ -12,8 +12,7 @@ export default class Demographics extends BaseMultiQuestion {
         name: "demographics",
         question: "Do any of these apply to you?",
         answers: {
-            "Escaping family violence": append("family violence")
-                .remove({service_type: "housing"}),
+            "Escaping family violence": append("family violence"),
             "Indigenous": append("Aboriginals & Torres Strait Islanders"),
             "Family with children": append("families -srs"),
             // TODO "Couples" might negate gendered search,
