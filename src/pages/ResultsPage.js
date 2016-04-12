@@ -55,10 +55,11 @@ class ResultsPage extends BaseCategoriesPage {
         // are SEO-friendly. If we dont have a location but the
         // URL does, use the one from the url.
         const {suburb, state} = this.props.params;
+        const combined = `${suburb}, ${state}`;
 
-        if (suburb && state && !storage.getLocation()) {
+        if (suburb && state && (combined != storage.getLocation())) {
             // Use the location from the URL since
-            // we haven't got one in personalisation.
+            // it differs from personalisation.
             storage.setLocation(`${suburb}, ${state}`);
             storage.setCoordinates(null);
         } else if (storage.getLocation()) {
