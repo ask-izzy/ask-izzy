@@ -34,7 +34,7 @@ server.use((err, req, res, next) => {  // eslint-disable-line no-unused-vars
 // Finally, start the express server
 server.set("port", process.env.PORT || 8000);
 
-server.listen(server.get("port"), () => {
+server.listen(server.get("port"), "0.0.0.0", () => {
     const env = server.get("env");
     const port = server.get("port");
 
