@@ -79,10 +79,10 @@ describe("iss service", function() {
 
         it("Sends arrays multiple times", function() {
             assert.equal(
-                "http://example.org/?age_groups=junior&age_groups=senior",
+                "http://example.org/?age_group=junior&age_group=senior",
                 mungeUrlQuery(
                     "http://example.org/",
-                    {age_groups: ["junior", "senior"]},
+                    {age_group: ["junior", "senior"]},
                 ),
             );
         });

@@ -35,7 +35,7 @@ export type searchRequest = {
     area?: string,
     location?: string,
     type?: string,
-    age_groups?: Array<string>,
+    age_group?: Array<string>,
     client_gender?: Array<string>,
 
     catchment?: boolean|string,

@@ -80,9 +80,9 @@ export class AppendToSearch extends Search {
             search.q = (search.q || "") + " " + this.search.q;
         }
 
-        if (this.search.age_groups) {
-            search.age_groups = (search.age_groups || [])
-                .concat(this.search.age_groups);
+        if (this.search.age_group) {
+            search.age_group = (search.age_group || [])
+                .concat(this.search.age_group);
         }
 
         if (this.search.client_gender) {
