@@ -242,7 +242,6 @@ class Location extends React.Component {
                             aria-label="Search for a suburb or postcode"
                             placeholder="Search for a suburb or postcode"
                             value={this.state.locationName}
-                            autoFocus={true}
                             onChange={this.onSearchChange.bind(this)}
                         />
                     </div>
