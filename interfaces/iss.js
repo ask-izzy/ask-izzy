@@ -1,8 +1,7 @@
 /* @flow */
 
 type email = string;
-type issAgeGroup = string; /* enum(
-    "prenatal" |
+type issAgeGroup = "prenatal" |
     "baby" |
     "toddler" |
     "preschool" |
@@ -13,18 +12,24 @@ type issAgeGroup = string; /* enum(
     "youngadult" |
     "adult" |
     "middleageadult" |
-    "preretirementage"
-) */
-type issAccessibility = string; /* enum(
-    "noaccess" |
+    "preretirementage";
+
+type issAccessibility = "noaccess" |
     "access" |
-    "fullaccess"
-) */
+    "fullaccess";
+
 type endpoint = {};
 type ymdWithDashesDate = string;
 type hmsWithColonsTime = string;
-type state = string; /* enum */
-type dayOfWeek = string; /* enum('Monday', 'Friday', etc) */
+type state = string;
+type dayOfWeek = 'Monday' |
+    'Tuesday' |
+    'Wednesday' |
+    'Thursday' |
+    'Friday' |
+    'Saturday' |
+    'Sunday';
+
 type issPoint = {
     "lat": number,
     "lon": number
@@ -68,7 +73,7 @@ type phone = {
     "kind": string,
     "number": string,
 }
-type issGender = string; /* enum('u', 'f', 'm', 'x') */
+type issGender = 'u' | 'f' | 'm' | 'x';
 
 type issPostalAddress = {
     "line1": string,
@@ -78,12 +83,11 @@ type issPostalAddress = {
     "suburb": string
 };
 
-type issEntityType = string; /* enum(
-    'organisation' |
+type issEntityType = 'organisation' |
     'site' |
     'service' |
-    'practitioner'
-) */
+    'practitioner';
+
 type urlString = string;
 type issNowOpen = {
     "local_time": hmsWithColonsTime,
