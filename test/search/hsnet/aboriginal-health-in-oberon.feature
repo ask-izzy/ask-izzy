@@ -7,6 +7,7 @@ Feature: Search for healthcare services
     Scenario: Looking for indigenous healthcare in Oberon
         Given my location is "Oberon, NSW"
         And I am not interested in any subcategory
+        And I have skipped setting my gender
         Then my results for health would ideally contain
         ----------------------------------
         - id: 575484
