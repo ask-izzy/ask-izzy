@@ -1,7 +1,7 @@
 /* @flow */
 
 import BaseQuestion from "./BaseQuestion";
-import { remove } from "../../iss/Search";
+import { append, remove } from "../../iss/Search";
 
 export default class HealthSubcategories extends BaseQuestion {
     static title = "Health";
@@ -10,6 +10,14 @@ export default class HealthSubcategories extends BaseQuestion {
         name: "sub-health",
         question: "What sort of help do you need?",
         answers: {
+            "Doctor or nurse": append("(general medical practitioners)")
+                .append("nurse"),
+            "Sexual health": append("(sexual health)"),
+            "Dentist": append("dentist"),
+            "Foot problems": append("podiatrist"),
+            "Eye care": append("optometrist"),
+            "Mental": append("psychologist")
+                .append("counselling"),
             "Children": remove("(community health)")
                 .append("health children"),
             "Maternal & child health": remove("(community health)")
