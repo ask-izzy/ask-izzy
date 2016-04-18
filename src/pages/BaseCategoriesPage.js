@@ -7,6 +7,7 @@ import categories, { Category } from "../constants/categories";
 import badRouteParams from "../server/not_found";
 import { searchRequest } from "../iss";
 import Location from "./personalisation/Location";
+import storage from "../storage";
 
 class BaseCategoriesPage extends React.Component {
     /**
@@ -73,6 +74,22 @@ class BaseCategoriesPage extends React.Component {
             (typeof component.showQuestion == "function") &&
             component.showQuestion()
         );
+    }
+
+    componentDidMount(): void {
+        // Update the URL to include the location, so that links
+        // are SEO-friendly. If we dont have a location but the
+        // URL does, use the one from the url.
+        const {suburb, state} = this.props.params;
+
+        if (suburb && state) {
+            if (storage.getLocation() != `${suburb}, ${state}`) {
+                // Use the location from the URL.
+                storage.setLocation(`${suburb}, ${state}`);
+                storage.setCoordinates(null);
+            }
+        }
+
     }
 
 }

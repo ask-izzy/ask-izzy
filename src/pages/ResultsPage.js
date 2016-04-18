@@ -51,36 +51,7 @@ class ResultsPage extends BaseCategoriesPage {
     }
 
     componentDidMount(): void {
-        // Update the URL to include the location, so that links
-        // are SEO-friendly. If we dont have a location but the
-        // URL does, use the one from the url.
-        const {suburb, state} = this.props.params;
-
-        if (suburb && state && !storage.getLocation()) {
-            // Use the location from the URL since
-            // we haven't got one in personalisation.
-            storage.setLocation(`${suburb}, ${state}`);
-            storage.setCoordinates(null);
-        } else if (storage.getLocation()) {
-            // We have a location in localStorage, use that instead.
-            const [newSuburb, newState] = storage.getLocation().split(", ");
-
-            if (newSuburb && newState) {
-                const newUrlLocation = `${newSuburb}-${newState}`;
-                let parts = this.props.location.pathname.split("/");
-
-                if (suburb && state) {
-                    // The url already includes '/in'
-                    parts.splice(3, 2, "in", newUrlLocation)
-                } else {
-                    parts.splice(3, 0, "in", newUrlLocation);
-                }
-
-                this.context.router.replace(
-                    parts.join("/")
-                );
-            }
-        }
+        super.componentDidMount();
 
         sendEvent({
             event: "searchResults",
