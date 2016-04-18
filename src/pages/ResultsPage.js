@@ -87,7 +87,7 @@ class ResultsPage extends BaseCategoriesPage {
             searchQuery: this.props.params.search,
             searchPage: this.props.params.page,
             location: storage.getLocation(),
-        })
+        });
 
         const request = this.issParams();
 
