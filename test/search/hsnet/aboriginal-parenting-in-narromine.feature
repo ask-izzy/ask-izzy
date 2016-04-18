@@ -8,6 +8,11 @@ Feature: Search for indigenous childrens health services
         Given my location is "Narromine, NSW"
         And I am not interested in any subcategory
         And I have skipped setting my gender
+        And I have skipped setting my age
+        And I am part of the following demographics
+        --------------------------------------
+        Indigenous
+        --------------------------------------
         Then my results for health would ideally contain
         ----------------------------------
         - id: 110947
