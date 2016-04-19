@@ -75,7 +75,7 @@ Feature: Service details page
         Then I can get to google maps by clicking "Unit 5, Level 3, Hany Building, 33 Elizabeth Street"
 
     Scenario: There is travel information for non-confidential services
-       Given my location is "Melbourne VIC"
+       Given my location is "Melbourne, VIC"
         When I visit /service/866464
         Then the fastest way to get there is "By public transport"
         Then I can get to google maps by clicking "Get directions"

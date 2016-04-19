@@ -7,7 +7,7 @@ Feature: Personalisation header
 
     Background:
         Given a fresh session
-        And my location is "Melbourne VIC"
+        And my location is "Melbourne, Vic"
 
     Scenario: Search for housing
         When I visit /
@@ -20,4 +20,4 @@ Feature: Personalisation header
          And I click on the done button # Gender
          And I click on "26 to 39"
          And I click on the done button # Demographics
-        Then I should see 3 search results for "people aged 26 to 39" in "Melbourne VIC"
+        Then I should see 3 search results for "people aged 26 to 39" in "Melbourne, Vic"

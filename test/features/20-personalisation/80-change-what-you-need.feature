@@ -6,7 +6,7 @@ Feature: Change your personalisation settings
     # So that I can refine my search
 
     Background:
-        Given my location is "Melbourne VIC"
+        Given my location is "Melbourne, Vic"
         And I have somewhere to sleep tonight
         And I need nothing for housing
         And my gender is female
@@ -21,7 +21,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Melbourne VIC
+        Where are you?                               | Melbourne, Vic
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
@@ -30,7 +30,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
 
         When I click back from the title bar
-        Then I should be at /category/housing/
+        Then I should be at /category/housing/in/Melbourne-Vic/
 
     Scenario: Edit my location setting
         When I visit /category/housing/personalise/summary
@@ -63,7 +63,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Melbourne VIC
+        Where are you?                               | Melbourne, Vic
         Do you have somewhere safe to sleep tonight? | No
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -79,7 +79,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Melbourne VIC
+        Where are you?                               | Melbourne, Vic
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | In a rooming house
         How do you identify?                         | Female
@@ -101,7 +101,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Melbourne VIC
+        Where are you?                               | Melbourne, Vic
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | Private rental
         How do you identify?                         | Female
@@ -121,7 +121,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Melbourne VIC
+        Where are you?                               | Melbourne, Vic
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
@@ -137,7 +137,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Melbourne VIC
+        Where are you?                               | Melbourne, Vic
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
@@ -154,7 +154,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Melbourne VIC
+        Where are you?                               | Melbourne, Vic
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Male
@@ -170,4 +170,4 @@ Feature: Change your personalisation settings
         When I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
          And I click on the done button
-        Then I should not see "Melbourne VIC"
+        Then I should not see "Melbourne, Vic"

@@ -12,7 +12,7 @@ Feature: History navigation
 
     Scenario: Navigate via category to a service and back to the personalisation page
         Given a fresh session
-        And my location is "Melbourne VIC"
+        And my location is "Melbourne, VIC"
         And I need nothing for housing
         And I am not part of any relevant demographics
         And I am not interested in any subcategory
@@ -41,9 +41,9 @@ Feature: History navigation
 
         When I click on "25 or younger"
 
-        Then I should see 3 search results for "men aged 25 or younger" in "Melbourne VIC"
+        Then I should see 3 search results for "men aged 25 or younger" in "Melbourne, VIC"
         And I should see "Housing"
-        And I should be at /category/housing/
+        And I should be at /category/housing/in/Melbourne-VIC/
         And I should see the results
         --------------------------------------------------------------------------
         Service Name (name) | Site Name (site_name) | Service provisions (related)
@@ -60,9 +60,9 @@ Feature: History navigation
         When I reload the page
         And I click back from the browser UI
 
-        Then I should be at /category/housing/
+        Then I should be at /category/housing/in/Melbourne-VIC/
 
-        Then I should see 3 search results for "men aged 25 or younger" in "Melbourne VIC"
+        Then I should see 3 search results for "men aged 25 or younger" in "Melbourne, VIC"
 
         When I click back from the browser UI
         Then I should see "How old are you?"
