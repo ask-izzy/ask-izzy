@@ -107,7 +107,7 @@ async function setGender(gender: string): Promise<void> {
 }
 
 // Shamelessly copied from ResultsPage
-function issRequest({search, personalisation}) {
+function issRequest({search, personalisation, name}) {
     let request = search;
 
     for (let item of personalisation) {
@@ -116,7 +116,11 @@ function issRequest({search, personalisation}) {
             request = item.getSearch(request);
 
             if (!request) {
-                return null;
+                throw new Error(`Expected ${
+                    name
+                } to generate a query (missing ${
+                    item.name
+                })`);
             }
         }
     }
@@ -140,12 +144,6 @@ function objectMatches(expectation: any, subject: any): boolean {
 async function searchIss(categoryName: string): Promise<searchResults> {
     const category = Categories.find(({key}) => key == categoryName)
     const request = issRequest(category);
-
-    if (!request) {
-        throw new Error(`Expected ${
-            category.name
-        } to generate a query`);
-    }
 
     return await search(Object.assign(request, {limit: 20}));
 }
