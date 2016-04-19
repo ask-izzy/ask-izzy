@@ -17,7 +17,7 @@ import extractText from "./extract-text";
 
 const assetsPath = path.resolve(__dirname, "../public/static");
 
-const WEBPACK_HOST = process.env.WEBPACK_HOST || "localhost";
+const WEBPACK_HOST = process.env.HOST || "localhost";
 const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
 const webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
 
