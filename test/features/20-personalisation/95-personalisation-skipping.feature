@@ -6,7 +6,7 @@ Feature: Skip personalisation settings
     # And have my previous answers saved
 
     Background:
-        Given my location is "Melbourne VIC"
+        Given my location is "Melbourne, Vic"
         And I have somewhere to sleep tonight
         And I need nothing for housing
         And I am not part of any relevant demographics
@@ -28,7 +28,7 @@ Feature: Skip personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Melbourne VIC
+        Where are you?                               | Melbourne, Vic
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | (skipped)

@@ -60,6 +60,12 @@ async function sendCoords(
  * @returns {Promise} promise that resolves when the value is set.
  */
 async function setLocation(location: string): Promise<void> {
+    if (!location.match(/, /)) {
+        throw new Error(
+            "Location must have suburb & state separated by ', '."
+        )
+    }
+
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript((location) => {
         IzzyStorage.setLocation(location);
