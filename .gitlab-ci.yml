@@ -27,7 +27,7 @@ search-test:
     script: make search-test
 
 # Deploy to integration test environment on merge with master
-deploy:
+uat:
     type: deploy
     script: make build push release-test
     only:
