@@ -28,7 +28,7 @@ search-test:
 
 # Deploy to integration test environment on merge with master
 deploy:
-    stage: deploy
+    type: deploy
     script: make build dockerpush release-test
     only:
         - master
