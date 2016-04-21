@@ -11,18 +11,18 @@ export class Category {
     key: string;
     name: string;
     byline: string;
-    icon: ReactClass;
+    icon: React$Class;
     search: iss.searchRequest;
     info: ?string|ReactElement;
-    personalisation: Array<ReactClass>;
+    personalisation: Array<React$Class>;
 
     constructor(props: {
         name: string,
         byline: string,
-        icon: ReactClass,
+        icon: React$Class,
         search: iss.searchRequest,
         info?: string|ReactElement,
-        personalisation: Array<ReactClass>,
+        personalisation: Array<React$Class>,
     }) {
         this.name = props.name;
         this.byline = props.byline;
