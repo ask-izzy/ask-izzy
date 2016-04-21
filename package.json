@@ -25,7 +25,7 @@
     "express": "4.13.4",
     "extract-text-webpack-plugin": "1.0.1",
     "has-geolocation": "1.0.1",
-    "history": "2.0.0",
+    "history": "2.1.0",
     "js-yaml": "3.6.0",
     "lru-cache": "4.0.1",
     "moment": "2.13.0",
