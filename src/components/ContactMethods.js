@@ -12,6 +12,8 @@ import Service from "../../fixtures/factories/Service";
 import sendEvent from "../google-tag-manager";
 
 class ContactMethods extends React.Component {
+    props: Object;
+    state: Object;
 
     static sampleProps = {
         closed: {

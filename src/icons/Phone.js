@@ -6,6 +6,8 @@ import React from "react";
 import classnames from "classnames";
 
 export default class SvgIconPhone extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         className: React.PropTypes.string,
     };

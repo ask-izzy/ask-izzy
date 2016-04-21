@@ -17,6 +17,8 @@ import icons from "../icons";
 import sendEvent from "../google-tag-manager";
 
 export default class ServicePane extends React.Component {
+    props: Object;
+    state: Object;
 
     constructor(props: Object) {
         super(props);

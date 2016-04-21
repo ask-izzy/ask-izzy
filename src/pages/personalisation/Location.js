@@ -23,6 +23,8 @@ const AutocompleteState = {
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Location extends React.Component {
+    props: Object;
+    state: Object;
 
     static propTypes = {
         name: React.PropTypes.string.isRequired,

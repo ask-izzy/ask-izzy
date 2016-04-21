@@ -7,6 +7,8 @@ import _string from "underscore.string";
 import fixtures from "../../fixtures/services";
 
 class Eligibility extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         catchment: React.PropTypes.string,
         eligibility_info: React.PropTypes.string,

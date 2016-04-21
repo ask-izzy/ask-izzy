@@ -8,6 +8,8 @@ import CategoryListItem from "./CategoryListItem";
 import icons from "../icons";
 
 class NavBar extends React.Component {
+    props: Object;
+    state: Object;
 
     static sampleProps = {default: {}};
 

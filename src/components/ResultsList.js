@@ -17,6 +17,8 @@ const className = (elem: {type: {displayName?: string}}) =>
         elem.type.displayName || "other"}`
 
 class ResultsList extends React.Component {
+    props: Object;
+    state: Object;
 
     crisisResults(): Array<Object> {
         return crisisResults(this.props.results);

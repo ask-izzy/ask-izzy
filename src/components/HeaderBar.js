@@ -3,6 +3,8 @@
 import React from "react";
 
 class HeaderBar extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         primaryText: React.PropTypes.node.isRequired,
         secondaryText: React.PropTypes.node,

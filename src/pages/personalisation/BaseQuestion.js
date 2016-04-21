@@ -18,6 +18,8 @@ import { append, Search } from "../../iss/Search";
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class BaseQuestion extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         name: React.PropTypes.string.isRequired,
         /* The question asked of the user */

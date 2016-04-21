@@ -10,6 +10,8 @@ import ResultsList from "./ResultsList";
 import storage from "../storage";
 
 class ResultsMap extends React.Component {
+    props: Object;
+    state: Object;
 
     static contextTypes = {
         router: React.PropTypes.object.isRequired,

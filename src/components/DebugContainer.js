@@ -4,6 +4,8 @@ import React from "react";
 import storage from "../storage";
 
 class DebugContainer extends React.Component {
+    props: Object;
+    state: Object;
 
     componentDidMount(): void {
         try {

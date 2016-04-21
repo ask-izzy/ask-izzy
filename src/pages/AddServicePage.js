@@ -8,6 +8,8 @@ import components from "../components";
 declare var ISS_URL: string;
 
 class AddServicePage extends React.Component {
+    props: Object;
+    state: Object;
 
     constructor(props: Object): void {
         super(props);

@@ -3,6 +3,8 @@
 import React from "react";
 
 class HtmlDocument extends React.Component {
+    props: Object;
+    state: Object;
 
     static propTypes = {
         css: React.PropTypes.arrayOf(React.PropTypes.string),

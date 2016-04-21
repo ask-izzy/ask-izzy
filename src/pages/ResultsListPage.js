@@ -11,6 +11,8 @@ import sendEvent from "../google-tag-manager";
 import storage from "../storage";
 
 class ResultsListPage extends React.Component {
+    props: Object;
+    state: Object;
 
     static propTypes = {
         objects: React.PropTypes.array,

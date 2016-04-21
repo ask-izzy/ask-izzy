@@ -3,6 +3,8 @@ import React from "react";
 import classnames from "classnames";
 
 class Collapser extends React.Component {
+    props: Object;
+    state: Object;
 
     constructor(props: Object) {
         super(props);

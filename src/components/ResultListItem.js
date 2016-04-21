@@ -13,6 +13,8 @@ import LinkListItem from "./LinkListItem";
 import TransportTime from "./TransportTime";
 
 class ResultListItem extends React.Component {
+    props: Object;
+    state: Object;
 
     static displayName = "ResultListItem";
 

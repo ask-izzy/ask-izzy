@@ -9,6 +9,8 @@ import * as iss from "../../iss";
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Intro extends React.Component {
+    props: Object;
+    state: Object;
 
     static defaultProps = {
         name: "intro",

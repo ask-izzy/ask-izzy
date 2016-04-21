@@ -6,6 +6,8 @@ import React from "react";
 import classnames from "classnames";
 
 export default class SvgIconFeedback extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         className: React.PropTypes.string,
     };

@@ -15,6 +15,8 @@ const GeoLocationState = {
 };
 
 class NotStartedGeolocation extends React.Component {
+    props: Object;
+    state: Object;
     render() {
         return (
             <ButtonListItem
@@ -36,6 +38,8 @@ class NotStartedGeolocation extends React.Component {
 }
 
 class RunningGeolocation extends React.Component {
+    props: Object;
+    state: Object;
     render() {
         return (
             <ListItem
@@ -50,6 +54,8 @@ class RunningGeolocation extends React.Component {
 }
 
 class FinishedGeolocation extends React.Component {
+    props: Object;
+    state: Object;
     render() {
         return (
             <ListItem
@@ -62,6 +68,8 @@ class FinishedGeolocation extends React.Component {
 }
 
 class FailedGeolocation extends React.Component {
+    props: Object;
+    state: Object;
     render() {
         return (
             <ListItem
@@ -75,6 +83,8 @@ class FailedGeolocation extends React.Component {
 }
 
 class GeolocationButton extends React.Component {
+    props: Object;
+    state: Object;
     static sampleProps = {
         default: {},
     };

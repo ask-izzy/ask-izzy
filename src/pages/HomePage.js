@@ -9,6 +9,8 @@ import icons from "../icons";
 import storage from "../storage";
 
 class HomePage extends React.Component {
+    props: Object;
+    state: Object;
 
     static contextTypes = {
         router: React.PropTypes.object.isRequired,

@@ -4,6 +4,8 @@ import React from "react";
 import { Link } from "react-router";
 
 class Infobox extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         href: React.PropTypes.string,
         to: React.PropTypes.string,

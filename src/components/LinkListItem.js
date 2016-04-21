@@ -6,6 +6,8 @@ import classnames from "classnames";
 import ListItem from "./ListItem";
 
 export default class LinkListItem extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         to: React.PropTypes.string,
         href: React.PropTypes.string,

@@ -6,6 +6,8 @@ import components from "../components";
 import icons from "../icons";
 
 class CategoryListItem extends React.Component {
+    props: Object;
+    state: Object;
 
     static sampleProps = {default: {
         category: {

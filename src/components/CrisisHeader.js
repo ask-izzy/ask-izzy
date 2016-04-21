@@ -3,6 +3,8 @@
 import React from "react";
 
 class CrisisHeader extends React.Component {
+    props: Object;
+    state: Object;
 
     render() {
         return (

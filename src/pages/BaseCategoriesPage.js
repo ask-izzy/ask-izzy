@@ -10,6 +10,8 @@ import Location from "./personalisation/Location";
 import storage from "../storage";
 
 class BaseCategoriesPage extends React.Component {
+    props: Object;
+    state: Object;
     /**
      * category:
      *
