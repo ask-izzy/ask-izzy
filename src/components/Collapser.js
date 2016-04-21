@@ -63,7 +63,7 @@ class Collapser extends React.Component {
         );
     }
 
-    renderMessage(): ?ReactElement {
+    renderMessage(): ?React$Element {
         if (this.state.collapsed) {
             return (
                 <a

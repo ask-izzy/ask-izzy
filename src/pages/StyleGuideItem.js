@@ -19,7 +19,7 @@ export default class StyleGuideItem extends React.Component {
         return this.props.params.componentName;
     }
 
-    getComponent(): React.Component {
+    getComponent(): ReactClass<any> {
         return components[this.getComponentName()];
     }
 

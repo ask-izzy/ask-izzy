@@ -11,20 +11,20 @@ import Age from "../../pages/personalisation/Age";
 import Location from "../../pages/personalisation/Location";
 import storage from "../../storage";
 
-const HomeLink = (): ReactElement =>
+const HomeLink = (): React$Element =>
     <Link
         className="homeLink"
         to="/"
         onClick={storage.clear}
     >Go back</Link>;
 
-const ErrorMessage = ({children}: Object): ReactElement =>
+const ErrorMessage = ({children}: Object): React$Element =>
     <p className="errorMessage">{children}</p>;
 
-const InfoMessage = (category: ?Object): ?ReactElement =>
+const InfoMessage = (category: ?Object): ?React$Element =>
     category && <div>{category.info}</div>;
 
-const LogoHeader = ({children}: Object): ReactElement =>
+const LogoHeader = ({children}: Object): React$Element =>
     <div className="LogoHeader">
         <LogoWithShadow />
         {children}
@@ -33,7 +33,7 @@ const LogoHeader = ({children}: Object): ReactElement =>
 const trailingSlash = (path: string): string =>
     `${path}${path.endsWith("/") ? "" : "/"}`;
 
-const PersonalisationLink = ({pathname}: Object): ReactElement =>
+const PersonalisationLink = ({pathname}: Object): React$Element =>
     <Link
         className="change-personalisation"
         to={`${trailingSlash(pathname)}personalise/summary`}

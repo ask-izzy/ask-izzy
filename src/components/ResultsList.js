@@ -12,7 +12,7 @@ import {
 
 const StaticTextLine = ({object}) => React.cloneElement(object.node);
 
-const className = (elem: {type: {displayName?: string}}) =>
+const className = (elem: React$Element<any>) =>
     `resultContainer resultContainer-${
         elem.type.displayName || "other"}`
 
@@ -44,7 +44,7 @@ class ResultsList extends React.Component {
     }
 
     renderCrisisResult(object: Object, index: number) {
-        const elem = object.staticText ?
+        const elem: React$Element<any> = object.staticText ?
             <StaticTextLine object={object} />
           : <CrisisLineItem object={object} />;
 

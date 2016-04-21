@@ -19,7 +19,6 @@ import categories from "../constants/categories";
 function hasVersionFile(): boolean {
     try {
         // Is there a version string?
-        /* flow:disable Flow doesn't know about F_OK */
         fs.accessSync("public/VERSION", fs.F_OK);
         return true;
     } catch (error) {
@@ -120,7 +119,7 @@ function *expandRoutes(
 }
 
 function renderRoute(
-    route: ReactComponent,
+    route: React$Element,
     prefix: string,
 ): void {
     if (route.map) {

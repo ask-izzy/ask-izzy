@@ -11,18 +11,19 @@ export class Category {
     key: string;
     name: string;
     byline: string;
-    icon: React$Class;
+    icon: ReactClass<any>;
     search: iss.searchRequest;
-    info: ?string|ReactElement;
-    personalisation: Array<React$Class>;
+    info: ?string|React$Element;
+    // I can't get flow to happily check that these are react classes.
+    personalisation: Array<any>;
 
     constructor(props: {
         name: string,
         byline: string,
-        icon: React$Class,
+        icon: ReactClass<any>,
         search: iss.searchRequest,
-        info?: string|ReactElement,
-        personalisation: Array<React$Class>,
+        info?: string|React$Element,
+        personalisation: Array<any>,
     }) {
         this.name = props.name;
         this.byline = props.byline;

@@ -142,7 +142,7 @@ async function urlIs(
         url = Url.parse(url).path
     }
 
-    return decodeURIComponent(url) == expected;
+    return decodeURIComponent(url || "") == expected;
 }
 
 async function checkURL(expected: string): Promise<void> {

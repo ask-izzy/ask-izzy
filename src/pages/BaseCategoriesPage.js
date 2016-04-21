@@ -5,13 +5,15 @@ import _ from "underscore";
 
 import categories, { Category } from "../constants/categories";
 import badRouteParams from "../server/not_found";
-import { searchRequest } from "../iss";
+import type { searchRequest } from "../iss";
 import Location from "./personalisation/Location";
 import storage from "../storage";
 
 class BaseCategoriesPage extends React.Component {
     props: Object;
     state: Object;
+    _category: Category;
+
     /**
      * category:
      *
@@ -60,7 +62,7 @@ class BaseCategoriesPage extends React.Component {
      *
      * An array of components required to personalise this category.
      */
-    get personalisationComponents(): Array<ReactClass> {
+    get personalisationComponents(): Array<ReactClass<any>> {
         let components = [];
 
         if (this.category) {
@@ -72,6 +74,7 @@ class BaseCategoriesPage extends React.Component {
         } else {
             throw badRouteParams;
         }
+
         return components.filter(component =>
             (typeof component.showQuestion == "function") &&
             component.showQuestion()

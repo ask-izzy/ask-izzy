@@ -68,7 +68,7 @@ class Intro extends React.Component {
         );
     }
 
-    renderDoneButton(): ?ReactElement {
+    renderDoneButton(): ?React$Element {
         return (
             <div>
                 <div className="done-button">

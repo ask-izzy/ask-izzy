@@ -64,7 +64,7 @@ class Eligibility extends React.Component {
         );
     }
 
-    renderCatchment(): ?ReactElement {
+    renderCatchment(): ?React$Element {
         const catchment: string = this.props.catchment;
 
         if (catchment && !catchment.match(/^open.?$/i)) {
@@ -72,13 +72,13 @@ class Eligibility extends React.Component {
         }
     }
 
-    renderItem(text: string): ?ReactElement {
+    renderItem(text: string): ?React$Element {
         if (text) {
             return (<li key={text}>{text}</li>);
         }
     }
 
-    renderEligibility(eligibility: ?string): Array<?ReactElement> {
+    renderEligibility(eligibility: ?string): Array<?React$Element> {
         const eligibilities = _.uniq(
             (eligibility || "")
                 .split(/\n|;/g)
@@ -88,7 +88,7 @@ class Eligibility extends React.Component {
         return _.compact(_(eligibilities).map(this.renderItem));
     }
 
-    renderReferralInfo(): ?ReactElement {
+    renderReferralInfo(): ?React$Element {
         const referralInfo = (this.props.referral_info || "").trim();
 
         if (referralInfo && !referralInfo.match(/^self\.?$/i)) {
