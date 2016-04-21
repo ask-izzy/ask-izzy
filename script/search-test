@@ -8,4 +8,4 @@ export PORT=8010
 
 # We pause for 4000ms when ISS rate-limits us, so allow a timeout of 9
 # seconds
-PAUSE_ON_ERROR= mocha --compilers js:babel/register --timeout 9000 test/search.js $@
+PAUSE_ON_ERROR= mocha --compilers js:babel-core/register --timeout 9000 test/search.js $@

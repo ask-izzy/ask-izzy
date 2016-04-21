@@ -16,7 +16,7 @@ describe("Compose personalisation search terms", function() {
             q: "crisis accommodation",
         };
 
-        request = require("../../src/pages/personalisation/Gender")
+        request = require("../../src/pages/personalisation/Gender").default
             .getSearchForAnswer(request, "Female");
         assert.deepEqual(request, {
             q: "crisis accommodation",
@@ -29,7 +29,7 @@ describe("Compose personalisation search terms", function() {
             q: "crisis accommodation",
         };
 
-        request = require("../../src/pages/personalisation/Age")
+        request = require("../../src/pages/personalisation/Age").default
             .getSearchForAnswer(request, "25 or younger");
         assert.deepEqual(request, {
             q: "crisis accommodation youth",
@@ -41,13 +41,13 @@ describe("Compose personalisation search terms", function() {
             q: "crisis accommodation",
         };
 
-        request = require("../../src/pages/personalisation/Gender")
+        request = require("../../src/pages/personalisation/Gender").default
             .getSearchForAnswer(request, "Male");
         if (!request) {
             throw new Error("unexpected");
         }
 
-        request = require("../../src/pages/personalisation/Age")
+        request = require("../../src/pages/personalisation/Age").default
             .getSearchForAnswer(request, "25 or younger");
         assert.deepEqual(request, {
             q: "crisis accommodation youth",

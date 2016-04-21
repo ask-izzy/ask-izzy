@@ -23,7 +23,7 @@ function runTest {
     export ISS_MOCK_PORT
 
     mocha \
-        --compilers js:babel/register \
+        --compilers js:babel-core/register \
         --colors \
         --timeout "$INTERACTIVE_TIMEOUT" \
         --grep "$2" \
@@ -53,7 +53,7 @@ export SHELL=/bin/bash
 export CONCURRENCY
 
 mocha \
-    --compilers js:babel/register \
+    --compilers js:babel-core/register \
         test/yadda-list.js \
         | grep '^[^[:space:]]' \
         | parallel \
