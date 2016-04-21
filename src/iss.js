@@ -492,6 +492,15 @@ async function _search(
             await wait(4000);
             return search(query);
         }
+
+        if (error &&
+            error.data &&
+            error.data.error_message == "Elasticsearch request timed out"
+        ) {
+            await wait(500);
+            return search(query);
+        }
+
         throw error;
     }
 }
