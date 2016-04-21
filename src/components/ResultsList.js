@@ -26,7 +26,7 @@ class ResultsList extends React.Component {
         return nonCrisisResults(this.props.results);
     }
 
-    render(): ReactElement {
+    render() {
         return (
             <div className="ResultList">
                 {
@@ -41,7 +41,7 @@ class ResultsList extends React.Component {
         );
     }
 
-    renderCrisisResult(object: Object, index: number): ReactElement {
+    renderCrisisResult(object: Object, index: number) {
         const elem = object.staticText ?
             <StaticTextLine object={object} />
           : <CrisisLineItem object={object} />;
@@ -56,7 +56,7 @@ class ResultsList extends React.Component {
         );
     }
 
-    renderResult(object: Object, index: number): ReactElement {
+    renderResult(object: Object, index: number) {
         const elem = <ResultListItem object={object} />;
 
         return (

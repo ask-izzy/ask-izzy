@@ -91,7 +91,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         }
     }
 
-    render(): ReactElement {
+    render() {
         const Subpage = this.currentComponent;
         const prevPage = this.prevSubPage()
         const backMessage = prevPage ?

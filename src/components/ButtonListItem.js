@@ -8,7 +8,7 @@ export default class ButtonListItem extends React.Component {
 
     static sampleProps = ListItem.sampleProps;
 
-    render(): ReactElement {
+    render() {
         return (
             <ListItem
                 rootElement="a"

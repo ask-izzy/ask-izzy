@@ -165,7 +165,7 @@ class ResultsPage extends BaseCategoriesPage {
         }
     }
 
-    render(): ReactElement {
+    render() {
         const Component = this.component();
 
         return (

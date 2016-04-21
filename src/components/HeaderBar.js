@@ -15,7 +15,7 @@ class HeaderBar extends React.Component {
         secondaryText: "Secondary Text",
     }};
 
-    render(): ReactElement {
+    render() {
         return (
             <div className="HeaderBar">
                 <div className="primary">

@@ -106,7 +106,7 @@ export default class CollapsedOpeningTimes extends React.Component {
         })
     }
 
-    render(): ReactElement {
+    render() {
         const order = [
             "Monday",
             "Tuesday",

@@ -36,7 +36,7 @@ class HomePage extends React.Component {
         );
     }
 
-    render(): ReactElement {
+    render() {
         return (
             <div className="HomePage">
                 <div className="header">

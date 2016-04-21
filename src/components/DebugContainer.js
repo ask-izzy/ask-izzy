@@ -22,7 +22,7 @@ class DebugContainer extends React.Component {
         return {addEventListener: () => null};
     }
 
-    render(): ReactElement {
+    render() {
         if (!storage.getDebug()) {
             return <span />;
         }

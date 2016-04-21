@@ -16,7 +16,7 @@ class AppBar extends React.Component {
         onBackTouchTap: function() {},
     }};
 
-    render(): ReactElement {
+    render() {
         return (
             <div className="AppBarContainer">
                 <div className="AppBar">

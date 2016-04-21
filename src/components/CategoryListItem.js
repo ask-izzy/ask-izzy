@@ -16,7 +16,7 @@ class CategoryListItem extends React.Component {
         },
     }};
 
-    render(): ReactElement {
+    render() {
         let Icon = this.props.category.icon || icons.House;
 
         return (

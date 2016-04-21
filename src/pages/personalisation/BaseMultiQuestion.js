@@ -142,7 +142,7 @@ class BaseMultiQuestion extends BaseQuestion {
         this.setState({rootHeight: ReactDOM.findDOMNode(this).offsetHeight});
     }
 
-    render(): ReactElement {
+    render() {
         let selected = this.selected;
 
         return (

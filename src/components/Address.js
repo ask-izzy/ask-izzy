@@ -35,7 +35,7 @@ class Address extends React.Component {
         },
     };
 
-    render(): ReactElement {
+    render() {
         let location = this.props.location;
 
         return (

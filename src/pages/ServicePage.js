@@ -56,7 +56,7 @@ class ServicePage extends React.Component {
 
     }
 
-    render(): ReactElement {
+    render() {
         let {
             object,
             error,

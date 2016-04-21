@@ -12,7 +12,7 @@ export default class BasePage extends React.Component {
         return {};
     }
 
-    render(): ReactElement {
+    render() {
         return (
             <div className="BasePage">
                 <DocumentTitle

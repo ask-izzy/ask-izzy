@@ -44,7 +44,7 @@ class Intro extends React.Component {
         }
     }
 
-    render(): ReactElement {
+    render() {
         return (
             <div>
                 <components.HeaderBar

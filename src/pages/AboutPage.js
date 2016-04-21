@@ -11,7 +11,7 @@ class AboutPage extends React.Component {
         router: React.PropTypes.object.isRequired,
     };
 
-    render(): ReactElement {
+    render() {
         let back = () => this.context.router.goBack();
 
         return (

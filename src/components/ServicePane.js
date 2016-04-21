@@ -52,7 +52,7 @@ export default class ServicePane extends React.Component {
         });
     }
 
-    render(): ReactElement {
+    render() {
         const object = this.props.service;
 
         return (
@@ -132,7 +132,7 @@ export default class ServicePane extends React.Component {
         );
     }
 
-    renderServiceProvisions(): ReactElement {
+    renderServiceProvisions() {
         let object = this.props.service;
 
         if (_.isEmpty(object.serviceProvisions)) {
@@ -154,7 +154,7 @@ export default class ServicePane extends React.Component {
         );
     }
 
-    renderSiblings(): ReactElement {
+    renderSiblings() {
         if (_.isEmpty(this.state.siblings)) {
             return <span />;
         }

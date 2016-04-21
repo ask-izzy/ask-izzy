@@ -25,7 +25,7 @@ class ResultsListPage extends React.Component {
         });
     }
 
-    render(): ReactElement {
+    render() {
         const path = this.props.location.pathname.replace(/\/?$/, "/map");
 
         return (

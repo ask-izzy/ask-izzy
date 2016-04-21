@@ -8,7 +8,7 @@ class BrandedFooter extends React.Component {
         default: {},
     };
 
-    render(): ReactElement {
+    render() {
         return (
             <footer className="branding-footer-container">
                 <div>

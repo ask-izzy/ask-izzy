@@ -39,7 +39,7 @@ class GoogleMapsLink extends React.Component {
             }&daddr=${query}`;
     }
 
-    render(): ReactElement {
+    render() {
         const {
             className,
             children,

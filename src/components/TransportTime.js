@@ -53,7 +53,7 @@ class TransportTime extends React.Component {
         }
     }
 
-    renderPublic(): ReactElement {
+    renderPublic() {
         const {travelTime} = this.props.location;
 
         return (
@@ -110,7 +110,7 @@ class TransportTime extends React.Component {
         });
     }
 
-    renderDirections(): ReactElement {
+    renderDirections() {
         if (!this.props.compact) {
             return (
                 <div
@@ -124,7 +124,7 @@ class TransportTime extends React.Component {
         return <span />;
     }
 
-    renderSuburb(): ReactElement {
+    renderSuburb() {
         return (
             <span className="location">
                 {titleize(this.props.location.suburb)}

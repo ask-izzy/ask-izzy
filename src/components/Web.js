@@ -15,7 +15,7 @@ export default class Web extends React.Component {
         });
     }
 
-    render(): ReactElement {
+    render() {
         let url = URL.parse(this.props.url);
 
         return (

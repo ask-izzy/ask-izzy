@@ -11,7 +11,7 @@ class NavBar extends React.Component {
 
     static sampleProps = {default: {}};
 
-    render(): ReactElement {
+    render() {
         const subject = "Ask Izzy - Feedback";
         const mailLink = `mailto:support@askizzy.org.au?subject=${subject}`;
 

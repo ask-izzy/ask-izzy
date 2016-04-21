@@ -41,7 +41,7 @@ class Collapser extends React.Component {
         }
     }
 
-    render(): ReactElement {
+    render() {
         return (
             <div
                 className={classnames(

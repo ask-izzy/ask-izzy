@@ -19,7 +19,7 @@ export default class LinkListItem extends React.Component {
         },
     };
 
-    render(): ReactElement {
+    render() {
         const {
             className,
             ...rest,

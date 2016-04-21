@@ -16,7 +16,7 @@ class Eligibility extends React.Component {
 
     static sampleProps = {default: fixtures.ixa};
 
-    render(): ReactElement {
+    render() {
         let eligibleMarkup, ineligibleMarkup;
 
         let eligibleItems = _.compact(_([

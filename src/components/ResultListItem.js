@@ -39,7 +39,7 @@ class ResultListItem extends React.Component {
                             this.props.nServiceProvisions);
     }
 
-    render(): ReactElement {
+    render() {
         const {
             object,
         } = this.props;

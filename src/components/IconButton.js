@@ -14,7 +14,7 @@ export default class IconButton extends React.Component {
         },
     };
 
-    render(): ReactElement {
+    render() {
         const {
             className,
             onClick,

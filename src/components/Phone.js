@@ -26,7 +26,7 @@ class Phone extends React.Component {
         });
     }
 
-    render(): ReactElement {
+    render() {
         return (
             <div className="Contact Phone">
                 <span className="kind">

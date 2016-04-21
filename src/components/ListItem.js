@@ -28,7 +28,7 @@ export default class ListItem extends React.Component {
         },
     };
 
-    render(): ReactElement {
+    render() {
         let {
             rootElement,
             className,

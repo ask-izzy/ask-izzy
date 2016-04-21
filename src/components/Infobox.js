@@ -25,7 +25,7 @@ class Infobox extends React.Component {
         children: "It's important to act early on housing.",
     }};
 
-    render(): ReactElement {
+    render() {
         let {
             linkText,
             ...other,

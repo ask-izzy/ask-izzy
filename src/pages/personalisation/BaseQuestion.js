@@ -151,7 +151,7 @@ class BaseQuestion extends React.Component {
         this.triggerNext();
     }
 
-    render(): ReactElement {
+    render() {
         const selected = this.selected;
 
         return (

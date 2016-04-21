@@ -16,7 +16,7 @@ export default class Email extends React.Component {
         })
     }
 
-    render(): ReactElement {
+    render() {
         let {
             email,
         } = this.props;

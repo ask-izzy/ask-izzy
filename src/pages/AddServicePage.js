@@ -65,7 +65,7 @@ class AddServicePage extends React.Component {
         }
     }
 
-    render(): ReactElement {
+    render() {
         let history = this.props.history;
 
         let body = this.state.isFormDone ? this.renderSuccessMessage()
@@ -85,7 +85,7 @@ class AddServicePage extends React.Component {
         );
     }
 
-    renderSuccessMessage(): ReactElement {
+    renderSuccessMessage() {
         return (
             <div>
                 <p>Thank you. The information you provided may be adjusted for
@@ -95,7 +95,7 @@ class AddServicePage extends React.Component {
         );
     }
 
-    renderForm(): ReactElement {
+    renderForm() {
         let issUrl = url.format(this.issUrl);
 
         return (

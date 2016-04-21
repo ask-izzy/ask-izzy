@@ -30,7 +30,7 @@ class HtmlDocument extends React.Component {
         return process.env.NODE_ENV == "production";
     }
 
-    render(): ReactElement {
+    render() {
         const {
             markup,
             script,

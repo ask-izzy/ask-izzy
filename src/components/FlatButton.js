@@ -16,7 +16,7 @@ export default class FlatButton extends React.Component {
         },
     };
 
-    render(): ReactElement {
+    render() {
         let {
             className,
             children,

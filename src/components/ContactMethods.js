@@ -57,7 +57,7 @@ class ContactMethods extends React.Component {
         })
     }
 
-    render(): ReactElement {
+    render() {
         let assignComponent = (component) =>
             (record) =>
                 Object.assign({ component: component }, record);
@@ -108,7 +108,7 @@ class ContactMethods extends React.Component {
         }
     }
 
-    renderContactMethod(record: Object, idx: number): ReactElement {
+    renderContactMethod(record: Object, idx: number) {
         Object.assign(record, {key: idx});
         return React.createElement(record.component, record);
     }

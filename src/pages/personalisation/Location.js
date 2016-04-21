@@ -209,7 +209,7 @@ class Location extends React.Component {
         });
     }
 
-    render(): ReactElement {
+    render() {
         return (
             <div className="Location">
                 <components.HeaderBar

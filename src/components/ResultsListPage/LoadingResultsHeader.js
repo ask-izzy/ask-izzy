@@ -43,7 +43,7 @@ const PersonalisationLink = ({pathname}: Object): ReactElement =>
 
 class LoadingResultsHeader extends React.Component {
 
-    render(): ReactElement {
+    render() {
         const {
             error,
             statusCode,

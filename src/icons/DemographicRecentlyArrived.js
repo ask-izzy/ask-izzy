@@ -10,7 +10,7 @@ export default class SvgIconDemographicRecentlyArrived extends React.Component {
         className: React.PropTypes.string,
     };
 
-    render(): ReactElement {
+    render() {
         const {className, ...rest} = this.props;
         const classes = classnames(
             "DemographicRecentlyArrivedIcon",

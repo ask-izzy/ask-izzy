@@ -21,7 +21,7 @@ export default class InputListItem extends React.Component {
         },
     };
 
-    render(): ReactElement {
+    render() {
         let {
             checkedIcon,
             uncheckedIcon,

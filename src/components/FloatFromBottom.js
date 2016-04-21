@@ -53,7 +53,7 @@ class FloatFromBottom extends React.Component {
         return this.state.containerHeight || 0;
     }
 
-    render(): ReactElement {
+    render() {
         return (
             <div
                 className={classnames(

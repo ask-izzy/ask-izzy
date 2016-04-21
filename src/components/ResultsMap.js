@@ -135,7 +135,7 @@ class ResultsMap extends React.Component {
         }
     }
 
-    render(): ReactElement {
+    render() {
         const selectedServices = this.state.selectedServices || [];
 
         return (
@@ -151,7 +151,7 @@ class ResultsMap extends React.Component {
         );
     }
 
-    renderMap(): ReactElement {
+    renderMap() {
         let selectedServices = this.state.selectedServices || [];
         let mapHeight = 0;
 
