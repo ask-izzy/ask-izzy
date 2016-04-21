@@ -3,6 +3,10 @@
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
 
+function specialist(query) {
+    return remove("community health").append(query);
+}
+
 export default class HealthSubcategories extends BaseQuestion {
     static title = "Health";
     static propTypes = BaseQuestion.propTypes;
@@ -12,12 +16,11 @@ export default class HealthSubcategories extends BaseQuestion {
         answers: {
             "Doctor or nurse": append("(general medical practitioners)")
                 .append("nurse"),
-            "Sexual health": append("(sexual health)"),
-            "Dentist": append("dentist"),
-            "Foot problems": append("podiatrist"),
-            "Eye care": append("optometrist"),
-            "Mental": append("psychologist")
-                .append("counselling"),
+            "Sexual health": specialist("sexual health"),
+            "Dentist": specialist("dentist"),
+            "Foot problems": specialist("podiatrist"),
+            "Eye care": specialist("optometrist"),
+            "Mental or emotional health": specialist("mental health"),
             "Children": remove("(community health)")
                 .append("health children"),
             "Maternal & child health": remove("(community health)")
