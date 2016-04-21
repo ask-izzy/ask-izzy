@@ -43,10 +43,10 @@
     "nodemon": "1.9.1",
     "optimist": "0.6.1",
     "phantomjs-prebuilt": "2.1.7",
-    "react": "0.14.7",
+    "react": "15.0.1",
     "react-document-title": "2.0.1",
-    "react-dom": "0.14.7",
-    "react-google-maps": "4.9.1",
+    "react-dom": "15.0.1",
+    "react-google-maps": "git+https://git@github.com/ask-izzy/react-google-maps.git",
     "react-mixin": "3.0.5",
     "react-router": "2.3.0",
     "sass-lint": "1.5.1",
@@ -62,6 +62,5 @@
     "webpack-dev-server": "1.14.1",
     "yadda": "0.17.4"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
