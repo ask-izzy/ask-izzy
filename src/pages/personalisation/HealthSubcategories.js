@@ -4,7 +4,7 @@ import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
 
 function specialist(query) {
-    return remove("community health").append(query);
+    return remove("(community health)").append(query);
 }
 
 export default class HealthSubcategories extends BaseQuestion {
