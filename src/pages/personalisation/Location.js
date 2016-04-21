@@ -137,7 +137,7 @@ class Location extends React.Component {
         suggest(input, this.state.locationCoords)
             .then(results => {
                 this.setState({
-                    autocompletions: results,
+                    autocompletions: Array.from(results),
                     autocompletion: AutocompleteState.NOT_SEARCHING,
                 });
             })

@@ -88,13 +88,10 @@ export async function guessSuburb(location: Position): Promise<string> {
             /* build a location name from the address components specified
              * in interestingComponent. We do this because we don't want
              * to show all the parts of Google's formatted_address */
-            let name = [
-                /*::`*/
-                for (component of geocodedLocation.address_components)
-                if (interestingComponent(component.types))
-                    component.long_name
-                /*::`*/
-            ].join(", ");
+            let name = geocodedLocation.address_components
+                .filter(({types}) => interestingComponent(types))
+                .map((component) => component.long_name)
+                .join(", ");
 
             return name;
         }

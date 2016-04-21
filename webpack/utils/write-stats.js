@@ -38,13 +38,10 @@ module.exports = function writeStats(stats: webpackStats) {
                     chunk = [chunk];
                 }
 
-                chunks = chunks.concat([
-                    /*::`*/
-                    for (chunkName of chunk)
-                    if (path.extname(chunkName) === "." + ext)
-                    publicPath + chunkName
-                    /*::`*/
-                ]);
+                chunks = chunks.concat(chunk
+                    .filter((name) => path.extname(name) === `.${ext}`)
+                    .map((name) => publicPath + name)
+                );
             }
         }
         return chunks;

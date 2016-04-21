@@ -50,6 +50,7 @@ type AutocompletePrediction = {
     description: string,
     place_id: string,
     types: Array<string>,
+    terms: Array<{value: string}>,
 };
 
 declare class AutocompleteService {

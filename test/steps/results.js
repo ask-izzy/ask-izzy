@@ -152,14 +152,10 @@ async function assertNoSuchResults(table: Array<Object>): Promise<void> {
 
     for (let row of table) {
         // Build a list of classes and text nodes that should match
-        const predicates = [
-            /*::`*/
-            for ([key, value] of _.pairs(row))
-            /*::`, function(key, value){*/
+        const predicates = _.pairs(row).map(([key, value]) =>
             `.//*[${matchClass(getCssClass(key))} and ` +
             `normalize-space(text()) = ${escapeXPathString(value)}]`
-            /*::}*/
-        ];
+        );
 
         // Find the ResultListItem that also matches all of these predicates
         const xpath = `//*[${matchClass("ResultListItem")} and ` +

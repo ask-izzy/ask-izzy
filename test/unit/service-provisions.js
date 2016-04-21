@@ -20,13 +20,9 @@ const tests = yaml.safeLoad(
 describe("Service Provisions", function() {
     tests.tests.forEach(test =>
         it(test.description, () => {
-            let provides = [
-                /*::`*/
-                for (provision of serviceProvisions)
-                if (provision.match(test.description))
-                provision.name
-                /*::`*/
-            ];
+            let provides = serviceProvisions
+                .filter((provision) => provision.match(test.description))
+                .map(({name}) => name)
 
             assert.deepEqual(provides, test.provides);
         })

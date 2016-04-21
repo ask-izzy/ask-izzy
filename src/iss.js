@@ -199,14 +199,14 @@ async function attachTransportTimes(
         return services;
     }
 
-    let formatPoint = (point) => `${point.lat},${point.lon}`;
+    let formatPoint = (point: issPoint) => `${point.lat},${point.lon}`;
     const maps = await Maps();
     let service: ?Service;
-    let travelTimes = await maps.travelTime([/*::`*/
-        for (service of services)
-        if (!service.Location().isConfidential())
-        formatPoint(service.location.point)
-    /*::`*/]);
+    let travelTimes = await maps.travelTime(services
+        .filter((service) => !service.Location().isConfidential())
+        // flow:disable isConfidential checks location.point
+        .map(({location}) => formatPoint(location.point))
+    );
 
     for (service of services) {
         if (!service.Location().isConfidential()) {
@@ -418,13 +418,10 @@ export class Service {
         }
 
         try {
-            this._serviceProvisions = [
-                /*::`*/
-                for (provision of serviceProvisions)
-                if (provision.match(this.description))
-                provision.name
-                /*::`*/
-            ];
+
+            this._serviceProvisions = serviceProvisions
+                .filter((provision) => provision.match(this.description))
+                .map(({name}) => name);
         } catch (error) {
             console.error("Failed to determine service provisions", error);
             this._serviceProvisions = [];
