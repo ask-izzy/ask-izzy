@@ -1,7 +1,11 @@
 /* @flow */
 
 import pauseToDebug from "./debug";
+import _ from "underscore";
 
+// This was originally needed because yadda only used
+// callbacks. Now that callback support has been added,
+// we still need it, to implement e.g. pause on error.
 function unpromisify(func: (...args: any) => Promise<void>): Function {
     function stripArgs(func) {
         return () => func();
@@ -11,7 +15,8 @@ function unpromisify(func: (...args: any) => Promise<void>): Function {
         // The last argument is a callback(error, result)
         // but there's no success value, so we just strip
         // all arguments on success.
-        const done = args.splice(args.length - 1, 1)[0];
+        const done = _.once(_(arguments).last());
+
         const errorHandler = function(error) {
             const report = () => done(error);
 
@@ -31,6 +36,8 @@ function unpromisify(func: (...args: any) => Promise<void>): Function {
         } catch (error) {
             errorHandler(error);
         }
+
+        return undefined;
     };
 }
 

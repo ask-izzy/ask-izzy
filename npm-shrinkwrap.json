@@ -6452,9 +6452,9 @@
       "resolved": "https://registry.npmjs.org/y18n/-/y18n-3.2.0.tgz"
     },
     "yadda": {
-      "version": "0.17.6",
-      "from": "yadda@0.17.6",
-      "resolved": "https://registry.npmjs.org/yadda/-/yadda-0.17.6.tgz"
+      "version": "0.17.4",
+      "from": "yadda@0.17.4",
+      "resolved": "https://registry.npmjs.org/yadda/-/yadda-0.17.4.tgz"
     },
     "yallist": {
       "version": "2.0.0",

@@ -110,7 +110,7 @@ async function assertNumSearchResults(
     target: string,
     location: string
 ): Promise<void> {
-    if (location) {
+    if (typeof location === "string") {
         // 3 params
         target = ` for ${target}`;
     } else {
