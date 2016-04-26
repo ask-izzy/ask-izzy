@@ -38,6 +38,8 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
     }
 
     componentDidMount(): void {
+        super.componentDidMount();
+
         if (this.refs.floatingDone &&
             this.refs.floatingDone.containerHeight) {
             this.setState({

@@ -18,6 +18,12 @@ async function deleteAnswers(): Promise<void> {
 }
 
 async function setLocation(location: string): Promise<void> {
+    if (!location.match(/, /)) {
+        throw new Error(
+            "Location must have suburb & state separated by ', '."
+        )
+    }
+
     storage.setLocation(location);
     storage.setCoordinates(null);
 }
