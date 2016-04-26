@@ -15,7 +15,9 @@ const GeoLocationState = {
 };
 
 class NotStartedGeolocation extends React.Component {
-    render(): ReactElement {
+    props: Object;
+    state: Object;
+    render() {
         return (
             <ButtonListItem
                 className="taller LocationButton"
@@ -36,7 +38,9 @@ class NotStartedGeolocation extends React.Component {
 }
 
 class RunningGeolocation extends React.Component {
-    render(): ReactElement {
+    props: Object;
+    state: Object;
+    render() {
         return (
             <ListItem
                 primaryText="Locating you..."
@@ -50,7 +54,9 @@ class RunningGeolocation extends React.Component {
 }
 
 class FinishedGeolocation extends React.Component {
-    render(): ReactElement {
+    props: Object;
+    state: Object;
+    render() {
         return (
             <ListItem
                 className="taller"
@@ -62,7 +68,9 @@ class FinishedGeolocation extends React.Component {
 }
 
 class FailedGeolocation extends React.Component {
-    render(): ReactElement {
+    props: Object;
+    state: Object;
+    render() {
         return (
             <ListItem
                 primaryText="Unable to get your location"
@@ -75,6 +83,8 @@ class FailedGeolocation extends React.Component {
 }
 
 class GeolocationButton extends React.Component {
+    props: Object;
+    state: Object;
     static sampleProps = {
         default: {},
     };
@@ -123,7 +133,7 @@ class GeolocationButton extends React.Component {
             });
     }
 
-    render(): ReactElement {
+    render() {
         if (this.state.geolocation == GeoLocationState.RUNNING) {
             return <RunningGeolocation />;
         } else if (this.state.geolocation == GeoLocationState.COMPLETE) {

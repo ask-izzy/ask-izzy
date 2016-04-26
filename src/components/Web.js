@@ -5,6 +5,8 @@ import icons from "../icons";
 import sendEvent from "../google-tag-manager";
 
 export default class Web extends React.Component {
+    props: Object;
+    state: Object;
 
     static sampleProps = {default: {url: "https://ExampleDomain.com/landingPage"}};
 
@@ -15,7 +17,7 @@ export default class Web extends React.Component {
         });
     }
 
-    render(): ReactElement {
+    render() {
         let url = URL.parse(this.props.url);
 
         return (

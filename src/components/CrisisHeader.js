@@ -3,8 +3,10 @@
 import React from "react";
 
 class CrisisHeader extends React.Component {
+    props: Object;
+    state: Object;
 
-    render(): ReactElement {
+    render() {
         return (
             <h3 className="CrisisHeader">
                 {this.props.plural ?

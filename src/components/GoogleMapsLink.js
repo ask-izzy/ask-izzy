@@ -5,6 +5,8 @@ import Location from "../iss/Location";
 import classnames from "classnames";
 
 class GoogleMapsLink extends React.Component {
+    props: Object;
+    state: Object;
 
     static sampleProps = {
         default: {
@@ -39,7 +41,7 @@ class GoogleMapsLink extends React.Component {
             }&daddr=${query}`;
     }
 
-    render(): ReactElement {
+    render() {
         const {
             className,
             children,

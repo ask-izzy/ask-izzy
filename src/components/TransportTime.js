@@ -10,6 +10,8 @@ import Location from "../iss/Location";
 import sendEvent from "../google-tag-manager";
 
 class TransportTime extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         compact: React.PropTypes.bool,
         location: React.PropTypes.object.isRequired,
@@ -45,7 +47,7 @@ class TransportTime extends React.Component {
         },
     };
 
-    render(): ?ReactElement {
+    render(): ?React$Element {
         if (!this.props.location.isConfidential()) {
             return this.renderPublic()
         } else {
@@ -53,7 +55,7 @@ class TransportTime extends React.Component {
         }
     }
 
-    renderPublic(): ReactElement {
+    renderPublic() {
         const {travelTime} = this.props.location;
 
         return (
@@ -90,7 +92,7 @@ class TransportTime extends React.Component {
         );
     }
 
-    renderDivider(): ?ReactElement {
+    renderDivider(): ?React$Element {
         if (!this.props.compact) {
             return (
                 <hr/>
@@ -110,7 +112,7 @@ class TransportTime extends React.Component {
         });
     }
 
-    renderDirections(): ReactElement {
+    renderDirections() {
         if (!this.props.compact) {
             return (
                 <div
@@ -124,7 +126,7 @@ class TransportTime extends React.Component {
         return <span />;
     }
 
-    renderSuburb(): ReactElement {
+    renderSuburb() {
         return (
             <span className="location">
                 {titleize(this.props.location.suburb)}

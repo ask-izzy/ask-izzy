@@ -11,7 +11,8 @@ import unpromisify from "../support/yadda-promise";
 import dictionary from "../support/dictionary";
 import storage from "../../src/storage";
 import Categories from "../../src/constants/categories";
-import {search, searchResults} from "../../src/iss";
+import {search} from "../../src/iss";
+import type {searchResults} from "../../src/iss";
 
 async function deleteAnswers(): Promise<void> {
     storage.clear();

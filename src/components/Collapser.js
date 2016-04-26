@@ -3,6 +3,8 @@ import React from "react";
 import classnames from "classnames";
 
 class Collapser extends React.Component {
+    props: Object;
+    state: Object;
 
     constructor(props: Object) {
         super(props);
@@ -41,7 +43,7 @@ class Collapser extends React.Component {
         }
     }
 
-    render(): ReactElement {
+    render() {
         return (
             <div
                 className={classnames(
@@ -61,7 +63,7 @@ class Collapser extends React.Component {
         );
     }
 
-    renderMessage(): ?ReactElement {
+    renderMessage(): ?React$Element {
         if (this.state.collapsed) {
             return (
                 <a

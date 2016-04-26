@@ -5,6 +5,8 @@ import components from "../components";
 import _s from "underscore.string";
 
 export default class StyleGuideItem extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         params: React.PropTypes.object,
     };
@@ -17,11 +19,11 @@ export default class StyleGuideItem extends React.Component {
         return this.props.params.componentName;
     }
 
-    getComponent(): React.Component {
+    getComponent(): ReactClass<any> {
         return components[this.getComponentName()];
     }
 
-    render(): ReactElement {
+    render() {
         let Component = this.getComponent();
 
         if (!Component) {

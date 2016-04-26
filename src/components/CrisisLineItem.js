@@ -34,6 +34,8 @@ const crisisDescriptions = {
 
 
 class CrisisLineItem extends React.Component {
+    props: Object;
+    state: Object;
 
     static displayName = "CrisisLineItem";
 
@@ -45,7 +47,7 @@ class CrisisLineItem extends React.Component {
         object: new iss.Service(fixtures.domesticviolence),
     }};
 
-    render(): ReactElement {
+    render() {
         const {
             object,
         } = this.props;

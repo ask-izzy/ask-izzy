@@ -6,6 +6,8 @@ import components from "../components";
 import icons from "../icons";
 
 class AppBar extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         title: React.PropTypes.string.isRequired,
         onBackTouchTap: React.PropTypes.func.isRequired,
@@ -16,7 +18,7 @@ class AppBar extends React.Component {
         onBackTouchTap: function() {},
     }};
 
-    render(): ReactElement {
+    render() {
         return (
             <div className="AppBarContainer">
                 <div className="AppBar">
@@ -29,7 +31,7 @@ class AppBar extends React.Component {
         );
     }
 
-    renderBackButton(): ?ReactElement {
+    renderBackButton(): ?React$Element {
         return (
             <components.IconButton
                 className="BackButton button-container"

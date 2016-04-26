@@ -6,6 +6,8 @@ import sendEvent from "../google-tag-manager";
 import icons from "../icons";
 
 class Phone extends React.Component {
+    props: Object;
+    state: Object;
 
     static sampleProps = {default: {
         "comment": "Here is a phone number with a long comment" +
@@ -26,7 +28,7 @@ class Phone extends React.Component {
         });
     }
 
-    render(): ReactElement {
+    render() {
         return (
             <div className="Contact Phone">
                 <span className="kind">

@@ -4,11 +4,13 @@ import React from "react";
 import { Link } from "react-router";
 
 class BrandedFooter extends React.Component {
+    props: Object;
+    state: Object;
     static sampleProps = {
         default: {},
     };
 
-    render(): ReactElement {
+    render() {
         return (
             <footer className="branding-footer-container">
                 <div>

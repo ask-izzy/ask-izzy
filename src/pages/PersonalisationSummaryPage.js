@@ -49,7 +49,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         }
     }
 
-    render(): ReactElement {
+    render() {
         const Subpage = this.currentComponent;
         const backMessage = Subpage ? "Answers" : this.title;
         const title = Subpage ? Subpage.title : "Answers";

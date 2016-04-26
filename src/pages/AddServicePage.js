@@ -8,6 +8,10 @@ import components from "../components";
 declare var ISS_URL: string;
 
 class AddServicePage extends React.Component {
+    props: Object;
+    state: Object;
+    issUrl: any; // Flowtype core declares url.parse(): any
+    handleMessage: Function;
 
     constructor(props: Object): void {
         super(props);
@@ -17,6 +21,7 @@ class AddServicePage extends React.Component {
         };
 
         this.handleMessage = this.handleMessage.bind(this);
+        this.issUrl = "";
     }
 
     componentDidMount(): void {
@@ -28,9 +33,7 @@ class AddServicePage extends React.Component {
     componentWillMount(): void {
         if (ISS_URL) {
             this.issUrl = url.parse(ISS_URL);
-            this.issUrl.auth = null;
-        } else {
-            this.issUrl = "";
+            delete this.issUrl;
         }
     }
 
@@ -65,7 +68,7 @@ class AddServicePage extends React.Component {
         }
     }
 
-    render(): ReactElement {
+    render() {
         let history = this.props.history;
 
         let body = this.state.isFormDone ? this.renderSuccessMessage()
@@ -85,7 +88,7 @@ class AddServicePage extends React.Component {
         );
     }
 
-    renderSuccessMessage(): ReactElement {
+    renderSuccessMessage() {
         return (
             <div>
                 <p>Thank you. The information you provided may be adjusted for
@@ -95,7 +98,7 @@ class AddServicePage extends React.Component {
         );
     }
 
-    renderForm(): ReactElement {
+    renderForm() {
         let issUrl = url.format(this.issUrl);
 
         return (

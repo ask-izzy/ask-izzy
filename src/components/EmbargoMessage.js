@@ -4,8 +4,10 @@ import React from "react";
 import moment from "moment";
 
 export default class EmbargoMessage extends React.Component {
+    props: Object;
+    state: Object;
 
-    render(): ReactElement {
+    render() {
         if (moment().isAfter(moment("2016-01-28T23"))) {
             return (
                 <p className="branding-copy EmbargoMessage" />

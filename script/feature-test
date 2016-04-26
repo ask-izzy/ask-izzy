@@ -13,4 +13,4 @@ ISS_URL="http://localhost:5000/" ./script/recreate-dev-env-file
 
 # we want this quite high as it makes debugging the tests easier.
 INTERACTIVE_TIMEOUT="80000"
-mocha --compilers js:babel/register --timeout "$INTERACTIVE_TIMEOUT" test/yadda.js $@
+mocha --compilers js:babel-core/register --timeout "$INTERACTIVE_TIMEOUT" test/yadda.js $@

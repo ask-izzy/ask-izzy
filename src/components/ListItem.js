@@ -4,6 +4,8 @@ import React from "react";
 import classnames from "classnames";
 
 export default class ListItem extends React.Component {
+    props: Object;
+    state: Object;
 
     static propTypes = {
         rootElement: React.PropTypes.any,
@@ -28,7 +30,7 @@ export default class ListItem extends React.Component {
         },
     };
 
-    render(): ReactElement {
+    render() {
         let {
             rootElement,
             className,

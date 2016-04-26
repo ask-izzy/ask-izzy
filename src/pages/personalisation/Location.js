@@ -23,6 +23,8 @@ const AutocompleteState = {
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Location extends React.Component {
+    props: Object;
+    state: Object;
 
     static propTypes = {
         name: React.PropTypes.string.isRequired,
@@ -137,7 +139,7 @@ class Location extends React.Component {
         suggest(input, this.state.locationCoords)
             .then(results => {
                 this.setState({
-                    autocompletions: results,
+                    autocompletions: Array.from(results),
                     autocompletion: AutocompleteState.NOT_SEARCHING,
                 });
             })
@@ -209,7 +211,7 @@ class Location extends React.Component {
         });
     }
 
-    render(): ReactElement {
+    render() {
         return (
             <div className="Location">
                 <components.HeaderBar
@@ -288,7 +290,7 @@ class Location extends React.Component {
         );
     }
 
-    renderDoneButton(): ?ReactElement {
+    renderDoneButton(): ?React$Element {
         return (
             <div>
                 <div className="done-button">

@@ -6,11 +6,13 @@ import React from "react";
 import classnames from "classnames";
 
 export default class SvgIconMoney extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         className: React.PropTypes.string,
     };
 
-    render(): ReactElement {
+    render() {
         const {className, ...rest} = this.props;
         const classes = classnames(
             "MoneyIcon",

@@ -9,11 +9,6 @@ export type LocationCompletion = {
     "state": string,
 }
 
-type GoogleCompletion = {
-    "types": Array<string>,
-    "terms": Array<{value: string}>,
-}
-
 /**
  * Take a search string and (optionally) the user's current location
  * and return a promise for an array of possible matches.
@@ -25,7 +20,7 @@ type GoogleCompletion = {
 export default async function suggest(
     input: string,
     location: ?Object,
-): Promise<Array<LocationCompletion>> {
+): Promise<Iterable<LocationCompletion>> {
     const maps = await Maps();
     let request: AutocompletionRequest = {
         input: input,
@@ -45,17 +40,11 @@ export default async function suggest(
 
     let completions = await maps.autocompletePlaces(request);
 
-    // flow:disable no generators
-    return [
-        /*::{_:`*/
-        for (completion of injectSuffixes(filterCompletions(completions)))
-            completion
-        /*::`}*/
-    ];
+    return injectSuffixes(filterCompletions(completions))
 }
 
 function *filterCompletions(
-    completions: Iterable<GoogleCompletion>
+    completions: Iterable<AutocompletePrediction>
 ): Iterable<LocationCompletion> {
     for (const completion of completions) {
         if (_.contains(completion.types, "locality")) {
@@ -97,13 +86,7 @@ const majorCitySuffixes = {
 function *injectSuffixes(
     completions: Iterable<LocationCompletion>
 ): Iterable<LocationCompletion> {
-    // flow:disable no generators
-    const completionArray: Array<LocationCompletion> = [
-        /*::{_:`*/
-        for (completion of completions)
-            completion
-        /*::`}*/
-    ];
+    const completionArray = Array.from(completions);
 
     for (const completion of completionArray) {
         const suffix = majorCitySuffixes[

@@ -77,7 +77,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
      *
      * An array of components required to personalise this category.
      */
-    get personalisationComponents(): Array<ReactClass> {
+    get personalisationComponents(): Array<ReactClass<any>> {
         return [Intro].concat(super.personalisationComponents);
     }
 
@@ -91,7 +91,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         }
     }
 
-    render(): ReactElement {
+    render() {
         const Subpage = this.currentComponent;
         const prevPage = this.prevSubPage()
         const backMessage = prevPage ?

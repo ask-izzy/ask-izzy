@@ -38,6 +38,8 @@ function fixture(
 }
 
 class OpeningTimes extends React.Component {
+    props: Object;
+    state: Object;
 
     static propTypes = {
         object: React.PropTypes.object.isRequired,
@@ -108,7 +110,7 @@ class OpeningTimes extends React.Component {
         }]),
     };
 
-    render(): ReactElement {
+    render() {
         let open = this.props.object.now_open;
         let renderMethod: ?Function;
 
@@ -137,7 +139,7 @@ class OpeningTimes extends React.Component {
     /*
      * Render the opening hours if ISS says it's open
      */
-    renderOpen(): ReactElement {
+    renderOpen() {
         return (
             <span className="until">
                 <span className="open">
@@ -154,7 +156,7 @@ class OpeningTimes extends React.Component {
     /*
      * Render the opening hours if ISS says it's closed
      */
-    renderClosed(): ReactElement {
+    renderClosed() {
         return (
             <span className="until">
                 <span className="closed">
@@ -172,7 +174,7 @@ class OpeningTimes extends React.Component {
      * Render the opening hours if ISS isn't sure whether
      * the place is currently open.
      */
-    renderUnsure(): ReactElement {
+    renderUnsure() {
         const openTime = this.props.object.nextOpeningTimes;
 
         if (!openTime) {

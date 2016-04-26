@@ -3,6 +3,8 @@
 import React from "react";
 
 class HeaderBar extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         primaryText: React.PropTypes.node.isRequired,
         secondaryText: React.PropTypes.node,
@@ -15,7 +17,7 @@ class HeaderBar extends React.Component {
         secondaryText: "Secondary Text",
     }};
 
-    render(): ReactElement {
+    render() {
         return (
             <div className="HeaderBar">
                 <div className="primary">
@@ -27,7 +29,7 @@ class HeaderBar extends React.Component {
         );
     }
 
-    renderSecondaryText(): ?ReactElement {
+    renderSecondaryText(): ?React$Element {
         if (this.props.secondaryText) {
             return (
                 <div className="secondary">

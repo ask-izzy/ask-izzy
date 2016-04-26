@@ -10,6 +10,8 @@ import ResultsList from "./ResultsList";
 import storage from "../storage";
 
 class ResultsMap extends React.Component {
+    props: Object;
+    state: Object;
 
     static contextTypes = {
         router: React.PropTypes.object.isRequired,
@@ -135,7 +137,7 @@ class ResultsMap extends React.Component {
         }
     }
 
-    render(): ReactElement {
+    render() {
         const selectedServices = this.state.selectedServices || [];
 
         return (
@@ -151,7 +153,7 @@ class ResultsMap extends React.Component {
         );
     }
 
-    renderMap(): ReactElement {
+    renderMap() {
         let selectedServices = this.state.selectedServices || [];
         let mapHeight = 0;
 

@@ -22,7 +22,9 @@ export default class Gender extends BaseQuestion {
         },
     };
 
-    static summaryLabel = "How do you identify?";
+    static get summaryLabel(): string {
+        return "How do you identify?";
+    }
 
     static headingValue(): string {
         switch (this.answer) {

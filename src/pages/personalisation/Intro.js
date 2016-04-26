@@ -9,6 +9,8 @@ import * as iss from "../../iss";
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Intro extends React.Component {
+    props: Object;
+    state: Object;
 
     static defaultProps = {
         name: "intro",
@@ -44,7 +46,7 @@ class Intro extends React.Component {
         }
     }
 
-    render(): ReactElement {
+    render() {
         return (
             <div>
                 <components.HeaderBar
@@ -66,7 +68,7 @@ class Intro extends React.Component {
         );
     }
 
-    renderDoneButton(): ?ReactElement {
+    renderDoneButton(): ?React$Element {
         return (
             <div>
                 <div className="done-button">

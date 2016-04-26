@@ -18,6 +18,11 @@ import { append, Search } from "../../iss/Search";
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class BaseQuestion extends React.Component {
+    props: Object;
+    state: Object;
+
+    static defaultProps: Object = {};
+
     static propTypes = {
         name: React.PropTypes.string.isRequired,
         /* The question asked of the user */
@@ -139,7 +144,9 @@ class BaseQuestion extends React.Component {
      */
     /*::__(){`*/@debounce(500)/*::`}*/
     triggerNext(): void {
-        this.nextStep();
+        if (typeof this.nextStep === "function") {
+            this.nextStep();
+        }
     }
 
     onNextStep(): void {
@@ -151,7 +158,7 @@ class BaseQuestion extends React.Component {
         this.triggerNext();
     }
 
-    render(): ReactElement {
+    render() {
         const selected = this.selected;
 
         return (
@@ -188,7 +195,7 @@ class BaseQuestion extends React.Component {
         );
     }
 
-    renderDoneButton(): ?ReactElement {
+    renderDoneButton(): ?React$Element {
         if (!this.props.suppressDoneButton) {
             return (
                 <div>

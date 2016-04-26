@@ -5,6 +5,8 @@ import DocumentTitle from "react-document-title";
 import { makeTitle } from "../routes";
 
 export default class BasePage extends React.Component {
+    props: Object;
+    state: Object;
 
     static childContextTypes = {};
 
@@ -12,7 +14,7 @@ export default class BasePage extends React.Component {
         return {};
     }
 
-    render(): ReactElement {
+    render() {
         return (
             <div className="BasePage">
                 <DocumentTitle

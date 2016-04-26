@@ -8,6 +8,8 @@ import components from "../components";
 import Loading from "../icons/Loading";
 
 class ServicePage extends React.Component {
+    props: Object;
+    state: Object;
 
     static propTypes = {
         params: React.PropTypes.object,
@@ -56,7 +58,7 @@ class ServicePage extends React.Component {
 
     }
 
-    render(): ReactElement {
+    render() {
         let {
             object,
             error,

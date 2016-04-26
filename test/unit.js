@@ -3,6 +3,7 @@
 /* eslint-env node, mocha */
 /* eslint-disable prefer-arrow-callback */
 
+import 'babel-polyfill';
 import Yadda from "yadda";
 
 describe("Unit tests", function() {

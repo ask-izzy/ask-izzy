@@ -5,6 +5,8 @@ import ScreenReader from "./ScreenReader";
 import Location from "../iss/Location";
 
 class Address extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         location: React.PropTypes.object,
     };
@@ -35,7 +37,7 @@ class Address extends React.Component {
         },
     };
 
-    render(): ReactElement {
+    render() {
         let location = this.props.location;
 
         return (

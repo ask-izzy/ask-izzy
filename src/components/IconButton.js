@@ -4,6 +4,8 @@ import React from "react";
 import classnames from "classnames";
 
 export default class IconButton extends React.Component {
+    props: Object;
+    state: Object;
     static propTypes = {
         onClick: React.PropTypes.func,
     };
@@ -14,7 +16,7 @@ export default class IconButton extends React.Component {
         },
     };
 
-    render(): ReactElement {
+    render() {
         const {
             className,
             onClick,

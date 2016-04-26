@@ -8,10 +8,12 @@ import CategoryListItem from "./CategoryListItem";
 import icons from "../icons";
 
 class NavBar extends React.Component {
+    props: Object;
+    state: Object;
 
     static sampleProps = {default: {}};
 
-    render(): ReactElement {
+    render() {
         const subject = "Ask Izzy - Feedback";
         const mailLink = `mailto:support@askizzy.org.au?subject=${subject}`;
 

@@ -165,7 +165,11 @@ class ResultsPage extends BaseCategoriesPage {
         }
     }
 
-    render(): ReactElement {
+    component(): ReactClass<any> {
+        throw new Error("Override this class to implement `component`");
+    }
+
+    render() {
         const Component = this.component();
 
         return (
@@ -194,7 +198,7 @@ class ResultsPage extends BaseCategoriesPage {
         );
     }
 
-    renderLoadMore(): ?ReactElement {
+    renderLoadMore(): ?React$Element {
         if (this.state.meta && this.state.meta.next) {
             return (
                 <ButtonListItem
@@ -214,13 +218,18 @@ class ResultsPage extends BaseCategoriesPage {
         }
     }
 
+    backButtonMessage(): string {
+        // FIXME: Should be category name if no marker is selected
+        return ""
+    }
+
 }
 
 export default ResultsPage;
 
 export class ResultsPageListing extends ResultsPage {
 
-    component(): ReactClass {
+    component(): ReactClass<any> {
         return ResultsListPage;
     }
 
@@ -231,12 +240,7 @@ export class ResultsPageListing extends ResultsPage {
 
 export class ResultsPageMap extends ResultsPage {
 
-    component(): ReactClass {
+    component(): ReactClass<any> {
         return ResultsMap;
-    }
-
-    backButtonMessage(): string {
-        // FIXME: Should be category name if no marker is selected
-        return ""
     }
 }
