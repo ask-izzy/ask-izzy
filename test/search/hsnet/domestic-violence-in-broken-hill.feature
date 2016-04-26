@@ -23,7 +23,7 @@ Feature: Search for housing services
             name: NSW Community Services (formerly DoCS), NSW Domestic Violence Line
         - id: 539077
           site:
-            name: Wilcannia Women's Refuge
+            name: Wilcannia Women & Children's Safe House
         ----------------------------------
         And my results for housing would ideally contain
         ----------------------------------
