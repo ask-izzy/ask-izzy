@@ -11,6 +11,9 @@ Feature: Search for housing services
         And I have skipped setting my gender
         Then my results for housing should contain
         ----------------------------------
+        - id: 878723
+          site:
+            name: Queensland Department of Housing & Public Works, Housing Service Centre, Chermside
         - id: 1021720
           crisis: true
           site:
@@ -33,10 +36,6 @@ Feature: Search for housing services
         - id: 770140
           site:
             name: Integrated Family & Youth Service
-        - id: 878723
-          site:
-            name: Queensland Department of Housing & Public Works, Housing Service Centre, Chermside
-
         ----------------------------------
 
     Scenario: Adult man in Geelong
