@@ -9,8 +9,14 @@ import storage from "../storage";
 
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
+    // static props need to be sync-ed with the superclass to support ie10.
     static contextTypes = {
         router: React.PropTypes.object.isRequired,
+    };
+
+    // static props need to be sync-ed with the superclass to support ie10.
+    static childContextTypes = {
+        controller: React.PropTypes.instanceOf(BasePersonalisationPage),
     };
 
     constructor(props: Object) {

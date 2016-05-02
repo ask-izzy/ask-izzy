@@ -228,6 +228,10 @@ class ResultsPage extends BaseCategoriesPage {
 export default ResultsPage;
 
 export class ResultsPageListing extends ResultsPage {
+    // static props need to be sync-ed with the superclass to support ie10.
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
 
     component(): ReactClass<any> {
         return ResultsListPage;
@@ -239,6 +243,10 @@ export class ResultsPageListing extends ResultsPage {
 }
 
 export class ResultsPageMap extends ResultsPage {
+    // static props need to be sync-ed with the superclass to support ie10.
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
 
     component(): ReactClass<any> {
         return ResultsMap;

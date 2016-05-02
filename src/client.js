@@ -9,6 +9,22 @@ import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
 
+// Polyfill for ie10
+/* eslint-disable no-proto */
+if (!(Object.setPrototypeOf || {}.__proto__)) {
+    let nativeGetPrototypeOf = Object.getPrototypeOf;
+
+    // flow:disable this ie10 does not conform to this rule
+    Object.getPrototypeOf = function(object) {
+        /* eslint-disable no-proto */
+        if (object.__proto__) {
+            return object.__proto__;
+        } else {
+            return nativeGetPrototypeOf.call(Object, object);
+        }
+    }
+}
+
 window.searchTest = searchTest;
 window.categories = categories;
 

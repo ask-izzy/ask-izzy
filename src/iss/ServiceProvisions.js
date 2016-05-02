@@ -67,7 +67,9 @@ class Keywords extends RegexpForm {
         )
             .join("[^.]*");
 
-        super(joinedForm);
+        super(new RegExp(joinedForm, "i"))
+        // ie10 does not set this
+        this.form = new RegExp(joinedForm, "i");
 
         this.ignoreReferrals = !forms.includes(referralsRegexp)
     }
