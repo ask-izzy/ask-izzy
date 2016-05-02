@@ -35,17 +35,6 @@ class BaseQuestion extends React.Component {
         suppressDoneButton: React.PropTypes.bool,
     };
 
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-            selected: null, // set when the user makes a choice
-        };
-    }
-
-    get selected(): string {
-        return this.state.selected || storage.getItem(this.props.name) || "";
-    }
-
     static get summaryLabel(): string {
         return this.defaultProps.question;
     }
@@ -117,6 +106,26 @@ class BaseQuestion extends React.Component {
     }
 
     /**
+     * Determines whether or not to show the question.
+     *
+     * @returns {boolean} true if we should show this question.
+     */
+    static showQuestion(): boolean {
+        return true;
+    }
+
+    constructor(props: Object) {
+        super(props);
+        this.state = {
+            selected: null, // set when the user makes a choice
+        };
+    }
+
+    get selected(): string {
+        return this.state.selected || storage.getItem(this.props.name) || "";
+    }
+
+    /**
      * Return the answers from the answers property element.
      *
      * @returns {Array<string>} an array of the valid answers
@@ -128,15 +137,6 @@ class BaseQuestion extends React.Component {
         } else {
             return Object.keys(this.props.answers);
         }
-    }
-
-    /**
-     * Determines whether or not to show the question.
-     *
-     * @returns {boolean} true if we should show this question.
-     */
-    static showQuestion(): boolean {
-        return true;
     }
 
     /**
