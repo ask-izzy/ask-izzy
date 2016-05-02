@@ -33,7 +33,7 @@ class AddServicePage extends React.Component {
     componentWillMount(): void {
         if (ISS_URL) {
             this.issUrl = url.parse(ISS_URL);
-            delete this.issUrl;
+            delete this.issUrl.auth;
         }
     }
 
