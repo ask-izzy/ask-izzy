@@ -29,7 +29,7 @@
     "eslint-plugin-react": "5.0.1",
     "express": "4.13.4",
     "extract-text-webpack-plugin": "1.0.1",
-    "flow-bin": "0.23.0",
+    "flow-bin": "0.24.0",
     "has-geolocation": "1.0.1",
     "history": "2.1.0",
     "js-yaml": "3.6.0",
