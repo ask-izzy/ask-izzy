@@ -58,7 +58,7 @@ if which parallel > /dev/null ; then
         'check "jsonlint package.json > /dev/null"' \
         'check "eslint src/ test/ fixtures/ webpack/"' \
         'check "sass-lint -v"' \
-        'check "flow"' \
+        'check "flow check"' \
 
 else
     (./node_modules/.bin/flow start &>/dev/null) & # Pre-start flow server
