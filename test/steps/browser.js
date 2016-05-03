@@ -68,8 +68,9 @@ module.exports.documentReady = function documentReady(
     driver: Webdriver.WebDriver
 ): Promise<boolean> {
     return driver.executeScript(() =>
-        ((!window.xhrCount) || (window.xhrCount() == 0)) &&
-        (document.readyState == "complete")
+        (document.readyState == "complete") &&
+        (window.xhrCount) &&
+        (window.xhrCount() == 0)
     );
 };
 
