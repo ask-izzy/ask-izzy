@@ -13,6 +13,4 @@ export default function checkInactive(): void {
         // Don't let this break anything.
         console.log(error)
     }
-
-
 }
