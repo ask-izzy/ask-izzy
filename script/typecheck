@@ -50,7 +50,7 @@ echo "Good"
 
 export -f checkPackageVersions
 
-if [ -z ${CI:-} ] && which parallel > /dev/null ; then
+if which parallel > /dev/null ; then
     export SHELL=/bin/bash
     parallel ::: \
         checkFlowDefs \
@@ -58,7 +58,7 @@ if [ -z ${CI:-} ] && which parallel > /dev/null ; then
         'check "jsonlint package.json > /dev/null"' \
         'check "eslint src/ test/ fixtures/ webpack/"' \
         'check "sass-lint -v"' \
-        'check "flow check --color always --show-all-errors"' \
+        'check "flow"' \
 
 else
     (./node_modules/.bin/flow start &>/dev/null) & # Pre-start flow server
