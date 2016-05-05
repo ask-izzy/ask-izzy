@@ -30,19 +30,11 @@ describe("Compose personalisation search terms", function() {
         };
 
         request = require("../../src/pages/personalisation/Age").default
-            .getSearchForAnswer(request, "25 or younger");
+            .getSearchForAnswer(request, "18 to 25");
         assert.deepEqual(request, {
             q: "crisis accommodation",
-            age_groups: [
+            age_group: [
                 "unspecified",
-                "prenatal",
-                "baby",
-                "toddler",
-                "preschool",
-                "schoolage",
-                "earlyadolescent",
-                "midadolescent",
-                "lateadolescent",
                 "youngadult",
             ],
         });
@@ -60,20 +52,12 @@ describe("Compose personalisation search terms", function() {
         }
 
         request = require("../../src/pages/personalisation/Age").default
-            .getSearchForAnswer(request, "25 or younger");
+            .getSearchForAnswer(request, "18 to 25");
         assert.deepEqual(request, {
             q: "crisis accommodation",
             client_gender: ["m", "u"],
-            age_groups: [
+            age_group: [
                 "unspecified",
-                "prenatal",
-                "baby",
-                "toddler",
-                "preschool",
-                "schoolage",
-                "earlyadolescent",
-                "midadolescent",
-                "lateadolescent",
                 "youngadult",
             ],
         });

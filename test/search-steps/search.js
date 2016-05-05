@@ -81,18 +81,34 @@ async function setSkipped(property: string): Promise<void> {
 }
 
 async function setAge(age: number): Promise<void> {
-    let description = "25 or younger";
+    let description = "0 to 5";
+
+    if (age >= 6) {
+        description = "6 to 12";
+    }
+
+    if (age >= 13) {
+        description = "13 to 15";
+    }
+
+    if (age >= 16) {
+        description = "16 to 17";
+    }
+
+    if (age >= 18) {
+        description = "18 to 25";
+    }
 
     if (age >= 26) {
-        description = "26 to 39";
+        description = "26 to 40";
     }
 
-    if (age >= 40) {
-        description = "40 to 54";
+    if (age >= 41) {
+        description = "41 to 55";
     }
 
-    if (age >= 55) {
-        description = "55 to 64";
+    if (age >= 56) {
+        description = "56 to 65";
     }
 
     if (age >= 65) {

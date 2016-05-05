@@ -39,9 +39,9 @@ Feature: History navigation
         When I click on "Male"
         Then I should see "How old are you?"
 
-        When I click on "25 or younger"
+        When I click on "18 to 25"
 
-        Then I should see 3 search results for "men aged 25 or younger" in "Melbourne, VIC"
+        Then I should see 3 search results for "men aged 18 to 25" in "Melbourne, VIC"
         And I should see "Housing"
         And I should be at /category/housing/in/Melbourne-VIC/
         And I should see the results
@@ -62,7 +62,7 @@ Feature: History navigation
 
         Then I should be at /category/housing/in/Melbourne-VIC/
 
-        Then I should see 3 search results for "men aged 25 or younger" in "Melbourne, VIC"
+        Then I should see 3 search results for "men aged 18 to 25" in "Melbourne, VIC"
 
         When I click back from the browser UI
         Then I should see "How old are you?"
