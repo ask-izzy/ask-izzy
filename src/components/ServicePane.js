@@ -47,6 +47,14 @@ export default class ServicePane extends React.Component {
         this.setState({siblings: response.objects});
     }
 
+    recordAlsoAtThisLocation(): void {
+        sendEvent({
+            event: "alsoAtThisLocation",
+            listingName: this.name,
+            crisis: this.crisis
+        });
+    }
+
     recordSuggestChange(): void {
         sendEvent({
             event: "suggestServiceChange",
@@ -172,6 +180,7 @@ export default class ServicePane extends React.Component {
                             className="plain-text"
                             to={`/service/${service.slug}`}
                             key={index}
+                            onClick={this.recordAlsoAtThisLocation.bind(service)}
                             primaryText={service.name}
                             secondaryText={service.shortDescription[0]}
                             rightIcon={<icons.Chevron />}
