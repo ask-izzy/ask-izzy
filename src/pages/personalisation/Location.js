@@ -11,7 +11,7 @@ import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
-import { remove } from "../../iss/Search";
+import { multiSearch } from "../../iss/Search";
 import * as iss from "../../iss";
 import suggest from "../../locationSuggestions";
 import type { LocationCompletion } from "../../locationSuggestions";
@@ -93,9 +93,7 @@ class Location extends React.Component {
         if (this.shouldInjectAccessPoints() &&
             request.service_type &&
             (request.service_type.indexOf("housing") > -1)) {
-            request = remove({
-                service_type: ["housing"],
-            }).multiSearch(
+            request = multiSearch(
                 {
                     service_type: ["Homelessness Access Point"],
                     catchment: "true",
