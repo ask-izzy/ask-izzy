@@ -47,7 +47,7 @@ class ResultListItem extends React.Component {
             event: "listing",
             listingName: this.props.object.name,
             crisis: this.props.object.crisis
-        })
+        });
     }
 
     render() {

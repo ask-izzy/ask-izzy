@@ -52,7 +52,7 @@ export default class ServicePane extends React.Component {
             event: "alsoAtThisLocation",
             listingName: this.name,
             crisis: this.crisis
-        })
+        });
     }
 
     recordSuggestChange(): void {
