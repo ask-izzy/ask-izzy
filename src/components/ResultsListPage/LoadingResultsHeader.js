@@ -10,6 +10,7 @@ import Gender from "../../pages/personalisation/Gender";
 import Age from "../../pages/personalisation/Age";
 import Location from "../../pages/personalisation/Location";
 import storage from "../../storage";
+import sendEvent from "../../google-tag-manager";
 
 const HomeLink = (): React$Element =>
     <Link
@@ -37,6 +38,7 @@ const PersonalisationLink = ({pathname}: Object): React$Element =>
     <Link
         className="change-personalisation"
         to={`${trailingSlash(pathname)}personalise/summary`}
+        onClick={sendEvent.bind(null, {event: "changeAnswers"})}
     >
         Change your answers
     </Link>;
