@@ -13,6 +13,7 @@ import ContactMethods from "./components/ContactMethods";
 import CrisisHeader from "./components/CrisisHeader";
 import CrisisLineItem from "./components/CrisisLineItem";
 import DebugContainer from "./components/DebugContainer";
+import DebugPersonalisation from "./components/DebugPersonalisation";
 import DebugQueryScore from "./components/DebugQueryScore";
 import DebugSearch from "./components/DebugSearch";
 import Eligibility from "./components/Eligibility";
@@ -54,6 +55,7 @@ export default {
     CrisisHeader: CrisisHeader,
     CrisisLineItem: CrisisLineItem,
     DebugContainer: DebugContainer,
+    DebugPersonalisation: DebugPersonalisation,
     DebugQueryScore: DebugQueryScore,
     DebugSearch: DebugSearch,
     Eligibility: Eligibility,

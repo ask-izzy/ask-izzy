@@ -71,9 +71,15 @@ class CrisisLineItem extends React.Component {
                         crisisDescriptions[object.id] &&
                         crisisDescriptions[object.id](object)
                     }
-                    <DebugContainer>
-                        <DebugQueryScore expl={object._explanation} />
+
+                    <DebugContainer message="ISS Object">
+                        <pre>{JSON.stringify(object, null, 4)}</pre>
                     </DebugContainer>
+                    {object._explanation &&
+                        <DebugContainer message="Query score">
+                            <DebugQueryScore expl={object._explanation} />
+                        </DebugContainer>
+                    }
                 </div>
             );
         }

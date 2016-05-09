@@ -12,6 +12,7 @@ import AppBar from "../components/AppBar";
 import ButtonListItem from "../components/ButtonListItem";
 import ResultsMap from "../components/ResultsMap";
 import DebugContainer from "../components/DebugContainer";
+import DebugPersonalisation from "../components/DebugPersonalisation";
 import DebugSearch from "../components/DebugSearch";
 import ResultsListPage from "./ResultsListPage";
 
@@ -179,7 +180,13 @@ class ResultsPage extends BaseCategoriesPage {
                     backMessage={this.backButtonMessage()}
                     onBackTouchTap={this.onBackClick.bind(this)}
                 />
-                <DebugContainer>
+                <DebugContainer message="Debug personalisation">
+                    <DebugPersonalisation
+                        search={this.search}
+                        items={this.personalisationComponents}
+                    />
+                </DebugContainer>
+                <DebugContainer message="ISS Parameters">
                     <DebugSearch search={this.issParams()} />
                 </DebugContainer>
 

@@ -2,6 +2,7 @@
 
 import React from "react";
 import storage from "../storage";
+import Collapser from "./Collapser";
 
 class DebugContainer extends React.Component {
     props: Object;
@@ -31,7 +32,9 @@ class DebugContainer extends React.Component {
 
         return (
             <div className="DebugContainer">
-                {this.props.children}
+                <Collapser message={this.props.message}>
+                    {this.props.children}
+                </Collapser>
             </div>
         );
     }
