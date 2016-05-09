@@ -34,7 +34,7 @@ module.exports = (function() {
                unpromisify(setDemographics))
         .given("my gender is $STRING", unpromisify(setGender))
         .given("I am 17 years old",
-               unpromisify(_.partial(setAgeTo, "18 to 25")))
+               unpromisify(_.partial(setAgeTo, "18 to 26")))
         .given("I am 27 years old",
                unpromisify(_.partial(setAgeTo, "26 to 64")))
         .given("I am 77 years old",

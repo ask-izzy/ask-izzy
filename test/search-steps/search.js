@@ -13,6 +13,7 @@ import storage from "../../src/storage";
 import Categories from "../../src/constants/categories";
 import {search} from "../../src/iss";
 import type {searchResults} from "../../src/iss";
+import Age from "../../src/pages/personalisation/Age";
 
 async function deleteAnswers(): Promise<void> {
     storage.clear();
@@ -80,42 +81,21 @@ async function setSkipped(property: string): Promise<void> {
     storage.setItem(property, "(skipped)");
 }
 
+function ageBracket(age: number): string {
+    const answers = Object.keys(Age.defaultProps.answers)
+    const ages = answers.map((answer) => parseInt(answer.split(' ')[0]))
+
+    for (let i = ages.length; i > 0; i--) {
+        if (age > ages[i]) {
+            return answers[i]
+        }
+    }
+
+    return answers[0];
+}
+
 async function setAge(age: number): Promise<void> {
-    let description = "0 to 5";
-
-    if (age >= 6) {
-        description = "6 to 12";
-    }
-
-    if (age >= 13) {
-        description = "13 to 15";
-    }
-
-    if (age >= 16) {
-        description = "16 to 17";
-    }
-
-    if (age >= 18) {
-        description = "18 to 25";
-    }
-
-    if (age >= 26) {
-        description = "26 to 40";
-    }
-
-    if (age >= 41) {
-        description = "41 to 55";
-    }
-
-    if (age >= 56) {
-        description = "56 to 65";
-    }
-
-    if (age >= 65) {
-        description = "65 or older";
-    }
-
-    storage.setItem("age", description);
+    storage.setItem("age", ageBracket(age));
 }
 
 async function setGender(gender: string): Promise<void> {

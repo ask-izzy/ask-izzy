@@ -30,7 +30,7 @@ describe("Compose personalisation search terms", function() {
         };
 
         request = require("../../src/pages/personalisation/Age").default
-            .getSearchForAnswer(request, "18 to 25");
+            .getSearchForAnswer(request, "18 to 26");
         assert.deepEqual(request, {
             q: "crisis accommodation",
             age_group: [
@@ -52,7 +52,7 @@ describe("Compose personalisation search terms", function() {
         }
 
         request = require("../../src/pages/personalisation/Age").default
-            .getSearchForAnswer(request, "18 to 25");
+            .getSearchForAnswer(request, "18 to 26");
         assert.deepEqual(request, {
             q: "crisis accommodation",
             client_gender: ["m", "u"],

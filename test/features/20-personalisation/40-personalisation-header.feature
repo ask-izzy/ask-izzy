@@ -18,6 +18,6 @@ Feature: Personalisation header
          And I click on the done button # Somewhere safe to sleep
          And I click on the done button # Subcategories
          And I click on the done button # Gender
-         And I click on "26 to 40"
+         And I click on "27 to 39"
          And I click on the done button # Demographics
-        Then I should see 3 search results for "people aged 26 to 40" in "Melbourne, Vic"
+        Then I should see 3 search results for "people aged 27 to 39" in "Melbourne, Vic"

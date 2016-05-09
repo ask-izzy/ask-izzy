@@ -36,11 +36,11 @@ Feature: Personalisation
         When I click on the done button # Didn't answer the question
         Then I should see "How old are you?"
 
-        When I click on "18 to 25"
+        When I click on "18 to 26"
         Then I should see "Do any of these apply to you?"
 
         When I click on the done button
-        Then I should see 3 search results for "people aged 18 to 25" in "Richmond, Victoria"
+        Then I should see 3 search results for "people aged 18 to 26" in "Richmond, Victoria"
 
         When I click back from the title bar
         Then I should see "The A to Z directory of homeless help"
@@ -68,7 +68,7 @@ Feature: Personalisation
         When I click on "Female"
         Then I should see "How old are you?"
 
-        When I click on "18 to 25"
+        When I click on "18 to 26"
         Then I should see "Do any of these apply to you?"
 
         When I click on the done button
