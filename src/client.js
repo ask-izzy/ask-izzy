@@ -1,5 +1,6 @@
 /* @flow */
 
+import xhr from "axios";
 import React from "react";
 import ReactDOM from "react-dom";
 import {Router, browserHistory} from "react-router";
@@ -11,6 +12,12 @@ import categories from "./constants/categories";
 
 window.searchTest = searchTest;
 window.categories = categories;
+
+// Allow typography.com to record the hit for licencing
+xhr({
+    url: "//cloud.typography.com/7948374/730248/css/fonts.css",
+    maxRedirects: 0,
+});
 
 /*
  * If at any point there isn't a meaningful 'back',

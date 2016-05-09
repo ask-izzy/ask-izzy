@@ -70,6 +70,7 @@ cat << EOF > $target
 @import "./colors";
 @import "./responsive";
 @import "./mixins";
+@import "./fonts";
 @import "../../bower_components/saffron/saffron/saffron";
 
 EOF
