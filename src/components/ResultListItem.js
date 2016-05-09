@@ -8,9 +8,10 @@ import iss from "../iss";
 
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
-import OpeningTimes from "./OpeningTimes";
 import LinkListItem from "./LinkListItem";
+import OpeningTimes from "./OpeningTimes";
 import TransportTime from "./TransportTime";
+import sendEvent from "../google-tag-manager";
 
 class ResultListItem extends React.Component {
     props: Object;
@@ -41,6 +42,14 @@ class ResultListItem extends React.Component {
                             this.props.nServiceProvisions);
     }
 
+    recordViewDetail(): void {
+        sendEvent({
+            event: "listing",
+            listingName: this.props.object.name,
+            crisis: this.props.object.crisis
+        })
+    }
+
     render() {
         const {
             object,
@@ -51,6 +60,7 @@ class ResultListItem extends React.Component {
                 className="plain-text ResultListItem"
                 to={`/service/${object.slug}`}
                 rightIcon={<icons.Chevron />}
+                onClick={this.recordViewDetail.bind(this)}
             >
                 <h2 className="name">{object.name}</h2>
                 <div className="site_name">{object.site.name}</div>
