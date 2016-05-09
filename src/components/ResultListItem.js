@@ -94,6 +94,7 @@ class ResultListItem extends React.Component {
                     </div>
                 : ""}
                 <DebugContainer>
+                    <pre>{JSON.stringify(object, null, 4)}</pre>
                     <DebugQueryScore expl={object._explanation} />
                 </DebugContainer>
             </LinkListItem>
