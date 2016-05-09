@@ -18,32 +18,34 @@ export default class Age extends BaseQuestion {
         name: "age",
         question: "How old are you?",
         answers: {
-            "Prenatal": append(ageGroups("prenatal")),
             "0 to 5": append(ageGroups(
+                "prenatal",
                 "baby",
                 "toddler",
                 "preschool",
             )),
-            "6 to 12": append(ageGroups(
+            "6 to 11": append(ageGroups(
                 "schoolage",
             )),
-            "13 to 15": append(ageGroups(
+            "12 or 13": append(ageGroups(
                 "earlyadolescent",
+            )),
+            "14 or 15": append(ageGroups(
                 "midadolescent",
             )),
-            "16 to 17": append(ageGroups(
+            "16 or 17": append(ageGroups(
                 "lateadolescent",
             )),
-            "18 to 25": append(ageGroups(
+            "18 to 26": append(ageGroups(
                 "youngadult",
             )),
-            "26 to 40": append(ageGroups(
+            "27 to 39": append(ageGroups(
                 "adult",
             )),
-            "41 to 55": append(ageGroups(
+            "40 to 54": append(ageGroups(
                 "middleageadult",
             )),
-            "56 to 65": append(ageGroups(
+            "56 to 64": append(ageGroups(
                 "preretirementage",
             )),
             "65 or older": append(ageGroups(
