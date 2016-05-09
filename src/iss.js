@@ -357,7 +357,7 @@ export class Service {
     }>;
     public_transport_info: string;
     referral_info: string;
-    service_types: Array<string>;
+    service_type: Array<string>;
     site: {
         id: number,
         name: string,

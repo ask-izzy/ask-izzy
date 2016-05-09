@@ -93,7 +93,7 @@ const objects: Object = {
         catchment: "Carlton",
         eligibility_info: "",
         ineligibility_info: "",
-        service_types: ["Housing Service"],
+        service_type: ["Housing Service"],
         now_open: {
             now_open: false,
         },
@@ -125,7 +125,7 @@ const objects: Object = {
             id: 333,
             name: "Youth Support Net",
         },
-        service_types: ["Accommodation"],
+        service_type: ["Accommodation"],
         now_open: {
             now_open: null,
         },
@@ -147,7 +147,7 @@ const objects: Object = {
             id: 333,
             name: "Susan's House",
         },
-        service_types: ["Refuge"],
+        service_type: ["Refuge"],
         now_open: {
             now_open: null,
         },
@@ -312,7 +312,7 @@ const objects: Object = {
         ],
         "public_transport_info": "Nearest train station, North Richmond; Bus 246, 250; Tram 24, 109 to stop 19",
         "referral_info": "",
-        "service_types": [],
+        "service_type": [],
         "site": {
             "id": 865888,
             "name": "Infoxchange",
@@ -337,7 +337,7 @@ const objects: Object = {
         catchment: "Carlton",
         eligibility_info: "",
         ineligibility_info: "",
-        service_types: ["Legal"],
+        service_type: ["Legal"],
         now_open: {
             now_open: false,
         },
@@ -515,7 +515,7 @@ const objects: Object = {
         ],
         "public_transport_info": "",
         "referral_info": "Self.",
-        "service_types": ["Counselling"],
+        "service_type": ["Counselling"],
         "site": {
             "id": 125111,
             "name": "Rape & Domestic Violence Services Australia",
@@ -540,7 +540,7 @@ const objects: Object = {
         catchment: "Carlton",
         eligibility_info: "",
         ineligibility_info: "",
-        service_types: [],
+        service_type: [],
         now_open: {
             now_open: false,
         },

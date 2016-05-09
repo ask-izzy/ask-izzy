@@ -139,7 +139,7 @@ type issService = {
     "postal_address": Array<issPostalAddress>,
     "public_transport_info": string,
     "referral_info": string,
-    "service_types": Array<string>,
+    "service_type": Array<string>,
     "site": issSite,
     "special_requirements": string,
     "target_gender": issGender,
