@@ -98,7 +98,7 @@ class Location extends React.Component {
             }).multiSearch(
                 {
                     service_type: ["Homelessness Access Point"],
-                    catchment: true,
+                    catchment: "true",
                     q: "(Homelessness Access Point)",
                 },
                 mergeAccessPoints

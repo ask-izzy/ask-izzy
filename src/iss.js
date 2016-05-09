@@ -38,7 +38,7 @@ export type searchRequest = {
     age_group?: Array<string>,
     client_gender?: Array<string>,
 
-    catchment?: boolean|string,
+    catchment?: "prefer"|"true"|"false",
     is_bulk_billing?: boolean,
     healthcare_card_holders?: boolean,
 
@@ -481,7 +481,6 @@ async function _search(
         q: "",
         type: "service",
         limit: 10,
-        catchment: "prefer",
     };
 
     Object.assign(request_, query);
