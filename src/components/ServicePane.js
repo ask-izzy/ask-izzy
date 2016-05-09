@@ -10,6 +10,7 @@ import ContactMethods from "./ContactMethods";
 import Eligibility from "./Eligibility";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
+import DebugContainer from "./DebugContainer";
 import LinkListItem from "./LinkListItem";
 import fixtures from "../../fixtures/services";
 import ServiceFactory from "../../fixtures/factories/Service";
@@ -138,6 +139,9 @@ export default class ServicePane extends React.Component {
                 >
                     Report an error
                 </a>
+                <DebugContainer message="ISS Object">
+                    <pre>{JSON.stringify(object, null, 4)}</pre>
+                </DebugContainer>
             </div>
         );
     }
