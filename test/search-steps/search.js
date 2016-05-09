@@ -85,9 +85,9 @@ function ageBracket(age: number): string {
     const answers = Object.keys(Age.defaultProps.answers)
     const ages = answers.map((answer) => parseInt(answer.split(' ')[0]))
 
-    for (let i = ages.length; i > 0; i--) {
-        if (age > ages[i]) {
-            return answers[i]
+    for (let idx = ages.length; idx > 0; idx--) {
+        if (age > ages[idx]) {
+            return answers[idx]
         }
     }
 
