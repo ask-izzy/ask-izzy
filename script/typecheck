@@ -7,7 +7,7 @@ END=$(tput sgr0)
 
 function check {
     echo "${BOLD}$1${END}"
-    bash -c "$1"
+    bash -c "set -e; $1"
     echo "Good"
 }
 
