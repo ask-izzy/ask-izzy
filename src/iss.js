@@ -108,9 +108,13 @@ async function _request(obj: XhrOptions) {
     try {
         return await xhr(obj);
     } catch (error) {
+        // Axios errors include config / request keys which
+        // cannot be JSON-ified.
+        const {data, status, statusText, headers} = error;
+
         sendEvent({
             event: "xhr_failed",
-            error: JSON.stringify(error),
+            error: JSON.stringify({data, status, statusText, headers}),
         });
         throw error;
     } finally {
