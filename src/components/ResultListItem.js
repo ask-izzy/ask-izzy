@@ -46,7 +46,7 @@ class ResultListItem extends React.Component {
         sendEvent({
             event: "listing",
             listingName: this.props.object.name,
-            crisis: this.props.object.crisis
+            crisis: this.props.object.crisis,
         });
     }
 
