@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 delete process.env.BROWSER;
 
 if (!process.env.NODE_ENV) {
