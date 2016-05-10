@@ -145,7 +145,7 @@ async function searchIss(categoryName: string): Promise<searchResults> {
     const category = Categories.find(({key}) => key == categoryName)
     const request = issRequest(category);
 
-    return await search(Object.assign(request, {limit: 20}));
+    return await search(Object.assign(request, {limit: 25}));
 }
 
 async function showResults(
@@ -160,7 +160,7 @@ async function assertNoSuchResults(
     category: string,
     table: Array<Object>
 ): Promise<void> {
-    let services = (await searchIss(category)).objects;
+    let services = (await searchIss(category)).objects.slice(0, 20);
     let errors = [];
 
     for (const banned of table) {
@@ -185,10 +185,10 @@ async function assertResults(
     expectedResults: Array<Object>
 ): Promise<void> {
     let services = (await searchIss(category)).objects;
-
+    let earlyServices = services.slice(0, 20)
     let found = expectedResults.filter(
         (requiredAttrs) =>
-            services.find((service) =>
+            earlyServices.find((service) =>
                 objectMatches(requiredAttrs, service))
     )
     let missing = _.difference(expectedResults, found)
@@ -196,7 +196,7 @@ async function assertResults(
     if (missing.length > 0) {
         throw new Error(`Expected to find ${
             JSON.stringify(missing, null, 4)
-        } results but they were absent. ${
+        } results in the first 20 but they were absent. ${
             JSON.stringify(found.map(service => service.id), null, 4)
         } services did match. Results that did come back: ${
             JSON.stringify(services.map(({id, site}) =>
