@@ -1,7 +1,7 @@
 options:
 files:
     include: 'src/**/*.s+(a|c)ss'
-    ignore: 'src/styles/normalize.scss'
+    ignore: ['src/styles/normalize.scss', 'src/styles/fonts.scss']
 rules:
     border-zero: 2
     class-name-format: 0

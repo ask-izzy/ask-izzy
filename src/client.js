@@ -1,5 +1,6 @@
 /* @flow */
 
+import xhr from "axios";
 import React from "react";
 import ReactDOM from "react-dom";
 import {Router, browserHistory} from "react-router";
@@ -11,6 +12,15 @@ import categories from "./constants/categories";
 
 window.searchTest = searchTest;
 window.categories = categories;
+
+// Allow typography.com to record the hit for licencing
+// This causes a CORS error after the request is run,
+// which is not a problem as we don't need to do anything
+// with the response.
+xhr({
+    url: "//cloud.typography.com/7948374/730248/css/fonts.css",
+    maxRedirects: 0,
+}).catch(() => null);
 
 /*
  * If at any point there isn't a meaningful 'back',

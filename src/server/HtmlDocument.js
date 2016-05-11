@@ -97,11 +97,6 @@ class HtmlDocument extends React.Component {
             href={canonicalUrl}
         />
 
-        <link rel="stylesheet"
-            type="text/css"
-            href="//cloud.typography.com/7948374/730248/css/fonts.css"
-        />
-
         <link
             rel="apple-touch-icon"
             sizes="57x57"

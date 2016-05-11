@@ -59,6 +59,7 @@ Feature: Category page
         Then I should see "Load more results…"
 
         When I click on "Load more results…"
+         And I wait for 10 results to load
         Then I should see the results
         --------------------
         Service Name (name)
