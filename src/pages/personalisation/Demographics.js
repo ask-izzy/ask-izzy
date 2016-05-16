@@ -23,7 +23,8 @@ export default class Demographics extends BaseMultiQuestion {
             "Have a disability": append("disabilities"),
             "Veteran": append("veteran"),
             "Asylum seeker": append("refugees"),
-            "Have pets": append("pets"),
+            "Have pets": append("pets")
+                .append("-(effectiveness training)"),
         },
         icons: {
             "Escaping family violence": icons.DemographicFamilyViolence,
