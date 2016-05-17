@@ -29,7 +29,8 @@ export default class EverydayThingsSubcategories extends BaseQuestion {
             "Help with pets": remove("material aid")
                 .remove({service_type: ["material aid"]})
                 .append("assistance pets")
-                .append("-(animal control)"),
+                .append("-(animal control)")
+                .append("-effectiveness"),
         },
     };
 }
