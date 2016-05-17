@@ -8,6 +8,8 @@ import iss from "../iss";
 
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
+import DebugServiceRecord from "./DebugServiceRecord";
+
 import LinkListItem from "./LinkListItem";
 import OpeningTimes from "./OpeningTimes";
 import TransportTime from "./TransportTime";
@@ -93,9 +95,13 @@ class ResultListItem extends React.Component {
                         : ""}
                     </div>
                 : ""}
-                <DebugContainer>
-                    <DebugQueryScore expl={object._explanation} />
-                </DebugContainer>
+
+                <DebugServiceRecord object={object} />
+                {object._explanation &&
+                    <DebugContainer message="Query score">
+                        <DebugQueryScore expl={object._explanation} />
+                    </DebugContainer>
+                }
             </LinkListItem>
 
         );

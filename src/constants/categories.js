@@ -29,7 +29,10 @@ export class Category {
         this.byline = props.byline;
         this.icon = props.icon;
         this.key = slugify(this.name);
-        this.search = props.search;
+        this.search = {
+            catchment: "prefer",
+            ...props.search,
+        };
         this.info = props.info;
         this.personalisation = props.personalisation;
     }

@@ -13,8 +13,10 @@ import ContactMethods from "./components/ContactMethods";
 import CrisisHeader from "./components/CrisisHeader";
 import CrisisLineItem from "./components/CrisisLineItem";
 import DebugContainer from "./components/DebugContainer";
+import DebugPersonalisation from "./components/DebugPersonalisation";
 import DebugQueryScore from "./components/DebugQueryScore";
 import DebugSearch from "./components/DebugSearch";
+import DebugServiceRecord from "./components/DebugServiceRecord";
 import Eligibility from "./components/Eligibility";
 import Email from "./components/Email";
 import EmbargoMessage from "./components/EmbargoMessage";
@@ -54,8 +56,10 @@ export default {
     CrisisHeader: CrisisHeader,
     CrisisLineItem: CrisisLineItem,
     DebugContainer: DebugContainer,
+    DebugPersonalisation: DebugPersonalisation,
     DebugQueryScore: DebugQueryScore,
     DebugSearch: DebugSearch,
+    DebugServiceRecord: DebugServiceRecord,
     Eligibility: Eligibility,
     Email: Email,
     EmbargoMessage: EmbargoMessage,

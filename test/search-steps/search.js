@@ -13,6 +13,7 @@ import storage from "../../src/storage";
 import Categories from "../../src/constants/categories";
 import {search} from "../../src/iss";
 import type {searchResults} from "../../src/iss";
+import Age from "../../src/pages/personalisation/Age";
 
 async function deleteAnswers(): Promise<void> {
     storage.clear();
@@ -80,26 +81,21 @@ async function setSkipped(property: string): Promise<void> {
     storage.setItem(property, "(skipped)");
 }
 
+function ageBracket(age: number): string {
+    const answers = Object.keys(Age.defaultProps.answers)
+    const ages = answers.map((answer) => parseInt(answer.split(' ')[0]))
+
+    for (let idx = ages.length; idx > 0; idx--) {
+        if (age > ages[idx]) {
+            return answers[idx]
+        }
+    }
+
+    return answers[0];
+}
+
 async function setAge(age: number): Promise<void> {
-    let description = "25 or younger";
-
-    if (age >= 26) {
-        description = "26 to 39";
-    }
-
-    if (age >= 40) {
-        description = "40 to 54";
-    }
-
-    if (age >= 55) {
-        description = "55 to 64";
-    }
-
-    if (age >= 65) {
-        description = "65 or older";
-    }
-
-    storage.setItem("age", description);
+    storage.setItem("age", ageBracket(age));
 }
 
 async function setGender(gender: string): Promise<void> {
@@ -241,6 +237,8 @@ module.exports = (function() {
             unpromisify(assertResults))
         .then("my results for $STRING would ideally contain\n$yaml",
             unpromisify(assertNoSuchResults))
+        .then("my results for $STRING would ideally not contain\n$yaml",
+            unpromisify(assertResults))
         .then("my results for $STRING has these services near the end\n$yaml",
             unpromisify(skipResultsCheck))
         .then("show my results for $STRING",

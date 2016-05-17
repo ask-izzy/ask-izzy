@@ -8,6 +8,7 @@ import fixtures from "../../fixtures/services";
 import iss from "../iss";
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
+import DebugServiceRecord from "./DebugServiceRecord";
 
 /* eslint-disable max-len */
 const crisisDescriptions = {
@@ -71,9 +72,13 @@ class CrisisLineItem extends React.Component {
                         crisisDescriptions[object.id] &&
                         crisisDescriptions[object.id](object)
                     }
-                    <DebugContainer>
-                        <DebugQueryScore expl={object._explanation} />
-                    </DebugContainer>
+
+                    <DebugServiceRecord object={object} />
+                    {object._explanation &&
+                        <DebugContainer message="Query score">
+                            <DebugQueryScore expl={object._explanation} />
+                        </DebugContainer>
+                    }
                 </div>
             );
         }

@@ -15,14 +15,10 @@ class DebugQueryScore extends React.Component {
 
         return (
             <div className="DebugSearch">
-                {Object.keys(search).map((key) =>
-                    <pre key={key}>
-                        <span className="key">
-                            {key}
-                        </span> = <span className="value">
-                            {JSON.stringify(search[key])}
-                        </span>
-                    </pre>
+                <h5>ISS params</h5>
+                <pre>
+                    {JSON.stringify(search, null, 4)}
+                </pre>
                 )}
             </div>
         );

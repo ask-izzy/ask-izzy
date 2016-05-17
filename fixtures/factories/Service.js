@@ -58,7 +58,7 @@ function defaults() {
         postal_address: [],
         public_transport_info: "Near South Yarra station",
         referral_info: "",
-        service_types: [],
+        service_type: [],
         site: Site(),
         special_requirements: "",
         target_gender: "u",

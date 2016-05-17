@@ -32,12 +32,12 @@ RUN \
         sudo \
         && \
     # Required by node-gyp
-    apt-get -qq install \
+    apt-get -y install \
         build-essential \
         python \
         && \
     # Required by flow (static type checker for JavaScript).
-    apt-get -qq install \
+    apt-get -y install \
         libelf-dev \
         && \
     echo "Cleaning up" && \
