@@ -8,6 +8,7 @@ import fixtures from "../../fixtures/services";
 import iss from "../iss";
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
+import DebugServiceRecord from "./DebugServiceRecord";
 
 /* eslint-disable max-len */
 const crisisDescriptions = {
@@ -72,9 +73,7 @@ class CrisisLineItem extends React.Component {
                         crisisDescriptions[object.id](object)
                     }
 
-                    <DebugContainer message="ISS Object">
-                        <pre>{JSON.stringify(object, null, 4)}</pre>
-                    </DebugContainer>
+                    <DebugServiceRecord object={object} />
                     {object._explanation &&
                         <DebugContainer message="Query score">
                             <DebugQueryScore expl={object._explanation} />

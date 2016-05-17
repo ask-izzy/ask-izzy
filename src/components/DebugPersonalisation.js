@@ -11,13 +11,16 @@ export default class DebugPersonalisation extends React.Component {
         let result: Array<Object> = [];
         let request = this.props.search;
 
-        result.push({source: "category", diff: _.clone(request)})
+        result.push({source: "category", diff: request})
 
         for (let item of this.props.items) {
             if (typeof item.getSearch == "function") {
-                const nextReq = item.getSearch(request);
+                const nextReq = item.getSearch(_.clone(request));
 
-                result.push({source: item.name, diff: diff(request, nextReq)})
+                result.push({
+                    source: item.defaultProps.name,
+                    diff: diff(request, nextReq),
+                });
                 request = nextReq;
             }
         }

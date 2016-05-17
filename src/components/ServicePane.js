@@ -3,19 +3,20 @@
 import React from "react";
 import _ from "underscore";
 
+import fixtures from "../../fixtures/services";
+import icons from "../icons";
+import sendEvent from "../google-tag-manager";
+import ServiceFactory from "../../fixtures/factories/Service";
+
 import Address from "./Address";
 import CollapsedOpeningTimes from "./CollapsedOpeningTimes";
 import Collapser from "./Collapser";
 import ContactMethods from "./ContactMethods";
+import DebugServiceRecord from "./DebugServiceRecord";
 import Eligibility from "./Eligibility";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
-import DebugContainer from "./DebugContainer";
 import LinkListItem from "./LinkListItem";
-import fixtures from "../../fixtures/services";
-import ServiceFactory from "../../fixtures/factories/Service";
-import icons from "../icons";
-import sendEvent from "../google-tag-manager";
 
 export default class ServicePane extends React.Component {
     props: Object;
@@ -139,9 +140,7 @@ export default class ServicePane extends React.Component {
                 >
                     Report an error
                 </a>
-                <DebugContainer message="ISS Object">
-                    <pre>{JSON.stringify(object, null, 4)}</pre>
-                </DebugContainer>
+                <DebugServiceRecord object={object} />
             </div>
         );
     }
