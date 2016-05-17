@@ -14,7 +14,8 @@ export default class HealthSubcategories extends BaseQuestion {
         name: "sub-health",
         question: "What sort of help do you need?",
         answers: {
-            "Doctor": append("(general medical practitioners)"),
+            "Doctor": remove("(community health)")
+                .append("(general medical practitioners)"),
             "Nurse": append("nurse"),
             "Sexual health": specialist("sexual health"),
             "Dentist": specialist("dentistry"),
