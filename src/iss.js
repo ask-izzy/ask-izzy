@@ -112,10 +112,23 @@ async function _request(obj: XhrOptions) {
         // cannot be JSON-ified.
         const {data, status, statusText, headers} = error;
 
+        if (status == 429) {
+            console.log("Rate limited by ISS - backing off for 4 seconds");
+            await wait(4000);
+            return xhr(obj);
+        }
+
+        if (status >= 502) {
+            console.log("ISS or elasticsearch are down - retrying")
+            await wait(500);
+            return xhr(obj);
+        }
+
         sendEvent({
             event: "xhr_failed",
             error: JSON.stringify({data, status, statusText, headers}),
         });
+
         throw error;
     } finally {
         xhrInProgress--;
@@ -484,25 +497,7 @@ async function _search(
     };
 
     Object.assign(request_, query);
-    try {
-        return await requestObjects("/api/v3/search/", request_);
-    } catch (error) {
-        if (error && error[0] == "OVER_QUERY_LIMIT") {
-            console.log("Rate limited by ISS - backing off for 4 seconds");
-            await wait(4000);
-            return search(query);
-        }
-
-        if (error &&
-            error.data &&
-            error.data.error_message == "Elasticsearch request timed out"
-        ) {
-            await wait(500);
-            return search(query);
-        }
-
-        throw error;
-    }
+    return await requestObjects("/api/v3/search/", request_);
 }
 
 export async function search(
