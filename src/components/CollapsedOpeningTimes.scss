@@ -15,11 +15,13 @@
             width: auto;
         }
 
-        & > a {
-            display: block;
-            font-size: 16px;
-            text-align: right;
-            white-space: nowrap;
+        @media screen {
+            & > a {
+                display: block;
+                font-size: 16px;
+                text-align: right;
+                white-space: nowrap;
+            }
         }
 
         .AllOpeningTimes {
