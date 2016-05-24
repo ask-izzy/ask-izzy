@@ -2,6 +2,8 @@
 
 ## Dependencies
 
+[![Dependency Status](https://gemnasium.com/badges/b91820f574d095d55ce62975008f0151.svg)](https://gemnasium.com/8f187dc904fea1417227ff718eb4200d)
+
 If you're working on this codebase, some understanding of the following will
 help:
 
