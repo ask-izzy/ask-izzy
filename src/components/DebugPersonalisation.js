@@ -51,6 +51,10 @@ function diff(first: Object, second: Object): Object {
     let removed = {};
     let changed = {};
 
+    if (!first || !second) {
+        return {error: "Could not generate a diff."};
+    }
+
     for (let key of Object.keys(first).concat(Object.keys(second))) {
         if (first.hasOwnProperty(key)) {
             if (second.hasOwnProperty(key)) {

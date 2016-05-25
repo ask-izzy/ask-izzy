@@ -321,6 +321,15 @@ export class Service {
             .uniq(phone => phone.number);
     }
 
+    Indigenous(): boolean {
+        const regex =
+            /\b(Kooris?|Aboriginals?|Indigenous|Torres Strait Islanders?)\b/i;
+
+        return this.description.match(regex) ||
+               this.name.match(regex) ||
+               this.site.name.match(regex);
+    }
+
     abn: string;
     accessibility: issAccessibility;
     accessibility_details: string;
