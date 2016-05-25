@@ -99,7 +99,7 @@ const categories:Array<Category> = [
             personalisation.HealthSubcategories,
             personalisation.Gender,
             personalisation.Age,
-            personalisation.Demographics,
+            personalisation.HealthDemographics,
         ],
     }),
     new Category({
