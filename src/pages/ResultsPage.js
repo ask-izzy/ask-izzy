@@ -205,7 +205,7 @@ class ResultsPage extends BaseCategoriesPage {
         );
     }
 
-    renderLoadMore(): ?React$Element {
+    renderLoadMore() {
         if (this.state.meta && this.state.meta.next) {
             return (
                 <ButtonListItem

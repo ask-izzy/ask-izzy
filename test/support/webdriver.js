@@ -46,7 +46,10 @@ export function baseUrl(): string {
  *
  * @return {Promise} - return value from Selenium Webdriver.get.
  */
-export function gotoUrl(driver: Webdriver.WebDriver, url: string): Promise {
+export function gotoUrl(
+    driver: Webdriver.WebDriver,
+    url: string
+): Promise<void> {
     return driver.get(baseUrl() + url);
 }
 

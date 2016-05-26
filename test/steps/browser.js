@@ -74,7 +74,7 @@ module.exports.documentReady = function documentReady(
     );
 };
 
-async function visitUrl(url: string): Promise {
+async function visitUrl(url: string): Promise<void> {
     await module.exports.visitUrl(this.driver, url);
 }
 

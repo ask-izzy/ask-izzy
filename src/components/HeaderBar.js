@@ -29,7 +29,7 @@ class HeaderBar extends React.Component {
         );
     }
 
-    renderSecondaryText(): ?React$Element {
+    renderSecondaryText() {
         if (this.props.secondaryText) {
             return (
                 <div className="secondary">

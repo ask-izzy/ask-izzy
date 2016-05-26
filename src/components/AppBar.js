@@ -31,7 +31,7 @@ class AppBar extends React.Component {
         );
     }
 
-    renderBackButton(): ?React$Element {
+    renderBackButton() {
         return (
             <components.IconButton
                 className="BackButton button-container"

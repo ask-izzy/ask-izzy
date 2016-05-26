@@ -12,20 +12,20 @@ import Location from "../../pages/personalisation/Location";
 import storage from "../../storage";
 import sendEvent from "../../google-tag-manager";
 
-const HomeLink = (): React$Element =>
+const HomeLink = () =>
     <Link
         className="homeLink"
         to="/"
         onClick={storage.clear}
     >Go back</Link>;
 
-const ErrorMessage = ({children}: Object): React$Element =>
+const ErrorMessage = ({children}: Object) =>
     <p className="errorMessage">{children}</p>;
 
-const InfoMessage = (category: ?Object): ?React$Element =>
+const InfoMessage = (category: ?Object) =>
     category && <div>{category.info}</div>;
 
-const LogoHeader = ({children}: Object): React$Element =>
+const LogoHeader = ({children}: Object) =>
     <div className="LogoHeader">
         <LogoWithShadow />
         {children}
@@ -34,7 +34,7 @@ const LogoHeader = ({children}: Object): React$Element =>
 const trailingSlash = (path: string): string =>
     `${path}${path.endsWith("/") ? "" : "/"}`;
 
-const PersonalisationLink = ({pathname}: Object): React$Element =>
+const PersonalisationLink = ({pathname}: Object) =>
     <Link
         className="change-personalisation"
         to={`${trailingSlash(pathname)}personalise/summary`}

@@ -85,7 +85,7 @@ async function setCoords(latitude: number, longitude: number): Promise<void> {
     }, {latitude, longitude});
 }
 
-async function disableGeolocation(): Promise {
+async function disableGeolocation(): Promise<void> {
     await this.driver.executeScript(() => {
         IzzyStorage.setGeolocationMock(
             false,

@@ -13,7 +13,7 @@ export class Category {
     byline: string;
     icon: ReactClass<any>;
     search: iss.searchRequest;
-    info: ?string|React$Element;
+    info: ?string|React$Element<*>;
     // I can't get flow to happily check that these are react classes.
     personalisation: Array<any>;
 
@@ -22,7 +22,7 @@ export class Category {
         byline: string,
         icon: ReactClass<any>,
         search: iss.searchRequest,
-        info?: string|React$Element,
+        info?: string|React$Element<*>,
         personalisation: Array<any>,
     }) {
         this.name = props.name;
