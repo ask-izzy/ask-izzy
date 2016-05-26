@@ -11,19 +11,19 @@ Feature: Search for housing services
         And I have skipped setting my gender
         Then my results for housing should contain
         ----------------------------------
-        - id: 878723
-          site:
-            name: Queensland Department of Housing & Public Works, Housing Service Centre, Chermside
         - id: 1021720
           crisis: true
           site:
             name: Homeless Hotline
+        - id: 878723
+          site:
+            name: Queensland Department of Housing & Public Works, Housing Service Centre, Chermside
+        - id: 2808090
+          site:
+            name: yourtown, Central Office
         - id: 645116
           site:
             name: Australian Community Safety & Research Organisation (ACRO)
-        - id: 894168
-          site:
-            name: Youth Emergency Services
         - id: 798820
           site:
             name: Queensland Homicide Victims' Support Group
