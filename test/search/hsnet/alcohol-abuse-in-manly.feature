@@ -34,6 +34,9 @@ Feature: Search for alcohol counselling
         - id: 647920
           site:
             name: Royal North Shore Hospital
+        - id: 224799
+          site:
+            name: Alcoholics Anonymous (AA), Neutral Bay
         ----------------------------------
         And my results for drugs-alcohol would ideally contain
         ----------------------------------
@@ -44,9 +47,6 @@ Feature: Search for alcohol counselling
         - id: 1173524
           site:
             name: Lower North Shore Community Drug & Alcohol Team
-        - id: 224799
-          site:
-            name: Alcoholics Anonymous (AA), Neutral Bay
         - id: 106537
           site:
             name: Manly Drug Education & Counselling Centre (MDECC)
