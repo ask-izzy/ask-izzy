@@ -70,6 +70,8 @@ Feature: Search for housing services
         ----------------------------------------------
         - site:
             name: Lifeview, The Willows
+        - site:
+            name: UnitingCare lifeAssist, Homeshare
         ----------------------------------
         And my results for housing should contain
         ----------------------------------
@@ -77,9 +79,4 @@ Feature: Search for housing services
           crisis: true
           site:
             name: Victorian Statewide Homelessness Line
-        ----------------------------------
-          And my results for housing would ideally not contain
-        ----------------------------------
-        - site:
-            name: UnitingCare lifeAssist, Homeshare
         ----------------------------------
