@@ -74,7 +74,7 @@ class BasePersonalisationPage extends BaseCategoriesPage {
         );
     }
 
-    get currentComponent(): ?ReactClass {
+    get currentComponent(): ?ReactClass<*> {
         return this.personalisationComponents[this.currentComponentIdx];
     }
 

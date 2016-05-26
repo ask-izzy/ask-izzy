@@ -47,7 +47,7 @@ class TransportTime extends React.Component {
         },
     };
 
-    render(): ?React$Element {
+    render() {
         if (!this.props.location.isConfidential()) {
             return this.renderPublic()
         } else {
@@ -92,7 +92,7 @@ class TransportTime extends React.Component {
         );
     }
 
-    renderDivider(): ?React$Element {
+    renderDivider() {
         if (!this.props.compact) {
             return (
                 <hr/>

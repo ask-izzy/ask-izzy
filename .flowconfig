@@ -22,6 +22,7 @@ esproposal.class_static_fields=ignore
 esproposal.class_instance_fields=enable
 esproposal.decorators=ignore
 unsafe.enable_getters_and_setters=true
+experimental.strict_type_args=true
 
 [version]
 0.25.0

@@ -119,7 +119,7 @@ function *expandRoutes(
 }
 
 function renderRoute(
-    route: React$Element,
+    route: React$Element<*>,
     prefix: string,
 ): void {
     if (route.map) {

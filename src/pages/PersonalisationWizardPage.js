@@ -38,18 +38,18 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         this.navigate("");
     }
 
-    goToSubPage(subpage: ReactClass): void {
+    goToSubPage(subpage: ReactClass<*>): void {
         this.navigate(`personalise/page/${subpage.defaultProps.name}`);
     }
 
-    nextSubPage(): ?ReactClass {
+    nextSubPage(): ?ReactClass<*> {
         return this.personalisationComponents.find((component, idx) =>
             (idx > this.currentComponentIdx) &&
             (!component.getSearch({}))
         );
     }
 
-    prevSubPage(): ?ReactClass {
+    prevSubPage(): ?ReactClass<*> {
         const nextSubpageIdx = this.currentComponentIdx - 1;
 
         return this.personalisationComponents[nextSubpageIdx];

@@ -195,7 +195,7 @@ class BaseQuestion extends React.Component {
         );
     }
 
-    renderDoneButton(): ?React$Element {
+    renderDoneButton() {
         if (!this.props.suppressDoneButton) {
             return (
                 <div>
