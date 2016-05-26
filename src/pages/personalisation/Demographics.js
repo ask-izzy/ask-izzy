@@ -15,9 +15,8 @@ export default class Demographics extends BaseMultiQuestion {
             "Escaping family violence": append("family violence"),
             "Indigenous": append("Aboriginals & Torres Strait Islanders"),
             "Family with children": append("families -srs"),
-            // TODO "Couples" might negate gendered search,
-            // until we reintroduce LGBTQI
             "Couples": append("couples"),
+            "Mental and Emotional difficulties": append("mental health"),
             "Parole / recently released": append("post-release"),
             "Have a disability": append("disabilities"),
             "Veteran": append("veteran"),
@@ -30,6 +29,7 @@ export default class Demographics extends BaseMultiQuestion {
             "Indigenous": icons.DemographicAboriginal,
             "Family with children": icons.DemographicChildren,
             "Couples": icons.DemographicCouple,
+            "Mental and Emotional difficulties": icons.Support,
             "Parole / recently released": icons.DemographicParole,
             "Have a disability": icons.DemographicDisability,
             "Veteran": icons.DemographicVeteran,
