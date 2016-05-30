@@ -20,6 +20,12 @@ svg.ColoredIcon {
 }
 
 svg.Icon {
+    &.inline-icon {
+        width: 30px;
+        height: 30px;
+        vertical-align: middle;
+    }
+
     &.small {
         width: 30px;
         height: 30px;

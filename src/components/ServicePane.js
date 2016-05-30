@@ -4,7 +4,6 @@ import React from "react";
 import _ from "underscore";
 
 import fixtures from "../../fixtures/services";
-import icons from "../icons";
 import sendEvent from "../google-tag-manager";
 import ServiceFactory from "../../fixtures/factories/Service";
 
@@ -17,6 +16,8 @@ import Eligibility from "./Eligibility";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
 import LinkListItem from "./LinkListItem";
+import Chevron from "../icons/Chevron";
+import DemographicAboriginal from "../icons/DemographicAboriginal";
 
 export default class ServicePane extends React.Component {
     props: Object;
@@ -70,7 +71,16 @@ export default class ServicePane extends React.Component {
         return (
             <div className="ServicePane">
                 <div className="header">
-                    <h2 className="name">{object.name}</h2>
+                    <h2 className="name">
+
+                        {
+                            object.Indigenous() &&
+                            <DemographicAboriginal
+                                className="inline-icon"
+                            />
+                        }
+                        {object.name}
+                    </h2>
                     <h3 className="description">
                         {object.shortDescription.map((sentence, idx) =>
                             <p key={idx}>{sentence}</p>
@@ -188,7 +198,7 @@ export default class ServicePane extends React.Component {
                             }
                             primaryText={service.name}
                             secondaryText={service.shortDescription[0]}
-                            rightIcon={<icons.Chevron />}
+                            rightIcon={<Chevron />}
                         />
                     )}
                 </div>
