@@ -29,7 +29,7 @@ export default class Demographics extends BaseMultiQuestion {
             "Indigenous": icons.DemographicAboriginal,
             "Family with children": icons.DemographicChildren,
             "Couples": icons.DemographicCouple,
-            "Mental or emotional difficulties": icons.Support,
+            "Mental or emotional difficulties": icons.Mental,
             "Parole / recently released": icons.DemographicParole,
             "Have a disability": icons.DemographicDisability,
             "Veteran": icons.DemographicVeteran,
