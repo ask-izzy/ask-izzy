@@ -97,9 +97,9 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.HealthSubcategories,
-            personalisation.Gender,
+            personalisation.HealthDemographics,
             personalisation.Age,
-            personalisation.Demographics,
+            personalisation.Gender,
         ],
     }),
     new Category({

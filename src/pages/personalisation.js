@@ -13,6 +13,7 @@ import CounsellingSubcategories from "./personalisation/CounsellingSubcategories
 import Demographics from "./personalisation/Demographics";
 import EverydayThingsSubcategories from "./personalisation/EverydayThingsSubcategories";
 import Gender from "./personalisation/Gender";
+import HealthDemographics from "./personalisation/HealthDemographics";
 import HealthSubcategories from "./personalisation/HealthSubcategories";
 import HousingSubcategories from "./personalisation/HousingSubcategories";
 import Intro from "./personalisation/Intro";
@@ -33,6 +34,7 @@ export default {
     Demographics: Demographics,
     EverydayThingsSubcategories: EverydayThingsSubcategories,
     Gender: Gender,
+    HealthDemographics: HealthDemographics,
     HealthSubcategories: HealthSubcategories,
     HousingSubcategories: HousingSubcategories,
     Intro: Intro,

@@ -46,6 +46,7 @@ async function setDemographics(
     items: Array<string>,
 ): Promise<void> {
     storage.setItem("demographics", JSON.stringify(items));
+    storage.setItem("health-demographics", JSON.stringify(items));
 }
 
 function setDemographicsNone(): Promise<void> {
