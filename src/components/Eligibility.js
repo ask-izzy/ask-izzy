@@ -48,7 +48,7 @@ class Eligibility extends React.Component {
         if (!_.isEmpty(ineligibleItems)) {
             ineligibleMarkup = (
                 <div className="ineligibility">
-                    <h3>You are ineligible if</h3>
+                    <h3>Ineligibility</h3>
                     <ul>
                         {ineligibleItems}
                     </ul>
