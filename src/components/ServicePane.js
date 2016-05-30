@@ -72,7 +72,13 @@ export default class ServicePane extends React.Component {
             <div className="ServicePane">
                 <div className="header">
                     <h2 className="name">
-                        {object.Indigenous() && <DemographicAboriginal />}
+
+                        {
+                            object.Indigenous() &&
+                            <DemographicAboriginal
+                                className="inline-icon"
+                            />
+                        }
                         {object.name}
                     </h2>
                     <h3 className="description">

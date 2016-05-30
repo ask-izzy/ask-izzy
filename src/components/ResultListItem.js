@@ -66,7 +66,12 @@ class ResultListItem extends React.Component {
                 onClick={this.recordViewDetail.bind(this)}
             >
                 <h2 className="name">
-                    {object.Indigenous() && <DemographicAboriginal />}
+                    {
+                        object.Indigenous() &&
+                        <DemographicAboriginal
+                            className="inline-icon"
+                        />
+                    }
                     {object.name}
                 </h2>
                 <div className="site_name">{object.site.name}</div>
