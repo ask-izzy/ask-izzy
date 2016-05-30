@@ -325,9 +325,11 @@ export class Service {
         const regex =
             /\b(Kooris?|Aboriginals?|Indigenous|Torres Strait Islanders?)\b/i;
 
-        return this.description.match(regex) ||
+        const match = this.description.match(regex) ||
                this.name.match(regex) ||
                this.site.name.match(regex);
+
+        return !!match;
     }
 
     abn: string;
