@@ -3,27 +3,13 @@
 
 import React from "react";
 import { Link } from "react-router";
-import components from "../components";
+import StaticPage from "./StaticPage";
 
 class AboutPage extends React.Component {
-    props: Object;
-    state: Object;
-
-    static contextTypes = {
-        router: React.PropTypes.object.isRequired,
-    };
 
     render() {
-        let back = () => this.context.router.goBack();
-
         return (
-            <div className="AboutPage">
-                <components.AppBar
-                    title="About Ask Izzy"
-                    onBackTouchTap={back}
-                />
-
-                <div className="body">
+            <StaticPage title="About Ask Izzy">
                     <p>
                         Ask Izzy helps people who are homeless
                         or at risk of becoming
@@ -118,8 +104,7 @@ class AboutPage extends React.Component {
                         land and pay our respects to their culture, their
                         people and elders past and present.
                     </p>
-                </div>
-            </div>
+            </StaticPage>
         );
     }
 
