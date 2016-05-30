@@ -17,7 +17,8 @@
         text-decoration: none;
     }
 
-    .supporters a {
+    .supporters a,
+    .information a {
         color: $brand-text-mid;
     }
 
@@ -31,7 +32,8 @@
             list-style-type: none;
 
             a {
-                padding: 10px 0;
+                // Increase the size of the hitbox on this tiny content
+                line-height: 2em;
             }
         }
 
