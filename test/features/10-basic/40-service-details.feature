@@ -47,7 +47,7 @@ Feature: Service details page
         ineligibility_info: no penguins allowed
         ----------------------------------------------
         When I navigate to the service page
-        Then I should see "You are ineligible if"
+        Then I should see "Ineligibility"
 
     Scenario: Ineligibility is absent if there are no criteria
        Given A service with:
@@ -55,7 +55,7 @@ Feature: Service details page
         ineligibility_info:
         ----------------------------------------------
         When I navigate to the service page
-        Then I should not see "You are ineligible if"
+        Then I should not see "Ineligibility"
 
     Scenario: The address is a link to google maps
        Given A service with:
