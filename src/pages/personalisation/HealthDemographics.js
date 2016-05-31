@@ -13,7 +13,8 @@ export default class HealthDemographics extends BaseMultiQuestion {
         question: "Do any of these apply to you?",
         answers: {
             "Aboriginal": append("Aboriginals & Torres Strait Islanders"),
-            "Torres Strait Islander": append("Aboriginals & Torres Strait Islanders"),
+            "Torres Strait Islander":
+                append("Aboriginals & Torres Strait Islanders"),
         },
         icons: {
             "Aboriginal": icons.DemographicAboriginal,

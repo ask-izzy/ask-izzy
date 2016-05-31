@@ -16,10 +16,10 @@ export default class DebugPersonalisation extends React.Component {
         for (let item of this.props.items) {
             if (typeof item.getSearch == "function") {
                 // let the type system find bugs
-                const gs = (request: Object): ?Object =>
+                const getSearch = (request: Object): ?Object =>
                     item.getSearch(request);
 
-                const nextReq = gs(_.clone(request));
+                const nextReq = getSearch(_.clone(request));
 
                 if (!nextReq) {
                     return result;
