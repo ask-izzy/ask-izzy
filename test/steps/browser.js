@@ -6,7 +6,6 @@
 /* eslint-disable no-use-before-define */
 
 import assert from "../support/page-assertions";
-import Url from "url";
 import Yadda from "yadda";
 import Webdriver, { By, Key } from "selenium-webdriver";
 import {
@@ -140,13 +139,17 @@ async function urlIs(
     let url = await driver.getCurrentUrl();
 
     if (expected.startsWith("/")) {
-        url = Url.parse(url).path
+        expected = baseUrl() + expected;
     }
 
     return decodeURIComponent(url || "") == expected;
 }
 
 async function checkURL(expected: string): Promise<void> {
+    if (expected.startsWith(`"`)) {
+        throw new Error("URL should not be quoted");
+    }
+
     if (expected.startsWith("/")) {
         expected = baseUrl() + expected;
     }
