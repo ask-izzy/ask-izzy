@@ -43,7 +43,7 @@ Feature: Personalisation
         Then I should see 3 search results for "people aged 18 to 26" in "Richmond, Victoria"
 
         When I click back from the title bar
-        Then I should be at "/"
+        Then I should be at /
 
     Scenario: Search for emergency accommodation
         Given control of geolocation
