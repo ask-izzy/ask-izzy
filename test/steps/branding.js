@@ -43,11 +43,6 @@ async function seeTheBrandingHeader(): Promise<void> {
     );
 
     await assert.svgIsVisible(this.driver, "Ask Izzy", container);
-    await assert.textIsVisible(
-        this.driver,
-        "The A to Z directory of homeless help",
-        container
-    );
 }
 
 async function seeTheSearchBar(): Promise<void> {
