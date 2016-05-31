@@ -6,8 +6,9 @@ BOLD=$(tput bold)
 END=$(tput sgr0)
 
 function check {
+    set -e
     echo "${BOLD}$1${END}"
-    bash -c "set -e; $1"
+    bash -c "$1"
     echo "Good"
 }
 
@@ -51,24 +52,29 @@ echo "Good"
 export -f checkPackageVersions
 
 if which parallel > /dev/null ; then
-    export SHELL=/bin/bash
-    parallel ::: \
-        checkFlowDefs \
-        checkPackageVersions \
-        'check "jsonlint package.json > /dev/null"' \
-        'check "eslint src/ test/ fixtures/ webpack/"' \
-        'check "sass-lint -v"' \
-        'check "flow"' \
+    PVERSION=$( parallel --version | head -n 1 | cut -d' ' -f 3 )
 
-else
-    (./node_modules/.bin/flow start &>/dev/null) & # Pre-start flow server
+    # Only use parallel if we have a recent version
+    if [ "$PVERSION" -gt "20160000" ] ; then
+        export SHELL=/bin/bash
+        parallel --halt-on-error now,fail,1 ::: \
+            checkFlowDefs \
+            checkPackageVersions \
+            'check "jsonlint package.json > /dev/null"' \
+            'check "eslint src/ test/ fixtures/ webpack/"' \
+            'check "sass-lint -v"' \
+            'check "flow"' \
 
-    checkFlowDefs
-    checkPackageVersions
-
-    check "jsonlint package.json > /dev/null"
-    check "eslint src/ test/ fixtures/ webpack/"
-    check "sass-lint -v"
-    check "flow"
+        exit 0
+    fi
 fi
 
+(./node_modules/.bin/flow start &>/dev/null) & # Pre-start flow server
+
+checkFlowDefs
+checkPackageVersions
+
+check "jsonlint package.json > /dev/null"
+check "eslint src/ test/ fixtures/ webpack/"
+check "sass-lint -v"
+check "flow"
