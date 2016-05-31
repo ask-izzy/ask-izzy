@@ -3,7 +3,6 @@
 import React from "react";
 
 import HeaderBar from "../components/HeaderBar";
-import EmbargoMessage from "../components/EmbargoMessage";
 import NavBar from "../components/NavBar";
 import icons from "../icons";
 import storage from "../storage";
@@ -49,13 +48,6 @@ class HomePage extends React.Component {
                                 aria-label="Ask Izzy"
                             />
                         </div>
-
-                        <p className="branding-copy">
-                           The A to Z directory of homeless help
-                        </p>
-
-                        <EmbargoMessage />
-
                     </div>
                     <HeaderBar
                         primaryText="What do you need?"

@@ -19,7 +19,6 @@ import DebugSearch from "./components/DebugSearch";
 import DebugServiceRecord from "./components/DebugServiceRecord";
 import Eligibility from "./components/Eligibility";
 import Email from "./components/Email";
-import EmbargoMessage from "./components/EmbargoMessage";
 import FlatButton from "./components/FlatButton";
 import FloatFromBottom from "./components/FloatFromBottom";
 import GeolocationButton from "./components/GeolocationButton";
@@ -62,7 +61,6 @@ export default {
     DebugServiceRecord: DebugServiceRecord,
     Eligibility: Eligibility,
     Email: Email,
-    EmbargoMessage: EmbargoMessage,
     FlatButton: FlatButton,
     FloatFromBottom: FloatFromBottom,
     GeolocationButton: GeolocationButton,
