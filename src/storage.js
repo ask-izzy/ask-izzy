@@ -49,6 +49,11 @@ const Storage = {
         this.setItem("location", location);
     },
 
+    getUserIsIndigenous(): boolean {
+        return this.getItem("indigenous") == "Yes" ||
+        this.getJSON("demographics").includes("Indigenous");
+    },
+
     getCoordinates(): ?{latitude: number, longitude: number} {
         const coords = JSON.parse(
             sessionStore.getItem("coordinates") || "null"

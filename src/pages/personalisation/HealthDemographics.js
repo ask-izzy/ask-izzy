@@ -1,5 +1,6 @@
 /* @flow */
 
+/* eslint-disable no-unused-vars */
 import React from "react";
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
@@ -9,9 +10,12 @@ export default class HousingSubcategories extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
     static defaultProps = {
         name: "indigenous",
-        question: "Do you identify as Aboriginal and/or Torres Strait Islander?",
-        byline: "All indigenous services are displayed as the Aboriginal flag",
+        question:
+            "Do you identify as Aboriginal and/or Torres Strait Islander?",
+        byline:
+            "All indigenous services are displayed as the Aboriginal flag",
         answers: {
+            // n.b. see also storage.getUserIsIndigenous when changing
             "Yes": append("Aboriginals & Torres Strait Islanders"),
             "No": append(""),
         },

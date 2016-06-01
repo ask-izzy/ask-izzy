@@ -14,7 +14,7 @@ import LinkListItem from "./LinkListItem";
 import OpeningTimes from "./OpeningTimes";
 import TransportTime from "./TransportTime";
 import sendEvent from "../google-tag-manager";
-import DemographicAboriginal from "../icons/DemographicAboriginal";
+import IndigenousServiceIcon from "./IndigenousServiceIcon";
 
 class ResultListItem extends React.Component {
     props: Object;
@@ -66,12 +66,7 @@ class ResultListItem extends React.Component {
                 onClick={this.recordViewDetail.bind(this)}
             >
                 <h2 className="name">
-                    {
-                        object.Indigenous() &&
-                        <DemographicAboriginal
-                            className="inline-icon"
-                        />
-                    }
+                    <IndigenousServiceIcon object={object} />
                     {object.name}
                 </h2>
                 <div className="site_name">{object.site.name}</div>

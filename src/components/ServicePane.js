@@ -17,7 +17,7 @@ import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
 import LinkListItem from "./LinkListItem";
 import Chevron from "../icons/Chevron";
-import DemographicAboriginal from "../icons/DemographicAboriginal";
+import IndigenousServiceIcon from "./IndigenousServiceIcon";
 
 export default class ServicePane extends React.Component {
     props: Object;
@@ -72,13 +72,7 @@ export default class ServicePane extends React.Component {
             <div className="ServicePane">
                 <div className="header">
                     <h2 className="name">
-
-                        {
-                            object.Indigenous() &&
-                            <DemographicAboriginal
-                                className="inline-icon"
-                            />
-                        }
+                        <IndigenousServiceIcon object={object} />
                         {object.name}
                     </h2>
                     <h3 className="description">
