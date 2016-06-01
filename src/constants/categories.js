@@ -92,7 +92,7 @@ const categories:Array<Category> = [
         icon: icons.Health,
         search: {
             q: "(community health) -(coordinating bodies)",
-            minimum_should_match: "3<30% 7<50%",
+            minimum_should_match: "30%",
             healthcare_card_holders: true,
         },
         personalisation: [
