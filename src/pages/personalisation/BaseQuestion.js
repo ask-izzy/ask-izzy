@@ -27,6 +27,7 @@ class BaseQuestion extends React.Component {
         name: React.PropTypes.string.isRequired,
         /* The question asked of the user */
         question: React.PropTypes.string.isRequired,
+        byline: React.PropTypes.string,
         /* possible answers to the question */
         answers: React.PropTypes.oneOfType([
             React.PropTypes.objectOf(React.PropTypes.object),
@@ -169,6 +170,9 @@ class BaseQuestion extends React.Component {
                             <LogoWithShadow />
                             {this.props.question}
                         </div>
+                    }
+                    secondaryText={
+                        this.props.byline
                     }
                 />
                 <div className="List">
