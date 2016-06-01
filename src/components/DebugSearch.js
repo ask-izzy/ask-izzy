@@ -19,7 +19,6 @@ class DebugQueryScore extends React.Component {
                 <pre>
                     {JSON.stringify(search, null, 4)}
                 </pre>
-                )}
             </div>
         );
     }
