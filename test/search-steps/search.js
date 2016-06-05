@@ -99,6 +99,10 @@ async function setAge(age: number): Promise<void> {
     storage.setItem("age", ageBracket(age));
 }
 
+async function setAnswer(answer: string, attr: string): Promise<void> {
+    storage.setItem(attr, answer);
+}
+
 async function setGender(gender: string): Promise<void> {
     storage.setItem("gender", titleize(gender));
 }
@@ -222,6 +226,7 @@ module.exports = (function() {
         .given("I am $NUMBER years old",
             unpromisify(setAge))
         .given("my gender is $STRING", unpromisify(setGender))
+        .given("I have answered $STRING for $STRING", unpromisify(setAnswer))
         .given("I have skipped setting my $STRING",
             unpromisify(setSkipped))
         .given("I am not part of any relevant demographics",

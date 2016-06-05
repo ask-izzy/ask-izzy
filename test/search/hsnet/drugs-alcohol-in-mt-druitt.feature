@@ -3,6 +3,7 @@
 Feature: Search for drugs/alcohol help
     Background:
         Given I have deleted all answers
+        And I am not part of any relevant demographics
 
     Scenario: Addiction in Mt Druitt
         Given my location is "Mount Druitt, NSW"
