@@ -10,11 +10,22 @@ export default class HomelessHealthStaticPage extends React.Component {
         return (
             <StaticPage title="Homeless Health">
                 <h1>Homeless health care</h1>
-                <p>Health problems can often be one of the biggest causes of a person becoming homeless. If you are experiencing homelessness, you may find these health problems get worse or you are troubled with new illnesses. </p>
                 <p>
-                    To manage your health issues there are many free health clinics available.
-                    To find a health clinic near you search <Link to="/category/health">Ask Izzy's health section</Link>.
+                    If you are facing the prospect of homelessness
+                    or are already experiencing homelessness, health
+                    problems are often a fact of life. You may find
+                    these health problems get worse or you are
+                    troubled with new illnesses.
                 </p>
+                <p>
+                    To manage your health issues there are many free
+                    health clinics available. Some clinics are
+                    scheduled at regular times, some are short-term
+                    programs or events. To find a health clinic,
+                    program or event near you <Link to="/category/health">
+                    search Ask Izzy’s health section</Link>.
+                </p>
+
                 <h2>What kind of homeless health care is available?</h2>
                 <p>Ask Izzy lists a range of health care options to respond to your needs. Health care available includes:</p>
                 <ul>
@@ -27,10 +38,22 @@ export default class HomelessHealthStaticPage extends React.Component {
                 <li>mental or emotional help</li>
                 <li>hospitals</li>
                 </ul>
-                <p>If you are in immediate need of medical assistance please call an ambulance on 000 [link]</p>
+                <p>
+                    If you are in immediate need of medical assistance
+                    please <a href="tel:000">call an ambulance on 000</a>
+                </p>
                 <h2>Are the services free?</h2>
                 <p>Most services bulk bill and do not charge you any initial fees, however this depends on the clinic and if you have a serious condition you may need tests that incur additional costs. To check whether you will be charged, call the clinic on the number listed in Ask Izzyy.</p>
-                <p>To receive bulk billing you will need a Medicare card. If you do not have one, you can request one on via the Department of Human Services. &nbsp;[http://www.humanservices.gov.au/customer/services/medicare/medicare-card]] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                <p>
+                    To receive bulk billing you will need a Medicare card.
+                    If you do not have one, you can request one on via the {' '}
+                    <Link
+                        to={"http://www.humanservices.gov.au" +
+                        "/customer/services/medicare/medicare-card"}
+                    >
+                        Department of Human Services
+                    </Link>.
+                </p>
                 <h2>Where can I find homeless health care?</h2>
                 <p>There are health care services for those experiencing homelessness located in regional and metropolitan areas across Australia. Some are drop in services so you do not need to make an appointment and others are not. Check with your selected service before you travel. </p>
                 <p><Link to="/category/health">Find health care near you</Link> or browse:</p>

@@ -17,7 +17,7 @@ export default class HomelessSheltersStaticPage extends React.Component {
                 </p>
                 <p>
                 Ask Izzy lists specialist housing services that can help you access homeless
-                shelters. To find services near you, <Link to="/">search Ask Izzy now</Link>
+                shelters. To find services near you, <Link to="/">search Ask Izzy</Link> now.
                 </p>
 
                 <h3>How do I get a bed?</h3>
@@ -88,9 +88,10 @@ export default class HomelessSheltersStaticPage extends React.Component {
                 <h3>Where can I find a homeless shelter?</h3>
 
                 <p>
-                There are homeless shelters across the country, in regional and metropolitan areas.
+                There are homeless shelters across the country,
+                in regional and metropolitan areas. {' '}
                 <Link to="/category/housing">
-                  Find a homeless specialist homeless service
+                  Find a specialist homeless service
                 </Link> who can help you access shelter near you or browse:
 
                 <ul>

@@ -18,7 +18,7 @@ export default class HomelessSupportStaticPage extends React.Component {
                 </p>
                 <p>
                     If you are in any of these situations you may be looking for different kinds of
-                    help - from a bed for the night to help finding work. You can find a range of
+                    help — from a bed for the night to help finding work. You can find a range of
                     support services near you on <Link to="/">Ask Izzy</Link>.
                 </p>
 

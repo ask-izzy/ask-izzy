@@ -12,7 +12,7 @@ export default class HomelessLegalStaticPage extends React.Component {
                 <h1>Homeless legal services</h1>
                 <p>
                     There are many free or low-cost legal services available for people experiencing, or at risk of, homelessness.
-                    If you need legal advice or representation in court, search <Link to="/">Ask Izzy</Link> to find your closest legal centre.
+                    If you need legal advice or representation in court, <Link to="/">search Ask Izzy</Link> to find your closest legal centre.
                 </p>
                 <h2>What kind of legal help can I get?</h2>
                 <p>Homeless legal centres provide free or low-cost, independent advice about the law and your specific situation. If you have a court date, they can prepare your case, represent you in the court appearance and help you through the legal process. </p>

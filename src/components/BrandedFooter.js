@@ -28,24 +28,26 @@ class BrandedFooter extends React.Component {
                     </ul>
                 </div>
                 <div>
+                    About Homelessness:
+                    {' '}
                     <ul className="footer-list information">
                         <li><Link to="/homeless-shelters">
-                            About Homeless shelters
+                            Shelters
                         </Link></li>
                         <li><Link to="/food-banks">
-                            About Food banks
+                            Food banks
                         </Link></li>
                         <li><Link to="/homeless-support">
-                            About Homeless support
+                            Support
                         </Link></li>
                         <li><Link to="/homeless-legal-services">
-                            About Homeless legal Services
+                            Legal Services
                         </Link></li>
                         <li><Link to="/homeless-financial-support">
-                            About Homeless financial support
+                            Financial support
                         </Link></li>
                         <li><Link to="/homeless-health-care">
-                            About Homeless health Care
+                            Health Care
                         </Link></li>
                     </ul>
                 </div>

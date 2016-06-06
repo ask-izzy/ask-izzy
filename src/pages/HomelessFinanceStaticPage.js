@@ -32,11 +32,17 @@ export default class HomelessFinanceStaticPage extends React.Component {
                 <li>get help</li>
                 <li>question the debt.</li>
                 </ul>
-                <h3><strong>Watch out for questionable offers of help</strong></h3>
+                <h2>Watch out for questionable offers of help</h2>
                 <p>Be careful of uninvited offers of help. Some organisations may offer to negotiate with your creditors and to restructure your debts for a fee. They usually write to you after you have been sued. </p>
                 <p>Some of these organisations may be okay but others are not. Make sure you get advice from a financial counsellor before signing any contracts.</p>
                 <h2>Where can I find homeless financial services?</h2>
-                <p>There are financial services located in regional and metropolitan areas across Australia. Some are drop in services so you do not need to make an appointment and others are not. Check with your selected service before you travel. </p>
+                <p>
+                    There are financial services located in regional and
+                    metropolitan areas across Australia. Some are drop in
+                    services so you do not need to make an appointment and
+                    others are not. Some offer phone help. Check with your
+                    selected service before you travel.
+                </p>
                 <p><Link to="/category/money-help">Find financial help near you</Link> or browse:</p>
                 <ul>
                     <li><Link to="/category/money-help/in/Adelaide-SA">Financial help in Adelaide</Link></li>

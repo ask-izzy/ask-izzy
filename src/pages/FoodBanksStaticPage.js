@@ -11,14 +11,17 @@ export default class FoodBanksStaticPage extends React.Component {
             <StaticPage title="Food Banks">
                 <h1>Food banks</h1>
                 <p>If you are unable to buy groceries because of lack of income, an unexpected life event or large expense you can visit a food bank to get what you need. </p>
-                <p>Each year, food banks across Australia provide groceries and other essential items to thousands of people in similar situations to yours. To find your closest food bank, search Ask Izzy [hyperlink to homepage] now.</p>
+                <p>
+                    Each year, food banks across Australia provide groceries and other essential items to thousands of people in similar situations to yours.
+                    To find your closest food bank, <Link to="/category/food">search Ask Izzy</Link> now.
+                </p>
                 <h2>What can I get at a food bank?</h2>
                 <p>A food bank provides free or low-cost food and other goods to people who need them. They usually stock basic, non-perishable food items like sauces, canned goods, pasta and rice. Depending on availability, toiletries like shampoo, soap and sanitary products are also available.</p>
-                <p>The products comes from different sources including supermarkets, personal donations and wholesalers.</p>
+                <p>The products come from different sources including supermarkets, personal donations and wholesalers.</p>
                 <h2>Where can I find a food bank?</h2>
                 <p>
-                    There are food banks across the country, in regional and metropolitan areas.
-                    <Link to="/category/food">Find a food bank near you</Link> or browse:
+                    There are food banks across the country, in regional and metropolitan
+                    areas. <Link to="/category/food">Find a food bank near you</Link> or browse:
                 </p>
                 <ul>
                 <li><Link to="/category/food/in/Adelaide-SA">Food banks in Adelaide</Link></li>
