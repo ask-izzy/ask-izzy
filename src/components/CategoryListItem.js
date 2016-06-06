@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import ListItem from "./ListItem";
+import LinkListItem from "./LinkListItem";
 import icons from "../icons";
 import type {Category} from "../constants/categories";
 
@@ -24,7 +24,7 @@ class CategoryListItem extends React.Component {
         let Icon = this.props.category.icon || icons.House;
 
         return (
-            <components.LinkListItem
+            <LinkListItem
                 className="CategoryListItem hero"
                 to={`/category/${this.props.category.key}`}
                 leftIcon={
