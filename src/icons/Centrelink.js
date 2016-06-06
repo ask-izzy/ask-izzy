@@ -7,7 +7,7 @@ import classnames from "classnames";
 
 export default class SvgIconCentrelink extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
     static propTypes = {
         className: React.PropTypes.string,
     };

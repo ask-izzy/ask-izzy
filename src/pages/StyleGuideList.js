@@ -6,7 +6,7 @@ import components from "../components";
 
 export default class StyleGuideList extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
     render() {
         return (
             <ul>

@@ -4,7 +4,9 @@ import classnames from "classnames";
 
 class Collapser extends React.Component {
     props: Object;
-    state: Object;
+    state: {
+        collapsed: boolean,
+    };
 
     constructor(props: Object) {
         super(props);

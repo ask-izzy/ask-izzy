@@ -6,7 +6,7 @@ import sendEvent from "../google-tag-manager";
 
 export default class Web extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static sampleProps = {default: {url: "https://ExampleDomain.com/landingPage"}};
 

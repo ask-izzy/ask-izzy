@@ -7,7 +7,7 @@ import classnames from "classnames";
 
 export default class SvgIconMoney extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
     static propTypes = {
         className: React.PropTypes.string,
     };

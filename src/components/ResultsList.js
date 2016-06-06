@@ -18,7 +18,7 @@ const className = (elem: React$Element<any>) =>
 
 class ResultsList extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     crisisResults(): Array<Object> {
         return crisisResults(this.props.results);

@@ -7,7 +7,7 @@ import icons from "../icons";
 
 class AppBar extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
     static propTypes = {
         title: React.PropTypes.string.isRequired,
         onBackTouchTap: React.PropTypes.func.isRequired,

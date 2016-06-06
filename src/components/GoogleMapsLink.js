@@ -6,7 +6,7 @@ import classnames from "classnames";
 
 class GoogleMapsLink extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static sampleProps = {
         default: {

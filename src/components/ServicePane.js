@@ -18,10 +18,11 @@ import GoogleMapsLink from "./GoogleMapsLink";
 import LinkListItem from "./LinkListItem";
 import Chevron from "../icons/Chevron";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
+import type {Service} from "../iss";
 
 export default class ServicePane extends React.Component {
     props: Object;
-    state: Object;
+    state: {siblings: ?Array<Service>};
 
     constructor(props: Object) {
         super(props);
@@ -172,7 +173,13 @@ export default class ServicePane extends React.Component {
     }
 
     renderSiblings() {
-        if (_.isEmpty(this.state.siblings)) {
+        const siblings = this.state.siblings;
+
+        if (!siblings) {
+            return <span />;
+        }
+
+        if (_.isEmpty(siblings)) {
             return <span />;
         }
 
@@ -182,7 +189,7 @@ export default class ServicePane extends React.Component {
                     Also at this location
                 </h3>
                 <div className="List">
-                    {this.state.siblings.map((service, index) =>
+                    {siblings.map((service, index) =>
                         <LinkListItem
                             className="plain-text"
                             to={`/service/${service.slug}`}

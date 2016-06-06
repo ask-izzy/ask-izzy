@@ -5,7 +5,7 @@ import icons from "../icons";
 
 export default class LogoWithShadow extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
     render() {
         return (
             <div className="LogoWithShadow">

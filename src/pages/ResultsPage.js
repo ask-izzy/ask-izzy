@@ -118,7 +118,7 @@ class ResultsPage extends BaseCategoriesPage {
             location: storage.getLocation(),
         });
 
-        if (!this.state.meta && this.state.meta.next) {
+        if (!(this.state.meta && this.state.meta.next)) {
             return;
         }
 

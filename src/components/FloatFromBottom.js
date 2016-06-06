@@ -9,7 +9,10 @@ const containerHeightPadding = 20;
 
 class FloatFromBottom extends React.Component {
     props: Object;
-    state: Object;
+    state: {
+        containerHeight: number,
+        elementScrolledOffscreen?: boolean,
+    };
 
     constructor(props: Object) {
         super(props);

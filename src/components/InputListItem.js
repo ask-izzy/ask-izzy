@@ -5,7 +5,7 @@ import ListItem from "./ListItem";
 
 export default class InputListItem extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
     static propTypes = {
         type: React.PropTypes.string.isRequired,
         checked: React.PropTypes.bool,

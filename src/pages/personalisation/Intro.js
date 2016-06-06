@@ -10,7 +10,7 @@ import * as iss from "../../iss";
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Intro extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static defaultProps = {
         name: "intro",
@@ -20,12 +20,6 @@ class Intro extends React.Component {
         name: React.PropTypes.string.isRequired,
         onDoneTouchTap: React.PropTypes.func,
     };
-
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-        };
-    }
 
     static title = "Intro";
 

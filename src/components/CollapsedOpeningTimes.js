@@ -48,7 +48,7 @@ function fixture(
 
 export default class CollapsedOpeningTimes extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static sampleProps = {
         "between Twice in one day (@1pm wed)": fixture(false, [{

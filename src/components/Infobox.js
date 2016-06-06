@@ -5,7 +5,8 @@ import { Link } from "react-router";
 
 class Infobox extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
+
     static propTypes = {
         href: React.PropTypes.string,
         to: React.PropTypes.string,
@@ -15,11 +16,6 @@ class Infobox extends React.Component {
     static defaultProps = {
         linkText: "More information",
     };
-
-    constructor(props: Object) {
-        super(props);
-        this.state = {};
-    }
 
     static sampleProps = {default: {
         linkText: "Housing information",

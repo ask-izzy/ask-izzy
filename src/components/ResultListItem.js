@@ -18,7 +18,7 @@ import IndigenousServiceIcon from "./IndigenousServiceIcon";
 
 class ResultListItem extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static displayName = "ResultListItem";
 

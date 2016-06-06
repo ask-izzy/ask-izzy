@@ -5,7 +5,7 @@ import classnames from "classnames";
 
 export default class ListItem extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static propTypes = {
         rootElement: React.PropTypes.any,

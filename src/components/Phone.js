@@ -7,7 +7,7 @@ import icons from "../icons";
 
 class Phone extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static sampleProps = {default: {
         "comment": "Here is a phone number with a long comment" +

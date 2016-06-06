@@ -7,7 +7,7 @@ import components from "../components";
 
 class AboutPage extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static contextTypes = {
         router: React.PropTypes.object.isRequired,

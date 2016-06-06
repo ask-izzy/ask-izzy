@@ -11,7 +11,7 @@ import sendEvent from "../google-tag-manager";
 
 class TransportTime extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
     static propTypes = {
         compact: React.PropTypes.bool,
         location: React.PropTypes.object.isRequired,
@@ -23,7 +23,6 @@ class TransportTime extends React.Component {
 
     constructor() {
         super();
-        this.state = {time: {}};
     }
 
     static sampleProps = {

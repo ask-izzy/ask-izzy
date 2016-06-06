@@ -79,24 +79,28 @@ type DirectionsRequest = {
 
 declare class DirectionsService {
     route(options: DirectionsRequest, callback: Function): void;
-}
+};
 
 type DistanceMatrixRequest = {
     travelMode: string,
     unitSystem: string,
     origins: Array<string>,
     destinations: Array<string>,
-}
+};
+
+type TravelMode = "WALKING"|"TRANSIT";
+
 type TravelModes = {
     WALKING: string,
     TRANSIT: string,
-}
+};
+
 declare class DistanceMatrixService {
     getDistanceMatrix(
         params: DistanceMatrixRequest,
         callback: Function
     ): void,
-}
+};
 
 declare class GoogleMaps {
     Geocoder(): Geocoder;
@@ -118,8 +122,8 @@ declare class GoogleMaps {
         trigger: function,
     };
     GeocoderStatus: {OK: string};
-}
+};
 
 declare class Google {
     maps: GoogleMaps;
-}
+};

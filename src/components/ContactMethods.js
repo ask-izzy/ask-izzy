@@ -13,7 +13,7 @@ import sendEvent from "../google-tag-manager";
 
 class ContactMethods extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static sampleProps = {
         closed: {

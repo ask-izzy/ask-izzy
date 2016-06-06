@@ -45,7 +45,7 @@ const PersonalisationLink = ({pathname}: Object) =>
 
 class LoadingResultsHeader extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     render() {
         const {

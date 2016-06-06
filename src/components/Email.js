@@ -7,7 +7,7 @@ import sendEvent from "../google-tag-manager";
 
 export default class Email extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static sampleProps = {default: fixtures.ixa.emails[0]};
 

@@ -19,7 +19,12 @@ import { append, Search } from "../../iss/Search";
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class BaseQuestion extends React.Component {
     props: Object;
-    state: Object;
+    state: {
+        selected: ?string,
+        rootHeight?: number,
+        windowHeight?: number,
+        answers?: Set<string>,
+    };
 
     static defaultProps: Object = {};
 
@@ -44,7 +49,11 @@ class BaseQuestion extends React.Component {
     }
 
     get selected(): string {
-        return this.state.selected || storage.getItem(this.props.name) || "";
+        return `${(
+            this.state.selected ||
+            storage.getItem(this.props.name) ||
+            ""
+        )}`;
     }
 
     static get summaryLabel(): string {

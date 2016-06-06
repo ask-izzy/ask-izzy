@@ -6,7 +6,7 @@ import Collapser from "./Collapser";
 
 class DebugContainer extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     componentDidMount(): void {
         try {

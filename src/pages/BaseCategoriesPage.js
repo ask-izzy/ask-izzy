@@ -5,13 +5,24 @@ import _ from "underscore";
 
 import categories, { Category } from "../constants/categories";
 import badRouteParams from "../server/not_found";
-import type { searchRequest } from "../iss";
+import type {
+    searchRequest,
+    searchResultsMeta,
+    Service,
+} from "../iss";
 import Location from "./personalisation/Location";
 import storage from "../storage";
 
 class BaseCategoriesPage extends React.Component {
     props: Object;
-    state: Object;
+    state: {
+        meta?: ?searchResultsMeta,
+        error?: any,
+        statusCode?: number,
+        objects?: Array<Service>,
+        nextDisabled?: boolean,
+        floatingContainerHeight?: number,
+    };
     _category: Category;
 
     /**

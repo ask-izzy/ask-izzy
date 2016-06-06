@@ -6,7 +6,7 @@ import components from "../components";
 
 class TermsPage extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static contextTypes = {
         router: React.PropTypes.object.isRequired,

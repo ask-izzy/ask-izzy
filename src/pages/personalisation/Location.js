@@ -16,15 +16,15 @@ import * as iss from "../../iss";
 import suggest from "../../locationSuggestions";
 import type { LocationCompletion } from "../../locationSuggestions";
 
-const AutocompleteState = {
-    NOT_SEARCHING: 0,
-    SEARCHING: 1,
-};
-
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Location extends React.Component {
     props: Object;
-    state: Object;
+    state: {
+        autocompletionInProgress: boolean,
+        locationName: string,
+        autocompletions: Array<LocationCompletion>,
+        nextDisabled: boolean,
+    };
 
     static propTypes = {
         name: React.PropTypes.string.isRequired,
@@ -38,9 +38,8 @@ class Location extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {
-            autocompletion: AutocompleteState.NOT_SEARCHING,
+            autocompletionInProgress: false,
             locationName: "",
-            locationCoords: {},
             autocompletions: [],
             nextDisabled: true,
         };
@@ -134,17 +133,17 @@ class Location extends React.Component {
     triggerAutocomplete(): void {
         let input = this.state.locationName;
 
-        suggest(input, this.state.locationCoords)
+        suggest(input)
             .then(results => {
                 this.setState({
                     autocompletions: Array.from(results),
-                    autocompletion: AutocompleteState.NOT_SEARCHING,
+                    autocompletionInProgress: false,
                 });
             })
 
             .catch(() => {
                 this.setState({
-                    autocompletion: AutocompleteState.NOT_SEARCHING,
+                    autocompletionInProgress: false,
                 });
             });
     }
@@ -181,7 +180,7 @@ class Location extends React.Component {
         if (event.target instanceof HTMLInputElement) {
             this.setLocationName(ltrim(event.target.value), false);
             this.setState({
-                autocompletion: AutocompleteState.SEARCHING,
+                autocompletionInProgress: true,
             });
 
             // Forget the users coordinates if they change
@@ -277,7 +276,7 @@ class Location extends React.Component {
                     )
                 }</div>
                 {
-                    this.state.autocompletion == AutocompleteState.SEARCHING ?
+                    this.state.autocompletionInProgress ?
                         <div className="progress">
                             <icons.Loading className="big" />
                         </div>

@@ -6,7 +6,7 @@ import storage from "./storage";
 import _ from "underscore";
 import checkInactive from "./inactiveTimeout";
 
-class MapsApi {
+export class MapsApi {
     api: GoogleMaps;
 
     constructor(api: GoogleMaps) {
@@ -62,7 +62,7 @@ class MapsApi {
     }
 
     batchDirectionsRequest(
-        destinations: Array<string>, mode = "WALKING"
+        destinations: Array<string>, mode: TravelMode = "WALKING"
     ): Promise<Array<travelTime>> {
         const directionsService = new this.api.DistanceMatrixService();
         const coords = storage.getCoordinates();

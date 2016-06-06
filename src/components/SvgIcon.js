@@ -5,7 +5,7 @@ import classnames from "classnames";
 
 class SvgIcon extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static defaultProps = {
         viewBox: "0 0 24 24",

@@ -7,69 +7,46 @@ import Geolocation, {guessSuburb} from "../geolocation";
 import icons from "../icons";
 import sendEvent from "../google-tag-manager";
 
-const GeoLocationState = {
-    NOT_STARTED: 0,
-    RUNNING: 1,
-    COMPLETE: 2,
-    FAILED: 3,
-};
+type GeoLocationState = "NOT_STARTED"|"RUNNING"|"COMPLETE"|"FAILED"
 
-class NotStartedGeolocation extends React.Component {
-    props: Object;
-    state: Object;
-    render() {
-        return (
-            <ButtonListItem
-                className="taller LocationButton"
-                onClick={this.props.onClick}
-                primaryText={
-                    <span className="link-color link-text">
-                        Get your current location
-                    </span>
-                }
-                leftIcon={
-                    <icons.Location
-                        className="ColoredIcon icon-fg-color big"
-                    />
-                }
+const NotStartedGeolocation = (props) => (
+    <ButtonListItem
+        className="taller LocationButton"
+        onClick={props.onClick}
+        primaryText={
+            <span className="link-color link-text">
+                Get your current location
+            </span>
+        }
+        leftIcon={
+            <icons.Location
+                className="ColoredIcon icon-fg-color big"
             />
-        );
-    }
-}
+        }
+    />
+);
 
-class RunningGeolocation extends React.Component {
-    props: Object;
-    state: Object;
-    render() {
-        return (
-            <ListItem
-                primaryText="Locating you..."
-                secondaryText="Please permit us to use your GPS"
-                leftIcon={
-                    <icons.Loading className="big" />
-                }
-            />
-        );
-    }
-}
+const RunningGeolocation = () => (
+    <ListItem
+        primaryText="Locating you..."
+        secondaryText="Please permit us to use your GPS"
+        leftIcon={
+            <icons.Loading className="big" />
+        }
+    />
+);
 
-class FinishedGeolocation extends React.Component {
-    props: Object;
-    state: Object;
-    render() {
-        return (
-            <ListItem
-                className="taller"
-                primaryText="Found your location"
-                leftIcon={<icons.Tick className="big" />}
-            />
-        );
-    }
-}
+const FinishedGeolocation = () => (
+    <ListItem
+        className="taller"
+        primaryText="Found your location"
+        leftIcon={<icons.Tick className="big" />}
+    />
+);
 
 class FailedGeolocation extends React.Component {
-    props: Object;
-    state: Object;
+    props: {error: string};
+    state: void;
     render() {
         return (
             <ListItem
@@ -84,7 +61,10 @@ class FailedGeolocation extends React.Component {
 
 class GeolocationButton extends React.Component {
     props: Object;
-    state: Object;
+    state: {
+        geolocation: GeoLocationState,
+        error?: string
+    };
     static sampleProps = {
         default: {},
     };
@@ -92,7 +72,7 @@ class GeolocationButton extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {
-            geolocation: GeoLocationState.NOT_STARTED,
+            geolocation: "NOT_STARTED",
         };
     }
 
@@ -104,18 +84,18 @@ class GeolocationButton extends React.Component {
     }
 
     onGeolocationClick(): void {
-        if (this.state.geolocation != GeoLocationState.NOT_STARTED) {
+        if (this.state.geolocation != "NOT_STARTED") {
             return;
         }
 
         this.setState({
-            geolocation: GeoLocationState.RUNNING,
+            geolocation: "RUNNING",
         });
         sendEvent({event: "geolocation-requested"});
 
         this.locateMe()
             .then((params) => {
-                this.setState({geolocation: GeoLocationState.COMPLETE});
+                this.setState({geolocation: "COMPLETE"});
                 sendEvent({event: "geolocation-success"});
 
                 this.props.onSuccess(params);
@@ -127,18 +107,18 @@ class GeolocationButton extends React.Component {
                 });
                 console.error(error);
                 this.setState({
-                    geolocation: GeoLocationState.FAILED,
+                    geolocation: "FAILED",
                     error: error.message,
                 });
             });
     }
 
     render() {
-        if (this.state.geolocation == GeoLocationState.RUNNING) {
+        if (this.state.geolocation == "RUNNING") {
             return <RunningGeolocation />;
-        } else if (this.state.geolocation == GeoLocationState.COMPLETE) {
+        } else if (this.state.geolocation == "COMPLETE") {
             return <FinishedGeolocation />;
-        } else if (this.state.geolocation == GeoLocationState.FAILED) {
+        } else if (this.state.error) {
             return <FailedGeolocation error={this.state.error}/>;
         } else {
             return (

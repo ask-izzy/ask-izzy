@@ -4,13 +4,16 @@ import React from "react";
 import ServicePane from "../components/ServicePane";
 
 import iss from "../iss";
+import type {Service} from "../iss";
 import components from "../components";
 import Loading from "../icons/Loading";
 
 class ServicePage extends React.Component {
     props: Object;
-    state: Object;
-
+    state: {
+        object?: Service,
+        error?: Object,
+    };
     static propTypes = {
         params: React.PropTypes.object,
     };

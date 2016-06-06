@@ -7,7 +7,7 @@ import classnames from "classnames";
 
 export default class SvgIconTram extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
     static propTypes = {
         className: React.PropTypes.string,
     };

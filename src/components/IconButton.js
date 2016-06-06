@@ -5,7 +5,7 @@ import classnames from "classnames";
 
 export default class IconButton extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
     static propTypes = {
         onClick: React.PropTypes.func,
     };

@@ -12,7 +12,7 @@ import storage from "../storage";
 
 class ResultsListPage extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static propTypes = {
         objects: React.PropTypes.array,
