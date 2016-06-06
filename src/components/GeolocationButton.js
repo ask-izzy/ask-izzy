@@ -7,7 +7,7 @@ import Geolocation, {guessSuburb} from "../geolocation";
 import icons from "../icons";
 import sendEvent from "../google-tag-manager";
 
-type GeoLocationState = "NOT_STARTED"|"RUNNING"|"COMPLETE"|"FAILED"
+type GeoLocationState = "NOT_STARTED"|"RUNNING"|"COMPLETE"|"FAILED";
 
 const NotStartedGeolocation = (props) => (
     <ButtonListItem
@@ -60,7 +60,10 @@ class FailedGeolocation extends React.Component {
 }
 
 class GeolocationButton extends React.Component {
-    props: Object;
+    props: {
+        onSuccess: (result: {name: string, coords: Coordinates}) => void,
+    };
+
     state: {
         geolocation: GeoLocationState,
         error?: string

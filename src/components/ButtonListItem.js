@@ -2,9 +2,10 @@
 
 import React from "react";
 import ListItem from "./ListItem";
+import type {ListItemProps} from "./ListItem";
 
 export default class ButtonListItem extends React.Component {
-    props: Object;
+    props: ListItemProps;
     state: void;
     static propTypes = ListItem.propTypes;
 

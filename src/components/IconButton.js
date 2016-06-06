@@ -4,7 +4,11 @@ import React from "react";
 import classnames from "classnames";
 
 export default class IconButton extends React.Component {
-    props: Object;
+    props: {
+        onClick: Function,
+        className?: string,
+        children?: any,
+    };
     state: void;
     static propTypes = {
         onClick: React.PropTypes.func,
@@ -21,14 +25,12 @@ export default class IconButton extends React.Component {
             className,
             onClick,
             children,
-            ...rest,
         } = this.props;
 
         return (
             <button
                 className={classnames("IconButton", className)}
                 onClick={onClick}
-                {...rest}
             >
                 {children}
             </button>

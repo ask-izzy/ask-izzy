@@ -5,7 +5,11 @@ import Location from "../iss/Location";
 import classnames from "classnames";
 
 class GoogleMapsLink extends React.Component {
-    props: Object;
+    props: {
+        to: Location,
+        children?: any,
+        className: ?string,
+    };
     state: void;
 
     static sampleProps = {
@@ -45,14 +49,12 @@ class GoogleMapsLink extends React.Component {
         const {
             className,
             children,
-            ...rest,
         } = this.props;
 
         if (this.props.to.isConfidential()) {
             return (
                 <span
                     className={classnames("GoogleMapsLink", className)}
-                    {...rest}
                 >
                     {children}
                 </span>
@@ -65,7 +67,6 @@ class GoogleMapsLink extends React.Component {
                 target="_blank"
                 aria-label="Open Google Maps in a new tab"
                 href={this.googleMapsUrl()}
-                {...rest}
             >
                     {children}
             </a>

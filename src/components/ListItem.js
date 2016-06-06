@@ -3,25 +3,22 @@
 import React from "react";
 import classnames from "classnames";
 
+export type ListItemProps = {
+    rootElement?: string,
+    className?: string,
+
+    primaryText?: any,
+    secondaryText?: any,
+
+    leftIcon?: any,
+    rightIcon?: any,
+
+    children?: any,
+}
+
 export default class ListItem extends React.Component {
-    props: Object;
+    props: ListItemProps;
     state: void;
-
-    static propTypes = {
-        rootElement: React.PropTypes.any,
-        className: React.PropTypes.string,
-
-        primaryText: React.PropTypes.node,
-        secondaryText: React.PropTypes.node,
-
-        leftIcon: React.PropTypes.node,
-        rightIcon: React.PropTypes.node,
-    };
-
-    static defaultProps = {
-        className: "",
-        rootElement: "div",
-    };
 
     static sampleProps = {
         default: {
@@ -41,6 +38,10 @@ export default class ListItem extends React.Component {
             secondaryText,
             ...rest,
         } = this.props;
+
+        if (!rootElement) {
+            rootElement = "div";
+        }
 
         return React.createElement(
             rootElement,

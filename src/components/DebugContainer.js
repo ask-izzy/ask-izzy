@@ -5,7 +5,10 @@ import storage from "../storage";
 import Collapser from "./Collapser";
 
 class DebugContainer extends React.Component {
-    props: Object;
+    props: {
+        message: string,
+        children?: any,
+    };
     state: void;
 
     componentDidMount(): void {

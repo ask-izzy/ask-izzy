@@ -3,7 +3,9 @@
 import React from "react";
 
 class CrisisHeader extends React.Component {
-    props: Object;
+    props: {
+        plural: boolean
+    };
     state: void;
 
     render() {

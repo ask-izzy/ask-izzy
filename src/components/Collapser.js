@@ -3,7 +3,12 @@ import React from "react";
 import classnames from "classnames";
 
 class Collapser extends React.Component {
-    props: Object;
+    props: {
+        message: string,
+        className?: string,
+        expanded?: boolean,
+        children?: any,
+    };
     state: {
         collapsed: boolean,
     };

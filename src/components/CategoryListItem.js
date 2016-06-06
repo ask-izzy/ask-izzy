@@ -1,12 +1,14 @@
 /* @flow */
 
 import React from "react";
-
-import components from "../components";
+import ListItem from "./ListItem";
 import icons from "../icons";
+import type {Category} from "../constants/categories";
 
 class CategoryListItem extends React.Component {
-    props: Object;
+    props: {
+        category: Category,
+    };
     state: void;
 
     static sampleProps = {default: {

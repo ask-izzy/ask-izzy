@@ -4,15 +4,15 @@ import React from "react";
 import { Link } from "react-router";
 import classnames from "classnames";
 import ListItem from "./ListItem";
+import type { ListItemProps } from "./ListItem";
 
 export default class LinkListItem extends React.Component {
-    props: Object;
+    props: ListItemProps & ({
+        to: string,
+    } | {
+        href: string,
+    });
     state: void;
-    static propTypes = {
-        to: React.PropTypes.string,
-        href: React.PropTypes.string,
-        ...ListItem.propTypes,
-    };
 
     static sampleProps = {
         default: {

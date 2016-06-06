@@ -3,7 +3,9 @@
 import React from "react";
 
 class DebugQueryScore extends React.Component {
-    props: Object;
+    props: {
+        search: ?Object,
+    };
     state: void;
 
     render() {

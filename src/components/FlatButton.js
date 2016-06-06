@@ -4,7 +4,13 @@ import React from "react";
 import classnames from "classnames";
 
 export default class FlatButton extends React.Component {
-    props: Object;
+    props: {
+        label: string,
+        className?: string,
+        onClick: Function,
+        disabled?: boolean,
+        children?: any,
+    };
     state: void;
     static propTypes = {
         disabled: React.PropTypes.bool,
