@@ -49,6 +49,11 @@ const Storage = {
         this.setItem("location", location);
     },
 
+    getUserIsIndigenous(): boolean {
+        return this.getItem("indigenous") == "Yes" ||
+        this.getArray("demographics").includes("Indigenous");
+    },
+
     getCoordinates(): ?{latitude: number, longitude: number} {
         const coords = JSON.parse(
             sessionStore.getItem("coordinates") || "null"
@@ -87,6 +92,10 @@ const Storage = {
         event[`personalize-${key}`] = obj;
         sendEvent(event);
         persistentStore.setItem(key, `${obj}`);
+    },
+
+    getArray(key: string): Array<any> {
+        return Array.from(this.getJSON(key) || []);
     },
 
     getJSON(key: string): any {
