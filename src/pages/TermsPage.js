@@ -5,7 +5,7 @@ import React from "react";
 import components from "../components";
 
 class TermsPage extends React.Component {
-    props: Object;
+    props: {};
     state: void;
 
     static contextTypes = {

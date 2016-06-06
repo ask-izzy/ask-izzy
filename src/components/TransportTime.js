@@ -10,12 +10,11 @@ import Location from "../iss/Location";
 import sendEvent from "../google-tag-manager";
 
 class TransportTime extends React.Component {
-    props: Object;
-    state: void;
-    static propTypes = {
-        compact: React.PropTypes.bool,
-        location: React.PropTypes.object.isRequired,
+    props: {
+        location: Location,
+        compact?: true,
     };
+    state: void;
 
     static defaultProps = {
         compact: false,
@@ -56,6 +55,10 @@ class TransportTime extends React.Component {
 
     renderPublic() {
         const {travelTime} = this.props.location;
+
+        if (!travelTime) {
+            return <div />;
+        }
 
         return (
             <div>

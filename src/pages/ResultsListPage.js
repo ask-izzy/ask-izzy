@@ -9,9 +9,22 @@ import LoadingResultsHeader from
 import ViewOnMapButton from "../components/ViewOnMapButton";
 import sendEvent from "../google-tag-manager";
 import storage from "../storage";
+import type { Service } from "../iss";
+
+type SearchOrCategory = {search: string} | {title: string};
 
 class ResultsListPage extends React.Component {
-    props: Object;
+    props: {
+        loadMore: any,
+        objects: Array<Service>,
+        location: any,
+        personalisationComponents: Array<Object>,
+        title: string,
+        statusCode: number,
+        meta: {total_count: number},
+        loading: boolean,
+        error: string,
+    } & SearchOrCategory;
     state: void;
 
     static propTypes = {
@@ -19,12 +32,20 @@ class ResultsListPage extends React.Component {
     };
 
     recordMapClick(): void {
-        sendEvent({
-            event: "ViewOnMap",
-            category: this.props.category,
-            search: this.props.search,
-            location: storage.getLocation(),
-        });
+        if (this.props.search) {
+            sendEvent({
+                event: "ViewOnMap",
+                search: this.props.search,
+                location: storage.getLocation(),
+            });
+        } else if (this.props.category) {
+            sendEvent({
+                event: "ViewOnMap",
+                category: this.props.category,
+                location: storage.getLocation(),
+            });
+        }
+
     }
 
     render() {

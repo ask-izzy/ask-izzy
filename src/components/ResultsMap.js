@@ -12,7 +12,7 @@ import ResultsList from "./ResultsList";
 import storage from "../storage";
 
 class ResultsMap extends React.Component {
-    props: Object;
+    props: {};
     state: {
         coords?: ?{latitude: number, longitude: number},
         selectedServices?: Array<Service>,

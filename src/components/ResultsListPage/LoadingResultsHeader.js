@@ -5,6 +5,7 @@ import {Link} from "react-router";
 
 import LogoWithShadow from "../LogoWithShadow";
 import HeaderBar from "../HeaderBar";
+import type {Category} from "../../constants/categories";
 
 import Gender from "../../pages/personalisation/Gender";
 import Age from "../../pages/personalisation/Age";
@@ -44,7 +45,16 @@ const PersonalisationLink = ({pathname}: Object) =>
     </Link>;
 
 class LoadingResultsHeader extends React.Component {
-    props: Object;
+    props: {
+        personalisationComponents: Array<Object>,
+        error: string,
+        statusCode: number,
+        loading: boolean,
+        category?: Category,
+        location: {pathname: string},
+        title: string,
+        meta: {total_count: number},
+    };
     state: void;
 
     render() {

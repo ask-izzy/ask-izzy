@@ -8,7 +8,11 @@ import components from "../components";
 declare var ISS_URL: string;
 
 class AddServicePage extends React.Component {
-    props: Object;
+    props: {
+        history: {
+            goBack: Function,
+        },
+    };
     state: {
         isFormDone: boolean,
     };

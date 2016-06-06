@@ -2,7 +2,9 @@
 import React from "react";
 
 class ScreenReader extends React.Component {
-    props: Object;
+    props: {
+        children?: any,
+    };
     state: void;
     static sampleProps = {default: {
         children: (

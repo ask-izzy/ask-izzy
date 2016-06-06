@@ -5,7 +5,7 @@ import components from "../components";
 import _s from "underscore.string";
 
 export default class StyleGuideItem extends React.Component {
-    props: Object;
+    props: {params: Object};
     state: void;
     static propTypes = {
         params: React.PropTypes.object,

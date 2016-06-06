@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import components from "../components";
 
 class AboutPage extends React.Component {
-    props: Object;
+    props: {};
     state: void;
 
     static contextTypes = {

@@ -8,7 +8,7 @@ import icons from "../icons";
 import storage from "../storage";
 
 class HomePage extends React.Component {
-    props: Object;
+    props: {};
     state: void;
 
     static contextTypes = {

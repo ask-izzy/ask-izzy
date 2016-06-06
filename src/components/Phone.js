@@ -6,7 +6,7 @@ import sendEvent from "../google-tag-manager";
 import icons from "../icons";
 
 class Phone extends React.Component {
-    props: Object;
+    props: phone & {crisis?: boolean};
     state: void;
 
     static sampleProps = {default: {

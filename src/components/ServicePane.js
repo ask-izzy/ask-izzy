@@ -21,7 +21,9 @@ import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import type {Service} from "../iss";
 
 export default class ServicePane extends React.Component {
-    props: Object;
+    props: {
+        service: Service,
+    };
     state: {siblings: ?Array<Service>};
 
     constructor(props: Object) {
@@ -99,7 +101,10 @@ export default class ServicePane extends React.Component {
 
                 <div className="practicalities">
                     <div className="practicalities-container">
-                        <CollapsedOpeningTimes object={object.open} />
+                        <CollapsedOpeningTimes
+                            object={object.open}
+                            serviceId={object.id}
+                        />
                         <hr />
 
                         <GoogleMapsLink

@@ -4,7 +4,11 @@ import React from "react";
 import classnames from "classnames";
 
 class SvgIcon extends React.Component {
-    props: Object;
+    props: {
+        className?: string,
+        viewBox?: string,
+        children?: any,
+    };
     state: void;
 
     static defaultProps = {

@@ -5,7 +5,13 @@ import DocumentTitle from "react-document-title";
 import { makeTitle } from "../routes";
 
 export default class BasePage extends React.Component {
-    props: Object;
+    props: {
+        main: any,
+        children: any,
+        footer: any,
+        routes: any,
+        params: any,
+    };
     state: void;
 
     static childContextTypes = {};

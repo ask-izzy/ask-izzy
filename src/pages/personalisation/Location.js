@@ -18,17 +18,16 @@ import type { LocationCompletion } from "../../locationSuggestions";
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Location extends React.Component {
-    props: Object;
+    props: {
+        name: string,
+        onDoneTouchTap: Function,
+    };
+
     state: {
         autocompletionInProgress: boolean,
         locationName: string,
         autocompletions: Array<LocationCompletion>,
         nextDisabled: boolean,
-    };
-
-    static propTypes = {
-        name: React.PropTypes.string.isRequired,
-        onDoneTouchTap: React.PropTypes.func,
     };
 
     static defaultProps = {
