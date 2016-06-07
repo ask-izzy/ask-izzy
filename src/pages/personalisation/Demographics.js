@@ -21,7 +21,7 @@ export default class Demographics extends BaseMultiQuestion {
             "Parole / recently released": append("post-release"),
             "Have a disability": append("disabilities"),
             "Veteran": append("veteran"),
-            "Asylum seeker": append("refugees"),
+            "Person seeking asylum": append("refugees"),
             "Have pets": append("pets")
                 .append("-effectiveness"),
         },
@@ -34,7 +34,7 @@ export default class Demographics extends BaseMultiQuestion {
             "Parole / recently released": icons.DemographicParole,
             "Have a disability": icons.DemographicDisability,
             "Veteran": icons.DemographicVeteran,
-            "Asylum seeker": icons.DemographicRecentlyArrived,
+            "Person seeking asylum": icons.DemographicRecentlyArrived,
             "Have pets": icons.DemographicPets,
         },
     };
