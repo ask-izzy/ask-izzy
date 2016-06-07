@@ -12,12 +12,12 @@ export default class Demographics extends BaseMultiQuestion {
         name: "demographics",
         question: "Do any of these apply to you?",
         answers: {
-            "Escaping family violence": append("family violence"),
+            "Escaping family violence": append("(family violence)"),
             // n.b. see also storage.getUserIsIndigenous when changing
-            "Indigenous": append("Aboriginals & Torres Strait Islanders"),
+            "Indigenous": append("(Aboriginals & Torres Strait Islanders)"),
             "Family with children": append("families -srs"),
             "Couples": append("couples"),
-            "Mental or emotional difficulties": append("mental health"),
+            "Mental or emotional difficulties": append("(mental health)"),
             "Parole / recently released": append("post-release"),
             "Have a disability": append("disabilities"),
             "Veteran": append("veteran"),
