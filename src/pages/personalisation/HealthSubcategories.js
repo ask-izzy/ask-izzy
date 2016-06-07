@@ -22,7 +22,6 @@ export default class HealthSubcategories extends BaseQuestion {
             "Foot problems": specialist("podiatry"),
             "Eye care": specialist("optometry"),
             "Social & emotional wellbeing": specialist("mental health"),
-            "Family": specialist("family"),
             "Children": remove("(community health)")
                 .append("health children"),
             "Maternal & child health": remove("(community health)")
