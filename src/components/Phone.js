@@ -6,8 +6,8 @@ import sendEvent from "../google-tag-manager";
 import icons from "../icons";
 
 class Phone extends React.Component {
-    props: Object;
-    state: Object;
+    props: phone & {crisis?: boolean};
+    state: void;
 
     static sampleProps = {default: {
         "comment": "Here is a phone number with a long comment" +

@@ -47,8 +47,13 @@ function fixture(
 }
 
 export default class CollapsedOpeningTimes extends React.Component {
-    props: Object;
-    state: Object;
+    props: {
+        object: ServiceOpening,
+        serviceId: number,
+        moment?: Moment,
+        expanded?: boolean,
+    };
+    state: void;
 
     static sampleProps = {
         "between Twice in one day (@1pm wed)": fixture(false, [{
@@ -104,7 +109,7 @@ export default class CollapsedOpeningTimes extends React.Component {
     recordExpandOpeningTimes(): void {
         sendEvent({
             event: "expandOpeningTimes",
-            service: this.props.object.id,
+            service: this.props.serviceId,
         })
     }
 

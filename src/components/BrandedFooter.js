@@ -4,8 +4,8 @@ import React from "react";
 import { Link } from "react-router";
 
 class BrandedFooter extends React.Component {
-    props: Object;
-    state: Object;
+    props: void;
+    state: void;
     static sampleProps = {
         default: {},
     };

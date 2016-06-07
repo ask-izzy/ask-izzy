@@ -4,7 +4,7 @@ import React from "react";
 
 class HtmlDocument extends React.Component {
     props: Object;
-    state: Object;
+    state: void;
 
     static propTypes = {
         css: React.PropTypes.arrayOf(React.PropTypes.string),

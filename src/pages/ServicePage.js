@@ -4,13 +4,20 @@ import React from "react";
 import ServicePane from "../components/ServicePane";
 
 import iss from "../iss";
+import type {Service} from "../iss";
 import components from "../components";
 import Loading from "../icons/Loading";
 
 class ServicePage extends React.Component {
-    props: Object;
-    state: Object;
-
+    props: {
+        params: {
+            slug: string,
+        },
+    };
+    state: {
+        object?: Service,
+        error?: Object,
+    };
     static propTypes = {
         params: React.PropTypes.object,
     };
@@ -40,8 +47,12 @@ class ServicePage extends React.Component {
     get id(): number {
         const leadingDigits = /^\d+/;
         let slug = this.props.params.slug;
+        let match = slug.match(leadingDigits);
 
-        return parseInt(slug.match(leadingDigits)[0]);
+        if (match) {
+            return parseInt(match[0]);
+        }
+        throw new Error("Bad URL (/service/[service-id must be a number]")
     }
 
     async loadService(): Promise<void> {

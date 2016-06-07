@@ -18,8 +18,21 @@ import { append, Search } from "../../iss/Search";
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class BaseQuestion extends React.Component {
-    props: Object;
-    state: Object;
+    props: {
+        name: string,
+        question: string,
+        byline?: string,
+        classNames?: string,
+        answers: Object|Array<string>,
+        onDoneTouchTap: Function,
+        suppressDoneButton: boolean,
+    };
+    state: {
+        selected: ?string,
+        rootHeight?: number,
+        windowHeight?: number,
+        answers?: Set<string>,
+    };
 
     static defaultProps: Object = {};
 
@@ -44,7 +57,11 @@ class BaseQuestion extends React.Component {
     }
 
     get selected(): string {
-        return this.state.selected || storage.getItem(this.props.name) || "";
+        return `${(
+            this.state.selected ||
+            storage.getItem(this.props.name) ||
+            ""
+        )}`;
     }
 
     static get summaryLabel(): string {
@@ -124,7 +141,7 @@ class BaseQuestion extends React.Component {
      * to this question.
      */
     get answers(): Array<string> {
-        if (_.isArray(this.props.answers)) {
+        if (Array.isArray(this.props.answers)) {
             return this.props.answers;
         } else {
             return Object.keys(this.props.answers);

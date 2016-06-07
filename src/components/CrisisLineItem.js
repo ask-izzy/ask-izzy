@@ -35,8 +35,10 @@ const crisisDescriptions = {
 
 
 class CrisisLineItem extends React.Component {
-    props: Object;
-    state: Object;
+    props: {
+        object: iss.Service,
+    };
+    state: void;
 
     static displayName = "CrisisLineItem";
 

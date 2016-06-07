@@ -5,13 +5,19 @@ import _ from "underscore";
 import { GoogleMap, Marker } from "react-google-maps";
 
 import iss from "../iss";
+import type {Service} from "../iss";
 import Maps from "../maps";
+import type {MapsApi} from "../maps";
 import ResultsList from "./ResultsList";
 import storage from "../storage";
 
 class ResultsMap extends React.Component {
-    props: Object;
-    state: Object;
+    props: {};
+    state: {
+        coords?: ?{latitude: number, longitude: number},
+        selectedServices?: Array<Service>,
+        maps?: MapsApi,
+    };
 
     static contextTypes = {
         router: React.PropTypes.object.isRequired,
@@ -104,6 +110,10 @@ class ResultsMap extends React.Component {
      */
     showWholeMap(): void {
         /* update the map bounds */
+        if (!this.state.maps) {
+            // We'll call this method after the api is ready.
+            return
+        }
         const maps = this.state.maps.api;
         let bounds = new maps.LatLngBounds();
         const points = removeOutliers(

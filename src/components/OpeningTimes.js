@@ -38,8 +38,11 @@ function fixture(
 }
 
 class OpeningTimes extends React.Component {
-    props: Object;
-    state: Object;
+    props: {
+        moment?: Moment,
+        object: ServiceOpening,
+    };
+    state: void;
 
     static propTypes = {
         object: React.PropTypes.object.isRequired,

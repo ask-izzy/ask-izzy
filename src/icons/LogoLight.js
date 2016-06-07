@@ -6,11 +6,10 @@ import React from "react";
 import classnames from "classnames";
 
 export default class SvgIconLogoLight extends React.Component {
-    props: Object;
-    state: Object;
-    static propTypes = {
-        className: React.PropTypes.string,
+    props: {
+        className?: string,
     };
+    state: void;
 
     render() {
         const {className, ...rest} = this.props;

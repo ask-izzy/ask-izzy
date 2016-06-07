@@ -3,14 +3,12 @@
 import React from "react";
 
 class HeaderBar extends React.Component {
-    props: Object;
-    state: Object;
-    static propTypes = {
-        primaryText: React.PropTypes.node.isRequired,
-        secondaryText: React.PropTypes.node,
-
-        // FIXME: icon
+    props: {
+        primaryText: any,
+        secondaryText?: any,
+        children?: any,
     };
+    state: void;
 
     static sampleProps = {default: {
         primaryText: "Primary Text",

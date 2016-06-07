@@ -168,6 +168,7 @@ class BaseMultiQuestion extends BaseQuestion {
                             key={index}
                             leftIcon={this.iconFor(answer)}
                             primaryText={answer}
+                            value={answer}
 
                             type="checkbox"
                             checked={selected.has(answer)}

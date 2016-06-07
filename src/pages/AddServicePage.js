@@ -8,8 +8,14 @@ import components from "../components";
 declare var ISS_URL: string;
 
 class AddServicePage extends React.Component {
-    props: Object;
-    state: Object;
+    props: {
+        history: {
+            goBack: Function,
+        },
+    };
+    state: {
+        isFormDone: boolean,
+    };
     issUrl: any; // Flowtype core declares url.parse(): any
     handleMessage: Function;
 

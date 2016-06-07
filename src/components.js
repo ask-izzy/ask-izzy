@@ -26,7 +26,6 @@ import GoogleMapsLink from "./components/GoogleMapsLink";
 import HeaderBar from "./components/HeaderBar";
 import IconButton from "./components/IconButton";
 import IndigenousServiceIcon from "./components/IndigenousServiceIcon";
-import Infobox from "./components/Infobox";
 import InputListItem from "./components/InputListItem";
 import LinkListItem from "./components/LinkListItem";
 import ListItem from "./components/ListItem";
@@ -69,7 +68,6 @@ export default {
     HeaderBar: HeaderBar,
     IconButton: IconButton,
     IndigenousServiceIcon: IndigenousServiceIcon,
-    Infobox: Infobox,
     InputListItem: InputListItem,
     LinkListItem: LinkListItem,
     ListItem: ListItem,

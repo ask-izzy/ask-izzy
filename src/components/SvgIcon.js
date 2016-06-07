@@ -4,8 +4,12 @@ import React from "react";
 import classnames from "classnames";
 
 class SvgIcon extends React.Component {
-    props: Object;
-    state: Object;
+    props: {
+        className?: string,
+        viewBox?: string,
+        children?: any,
+    };
+    state: void;
 
     static defaultProps = {
         viewBox: "0 0 24 24",

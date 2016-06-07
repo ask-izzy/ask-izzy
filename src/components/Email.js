@@ -6,8 +6,11 @@ import fixtures from "../../fixtures/services";
 import sendEvent from "../google-tag-manager";
 
 export default class Email extends React.Component {
-    props: Object;
-    state: Object;
+    props: {
+        email: string,
+        comment: string,
+    };
+    state: void;
 
     static sampleProps = {default: fixtures.ixa.emails[0]};
 

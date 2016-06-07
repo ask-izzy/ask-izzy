@@ -59,7 +59,7 @@ type searchResultsLocation = {
     lon: number,
 };
 
-type searchResultsMeta = {
+export type searchResultsMeta = {
     total_count: number,
     available_count: number,
     limit: number,

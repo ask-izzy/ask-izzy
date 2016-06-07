@@ -19,7 +19,6 @@ export type LocationCompletion = {
  */
 export default async function suggest(
     input: string,
-    location: ?Object,
 ): Promise<Iterable<LocationCompletion>> {
     const maps = await Maps();
     let request: AutocompletionRequest = {
@@ -31,7 +30,8 @@ export default async function suggest(
     };
 
     /* If the user has coordinates set in this session, use them */
-    location = storage.getCoordinates();
+    const location = storage.getCoordinates();
+
     if (location && location.latitude && location.longitude) {
         request.location = new maps.api.LatLng(location.latitude,
                                                location.longitude);

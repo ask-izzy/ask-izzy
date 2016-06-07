@@ -3,8 +3,10 @@
 import React from "react";
 
 class CrisisHeader extends React.Component {
-    props: Object;
-    state: Object;
+    props: {
+        plural: boolean
+    };
+    state: void;
 
     render() {
         return (

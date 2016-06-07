@@ -2,19 +2,20 @@
 
 import React from "react";
 import ListItem from "./ListItem";
+import type { ListItemProps } from "./ListItem";
 
 export default class InputListItem extends React.Component {
-    props: Object;
-    state: Object;
-    static propTypes = {
-        type: React.PropTypes.string.isRequired,
-        checked: React.PropTypes.bool,
-        value: React.PropTypes.string,
+    props: ListItemProps & {
+        type: "checkbox"|"radio",
+        checked: boolean,
+        value: string,
+        checkedIcon: any,
+        uncheckedIcon: any,
+        onClick: Function,
 
-        checkedIcon: React.PropTypes.node,
-        uncheckedIcon: React.PropTypes.node,
-        ...ListItem.propTypes,
+        tabIndex?: number,
     };
+    state: void;
 
     static sampleProps = {
         default: {

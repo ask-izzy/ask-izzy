@@ -87,7 +87,7 @@ async function hotlinePositionAndText(
     expectedText: string,
 ): Promise<void> {
     let elements = await this.driver.findElements(
-            By.css(".CrisisLineItem, .ResultListItem, .Infobox")
+            By.css(".CrisisLineItem, .ResultListItem")
         );
     let crisisLine = elements[expectedPos - 1];
 

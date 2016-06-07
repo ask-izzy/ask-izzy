@@ -10,6 +10,8 @@ import {
     nonCrisisResults,
 } from "../iss";
 
+import type { Service } from "../iss";
+
 const StaticTextLine = ({object}) => React.cloneElement(object.node);
 
 const className = (elem: React$Element<any>) =>
@@ -17,8 +19,10 @@ const className = (elem: React$Element<any>) =>
         elem.type.displayName || "other"}`
 
 class ResultsList extends React.Component {
-    props: Object;
-    state: Object;
+    props: {
+        results: Array<Service>,
+    };
+    state: void;
 
     crisisResults(): Array<Object> {
         return crisisResults(this.props.results);

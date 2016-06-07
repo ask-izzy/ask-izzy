@@ -5,8 +5,8 @@ import { Link } from "react-router";
 import components from "../components";
 
 export default class StyleGuideList extends React.Component {
-    props: Object;
-    state: Object;
+    props: {};
+    state: void;
     render() {
         return (
             <ul>

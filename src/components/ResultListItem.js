@@ -17,8 +17,11 @@ import sendEvent from "../google-tag-manager";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 
 class ResultListItem extends React.Component {
-    props: Object;
-    state: Object;
+    props: {
+        object: iss.Service,
+        nServiceProvisions: number,
+    };
+    state: void;
 
     static displayName = "ResultListItem";
 

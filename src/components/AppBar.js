@@ -6,12 +6,12 @@ import components from "../components";
 import icons from "../icons";
 
 class AppBar extends React.Component {
-    props: Object;
-    state: Object;
-    static propTypes = {
-        title: React.PropTypes.string.isRequired,
-        onBackTouchTap: React.PropTypes.func.isRequired,
+    props: {
+        title: string,
+        onBackTouchTap: Function,
+        backMessage?: string,
     };
+    state: void;
 
     static sampleProps = {default: {
         title: "App bar",

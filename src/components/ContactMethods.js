@@ -8,16 +8,21 @@ import Email from "./Email";
 import Phone from "./Phone";
 import Web from "./Web";
 import fixtures from "../../fixtures/services";
-import Service from "../../fixtures/factories/Service";
+import ServiceFactory from "../../fixtures/factories/Service";
 import sendEvent from "../google-tag-manager";
 
+import type { Service } from "../iss";
+
 class ContactMethods extends React.Component {
-    props: Object;
-    state: Object;
+    props: {
+        object: Service,
+        expanded?: boolean
+    };
+    state: void;
 
     static sampleProps = {
         closed: {
-            object: Service({
+            object: ServiceFactory({
                 phones: fixtures.ixa.phones,
                 emails: [],
                 web: null,
@@ -25,7 +30,7 @@ class ContactMethods extends React.Component {
             expanded: false,
         },
         open: {
-            object: Service({
+            object: ServiceFactory({
                 phones: fixtures.ixa.phones,
                 emails: [],
                 web: null,
@@ -33,7 +38,7 @@ class ContactMethods extends React.Component {
             expanded: true,
         },
         "two numbers": {
-            object: Service({
+            object: ServiceFactory({
                 phones: [
                     {kind: "phone", number: "(03) 3333 3333"},
                     {kind: "phone", number: "(03) 5555 5555"},

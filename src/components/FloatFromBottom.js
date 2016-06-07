@@ -8,8 +8,15 @@ const floatAnimationDuration = 1000;
 const containerHeightPadding = 20;
 
 class FloatFromBottom extends React.Component {
-    props: Object;
-    state: Object;
+    props: {
+        includeOffsetElement?: boolean,
+        children?: any,
+        className?: string,
+    };
+    state: {
+        containerHeight: number,
+        elementScrolledOffscreen?: boolean,
+    };
 
     constructor(props: Object) {
         super(props);
