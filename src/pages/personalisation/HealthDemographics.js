@@ -17,7 +17,7 @@ export default class HealthDemographics extends BaseQuestion {
             "are displayed with the Aboriginal flag.",
         answers: {
             // n.b. see also storage.getUserIsIndigenous when changing
-            "Yes": append("Aboriginals & Torres Strait Islanders"),
+            "Yes": append("(Aboriginals & Torres Strait Islanders)"),
             "No": append(""),
         },
     };
