@@ -17,6 +17,14 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import AddServicePage from "./pages/AddServicePage";
 import TermsPage from "./pages/TermsPage";
+
+import HomelessSheltersStaticPage from "./pages/HomelessSheltersStaticPage";
+import FoodBanksStaticPage from "./pages/FoodBanksStaticPage";
+import HomelessSupportStaticPage from "./pages/HomelessSupportStaticPage";
+import HomelessLegalStaticPage from "./pages/HomelessLegalStaticPage";
+import HomelessFinanceStaticPage from "./pages/HomelessFinanceStaticPage";
+import HomelessHealthStaticPage from "./pages/HomelessHealthStaticPage";
+
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
 import {ResultsPageListing, ResultsPageMap} from "./pages/ResultsPage";
@@ -80,6 +88,36 @@ export default (
             path="/terms"
             component={TermsPage}
             title="Terms of use"
+        />
+        <Route
+            path="/homeless-shelters"
+            component={HomelessSheltersStaticPage}
+            title="Homeless shelters"
+        />
+        <Route
+            path="/food-banks"
+            component={FoodBanksStaticPage}
+            title="Food Banks"
+        />
+        <Route
+            path="/homeless-support"
+            component={HomelessSupportStaticPage}
+            title="Homeless support"
+        />
+        <Route
+            path="/homeless-legal-services"
+            component={HomelessLegalStaticPage}
+            title="Homeless Legal Services"
+        />
+        <Route
+            path="/homeless-financial-support"
+            component={HomelessFinanceStaticPage}
+            title="Homeless financial support"
+        />
+        <Route
+            path="/homeless-health-care"
+            component={HomelessHealthStaticPage}
+            title="Homeless Health Care"
         />
         <Route
             path="/add-service"

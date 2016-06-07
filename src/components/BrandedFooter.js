@@ -27,6 +27,32 @@ class BrandedFooter extends React.Component {
                         <li><a href="http://www.newscorpaustralia.com">News Corp Australia</a></li>
                     </ul>
                 </div>
+                <div>
+                    About Homelessness:
+                    {' '}
+                    <ul className="footer-list information">
+                        <li><Link to="/homeless-shelters">
+                            Shelters
+                        </Link></li>
+                        <li><Link to="/food-banks">
+                            Food banks
+                        </Link></li>
+                        <li><Link to="/homeless-support">
+                            Support
+                        </Link></li>
+                        <li><Link to="/homeless-legal-services">
+                            Legal Services
+                        </Link></li>
+                        <li><Link to="/homeless-financial-support">
+                            Financial support
+                        </Link></li>
+                        <li><Link to="/homeless-health-care">
+                            Health Care
+                        </Link></li>
+                    </ul>
+                </div>
+
+
             </footer>
         );
     }
@@ -34,3 +60,4 @@ class BrandedFooter extends React.Component {
 }
 
 export default BrandedFooter;
+
