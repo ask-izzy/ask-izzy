@@ -56,8 +56,9 @@ export default class HomelessSheltersStaticPage extends React.Component {
                 </p>
                 <p>
                 Through answering a few simple questions, Ask Izzy can find the most suitable
-                specialist homeless service for you in your area. Your answers are shared with
-                our partners to help us understand what services are needed.
+                specialist homeless service for you in your area.
+                Your answers are private and no personal information is collected.
+                Anonymous data is collected via Google Analytics to help us understand what people are searching for.
                 {' '}<Link to="/category/housing">Search Ask Izzy for housing</Link>.
                 </p>
 
