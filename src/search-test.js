@@ -33,7 +33,7 @@ let test = {search: {
         [
             "Couples",
             "Family with children",
-            "Asylum seeker",
+            "Person seeking asylum",
         ],
         [
             "Veteran",
