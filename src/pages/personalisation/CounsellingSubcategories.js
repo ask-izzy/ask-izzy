@@ -10,7 +10,7 @@ export default class CounsellingSubcategories extends BaseQuestion {
         name: "sub-counselling",
         question: "What issues are you dealing with?",
         answers: {
-            "Homelessness": append("homeless"),
+            "Homelessness": append(""),
             "Family violence": remove("support")
                 .append("family violence"),
             "Sexual identity": append("sexuality"),
