@@ -38,7 +38,7 @@ export default class HomelessSupportStaticPage extends React.Component {
                     <li>Help finding work: search employment service and volunteering opportunities</li>
                     <li>Location of facilities: find the nearest public toilets, libraries and more. </li>
                     <li>Something to do near you: search local events.</li>
-                    <li>Technology assistance: charge your phone, find free wi-fi and more.</li>
+                    <li>Technology assistance: charge your phone, find free wifi and more.</li>
                 </ul>
 
                 <h2>Where can I find support?</h2>
