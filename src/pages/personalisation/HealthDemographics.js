@@ -13,7 +13,8 @@ export default class HealthDemographics extends BaseQuestion {
         question:
             "Do you identify as Aboriginal and/or Torres Strait Islander?",
         byline:
-            "Services for both Aboriginal and/or Torres Strait Islanders are displayed with the Aboriginal flag.",
+            "Services for both Aboriginal and/or Torres Strait Islanders " +
+            "are displayed with the Aboriginal flag.",
         answers: {
             // n.b. see also storage.getUserIsIndigenous when changing
             "Yes": append("Aboriginals & Torres Strait Islanders"),
