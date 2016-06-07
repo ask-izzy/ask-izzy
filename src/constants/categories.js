@@ -48,7 +48,7 @@ const categories:Array<Category> = [
                 "-(housing information) -hef " +
                 "-(holiday accommodation)",
             service_type: ["housing"],
-            minimum_should_match: "3<30% 7<50%",
+            minimum_should_match: "30%",
         },
         personalisation: [
             personalisation.Location,
@@ -131,6 +131,7 @@ const categories:Array<Category> = [
         icon: icons.Support,
         search: {
             q: "support counselling -(coordinating bodies)",
+            minimum_should_match: "30%",
         },
         personalisation: [
             personalisation.Location,
@@ -159,6 +160,7 @@ const categories:Array<Category> = [
         search: {
             q: "substance abuse -(coordinating bodies)" +
                 " -(registered training)",
+            minimum_should_match: "30%",
         },
         personalisation: [
             personalisation.Location,
