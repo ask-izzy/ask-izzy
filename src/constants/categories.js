@@ -135,6 +135,7 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.CounsellingSubcategories,
+            personalisation.HealthDemographics,
         ],
     }),
     new Category({
