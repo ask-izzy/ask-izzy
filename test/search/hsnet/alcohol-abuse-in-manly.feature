@@ -3,7 +3,7 @@
 Feature: Search for alcohol counselling
     Background:
         Given I have deleted all answers
-        And I am not part of any relevant demographics
+        And I have answered No for indigenous
 
     Scenario: Alcohol abuse in manly
         Given my location is "Manly, NSW"
