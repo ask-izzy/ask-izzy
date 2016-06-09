@@ -16,9 +16,6 @@ import unpromisify from "../support/yadda-promise";
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .given("I'm watching map events", unpromisify(instrumentMap))
-        .given("googles suburb autocomplete will return\n$table",
-            unpromisify(instrumentAutocomplete)
-        )
         .given("googles directions matrix will return\n$yaml",
             unpromisify(instrumentDistanceMatrix)
         )
@@ -72,33 +69,6 @@ async function clickMapLink() {
     await this.driver.findElement(
         By.css(".ViewOnMapButton")
     ).click();
-}
-
-/**
- * Stub google place suggest so we can get reliable results
- *
- * @param {results} results for autocomplete requests
- *
- * @returns {Promise} promise that resolves when the script executes.
- */
-async function instrumentAutocomplete(results) {
-    await this.driver.executeScript((results) => {
-        google.maps.places.AutocompleteService = function() {
-            return {
-                getPlacePredictions: function(params, callback) {
-                    return callback(
-                        results,
-                        google.maps.places.PlacesServiceStatus.OK,
-                    );
-                },
-            };
-        };
-    }, results.map((result) => {
-        return {
-            terms: [{value: result.suburb}, {value: result.state}],
-            types: ["locality"],
-        };
-    }));
 }
 
 /**
