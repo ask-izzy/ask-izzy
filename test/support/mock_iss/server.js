@@ -54,6 +54,16 @@ export function mock(service: Object): void {
     });
 }
 
+app.get("/api/v3/location/search/", (req, res) => {
+    res.json({
+        meta: {},
+        objects: [
+            {name: "Carlton", state: "VIC"},
+            {name: "Carlton North", state: "VIC"},
+        ],
+    });
+});
+
 /* eslint-disable complexity */
 /* FIXME: refactor to use mocks instead of these */
 app.get("/api/v3/search/", (req, res) => {

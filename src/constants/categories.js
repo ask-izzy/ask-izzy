@@ -130,8 +130,8 @@ const categories:Array<Category> = [
         byline: "Someone to help",
         icon: icons.Support,
         search: {
-            q: "support counselling -(coordinating bodies)",
-            minimum_should_match: "30%",
+            q: "counselling indigenous fasdfasdf",
+            minimum_should_match: "1",
         },
         personalisation: [
             personalisation.Location,

@@ -46,7 +46,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Carlton, Victoria
+        Where are you?                               | Carlton, VIC
         Do you have somewhere safe to sleep tonight? | Yes
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female

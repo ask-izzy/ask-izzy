@@ -1,5 +1,13 @@
 /* @flow */
 
+type issArea = {
+    "name": string,
+    "kind": string,
+    "postcode": string,
+    "state": string,
+    "suburb": string,
+};
+
 type email = string;
 type issAgeGroup = "unspecified" |
     "prenatal" |

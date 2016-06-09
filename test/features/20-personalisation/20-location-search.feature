@@ -9,24 +9,17 @@ Feature: Location search
         When I visit /category/housing/personalise/page/location
         Then I should see "Where are you?"
 
-       Given googles suburb autocomplete will return
-        -------------------------------------------
-        suburb              | state
-        ===========================================
-        Carlton             | Victoria
-        Carlton North       | Victoria
-        -------------------------------------------
         When I search for "carlt"
         Then I should see the results
         -------------------------------------------
         First line (suburb) | Second line (state)
         ===========================================
-        Carlton             | Victoria
-        Carlton North       | Victoria
+        Carlton             | VIC
+        Carlton North       | VIC
         -------------------------------------------
 
         When I click on "Carlton"
-        Then search box should contain "Carlton, Victoria"
+        Then search box should contain "Carlton, VIC"
         And the button "Done" should be enabled
 
     Scenario: Suburb search normalises spaces
