@@ -41,8 +41,12 @@ class BaseMultiQuestion extends BaseQuestion {
 
     // flow:disable we have the liskov substitution principle :(
     get selected(): Set<string> {
-        return this.state.answers || new Set(
-            storage.getJSON(this.props.name) || []
+        if (this.state.answers) {
+            return this.state.answers;
+        }
+
+        return new Set(
+            this.constructor.answer || []
         );
     }
 
@@ -68,7 +72,17 @@ class BaseMultiQuestion extends BaseQuestion {
 
     // flow:disable we have the liskov substitution principle :(
     static get answer(): ?Array<string> {
-        return storage.getJSON(this.defaultProps.name);
+        let answers = storage.getJSON(this.defaultProps.name);
+
+        if (Array.isArray(answers)) {
+            // Update answers if we had stored an old answer
+            answers = answers.map((answer) =>
+                this.defaultProps.oldAnswers[answer] || answer
+            )
+            return _.union(this.defaultProps.answers.keys, answers);
+        }
+
+        return answers;
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
