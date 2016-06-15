@@ -23,19 +23,19 @@ export default class Age extends BaseQuestion {
                 "baby",
                 "toddler",
                 "preschool",
-            )),
+            )).append("children"),
             "6 to 11": append(ageGroups(
                 "schoolage",
-            )),
+            )).append("children"),
             "12 or 13": append(ageGroups(
                 "earlyadolescent",
-            )),
+            )).append("children"),
             "14 or 15": append(ageGroups(
                 "midadolescent",
-            )),
+            )).append("youth"),
             "16 or 17": append(ageGroups(
                 "lateadolescent",
-            )),
+            )).append("youth"),
             "18 to 26": append(ageGroups(
                 "youngadult",
             )),
@@ -50,7 +50,7 @@ export default class Age extends BaseQuestion {
             )),
             "65 or older": append(ageGroups(
                 "agedpersons",
-            )),
+            )).append("aged"),
         },
     };
 
