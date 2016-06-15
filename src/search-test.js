@@ -24,7 +24,7 @@ let test = {search: {
         ["Have pets"],
         [
             "Escaping family violence",
-            "Indigenous",
+            "Aboriginal",
             "Family with children",
             "Parole / recently released",
             "Have a disability",

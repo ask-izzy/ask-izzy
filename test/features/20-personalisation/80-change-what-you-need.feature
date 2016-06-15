@@ -112,7 +112,7 @@ Feature: Change your personalisation settings
     Scenario: Edit demographics items
         Given I am part of the following demographics
         --------------------------------------
-        Indigenous
+        Aboriginal
         --------------------------------------
 
         When I visit /category/housing/personalise/summary
@@ -126,11 +126,11 @@ Feature: Change your personalisation settings
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | Indigenous
+        Do any of these apply to you?                | Aboriginal
         ----------------------------------------------------------------
 
         When I click on "Do any of these apply to you?"
-        And I click on "Indigenous"
+        And I click on "Aboriginal"
         And I click on the done button
         Then I should see "Change your answers here"
         Then I should see the results

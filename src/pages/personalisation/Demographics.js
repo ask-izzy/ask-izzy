@@ -14,7 +14,7 @@ export default class Demographics extends BaseMultiQuestion {
         answers: {
             "Escaping family violence": append("(family violence)"),
             // n.b. see also storage.getUserIsIndigenous when changing
-            "Indigenous": append("(Aboriginals & Torres Strait Islanders)"),
+            "Aboriginal": append("(Aboriginals & Torres Strait Islanders)"),
             "Family with children": append("families -srs"),
             "Couples": append("couples"),
             "Mental or emotional difficulties": append("(mental health)"),
@@ -27,7 +27,7 @@ export default class Demographics extends BaseMultiQuestion {
         },
         icons: {
             "Escaping family violence": icons.DemographicFamilyViolence,
-            "Indigenous": icons.DemographicAboriginal,
+            "Aboriginal": icons.DemographicAboriginal,
             "Family with children": icons.DemographicChildren,
             "Couples": icons.DemographicCouple,
             "Mental or emotional difficulties": icons.Mental,
