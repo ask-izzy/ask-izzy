@@ -20,7 +20,15 @@ export default class ButtonListItem extends React.Component {
                 tabIndex="0"
                 href="#"
                 {...this.props}
+                onClick={this.onClick.bind(this)}
             />
         );
+    }
+
+    onClick(event: SyntheticInputEvent): void {
+        if (this.props.onClick) {
+            this.props.onClick();
+        }
+        event.preventDefault();
     }
 }

@@ -11,7 +11,6 @@ export default class InputListItem extends React.Component {
         value: string,
         checkedIcon: any,
         uncheckedIcon: any,
-        onClick: Function,
 
         tabIndex?: number,
     };

@@ -14,6 +14,8 @@ export type ListItemProps = {
     rightIcon?: any,
 
     children?: any,
+
+    onClick?: Function,
 }
 
 export default class ListItem extends React.Component {
