@@ -37,5 +37,8 @@ export default class Demographics extends BaseMultiQuestion {
             "Person seeking asylum": icons.DemographicRecentlyArrived,
             "Have pets": icons.DemographicPets,
         },
+        oldAnswers: {
+            "Aboriginal": "Indigenous",
+        },
     };
 }
