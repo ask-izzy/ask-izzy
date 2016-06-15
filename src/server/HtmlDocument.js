@@ -49,7 +49,7 @@ class HtmlDocument extends React.Component {
         const canonicalUrl = `https://askizzy.org.au${currentUrl.pathname}`;
 
         return (
-<html >
+<html lang="en">
     <head>
         <meta
             name="viewport"
