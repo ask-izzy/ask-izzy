@@ -51,7 +51,7 @@ const Storage = {
 
     getUserIsIndigenous(): boolean {
         return this.getItem("indigenous") == "Yes" ||
-        this.getArray("demographics").includes("Indigenous");
+        this.getArray("demographics").includes("Aboriginal");
     },
 
     getCoordinates(): ?{latitude: number, longitude: number} {
