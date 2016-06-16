@@ -13,8 +13,6 @@ import icons from "../../icons";
 import storage from "../../storage";
 import { multiSearch } from "../../iss/Search";
 import * as iss from "../../iss";
-import suggest from "../../locationSuggestions";
-import type { LocationCompletion } from "../../locationSuggestions";
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class Location extends React.Component {
@@ -26,7 +24,7 @@ class Location extends React.Component {
     state: {
         autocompletionInProgress: boolean,
         locationName: string,
-        autocompletions: Array<LocationCompletion>,
+        autocompletions: Array<issArea>,
         nextDisabled: boolean,
     };
 
@@ -132,10 +130,10 @@ class Location extends React.Component {
     triggerAutocomplete(): void {
         let input = this.state.locationName;
 
-        suggest(input)
+        iss.getLocations(input)
             .then(results => {
                 this.setState({
-                    autocompletions: Array.from(results),
+                    autocompletions: Array.from(results.objects),
                     autocompletionInProgress: false,
                 });
             })
@@ -195,11 +193,11 @@ class Location extends React.Component {
         this.setLocationName(params.name, true);
     }
 
-    selectAutocomplete(result: LocationCompletion): void {
+    selectAutocomplete(result: issArea): void {
         /* set the text box to this value
          * and remove the autocompletions */
         let locationName =
-            `${result.suburb}, ${result.state}`;
+            `${result.name}, ${result.state}`;
 
         this.setLocationName(locationName, true);
         this.setState({
@@ -252,7 +250,7 @@ class Location extends React.Component {
                             key={index}
                             primaryText={
                                 <div className="suburb">
-                                    {result.suburb}
+                                    {result.name}
                                 </div>
                             }
                             secondaryText={

@@ -76,6 +76,11 @@ export type searchResults = {
     objects: Array<Service>,
 };
 
+export type searchLocations = {
+    meta: searchResultsMeta,
+    objects: Array<issArea>,
+}
+
 type XhrOptions = {
     url: string,
     method?: string,
@@ -516,6 +521,22 @@ async function _search(
 
     Object.assign(request_, query);
     return await requestObjects("/api/v3/search/", request_);
+}
+
+/**
+ * Autocomplete locations from ISS.
+ *
+ * @param {searchRequest} where - the input so far
+ *
+ * @returns {Promise<searchLocations>} location results from ISS.
+ */
+export async function getLocations(
+    where: string,
+): Promise<searchLocations> {
+    return await request("/api/v3/location/search/", {
+        name: where,
+        kind: ["postcode", "suburb", "town"],
+    });
 }
 
 export async function search(
