@@ -15,6 +15,7 @@ import DebugServiceRecord from "./DebugServiceRecord";
 import Eligibility from "./Eligibility";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
+import Spacer from "./Spacer";
 import LinkListItem from "./LinkListItem";
 import Chevron from "../icons/Chevron";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
@@ -105,7 +106,7 @@ export default class ServicePane extends React.Component {
                             object={object.open}
                             serviceId={object.id}
                         />
-                        <hr />
+                        <Spacer />
 
                         <GoogleMapsLink
                             className="plain-text"
@@ -115,7 +116,7 @@ export default class ServicePane extends React.Component {
                             <TransportTime location={object.Location()}/>
                         </GoogleMapsLink>
 
-                        <hr />
+                        <Spacer />
                         <ContactMethods object={object} />
                     </div>
                 </div>

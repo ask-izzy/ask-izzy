@@ -38,6 +38,7 @@ import ResultsList from "./components/ResultsList";
 import ResultsMap from "./components/ResultsMap";
 import ScreenReader from "./components/ScreenReader";
 import ServicePane from "./components/ServicePane";
+import Spacer from "./components/Spacer";
 import SvgIcon from "./components/SvgIcon";
 import TransportTime from "./components/TransportTime";
 import ViewOnMapButton from "./components/ViewOnMapButton";
@@ -80,6 +81,7 @@ export default {
     ResultsMap: ResultsMap,
     ScreenReader: ScreenReader,
     ServicePane: ServicePane,
+    Spacer: Spacer,
     SvgIcon: SvgIcon,
     TransportTime: TransportTime,
     ViewOnMapButton: ViewOnMapButton,
