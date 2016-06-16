@@ -4,6 +4,8 @@
 
 import Address from "./components/Address";
 import AppBar from "./components/AppBar";
+import BoxedText from "./components/BoxedText";
+import BoxedTextDivider from "./components/BoxedTextDivider";
 import BrandedFooter from "./components/BrandedFooter";
 import ButtonListItem from "./components/ButtonListItem";
 import CategoryListItem from "./components/CategoryListItem";
@@ -47,6 +49,8 @@ import Web from "./components/Web";
 export default {
     Address: Address,
     AppBar: AppBar,
+    BoxedText: BoxedText,
+    BoxedTextDivider: BoxedTextDivider,
     BrandedFooter: BrandedFooter,
     ButtonListItem: ButtonListItem,
     CategoryListItem: CategoryListItem,

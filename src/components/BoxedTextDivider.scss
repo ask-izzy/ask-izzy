@@ -1,0 +1,17 @@
+
+.BoxedTextDivider {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    background-color: $brand-bg-light;
+
+    hr {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+@media ($tablet) {
+    .BoxedTextDivider {
+        display: none;
+    }
+}
