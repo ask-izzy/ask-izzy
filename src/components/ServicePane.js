@@ -17,6 +17,8 @@ import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
 import Spacer from "./Spacer";
 import LinkListItem from "./LinkListItem";
+import BoxedText from "./BoxedText";
+import BoxedTextDivider from "./BoxedTextDivider";
 import Chevron from "../icons/Chevron";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import type {Service} from "../iss";
@@ -96,11 +98,9 @@ export default class ServicePane extends React.Component {
 
                 </div>
 
-                <div className="header-practicalities-divider">
-                    <hr />
-                </div>
+                <BoxedTextDivider />
 
-                <div className="practicalities">
+                <BoxedText>
                     <div className="practicalities-container">
                         <CollapsedOpeningTimes
                             object={object.open}
@@ -119,7 +119,7 @@ export default class ServicePane extends React.Component {
                         <Spacer />
                         <ContactMethods object={object} />
                     </div>
-                </div>
+                </BoxedText>
 
                 <div className="provisions">
                     <Eligibility {...object} />
