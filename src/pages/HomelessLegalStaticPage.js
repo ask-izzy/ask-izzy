@@ -16,7 +16,13 @@ export default class HomelessLegalStaticPage extends React.Component {
                 </p>
                 <h2>What kind of legal help can I get?</h2>
                 <p>Homeless legal centres provide free or low-cost, independent advice about the law and your specific situation. If you have a court date, they can prepare your case, represent you in the court appearance and help you through the legal process. </p>
-                <p>Typically legal centres specialise in either criminal or civil law (see below for some examples of each). If you are unsure if your issues is criminal or civil, or if the centre near you offers the right support, call them on the phone number listed in Ask Izzy. </p>
+                <p>
+                    Typically legal centres specialise in either criminal or civil law
+                    (see below for some examples of each).
+                    If you are unsure if your issues are a criminal matter,
+                    or if the centre near you offers the right support,
+                    call them on the phone number listed in Ask Izzy.
+                </p>
                 <p>Many centres also offer translators if you need one. </p>
                 <h2>Civil law</h2>
                 <p>Lawyers working in civil law can help you with a range of problems, relating to disputes between private individuals and/or companies. Examples include:</p>
@@ -32,7 +38,7 @@ export default class HomelessLegalStaticPage extends React.Component {
                 <li>parole issues</li>
                 <li>prison and detention</li>
                 </ul>
-                <h2>Where can I find a homeless legal services?</h2>
+                <h2>Where can I find legal services for the homeless?</h2>
                 <p>There are homeless legal service located in regional and metropolitan areas across Australia. Some are drop in services so you do not need to make an appointment and others are not. Check with your selected service before you travel. </p>
                 <p><Link to="/">Find a legal service near you</Link> or browse:</p>
                 <ul>

@@ -16,21 +16,22 @@ export default class HomelessFinanceStaticPage extends React.Component {
                 <h2>What support is available?</h2>
                 <p>There are many different free or low-cost services on offer to respond to your specific needs. Depending on your situation, the following help may be available to you:</p>
                 <ul>
-                <li>emergency aid</li>
-                <li>bond or rental assistance</li>
-                <li>assistance paying bills or buying food </li>
-                <li>a no interest loans</li>
-                <li>gambling or financial counselling</li>
+                    <li>emergency aid</li>
+                    <li>bond or rental assistance</li>
+                    <li>assistance paying bills or buying food </li>
+                    <li>a no interest loans</li>
+                    <li>gambling</li>
+                    <li>financial counselling</li>
                 </ul>
                 <h2>Dealing with debt</h2>
                 <p>If you can't repay a debt by an agreed date, it is important to seek advice and take action as soon as possible. Unpaid debt may result in seizure of your property or a visit to court.</p>
                 <p>You may feel pressured to make a decision or to agree to something when a creditor or debt collector contacts you. You have a right to get financial or legal information and advice before signing or agreeing to anything.</p>
                 <p>It is important to remember that you also have the right to be protected from illegal behaviour from creditors and debt collectors. You have the right to:</p>
                 <ul>
-                <li>be treated fairly and not discriminated against</li>
-                <li>have your privacy protected</li>
-                <li>get help</li>
-                <li>question the debt.</li>
+                    <li>be treated fairly and not discriminated against</li>
+                    <li>have your privacy protected</li>
+                    <li>get help</li>
+                    <li>question the debt.</li>
                 </ul>
                 <h2>Watch out for questionable offers of help</h2>
                 <p>Be careful of uninvited offers of help. Some organisations may offer to negotiate with your creditors and to restructure your debts for a fee. They usually write to you after you have been sued. </p>
