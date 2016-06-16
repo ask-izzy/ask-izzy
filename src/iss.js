@@ -323,8 +323,15 @@ export class Service {
 
     Indigenous(): boolean {
         /* eslint-disable max-len */
-        const regex = /\b(Aborigines?|Kooris?|Aboriginals?|Indigenous|Torres Strait Islanders?)\b/i;
-
+        const words = [
+            "Aborigines?",
+            "Aboriginals?",
+            "Kooris?",
+            "Indigenous?",
+            "Torres Strait Islanders?",
+            "Murris?",
+        ].join("|");
+        const regex = new RegExp(`\\b(${words})\\b`, "i");
         const match = this.description.match(regex) ||
                this.name.match(regex) ||
                this.site.name.match(regex);
