@@ -130,7 +130,7 @@ const categories:Array<Category> = [
         byline: "Someone to help",
         icon: icons.Support,
         search: {
-            q: "counselling indigenous",
+            q: "counselling",
             minimum_should_match: "1",
         },
         personalisation: [
