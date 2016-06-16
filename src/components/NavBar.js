@@ -1,9 +1,11 @@
 /* @flow */
 
 import React from "react";
+import moment from "moment";
 
 import categories from "../constants/categories";
 import LinkListItem from "./LinkListItem";
+import LimitedTimeMessage from "./LimitedTimeMessage";
 import CategoryListItem from "./CategoryListItem";
 import icons from "../icons";
 
@@ -30,7 +32,24 @@ class NavBar extends React.Component {
                             );
                         })
                     }
-
+                    <LimitedTimeMessage
+                        to={moment({day: 1, month: 8, year: 2016})}
+                    >
+                        <LinkListItem
+                            className="CategoryListItem CensusLink"
+                            href={"/census-2016"}
+                            leftIcon={
+                                <img
+                                    className="census-logo"
+                                    src="/static/images/census.png"
+                                />
+                            }
+                            primaryText="2016 Census"
+                            secondaryText={
+                                "Information for the homeless on census night"
+                            }
+                        />
+                    </LimitedTimeMessage>
                     <LinkListItem
                         className="CategoryListItem FeedbackLink"
                         href={mailLink}
