@@ -6,7 +6,10 @@
 
 .FeedbackLink {
     background: $brand-bg-light;
+}
 
+.CensusLink,
+.FeedbackLink {
     & > div {
         padding-top: 11px;
         padding-bottom: 11px;
@@ -17,4 +20,9 @@
             line-height: 18px;
         }
     }
+}
+
+.census-logo {
+    margin-top: 3px;
+    margin-left: 3px;
 }

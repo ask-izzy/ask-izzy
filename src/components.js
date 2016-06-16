@@ -29,6 +29,7 @@ import HeaderBar from "./components/HeaderBar";
 import IconButton from "./components/IconButton";
 import IndigenousServiceIcon from "./components/IndigenousServiceIcon";
 import InputListItem from "./components/InputListItem";
+import LimitedTimeMessage from "./components/LimitedTimeMessage";
 import LinkListItem from "./components/LinkListItem";
 import ListItem from "./components/ListItem";
 import LogoWithShadow from "./components/LogoWithShadow";
@@ -74,6 +75,7 @@ export default {
     IconButton: IconButton,
     IndigenousServiceIcon: IndigenousServiceIcon,
     InputListItem: InputListItem,
+    LimitedTimeMessage: LimitedTimeMessage,
     LinkListItem: LinkListItem,
     ListItem: ListItem,
     LogoWithShadow: LogoWithShadow,
