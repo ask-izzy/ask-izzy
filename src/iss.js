@@ -475,10 +475,12 @@ export class Service {
             return this._siblingServices;
         }
 
+        // limit should be 0 - see
+        // https://redmine.office.infoxchange.net.au/issues/112476
         let request_: searchRequest = {
             site_id: this.site.id,
             type: "service",
-            limit: 0,
+            limit: 100,
         };
         let {objects, meta} = await requestObjects(
             "/api/v3/search/",
