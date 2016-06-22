@@ -39,10 +39,7 @@ class NavBar extends React.Component {
                             className="CategoryListItem CensusLink"
                             href={"/census-2016"}
                             leftIcon={
-                                <img
-                                    className="census-logo"
-                                    src="/static/images/census.png"
-                                />
+                                <icons.Census2016 className="census-logo" />
                             }
                             primaryText="2016 Census"
                             secondaryText={
