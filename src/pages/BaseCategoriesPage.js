@@ -11,7 +11,7 @@ import type {
     Service,
 } from "../iss";
 import Location from "./personalisation/Location";
-import Indigenous from "./personalisation/HealthDemographics";
+import Indigenous from "./personalisation/Indigenous";
 import storage from "../storage";
 
 class BaseCategoriesPage extends React.Component {

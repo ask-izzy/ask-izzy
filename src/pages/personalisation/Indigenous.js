@@ -5,7 +5,7 @@ import React from "react";
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
 
-export default class HealthDemographics extends BaseQuestion {
+export default class Indigenous extends BaseQuestion {
     static title = "Indigenous";
     static propTypes = BaseQuestion.propTypes;
     static defaultProps = {
