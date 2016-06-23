@@ -10,15 +10,15 @@
     transition: none;
 }
 
-svg.ColoredIcon {
-    &.allow-override-color.icon-fg-color {
+.ColoredIcon {
+    &.allow-override-color.icon-fg-color svg g  {
         path,
         circle {
             fill: $icon-fg-color;
         }
     }
 
-    &.allow-override-color.brand-bg-dark {
+    &.allow-override-color.brand-bg-dark svg g {
         path,
         circle {
             fill: $brand-bg-dark;
@@ -26,7 +26,7 @@ svg.ColoredIcon {
     }
 }
 
-svg.Icon {
+.Icon {
     &.inline-icon {
         width: 30px;
         height: 30px;
@@ -92,22 +92,6 @@ svg.Icon {
 .RadioUnselectedIcon,
 .RadioSelectedIcon {
     top: -2px;
-}
-
-.Census2016Icon {
-    .left-path,
-    .right-path {
-        fill: none;
-        stroke: $census-brand-color;
-        stroke-width: 13;
-        stroke-linejoin: round;
-    }
-
-    .outer-circle {
-        fill: none;
-        stroke: $census-brand-color;
-        stroke-width: 8;
-    }
 }
 
 .LoadingIcon {
