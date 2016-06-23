@@ -1,6 +1,7 @@
 
 @media print {
-    path {
+    path,
+    circle {
         fill: $black;
     }
 }
@@ -10,12 +11,18 @@
 }
 
 svg.ColoredIcon {
-    &.allow-override-color.icon-fg-color path {
-        fill: $icon-fg-color;
+    &.allow-override-color.icon-fg-color {
+        path,
+        circle {
+            fill: $icon-fg-color;
+        }
     }
 
-    &.allow-override-color.brand-bg-dark path {
-        fill: $brand-bg-dark;
+    &.allow-override-color.brand-bg-dark {
+        path,
+        circle {
+            fill: $brand-bg-dark;
+        }
     }
 }
 
@@ -43,13 +50,15 @@ svg.Icon {
     height: 35px;
     padding-right: 0;
 
-    path {
+    path,
+    circle {
         fill: $interactive-icon;
     }
 }
 
 .ChevronBackIcon {
-    path {
+    path,
+    circle {
         fill: $white;
     }
 }
@@ -67,7 +76,8 @@ svg.Icon {
 }
 
 .CheckboxSelectedIcon {
-    path {
+    path,
+    circle {
         fill: $white;
         stroke: $interactive-icon;
         stroke-width: 2px;
