@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Link } from "react-router";
+import DemographicAboriginal from "../icons/DemographicAboriginal";
 
 class BrandedFooter extends React.Component {
     props: void;
@@ -14,6 +15,9 @@ class BrandedFooter extends React.Component {
         return (
             <footer className="branding-footer-container">
                 <div>
+                    <DemographicAboriginal
+                        className="small aboriginal-flag"
+                    />
                     <ul className="footer-list">
                         <li><Link to="/about">About Ask Izzy</Link></li>
                         <li><Link to="/terms">Terms of use</Link></li>

@@ -1,6 +1,4 @@
 .branding-footer-container {
-    padding: 10px 0;
-
     background-color: $brand-bg-dark;
     color: $brand-text-mid;
 
@@ -15,6 +13,12 @@
     a {
         color: $white;
         text-decoration: none;
+    }
+
+    .aboriginal-flag {
+        display: inline-block;
+        position: relative;
+        top: 10px;
     }
 
     .supporters a,
