@@ -44,12 +44,35 @@ export default class Location {
             this.street_type +
             this.suburb +
             this.details
-        ).match(/confidential|secret|no street access/i) || !this.point);
+        ).match(/confidential|secret/i) || !this.point);
+    }
+
+    /*
+     * Does this record lack a useful street address?
+     */
+    isSuburbOnly(): boolean {
+        return Boolean((
+            this.building +
+            this.flat_unit +
+            this.level +
+            this.postcode +
+            this.state +
+            this.street_name +
+            this.street_number +
+            this.street_suffix +
+            this.street_type +
+            this.suburb +
+            this.details
+        ).match(/(local ?access)|(no ?street ?access)/i));
     }
 
     streetAddressLine1(): string {
         if (this.isConfidential()) {
             return "Confidential location";
+        }
+
+        if (this.isSuburbOnly()) {
+            return "";
         }
 
         let addrDescriptors = [

@@ -26,7 +26,7 @@ class GoogleMapsLink extends React.Component {
         const {travelTime} = toAddr;
         const mode = travelTime && travelTime.mode == "TRANSIT" ? "r" : "w";
         const start = encodeURIComponent("Current Location");
-        const query = encodeURIComponent([
+        let queryFields = [
             toAddr.flat_unit,
             toAddr.street_number,
             toAddr.street_name,
@@ -36,6 +36,16 @@ class GoogleMapsLink extends React.Component {
             toAddr.state,
             toAddr.postcode,
         ]
+
+        if (toAddr.isSuburbOnly()) {
+            queryFields = [
+                toAddr.suburb,
+                toAddr.state,
+                toAddr.postcode,
+            ]
+        }
+        const query = encodeURIComponent(
+            queryFields
             .join(" ")
             .trim()
         );
