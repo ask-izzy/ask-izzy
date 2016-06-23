@@ -89,4 +89,5 @@ Feature: Personalisation
         And search box should contain "Richmond, Victoria"
 
         When I click on the done button
+        And I click on the done button # Indigenous
         Then I should see 3 search results in "Richmond, Victoria"

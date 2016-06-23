@@ -121,8 +121,9 @@ async function setDemographics(
     }, items);
 }
 
-function setDemographicsNone(): Promise<void> {
-    return setDemographics.bind(this)([]);
+async function setDemographicsNone(): Promise<void> {
+    await setDemographics.bind(this)([]);
+    await setStorageValue(this.driver, 'indigenous', '(skipped)');
 }
 
 async function setSubcategoriesNone(

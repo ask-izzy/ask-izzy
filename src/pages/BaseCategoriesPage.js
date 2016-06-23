@@ -11,6 +11,7 @@ import type {
     Service,
 } from "../iss";
 import Location from "./personalisation/Location";
+import Indigenous from "./personalisation/HealthDemographics";
 import storage from "../storage";
 
 class BaseCategoriesPage extends React.Component {
@@ -74,14 +75,13 @@ class BaseCategoriesPage extends React.Component {
      * An array of components required to personalise this category.
      */
     get personalisationComponents(): Array<ReactClass<any>> {
-        let components = [];
+        let components: Array<ReactClass<any>> = [];
 
         if (this.category) {
             components = this.category.personalisation;
         } else if (this.props.params.search) {
-            components = [
-                Location,
-            ];
+            components.push(Location);
+            components.push(Indigenous);
         } else {
             throw badRouteParams;
         }
