@@ -4,6 +4,8 @@
 
 import Address from "./components/Address";
 import AppBar from "./components/AppBar";
+import BoxedText from "./components/BoxedText";
+import BoxedTextDivider from "./components/BoxedTextDivider";
 import BrandedFooter from "./components/BrandedFooter";
 import ButtonListItem from "./components/ButtonListItem";
 import CategoryListItem from "./components/CategoryListItem";
@@ -27,6 +29,7 @@ import HeaderBar from "./components/HeaderBar";
 import IconButton from "./components/IconButton";
 import IndigenousServiceIcon from "./components/IndigenousServiceIcon";
 import InputListItem from "./components/InputListItem";
+import LimitedTimeMessage from "./components/LimitedTimeMessage";
 import LinkListItem from "./components/LinkListItem";
 import ListItem from "./components/ListItem";
 import LogoWithShadow from "./components/LogoWithShadow";
@@ -38,6 +41,7 @@ import ResultsList from "./components/ResultsList";
 import ResultsMap from "./components/ResultsMap";
 import ScreenReader from "./components/ScreenReader";
 import ServicePane from "./components/ServicePane";
+import Spacer from "./components/Spacer";
 import SvgIcon from "./components/SvgIcon";
 import TransportTime from "./components/TransportTime";
 import ViewOnMapButton from "./components/ViewOnMapButton";
@@ -46,6 +50,8 @@ import Web from "./components/Web";
 export default {
     Address: Address,
     AppBar: AppBar,
+    BoxedText: BoxedText,
+    BoxedTextDivider: BoxedTextDivider,
     BrandedFooter: BrandedFooter,
     ButtonListItem: ButtonListItem,
     CategoryListItem: CategoryListItem,
@@ -69,6 +75,7 @@ export default {
     IconButton: IconButton,
     IndigenousServiceIcon: IndigenousServiceIcon,
     InputListItem: InputListItem,
+    LimitedTimeMessage: LimitedTimeMessage,
     LinkListItem: LinkListItem,
     ListItem: ListItem,
     LogoWithShadow: LogoWithShadow,
@@ -80,6 +87,7 @@ export default {
     ResultsMap: ResultsMap,
     ScreenReader: ScreenReader,
     ServicePane: ServicePane,
+    Spacer: Spacer,
     SvgIcon: SvgIcon,
     TransportTime: TransportTime,
     ViewOnMapButton: ViewOnMapButton,

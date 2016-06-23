@@ -1,5 +1,3 @@
-$padding: 15px;
-
 .ServicePane {
     color: $brand-text-dark;
 
@@ -27,38 +25,11 @@ $padding: 15px;
         }
     }
 
-    // FIXME: Modifying child component styles
-    .Eligibility,
-    .serviceProvisions-container {
-        padding-right: $padding;
-        padding-left: $padding;
-    }
-
-    .header,
-    .practicalities {
-        margin: 0;
-        padding: $padding;
-        background-color: $brand-bg-light;
-    }
-
     .header {
+        margin: 0;
+        padding: 15px;
         padding-bottom: 1px;
-    }
-
-    .header-practicalities-divider {
-        padding-top: 7px;
-        padding-bottom: 7px;
         background-color: $brand-bg-light;
-
-        hr {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-    }
-
-    .practicalities {
-        padding-top: 0;
-        padding-bottom: 7px;
     }
 
     @media ($tablet) {
@@ -68,29 +39,18 @@ $padding: 15px;
             background-color: $white;
         }
 
-        .header-practicalities-divider {
-            display: none;
-        }
-
-        .practicalities {
-            width: 46%;
-            margin-top: 15px;
-            float: right;
-            background-color: $white;
-        }
-
-        .practicalities-container {
-            padding: 15px;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            background-color: $brand-bg-light;
-        }
-
         .provisions {
             width: 46%;
             float: left;
             clear: left;
         }
+    }
+
+    // FIXME: Modifying child component styles
+    .Eligibility,
+    .serviceProvisions-container {
+        padding-right: 15px;
+        padding-left: 15px;
     }
 
     h1,
@@ -101,15 +61,6 @@ $padding: 15px;
     h6 {
         margin-bottom: 0;
         font-weight: 500;
-    }
-
-    hr {
-        height: 1px;
-        margin-right: -$padding;
-        margin-left: -$padding;
-
-        border: 0;
-        background-color: $brand-spacer;
     }
 
     .name {
@@ -182,8 +133,8 @@ $padding: 15px;
 
         .siblings-header {
             margin-bottom: 1em;
-            padding-right: $padding;
-            padding-left: $padding;
+            padding-right: 15px;
+            padding-left: 15px;
         }
 
         .List > :first-child {

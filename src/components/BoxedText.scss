@@ -1,0 +1,22 @@
+.BoxedText {
+    margin: 0;
+    padding: 15px;
+    padding-top: 0;
+    padding-bottom: 7px;
+    background-color: $brand-bg-light;
+
+    @media ($tablet) {
+        width: 46%;
+        margin-top: 15px;
+        float: right;
+        background-color: $white;
+
+        .BoxedText-container {
+            padding: 15px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background-color: $brand-bg-light;
+        }
+
+    }
+}

@@ -1,0 +1,34 @@
+.CensusStaticPage {
+    h2 {
+        margin: 0;
+        color: $brand-text-dark;
+        font-size: 22px;
+        font-weight: 500;
+    }
+
+    .description {
+        margin: 0;
+        padding: 15px;
+        padding-bottom: 1px;
+
+        background-color: $brand-bg-light;
+        color: $brand-bg-mid;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 140%;
+    }
+
+    @media ($tablet) {
+        .description {
+            width: 46%;
+            float: left;
+            background-color: $white;
+        }
+    }
+
+    .census-opening-times {
+        color: $brand-text-dark;
+        font-size: 16px;
+        font-weight: 500;
+    }
+}

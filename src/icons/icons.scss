@@ -84,6 +84,22 @@ svg.Icon {
     top: -2px;
 }
 
+.Census2016Icon {
+    .left-path,
+    .right-path {
+        fill: none;
+        stroke: $census-brand-color;
+        stroke-width: 13;
+        stroke-linejoin: round;
+    }
+
+    .outer-circle {
+        fill: none;
+        stroke: $census-brand-color;
+        stroke-width: 8;
+    }
+}
+
 .LoadingIcon {
     animation: rotation 3s infinite linear;
 
