@@ -25,11 +25,9 @@ export default class SvgIconDemographicRecentlyArrived extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-demographic-recently-arrived.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#DemographicRecentlyArrived"></use>
+                </svg>
             </span>
         );
     }

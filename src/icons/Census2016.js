@@ -25,11 +25,9 @@ export default class SvgIconCensus2016 extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-census-2016.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Census2016"></use>
+                </svg>
             </span>
         );
     }

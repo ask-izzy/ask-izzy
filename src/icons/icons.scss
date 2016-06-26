@@ -1,7 +1,6 @@
 
 @media print {
-    path,
-    circle {
+    svg {
         fill: $black;
     }
 }
@@ -11,18 +10,12 @@
 }
 
 .ColoredIcon {
-    &.allow-override-color.icon-fg-color svg g  {
-        path,
-        circle {
-            fill: $icon-fg-color;
-        }
+    &.allow-override-color.icon-fg-color {
+        fill: $icon-fg-color;
     }
 
-    &.allow-override-color.brand-bg-dark svg g {
-        path,
-        circle {
-            fill: $brand-bg-dark;
-        }
+    &.allow-override-color.brand-bg-dark {
+        fill: $brand-bg-dark;
     }
 }
 
@@ -44,23 +37,17 @@
     }
 }
 
-.ChevronIcon {
+svg.ChevronIcon {
     top: 2px;
     width: 35px;
     height: 35px;
     padding-right: 0;
 
-    path,
-    circle {
-        fill: $interactive-icon;
-    }
+    fill: $interactive-icon;
 }
 
-.ChevronBackIcon {
-    path,
-    circle {
-        fill: $white;
-    }
+svg.ChevronBackIcon {
+    fill: $white;
 }
 
 .CheckboxSelectedIcon,
@@ -69,19 +56,13 @@
 .RadioUnselectedIcon {
     margin-top: -8px;
 
-    path,
-    circle {
-        fill: $interactive-icon;
-    }
+    fill: $interactive-icon;
 }
 
 .CheckboxSelectedIcon {
-    path,
-    circle {
-        fill: $white;
-        stroke: $interactive-icon;
-        stroke-width: 2px;
-    }
+    fill: $white;
+    stroke: $interactive-icon;
+    stroke-width: 2px;
 }
 
 .CrossIcon {

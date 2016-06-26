@@ -25,11 +25,9 @@ export default class SvgIconTick extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-tick.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Tick"></use>
+                </svg>
             </span>
         );
     }

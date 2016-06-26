@@ -25,11 +25,9 @@ export default class SvgIconLegal extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-legal.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Legal"></use>
+                </svg>
             </span>
         );
     }

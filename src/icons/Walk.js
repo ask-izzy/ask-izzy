@@ -25,11 +25,9 @@ export default class SvgIconWalk extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-walk.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Walk"></use>
+                </svg>
             </span>
         );
     }

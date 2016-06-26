@@ -25,11 +25,9 @@ export default class SvgIconCentrelink extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-centrelink.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Centrelink"></use>
+                </svg>
             </span>
         );
     }

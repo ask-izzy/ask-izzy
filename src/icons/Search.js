@@ -25,11 +25,9 @@ export default class SvgIconSearch extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-search.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Search"></use>
+                </svg>
             </span>
         );
     }

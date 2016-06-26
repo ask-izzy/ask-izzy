@@ -34,8 +34,20 @@ function titleize(name: string): string {
         .replace(/-(.)/g, upcaseGroup);
 }
 
+let svgs = [];
+
 files.forEach((path) => {
+    const content = readFileSync(srcDir + "/" + path, {encoding: 'utf-8'})
     const className = toClassName(path)
+
+    const idx = content.match(/viewBox="/).index
+    svgs.push(
+        `<symbol id="${className}" ` +
+        content.slice(idx, content.length)
+            .replace(/\/svg>.*/m, '/symbol>')
+            .replace(/id="[^"]*"/g, '')
+    );
+
     const outFile = `${destDir}/${className}.js`;
 
     let allowColoring = "allow-override-color"
@@ -71,11 +83,9 @@ export default class SvgIcon${className} extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/${path}"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#${className}"></use>
+                </svg>
             </span>
         );
     }
@@ -83,6 +93,10 @@ export default class SvgIcon${className} extends React.Component {
 `, 'utf8');
 });
 
+writeFileSync(
+    "public/static/images/icons.svg",
+    "<svg>" + svgs.join("\n") + "</svg>"
+);
 
 const importStatements = files.map((file) =>
     `import SvgIcon${toClassName(file)} from \"./${toClassName(file)}.js\";`

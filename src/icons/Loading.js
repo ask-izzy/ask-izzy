@@ -25,11 +25,9 @@ export default class SvgIconLoading extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-loading.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Loading"></use>
+                </svg>
             </span>
         );
     }

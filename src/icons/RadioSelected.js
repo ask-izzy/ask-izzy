@@ -25,11 +25,9 @@ export default class SvgIconRadioSelected extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-radio-selected.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#RadioSelected"></use>
+                </svg>
             </span>
         );
     }

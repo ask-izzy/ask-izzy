@@ -25,11 +25,9 @@ export default class SvgIconMental extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-mental.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Mental"></use>
+                </svg>
             </span>
         );
     }

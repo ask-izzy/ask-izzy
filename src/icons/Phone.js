@@ -25,11 +25,9 @@ export default class SvgIconPhone extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-phone.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Phone"></use>
+                </svg>
             </span>
         );
     }

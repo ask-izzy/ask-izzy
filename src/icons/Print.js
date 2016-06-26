@@ -25,11 +25,9 @@ export default class SvgIconPrint extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-print.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Print"></use>
+                </svg>
             </span>
         );
     }

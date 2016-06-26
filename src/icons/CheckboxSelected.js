@@ -25,11 +25,9 @@ export default class SvgIconCheckboxSelected extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-checkbox-selected.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#CheckboxSelected"></use>
+                </svg>
             </span>
         );
     }

@@ -25,11 +25,9 @@ export default class SvgIconCross extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-cross.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Cross"></use>
+                </svg>
             </span>
         );
     }

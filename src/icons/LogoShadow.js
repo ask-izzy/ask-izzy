@@ -25,11 +25,9 @@ export default class SvgIconLogoShadow extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-logo-shadow.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#LogoShadow"></use>
+                </svg>
             </span>
         );
     }

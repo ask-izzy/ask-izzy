@@ -25,11 +25,9 @@ export default class SvgIconHouse extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-house.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#House"></use>
+                </svg>
             </span>
         );
     }

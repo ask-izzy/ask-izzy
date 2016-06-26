@@ -25,11 +25,9 @@ export default class SvgIconDemographicTorresStrait extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-demographic-torres-strait.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#DemographicTorresStrait"></use>
+                </svg>
             </span>
         );
     }

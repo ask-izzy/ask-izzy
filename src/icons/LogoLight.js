@@ -25,11 +25,9 @@ export default class SvgIconLogoLight extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-logo-light.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#LogoLight"></use>
+                </svg>
             </span>
         );
     }

@@ -25,11 +25,9 @@ export default class SvgIconMap extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-map.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Map"></use>
+                </svg>
             </span>
         );
     }

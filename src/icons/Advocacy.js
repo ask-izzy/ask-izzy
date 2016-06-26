@@ -25,11 +25,9 @@ export default class SvgIconAdvocacy extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-advocacy.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Advocacy"></use>
+                </svg>
             </span>
         );
     }

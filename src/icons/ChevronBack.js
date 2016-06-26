@@ -25,11 +25,9 @@ export default class SvgIconChevronBack extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-chevron-back.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#ChevronBack"></use>
+                </svg>
             </span>
         );
     }

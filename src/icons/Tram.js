@@ -25,11 +25,9 @@ export default class SvgIconTram extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-tram.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Tram"></use>
+                </svg>
             </span>
         );
     }

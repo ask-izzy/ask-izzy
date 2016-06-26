@@ -25,11 +25,9 @@ export default class SvgIconDemographicParole extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-demographic-parole.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#DemographicParole"></use>
+                </svg>
             </span>
         );
     }

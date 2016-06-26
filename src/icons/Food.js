@@ -25,11 +25,9 @@ export default class SvgIconFood extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-food.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Food"></use>
+                </svg>
             </span>
         );
     }

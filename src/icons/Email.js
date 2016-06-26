@@ -25,11 +25,9 @@ export default class SvgIconEmail extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-email.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Email"></use>
+                </svg>
             </span>
         );
     }

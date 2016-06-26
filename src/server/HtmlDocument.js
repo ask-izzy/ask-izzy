@@ -1,6 +1,9 @@
 /* @flow */
 
 import React from "react";
+import { readFileSync } from "fs";
+
+let svgContent = readFileSync("public/static/images/icons.svg");
 
 class HtmlDocument extends React.Component {
     props: Object;
@@ -236,9 +239,14 @@ class HtmlDocument extends React.Component {
 
         <script src={envPath} />
 
+
     </head>
 
     <body>
+        <div
+            id="iconContainer"
+            dangerouslySetInnerHTML={{__html: svgContent}}
+        />
         <div id="secretContainer" />
         <div
             id="root"

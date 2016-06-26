@@ -25,11 +25,9 @@ export default class SvgIconAddiction extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-addiction.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Addiction"></use>
+                </svg>
             </span>
         );
     }

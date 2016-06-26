@@ -25,11 +25,9 @@ export default class SvgIconFeedback extends React.Component {
             <span
                 {...rest}
             >
-                <object
-                    type="image/svg+xml"
-                    data="/static/images/icons/askizzy-icon-feedback.svg"
-                    className={classes}
-                />
+                <svg className={classes}>
+                   <use xlinkHref="#Feedback"></use>
+                </svg>
             </span>
         );
     }
