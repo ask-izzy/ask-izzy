@@ -133,7 +133,11 @@ class Location extends React.Component {
         iss.getLocations(input)
             .then(results => {
                 this.setState({
-                    autocompletions: Array.from(results.objects),
+                    autocompletions: _.uniq(
+                        Array.from(results.objects),
+                        false,
+                        ({name, state}) => name + state
+                    ),
                     autocompletionInProgress: false,
                 });
             })
