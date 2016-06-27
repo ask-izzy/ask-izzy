@@ -36,19 +36,6 @@ class BaseQuestion extends React.Component {
 
     static defaultProps: Object = {};
 
-    static propTypes = {
-        name: React.PropTypes.string.isRequired,
-        /* The question asked of the user */
-        question: React.PropTypes.string.isRequired,
-        byline: React.PropTypes.string,
-        /* possible answers to the question */
-        answers: React.PropTypes.oneOfType([
-            React.PropTypes.objectOf(React.PropTypes.object),
-        ]).isRequired,
-        onDoneTouchTap: React.PropTypes.func,
-        suppressDoneButton: React.PropTypes.bool,
-    };
-
     constructor(props: Object) {
         super(props);
         this.state = {
@@ -176,7 +163,7 @@ class BaseQuestion extends React.Component {
         this.triggerNext();
     }
 
-    render() {
+    render(): React$Element<*> {
         const selected = this.selected;
 
         return (
@@ -216,7 +203,7 @@ class BaseQuestion extends React.Component {
         );
     }
 
-    renderDoneButton() {
+    renderDoneButton(): ?React$Element<*> {
         if (!this.props.suppressDoneButton) {
             return (
                 <div>

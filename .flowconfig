@@ -25,4 +25,4 @@ unsafe.enable_getters_and_setters=true
 experimental.strict_type_args=true
 
 [version]
-0.25.0
+0.27.0

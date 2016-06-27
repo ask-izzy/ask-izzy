@@ -20,7 +20,7 @@ import * as iss from "../../iss";
 class BaseMultiQuestion extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
 
-    renderDoneButton() {
+    renderDoneButton(): ?React$Element<*> {
         const label = (this.selected.size) ?
             "Done"
             : "None of these";
@@ -123,7 +123,7 @@ class BaseMultiQuestion extends BaseQuestion {
         return search;
     }
 
-    iconFor(answer: string) {
+    iconFor(answer: string): ?React$Element<*> {
         if (this.props.icons && this.props.icons[answer]) {
             const Icon = this.props.icons[answer];
 

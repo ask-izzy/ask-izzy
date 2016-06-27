@@ -254,7 +254,8 @@ class HtmlDocument extends React.Component {
 
         {this.renderAnalytics() ? <script src={analyticsPath} /> : null}
 
-        <script dangerouslySetInnerHTML={{__html: `
+        <script
+            dangerouslySetInnerHTML={{__html: `
             var gmapsApi = document.createElement("script");
             gmapsApi.setAttribute(
                 "src",
