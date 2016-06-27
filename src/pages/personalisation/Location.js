@@ -11,7 +11,6 @@ import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
-import { multiSearch } from "../../iss/Search";
 import * as iss from "../../iss";
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
@@ -85,19 +84,6 @@ class Location extends React.Component {
         }
 
         request = Object.assign(request, {area: location});
-
-        if (this.shouldInjectAccessPoints() &&
-            request.service_type &&
-            (request.service_type.indexOf("housing") > -1)) {
-            request = multiSearch(
-                {
-                    service_type: ["Homelessness Access Point"],
-                    catchment: "true",
-                    q: "(Homelessness Access Point)",
-                },
-                mergeAccessPoints
-            ).compose(request)
-        }
 
         return request;
     }

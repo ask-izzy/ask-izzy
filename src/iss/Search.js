@@ -2,6 +2,25 @@
 
 import * as iss from "../iss";
 import _ from "underscore";
+import Location from "../pages/personalisation/Location";
+
+export function housingCrisis(): Search {
+    return remove("housing")
+        .remove("-(respite care)")
+        .remove("-(housing information)")
+        .remove("-hef")
+        .append("crisis accommodation")
+        .conditionally(
+            remove("crisis accomodation")
+            .remove({service_type: ["housing"]})
+            .append({
+                service_type: ["Homelessness Access Point"],
+                catchment: "true",
+                q: "(Homelessness Access Point)",
+            }),
+            () => Location.shouldInjectAccessPoints()
+        )
+}
 
 export function append(search: string|iss.searchRequest): Search {
     return new AppendToSearch(search);
@@ -11,11 +30,11 @@ export function remove(search: string|iss.searchRequest): Search {
     return new RemoveFromSearch(search);
 }
 
-export function multiSearch(
-    search: iss.searchRequest,
-    merger: iss.searchResultMerger
+export function conditionally(
+    other: Search,
+    filter: (search: iss.searchRequest) => boolean
 ): Search {
-    return new MultiSearch(search, merger);
+    return new ConditionalSearch(other, filter);
 }
 
 /**
@@ -58,21 +77,23 @@ export class Search {
         return next;
     }
 
-    multiSearch(
-        search: iss.searchRequest,
-        merger: iss.searchResultMerger
+    conditionally(
+        other: Search,
+        filter: (search: iss.searchRequest) => boolean
     ): Search {
-        let next = multiSearch(search, merger);
+        let next = conditionally(other, filter);
 
         next.chain = this;
         return next;
     }
+
 }
 
 /**
  * Subclass for combining searches together.
  */
 export class AppendToSearch extends Search {
+
     /* eslint-disable complexity*/
     compose(search: iss.searchRequest): iss.searchRequest {
         search = super.compose(search);
@@ -122,6 +143,7 @@ export class AppendToSearch extends Search {
  * Subclass for removing a search term.
  */
 export class RemoveFromSearch extends Search {
+
     compose(search: iss.searchRequest): iss.searchRequest {
         search = super.compose(search);
 
@@ -146,38 +168,29 @@ export class RemoveFromSearch extends Search {
     }
 }
 
+
 /**
- * Subclass for performing two searches and returning a unified resultset.
- * This is an awful hack.
+ * Subclass for conditionally modifying a search
  */
-export class MultiSearch extends Search {
-    merger: iss.searchResultMerger;
+export class ConditionalSearch extends Search {
+
+    other: Search;
+    filter: (search: iss.searchRequest) => boolean;
 
     constructor(
-        search: string|iss.searchRequest,
-        merger: iss.searchResultMerger
+        other: Search,
+        filter: (search: iss.searchRequest) => boolean
     ) {
-        super(search)
-        this.merger = merger;
+        super('');
+        this.other = other;
+        this.filter = filter;
     }
 
     compose(search: iss.searchRequest): iss.searchRequest {
-        const {q, ...rest} = this.search;
-
         search = super.compose(search);
-        if (search._multi) {
-            throw new Error("Cannot nest multi searches");
-        }
 
-        search._multi = {
-            alternate: (baseSearch) => {
-                return {
-                    ...(append(rest).compose(baseSearch)),
-                    q: q,
-                }
-            },
-            merge: this.merger,
-            _search: this.search,
+        if (this.filter(search)) {
+            return this.other.compose(search);
         }
 
         return search;
