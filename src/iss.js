@@ -519,6 +519,7 @@ async function _search(
         q: "",
         type: "service",
         limit: 10,
+        minimum_should_match: "1",
     };
 
     Object.assign(request_, query);
