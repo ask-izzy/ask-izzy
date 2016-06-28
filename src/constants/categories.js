@@ -48,7 +48,6 @@ const categories:Array<Category> = [
                 "-(housing information) -hef " +
                 "-(holiday accommodation)",
             service_type: ["housing"],
-            minimum_should_match: "30%",
         },
         personalisation: [
             personalisation.Location,
@@ -92,7 +91,6 @@ const categories:Array<Category> = [
         icon: icons.Health,
         search: {
             q: "(community health) -(coordinating bodies)",
-            minimum_should_match: "30%",
             healthcare_card_holders: true,
         },
         personalisation: [
@@ -131,7 +129,6 @@ const categories:Array<Category> = [
         icon: icons.Support,
         search: {
             q: "counselling",
-            minimum_should_match: "1",
         },
         personalisation: [
             personalisation.Location,
@@ -160,7 +157,6 @@ const categories:Array<Category> = [
         search: {
             q: "substance abuse -(coordinating bodies)" +
                 " -(registered training)",
-            minimum_should_match: "30%",
         },
         personalisation: [
             personalisation.Location,
