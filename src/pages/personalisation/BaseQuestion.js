@@ -167,7 +167,9 @@ class BaseQuestion extends React.Component {
         const selected = this.selected;
 
         return (
-            <div>
+            <div
+                className="BaseQuestion"
+            >
                 <HeaderBar
                     primaryText={
                         <div>
