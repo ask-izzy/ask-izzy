@@ -10,6 +10,11 @@ export default class ViewOnMapButton extends React.Component {
     props: any;
     state: {maps: ?MapsApi};
 
+    constructor() {
+        super();
+        this.state = {maps: null};
+    }
+
     componentWillMount(): void {
         maps().then((maps) => this.setState({maps}));
     }
