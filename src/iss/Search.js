@@ -2,9 +2,10 @@
 
 import * as iss from "../iss";
 import _ from "underscore";
-import Location from "../pages/personalisation/Location";
 
-export function housingCrisis(): Search {
+export function housingCrisis(
+    filter: (search: iss.searchRequest) => boolean
+): Search {
     return remove("housing")
         .remove("-(respite care)")
         .remove("-(housing information)")
@@ -18,8 +19,8 @@ export function housingCrisis(): Search {
                 catchment: "true",
                 q: "(Homelessness Access Point)",
             }),
-            () => Location.shouldInjectAccessPoints()
-        )
+            filter
+        );
 }
 
 export function append(search: string|iss.searchRequest): Search {

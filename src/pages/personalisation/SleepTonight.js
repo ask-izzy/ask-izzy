@@ -1,6 +1,7 @@
 /* @flow */
 
 import BaseQuestion from "./BaseQuestion";
+import Location from "./Location";
 import { append, housingCrisis } from "../../iss/Search";
 
 export default class SleepTonight extends BaseQuestion {
@@ -13,7 +14,7 @@ export default class SleepTonight extends BaseQuestion {
         question: "Do you have somewhere safe to sleep tonight?",
         answers: {
             "Yes": append(""),
-            "No": housingCrisis(),
+            "No": housingCrisis(() => Location.shouldInjectAccessPoints()),
         },
     };
 }
