@@ -1,6 +1,6 @@
 /* @flow */
 
-function ReturnAfter<U>(
+export function ReturnAfter<U>(
     milliseconds: number,
     result: U
 ): Promise<U> {
