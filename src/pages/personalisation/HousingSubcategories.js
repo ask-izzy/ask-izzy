@@ -1,8 +1,9 @@
 /* @flow */
 
-import SleepTonight from "./SleepTonight";
 import BaseQuestion from "./BaseQuestion";
-import { remove } from "../../iss/Search";
+import SleepTonight from "./SleepTonight";
+import Location from "./Location";
+import { remove, housingCrisis } from "../../iss/Search";
 
 export default class HousingSubcategories extends BaseQuestion {
     static title = "Situation";
@@ -11,8 +12,9 @@ export default class HousingSubcategories extends BaseQuestion {
         name: "sub-housing",
         question: "Which situation is most like yours?",
         answers: {
-            "On the street": remove("housing")
-                .append("crisis accommodation"),
+            "On the street": housingCrisis(
+                () => Location.shouldInjectAccessPoints()
+            ),
             "Couch surfing": remove("housing")
                 .append("homeless accommodation"),
             "In a rooming house": remove("housing")

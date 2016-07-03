@@ -1,7 +1,8 @@
 /* @flow */
 
 import BaseQuestion from "./BaseQuestion";
-import { append, remove } from "../../iss/Search";
+import Location from "./Location";
+import { append, housingCrisis } from "../../iss/Search";
 
 export default class SleepTonight extends BaseQuestion {
     static title = "Sleeping";
@@ -13,11 +14,7 @@ export default class SleepTonight extends BaseQuestion {
         question: "Do you have somewhere safe to sleep tonight?",
         answers: {
             "Yes": append(""),
-            "No": remove("housing")
-                .remove("-(respite care)")
-                .remove("-(housing information)")
-                .remove("-hef")
-                .append("crisis accommodation"),
+            "No": housingCrisis(() => Location.shouldInjectAccessPoints()),
         },
     };
 }

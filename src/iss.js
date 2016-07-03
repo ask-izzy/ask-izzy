@@ -49,11 +49,6 @@ export type searchRequest = {
 
     limit?: number,
     key?: string,
-
-    _multi?: {
-        alternate: (x: searchRequest) => searchRequest,
-        merge: searchResultMerger,
-    }
 };
 
 type searchResultsLocation = {
@@ -554,19 +549,7 @@ export async function getLocations(
 export async function search(
     query: searchRequest,
 ): Promise<searchResults> {
-    if (query._multi) {
-        const {_multi, ...base} = query;
-
-        const baseQuery = _search(base);
-        const alternateQuery = _search(_multi.alternate(base));
-
-        return _multi.merge(
-            await baseQuery,
-            await alternateQuery
-        );
-    } else {
-        return await _search(query);
-    }
+    return await _search(query);
 }
 
 export async function getService(
