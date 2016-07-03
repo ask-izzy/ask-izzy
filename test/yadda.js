@@ -30,7 +30,7 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
 
             if (process.env.BROWSER_LOGS) {
                 // Flush any logs from previous tests
-                let logger = new Webdriver.WebDriver.Logs(driver);
+                let logger = driver.manage().logs()
 
                 await logger.get("browser");
             }
@@ -80,7 +80,7 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
                 );
 
                 if (process.env.BROWSER_LOGS) {
-                    let logger = new Webdriver.WebDriver.Logs(driver);
+                    let logger = driver.manage().logs()
 
                     // N.B: iterating this causes problems but map works...
                     // very strange

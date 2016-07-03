@@ -17,6 +17,11 @@ import Location from "./iss/Location";
 import Cache from "./iss/Cache";
 import serviceProvisions from "./constants/service-provisions";
 import Maps from "./maps";
+import {
+    Timeout,
+    TryWithDefault,
+    ReturnAfter,
+} from "./timeout";
 
 declare var ISS_URL: string;
 
@@ -119,13 +124,13 @@ async function _request(obj: XhrOptions) {
 
         if (status == 429) {
             console.log("Rate limited by ISS - backing off for 4 seconds");
-            await wait(4000);
+            await ReturnAfter(4000, null);
             return xhr(obj);
         }
 
         if (status >= 502) {
             console.log("ISS or elasticsearch are down - retrying")
-            await wait(500);
+            await ReturnAfter(500, null);
             return xhr(obj);
         }
 
@@ -222,13 +227,14 @@ async function attachTransportTimes(
     }
 
     let formatPoint = (point: issPoint) => `${point.lat},${point.lon}`;
-    const maps = await Maps();
+
+    const maps = await Timeout(1000, Maps());
     let service: ?Service;
-    let travelTimes = await maps.travelTime(services
+    let travelTimes = await Timeout(1000, maps.travelTime(services
         .filter((service) => !service.Location().isConfidential())
         // flow:disable isConfidential checks location.point
         .map(({location}) => formatPoint(location.point))
-    );
+    ));
 
     for (service of services) {
         if (!service.Location().isConfidential()) {
@@ -268,7 +274,11 @@ export async function requestObjects(
         (object: issService): Service => new Service(object)
     );
 
-    response.objects = await attachTransportTimes(objects);
+    response.objects = await TryWithDefault(
+        3000,
+        attachTransportTimes(objects),
+        objects
+    )
 
     response.objects.forEach((service) =>
         serviceCache.set(service.id, service)
@@ -557,16 +567,6 @@ export async function search(
     } else {
         return await _search(query);
     }
-}
-
-function wait(
-    milliseconds: number,
-): Promise<void> {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve()
-        }, milliseconds);
-    });
 }
 
 export async function getService(
