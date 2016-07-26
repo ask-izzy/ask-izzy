@@ -147,16 +147,34 @@ export class MapsApi {
  */
 function maps(): Promise<MapsApi> {
     return new Promise((resolve, reject) => {
+
+        var tries = 0;
+        var timeout;
+
         function checkLoaded() {
             try {
+
+                tries = tries + 1;
+
                 // Check that google maps has loaded
                 google.maps.DistanceMatrixService.name;
 
                 resolve(new MapsApi(google.maps));
+
             } catch (error) {
+
+                // If Google maps hasn't loaded, try 3 times before
+                // failing to a blank object, to fullfill the promise.
+                if(tries >= 3) {
+                    clearTimeout(timeout);
+                    resolve(new Object());
+                }
+
                 /* try again in 500ms */
-                setTimeout(checkLoaded, 500);
+                timeout = setTimeout(function(){checkLoaded()}, 500);
+
             }
+
         }
 
         checkLoaded();
