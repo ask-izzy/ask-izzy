@@ -226,18 +226,16 @@ async function attachTransportTimes(
     const maps = await TryWithDefault(1000, Maps(), Object());
 
     if (typeof maps.travelTime == 'function') {
-        let service: ?Service;
+        let service: ?Service; // eslint-disable-line no-unused-vars
         let travelTimes = await Timeout(1000, maps.travelTime(services
             .filter((service) => !service.Location().isConfidential())
             // flow:disable isConfidential checks location.point
             .map(({location}) => formatPoint(location.point))
         ));
 
-        for (service of services) {
-            if (!service.Location().isConfidential()) {
-                service.travelTime = travelTimes.shift();
-            }
-        }
+        services.filter((service) => !service.Location().isConfidential())
+            // eslint-disable-next-line no-return-assign
+            .map((service) => service.travelTime = travelTimes.shift());
     }
 
     return services;
