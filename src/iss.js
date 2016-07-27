@@ -223,10 +223,9 @@ async function attachTransportTimes(
 
     let formatPoint = (point: issPoint) => `${point.lat},${point.lon}`;
 
-    const maps = await Timeout(5000, Maps());
+    const maps = await TryWithDefault(1000, Maps(), Object());
 
     if(typeof maps.travelTime == 'function') {
-
         let service: ?Service;
         let travelTimes = await Timeout(1000, maps.travelTime(services
             .filter((service) => !service.Location().isConfidential())
@@ -239,8 +238,8 @@ async function attachTransportTimes(
                 service.travelTime = travelTimes.shift();
             }
         }
-
     }
+
     return services;
 }
 
