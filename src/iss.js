@@ -225,7 +225,7 @@ async function attachTransportTimes(
 
     const maps = await TryWithDefault(1000, Maps(), Object());
 
-    if(typeof maps.travelTime == 'function') {
+    if (typeof maps.travelTime == 'function') {
         let service: ?Service;
         let travelTimes = await Timeout(1000, maps.travelTime(services
             .filter((service) => !service.Location().isConfidential())
