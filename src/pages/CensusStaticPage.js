@@ -75,7 +75,7 @@ export default class CensusStaticPage extends React.Component {
                         kind="phone"
                         number="1300 214 531"
                     />
-                    <Web url="http://www.abs.gov.au/websitedbs/censushome.nsf/home/2016" />
+                    <Web url="http://help.census.abs.gov.au/sites/default/files/Census_Public/pdf/HOMELESSNESS_WEB.pdf" />
                 </BoxedText>
             </div>
         );
