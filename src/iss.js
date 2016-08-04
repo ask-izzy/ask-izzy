@@ -223,18 +223,19 @@ async function attachTransportTimes(
 
     let formatPoint = (point: issPoint) => `${point.lat},${point.lon}`;
 
-    const maps = await Timeout(1000, Maps());
-    let service: ?Service;
-    let travelTimes = await Timeout(1000, maps.travelTime(services
-        .filter((service) => !service.Location().isConfidential())
-        // flow:disable isConfidential checks location.point
-        .map(({location}) => formatPoint(location.point))
-    ));
+    const maps = await TryWithDefault(1000, Maps(), Object());
 
-    for (service of services) {
-        if (!service.Location().isConfidential()) {
-            service.travelTime = travelTimes.shift();
-        }
+    if (typeof maps.travelTime == 'function') {
+        let service: ?Service; // eslint-disable-line no-unused-vars
+        let travelTimes = await Timeout(1000, maps.travelTime(services
+            .filter((service) => !service.Location().isConfidential())
+            // flow:disable isConfidential checks location.point
+            .map(({location}) => formatPoint(location.point))
+        ));
+
+        services.filter((service) => !service.Location().isConfidential())
+            // eslint-disable-next-line no-return-assign
+            .map((service) => service.travelTime = travelTimes.shift());
     }
 
     return services;
