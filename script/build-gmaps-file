@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+
+# Replace all external resources in the Google maps API with proxied 
+# versions, and/or replace with null if a proxy isn't available for that domain
+
+# Download Google maps api file, frozen to a version
+wget -O ../public/static/google-maps-api.js \
+"https://maps.googleapis.com/maps/api/js?v=3.25&key=$GOOGLE_API_KEY&libraries=places"
+
+declare -A proxy_domains=(
+	["gmaps"]="maps.googleapis.com" 
+	["gmaps-static"]="maps.gstatic.com" 
+	["gcsi-static"]="csi.gstatic.com" 
+	["gfonts-static"]="fonts.gstatic.com"
+	["gtagmanager"]="tagmanager.google.com"
+	["gfonts"]="fonts.google.com"
+)
+
+declare -A proxy_dev_domains=(
+	["gmaps"]="gmaps.docker.dev"
+	["gmaps-static"]="gmaps-static.docker.dev"
+	["gcsi-static"]="gcsi-static.docker.dev"
+	["gfonts-static"]="gfonts-static.docker.dev"
+	["gtagmanager"]="gtagmanager.docker.dev"
+	["gfonts"]="gfonts.docker.dev"
+)
+
+declare -A proxy_prod_domains=(
+	["gmaps"]="gmaps.docker.dev"
+	["gmaps-static"]="gmaps-static.docker.dev"
+	["gcsi-static"]="gcsi-static.docker.dev"
+	["gfonts-static"]="gfonts-static.docker.dev"
+	["gtagmanager"]="gtagmanager.docker.dev"
+	["gfonts"]="gfonts.docker.dev"
+)
+
+for var in "${!proxy_domains[@]}"
+do
+	if [ "$NODE_ENV" = "production" ]; then
+		sed -r -i -e \
+		"s/${proxy_domains[$var]}/${proxy_prod_domains[$var]}/gi" \
+		../public/static/google-maps-api.js
+	else
+		sed -r -i -e \
+		"s/${proxy_domains[$var]}/${proxy_dev_domains[$var]}/gi" \
+		../public/static/google-maps-api.js
+	fi
+done
+
+declare -a banned_domains=(
+	"mts.googleapis.com"
+	"mts0.googleapis.com"
+	"mts1.googleapis.com"
+	"mts0.google.com"
+	"mts1.google.com"
+	"khms.googleapis.com"
+	"khms0.googleapis.com"
+	"khms1.googleapis.com"
+	"khms0.google.com"
+	"khms1.google.com"
+	"cbks0.googleapis.com"
+	"cbks1.googleapis.com"
+	"gg.google"
+	"g0.gstatic.com"
+	"static.panoramio.com.storage.googleapis.com"
+	"geo0.ggpht.com"
+	"geo1.ggpht.com"
+	"geo2.ggpht.com"
+	"geo3.ggpht.com"
+	"lh3.ggpht.com"
+	"lh4.ggpht.com"
+	"lh5.ggpht.com"
+	"lh6.ggpht.com"
+	"safebrowsing.google.com"
+	"www.google"
+	"maps.google"
+	"earthbuilder.googleapis"
+)
+
+for var in "${banned_domains[@]}"
+do
+	sed -r -i -e \
+	"s/\"(http(s?):\/\/$var)[^\"]+\"/null/gi" \
+	../public/static/google-maps-api.js
+done

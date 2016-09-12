@@ -18,6 +18,7 @@ class HtmlDocument extends React.Component {
         title: React.PropTypes.string,
         envPath: React.PropTypes.string,
         analyticsPath: React.PropTypes.string,
+        mapsPath: React.PropTypes.string,
     };
 
     static defaultProps = {
@@ -26,6 +27,7 @@ class HtmlDocument extends React.Component {
         meta: {},
         envPath: "/static/env.js",
         analyticsPath: "/static/google-analytics.js",
+        mapsPath: "/static/google-maps-api.js",
     };
 
     renderAnalytics(): boolean {
@@ -43,6 +45,7 @@ class HtmlDocument extends React.Component {
             currentUrl,
             envPath,
             analyticsPath,
+            mapsPath,
         } = this.props;
         const viewport =
             "width=device-width, initial-scale=1.0, user-scalable=no";
@@ -236,6 +239,8 @@ class HtmlDocument extends React.Component {
 
         <script src={envPath} />
 
+        <script src={mapsPath} />
+
     </head>
 
     <body>
@@ -254,17 +259,6 @@ class HtmlDocument extends React.Component {
 
         {this.renderAnalytics() ? <script src={analyticsPath} /> : null}
 
-        <script
-            dangerouslySetInnerHTML={{__html: `
-            var gmapsApi = document.createElement("script");
-            gmapsApi.setAttribute(
-                "src",
-                "//maps.googleapis.com/maps/api/js?key=" +
-                window.GOOGLE_API_KEY +
-                "&libraries=places"
-            );
-            document.body.appendChild(gmapsApi);`}}
-        />
 
     </body>
 </html>
