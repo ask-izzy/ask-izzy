@@ -46,7 +46,7 @@
     "react": "15.1.0",
     "react-document-title": "2.0.2",
     "react-dom": "15.1.0",
-    "react-google-maps": "git+https://git@github.com/ask-izzy/react-google-maps.git",
+    "react-google-maps": "git+https://git@github.com/infoxchange/react-google-maps.git",
     "react-mixin": "3.0.5",
     "react-router": "2.3.0",
     "sass-lint": "1.8.2",
