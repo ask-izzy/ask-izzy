@@ -30,6 +30,7 @@ RUN \
         parallel \
         git \
         sudo \
+        wget \
         && \
     # Required by node-gyp
     apt-get -y install \
