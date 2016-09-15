@@ -4,7 +4,7 @@
 # versions, and/or replace with null if a proxy isn't available for that domain
 
 # Download Google maps api file, frozen to a version
-wget -O ../public/static/google-maps-api.js \
+wget -O ./public/static/google-maps-api.js \
 "https://maps.googleapis.com/maps/api/js?v=3.25&key=$GOOGLE_API_KEY&libraries=places"
 
 declare -A proxy_domains=(
@@ -39,11 +39,11 @@ do
 	if [ "$NODE_ENV" = "production" ]; then
 		sed -r -i -e \
 		"s/${proxy_domains[$var]}/${proxy_prod_domains[$var]}/gi" \
-		../public/static/google-maps-api.js
+		./public/static/google-maps-api.js
 	else
 		sed -r -i -e \
 		"s/${proxy_domains[$var]}/${proxy_dev_domains[$var]}/gi" \
-		../public/static/google-maps-api.js
+		./public/static/google-maps-api.js
 	fi
 done
 
@@ -81,5 +81,5 @@ for var in "${banned_domains[@]}"
 do
 	sed -r -i -e \
 	"s/\"(http(s?):\/\/$var)[^\"]+\"/null/gi" \
-	../public/static/google-maps-api.js
+	./public/static/google-maps-api.js
 done
