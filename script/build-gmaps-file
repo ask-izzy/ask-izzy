@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-# Replace all external resources in the Google maps API with proxied 
+# Replace all external resources in the Google maps API with proxied
 # versions, and/or replace with null if a proxy isn't available for that domain
 
 # Download Google maps api file, frozen to a version
 wget -O ./public/static/google-maps-api.js \
-"https://maps.googleapis.com/maps/api/js?v=3.25&key=$GOOGLE_API_KEY&libraries=places"
+"https://maps.googleapis.com/maps/api/js?v=3.25&key=${GOOGLE_API_KEY}&libraries=places"
 
 declare -A proxy_domains=(
-	["gmaps"]="maps.googleapis.com" 
-	["gmaps-static"]="maps.gstatic.com" 
-	["gcsi-static"]="csi.gstatic.com" 
+	["gmaps"]="maps.googleapis.com"
+	["gmaps-static"]="maps.gstatic.com"
+	["gcsi-static"]="csi.gstatic.com"
 	["gfonts-static"]="fonts.gstatic.com"
 	["gtagmanager"]="tagmanager.google.com"
 	["gfonts"]="fonts.google.com"
