@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Replace all external resources in the Google maps API with proxied
 # versions, and/or replace with null if a proxy isn't available for that domain
