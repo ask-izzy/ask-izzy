@@ -26,12 +26,12 @@ declare -A proxy_dev_domains=(
 )
 
 declare -A proxy_prod_domains=(
-	["gmaps"]="gmaps.docker.dev"
-	["gmaps-static"]="gmaps-static.docker.dev"
-	["gcsi-static"]="gcsi-static.docker.dev"
-	["gfonts-static"]="gfonts-static.docker.dev"
-	["gtagmanager"]="gtagmanager.docker.dev"
-	["gfonts"]="gfonts.docker.dev"
+	["gmaps"]="gmaps.askizzy.org.au"
+	["gmaps-static"]="gmaps-static.askizzy.org.au"
+	["gcsi-static"]="gcsi-static.askizzy.org.au"
+	["gfonts-static"]="gfonts-static.askizzy.org.au"
+	["gtagmanager"]="gtagmanager.askizzy.org.au"
+	["gfonts"]="gfonts.askizzy.org.au"
 )
 
 for var in "${!proxy_domains[@]}"
