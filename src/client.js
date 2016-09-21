@@ -31,13 +31,8 @@ head.insertBefore = function (newElement, referenceElement) {
 // This causes a CORS error after the request is run,
 // which is not a problem as we don't need to do anything
 // with the response.
-let typographyProxy = 'typography.docker.dev';
-if (process.env.NODE_ENV === "production") {
-    typographyProxy = 'typography.askizzy.org.au';
-}
-
 xhr({
-    url: "//" + typographyProxy + "/7948374/730248/css/fonts.css",
+    url: "//" + window.PROXY_TYPOGRAPHY + "/7948374/730248/css/fonts.css",
     maxRedirects: 0,
 }).catch(() => null);
 
