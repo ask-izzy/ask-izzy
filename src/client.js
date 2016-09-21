@@ -13,12 +13,31 @@ import categories from "./constants/categories";
 window.searchTest = searchTest;
 window.categories = categories;
 
+// Preventing the Google Maps libary from downloading an extra font
+// http://stackoverflow.com/questions/25523806/google-maps-v3-prevent-api-from-loading-roboto-font
+var head = document.getElementsByTagName('head')[0];
+var insertBefore = head.insertBefore;
+head.insertBefore = function (newElement, referenceElement) {
+    // intercept font download
+    if (newElement.href
+        && newElement.href.indexOf('https://fonts.googleapis.com/css?family=Roboto') === 0) {
+        return;
+    }
+
+    insertBefore.call(head, newElement, referenceElement);
+};
+
 // Allow typography.com to record the hit for licencing
 // This causes a CORS error after the request is run,
 // which is not a problem as we don't need to do anything
 // with the response.
+let typographyProxy = 'typography.docker.dev';
+if (process.env.NODE_ENV === "production") {
+    typographyProxy = 'typography.askizzy.org.au';
+}
+
 xhr({
-    url: "//cloud.typography.com/7948374/730248/css/fonts.css",
+    url: "//" + typographyProxy + "/7948374/730248/css/fonts.css",
     maxRedirects: 0,
 }).catch(() => null);
 
