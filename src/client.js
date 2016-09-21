@@ -15,12 +15,13 @@ window.categories = categories;
 
 // Preventing the Google Maps libary from downloading an extra font
 // http://stackoverflow.com/questions/25523806/google-maps-v3-prevent-api-from-loading-roboto-font
-var head = document.getElementsByTagName('head')[0];
-var insertBefore = head.insertBefore;
-head.insertBefore = function (newElement, referenceElement) {
+let head = document.getElementsByTagName('head')[0];
+let insertBefore = head.insertBefore;
+
+head.insertBefore = function(newElement, referenceElement) {
     // intercept font download
-    if (newElement.href
-        && newElement.href.indexOf('https://fonts.googleapis.com/css?family=Roboto') === 0) {
+    if (newElement.href &&
+        newElement.href.indexOf('https://fonts.googleapis.com/css?family=Roboto') === 0) {
         return;
     }
 
