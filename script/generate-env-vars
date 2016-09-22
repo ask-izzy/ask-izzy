@@ -3,6 +3,12 @@ set -euo pipefail
 IFS=$'\n\t'
 PATH=$(npm bin):$PATH
 
+if [ "$NODE_ENV" = "production" ]; then
+	PROXY_TYPOGRAPHY = "typography-com.askizzy.org.au"
+else
+	PROXY_TYPOGRAPHY = "typography-com.docker.dev"
+fi
+
 cat <<JSON
 window.ISS_URL = "$ISS_URL";
 window.GOOGLE_API_KEY = "$GOOGLE_API_KEY";
