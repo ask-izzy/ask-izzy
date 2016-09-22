@@ -4,9 +4,9 @@ IFS=$'\n\t'
 PATH=$(npm bin):$PATH
 
 if [ "$NODE_ENV" = "production" ]; then
-	PROXY_TYPOGRAPHY = "typography-com.askizzy.org.au"
+	PROXY_TYPOGRAPHY="typography-com.askizzy.org.au"
 else
-	PROXY_TYPOGRAPHY = "typography-com.docker.dev"
+	PROXY_TYPOGRAPHY="typography-com.docker.dev"
 fi
 
 cat <<JSON
