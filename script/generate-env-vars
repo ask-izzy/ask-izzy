@@ -5,8 +5,10 @@ PATH=$(npm bin):$PATH
 
 if [ "$NODE_ENV" = "production" ]; then
 	PROXY_TYPOGRAPHY="typography-com.askizzy.org.au"
+	PROXY_TAGS="gtagmanager.askizzy.org.au"
 else
 	PROXY_TYPOGRAPHY="typography-com.docker.dev"
+	PROXY_TAGS="gtagmanager.docker.dev"
 fi
 
 cat <<JSON
@@ -15,4 +17,5 @@ window.GOOGLE_API_KEY = "$GOOGLE_API_KEY";
 window.GOOGLE_ANALYTICS_ID = "${GOOGLE_ANALYTICS_ID:=}"
 window.GOOGLE_TAG_MANAGER_ID = "${GOOGLE_TAG_MANAGER_ID:=}";
 window.PROXY_TYPOGRAPHY = "${PROXY_TYPOGRAPHY}";
+window.PROXY_TAGS = "${PROXY_TAGS}";
 JSON
