@@ -26,6 +26,12 @@ head.insertBefore = function(newElement, referenceElement) {
         return;
     }
 
+    // intercept analytics download
+    if (newElement.src &&
+        newElement.src.indexOf('http://www.google-analytics.com/analytics.js') === 0) {
+        newElement.src = '/static/analytics.js'
+    }
+
     insertBefore.call(head, newElement, referenceElement);
 };
 
