@@ -39,7 +39,7 @@ declare -A proxy_prod_domains=(
 
 for var in "${!proxy_domains[@]}"
 do
-	if [ "$NODE_ENV" = "production" ]; then
+	if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging"  ]; then
 		sed -r -i -e \
 		"s/${proxy_domains[$var]}/${proxy_prod_domains[$var]}/gi" \
 		./public/static/google-maps-api.js
@@ -93,7 +93,7 @@ wget -O ./public/static/analytics.js \
 
 for var in "${!proxy_domains[@]}"
 do
-	if [ "$NODE_ENV" = "production" ]; then
+	if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging"  ]; then
 		sed -r -i -e \
 		"s/${proxy_domains[$var]}/${proxy_prod_domains[$var]}/gi" \
 		./public/static/analytics.js
