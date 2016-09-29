@@ -3,7 +3,7 @@ set -euo pipefail
 IFS=$'\n\t'
 PATH=$(npm bin):$PATH
 
-if [ "$NODE_ENV" = "production" ]; then
+if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging" ]; then
 	PROXY_TYPOGRAPHY="typography-com.askizzy.org.au"
 	PROXY_TAGS="gtagmanager.askizzy.org.au"
 	PROXY_ANALYTICS="google-analytics.askizzy.org.au"
