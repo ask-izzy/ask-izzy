@@ -3,6 +3,7 @@
 
 variables:
     GOOGLE_API_KEY: AIzaSyChNlerDt3cxNWvSylVdCsUkJ-3l87qojU
+    ENVIRONMENT: development
 
 before_script:
     - hostname
