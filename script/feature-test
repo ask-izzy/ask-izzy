@@ -5,6 +5,7 @@ PATH=$(npm bin):$PATH
 
 export NODE_ENV=production
 export PORT=8010
+export ENVIRONMENT=development
 
 ./script/test-setup
 
