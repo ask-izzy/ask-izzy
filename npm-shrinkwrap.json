@@ -5222,8 +5222,8 @@
     },
     "react-google-maps": {
       "version": "4.9.2",
-      "from": "git+https://git@github.com/ask-izzy/react-google-maps.git#b1c9377100919752c958441631eed39872cb9172",
-      "resolved": "git+https://git@github.com/ask-izzy/react-google-maps.git#b1c9377100919752c958441631eed39872cb9172"
+      "from": "git+https://git@github.com/infoxchange/react-google-maps.git#25688372b3d0ef434d8c030d121838b886013ab3",
+      "resolved": "git+https://git@github.com/infoxchange/react-google-maps.git#25688372b3d0ef434d8c030d121838b886013ab3"
     },
     "react-mixin": {
       "version": "3.0.5",

@@ -30,6 +30,7 @@ RUN \
         parallel \
         git \
         sudo \
+        wget \
         && \
     # Required by node-gyp
     apt-get -y install \
@@ -58,6 +59,7 @@ ADD . /app
 
 RUN git describe > public/VERSION && \
     script/build-assets && \
+    script/build-gmaps-file && \
     chown -R app .
 
 # forward request and error logs to docker log collector
