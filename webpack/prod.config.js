@@ -29,6 +29,9 @@ module.exports = {
             "underscore",
             "underscore.string",
         ],
+	googleanalytics: [
+	    "./src/google-analytics.js",
+	],
     },
     output: {
         path: assetsPath,

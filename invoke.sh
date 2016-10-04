@@ -33,9 +33,6 @@ case "$1" in
 
         set -x # Logs
         cp -r ./public/static/* /static/
-
-        # Make analytics code available.
-        cp ./src/google-analytics.js /static/
         ;;
 
     serve)

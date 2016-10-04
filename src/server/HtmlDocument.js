@@ -26,13 +26,8 @@ class HtmlDocument extends React.Component {
         css: [],
         meta: {},
         envPath: "/static/env.js",
-        analyticsPath: "/static/google-analytics.js",
         mapsPath: "/static/google-maps-api.js",
     };
-
-    renderAnalytics(): boolean {
-        return process.env.NODE_ENV == "production";
-    }
 
     render() {
         const {
@@ -256,10 +251,6 @@ class HtmlDocument extends React.Component {
                 src={src}
             />
         )}
-
-        {this.renderAnalytics() ? <script src={analyticsPath} /> : null}
-
-
     </body>
 </html>
         );
