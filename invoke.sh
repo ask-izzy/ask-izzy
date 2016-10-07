@@ -39,6 +39,7 @@ case "$1" in
         shift 1
 
         ./script/generate-env-vars > /static/env-$(cat public/VERSION).js
+        ./script/build-gmaps-file
         exec ./script/run-nginx
         ;;
 
