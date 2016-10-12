@@ -58,8 +58,8 @@ RUN npm install && \
 ADD . /app
 
 RUN git describe > public/VERSION && \
-    script/build-assets && \
     script/build-gmaps-file && \
+    script/build-assets && \
     chown -R app .
 
 # forward request and error logs to docker log collector
