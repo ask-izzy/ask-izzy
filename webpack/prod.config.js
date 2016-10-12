@@ -32,6 +32,9 @@ module.exports = {
         googleanalytics: [
             "./src/google-analytics.js",
         ],
+        googlemapsapi: [
+            "./public/static/google-maps-api.js",
+        ],
     },
     output: {
         path: assetsPath,

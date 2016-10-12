@@ -32,14 +32,14 @@ case "$1" in
         shift 1
 
         set -x # Logs
+        ./script/generate-env-vars > /static/env-$(cat public/VERSION).js
+        ./script/build-gmaps-file
         cp -r ./public/static/* /static/
         ;;
 
     serve)
         shift 1
 
-        ./script/generate-env-vars > /static/env-$(cat public/VERSION).js
-        ./script/build-gmaps-file
         exec ./script/run-nginx
         ;;
 
