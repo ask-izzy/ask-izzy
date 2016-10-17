@@ -71,7 +71,8 @@ export default function render(req, res, next) {
                               process.env.ENVFILE_PATH || "/static/env.js"
                           }
                           mapsPath={
-                              process.env.MAPSFILE_PATH || "/static/google-maps-api.js"
+                              process.env.MAPSFILE_PATH ||
+				"/static/google-maps-api.js"
                           }
                           currentUrl={reqUrl}
                           siteName="Ask Izzy"

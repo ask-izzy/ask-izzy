@@ -64,7 +64,8 @@ function renderPage(uri: string, path: string): void {
                       `/static/env-${version}.js` : "/static/env.js"
                   }
                   mapsPath={version ?
-                      `/static/google-maps-api-${version}.js` : "/static/google-maps-api.js"
+                      `/static/google-maps-api-${version}.js`
+                        : "/static/google-maps-api.js"
                   }
                   siteName="Ask Izzy"
                   description={
