@@ -7,11 +7,11 @@
 
 if [ -z "$HTTP_PROXY" ]; then
 	wget -O ./public/static/google-maps-api.js \
-	"http://maps.googleapis.com/maps/api/js?v=3.25&key=${GOOGLE_API_KEY}&libraries=places"
+	"https://maps.googleapis.com/maps/api/js?v=3.25&key=${GOOGLE_API_KEY}&libraries=places"
 else
 	wget -O ./public/static/google-maps-api.js \
 	-e use_proxy=yes -e http_proxy=$HTTP_PROXY \
-	"http://maps.googleapis.com/maps/api/js?v=3.25&key=${GOOGLE_API_KEY}&libraries=places"
+	"https://maps.googleapis.com/maps/api/js?v=3.25&key=${GOOGLE_API_KEY}&libraries=places"
 fi
 
 declare -A proxy_domains=(
@@ -105,11 +105,11 @@ done
 # Download Google analytics file
 if [ -z "$HTTP_PROXY" ]; then
 	wget -O ./public/static/analytics.js \
-	"http://www.google-analytics.com/analytics.js"
+	"https://www.google-analytics.com/analytics.js"
 else
 	wget -O ./public/static/analytics.js \
 	-e use_proxy=yes -e http_proxy=$HTTP_PROXY \
-	"http://www.google-analytics.com/analytics.js"
+	"https://www.google-analytics.com/analytics.js"
 fi
 
 for var in "${!proxy_domains[@]}"
