@@ -1,10 +1,10 @@
+/* flow:disable */
 /* This function intercepts xmlhttprequests and checks if
 * the request is being made to an external domain.
 * For the purpose of AskIzzy to be zero-rated for end users,
 * known external services are proxied through Infoxchange servers.
 */
 (function(open) {
-
     XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {
 
         // Replace external domain
