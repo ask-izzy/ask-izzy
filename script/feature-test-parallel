@@ -28,7 +28,7 @@ function runTest {
         --compilers js:babel-core/register \
         --colors \
         --timeout "$INTERACTIVE_TIMEOUT" \
-        --grep "$2
+        --grep "$2" \
         test/yadda.js \
 
     sleep 1 # Avoid completely slamming the machine
