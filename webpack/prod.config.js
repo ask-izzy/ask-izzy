@@ -32,6 +32,9 @@ module.exports = {
         googleanalytics: [
             "./src/google-analytics.js",
         ],
+        requestinterceptor: [
+            "./src/request-interceptor.js",
+        ],
     },
     output: {
         path: assetsPath,
