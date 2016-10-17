@@ -25,7 +25,7 @@ class HtmlDocument extends React.Component {
         css: [],
         meta: {},
         envPath: "/static/env.js",
-        mapsPath: "/google-maps-api.js",
+        mapsPath: "/static/google-maps-api.js",
     };
 
     render() {

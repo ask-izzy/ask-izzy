@@ -6,10 +6,10 @@
 # Download Google maps api file, frozen to a version
 
 if [ -z "$HTTP_PROXY" ]; then
-	wget -O ./public/google-maps-api.js \
+	wget -O ./public/static/google-maps-api.js \
 	"http://maps.googleapis.com/maps/api/js?v=3.25&key=${GOOGLE_API_KEY}&libraries=places"
 else
-	wget -O ./public/google-maps-api.js \
+	wget -O ./public/static/google-maps-api.js \
 	-e use_proxy=yes -e http_proxy=$HTTP_PROXY \
 	"http://maps.googleapis.com/maps/api/js?v=3.25&key=${GOOGLE_API_KEY}&libraries=places"
 fi
@@ -49,20 +49,28 @@ do
 	if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging"  ]; then
 		sed -r -i -e \
 		"s/${proxy_domains[$var]}/${proxy_prod_domains[$var]}/gi" \
-		./public/google-maps-api.js
+		./public/static/google-maps-api.js
 	else
 		sed -r -i -e \
 		"s/${proxy_domains[$var]}/${proxy_dev_domains[$var]}/gi" \
-		./public/google-maps-api.js
+		./public/static/google-maps-api.js
 	fi
 done
 
 declare -a banned_domains=(
+	"cbk0.googleapis.com"
+	"cbk1.googleapis.com"
+	"mt.googleapis.com"
+	"mt0.googleapis.com"
+	"mt1.googleapis.com"
 	"mts.googleapis.com"
 	"mts0.googleapis.com"
 	"mts1.googleapis.com"
 	"mts0.google.com"
 	"mts1.google.com"
+	"khm.googleapis.com"
+	"khm0.googleapis.com"
+	"khm1.googleapis.com"
 	"khms.googleapis.com"
 	"khms0.googleapis.com"
 	"khms1.googleapis.com"
@@ -91,7 +99,7 @@ for var in "${banned_domains[@]}"
 do
 	sed -r -i -e \
 	"s/\"(http(s?):\/\/$var)[^\"]+\"/null/gi" \
-	./public/google-maps-api.js
+	./public/static/google-maps-api.js
 done
 
 # Download Google analytics file
