@@ -16,8 +16,10 @@ function runTest {
     let ISS_MOCK_PORT=8011+$1*2
     export ISS_URL="http://localhost:$ISS_MOCK_PORT"
     export ENVFILE_PATH="/static/env-test-$1.js"
+    export MAPSFILE_PATH="/static/google-maps-api-test-$1.js"
 
     ./script/generate-env-vars > "public/$ENVFILE_PATH"
+
 
     export PORT
     export ISS_MOCK_PORT

@@ -58,11 +58,19 @@ do
 done
 
 declare -a banned_domains=(
+	"cbk0.googleapis.com"
+	"cbk1.googleapis.com"
+	"mt.googleapis.com"
+	"mt0.googleapis.com"
+	"mt1.googleapis.com"
 	"mts.googleapis.com"
 	"mts0.googleapis.com"
 	"mts1.googleapis.com"
 	"mts0.google.com"
 	"mts1.google.com"
+	"khm.googleapis.com"
+	"khm0.googleapis.com"
+	"khm1.googleapis.com"
 	"khms.googleapis.com"
 	"khms0.googleapis.com"
 	"khms1.googleapis.com"

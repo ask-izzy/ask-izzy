@@ -20,7 +20,7 @@ Feature: Search for housing services
         - id: 605690
           crisis: true
           site:
-            name: NSW Community Services (formerly DoCS), NSW Domestic Violence Line
+            name: FACS Community Services (formerly DoCS), NSW Domestic Violence Line
         - id: 539077
           site:
             name: Wilcannia Women & Children's Safe House
