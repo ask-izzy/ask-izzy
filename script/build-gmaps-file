@@ -5,13 +5,21 @@
 
 # Download Google maps api file, frozen to a version
 
+GMAPSAPI_FETCH_URL="https://maps.googleapis.com/maps/api/js?v=3.25&key=${GOOGLE_API_KEY}&libraries=places"
+
 if [ -z "$HTTP_PROXY" ]; then
 	wget -O ./public/static/google-maps-api.js \
-	"https://maps.googleapis.com/maps/api/js?v=3.25&key=${GOOGLE_API_KEY}&libraries=places"
+	$GMAPSAPI_FETCH_URL
 else
-	wget -O ./public/static/google-maps-api.js \
-	-e use_proxy=yes -e http_proxy=$HTTP_PROXY \
-	"https://maps.googleapis.com/maps/api/js?v=3.25&key=${GOOGLE_API_KEY}&libraries=places"
+    if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging"  ]; then
+        wget -O ./public/static/google-maps-api.js \
+        -e use_proxy=yes -e https_proxy=$HTTP_PROXY \
+        $GMAPSAPI_FETCH_URL
+	else
+        wget -O ./public/static/google-maps-api.js \
+        -e use_proxy=yes -e http_proxy=$HTTP_PROXY \
+        $GMAPSAPI_FETCH_URL
+	fi
 fi
 
 declare -A proxy_domains=(
@@ -103,13 +111,21 @@ do
 done
 
 # Download Google analytics file
+GA_FETCH_URL="https://www.google-analytics.com/analytics.js"
+
 if [ -z "$HTTP_PROXY" ]; then
 	wget -O ./public/static/analytics.js \
-	"https://www.google-analytics.com/analytics.js"
+	$GA_FETCH_URL
 else
-	wget -O ./public/static/analytics.js \
-	-e use_proxy=yes -e http_proxy=$HTTP_PROXY \
-	"https://www.google-analytics.com/analytics.js"
+    if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging"  ]; then
+        wget -O ./public/static/analytics.js \
+        -e use_proxy=yes -e https_proxy=$HTTP_PROXY \
+        $GA_FETCH_URL
+	else
+        wget -O ./public/static/analytics.js \
+        -e use_proxy=yes -e http_proxy=$HTTP_PROXY \
+        $GA_FETCH_URL
+	fi
 fi
 
 for var in "${!proxy_domains[@]}"

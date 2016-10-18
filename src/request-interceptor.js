@@ -22,7 +22,7 @@
             // Map domain name to replace
             let map = {
                 "www.google-analytics.com":
-                    "www.google-analytics.askizzy.org.au",
+                    "google-analytics.askizzy.org.au",
                 "google-analytics.com":
                     "google-analytics.askizzy.org.au",
                 "bam.nr-data.net":
