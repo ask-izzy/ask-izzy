@@ -67,6 +67,10 @@ function renderPage(uri: string, path: string): void {
                       `/static/google-maps-api-${version}.js`
                         : "/static/google-maps-api.js"
                   }
+                  requestInterceptorPath={version ?
+                      `/static/scripts/request-interceptor-${version}.js`
+                        : "/static/scripts/request-interceptor.js"
+                  }
                   siteName="Ask Izzy"
                   description={
                       `Ask Izzy helps people who are homeless ` +

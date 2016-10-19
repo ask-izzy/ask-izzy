@@ -26,6 +26,7 @@ class HtmlDocument extends React.Component {
         meta: {},
         envPath: "/static/env.js",
         mapsPath: "/static/google-maps-api.js",
+        requestInterceptorPath: "/static/scripts/request-interceptor.js",
     };
 
     render() {
@@ -39,6 +40,7 @@ class HtmlDocument extends React.Component {
             currentUrl,
             envPath,
             mapsPath,
+            requestInterceptorPath,
         } = this.props;
         const viewport =
             "width=device-width, initial-scale=1.0, user-scalable=no";
@@ -229,6 +231,8 @@ class HtmlDocument extends React.Component {
             name="msapplication-TileImage"
             content="/static/favicons/mstile-144x144.png"
         />
+
+        <script src={requestInterceptorPath} />
 
         <script src={envPath} />
 
