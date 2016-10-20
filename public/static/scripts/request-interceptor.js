@@ -6,14 +6,14 @@
 */
 
 // Common replace function: Replace knwon external domains to internal proxy
-function replaceDomain(pUrl) {
+function replaceDomain(url) {
     // Parse hostname from URL
     let parser = document.createElement('a');
 
-    parser.href = pUrl;
+    parser.href = url;
 
     // Map domain name to replace
-    let map = {
+    let domain_map = {
         "www.google-analytics.com":
             "google-analytics.askizzy.org.au",
         "google-analytics.com":
@@ -24,11 +24,11 @@ function replaceDomain(pUrl) {
             "js-agent-newrelic.askizzy.org.au",
     };
 
-    if (parser.hostname in map) {
-        parser.hostname = map[parser.hostname];
+    if (parser.hostname in domain_map) {
+        parser.hostname = domain_map[parser.hostname];
         return parser.href;
     } else {
-        return pUrl;
+        return url;
     }
 }
 
