@@ -10,14 +10,10 @@ sed "s%/app/public%$(pwd)/public%g" < conf/nginx.conf > "$conffile"
 
 if [ ! -z "$HTTP_PROXY" ]; then
     PROXY_PLACEHOLDER="#proxy_pass HTTP_PROXY"
-    if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging"  ]; then
-        PROXY_VALUE="proxy_pass https\:\/\/${HTTP_PROXY}"
-	else
-        PROXY_VALUE="proxy_pass http\:\/\/${HTTP_PROXY}"
-	fi
+    PROXY_VALUE="proxy_pass ${HTTP_PROXY}"
 
     sed -r -i -e \
-    "s/${PROXY_PLACEHOLDER}/${PROXY_VALUE}/gi" \
+    "s%${PROXY_PLACEHOLDER}%${PROXY_VALUE}%gi" \
     $conffile
 fi
 
