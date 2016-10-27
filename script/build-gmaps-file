@@ -2,25 +2,8 @@
 
 # Replace all external resources in the Google maps API with proxied
 # versions, and/or replace with null if a proxy isn't available for that domain
-
-# Download Google maps api file, frozen to a version
-
-GMAPSAPI_FETCH_URL="https://maps.googleapis.com/maps/api/js?v=3.25&key=${GOOGLE_API_KEY}&libraries=places"
-
-if [ -z "$HTTP_PROXY" ]; then
-	wget -O ./public/static/google-maps-api.js \
-	$GMAPSAPI_FETCH_URL
-else
-    if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging"  ]; then
-        wget -O ./public/static/google-maps-api.js \
-        -e use_proxy=yes -e https_proxy=$HTTP_PROXY \
-        $GMAPSAPI_FETCH_URL
-	else
-        wget -O ./public/static/google-maps-api.js \
-        -e use_proxy=yes -e http_proxy=$HTTP_PROXY \
-        $GMAPSAPI_FETCH_URL
-	fi
-fi
+# The google maps file replacements has been moved to nginx + clientside replacements
+# The google analytics file remains here for the time being.
 
 declare -A proxy_domains=(
 	["gmaps"]="maps.googleapis.com"
@@ -51,19 +34,6 @@ declare -A proxy_prod_domains=(
 	["gfonts"]="gfonts.askizzy.org.au"
 	["google-analytics"]="google-analytics.askizzy.org.au"
 )
-
-for var in "${!proxy_domains[@]}"
-do
-	if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging"  ]; then
-		sed -r -i -e \
-		"s/${proxy_domains[$var]}/${proxy_prod_domains[$var]}/gi" \
-		./public/static/google-maps-api.js
-	else
-		sed -r -i -e \
-		"s/${proxy_domains[$var]}/${proxy_dev_domains[$var]}/gi" \
-		./public/static/google-maps-api.js
-	fi
-done
 
 declare -a banned_domains=(
 	"cbk0.googleapis.com"
@@ -102,13 +72,6 @@ declare -a banned_domains=(
 	"maps.google"
 	"earthbuilder.googleapis"
 )
-
-for var in "${banned_domains[@]}"
-do
-	sed -r -i -e \
-	"s/\"(http(s?):\/\/$var)[^\"]+\"/null/gi" \
-	./public/static/google-maps-api.js
-done
 
 # Download Google analytics file
 GA_FETCH_URL="https://www.google-analytics.com/analytics.js"
