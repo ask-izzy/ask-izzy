@@ -63,10 +63,6 @@ function renderPage(uri: string, path: string): void {
                   envPath={version ?
                       `/static/env-${version}.js` : "/static/env.js"
                   }
-                  mapsPath={version ?
-                      `/static/google-maps-api-${version}.js`
-                        : "/static/google-maps-api.js"
-                  }
                   requestInterceptorPath={version ?
                       `/static/scripts/request-interceptor-${version}.js`
                         : "/static/scripts/request-interceptor.js"

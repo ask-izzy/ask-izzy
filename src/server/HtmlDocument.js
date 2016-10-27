@@ -17,7 +17,6 @@ class HtmlDocument extends React.Component {
         siteName: React.PropTypes.string,
         title: React.PropTypes.string,
         envPath: React.PropTypes.string,
-        mapsPath: React.PropTypes.string,
     };
 
     static defaultProps = {
@@ -25,7 +24,6 @@ class HtmlDocument extends React.Component {
         css: [],
         meta: {},
         envPath: "/static/env.js",
-        mapsPath: "/static/google-maps-api.js",
         requestInterceptorPath: "/static/scripts/request-interceptor.js",
     };
 
@@ -39,7 +37,6 @@ class HtmlDocument extends React.Component {
             siteName,
             currentUrl,
             envPath,
-            mapsPath,
             requestInterceptorPath,
         } = this.props;
         const viewport =
@@ -232,11 +229,9 @@ class HtmlDocument extends React.Component {
             content="/static/favicons/mstile-144x144.png"
         />
 
-        <script src={requestInterceptorPath} />
-
         <script src={envPath} />
 
-        <script src={mapsPath} />
+        <script src={requestInterceptorPath} />
 
     </head>
 
