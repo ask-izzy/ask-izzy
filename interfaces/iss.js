@@ -20,7 +20,7 @@ type issAgeGroup = "unspecified" |
     "lateadolescent" |
     "youngadult" |
     "adult" |
-    "middleageadult" |
+    "middleagedadult" |
     "preretirementage";
 
 type issAccessibility = "noaccess" |
