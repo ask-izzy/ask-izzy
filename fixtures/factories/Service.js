@@ -15,7 +15,7 @@ function defaults() {
         age_groups: [
             "youngadult",
             "adult",
-            "middleageadult",
+            "middleagedadult",
         ],
 
         // FIXME: Can we include the main name in the alias?
