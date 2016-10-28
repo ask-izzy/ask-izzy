@@ -64,6 +64,7 @@ zeroRatingHelper.getResource = function(url, success_callback, fail_callback){
 };
 
 zeroRatingHelper.retrieveGoogleMapsAPIJS = function(){
+
     var googlemaps_url = 'https://maps.googleapis.com/maps/api/js?v=3.25&key='
         + window.GOOGLE_API_KEY + '&libraries=places';
 
