@@ -43,7 +43,7 @@ export default class Age extends BaseQuestion {
                 "adult",
             )),
             "40 to 54": append(ageGroups(
-                "middleageadult",
+                "middleagedadult",
             )),
             "55 to 64": append(ageGroups(
                 "preretirementage",
