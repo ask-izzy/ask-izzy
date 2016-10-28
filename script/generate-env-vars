@@ -8,22 +8,6 @@ if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging" ]; then
 	PROXY_TAGS="gtagmanager.askizzy.org.au"
 	PROXY_ANALYTICS="google-analytics.askizzy.org.au"
 	DOMAIN_MAPS="{
-	    'maps.googleapis.com':'gmaps.docker.dev',
-        'maps.gstatic.com':'gmaps-static.docker.dev',
-        'csi.gstatic.com':'gcsi-static.docker.dev',
-        'fonts.gstatic.com':'gfonts-static.docker.dev',
-        'tagmanager.google.com':'gtagmanager.docker.dev',
-        'fonts.google.com':'gfonts.docker.dev',
-        'www.google-analytics.com':'google-analytics.docker.dev',
-        'google-analytics.com':'google-analytics.docker.dev',
-        'bam.nr-data.net':'bam-nr-data.docker.dev',
-        'js-agent.newrelic.com':'js-agent-newrelic.docker.dev',
-	}"
-else
-	PROXY_TYPOGRAPHY="typography-com.docker.dev"
-	PROXY_TAGS="gtagmanager.docker.dev"
-	PROXY_ANALYTICS="google-analytics.docker.dev"
-	DOMAIN_MAPS="{
 	    'maps.googleapis.com':'gmaps.askizzy.org.au',
         'maps.gstatic.com':'gmaps-static.askizzy.org.au',
         'csi.gstatic.com':'gcsi-static.askizzy.org.au',
@@ -34,6 +18,22 @@ else
         'google-analytics.com':'google-analytics.askizzy.org.au',
         'bam.nr-data.net':'bam-nr-data.askizzy.org.au',
         'js-agent.newrelic.com':'js-agent-newrelic.askizzy.org.au',
+	}"
+else
+	PROXY_TYPOGRAPHY="typography-com.docker.dev"
+	PROXY_TAGS="gtagmanager.docker.dev"
+	PROXY_ANALYTICS="google-analytics.docker.dev"
+	DOMAIN_MAPS="{
+	    'maps.googleapis.com':'gmaps.docker.dev',
+        'maps.gstatic.com':'gmaps-static.docker.dev',
+        'csi.gstatic.com':'gcsi-static.docker.dev',
+        'fonts.gstatic.com':'gfonts-static.docker.dev',
+        'tagmanager.google.com':'gtagmanager.docker.dev',
+        'fonts.google.com':'gfonts.docker.dev',
+        'www.google-analytics.com':'google-analytics.docker.dev',
+        'google-analytics.com':'google-analytics.docker.dev',
+        'bam.nr-data.net':'bam-nr-data.docker.dev',
+        'js-agent.newrelic.com':'js-agent-newrelic.docker.dev',
 	}"
 fi
 
