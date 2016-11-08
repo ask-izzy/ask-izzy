@@ -7,11 +7,74 @@ if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging" ]; then
 	PROXY_TYPOGRAPHY="typography-com.askizzy.org.au"
 	PROXY_TAGS="gtagmanager.askizzy.org.au"
 	PROXY_ANALYTICS="google-analytics.askizzy.org.au"
+	DOMAIN_MAPS="{
+	    'maps.googleapis.com':'gmaps.askizzy.org.au',
+        'maps.gstatic.com':'gmaps-static.askizzy.org.au',
+        'csi.gstatic.com':'gcsi-static.askizzy.org.au',
+        'fonts.gstatic.com':'gfonts-static.askizzy.org.au',
+        'tagmanager.google.com':'gtagmanager.askizzy.org.au',
+        'fonts.google.com':'gfonts.askizzy.org.au',
+        'www.google-analytics.com':'google-analytics.askizzy.org.au',
+        'google-analytics.com':'google-analytics.askizzy.org.au',
+        'bam.nr-data.net':'bam-nr-data.askizzy.org.au',
+        'js-agent.newrelic.com':'js-agent-newrelic.askizzy.org.au',
+	}"
 else
 	PROXY_TYPOGRAPHY="typography-com.docker.dev"
 	PROXY_TAGS="gtagmanager.docker.dev"
 	PROXY_ANALYTICS="google-analytics.docker.dev"
+	DOMAIN_MAPS="{
+	    'maps.googleapis.com':'gmaps.docker.dev',
+        'maps.gstatic.com':'gmaps-static.docker.dev',
+        'csi.gstatic.com':'gcsi-static.docker.dev',
+        'fonts.gstatic.com':'gfonts-static.docker.dev',
+        'tagmanager.google.com':'gtagmanager.docker.dev',
+        'fonts.google.com':'gfonts.docker.dev',
+        'www.google-analytics.com':'google-analytics.docker.dev',
+        'google-analytics.com':'google-analytics.docker.dev',
+        'bam.nr-data.net':'bam-nr-data.docker.dev',
+        'js-agent.newrelic.com':'js-agent-newrelic.docker.dev',
+	}"
 fi
+
+EXCLUDED_DOMAINS="[
+    'cbk0.googleapis.com',
+	'cbk1.googleapis.com',
+	'mt.googleapis.com',
+	'mt0.googleapis.com',
+	'mt1.googleapis.com',
+	'mts.googleapis.com',
+	'mts0.googleapis.com',
+	'mts1.googleapis.com',
+	'mts0.google.com',
+	'mts1.google.com',
+	'khm.googleapis.com',
+	'khm0.googleapis.com',
+	'khm1.googleapis.com',
+	'khms.googleapis.com',
+	'khms0.googleapis.com',
+	'khms1.googleapis.com',
+	'khms0.google.com',
+	'khms1.google.com',
+	'cbks0.googleapis.com',
+	'cbks1.googleapis.com',
+	'gg.google',
+	'g0.gstatic.com',
+	'static.panoramio.com.storage.googleapis.com',
+	'geo0.ggpht.com',
+	'geo1.ggpht.com',
+	'geo2.ggpht.com',
+	'geo3.ggpht.com',
+	'lh3.ggpht.com',
+	'lh4.ggpht.com',
+	'lh5.ggpht.com',
+	'lh6.ggpht.com',
+	'safebrowsing.google.com',
+	'www.google',
+	'maps.google',
+	'earthbuilder.googleapis'
+]"
+
 
 cat <<JSON
 window.ISS_URL = "$ISS_URL";
@@ -21,4 +84,6 @@ window.GOOGLE_TAG_MANAGER_ID = "${GOOGLE_TAG_MANAGER_ID:=}";
 window.PROXY_TYPOGRAPHY = "${PROXY_TYPOGRAPHY}";
 window.PROXY_TAGS = "${PROXY_TAGS}";
 window.PROXY_ANALYTICS = "${PROXY_ANALYTICS}";
+window.DOMAIN_MAPS = ${DOMAIN_MAPS};
+window.EXCLUDED_DOMAINS = ${EXCLUDED_DOMAINS};
 JSON
