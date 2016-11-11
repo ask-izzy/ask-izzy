@@ -97,7 +97,7 @@ zeroRatingHelper.retrieveGoogleMapsAPIJS = function(){
 
 // 2. Replace domains for all scripts loaded via createElement
 // Override the src property so we can replace the domains for new scripts that
-// the browser attempts to load using this method
+// the browser attempts to load using this method.
 // Note: phantomJS doesnt like this. Disable until a newer phantomJS version.
 if ( !zeroRatingHelper.isPhantomJS ){
     document.createElement = function(create) {
@@ -106,29 +106,30 @@ if ( !zeroRatingHelper.isPhantomJS ){
             if (ret.tagName.toLowerCase() === "script" ||
                 ret.tagName.toLowerCase() === "img")
             {
+                var obj_prop;
                 // Copy original src/etc setter to a new property
                 if ( ret.tagName.toLowerCase() === "script" ){
-                    Object.defineProperty(ret, 'originalSrc',
-                        Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, "src")
-                    );
+                    obj_prop = Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, "src");
+                    Object.defineProperty(ret, 'originalSrc', obj_prop);
                  } else if (ret.tagName.toLowerCase() === "img" ) {
-                    Object.defineProperty(ret, 'originalSrc',
-                        Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src")
-                    );
+                    obj_prop = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+                    Object.defineProperty(ret, 'originalSrc', obj_prop);
                  }
 
-                if (ret.tagName.toLowerCase() === "script" ||
-                    ret.tagName.toLowerCase() === "img" ){
-                    // Override the src property. Add replaceDomain to the setter.
-                    Object.defineProperty(ret, "src", {
-                        get : function (){
-                            return this.originalSrc;
-                        },
-                        set : function (val){
-                            var newSrc = zeroRatingHelper.replaceDomain(val);
-                            this.originalSrc = newSrc;
-                        }
-                    });
+                if ( obj_prop.configurable ){
+                    if (ret.tagName.toLowerCase() === "script" ||
+                        ret.tagName.toLowerCase() === "img" ){
+                        // Override the src property. Add replaceDomain to the setter.
+                        Object.defineProperty(ret, "src", {
+                            get : function (){
+                                return this.originalSrc;
+                            },
+                            set : function (val){
+                                var newSrc = zeroRatingHelper.replaceDomain(val);
+                                this.originalSrc = newSrc;
+                            }
+                        });
+                    }
                 }
             }
             return ret;
