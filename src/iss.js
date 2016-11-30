@@ -123,8 +123,25 @@ async function _request(obj: XhrOptions) {
             return xhr(obj);
         }
 
-        if (status >= 502) {
-            console.log("ISS or elasticsearch are down - retrying")
+        if (status == 504) {
+            await ReturnAfter(500, null);
+            try {
+                return await xhr(obj);
+            } catch (error) {
+                if (status == 504) {
+                    obj.url = obj.url.replace("catchment=prefer",
+                        "catchment=true");
+                    // perform query to failover URL where catchment=true
+					try {
+						return await xhr(obj);
+					} catch (error) {
+						await ReturnAfter(500, null);
+						return await xhr(obj);
+					}
+                }
+            }
+        } else if (status >= 502) {
+            console.log("ISS or elasticsearch are down - retrying");
             await ReturnAfter(500, null);
             return xhr(obj);
         }
