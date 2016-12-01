@@ -30,7 +30,7 @@ export class Category {
         this.icon = props.icon;
         this.key = slugify(this.name);
         this.search = {
-            catchment: "true",
+            catchment: "prefer",
             ...props.search,
         };
         this.info = props.info;

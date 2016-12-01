@@ -123,8 +123,23 @@ async function _request(obj: XhrOptions) {
             return xhr(obj);
         }
 
-        if (status >= 502) {
-            console.log("ISS or elasticsearch are down - retrying")
+        if (status == 504) {
+            console.log("ISS returned 504 from this query: " + obj.url);
+            await ReturnAfter(500, null);
+            try {
+                return await xhr(obj);
+            } catch (error) {
+                if (status == 504)
+                {
+                    console.log("ISS returned another 504 from this query: "  + obj.url);
+                    obj.url = obj.url.replace("catchment=prefer", "catchment=true");
+                    console.log("Trying failover URL where catchment=true: " + obj.url);
+                    return await xhr(obj);
+                }
+            }
+        }
+        else if (status >= 502) {
+            console.log("ISS or elasticsearch are down - retrying");
             await ReturnAfter(500, null);
             return xhr(obj);
         }
