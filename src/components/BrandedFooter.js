@@ -21,6 +21,7 @@ class BrandedFooter extends React.Component {
                     <ul className="footer-list">
                         <li><Link to="/about">About Ask Izzy</Link></li>
                         <li><Link to="/terms">Terms of use</Link></li>
+                        <li><a href="https://www.infoxchange.org/donate-ask-izzy">Donate</a></li>
                     </ul>
                 </div>
                 <div>
