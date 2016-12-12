@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import { Route } from "react-router";
+import { Route, Redirect } from "react-router";
 import { titleize } from "underscore.string";
 import _ from "underscore";
 
@@ -131,11 +131,27 @@ export default (
             component={AddServicePage}
             title="Add a service"
         />
+        <Route
+            path="/service/:slug"
+            component={ServicePage}
+        />
+        <Redirect
+            from="/category/:page"
+            to="/:page"
+        />
+        <Redirect
+            from="/category/:page/in/:suburb-:state"
+            to="/:page/:suburb-:state"
+        />
+        <Redirect
+            from="/search/:search/in/:suburb-:state"
+            to="/search/:search/:suburb-:state"
+        />
         {[
-            "/category/:page",
-            "/category/:page/in/:suburb-:state",
             "/search/:search",
-            "/search/:search/in/:suburb-:state",
+            "/search/:search/:suburb-:state",
+            "/:page",
+            "/:page/:suburb-:state",
         ].map((str) => [
             <Route
                 path={`${str}`}
@@ -180,9 +196,5 @@ export default (
                 component={PersonalisationSummaryPage}
             />,
         ])}
-        <Route
-            path="/service/:slug"
-            component={ServicePage}
-        />
     </Route>
 );
