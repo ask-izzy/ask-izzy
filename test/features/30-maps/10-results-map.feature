@@ -15,7 +15,7 @@ Feature: See results on a map
     Scenario: View results on a map
        Given I am not interested in any subcategory
          And my location is 37.822S 144.99E
-        When I visit /category/everyday-things
+        When I visit /everyday-things
         And I click on "Load more results…"
         And I wait for 10 results to load
         Then I should see the results
@@ -64,7 +64,7 @@ Feature: See results on a map
         ---------------------
 
     Scenario: Clicking a marker shows services at that site and clicking on map returns to full map
-        When I visit /category/housing
+        When I visit /housing
 
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
@@ -82,7 +82,7 @@ Feature: See results on a map
         Then I should not see "Housing Service"
 
     Scenario: Clicking a marker shows services at that site and clicking back returns to full map
-        When I visit /category/housing
+        When I visit /housing
 
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
@@ -95,4 +95,4 @@ Feature: See results on a map
         And I should not see "Housing Service"
 
         When I click back from the title bar
-        Then I should be at /category/housing
+        Then I should be at /housing
