@@ -30,10 +30,10 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
 
         When I click back from the title bar
-        Then I should be at /category/housing/in/Melbourne-Vic/
+        Then I should be at /housing/Melbourne-Vic/
 
     Scenario: Edit my location setting
-        When I visit /category/housing/personalise/summary
+        When I visit /housing/personalise/summary
         And I click on "Where are you?"
         Then I should see "This will let me find the services closest to you"
 
@@ -55,7 +55,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
 
     Scenario: Edit whether I have somewhere to sleep tonight
-        When I visit /category/housing/personalise/summary
+        When I visit /housing/personalise/summary
         And I click on "Do you have somewhere safe to sleep tonight?"
         And I click on "No"
         Then I should see "Change your answers here"
@@ -73,7 +73,7 @@ Feature: Change your personalisation settings
     Scenario: Edit housing subcategory items
         Given I need the following for housing: In a rooming house
 
-        When I visit /category/housing/personalise/summary
+        When I visit /housing/personalise/summary
         Then I should see "Change your answers here"
         Then I should see the results
         ----------------------------------------------------------------
@@ -115,7 +115,7 @@ Feature: Change your personalisation settings
         Aboriginal
         --------------------------------------
 
-        When I visit /category/housing/personalise/summary
+        When I visit /housing/personalise/summary
         Then I should see "Change your answers here"
         Then I should see the results
         ----------------------------------------------------------------
@@ -146,7 +146,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
 
     Scenario: Edit gender
-        When I visit /category/housing/personalise/summary
+        When I visit /housing/personalise/summary
         And I click on "How do you identify?"
         And I click on "Male"
         Then I should see "Change your answers here"
@@ -163,7 +163,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
 
     Scenario: Clear my personalisation
-        When I visit /category/housing/personalise/summary
+        When I visit /housing/personalise/summary
          And I click on "Delete all answers"
         Then I should see the branding header
          And I should be at /
