@@ -60,7 +60,7 @@ Feature: History navigation
         When I reload the page
         And I click back from the browser UI
 
-        Then I should be at /category/housing/in/Melbourne-VIC/
+        Then I should be at /housing/in/Melbourne-VIC/
 
         Then I should see 3 search results for "men aged 18 to 26" in "Melbourne, VIC"
 
