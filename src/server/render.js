@@ -43,6 +43,10 @@ export default function render(req, res, next) {
         match(
             { routes, location: reqUrl },
             (error, redirectLocation, renderProps) => {
+                let isStaticFileRequest =
+                    renderProps.location.pathname.substring(0, 8) ===
+                    "/static/";
+
                 if (error) {
                     next(error);
                 } else if (redirectLocation) {
@@ -51,6 +55,8 @@ export default function render(req, res, next) {
                         redirectLocation.pathname +
                         redirectLocation.search
                     );
+                } else if (renderProps && isStaticFileRequest) {
+                    next();
                 } else if (renderProps) {
                     const title = makeTitle(
                         renderProps.routes,

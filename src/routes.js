@@ -131,6 +131,10 @@ export default (
             component={AddServicePage}
             title="Add a service"
         />
+        <Route
+            path="/service/:slug"
+            component={ServicePage}
+        />
         <Redirect
             from="/category/:page"
             to="/:page"
@@ -192,9 +196,5 @@ export default (
                 component={PersonalisationSummaryPage}
             />,
         ])}
-        <Route
-            path="/service/:slug"
-            component={ServicePage}
-        />
     </Route>
 );
