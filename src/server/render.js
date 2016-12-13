@@ -43,9 +43,10 @@ export default function render(req, res, next) {
         match(
             { routes, location: reqUrl },
             (error, redirectLocation, renderProps) => {
-                let url_substring = false;
+                let requestURL = "";
+
                 if (renderProps) {
-                  url_substring = renderProps.location.pathname.substring(0, 8);
+                    requestURL = renderProps.location.pathname;
                 }
                 if (error) {
                     next(error);
@@ -55,8 +56,8 @@ export default function render(req, res, next) {
                         redirectLocation.pathname +
                         redirectLocation.search
                     );
-                } else if (url_substring === "/static/" | 
-                    url_substring === "/session/") {
+                } else if (requestURL.startsWith("/static/") |
+                    requestURL.startsWith("/session/")) {
                     next();
                 } else if (renderProps) {
                     const title = makeTitle(
