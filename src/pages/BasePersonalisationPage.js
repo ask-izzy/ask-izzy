@@ -39,7 +39,6 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     urlFor(subpath: string): string {
         // Maintain (eg) '/category/foo' or '/search/badger'
         // prefix when navigating within personalisation
-        // Also, maintain '/in/Abbotsford-Vic' SEO stuff
         const parts = this.props.location.pathname.split("/");
         const location = storage.getLocation();
 
@@ -48,14 +47,8 @@ class BasePersonalisationPage extends BaseCategoriesPage {
                 .split(", ")
                 .map(encodeURIComponent)
                 .join("-");
-            const separatorIdx = parts.indexOf("in");
 
-            if (separatorIdx > -1) {
-                // The url already includes '/in'
-                parts.splice(3, 2, "in", newUrlLocation)
-            } else {
-                parts.splice(3, 0, "in", newUrlLocation);
-            }
+            parts.splice(3, 0, newUrlLocation);
         }
 
         // Replace everything after 'personalise'
