@@ -30,7 +30,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
 
         When I click back from the title bar
-        Then I should be at /housing/Melbourne-Vic/
+        Then I should be at /housing/melbourne-vic/
 
     Scenario: Edit my location setting
         When I visit /housing/personalise/summary

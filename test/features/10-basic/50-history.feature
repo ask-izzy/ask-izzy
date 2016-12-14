@@ -43,7 +43,7 @@ Feature: History navigation
 
         Then I should see 3 search results for "men aged 18 to 26" in "Melbourne, VIC"
         And I should see "Housing"
-        And I should be at /housing/Melbourne-VIC/
+        And I should be at /housing/melbourne-vic/
         And I should see the results
         --------------------------------------------------------------------------
         Service Name (name) | Site Name (site_name) | Service provisions (related)
@@ -60,7 +60,7 @@ Feature: History navigation
         When I reload the page
         And I click back from the browser UI
 
-        Then I should be at /housing/Melbourne-VIC/
+        Then I should be at /housing/melbourne-vic/
 
         Then I should see 3 search results for "men aged 18 to 26" in "Melbourne, VIC"
 

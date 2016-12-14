@@ -45,7 +45,7 @@ class BasePersonalisationPage extends BaseCategoriesPage {
             const newUrlLocation = location
                 .split(", ")
                 .map(encodeURIComponent)
-                .join("-");
+                .join("-").toLowerCase();
 
             // if url has suburb, replace the existing suburb
             if (parts.length > 3 && parts[3].includes("-")) {
