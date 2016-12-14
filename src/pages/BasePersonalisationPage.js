@@ -41,6 +41,8 @@ class BasePersonalisationPage extends BaseCategoriesPage {
         // prefix when navigating within personalisation
         const parts = this.props.location.pathname.split("/");
         const location = storage.getLocation();
+        console.log("urlFor");
+        console.log(parts);
 
         if (location) {
             const newUrlLocation = location
@@ -49,14 +51,20 @@ class BasePersonalisationPage extends BaseCategoriesPage {
                 .join("-");
 
             //if url has suburb, remove the existing suburb
-            if (parts.length>3 && parts[3].includes("-")) {
+            if (parts.length > 3 && parts[3].includes("-")) {
                 parts.splice(3, 1, newUrlLocation)
-            } else if (parts.length>2 && parts[2].includes("-")) {
+            } else if (parts.length > 2 && parts[2].includes("-")) {
                 parts.splice(2, 1, newUrlLocation)
             } else {
-                parts.splice(2, 0, newUrlLocation)
+                //we didn't find any suburb, don't delete any terms
+                if (parts[1].includes("search")) {
+                    parts.splice(3, 0, newUrlLocation)
+                } else {
+                    parts.splice(2, 0, newUrlLocation)
+                }
             }
         }
+        console.log(parts);
 
         // Replace everything after 'personalise'
         parts.splice(
@@ -64,6 +72,7 @@ class BasePersonalisationPage extends BaseCategoriesPage {
             parts.length,
             subpath
         )
+        console.log(parts);
 
         return parts.join('/');
     }
