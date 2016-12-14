@@ -36,19 +36,11 @@ class BasePersonalisationPage extends BaseCategoriesPage {
         this.refs.subpage.onNextStep();
     }
 
-    urlHasSuburb(url: string): boolean {
-        if (url.includes("-")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
     urlFor(subpath: string): string {
         // Maintain (eg) '/category/foo' or '/search/badger'
         // prefix when navigating within personalisation
         const parts = this.props.location.pathname.split("/");
         const location = storage.getLocation();
-        let url = this.props.location.pathname;
 
         if (location) {
             const newUrlLocation = location
@@ -56,8 +48,10 @@ class BasePersonalisationPage extends BaseCategoriesPage {
                 .map(encodeURIComponent)
                 .join("-");
 
-            //if has suburb, remove the existing suburb
-            if (this.urlHasSuburb(url)) {
+            //if url has suburb, remove the existing suburb
+            if (parts.length>3 && parts[3].includes("-")) {
+                parts.splice(3, 1, newUrlLocation)
+            } else if (parts.length>2 && parts[2].includes("-")) {
                 parts.splice(2, 1, newUrlLocation)
             } else {
                 parts.splice(2, 0, newUrlLocation)
