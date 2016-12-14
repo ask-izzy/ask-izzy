@@ -37,9 +37,7 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     }
 
     urlFor(subpath: string): string {
-        // Maintain (eg) '/category/foo' or '/search/badger'
-        // prefix when navigating within personalisation
-        // Also, maintain '/in/Abbotsford-Vic' SEO stuff
+        // Rewrites the URL based on search location/personalisation
         const parts = this.props.location.pathname.split("/");
         const location = storage.getLocation();
 
@@ -48,13 +46,20 @@ class BasePersonalisationPage extends BaseCategoriesPage {
                 .split(", ")
                 .map(encodeURIComponent)
                 .join("-");
-            const separatorIdx = parts.indexOf("in");
 
-            if (separatorIdx > -1) {
-                // The url already includes '/in'
-                parts.splice(3, 2, "in", newUrlLocation)
+            // if url has suburb, replace the existing suburb
+            if (parts.length > 3 && parts[3].includes("-")) {
+                parts.splice(3, 1, newUrlLocation)
+            } else if (parts.length > 2 && parts[2].includes("-")) {
+                parts.splice(2, 1, newUrlLocation)
             } else {
-                parts.splice(3, 0, "in", newUrlLocation);
+                // we didn't find any suburb
+                // just add the new location to the url
+                if (parts[1].includes("search")) {
+                    parts.splice(3, 0, newUrlLocation)
+                } else {
+                    parts.splice(2, 0, newUrlLocation)
+                }
             }
         }
 
