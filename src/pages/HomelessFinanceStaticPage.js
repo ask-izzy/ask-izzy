@@ -12,7 +12,7 @@ export default class HomelessFinanceStaticPage extends React.Component {
                 <h1>Homeless financial support</h1>
                 <p>
                     If you have urgent money issues, are unable to pay your bills or need any other financial assistance, there are many homeless financial support services available to you.
-                    To find support near you, search <Link to="/category/money-help">Ask Izzy's money help section</Link>.</p>
+                    To find support near you, search <Link to="/money-help">Ask Izzy's money help section</Link>.</p>
                 <h2>What support is available?</h2>
                 <p>There are many different free or low-cost services on offer to respond to your specific needs. Depending on your situation, the following help may be available to you:</p>
                 <ul>
@@ -44,15 +44,15 @@ export default class HomelessFinanceStaticPage extends React.Component {
                     others are not. Some offer phone help. Check with your
                     selected service before you travel.
                 </p>
-                <p><Link to="/category/money-help">Find financial help near you</Link> or browse:</p>
+                <p><Link to="/money-help">Find financial help near you</Link> or browse:</p>
                 <ul>
-                    <li><Link to="/category/money-help/in/Adelaide-SA">Financial help in Adelaide</Link></li>
-                    <li><Link to="/category/money-help/in/Brisbane-QLD">Financial help in Brisbane</Link></li>
-                    <li><Link to="/category/money-help/in/Canberra-ACT">Financial help in Canberra</Link></li>
-                    <li><Link to="/category/money-help/in/Darwin-NT">Financial help in Darwin</Link></li>
-                    <li><Link to="/category/money-help/in/Melbourne-VIC">Financial help in Melbourne</Link></li>
-                    <li><Link to="/category/money-help/in/Perth-WA">Financial help in Perth</Link></li>
-                    <li><Link to="/category/money-help/in/Sydney-NSW">Financial help in Sydney</Link></li>
+                    <li><Link to="/money-help/Adelaide-SA">Financial help in Adelaide</Link></li>
+                    <li><Link to="/money-help/Brisbane-QLD">Financial help in Brisbane</Link></li>
+                    <li><Link to="/money-help/Canberra-ACT">Financial help in Canberra</Link></li>
+                    <li><Link to="/money-help/Darwin-NT">Financial help in Darwin</Link></li>
+                    <li><Link to="/money-help/Melbourne-VIC">Financial help in Melbourne</Link></li>
+                    <li><Link to="/money-help/Perth-WA">Financial help in Perth</Link></li>
+                    <li><Link to="/money-help/Sydney-NSW">Financial help in Sydney</Link></li>
                 </ul>
 
             </StaticPage>

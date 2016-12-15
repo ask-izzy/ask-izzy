@@ -22,7 +22,7 @@ export default class HomelessHealthStaticPage extends React.Component {
                     health clinics available. Some clinics are
                     scheduled at regular times, some are short-term
                     programs or events. To find a health clinic,
-                    program or event near you <Link to="/category/health">
+                    program or event near you <Link to="/health">
                     search Ask Izzy’s health section</Link>.
                 </p>
 
@@ -56,15 +56,15 @@ export default class HomelessHealthStaticPage extends React.Component {
                 </p>
                 <h2>Where can I find homeless health care?</h2>
                 <p>There are health care services for those experiencing homelessness located in regional and metropolitan areas across Australia. Some are drop in services so you do not need to make an appointment and others are not. Check with your selected service before you travel. </p>
-                <p><Link to="/category/health">Find health care near you</Link> or browse:</p>
+                <p><Link to="/health">Find health care near you</Link> or browse:</p>
                 <ul>
-                    <li><Link to="/category/health/in/Adelaide-SA">Health care in Adelaide</Link></li>
-                    <li><Link to="/category/health/in/Brisbane-QLD">Health care in Brisbane</Link></li>
-                    <li><Link to="/category/health/in/Canberra-ACT">Health care in Canberra</Link></li>
-                    <li><Link to="/category/health/in/Darwin-NT">Health care in Darwin</Link></li>
-                    <li><Link to="/category/health/in/Melbourne-VIC">Health care in Melbourne</Link></li>
-                    <li><Link to="/category/health/in/Perth-WA">Health care in Perth</Link></li>
-                    <li><Link to="/category/health/in/Sydney-NSW">Health care in Sydney</Link></li>
+                    <li><Link to="/health/Adelaide-SA">Health care in Adelaide</Link></li>
+                    <li><Link to="/health/Brisbane-QLD">Health care in Brisbane</Link></li>
+                    <li><Link to="/health/Canberra-ACT">Health care in Canberra</Link></li>
+                    <li><Link to="/health/Darwin-NT">Health care in Darwin</Link></li>
+                    <li><Link to="/health/Melbourne-VIC">Health care in Melbourne</Link></li>
+                    <li><Link to="/health/Perth-WA">Health care in Perth</Link></li>
+                    <li><Link to="/health/Sydney-NSW">Health care in Sydney</Link></li>
                 </ul>
             </StaticPage>
         );
