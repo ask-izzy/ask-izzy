@@ -43,11 +43,6 @@ export default function render(req, res, next) {
         match(
             { routes, location: reqUrl },
             (error, redirectLocation, renderProps) => {
-                let requestURL = "";
-
-                if (renderProps) {
-                    requestURL = renderProps.location.pathname;
-                }
                 if (error) {
                     next(error);
                 } else if (redirectLocation) {
@@ -56,8 +51,8 @@ export default function render(req, res, next) {
                         redirectLocation.pathname +
                         redirectLocation.search
                     );
-                } else if (requestURL.startsWith("/static/") |
-                    requestURL.startsWith("/session/")) {
+                } else if (reqUrl.pathname.startsWith("/static/") |
+                    reqUrl.pathname.startsWith("/session/")) {
                     next();
                 } else if (renderProps) {
                     const title = makeTitle(
