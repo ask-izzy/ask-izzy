@@ -46,13 +46,13 @@ export default class HomelessSupportStaticPage extends React.Component {
                     Ask Izzy lists over 340 000 support services in regional and metropolitan
                     areas across Australia. <Link to="/">Find support services near you</Link> or browse:</p>
                 <ul>
-                <li><Link to="/category/support-counselling/in/Adelaide-SA">Support services in Adelaide</Link></li>
-                <li><Link to="/category/support-counselling/in/Brisbane-QLD">Support services in Brisbane</Link></li>
-                <li><Link to="/category/support-counselling/in/Canberra-ACT">Support services in Canberra</Link></li>
-                <li><Link to="/category/support-counselling/in/Darwin-NT">Support services in Darwin</Link></li>
-                <li><Link to="/category/support-counselling/in/Melbourne-VIC">Support services in Melbourne</Link></li>
-                <li><Link to="/category/support-counselling/in/Perth-WA">Support services in Perth</Link></li>
-                <li><Link to="/category/support-counselling/in/Sydney-NSW">Support services in Sydney</Link></li>
+                <li><Link to="/support-counselling/Adelaide-SA">Support services in Adelaide</Link></li>
+                <li><Link to="/support-counselling/Brisbane-QLD">Support services in Brisbane</Link></li>
+                <li><Link to="/support-counselling/Canberra-ACT">Support services in Canberra</Link></li>
+                <li><Link to="/support-counselling/Darwin-NT">Support services in Darwin</Link></li>
+                <li><Link to="/support-counselling/Melbourne-VIC">Support services in Melbourne</Link></li>
+                <li><Link to="/support-counselling/Perth-WA">Support services in Perth</Link></li>
+                <li><Link to="/support-counselling/Sydney-NSW">Support services in Sydney</Link></li>
                 </ul>
             </StaticPage>
         );

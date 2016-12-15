@@ -42,13 +42,13 @@ export default class HomelessLegalStaticPage extends React.Component {
                 <p>There are homeless legal service located in regional and metropolitan areas across Australia. Some are drop in services so you do not need to make an appointment and others are not. Check with your selected service before you travel. </p>
                 <p><Link to="/">Find a legal service near you</Link> or browse:</p>
                 <ul>
-                    <li><Link to="/category/legal/in/Adelaide-SA">Legal service in Adelaide</Link></li>
-                    <li><Link to="/category/legal/in/Brisbane-QLD">Legal service in Brisbane</Link></li>
-                    <li><Link to="/category/legal/in/Canberra-ACT">Legal service in Canberra</Link></li>
-                    <li><Link to="/category/legal/in/Darwin-NT">Legal service in Darwin</Link></li>
-                    <li><Link to="/category/legal/in/Melbourne-VIC">Legal service in Melbourne</Link></li>
-                    <li><Link to="/category/legal/in/Perth-WA">Legal service in Perth</Link></li>
-                    <li><Link to="/category/legal/in/Sydney-NSW">Legal service in Sydney</Link></li>
+                    <li><Link to="/legal/Adelaide-SA">Legal service in Adelaide</Link></li>
+                    <li><Link to="/legal/Brisbane-QLD">Legal service in Brisbane</Link></li>
+                    <li><Link to="/legal/Canberra-ACT">Legal service in Canberra</Link></li>
+                    <li><Link to="/legal/Darwin-NT">Legal service in Darwin</Link></li>
+                    <li><Link to="/legal/Melbourne-VIC">Legal service in Melbourne</Link></li>
+                    <li><Link to="/legal/Perth-WA">Legal service in Perth</Link></li>
+                    <li><Link to="/legal/Sydney-NSW">Legal service in Sydney</Link></li>
 
                 </ul>
             </StaticPage>
