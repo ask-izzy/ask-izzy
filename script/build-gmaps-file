@@ -80,15 +80,9 @@ if [ -z "$HTTP_PROXY" ]; then
 	wget -O ./public/static/analytics.js \
 	$GA_FETCH_URL
 else
-    if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging"  ]; then
-        wget -O ./public/static/analytics.js \
-        -e use_proxy=yes -e https_proxy=$HTTP_PROXY \
-        $GA_FETCH_URL
-	else
-        wget -O ./public/static/analytics.js \
-        -e use_proxy=yes -e http_proxy=$HTTP_PROXY \
-        $GA_FETCH_URL
-	fi
+    wget -O ./public/static/analytics.js \
+    -e use_proxy=yes -e https_proxy=$HTTP_PROXY -e http_proxy=$HTTP_PROXY \
+    $GA_FETCH_URL
 fi
 
 for var in "${!proxy_domains[@]}"
