@@ -88,9 +88,10 @@ type DistanceMatrixRequest = {
     destinations: Array<string>,
 };
 
-type TravelMode = "WALKING"|"TRANSIT";
+type TravelMode = "DRIVING"|"WALKING"|"TRANSIT";
 
 type TravelModes = {
+    DRIVING: string,
     WALKING: string,
     TRANSIT: string,
 };
