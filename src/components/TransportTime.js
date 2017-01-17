@@ -69,29 +69,49 @@ class TransportTime extends React.Component {
                         {compact: this.props.compact}
                     )}
                 >
-                    {travelTime.mode === "TRANSIT" ?
-                        <icons.Tram
-                            className="ColoredIcon"
-                            aria-label="By public transport"
-                        />
-                    : (
-                        <icons.Walk
-                            className="ColoredIcon"
-                            aria-label="On foot"
-                        />
-                    )}
-                    <span className="travel-time">
-                        {
-                            travelTime &&
-                            travelTime.duration &&
-                            travelTime.duration.text
-                        }
-                    </span>&nbsp;
+                    {this.renderTravelTimes(travelTime)}
                     {this.renderSuburb()}
                     {this.renderDirections()}
                 </div>
             </div>
         );
+    }
+
+    renderTravelTimes(travelTimes: Object) {
+
+        return travelTimes.map((travel, key) => {
+            let icon = '';
+
+            if (travel.mode === "TRANSIT") {
+                icon = (<icons.Tram
+                    className="ColoredIcon"
+                    aria-label="By public transport"
+                        />);
+            } else if (travel.mode === "DRIVING") {
+                icon = (<icons.Phone
+                    className="ColoredIcon"
+                    aria-label="By car"
+                        />);
+            } else {
+                icon = (<icons.Walk
+                    className="ColoredIcon"
+                    aria-label="On foot"
+                        />);
+            }
+
+            return (
+                <div className="travel-time">
+                    {icon}
+                    {
+                        travel &&
+                        travel.duration &&
+                        travel.duration.text
+                    }
+                </div>
+            );
+
+        });
+
     }
 
     renderDivider() {
