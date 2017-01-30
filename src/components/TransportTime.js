@@ -88,7 +88,7 @@ class TransportTime extends React.Component {
                     aria-label="By public transport"
                         />);
             } else if (travel.mode === "DRIVING") {
-                icon = (<icons.Phone
+                icon = (<icons.Car
                     className="ColoredIcon"
                     aria-label="By car"
                         />);
