@@ -82,6 +82,15 @@ class TransportTime extends React.Component {
         return travelTimes.map((travel, key) => {
             let icon = '';
 
+            // Specify an arrival time so tests can determine
+            // which is the fastest mode of travel.
+            let arrivalTime = new Date();
+
+            arrivalTime.setSeconds(
+                (travel.duration.value) -
+                (arrivalTime.getTimezoneOffset() * 60)
+            );
+
             if (travel.mode === "TRANSIT") {
                 icon = (<icons.Tram
                     className="ColoredIcon"
@@ -102,11 +111,13 @@ class TransportTime extends React.Component {
             return (
                 <div className="travel-time">
                     {icon}
+                    <time dateTime={arrivalTime.toISOString().slice(0, -1)}>
                     {
                         travel &&
                         travel.duration &&
                         travel.duration.text
                     }
+                    </time>
                 </div>
             );
 
