@@ -32,7 +32,28 @@ module.exports = (function() {
 })();
 
 async function assertTransitMethod(method) {
-    await assert.withRetries(assert.svgIsVisible)(this.driver, method);
+
+    let travelTimes = await this.driver.findElements(
+        By.css(".travel-time")
+    );
+
+    let fastestTime = -1;
+    let fastestMethod = '';
+
+    for (let travelTime of travelTimes) {
+        let mode = await travelTime.findElement(By.tagName("span"))
+        .getAttribute("aria-label");
+        let arrivalTime = await travelTime.findElement(By.tagName("time"))
+        .getAttribute("datetime");
+        let duration = new Date(Date.parse(arrivalTime)).getTime();
+
+        if (duration < fastestTime || fastestTime === -1) {
+            fastestTime = duration;
+            fastestMethod = mode;
+        }
+    }
+
+    assert.equal(fastestMethod, method);
 
 }
 
