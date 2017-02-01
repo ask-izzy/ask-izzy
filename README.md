@@ -193,6 +193,14 @@ And run:
 There's also a mock ISS server available as `./script/mock-iss`. This will
 start a server on `localhost:5000`.
 
+### Adding new icons
+
+ * Add your icon to https://github.com/ask-izzy/designs
+ * The Iconify script requires babel, install by running `sudo npm install -g babel-cli`
+ * Run `.script/iconify <path_to_cloned_designs_repo>`
+
+The icons/index.js file will be updated, and a new js file for the icon will be generated in /icons.
+
 ## Contributing
 
 Link up the git hooks:
@@ -219,6 +227,13 @@ browser to run the feature tests with (default is firefox)
 
 You can pass `BROWSER_LOGS=yes` to dump logs from the browser. Be aware not
 all browsers support this.
+
+If you have issues running tests on Ubuntu, follow the steps here:
+https://christopher.su/2015/selenium-chromedriver-ubuntu/
+
+Then use Chrome as the selenium browser to run the tests.
+
+If you're using a virtual machine open a terminal in the VM to run them.
 
 ## Attribution
 
