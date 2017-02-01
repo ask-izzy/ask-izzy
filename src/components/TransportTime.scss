@@ -3,7 +3,6 @@
     position: relative;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 24px;
 
     font-size: 14px;
 
@@ -12,34 +11,42 @@
         padding-top: 0;
         padding-bottom: 0;
 
-        .Icon.WalkIcon {
-            top: -5px;
+        .travel-time {
+            display: block;
+            margin-right: 24px;
+            padding-left: 24px;
         }
 
-        .Icon.TramIcon {
-            top: -16px;
+        @media ($tablet) {
+            .travel-time {
+                display: inline-block;
+            }
+        }
+
+        .Icon {
+            top: 2px;
+            left: -2px;
         }
 
     }
 
     .Icon {
         position: absolute;
+        top: 2px;
+        left: -32px;
+    }
 
-        &.WalkIcon {
-            top: 6px;
-            left: -2px;
-        }
+    .Icon.TramIcon {
+        transform: scale(2);
+    }
 
-        &.TramIcon {
-            top: -5px;
-            left: -16px;
-
-            width: 50px;
-            height: 50px;
-        }
+    .Icon.CarIcon {
+        transform: scale(40);
     }
 
     .travel-time {
+        position: relative;
+        padding: 5px 0;
         color: $brand-text-dark;
         font-weight: 500;
     }

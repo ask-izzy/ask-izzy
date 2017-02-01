@@ -27,6 +27,10 @@ export class MapsApi {
             return [];
         }
 
+        const drivingRequest = this.batchDirectionsRequest(
+            destinations,
+            "DRIVING",
+        );
         const walkingRequest = this.batchDirectionsRequest(
             destinations,
             "WALKING",
@@ -35,28 +39,25 @@ export class MapsApi {
             destinations,
             "TRANSIT",
         );
+        const drivingResults = await drivingRequest;
         const walkingResults = await walkingRequest;
         const transitResults = await transitRequest;
 
-        return _.zip(walkingResults, transitResults)
-            .map(([walking, transit]) => {
-                if (transit.status != "OK") {
-                    // Transit had no result; use walking directions
-                    return walking;
-                } else {
-                    if (walking.status != "OK") {
-                        // Walking had no result; use transit directions
-                        return transit;
-                    } else {
-                        // Both modes had results; return the faster one.
-                        if (walking.duration.value >
-                            transit.duration.value) {
-                            return transit;
-                        } else {
-                            return walking;
-                        }
-                    }
+        return _.zip(drivingResults, walkingResults, transitResults)
+            .map(([driving, walking, transit]) => {
+                let travelTimes = [];
+
+                if (walking.status === "OK") {
+                    travelTimes.push(walking);
                 }
+                if (transit.status === "OK") {
+                    travelTimes.push(transit);
+                }
+                if (driving.status === "OK") {
+                    travelTimes.push(driving);
+                }
+
+                return travelTimes;
             }
         )
     }

@@ -69,29 +69,60 @@ class TransportTime extends React.Component {
                         {compact: this.props.compact}
                     )}
                 >
-                    {travelTime.mode === "TRANSIT" ?
-                        <icons.Tram
-                            className="ColoredIcon"
-                            aria-label="By public transport"
-                        />
-                    : (
-                        <icons.Walk
-                            className="ColoredIcon"
-                            aria-label="On foot"
-                        />
-                    )}
-                    <span className="travel-time">
-                        {
-                            travelTime &&
-                            travelTime.duration &&
-                            travelTime.duration.text
-                        }
-                    </span>&nbsp;
+                    {this.renderTravelTimes(travelTime)}
                     {this.renderSuburb()}
                     {this.renderDirections()}
                 </div>
             </div>
         );
+    }
+
+    renderTravelTimes(travelTimes: Object) {
+
+        return travelTimes.map((travel, key) => {
+            let icon = '';
+
+            // Specify an arrival time so tests can determine
+            // which is the fastest mode of travel.
+            let arrivalTime = new Date();
+
+            arrivalTime.setSeconds(
+                (travel.duration.value) -
+                (arrivalTime.getTimezoneOffset() * 60)
+            );
+
+            if (travel.mode === "TRANSIT") {
+                icon = (<icons.Tram
+                    className="ColoredIcon"
+                    aria-label="By public transport"
+                        />);
+            } else if (travel.mode === "DRIVING") {
+                icon = (<icons.Car
+                    className="ColoredIcon"
+                    aria-label="By car"
+                        />);
+            } else {
+                icon = (<icons.Walk
+                    className="ColoredIcon"
+                    aria-label="On foot"
+                        />);
+            }
+
+            return (
+                <div className="travel-time">
+                    {icon}
+                    <time dateTime={arrivalTime.toISOString().slice(0, -1)}>
+                    {
+                        travel &&
+                        travel.duration &&
+                        travel.duration.text
+                    }
+                    </time>
+                </div>
+            );
+
+        });
+
     }
 
     renderDivider() {
