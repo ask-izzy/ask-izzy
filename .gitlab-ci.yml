@@ -30,42 +30,9 @@ search-test:
     stage: test
     script: make search-test
 
-# Deploy to integration test environment on merge with master
-uat:
-    type: deploy
-    script: make build push release-test
-    only:
-        - master
-
-# Deploy to staging environment when tagged
+# Deploy to test environment when tagged
 deploy:
     stage: deploy
     script: make build dockerpush release-test
     only:
         - tags
-
-# test1-6 run off matching branches
-test1:
-    script: make build push release-test1
-    only:
-        - test1
-test2:
-    script: make build push release-test2
-    only:
-        - test2
-test3:
-    script: make build push release-test3
-    only:
-        - test3
-test4:
-    script: make build push release-test4
-    only:
-        - test4
-test5:
-    script: make build push release-test5
-    only:
-        - test5
-test6:
-    script: make build push release-test6
-    only:
-        - test6
