@@ -31,7 +31,6 @@ build:
 	@if [ -n "$(CI)" ]; then \
 		docker push $(REPO):$(TAG); \
 	fi
-	@echo "make test push"
 
 dockerpush:
 	@if [ -n "$(CI)" ]; then \
@@ -82,6 +81,9 @@ release:
 		git push
 	rm -rf tags_repo
 
+release-dev:
+	$(MAKE) release APPNAME=askizzy.docker.dev CONTINUE=y
+
 release-test:
 	$(MAKE) release APPNAME=askizzy-test.docker.dev CONTINUE=y
 
@@ -92,4 +94,4 @@ release-prod:
 	$(MAKE) release APPNAME=askizzy.org.au
 
 .PHONY: build push test deploy serve \
-	release-test release-uat release-prod
+	release-dev release-test release-uat release-prod
