@@ -69,8 +69,8 @@ class TransportTime extends React.Component {
                         {compact: this.props.compact}
                     )}
                 >
-                    {this.renderTravelTimes(travelTime)}
                     {this.renderSuburb()}
+                    {this.renderTravelTimes(travelTime)}
                     {this.renderDirections()}
                 </div>
             </div>

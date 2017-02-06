@@ -47,7 +47,10 @@ export class MapsApi {
             .map(([driving, walking, transit]) => {
                 let travelTimes = [];
 
-                if (walking.status === "OK") {
+                if (
+                    walking.status === "OK" &&
+                    walking.distance.value < 5000
+                ) {
                     travelTimes.push(walking);
                 }
                 if (transit.status === "OK") {
