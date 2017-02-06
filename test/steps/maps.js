@@ -25,13 +25,17 @@ module.exports = (function() {
         .then("I should see a map", unpromisify(assertMap))
         .then("I should see markers?\n$table", unpromisify(assertMarkers))
         .then('the fastest way to get there is "$STRING"',
-            unpromisify(assertTransitMethod))
+            unpromisify(assertTransitMethodFastest))
         .then('I can get to google maps by clicking "$STRING"',
             unpromisify(assertGoogleMapsLink))
+        .then('I should be able to travel there "$STRING"',
+            unpromisify(assertTransitMethod))
+        .then('I should not be able to travel there "$STRING"',
+            unpromisify(assertTransitMethodNot))
         ;
 })();
 
-async function assertTransitMethod(method) {
+async function assertTransitMethodFastest(method) {
 
     let travelTimes = await this.driver.findElements(
         By.css(".travel-time")
@@ -55,6 +59,19 @@ async function assertTransitMethod(method) {
 
     assert.equal(fastestMethod, method);
 
+}
+
+async function assertTransitMethod(method) {
+    await assert.withRetries(assert.svgIsVisible)(this.driver, method);
+}
+
+async function assertTransitMethodNot(method) {
+
+    let exists = await this.driver.findElements(By.css(
+        `[aria-label='${method}'] svg`
+    )).length > 0;
+
+    assert.equal(exists, false);
 }
 
 /**
