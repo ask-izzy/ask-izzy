@@ -28,6 +28,8 @@ Feature: Transport times
           duration:
               text: 8 hours 27 mins
               value: 8000
+          distance:
+              value: 1000
         ----------------------------------------------
 
         When I click on "Transportable"
