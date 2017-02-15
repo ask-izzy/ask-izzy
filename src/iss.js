@@ -583,7 +583,12 @@ export async function getService(
     const response = await request(`/api/v3/service/${id}/`);
     const service = new Service(response);
 
-    await attachTransportTimes([service]);
+    try {
+        await attachTransportTimes([service]);    
+    } catch (error) {
+        console.log("No transport times found");
+    }
+    
     return service;
 }
 
