@@ -109,7 +109,7 @@ class TransportTime extends React.Component {
             }
 
             return (
-                <div className="travel-time">
+                <div className="travel-time" key={key}>
                     {icon}
                     <time dateTime={arrivalTime.toISOString().slice(0, -1)}>
                     {
