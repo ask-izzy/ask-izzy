@@ -43,7 +43,7 @@ export default class HomelessHealthStaticPage extends React.Component {
                     please <a href="tel:000">call an ambulance on 000</a>
                 </p>
                 <h2>Are the services free?</h2>
-                <p>Most services bulk bill and do not charge you any initial fees, however this depends on the clinic and if you have a serious condition you may need tests that incur additional costs. To check whether you will be charged, call the clinic on the number listed in Ask Izzyy.</p>
+                <p>Most services bulk bill and do not charge you any initial fees, however this depends on the clinic and if you have a serious condition you may need tests that incur additional costs. To check whether you will be charged, call the clinic on the number listed in Ask Izzy.</p>
                 <p>
                     To receive bulk billing you will need a Medicare card.
                     If you do not have one, you can request one on via the {' '}
