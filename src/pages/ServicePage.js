@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable max-len */
 
 import React from "react";
 import ServicePane from "../components/ServicePane";
@@ -88,8 +89,14 @@ class ServicePage extends React.Component {
                             {
                                 error ?
                                 <div className="error">
-                                    Whoops - something went wrong
+                                    <p>
+                                        Sorry, I was unable to retrieve the information for this service at this time.
+                                        Please try viewing another service or contact us
+                                        if the problem persists at support@askizzy.org.au
+                                    </p>
+                                    <p>
                                     (error {error.statusCode})
+                                    </p>
                                 </div>
                                 : <div className="progress">
                                     <Loading className="big" />
