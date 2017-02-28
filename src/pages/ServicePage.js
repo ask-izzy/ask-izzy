@@ -95,11 +95,13 @@ class ServicePage extends React.Component {
                                         if the problem persists at&nbsp;
                                         <a href="mailto:support@askizzy.org.au">support@askizzy.org.au</a>.
                                     </p>
-                                    {
-                                       error.statusCode ?
-                                       "<p>(error: " + error.statusCode + ")</p>"
-                                       : ""
-                                    }
+                                    <p>
+                                        {
+                                           error.statusCode ?
+                                           "(error: " + error.statusCode + ")"
+                                           : ""
+                                        }
+                                    </p>
                                 </div>
                                 : <div className="progress">
                                     <Loading className="big" />
