@@ -92,10 +92,15 @@ class ServicePage extends React.Component {
                                     <p>
                                         Sorry, I was unable to retrieve the information for this service at this time.
                                         Please try viewing another service or contact us
-                                        if the problem persists at support@askizzy.org.au
+                                        if the problem persists at&nbsp;
+                                        <a href="mailto:support@askizzy.org.au">support@askizzy.org.au</a>.
                                     </p>
                                     <p>
-                                        (error {error.statusCode})
+                                        {
+                                           error.statusCode ?
+                                           "(error: " + error.statusCode + ")"
+                                           : ""
+                                        }
                                     </p>
                                 </div>
                                 : <div className="progress">
