@@ -18,4 +18,4 @@ Feature: Show location in url
         And I click on "Carlton"
         And I click on the done button
         And I click on the done button
-        Then I should be at /search/housing/in/Carlton-VIC/
+        Then I should be at /search/housing/Carlton-VIC/
