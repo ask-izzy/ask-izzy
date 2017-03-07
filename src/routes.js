@@ -135,23 +135,14 @@ export default (
             path="/service/:slug"
             component={ServicePage}
         />
-        <Redirect
-            from="/category/:page"
-            to="/:page"
-        />
-        <Redirect
-            from="/category/:page/in/:suburb-:state"
-            to="/:page/:suburb-:state"
-        />
-        <Redirect
-            from="/search/:search/in/:suburb-:state"
-            to="/search/:search/:suburb-:state"
-        />
         {[
-            "/search/:search",
+            "/category/:page/in/:suburb-:state",
+            "/category/:page",
+            "/search/:search/in/:suburb-:state",
             "/search/:search/:suburb-:state",
-            "/:page",
+            "/search/:search",
             "/:page/:suburb-:state",
+            "/:page",
         ].map((str) => [
             <Route
                 path={`${str}`}
