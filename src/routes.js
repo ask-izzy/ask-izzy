@@ -148,10 +148,10 @@ export default (
             to="/search/:search/:suburb-:state"
         />
         {[
-            "/search/:search",
             "/search/:search/:suburb-:state",
-            "/:page",
+            "/search/:search",
             "/:page/:suburb-:state",
+            "/:page",
         ].map((str) => [
             <Route
                 path={`${str}`}
