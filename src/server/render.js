@@ -51,6 +51,8 @@ export default function render(req, res, next) {
                         redirectLocation.pathname +
                         redirectLocation.search
                     );
+                } else if (reqUrl.pathname.startsWith("/static/") |
+                    reqUrl.pathname.startsWith("/session/")) {
                 } else if (renderProps) {
                     const title = makeTitle(
                         renderProps.routes,
