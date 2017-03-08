@@ -47,13 +47,13 @@ class BasePersonalisationPage extends BaseCategoriesPage {
                 .map(encodeURIComponent)
                 .join("-");
 
-            // if url has suburb, replace the existing suburb
+            // If URL has suburb, replace the existing suburb
             if (parts.length > 3 && parts[3].includes("-")) {
                 parts.splice(3, 1, newUrlLocation)
             } else if (parts.length > 2 && parts[2].includes("-")) {
                 parts.splice(2, 1, newUrlLocation)
             } else {
-                // we didn't find any suburb
+                // We didn't find any suburb
                 // just add the new location to the url
                 if (parts[1].includes("search")) {
                     parts.splice(3, 0, newUrlLocation)
