@@ -49,6 +49,53 @@ Once the page JS loads:
  * the page is updated with any differences between the expected DOM and actual DOM (usually none)
  * once any async data arrives from ISS, the page is updated again
 
+## Ask Izzy Routes
+
+
+Here are the explict paths that AskIzzy supports:
+
+````
+/service/<service-id>
+/service/<service-id>/
+
+/search/<search-term>
+/search/<search-term>/
+/search/<search-term>/<personalise-path>
+/search/<search-term>/<suburb>-<state>
+/search/<search-term>/<suburb>-<state>/
+/search/<search-term>/<suburb>-<state>/<personalise-path>
+/search/<search-term>/in/<suburb>-<state>
+/search/<search-term>/in/<suburb>-<state>/
+
+/category/<category-name>
+/category/<category-name>/
+/category/<category-name>/in/<suburb>-<state>
+/category/<category-name>/in/<suburb>-<state>/
+
+/<category-name>
+/<category-name>/
+/<category-name>/<suburb>-<state>
+/<category-name>/<suburb>-<state>/
+/<category-name>/<suburb>-<state>/<personalise-path>
+/<category-name>/<personalise-path>
+
+/<static-pages>
+/<static-pages>/
+````
+
+Examples for routes terms are given below:
+
+````
+<service-id> e.g. 820532-infoxchange
+<personalise-path> e.g. personalise/, personalise/summary, personalise/page/location
+<category-name> e.g. housing, food, money-help
+<suburb> e.g. Melbourne, Richmond, Run-O-Waters
+<state> e.g. VIC, NSW, Victoria
+<static-pages> e.g. about, homeless-shelters
+````
+
+Note: Ask Izzy categories or static pages must NEVER be named "search", "static", "session", "service", "category" or "in".
+
 ### Building HTML pages
 See `server/render-static.js`
 
