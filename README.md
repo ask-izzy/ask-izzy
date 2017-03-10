@@ -59,15 +59,19 @@ Here are the explict paths that AskIzzy supports:
 /service/<service-id>/
 
 /search/<search-term>
+/search/<search-term>/
 /search/<search-term>/<personalise-path>
+/search/<search-term>/<suburb>-<state>
+/search/<search-term>/<suburb>-<state>/
 /search/<search-term>/<suburb>-<state>/<personalise-path>
+/search/<search-term>/in/<suburb>-<state>
+/search/<search-term>/in/<suburb>-<state>/
 /search/<search-term>/in/<suburb>-<state>/<personalise-path>
 
 /category/<category-name>
 /category/<category-name>/
-/category/<category-name>/<personalise-path>
+/category/<category-name>/in/<suburb>-<state>
 /category/<category-name>/in/<suburb>-<state>/
-/category/<category-name>/in/<suburb>-<state>/<personalise-path>
 
 /<category-name>
 /<category-name>/
@@ -90,6 +94,8 @@ Examples for routes terms are given below:
 <state> e.g. VIC, NSW, Victoria
 <static-pages> e.g. about, homeless-shelters
 ````
+
+Note: Ask Izzy categories or static pages must NEVER be named "search", "static", "session", "service", "category" or "in".
 
 ### Building HTML pages
 See `server/render-static.js`
