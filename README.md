@@ -66,7 +66,6 @@ Here are the explict paths that AskIzzy supports:
 /search/<search-term>/<suburb>-<state>/<personalise-path>
 /search/<search-term>/in/<suburb>-<state>
 /search/<search-term>/in/<suburb>-<state>/
-/search/<search-term>/in/<suburb>-<state>/<personalise-path>
 
 /category/<category-name>
 /category/<category-name>/
