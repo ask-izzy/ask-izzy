@@ -15,7 +15,7 @@ Feature: Category page
         And I am not interested in any subcategory
 
     Scenario: Visit housing category
-        When I visit /category/housing
+        When I visit /housing
         Then I should see "Housing"
         Then I should see 3 search results for "women aged 26 to 64" in "Melbourne, VIC"
         And I should see the results
@@ -51,11 +51,11 @@ Feature: Category page
         And I should see "1 more…"
 
     Scenario: I should never see "invalid date"
-        When I visit /category/housing
+        When I visit /housing
         Then I should not see "Invalid date"
 
     Scenario: Visit a category with more than 5 services
-        When I visit /category/everyday-things
+        When I visit /everyday-things
         Then I should see "Load more results…"
 
         When I click on "Load more results…"

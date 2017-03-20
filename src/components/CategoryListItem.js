@@ -26,7 +26,7 @@ class CategoryListItem extends React.Component {
         return (
             <LinkListItem
                 className="CategoryListItem hero"
-                to={`/category/${this.props.category.key}`}
+                to={`/${this.props.category.key}`}
                 leftIcon={
                     <Icon className="ColoredIcon icon-fg-color small" />
                 }

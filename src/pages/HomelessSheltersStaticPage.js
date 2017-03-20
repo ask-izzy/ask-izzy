@@ -59,7 +59,7 @@ export default class HomelessSheltersStaticPage extends React.Component {
                 specialist homeless service for you in your area.
                 Your answers are private and no personal information is collected.
                 Anonymous data is collected via Google Analytics to help us understand what people are searching for.
-                {' '}<Link to="/category/housing">Search Ask Izzy for housing</Link>.
+                {' '}<Link to="/housing">Search Ask Izzy for housing</Link>.
                 </p>
 
                 <h3>What help do they offer?</h3>
@@ -91,7 +91,7 @@ export default class HomelessSheltersStaticPage extends React.Component {
                 <p>
                 There are homeless shelters across the country,
                 in regional and metropolitan areas. {' '}
-                <Link to="/category/housing">
+                <Link to="/housing">
                   Find a specialist homeless service
                 </Link> who can help you access shelter near you or browse:
 
@@ -100,13 +100,13 @@ export default class HomelessSheltersStaticPage extends React.Component {
                         // This uses /search instead of /category
                         // so that search engines can index the results
                     }
-                    <li><Link to="/search/housing/in/Adelaide-SA">housing in Adelaide</Link></li>
-                    <li><Link to="/search/housing/in/Brisbane-QLD">housing in Brisbane</Link></li>
-                    <li><Link to="/search/housing/in/Canberra-ACT">housing in Canberra</Link></li>
-                    <li><Link to="/search/housing/in/Darwin-NT">housing in Darwin</Link></li>
-                    <li><Link to="/search/housing/in/Melbourne-VIC">housing in Melbourne</Link></li>
-                    <li><Link to="/search/housing/in/Perth-WA">housing in Perth</Link></li>
-                    <li><Link to="/search/housing/in/Sydney-NSW">housing in Sydney</Link></li>
+                    <li><Link to="/search/housing/Adelaide-SA">housing in Adelaide</Link></li>
+                    <li><Link to="/search/housing/Brisbane-QLD">housing in Brisbane</Link></li>
+                    <li><Link to="/search/housing/Canberra-ACT">housing in Canberra</Link></li>
+                    <li><Link to="/search/housing/Darwin-NT">housing in Darwin</Link></li>
+                    <li><Link to="/search/housing/Melbourne-VIC">housing in Melbourne</Link></li>
+                    <li><Link to="/search/housing/Perth-WA">housing in Perth</Link></li>
+                    <li><Link to="/search/housing/Sydney-NSW">housing in Sydney</Link></li>
                 </ul>
                 </p>
             </StaticPage>
