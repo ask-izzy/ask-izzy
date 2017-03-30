@@ -25,5 +25,5 @@ Feature: Search for alcohol counselling
             name: Alcoholics Anonymous (AA), Cremorne
         - id: 109709
           site:
-            name: Alcoholics Anonymous (AA), Mosman
+            name: Support for Alcoholics
         ----------------------------------
