@@ -23,7 +23,7 @@ Feature: Search for alcohol counselling
         - id: 111573
           site:
             name: Alcoholics Anonymous (AA), Cremorne
-        - id: 109709
+        - id: 109701
           site:
-            name: Alcoholics Anonymous (AA), Mosman
+            name: Alcoholics Anonymous (AA), North Sydney
         ----------------------------------
