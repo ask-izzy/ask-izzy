@@ -52,24 +52,23 @@ module.exports = {
         publicPath: webpackUrl + "/static/",
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.(jpe?g|png|gif|svg|json)$/,
-                loader: "file",
+                use: "file",
             },
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                loader: extractText.loader,
+                use: extractText.loader,
             },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loaders: ["es3ify", "babel?cacheDirectory"],
+                use: ["es3ify-loader", "babel-loader?cacheDirectory"],
             },
         ],
     },
-    progress: true,
     plugins: [
         env("development"),
 
