@@ -40,24 +40,23 @@ module.exports = {
         publicPath: "/static/",
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.(jpe?g|png|gif|svg)$/,
-                loader: "file",
+                use: "file",
             },
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                loader: extractText.loader,
+                use: extractText.loader,
             },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loaders: ["es3ify", "babel"],
+                use: ["es3ify-loader", "babel-loader"],
             },
         ],
     },
-    progress: true,
     plugins: [
 
         // Only load the en-au moment.js config
@@ -74,8 +73,6 @@ module.exports = {
         extractText.plugin,
 
         // optimizations
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false,

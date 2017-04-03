@@ -20,9 +20,9 @@ Feature: Search for alcohol counselling
         - id: 105653
           site:
             name: Manly Drug Education & Counselling Centre (MDECC)
-        - id: 111573
+        - id: 224037
           site:
-            name: Alcoholics Anonymous (AA), Cremorne
+            name: Alcoholics Anonymous (AA), Kings Cross
         - id: 109701
           site:
             name: Alcoholics Anonymous (AA), North Sydney
