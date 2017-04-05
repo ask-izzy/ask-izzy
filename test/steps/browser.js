@@ -289,8 +289,10 @@ async function checkMetaCanonical(expected: string): Promise<void> {
         "link[rel=canonical]"
     ))
         .getAttribute("content");
+
     content = decodeURIComponent(content);
-    content = content.replace (/^.*\/\/[^\/]+/, '');
+
+    content = content.replace(/^.*\/\/[^\/]+/, '');
 
     assert.equal(
         content,
