@@ -3,7 +3,7 @@
 /Test-*.png
 /bower_components
 /node_modules/
-/npm-debug.log
+/npm-debug.log*
 /public/static/*.css
 /public/static/*.css.map
 /public/static/*.js

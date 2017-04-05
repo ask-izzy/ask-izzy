@@ -15,6 +15,7 @@ import HtmlDocument from "./HtmlDocument";
 // flow:disable
 import webpackStats from "./webpack-stats";
 import categories from "../constants/categories";
+import Helmet from "react-helmet";
 
 function hasVersionFile(): boolean {
     try {
@@ -51,6 +52,8 @@ function renderPage(uri: string, path: string): void {
                 <RouterContext {...renderProps} />
             );
 
+            const helmet = Helmet.renderStatic();
+
             // The application component is rendered to static markup
             // and sent as response.
             const html = ReactDOMServer.renderToStaticMarkup(
@@ -59,6 +62,7 @@ function renderPage(uri: string, path: string): void {
                   markup={markup}
                   script={webpackStats.script}
                   css={webpackStats.css}
+                  helmet={helmet}
                   currentUrl={reqUrl}
                   envPath={version ?
                       `/static/env-${version}.js` : "/static/env.js"

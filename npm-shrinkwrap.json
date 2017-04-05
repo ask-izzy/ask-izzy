@@ -4533,6 +4533,11 @@
         }
       }
     },
+    "react-helmet": {
+      "version": "5.0.2",
+      "from": "react-helmet@latest",
+      "resolved": "https://registry.npmjs.org/react-helmet/-/react-helmet-5.0.2.tgz"
+    },
     "react-mixin": {
       "version": "3.0.5",
       "from": "react-mixin@3.0.5",

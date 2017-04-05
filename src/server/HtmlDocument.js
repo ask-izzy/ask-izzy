@@ -10,7 +10,7 @@ class HtmlDocument extends React.Component {
         css: React.PropTypes.arrayOf(React.PropTypes.string),
         markup: React.PropTypes.string.isRequired,
         script: React.PropTypes.arrayOf(React.PropTypes.string),
-
+        helmet: React.PropTypes.object,
         // meta tags, title, etc.
         currentUrl: React.PropTypes.object,
         description: React.PropTypes.string,
@@ -35,13 +35,12 @@ class HtmlDocument extends React.Component {
             title,
             description,
             siteName,
-            currentUrl,
             envPath,
             requestInterceptorPath,
+            helmet,
         } = this.props;
         const viewport =
             "width=device-width, initial-scale=1.0, user-scalable=no";
-        const canonicalUrl = `https://askizzy.org.au${currentUrl.pathname}`;
 
         return (
 <html lang="en">
@@ -73,10 +72,9 @@ class HtmlDocument extends React.Component {
             property="og:description"
             content={description}
         />
-        <meta
-            property="og:url"
-            content={canonicalUrl}
-        />
+
+        {helmet.meta.toComponent()}
+        {helmet.link.toComponent()}
 
         {css.map((href, idx) =>
             <link
@@ -86,11 +84,6 @@ class HtmlDocument extends React.Component {
                 href={href}
             />)
         }
-
-        <link
-            rel="canonical"
-            href={canonicalUrl}
-        />
 
         <link
             rel="apple-touch-icon"

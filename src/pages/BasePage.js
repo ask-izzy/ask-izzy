@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import Helmet from "react-helmet";
 import DocumentTitle from "react-document-title";
 import { makeTitle } from "../routes";
 
@@ -11,6 +12,7 @@ export default class BasePage extends React.Component {
         footer: any,
         routes: any,
         params: any,
+        location: any,
     };
     state: void;
 
@@ -21,8 +23,23 @@ export default class BasePage extends React.Component {
     }
 
     render() {
+
+        const canonicalUrl = `https://askizzy.org.au${this.props.location.pathname}`;
+
         return (
             <div className="BasePage">
+
+                <Helmet>
+                    <link
+                        rel="canonical"
+                        content={canonicalUrl}
+                    />
+                    <meta
+                        property="og:url"
+                        content={canonicalUrl}
+                    />
+                </Helmet>
+
                 <DocumentTitle
                     title={makeTitle(
                         this.props.routes,
