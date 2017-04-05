@@ -54,6 +54,7 @@ module.exports = (function() {
         .then('"$STRING" should be checked', unpromisify(assertItemChecked))
         .then('"$STRING" should not be checked',
               unpromisify(assertItemNotChecked))
+        .then("the canonical meta is $URL", unpromisify(checkMetaCanonical))
         ;
 })();
 
@@ -280,6 +281,21 @@ async function assertItemChecked(label: string): Promise<void> {
 
 async function assertItemNotChecked(label: string): Promise<void> {
     await assertItemCheckedIs.bind(this)(label, null);
+}
+
+async function checkMetaCanonical(expected: string): Promise<void> {
+
+    let content = await this.driver.findElement(By.css(
+        "link[rel=canonical]"
+    ))
+        .getAttribute("content");
+    content = decodeURIComponent(content);
+    content = content.replace (/^.*\/\/[^\/]+/, '');
+
+    assert.equal(
+        content,
+        expected
+    );
 }
 
 /**
