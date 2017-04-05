@@ -9,6 +9,7 @@ import url from "url";
 import routes, { makeTitle } from "../routes";
 import badRouteParams from "./not_found";
 import HtmlDocument from "./HtmlDocument";
+import Helmet from "react-helmet";
 
 let webpackStats;
 
@@ -62,6 +63,9 @@ export default function render(req, res, next) {
                     const markup = ReactDOMServer.renderToString(
                         <RouterContext {...renderProps} />
                     );
+
+                    const helmet = Helmet.renderStatic();
+
                     // The application component is rendered to static markup
                     // and sent as response.
                     const html = ReactDOMServer.renderToStaticMarkup(
@@ -70,6 +74,7 @@ export default function render(req, res, next) {
                           markup={markup}
                           script={webpackStats.script}
                           css={webpackStats.css}
+                          helmet={helmet}
                           envPath={
                               process.env.ENVFILE_PATH || "/static/env.js"
                           }
