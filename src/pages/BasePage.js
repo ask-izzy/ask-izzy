@@ -12,6 +12,7 @@ export default class BasePage extends React.Component {
         footer: any,
         routes: any,
         params: any,
+        location: any,
     };
     state: void;
 
