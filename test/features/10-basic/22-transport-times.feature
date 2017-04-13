@@ -35,6 +35,6 @@ Feature: Transport times
         When I click on "Transportable"
         Then I should see a transport time of
         ------------------------------------------
-        8 hours 27 mins
+        8 hours 27 mins transport
         Get directions
         ------------------------------------------
