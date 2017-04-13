@@ -14,13 +14,6 @@
         }
     }
 
-    .MapIcon {
-        width: 40px;
-        height: 40px;
-        margin-top: -9px;
-        margin-left: -2px;
-    }
-
     .rightIcon {
         top: 6px;
         width: 40px;
@@ -43,6 +36,13 @@
         .primaryText {
             font-size: 18px;
             line-height: 18px;
+        }
+
+        .MapIcon {
+            width: 40px;
+            height: 40px;
+            margin-top: -9px;
+            margin-left: -2px;
         }
 
         .rightIcon {
