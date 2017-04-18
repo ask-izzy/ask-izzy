@@ -15,6 +15,7 @@ import OpeningTimes from "./OpeningTimes";
 import TransportTime from "./TransportTime";
 import sendEvent from "../google-tag-manager";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
+import { titleize } from "underscore.string";
 
 class ResultListItem extends React.Component {
     props: {
@@ -56,6 +57,24 @@ class ResultListItem extends React.Component {
         });
     }
 
+    renderLocation(location: Object) {
+
+        let suburb = location.suburb;
+
+        if (location.isConfidential()) {
+            suburb = "Confidential location";
+        }
+
+        return (
+            <span className="location">
+                <icons.Map
+                    aria-label="Location"
+                />
+                {titleize(suburb)}
+            </span>
+        );
+    }
+
     render() {
         const {
             object,
@@ -68,6 +87,9 @@ class ResultListItem extends React.Component {
                 rightIcon={<icons.Chevron />}
                 onClick={this.recordViewDetail.bind(this)}
             >
+
+                {this.renderLocation(object.Location())}
+
                 <h2 className="name">
                     <IndigenousServiceIcon object={object} />
                     {object.name}
