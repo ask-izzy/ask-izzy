@@ -33,7 +33,7 @@ module.exports = (function() {
         .when('I search for "$STRING"', unpromisify(doSearch))
         .when('I search for "$STRING" and press enter',
               unpromisify(doSearchAndEnter))
-        .when("I click on the search icon", unpromisify(clickSearchIcon))
+        .when("I click on the search button", unpromisify(clickSearch))
         .when("I click back from the title bar", unpromisify(clickBack))
         .when(
             "I click back from the browser UI",
@@ -235,8 +235,8 @@ async function searchContains(expected: string): Promise<void> {
     assert.equal(value, expected);
 }
 
-async function clickSearchIcon(): Promise<void> {
-    await this.driver.findElement(By.css(".search .icon"))
+async function clickSearch(): Promise<void> {
+    await this.driver.findElement(By.css(".search button"))
         .click();
 }
 

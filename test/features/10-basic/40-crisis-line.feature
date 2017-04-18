@@ -35,6 +35,6 @@ Feature: Crisis Line
     Scenario: Search for helpline phone numbers for domestic violence
         When I visit /
         And I search for "domestic violence"
-        And I click on the search icon
+        And I click on the search button
         Then I should see a hotline in position 1 which says "1800 737 732"
         And I should see "If you need urgent help call this number" before first hotline

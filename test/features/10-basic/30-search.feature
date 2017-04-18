@@ -26,11 +26,11 @@ Feature: Search
 
     Scenario: Search for pets using keyboard and mouse
         When I search for "pet food"
-        And I click on the search icon
+        And I click on the search button
         Then I should be at /search/pet food
 
     Scenario: Search on blank does not search
-        When I click on the search icon
+        When I click on the search button
         Then I should be at /
 
     Scenario: Search with zero results displays a different sentence

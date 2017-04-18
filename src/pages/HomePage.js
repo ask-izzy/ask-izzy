@@ -3,9 +3,11 @@
 import React from "react";
 
 import HeaderBar from "../components/HeaderBar";
+import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
 import icons from "../icons";
 import storage from "../storage";
+
 
 class HomePage extends React.Component {
     props: {};
@@ -60,12 +62,13 @@ class HomePage extends React.Component {
                                 <input
                                     ref="search"
                                     type="search"
-                                    placeholder="Search"
+                                    placeholder=
+                                        "e.g. housing, food, legal help"
                                     aria-label="Search"
                                     defaultValue={storage.getSearch()}
                                 />
-                                <icons.Search
-                                    className="icon"
+                                <FlatButton
+                                    label="Search"
                                     onClick={this.onSearchSubmit.bind(this)}
                                 />
                             </div>
