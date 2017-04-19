@@ -16,8 +16,6 @@ class NavBar extends React.Component {
     static sampleProps = {default: {}};
 
     render() {
-        const subject = "Ask Izzy - Feedback";
-        const mailLink = `mailto:support@askizzy.org.au?subject=${subject}`;
 
         return (
             <div className="NavBar">
@@ -47,18 +45,6 @@ class NavBar extends React.Component {
                             }
                         />
                     </LimitedTimeMessage>
-                    <LinkListItem
-                        className="CategoryListItem FeedbackLink"
-                        href={mailLink}
-                        leftIcon={
-                            <icons.Logo
-                                className="ColoredIcon icon-fg-color small"
-                            />
-                        }
-                        primaryText="Ask Izzy feedback"
-                        secondaryText={"Tell us what you think"}
-                    />
-
                 </div>
             </div>
         );
