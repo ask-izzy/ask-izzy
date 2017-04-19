@@ -7,7 +7,15 @@
 
     & > div {
         display: inline-block;
-        margin: 5px 15px;
+        width: 100%;
+        margin: 15px;
+        vertical-align: top;
+    }
+
+    & > div div {
+        display: inline-block;
+        width: 50%;
+        vertical-align: top;
     }
 
     a {
@@ -15,7 +23,15 @@
         text-decoration: none;
     }
 
-    .aboriginal-flag {
+    hr {
+        height: 1px;
+        margin: 0 15px;
+        border: 0 none;
+        background-color: $brand-text-mid;
+        color: $brand-text-mid;
+    }
+
+    .flag {
         display: inline-block;
         position: relative;
         top: 10px;
@@ -28,22 +44,29 @@
 
     .footer-list {
         display: inline;
+        margin: 0;
         padding: 0;
         text-align: left;
 
+        &.about {
+
+            li {
+                display: inline-block;
+                width: 50%;
+            }
+        }
+
         li {
-            display: inline-block;
+            display: block;
             list-style-type: none;
 
             a {
                 // Increase the size of the hitbox on this tiny content
+                color: $white;
                 line-height: 2em;
             }
         }
 
-        li + li::before {
-            content: "\00a0|\00a0";
-        }
     }
 
 
