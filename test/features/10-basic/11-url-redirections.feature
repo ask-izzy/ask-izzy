@@ -33,3 +33,7 @@ Feature: Landing page
     Scenario: Search for "room for the night" at Richmond, VIC
         When I visit /search/room for the night/in/Richmond-VIC/
         Then I should be at /search/room for the night/Richmond-VIC
+
+    Scenario: Visit legacy Have your say page
+        When I visit /have-your-say
+        Then I should be at /advocacy
