@@ -8,6 +8,7 @@ import iss from "../iss";
 import type {Service} from "../iss";
 import components from "../components";
 import Loading from "../icons/Loading";
+import config from "../config";
 
 class ServicePage extends React.Component {
     props: {
@@ -93,7 +94,7 @@ class ServicePage extends React.Component {
                                         Sorry, I was unable to retrieve the information for this service at this time.
                                         Please try viewing another service or contact us
                                         if the problem persists at&nbsp;
-                                        <a href="mailto:support@askizzy.org.au">support@askizzy.org.au</a>.
+                                        <a href={"mailto:" + config.default.siteMail}>{config.default.siteMail}</a>.
                                     </p>
                                     <p>
                                         {

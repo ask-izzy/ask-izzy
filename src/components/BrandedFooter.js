@@ -4,6 +4,7 @@ import React from "react";
 import { Link } from "react-router";
 import DemographicAboriginal from "../icons/DemographicAboriginal";
 import DemographicTorresStrait from "../icons/DemographicTorresStrait";
+import config from "../config";
 
 class BrandedFooter extends React.Component {
     props: void;
@@ -13,10 +14,9 @@ class BrandedFooter extends React.Component {
     };
 
     render() {
-
-        const siteEmail = "support@askizzy.org.au";
         const subject = "Ask Izzy - Feedback";
-        const mailLink = `mailto:${siteEmail}?subject=${subject}`;
+        const siteMail = config.default.siteMail;
+        const mailLink = `mailto:${siteMail}?subject=${subject}`;
         const donateLink = "https://www.infoxchange.org/donate-ask-izzy";
 
         return (

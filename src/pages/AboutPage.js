@@ -4,6 +4,7 @@
 import React from "react";
 import { Link } from "react-router";
 import StaticPage from "./StaticPage";
+import config from "../config";
 
 class AboutPage extends React.Component {
     props: {};
@@ -56,7 +57,7 @@ class AboutPage extends React.Component {
                     If you notice information that is not up to
                     date you can
                     {' '}
-                    <a href="mailto:support@askizzy.org.au">
+                    <a href={"mailto:" + config.default.siteMail}>
                         let us know directly
                     </a>.
                 </p>
