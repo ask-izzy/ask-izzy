@@ -9,6 +9,7 @@ import iss from "../iss";
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
+import Collapser from "./Collapser";
 
 /* eslint-disable max-len */
 const crisisDescriptions = {
@@ -36,6 +37,7 @@ const crisisDescriptions = {
 class CrisisLineItem extends React.Component {
     props: {
         object: iss.Service,
+        expanded?: boolean,
     };
     state: void;
 
@@ -71,9 +73,14 @@ class CrisisLineItem extends React.Component {
                     />
                     {
                         crisisDescriptions[object.id] &&
-                        crisisDescriptions[object.id](object)
+                        <Collapser
+                            message="See information about this call"
+                            closeMessage="Hide information about this call"
+                            expanded={this.props.expanded}
+                        >
+                            {crisisDescriptions[object.id](object)}
+                        </Collapser>
                     }
-
                     <DebugServiceRecord object={object} />
                     {object._explanation &&
                         <DebugContainer message="Query score">
