@@ -147,6 +147,14 @@ export default (
             from="/search/:search/in/:suburb-:state"
             to="/search/:search/:suburb-:state"
         />
+        <Redirect
+            from="/have-your-say"
+            to="/advocacy"
+        />
+        <Redirect
+            from="/have-your-say/:page"
+            to="/advocacy/:page"
+        />
         {[
             "/search/:search/:suburb-:state",
             "/search/:search",

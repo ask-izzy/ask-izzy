@@ -131,6 +131,7 @@ async function setSubcategoriesNone(
     await gotoUrl(this.driver, "/");  // go anywhere to start the session
     await this.driver.executeScript(() => {
         IzzyStorage.setItem("sub-addiction", "(skipped)");
+        IzzyStorage.setItem("sub-advocacy", "(skipped)");
         IzzyStorage.setItem("sub-counselling", "(skipped)");
         IzzyStorage.setItem("sub-everyday-things", "(skipped)");
         IzzyStorage.setItem("sub-health", "(skipped)");

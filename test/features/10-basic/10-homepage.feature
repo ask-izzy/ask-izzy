@@ -25,6 +25,6 @@ Feature: Landing page
         Facilities
         Something to do
         Technology
-        Have your say
+        Advocacy
         ---------------
         And I should see the branding footer
