@@ -233,8 +233,8 @@ const categories:Array<Category> = [
         ],
     }),
     new Category({
-        name: "Have your say",
-        byline: "Complaints & advocacy",
+        name: "Advocacy",
+        byline: "Complaints and advice",
         icon: icons.Advocacy,
         search: {
             q: "consumer issues mediation discrimination " +
