@@ -6,6 +6,7 @@ class Collapser extends React.Component {
     props: {
         message: string,
         className?: string,
+        closeMessage?: string,
         expanded?: boolean,
         children?: any,
     };
@@ -14,6 +15,11 @@ class Collapser extends React.Component {
     };
 
     constructor(props: Object) {
+        // By default, if 'closeMessage' is not defined, then
+        // the component will remove the expand link on click, and the user
+        // will not be able to hide the expanded content.
+        // If 'closeMessage' is defined, then the component will provide a
+        // close link that will collapse an expanded Collapser.
         super(props);
 
         // This component renders
@@ -46,6 +52,10 @@ class Collapser extends React.Component {
         if (this.state.collapsed) {
             event.preventDefault();
             this.setState({collapsed: false});
+            this.props.onClick && this.props.onClick();
+        } else if (this.props.closeMessage) {
+            event.preventDefault();
+            this.setState({collapsed: true});
             this.props.onClick && this.props.onClick();
         }
     }
@@ -80,6 +90,17 @@ class Collapser extends React.Component {
                     role="button"
                 >
                     {this.props.message}
+                </a>
+            );
+        } else if (this.props.closeMessage) {
+            return (
+                <a
+                    href="#"
+                    alt="Show less"
+                    className="collapser-message"
+                    role="button"
+                >
+                    {this.props.closeMessage}
                 </a>
             );
         }

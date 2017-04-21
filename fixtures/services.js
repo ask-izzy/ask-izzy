@@ -412,7 +412,7 @@ const objects: Object = {
         "endpoints": [],
         "funding_body": "Department of Social Services",
         "healthcare_card_holders": false,
-        "id": 537512,
+        "id": 2721562,
         "ineligibility_info": "",
         "intake_info": "Self referral; availability, 24 hours, 7 days a week.",
         "intake_point": "Phone Counsellor, free call: 1800 211 028",

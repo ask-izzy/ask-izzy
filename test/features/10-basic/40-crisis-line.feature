@@ -38,3 +38,24 @@ Feature: Crisis Line
         And I click on the search button
         Then I should see a hotline in position 1 which says "1800 737 732"
         And I should see "If you need urgent help call this number" before first hotline
+
+    Scenario: Show extra call information
+        When I visit /
+        And I search for "domestic violence"
+        And I click on the search button
+        And I click on "See information about this call"
+        Then I should see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"
+
+    Scenario: Hide extra call information
+        When I visit /
+        And I search for "domestic violence"
+        And I click on the search button
+        And I click on "See information about this call"
+        And I click on "Hide information about this call"
+        Then I should not see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"
+
+    Scenario: Not see extra call information
+        When I visit /
+        And I search for "get helpline phone number"
+        And I click on the search button
+        Then I should not see "See information about this call"
