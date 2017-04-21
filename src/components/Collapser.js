@@ -15,6 +15,11 @@ class Collapser extends React.Component {
     };
 
     constructor(props: Object) {
+        // By default, if 'closeMessage' is not defined, then
+        // the component will remove the expand link on click, and the user
+        // will not be able to hide the expanded content.
+        // If 'closeMessage' is defined, then the component will provide a
+        // close link that will collapse an expanded Collapser.
         super(props);
 
         // This component renders
