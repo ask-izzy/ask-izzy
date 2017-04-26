@@ -1,8 +1,8 @@
 .branding-footer-container {
     background-color: $brand-bg-dark;
-    color: $brand-text-mid;
+    color: $brand-text-light;
 
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
 
     & > div {
@@ -20,6 +20,7 @@
 
     a {
         color: $white;
+        font-size: 14px;
         text-decoration: none;
     }
 

@@ -74,9 +74,11 @@ class BrandedFooter extends React.Component {
                     />
                     <p>
                         <small>
-                        Infoxchange would like to pay respect to and
-                        acknowledge the Traditional Owners of the
-                        land and to the Elders past &amp; present.
+                        Infoxchange acknowledges the Traditional Owners of
+                        country throughout Australia and recognises their
+                        continuing connection to land, waters and community.
+                        We pay our respects to them and their cultures; and
+                        to elders both past and present.
                         </small>
                     </p>
                 </div>
