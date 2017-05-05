@@ -12,6 +12,7 @@ import BaseQuestion from "./personalisation/BaseQuestion";
 import CounsellingSubcategories from "./personalisation/CounsellingSubcategories";
 import Demographics from "./personalisation/Demographics";
 import EverydayThingsSubcategories from "./personalisation/EverydayThingsSubcategories";
+import FoodSubcategories from "./personalisation/FoodSubcategories";
 import Gender from "./personalisation/Gender";
 import HealthDemographics from "./personalisation/HealthDemographics";
 import HealthSubcategories from "./personalisation/HealthSubcategories";
@@ -33,6 +34,7 @@ export default {
     CounsellingSubcategories: CounsellingSubcategories,
     Demographics: Demographics,
     EverydayThingsSubcategories: EverydayThingsSubcategories,
+    FoodSubcategories: FoodSubcategories,
     Gender: Gender,
     HealthDemographics: HealthDemographics,
     HealthSubcategories: HealthSubcategories,
