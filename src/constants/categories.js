@@ -70,6 +70,7 @@ const categories:Array<Category> = [
                 " -(hire of facilities) -chsp -(meal preparation)",
         },
         personalisation: [
+            personalisation.FoodSubcategories,
             personalisation.Location,
         ],
     }),
