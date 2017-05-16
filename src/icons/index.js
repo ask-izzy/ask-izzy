@@ -14,6 +14,7 @@ import SvgIconChevron from "./Chevron.js";
 import SvgIconClock from "./Clock.js";
 import SvgIconCross from "./Cross.js";
 import SvgIconDemographicAboriginal from "./DemographicAboriginal.js";
+import SvgIconDemographicAtsi from "./DemographicAtsi.js";
 import SvgIconDemographicChildren from "./DemographicChildren.js";
 import SvgIconDemographicCouple from "./DemographicCouple.js";
 import SvgIconDemographicDisability from "./DemographicDisability.js";
@@ -71,6 +72,7 @@ export default {
     Clock: SvgIconClock,
     Cross: SvgIconCross,
     DemographicAboriginal: SvgIconDemographicAboriginal,
+    DemographicAtsi: SvgIconDemographicAtsi,
     DemographicChildren: SvgIconDemographicChildren,
     DemographicCouple: SvgIconDemographicCouple,
     DemographicDisability: SvgIconDemographicDisability,
