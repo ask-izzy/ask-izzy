@@ -91,7 +91,6 @@ class ResultListItem extends React.Component {
                 {this.renderLocation(object.Location())}
 
                 <h2 className="name">
-                    <IndigenousServiceIcon object={object} />
                     {object.name}
                 </h2>
                 <div className="site_name">{object.site.name}</div>
@@ -103,6 +102,7 @@ class ResultListItem extends React.Component {
                     compact={true}
                     location={object.Location()}
                 />
+                <IndigenousServiceIcon object={object} />
                 {this.props.nServiceProvisions > 0 ?
                     <div>
                         <ul className="related">{
