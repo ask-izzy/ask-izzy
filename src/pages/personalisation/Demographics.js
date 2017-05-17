@@ -14,7 +14,8 @@ export default class Demographics extends BaseMultiQuestion {
         answers: {
             "Escaping family violence": append("(family violence)"),
             // n.b. see also storage.getUserIsIndigenous when changing
-            "Aboriginal": append("(Aboriginals & Torres Strait Islanders)"),
+            "Aboriginal and/or Torres Strait Islander":
+                append("(Aboriginals & Torres Strait Islanders)"),
             "Family with children": append("families -srs"),
             "Couples": append("couples"),
             "Mental or emotional difficulties": append("(mental health)"),
@@ -27,7 +28,7 @@ export default class Demographics extends BaseMultiQuestion {
         },
         icons: {
             "Escaping family violence": icons.DemographicFamilyViolence,
-            "Aboriginal": icons.DemographicAboriginal,
+            "Aboriginal and/or Torres Strait Islander": icons.DemographicAtsi,
             "Family with children": icons.DemographicChildren,
             "Couples": icons.DemographicCouple,
             "Mental or emotional difficulties": icons.Mental,
@@ -38,7 +39,8 @@ export default class Demographics extends BaseMultiQuestion {
             "Have pets": icons.DemographicPets,
         },
         oldAnswers: {
-            "Indigenous": "Aboriginal",
+            "Indigenous": "Aboriginal and/or Torres Strait Islander",
+            "Aboriginal": "Aboriginal and/or Torres Strait Islander",
         },
     };
 }

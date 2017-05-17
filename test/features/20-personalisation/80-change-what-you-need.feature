@@ -126,11 +126,11 @@ Feature: Change your personalisation settings
         Which situation is most like yours?          | (skipped)
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
-        Do any of these apply to you?                | Aboriginal
+        Do any of these apply to you?                | Aboriginal and/or Torres Strait Islander
         ----------------------------------------------------------------
 
         When I click on "Do any of these apply to you?"
-        And I click on "Aboriginal"
+        And I click on "Aboriginal and/or Torres Strait Islander"
         And I click on the done button
         Then I should see "Change your answers here"
         Then I should see the results

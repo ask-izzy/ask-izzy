@@ -53,6 +53,7 @@ files.forEach((path) => {
     let allowColoring = "allow-override-color"
     if ([
         "DemographicAboriginal",
+        "DemographicAtsi",
         "DemographicTorresStrait",
         "DemographicLgbtiq",
     ].includes(className)){
