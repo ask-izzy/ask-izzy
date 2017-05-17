@@ -78,9 +78,11 @@ export default class ServicePane extends React.Component {
             <div className="ServicePane">
                 <div className="header">
                     <h2 className="name">
-                        <IndigenousServiceIcon object={object} />
                         {object.name}
                     </h2>
+                    <p>
+                        <IndigenousServiceIcon object={object} />
+                    </p>
                     <h3 className="description">
                         {object.shortDescription.map((sentence, idx) =>
                             <p key={idx}>{sentence}</p>

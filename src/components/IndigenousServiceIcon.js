@@ -2,8 +2,8 @@
 
 import React from "react";
 import DemographicAboriginal from "../icons/DemographicAboriginal";
+import DemographicTorresStrait from "../icons/DemographicTorresStrait";
 import type { Service } from "../iss";
-import storage from "../storage";
 
 class IndigenousServiceIcon extends React.Component {
     props: {object: Service};
@@ -14,14 +14,15 @@ class IndigenousServiceIcon extends React.Component {
             return null;
         }
 
-        if (!storage.getUserIsIndigenous()) {
-            return null;
-        }
-
         return (
-            <DemographicAboriginal
-                className="inline-icon"
-            />
+            <div>
+                <DemographicAboriginal
+                    className="inline-icon"
+                />
+                <DemographicTorresStrait
+                    className="inline-icon"
+                />
+            </div>
         );
     }
 
