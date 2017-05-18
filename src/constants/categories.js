@@ -152,6 +152,7 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.LegalSubcategories,
+            personalisation.DemographicsIndigenous,
         ],
     }),
     new Category({
@@ -180,6 +181,7 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.LifeSkillsSubcategories,
+            personalisation.DemographicsIndigenous,
         ],
     }),
     new Category({
