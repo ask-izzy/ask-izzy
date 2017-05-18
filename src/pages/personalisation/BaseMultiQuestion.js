@@ -127,6 +127,13 @@ class BaseMultiQuestion extends BaseQuestion {
         if (this.props.icons && this.props.icons[answer]) {
             const Icon = this.props.icons[answer];
 
+            if (answer === 'Aboriginal and/or Torres Strait Islander') {
+                return (
+                    <Icon
+                        className="ColoredIcon big icon-fg-color"
+                    />
+                );
+            }
             return (
                 <Icon
                     className="ColoredIcon small icon-fg-color"
