@@ -158,6 +158,25 @@ class BaseQuestion extends React.Component {
         storage.setItem(this.props.name, this.selected || "(skipped)");
     }
 
+    iconFor(answer: string): ?React$Element<*> {
+        if (this.props.icons && this.props.icons[answer]) {
+            const Icon = this.props.icons[answer];
+
+            if (answer === 'Yes - show these first where possible') {
+                return (
+                    <Icon
+                        className="ColoredIcon big icon-fg-color"
+                    />
+                );
+            }
+            return (
+                <Icon
+                    className="ColoredIcon small icon-fg-color"
+                />
+            );
+        }
+    }
+
     onAnswerTouchTap(answer: string, ...rest: any): void {
         this.setState({selected: answer});
         this.triggerNext();
@@ -183,6 +202,7 @@ class BaseQuestion extends React.Component {
                 {this.answers.map((answer, index) =>
                     <InputListItem
                         key={index}
+                        leftIcon={this.iconFor(answer)}
                         primaryText={answer}
 
                         type="radio"

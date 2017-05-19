@@ -4,6 +4,7 @@
 import React from "react";
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
+import icons from "../../icons";
 
 export default class DemographicsIndigenous extends BaseQuestion {
     static title = "Indigenous";
@@ -21,6 +22,9 @@ export default class DemographicsIndigenous extends BaseQuestion {
             // n.b. see also storage.getUserIsIndigenous when changing
             "Yes - show these first where possible":
                 append("(Aboriginals & Torres Strait Islanders)"),
+        },
+        icons: {
+            "Yes - show these first where possible": icons.DemographicAtsi,
         },
     };
 
