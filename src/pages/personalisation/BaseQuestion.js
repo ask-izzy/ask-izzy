@@ -162,13 +162,6 @@ class BaseQuestion extends React.Component {
         if (this.props.icons && this.props.icons[answer]) {
             const Icon = this.props.icons[answer];
 
-            if (answer === 'Yes - show these first where possible') {
-                return (
-                    <Icon
-                        className="ColoredIcon big icon-fg-color"
-                    />
-                );
-            }
             return (
                 <Icon
                     className="ColoredIcon small icon-fg-color"
