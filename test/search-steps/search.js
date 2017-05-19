@@ -71,6 +71,7 @@ async function setSubcategoriesNone(
     storage.setItem("sub-everyday-things", "(skipped)");
     storage.setItem("sub-health", "(skipped)");
     storage.setItem("sub-housing", "(skipped)");
+    storage.setItem("sub-indigenous", "(skipped)");
     storage.setItem("sub-job", "(skipped)");
     storage.setItem("sub-legal", "(skipped)");
     storage.setItem("sub-life-skills", "(skipped)");

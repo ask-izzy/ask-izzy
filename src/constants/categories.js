@@ -99,7 +99,7 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.HealthSubcategories,
-            personalisation.HealthDemographics,
+            personalisation.DemographicsIndigenous,
         ],
     }),
     new Category({
@@ -137,7 +137,7 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.CounsellingSubcategories,
-            personalisation.HealthDemographics,
+            personalisation.DemographicsIndigenous,
         ],
     }),
     new Category({
@@ -152,6 +152,7 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.LegalSubcategories,
+            personalisation.DemographicsIndigenous,
         ],
     }),
     new Category({
@@ -166,7 +167,7 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.AddictionSubcategories,
-            personalisation.HealthDemographics,
+            personalisation.DemographicsIndigenous,
         ],
     }),
     new Category({
@@ -180,6 +181,7 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.LifeSkillsSubcategories,
+            personalisation.DemographicsIndigenous,
         ],
     }),
     new Category({

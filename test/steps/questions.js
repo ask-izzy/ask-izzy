@@ -137,6 +137,7 @@ async function setSubcategoriesNone(
         IzzyStorage.setItem("sub-food", "(skipped)");
         IzzyStorage.setItem("sub-health", "(skipped)");
         IzzyStorage.setItem("sub-housing", "(skipped)");
+        IzzyStorage.setItem("sub-indigenous", "(skipped)");
         IzzyStorage.setItem("sub-job", "(skipped)");
         IzzyStorage.setItem("sub-legal", "(skipped)");
         IzzyStorage.setItem("sub-life-skills", "(skipped)");
