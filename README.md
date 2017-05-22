@@ -112,6 +112,7 @@ path to the files.
 By convention, we have one SCSS and one JS file per react component.
 Each component renders an element with a `class` equal to the name of the component.
 This class is used in the SCSS file to avoid rules applying to the wrong component.
+`script/generate-component-index` is required to be manually run each time you introduce a new react component.
 
 ## Javascript features
 

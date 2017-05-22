@@ -5,7 +5,7 @@ PATH=$(npm bin):$PATH
 
 # Build js index
 target=./src/components.js
-files=$( find src/components -depth 1 -name '*.js' | sort )
+files=$( find src/components -maxdepth 1 -name '*.js' | sort )
 
 cat << EOF > $target
 /* @flow */
