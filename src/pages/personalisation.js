@@ -10,8 +10,8 @@ import Age from "./personalisation/Age";
 import BaseMultiQuestion from "./personalisation/BaseMultiQuestion";
 import BaseQuestion from "./personalisation/BaseQuestion";
 import CounsellingSubcategories from "./personalisation/CounsellingSubcategories";
-import Demographics from "./personalisation/Demographics";
 import DemographicsIndigenous from "./personalisation/DemographicsIndigenous";
+import Demographics from "./personalisation/Demographics";
 import EverydayThingsSubcategories from "./personalisation/EverydayThingsSubcategories";
 import FoodSubcategories from "./personalisation/FoodSubcategories";
 import Gender from "./personalisation/Gender";
@@ -32,8 +32,8 @@ export default {
     BaseMultiQuestion: BaseMultiQuestion,
     BaseQuestion: BaseQuestion,
     CounsellingSubcategories: CounsellingSubcategories,
-    Demographics: Demographics,
     DemographicsIndigenous: DemographicsIndigenous,
+    Demographics: Demographics,
     EverydayThingsSubcategories: EverydayThingsSubcategories,
     FoodSubcategories: FoodSubcategories,
     Gender: Gender,
