@@ -8,6 +8,7 @@ import sendEvent from "../google-tag-manager";
 import ServiceFactory from "../../fixtures/factories/Service";
 
 import Address from "./Address";
+import Accessibility from "./Accessibility";
 import CollapsedOpeningTimes from "./CollapsedOpeningTimes";
 import Collapser from "./Collapser";
 import ContactMethods from "./ContactMethods";
@@ -108,6 +109,7 @@ export default class ServicePane extends React.Component {
                             object={object.open}
                             serviceId={object.id}
                         />
+                        <Accessibility object={object} />
                         <Spacer />
 
                         <GoogleMapsLink
