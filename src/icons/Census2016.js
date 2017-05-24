@@ -24,32 +24,10 @@ export default class SvgIconCensus2016 extends React.Component {
         return (
             <span
                 {...rest}
-            >
-                <svg
-                    className={classes}
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xlinkHref="http://www.w3.org/1999/xlink"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 100 100"
-                >
-                    <circle
-                        cx="50"
-                        cy="50"
-                        r="44"
-                        className="outer-circle"
-                    />
-                    <path
-                        className="left-path"
-                        d="M 39 34 L 39 65 z"
-                    />
-                    <path
-                        className="right-path"
-                        d="M 62 34 L 62 65 z"
-                    />
-                </svg>
-            </span>
+                dangerouslySetInnerHTML={{__html: `
+                    <svg class='${classes}' version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"><style type="text/css">
+                `}}
+            />
         );
     }
 }
