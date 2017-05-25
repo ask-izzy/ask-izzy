@@ -11,6 +11,7 @@ import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
 
 import LinkListItem from "./LinkListItem";
+import Accessibility from "./Accessibility";
 import OpeningTimes from "./OpeningTimes";
 import TransportTime from "./TransportTime";
 import sendEvent from "../google-tag-manager";
@@ -98,10 +99,12 @@ class ResultListItem extends React.Component {
                     className="opening_hours"
                     object={object.open}
                 />
+                <Accessibility object={object} />
                 <TransportTime
                     compact={true}
                     location={object.Location()}
                 />
+
                 <IndigenousServiceIcon object={object} />
                 {this.props.nServiceProvisions > 0 ?
                     <div>
