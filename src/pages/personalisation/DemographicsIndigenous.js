@@ -22,9 +22,11 @@ export default class DemographicsIndigenous extends BaseQuestion {
             // n.b. see also storage.getUserIsIndigenous when changing
             "Yes - show these first where possible":
                 append("(Aboriginals & Torres Strait Islanders)"),
+            "No - show me everything": append(""),
         },
         icons: {
             "Yes - show these first where possible": icons.DemographicAtsi,
+            "No - show me everything": icons.Blank,
         },
     };
 
