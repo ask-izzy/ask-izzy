@@ -18,29 +18,69 @@ class AboutPage extends React.Component {
         return (
             <StaticPage title="About Ask Izzy">
                 <p>
-                    Ask Izzy helps people who are homeless
-                    or at risk of becoming
-                    homeless to find the services they need,
-                    right now and nearby.
+                    When you’re looking for support, Ask Izzy can help you to find the services you need, right now and nearby. It is free and anonymous, and you can search over 350 000 services to find housing, meals, healthcare, counselling, legal advice, addiction treatment and a whole lot more.
+                </p>
+                <p>
+                    If you’re on the Telstra mobile network, you can access Ask Izzy even if you don’t have credit.
+                </p>
+                <p>
+                    We’re making improvements.
+                </p>
+                <p>
+                    You might see some changes to the site over the coming months including a more welcoming design, improved Aboriginal and Torres Strait Islander service listings as well as the ability to find these services more easily. With help from the Victorian Government, we’re working to make Ask Izzy more inclusive for Aboriginal and Torres Strait Islander people.
+                </p>
+                <p>
+                    We’re also making use of Ask Izzy’s anonymous data so service providers and policymakers can better match their offerings with need. In September, you’ll be able to compare data from the Australian Bureau of Statistics, Australian Institute of Health and Welfare and Ask Izzy, thanks to funding from Google.
                 </p>
 
-                <h3>Ask Izzy</h3>
-                <ul>
-                    <li>
-                        Is Australia wide, free and anonymous
-                    </li>
-                    <li>
-                        Can help you find housing, meals,
-                        health services, counselling, legal help,
-                        addiction help and a whole lot more services
-                    </li>
-                    <li>
-                        Lists more than 350,000 different services
-                    </li>
-                    <li>
-                        Is available on phones, tablets and computers
-                    </li>
-                </ul>
+                <h3>Are you a service provider?</h3>
+                <p>
+                    Service information is constantly changing, so if you notice information that is not up to date you can
+                    {' '}
+                    <a href={"mailto:" + config.default.siteMail}>
+                        let us know directly
+                    </a>.
+                </p>
+                <p>
+                    If your site or service isn’t listed, you can add it through our simple online form.
+                </p>
+                <p>
+                    The information you provide will be published on Ask Izzy and its sister directory, <a href="https://infoxchange.serviceseeker.com.au">Service Seeker</a>.
+                </p>
+                <p>
+                    Please provide information that you wish to be public and an email address on which we can contact you for data maintenance purposes.
+                </p>
+                <p>
+                    <Link to="/add-service">
+                        Add your new site or service.
+                    </Link>
+                </p>
+                <p>
+                    If you already have a listing you can edit or remove it by clicking 'Update/remove service' on your  listing. The changes you request will be actioned within a week.
+                </p>
+
+                <h3>Ask Izzy is proudly supported by...</h3>
+                <a href="https://www.infoxchange.net.au/ask-izzy"><h4>Infoxchange</h4></a>
+                <p>
+                    Infoxchange has used technology to tackle our community’s biggest social challenges for over 26 years. We wanted to make it easier for people to find the services they need, when they need them, so we developed Ask Izzy in partnership with Google, REA Group and News Corp Australia.
+                </p>
+
+                <a href="https://www.google.org"><h4>Google</h4></a>
+                <p>
+                    Google partners with organisations that see the potential of technology to have a scalable, positive impact on significant social issues.
+                </p>
+
+                <a href="http://www.rea-group.com"><h4>REA Group</h4></a>
+                <p>
+                    REA Group, the company behind Australia’s number one property website realestate.com.au, believes everyone should have a safe place to sleep - every night.
+                </p>
+
+                <a href="http://www.newscorpaustralia.com"><h4>News Corp Australia</h4></a>
+                <p>
+                    News Corp’s mission is to inspire, inform and advocate for a better Australia.
+                </p>
+
+                <br />
                 <p>
                     For media enquiries or to find out more about
                     Ask Izzy visit{' '}
@@ -49,63 +89,7 @@ class AboutPage extends React.Component {
                     </a>
                 </p>
 
-                <h3>
-                    Ask Izzy Service provider information
-                </h3>
-                <p>
-                    Service information is constantly changing.
-                    If you notice information that is not up to
-                    date you can
-                    {' '}
-                    <a href={"mailto:" + config.default.siteMail}>
-                        let us know directly
-                    </a>.
-                </p>
-
-                <h4>
-                    Adding your site or service
-                </h4>
-                <p>
-                    You are able to add your service details to Ask Izzy by clicking the button below and providing the requested information. Information provided will be published on the Ask Izzy homelessness website and Infoxchange Service Seeker national directory. Please only provide information that you wish to be published. Please also note, correspondence for data maintenance purposes and updates regarding your listed service/s will be sent to your nominated contact email address.
-                </p>
-                <p>
-                    If you provide a community support service and would like to list your service in Ask Izzy, take action now. It's easy and there is no cost involved.
-                </p>
-                <p>
-                    <Link to="/add-service">
-                        Add a new site / service
-                    </Link>.
-                </p>
-
-
-                <h4>
-                    Editing or removing your site or service
-                </h4>
-                <p>
-                    If you need to make changes to your service details, or remove your service from the Ask Izzy homelessness website and Infoxchange Service Seeker national directory, please click 'Update/remove service' on the individual service listing and provide all of the requested information. The changes you request will be actioned within seven (7) calendar days from submission.
-                </p>
-
-                <h3>Supported by</h3>
-                <a href="https://www.infoxchange.net.au/ask-izzy"><h4>Infoxchange</h4></a>
-                <p>
-                    Infoxchange has used technology to tackle our community’s biggest social challenges for over 25 years. We wanted to make it easier for people experiencing homelessness to find the services they need, when they need them, so we developed Ask Izzy in partnership with Google, REA Group and News Corp Australia.
-                </p>
-
-                <a href="https://www.google.org"><h4>Google</h4></a>
-                <p>
-                    Google partners with organisations that see the potential of technology to have a scalable, positive impact on significant social issues. Infoxchange demonstrated this in spades and since our funding of Ask Izzy, our relationship has gone from strength to strength. We hope that the launch of Ask Izzy is just the first major milestone in a long and fruitful partnership.
-                </p>
-
-                <a href="http://www.rea-group.com"><h4>REA Group</h4></a>
-                <p>
-                    REA Group, the company behind Australia’s number one property website realestate.com.au, exists to empower people by making the property process simple, efficient and stress free. That’s why our social mission is focused on homelessness in Australia, because we believe everyone should have a safe place to sleep - every night.
-                </p>
-
-                <a href="http://www.newscorpaustralia.com"><h4>News Corp Australia</h4></a>
-                <p>
-                    News Corp’s mission is to inspire, inform and advocate for a better Australia, which is why we are collaborating with REA Group, Google and Infoxchange on Ask Izzy. Each day we reach 7.1 million Australians through our newspapers and websites. We have an important role in communicating the value and existence of this critical social tool that will benefit the vulnerable in our society.
-                </p>
-
+                <br />
                 <p className="acknowledgement">
                     We acknowledge the traditional custodians of this
                     land and pay our respects to their culture, their
