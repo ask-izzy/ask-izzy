@@ -88,13 +88,6 @@ class AboutPage extends React.Component {
                         Infoxchange’s website
                     </a>
                 </p>
-
-                <br />
-                <p className="acknowledgement">
-                    We acknowledge the traditional custodians of this
-                    land and pay our respects to their culture, their
-                    people and elders past and present.
-                </p>
             </StaticPage>
         );
     }
