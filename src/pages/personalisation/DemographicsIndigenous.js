@@ -13,7 +13,7 @@ export default class DemographicsIndigenous extends BaseQuestion {
         name: "sub-indigenous",
         question:
             "Do you want to see Aboriginal & Torres Strait Islander " +
-            "services?",
+            "specific services?",
         byline:
             "Services for both Aboriginal and/or Torres Strait Islanders " +
             "are displayed with the Aboriginal and Torres Strait Islander " +
