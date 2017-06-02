@@ -23,7 +23,4 @@ Feature: Search for alcohol counselling
         - id: 224037
           site:
             name: Alcoholics Anonymous (AA), Kings Cross
-        - id: 109701
-          site:
-            name: Alcoholics Anonymous (AA), North Sydney
         ----------------------------------
