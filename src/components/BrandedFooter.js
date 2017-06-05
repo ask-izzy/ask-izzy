@@ -7,7 +7,7 @@ import DemographicTorresStrait from "../icons/DemographicTorresStrait";
 import config from "../config";
 
 class BrandedFooter extends React.Component {
-    props: void;
+    props: {};
     state: void;
     static sampleProps = {
         default: {},

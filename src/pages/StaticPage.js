@@ -3,6 +3,7 @@
 
 import React from "react";
 import AppBar from "../components/AppBar";
+import BrandedFooter from "../components/BrandedFooter";
 
 export default class StaticPage extends React.Component {
     props: {
@@ -33,6 +34,8 @@ export default class StaticPage extends React.Component {
                 <div className="body">
                     {this.props.children}
                 </div>
+                <br />
+                <BrandedFooter />
             </div>
         );
     }

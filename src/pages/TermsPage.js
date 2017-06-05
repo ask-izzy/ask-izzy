@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 import React from "react";
-import components from "../components";
+import StaticPage from "./StaticPage";
 
 class TermsPage extends React.Component {
     props: {};
@@ -13,16 +13,8 @@ class TermsPage extends React.Component {
     };
 
     render() {
-        let back = () => this.context.router.goBack();
-
         return (
-            <div className="TermsPage">
-                <components.AppBar
-                    title="Terms of use"
-                    onBackTouchTap={back}
-                />
-
-                <div className="body">
+            <StaticPage title="Terms of use">
                     <p><strong>Ask Izzy Application Terms of Use</strong></p>
                     <p>Thank you for accessing the Ask Izzy application (<strong>App</strong>), which is operated by Infoxchange (ABN 74 457 506 140). Access to, and use of, this App is provided strictly subject to these terms of use. By using this App, you accept these terms of use and our <a href="https://www.infoxchange.net.au/privacy-policy">Privacy Policy</a> (collectively the <strong>App Terms</strong>). Please only use this App if you have read, understood and agree to these terms of use.</p>
                     <p><strong>Use of the App</strong></p>
@@ -49,8 +41,7 @@ class TermsPage extends React.Component {
                     <p>All information and content available on the App and its “look and feel”, including but not limited to trademarks, logos, service marks, text, graphics, logos, button icons, images, audio clips, data compilations and software, and the compilation and organisation of them (collectively, the <strong>App Content</strong>) is the property of Infoxchange, our affiliates, partners or licensors, and is protected by Australian and international laws, including laws governing copyrights and trademarks. All rights not expressly granted are reserved.</p>
                     <p><strong>Governing law</strong></p>
                     <p>These App Terms shall be governed by the laws of Victoria, Australia and the parties submit to the non-exclusive jurisdiction of the courts of Victoria, Australia.</p>
-                </div>
-            </div>
+            </StaticPage>
         );
     }
 
