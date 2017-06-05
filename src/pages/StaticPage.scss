@@ -1,14 +1,24 @@
-.StaticPage .body {
-    @media ($tablet) {
-        max-width: 90%;
-        margin: auto;
-    }
+.StaticPage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 
-    h3 {
-        line-height: 3em;
-    }
+    .body {
+        flex: 1;
+        /* FIXME: autoprefixer should be taking care of this */
+        -ms-flex-preferred-size: auto;  /* Needed for IE10 */
 
-    .acknowledgement {
-        font-style: italic;
+        @media ($tablet) {
+            max-width: 90%;
+            margin: auto;
+        }
+
+        h3 {
+            line-height: 3em;
+        }
+
+        .acknowledgement {
+            font-style: italic;
+        }
     }
 }

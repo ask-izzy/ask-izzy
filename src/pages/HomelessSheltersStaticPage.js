@@ -94,6 +94,7 @@ export default class HomelessSheltersStaticPage extends React.Component {
                 <Link to="/housing">
                   Find a specialist homeless service
                 </Link> who can help you access shelter near you or browse:
+                </p>
 
                 <ul>
                     {
@@ -108,7 +109,6 @@ export default class HomelessSheltersStaticPage extends React.Component {
                     <li><Link to="/search/housing/Perth-WA">housing in Perth</Link></li>
                     <li><Link to="/search/housing/Sydney-NSW">housing in Sydney</Link></li>
                 </ul>
-                </p>
             </StaticPage>
         );
     }
