@@ -19,8 +19,8 @@ Feature: Search for alcohol counselling
             name: Manly Community Centre
         - id: 105653
           site:
-            name: Manly Drug Education & Counselling Centre (MDECC)
-        - id: 224037
+            name: Sydney Drug Education & Counselling Centre (SDECC)
+        - id: 1851455
           site:
-            name: Alcoholics Anonymous (AA), Kings Cross
+            name: Life Supports, Manly (Central Avenue)
         ----------------------------------
