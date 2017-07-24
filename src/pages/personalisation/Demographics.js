@@ -15,7 +15,7 @@ export default class Demographics extends BaseMultiQuestion {
             "Escaping family violence": append("(family violence)"),
             // n.b. see also storage.getUserIsIndigenous when changing
             "Aboriginal and/or Torres Strait Islander":
-                append("(Aboriginals & Torres Strait Islanders)"),
+                append({indigenous_classification: "mainstream"}),
             "Family with children": append("families -srs"),
             "Couples": append("couples"),
             "Mental or emotional difficulties": append("(mental health)"),
