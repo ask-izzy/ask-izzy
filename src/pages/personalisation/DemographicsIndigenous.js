@@ -19,7 +19,7 @@ export default class DemographicsIndigenous extends BaseQuestion {
         answers: {
             // n.b. see also storage.getUserIsIndigenous when changing
             "Yes - show these first where possible":
-                append({indigenous_classification: "culturallysafeforaboriginal"}),
+                append({indigenous_classification: "aboriginalspecific"}),
             "No - show me everything": append(""),
         },
         icons: {

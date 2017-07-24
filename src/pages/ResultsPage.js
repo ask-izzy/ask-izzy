@@ -76,7 +76,145 @@ class ResultsPage extends BaseCategoriesPage {
             return;
         }
 
-        iss.search(request)
+        if ("indigenous_classification" in request) {
+            /*
+                The order in which results must be loaded is:
+                1) indigenousespecific
+                2) culturallysafeforaboriginal
+                3) mainstreamwhocaterforaboriginal
+                4) mainstream services (non-aboriginal oriented)
+
+                The load order exhaust all relevant results on each category
+                before rendering the next one. Loading 10 results at a time
+                for a maximun of 100 results.
+            */
+            let atsi1 = Object.assign({}, request);
+            let atsi2 = Object.assign({}, request);
+            let atsi3 = Object.assign({}, request);
+            let atsi4 = Object.assign({}, request);
+
+            atsi2.indigenous_classification = 'culturallysafeforaboriginal';
+            atsi3.indigenous_classification =
+                'mainstreamwhocaterforaboriginal';
+            atsi4.indigenous_classification = 'mainstream';
+
+            let issPromises = [
+                iss.search(atsi1),
+                iss.search(atsi2),
+                iss.search(atsi3),
+                iss.search(atsi4),
+            ];
+
+            Promise.all(issPromises).then(data => {
+                let atsiObjects = [];
+                let atsiMeta = Object.assign({}, data[1].meta);
+                let availableCount = 0;
+                let totalCount = 0;
+                let nextExists = false;
+                let countLimit = 10;
+
+                for (let iter = 0; iter < data.length; iter++) {
+                    // store data and do one category at a time.
+
+                    availableCount += data[iter].meta.available_count;
+                    totalCount += data[iter].meta.total_count;
+
+                    // Create a list with the first 10 objects to display and
+                    // keep track of the index of leftover objects for
+                    // render more.
+                    if (atsiObjects.length < 10) {
+                        if (data[iter].meta.next) {
+                            // If meta.next exists then this atsi response
+                            // has 10 results already and more to follow.
+                            // We first check if we can add the whole result
+                            // set or only a subset. The index metric will
+                            // point to the last accessed value.
+                            nextExists = true;
+                            if (atsiObjects.length == 0) {
+                                atsiObjects =
+                                    [...atsiObjects, ...data[iter].objects];
+
+                                // We want index to be a property that only
+                                // exists inside the context of atsi results
+                                // display
+                                // flow:disable
+                                data[iter].meta.index = 10;
+                            } else {
+                                let availableSpaces = 10 - atsiObjects.length;
+
+                                for (let pos = 0; pos < availableSpaces &&
+                                     pos < data[iter].meta.available_count;
+                                     pos++) {
+                                    atsiObjects.push(data[iter].objects[pos]);
+                                    // flow:disable
+                                    data[iter].meta.index = pos;
+                                }
+                            }
+                        } else {
+                            // If copying the whole result set adds up to less
+                            // than 10 objects add them all. Else copy a
+                            // subset and include an index metric pointing to
+                            // the last accessed spot, this will later be used
+                            // to load more results.
+                            if ((data[iter].meta.available_count +
+                                    atsiObjects.length) <= 10) {
+                                atsiObjects =
+                                    [...atsiObjects, ...data[iter].objects];
+                            } else {
+                                let availableSpaces = 10 - atsiObjects.length;
+
+                                for (let pos = 0; pos < availableSpaces &&
+                                     pos < data[iter].meta.available_count;
+                                     pos++) {
+                                    atsiObjects.push(data[iter].objects[pos]);
+                                    // flow:disable
+                                    data[iter].meta.index = pos;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Set meta fields for atsi data used for render of
+                // load more and loading result header.
+                atsiMeta.available_count = availableCount;
+                atsiMeta.total_count = totalCount;
+                if (nextExists) {
+                    atsiMeta.next = nextExists;
+                }
+
+                this.setState((prevState, props) => {
+                    return {
+                        objects: atsiObjects,
+                        meta: atsiMeta,
+                        atsiRequestData: data,
+                        countLimit: countLimit,
+                        error: undefined,
+                    };
+                });
+            })
+            .catch(response => {
+                try {
+                    console.error(response, response.stack);
+
+                    let data = JSON.parse(response.body);
+
+                    this.setState({
+                        error: data.error_message,
+                        statusCode: response.statusCode,
+                    });
+                } catch (error) {
+                    console.log(error)
+                    this.setState({
+                        error: `An error occurred. Please try again.`,
+                        statusCode: response.statusCode,
+                    });
+                }
+
+            });
+
+        } else {
+            iss.search(request)
             .then(data => {
                 this.setState({
                     meta: data.meta,
@@ -104,12 +242,18 @@ class ResultsPage extends BaseCategoriesPage {
                 }
 
             });
+        }
     }
+
 
     get loading(): boolean {
         return !(this.state.meta || this.state.error);
     }
 
+    // Can't reduce an async function into sub async functions easily.
+    // Aiming to preserve simplicity we increase the Cyclomatic Complexity
+    // threshold on ESLint to its default of 20.
+    /*eslint complexity: ["error", 20]*/
     async loadMore(): Promise<void> {
         sendEvent({
             event: "LoadMoreSearchResults",
@@ -118,38 +262,162 @@ class ResultsPage extends BaseCategoriesPage {
             location: storage.getLocation(),
         });
 
-        if (!(this.state.meta && this.state.meta.next)) {
+        if (!(this.state.meta && this.state.meta.next) ||
+                this.state.countLimit == 100) {
             return;
         }
 
-        let next = this.state.meta.next;
-        let data;
+        if (this.state.atsiRequestData) {
+            // Itearate through all atsi request data and first load
+            // un-rendered results starting from index before requesting
+            // additional objects via meta.next query string.
 
-        /* reenable the search spinner */
-        this.setState({meta: null});
+            let data = this.state.atsiRequestData;
+            let atsiObjects = this.state.objects;
 
-        try {
-            data = await iss.requestObjects(next);
+            // Flow lint complains this property is not declared even when
+            // the property is declared on state constructor.
+            // flow:disable
+            let countLimit = this.state.countLimit + 10;
+            let atsiMeta = this.state.meta;
 
-            this.setState({
-                meta: data.meta,
-                objects: data.objects,
-                error: undefined,
+            // We are only interested in the truth value for next to use
+            // it as display logic for the "load more" buttom.
+            atsiMeta.next = '';
+
+            for (let iter = 0; iter < data.length; iter++) {
+                if (atsiObjects && atsiObjects.length < countLimit) {
+                    // First render already loaded results if we have any.
+                    if (data[iter].meta.index &&
+                        data[iter].meta.index !=
+                            data[iter].objects.length - 1) {
+
+                        // Start loading from the next value after the last
+                        // element accessed during the previous render cycle.
+                        let index = data[iter].meta.index + 1;
+                        let availableSpaces = countLimit - atsiObjects.length;
+
+                        for (let pos = 0;
+                                pos < availableSpaces &&
+                                index < data[iter].objects.length; pos++) {
+
+                            atsiObjects.push(data[iter].objects[index]);
+                            data[iter].meta.index = index++;
+                        }
+                    }
+
+                    // If index has caped with all available loaded objects,
+                    // request more objects and load if space is available.
+                    //this.LoadNextAtsiObjects(
+                    //    data, atsiObjects, countLimit, atsiMeta, iter);
+                    if (data[iter].meta.next &&
+                        data[iter].meta.index ==
+                            data[iter].objects.length - 1) {
+
+                        let next = data[iter].meta.next;
+                        let newData;
+
+                        // Load new  data.
+
+                        // Reenable the search spinner by clearing state.meta
+                        // and re-enabling.
+                        this.setState({meta: null});
+
+                        try {
+                            // Get index data before overriding with new
+                            // results.
+                            let index = data[iter].meta.index;
+
+                            data[iter] = await iss.requestObjects(next);
+                            data[iter].meta.index = index;
+
+                            // Start loading from the next value
+                            // after the last element accessed
+                            // during the previous render cycle.
+                            index = data[iter].meta.index + 1;
+                            let availableSpaces =
+                                countLimit - atsiObjects.length;
+
+                            for (let pos = 0;
+                                    pos < availableSpaces &&
+                                    index < data[iter].objects.length;
+                                    pos++) {
+
+                                atsiObjects.push(data[iter].objects[index]);
+                                data[iter].meta.index = index++;
+                            }
+
+                            // Allow the load more buttom to be available if
+                            // we have meta.next or if we have undendered
+                            // loaded services.
+                            if (data[iter].meta.next ||
+                                data[iter].meta.index !=
+                                    data[iter].objects.length) {
+                                atsiMeta.next = 'true';
+                            }
+                            this.setState({
+                                error: undefined,
+                            });
+
+                        } catch (response) {
+                            try {
+                                newData = JSON.parse(response.body);
+                                this.setState({
+                                    error: newData.error_message,
+                                });
+                            } catch (error) {
+                                this.setState({
+                                    error: `An error occurred (${
+                                        response.statusCode || error
+                                    })`,
+                                    statusCode: response.statusCode,
+                                });
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            // Reset component state after processing additions.
+            this.setState((prevState, props) => {
+                return {
+                    objects: atsiObjects,
+                    meta: atsiMeta,
+                    atsiRequestData: data,
+                    countLimit: countLimit,
+                };
             });
 
-        } catch (response) {
+        } else {
+            let next = this.state.meta.next;
+            let data;
+
+            /* reenable the search spinner */
+            this.setState({meta: null});
+
             try {
-                data = JSON.parse(response.body);
+                data = await iss.requestObjects(next);
                 this.setState({
-                    error: data.error_message,
+                    meta: data.meta,
+                    objects: data.objects,
+                    error: undefined,
                 });
-            } catch (error) {
-                this.setState({
-                    error: `An error occurred (${
-                        response.statusCode || error
-                    })`,
-                    statusCode: response.statusCode,
-                });
+
+            } catch (response) {
+                try {
+                    data = JSON.parse(response.body);
+                    this.setState({
+                        error: data.error_message,
+                    });
+                } catch (error) {
+                    this.setState({
+                        error: `An error occurred (${
+                            response.statusCode || error
+                        })`,
+                        statusCode: response.statusCode,
+                    });
+                }
             }
         }
     }
