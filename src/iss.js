@@ -46,6 +46,7 @@ export type searchRequest = {
     catchment?: "prefer"|"true"|"false",
     is_bulk_billing?: boolean,
     healthcare_card_holders?: boolean,
+    indigenous_classification?: string,
 
     limit?: number,
     key?: string,
@@ -393,6 +394,7 @@ export class Service {
     endpoints: Array<endpoint>;
     funding_body: string;
     healthcare_card_holders: boolean;
+    indigenous_classification: string;
     id: number;
     ineligibility_info: string;
     intake_info: string;

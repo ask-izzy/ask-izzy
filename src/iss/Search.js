@@ -126,6 +126,11 @@ export class AppendToSearch extends Search {
                 this.search.healthcare_card_holders;
         }
 
+        if (this.search.indigenous_classification) {
+            search.indigenous_classification =
+                this.search.indigenous_classification;
+        }
+
         if (this.search.minimum_should_match) {
             search.minimum_should_match =
                 this.search.minimum_should_match;

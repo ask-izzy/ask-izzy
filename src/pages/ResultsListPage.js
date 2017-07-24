@@ -10,6 +10,7 @@ import ViewOnMapButton from "../components/ViewOnMapButton";
 import sendEvent from "../google-tag-manager";
 import storage from "../storage";
 import type { Service } from "../iss";
+import DemographicsIndigenous from "../pages/personalisation/DemographicsIndigenous"
 
 type SearchOrCategory = {search: string} | {title: string};
 
@@ -50,6 +51,32 @@ class ResultsListPage extends React.Component {
 
     render() {
         const path = this.props.location.pathname.replace(/\/?$/, "/map");
+
+        var is_indigenous_search = false;
+        var more_than_100_results = false;
+
+        if (this.props.meta && this.props.meta.available_count >= 100) {
+            more_than_100_results = true;
+        }
+        if (this.props.personalisationComponents) {
+            const personalisations = [
+                DemographicsIndigenous,
+            ].filter((component) =>
+                this.props.personalisationComponents.includes(component)
+            )
+            if (personalisations.length >= 1 && storage.getUserIsIndigenous() == true)
+                is_indigenous_search = true;
+        }
+
+        if (is_indigenous_search==true && more_than_100_results==false)
+        {
+            console.log("handle special case!");
+            return (
+                <div className="ResultsListPage">
+                    special case!
+                </div>
+            );
+        }
 
         return (
             <div className="ResultsListPage">
