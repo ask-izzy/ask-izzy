@@ -244,8 +244,9 @@ start a server on `localhost:5000`.
 ### Adding new icons
 
  * Add your icon to https://github.com/ask-izzy/designs
+ * Clone the designs repo. e.g. `git clone https://github.com/ask-izzy/designs.git ~/git/designs`
  * The Iconify script requires babel, install by running `sudo npm install -g babel-cli`
- * Run `.script/iconify <path_to_cloned_designs_repo>`
+ * Run `.script/iconify <path_to_cloned_designs_repo>`. e.g. `./script/iconify ~/git/designs/icons/*.svg`
 
 The icons/index.js file will be updated, and a new js file for the icon will be generated in /icons.
 
