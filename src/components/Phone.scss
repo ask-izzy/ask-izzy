@@ -35,4 +35,21 @@
         }
 
     }
+
+    .CrisisContactButton {
+        border: 1px solid $brand-highlight;
+        background-color: $brand-highlight;
+
+        .Icon {
+            outline: $white;
+
+            path {
+                fill: $white;
+            }
+        }
+
+        .Contact-text {
+            color: $white;
+        }
+    }
 }
