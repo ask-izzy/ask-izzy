@@ -47,6 +47,7 @@ import SvgIconLogotype from "./Logotype.js";
 import SvgIconMap from "./Map.js";
 import SvgIconMental from "./Mental.js";
 import SvgIconMoney from "./Money.js";
+import SvgIconPhoneSolid from "./PhoneSolid.js";
 import SvgIconPhone from "./Phone.js";
 import SvgIconPrint from "./Print.js";
 import SvgIconRadioSelected from "./RadioSelected.js";
@@ -107,6 +108,7 @@ export default {
     Map: SvgIconMap,
     Mental: SvgIconMental,
     Money: SvgIconMoney,
+    PhoneSolid: SvgIconPhoneSolid,
     Phone: SvgIconPhone,
     Print: SvgIconPrint,
     RadioSelected: SvgIconRadioSelected,
