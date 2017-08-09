@@ -29,6 +29,7 @@ import SvgIconDemographicTorresStrait from "./DemographicTorresStrait.js";
 import SvgIconDemographicVeteran from "./DemographicVeteran.js";
 import SvgIconEmail from "./Email.js";
 import SvgIconEntertainment from "./Entertainment.js";
+import SvgIconExternalLink from "./ExternalLink.js";
 import SvgIconFacilaties from "./Facilaties.js";
 import SvgIconFeedback from "./Feedback.js";
 import SvgIconFood from "./Food.js";
@@ -88,6 +89,7 @@ export default {
     DemographicVeteran: SvgIconDemographicVeteran,
     Email: SvgIconEmail,
     Entertainment: SvgIconEntertainment,
+    ExternalLink: SvgIconExternalLink,
     Facilaties: SvgIconFacilaties,
     Feedback: SvgIconFeedback,
     Food: SvgIconFood,
