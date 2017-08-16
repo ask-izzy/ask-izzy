@@ -7,7 +7,7 @@ $brand-pane-alt-dark:  #4d13af;
 $brand-pane-alt-light: #3ed1d3; /* N.B. not enough contrast with white */
 $brand-pane-alt-light-translucent: rgba(62, 209, 211, 0.3);
 
-$brand-highlight:      #e52d4f;
+$brand-highlight:      #b30000;
 
 $brand-spacer:         #c2c1be;
 
@@ -15,7 +15,7 @@ $brand-text-dark:      #363e43;
 $brand-text-mid:       $brand-bg-mid;
 $brand-text-light:     #d1d1d1;
 
-$brand-error:          #e52d4f;
+$brand-error:          $brand-highlight;
 
 $icon-fg-color: $brand-pane-alt-dark;
 $interactive-icon: $brand-text-mid;

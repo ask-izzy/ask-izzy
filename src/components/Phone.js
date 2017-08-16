@@ -29,6 +29,15 @@ class Phone extends React.Component {
     }
 
     render() {
+        let contactButtonClassName = "ContactButton";
+        let phonebutton = <icons.Phone />;
+
+        if (this.props.crisis) {
+            // Customise crisis services with style branding
+            contactButtonClassName += " CrisisContactButton"
+            phonebutton = <icons.PhoneSolid />;
+        }
+
         return (
             <div className="Contact Phone">
                 <span className="kind">
@@ -37,13 +46,13 @@ class Phone extends React.Component {
                 </span>
                 <a
                     href={this.href}
-                    className="ContactButton"
+                    className={contactButtonClassName}
                     onClick={this.recordClick.bind(this)}
                 >
                     <div
                         className="Contact-text"
                     >
-                        <icons.Phone />
+                        {phonebutton}
                         <span className="number value">
                             {this.props.number}
                         </span>

@@ -57,42 +57,4 @@
             }
         }
     }
-
-    .ContactButton {
-
-        max-width: 320px;
-        margin-bottom: 5px;
-
-        border: 1px solid $brand-pane-alt-dark;
-        @media print {
-            border: 0;
-        }
-
-        border-radius: 3px;
-
-        font-size: 18px;
-        text-align: center;
-        text-decoration: none;
-
-        .Icon {
-            display: inline-block;
-            position: absolute;
-            top: -2px;
-            left: 50%;
-            margin-left: -110px;
-
-            path {
-                fill: $brand-pane-alt-dark;
-                @media print {
-                    fill: $black;
-                }
-            }
-        }
-
-        .Contact-text {
-            padding: 0;
-        }
-
-    }
-
 }
