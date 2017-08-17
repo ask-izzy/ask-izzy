@@ -50,16 +50,6 @@ files.forEach((path) => {
         }
         );
 
-    let allowColoring = "allow-override-color"
-    if ([
-        "DemographicAboriginal",
-        "DemographicAtsi",
-        "DemographicTorresStrait",
-        "DemographicLgbtiq",
-    ].includes(className)){
-        allowColoring = "disallow-override-color";
-    }
-
     writeFileSync(outFile, `${fileHeader}
 import React from "react";
 import classnames from "classnames";
@@ -74,7 +64,7 @@ export default class SvgIcon${className} extends React.Component {
         const {className, ...rest} = this.props;
         const classes = classnames(
             "${className}Icon",
-            "${allowColoring}",
+            "disallow-override-color",
             "Icon",
             "SvgIcon",
             className
