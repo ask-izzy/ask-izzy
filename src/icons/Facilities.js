@@ -5,7 +5,7 @@
 import React from "react";
 import classnames from "classnames";
 
-export default class SvgIconFacilaties extends React.Component {
+export default class SvgIconFacilities extends React.Component {
     props: {
         className?: string,
     };
@@ -14,7 +14,7 @@ export default class SvgIconFacilaties extends React.Component {
     render() {
         const {className, ...rest} = this.props;
         const classes = classnames(
-            "FacilatiesIcon",
+            "FacilitiesIcon",
             "disallow-override-color",
             "Icon",
             "SvgIcon",
