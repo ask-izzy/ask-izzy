@@ -15,7 +15,7 @@ export default class SvgIconFacilaties extends React.Component {
         const {className, ...rest} = this.props;
         const classes = classnames(
             "FacilatiesIcon",
-            "allow-override-color",
+            "disallow-override-color",
             "Icon",
             "SvgIcon",
             className

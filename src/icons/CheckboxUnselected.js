@@ -15,7 +15,7 @@ export default class SvgIconCheckboxUnselected extends React.Component {
         const {className, ...rest} = this.props;
         const classes = classnames(
             "CheckboxUnselectedIcon",
-            "allow-override-color",
+            "disallow-override-color",
             "Icon",
             "SvgIcon",
             className

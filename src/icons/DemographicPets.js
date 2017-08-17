@@ -15,7 +15,7 @@ export default class SvgIconDemographicPets extends React.Component {
         const {className, ...rest} = this.props;
         const classes = classnames(
             "DemographicPetsIcon",
-            "allow-override-color",
+            "disallow-override-color",
             "Icon",
             "SvgIcon",
             className
