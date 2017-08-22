@@ -26,10 +26,6 @@ feature-test:
     stage: test
     script: make feature-test
 
-search-test:
-    stage: test
-    script: make search-test
-
 # Deploy to test environment when tagged
 deploy:
     stage: deploy
