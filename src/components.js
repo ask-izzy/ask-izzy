@@ -35,6 +35,7 @@ import LinkListItem from "./components/LinkListItem";
 import ListItem from "./components/ListItem";
 import LogoWithShadow from "./components/LogoWithShadow";
 import NavBar from "./components/NavBar";
+import Ndis from "./components/Ndis";
 import OpeningTimes from "./components/OpeningTimes";
 import Phone from "./components/Phone";
 import ResultListItem from "./components/ResultListItem";
@@ -82,6 +83,7 @@ export default {
     ListItem: ListItem,
     LogoWithShadow: LogoWithShadow,
     NavBar: NavBar,
+    Ndis: Ndis,
     OpeningTimes: OpeningTimes,
     Phone: Phone,
     ResultListItem: ResultListItem,
