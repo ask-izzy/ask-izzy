@@ -13,6 +13,7 @@ import DebugServiceRecord from "./DebugServiceRecord";
 import LinkListItem from "./LinkListItem";
 import Accessibility from "./Accessibility";
 import OpeningTimes from "./OpeningTimes";
+import Ndis from "./Ndis";
 import TransportTime from "./TransportTime";
 import sendEvent from "../google-tag-manager";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
@@ -94,7 +95,15 @@ class ResultListItem extends React.Component {
                 <h2 className="name">
                     {object.name}
                 </h2>
-                <div className="site_name">{object.site.name}</div>
+                <div className="site_name">
+                    {object.site.name}
+                    <Ndis
+                        className="ndis"
+                        compact={true}
+                        object={object}
+                    />
+                </div>
+
                 <OpeningTimes
                     className="opening_hours"
                     object={object.open}
