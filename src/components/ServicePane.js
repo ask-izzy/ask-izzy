@@ -16,6 +16,7 @@ import DebugServiceRecord from "./DebugServiceRecord";
 import Eligibility from "./Eligibility";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
+import Ndis from "./Ndis";
 import Spacer from "./Spacer";
 import LinkListItem from "./LinkListItem";
 import BoxedText from "./BoxedText";
@@ -111,7 +112,12 @@ export default class ServicePane extends React.Component {
                         />
                         <Accessibility object={object} />
                         <Spacer />
-
+                        <Ndis
+                            className="ndis"
+                            compact={false}
+                            object={object}
+                            spacer={true}
+                        />
                         <GoogleMapsLink
                             className="plain-text"
                             to={object.Location()}

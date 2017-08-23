@@ -8,6 +8,7 @@ import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import Location from "../iss/Location";
 import sendEvent from "../google-tag-manager";
+import Spacer from "./Spacer";
 
 class TransportTime extends React.Component {
     props: {
@@ -135,7 +136,7 @@ class TransportTime extends React.Component {
     renderDivider() {
         if (!this.props.compact) {
             return (
-                <hr/>
+                <Spacer />
             );
         } else {
             return null;
