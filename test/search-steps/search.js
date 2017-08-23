@@ -243,9 +243,9 @@ module.exports = (function() {
         .then("my results for $STRING should contain\n$yaml",
             unpromisify(assertResults))
         .then("my results for $STRING would ideally contain\n$yaml",
-            unpromisify(assertNoSuchResults))
-        .then("my results for $STRING would ideally not contain\n$yaml",
             unpromisify(assertResults))
+        .then("my results for $STRING would ideally not contain\n$yaml",
+            unpromisify(assertNoSuchResults))
         .then("my results for $STRING has these services near the end\n$yaml",
             unpromisify(skipResultsCheck))
         .then("show my results for $STRING",
