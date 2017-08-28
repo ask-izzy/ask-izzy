@@ -15,7 +15,7 @@ export default class SvgIconMap extends React.Component {
         const {className, ...rest} = this.props;
         const classes = classnames(
             "MapIcon",
-            "allow-override-color",
+            "disallow-override-color",
             "Icon",
             "SvgIcon",
             className

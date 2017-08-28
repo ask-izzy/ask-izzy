@@ -15,7 +15,7 @@ export default class SvgIconHouse extends React.Component {
         const {className, ...rest} = this.props;
         const classes = classnames(
             "HouseIcon",
-            "allow-override-color",
+            "disallow-override-color",
             "Icon",
             "SvgIcon",
             className
@@ -25,7 +25,7 @@ export default class SvgIconHouse extends React.Component {
             <span
                 {...rest}
                 dangerouslySetInnerHTML={{__html: `
-                    <svg class='${classes}' version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64" enable-background="new 0 0 64 64"  xml:space="preserve"><g id="house"><g id="XMLID_626_"><g id="XMLID_631_"><path fill="none" stroke="#231F20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"  d=" M43.362,58"></path></g><g id="XMLID_630_"><path fill="none" stroke="#231F20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"  d=" M25.251,58"></path></g><g id="XMLID_628_"><g id="XMLID_629_"><path fill="#231F20"  d="M51.864,59.5H38.437c-0.829,0-1.5-0.672-1.5-1.5V39.718c0-0.092-0.075-0.167-0.167-0.167h-9.851 c-0.092,0-0.167,0.075-0.167,0.167V58c0,0.828-0.671,1.5-1.5,1.5H11.824c-0.785,0-1.438-0.605-1.496-1.389L8.432,32.693H3.292 c-0.622,0-1.178-0.383-1.401-0.964c-0.222-0.58-0.063-1.237,0.399-1.652L30.842,4.44c0.569-0.512,1.435-0.512,2.004,0 l28.551,25.637c0.462,0.415,0.621,1.072,0.399,1.652c-0.223,0.581-0.779,0.964-1.401,0.964h-5.139l-1.896,25.418 C53.301,58.895,52.649,59.5,51.864,59.5z M39.937,56.5h10.535l1.896-25.418c0.058-0.783,0.71-1.389,1.496-1.389h2.616 L31.844,7.572L7.208,29.693h2.616c0.785,0,1.438,0.605,1.496,1.389L13.216,56.5h10.536V39.718c0-1.746,1.421-3.167,3.167-3.167 h9.851c1.746,0,3.167,1.421,3.167,3.167V56.5z"></path></g></g><g id="XMLID_627_"><path fill="#231F20"  d="M14.344,32.693h-4.52c-0.829,0-1.5-0.672-1.5-1.5s0.671-1.5,1.5-1.5h4.52 c0.829,0,1.5,0.672,1.5,1.5S15.172,32.693,14.344,32.693z"></path></g></g></g><g id="Layer_1"></g></svg>
+                    <svg class='${classes}' data-name="Layer 1" id="Layer_1" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><title>house</title><rect height="64" fill="none" width="64"></rect><polyline points="57.6 28.44 6.4 28.44 6.4 61.7 39.2 61.7 57.6 61.7 57.6 28.44" fill="#b0deea"></polyline><polyline points="32 2.31 2.03 28.28 2.03 28.44 5.36 28.44 6.4 28.44 6.4 24.73 57.6 27.93 57.6 28.44 58.64 28.44 61.97 28.44 32 2.31" fill="#cc6145"></polyline><polyline points="6.4 24.73 6.4 28.44 57.6 28.44 57.6 27.93 6.4 24.73" fill="#bc5b42"></polyline></svg>
                 `}}
             />
         );

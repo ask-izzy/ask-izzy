@@ -156,11 +156,8 @@ class TransportTime extends React.Component {
     renderDirections() {
         if (!this.props.compact) {
             return (
-                <div>
-                    <span
-                        className="getDirections"
-                        onClick={this.recordClick.bind(this)}
-                    >
+                <div className="getDirections">
+                    <span onClick={this.recordClick.bind(this)}>
                         Get directions in Google Maps
                     </span>
                     <span>

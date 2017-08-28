@@ -200,7 +200,7 @@ const categories:Array<Category> = [
     new Category({
         name: "Facilities",
         byline: "Toilets, libraries etc",
-        icon: icons.Facilaties,
+        icon: icons.Facilities,
         search: {
             q: "public facilities" +
                 " -(coordinating bodies) -(hire of facilities)" +

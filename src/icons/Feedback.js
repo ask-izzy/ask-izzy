@@ -15,7 +15,7 @@ export default class SvgIconFeedback extends React.Component {
         const {className, ...rest} = this.props;
         const classes = classnames(
             "FeedbackIcon",
-            "allow-override-color",
+            "disallow-override-color",
             "Icon",
             "SvgIcon",
             className

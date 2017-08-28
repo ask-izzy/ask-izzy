@@ -129,7 +129,7 @@ class BaseMultiQuestion extends BaseQuestion {
 
             return (
                 <Icon
-                    className="ColoredIcon small icon-fg-color"
+                    className="ColoredIcon big icon-fg-color"
                 />
             );
         }

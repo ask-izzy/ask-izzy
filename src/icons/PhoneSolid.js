@@ -15,7 +15,7 @@ export default class SvgIconPhoneSolid extends React.Component {
         const {className, ...rest} = this.props;
         const classes = classnames(
             "PhoneSolidIcon",
-            "allow-override-color",
+            "disallow-override-color",
             "Icon",
             "SvgIcon",
             className

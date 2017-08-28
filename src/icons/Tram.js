@@ -15,7 +15,7 @@ export default class SvgIconTram extends React.Component {
         const {className, ...rest} = this.props;
         const classes = classnames(
             "TramIcon",
-            "allow-override-color",
+            "disallow-override-color",
             "Icon",
             "SvgIcon",
             className
