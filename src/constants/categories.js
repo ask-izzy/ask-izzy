@@ -199,7 +199,7 @@ const categories:Array<Category> = [
     }),
     new Category({
         name: "Facilities",
-        byline: "Toilets, libraries etc",
+        byline: "Toilets",
         icon: icons.Facilities,
         search: {
             q: "public facilities" +
@@ -212,7 +212,7 @@ const categories:Array<Category> = [
     }),
     new Category({
         name: "Something to do",
-        byline: "Near you",
+        byline: "Libraries, Community Hubs etc",
         icon: icons.Entertainment,
         search: {
             q: "recreation libraries pools -(coordinating bodies) " +
