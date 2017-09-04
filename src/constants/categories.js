@@ -215,8 +215,8 @@ const categories:Array<Category> = [
         byline: "Near you",
         icon: icons.Entertainment,
         search: {
-            q: "recreation -(coordinating bodies) -physiology " +
-                "-permit -hire -grants " +
+            q: "recreation libraries pools -(coordinating bodies) " +
+                "-physiology -permit -hire -grants " +
                 "-(sports medicine) -(sports physician) " +
                 "-(sports psychology)",
         },
