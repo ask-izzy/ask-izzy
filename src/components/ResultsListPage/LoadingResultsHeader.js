@@ -3,7 +3,6 @@
 import React from "react";
 import {Link} from "react-router";
 
-import LogoWithShadow from "../LogoWithShadow";
 import HeaderBar from "../HeaderBar";
 import type {Category} from "../../constants/categories";
 
@@ -28,10 +27,8 @@ const InfoMessage = (category: ?Object) =>
 
 const LogoHeader = ({children}: Object) =>
     <div className="LogoHeader">
-        <LogoWithShadow />
         {children}
     </div>;
-
 const trailingSlash = (path: string): string =>
     `${path}${path.endsWith("/") ? "" : "/"}`;
 
@@ -67,6 +64,14 @@ class LoadingResultsHeader extends React.Component {
             title,
             meta,
         } = this.props;
+        let bannerName = "";
+
+        try {
+            // flow:disable
+            bannerName = this.props.params.page;
+        } catch (err) {
+            // continue with no banner
+        }
 
         if (loading) {
             return (
@@ -75,10 +80,10 @@ class LoadingResultsHeader extends React.Component {
                     primaryText="Searching..."
                     secondaryText={
                         <div>
-                            <LogoWithShadow />
                             Loading results...
                         </div>
                     }
+                    bannerName={bannerName}
                 />
             );
         }
@@ -103,6 +108,7 @@ class LoadingResultsHeader extends React.Component {
                                 <PersonalisationLink {...location} />
                             </div>
                         }
+                        bannerName={bannerName}
                     />
                 );
             }
@@ -117,6 +123,7 @@ class LoadingResultsHeader extends React.Component {
                             <HomeLink />
                         </div>
                     }
+                    bannerName={bannerName}
                 />
             );
         }
@@ -154,6 +161,7 @@ class LoadingResultsHeader extends React.Component {
                         <PersonalisationLink {...location} />
                     </div>
                 }
+                bannerName={bannerName}
             />
         );
     }
