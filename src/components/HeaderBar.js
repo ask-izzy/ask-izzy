@@ -7,22 +7,40 @@ class HeaderBar extends React.Component {
         primaryText: any,
         secondaryText?: any,
         children?: any,
+        bannerName: any,
     };
     state: void;
 
     static sampleProps = {default: {
         primaryText: "Primary Text",
         secondaryText: "Secondary Text",
+        bannerName: "food",
     }};
 
     render() {
+        // Search banner is the default
+        let bannerClassName = "HeaderBarBanner search";
+        let headerBarClassName = "HeaderBar search";
+
+        if (this.props.bannerName) {
+            bannerClassName = "HeaderBarBanner " + this.props.bannerName;
+            headerBarClassName = "HeaderBar " + this.props.bannerName;
+        }
+
         return (
-            <div className="HeaderBar">
-                <div className="primary">
-                    {this.props.primaryText}
+            <div className={headerBarClassName}>
+                <div className={bannerClassName}>
+
+                    <div className="BlackBanner">
+                    </div>
                 </div>
-                {this.renderSecondaryText()}
-                {this.props.children}
+                <div className="HeaderBarContent ">
+                    <div className="primary">
+                        {this.props.primaryText}
+                    </div>
+                    {this.renderSecondaryText()}
+                    {this.props.children}
+                </div>
             </div>
         );
     }
