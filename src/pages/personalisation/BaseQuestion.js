@@ -196,6 +196,7 @@ class BaseQuestion extends React.Component {
                         this.props.byline
                     }
                     bannerName={bannerName}
+                    alternateBackgroundColor={false}
                 />
                 <div className="List">
                 {this.answers.map((answer, index) =>

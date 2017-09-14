@@ -85,6 +85,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                             </div>
                         }
                         bannerName={bannerName}
+                        alternateBackgroundColor={true}
                     />
 
                     <div className="List">

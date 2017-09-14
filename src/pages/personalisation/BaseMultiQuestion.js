@@ -181,6 +181,7 @@ class BaseMultiQuestion extends BaseQuestion {
                         </div>
                     }
                     bannerName={bannerName}
+                    alternateBackgroundColor={false}
                 />
                 <div className="List">
                     {this.answers.map((answer, index) =>
