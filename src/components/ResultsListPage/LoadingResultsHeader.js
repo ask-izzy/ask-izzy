@@ -84,6 +84,7 @@ class LoadingResultsHeader extends React.Component {
                         </div>
                     }
                     bannerName={bannerName}
+                    alternateBackgroundColor={false}
                 />
             );
         }
@@ -109,6 +110,7 @@ class LoadingResultsHeader extends React.Component {
                             </div>
                         }
                         bannerName={bannerName}
+                        alternateBackgroundColor={false}
                     />
                 );
             }
@@ -124,6 +126,7 @@ class LoadingResultsHeader extends React.Component {
                         </div>
                     }
                     bannerName={bannerName}
+                    alternateBackgroundColor={false}
                 />
             );
         }
@@ -162,6 +165,7 @@ class LoadingResultsHeader extends React.Component {
                     </div>
                 }
                 bannerName={bannerName}
+                alternateBackgroundColor={true}
             />
         );
     }
