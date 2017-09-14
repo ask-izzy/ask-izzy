@@ -2,6 +2,10 @@
     position: relative;
     height: 256px;
 
+    &.alternate-bg-color {
+        background-color: $brand-bg-light;
+    }
+
     @media only screen and (max-width: 375px) {
         max-height: 196px;
     }

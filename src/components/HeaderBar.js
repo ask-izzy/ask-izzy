@@ -8,6 +8,7 @@ class HeaderBar extends React.Component {
         secondaryText?: any,
         children?: any,
         bannerName: any,
+        alternateBackgroundColor: bool,
     };
     state: void;
 
@@ -15,6 +16,7 @@ class HeaderBar extends React.Component {
         primaryText: "Primary Text",
         secondaryText: "Secondary Text",
         bannerName: "food",
+        alternateBackgroundColor: false,
     }};
 
     render() {
@@ -25,6 +27,10 @@ class HeaderBar extends React.Component {
         if (this.props.bannerName) {
             bannerClassName = "HeaderBarBanner " + this.props.bannerName;
             headerBarClassName = "HeaderBar " + this.props.bannerName;
+        }
+
+        if (this.props.alternateBackgroundColor) {
+            headerBarClassName += " alternate-bg-color" ;
         }
 
         return (
