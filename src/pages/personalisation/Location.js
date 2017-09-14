@@ -196,18 +196,26 @@ class Location extends React.Component {
     }
 
     render() {
+        let bannerName = "";
+
+        try {
+            bannerName = this.context.controller.props.params.page;
+        } catch (err) {
+            // continue with no banner
+        }
+
         return (
             <div className="Location">
                 <components.HeaderBar
                     primaryText={
                         <div>
                             Where are you?
-                            <components.LogoWithShadow />
                         </div>
                     }
                     secondaryText={
                         "This will let me find the services closest to you"
                     }
+                    bannerName={bannerName}
                 />
                 <div className="List">{
                     /* if the browser supports geolocation */

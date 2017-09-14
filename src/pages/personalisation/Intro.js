@@ -41,12 +41,19 @@ class Intro extends React.Component {
     }
 
     render() {
+        let bannerName = "";
+
+        try {
+            bannerName = this.context.controller.props.params.page;
+        } catch (err) {
+            // continue with no banner
+        }
+
         return (
             <div>
                 <components.HeaderBar
                     primaryText={
                         <div>
-                            <components.LogoWithShadow />
                             To help me find the right services
                             I'll ask you a few questions
                         </div>
@@ -56,6 +63,7 @@ class Intro extends React.Component {
                             All of your answers are private and anonymous.
                         </div>
                     }
+                    bannerName={bannerName}
                 />
                 {this.renderDoneButton()}
             </div>
