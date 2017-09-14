@@ -47,6 +47,7 @@ class HomePage extends React.Component {
                     <HeaderBar
                         primaryText=""
                         bannerName="homepage"
+                        alternateBackgroundColor={false}
                     >
                         <form
                             className="search"
