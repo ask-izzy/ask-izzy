@@ -92,18 +92,18 @@
         support-counselling technology;
         @each $category in $categories {
             &.#{$category} {
-                background: url("/static/images/banners/#{$category}.png") center top;
+                background: url("/static/images/banners/#{$category}.png") center center;
                 background-size: cover;
             }
         }
 
         &.homepage {
-            background: url("/static/images/banners/homepage.png") center top;
+            background: url("/static/images/banners/homepage.png") center center;
             background-size: cover;
         }
 
         &.search {
-            background: url("/static/images/banners/homepage.png") center top;
+            background: url("/static/images/banners/homepage.png") center center;
             background-size: cover;
         }
 
