@@ -140,29 +140,34 @@ export default class ServicePane extends React.Component {
                     {this.renderSiblings()}
                 </div>
 
-                <a
-                    className="suggestChange"
-                    onClick={this.recordSuggestChange.bind(this)}
-                    href={
-                        "mailto:database@infoxchange.org" +
-                        "?subject=" +
-                        encodeURIComponent(`Ask Izzy changes: ${object.id}`) +
-                        "&body=" +
-                        encodeURIComponent(
-                            `Contact name:
+                <div className="feedback">
+                    <h4>Your feedback</h4>
+                    <p>If information needs updating, or if something is not occurring as expected,&nbsp;
+                        <a
+                            className="suggestChange"
+                            onClick={this.recordSuggestChange.bind(this)}
+                            href={
+                                "mailto:support@askizzy.org.au" +
+                                "?subject=" +
+                                encodeURIComponent(`Your Ask Izzy feedback: ${object.id}`) +
+                                "&body=" +
+                                encodeURIComponent(
+                                    `Contact name:
 
-                            Contact number:
+                                    Contact number:
 
-                            Contact email:
+                                    Contact email:
 
-                            Details of change:
+                                    Details of change:
 
-                            `.replace(/^ +/gm, "")
-                        )
-                    }
-                >
-                    Report an error
-                </a>
+                                    `.replace(/^ +/gm, "")
+                                )
+                            }
+                        >
+                            let us know
+                        </a>
+                    </p>
+                </div>
                 <DebugServiceRecord object={object} />
             </div>
         );
