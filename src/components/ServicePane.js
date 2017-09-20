@@ -142,14 +142,16 @@ export default class ServicePane extends React.Component {
 
                 <div className="feedback">
                     <h4>Your feedback</h4>
-                    <p>If information needs updating, or if something is not occurring as expected,&nbsp;
+                    <p>If information needs updating, or if something is not
+                     occurring as expected,&nbsp;
                         <a
                             className="suggestChange"
                             onClick={this.recordSuggestChange.bind(this)}
                             href={
                                 "mailto:support@askizzy.org.au" +
                                 "?subject=" +
-                                encodeURIComponent(`Your Ask Izzy feedback: ${object.id}`) +
+                                encodeURIComponent(
+                                `Your Ask Izzy feedback: ${object.id}`) +
                                 "&body=" +
                                 encodeURIComponent(
                                     `Contact name:
@@ -165,7 +167,7 @@ export default class ServicePane extends React.Component {
                             }
                         >
                             let us know
-                        </a>
+                        </a>.
                     </p>
                 </div>
                 <DebugServiceRecord object={object} />
