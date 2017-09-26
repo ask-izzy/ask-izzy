@@ -81,10 +81,29 @@
         margin: 0;
         opacity: 1;
         overflow: hidden;
-        clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+
+        &::after {
+            position: absolute;
+            bottom: 0%;
+            left: 0%;
+            border-top: 3.5vw solid transparent;
+            border-right: 100vw solid $white;
+            content: "";
+        }
+
+        &.alternate-fg-color::after {
+            border-right: 100vw solid $brand-bg-light;
+        }
 
         &.homepage {
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            &::after {
+                position: absolute;
+                bottom: 0%;
+                left: 0%;
+                border-top: 3.5vw solid transparent;
+                border-right: 100vw solid $white;
+                content: "";
+            }
         }
         $categories: advocacy centrelink drugs-alcohol everyday-things
         facilities finding-work food health housing legal

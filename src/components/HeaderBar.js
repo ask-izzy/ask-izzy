@@ -30,7 +30,7 @@ class HeaderBar extends React.Component {
         }
 
         if (this.props.alternateBackgroundColor) {
-            headerBarClassName += " alternate-bg-color" ;
+            bannerClassName += " alternate-fg-color" ;
         }
 
         return (
