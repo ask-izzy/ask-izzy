@@ -26,6 +26,10 @@ feature-test:
     stage: test
     script: make feature-test
 
+personalisation-test:
+    stage: test
+    script: make personalisation-test
+
 # Deploy to test environment when tagged
 deploy:
     stage: deploy

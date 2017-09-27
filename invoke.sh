@@ -21,6 +21,14 @@ case "$1" in
         exec ./script/feature-test
         ;;
 
+    personalisation-test)
+        shift 1
+
+        echo "ISS server: $ISS_URL"
+        exec ./script/personalisation-test
+        ;;
+
+
     search-test)
         shift 1
 
