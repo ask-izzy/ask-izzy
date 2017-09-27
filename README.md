@@ -218,6 +218,7 @@ All tests live in the `test` toplevel directory.
 
 Unit tests live in `test/unit` and are invoked from `test/unit.js`. They use `mocha`.
 BDD features live in `test/features` with step definitions in `test/steps` invoked from `test/yadda.js`. They use `yadda`.
+Personalisation features live in `test/personalisation` with step definitions in `test/steps` invoked from `test/personlisation.js`. They use `yadda`.
 Search features live in `test/search` with step definitions in `test/search-steps` invoked from `test/search.js`. They use `yadda`.
 
 ### Forklift / docker
@@ -269,6 +270,7 @@ Running the tests:
 
     ./script/unit-test
     ./script/feature-test
+    ./script/personalisation-test
     ./script/search-test
 
 Pass `SELENIUM_BROWSER=firefox|phantomjs|chrome` to choose a 
