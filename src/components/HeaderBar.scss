@@ -126,21 +126,11 @@
         &.homepage {
             background: url("/static/images/banners/homepage.png") center center;
             background-size: cover;
-
-            @media only screen and (max-width: 400px) {
-                background: url("/static/images/banners/homepage.png") right top;
-                background-size: 200%;
-            }
         }
 
         &.search {
             background: url("/static/images/banners/homepage.png") center center;
             background-size: cover;
-
-            @media only screen and (max-width: 400px) {
-                background: url("/static/images/banners/homepage.png") right top;
-                background-size: 200%;
-            }
         }
 
         &.atsi {
