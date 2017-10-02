@@ -22,11 +22,15 @@ class HeaderBar extends React.Component {
     render() {
         // Search banner is the default
         let bannerClassName = "HeaderBarBanner search";
+        let bannerAltText = "";
         let headerBarClassName = "HeaderBar search";
 
         if (this.props.bannerName) {
             bannerClassName = "HeaderBarBanner " + this.props.bannerName;
             headerBarClassName = "HeaderBar " + this.props.bannerName;
+        }
+        if (this.props.bannerName === "homepage") {
+            bannerAltText = "AskIzzy";
         }
 
         if (this.props.alternateBackgroundColor) {
@@ -35,12 +39,14 @@ class HeaderBar extends React.Component {
 
         return (
             <div className={headerBarClassName}>
-                <div className={bannerClassName}>
-
-                    <div className="BlackBanner">
-                    </div>
+                <div className={bannerClassName}
+                    alt={bannerAltText}
+                >
+                    <div className="BlackBanner"
+                        alt=""
+                    />
                 </div>
-                <div className="HeaderBarContent ">
+                <div className="HeaderBarContent">
                     <div className="primary">
                         {this.props.primaryText}
                     </div>
