@@ -1,23 +1,34 @@
 
 .HomePage {
-    .HeaderBar {
-        text-align: center;
 
-        @media ($tablet) {
-            text-align: left;
-        }
+    .HeaderBar {
+        text-align: left;
+
 
         .primary {
-            @media ($tablet) {
-                padding-top: 20px;
-                float: left;
-            }
-
-            padding-top: 12px;
+            height: 0;
+            padding-top: 0;
+            font-size: 20px;
+            text-align: center;
         }
 
         .secondary {
             display: none;
+        }
+
+        .homepage-logo {
+            display: block;
+            width: 250px;
+            margin-top: 10px;
+            margin-right: auto;
+            margin-left: auto;
+            padding-bottom: 20px;
+
+            @media only screen and (max-width: 375px) {
+                width: 180px;
+                margin-top: -10px;
+                padding-bottom: 10px;
+            }
         }
     }
 
@@ -27,10 +38,6 @@
         color: $white;
         text-align: center;
 
-        @media ($tablet) {
-            text-align: left;
-        }
-
         .logo {
             width: auto;
             padding-top: 2px;
@@ -38,7 +45,6 @@
             @media ($tablet) {
                 display: inline-block;
                 padding-left: 20px;
-                text-align: left;
             }
         }
 
@@ -70,15 +76,12 @@
     }
 
     .search {
-        position: relative;
-        width: 100%;
+        width: 90%;
+        margin: 0 auto;
+        padding-right: 15px;
         padding-bottom: 15px;
+        padding-left: 15px;
 
-        @media ($tablet) {
-            width: 60%;
-            padding-top: 15px;
-            float: right;
-        }
 
         .searchWrapper {
             display: flex;

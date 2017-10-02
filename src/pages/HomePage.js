@@ -5,7 +5,6 @@ import React from "react";
 import HeaderBar from "../components/HeaderBar";
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
-import icons from "../icons";
 import storage from "../storage";
 
 
@@ -40,24 +39,27 @@ class HomePage extends React.Component {
     }
 
     render() {
+        let logo = "/static/images/askizzy-logo.png";
+
         return (
             <div className="HomePage">
                 <div className="header">
-                    <div className="branding-container">
-                        <div className="logo">
-                            <icons.Logotype
-                                role="img"
-                                aria-label="Ask Izzy"
-                            />
-                        </div>
-                    </div>
                     <HeaderBar
-                        primaryText="What do you need?"
+                        primaryText=""
+                        bannerName="homepage"
+                        alternateBackgroundColor={false}
                     >
                         <form
                             className="search"
                             onSubmit={this.onSearchSubmit.bind(this)}
                         >
+                            <img
+                                src={logo}
+                                className="homepage-logo"
+                            />
+                            <div className="primary">
+                                What do you need?
+                            </div>
                             <div className="searchWrapper">
                                 <input
                                     ref="search"

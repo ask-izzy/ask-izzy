@@ -12,12 +12,10 @@ export default class DemographicsIndigenous extends BaseQuestion {
     static defaultProps = {
         name: "sub-indigenous",
         question:
-            "Do you want to see Aboriginal & Torres Strait Islander " +
+            "Would you like Aboriginal & Torres Strait Islander " +
             "specific services?",
         byline:
-            "Services for both Aboriginal and/or Torres Strait Islanders " +
-            "are displayed with the Aboriginal and Torres Strait Islander " +
-            "flags.",
+            "",
         answers: {
             // n.b. see also storage.getUserIsIndigenous when changing
             "Yes - show these first where possible":

@@ -53,6 +53,13 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         const Subpage = this.currentComponent;
         const backMessage = Subpage ? "Answers" : this.title;
         const title = Subpage ? Subpage.title : "Answers";
+        let bannerName = "";
+
+        try {
+            bannerName = this.category.key;
+        } catch (err) {
+            // continue with no banner
+        }
 
         return (
             <div className="PersonalisationPage">
@@ -74,10 +81,11 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                     <components.HeaderBar
                         primaryText={
                             <div>
-                                <components.LogoWithShadow />
                                 Change your answers here
                             </div>
                         }
+                        bannerName={bannerName}
+                        alternateBackgroundColor={true}
                     />
 
                     <div className="List">

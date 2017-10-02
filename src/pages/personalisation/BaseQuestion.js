@@ -7,7 +7,6 @@ import _ from "underscore";
 
 import Personalisation from "../../mixins/Personalisation";
 import HeaderBar from "../../components/HeaderBar";
-import LogoWithShadow from "../../components/LogoWithShadow";
 import InputListItem from "../../components/InputListItem";
 import FlatButton from "../../components/FlatButton";
 
@@ -177,19 +176,27 @@ class BaseQuestion extends React.Component {
 
     render(): React$Element<*> {
         const selected = this.selected;
+        let bannerName = "";
+
+        try {
+            bannerName = this.context.controller.props.params.page;
+        } catch (err) {
+            // continue with no banner
+        }
 
         return (
             <div>
                 <HeaderBar
                     primaryText={
                         <div>
-                            <LogoWithShadow />
                             {this.props.question}
                         </div>
                     }
                     secondaryText={
                         this.props.byline
                     }
+                    bannerName={bannerName}
+                    alternateBackgroundColor={false}
                 />
                 <div className="List">
                 {this.answers.map((answer, index) =>

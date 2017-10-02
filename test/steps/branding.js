@@ -42,7 +42,11 @@ async function seeTheBrandingHeader(): Promise<void> {
         "//*[@class='branding-container']"
     );
 
-    await assert.svgIsVisible(this.driver, "Ask Izzy", container);
+    await assert.textIsVisible(
+        this.driver,
+        "What do you need?",
+        container
+    );
 }
 
 async function seeTheSearchBar(): Promise<void> {

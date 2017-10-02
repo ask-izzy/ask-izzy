@@ -9,7 +9,6 @@ import ReactDOM from "react-dom";
 import BaseQuestion from "./BaseQuestion";
 import InputListItem from "../../components/InputListItem";
 import HeaderBar from "../../components/HeaderBar";
-import LogoWithShadow from "../../components/LogoWithShadow";
 import FlatButton from "../../components/FlatButton";
 import FloatFromBottom from "../../components/FloatFromBottom";
 
@@ -158,6 +157,13 @@ class BaseMultiQuestion extends BaseQuestion {
 
     render() {
         let selected = this.selected;
+        let bannerName = "";
+
+        try {
+            bannerName = this.context.controller.props.params.page;
+        } catch (err) {
+            // continue with no banner
+        }
 
         return (
             <div
@@ -171,10 +177,11 @@ class BaseMultiQuestion extends BaseQuestion {
                 <HeaderBar
                     primaryText={
                         <div>
-                            <LogoWithShadow />
                             {this.props.question}
                         </div>
                     }
+                    bannerName={bannerName}
+                    alternateBackgroundColor={false}
                 />
                 <div className="List">
                     {this.answers.map((answer, index) =>

@@ -1,53 +1,155 @@
 .HeaderBar {
-    @include clearfix;
+    position: relative;
+    height: 256px;
 
-    min-height: 70px;
-
-    padding-right: 20px;
-    padding-left: 20px;
-
-    background-color: $brand-pane-alt-light;
-    color: $brand-text-dark;
-
-    // The default focus style has an outline
-    // the same color as this background
-    :focus {
-        outline: 1px dashed $brand-bg-dark;
+    &.alternate-bg-color {
+        background-color: $brand-bg-light;
     }
 
-    .primary {
-        min-height: 1em;
-        padding-top: 15px;
-        padding-bottom: 15px;
-
-        font-size: 22px;
-        font-weight: 500;
+    @media only screen and (max-width: 375px) {
+        max-height: 196px;
     }
 
-    .secondary {
-        min-height: 1em;
-        padding-bottom: 20px;
-
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 1.4;
-
-        .clickable {
-            color: $white;
-            font-weight: 400;
+    &.homepage {
+        height: 270px;
+        @media only screen and (max-width: 375px) {
+            max-height: 190px;
         }
     }
 
-    .LogoWithShadow {
-        float: right;
+
+    .HeaderBarContent {
+        @include clearfix;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        color: $white;
+
+        // The default focus style has an outline
+        // the same color as this background
+        :focus {
+            outline: 1px dashed $brand-bg-dark;
+        }
+
+        .primary {
+            max-width: 780px;
+            min-height: 1em;
+            padding-top: 15px;
+            padding-right: 20px;
+            padding-bottom: 15px;
+            padding-left: 20px;
+
+            font-size: 22px;
+            font-weight: 500;
+            text-shadow: $text-shadow;
+        }
+
+        .secondary {
+            max-width: 780px;
+            min-height: 1em;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            padding-left: 20px;
+
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.4;
+            text-shadow: $text-shadow;
+
+            .clickable {
+                color: $white;
+                font-weight: 400;
+            }
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+
+            & + p {
+                margin-top: 15px;
+            }
+        }
     }
 
-    p {
+    .HeaderBarBanner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         margin: 0;
-        padding: 0;
+        opacity: 1;
+        overflow: hidden;
 
-        & + p {
-            margin-top: 15px;
+        &::after {
+            position: absolute;
+            bottom: 0%;
+            left: 0%;
+            border-top: 3.5vw solid transparent;
+            border-right: 100vw solid $white;
+            content: "";
+        }
+
+        &.alternate-fg-color::after {
+            border-right: 100vw solid $brand-bg-light;
+        }
+
+        &.homepage {
+            &::after {
+                position: absolute;
+                bottom: 0%;
+                left: 0%;
+                border-top: 3.5vw solid transparent;
+                border-right: 100vw solid $white;
+                content: "";
+            }
+        }
+        $categories: advocacy centrelink drugs-alcohol everyday-things
+        facilities finding-work food health housing legal
+        life-skills-education money-help something-to-do
+        support-counselling technology;
+        @each $category in $categories {
+            &.#{$category} {
+                background: url("/static/images/banners/#{$category}.png") center center;
+                background-size: cover;
+
+                @media only screen and (max-width: 400px) {
+                    background: url("/static/images/banners/#{$category}.png") left top;
+                    background-size: 200%;
+                }
+            }
+        }
+
+        &.homepage {
+            background: url("/static/images/banners/homepage.png") center center;
+            background-size: cover;
+        }
+
+        &.search {
+            background: url("/static/images/banners/homepage.png") center center;
+            background-size: cover;
+        }
+
+        &.atsi {
+            background: url("/static/images/banners/atsi.png") center center;
+            background-size: cover;
+
+            @media only screen and (max-width: 400px) {
+                background: url("/static/images/banners/atsi.png") left top;
+                background-size: 200%;
+            }
+        }
+
+        .BlackBanner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: $black-banner-rgba;
         }
     }
 }
