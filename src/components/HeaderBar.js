@@ -40,7 +40,7 @@ class HeaderBar extends React.Component {
                     <div className="BlackBanner">
                     </div>
                 </div>
-                <div className="HeaderBarContent ">
+                <div className="HeaderBarContent">
                     <div className="primary">
                         {this.props.primaryText}
                     </div>
