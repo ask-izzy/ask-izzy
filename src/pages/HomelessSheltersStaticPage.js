@@ -8,7 +8,10 @@ import StaticPage from "./StaticPage";
 export default class HomelessSheltersStaticPage extends React.Component {
     render() {
         return (
-            <StaticPage title="Homeless Shelters">
+            <StaticPage
+                title="Homeless Shelters"
+                bannerName="centrelink"
+            >
                 <h2>Homeless Shelters</h2>
                 <p>
                 If there are significant issues impacting your life, such as legal, family,

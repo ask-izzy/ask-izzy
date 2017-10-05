@@ -8,7 +8,10 @@ import StaticPage from "./StaticPage";
 export default class HomelessLegalStaticPage extends React.Component {
     render() {
         return (
-            <StaticPage title="Homeless Legal">
+            <StaticPage
+                title="Homeless Legal"
+                bannerName="legal"
+            >
                 <h1>Homeless legal services</h1>
                 <p>
                     There are many free or low-cost legal services available for people experiencing, or at risk of, homelessness.

@@ -8,7 +8,10 @@ import StaticPage from "./StaticPage";
 export default class FoodBanksStaticPage extends React.Component {
     render() {
         return (
-            <StaticPage title="Food Banks">
+            <StaticPage
+                title="Food Banks"
+                bannerName="food"
+            >
                 <h1>Food banks</h1>
                 <p>If you are unable to buy groceries because of lack of income, an unexpected life event or large expense you can visit a food bank to get what you need. </p>
                 <p>
