@@ -5,13 +5,10 @@
 
     .body {
         flex: 1;
+        max-width: 90%;
+        margin: auto;
         /* FIXME: autoprefixer should be taking care of this */
         -ms-flex-preferred-size: auto;  /* Needed for IE10 */
-
-        @media ($tablet) {
-            max-width: 90%;
-            margin: auto;
-        }
 
         h3 {
             line-height: 3em;
