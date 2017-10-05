@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import DemographicDisability from "../icons/DemographicDisability";
+import icons from "../icons";
 import type { Service } from "../iss";
 
 class Accessibility extends React.Component {
@@ -19,7 +19,7 @@ class Accessibility extends React.Component {
         if (issAccessibility === "fullaccess") {
             return (
                 <div className="Accessibility">
-                    <DemographicDisability
+                    <icons.Accessibility
                         className="ColoredIcon brand-text-dark"
                     />
                     {accessibilityMapping[issAccessibility]}
