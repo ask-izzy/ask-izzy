@@ -1,6 +1,6 @@
 .HeaderBar {
     position: relative;
-    height: 256px;
+    height: 160px;
 
     &.alternate-bg-color {
         background-color: $brand-bg-light;
@@ -13,7 +13,7 @@
     &.homepage {
         height: 270px;
         @media only screen and (max-width: 375px) {
-            max-height: 190px;
+            max-height: 204px;
         }
     }
 
