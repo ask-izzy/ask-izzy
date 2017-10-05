@@ -8,7 +8,10 @@ import StaticPage from "./StaticPage";
 export default class HomelessHealthStaticPage extends React.Component {
     render() {
         return (
-            <StaticPage title="Homeless Health">
+            <StaticPage
+                title="Homeless Health"
+                bannerName="health"
+            >
                 <h1>Homeless health care</h1>
                 <p>
                     If you are facing the prospect of homelessness

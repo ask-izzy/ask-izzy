@@ -7,7 +7,7 @@
 
         .primary {
             height: 0;
-            padding-top: 0;
+            padding-top: 5px;
             font-size: 20px;
             text-align: center;
         }
@@ -25,7 +25,7 @@
             padding-bottom: 20px;
 
             @media only screen and (max-width: 375px) {
-                width: 180px;
+                width: 230px;
                 margin-top: -10px;
                 padding-bottom: 10px;
             }

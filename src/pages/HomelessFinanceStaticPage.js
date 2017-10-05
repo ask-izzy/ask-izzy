@@ -8,7 +8,10 @@ import StaticPage from "./StaticPage";
 export default class HomelessFinanceStaticPage extends React.Component {
     render() {
         return (
-            <StaticPage title="Homeless Finance">
+            <StaticPage
+                title="Homeless Finance"
+                bannerName="money-help"
+            >
                 <h1>Homeless financial support</h1>
                 <p>
                     If you have urgent money issues, are unable to pay your bills or need any other financial assistance, there are many homeless financial support services available to you.

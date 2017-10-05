@@ -56,6 +56,7 @@ class HomePage extends React.Component {
                             <img
                                 src={logo}
                                 className="homepage-logo"
+                                alt="AskIzzy"
                             />
                             <div className="primary">
                                 What do you need?

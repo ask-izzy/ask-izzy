@@ -14,7 +14,10 @@ class TermsPage extends React.Component {
 
     render() {
         return (
-            <StaticPage title="Terms of use">
+            <StaticPage
+                title="Terms of use"
+                bannerName="everyday-things"
+            >
                     <p><strong>Ask Izzy Application Terms of Use</strong></p>
                     <p>Thank you for accessing the Ask Izzy application (<strong>App</strong>), which is operated by Infoxchange (ABN 74 457 506 140). Access to, and use of, this App is provided strictly subject to these terms of use. By using this App, you accept these terms of use and our <a href="https://www.infoxchange.net.au/privacy-policy">Privacy Policy</a> (collectively the <strong>App Terms</strong>). Please only use this App if you have read, understood and agree to these terms of use.</p>
                     <p><strong>Use of the App</strong></p>
