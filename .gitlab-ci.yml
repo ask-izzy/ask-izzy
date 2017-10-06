@@ -26,6 +26,10 @@ feature-test:
     stage: test
     script: make feature-test
 
+maps-test:
+    stage: test
+    script: make maps-test
+
 personalisation-test:
     stage: test
     script: make personalisation-test
