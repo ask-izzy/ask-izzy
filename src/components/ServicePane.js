@@ -14,6 +14,7 @@ import Collapser from "./Collapser";
 import ContactMethods from "./ContactMethods";
 import DebugServiceRecord from "./DebugServiceRecord";
 import Eligibility from "./Eligibility";
+import Feedback from "./Feedback";
 import HeaderBar from "./HeaderBar";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
@@ -63,13 +64,6 @@ export default class ServicePane extends React.Component {
             event: "alsoAtThisLocation",
             listingName: this.props.service.name,
             crisis: this.props.service.crisis,
-        });
-    }
-
-    recordSuggestChange(): void {
-        sendEvent({
-            event: "suggestServiceChange",
-            service: this.props.service.id,
         });
     }
 
@@ -130,6 +124,8 @@ export default class ServicePane extends React.Component {
 
                         <Spacer />
                         <ContactMethods object={object} />
+                        <Spacer />
+                        <Feedback object={object} />
                     </div>
                 </BoxedText>
 
@@ -140,29 +136,6 @@ export default class ServicePane extends React.Component {
                     {this.renderSiblings()}
                 </div>
 
-                <a
-                    className="suggestChange"
-                    onClick={this.recordSuggestChange.bind(this)}
-                    href={
-                        "mailto:database@infoxchange.org" +
-                        "?subject=" +
-                        encodeURIComponent(`Ask Izzy changes: ${object.id}`) +
-                        "&body=" +
-                        encodeURIComponent(
-                            `Contact name:
-
-                            Contact number:
-
-                            Contact email:
-
-                            Details of change:
-
-                            `.replace(/^ +/gm, "")
-                        )
-                    }
-                >
-                    Report an error
-                </a>
                 <DebugServiceRecord object={object} />
             </div>
         );

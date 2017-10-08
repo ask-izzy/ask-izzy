@@ -22,6 +22,7 @@ import DebugSearch from "./components/DebugSearch";
 import DebugServiceRecord from "./components/DebugServiceRecord";
 import Eligibility from "./components/Eligibility";
 import Email from "./components/Email";
+import Feedback from "./components/Feedback";
 import FlatButton from "./components/FlatButton";
 import FloatFromBottom from "./components/FloatFromBottom";
 import GeolocationButton from "./components/GeolocationButton";
@@ -70,6 +71,7 @@ export default {
     DebugServiceRecord: DebugServiceRecord,
     Eligibility: Eligibility,
     Email: Email,
+    Feedback: Feedback,
     FlatButton: FlatButton,
     FloatFromBottom: FloatFromBottom,
     GeolocationButton: GeolocationButton,
