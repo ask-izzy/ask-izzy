@@ -138,8 +138,8 @@
             background-size: cover;
 
             @media only screen and (max-width: 400px) {
-                background: url("/static/images/banners/atsi.png") left top;
-                background-size: 200%;
+                background: url("/static/images/banners/atsi.png") center center;
+                background-size: cover;
             }
         }
 

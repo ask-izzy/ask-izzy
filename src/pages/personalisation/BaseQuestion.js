@@ -184,6 +184,10 @@ class BaseQuestion extends React.Component {
             // continue with no banner
         }
 
+        if (this.props.name === "sub-indigenous") {
+            bannerName = "atsi";
+        }
+
         return (
             <div>
                 <HeaderBar
