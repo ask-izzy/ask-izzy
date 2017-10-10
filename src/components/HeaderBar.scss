@@ -134,11 +134,11 @@
         }
 
         &.atsi {
-            background: url("/static/images/banners/atsi.jpg") center center;
+            background: url("/static/images/banners/atsi.png") center center;
             background-size: cover;
 
             @media only screen and (max-width: 400px) {
-                background: url("/static/images/banners/atsi.jpg") left top;
+                background: url("/static/images/banners/atsi.png") center center;
                 background-size: cover;
             }
         }
