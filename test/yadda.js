@@ -23,7 +23,7 @@ import mockISS from "./support/mock_iss/server";
 const driverPromise = webDriverInstance();
 let driver: Webdriver.WebDriver;
 
-new Yadda.FeatureFileSearch("./test/features").each(file => {
+let processFile = (file) => {
     featureFile(file, feature => {
         before(async function(): Promise<void> {
             driver = await driverPromise;
@@ -93,10 +93,19 @@ new Yadda.FeatureFileSearch("./test/features").each(file => {
             }
         });
     });
-});
+}
 
-after(async function(): Promise<void> {
-    if (driver) {
-        await driver.quit();
-    }
-});
+/**
+ * Setup webdriver and run feature tests given directory
+ * @param {string} directory -Directory pathname e.g. "./test/personalisation"
+ * @returns {undefined}
+ */
+export default function runTests(directory:string) {
+    new Yadda.FeatureFileSearch(directory).each(processFile);
+
+    after(async function(): Promise<void> {
+        if (driver) {
+            await driver.quit();
+        }
+    });
+}

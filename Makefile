@@ -53,6 +53,9 @@ unit-test:
 feature-test:
 	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) feature-test $(CI_TEST_FLAGS)
 
+maps-test:
+	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) maps-test $(CI_TEST_FLAGS)
+
 personalisation-test:
 	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) personalisation-test $(CI_TEST_FLAGS)
 

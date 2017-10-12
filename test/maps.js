@@ -2,4 +2,4 @@
 
 import runTests from "./yadda";
 
-runTests("./test/personalisation");
+runTests("./test/maps");

@@ -16,4 +16,4 @@ ISS_URL="http://localhost:5000/"
 
 # we want this quite high as it makes debugging the tests easier.
 INTERACTIVE_TIMEOUT="50000"
-mocha --compilers js:babel-core/register --timeout "$INTERACTIVE_TIMEOUT" test/feature.js $@
+mocha --compilers js:babel-core/register --timeout "$INTERACTIVE_TIMEOUT" test/maps.js $@
