@@ -353,20 +353,11 @@ export class Service {
 
     Indigenous(): boolean {
         /* eslint-disable max-len */
-        const words = [
-            "Aborigines?",
-            "Aboriginals?",
-            "Kooris?",
-            "Indigenous?",
-            "Torres Strait Islanders?",
-            "Murris?",
-        ].join("|");
-        const regex = new RegExp(`\\b(${words})\\b`, "i");
-        const match = this.description.match(regex) ||
-               this.name.match(regex) ||
-               this.site.name.match(regex);
+        let classification = this.indigenous_classification;
 
-        return !!match;
+        return classification == 'culturallysafeforaboriginal' ||
+               classification == 'mainstreamwhocaterforaboriginal' ||
+               classification == 'aboriginalspecific';
     }
 
     abn: string;
