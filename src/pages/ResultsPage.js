@@ -82,17 +82,29 @@ class ResultsPage extends BaseCategoriesPage {
                 1) indigenousespecific
                 2) culturallysafeforaboriginal
                 3) mainstreamwhocaterforaboriginal
-                4) mainstream services (non-aboriginal oriented)
+                4) mainstream (services non-aboriginal oriented)
 
                 The load order exhaust all relevant results on each category
                 before rendering the next one. Loading 10 results at a time
                 for a maximun of 100 results.
+
+                During a load cycle we might run on instances where we have
+                received 10 new results and we can only load some of them,
+                on this case we will load as many as we can and store the
+                the rest. During the next load cycle we will first try
+                to load saved results before requesting more.
+
+                ISS3 allows us to load more results by providing an url on
+                request.meta.next if this url is not returned then we have
+                no more results to load. Each call to this url will return
+                the prvious set plus 10 more sults (less if not available)
             */
             let atsi1 = Object.assign({}, request);
             let atsi2 = Object.assign({}, request);
             let atsi3 = Object.assign({}, request);
             let atsi4 = Object.assign({}, request);
 
+            // atsi1 is the default search for aboriginal specific.
             atsi2.indigenous_classification = 'culturallysafeforaboriginal';
             atsi3.indigenous_classification =
                 'mainstreamwhocaterforaboriginal';
@@ -134,11 +146,13 @@ class ResultsPage extends BaseCategoriesPage {
                                 atsiObjects =
                                     [...atsiObjects, ...data[iter].objects];
 
+                                // Index of the last position of the objects
+                                // array, for a lenght of 10 index is 9.
                                 // We want index to be a property that only
                                 // exists inside the context of atsi results
-                                // display
+                                // display this we disable flow.
                                 // flow:disable
-                                data[iter].meta.index = 10;
+                                data[iter].meta.index = 9;
                             } else {
                                 let availableSpaces = 10 - atsiObjects.length;
 
@@ -172,6 +186,14 @@ class ResultsPage extends BaseCategoriesPage {
                                 }
                             }
                         }
+                    }
+
+                    // If atsiobject list is full assign index of 0 for
+                    // unprocessed requests. The next load cycle will start
+                    // loading from this position.
+                    if (!data[iter].meta.index) {
+                        // flow:disable
+                        data[iter].meta.index = 0;
                     }
                 }
 
@@ -288,14 +310,19 @@ class ResultsPage extends BaseCategoriesPage {
             for (let iter = 0; iter < data.length; iter++) {
                 if (atsiObjects && atsiObjects.length < countLimit) {
                     // First render already loaded results if we have any.
-                    if (data[iter].meta.index &&
+                    if ((data[iter].meta.index &&
                         data[iter].meta.index !=
-                            data[iter].objects.length - 1) {
+                            data[iter].objects.length - 1) ||
+                            data[iter].meta.index == 0) {
 
                         // Start loading from the next value after the last
                         // element accessed during the previous render cycle.
-                        let index = data[iter].meta.index + 1;
+                        let index = data[iter].meta.index;
                         let availableSpaces = countLimit - atsiObjects.length;
+
+                        if (index != 0) {
+                            index++;
+                        }
 
                         for (let pos = 0;
                                 pos < availableSpaces &&
@@ -308,11 +335,10 @@ class ResultsPage extends BaseCategoriesPage {
 
                     // If index has caped with all available loaded objects,
                     // request more objects and load if space is available.
-                    //this.LoadNextAtsiObjects(
-                    //    data, atsiObjects, countLimit, atsiMeta, iter);
                     if (data[iter].meta.next &&
                         data[iter].meta.index ==
-                            data[iter].objects.length - 1) {
+                            data[iter].objects.length - 1 &&
+                            data[iter].meta.next) {
 
                         let next = data[iter].meta.next;
                         let newData;
@@ -474,7 +500,8 @@ class ResultsPage extends BaseCategoriesPage {
     }
 
     renderLoadMore() {
-        if (this.state.meta && this.state.meta.next) {
+        if (this.state.meta && this.state.meta.next &&
+            this.state.countLimit != 100) {
             return (
                 <ButtonListItem
                     className="MoreResultsButton"
