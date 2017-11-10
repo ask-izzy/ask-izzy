@@ -110,6 +110,11 @@ class ResultsPage extends BaseCategoriesPage {
                 'mainstreamwhocaterforaboriginal';
             atsi4.indigenous_classification = 'mainstream';
 
+            // Enforce catchment for atsi searches.
+            atsi1.catchment = "true";
+            atsi2.catchment = "true";
+            atsi3.catchment = "true";
+
             let issPromises = [
                 iss.search(atsi1),
                 iss.search(atsi2),
@@ -163,6 +168,12 @@ class ResultsPage extends BaseCategoriesPage {
                                     // flow:disable
                                     data[iter].meta.index = pos;
                                 }
+                                // If we loaded only the first record let the
+                                // next load cycle know.
+                                if (data[iter].meta.index == 0) {
+                                    // flow:disable
+                                    data[iter].meta.first_rendered = true;
+                                }
                             }
                         } else {
                             // If copying the whole result set adds up to less
@@ -174,8 +185,12 @@ class ResultsPage extends BaseCategoriesPage {
                                     atsiObjects.length) <= 10) {
                                 atsiObjects =
                                     [...atsiObjects, ...data[iter].objects];
+                                // flow:disable
+                                data[iter].meta.index =
+                                    data[iter].meta.available_count;
                             } else {
                                 let availableSpaces = 10 - atsiObjects.length;
+
 
                                 for (let pos = 0; pos < availableSpaces &&
                                      pos < data[iter].meta.available_count;
@@ -184,6 +199,13 @@ class ResultsPage extends BaseCategoriesPage {
                                     // flow:disable
                                     data[iter].meta.index = pos;
                                 }
+                                // If we loaded only the first record let the
+                                // next load cycle know.
+                                if (data[iter].meta.index == 0) {
+                                    // flow:disable
+                                    data[iter].meta.first_rendered = true;
+                                }
+
                             }
                         }
                     }
@@ -204,6 +226,8 @@ class ResultsPage extends BaseCategoriesPage {
                 if (nextExists) {
                     atsiMeta.next = nextExists;
                 }
+
+                console.log(data);
 
                 this.setState((prevState, props) => {
                     return {
@@ -275,7 +299,7 @@ class ResultsPage extends BaseCategoriesPage {
     // Can't reduce an async function into sub async functions easily.
     // Aiming to preserve simplicity we increase the Cyclomatic Complexity
     // threshold on ESLint to its default of 20.
-    /*eslint complexity: ["error", 20]*/
+    /*eslint complexity: ["error", 21]*/
     async loadMore(): Promise<void> {
         sendEvent({
             event: "LoadMoreSearchResults",
@@ -314,13 +338,15 @@ class ResultsPage extends BaseCategoriesPage {
                         data[iter].meta.index !=
                             data[iter].objects.length - 1) ||
                             data[iter].meta.index == 0) {
-
                         // Start loading from the next value after the last
                         // element accessed during the previous render cycle.
                         let index = data[iter].meta.index;
                         let availableSpaces = countLimit - atsiObjects.length;
 
-                        if (index != 0) {
+                        // If loading from any other value than the very
+                        // first element of the list, start from the next
+                        // index after the last accessed.
+                        if (index != 0 || data[iter].meta.first_rendered) {
                             index++;
                         }
 
@@ -337,8 +363,7 @@ class ResultsPage extends BaseCategoriesPage {
                     // request more objects and load if space is available.
                     if (data[iter].meta.next &&
                         data[iter].meta.index ==
-                            data[iter].objects.length - 1 &&
-                            data[iter].meta.next) {
+                            data[iter].objects.length - 1) {
 
                         let next = data[iter].meta.next;
                         let newData;
@@ -374,7 +399,7 @@ class ResultsPage extends BaseCategoriesPage {
                             }
 
                             // Allow the load more buttom to be available if
-                            // we have meta.next or if we have undendered
+                            // we have meta.next or if we have unrendered
                             // loaded services.
                             if (data[iter].meta.next ||
                                 data[iter].meta.index !=
@@ -404,6 +429,8 @@ class ResultsPage extends BaseCategoriesPage {
 
                 }
             }
+
+            console.log(data);
 
             // Reset component state after processing additions.
             this.setState((prevState, props) => {
