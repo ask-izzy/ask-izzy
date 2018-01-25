@@ -10,32 +10,32 @@ import Service from "../../fixtures/factories/Service";
 describe("iss service", function() {
 
     describe("Identifying indigenous services", function() {
-        const testCases = [
-            "housing for Indigenous australians",
-            "housing for indigenous australians",
-            "Koori health program",
-            "koori health program",
-            "Aboriginal",
-            "Aboriginals",
-            "Torres Strait Islander",
-            "Torres Strait Islanders",
-        ]
 
-        testCases.forEach((str) =>
-            describe(`by the word ${str}`, function() {
-                it("finds it in the description", function() {
-                    assert(Service({description: str}).Indigenous())
-                })
-                it("finds it in the name", function() {
-                    assert(Service({name: str}).Indigenous())
-                })
-                it("finds it in the site name", function() {
-                    assert(Service({site: {name: str}}).Indigenous())
-                })
-            })
-        )
+        describe("by classification", function() {
+            it("if type is 'culturallysafeforaboriginal'", function() {
+                assert(!Service({
+                    indigenous_classification: 'culturallysafeforaboriginal',
+                }).Indigenous());
+            });
+            it("if type is 'mainstreamwhocaterforaboriginal'", function() {
+                assert(Service(
+                    {indigenous_classification:
+                        'mainstreamwhocaterforaboriginal'}).Indigenous());
+            });
+            it("if type is 'aboriginalspecific'", function() {
+                assert(Service({
+                    indigenous_classification: 'aboriginalspecific',
+                }).Indigenous());
+            });
+            it("if type is 'mainstream'", function() {
+                assert(!Service({
+                    indigenous_classification: 'mainstream',
+                }).Indigenous());
+            });
+        });
 
-    })
+
+    });
 
     describe("splitting description into sentences", function() {
         function test(input: string, output: Array<string>): Function {
