@@ -354,8 +354,9 @@ export class Service {
         if (this.indigenous_classification) {
             let classification = this.indigenous_classification;
 
-            return classification == 'mainstreamwhocaterforaboriginal' ||
-                   classification == 'aboriginalspecific';
+            return (classification ==
+                'Mainstream who cater for Aboriginal (indigenous)') ||
+                   classification == 'Aboriginal (indigenous) specific';
         }
 
         return false;
