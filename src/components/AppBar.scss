@@ -1,5 +1,7 @@
 $appbar-height: 44px;
 $appbar-text-line-height: 42px;
+$colour-red: #ff0000;
+
 
 .AppBarSpacer {
     width: 100%;
@@ -33,6 +35,15 @@ $appbar-text-line-height: 42px;
     & > .button-container {
         flex: 1;
         z-index: 2;
+    }
+
+    .button-container a {
+        color: $white;
+        font-size: 14px;
+        line-height: 44px;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
     }
 
     .title {
@@ -104,4 +115,47 @@ $appbar-text-line-height: 42px;
 
     }
 
+    .quick-exit {
+        min-width: 35%;
+        height: $appbar-height;
+        margin-left: 5px;
+        padding: 0 5px;
+        float: right;
+        background-color: lighten($colour-red, 15%);
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+    }
+
+    /* if desktop */
+    .mobile_device {
+        display: none;
+    }
+
+    /* if mobile device max width 380px */
+    @media only screen and (max-device-width: 380px) {
+        .mobile_device {display: block;}
+
+        .mobile_device img {
+            width: 24px;
+            height: 24px;
+            padding: 10px 5px 0 0;
+            float: right;
+        }
+        .desktop {display: none;}
+    }
+
+    /* if mobile device max width 480px */
+    @media only screen and (max-device-width: 480px) {
+        .mobile_device {display: block;}
+
+        .mobile_device img {
+            width: 24px;
+            height: 24px;
+            padding: 10px 5px 0 0;
+            float: right;
+        }
+
+        .desktop {display: none;}
+    }
 }

@@ -1,4 +1,7 @@
 
+$colour-red: #ff0000;
+$colour-red-dark: #dc4554;
+
 .HomePage {
 
     .HeaderBar {
@@ -30,6 +33,12 @@
                 padding-bottom: 10px;
             }
         }
+    }
+
+    .header a {
+        color: $white;
+        font-size: 15px;
+        text-decoration: none;
     }
 
     .branding-container {
@@ -128,5 +137,56 @@
             }
         }
 
+    }
+
+    .quick-exit {
+        position: fixed;
+        width: 100%;
+        max-width: 800px;
+        padding: 5px 0;
+        background-color: lighten($colour-red, 15%);
+        text-align: center;
+        z-index: 99;
+    }
+
+    .quick-exit-img {
+        position: fixed;
+        width: 100%;
+        max-width: 800px;
+        height: 20px;
+        background-color: none;
+        z-index: 99;
+    }
+
+    /* if desktop */
+    .mobile_device {
+        display: none;
+    }
+
+    /* if mobile device max width 380px */
+    @media only screen and (max-device-width: 380px) {
+        .mobile_device {display: block;}
+
+        .mobile_device img {
+            width: 24px;
+            height: 24px;
+            padding: 10px 5px 0 0;
+            float: right;
+        }
+        .desktop {display: none;}
+    }
+
+    /* if mobile device max width 480px */
+    @media only screen and (max-device-width: 480px) {
+        .mobile_device {display: block;}
+
+        .mobile_device img {
+            width: 24px;
+            height: 24px;
+            padding: 10px 5px 0 0;
+            float: right;
+        }
+
+        .desktop {display: none;}
     }
 }
