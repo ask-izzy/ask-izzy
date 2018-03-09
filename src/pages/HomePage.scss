@@ -1,6 +1,5 @@
 
-$colour-red: #ff0000;
-$colour-red-dark: #dc4554;
+$colour-red: #b30000;
 
 .HomePage {
 
@@ -144,7 +143,8 @@ $colour-red-dark: #dc4554;
         width: 100%;
         max-width: 800px;
         padding: 5px 0;
-        background-color: lighten($colour-red, 15%);
+        background-color: $colour-red;
+        font-weight: bold;
         text-align: center;
         z-index: 99;
     }

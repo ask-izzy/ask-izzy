@@ -1,6 +1,6 @@
 $appbar-height: 44px;
 $appbar-text-line-height: 42px;
-$colour-red: #ff0000;
+$colour-red: #b30000;
 
 
 .AppBarSpacer {
@@ -121,7 +121,8 @@ $colour-red: #ff0000;
         margin-left: 5px;
         padding: 0 5px;
         float: right;
-        background-color: lighten($colour-red, 15%);
+        background-color: $colour-red;
+        font-weight: bold;
         white-space: nowrap;
         overflow: hidden;
         vertical-align: middle;

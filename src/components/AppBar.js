@@ -21,10 +21,10 @@ class AppBar extends React.Component {
 
     render() {
         let redirectUri = "http://www.bom.gov.au/";
-        let tooltip = "To leave this website quickly, click the 'Quick '" +
-            " Exit button. If you are in immediate danger call 000 " +
+        let tooltip = "To leave this website quickly, click the 'Quick" +
+            " Exit' button. If you are in immediate danger call 000 " +
             "(Australian emergency line), for advice about family " +
-            "violence call 1800 Respect on 1800 737 732 (Helpline)";
+            "violence call 1800 Respect on 1800 737 732 (Helpline).";
 
         return (
             <div className="AppBarContainer">
