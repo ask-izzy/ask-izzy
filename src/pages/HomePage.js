@@ -50,25 +50,29 @@ class HomePage extends React.Component {
         return (
             <div className="HomePage">
                 <div className="header">
-                    <a className="desktop"
-                        title = {tooltip}
-                        href = {redirectUri}
-                    >
-                        <span className="quick-exit">
-                            Quick Exit X
-                        </span>
-                    </a>
+                    <div className="desktop">
+                        <a title = {tooltip}
+                            href = {redirectUri}
+                        >
+                            <span className="quick-exit-right">
+                            </span>
+                            <span className="quick-exit-left">
+                                Quick Exit X
+                            </span>
+                        </a>
+                    </div>
 
-                    <a className="mobile_device"
-                        href={redirectUri}
-                        title={tooltip}
-                    >
-                    <span className="quick-exit-img">
-                        <img src="/static/images/exitsmall.png"
-                            alt="exit"
-                        />
-                    </span>
-                    </a>
+                    <div className="mobile_device">
+                        <a href={redirectUri}
+                            title={tooltip}
+                        >
+                            <span className="quick-exit-img">
+                                <img src="/static/images/exitsmall.png"
+                                    alt="exit"
+                                />
+                            </span>
+                        </a>
+                    </div>
 
                     <HeaderBar
                         primaryText=""

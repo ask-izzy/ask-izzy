@@ -115,6 +115,8 @@ $colour-red: #b30000;
 
     }
 
+    // Quick Exit button
+
     .quick-exit {
         min-width: 35%;
         height: $appbar-height;
@@ -128,33 +130,25 @@ $colour-red: #b30000;
         vertical-align: middle;
     }
 
+
     /* if desktop */
     .mobile_device {
         display: none;
     }
 
-    /* if mobile device max width 380px */
-    @media only screen and (max-device-width: 380px) {
-        .mobile_device {display: block;}
-
-        .mobile_device img {
-            width: 24px;
-            height: 24px;
-            padding: 10px 5px 0 0;
-            float: right;
-        }
-        .desktop {display: none;}
-    }
 
     /* if mobile device max width 480px */
     @media only screen and (max-device-width: 480px) {
-        .mobile_device {display: block;}
+        .mobile_device {
+            display: block;
+            padding: 6px 5px;
+            float: right;
+        }
 
         .mobile_device img {
             width: 24px;
             height: 24px;
-            padding: 10px 5px 0 0;
-            float: right;
+            background-color: $white;
         }
 
         .desktop {display: none;}

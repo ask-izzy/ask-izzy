@@ -40,14 +40,15 @@ class AppBar extends React.Component {
                                 Quick Exit X
                             </div>
                         </a>
-                        <a className="mobile_device"
-                            href={redirectUri}
-                            title={tooltip}
-                        >
-                            <img src="/static/images/exitsmall.png"
-                                alt="exit"
-                            />
-                        </a>
+                        <div className="mobile_device">
+                            <a href={redirectUri}
+                                title={tooltip}
+                            >
+                                <img src="/static/images/exitsmall.png"
+                                    alt="exit"
+                                />
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div className="AppBarSpacer" />
