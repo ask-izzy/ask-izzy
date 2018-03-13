@@ -1,6 +1,7 @@
 $appbar-height: 44px;
 $appbar-text-line-height: 42px;
 $colour-red: #b30000;
+$colour-grey: #bfbfbf;
 
 
 .AppBarSpacer {
@@ -141,14 +142,14 @@ $colour-red: #b30000;
     @media only screen and (max-device-width: 480px) {
         .mobile_device {
             display: block;
-            padding: 6px 5px;
+            //padding: 6px 5px;
             float: right;
         }
 
         .mobile_device img {
-            width: 24px;
-            height: 24px;
-            background-color: $white;
+            width: 44px;
+            height: 44px;
+            background-color: $colour-grey;
         }
 
         .desktop {display: none;}

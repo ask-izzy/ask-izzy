@@ -1,6 +1,7 @@
 $appbar-height: 38px;
 $colour-red: #b30000;
 $brand-bg-dark: #363e43;
+$colour-grey: #bfbfbf;
 
 .HomePage {
 
@@ -186,10 +187,10 @@ $brand-bg-dark: #363e43;
         }
 
         .mobile_device img {
-            width: 24px;
-            height: 24px;
+            width: 44px;
+            height: 44px;
             float: right;
-            background-color: $white;
+            background-color: $colour-grey;
         }
 
         .desktop {display: none;}
