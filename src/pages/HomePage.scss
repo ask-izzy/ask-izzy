@@ -1,7 +1,7 @@
-$appbar-height: 38px;
+$appbar-height: 44px;
 $colour-red: #b30000;
 $brand-bg-dark: #363e43;
-$colour-grey: #bfbfbf;
+$colour-grey: #f8f9f9;
 
 .HomePage {
 
@@ -151,7 +151,7 @@ $colour-grey: #bfbfbf;
 
     .quick-exit-right {
         position: relative;
-        min-width: 80%;
+        min-width: 85%;
         height: $appbar-height;
         float: left;
         background-color: $brand-bg-dark;
@@ -159,7 +159,7 @@ $colour-grey: #bfbfbf;
 
     .quick-exit-left {
         position: relative;
-        min-width: 20%;
+        min-width: 15%;
         height: $appbar-height - 10;
         padding-top: 10px;
         float: right;
@@ -180,7 +180,7 @@ $colour-grey: #bfbfbf;
         display: none;
     }
 
-    /* if mobile device max width 480px */
+    /* mobile device (max width is 480px) */
     @media only screen and (max-device-width: 480px) {
         .mobile_device {
             display: block;

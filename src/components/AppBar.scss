@@ -1,7 +1,7 @@
 $appbar-height: 44px;
 $appbar-text-line-height: 42px;
 $colour-red: #b30000;
-$colour-grey: #bfbfbf;
+$colour-grey: #f8f9f9;
 
 
 .AppBarSpacer {
@@ -119,7 +119,7 @@ $colour-grey: #bfbfbf;
     // Quick Exit button
 
     .quick-exit {
-        min-width: 35%;
+        min-width: 29%;
         height: $appbar-height;
         margin-left: 5px;
         padding: 0 5px;
