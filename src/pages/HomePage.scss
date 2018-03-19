@@ -187,12 +187,28 @@ $colour-grey: #f8f9f9;
         }
 
         .mobile_device img {
-            width: 44px;
-            height: 44px;
+            width: 30px;
+            height: 30px;
             float: right;
-            background-color: $colour-grey;
+            background-color: $colour-red;
+    }
+            
+        .desktop {display: none;}
+    }
+
+    /* mobile device (max width is 736px) */
+    @media only screen and (max-device-width: 768px) {
+        .mobile_device {
+            display: block;
         }
 
+        .mobile_device img {
+            width: 30px;
+            height: 30px;
+            float: right;
+            background-color: $colour-red;
+        }
+   
         .desktop {display: none;}
     }
 }
