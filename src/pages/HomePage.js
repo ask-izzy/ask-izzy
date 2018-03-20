@@ -68,7 +68,7 @@ class HomePage extends React.Component {
                             title={tooltip}
                         >
                             <span className="quick-exit-img">
-                                <img src="/static/images/exit.png"
+                                <img src="/static/images/exit-large.png"
                                     alt="exit"
                                 />
                             </span>

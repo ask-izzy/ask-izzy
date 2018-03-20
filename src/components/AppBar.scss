@@ -149,7 +149,8 @@ $colour-grey: #f8f9f9;
         .mobile_device img {
             width: 44px;
             height: 44px;
-            background-color: $colour-grey;
+            float: right;
+            background-color: $colour-red;
         }
 
         .desktop {display: none;}

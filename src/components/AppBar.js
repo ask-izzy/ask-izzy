@@ -44,7 +44,7 @@ class AppBar extends React.Component {
                             <a href={redirectUri}
                                 title={tooltip}
                             >
-                                <img src="/static/images/exitsmall.png"
+                                <img src="/static/images/exit-large.png"
                                     alt="exit"
                                 />
                             </a>
