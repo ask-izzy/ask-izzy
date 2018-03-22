@@ -10,32 +10,40 @@ import Service from "../../fixtures/factories/Service";
 describe("iss service", function() {
 
     describe("Identifying indigenous services", function() {
-        const testCases = [
-            "housing for Indigenous australians",
-            "housing for indigenous australians",
-            "Koori health program",
-            "koori health program",
-            "Aboriginal",
-            "Aboriginals",
-            "Torres Strait Islander",
-            "Torres Strait Islanders",
-        ]
 
-        testCases.forEach((str) =>
-            describe(`by the word ${str}`, function() {
-                it("finds it in the description", function() {
-                    assert(Service({description: str}).Indigenous())
-                })
-                it("finds it in the name", function() {
-                    assert(Service({name: str}).Indigenous())
-                })
-                it("finds it in the site name", function() {
-                    assert(Service({site: {name: str}}).Indigenous())
-                })
-            })
-        )
+        describe("by classification", function() {
 
-    })
+            const culturalySafe =
+                'Culturally safe for Aboriginal (indigenous)';
+            const mainstreamCaterAboriginal =
+                'Mainstream who cater for Aboriginal (indigenous)'
+            const aboriginalSpecific = 'Aboriginal (indigenous) specific'
+
+            it("if type is 'Culturally safe for Aboriginal'", function() {
+                assert(!Service({
+                    indigenous_classification: culturalySafe,
+                }).Indigenous());
+            });
+            it("if type is 'Mainstream who cater Aboriginal'", function() {
+                assert(Service(
+                    {indigenous_classification:
+                        mainstreamCaterAboriginal,
+                }).Indigenous());
+            });
+            it("if type is 'Aboriginal (indigenous) specific'", function() {
+                assert(Service({
+                    indigenous_classification: aboriginalSpecific,
+                }).Indigenous());
+            });
+            it("if type is 'Mainstream'", function() {
+                assert(!Service({
+                    indigenous_classification: 'Mainstream',
+                }).Indigenous());
+            });
+        });
+
+
+    });
 
     describe("splitting description into sentences", function() {
         function test(input: string, output: Array<string>): Function {
