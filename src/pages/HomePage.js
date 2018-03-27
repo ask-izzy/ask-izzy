@@ -8,6 +8,7 @@ import NavBar from "../components/NavBar";
 import storage from "../storage";
 
 
+
 class HomePage extends React.Component {
     props: {};
     state: void;
@@ -40,15 +41,46 @@ class HomePage extends React.Component {
 
     render() {
         let logo = "/static/images/askizzy-logo.png";
+        let redirectUri = "http://www.bom.gov.au/";
+        let tooltip = "To leave this website quickly, click the 'Quick " +
+        "Exit' button. If you are in immediate danger call 000 ( " +
+        "Australian emergency line), for advice about family violence " +
+        " call 1800 Respect on 1800 737 732 (Helpline).";
 
         return (
             <div className="HomePage">
                 <div className="header">
+                    <div className="desktop">
+                        <a title = {tooltip}
+                            href = {redirectUri}
+                        >
+                            <span className="quick-exit-right">
+                            </span>
+                            <span className="quick-exit-left">
+                                Quick Exit X
+                            </span>
+                        </a>
+                    </div>
+
+                    <div className="mobile_device">
+
+                        <a href={redirectUri}
+                            title={tooltip}
+                        >
+                            <span className="quick-exit-img">
+                                <img src="/static/images/exit-large.png"
+                                    alt="exit"
+                                />
+                            </span>
+                        </a>
+                    </div>
+
                     <HeaderBar
                         primaryText=""
                         bannerName="homepage"
                         alternateBackgroundColor={false}
                     >
+
                         <form
                             className="search"
                             onSubmit={this.onSearchSubmit.bind(this)}

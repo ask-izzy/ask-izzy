@@ -1,3 +1,7 @@
+$appbar-height: 44px;
+$colour-red: #b30000;
+$brand-bg-dark: #363e43;
+$colour-grey: #f8f9f9;
 
 .HomePage {
 
@@ -30,6 +34,12 @@
                 padding-bottom: 10px;
             }
         }
+    }
+
+    .header a {
+        color: $white;
+        font-size: 15px;
+        text-decoration: none;
     }
 
     .branding-container {
@@ -128,5 +138,77 @@
             }
         }
 
+    }
+
+    // Quick Exit button 
+
+    .desktop {
+        position: fixed;
+        min-width: 800px;
+        height: $appbar-height;
+        z-index: 99;
+    }
+
+    .quick-exit-right {
+        position: relative;
+        min-width: 85%;
+        height: $appbar-height;
+        float: left;
+        background-color: $brand-bg-dark;
+    }
+
+    .quick-exit-left {
+        position: relative;
+        min-width: 15%;
+        height: $appbar-height - 10;
+        padding-top: 10px;
+        float: right;
+        background-color: $colour-red;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .quick-exit-img {
+        position: fixed;
+        width: 100%;
+        max-width: 800px;
+        z-index: 99;
+    }
+
+    /* if desktop */
+    .mobile_device {
+        display: none;
+    }
+
+    /* mobile device (max width is 480px) */
+    @media only screen and (max-device-width: 480px) {
+        .mobile_device {
+            display: block;
+        }
+
+        .mobile_device img {
+            width: 30px;
+            height: 30px;
+            float: right;
+            background-color: $colour-red;
+    }
+            
+        .desktop {display: none;}
+    }
+
+    /* mobile device (max width is 736px) */
+    @media only screen and (max-device-width: 768px) {
+        .mobile_device {
+            display: block;
+        }
+
+        .mobile_device img {
+            width: 35px;
+            height: 35px;
+            float: right;
+            background-color: $colour-red;
+        }
+   
+        .desktop {display: none;}
     }
 }

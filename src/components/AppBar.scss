@@ -1,5 +1,8 @@
 $appbar-height: 44px;
 $appbar-text-line-height: 42px;
+$colour-red: #b30000;
+$colour-grey: #f8f9f9;
+
 
 .AppBarSpacer {
     width: 100%;
@@ -33,6 +36,15 @@ $appbar-text-line-height: 42px;
     & > .button-container {
         flex: 1;
         z-index: 2;
+    }
+
+    .button-container a {
+        color: $white;
+        font-size: 14px;
+        line-height: 44px;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
     }
 
     .title {
@@ -104,4 +116,59 @@ $appbar-text-line-height: 42px;
 
     }
 
+    // Quick Exit button
+
+    .quick-exit {
+        min-width: 29%;
+        height: $appbar-height;
+        margin-left: 5px;
+        padding: 0 5px;
+        float: right;
+        background-color: $colour-red;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+    }
+
+
+    /* if desktop */
+    .mobile_device {
+        display: none;
+    }
+
+
+    /* if mobile device max width 480px */
+    @media only screen and (max-device-width: 480px) {
+        .mobile_device {
+            display: block;
+            //padding: 6px 5px;
+            float: right;
+        }
+
+        .mobile_device img {
+            width: 44px;
+            height: 44px;
+            float: right;
+            background-color: $colour-red;
+        }
+
+        .desktop {display: none;}
+    }
+
+    /* mobile device (max width is 736px) */
+    @media only screen and (max-device-width: 768px) {
+        .mobile_device {
+            display: block;
+        }
+
+        .mobile_device img {
+            width: 44px;
+            height: 44px;
+            float: right;
+            background-color: $colour-red;
+        }
+   
+        .desktop {display: none;}
+    }
 }
