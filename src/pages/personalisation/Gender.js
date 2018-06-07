@@ -16,7 +16,7 @@ export default class Gender extends BaseQuestion {
             "Male": append({
                 client_gender: ["m", "u"],
             }),
-            "Neither/Both/Something else": append({
+            "Trans and Gender Diverse (TGD)": append({
                 client_gender: ["x", "u"],
             }),
         },
