@@ -67,10 +67,10 @@ class HomePage extends React.Component {
                         <a href={redirectUri}
                             title={tooltip}
                         >
-                            <span className="quick-exit-img">
-                                <img src="/static/images/exit-large.png"
-                                    alt="exit"
-                                />
+                            <span className="qexit-txtleft left-width">
+                            </span>
+                            <span className="qexit-txtright right-width">
+                                Quick Exit
                             </span>
                         </a>
                     </div>
