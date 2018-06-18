@@ -128,7 +128,7 @@ const categories:Array<Category> = [
     }),
     new Category({
         name: "Support & counselling",
-        byline: "Relationship problems, LGBTIQA+ & gambling",
+        byline: "Relationships, gambling & LGBTIQA+",
         icon: icons.Support,
         search: {
             q: "counselling",
