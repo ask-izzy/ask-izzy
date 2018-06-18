@@ -170,9 +170,9 @@ $colour-grey: #f8f9f9;
 
     .qexit-txtleft {
         position: relative;
-        background-color: $brand-bg-dark;
         height: $appbar-height - 20;
         float: left;
+        background-color: $brand-bg-dark;
         z-index: 99;
     }
 
