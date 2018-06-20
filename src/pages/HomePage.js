@@ -63,15 +63,14 @@ class HomePage extends React.Component {
                     </div>
 
                     <div className="mobile_device">
-
                         <a href={redirectUri}
                             title={tooltip}
                         >
-                            <span className="qexit-txtleft left-width">
-                            </span>
-                            <span className="qexit-txtright right-width">
+                            <div className="qexit-txtleft">
+                            </div>
+                            <div className="qexit-txtright">
                                 Quick Exit
-                            </span>
+                            </div>
                         </a>
                     </div>
 

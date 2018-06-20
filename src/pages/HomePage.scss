@@ -168,8 +168,9 @@ $colour-grey: #f8f9f9;
         text-align: center;
     }
 
-    .qqexit-txtleft {
+    .qexit-txtleft {
         position: relative;
+        width: 70%;
         height: $appbar-height - 20;
         float: left;
         background-color: $brand-bg-dark;
@@ -177,12 +178,12 @@ $colour-grey: #f8f9f9;
     }
 
     .qexit-txtright {
-        position: fixed;
+        position: relative;
+        width: 30%;
         height: $appbar-height - 22;
         padding-top: 2px;
         float: right;
         background-color: $colour-red;
-        //font-weight: bold;
         text-align: center;
         z-index: 99;
     }
@@ -213,6 +214,9 @@ $colour-grey: #f8f9f9;
     @media only screen and (max-device-width: 320px) {
         .mobile_device {
             display: block;
+            position: fixed;
+            width: 100%;
+            z-index: 99;
         }
 
         .left-width {
@@ -230,6 +234,9 @@ $colour-grey: #f8f9f9;
     @media only screen and (min-device-width: 321px) and (max-device-width: 480px) {
         .mobile_device {
             display: block;
+            position: fixed;
+            width: 100%;
+            z-index: 99;
         }
 
         .mobile_device img {
@@ -246,6 +253,9 @@ $colour-grey: #f8f9f9;
     @media only screen and (max-device-width: 768px) {
         .mobile_device {
             display: block;
+            position: fixed;
+            width: 100%;
+            z-index: 99;
         }
 
         .mobile_device img {
