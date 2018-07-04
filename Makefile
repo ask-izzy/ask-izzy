@@ -26,7 +26,11 @@ CI_TEST_FLAGS := $(TEST_FLAGS) \
 
 build:
 	@test -z "`git status --porcelain`" || echo "WARNING: you have changes to your git repo not committed to this tag"
-	docker build -t $(REPO):$(TAG) .
+	@if [ -z "$(CI)" ]; then \
+		docker build -t $(REPO):$(TAG) .; \
+	else \
+		docker build --target test -t $(REPO):$(TAG) .; \
+	fi
 	@echo "Successfully built $(REPO):$(TAG)..."
 	@if [ -n "$(CI)" ]; then \
 		docker push $(REPO):$(TAG); \
