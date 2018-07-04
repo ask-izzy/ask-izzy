@@ -245,7 +245,7 @@ async function attachTransportTimes(
 
     if (typeof maps.travelTime == 'function') {
         let service: ?Service; // eslint-disable-line no-unused-vars
-        let travelTimes = await Timeout(1000, maps.travelTime(services
+        let travelTimes = await Timeout(3000, maps.travelTime(services
             .filter((service) => !service.Location().isConfidential())
             // flow:disable isConfidential checks location.point
             .map(({location}) => formatPoint(location.point))
