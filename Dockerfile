@@ -1,4 +1,4 @@
-FROM contyard.office.infoxchange.net.au/jessie
+FROM contyard.office.infoxchange.net.au/stretch
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV NODE_ENV production

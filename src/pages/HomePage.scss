@@ -168,6 +168,35 @@ $colour-grey: #f8f9f9;
         text-align: center;
     }
 
+    .qexit-txtleft {
+        position: relative;
+        width: 70%;
+        height: $appbar-height - 20;
+        float: left;
+        background-color: $brand-bg-dark;
+        z-index: 99;
+    }
+
+    .qexit-txtright {
+        position: relative;
+        width: 30%;
+        height: $appbar-height - 22;
+        padding-top: 2px;
+        float: right;
+        background-color: $colour-red;
+        text-align: center;
+        z-index: 99;
+    }
+
+
+    .left-width {
+        width: 75%;
+    }
+
+    .right-width {
+        min-width: 25%;
+    }
+
     .quick-exit-img {
         position: fixed;
         width: 100%;
@@ -175,15 +204,39 @@ $colour-grey: #f8f9f9;
         z-index: 99;
     }
 
+
     /* if desktop */
     .mobile_device {
         display: none;
     }
 
-    /* mobile device (max width is 480px) */
-    @media only screen and (max-device-width: 480px) {
+    /* mobile device (max width is 320px) */
+    @media only screen and (max-device-width: 320px) {
         .mobile_device {
             display: block;
+            position: fixed;
+            width: 100%;
+            z-index: 99;
+        }
+
+        .left-width {
+            width: 70%;
+          }
+
+        .right-width {
+            min-width: 30%;
+        }
+
+        .desktop {display: none;}
+    }
+
+    /* mobile device (max width is 480px) */
+    @media only screen and (min-device-width: 321px) and (max-device-width: 480px) {
+        .mobile_device {
+            display: block;
+            position: fixed;
+            width: 100%;
+            z-index: 99;
         }
 
         .mobile_device img {
@@ -191,8 +244,8 @@ $colour-grey: #f8f9f9;
             height: 30px;
             float: right;
             background-color: $colour-red;
-    }
-            
+        }
+
         .desktop {display: none;}
     }
 
@@ -200,6 +253,9 @@ $colour-grey: #f8f9f9;
     @media only screen and (max-device-width: 768px) {
         .mobile_device {
             display: block;
+            position: fixed;
+            width: 100%;
+            z-index: 99;
         }
 
         .mobile_device img {

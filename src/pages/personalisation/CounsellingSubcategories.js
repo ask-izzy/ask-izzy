@@ -11,8 +11,8 @@ export default class CounsellingSubcategories extends BaseQuestion {
         question: "What issues are you dealing with?",
         answers: {
             "Homelessness": append("housing"),
-            "Family violence": append("family violence"),
-            "Sexual identity": append("sexuality"),
+            "Scared in my relationship": append("family violence"),
+            "Sexual identity (LGBTIQA+)": append("sexuality"),
             "Family or relationships": append("family relationship"),
             "Money matters": remove("counselling")
                 .append("(money matters)"),
