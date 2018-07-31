@@ -115,7 +115,11 @@
         $categories: advocacy centrelink drugs-alcohol everyday-things
         facilities finding-work food health housing legal
         life-skills-education money-help something-to-do
+<<<<<<< HEAD
         support-counselling technology family-violence;
+=======
+        support-counselling technology domestic-family-violence-help;
+>>>>>>> Add Domestic and family violence on homepage
         @each $category in $categories {
             &.#{$category} {
                 background: url("/static/images/banners/#{$category}.png") center center;

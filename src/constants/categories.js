@@ -87,6 +87,14 @@ const categories:Array<Category> = [
         ],
     }),
     new Category({
+        name: "Domestic & family violence help",
+        byline: "Scared of partner or family member",
+        icon: icons.EscapeViolence,
+        personalisation: [
+            personalisation.Location,
+        ],
+    }),
+    new Category({
         name: "Health",
         byline: "Physical, mental, emotional",
         icon: icons.Health,
