@@ -90,6 +90,9 @@ const categories:Array<Category> = [
         name: "Domestic & family violence help",
         byline: "Scared of partner or family member",
         icon: icons.EscapeViolence,
+        search: {
+            q: "search placeholder",
+        },
         personalisation: [
             personalisation.Location,
         ],
