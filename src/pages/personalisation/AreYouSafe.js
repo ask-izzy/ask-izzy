@@ -12,7 +12,7 @@ export default class AreYouSafe extends BaseQuestion {
     static defaultProps = {
         name: "are-you-safe",
         question: "Are you safe right now?",
-        answers: {            
+        answers: {
             "No": housingCrisis(() => Location.shouldInjectAccessPoints()),
             "I'm not sure": append(""),
             "Yes": append(""),
