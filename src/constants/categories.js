@@ -95,7 +95,10 @@ const categories:Array<Category> = [
         },
         personalisation: [
             personalisation.AreYouSafe,
+<<<<<<< HEAD
             personalisation.Location,
+=======
+>>>>>>> Link to AreYouSafe after clicking violence category
         ],
     }),
     new Category({
