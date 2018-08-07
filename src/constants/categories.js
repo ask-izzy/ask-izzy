@@ -94,7 +94,7 @@ const categories:Array<Category> = [
             q: "search placeholder",
         },
         personalisation: [
-            personalisation.Location,
+            personalisation.AreYouSafe,
         ],
     }),
     new Category({
