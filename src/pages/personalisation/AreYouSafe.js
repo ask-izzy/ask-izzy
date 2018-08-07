@@ -18,6 +18,7 @@ export default class AreYouSafe extends BaseQuestion {
         name: "are-you-safe",
         question: "Are you safe right now?",
 <<<<<<< HEAD
+<<<<<<< HEAD
         byline:
             "All of your answers are private and anonymous",
         answers: {
@@ -35,6 +36,9 @@ export default class AreYouSafe extends BaseQuestion {
 
 =======
         answers: {            
+=======
+        answers: {
+>>>>>>> fix lint error
             "No": housingCrisis(() => Location.shouldInjectAccessPoints()),
             "I'm not sure": append(""),
             "Yes": append(""),
