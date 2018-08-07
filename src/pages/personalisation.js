@@ -25,6 +25,7 @@ import LifeSkillsSubcategories from "./personalisation/LifeSkillsSubcategories";
 import Location from "./personalisation/Location";
 import MoneySubcategories from "./personalisation/MoneySubcategories";
 import SleepTonight from "./personalisation/SleepTonight";
+import AreYouSafe from "./personalisation/AreYouSafe";
 
 export default {
     AddictionSubcategories: AddictionSubcategories,
@@ -48,4 +49,5 @@ export default {
     Location: Location,
     MoneySubcategories: MoneySubcategories,
     SleepTonight: SleepTonight,
+    AreYouSafe: AreYouSafe,
 };
