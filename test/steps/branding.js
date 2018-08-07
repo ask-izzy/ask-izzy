@@ -33,6 +33,11 @@ module.exports = (function() {
         .then(
             "I should see the branding footer",
             unpromisify(seeTheBrandingFooter)
+        )
+
+        .then(
+            "within the footer I should see \"$text\"",
+            unpromisify(seeTextInBrandingFooter)
         );
 
 })();
@@ -90,6 +95,18 @@ async function seeTheBrandingFooter(): Promise<void> {
     await assert.textIsVisible(
         this.driver,
         "About Ask Izzy",
+        container
+    );
+}
+
+async function seeTextInBrandingFooter(text: string): Promise<void> {
+    const container = within(
+        "//footer"
+    );
+
+    await assert.textIsVisible(
+        this.driver,
+        text,
         container
     );
 }

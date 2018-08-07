@@ -28,3 +28,8 @@ Feature: Landing page
         Advocacy
         ---------------
         And I should see the branding footer
+
+    Scenario: Interpreter service links work correctly
+        When I visit /
+        Then I should see the branding footer
+        And within the footer I should see "TIS Interpreter Hotline"
