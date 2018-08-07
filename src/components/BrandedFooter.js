@@ -19,6 +19,13 @@ class BrandedFooter extends React.Component {
         const mailLink = `mailto:${siteMail}?subject=${subject}`;
         const donateLink = "https://www.infoxchange.org/donate-ask-izzy";
 
+        let isMobile;
+        if (typeof window !== "undefined") {
+            isMobile = window.innerWidth <= 768;
+        } else {
+            isMobile = false;
+        }
+
         return (
             <footer className="branding-footer-container">
                 <div>
@@ -62,6 +69,24 @@ class BrandedFooter extends React.Component {
                             <li><a href="http://www.rea-group.com">REA Group</a></li>
                             <li><a href="http://www.newscorpaustralia.com">News Corp Australia</a></li>
                         </ul>
+                    </div>
+                </div>
+                <hr />
+                <div>
+                    <div>
+                        <a href="/service/105139-translating-interpreting-service-tis-national">
+                            TIS Interpreter Hotline
+                        </a>
+                        <br />
+                        {
+                            isMobile ? (
+                                <a href="tel:131450">
+                                    13 14 50
+                                </a>
+                            ) : (
+                                "13 14 50"
+                            )
+                        }
                     </div>
                 </div>
                 <hr />
