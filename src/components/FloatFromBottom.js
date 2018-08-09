@@ -7,17 +7,18 @@ const floatAnimationDuration = 1000;
 // Pad the container so it's obvious that there's no content past the end.
 const containerHeightPadding = 20;
 
-class FloatFromBottom extends React.Component {
-    props: {
-        includeOffsetElement?: boolean,
-        children?: any,
-        className?: string,
-    };
-    state: {
-        containerHeight: number,
-        elementScrolledOffscreen?: boolean,
-    };
+type Props = {
+    includeOffsetElement?: boolean,
+    children?: any,
+    className?: string,
+}
 
+type State = {
+    containerHeight: number,
+    elementScrolledOffscreen?: boolean,
+}
+
+class FloatFromBottom extends React.Component<Props, State> {
     constructor(props: Object) {
         super(props);
         this.state = {containerHeight: 0};
@@ -79,7 +80,7 @@ class FloatFromBottom extends React.Component {
                 >
                     {this.props.children}
                 </div>
-                {  /*
+                { /*
                     * The following makes the parent element
                     * tall enough when floating the child elements
                     * so that they don't prevent scrolling to the bottom.
@@ -95,7 +96,6 @@ class FloatFromBottom extends React.Component {
             </div>
         );
     }
-
 }
 
 export default FloatFromBottom;

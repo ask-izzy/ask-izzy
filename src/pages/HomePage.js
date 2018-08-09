@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import PropTypes from "proptypes";
 
 import HeaderBar from "../components/HeaderBar";
 import FlatButton from "../components/FlatButton";
@@ -9,12 +10,9 @@ import storage from "../storage";
 
 
 
-class HomePage extends React.Component {
-    props: {};
-    state: void;
-
+class HomePage extends React.Component<{}, void> {
     static contextTypes = {
-        router: React.PropTypes.object.isRequired,
+        router: PropTypes.object.isRequired,
     };
 
     componentDidMount(): void {
@@ -54,8 +52,7 @@ class HomePage extends React.Component {
                         <a title = {tooltip}
                             href = {redirectUri}
                         >
-                            <span className="quick-exit-right">
-                            </span>
+                            <span className="quick-exit-right" />
                             <span className="quick-exit-left">
                                 Quick Exit X
                             </span>
@@ -66,8 +63,7 @@ class HomePage extends React.Component {
                         <a href={redirectUri}
                             title={tooltip}
                         >
-                            <div className="qexit-txtleft">
-                            </div>
+                            <div className="qexit-txtleft" />
                             <div className="qexit-txtright">
                                 Quick Exit
                             </div>
@@ -116,7 +112,6 @@ class HomePage extends React.Component {
             </div>
         );
     }
-
 }
 
 export default HomePage;

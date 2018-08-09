@@ -6,14 +6,12 @@ import classnames from "classnames";
 import ListItem from "./ListItem";
 import type { ListItemProps } from "./ListItem";
 
-export default class LinkListItem extends React.Component {
-    props: ListItemProps & ({
-        to: string,
-    } | {
-        href: string,
-    });
-    state: void;
+type Props = ListItemProps & {
+    to?: string,
+    href?: string
+}
 
+export default class LinkListItem extends React.Component<Props, void> {
     static sampleProps = {
         default: {
             to: "example.com",
@@ -24,7 +22,7 @@ export default class LinkListItem extends React.Component {
     render() {
         const {
             className,
-            ...rest,
+            ...rest
         } = this.props;
         let rootElement = Link;
 

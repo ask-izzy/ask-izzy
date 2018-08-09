@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 
 import ResultListItem from "../components/ResultListItem";
 import CrisisLineItem from "../components/CrisisLineItem";
@@ -14,16 +14,13 @@ import type { Service } from "../iss";
 
 const StaticTextLine = ({object}) => React.cloneElement(object.node);
 
-const className = (elem: React$Element<any>) =>
+const className = (elem: React.Element<any>) =>
     `resultContainer resultContainer-${
         elem.type.displayName || "other"}`
 
-class ResultsList extends React.Component {
-    props: {
-        results: Array<Service>,
-    };
-    state: void;
-
+class ResultsList extends React.Component<{
+    results: Array<Service>,
+}, void> {
     crisisResults(): Array<Object> {
         return crisisResults(this.props.results);
     }
@@ -48,9 +45,9 @@ class ResultsList extends React.Component {
     }
 
     renderCrisisResult(object: Object, index: number) {
-        const elem: React$Element<any> = object.staticText ?
+        const elem: React.Element<any> = object.staticText ?
             <StaticTextLine object={object} />
-          : <CrisisLineItem object={object} />;
+            : <CrisisLineItem object={object} />;
 
         return (
             <div

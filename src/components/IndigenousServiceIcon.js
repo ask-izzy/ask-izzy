@@ -5,10 +5,11 @@ import DemographicAboriginal from "../icons/DemographicAboriginal";
 import DemographicTorresStrait from "../icons/DemographicTorresStrait";
 import type { Service } from "../iss";
 
-class IndigenousServiceIcon extends React.Component {
-    props: {object: Service};
-    state: void;
+type Props = {
+    object: Service
+}
 
+class IndigenousServiceIcon extends React.Component<Props, void> {
     render() {
         if (!this.props.object.Indigenous()) {
             return null;
@@ -25,7 +26,6 @@ class IndigenousServiceIcon extends React.Component {
             </div>
         );
     }
-
 }
 
 export default IndigenousServiceIcon;

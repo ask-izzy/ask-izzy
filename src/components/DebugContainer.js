@@ -4,13 +4,12 @@ import React from "react";
 import storage from "../storage";
 import Collapser from "./Collapser";
 
-class DebugContainer extends React.Component {
-    props: {
-        message: string,
-        children?: any,
-    };
-    state: void;
+type Props = {
+    message: string,
+    children?: any,
+}
 
+class DebugContainer extends React.Component<Props, void> {
     componentDidMount(): void {
         try {
             this.window().addEventListener("debug", () => {

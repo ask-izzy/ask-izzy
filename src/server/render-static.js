@@ -4,7 +4,7 @@ import fs from "fs";
 import { dirname } from "path";
 import url from "url";
 
-import React from "react";
+import * as React from "react";
 import ReactDOMServer from "react-dom/server";
 import { match, RouterContext } from "react-router";
 import mkdirp from "mkdirp";
@@ -27,9 +27,8 @@ function hasVersionFile(): boolean {
     }
 }
 
-const version = hasVersionFile() ?
-    fs.readFileSync("public/VERSION", "utf-8").trim()
-    : "";
+const version = hasVersionFile() &&
+    fs.readFileSync("public/VERSION", "utf-8").trim();
 
 function renderPage(uri: string, path: string): void {
     const reqUrl = url.parse(uri);
@@ -57,27 +56,27 @@ function renderPage(uri: string, path: string): void {
             // The application component is rendered to static markup
             // and sent as response.
             const html = ReactDOMServer.renderToStaticMarkup(
-              <HtmlDocument
-                  title={title}
-                  markup={markup}
-                  script={webpackStats.script}
-                  css={webpackStats.css}
-                  helmet={helmet}
-                  currentUrl={reqUrl}
-                  envPath={version ?
-                      `/static/env-${version}.js` : "/static/env.js"
-                  }
-                  requestInterceptorPath={version ?
-                      `/static/scripts/request-interceptor-${version}.js`
+                <HtmlDocument
+                    title={title}
+                    markup={markup}
+                    script={webpackStats.script}
+                    css={webpackStats.css}
+                    helmet={helmet}
+                    currentUrl={reqUrl}
+                    envPath={version ?
+                        `/static/env-${version}.js` : "/static/env.js"
+                    }
+                    requestInterceptorPath={version ?
+                        `/static/scripts/request-interceptor-${version}.js`
                         : "/static/scripts/request-interceptor.js"
-                  }
-                  siteName="Ask Izzy"
-                  description={
-                      `Ask Izzy helps people who are homeless ` +
+                    }
+                    siteName="Ask Izzy"
+                    description={
+                        `Ask Izzy helps people who are homeless ` +
                       `or at risk of becoming homeless to find` +
                       ` the services they need, right now and nearby.`
-                  }
-              />
+                    }
+                />
             );
             const doctype = "<!DOCTYPE html>";
 
@@ -126,10 +125,8 @@ function *expandRoutes(
     }
 }
 
-function renderRoute(
-    route: React$Element<*>,
-    prefix: string,
-): void {
+function renderRoute(route: React.Element<any>, prefix: string): void {
+    // flow:disable
     if (route.map) {
         route.map((route) => renderRoute(route, prefix));
         return;
@@ -149,4 +146,4 @@ function renderRoute(
 
 }
 
-renderRoute(routes, "", "");
+renderRoute(routes, "");

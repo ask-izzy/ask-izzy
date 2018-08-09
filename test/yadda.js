@@ -1,4 +1,5 @@
-/* @flow */
+/* flow:disable */
+/* eslint-disable prefer-arrow-callback */
 
 /*
  * Enable Yadda in Mocha
@@ -8,7 +9,7 @@ import 'babel-polyfill';
 import Webdriver from "selenium-webdriver";
 import Yadda from "yadda";
 import fs from "fs";
-import webDriverInstance, {cleanDriverSession} from "./support/webdriver";
+import webDriverInstance, { cleanDriverSession } from "./support/webdriver";
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
@@ -38,7 +39,7 @@ let processFile = (file) => {
 
         scenarios(feature.scenarios, scenario => {
             before(async function(): Promise<void> {
-                await cleanDriverSession(await driverPromise);
+                await cleanDriverSession(driver);
             });
 
             steps(scenario.steps, (step, done) => {
@@ -104,8 +105,6 @@ export default function runTests(directory:string) {
     new Yadda.FeatureFileSearch(directory).each(processFile);
 
     after(async function(): Promise<void> {
-        if (driver) {
-            await driver.quit();
-        }
+        await driver.quit();
     });
 }

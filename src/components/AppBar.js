@@ -5,14 +5,13 @@ import React from "react";
 import components from "../components";
 import icons from "../icons";
 
-class AppBar extends React.Component {
-    props: {
-        title: string,
-        onBackTouchTap: Function,
-        backMessage?: string,
-    };
-    state: void;
+type Props = {
+    title: string,
+    onBackTouchTap: Function,
+    backMessage?: string,
+}
 
+class AppBar extends React.Component<Props, void> {
     static sampleProps = {default: {
         title: "App bar",
         onBackTouchTap: function() {},
@@ -69,7 +68,6 @@ class AppBar extends React.Component {
             </components.IconButton>
         )
     }
-
 }
 
 export default AppBar;

@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 import _ from "underscore";
 
 import categories, { Category } from "../constants/categories";
@@ -13,16 +13,18 @@ import type {
 import Location from "./personalisation/Location";
 import storage from "../storage";
 
-class BaseCategoriesPage extends React.Component {
-    props: Object;
-    state: {
-        meta?: ?searchResultsMeta,
-        error?: any,
-        statusCode?: number,
-        objects?: Array<Service>,
-        nextDisabled?: boolean,
-        floatingContainerHeight?: number,
-    };
+type State = {
+    meta?: ?searchResultsMeta,
+    error?: any,
+    statusCode?: number,
+    objects?: Array<Service>,
+    nextDisabled?: boolean,
+    floatingContainerHeight?: number,
+    isClient?: boolean,
+    childServices?: Array<Service>
+}
+
+class BaseCategoriesPage extends React.Component<Object, State> {
     _category: Category;
 
     /**
@@ -73,7 +75,7 @@ class BaseCategoriesPage extends React.Component {
      *
      * An array of components required to personalise this category.
      */
-    get personalisationComponents(): Array<ReactClass<any>> {
+    get personalisationComponents(): Array<React.ComponentType<any>> {
         let components = [];
 
         if (this.category) {
@@ -107,7 +109,6 @@ class BaseCategoriesPage extends React.Component {
         }
 
     }
-
 }
 
 export default BaseCategoriesPage;

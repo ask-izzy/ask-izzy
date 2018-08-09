@@ -41,6 +41,7 @@ try {
     console.log(error)
 }
 
+// flow:disable
 if (persistentStore.privateMode) {
     privateModeStore = persistentStore;
     persistentStore = sessionStore;

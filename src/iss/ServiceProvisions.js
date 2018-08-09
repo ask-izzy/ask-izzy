@@ -3,7 +3,7 @@
 import _ from "underscore";
 
 function escapeRegex(str) {
-    return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+    return str.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
 }
 
 class Form {
@@ -64,7 +64,7 @@ class Keywords extends RegexpForm {
 
                 return `${wordTerminator}${form}${wordTerminator}`;
             }
-        )
+            )
             .join("[^.]*");
 
         super(joinedForm);

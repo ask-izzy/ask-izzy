@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import PropTypes from "proptypes";
 import moment from "moment";
 
 import ScreenReader from "./ScreenReader";
@@ -37,16 +38,15 @@ function fixture(
     };
 }
 
-class OpeningTimes extends React.Component {
-    props: {
-        moment?: Moment,
-        object: ServiceOpening,
-    };
-    state: void;
+type Props = {
+    moment?: Moment,
+    object: ServiceOpening,
+}
 
+class OpeningTimes extends React.Component<Props, void> {
     static propTypes = {
-        object: React.PropTypes.object.isRequired,
-        moment: React.PropTypes.func,
+        object: PropTypes.object.isRequired,
+        moment: PropTypes.func,
     };
 
     static defaultProps = {
@@ -194,7 +194,7 @@ class OpeningTimes extends React.Component {
         return (
             <span className="until">
                 {openTime.day} {start} {end}
-                {openTime.note ? ` (${openTime.note})` : ""}
+                {openTime.note && ` (${openTime.note})`}
             </span>
         );
     }

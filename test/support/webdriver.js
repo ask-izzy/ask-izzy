@@ -1,6 +1,7 @@
 /* @flow */
 
 import Webdriver from "selenium-webdriver";
+import ChromeWebDriver from "selenium-webdriver/chrome";
 
 declare var IzzyStorage: Object;
 
@@ -64,14 +65,26 @@ export default async function webDriverInstance(
     const browserName = (process.env.SELENIUM_BROWSER || "").split(/:/)[0];
 
     const driver = new Webdriver.Builder()
-        /* Default to using phantom.js if `SELENIUM_BROWSER` not provided. */
-        .forBrowser(browserName || "phantomjs")
+        /**
+         * Default to using headless chrome if `SELENIUM_BROWSER` not provided.
+         * */
+        .withCapabilities(
+            new Webdriver.Capabilities().setAcceptInsecureCerts(true)
+        )
+        .forBrowser(browserName || "chrome")
+        .setChromeOptions(
+            new ChromeWebDriver.Options().addArguments([
+                'headless',
+                'no-sandbox',
+                'acceptInsecureCerts=true',
+                'ignore-certificate-errors',
+            ])
+        )
         .build();
 
     await driver
         .manage()
-        .timeouts()
-        .implicitlyWait(10000);
+        .setTimeouts({ implicit: 10000 });
 
     return driver;
 }
@@ -80,10 +93,12 @@ async function waitForStorage(
     driver: Webdriver.WebDriver,
 ): Promise<void> {
     await gotoUrl(driver, "/");
-    await driver.wait(() =>
-        driver.executeScript(() =>
-            typeof IzzyStorage != "undefined"
-        ),
+    await driver.wait(
+        () => {
+            return driver.executeScript(() =>
+                typeof IzzyStorage != "undefined"
+            )
+        },
         10000
     );
 }
@@ -106,4 +121,13 @@ export async function cleanDriverSession(
         IzzyStorage.clear();
         window.dataLayer = [];
     });
+}
+
+export async function isElementPresent(
+    driver: Webdriver.WebDriver,
+    locator: Webdriver.By
+): Promise<boolean> {
+    const elements = await driver.findElements(locator);
+
+    return elements.length > 0;
 }

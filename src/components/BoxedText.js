@@ -2,10 +2,11 @@
 
 import React from "react";
 
-export default class BoxedText extends React.Component {
-    props: {children?: any};
-    state: {};
+type Props = {
+    children?: any
+}
 
+export default class BoxedText extends React.Component<Props, {}> {
     render() {
         return (
             <div className="BoxedText">

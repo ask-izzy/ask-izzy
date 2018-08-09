@@ -71,7 +71,7 @@ cat << EOF > $target
 @import "./responsive";
 @import "./mixins";
 @import "./fonts";
-@import "../../bower_components/saffron/saffron/saffron";
+@import "~saffron-sass/saffron/saffron";
 
 EOF
 

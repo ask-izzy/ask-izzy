@@ -1,5 +1,4 @@
-/* @flow */
-
+/* flow:disable */
 /*
  * List scenarios to STDOUT
  */

@@ -62,7 +62,7 @@ export class MapsApi {
 
                 return travelTimes;
             }
-        )
+            )
     }
 
     batchDirectionsRequest(
@@ -117,7 +117,7 @@ export class MapsApi {
                 if (status === this.api.GeocoderStatus.OK) {
                     resolve(results);
                 } else {
-                    reject(status, results);
+                    reject(status);
                 }
             }));
     }
@@ -133,7 +133,7 @@ export class MapsApi {
                 if (status == this.api.places.PlacesServiceStatus.OK) {
                     resolve(results);
                 } else {
-                    reject(status, results);
+                    reject(status);
                 }
             }));
     }

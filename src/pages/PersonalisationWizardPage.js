@@ -1,6 +1,7 @@
-/* @flow */
+/* flow:disable */
 
-import React from "react";
+import * as React from "react";
+import PropTypes from "proptypes";
 
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import Intro from "./personalisation/Intro";
@@ -10,7 +11,7 @@ import Chevron from "../icons/Chevron";
 class PersonalisationWizardPage extends BasePersonalisationPage {
 
     static contextTypes = {
-        router: React.PropTypes.object.isRequired,
+        router: PropTypes.object.isRequired,
     };
 
     constructor(props: Object) {
@@ -38,18 +39,21 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         this.navigate("");
     }
 
-    goToSubPage(subpage: ReactClass<*>): void {
+    goToSubPage(subpage: React.ComponentType<*>): void {
+        /* TODO: Narrow down which components don't have defaultProps */
+
+        // flow:disable
         this.navigate(`personalise/page/${subpage.defaultProps.name}`);
     }
 
-    nextSubPage(): ?ReactClass<*> {
+    nextSubPage(): ?React.ComponentType<*> {
         return this.personalisationComponents.find((component, idx) =>
             (idx > this.currentComponentIdx) &&
             (!component.getSearch({}))
         );
     }
 
-    prevSubPage(): ?ReactClass<*> {
+    prevSubPage(): ?React.ComponentType<*> {
         const nextSubpageIdx = this.currentComponentIdx - 1;
 
         return this.personalisationComponents[nextSubpageIdx];
@@ -77,7 +81,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
      *
      * An array of components required to personalise this category.
      */
-    get personalisationComponents(): Array<ReactClass<any>> {
+    get personalisationComponents(): Array<React.ComponentType<any>> {
         return [Intro].concat(super.personalisationComponents);
     }
 
@@ -95,6 +99,9 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         const Subpage = this.currentComponent;
         const prevPage = this.prevSubPage()
         const backMessage = prevPage ?
+            /* TODO: Narrow down the components that aren't returning a title */
+
+            // flow:disable
             prevPage.title
             : "Categories";
 
@@ -106,7 +113,11 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         return (
             <div className="PersonalisationPage">
                 <components.AppBar
+                    // TODO: Find where the types are set for the Subpage line
+                    // and resolve the issue.
+                    // flow:disable
                     title={Subpage.title || this.title}
+                    // flow:enable
                     onBackTouchTap={this.previousStep.bind(this)}
                     backMessage={backMessage}
                     forwardMessage="Next"

@@ -2,6 +2,7 @@
 /* eslint-disable max-len */
 
 import React from "react";
+import PropTypes from "proptypes";
 import Phone from "../components/Phone";
 import Web from "../components/Web";
 import AppBar from "../components/AppBar";
@@ -9,10 +10,10 @@ import BoxedText from "../components/BoxedText";
 import BoxedTextDivider from "../components/BoxedTextDivider";
 import Spacer from "../components/Spacer";
 
-export default class CensusStaticPage extends React.Component {
+export default class CensusStaticPage extends React.Component<{}> {
 
     static contextTypes = {
-        router: React.PropTypes.object.isRequired,
+        router: PropTypes.object.isRequired,
     };
 
     render() {

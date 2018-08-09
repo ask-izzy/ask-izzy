@@ -3,7 +3,7 @@ ARG commonPackages='apt-transport-https \
     nginx \
     parallel'
 
-FROM contyard.office.infoxchange.net.au/stretch as test
+FROM contyard.office.infoxchange.net.au/stretch-nodejs8 as test
 
 ARG commonPackages
 
@@ -14,34 +14,23 @@ WORKDIR /app
 
 # Install Debian packages
 RUN \
-    echo "Adding nodejs gpg key" && \
-    curl -sL 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key' | apt-key add - && \
-    echo "Adding nodejs repo" && \
-    echo 'deb https://deb.nodesource.com/node_8.x stretch main' > /etc/apt/sources.list.d/nodesource.list && \
     apt-get -y update && \
     apt-get -y upgrade && \
     apt-get -y --no-install-recommends install \
         ${commonPackages} \
-        nodejs \
         git \
         sudo \
         wget \
-    && \
-    # Required by node-gyp
-    apt-get -y install \
-    build-essential \
-    python \
-    && \
-    # Required by flow (static type checker for JavaScript).
-    apt-get -y install \
+        chromium \
+        build-essential \
+        python \
         libelf-dev
 
-# Install the npm deps
-COPY package.json npm-shrinkwrap.json bower.json /app/
-RUN npm install && \
-    npm install --only=dev && \
-    npm cache clean --force && \
-    $(npm bin)/bower install --allow-root
+# Install the yarn deps
+COPY package.json npm-shrinkwrap.json yarn.lock /app/
+RUN npm install -g yarn && \
+    yarn --frozen-lockfile && \
+    yarn cache clean
 
 # Install and build the app
 ADD . /app

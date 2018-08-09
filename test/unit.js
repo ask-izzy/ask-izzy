@@ -10,5 +10,5 @@ describe("Unit tests", function() {
     new Yadda.FileSearch(
         "./test/unit",
         /.*\.js$/
-        ).each(file => require("../" + file));
+    ).each(file => require("../" + file));
 });

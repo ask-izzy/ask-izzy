@@ -5,7 +5,7 @@ import React from "react";
 import { Link } from "react-router";
 import StaticPage from "./StaticPage";
 
-export default class FoodBanksStaticPage extends React.Component {
+export default class FoodBanksStaticPage extends React.Component<{}> {
     render() {
         return (
             <StaticPage
@@ -27,13 +27,13 @@ export default class FoodBanksStaticPage extends React.Component {
                     areas. <Link to="/food">Find a food bank near you</Link> or browse:
                 </p>
                 <ul>
-                <li><Link to="/food/Adelaide-SA">Food banks in Adelaide</Link></li>
-                <li><Link to="/food/Brisbane-QLD">Food banks in Brisbane</Link></li>
-                <li><Link to="/food/Canberra-ACT">Food banks in Canberra</Link></li>
-                <li><Link to="/food/Darwin-NT">Food banks in Darwin</Link></li>
-                <li><Link to="/food/Melbourne-VIC">Food banks in Melbourne</Link></li>
-                <li><Link to="/food/Perth-WA">Food banks in Perth</Link></li>
-                <li><Link to="/food/Sydney-NSW">Food banks in Sydney</Link></li>
+                    <li><Link to="/food/Adelaide-SA">Food banks in Adelaide</Link></li>
+                    <li><Link to="/food/Brisbane-QLD">Food banks in Brisbane</Link></li>
+                    <li><Link to="/food/Canberra-ACT">Food banks in Canberra</Link></li>
+                    <li><Link to="/food/Darwin-NT">Food banks in Darwin</Link></li>
+                    <li><Link to="/food/Melbourne-VIC">Food banks in Melbourne</Link></li>
+                    <li><Link to="/food/Perth-WA">Food banks in Perth</Link></li>
+                    <li><Link to="/food/Sydney-NSW">Food banks in Sydney</Link></li>
                 </ul>
             </StaticPage>
         );

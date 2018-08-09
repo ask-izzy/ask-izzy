@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable camelcase */
 import _ from "underscore";
 import { titleize } from "underscore.string";
 

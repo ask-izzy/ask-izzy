@@ -24,7 +24,7 @@ server.use(express.static(path.resolve(__dirname, "../../public"), {
 }));
 
 // Generic server errors (e.g. not caught by components)
-server.use((err, req, res, next) => {  // eslint-disable-line no-unused-vars
+server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     console.error("Error on request %s %s", req.method, req.url);
     console.error(err);
     console.error(err.stack);

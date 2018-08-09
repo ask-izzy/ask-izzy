@@ -5,7 +5,7 @@ import React from "react";
 import { Link } from "react-router";
 import StaticPage from "./StaticPage";
 
-export default class HomelessHealthStaticPage extends React.Component {
+export default class HomelessHealthStaticPage extends React.Component<{}> {
     render() {
         return (
             <StaticPage
@@ -32,14 +32,14 @@ export default class HomelessHealthStaticPage extends React.Component {
                 <h2>What kind of homeless health care is available?</h2>
                 <p>Ask Izzy lists a range of health care options to respond to your needs. Health care available includes:</p>
                 <ul>
-                <li>doctors and nurses</li>
-                <li>child health specialists</li>
-                <li>maternal and child health clinics</li>
-                <li>sexual health clinics</li>
-                <li>dentists</li>
-                <li>podiatrists for foot issues</li>
-                <li>mental or emotional help</li>
-                <li>hospitals</li>
+                    <li>doctors and nurses</li>
+                    <li>child health specialists</li>
+                    <li>maternal and child health clinics</li>
+                    <li>sexual health clinics</li>
+                    <li>dentists</li>
+                    <li>podiatrists for foot issues</li>
+                    <li>mental or emotional help</li>
+                    <li>hospitals</li>
                 </ul>
                 <p>
                     If you are in immediate need of medical assistance

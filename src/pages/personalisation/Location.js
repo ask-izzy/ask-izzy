@@ -2,7 +2,7 @@
 
 import React from "react";
 import reactMixin from "react-mixin";
-import { debounce } from "core-decorators";
+import { debounce } from "lodash-decorators";
 import { ltrim } from "underscore.string";
 import _ from "underscore";
 
@@ -13,20 +13,20 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 
-/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
-class Location extends React.Component {
-    props: {
+type Props = {
         name: string,
         onDoneTouchTap: Function,
-    };
+}
 
-    state: {
+type State = {
         autocompletionInProgress: boolean,
         locationName: string,
         autocompletions: Array<issArea>,
         nextDisabled: boolean,
-    };
+}
 
+/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
+class Location extends React.Component<Props, State> {
     static defaultProps = {
         name: "location",
     };
@@ -98,7 +98,7 @@ class Location extends React.Component {
         return true;
     }
 
-    onDoneTouchTap(event: SyntheticInputEvent): void {
+    onDoneTouchTap(event: SyntheticInputEvent<>): void {
         event.preventDefault();
         if (!this.state.nextDisabled) {
             this.props.onDoneTouchTap();
@@ -217,65 +217,67 @@ class Location extends React.Component {
                     }
                     bannerName={bannerName}
                 />
-                <div className="List">{
-                    /* if the browser supports geolocation */
-                    geolocationAvailable() &&
-                    <components.GeolocationButton
-                        onSuccess={this.onGeoLocationSuccess.bind(this)}
-                    />
-                }
-                <form
-                    className="search"
-                    onSubmit={this.onDoneTouchTap.bind(this)}
-                >
-                    <div>
-                        <input
-                            type="search"
-                            ref="search"
-                            onFocus={this.scrollToSearchControl.bind(this)}
-                            aria-label="Search for a suburb or postcode"
-                            placeholder="Search for a suburb or postcode"
-                            value={this.state.locationName}
-                            onChange={this.onSearchChange.bind(this)}
+                <div className="List">
+                    {
+                        /* if the browser supports geolocation */
+                        geolocationAvailable() &&
+                        <components.GeolocationButton
+                            onSuccess={this.onGeoLocationSuccess.bind(this)}
                         />
-                    </div>
+                    }
+                    <form
+                        className="search"
+                        onSubmit={this.onDoneTouchTap.bind(this)}
+                    >
+                        <div>
+                            <input
+                                type="search"
+                                ref="search"
+                                onFocus={this.scrollToSearchControl.bind(this)}
+                                aria-label="Search for a suburb or postcode"
+                                placeholder="Search for a suburb or postcode"
+                                value={this.state.locationName}
+                                onChange={this.onSearchChange.bind(this)}
+                            />
+                        </div>
 
-                </form>
+                    </form>
+                    {
+                        /* any autocompletions we currently have */
+                        this.state.autocompletions.map((result, index) =>
+                            <components.InputListItem
+                                key={index}
+                                primaryText={
+                                    <div className="suburb">
+                                        {result.name}
+                                    </div>
+                                }
+                                secondaryText={
+                                    <div className="state">
+                                        {result.state}
+                                    </div>
+                                }
+                                type="radio"
+                                tabIndex={0}
+                                uncheckedIcon={
+                                    <icons.RadioUnselected className="big" />
+                                }
+                                checkedIcon={
+                                    <icons.RadioSelected className="big" />
+                                }
+                                onClick={
+                                    this.selectAutocomplete.bind(this, result)
+                                }
+                            />
+                        )
+                    }
+                </div>
                 {
-                    /* any autocompletions we currently have */
-                    this.state.autocompletions.map((result, index) =>
-                        <components.InputListItem
-                            key={index}
-                            primaryText={
-                                <div className="suburb">
-                                    {result.name}
-                                </div>
-                            }
-                            secondaryText={
-                                <div className="state">
-                                    {result.state}
-                                </div>
-                            }
-                            type="radio"
-                            tabIndex="0"
-                            uncheckedIcon={
-                                <icons.RadioUnselected className="big" />
-                            }
-                            checkedIcon={
-                                <icons.RadioSelected className="big" />
-                            }
-                            onClick={
-                                this.selectAutocomplete.bind(this, result)
-                            }
-                        />
-                    )
-                }</div>
-                {
-                    this.state.autocompletionInProgress ?
+                    this.state.autocompletionInProgress && (
                         <div className="progress">
                             <icons.Loading className="big" />
                         </div>
-                    : ""
+                    )
                 }
                 {this.renderDoneButton()}
             </div>
@@ -295,7 +297,6 @@ class Location extends React.Component {
             </div>
         )
     }
-
 }
 
 export default Location;

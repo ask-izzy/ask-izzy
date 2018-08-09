@@ -9,10 +9,7 @@ import LimitedTimeMessage from "./LimitedTimeMessage";
 import CategoryListItem from "./CategoryListItem";
 import icons from "../icons";
 
-class NavBar extends React.Component {
-    props: {};
-    state: void;
-
+class NavBar extends React.Component<{}, void> {
     static sampleProps = {default: {}};
 
     render() {
@@ -49,7 +46,6 @@ class NavBar extends React.Component {
             </div>
         );
     }
-
 }
 
 export default NavBar;

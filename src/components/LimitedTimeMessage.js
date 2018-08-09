@@ -3,10 +3,13 @@
 import React from "react";
 import moment from "moment";
 
-export default class LimitedTimeMessage extends React.Component {
-    props: {from?: Moment, to?: Moment, children?: any};
-    state: void;
+type Props = {
+    from?: Moment,
+    to?: Moment,
+    children?: any
+}
 
+export default class LimitedTimeMessage extends React.Component<Props, void> {
     isVisible(): boolean {
         if (typeof window == "undefined") {
             return false; // Do not render server-side

@@ -5,14 +5,13 @@ import iss from "../iss";
 import fixtures from "../../fixtures/services";
 import Spacer from "./Spacer";
 
-export default class Ndis extends React.Component {
-    props: {
-        object: iss.Service,
-        compact?: boolean,
-        spacer?: boolean,
-    };
-    state: void;
+type Props = {
+    object: iss.Service,
+    compact?: boolean,
+    spacer?: boolean,
+}
 
+export default class Ndis extends React.Component<Props, void> {
     static sampleProps = {default: {
         object: new iss.Service(fixtures.ixa),
         compact: true,
@@ -35,7 +34,7 @@ export default class Ndis extends React.Component {
                     <div className="Ndis">
                         Part of National Disability Insurance Scheme
                     </div>
-                    {this.props.spacer ? <Spacer /> : ""}
+                    {this.props.spacer && (<Spacer />)}
                 </div>
             );
         }

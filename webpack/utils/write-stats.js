@@ -11,8 +11,10 @@ import fs from "fs";
 import path from "path";
 import _ from "underscore";
 
-const filepath = path.resolve(__dirname,
-                              "../../src/server/webpack-stats.json");
+const filepath = path.resolve(
+    __dirname,
+    "../../src/server/webpack-stats.json"
+);
 
 // Write only a relevant subset of the stats and attach the public path to it
 

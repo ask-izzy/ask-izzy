@@ -5,7 +5,7 @@ import React from "react";
 import { Link } from "react-router";
 import StaticPage from "./StaticPage";
 
-export default class HomelessSupportStaticPage extends React.Component {
+export default class HomelessSupportStaticPage extends React.Component<{}> {
     render() {
         return (
             <StaticPage
@@ -49,13 +49,13 @@ export default class HomelessSupportStaticPage extends React.Component {
                     Ask Izzy lists over 340 000 support services in regional and metropolitan
                     areas across Australia. <Link to="/">Find support services near you</Link> or browse:</p>
                 <ul>
-                <li><Link to="/support-counselling/Adelaide-SA">Support services in Adelaide</Link></li>
-                <li><Link to="/support-counselling/Brisbane-QLD">Support services in Brisbane</Link></li>
-                <li><Link to="/support-counselling/Canberra-ACT">Support services in Canberra</Link></li>
-                <li><Link to="/support-counselling/Darwin-NT">Support services in Darwin</Link></li>
-                <li><Link to="/support-counselling/Melbourne-VIC">Support services in Melbourne</Link></li>
-                <li><Link to="/support-counselling/Perth-WA">Support services in Perth</Link></li>
-                <li><Link to="/support-counselling/Sydney-NSW">Support services in Sydney</Link></li>
+                    <li><Link to="/support-counselling/Adelaide-SA">Support services in Adelaide</Link></li>
+                    <li><Link to="/support-counselling/Brisbane-QLD">Support services in Brisbane</Link></li>
+                    <li><Link to="/support-counselling/Canberra-ACT">Support services in Canberra</Link></li>
+                    <li><Link to="/support-counselling/Darwin-NT">Support services in Darwin</Link></li>
+                    <li><Link to="/support-counselling/Melbourne-VIC">Support services in Melbourne</Link></li>
+                    <li><Link to="/support-counselling/Perth-WA">Support services in Perth</Link></li>
+                    <li><Link to="/support-counselling/Sydney-NSW">Support services in Sydney</Link></li>
                 </ul>
             </StaticPage>
         );

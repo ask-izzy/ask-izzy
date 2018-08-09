@@ -51,5 +51,5 @@ module.exports = (function() {
             unpromisify(searchMockedService))
         .given("A search for \"$string\" returns:\n$services",
             unpromisify(mockSearchForServices))
-        ;
+    ;
 })();

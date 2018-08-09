@@ -31,10 +31,7 @@ import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
 import {ResultsPageListing, ResultsPageMap} from "./pages/ResultsPage";
 import ServicePage from "./pages/ServicePage";
 
-export function makeTitle(
-    routes: Array<Object>,
-    params: Object
-): string {
+export function makeTitle(routes: Array<Object>, params: Object): string {
     const template = _.chain(routes)
         .pluck("title")
         .compact()

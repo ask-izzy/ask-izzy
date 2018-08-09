@@ -1,4 +1,4 @@
-/* @flow */
+/* flow:disable */
 /*
  * Definitions for Geolocation related steps
  */
@@ -19,29 +19,29 @@ import { gotoUrl } from "../support/webdriver";
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .given("I have (somewhere|nowhere) to sleep tonight",
-               unpromisify(setSleepTonight))
+            unpromisify(setSleepTonight))
         .given("I need nothing for $STRING",
-               unpromisify(setSubcategoryItemsNone))
+            unpromisify(setSubcategoryItemsNone))
         .given("I need the following for $STRING\n$lines",
-               unpromisify(setSubcategoryItems))
+            unpromisify(setSubcategoryItems))
         .given("I need the following for $STRING: $STRING",
-               unpromisify(setSubcategoryItem))
+            unpromisify(setSubcategoryItem))
         .given("I am not part of any relevant demographics",
-               unpromisify(setDemographicsNone))
+            unpromisify(setDemographicsNone))
         .given("I am not interested in any subcategory",
-               unpromisify(setSubcategoriesNone))
+            unpromisify(setSubcategoriesNone))
         .given("I am part of the following demographics\n$lines",
-               unpromisify(setDemographics))
+            unpromisify(setDemographics))
         .given("my gender is $STRING", unpromisify(setGender))
         .given("I am 17 years old",
-               unpromisify(_.partial(setAgeTo, "18 to 26")))
+            unpromisify(_.partial(setAgeTo, "18 to 26")))
         .given("I am 27 years old",
-               unpromisify(_.partial(setAgeTo, "26 to 64")))
+            unpromisify(_.partial(setAgeTo, "26 to 64")))
         .given("I am 77 years old",
-               unpromisify(_.partial(setAgeTo, "65 or older")))
+            unpromisify(_.partial(setAgeTo, "65 or older")))
         .when("I click on the done button",
-               unpromisify(clickDoneButton))
-        ;
+            unpromisify(clickDoneButton))
+    ;
 })();
 
 async function clickDoneButton(): Promise<void> {
@@ -63,7 +63,7 @@ async function setSleepTonight(answer: string): Promise<void> {
         throw new Error(`Expected ${answer} to be Yes or No`);
     }
 
-    await gotoUrl(this.driver, "/");  // go anywhere to start the session
+    await gotoUrl(this.driver, "/"); // go anywhere to start the session
     await this.driver.executeScript(answer => {
         IzzyStorage.setItem("sleep-tonight", answer);
     }, answer);
@@ -74,7 +74,7 @@ async function setStorageValue(
     key: string,
     value: string,
 ): Promise<void> {
-    await gotoUrl(driver, "/");  // go anywhere to start the session
+    await gotoUrl(driver, "/"); // go anywhere to start the session
     await driver.executeScript((key, value) => {
         IzzyStorage.setItem(key, value);
     }, key, value);
@@ -115,7 +115,7 @@ async function setSubcategoryItemsNone(category: string): Promise<void> {
 async function setDemographics(
     items: Array<string>,
 ): Promise<void> {
-    await gotoUrl(this.driver, "/");  // go anywhere to start the session
+    await gotoUrl(this.driver, "/"); // go anywhere to start the session
     await this.driver.executeScript(items => {
         IzzyStorage.setItem("demographics", JSON.stringify(items));
     }, items);
@@ -128,7 +128,7 @@ function setDemographicsNone(): Promise<void> {
 async function setSubcategoriesNone(
     items: Array<string>,
 ): Promise<void> {
-    await gotoUrl(this.driver, "/");  // go anywhere to start the session
+    await gotoUrl(this.driver, "/"); // go anywhere to start the session
     await this.driver.executeScript(() => {
         IzzyStorage.setItem("sub-addiction", "(skipped)");
         IzzyStorage.setItem("sub-advocacy", "(skipped)");
@@ -147,14 +147,14 @@ async function setSubcategoriesNone(
 }
 
 async function setAgeTo(option: string): Promise<void> {
-    await gotoUrl(this.driver, "/");  // go anywhere to start the session
+    await gotoUrl(this.driver, "/"); // go anywhere to start the session
     await this.driver.executeScript(age => {
         IzzyStorage.setItem("age", age);
     }, option);
 }
 
 async function setGender(gender: string): Promise<void> {
-    await gotoUrl(this.driver, "/");  // go anywhere to start the session
+    await gotoUrl(this.driver, "/"); // go anywhere to start the session
     await this.driver.executeScript(gender => {
         IzzyStorage.setItem("gender", gender);
     }, titleize(gender));

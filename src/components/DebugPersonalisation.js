@@ -3,10 +3,12 @@
 import React from "react";
 import _ from "underscore";
 
-export default class DebugPersonalisation extends React.Component {
-    props: {items: Array<any>, search: Object};
-    state: void;
+type Props = {
+    items: Array<any>,
+    search: Object
+}
 
+export default class DebugPersonalisation extends React.Component<Props, void> {
     personalisationSteps() {
         let result: Array<Object> = [];
         let request = this.props.search;
@@ -44,7 +46,6 @@ export default class DebugPersonalisation extends React.Component {
             </div>
         );
     }
-
 }
 
 function fmt({source, diff}, idx) {

@@ -1,4 +1,4 @@
-/* @flow */
+/* flow:disable */
 /*
  * Step definitions for Selenium/browser related steps
  */
@@ -22,7 +22,12 @@ import {
     elementWithChildText,
     escapeXPathString,
 } from "../support/selectors";
-import { gotoUrl, baseUrl, cleanDriverSession } from "../support/webdriver";
+import {
+    gotoUrl,
+    baseUrl,
+    cleanDriverSession,
+    isElementPresent,
+} from "../support/webdriver";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
@@ -32,7 +37,7 @@ module.exports = (function() {
         .when('I click on "$STRING"', unpromisify(clickLink))
         .when('I search for "$STRING"', unpromisify(doSearch))
         .when('I search for "$STRING" and press enter',
-              unpromisify(doSearchAndEnter))
+            unpromisify(doSearchAndEnter))
         .when("I click on the search button", unpromisify(clickSearch))
         .when("I click back from the title bar", unpromisify(clickBack))
         .when(
@@ -46,16 +51,16 @@ module.exports = (function() {
         .then("I should see\n$STRING", unpromisify(thenISee))
         .then('I should not see "$STRING"', unpromisify(thenIDontSee))
         .then('search box should contain "$STRING"',
-              unpromisify(searchContains))
+            unpromisify(searchContains))
         .then('the button "$STRING" should be disabled',
-              unpromisify(checkDisabled))
+            unpromisify(checkDisabled))
         .then('the button "$STRING" should be enabled',
-              unpromisify(checkEnabled))
+            unpromisify(checkEnabled))
         .then('"$STRING" should be checked', unpromisify(assertItemChecked))
         .then('"$STRING" should not be checked',
-              unpromisify(assertItemNotChecked))
+            unpromisify(assertItemNotChecked))
         .then("the canonical meta is $URL", unpromisify(checkMetaCanonical))
-        ;
+    ;
 })();
 
 /**
@@ -102,7 +107,7 @@ async function clickLink(link: string): Promise<void> {
             .join("|")
     );
 
-    while (!await this.driver.isElementPresent(locator)) {
+    while (!await isElementPresent(this.driver, locator)) {
         console.log(`Looking for ${link}`)
     }
     await this.driver.findElement(locator).click();
@@ -292,7 +297,7 @@ async function checkMetaCanonical(expected: string): Promise<void> {
 
     content = decodeURIComponent(content);
 
-    content = content.replace(/^.*\/\/[^\/]+/, '');
+    content = content.replace(/^.*\/\/[^/]+/, '');
 
     assert.equal(
         content,

@@ -13,12 +13,12 @@ export function housingCrisis(
         .append("crisis accommodation")
         .conditionally(
             remove("crisis accomodation")
-            .remove({service_type: ["housing"]})
-            .append({
-                service_type: ["Homelessness Access Point"],
-                catchment: "true",
-                q: "(Homelessness Access Point)",
-            }),
+                .remove({service_type: ["housing"]})
+                .append({
+                    service_type: ["Homelessness Access Point"],
+                    catchment: "true",
+                    q: "(Homelessness Access Point)",
+                }),
             filter
         );
 }

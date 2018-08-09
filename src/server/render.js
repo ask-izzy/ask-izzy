@@ -69,23 +69,23 @@ export default function render(req, res, next) {
                     // The application component is rendered to static markup
                     // and sent as response.
                     const html = ReactDOMServer.renderToStaticMarkup(
-                      <HtmlDocument
-                          title={title}
-                          markup={markup}
-                          script={webpackStats.script}
-                          css={webpackStats.css}
-                          helmet={helmet}
-                          envPath={
-                              process.env.ENVFILE_PATH || "/static/env.js"
-                          }
-                          currentUrl={reqUrl}
-                          siteName="Ask Izzy"
-                          description={
-                              `Ask Izzy helps people who are homeless ` +
+                        <HtmlDocument
+                            title={title}
+                            markup={markup}
+                            script={webpackStats.script}
+                            css={webpackStats.css}
+                            helmet={helmet}
+                            envPath={
+                                process.env.ENVFILE_PATH || "/static/env.js"
+                            }
+                            currentUrl={reqUrl}
+                            siteName="Ask Izzy"
+                            description={
+                                `Ask Izzy helps people who are homeless ` +
                               `or at risk of becoming homeless to find` +
                               ` the services they need, right now and nearby.`
-                          }
-                      />
+                            }
+                        />
                     );
                     const doctype = "<!DOCTYPE html>";
 

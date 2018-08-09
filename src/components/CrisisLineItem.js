@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import PropTypes from "proptypes";
 import { Link } from "react-router";
 
 import Phone from "./Phone";
@@ -34,17 +35,16 @@ const crisisDescriptions = {
     ),
 }
 
-class CrisisLineItem extends React.Component {
-    props: {
-        object: iss.Service,
-        expanded?: boolean,
-    };
-    state: void;
+type Props = {
+    object: iss.Service,
+    expanded?: boolean,
+}
 
+class CrisisLineItem extends React.Component<Props, void> {
     static displayName = "CrisisLineItem";
 
     static propTypes = {
-        object: React.PropTypes.object.isRequired,
+        object: PropTypes.object.isRequired,
     };
 
     static sampleProps = {default: {

@@ -10,13 +10,10 @@ import Location from "../iss/Location";
 import sendEvent from "../google-tag-manager";
 import Spacer from "./Spacer";
 
-class TransportTime extends React.Component {
-    props: {
-        location: Location,
-        compact?: true,
-    };
-    state: void;
-
+class TransportTime extends React.Component<{
+    location: Location,
+    compact?: true,
+}, void> {
     static defaultProps = {
         compact: false,
     };
@@ -93,22 +90,28 @@ class TransportTime extends React.Component {
             );
 
             if (travel.mode === "TRANSIT") {
-                icon = (<icons.Tram
-                    className="ColoredIcon"
-                    aria-label="By public transport"
-                        />);
+                icon = (
+                    <icons.Tram
+                        className="ColoredIcon"
+                        aria-label="By public transport"
+                    />
+                );
                 method = (' transport');
             } else if (travel.mode === "DRIVING") {
-                icon = (<icons.Car
-                    className="ColoredIcon"
-                    aria-label="By car"
-                        />);
+                icon = (
+                    <icons.Car
+                        className="ColoredIcon"
+                        aria-label="By car"
+                    />
+                );
                 method = (' drive');
             } else {
-                icon = (<icons.Walk
-                    className="ColoredIcon"
-                    aria-label="On foot"
-                        />);
+                icon = (
+                    <icons.Walk
+                        className="ColoredIcon"
+                        aria-label="On foot"
+                    />
+                );
                 method = (' walk');
             }
 
@@ -119,11 +122,11 @@ class TransportTime extends React.Component {
                 >
                     {icon}
                     <time dateTime={arrivalTime.toISOString().slice(0, -1)}>
-                    {
-                        travel &&
+                        {
+                            travel &&
                         travel.duration &&
                         travel.duration.text
-                    }
+                        }
                     </time>
                     {method}
                 </div>

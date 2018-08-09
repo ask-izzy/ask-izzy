@@ -5,13 +5,12 @@ import icons from "../icons";
 import fixtures from "../../fixtures/services";
 import sendEvent from "../google-tag-manager";
 
-export default class Email extends React.Component {
-    props: {
-        email: string,
-        comment: string,
-    };
-    state: void;
+type Props = {
+    email: string,
+    comment: string,
+}
 
+export default class Email extends React.Component<Props, void> {
     static sampleProps = {default: fixtures.ixa.emails[0]};
 
     recordClick(): void {
@@ -22,9 +21,7 @@ export default class Email extends React.Component {
     }
 
     render() {
-        let {
-            email,
-        } = this.props;
+        const { email } = this.props;
 
         return (
             <div className="Contact Email">

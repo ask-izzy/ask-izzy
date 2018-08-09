@@ -4,10 +4,11 @@ import icons from "../icons";
 import ScreenReader from "./ScreenReader";
 import Location from "../iss/Location";
 
-class Address extends React.Component {
-    props: {location: Location};
-    state: void;
+type Props = {
+    location: Location
+}
 
+class Address extends React.Component<Props, void> {
     static sampleProps = {
         complex: {
             location: new Location({
@@ -62,7 +63,6 @@ class Address extends React.Component {
             </div>
         );
     }
-
 }
 
 export default Address;

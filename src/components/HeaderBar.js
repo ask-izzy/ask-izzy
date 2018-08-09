@@ -2,22 +2,23 @@
 
 import React from "react";
 
-class HeaderBar extends React.Component {
-    props: {
-        primaryText: any,
-        secondaryText?: any,
-        children?: any,
-        bannerName: any,
-        alternateBackgroundColor: bool,
-    };
-    state: void;
+type Props = {
+    primaryText: any,
+    secondaryText?: any,
+    children?: any,
+    bannerName: any,
+    alternateBackgroundColor?: bool,
+}
 
-    static sampleProps = {default: {
-        primaryText: "Primary Text",
-        secondaryText: "Secondary Text",
-        bannerName: "food",
-        alternateBackgroundColor: false,
-    }};
+class HeaderBar extends React.Component<Props, void> {
+    static sampleProps = {
+        default: {
+            primaryText: "Primary Text",
+            secondaryText: "Secondary Text",
+            bannerName: "food",
+            alternateBackgroundColor: false,
+        },
+    };
 
     render() {
         // Search banner is the default
@@ -37,8 +38,7 @@ class HeaderBar extends React.Component {
             <div className={headerBarClassName}>
                 <div className={bannerClassName}>
 
-                    <div className="BlackBanner">
-                    </div>
+                    <div className="BlackBanner" />
                 </div>
                 <div className="HeaderBarContent">
                     <div className="primary">

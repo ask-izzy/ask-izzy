@@ -7,15 +7,17 @@ import components from "../components";
 
 declare var ISS_URL: string;
 
-class AddServicePage extends React.Component {
-    props: {
-        history: {
-            goBack: Function,
-        },
-    };
-    state: {
-        isFormDone: boolean,
-    };
+type Props = {
+    router: {
+        goBack: Function,
+    },
+}
+
+type State = {
+    isFormDone: boolean,
+}
+
+class AddServicePage extends React.Component<Props, State> {
     issUrl: any; // Flowtype core declares url.parse(): any
     handleMessage: Function;
 
@@ -49,10 +51,8 @@ class AddServicePage extends React.Component {
         }
     }
 
-    handleMessage(event: Event): void {
-        let origin = event.origin ||
-            (typeof event.originalEvent == "object") &&
-            event.originalEvent.origin;
+    handleMessage(event: MessageEvent): void {
+        const origin = event.origin
 
         if (origin !== `${this.issUrl.protocol}//${this.issUrl.hostname}`) {
             return;
@@ -75,16 +75,16 @@ class AddServicePage extends React.Component {
     }
 
     render() {
-        let history = this.props.history;
+        const { router } = this.props;
 
-        let body = this.state.isFormDone ? this.renderSuccessMessage()
+        const body = this.state.isFormDone ? this.renderSuccessMessage()
             : this.renderForm();
 
         return (
             <div className="AddServicePage">
                 <components.AppBar
                     title="Add a service"
-                    onBackTouchTap={history.goBack.bind(history)}
+                    onBackTouchTap={router.goBack.bind(router)}
                 />
 
                 <div className="body">
@@ -150,7 +150,6 @@ class AddServicePage extends React.Component {
             </div>
         );
     }
-
 }
 
 export default AddServicePage;

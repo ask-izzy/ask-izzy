@@ -6,10 +6,11 @@ import LinkListItem from "./LinkListItem";
 import maps from "../maps";
 import type MapsApi from "../maps";
 
-export default class ViewOnMapButton extends React.Component {
-    props: any;
-    state: {maps: ?MapsApi};
+type State = {
+    maps: ?MapsApi
+}
 
+export default class ViewOnMapButton extends React.Component<any, State> {
     constructor() {
         super();
         this.state = {maps: null};

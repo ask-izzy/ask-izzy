@@ -4,10 +4,7 @@ import React from "react";
 import icons from "../icons";
 import type { Service } from "../iss";
 
-class Accessibility extends React.Component {
-    props: {object: Service};
-    state: void;
-
+class Accessibility extends React.Component<{object: Service}, void> {
     render() {
         let accessibilityMapping = {
             // "noaccess": "No wheelchair access",

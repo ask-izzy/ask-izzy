@@ -4,14 +4,13 @@ import fixtures from "../../fixtures/services";
 import Location from "../iss/Location";
 import classnames from "classnames";
 
-class GoogleMapsLink extends React.Component {
-    props: {
-        to: Location,
-        children?: any,
-        className: ?string,
-    };
-    state: void;
+type Props = {
+    to: Location,
+    children?: any,
+    className: ?string,
+}
 
+class GoogleMapsLink extends React.Component<Props, void> {
     static sampleProps = {
         default: {
             children: (
@@ -46,13 +45,13 @@ class GoogleMapsLink extends React.Component {
         }
         const query = encodeURIComponent(
             queryFields
-            .join(" ")
-            .trim()
+                .join(" ")
+                .trim()
         );
 
         return `https://maps.google.com/?dirflg=${mode
-            }&saddr=${start
-            }&daddr=${query}`;
+        }&saddr=${start
+        }&daddr=${query}`;
     }
 
     render() {
@@ -78,11 +77,10 @@ class GoogleMapsLink extends React.Component {
                 aria-label="Open Google Maps in a new tab"
                 href={this.googleMapsUrl()}
             >
-                    {children}
+                {children}
             </a>
         );
     }
-
 }
 
 export default GoogleMapsLink;

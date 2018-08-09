@@ -41,19 +41,18 @@ const PersonalisationLink = ({pathname}: Object) =>
         Change your answers
     </Link>;
 
-class LoadingResultsHeader extends React.Component {
-    props: {
-        personalisationComponents: Array<Object>,
-        error: string,
-        statusCode: number,
-        loading: boolean,
-        category?: Category,
-        location: {pathname: string},
-        title: string,
-        meta: {total_count: number},
-    };
-    state: void;
+type Props = {
+    personalisationComponents: Array<Object>,
+    error: string,
+    statusCode: number,
+    loading: boolean,
+    category?: Category,
+    location: {pathname: string},
+    title: string,
+    meta: {total_count: number},
+}
 
+class LoadingResultsHeader extends React.Component<Props, void> {
     render() {
         const {
             error,
@@ -141,7 +140,7 @@ class LoadingResultsHeader extends React.Component {
         ].filter((component) =>
             this.props.personalisationComponents.includes(component)
         )
-        .map((component) => component.headingValue())
+            .map((component) => component.headingValue())
         const count = meta.total_count > 20 ? "lots of" : meta.total_count;
 
         return (
@@ -153,10 +152,10 @@ class LoadingResultsHeader extends React.Component {
                             I found {count} {servicesWord}{' '}
                             {personalisations.join(" ")}
                         </LogoHeader>
-                    : <LogoHeader>
+                        : <LogoHeader>
                          Sorry, I couldn't find any results
                          for {title.toLocaleLowerCase()}.
-                     </LogoHeader>
+                        </LogoHeader>
                 }
                 secondaryText={
                     <div>
@@ -169,7 +168,6 @@ class LoadingResultsHeader extends React.Component {
             />
         );
     }
-
 }
 
 export default LoadingResultsHeader;

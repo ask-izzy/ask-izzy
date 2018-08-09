@@ -48,6 +48,7 @@ export function Sequence(): () => number {
     });
 }
 
+/* eslint-disable complexity */
 export function Merge(defaults: Object, props: ?Object): Object {
     // Only allow overriding keys on objects if the sample object is empty.
     if (props && Object.keys(defaults).length) {

@@ -3,10 +3,11 @@
 import React from "react";
 import DebugContainer from "./DebugContainer";
 
-export default class DebugServiceRecord extends React.Component {
-    props: {object: Object};
-    state: void;
+type Props = {
+    object: Object
+}
 
+export default class DebugServiceRecord extends React.Component<Props, void> {
     render() {
         // need to remove _explanation to get ...rest
         /* eslint-disable no-unused-vars */
@@ -20,5 +21,4 @@ export default class DebugServiceRecord extends React.Component {
             </DebugContainer>
         );
     }
-
 }

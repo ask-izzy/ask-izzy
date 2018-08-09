@@ -1,6 +1,7 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
+import PropTypes from "proptypes";
 
 import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
@@ -16,16 +17,24 @@ import DebugPersonalisation from "../components/DebugPersonalisation";
 import DebugSearch from "../components/DebugSearch";
 import ResultsListPage from "./ResultsListPage";
 
+import type { Service } from "../iss";
+
 class ResultsPage extends BaseCategoriesPage {
 
     static contextTypes = {
-        router: React.PropTypes.object.isRequired,
+        router: PropTypes.object.isRequired,
     };
 
     constructor(props: Object) {
         super(props);
-        this.state = {};
+        this.state = {
+            isClient: false,
+            childServices: [],
+        };
     }
+
+    _component: any;
+    _childComponent: any;
 
     issParams(): ?Object {
         // Build the search request.
@@ -39,6 +48,8 @@ class ResultsPage extends BaseCategoriesPage {
         let request = this.search;
 
         for (let item of this.personalisationComponents) {
+            // TODO: This needs to be debugged with the new flow version
+            // flow:disable
             if (typeof item.getSearch == "function") {
                 request = item.getSearch(request);
 
@@ -53,6 +64,8 @@ class ResultsPage extends BaseCategoriesPage {
 
     componentDidMount(): void {
         super.componentDidMount();
+
+        this.setState({ isClient: true });
 
         sendEvent({
             event: "searchResults",
@@ -154,9 +167,13 @@ class ResultsPage extends BaseCategoriesPage {
         }
     }
 
-    onBackClick(event: SyntheticInputEvent): void {
-        if (this.refs.component.onGoBack) {
-            this.refs.component.onGoBack(event)
+    onBackClick(event: SyntheticInputEvent<>): void {
+        if (this._childComponent && this._childComponent.onGoBack) {
+            this._childComponent.onGoBack(event);
+        }
+
+        if (this._component.onGoBack) {
+            this._component.onGoBack(event);
         }
 
         if (!event.defaultPrevented) {
@@ -166,7 +183,11 @@ class ResultsPage extends BaseCategoriesPage {
         }
     }
 
-    component(): ReactClass<any> {
+    onServicesChange(services: Array<Service>) {
+        this.setState({ childServices: services });
+    }
+
+    component(): React.ComponentType<any> {
         throw new Error("Override this class to implement `component`");
     }
 
@@ -191,7 +212,9 @@ class ResultsPage extends BaseCategoriesPage {
                 </DebugContainer>
 
                 <Component
-                    ref="component"
+                    ref={elem => {
+                        this._component = elem
+                    }}
                     {...this.state}
                     {...this.props}
                     category={this.category}
@@ -200,9 +223,57 @@ class ResultsPage extends BaseCategoriesPage {
                     title={this.title}
                     loading={this.loading}
                     personalisationComponents={this.personalisationComponents}
+                    // The below props are only used for the ResultsMap
+                    // component - this is because react-google-maps >= 6.0.0
+                    // introduced a HOC to initialise the Google Map
+                    loadingElement={<div style={{ height: `100%` }} />}
+                    containerElement={
+                        <div
+                            style={
+                                { height: `${this.calculateMapHeight()}px` }
+                            }
+                        />
+                    }
+                    mapElement={<div style={{ height: `100%` }} />}
+                    childRef={elem => {
+                        this._childComponent = elem
+                    }}
+                    onServicesChange={this.onServicesChange.bind(this)}
                 />
             </div>
         );
+    }
+
+    calculateMapHeight(): number {
+        const selectedServices = this.state.childServices || [];
+        let mapHeight = 2000;
+
+        if (!this.state.isClient) {
+            return mapHeight;
+        }
+
+        try {
+            /* calculate the height of the map */
+            /* TODO: Find why flow doesn't like the offsetHeight here
+               Might be because the DOM isn't actually rendered? */
+
+            mapHeight =
+                window.innerHeight -
+                // flow:disable
+                document.querySelector(".AppBar").offsetHeight;
+
+            /* resize the map to make room
+             * for the selected results */
+            mapHeight -= 150 * selectedServices.length;
+
+            /* limit minimum height to 1/2 of the screen realestate */
+            mapHeight = Math.max(mapHeight,
+                window.innerHeight / 2);
+        } catch (error) {
+            //
+        }
+
+        return mapHeight;
     }
 
     renderLoadMore() {
@@ -236,7 +307,7 @@ export default ResultsPage;
 
 export class ResultsPageListing extends ResultsPage {
 
-    component(): ReactClass<any> {
+    component(): React.ComponentType<any> {
         return ResultsListPage;
     }
 
@@ -247,7 +318,7 @@ export class ResultsPageListing extends ResultsPage {
 
 export class ResultsPageMap extends ResultsPage {
 
-    component(): ReactClass<any> {
+    component(): React.ComponentType<any> {
         return ResultsMap;
     }
 }

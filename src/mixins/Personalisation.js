@@ -1,13 +1,13 @@
 /* @flow */
 
-import React from "react";
+import PropTypes from "proptypes";
 
 const Personalisation = {
     contextTypes: {
         // Would be nice to specify type here,
         // but we can't have cyclic imports.
-        // controller: React.PropTypes.instanceOf(BasePersonalisationPage),
-        controller: React.PropTypes.object.isRequired,
+        // controller: PropTypes.instanceOf(BasePersonalisationPage),
+        controller: PropTypes.object.isRequired,
     },
 
     nextStep: function nextStep(): void {

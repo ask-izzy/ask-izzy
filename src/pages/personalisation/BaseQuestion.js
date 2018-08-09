@@ -1,8 +1,8 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 import reactMixin from "react-mixin";
-import { debounce } from "core-decorators";
+import { debounce } from "lodash-decorators";
 import _ from "underscore";
 
 import Personalisation from "../../mixins/Personalisation";
@@ -15,24 +15,26 @@ import storage from "../../storage";
 import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
 
-/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
-class BaseQuestion extends React.Component {
-    props: {
-        name: string,
-        question: string,
-        byline?: string,
-        classNames?: string,
-        answers: Object|Array<string>,
-        onDoneTouchTap: Function,
-        suppressDoneButton: boolean,
-    };
-    state: {
-        selected: ?string,
-        rootHeight?: number,
-        windowHeight?: number,
-        answers?: Set<string>,
-    };
+type Props = {
+    name: string,
+    question: string,
+    byline?: string,
+    classNames?: string,
+    answers: Object | Array<string>,
+    onDoneTouchTap: Function,
+    suppressDoneButton: boolean,
+    icons?: Object
+}
 
+type State = {
+    selected: ?string,
+    rootHeight?: number,
+    windowHeight?: number,
+    answers?: Set<string>,
+}
+
+/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
+class BaseQuestion extends React.Component<Props, State> {
     static defaultProps: Object = {};
 
     constructor(props: Object) {
@@ -42,10 +44,22 @@ class BaseQuestion extends React.Component {
         };
     }
 
+    nextStep: any;
+
     get selected(): string {
+        let storageValue;
+
+        const valueFromStorage = storage.getItem(this.props.name)
+
+        if (typeof valueFromStorage === 'boolean') {
+            storageValue = valueFromStorage ? 'true' : 'false';
+        } else {
+            storageValue = valueFromStorage;
+        }
+
         return `${(
+            storageValue ||
             this.state.selected ||
-            storage.getItem(this.props.name) ||
             ""
         )}`;
     }
@@ -154,10 +168,10 @@ class BaseQuestion extends React.Component {
     }
 
     onNextStep(): void {
-        storage.setItem(this.props.name, this.selected || "(skipped)");
+        storage.setItem(this.props.name, this.state.selected || "(skipped)");
     }
 
-    iconFor(answer: string): ?React$Element<*> {
+    iconFor(answer: string): ?React.Element<any> {
         if (this.props.icons && this.props.icons[answer]) {
             const Icon = this.props.icons[answer];
 
@@ -174,7 +188,7 @@ class BaseQuestion extends React.Component {
         this.triggerNext();
     }
 
-    render(): React$Element<*> {
+    render(): React.Node {
         const selected = this.selected;
         let bannerName = "";
 
@@ -203,31 +217,31 @@ class BaseQuestion extends React.Component {
                     alternateBackgroundColor={false}
                 />
                 <div className="List">
-                {this.answers.map((answer, index) =>
-                    <InputListItem
-                        key={index}
-                        leftIcon={this.iconFor(answer)}
-                        primaryText={answer}
+                    {this.answers.map((answer, index) =>
+                        <InputListItem
+                            key={index}
+                            leftIcon={this.iconFor(answer)}
+                            primaryText={answer}
 
-                        type="radio"
-                        checked={answer == selected}
-                        value={answer}
-                        onClick={this.onAnswerTouchTap.bind(this, answer)}
+                            type="radio"
+                            checked={answer == selected}
+                            value={answer}
+                            onClick={this.onAnswerTouchTap.bind(this, answer)}
 
-                        checkedIcon={
-                            <icons.RadioSelected className="big" />
-                        }
-                        uncheckedIcon={
-                            <icons.RadioUnselected className="big" />
-                        }
-                    />)}
+                            checkedIcon={
+                                <icons.RadioSelected className="big" />
+                            }
+                            uncheckedIcon={
+                                <icons.RadioUnselected className="big" />
+                            }
+                        />)}
                 </div>
                 {this.renderDoneButton()}
             </div>
         );
     }
 
-    renderDoneButton(): ?React$Element<*> {
+    renderDoneButton(): ?React.Element<any> {
         if (!this.props.suppressDoneButton) {
             return (
                 <div>
@@ -242,7 +256,6 @@ class BaseQuestion extends React.Component {
             )
         }
     }
-
 }
 
 export default BaseQuestion;

@@ -5,7 +5,7 @@ import React from "react";
 import { Link } from "react-router";
 import StaticPage from "./StaticPage";
 
-export default class HomelessSheltersStaticPage extends React.Component {
+export default class HomelessSheltersStaticPage extends React.Component<{}> {
     render() {
         return (
             <StaticPage
@@ -44,12 +44,12 @@ export default class HomelessSheltersStaticPage extends React.Component {
                 </p>
 
                 <ul>
-                  <li>women fleeing family violence</li>
-                  <li>families</li>
-                  <li>young people</li>
-                  <li>Indigenous people</li>
-                  <li>people seeking asylum</li>
-                  <li>people with disabilities</li>
+                    <li>women fleeing family violence</li>
+                    <li>families</li>
+                    <li>young people</li>
+                    <li>Indigenous people</li>
+                    <li>people seeking asylum</li>
+                    <li>people with disabilities</li>
                 </ul>
 
                 <p>
@@ -62,7 +62,7 @@ export default class HomelessSheltersStaticPage extends React.Component {
                 specialist homeless service for you in your area.
                 Your answers are private and no personal information is collected.
                 Anonymous data is collected via Google Analytics to help us understand what people are searching for.
-                {' '}<Link to="/housing">Search Ask Izzy for housing</Link>.
+                    {' '}<Link to="/housing">Search Ask Izzy for housing</Link>.
                 </p>
 
                 <h3>What help do they offer?</h3>
@@ -78,15 +78,15 @@ export default class HomelessSheltersStaticPage extends React.Component {
                 </p>
 
                 <ul>
-                  <li>clothes, food vouchers and other everyday things</li>
-                  <li>health advice (physical, mental and emotional)</li>
-                  <li>Centrelink payments</li>
-                  <li>money help</li>
-                  <li>support and counselling</li>
-                  <li>legal advice</li>
-                  <li>drug and alcohol support</li>
-                  <li>life skills and education</li>
-                  <li>employment</li>
+                    <li>clothes, food vouchers and other everyday things</li>
+                    <li>health advice (physical, mental and emotional)</li>
+                    <li>Centrelink payments</li>
+                    <li>money help</li>
+                    <li>support and counselling</li>
+                    <li>legal advice</li>
+                    <li>drug and alcohol support</li>
+                    <li>life skills and education</li>
+                    <li>employment</li>
                 </ul>
 
                 <h3>Where can I find a homeless shelter?</h3>
@@ -94,9 +94,9 @@ export default class HomelessSheltersStaticPage extends React.Component {
                 <p>
                 There are homeless shelters across the country,
                 in regional and metropolitan areas. {' '}
-                <Link to="/housing">
+                    <Link to="/housing">
                   Find a specialist homeless service
-                </Link> who can help you access shelter near you or browse:
+                    </Link> who can help you access shelter near you or browse:
                 </p>
 
                 <ul>

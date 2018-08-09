@@ -1,5 +1,4 @@
-/* @flow */
-
+/* flow:disable */
 /* eslint-env node, mocha */
 /* eslint-disable prefer-arrow-callback */
 

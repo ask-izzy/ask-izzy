@@ -22,7 +22,7 @@ const serviceProvisions: Array<ServiceProvision> = [
     provides({
         name: "Crisis accommodation for women fleeing domestic violence",
         form: keywords(/crisis|emergency|refuge/, "accommodation",
-                       "women", /family|domestic/, "violence"),
+            "women", /family|domestic/, "violence"),
     }),
     provides({
         name: "Family accommodation",
@@ -36,7 +36,7 @@ const serviceProvisions: Array<ServiceProvision> = [
                 /accommodation|housing|shelter/
             ),
             keywords("housing", "crisis"),
-            keywords("refuge", "accommodation"),  // N.B. not refugee
+            keywords("refuge", "accommodation"), // N.B. not refugee
         ),
     }),
     provides({

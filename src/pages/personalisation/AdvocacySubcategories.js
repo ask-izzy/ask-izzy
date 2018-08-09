@@ -12,16 +12,16 @@ export default class AdvocacySubcategories extends BaseQuestion {
         answers: {
             "Making a complaint":
                 remove("consumer issues mediation discrimination")
-                .remove("disputes advocacy")
-                .append("ombudsman complaint"),
+                    .remove("disputes advocacy")
+                    .append("ombudsman complaint"),
             "Get advice on your rights":
                 remove("consumer issues mediation discrimination")
-                .remove("disputes advocacy")
-                .append("rights advice"),
+                    .remove("disputes advocacy")
+                    .append("rights advice"),
             "Someone to speak for you":
                 remove("consumer issues mediation discrimination")
-                .remove("disputes advocacy")
-                .append("advocacy"),
+                    .remove("disputes advocacy")
+                    .append("advocacy"),
         },
     };
 }

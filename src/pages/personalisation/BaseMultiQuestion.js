@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 import classnames from "classnames";
 import _ from "underscore";
 
@@ -19,7 +19,7 @@ import * as iss from "../../iss";
 class BaseMultiQuestion extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
 
-    renderDoneButton(): ?React$Element<*> {
+    renderDoneButton(): ?React.Element<any> {
         const label = (this.selected.size) ?
             "Done"
             : "None of these";
@@ -122,7 +122,7 @@ class BaseMultiQuestion extends BaseQuestion {
         return search;
     }
 
-    iconFor(answer: string): ?React$Element<*> {
+    iconFor(answer: string): ?React.Element<any> {
         if (this.props.icons && this.props.icons[answer]) {
             const Icon = this.props.icons[answer];
 
@@ -152,7 +152,10 @@ class BaseMultiQuestion extends BaseQuestion {
 
     componentDidMount(): void {
         this.setState({windowHeight: window.innerHeight});
-        this.setState({rootHeight: ReactDOM.findDOMNode(this).offsetHeight});
+        const thisElement = ReactDOM.findDOMNode(this);
+
+        // flow:disable
+        this.setState({rootHeight: thisElement.offsetHeight});
     }
 
     render() {

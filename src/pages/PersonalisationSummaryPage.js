@@ -1,6 +1,7 @@
-/* @flow */
+/* flow:disable */
 
 import React from "react";
+import PropTypes from "proptypes";
 
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import components from "../components";
@@ -10,7 +11,7 @@ import storage from "../storage";
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
     static contextTypes = {
-        router: React.PropTypes.object.isRequired,
+        router: PropTypes.object.isRequired,
     };
 
     constructor(props: Object) {
@@ -31,7 +32,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         this.goBack();
     }
 
-    clearAll(event: SyntheticInputEvent): void {
+    clearAll(event: SyntheticInputEvent<>): void {
         event.preventDefault();
         storage.clear();
         this.context.router.push("/");
@@ -77,78 +78,81 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         />
                     </div>
 
-                : <div>
-                    <components.HeaderBar
-                        primaryText={
-                            <div>
+                    : <div>
+                        <components.HeaderBar
+                            primaryText={
+                                <div>
                                 Change your answers here
-                            </div>
-                        }
-                        bannerName={bannerName}
-                        alternateBackgroundColor={true}
-                    />
+                                </div>
+                            }
+                            bannerName={bannerName}
+                            alternateBackgroundColor={true}
+                        />
 
-                    <div className="List">
-                        {
-                            this.personalisationComponents
-                                .map((component, index) =>
-                                    <components.LinkListItem
-                                        key={index}
-                                        className="SummaryItem"
-                                        to={this.urlFor(
-                                            `personalise/summary/${
-                                                component.defaultProps.name
-                                            }`
-                                        )}
-                                        primaryText={component.summaryLabel}
-                                        secondaryText={component.summaryValue}
-                                    />
-                            )
-                        }
+                        <div className="List">
+                            {
+                                this.personalisationComponents.map(
+                                    (component, index) =>
+                                        <components.LinkListItem
+                                            key={index}
+                                            className="SummaryItem"
+                                            to={this.urlFor(
+                                                `personalise/summary/${
+                                                    component.defaultProps.name
+                                                }`
+                                            )}
+                                            // eslint-disable-next-line max-len
+                                            primaryText={component.summaryLabel ? component.summaryLabel : ''}
+                                            secondaryText={
+                                                component.summaryValue
+                                            }
+                                        />
+                                )
+                            }
 
-                        <FloatFromBottom
-                            ref="floatingDone"
-                            includeOffsetElement={false}
-                        >
-                            <div className="Done">
-                                <div className="done-button">
+                            <FloatFromBottom
+                                ref="floatingDone"
+                                includeOffsetElement={false}
+                            >
+                                <div className="Done">
+                                    <div className="done-button">
+                                        <components.FlatButton
+                                            label="Done"
+                                            onClick={this.goBack.bind(this)}
+                                        />
+                                    </div>
+                                </div>
+                            </FloatFromBottom>
+
+                            <div className="ClearResults">
+                                <div>
+                                Want me to forget what I know about you?
+                                </div>
+                                <div className="clear-button">
                                     <components.FlatButton
-                                        label="Done"
-                                        onClick={this.goBack.bind(this)}
+                                        label="Delete all answers"
+                                        onClick={this.clearAll.bind(this)}
                                     />
                                 </div>
                             </div>
-                        </FloatFromBottom>
 
-                        <div className="ClearResults">
-                            <div>
-                                Want me to forget what I know about you?
-                            </div>
-                            <div className="clear-button">
-                                <components.FlatButton
-                                    label="Delete all answers"
-                                    onClick={this.clearAll.bind(this)}
-                                />
-                            </div>
-                        </div>
-
-                        {/*
+                            {/*
                           * The following makes the parent element
                           * tall enough when floating the child elements
                           * so that they don't prevent
                           * scrolling to the bottom.
                           */}
-                        <div
-                            style={{
-                                height: this.state.floatingContainerHeight,
-                            }}
-                        >
+                            <div
+                                style={{
+                                    height: this.state.floatingContainerHeight,
+                                }}
+                            >
                             &nbsp;
+                            </div>
+
                         </div>
 
-                    </div>
-
-                </div>}
+                    </div>}
             </div>
         );
     }

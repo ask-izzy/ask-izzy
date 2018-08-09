@@ -1,6 +1,4 @@
-/* @flow */
-
-/* @flow */
+/* flow:disable */
 // This file from https://github.com/gpbl/isomorphic500 @ 413c6533ae23
 // A webpack plugin to notify errors and warning when compiling
 
