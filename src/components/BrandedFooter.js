@@ -18,6 +18,7 @@ class BrandedFooter extends React.Component<{}, void> {
         const donateLink = "https://www.infoxchange.org/donate-ask-izzy";
 
         let isMobile;
+
         if (typeof window !== "undefined") {
             isMobile = window.innerWidth <= 768;
         } else {
@@ -72,7 +73,12 @@ class BrandedFooter extends React.Component<{}, void> {
                 <hr />
                 <div>
                     <div>
-                        <a href="/service/105139-translating-interpreting-service-tis-national">
+                        <a
+                            href={
+                                "/service/105139-translating" +
+                                "-interpreting-service-tis-national"
+                            }
+                        >
                             TIS Interpreter Hotline
                         </a>
                         <br />
