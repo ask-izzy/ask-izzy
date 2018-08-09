@@ -44,9 +44,11 @@ const FinishedGeolocation = () => (
     />
 );
 
-class FailedGeolocation extends React.Component {
-    props: {error: string};
-    state: void;
+type FailedGeolocationProps = {
+    error: string
+}
+
+class FailedGeolocation extends React.Component<FailedGeolocationProps, void> {
     render() {
         return (
             <ListItem
@@ -59,15 +61,17 @@ class FailedGeolocation extends React.Component {
     }
 }
 
-class GeolocationButton extends React.Component {
-    props: {
-        onSuccess: (result: {name: string, coords: Coordinates}) => void,
-    };
+type GeolocationButtonProps = {
+    onSuccess: (result: { name: string, coords: Coordinates }) => void,
+}
 
-    state: {
-        geolocation: GeoLocationState,
-        error?: string
-    };
+type GeolocationButtonState = {
+    geolocation: GeoLocationState,
+    error?: string
+}
+
+// eslint-disable-next-line max-len
+class GeolocationButton extends React.Component<GeolocationButtonProps, GeolocationButtonState> {
     static sampleProps = {
         default: {},
     };
@@ -131,7 +135,6 @@ class GeolocationButton extends React.Component {
             );
         }
     }
-
 }
 
 export default GeolocationButton;

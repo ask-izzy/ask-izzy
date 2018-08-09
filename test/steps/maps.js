@@ -32,7 +32,7 @@ module.exports = (function() {
             unpromisify(assertTransitMethod))
         .then('I should not be able to travel there "$STRING"',
             unpromisify(assertTransitMethodNot))
-        ;
+    ;
 })();
 
 async function assertTransitMethodFastest(method) {
@@ -46,9 +46,9 @@ async function assertTransitMethodFastest(method) {
 
     for (let travelTime of travelTimes) {
         let mode = await travelTime.findElement(By.tagName("span"))
-        .getAttribute("aria-label");
+            .getAttribute("aria-label");
         let arrivalTime = await travelTime.findElement(By.tagName("time"))
-        .getAttribute("datetime");
+            .getAttribute("datetime");
         let duration = new Date(Date.parse(arrivalTime)).getTime();
 
         if (duration < fastestTime || fastestTime === -1) {
@@ -175,11 +175,11 @@ async function assertMap() {
         this.driver.executeScript(
             () => google.maps.maps.length
         ),
-        10000,
+    10000,
     );
     let visible = await this.driver
-                    .findElement(By.css(".gm-style"))
-                    .isDisplayed();
+        .findElement(By.css(".gm-style"))
+        .isDisplayed();
 
     assert.equal(visible, true);
 }
@@ -218,5 +218,5 @@ async function assertMarkers(table) {
     }
 
     assert.deepEqual(markers.sort(cmp),
-                     table.sort(cmp));
+        table.sort(cmp));
 }

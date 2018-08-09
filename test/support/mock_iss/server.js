@@ -99,7 +99,7 @@ app.get("/api/v3/search/", (req, res) => {
             },
             objects: [
                 {
-                    id: 444,  // ourselves
+                    id: 444, // ourselves
                     name: "Community Lunch",
                 }, {
                     id: 445,

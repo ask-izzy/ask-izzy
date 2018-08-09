@@ -26,12 +26,9 @@ import Chevron from "../icons/Chevron";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import type {Service} from "../iss";
 
-export default class ServicePane extends React.Component {
-    props: {
-        service: Service,
-    };
-    state: {siblings: ?Array<Service>};
-
+export default class ServicePane extends React.Component<{
+    service: Service,
+}, {siblings: ?Array<Service>}> {
     constructor(props: Object) {
         super(props);
         this.state = {
@@ -156,7 +153,7 @@ export default class ServicePane extends React.Component {
                 <ul>
                     {object.serviceProvisions.map(
                         (provision, index) =>
-                        <li key={index}>{provision}</li>
+                            <li key={index}>{provision}</li>
                     )}
                 </ul>
             </div>

@@ -5,17 +5,16 @@ import Helmet from "react-helmet";
 import DocumentTitle from "react-document-title";
 import { makeTitle } from "../routes";
 
-export default class BasePage extends React.Component {
-    props: {
-        main: any,
-        children: any,
-        footer: any,
-        routes: any,
-        params: any,
-        location: any,
-    };
-    state: void;
+type Props = {
+    main: any,
+    children: any,
+    footer: any,
+    routes: any,
+    params: any,
+    location: any,
+}
 
+export default class BasePage extends React.Component<Props, void> {
     static childContextTypes = {};
 
     getChildContext(): Object {

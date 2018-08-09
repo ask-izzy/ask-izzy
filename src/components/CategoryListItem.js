@@ -5,12 +5,11 @@ import LinkListItem from "./LinkListItem";
 import icons from "../icons";
 import type {Category} from "../constants/categories";
 
-class CategoryListItem extends React.Component {
-    props: {
-        category: Category,
-    };
-    state: void;
+type Props = {
+    category: Category,
+}
 
+class CategoryListItem extends React.Component<Props, void> {
     static sampleProps = {default: {
         category: {
             key: "material-aid",

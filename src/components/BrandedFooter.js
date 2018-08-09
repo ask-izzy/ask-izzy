@@ -6,9 +6,7 @@ import DemographicAboriginal from "../icons/DemographicAboriginal";
 import DemographicTorresStrait from "../icons/DemographicTorresStrait";
 import config from "../config";
 
-class BrandedFooter extends React.Component {
-    props: {};
-    state: void;
+class BrandedFooter extends React.Component<{}, void> {
     static sampleProps = {
         default: {},
     };
@@ -83,7 +81,6 @@ class BrandedFooter extends React.Component {
             </footer>
         );
     }
-
 }
 
 export default BrandedFooter;

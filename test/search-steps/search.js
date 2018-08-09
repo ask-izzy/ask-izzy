@@ -145,6 +145,7 @@ function objectMatches(expectation: any, subject: any): boolean {
 
 async function searchIss(categoryName: string): Promise<searchResults> {
     const category = Categories.find(({key}) => key == categoryName)
+    // flow:disable
     const request = issRequest(category);
 
     return await search(Object.assign(request, {limit: 25}));
@@ -237,7 +238,7 @@ module.exports = (function() {
         .given("I am not interested in any subcategory",
             unpromisify(setSubcategoriesNone))
         .given("I need the following for $STRING: $string",
-               unpromisify(setSubcategoryItem))
+            unpromisify(setSubcategoryItem))
         .then("my results for $STRING should not contain\n$yaml",
             unpromisify(assertNoSuchResults))
         .then("my results for $STRING should contain\n$yaml",

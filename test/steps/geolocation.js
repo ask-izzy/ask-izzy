@@ -21,7 +21,7 @@ module.exports = (function() {
         .given('my location is "$STRING"', unpromisify(setLocation))
         .given("my location is $LATITUDE $LONGITUDE", unpromisify(setCoords))
         .when("I deny access to geolocation",
-              unpromisify(disableGeolocation));
+            unpromisify(disableGeolocation));
 })();
 
 /**
@@ -66,7 +66,7 @@ async function setLocation(location: string): Promise<void> {
         )
     }
 
-    await gotoUrl(this.driver, "/");  // go anywhere to start the session
+    await gotoUrl(this.driver, "/"); // go anywhere to start the session
     await this.driver.executeScript((location) => {
         IzzyStorage.setLocation(location);
     }, location);

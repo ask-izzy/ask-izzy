@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable camelcase */
 /**
  * ISS API functions.
  *
@@ -326,7 +327,9 @@ export class Service {
     }
 
     Location(): Location {
+        // flow:disable
         return new Location(this.location, this.travelTime);
+        // @flow:enable
     }
 
     Phones(): Array<phone> {
@@ -389,13 +392,14 @@ export class Service {
     funding_body: string;
     healthcare_card_holders: boolean;
     id: number;
+    indigenous_classification: string;
     ineligibility_info: string;
     intake_info: string;
     intake_point: string;
     is_bulk_billing: boolean;
     languages: Array<string>;
     last_updated: ymdWithDashesDate;
-    location: issLocation;
+    location: ?issLocation;
     travelTime: ?travelTime; // From google travel times api
     name: string;
     ndis_approved: boolean;
@@ -428,6 +432,7 @@ export class Service {
 
     _serviceProvisions: Array<string>;
     _siblingServices: searchResults;
+    _explanation: Object;
 
 
     /**

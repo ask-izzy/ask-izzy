@@ -11,12 +11,12 @@ export default class FoodSubcategories extends BaseQuestion {
         name: "sub-food",
         question: "What type of food do you need?",
         answers: {
-            "Community meals": remove("-\(coordinating bodies\)"),
+            "Community meals": remove("-(coordinating bodies)"),
             "Food packages/parcels/vouchers": remove("meals")
                 .append("food parcel")
                 .append({service_type: ["material aid"]}),
             "Meals on Wheels": remove("meals")
-                .remove("-\(meals on wheels\)")
+                .remove("-(meals on wheels)")
                 .remove("-chsp")
                 .append("meals on wheels"),
         },

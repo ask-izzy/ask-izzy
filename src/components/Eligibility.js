@@ -6,16 +6,15 @@ import _string from "underscore.string";
 
 import fixtures from "../../fixtures/services";
 
-class Eligibility extends React.Component {
-    props: {
-        catchment: string,
-        eligibility_info: string,
-        ineligibility_info: string,
-        referral_info: string,
-        special_requirements: string,
-    };
-    state: void;
+type Props = {
+    catchment: string,
+    eligibility_info: string,
+    ineligibility_info: string,
+    referral_info: string,
+    special_requirements: string,
+}
 
+class Eligibility extends React.Component<Props, void> {
     static sampleProps = {default: fixtures.ixa};
 
     render() {

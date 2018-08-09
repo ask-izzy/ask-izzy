@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import PropTypes from "proptypes";
 import _ from "underscore";
 
 import ResultsList from "../components/ResultsList";
@@ -10,25 +11,25 @@ import ViewOnMapButton from "../components/ViewOnMapButton";
 import sendEvent from "../google-tag-manager";
 import storage from "../storage";
 import type { Service } from "../iss";
+import type { Category } from "../constants/categories";
 
-type SearchOrCategory = {search: string} | {title: string};
+type Props = {
+    loadMore: any,
+    objects: Array<Service>,
+    location: any,
+    personalisationComponents: Array<Object>,
+    title: string,
+    statusCode: number,
+    meta: {total_count: number},
+    loading: boolean,
+    error: string,
+    category?: Category,
+    search?: {search: string}
+}
 
-class ResultsListPage extends React.Component {
-    props: {
-        loadMore: any,
-        objects: Array<Service>,
-        location: any,
-        personalisationComponents: Array<Object>,
-        title: string,
-        statusCode: number,
-        meta: {total_count: number},
-        loading: boolean,
-        error: string,
-    } & SearchOrCategory;
-    state: void;
-
+class ResultsListPage extends React.Component<Props, void> {
     static propTypes = {
-        objects: React.PropTypes.array,
+        objects: PropTypes.array,
     };
 
     recordMapClick(): void {
@@ -70,7 +71,6 @@ class ResultsListPage extends React.Component {
             </div>
         );
     }
-
 }
 
 export default ResultsListPage;

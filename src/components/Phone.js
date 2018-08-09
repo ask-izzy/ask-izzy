@@ -5,10 +5,11 @@ import { titleize } from "underscore.string";
 import sendEvent from "../google-tag-manager";
 import icons from "../icons";
 
-class Phone extends React.Component {
-    props: phone & {crisis?: boolean};
-    state: void;
+type Props = phone & {
+    crisis?: boolean
+}
 
+class Phone extends React.Component<Props, void> {
     static sampleProps = {default: {
         "comment": "Here is a phone number with a long comment" +
             ", like, a really long comment",
@@ -17,7 +18,7 @@ class Phone extends React.Component {
     }};
 
     get href(): string {
-        return "tel:" + this.props.number.replace(/[^0-9\+]/g, "");
+        return "tel:" + this.props.number.replace(/[^0-9+]/g, "");
     }
 
     recordClick(): void {
@@ -42,7 +43,7 @@ class Phone extends React.Component {
             <div className="Contact Phone">
                 <span className="kind">
                     {this.props.comment ? this.props.comment
-                    : titleize(this.props.kind)}
+                        : titleize(this.props.kind)}
                 </span>
                 <a
                     href={this.href}
@@ -61,7 +62,6 @@ class Phone extends React.Component {
             </div>
         );
     }
-
 }
 
 export default Phone;

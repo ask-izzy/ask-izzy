@@ -5,7 +5,7 @@ import React from "react";
 import { Link } from "react-router";
 import StaticPage from "./StaticPage";
 
-export default class HomelessFinanceStaticPage extends React.Component {
+export default class HomelessFinanceStaticPage extends React.Component<{}> {
     render() {
         return (
             <StaticPage

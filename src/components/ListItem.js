@@ -18,10 +18,7 @@ export type ListItemProps = {
     onClick?: Function,
 }
 
-export default class ListItem extends React.Component {
-    props: ListItemProps;
-    state: void;
-
+export default class ListItem extends React.Component<ListItemProps, void> {
     static sampleProps = {
         default: {
             primaryText: "Link Text",
@@ -38,7 +35,7 @@ export default class ListItem extends React.Component {
             rightIcon,
             primaryText,
             secondaryText,
-            ...rest,
+            ...rest
         } = this.props;
 
         if (!rootElement) {
@@ -62,14 +59,16 @@ export default class ListItem extends React.Component {
                 <div className="leftIcon">
                     {leftIcon}
                 </div>
-                {children ? null
-                : <div className="primaryText">
-                    {primaryText}
-                </div>}
-                {children ? null
-                : <div className="secondaryText">
-                    {secondaryText}
-                </div>}
+                {!children && (
+                    <div className="primaryText">
+                        {primaryText}
+                    </div>
+                )}
+                {!children && (
+                    <div className="secondaryText">
+                        {secondaryText}
+                    </div>
+                )}
                 {children}
                 <div className="rightIcon">
                     {rightIcon}

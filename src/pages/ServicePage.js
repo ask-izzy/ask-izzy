@@ -2,6 +2,7 @@
 /* eslint-disable max-len */
 
 import React from "react";
+import PropTypes from "proptypes";
 import ServicePane from "../components/ServicePane";
 
 import iss from "../iss";
@@ -10,22 +11,20 @@ import components from "../components";
 import Loading from "../icons/Loading";
 import config from "../config";
 
-class ServicePage extends React.Component {
-    props: {
-        params: {
-            slug: string,
-        },
-    };
-    state: {
-        object?: Service,
-        error?: Object,
-    };
+class ServicePage extends React.Component<{
+    params: {
+        slug: string,
+    },
+}, {
+    object?: Service,
+    error?: Object,
+}> {
     static propTypes = {
-        params: React.PropTypes.object,
+        params: PropTypes.object,
     };
 
     static contextTypes = {
-        router: React.PropTypes.object.isRequired,
+        router: PropTypes.object.isRequired,
     };
 
     constructor(props: Object) {
@@ -89,24 +88,23 @@ class ServicePage extends React.Component {
                         <main>
                             {
                                 error ?
-                                <div className="error">
-                                    <p>
+                                    <div className="error">
+                                        <p>
                                         Sorry, I was unable to retrieve the information for this service at this time.
                                         Please try viewing another service or contact us
                                         if the problem persists at&nbsp;
-                                        <a href={"mailto:" + config.default.siteMail}>{config.default.siteMail}</a>.
-                                    </p>
-                                    <p>
-                                        {
-                                           error.statusCode ?
-                                           "(error: " + error.statusCode + ")"
-                                           : ""
-                                        }
-                                    </p>
-                                </div>
-                                : <div className="progress">
-                                    <Loading className="big" />
-                                  </div>
+                                            <a href={"mailto:" + config.default.siteMail}>{config.default.siteMail}</a>.
+                                        </p>
+                                        <p>
+                                            {
+                                                error.statusCode &&
+                                                    "(error: " + error.statusCode + ")"
+                                            }
+                                        </p>
+                                    </div>
+                                    : <div className="progress">
+                                        <Loading className="big" />
+                                    </div>
                             }
                         </main>
                     </div>
@@ -124,7 +122,6 @@ class ServicePage extends React.Component {
             );
         }
     }
-
 }
 
 export default ServicePage;

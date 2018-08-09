@@ -12,12 +12,12 @@ import asyncFilter from "../support/async-filter";
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .then("I should see the contacts\n$lines",
-              unpromisify(checkPhoneNumbers))
+            unpromisify(checkPhoneNumbers))
         .then("I should see a transport time of \"$string\"",
-              unpromisify(checkTransportTime))
+            unpromisify(checkTransportTime))
         .then("I should see a transport time of\n$lines",
-              unpromisify(checkTransportTimeLines))
-        ;
+            unpromisify(checkTransportTimeLines))
+    ;
 })();
 
 async function checkTransportTimeLines(time: Array<string>): Promise<void> {
@@ -38,7 +38,7 @@ async function checkTransportTime(time: string): Promise<void> {
 
     text = normalizeWhitespace(text.join("\n"))
     assert(text.indexOf(normalizeWhitespace(time)) !== -1,
-           `Expected '${text}' to include '${time}'`);
+        `Expected '${text}' to include '${time}'`);
 }
 
 function normalizeWhitespace(text: string, resultingSpace = "\n"): string {

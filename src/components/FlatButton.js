@@ -1,21 +1,22 @@
 /* @flow */
 
 import React from "react";
+import PropTypes from "proptypes";
 import classnames from "classnames";
 
-export default class FlatButton extends React.Component {
-    props: {
-        label: string,
-        className?: string,
-        onClick: Function,
-        disabled?: boolean,
-        children?: any,
-    };
-    state: void;
+type Props = {
+    label: string,
+    className?: string,
+    onClick: Function,
+    disabled?: boolean,
+    children?: any,
+}
+
+export default class FlatButton extends React.Component<Props, void> {
     static propTypes = {
-        disabled: React.PropTypes.bool,
-        label: React.PropTypes.string.isRequired,
-        onClick: React.PropTypes.func,
+        disabled: PropTypes.bool,
+        label: PropTypes.string.isRequired,
+        onClick: PropTypes.func,
     };
 
     static sampleProps = {
@@ -29,7 +30,7 @@ export default class FlatButton extends React.Component {
             className,
             children,
             label,
-            ...rest,
+            ...rest
         } = this.props;
 
         return (

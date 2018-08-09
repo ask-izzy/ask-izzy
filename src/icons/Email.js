@@ -5,12 +5,9 @@
 import React from "react";
 import classnames from "classnames";
 
-export default class SvgIconEmail extends React.Component {
-    props: {
-        className?: string,
-    };
-    state: void;
-
+export default class SvgIconEmail extends React.Component<{
+    className?: string,
+}, void> {
     render() {
         const {className, ...rest} = this.props;
         const classes = classnames(

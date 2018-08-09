@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import PropTypes from "proptypes";
 import fixtures from "../../fixtures/services";
 
 import icons from "../icons";
@@ -19,18 +20,15 @@ import sendEvent from "../google-tag-manager";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import { titleize } from "underscore.string";
 
-class ResultListItem extends React.Component {
-    props: {
-        object: iss.Service,
-        nServiceProvisions: number,
-    };
-    state: void;
-
+class ResultListItem extends React.Component<{
+    object: iss.Service,
+    nServiceProvisions: number,
+}, void> {
     static displayName = "ResultListItem";
 
     static propTypes = {
-        object: React.PropTypes.instanceOf(iss.Service).isRequired,
-        nServiceProvisions: React.PropTypes.number,
+        object: PropTypes.instanceOf(iss.Service).isRequired,
+        nServiceProvisions: PropTypes.number,
     };
 
     static defaultProps = {
@@ -47,7 +45,7 @@ class ResultListItem extends React.Component {
      */
     get nMoreServiceProvisions(): number {
         return Math.max(0,
-                        this.props.object.serviceProvisions.length -
+            this.props.object.serviceProvisions.length -
                             this.props.nServiceProvisions);
     }
 
@@ -115,10 +113,10 @@ class ResultListItem extends React.Component {
                 />
 
                 <IndigenousServiceIcon object={object} />
-                {this.props.nServiceProvisions > 0 ?
+                {this.props.nServiceProvisions > 0 && (
                     <div>
-                        <ul className="related">{
-                            object.serviceProvisions
+                        <ul className="related">
+                            {object.serviceProvisions
                                 .slice(0, this.props.nServiceProvisions)
                                 .map((service, index) =>
                                     <li className="provision"
@@ -127,15 +125,16 @@ class ResultListItem extends React.Component {
                                         {service}
                                     </li>
                                 )
-                        }</ul>
+                            }
+                        </ul>
 
-                        {this.nMoreServiceProvisions > 0 ?
+                        {this.nMoreServiceProvisions > 0 && (
                             <div>
                                 {this.nMoreServiceProvisions} more…
                             </div>
-                        : ""}
+                        )}
                     </div>
-                : ""}
+                )}
 
                 <DebugServiceRecord object={object} />
                 {object._explanation &&

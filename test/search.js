@@ -1,5 +1,4 @@
-/* @flow */
-
+/* flow:disable */
 /*
  * Enable Yadda in Mocha
  */

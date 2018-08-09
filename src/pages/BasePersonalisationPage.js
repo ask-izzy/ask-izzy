@@ -1,6 +1,6 @@
-/* @flow */
+/* flow:disable */
 
-import React from "react";
+import PropTypes from "proptypes";
 import { browserHistory } from "react-router";
 
 import BaseCategoriesPage from "./BaseCategoriesPage";
@@ -12,11 +12,7 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     }
 
     static contextTypes = {
-        router: React.PropTypes.object.isRequired,
-    };
-
-    static childContextTypes = {
-        controller: React.PropTypes.instanceOf(BasePersonalisationPage),
+        router: PropTypes.object.isRequired,
     };
 
     getChildContext(): Object {
@@ -79,7 +75,7 @@ class BasePersonalisationPage extends BaseCategoriesPage {
         );
     }
 
-    get currentComponent(): ?ReactClass<*> {
+    get currentComponent(): ?React$ComponentType<*> {
         return this.personalisationComponents[this.currentComponentIdx];
     }
 
@@ -88,7 +84,10 @@ class BasePersonalisationPage extends BaseCategoriesPage {
             component.defaultProps.name == this.props.params.subpage
         );
     }
+}
 
+BasePersonalisationPage.childContextTypes = {
+    controller: PropTypes.instanceOf(BasePersonalisationPage),
 }
 
 export default BasePersonalisationPage;

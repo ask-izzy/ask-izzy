@@ -37,7 +37,7 @@
         "indent": [2, 4],
         "jsx-quotes": 2,
         "key-spacing": [2, {"beforeColon": false, "afterColon": true}],
-        "max-len": [2, 78, 4, { "ignoreUrls": true }],
+        "max-len": [2, 80, 4, { "ignoreUrls": true }],
         "new-parens": 2,
         "newline-after-var": 2,
         "no-alert": 2,
@@ -103,8 +103,6 @@
         "react/no-did-mount-set-state": 0, /* ismorphic rendering does not play nice with this rule */
         "react/prop-types": 0, // Does not track proptypes across inheritance / mixins / composition
         "react/react-in-jsx-scope": 2,
-        "react/require-extension": 2,
         "react/self-closing-comp": 2,
-        "react/wrap-multilines": 2
     }
 }

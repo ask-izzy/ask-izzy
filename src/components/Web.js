@@ -4,10 +4,7 @@ import URL from "url";
 import icons from "../icons";
 import sendEvent from "../google-tag-manager";
 
-export default class Web extends React.Component {
-    props: {url: string};
-    state: void;
-
+export default class Web extends React.Component<{url: string}, void> {
     static sampleProps = {default: {url: "https://ExampleDomain.com/landingPage"}};
 
     recordClick(): void {
@@ -29,7 +26,7 @@ export default class Web extends React.Component {
                     <icons.Website />
                     <div className="Contact-text">
                         <span className="kind">
-                        {' '}
+                            {' '}
                         </span>
                         <span className="web value">
                             {url.hostname}

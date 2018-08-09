@@ -24,14 +24,14 @@ module.exports = (function() {
             unpromisify(hotlinePositionAndText))
         .then("I should see $NUMBER search results " +
             'for "$STRING" in "$STRING"',
-            unpromisify(assertNumSearchResults))
+        unpromisify(assertNumSearchResults))
         .then('I should see $NUMBER search results in "$STRING"',
             unpromisify(assertNumSearchResults))
         .then('I should see "$STRING" before first hotline',
             unpromisify(assertHotlineHeading))
         .then("my results should not contain\n$table",
             unpromisify(assertNoSuchResults))
-        ;
+    ;
 })();
 
 async function waitForResultCount(
@@ -74,7 +74,7 @@ async function seeTheResultsIn(
         expected = expected.map(text => text == "(nada)" ? "" : text);
 
         assert.deepEqual(actual, expected,
-                         `${key} is not correct`);
+            `${key} is not correct`);
     }
 }
 
@@ -87,8 +87,8 @@ async function hotlinePositionAndText(
     expectedText: string,
 ): Promise<void> {
     let elements = await this.driver.findElements(
-            By.css(".CrisisLineItem, .ResultListItem")
-        );
+        By.css(".CrisisLineItem, .ResultListItem")
+    );
     let crisisLine = elements[expectedPos - 1];
 
     if (!crisisLine) {
@@ -98,7 +98,7 @@ async function hotlinePositionAndText(
         );
     }
     assert.equal(await crisisLine.getAttribute("class"),
-                 "CrisisLineItem");
+        "CrisisLineItem");
 
     let phone = await crisisLine.findElement(By.css(".Phone .ContactButton"));
 

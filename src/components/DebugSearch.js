@@ -2,12 +2,11 @@
 
 import React from "react";
 
-class DebugQueryScore extends React.Component {
-    props: {
-        search: ?Object,
-    };
-    state: void;
+type Props = {
+    search: ?Object,
+}
 
+class DebugQueryScore extends React.Component<Props, void> {
     render() {
         const {search} = this.props;
 
@@ -24,7 +23,6 @@ class DebugQueryScore extends React.Component {
             </div>
         );
     }
-
 }
 
 export default DebugQueryScore;

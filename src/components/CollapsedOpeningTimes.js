@@ -46,15 +46,15 @@ function fixture(
     };
 }
 
-export default class CollapsedOpeningTimes extends React.Component {
-    props: {
-        object: ServiceOpening,
-        serviceId: number,
-        moment?: Moment,
-        expanded?: boolean,
-    };
-    state: void;
+type Props = {
+    object: ServiceOpening,
+    serviceId: number,
+    moment?: Moment,
+    expanded?: boolean,
+}
 
+// eslint-disable-next-line max-len
+export default class CollapsedOpeningTimes extends React.Component<Props, void> {
     static sampleProps = {
         "between Twice in one day (@1pm wed)": fixture(false, [{
             day: "Wednesday",
@@ -134,27 +134,27 @@ export default class CollapsedOpeningTimes extends React.Component {
         return (
             <div className="CollapsedOpeningTimes">
                 <OpeningTimes object={this.props.object} />
-                {openingHours.length > 0 ?
+                {openingHours.length > 0 && (
                     <Collapser
                         message="Open Times"
                         expanded={this.props.expanded}
                         onClick={this.recordExpandOpeningTimes.bind(this)}
                     >
-                    <ul className="AllOpeningTimes">
-                    {openingHours.map((record, idx) =>
-                        <li key={idx} >
-                            <span className="day">{record.day}</span>
-                            {' '}
-                            <span className="time">
-                                {formatTime(record.open)}
-                                &ndash;
-                                {formatTime(record.close)}
-                            </span>
-                        </li>
-                    )}
-                    </ul>
+                        <ul className="AllOpeningTimes">
+                            {openingHours.map((record, idx) =>
+                                <li key={idx} >
+                                    <span className="day">{record.day}</span>
+                                    {' '}
+                                    <span className="time">
+                                        {formatTime(record.open)}
+                                        &ndash;
+                                        {formatTime(record.close)}
+                                    </span>
+                                </li>
+                            )}
+                        </ul>
                     </Collapser>
-                : ""}
+                )}
             </div>
         );
     }

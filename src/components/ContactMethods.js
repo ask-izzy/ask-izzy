@@ -13,13 +13,12 @@ import sendEvent from "../google-tag-manager";
 
 import type { Service } from "../iss";
 
-class ContactMethods extends React.Component {
-    props: {
-        object: Service,
-        expanded?: boolean
-    };
-    state: void;
+type Props = {
+    object: Service,
+    expanded?: boolean
+}
 
+class ContactMethods extends React.Component<Props, void> {
     static sampleProps = {
         closed: {
             object: ServiceFactory({

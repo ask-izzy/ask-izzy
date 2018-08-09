@@ -1,17 +1,18 @@
 /* @flow */
 
 import React from "react";
+import PropTypes from "proptypes";
 import classnames from "classnames";
 
-export default class IconButton extends React.Component {
-    props: {
-        onClick: Function,
-        className?: string,
-        children?: any,
-    };
-    state: void;
+type Props = {
+    onClick: Function,
+    className?: string,
+    children?: any,
+}
+
+export default class IconButton extends React.Component<Props, void> {
     static propTypes = {
-        onClick: React.PropTypes.func,
+        onClick: PropTypes.func,
     };
 
     static sampleProps = {

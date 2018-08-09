@@ -5,7 +5,7 @@ import React from "react";
 import { Link } from "react-router";
 import StaticPage from "./StaticPage";
 
-export default class HomelessLegalStaticPage extends React.Component {
+export default class HomelessLegalStaticPage extends React.Component<{}> {
     render() {
         return (
             <StaticPage
@@ -37,9 +37,9 @@ export default class HomelessLegalStaticPage extends React.Component {
                 <h2>Criminal law</h2>
                 <p>Lawyers specialising in criminal law, can help you with issues relating to conduct prohibited by the government. Examples include:</p>
                 <ul>
-                <li>fines and infringement notices </li>
-                <li>parole issues</li>
-                <li>prison and detention</li>
+                    <li>fines and infringement notices </li>
+                    <li>parole issues</li>
+                    <li>prison and detention</li>
                 </ul>
                 <h2>Where can I find legal services for the homeless?</h2>
                 <p>There are homeless legal service located in regional and metropolitan areas across Australia. Some are drop in services so you do not need to make an appointment and others are not. Check with your selected service before you travel. </p>

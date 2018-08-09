@@ -18,7 +18,7 @@ CI_FORKLIFT_FLAGS := $(FORKLIFT_FLAGS) \
 	-e CI="$(CI)" \
 	-e GOOGLE_API_KEY="$(GOOGLE_API_KEY)" \
 	-e ISS_URL="$(ISS_URL)" \
-	-e SELENIUM_BROWSER="phantomjs" \
+	-e SELENIUM_BROWSER="chrome" \
 	$(NULL)
 
 CI_TEST_FLAGS := $(TEST_FLAGS) \

@@ -2,30 +2,27 @@
 /* eslint-disable max-len */
 
 import React from "react";
+import PropTypes from "proptypes";
 import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
 
-export default class StaticPage extends React.Component {
-    props: {
-        title: string,
-        bannerName: string,
-        children: any,
+export default class StaticPage extends React.Component<{
+    title: string,
+    bannerName: string,
+    children: any,
+}, void> {
+    static defaultProps: {
+        children: null,
     };
-    state: void;
 
     static sampleProps = {
         title: "Food Banks",
         bannerName: "food",
     };
 
-    // FIXME: https://github.com/facebook/flow/issues/1820
-    static defaultProps: {
-        children: null,
-    };
-
     static contextTypes = {
-        router: React.PropTypes.object.isRequired,
+        router: PropTypes.object.isRequired,
     };
 
     render() {
@@ -39,13 +36,13 @@ export default class StaticPage extends React.Component {
                 />
                 {
                     this.props.bannerName ?
-                    <HeaderBar
-                        primaryText={null}
-                        secondaryText={null}
-                        bannerName={this.props.bannerName}
-                        alternateBackgroundColor={false}
-                    />
-                    : null
+                        <HeaderBar
+                            primaryText={null}
+                            secondaryText={null}
+                            bannerName={this.props.bannerName}
+                            alternateBackgroundColor={false}
+                        />
+                        : null
                 }
 
                 <div className="body">
@@ -56,5 +53,4 @@ export default class StaticPage extends React.Component {
             </div>
         );
     }
-
 }

@@ -1,5 +1,4 @@
-/* @flow */
-
+/* flow:disable */
 /* eslint-env node, mocha */
 /* eslint-disable no-use-before-define, prefer-arrow-callback */
 
@@ -17,10 +16,7 @@ function point(lat: number, lon: number): issPoint {
     return denormalizePoint({lat, lon});
 }
 
-function assertEqual(
-    expected: Array<issPoint>,
-    actual: Array<issPoint>
-): void {
+function assertEqual(expected: Array<issPoint>, actual: Array<issPoint>): void {
     assert.deepEqual(expected.map(normalizePoint), actual.map(normalizePoint))
 }
 

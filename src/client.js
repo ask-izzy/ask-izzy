@@ -1,4 +1,4 @@
-/* @flow */
+/* flow:disable */
 
 import xhr from "axios";
 import React from "react";
@@ -107,7 +107,7 @@ function History() {
     };
 }
 
-ReactDOM.render(
+ReactDOM.hydrate(
     <Router
         history={History()}
         onUpdate={() => {

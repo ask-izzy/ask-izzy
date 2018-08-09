@@ -5,7 +5,7 @@
 @import "./responsive";
 @import "./mixins";
 @import "./fonts";
-@import "../../bower_components/saffron/saffron/saffron";
+@import "~saffron-sass/saffron/saffron";
 
 @import "../styles/shared/plain-text";
 @import "../styles/shared/print-only";

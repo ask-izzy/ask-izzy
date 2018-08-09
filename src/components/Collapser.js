@@ -2,18 +2,20 @@
 import React from "react";
 import classnames from "classnames";
 
-class Collapser extends React.Component {
-    props: {
-        message: string,
-        className?: string,
-        closeMessage?: string,
-        expanded?: boolean,
-        children?: any,
-    };
-    state: {
-        collapsed: boolean,
-    };
+type Props = {
+    message: string,
+    className?: string,
+    closeMessage?: string,
+    expanded?: boolean,
+    children?: any,
+    onClick?: Function
+}
 
+type State = {
+    collapsed: boolean,
+}
+
+class Collapser extends React.Component<Props, State> {
     constructor(props: Object) {
         // By default, if 'closeMessage' is not defined, then
         // the component will remove the expand link on click, and the user
@@ -48,7 +50,7 @@ class Collapser extends React.Component {
         },
     };
 
-    onClick(event: SyntheticInputEvent): void {
+    onClick(event: SyntheticInputEvent<>): void {
         if (this.state.collapsed) {
             event.preventDefault();
             this.setState({collapsed: false});
@@ -105,7 +107,6 @@ class Collapser extends React.Component {
             );
         }
     }
-
 }
 
 export default Collapser;

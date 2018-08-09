@@ -37,6 +37,7 @@ function timeOfDay(day: Moment, time: hmsWithColonsTime): Moment {
     return time_;
 }
 
+/* eslint-disable camelcase */
 export default class ServiceOpening {
     now_open: ?boolean;
     _opening_times: Array<serviceOpeningHours>;
@@ -165,7 +166,7 @@ export default class ServiceOpening {
         // Reject invalid dates
         if (_(values).any(
             value => moment.isMoment(value) && !value.isValid())
-           ) {
+        ) {
             return "";
         }
 

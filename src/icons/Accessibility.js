@@ -5,12 +5,11 @@
 import React from "react";
 import classnames from "classnames";
 
-export default class SvgIconAccessibility extends React.Component {
-    props: {
-        className?: string,
-    };
-    state: void;
+type Props = {
+    className?: string,
+}
 
+export default class SvgIconAccessibility extends React.Component<Props, void> {
     render() {
         const {className, ...rest} = this.props;
         const classes = classnames(

@@ -1,14 +1,17 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
+import PropTypes from "proptypes";
 import components from "../components";
 import _s from "underscore.string";
 
-export default class StyleGuideItem extends React.Component {
-    props: {params: Object};
-    state: void;
+type Props = {
+    params: Object
+}
+
+export default class StyleGuideItem extends React.Component<Props, void> {
     static propTypes = {
-        params: React.PropTypes.object,
+        params: PropTypes.object,
     };
 
     constructor(props: Object) {
@@ -19,7 +22,10 @@ export default class StyleGuideItem extends React.Component {
         return this.props.params.componentName;
     }
 
-    getComponent(): ReactClass<any> {
+    getComponent(): React.ComponentType<any> {
+        /* TODO: Find why flow doesn't like this func. Mmight be because not all
+           components have `sampleProps` defined. Might be able to narrow down
+           what this function returns. */
         return components[this.getComponentName()];
     }
 
@@ -32,6 +38,7 @@ export default class StyleGuideItem extends React.Component {
             );
         }
 
+        // flow:disable
         let variantNames = Object.keys(Component.sampleProps);
         let variants = variantNames.map(key => {
             let heading;
@@ -43,6 +50,7 @@ export default class StyleGuideItem extends React.Component {
             return (
                 <div key={key}>
                     {heading}
+                    {/* flow:disable */}
                     <Component {...Component.sampleProps[key]} />
                 </div>
             );
@@ -54,5 +62,4 @@ export default class StyleGuideItem extends React.Component {
             </div>
         );
     }
-
 }

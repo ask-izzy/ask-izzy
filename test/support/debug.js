@@ -9,7 +9,7 @@ function pauseToDebug() {
             stdin.setRawMode(true);
             stdin.on("data", (key) => {
                 stdin.setRawMode(false);
-                if (key === "\u0003") {  // Ctrl-C
+                if (key === "\u0003") { // Ctrl-C
                     reject();
                 } else {
                     resolve();
@@ -18,7 +18,6 @@ function pauseToDebug() {
         } else {
             console.log("Cannot capture STDIN; hanging forever.")
         }
-
     });
 }
 

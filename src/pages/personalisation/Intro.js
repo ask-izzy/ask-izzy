@@ -1,24 +1,26 @@
 /* @flow */
 
 import React from "react";
+import PropTypes from "proptypes";
 import reactMixin from "react-mixin";
 
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import * as iss from "../../iss";
 
-/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
-class Intro extends React.Component {
-    props: {};
-    state: void;
+type Props = {
+    onDoneTouchTap: Function
+}
 
+/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
+class Intro extends React.Component<Props, void> {
     static defaultProps = {
         name: "intro",
     };
 
     static propTypes = {
-        name: React.PropTypes.string.isRequired,
-        onDoneTouchTap: React.PropTypes.func,
+        name: PropTypes.string.isRequired,
+        onDoneTouchTap: PropTypes.func,
     };
 
     static title = "Intro";
@@ -83,7 +85,6 @@ class Intro extends React.Component {
             </div>
         )
     }
-
 }
 
 export default Intro;

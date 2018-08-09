@@ -17,12 +17,9 @@ interfaces/
 module.system=node
 suppress_type=$FlowIssue
 suppress_comment= \\(.\\|\n\\)*\\flow:disable
-strip_root=false
 esproposal.class_static_fields=ignore
 esproposal.class_instance_fields=enable
 esproposal.decorators=ignore
-unsafe.enable_getters_and_setters=true
-experimental.strict_type_args=true
 
 [version]
-0.27.0
+0.76.0

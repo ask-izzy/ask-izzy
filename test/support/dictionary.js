@@ -72,11 +72,11 @@ function parseTable(lines: Array<string>): Array<Object> | Object {
 
     lines.shift();
     return lines.map(
-         line => _.object(header,
-                          line
-                             .split("|")
-                             .map(cell => cell.trim())
-                         )
+        line => _.object(
+            header,
+            line.split("|")
+                .map(cell => cell.trim())
+        )
     );
 }
 
@@ -129,6 +129,7 @@ function numberConverter(str: string, done: callback): void {
     }
 }
 
+/* eslint-disable no-control-regex, newline-after-var */
 const dictionary = new Yadda.Dictionary()
     .define("LATITUDE", /(\d+.\d+[NS])/, latitudeConverter)
     .define("LONGITUDE", /(\d+.\d+[EW])/, longitudeConverter)
@@ -137,7 +138,7 @@ const dictionary = new Yadda.Dictionary()
     .define("service", /([^\u0000]*)/, serviceConverter)
     .define("services", /([^\u0000]*)/, servicesConverter)
     .define("yaml", /([^\u0000]*)/, yamlConverter)
-    .define("NUMBER", /([^\u0000]*)/, numberConverter)
-    ;
+    .define("NUMBER", /([^\u0000]*)/, numberConverter);
+/* eslint-enable */
 
 export default dictionary;

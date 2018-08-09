@@ -2,12 +2,11 @@
 
 import React from "react";
 
-class CrisisHeader extends React.Component {
-    props: {
-        plural: boolean
-    };
-    state: void;
+type Props = {
+    plural: boolean
+}
 
+class CrisisHeader extends React.Component<Props, void> {
     render() {
         return (
             <h3 className="CrisisHeader">

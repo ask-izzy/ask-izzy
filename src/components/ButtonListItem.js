@@ -4,9 +4,8 @@ import React from "react";
 import ListItem from "./ListItem";
 import type {ListItemProps} from "./ListItem";
 
-export default class ButtonListItem extends React.Component {
-    props: ListItemProps;
-    state: void;
+/* eslint-disable-next-line max-len */
+export default class ButtonListItem extends React.Component<ListItemProps, void> {
     static propTypes = ListItem.propTypes;
 
     static sampleProps = ListItem.sampleProps;
@@ -15,7 +14,6 @@ export default class ButtonListItem extends React.Component {
         return (
             <ListItem
                 rootElement="a"
-                aria-role="button"
                 role="button"
                 tabIndex="0"
                 href="#"
@@ -25,7 +23,7 @@ export default class ButtonListItem extends React.Component {
         );
     }
 
-    onClick(event: SyntheticInputEvent): void {
+    onClick(event: SyntheticInputEvent<>): void {
         if (this.props.onClick) {
             this.props.onClick();
         }

@@ -1,8 +1,9 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
+import PropTypes from "proptypes";
 import _ from "underscore";
-import { GoogleMap, Marker } from "react-google-maps";
+import { GoogleMap, Marker, withGoogleMap } from "react-google-maps";
 
 import iss from "../iss";
 import type {Service} from "../iss";
@@ -11,17 +12,23 @@ import type {MapsApi} from "../maps";
 import ResultsList from "./ResultsList";
 import storage from "../storage";
 
-class ResultsMap extends React.Component {
-    props: {};
-    state: {
-        coords?: ?{latitude: number, longitude: number},
-        selectedServices?: Array<Service>,
-        maps?: MapsApi,
+type Props = {
+    objects: Array<Object>,
+    onServicesChange?: Function,
+}
+
+type State = {
+    coords?: ?{latitude: number, longitude: number},
+    selectedServices?: Array<Service>,
+    maps?: MapsApi,
+}
+
+class ResultsMap extends React.Component<Props, State> {
+    static contextTypes = {
+        router: PropTypes.object.isRequired,
     };
 
-    static contextTypes = {
-        router: React.PropTypes.object.isRequired,
-    };
+    _map: any;
 
     constructor(props: Object) {
         super(props);
@@ -62,6 +69,9 @@ class ResultsMap extends React.Component {
     clearSelection(): void {
         if (this.state.selectedServices) {
             this.setState({selectedServices: []});
+            if (this.props.onServicesChange) {
+                this.props.onServicesChange([]);
+            }
         }
     }
 
@@ -70,13 +80,13 @@ class ResultsMap extends React.Component {
      *
      * @returns {Promise} the Google Maps object.
      */
-    getMap(): Promise<Object> {  // FIXME: use actual type
-        const map = this.refs.map;
+    getMap(): Promise<Object> { // FIXME: use actual type
+        const map = this._map;
 
         return new Promise((resolve, reject) => {
             function checkMaps() {
-                if (map.refs && map.refs.delegate) {
-                    resolve(map.refs.delegate);
+                if (map) {
+                    resolve(map);
                 } else {
                     setTimeout(checkMaps, 500);
                 }
@@ -118,7 +128,7 @@ class ResultsMap extends React.Component {
         let bounds = new maps.LatLngBounds();
         const points = removeOutliers(
             _.compact(this.services().map(
-                (service) => service.location.point
+                (service) => service.location ? service.location.point : null
             ))
         )
 
@@ -137,9 +147,12 @@ class ResultsMap extends React.Component {
 
     onMarkerClick(services: Array<Object>): void {
         this.setState({selectedServices: services});
+        if (this.props.onServicesChange) {
+            this.props.onServicesChange(services);
+        }
     }
 
-    onGoBack(event: SyntheticInputEvent): void {
+    onGoBack(event: SyntheticInputEvent<>): void {
         event.preventDefault()
         if (!_.isEmpty(this.state.selectedServices)) {
             this.clearSelection();
@@ -153,9 +166,9 @@ class ResultsMap extends React.Component {
 
         return (
             <div className="ResultsMap">
-                {   /* we can't create the map component until the API promise
+                { /* we can't create the map component until the API promise
                      * resolves */
-                    this.state.maps ? this.renderMap() : ""
+                    this.state.maps && this.renderMap()
                 }
                 <ResultsList
                     results={selectedServices}
@@ -165,78 +178,60 @@ class ResultsMap extends React.Component {
     }
 
     renderMap() {
-        let selectedServices = this.state.selectedServices || [];
-        let mapHeight = 0;
-
-        try {
-            /* calculate the height of the map */
-            mapHeight =
-                window.innerHeight -
-                document.querySelector(".AppBar").offsetHeight;
-
-            /* resize the map to make room
-             * for the selected results */
-            mapHeight -= 150 * selectedServices.length;
-
-            /* limit minimum height to 1/2 of the screen realestate */
-            mapHeight = Math.max(mapHeight,
-                                 window.innerHeight / 2);
-        } catch (error) {
-            console.error(error);
-        }
 
         return (
             <GoogleMap
-                ref="map"
-                containerProps={{
-                    style: {
-                        height: mapHeight,
-                    },
+                ref={elem => {
+                    this._map = elem
                 }}
                 defaultCenter={{
                     lat: -34.397,
                     lng: 150.644,
                 }}
                 options={{disableDefaultUI: true, zoomControl: true}}
-                defaultZoom={4}
+                defaultZoom={12}
                 onClick={this.onMapClick.bind(this)}
             >
-                {this.state.coords ?
-                <Marker
-                    title="You are here"
-                    icon={{
-                        url: "/static/images/you-are-here.png",
-                        scaledSize: {width: 32, height: 32},
-                    }}
-                    position={{
-                        lat: this.state.coords.latitude,
-                        lng: this.state.coords.longitude,
-                    }}
-                />
-                : ""
-                }
-                {this.sites.map((objects, index) => {
-                    /* the site must have a public location */
-                    const point = objects[0].location.point;
-
-                    return point ?
+                {
+                    this.state.coords && (
                         <Marker
-                            key={index}
-                            title={objects[0].site.name}
-                            position={{
-                                lat: point.lat,
-                                lng: point.lon,
+                            title="You are here"
+                            icon={{
+                                url: "/static/images/you-are-here.png",
+                                scaledSize: {width: 32, height: 32},
                             }}
-                            onClick={this.onMarkerClick.bind(this, objects)}
+                            position={{
+                                lat: this.state.coords.latitude,
+                                lng: this.state.coords.longitude,
+                            }}
                         />
-                    : ""
-                })}
+                    )
+                }
+                {
+                    this.sites.map((objects, index) => {
+                        /* the site must have a public location */
+                        // eslint-disable-next-line max-len
+                        const point = objects[0].location ? objects[0].location.point : null;
+
+                        return point && (
+                            <Marker
+                                key={index}
+                                title={objects[0].site.name}
+                                position={{
+                                    lat: point.lat,
+                                    lng: point.lon,
+                                }}
+                                onClick={this.onMarkerClick.bind(this, objects)}
+                            />
+                        )
+                    })
+                }
             </GoogleMap>
         );
     }
 }
 
-export default ResultsMap;
+export default withGoogleMap(ResultsMap);
 
 // what I really want here is something to figure
 // out how far out to draw the bounding box.

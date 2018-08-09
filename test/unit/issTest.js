@@ -1,5 +1,4 @@
-/* @flow */
-
+/* flow:disable */
 /* eslint-env node, mocha */
 /* eslint-disable no-use-before-define, prefer-arrow-callback */
 
@@ -28,7 +27,7 @@ describe("iss service", function() {
                 assert(Service(
                     {indigenous_classification:
                         mainstreamCaterAboriginal,
-                }).Indigenous());
+                    }).Indigenous());
             });
             it("if type is 'Aboriginal (indigenous) specific'", function() {
                 assert(Service({

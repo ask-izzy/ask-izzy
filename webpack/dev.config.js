@@ -33,7 +33,7 @@ module.exports = {
             "./src/styles/bundle.scss",
         ],
         vendor: [
-            "core-decorators",
+            "lodash-decorators",
             "moment",
             "react",
             "react-google-maps",
@@ -73,7 +73,7 @@ module.exports = {
         env("development"),
 
         // Only load the en-au moment.js config
-        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en-au/),
+        new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en-au/),
 
         new webpack.HotModuleReplacementPlugin(),
 
