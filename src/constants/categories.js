@@ -91,7 +91,7 @@ const categories:Array<Category> = [
         byline: "Scared of partner or family member",
         icon: icons.EscapeViolence,
         search: {
-            q: "search placeholder",
+            q: "Family violence -(coordinating bodies)",
         },
         personalisation: [
             personalisation.AreYouSafe,
