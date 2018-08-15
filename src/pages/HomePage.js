@@ -15,11 +15,6 @@ class HomePage extends React.Component<{}, void> {
         router: PropTypes.object.isRequired,
     };
 
-    componentDidMount(): void {
-        // Make mobile browser hide the app bar
-        window.scrollTo(0, 1);
-    }
-
     onSearchSubmit(event: Event): void {
         event.preventDefault();
 
@@ -38,9 +33,9 @@ class HomePage extends React.Component<{}, void> {
     }
 
     render() {
-        let logo = "/static/images/askizzy-logo.png";
-        let redirectUri = "http://www.bom.gov.au/";
-        let tooltip = "To leave this website quickly, click the 'Quick " +
+        const logo = "/static/images/askizzy-logo.png";
+        const redirectUri = "http://www.bom.gov.au/";
+        const tooltip = "To leave this website quickly, click the 'Quick " +
         "Exit' button. If you are in immediate danger call 000 ( " +
         "Australian emergency line), for advice about family violence " +
         " call 1800 Respect on 1800 737 732 (Helpline).";
@@ -63,8 +58,8 @@ class HomePage extends React.Component<{}, void> {
                         <a href={redirectUri}
                             title={tooltip}
                         >
-                            <div className="qexit-txtleft" />
-                            <div className="qexit-txtright">
+                            <div className="qexit-txtleft qexit-heightleft" />
+                            <div className="qexit-txtright qexit-heightright">
                                 Quick Exit
                             </div>
                         </a>

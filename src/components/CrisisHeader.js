@@ -10,10 +10,7 @@ class CrisisHeader extends React.Component<Props, void> {
     render() {
         return (
             <h3 className="CrisisHeader">
-                {this.props.plural ?
-                    "If you need urgent help call one of these numbers"
-                    : "If you need urgent help call this number"
-                }
+                For help and safety call:
             </h3>
         );
     }

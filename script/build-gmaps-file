@@ -76,6 +76,12 @@ declare -a banned_domains=(
 # Download Google analytics file
 GA_FETCH_URL="https://www.google-analytics.com/analytics.js"
 
+if which gsed; then
+    SED=gsed
+else
+    SED=sed
+fi
+
 if [ -z "$HTTP_PROXY" ]; then
 	wget -O ./public/static/analytics.js \
 	$GA_FETCH_URL
@@ -88,11 +94,11 @@ fi
 for var in "${!proxy_domains[@]}"
 do
 	if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging"  ]; then
-		sed -r -i -e \
+		$SED -r -i -e \
 		"s/${proxy_domains[$var]}/${proxy_prod_domains[$var]}/gi" \
 		./public/static/analytics.js
 	else
-		sed -r -i -e \
+		$SED -r -i -e \
 		"s/${proxy_domains[$var]}/${proxy_dev_domains[$var]}/gi" \
 		./public/static/analytics.js
 	fi

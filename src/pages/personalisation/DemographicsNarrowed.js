@@ -16,9 +16,9 @@ export default class DemographicsNarrowed extends BaseMultiQuestion {
             "Aboriginal and/or Torres Strait Islander":
                 append("(Aboriginals & Torres Strait Islanders)"),
             "Have a disability": append("disabilities"),
-            "LGBTIQA+": append(""),
+            "LGBTIQA+": append("(Gender & Sexuality)"),
             "Person seeking asylum": append("refugees"),
-            "Under 18": append(""),
+            "Under 18": append("(Under 18)"),
         },
         icons: {
             "Aboriginal and/or Torres Strait Islander": icons.DemographicAtsi,

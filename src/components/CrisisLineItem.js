@@ -37,7 +37,7 @@ const crisisDescriptions = {
 
 type Props = {
     object: iss.Service,
-    expanded?: boolean,
+    expanded ? : boolean,
 }
 
 class CrisisLineItem extends React.Component<Props, void> {
