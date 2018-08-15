@@ -142,11 +142,22 @@ $colour-grey: #f8f9f9;
 
     // Quick Exit button
 
-    .desktop {
+    .desktop,
+    .mobile_device {
         position: fixed;
-        min-width: 800px;
+        top: 0;
+        width: 100%;
+        max-width: 800px;
         height: $appbar-height;
         z-index: 99;
+    }
+
+    .desktop {
+        display: block;
+    }
+
+    .mobile_device {
+        display: none;
     }
 
     .quick-exit-right {
@@ -160,41 +171,41 @@ $colour-grey: #f8f9f9;
     .quick-exit-left {
         position: relative;
         min-width: 15%;
-        height: $appbar-height - 10;
-        padding-top: 10px;
         float: right;
         background-color: $colour-red;
         font-weight: bold;
+        line-height: $appbar-height;
         text-align: center;
     }
 
     .qexit-txtleft {
         position: relative;
         width: 70%;
-        height: $appbar-height - 20;
         float: left;
         background-color: $brand-bg-dark;
         z-index: 99;
     }
 
+    .qexit-heightleft {
+        // height: $appbar-height - 10;
+        height: $appbar-height;
+    }
+
     .qexit-txtright {
         position: relative;
         width: 30%;
-        height: $appbar-height - 22;
-        padding-top: 2px;
         float: right;
         background-color: $colour-red;
+        font-weight: bold;
         text-align: center;
         z-index: 99;
     }
 
-
-    .left-width {
-        width: 75%;
-    }
-
-    .right-width {
-        min-width: 25%;
+    .qexit-heightright {
+        // height: $appbar-height - 10;
+        // line-height: $appbar-height - 10;
+        height: $appbar-height;
+        line-height: $appbar-height;
     }
 
     .quick-exit-img {
@@ -211,34 +222,21 @@ $colour-grey: #f8f9f9;
     }
 
     /* mobile device (max width is 320px) */
-    @media only screen and (max-device-width: 320px) {
-        .mobile_device {
-            display: block;
-            position: fixed;
-            width: 100%;
-            z-index: 99;
+    @media only screen and (max-width: 320px) {
+        .qexit-heightleft {
+            height: $appbar-height;
         }
 
-        .left-width {
-            width: 70%;
-          }
-
-        .right-width {
-            min-width: 30%;
+        .qexit-heightright {
+            height: $appbar-height;
+            line-height: $appbar-height;
         }
-
-        .desktop {display: none;}
     }
 
     /* mobile device (max width is 480px) */
-    @media only screen and (min-device-width: 321px) and (max-device-width: 480px) {
-        .mobile_device {
-            display: block;
-            position: fixed;
-            width: 100%;
-            z-index: 99;
-        }
-
+    @media only screen
+    and (min-width: 321px)
+    and (max-width: 480px) {
         .mobile_device img {
             width: 30px;
             height: 30px;
@@ -246,17 +244,20 @@ $colour-grey: #f8f9f9;
             background-color: $colour-red;
         }
 
-        .desktop {display: none;}
+        .qexit-heightleft {
+            height: $appbar-height;
+        }
+
+        .qexit-heightright {
+            height: $appbar-height;
+            line-height: $appbar-height;
+        }
     }
 
-    /* mobile device (max width is 736px) */
-    @media only screen and (max-device-width: 768px) {
-        .mobile_device {
-            display: block;
-            position: fixed;
-            width: 100%;
-            z-index: 99;
-        }
+
+    @media only screen
+    and (min-width: 768px)
+    and (max-width: 1024px) {
 
         .mobile_device img {
             width: 35px;
@@ -264,7 +265,21 @@ $colour-grey: #f8f9f9;
             float: right;
             background-color: $colour-red;
         }
+    }
 
-        .desktop {display: none;}
+    @media only screen and (max-width: 767px) {
+        .desktop {
+            display: none;
+        }
+
+        .mobile_device {
+            display: block;
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .HomePage {
+        margin-top: $appbar-height;
     }
 }

@@ -90,4 +90,8 @@ BasePersonalisationPage.childContextTypes = {
     controller: PropTypes.instanceOf(BasePersonalisationPage),
 }
 
+BasePersonalisationPage.childContextTypes = {
+    controller: PropTypes.instanceOf(BasePersonalisationPage),
+};
+
 export default BasePersonalisationPage;

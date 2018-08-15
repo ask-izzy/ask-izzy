@@ -11,6 +11,7 @@ import BaseMultiQuestion from "./personalisation/BaseMultiQuestion";
 import BaseQuestion from "./personalisation/BaseQuestion";
 import CounsellingSubcategories from "./personalisation/CounsellingSubcategories";
 import DemographicsIndigenous from "./personalisation/DemographicsIndigenous";
+import DemographicsNarrowed from "./personalisation/DemographicsNarrowed";
 import Demographics from "./personalisation/Demographics";
 import EverydayThingsSubcategories from "./personalisation/EverydayThingsSubcategories";
 import FoodSubcategories from "./personalisation/FoodSubcategories";
@@ -33,6 +34,7 @@ export default {
     BaseQuestion: BaseQuestion,
     CounsellingSubcategories: CounsellingSubcategories,
     DemographicsIndigenous: DemographicsIndigenous,
+    DemographicsNarrowed: DemographicsNarrowed,
     Demographics: Demographics,
     EverydayThingsSubcategories: EverydayThingsSubcategories,
     FoodSubcategories: FoodSubcategories,
