@@ -95,6 +95,7 @@ const categories:Array<Category> = [
         },
         personalisation: [
             personalisation.AreYouSafe,
+            personalisation.Location,
         ],
     }),
     new Category({
