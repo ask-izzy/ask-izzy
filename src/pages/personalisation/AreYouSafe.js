@@ -26,4 +26,5 @@ export default class AreYouSafe extends BaseQuestion {
         },
         showOnlineSafetyLink: true,
     };
+
 }
