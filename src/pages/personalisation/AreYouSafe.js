@@ -23,15 +23,10 @@ class AreYouSafe extends BaseQuestion {
     static defaultProps = {
         name: "are-you-safe",
         question: "Are you safe right now?",
-<<<<<<< HEAD
         byline:
             "All of your answers are private and anonymous",
         answers: {
             "No": append(""),
-=======
-        answers: {
-            "No": housingCrisis(() => Location.shouldInjectAccessPoints()),
->>>>>>> fix lint error
             "I'm not sure": append(""),
             "Yes": append(""),
         },
@@ -43,6 +38,7 @@ class AreYouSafe extends BaseQuestion {
         showBaseTextBox: true,
         baseTextBoxComponent: <OnlineSafetyLink/>,
     };
+
 }
 
 export default AreYouSafe;
