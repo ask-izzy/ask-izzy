@@ -26,11 +26,8 @@ import Location from "./personalisation/Location";
 import MoneySubcategories from "./personalisation/MoneySubcategories";
 import SleepTonight from "./personalisation/SleepTonight";
 import AreYouSafe from "./personalisation/AreYouSafe";
-<<<<<<< HEAD
 import LegalAreYouSafe from "./personalisation/LegalAreYouSafe";
 import OnlineSafetyScreen from "./personalisation/OnlineSafetyScreen";
-=======
->>>>>>> Link to AreYouSafe after clicking violence category
 
 export default {
     AddictionSubcategories: AddictionSubcategories,
@@ -54,7 +51,6 @@ export default {
     Location: Location,
     MoneySubcategories: MoneySubcategories,
     SleepTonight: SleepTonight,
-<<<<<<< HEAD
     AreYouSafe,
     LegalAreYouSafe,
     OnlineSafetyScreen,
@@ -62,7 +58,4 @@ export default {
         AreYouSafe,
         OnlineSafetyScreen,
     ],
-=======
-    AreYouSafe: AreYouSafe,
->>>>>>> Link to AreYouSafe after clicking violence category
 };
