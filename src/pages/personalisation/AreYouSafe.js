@@ -1,8 +1,8 @@
 /* @flow */
 
 import BaseQuestion from "./BaseQuestion";
-import Location from "./Location";
-import { append, housingCrisis } from "../../iss/Search";
+import { append } from "../../iss/Search";
+import icons from "../../icons";
 
 export default class AreYouSafe extends BaseQuestion {
     static title = "Safety";
@@ -12,10 +12,18 @@ export default class AreYouSafe extends BaseQuestion {
     static defaultProps = {
         name: "are-you-safe",
         question: "Are you safe right now?",
+        byline:
+            "All of your answers are private and anonymous",
         answers: {
-            "No": housingCrisis(() => Location.shouldInjectAccessPoints()),
+            "No": append(""),
             "I'm not sure": append(""),
             "Yes": append(""),
         },
+        icons: {
+            "No": icons.EscapeViolence,
+            "I'm not sure": icons.Mental,
+            "Yes": icons.House,
+        },
     };
+
 }
