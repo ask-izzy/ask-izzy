@@ -38,6 +38,7 @@ class AreYouSafe extends BaseQuestion {
         showBaseTextBox: true,
         baseTextBoxComponent: <OnlineSafetyLink/>,
     };
+
 }
 
 export default AreYouSafe;
