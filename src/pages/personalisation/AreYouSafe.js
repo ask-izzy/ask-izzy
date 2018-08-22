@@ -1,13 +1,8 @@
 /* @flow */
 
 import BaseQuestion from "./BaseQuestion";
-<<<<<<< HEAD
 import { append } from "../../iss/Search";
 import icons from "../../icons";
-=======
-import Location from "./Location";
-import { append, housingCrisis } from "../../iss/Search";
->>>>>>> Link to AreYouSafe after clicking violence category
 
 export default class AreYouSafe extends BaseQuestion {
     static title = "Safety";
@@ -17,8 +12,6 @@ export default class AreYouSafe extends BaseQuestion {
     static defaultProps = {
         name: "are-you-safe",
         question: "Are you safe right now?",
-<<<<<<< HEAD
-<<<<<<< HEAD
         byline:
             "All of your answers are private and anonymous",
         answers: {
@@ -33,16 +26,4 @@ export default class AreYouSafe extends BaseQuestion {
         },
         showOnlineSafetyLink: true,
     };
-
-=======
-        answers: {            
-=======
-        answers: {
->>>>>>> fix lint error
-            "No": housingCrisis(() => Location.shouldInjectAccessPoints()),
-            "I'm not sure": append(""),
-            "Yes": append(""),
-        },
-    };
->>>>>>> Link to AreYouSafe after clicking violence category
 }
