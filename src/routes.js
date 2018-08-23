@@ -25,6 +25,7 @@ import HomelessLegalStaticPage from "./pages/HomelessLegalStaticPage";
 import HomelessFinanceStaticPage from "./pages/HomelessFinanceStaticPage";
 import HomelessHealthStaticPage from "./pages/HomelessHealthStaticPage";
 import CensusStaticPage from "./pages/CensusStaticPage";
+import OnlineSafetyStaticPage from "./pages/OnlineSafetyStaticPage";
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
@@ -86,6 +87,11 @@ export default (
             path="/terms"
             component={TermsPage}
             title="Terms of use"
+        />
+        <Route
+            path="/online-safety"
+            component={OnlineSafetyStaticPage}
+            title="Online Safety"
         />
         <Route
             path="/homeless-shelters"

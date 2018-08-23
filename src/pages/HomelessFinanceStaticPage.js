@@ -10,7 +10,7 @@ export default class HomelessFinanceStaticPage extends React.Component<{}> {
         return (
             <StaticPage
                 title="Homeless Finance"
-                bannerName="money-help"
+                bannerName="money-help static"
             >
                 <h1>Homeless financial support</h1>
                 <p>
