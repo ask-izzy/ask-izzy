@@ -10,7 +10,7 @@ export default class HomelessSheltersStaticPage extends React.Component<{}> {
         return (
             <StaticPage
                 title="Homeless Shelters"
-                bannerName="centrelink"
+                bannerName="centrelink static"
             >
                 <h2>Homeless Shelters</h2>
                 <p>

@@ -10,7 +10,7 @@ export default class FoodBanksStaticPage extends React.Component<{}> {
         return (
             <StaticPage
                 title="Food Banks"
-                bannerName="food"
+                bannerName="food static"
             >
                 <h1>Food banks</h1>
                 <p>If you are unable to buy groceries because of lack of income, an unexpected life event or large expense you can visit a food bank to get what you need. </p>

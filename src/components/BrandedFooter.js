@@ -51,6 +51,11 @@ class BrandedFooter extends React.Component<{}, void> {
                             </a>
                         </li>
                         <li>
+                            <Link to="/online-safety">
+                                Online Safety
+                            </Link>
+                        </li>
+                        <li>
                             <a href={resourcesLink}>
                                 Online resources
                             </a>

@@ -16,7 +16,7 @@ class AboutPage extends React.Component<{}, void> {
         return (
             <StaticPage
                 title="About Ask Izzy"
-                bannerName="drugs-alcohol"
+                bannerName="drugs-alcohol static"
             >
                 <p>
                     When you’re looking for support, Ask Izzy can help you to find the services you need, right now and nearby. It is free and anonymous, and you can search over 350 000 services to find housing, meals, healthcare, counselling, legal advice, addiction treatment and a whole lot more.
