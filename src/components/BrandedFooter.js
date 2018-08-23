@@ -16,6 +16,7 @@ class BrandedFooter extends React.Component<{}, void> {
         const siteMail = config.default.siteMail;
         const mailLink = `mailto:${siteMail}?subject=${subject}`;
         const donateLink = "https://www.infoxchange.org/donate-ask-izzy";
+        const resourcesLink = "https://www.infoxchange.org/au/ask-izzy";
 
         let isMobile;
 
@@ -29,10 +30,31 @@ class BrandedFooter extends React.Component<{}, void> {
             <footer className="branding-footer-container">
                 <div>
                     <ul className="footer-list about">
-                        <li><Link to="/about">About Ask Izzy</Link></li>
-                        <li><Link to="/terms">Our terms of use</Link></li>
-                        <li><a href={mailLink}>Leave feedback</a></li>
-                        <li><a href={donateLink}>Donate to us</a></li>
+                        <li>
+                            <Link to="/about">
+                                About Ask Izzy
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/terms">
+                                Our terms of use
+                            </Link>
+                        </li>
+                        <li>
+                            <a href={mailLink}>
+                                Leave feedback
+                            </a>
+                        </li>
+                        <li>
+                            <a href={donateLink}>
+                                Donate to us
+                            </a>
+                        </li>
+                        <li>
+                            <a href={resourcesLink}>
+                                Online resources
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <hr />
