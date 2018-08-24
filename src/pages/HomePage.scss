@@ -198,11 +198,20 @@ $colour-grey: #f8f9f9;
         z-index: 99;
     }
 
+<<<<<<< HEAD
     .qexit-heightright {
         // height: $appbar-height - 10;
         // line-height: $appbar-height - 10;
         height: $appbar-height;
         line-height: $appbar-height;
+=======
+    .left-width {
+        width: 75%;
+    }
+
+    .right-width {
+        min-width: 25%;
+>>>>>>> Fix linting issues
     }
 
     .quick-exit-img {
@@ -223,10 +232,24 @@ $colour-grey: #f8f9f9;
             height: $appbar-height;
         }
 
+<<<<<<< HEAD
         .qexit-heightright {
             height: $appbar-height;
             line-height: $appbar-height;
         }
+=======
+        .left-width {
+            width: 70%;
+        }
+
+        .right-width {
+            min-width: 30%;
+        }
+
+        .desktop {
+            display: none;
+        }
+>>>>>>> Fix linting issues
     }
 
     /* mobile device (max width is 480px) */
@@ -240,9 +263,16 @@ $colour-grey: #f8f9f9;
             background-color: $colour-red;
         }
 
+<<<<<<< HEAD
         .qexit-heightleft {
             height: $appbar-height;
         }
+=======
+        .desktop {
+            display: none;
+        }
+    }
+>>>>>>> Fix linting issues
 
         .qexit-heightright {
             height: $appbar-height;
@@ -261,6 +291,7 @@ $colour-grey: #f8f9f9;
             float: right;
             background-color: $colour-red;
         }
+<<<<<<< HEAD
     }
 
     @media only screen and (max-width: 767px) {
@@ -277,5 +308,11 @@ $colour-grey: #f8f9f9;
 @media only screen and (max-width: 767px) {
     .HomePage {
         margin-top: $appbar-height;
+=======
+
+        .desktop {
+            display: none;
+        }
+>>>>>>> Fix linting issues
     }
 }
