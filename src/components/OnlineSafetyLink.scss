@@ -1,12 +1,11 @@
-$colour-background: #EDECE9;
+$colour-background: #edece9;
 $colour-grey: #808080;
 $colour-darkcyan: #008b8b;
 
 .OnlineSafetyLink {
     height: 17vh;
-    background-color: $colour-background;
     padding-left: 2vw;
-
+    background-color: $colour-background;
     cursor: pointer;
 
     .Icon {
