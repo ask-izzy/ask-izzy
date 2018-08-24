@@ -243,10 +243,7 @@ class BaseQuestion extends React.Component<Props, State> {
         );
     }
 
-<<<<<<< HEAD
-    renderDoneButton(): ?React.Element<any> {
-=======
-    renderOnlineSafetyLink(): ?React$Element<*> {
+    renderOnlineSafetyLink(): ?React.Element<any> {
         if (this.props.showOnlineSafetyLink) {
             return (
                 <OnlineSafetyLink/>
@@ -254,8 +251,7 @@ class BaseQuestion extends React.Component<Props, State> {
         }
     }
 
-    renderDoneButton(): ?React$Element<*> {
->>>>>>> Add OnlineSafetyLink Component
+    renderDoneButton(): ?React.Element<any> {
         if (!this.props.suppressDoneButton) {
             return (
                 <div>
