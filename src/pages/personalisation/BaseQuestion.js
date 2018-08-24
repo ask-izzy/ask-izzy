@@ -14,6 +14,7 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
+import OnlineSafetyLink from "../../components/OnlineSafetyLink";
 
 type Props = {
     name: string,
@@ -237,11 +238,24 @@ class BaseQuestion extends React.Component<Props, State> {
                         />)}
                 </div>
                 {this.renderDoneButton()}
+                {this.renderOnlineSafetyLink()}
             </div>
         );
     }
 
+<<<<<<< HEAD
     renderDoneButton(): ?React.Element<any> {
+=======
+    renderOnlineSafetyLink(): ?React$Element<*> {
+        if (this.props.showOnlineSafetyLink) {
+            return (
+                <OnlineSafetyLink/>
+            )
+        }
+    }
+
+    renderDoneButton(): ?React$Element<*> {
+>>>>>>> Add OnlineSafetyLink Component
         if (!this.props.suppressDoneButton) {
             return (
                 <div>
