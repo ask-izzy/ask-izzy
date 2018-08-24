@@ -14,6 +14,7 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
+import OnlineSafetyLink from "../../components/OnlineSafetyLink";
 
 /*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
 class BaseQuestion extends React.Component {
@@ -25,6 +26,7 @@ class BaseQuestion extends React.Component {
         answers: Object|Array<string>,
         onDoneTouchTap: Function,
         suppressDoneButton: boolean,
+        showOnlineSafetyLink: boolean,
     };
     state: {
         selected: ?string,
@@ -223,8 +225,17 @@ class BaseQuestion extends React.Component {
                     />)}
                 </div>
                 {this.renderDoneButton()}
+                {this.renderOnlineSafetyLink()}
             </div>
         );
+    }
+
+    renderOnlineSafetyLink(): ?React$Element<*> {
+        if (this.props.showOnlineSafetyLink) {
+            return (
+                <OnlineSafetyLink/>
+            )
+        }
     }
 
     renderDoneButton(): ?React$Element<*> {

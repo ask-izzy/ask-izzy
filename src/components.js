@@ -49,6 +49,7 @@ import SvgIcon from "./components/SvgIcon";
 import TransportTime from "./components/TransportTime";
 import ViewOnMapButton from "./components/ViewOnMapButton";
 import Web from "./components/Web";
+import OnlineSafetyLink from "./components/OnlineSafetyLink";
 
 export default {
     Accessibility: Accessibility,
@@ -86,6 +87,7 @@ export default {
     LogoWithShadow: LogoWithShadow,
     NavBar: NavBar,
     Ndis: Ndis,
+    OnlineSafetyLink: OnlineSafetyLink,
     OpeningTimes: OpeningTimes,
     Phone: Phone,
     ResultListItem: ResultListItem,

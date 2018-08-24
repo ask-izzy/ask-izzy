@@ -1,0 +1,49 @@
+.OnlineSafetyLink {
+    background-color: #edece9;
+    padding-left: 2vw;
+    height: 17vh;
+
+    cursor: pointer;
+
+    .Icon{
+        height: 17vh;
+        width: 64px;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+
+    }
+
+    .Content{
+        display: table-cell;
+        width: 70vw;
+        padding: 1vw;
+        vertical-align: middle;
+
+        .Header{
+            font-size: large;
+            padding-bottom: 1vh;
+            font-weight: 500;
+        }
+
+        .Instruction{
+            font-size: small;
+            padding-bottom: 2vh;
+
+        }
+
+        .Link {
+            color: grey;
+            display: inline;
+            font-weight: 500;
+
+            .Chevron{
+                display: inline;
+                color: darkcyan;
+                font-weight: normal;
+            }
+        }
+
+    }
+}
+
