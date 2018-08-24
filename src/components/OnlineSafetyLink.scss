@@ -1,45 +1,48 @@
+$colour-background: #EDECE9;
+$colour-grey: #808080;
+$colour-darkcyan: #008b8b;
+
 .OnlineSafetyLink {
-    background-color: #edece9;
-    padding-left: 2vw;
     height: 17vh;
+    background-color: $colour-background;
+    padding-left: 2vw;
 
     cursor: pointer;
 
-    .Icon{
-        height: 17vh;
-        width: 64px;
+    .Icon {
         display: table-cell;
+        width: 64px;
+        height: 17vh;
         text-align: center;
         vertical-align: middle;
 
     }
 
-    .Content{
+    .Content {
         display: table-cell;
         width: 70vw;
         padding: 1vw;
         vertical-align: middle;
 
-        .Header{
-            font-size: large;
+        .Header {
             padding-bottom: 1vh;
+            font-size: large;
             font-weight: 500;
         }
 
-        .Instruction{
-            font-size: small;
+        .Instruction {
             padding-bottom: 2vh;
-
+            font-size: small;
         }
 
         .Link {
-            color: grey;
             display: inline;
+            color: $colour-grey;
             font-weight: 500;
 
-            .Chevron{
+            .Chevron {
                 display: inline;
-                color: darkcyan;
+                color: $colour-darkcyan;
                 font-weight: normal;
             }
         }
