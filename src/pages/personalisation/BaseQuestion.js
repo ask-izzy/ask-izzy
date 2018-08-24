@@ -14,6 +14,7 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
+import OnlineSafetyLink from "../../components/OnlineSafetyLink";
 
 type Props = {
     name: string,
@@ -23,7 +24,8 @@ type Props = {
     answers: Object | Array<string>,
     onDoneTouchTap: Function,
     suppressDoneButton: boolean,
-    icons?: Object
+    icons?: Object,
+    showOnlineSafetyLink: boolean,
 }
 
 type State = {
@@ -237,11 +239,20 @@ class BaseQuestion extends React.Component<Props, State> {
                         />)}
                 </div>
                 {this.renderDoneButton()}
+                {this.renderOnlineSafetyLink()}
             </div>
         );
     }
 
-    renderDoneButton(): ?React.Element<any> {
+    renderOnlineSafetyLink(): ?React$Element<*> {
+        if (this.props.showOnlineSafetyLink) {
+            return (
+                <OnlineSafetyLink/>
+            )
+        }
+    }
+
+    renderDoneButton(): ?React$Element<*> {
         if (!this.props.suppressDoneButton) {
             return (
                 <div>

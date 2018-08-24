@@ -24,6 +24,7 @@ export default class AreYouSafe extends BaseQuestion {
             "I'm not sure": icons.Mental,
             "Yes": icons.House,
         },
+        showOnlineSafetyLink: true,
     };
 
 }
