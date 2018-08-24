@@ -37,8 +37,7 @@ export default class OnlineSafetyLink extends React.Component {
     }
 
     onClickOnlineSafetyLink() {
-        // TODO: change the path to online safety page
-        let path = "/about";
+        let path = "/online-safety";
 
         this.context.router.push(
             path,
