@@ -8,7 +8,6 @@ $colour-grey: #f8f9f9;
     .HeaderBar {
         text-align: left;
 
-
         .primary {
             height: 0;
             padding-top: 5px;
@@ -80,7 +79,6 @@ $colour-grey: #f8f9f9;
                 margin-bottom: -16px;
             }
 
-
         }
 
     }
@@ -91,7 +89,6 @@ $colour-grey: #f8f9f9;
         padding-right: 15px;
         padding-bottom: 15px;
         padding-left: 15px;
-
 
         .searchWrapper {
             display: flex;
@@ -201,11 +198,20 @@ $colour-grey: #f8f9f9;
         z-index: 99;
     }
 
+<<<<<<< HEAD
     .qexit-heightright {
         // height: $appbar-height - 10;
         // line-height: $appbar-height - 10;
         height: $appbar-height;
         line-height: $appbar-height;
+=======
+    .left-width {
+        width: 75%;
+    }
+
+    .right-width {
+        min-width: 25%;
+>>>>>>> Fix linting issues
     }
 
     .quick-exit-img {
@@ -214,7 +220,6 @@ $colour-grey: #f8f9f9;
         max-width: 800px;
         z-index: 99;
     }
-
 
     /* if desktop */
     .mobile_device {
@@ -227,10 +232,24 @@ $colour-grey: #f8f9f9;
             height: $appbar-height;
         }
 
+<<<<<<< HEAD
         .qexit-heightright {
             height: $appbar-height;
             line-height: $appbar-height;
         }
+=======
+        .left-width {
+            width: 70%;
+        }
+
+        .right-width {
+            min-width: 30%;
+        }
+
+        .desktop {
+            display: none;
+        }
+>>>>>>> Fix linting issues
     }
 
     /* mobile device (max width is 480px) */
