@@ -1,12 +1,13 @@
 /* @flow */
 
 import React from "react";
+import PropTypes from "proptypes";
 import icons from "../icons";
 
 export default class OnlineSafetyLink extends React.Component {
 
     static contextTypes = {
-        router: React.PropTypes.object.isRequired,
+        router: PropTypes.object.isRequired,
     };
 
     // TODO: change to the suitable icon for Online Safety Link
