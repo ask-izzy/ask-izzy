@@ -72,6 +72,7 @@ import SvgIconWalk from "./Walk.js";
 import SvgIconWebsite from "./Website.js";
 import SvgIconQuestionMark from "./QuestionMark";
 import SvgIconOnlineSecurity from "./OnlineSecurity";
+import SvgIconEscapeViolence from "./EscapeViolence";
 
 export default {
     OnlineSecurity: SvgIconOnlineSecurity,
