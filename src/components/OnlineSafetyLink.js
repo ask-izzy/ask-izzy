@@ -4,7 +4,7 @@ import React from "react";
 import PropTypes from "proptypes";
 import icons from "../icons";
 
-export default class OnlineSafetyLink extends React.Component {
+export default class OnlineSafetyLink extends React.Component<any> {
 
     static contextTypes = {
         router: PropTypes.object.isRequired,
