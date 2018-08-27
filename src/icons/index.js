@@ -101,6 +101,7 @@ export default {
     DemographicRecentlyArrived: SvgIconDemographicRecentlyArrived,
     DemographicTorresStrait: SvgIconDemographicTorresStrait,
     DemographicVeteran: SvgIconDemographicVeteran,
+    EscapeViolence: SvgIconEscapeViolence,
     Email: SvgIconEmail,
     Entertainment: SvgIconEntertainment,
     EscapeViolence: SvgIconEscapeViolence,

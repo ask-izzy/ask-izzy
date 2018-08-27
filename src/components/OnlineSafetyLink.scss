@@ -1,13 +1,12 @@
 $colour-background: #edece9;
 $colour-grey: #808080;
-$colour-icon-background: #70BDAE;
+$colour-icon-background: #70bdae;
 
 .OnlineSafetyLink {
     height: 17vh;
     padding-left: 2vw;
     background-color: $colour-background;
     cursor: pointer;
-
 
     .Icon {
         display: table-cell;
@@ -19,8 +18,8 @@ $colour-icon-background: #70BDAE;
         .IconBorder {
             width: 64px;
             height: 64px;
-            background: $colour-icon-background;
             border-radius: 50%;
+            background: $colour-icon-background;
 
             .middle {
                 padding: 11px;
