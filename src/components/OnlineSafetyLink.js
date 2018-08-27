@@ -18,7 +18,9 @@ export default class OnlineSafetyLink extends React.Component {
                 onClick={this.onClickOnlineSafetyLink.bind(this)}
             >
                 <div className={"Icon"}>
-                    <icons.House className={"big"}/>
+                    <div className={"IconBorder"}>
+                        <icons.OnLineSecurity className={"big middle"}/>
+                    </div>
                 </div>
                 <div className={"Content"}>
                     <div className={"Header"}>

@@ -70,6 +70,8 @@ import SvgIconUnder18 from "./Under18.js";
 import SvgIconUsingViolence from "./UsingViolence.js";
 import SvgIconWalk from "./Walk.js";
 import SvgIconWebsite from "./Website.js";
+import SvgIconQuestionMark from "./QuestionMark";
+import SvgIconOnlineSecurity from "./OnlineSecurity";
 
 export default {
     OnlineSecurity: SvgIconOnlineSecurity,
@@ -122,11 +124,13 @@ export default {
     Map: SvgIconMap,
     Mental: SvgIconMental,
     Money: SvgIconMoney,
+    OnLineSecurity: SvgIconOnlineSecurity,
     PhoneSolid: SvgIconPhoneSolid,
     PhoneTalk: SvgIconPhoneTalk,
     Phone: SvgIconPhone,
     Police: SvgIconPolice,
     Print: SvgIconPrint,
+    QuestionMark: SvgIconQuestionMark,
     RadioSelected: SvgIconRadioSelected,
     RadioUnselected: SvgIconRadioUnselected,
     Search: SvgIconSearch,

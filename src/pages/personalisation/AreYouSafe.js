@@ -20,9 +20,9 @@ export default class AreYouSafe extends BaseQuestion {
             "Yes": append(""),
         },
         icons: {
-            "No": icons.EscapeViolence,
-            "I'm not sure": icons.Mental,
-            "Yes": icons.House,
+            "No": icons.Cross,
+            "I'm not sure": icons.QuestionMark,
+            "Yes": icons.Tick,
         },
         showOnlineSafetyLink: true,
     };
