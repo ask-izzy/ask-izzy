@@ -5,19 +5,11 @@
 import React from "react";
 import classnames from "classnames";
 
-<<<<<<< HEAD
 type Props = {
     className?: string,
 }
 
 export default class SvgIconOnlineSecurity extends React.Component<Props, void> {
-=======
-export default class SvgIconOnlineSecurity extends React.Component {
-    props: {
-        className?: string,
-    };
-    state: void;
->>>>>>> Update icons for safety screen
 
     render() {
         const {className, ...rest} = this.props;
