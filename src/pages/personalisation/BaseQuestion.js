@@ -24,6 +24,7 @@ type Props = {
     answers: Object | Array<string>,
     onDoneTouchTap: Function,
     suppressDoneButton: boolean,
+    showOnlineSafetyLink?: boolean,
     icons?: Object
 }
 
