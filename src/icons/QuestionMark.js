@@ -5,7 +5,7 @@
 import React from "react";
 import classnames from "classnames";
 
-export default class SvgIconQuestionMark extends React.Component {
+export default class SvgIconQuestionMark extends React.Component<any> {
     props: {
         className?: string,
     };
