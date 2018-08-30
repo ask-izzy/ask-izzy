@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import reactMixin from "react-mixin";
 import { debounce } from "lodash-decorators";
 import { ltrim } from "underscore.string";
 import _ from "underscore";
@@ -25,8 +24,7 @@ type State = {
         nextDisabled: boolean,
 }
 
-/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
-class Location extends React.Component<Props, State> {
+class Location extends Personalisation<Props, State> {
     static defaultProps = {
         name: "location",
     };

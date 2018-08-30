@@ -2,7 +2,6 @@
 
 import React from "react";
 import PropTypes from "proptypes";
-import reactMixin from "react-mixin";
 
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
@@ -12,8 +11,7 @@ type Props = {
     onDoneTouchTap: Function
 }
 
-/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
-class Intro extends React.Component<Props, void> {
+class Intro extends Personalisation<Props, {}> {
     static defaultProps = {
         name: "intro",
     };
