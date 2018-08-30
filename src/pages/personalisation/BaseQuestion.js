@@ -239,7 +239,7 @@ class BaseQuestion extends React.Component<Props, State> {
                         />)}
                 </div>
                 {this.renderDoneButton()}
-                {this.renderOnlineSafetyLink()}
+                {this.props.showOnlineSafetyLink && <OnlineSafetyLink/>}
             </div>
         );
     }
