@@ -3,6 +3,7 @@
 
 import React from "react";
 import BaseQuestion from "./BaseQuestion";
+import type { Props } from "./BaseQuestion";
 import { append } from "../../iss/Search";
 import icons from "../../icons";
 import OnlineSafetyLink from "../../components/OnlineSafetyLink";
@@ -38,6 +39,116 @@ class AreYouSafe extends BaseQuestion {
         showBaseTextBox: true,
         baseTextBoxComponent: <OnlineSafetyLink/>,
     };
+
+    customTitle(): ?string {
+        if (typeof window !== "undefined" && this.shouldRenderSafetyDetails) {
+            return this.constructor.title;
+        }
+    }
+
+    get shouldRenderSafetyDetails(): boolean {
+        return [
+            "",
+            "Yes",
+            "(skipped)"
+        ].indexOf(this.selected) === -1;
+    }
+
+    nextStep(): void {
+        if (this.shouldRenderSafetyDetails) {
+            return;
+        }
+
+        super.nextStep();
+    }
+
+    onPreviousStep(): void {
+        if (this.shouldRenderSafetyDetails) {
+            storage.setItem(this.props.name, "");
+            return;
+        }
+    }
+
+    get question(): string {
+        if (this.shouldRenderSafetyDetails) {
+            return "Everyone has the right to be safe";
+        }
+
+        return this.props.question;
+    }
+
+    renderDoneButton(): ?React.Element<any> {
+        if (this.shouldRenderSafetyDetails) {
+            return (
+                <div>
+                    <div className="done-button">
+                        <components.FlatButton
+                            label="CONTINUE"
+                            autoFocus={true}
+                            onClick={this.props.onDoneTouchTap}
+                        />
+                    </div>
+                </div>
+            );
+        }
+
+        return super.renderDoneButton();
+    }
+
+    render(): React.Node {
+        if (this.shouldRenderSafetyDetails) {
+            const link1800Respect = "/service/634190-1800respect";
+            const number1800Respect = "1800 737 732";
+
+            let isMobile;
+
+            if (typeof window !== "undefined") {
+                isMobile = window.innerWidth <= 768;
+            } else {
+                isMobile = false;
+            }
+
+            return (
+                <div className="AreYouSafe">
+                    {this.renderHeaderBar()}
+                    <div className="safety-message">
+                        <icons.PhoneCalling className="PhoneIcon" />
+                        <h2>
+                            If you or someone else is in danger call{' '}
+                            {
+                                isMobile ? (
+                                    <a href="tel:000">000</a>
+                                ) : (
+                                    "000"
+                                )
+                            }
+                        </h2>
+                        <h3>
+                            If you don't feel safe in your life, call{' '}
+                            <a href={link1800Respect}>1800 Respect</a> for
+                            confidential counselling, support and services
+                        </h3>
+                        <h3>
+                            <a href={link1800Respect}>1800 Respect</a> on{' '}
+                            {
+                                isMobile ? (
+                                    <a href={`tel:${number1800Respect}`}>
+                                        {number1800Respect}
+                                    </a>
+                                ) : (
+                                    `${ number1800Respect }`
+                                )
+                            }
+                        </h3>
+                    </div>
+                    {this.renderDoneButton()}
+                    {this.renderOnlineSafetyLink()}
+                </div>
+            );
+        }
+
+        return super.render();
+    }
 }
 
 export default AreYouSafe;
