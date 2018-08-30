@@ -248,7 +248,7 @@ class BaseQuestion extends React.Component<Props, State> {
         if (this.props.showOnlineSafetyLink) {
             return (
                 <OnlineSafetyLink/>
-            )
+            );
         }
     }
 
