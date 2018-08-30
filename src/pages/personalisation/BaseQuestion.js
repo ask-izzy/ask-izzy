@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from "react";
-import reactMixin from "react-mixin";
 import { debounce } from "lodash-decorators";
 import _ from "underscore";
 
@@ -16,7 +15,7 @@ import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
 import OnlineSafetyLink from "../../components/OnlineSafetyLink";
 
-type Props = {
+export type Props = {
     name: string,
     question: string,
     byline?: string,
@@ -28,15 +27,15 @@ type Props = {
     icons?: Object
 }
 
-type State = {
+export type State = {
     selected: ?string,
     rootHeight?: number,
     windowHeight?: number,
     answers?: Set<string>,
+    shouldRenderSafetyDetails?: boolean,
 }
 
-/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
-class BaseQuestion extends React.Component<Props, State> {
+class BaseQuestion extends Personalisation<Props, State> {
     static defaultProps: Object = {};
 
     constructor(props: Object) {
@@ -45,8 +44,6 @@ class BaseQuestion extends React.Component<Props, State> {
             selected: null, // set when the user makes a choice
         };
     }
-
-    nextStep: any;
 
     get selected(): string {
         let storageValue;
@@ -60,8 +57,8 @@ class BaseQuestion extends React.Component<Props, State> {
         }
 
         return `${(
-            storageValue ||
             this.state.selected ||
+            storageValue ||
             ""
         )}`;
     }
@@ -150,6 +147,10 @@ class BaseQuestion extends React.Component<Props, State> {
         }
     }
 
+    get question(): string {
+        return this.props.question;
+    }
+
     /**
      * Determines whether or not to show the question.
      *
@@ -186,38 +187,19 @@ class BaseQuestion extends React.Component<Props, State> {
     }
 
     onAnswerTouchTap(answer: string, ...rest: any): void {
-        this.setState({selected: answer});
-        this.triggerNext();
+        this.setState({
+            selected: answer
+        }, () => {
+            this.triggerNext()
+        });
     }
 
     render(): React.Node {
         const selected = this.selected;
-        let bannerName = "";
-
-        try {
-            bannerName = this.context.controller.props.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
-
-        if (this.props.name === "sub-indigenous") {
-            bannerName = "atsi";
-        }
 
         return (
             <div>
-                <HeaderBar
-                    primaryText={
-                        <div>
-                            {this.props.question}
-                        </div>
-                    }
-                    secondaryText={
-                        this.props.byline
-                    }
-                    bannerName={bannerName}
-                    alternateBackgroundColor={false}
-                />
+                {this.renderHeaderBar()}
                 <div className="List">
                     {this.answers.map((answer, index) =>
                         <InputListItem

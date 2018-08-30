@@ -1,0 +1,28 @@
+.AreYouSafe {
+    h2, h3 {
+        font-weight: normal;
+    }
+
+    .safety-message {
+        width: 75%;
+        margin: 60px auto;
+        text-align: center;
+    }
+
+    .green-text {
+
+    }
+
+    .PhoneIcon {
+        width: 90px;
+        height: 90px;
+    }
+
+    @media (max-width: 768px) {
+        & {
+            .safety-message {
+                width: 95%;
+            }
+        }
+    }
+}

@@ -25,9 +25,10 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     }
 
     previousStep(): void {
-        const prevSubPage = this.prevSubPage();
-
+        super.previousStep();
         this.setState({nextDisabled: false});
+
+        const prevSubPage = this.prevSubPage();
 
         if (prevSubPage) {
             this.goToSubPage(prevSubPage);
@@ -40,7 +41,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         this.navigate("");
     }
 
-    goToSubPage(subpage: React.ComponentType<*>): void {
+    goToSubPage(subpage: React.ComponentType<any>): void {
         /* TODO: Narrow down which components don't have defaultProps */
 
         // flow:disable
@@ -96,15 +97,21 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         }
     }
 
+    get backMessage(): string {
+        if (this.refs.subpage && this.refs.subpage.customTitle) {
+            const title = this.refs.subpage.customTitle();
+            if (title) {
+                return title;
+            }
+        }
+
+        const prevPage = this.prevSubPage();
+
+        return prevPage ? prevPage.title : "Categories";
+    }
+
     render() {
         const Subpage = this.currentComponent;
-        const prevPage = this.prevSubPage()
-        const backMessage = prevPage ?
-            /* TODO: Narrow down the components that aren't returning a title */
-
-            // flow:disable
-            prevPage.title
-            : "Categories";
 
         if (!Subpage) {
             throw new Error("Unexpected");
@@ -127,7 +134,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
                     title={Subpage.title || this.title}
                     // flow:enable
                     onBackTouchTap={this.previousStep.bind(this)}
-                    backMessage={backMessage}
+                    backMessage={this.backMessage}
                     forwardMessage="Next"
                     forwardIcon={<Chevron alt="" />}
                     forwardEnabled={

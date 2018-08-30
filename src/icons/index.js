@@ -50,6 +50,7 @@ import SvgIconMental from "./Mental.js";
 import SvgIconMoney from "./Money.js";
 import SvgIconPhoneSolid from "./PhoneSolid.js";
 import SvgIconPhone from "./Phone.js";
+import SvgIconPhoneCalling from "./PhoneCalling.js";
 import SvgIconPrint from "./Print.js";
 import SvgIconRadioSelected from "./RadioSelected.js";
 import SvgIconRadioUnselected from "./RadioUnselected.js";
@@ -117,6 +118,7 @@ export default {
     OnLineSecurity: SvgIconOnlineSecurity,
     PhoneSolid: SvgIconPhoneSolid,
     Phone: SvgIconPhone,
+    PhoneCalling: SvgIconPhoneCalling,
     Print: SvgIconPrint,
     QuestionMark: SvgIconQuestionMark,
     RadioSelected: SvgIconRadioSelected,
