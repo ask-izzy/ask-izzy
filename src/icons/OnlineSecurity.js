@@ -5,11 +5,11 @@
 import React from "react";
 import classnames from "classnames";
 
-export default class SvgIconOnlineSecurity extends React.Component<any> {
-    props: {
-        className?: string,
-    };
-    state: void;
+type Props = {
+    className?: string,
+}
+
+export default class SvgIconOnlineSecurity extends React.Component<Props, void> {
 
     render() {
         const {className, ...rest} = this.props;
