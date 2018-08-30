@@ -7,6 +7,15 @@ import * as iss from "../iss";
 
 import personalisation from "../pages/personalisation";
 
+type Props = {
+    name: string,
+    byline: string,
+    icon: React$ComponentType<any> ,
+    search: iss.searchRequest,
+    info?: string | React$Element<any>,
+    personalisation: Array<any>,
+};
+
 export class Category {
     key: string;
     name: string;
@@ -17,14 +26,7 @@ export class Category {
     // I can't get flow to happily check that these are react classes.
     personalisation: Array<any>;
 
-    constructor(props: {
-        name: string,
-        byline: string,
-        icon: React$ComponentType<any>,
-        search: iss.searchRequest,
-        info?: string|React$Element<any>,
-        personalisation: Array<any>,
-    }) {
+    constructor(props: Props) {
         this.name = props.name;
         this.byline = props.byline;
         this.icon = props.icon;
@@ -38,7 +40,7 @@ export class Category {
     }
 }
 
-const categories:Array<Category> = [
+const categories: Array<Category> = [
     new Category({
         name: "Housing",
         byline: "A place to stay",

@@ -22,6 +22,11 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     }
 
     previousStep(): void {
+        // If our subpage has an onPreviousStep hook, call it, otherwise
+        // just go back.
+        this.refs.subpage &&
+        this.refs.subpage.onPreviousStep &&
+        this.refs.subpage.onPreviousStep() ||
         browserHistory.goBack();
     }
 
@@ -84,10 +89,6 @@ class BasePersonalisationPage extends BaseCategoriesPage {
             component.defaultProps.name == this.props.params.subpage
         );
     }
-}
-
-BasePersonalisationPage.childContextTypes = {
-    controller: PropTypes.instanceOf(BasePersonalisationPage),
 }
 
 BasePersonalisationPage.childContextTypes = {
