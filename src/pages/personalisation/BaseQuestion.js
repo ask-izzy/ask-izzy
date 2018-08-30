@@ -239,17 +239,9 @@ class BaseQuestion extends React.Component<Props, State> {
                         />)}
                 </div>
                 {this.renderDoneButton()}
-                {this.renderOnlineSafetyLink()}
+                {this.props.showOnlineSafetyLink && <OnlineSafetyLink/>}
             </div>
         );
-    }
-
-    renderOnlineSafetyLink(): ?React$Element<*> {
-        if (this.props.showOnlineSafetyLink) {
-            return (
-                <OnlineSafetyLink/>
-            );
-        }
     }
 
     renderDoneButton(): ?React.Element<any> {
