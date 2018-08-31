@@ -10,13 +10,13 @@ Feature: Personalisation
         Given a fresh session
         And I visit /
 
+        Then I should see "Where are you?"
     Scenario: Search for housing with personalised results
         Given control of geolocation
         When I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
-        Then I should see "Where are you?"
 
         When I click on "Get your current location"
 
@@ -87,3 +87,21 @@ Feature: Personalisation
 
         When I click on the done button
         Then I should see 3 search results in "Richmond, Victoria"
+
+    Scenario: Searching for domestic violence checks that I'm safe
+        Given I click on "Family & domestic violence help"
+        Then I should see "To help me find the right services I'll ask you a few questions"
+
+        When I click on the done button
+        Then I should see "Are you safe right now?"
+
+        When I click on "No"
+        Then I should see "Everyone has the right to feel safe"
+
+        When I click back from the title bar
+        And I click "I'm not sure"
+        Then I should see "Everyone has the right to feel safe"
+
+        When I click back from the title bar
+        And I click "Yes"
+        Then I should see "Where are you?"
