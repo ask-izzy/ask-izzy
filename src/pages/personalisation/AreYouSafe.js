@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import BaseQuestion from "./BaseQuestion";
-import type { Props } from "./BaseQuestion";
 import { append } from "../../iss/Search";
 import icons from "../../icons";
 import storage from "../../storage";
@@ -41,7 +40,7 @@ export default class AreYouSafe extends BaseQuestion {
         return [
             "",
             "Yes",
-            "(skipped)"
+            "(skipped)",
         ].indexOf(this.selected) === -1;
     }
 
