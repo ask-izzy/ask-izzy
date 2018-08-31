@@ -100,6 +100,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     get backMessage(): string {
         if (this.refs.subpage && this.refs.subpage.customTitle) {
             const title = this.refs.subpage.customTitle();
+
             if (title) {
                 return title;
             }
