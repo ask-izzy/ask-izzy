@@ -3,7 +3,6 @@
 
 import React from "react";
 import BaseQuestion from "./BaseQuestion";
-import type { Props } from "./BaseQuestion";
 import { append } from "../../iss/Search";
 import icons from "../../icons";
 import OnlineSafetyLink from "../../components/OnlineSafetyLink";
@@ -50,7 +49,7 @@ class AreYouSafe extends BaseQuestion {
         return [
             "",
             "Yes",
-            "(skipped)"
+            "(skipped)",
         ].indexOf(this.selected) === -1;
     }
 
