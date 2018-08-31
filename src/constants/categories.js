@@ -10,11 +10,7 @@ import personalisation from "../pages/personalisation";
 type Props = {
     name: string,
     byline: string,
-<<<<<<< HEAD
     icon: React$ComponentType<any>,
-=======
-    icon: React$ComponentType<any> ,
->>>>>>> Restructured the Personalisation mixin to be a component to extend from to assist with typing issues and allow overwriting the methods in the class.
     search: iss.searchRequest,
     info?: string | React$Element<any>,
     personalisation: Array<any>,
