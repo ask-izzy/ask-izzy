@@ -10,7 +10,6 @@ Feature: Personalisation
         Given a fresh session
         And I visit /
 
-        Then I should see "Where are you?"
     Scenario: Search for housing with personalised results
         Given control of geolocation
         When I click on "Housing"
