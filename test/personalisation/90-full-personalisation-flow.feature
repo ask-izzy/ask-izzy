@@ -91,19 +91,19 @@ Feature: Personalisation
         Then I should see 3 search results in "Richmond, Victoria"
 
     Scenario: Searching for domestic violence checks that I'm safe
-        When I click on "Family & domestic violence help"
+        When I click on "Domestic & family violence help"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
         Then I should see "Are you safe right now?"
 
         When I click on "No"
-        Then I should see "Everyone has the right to feel safe"
+        Then I should see "Everyone has the right to be safe"
 
         When I click back from the title bar
-        And I click "I'm not sure"
-        Then I should see "Everyone has the right to feel safe"
+        And I click on "I'm not sure"
+        Then I should see "Everyone has the right to be safe"
 
         When I click back from the title bar
-        And I click "Yes"
+        And I click on "Yes"
         Then I should see "Where are you?"
