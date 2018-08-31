@@ -88,7 +88,7 @@ Feature: Personalisation
         Then I should see 3 search results in "Richmond, Victoria"
 
     Scenario: Searching for domestic violence checks that I'm safe
-        Given I click on "Family & domestic violence help"
+        When I click on "Family & domestic violence help"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
