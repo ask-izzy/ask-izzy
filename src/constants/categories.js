@@ -10,7 +10,7 @@ import personalisation from "../pages/personalisation";
 type Props = {
     name: string,
     byline: string,
-    icon: React$ComponentType<any> ,
+    icon: React$ComponentType<any>,
     search: iss.searchRequest,
     info?: string | React$Element<any>,
     personalisation: Array<any>,
