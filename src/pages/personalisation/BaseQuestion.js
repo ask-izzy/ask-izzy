@@ -188,7 +188,7 @@ class BaseQuestion extends Personalisation<Props, State> {
 
     onAnswerTouchTap(answer: string, ...rest: any): void {
         this.setState({
-            selected: answer
+            selected: answer,
         }, () => {
             this.triggerNext()
         });
