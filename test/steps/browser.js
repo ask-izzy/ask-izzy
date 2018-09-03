@@ -174,8 +174,14 @@ async function checkURL(expected: string): Promise<void> {
         }`,
     );
 
+    let url = await this.driver.getCurrentUrl();
+
+    if (url.endsWith("#")) {
+        url = url.slice(0, -1);
+    }
+
     assert.equal(
-        decodeURIComponent(await this.driver.getCurrentUrl()),
+        decodeURIComponent(url),
         expected
     );
 }
