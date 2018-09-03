@@ -144,7 +144,7 @@ async function urlIs(
 ): Promise<boolean> {
     let url = await driver.getCurrentUrl();
 
-    if (url.endswith("#")) {
+    if (url.endsWith("#")) {
         url = url.slice(0, -1);
     }
 
