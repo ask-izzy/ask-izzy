@@ -39,10 +39,11 @@ class AreYouSafe extends BaseQuestion {
         baseTextBoxComponent: <OnlineSafetyLink/>,
     };
 
-    customTitle(): ?string {
+    get customTitle(): string {
         if (typeof window !== "undefined" && this.shouldRenderSafetyDetails) {
             return this.constructor.title;
         }
+        return "";
     }
 
     get shouldRenderSafetyDetails(): boolean {
@@ -61,11 +62,14 @@ class AreYouSafe extends BaseQuestion {
         super.nextStep();
     }
 
-    onPreviousStep(): void {
+    onPreviousStep(): boolean {
         if (this.shouldRenderSafetyDetails) {
             storage.setItem(this.props.name, "");
-            return;
+            this.setState({ selected: null });
+            return false;
         }
+
+        return true;
     }
 
     get question(): string {
