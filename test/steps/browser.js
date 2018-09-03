@@ -144,6 +144,10 @@ async function urlIs(
 ): Promise<boolean> {
     let url = await driver.getCurrentUrl();
 
+    if (url.endswith("#")) {
+        url = url.slice(0, -1);
+    }
+
     if (expected.startsWith("/")) {
         expected = baseUrl() + expected;
     }
