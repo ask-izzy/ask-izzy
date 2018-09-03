@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from "react";
-import { debounce } from "lodash-decorators";
 import _ from "underscore";
 
 import Personalisation from "../../mixins/Personalisation";
@@ -24,7 +23,8 @@ export type Props = {
     onDoneTouchTap: Function,
     suppressDoneButton: boolean,
     showOnlineSafetyLink?: boolean,
-    icons?: Object
+    icons?: Object,
+    onNextStepCallback?: Function,
 }
 
 export type State = {
@@ -162,8 +162,9 @@ class BaseQuestion extends Personalisation<Props, State> {
 
     /**
      * Trigger next page after a 500ms debounce.
+     *
+     * @returns {void}
      */
-    /*::__(){`*/@debounce(500)/*::`}*/
     triggerNext(): void {
         if (typeof this.nextStep === "function") {
             this.nextStep();
@@ -211,6 +212,7 @@ class BaseQuestion extends Personalisation<Props, State> {
                             checked={answer == selected}
                             value={answer}
                             onClick={this.onAnswerTouchTap.bind(this, answer)}
+                            readOnly={true}
 
                             checkedIcon={
                                 <icons.RadioSelected className="big" />

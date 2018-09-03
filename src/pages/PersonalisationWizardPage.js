@@ -26,7 +26,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
 
     previousStep(): void {
         if (this.refs.subpage && this.refs.subpage.onPreviousStep) {
-            if (!this.refs.subpage.onPreviousStep()) {
+            if (!this.refs.subpage.onPreviousStep(this.forceUpdate.bind(this))) {
                 return;
             }
         }
@@ -155,6 +155,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
                 <Subpage
                     ref="subpage"
                     onDoneTouchTap={this.nextStep.bind(this)}
+                    onNextStepCallback={this.forceUpdate.bind(this)}
                 />
             </div>
         );
