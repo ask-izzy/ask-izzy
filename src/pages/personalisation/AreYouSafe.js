@@ -58,16 +58,22 @@ import OnlineSafetyLink from "../../components/OnlineSafetyLink";
 
     nextStep(): void {
         if (this.shouldRenderSafetyDetails) {
+            if (this.props.onNextStepCallback) {
+                this.props.onNextStepCallback();
+            }
             return;
         }
 
         super.nextStep();
     }
 
-    onPreviousStep(): boolean {
+    onPreviousStep(onCompleteCallback: Function): boolean {
         if (this.shouldRenderSafetyDetails) {
             storage.setItem(this.props.name, "");
-            this.setState({ selected: null });
+            this.setState({ selected: null }, () => {
+                onCompleteCallback();
+            });
+
             return false;
         }
 
