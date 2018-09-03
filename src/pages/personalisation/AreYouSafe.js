@@ -33,10 +33,11 @@ import OnlineSafetyLink from "../../components/OnlineSafetyLink";
         baseTextBoxComponent: <OnlineSafetyLink/>,
     };
 
-    customTitle(): ?string {
+    get customTitle(): string {
         if (typeof window !== "undefined" && this.shouldRenderSafetyDetails) {
             return this.constructor.title;
         }
+        return "";
     }
 
     get shouldRenderSafetyDetails(): boolean {
@@ -55,11 +56,14 @@ import OnlineSafetyLink from "../../components/OnlineSafetyLink";
         super.nextStep();
     }
 
-    onPreviousStep(): void {
+    onPreviousStep(): boolean {
         if (this.shouldRenderSafetyDetails) {
             storage.setItem(this.props.name, "");
-            return;
+            this.setState({ selected: null });
+            return false;
         }
+
+        return true;
     }
 
     get question(): string {
