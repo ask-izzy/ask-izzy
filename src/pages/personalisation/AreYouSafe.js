@@ -30,10 +30,11 @@ export default class AreYouSafe extends BaseQuestion {
         showOnlineSafetyLink: true,
     };
 
-    customTitle(): ?string {
+    get customTitle(): string {
         if (typeof window !== "undefined" && this.shouldRenderSafetyDetails) {
             return this.constructor.title;
         }
+        return "";
     }
 
     get shouldRenderSafetyDetails(): boolean {
@@ -52,11 +53,14 @@ export default class AreYouSafe extends BaseQuestion {
         super.nextStep();
     }
 
-    onPreviousStep(): void {
+    onPreviousStep(): boolean {
         if (this.shouldRenderSafetyDetails) {
             storage.setItem(this.props.name, "");
-            return;
+            this.setState({ selected: null });
+            return false;
         }
+
+        return true;
     }
 
     get question(): string {
