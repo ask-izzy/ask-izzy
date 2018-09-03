@@ -102,13 +102,21 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     }
 
     get backMessage(): string {
-        if (this.refs.subpage && this.refs.subpage.customTitle) {
-            return this.refs.subpage.customTitle;
+        if (this.refs.subpage && this.refs.subpage.customBackMessage) {
+            return this.refs.subpage.customBackMessage;
         }
 
         const prevPage = this.prevSubPage();
 
         return prevPage ? prevPage.title : "Categories";
+    }
+
+    get pageTitle(): string {
+        if (this.refs.subpage && this.refs.subpage.customPageTitle) {
+            return this.refs.subpage.customPageTitle;
+        }
+
+        return this.currentComponent.title || this.title;
     }
 
     render() {
@@ -125,7 +133,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
                     // TODO: Find where the types are set for the Subpage line
                     // and resolve the issue.
                     // flow:disable
-                    title={Subpage.title || this.title}
+                    title={this.pageTitle}
                     // flow:enable
                     onBackTouchTap={this.previousStep.bind(this)}
                     backMessage={this.backMessage}

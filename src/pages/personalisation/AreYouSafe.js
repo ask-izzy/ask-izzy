@@ -30,7 +30,15 @@ export default class AreYouSafe extends BaseQuestion {
         showOnlineSafetyLink: true,
     };
 
-    get customTitle(): string {
+    get customPageTitle(): string {
+        if (typeof window !== "undefined" && this.shouldRenderSafetyDetails) {
+            return "Help";
+        }
+
+        return "";
+    }
+
+    get customBackMessage(): string {
         if (typeof window !== "undefined" && this.shouldRenderSafetyDetails) {
             return this.constructor.title;
         }
