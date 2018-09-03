@@ -25,7 +25,12 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     }
 
     previousStep(): void {
-        super.previousStep();
+        if (this.refs.subpage && this.refs.subpage.onPreviousStep) {
+            if (!this.refs.subpage.onPreviousStep()) {
+                return;
+            }
+        }
+
         this.setState({nextDisabled: false});
 
         const prevSubPage = this.prevSubPage();
@@ -99,11 +104,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
 
     get backMessage(): string {
         if (this.refs.subpage && this.refs.subpage.customTitle) {
-            const title = this.refs.subpage.customTitle();
-
-            if (title) {
-                return title;
-            }
+            return this.refs.subpage.customTitle;
         }
 
         const prevPage = this.prevSubPage();
