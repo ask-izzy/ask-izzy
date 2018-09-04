@@ -63,10 +63,11 @@ class AreYouSafe extends BaseQuestion {
     }
 
     nextStep(): void {
+        if (this.props.onNextStepCallback) {
+            this.props.onNextStepCallback();
+        }
+
         if (this.shouldRenderSafetyDetails) {
-            if (this.props.onNextStepCallback) {
-                this.props.onNextStepCallback();
-            }
             return;
         }
 
