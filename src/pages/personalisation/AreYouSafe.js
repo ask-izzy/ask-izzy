@@ -33,6 +33,10 @@ import OnlineSafetyLink from "../../components/OnlineSafetyLink";
         baseTextBoxComponent: <OnlineSafetyLink/>,
     };
 
+    static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+        return null;
+    }
+
     get customPageTitle(): string {
         if (typeof window !== "undefined" && this.shouldRenderSafetyDetails) {
             return "Help";
@@ -60,7 +64,7 @@ import OnlineSafetyLink from "../../components/OnlineSafetyLink";
         if (this.props.onNextStepCallback) {
             this.props.onNextStepCallback();
         }
-
+        
         if (this.shouldRenderSafetyDetails) {
             return;
         }
