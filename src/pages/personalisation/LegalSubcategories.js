@@ -16,8 +16,8 @@ export default class LegalSubcategories extends BaseQuestion {
                 .remove("-making -checks -electoral -taxation")
                 .remove("-centrelink -immigration -(hire of facilities)")
                 .remove("(legal aid)").append("legal advice"),
-            "Domestic & family violence issues": append("family ")
-                .remove("(legal aid)") + ("violence -police"),
+            "Domestic & family violence issues":
+                append("(family violence) -police").remove("(legal aid)"),
             "Victims of crime compensation": remove("legal -permits")
                 .remove("-(coordinating bodies) -ceremonies -making")
                 .remove("-checks -electoral -taxation")
