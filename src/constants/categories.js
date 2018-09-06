@@ -98,6 +98,7 @@ const categories: Array<Category> = [
         },
         personalisation: [
             personalisation.AreYouSafe,
+            personalisation.OnlineSafetyScreen,
             personalisation.Location,
         ],
     }),

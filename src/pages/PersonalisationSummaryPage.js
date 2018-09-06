@@ -1,12 +1,14 @@
-/* flow:disable */
+/* @flow */
 
-import React from "react";
+import * as React from "react";
 import PropTypes from "proptypes";
 
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import components from "../components";
 import FloatFromBottom from "../components/FloatFromBottom";
 import storage from "../storage";
+/* eslint-disable-next-line max-len */
+import BaseStaticPersonalisation from "./personalisation/BaseStaticPersonalisation";
 
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
@@ -92,21 +94,35 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         <div className="List">
                             {
                                 this.personalisationComponents.map(
-                                    (component, index) =>
-                                        <components.LinkListItem
-                                            key={index}
-                                            className="SummaryItem"
-                                            to={this.urlFor(
-                                                `personalise/summary/${
-                                                    component.defaultProps.name
-                                                }`
-                                            )}
-                                            // eslint-disable-next-line max-len
-                                            primaryText={component.summaryLabel ? component.summaryLabel : ''}
-                                            secondaryText={
-                                                component.summaryValue
-                                            }
-                                        />
+                                    (component, index) => {
+                                        if (component.prototype instanceof
+                                            BaseStaticPersonalisation
+                                        ) {
+                                            return false;
+                                        }
+
+                                        const toUrl = this.urlFor(
+                                            `personalise/summary/${
+                                                component.defaultProps.name
+                                            }`
+                                        );
+
+                                        return (
+                                            <components.LinkListItem
+                                                key={index}
+                                                className="SummaryItem"
+                                                to={toUrl}
+                                                primaryText={
+                                                    component.summaryLabel ?
+                                                        component.summaryLabel
+                                                        : ''
+                                                }
+                                                secondaryText={
+                                                    component.summaryValue
+                                                }
+                                            />
+                                        )
+                                    }
                                 )
                             }
 
