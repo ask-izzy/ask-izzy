@@ -16,7 +16,6 @@ Feature: Personalisation header
 
         When I click on the done button # Intro page
          And I click on the done button # Somewhere safe to sleep
-         And I click on the done button # Subcategories
          And I click on the done button # Gender
          And I click on "27 to 39"
          And I click on the done button # Demographics

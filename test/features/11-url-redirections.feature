@@ -4,11 +4,10 @@ Feature: Landing page
     # When I come to Ask Izzy using old URLs
     # I want to be redirected to the right pages
     # So that I can view the contents of my saved URLs
-    
+
     Background:
         Given my location is "Melbourne, VIC"
         And I have somewhere to sleep tonight
-        And I need nothing for housing
         And my gender is female
         And I am 27 years old
         And I am not part of any relevant demographics
