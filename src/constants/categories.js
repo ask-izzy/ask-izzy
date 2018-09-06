@@ -165,6 +165,8 @@ const categories: Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.LegalSubcategories,
+            personalisation.LegalAreYouSafe,
+            personalisation.OnlineSafetyScreen,
             personalisation.DemographicsIndigenous,
         ],
     }),
