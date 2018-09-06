@@ -95,12 +95,6 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                             {
                                 this.personalisationComponents.map(
                                     (component, index) => {
-                                        if (component.prototype instanceof
-                                            BaseStaticPersonalisation
-                                        ) {
-                                            return false;
-                                        }
-
                                         const toUrl = this.urlFor(
                                             `personalise/summary/${
                                                 component.defaultProps.name

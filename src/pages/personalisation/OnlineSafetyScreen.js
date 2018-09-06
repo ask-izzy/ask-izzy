@@ -10,7 +10,7 @@ export default class OnlineSafetyScreen extends BaseStaticPersonalisation {
 
     static defaultProps = {
         name: "online-safety-screen",
-        heading: "Everyone has the right to feel safe",
+        heading: "Everyone has the right to be safe",
         byline: "All of your answers are private and anonymous",
         showOnlineSafetyLink: true,
     };
@@ -18,6 +18,8 @@ export default class OnlineSafetyScreen extends BaseStaticPersonalisation {
     static showPage(): boolean {
         return Boolean(AreYouSafe.answer) && AreYouSafe.answer !== "Yes";
     }
+
+    static summaryLabel = "Online safety screen"
 
     renderContent(): React.Element<any> {
         const link1800Respect = "/service/634190-1800respect";

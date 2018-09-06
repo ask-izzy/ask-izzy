@@ -52,4 +52,8 @@ export default {
     SleepTonight: SleepTonight,
     AreYouSafe,
     OnlineSafetyScreen,
+    OnlineSafetyScreenBundle: [
+        AreYouSafe,
+        OnlineSafetyScreen,
+    ],
 };
