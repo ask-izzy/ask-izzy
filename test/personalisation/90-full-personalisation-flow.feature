@@ -28,9 +28,6 @@ Feature: Personalisation
         Then I should see "Do you have somewhere safe to sleep tonight?"
 
         When I click on "Yes"
-        Then I should see "Which situation is most like yours?"
-
-        When I click on the done button
         Then I should see "Do you identify as…"
 
         When I click on the done button # Didn't answer the question

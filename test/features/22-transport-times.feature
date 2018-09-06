@@ -12,7 +12,7 @@ Feature: Transport times
         And I am not part of any relevant demographics
 
     Scenario: Show transport times
-       Given A service with:
+        Given A service with:
         ----------------------------------------------
         name: "Transportable"
         location:
@@ -22,7 +22,7 @@ Feature: Transport times
                 lon: 144.5192432
         ----------------------------------------------
         When I search for the service
-       Given googles directions matrix will return
+        Given googles directions matrix will return
         ----------------------------------------------
         - status: OK
           duration:

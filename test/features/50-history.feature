@@ -13,7 +13,6 @@ Feature: History navigation
     Scenario: Navigate via category to a service and back to the personalisation page
         Given a fresh session
         And my location is "Melbourne, VIC"
-        And I need nothing for housing
         And I am not part of any relevant demographics
         And I am not interested in any subcategory
 
