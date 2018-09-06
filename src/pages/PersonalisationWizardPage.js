@@ -58,7 +58,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     nextSubPage(): ?React.ComponentType<*> {
         return this.personalisationComponents.find((component, idx) =>
             (idx > this.currentComponentIdx) &&
-            (!component.getSearch({}))
+            (component.getSearch ? !component.getSearch({}) : true)
         );
     }
 

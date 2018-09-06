@@ -257,14 +257,6 @@ class BaseQuestion extends Personalisation<Props, State> {
         );
     }
 
-    renderOnlineSafetyLink(): ?React.Element<any> {
-        if (this.props.showOnlineSafetyLink) {
-            return (
-                <OnlineSafetyLink/>
-            )
-        }
-    }
-
     renderDoneButton(): ?React.Element<any> {
         if (!this.props.suppressDoneButton) {
             return (
