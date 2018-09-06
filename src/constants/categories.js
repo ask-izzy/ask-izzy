@@ -97,8 +97,7 @@ const categories: Array<Category> = [
             q: "Family violence -(coordinating bodies)",
         },
         personalisation: [
-            personalisation.AreYouSafe,
-            personalisation.OnlineSafetyScreen,
+            ...personalisation.OnlineSafetyScreenBundle,
             personalisation.Location,
         ],
     }),
