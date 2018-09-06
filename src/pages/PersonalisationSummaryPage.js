@@ -7,8 +7,6 @@ import BasePersonalisationPage from "./BasePersonalisationPage";
 import components from "../components";
 import FloatFromBottom from "../components/FloatFromBottom";
 import storage from "../storage";
-/* eslint-disable-next-line max-len */
-import BaseStaticPersonalisation from "./personalisation/BaseStaticPersonalisation";
 
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
