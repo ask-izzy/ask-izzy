@@ -36,6 +36,8 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
         super.onDoneTouchTap();
     }
 
+    static summaryLabel = "Online safety screen"
+
     renderContent(): React.Element<any> {
         const link1800Respect = "/service/634190-1800respect";
         const number1800Respect = "1800 737 732";
