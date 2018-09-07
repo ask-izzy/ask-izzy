@@ -14,25 +14,25 @@ export default class OnlineSafetyLink extends React.Component<any> {
     render() {
         return (
             <div
-                className={"OnlineSafetyLink"}
+                className="OnlineSafetyLink"
                 onClick={this.onClickOnlineSafetyLink.bind(this)}
             >
-                <div className={"Icon"}>
-                    <div className={"IconBorder"}>
-                        <icons.OnLineSecurity className={"big middle"}/>
+                <div className="IconSection">
+                    <div className="IconBorder">
+                        <icons.OnLineSecurity className="big middle" />
                     </div>
                 </div>
-                <div className={"Content"}>
-                    <div className={"Header"}>
+                <div className="Content">
+                    <div className="Header">
                         Online Safety
                     </div>
-                    <div className={"Instruction"}>
+                    <div className="Instruction">
                         There are some simple steps you can take
                         which will make you safer online.
                     </div>
-                    <div className={"Link"}>
+                    <div className="Link">
                         Learn More
-                        <div className={"Chevron"}> ></div>
+                        <div className="Chevron">&nbsp;&gt;</div>
                     </div>
                 </div>
             </div>
@@ -40,12 +40,10 @@ export default class OnlineSafetyLink extends React.Component<any> {
     }
 
     onClickOnlineSafetyLink() {
-        let path = "/online-safety";
+        const path = "/online-safety";
 
         this.context.router.push(
             path,
         );
     }
-
-
 }
