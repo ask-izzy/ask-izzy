@@ -3,15 +3,14 @@ $colour-grey: #808080;
 $colour-icon-background: #70bdae;
 
 .OnlineSafetyLink {
-    height: 17vh;
-    padding-left: 2vw;
+    padding-left: 5vmin;
     background-color: $colour-background;
     cursor: pointer;
 
     .Icon {
         display: table-cell;
         width: 64px;
-        height: 17vh;
+        height: 120px;
         text-align: center;
         vertical-align: middle;
 
@@ -29,18 +28,18 @@ $colour-icon-background: #70bdae;
 
     .Content {
         display: table-cell;
-        width: 70vw;
-        padding: 2vw;
+        width: 70vmin;
+        padding: 2vmin;
         vertical-align: middle;
 
         .Header {
-            padding-bottom: 1vh;
+            padding-bottom: 5px;
             font-size: large;
             font-weight: 500;
         }
 
         .Instruction {
-            padding-bottom: 2vh;
+            padding-bottom: 10px;
             font-size: small;
         }
 
