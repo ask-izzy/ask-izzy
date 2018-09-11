@@ -58,6 +58,8 @@ const categories: Array<Category> = [
             personalisation.Gender,
             personalisation.Age,
             personalisation.Demographics,
+            personalisation.HousingAreYouSafe,
+            personalisation.OnlineSafetyScreen,
         ],
     }),
     new Category({
@@ -150,6 +152,8 @@ const categories: Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.CounsellingSubcategories,
+            personalisation.CounsellingAreYouSafe,
+            personalisation.OnlineSafetyScreen,
             personalisation.DemographicsIndigenous,
         ],
     }),
