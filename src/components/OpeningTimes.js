@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import PropTypes from "proptypes";
 import moment from "moment";
 
 import ScreenReader from "./ScreenReader";
