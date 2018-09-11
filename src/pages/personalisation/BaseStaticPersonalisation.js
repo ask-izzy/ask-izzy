@@ -48,6 +48,15 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
     }
 
     /**
+     * Determines whether or not to show the question on the summary page.
+     *
+     * @returns {boolean} true if we should show this on the summary page.
+     */
+    static showInSummary(): boolean {
+        return true;
+    }
+
+    /**
      * Trigger next page after a 500ms debounce.
      *
      * @returns {void}

@@ -49,7 +49,7 @@ class BaseMultiQuestion extends BaseQuestion {
         );
     }
 
-    static showQuestion(): boolean {
+    static showPage(): boolean {
         return true;
     }
 

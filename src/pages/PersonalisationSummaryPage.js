@@ -50,6 +50,15 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         }
     }
 
+    get personalisationComponents(): Array<React.ComponentType<any>> {
+        const components = super.personalisationComponents;
+
+        return components.filter((component: React.ComponentType<any>) =>
+            (typeof component.showInSummary === "function") &&
+            component.showInSummary()
+        );
+    }
+
     render() {
         const Subpage = this.currentComponent;
         const backMessage = Subpage ? "Answers" : this.title;

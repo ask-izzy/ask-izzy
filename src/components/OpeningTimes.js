@@ -44,11 +44,6 @@ type Props = {
 }
 
 class OpeningTimes extends React.Component<Props, void> {
-    static propTypes = {
-        object: PropTypes.object.isRequired,
-        moment: PropTypes.func,
-    };
-
     static defaultProps = {
         moment: moment,
     };

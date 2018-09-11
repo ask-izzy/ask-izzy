@@ -88,10 +88,8 @@ class BaseCategoriesPage extends React.Component<Object, State> {
         }
 
         return components.filter(component =>
-            ((typeof component.showQuestion == "function") &&
-                component.showQuestion()) ||
-            ((typeof component.showPage == "function") &&
-                component.showPage())
+            (typeof component.showPage == "function") &&
+                component.showPage()
         );
     }
 
