@@ -50,10 +50,10 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         }
     }
 
-    get personalisationComponents(): Array<React.ComponentType<any>> {
+    get personalisationComponents() {
         const components = super.personalisationComponents;
 
-        return components.filter((component: React.ComponentType<any>) =>
+        return components.filter(component =>
             (typeof component.showInSummary === "function") &&
             component.showInSummary()
         );
