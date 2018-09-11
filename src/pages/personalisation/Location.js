@@ -92,7 +92,11 @@ class Location extends Personalisation<Props, State> {
         return storage.getLocation();
     }
 
-    static showQuestion(): boolean {
+    static showPage(): boolean {
+        return true;
+    }
+
+    static showInSummary(): boolean {
         return true;
     }
 

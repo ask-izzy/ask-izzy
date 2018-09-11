@@ -27,6 +27,8 @@ import MoneySubcategories from "./personalisation/MoneySubcategories";
 import SleepTonight from "./personalisation/SleepTonight";
 import AreYouSafe from "./personalisation/AreYouSafe";
 import LegalAreYouSafe from "./personalisation/LegalAreYouSafe";
+import CounsellingAreYouSafe from "./personalisation/CounsellingAreYouSafe";
+import HousingAreYouSafe from "./personalisation/HousingAreYouSafe";
 import OnlineSafetyScreen from "./personalisation/OnlineSafetyScreen";
 
 export default {
@@ -53,6 +55,8 @@ export default {
     SleepTonight: SleepTonight,
     AreYouSafe,
     LegalAreYouSafe,
+    CounsellingAreYouSafe,
+    HousingAreYouSafe,
     OnlineSafetyScreen,
     OnlineSafetyScreenBundle: [
         AreYouSafe,

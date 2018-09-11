@@ -156,7 +156,16 @@ class BaseQuestion extends Personalisation<Props, State> {
      *
      * @returns {boolean} true if we should show this question.
      */
-    static showQuestion(): boolean {
+    static showPage(): boolean {
+        return true;
+    }
+
+    /**
+     * Determines whether or not to show the question on the summary page.
+     *
+     * @returns {boolean} true if we should show this on the summary page.
+     */
+    static showInSummary(): boolean {
         return true;
     }
 
