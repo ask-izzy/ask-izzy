@@ -58,8 +58,9 @@ const categories: Array<Category> = [
             personalisation.Gender,
             personalisation.Age,
             personalisation.Demographics,
-            personalisation.HousingAreYouSafe,
-            personalisation.OnlineSafetyScreen,
+            ...personalisation.OnlineSafetyScreenBundle(
+                personalisation.HousingAreYouSafe
+            ),
         ],
     }),
     new Category({
@@ -98,7 +99,9 @@ const categories: Array<Category> = [
             q: "Family violence -(coordinating bodies)",
         },
         personalisation: [
-            ...personalisation.OnlineSafetyScreenBundle,
+            ...personalisation.OnlineSafetyScreenBundle(
+                personalisation.AreYouSafe
+            ),
             personalisation.Location,
         ],
     }),
@@ -152,8 +155,9 @@ const categories: Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.CounsellingSubcategories,
-            personalisation.CounsellingAreYouSafe,
-            personalisation.OnlineSafetyScreen,
+            ...personalisation.OnlineSafetyScreenBundle(
+                personalisation.CounsellingAreYouSafe
+            ),
             personalisation.DemographicsIndigenous,
         ],
     }),
@@ -169,8 +173,9 @@ const categories: Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.LegalSubcategories,
-            personalisation.LegalAreYouSafe,
-            personalisation.OnlineSafetyScreen,
+            ...personalisation.OnlineSafetyScreenBundle(
+                personalisation.LegalAreYouSafe
+            ),
             personalisation.DemographicsIndigenous,
         ],
     }),
