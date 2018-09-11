@@ -4,6 +4,8 @@
 
 /* eslint-disable max-len */
 
+import * as React from "react";
+
 import AddictionSubcategories from "./personalisation/AddictionSubcategories";
 import AdvocacySubcategories from "./personalisation/AdvocacySubcategories";
 import Age from "./personalisation/Age";
@@ -58,8 +60,10 @@ export default {
     CounsellingAreYouSafe,
     HousingAreYouSafe,
     OnlineSafetyScreen,
-    OnlineSafetyScreenBundle: [
-        AreYouSafe,
-        OnlineSafetyScreen,
-    ],
+    OnlineSafetyScreenBundle: function(initialQuestion: React.ComponentType<any>) {
+        return [
+            initialQuestion,
+            OnlineSafetyScreen,
+        ]
+    },
 };
