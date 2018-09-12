@@ -25,6 +25,7 @@ import HomelessLegalStaticPage from "./pages/HomelessLegalStaticPage";
 import HomelessFinanceStaticPage from "./pages/HomelessFinanceStaticPage";
 import HomelessHealthStaticPage from "./pages/HomelessHealthStaticPage";
 import CensusStaticPage from "./pages/CensusStaticPage";
+import InformationPage from "./pages/InformationPage";
 import OnlineSafetyStaticPage from "./pages/OnlineSafetyStaticPage";
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
@@ -127,6 +128,11 @@ export default (
             path="/census-2016"
             component={CensusStaticPage}
             title="2016 Census"
+        />
+        <Route
+            path="/information"
+            component={InformationPage}
+            title="Information"
         />
 
         <Route
