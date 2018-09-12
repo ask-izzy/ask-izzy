@@ -16,7 +16,10 @@ export default class OnlineSafetyScreen extends BaseStaticPersonalisation {
     };
 
     static showPage(): boolean {
-        return Boolean(AreYouSafe.answer) && AreYouSafe.answer !== "Yes";
+        return Boolean(AreYouSafe.answer) && [
+            "Yes",
+            "(skipped)",
+        ].indexOf(AreYouSafe.answer) === -1;
     }
 
     static summaryLabel = "Online safety screen"
