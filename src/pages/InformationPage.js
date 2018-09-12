@@ -13,9 +13,8 @@ export default class InformationPage extends React.Component<{}> {
                 title="Information"
                 bannerName="family-violence static"
             >
-                <h1>Information</h1>
-                <p>It is not your fault. Everyone has the right to be safe.</p>
-                <p>Anyone can experience domestic and family violence or abuse.</p>
+                <p><strong>Violence or abuse is not your fault. Everyone has the right to be safe.</strong></p>
+                <p><strong>Anyone can experience domestic and family violence or abuse.</strong></p>
                 <p>Domestic and family violence is when someone is controlling or hurting you.</p>
                 <p>This can include one or more:</p>
                 <ul>
