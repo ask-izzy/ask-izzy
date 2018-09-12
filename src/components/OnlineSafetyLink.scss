@@ -3,25 +3,25 @@ $colour-grey: #808080;
 $colour-icon-background: #70bdae;
 
 .OnlineSafetyLink {
-    background-color: $colour-background;
-    cursor: pointer;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    background-color: $colour-background;
+    cursor: pointer;
 
     .IconSection {
         width: 64px;
         height: 64px;
 
         .IconBorder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 64px;
             height: 64px;
             border-radius: 50%;
             background: $colour-icon-background;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
     }
 
