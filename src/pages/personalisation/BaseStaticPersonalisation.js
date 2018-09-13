@@ -6,6 +6,8 @@ import Personalisation from "../../mixins/Personalisation";
 import HeaderBar from "../../components/HeaderBar";
 import components from "../../components";
 
+import storage from "../../storage";
+
 import OnlineSafetyLink from "../../components/OnlineSafetyLink";
 
 export type Props = {
@@ -32,6 +34,16 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
     */
     static headingValue(): string {
         return "";
+    }
+
+    static get answer(): string {
+        let answer = storage.getItem(this.defaultProps.name);
+
+        if (typeof answer != "string") {
+            return "";
+        }
+
+        return answer;
     }
 
     get heading(): string {
@@ -65,6 +77,10 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
         if (typeof this.nextStep === "function") {
             this.nextStep();
         }
+    }
+
+    onDoneTouchTap(): void {
+        this.props.onDoneTouchTap();
     }
 
     onAnswerTouchTap(): void {
@@ -111,7 +127,7 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
                     <components.FlatButton
                         label="CONTINUE"
                         autoFocus={true}
-                        onClick={this.props.onDoneTouchTap}
+                        onClick={this.onDoneTouchTap.bind(this)}
                     />
                 </div>
             </div>

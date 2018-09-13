@@ -4,8 +4,9 @@ import * as React from "react";
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
 import AreYouSafe from "./AreYouSafe";
+import storage from "../../storage";
 
-export default class OnlineSafetyScreen extends BaseStaticPersonalisation {
+class OnlineSafetyScreen extends BaseStaticPersonalisation {
     static title = "Help";
 
     static defaultProps = {
@@ -15,14 +16,13 @@ export default class OnlineSafetyScreen extends BaseStaticPersonalisation {
         showOnlineSafetyLink: true,
     };
 
-    static showPage(): boolean {
-        return Boolean(AreYouSafe.answer) && [
-            "Yes",
-            "(skipped)",
-        ].indexOf(AreYouSafe.answer) === -1;
-    }
+    static summaryLabel = "Online safety screen";
 
-    static summaryLabel = "Online safety screen"
+    onDoneTouchTap(): void {
+        storage.setItem(this.props.name, true);
+
+        super.onDoneTouchTap();
+    }
 
     renderContent(): React.Element<any> {
         const link1800Respect = "/service/634190-1800respect";
@@ -72,3 +72,15 @@ export default class OnlineSafetyScreen extends BaseStaticPersonalisation {
         );
     }
 }
+
+OnlineSafetyScreen.showPage = function(): boolean {
+    return !Boolean(OnlineSafetyScreen.answer)
+        && Boolean(AreYouSafe.answer)
+        && [
+            "Yes",
+            "(skipped)",
+        ].indexOf(AreYouSafe.answer) === -1;
+}
+
+
+export default OnlineSafetyScreen;
