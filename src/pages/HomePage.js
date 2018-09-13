@@ -11,7 +11,6 @@ import storage from "../storage";
 import AreYouSafe from "./personalisation/AreYouSafe";
 import OnlineSafetyScreen from "./personalisation/OnlineSafetyScreen";
 
-
 class HomePage extends React.Component<{}, void> {
     static contextTypes = {
         router: PropTypes.object.isRequired,

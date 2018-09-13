@@ -6,12 +6,15 @@ import { append } from "../../iss/Search";
 import icons from "../../icons";
 import OnlineSafetyLink from "../../components/OnlineSafetyLink";
 
-    static showInSummary(): boolean {
-        return false;
-    }
+class AreYouSafe extends BaseQuestion {
+    static title = "Safety";
 
     static showPage(): boolean {
         return !this.answer;
+    }
+
+    static showInSummary(): boolean {
+        return false;
     }
 
     static defaultProps = {
