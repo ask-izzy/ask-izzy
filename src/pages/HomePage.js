@@ -9,7 +9,6 @@ import NavBar from "../components/NavBar";
 import storage from "../storage";
 
 
-
 class HomePage extends React.Component<{}, void> {
     static contextTypes = {
         router: PropTypes.object.isRequired,

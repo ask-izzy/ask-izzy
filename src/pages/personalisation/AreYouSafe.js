@@ -4,10 +4,14 @@ import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
 import icons from "../../icons";
 
-export default class AreYouSafe extends BaseQuestion {
+class AreYouSafe extends BaseQuestion {
     static title = "Safety";
 
     static propTypes = BaseQuestion.propTypes;
+
+    static showInSummary(): boolean {
+        return false;
+    }
 
     static defaultProps = {
         name: "are-you-safe",
@@ -27,3 +31,9 @@ export default class AreYouSafe extends BaseQuestion {
         showOnlineSafetyLink: true,
     };
 }
+
+AreYouSafe.showPage = function showPage(): boolean {
+    return !Boolean(AreYouSafe.answer);
+}
+
+export default AreYouSafe;
