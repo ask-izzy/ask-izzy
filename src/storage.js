@@ -143,8 +143,7 @@ const Storage = {
     removeItem(key: string): void {
         persistentStore.removeItem(key);
         sessionStore.removeItem(key);
-    }
-
+    },
 }
 
 if (typeof window != "undefined") {
