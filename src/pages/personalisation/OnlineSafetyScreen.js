@@ -18,6 +18,15 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
 
     static summaryLabel = "Online safety screen";
 
+    static showPage(): boolean {
+        return !this.answer &&
+        Boolean(AreYouSafe.answer) &&
+        [
+            "Yes",
+            "(skipped)",
+        ].indexOf(AreYouSafe.answer) === -1;
+    }
+
     onDoneTouchTap(): void {
         storage.setItem(this.props.name, true);
 
@@ -71,15 +80,6 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
             </div>
         );
     }
-}
-
-OnlineSafetyScreen.showPage = function(): boolean {
-    return !Boolean(OnlineSafetyScreen.answer)
-        && Boolean(AreYouSafe.answer)
-        && [
-            "Yes",
-            "(skipped)",
-        ].indexOf(AreYouSafe.answer) === -1;
 }
 
 
