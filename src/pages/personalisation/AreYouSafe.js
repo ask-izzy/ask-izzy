@@ -17,6 +17,10 @@ class AreYouSafe extends BaseQuestion {
         return false;
     }
 
+    static showPage(): boolean {
+        return !this.answer;
+    }
+
     static defaultProps = {
         name: "are-you-safe",
         question: "Are you safe right now?",
