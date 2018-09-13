@@ -98,9 +98,4 @@ Feature: Personalisation
         Then I should see "Everyone has the right to be safe"
 
         When I click back from the title bar
-        And I click on "I'm not sure"
-        Then I should see "Everyone has the right to be safe"
-
-        When I click back from the title bar
-        And I click on "Yes"
-        Then I should see "Where are you?"
+        Then I should see "Intro"
