@@ -13,6 +13,10 @@ class AreYouSafe extends BaseQuestion {
         return false;
     }
 
+    static showPage(): boolean {
+        return !this.answer;
+    }
+
     static defaultProps = {
         name: "are-you-safe",
         question: "Are you safe right now?",
@@ -30,10 +34,6 @@ class AreYouSafe extends BaseQuestion {
         },
         showOnlineSafetyLink: true,
     };
-}
-
-AreYouSafe.showPage = function showPage(): boolean {
-    return !Boolean(AreYouSafe.answer);
 }
 
 export default AreYouSafe;
