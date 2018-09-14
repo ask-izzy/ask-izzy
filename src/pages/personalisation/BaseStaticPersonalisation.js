@@ -8,15 +8,15 @@ import components from "../../components";
 
 import storage from "../../storage";
 
-import OnlineSafetyLink from "../../components/OnlineSafetyLink";
-
 export type Props = {
     name: string,
     heading: string,
     byline?: string,
     onDoneTouchTap: Function,
-    showOnlineSafetyLink?: boolean,
+    showBaseTextBox?: boolean,
+    baseTextBoxComponent?: React.Element<any>,
     classNames?: string,
+    mobileView?: boolean,
 }
 
 export type State = {
@@ -140,7 +140,11 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
                 {this.renderHeaderBar()}
                 {this.renderContent()}
                 {this.renderDoneButton()}
-                {this.props.showOnlineSafetyLink && <OnlineSafetyLink/>}
+                {
+                    this.props.showBaseTextBox &&
+                    Boolean(this.props.baseTextBoxComponent) &&
+                    this.props.baseTextBoxComponent
+                }
             </div>
         );
     }
