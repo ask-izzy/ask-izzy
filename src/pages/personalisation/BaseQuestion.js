@@ -12,7 +12,6 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
-import OnlineSafetyLink from "../../components/OnlineSafetyLink";
 
 export type Props = {
     name: string,
