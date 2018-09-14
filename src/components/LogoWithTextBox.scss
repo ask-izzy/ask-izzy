@@ -2,7 +2,7 @@ $colour-background: #edece9;
 $colour-grey: #808080;
 $colour-icon-background: #70bdae;
 
-.OnlineSafetyLink {
+.LogoWithTextBox {
     padding-left: 5vmin;
     background-color: $colour-background;
     cursor: pointer;
@@ -19,7 +19,7 @@ $colour-icon-background: #70bdae;
             width: 64px;
             height: 64px;
             border-radius: 50%;
-            background: $colour-icon-background;
+            // background: $colour-icon-background;
 
             .middle {
                 padding: 11px;
@@ -51,7 +51,6 @@ $colour-icon-background: #70bdae;
 
             .Chevron {
                 display: inline;
-                color: $colour-icon-background;
                 font-weight: normal;
             }
         }

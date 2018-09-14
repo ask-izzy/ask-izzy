@@ -54,12 +54,11 @@ files.forEach((path) => {
 import React from "react";
 import classnames from "classnames";
 
-export default class SvgIcon${className} extends React.Component {
-    props: {
-        className?: string,
-    };
-    state: void;
+type Props = {
+    className?: string,
+}
 
+export default class SvgIcon${className} extends React.Component<Props, void> {
     render() {
         const {className, ...rest} = this.props;
         const classes = classnames(
@@ -85,7 +84,7 @@ export default class SvgIcon${className} extends React.Component {
 
 
 const importStatements = files.map((file) =>
-    `import SvgIcon${toClassName(file)} from \"./${toClassName(file)}.js\";`
+    `import SvgIcon${toClassName(file)} from \"./${toClassName(file)}\";`
 ).join("\n");
 const exportStatements = files.map((file) =>
     `    ${toClassName(file)}: SvgIcon${toClassName(file)},`
