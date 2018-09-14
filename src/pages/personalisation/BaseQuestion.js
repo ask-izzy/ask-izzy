@@ -12,7 +12,6 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
-import OnlineSafetyLink from "../../components/OnlineSafetyLink";
 
 export type Props = {
     name: string,
@@ -22,9 +21,11 @@ export type Props = {
     answers: Object | Array<string>,
     onDoneTouchTap: Function,
     suppressDoneButton: boolean,
-    showOnlineSafetyLink?: boolean,
+    showBaseTextBox?: boolean,
+    baseTextBoxComponent?: React.Element<any>,
     icons?: Object,
     onNextStepCallback?: Function,
+    mobileView?: boolean,
 }
 
 export type State = {
@@ -232,7 +233,11 @@ class BaseQuestion extends Personalisation<Props, State> {
                         />)}
                 </div>
                 {this.renderDoneButton()}
-                {this.props.showOnlineSafetyLink && <OnlineSafetyLink/>}
+                {
+                    this.props.showBaseTextBox &&
+                    Boolean(this.props.baseTextBoxComponent) &&
+                    this.props.baseTextBoxComponent
+                }
             </div>
         );
     }

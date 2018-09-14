@@ -32,6 +32,8 @@ import LegalAreYouSafe from "./personalisation/LegalAreYouSafe";
 import CounsellingAreYouSafe from "./personalisation/CounsellingAreYouSafe";
 import HousingAreYouSafe from "./personalisation/HousingAreYouSafe";
 import OnlineSafetyScreen from "./personalisation/OnlineSafetyScreen";
+import UsingViolenceScreen from "./personalisation/UsingViolenceScreen";
+import Under18DomesticViolenceScreen from "./personalisation/Under18DomesticViolenceScreen";
 
 export default {
     AddictionSubcategories: AddictionSubcategories,
@@ -66,4 +68,6 @@ export default {
             OnlineSafetyScreen,
         ]
     },
+    Under18DomesticViolenceScreen,
+    UsingViolenceScreen,
 };

@@ -1,8 +1,11 @@
 /* @flow */
 
+
+import React from "react";
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
 import icons from "../../icons";
+import OnlineSafetyLink from "../../components/OnlineSafetyLink";
 
 class AreYouSafe extends BaseQuestion {
     static title = "Safety";
@@ -32,7 +35,8 @@ class AreYouSafe extends BaseQuestion {
             "I'm not sure": icons.QuestionMark,
             "Yes": icons.Tick,
         },
-        showOnlineSafetyLink: true,
+        showBaseTextBox: true,
+        baseTextBoxComponent: <OnlineSafetyLink/>,
     };
 }
 

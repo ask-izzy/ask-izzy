@@ -5,6 +5,8 @@ import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
 import AreYouSafe from "./AreYouSafe";
 import storage from "../../storage";
+import OnlineSafetyLink from "../../components/OnlineSafetyLink";
+import MobileDetect from "../../components/higherorder/MobileDetect";
 
 class OnlineSafetyScreen extends BaseStaticPersonalisation {
     static title = "Help";
@@ -13,7 +15,8 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
         name: "online-safety-screen",
         heading: "Everyone has the right to be safe",
         byline: "All of your answers are private and anonymous",
-        showOnlineSafetyLink: true,
+        showBaseTextBox: true,
+        baseTextBoxComponent: <OnlineSafetyLink/>,
     };
 
     static summaryLabel = "Online safety screen";
@@ -37,22 +40,14 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
         const link1800Respect = "/service/634190-1800respect";
         const number1800Respect = "1800 737 732";
 
-        let isMobile;
-
-        if (typeof window !== "undefined") {
-            isMobile = window.innerWidth <= 768;
-        } else {
-            isMobile = false;
-        }
-
         return (
             <div className="AreYouSafe">
                 <div className="safety-message">
-                    <icons.PhoneCalling className="PhoneIcon" />
+                    <icons.PhoneTalk className="PhoneIcon" />
                     <h2>
                         If you or someone else is in danger call{' '}
                         {
-                            isMobile ? (
+                            this.props.mobileView ? (
                                 <a href="tel:000">000</a>
                             ) : (
                                 "000"
@@ -67,7 +62,7 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
                     <h3>
                         <a href={link1800Respect}>1800 Respect</a> on{' '}
                         {
-                            isMobile ? (
+                            this.props.mobileView ? (
                                 <a href={`tel:${number1800Respect}`}>
                                     {number1800Respect}
                                 </a>
@@ -82,5 +77,4 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
     }
 }
 
-
-export default OnlineSafetyScreen;
+export default MobileDetect(OnlineSafetyScreen);
