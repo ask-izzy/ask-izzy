@@ -3,7 +3,6 @@
 import * as React from "react";
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
-import storage from "../../storage";
 import Gender from "./Gender";
 import MobileDetect from "../../components/higherorder/MobileDetect";
 
@@ -61,7 +60,8 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
 
         return (
             <h3>
-                <a href={referralServiceLink}>Women's referral service</a> on{' '}
+                <a href={referralServiceLink}>Women's referral service</a> on
+                {' '}
                 {
                     this.props.mobileView ? (
                         <a href={`tel:${referralServicePhone}`}>
