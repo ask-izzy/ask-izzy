@@ -1,4 +1,4 @@
-/* @flow:disable */
+/* flow:disable */
 
 import React from "react";
 
