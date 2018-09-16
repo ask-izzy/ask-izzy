@@ -3,8 +3,6 @@
 import * as React from "react";
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
-import AreYouSafe from "./AreYouSafe";
-import storage from "../../storage";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 import MobileDetect from "../../components/higherorder/MobileDetect";
 
