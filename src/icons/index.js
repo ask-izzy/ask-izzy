@@ -60,6 +60,7 @@ import SvgIconPrint from "./Print";
 import SvgIconRadioSelected from "./RadioSelected";
 import SvgIconRadioUnselected from "./RadioUnselected";
 import SvgIconSearch from "./Search";
+import SvgIconSexualViolence from "./SexualViolence";
 import SvgIconSkills from "./Skills";
 import SvgIconSupport from "./Support";
 import SvgIconTech from "./Tech";
@@ -130,6 +131,7 @@ export default {
     RadioSelected: SvgIconRadioSelected,
     RadioUnselected: SvgIconRadioUnselected,
     Search: SvgIconSearch,
+    SexualViolence: SvgIconSexualViolence,
     Skills: SvgIconSkills,
     Support: SvgIconSupport,
     Tech: SvgIconTech,

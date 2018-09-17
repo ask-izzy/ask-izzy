@@ -40,7 +40,7 @@ export default class ServiceList extends BaseQuestion {
             "Police": icons.Police,
             "Legal support": icons.Legal,
             "Children's support and protection": icons.DemographicChildren,
-            "Sexual assault": icons.DemographicFamilyViolence,
+            "Sexual assault": icons.SexualViolence,
             "Financial Help": icons.Money,
             "Help for people using violence": icons.UsingViolence,
             "Help for Pets": icons.DemographicPets,
