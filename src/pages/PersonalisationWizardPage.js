@@ -7,6 +7,7 @@ import BasePersonalisationPage from "./BasePersonalisationPage";
 import Intro from "./personalisation/Intro";
 import components from "../components";
 import Chevron from "../icons/Chevron";
+import NotFoundStaticPage from "./NotFoundStaticPage";
 
 class PersonalisationWizardPage extends BasePersonalisationPage {
 
@@ -107,6 +108,13 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
 
         if (!Subpage) {
             throw new Error("Unexpected");
+        }
+
+        if (!this.category &&
+            (this.search.q === "undefined-search")) {
+            return (
+                <NotFoundStaticPage/>
+            )
         }
 
         // FIXME: Tap-up is hitting the new questions on the next page
