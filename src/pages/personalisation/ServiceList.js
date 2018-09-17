@@ -50,10 +50,12 @@ export default class ServiceList extends BaseQuestion {
             "Counselling": "Some to talk to",
             "Police": "Stations and liason officers",
             "Legal support": "Intervention orders, court and separation",
-            "Children's support and protection": "Support services, child protection",
+            "Children's support and protection":
+                "Support services, child protection",
             "Sexual assault": "Counselling, medical care and support",
             "Financial Help": "Money counsellors and support",
-            "Help for people using violence": "Counselling, behaviour change programs",
+            "Help for people using violence":
+                "Counselling, behaviour change programs",
             "Help for Pets": "Emergency kennel and support",
         },
         showTopTextBox: true,
