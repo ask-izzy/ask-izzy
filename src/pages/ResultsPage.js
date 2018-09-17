@@ -18,6 +18,7 @@ import DebugSearch from "../components/DebugSearch";
 import ResultsListPage from "./ResultsListPage";
 
 import type { Service } from "../iss";
+import NotFoundStaticPage from "./NotFoundStaticPage"
 
 class ResultsPage extends BaseCategoriesPage {
 
@@ -193,6 +194,13 @@ class ResultsPage extends BaseCategoriesPage {
 
     render() {
         const Component = this.component();
+
+        if (!this.category &&
+            (this.search.q === "undefined-search")) {
+            return (
+                <NotFoundStaticPage/>
+            )
+        }
 
         return (
             <div className="ResultsPage">

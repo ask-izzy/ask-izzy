@@ -3,8 +3,7 @@
 import * as React from "react";
 import _ from "underscore";
 
-import categories, { Category } from "../constants/categories";
-import badRouteParams from "../server/not_found";
+import categories, {Category} from "../constants/categories";
 import type {
     searchRequest,
     searchResultsMeta,
@@ -48,13 +47,13 @@ class BaseCategoriesPage extends React.Component<Object, State> {
     get title(): string {
         if (this.category) {
             return this.category.name;
-        } else if (this.search) {
+        } else if (this.search.q !== "undefined-search") {
             const quote = new RegExp(`["']`, "g");
             const search = this.props.params.search;
 
             return `“${search.replace(quote, "")}”`;
         } else {
-            throw badRouteParams;
+            return "undefined-category";
         }
     }
 
@@ -66,7 +65,9 @@ class BaseCategoriesPage extends React.Component<Object, State> {
                 q: this.props.params.search,
             };
         } else {
-            throw badRouteParams;
+            return {
+                q: "undefined-search",
+            };
         }
     }
 
@@ -84,8 +85,6 @@ class BaseCategoriesPage extends React.Component<Object, State> {
             components = [
                 Location,
             ];
-        } else {
-            throw badRouteParams;
         }
 
         return components.filter(component =>

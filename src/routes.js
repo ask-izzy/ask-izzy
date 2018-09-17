@@ -1,8 +1,8 @@
 /* @flow */
 
 import React from "react";
-import { Route, Redirect } from "react-router";
-import { titleize } from "underscore.string";
+import {Route, Redirect} from 'react-router'
+import {titleize} from "underscore.string";
 import _ from "underscore";
 
 // If you import these after the others,
@@ -15,6 +15,7 @@ import BasePage from "./pages/BasePage";
 import BrandedFooter from "./components/BrandedFooter";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
+import NotFoundStaticPage from "./pages/NotFoundStaticPage";
 import AddServicePage from "./pages/AddServicePage";
 import TermsPage from "./pages/TermsPage";
 
@@ -130,6 +131,12 @@ export default (
         />
 
         <Route
+            path="/not-found"
+            component={NotFoundStaticPage}
+            title="Page not found"
+        />
+
+        <Route
             path="/add-service"
             component={AddServicePage}
             title="Add a service"
@@ -207,5 +214,9 @@ export default (
                 component={PersonalisationSummaryPage}
             />,
         ])}
+        <Route
+            path="*"
+            component={NotFoundStaticPage}
+        />
     </Route>
 );
