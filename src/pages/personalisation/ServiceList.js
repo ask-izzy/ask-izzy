@@ -47,7 +47,7 @@ export default class ServiceList extends BaseQuestion {
         },
         answersDesc: {
             "Domestic Violence": "Crisis counselling, accomodation",
-            "Counselling": "Some to talk to",
+            "Counselling": "Someone to talk to",
             "Police": "Stations and liason officers",
             "Legal support": "Intervention orders, court and separation",
             "Children's support and protection":

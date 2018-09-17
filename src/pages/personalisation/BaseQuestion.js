@@ -219,8 +219,8 @@ class BaseQuestion extends Personalisation<Props, State> {
         const selected = this.selected;
         let listClassName = "List";
 
-        if (this.props.name === "service-list") {
-            listClassName += " service-list";
+        if (this.props.name) {
+            listClassName += ' ' + this.props.name;
         }
 
         return (
