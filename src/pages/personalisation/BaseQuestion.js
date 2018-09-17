@@ -22,10 +22,12 @@ export type Props = {
     onDoneTouchTap: Function,
     suppressDoneButton: boolean,
     showBaseTextBox?: boolean,
+    showTopTextBox?: boolean,
     baseTextBoxComponent?: React.Element<any>,
     icons?: Object,
     onNextStepCallback?: Function,
     mobileView?: boolean,
+    answersDesc: Object,
 }
 
 export type State = {
@@ -205,18 +207,37 @@ class BaseQuestion extends Personalisation<Props, State> {
         });
     }
 
+    answerDescFor(answer: string): ?React.Element<any> {
+        if (this.props.answersDesc && this.props.answersDesc[answer]) {
+            const answerDesc = this.props.answersDesc[answer];
+
+            return answerDesc;
+        }
+    }
+
     render(): React.Node {
         const selected = this.selected;
+        let listClassName = "List";
+
+        if (this.props.name === "service-list") {
+            listClassName += " service-list";
+        }
 
         return (
             <div>
                 {this.renderHeaderBar()}
-                <div className="List">
+                {
+                    this.props.showTopTextBox &&
+                    Boolean(this.props.baseTextBoxComponent) &&
+                    this.props.baseTextBoxComponent
+                }
+                <div className={listClassName}>
                     {this.answers.map((answer, index) =>
                         <InputListItem
                             key={index}
                             leftIcon={this.iconFor(answer)}
                             primaryText={answer}
+                            secondaryText={this.answerDescFor(answer)}
 
                             type="radio"
                             checked={answer == selected}
