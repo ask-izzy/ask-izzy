@@ -54,10 +54,10 @@ class HomePage extends React.Component<{}, void> {
             <div className="HomePage">
                 <div className="header">
                     <div className="desktop">
-                        <a title = {tooltip}
-                            href = {redirectUri}
+                        <span className="quick-exit-right" />
+                        <a title={tooltip}
+                            href={redirectUri}
                         >
-                            <span className="quick-exit-right" />
                             <span className="quick-exit-left">
                                 Quick Exit X
                             </span>
@@ -65,10 +65,10 @@ class HomePage extends React.Component<{}, void> {
                     </div>
 
                     <div className="mobile_device">
+                        <div className="qexit-txtleft qexit-heightleft" />
                         <a href={redirectUri}
                             title={tooltip}
                         >
-                            <div className="qexit-txtleft qexit-heightleft" />
                             <div className="qexit-txtright qexit-heightright">
                                 Quick Exit
                             </div>

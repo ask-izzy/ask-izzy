@@ -212,11 +212,6 @@ $colour-grey: #f8f9f9;
         z-index: 99;
     }
 
-    /* if desktop */
-    .mobile_device {
-        display: none;
-    }
-
     /* mobile device (max width is 320px) */
     @media only screen and (max-width: 320px) {
         .qexit-heightleft {
@@ -240,16 +235,9 @@ $colour-grey: #f8f9f9;
             background-color: $colour-red;
         }
 
-<<<<<<< HEAD
         .qexit-heightleft {
             height: $appbar-height;
         }
-=======
-        .desktop {
-            display: none;
-        }
-    }
->>>>>>> Fix linting issues
 
         .qexit-heightright {
             height: $appbar-height;
@@ -268,28 +256,19 @@ $colour-grey: #f8f9f9;
             float: right;
             background-color: $colour-red;
         }
-<<<<<<< HEAD
     }
 
     @media only screen and (max-width: 767px) {
-        .desktop {
-            display: none;
-        }
+        & {
+            margin-top: $appbar-height;
 
-        .mobile_device {
-            display: block;
-        }
-    }
-}
+            .desktop {
+                display: none;
+            }
 
-@media only screen and (max-width: 767px) {
-    .HomePage {
-        margin-top: $appbar-height;
-=======
-
-        .desktop {
-            display: none;
+            .mobile_device {
+                display: block;
+            }
         }
->>>>>>> Fix linting issues
     }
 }
