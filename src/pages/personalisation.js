@@ -28,6 +28,7 @@ import Location from "./personalisation/Location";
 import MoneySubcategories from "./personalisation/MoneySubcategories";
 import SleepTonight from "./personalisation/SleepTonight";
 import AreYouSafe from "./personalisation/AreYouSafe";
+import HealthAreYouSafe from "./personalisation/HealthAreYouSafe";
 import LegalAreYouSafe from "./personalisation/LegalAreYouSafe";
 import CounsellingAreYouSafe from "./personalisation/CounsellingAreYouSafe";
 import HousingAreYouSafe from "./personalisation/HousingAreYouSafe";
@@ -58,6 +59,7 @@ export default {
     MoneySubcategories: MoneySubcategories,
     SleepTonight: SleepTonight,
     AreYouSafe,
+    HealthAreYouSafe,
     LegalAreYouSafe,
     CounsellingAreYouSafe,
     HousingAreYouSafe,
