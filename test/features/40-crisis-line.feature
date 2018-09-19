@@ -36,6 +36,8 @@ Feature: Crisis Line
         When I visit /
         And I search for "domestic violence"
         And I click on the search button
+        And I click on "Okay"
+        And I click on "Skip"
         Then I should see a hotline in position 1 which says "1800 737 732"
         And I should see "For help and safety call:" before first hotline
 
