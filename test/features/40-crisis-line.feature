@@ -45,6 +45,8 @@ Feature: Crisis Line
         When I visit /
         And I search for "domestic violence"
         And I click on the search button
+        And I click on "Okay"
+        And I click on "Skip"
         And I click on "See information about this call"
         Then I should see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"
 
@@ -52,6 +54,8 @@ Feature: Crisis Line
         When I visit /
         And I search for "domestic violence"
         And I click on the search button
+        And I click on "Okay"
+        And I click on "Skip"
         And I click on "See information about this call"
         And I click on "Hide information about this call"
         Then I should not see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"
