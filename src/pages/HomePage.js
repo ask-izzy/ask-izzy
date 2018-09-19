@@ -17,6 +17,8 @@ class HomePage extends React.Component<{}, void> {
         router: PropTypes.object.isRequired,
     };
 
+    search: ?HTMLInputElement;
+
     constructor(props: Object) {
         super(props);
 
@@ -28,7 +30,7 @@ class HomePage extends React.Component<{}, void> {
     onSearchSubmit(event: Event): void {
         event.preventDefault();
 
-        const search = this.refs.search.value;
+        const search = this.search ? this.search.value : '';
 
         if (search == "") {
             /* FIXME: should this give some user feedback? */
@@ -95,7 +97,9 @@ class HomePage extends React.Component<{}, void> {
                             </div>
                             <div className="searchWrapper">
                                 <input
-                                    ref="search"
+                                    ref={element => {
+                                        this.search = element;
+                                    }}
                                     type="search"
                                     placeholder=
                                         "e.g. housing, food, legal help"
