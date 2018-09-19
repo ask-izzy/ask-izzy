@@ -8,11 +8,22 @@ import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
 import storage from "../storage";
 
+import AreYouSafe from "./personalisation/AreYouSafe";
+import OnlineSafetyScreen from "./personalisation/OnlineSafetyScreen";
+
 
 class HomePage extends React.Component<{}, void> {
     static contextTypes = {
         router: PropTypes.object.isRequired,
     };
+
+    constructor(props: Object) {
+        super(props);
+
+        if (Boolean(AreYouSafe.answer) && !Boolean(OnlineSafetyScreen.answer)) {
+            storage.removeItem(AreYouSafe.defaultProps.name);
+        }
+    }
 
     onSearchSubmit(event: Event): void {
         event.preventDefault();

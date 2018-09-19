@@ -54,14 +54,14 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         this.navigate(`personalise/page/${subpage.defaultProps.name}`);
     }
 
-    nextSubPage(): ?React.ComponentType<*> {
+    nextSubPage(): ?React.ComponentType<any> {
         return this.personalisationComponents.find((component, idx) =>
             (idx > this.currentComponentIdx) &&
             (component.getSearch ? !component.getSearch({}) : true)
         );
     }
 
-    prevSubPage(): ?React.ComponentType<*> {
+    prevSubPage(): ?React.ComponentType<any> {
         const nextSubpageIdx = this.currentComponentIdx - 1;
 
         return this.personalisationComponents[nextSubpageIdx];
@@ -121,7 +121,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         return this.currentComponent.title || this.title;
     }
 
-    render() {
+    render(): React.Element {
         const Subpage = this.currentComponent;
 
         if (!Subpage) {

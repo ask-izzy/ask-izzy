@@ -15,6 +15,11 @@ import {
 
 import sendEvent from "./google-tag-manager";
 
+type Coordinates = {
+    latitude: number,
+    longitude: number,
+}
+
 const Storage = {
 
     getSearch(): string {
@@ -56,7 +61,7 @@ const Storage = {
             .includes("Aboriginal and/or Torres Strait Islander");
     },
 
-    getCoordinates(): ?{latitude: number, longitude: number} {
+    getCoordinates(): ?Coordinates {
         const coords = JSON.parse(
             sessionStore.getItem("coordinates") || "null"
         );
