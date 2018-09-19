@@ -242,12 +242,33 @@ class BaseQuestion extends Personalisation<Props, State> {
         );
     }
 
-    renderOnlineSafetyLink(): ?React.Element<any> {
-        if (this.props.showOnlineSafetyLink) {
-            return (
-                <OnlineSafetyLink/>
-            );
+    renderHeaderBar(): React.Element<any> {
+        let bannerName = "";
+
+        try {
+            bannerName = this.context.controller.props.params.page;
+        } catch (err) {
+            // continue with no banner
         }
+
+        if (this.props.name === "sub-indigenous") {
+            bannerName = "atsi";
+        }
+
+        return (
+            <HeaderBar
+                primaryText={
+                    <div>
+                        {this.question}
+                    </div>
+                }
+                secondaryText={
+                    this.props.byline
+                }
+                bannerName={bannerName}
+                alternateBackgroundColor={false}
+            />
+        );
     }
 
     renderDoneButton(): ?React.Element<any> {
