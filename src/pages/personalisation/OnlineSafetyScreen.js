@@ -11,13 +11,17 @@ import MobileDetect from "../../components/higherorder/MobileDetect";
 class OnlineSafetyScreen extends BaseStaticPersonalisation {
     static title = "Help";
 
-    static defaultProps = {
-        name: "online-safety-screen",
-        heading: "Everyone has the right to be safe",
-        byline: "All of your answers are private and anonymous",
-        showBaseTextBox: true,
-        baseTextBoxComponent: <OnlineSafetyLink/>,
-    };
+    static defaultProps = Object.assign(
+        {},
+        BaseStaticPersonalisation.defaultProps,
+        {
+            name: "online-safety-screen",
+            heading: "Everyone has the right to be safe",
+            byline: "All of your answers are private and anonymous",
+            showBaseTextBox: true,
+            baseTextBoxComponent: <OnlineSafetyLink/>,
+        }
+    );
 
     static summaryLabel = "Online safety screen";
 

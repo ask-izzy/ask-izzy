@@ -9,12 +9,16 @@ import MobileDetect from "../../components/higherorder/MobileDetect";
 class UsingViolenceScreen extends BaseStaticPersonalisation {
     static title = "";
 
-    static defaultProps = {
-        name: "using-violence",
-        heading: "Worried about your behaviour?",
-        byline: "All of your answers are private and anonymous",
-        showBaseTextBox: false,
-    };
+    static defaultProps = Object.assign(
+        {},
+        BaseStaticPersonalisation.defaultProps,
+        {
+            name: "using-violence",
+            heading: "Worried about your behaviour?",
+            byline: "All of your answers are private and anonymous",
+            renderDoneButton: false,
+        }
+    );
 
     static summaryLabel = "Worried about your behaviour?";
 

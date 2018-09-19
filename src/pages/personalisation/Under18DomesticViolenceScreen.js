@@ -9,13 +9,18 @@ import MobileDetect from "../../components/higherorder/MobileDetect";
 class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
     static title = "";
 
-    static defaultProps = {
-        name: "under-18-dfv",
-        heading: "Under 18",
-        byline: "All of your answers are private and anonymous",
-        showBaseTextBox: true,
-        baseTextBoxComponent: <DomesticViolenceLink/>,
-    };
+    static defaultProps = Object.assign(
+        {},
+        BaseStaticPersonalisation.defaultProps,
+        {
+            name: "under-18-dfv",
+            heading: "Under 18",
+            byline: "All of your answers are private and anonymous",
+            renderDoneButton: false,
+            showBaseTextBox: true,
+            baseTextBoxComponent: <DomesticViolenceLink/>,
+        }
+    );
 
     static summaryLabel = "Under 18 Domestic Violence Information";
 
