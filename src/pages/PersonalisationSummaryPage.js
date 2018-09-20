@@ -116,7 +116,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                                                 primaryText={
                                                     component.summaryLabel ?
                                                         component.summaryLabel
-                                                        : ''
+                                                        : ""
                                                 }
                                                 secondaryText={
                                                     component.summaryValue
