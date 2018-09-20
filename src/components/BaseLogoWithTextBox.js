@@ -16,7 +16,7 @@ export default class BaseLogoWithTextBox extends React.Component<Props, void> {
     };
 
     onClickBox(): void {
-        throw new Error('The onClickBox method should be implemented.');
+        throw new Error("The onClickBox method should be implemented.");
     }
 
     render(): React.Node {

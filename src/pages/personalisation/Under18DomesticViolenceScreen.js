@@ -45,7 +45,7 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
                         with family or with someone you're dating.
                     </h2>
                     <h3>
-                        Call <a href={linkService}>Kid's Helpline</a> on{' '}
+                        Call <a href={linkService}>Kid's Helpline</a> on{" "}
                         {
                             this.props.mobileView ? (
                                 <a href={`tel:${numberService}`}>
@@ -55,10 +55,10 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
                                 `${ numberService }`
                             )
                         }
-                        {' '} or chat online <a href={chatService}>here</a>
+                        {" "} or chat online <a href={chatService}>here</a>
                     </h3>
                     <h3>
-                        Visit <a href={linkWoah}>WOAH</a> or{' '}
+                        Visit <a href={linkWoah}>WOAH</a> or{" "}
                         <a href={linkYoungAndEsafe}>Young and E-SAFE</a> to
                         learn more
                     </h3>

@@ -57,7 +57,6 @@ import SvgIconPhoneTalk from "./PhoneTalk";
 import SvgIconPhone from "./Phone";
 import SvgIconPolice from "./Police";
 import SvgIconPrint from "./Print";
-import SvgIconQuestionMark from "./QuestionMark";
 import SvgIconRadioSelected from "./RadioSelected";
 import SvgIconRadioUnselected from "./RadioUnselected";
 import SvgIconSearch from "./Search";

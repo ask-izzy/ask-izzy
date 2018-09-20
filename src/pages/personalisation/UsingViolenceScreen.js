@@ -9,16 +9,12 @@ import MobileDetect from "../../components/higherorder/MobileDetect";
 class UsingViolenceScreen extends BaseStaticPersonalisation {
     static title = "";
 
-    static defaultProps = Object.assign(
-        {},
-        BaseStaticPersonalisation.defaultProps,
-        {
-            name: "using-violence",
-            heading: "Worried about your behaviour?",
-            byline: "All of your answers are private and anonymous",
-            renderDoneButton: false,
-        }
-    );
+    static defaultProps = {
+        name: "using-violence",
+        heading: "Worried about your behaviour?",
+        byline: "All of your answers are private and anonymous",
+        showBaseTextBox: false,
+    };
 
     static summaryLabel = "Worried about your behaviour?";
 
@@ -38,7 +34,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
 
         return (
             <h3>
-                <a href={referralServiceLink}>Men's referral service</a> on{' '}
+                <a href={referralServiceLink}>Men's referral service</a> on{" "}
                 {
                     this.props.mobileView ? (
                         <a href={`tel:${referralServicePhone}`}>
@@ -48,7 +44,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
                         `${ referralServicePhone }`
                     )
                 }
-                {' '}or chat online <a href={referralServiceChat}>here</a>
+                {" "}or chat online <a href={referralServiceChat}>here</a>
             </h3>
         )
     }
@@ -65,7 +61,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
         return (
             <h3>
                 <a href={referralServiceLink}>Women's referral service</a> on
-                {' '}
+                {" "}
                 {
                     this.props.mobileView ? (
                         <a href={`tel:${referralServicePhone}`}>

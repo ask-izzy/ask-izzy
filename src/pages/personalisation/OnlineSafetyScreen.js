@@ -51,7 +51,7 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
                 <div className="safety-message">
                     <icons.PhoneTalk className="PhoneIcon" />
                     <h2>
-                        If you or someone else is in danger call{' '}
+                        If you or someone else is in danger call{" "}
                         {
                             this.props.mobileView ? (
                                 <a href="tel:000">000</a>
@@ -61,12 +61,12 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
                         }
                     </h2>
                     <h3>
-                        If you don't feel safe in your life, call{' '}
+                        If you don't feel safe in your life, call{" "}
                         <a href={link1800Respect}>1800 Respect</a> for
                         confidential counselling, support and services
                     </h3>
                     <h3>
-                        <a href={link1800Respect}>1800 Respect</a> on{' '}
+                        <a href={link1800Respect}>1800 Respect</a> on{" "}
                         {
                             this.props.mobileView ? (
                                 <a href={`tel:${number1800Respect}`}>
