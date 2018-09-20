@@ -43,10 +43,6 @@ function checkPackageVersions {
 echo "${BOLD}Checking for '^' or '~' in package.json${END}"
 grep '[\^\~]' package.json && exit 1
 echo "Good"
-
-echo "${BOLD}Checking for '^' or '~' in bower.json${END}"
-grep '[\^\~]' bower.json && exit 1
-echo "Good"
 }
 
 export -f checkPackageVersions

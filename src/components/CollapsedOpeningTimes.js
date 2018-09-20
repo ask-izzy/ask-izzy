@@ -144,7 +144,7 @@ export default class CollapsedOpeningTimes extends React.Component<Props, void> 
                             {openingHours.map((record, idx) =>
                                 <li key={idx} >
                                     <span className="day">{record.day}</span>
-                                    {' '}
+                                    {" "}
                                     <span className="time">
                                         {formatTime(record.open)}
                                         &ndash;

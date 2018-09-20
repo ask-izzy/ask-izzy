@@ -3,5 +3,5 @@
 // Do not require this directly. Use ./src/config instead.
 
 export default {
-    siteMail: 'example@example.com',
+    siteMail: "example@example.com",
 };

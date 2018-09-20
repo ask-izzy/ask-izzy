@@ -66,7 +66,7 @@ class BasePersonalisationPage extends BaseCategoriesPage {
             subpath
         )
 
-        return parts.join('/');
+        return parts.join("/");
     }
 
     navigate(subpath: string): void {

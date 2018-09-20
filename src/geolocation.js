@@ -62,7 +62,7 @@ export function geolocationAvailable(): boolean {
     }
 
     return navigator.geolocation &&
-        typeof navigator.geolocation.getCurrentPosition === 'function';
+        typeof navigator.geolocation.getCurrentPosition === "function";
 }
 
 export async function guessSuburb(location: Position): Promise<string> {

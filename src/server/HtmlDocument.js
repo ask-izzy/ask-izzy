@@ -43,7 +43,7 @@ class HtmlDocument extends React.Component<Object, void> {
         return (
             <html lang="en">
                 <head>
-                    {process.env.NODE_ENV !== 'production' && (
+                    {process.env.NODE_ENV !== "production" && (
                         /**
                          * Add standalone react devtools if not in production
                          * Useful for debugging React components in an iOS

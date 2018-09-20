@@ -77,8 +77,8 @@ class TransportTime extends React.Component<{
     renderTravelTimes(travelTimes: Object) {
 
         return travelTimes.map((travel, key) => {
-            let icon = '';
-            let method = '';
+            let icon = "";
+            let method = "";
 
             // Specify an arrival time so tests can determine
             // which is the fastest mode of travel.
@@ -96,7 +96,7 @@ class TransportTime extends React.Component<{
                         aria-label="By public transport"
                     />
                 );
-                method = (' transport');
+                method = (" transport");
             } else if (travel.mode === "DRIVING") {
                 icon = (
                     <icons.Car
@@ -104,7 +104,7 @@ class TransportTime extends React.Component<{
                         aria-label="By car"
                     />
                 );
-                method = (' drive');
+                method = (" drive");
             } else {
                 icon = (
                     <icons.Walk
@@ -112,7 +112,7 @@ class TransportTime extends React.Component<{
                         aria-label="On foot"
                     />
                 );
-                method = (' walk');
+                method = (" walk");
             }
 
             return (

@@ -35,7 +35,7 @@ files.forEach((path) => {
     const outFile = `${destDir}/${className}.js`;
     const svgContent = loader
         .getExtractedSVG(readFileSync(path))
-        .replace(/^<svg/, "<svg class='${classes}'")
+        .replace(/^<svg/, "<svg class='${this.classNames}'")
         .replace(/style="([^"]*)"/g, (match, styleBlock) => {
             const result = styleBlock
                 .split(";")
@@ -51,33 +51,18 @@ files.forEach((path) => {
         );
 
     writeFileSync(outFile, `${fileHeader}
-import React from "react";
-import classnames from "classnames";
 
-export default class SvgIcon${className} extends React.Component {
-    props: {
-        className?: string,
-    };
-    state: void;
+import BaseIcon from "./BaseIcon";
 
-    render() {
-        const {className, ...rest} = this.props;
-        const classes = classnames(
-            "${className}Icon",
-            "disallow-override-color",
-            "Icon",
-            "SvgIcon",
-            className
-        );
+export default class SvgIcon${className} extends BaseIcon {
+    static defaultProps = {
+        iconClass: "${className}Icon",
+    }
 
-        return (
-            <span
-                {...rest}
-                dangerouslySetInnerHTML={{__html: \`
-                    ${svgContent}
-                \`}}
-            />
-        );
+    get svgContent(): string {
+        return \`
+            ${svgContent}
+        \`;
     }
 }
 `, 'utf8');
