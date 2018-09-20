@@ -7,14 +7,6 @@ import icons from "../../icons";
 export default class ServiceList extends BaseQuestion {
     static title = "Service";
 
-    static showInSummary(): boolean {
-        return false;
-    }
-
-    static showPage(): boolean {
-        return !this.answer;
-    }
-
     static defaultProps = {
         name: "service-list",
         question: "What best describes what you need?",

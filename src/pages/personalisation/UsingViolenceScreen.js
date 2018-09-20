@@ -6,9 +6,10 @@ import icons from "../../icons";
 import Gender from "./Gender";
 import MobileDetect from "../../components/higherorder/MobileDetect";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
+import ServiceList from "./ServiceList";
 
 class UsingViolenceScreen extends BaseStaticPersonalisation {
-    static title = "";
+    static title = " ";
 
     static defaultProps = Object.assign(
         {},
@@ -26,7 +27,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
     static summaryLabel = "Worried about your behaviour?";
 
     static showPage(): boolean {
-        return true;
+        return ServiceList.answer === "Help for people using violence";
     }
 
     renderMensReferralService(): React.Element<any> {

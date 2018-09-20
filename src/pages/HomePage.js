@@ -19,7 +19,12 @@ class HomePage extends React.Component<{}, void> {
     constructor(props: Object) {
         super(props);
 
-        if (Boolean(AreYouSafe.answer) && !OnlineSafetyScreen.answer) {
+        if (Boolean(AreYouSafe.answer) &&
+            [
+                "No",
+                "I'm not sure",
+            ].indexOf(AreYouSafe.answer) > -1 &&
+            !OnlineSafetyScreen.answer) {
             storage.removeItem(AreYouSafe.defaultProps.name);
         }
     }

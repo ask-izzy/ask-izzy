@@ -5,10 +5,10 @@ import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 import MobileDetect from "../../components/higherorder/MobileDetect";
-import ServiceList from "./ServiceList"
+import ServiceList from "./ServiceList";
 
 class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
-    static title = "";
+    static title = " ";
 
     static defaultProps = Object.assign(
         {},
