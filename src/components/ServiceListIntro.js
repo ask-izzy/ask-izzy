@@ -10,7 +10,7 @@ export default class ServiceListIntro extends BaseLogoWithTextBox {
         header: "Information and warning signs",
         body: `Do you know what domestic violence looks like? Learn
                more about how to spot the signs and what to do.`,
-        highlightColor: '#887FBB',
+        highlightColor: "#887FBB",
     };
 
     onClickBox(): void {

@@ -1,14 +1,11 @@
 /* @flow */
 
-import React from "react";
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
 import icons from "../../icons";
 
 export default class ServiceList extends BaseQuestion {
     static title = "Service";
-
-    static propTypes = BaseQuestion.propTypes;
 
     static showInSummary(): boolean {
         return false;
@@ -45,7 +42,7 @@ export default class ServiceList extends BaseQuestion {
             "Help for Pets": icons.DemographicPets,
         },
         answersDesc: {
-            "Domestic Violence": "Crisis counselling, accomodation",
+            "Domestic Violence": "Crisis counselling, accommodation",
             "Counselling": "Someone to talk to",
             "Police": "Stations and liason officers",
             "Legal support": "Intervention orders, court and separation",

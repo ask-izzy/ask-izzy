@@ -104,6 +104,8 @@ const categories: Array<Category> = [
             ),
             personalisation.Location,
             personalisation.ServiceList,
+            personalisation.UsingViolenceScreen,
+            personalisation.Under18DomesticViolenceScreen,
         ],
     }),
     new Category({

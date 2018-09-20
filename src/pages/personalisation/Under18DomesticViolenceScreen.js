@@ -5,6 +5,7 @@ import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 import MobileDetect from "../../components/higherorder/MobileDetect";
+import ServiceList from "./ServiceList"
 
 class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
     static title = "";
@@ -25,7 +26,7 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
     static summaryLabel = "Under 18 Domestic Violence Information";
 
     static showPage(): boolean {
-        return true;
+        return ServiceList.answer === "Children's support and protection";
     }
 
     renderContent(): React.Element<any> {

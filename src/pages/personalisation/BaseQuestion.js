@@ -219,7 +219,7 @@ class BaseQuestion extends Personalisation<Props, State> {
         let listClassName = "List";
 
         if (this.props.name) {
-            listClassName += ' ' + this.props.name;
+            listClassName = `${listClassName} ${this.props.name}`;
         }
 
         return (
