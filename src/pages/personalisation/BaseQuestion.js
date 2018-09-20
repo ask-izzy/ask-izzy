@@ -26,6 +26,7 @@ export type Props = {
     icons?: Object,
     onNextStepCallback?: Function,
     mobileView?: boolean,
+    answersDesc: Object,
 }
 
 export type State = {
@@ -205,18 +206,32 @@ class BaseQuestion extends Personalisation<Props, State> {
         });
     }
 
+    answerDescFor(answer: string): ?React.Element<any> {
+        if (this.props.answersDesc && this.props.answersDesc[answer]) {
+            const answerDesc = this.props.answersDesc[answer];
+
+            return answerDesc;
+        }
+    }
+
     render(): React.Node {
         const selected = this.selected;
+        let listClassName = "List";
+
+        if (this.props.name) {
+            listClassName += ' ' + this.props.name;
+        }
 
         return (
             <div>
                 {this.renderHeaderBar()}
-                <div className="List">
+                <div className={listClassName}>
                     {this.answers.map((answer, index) =>
                         <InputListItem
                             key={index}
                             leftIcon={this.iconFor(answer)}
                             primaryText={answer}
+                            secondaryText={this.answerDescFor(answer)}
 
                             type="radio"
                             checked={answer == selected}

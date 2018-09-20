@@ -103,6 +103,7 @@ const categories: Array<Category> = [
                 personalisation.AreYouSafe
             ),
             personalisation.Location,
+            personalisation.ServiceList,
         ],
     }),
     new Category({

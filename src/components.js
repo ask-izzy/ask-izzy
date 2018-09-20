@@ -43,6 +43,7 @@ import ResultListItem from "./components/ResultListItem";
 import ResultsList from "./components/ResultsList";
 import ResultsMap from "./components/ResultsMap";
 import ScreenReader from "./components/ScreenReader";
+import ServiceListIntro from "./components/ServiceListIntro";
 import ServicePane from "./components/ServicePane";
 import Spacer from "./components/Spacer";
 import SvgIcon from "./components/SvgIcon";
@@ -94,6 +95,7 @@ export default {
     ResultsList: ResultsList,
     ResultsMap: ResultsMap,
     ScreenReader: ScreenReader,
+    ServiceListIntro: ServiceListIntro,
     ServicePane: ServicePane,
     Spacer: Spacer,
     SvgIcon: SvgIcon,
