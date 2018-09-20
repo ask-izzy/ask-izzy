@@ -37,7 +37,7 @@ class AboutPage extends React.Component<{}, void> {
                 <h3>Are you a service provider?</h3>
                 <p>
                     Service information is constantly changing, so if you notice information that is not up to date you can
-                    {' '}
+                    {" "}
                     <a href={"mailto:" + config.default.siteMail}>
                         let us know directly
                     </a>.
@@ -84,7 +84,7 @@ class AboutPage extends React.Component<{}, void> {
                 <br />
                 <p>
                     For media enquiries or to find out more about
-                    Ask Izzy visit{' '}
+                    Ask Izzy visit{" "}
                     <a href="https://www.infoxchange.net.au/ask-izzy">
                         Infoxchange’s website
                     </a>

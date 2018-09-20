@@ -13,10 +13,10 @@ describe("iss service", function() {
         describe("by classification", function() {
 
             const culturalySafe =
-                'Culturally safe for Aboriginal (indigenous)';
+                "Culturally safe for Aboriginal (indigenous)";
             const mainstreamCaterAboriginal =
-                'Mainstream who cater for Aboriginal (indigenous)'
-            const aboriginalSpecific = 'Aboriginal (indigenous) specific'
+                "Mainstream who cater for Aboriginal (indigenous)"
+            const aboriginalSpecific = "Aboriginal (indigenous) specific"
 
             it("if type is 'Culturally safe for Aboriginal'", function() {
                 assert(!Service({
@@ -36,7 +36,7 @@ describe("iss service", function() {
             });
             it("if type is 'Mainstream'", function() {
                 assert(!Service({
-                    indigenous_classification: 'Mainstream',
+                    indigenous_classification: "Mainstream",
                 }).Indigenous());
             });
         });

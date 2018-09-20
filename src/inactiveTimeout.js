@@ -2,7 +2,7 @@
 
 import moment from "moment";
 
-const timeOut = moment().add(3, 'h');
+const timeOut = moment().add(3, "h");
 
 export default function checkInactive(): void {
     try {

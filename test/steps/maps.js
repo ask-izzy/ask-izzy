@@ -20,17 +20,17 @@ module.exports = (function() {
             unpromisify(instrumentDistanceMatrix)
         )
         .when("I click on the map", unpromisify(clickMap))
-        .when('I click marker titled "$STRING"', unpromisify(clickMarker))
+        .when("I click marker titled \"$STRING\"", unpromisify(clickMarker))
         .when("I click the map link", unpromisify(clickMapLink))
         .then("I should see a map", unpromisify(assertMap))
         .then("I should see markers?\n$table", unpromisify(assertMarkers))
-        .then('the fastest way to get there is "$STRING"',
+        .then("the fastest way to get there is \"$STRING\"",
             unpromisify(assertTransitMethodFastest))
-        .then('I can get to google maps by clicking "$STRING"',
+        .then("I can get to google maps by clicking \"$STRING\"",
             unpromisify(assertGoogleMapsLink))
-        .then('I should be able to travel there "$STRING"',
+        .then("I should be able to travel there \"$STRING\"",
             unpromisify(assertTransitMethod))
-        .then('I should not be able to travel there "$STRING"',
+        .then("I should not be able to travel there \"$STRING\"",
             unpromisify(assertTransitMethodNot))
     ;
 })();
@@ -42,7 +42,7 @@ async function assertTransitMethodFastest(method) {
     );
 
     let fastestTime = -1;
-    let fastestMethod = '';
+    let fastestMethod = "";
 
     for (let travelTime of travelTimes) {
         let mode = await travelTime.findElement(By.tagName("span"))

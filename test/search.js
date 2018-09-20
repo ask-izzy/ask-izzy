@@ -3,7 +3,7 @@
  * Enable Yadda in Mocha
  */
 
-import 'babel-polyfill';
+import "babel-polyfill";
 import Yadda from "yadda";
 import libraries from "./search-steps";
 

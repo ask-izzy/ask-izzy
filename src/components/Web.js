@@ -26,7 +26,7 @@ export default class Web extends React.Component<{url: string}, void> {
                     <icons.Website />
                     <div className="Contact-text">
                         <span className="kind">
-                            {' '}
+                            {" "}
                         </span>
                         <span className="web value">
                             {url.hostname}

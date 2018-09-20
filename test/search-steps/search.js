@@ -85,7 +85,7 @@ async function setSkipped(property: string): Promise<void> {
 
 function ageBracket(age: number): string {
     const answers = Object.keys(Age.defaultProps.answers)
-    const ages = answers.map((answer) => parseInt(answer.split(' ')[0]))
+    const ages = answers.map((answer) => parseInt(answer.split(" ")[0]))
 
     for (let idx = ages.length; idx > 0; idx--) {
         if (age > ages[idx]) {
@@ -222,7 +222,7 @@ async function assertResults(
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .given("I have deleted all answers", unpromisify(deleteAnswers))
-        .given('my location is "$STRING"', unpromisify(setLocation))
+        .given("my location is \"$STRING\"", unpromisify(setLocation))
         .given("I have (somewhere|nowhere) to sleep tonight",
             unpromisify(setSleepTonight))
         .given("I am $NUMBER years old",

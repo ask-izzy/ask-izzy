@@ -51,8 +51,8 @@ class BaseQuestion extends React.Component<Props, State> {
 
         const valueFromStorage = storage.getItem(this.props.name)
 
-        if (typeof valueFromStorage === 'boolean') {
-            storageValue = valueFromStorage ? 'true' : 'false';
+        if (typeof valueFromStorage === "boolean") {
+            storageValue = valueFromStorage ? "true" : "false";
         } else {
             storageValue = valueFromStorage;
         }

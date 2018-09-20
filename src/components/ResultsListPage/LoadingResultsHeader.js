@@ -104,7 +104,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                             <div>
                                 <ErrorMessage>{error}</ErrorMessage>
                                 <HomeLink />
-                                {' '}
+                                {" "}
                                 <PersonalisationLink {...location} />
                             </div>
                         }
@@ -149,7 +149,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                 primaryText={
                     meta.total_count > 0 ?
                         <LogoHeader>
-                            I found {count} {servicesWord}{' '}
+                            I found {count} {servicesWord}{" "}
                             {personalisations.join(" ")}
                         </LogoHeader>
                         : <LogoHeader>

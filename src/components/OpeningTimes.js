@@ -131,7 +131,7 @@ class OpeningTimes extends React.Component<Props, void> {
                     <h4>Opening times</h4>
                 </ScreenReader>
                 <icons.Clock className="ColoredIcon brand-text-dark" />
-                {' '}
+                {" "}
                 <span className="print-only">Open Times</span>
                 {renderMethod.apply(this)}
             </div>
@@ -148,7 +148,7 @@ class OpeningTimes extends React.Component<Props, void> {
                 <span className="open">
                     Open now
                 </span>
-                {' '}
+                {" "}
                 <span className="time">
                     {this.props.object.until}
                 </span>
@@ -165,7 +165,7 @@ class OpeningTimes extends React.Component<Props, void> {
                 <span className="closed">
                     Closed
                 </span>
-                {' '}
+                {" "}
                 <span className="time">
                     {this.props.object.until}
                 </span>

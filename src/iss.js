@@ -244,7 +244,7 @@ async function attachTransportTimes(
 
     const maps = await TryWithDefault(1000, Maps(), Object());
 
-    if (typeof maps.travelTime == 'function') {
+    if (typeof maps.travelTime == "function") {
         let service: ?Service; // eslint-disable-line no-unused-vars
         let travelTimes = await Timeout(3000, maps.travelTime(services
             .filter((service) => !service.Location().isConfidential())
@@ -358,8 +358,8 @@ export class Service {
             let classification = this.indigenous_classification;
 
             return (classification ==
-                'Mainstream who cater for Aboriginal (indigenous)') ||
-                   classification == 'Aboriginal (indigenous) specific';
+                "Mainstream who cater for Aboriginal (indigenous)") ||
+                   classification == "Aboriginal (indigenous) specific";
         }
 
         return false;

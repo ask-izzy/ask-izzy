@@ -102,7 +102,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                                                 }`
                                             )}
                                             // eslint-disable-next-line max-len
-                                            primaryText={component.summaryLabel ? component.summaryLabel : ''}
+                                            primaryText={component.summaryLabel ? component.summaryLabel : ""}
                                             secondaryText={
                                                 component.summaryValue
                                             }

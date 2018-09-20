@@ -49,7 +49,7 @@ export default class HomelessHealthStaticPage extends React.Component<{}> {
                 <p>Most services bulk bill and do not charge you any initial fees, however this depends on the clinic and if you have a serious condition you may need tests that incur additional costs. To check whether you will be charged, call the clinic on the number listed in Ask Izzy.</p>
                 <p>
                     To receive bulk billing you will need a Medicare card.
-                    If you do not have one, you can request one on via the {' '}
+                    If you do not have one, you can request one on via the {" "}
                     <Link
                         to={"http://www.humanservices.gov.au" +
                         "/customer/services/medicare/medicare-card"}

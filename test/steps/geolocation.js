@@ -18,7 +18,7 @@ module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .given("control of geolocation", unpromisify(mockGeolocation))
         .given("I'm at $LATITUDE $LONGITUDE", unpromisify(sendCoords))
-        .given('my location is "$STRING"', unpromisify(setLocation))
+        .given("my location is \"$STRING\"", unpromisify(setLocation))
         .given("my location is $LATITUDE $LONGITUDE", unpromisify(setCoords))
         .when("I deny access to geolocation",
             unpromisify(disableGeolocation));

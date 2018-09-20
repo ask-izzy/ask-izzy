@@ -20,7 +20,7 @@ export default class MoneySubcategories extends BaseQuestion {
                 .append("gambling counselling"),
             "Financial counselling": remove("financial aid")
                 .append("financial counselling")
-                .append('name:"financial counselling"'),
+                .append("name:\"financial counselling\""),
         },
     };
 }

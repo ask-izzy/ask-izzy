@@ -62,7 +62,7 @@ export default class HomelessSheltersStaticPage extends React.Component<{}> {
                 specialist homeless service for you in your area.
                 Your answers are private and no personal information is collected.
                 Anonymous data is collected via Google Analytics to help us understand what people are searching for.
-                    {' '}<Link to="/housing">Search Ask Izzy for housing</Link>.
+                    {" "}<Link to="/housing">Search Ask Izzy for housing</Link>.
                 </p>
 
                 <h3>What help do they offer?</h3>
@@ -93,7 +93,7 @@ export default class HomelessSheltersStaticPage extends React.Component<{}> {
 
                 <p>
                 There are homeless shelters across the country,
-                in regional and metropolitan areas. {' '}
+                in regional and metropolitan areas. {" "}
                     <Link to="/housing">
                   Find a specialist homeless service
                     </Link> who can help you access shelter near you or browse:

@@ -182,7 +182,7 @@ export class ConditionalSearch extends Search {
         other: Search,
         filter: (search: iss.searchRequest) => boolean
     ) {
-        super('');
+        super("");
         this.other = other;
         this.filter = filter;
     }

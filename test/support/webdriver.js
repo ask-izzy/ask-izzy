@@ -74,10 +74,10 @@ export default async function webDriverInstance(
         .forBrowser(browserName || "chrome")
         .setChromeOptions(
             new ChromeWebDriver.Options().addArguments([
-                'headless',
-                'no-sandbox',
-                'acceptInsecureCerts=true',
-                'ignore-certificate-errors',
+                "headless",
+                "no-sandbox",
+                "acceptInsecureCerts=true",
+                "ignore-certificate-errors",
             ])
         )
         .build();

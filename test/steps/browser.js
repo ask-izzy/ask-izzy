@@ -34,9 +34,9 @@ module.exports = (function() {
         .given("a fresh session", unpromisify(cleanSession))
         .given("I open a new browser", unpromisify(newBrowser))
         .when("I visit $URL", unpromisify(visitUrl))
-        .when('I click on "$STRING"', unpromisify(clickLink))
-        .when('I search for "$STRING"', unpromisify(doSearch))
-        .when('I search for "$STRING" and press enter',
+        .when("I click on \"$STRING\"", unpromisify(clickLink))
+        .when("I search for \"$STRING\"", unpromisify(doSearch))
+        .when("I search for \"$STRING\" and press enter",
             unpromisify(doSearchAndEnter))
         .when("I click on the search button", unpromisify(clickSearch))
         .when("I click back from the title bar", unpromisify(clickBack))
@@ -47,17 +47,17 @@ module.exports = (function() {
         .when("I reload the page", unpromisify(reloadPage))
         .when("I pause for debugging", unpromisify(pauseToDebug))
         .then("I should be at $URL", unpromisify(checkURL))
-        .then('I should see "$STRING"', unpromisify(thenISee))
+        .then("I should see \"$STRING\"", unpromisify(thenISee))
         .then("I should see\n$STRING", unpromisify(thenISee))
-        .then('I should not see "$STRING"', unpromisify(thenIDontSee))
-        .then('search box should contain "$STRING"',
+        .then("I should not see \"$STRING\"", unpromisify(thenIDontSee))
+        .then("search box should contain \"$STRING\"",
             unpromisify(searchContains))
-        .then('the button "$STRING" should be disabled',
+        .then("the button \"$STRING\" should be disabled",
             unpromisify(checkDisabled))
-        .then('the button "$STRING" should be enabled',
+        .then("the button \"$STRING\" should be enabled",
             unpromisify(checkEnabled))
-        .then('"$STRING" should be checked', unpromisify(assertItemChecked))
-        .then('"$STRING" should not be checked',
+        .then("\"$STRING\" should be checked", unpromisify(assertItemChecked))
+        .then("\"$STRING\" should not be checked",
             unpromisify(assertItemNotChecked))
         .then("the canonical meta is $URL", unpromisify(checkMetaCanonical))
     ;
@@ -297,7 +297,7 @@ async function checkMetaCanonical(expected: string): Promise<void> {
 
     content = decodeURIComponent(content);
 
-    content = content.replace(/^.*\/\/[^/]+/, '');
+    content = content.replace(/^.*\/\/[^/]+/, "");
 
     assert.equal(
         content,

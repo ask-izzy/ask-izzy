@@ -106,8 +106,8 @@ const categories:Array<Category> = [
         byline: "Access to services",
         icon: icons.Centrelink,
         search: {
-            q: '"centrelink"',
-            name: '"centrelink"',
+            q: "\"centrelink\"",
+            name: "\"centrelink\"",
         },
         personalisation: [
             personalisation.Location,

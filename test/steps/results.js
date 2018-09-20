@@ -18,16 +18,16 @@ module.exports = (function() {
             unpromisify(waitForResultCount))
         .then("I should see the results\n$table",
             unpromisify(seeTheResults))
-        .then('I should see the results for "$string"\n$table',
+        .then("I should see the results for \"$string\"\n$table",
             unpromisify(seeTheResultsIn))
-        .then('I should see a hotline in position $NUM which says "$STRING"',
+        .then("I should see a hotline in position $NUM which says \"$STRING\"",
             unpromisify(hotlinePositionAndText))
         .then("I should see $NUMBER search results " +
-            'for "$STRING" in "$STRING"',
+            "for \"$STRING\" in \"$STRING\"",
         unpromisify(assertNumSearchResults))
-        .then('I should see $NUMBER search results in "$STRING"',
+        .then("I should see $NUMBER search results in \"$STRING\"",
             unpromisify(assertNumSearchResults))
-        .then('I should see "$STRING" before first hotline',
+        .then("I should see \"$STRING\" before first hotline",
             unpromisify(assertHotlineHeading))
         .then("my results should not contain\n$table",
             unpromisify(assertNoSuchResults))

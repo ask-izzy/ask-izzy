@@ -45,15 +45,15 @@ class Address extends React.Component<Props, void> {
                 </ScreenReader>
                 <icons.Map />
                 <div className="Address-wrapper">
-                    {' '}
+                    {" "}
                     <div className="street">
                         {location.streetAddressLine1()}
                     </div>
-                    {' '}
+                    {" "}
                     <div className="suburb">
                         {location.streetAddressLine2()}
                     </div>
-                    {' '}
+                    {" "}
                     {location.details &&
                         <div className="details">
                             {location.details}

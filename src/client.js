@@ -22,14 +22,14 @@ let insertBefore = head.insertBefore;
 head.insertBefore = function(newElement, referenceElement) {
     // intercept font download
     if (newElement.href &&
-        newElement.href.indexOf('https://fonts.googleapis.com/css?family=Roboto') === 0) {
+        newElement.href.indexOf("https://fonts.googleapis.com/css?family=Roboto") === 0) {
         return;
     }
 
     // intercept analytics download
     if (newElement.src &&
-        newElement.src.indexOf('http://www.google-analytics.com/analytics.js') === 0) {
-        newElement.src = '/static/analytics.js'
+        newElement.src.indexOf("http://www.google-analytics.com/analytics.js") === 0) {
+        newElement.src = "/static/analytics.js"
     }
 
     insertBefore.call(head, newElement, referenceElement);

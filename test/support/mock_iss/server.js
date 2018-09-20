@@ -129,7 +129,7 @@ app.get("/api/v3/search/", (req, res) => {
         res
             .status(402)
             .json({
-                error_message: 'Could not find a location matching "carlt"',
+                error_message: "Could not find a location matching \"carlt\"",
             });
     } else if (searchMocks[req.query.q]) {
         res.json({

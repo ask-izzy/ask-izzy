@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import {Route, Redirect} from 'react-router'
+import {Route, Redirect} from "react-router";
 import {titleize} from "underscore.string";
 import _ from "underscore";
 
