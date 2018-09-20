@@ -5998,9 +5998,9 @@ safe-regex@^1.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
-"saffron-sass@git+https://github.com/colindresj/saffron.git":
-  version "0.0.0"
-  resolved "git+https://github.com/colindresj/saffron.git#1f414e0d2359a48877306e18866e52fd484e2e2a"
+"saffron-sass@git+https://github.com/infoxchange/saffron.git":
+  version "0.2.3"
+  resolved "git+https://github.com/infoxchange/saffron.git#7897e4deab8dc1a9b01b15287d14845e641da521"
 
 sass-graph@^2.2.4:
   version "2.2.4"
