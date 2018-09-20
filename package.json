@@ -53,7 +53,7 @@
     "react-helmet": "5.2.0",
     "react-mixin": "4.0.0",
     "react-router": "3.2.1",
-    "saffron-sass": "git+https://github.com/colindresj/saffron.git",
+    "saffron-sass": "git+https://github.com/infoxchange/saffron.git",
     "sass-lint": "1.12.1",
     "sass-loader": "7.0.3",
     "selenium-webdriver": "4.0.0-alpha.1",
