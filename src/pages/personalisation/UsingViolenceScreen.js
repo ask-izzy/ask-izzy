@@ -5,6 +5,7 @@ import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
 import Gender from "./Gender";
 import MobileDetect from "../../components/higherorder/MobileDetect";
+import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 
 class UsingViolenceScreen extends BaseStaticPersonalisation {
     static title = "";
@@ -17,6 +18,8 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
             heading: "Worried about your behaviour?",
             byline: "All of your answers are private and anonymous",
             renderDoneButton: false,
+            showBaseTextBox: true,
+            baseTextBoxComponent: <DomesticViolenceLink/>,
         }
     );
 
