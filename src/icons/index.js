@@ -16,6 +16,7 @@ import SvgIconCheckboxUnselected from "./CheckboxUnselected";
 import SvgIconChevronBack from "./ChevronBack";
 import SvgIconChevron from "./Chevron";
 import SvgIconClock from "./Clock";
+import SvgIconCrossColor from "./CrossColor";
 import SvgIconCross from "./Cross";
 import SvgIconDemographicAboriginal from "./DemographicAboriginal";
 import SvgIconDemographicAtsi from "./DemographicAtsi";
@@ -57,13 +58,16 @@ import SvgIconPhoneTalk from "./PhoneTalk";
 import SvgIconPhone from "./Phone";
 import SvgIconPolice from "./Police";
 import SvgIconPrint from "./Print";
+import SvgIconQuestionMarkColor from "./QuestionMarkColor";
 import SvgIconRadioSelected from "./RadioSelected";
 import SvgIconRadioUnselected from "./RadioUnselected";
 import SvgIconSearch from "./Search";
+import SvgIconSexualViolence from "./SexualViolence";
 import SvgIconSkills from "./Skills";
 import SvgIconSupport from "./Support";
 import SvgIconTech from "./Tech";
 import SvgIconThings from "./Things";
+import SvgIconTickColor from "./TickColor";
 import SvgIconTick from "./Tick";
 import SvgIconTram from "./Tram";
 import SvgIconUnder18 from "./Under18";
@@ -86,6 +90,7 @@ export default {
     ChevronBack: SvgIconChevronBack,
     Chevron: SvgIconChevron,
     Clock: SvgIconClock,
+    CrossColor: SvgIconCrossColor,
     Cross: SvgIconCross,
     DemographicAboriginal: SvgIconDemographicAboriginal,
     DemographicAtsi: SvgIconDemographicAtsi,
@@ -127,13 +132,16 @@ export default {
     Phone: SvgIconPhone,
     Police: SvgIconPolice,
     Print: SvgIconPrint,
+    QuestionMarkColor: SvgIconQuestionMarkColor,
     RadioSelected: SvgIconRadioSelected,
     RadioUnselected: SvgIconRadioUnselected,
     Search: SvgIconSearch,
+    SexualViolence: SvgIconSexualViolence,
     Skills: SvgIconSkills,
     Support: SvgIconSupport,
     Tech: SvgIconTech,
     Things: SvgIconThings,
+    TickColor: SvgIconTickColor,
     Tick: SvgIconTick,
     Tram: SvgIconTram,
     Under18: SvgIconUnder18,
