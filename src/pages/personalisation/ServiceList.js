@@ -4,7 +4,6 @@ import React from "react";
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
 import icons from "../../icons";
-import ServiceListIntro from "../../components/ServiceListIntro";
 
 export default class ServiceList extends BaseQuestion {
     static title = "Service";
@@ -58,7 +57,5 @@ export default class ServiceList extends BaseQuestion {
                 "Counselling, behaviour change programs",
             "Help for Pets": "Emergency kennel and support",
         },
-        showTopTextBox: true,
-        baseTextBoxComponent: <ServiceListIntro/>,
     };
 }

@@ -22,7 +22,6 @@ export type Props = {
     onDoneTouchTap: Function,
     suppressDoneButton: boolean,
     showBaseTextBox?: boolean,
-    showTopTextBox?: boolean,
     baseTextBoxComponent?: React.Element<any>,
     icons?: Object,
     onNextStepCallback?: Function,
@@ -226,11 +225,6 @@ class BaseQuestion extends Personalisation<Props, State> {
         return (
             <div>
                 {this.renderHeaderBar()}
-                {
-                    this.props.showTopTextBox &&
-                    Boolean(this.props.baseTextBoxComponent) &&
-                    this.props.baseTextBoxComponent
-                }
                 <div className={listClassName}>
                     {this.answers.map((answer, index) =>
                         <InputListItem
