@@ -28,9 +28,9 @@ class AreYouSafe extends BaseQuestion {
             "Yes": append(""),
         },
         icons: {
-            "No": icons.Cross,
-            "I'm not sure": icons.QuestionMark,
-            "Yes": icons.Tick,
+            "No": icons.CrossColor,
+            "I'm not sure": icons.QuestionMarkColor,
+            "Yes": icons.TickColor,
         },
         showBaseTextBox: true,
         baseTextBoxComponent: <OnlineSafetyLink/>,
