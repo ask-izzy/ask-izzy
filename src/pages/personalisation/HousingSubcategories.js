@@ -4,6 +4,7 @@ import BaseQuestion from "./BaseQuestion";
 import SleepTonight from "./SleepTonight";
 import Location from "./Location";
 import { remove, housingCrisis } from "../../iss/Search";
+import { resetDfvOptions } from "../../utils";
 
 export default class HousingSubcategories extends BaseQuestion {
     static title = "Situation";
@@ -33,5 +34,13 @@ export default class HousingSubcategories extends BaseQuestion {
     static showPage(): boolean {
         /* only show this question if the user has someone to sleep tonight */
         return (SleepTonight.answer != "No");
+    }
+
+    componentDidMount(): void {
+        if (super.componentDidMount) {
+            super.componentDidMount();
+        }
+
+        resetDfvOptions();
     }
 }

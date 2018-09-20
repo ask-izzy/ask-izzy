@@ -8,8 +8,7 @@ import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
 import storage from "../storage";
 
-import AreYouSafe from "./personalisation/AreYouSafe";
-import OnlineSafetyScreen from "./personalisation/OnlineSafetyScreen";
+import { resetDfvOptions } from "../utils";
 
 class HomePage extends React.Component<{}, void> {
     static contextTypes = {
@@ -19,14 +18,7 @@ class HomePage extends React.Component<{}, void> {
     constructor(props: Object) {
         super(props);
 
-        if (Boolean(AreYouSafe.answer) &&
-            [
-                "No",
-                "I'm not sure",
-            ].indexOf(AreYouSafe.answer) > -1 &&
-            !OnlineSafetyScreen.answer) {
-            storage.removeItem(AreYouSafe.defaultProps.name);
-        }
+        resetDfvOptions();
     }
 
     onSearchSubmit(event: Event): void {

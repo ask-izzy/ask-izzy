@@ -2,6 +2,7 @@
 
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
+import { resetDfvOptions } from "../../utils";
 
 export default class LegalSubcategories extends BaseQuestion {
     static title = "Legal";
@@ -25,4 +26,12 @@ export default class LegalSubcategories extends BaseQuestion {
                 .remove("(legal aid)").append("victims of crime -police"),
         },
     };
+
+    componentDidMount(): void {
+        if (super.componentDidMount) {
+            super.componentDidMount();
+        }
+
+        resetDfvOptions();
+    }
 }
