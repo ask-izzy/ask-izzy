@@ -6,7 +6,7 @@ import icons from "../../icons";
 import Gender from "./Gender";
 import MobileDetect from "../../components/higherorder/MobileDetect";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
-import ServiceList from "./ServiceList";
+import DfvDemographics from "./DfvDemographics";
 
 class UsingViolenceScreen extends BaseStaticPersonalisation {
     static title = " ";
@@ -27,7 +27,8 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
     static summaryLabel = "Worried about your behaviour?";
 
     static showPage(): boolean {
-        return ServiceList.answer === "Help for people using violence";
+        return DfvDemographics.answer &&
+            DfvDemographics.answer.indexOf("Using violence") > -1;
     }
 
     renderMensReferralService(): React.Element<any> {
@@ -99,6 +100,10 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
                     </h3>
                     { this.renderMensReferralService() }
                     { this.renderWomensReferralService() }
+                    <h4>
+                        If you want to look at all services, go back and
+                        de-select "using violence"
+                    </h4>
                 </div>
             </div>
         );

@@ -14,6 +14,7 @@ import BaseQuestion from "./personalisation/BaseQuestion";
 import CounsellingSubcategories from "./personalisation/CounsellingSubcategories";
 import DemographicsIndigenous from "./personalisation/DemographicsIndigenous";
 import DemographicsNarrowed from "./personalisation/DemographicsNarrowed";
+import DfvDemographics from "./personalisation/DfvDemographics";
 import Demographics from "./personalisation/Demographics";
 import EverydayThingsSubcategories from "./personalisation/EverydayThingsSubcategories";
 import FoodSubcategories from "./personalisation/FoodSubcategories";
@@ -35,6 +36,7 @@ import HousingAreYouSafe from "./personalisation/HousingAreYouSafe";
 import OnlineSafetyScreen from "./personalisation/OnlineSafetyScreen";
 import UsingViolenceScreen from "./personalisation/UsingViolenceScreen";
 import Under18DomesticViolenceScreen from "./personalisation/Under18DomesticViolenceScreen";
+import LgbtiqaDomesticViolenceScreen from "./personalisation/LgbtiqaDomesticViolenceScreen";
 
 export default {
     AddictionSubcategories: AddictionSubcategories,
@@ -45,6 +47,7 @@ export default {
     CounsellingSubcategories: CounsellingSubcategories,
     DemographicsIndigenous: DemographicsIndigenous,
     DemographicsNarrowed: DemographicsNarrowed,
+    DfvDemographics,
     Demographics: Demographics,
     EverydayThingsSubcategories: EverydayThingsSubcategories,
     FoodSubcategories: FoodSubcategories,
@@ -55,6 +58,7 @@ export default {
     JobSubcategories: JobSubcategories,
     LegalSubcategories: LegalSubcategories,
     LifeSkillsSubcategories: LifeSkillsSubcategories,
+    LgbtiqaDomesticViolenceScreen,
     Location: Location,
     MoneySubcategories: MoneySubcategories,
     ServiceList: ServiceList,

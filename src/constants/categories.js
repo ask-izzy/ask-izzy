@@ -103,9 +103,11 @@ const categories: Array<Category> = [
                 personalisation.AreYouSafe
             ),
             personalisation.Location,
-            personalisation.ServiceList,
-            personalisation.UsingViolenceScreen,
+            personalisation.DfvDemographics,
             personalisation.Under18DomesticViolenceScreen,
+            personalisation.UsingViolenceScreen,
+            personalisation.LgbtiqaDomesticViolenceScreen,
+            personalisation.ServiceList,
         ],
     }),
     new Category({

@@ -51,7 +51,6 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     goToSubPage(subpage: React.ComponentType<any>): void {
         /* TODO: Narrow down which components don't have defaultProps */
 
-        // flow:disable
         this.navigate(`personalise/page/${subpage.defaultProps.name}`);
     }
 

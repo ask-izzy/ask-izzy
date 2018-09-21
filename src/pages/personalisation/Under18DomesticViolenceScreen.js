@@ -5,7 +5,7 @@ import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 import MobileDetect from "../../components/higherorder/MobileDetect";
-import ServiceList from "./ServiceList";
+import DfvDemographics from "./DfvDemographics";
 
 class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
     static title = " ";
@@ -26,7 +26,8 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
     static summaryLabel = "Under 18 Domestic Violence Information";
 
     static showPage(): boolean {
-        return ServiceList.answer === "Children's support and protection";
+        return DfvDemographics.answer &&
+            DfvDemographics.answer.indexOf("Under 18") > -1;
     }
 
     renderContent(): React.Element<any> {
@@ -63,6 +64,10 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
                         <a href={linkYoungAndEsafe}>Young and E-SAFE</a> to
                         learn more
                     </h3>
+                    <h4>
+                        If you want to look at all services, go back and
+                        de-select "under 18"
+                    </h4>
                 </div>
             </div>
         );

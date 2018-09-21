@@ -15,8 +15,10 @@ export default class DomesticViolenceLink extends BaseLogoWithTextBox {
     };
 
     onClickBox(): void {
-        const path = "https://woah.org.au/";
+        const path = "/information";
 
-        window.location = path
+        this.context.router.push(
+            path,
+        );
     }
 }
