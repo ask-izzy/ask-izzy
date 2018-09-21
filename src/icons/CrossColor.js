@@ -12,7 +12,7 @@ export default class SvgIconCrossColor extends BaseIcon {
 
     get svgContent(): string {
         return `
-            <svg class='${this.classNames}' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.89 13.28"><title>Cross</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><polygon points="12.89 2 10.8 0 6.44 4.55 2.09 0 0 2 4.44 6.64 0 11.28 2.09 13.28 6.44 8.73 10.8 13.28 12.89 11.28 8.45 6.64 12.89 2" fill="#f48267"></polygon></g></g></svg>
+            <svg class='${this.classNames}' id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><title>cross</title><polygon points="43.51 23.73 39.77 20.15 32.01 28.27 24.23 20.15 20.49 23.73 28.42 32 20.49 40.27 24.23 43.85 32.01 35.73 39.77 43.85 43.51 40.27 35.58 32 43.51 23.73" fill="#f48267"></polygon></svg>
         `;
     }
 }

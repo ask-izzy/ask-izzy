@@ -12,7 +12,7 @@ export default class SvgIconTickColor extends BaseIcon {
 
     get svgContent(): string {
         return `
-            <svg class='${this.classNames}' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.77 11.91"><title>Tick</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><polygon points="6.83 10.77 15.77 1.87 13.91 0 5.66 8.21 1.77 4.69 0 6.64 4.61 10.82 5.69 11.91 5.75 11.85 5.8 11.9 6.83 10.77" fill="#48b7b9"></polygon></g></g></svg>
+            <svg class='${this.classNames}' id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><title>tick</title><polygon points="30.07 40.92 46.61 24.37 43.17 20.93 27.92 36.19 20.61 29.64 17.39 33.29 25.88 41.02 27.92 43.07 28.02 42.96 28.13 43.07 30.07 40.92" fill="#48b7b9"></polygon></svg>
         `;
     }
 }
