@@ -31,6 +31,7 @@ import SleepTonight from "./personalisation/SleepTonight";
 import ServiceList from "./personalisation/ServiceList";
 import AreYouSafe from "./personalisation/AreYouSafe";
 import LegalAreYouSafe from "./personalisation/LegalAreYouSafe";
+import FreeTextAreYouSafe from "./personalisation/FreeTextAreYouSafe";
 import CounsellingAreYouSafe from "./personalisation/CounsellingAreYouSafe";
 import HousingAreYouSafe from "./personalisation/HousingAreYouSafe";
 import OnlineSafetyScreen from "./personalisation/OnlineSafetyScreen";
@@ -65,6 +66,7 @@ export default {
     SleepTonight: SleepTonight,
     AreYouSafe,
     LegalAreYouSafe,
+    FreeTextAreYouSafe,
     CounsellingAreYouSafe,
     HousingAreYouSafe,
     OnlineSafetyScreen,

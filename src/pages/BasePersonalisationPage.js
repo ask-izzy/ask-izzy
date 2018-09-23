@@ -7,10 +7,6 @@ import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
 
 class BasePersonalisationPage extends BaseCategoriesPage {
-    constructor(props: Object) {
-        super(props);
-    }
-
     static contextTypes = {
         router: PropTypes.object.isRequired,
     };

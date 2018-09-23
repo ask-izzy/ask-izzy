@@ -11,6 +11,7 @@ import type {
 } from "../iss";
 import Location from "./personalisation/Location";
 import storage from "../storage";
+import personalisation from "./personalisation";
 
 type State = {
     meta?: ?searchResultsMeta,
@@ -83,6 +84,9 @@ class BaseCategoriesPage extends React.Component<Object, State> {
             components = this.category.personalisation;
         } else if (this.props.params.search) {
             components = [
+                ...personalisation.OnlineSafetyScreenBundle(
+                    personalisation.FreeTextAreYouSafe
+                ),
                 Location,
             ];
         }
