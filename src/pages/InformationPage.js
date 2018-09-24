@@ -25,15 +25,22 @@ export default class InformationPage extends React.Component<{}> {
                         <li>Sexual - touching or doing things you don’t want them to do.</li>
                         <li>Stalking - following you or tracking you with calls, texts and other devices.</li>
                     </ul>
-                    <p>All types of violence are serious.</p>
-                    <p>Many people who experience domestic violence will never experience physical violence.</p>
-                    <p>You might be experiencing domestic and family violence or abuse if...</p>
+                    <p>All types of violence are serious. Many people who experience domestic violence will never experience physical violence.</p>
+                    <p>It can be done by:</p>
                     <ul>
-                        <li>Scared and frightened of the person (even sometimes)?</li>
-                        <li>Feel like you never know what will 'set them off'?</li>
-                        <li>That you are 'walking on eggshells'?</li>
-                        <li>Says you are not a good person or worthless</li>
-                        <li>Says or does hurt you, your children or animals</li>
+                        <li>Your partner / husband / wife / boyfriend / girlfriend</li>
+                        <li>Your ex partner / husband / wife / boyfriend / girlfriend</li>
+                        <li>Your LGBTIQA+ relationships</li>
+                        <li>Your family member, kin, or someone like a family member</li>
+                        <li>A carer like a support worker</li>
+                    </ul>
+                    <p>Warnings signs that you are experiencing domestic and family violence:</p>
+                    <ul>
+                        <li>Feeling scared and frightened of the person (even sometimes)?</li>
+                        <li>Feeling like you are 'walking on eggshells'?</li>
+                        <li>Feeling like you never know what will 'set them off'?</li>
+                        <li>The person says you are not a good person or worthless.</li>
+                        <li>The person says they will or does hurt you, your children or animals.</li>
                     </ul>
                     <p>Help is available now - Advice, choices and safety.</p>
                     <p>Call <a href={link1800Respect}>1800Respect</a>.</p>
