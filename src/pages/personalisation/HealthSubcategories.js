@@ -17,6 +17,8 @@ export default class HealthSubcategories extends BaseQuestion {
             "Doctor": remove("(community health)")
                 .append("(general medical practitioners)"),
             "Nurse": append("nurse"),
+            "Domestic & family violence": append(""),
+            "Sexual assault": append(""),
             "Sexual health": specialist("sexual health"),
             "Dentist": specialist("dentistry"),
             "Problems with feet": specialist("podiatry"),

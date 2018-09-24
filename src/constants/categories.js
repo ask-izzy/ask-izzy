@@ -122,6 +122,9 @@ const categories: Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.HealthSubcategories,
+            ...personalisation.OnlineSafetyScreenBundle(
+                personalisation.HealthAreYouSafe
+            ),
             personalisation.DemographicsIndigenous,
         ],
     }),

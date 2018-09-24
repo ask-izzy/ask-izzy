@@ -30,6 +30,7 @@ import MoneySubcategories from "./personalisation/MoneySubcategories";
 import SleepTonight from "./personalisation/SleepTonight";
 import ServiceList from "./personalisation/ServiceList";
 import AreYouSafe from "./personalisation/AreYouSafe";
+import HealthAreYouSafe from "./personalisation/HealthAreYouSafe";
 import LegalAreYouSafe from "./personalisation/LegalAreYouSafe";
 import FreeTextAreYouSafe from "./personalisation/FreeTextAreYouSafe";
 import CounsellingAreYouSafe from "./personalisation/CounsellingAreYouSafe";
@@ -65,6 +66,7 @@ export default {
     ServiceList: ServiceList,
     SleepTonight: SleepTonight,
     AreYouSafe,
+    HealthAreYouSafe,
     LegalAreYouSafe,
     FreeTextAreYouSafe,
     CounsellingAreYouSafe,
