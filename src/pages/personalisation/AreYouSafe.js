@@ -4,7 +4,7 @@ import React from "react";
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
 import icons from "../../icons";
-import OnlineSafetyLink from "../../components/OnlineSafetyLink";
+import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 
 class AreYouSafe extends BaseQuestion {
     static title = "Safety";
@@ -33,7 +33,7 @@ class AreYouSafe extends BaseQuestion {
             "Yes": icons.TickColor,
         },
         showBaseTextBox: true,
-        baseTextBoxComponent: <OnlineSafetyLink/>,
+        baseTextBoxComponent: <DomesticViolenceLink/>,
     };
 }
 
