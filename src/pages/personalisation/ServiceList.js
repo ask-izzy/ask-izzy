@@ -1,7 +1,7 @@
 /* @flow */
 
 import BaseQuestion from "./BaseQuestion";
-import { append } from "../../iss/Search";
+import { append, remove } from "../../iss/Search";
 import icons from "../../icons";
 
 export default class ServiceList extends BaseQuestion {
@@ -10,17 +10,28 @@ export default class ServiceList extends BaseQuestion {
     static defaultProps = {
         name: "service-list",
         question: "What best describes what you need?",
-        byline: "All of your ansers are private and anonymous",
+        byline: "All of your answers are private and anonymous",
         answers: {
             "Domestic Violence": append(""),
-            "Counselling": append(""),
-            "Police": append(""),
-            "Legal support": append(""),
-            "Children's support and protection": append(""),
-            "Sexual assault": append(""),
-            "Financial Help": append(""),
-            "Help for people using violence": append(""),
-            "Help for Pets": append(""),
+            "Counselling": append("counselling"),
+            "Police": remove("(family violence)")
+                .append("police dvlo"),
+            "Legal support": append("legal -permits -ceremonies")
+                .append("-making -checks -electoral -taxation")
+                .append("-centrelink -immigration -(hire of facilities)")
+                .append("-police"),
+            "Children's support and protection": remove("(family violence)")
+                .append("service_type:Child Protection/ Placement"),
+            "Sexual assault": remove("(family violence)")
+                .append("(sexual assault)"),
+            "Financial Help": remove("(family violence)")
+                .append("(financial counselling)")
+                .append("-grants")
+                .append("name:\"financial counselling\""),
+            "Help for people using violence": remove("(family violence)")
+                .append("(anger management)"),
+            "Help for Pets": append("pets -(animal control)")
+                .append("-(effectiveness training)"),
         },
         icons: {
             "Domestic Violence": icons.ExperiencingViolence,
@@ -36,7 +47,7 @@ export default class ServiceList extends BaseQuestion {
         answersDesc: {
             "Domestic Violence": "Crisis counselling, accommodation",
             "Counselling": "Someone to talk to",
-            "Police": "Stations and liason officers",
+            "Police": "Stations and liaison officers",
             "Legal support": "Intervention orders, court and separation",
             "Children's support and protection":
                 "Support services, child protection",
