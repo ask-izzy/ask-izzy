@@ -1,6 +1,7 @@
 /* @flow */
 
 import * as React from "react";
+import PropTypes from "proptypes";
 import _ from "underscore";
 
 import categories, {Category} from "../constants/categories";
@@ -26,6 +27,10 @@ type State = {
 
 class BaseCategoriesPage extends React.Component<Object, State> {
     _category: Category;
+
+    static contextTypes = {
+        router: PropTypes.object.isRequired,
+    };
 
     /**
      * category:
@@ -91,10 +96,16 @@ class BaseCategoriesPage extends React.Component<Object, State> {
             ];
         }
 
-        return components.filter(component =>
-            (typeof component.showPage == "function") &&
+        return components.filter(component => {
+            if (this.context.router.isRenderingStatic) {
+                if (typeof component.staticShowPage === "function") {
+                    return component.staticShowPage();
+                }
+            }
+
+            return (typeof component.showPage == "function") &&
                 component.showPage()
-        );
+        });
     }
 
     componentDidMount(): void {

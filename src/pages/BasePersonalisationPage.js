@@ -7,10 +7,6 @@ import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
 
 class BasePersonalisationPage extends BaseCategoriesPage {
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
-
     getChildContext(): Object {
         return {
             controller: this,

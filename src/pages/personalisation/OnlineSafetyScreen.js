@@ -25,8 +25,13 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
 
     static summaryLabel = "Online safety screen";
 
+    static staticShowPage(): boolean {
+        return true;
+    }
+
     static showPage(): boolean {
         return !this.answer &&
+            Boolean(AreYouSafe.answer) &&
             [
                 "Yes",
                 "(skipped)",

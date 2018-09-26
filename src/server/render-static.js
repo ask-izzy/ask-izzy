@@ -43,6 +43,13 @@ function renderPage(uri: string, path: string): void {
             } else if (!renderProps) {
                 throw badRouteParams;
             }
+            renderProps.router = Object.assign(
+                {},
+                renderProps.router,
+                {
+                    isRenderingStatic: true,
+                }
+            )
             const title = makeTitle(
                 renderProps.routes,
                 renderProps.params
@@ -50,6 +57,10 @@ function renderPage(uri: string, path: string): void {
             const markup = ReactDOMServer.renderToString(
                 <RouterContext {...renderProps} />
             );
+
+            if (renderProps.router.params.subpage === "online-safety-screen") {
+                console.log(markup);
+            }
 
             const helmet = Helmet.renderStatic();
 
