@@ -2,13 +2,8 @@
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
 
-import { pull as lodashPull} from "lodash";
-
 import { append } from "../../iss/Search";
 import icons from "../../icons";
-
-import Demographics from "./Demographics";
-import storage from "../../storage";
 
 export default class DfvDemographics extends BaseMultiQuestion {
     static title = "Personal";
@@ -38,31 +33,4 @@ export default class DfvDemographics extends BaseMultiQuestion {
         },
         oldAnswers: {},
     };
-
-    onAnswerTouchTap(answer: string, enabled: boolean): void {
-        super.onAnswerTouchTap(answer, enabled);
-
-        /**
-         * Since this component has some similar options to the regular
-         * demographics we want to make sure that we keep those values in sync
-         * so that a user doesn't need to tick the boxes twice.
-         */
-        // eslint-disable-next-line max-len
-        if (Object.keys(Demographics.defaultProps.answers).indexOf(answer) > -1) {
-            let demographicsAnswers = storage.getJSON(
-                Demographics.defaultProps.name
-            ) || [];
-
-            if (enabled) {
-                demographicsAnswers.push(answer);
-            } else {
-                lodashPull(demographicsAnswers, answer);
-            }
-
-            storage.setJSON(
-                Demographics.defaultProps.name,
-                demographicsAnswers
-            );
-        }
-    }
 }

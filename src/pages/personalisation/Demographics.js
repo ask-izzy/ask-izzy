@@ -5,10 +5,6 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { append } from "../../iss/Search";
 import icons from "../../icons";
 
-import { pull as lodashPull } from "lodash";
-import DfvDemographics from "./DfvDemographics";
-import storage from "../../storage";
-
 export default class Demographics extends BaseMultiQuestion {
     static title = "Personal";
     static propTypes = BaseMultiQuestion.propTypes;
@@ -47,31 +43,4 @@ export default class Demographics extends BaseMultiQuestion {
             "Aboriginal": "Aboriginal and/or Torres Strait Islander",
         },
     };
-
-    onAnswerTouchTap(answer: string, enabled: boolean): void {
-        super.onAnswerTouchTap(answer, enabled);
-
-        /**
-         * This is the reverse of the function in DfvDemographics. If we update
-         * an answer here we also want it to apply to DfvDemographics if it one
-         * of the options available on that page.
-         */
-        // eslint-disable-next-line max-len
-        if (Object.keys(DfvDemographics.defaultProps.answers).indexOf(answer) > -1) {
-            let demographicsAnswers = storage.getJSON(
-                DfvDemographics.defaultProps.name
-            ) || [];
-
-            if (enabled) {
-                demographicsAnswers.push(answer);
-            } else {
-                lodashPull(demographicsAnswers, answer);
-            }
-
-            storage.setJSON(
-                DfvDemographics.defaultProps.name,
-                demographicsAnswers
-            );
-        }
-    }
 }
