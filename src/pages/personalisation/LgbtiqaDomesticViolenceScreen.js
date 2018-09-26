@@ -17,7 +17,7 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
             name: "lgbtiqa-domestic-violence",
             heading: "Worried about your behaviour?",
             byline: "All of your answers are private and anonymous",
-            renderDoneButton: false,
+            showDoneButton: false,
             showBaseTextBox: true,
             baseTextBoxComponent: <DomesticViolenceLink/>,
         }

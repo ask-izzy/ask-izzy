@@ -17,7 +17,7 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
             name: "under-18-dfv",
             heading: "Under 18",
             byline: "All of your answers are private and anonymous",
-            renderDoneButton: false,
+            showDoneButton: false,
             showBaseTextBox: true,
             baseTextBoxComponent: <DomesticViolenceLink/>,
         }

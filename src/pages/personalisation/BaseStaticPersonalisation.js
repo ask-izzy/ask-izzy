@@ -17,7 +17,7 @@ export type Props = {
     baseTextBoxComponent?: React.Element<any>,
     classNames?: string,
     mobileView?: boolean,
-    renderDoneButton?: boolean,
+    showDoneButton?: boolean,
 }
 
 export type State = {
@@ -29,7 +29,7 @@ export type State = {
 class BaseStaticPersonalisation extends Personalisation<Props, State> {
     static defaultProps: Object = {
         showBaseTextBox: false,
-        renderDoneButton: true,
+        showDoneButton: true,
     };
 
     /*
@@ -143,7 +143,7 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
             <div>
                 {this.renderHeaderBar()}
                 {this.renderContent()}
-                {this.props.renderDoneButton && this.renderDoneButton()}
+                {this.props.showDoneButton && this.renderDoneButton()}
                 {
                     this.props.showBaseTextBox &&
                     Boolean(this.props.baseTextBoxComponent) &&
