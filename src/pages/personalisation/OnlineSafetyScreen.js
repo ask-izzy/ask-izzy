@@ -26,17 +26,11 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
     static summaryLabel = "Online safety screen";
 
     static showPage(): boolean {
-        if (typeof process !== "undefined" &&
-            process.env.ENVIRONMENT !== "dev_local") {
-            return true;
-        }
-
         return !this.answer &&
-        Boolean(AreYouSafe.answer) &&
-        [
-            "Yes",
-            "(skipped)",
-        ].indexOf(AreYouSafe.answer) === -1;
+            [
+                "Yes",
+                "(skipped)",
+            ].indexOf(AreYouSafe.answer) === -1;
     }
 
     onDoneTouchTap(): void {
