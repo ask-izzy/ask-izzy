@@ -33,6 +33,7 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
         return !this.answer &&
             Boolean(AreYouSafe.answer) &&
             [
+                "",
                 "Yes",
                 "(skipped)",
             ].indexOf(AreYouSafe.answer) === -1;

@@ -58,10 +58,6 @@ function renderPage(uri: string, path: string): void {
                 <RouterContext {...renderProps} />
             );
 
-            if (renderProps.router.params.subpage === "online-safety-screen") {
-                console.log(markup);
-            }
-
             const helmet = Helmet.renderStatic();
 
             // The application component is rendered to static markup
