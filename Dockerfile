@@ -29,6 +29,7 @@ RUN \
 # Install the yarn deps
 COPY package.json npm-shrinkwrap.json yarn.lock /app/
 RUN npm install -g yarn && \
+    yarn config set registry http://apt.office.infoxchange.net.au/npm && \
     yarn --frozen-lockfile && \
     yarn cache clean
 
