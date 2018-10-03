@@ -30,19 +30,18 @@ class AddServicePage extends React.Component<Props, State> {
 
         this.handleMessage = this.handleMessage.bind(this);
         this.issUrl = "";
+
+        if (ISS_URL) {
+            this.issUrl = url.parse(ISS_URL);
+            delete this.issUrl.auth;
+        }
     }
 
     componentDidMount(): void {
         if (typeof window !== "undefined") {
             window.addEventListener("message", this.handleMessage, false);
         }
-    }
 
-    componentWillMount(): void {
-        if (ISS_URL) {
-            this.issUrl = url.parse(ISS_URL);
-            delete this.issUrl.auth;
-        }
     }
 
     componentWillUnmount(): void {
@@ -105,7 +104,7 @@ class AddServicePage extends React.Component<Props, State> {
     }
 
     renderForm() {
-        let issUrl = url.format(this.issUrl);
+        const issUrl = url.format(this.issUrl);
 
         return (
             <div>
@@ -146,7 +145,7 @@ class AddServicePage extends React.Component<Props, State> {
                     noted in blue.
                 </p>
 
-                <iframe src={`${issUrl}add-service-form?form=ask-izzy`} />
+                <iframe src={`${issUrl}/add-service-form?form=ask-izzy`} />
             </div>
         );
     }
