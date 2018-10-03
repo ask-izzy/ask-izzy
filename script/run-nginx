@@ -6,7 +6,9 @@ conffile=$(mktemp -t nginxconf.XXXXXX)
 
 echo $(pwd)
 
-sed "s%/app/public%$(pwd)/public%g" < conf/nginx.conf > "$conffile"
+stripped_iss_host=$(echo $ISS_URL | sed -r "s%//[^0-9]+:[^0-9]+@%//%; s%/$%%")
+
+sed "s%/app/public%$(pwd)/public%g; s%/iss_host/%$stripped_iss_host%g" < conf/nginx.conf > "$conffile"
 
 if [ ! -z "$HTTP_PROXY" ]; then
     PROXY_PLACEHOLDER="#proxy_pass HTTP_PROXY"
