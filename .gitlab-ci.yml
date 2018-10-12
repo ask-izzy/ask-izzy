@@ -37,6 +37,6 @@ personalisation-test:
 # Deploy to test environment when tagged
 deploy:
     stage: deploy
-    script: make build dockerpush release-dev release-test
+    script: make build-prod dockerpush release-dev release-test
     only:
         - tags
