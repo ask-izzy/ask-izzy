@@ -16,11 +16,11 @@ REDCOLOR='\e[37;41m'
 DIFF=$(git diff --shortstat $PREV_COMMIT..$POST_COMMIT package.json 2>/dev/null)
 if [[ $DIFF != "" ]]; then
 
-    echo -e "$REDCOLOR package.json has changed: running npm install $NOCOLOR"
+    echo -e "$REDCOLOR package.json has changed: running yarn $NOCOLOR"
 
     which npm > /dev/null 2>&1
     if [[ $GIT_MERGE_REBASE = false && $? ]]; then
-        npm install
+        yarn
     fi
 
 fi

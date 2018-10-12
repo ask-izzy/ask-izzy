@@ -16,10 +16,10 @@ if (process.argv[3]) {
 }
 
 // Pass through environment variables
-GLOBAL.ISS_URL = process.env.ISS_URL;
-GLOBAL.GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
-GLOBAL.GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID;
-GLOBAL.GOOGLE_TAG_MANAGER_ID = process.env.GOOGLE_TAG_MANAGER_ID;
+global.ISS_URL = process.env.ISS_URL;
+global.GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+global.GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID;
+global.GOOGLE_TAG_MANAGER_ID = process.env.GOOGLE_TAG_MANAGER_ID;
 
 if (process.argv[2] && (process.argv[2] != "index.js")) {
     var content = require("./" + process.argv[2]);
