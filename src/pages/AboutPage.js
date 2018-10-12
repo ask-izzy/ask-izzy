@@ -19,19 +19,53 @@ class AboutPage extends React.Component<{}, void> {
                 bannerName="drugs-alcohol static"
             >
                 <p>
-                    When you’re looking for support, Ask Izzy can help you to find the services you need, right now and nearby. It is free and anonymous, and you can search over 350 000 services to find housing, meals, healthcare, counselling, legal advice, addiction treatment and a whole lot more.
+                    When you’re looking for support, Ask Izzy can help you to
+                    find the services you need, right now and nearby. It is free
+                    and anonymous, and you can search over 350 000 services to
+                    find housing, meals, healthcare, counselling, legal advice,
+                    addiction treatment and a whole lot more.
                 </p>
                 <p>
-                    If you’re on the Telstra mobile network, you can access Ask Izzy even if you don’t have credit.
+                    If you’re on the Telstra mobile network, you can access Ask
+                    Izzy even if you don’t have credit.
                 </p>
                 <p>
                     We’re making improvements.
                 </p>
                 <p>
-                    You might see some changes to the site over the coming months including a more welcoming design, improved Aboriginal and Torres Strait Islander service listings as well as the ability to find these services more easily. With help from the Victorian Government, we’re working to make Ask Izzy more inclusive for Aboriginal and Torres Strait Islander people.
+                    You might have seen some changes to the site recently
+                    including a more welcoming design, improved Aboriginal and
+                    Torres Strait Islander service listings as well as the
+                    ability to find these services more easily. With help from
+                    the Victorian Government, we've made improvements to make
+                    Ask Izzy more inclusive for Aboriginal and Torres Strait
+                    Islander people.
                 </p>
                 <p>
-                    We’re also making use of Ask Izzy’s anonymous data so service providers and policymakers can better match their offerings with need. In September, you’ll be able to compare data from the Australian Bureau of Statistics, Australian Institute of Health and Welfare and Ask Izzy, thanks to funding from Google.
+                    With the support of Google, Infoxchange has also developed
+                    the{" "}
+                    <a
+                        href="https://opendata.askizzy.org.au"
+                        target="_blank"
+                    >
+                        Ask Izzy Open Data Platform
+                    </a>. Using anonymous data from Ask Izzy, the Australian
+                    Bureau of Statistics and Australian Institute of Health and
+                    Welfare, the Ask Izzy Open Data Platform provides insights
+                    into the supply and demand of services across Australia such
+                    as housing, food, health and more.
+                </p>
+                <p>
+                    To keep up-to-date with the latest Ask Izzy stories,
+                    projects, events and upcoming launches, sign up to our{" "}
+                    <a href="http://eepurl.com/c79CV1">Ask Izzy Updates</a>{" "}
+                    quarterly enewsletter and follow us on{" "}
+                    <a
+                        href="https://www.facebook.com/askizzyau/"
+                        target="_blank"
+                    >
+                        Facebook
+                    </a>.
                 </p>
 
                 <h3>Are you a service provider?</h3>
