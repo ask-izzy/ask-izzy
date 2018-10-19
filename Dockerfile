@@ -14,7 +14,7 @@ VOLUME ["/static", "/storage"]
 
 WORKDIR /app
 
-COPY package.json npm-shrinkwrap.json yarn.lock /app/
+COPY package.json yarn.lock /app/
 
 RUN \
     useradd -d /app -r app && \
