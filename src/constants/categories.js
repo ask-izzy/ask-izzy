@@ -7,6 +7,15 @@ import * as iss from "../iss";
 
 import personalisation from "../pages/personalisation";
 
+type Props = {
+    name: string,
+    byline: string,
+    icon: React$ComponentType<any>,
+    search: iss.searchRequest,
+    info?: string | React$Element<any>,
+    personalisation: Array<any>,
+};
+
 export class Category {
     key: string;
     name: string;
@@ -17,14 +26,7 @@ export class Category {
     // I can't get flow to happily check that these are react classes.
     personalisation: Array<any>;
 
-    constructor(props: {
-        name: string,
-        byline: string,
-        icon: React$ComponentType<any>,
-        search: iss.searchRequest,
-        info?: string|React$Element<any>,
-        personalisation: Array<any>,
-    }) {
+    constructor(props: Props) {
         this.name = props.name;
         this.byline = props.byline;
         this.icon = props.icon;
@@ -38,7 +40,7 @@ export class Category {
     }
 }
 
-const categories:Array<Category> = [
+const categories: Array<Category> = [
     new Category({
         name: "Housing",
         byline: "A place to stay",
@@ -56,6 +58,9 @@ const categories:Array<Category> = [
             personalisation.Gender,
             personalisation.Age,
             personalisation.Demographics,
+            ...personalisation.OnlineSafetyScreenBundle(
+                personalisation.HousingAreYouSafe
+            ),
         ],
     }),
     new Category({
@@ -87,6 +92,25 @@ const categories:Array<Category> = [
         ],
     }),
     new Category({
+        name: "Domestic & family violence help",
+        byline: "Scared of partner or family member",
+        icon: icons.EscapeViolence,
+        search: {
+            q: "Family violence -(coordinating bodies)",
+        },
+        personalisation: [
+            ...personalisation.OnlineSafetyScreenBundle(
+                personalisation.AreYouSafe
+            ),
+            personalisation.Location,
+            personalisation.DfvDemographics,
+            personalisation.Under18DomesticViolenceScreen,
+            personalisation.UsingViolenceScreen,
+            personalisation.LgbtiqaDomesticViolenceScreen,
+            personalisation.ServiceList,
+        ],
+    }),
+    new Category({
         name: "Health",
         byline: "Physical, mental, emotional",
         icon: icons.Health,
@@ -98,6 +122,9 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.HealthSubcategories,
+            ...personalisation.OnlineSafetyScreenBundle(
+                personalisation.HealthAreYouSafe
+            ),
             personalisation.DemographicsIndigenous,
         ],
     }),
@@ -136,6 +163,9 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.CounsellingSubcategories,
+            ...personalisation.OnlineSafetyScreenBundle(
+                personalisation.CounsellingAreYouSafe
+            ),
             personalisation.DemographicsIndigenous,
         ],
     }),
@@ -151,6 +181,9 @@ const categories:Array<Category> = [
         personalisation: [
             personalisation.Location,
             personalisation.LegalSubcategories,
+            ...personalisation.OnlineSafetyScreenBundle(
+                personalisation.LegalAreYouSafe
+            ),
             personalisation.DemographicsIndigenous,
         ],
     }),

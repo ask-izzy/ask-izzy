@@ -19,4 +19,11 @@
             font-style: italic;
         }
     }
+
+    /* IE10+ styles */
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        .body {
+            margin: 0 5%;
+        }
+    }
 }

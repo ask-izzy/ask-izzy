@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable valid-jsdoc */
 
 import React from "react";
 import {Route, Redirect} from "react-router";
@@ -26,6 +27,7 @@ import HomelessLegalStaticPage from "./pages/HomelessLegalStaticPage";
 import HomelessFinanceStaticPage from "./pages/HomelessFinanceStaticPage";
 import HomelessHealthStaticPage from "./pages/HomelessHealthStaticPage";
 import CensusStaticPage from "./pages/CensusStaticPage";
+import InformationPage from "./pages/InformationPage";
 import OnlineSafetyStaticPage from "./pages/OnlineSafetyStaticPage";
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
@@ -56,6 +58,33 @@ export function makeTitle(routes: Array<Object>, params: Object): string {
 
     return title ? `${title} | Ask Izzy` : "Ask Izzy";
 }
+
+/**
+ * While entering the 404 page,
+ * if the pathname contains double slashes
+ * this hook will remove the them from the next state
+ */
+const removeDoubleSlashOnEnter404 = (
+    nextState: Object,
+    replace: Function
+): void => {
+    let nextPathName = nextState.location.pathname;
+    let needChangePath = false;
+
+    // remove double slashes
+    const regex = new RegExp("/{2,}", "g");
+
+    if (nextPathName.match(regex)) {
+        needChangePath = true;
+        nextPathName = nextPathName.replace(regex, "/");
+    }
+
+    if (needChangePath) {
+        // change to the new path
+        replace(nextPathName);
+    }
+
+};
 
 export default (
     <Route
@@ -129,13 +158,17 @@ export default (
             component={CensusStaticPage}
             title="2016 Census"
         />
+        <Route
+            path="/information"
+            component={InformationPage}
+            title="Information"
+        />
 
         <Route
             path="/not-found"
             component={NotFoundStaticPage}
             title="Page not found"
         />
-
         <Route
             path="/add-service"
             component={AddServicePage}
@@ -217,6 +250,7 @@ export default (
         <Route
             path="*"
             component={NotFoundStaticPage}
+            onEnter={removeDoubleSlashOnEnter404}
         />
     </Route>
 );

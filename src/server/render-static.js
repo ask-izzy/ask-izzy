@@ -43,6 +43,13 @@ function renderPage(uri: string, path: string): void {
             } else if (!renderProps) {
                 throw badRouteParams;
             }
+            renderProps.router = Object.assign(
+                {},
+                renderProps.router,
+                {
+                    isRenderingStatic: true,
+                }
+            )
             const title = makeTitle(
                 renderProps.routes,
                 renderProps.params

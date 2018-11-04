@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from "react";
-import PropTypes from "proptypes";
 
 import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
@@ -21,11 +20,6 @@ import type { Service } from "../iss";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 
 class ResultsPage extends BaseCategoriesPage {
-
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
-
     constructor(props: Object) {
         super(props);
         this.state = {

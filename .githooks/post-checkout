@@ -18,9 +18,10 @@ if [[ $DIFF != "" ]]; then
 
     echo -e "$REDCOLOR package.json has changed: running yarn $NOCOLOR"
 
-    which npm > /dev/null 2>&1
+    which yarn > /dev/null 2>&1
     if [[ $GIT_MERGE_REBASE = false && $? ]]; then
-        yarn
+        rm -rf node_modules
+        yarn --frozen-lockfile
     fi
 
 fi

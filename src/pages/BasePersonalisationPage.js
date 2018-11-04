@@ -7,14 +7,6 @@ import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
 
 class BasePersonalisationPage extends BaseCategoriesPage {
-    constructor(props: Object) {
-        super(props);
-    }
-
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
-
     getChildContext(): Object {
         return {
             controller: this,
@@ -22,6 +14,10 @@ class BasePersonalisationPage extends BaseCategoriesPage {
     }
 
     previousStep(): void {
+        // If our subpage has an onPreviousStep hook, call it, otherwise
+        // just go back.
+
+
         browserHistory.goBack();
     }
 
@@ -84,10 +80,6 @@ class BasePersonalisationPage extends BaseCategoriesPage {
             component.defaultProps.name == this.props.params.subpage
         );
     }
-}
-
-BasePersonalisationPage.childContextTypes = {
-    controller: PropTypes.instanceOf(BasePersonalisationPage),
 }
 
 BasePersonalisationPage.childContextTypes = {

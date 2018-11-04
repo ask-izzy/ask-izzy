@@ -5,8 +5,9 @@ import { Link } from "react-router";
 import DemographicAboriginal from "../icons/DemographicAboriginal";
 import DemographicTorresStrait from "../icons/DemographicTorresStrait";
 import config from "../config";
+import MobileDetect from "./higherorder/MobileDetect";
 
-class BrandedFooter extends React.Component<{}, void> {
+class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
     static sampleProps = {
         default: {},
     };
@@ -17,14 +18,6 @@ class BrandedFooter extends React.Component<{}, void> {
         const mailLink = `mailto:${siteMail}?subject=${subject}`;
         const donateLink = "https://www.infoxchange.org/donate-ask-izzy";
         const resourcesLink = "https://www.infoxchange.org/au/ask-izzy";
-
-        let isMobile;
-
-        if (typeof window !== "undefined") {
-            isMobile = window.innerWidth <= 768;
-        } else {
-            isMobile = false;
-        }
 
         return (
             <footer className="branding-footer-container">
@@ -110,7 +103,7 @@ class BrandedFooter extends React.Component<{}, void> {
                         </a>
                         <br />
                         {
-                            isMobile ? (
+                            this.props.mobileView ? (
                                 <a href="tel:131450">
                                     13 14 50
                                 </a>
@@ -141,5 +134,4 @@ class BrandedFooter extends React.Component<{}, void> {
     }
 }
 
-export default BrandedFooter;
-
+export default MobileDetect(BrandedFooter);

@@ -1,8 +1,6 @@
 /* @flow */
 
 import * as React from "react";
-import reactMixin from "react-mixin";
-import { debounce } from "lodash-decorators";
 import _ from "underscore";
 
 import Personalisation from "../../mixins/Personalisation";
@@ -15,7 +13,7 @@ import storage from "../../storage";
 import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
 
-type Props = {
+export type Props = {
     name: string,
     question: string,
     byline?: string,
@@ -23,18 +21,23 @@ type Props = {
     answers: Object | Array<string>,
     onDoneTouchTap: Function,
     suppressDoneButton: boolean,
-    icons?: Object
+    showBaseTextBox?: boolean,
+    baseTextBoxComponent?: React.Element<any>,
+    icons?: Object,
+    onNextStepCallback?: Function,
+    mobileView?: boolean,
+    answersDesc: Object,
 }
 
-type State = {
+export type State = {
     selected: ?string,
     rootHeight?: number,
     windowHeight?: number,
     answers?: Set<string>,
+    shouldRenderSafetyDetails?: boolean,
 }
 
-/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
-class BaseQuestion extends React.Component<Props, State> {
+class BaseQuestion extends Personalisation<Props, State> {
     static defaultProps: Object = {};
 
     constructor(props: Object) {
@@ -43,8 +46,6 @@ class BaseQuestion extends React.Component<Props, State> {
             selected: null, // set when the user makes a choice
         };
     }
-
-    nextStep: any;
 
     get selected(): string {
         let storageValue;
@@ -58,8 +59,8 @@ class BaseQuestion extends React.Component<Props, State> {
         }
 
         return `${(
-            storageValue ||
             this.state.selected ||
+            storageValue ||
             ""
         )}`;
     }
@@ -148,19 +149,33 @@ class BaseQuestion extends React.Component<Props, State> {
         }
     }
 
+    get question(): string {
+        return this.props.question;
+    }
+
     /**
      * Determines whether or not to show the question.
      *
      * @returns {boolean} true if we should show this question.
      */
-    static showQuestion(): boolean {
+    static showPage(): boolean {
+        return true;
+    }
+
+    /**
+     * Determines whether or not to show the question on the summary page.
+     *
+     * @returns {boolean} true if we should show this on the summary page.
+     */
+    static showInSummary(): boolean {
         return true;
     }
 
     /**
      * Trigger next page after a 500ms debounce.
+     *
+     * @returns {void}
      */
-    /*::__(){`*/@debounce(500)/*::`}*/
     triggerNext(): void {
         if (typeof this.nextStep === "function") {
             this.nextStep();
@@ -184,12 +199,65 @@ class BaseQuestion extends React.Component<Props, State> {
     }
 
     onAnswerTouchTap(answer: string, ...rest: any): void {
-        this.setState({selected: answer});
-        this.triggerNext();
+        this.setState({
+            selected: answer,
+        }, () => {
+            this.triggerNext()
+        });
+    }
+
+    answerDescFor(answer: string): ?React.Element<any> {
+        if (this.props.answersDesc && this.props.answersDesc[answer]) {
+            const answerDesc = this.props.answersDesc[answer];
+
+            return answerDesc;
+        }
     }
 
     render(): React.Node {
         const selected = this.selected;
+        let listClassName = "List";
+
+        if (this.props.name) {
+            listClassName = `${listClassName} ${this.props.name}`;
+        }
+
+        return (
+            <div>
+                {this.renderHeaderBar()}
+                <div className={listClassName}>
+                    {this.answers.map((answer, index) =>
+                        <InputListItem
+                            key={index}
+                            leftIcon={this.iconFor(answer)}
+                            primaryText={answer}
+                            secondaryText={this.answerDescFor(answer)}
+
+                            type="radio"
+                            checked={answer == selected}
+                            value={answer}
+                            onClick={this.onAnswerTouchTap.bind(this, answer)}
+                            readOnly={true}
+
+                            checkedIcon={
+                                <icons.RadioSelected className="big" />
+                            }
+                            uncheckedIcon={
+                                <icons.RadioUnselected className="big" />
+                            }
+                        />)}
+                </div>
+                {this.renderDoneButton()}
+                {
+                    this.props.showBaseTextBox &&
+                    Boolean(this.props.baseTextBoxComponent) &&
+                    this.props.baseTextBoxComponent
+                }
+            </div>
+        );
+    }
+
+    renderHeaderBar(): React.Element<any> {
         let bannerName = "";
 
         try {
@@ -203,41 +271,18 @@ class BaseQuestion extends React.Component<Props, State> {
         }
 
         return (
-            <div>
-                <HeaderBar
-                    primaryText={
-                        <div>
-                            {this.props.question}
-                        </div>
-                    }
-                    secondaryText={
-                        this.props.byline
-                    }
-                    bannerName={bannerName}
-                    alternateBackgroundColor={false}
-                />
-                <div className="List">
-                    {this.answers.map((answer, index) =>
-                        <InputListItem
-                            key={index}
-                            leftIcon={this.iconFor(answer)}
-                            primaryText={answer}
-
-                            type="radio"
-                            checked={answer == selected}
-                            value={answer}
-                            onClick={this.onAnswerTouchTap.bind(this, answer)}
-
-                            checkedIcon={
-                                <icons.RadioSelected className="big" />
-                            }
-                            uncheckedIcon={
-                                <icons.RadioUnselected className="big" />
-                            }
-                        />)}
-                </div>
-                {this.renderDoneButton()}
-            </div>
+            <HeaderBar
+                primaryText={
+                    <div>
+                        {this.question}
+                    </div>
+                }
+                secondaryText={
+                    this.props.byline
+                }
+                bannerName={bannerName}
+                alternateBackgroundColor={false}
+            />
         );
     }
 
