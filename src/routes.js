@@ -57,6 +57,26 @@ export function makeTitle(routes: Array<Object>, params: Object): string {
     return title ? `${title} | Ask Izzy` : "Ask Izzy";
 }
 
+/*
+ * While entering the 404 page,
+ * if the pathname contains double slashes
+ * this hook will remove the them from the next state
+ */
+const removeDoubleSlashOnEnter404 = (
+    nextState: Object,
+    replace: Function
+): void => {
+    let nextPathName = nextState.location.pathname;
+
+    // remove double slashes
+    const regex = new RegExp("/{2,}", "g");
+
+    if (nextPathName.match(regex)) {
+        nextPathName = nextPathName.replace(regex, "/");
+        replace(nextPathName);
+    }
+};
+
 export default (
     <Route
         path=""
@@ -129,13 +149,11 @@ export default (
             component={CensusStaticPage}
             title="2016 Census"
         />
-
         <Route
             path="/not-found"
             component={NotFoundStaticPage}
             title="Page not found"
         />
-
         <Route
             path="/add-service"
             component={AddServicePage}
@@ -217,6 +235,7 @@ export default (
         <Route
             path="*"
             component={NotFoundStaticPage}
+            onEnter={removeDoubleSlashOnEnter404}
         />
     </Route>
 );
