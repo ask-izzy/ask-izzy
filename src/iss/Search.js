@@ -10,9 +10,9 @@ export function housingCrisis(
         .remove("-(respite care)")
         .remove("-(housing information)")
         .remove("-hef")
-        .append("crisis accommodation")
+        .append("(crisis accommodation)")
         .conditionally(
-            remove("crisis accomodation")
+            remove("(crisis accommodation)")
                 .remove({service_type: ["housing"]})
                 .append({
                     service_type: ["Homelessness Access Point"],

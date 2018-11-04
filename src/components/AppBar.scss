@@ -3,7 +3,6 @@ $appbar-text-line-height: 42px;
 $colour-red: $brand-red;
 $colour-grey: #f8f9f9;
 
-
 .AppBarSpacer {
     width: 100%;
     height: $appbar-height;
@@ -131,12 +130,10 @@ $colour-grey: #f8f9f9;
         vertical-align: middle;
     }
 
-
     /* if desktop */
     .mobile_device {
         display: none;
     }
-
 
     /* if mobile device max width 480px */
     @media only screen and (max-device-width: 480px) {
@@ -153,7 +150,9 @@ $colour-grey: #f8f9f9;
             background-color: $colour-red;
         }
 
-        .desktop {display: none;}
+        .desktop {
+            display: none;
+        }
     }
 
     /* mobile device (max width is 736px) */
@@ -169,6 +168,8 @@ $colour-grey: #f8f9f9;
             background-color: $colour-red;
         }
 
-        .desktop {display: none;}
+        .desktop {
+            display: none;
+        }
     }
 }

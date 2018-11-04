@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import reactMixin from "react-mixin";
 import { debounce } from "lodash-decorators";
 import { ltrim } from "underscore.string";
 import _ from "underscore";
@@ -25,11 +24,12 @@ type State = {
         nextDisabled: boolean,
 }
 
-/*::`*/@reactMixin.decorate(Personalisation)/*::`;*/
-class Location extends React.Component<Props, State> {
+class Location extends Personalisation<Props, State> {
     static defaultProps = {
         name: "location",
     };
+
+    _search: ?HTMLInputElement;
 
     constructor(props: Object) {
         super(props);
@@ -94,7 +94,11 @@ class Location extends React.Component<Props, State> {
         return storage.getLocation();
     }
 
-    static showQuestion(): boolean {
+    static showPage(): boolean {
+        return true;
+    }
+
+    static showInSummary(): boolean {
         return true;
     }
 
@@ -148,8 +152,8 @@ class Location extends React.Component<Props, State> {
 
     componentDidUpdate(prevProps: Object, prevState: Object): void {
         // After state updates, make sure you can see the input
-        if (this.refs.search &&
-            this.refs.search == document.activeElement &&
+        if (this._search &&
+            this._search == document.activeElement &&
             prevState.autocompletions != this.state.autocompletions) {
             this.scrollToSearchControl();
         }
@@ -157,9 +161,9 @@ class Location extends React.Component<Props, State> {
 
     /*::__(){`*/@debounce(500)/*::`}*/
     scrollToSearchControl(): void {
-        if (this.refs.search) {
+        if (this._search) {
             // Scroll the input to just under the appbar
-            window.scrollTo(0, this.refs.search.offsetTop - 40);
+            window.scrollTo(0, this._search.offsetTop - 40);
         }
     }
 
@@ -232,7 +236,9 @@ class Location extends React.Component<Props, State> {
                         <div>
                             <input
                                 type="search"
-                                ref="search"
+                                ref={element => {
+                                    this._search = element;
+                                }}
                                 onFocus={this.scrollToSearchControl.bind(this)}
                                 aria-label="Search for a suburb or postcode"
                                 placeholder="Search for a suburb or postcode"

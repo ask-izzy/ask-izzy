@@ -70,7 +70,7 @@ export default class SvgIcon${className} extends BaseIcon {
 
 
 const importStatements = files.map((file) =>
-    `import SvgIcon${toClassName(file)} from \"./${toClassName(file)}.js\";`
+    `import SvgIcon${toClassName(file)} from \"./${toClassName(file)}\";`
 ).join("\n");
 const exportStatements = files.map((file) =>
     `    ${toClassName(file)}: SvgIcon${toClassName(file)},`

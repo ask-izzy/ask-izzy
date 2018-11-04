@@ -93,6 +93,20 @@
         padding-bottom: 60px;
     }
 
+    .service-list {
+        .leftIcon {
+            top: 18px;
+        }
+
+        .rightIcon {
+            top: 26px;
+        }
+
+        .primaryText {
+            font-weight: 500;
+        }
+    }
+
     .SummaryItem {
         @include clearfix;
 
