@@ -9,6 +9,10 @@
         width: 75%;
         margin: 40px auto;
         text-align: center;
+
+        .phone-number {
+            white-space: nowrap;
+        }
     }
 
     .PhoneIcon {

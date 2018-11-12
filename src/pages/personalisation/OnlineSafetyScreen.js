@@ -72,11 +72,15 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
                         <a href={link1800Respect}>1800 Respect</a> on{" "}
                         {
                             this.props.mobileView ? (
-                                <a href={`tel:${number1800Respect}`}>
+                                <a className="phone-number"
+                                    href={`tel:${number1800Respect}`}
+                                >
                                     {number1800Respect}
                                 </a>
                             ) : (
-                                `${ number1800Respect }`
+                                <span className="phone-number">
+                                    {number1800Respect}
+                                </span>
                             )
                         } for confidential counselling, support and services.
                     </h3>
