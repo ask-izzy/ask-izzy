@@ -4,7 +4,7 @@ import _ from "underscore";
 
 type props = {
     now_open: {
-        local_time: hmsWithColonsTime,
+        local_time: isoDateAndTime,
         notes: string,
         now_open: ?boolean,
     },
