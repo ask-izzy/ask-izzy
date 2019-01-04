@@ -83,10 +83,10 @@ else
 fi
 
 if [ -z "$HTTP_PROXY" ]; then
-	wget -O ./public/static/analytics.js \
+	wget -O ./public/static/analytics-$(cat public/VERSION).js \
 	$GA_FETCH_URL
 else
-    wget -O ./public/static/analytics.js \
+    wget -O ./public/static/analytics-$(cat public/VERSION).js \
     -e use_proxy=yes -e https_proxy=$HTTP_PROXY -e http_proxy=$HTTP_PROXY \
     $GA_FETCH_URL
 fi
@@ -96,10 +96,10 @@ do
 	if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging"  ]; then
 		$SED -r -i -e \
 		"s/${proxy_domains[$var]}/${proxy_prod_domains[$var]}/gi" \
-		./public/static/analytics.js
+		./public/static/analytics-$(cat public/VERSION).js
 	else
 		$SED -r -i -e \
 		"s/${proxy_domains[$var]}/${proxy_dev_domains[$var]}/gi" \
-		./public/static/analytics.js
+		./public/static/analytics-$(cat public/VERSION).js
 	fi
 done
