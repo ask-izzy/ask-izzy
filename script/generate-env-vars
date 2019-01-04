@@ -2,6 +2,8 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+VERSION="$(cat public/VERSION)"
+
 if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging" ]; then
 	PROXY_TYPOGRAPHY="typography-com.askizzy.org.au"
 	PROXY_TAGS="gtagmanager.askizzy.org.au"
@@ -85,4 +87,5 @@ window.PROXY_TAGS = "${PROXY_TAGS}";
 window.PROXY_ANALYTICS = "${PROXY_ANALYTICS}";
 window.DOMAIN_MAPS = ${DOMAIN_MAPS};
 window.EXCLUDED_DOMAINS = ${EXCLUDED_DOMAINS};
+window.VERSION = "${VERSION}";
 JSON
