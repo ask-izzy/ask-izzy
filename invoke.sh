@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eo
+
 case "$1" in
     lint)
         shift 1
