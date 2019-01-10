@@ -1,7 +1,8 @@
 ARG commonPackages='apt-transport-https \
     ca-certificates \
     nginx \
-    parallel'
+    parallel \
+    wget'
 
 FROM contyard.office.infoxchange.net.au/stretch-nodejs8 as test
 
@@ -26,7 +27,6 @@ RUN \
     ${commonPackages} \
     git \
     sudo \
-    wget \
     chromium \
     build-essential \
     python \
