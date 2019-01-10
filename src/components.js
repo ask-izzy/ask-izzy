@@ -34,6 +34,7 @@ import InputListItem from "./components/InputListItem";
 import LimitedTimeMessage from "./components/LimitedTimeMessage";
 import LinkListItem from "./components/LinkListItem";
 import ListItem from "./components/ListItem";
+import LgbtiqIcon from "./components/LgbtiqIcon";
 import LogoWithShadow from "./components/LogoWithShadow";
 import NavBar from "./components/NavBar";
 import Ndis from "./components/Ndis";
@@ -80,6 +81,7 @@ export default {
     IconButton: IconButton,
     IndigenousServiceIcon: IndigenousServiceIcon,
     InputListItem: InputListItem,
+    LgbtiqIcon: LgbtiqIcon,
     LimitedTimeMessage: LimitedTimeMessage,
     LinkListItem: LinkListItem,
     ListItem: ListItem,

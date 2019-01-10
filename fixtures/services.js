@@ -211,6 +211,7 @@ const objects: Object = {
         "is_bulk_billing": false,
         "languages": [],
         "last_updated": "2015-04-16",
+        "lgbtiqa_plus_specific": false,
         "location": {
             "building": "",
             "flat_unit": "",

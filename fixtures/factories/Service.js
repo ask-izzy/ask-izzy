@@ -49,6 +49,7 @@ function defaults() {
             "Italian",
         ],
         last_updated: "2015-02-03",
+        lgbtiqa_plus_specific: false,
         location: Location(),
         name: "Bare Needs",
         ndis_approved: false,

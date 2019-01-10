@@ -16,7 +16,7 @@ class IndigenousServiceIcon extends React.Component<Props, void> {
         }
 
         return (
-            <div>
+            <div className="IndigenousServiceIcon">
                 <DemographicAboriginal
                     className="inline-icon"
                 />
