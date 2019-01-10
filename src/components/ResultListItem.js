@@ -18,6 +18,7 @@ import Ndis from "./Ndis";
 import TransportTime from "./TransportTime";
 import sendEvent from "../google-tag-manager";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
+import LgbtiqIcon from "./LgbtiqIcon";
 import { titleize } from "underscore.string";
 
 class ResultListItem extends React.Component<{
@@ -113,6 +114,7 @@ class ResultListItem extends React.Component<{
                 />
 
                 <IndigenousServiceIcon object={object} />
+                <LgbtiqIcon object={object} />
                 {this.props.nServiceProvisions > 0 && (
                     <div>
                         <ul className="related">

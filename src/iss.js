@@ -399,6 +399,7 @@ export class Service {
     is_bulk_billing: boolean;
     languages: Array<string>;
     last_updated: ymdWithDashesDate;
+    lgbtiqa_plus_specific: boolean;
     location: ?issLocation;
     travelTime: ?travelTime; // From google travel times api
     name: string;
