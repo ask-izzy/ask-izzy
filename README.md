@@ -6,6 +6,7 @@ If you're working on this codebase, some understanding of the following will
 help:
 
  * Node/npm
+ * yarn
  * webpack
  * React
  * jsx (inline templating)
@@ -18,15 +19,14 @@ help:
 
     git clone git@github.com:ask-izzy/ask-izzy.git
     cd ask-izzy
-    npm install
-    bower install
+    yarn install
 
 ## Running the dev server
 
 You will need API keys for [ISS](https://api.serviceseeker.com.au/) and
 Google.
 
-    ISS_URL=... GOOGLE_API_KEY=... ./script/dev-server
+    ENVIRONMENT=dev ISS_URL=... GOOGLE_API_KEY=... ./script/dev-server
 
 ## Dealing with HTTP and browsers
 
