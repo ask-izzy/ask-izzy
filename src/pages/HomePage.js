@@ -60,7 +60,7 @@ class HomePage extends React.Component<{}, void> {
                         >
                             <div className="qexit-txtleft qexit-heightleft" />
                             <div className="qexit-txtright qexit-heightright">
-                                Exit X
+                                Exit &times;
                             </div>
                         </a>
                     </div>

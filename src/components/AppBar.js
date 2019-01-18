@@ -46,7 +46,7 @@ class AppBar extends React.Component<Props, void> {
                                 title={tooltip}
                             >
                                 <div className="quick-exit">
-                                    Exit X
+                                    Exit &times;
                                 </div>
 
 
