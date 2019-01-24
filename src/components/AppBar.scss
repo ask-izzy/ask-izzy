@@ -141,16 +141,34 @@ $colour-grey: #f8f9f9;
     /* if mobile device max width 480px */
     @media only screen and (max-device-width: 480px) {
         .mobile_device {
-            display: block;
-            //padding: 6px 5px;
+            display: flex;
+            justify-content: center;
+            width: 95px;
             float: right;
+            background-color: $colour-red;
+        }
+
+        .exit_text {
+            width: 32px;
+            height: 13px;
+            margin-left: 16px;
+            color: $colour-grey;
+            font-family: Calibri;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: bold;
+            letter-spacing: 0.9px;
+            line-height: 1.1;
+            text-align: center;
+            white-space: nowrap;
+            font-stretch: normal;
         }
 
         .mobile_device img {
-            width: 44px;
-            height: 44px;
+            width: 34px;
+            height: 34px;
+            margin-top: 4px;
             float: right;
-            background-color: $colour-red;
         }
 
         .desktop {display: none;}
@@ -159,14 +177,34 @@ $colour-grey: #f8f9f9;
     /* mobile device (max width is 736px) */
     @media only screen and (max-device-width: 768px) {
         .mobile_device {
-            display: block;
+            display: flex;
+            justify-content: center;
+            width: 95px;
+            float: right;
+            background-color: $colour-red;
+        }
+
+        .exit_text {
+            width: 32px;
+            height: 13px;
+            margin-left: 16px;
+            color: $colour-grey;
+            font-family: Calibri;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: bold;
+            letter-spacing: 0.9px;
+            line-height: 1.1;
+            text-align: center;
+            white-space: nowrap;
+            font-stretch: normal;
         }
 
         .mobile_device img {
-            width: 44px;
-            height: 44px;
+            width: 34px;
+            height: 34px;
+            margin-top: 4px;
             float: right;
-            background-color: $colour-red;
         }
 
         .desktop {display: none;}

@@ -45,11 +45,10 @@ class AppBar extends React.Component<Props, void> {
                             <a href={redirectUri}
                                 title={tooltip}
                             >
-                                <div className="quick-exit">
-                                    Exit &times;
-                                </div>
-
-
+                                <b className="exit_text">Exit</b>
+                                <img src="/static/images/exit-large.png"
+                                    alt="exit"
+                                />
                             </a>
                         </div>
                     </div>
