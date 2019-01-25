@@ -8,12 +8,17 @@ type Props = {
     header: string,
     body: string,
     highlightColor: string,
+    classes: Array<string>,
 }
 
 export default class BaseLogoWithTextBox extends React.Component<Props, void> {
     static contextTypes = {
         router: PropTypes.object.isRequired,
     };
+
+    static defaultProps = {
+        classes: [],
+    }
 
     onClickBox(): void {
         throw new Error("The onClickBox method should be implemented.");
@@ -22,7 +27,9 @@ export default class BaseLogoWithTextBox extends React.Component<Props, void> {
     render(): React.Node {
         return (
             <div
-                className={"LogoWithTextBox"}
+                className={
+                    ["LogoWithTextBox", ...this.props.classes].join(" ")
+                }
                 onClick={this.onClickBox.bind(this)}
             >
                 <div className={"Icon"}>

@@ -53,6 +53,8 @@
     "react-helmet": "5.2.0",
     "react-mixin": "4.0.0",
     "react-router": "3.2.1",
+    "react-wave-stream": "1.0.0",
+    "recorder-js": "git+https://github.com/infoxchange/recorder-js.git#f8c7148a76f11ea26180c1be04e3eb918ff1394c",
     "saffron-sass": "git+https://github.com/infoxchange/saffron.git",
     "sass-lint": "1.12.1",
     "sass-loader": "7.0.3",

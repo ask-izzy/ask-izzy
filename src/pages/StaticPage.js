@@ -11,6 +11,7 @@ export default class StaticPage extends React.Component<{
     title: string,
     bannerName: string,
     children: any,
+    className?: string,
 }, void> {
     static defaultProps: {
         children: null,
@@ -29,7 +30,7 @@ export default class StaticPage extends React.Component<{
         let back = () => this.context.router.goBack();
 
         return (
-            <div className="StaticPage">
+            <div className={["StaticPage", this.props.className].join(" ")}>
                 <AppBar
                     title={this.props.title}
                     onBackTouchTap={back}

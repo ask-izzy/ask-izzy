@@ -19,6 +19,7 @@ import AboutPage from "./pages/AboutPage";
 import NotFoundStaticPage from "./pages/NotFoundStaticPage";
 import AddServicePage from "./pages/AddServicePage";
 import TermsPage from "./pages/TermsPage";
+import ChatPage from "./pages/ChatPage";
 
 import HomelessSheltersStaticPage from "./pages/HomelessSheltersStaticPage";
 import FoodBanksStaticPage from "./pages/FoodBanksStaticPage";
@@ -163,7 +164,11 @@ export default (
             component={InformationPage}
             title="Information"
         />
-
+        <Route
+            path="/chat"
+            component={ChatPage}
+            title="Chat"
+        />
         <Route
             path="/not-found"
             component={NotFoundStaticPage}

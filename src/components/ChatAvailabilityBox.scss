@@ -1,0 +1,13 @@
+.ChatAvailabilityBox {
+    position: fixed;
+    bottom: 0;
+    width: $max-width;
+    background-color: $brand-pane-alt-dark;
+    color: $white;
+    z-index: 1;
+    box-sizing: border-box;
+
+    .Content .Link {
+        display: none;
+    }
+}

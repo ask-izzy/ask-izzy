@@ -1,0 +1,92 @@
+$talk-button-size: 80px;
+$talk-button-color: #ffffff;
+$from-message-bg-color: #e8e8e8;
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+}
+
+.lds-dual-ring::after {
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border: 5px solid $brand-pane-alt-dark;
+    border-radius: 50%;
+    border-color: $brand-pane-alt-dark transparent;
+    content: " ";
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.HeaderBarBanner.chat {
+    background-color: $brand-pane-alt-dark;
+}
+
+.ChatMessage {
+    max-width: 60%;
+    margin: 5px 0;
+    padding: 7px 9px;
+    clear: both;
+    border-radius: 5px;
+
+    &.to {
+        float: left;
+    }
+
+    &.from {
+        position: relative;
+        float: right;
+        background-color: $from-message-bg-color;
+
+        &::after {
+            position: absolute;
+            right: 10px;
+            bottom: -8px;
+            width: 0;
+            height: 0;
+            border-top: 9px solid $from-message-bg-color;
+            border-right: 9px solid transparent;
+            border-left: 9px solid transparent;
+            content: " ";
+        }
+    }
+}
+
+.ChatPage {
+    .body {
+        width: 100%;
+    }
+
+    .TalkButton {
+        width: $talk-button-size;
+        height: $talk-button-size;
+        margin: 0 auto;
+        border-radius: 50%;
+        background-color: $brand-pane-alt-dark;
+        color: $talk-button-color;
+        line-height: $talk-button-size;
+        text-align: center;
+    }
+
+    .MessageContainer {
+        &::after,
+        &::before {
+            display: table;
+            clear: both;
+            content: " ";
+        }
+    }
+}

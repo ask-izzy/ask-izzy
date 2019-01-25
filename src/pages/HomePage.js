@@ -6,6 +6,7 @@ import PropTypes from "proptypes";
 import HeaderBar from "../components/HeaderBar";
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
+import ChatAvailabilityBox from "../components/ChatAvailabilityBox";
 import storage from "../storage";
 
 import { resetDfvOptions } from "../utils";
@@ -110,6 +111,8 @@ class HomePage extends React.Component<{}, void> {
                         </form>
                     </HeaderBar>
                 </div>
+
+                <ChatAvailabilityBox />
 
                 <div className="body">
                     <NavBar />
