@@ -7,14 +7,17 @@ import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
 
-export default class StaticPage extends React.Component<{
+type Props = {
     title: string,
     bannerName: string,
     children: any,
-    className?: string,
-}, void> {
+    className: string,
+}
+
+export default class StaticPage extends React.Component<Props, void> {
     static defaultProps: {
         children: null,
+        className: "",
     };
 
     static sampleProps = {

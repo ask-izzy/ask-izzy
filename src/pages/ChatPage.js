@@ -1,4 +1,4 @@
-/* @flow */
+/* flow:disable */
 /* eslint-disable max-len */
 
 import * as React from "react";
@@ -28,11 +28,12 @@ export default class ChatPage extends React.Component<{}, State> {
     _audioContext: ?AudioContext;
     _soundMeter: ?SoundMeter;
     _mediaRecorder: ?Recorder;
+    _encoder: ?Worker;
 
     _audioCaptureThreshold: number = 0.05;
     _audioFiles = [];
 
-    constructor(props): void {
+    constructor(props: {}): void {
         super(props)
 
         this.state = {
@@ -54,10 +55,9 @@ export default class ChatPage extends React.Component<{}, State> {
 
     connectWebsocket(): void {
         if (!this._websocket || this._websocket.readyState > 1) {
-            // this._websocket = new WebSocket("ws://localhost:8000/ws/askizzy/");
-            this._websocket = new WebSocket("ws://10.51.21.49:8000/ws/askizzy/");
+            this._websocket = new WebSocket(window.SPEECH_SERVER_URL);
 
-            this._websocket.onmessage = function(frame) {
+            this._websocket.onmessage = function(frame: {data: mixed}) {
                 const data = JSON.parse(frame.data);
 
                 this.setState({
@@ -101,7 +101,8 @@ export default class ChatPage extends React.Component<{}, State> {
         }
 
         navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-            .then(this.handleSuccess.bind(this)).catch(this.handleError.bind(this));
+            .then(this.handleSuccess.bind(this))
+            .catch(this.handleError.bind(this));
     }
 
     handleError(error): void {
@@ -150,14 +151,14 @@ export default class ChatPage extends React.Component<{}, State> {
                 this._audioFiles.push((
                     <AudioFile
                         hidden={false}
-                        src={window.URL.createObjectURL(blob)}
+                        src={blob}
                     />
                 ));
             }
         }.bind(this)
     }
 
-    float32Concat(first, second): Float32Array {
+    float32Concat(first: Float32Array, second: Float32Array): Float32Array {
         const firstLength = first.length;
         let result = new Float32Array(firstLength + second.length);
 
@@ -167,60 +168,69 @@ export default class ChatPage extends React.Component<{}, State> {
         return result;
     }
 
-    handleAudioCaptureFinished(data): void {
+    handleAudioCaptureFinished(data: { buffer: Array<Float32Array>, blob: Blob }): void {
         const { buffer } = data;
 
         this.setState({ isProcessing: true });
 
-        const joinedBuffers = this.float32Concat(this.state.soundBuffer, buffer[0]);
+        const joinedBuffers = this.float32Concat(
+            this.state.soundBuffer,
+            buffer[0]
+        );
 
-        this._encoder.postMessage({
-            cmd: "encode",
-            buf: joinedBuffers,
-        });
+        if (this._encoder) {
+            this._encoder.postMessage({
+                cmd: "encode",
+                buf: joinedBuffers,
+            });
+        }
     }
 
-    handleAudioSource(err): void {
+    handleAudioSource(err: Error): void {
         if (err) {
-            console.error("There was an error.", e);
+            console.error("There was an error.", err);
             return;
         }
 
         this._volumeInterval = setInterval(() => {
-            const instantLevel = Math.round(this._soundMeter.instant * 100) / 100;
-            const slowLevel = Math.round(this._soundMeter.slow * 100) / 100;
+            if (this._soundMeter) {
+                const instantLevel = Math.round(this._soundMeter.instant * 100) / 100;
+                const slowLevel = Math.round(this._soundMeter.slow * 100) / 100;
 
-            this.setState({
-                instantLevel,
-                slowLevel,
-            });
+                this.setState({
+                    instantLevel,
+                    slowLevel,
+                });
 
-            if (slowLevel >= this._audioCaptureThreshold) {
-                if (this._mediaRecorder && !this.state.isRecording) {
-                    this.setState({
-                        isRecording: true,
-                        soundBuffer: this._soundMeter.buffer,
-                    });
+                if (slowLevel >= this._audioCaptureThreshold) {
+                    if (this._mediaRecorder && !this.state.isRecording) {
+                        this.setState({
+                            isRecording: true,
+                            soundBuffer: this._soundMeter.buffer,
+                        });
 
-                    this._encoder.postMessage({
-                        cmd: "init",
-                        config: {
-                            samplerate: 44100,
-                            bps: 16,
-                            channels: 1,
-                            compression: 5,
-                        },
-                    });
+                        if (this._encoder) {
+                            this._encoder.postMessage({
+                                cmd: "init",
+                                config: {
+                                    samplerate: 44100,
+                                    bps: 16,
+                                    channels: 1,
+                                    compression: 5,
+                                },
+                            });
+                        }
 
-                    this._mediaRecorder.start();
+                        this._mediaRecorder.start();
+                    }
                 }
-            }
-            if (slowLevel < this._audioCaptureThreshold) {
-                if (this._mediaRecorder && this._encoder && this.state.isRecording) {
-                    this._mediaRecorder.stop().then(data => {
-                        this.setState({ isRecording: false });
-                        this.handleAudioCaptureFinished(data);
-                    });
+                if (slowLevel < this._audioCaptureThreshold) {
+                    if (this._mediaRecorder && this._encoder && this.state.isRecording) {
+                        this._mediaRecorder.stop().then(data => {
+                            this.setState({ isRecording: false });
+                            this.handleAudioCaptureFinished(data);
+                        });
+                    }
                 }
             }
         }, 200);
@@ -247,9 +257,9 @@ export default class ChatPage extends React.Component<{}, State> {
                         )
                     }
                     {
-                        this.state.messages.map(message => {
+                        this.state.messages.map((message, iter) => {
                             return (
-                                <ChatMessage message={message} />
+                                <ChatMessage key={iter} message={message} />
                             );
                         })
                     }

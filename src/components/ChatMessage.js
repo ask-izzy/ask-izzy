@@ -8,6 +8,7 @@ type Props = {
     message: {
         message_type: string,
         body: string,
+        output_audio?: string,
     },
     onClick?: Function,
 }
@@ -19,7 +20,7 @@ export default class ChatMessage extends React.Component<Props, void> {
         }
     }
 
-    render(): React.Element<any> {
+    render(): ?React.Element<any> {
         if (this.props.message.body === "") {
             return null;
         }

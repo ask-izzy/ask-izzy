@@ -3,16 +3,29 @@
 import * as React from "react";
 
 type Props = {
-    src: string,
+    data?: string,
     hidden: boolean,
     autoplay: boolean,
+    src?: string,
 }
 
 export default class AudioFile extends React.Component<Props, void> {
+    _dataUrl: string = "";
+
     static defaultProps = {
         hidden: true,
         autoplay: false,
     };
+
+    constructor(props: Props): void {
+        super(props);
+
+        this._dataUrl = window.URL.createObjectURL(props.data);
+    }
+
+    componentWillUnmount(): void {
+        window.URL.revokeObjectURL(this._dataUrl);
+    }
 
     render(): React.Element<any> {
         const className = this.props.hidden ? "HiddenAudioFile"
@@ -26,11 +39,11 @@ export default class AudioFile extends React.Component<Props, void> {
                     autoPlay={this.props.autoplay}
                     controls={true}
                 >
-                    <source src={this.props.src} />
+                    <source src={this._dataUrl} />
                 </audio>
                 <a
                     download="audio.flac"
-                    href={this.props.src}
+                    href={this._dataUrl}
                 >
                     Download
                 </a>
