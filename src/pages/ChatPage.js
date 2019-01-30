@@ -13,7 +13,6 @@ import ChatInputVolumeDisplay from "../components/ChatInputVolumeDisplay";
 
 type State = {
     analysedAudio: Array<number>,
-    lastAnalysed: number,
     messages: Array<Object>,
     instantLevel: number,
     slowLevel: number,
@@ -23,6 +22,7 @@ type State = {
     isMessagePlaying: boolean,
     showTalkButton: boolean,
     soundBuffer: Float32Array,
+    showErrorMessage: boolean,
 }
 
 export default class ChatPage extends React.Component<{}, State> {
@@ -41,7 +41,6 @@ export default class ChatPage extends React.Component<{}, State> {
 
         this.state = {
             analysedAudio: (new Array(5)).fill(0),
-            lastAnalysed: 0,
             messages: [],
             instantLevel: 0,
             slowLevel: 0,
@@ -50,7 +49,8 @@ export default class ChatPage extends React.Component<{}, State> {
             showWebsocketReconnect: false,
             isProcessing: false,
             showTalkButton: true,
-            soundBuffer: new Float32Array(4096),
+            soundBuffer: new Float32Array(),
+            showErrorMessage: false,
         };
     }
 
@@ -115,7 +115,7 @@ export default class ChatPage extends React.Component<{}, State> {
 
     handleError(error): void {
         console.log("navigator.getUserMedia error: ", JSON.stringify(error));
-        this.setState({ showTalkButton: true });
+        this.setState({ showErrorMessage: true, showTalkButton: true });
     }
 
     handleSuccess(stream): void {
@@ -192,14 +192,15 @@ export default class ChatPage extends React.Component<{}, State> {
     }
 
     analyseAudio(volumeLevel: number): void {
-        const analysing = this.state.lastAnalysed + 1 >= this.state.analysedAudio.length ? 0 : this.state.lastAnalysed + 1;
-
         let newData = this.state.analysedAudio;
 
-        newData.splice(analysing, 1, volumeLevel);
+        newData.splice(
+            Math.floor(Math.random() * this.state.analysedAudio.length),
+            1,
+            volumeLevel
+        );
 
         this.setState({
-            lastAnalysed: analysing,
             analysedAudio: newData,
         });
     }
@@ -317,6 +318,14 @@ export default class ChatPage extends React.Component<{}, State> {
             >
                 <div className="MessageContainer">
                     {
+                        this.state.showErrorMessage && (
+                            <div>
+                                It looks like we're having trouble accessing your microphone.
+                                Please double check you allowed permission and try again.
+                            </div>
+                        )
+                    }
+                    {
                         !this._websocket || (
                             this._websocket.readyState === 0 && (
                                 <ChatMessage
@@ -354,15 +363,16 @@ export default class ChatPage extends React.Component<{}, State> {
                         <div className="lds-dual-ring" />
                     )
                 }
-                <ChatInputVolumeDisplay audioData={this.state.analysedAudio} />
                 {
-                    this.state.showTalkButton && (
+                    this.state.showTalkButton ? (
                         <div
                             className="TalkButton"
                             onClick={this.startVoiceChat.bind(this)}
                         >
                             Talk
                         </div>
+                    ) : (
+                        <ChatInputVolumeDisplay audioData={this.state.analysedAudio} />
                     )
                 }
             </StaticPage>
