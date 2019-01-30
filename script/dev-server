@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+git describe > public/VERSION
+
 set -euo pipefail
 IFS=$'\n\t'
 PATH=`npm bin`:$PATH
