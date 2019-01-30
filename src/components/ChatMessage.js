@@ -54,7 +54,7 @@ export default class ChatMessage extends React.Component<Props, void> {
 
     render(): ?React.Element<any> {
         try {
-            if (!this.props.message.fulfillment_messages.texts.length && this.props.message.fulfillment_messages.texts[0] === "") {
+            if (!this.props.message.fulfillment_messages.texts.length || this.props.message.fulfillment_messages.texts[0] === "") {
                 return null;
             }
         } catch (exc) {
