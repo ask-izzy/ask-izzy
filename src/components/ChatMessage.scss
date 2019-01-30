@@ -1,6 +1,7 @@
 $talk-button-size: 80px;
 $talk-button-color: #ffffff;
 $from-message-bg-color: #e8e8e8;
+$message-border-radius: 8px;
 
 .lds-dual-ring {
     width: 64px;
@@ -16,6 +17,7 @@ $from-message-bg-color: #e8e8e8;
     border: 5px solid $brand-pane-alt-dark;
     border-radius: 50%;
     border-color: $brand-pane-alt-dark transparent;
+    font-size: 1px;
     content: " ";
     animation: lds-dual-ring 1.2s linear infinite;
 }
@@ -35,19 +37,25 @@ $from-message-bg-color: #e8e8e8;
 }
 
 .ChatMessage {
-    max-width: 60%;
-    margin: 5px 0;
-    padding: 7px 9px;
-    clear: both;
-    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
 
-    &.to {
-        float: left;
+    .to,
+    .from {
+        display: inline-block;
+        max-width: 60%;
+        margin: 5px 0;
+        padding: 7px 9px;
+        border-radius: $message-border-radius;
     }
 
-    &.from {
+    .to {
+        align-self: flex-start;
+    }
+
+    .from {
         position: relative;
-        float: right;
+        align-self: flex-end;
         background-color: $from-message-bg-color;
 
         &::after {
@@ -81,11 +89,42 @@ $from-message-bg-color: #e8e8e8;
     }
 
     .MessageContainer {
-        &::after,
-        &::before {
-            display: table;
-            clear: both;
-            content: " ";
+        display: flex;
+        flex-direction: column;
+    }
+
+    .QuickReplyContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+}
+
+.ChatQuickReply {
+    padding: 6px 11px;
+    border: 1px solid $brand-pane-alt-dark;
+    border-radius: $message-border-radius;
+    color: $brand-pane-alt-dark;
+    cursor: pointer;
+
+    &:not(:last-of-type) {
+        margin-right: 6px;
+    }
+}
+
+.InputVolumeDisplayContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+
+    .InputVolumeDisplayBar {
+        width: 10px;
+        transition: 0.1s ease;
+        background-color: $brand-pane-alt-dark;
+
+        &:not(:last-child) {
+            margin-right: 4px;
         }
     }
 }

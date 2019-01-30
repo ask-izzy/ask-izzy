@@ -12,12 +12,16 @@ type Props = {
     bannerName: string,
     children: any,
     className: string,
+    bannerTitle: string,
+    bannerSubtitle: string,
 }
 
 export default class StaticPage extends React.Component<Props, void> {
     static defaultProps: {
         children: null,
         className: "",
+        bannerTitle: "",
+        bannerSubtitle: "",
     };
 
     static sampleProps = {
@@ -39,14 +43,14 @@ export default class StaticPage extends React.Component<Props, void> {
                     onBackTouchTap={back}
                 />
                 {
-                    this.props.bannerName ?
+                    this.props.bannerName && (
                         <HeaderBar
-                            primaryText={null}
-                            secondaryText={null}
+                            primaryText={this.props.bannerTitle}
+                            secondaryText={this.props.bannerSubtitle}
                             bannerName={this.props.bannerName}
                             alternateBackgroundColor={false}
                         />
-                        : null
+                    )
                 }
 
                 <div className="body">

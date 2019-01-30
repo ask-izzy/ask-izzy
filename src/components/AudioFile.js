@@ -7,10 +7,13 @@ type Props = {
     hidden: boolean,
     autoplay: boolean,
     src?: string,
+    onAudioStart?: Function,
+    onAudioEnd?: Function,
 }
 
 export default class AudioFile extends React.Component<Props, void> {
     _dataUrl: string = "";
+    _audioElement: ?React.Element<any>;
 
     static defaultProps = {
         hidden: true,
@@ -20,11 +23,32 @@ export default class AudioFile extends React.Component<Props, void> {
     constructor(props: Props): void {
         super(props);
 
-        this._dataUrl = window.URL.createObjectURL(props.data);
+        if (props.src) {
+            this._dataUrl = props.src;
+        } else {
+            window.URL.createObjectURL(props.data);
+        }
     }
 
     componentWillUnmount(): void {
-        window.URL.revokeObjectURL(this._dataUrl);
+        try {
+            window.URL.revokeObjectURL(this._dataUrl);
+        } catch (err) {
+            // This mightn't be a browser created object URL, so we can
+            // ignore this error.
+        }
+    }
+
+    onAudioStart(): void {
+        if (this.props.onAudioStart) {
+            this.props.onAudioStart();
+        }
+    }
+
+    onAudioEnd(): void {
+        if (this.props.onAudioEnd) {
+            this.props.onAudioEnd();
+        }
     }
 
     render(): React.Element<any> {
@@ -38,6 +62,8 @@ export default class AudioFile extends React.Component<Props, void> {
                 <audio
                     autoPlay={this.props.autoplay}
                     controls={true}
+                    onEnded={this.onAudioEnd.bind(this)}
+                    onPlay={this.onAudioStart.bind(this)}
                 >
                     <source src={this._dataUrl} />
                 </audio>

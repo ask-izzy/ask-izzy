@@ -9,15 +9,18 @@ import ChatMessage from "../components/ChatMessage";
 import AudioFile from "../components/AudioFile";
 
 import SoundMeter from "../utils/soundmeter";
+import ChatInputVolumeDisplay from "../components/ChatInputVolumeDisplay";
 
 type State = {
     analysedAudio: Array<number>,
+    lastAnalysed: number,
     messages: Array<Object>,
     instantLevel: number,
     slowLevel: number,
     isRecording: boolean,
     showWebsocketReconnect: boolean,
     isProcessing: boolean,
+    isMessagePlaying: boolean,
     showTalkButton: boolean,
     soundBuffer: Float32Array,
 }
@@ -37,11 +40,13 @@ export default class ChatPage extends React.Component<{}, State> {
         super(props)
 
         this.state = {
-            analysedAudio: [0, 0, 0],
+            analysedAudio: (new Array(5)).fill(0),
+            lastAnalysed: 0,
             messages: [],
             instantLevel: 0,
             slowLevel: 0,
             isRecording: false,
+            isMessagePlaying: false,
             showWebsocketReconnect: false,
             isProcessing: false,
             showTalkButton: true,
@@ -67,7 +72,10 @@ export default class ChatPage extends React.Component<{}, State> {
             }.bind(this);
 
             this._websocket.onclose = function(err) {
-                this.setState({ showWebsocketReconnect: true });
+                this.setState({
+                    showWebsocketReconnect: true,
+                    isProcessing: false,
+                });
                 console.error("Chat socket closed unexpectedly.", err);
                 this._websocket = undefined;
             }.bind(this);
@@ -116,9 +124,6 @@ export default class ChatPage extends React.Component<{}, State> {
         console.log("Media Recorder starting");
         this._mediaRecorder = new Recorder(this._audioContext, {
             nFrequencyBars: 3,
-            onAnalysed: data => {
-                this.setState({ analysedAudio: data })
-            },
             microphoneConfig: {
                 numChannels: 1,
             },
@@ -151,7 +156,7 @@ export default class ChatPage extends React.Component<{}, State> {
                 this._audioFiles.push((
                     <AudioFile
                         hidden={false}
-                        src={blob}
+                        data={blob}
                     />
                 ));
             }
@@ -186,6 +191,51 @@ export default class ChatPage extends React.Component<{}, State> {
         }
     }
 
+    analyseAudio(volumeLevel: number): void {
+        const analysing = this.state.lastAnalysed + 1 >= this.state.analysedAudio.length ? 0 : this.state.lastAnalysed + 1;
+
+        let newData = this.state.analysedAudio;
+
+        newData.splice(analysing, 1, volumeLevel);
+
+        this.setState({
+            lastAnalysed: analysing,
+            analysedAudio: newData,
+        });
+    }
+
+    startRecording(): void {
+        if (this._mediaRecorder && !this.state.isRecording && !this.state.isMessagePlaying) {
+            this.setState({
+                isRecording: true,
+                soundBuffer: this._soundMeter.buffer,
+            });
+
+            if (this._encoder) {
+                this._encoder.postMessage({
+                    cmd: "init",
+                    config: {
+                        samplerate: 44100,
+                        bps: 16,
+                        channels: 1,
+                        compression: 5,
+                    },
+                });
+            }
+
+            this._mediaRecorder.start();
+        }
+    }
+
+    stopRecording(): void {
+        if (this._mediaRecorder && this._encoder && this.state.isRecording) {
+            this._mediaRecorder.stop().then(data => {
+                this.setState({ isRecording: false });
+                this.handleAudioCaptureFinished(data);
+            });
+        }
+    }
+
     handleAudioSource(err: Error): void {
         if (err) {
             console.error("There was an error.", err);
@@ -202,38 +252,58 @@ export default class ChatPage extends React.Component<{}, State> {
                     slowLevel,
                 });
 
+                this.analyseAudio(instantLevel);
+
                 if (slowLevel >= this._audioCaptureThreshold) {
-                    if (this._mediaRecorder && !this.state.isRecording) {
-                        this.setState({
-                            isRecording: true,
-                            soundBuffer: this._soundMeter.buffer,
-                        });
-
-                        if (this._encoder) {
-                            this._encoder.postMessage({
-                                cmd: "init",
-                                config: {
-                                    samplerate: 44100,
-                                    bps: 16,
-                                    channels: 1,
-                                    compression: 5,
-                                },
-                            });
-                        }
-
-                        this._mediaRecorder.start();
-                    }
+                    this.startRecording();
                 }
                 if (slowLevel < this._audioCaptureThreshold) {
-                    if (this._mediaRecorder && this._encoder && this.state.isRecording) {
-                        this._mediaRecorder.stop().then(data => {
-                            this.setState({ isRecording: false });
-                            this.handleAudioCaptureFinished(data);
-                        });
-                    }
+                    this.stopRecording();
                 }
             }
         }, 200);
+    }
+
+    quickReplyTriggered(action): void {
+        if (this._websocket) {
+            this.setState({
+                isProcessing: true,
+            });
+
+            this._websocket.send(JSON.stringify({
+                message: action,
+            }));
+        }
+    }
+
+    onMessageAnnounceStart(): void {
+        this.setState({
+            isMessagePlaying: true,
+        });
+    }
+
+    onMessageAnnounceEnd(): void {
+        setTimeout(() => {
+            this.setState({
+                isMessagePlaying: false,
+            });
+        }, 550);
+    }
+
+    renderMessages(): React.Element<any> {
+        return this.state.messages.map((message, iter) => {
+            return (
+                <React.Fragment key={iter}>
+                    <ChatMessage
+                        message={message}
+                        showQuickRepliesIfAvailable={iter + 1 === this.state.messages.length && !this.state.isProcessing}
+                        quickReplyCallback={this.quickReplyTriggered.bind(this)}
+                        onMessageAnnounceStart={this.onMessageAnnounceStart.bind(this)}
+                        onMessageAnnounceEnd={this.onMessageAnnounceEnd.bind(this)}
+                    />
+                </React.Fragment>
+            );
+        });
     }
 
     render(): React.Element<any> {
@@ -242,6 +312,8 @@ export default class ChatPage extends React.Component<{}, State> {
                 title="Chat to Izzy"
                 bannerName="chat static"
                 className="ChatPage"
+                bannerTitle="I'm Izzy, ask me anything!"
+                bannerSubtitle="Our chat is private and anonymous."
             >
                 <div className="MessageContainer">
                     {
@@ -250,25 +322,27 @@ export default class ChatPage extends React.Component<{}, State> {
                                 <ChatMessage
                                     message={{
                                         message_type: "to",
-                                        body: "Connecting to server...",
+                                        fulfillment_messages: {
+                                            texts: [
+                                                "Connecting to server...",
+                                            ],
+                                        },
                                     }}
                                 />
                             )
                         )
                     }
-                    {
-                        this.state.messages.map((message, iter) => {
-                            return (
-                                <ChatMessage key={iter} message={message} />
-                            );
-                        })
-                    }
+                    {this.renderMessages()}
                     {
                         this.state.showWebsocketReconnect && (
                             <ChatMessage
                                 message={{
                                     message_type: "to",
-                                    body: "You've been disconnected. Click here to reconnect.",
+                                    fulfillment_messages: {
+                                        texts: [
+                                            "You've been disconnected. Click here to reconnect.",
+                                        ],
+                                    },
                                 }}
                                 onClick={this.connectWebsocket.bind(this)}
                             />
@@ -280,6 +354,7 @@ export default class ChatPage extends React.Component<{}, State> {
                         <div className="lds-dual-ring" />
                     )
                 }
+                <ChatInputVolumeDisplay audioData={this.state.analysedAudio} />
                 {
                     this.state.showTalkButton && (
                         <div
