@@ -28,7 +28,7 @@ export default class BaseLogoWithTextBox extends React.Component<Props, void> {
         return (
             <div
                 className={
-                    ["LogoWithTextBox", ...this.props.classes].join(" ")
+                    ["LogoWithTextBox"].concat(this.props.classes).join(" ")
                 }
                 onClick={this.onClickBox.bind(this)}
             >
