@@ -6,18 +6,22 @@ conffile=$(mktemp -t nginxconf.XXXXXX)
 
 echo $(pwd)
 
-stripped_iss_host=$(echo $ISS_URL | sed -r "s%//[^0-9]+:[^0-9]+@%//%; s%/$%%")
+export APP_PWD=$(pwd)
+export STRIPPED_ISS_HOST=$(echo $ISS_URL | sed -r "s%//[^0-9]+:[^0-9]+@%//%; s%/$%%")
 
-sed "s%/app/public%$(pwd)/public%g; s%/iss_host/%$stripped_iss_host%g" < conf/nginx.conf > "$conffile"
+cat conf/nginx.conf > "$conffile"
 
-if [ ! -z "$HTTP_PROXY" ]; then
-    PROXY_PLACEHOLDER="#proxy_pass HTTP_PROXY"
-    PROXY_VALUE="proxy_pass ${HTTP_PROXY}"
-
-    sed -r -i -e \
-    "s%${PROXY_PLACEHOLDER}%${PROXY_VALUE}%gi" \
-    $conffile
+# Set the nginx csp config
+# Add default SAMEORIGIN settings if no environment variable is present
+if [ ! -z "$ALLOW_FRAME_ANCESTORS" ]; then
+    export X_FRAME_OPTIONS="ALLOW-FROM $ALLOW_FRAME_ANCESTORS"
+    export CSP_HEADERS="frame-ancestors 'self' $ALLOW_FRAME_ANCESTORS"
+else
+    export X_FRAME_OPTIONS="SAMEORIGIN"
+    export CSP_HEADERS="frame-ancestors 'self'"
 fi
+
+echo "$(envsubst '${X_FRAME_OPTIONS} ${CSP_HEADERS} ${STRIPPED_ISS_HOST} ${APP_PWD}' < $conffile)" > "$conffile" 
 
 cat $conffile
 

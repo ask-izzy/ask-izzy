@@ -1,5 +1,6 @@
 ARG commonPackages='apt-transport-https \
     ca-certificates \
+    gettext \
     nginx \
     parallel \
     wget'
