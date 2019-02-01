@@ -144,25 +144,15 @@ $colour-grey: #f8f9f9;
             display: flex;
             justify-content: center;
             width: 95px;
+            height: $appbar-height;
             float: right;
             background-color: $colour-red;
         }
 
         .exit_text {
-            width: 32px;
-            height: 13px;
-            margin-left: 16px;
             color: $colour-grey;
-            font-size: 20px;
+            font-size: 17px;
             font-weight: bold;
-            line-height: 1.1;
-        }
-
-        .mobile_device img {
-            width: 34px;
-            height: 34px;
-            margin-top: 4px;
-            float: right;
         }
 
         .desktop {display: none;}
@@ -174,25 +164,15 @@ $colour-grey: #f8f9f9;
             display: flex;
             justify-content: center;
             width: 95px;
+            height: $appbar-height;
             float: right;
             background-color: $colour-red;
         }
 
         .exit_text {
-            width: 32px;
-            height: 13px;
-            margin-left: 16px;
             color: $colour-grey;
-            font-size: 20px;
+            font-size: 17px;
             font-weight: bold;
-            line-height: 1.1;
-        }
-
-        .mobile_device img {
-            width: 34px;
-            height: 34px;
-            margin-top: 4px;
-            float: right;
         }
 
         .desktop {display: none;}
