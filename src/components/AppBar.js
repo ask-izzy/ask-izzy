@@ -41,7 +41,7 @@ class AppBar extends React.Component<Props, void> {
                                 Quick Exit X
                             </div>
                         </a>
-                        <div className="mobile_device" >
+                        <div className="mobile_device">
                             <a href={redirectUri}
                                 title={tooltip}
                             >
