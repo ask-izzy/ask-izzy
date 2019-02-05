@@ -6,12 +6,16 @@ import * as React from "react";
 import AudioFile from "./AudioFile";
 import ChatQuickReply from "./ChatQuickReply";
 
+interface IXArray<V> extends Array<V> {
+    randomElement(): any;
+}
+
 type Props = {
     message: {
         message_type: string,
         output_audio?: string,
         fulfillment_messages: {
-            texts: Array<string>,
+            texts: IXArray<string>,
             quick_replies: Array<string>,
             cards: Array<Object>,
         }
