@@ -7,7 +7,7 @@ export NODE_ENV=production
 export PORT=8010
 export INTERACTIVE_TIMEOUT="10000"
 
-ISS_URL="http://localhost:5000/" ./script/test-setup
+ISS_URL="http://localhost:5000/" . ./script/test-setup
 
 function runTest {
     JOB_NUM=$1
