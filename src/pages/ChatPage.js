@@ -6,6 +6,8 @@ import Recorder from "recorder-js";
 
 import StaticPage from "./StaticPage";
 import ChatMessage from "../components/ChatMessage";
+import DebugContainer from "../components/DebugContainer";
+import DebugChatMessages from "../components/DebugChatMessages";
 import AudioFile from "../components/AudioFile";
 
 import SoundMeter from "../utils/soundmeter";
@@ -266,13 +268,17 @@ export default class ChatPage extends React.Component<{}, State> {
     }
 
     quickReplyTriggered(action): void {
+        this.sendTextIntent(action);
+    }
+
+    sendTextIntent(textIntent): void {
         if (this._websocket) {
             this.setState({
                 isProcessing: true,
             });
 
             this._websocket.send(JSON.stringify({
-                message: action,
+                message: textIntent,
             }));
         }
     }
@@ -363,6 +369,9 @@ export default class ChatPage extends React.Component<{}, State> {
                         <div className="lds-dual-ring" />
                     )
                 }
+                <DebugContainer message="Text Intents">
+                    <DebugChatMessages onMessageSubmit={this.sendTextIntent.bind(this)} />
+                </DebugContainer>
                 {
                     this.state.showTalkButton ? (
                         <div

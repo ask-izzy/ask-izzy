@@ -5,6 +5,7 @@ PATH=$(npm bin):$PATH
 
 export NODE_ENV=production
 export PORT=8010
+export SPEECH_SERVER_URL=ws://localhost
 
 # Set up the environment variables. If using forklift, these will be
 # whatever is specified in your .yaml file, or whatever is passed in
