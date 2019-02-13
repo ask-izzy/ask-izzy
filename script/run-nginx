@@ -12,14 +12,8 @@ export STRIPPED_ISS_HOST=$(echo $ISS_URL | sed -r "s%//[^0-9]+:[^0-9]+@%//%; s%/
 cat conf/nginx.conf > "$conffile"
 
 # Set the nginx csp config
-# Add default SAMEORIGIN settings if no environment variable is present
-if [ ! -z "$ALLOW_FRAME_ANCESTORS" ]; then
-    export X_FRAME_OPTIONS="ALLOW-FROM $ALLOW_FRAME_ANCESTORS"
-    export CSP_HEADERS="frame-ancestors 'self' $ALLOW_FRAME_ANCESTORS"
-else
-    export X_FRAME_OPTIONS="SAMEORIGIN"
-    export CSP_HEADERS="frame-ancestors 'self'"
-fi
+export X_FRAME_OPTIONS="SAMEORIGIN"
+export CSP_HEADERS="frame-ancestors 'self'"
 
 echo "$(envsubst '${X_FRAME_OPTIONS} ${CSP_HEADERS} ${STRIPPED_ISS_HOST} ${APP_PWD}' < $conffile)" > "$conffile" 
 
