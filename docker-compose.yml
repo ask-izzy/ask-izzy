@@ -11,7 +11,6 @@ services:
             # Pallet
             DEVNAME: docker
             ENVIRONMENT: dev
-            ALLOW_FRAME_ANCESTORS: "*.foodbank.org.au:*"
             
             # Services
             ISS_URL: https://UNDFUUWCHWGIJGTGMTBXZJDENAACETNJ:XBKSEBMIGVELOOSTGZFEJHKZWCKAFZUY@iss3-test.docker.dev

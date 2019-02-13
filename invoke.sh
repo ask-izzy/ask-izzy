@@ -53,8 +53,6 @@ case "$1" in
         ./script/build-gmaps-file
         cp ./public/static/scripts/request-interceptor.js ./public/static/scripts/request-interceptor-$(cat public/VERSION).js
         cp -r ./public/static/* /static/
-	# create nginx conf
-	echo "$(envsubst '${CSP_FRAME_ANCESTORS}' < conf/nginx.conf)" > conf/nginx.conf
         ;;
 
     serve)
