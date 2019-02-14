@@ -5,7 +5,8 @@
 If you're working on this codebase, some understanding of the following will
 help:
 
- * Node/npm
+ * Node (version 8)
+ * npm (versions 6.x and above)
  * yarn
  * webpack
  * React
@@ -17,16 +18,22 @@ help:
 
 ## Getting the code
 
+Run the following terminal commands:
+
     git clone git@github.com:ask-izzy/ask-izzy.git
     cd ask-izzy
     yarn install
 
 ## Running the dev server
 
-You will need API keys for [ISS](https://api.serviceseeker.com.au/) and
-Google.
+You will need to insert API keys for [ISS](https://api.serviceseeker.com.au/) and
+Google into the following command:
 
-    ENVIRONMENT=dev ISS_URL=... GOOGLE_API_KEY=... ./script/dev-server
+    ENVIRONMENT="dev" NODE_ENV="development" ISS_URL=... GOOGLE_API_KEY=... ./script/dev-server
+
+You can find the ISS API key on the ISS admin instance under consumers.
+
+The Google API key is set by the Dev team in appvars.
 
 ## Dealing with HTTP and browsers
 
@@ -48,7 +55,6 @@ Once the page JS loads:
  * once any async data arrives from ISS, the page is updated again
 
 ## Ask Izzy Routes
-
 
 Here are the explict paths that AskIzzy supports:
 
@@ -95,7 +101,8 @@ Examples for routes terms are given below:
 Note: Ask Izzy categories or static pages must NEVER be named "search", "static", "session", "service", "category" or "in".
 
 ### Building HTML pages
-See `server/render-static.js`
+
+See `server/render-static.js`.
 
 ### Building JS and CSS
 
@@ -138,7 +145,7 @@ Promises are part of the JS standard and are supported
 natively in every browser except IE (where they are polyfilled),
 but async and await are not yet standardized (see 
 https://github.com/tc39/ecmascript-asyncawait 
-for the in-progress standard)
+for the in-progress standard).
 
 ## Type system (flowtype)
 
@@ -220,23 +227,11 @@ Maps features live in `test/maps` with step definitions in `test/steps` invoked 
 Personalisation features live in `test/personalisation` with step definitions in `test/steps` invoked from `test/personlisation.js`. They use `yadda`.
 Search features live in `test/search` with step definitions in `test/search-steps` invoked from `test/search.js`. They use `yadda`.
 
-### Forklift / docker
+### Docker
 
 The dockerfile can run the tests but there's currently 
-no development server in `invoke.sh` (should be easy to 
-fix but I don't use docker locally).
-
-If you're using [forklift](https://github.com/infoxchange/docker-forklift)
-then you can add a config file `~/.config/forklift/ask-izzy.yaml`:
-
-    environment:
-        ISS_URL: ...
-        # ISS_URL: http://localhost:5000
-        GOOGLE_API_KEY: ...
-
-And run:
-
-    forklift -- ./script/dev-server
+no development server in `invoke.sh` (should be an easy 
+fix but docker isn't typically run locally).
 
 There's also a mock ISS server available as `./script/mock-iss`. This will
 start a server on `localhost:5000`.
@@ -256,7 +251,7 @@ Link up the git hooks:
 
     ln -s ../.githooks .git/hooks
 
-Add the git merge strategies to `.git/config`:
+Add the git merge strategies to your `.git/config` file:
 
     [include]
         path = ../.gitmerge/strategies
