@@ -75,7 +75,7 @@ const categories:Array<Category> = [
     }),
     new Category({
         name: "Everyday things",
-        byline: "Swags, clothes, food vouchers etc",
+        byline: "Swags, clothes, food vouchers etc.",
         icon: icons.Things,
         search: {
             q: "material aid -(coordinating bodies)",
@@ -115,7 +115,7 @@ const categories:Array<Category> = [
     }),
     new Category({
         name: "Money help",
-        byline: "Emergency funds, bills etc",
+        byline: "Emergency funds, bills etc.",
         icon: icons.Money,
         search: {
             q: "financial aid -(coordinating bodies) -grants -heritage",
@@ -211,7 +211,7 @@ const categories:Array<Category> = [
     }),
     new Category({
         name: "Something to do",
-        byline: "Libraries, Community Hubs etc",
+        byline: "Libraries, Community Hubs etc.",
         icon: icons.Entertainment,
         search: {
             q: "recreation libraries pools -(coordinating bodies) " +
@@ -225,7 +225,7 @@ const categories:Array<Category> = [
     }),
     new Category({
         name: "Technology",
-        byline: "Wifi, charging etc",
+        byline: "Wifi, charging etc.",
         icon: icons.Tech,
         search: {
             q: "wifi internet computer",
