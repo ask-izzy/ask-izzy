@@ -28,7 +28,7 @@ RUN \
     ${commonPackages} \
     git \
     sudo \
-    chromium \
+    chromium=70.0.3538.110-1~deb9u1 \
     build-essential \
     python \
     libelf-dev && \
