@@ -13,6 +13,8 @@ import AudioFile from "../components/AudioFile";
 import SoundMeter from "../utils/soundmeter";
 import ChatInputVolumeDisplay from "../components/ChatInputVolumeDisplay";
 
+import storage from "../storage";
+
 type State = {
     analysedAudio: Array<number>,
     messages: Array<Object>,
@@ -63,6 +65,12 @@ export default class ChatPage extends React.Component<{}, State> {
     connectWebsocket(): void {
         if (!this._websocket || this._websocket.readyState > 1) {
             this._websocket = new WebSocket(window.SPEECH_SERVER_URL);
+
+            this._websocket.onopen = function() {
+                this._websocket.send(JSON.stringify({
+                    context: storage.getAllItems(),
+                }))
+            }.bind(this)
 
             this._websocket.onmessage = function(frame: {data: mixed}) {
                 const data = JSON.parse(frame.data);
@@ -150,7 +158,8 @@ export default class ChatPage extends React.Component<{}, State> {
 
                     if (this._websocket) {
                         this._websocket.send(JSON.stringify({
-                            audio: base64,
+                            cmd: 'audio',
+                            data: base64,
                         }));
                     }
                 }.bind(this)
@@ -278,7 +287,8 @@ export default class ChatPage extends React.Component<{}, State> {
             });
 
             this._websocket.send(JSON.stringify({
-                message: textIntent,
+                cmd: 'text',
+                data: textIntent,
             }));
         }
     }

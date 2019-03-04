@@ -149,6 +149,18 @@ const Storage = {
         persistentStore.removeItem(key);
         sessionStore.removeItem(key);
     },
+
+    getAllItems(): Object {
+        return Object.keys(persistentStore).reduce((carry, key) => {
+            return Object.assign(
+                {},
+                carry,
+                {
+                    [key]: persistentStore.getItem(key),
+                }
+            )
+        }, {})
+    }
 }
 
 if (typeof window != "undefined") {
