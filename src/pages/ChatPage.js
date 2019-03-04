@@ -68,7 +68,8 @@ export default class ChatPage extends React.Component<{}, State> {
 
             this._websocket.onopen = function() {
                 this._websocket.send(JSON.stringify({
-                    context: storage.getAllItems(),
+                    cmd: 'set_context',
+                    data: storage.getAllItems(),
                 }))
             }.bind(this)
 
