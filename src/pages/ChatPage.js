@@ -311,7 +311,7 @@ export default class ChatPage extends React.Component<{}, State> {
     renderMessages(): React.Element<any> {
         return this.state.messages.map((message, iter) => {
             return (
-                <React.Fragment key={iter}>
+                <React.Fragment key={`message${iter}`}>
                     <ChatMessage
                         message={message}
                         showQuickRepliesIfAvailable={iter + 1 === this.state.messages.length && !this.state.isProcessing}

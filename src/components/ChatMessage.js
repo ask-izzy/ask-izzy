@@ -6,6 +6,8 @@ import * as React from "react";
 import AudioFile from "./AudioFile";
 import ChatQuickReply from "./ChatQuickReply";
 
+import LocationAction from "./quickReplyActions/LocationAction";
+
 interface IXArray<V> extends Array<V> {
     randomElement(): any;
 }
@@ -27,9 +29,14 @@ type Props = {
     onMessageAnnounceEnd?: Function,
 }
 
+
 export default class ChatMessage extends React.Component<Props, void> {
     static defaultProps = {
         showQuickRepliesIfAvailable: false,
+    }
+
+    extraDisplayComponents = {
+        'getUserLocation': LocationAction,
     }
 
     clickHandler(): void {
@@ -54,6 +61,58 @@ export default class ChatMessage extends React.Component<Props, void> {
         if (this.props.onMessageAnnounceEnd) {
             this.props.onMessageAnnounceEnd();
         }
+    }
+
+    generateQuickReplies(): ?React.Element<any> {
+        let quickReplies = [];
+
+        try {
+            quickReplies = this.props.message.fulfillment_messages.quick_replies;
+        } catch (err) {
+            // We don't need to do anything here.
+        }
+
+        if (quickReplies.length) {
+            return (
+                <div className="QuickReplyContainer">
+                    {
+                        quickReplies.map((reply, iter) => (
+                            <ChatQuickReply
+                                key={`quickreply${iter}`}
+                                action={reply}
+                                onClick={this.quickReplyHandler.bind(this, reply)}
+                            />
+                        ))
+                    }
+                </div>
+            )
+        }
+    }
+
+    generateExtraDataComponent(): ?React.Element<any> {
+        let displayComponent = null;
+
+        try {
+            displayComponent = this.props.message.fulfillment_messages.extra.webhook_payload.drawComponent;
+        } catch (err) {
+            // We don't need to do anything here.
+        }
+
+        if (displayComponent) {
+            const Component = this.extraDisplayComponents[displayComponent];
+
+            return (
+                <div className="QuickReplyContainer">
+                    <Component
+                        onSuccess={this.handleExtraDataComponentSuccess.bind(this)}
+                    />
+                </div>
+            );
+        }
+    }
+
+    handleExtraDataComponentSuccess(data): void {
+        console.log(data)
     }
 
     render(): ?React.Element<any> {
@@ -94,28 +153,10 @@ export default class ChatMessage extends React.Component<Props, void> {
         )];
 
         if (this.props.showQuickRepliesIfAvailable) {
-            let quickReplies = [];
-
             try {
-                quickReplies = this.props.message.fulfillment_messages.quick_replies;
-            } catch (err) {
-                // We don't need to do anything here.
-            }
-
-            if (quickReplies.length) {
-                output.push((
-                    <div className="QuickReplyContainer">
-                        {
-                            quickReplies.map((reply, iter) => (
-                                <ChatQuickReply
-                                    key={iter}
-                                    action={reply}
-                                    onClick={this.quickReplyHandler.bind(this, reply)}
-                                />
-                            ))
-                        }
-                    </div>
-                ))
+                output.push(this.generateExtraDataComponent());
+            } catch (exc) {
+                output.push(this.generateQuickReplies());
             }
         }
 
