@@ -29,6 +29,13 @@ type State = {
     showErrorMessage: boolean,
 }
 
+export const Context = React.createContext();
+
+export type ContextType = {
+    setProcessing: Function,
+    websocket: WebSocket,
+};
+
 export default class ChatPage extends React.Component<{}, State> {
     _websocket: ?WebSocket;
     _volumeInterval: ?IntervalID;
@@ -311,15 +318,26 @@ export default class ChatPage extends React.Component<{}, State> {
     renderMessages(): React.Element<any> {
         return this.state.messages.map((message, iter) => {
             return (
-                <React.Fragment key={`message${iter}`}>
-                    <ChatMessage
-                        message={message}
-                        showQuickRepliesIfAvailable={iter + 1 === this.state.messages.length && !this.state.isProcessing}
-                        quickReplyCallback={this.quickReplyTriggered.bind(this)}
-                        onMessageAnnounceStart={this.onMessageAnnounceStart.bind(this)}
-                        onMessageAnnounceEnd={this.onMessageAnnounceEnd.bind(this)}
-                    />
-                </React.Fragment>
+                <Context.Provider
+                    value={{
+                        websocket: this._websocket,
+                        setProcessing: () => {
+                            this.setState({
+                                isProcessing: true,
+                            })
+                        },
+                    }}
+                >
+                    <React.Fragment key={`message${iter}`}>
+                        <ChatMessage
+                            message={message}
+                            showQuickRepliesIfAvailable={iter + 1 === this.state.messages.length && !this.state.isProcessing}
+                            quickReplyCallback={this.quickReplyTriggered.bind(this)}
+                            onMessageAnnounceStart={this.onMessageAnnounceStart.bind(this)}
+                            onMessageAnnounceEnd={this.onMessageAnnounceEnd.bind(this)}
+                        />
+                    </React.Fragment>
+                </Context.Provider>
             );
         });
     }

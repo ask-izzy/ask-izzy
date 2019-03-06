@@ -7,9 +7,23 @@ import AudioFile from "./AudioFile";
 import ChatQuickReply from "./ChatQuickReply";
 
 import LocationAction from "./quickReplyActions/LocationAction";
+import { Context } from "../pages/ChatPage";
+
+import ChatResultCard from "./ChatResultCard";
 
 interface IXArray<V> extends Array<V> {
     randomElement(): any;
+}
+
+export type CardButtonType = {
+    text: string,
+    postback: string,
+}
+
+export type CardType = {
+    title: string,
+    subtitle: string,
+    buttons: CardButtonType[],
 }
 
 type Props = {
@@ -18,8 +32,9 @@ type Props = {
         output_audio?: string,
         fulfillment_messages: {
             texts: IXArray<string>,
-            quick_replies: Array<string>,
-            cards: Array<Object>,
+            quick_replies: string[],
+            cards: Object[],
+            extra: Object,
         }
     },
     onClick?: Function,
@@ -102,17 +117,39 @@ export default class ChatMessage extends React.Component<Props, void> {
             const Component = this.extraDisplayComponents[displayComponent];
 
             return (
-                <div className="QuickReplyContainer">
-                    <Component
-                        onSuccess={this.handleExtraDataComponentSuccess.bind(this)}
-                    />
-                </div>
+                <Context.Consumer>
+                    {
+                        value => (
+                            <div className="QuickReplyContainer">
+                                <Component
+                                    onSuccess={this.handleExtraDataComponentSuccess.bind(this)}
+                                    parentHandlers={value}
+                                />
+                            </div>
+                        )
+                    }
+                </Context.Consumer>
             );
         }
     }
 
-    handleExtraDataComponentSuccess(data): void {
-        console.log(data)
+    generateResponseCards(): ?React.Element<any>[] {
+        try {
+            const cards = this.props.message.fulfillment_messages.cards;
+
+            return cards.map((card, key) => (
+                <ChatResultCard
+                    key={key}
+                    card={card}
+                />
+            ));
+        } catch (exc) {
+            return null;
+        }
+    }
+
+    handleExtraDataComponentSuccess(data: any): void {
+        console.log(data);
     }
 
     render(): ?React.Element<any> {
@@ -148,6 +185,7 @@ export default class ChatMessage extends React.Component<Props, void> {
                         )
                     }
                     {this.props.message.fulfillment_messages.texts.randomElement()}
+                    {this.generateResponseCards()}
                 </div>
             </div>
         )];
