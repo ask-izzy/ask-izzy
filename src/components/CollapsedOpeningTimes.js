@@ -34,11 +34,12 @@ function fixture(
             {
                 now_open: {
                     now_open: nowOpen,
-                    local_time: timeFn().format(),
+                    local_time: "",
                     notes: "",
                 },
                 opening_hours: openingHours,
-            }
+            },
+            timeFn
         ),
         moment: timeFn,
         expanded: expanded,

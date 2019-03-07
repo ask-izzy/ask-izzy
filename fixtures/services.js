@@ -231,7 +231,7 @@ const objects: Object = {
         "name": "Infoxchange Service Seeker (ISS) Online Databases",
         "ndis_approved": false,
         "now_open": {
-            "local_time": "2019-01-03T11:02:00+11:00",
+            "local_time": "11:02:00",
             "notes": "",
             "now_open": true,
         },
