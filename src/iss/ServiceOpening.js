@@ -4,7 +4,7 @@ import _ from "underscore";
 
 type props = {
     now_open: {
-        local_time: isoDateAndTime,
+        local_time: hmsWithColonsTime,
         notes: string,
         now_open: ?boolean,
     },
@@ -44,9 +44,8 @@ export default class ServiceOpening {
     _closing_times: Array<serviceOpeningHours>;
     _now: Moment;
 
-    constructor(properties: props) {
+    constructor(properties: props, now: () => Moment = moment) {
         this.now_open = properties.now_open.now_open;
-        this._now = moment(properties.now_open.local_time || []);
 
         // Turn opening_hours into a sorted list
         // so that we can scan forwards from the first one
@@ -56,16 +55,17 @@ export default class ServiceOpening {
 
         for (let openingHours of properties.opening_hours) {
             // Convert (eg) 'Monday' to a Moment()
-            let day = this._now.clone().day(openingHours.day);
+            let day = moment(now())
+                .day(openingHours.day);
             let close = timeOfDay(day, openingHours.close);
             let open = timeOfDay(day, openingHours.open);
 
             // split opening / closing hours into separate arrays?
-            if (close.isBefore(this._now)) {
+            if (close.isBefore(moment(now()))) {
                 close.add(1, "weeks");
             }
 
-            if (open.isBefore(this._now)) {
+            if (open.isBefore(moment(now()))) {
                 open.add(1, "weeks");
             }
 
@@ -78,10 +78,11 @@ export default class ServiceOpening {
             closingTimes.push(serviceOpeningHours);
         }
 
+        this._now = now();
         this._opening_times = _.sortBy(openingTimes, ({start}) =>
-            start.diff(this._now, "minutes"));
+            start.diff(now(), "minutes"));
         this._closing_times = _.sortBy(closingTimes, ({end}) =>
-            end.diff(this._now, "minutes"));
+            end.diff(now(), "minutes"));
     }
 
     get openingTimes(): Array<serviceOpeningHours> {
@@ -117,7 +118,7 @@ export default class ServiceOpening {
                 return "";
             } else {
                 const nextOpen = nextOpeningTimes.start;
-                const startToday = this._now.clone().startOf("day");
+                const startToday = this._now.startOf("day");
                 const daysAway = nextOpeningTimes.start.clone()
                     .startOf("day")
                     .diff(startToday, "days");

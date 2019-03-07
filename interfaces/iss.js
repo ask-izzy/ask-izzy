@@ -30,7 +30,6 @@ type issAccessibility = "noaccess" |
 type endpoint = {};
 type ymdWithDashesDate = string;
 type hmsWithColonsTime = string;
-type isoDateAndTime = string;
 type state = string;
 type dayOfWeek = 'Monday' |
     'Tuesday' |
@@ -100,7 +99,7 @@ type issEntityType = 'organisation' |
 
 type urlString = string;
 type issNowOpen = {
-    "local_time": isoDateAndTime,
+    "local_time": hmsWithColonsTime,
     "notes": string,
     "now_open": ?boolean
 };

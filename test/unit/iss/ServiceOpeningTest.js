@@ -36,12 +36,15 @@ function serviceFactory(openingHours) {
             {
                 now_open: {
                     now_open: open,
-                    local_time: time(now).format(),
+                    local_time: "",
                     notes: "",
                 },
                 opening_hours: openingHours.map(
                     openingHours => _.clone(openingHours)
                 ),
+            },
+            function() {
+                return time(now);
             }
         );
     };
