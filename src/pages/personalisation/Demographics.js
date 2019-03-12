@@ -4,6 +4,7 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 
 import { append } from "../../iss/Search";
 import icons from "../../icons";
+import { resetDfvOptions } from "../../utils";
 
 export default class Demographics extends BaseMultiQuestion {
     static title = "Personal";
@@ -11,6 +12,7 @@ export default class Demographics extends BaseMultiQuestion {
     static defaultProps = {
         name: "demographics",
         question: "Do any of these apply to you?",
+        byline: "All of your answers are private and anonymous",
         answers: {
             "Escaping family violence": append("(family violence)"),
             // n.b. see also storage.getUserIsIndigenous when changing
@@ -43,4 +45,12 @@ export default class Demographics extends BaseMultiQuestion {
             "Aboriginal": "Aboriginal and/or Torres Strait Islander",
         },
     };
+
+    componentDidMount(): void {
+        if (super.componentDidMount) {
+            super.componentDidMount();
+        }
+
+        resetDfvOptions();
+    }
 }

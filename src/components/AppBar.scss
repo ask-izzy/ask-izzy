@@ -3,7 +3,6 @@ $appbar-text-line-height: 42px;
 $colour-red: $brand-red;
 $colour-grey: #f8f9f9;
 
-
 .AppBarSpacer {
     width: 100%;
     height: $appbar-height;
@@ -131,44 +130,30 @@ $colour-grey: #f8f9f9;
         vertical-align: middle;
     }
 
-
     /* if desktop */
     .mobile_device {
         display: none;
     }
 
-
-    /* if mobile device max width 480px */
-    @media only screen and (max-device-width: 480px) {
-        .mobile_device {
-            display: block;
-            //padding: 6px 5px;
-            float: right;
-        }
-
-        .mobile_device img {
-            width: 44px;
-            height: 44px;
-            float: right;
-            background-color: $colour-red;
-        }
-
-        .desktop {display: none;}
-    }
-
     /* mobile device (max width is 736px) */
     @media only screen and (max-device-width: 768px) {
         .mobile_device {
-            display: block;
-        }
-
-        .mobile_device img {
-            width: 44px;
-            height: 44px;
+            display: flex;
+            justify-content: center;
+            width: 95px;
+            height: $appbar-height;
             float: right;
             background-color: $colour-red;
         }
 
-        .desktop {display: none;}
+        .exit_text {
+            color: $colour-grey;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .desktop {
+            display: none;
+        }
     }
 }

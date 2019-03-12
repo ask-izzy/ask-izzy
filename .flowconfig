@@ -22,4 +22,4 @@ esproposal.class_instance_fields=enable
 esproposal.decorators=ignore
 
 [version]
-0.76.0
+0.80.0

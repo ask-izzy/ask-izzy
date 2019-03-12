@@ -49,7 +49,7 @@ class BaseMultiQuestion extends BaseQuestion {
         );
     }
 
-    static showQuestion(): boolean {
+    static showPage(): boolean {
         return true;
     }
 
@@ -182,6 +182,9 @@ class BaseMultiQuestion extends BaseQuestion {
                         <div>
                             {this.props.question}
                         </div>
+                    }
+                    secondaryText={
+                        this.props.byline
                     }
                     bannerName={bannerName}
                     alternateBackgroundColor={false}

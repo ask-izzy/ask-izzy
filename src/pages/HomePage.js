@@ -8,17 +8,25 @@ import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
 import storage from "../storage";
 
-
+import { resetDfvOptions } from "../utils";
 
 class HomePage extends React.Component<{}, void> {
     static contextTypes = {
         router: PropTypes.object.isRequired,
     };
 
+    search: ?HTMLInputElement;
+
+    constructor(props: Object) {
+        super(props);
+
+        resetDfvOptions();
+    }
+
     onSearchSubmit(event: Event): void {
         event.preventDefault();
 
-        const search = this.refs.search.value;
+        const search = this.search ? this.search.value : "";
 
         if (search == "") {
             /* FIXME: should this give some user feedback? */
@@ -44,10 +52,10 @@ class HomePage extends React.Component<{}, void> {
             <div className="HomePage">
                 <div className="header">
                     <div className="desktop">
-                        <a title = {tooltip}
-                            href = {redirectUri}
+                        <span className="quick-exit-right" />
+                        <a title={tooltip}
+                            href={redirectUri}
                         >
-                            <span className="quick-exit-right" />
                             <span className="quick-exit-left">
                                 Quick Exit X
                             </span>
@@ -55,10 +63,10 @@ class HomePage extends React.Component<{}, void> {
                     </div>
 
                     <div className="mobile_device">
+                        <div className="qexit-txtleft qexit-heightleft" />
                         <a href={redirectUri}
                             title={tooltip}
                         >
-                            <div className="qexit-txtleft qexit-heightleft" />
                             <div className="qexit-txtright qexit-heightright">
                                 Quick Exit
                             </div>
@@ -85,7 +93,9 @@ class HomePage extends React.Component<{}, void> {
                             </div>
                             <div className="searchWrapper">
                                 <input
-                                    ref="search"
+                                    ref={element => {
+                                        this.search = element;
+                                    }}
                                     type="search"
                                     placeholder=
                                         "e.g. housing, food, legal help"

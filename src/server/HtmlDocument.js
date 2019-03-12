@@ -12,6 +12,8 @@ class HtmlDocument extends React.Component<Object, void> {
         // meta tags, title, etc.
         currentUrl: PropTypes.object,
         description: PropTypes.string,
+        ogTitle: PropTypes.string,
+        ogDescription: PropTypes.string,
         siteName: PropTypes.string,
         title: PropTypes.string,
         envPath: PropTypes.string,
@@ -36,6 +38,8 @@ class HtmlDocument extends React.Component<Object, void> {
             envPath,
             requestInterceptorPath,
             helmet,
+            ogTitle,
+            ogDescription,
         } = this.props;
         const viewport =
             "width=device-width, initial-scale=1.0, user-scalable=no";
@@ -72,11 +76,15 @@ class HtmlDocument extends React.Component<Object, void> {
                     />
                     <meta
                         property="og:title"
-                        content={title}
+                        content={ogTitle}
                     />
                     <meta
                         property="og:description"
-                        content={description}
+                        content={ogDescription}
+                    />
+                    <meta
+                        property="og:image"
+                        content="https://askizzy.org.au/static/images/askizzy-metatag.jpg"
                     />
 
                     {helmet.meta.toComponent()}

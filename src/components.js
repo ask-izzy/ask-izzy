@@ -44,12 +44,14 @@ import ResultListItem from "./components/ResultListItem";
 import ResultsList from "./components/ResultsList";
 import ResultsMap from "./components/ResultsMap";
 import ScreenReader from "./components/ScreenReader";
+import ServiceListIntro from "./components/ServiceListIntro";
 import ServicePane from "./components/ServicePane";
 import Spacer from "./components/Spacer";
 import SvgIcon from "./components/SvgIcon";
 import TransportTime from "./components/TransportTime";
 import ViewOnMapButton from "./components/ViewOnMapButton";
 import Web from "./components/Web";
+import OnlineSafetyLink from "./components/OnlineSafetyLink";
 
 export default {
     Accessibility: Accessibility,
@@ -88,12 +90,14 @@ export default {
     LogoWithShadow: LogoWithShadow,
     NavBar: NavBar,
     Ndis: Ndis,
+    OnlineSafetyLink: OnlineSafetyLink,
     OpeningTimes: OpeningTimes,
     Phone: Phone,
     ResultListItem: ResultListItem,
     ResultsList: ResultsList,
     ResultsMap: ResultsMap,
     ScreenReader: ScreenReader,
+    ServiceListIntro: ServiceListIntro,
     ServicePane: ServicePane,
     Spacer: Spacer,
     SvgIcon: SvgIcon,

@@ -21,7 +21,7 @@ Feature: Skip personalisation settings
         When I click on the done button # Gender
         And I click on the done button  # Age
 
-        And I click on "Change your answers"
+        And I click on "Edit Answers"
         Then I should see "Change your answers here"
         Then I should see the results
         ----------------------------------------------------------------

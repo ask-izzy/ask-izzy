@@ -32,14 +32,17 @@ const LogoHeader = ({children}: Object) =>
 const trailingSlash = (path: string): string =>
     `${path}${path.endsWith("/") ? "" : "/"}`;
 
-const PersonalisationLink = ({pathname}: Object) =>
-    <Link
-        className="change-personalisation"
-        to={`${trailingSlash(pathname)}personalise/summary`}
-        onClick={sendEvent.bind(null, {event: "changeAnswers"})}
-    >
-        Change your answers
-    </Link>;
+const PersonalisationLink = ({pathname}: Object) => (
+    <div className="change-personalisation-container">
+        <Link
+            className="change-personalisation"
+            to={`${trailingSlash(pathname)}personalise/summary`}
+            onClick={sendEvent.bind(null, {event: "changeAnswers"})}
+        >
+            Edit Answers
+        </Link>
+    </div>
+);
 
 type Props = {
     personalisationComponents: Array<Object>,
@@ -144,28 +147,29 @@ class LoadingResultsHeader extends React.Component<Props, void> {
         const count = meta.total_count > 20 ? "lots of" : meta.total_count;
 
         return (
-            <HeaderBar
-                className="LoadingResultsHeader"
-                primaryText={
-                    meta.total_count > 0 ?
-                        <LogoHeader>
-                            I found {count} {servicesWord}{" "}
-                            {personalisations.join(" ")}
-                        </LogoHeader>
-                        : <LogoHeader>
-                         Sorry, I couldn't find any results
-                         for {title.toLocaleLowerCase()}.
-                        </LogoHeader>
-                }
-                secondaryText={
-                    <div>
-                        <InfoMessage {...category} />
-                        <PersonalisationLink {...location} />
-                    </div>
-                }
-                bannerName={bannerName}
-                alternateBackgroundColor={true}
-            />
+            <React.Fragment>
+                <HeaderBar
+                    className="LoadingResultsHeader"
+                    primaryText={
+                        meta.total_count > 0 ?
+                            <LogoHeader>
+                                I found {count} {servicesWord}{" "}
+                                {personalisations.join(" ")}
+                            </LogoHeader>
+                            : <LogoHeader>
+                             Sorry, I couldn't find any results
+                             for {title.toLocaleLowerCase()}.
+                            </LogoHeader>
+                    }
+                    secondaryText={
+                        <div>
+                            <InfoMessage {...category} />
+                        </div>
+                    }
+                    bannerName={bannerName}
+                />
+                <PersonalisationLink {...location} />
+            </React.Fragment>
         );
     }
 }
