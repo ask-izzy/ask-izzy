@@ -19,7 +19,6 @@ import HeaderBar from "./HeaderBar";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
 import Ndis from "./Ndis";
-import Spacer from "./Spacer";
 import LinkListItem from "./LinkListItem";
 import BoxedText from "./BoxedText";
 import Chevron from "../icons/Chevron";
@@ -106,7 +105,6 @@ export default class ServicePane extends React.Component<{
                             serviceId={object.id}
                         />
                         <Accessibility object={object} />
-                        <Spacer />
                         <Ndis
                             className="ndis"
                             compact={false}
@@ -120,10 +118,7 @@ export default class ServicePane extends React.Component<{
                             <Address location={object.Location()} />
                             <TransportTime location={object.Location()}/>
                         </GoogleMapsLink>
-
-                        <Spacer />
                         <ContactMethods object={object} />
-                        <Spacer />
                         <Feedback object={object} />
                     </div>
                 </BoxedText>

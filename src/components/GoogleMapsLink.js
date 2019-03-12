@@ -3,6 +3,7 @@ import React from "react";
 import fixtures from "../../fixtures/services";
 import Location from "../iss/Location";
 import classnames from "classnames";
+import Spacer from "./Spacer";
 
 type Props = {
     to: Location,
@@ -65,6 +66,7 @@ class GoogleMapsLink extends React.Component<Props, void> {
                 <span
                     className={classnames("GoogleMapsLink", className)}
                 >
+                    <Spacer />
                     {children}
                 </span>
             );
@@ -77,6 +79,7 @@ class GoogleMapsLink extends React.Component<Props, void> {
                 aria-label="Open Google Maps in a new tab"
                 href={this.googleMapsUrl()}
             >
+                <Spacer />
                 {children}
             </a>
         );
