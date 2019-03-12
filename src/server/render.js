@@ -81,9 +81,19 @@ export default function render(req, res, next) {
                             currentUrl={reqUrl}
                             siteName="Ask Izzy"
                             description={
-                                `Ask Izzy helps people who are homeless ` +
-                              `or at risk of becoming homeless to find` +
-                              ` the services they need, right now and nearby.`
+                                `Ask Izzy is a mobile website that connects` +
+                              ` people who are in crisis with the services` +
+                              ` they need right now and nearby.`
+                            }
+                            ogTitle={
+                                `Ask Izzy: Find the help you need, ` +
+                              `now and nearby`
+                            }
+                            ogDescription={
+                                `Ask Izzy is a mobile website that connects ` +
+                              `people in need with housing, a meal, money ` +
+                              `help, health and wellbeing services, family ` +
+                              `violence support, counselling and much more.`
                             }
                         />
                     );

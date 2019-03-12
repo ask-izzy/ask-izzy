@@ -20,9 +20,13 @@
         height: 40px;
     }
 
+    .change-personalisation-container {
+        padding: 20px 15px 15px 30px;
+        text-align: right;
+    }
+
     .change-personalisation {
-        color: $white;
-        font-weight: 400;
+        font-weight: bold;
     }
 
     .List {

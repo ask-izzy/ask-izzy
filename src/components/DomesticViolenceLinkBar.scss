@@ -1,0 +1,43 @@
+$colour-background: #edece9;
+$colour-icon: #7e74b3;
+
+.DomesticViolenceLinkBar {
+
+    display: table;
+    width: 100%;
+    background: $colour-background;
+    cursor: pointer;
+
+    .primaryText {
+        display: table-cell;
+        padding: 10px 5px;
+        vertical-align: middle;
+    }
+
+    .leftIcon,
+    .rightIcon {
+        display: table-cell;
+        width: 15px;
+        padding: 10px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .leftIcon {
+        padding-left: 15px;
+
+        .Icon {
+            width: 20px;
+            height: 20px;
+            padding: 5px;
+            border-radius: 50%;
+            background: $colour-icon;
+        }
+    }
+
+    .rightIcon .ChevronIcon path {
+        font-weight: 600;
+        fill: $colour-icon;
+    }
+
+}

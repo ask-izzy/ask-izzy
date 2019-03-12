@@ -11,6 +11,7 @@ export default class DemographicsNarrowed extends BaseMultiQuestion {
     static defaultProps = {
         name: "demographics",
         question: "Do any of these apply to you?",
+        byline: "All of your answers are private and anonymous",
         answers: {
             // n.b. see also storage.getUserIsIndigenous when changing
             "Aboriginal and/or Torres Strait Islander":

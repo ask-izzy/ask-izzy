@@ -25,9 +25,17 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     }
 
     previousStep(): void {
-        const prevSubPage = this.prevSubPage();
+        if (this.refs.subpage && this.refs.subpage.onPreviousStep) {
+            if (!this.refs.subpage.onPreviousStep(
+                this.forceUpdate.bind(this)
+            )) {
+                return;
+            }
+        }
 
         this.setState({nextDisabled: false});
+
+        const prevSubPage = this.prevSubPage();
 
         if (prevSubPage) {
             this.goToSubPage(prevSubPage);
@@ -40,21 +48,20 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         this.navigate("");
     }
 
-    goToSubPage(subpage: React.ComponentType<*>): void {
+    goToSubPage(subpage: React.ComponentType<any>): void {
         /* TODO: Narrow down which components don't have defaultProps */
 
-        // flow:disable
         this.navigate(`personalise/page/${subpage.defaultProps.name}`);
     }
 
-    nextSubPage(): ?React.ComponentType<*> {
+    nextSubPage(): ?React.ComponentType<any> {
         return this.personalisationComponents.find((component, idx) =>
             (idx > this.currentComponentIdx) &&
-            (!component.getSearch({}))
+            (component.getSearch ? !component.getSearch({}) : true)
         );
     }
 
-    prevSubPage(): ?React.ComponentType<*> {
+    prevSubPage(): ?React.ComponentType<any> {
         const nextSubpageIdx = this.currentComponentIdx - 1;
 
         return this.personalisationComponents[nextSubpageIdx];
@@ -96,15 +103,26 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
         }
     }
 
-    render() {
-        const Subpage = this.currentComponent;
-        const prevPage = this.prevSubPage()
-        const backMessage = prevPage ?
-            /* TODO: Narrow down the components that aren't returning a title */
+    get backMessage(): string {
+        if (this.refs.subpage && this.refs.subpage.customBackMessage) {
+            return this.refs.subpage.customBackMessage;
+        }
 
-            // flow:disable
-            prevPage.title
-            : "Categories";
+        const prevPage = this.prevSubPage();
+
+        return prevPage ? prevPage.title : "Categories";
+    }
+
+    get pageTitle(): string {
+        if (this.refs.subpage && this.refs.subpage.customPageTitle) {
+            return this.refs.subpage.customPageTitle;
+        }
+
+        return this.currentComponent.title || this.title;
+    }
+
+    render(): React.Element {
+        const Subpage = this.currentComponent;
 
         if (!Subpage) {
             throw new Error("Unexpected");
@@ -124,10 +142,10 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
                     // TODO: Find where the types are set for the Subpage line
                     // and resolve the issue.
                     // flow:disable
-                    title={Subpage.title || this.title}
+                    title={this.pageTitle}
                     // flow:enable
                     onBackTouchTap={this.previousStep.bind(this)}
-                    backMessage={backMessage}
+                    backMessage={this.backMessage}
                     forwardMessage="Next"
                     forwardIcon={<Chevron alt="" />}
                     forwardEnabled={
@@ -138,6 +156,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
                 <Subpage
                     ref="subpage"
                     onDoneTouchTap={this.nextStep.bind(this)}
+                    onNextStepCallback={this.forceUpdate.bind(this)}
                 />
             </div>
         );

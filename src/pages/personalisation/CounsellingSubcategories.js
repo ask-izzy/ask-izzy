@@ -2,6 +2,7 @@
 
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
+import { resetDfvOptions } from "../../utils";
 
 export default class CounsellingSubcategories extends BaseQuestion {
     static title = "Counselling";
@@ -21,4 +22,12 @@ export default class CounsellingSubcategories extends BaseQuestion {
             "Other": append(""),
         },
     };
+
+    componentDidMount(): void {
+        if (super.componentDidMount) {
+            super.componentDidMount();
+        }
+
+        resetDfvOptions();
+    }
 }

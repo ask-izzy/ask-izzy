@@ -22,7 +22,7 @@ Run the following terminal commands:
 
     git clone git@github.com:ask-izzy/ask-izzy.git
     cd ask-izzy
-    yarn install
+    yarn
 
 ## Running the dev server
 

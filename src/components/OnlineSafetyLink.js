@@ -1,0 +1,30 @@
+/* @flow */
+
+import React from "react";
+
+import icons from "../icons";
+import BaseLogoWithTextBox from "./BaseLogoWithTextBox";
+import sendEvent from "../google-tag-manager";
+
+export default class OnlineSafetyLink extends BaseLogoWithTextBox {
+    static defaultProps = {
+        icon: <icons.OnlineSecurity className={"big middle"}/>,
+        header: "Online Safety",
+        body: `There are some simple steps you can take
+               which will make you safer online.`,
+        highlightColor: "#70bdae",
+    };
+
+    onClickBox(): void {
+        const path = "/online-safety";
+
+        sendEvent({
+            event: "clickedInformationBanner",
+            banner: "Online safety - are you safe?",
+        });
+
+        this.context.router.push(
+            path,
+        );
+    }
+}

@@ -46,3 +46,9 @@ Feature: Search
         When I search for "cause error" and press enter
         Then I should see "Sorry, I couldn't do this search."
         And I should see "An error occurred. Please try again."
+
+    Scenario: Searching for domestic violence performs the safety check
+        When I search for "domestic violence" and press enter
+        Then I should see "To help me find the right services I'll ask you a few questions"
+        And I click on "Okay"
+        Then I should see "Are you safe right now?"

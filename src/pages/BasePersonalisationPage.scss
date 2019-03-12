@@ -61,11 +61,12 @@
 
             width: calc(100% - 40px);
 
-            margin-top: 20px;
-            margin-right: auto;
-            margin-bottom: 20px;
-            margin-left: auto;
+            margin: 20px auto;
         }
+    }
+
+    .TextBannerContainer {
+        margin: 20px;
     }
 
     .ClearResults {
@@ -91,6 +92,20 @@
 
     .List.floatingDoneButton {
         padding-bottom: 60px;
+    }
+
+    .service-list {
+        .leftIcon {
+            top: 18px;
+        }
+
+        .rightIcon {
+            top: 26px;
+        }
+
+        .primaryText {
+            font-weight: 500;
+        }
     }
 
     .SummaryItem {

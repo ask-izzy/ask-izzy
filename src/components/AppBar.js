@@ -12,10 +12,12 @@ type Props = {
 }
 
 class AppBar extends React.Component<Props, void> {
-    static sampleProps = {default: {
-        title: "App bar",
-        onBackTouchTap: function() {},
-    }};
+    static sampleProps = {
+        default: {
+            title: "App bar",
+            onBackTouchTap: function() {},
+        },
+    };
 
 
     render() {
@@ -43,9 +45,7 @@ class AppBar extends React.Component<Props, void> {
                             <a href={redirectUri}
                                 title={tooltip}
                             >
-                                <img src="/static/images/exit-large.png"
-                                    alt="exit"
-                                />
+                                <span className="exit_text">Exit X</span>
                             </a>
                         </div>
                     </div>
