@@ -1,10 +1,11 @@
 /* @flow */
+// eslint-disable max-len
 
 import React from "react";
 
 class OnlineSafetyContent extends React.Component<{}, void> {
     render() {
-        const linkEsafetyPage = "https://www.esafety.gov.au/";
+        const linkEsafetyPage = "https://www.esafety.gov.au/women/get-help/other-languages#english";
         const link1800Respect = "https://www.1800respect.org.au";
 
         return (
@@ -56,8 +57,10 @@ class OnlineSafetyContent extends React.Component<{}, void> {
                     </li>
                 </ul>
                 <p>
-                    To learn how go to <a href={linkEsafetyPage}>E-Commissioners
-                    - Australian Government</a>
+                    To learn how go to{" "}
+                    <a href="https://www.esafety.gov.au/">
+                        E-Commissioners - Australian Government
+                    </a>
                 </p>
 
                 <h2>
