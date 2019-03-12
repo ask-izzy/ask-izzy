@@ -4,6 +4,7 @@ import React from "react";
 import _ from "underscore";
 
 import Collapser from "./Collapser";
+import Spacer from "./Spacer";
 import Email from "./Email";
 import Phone from "./Phone";
 import Web from "./Web";
@@ -91,6 +92,7 @@ class ContactMethods extends React.Component<Props, void> {
              * then put the rest in a collapser */
             return (
                 <div className="ContactMethods">
+                    <Spacer />
                     {beforeFoldContacts.map(this.renderContactMethod)}
                     <Collapser
                         message="Other contact options"
@@ -106,6 +108,7 @@ class ContactMethods extends React.Component<Props, void> {
             /* render 1 contact method of each type */
             return (
                 <div className="ContactMethods">
+                    <Spacer />
                     {beforeFoldContacts.map(this.renderContactMethod)}
                 </div>
             );

@@ -4,6 +4,7 @@ import React from "react";
 
 import sendEvent from "../google-tag-manager";
 import iss from "../iss";
+import Spacer from "./Spacer";
 
 type Props = {
     object: iss.Service,
@@ -21,6 +22,7 @@ export default class Feedback extends React.Component<Props, void> {
 
         return (
             <div className="Feedback">
+                <Spacer />
                 <h4>Your feedback</h4>
                 <p>If information needs updating, or if something is not
                  occurring as expected,&nbsp;
