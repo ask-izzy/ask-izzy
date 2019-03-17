@@ -26,12 +26,11 @@ function fixture(
             {
                 now_open: {
                     now_open: nowOpen,
-                    local_time: "",
+                    local_time: timeFn().format(),
                     notes: "",
                 },
                 opening_hours: openingHours,
-            },
-            timeFn
+            }
         ),
         moment: timeFn,
     };
