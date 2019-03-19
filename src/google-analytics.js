@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//' + window.PROXY_TAGS + '/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer', window.GOOGLE_TAG_MANAGER_ID);
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl+ '&gtm_auth=wmCrMTTnSkvyo9kHQjRmLw&gtm_preview=env-34&gtm_cookies_win=x';f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-5XC34R');
 
         // For all trackers, override the sendHitTask to send the analytics
         // payload to our proxy.
