@@ -5,11 +5,12 @@ import * as React from "react";
 
 import AudioFile from "./AudioFile";
 import ChatQuickReply from "./ChatQuickReply";
+import ChatResultCard from "./ChatResultCard";
 
 import LocationAction from "./quickReplyActions/LocationAction";
 import { Context } from "../pages/ChatPage";
 
-import ChatResultCard from "./ChatResultCard";
+import { Service } from "../iss";
 
 interface IXArray<V> extends Array<V> {
     randomElement(): any;
@@ -24,6 +25,7 @@ export type CardType = {
     title: string,
     subtitle: string,
     buttons: CardButtonType[],
+    iss_data?: Object,
 }
 
 type Props = {
@@ -89,7 +91,7 @@ export default class ChatMessage extends React.Component<Props, void> {
 
         if (quickReplies.length) {
             return (
-                <div className="QuickReplyContainer">
+                <div className="QuickReplyContainer" key={2}>
                     {
                         quickReplies.map((reply, iter) => (
                             <ChatQuickReply
@@ -117,7 +119,7 @@ export default class ChatMessage extends React.Component<Props, void> {
             const Component = this.extraDisplayComponents[displayComponent];
 
             return (
-                <Context.Consumer>
+                <Context.Consumer key={1}>
                     {
                         value => (
                             <div className="QuickReplyContainer">
@@ -140,7 +142,10 @@ export default class ChatMessage extends React.Component<Props, void> {
             return cards.map((card, key) => (
                 <ChatResultCard
                     key={key}
-                    card={card}
+                    card={{
+                        ...card,
+                        iss_data: new Service(this.props.message.fulfillment_messages.extra.webhook_payload.iss_response[key])
+                    }}
                 />
             ));
         } catch (exc) {
@@ -171,6 +176,7 @@ export default class ChatMessage extends React.Component<Props, void> {
             <div
                 className="ChatMessage"
                 onClick={this.clickHandler.bind(this)}
+                key={0}
             >
                 <div className={this.props.message.message_type}>
                     {

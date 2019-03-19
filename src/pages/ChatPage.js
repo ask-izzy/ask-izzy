@@ -17,16 +17,17 @@ import storage from "../storage";
 
 type State = {
     analysedAudio: Array<number>,
-    messages: Array<Object>,
     instantLevel: number,
-    slowLevel: number,
-    isRecording: boolean,
-    showWebsocketReconnect: boolean,
-    isProcessing: boolean,
     isMessagePlaying: boolean,
-    showTalkButton: boolean,
-    soundBuffer: Float32Array,
+    isProcessing: boolean,
+    isRecording: boolean,
+    lastError: ?string,
+    messages: Array<Object>,
     showErrorMessage: boolean,
+    showTalkButton: boolean,
+    showWebsocketReconnect: boolean,
+    slowLevel: number,
+    soundBuffer: Float32Array,
 }
 
 export const Context = React.createContext();
@@ -46,23 +47,29 @@ export default class ChatPage extends React.Component<{}, State> {
 
     _audioCaptureThreshold: number = 0.05;
     _audioFiles = [];
+    _websocketUrl: ?URL;
 
     constructor(props: {}): void {
         super(props)
 
         this.state = {
             analysedAudio: (new Array(5)).fill(0),
-            messages: [],
             instantLevel: 0,
-            slowLevel: 0,
-            isRecording: false,
             isMessagePlaying: false,
-            showWebsocketReconnect: false,
             isProcessing: false,
-            showTalkButton: true,
-            soundBuffer: new Float32Array(),
+            isRecording: false,
+            lastError: null,
+            messages: [],
             showErrorMessage: false,
+            showTalkButton: true,
+            showWebsocketReconnect: false,
+            slowLevel: 0,
+            soundBuffer: new Float32Array(),
         };
+
+        if (typeof window !== "undefined") {
+            this._websocketUrl = new URL(window.SPEECH_SERVER_URL);
+        }
     }
 
     componentDidMount(): void {
@@ -71,9 +78,15 @@ export default class ChatPage extends React.Component<{}, State> {
 
     connectWebsocket(): void {
         if (!this._websocket || this._websocket.readyState > 1) {
-            this._websocket = new WebSocket(window.SPEECH_SERVER_URL);
+            this._websocket = new WebSocket(this._websocketUrl.href);
 
             this._websocket.onopen = function() {
+                this._websocket.send(JSON.stringify({
+                    cmd: 'authenticate',
+                    data: {
+                        credentials: btoa(`${this._websocketUrl.username}:${this._websocketUrl.password}`)
+                    },
+                }))
                 this._websocket.send(JSON.stringify({
                     cmd: 'set_context',
                     data: storage.getAllItems(),
@@ -82,6 +95,16 @@ export default class ChatPage extends React.Component<{}, State> {
 
             this._websocket.onmessage = function(frame: {data: mixed}) {
                 const data = JSON.parse(frame.data);
+
+                if (!data.success) {
+                    this.setState({
+                        lastError: data.message,
+                        isProcessing: false,
+                        showErrorMessage: true,
+                    })
+
+                    return
+                }
 
                 this.setState({
                     messages: [...this.state.messages, data],
@@ -133,7 +156,11 @@ export default class ChatPage extends React.Component<{}, State> {
 
     handleError(error): void {
         console.log("navigator.getUserMedia error: ", JSON.stringify(error));
-        this.setState({ showErrorMessage: true, showTalkButton: true });
+        this.setState({
+            showErrorMessage: true,
+            showTalkButton: true,
+            lastError: null,
+        });
     }
 
     handleSuccess(stream): void {
@@ -355,8 +382,16 @@ export default class ChatPage extends React.Component<{}, State> {
                     {
                         this.state.showErrorMessage && (
                             <div>
-                                It looks like we're having trouble accessing your microphone.
-                                Please double check you allowed permission and try again.
+                            {
+                                this.state.lastError ? (
+                                    `${this.state.lastError}`
+                                ) : (
+                                    `It looks like we're having trouble ` +
+                                    `accessing your microphone. Please ` +
+                                    `double check you allowed permission ` +
+                                    `and try again.`
+                                )
+                            }
                             </div>
                         )
                     }
