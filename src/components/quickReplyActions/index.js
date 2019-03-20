@@ -1,6 +1,6 @@
 /* flow:disable */
 
-import LocationAction from './LocationAction'
+import LocationAction from "./LocationAction";
 
 export default {
     LocationAction,

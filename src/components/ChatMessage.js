@@ -53,7 +53,7 @@ export default class ChatMessage extends React.Component<Props, void> {
     }
 
     extraDisplayComponents = {
-        'getUserLocation': LocationAction,
+        "getUserLocation": LocationAction,
     }
 
     clickHandler(): void {
@@ -91,7 +91,10 @@ export default class ChatMessage extends React.Component<Props, void> {
 
         if (quickReplies.length) {
             return (
-                <div className="QuickReplyContainer" key={2}>
+                <div
+                    className="QuickReplyContainer"
+                    key={2}
+                >
                     {
                         quickReplies.map((reply, iter) => (
                             <ChatQuickReply
@@ -144,7 +147,7 @@ export default class ChatMessage extends React.Component<Props, void> {
                     key={key}
                     card={{
                         ...card,
-                        iss_data: new Service(this.props.message.fulfillment_messages.extra.webhook_payload.iss_response[key])
+                        iss_data: new Service(this.props.message.fulfillment_messages.extra.webhook_payload.iss_response[key]),
                     }}
                 />
             ));

@@ -26,18 +26,19 @@ class ChatResultCard extends React.Component<Props, void> {
                 <NullOnException data={this.props.card.iss_data}>
                     {
                         data => {
-                            const phoneNumber = data.Phones()[0].number
+                            const phoneNumber = data.Phones()[0].number;
+
                             return (
                                 <React.Fragment>
                                     <hr />
-                                        {data.Phones()[0].comment}<br />
-                                        {
-                                            this.props.mobileView ? (
-                                                <a href={`tel:${phoneNumber}`}>
-                                                    {phoneNumber}
-                                                </a>
-                                            ) : phoneNumber
-                                        }
+                                    {data.Phones()[0].comment}<br />
+                                    {
+                                        this.props.mobileView ? (
+                                            <a href={`tel:${phoneNumber}`}>
+                                                {phoneNumber}
+                                            </a>
+                                        ) : phoneNumber
+                                    }
                                     <hr />
                                 </React.Fragment>
                             )

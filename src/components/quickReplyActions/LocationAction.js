@@ -39,7 +39,7 @@ export default class LocationAction extends React.Component<Props, State> {
     handleLocationSuccess(location: { name: string, coords: Object }): void {
         this.props.parentHandlers.setProcessing();
         this.props.parentHandlers.websocket.send(JSON.stringify({
-            cmd: 'text',
+            cmd: "text",
             data: location.name,
         }));
     }

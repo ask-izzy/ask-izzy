@@ -157,10 +157,10 @@ const Storage = {
                 carry,
                 {
                     [key]: persistentStore.getItem(key),
-                }
+                },
             )
         }, {})
-    }
+    },
 }
 
 if (typeof window != "undefined") {

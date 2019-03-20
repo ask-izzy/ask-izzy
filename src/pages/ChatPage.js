@@ -82,13 +82,13 @@ export default class ChatPage extends React.Component<{}, State> {
 
             this._websocket.onopen = function() {
                 this._websocket.send(JSON.stringify({
-                    cmd: 'authenticate',
+                    cmd: "authenticate",
                     data: {
-                        credentials: btoa(`${this._websocketUrl.username}:${this._websocketUrl.password}`)
+                        credentials: btoa(`${this._websocketUrl.username}:${this._websocketUrl.password}`),
                     },
                 }))
                 this._websocket.send(JSON.stringify({
-                    cmd: 'set_context',
+                    cmd: "set_context",
                     data: storage.getAllItems(),
                 }))
             }.bind(this)
@@ -193,7 +193,7 @@ export default class ChatPage extends React.Component<{}, State> {
 
                     if (this._websocket) {
                         this._websocket.send(JSON.stringify({
-                            cmd: 'audio',
+                            cmd: "audio",
                             data: base64,
                         }));
                     }
@@ -322,7 +322,7 @@ export default class ChatPage extends React.Component<{}, State> {
             });
 
             this._websocket.send(JSON.stringify({
-                cmd: 'text',
+                cmd: "text",
                 data: textIntent,
             }));
         }
@@ -382,16 +382,16 @@ export default class ChatPage extends React.Component<{}, State> {
                     {
                         this.state.showErrorMessage && (
                             <div>
-                            {
-                                this.state.lastError ? (
-                                    `${this.state.lastError}`
-                                ) : (
-                                    `It looks like we're having trouble ` +
-                                    `accessing your microphone. Please ` +
-                                    `double check you allowed permission ` +
-                                    `and try again.`
-                                )
-                            }
+                                {
+                                    this.state.lastError ? (
+                                        `${this.state.lastError}`
+                                    ) : (
+                                        `It looks like we're having trouble ` +
+                                        `accessing your microphone. Please ` +
+                                        `double check you allowed permission ` +
+                                        `and try again.`
+                                    )
+                                }
                             </div>
                         )
                     }
