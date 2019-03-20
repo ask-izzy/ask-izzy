@@ -8,6 +8,7 @@ import ChatQuickReply from "./ChatQuickReply";
 import ChatResultCard from "./ChatResultCard";
 
 import LocationAction from "./quickReplyActions/LocationAction";
+import AmbiguousStateAction from "./quickReplyActions/AmbiguousStateAction";
 import { Context } from "../pages/ChatPage";
 
 import { Service } from "../iss";
@@ -54,6 +55,7 @@ export default class ChatMessage extends React.Component<Props, void> {
 
     extraDisplayComponents = {
         "getUserLocation": LocationAction,
+        "showUserStates": AmbiguousStateAction,
     }
 
     clickHandler(): void {
