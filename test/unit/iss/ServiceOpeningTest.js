@@ -3,7 +3,7 @@
 /* eslint-disable prefer-arrow-callback */
 
 import assert from "assert";
-import moment from "moment";
+import moment from "moment-timezone";
 import _ from "underscore";
 import ServiceOpening from "../../../src/iss/ServiceOpening";
 

@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import moment from "moment";
+import moment from "moment-timezone";
 
 type Props = {
     from?: Moment,

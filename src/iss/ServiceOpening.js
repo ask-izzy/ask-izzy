@@ -1,5 +1,5 @@
 /* @flow */
-import moment from "moment";
+import moment from "moment-timezone";
 import _ from "underscore";
 
 type props = {
@@ -47,6 +47,12 @@ export default class ServiceOpening {
     constructor(properties: props) {
         this.now_open = properties.now_open.now_open;
         this._now = moment(properties.now_open.local_time || []);
+        let timezone = properties.now_open.local_time &&
+            properties.now_open.local_time.match(/([-+][0-9:]*)$/)
+
+        if (timezone) {
+            this._now = this._now.utcOffset(timezone.pop())
+        }
 
         // Turn opening_hours into a sorted list
         // so that we can scan forwards from the first one

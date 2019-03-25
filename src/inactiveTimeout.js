@@ -1,6 +1,6 @@
 /* @flow */
 
-import moment from "moment";
+import moment from "moment-timezone";
 
 const timeOut = moment().add(3, "h");
 
