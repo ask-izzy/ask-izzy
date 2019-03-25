@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import ChatResultCardButton from "./ChatResultCardButton";
-import NullOnException from "./NullOnException";
+import ErrorCapture from "./ErrorCapture";
 import MobileDetect from "./higherorder/MobileDetect";
 
 import type { CardType } from "./ChatMessage";
@@ -15,6 +15,7 @@ type Props = {
 
 class ChatResultCard extends React.Component<Props, void> {
     render(): ?React.Element<any> {
+
         return (
             <div className="ChatResultCard">
                 <h3>
@@ -23,28 +24,30 @@ class ChatResultCard extends React.Component<Props, void> {
                 <p>
                     {this.props.card.subtitle}
                 </p>
-                <NullOnException data={this.props.card.iss_data}>
+                <ErrorCapture data={this.props.card.iss_data}>
                     {
-                        data => {
+                        ({ caughtError, data }) => {
                             const phoneNumber = data.Phones()[0].number;
 
-                            return (
-                                <React.Fragment>
-                                    <hr />
-                                    {data.Phones()[0].comment}<br />
-                                    {
-                                        this.props.mobileView ? (
-                                            <a href={`tel:${phoneNumber}`}>
-                                                {phoneNumber}
-                                            </a>
-                                        ) : phoneNumber
-                                    }
-                                    <hr />
-                                </React.Fragment>
-                            )
+                            if (!caughtError) {
+                                return (
+                                    <React.Fragment>
+                                        <hr />
+                                        {data.Phones()[0].comment}<br />
+                                        {
+                                            this.props.mobileView ? (
+                                                <a href={`tel:${phoneNumber}`}>
+                                                    {phoneNumber}
+                                                </a>
+                                            ) : phoneNumber
+                                        }
+                                        <hr />
+                                    </React.Fragment>
+                                )
+                            }
                         }
                     }
-                </NullOnException>
+                </ErrorCapture>
                 <div className="ButtonContainer">
                     {
                         this.props.card.buttons.map((button, key) =>

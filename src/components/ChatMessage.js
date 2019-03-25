@@ -26,7 +26,7 @@ export type CardType = {
     title: string,
     subtitle: string,
     buttons: CardButtonType[],
-    iss_data?: Object,
+    iss_data?: Service,
 }
 
 type Props = {
@@ -64,7 +64,7 @@ export default class ChatMessage extends React.Component<Props, void> {
         }
     }
 
-    quickReplyHandler(action: string): void {
+    quickReplyHandler = (action: string): Function => (): void => {
         if (this.props.quickReplyCallback) {
             this.props.quickReplyCallback(action);
         }
@@ -102,7 +102,7 @@ export default class ChatMessage extends React.Component<Props, void> {
                             <ChatQuickReply
                                 key={`quickreply${iter}`}
                                 action={reply}
-                                onClick={this.quickReplyHandler.bind(this, reply)}
+                                onClick={this.quickReplyHandler(reply)}
                             />
                         ))
                     }
@@ -114,11 +114,7 @@ export default class ChatMessage extends React.Component<Props, void> {
     generateExtraDataComponent(): ?React.Element<any> {
         let displayComponent = null;
 
-        try {
-            displayComponent = this.props.message.fulfillment_messages.extra.webhook_payload.drawComponent;
-        } catch (err) {
-            // We don't need to do anything here.
-        }
+        displayComponent = this.props.message.fulfillment_messages.extra.webhook_payload.drawComponent;
 
         if (displayComponent) {
             const Component = this.extraDisplayComponents[displayComponent];
