@@ -80,6 +80,13 @@ export default class ChatPage extends React.Component<{}, State> {
         this.connectWebsocket();
     }
 
+    async componentWillUnmount(): Promise<void> {
+        await this.cancelRecording();
+        if (this._websocket) {
+            this._websocket.close();
+        }
+    }
+
     /**
      * Connect to the websocket server.
      */
@@ -130,13 +137,9 @@ export default class ChatPage extends React.Component<{}, State> {
         }
     }
 
-    async componentWillUnmount(): Promise<void> {
-        await this.cancelRecording();
-        if (this._websocket) {
-            this._websocket.close();
-        }
-    }
-
+    /**
+     * Request permission from the user and start a voice session.
+     */
     startVoiceChat = async(): void => {
         try {
             window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -188,7 +191,7 @@ export default class ChatPage extends React.Component<{}, State> {
         this._soundMeter = new SoundMeter(this._audioContext);
         this._soundMeter.connectToSource(
             stream,
-            this.handleAudioSource.bind(this)
+            this.handleAudioSource
         );
 
         this._encoder = new Worker("/static/scripts/encoder.js");
@@ -239,18 +242,20 @@ export default class ChatPage extends React.Component<{}, State> {
         const { isMuted } = this.state;
         const { buffer } = data;
 
-        this.setState({ isProcessing: true });
+        if (!isMuted) {
+            this.setState({ isProcessing: true });
 
-        const joinedBuffers = this.float32Concat(
-            this.state.soundBuffer,
-            buffer[0]
-        );
+            const joinedBuffers = this.float32Concat(
+                this.state.soundBuffer,
+                buffer[0]
+            );
 
-        if (this._encoder && !isMuted) {
-            this._encoder.postMessage({
-                cmd: "encode",
-                buf: joinedBuffers,
-            });
+            if (this._encoder) {
+                this._encoder.postMessage({
+                    cmd: "encode",
+                    buf: joinedBuffers,
+                });
+            }
         }
     }
 
@@ -331,7 +336,7 @@ export default class ChatPage extends React.Component<{}, State> {
             this._soundMeter.stop();
         }
         if (this._mediaRecorder && this.state.isRecording) {
-            this._mediaRecorder.stop();
+            await this._mediaRecorder.stop();
         }
         if (this._audioContext) {
             await this._audioContext.close();
@@ -340,7 +345,10 @@ export default class ChatPage extends React.Component<{}, State> {
         this.setState({ showTalkButton: true });
     }
 
-    handleAudioSource(err: Error): void {
+    /**
+     * Take the audio source and watch input volume to trigger recording.
+     */
+    handleAudioSource = (err: Error): void => {
         if (err) {
             console.error("There was an error.", err);
             return;
