@@ -9,6 +9,8 @@ import ChatMessage from "../components/ChatMessage";
 import DebugContainer from "../components/DebugContainer";
 import DebugChatMessages from "../components/DebugChatMessages";
 import AudioFile from "../components/AudioFile";
+import ChatButton from "../components/styled/ChatButton";
+import ChatButtonContainer from "../components/styled/ChatButtonContainer";
 
 import SoundMeter from "../utils/soundmeter";
 import ChatInputVolumeDisplay from "../components/ChatInputVolumeDisplay";
@@ -17,17 +19,26 @@ import storage from "../storage";
 
 type State = {
     analysedAudio: Array<number>,
-    messages: Array<Object>,
     instantLevel: number,
-    slowLevel: number,
-    isRecording: boolean,
-    showWebsocketReconnect: boolean,
-    isProcessing: boolean,
     isMessagePlaying: boolean,
-    showTalkButton: boolean,
-    soundBuffer: Float32Array,
+    isMuted: boolean,
+    isProcessing: boolean,
+    isRecording: boolean,
+    lastError: ?string,
+    messages: Array<Object>,
     showErrorMessage: boolean,
+    showTalkButton: boolean,
+    showWebsocketReconnect: boolean,
+    slowLevel: number,
+    soundBuffer: Float32Array,
 }
+
+export const Context = React.createContext();
+
+export type ContextType = {
+    setProcessing: Function,
+    websocket: WebSocket,
+};
 
 export default class ChatPage extends React.Component<{}, State> {
     _websocket: ?WebSocket;
@@ -39,79 +50,97 @@ export default class ChatPage extends React.Component<{}, State> {
 
     _audioCaptureThreshold: number = 0.05;
     _audioFiles = [];
+    _websocketUrl: ?URL;
 
     constructor(props: {}): void {
         super(props)
 
         this.state = {
             analysedAudio: (new Array(5)).fill(0),
-            messages: [],
             instantLevel: 0,
-            slowLevel: 0,
-            isRecording: false,
             isMessagePlaying: false,
-            showWebsocketReconnect: false,
+            isMuted: false,
             isProcessing: false,
-            showTalkButton: true,
-            soundBuffer: new Float32Array(),
+            isRecording: false,
+            lastError: null,
+            messages: [],
             showErrorMessage: false,
+            showTalkButton: true,
+            showWebsocketReconnect: false,
+            slowLevel: 0,
+            soundBuffer: new Float32Array(),
         };
+
+        if (typeof window !== "undefined") {
+            this._websocketUrl = new URL(window.SPEECH_SERVER_URL);
+        }
     }
 
     componentDidMount(): void {
         this.connectWebsocket();
     }
 
-    connectWebsocket(): void {
-        if (!this._websocket || this._websocket.readyState > 1) {
-            this._websocket = new WebSocket(window.SPEECH_SERVER_URL);
+    async componentWillUnmount(): Promise<void> {
+        await this.cancelRecording();
+        if (this._websocket) {
+            this._websocket.close();
+        }
+    }
 
-            this._websocket.onopen = function() {
+    /**
+     * Connect to the websocket server.
+     */
+    connectWebsocket = (): void => {
+        if (!this._websocket || this._websocket.readyState > 1) {
+            this._websocket = new WebSocket(this._websocketUrl.href);
+
+            this._websocket.onopen = () => {
                 this._websocket.send(JSON.stringify({
-                    cmd: 'set_context',
+                    cmd: "authenticate",
+                    data: {
+                        credentials: btoa(`${this._websocketUrl.username}:${this._websocketUrl.password}`),
+                    },
+                }))
+                this._websocket.send(JSON.stringify({
+                    cmd: "set_context",
                     data: storage.getAllItems(),
                 }))
-            }.bind(this)
+            };
 
-            this._websocket.onmessage = function(frame: {data: mixed}) {
+            this._websocket.onmessage = (frame: {data: mixed}): void => {
                 const data = JSON.parse(frame.data);
+
+                if (!data.success) {
+                    this.setState({
+                        lastError: data.message,
+                        isProcessing: false,
+                        showErrorMessage: true,
+                    });
+
+                    return
+                }
 
                 this.setState({
                     messages: [...this.state.messages, data],
                     isProcessing: false,
                 });
-            }.bind(this);
+            };
 
-            this._websocket.onclose = function(err) {
+            this._websocket.onclose = (err): void => {
                 this.setState({
                     showWebsocketReconnect: true,
                     isProcessing: false,
                 });
                 console.error("Chat socket closed unexpectedly.", err);
                 this._websocket = undefined;
-            }.bind(this);
+            };
         }
     }
 
-    async componentWillUnmount(): Promise<void> {
-        if (this._volumeInterval) {
-            clearInterval(this._volumeInterval);
-        }
-        if (this._soundMeter) {
-            this._soundMeter.stop();
-        }
-        if (this._mediaRecorder && this.state.isRecording) {
-            this._mediaRecorder.stop();
-        }
-        if (this._audioContext) {
-            await this._audioContext.close();
-        }
-        if (this._websocket) {
-            this._websocket.close();
-        }
-    }
-
-    startVoiceChat(): void {
+    /**
+     * Request permission from the user and start a voice session.
+     */
+    startVoiceChat = async(): void => {
         try {
             window.AudioContext = window.AudioContext || window.webkitAudioContext;
             this._audioContext = new AudioContext();
@@ -119,17 +148,35 @@ export default class ChatPage extends React.Component<{}, State> {
             console.error("Web Audio API not supported.");
         }
 
-        navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-            .then(this.handleSuccess.bind(this))
-            .catch(this.handleError.bind(this));
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                audio: true,
+                video: false,
+            });
+
+            this.handleSuccess(stream);
+        } catch (error) {
+            this.handleError(error);
+        }
     }
 
-    handleError(error): void {
+    /**
+     * Handle an error occurring while attempting to gain permission to a
+     * user's audio input.
+     */
+    handleError = (error): void => {
         console.log("navigator.getUserMedia error: ", JSON.stringify(error));
-        this.setState({ showErrorMessage: true, showTalkButton: true });
+        this.setState({
+            showErrorMessage: true,
+            showTalkButton: true,
+            lastError: null,
+        });
     }
 
-    handleSuccess(stream): void {
+    /**
+     * Handle successfully gaining permission to the user's audio input stream.
+     */
+    handleSuccess = (stream): void => {
         this.setState({ showTalkButton: false });
 
         console.log("Media Recorder starting");
@@ -144,11 +191,11 @@ export default class ChatPage extends React.Component<{}, State> {
         this._soundMeter = new SoundMeter(this._audioContext);
         this._soundMeter.connectToSource(
             stream,
-            this.handleAudioSource.bind(this)
+            this.handleAudioSource
         );
 
         this._encoder = new Worker("/static/scripts/encoder.js");
-        this._encoder.onmessage = function(msg) {
+        this._encoder.onmessage = (msg): void => {
             if (msg.data.cmd === "end") {
                 const blob = msg.data.buf;
                 const reader = new FileReader();
@@ -159,7 +206,7 @@ export default class ChatPage extends React.Component<{}, State> {
 
                     if (this._websocket) {
                         this._websocket.send(JSON.stringify({
-                            cmd: 'audio',
+                            cmd: "audio",
                             data: base64,
                         }));
                     }
@@ -172,9 +219,12 @@ export default class ChatPage extends React.Component<{}, State> {
                     />
                 ));
             }
-        }.bind(this)
+        };
     }
 
+    /**
+     * Concatenate two Float32Arrays.
+     */
     float32Concat(first: Float32Array, second: Float32Array): Float32Array {
         const firstLength = first.length;
         let result = new Float32Array(firstLength + second.length);
@@ -185,26 +235,41 @@ export default class ChatPage extends React.Component<{}, State> {
         return result;
     }
 
-    handleAudioCaptureFinished(data: { buffer: Array<Float32Array>, blob: Blob }): void {
+    /**
+     * Process a section of audio and have it encoded.
+     */
+    handleAudioCaptureFinished = (data: { buffer: Array<Float32Array>, blob: Blob }): void => {
+        const { isMuted } = this.state;
         const { buffer } = data;
 
-        this.setState({ isProcessing: true });
+        if (!isMuted) {
+            this.setState({ isProcessing: true });
 
-        const joinedBuffers = this.float32Concat(
-            this.state.soundBuffer,
-            buffer[0]
-        );
+            const joinedBuffers = this.float32Concat(
+                this.state.soundBuffer,
+                buffer[0]
+            );
 
-        if (this._encoder) {
-            this._encoder.postMessage({
-                cmd: "encode",
-                buf: joinedBuffers,
-            });
+            if (this._encoder) {
+                this._encoder.postMessage({
+                    cmd: "encode",
+                    buf: joinedBuffers,
+                });
+            }
         }
     }
 
+    /**
+     * Analyse the last section of recorded audio and save to state.
+     * This is used for the input volume indicator.
+     */
     analyseAudio(volumeLevel: number): void {
+        const { isMuted } = this.state;
         let newData = this.state.analysedAudio;
+
+        if (isMuted) {
+            volumeLevel = 0;
+        }
 
         newData.splice(
             Math.floor(Math.random() * this.state.analysedAudio.length),
@@ -217,6 +282,10 @@ export default class ChatPage extends React.Component<{}, State> {
         });
     }
 
+    /**
+     * Starts recording and configures the service worker required for encoding
+     * the audio.
+     */
     startRecording(): void {
         if (this._mediaRecorder && !this.state.isRecording && !this.state.isMessagePlaying) {
             this.setState({
@@ -240,16 +309,46 @@ export default class ChatPage extends React.Component<{}, State> {
         }
     }
 
-    stopRecording(): void {
+    /**
+     * Stops a recording and processes the recorded data.
+     */
+    async stopRecording(): void {
         if (this._mediaRecorder && this._encoder && this.state.isRecording) {
-            this._mediaRecorder.stop().then(data => {
+            try {
+                const data = await this._mediaRecorder.stop();
+
                 this.setState({ isRecording: false });
                 this.handleAudioCaptureFinished(data);
-            });
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 
-    handleAudioSource(err: Error): void {
+    /**
+     * Cancel audio recording.
+     */
+    cancelRecording = async(): void => {
+        if (this._volumeInterval) {
+            clearInterval(this._volumeInterval);
+        }
+        if (this._soundMeter) {
+            this._soundMeter.stop();
+        }
+        if (this._mediaRecorder && this.state.isRecording) {
+            await this._mediaRecorder.stop();
+        }
+        if (this._audioContext) {
+            await this._audioContext.close();
+        }
+
+        this.setState({ showTalkButton: true });
+    }
+
+    /**
+     * Take the audio source and watch input volume to trigger recording.
+     */
+    handleAudioSource = (err: Error): void => {
         if (err) {
             console.error("There was an error.", err);
             return;
@@ -257,6 +356,8 @@ export default class ChatPage extends React.Component<{}, State> {
 
         this._volumeInterval = setInterval(() => {
             if (this._soundMeter) {
+                const { isMuted } = this.state;
+
                 const instantLevel = Math.round(this._soundMeter.instant * 100) / 100;
                 const slowLevel = Math.round(this._soundMeter.slow * 100) / 100;
 
@@ -267,7 +368,7 @@ export default class ChatPage extends React.Component<{}, State> {
 
                 this.analyseAudio(instantLevel);
 
-                if (slowLevel >= this._audioCaptureThreshold) {
+                if (slowLevel >= this._audioCaptureThreshold && !isMuted) {
                     this.startRecording();
                 }
                 if (slowLevel < this._audioCaptureThreshold) {
@@ -277,30 +378,50 @@ export default class ChatPage extends React.Component<{}, State> {
         }, 200);
     }
 
-    quickReplyTriggered(action): void {
+    /**
+     * Toggle the audio input mute status.
+     */
+    toggleAudioInputMute = (): void => {
+        this.setState({ isMuted: !this.state.isMuted });
+    }
+
+    /**
+     * Called when a quick reply has been clicked.
+     */
+    quickReplyTriggered = (action): void => {
         this.sendTextIntent(action);
     }
 
-    sendTextIntent(textIntent): void {
+    /**
+     * Send a text message to the server.
+     */
+    sendTextIntent = (textIntent): void => {
         if (this._websocket) {
             this.setState({
                 isProcessing: true,
             });
 
             this._websocket.send(JSON.stringify({
-                cmd: 'text',
+                cmd: "text",
                 data: textIntent,
             }));
         }
     }
 
-    onMessageAnnounceStart(): void {
+    /**
+     * Called when automatic voice messages start playing.
+     */
+    onMessageAnnounceStart = (): void => {
         this.setState({
             isMessagePlaying: true,
         });
     }
 
-    onMessageAnnounceEnd(): void {
+    /**
+     * This is called when automatic voice messages from chat are finished
+     * speaking.
+     */
+    onMessageAnnounceEnd = (): void => {
         setTimeout(() => {
             this.setState({
                 isMessagePlaying: false,
@@ -311,20 +432,41 @@ export default class ChatPage extends React.Component<{}, State> {
     renderMessages(): React.Element<any> {
         return this.state.messages.map((message, iter) => {
             return (
-                <React.Fragment key={iter}>
-                    <ChatMessage
-                        message={message}
-                        showQuickRepliesIfAvailable={iter + 1 === this.state.messages.length && !this.state.isProcessing}
-                        quickReplyCallback={this.quickReplyTriggered.bind(this)}
-                        onMessageAnnounceStart={this.onMessageAnnounceStart.bind(this)}
-                        onMessageAnnounceEnd={this.onMessageAnnounceEnd.bind(this)}
-                    />
-                </React.Fragment>
+                <Context.Provider
+                    value={{
+                        websocket: this._websocket,
+                        setProcessing: () => {
+                            this.setState({
+                                isProcessing: true,
+                            })
+                        },
+                    }}
+                >
+                    <React.Fragment key={`message${iter}`}>
+                        <ChatMessage
+                            message={message}
+                            showQuickRepliesIfAvailable={iter + 1 === this.state.messages.length && !this.state.isProcessing}
+                            quickReplyCallback={this.quickReplyTriggered}
+                            onMessageAnnounceStart={this.onMessageAnnounceStart}
+                            onMessageAnnounceEnd={this.onMessageAnnounceEnd}
+                        />
+                    </React.Fragment>
+                </Context.Provider>
             );
         });
     }
 
     render(): React.Element<any> {
+        const {
+            analysedAudio,
+            isMuted,
+            isProcessing,
+            lastError,
+            showErrorMessage,
+            showTalkButton,
+            showWebsocketReconnect,
+        } = this.state;
+
         return (
             <StaticPage
                 title="Chat to Izzy"
@@ -335,10 +477,18 @@ export default class ChatPage extends React.Component<{}, State> {
             >
                 <div className="MessageContainer">
                     {
-                        this.state.showErrorMessage && (
+                        showErrorMessage && (
                             <div>
-                                It looks like we're having trouble accessing your microphone.
-                                Please double check you allowed permission and try again.
+                                {
+                                    lastError ? (
+                                        `${lastError}`
+                                    ) : (
+                                        `It looks like we're having trouble ` +
+                                        `accessing your microphone. Please ` +
+                                        `double check you allowed permission ` +
+                                        `and try again.`
+                                    )
+                                }
                             </div>
                         )
                     }
@@ -360,39 +510,54 @@ export default class ChatPage extends React.Component<{}, State> {
                     }
                     {this.renderMessages()}
                     {
-                        this.state.showWebsocketReconnect && (
+                        showWebsocketReconnect && (
                             <ChatMessage
                                 message={{
                                     message_type: "to",
                                     fulfillment_messages: {
                                         texts: [
-                                            "You've been disconnected. Click here to reconnect.",
+                                            "You've been disconnected.",
+                                        ],
+                                        "quick_replies": [
+                                            "Reconnect",
                                         ],
                                     },
                                 }}
-                                onClick={this.connectWebsocket.bind(this)}
+                                showQuickRepliesIfAvailable={true}
+                                quickReplyCallback={this.connectWebsocket}
                             />
                         )
                     }
                 </div>
                 {
-                    this.state.isProcessing && (
+                    isProcessing && (
                         <div className="lds-dual-ring" />
                     )
                 }
                 <DebugContainer message="Text Intents">
-                    <DebugChatMessages onMessageSubmit={this.sendTextIntent.bind(this)} />
+                    <DebugChatMessages onMessageSubmit={this.sendTextIntent} />
                 </DebugContainer>
                 {
-                    this.state.showTalkButton ? (
-                        <div
-                            className="TalkButton"
-                            onClick={this.startVoiceChat.bind(this)}
-                        >
-                            Talk
-                        </div>
+                    showTalkButton ? (
+                        <ChatButtonContainer>
+                            <ChatButton onClick={this.startVoiceChat}>
+                                Talk
+                            </ChatButton>
+                        </ChatButtonContainer>
                     ) : (
-                        <ChatInputVolumeDisplay audioData={this.state.analysedAudio} />
+                        <React.Fragment>
+                            <ChatInputVolumeDisplay audioData={analysedAudio} />
+                            <ChatButtonContainer>
+                                <ChatButton onClick={this.cancelRecording}>
+                                    Cancel
+                                </ChatButton>
+                                <ChatButton onClick={this.toggleAudioInputMute}>
+                                    {
+                                        isMuted ? "Unmute" : "Mute"
+                                    }
+                                </ChatButton>
+                            </ChatButtonContainer>
+                        </React.Fragment>
                     )
                 }
             </StaticPage>

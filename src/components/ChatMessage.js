@@ -5,9 +5,28 @@ import * as React from "react";
 
 import AudioFile from "./AudioFile";
 import ChatQuickReply from "./ChatQuickReply";
+import ChatResultCard from "./ChatResultCard";
+
+import LocationAction from "./quickReplyActions/LocationAction";
+import AmbiguousStateAction from "./quickReplyActions/AmbiguousStateAction";
+import { Context } from "../pages/ChatPage";
+
+import { Service } from "../iss";
 
 interface IXArray<V> extends Array<V> {
     randomElement(): any;
+}
+
+export type CardButtonType = {
+    text: string,
+    postback: string,
+}
+
+export type CardType = {
+    title: string,
+    subtitle: string,
+    buttons: CardButtonType[],
+    iss_data?: Service,
 }
 
 type Props = {
@@ -16,8 +35,9 @@ type Props = {
         output_audio?: string,
         fulfillment_messages: {
             texts: IXArray<string>,
-            quick_replies: Array<string>,
-            cards: Array<Object>,
+            quick_replies: string[],
+            cards: Object[],
+            extra: Object,
         }
     },
     onClick?: Function,
@@ -27,9 +47,15 @@ type Props = {
     onMessageAnnounceEnd?: Function,
 }
 
+
 export default class ChatMessage extends React.Component<Props, void> {
     static defaultProps = {
         showQuickRepliesIfAvailable: false,
+    }
+
+    extraDisplayComponents = {
+        "getUserLocation": LocationAction,
+        "showUserStates": AmbiguousStateAction,
     }
 
     clickHandler(): void {
@@ -38,7 +64,7 @@ export default class ChatMessage extends React.Component<Props, void> {
         }
     }
 
-    quickReplyHandler(action: string): void {
+    quickReplyHandler = (action: string): Function => (): void => {
         if (this.props.quickReplyCallback) {
             this.props.quickReplyCallback(action);
         }
@@ -54,6 +80,82 @@ export default class ChatMessage extends React.Component<Props, void> {
         if (this.props.onMessageAnnounceEnd) {
             this.props.onMessageAnnounceEnd();
         }
+    }
+
+    generateQuickReplies(): ?React.Element<any> {
+        let quickReplies = [];
+
+        try {
+            quickReplies = this.props.message.fulfillment_messages.quick_replies;
+        } catch (err) {
+            // We don't need to do anything here.
+        }
+
+        if (quickReplies.length) {
+            return (
+                <div
+                    className="QuickReplyContainer"
+                    key={2}
+                >
+                    {
+                        quickReplies.map((reply, iter) => (
+                            <ChatQuickReply
+                                key={`quickreply${iter}`}
+                                action={reply}
+                                onClick={this.quickReplyHandler(reply)}
+                            />
+                        ))
+                    }
+                </div>
+            )
+        }
+    }
+
+    generateExtraDataComponent(): ?React.Element<any> {
+        let displayComponent = null;
+
+        displayComponent = this.props.message.fulfillment_messages.extra.webhook_payload.drawComponent;
+
+        if (displayComponent) {
+            const Component = this.extraDisplayComponents[displayComponent];
+
+            return (
+                <Context.Consumer key={1}>
+                    {
+                        value => (
+                            <div className="QuickReplyContainer">
+                                <Component
+                                    onSuccess={this.handleExtraDataComponentSuccess.bind(this)}
+                                    parentHandlers={value}
+                                />
+                            </div>
+                        )
+                    }
+                </Context.Consumer>
+            );
+        }
+    }
+
+    generateResponseCards(): ?React.Element<any>[] {
+        try {
+            const cards = this.props.message.fulfillment_messages.cards;
+
+            return cards.map((card, key) => (
+                <ChatResultCard
+                    key={key}
+                    card={{
+                        ...card,
+                        iss_data: new Service(this.props.message.fulfillment_messages.extra.webhook_payload.iss_response[key]),
+                    }}
+                />
+            ));
+        } catch (exc) {
+            return null;
+        }
+    }
+
+    handleExtraDataComponentSuccess(data: any): void {
+        console.log(data);
     }
 
     render(): ?React.Element<any> {
@@ -75,6 +177,7 @@ export default class ChatMessage extends React.Component<Props, void> {
             <div
                 className="ChatMessage"
                 onClick={this.clickHandler.bind(this)}
+                key={0}
             >
                 <div className={this.props.message.message_type}>
                     {
@@ -89,33 +192,16 @@ export default class ChatMessage extends React.Component<Props, void> {
                         )
                     }
                     {this.props.message.fulfillment_messages.texts.randomElement()}
+                    {this.generateResponseCards()}
                 </div>
             </div>
         )];
 
         if (this.props.showQuickRepliesIfAvailable) {
-            let quickReplies = [];
-
             try {
-                quickReplies = this.props.message.fulfillment_messages.quick_replies;
-            } catch (err) {
-                // We don't need to do anything here.
-            }
-
-            if (quickReplies.length) {
-                output.push((
-                    <div className="QuickReplyContainer">
-                        {
-                            quickReplies.map((reply, iter) => (
-                                <ChatQuickReply
-                                    key={iter}
-                                    action={reply}
-                                    onClick={this.quickReplyHandler.bind(this, reply)}
-                                />
-                            ))
-                        }
-                    </div>
-                ))
+                output.push(this.generateExtraDataComponent());
+            } catch (exc) {
+                output.push(this.generateQuickReplies());
             }
         }
 
