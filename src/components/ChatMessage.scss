@@ -1,5 +1,3 @@
-$talk-button-size: 80px;
-$talk-button-color: #ffffff;
 $from-message-bg-color: #e8e8e8;
 $message-border-radius: 8px;
 
@@ -75,17 +73,6 @@ $message-border-radius: 8px;
 .ChatPage {
     .body {
         width: 100%;
-    }
-
-    .TalkButton {
-        width: $talk-button-size;
-        height: $talk-button-size;
-        margin: 0 auto;
-        border-radius: 50%;
-        background-color: $brand-pane-alt-dark;
-        color: $talk-button-color;
-        line-height: $talk-button-size;
-        text-align: center;
     }
 
     .MessageContainer {
