@@ -118,6 +118,7 @@ export default class ChatMessage extends React.Component<Props, void> {
 
         if (displayComponent) {
             const Component = this.extraDisplayComponents[displayComponent];
+            const extraComponentData = this.props.message.fulfillment_messages.extra.webhook_payload.componentData || {};
 
             return (
                 <Context.Consumer key={1}>
@@ -125,8 +126,9 @@ export default class ChatMessage extends React.Component<Props, void> {
                         value => (
                             <div className="QuickReplyContainer">
                                 <Component
-                                    onSuccess={this.handleExtraDataComponentSuccess.bind(this)}
+                                    onSuccess={this.handleExtraDataComponentSuccess}
                                     parentHandlers={value}
+                                    extraData={extraComponentData}
                                 />
                             </div>
                         )
@@ -154,7 +156,7 @@ export default class ChatMessage extends React.Component<Props, void> {
         }
     }
 
-    handleExtraDataComponentSuccess(data: any): void {
+    handleExtraDataComponentSuccess = (data: any): void => {
         console.log(data);
     }
 
