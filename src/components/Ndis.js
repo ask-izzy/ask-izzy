@@ -31,10 +31,10 @@ export default class Ndis extends React.Component<Props, void> {
             }
             return (
                 <div>
+                    {this.props.spacer && (<Spacer />)}
                     <div className="Ndis">
                         Part of National Disability Insurance Scheme
                     </div>
-                    {this.props.spacer && (<Spacer />)}
                 </div>
             );
         }
