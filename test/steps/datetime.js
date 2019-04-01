@@ -7,7 +7,7 @@
 
 import Yadda from "yadda";
 import fs from "fs";
-import moment from "moment";
+import moment from "moment-timezone";
 
 import unpromisify from "../support/yadda-promise";
 

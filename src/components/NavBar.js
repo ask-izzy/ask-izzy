@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import moment from "moment";
+import moment from "moment-timezone";
 
 import categories from "../constants/categories";
 import LinkListItem from "./LinkListItem";

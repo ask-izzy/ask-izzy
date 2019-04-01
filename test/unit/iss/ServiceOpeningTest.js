@@ -3,7 +3,7 @@
 /* eslint-disable prefer-arrow-callback */
 
 import assert from "assert";
-import moment from "moment";
+import moment from "moment-timezone";
 import _ from "underscore";
 import ServiceOpening from "../../../src/iss/ServiceOpening";
 
@@ -36,15 +36,12 @@ function serviceFactory(openingHours) {
             {
                 now_open: {
                     now_open: open,
-                    local_time: "",
+                    local_time: time(now).format(),
                     notes: "",
                 },
                 opening_hours: openingHours.map(
                     openingHours => _.clone(openingHours)
                 ),
-            },
-            function() {
-                return time(now);
             }
         );
     };

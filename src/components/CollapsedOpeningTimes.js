@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import moment from "moment";
+import moment from "moment-timezone";
 import _ from "underscore";
 
 import ServiceOpening from "../iss/ServiceOpening";
@@ -34,12 +34,11 @@ function fixture(
             {
                 now_open: {
                     now_open: nowOpen,
-                    local_time: "",
+                    local_time: timeFn().format(),
                     notes: "",
                 },
                 opening_hours: openingHours,
-            },
-            timeFn
+            }
         ),
         moment: timeFn,
         expanded: expanded,
