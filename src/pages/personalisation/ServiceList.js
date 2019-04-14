@@ -29,7 +29,7 @@ export default class ServiceList extends BaseQuestion {
                 .append("-grants")
                 .append("name:\"financial counselling\""),
             "Help for people using violence": remove("(family violence)")
-                .append("(anger management)"),
+                .append("(using violence)"),
             "Help for pets": append("pets -(animal control)")
                 .append("-(effectiveness training)"),
         },
