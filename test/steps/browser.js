@@ -73,9 +73,9 @@ module.exports.documentReady = function documentReady(
     driver: Webdriver.WebDriver
 ): Promise<boolean> {
     return driver.executeScript(() =>
-        (document.readyState == "complete") &&
+        (document.readyState === "complete") &&
         (window.xhrCount) &&
-        (window.xhrCount() == 0)
+        (window.xhrCount() === 0)
     );
 };
 
@@ -152,7 +152,7 @@ async function urlIs(
         expected = baseUrl() + expected;
     }
 
-    return decodeURIComponent(url || "") == expected;
+    return decodeURIComponent(url || "") === expected;
 }
 
 async function checkURL(expected: string): Promise<void> {

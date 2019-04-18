@@ -87,7 +87,7 @@ export class MapsApi {
             directionsService.getDistanceMatrix(
                 params,
                 (response, status) => {
-                    if (status == this.api.DirectionsStatus.OK) {
+                    if (status === this.api.DirectionsStatus.OK) {
                         let times = response.rows[0].elements;
 
                         times.forEach((transportTime) => {
@@ -130,7 +130,7 @@ export class MapsApi {
         return new Promise((resolve, reject) =>
             autocompleter.getPlacePredictions(params, (results, status) => {
 
-                if (status == this.api.places.PlacesServiceStatus.OK) {
+                if (status === this.api.places.PlacesServiceStatus.OK) {
                     resolve(results);
                 } else {
                     reject(status);

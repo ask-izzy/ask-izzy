@@ -23,7 +23,7 @@ global.GOOGLE_TAG_MANAGER_ID = process.env.GOOGLE_TAG_MANAGER_ID;
 
 if (process.argv[2] && (process.argv[2] != "index.js")) {
     var content = require("./" + process.argv[2]);
-    if (typeof content == "function") {
+    if (typeof content === "function") {
         content();
     }
 } else {

@@ -62,7 +62,7 @@ export function Merge(defaults: Object, props: ?Object): Object {
     for (let key of Object.keys(defaults)) {
         if (props && props[key] != undefined) {
             if (
-                typeof defaults[key] == "object" &&
+                typeof defaults[key] === "object" &&
                 !Array.isArray(defaults[key])
             ) {
                 try {

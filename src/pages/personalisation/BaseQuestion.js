@@ -103,7 +103,7 @@ class BaseQuestion extends Personalisation<Props, State> {
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         let value = this.answer;
 
-        if (value == "(skipped)") {
+        if (value === "(skipped)") {
             // This question has been skipped.
             return request;
         }
@@ -235,7 +235,7 @@ class BaseQuestion extends Personalisation<Props, State> {
                             secondaryText={this.answerDescFor(answer)}
 
                             type="radio"
-                            checked={answer == selected}
+                            checked={answer === selected}
                             value={answer}
                             onClick={this.onAnswerTouchTap.bind(this, answer)}
                             readOnly={true}

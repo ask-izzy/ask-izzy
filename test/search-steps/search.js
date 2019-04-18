@@ -31,9 +31,9 @@ async function setLocation(location: string): Promise<void> {
 }
 
 async function setSleepTonight(answer: string): Promise<void> {
-    if (answer == "somewhere") {
+    if (answer === "somewhere") {
         answer = "Yes";
-    } else if (answer == "nowhere") {
+    } else if (answer === "nowhere") {
         answer = "No";
     } else {
         throw new Error(`Expected ${answer} to be Yes or No`);
@@ -114,7 +114,7 @@ function issRequest({search, personalisation, name}) {
 
     for (let item of personalisation) {
 
-        if (typeof item.getSearch == "function") {
+        if (typeof item.getSearch === "function") {
             request = item.getSearch(request);
 
             if (!request) {
@@ -130,8 +130,8 @@ function issRequest({search, personalisation, name}) {
 }
 
 function objectMatches(expectation: any, subject: any): boolean {
-    if (typeof expectation != "object") {
-        return expectation == subject;
+    if (typeof expectation !== "object") {
+        return expectation === subject;
     }
 
     for (const key of Object.keys(expectation)) {
@@ -144,7 +144,7 @@ function objectMatches(expectation: any, subject: any): boolean {
 }
 
 async function searchIss(categoryName: string): Promise<searchResults> {
-    const category = Categories.find(({key}) => key == categoryName)
+    const category = Categories.find(({key}) => key === categoryName)
     // flow:disable
     const request = issRequest(category);
 

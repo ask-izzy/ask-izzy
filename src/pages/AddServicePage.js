@@ -57,7 +57,7 @@ class AddServicePage extends React.Component<Props, State> {
             return;
         }
 
-        switch (typeof event == "object" && event.data) {
+        switch (typeof event === "object" && event.data) {
         case "formSubmitted":
             this.setState({
                 isFormDone: true,

@@ -96,11 +96,11 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     get currentComponentIdx(): number {
         const sup = super.currentComponentIdx;
 
-        if (sup == -1) {
+        if (sup === -1) {
             return 0;
-        } else {
-            return sup;
         }
+
+        return sup;
     }
 
     get backMessage(): string {

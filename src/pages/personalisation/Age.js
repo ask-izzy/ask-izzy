@@ -47,7 +47,7 @@ export default class Age extends BaseQuestion {
     };
 
     static headingValue(): string {
-        if (!this.answer || (this.answer == "(skipped)")) {
+        if (!this.answer || (this.answer === "(skipped)")) {
             return "";
         } else {
             return `aged ${this.answer}`;
