@@ -55,9 +55,9 @@ async function clickDoneButton(): Promise<void> {
 }
 
 async function setSleepTonight(answer: string): Promise<void> {
-    if (answer == "somewhere") {
+    if (answer === "somewhere") {
         answer = "Yes";
-    } else if (answer == "nowhere") {
+    } else if (answer === "nowhere") {
         answer = "No";
     } else {
         throw new Error(`Expected ${answer} to be Yes or No`);
@@ -108,7 +108,7 @@ async function setSubcategoryItemsNone(category: string): Promise<void> {
     await setStorageValue(
         this.driver,
         key,
-        (category == "housing") ? "(skipped)" : JSON.stringify([])
+        (category === "housing") ? "(skipped)" : JSON.stringify([])
     );
 }
 

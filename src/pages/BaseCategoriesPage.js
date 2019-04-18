@@ -103,7 +103,7 @@ class BaseCategoriesPage extends React.Component<Object, State> {
                 }
             }
 
-            return (typeof component.showPage == "function") &&
+            return (typeof component.showPage === "function") &&
                 component.showPage()
         });
     }

@@ -54,7 +54,7 @@ function issRequest({search, personalisation}) {
 
     for (let item of personalisation) {
 
-        if (typeof item.getSearch == "function") {
+        if (typeof item.getSearch === "function") {
             request = item.getSearch(request);
 
             if (!request) {
@@ -78,12 +78,12 @@ function answerPermutations(personalisation: Object): Array<Object> {
         return result;
     }
 
-    if (name == "location") {
+    if (name === "location") {
         return [];
     }
 
     // Pick a single demographic at a time
-    if (name == "demographics") {
+    if (name === "demographics") {
         return test.search.demographicPermutations.map(toObject);
     }
 

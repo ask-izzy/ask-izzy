@@ -77,7 +77,7 @@ class BasePersonalisationPage extends BaseCategoriesPage {
 
     get currentComponentIdx(): number {
         return this.personalisationComponents.findIndex(component =>
-            component.defaultProps.name == this.props.params.subpage
+            component.defaultProps.name === this.props.params.subpage
         );
     }
 }

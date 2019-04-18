@@ -45,7 +45,7 @@ class ResultsPage extends BaseCategoriesPage {
         for (let item of this.personalisationComponents) {
             // TODO: This needs to be debugged with the new flow version
             // flow:disable
-            if (typeof item.getSearch == "function") {
+            if (typeof item.getSearch === "function") {
                 request = item.getSearch(request);
 
                 if (!request) {

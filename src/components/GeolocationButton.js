@@ -121,9 +121,9 @@ class GeolocationButton extends React.Component<GeolocationButtonProps, Geolocat
     }
 
     render() {
-        if (this.state.geolocation == "RUNNING") {
+        if (this.state.geolocation === "RUNNING") {
             return <RunningGeolocation />;
-        } else if (this.state.geolocation == "COMPLETE") {
+        } else if (this.state.geolocation === "COMPLETE") {
             return <FinishedGeolocation />;
         } else if (this.state.error) {
             return <FailedGeolocation error={this.state.error}/>;

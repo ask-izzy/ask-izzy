@@ -28,7 +28,7 @@ class HomePage extends React.Component<{}, void> {
 
         const search = this.search ? this.search.value : "";
 
-        if (search == "") {
+        if (search === "") {
             /* FIXME: should this give some user feedback? */
             return;
         }

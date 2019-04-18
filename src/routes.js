@@ -48,7 +48,7 @@ export function makeTitle(routes: Array<Object>, params: Object): string {
 
     Object.keys(params).forEach((key) => {
         // FIXME This is a hack. Rewrite it when we're not about to launch.
-        if (key == "search") {
+        if (key === "search") {
             title = title.replace(":page", unslug(params[key]));
         }
         title = title.replace(`:${key}`, unslug(params[key]));

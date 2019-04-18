@@ -129,9 +129,9 @@ export default class ServiceOpening {
                     .diff(startToday, "days");
                 const dayName = nextOpeningTimes.start.format("dddd");
 
-                if (daysAway == 0) {
+                if (daysAway === 0) {
                     return this.ifTime`until today ${nextOpen}`;
-                } else if (daysAway == 1) {
+                } else if (daysAway === 1) {
                     return this.ifTime`until tomorrow ${nextOpen}`;
                 } else if (daysAway >= 6) {
                     return this.ifTime`until next ${dayName} ${nextOpen}`;

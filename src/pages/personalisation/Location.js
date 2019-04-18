@@ -153,7 +153,7 @@ class Location extends Personalisation<Props, State> {
     componentDidUpdate(prevProps: Object, prevState: Object): void {
         // After state updates, make sure you can see the input
         if (this._search &&
-            this._search == document.activeElement &&
+            this._search === document.activeElement &&
             prevState.autocompletions != this.state.autocompletions) {
             this.scrollToSearchControl();
         }

@@ -81,7 +81,7 @@ app.get("/api/v3/search/", (req, res) => {
             },
             objects: [mocks[mockId]],
         });
-    } else if (req.query.site_id == "111") {
+    } else if (req.query.site_id === "111") {
         /* related services search for housingService */
         res.json({
             meta: {
@@ -92,7 +92,7 @@ app.get("/api/v3/search/", (req, res) => {
                 ServiceFactory(services.housingServiceSibling),
             ],
         });
-    } else if (req.query.site_id == "444") {
+    } else if (req.query.site_id === "444") {
         res.json({
             meta: {
                 total_count: 6,
@@ -125,7 +125,7 @@ app.get("/api/v3/search/", (req, res) => {
             meta: {},
             objects: [],
         });
-    } else if (req.query.area == "carlt") {
+    } else if (req.query.area === "carlt") {
         res
             .status(402)
             .json({
