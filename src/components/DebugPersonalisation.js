@@ -16,7 +16,7 @@ export default class DebugPersonalisation extends React.Component<Props, void> {
         result.push({source: "category", diff: request})
 
         for (let item of this.props.items) {
-            if (typeof item.getSearch == "function") {
+            if (typeof item.getSearch === "function") {
                 // let the type system find bugs
                 const getSearch = (request: Object): ?Object =>
                     item.getSearch(request);

@@ -11,7 +11,7 @@ type Props = {
 
 export default class LimitedTimeMessage extends React.Component<Props, void> {
     isVisible(): boolean {
-        if (typeof window == "undefined") {
+        if (typeof window === "undefined") {
             return false; // Do not render server-side
         }
 

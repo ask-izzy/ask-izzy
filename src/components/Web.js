@@ -30,7 +30,7 @@ export default class Web extends React.Component<{url: string}, void> {
                         </span>
                         <span className="web value">
                             {url.hostname}
-                            {url.path == "/" ? "" : url.path}
+                            {url.path === "/" ? "" : url.path}
                         </span>
                     </div>
                 </a>

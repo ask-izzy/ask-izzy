@@ -31,7 +31,7 @@ const Storage = {
     },
 
     getDebug(): boolean {
-        return this.getItem("debug") == "true";
+        return this.getItem("debug") === "true";
     },
 
     setDebug(debug: boolean): void {
@@ -67,8 +67,8 @@ const Storage = {
         );
 
         if (coords &&
-            (typeof coords.latitude == "number") &&
-            (typeof coords.longitude == "number")) {
+            (typeof coords.latitude === "number") &&
+            (typeof coords.longitude === "number")) {
             return coords;
         }
 

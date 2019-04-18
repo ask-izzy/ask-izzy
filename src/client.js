@@ -120,7 +120,7 @@ ReactDOM.hydrate(
             // insight into the what kind of searches users are
             // performing.
             if (!window.location.pathname.match("/search") &&
-                (typeof window.ga == "function")) {
+                (typeof window.ga === "function")) {
                 window.ga("send", "pageview", window.location.toString());
             }
         }}
@@ -131,7 +131,7 @@ ReactDOM.hydrate(
 // Can't use 'new Event' in IE
 const debugEvent = document.createEvent("CustomEvent");
 
-if (typeof debugEvent.initCustomEvent == "function") {
+if (typeof debugEvent.initCustomEvent === "function") {
     debugEvent.initCustomEvent("debug", false, false, undefined);
 }
 

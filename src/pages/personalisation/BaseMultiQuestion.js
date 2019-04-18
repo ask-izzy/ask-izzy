@@ -59,7 +59,7 @@ class BaseMultiQuestion extends BaseQuestion {
         } else {
             const nSelected = this.answer.length;
 
-            if (nSelected == 0) {
+            if (nSelected === 0) {
                 return "None selected";
             } else if (nSelected > 3) {
                 return `${nSelected} selected`;

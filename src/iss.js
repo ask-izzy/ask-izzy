@@ -118,28 +118,26 @@ async function _request(obj: XhrOptions) {
         // cannot be JSON-ified.
         const {data, status, statusText, headers} = error;
 
-        if (status == 429) {
+        if (status === 429) {
             console.log("Rate limited by ISS - backing off for 4 seconds");
             await ReturnAfter(4000, null);
             return xhr(obj);
         }
 
-        if (status == 504) {
+        if (status === 504) {
             console.log("ISS has gateway timeout - retrying");
             await ReturnAfter(500, null);
             try {
                 return await xhr(obj);
             } catch (error) {
-                if (status == 504) {
-                    // perform query to failover URL where catchment=true
-                    obj.url = obj.url.replace("catchment=prefer",
-                        "catchment=true");
-                    try {
-                        return await xhr(obj);
-                    } catch (error) {
-                        await ReturnAfter(500, null);
-                        return xhr(obj);
-                    }
+                // perform query to failover URL where catchment=true
+                obj.url = obj.url.replace("catchment=prefer",
+                    "catchment=true");
+                try {
+                    return await xhr(obj);
+                } catch (error) {
+                    await ReturnAfter(500, null);
+                    return xhr(obj);
                 }
             }
         } else if (status >= 502) {
@@ -235,7 +233,7 @@ export async function request(
 async function attachTransportTimes(
     services: Array<Service>
 ): Promise<Array<Service>> {
-    if (typeof window == "undefined") {
+    if (typeof window === "undefined") {
         // Google maps api doesn't work outside the browser.
         return services;
     }
@@ -244,7 +242,7 @@ async function attachTransportTimes(
 
     const maps = await TryWithDefault(1000, Maps(), Object());
 
-    if (typeof maps.travelTime == "function") {
+    if (typeof maps.travelTime === "function") {
         let service: ?Service; // eslint-disable-line no-unused-vars
         let travelTimes = await Timeout(3000, maps.travelTime(services
             .filter((service) => !service.Location().isConfidential())
@@ -339,7 +337,7 @@ export class Service {
             .filter(({kind}) => phoneKinds.includes(kind))
             .map(({comment, kind, number}) => {
                 // 13* lines are not free calls
-                if ((kind == "freecall") && (number.match(/^13/))) {
+                if ((kind === "freecall") && (number.match(/^13/))) {
                     kind = "phone";
                 }
 
@@ -357,9 +355,9 @@ export class Service {
         if (this.indigenous_classification) {
             let classification = this.indigenous_classification;
 
-            return (classification ==
+            return (classification ===
                 "Mainstream who cater for Aboriginal (indigenous)") ||
-                   classification == "Aboriginal (indigenous) specific";
+                   classification === "Aboriginal (indigenous) specific";
         }
 
         return false;

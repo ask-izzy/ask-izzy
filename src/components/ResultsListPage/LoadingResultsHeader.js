@@ -98,7 +98,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                 </LogoHeader>
             )
 
-            if (statusCode == 402) {
+            if (statusCode === 402) {
                 return (
                     <HeaderBar
                         className="LoadingResultsHeader"
@@ -133,7 +133,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             );
         }
 
-        const servicesWord = meta.total_count == 1 ?
+        const servicesWord = meta.total_count === 1 ?
             "service"
             : "services";
         const personalisations = [

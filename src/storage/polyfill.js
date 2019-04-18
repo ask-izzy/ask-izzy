@@ -6,7 +6,7 @@ import ObjectStorage from "./memory";
 function canUseStorageImpl(storageImpl: Storage): boolean {
     try {
         storageImpl.setItem("__TEST__", "__TEST__");
-        return storageImpl.getItem("__TEST__") == "__TEST__";
+        return storageImpl.getItem("__TEST__") === "__TEST__";
     } catch (err) {
         return false;
     }
@@ -48,7 +48,7 @@ if (persistentStore.privateMode) {
 }
 
 export function switchToPrivateMode(): void {
-    if (persistentStore == sessionStore) {
+    if (persistentStore === sessionStore) {
         return;
     }
 

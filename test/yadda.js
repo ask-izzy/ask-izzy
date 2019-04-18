@@ -57,7 +57,7 @@ let processFile = (file) => {
                     try {
                         let data = await driver.takeScreenshot();
 
-                        if (process.env.SCREENSHOT_FAILURES == "base64") {
+                        if (process.env.SCREENSHOT_FAILURES === "base64") {
                             console.log(`Test-${title}.png`);
                             console.log(`Base64 PNG data :${data}`);
                         } else {
