@@ -12,7 +12,7 @@ type Props = {
 }
 
 class ShareBox extends React.Component<Props> {
-    shareService = () => {
+    shareService = async () => {
         if (navigator.share !== undefined) {
             try {
                 await navigator.share({
