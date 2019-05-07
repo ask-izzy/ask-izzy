@@ -18,6 +18,7 @@ class ShareBox extends React.Component<Props> {
                 await navigator.share({
                     title: this.props.object.name,
                     url: window.location.href,
+                    text: `This service might be useful for you: ${this.props.object.name}`,
                 })
             } catch (e) {
                 console.log("There was an error while sharing.");
