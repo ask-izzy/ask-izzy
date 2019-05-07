@@ -15,7 +15,7 @@ class ShareBox extends React.Component<Props> {
     shareService = () => {
         if (navigator.share !== undefined) {
             try {
-                navigator.share({
+                await navigator.share({
                     title: object.name,
                     url: window.location.href,
                 })
