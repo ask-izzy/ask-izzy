@@ -130,15 +130,21 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
                     </h3>
                     <h3>
                         Call <a href={link1800Respect}>1800Respect</a> on{" "}
+                        <MobileDetect>
                         {
-                            this.props.mobileView ? (
-                                <a href={`tel:${phone1800Respect}`}>
-                                    { phone1800Respect }
-                                </a>
-                            ) : (
-                                `${phone1800Respect}`
-                            )
-                        }.
+                            ({ isMobile }) => {
+                                if (!isMobile) {
+                                    return `${phone1800Respect}`
+                                }
+
+                                return (
+                                    <a href={`tel:${phone1800Respect}`}>
+                                        { phone1800Respect }
+                                    </a>
+                                )
+                            }
+                        }
+                        </MobileDetect>.
                     </h3>
                 </div>
             </div>
@@ -147,4 +153,4 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
 }
 
 
-export default MobileDetect(LgbtiqaDomesticViolenceScreen);
+export default LgbtiqaDomesticViolenceScreen;

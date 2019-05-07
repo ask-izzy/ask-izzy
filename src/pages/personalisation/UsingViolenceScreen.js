@@ -98,15 +98,21 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
             <h3>
                 <a href={referralServiceLink}>Women's referral service</a> on
                 {" "}
-                {
-                    this.props.mobileView ? (
-                        <a href={`tel:${referralServicePhone}`}>
-                            { referralServicePhone }
-                        </a>
-                    ) : (
-                        `${ referralServicePhone }`
-                    )
-                }.
+                <MobileDetect>
+                    {
+                        ({ isMobile }) => {
+                            if (!isMobile) {
+                                return `${ referralServicePhone }`
+                            }
+
+                            return (
+                                <a href={`tel:${referralServicePhone}`}>
+                                    { referralServicePhone }
+                                </a>
+                            )
+                        }
+                    }
+                </MobileDetect>.
             </h3>
         )
     }
@@ -138,4 +144,4 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
 }
 
 
-export default MobileDetect(UsingViolenceScreen);
+export default UsingViolenceScreen;

@@ -16,7 +16,6 @@ export type Props = {
     showBaseTextBox?: boolean,
     baseTextBoxComponent?: React.Element<any>,
     classNames?: string,
-    mobileView?: boolean,
     showDoneButton?: boolean,
 }
 

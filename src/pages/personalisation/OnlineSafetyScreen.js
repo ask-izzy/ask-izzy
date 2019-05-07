@@ -69,19 +69,27 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
                     <h3>
                         If you don't feel safe in your life, call{" "}
                         <a href={link1800Respect}>1800 Respect</a> on{" "}
-                        {
-                            this.props.mobileView ? (
-                                <a className="phone-number"
-                                    href={`tel:${number1800Respect}`}
-                                >
-                                    {number1800Respect}
-                                </a>
-                            ) : (
-                                <span className="phone-number">
-                                    {number1800Respect}
-                                </span>
-                            )
-                        } for confidential counselling, support and services.
+                        <MobileDetect>
+                            {
+                                ({ isMobile }) => {
+                                    if (!isMobile) {
+                                        return (
+                                            <span className="phone-number">
+                                                {number1800Respect}
+                                            </span>
+                                        )
+                                    }
+
+                                    return (
+                                        <a className="phone-number"
+                                            href={`tel:${number1800Respect}`}
+                                        >
+                                            {number1800Respect}
+                                        </a>
+                                    )
+                                }
+                            }
+                        </MobileDetect> for confidential counselling, support and services.
                     </h3>
                 </div>
             </div>
@@ -89,4 +97,4 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
     }
 }
 
-export default MobileDetect(OnlineSafetyScreen);
+export default OnlineSafetyScreen;

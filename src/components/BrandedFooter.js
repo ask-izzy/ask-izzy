@@ -102,15 +102,22 @@ class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
                             TIS Interpreter Hotline
                         </a>
                         <br />
-                        {
-                            this.props.mobileView ? (
-                                <a href="tel:131450">
-                                    13 14 50
-                                </a>
-                            ) : (
-                                "13 14 50"
-                            )
-                        }
+                        <MobileDetect>
+                            {
+                                ({ isMobile }) => {
+                                    if (isMobile) {
+                                        return "13 14 50";
+                                    }
+
+                                    return (
+                                        <a href="tel:131450">
+                                            13 14 50
+                                        </a>
+                                    )
+
+                                }
+                            }
+                        </MobileDetect>
                     </div>
                 </div>
                 <hr />
@@ -134,4 +141,4 @@ class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
     }
 }
 
-export default MobileDetect(BrandedFooter);
+export default BrandedFooter;

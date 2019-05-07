@@ -77,15 +77,21 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
                     </h2>
                     <h3>
                         Call <a href={linkService}>Kids Helpline</a> on{" "}
-                        {
-                            this.props.mobileView ? (
-                                <a href={`tel:${numberService}`}>
-                                    {numberService}
-                                </a>
-                            ) : (
-                                `${ numberService }`
-                            )
-                        }
+                        <MobileDetect>
+                            {
+                                ({ isMobile }) => {
+                                    if (!isMobile) {
+                                        return `${ numberService }`;
+                                    }
+
+                                    return (
+                                        <a href={`tel:${numberService}`}>
+                                            {numberService}
+                                        </a>
+                                    )
+                                }
+                            }
+                        </MobileDetect>
                         {" "} or chat online <a href={chatService}>here</a>.
                     </h3>
                     <h3>
@@ -100,4 +106,4 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
 }
 
 
-export default MobileDetect(Under18DomesticViolenceScreen);
+export default Under18DomesticViolenceScreen;

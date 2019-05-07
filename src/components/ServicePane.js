@@ -22,6 +22,7 @@ import Ndis from "./Ndis";
 import LinkListItem from "./LinkListItem";
 import BoxedText from "./BoxedText";
 import Chevron from "../icons/Chevron";
+import ShareBox from "./ShareBox";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import type {Service} from "../iss";
@@ -111,6 +112,7 @@ export default class ServicePane extends React.Component<{
                             object={object}
                             spacer={true}
                         />
+                        <ShareBox object={object} />
                         <GoogleMapsLink
                             className="plain-text"
                             to={object.Location()}
