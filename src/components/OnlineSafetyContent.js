@@ -5,7 +5,7 @@ import React from "react";
 
 class OnlineSafetyContent extends React.Component<{}, void> {
     render() {
-        const linkEsafetyPage = "https://www.esafety.gov.au/women/get-help/other-languages#english";
+        const linkEsafetyPage = "https://www.esafety.gov.au/women/get-help/other-languages";
         const link1800Respect = "https://www.1800respect.org.au";
 
         return (
@@ -68,28 +68,36 @@ class OnlineSafetyContent extends React.Component<{}, void> {
                 </h2>
                 <p>
                     If you are worried about someone looking at your internet
-                    use, then you should use a safe computer. This is a computer
-                    that the person checking your phone or computer couldn't use
-                    - like a friends computer, work computer or one at the
-                    library. Do not sign in to sites like Gmail or Facebook as
-                    these sites can save other places you look at.
+                    use, then you should use a safe computer. A safe computer
+                    is a computer that the person checking your phone or
+                    computer couldn't use - like a friend's computer, work
+                    computer or one at the library. Do not sign in to sites
+                    like Gmail or Facebook as these sites can save other
+                    places you look at.
                 </p>
 
                 <h2>
                     Step-by-Step Guides
                 </h2>
+
+                <p>
+                    Available in 12 different languages.
+                </p>
+
                 <h3>
                     <a href={linkEsafetyPage}>
-                        E-Commissioners - Australian Government
+                        eSafety Commissioner - Step-by-Step Guides
                     </a>
                 </h3>
                 <p>
-                    The eSafetyWomen resources aim to help women manage
-                    technology risks and abuse by giving women the tools they
-                    need to be confident when online.<br />
-                    The website has safety checks and step by step guides on how
-                    to clear your browser, make sure your social media and other
-                    accounts are secure.
+                    The eSafetyWomen resources aim to help women to manage
+                    technology risks and abuse by giving them the tools they
+                    need to be confident when online.
+                </p>
+                <p>
+                    The resources include safety checks and step-by-step
+                    guides on how to clear your browser, and make sure your
+                    social media and other accounts are secure.
                 </p>
                 <p>
                     If you are worried a partner or family member is monitoring
