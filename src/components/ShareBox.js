@@ -2,7 +2,6 @@
 
 import React from "react";
 
-import MobileDetect from "./higherorder/MobileDetect";
 import Spacer from "./Spacer";
 
 import type { Service } from "../iss";
@@ -29,26 +28,18 @@ class ShareBox extends React.Component<Props> {
     render(): React.Element<any> {
         return (
             <React.Fragment>
-                <MobileDetect>
                 {
-                    ({ isMobile }) => {
-                        if (!isMobile || navigator.share === undefined) {
-                            return
-                        }
-
-                        return (
-                            <React.Fragment>
-                                <Spacer />
-                                <div>
-                                    <button onClick={this.shareService}>
-                                        Share
-                                    </button>
-                                </div>
-                            </React.Fragment>
-                        )
-                    }
+                    navigator.share !== undefined && (
+                        <React.Fragment>
+                            <Spacer />
+                            <div>
+                                <button onClick={this.shareService}>
+                                    Share
+                                </button>
+                            </div>
+                        </React.Fragment>
+                    )
                 }
-                </MobileDetect>
             </React.Fragment>
         );
     }
