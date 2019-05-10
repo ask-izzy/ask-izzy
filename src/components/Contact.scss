@@ -19,7 +19,13 @@
         font-weight: 400;
     }
 
-    a {
+    button {
+        background-color: transparent;
+    }
+
+    a,
+    button
+    {
         display: block;
         position: relative;
         width: auto;

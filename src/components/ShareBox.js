@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 
 import Spacer from "./Spacer";
 
@@ -32,9 +32,16 @@ class ShareBox extends React.Component<Props> {
                     navigator.share !== undefined && (
                         <React.Fragment>
                             <Spacer />
-                            <div>
-                                <button onClick={this.shareService}>
-                                    Share
+                            <div class="Contact">
+                                <button
+                                    className="ContactButton"
+                                    onClick={this.shareService}
+                                >
+                                    <div
+                                        className="Contact-text"
+                                    >
+                                        Share this service
+                                    </div>
                                 </button>
                             </div>
                         </React.Fragment>
