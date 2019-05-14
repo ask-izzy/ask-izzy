@@ -198,11 +198,17 @@ export default class ChatMessage extends React.Component<Props, void> {
         )];
 
         if (this.props.showQuickRepliesIfAvailable) {
+            let responses;
+
             try {
-                output.push(this.generateExtraDataComponent());
+                responses = this.generateExtraDataComponent();
+                if (!responses) {
+                    responses = this.generateQuickReplies();
+                }
             } catch (exc) {
-                output.push(this.generateQuickReplies());
+                responses = this.generateQuickReplies();
             }
+            output.push(responses);
         }
 
         return (
