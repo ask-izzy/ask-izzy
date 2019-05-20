@@ -83,11 +83,13 @@ $message-border-radius: 8px;
     .QuickReplyContainer {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         justify-content: flex-end;
     }
 }
 
 .ChatQuickReply {
+    margin-bottom: 8px;
     padding: 6px 11px;
     border: 1px solid $brand-pane-alt-dark;
     border-radius: $message-border-radius;

@@ -18,16 +18,18 @@ export default class ChatAvailabilityBox extends BaseLogoWithTextBox {
     );
 
     componentDidMount(): void {
-        const element = document.getElementById('root');
+        const element = document.getElementById("root");
+
         if (element) {
-            element.classList.add('PadChatBox');
+            element.classList.add("PadChatBox");
         }
     }
 
     componentWillUnmount(): void {
-        const element = document.getElementById('root');
+        const element = document.getElementById("root");
+
         if (element) {
-            element.classList.remove('PadChatBox');
+            element.classList.remove("PadChatBox");
         }
     }
 
