@@ -127,12 +127,14 @@ export default class ChatPage extends React.Component<{}, State> {
             };
 
             this._websocket.onclose = (err): void => {
-                this.setState({
-                    showWebsocketReconnect: true,
-                    isProcessing: false,
-                });
-                console.error("Chat socket closed unexpectedly.", err);
-                this._websocket = undefined;
+                if (err.code !== 1000) {
+                    this.setState({
+                        showWebsocketReconnect: true,
+                        isProcessing: false,
+                    });
+                    console.error("Chat socket closed unexpectedly.", err);
+                    this._websocket = undefined;
+                }
             };
         }
     }
@@ -148,16 +150,29 @@ export default class ChatPage extends React.Component<{}, State> {
             console.error("Web Audio API not supported.");
         }
 
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({
-                audio: true,
-                video: false,
-            });
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    audio: true,
+                    video: false,
+                });
 
-            this.handleSuccess(stream);
-        } catch (error) {
-            this.handleError(error);
+                this.handleSuccess(stream);
+            } catch (error) {
+                this.handleError(error);
+            }
+        } else {
+            this.setState({
+                showErrorMessage: true,
+                lastError: `It looks like your browser currently doesn't support
+                voice submission, please try switching browsers in order to use this feature.`,
+                showWebsocketReconnect: false,
+            });
+            if (this._websocket) {
+                this._websocket.close();
+            }
         }
+
     }
 
     /**
