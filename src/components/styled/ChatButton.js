@@ -16,6 +16,7 @@ const ChatButton = styled.button`
     color: ${buttonColor};
     line-height: ${buttonSize};
     text-align: center;
+    padding: 0;
 
     &:not(:first-of-type) {
         margin-left: 15px;
