@@ -100,11 +100,12 @@ export default class ChatPage extends React.Component<{}, State> {
                     data: {
                         credentials: btoa(`${this._websocketUrl.username}:${this._websocketUrl.password}`),
                     },
-                }))
+                }));
                 this._websocket.send(JSON.stringify({
                     cmd: "set_context",
                     data: storage.getAllItems(),
-                }))
+                }));
+                this.setState({ showWebsocketReconnect: false });
             };
 
             this._websocket.onmessage = (frame: {data: mixed}): void => {
@@ -133,8 +134,8 @@ export default class ChatPage extends React.Component<{}, State> {
                         isProcessing: false,
                     });
                     console.error("Chat socket closed unexpectedly.", err);
-                    this._websocket = undefined;
                 }
+                this._websocket = undefined;
             };
         }
     }
