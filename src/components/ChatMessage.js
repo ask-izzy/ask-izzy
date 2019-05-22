@@ -139,14 +139,20 @@ export default class ChatMessage extends React.Component<Props, void> {
 
     generateResponseCards(): ?React.Element<any>[] {
         try {
-            const cards = this.props.message.fulfillment_messages.cards;
+            const {
+                message: {
+                    fulfillment_messages: fulfillmentMessages,
+                },
+            } = this.props;
+
+            const cards = fulfillmentMessages.cards;
 
             return cards.map((card, key) => (
                 <ChatResultCard
                     key={key}
                     card={{
                         ...card,
-                        iss_data: new Service(this.props.message.fulfillment_messages.extra.webhook_payload.iss_response[key]),
+                        iss_data: new Service(fulfillmentMessages.extra.webhook_payload.iss_response[key]),
                     }}
                 />
             ));
