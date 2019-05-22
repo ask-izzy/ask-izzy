@@ -52,24 +52,25 @@ export default class ChatPage extends React.Component<{}, State> {
     _audioFiles = [];
     _websocketUrl: ?URL;
 
+    state = {
+        analysedAudio: (new Array(5)).fill(0),
+        instantLevel: 0,
+        isBlurred: false,
+        isMessagePlaying: false,
+        isMuted: false,
+        isProcessing: false,
+        isRecording: false,
+        lastError: null,
+        messages: [],
+        showErrorMessage: false,
+        showTalkButton: true,
+        showWebsocketReconnect: false,
+        slowLevel: 0,
+        soundBuffer: new Float32Array(),
+    };
+
     constructor(props: {}): void {
         super(props)
-
-        this.state = {
-            analysedAudio: (new Array(5)).fill(0),
-            instantLevel: 0,
-            isMessagePlaying: false,
-            isMuted: false,
-            isProcessing: false,
-            isRecording: false,
-            lastError: null,
-            messages: [],
-            showErrorMessage: false,
-            showTalkButton: true,
-            showWebsocketReconnect: false,
-            slowLevel: 0,
-            soundBuffer: new Float32Array(),
-        };
 
         if (typeof window !== "undefined") {
             this._websocketUrl = new URL(window.SPEECH_SERVER_URL);
@@ -78,12 +79,32 @@ export default class ChatPage extends React.Component<{}, State> {
 
     componentDidMount(): void {
         this.connectWebsocket();
+        window.addEventListener("blur", this.onBlurTab);
+        window.addEventListener("focus", this.onFocusTab);
     }
 
     async componentWillUnmount(): Promise<void> {
+        window.removeEventListener("blur", this.onBlurTab);
+        window.removeEventListener("focus", this.onFocusTab);
         await this.cancelRecording();
         if (this._websocket) {
             this._websocket.close();
+        }
+    }
+
+    onBlurTab = (): void => {
+        this.setState({
+            isMuted: true,
+            isBlurred: true,
+        });
+    }
+
+    onFocusTab = (): void => {
+        if (this.state.isBlurred) {
+            this.setState({
+                isMuted: false,
+                isBlurred: false,
+            });
         }
     }
 
@@ -203,6 +224,7 @@ export default class ChatPage extends React.Component<{}, State> {
             },
         });
         this._mediaRecorder.init(stream);
+        this._mediaRecorder.inputPoint.gain.value = 5.0;
 
         this._soundMeter = new SoundMeter(this._audioContext);
         this._soundMeter.connectToSource(

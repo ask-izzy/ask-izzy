@@ -58,7 +58,7 @@ export default class ChatMessage extends React.Component<Props, void> {
         "showUserStates": AmbiguousStateAction,
     }
 
-    clickHandler(): void {
+    clickHandler = (): void => {
         if (this.props.onClick) {
             this.props.onClick();
         }
@@ -70,13 +70,13 @@ export default class ChatMessage extends React.Component<Props, void> {
         }
     }
 
-    onMessageAnnounceStart(): void {
+    onMessageAnnounceStart = (): void => {
         if (this.props.onMessageAnnounceStart) {
             this.props.onMessageAnnounceStart();
         }
     }
 
-    onMessageAnnounceEnd(): void {
+    onMessageAnnounceEnd = (): void => {
         if (this.props.onMessageAnnounceEnd) {
             this.props.onMessageAnnounceEnd();
         }
@@ -125,8 +125,9 @@ export default class ChatMessage extends React.Component<Props, void> {
                         value => (
                             <div className="QuickReplyContainer">
                                 <Component
-                                    onSuccess={this.handleExtraDataComponentSuccess.bind(this)}
+                                    onSuccess={this.handleExtraDataComponentSuccess}
                                     parentHandlers={value}
+                                    showQuickReplies={this.props.showQuickRepliesIfAvailable}
                                 />
                             </div>
                         )
@@ -154,13 +155,15 @@ export default class ChatMessage extends React.Component<Props, void> {
         }
     }
 
-    handleExtraDataComponentSuccess(data: any): void {
+    handleExtraDataComponentSuccess = (data: any): void => {
         console.log(data);
     }
 
     render(): ?React.Element<any> {
+        const { message: { fulfillment_messages, output_audio, message_type } } = this.props;
+
         try {
-            if (!this.props.message.fulfillment_messages.texts.length || this.props.message.fulfillment_messages.texts[0] === "") {
+            if (!fulfillment_messages.texts.length || fulfillment_messages.texts[0] === "") {
                 return null;
             }
         } catch (exc) {
@@ -169,29 +172,29 @@ export default class ChatMessage extends React.Component<Props, void> {
 
         let decodedAudio = null;
 
-        if (this.props.message.output_audio) {
-            decodedAudio = this.props.message.output_audio;
+        if (output_audio) {
+            decodedAudio = output_audio;
         }
 
         let output = [(
             <div
                 className="ChatMessage"
-                onClick={this.clickHandler.bind(this)}
+                onClick={this.clickHandler}
                 key={0}
             >
-                <div className={this.props.message.message_type}>
+                <div className={message_type}>
                     {
                         decodedAudio && (
                             <AudioFile
                                 autoplay={true}
                                 hidden={true}
                                 src={`data:audio/mpeg;base64,${decodedAudio}`}
-                                onAudioStart={this.onMessageAnnounceStart.bind(this)}
-                                onAudioEnd={this.onMessageAnnounceEnd.bind(this)}
+                                onAudioStart={this.onMessageAnnounceStart}
+                                onAudioEnd={this.onMessageAnnounceEnd}
                             />
                         )
                     }
-                    {this.props.message.fulfillment_messages.texts.randomElement()}
+                    {fulfillment_messages.texts.randomElement()}
                     {this.generateResponseCards()}
                 </div>
             </div>
