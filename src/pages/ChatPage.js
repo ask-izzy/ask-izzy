@@ -584,9 +584,9 @@ export default class ChatPage extends React.Component<{}, State> {
                     showTalkButton ? (
                         <ChatButtonContainer>
                             <AudioFile
-                                hidden
+                                hidden={true}
                                 src="data:audio/wave;base64,UklGRjIAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAAABmYWN0BAAAAAAAAABkYXRhAAAAAA=="
-                                forwardRef={elem => this._hiddenDefaultAudio = elem}
+                                forwardRef={elem => { this._hiddenDefaultAudio = elem }}
                             />
                             <ChatButton onClick={this.startVoiceChat}>
                                 Talk

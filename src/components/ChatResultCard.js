@@ -15,7 +15,14 @@ type Props = {
 
 class ChatResultCard extends React.Component<Props, void> {
     render(): ?React.Element<any> {
-        const { card: { buttons, title, subtitle, iss_data: issData }} = this.props;
+        const {
+            card: {
+                buttons,
+                title,
+                subtitle,
+                iss_data: issData,
+            },
+        } = this.props;
 
         return (
             <div className="ChatResultCard">
