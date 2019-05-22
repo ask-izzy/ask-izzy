@@ -160,10 +160,16 @@ export default class ChatMessage extends React.Component<Props, void> {
     }
 
     render(): ?React.Element<any> {
-        const { message: { fulfillment_messages, output_audio, message_type } } = this.props;
+        const {
+            message: {
+                fulfillment_messages: fulfillmentMessages,
+                output_audio: outputAudio,
+                message_type: messageType,
+            },
+        } = this.props;
 
         try {
-            if (!fulfillment_messages.texts.length || fulfillment_messages.texts[0] === "") {
+            if (!fulfillmentMessages.texts.length || fulfillmentMessages.texts[0] === "") {
                 return null;
             }
         } catch (exc) {
@@ -172,8 +178,8 @@ export default class ChatMessage extends React.Component<Props, void> {
 
         let decodedAudio = null;
 
-        if (output_audio) {
-            decodedAudio = output_audio;
+        if (outputAudio) {
+            decodedAudio = outputAudio;
         }
 
         let output = [(
@@ -182,7 +188,7 @@ export default class ChatMessage extends React.Component<Props, void> {
                 onClick={this.clickHandler}
                 key={0}
             >
-                <div className={message_type}>
+                <div className={messageType}>
                     {
                         decodedAudio && (
                             <AudioFile
@@ -194,7 +200,7 @@ export default class ChatMessage extends React.Component<Props, void> {
                             />
                         )
                     }
-                    {fulfillment_messages.texts.randomElement()}
+                    {fulfillmentMessages.texts.randomElement()}
                     {this.generateResponseCards()}
                 </div>
             </div>
