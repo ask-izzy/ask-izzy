@@ -9,15 +9,15 @@ type Props = {
 }
 
 class ChatResultCardButton extends React.Component<Props, void> {
-    handleButtonPress(): void {
-        window.location = this.props.button.postback;
+    handleButtonPress = (): void => {
+        window.open(this.props.button.postback, "_blank");
     }
 
     render(): ?React.Element<any> {
         return (
             <button
                 className="ChatResultCardButton"
-                onClick={this.handleButtonPress.bind(this)}
+                onClick={this.handleButtonPress}
             >
                 {this.props.button.text}
             </button>

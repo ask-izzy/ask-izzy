@@ -16,7 +16,7 @@ const MobileDetect = OldComponent => {
 
                 window.addEventListener(
                     "resize",
-                    this._updateMobileSize.bind(this)
+                    this._updateMobileSize
                 );
             }
         }
@@ -29,12 +29,12 @@ const MobileDetect = OldComponent => {
             if (typeof window !== "undefined") {
                 window.removeEventListener(
                     "resize",
-                    this._updateMobileSize.bind(this)
+                    this._updateMobileSize
                 );
             }
         }
 
-        _updateMobileSize(): void {
+        _updateMobileSize = (): void => {
             let isMobile = false;
 
             if (typeof window !== "undefined") {
