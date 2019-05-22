@@ -9,6 +9,7 @@ type Props = {
     src?: string,
     onAudioStart?: Function,
     onAudioEnd?: Function,
+    forwardRef?: Function,
 }
 
 export default class AudioFile extends React.Component<Props, void> {
@@ -26,7 +27,7 @@ export default class AudioFile extends React.Component<Props, void> {
         if (props.src) {
             this._dataUrl = props.src;
         } else {
-            window.URL.createObjectURL(props.data);
+            this._dataUrl = window.URL.createObjectURL(props.data);
         }
     }
 
@@ -39,13 +40,13 @@ export default class AudioFile extends React.Component<Props, void> {
         }
     }
 
-    onAudioStart(): void {
+    onAudioStart = (): void => {
         if (this.props.onAudioStart) {
             this.props.onAudioStart();
         }
     }
 
-    onAudioEnd(): void {
+    onAudioEnd = (): void => {
         if (this.props.onAudioEnd) {
             this.props.onAudioEnd();
         }
@@ -62,13 +63,14 @@ export default class AudioFile extends React.Component<Props, void> {
                 <audio
                     autoPlay={this.props.autoplay}
                     controls={true}
-                    onEnded={this.onAudioEnd.bind(this)}
-                    onPlay={this.onAudioStart.bind(this)}
+                    onEnded={this.onAudioEnd}
+                    onPlay={this.onAudioStart}
+                    ref={this.props.forwardRef}
                 >
                     <source src={this._dataUrl} />
                 </audio>
                 <a
-                    download="audio.flac"
+                    download="audio.mpeg"
                     href={this._dataUrl}
                 >
                     Download

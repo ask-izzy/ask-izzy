@@ -198,8 +198,8 @@ export default class ChatMessage extends React.Component<Props, void> {
                     {
                         decodedAudio && (
                             <AudioFile
-                                autoplay={true}
-                                hidden={true}
+                                autoplay
+                                hidden
                                 src={`data:audio/mpeg;base64,${decodedAudio}`}
                                 onAudioStart={this.onMessageAnnounceStart}
                                 onAudioEnd={this.onMessageAnnounceEnd}

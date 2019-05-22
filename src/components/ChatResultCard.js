@@ -15,16 +15,17 @@ type Props = {
 
 class ChatResultCard extends React.Component<Props, void> {
     render(): ?React.Element<any> {
+        const { card: { buttons, title, subtitle, iss_data: issData }} = this.props;
 
         return (
             <div className="ChatResultCard">
                 <h3>
-                    {this.props.card.title}
+                    {title}
                 </h3>
                 <p>
-                    {this.props.card.subtitle}
+                    {subtitle}
                 </p>
-                <ErrorCapture data={this.props.card.iss_data}>
+                <ErrorCapture data={issData}>
                     {
                         ({ caughtError, data }) => {
                             const phoneNumber = data.Phones()[0].number;
@@ -50,7 +51,7 @@ class ChatResultCard extends React.Component<Props, void> {
                 </ErrorCapture>
                 <div className="ButtonContainer">
                     {
-                        this.props.card.buttons.map((button, key) =>
+                        buttons.map((button, key) =>
                             <ChatResultCardButton
                                 key={key}
                                 button={button}

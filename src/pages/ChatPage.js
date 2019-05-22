@@ -47,6 +47,7 @@ export default class ChatPage extends React.Component<{}, State> {
     _soundMeter: ?SoundMeter;
     _mediaRecorder: ?Recorder;
     _encoder: ?Worker;
+    _hiddenDefaultAudio: ?HTMLAudioElement;
 
     _audioCaptureThreshold: number = 0.05;
     _audioFiles = [];
@@ -173,6 +174,10 @@ export default class ChatPage extends React.Component<{}, State> {
         }
 
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            if (this._hiddenDefaultAudio) {
+                this._hiddenDefaultAudio.play();
+            }
+
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({
                     audio: true,
@@ -578,6 +583,11 @@ export default class ChatPage extends React.Component<{}, State> {
                 {
                     showTalkButton ? (
                         <ChatButtonContainer>
+                            <AudioFile
+                                hidden
+                                src="data:audio/wave;base64,UklGRjIAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAAABmYWN0BAAAAAAAAABkYXRhAAAAAA=="
+                                forwardRef={elem => this._hiddenDefaultAudio = elem}
+                            />
                             <ChatButton onClick={this.startVoiceChat}>
                                 Talk
                             </ChatButton>
