@@ -483,6 +483,7 @@ export default class ChatPage extends React.Component<{}, State> {
                                 isProcessing: true,
                             })
                         },
+                        audioContext: this._audioContext,
                     }}
                 >
                     <React.Fragment key={`message${iter}`}>
@@ -583,13 +584,13 @@ export default class ChatPage extends React.Component<{}, State> {
                 {
                     showTalkButton ? (
                         <ChatButtonContainer>
-                            <AudioFile
+                            {/* <AudioFile
                                 hidden={true}
                                 src="data:audio/wave;base64,UklGRjIAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAAABmYWN0BAAAAAAAAABkYXRhAAAAAA=="
                                 forwardRef={elem => {
                                     this._hiddenDefaultAudio = elem
                                 }}
-                            />
+                            /> */}
                             <ChatButton onClick={this.startVoiceChat}>
                                 Talk
                             </ChatButton>

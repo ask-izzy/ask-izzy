@@ -10,6 +10,7 @@ type Props = {
     onAudioStart?: Function,
     onAudioEnd?: Function,
     forwardRef?: Function,
+    audioContext: ?AudioContext,
 }
 
 export default class AudioFile extends React.Component<Props, void> {
@@ -28,6 +29,21 @@ export default class AudioFile extends React.Component<Props, void> {
             this._dataUrl = props.src;
         } else {
             this._dataUrl = window.URL.createObjectURL(props.data);
+        }
+    }
+
+    componentDidMount(): void {
+        if (this.props.audioContext && this.props.decodedAudio) {
+            this.props.audioContext.decodeAudioData(
+                Uint8Array.from(atob(this.props.decodedAudio), c => c.charCodeAt(0)).buffer,
+                audioBuffer => {
+                    const source = this.props.audioContext.createBufferSource()
+                    source.buffer = audioBuffer
+                    source.connect(this.props.audioContext.destination)
+                    source.start()
+                    console.log(source)
+                }
+            )
         }
     }
 
@@ -55,6 +71,8 @@ export default class AudioFile extends React.Component<Props, void> {
     render(): React.Element<any> {
         const className = this.props.hidden ? "HiddenAudioFile"
             : "VisibleAudioFile";
+
+        return <React.Fragment />
 
         return (
             <div

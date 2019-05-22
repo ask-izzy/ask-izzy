@@ -194,21 +194,29 @@ export default class ChatMessage extends React.Component<Props, void> {
                 onClick={this.clickHandler}
                 key={0}
             >
-                <div className={messageType}>
+                <Context.Consumer>
                     {
-                        decodedAudio && (
-                            <AudioFile
-                                autoplay={true}
-                                hidden={true}
-                                src={`data:audio/mpeg;base64,${decodedAudio}`}
-                                onAudioStart={this.onMessageAnnounceStart}
-                                onAudioEnd={this.onMessageAnnounceEnd}
-                            />
+                        value => (
+                            <div className={messageType}>
+                                {
+                                    decodedAudio && (
+                                        <AudioFile
+                                            autoplay={true}
+                                            hidden={true}
+                                            decodedAudio={decodedAudio}
+                                            src={`data:audio/mpeg;base64,${decodedAudio}`}
+                                            onAudioStart={this.onMessageAnnounceStart}
+                                            onAudioEnd={this.onMessageAnnounceEnd}
+                                            audioContext={value.audioContext}
+                                        />
+                                    )
+                                }
+                                {fulfillmentMessages.texts.randomElement()}
+                                {this.generateResponseCards()}
+                            </div>
                         )
                     }
-                    {fulfillmentMessages.texts.randomElement()}
-                    {this.generateResponseCards()}
-                </div>
+                </Context.Consumer>
             </div>
         )];
 
