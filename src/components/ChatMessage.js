@@ -31,7 +31,7 @@ export type CardType = {
 
 type Props = {
     message: {
-        message_type: string,
+        message_type: 'from' | 'to',
         output_audio?: string,
         fulfillment_messages: {
             texts: IXArray<string>,
@@ -201,10 +201,7 @@ export default class ChatMessage extends React.Component<Props, void> {
                                 {
                                     decodedAudio && (
                                         <AudioFile
-                                            autoplay={true}
-                                            hidden={true}
                                             decodedAudio={decodedAudio}
-                                            src={`data:audio/mpeg;base64,${decodedAudio}`}
                                             onAudioStart={this.onMessageAnnounceStart}
                                             onAudioEnd={this.onMessageAnnounceEnd}
                                             audioContext={value.audioContext}
