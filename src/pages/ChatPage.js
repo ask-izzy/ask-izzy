@@ -31,6 +31,7 @@ type State = {
     showWebsocketReconnect: boolean,
     slowLevel: number,
     soundBuffer: Float32Array,
+    inputMessage: string,
 }
 
 export const Context = React.createContext();
@@ -68,6 +69,7 @@ export default class ChatPage extends React.Component<{}, State> {
         showWebsocketReconnect: false,
         slowLevel: 0,
         soundBuffer: new Float32Array(),
+        inputMessage: '',
     };
 
     constructor(props: {}): void {
@@ -143,10 +145,12 @@ export default class ChatPage extends React.Component<{}, State> {
                     return
                 }
 
-                this.setState({
-                    messages: [...this.state.messages, data],
-                    isProcessing: false,
-                });
+                if (data.message_type === 'to') {
+                    this.setState({
+                        messages: [...this.state.messages, data],
+                        isProcessing: false,
+                    });
+                }
             };
 
             this._websocket.onclose = (err): void => {
@@ -448,6 +452,23 @@ export default class ChatPage extends React.Component<{}, State> {
                 cmd: "text",
                 data: textIntent,
             }));
+
+            this.setState({
+                messages: [
+                    ...this.state.messages,
+                    {
+                        message_type: 'from',
+                        fulfillment_messages: {
+                            texts: [
+                                textIntent,
+                            ],
+                            quick_replies: [],
+                            cards: [],
+                            extra: {},
+                        },
+                    },
+                ]
+            })
         }
     }
 
@@ -470,6 +491,12 @@ export default class ChatPage extends React.Component<{}, State> {
                 isMessagePlaying: false,
             });
         }, 550);
+    }
+
+    submitMessage = (event): void => {
+        event.preventDefault()
+        this.sendTextIntent(this.state.inputMessage)
+        this.setState({ inputMessage: '' })
     }
 
     renderMessages(): React.Element<any> {
@@ -578,7 +605,18 @@ export default class ChatPage extends React.Component<{}, State> {
                         <div className="lds-dual-ring" />
                     )
                 }
-                <DebugContainer message="Text Intents">
+                <form
+                    onSubmit={this.submitMessage}
+                >
+                    <input
+                        type="text"
+                        name="input-message"
+                        value={this.state.inputMessage}
+                        onChange={e => { this.setState({ inputMessage: e.target.value }) }}
+                    />
+                    <input type="submit" value="Send" />
+                </form>
+                {/* <DebugContainer message="Text Intents">
                     <DebugChatMessages onMessageSubmit={this.sendTextIntent} />
                 </DebugContainer>
                 {
@@ -603,7 +641,7 @@ export default class ChatPage extends React.Component<{}, State> {
                             </ChatButtonContainer>
                         </React.Fragment>
                     )
-                }
+                } */}
             </StaticPage>
         );
     }
