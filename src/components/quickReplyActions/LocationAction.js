@@ -44,7 +44,7 @@ export default class LocationAction extends React.Component<Props, State> {
         }));
     }
 
-    getUserLocation(): void {
+    getUserLocation = async (): Promise<void> => {
         if (this.state.geolocation !== "NOT_STARTED") {
             return;
         }
@@ -54,34 +54,43 @@ export default class LocationAction extends React.Component<Props, State> {
         });
         sendEvent({event: "geolocation-requested"});
 
-        this.locateMe()
-            .then((params) => {
-                this.setState({geolocation: "COMPLETE"});
-                sendEvent({event: "geolocation-success"});
+        try {
+            const params = await this.locateMe()
 
-                this.handleLocationSuccess(params);
-            })
-            .catch(error => {
-                sendEvent({
-                    event: "geolocation-failed",
-                    message: error.message,
-                });
-                console.error(error);
-                this.setState({
-                    geolocation: "FAILED",
-                    error: error.message,
-                });
+            this.setState({geolocation: "COMPLETE"});
+            sendEvent({event: "geolocation-success"});
+
+            this.handleLocationSuccess(params);
+        } catch (error) {
+            sendEvent({
+                event: "geolocation-failed",
+                message: error.message,
             });
+            console.error(error);
+            this.setState({
+                geolocation: "FAILED",
+                error: error.message,
+            });
+        }
     }
 
-    render(): ?React.Element<any> {
-        return this.state.geolocation === "NOT_STARTED" ? (
-            <ChatQuickReply
-                action="Enable my location"
-                onClick={this.getUserLocation.bind(this)}
-            />
-        ) : (
-            <div className="lds-dual-ring" />
-        )
+    render(): React.Element<any> {
+        switch (this.state.geolocation) {
+            case "NOT_STARTED":
+                return (
+                    <ChatQuickReply
+                        action="Enable my location"
+                        onClick={this.getUserLocation}
+                    />
+                )
+            case "FAILED":
+                return (
+                    <React.Fragment>
+                        Couldn't find your location, please enter your location.
+                    </React.Fragment>
+                )
+            default:
+                return <div className="lds-dual-ring" />
+        }
     }
 }
