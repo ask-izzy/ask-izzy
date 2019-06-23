@@ -4,6 +4,10 @@ VERSION_TAG := $(shell git describe)
 TAG := $(shell if [ -z "$(CI)" ]; then echo $(VERSION_TAG); else echo "$(VERSION_TAG)-ci"; fi)
 FORKLIFT := docker run -t
 
+ifdef CI
+runnerid := $(shell grep 'docker/' /proc/1/cgroup | tail -1 | sed 's/^.*\///' | cut -c 1-12)
+endif
+
 # Allow multi-line assignments to include a `\` on the end of every
 # line (including the last one), which avoids the situation where you
 # have to touch two lines in order to add an item to the list.
@@ -54,6 +58,15 @@ push: dockerpush
 
 lint:
 	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) lint
+
+lint-dockerfile:
+ifdef CI
+	docker run --rm --volumes-from "$(runnerid)" -w "$(CI_PROJECT_DIR)" \
+		hadolint/hadolint:latest-debian hadolint Dockerfile
+else
+	docker run --rm -v $(PWD):/mnt -w /mnt \
+		hadolint/hadolint:latest-debian hadolint Dockerfile
+endif
 
 unit-test:
 	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) unit-test $(CI_TEST_FLAGS)

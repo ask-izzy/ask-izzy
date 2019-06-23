@@ -5,7 +5,7 @@ ARG commonPackages='apt-transport-https \
     parallel \
     wget'
 
-FROM contyard.office.infoxchange.net.au/stretch-nodejs8 as test
+FROM contyard.office.infoxchange.net.au/stretch-nodejs8:latest as test
 
 ARG commonPackages
 
@@ -23,22 +23,21 @@ RUN \
     mkdir -p /static /storage /app && \
     chown -R app /static /storage /app && \
     apt-get -y update && \
-    apt-get -y upgrade && \
     apt-get -y --no-install-recommends install \
-    ${commonPackages} \
-    git \
-    sudo \
-    chromium=70.0.3538.110-1~deb9u1 \
-    build-essential \
-    python \
-    libelf-dev && \
+        ${commonPackages} \
+        git \
+        sudo \
+        chromium=70.0.3538.110-1~deb9u1 \
+        build-essential \
+        python \
+        libelf-dev && \
     npm install -g yarn && \
     yarn config set registry http://apt.office.infoxchange.net.au/npm && \
     yarn --frozen-lockfile && \
     yarn cache clean
 
 # Install and build the app
-ADD . /app
+COPY . /app
 
 RUN git describe > public/VERSION && \
     script/build-assets && \
@@ -49,7 +48,7 @@ ENTRYPOINT ["./invoke.sh"]
 EXPOSE 8000
 
 
-FROM contyard.office.infoxchange.net.au/stretch
+FROM contyard.office.infoxchange.net.au/stretch:latest
 
 ARG commonPackages
 
@@ -64,7 +63,6 @@ WORKDIR /app
 COPY --from=test /app /app
 
 RUN apt-get -y update && \
-    apt-get -y upgrade && \
     apt-get -y --no-install-recommends install \
         ${commonPackages} \
     && rm -rf /app/node_modules \

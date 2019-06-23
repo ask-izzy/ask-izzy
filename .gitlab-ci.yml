@@ -5,41 +5,77 @@ variables:
     GOOGLE_API_KEY: AIzaSyChNlerDt3cxNWvSylVdCsUkJ-3l87qojU
     ENVIRONMENT: development
 
+stages:
+ - build
+ - lint
+ - test
+ - deploy
+
 before_script:
-    - hostname
-    - docker version
-    - docker info
+  - hostname
+  - docker version
+  - docker info
 
 build:
-    stage: build
-    script: make build
+  stage: build
+  script: make build
 
-lint:
-    stage: test
-    script: make lint
+.lint:
+  stage: lint
+  script: make lint
+
+lint-dev:
+  extends: .lint
+  except:
+    - master
+    - tags
+  allow_failure: true
+
+lint-final:
+  extends: .lint
+  only:
+    - master
+    - tags
+
+.lint-dockerfile:
+  stage: lint
+  script: make lint-dockerfile
+
+lint-dockerfile-dev:
+  extends: .lint-dockerfile
+  except:
+    - master
+    - tags
+  allow_failure: true
+
+lint-dockerfile-final:
+  extends: .lint-dockerfile
+  only:
+    - master
+    - tags
 
 unit-test:
-    stage: test
-    script: make unit-test
+  stage: test
+  script: make unit-test
 
 feature-test:
-    stage: test
-    script: make feature-test
+  stage: test
+  script: make feature-test
 
 maps-test:
-    stage: test
-    script: make maps-test
+  stage: test
+  script: make maps-test
 
 personalisation-test:
-    stage: test
-    script: make personalisation-test
+  stage: test
+  script: make personalisation-test
 
 # Deploy to test environment when tagged
 deploy:
-    stage: deploy
-    script: make build-prod dockerpush release-dev release-test
-    only:
-        - tags
+  stage: deploy
+  script: make build-prod dockerpush release-dev release-test
+  only:
+    - tags
 
 dependency_scanning:
   image: docker:stable
