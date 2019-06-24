@@ -1,6 +1,11 @@
 ---
 ignored:
-    - DL3006
-    - DL3007
-    - DL3008
-    - DL3016
+  # Using :latest is prone to errors.
+  # We don't explicitly tag the version of our base image so we use latest.
+  - DL3007
+  # Pin versions in apt.
+  # We prefer to fetch the latest dependencies to reduce maintenance overhead.
+  - DL3008
+  # Pin versions in npm.
+  # Same as above.
+  - DL3016

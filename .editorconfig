@@ -1,17 +1,19 @@
-[*]
+# Infoxchange base editor config
 
-# Change these settings to your own preference
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Since it's most common in our projects set a default of 4 spaces for a tab
 indent_style = space
 indent_size = 4
 
-# We recommend you to keep these unchanged
-end_of_line = lf
-charset = utf-8
-trim_trailing_whitespace = true
-insert_final_newline = true
+[Makefile]
+indent_style = tab
 
-[*.html]
+[*.{js,yaml,php}]
 indent_size = 2
-
-[*.md]
-trim_trailing_whitespace = false
