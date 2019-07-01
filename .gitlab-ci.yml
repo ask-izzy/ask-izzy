@@ -2,7 +2,6 @@
 # See http://doc.gitlab.com/ci/builds_configuration/README.html
 
 variables:
-    GOOGLE_API_KEY: AIzaSyChNlerDt3cxNWvSylVdCsUkJ-3l87qojU
     ENVIRONMENT: development
 
 stages:
