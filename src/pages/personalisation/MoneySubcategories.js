@@ -14,8 +14,9 @@ export default class MoneySubcategories extends BaseQuestion {
             "Emergency aid": append("emergency aid"),
             "Bond or rental assistance": append("(bond assistance)"),
             "Financial assistance e.g. utility bills, petrol, food": append(""),
-            "No interest loans": remove("financial aid")
-                .append("nils"),
+            "No interest & low interest loans": remove("financial aid")
+                .append("nils")
+                .append("low-interest"),
             "Gambling counselling": remove("financial aid")
                 .append("gambling counselling"),
             "Financial counselling": remove("financial aid")
