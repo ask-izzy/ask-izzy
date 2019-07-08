@@ -74,6 +74,7 @@ import SvgIconUnder18 from "./Under18";
 import SvgIconUsingViolence from "./UsingViolence";
 import SvgIconWalk from "./Walk";
 import SvgIconWebsite from "./Website";
+import SvgIconFacebook from "./Facebook";
 
 export default {
     OnlineSecurity: SvgIconOnlineSecurity,
@@ -148,4 +149,5 @@ export default {
     UsingViolence: SvgIconUsingViolence,
     Walk: SvgIconWalk,
     Website: SvgIconWebsite,
+    Facebook: SvgIconFacebook,
 };

@@ -43,6 +43,20 @@
         color: $brand-text-mid;
     }
 
+    div.full-width {
+        width: 100%;
+    }
+
+    .flex-align {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .inline-block-icon {
+        display: inline-block;
+        margin-left: 5px;
+    }
+
     .footer-list {
         display: inline;
         margin: 0;
