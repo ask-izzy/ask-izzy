@@ -15,6 +15,7 @@ export default class EverydayThingsSubcategories extends BaseQuestion {
                 .remove({service_type: ["material aid"]})
                 .remove("material aid"),
             "Transport": remove("material aid")
+                .remove({service_type: ["material aid"]})
                 .append("transport")
                 .append("travel")
                 .append("-hacc"),
