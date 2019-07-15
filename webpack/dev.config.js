@@ -54,8 +54,8 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(jpe?g|png|gif|svg|json)$/,
-                use: "file",
+                test: /\.(jpe?g|png|gif|svg)$/,
+                use: "file-loader",
             },
             {
                 test: /\.scss$/,
