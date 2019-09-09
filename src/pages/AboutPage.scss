@@ -1,0 +1,20 @@
+$color-grey: #515257;
+
+.AboutPage {
+    margin-bottom: 5em;
+
+    .text-center {
+        text-align: center;
+    }
+
+    .small {
+        margin-bottom: 3em;
+        color: $color-grey;
+        font-size: 0.7em;
+    }
+
+    .img-center {
+        display: block;
+        margin: 0 auto;
+    }
+}
