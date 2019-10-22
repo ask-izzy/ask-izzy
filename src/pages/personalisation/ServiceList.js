@@ -3,6 +3,7 @@
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
 import icons from "../../icons";
+import Location from "./Location";
 
 export default class ServiceList extends BaseQuestion {
     static title = "Service";
@@ -29,7 +30,14 @@ export default class ServiceList extends BaseQuestion {
                 .append("-grants")
                 .append("name:\"financial counselling\""),
             "Help for people using violence": remove("(family violence)")
-                .append("(using violence)"),
+                .append("(using violence)")
+                .conditionally(
+                    remove("(using violence)")
+                        .append("(men's behaviour change)"),
+                    // Check for injection of access points currently checks
+                    // if a user is in Victoria
+                    () => Location.shouldInjectAccessPoints()
+                ),
             "Help for pets": append("pets -(animal control)")
                 .append("-(effectiveness training)"),
         },
