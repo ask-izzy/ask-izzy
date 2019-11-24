@@ -96,7 +96,7 @@ const categories: Array<Category> = [
         byline: "Scared of partner or family member",
         icon: icons.EscapeViolence,
         search: {
-            q: "(family violence) -(coordinating bodies)",
+            q: "(family violence) -(coordinating bodies) -(fire-fighting)",
         },
         personalisation: [
             ...personalisation.OnlineSafetyScreenBundle(
@@ -117,7 +117,7 @@ const categories: Array<Category> = [
         search: {
             q: "(community health) -(coordinating bodies)",
             minimum_should_match: "30%",
-            healthcare_card_holders: true,
+            show_in_askizzy_health: true,
         },
         personalisation: [
             personalisation.Location,

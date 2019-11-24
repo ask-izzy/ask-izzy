@@ -37,7 +37,7 @@ function defaults() {
         emails: [],
         endpoints: [],
         funding_body: "Department of Human Services (VIC)",
-        healthcare_card_holders: true,
+        show_in_askizzy_health: true,
         id: Id(),
         indigenous_classification: [],
         ineligibility_info: "",

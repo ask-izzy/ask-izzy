@@ -30,10 +30,10 @@ export default class HealthSubcategories extends BaseQuestion {
             "Children": remove("(community health)")
                 .append("health children"),
             "Maternal & child health": remove("(community health)")
-                .remove({healthcare_card_holders: true})
+                .remove({show_in_askizzy_health: true})
                 .append("(maternal child health)"),
             "Hospital": remove("(community health)")
-                .remove({healthcare_card_holders: true})
+                .remove({show_in_askizzy_health: true})
                 .append("(public hospital services)")
                 .append("-pac")
                 .append("-medicare"),

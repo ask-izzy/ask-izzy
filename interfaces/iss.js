@@ -130,7 +130,7 @@ type issService = {
     "emails": Array<issEmail>,
     "endpoints": Array<endpoint>,
     "funding_body": string,
-    "healthcare_card_holders": boolean,
+    "show_in_askizzy_health": boolean,
     "id": number,
     "ineligibility_info": string,
     "intake_info": string,

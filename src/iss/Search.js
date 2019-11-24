@@ -121,9 +121,9 @@ export class AppendToSearch extends Search {
             search.is_bulk_billing = this.search.is_bulk_billing;
         }
 
-        if (this.search.healthcare_card_holders) {
-            search.healthcare_card_holders =
-                this.search.healthcare_card_holders;
+        if (this.search.show_in_askizzy_health) {
+            search.show_in_askizzy_health =
+                this.search.show_in_askizzy_health;
         }
 
         if (this.search.minimum_should_match) {
