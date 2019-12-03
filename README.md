@@ -5,7 +5,7 @@
 If you're working on this codebase, some understanding of the following will
 help:
 
- * Node (version 8)
+ * Node (version 12)
  * npm (versions 6.x and above)
  * yarn
  * webpack
@@ -37,12 +37,12 @@ The Google API key is set by the Dev team in appvars.
 
 ## Dealing with HTTP and browsers
 
-Ask Izzy is a fully static site in production 
-(see `conf/nginx.conf` for the rewrite rules that make this 
+Ask Izzy is a fully static site in production
+(see `conf/nginx.conf` for the rewrite rules that make this
 work - there is duplicated logic from `routes.js`).
 
-Pages which do not require ISS data are pre-generated and generally work 
-without javascript. 
+Pages which do not require ISS data are pre-generated and generally work
+without javascript.
 See `HtmlDocument.js`, `server/render-static.js` (prod) and `server/render.js` (dev).
 
 Once the page JS loads:
@@ -110,7 +110,7 @@ Ask Izzy uses Webpack to organize building JS / CSS.
 
 Webpack configuration is very powerful but unfortunately quite complex.
 The current configuration compiles javascript files using babel (for JSX and flow) and CSS files using sass,
-then writes the result to `public/static/main-<MD5>.<css|js>`. 
+then writes the result to `public/static/main-<MD5>.<css|js>`.
 The file `server/webpack-stats.json` is also generated, so that our code can find the
 path to the files.
 
@@ -121,52 +121,52 @@ This class is used in the SCSS file to avoid rules applying to the wrong compone
 
 ## Javascript features
 
-The babel compiler and polyfill allows us to use advanced features 
+The babel compiler and polyfill allows us to use advanced features
 which are not yet available in all browsers.
 
 ### Promises, async and await
 
 We've used `async` and `await` extensively in Ask Izzy.
-Under the hood these are syntactic sugar for promises 
+Under the hood these are syntactic sugar for promises
 (which are well documented online).
 
 Any function defined as `async function foo()` will
-have its return value converted to a promise (any 
-exception will result in a promise error and the 
+have its return value converted to a promise (any
+exception will result in a promise error and the
 result is the promise result).
 
 Within an `async function`, you can use `[my variable] = await [a promise]`
 which will pause the function until the given promise
-resolves to a value or an error. If it's a value it's 
-returned, if the promise has an error an exception is 
+resolves to a value or an error. If it's a value it's
+returned, if the promise has an error an exception is
 raised.
 
 Promises are part of the JS standard and are supported
 natively in every browser except IE (where they are polyfilled),
-but async and await are not yet standardized (see 
-https://github.com/tc39/ecmascript-asyncawait 
+but async and await are not yet standardized (see
+https://github.com/tc39/ecmascript-asyncawait
 for the in-progress standard).
 
 ## Type system (flowtype)
 
 Flow is configured using the `.flowconfig` file.
 
-All JS files in the repo either start with 
-`/* @flow */` if they are typechecked 
+All JS files in the repo either start with
+`/* @flow */` if they are typechecked
 or `/* flow:disable */` if they are not.
 
 You can run flow on its own using `./node_modules/.bin/flow`.
 It's also run as part of the precommit hooks and in CI.
 
-Libraries which aren't part of the code have type definitions 
+Libraries which aren't part of the code have type definitions
 in the `interfaces` directory.
 
 ## Search query generation
 
 When a `ResultsPage` is added to the page, it builds a query
-by calling `issParams` which iterates through 
+by calling `issParams` which iterates through
 `personalisationComponents` (inherited from `BaseCategoriesPage`)
-and calls `getSearch` to build up a search object which is 
+and calls `getSearch` to build up a search object which is
 passed to `search` in `iss.js`.
 
 For category pages, `BaseCategoriesPage` checks `constants/categories.js`
@@ -177,7 +177,7 @@ will return `null` from `getSearch`, and the `ResultsPage`
 will redirect to the personalisation page to answer the question.
 
 The whole personalisation space is a twisty mess of side effects
-and inheritance. Changes which fit into the existing model are 
+and inheritance. Changes which fit into the existing model are
 super easy but I would be very careful testing any changes to
 the control code.
 
@@ -192,9 +192,9 @@ All google analytics events are sent by calling the `push` method in `google-tag
 
 We use the react-google-maps component to handle the maps integration.
 
-The `removeOutliers` method in `ResultsMap.js` was implemented 
+The `removeOutliers` method in `ResultsMap.js` was implemented
 because results sometimes include e.g. a hotline which is headquartered
-hundreds of km away. `removeOutliers` is reasonably well commented and 
+hundreds of km away. `removeOutliers` is reasonably well commented and
 tested (see `ResultsMapTest.js`) but it is quite complex.
 
 ### Directions / travel times
@@ -204,18 +204,18 @@ See `maps.js` for the implementation, called from `iss.js`
 
 ### Places autocomplete
 
-We use the google places API to autocomplete place names. 
+We use the google places API to autocomplete place names.
 See `locationSuggestions.js` for implementation.
 
 This approach means that we frequently have bugs where a location
-is known to google but not ISS. The obvious fix would be to use ISS 
+is known to google but not ISS. The obvious fix would be to use ISS
 as the source of location autocomplete data.
 
 ## Outstanding issues
 
 The search implementation attempts to build a free-text query.
-This is fundamentally not really a workable approach but for 
-organisational and technical reasons it's very difficult to 
+This is fundamentally not really a workable approach but for
+organisational and technical reasons it's very difficult to
 make changes to ISS3 which serves the queries.
 
 ## Tests
@@ -229,8 +229,8 @@ Search features live in `test/search` with step definitions in `test/search-step
 
 ### Docker
 
-The dockerfile can run the tests but there's currently 
-no development server in `invoke.sh` (should be an easy 
+The dockerfile can run the tests but there's currently
+no development server in `invoke.sh` (should be an easy
 fix but docker isn't typically run locally).
 
 There's also a mock ISS server available as `./script/mock-iss`. This will
@@ -267,7 +267,7 @@ Running the tests:
     ./script/personalisation-test
     ./script/search-test
 
-Pass `SELENIUM_BROWSER=firefox|phantomjs|chrome` to choose a 
+Pass `SELENIUM_BROWSER=firefox|phantomjs|chrome` to choose a
 browser to run the feature tests with (default is firefox)
 
 You can pass `BROWSER_LOGS=yes` to dump logs from the browser. Be aware not
