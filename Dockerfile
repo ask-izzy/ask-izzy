@@ -5,7 +5,7 @@ ARG commonPackages='apt-transport-https \
     parallel \
     wget'
 
-FROM contyard.office.infoxchange.net.au/stretch-nodejs8:latest as test
+FROM contyard.office.infoxchange.net.au/stretch-nodejs12:latest as test
 
 ARG commonPackages
 

@@ -43,7 +43,7 @@
     "moment": "2.24.0",
     "moment-timezone": "0.5.25",
     "node-jsx": "0.13.3",
-    "node-sass": "4.9.2",
+    "node-sass": "4.13.0",
     "nodemon": "1.18.10",
     "optimist": "0.6.1",
     "postcss-loader": "2.1.6",

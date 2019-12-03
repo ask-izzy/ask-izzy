@@ -5,7 +5,7 @@ import React from "react";
 
 class OnlineSafetyContent extends React.Component<{}, void> {
     render() {
-        const linkEsafetyPage = "https://www.esafety.gov.au/women/get-help/other-languages";
+        const linkEsafetyPage = "https://www.esafety.gov.au/key-issues/domestic-family-violence/help-support/get-help-in-your-language";
         const link1800Respect = "https://www.1800respect.org.au";
 
         return (
