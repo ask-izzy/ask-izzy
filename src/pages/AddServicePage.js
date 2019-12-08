@@ -135,14 +135,34 @@ class AddServicePage extends React.Component<Props, State> {
                 </p>
                 <p>
                     We are of course aware that Services and Program
-                    information changes regularly. So that other Service
-                    Providers and Consumers only see current information,
-                    please make those updates as soon as possible via (report
-                    an error link).
-                </p>
-                <p>
-                    Information that is displayed in the Ask Izzy product is
-                    noted in blue.
+                    information changes regularly. If information needs
+                    updating, or if something is not occurring
+                    as expected,&nbsp;
+                    <a
+                        href={
+                            "mailto:support@askizzy.org.au" +
+                                "?subject=" +
+                                encodeURIComponent(
+                                    `Your Ask Izzy feedback`) +
+                                "&body=" +
+                                encodeURIComponent(
+                                    `Service name:
+
+                                    Contact name:
+
+                                    Contact number:
+
+                                    Contact email:
+
+                                    Details of change:
+
+                                    `.replace(/^ +/gm, "")
+                                )
+                        }
+                    >
+                        let us know
+                    </a>. This helps us to ensure that other Service Providers
+                    and Consumers only see current information.
                 </p>
 
                 <iframe src={`${issUrl}/add-service-form?form=ask-izzy`} />
