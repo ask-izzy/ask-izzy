@@ -65,11 +65,8 @@
     "underscore": "1.9.1",
     "underscore.string": "3.3.4",
     "webpack": "3.12.0",
-    "webpack-dev-server": "2.11.2",
+    "webpack-dev-server": "2.11.5",
     "yadda": "1.5.0"
   },
-  "devDependencies": {},
-  "resolutions": {
-    "**/fsevents": "1.2.9"
-  }
+  "devDependencies": {}
 }
