@@ -121,9 +121,9 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                 <p>
                     For those with money to give, the{" "}
                     <a
-                      href="https://www.redcross.org.au/campaigns/disaster-relief-and-recovery-donate"
-                      target="_blank"
-                      rel="noopener noreferer"
+                        href="https://www.redcross.org.au/campaigns/disaster-relief-and-recovery-donate"
+                        target="_blank"
+                        rel="noopener noreferer"
                     >
                         Australian Red Cross
                     </a> and state-based fire authorities will gratefully accept
