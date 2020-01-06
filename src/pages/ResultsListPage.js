@@ -7,7 +7,9 @@ import _ from "underscore";
 import ResultsList from "../components/ResultsList";
 import LoadingResultsHeader from
     "../components/ResultsListPage/LoadingResultsHeader";
+import LimitedServicesBanner from "../components/LimitedServicesBanner";
 import ViewOnMapButton from "../components/ViewOnMapButton";
+
 import sendEvent from "../google-tag-manager";
 import storage from "../storage";
 import type { Service } from "../iss";
@@ -57,11 +59,15 @@ class ResultsListPage extends React.Component<Props, void> {
                 <LoadingResultsHeader {...this.props} />
                 <div className="List results">
                     {
-                        _.isEmpty(this.props.objects) ||
-                        <ViewOnMapButton
-                            to={path}
-                            onClick={this.recordMapClick.bind(this)}
-                        />
+                        _.isEmpty(this.props.objects) || (
+                            <React.Fragment>
+                                <LimitedServicesBanner />
+                                <ViewOnMapButton
+                                    to={path}
+                                    onClick={this.recordMapClick.bind(this)}
+                                />
+                            </React.Fragment>
+                        )
                     }
                     <ResultsList
                         results={this.props.objects || []}

@@ -68,5 +68,8 @@
     "webpack-dev-server": "2.11.2",
     "yadda": "1.5.0"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "**/fsevents": "1.2.9"
+  }
 }

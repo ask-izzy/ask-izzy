@@ -101,11 +101,11 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
         this.triggerNext();
     }
 
-    renderContent(): React.Element<any> {
+    renderContent(): React.Node {
         return <React.Fragment />;
     }
 
-    renderHeaderBar(): React.Element<any> {
+    renderHeaderBar(): React.Node {
         let bannerName = "";
 
         try {
@@ -156,7 +156,7 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
         return (
             <div>
                 {this.renderHeaderBar()}
-                <div class="body">
+                <div className="body">
                     {this.renderContent()}
                     {
                         this.props.showBaseTextBox &&

@@ -1,4 +1,4 @@
-#!/usr/bin/env babel-node
+#!/usr/bin/env node
 
 const basename = require("path").basename;
 const { readFileSync, writeFileSync } = require("fs");

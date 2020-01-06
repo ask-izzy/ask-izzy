@@ -5,7 +5,8 @@ import PropTypes from "proptypes";
 
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import Intro from "./personalisation/Intro";
-import BushfireResponseAcknowledgement from "./personalisation/BushfireResponseAcknowledgement";
+import BushfireResponseAcknowledgement from
+    "./personalisation/BushfireResponseAcknowledgement";
 import components from "../components";
 import Chevron from "../icons/Chevron";
 import NotFoundStaticPage from "./NotFoundStaticPage";
@@ -90,9 +91,9 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
      * An array of components required to personalise this category.
      */
     get personalisationComponents(): Array<React.ComponentType<any>> {
-      return [BushfireResponseAcknowledgement, Intro].concat(
-        super.personalisationComponents
-      );
+        return [BushfireResponseAcknowledgement, Intro].concat(
+            super.personalisationComponents
+        );
     }
 
     get currentComponentIdx(): number {

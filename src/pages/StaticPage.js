@@ -1,19 +1,23 @@
 /* @flow */
 /* eslint-disable max-len */
 
-import React from "react";
+import * as React from "react";
 import PropTypes from "proptypes";
 import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
 
-export default class StaticPage extends React.Component<{
-    title: string,
-    bannerName: string,
-    children: any,
-}, void> {
+type Props = {
+  title: string,
+  bannerName: string,
+  children: React.Node,
+  className: string,
+}
+
+export default class StaticPage extends React.Component<Props> {
     static defaultProps: {
         children: null,
+        className: "",
     };
 
     static sampleProps = {
@@ -29,7 +33,7 @@ export default class StaticPage extends React.Component<{
         let back = () => this.context.router.goBack();
 
         return (
-            <div className="StaticPage">
+            <div className={`StaticPage ${this.props.className}`}>
                 <AppBar
                     title={this.props.title}
                     onBackTouchTap={back}

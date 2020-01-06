@@ -1,6 +1,28 @@
 .BushfireNotice {
-    overflow: auto;
     padding: 0 15px;
     background-color: $brand-red;
     color: $white;
+    overflow: auto;
+}
+
+.BushfireReliefPage {
+    h3 {
+        font-weight: normal;
+    }
+
+    h2:first-of-type {
+        margin-top: 3rem;
+    }
+
+    .find-evacuation {
+        margin: 6rem 0;
+    }
+}
+
+.BushfireResultsBanner {
+    margin-bottom: 3rem;
+
+    .ServicePane & {
+        margin: 1.5rem 0;
+    }
 }
