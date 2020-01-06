@@ -36,6 +36,7 @@ Feature: Crisis Line
         When I visit /
         And I search for "domestic violence"
         And I click on the search button
+        And I click on "I understand"
         And I click on "Okay"
         And I click on "Skip"
         Then I should see a hotline in position 1 which says "1800 737 732"
@@ -45,6 +46,7 @@ Feature: Crisis Line
         When I visit /
         And I search for "domestic violence"
         And I click on the search button
+        And I click on "I understand"
         And I click on "Okay"
         And I click on "Skip"
         And I click on "See information about this call"
@@ -54,6 +56,7 @@ Feature: Crisis Line
         When I visit /
         And I search for "domestic violence"
         And I click on the search button
+        And I click on "I understand"
         And I click on "Okay"
         And I click on "Skip"
         And I click on "See information about this call"

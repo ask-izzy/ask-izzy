@@ -49,6 +49,7 @@ Feature: Search
 
     Scenario: Searching for domestic violence performs the safety check
         When I search for "domestic violence" and press enter
+        And I click on "I understand"
         Then I should see "To help me find the right services I'll ask you a few questions"
         And I click on "Okay"
         Then I should see "Are you safe right now?"
