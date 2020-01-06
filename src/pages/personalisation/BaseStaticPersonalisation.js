@@ -156,16 +156,18 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
         return (
             <div>
                 {this.renderHeaderBar()}
-                {this.renderContent()}
-                {
-                    this.props.showBaseTextBox &&
-                    Boolean(this.props.baseTextBoxComponent) && (
-                        <div className="TextBannerContainer">
-                            {this.props.baseTextBoxComponent}
-                        </div>
-                    )
-                }
-                {this.props.showDoneButton && this.renderDoneButton()}
+                <div class="body">
+                    {this.renderContent()}
+                    {
+                        this.props.showBaseTextBox &&
+                        Boolean(this.props.baseTextBoxComponent) && (
+                            <div className="TextBannerContainer">
+                                {this.props.baseTextBoxComponent}
+                            </div>
+                        )
+                    }
+                    {this.props.showDoneButton && this.renderDoneButton()}
+                </div>
             </div>
         );
     }

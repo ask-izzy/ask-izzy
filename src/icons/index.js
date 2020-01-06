@@ -73,6 +73,7 @@ import SvgIconTram from "./Tram";
 import SvgIconUnder18 from "./Under18";
 import SvgIconUsingViolence from "./UsingViolence";
 import SvgIconWalk from "./Walk";
+import SvgIconWarning from "./Warning";
 import SvgIconWebsite from "./Website";
 import SvgIconFacebook from "./Facebook";
 
@@ -148,6 +149,7 @@ export default {
     Under18: SvgIconUnder18,
     UsingViolence: SvgIconUsingViolence,
     Walk: SvgIconWalk,
+    Warning: SvgIconWarning,
     Website: SvgIconWebsite,
     Facebook: SvgIconFacebook,
 };

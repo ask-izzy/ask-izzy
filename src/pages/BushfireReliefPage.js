@@ -1,0 +1,101 @@
+/* @flow */
+/* eslint-disable max-len */
+
+import React from "react";
+import { Link } from "react-router";
+import StaticPage from "./StaticPage";
+import MobileDetect from "../components/higherorder/MobileDetect";
+
+class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> {
+  render(): React.Node {
+    const { mobileView } = this.props
+
+    return (
+      <StaticPage
+        title="Bushfire Relief"
+        bannerName="money-help static"
+      >
+        <p>
+          The information on this page is for people affected by the current
+          bushfires across Australia. You can use the back button to return to
+          the regular Ask Izzy categories, but please be aware that some
+          services may be affected by the fires.
+        </p>
+        <h2>
+          For fire and emergency information in your state, contact:
+        </h2>
+        <p>
+          <strong>Victoria:</strong> VicEmergency hotline{" "}
+          {
+            mobileView ? (
+              <a href="tel:1800226226">1800 226 226</a>
+            ) : '1800 226 226'
+          } or visit{' '}
+          <a
+            href="https://www.emergency.vic.gov.au"
+            rel="noopener noreferer"
+            target="_blank"
+          >
+            www.emergency.vic.gov.au
+          </a>
+        </p>
+        <p>
+          <strong>NSW:</strong> Bushfire information hotline{" "}
+          {
+            mobileView ? (
+              <a href="tel:1800679737">1800 679 737</a>
+            ) : '1800 679 737'
+          } or visit{' '}
+          <a
+            href="https://www.rfs.nsw.gov.au"
+            rel="noopener noreferer"
+            target="_blank"
+          >
+            www.rfs.nsw.gov.au
+          </a>
+        </p>
+        <p>
+          <strong>South Australia:</strong> South Australian Country Fire
+          Service
+          <a
+            href="https://www.cfs.sa.gov.au"
+            rel="noopener noreferer"
+            target="_blank"
+          >
+            https://www.cfs.sa.gov.au
+          </a>
+        </p>
+        <p>
+          <strong>Tasmania:</strong> Tasmanian fire service
+          <a
+            href="http://www.fire.tas.gov.au"
+            rel="noopener noreferer"
+            target="_blank"
+          >
+            http://www.fire.tas.gov.au
+          </a>
+        </p>
+        <p>
+          <strong>ACT:</strong> ACT Emergency Services Agency
+          <a
+            href="https://esa.act.gov.au/fire-rescue"
+            rel="noopener noreferer"
+            target="_blank"
+          >
+            https://esa.act.gov.au/fire-rescue
+          </a>
+        </p>
+        <p>
+          <strong>
+            Find a nearby evacuation centre{" "}
+            <Link to="/search/evacuation/personalise">
+              here
+            </Link>.
+          </strong>
+        </p>
+      </StaticPage>
+    );
+  }
+}
+
+export default MobileDetect(BushfireReliefStaticPage)

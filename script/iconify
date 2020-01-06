@@ -1,8 +1,8 @@
 #!/usr/bin/env babel-node
 
-import {basename} from "path";
-import {readFileSync, writeFileSync} from "fs";
-import loader from "svg-inline-loader";
+const basename = require("path").basename;
+const { readFileSync, writeFileSync } = require("fs");
+const loader = require("svg-inline-loader");
 
 const destDir = "./src/icons/"
 const files = process.argv.slice(2, process.argv.length).sort();
@@ -15,14 +15,14 @@ if (!files.length) {
     process.exit(1);
 }
 
-function toClassName(source_path: string): string {
+function toClassName(source_path) {
     return titleize(basename(source_path).
         replace("askizzy-icon-", '').
         replace(/.svg$/, '')
     )
 }
 
-function titleize(name: string): string {
+function titleize(name) {
     const upcaseGroup = (match, char) => char.toUpperCase();
 
     return name

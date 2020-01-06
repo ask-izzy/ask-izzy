@@ -25,7 +25,8 @@ class Intro extends Personalisation<Props, {}> {
     static title = "Intro";
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
-        return request;
+        // Force this component to be shown while bushfire message is active.
+        return false;
     }
 
     get seekingHelpWith(): string {
