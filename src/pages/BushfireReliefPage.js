@@ -17,13 +17,14 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                 className="BushfireReliefPage"
             >
                 <p>
-          The information on this page is for people affected by the current
-          bushfires across Australia. You can use the back button to return to
-          the regular Ask Izzy categories, but please be aware that some
-          services may be affected by the fires.
+                    The information on this page is for people affected by the
+                    current bushfires across Australia. You can use the back
+                    button to return to the regular Ask Izzy categories, but
+                    please be aware that some services may be affected by the
+                    fires.
                 </p>
                 <h2>
-          For fire and emergency information in your state, contact:
+                    For fire and emergency information in your state, contact:
                 </h2>
                 <h3>
                     <strong>Victoria:</strong> VicEmergency hotline{" "}
@@ -37,7 +38,7 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                         rel="noopener noreferer"
                         target="_blank"
                     >
-            www.emergency.vic.gov.au
+                        www.emergency.vic.gov.au
                     </a>
                 </h3>
                 <h3>
@@ -52,23 +53,23 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                         rel="noopener noreferer"
                         target="_blank"
                     >
-            www.rfs.nsw.gov.au
+                        www.rfs.nsw.gov.au
                     </a>
                 </h3>
                 <h3>
-                    <strong>South Australia:</strong> Bushfire information hotline{" "}
+                    <strong>South Australia:</strong> Bushfire information
+                    hotline{" "}
                     {
                         mobileView ? (
                             <a href="tel:1800362361">1800 362 361</a>
                         ) : "1800 362 361"
-                    } or visit South Australian Country Fire
-          Service{" "}
+                    } or visit South Australian Country Fire Service{" "}
                     <a
                         href="https://www.cfs.sa.gov.au"
                         rel="noopener noreferer"
                         target="_blank"
                     >
-            https://www.cfs.sa.gov.au
+                        https://www.cfs.sa.gov.au
                     </a>
                 </h3>
                 <h3>
@@ -78,7 +79,7 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                         rel="noopener noreferer"
                         target="_blank"
                     >
-            http://www.fire.tas.gov.au
+                        http://www.fire.tas.gov.au
                     </a>
                 </h3>
                 <h3>
@@ -88,30 +89,45 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                         rel="noopener noreferer"
                         target="_blank"
                     >
-            https://esa.act.gov.au/fire-rescue
+                        https://esa.act.gov.au/fire-rescue
                     </a>
                 </h3>
                 <h3 className="find-evacuation">
                     <strong>
-            Find a nearby evacuation centre{" "}
+                        Find a nearby evacuation centre{" "}
                         <Link to="/search/Bushfire%20emergency/personalise">
-              here
+                            here
                         </Link>.
                     </strong>
                 </h3>
                 <h3>
                     <strong>
-            If you want to help
+                        If you want to help
                     </strong>
                 </h3>
                 <p>
                     <strong>Updating service information</strong>
                 </p>
                 <p>
-          Ask Izzy has over 360,000 services listed, and we’d love your help at
-          making sure they’re up to date. If you have information about a
-          service in our directory that is closed or has altered information,
-          please let us know by completing this form.
+                    Ask Izzy has over 360,000 services listed, and we’d love
+                    your help at making sure they’re up to date. If you have
+                    information about a service in our directory that is closed
+                    or has altered information, please let us know by completing
+                    this form.
+                </p>
+                <p>
+                    <strong>Donating money</strong>
+                </p>
+                <p>
+                    For those with money to give, the{" "}
+                    <a
+                      href="https://www.redcross.org.au/campaigns/disaster-relief-and-recovery-donate"
+                      target="_blank"
+                      rel="noopener noreferer"
+                    >
+                        Australian Red Cross
+                    </a> and state-based fire authorities will gratefully accept
+                    your donations.
                 </p>
             </StaticPage>
         );
