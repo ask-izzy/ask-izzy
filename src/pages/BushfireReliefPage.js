@@ -171,7 +171,8 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     your help at making sure they’re up to date. If you have
                     information about a service in our directory that is closed
                     or has altered information, please let us know by completing
-                    {" "}<a
+                    {" "}
+                    <a
                         href="https://www.surveygizmo.com/s3/5391212/Ask-Izzy-service-update-form"
                         target="_blank"
                         ref="noopener noreferer"

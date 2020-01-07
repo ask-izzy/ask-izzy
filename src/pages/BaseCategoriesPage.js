@@ -97,13 +97,13 @@ class BaseCategoriesPage extends React.Component<Object, State> {
         }
 
         return components.filter(component => {
-          if (this.context.router.isRenderingStatic) {
-            if (typeof component.staticShowPage === "function") {
-              return component.staticShowPage();
+            if (this.context.router.isRenderingStatic) {
+                if (typeof component.staticShowPage === "function") {
+                    return component.staticShowPage();
+                }
             }
-          }
 
-          return (typeof component.showPage === "function") &&
+            return (typeof component.showPage === "function") &&
             component.showPage()
         });
     }

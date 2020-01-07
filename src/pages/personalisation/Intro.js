@@ -30,9 +30,10 @@ class Intro extends Personalisation<Props, {}> {
         return request;
     }
 
-    componentDidMount () {
+    componentDidMount() {
         if (this.context.controller.context.router.params.search &&
-            this.context.controller.context.router.params.search === "Bushfire emergency") {
+            this.context.controller.context.router.params.search ===
+            "Bushfire emergency") {
             this.props.onDoneTouchTap()
         }
     }
