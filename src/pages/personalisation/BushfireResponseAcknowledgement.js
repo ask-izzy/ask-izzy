@@ -21,6 +21,10 @@ class BushfireResponseAcknowledgement extends BaseStaticPersonalisation {
 
   static summaryLabel = "Bushfire response 2020";
 
+  static showInSummary(): boolean {
+      return false;
+  }
+
   static staticShowPage(): boolean {
       return true;
   }

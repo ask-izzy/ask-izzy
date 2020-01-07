@@ -42,7 +42,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
     }
 
     static getSearch(request: searchRequest): ? searchRequest {
-        return this.answer ? request : null;
+        return request;
     }
 
     onDoneTouchTap(): void {

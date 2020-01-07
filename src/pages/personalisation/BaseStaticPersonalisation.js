@@ -45,7 +45,7 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
     static get answer(): string {
         let answer = storage.getItem(this.defaultProps.name);
 
-        if (typeof answer != "string") {
+        if (typeof answer !== "string") {
             return "";
         }
 

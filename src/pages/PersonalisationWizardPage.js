@@ -56,10 +56,29 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     }
 
     nextSubPage(): ?React.ComponentType<any> {
-        return this.personalisationComponents.find((component, idx) =>
-            (idx > this.currentComponentIdx) &&
-            (component.getSearch ? !component.getSearch({}) : true)
-        );
+        const component = this.personalisationComponents.find(
+            (component, idx) => {
+                const correctIndex = (
+                    (this.currentComponentIdx === 0 && idx === 1) ||
+                    (idx > this.currentComponentIdx &&
+                        (component.getSearch ? !component.getSearch({}) : true)
+                    )
+                )
+
+                if (this.context.router.isRenderingStatic &&
+                  typeof component.staticShowPage === "function") {
+                    return correctIndex && component.staticShowPage();
+                }
+
+                if (typeof component.showPage === "function") {
+                    return correctIndex && component.showPage();
+                }
+
+                return correctIndex
+            }
+        )
+
+        return component
     }
 
     prevSubPage(): ?React.ComponentType<any> {
