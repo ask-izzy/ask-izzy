@@ -12,6 +12,8 @@ type Props = {
   bannerName: string,
   children: React.Node,
   className: string,
+  bannerPrimary?: string,
+  bannerSecondary?: string,
 }
 
 export default class StaticPage extends React.Component<Props> {
@@ -41,8 +43,8 @@ export default class StaticPage extends React.Component<Props> {
                 {
                     this.props.bannerName ?
                         <HeaderBar
-                            primaryText={null}
-                            secondaryText={null}
+                            primaryText={this.props.bannerPrimary || null}
+                            secondaryText={this.props.bannerSecondary || null}
                             bannerName={this.props.bannerName}
                             alternateBackgroundColor={false}
                         />

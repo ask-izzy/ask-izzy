@@ -18,7 +18,7 @@ class NavBar extends React.Component<{}, void> {
                 <div className="List categories">
                     <div className="BushfireNotice">
                         <h3>
-                            Bushfire response January 2020
+                            Bushfire support 2020
                         </h3>
                         <p>
                             We have added a new section to Ask Izzy for people
@@ -30,7 +30,7 @@ class NavBar extends React.Component<{}, void> {
                     </div>
                     <LinkListItem
                         className="CategoryListItem hero"
-                        to={`/bushfire-relief`}
+                        to={"/bushfire-support"}
                         leftIcon={
                             <Warning
                                 className="ColoredIcon icon-fg-color big"

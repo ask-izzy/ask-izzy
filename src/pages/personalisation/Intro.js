@@ -2,6 +2,7 @@
 
 import React from "react";
 import PropTypes from "proptypes";
+import { Link } from "react-router"
 
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
@@ -27,6 +28,13 @@ class Intro extends Personalisation<Props, {}> {
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         // Force this component to be shown while bushfire message is active.
         return request;
+    }
+
+    componentDidMount () {
+        if (this.context.controller.context.router.params.search &&
+            this.context.controller.context.router.params.search === "Bushfire emergency") {
+            this.props.onDoneTouchTap()
+        }
     }
 
     get seekingHelpWith(): string {
@@ -67,7 +75,24 @@ class Intro extends Personalisation<Props, {}> {
                     }
                     bannerName={bannerName}
                 />
-                {this.renderDoneButton()}
+                <div className="body">
+                    <p>
+                        Please be aware that due to the bushfires currently
+                        affecting many parts of Australia, some services listed
+                        may not be operating or offering a more limited range of
+                        services. We are working to update these as soon as
+                        possible.
+                    </p>
+                    <p>
+                        If you are looking for assistance (including food,
+                        housing, clothing etc) as a result of the current
+                        bushfires, please see our{" "}
+                        <Link to="/bushfire-support">
+                            bushfire response page
+                        </Link>.
+                    </p>
+                    {this.renderDoneButton()}
+                </div>
             </div>
         );
     }
