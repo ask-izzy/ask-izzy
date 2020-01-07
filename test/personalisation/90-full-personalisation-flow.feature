@@ -13,7 +13,6 @@ Feature: Personalisation
     Scenario: Search for housing with personalised results
         Given control of geolocation
         When I click on "Housing"
-        And I click on "I understand"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
@@ -45,7 +44,6 @@ Feature: Personalisation
     Scenario: Search for emergency accommodation
         Given control of geolocation
         When I click on "Housing"
-        And I click on "I understand"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
@@ -75,7 +73,6 @@ Feature: Personalisation
     Scenario: Do a search
         Given control of geolocation
         When I search for "find a meal" and press enter
-        And I click on "I understand"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
@@ -92,7 +89,6 @@ Feature: Personalisation
 
     Scenario: Searching for domestic violence checks that I'm safe
         When I click on "Domestic & family violence help"
-        And I click on "I understand"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button

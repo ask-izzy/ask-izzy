@@ -123,7 +123,6 @@ Feature: Change your personalisation settings
         Then I should see the branding header
          And I should be at /
         When I click on "Housing"
-        And I click on "I understand"
         Then I should see "To help me find the right services I'll ask you a few questions"
          And I click on the done button
         Then I should not see "Melbourne, Vic"

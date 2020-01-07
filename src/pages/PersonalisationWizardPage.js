@@ -54,29 +54,10 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
     }
 
     nextSubPage(): ?React.ComponentType<any> {
-        const component = this.personalisationComponents.find(
-            (component, idx) => {
-                const correctIndex = (
-                    (this.currentComponentIdx === 0 && idx === 1) ||
-                    (idx > this.currentComponentIdx &&
-                        (component.getSearch ? !component.getSearch({}) : true)
-                    )
-                )
-
-                if (this.context.router.isRenderingStatic &&
-                  typeof component.staticShowPage === "function") {
-                    return correctIndex && component.staticShowPage();
-                }
-
-                if (typeof component.showPage === "function") {
-                    return correctIndex && component.showPage();
-                }
-
-                return correctIndex
-            }
-        )
-
-        return component
+        return this.personalisationComponents.find((component, idx) =>
+            (idx > this.currentComponentIdx) &&
+            (component.getSearch ? !component.getSearch({}) : true)
+        );
     }
 
     prevSubPage(): ?React.ComponentType<any> {
@@ -108,9 +89,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
      * An array of components required to personalise this category.
      */
     get personalisationComponents(): Array<React.ComponentType<any>> {
-        return [Intro].concat(
-            super.personalisationComponents
-        );
+        return [Intro].concat(super.personalisationComponents);
     }
 
     get currentComponentIdx(): number {

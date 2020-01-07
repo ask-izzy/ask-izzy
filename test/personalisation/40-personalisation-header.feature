@@ -12,7 +12,6 @@ Feature: Personalisation header
     Scenario: Search for housing
         When I visit /
         And I click on "Housing"
-        And I click on "I understand"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button # Intro page

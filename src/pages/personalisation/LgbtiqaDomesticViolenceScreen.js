@@ -35,7 +35,7 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
     }
 
     static getSearch(request: searchRequest): ? searchRequest {
-        return request;
+        return this.answer ? request : null;
     }
 
     onDoneTouchTap(): void {
