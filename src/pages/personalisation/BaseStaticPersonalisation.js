@@ -45,7 +45,7 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
     static get answer(): string {
         let answer = storage.getItem(this.defaultProps.name);
 
-        if (typeof answer != "string") {
+        if (typeof answer !== "string") {
             return "";
         }
 
@@ -101,11 +101,11 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
         this.triggerNext();
     }
 
-    renderContent(): React.Element<any> {
+    renderContent(): React.Node {
         return <React.Fragment />;
     }
 
-    renderHeaderBar(): React.Element<any> {
+    renderHeaderBar(): React.Node {
         let bannerName = "";
 
         try {
@@ -156,16 +156,18 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
         return (
             <div>
                 {this.renderHeaderBar()}
-                {this.renderContent()}
-                {
-                    this.props.showBaseTextBox &&
-                    Boolean(this.props.baseTextBoxComponent) && (
-                        <div className="TextBannerContainer">
-                            {this.props.baseTextBoxComponent}
-                        </div>
-                    )
-                }
-                {this.props.showDoneButton && this.renderDoneButton()}
+                <div className="body">
+                    {this.renderContent()}
+                    {
+                        this.props.showBaseTextBox &&
+                        Boolean(this.props.baseTextBoxComponent) && (
+                            <div className="TextBannerContainer">
+                                {this.props.baseTextBoxComponent}
+                            </div>
+                        )
+                    }
+                    {this.props.showDoneButton && this.renderDoneButton()}
+                </div>
             </div>
         );
     }

@@ -10,7 +10,6 @@ import Chevron from "../icons/Chevron";
 import NotFoundStaticPage from "./NotFoundStaticPage";
 
 class PersonalisationWizardPage extends BasePersonalisationPage {
-
     static contextTypes = {
         router: PropTypes.object.isRequired,
     };
