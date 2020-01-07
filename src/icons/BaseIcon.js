@@ -22,7 +22,7 @@ class BaseIcon extends React.Component<Props, void> {
     }
 
     render() {
-        const { className: _, iconClass: __, ...parentProps } = this.props
+        const { className, iconClass, ...parentProps } = this.props;
 
         return (
             <span
