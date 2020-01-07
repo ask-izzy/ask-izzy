@@ -9,14 +9,6 @@
     h3 {
         font-weight: normal;
     }
-
-    h2:first-of-type {
-        margin-top: 3rem;
-    }
-
-    .find-evacuation {
-        margin: 6rem 0;
-    }
 }
 
 .BushfireResultsBanner {
@@ -24,5 +16,13 @@
 
     .ServicePane & {
         margin: 1.5rem 0;
+    }
+}
+
+.separator {
+    height: 2.4rem;
+
+    & + * {
+        margin: 0;
     }
 }

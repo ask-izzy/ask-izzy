@@ -114,9 +114,9 @@ export default (
             title="About"
         />
         <Route
-            path="/bushfire-relief"
+            path="/bushfire-support"
             component={BushfireReliefPage}
-            title="Bushfire Relief"
+            title="Bushfire Support"
         />
         <Route
             path="/terms"
