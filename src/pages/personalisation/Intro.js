@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import PropTypes from "proptypes";
 import { Link } from "react-router"
 
 import Personalisation from "../../mixins/Personalisation";
@@ -18,24 +17,10 @@ class Intro extends Personalisation<Props, {}> {
         name: "intro",
     };
 
-    static propTypes = {
-        name: PropTypes.string.isRequired,
-        onDoneTouchTap: PropTypes.func,
-    };
-
     static title = "Intro";
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
-        // Force this component to be shown while bushfire message is active.
         return request;
-    }
-
-    componentDidMount() {
-        if (this.context.controller.context.router.params.search &&
-            this.context.controller.context.router.params.search ===
-            "Bushfire emergency") {
-            this.props.onDoneTouchTap()
-        }
     }
 
     get seekingHelpWith(): string {

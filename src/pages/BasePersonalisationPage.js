@@ -6,7 +6,9 @@ import { browserHistory } from "react-router";
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
 
-class BasePersonalisationPage extends BaseCategoriesPage {
+class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
+    ExtraState
+> {
     getChildContext(): Object {
         return {
             controller: this,

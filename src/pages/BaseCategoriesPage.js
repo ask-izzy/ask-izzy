@@ -25,7 +25,8 @@ type State = {
     childServices?: Array<Service>
 }
 
-class BaseCategoriesPage extends React.Component<Object, State> {
+class BaseCategoriesPage<ExtraState = {}> extends React.Component<
+    Object, State & ExtraState> {
     _category: Category;
 
     static contextTypes = {

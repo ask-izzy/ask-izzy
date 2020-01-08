@@ -36,8 +36,7 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     You can use Ask Izzy to{" "}
                     <Link to="/search/Bushfire%20emergency/personalise">
                         find a nearby bushfire emergency relief centre
-                    </Link>. These centres may be able to offer clothing,
-                    food, and other support services. Please note that these
+                    </Link>. Please note that these
                     centres may open and close on short notice.
                 </p>
                 <div className="separator" />
