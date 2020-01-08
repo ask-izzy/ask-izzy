@@ -9,18 +9,33 @@ import components from "../components";
 import Chevron from "../icons/Chevron";
 import NotFoundStaticPage from "./NotFoundStaticPage";
 
-class PersonalisationWizardPage extends BasePersonalisationPage {
+type State = {
+  showSubpage: boolean,
+}
+
+class PersonalisationWizardPage extends BasePersonalisationPage<State> {
     static contextTypes = {
         router: PropTypes.object.isRequired,
     };
 
     constructor(props: Object) {
         super(props);
-        this.state = {nextDisabled: false};
+
+        this.state = {
+            nextDisabled: false,
+            showSubpage: true,
+        };
     }
 
     componentWillReceiveProps(nextProps: Object): void {
-        this.setState({nextDisabled: false});
+        this.setState({nextDisabled: false, showSubpage: true});
+    }
+
+    componentDidMount(): void {
+        if (this.context.router.params.search &&
+            this.context.router.params.search === "Bushfire emergency") {
+            this.setState({ showSubpage: false });
+        }
     }
 
     previousStep(): void {
@@ -132,6 +147,10 @@ class PersonalisationWizardPage extends BasePersonalisationPage {
             return (
                 <NotFoundStaticPage/>
             )
+        }
+
+        if (!this.state.showSubpage) {
+            this.nextStep();
         }
 
         // FIXME: Tap-up is hitting the new questions on the next page
