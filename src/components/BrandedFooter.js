@@ -17,7 +17,9 @@ class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
         const subject = "Ask Izzy - Feedback";
         const siteMail = config.default.siteMail;
         const mailLink = `mailto:${siteMail}?subject=${subject}`;
-        const donateLink = "https://www.infoxchange.org/donate-ask-izzy";
+        // There is an nginx rewrite to go to the correct donation URL,
+        // this reduces duplication.
+        const donateLink = "/donate";
         const resourcesLink = "https://www.infoxchange.org/au/ask-izzy";
 
         return (
