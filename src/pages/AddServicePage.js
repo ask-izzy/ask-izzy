@@ -109,35 +109,25 @@ class AddServicePage extends React.Component<Props, State> {
         return (
             <div>
                 <p>
-                    Information about Service Providers is maintained in
-                    Infoxchange's Service Seeker database. The database
-                    supports a range of directory services provided by
-                    Infoxchange including HSNet in NSW and oneplace in
-                    Queensland.  Ask Izzy displays a subset of the information
-                    to make it easier for Consumers to read and understand.
-                    Fields that are displayed in Ask Izzy are clearly marked
-                    so that you can see what will be displayed in your
-                    listing.
-                </p>
-                <p>Information is structured at multiple levels:</p>
-                <ul>
-                    <li>Organisation</li>
-                    <li>Site</li>
-                    <li>Services and Programs</li>
-                </ul>
-                <p>
-                    To help Ask Izzy users, please review and update
-                    information for each section.  If there is no change to
-                    information already on the database, please ensure you
-                    complete the Service Provider name together with the
-                    relevant section for the detail that is being added or
-                    changed.
+                    The service listings on Ask Izzy come
+                    from <a href="https://www.infoxchange.org">
+                    Infoxchange</a>&apos;s Service Seeker database,
+                    Australia&apos;s largest up-to-date directory of
+                    health and welfare services.
                 </p>
                 <p>
-                    We are of course aware that Services and Program
-                    information changes regularly. If information needs
-                    updating, or if something is not occurring
-                    as expected,&nbsp;
+                    We would love your help keeping the service listings
+                    as current as possible.
+                </p>
+                <p>
+                    <strong>
+                        If you notice that service information is incorrect:
+                    </strong>
+                </p>
+                <p>
+                    We know that service and program information changes all
+                    the time. If you think that a listing needs updating or
+                    you see an error, please&nbsp;
                     <a
                         href={
                             "mailto:support@askizzy.org.au" +
@@ -160,9 +150,35 @@ class AddServicePage extends React.Component<Props, State> {
                                 )
                         }
                     >
-                        let us know
-                    </a>. This helps us to ensure that other Service Providers
-                    and Consumers only see current information.
+                        email to let us know
+                    </a>.
+                </p>
+                <p>
+                    <strong>
+                        If you want to add a new service:
+                    </strong>
+                </p>
+                <p>
+                    If your service doesn&apos;t appear when you search for
+                    it on Ask Izzy, we&apos;d love you to submit a new service
+                    listing using the form below. Your entry will then be
+                    checked by our database team before it gets added.
+                </p>
+                <p>
+                    We know the form is quite long! Unfortunately it needs
+                    to be – we gather as much information as possible so we
+                    can put people in touch with the right services for their
+                    needs. Note that not all the fields need to be filled in
+                    and we will follow up with you if we need any additional
+                    information.
+                </p>
+                <p>
+                    If your service is complex (e.g. the same service is
+                    offered at multiple sites or there are complex
+                    eligibility criteria) or if you&apos;re having trouble with
+                    the form, <a href="mailto:database@infoxchange.org">email
+                    us</a> some basic information about the service and
+                    we&apos;ll contact you to find out more.
                 </p>
 
                 <iframe src={`${issUrl}/add-service-form?form=ask-izzy`} />
