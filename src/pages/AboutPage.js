@@ -13,8 +13,6 @@ class AboutPage extends React.Component<{}, void> {
     };
 
     render() {
-        const foundingPartners = "/static/images/founding-partners.jpg";
-        const contributingParters = "/static/images/contributing-partners.png";
 
         return (
             <StaticPage
@@ -142,19 +140,28 @@ class AboutPage extends React.Component<{}, void> {
                         clicking 'Update/remove service' on your  listing. The
                         changes you request will be actioned within a week.
                     </p>
-                    <h3 className="text-center">Founding partners</h3>
-                    <img
-                        src={foundingPartners}
-                        className="img-center"
-                        alt="Google, realestate.com.au and News Corp Australia logos"
-                    />
+                    <p>
+                        <img src="/static/images/logo-powered-by-ix.svg"
+                            className="powered-by-ix img-center"
+                            alt="Ask Izzy is powered by Infoxchange"
+                            title="Ask Izzy is powered by Infoxchange"
+                        />
+                    </p>
+                    <h4 className="text-center h4-founding-partners">Founding partners</h4>
+                    <p>
+                        <img src="/static/images/logo-four-founding-partners.svg"
+                            alt="Infoxchange, Google, realestate.com.au and News Corp Australia logos"
+                            title="Infoxchange, Google, realestate.com.au and News Corp Australia logos"
+                        />
+                    </p>
                     <p className="small text-center">Ask Izzy was developed by <a href="https://www.infoxchange.org">Infoxchange</a> in partnership with <a href="https://google.org">Google</a>, <a href="https://www.realestate.com.au">realestate.com.au</a> and <a href="https://www.newscorpaustralia.com">News Corp Australia</a>.</p>
-                    <h3 className="text-center">Contributing partners</h3>
-                    <img
-                        src={contributingParters}
-                        className="img-center"
-                        alt="Google, realestate.com.au and News Corp Australia logos"
-                    />
+                    <h4 className="h4-ctb-partners text-center">Contributing partners</h4>
+                    <p>
+                        <img src="/static/images/logo-four-ctb-partners.svg"
+                            alt="NAB Foundation, Telstra Foundation, Victorian Government and Vodafone Foundation logos"
+                            title="NAB Foundation, Telstra Foundation, Victorian Government and Vodafone Foundation logos"
+                        />
+                    </p>
                 </div>
             </StaticPage>
         );
