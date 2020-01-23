@@ -33,7 +33,8 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
 
     componentDidMount(): void {
         if (this.context.router.params.search &&
-            this.context.router.params.search === "Bushfire") {
+            this.context.router.params.search ===
+            "bushfires -(closed due to the recent bushfires)") {
             this.setState({ showSubpage: false });
         }
     }
