@@ -1,11 +1,12 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 import { Link } from "react-router"
 
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import * as iss from "../../iss";
+import sendEvent from "../../google-tag-manager";
 
 type Props = {
     onDoneTouchTap: Function,
@@ -36,6 +37,16 @@ class Intro extends Personalisation<Props, {}> {
         }
     }
 
+    handleButtonClick = (userType: string) =>
+        (event: SyntheticEvent<HTMLButtonElement>): void => {
+            sendEvent({
+                event: "selectUserType",
+                userType,
+            });
+
+            this.props.onDoneTouchTap();
+        }
+
     render() {
         let bannerName = "";
 
@@ -62,13 +73,10 @@ class Intro extends Personalisation<Props, {}> {
                     bannerName={bannerName}
                 />
                 <div className="body">
-                    <p>
-                        Please be aware that due to the bushfires currently
-                        affecting many parts of Australia, some services listed
-                        may not be operating or offering a more limited range of
-                        services. We are working to update these as soon as
-                        possible.
-                    </p>
+                    <h3>
+                        I&#39;m looking for help for
+                    </h3>
+                    {this.renderDoneButton()}
                     <p>
                         If you are looking for assistance (including food,
                         housing, clothing etc) as a result of the current
@@ -77,7 +85,6 @@ class Intro extends Personalisation<Props, {}> {
                             bushfire response page
                         </Link>.
                     </p>
-                    {this.renderDoneButton()}
                 </div>
             </div>
         );
@@ -88,9 +95,17 @@ class Intro extends Personalisation<Props, {}> {
             <div>
                 <div className="done-button">
                     <components.FlatButton
-                        label="Okay"
+                        label="Myself"
                         autoFocus={true}
-                        onClick={this.props.onDoneTouchTap}
+                        onClick={this.handleButtonClick("User Myself")}
+                    />
+                    <components.FlatButton
+                        label="A friend or family member"
+                        onClick={this.handleButtonClick("User Someone Else")}
+                    />
+                    <components.FlatButton
+                        label="A client or consumer"
+                        onClick={this.handleButtonClick("User Worker")}
                     />
                 </div>
             </div>
