@@ -20,20 +20,26 @@ help:
 
 Run the following terminal commands:
 
-    git clone git@github.com:ask-izzy/ask-izzy.git
-    cd ask-izzy
-    yarn
+```bash
+git clone git@github.com:ask-izzy/ask-izzy.git
+cd ask-izzy
+yarn
+```
 
 ## Running the dev server
 
 You will need to insert API keys for [ISS](https://api.serviceseeker.com.au/) and
 Google into the following command:
 
-    ENVIRONMENT="dev" NODE_ENV="development" ISS_URL=... GOOGLE_API_KEY=... ./script/dev-server
+```bash
+ENVIRONMENT="dev_local" NODE_ENV="development" ISS_URL="$ISS_URL" GOOGLE_API_KEY="$G_API_KEY" ./script/dev-server
+```
 
-You can find the ISS API key on the ISS admin instance under consumers.
+The ISS API key can be sourced from ISS admin under consumers. We use a key in [ISS Test](https://iss3-test.docker.dev/admin/iss/consumer/) under the organisation name "Ask Izzy" and the contact name "Joshua Crompton".
 
-The Google API key is set by the Dev team in appvars.
+The Google API key for dev local can be found in [Google cloud console](https://console.developers.google.com/) by logging into the "infoxchange.web@gmail.com" Google account (see the 1Password shared vault for details). Change to the project to "Askizzy Dev" if it isn't already selected then navigate to "APIs & Services" > "Credentials" and copy the key "Askizzy Dev". Note this key is different to the key currently used in `https://askizzy.docker.dev/` which uses the "AskIzzy-Dev-API" key under the "ixmarcomms@gmail.com" account for the similarly named "AskIzzy Dev" project.
+
+Alternatively environment variables can be added to a `.env` file saved in the app root dir instead of supplying in the command each time. This will be automatically sourced when running `./script/dev-server`.
 
 ## Dealing with HTTP and browsers
 
