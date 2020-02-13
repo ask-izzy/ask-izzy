@@ -198,11 +198,6 @@ All google analytics events are sent by calling the `push` method in `google-tag
 
 We use the react-google-maps component to handle the maps integration.
 
-The `removeOutliers` method in `ResultsMap.js` was implemented
-because results sometimes include e.g. a hotline which is headquartered
-hundreds of km away. `removeOutliers` is reasonably well commented and
-tested (see `ResultsMapTest.js`) but it is quite complex.
-
 ### Directions / travel times
 
 We use the google directions matrix API to fetch transit / walking times.
