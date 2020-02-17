@@ -150,6 +150,11 @@ class ResultsMap extends React.Component<Props, State> {
             return (aLatDiff - bLatDiff) + (aLonDiff - bLonDiff);
         }).splice(0, Math.ceil(points.length / 2));
 
+        // Add two points to create a maximum possible level of zoom 
+        let maxZoom = 0.002; // about 0.5km
+        bounds.extend(new maps.LatLng(centerPoint.lat + (maxZoom / 2), centerPoint.lon + (maxZoom / 2)));
+        bounds.extend(new maps.LatLng(centerPoint.lat - (maxZoom / 2), centerPoint.lon - (maxZoom / 2)));
+
         // Loop though points and add to bounding box used for setting initial
         // map view. For each point add another point that's exactly opposite
         // when compared to the center point. This ensures that the center
