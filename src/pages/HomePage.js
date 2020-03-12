@@ -49,7 +49,7 @@ class HomePage extends React.Component<{}, void> {
         " call 1800 Respect on 1800 737 732 (Helpline).";
 
         return (
-            <div className="HomePage">
+            <div className="HomePage CurrentEmergency">
                 <div className="header">
                     <div className="desktop">
                         <span className="quick-exit-right" />
@@ -109,6 +109,18 @@ class HomePage extends React.Component<{}, void> {
                             </div>
                         </form>
                     </HeaderBar>
+                    <div className="CurrentEmergencyNotice">
+                        <h3>
+                            Coronavirus (COVID-19) health information
+                        </h3>
+                        <p>
+                            If you are feeling unwell or want to know more
+                            about the illness caused by coronavirus (COVID-19),
+                            please visit the <a href="https://www.health.gov.au/news/health-alerts/novel-coronavirus-2019-ncov-health-alert">
+                            Australian Department of Health website</a> for
+                            the latest medical advice, news and information.
+                        </p>
+                    </div>
                 </div>
 
                 <div className="body">
