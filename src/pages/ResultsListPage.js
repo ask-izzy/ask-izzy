@@ -7,7 +7,6 @@ import _ from "underscore";
 import ResultsList from "../components/ResultsList";
 import LoadingResultsHeader from
     "../components/ResultsListPage/LoadingResultsHeader";
-// import LimitedServicesBanner from "../components/LimitedServicesBanner";
 import ViewOnMapButton from "../components/ViewOnMapButton";
 
 import sendEvent from "../google-tag-manager";
@@ -61,7 +60,6 @@ class ResultsListPage extends React.Component<Props, void> {
                     {
                         _.isEmpty(this.props.objects) || (
                             <React.Fragment>
-                                {/* <LimitedServicesBanner /> */}
                                 <ViewOnMapButton
                                     to={path}
                                     onClick={this.recordMapClick.bind(this)}
