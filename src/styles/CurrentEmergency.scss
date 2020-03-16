@@ -1,0 +1,39 @@
+.CurrentEmergencyNotice {
+    padding: 0 15px;
+    background-color: $brand-pane-alt-dark;
+    color: $white;
+    overflow: auto;
+
+    a {
+        color: $white;
+    }
+}
+
+.HomePage .header .CurrentEmergencyNotice a {
+    text-decoration: underline;
+}
+
+.CurrentEmergency .HeaderBar {
+    .HeaderBarBanner {
+        &::after,
+        &.homepage::after {
+            border-right: 100vw solid $brand-pane-alt-dark;
+        }
+    }
+}
+
+.CurrentEmergencyResultsBanner {
+    margin-bottom: 3rem;
+
+    .ServicePane & {
+        margin: 1.5rem 0;
+    }
+}
+
+.separator {
+    height: 2.4rem;
+
+    & + * {
+        margin: 0;
+    }
+}
