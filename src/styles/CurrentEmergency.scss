@@ -9,6 +9,10 @@
     }
 }
 
+.HomePage .header .CurrentEmergencyNotice a {
+    text-decoration: underline;
+}
+
 .CurrentEmergency .HeaderBar {
     .HeaderBarBanner {
         &::after,
