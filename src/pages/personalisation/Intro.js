@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from "react";
-import { Link } from "react-router"
 
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
@@ -77,14 +76,6 @@ class Intro extends Personalisation<Props, {}> {
                         I&#39;m looking for help for
                     </h3>
                     {this.renderDoneButton()}
-                    <p>
-                        If you are looking for assistance (including food,
-                        housing, clothing etc) as a result of the current
-                        bushfires, please see our{" "}
-                        <Link to="/bushfire-support">
-                            bushfire response page
-                        </Link>.
-                    </p>
                 </div>
             </div>
         );

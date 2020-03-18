@@ -23,10 +23,7 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                 <div className="separator" />
                 <p>
                     The information on this page is for people affected by the
-                    current bushfires across Australia. You can use the back
-                    button to return to the regular Ask Izzy categories, but
-                    please be aware that some services may be affected by the
-                    fires.
+                    recent bushfires across Australia.
                 </p>
                 <div className="separator" />
                 <h2>
