@@ -24,6 +24,7 @@ import BoxedText from "./BoxedText";
 import Chevron from "../icons/Chevron";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
+import LimitedServicesBanner from "./LimitedServicesBanner";
 import type {Service} from "../iss";
 
 export default class ServicePane extends React.Component<{
@@ -75,6 +76,7 @@ export default class ServicePane extends React.Component<{
                     bannerName="housing"
                     alternateBackgroundColor={false}
                 />
+                <LimitedServicesBanner />
                 <div className="header">
                     <p>
                         <IndigenousServiceIcon object={object} />

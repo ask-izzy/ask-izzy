@@ -6,11 +6,20 @@
 
     a {
         color: $white;
-    }
-}
 
-.HomePage .header .CurrentEmergencyNotice a {
-    text-decoration: underline;
+        .HomePage .header & {
+            text-decoration: underline;
+        }
+    }
+
+    // Reset ServicePane specific styles
+    .ServicePane & {
+        font-size: 1rem;
+    }
+
+    .ServicePane & h3 {
+        font-weight: revert;
+    }
 }
 
 .CurrentEmergency .HeaderBar {
