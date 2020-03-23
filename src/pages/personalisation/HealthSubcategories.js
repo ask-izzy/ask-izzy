@@ -18,6 +18,7 @@ export default class HealthSubcategories extends BaseQuestion {
             "Doctor": remove("(community health)")
                 .append("(general medical practitioners)"),
             "Nurse": append("nurse"),
+            "Social & emotional wellbeing": specialist("(mental health)"),
             "Domestic & family violence": append("health (Family violence)")
                 .remove("(community health)"),
             "Sexual assault": append("(sexual assault)")
@@ -26,7 +27,6 @@ export default class HealthSubcategories extends BaseQuestion {
             "Dentist": specialist("dentistry"),
             "Problems with feet": specialist("podiatry"),
             "Eye care": specialist("optometry"),
-            "Social & emotional wellbeing": specialist("(mental health)"),
             "Children": remove("(community health)")
                 .append("health children"),
             "Maternal & child health": remove("(community health)")
