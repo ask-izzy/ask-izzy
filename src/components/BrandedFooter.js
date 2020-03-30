@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import DemographicAboriginal from "../icons/DemographicAboriginal";
 import DemographicTorresStrait from "../icons/DemographicTorresStrait";
 import FacebookIcon from "../icons/Facebook";
+import Instagram from "../icons/Instagram";
 import config from "../config";
 import MobileDetect from "./higherorder/MobileDetect";
 
@@ -117,13 +118,20 @@ class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
                     </div>
                     <div>
                         <div className="full-width">
+                            Find us on
                             <a
                                 href="https://www.facebook.com/askizzyau"
                                 target="_blank"
                                 className="flex-align"
                             >
-                                <span>Find us on</span>
                                 <FacebookIcon className="inline-block-icon" />
+                            </a>
+                            <a
+                                href="https://www.instagram.com/askizzyau/"
+                                target="_blank"
+                                className="flex-align"
+                            >
+                                <Instagram className="inline-block-icon" />
                             </a>
                         </div>
                     </div>

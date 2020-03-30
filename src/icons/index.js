@@ -42,6 +42,7 @@ import SvgIconFood from "./Food";
 import SvgIconHealth from "./Health";
 import SvgIconHouse from "./House";
 import SvgIconInfo from "./Info";
+import SvgIconInstagram from "./Instagram";
 import SvgIconJob from "./Job";
 import SvgIconLegal from "./Legal";
 import SvgIconLoading from "./Loading";
@@ -118,6 +119,7 @@ export default {
     Health: SvgIconHealth,
     House: SvgIconHouse,
     Info: SvgIconInfo,
+    Instagram: SvgIconInstagram,
     Job: SvgIconJob,
     Legal: SvgIconLegal,
     Loading: SvgIconLoading,
