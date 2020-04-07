@@ -1,6 +1,10 @@
 /* flow:disable */
 /*eslint-disable */
 document.addEventListener("DOMContentLoaded", function(event) {
+    window.GOOGLE_ANALYTICS_ID = "UA-69572418-4";
+    window.GOOGLE_TAG_MANAGER_ID = "GTM-5XC34R";
+    window.GOOGLE_TAG_MANAGER_AUTH = "wmCrMTTnSkvyo9kHQjRmLw";
+    window.GOOGLE_TAG_MANAGER_ENV = "env-34";
 
     if (window.GOOGLE_ANALYTICS_ID) {
         // Analytics
