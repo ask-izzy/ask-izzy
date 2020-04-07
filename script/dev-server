@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# Read in environment variables from file
+if [ -f .env ]; then
+    set -a
+    source .env
+    set +a
+fi
+
 git describe > public/VERSION
 
 set -euo pipefail

@@ -20,20 +20,24 @@ help:
 
 Run the following terminal commands:
 
-    git clone git@github.com:ask-izzy/ask-izzy.git
-    cd ask-izzy
-    yarn
+```bash
+git clone git@github.com:ask-izzy/ask-izzy.git
+cd ask-izzy
+yarn
+```
 
 ## Running the dev server
 
 You will need to insert API keys for [ISS](https://api.serviceseeker.com.au/) and
 Google into the following command:
 
-    ENVIRONMENT="dev" NODE_ENV="development" ISS_URL=... GOOGLE_API_KEY=... ./script/dev-server
+```bash
+ENVIRONMENT="dev_local" NODE_ENV="development" ISS_URL="$ISS_URL" GOOGLE_API_KEY="$G_API_KEY" ./script/dev-server
+```
 
-You can find the ISS API key on the ISS admin instance under consumers.
+The required environment variables can be copied from the dev environment in the appvars repo.
 
-The Google API key is set by the Dev team in appvars.
+Alternatively environment variables can be added to a `.env` file saved in the app root dir instead of supplying in the command each time. This will be automatically sourced when running `./script/dev-server`.
 
 ## Dealing with HTTP and browsers
 
@@ -191,11 +195,6 @@ All google analytics events are sent by calling the `push` method in `google-tag
 ### Maps
 
 We use the react-google-maps component to handle the maps integration.
-
-The `removeOutliers` method in `ResultsMap.js` was implemented
-because results sometimes include e.g. a hotline which is headquartered
-hundreds of km away. `removeOutliers` is reasonably well commented and
-tested (see `ResultsMapTest.js`) but it is quite complex.
 
 ### Directions / travel times
 
