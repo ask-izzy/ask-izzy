@@ -190,7 +190,35 @@ The question classes mostly derive from `BaseQuestion` or `BaseMultiQuestion`.
 ## Google services
 
 ### Analytics
-All google analytics events are sent by calling the `push` method in `google-tag-manager.js`.
+The Google Analytics and/or the Google Tag Manager trackers are enabled if the required environmental variables are set. All GA events are sent though GTM.
+
+For Infoxchange devs see the internal dev wiki for specifics on GA/GTM dev and testing workflow in the Infoxchange context.
+
+#### Google Analytics
+Required environment variables:
+```yaml
+GOOGLE_ANALYTICS_ID: 'UA-12345678-1'
+```
+
+#### Google Tag Manager
+Required environment variables:
+```yaml
+GOOGLE_TAG_MANAGER_ID: 'GTM-ABC123'
+GOOGLE_TAG_MANAGER_AUTH: 'a1b2c3d5e6f7g8'
+GOOGLE_TAG_MANAGER_ENV: 'env-1'
+```
+
+All GA events are sent via GTM by calling the `push` method in `google-tag-manager.js` like so:
+```javascript
+import sendEvent from "../google-tag-manager";
+sendEvent({
+    event: "categoryPageLoad",
+    additionalData: "foo",
+    additionalData2: "bar",
+});
+```
+
+Note: Due to the way the GTM client JS file is proxied the GTM debug console cannot be triggered as normal. (Technical side note: the normal way relies on setting cookies which are scoped to the domain which the GTM JS file is served from.) Instead it can be enabled by including query string parameter "gtm_debug" set to a true value. For example: http://localhost:8000/?gtm_debug=1
 
 ### Maps
 
