@@ -147,7 +147,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <ul>
                     <li>
                         {this.contactDetailWeb(
-                            "https://www.sahealth.sa.gov.au/wps/wcm/connect/public+content/sa+health+internet/health+topics/health+topics+a+-+z/novel+coronavirus",
+                            "https://www.sahealth.sa.gov.au/wps/wcm/connect/public+content/sa+health+internet/health+topics/health+topics+a+-+z/COVID+2019",
                             "SA Health coronavirus webpage"
                         )}
                     </li>
