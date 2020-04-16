@@ -1,5 +1,7 @@
 /* flow:disable */
 /*eslint-disable */
+import 'url-search-params-polyfill';
+
 document.addEventListener("DOMContentLoaded", function(event) {
 
     if (window.GOOGLE_ANALYTICS_ID) {
