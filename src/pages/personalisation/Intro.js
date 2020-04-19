@@ -86,17 +86,16 @@ class Intro extends Personalisation<Props, {}> {
             <div>
                 <div className="done-button">
                     <components.FlatButton
+                        label="A client or consumer"
+                        onClick={this.handleButtonClick("User Worker")}
+                    />
+                    <components.FlatButton
                         label="Myself"
-                        autoFocus={true}
                         onClick={this.handleButtonClick("User Myself")}
                     />
                     <components.FlatButton
                         label="A friend or family member"
                         onClick={this.handleButtonClick("User Someone Else")}
-                    />
-                    <components.FlatButton
-                        label="A client or consumer"
-                        onClick={this.handleButtonClick("User Worker")}
                     />
                 </div>
             </div>
