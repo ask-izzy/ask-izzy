@@ -38,7 +38,7 @@ class Intro extends Personalisation<Props, {}> {
 
     handleButtonClick = (userType: string) =>
         (event: SyntheticEvent<HTMLButtonElement>): void => {
-            storage.setItem('user_type', userType);
+            storage.setItem("user_type", userType);
 
             this.props.onDoneTouchTap();
         }

@@ -546,18 +546,20 @@ async function _search(
     };
 
     const searchUrlPath = "/api/v3/search/";
-    const previousSearchUrl: string = (storage.getItem('previous_search_url'): any);
+    const previousSearchUrl: string =
+        (storage.getItem("previous_search_url"): any);
 
     Object.assign(request_, query);
     let searchUrl = mungeUrlQuery(searchUrlPath, request_);
+
     if (searchUrl != previousSearchUrl) {
         sendEvent({
             event: "newSearch",
-            searchQuery: query, 
-            onBehalfOf: storage.getItem('user_type'),
+            searchQuery: query,
+            onBehalfOf: storage.getItem("user_type"),
         });
     }
-    storage.setItem('previous_search_url', searchUrl);
+    storage.setItem("previous_search_url", searchUrl);
     return await requestObjects(searchUrlPath, request_);
 }
 
