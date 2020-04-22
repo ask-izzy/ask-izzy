@@ -4,8 +4,8 @@ import * as React from "react";
 
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
+import storage from "../../storage";
 import * as iss from "../../iss";
-import sendEvent from "../../google-tag-manager";
 
 type Props = {
     onDoneTouchTap: Function,
@@ -38,10 +38,7 @@ class Intro extends Personalisation<Props, {}> {
 
     handleButtonClick = (userType: string) =>
         (event: SyntheticEvent<HTMLButtonElement>): void => {
-            sendEvent({
-                event: "selectUserType",
-                userType,
-            });
+            storage.setItem('user_type', userType);
 
             this.props.onDoneTouchTap();
         }
