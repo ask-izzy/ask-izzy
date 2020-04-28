@@ -16,6 +16,10 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
             categoryName: "Covid-19",
             isTopical: true,
         });
+        sendEvent({
+            categoryName: undefined,
+            isTopical: undefined,
+        });
     }
 
     contactDetailPhone(number: string, comment: string | React.Node): React.Node {
