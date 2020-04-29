@@ -17,6 +17,7 @@ import ServiceOpening from "./iss/ServiceOpening";
 import Location from "./iss/Location";
 import Cache from "./iss/Cache";
 import serviceProvisions from "./constants/service-provisions";
+import storage from "./storage";
 import Maps from "./maps";
 import {
     Timeout,
@@ -544,8 +545,22 @@ async function _search(
         limit: 10,
     };
 
+    const searchUrlPath = "/api/v3/search/";
+    const previousSearchUrl: string =
+        (storage.getItem("previous_search_url"): any);
+
     Object.assign(request_, query);
-    return await requestObjects("/api/v3/search/", request_);
+    let searchUrl = mungeUrlQuery(searchUrlPath, request_);
+
+    if (searchUrl != previousSearchUrl) {
+        sendEvent({
+            event: "newSearch",
+            searchQuery: query,
+            onBehalfOf: storage.getItem("user_type"),
+        });
+    }
+    storage.setItem("previous_search_url", searchUrl);
+    return await requestObjects(searchUrlPath, request_);
 }
 
 /**

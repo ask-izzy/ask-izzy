@@ -7,10 +7,6 @@ const MobileDetect = OldComponent => {
         _mobileView: ?boolean;
 
         componentDidMount(): void {
-            if (super.componentDidMount) {
-                super.componentDidMount();
-            }
-
             if (typeof window !== "undefined") {
                 this._updateMobileSize();
 

@@ -5,10 +5,23 @@ import * as React from "react";
 import { Link } from "react-router";
 import StaticPage from "./StaticPage";
 import MobileDetect from "../components/higherorder/MobileDetect";
+import sendEvent from "../google-tag-manager";
 import Phone from "../components/Phone";
 import icons from "../icons";
 
 class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
+    componentDidMount(): void {
+        sendEvent({
+            event: "categoryPageLoad",
+            categoryName: "Covid-19",
+            isTopical: true,
+        });
+        sendEvent({
+            categoryName: undefined,
+            isTopical: undefined,
+        });
+    }
+
     contactDetailPhone(number: string, comment: string | React.Node): React.Node {
         return (
             <div className="contact-detail phone">
