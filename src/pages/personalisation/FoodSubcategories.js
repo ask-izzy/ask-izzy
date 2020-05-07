@@ -13,7 +13,7 @@ export default class FoodSubcategories extends BaseQuestion {
         answers: {
             "Community meals": remove("-(coordinating bodies)"),
             "Food packages/parcels/vouchers": remove("meals")
-                .append("food parcel")
+                .append("(Food Parcels & Food Vouchers)")
                 .append({service_type: ["material aid"]}),
             "Meals on Wheels": remove("meals")
                 .remove("-(meals on wheels)")
