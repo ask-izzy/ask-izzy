@@ -124,7 +124,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                     </li>
                     <li>
                         {this.contactDetailWeb(
-                            "https://health.nsw.gov.au/Infectious/diseases/Pages/coronavirus.aspx",
+                            "https://www.nsw.gov.au/covid-19",
                             "NSW health coronavirus webpage"
                         )}
                     </li>
@@ -160,7 +160,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <ul>
                     <li>
                         {this.contactDetailWeb(
-                            "https://www.sahealth.sa.gov.au/wps/wcm/connect/public+content/sa+health+internet/health+topics/health+topics+a+-+z/COVID+2019",
+                            "https://www.sahealth.sa.gov.au/COVID2019",
                             "SA Health coronavirus webpage"
                         )}
                     </li>
@@ -176,7 +176,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                     </li>
                     <li>
                         {this.contactDetailWeb(
-                            "https://www.dhhs.tas.gov.au/publichealth/communicable_diseases_prevention_unit/infectious_diseases/coronavirus",
+                            "https://www.coronavirus.tas.gov.au/",
                             "Tasmanian Department of Health coronavirus webpage"
                         )}
                     </li>
@@ -186,7 +186,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <ul>
                     <li>
                         {this.contactDetailWeb(
-                            "https://health.act.gov.au/public-health-alert/updated-information-about-covid-19",
+                            "https://www.covid19.act.gov.au/",
                             "ACT Health coronavirus webpage"
                         )}
                     </li>
@@ -202,7 +202,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                     </li>
                     <li>
                         {this.contactDetailWeb(
-                            "https://securent.nt.gov.au/alerts/coronavirus-covid-19-updates",
+                            "https://coronavirus.nt.gov.au/",
                             "NT Department of Health coronavirus webpage"
                         )}
                     </li>
