@@ -10,6 +10,18 @@
         max-height: 196px;
     }
 
+    &.homepage {
+        height: 270px;
+        @media only screen and (max-width: 375px) {
+            max-height: 204px;
+        }
+    }
+
+    &.purple {
+        a:link {
+            color: $white;
+        }
+    }
 
     .HeaderBarContent {
         @include clearfix;
@@ -142,6 +154,11 @@
                 background: url("/static/images/banners/atsi.png") center center;
                 background-size: cover;
             }
+        }
+
+        &.purple {
+            background-color: $brand-pane-alt-dark;
+            background-size: cover;
         }
 
         .BlackBanner {
