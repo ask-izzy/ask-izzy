@@ -22,7 +22,8 @@ type State = {
     nextDisabled?: boolean,
     floatingContainerHeight?: number,
     isClient?: boolean,
-    childServices?: Array<Service>
+    childServices?: Array<Service>,
+    covidCategory: Object
 }
 
 class BaseCategoriesPage<ExtraState = {}> extends React.Component<
@@ -36,7 +37,8 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
      */
     get category(): ?Category {
         return getCategory(
-            this.context.router.match.params.page
+            this.context.router.match.params.page ||
+            this.context.router.match.params.supportCategorySlug
         )
     }
 
