@@ -22,7 +22,8 @@ type State = {
     nextDisabled?: boolean,
     floatingContainerHeight?: number,
     isClient?: boolean,
-    childServices?: Array<Service>
+    childServices?: Array<Service>,
+    covidCategory: Object
 }
 
 class BaseCategoriesPage<ExtraState = {}> extends React.Component<
@@ -44,7 +45,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         }
 
         let category = _.findWhere(categories, {
-            key: this.props.params.page,
+            key: this.props.params.page || this.props.params.supportCategorySlug,
         });
 
         this._category = category;
