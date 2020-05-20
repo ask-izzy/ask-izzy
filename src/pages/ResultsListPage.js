@@ -26,7 +26,8 @@ type Props = {
     loading: boolean,
     error: string,
     category?: Category,
-    search?: {search: string}
+    search?: {search: string},
+    covidCategory?: Object
 }
 
 class ResultsListPage extends React.Component<Props, void> {

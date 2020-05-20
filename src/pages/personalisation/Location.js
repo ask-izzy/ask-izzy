@@ -11,6 +11,7 @@ import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
+import CovidRelatedIssues from "../../components/CovidRelatedIssues";
 
 type Props = {
         name: string,
@@ -277,6 +278,7 @@ class Location extends Personalisation<Props, State> {
                         </div>
                     )
                 }
+                {this.state.nextDisabled || <CovidRelatedIssues />}
                 {this.renderDoneButton()}
             </div>
         );

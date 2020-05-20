@@ -24,6 +24,7 @@ import {ResultsPageListing, ResultsPageMap} from "./pages/ResultsPage";
 import ServicePage from "./pages/ServicePage";
 import BushfireReliefPage from "./pages/BushfireReliefPage";
 import Covid19StaticPage from "./pages/Covid19StaticPage";
+import {CovidSupportPageListing} from "./pages/CovidSupportPage";
 
 export function makeTitle(route: string, params: Object): string {
     let unslug = (str) =>
@@ -101,6 +102,12 @@ export default (
         <BasePage
             path="/covid-19-support"
             component={Covid19StaticPage}
+            title="COVID 19 Support"
+            exact={true}
+        />
+        <BasePage
+            path="/covid-19-support/:supportCategorySlug"
+            component={CovidSupportPageListing}
             title="COVID 19 Support"
         />
         <BasePage
