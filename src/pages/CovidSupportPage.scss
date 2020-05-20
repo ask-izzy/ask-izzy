@@ -1,0 +1,177 @@
+.CovidSupportPage {
+    $padding: 1em;
+    .pageBanner {
+        background-color: $brand-bg-dark;
+        color: $white;
+        overflow: auto;
+        padding: 1.5em;
+        font-size: 0.9em;
+        h3 {
+            margin: 0 0 0.3em;
+        }
+    }
+    .primaryInfo, .keyInfo {
+        h3 {
+            margin: 0.5em 0 0.2em;
+            font-size: 1.3em;
+            font-weight: 500;
+        }
+        h4 {
+            margin: 0.2em 0 1em;
+            font-weight: 300;
+            color: $brand-text-dark;
+        }
+        .body {
+            margin: 1em 0;
+        }
+        > .learnMore:link {
+            color: black; 
+        }
+    }
+    .primaryInfo {
+        background-color: $brand-bg-light;
+        margin: $padding;
+        padding: 1em;
+    }
+
+    .keyInfos {
+        margin: $padding;
+        > h3 {
+            font-size: 1.5em;
+            font-weight: 400;
+        }
+    }
+    .keyInfo     {
+        margin: 2em 0;
+    }
+    .results {
+        .heading {
+            padding: 0 $padding;
+            background-color: $brand-bg-light;
+            overflow: auto;
+            h3 {
+                font-weight: 500;
+            }
+        }
+        .loadMore {
+            padding: 1em $padding;
+            background-color: $brand-bg-light;
+            button {
+                background: transparent;
+                border: 1px solid;
+                padding: 0.8em 1em;
+            }
+        }
+    }
+
+    .otherCovidSupportCategories {
+        h3 {
+            font-weight: 400;
+            font-size: 1.5em;
+            text-align: center;
+            padding: 0 $padding;
+        }
+        ul {
+            padding-left: 0;
+        }
+    }
+
+    .exitCovidFlowBox {
+        background: right 5% bottom 0.7em / 8% no-repeat url("/static/images/main-symbol-yellow.svg"), $brand-pane-alt-dark;
+        color: $white;
+        padding: 0 8em 1em $padding;
+        overflow: auto;
+
+        a, a:link {
+            color: $white;
+        }
+    }
+
+
+
+
+
+
+
+    .progress {
+        width: 100%;
+        padding-top: 40px;
+        padding-bottom: 40px;
+
+        & > * {
+            display: block;
+            width: 60px;
+            height: 60px;
+
+            margin-right: auto;
+            margin-left: auto;
+        }
+    }
+
+    .rightIcon {
+        top: 6px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .change-personalisation-container {
+        padding: 20px 15px 15px 30px;
+        text-align: right;
+    }
+
+    .change-personalisation {
+        font-weight: bold;
+    }
+
+    .List {
+        padding: 0;
+    }
+
+    .ViewOnMapButton {
+        background-color: $brand-bg-light;
+        color: $brand-text-mid;
+
+        .primaryText {
+            font-size: 18px;
+            line-height: 18px;
+        }
+
+        .MapIcon {
+            width: 40px;
+            height: 40px;
+            margin-top: -9px;
+            margin-left: -2px;
+        }
+
+        .rightIcon {
+            top: 6px;
+        }
+
+        & > div {
+            padding-left: 58px;
+        }
+    }
+
+    .MoreResultsButton {
+        border-right: 10px solid $brand-bg-light;
+        border-bottom: 10px solid $brand-bg-light;
+        border-left: 10px solid $brand-bg-light;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .CrisisHeader {
+        margin-right: 16px;
+        margin-bottom: 5px;
+        margin-left: 16px;
+
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+}
+
+.homeLink {
+    margin-right: 20px;
+}
+

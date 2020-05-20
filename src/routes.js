@@ -35,6 +35,7 @@ import {ResultsPageListing, ResultsPageMap} from "./pages/ResultsPage";
 import ServicePage from "./pages/ServicePage";
 import BushfireReliefPage from "./pages/BushfireReliefPage";
 import Covid19StaticPage from "./pages/Covid19StaticPage";
+import {CovidSupportPageListing} from "./pages/CovidSupportPage";
 
 export function makeTitle(routes: Array<Object>, params: Object): string {
     const template = _.chain(routes)
@@ -122,6 +123,11 @@ export default (
         <Route
             path="/covid-19-support"
             component={Covid19StaticPage}
+            title="COVID 19 Support"
+        />
+        <Route
+            path="/covid-19-support/:supportCategorySlug"
+            component={CovidSupportPageListing}
             title="COVID 19 Support"
         />
         <Route

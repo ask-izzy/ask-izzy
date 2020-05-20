@@ -17,6 +17,11 @@
         }
     }
 
+    &.purple {
+        a:link {
+            color: $white;
+        }
+    }
 
     .HeaderBarContent {
         @include clearfix;
@@ -149,6 +154,11 @@
                 background: url("/static/images/banners/atsi.png") center center;
                 background-size: cover;
             }
+        }
+
+        &.purple {
+            background-color: $brand-pane-alt-dark;
+            background-size: cover;
         }
 
         .BlackBanner {
