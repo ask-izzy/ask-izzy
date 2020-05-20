@@ -53,6 +53,7 @@ type Props = {
     location: {pathname: string},
     title: string,
     meta: {total_count: number},
+    covidCategory?: Object
 }
 
 class LoadingResultsHeader extends React.Component<Props, void> {
