@@ -20,6 +20,9 @@ import LinkListItem from "../components/LinkListItem";
 import ResultsListPage from "./ResultsListPage";
 import ResultsList from "../components/ResultsList";
 import routerContext from "../contexts/router-context";
+import Eligibility from "../components/Eligibility";
+import Collapser from "../components/Collapser";
+import Ndis from "../components/Ndis";
 
 import covidSupportCategories from "../constants/covidSupportCategories";
 
@@ -28,8 +31,7 @@ import NotFoundStaticPage from "./NotFoundStaticPage"
 
 const extraState = {
     primaryInfo: Object,
-    keyInfo: Object,
-    numOfDisplayedResults: Number
+    keyInfo: Object
 }
 
 class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
@@ -43,8 +45,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
             childServices: [],
             covidCategory: covidCategory,
             primaryInfo: covidContent.primaryInfo,
-            keyInfo: covidContent.keyInfo,
-            numOfDisplayedResults: 2
+            keyInfo: covidContent.keyInfo
         };
     }
 
@@ -66,7 +67,10 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
     _childComponent: any;
 
     issParams(): ?Object {
-        return this.state.covidCategory.query
+        let query = Object.assign({}, (this.state.covidCategory && this.state.covidCategory.query) || {})
+        query.area = storage.getLocation()
+        query.limit = 2
+        return query
         // // Build the search request.
         // //
         // // If we don't have enough information to build the search request
@@ -99,6 +103,10 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
         //     throw new Error(`Covid Category "${slug}" is not defined`)
         // }
         return cat
+    }
+
+    get title(): string {
+        return (this.state.covidCategory && 'Covid Info - ' + this.state.covidCategory.title) || 'Page Not Found'
     }
 
     componentDidMount(): void {
@@ -299,16 +307,49 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                     </div>
                     )}
                 </div>
-                <div className="results">
+                <div className="supportServices">
                     <div className="heading">
                         <h3>Support services near you</h3>
                     </div>
-                    <ResultsList
-                        results={(this.state.objects || []).slice(0, this.state.numOfDisplayedResults)}
-                    />
-                    <div className="loadMore">
-                        <button>Load more results...</button>
-                    </div>
+                    <ul>
+                        {(this.state.objects || []).map(object =>
+                        <li className="result supportService" key={object.id}>
+                            <h3 className="name">
+                                {object.name}
+                            </h3>
+                            <h4 className="site_name">
+                                {object.site.name}
+                                <Ndis
+                                    className="ndis"
+                                    compact={true}
+                                    object={object}
+                                />
+                            </h4>
+                            <div className="description">
+                                {object.shortDescription.map((sentence, idx) =>
+                                    <p key={idx}>{sentence}</p>
+                                )}
+                                {object.descriptionRemainder.length ?
+                                    <Collapser message="Read more">
+                                        {object.descriptionRemainder.map(
+                                            (sentence, idx) =>
+                                                <p key={idx}>{sentence}</p>
+                                        )}
+                                    </Collapser>
+                                    : null
+                                }
+                            </div>
+                            <Eligibility {...object} />
+                            <Link
+                                className="learnMore"
+                                to={`/service/${object.slug}`}
+                            >
+                                Learn More
+                            </Link>
+                        </li>
+                        )}
+                    </ul>
+                    {this.renderLoadMore()}
                 </div>
 
                 <div className="otherCovidSupportCategories">
@@ -490,11 +531,13 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
     renderLoadMore() {
         if (this.state.meta && this.state.meta.next) {
             return (
-                <ButtonListItem
-                    className="MoreResultsButton"
-                    primaryText="Load more results…"
-                    onClick={this.loadMore.bind(this)}
-                />
+                <div className="loadMore">
+                    <button
+                        onClick={this.loadMore.bind(this)}
+                    >
+                        Load more results…
+                    </button>
+                </div>
             );
         }
 
