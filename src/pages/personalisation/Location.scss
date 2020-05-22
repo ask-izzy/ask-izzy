@@ -1,6 +1,10 @@
 .Location {
     background: $brand-bg-light;
 
+    .HeaderBar .HeaderBarBanner::after {
+        border-right-color: $brand-bg-light;
+    }
+
     .done-button {
         overflow: auto;
     }
