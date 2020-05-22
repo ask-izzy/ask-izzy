@@ -10,7 +10,7 @@
             margin: 0 0 0.3em;
         }
     }
-    .primaryInfo, .keyInfo {
+    .primaryInfo, .keyInfos .keyInfo, .supportServices .supportService {
         h3 {
             margin: 0.5em 0 0.2em;
             font-size: 1.3em;
@@ -24,7 +24,7 @@
         .body {
             margin: 1em 0;
         }
-        > .learnMore:link {
+        > .learnMore:link, > .learnMore:visited {
             color: black; 
         }
     }
@@ -40,17 +40,39 @@
             font-size: 1.5em;
             font-weight: 400;
         }
+        .keyInfo {
+            margin: 2em 0;
+        }
     }
-    .keyInfo     {
-        margin: 2em 0;
-    }
-    .results {
+
+    .supportServices {
         .heading {
             padding: 0 $padding;
             background-color: $brand-bg-light;
             overflow: auto;
             h3 {
                 font-weight: 500;
+            }
+        }
+        > ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+
+            .supportService {
+                padding: 1em $padding 2em;
+                border-top: 10px solid #edece9;
+
+                .Eligibility {
+                    margin-bottom: 1em;
+
+                    h3 {
+                        font-size: 1em;
+                    }
+                }
+            }
+            .supportService:first-child {
+                border-top: 0;
             }
         }
         .loadMore {
