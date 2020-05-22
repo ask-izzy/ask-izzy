@@ -33,15 +33,14 @@ const categories: Array<Category> = [
         slug: 'rent-or-tenancy',
         title: 'Rent or tenancy help',
         subtitle: 'Your rights, rent relief and more',
-        icon: icons.House,
+        icon: icons.Advocacy,
         query: {
-            "q": "Tenancy",
-            "area": "3056, VIC"
+            "q": "Tenancy"
         }
     }),
     new CovidSupportCategory({
         slug: 'place-to-stay',
-        title: 'Need a place to stay?',
+        title: '[Not Implemented] Need a place to stay?',
         subtitle: 'Housing and accommodation',
         icon: icons.House,
         query: {
@@ -62,17 +61,16 @@ const categories: Array<Category> = [
         slug: 'money',
         title: 'Money help',
         subtitle: 'Debt, bills and motgage help',
-        icon: icons.House,
+        icon: icons.Money,
         query: {
-            "q": "Nils",
-            "area": "3000, VIC"
+            "q": "Nils"
         }
     }),
     new CovidSupportCategory({
         slug: 'food-and-everyday-things',
-        title: 'Food and everyday things',
+        title: '[Not Implemented] Food and everyday things',
         subtitle: 'Meals, clothing, toiletries, etc.',
-        icon: icons.House,
+        icon: icons.Food,
         query: {
             "catchment": "prefer",
             "q": "housing -(coordinating bodies) -(respite care) -(housing information) -hef -(holiday accommodation)",

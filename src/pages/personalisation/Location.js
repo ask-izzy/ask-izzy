@@ -38,7 +38,7 @@ class Location extends Personalisation<Props, State> {
             autocompletionInProgress: false,
             locationName: "",
             autocompletions: [],
-            nextDisabled: true,
+            nextDisabled: true
         };
     }
 
@@ -62,9 +62,7 @@ class Location extends Personalisation<Props, State> {
 
     static shouldInjectAccessPoints(): boolean {
         // Currently only for locations in Victoria.
-        let victoriaRegex = /VIC(toria)?$/i;
-
-        return !!victoriaRegex.exec(storage.getLocation());
+        return Location.locationInVic(storage.getLocation())
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
@@ -101,6 +99,13 @@ class Location extends Personalisation<Props, State> {
 
     static showInSummary(): boolean {
         return true;
+    }
+
+    static locationInVic(location: string): boolean {
+        console.log(location)
+        let victoriaRegex = /VIC(toria)?$/i;
+
+        return !!victoriaRegex.exec(location);
     }
 
     onDoneTouchTap(event: SyntheticInputEvent<>): void {
@@ -148,6 +153,7 @@ class Location extends Personalisation<Props, State> {
     }
 
     onNextStep(): void {
+        console.log('blar')
         storage.setLocation(this.state.locationName || "");
     }
 
@@ -278,7 +284,11 @@ class Location extends Personalisation<Props, State> {
                         </div>
                     )
                 }
-                {this.state.nextDisabled || <CovidRelatedIssues />}
+                {
+                    !this.state.nextDisabled && 
+                    Location.locationInVic(this.state.locationName) && 
+                    <CovidRelatedIssues onClick={this.onNextStep.bind(this)} />
+                }
                 {this.renderDoneButton()}
             </div>
         );
