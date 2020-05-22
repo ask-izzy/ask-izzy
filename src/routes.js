@@ -107,7 +107,12 @@ export default (
         />
         <BasePage
             path="/covid-19-support/:supportCategorySlug"
-            component={CovidSupportPageListing}
+            component={props => (
+                <CovidSupportPageListing 
+                    key={props.computedMatch.params.supportCategorySlug} 
+                    {...props}
+                />
+            )}
             title="COVID 19 Support"
         />
         <BasePage
