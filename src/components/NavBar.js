@@ -16,21 +16,6 @@ class NavBar extends React.Component<{}, void> {
         return (
             <div className="NavBar">
                 <div className="List categories">
-                    <LinkListItem
-                        className="CategoryListItem hero"
-                        to={"/covid-19-support"}
-                        leftIcon={
-                            <Warning
-                                className="ColoredIcon icon-fg-color big"
-                            />
-                        }
-                        rightIcon={<Chevron />}
-                        primaryText="Coronavirus (COVID-19) support"
-                        secondaryText={
-                            "Information for those affected by coronavirus " +
-                            "(COVID-19)"
-                        }
-                    />
                     {
                         categories.map(category => {
                             return (
