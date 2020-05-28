@@ -53,20 +53,6 @@ class HomePage extends React.Component<{}, void> {
 
         return (
             <div className="HomePage">
-                <div className="notification">
-                    <icons.Info className={"big middle"}/>
-                    <div>
-                        <h3>
-                            Coronavirus (COVID-19) support
-                        </h3>
-                        <span>
-                            Find help and information near you.{" "}
-                            <Link to="/covid-19-support">
-                                Learn&nbsp;more
-                            </Link>
-                        </span>
-                    </div>
-                </div>
                 <div className="appbar">
                     <a className="quick-exit"
                         href={redirectUri}
