@@ -1,19 +1,15 @@
 .CovidRelatedIssues {
     margin: 0;
+    border: solid 1px black;
+    margin: 15px;
 
-    @media ($tablet) {
-        border: solid 1px black;
-        margin: 15px;
+    .CovidRelatedIssues-container {
+        background-color: $white;
+        padding: 15px;
 
-        .CovidRelatedIssues-container {
-            background-color: $white;
-            padding: 15px;
-
-            .covidServices {
-                padding: 0;
-                margin: 1em -15px 1em;
-            }
+        .covidServices {
+            padding: 0;
+            margin: 1em -15px 1em;
         }
-
     }
 }
