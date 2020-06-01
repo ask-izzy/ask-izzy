@@ -48,19 +48,21 @@ class Location extends Personalisation<Props, State> {
             storage.getLocation(),
             storage.getLocation() != "" // valid location
         );
-        if( !this.overlapObserver ){
-            // Do this in componentDidMount because if we did this in the 
-            // constructor then the server will attempt to execute it when 
-            // rendering a static page but will fail because the 
-            // IntersectionObserver API is not available in node
-            this.overlapObserver = new IntersectionObserver( 
-                ([e]) => e.target.toggleAttribute(
-                    'stuck', e.intersectionRatio < 1
-                ),
-                {threshold: [1]}
-            );
+        if ('IntersectionObserver' in window) {
+            if( !this.overlapObserver ){
+                // Do this in componentDidMount because if we did this in the 
+                // constructor then the server will attempt to execute it when 
+                // rendering a static page but will fail because the 
+                // IntersectionObserver API is not available in node
+                this.overlapObserver = new IntersectionObserver( 
+                    ([e]) => e.target.toggleAttribute(
+                        'stuck', e.intersectionRatio < 1
+                    ),
+                    {threshold: [1]}
+                );
+            }
+            this.overlapObserver.observe(this.doneButtonRef.current);
         }
-        this.overlapObserver.observe(this.doneButtonRef.current);
     }
 
     /* eslint-disable react/sort-comp */
