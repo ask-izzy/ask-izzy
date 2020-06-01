@@ -18,6 +18,7 @@ import HtmlDocument from "./HtmlDocument";
 import webpackStats from "./webpack-stats";
 import categories from "../constants/categories";
 import Category from "../constants/Category";
+import covidSupportCategories from "../constants/covidSupportCategories";
 import Helmet from "react-helmet";
 
 const versionFilePath = "public/VERSION"
@@ -137,6 +138,13 @@ function* generateRouteParamVals(
                     page: key,
                 };
             }
+        }
+    } else if (routePathParts[1] === ":supportCategorySlug") {
+        for (const {slug} of covidSupportCategories) {
+            yield {
+                ...defaultParamVals,
+                supportCategorySlug: slug,
+            };
         }
     } else if (routePathParts[1] === "search") {
         yield {
