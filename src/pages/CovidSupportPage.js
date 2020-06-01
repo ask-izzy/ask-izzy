@@ -39,7 +39,6 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
         super(props, context);
         const covidCategory = CovidSupportPage.getCovidCategory(context.router.match.params.supportCategorySlug)
         const covidContent = CovidSupportPage.getContent(covidCategory)
-        console.log(covidContent, covidCategory)
         this.state = {
             isClient: false,
             childServices: [],

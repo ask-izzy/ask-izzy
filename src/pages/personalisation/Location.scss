@@ -7,5 +7,12 @@
 
     .done-button {
         overflow: auto;
+        position: sticky;
+        bottom: -2px;
+        background-color: white;
+        
+        &[stuck] {
+            box-shadow: 0px -5px 5px #8e8e8e;
+        }
     }
 }

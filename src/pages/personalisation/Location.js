@@ -40,6 +40,7 @@ class Location extends Personalisation<Props, State> {
             autocompletions: [],
             nextDisabled: true
         };
+        this.doneButtonRef = React.createRef();
     }
 
     componentDidMount(): void {
@@ -47,6 +48,19 @@ class Location extends Personalisation<Props, State> {
             storage.getLocation(),
             storage.getLocation() != "" // valid location
         );
+        if( !this.overlapObserver ){
+            // Do this in componentDidMount because if we did this in the 
+            // constructor then the server will attempt to execute it when 
+            // rendering a static page but will fail because the 
+            // IntersectionObserver API is not available in node
+            this.overlapObserver = new IntersectionObserver( 
+                ([e]) => e.target.toggleAttribute(
+                    'stuck', e.intersectionRatio < 1
+                ),
+                {threshold: [1]}
+            );
+        }
+        this.overlapObserver.observe(this.doneButtonRef.current);
     }
 
     /* eslint-disable react/sort-comp */
@@ -296,14 +310,12 @@ class Location extends Personalisation<Props, State> {
 
     renderDoneButton() {
         return (
-            <div>
-                <div className="done-button">
-                    <components.FlatButton
-                        label="Done"
-                        onClick={this.onDoneTouchTap.bind(this)}
-                        disabled={this.state.nextDisabled}
-                    />
-                </div>
+            <div className="done-button" ref={this.doneButtonRef}>
+                <components.FlatButton
+                    label="Done"
+                    onClick={this.onDoneTouchTap.bind(this)}
+                    disabled={this.state.nextDisabled}
+                />
             </div>
         )
     }
