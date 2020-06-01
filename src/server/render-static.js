@@ -15,6 +15,7 @@ import HtmlDocument from "./HtmlDocument";
 // flow:disable
 import webpackStats from "./webpack-stats";
 import categories from "../constants/categories";
+import covidSupportCategories from "../constants/covidSupportCategories";
 import Helmet from "react-helmet";
 
 function hasVersionFile(): boolean {
@@ -123,6 +124,10 @@ function *expandRoutes(
                     // Just the category page
                     yield categoryUrl;
                 }
+            }
+        } else if (cleanedUrl.match(/:supportCategorySlug/)) {
+            for (const {slug} of covidSupportCategories) {
+                yield cleanedUrl.replace(/:supportCategorySlug/, slug);
             }
         } else if (cleanedUrl.match(/:subpage/)) { // search personalisation
             yield cleanedUrl.replace("/:subpage", "/location");
