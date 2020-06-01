@@ -77,6 +77,7 @@ module.exports = {
             compress: {
                 warnings: false,
             },
+            sourceMap: true,
         }),
         commons,
 
