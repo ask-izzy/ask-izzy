@@ -38,6 +38,7 @@ const categories: Array<Category> = [
             "q": "Tenancy"
         }
     }),
+    /*
     new CovidSupportCategory({
         slug: 'place-to-stay',
         title: '[Not Implemented] Need a place to stay?',
@@ -57,6 +58,7 @@ const categories: Array<Category> = [
             ]
         }
     }),
+    */
     new CovidSupportCategory({
         slug: 'money',
         title: 'Money help',
@@ -66,6 +68,7 @@ const categories: Array<Category> = [
             "q": "Nils"
         }
     }),
+    /*
     new CovidSupportCategory({
         slug: 'food-and-everyday-things',
         title: '[Not Implemented] Food and everyday things',
@@ -85,6 +88,7 @@ const categories: Array<Category> = [
             ]
         }
     }),
+    */
 ];
 
 export default categories;
