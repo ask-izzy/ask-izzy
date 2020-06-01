@@ -1,6 +1,12 @@
 .AppleDouble
 *.css.map
+*.js.map
 .*.sw?
+.env
 bower_components/
 ghostdriver.log
 node_modules/
+public/static/*.css
+public/static/*.js
+public/**/*.html
+public/VERSION
