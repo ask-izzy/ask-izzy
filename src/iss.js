@@ -460,7 +460,10 @@ export class Service {
         let descriptionLength = () =>
             description.reduce((memo, elem) => memo + elem.length, 0);
 
-        while (sentences.length && descriptionLength() < 250) {
+        while (
+            sentences.length && 
+            (descriptionLength() + sentences[0].length) < 250
+        ) {
             description.push(sentences.shift());
         }
 
