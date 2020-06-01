@@ -38,7 +38,6 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
         super(props);
         const covidCategory = CovidSupportPage.getCovidCategory(this.props.params.supportCategorySlug)
         const covidContent = CovidSupportPage.getContent(covidCategory)
-        console.log(covidContent, covidCategory)
         this.state = {
             isClient: false,
             childServices: [],
