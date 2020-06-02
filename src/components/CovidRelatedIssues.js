@@ -20,8 +20,8 @@ export default class CovidRelatedIssues extends React.Component<Props, {}> {
         return (
             <div className="CovidRelatedIssues">
                 <div className="CovidRelatedIssues-container">
-                            <h3>Have you been put out by Corona (COVID-19)?</h3>
-                            <span>We have some useful information for you. Please select an area you'd like to explore.</span>
+                            <h3>Has your financial situation been affected by the pandemic?</h3>
+                            <span>We have some useful information for you.</span>
 
                             <ul className="covidServices">
                                 {covidSupportCategories.map(category =>
