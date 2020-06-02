@@ -2,10 +2,10 @@
     margin: 0;
     border: solid 1px black;
     margin: 15px;
+    background-color: $white;
 
     .CovidRelatedIssues-container {
-        background-color: $white;
-        padding: 15px;
+        margin: 15px;
 
         .covidServices {
             padding: 0;
