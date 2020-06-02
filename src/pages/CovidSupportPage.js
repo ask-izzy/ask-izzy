@@ -284,7 +284,6 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                     bannerName={"purple covid_"+this.state.covidCategory.slug}
                 />
 
-                {/*this.renderKeyResults*/}
                 <div className="primaryInfo">
                     <h3>{this.state.primaryInfo.title}</h3>
                     <h4>{this.state.primaryInfo.subtitle}</h4>
@@ -308,7 +307,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                 </div>
                 <div className="supportServices">
                     <div className="heading">
-                        <h3>Support services near you</h3>
+                        <h3>Support services</h3>
                     </div>
                     <ul>
                         {(this.state.objects || []).map(object =>
@@ -328,15 +327,6 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                                 {object.shortDescription.map((sentence, idx) =>
                                     <p key={idx}>{sentence}</p>
                                 )}
-                                {object.descriptionRemainder.length ?
-                                    <Collapser message="Read more">
-                                        {object.descriptionRemainder.map(
-                                            (sentence, idx) =>
-                                                <p key={idx}>{sentence}</p>
-                                        )}
-                                    </Collapser>
-                                    : null
-                                }
                             </div>
                             <Eligibility {...object} />
                             <Link
@@ -352,7 +342,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                 </div>
 
                 <div className="otherCovidSupportCategories">
-                    <h3>Explore more helpful content for those affected by COVID-19.</h3>
+                    <h3>Explore more helpful content for those affected by the pandemic.</h3>
                     <ul>
                     {covidSupportCategories
                         .filter(cat => cat.slug !== this.state.covidCategory.slug)
@@ -380,38 +370,6 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                         </Link>
                     </div>
                 </div>
-                {/*
-                <Component
-                    covidCategory={this.state.covidCategory}
-                    ref={elem => {
-                        this._component = elem
-                    }}
-                    {...this.state}
-                    {...this.props}
-                    category={this.category}
-                    search={this.props.params.search}
-                    loadMore={this.renderLoadMore()}
-                    title={this.title}
-                    loading={this.loading}
-                    personalisationComponents={this.personalisationComponents}
-                    // The below props are only used for the ResultsMap
-                    // component - this is because react-google-maps >= 6.0.0
-                    // introduced a HOC to initialise the Google Map
-                    loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={
-                        <div
-                            style={
-                                { height: `${this.calculateMapHeight()}px` }
-                            }
-                        />
-                    }
-                    mapElement={<div style={{ height: `100%` }} />}
-                    childRef={elem => {
-                        this._childComponent = elem
-                    }}
-                    onServicesChange={this.onServicesChange.bind(this)}
-                />
-                */}
             </div>
         );
     }
