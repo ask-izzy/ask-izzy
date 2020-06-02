@@ -228,11 +228,11 @@ class Location extends Personalisation<Props, State> {
                 <components.HeaderBar
                     primaryText={
                         <div>
-                            Where are you?
+                            Where are you looking for help?
                         </div>
                     }
                     secondaryText={
-                        "This will let me find the services closest to you"
+                        "This will help find services closest to your chosen location"
                     }
                     bannerName={this.bannerName}
                 />
