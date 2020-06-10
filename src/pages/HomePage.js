@@ -22,6 +22,10 @@ class HomePage extends React.Component<{}, void> {
         resetDfvOptions();
     }
 
+    componentDidMount(): void {
+        storage.clear();
+    }
+
     onSearchSubmit(event: Event): void {
         event.preventDefault();
 
@@ -46,6 +50,7 @@ class HomePage extends React.Component<{}, void> {
         "Exit' button. If you are in immediate danger call 000 ( " +
         "Australian emergency line), for advice about family violence " +
         " call 1800 Respect on 1800 737 732 (Helpline).";
+
 
         return (
             <div className="HomePage">
