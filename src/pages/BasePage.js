@@ -6,6 +6,9 @@ import { makeTitle } from "../routes";
 import { Route } from "react-router";
 import { InjectRouterContext } from "../contexts/router-context"
 
+import { ApolloProvider } from "react-apollo";
+import client from "../utils/apolloClient";
+
 type Props = {
     children: any,
     routes: any,
@@ -29,32 +32,34 @@ class BasePage extends Route<Props, {}> {
 
         return (
             <InjectRouterContext matchedRoute={match}>
-                <div className="BasePage">
-                    <Helmet>
-                        <link
-                            rel="canonical"
-                            content={canonicalUrl}
-                        />
-                        <meta
-                            property="og:url"
-                            content={canonicalUrl}
-                        />
-                        <title>
-                            {
-                                makeTitle(
-                                    this.props.title,
-                                    match.params
-                                )
-                            }
-                        </title>
-                    </Helmet>
+                <ApolloProvider client={client}>
+                    <div className="BasePage">
+                        <Helmet>
+                            <link
+                                rel="canonical"
+                                content={canonicalUrl}
+                            />
+                            <meta
+                                property="og:url"
+                                content={canonicalUrl}
+                            />
+                            <title>
+                                {
+                                    makeTitle(
+                                        this.props.title,
+                                        match.params
+                                    )
+                                }
+                            </title>
+                        </Helmet>
 
-                    <main>
-                        <Component
-                            {...this.props}
-                        />
-                    </main>
-                </div>
+                        <main>
+                            <Component
+                                {...this.props}
+                            />
+                        </main>
+                    </div>
+                </ApolloProvider>
             </InjectRouterContext>
         );
     }
