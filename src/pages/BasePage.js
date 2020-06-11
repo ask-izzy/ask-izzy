@@ -7,6 +7,9 @@ import { Route } from "react-router";
 import history from "../utils/history";
 import sendEvent from "../google-tag-manager";
 
+import { ApolloProvider } from "react-apollo";
+import client from "../utils/apolloClient";
+
 type Props = {
     children: any,
     routes: any,
@@ -37,34 +40,36 @@ class BasePage extends Route<Props, {}> {
         let Component = this.props.component;
 
         return (
-            <div className="BasePage">
-                <Helmet>
-                    <link
-                        rel="canonical"
-                        content={canonicalUrl}
-                    />
-                    <meta
-                        property="og:url"
-                        content={canonicalUrl}
-                    />
-                    <title>
-                        {
-                            makeTitle(
-                                this.props.title,
-                                match.params
-                            )
-                        }
-                    </title>
-                </Helmet>
+            <ApolloProvider client={client}>
+                <div className="BasePage">
+                    <Helmet>
+                        <link
+                            rel="canonical"
+                            content={canonicalUrl}
+                        />
+                        <meta
+                            property="og:url"
+                            content={canonicalUrl}
+                        />
+                        <title>
+                            {
+                                makeTitle(
+                                    this.props.title,
+                                    match.params
+                                )
+                            }
+                        </title>
+                    </Helmet>
 
-                <main>
-                    <Component
-                        {...this.props}
-                        match={match}
-                        history={history}
-                    />
-                </main>
-            </div>
+                    <main>
+                        <Component
+                            {...this.props}
+                            match={match}
+                            history={history}
+                        />
+                    </main>
+                </div>
+            </ApolloProvider>
         );
     }
 }
