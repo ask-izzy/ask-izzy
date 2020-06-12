@@ -199,19 +199,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
     }
 
     onBackClick(event: SyntheticInputEvent<>): void {
-        if (this._childComponent && this._childComponent.onGoBack) {
-            this._childComponent.onGoBack(event);
-        }
-
-        if (this._component.onGoBack) {
-            this._component.onGoBack(event);
-        }
-
-        if (!event.defaultPrevented) {
-            this.context.router.push(
-                "/",
-            );
-        }
+        this.context.router.goBack();
     }
 
     onServicesChange(services: Array<Service>) {
