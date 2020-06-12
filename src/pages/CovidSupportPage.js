@@ -213,22 +213,6 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
         }
     }
 
-    onBackClick(event: SyntheticInputEvent<>): void {
-        if (this._childComponent && this._childComponent.onGoBack) {
-            this._childComponent.onGoBack(event);
-        }
-
-        if (this._component.onGoBack) {
-            this._component.onGoBack(event);
-        }
-
-        if (!event.defaultPrevented) {
-            this.context.router.push(
-                "/",
-            );
-        }
-    }
-
     onServicesChange(services: Array<Service>) {
         this.setState({ childServices: services });
     }
@@ -251,7 +235,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                 <AppBar
                     title={this.title}
                     backMessage={this.backButtonMessage()}
-                    onBackTouchTap={this.onBackClick.bind(this)}
+                    onBackTouchTap={this.context.router.history.goBack}
                 />
                 <DebugContainer message="Debug personalisation">
                     <DebugPersonalisation
