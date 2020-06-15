@@ -10,6 +10,14 @@
             margin: 0 0 0.3em;
         }
     }
+    .anchor {
+        /* push anchor down the page to stop header cutting it off */
+        display: block;
+        position: relative;
+        top: -44px; /* header height */
+        visibility: hidden;
+        overflow: auto;
+    }
     .primaryInfo, .keyInfos .keyInfo, .supportServices .supportService {
         h3 {
             margin: 0.5em 0 0.2em;
