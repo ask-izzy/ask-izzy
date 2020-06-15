@@ -169,7 +169,6 @@ class Location extends Personalisation<Props, State> {
     }
 
     onNextStep(): void {
-        console.log('blar')
         storage.setLocation(this.state.locationName || "");
     }
 
