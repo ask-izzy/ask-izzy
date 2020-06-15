@@ -268,14 +268,22 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                     bannerName={"purple covid_"+this.state.covidCategory.slug}
                 />
 
+                <a className="anchor" id="tools"></a>
                 <div className="primaryInfo">
                     <h3>{this.state.primaryInfo.title}</h3>
                     <h4>{this.state.primaryInfo.subtitle}</h4>
                     <div className="body">{this.state.primaryInfo.body}</div>
-                    <a className="learnMore" href={this.state.primaryInfo.learnMoreLink}>
+                    <a 
+                        className="learnMore"
+                        href={this.state.primaryInfo.learnMoreLink}
+                        rel="noopener noreferer"
+                        target="_blank"
+                    >
                         {this.state.primaryInfo.learnMoreText || "Learn More"}
                     </a>
                 </div>
+
+                <a className="anchor" id="information"></a>
                 <div className="keyInfos">
                     <h3>Key Information</h3>
                     {this.state.keyInfo.map(info => 
@@ -283,12 +291,19 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                         <h3>{info.title}</h3>
                         <h4>{info.subtitle}</h4>
                         <div className="body">{info.body}</div>
-                        <a className="learnMore" href={info.learnMoreLink}>
+                        <a 
+                            className="learnMore" 
+                            href={info.learnMoreLink}
+                            rel="noopener noreferer"
+                            target="_blank"
+                        >
                             {info.learnMoreText || "Learn More"}
                         </a>
                     </div>
                     )}
                 </div>
+
+                <a className="anchor" id="services"></a>
                 <div className="supportServices">
                     <div className="heading">
                         <h3>Support services</h3>
