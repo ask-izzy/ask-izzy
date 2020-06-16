@@ -313,7 +313,7 @@ class Location extends Personalisation<Props, State> {
         return (
             <div className="done-button" ref={this.doneButtonRef}>
                 <components.FlatButton
-                    label="Done"
+                    label="Next"
                     onClick={this.onDoneTouchTap.bind(this)}
                     disabled={this.state.nextDisabled}
                 />

@@ -38,10 +38,9 @@ const categories: Array<Category> = [
             "q": "Tenancy"
         }
     }),
-    /*
     new CovidSupportCategory({
         slug: 'place-to-stay',
-        title: '[Not Implemented] Need a place to stay?',
+        title: 'Need a place to stay?',
         subtitle: 'Housing and accommodation',
         icon: icons.House,
         query: {
@@ -58,7 +57,6 @@ const categories: Array<Category> = [
             ]
         }
     }),
-    */
     new CovidSupportCategory({
         slug: 'money',
         title: 'Money help',
@@ -68,10 +66,9 @@ const categories: Array<Category> = [
             "q": "Nils"
         }
     }),
-    /*
     new CovidSupportCategory({
-        slug: 'food-and-everyday-things',
-        title: '[Not Implemented] Food and everyday things',
+        slug: 'food-and-everyday',
+        title: 'Food and everyday things',
         subtitle: 'Meals, clothing, toiletries, etc.',
         icon: icons.Food,
         query: {
@@ -88,7 +85,25 @@ const categories: Array<Category> = [
             ]
         }
     }),
-    */
+    new CovidSupportCategory({
+        slug: 'mental-health-and-wellbeing',
+        title: 'Mental health & wellbeing',
+        subtitle: '--------',
+        icon: icons.Health,
+        query: {
+            "catchment": "prefer",
+            "q": "housing -(coordinating bodies) -(respite care) -(housing information) -hef -(holiday accommodation)",
+            "service_type": [
+                "housing"
+            ],
+            "minimum_should_match": "30%",
+            "area": "3000, VIC",
+            "client_gender": [
+                "x",
+                "u"
+            ]
+        }
+    })
 ];
 
 export default categories;
