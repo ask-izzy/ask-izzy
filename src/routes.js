@@ -19,7 +19,7 @@ import AddServicePage from "./pages/AddServicePage";
 import TermsPage from "./pages/TermsPage";
 
 import HomelessSheltersStaticPage from "./pages/HomelessSheltersStaticPage";
-import FoodBanksStaticPage from "./pages/FoodBanksStaticPage";
+import FoodStaticPage from "./pages/FoodStaticPage";
 import HomelessSupportStaticPage from "./pages/HomelessSupportStaticPage";
 import HomelessLegalStaticPage from "./pages/HomelessLegalStaticPage";
 import HomelessFinanceStaticPage from "./pages/HomelessFinanceStaticPage";
@@ -140,9 +140,9 @@ export default (
             title="Homeless shelters"
         />
         <BasePage
-            path="/food-banks"
-            component={FoodBanksStaticPage}
-            title="Food Banks"
+            path="/food-info"
+            component={FoodStaticPage}
+            title="Food"
         />
         <BasePage
             path="/homeless-support"

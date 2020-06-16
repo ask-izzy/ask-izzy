@@ -67,8 +67,8 @@ class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
                             <li><Link to="/homeless-shelters">
                                 Shelters
                             </Link></li>
-                            <li><Link to="/food-banks">
-                                Food banks
+                            <li><Link to="/food-info">
+                                Food
                             </Link></li>
                             <li><Link to="/homeless-support">
                                 Support
