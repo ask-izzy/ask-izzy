@@ -136,9 +136,9 @@ export default (
             title="Homeless shelters"
         />
         <BasePage
-            path="/food-banks"
+            path="/food-info"
             component={DynamicPage}
-            title="Food Banks"
+            title="Food"
             strict={false}
         />
         <BasePage
