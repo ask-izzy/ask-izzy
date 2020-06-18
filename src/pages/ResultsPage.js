@@ -330,7 +330,7 @@ export class ResultsPageListing extends ResultsPage {
     }
 
     backButtonMessage(): string {
-        return "Categories"
+        return "Home Page"
     }
 }
 
