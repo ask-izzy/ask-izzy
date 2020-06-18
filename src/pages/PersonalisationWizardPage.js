@@ -125,7 +125,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
 
         const prevPage = this.prevSubPage();
 
-        return prevPage ? prevPage.title : "Categories";
+        return prevPage ? prevPage.title : "Home Page";
     }
 
     get pageTitle(): string {
