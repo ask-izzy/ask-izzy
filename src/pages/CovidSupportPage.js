@@ -248,7 +248,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                 </DebugContainer>
                 <div className="pageBanner">
                     <h3>Beta COVID-19 support page for those in Victoria.</h3>
-                    <div>We have added a new section to Ask Izzy for people who have been put out by the coronavirus (COVID-19) pandemic, in Victoria. Please be aware that some services may not be operating or offering a limited range of services during this time.</div>
+                    <div>We have added a new section to Ask Izzy for people who have been impacted by the coronavirus (COVID-19) pandemic, in Victoria. Please be aware that some services may not be operating or offering a limited range of services during this time.</div>
                 </div>
 
                 <HeaderBar
@@ -270,7 +270,14 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
 
                 <a className="anchor" id="tools"></a>
                 <div className="primaryInfo">
-                    <h3>{this.state.primaryInfo.title}</h3>
+                    <a 
+                        className="title"
+                        href={this.state.primaryInfo.learnMoreLink}
+                        rel="noopener noreferer"
+                        target="_blank"
+                    >
+                        <h3>{this.state.primaryInfo.title}</h3>
+                    </a>
                     <h4>{this.state.primaryInfo.subtitle}</h4>
                     <div className="body">{this.state.primaryInfo.body}</div>
                     <a 
@@ -288,7 +295,14 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                     <h3>Key Information</h3>
                     {this.state.keyInfo.map(info => 
                     <div className="keyInfo" key={info.title}>
-                        <h3>{info.title}</h3>
+                        <a 
+                            className="title" 
+                            href={info.learnMoreLink}
+                            rel="noopener noreferer"
+                            target="_blank"
+                        >
+                            <h3>{info.title}</h3>
+                        </a>
                         <h4>{info.subtitle}</h4>
                         <div className="body">{info.body}</div>
                         <a 
@@ -311,9 +325,14 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                     <ul>
                         {(this.state.objects || []).map(object =>
                         <li className="result supportService" key={object.id}>
-                            <h3 className="name">
-                                {object.name}
-                            </h3>
+                            <Link
+                                className="title"
+                                to={`/service/${object.slug}`}
+                            >
+                                <h3 className="name">
+                                    {object.name}
+                                </h3>
+                            </Link>
                             <h4 className="site_name">
                                 {object.site.name}
                                 <Ndis
@@ -413,7 +432,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
             };
         }
         const slug = covidCategory.slug;
-        if (slug === "rent-or-tenancy") {
+        if (slug === "rent-and-tenancy") {
             return {
                 primaryInfo: {
                     title: "Dear Landlord Letter Writer",
@@ -469,7 +488,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                     },
                 ],
             };
-        } else if (slug === "place-to-stay") {
+        } else if (slug === "accommodation") {
             return {
                 primaryInfo: {
                     title: "Emergency Housing Support",
@@ -498,7 +517,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                     },
                 ],
             };
-        } else if (slug === "food-and-everyday") {
+        } else if (slug === "food-and-everyday-things") {
             return {
                 primaryInfo: {
                     title: "Types of Food Support",
@@ -527,7 +546,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                     },
                 ],
             };
-        } else if (slug === "mental-health-and-wellbeing") {
+        } else if (slug === "mental-health") {
             return {
                 primaryInfo: {
                     title: "Mental health and wellbeing support",
@@ -601,7 +620,7 @@ export class CovidSupportPageListing extends CovidSupportPage {
     }
 
     backButtonMessage(): string {
-        return "Categories"
+        return "Home Page"
     }
 }
 

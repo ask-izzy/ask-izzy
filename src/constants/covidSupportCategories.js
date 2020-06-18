@@ -30,8 +30,8 @@ export class CovidSupportCategory {
 
 const categories: Array<Category> = [
     new CovidSupportCategory({
-        slug: 'rent-or-tenancy',
-        title: 'Rent or tenancy help',
+        slug: 'rent-and-tenancy',
+        title: 'Rent and tenancy help',
         subtitle: 'Your rights, rent relief and more',
         icon: icons.Advocacy,
         query: {
@@ -39,69 +39,39 @@ const categories: Array<Category> = [
         }
     }),
     new CovidSupportCategory({
-        slug: 'place-to-stay',
-        title: 'Need a place to stay?',
+        slug: 'accommodation',
+        title: 'A place to stay',
         subtitle: 'Housing and accommodation',
         icon: icons.House,
         query: {
-            "catchment": "prefer",
-            "q": "housing -(coordinating bodies) -(respite care) -(housing information) -hef -(holiday accommodation)",
-            "service_type": [
-                "housing"
-            ],
-            "minimum_should_match": "30%",
-            "area": "3000, VIC",
-            "client_gender": [
-                "x",
-                "u"
-            ]
+            "q": "Housing",
         }
     }),
     new CovidSupportCategory({
         slug: 'money',
         title: 'Money help',
-        subtitle: 'Debt, bills and motgage help',
+        subtitle: 'Debt, bills and mortgage help',
         icon: icons.Money,
         query: {
-            "q": "Nils"
+            "q": "money, hardship"
         }
     }),
     new CovidSupportCategory({
-        slug: 'food-and-everyday',
+        slug: 'food-and-everyday-things',
         title: 'Food and everyday things',
         subtitle: 'Meals, clothing, toiletries, etc.',
         icon: icons.Food,
         query: {
-            "catchment": "prefer",
-            "q": "housing -(coordinating bodies) -(respite care) -(housing information) -hef -(holiday accommodation)",
-            "service_type": [
-                "housing"
-            ],
-            "minimum_should_match": "30%",
-            "area": "3000, VIC",
-            "client_gender": [
-                "x",
-                "u"
-            ]
+            "q": "(material aid), (food), (clothing), (meals), (toiletries)",
         }
     }),
     new CovidSupportCategory({
-        slug: 'mental-health-and-wellbeing',
+        slug: 'mental-health',
         title: 'Mental health & wellbeing',
-        subtitle: '--------',
+        subtitle: 'Counselling and support',
         icon: icons.Health,
         query: {
-            "catchment": "prefer",
-            "q": "housing -(coordinating bodies) -(respite care) -(housing information) -hef -(holiday accommodation)",
-            "service_type": [
-                "housing"
-            ],
-            "minimum_should_match": "30%",
-            "area": "3000, VIC",
-            "client_gender": [
-                "x",
-                "u"
-            ]
+            "q": "counselling, mental health",
         }
     })
 ];
