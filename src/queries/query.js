@@ -43,7 +43,9 @@ const Query = ({ children, query, id }) => {
         variables: { id },
     });
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) {
+        return <p>Loading...</p>;
+    }
     if (error) {
         return <p>An error ocurred and we could not load this section.</p>;
     }
