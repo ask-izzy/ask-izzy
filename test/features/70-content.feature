@@ -11,12 +11,9 @@ Feature: Content
         And I am not interested in any subcategory
 
     Scenario: View money help
-        When I visit /money-help
-        When I click on "Myself"
-        Then I should see "Next"
-        When I click on "Next"
+        When I visit /covid-19-support/money
         Then I should see "Key Information"
         Then I should see "Support services"
         Then I should see "Free calculators, tips and guidance"
         Then I should see "By moneysmart.gov.au"
-        Then I should see "National Debt Helpline is a not-for-profit"
+        Then I should see "Here you'll find out about the major changes banks have introduced to help customers through this difficult time."
