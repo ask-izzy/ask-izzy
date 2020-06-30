@@ -19,9 +19,13 @@ import LinkListItem from "../components/LinkListItem";
 import ResultsListPage from "./ResultsListPage";
 import Eligibility from "../components/Eligibility";
 import Ndis from "../components/Ndis";
+import ContentList from "../components/content/ContentList";
 
 import covidSupportCategories, {CovidSupportCategory}
     from "../constants/covidSupportCategories";
+
+import Query from "../queries/query";
+import externalResourcesQuery from "../queries/content/externalResources.js";
 
 import type { Service } from "../iss";
 import NotFoundStaticPage from "./NotFoundStaticPage"
@@ -267,28 +271,19 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
                         bannerName={"purple covid_" + covidCategory.slug}
                     />
 
-                    <a className="anchor"
-                        id="tools"
+                    <a
+                        className="anchor"
+                        id="information"
                     />
-                    <div className="primaryInfo">
-                        <a
-                            className="title"
-                            href={primaryInfo.learnMoreLink}
-                            rel="noopener noreferer"
-                            target="_blank"
-                        >
-                            <h3>{primaryInfo.title}</h3>
-                        </a>
-                        <h4>{primaryInfo.subtitle}</h4>
-                        <div className="body">{primaryInfo.body}</div>
-                        <a
-                            className="learnMore"
-                            href={primaryInfo.learnMoreLink}
-                            rel="noopener noreferer"
-                            target="_blank"
-                        >
-                            {primaryInfo.learnMoreText || "Learn More"}
-                        </a>
+                    <div className="keyInfo">
+                        <h3>Key Information</h3>
+                        <Query query={externalResourcesQuery}>
+                            {data => (
+                                <ContentList
+                                    items={data.data.externalResources}
+                                />
+                            )}
+                        </Query>
                     </div>
 
                     <a className="anchor"
