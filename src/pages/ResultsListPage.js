@@ -16,12 +16,16 @@ import AlertBannerList from "../components/AlertBannerList";
 import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
 import NotFoundStaticPage from "./NotFoundStaticPage"
+import ContentList from "../components/content/ContentList";
 import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "./QuestionStepper";
 import Button from "../components/base/Button";
 import Link from "../components/base/Link";
 import Category from "../constants/Category";
 import UserSnapResults from "../components/feedback/UserSnapResults";
+
+import Query from "../queries/query";
+import externalResourcesQuery from "../queries/content/externalResources.js";
 
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
@@ -197,10 +201,6 @@ class ResultsListPage extends ResultsPage<{}, State> {
     }
 
     renderKeyInfo(): ReactNode {
-        const keyInfo = this.state.keyInfo
-        if (!keyInfo) {
-            return null
-        }
         return (
             <React.Fragment>
                 <span
@@ -209,30 +209,13 @@ class ResultsListPage extends ResultsPage<{}, State> {
                 />
                 <div className="keyInfos">
                     <h3>Key information</h3>
-                    {keyInfo.map(info =>
-                        <div className="keyInfo"
-                            key={info.title}
-                        >
-                            <Link
-                                className="title"
-                                to={info.learnMoreLink}
-                                rel="noopener noreferer"
-                                target="_blank"
-                            >
-                                <h3>{info.title}</h3>
-                            </Link>
-                            <h4>{info.subtitle}</h4>
-                            <div className="body">{info.body}</div>
-                            <Link
-                                className="learnMore"
-                                to={info.learnMoreLink}
-                                rel="noopener noreferer"
-                                target="_blank"
-                            >
-                                {info.learnMoreText || "Learn More"}
-                            </Link>
-                        </div>
-                    )}
+                    <Query query={externalResourcesQuery}>
+                        {data => (
+                            <ContentList
+                                items={data.data.externalResources}
+                            />
+                        )}
+                    </Query>
                 </div>
             </React.Fragment>
         )
