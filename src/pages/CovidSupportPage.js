@@ -22,8 +22,12 @@ import ResultsList from "../components/ResultsList";
 import Eligibility from "../components/Eligibility";
 import Collapser from "../components/Collapser";
 import Ndis from "../components/Ndis";
+import ContentList from "../components/content/ContentList";
 
 import covidSupportCategories from "../constants/covidSupportCategories";
+
+import Query from "../queries/query";
+import externalResourcesQuery from "../queries/content/externalResources.js";
 
 import type { Service } from "../iss";
 import NotFoundStaticPage from "./NotFoundStaticPage"
@@ -272,24 +276,19 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                     </a>
                 </div>
 
-                <a className="anchor" id="information"></a>
-                <div className="keyInfos">
+                <a
+                    className="anchor"
+                    id="information"
+                />
+                <div className="keyInfo">
                     <h3>Key Information</h3>
-                    {this.state.keyInfo.map(info => 
-                    <div className="keyInfo" key={info.title}>
-                        <h3>{info.title}</h3>
-                        <h4>{info.subtitle}</h4>
-                        <div className="body">{info.body}</div>
-                        <a 
-                            className="learnMore" 
-                            href={info.learnMoreLink}
-                            rel="noopener noreferer"
-                            target="_blank"
-                        >
-                            {info.learnMoreText || "Learn More"}
-                        </a>
-                    </div>
-                    )}
+                    <Query query={externalResourcesQuery}>
+                        {data => (
+                            <ContentList
+                                items={data.data.externalResources}
+                            />
+                        )}
+                    </Query>
                 </div>
 
                 <a className="anchor" id="services"></a>
