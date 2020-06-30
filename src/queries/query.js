@@ -49,7 +49,10 @@ const Query = ({ children, query, id }) => {
     if (error) {
         return <p>An error ocurred and we could not load this section.</p>;
     }
-    return children({ data });
+    if (data !== undefined) {
+        return children({data});
+    }
+    return null
 };
 
 export default Query;
