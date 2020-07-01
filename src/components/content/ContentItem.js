@@ -16,7 +16,7 @@ class ContentItem extends React.Component<Props> {
         return (
             <li
                 key={this.props.id}
-                className="keyInfo"
+                className="ContentItem"
             >
                 <h3>
                     <Link
