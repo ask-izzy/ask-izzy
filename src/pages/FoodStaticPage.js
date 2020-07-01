@@ -32,7 +32,7 @@ export default class FoodBanksStaticPage extends React.Component<{}> {
                 <p>Each state in Australia has a Meals on Wheels service. This service provides affordable meals to people who cannot easily leave their homes, due to age or disability. This can be either short term, for example after an operation, or longer term.</p>
                 <p>Meals on Wheels is usually managed by your local council, or your rural health network. You will need to contact them to find out if you are eligible.</p>
                 <p>
-                    You can find details at <a href="https://mealsonwheels.org.au/find-us/" rel="noopener noreferer" target="_blank">Meals on Wheels Australia</a> or in <Link to="/meals on wheels">Ask Izzy</Link>.
+                    You can find details at <a href="https://mealsonwheels.org.au/find-us/" rel="noopener noreferer" target="_blank">Meals on Wheels Australia</a> or in <Link to="/search/meals on wheels">Ask Izzy</Link>.
                 </p>
 
                 <p><strong>
