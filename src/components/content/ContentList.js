@@ -15,7 +15,7 @@ class ContentList extends React.Component<Props> {
     render(): ReactNode {
         return (
             this.props.items !== undefined ? (
-                <ul className="contentList">
+                <ul className="ContentList">
                     {(this.props.items).map(item =>
                         <ContentItem
                             key={item.id}

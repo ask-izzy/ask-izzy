@@ -16,7 +16,7 @@ class ContentItem extends React.Component<Props> {
 
     render(): ReactNode {
         return (
-            <li className="keyInfo">
+            <li className="ContentItem">
                 <h3>
                     <Link
                         className="learnMore"

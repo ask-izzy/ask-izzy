@@ -1,0 +1,25 @@
+.ContentList {
+    list-style: none;
+    margin: 0;
+    padding: 0 1em;
+
+    .ContentItem {
+        margin: 0 0 2em;
+
+        h3 {
+            margin: 0.5em 0 0.2em;
+            font-size: 1.3em;
+            font-weight: 500;
+        }
+
+        h4 {
+            margin: 0.2em 0 1em;
+            font-weight: 300;
+            font-size: 14px;
+        }
+
+        .body {
+            margin: 1em 0;
+        }
+    }
+}
