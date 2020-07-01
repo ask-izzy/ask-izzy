@@ -41,7 +41,7 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: /node_modules\/(?!posthog-js)/,
                 use: ["babel-loader"],
             },
         ],
