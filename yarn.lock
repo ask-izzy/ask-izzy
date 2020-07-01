@@ -11109,6 +11109,11 @@ postcss@^8.2.10:
     nanoid "^3.1.23"
     source-map "^0.6.1"
 
+posthog-js@1.2.2-beta.0:
+  version "1.2.2-beta.0"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.2.2-beta.0.tgz#7eea51ed15f78ea53f89bf8b4338605ceb6a20a0"
+  integrity sha512-fYTg6VlimiNMV65IgWRST/x+4csIVrthos2ye2cNGCsmvxxiOR0OvqSKETdNHhcS1B1JwbqNbTkV4m3IZSoKvg==
+
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
