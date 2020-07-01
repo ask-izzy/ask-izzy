@@ -18,7 +18,15 @@
         visibility: hidden;
         overflow: auto;
     }
-    .primaryInfo, .keyInfos .keyInfo, .supportServices .supportService {
+    .keyInfo {
+        > h3 {
+            padding: 0 16px;
+            font-weight: 500;
+            font-size: 26px;
+            color: $brand-text-mid;
+        }
+    }
+    .supportServices .supportService {
         h3 {
             margin: 0.5em 0 0.2em;
             font-size: 1.3em;
@@ -36,23 +44,6 @@
         }
         > .learnMore:link {
             color: $brand-highlight; 
-        }
-    }
-    .primaryInfo {
-        background-color: $brand-bg-light;
-        margin: $padding;
-        padding: 1em;
-    }
-
-    .keyInfos {
-        margin: $padding;
-        > h3 {
-            font-size: 26px;
-            font-weight: 500;
-            color: $brand-text-mid;
-        }
-        .keyInfo {
-            margin: 2em 0;
         }
     }
 
