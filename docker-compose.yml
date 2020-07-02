@@ -15,6 +15,7 @@ services:
             # Services
             ISS_URL: https://UNDFUUWCHWGIJGTGMTBXZJDENAACETNJ:XBKSEBMIGVELOOSTGZFEJHKZWCKAFZUY@iss3-test.docker.dev
             GOOGLE_API_KEY: ABCDEFG
+            STRAPI_URL: https://cms-askizzy.docker.dev
         ports:
             - '80:8000'
             - '8000:8000'
