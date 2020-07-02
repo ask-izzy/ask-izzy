@@ -173,24 +173,17 @@ class ResultsListPage extends ResultsPage<Props, State> {
                     id="tools"
                 />
                 <div className="primaryInfo">
-                    <a
-                        className="title"
-                        href={primaryInfo.learnMoreLink}
-                        rel="noopener noreferer"
-                        target="_blank"
+                    <Query
+                        query={externalResourcesQuery}
+                        category={[this.category.title]}
+                        tag={["Tool"]}
                     >
-                        <h3>{primaryInfo.title}</h3>
-                    </a>
-                    <h4>{primaryInfo.subtitle}</h4>
-                    <div className="body">{primaryInfo.body}</div>
-                    <a
-                        className="learnMore"
-                        href={primaryInfo.learnMoreLink}
-                        rel="noopener noreferer"
-                        target="_blank"
-                    >
-                        {primaryInfo.learnMoreText || "Learn More"}
-                    </a>
+                        {data => (
+                            <ContentList
+                                items={data.data.externalResources}
+                            />
+                        )}
+                    </Query>
                 </div>
             </React.Fragment>
         )
