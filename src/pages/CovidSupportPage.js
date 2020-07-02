@@ -282,7 +282,10 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                 />
                 <div className="keyInfo">
                     <h3>Key Information</h3>
-                    <Query query={externalResourcesQuery}>
+                    <Query
+                        query={externalResourcesQuery}
+                        category={[this.state.covidCategory.title]}
+                    >
                         {data => (
                             <ContentList
                                 items={data.data.externalResources}
