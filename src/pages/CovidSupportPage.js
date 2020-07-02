@@ -270,6 +270,27 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
                         }
                         bannerName={"purple covid_" + covidCategory.slug}
                     />
+                    }
+                    bannerName={"purple covid_"+this.state.covidCategory.slug}
+                />
+
+                    <a
+                        className="anchor"
+                        id="tools"
+                    />
+                    <div className="primaryInfo">
+                        <Query
+                            query={externalResourcesQuery}
+                            category={[this.state.covidCategory.title]}
+                            tag={["Tool"]}
+                        >
+                            {data => (
+                                <ContentList
+                                    items={data.data.externalResources}
+                                />
+                            )}
+                        </Query>
+                    </div>
 
                     <a
                         className="anchor"
@@ -280,6 +301,7 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
                         <Query
                             query={externalResourcesQuery}
                             category={[this.state.covidCategory.title]}
+                            tag={["Information"]}
                         >
                             {data => (
                                 <ContentList
