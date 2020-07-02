@@ -263,17 +263,17 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
 
                 <a className="anchor" id="tools"></a>
                 <div className="primaryInfo">
-                    <h3>{this.state.primaryInfo.title}</h3>
-                    <h4>{this.state.primaryInfo.subtitle}</h4>
-                    <div className="body">{this.state.primaryInfo.body}</div>
-                    <a 
-                        className="learnMore"
-                        href={this.state.primaryInfo.learnMoreLink}
-                        rel="noopener noreferer"
-                        target="_blank"
+                    <Query
+                        query={externalResourcesQuery}
+                        category={[this.state.covidCategory.title]}
+                        tag={["Tool"]}
                     >
-                        {this.state.primaryInfo.learnMoreText || "Learn More"}
-                    </a>
+                        {data => (
+                            <ContentList
+                                items={data.data.externalResources}
+                            />
+                        )}
+                    </Query>
                 </div>
 
                 <a
@@ -285,6 +285,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                     <Query
                         query={externalResourcesQuery}
                         category={[this.state.covidCategory.title]}
+                        tag={["Information"]}
                     >
                         {data => (
                             <ContentList
