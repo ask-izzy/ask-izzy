@@ -22,6 +22,7 @@
 @import "../components/Collapser";
 @import "../components/ContactMethods";
 @import "../components/Contact";
+@import "../components/content/ContentList";
 @import "../components/CovidRelatedIssues";
 @import "../components/CrisisHeader";
 @import "../components/CrisisLineItem";
@@ -54,13 +55,14 @@
 @import "../icons/icons";
 @import "../pages/AboutPage";
 @import "../pages/AddServicePage";
-@import "../pages/personalisation/AreYouSafe";
 @import "../pages/BasePage";
 @import "../pages/BasePersonalisationPage";
 @import "../pages/CovidSupportPage";
 @import "../pages/HomePage";
+@import "../pages/InformationPage";
+@import "../pages/personalisation/AreYouSafe";
 @import "../pages/personalisation/Location";
 @import "../pages/personalisation/ServicePage";
 @import "../pages/ResultsListPage";
 @import "../pages/StaticPage";
-@import "../pages/InformationPage";
+@import "../queries/Query";
