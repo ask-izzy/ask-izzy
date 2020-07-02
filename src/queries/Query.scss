@@ -1,0 +1,11 @@
+.Query {
+    .progress {
+        text-align: center;
+    }
+    .errorMessage {
+        margin: 1em;
+        padding: 1em;
+        color: white;
+        background-color: $brand-error;
+    }
+}
