@@ -2,8 +2,9 @@
 
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
+import icons from "../icons";
 
-const Query = ({ children, query, id }) => {
+const Query = ({ children, query, id, category }) => {
     /*
       Paramaters:
           query: A gql query string.
@@ -40,17 +41,29 @@ const Query = ({ children, query, id }) => {
     */
 
     const { data, loading, error } = useQuery(query, {
-        variables: { id },
+        variables: { id, category },
     });
 
     if (loading) {
-        return <p>Loading...</p>;
+        return (
+            <div className="Query">
+                <p className="progress"><icons.Loading /></p>
+            </div>
+        );
     }
     if (error) {
-        return <p>An error ocurred and we could not load this section.</p>;
+        return (
+            <div className="Query">
+                <p className="errorMessage">
+                    An error ocurred and we could not load this section.
+                </p>
+            </div>
+        );
     }
     if (data !== undefined) {
-        return children({data});
+        return (
+            <div className="Query">{children({data})}</div>
+        )
     }
     return null
 };
