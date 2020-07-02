@@ -277,44 +277,16 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
                     />
                     <div className="keyInfo">
                         <h3>Key Information</h3>
-                        <Query query={externalResourcesQuery}>
+                        <Query
+                            query={externalResourcesQuery}
+                            category={[this.state.covidCategory.title]}
+                        >
                             {data => (
                                 <ContentList
                                     items={data.data.externalResources}
                                 />
                             )}
                         </Query>
-                    </div>
-
-                    <a className="anchor"
-                        id="information"
-                    />
-                    <div className="keyInfos">
-                        <h3>Key Information</h3>
-                        {keyInfo.map(info =>
-                            <div className="keyInfo"
-                                key={info.title}
-                            >
-                                <a
-                                    className="title"
-                                    href={info.learnMoreLink}
-                                    rel="noopener noreferer"
-                                    target="_blank"
-                                >
-                                    <h3>{info.title}</h3>
-                                </a>
-                                <h4>{info.subtitle}</h4>
-                                <div className="body">{info.body}</div>
-                                <a
-                                    className="learnMore"
-                                    href={info.learnMoreLink}
-                                    rel="noopener noreferer"
-                                    target="_blank"
-                                >
-                                    {info.learnMoreText || "Learn More"}
-                                </a>
-                            </div>
-                        )}
                     </div>
 
                     <a className="anchor"
