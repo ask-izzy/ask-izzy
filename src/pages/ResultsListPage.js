@@ -205,7 +205,10 @@ class ResultsListPage extends ResultsPage<Props, State> {
                 />
                 <div className="keyInfos">
                     <h3>Key information</h3>
-                    <Query query={externalResourcesQuery}>
+                    <Query
+                        query={externalResourcesQuery}
+                        category={[this.category.title]}
+                    >
                         {data => (
                             <ContentList
                                 items={data.data.externalResources}
