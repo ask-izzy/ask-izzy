@@ -4,6 +4,21 @@ IFS=$'\n\t'
 
 VERSION="$(cat public/VERSION)"
 
+# Set Strapi url based on env.
+if [ "$ENVIRONMENT" = "prod" ]; then
+	STRAPI_URL="https://cms.askizzy.org.au"
+fi
+if [ "$ENVIRONMENT" = "staging" ]; then
+	STRAPI_URL="https://cms-uat.askizzy.org.au"
+fi
+if [ "$ENVIRONMENT" = "test" ]; then
+	STRAPI_URL="https://cms-askizzy-test.docker.dev"
+fi
+if [ "$ENVIRONMENT" = "dev" ]; then
+	STRAPI_URL="https://cms-askizzy.docker.dev"
+fi
+
+
 if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging" ]; then
 	PROXY_TYPOGRAPHY="typography-com.askizzy.org.au"
 	PROXY_TAGS="gtagmanager.askizzy.org.au"
@@ -90,4 +105,5 @@ window.PROXY_ANALYTICS = "${PROXY_ANALYTICS}";
 window.DOMAIN_MAPS = ${DOMAIN_MAPS};
 window.EXCLUDED_DOMAINS = ${EXCLUDED_DOMAINS};
 window.VERSION = "${VERSION}";
+window.STRAPI_URL = "$STRAPI_URL";
 JSON
