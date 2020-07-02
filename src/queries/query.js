@@ -4,7 +4,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import icons from "../icons";
 
-const Query = ({ children, query, id, category }) => {
+const Query = ({ children, query, id, category, tag }) => {
     /*
       Paramaters:
           query: A gql query string.
@@ -41,7 +41,7 @@ const Query = ({ children, query, id, category }) => {
     */
 
     const { data, loading, error } = useQuery(query, {
-        variables: { id, category },
+        variables: { id, category, tag },
     });
 
     if (loading) {
