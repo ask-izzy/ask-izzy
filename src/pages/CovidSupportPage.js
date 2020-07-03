@@ -270,6 +270,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                     >
                         {data => (
                             <ContentList
+                                className="featured"
                                 items={data.data.externalResources}
                             />
                         )}
