@@ -176,7 +176,7 @@ class ResultsListPage extends ResultsPage<Props, State> {
                     <Query
                         query={externalResourcesQuery}
                         category={[this.category.title]}
-                        tag={["Tool"]}
+                        tag={["Tool", "Covid19"]}
                     >
                         {data => (
                             <ContentList
@@ -201,6 +201,7 @@ class ResultsListPage extends ResultsPage<Props, State> {
                     <Query
                         query={externalResourcesQuery}
                         category={[this.category.title]}
+                        tag={["Information", "Covid19"]}
                     >
                         {data => (
                             <ContentList
