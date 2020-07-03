@@ -205,6 +205,7 @@ class ResultsListPage extends ResultsPage<Props, State> {
                     >
                         {data => (
                             <ContentList
+                                className="featured"
                                 items={data.data.externalResources}
                             />
                         )}
