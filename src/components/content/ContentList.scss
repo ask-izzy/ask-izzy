@@ -28,4 +28,10 @@
             color: $brand-highlight; 
         }
     }
+
+    &.featured .ContentItem {
+        background-color: $brand-bg-light;
+        padding: 1em;
+        margin: 1em 0;
+    }
 }
