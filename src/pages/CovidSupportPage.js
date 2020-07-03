@@ -266,7 +266,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                     <Query
                         query={externalResourcesQuery}
                         category={[this.state.covidCategory.title]}
-                        tag={["Tool"]}
+                        tag={["Tool", "Covid19"]}
                     >
                         {data => (
                             <ContentList
@@ -285,7 +285,7 @@ class CovidSupportPage<ExtraState = extraState> extends BaseCategoriesPage {
                     <Query
                         query={externalResourcesQuery}
                         category={[this.state.covidCategory.title]}
-                        tag={["Information"]}
+                        tag={["Information", "Covid19"]}
                     >
                         {data => (
                             <ContentList
