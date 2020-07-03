@@ -91,6 +91,25 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
             this.state.covidCategory.title) || "Page Not Found"
     }
 
+    getContentCat(slug: string): string {
+        // Given a covid category slug, return the matching content category.
+        switch (slug) {
+        case "money":
+            return "Money help";
+        case "place-to-stay":
+            return "Housing";
+        case "rent-or-tenancy":
+            return "Rent";
+        case "food-and-everyday":
+            return "Food";
+        case "mental-health-and-wellbeing":
+            return "Mental health";
+        default:
+            break;
+        }
+        return "";
+    }
+
     componentDidMount(): void {
         super.componentDidMount();
 
@@ -281,7 +300,13 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
                     <div className="primaryInfo">
                         <Query
                             query={externalResourcesQuery}
-                            category={[this.state.covidCategory.title]}
+                            category={
+                                [
+                                    this.getContentCat(
+                                        this.state.covidCategory.slug
+                                    )
+                                ]
+                            }
                             tag={["Tool", "Covid19"]}
                         >
                             {data => (
@@ -301,7 +326,13 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
                         <h3>Key Information</h3>
                         <Query
                             query={externalResourcesQuery}
-                            category={[this.state.covidCategory.title]}
+                            category={
+                                [
+                                    this.getContentCat(
+                                        this.state.covidCategory.slug
+                                    )
+                                ]
+                            }
                             tag={["Information", "Covid19"]}
                         >
                             {data => (
