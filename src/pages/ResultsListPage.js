@@ -9,7 +9,6 @@ import DebugSearch from "../components/DebugSearch";
 import ResultsPage from "./ResultsPage";
 import ResultsList from "../components/ResultsList";
 import CrisisResultsList from "../components/CrisisResultsList";
-import resultsContent from "../results-content.json"
 import HeaderBar from "../components/HeaderBar";
 import Switch from "../components/Switch";
 import AlertBannerList from "../components/AlertBannerList";
@@ -21,7 +20,6 @@ import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "./QuestionStepper";
 import Button from "../components/base/Button";
 import Link from "../components/base/Link";
-import Category from "../constants/Category";
 import UserSnapResults from "../components/feedback/UserSnapResults";
 
 import Query from "../queries/query";
@@ -29,44 +27,9 @@ import externalResourcesQuery from "../queries/content/externalResources.js";
 
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
-import storage from "../storage";
 
-type primaryInfo = {
-    name: String,
-    title: string,
-    subtitle: string,
-    body: string,
-    learnMoreText: ?string,
-    learnMoreLink: string,
-}
 
-type State = {
-    primaryInfo: ?primaryInfo,
-    keyInfo: ?Array<Object>
-}
-
-class ResultsListPage extends ResultsPage<{}, State> {
-    componentDidMount() {
-        super.componentDidMount();
-
-        // We have to load this after the first render so we match
-        // server-rendered markup on hydrate stage
-        const category = this.category
-        if (category) {
-            const subCategory = category.slug === "money" ?
-                ((storage.getItem("sub-money"): any): ?string)
-                : ""
-            const topicInfo = getTopicInfo(
-                category,
-                subCategory,
-                storage.getLocation()
-            )
-            this.setState({
-                primaryInfo: topicInfo && topicInfo.primaryInfo,
-                keyInfo: topicInfo && topicInfo.keyInfo,
-            })
-        }
-    }
+class ResultsListPage extends ResultsPage {
     render(): ReactElement<"div"> | ReactNode {
         if (this.state.searchType) {
             return this.renderPage()
@@ -111,17 +74,12 @@ class ResultsListPage extends ResultsPage<{}, State> {
                         <div>
                             What you'll find here:
                             <ul>
-                                {this.state.primaryInfo && <li>
-                                    <Link to="#tools">
-                                        <icons.DownArrow />
-                                        {this.state.primaryInfo.title}
-                                    </Link>
-                                </li>}
-                                {this.state.keyInfo && <li>
-                                    <Link to="#information">
-                                        <icons.DownArrow />Key information
-                                    </Link>
-                                </li>}
+                                <li><Link to="#tools">
+                                    <icons.DownArrow />Highlighted resource
+                                </Link></li>
+                                <li><Link to="#information">
+                                    <icons.DownArrow />Key information
+                                </Link></li>
                                 <li><Link to="#services">
                                     <icons.DownArrow />Support services
                                 </Link></li>
@@ -166,10 +124,6 @@ class ResultsListPage extends ResultsPage<{}, State> {
     )
 
     renderPrimaryInfo(): ReactNode {
-        const primaryInfo = this.state.primaryInfo
-        if (!primaryInfo) {
-            return null
-        }
         return (
             <React.Fragment>
                 <span
@@ -339,55 +293,3 @@ class ResultsListPage extends ResultsPage<{}, State> {
 }
 
 export default ResultsListPage;
-
-// Soon to be pulled from the CMS
-function getTopicInfo(
-    category: Category,
-    subCategory: ?string,
-    location: string
-) {
-    let resultsCategoryKey;
-    const slugMap = {
-        "rent-and-tenancy": "Rent and Tenancy Help",
-        "money": "Money Help",
-        "food-and-everyday-things": "Food & Everyday things",
-        "mental-health": "Mental health & Wellbeing",
-        "jobs-and-training": "Jobs, Skills, and Training",
-        "accommodation": "Housing",
-    }
-    resultsCategoryKey = slugMap[category.slug]
-    if (category.slug === "money" && subCategory === "Centrelink") {
-        resultsCategoryKey = "Centrelink"
-    }
-    const locationMatch = location.match(/,\s*(\w+)$/)
-    const resultsStateKey = locationMatch && locationMatch[1]
-
-    const relevantResultsContent = resultsContent
-        .filter(
-            content => content.Category === resultsCategoryKey &&
-                (
-                    content.State.length === 0 ||
-                    content.State.some(state => state === resultsStateKey)
-                ) &&
-                content.Status !== "Potential"
-        )
-        .map(content => ({
-            name: content.Name,
-            title: content["Display Title"],
-            subtitle: content.Subtitle,
-            body: content["Body text"],
-            learnMoreText: content["Link text"],
-            learnMoreLink: content["Link URL"],
-            type: content.Type,
-            original: content,
-        }))
-    const primaryInfo = relevantResultsContent
-        .filter(content => content.type === "Primary Info").shift();
-    const keyInfo = relevantResultsContent
-        .filter(content => content.type === "Secondary Info");
-
-    return {
-        primaryInfo,
-        keyInfo: keyInfo.length ? keyInfo : undefined,
-    }
-}
