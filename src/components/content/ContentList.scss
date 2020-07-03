@@ -1,3 +1,5 @@
+@use '../../styles/mixins/colours';
+
 .ContentList {
     list-style: none;
     margin: 0;
@@ -21,5 +23,12 @@
         .body {
             margin: 1em 0;
         }
+    }
+
+    &.featured .ContentItem {
+        background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+        background-color: var(--colour-bg-standard-tint-2);
+        padding: 1em;
+        margin: 1em 0;
     }
 }
