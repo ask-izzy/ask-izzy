@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 
 type Props = {
     id: Number,
@@ -28,7 +29,9 @@ class ContentItem extends React.Component<Props> {
                     </Link>
                 </h3>
                 {this.props.subtitle ? (<h4>{this.props.subtitle}</h4>) : null}
-                <div className="body">{this.props.body}</div>
+                <div className="body">
+                    <ReactMarkdown source={this.props.body} />
+                </div>
                 <Link
                     className="learnMore"
                     to={this.props.link}
