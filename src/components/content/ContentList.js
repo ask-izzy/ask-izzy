@@ -14,7 +14,7 @@ class ContentList extends React.Component<Props> {
     render() {
         return (
             this.props.items !== undefined ? (
-                <ul className="ContentList">
+                <ul className={"ContentList " + this.props.className}>
                     {(this.props.items).map(item =>
                         <ContentItem
                             title={item.Title}
