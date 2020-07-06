@@ -1,6 +1,5 @@
 /* $FlowIgnore */
 /*eslint-disable */
-import posthog from 'posthog-js';
 import 'url-search-params-polyfill';
 
 document.addEventListener("DOMContentLoaded", function(event) {
