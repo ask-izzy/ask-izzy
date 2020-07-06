@@ -16,6 +16,7 @@ import CovidRelatedIssues from "../../components/CovidRelatedIssues";
 type Props = {
         name: string,
         onDoneTouchTap: Function,
+        siteFeatureFlags: Object,
 }
 
 type State = {
@@ -118,7 +119,6 @@ class Location extends Personalisation<Props, State> {
     }
 
     static locationInVic(location: string): boolean {
-        console.log(location)
         let victoriaRegex = /VIC(toria)?$/i;
 
         return !!victoriaRegex.exec(location);
@@ -302,6 +302,7 @@ class Location extends Personalisation<Props, State> {
                 {
                     !this.state.nextDisabled && 
                     Location.locationInVic(this.state.locationName) && 
+                    this.props.siteFeatureFlags['covid-categories-show-for-victoria'] &&
                     <CovidRelatedIssues onClick={this.onNextStep.bind(this)} />
                 }
                 {this.renderDoneButton()}

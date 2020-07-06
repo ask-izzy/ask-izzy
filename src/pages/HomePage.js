@@ -2,6 +2,8 @@
 
 import React from "react";
 
+import posthog from "posthog-js";
+
 import HeaderBar from "../components/HeaderBar";
 import { Link } from "react-router-dom";
 import icons from "../icons"
@@ -12,7 +14,10 @@ import BrandedFooter from "../components/BrandedFooter";
 import { resetDfvOptions } from "../utils";
 import routerContext from "../contexts/router-context";
 
-class HomePage extends React.Component<{}, void> {
+type Props = {
+    siteFeatureFlags: Object
+}
+class HomePage extends React.Component<Props, void> {
 
     search: ?HTMLInputElement;
 
@@ -53,7 +58,7 @@ class HomePage extends React.Component<{}, void> {
 
 
         return (
-            <div className="HomePage">
+            <div className={"HomePage" + (this.props.siteFeatureFlags['site-banner-feature-flag-test'] ? " CurrentEmergency" : "")}>
                 <div className="appbar">
                     <a className="quick-exit"
                         href={redirectUri}
@@ -82,6 +87,20 @@ class HomePage extends React.Component<{}, void> {
                         bannerName="homepage"
                         taperColour="LighterGrey"
                     />
+                    {this.props.siteFeatureFlags['site-banner-feature-flag-test'] &&
+                        <div className="CurrentEmergencyNotice">
+                            <h3>
+                                The site banner feature flag test is set
+                            </h3>
+                            <p>
+                                Bikie rort rip snorter my tinny. Brickie as 
+                                stands out like stands out like a waggin' 
+                                school <a href="https://txtrdr.com/boganipsum/">
+                                billabong</a> his blood's worth bottling 
+                                budgie smugglers.
+                            </p>
+                        </div>
+                    }
                 </div>
 
                 <div className="body">

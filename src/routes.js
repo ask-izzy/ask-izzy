@@ -5,6 +5,8 @@ import React from "react";
 import {Redirect, Switch} from "react-router-dom";
 import {titleize} from "underscore.string";
 
+import posthog from "./utils/posthog"
+
 // If you import these after the others,
 // babel decides the navbar doesn't really
 // need to be loaded.
@@ -86,7 +88,7 @@ export default (
         />
         <BasePage
             path="/"
-            component={HomePage}
+            component={posthog.setFeatureFlags(HomePage)}
             exact={true}
         />
         <BasePage
