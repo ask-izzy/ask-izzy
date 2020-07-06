@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 // flow:disable flowjs needs to be updated to include useEffect
 import { useEffect } from "react";
 import sendEvent from "../../google-tag-manager";
+import posthog from "../../utils/posthog";
 
 function historyListener(history) {
     // Override the goBack function for the history object to navigate to
@@ -21,6 +22,7 @@ function historyListener(history) {
     sendEvent({
         event: "Page Viewed",
     });
+    posthog.client.capture('$pageview');
 
     history.listen((location, action) => {
         window.scrollTo(0, 0);
@@ -30,6 +32,7 @@ function historyListener(history) {
         sendEvent({
             event: "Page Viewed",
         });
+        posthog.client.capture('$pageview');
 
         // Track size of history stack while navigating Ask Izzy so we know if
         // the previous page is part of ask izzy or not.
