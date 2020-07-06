@@ -278,7 +278,7 @@ class CovidSupportPage extends BaseCategoriesPage {
                     <Query
                         query={externalResourcesQuery}
                         category={[this.getContentCat(this.state.covidCategory.slug)]}
-                        tag={["Tool", "Covid19"]}
+                        tag={["Tool"]}
                     >
                         {data => (
                             <ContentList
@@ -298,7 +298,7 @@ class CovidSupportPage extends BaseCategoriesPage {
                     <Query
                         query={externalResourcesQuery}
                         category={[this.getContentCat(this.state.covidCategory.slug)]}
-                        tag={["Information", "Covid19"]}
+                        tag={["Information"]}
                     >
                         {data => (
                             <ContentList
