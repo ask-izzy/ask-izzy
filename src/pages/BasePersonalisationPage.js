@@ -5,6 +5,9 @@ import PropTypes from "proptypes";
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
 import history, {onBack} from "../utils/history";
+import posthog from "../utils/posthog"
+
+const cachedRenderComponents = {}
 
 class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     ExtraState
@@ -90,6 +93,13 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
 
     get currentComponent(): ?React$ComponentType<*> {
         return this.personalisationComponents[this.currentComponentIdx];
+    }
+
+    get currentComponentForRender(): ?React$ComponentType<*> {
+        if (!cachedRenderComponents[this.currentComponentIdx]) {
+            cachedRenderComponents[this.currentComponentIdx] = posthog.setFeatureFlags(this.currentComponent);
+        }
+        return cachedRenderComponents[this.currentComponentIdx];
     }
 
     get currentComponentIdx(): number {

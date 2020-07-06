@@ -11,6 +11,7 @@ import searchTest from "./search-test";
 import categories from "./constants/categories";
 import history from "./utils/history";
 import ScrollToTop from "./components/ScrollToTop";
+import posthog from "./utils/posthog"
 
 window.searchTest = searchTest;
 window.categories = categories;
@@ -49,6 +50,8 @@ ReactDOM.hydrate(
             sendEvent({
                 event: "Page Viewed",
             });
+
+            posthog.client.capture('$pageview');
         }}
     >
         <ScrollToTop>
