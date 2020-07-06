@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import posthog from "posthog-js";
 import PropTypes from "proptypes";
 
 import HeaderBar from "../components/HeaderBar";
@@ -10,7 +11,10 @@ import storage from "../storage";
 
 import { resetDfvOptions } from "../utils";
 
-class HomePage extends React.Component<{}, void> {
+type Props = {
+    siteFeatureFlags: Object
+}
+class HomePage extends React.Component<Props, void> {
     static contextTypes = {
         router: PropTypes.object.isRequired,
     };
@@ -54,7 +58,7 @@ class HomePage extends React.Component<{}, void> {
 
 
         return (
-            <div className="HomePage">
+            <div className={"HomePage" + (this.props.siteFeatureFlags['site-banner-feature-flag-test'] ? " CurrentEmergency" : "")}>
                 <div className="header">
                     <div className="desktop">
                         <span className="quick-exit-right" />
@@ -114,6 +118,20 @@ class HomePage extends React.Component<{}, void> {
                             </div>
                         </form>
                     </HeaderBar>
+                    {this.props.siteFeatureFlags['site-banner-feature-flag-test'] &&
+                        <div className="CurrentEmergencyNotice">
+                            <h3>
+                                The site banner feature flag test is set
+                            </h3>
+                            <p>
+                                Bikie rort rip snorter my tinny. Brickie as 
+                                stands out like stands out like a waggin' 
+                                school <a href="https://txtrdr.com/boganipsum/">
+                                billabong</a> his blood's worth bottling 
+                                budgie smugglers.
+                            </p>
+                        </div>
+                    }
                 </div>
 
                 <div className="body">

@@ -9,6 +9,7 @@ import routes from "./routes";
 import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
+import posthog from "./utils/posthog"
 
 window.searchTest = searchTest;
 window.categories = categories;
@@ -116,6 +117,8 @@ ReactDOM.hydrate(
             sendEvent({
                 event: "Page Viewed",
             });
+
+            posthog.client.capture('$pageview');
         }}
     >{routes}</Router>,
     document.getElementById("root")

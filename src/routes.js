@@ -6,6 +6,8 @@ import {Route, Redirect} from "react-router";
 import {titleize} from "underscore.string";
 import _ from "underscore";
 
+import posthog from "./utils/posthog"
+
 // If you import these after the others,
 // babel decides the navbar doesn't really
 // need to be loaded.
@@ -106,7 +108,7 @@ export default (
         <Route
             path="/"
             components={{
-                main: HomePage,
+                main: posthog.setFeatureFlags(HomePage),
                 footer: BrandedFooter,
             }}
         />
