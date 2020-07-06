@@ -134,7 +134,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
     }
 
     render(): React.Element {
-        const Subpage = this.currentComponent;
+        const Subpage = this.currentComponentForRender;
 
         if (!Subpage) {
             throw new Error("Unexpected");

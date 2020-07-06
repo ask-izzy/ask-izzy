@@ -11,6 +11,7 @@ import searchTest from "./search-test";
 import categories from "./constants/categories";
 import history from "./utils/history";
 import ScrollToTop from "./components/ScrollToTop";
+import posthog from "./utils/posthog";
 
 window.searchTest = searchTest;
 window.categories = categories;
@@ -41,7 +42,16 @@ xhr({
 }).catch(() => null);
 
 ReactDOM.hydrate(
-    <Router history={history}>
+    <Router history={history}
+        onUpdate={() => {
+            // Since Ask Izzy is a SPA we need to manually register each
+            // new page view
+            sendEvent({
+                event: "Page Viewed",
+            });
+
+            posthog.client.capture('$pageview');
+        }}>
         <ScrollToTop>
             {routes}
         </ScrollToTop>
