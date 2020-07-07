@@ -26,22 +26,39 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
         return (
             <div className="contact-detail phone">
                 <icons.Phone />
+                <span className="main">
+                    {
+                        this.props.mobileView ? (
+                            <a href={"tel:" + number}>{number}</a>
+                        ) : <span>{number}</span>
+                    } ({comment})
+                </span>
+            </div>
+        )
+    }
+
+    contactDetailPhoneInline(number: string, comment: ?string): React.Node {
+        const text = number + (comment ? " (" + comment + ")" : "")
+
+        return (
+            <div className="contact-detail phone inline">
                 {
                     this.props.mobileView ? (
-                        <a href={"tel:" + number}>{number}</a>
-                    ) : <span>{number}</span>
-                } ({comment})
+                        <a href={"tel:" + number}>{text}</a>
+                    ) : (<span>{text}</span>)
+                }
             </div>
         )
     }
     contactDetailWeb(url: string, linkText: string | React.Node): React.Node {
         return (
             <div className="contact-detail web">
-                <icons.Website />
+                <icons.Website className="icon" />
                 <a
                     href={url}
                     rel="noopener noreferer"
                     target="_blank"
+                    className="main"
                 >
                     {linkText}
                 </a>
@@ -109,10 +126,28 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                     <li>
                         {this.contactDetailWeb(
                             "https://dhhs.vic.gov.au/coronavirus",
-                            "Victorian Human Services coronavirus webpage"
+                            "Victorian Department of Health and Human Services – Coronavirus Info"
+                        )}
+                    </li>
+                    <li>
+                        {this.contactDetailWeb(
+                            "https://www.dhhs.vic.gov.au/information-and-supports-public-housing-restrictions-covid-19",
+                            "Victorian Department of Health and Human Services – Public Housing Restrictions"
                         )}
                     </li>
                 </ul>
+                <p>
+                    If you live in a public housing estate in Flemington {" "}
+                    or North Melbourne, and are unable to leave your {" "}
+                    home, you can access support from the Department of {" "}
+                    Health and Human services by calling {" "}
+                    {this.contactDetailPhoneInline("1800 961 054")}. {" "}
+                    If you need a translator call {" "}
+                    {this.contactDetailPhoneInline("131 450")}.
+                </p>
+                <p>
+                    Both services are available 24 hours a day and 7 days a week.
+                </p>
 
                 <h3>New South Wales</h3>
                 <ul>
