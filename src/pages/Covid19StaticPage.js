@@ -140,7 +140,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                     If you live in a public housing estate in Flemington {" "}
                     or North Melbourne, and are unable to leave your {" "}
                     home, you can access support from the Department of {" "}
-                    Health and Human services by calling {" "}
+                    Health and Human Services by calling {" "}
                     {this.contactDetailPhoneInline("1800 961 054")}. {" "}
                     If you need a translator call {" "}
                     {this.contactDetailPhoneInline("131 450")}.
