@@ -5,15 +5,11 @@ import { useQuery } from "@apollo/react-hooks";
 // flow:disable
 import type { DocumentNode } from "graphql";
 
-const Query = ({ children, query, id }: {
-  children: ({data: Object}) => {},
-  query: DocumentNode,
-  id: number
-}) => {
+const Query = ({ children, query, args, loadingComponent, errorComponent }) => {
     /*
       Paramaters:
           query: A gql query string.
-          id: The id of the record.
+          args GQL arguments to be used in the query.
 
       This is a simple query component which takes a query and an
       a unique identifier and performs a graphql query for the record.
@@ -46,14 +42,20 @@ const Query = ({ children, query, id }: {
     */
 
     const { data, loading, error } = useQuery(query, {
-        variables: { id },
+        variables: args,
     });
 
     if (loading) {
+        if (loadingComponent) {
+            return loadingComponent;
+        }
         return <p>Loading...</p>;
     }
     if (error) {
-        return <p>An error occurred and we could not load this section.</p>;
+        if (errorComponent) {
+            return errorComponent;
+        }
+        return <p>An error ocurred and we could not load this section.</p>;
     }
     if (data !== undefined) {
         return children({data});
