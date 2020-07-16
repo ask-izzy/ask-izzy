@@ -3,7 +3,9 @@
 import React from "react";
 import PropTypes from "proptypes";
 import ReactMarkdown from "react-markdown";
+import DocumentTitle from "react-document-title";
 
+import icons from "../icons";
 import Query from "../queries/query";
 import StaticPage from "./StaticPage";
 import pageQuery from "../queries/content/page.js";
@@ -14,39 +16,78 @@ class DynamicPage extends React.Component<{}, void> {
         router: PropTypes.object.isRequired,
     };
 
+    absoluteImageUrl(uri) {
+        // Strapi returns a relative image url, we need to change
+        // it to point to our content server.
+        return window.STRAPI_URL + uri;
+    }
+
     render() {
-        //console.log(this.props.routes[this.props.routes.length - 1].title)
 
         const params = {
-            "slug": this.props.location.pathname,
+            "path": this.props.location.pathname,
         };
+
+        const loading = (
+            <StaticPage
+                title="Loading"
+                bannerName="static"
+            >
+                <icons.Loading className="big" />
+            </StaticPage>
+        )
+
+        const error = (
+            <StaticPage
+                title="Error"
+                bannerName="static"
+            >
+                <p className="errorMessage">
+                    Error retrieving content.  Please try again.
+                </p>
+            </StaticPage>
+        )
 
         return (
 
             <Query
                 query={pageQuery}
-                params={params}
+                args={params}
+                loadingComponent={loading}
+                errorComponent={error}
             >
-                {data => {
+                {res => {
                     if (
-                        data.data.pages !== undefined && data.data.pages.length
+                        res.data.pages !== undefined && res.data.pages.length
                     ) {
+                        const page = res.data.pages.pop();
+
                         return (
                             <StaticPage
-                                title={data.data.pages[0].Title}
-                                bannerName={data.data.pages[0].Banner}
+                                title={page.Title}
+                                bannerName={page.Banner}
                             >
-                                <ReactMarkdown
-                                    source={data.data.pages[0].Body}
+
+                                <DocumentTitle
+                                    title={
+                                        page.Title + " | Ask Izzy"
+                                    }
                                 />
+
+                                <div className="DynamicPage">
+                                    <ReactMarkdown
+                                        source={page.Body}
+                                        transformImageUri={
+                                            this.absoluteImageUrl
+                                        }
+                                    />
+                                </div>
                             </StaticPage>
                         )
                     }
                     return (<NotFoundStaticPage />)
-                }
-                }
+                }}
             </Query>
-
         );
     }
 }
