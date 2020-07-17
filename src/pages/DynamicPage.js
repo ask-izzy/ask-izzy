@@ -11,12 +11,16 @@ import StaticPage from "./StaticPage";
 import pageQuery from "../queries/content/page.js";
 import NotFoundStaticPage from "./NotFoundStaticPage";
 
-class DynamicPage extends React.Component<{}, void> {
+type Props = {
+    location: any,
+}
+
+class DynamicPage extends React.Component<Props, void> {
     static contextTypes = {
         router: PropTypes.object.isRequired,
     };
 
-    absoluteImageUrl(uri) {
+    absoluteImageUrl(uri: string): string {
         // Strapi returns a relative image url, we need to change
         // it to point to our content server.
         return window.STRAPI_URL + uri;
