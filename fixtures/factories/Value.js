@@ -54,7 +54,7 @@ export function Merge(defaults: Object, props: ?Object): Object {
     if (props && Object.keys(defaults).length) {
         for (let key of Object.keys(props)) {
             if (defaults[key] === undefined) {
-                throw new Error(`Supplied unsupported key ${key}`)
+                throw new Error(`Supplied unsupported key "${key}"`)
             }
         }
     }

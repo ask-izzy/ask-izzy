@@ -7,6 +7,7 @@ const streetNo = Sequence();
 export function Location(props: ?Object): issLocation {
     return Merge({
         building: "",
+        details: "",
         flat_unit: "",
         level: "",
         point: {
