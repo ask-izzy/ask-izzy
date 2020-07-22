@@ -24,8 +24,7 @@ module.exports = (function() {
         .when("I click the map link", unpromisify(clickMapLink))
         .then("I should see a map", unpromisify(assertMap))
         .then("I should see markers?\n$table", unpromisify(assertMarkers))
-        .then("the fastest way to get there is \"$STRING\"",
-            unpromisify(assertTransitMethodFastest))
+        .then("I can see travel times", unpromisify(assertTravelTimes))
         .then("I can get to google maps by clicking \"$STRING\"",
             unpromisify(assertGoogleMapsLink))
         .then("I should be able to travel there \"$STRING\"",
@@ -35,30 +34,34 @@ module.exports = (function() {
     ;
 })();
 
-async function assertTransitMethodFastest(method) {
+async function assertTravelTimes(method) {
+    const travelTimes = ["walking", "transit", "driving"]
 
-    let travelTimes = await this.driver.findElements(
-        By.css(".travel-time")
-    );
+    for (let index = 0; index < travelTimes.length; index++) {
+        try {
+            travelTimes[index] = await this.driver.findElement(
+                By.css(".travel-time.travel-mode-" + travelTimes[index])
+            )
+            travelTimes[index] = await travelTimes[index]
+                .findElement(By.tagName("time"))
+                .getAttribute("datetime")
 
-    let fastestTime = -1;
-    let fastestMethod = "";
+            // Get current date from loaded page since date might be mocked
+            const currentDate = new Date(
+                await this.driver.executeScript("return (new Date()).getTime()")
+            )
 
-    for (let travelTime of travelTimes) {
-        let mode = await travelTime.findElement(By.tagName("span"))
-            .getAttribute("aria-label");
-        let arrivalTime = await travelTime.findElement(By.tagName("time"))
-            .getAttribute("datetime");
-        let duration = new Date(Date.parse(arrivalTime)).getTime();
-
-        if (duration < fastestTime || fastestTime === -1) {
-            fastestTime = duration;
-            fastestMethod = mode;
+            // Arrival time is a future date
+            travelTimes[index] = (
+                new Date(travelTimes[index]) - currentDate
+            ) > 0
+        } catch (err) {
+            console.error("Error when checking travel times:", err)
+            travelTimes[index] = false
         }
     }
 
-    assert.equal(fastestMethod, method);
-
+    assert.ok(travelTimes.every(time => time))
 }
 
 async function assertTransitMethod(method) {

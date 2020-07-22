@@ -81,6 +81,7 @@ export class MapsApi {
             unitSystem: this.api.UnitSystem.METRIC,
             origins: [`${origin}`],
             destinations: destinations,
+            transitOptions: {departureTime: new Date()},
         }
 
         return new Promise((resolve, reject) => {

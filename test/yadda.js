@@ -28,6 +28,12 @@ let processFile = (file) => {
     featureFile(file, feature => {
         before(async function(): Promise<void> {
             driver = await driverPromise;
+            driver.executeScriptBeforeLoad = (async function(script) {
+                return this.sendDevToolsCommand(
+                    "Page.addScriptToEvaluateOnNewDocument",
+                    {"source": script}
+                )
+            }).bind(driver)
 
             if (process.env.BROWSER_LOGS) {
                 // Flush any logs from previous tests
