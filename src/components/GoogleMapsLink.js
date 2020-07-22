@@ -25,7 +25,6 @@ class GoogleMapsLink extends React.Component<Props, void> {
         const toAddr = this.props.to;
         const {travelTime} = toAddr;
         const mode = travelTime && travelTime.mode === "TRANSIT" ? "r" : "w";
-        const start = encodeURIComponent("Current Location");
         let queryFields = [
             toAddr.flat_unit,
             toAddr.street_number,
@@ -51,7 +50,6 @@ class GoogleMapsLink extends React.Component<Props, void> {
         );
 
         return `https://maps.google.com/?dirflg=${mode
-        }&saddr=${start
         }&daddr=${query}`;
     }
 
