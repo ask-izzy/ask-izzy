@@ -28,10 +28,10 @@ async function changeToLateDay(day: string): Promise<void> {
 }
 async function changeDateAndTime(day: string, hour: number): Promise<void> {
     let time = moment()
+        .tz("Australia/Melbourne")
         .day(day)
         .startOf("day")
-        .add(hour, "h")
-        .valueOf();
+        .add(hour, "h");
 
     await this.driver.executeScriptBeforeLoad(
         fs.readFileSync(
@@ -41,9 +41,12 @@ async function changeDateAndTime(day: string, hour: number): Promise<void> {
     );
     await this.driver.executeScriptBeforeLoad(`
         Date = window.TimeShift.Date; // eslint-disable-line no-global-assign
-        // TZ = Australia/Melbourne (+10:00)
-        window.TimeShift.setTimezoneOffset(600);
-        window.TimeShift.setTime(${time});
-        console.log("Mocked time to: " + (new Date()).toISOString());
+        window.TimeShift.setTime(${time.valueOf()});
+        // TimeShift.js inverts offset value
+        window.TimeShift.setTimezoneOffset(${time.utcOffset() * -1});
+        console.log("Mocked time to:" );
+        new Date().desc().split("   ")
+            .map(line => line.replace(/\\s+[A-Z]+$/, ''))
+            .forEach(line => console.log("    " + line.split("=").join(": ")))
     `);
 }

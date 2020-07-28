@@ -63,13 +63,21 @@ export default async function webDriverInstance(
 ): Promise<Webdriver.WebDriver> {
     // Remove version from browserName (not supported)
     const browserName = (process.env.SELENIUM_BROWSER || "").split(/:/)[0];
+    const preferences = new Webdriver.logging.Preferences();
+
+    preferences.setLevel(
+        Webdriver.logging.Type.BROWSER,
+        Webdriver.logging.Level.ALL
+    );
 
     const driver = new Webdriver.Builder()
         /**
          * Default to using headless chrome if `SELENIUM_BROWSER` not provided.
          * */
         .withCapabilities(
-            new Webdriver.Capabilities().setAcceptInsecureCerts(true)
+            new Webdriver.Capabilities()
+                .setAcceptInsecureCerts(true)
+                .setLoggingPrefs(preferences)
         )
         .forBrowser(browserName || "chrome")
         .setChromeOptions(
