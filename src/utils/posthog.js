@@ -14,7 +14,7 @@ if (typeof window !== "undefined" && window.LOCAL_FILE_ENCRYPTION_KEY) {
 }
 
 function setFeatureFlags(WrappedComponent) {
-  return class FeatureFlagSetter extends React.Component {
+  class FeatureFlagSetter extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -39,9 +39,14 @@ function setFeatureFlags(WrappedComponent) {
     }
 
     render () {
-      return <WrappedComponent {...this.props} {...this.state} />;
+      const {forwardedRef, ...props} = this.props;
+      return <WrappedComponent {...props} {...this.state} ref={forwardedRef} />;
     }
   };
+
+  return React.forwardRef((props, ref) => {    
+    return <FeatureFlagSetter {...props} forwardedRef={ref} />;  
+  });
 }
 
 export default {
