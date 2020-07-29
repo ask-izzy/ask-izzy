@@ -3,11 +3,6 @@
 import 'url-search-params-polyfill';
 
 document.addEventListener("DOMContentLoaded", function(event) {
-    if (window.LOCAL_FILE_ENCRYPTION_KEY) {
-        const posthogCreds = window.LOCAL_FILE_ENCRYPTION_KEY.split('~');
-        posthog.init(posthogCreds[0], {api_host: posthogCreds[1]});
-    }
-
     if (window.GOOGLE_TAG_MANAGER_ID && window.GOOGLE_TAG_MANAGER_AUTH && window.GOOGLE_TAG_MANAGER_ENV) {
         const urlParams = new URLSearchParams(window.location.search);
         const gtmIsDebug = !!urlParams.get('gtm_debug');
