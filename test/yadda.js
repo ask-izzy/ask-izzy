@@ -10,6 +10,7 @@ import Webdriver from "selenium-webdriver";
 import Yadda from "yadda";
 import fs from "fs";
 import webDriverInstance, { cleanDriverSession } from "./support/webdriver";
+import chalk from "chalk";
 
 Yadda.plugins.mocha.StepLevelPlugin.init();
 
@@ -28,13 +29,22 @@ let processFile = (file) => {
     featureFile(file, feature => {
         before(async function(): Promise<void> {
             driver = await driverPromise;
+            driver.executeScriptBeforeLoad = (async function(script) {
+                return this.sendDevToolsCommand(
+                    "Page.addScriptToEvaluateOnNewDocument",
+                    {"source": script}
+                )
+            }).bind(driver)
 
-            if (process.env.BROWSER_LOGS) {
-                // Flush any logs from previous tests
-                let logger = driver.manage().logs()
+            await driver.executeScriptBeforeLoad(`
+                console.log('------------- Loading Page -------------')
+                console.log('URL: ' + location.href)
+            `);
 
-                await logger.get("browser");
-            }
+            // Flush any logs from previous tests
+            let logger = driver.manage().logs()
+
+            await logger.get("browser");
         });
 
         scenarios(feature.scenarios, scenario => {
@@ -75,21 +85,30 @@ let processFile = (file) => {
 
                 // This includes user actions, unhandled errors etc
                 console.log(
+                    "Google Tag Manager events fired:",
                     await driver.executeScript(() =>
-                        JSON.stringify(window.dataLayer)
+                        JSON.stringify(window.dataLayer, null, 2)
                     )
                 );
 
-                if (process.env.BROWSER_LOGS) {
-                    let logger = driver.manage().logs()
+                console.log("Browser logs:")
 
-                    // N.B: iterating this causes problems but map works...
-                    // very strange
-                    console.log(
-                        (await logger.get("browser")).map(
-                            entry => `${entry.level.name}: ${entry.message}`
-                        ).join("\n")
-                    );
+                let logger = driver.manage().logs()
+
+                for (const entry of await logger.get("browser")) {
+                    const logLevel = entry.level.value;
+                    let format
+
+                    if (logLevel >= 1000) {
+                        format = chalk.red
+                    } else if (logLevel >= 900) {
+                        format = chalk.yellow
+                    } else if (logLevel >= 800) {
+                        format = chalk.green
+                    } else {
+                        format = chalk.blue
+                    }
+                    console.log(`${format(entry.level.name)}: ${entry.message}`)
                 }
             }
         });

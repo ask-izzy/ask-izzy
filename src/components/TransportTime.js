@@ -80,13 +80,10 @@ class TransportTime extends React.Component<{
             let icon = "";
             let method = "";
 
-            // Specify an arrival time so tests can determine
-            // which is the fastest mode of travel.
             let arrivalTime = new Date();
 
             arrivalTime.setSeconds(
-                (travel.duration.value) -
-                (arrivalTime.getTimezoneOffset() * 60)
+                arrivalTime.getSeconds() + travel.duration.value
             );
 
             if (travel.mode === "TRANSIT") {
@@ -117,11 +114,14 @@ class TransportTime extends React.Component<{
 
             return (
                 <div
-                    className="travel-time"
+                    className={
+                        "travel-time travel-mode-" +
+                        travel.mode.toLocaleLowerCase()
+                    }
                     key={key}
                 >
                     {icon}
-                    <time dateTime={arrivalTime.toISOString().slice(0, -1)}>
+                    <time dateTime={arrivalTime.toISOString()}>
                         {
                             travel &&
                         travel.duration &&

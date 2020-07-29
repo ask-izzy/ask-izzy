@@ -76,8 +76,19 @@ Feature: Service details page
 
     Scenario: There is travel information for non-confidential services
        Given my location is "Melbourne, VIC"
+       And it is late morning on "Monday"
+       And googles directions matrix will return
+        ----------------------------------------------
+        - status: OK
+          duration:
+              text: 7 mins
+              value: 424
+          distance:
+              text: 2.8 km
+              value: 2790
+        ----------------------------------------------
         When I visit /service/866464
-        Then the fastest way to get there is "By public transport"
+        Then I can see travel times
         Then I can get to google maps by clicking "Get directions"
 
     Scenario: There is no travel information for new-style confidential services

@@ -295,10 +295,7 @@ Running the tests:
     ./script/search-test
 
 Pass `SELENIUM_BROWSER=firefox|phantomjs|chrome` to choose a
-browser to run the feature tests with (default is firefox)
-
-You can pass `BROWSER_LOGS=yes` to dump logs from the browser. Be aware not
-all browsers support this.
+browser to run the feature tests with (default is chrome)
 
 If you have issues running tests on Ubuntu, follow the steps here:
 https://christopher.su/2015/selenium-chromedriver-ubuntu/
