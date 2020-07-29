@@ -16,7 +16,7 @@ export default class ViewOnMapButton extends React.Component<any, State> {
         this.state = {maps: null};
     }
 
-    componentWillMount(): void {
+    componentDidMount(): void {
         maps().then((maps) => this.setState({maps}));
     }
 
