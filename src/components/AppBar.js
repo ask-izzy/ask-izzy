@@ -2,8 +2,10 @@
 
 import React from "react";
 
+import ConsensualTrackingBar from "../components/ConsensualTrackingBar"
 import components from "../components";
 import icons from "../icons";
+import storage from "../storage"
 
 type Props = {
     title: string,
@@ -29,6 +31,8 @@ class AppBar extends React.Component<Props, void> {
 
         return (
             <div className="AppBarContainer">
+                {storage.getItem('consensual-user-tracking') === 'true' &&
+                    <ConsensualTrackingBar />}
                 <div className="AppBar">
                     {this.renderBackButton()}
                     <h1 className="title">{this.props.title}</h1>

@@ -1,0 +1,28 @@
+.ConsensualTrackingBar {
+    background-color: $brand-bg-dark;
+    text-align: center;
+    color: $colour-grey;
+
+    div {
+        line-height: 2.5em;
+    }
+
+    button {
+        background-color:
+        transparent;
+        line-height: 1.5em;
+        border: 1px solid $colour-grey;
+        border-radius: 0.5em;
+    }
+}
+
+.AppBarContainer {
+    position: fixed;
+    width: 100%;
+    max-width: 800px;
+    z-index: 2;
+
+    & + * {
+        padding-top: 84px;
+    }
+}

@@ -4,6 +4,7 @@ import xhr from "axios";
 import React from "react";
 import ReactDOM from "react-dom";
 import {Router, browserHistory} from "react-router";
+import { hotjar } from 'react-hotjar';
 import storage from "./storage";
 import routes from "./routes";
 import sendEvent from "./google-tag-manager";
@@ -44,6 +45,14 @@ xhr({
     url: "//" + window.PROXY_TYPOGRAPHY + "/7948374/730248/css/fonts.css",
     maxRedirects: 0,
 }).catch(() => null);
+
+if (
+    storage.getItem('consensual-user-tracking') === 'true' &&
+    window.GOOGLE_ANALYTICS_ID
+) {
+    console.log('Consensual HotJar Tracking Enabled')
+    hotjar.initialize(window.GOOGLE_ANALYTICS_ID);
+}
 
 /*
  * If at any point there isn't a meaningful 'back',

@@ -7,6 +7,7 @@ import PropTypes from "proptypes";
 import HeaderBar from "../components/HeaderBar";
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
+import ConsensualTrackingBar from "../components/ConsensualTrackingBar"
 import storage from "../storage";
 
 import { resetDfvOptions } from "../utils";
@@ -28,7 +29,9 @@ class HomePage extends React.Component<Props, void> {
     }
 
     componentDidMount(): void {
+        const hasConsented = storage.getItem('consensual-user-tracking');
         storage.clear();
+        storage.setItem('consensual-user-tracking', hasConsented)
     }
 
     onSearchSubmit(event: Event): void {
@@ -61,7 +64,10 @@ class HomePage extends React.Component<Props, void> {
             <div className={"HomePage" + (this.props.siteFeatureFlags['site-banner-feature-flag-test'] ? " CurrentEmergency" : "")}>
                 <div className="header">
                     <div className="desktop">
-                        <span className="quick-exit-right" />
+                        <span className="quick-exit-right">
+                            {storage.getItem('consensual-user-tracking') === 'true' &&
+                                <ConsensualTrackingBar />}
+                        </span>
                         <a title={tooltip}
                             href={redirectUri}
                         >

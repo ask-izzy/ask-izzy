@@ -30,6 +30,7 @@ import HomelessFinanceStaticPage from "./pages/HomelessFinanceStaticPage";
 import HomelessHealthStaticPage from "./pages/HomelessHealthStaticPage";
 import InformationPage from "./pages/InformationPage";
 import OnlineSafetyStaticPage from "./pages/OnlineSafetyStaticPage";
+import UserTrackingConsentStaticPage from "./pages/UserTrackingConsentStaticPage";
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
@@ -181,6 +182,11 @@ export default (
             path="/information"
             component={InformationPage}
             title="Information"
+        />
+        <Route
+            path="/user-tracking-consent-request"
+            component={UserTrackingConsentStaticPage}
+            title="User Tracking Consent Request"
         />
 
         <Route
