@@ -14,7 +14,6 @@ IFS=$'\n\t'
 PATH=`npm bin`:$PATH
 
 ./script/recreate-dev-env-file
-./script/build-gmaps-file
 
 if which xdg-open; then
     OPEN=xdg-open

@@ -50,7 +50,6 @@ case "$1" in
 
         set -x # Logs
         ./script/generate-env-vars > /static/env-$(cat public/VERSION).js
-        ./script/build-gmaps-file
         cp ./public/static/scripts/request-interceptor.js ./public/static/scripts/request-interceptor-$(cat public/VERSION).js
         cp -r ./public/static/* /static/
         ;;

@@ -190,15 +190,9 @@ The question classes mostly derive from `BaseQuestion` or `BaseMultiQuestion`.
 ## Google services
 
 ### Analytics
-The Google Analytics and/or the Google Tag Manager trackers are enabled if the required environmental variables are set. All GA events are sent though GTM.
+The Google Tag Manager (GTM) tracker is enabled if the required environmental variables are set. Google Analytics (GA) can be configured via GTM.
 
-For Infoxchange devs see the internal dev wiki for specifics on GA/GTM dev and testing workflow in the Infoxchange context.
-
-#### Google Analytics
-Required environment variables:
-```yaml
-GOOGLE_ANALYTICS_ID: 'UA-12345678-1'
-```
+For Infoxchange devs see the internal dev wiki for specifics on GTM/GA dev and testing workflow in the Infoxchange context.
 
 #### Google Tag Manager
 Required environment variables:
@@ -208,9 +202,9 @@ GOOGLE_TAG_MANAGER_AUTH: 'a1b2c3d5e6f7g8'
 GOOGLE_TAG_MANAGER_ENV: 'env-1'
 ```
 
-All GA events are sent via GTM by calling the `push` method in `google-tag-manager.js` like so:
+GTM events are triggered by the `sendEvent` method in `google-tag-manager.js` like so:
 ```javascript
-import sendEvent from "../google-tag-manager";
+import sendEvent from "./google-tag-manager";
 sendEvent({
     event: "categoryPageLoad",
     additionalData: "foo",
