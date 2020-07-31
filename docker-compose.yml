@@ -5,20 +5,15 @@ services:
         build:
            context: .
            target: test
-        entrypoint: /bin/bash
-        command: -c /app/script/dev-server
+        command: "dev-serve"
         environment:
             # Pallet
             DEVNAME: docker
             ENVIRONMENT: dev
-            
-            # Services
-            ISS_URL: https://UNDFUUWCHWGIJGTGMTBXZJDENAACETNJ:XBKSEBMIGVELOOSTGZFEJHKZWCKAFZUY@iss3-test.docker.dev
-            GOOGLE_API_KEY: ABCDEFG
         ports:
             - '80:8000'
             - '8000:8000'
             - '8001:8001'
             - '8097:8097'
-            #volumes:
-            #- .:/app
+        volumes:
+            - .:/app

@@ -2,6 +2,13 @@
 
 set -eo
 
+# Read in environment variables from file
+if [ -f .env ]; then
+    set -a
+    source .env
+    set +a
+fi
+
 case "$1" in
     lint)
         shift 1
@@ -60,13 +67,20 @@ case "$1" in
         exec ./script/run-nginx
         ;;
 
+    dev-serve)
+        shift 1
+
+        exec ./script/dev-server
+        ;;
+
     env)
         shift 1
         exec env $@
         ;;
 
     shell)
-        /bin/bash
+        shift 1
+        /bin/bash "$@"
         ;;
 
     *)
