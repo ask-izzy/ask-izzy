@@ -3,9 +3,12 @@
 import posthog from "posthog-js";
 import * as React from "react"
 
+const posthogShouldBeLoaded = typeof window !== "undefined" &&
+    window.LOCAL_FILE_ENCRYPTION_KEY
+
 // Use existing appvars var LOCAL_FILE_ENCRYPTION_KEY until it is decided that
 // PostHog is worth using. Then commission PostHog specific variable
-if (typeof window !== "undefined" && window.LOCAL_FILE_ENCRYPTION_KEY) {
+if (posthogShouldBeLoaded) {
     const posthogCreds = window.LOCAL_FILE_ENCRYPTION_KEY.split("~");
 
     posthog.init(posthogCreds[0], {
@@ -42,17 +45,19 @@ function setFeatureFlags<Props, Instance>(
                 return
             }
 
-            posthog.onFeatureFlags(() => {
-                this.setState({
-                    siteFeatureFlags: Object.assign(
-                        {},
-                        ...posthog.feature_flags.getFlags()
-                            .map((flag) => (
-                                { [flag]: posthog.isFeatureEnabled(flag) }
-                            ))
-                    ),
+            if (posthogShouldBeLoaded) {
+                posthog.onFeatureFlags(() => {
+                    this.setState({
+                        siteFeatureFlags: Object.assign(
+                            {},
+                            ...posthog.feature_flags.getFlags()
+                                .map((flag) => (
+                                    { [flag]: posthog.isFeatureEnabled(flag) }
+                                ))
+                        ),
+                    });
                 });
-            });
+            }
         }
 
         render() {
@@ -67,7 +72,7 @@ function setFeatureFlags<Props, Instance>(
         }
     }
 
-    return React.forwardRef < Props, Instance > ((props, ref) => {
+    return React.forwardRef((props, ref) => {
         return (
             <FeatureFlagSetter {...props}
                 forwardedRef={ref}
@@ -79,4 +84,5 @@ function setFeatureFlags<Props, Instance>(
 export default {
     setFeatureFlags,
     client: posthog,
+    posthogShouldBeLoaded,
 };
