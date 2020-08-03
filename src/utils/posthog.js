@@ -1,3 +1,4 @@
+/* flow:disable */
 import posthog from "posthog-js";
 import React from "react"
 
