@@ -27,8 +27,8 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
         };
     }
 
-    componentWillReceiveProps(nextProps: Object): void {
-        this.setState({nextDisabled: false, showSubpage: true});
+    static getDerivedStateFromProps(props, state): void {
+        return {nextDisabled: false, showSubpage: true};
     }
 
     componentDidMount(): void {
