@@ -118,7 +118,7 @@ ReactDOM.hydrate(
                 event: "Page Viewed",
             });
 
-            posthog.client.capture('$pageview');
+            posthog.client.capture("$pageview");
         }}
     >{routes}</Router>,
     document.getElementById("root")

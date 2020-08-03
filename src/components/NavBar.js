@@ -4,9 +4,6 @@ import React from "react";
 
 import categories from "../constants/categories";
 import CategoryListItem from "./CategoryListItem";
-import LinkListItem from "./LinkListItem";
-import Warning from "../icons/Warning";
-import Chevron from "../icons/Chevron";
 
 class NavBar extends React.Component<{}, void> {
     static sampleProps = {default: {}};
