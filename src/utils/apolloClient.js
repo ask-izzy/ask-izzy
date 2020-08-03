@@ -1,4 +1,6 @@
-if (typeof global.fetch == "undefined") {
+/* flow:disable */
+
+if (typeof global.fetch === "undefined") {
     global.fetch = require("node-fetch");
 }
 
