@@ -16,16 +16,22 @@ import DebugPersonalisation from "../components/DebugPersonalisation";
 import DebugSearch from "../components/DebugSearch";
 import ResultsListPage from "./ResultsListPage";
 import routerContext from "../contexts/router-context";
+import FormFeedbackCantFind from "../components/feedback/FormCantFind";
 
 import type { Service } from "../iss";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 
-class ResultsPage extends BaseCategoriesPage {
+type State = {
+    loadMoreCount: number,
+}
+
+class ResultsPage extends BaseCategoriesPage<State> {
     constructor(props: Object) {
         super(props);
         this.state = {
             isClient: false,
             childServices: [],
+            loadMoreCount: 0,
         };
     }
 
@@ -155,11 +161,12 @@ class ResultsPage extends BaseCategoriesPage {
         try {
             data = await iss.requestObjects(next);
 
-            this.setState({
+            this.setState(prevState => ({
                 meta: data.meta,
                 objects: data.objects,
                 error: undefined,
-            });
+                loadMoreCount: prevState.loadMoreCount + 1,
+            }));
 
         } catch (response) {
             try {
@@ -258,6 +265,9 @@ class ResultsPage extends BaseCategoriesPage {
                     }}
                     onServicesChange={this.onServicesChange.bind(this)}
                 />
+                { !this.loading && this.state.loadMoreCount > 0 &&
+                    <FormFeedbackCantFind />
+                }
             </div>
         );
     }

@@ -1,4 +1,23 @@
 .Collapser {
+
+    .ChevronIcon {
+        top: 0;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        transform: rotate(-90deg);
+        line-height: 0;
+        vertical-align: middle;
+    }
+
+    &.collapsed .ChevronIcon {
+        transform: rotate(90deg);
+    }
+
+    &.inline {
+        display: inline;
+    }
+
     @media screen {
         .collapsed {
             display: none;
