@@ -36,6 +36,7 @@ $lightness-button-hover: 10%;
     );
 
     @include colours.define('colour-irreversible-action', 'global', 'raw-colour-bright-red');
+    @include colours.define('colour-error', 'global', 'raw-colour-bright-red');
 
     @include colours.define(
         'colour-element-shadow-base',
