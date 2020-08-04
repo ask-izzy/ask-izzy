@@ -31,6 +31,10 @@
         transform: rotate(90deg);
     }
 
+    &.inline {
+        display: inline;
+    }
+
     @media screen {
         .collapsed {
             display: none;

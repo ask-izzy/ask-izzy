@@ -20,6 +20,7 @@ import QuestionStepper from "./QuestionStepper";
 import Button from "../components/base/Button";
 import Link from "../components/base/Link";
 import Category from "../constants/Category";
+import FormFeedbackCantFind from "../components/feedback/FormCantFind";
 
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
@@ -299,6 +300,7 @@ class ResultsListPage extends ResultsPage<{}, State> {
                     </Button>
                 </div>
             </Switch>
+            {this.renderFeedbackCantFind()}
             { this.renderSuggestionBox() }
         </div>
     </>
@@ -319,6 +321,12 @@ class ResultsListPage extends ResultsPage<{}, State> {
                     results={this.state.searchResults || []}
                 />
             )
+        }
+    }
+
+    renderFeedbackCantFind(): ReactNode | void {
+        if (!this.searchIsLoading && this.state.searchPagesLoaded > 1) {
+            return <FormFeedbackCantFind />
         }
     }
 

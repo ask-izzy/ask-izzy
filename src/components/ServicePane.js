@@ -14,6 +14,7 @@ import ContactMethods from "./ContactMethods";
 import DebugServiceRecord from "./DebugServiceRecord";
 import Eligibility from "./Eligibility";
 import Feedback from "./Feedback";
+import FormFindInformation from "./feedback/FormFindInformation";
 import HeaderBar from "./HeaderBar";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
@@ -220,6 +221,7 @@ function ServicePane({service}: Props): ReactNode {
                         <Eligibility {...service} />
                         {renderServiceProvisions()}
                         {!isMobile && renderSiblings()}
+                        <FormFindInformation />
                     </div>
                 </div>
                 <div
