@@ -66,7 +66,7 @@ class OpeningTimes extends React.Component<Props, void> {
         return (
             <span className="until">
                 <span className="closed">
-                    Closed
+                    Closed now
                 </span>
                 {" "}
                 <span

@@ -6,12 +6,14 @@ import classnames from "classnames";
 
 import Button from "../base/Button";
 import type {AnalyticsEvent} from "../../google-tag-manager"
+import Chevron from "../../icons/Chevron";
 
 type Props = {
     className?: string,
     expandMessage: string,
     collapseMessage?: string,
     initiallyExpanded?: boolean,
+    hasIcon?: boolean,
     contentPreview?: ReactNode,
     children?: ReactNode,
     onClick?: Function,
@@ -27,6 +29,7 @@ export default function Collapser({
     initiallyExpanded = false,
     contentPreview,
     children,
+    hasIcon,
     onClick: onClickProp,
     analyticsEvent,
 }: Props): ReactElement<"div"> {
@@ -62,6 +65,9 @@ export default function Collapser({
                     }}
                 >
                     {message}
+                    {hasIcon &&
+                        <Chevron />
+                    }
                 </Button>
             }
             <div
