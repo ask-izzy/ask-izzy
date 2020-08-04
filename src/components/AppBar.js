@@ -6,7 +6,7 @@ import components from "../components";
 import icons from "../icons";
 
 type Props = {
-    title: string,
+    title?: string,
     onBackTouchTap: Function,
     backMessage?: string,
 }
@@ -31,7 +31,9 @@ class AppBar extends React.Component<Props, void> {
             <div className="AppBarContainer">
                 <div className="AppBar">
                     {this.renderBackButton()}
-                    <h1 className="title">{this.props.title}</h1>
+                    {this.props.title &&
+                        <h1 className="title">{this.props.title}</h1>
+                    }
                     <div className="button-container">
                         <a className="quick-exit"
                             href={redirectUri}
