@@ -9,7 +9,11 @@ import sendEvent from "../google-tag-manager";
 
 type GeoLocationState = "NOT_STARTED"|"RUNNING"|"COMPLETE"|"FAILED";
 
-const NotStartedGeolocation = (props) => (
+type NotStartedGeolocationProps = {
+    onClick: () => {}
+}
+
+const NotStartedGeolocation = (props: NotStartedGeolocationProps) => (
     <ButtonListItem
         className="taller LocationButton"
         onClick={props.onClick}
