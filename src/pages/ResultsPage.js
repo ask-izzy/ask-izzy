@@ -22,7 +22,6 @@ import OpeningTimes from "../components/OpeningTimes";
 import Ndis from "../components/Ndis";
 import type {searchResultsMeta, Service} from "../iss";
 
-
 import {Category} from "../constants/categories";
 import covidSupportCategories, {CovidSupportCategory}
     from "../constants/covidSupportCategories";
@@ -32,6 +31,7 @@ import NotFoundStaticPage from "./NotFoundStaticPage"
 type State = {
     searchResultsMeta?: ?searchResultsMeta,
     searchResults: Array<Service>,
+    loadMoreCount: number,
 }
 
 
@@ -43,6 +43,7 @@ extends BaseCategoriesPage<ChildProps, State & ChildState> {
         this.state = {
             searchResultsMeta: undefined,
             searchResults: [],
+            loadMoreCount: 0,
         };
     }
 
@@ -147,7 +148,7 @@ extends BaseCategoriesPage<ChildProps, State & ChildState> {
     }
 
     get loading(): boolean {
-        return !(this.state.meta || this.state.error);
+        return !(this.state.searchResultsMeta || this.state.error);
     }
 
     async loadMore(): Promise<void> {
@@ -179,11 +180,12 @@ extends BaseCategoriesPage<ChildProps, State & ChildState> {
         try {
             data = await iss.requestObjects(next);
 
-            this.setState({
+            this.setState(prevState => ({
                 searchResultsMeta: data.meta,
                 searchResults: data.objects,
                 error: undefined,
-            });
+                loadMoreCount: prevState.loadMoreCount + 1,
+            }));
 
         } catch (response) {
             try {
