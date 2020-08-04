@@ -72,7 +72,7 @@ export default class ServicePane extends React.Component<{
             <div className="ServicePane">
                 <HeaderBar
                     primaryText={object.name}
-                    secondaryText={null}
+                    secondaryText={object.site.name}
                     bannerName="housing"
                 />
                 <LimitedServicesBanner />
