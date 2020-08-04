@@ -2,7 +2,7 @@
 import React from "react";
 import { withRouter } from "react-router";
 
-const RouterContext = React.createContext();
+const RouterContext = React.createContext<Object>();
 
 export default RouterContext
 

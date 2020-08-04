@@ -1,5 +1,6 @@
-/* flow:disable */
+/* @flow */
 
+// flow:disable
 import gql from "graphql-tag";
 
 const bannerQuery = gql`
