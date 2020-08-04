@@ -91,7 +91,8 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
 
     get currentComponentForRender(): ?React$ComponentType<*> {
         if (!cachedRenderComponents[this.currentComponentIdx]) {
-            cachedRenderComponents[this.currentComponentIdx] = posthog.setFeatureFlags(this.currentComponent);
+            cachedRenderComponents[this.currentComponentIdx] = posthog
+                .setFeatureFlags(this.currentComponent);
         }
         return cachedRenderComponents[this.currentComponentIdx];
     }

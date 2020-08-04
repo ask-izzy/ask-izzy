@@ -2,11 +2,7 @@
 
 import React from "react";
 
-import posthog from "posthog-js";
-
 import HeaderBar from "../components/HeaderBar";
-import { Link } from "react-router-dom";
-import icons from "../icons"
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
 import storage from "../storage";
@@ -20,6 +16,8 @@ type Props = {
 class HomePage extends React.Component<Props, void> {
 
     search: ?HTMLInputElement;
+
+    static contextType = routerContext;
 
     constructor(props: Object) {
         super(props);
@@ -58,7 +56,13 @@ class HomePage extends React.Component<Props, void> {
 
 
         return (
-            <div className={"HomePage" + (this.props.siteFeatureFlags['site-banner-feature-flag-test'] ? " CurrentEmergency" : "")}>
+            <div className={"HomePage" + (
+                this.props
+                    .siteFeatureFlags["site-banner-feature-flag-test"] ?
+                    " CurrentEmergency"
+                    : ""
+            )}
+            >
                 <div className="appbar">
                     <a className="quick-exit"
                         href={redirectUri}
@@ -87,16 +91,18 @@ class HomePage extends React.Component<Props, void> {
                         bannerName="homepage"
                         taperColour="LighterGrey"
                     />
-                    {this.props.siteFeatureFlags['site-banner-feature-flag-test'] &&
+                    {this.props.siteFeatureFlags[
+                        "site-banner-feature-flag-test"
+                    ] &&
                         <div className="CurrentEmergencyNotice">
                             <h3>
                                 The site banner feature flag test is set
                             </h3>
                             <p>
-                                Bikie rort rip snorter my tinny. Brickie as 
-                                stands out like stands out like a waggin' 
+                                Bikie rort rip snorter my tinny. Brickie as
+                                stands out like stands out like a waggin'
                                 school <a href="https://txtrdr.com/boganipsum/">
-                                billabong</a> his blood's worth bottling 
+                                billabong</a> his blood's worth bottling
                                 budgie smugglers.
                             </p>
                         </div>

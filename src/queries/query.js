@@ -1,6 +1,6 @@
-/* flow:disable */
+/* @flow */
 
-import React from "react";
+import * as React from "react";
 import { useQuery } from "@apollo/react-hooks";
 // flow:disable
 import type { DocumentNode } from "graphql";
@@ -61,7 +61,7 @@ const Query = ({ children, query, args, loadingComponent, errorComponent }: {
         if (errorComponent) {
             return errorComponent;
         }
-        return <p>An error ocurred and we could not load this section.</p>;
+        return <p>An error occurred and we could not load this section.</p>;
     }
     if (data !== undefined) {
         return children({data});

@@ -460,7 +460,7 @@ export class Service {
             description.reduce((memo, elem) => memo + elem.length, 0);
 
         while (
-            sentences.length && 
+            sentences.length &&
             (descriptionLength() + sentences[0].length) < 250
         ) {
             description.push(sentences.shift());

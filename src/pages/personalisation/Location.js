@@ -23,13 +23,17 @@ type State = {
         autocompletionInProgress: boolean,
         locationName: string,
         autocompletions: Array<issArea>,
-        nextDisabled: boolean,
+        nextDisabled: boolean
 }
 
 class Location extends Personalisation<Props, State> {
     static defaultProps = {
         name: "location",
     };
+
+    doneButtonRef: { current: null | HTMLDivElement }
+
+    overlapObserver: ?IntersectionObserver
 
     _search: ?HTMLInputElement;
 
@@ -39,7 +43,7 @@ class Location extends Personalisation<Props, State> {
             autocompletionInProgress: false,
             locationName: "",
             autocompletions: [],
-            nextDisabled: true
+            nextDisabled: true,
         };
         this.doneButtonRef = React.createRef();
     }
@@ -49,20 +53,21 @@ class Location extends Personalisation<Props, State> {
             storage.getLocation(),
             storage.getLocation() != "" // valid location
         );
-        if ('IntersectionObserver' in window) {
-            if( !this.overlapObserver ){
-                // Do this in componentDidMount because if we did this in the 
-                // constructor then the server will attempt to execute it when 
-                // rendering a static page but will fail because the 
+        if ("IntersectionObserver" in window) {
+            if (!this.overlapObserver) {
+                // Do this in componentDidMount because if we did this in the
+                // constructor then the server will attempt to execute it when
+                // rendering a static page but will fail because the
                 // IntersectionObserver API is not available in node
-                this.overlapObserver = new IntersectionObserver( 
+                this.overlapObserver = new IntersectionObserver(
                     ([e]) => e.target.toggleAttribute(
-                        'stuck', e.intersectionRatio < 1
+                        "stuck", e.intersectionRatio < 1
                     ),
                     {threshold: [1]}
                 );
             }
-            this.overlapObserver.observe(this.doneButtonRef.current);
+            this.doneButtonRef && this.doneButtonRef.current &&
+                this.overlapObserver.observe(this.doneButtonRef.current);
         }
     }
 
@@ -231,7 +236,8 @@ class Location extends Personalisation<Props, State> {
                         </div>
                     }
                     secondaryText={
-                        "This will help find services closest to your chosen location"
+                        "This will help find services closest to your chosen" +
+                            " location"
                     }
                     bannerName={this.bannerName}
                 />
@@ -300,9 +306,11 @@ class Location extends Personalisation<Props, State> {
                     )
                 }
                 {
-                    !this.state.nextDisabled && 
-                    Location.locationInVic(this.state.locationName) && 
-                    this.props.siteFeatureFlags['covid-categories-show-for-victoria'] &&
+                    !this.state.nextDisabled &&
+                    Location.locationInVic(this.state.locationName) &&
+                    this.props.siteFeatureFlags[
+                        "covid-categories-show-for-victoria"
+                    ] &&
                     <CovidRelatedIssues onClick={this.onNextStep.bind(this)} />
                 }
                 {this.renderDoneButton()}
@@ -312,7 +320,9 @@ class Location extends Personalisation<Props, State> {
 
     renderDoneButton() {
         return (
-            <div className="done-button" ref={this.doneButtonRef}>
+            <div className="done-button"
+                ref={this.doneButtonRef}
+            >
                 <components.FlatButton
                     label="Next"
                     onClick={this.onDoneTouchTap.bind(this)}
