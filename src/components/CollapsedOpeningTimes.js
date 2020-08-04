@@ -143,6 +143,7 @@ export default class CollapsedOpeningTimes extends React.Component<Props, void> 
                             eventAction: "Show opening times",
                             eventLabel: null,
                         }}
+                        hasIcon={true}
                     >
                         <ul className="AllOpeningTimes">
                             {openingHours.map((record, idx) =>
