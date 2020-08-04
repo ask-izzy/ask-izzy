@@ -22,7 +22,9 @@ function historyListener(history) {
     sendEvent({
         event: "Page Viewed",
     });
-    posthog.client.capture('$pageview');
+    if (posthog.posthogShouldBeLoaded) {
+        posthog.client.capture("$pageview");
+    }
 
     history.listen((location, action) => {
         window.scrollTo(0, 0);
@@ -32,7 +34,9 @@ function historyListener(history) {
         sendEvent({
             event: "Page Viewed",
         });
-        posthog.client.capture('$pageview');
+        if (posthog.posthogShouldBeLoaded) {
+            posthog.client.capture("$pageview");
+        }
 
         // Track size of history stack while navigating Ask Izzy so we know if
         // the previous page is part of ask izzy or not.

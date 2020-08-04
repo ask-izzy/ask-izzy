@@ -106,7 +106,6 @@
         "react/jsx-no-undef": 2,
         "react/jsx-uses-react": 2,
         "react/jsx-uses-vars": 2,
-        "react/no-did-update-set-state": 2,
         "react/no-multi-comp": 0, /* Composing components out of small pieces is a good thing */
         "react/no-unknown-property": 2,
         "react/no-did-mount-set-state": 0, /* ismorphic rendering does not play nice with this rule */
