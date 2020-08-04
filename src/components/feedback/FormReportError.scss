@@ -1,0 +1,58 @@
+.FormReportError {
+    margin-top: 10px;
+    color: $brand-text-dark;
+
+    ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    input {
+        &[type="checkbox"] {
+            height: 20px;
+        }
+    }
+
+    label {
+        margin-left: 5px;
+        font-weight: normal;
+        line-height: 20px;
+        cursor: pointer;
+        vertical-align: top;
+    }
+
+    .moreInformation {
+        margin-bottom: 10px;
+
+        label {
+            display: block;
+        }
+
+        textarea {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    .formError {
+        padding: 0;
+        color: $brand-error;
+        text-align: left;
+    }
+
+    .formControls {
+        text-align: right;
+
+        button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: 1px solid $brand-pane-alt-dark;
+            border-radius: 3px;
+            background-color: transparent;
+            color: $brand-pane-alt-dark;
+            font-size: 16px;
+            font-weight: normal;
+        }
+    }
+}
