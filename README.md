@@ -28,16 +28,26 @@ yarn
 
 ## Running the dev server
 
-You will need to insert API keys for [ISS](https://api.serviceseeker.com.au/) and
-Google into the following command:
+You will need to create a file in the root directory called `.env` with environment variables for the [ISS](https://api.serviceseeker.com.au/) and Google API keys.
 
+```bash
+# Contents of .env
+ISS_URL="https://<username>:<token>@<iss domain>"
+GOOGLE_API_KEY="Rlf90...S0fwV"
+```
+
+You can then start the dev server like so:
+
+```bash
+docker-compose up
+```
+
+Once started it should then be accessible at [http://localhost:8000/](http://localhost:8000/).
+
+Alternatively you can run it without docker via:
 ```bash
 ENVIRONMENT="dev_local" NODE_ENV="development" ISS_URL="$ISS_URL" GOOGLE_API_KEY="$G_API_KEY" ./script/dev-server
 ```
-
-The required environment variables can be copied from the dev environment in the appvars repo.
-
-Alternatively environment variables can be added to a `.env` file saved in the app root dir instead of supplying in the command each time. This will be automatically sourced when running `./script/dev-server`.
 
 ## Dealing with HTTP and browsers
 
@@ -284,15 +294,24 @@ Add the git merge strategies to your `.git/config` file:
         path = ../.gitmerge/strategies
 
 Run the linters:
-
-    ./script/typecheck
+````bash
+docker-compose run --rm app lint
+# or without docker: 
+./script/typecheck
+````
 
 Running the tests:
-
-    ./script/unit-test
-    ./script/feature-test
-    ./script/personalisation-test
-    ./script/search-test
+````bash
+docker-compose run --rm app unit-test
+docker-compose run --rm app feature-test
+docker-compose run --rm app personalisation-test
+docker-compose run --rm app search-test
+# or without docker: 
+./script/unit-test
+./script/feature-test
+./script/personalisation-test
+./script/search-test
+````
 
 Pass `SELENIUM_BROWSER=firefox|phantomjs|chrome` to choose a
 browser to run the feature tests with (default is chrome)

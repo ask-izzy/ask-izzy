@@ -1,60 +1,72 @@
 .CovidSupportPage {
     $padding: 1em;
+
     .pageBanner {
+        padding: 1.5em;
         background-color: $brand-yellow;
         color: $brand-bg-dark;
-        overflow: auto;
-        padding: 1.5em;
         font-size: 0.9em;
+        overflow: auto;
+
         h3 {
             margin: 0 0 0.3em;
         }
     }
+
     .anchor {
         /* push anchor down the page to stop header cutting it off */
         display: block;
         position: relative;
         top: -44px; /* header height */
-        visibility: hidden;
         overflow: auto;
+        visibility: hidden;
     }
-    .primaryInfo, .keyInfos .keyInfo, .supportServices .supportService {
+
+    .primaryInfo,
+    .keyInfos .keyInfo,
+    .supportServices .supportService {
         .title {
             text-decoration: none;
 
             h3 {
                 margin: 0.5em 0 0.2em;
+                color: $brand-highlight-darker;
                 font-size: 1.3em;
                 font-weight: 500;
-                color: $brand-highlight-darker;
             }
         }
+
         h4 {
             margin: 0.2em 0 1em;
-            font-weight: 300;
-            font-size: 14px;
             color: $brand-text-dark;
+            font-size: 14px;
+            font-weight: 300;
         }
+
         .body {
             margin: 1em 0;
         }
+
         > .learnMore:link {
-            color: $brand-highlight-darker; 
+            color: $brand-highlight-darker;
         }
     }
+
     .primaryInfo {
-        background-color: $brand-bg-light;
         margin: $padding;
         padding: 1em;
+        background-color: $brand-bg-light;
     }
 
     .keyInfos {
         margin: $padding;
+
         > h3 {
+            color: $brand-text-mid;
             font-size: 26px;
             font-weight: 500;
-            color: $brand-text-mid;
         }
+
         .keyInfo {
             margin: 2em 0;
         }
@@ -65,20 +77,22 @@
             padding: 0 $padding;
             background-color: $brand-bg-light;
             overflow: auto;
+
             h3 {
-                font-weight: 500;
-                font-size: 26px;
                 color: $brand-text-mid;
+                font-size: 26px;
+                font-weight: 500;
             }
         }
+
         > ul {
-            list-style-type: none;
-            padding-left: 0;
             margin: 0;
+            padding-left: 0;
+            list-style-type: none;
 
             .supportService {
                 padding: 1em $padding 2em;
-                border-top: 10px solid #edece9;
+                border-top: 10px solid $brand-bg-light;
 
                 .Eligibility {
                     margin-bottom: 1em;
@@ -89,21 +103,24 @@
                     }
                 }
             }
+
             .supportService:first-child {
                 border-top: 0;
             }
         }
+
         .loadMore {
             padding: 1em $padding;
             background-color: $brand-bg-light;
             text-align: center;
 
             button {
-                background: transparent;
-                border: 1px solid;
                 padding: 0.8em 1em;
+                border: 1px solid;
+                background: transparent;
             }
         }
+
         .progress {
             text-align: center;
         }
@@ -111,25 +128,27 @@
 
     .otherCovidSupportCategories {
         h3 {
-            font-weight: 400;
-            font-size: 18px;
-            text-align: center;
             padding: 0 $padding;
             color: $brand-pane-alt-dark;
+            font-size: 18px;
+            font-weight: 400;
+            text-align: center;
         }
+
         ul {
-            padding-left: 0;
             margin-bottom: 0;
+            padding-left: 0;
         }
     }
 
     .exitCovidFlowBox {
+        padding: 0 calc(5em + 10%) 1em $padding;
         background: right 5% bottom 40% / 5em no-repeat url("/static/images/main-symbol-yellow.svg"), $brand-pane-alt-dark;
         color: $white;
-        padding: 0 calc(5em + 10%) 1em $padding;
         overflow: auto;
 
-        a, a:link {
+        a,
+        a:link {
             color: $white;
         }
     }
