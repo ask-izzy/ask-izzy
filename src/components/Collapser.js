@@ -1,12 +1,14 @@
 /* @flow */
 import React from "react";
 import classnames from "classnames";
+import Chevron from "../icons/Chevron";
 
 type Props = {
     message: string,
     className?: string,
     closeMessage?: string,
     expanded?: boolean,
+    hasIcon?: boolean,
     children?: any,
     onClick?: Function
 }
@@ -92,6 +94,9 @@ class Collapser extends React.Component<Props, State> {
                     role="button"
                 >
                     {this.props.message}
+                    {this.props.hasIcon &&
+                        <Chevron />
+                    }
                 </a>
             );
         } else if (this.props.closeMessage) {
@@ -103,6 +108,9 @@ class Collapser extends React.Component<Props, State> {
                     role="button"
                 >
                     {this.props.closeMessage}
+                    {this.props.hasIcon &&
+                        <Chevron />
+                    }
                 </a>
             );
         }
