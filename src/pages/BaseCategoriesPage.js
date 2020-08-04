@@ -22,8 +22,7 @@ type State = {
     nextDisabled?: boolean,
     floatingContainerHeight?: number,
     isClient?: boolean,
-    childServices?: Array<Service>,
-    covidCategory: Object
+    childServices?: Array<Service>
 }
 
 class BaseCategoriesPage<ExtraState = {}> extends React.Component<
@@ -98,6 +97,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
                 }
             }
 
+            // $FlowIgnore
             return (typeof component.showPage === "function") &&
                 // $FlowIgnore
                 component.showPage()
