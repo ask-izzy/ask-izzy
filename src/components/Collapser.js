@@ -72,7 +72,6 @@ class Collapser extends React.Component<Props, State> {
                     this.props.className,
                     {collapsed: this.state.collapsed}
                 )}
-                onClick={this.onClick.bind(this)}
             >
                 {this.renderMessage()}
                 <div
@@ -92,6 +91,7 @@ class Collapser extends React.Component<Props, State> {
                     alt="Show more"
                     className="collapser-message"
                     role="button"
+                    onClick={this.onClick.bind(this)}
                 >
                     {this.props.message}
                     {this.props.hasIcon &&
@@ -106,6 +106,7 @@ class Collapser extends React.Component<Props, State> {
                     alt="Show less"
                     className="collapser-message"
                     role="button"
+                    onClick={this.onClick.bind(this)}
                 >
                     {this.props.closeMessage}
                     {this.props.hasIcon &&
