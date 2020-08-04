@@ -13,13 +13,14 @@
 
         &.collapsed {
             width: auto;
-            padding-top: 10px;
+            padding-top: 0;
+            padding-left: 32px;
         }
 
         & > a {
             display: block;
             font-size: 16px;
-            text-align: right;
+            text-align: left;
             white-space: nowrap;
         }
 
