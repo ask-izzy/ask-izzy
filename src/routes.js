@@ -130,8 +130,8 @@ export default (
         <Route
             path="/covid-19-support/:supportCategorySlug"
             component={props => (
-                <CovidSupportPageListing 
-                    key={props.params.supportCategorySlug} 
+                <CovidSupportPageListing
+                    key={props.params.supportCategorySlug}
                     {...props}
                 />
             )}

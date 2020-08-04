@@ -22,8 +22,7 @@ type State = {
     nextDisabled?: boolean,
     floatingContainerHeight?: number,
     isClient?: boolean,
-    childServices?: Array<Service>,
-    covidCategory: Object
+    childServices?: Array<Service>
 }
 
 class BaseCategoriesPage<ExtraState = {}> extends React.Component<
@@ -45,7 +44,8 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         }
 
         let category = _.findWhere(categories, {
-            key: this.props.params.page || this.props.params.supportCategorySlug,
+            key: this.props.params.page ||
+                this.props.params.supportCategorySlug,
         });
 
         this._category = category;
@@ -101,10 +101,12 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         return components.filter(component => {
             if (this.context.router.isRenderingStatic) {
                 if (typeof component.staticShowPage === "function") {
+                    // flow:disable
                     return component.staticShowPage();
                 }
             }
 
+            // flow:disable
             return (typeof component.showPage === "function") &&
             component.showPage()
         });

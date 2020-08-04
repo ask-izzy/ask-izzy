@@ -22,8 +22,8 @@ const HomeLink = () =>
 const ErrorMessage = ({children}: Object) =>
     <p className="errorMessage">{children}</p>;
 
-const InfoMessage = (category: ?Object) =>
-    category && <div>{category.info}</div>;
+const InfoMessage = (category: Object) =>
+    <div>{category.info}</div>;
 
 const LogoHeader = ({children}: Object) =>
     <div className="LogoHeader">
@@ -164,7 +164,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                     }
                     secondaryText={
                         <div>
-                            <InfoMessage {...category} />
+                            {category && <InfoMessage {...category} />}
                         </div>
                     }
                     bannerName={bannerName}

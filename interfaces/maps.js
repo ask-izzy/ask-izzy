@@ -66,7 +66,7 @@ declare class InfoWindow {
     set(key: string, value: any): void;
 }
 
-declare class Map {
+declare class GeoMap {
 }
 
 type DirectionsRequest = {
@@ -108,7 +108,7 @@ declare class GoogleMaps {
     InfoWindow(opts?: Object): InfoWindow;
     LatLng(lat: number, lon: number, noWrap: ?boolean): LatLng;
     LatLngBounds(sw?: LatLng, ne?: LatLng): LatLngBounds;
-    Map(node: Element, obj: Object): Map;
+    Map(node: Element, obj: Object): GeoMap;
     places: Places;
     DirectionsTravelMode: TravelModes;
     TravelMode: TravelModes;
@@ -118,7 +118,7 @@ declare class GoogleMaps {
     DistanceMatrixService(): DistanceMatrixService;
     Marker: Object;
     markers: Array<Object>;
-    maps: Array<Map>;
+    maps: Array<GeoMap>;
     event: {
         trigger: function,
     };

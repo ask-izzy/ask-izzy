@@ -19,7 +19,7 @@ const tests = yaml.safeLoad(
 
 describe("Service Provisions", function() {
     tests.tests.forEach(test =>
-        it(test.description, () => {
+        it(test.description, (): void => {
             let provides = serviceProvisions
                 .filter((provision) => provision.match(test.description))
                 .map(({name}) => name)
