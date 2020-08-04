@@ -9,6 +9,7 @@ import {geolocationAvailable} from "../../geolocation";
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import icons from "../../icons";
+import posthog from "../../utils/posthog"
 import storage from "../../storage";
 import * as iss from "../../iss";
 import CovidRelatedIssues from "../../components/CovidRelatedIssues";
@@ -308,9 +309,12 @@ class Location extends Personalisation<Props, State> {
                 {
                     !this.state.nextDisabled &&
                     Location.locationInVic(this.state.locationName) &&
-                    this.props.siteFeatureFlags[
-                        "covid-categories-show-for-victoria"
-                    ] &&
+                    (
+                        !posthog.posthogShouldBeLoaded ||
+                        this.props.siteFeatureFlags[
+                            "covid-categories-show-for-victoria"
+                        ]
+                    ) &&
                     <CovidRelatedIssues onClick={this.onNextStep.bind(this)} />
                 }
                 {this.renderDoneButton()}
