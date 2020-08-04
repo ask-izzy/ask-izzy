@@ -26,4 +26,4 @@ esproposal.decorators=ignore
 esproposal.optional_chaining=enable
 
 [version]
-0.80.0
+0.93.0

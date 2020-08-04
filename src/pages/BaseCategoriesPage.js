@@ -91,10 +91,12 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         return components.filter(component => {
             if (typeof window === "undefined") {
                 if (typeof component.staticShowPage === "function") {
+                    // flow:disable
                     return component.staticShowPage();
                 }
             }
 
+            // flow:disable
             return (typeof component.showPage === "function") &&
             component.showPage()
         });

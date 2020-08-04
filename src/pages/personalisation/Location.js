@@ -21,7 +21,7 @@ type State = {
         autocompletionInProgress: boolean,
         locationName: string,
         autocompletions: Array<issArea>,
-        nextDisabled: boolean,
+        nextDisabled: boolean
 }
 
 class Location extends Personalisation<Props, State> {

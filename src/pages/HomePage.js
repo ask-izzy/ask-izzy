@@ -16,6 +16,8 @@ class HomePage extends React.Component<{}, void> {
 
     search: ?HTMLInputElement;
 
+    static contextType = routerContext;
+
     constructor(props: Object) {
         super(props);
 
