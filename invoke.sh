@@ -2,6 +2,13 @@
 
 set -eo
 
+# Read in environment variables from file
+if [ -f .env ]; then
+    set -a
+    source .env
+    set +a
+fi
+
 case "$1" in
     lint)
         shift 1
@@ -50,7 +57,6 @@ case "$1" in
 
         set -x # Logs
         ./script/generate-env-vars > /static/env-$(cat public/VERSION).js
-        ./script/build-gmaps-file
         cp ./public/static/scripts/request-interceptor.js ./public/static/scripts/request-interceptor-$(cat public/VERSION).js
         cp -r ./public/static/* /static/
         ;;
@@ -61,13 +67,20 @@ case "$1" in
         exec ./script/run-nginx
         ;;
 
+    dev-serve)
+        shift 1
+
+        exec ./script/dev-server
+        ;;
+
     env)
         shift 1
         exec env $@
         ;;
 
     shell)
-        /bin/bash
+        shift 1
+        /bin/bash "$@"
         ;;
 
     *)

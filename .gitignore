@@ -11,4 +11,5 @@
 /src/server/webpack-stats.json
 phantomjsdriver.log
 /public/*.html
+/public/**/index.html
 /public/VERSION

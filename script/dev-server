@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
 
-# Read in environment variables from file
-if [ -f .env ]; then
-    set -a
-    source .env
-    set +a
-fi
-
 git describe > public/VERSION
 
 set -euo pipefail
@@ -14,7 +7,6 @@ IFS=$'\n\t'
 PATH=`npm bin`:$PATH
 
 ./script/recreate-dev-env-file
-./script/build-gmaps-file
 
 if which xdg-open; then
     OPEN=xdg-open

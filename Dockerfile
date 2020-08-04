@@ -41,7 +41,6 @@ COPY . /app
 
 RUN git describe > public/VERSION && \
     script/build-assets && \
-    script/build-gmaps-file && \
     chown -R app .
 
 ENTRYPOINT ["./invoke.sh"]

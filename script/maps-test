@@ -12,7 +12,6 @@ export ENVIRONMENT=development
 # Point the app at our mock ISS instance.
 ISS_URL="http://localhost:5000/"
 ./script/recreate-dev-env-file
-./script/build-gmaps-file
 
 # we want this quite high as it makes debugging the tests easier.
 INTERACTIVE_TIMEOUT="50000"
