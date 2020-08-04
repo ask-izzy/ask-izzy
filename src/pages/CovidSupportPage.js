@@ -453,11 +453,14 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
                 primaryInfo: {
                     title: "Dear Landlord Letter Writer",
                     subtitle: "By Justice Connect",
-                    body:
-                    "The Dear Landlord letter writer is a tool that will " +
-                        "ask you to enter some simple information and draft " +
-                        "a letter on your behalf that you can print or send " +
-                        "by email to your landlord or real estate agent.",
+                    body: "Dear Landlord can help you if you are struggling " +
+                        "to pay rent. Answer a few questions and Dear " +
+                        "Landlord will help determine the best way forward, " +
+                        "whether that’s helping you draft a rent reduction " +
+                        "letter to your landlord, contacting Consumer " +
+                        "Affairs Victoria to help negotiate a rent " +
+                        "reduction, tips for mediation, or for appearing at " +
+                        "VCAT.",
                     learnMoreText: "Take me to Dear Landlord",
                     learnMoreLink: "https://justiceconnect.org.au/resources" +
                         "/dear-landlord-letter-writer/",
