@@ -1,9 +1,15 @@
-/* flow:disable */
+/* @flow */
 
-import React from "react";
+import * as React from "react";
 import { useQuery } from "@apollo/react-hooks";
+// flow:disable
+import type { DocumentNode } from "graphql";
 
-const Query = ({ children, query, id }) => {
+const Query = ({ children, query, id }: {
+  children: ({data: Object}) => {},
+  query: DocumentNode,
+  id: number
+}) => {
     /*
       Paramaters:
           query: A gql query string.
@@ -43,9 +49,11 @@ const Query = ({ children, query, id }) => {
         variables: { id },
     });
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) {
+        return <p>Loading...</p>;
+    }
     if (error) {
-        return <p>An error ocurred and we could not load this section.</p>;
+        return <p>An error occurred and we could not load this section.</p>;
     }
     return children({ data });
 };

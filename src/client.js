@@ -50,7 +50,9 @@ ReactDOM.hydrate(
                 event: "Page Viewed",
             });
 
-            posthog.client.capture('$pageview');
+            if (posthog.posthogShouldBeLoaded) {
+                posthog.client.capture("$pageview");
+            }
         }}>
         <ScrollToTop>
             {routes}
