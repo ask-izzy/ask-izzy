@@ -7,7 +7,7 @@ import HeaderBar from "../components/HeaderBar";
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
 import storage from "../storage";
-
+import BrandedFooter from "../components/BrandedFooter";
 import { resetDfvOptions } from "../utils";
 
 class HomePage extends React.Component<{}, void> {
@@ -126,6 +126,8 @@ class HomePage extends React.Component<{}, void> {
                 <div className="body">
                     <NavBar />
                 </div>
+
+                <BrandedFooter />
             </div>
         );
     }

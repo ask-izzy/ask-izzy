@@ -4,17 +4,16 @@ import React from "react";
 import Helmet from "react-helmet";
 import DocumentTitle from "react-document-title";
 import { makeTitle } from "../routes";
+import { withRouter } from "react-router";
 
 type Props = {
-    main: any,
     children: any,
-    footer: any,
     routes: any,
     params: any,
     location: any,
 }
 
-export default class BasePage extends React.Component<Props, void> {
+class BasePage extends React.Component<Props, void> {
     static childContextTypes = {};
 
     getChildContext(): Object {
@@ -42,14 +41,15 @@ export default class BasePage extends React.Component<Props, void> {
                 <DocumentTitle
                     title={makeTitle(
                         this.props.routes,
-                        this.props.params
+                        this.props.match.params
                     )}
                 />
                 <main>
-                    {this.props.main || this.props.children}
+                    {this.props.children}
                 </main>
-                {this.props.footer}
             </div>
         );
     }
 }
+
+export default withRouter(BasePage)
