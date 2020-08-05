@@ -2,7 +2,7 @@
 /* eslint-disable valid-jsdoc */
 
 import React from "react";
-import {Route, Redirect} from "react-router";
+import {Route, Redirect, Switch} from "react-router-dom";
 import {titleize} from "underscore.string";
 import _ from "underscore";
 
@@ -88,175 +88,172 @@ const removeDoubleSlashOnEnter404 = (
 };
 
 export default (
-    <Route
-        path=""
-        component={BasePage}
-    >
-        <Route
-            path="/styleGuide/component/:componentName"
-            component={StyleGuideItem}
-            title="Styleguide"
-        />
-        <Route
-            path="/styleGuide*"
-            component={StyleGuideList}
-            title="Styleguide"
-        />
-        <Route
-            path="/"
-            components={{
-                main: HomePage,
-                footer: BrandedFooter,
-            }}
-        />
-        <Route
-            path="/about"
-            component={AboutPage}
-            title="About"
-        />
-        <Route
-            path="/bushfire-support"
-            component={BushfireReliefPage}
-            title="Bushfire Support"
-        />
-        <Route
-            path="/covid-19-support"
-            component={Covid19StaticPage}
-            title="COVID 19 Support"
-        />
-        <Route
-            path="/terms"
-            component={TermsPage}
-            title="Terms of use"
-        />
-        <Route
-            path="/online-safety"
-            component={OnlineSafetyStaticPage}
-            title="Online Safety"
-        />
-        <Route
-            path="/homeless-shelters"
-            component={HomelessSheltersStaticPage}
-            title="Homeless shelters"
-        />
-        <Route
-            path="/food-banks"
-            component={FoodBanksStaticPage}
-            title="Food Banks"
-        />
-        <Route
-            path="/homeless-support"
-            component={HomelessSupportStaticPage}
-            title="Homeless support"
-        />
-        <Route
-            path="/homeless-legal-services"
-            component={HomelessLegalStaticPage}
-            title="Homeless Legal Services"
-        />
-        <Route
-            path="/homeless-financial-support"
-            component={HomelessFinanceStaticPage}
-            title="Homeless financial support"
-        />
-        <Route
-            path="/homeless-health-care"
-            component={HomelessHealthStaticPage}
-            title="Homeless Health Care"
-        />
-        <Route
-            path="/information"
-            component={InformationPage}
-            title="Information"
-        />
+    <BasePage>
+        <Switch>
+            <Route
+                path="/styleGuide/component/:componentName"
+                component={StyleGuideItem}
+                title="Styleguide"
+            />
+            <Route
+                path="/styleGuide*"
+                component={StyleGuideList}
+                title="Styleguide"
+            />
+            <Route
+                path="/"
+                component={HomePage}
+                exact={true}
+            />
+            <Route
+                path="/about"
+                component={AboutPage}
+                title="About"
+            />
+            <Route
+                path="/bushfire-support"
+                component={BushfireReliefPage}
+                title="Bushfire Support"
+            />
+            <Route
+                path="/covid-19-support"
+                component={Covid19StaticPage}
+                title="COVID 19 Support"
+            />
+            <Route
+                path="/terms"
+                component={TermsPage}
+                title="Terms of use"
+            />
+            <Route
+                path="/online-safety"
+                component={OnlineSafetyStaticPage}
+                title="Online Safety"
+            />
+            <Route
+                path="/homeless-shelters"
+                component={HomelessSheltersStaticPage}
+                title="Homeless shelters"
+            />
+            <Route
+                path="/food-banks"
+                component={FoodBanksStaticPage}
+                title="Food Banks"
+            />
+            <Route
+                path="/homeless-support"
+                component={HomelessSupportStaticPage}
+                title="Homeless support"
+            />
+            <Route
+                path="/homeless-legal-services"
+                component={HomelessLegalStaticPage}
+                title="Homeless Legal Services"
+            />
+            <Route
+                path="/homeless-financial-support"
+                component={HomelessFinanceStaticPage}
+                title="Homeless financial support"
+            />
+            <Route
+                path="/homeless-health-care"
+                component={HomelessHealthStaticPage}
+                title="Homeless Health Care"
+            />
+            <Route
+                path="/information"
+                component={InformationPage}
+                title="Information"
+            />
 
-        <Route
-            path="/not-found"
-            component={NotFoundStaticPage}
-            title="Page not found"
-        />
-        <Route
-            path="/add-service"
-            component={AddServicePage}
-            title="Add a service"
-        />
-        <Route
-            path="/service/:slug"
-            component={ServicePage}
-        />
-        <Redirect
-            from="/category/:page"
-            to="/:page"
-        />
-        <Redirect
-            from="/category/:page/in/:suburb-:state"
-            to="/:page/:suburb-:state"
-        />
-        <Redirect
-            from="/search/:search/in/:suburb-:state"
-            to="/search/:search/:suburb-:state"
-        />
-        <Redirect
-            from="/have-your-say"
-            to="/advocacy"
-        />
-        <Redirect
-            from="/have-your-say/:page"
-            to="/advocacy/:page"
-        />
-        {[
-            "/search/:search/:suburb-:state",
-            "/search/:search",
-            "/:page/:suburb-:state",
-            "/:page",
-        ].map((str) => [
             <Route
-                path={`${str}`}
-                component={ResultsPageListing}
-                title=":page in :suburb, :state"
-            />,
+                path="/not-found"
+                component={NotFoundStaticPage}
+                title="Page not found"
+            />
             <Route
-                path={`${str}/map`}
-                component={ResultsPageMap}
-                title="Map of :page in :suburb, :state"
-            />,
+                path="/add-service"
+                component={AddServicePage}
+                title="Add a service"
+            />
             <Route
-                path={`${str}/map/personalise`}
-                component={PersonalisationWizardPage}
-            />,
+                path="/service/:slug"
+                component={ServicePage}
+            />
+            <Redirect
+                from="/category/:page"
+                to="/:page"
+            />
+            <Redirect
+                from="/category/:page/in/:suburb-:state"
+                to="/:page/:suburb-:state"
+            />
+            <Redirect
+                from="/search/:search/in/:suburb-:state"
+                to="/search/:search/:suburb-:state"
+            />
+            <Redirect
+                from="/have-your-say"
+                to="/advocacy"
+            />
+            <Redirect
+                from="/have-your-say/:page"
+                to="/advocacy/:page"
+            />
+            {[
+                "/search/:search/:suburb-:state",
+                "/search/:search",
+                "/:page/:suburb-:state",
+                "/:page",
+            ].map((str) => [
+                <Route
+                    path={`${str}`}
+                    component={ResultsPageListing}
+                    title=":page in :suburb, :state"
+                />,
+                <Route
+                    path={`${str}/map`}
+                    component={ResultsPageMap}
+                    title="Map of :page in :suburb, :state"
+                />,
+                <Route
+                    path={`${str}/map/personalise`}
+                    component={PersonalisationWizardPage}
+                />,
+                <Route
+                    path={`${str}/map/personalise/page/:subpage`}
+                    component={PersonalisationWizardPage}
+                />,
+                <Route
+                    path={`${str}/map/personalise/summary`}
+                    component={PersonalisationSummaryPage}
+                />,
+                <Route
+                    path={`${str}/map/personalise/summary/:subpage`}
+                    component={PersonalisationSummaryPage}
+                />,
+                <Route
+                    path={`${str}/personalise`}
+                    component={PersonalisationWizardPage}
+                />,
+                <Route
+                    path={`${str}/personalise/page/:subpage`}
+                    component={PersonalisationWizardPage}
+                />,
+                <Route
+                    path={`${str}/personalise/summary`}
+                    component={PersonalisationSummaryPage}
+                />,
+                <Route
+                    path={`${str}/personalise/summary/:subpage`}
+                    component={PersonalisationSummaryPage}
+                />,
+            ])}
             <Route
-                path={`${str}/map/personalise/page/:subpage`}
-                component={PersonalisationWizardPage}
-            />,
-            <Route
-                path={`${str}/map/personalise/summary`}
-                component={PersonalisationSummaryPage}
-            />,
-            <Route
-                path={`${str}/map/personalise/summary/:subpage`}
-                component={PersonalisationSummaryPage}
-            />,
-            <Route
-                path={`${str}/personalise`}
-                component={PersonalisationWizardPage}
-            />,
-            <Route
-                path={`${str}/personalise/page/:subpage`}
-                component={PersonalisationWizardPage}
-            />,
-            <Route
-                path={`${str}/personalise/summary`}
-                component={PersonalisationSummaryPage}
-            />,
-            <Route
-                path={`${str}/personalise/summary/:subpage`}
-                component={PersonalisationSummaryPage}
-            />,
-        ])}
-        <Route
-            path="*"
-            component={NotFoundStaticPage}
-            onEnter={removeDoubleSlashOnEnter404}
-        />
-    </Route>
+                path="*"
+                component={NotFoundStaticPage}
+                onEnter={removeDoubleSlashOnEnter404}
+            />
+        </Switch>
+    </BasePage>
 );
