@@ -37,7 +37,7 @@ class ServicePage extends React.Component<{
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object): void {
-        if (prevProps.params.slug != this.props.params.slug) {
+        if (prevProps.match.params.slug != this.props.match.params.slug) {
             this.loadService();
         }
     }
@@ -47,7 +47,7 @@ class ServicePage extends React.Component<{
      */
     get id(): number {
         const leadingDigits = /^\d+/;
-        let slug = this.props.params.slug;
+        let slug = this.props.match.params.slug;
         let match = slug.match(leadingDigits);
 
         if (match) {
@@ -75,7 +75,7 @@ class ServicePage extends React.Component<{
             object,
             error,
         } = this.state;
-        const back = () => this.context.router.goBack();
+        const back = () => this.props.history.back();
 
         if (!object) {
             return (

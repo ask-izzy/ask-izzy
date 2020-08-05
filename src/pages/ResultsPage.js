@@ -64,8 +64,8 @@ class ResultsPage extends BaseCategoriesPage {
 
         sendEvent({
             event: "searchResults",
-            searchQuery: this.props.params.search,
-            searchPage: this.props.params.page,
+            searchQuery: this.props.match.params.search,
+            searchPage: this.props.match.params.page,
             location: storage.getLocation(),
         });
 
@@ -121,8 +121,8 @@ class ResultsPage extends BaseCategoriesPage {
     async loadMore(): Promise<void> {
         sendEvent({
             event: "LoadMoreSearchResults",
-            searchQuery: this.props.params.search,
-            searchPage: this.props.params.page,
+            searchQuery: this.props.match.params.search,
+            searchPage: this.props.match.params.page,
             location: storage.getLocation(),
         });
 
@@ -220,7 +220,7 @@ class ResultsPage extends BaseCategoriesPage {
                     {...this.state}
                     {...this.props}
                     category={this.category}
-                    search={this.props.params.search}
+                    search={this.props.match.params.search}
                     loadMore={this.renderLoadMore()}
                     title={this.title}
                     loading={this.loading}
