@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import {Link} from "react-router";
+import {Link} from "react-router-dom";
 
 import HeaderBar from "../HeaderBar";
 import type {Category} from "../../constants/categories";
@@ -70,7 +70,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
 
         try {
             // flow:disable
-            bannerName = this.props.params.page;
+            bannerName = this.props.match.params.page;
         } catch (err) {
             // continue with no banner
         }

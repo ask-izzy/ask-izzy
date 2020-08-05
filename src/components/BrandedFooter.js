@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import DemographicAboriginal from "../icons/DemographicAboriginal";
 import DemographicTorresStrait from "../icons/DemographicTorresStrait";
 import FacebookIcon from "../icons/Facebook";

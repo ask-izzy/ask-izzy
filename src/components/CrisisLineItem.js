@@ -2,7 +2,7 @@
 
 import React from "react";
 import PropTypes from "proptypes";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 import Phone from "./Phone";
 import fixtures from "../../fixtures/services";
