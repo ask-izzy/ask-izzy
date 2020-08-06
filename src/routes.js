@@ -99,11 +99,17 @@ export default (
             path="/styleGuide/component/:componentName"
             component={StyleGuideItem}
             title="Styleguide"
+            state={{
+                pageTypeContentGroup: "Style Guide"
+            }}
         />
         <Route
             path="/styleGuide*"
             component={StyleGuideList}
             title="Styleguide"
+            state={{
+                pageTypeContentGroup: "Style Guide"
+            }}
         />
         <Route
             path="/"
@@ -111,21 +117,33 @@ export default (
                 main: posthog.setFeatureFlags(HomePage),
                 footer: BrandedFooter,
             }}
+            state={{
+                pageTypeContentGroup: "Home"
+            }}
         />
         <Route
             path="/about"
             component={AboutPage}
             title="About"
+            state={{
+                pageTypeContentGroup: "Static Page"
+            }}
         />
         <Route
             path="/bushfire-support"
             component={BushfireReliefPage}
             title="Bushfire Support"
+            state={{
+                pageTypeContentGroup: "Static Page"
+            }}
         />
         <Route
             path="/covid-19-support"
             component={Covid19StaticPage}
             title="COVID 19 Support"
+            state={{
+                pageTypeContentGroup: "Static Page"
+            }}
         />
         <Route
             path="/covid-19-support/:supportCategorySlug"
@@ -136,66 +154,105 @@ export default (
                 />
             )}
             title="COVID 19 Support"
+            state={{
+                pageTypeContentGroup: "Covid Support"
+            }}
         />
         <Route
             path="/terms"
             component={TermsPage}
             title="Terms of use"
+            state={{
+                pageTypeContentGroup: "Static Page"
+            }}
         />
         <Route
             path="/online-safety"
             component={OnlineSafetyStaticPage}
             title="Online Safety"
+            state={{
+                pageTypeContentGroup: "Static Page"
+            }}
         />
         <Route
             path="/homeless-shelters"
             component={HomelessSheltersStaticPage}
             title="Homeless shelters"
+            state={{
+                pageTypeContentGroup: "Static Page"
+            }}
         />
         <Route
             path="/food-info"
             component={FoodStaticPage}
             title="Food"
+            state={{
+                pageTypeContentGroup: "Static Page"
+            }}
         />
         <Route
             path="/homeless-support"
             component={HomelessSupportStaticPage}
             title="Homeless support"
+            state={{
+                pageTypeContentGroup: "Static Page"
+            }}
         />
         <Route
             path="/homeless-legal-services"
             component={HomelessLegalStaticPage}
             title="Homeless Legal Services"
+            state={{
+                pageTypeContentGroup: "Static Page"
+            }}
         />
         <Route
             path="/homeless-financial-support"
             component={HomelessFinanceStaticPage}
             title="Homeless financial support"
+            state={{
+                pageTypeContentGroup: "Static Page"
+            }}
         />
         <Route
             path="/homeless-health-care"
             component={HomelessHealthStaticPage}
             title="Homeless Health Care"
+            state={{
+                pageTypeContentGroup: "Static Page"
+            }}
         />
         <Route
             path="/information"
             component={InformationPage}
             title="Information"
+            state={{
+                pageTypeContentGroup: "Static Page"
+            }}
         />
 
         <Route
             path="/not-found"
             component={NotFoundStaticPage}
             title="Page not found"
+            state={{
+                pageTypeContentGroup: "Page Not Found"
+            }}
         />
         <Route
             path="/add-service"
             component={AddServicePage}
             title="Add a service"
+            state={{
+                pageTypeContentGroup: "Static Page"
+            }}
         />
         <Route
             path="/service/:slug"
             component={ServicePage}
+            state={{
+                pageTypeContentGroup: "Service"
+            }}
         />
         <Redirect
             from="/category/:page"
@@ -222,54 +279,89 @@ export default (
             "/search/:search",
             "/:page/:suburb-:state",
             "/:page",
-        ].map((str) => [
+        ].map(str => [str, str.split('/')[1] === 'search'])
+        .map(([str, isSearch]) => [str, isSearch ? 'Search' : 'Category'])
+        .map(([str, pageTypeParent]) => [
             <Route
                 path={`${str}`}
                 component={ResultsPageListing}
                 title=":page in :suburb, :state"
+                state={{
+                    pageTypeContentGroup: `${pageTypeParent} Results`,
+                }}
             />,
             <Route
                 path={`${str}/map`}
                 component={ResultsPageMap}
                 title="Map of :page in :suburb, :state"
+                state={{
+                    pageTypeContentGroup: `${pageTypeParent} Map`,
+                }}
             />,
             <Route
                 path={`${str}/map/personalise`}
                 component={PersonalisationWizardPage}
+                state={{
+                    pageTypeContentGroup: `${pageTypeParent} Map Personalisation`,
+                }}
             />,
             <Route
                 path={`${str}/map/personalise/page/:subpage`}
                 component={PersonalisationWizardPage}
+                state={{
+                    pageTypeContentGroup: `${pageTypeParent} Map Personalisation`,
+                }}
             />,
             <Route
                 path={`${str}/map/personalise/summary`}
                 component={PersonalisationSummaryPage}
+                state={{
+                    pageTypeContentGroup: `${pageTypeParent} Edit Map Personalisation`,
+                }}
             />,
             <Route
                 path={`${str}/map/personalise/summary/:subpage`}
                 component={PersonalisationSummaryPage}
+                state={{
+                    pageTypeContentGroup: `${pageTypeParent} Edit Map Personalisation`,
+                }}
             />,
             <Route
                 path={`${str}/personalise`}
                 component={PersonalisationWizardPage}
+                state={{
+                    pageTypeContentGroup: `${pageTypeParent} Personalisation`,
+                }}
             />,
             <Route
                 path={`${str}/personalise/page/:subpage`}
                 component={PersonalisationWizardPage}
+                state={{
+                    pageTypeContentGroup: `${pageTypeParent} Personalisation`,
+                }}
             />,
             <Route
                 path={`${str}/personalise/summary`}
                 component={PersonalisationSummaryPage}
+                state={{
+                    pageTypeContentGroup: `${pageTypeParent} Edit Personalisation`
+                }}
             />,
             <Route
                 path={`${str}/personalise/summary/:subpage`}
                 component={PersonalisationSummaryPage}
+                state={{
+                    pageTypeContentGroup: `${pageTypeParent} Edit Personalisation`,
+                }}
             />,
         ])}
         <Route
             path="*"
             component={NotFoundStaticPage}
             onEnter={removeDoubleSlashOnEnter404}
+            state={{
+                pageTypeContentGroup: "Page Not Found"
+            }}
         />
     </Route>
 );

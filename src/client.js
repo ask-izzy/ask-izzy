@@ -9,7 +9,7 @@ import routes from "./routes";
 import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
-import posthog from "./utils/posthog"
+import posthog from "./utils/posthog";
 
 window.searchTest = searchTest;
 window.categories = categories;
@@ -111,15 +111,43 @@ function History() {
 ReactDOM.hydrate(
     <Router
         history={History()}
-        onUpdate={() => {
-            // Since Ask Izzy is a SPA we need to manually register each
-            // new page view
+        onUpdate={function () {
+            // Gather and set analytics environment variables
+            let catKey = this.state.params.page
+            let catContentGroup = '[Non-Category Page]'
+            let cat
+            if (catKey) {
+                cat = categories.find(cat => cat.key === catKey)
+                if (cat) {
+                    catContentGroup = cat.name
+                } else {
+                    catContentGroup = '[Not a Valid Category]'
+                }
+            }
+            const routeState = this.state
+                .routes[this.state.routes.length-1].state
+            const pageTypeContentGroup = routeState && 
+                routeState.pageTypeContentGroup
             sendEvent({
-                event: "Page Viewed",
-            });
+                category: (cat && cat.name) || undefined,
+                catContentGroup,
+                pageTypeContentGroup
+            }, 'GTM-54BTPQM');
 
-            if (posthog.posthogShouldBeLoaded) {
-                posthog.client.capture("$pageview");
+            // Don't record page view if redirecting
+            if(location.pathname === this.state.location.pathname) {
+                // Since Ask Izzy is a SPA we need to manually register each
+                // new page view
+                sendEvent({
+                    event: "Page Viewed",
+                });
+                sendEvent({
+                    event: "Page Viewed",
+                }, 'GTM-54BTPQM');
+
+                if (posthog.posthogShouldBeLoaded) {
+                    posthog.client.capture("$pageview");
+                }
             }
         }}
     >{routes}</Router>,
