@@ -9,6 +9,7 @@ import routes from "./routes";
 import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
+import covidCategories from "./constants/covidSupportCategories";
 import posthog from "./utils/posthog";
 
 window.searchTest = searchTest;
@@ -113,26 +114,74 @@ ReactDOM.hydrate(
         history={History()}
         onUpdate={function () {
             // Gather and set analytics environment variables
-            let catKey = this.state.params.page
-            let catContentGroup = '[Non-Category Page]'
-            let cat
-            if (catKey) {
-                cat = categories.find(cat => cat.key === catKey)
-                if (cat) {
-                    catContentGroup = cat.name
+            const routeParams = this.state.params
+            const routes = this.state.routes
+            const routeState = Object.assign(
+                {},
+                ...routes.map(route => route.state)
+            )
+            const pageVars = {
+                resultsType: undefined,
+                category: undefined,
+                categoryDisplayName: undefined,
+                covidCategory: undefined,
+                covidCategoryDisplayName: undefined,
+                pageType: undefined,
+                
+            }
+            if (routes.find(r => r.name === 'Service Listing')) {
+                if (routeParams.page) {
+                    pageVars.resultsType = 'Category'
+                    pageVars.category = categories
+                        .find(cat => cat.key === routeParams.page) ||
+                        null
                 } else {
-                    catContentGroup = '[Not a Valid Category]'
+                    pageVars.resultsType = 'Search'
                 }
             }
-            const routeState = this.state
-                .routes[this.state.routes.length-1].state
-            const pageTypeContentGroup = routeState && 
-                routeState.pageTypeContentGroup
-            sendEvent({
-                category: (cat && cat.name) || undefined,
-                catContentGroup,
-                pageTypeContentGroup
-            }, 'GTM-54BTPQM');
+            if (pageVars.category === undefined) {
+                pageVars.categoryDisplayName = '[Non-Category Page]'
+            } else if (pageVars.category === null) {
+                pageVars.categoryDisplayName = '[Not a Valid Category]'
+            } else {
+                pageVars.categoryDisplayName = pageVars.category.name
+            }
+
+            if (routes.find(r => r.name === 'Covid Support Category')) {
+                pageVars.covidCategory = covidCategories
+                    .find(
+                        cat => cat.slug === routeParams.supportCategorySlug
+                    ) || null
+            }
+            if (pageVars.covidCategory === undefined) {
+                pageVars.covidCategoryDisplayName = '[Non-Covid Category Page]'
+            } else if (pageVars.covidCategory === null) {
+                pageVars.covidCategoryDisplayName = '[Not a Valid Covid Category]'
+            } else {
+                pageVars.covidCategoryDisplayName = pageVars.covidCategory.title
+            }
+
+            let pageType = routeState.pageType
+            if (typeof pageType === 'function') {
+                pageType = pageType(pageVars)
+            }
+            if (pageType instanceof Array) {
+                pageType = pageType.filter(type => type)
+            } else {
+                pageType = [pageType]
+            }
+            pageVars.pageType = pageType
+
+            const gtmVars = Object.assign({}, pageVars, {
+                contentGroup_PageTypeLevel1: pageVars
+                    .pageType.slice(0, 1).join(" - "),
+                contentGroup_PageTypeLevel2: pageVars
+                    .pageType.slice(0, 2).join(" - "),
+                contentGroup_PageTypeLevel3: pageVars
+                    .pageType.slice(0, 3).join(" - "),
+            })
+
+            sendEvent(gtmVars, 'GTM-54BTPQM');
 
             // Don't record page view if redirecting
             if(location.pathname === this.state.location.pathname) {
