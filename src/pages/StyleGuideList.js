@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import components from "../components";
 
 export default class StyleGuideList extends React.Component<{}, void> {

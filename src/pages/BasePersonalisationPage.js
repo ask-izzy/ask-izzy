@@ -1,7 +1,6 @@
 /* flow:disable */
 
 import PropTypes from "proptypes";
-import { browserHistory } from "react-router";
 
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
@@ -20,7 +19,7 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
         // just go back.
 
 
-        browserHistory.goBack();
+        this.context.router.goBack();
     }
 
     nextStep(): void {

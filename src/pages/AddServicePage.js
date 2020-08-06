@@ -8,7 +8,7 @@ import components from "../components";
 declare var ISS_URL: string;
 
 type Props = {
-    router: {
+    history: {
         goBack: Function,
     },
 }
@@ -74,7 +74,7 @@ class AddServicePage extends React.Component<Props, State> {
     }
 
     render() {
-        const { router } = this.props;
+        const { history } = this.props;
 
         const body = this.state.isFormDone ? this.renderSuccessMessage()
             : this.renderForm();
@@ -83,7 +83,7 @@ class AddServicePage extends React.Component<Props, State> {
             <div className="AddServicePage">
                 <components.AppBar
                     title="Add a service"
-                    onBackTouchTap={router.goBack.bind(router)}
+                    onBackTouchTap={history.goBack.bind(history)}
                 />
 
                 <div className="body">

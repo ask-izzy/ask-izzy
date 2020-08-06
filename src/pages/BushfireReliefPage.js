@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 import * as React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import StaticPage from "./StaticPage";
 import MobileDetect from "../components/higherorder/MobileDetect";
 
