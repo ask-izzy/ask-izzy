@@ -6,11 +6,11 @@ import url from "url";
 
 import * as React from "react";
 import ReactDOMServer from "react-dom/server";
-import { match, RouterContext } from "react-router";
+import { StaticRouter } from "react-router-dom";
 import mkdirp from "mkdirp";
 
-import routes, { makeTitle } from "../routes";
-import badRouteParams from "./not_found";
+import routes, { makeTitle, routeList } from "../routes";
+
 import HtmlDocument from "./HtmlDocument";
 // flow:disable
 import webpackStats from "./webpack-stats";
@@ -32,78 +32,69 @@ const version = hasVersionFile() &&
 
 function renderPage(uri: string, path: string): void {
     const reqUrl = url.parse(uri);
+    const context = {};
 
-    match(
-        { routes, location: reqUrl },
-        (error, redirectLocation, renderProps) => {
-            if (error) {
-                throw error;
-            } else if (redirectLocation) {
-                throw badRouteParams;
-            } else if (!renderProps) {
-                throw badRouteParams;
-            }
-            renderProps.router = Object.assign(
-                {},
-                renderProps.router,
-                {
-                    isRenderingStatic: true,
+    if (reqUrl.pathname.startsWith("/static/") |
+    reqUrl.pathname.startsWith("/session/")) {
+        next();
+    } else {
+
+        const title = makeTitle(
+            routes,
+            {}
+        )
+        const markup = ReactDOMServer.renderToString(
+            <StaticRouter location={{pathname: path}}
+                context={context}
+            >{routeList}</StaticRouter>
+        );
+
+        const helmet = Helmet.renderStatic();
+
+        // The application component is rendered to static markup
+        // and sent as response.
+        const html = ReactDOMServer.renderToStaticMarkup(
+            <HtmlDocument
+                title={title}
+                markup={markup}
+                script={webpackStats.script}
+                css={webpackStats.css}
+                helmet={helmet}
+                currentUrl={reqUrl}
+                envPath={version ?
+                    `/static/env-${version}.js` : "/static/env.js"
                 }
-            )
-            const title = makeTitle(
-                renderProps.routes,
-                renderProps.params
-            )
-            const markup = ReactDOMServer.renderToString(
-                <RouterContext {...renderProps} />
-            );
+                requestInterceptorPath={version ?
+                    `/static/scripts/request-interceptor-${version}.js`
+                    : "/static/scripts/request-interceptor.js"
+                }
+                siteName="Ask Izzy"
+                description={
+                    `Ask Izzy is a mobile website that connects` +
+                    ` people who are in crisis with the services` +
+                    ` they need right now and nearby.`
+                }
+                ogTitle={
+                    `Ask Izzy: Find the help you need, now and nearby`
+                }
+                ogDescription={
+                    `Ask Izzy is a mobile website that connects ` +
+                    `people in need with housing, a meal, money ` +
+                    `help, health and wellbeing services, family ` +
+                    `violence support, counselling and much more.`
+                }
+            />
+        );
+        const doctype = "<!DOCTYPE html>";
 
-            const helmet = Helmet.renderStatic();
+        mkdirp.sync(`public/${dirname(path)}`)
+        fs.writeFileSync(
+            `public/${path}`,
+            doctype + html
+        );
+        console.log(uri, path);
+    }
 
-            // The application component is rendered to static markup
-            // and sent as response.
-            const html = ReactDOMServer.renderToStaticMarkup(
-                <HtmlDocument
-                    title={title}
-                    markup={markup}
-                    script={webpackStats.script}
-                    css={webpackStats.css}
-                    helmet={helmet}
-                    currentUrl={reqUrl}
-                    envPath={version ?
-                        `/static/env-${version}.js` : "/static/env.js"
-                    }
-                    requestInterceptorPath={version ?
-                        `/static/scripts/request-interceptor-${version}.js`
-                        : "/static/scripts/request-interceptor.js"
-                    }
-                    siteName="Ask Izzy"
-                    description={
-                        `Ask Izzy is a mobile website that connects` +
-                      ` people who are in crisis with the services` +
-                      ` they need right now and nearby.`
-                    }
-                    ogTitle={
-                        `Ask Izzy: Find the help you need, now and nearby`
-                    }
-                    ogDescription={
-                        `Ask Izzy is a mobile website that connects ` +
-                      `people in need with housing, a meal, money ` +
-                      `help, health and wellbeing services, family ` +
-                      `violence support, counselling and much more.`
-                    }
-                />
-            );
-            const doctype = "<!DOCTYPE html>";
-
-            mkdirp.sync(`public/${dirname(path)}`)
-            fs.writeFileSync(
-                `public/${path}`,
-                doctype + html
-            );
-            console.log(uri, path);
-        }
-    )
 }
 
 function *expandRoutes(
@@ -162,4 +153,4 @@ function renderRoute(route: React.Element<any>, prefix: string): void {
 
 }
 
-renderRoute(routes, "");
+renderRoute(routeList, "");
