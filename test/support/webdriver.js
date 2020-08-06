@@ -127,7 +127,9 @@ export async function cleanDriverSession(
     await waitForStorage(driver);
     await driver.executeScript(() => {
         IzzyStorage.clear();
-        window.dataLayer = [];
+        Object.keys(window)
+            .filter(key => key.match(/^dataLayer/))
+            .map(key => window[key] = []);
     });
 }
 

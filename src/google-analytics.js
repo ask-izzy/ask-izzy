@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             const gtmEnv = window.GOOGLE_TAG_MANAGER_ENV.split("~")[index];
             const urlParams = new URLSearchParams(window.location.search);
             const gtmIsDebug = !!urlParams.get('gtm_debug');
+            const dataLayerKey = `dataLayer${gtmId.split('-')[1]}`;
 
             // Tag manager
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             '//' + window.PROXY_TAGS + '/gtm.js?id='+i+dl+(gtmIsDebug?'&gtm_debug=x':'')+'&gtm_auth='+
             gtmAuth+'&gtm_preview='+gtmEnv;
             f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer',gtmId);
+            })(window,document,'script',dataLayerKey,gtmId);
         }
     }
 
