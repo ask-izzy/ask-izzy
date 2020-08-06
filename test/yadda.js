@@ -88,6 +88,7 @@ let processFile = (file) => {
                     "Google Tag Manager events fired:",
                     await driver.executeScript(() => {
                         let dataLayersDump = []
+
                         Object.keys(window)
                             .filter(key => key.match(/^dataLayer/))
                             .map(key => dataLayersDump.push(

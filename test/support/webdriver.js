@@ -127,9 +127,12 @@ export async function cleanDriverSession(
     await waitForStorage(driver);
     await driver.executeScript(() => {
         IzzyStorage.clear();
+        // Wipe analytics dataLayers
         Object.keys(window)
             .filter(key => key.match(/^dataLayer/))
-            .map(key => window[key] = []);
+            .forEach(key => {
+                window[key] = []
+            });
     });
 }
 

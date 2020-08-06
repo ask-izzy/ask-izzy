@@ -100,7 +100,7 @@ export default (
             component={StyleGuideItem}
             title="Styleguide"
             state={{
-                pageType: "Style Guide"
+                pageType: "Style Guide",
             }}
         />
         <Route
@@ -108,7 +108,7 @@ export default (
             component={StyleGuideList}
             title="Styleguide"
             state={{
-                pageType: "Style Guide"
+                pageType: "Style Guide",
             }}
         />
         <Route
@@ -118,7 +118,7 @@ export default (
                 footer: BrandedFooter,
             }}
             state={{
-                pageType: "Home"
+                pageType: "Home",
             }}
         />
         <Route
@@ -276,7 +276,7 @@ export default (
             component={NotFoundStaticPage}
             title="Page not found"
             state={{
-                pageType: "Page Not Found"
+                pageType: "Page Not Found",
             }}
         />
         <Route
@@ -294,7 +294,7 @@ export default (
             path="/service/:slug"
             component={ServicePage}
             state={{
-                pageType: "Service"
+                pageType: "Service",
             }}
         />
         <Redirect
@@ -321,142 +321,142 @@ export default (
             path=""
             name="Service Listing"
         >
-        {[
-            "/search/:search/:suburb-:state",
-            "/search/:search",
-            "/:page/:suburb-:state",
-            "/:page",
-        ].map(str => [
-            <Route
-                path={`${str}`}
-                component={ResultsPageListing}
-                title=":page in :suburb, :state"
-                state={{
-                    pageType: vars => [
-                        vars.resultsType,
-                        'Results List',
-                        vars.resultsType === 'Category' ?
-                            `Category: ${vars.categoryDisplayName}` : null
-                    ],
-                }}
-            />,
-            <Route
-                path={`${str}/map`}
-                component={ResultsPageMap}
-                title="Map of :page in :suburb, :state"
-                state={{
-                    pageType: vars => [
-                        vars.resultsType,
-                        'Results Map',
-                        vars.resultsType === 'Category' ?
-                            `Category: ${vars.categoryDisplayName}` : null
-                    ],
-                }}
-            />,
-            <Route
-                path={`${str}/map/personalise`}
-                component={PersonalisationWizardPage}
-                state={{
-                    pageType: vars => [
-                        vars.resultsType,
-                        'Results Map Personalisation',
-                        vars.resultsType === 'Category' ?
-                            `Category: ${vars.categoryDisplayName}` : null
-                    ],
-                }}
-            />,
-            <Route
-                path={`${str}/map/personalise/page/:subpage`}
-                component={PersonalisationWizardPage}
-                state={{
-                    pageType: vars => [
-                        vars.resultsType,
-                        'Results Map Personalisation',
-                        vars.resultsType === 'Category' ?
-                            `Category: ${vars.categoryDisplayName}` : null
-                    ],
-                }}
-            />,
-            <Route
-                path={`${str}/map/personalise/summary`}
-                component={PersonalisationSummaryPage}
-                state={{
-                    pageType: vars => [
-                        vars.resultsType,
-                        'Edit Map Personalisation',
-                        vars.resultsType === 'Category' ?
-                            `Category: ${vars.categoryDisplayName}` : null
-                    ],
-                }}
-            />,
-            <Route
-                path={`${str}/map/personalise/summary/:subpage`}
-                component={PersonalisationSummaryPage}
-                state={{
-                    pageType: vars => [
-                        vars.resultsType,
-                        'Edit Map Personalisation',
-                        vars.resultsType === 'Category' ?
-                            `Category: ${vars.categoryDisplayName}` : null
-                    ],
-                }}
-            />,
-            <Route
-                path={`${str}/personalise`}
-                component={PersonalisationWizardPage}
-                state={{
-                    pageType: vars => [
-                        vars.resultsType,
-                        'List Personalisation',
-                        vars.resultsType === 'Category' ?
-                            `Category: ${vars.categoryDisplayName}` : null
-                    ],
-                }}
-            />,
-            <Route
-                path={`${str}/personalise/page/:subpage`}
-                component={PersonalisationWizardPage}
-                state={{
-                    pageType: vars => [
-                        vars.resultsType,
-                        'List Personalisation',
-                        vars.resultsType === 'Category' ?
-                            `Category: ${vars.categoryDisplayName}` : null
-                    ],
-                }}
-            />,
-            <Route
-                path={`${str}/personalise/summary`}
-                component={PersonalisationSummaryPage}
-                state={{
-                    pageType: vars => [
-                        vars.resultsType,
-                        'Edit List Personalisation',
-                        vars.resultsType === 'Category' ?
-                            `Category: ${vars.categoryDisplayName}` : null
-                    ],
-                }}
-            />,
-            <Route
-                path={`${str}/personalise/summary/:subpage`}
-                component={PersonalisationSummaryPage}
-                state={{
-                    pageType: vars => [
-                        vars.resultsType,
-                        'Edit List Personalisation',
-                        vars.resultsType === 'Category' ?
-                            `Category: ${vars.categoryDisplayName}` : null
-                    ],
-                }}
-            />,
-        ])}
+            {[
+                "/search/:search/:suburb-:state",
+                "/search/:search",
+                "/:page/:suburb-:state",
+                "/:page",
+            ].map(str => [
+                <Route
+                    path={`${str}`}
+                    component={ResultsPageListing}
+                    title=":page in :suburb, :state"
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Results List",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/map`}
+                    component={ResultsPageMap}
+                    title="Map of :page in :suburb, :state"
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Results Map",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/map/personalise`}
+                    component={PersonalisationWizardPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Results Map Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/map/personalise/page/:subpage`}
+                    component={PersonalisationWizardPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Results Map Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/map/personalise/summary`}
+                    component={PersonalisationSummaryPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Edit Map Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/map/personalise/summary/:subpage`}
+                    component={PersonalisationSummaryPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Edit Map Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/personalise`}
+                    component={PersonalisationWizardPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "List Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/personalise/page/:subpage`}
+                    component={PersonalisationWizardPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "List Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/personalise/summary`}
+                    component={PersonalisationSummaryPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Edit List Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/personalise/summary/:subpage`}
+                    component={PersonalisationSummaryPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Edit List Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+            ])}
         </Route>
         <Route
             path="*"
             component={NotFoundStaticPage}
             onEnter={removeDoubleSlashOnEnter404}
             state={{
-                pageType: "Page Not Found"
+                pageType: "Page Not Found",
             }}
         />
     </Route>
