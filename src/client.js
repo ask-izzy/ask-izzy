@@ -69,11 +69,11 @@ window.pi = function() {
 }
 
 // Report JS errors to google analytics
-window.addEventListener("error", (e) => {
+window.addEventListener("error", (evt) => {
     sendEvent({
         event: "exception",
-        exDescription: `JavaScript Error: ${e.message} ${e.filename}: ${
-            e.lineno
+        exDescription: `JavaScript Error: ${evt.message} ${evt.filename}: ${
+            evt.lineno
         }`,
     });
 });

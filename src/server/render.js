@@ -7,7 +7,6 @@ import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import url from "url";
 import routes, { makeTitle } from "../routes";
-import badRouteParams from "./not_found";
 import HtmlDocument from "./HtmlDocument";
 import Helmet from "react-helmet";
 
