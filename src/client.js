@@ -9,12 +9,10 @@ import routes from "./routes";
 import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
-import { createBrowserHistory } from "history"
+import history from "./utils/history";
 
 window.searchTest = searchTest;
 window.categories = categories;
-
-const history = createBrowserHistory();
 
 // Preventing the Google Maps libary from downloading an extra font
 // http://stackoverflow.com/questions/25523806/google-maps-v3-prevent-api-from-loading-roboto-font
