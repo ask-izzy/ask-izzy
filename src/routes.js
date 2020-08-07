@@ -99,11 +99,17 @@ export default (
             path="/styleGuide/component/:componentName"
             component={StyleGuideItem}
             title="Styleguide"
+            state={{
+                pageType: "Style Guide",
+            }}
         />
         <Route
             path="/styleGuide*"
             component={StyleGuideList}
             title="Styleguide"
+            state={{
+                pageType: "Style Guide",
+            }}
         />
         <Route
             path="/"
@@ -111,21 +117,42 @@ export default (
                 main: posthog.setFeatureFlags(HomePage),
                 footer: BrandedFooter,
             }}
+            state={{
+                pageType: "Home",
+            }}
         />
         <Route
             path="/about"
             component={AboutPage}
             title="About"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "About",
+                ],
+            }}
         />
         <Route
             path="/bushfire-support"
             component={BushfireReliefPage}
             title="Bushfire Support"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Bushfire Support",
+                ],
+            }}
         />
         <Route
             path="/covid-19-support"
             component={Covid19StaticPage}
             title="COVID 19 Support"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "COVID 19 Support",
+                ],
+            }}
         />
         <Route
             path="/covid-19-support/:supportCategorySlug"
@@ -135,67 +162,140 @@ export default (
                     {...props}
                 />
             )}
+            name="Covid Support Category"
             title="COVID 19 Support"
+            state={{
+                pageType: vars => [
+                    "Covid Support",
+                    vars.covidCategoryDisplayName,
+                ],
+            }}
         />
         <Route
             path="/terms"
             component={TermsPage}
             title="Terms of use"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Terms of Use",
+                ],
+            }}
         />
         <Route
             path="/online-safety"
             component={OnlineSafetyStaticPage}
             title="Online Safety"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Online Safety",
+                ],
+            }}
         />
         <Route
             path="/homeless-shelters"
             component={HomelessSheltersStaticPage}
             title="Homeless shelters"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Homeless Shelters",
+                ],
+            }}
         />
         <Route
             path="/food-info"
             component={FoodStaticPage}
             title="Food"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Food",
+                ],
+            }}
         />
         <Route
             path="/homeless-support"
             component={HomelessSupportStaticPage}
             title="Homeless support"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Homeless Support",
+                ],
+            }}
         />
         <Route
             path="/homeless-legal-services"
             component={HomelessLegalStaticPage}
             title="Homeless Legal Services"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Homeless Legal Services",
+                ],
+            }}
         />
         <Route
             path="/homeless-financial-support"
             component={HomelessFinanceStaticPage}
             title="Homeless financial support"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Homeless Financial Support",
+                ],
+            }}
         />
         <Route
             path="/homeless-health-care"
             component={HomelessHealthStaticPage}
             title="Homeless Health Care"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Homeless Health Care",
+                ],
+            }}
         />
         <Route
             path="/information"
             component={InformationPage}
             title="Information"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Information",
+                ],
+            }}
         />
 
         <Route
             path="/not-found"
             component={NotFoundStaticPage}
             title="Page not found"
+            state={{
+                pageType: "Page Not Found",
+            }}
         />
         <Route
             path="/add-service"
             component={AddServicePage}
             title="Add a service"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Add a Service",
+                ],
+            }}
         />
         <Route
             path="/service/:slug"
             component={ServicePage}
+            state={{
+                pageType: "Service",
+            }}
         />
         <Redirect
             from="/category/:page"
@@ -217,59 +317,147 @@ export default (
             from="/have-your-say/:page"
             to="/advocacy/:page"
         />
-        {[
-            "/search/:search/:suburb-:state",
-            "/search/:search",
-            "/:page/:suburb-:state",
-            "/:page",
-        ].map((str) => [
-            <Route
-                path={`${str}`}
-                component={ResultsPageListing}
-                title=":page in :suburb, :state"
-            />,
-            <Route
-                path={`${str}/map`}
-                component={ResultsPageMap}
-                title="Map of :page in :suburb, :state"
-            />,
-            <Route
-                path={`${str}/map/personalise`}
-                component={PersonalisationWizardPage}
-            />,
-            <Route
-                path={`${str}/map/personalise/page/:subpage`}
-                component={PersonalisationWizardPage}
-            />,
-            <Route
-                path={`${str}/map/personalise/summary`}
-                component={PersonalisationSummaryPage}
-            />,
-            <Route
-                path={`${str}/map/personalise/summary/:subpage`}
-                component={PersonalisationSummaryPage}
-            />,
-            <Route
-                path={`${str}/personalise`}
-                component={PersonalisationWizardPage}
-            />,
-            <Route
-                path={`${str}/personalise/page/:subpage`}
-                component={PersonalisationWizardPage}
-            />,
-            <Route
-                path={`${str}/personalise/summary`}
-                component={PersonalisationSummaryPage}
-            />,
-            <Route
-                path={`${str}/personalise/summary/:subpage`}
-                component={PersonalisationSummaryPage}
-            />,
-        ])}
+        <Route
+            path=""
+            name="Service Listing"
+        >
+            {[
+                "/search/:search/:suburb-:state",
+                "/search/:search",
+                "/:page/:suburb-:state",
+                "/:page",
+            ].map(str => [
+                <Route
+                    path={`${str}`}
+                    component={ResultsPageListing}
+                    title=":page in :suburb, :state"
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Results List",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/map`}
+                    component={ResultsPageMap}
+                    title="Map of :page in :suburb, :state"
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Results Map",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/map/personalise`}
+                    component={PersonalisationWizardPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Results Map Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/map/personalise/page/:subpage`}
+                    component={PersonalisationWizardPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Results Map Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/map/personalise/summary`}
+                    component={PersonalisationSummaryPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Edit Map Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/map/personalise/summary/:subpage`}
+                    component={PersonalisationSummaryPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Edit Map Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/personalise`}
+                    component={PersonalisationWizardPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "List Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/personalise/page/:subpage`}
+                    component={PersonalisationWizardPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "List Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/personalise/summary`}
+                    component={PersonalisationSummaryPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Edit List Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+                <Route
+                    path={`${str}/personalise/summary/:subpage`}
+                    component={PersonalisationSummaryPage}
+                    state={{
+                        pageType: vars => [
+                            vars.resultsType,
+                            "Edit List Personalisation",
+                            vars.resultsType === "Category" ?
+                                `Category: ${vars.categoryDisplayName}` : null,
+                        ],
+                    }}
+                />,
+            ])}
+        </Route>
         <Route
             path="*"
             component={NotFoundStaticPage}
             onEnter={removeDoubleSlashOnEnter404}
+            state={{
+                pageType: "Page Not Found",
+            }}
         />
     </Route>
 );
