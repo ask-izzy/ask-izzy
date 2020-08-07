@@ -9,7 +9,8 @@ import routes from "./routes";
 import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
-import posthog from "./utils/posthog"
+import covidCategories from "./constants/covidSupportCategories";
+import posthog from "./utils/posthog";
 
 window.searchTest = searchTest;
 window.categories = categories;
@@ -111,15 +112,36 @@ function History() {
 ReactDOM.hydrate(
     <Router
         history={History()}
-        onUpdate={() => {
-            // Since Ask Izzy is a SPA we need to manually register each
-            // new page view
-            sendEvent({
-                event: "Page Viewed",
-            });
+        onUpdate={function() {
+            // Gather and set analytics environment variables
+            const routeParams = this.state.params
+            const routes = this.state.routes
+            const pageVars = getPageVars(routes, routeParams)
+            const gtmVars = Object.assign({}, pageVars, {
+                contentGroup_PageTypeLevel1: pageVars
+                    .pageType.slice(0, 1).join(" - "),
+                contentGroup_PageTypeLevel2: pageVars
+                    .pageType.slice(0, 2).join(" - "),
+                contentGroup_PageTypeLevel3: pageVars
+                    .pageType.slice(0, 3).join(" - "),
+            })
 
-            if (posthog.posthogShouldBeLoaded) {
-                posthog.client.capture("$pageview");
+            sendEvent(gtmVars, "GTM-54BTPQM");
+
+            // Don't record page view if redirecting
+            if (location.pathname === this.state.location.pathname) {
+                // Since Ask Izzy is a SPA we need to manually register each
+                // new page view
+                sendEvent({
+                    event: "Page Viewed",
+                });
+                sendEvent({
+                    event: "Page Viewed",
+                }, "GTM-54BTPQM");
+
+                if (posthog.posthogShouldBeLoaded) {
+                    posthog.client.capture("$pageview");
+                }
             }
         }}
     >{routes}</Router>,
@@ -148,3 +170,67 @@ window.addEventListener("error", (e) => {
         }`,
     });
 });
+
+function getPageVars(routes, routeParams) {
+    const routeState = Object.assign(
+        {},
+        ...routes.map(route => route.state)
+    )
+    const pageVars = {
+        resultsType: undefined,
+        category: undefined,
+        categoryDisplayName: undefined,
+        covidCategory: undefined,
+        covidCategoryDisplayName: undefined,
+        pageType: undefined,
+    }
+
+    if (routes.find(r => r.name === "Service Listing")) {
+        if (routeParams.page) {
+            pageVars.resultsType = "Category"
+            pageVars.category = categories
+                .find(cat => cat.key === routeParams.page) ||
+                null
+        } else {
+            pageVars.resultsType = "Search"
+        }
+    }
+    if (pageVars.category === undefined) {
+        pageVars.categoryDisplayName = "[Non-Category Page]"
+    } else if (pageVars.category === null) {
+        pageVars.categoryDisplayName = "[Not a Valid Category]"
+    } else {
+        pageVars.categoryDisplayName = pageVars.category.name
+    }
+
+    if (routes.find(r => r.name === "Covid Support Category")) {
+        pageVars.covidCategory = covidCategories
+            .find(
+                cat => cat.slug === routeParams.supportCategorySlug
+            ) || null
+    }
+    if (pageVars.covidCategory === undefined) {
+        pageVars.covidCategoryDisplayName = "[Non-Covid Category Page]"
+    } else if (pageVars.covidCategory === null) {
+        pageVars.covidCategoryDisplayName =
+            "[Not a Valid Covid Category]"
+    } else {
+        pageVars.covidCategoryDisplayName = pageVars.covidCategory.title
+    }
+
+    pageVars.pageType = processPageType(routeState.pageType, pageVars)
+
+    return pageVars
+}
+
+function processPageType(pageType, pageVars) {
+    if (typeof pageType === "function") {
+        pageType = pageType(pageVars)
+    }
+    if (pageType instanceof Array) {
+        pageType = pageType.filter(type => type)
+    } else {
+        pageType = [pageType]
+    }
+    return pageType
+}
