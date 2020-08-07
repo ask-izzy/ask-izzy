@@ -4,6 +4,7 @@ import PropTypes from "proptypes";
 
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
+import history from "../utils/history";
 
 class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     ExtraState
@@ -17,13 +18,12 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     previousStep(): void {
         // If our subpage has an onPreviousStep hook, call it, otherwise
         // just go back.
-
-
-        this.context.router.goBack();
+        history.back();
     }
 
     nextStep(): void {
         // If our subpage has an onNextStep hook, call it.
+        this.refs &&
         this.refs.subpage &&
         this.refs.subpage.onNextStep &&
         this.refs.subpage.onNextStep();
@@ -82,7 +82,7 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     }
 
     navigate(subpath: string): void {
-        this.context.router.push(
+        history.push(
             this.urlFor(subpath),
         );
     }
@@ -92,9 +92,11 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     }
 
     get currentComponentIdx(): number {
-        return this.personalisationComponents.findIndex(component =>
-            component.defaultProps.name === this.props.params.subpage
-        );
+        return this.personalisationComponents.findIndex(component => {
+            if (this.props.params) {
+                component.defaultProps.name === this.props.params.subpage
+            }
+        });
     }
 }
 
