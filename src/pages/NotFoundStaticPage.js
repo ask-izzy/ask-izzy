@@ -2,18 +2,18 @@
 /* eslint-disable max-len */
 
 import React from "react";
-import PropTypes from "proptypes";
 import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
 
-export default class NotFoundStaticPage extends React.Component<{}> {
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
+type Props = {
+    history: any,
+}
+
+export default class NotFoundStaticPage extends React.Component<Props, void> {
 
     render() {
-        let back = () => this.context.router.goBack();
+        let back = () => this.props.history.goBack();
 
         return (
             <div

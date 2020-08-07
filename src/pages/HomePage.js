@@ -9,11 +9,9 @@ import NavBar from "../components/NavBar";
 import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
 import { resetDfvOptions } from "../utils";
+import history from "../utils/history";
 
 class HomePage extends React.Component<{}, void> {
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
 
     search: ?HTMLInputElement;
 
@@ -35,7 +33,7 @@ class HomePage extends React.Component<{}, void> {
 
         storage.setSearch(search);
 
-        this.context.router.push(
+        history.push(
             `/search/${encodeURIComponent(search)}`
         );
     }

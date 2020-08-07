@@ -172,7 +172,7 @@ class ResultsPage extends BaseCategoriesPage {
         }
 
         if (!event.defaultPrevented) {
-            this.context.router.push(
+            this.props.history.push(
                 "/",
             );
         }

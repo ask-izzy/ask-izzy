@@ -1,18 +1,14 @@
 /* @flow */
 
 import * as React from "react";
-import PropTypes from "proptypes";
 
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import components from "../components";
 import FloatFromBottom from "../components/FloatFromBottom";
 import storage from "../storage";
+import history from "../utils/history";
 
 class PersonalisationSummaryPage extends BasePersonalisationPage {
-
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
 
     constructor(props: Object) {
         super(props);
@@ -35,7 +31,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
     clearAll(event: SyntheticInputEvent<>): void {
         event.preventDefault();
         storage.clear();
-        this.context.router.push("/");
+        history.push("/");
     }
 
     componentDidMount(): void {
