@@ -208,43 +208,53 @@ export const routeList = (
                 path={`${str}`}
                 component={ResultsPageListing}
                 title=":page in :suburb, :state"
+                exact={true}
             />,
             <Route
                 path={`${str}/map`}
                 component={ResultsPageMap}
                 title="Map of :page in :suburb, :state"
+                exact={true}
             />,
             <Route
                 path={`${str}/map/personalise`}
                 component={PersonalisationWizardPage}
+                exact={true}
             />,
             <Route
                 path={`${str}/map/personalise/page/:subpage`}
                 component={PersonalisationWizardPage}
+                exact={true}
             />,
             <Route
                 path={`${str}/map/personalise/summary`}
                 component={PersonalisationSummaryPage}
+                exact={true}
             />,
             <Route
                 path={`${str}/map/personalise/summary/:subpage`}
                 component={PersonalisationSummaryPage}
+                exact={true}
             />,
             <Route
                 path={`${str}/personalise`}
                 component={PersonalisationWizardPage}
+                exact={true}
             />,
             <Route
                 path={`${str}/personalise/page/:subpage`}
                 component={PersonalisationWizardPage}
+                exact={true}
             />,
             <Route
                 path={`${str}/personalise/summary`}
                 component={PersonalisationSummaryPage}
+                exact={true}
             />,
             <Route
                 path={`${str}/personalise/summary/:subpage`}
                 component={PersonalisationSummaryPage}
+                exact={true}
             />,
         ])}
         <Route
