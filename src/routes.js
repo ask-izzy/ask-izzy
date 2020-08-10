@@ -310,7 +310,6 @@ export default (
             to="/advocacy/:page"
             exact={true}
         />
-<<<<<<< HEAD
         {[
             "/search/:search/:suburb-:state",
             "/search/:search",
@@ -324,10 +323,8 @@ export default (
                 exact={true}
                 state={{
                     pageType: vars => [
-                        vars.resultsType,
+                        vars.serviceListingType,
                         "Results List",
-                        vars.resultsType === "Category" ?
-                            `Category: ${vars.categoryDisplayName}` : null,
                     ],
                 }}
             />,
@@ -338,10 +335,8 @@ export default (
                 exact={true}
                 state={{
                     pageType: vars => [
-                        vars.resultsType,
+                        vars.serviceListingType,
                         "Results Map",
-                        vars.resultsType === "Category" ?
-                            `Category: ${vars.categoryDisplayName}` : null,
                     ],
                 }}
             />,
@@ -351,10 +346,8 @@ export default (
                 exact={true}
                 state={{
                     pageType: vars => [
-                        vars.resultsType,
+                        vars.serviceListingType,
                         "Results Map Personalisation",
-                        vars.resultsType === "Category" ?
-                            `Category: ${vars.categoryDisplayName}` : null,
                     ],
                 }}
             />,
@@ -364,10 +357,8 @@ export default (
                 exact={true}
                 state={{
                     pageType: vars => [
-                        vars.resultsType,
+                        vars.serviceListingType,
                         "Results Map Personalisation",
-                        vars.resultsType === "Category" ?
-                            `Category: ${vars.categoryDisplayName}` : null,
                     ],
                 }}
             />,
@@ -377,10 +368,8 @@ export default (
                 exact={true}
                 state={{
                     pageType: vars => [
-                        vars.resultsType,
+                        vars.serviceListingType,
                         "Edit Map Personalisation",
-                        vars.resultsType === "Category" ?
-                            `Category: ${vars.categoryDisplayName}` : null,
                     ],
                 }}
             />,
@@ -390,10 +379,8 @@ export default (
                 exact={true}
                 state={{
                     pageType: vars => [
-                        vars.resultsType,
+                        vars.serviceListingType,
                         "Edit Map Personalisation",
-                        vars.resultsType === "Category" ?
-                            `Category: ${vars.categoryDisplayName}` : null,
                     ],
                 }}
             />,
@@ -403,10 +390,8 @@ export default (
                 exact={true}
                 state={{
                     pageType: vars => [
-                        vars.resultsType,
+                        vars.serviceListingType,
                         "List Personalisation",
-                        vars.resultsType === "Category" ?
-                            `Category: ${vars.categoryDisplayName}` : null,
                     ],
                 }}
             />,
@@ -416,10 +401,8 @@ export default (
                 exact={true}
                 state={{
                     pageType: vars => [
-                        vars.resultsType,
+                        vars.serviceListingType,
                         "List Personalisation",
-                        vars.resultsType === "Category" ?
-                            `Category: ${vars.categoryDisplayName}` : null,
                     ],
                 }}
             />,
@@ -429,10 +412,8 @@ export default (
                 exact={true}
                 state={{
                     pageType: vars => [
-                        vars.resultsType,
+                        vars.serviceListingType,
                         "Edit List Personalisation",
-                        vars.resultsType === "Category" ?
-                            `Category: ${vars.categoryDisplayName}` : null,
                     ],
                 }}
             />,
@@ -442,10 +423,8 @@ export default (
                 exact={true}
                 state={{
                     pageType: vars => [
-                        vars.resultsType,
+                        vars.serviceListingType,
                         "Edit List Personalisation",
-                        vars.resultsType === "Category" ?
-                            `Category: ${vars.categoryDisplayName}` : null,
                     ],
                 }}
             />,
