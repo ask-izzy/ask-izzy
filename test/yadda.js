@@ -87,9 +87,17 @@ let processFile = (file) => {
                 // This includes user actions, unhandled errors etc
                 console.log(
                     "Google Tag Manager events fired:",
-                    await driver.executeScript(() =>
-                        JSON.stringify(window.dataLayer, null, 2)
-                    )
+                    await driver.executeScript(() => {
+                        let dataLayersDump = []
+
+                        Object.keys(window)
+                            .filter(key => key.match(/^dataLayer/))
+                            .map(key => dataLayersDump.push(
+                                key,
+                                JSON.stringify(window[key], null, 2)
+                            ))
+                        return dataLayersDump.join("\n")
+                    })
                 );
 
                 console.log("Browser logs:")
