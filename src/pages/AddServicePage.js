@@ -4,14 +4,11 @@ import url from "url";
 import React from "react";
 
 import components from "../components";
+import history from "../utils/history";
 
 declare var ISS_URL: string;
 
-type Props = {
-    history: {
-        goBack: Function,
-    },
-}
+type Props = {}
 
 type State = {
     isFormDone: boolean,
@@ -74,8 +71,6 @@ class AddServicePage extends React.Component<Props, State> {
     }
 
     render() {
-        const { history } = this.props;
-
         const body = this.state.isFormDone ? this.renderSuccessMessage()
             : this.renderForm();
 
@@ -83,7 +78,7 @@ class AddServicePage extends React.Component<Props, State> {
             <div className="AddServicePage">
                 <components.AppBar
                     title="Add a service"
-                    onBackTouchTap={history.back.bind(history)}
+                    onBackTouchTap={history.back}
                 />
 
                 <div className="body">
