@@ -9,7 +9,6 @@ import routes from "./routes";
 import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
-import HistoryListener from "./components/effects/HistoryListener"
 
 window.searchTest = searchTest;
 window.categories = categories;
@@ -45,7 +44,6 @@ const Router = typeof document !== "undefined" ?
 
 ReactDOM.hydrate(
     <Router>
-        <HistoryListener/>
         {routes}
     </Router>,
     document.getElementById("root")
