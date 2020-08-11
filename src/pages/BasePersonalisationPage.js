@@ -23,7 +23,6 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
 
     nextStep(): void {
         // If our subpage has an onNextStep hook, call it.
-        this.refs &&
         this.refs.subpage &&
         this.refs.subpage.onNextStep &&
         this.refs.subpage.onNextStep();
@@ -93,9 +92,8 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
 
     get currentComponentIdx(): number {
         return this.personalisationComponents.findIndex(component => {
-            if (this.props.params) {
-                component.defaultProps.name === this.props.params.subpage
-            }
+            return component.defaultProps.name ===
+                this.props.match.params.subpage
         });
     }
 }
