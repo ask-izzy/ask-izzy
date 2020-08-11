@@ -1,13 +1,14 @@
 /* @flow */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
 import { makeTitle } from "../routes";
-import { Route } from "react-router";
+import { Route, withRouter } from "react-router";
 import { InjectRouterContext } from "../contexts/router-context"
 
 import { ApolloProvider } from "react-apollo";
 import client from "../utils/apolloClient";
+import HistoryListener from "../components/effects/HistoryListener";
 
 type Props = {
     children: any,
@@ -29,9 +30,12 @@ class BasePage extends Route<Props, {}> {
         let match = this.props.match || this.props.computedMatch
         const canonicalUrl = `https://askizzy.org.au${this.props.location.pathname}`;
         let Component = this.props.component;
+        // console.log('match', match, useHistory(), useLocation(), useParams())
+
 
         return (
             <InjectRouterContext matchedRoute={match}>
+                <HistoryListener routeMatch={match} />
                 <ApolloProvider client={client}>
                     <div className="BasePage">
                         <Helmet>
