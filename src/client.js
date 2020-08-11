@@ -9,7 +9,8 @@ import routes from "./routes";
 import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
-import posthog from "./utils/posthog"
+import covidCategories from "./constants/covidSupportCategories";
+import posthog from "./utils/posthog";
 
 window.searchTest = searchTest;
 window.categories = categories;
@@ -111,15 +112,28 @@ function History() {
 ReactDOM.hydrate(
     <Router
         history={History()}
-        onUpdate={() => {
-            // Since Ask Izzy is a SPA we need to manually register each
-            // new page view
-            sendEvent({
-                event: "Page Viewed",
-            });
+        onUpdate={function() {
+            // Gather and set analytics environment variables
+            const routeParams = this.state.params
+            const routes = this.state.routes
+            const pageVars = getPageVars(routes, routeParams)
 
-            if (posthog.posthogShouldBeLoaded) {
-                posthog.client.capture("$pageview");
+            sendEvent(Object.assign({}, pageVars), "GTM-54BTPQM");
+
+            // Don't record page view if redirecting
+            if (location.pathname === this.state.location.pathname) {
+                // Since Ask Izzy is a SPA we need to manually register each
+                // new page view
+                sendEvent({
+                    event: "Page Viewed",
+                });
+                sendEvent({
+                    event: "Page Viewed",
+                }, "GTM-54BTPQM");
+
+                if (posthog.posthogShouldBeLoaded) {
+                    posthog.client.capture("$pageview");
+                }
             }
         }}
     >{routes}</Router>,
@@ -148,3 +162,37 @@ window.addEventListener("error", (e) => {
         }`,
     });
 });
+
+function getPageVars(routes, routeParams) {
+    const routeState = Object.assign(
+        {},
+        ...routes.map(route => route.state)
+    )
+    const pageVars = {
+        category: undefined,
+        covidCategory: undefined,
+        pageType: routeState.pageType,
+        routes: routes.map(({name}) => ({name})),
+        serviceListingType: undefined,
+    }
+
+    if (routes.find(r => r.name === "Service Listing")) {
+        if (routeParams.page) {
+            pageVars.serviceListingType = "Category"
+            pageVars.category = categories
+                .find(cat => cat.key === routeParams.page) ||
+                null
+        } else {
+            pageVars.serviceListingType = "Search"
+        }
+    }
+
+    if (routes.find(r => r.name === "Covid Support Category")) {
+        pageVars.covidCategory = covidCategories
+            .find(
+                cat => cat.slug === routeParams.supportCategorySlug
+            ) || null
+    }
+
+    return pageVars
+}
