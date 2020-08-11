@@ -15,6 +15,7 @@ import DebugContainer from "../components/DebugContainer";
 import DebugPersonalisation from "../components/DebugPersonalisation";
 import DebugSearch from "../components/DebugSearch";
 import ResultsListPage from "./ResultsListPage";
+import history from "../utils/history";
 
 import type { Service } from "../iss";
 import NotFoundStaticPage from "./NotFoundStaticPage"
@@ -78,7 +79,7 @@ class ResultsPage extends BaseCategoriesPage {
                 .pathname
                 .endsWith("/") ? "" : "/";
 
-            this.context.router.replace(
+            history.replace(
                 `${this.props.location.pathname}${sep}personalise`
             );
             return;
