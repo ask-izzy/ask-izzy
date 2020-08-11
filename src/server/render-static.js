@@ -53,7 +53,7 @@ function renderPage(uri: string, path: string): void {
 
         // The application component is rendered to static markup
         // and sent as response.
-        const html = ReactDOMServer.renderToStaticMarkup(
+        const html = ReactDOMServer.renderToString(
             <HtmlDocument
                 title={title}
                 markup={markup}

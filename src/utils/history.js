@@ -5,8 +5,7 @@ let history;
 
 if (typeof document !== "undefined") {
     history = createBrowserHistory()
-}
-else {
+} else {
     history = createMemoryHistory()
 }
 
