@@ -56,7 +56,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
             return this.category.name;
         } else if (this.search.q !== "undefined-search") {
             const quote = new RegExp(`["']`, "g");
-            const search = this.props.match.params.search;
+            const search = decodeURIComponent(this.props.match.params.search);
 
             return `“${search.replace(quote, "")}”`;
         } else {
