@@ -30,7 +30,7 @@ function hasVersionFile(): boolean {
 const version = hasVersionFile() &&
     fs.readFileSync("public/VERSION", "utf-8").trim();
 
-function renderPage(uri: string, path: string): void {
+function renderPage(uri: string, path: string, params: Object): void {
     const reqUrl = url.parse(uri);
     const context = {};
 
@@ -39,10 +39,9 @@ function renderPage(uri: string, path: string): void {
         // flow:disable
         next();
     } else {
-
         const title = makeTitle(
             routeList.props.children,
-            {}
+            params
         )
         const markup = ReactDOMServer.renderToString(
             <StaticRouter location={{pathname: path}}
@@ -133,6 +132,21 @@ function *expandRoutes(
     }
 }
 
+function getParamsFromPath(path: string, expandedPath: string): Object {
+    // Given a path, convert params from :param format into a key:value pairs.
+    let params = {}
+    let pathParams = path.split("/")
+    let expandedParams = expandedPath.split("/")
+
+    pathParams.forEach((bit, index) => {
+        if (bit.startsWith(":")) {
+            params[bit.replace(":", "")] = expandedParams[index]
+        }
+    });
+
+    return params
+}
+
 function renderRoute(route: React.Element<any>, prefix: string): void {
     // flow:disable
     if (route.map) {
@@ -142,9 +156,12 @@ function renderRoute(route: React.Element<any>, prefix: string): void {
     let {path, children} = route.props;
 
     for (const expandedPath of expandRoutes(path)) {
+        let params = getParamsFromPath(path, expandedPath)
+
         renderPage(
             expandedPath,
-            expandedPath.replace("/searchTerm", "") + "/index.html"
+            expandedPath.replace("/searchTerm", "") + "/index.html",
+            params
         );
     }
 
