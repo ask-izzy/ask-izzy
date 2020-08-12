@@ -5,15 +5,14 @@ import React from "react";
 import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
+import history from "../utils/history";
 
-type Props = {
-    history: any,
-}
+type Props = {}
 
 export default class NotFoundStaticPage extends React.Component<Props, void> {
 
     render() {
-        let back = () => this.props.history.goBack();
+        let back = () => history.back();
 
         return (
             <div

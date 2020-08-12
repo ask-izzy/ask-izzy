@@ -34,13 +34,14 @@ function renderPage(uri: string, path: string): void {
     const reqUrl = url.parse(uri);
     const context = {};
 
-    if (reqUrl.pathname.startsWith("/static/") |
-    reqUrl.pathname.startsWith("/session/")) {
+    if ((reqUrl.pathname && reqUrl.pathname.startsWith("/static/")) ||
+    (reqUrl.pathname && reqUrl.pathname.startsWith("/session/"))) {
+        // flow:disable
         next();
     } else {
 
         const title = makeTitle(
-            routes,
+            routeList.props.children,
             {}
         )
         const markup = ReactDOMServer.renderToString(

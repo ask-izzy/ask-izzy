@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import PropTypes from "proptypes";
 
 import HeaderBar from "../components/HeaderBar";
 import FlatButton from "../components/FlatButton";

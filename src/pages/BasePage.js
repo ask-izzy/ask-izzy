@@ -11,6 +11,7 @@ type Props = {
     routes: any,
     params: any,
     location: any,
+    match: any,
 }
 
 class BasePage extends React.Component<Props, void> {

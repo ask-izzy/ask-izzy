@@ -10,17 +10,19 @@ import type {Service} from "../iss";
 import components from "../components";
 import Loading from "../icons/Loading";
 import config from "../config";
+import history from "../utils/history";
 
 class ServicePage extends React.Component<{
     params: {
         slug: string,
     },
+    match: any,
 }, {
     object?: Service,
     error?: Object,
 }> {
     static propTypes = {
-        params: PropTypes.object,
+        match: PropTypes.object,
     };
 
     static contextTypes = {
@@ -75,7 +77,7 @@ class ServicePage extends React.Component<{
             object,
             error,
         } = this.state;
-        const back = () => this.props.history.back();
+        const back = () => history.back();
 
         if (!object) {
             return (
