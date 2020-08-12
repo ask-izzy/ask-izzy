@@ -114,7 +114,7 @@ export default (
         <Route
             path="/"
             components={{
-                main: posthog.setFeatureFlags(HomePage),
+                main: posthog.injectFeatureFlags(HomePage),
                 footer: BrandedFooter,
             }}
             state={{
