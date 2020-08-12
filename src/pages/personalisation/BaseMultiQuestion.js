@@ -190,6 +190,7 @@ class BaseMultiQuestion extends BaseQuestion {
 
                             type="checkbox"
                             checked={selected.has(answer)}
+                            readOnly={true}
                             checkedIcon={
                                 <icons.CheckboxSelected className="big" />
                             }
