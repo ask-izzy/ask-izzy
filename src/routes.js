@@ -103,7 +103,7 @@ export default (
         />
         <BasePage
             path="/"
-            component={posthog.setFeatureFlags(HomePage)}
+            component={posthog.injectFeatureFlags(HomePage)}
             exact={true}
             state={{
                 pageType: "Home",
