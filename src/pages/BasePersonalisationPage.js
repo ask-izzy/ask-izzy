@@ -4,9 +4,7 @@ import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
 import routerContext from "../contexts/router-context"
 import {replaceUrlLocation} from "../utils/url.service";
-import {setFeatureFlags} from "../utils/posthog";
-
-const cachedRenderComponents = {}
+import {cachedInjectFeatureFlags} from "../utils/posthog";
 
 class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     ExtraState
@@ -58,11 +56,10 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     }
 
     get currentComponentForRender(): ?React$ComponentType<*> {
-        if (!cachedRenderComponents[this.currentComponentIdx]) {
-            cachedRenderComponents[this.currentComponentIdx] =
-                setFeatureFlags(this.currentComponent);
-        }
-        return cachedRenderComponents[this.currentComponentIdx];
+        // We want to wrap this page components in HOC to manage feature flags
+        // but we need to cache this so we don't create a new page component
+        // each time because that screws up refs and things
+        return cachedInjectFeatureFlags(this.currentComponent)
     }
 
     get currentComponentIdx(): number {

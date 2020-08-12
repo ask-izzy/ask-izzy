@@ -13,7 +13,7 @@ import {
 } from "react-router-dom";
 import {titleize} from "underscore.string";
 
-import {setFeatureFlags} from "./utils/posthog"
+import {injectFeatureFlags} from "./utils/posthog"
 
 // If you import these after the others,
 // babel decides the navbar doesn't really
@@ -110,7 +110,7 @@ const routes: ReactElement<typeof Routes> = <Routes>
         <Route
             path=""
             element={() => {
-                const WrappedHomePage = setFeatureFlags(HomePage)
+                const WrappedHomePage = injectFeatureFlags(HomePage)
                 return <WrappedHomePage />
             }}
             type={["Home"]}

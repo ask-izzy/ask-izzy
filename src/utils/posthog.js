@@ -24,60 +24,73 @@ export default posthog
 
 type InjectedProps = {| siteFeatureFlags: Object |}
 
-export function setFeatureFlags<Props, Instance>(
-    WrappedComponent: React.AbstractComponent<
-        {...Props, ...InjectedProps},
-        Instance
-    >
-): React.AbstractComponent<Props, Instance> {
-    class FeatureFlagSetter extends React.Component<
-        {|...Props, forwardedRef: React.Ref<any>|},
-        {siteFeatureFlags: Object}
-    > {
-        constructor(props) {
-            super(props);
-            this.state = {
-                siteFeatureFlags: {},
-            };
-        }
+// Wrap given component in HoC which injects any feature flags after they have
+// loaded
+export function injectFeatureFlags<Props>(
+    ComponentToWrap: React.AbstractComponent<Props>
+): React.AbstractComponent<$Diff<Props, InjectedProps>> {
+    return React.forwardRef(
+        (props, ref) => React.createElement(FeatureFlagSetter, {
+            child: ComponentToWrap,
+            childProps: props,
+            forwardedRef: ref,
+        })
+    )
+}
 
-        componentDidMount() {
-            if (typeof window === "undefined") {
-                return
-            }
+const injectFeatureFlagsComponentCache = new Map()
 
-            if (posthogShouldBeLoaded) {
-                posthog.onFeatureFlags(() => {
-                    this.setState({
-                        siteFeatureFlags: Object.assign(
-                            {},
-                            ...posthog.feature_flags.getFlags()
-                                .map((flag) => ({
-                                    [flag]: posthog.isFeatureEnabled(flag),
-                                }))
-                        ),
-                    });
-                });
-            }
-        }
+// For a given component only wrap it with HoC once. Cache on the first call
+// and returned the cached wrapped component for future calls.
+export function cachedInjectFeatureFlags<Props>(
+    ComponentToWrap: React.AbstractComponent<Props>
+): React.AbstractComponent<$Diff<Props, InjectedProps>> {
+    let WrappedComponent = injectFeatureFlagsComponentCache.get(ComponentToWrap)
 
-        render() {
-            const {forwardedRef, ...props} = this.props;
-
-            return (
-                <WrappedComponent {...props}
-                    {...this.state}
-                    ref={forwardedRef}
-                />
-            )
-        }
+    if (!WrappedComponent) {
+        WrappedComponent = this.injectFeatureFlags(ComponentToWrap)
+        injectFeatureFlagsComponentCache.set(ComponentToWrap, WrappedComponent)
     }
 
-    return React.forwardRef((props, ref) => {
-        return (
-            <FeatureFlagSetter {...props}
-                forwardedRef={ref}
-            />
-        )
-    });
+    return WrappedComponent
+}
+
+type State = {| siteFeatureFlags: Object |}
+class FeatureFlagSetter<ChildProps> extends React.Component<
+    {
+        child: React.AbstractComponent<ChildProps & State>,
+        childProps: ChildProps,
+        forwardedRef: React.Ref<any>
+    },
+    State
+> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            siteFeatureFlags: {},
+        };
+    }
+
+    componentDidMount() {
+        if (posthogShouldBeLoaded) {
+            posthog.onFeatureFlags(() => {
+                const flags = posthog.feature_flags.getFlags()
+                    .map((flag) => (
+                        { [flag]: posthog.isFeatureEnabled(flag) }
+                    ))
+
+                this.setState({
+                    siteFeatureFlags: Object.assign({}, ...flags),
+                });
+            });
+        }
+
+    }
+
+    render() {
+        return React.createElement(this.props.child, {
+            ...this.props.childProps,
+            siteFeatureFlags: this.state.siteFeatureFlags,
+        })
+    }
 }
