@@ -6,12 +6,11 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import storage from "./storage";
 import routes from "./routes";
-import sendEvent from "./google-tag-manager";
+import * as gtm from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
 
 window.searchTest = searchTest;
-window.categories = categories;
 
 // Preventing the Google Maps libary from downloading an extra font
 // http://stackoverflow.com/questions/25523806/google-maps-v3-prevent-api-from-loading-roboto-font
@@ -63,11 +62,20 @@ window.pi = function() {
 }
 
 // Report JS errors to google analytics
-window.addEventListener("error", (evt) => {
-    sendEvent({
+window.addEventListener("error", (e) => {
+    gtm.emit({
         event: "exception",
         exDescription: `JavaScript Error: ${evt.message} ${evt.filename}: ${
             evt.lineno
         }`,
     });
+    gtm.emit({
+        event: "JS Error",
+        eventCat: "Error Occurred",
+        eventAction: "Javascript",
+        eventLabel: `${e.message}
+            ${e.filename} [Line ${e.lineno}]
+            From page: ${location.pathname}`.replace(/\n +/g, "\n"),
+        sendDirectlyToGA: true,
+    }, "GTM-54BTPQM");
 });
