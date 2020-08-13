@@ -1,7 +1,6 @@
 /* @flow */
 import React from "react";
 import { withRouter } from "react-router";
-import routes from "../routes";
 import {Redirect, Switch} from "react-router-dom";
 
 const RouterContext = React.createContext<Object>();
@@ -9,13 +8,13 @@ const RouterContext = React.createContext<Object>();
 export default RouterContext
 
 export const InjectRouterContext = withRouter(
-    ({children, history, location, matchedRoute}) => {
+    ({children, history, location, matchedRoute, routes}) => {
         const context = {
             router: {
                 history,
                 location,
                 match: {
-                    props: getRouteProps(matchedRoute),
+                    props: getRouteProps(routes, matchedRoute),
                     ...matchedRoute,
                 }
             },
@@ -28,9 +27,7 @@ export const InjectRouterContext = withRouter(
     }
 )
 
-
-
-function getRouteProps(routeMatch): Object {
+function getRouteProps(routes, routeMatch): Object {
     // Routes are nested components so flatten out and extract just the props
     // for each route 
     function extractRouteInfo(routes): Array<Object> {

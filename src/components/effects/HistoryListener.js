@@ -3,7 +3,7 @@ import storage from "../../storage";
 import { withRouter, useHistory, useParams } from "react-router";
 // flow:disable flowjs needs to be updated to include useEffect
 import { useState, useEffect, useContext } from "react";
-import sendEvent from "../../google-tag-manager";
+import * as gtm from "../../google-tag-manager";
 import posthog from "../../utils/posthog";
 import covidCategories from "../../constants/covidSupportCategories";
 import categories from "../../constants/categories";
@@ -90,51 +90,21 @@ export default (props: Object) => {
 
 function recordAnalytics(routeMatch) {
     // Gather and set analytics environment variables
-    const pageVars = getPageVars(routeMatch)
-
-    sendEvent(Object.assign({}, pageVars), "GTM-54BTPQM");
+    gtm.setPageVars(routeMatch, "GTM-54BTPQM")
 
     // Since Ask Izzy is a SPA we need to manually register each
     // new page view
-    sendEvent({
+    let hash = location.href.match(/(#[^#]*)$/)
+    gtm.emit({
         event: "Page Viewed",
     });
-    sendEvent({
+    gtm.emit({
         event: "Page Viewed",
+        path: location.pathname,
+        hash,
     }, "GTM-54BTPQM");
 
     if (posthog.posthogShouldBeLoaded) {
         posthog.client.capture("$pageview");
     }
-}
-
-function getPageVars(routeMatch) {
-    const routeParams = routeMatch.params
-    const routeState = routeMatch.props.state
-    const pageVars = {
-        category: undefined,
-        covidCategory: undefined,
-        pageType: routeState.pageType,
-        serviceListingType: undefined,
-    }
-
-    if (routeMatch.props.name === "Service Listing") {
-        if (routeParams.page) {
-            pageVars.serviceListingType = "Category"
-            pageVars.category = categories
-                .find(cat => cat.key === routeParams.page) ||
-                null
-        } else {
-            pageVars.serviceListingType = "Search"
-        }
-    }
-
-    if (routeMatch.props.name === "Covid Support Category") {
-        pageVars.covidCategory = covidCategories
-            .find(
-                cat => cat.slug === routeParams.supportCategorySlug
-            ) || null
-    }
-
-    return pageVars
 }

@@ -10,7 +10,7 @@ import LoadingResultsHeader from
 import LimitedServicesBanner from "../components/LimitedServicesBanner";
 import ViewOnMapButton from "../components/ViewOnMapButton";
 
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 import storage from "../storage";
 import type { Service } from "../iss";
 import type Category from "../constants/Category";
@@ -37,13 +37,13 @@ class ResultsListPage extends React.Component<Props, void> {
 
     recordMapClick(): void {
         if (this.props.search) {
-            sendEvent({
+            gtm.emit({
                 event: "ViewOnMap",
                 search: this.props.search,
                 location: storage.getLocation(),
             });
         } else if (this.props.category) {
-            sendEvent({
+            gtm.emit({
                 event: "ViewOnMap",
                 category: this.props.category,
                 location: storage.getLocation(),

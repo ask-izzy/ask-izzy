@@ -4,8 +4,8 @@ import React from "react";
 
 import icons from "../icons";
 import BaseLogoWithTextBox from "./BaseLogoWithTextBox";
-import sendEvent from "../google-tag-manager";
 import routerContext from "../contexts/router-context";
+import * as gtm from "../google-tag-manager";
 
 export default class OnlineSafetyLink extends BaseLogoWithTextBox {
     static defaultProps = {
@@ -21,10 +21,18 @@ export default class OnlineSafetyLink extends BaseLogoWithTextBox {
     onClickBox(): void {
         const path = "/online-safety";
 
-        sendEvent({
+        gtm.emit({
             event: "clickedInformationBanner",
             banner: "Online safety - are you safe?",
         });
+
+        gtm.emit({
+            event: "Online Safety Banner Clicked",
+            eventCat: "Banner Clicked",
+            eventAction: "Online Safety",
+            eventLabel: location.pathname,
+            sendDirectlyToGA: true,
+        }, "GTM-54BTPQM");
 
         this.context.router.history.push(
             path,
