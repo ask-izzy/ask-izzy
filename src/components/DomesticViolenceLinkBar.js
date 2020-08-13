@@ -2,8 +2,8 @@
 
 import React from "react";
 import icons from "../icons";
-import sendEvent from "../google-tag-manager";
 import history from "../utils/history";
+import * as gtm from "../google-tag-manager";
 
 export default class DomesticViolenceLinkBar extends React.Component<{}, void> {
 
@@ -27,13 +27,21 @@ export default class DomesticViolenceLinkBar extends React.Component<{}, void> {
         );
     }
 
-    onClickDVLink():void {
+    onClickDVLink(): void {
         const path = "/information";
 
-        sendEvent({
+        gtm.emit({
             event: "clickedInformationBanner",
             banner: "Domestic violence - are you safe?",
         });
+
+        gtm.emit({
+            event: "DV Banner Clicked",
+            eventCat: "Banner Clicked",
+            eventAction: "Domestic Violence Information",
+            eventLabel: location.pathname,
+            sendDirectlyToGA: true,
+        }, "GTM-54BTPQM");
 
         history.push(
             path,
