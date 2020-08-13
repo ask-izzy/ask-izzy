@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 import iss from "../iss";
 import Spacer from "./Spacer";
 
@@ -12,10 +12,19 @@ type Props = {
 
 export default class Feedback extends React.Component<Props, void> {
     recordSuggestChange(): void {
-        sendEvent({
+        gtm.emit({
             event: "suggestServiceChange",
             service: this.props.object.id,
         });
+
+        gtm.emit({
+            event: "Service Change Requested",
+            eventCat: "Feedback Given",
+            eventAction: "Service Change Suggestion",
+            eventLabel: location.pathname,
+            eventValue: this.props.object.id,
+            sendDirectlyToGA: true,
+        }, "GTM-54BTPQM");
     }
 
     render() {

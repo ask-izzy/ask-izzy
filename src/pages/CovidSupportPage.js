@@ -7,7 +7,7 @@ import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import icons from "../icons";
 import storage from "../storage";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 
 import AppBar from "../components/AppBar";
 import ResultsMap from "../components/ResultsMap";
@@ -109,7 +109,7 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
 
         this.setState({ isClient: true });
 
-        sendEvent({
+        gtm.emit({
             event: "searchResults",
             searchQuery: this.context.router.match.params.search,
             searchPage: this.context.router.match.params.page,
@@ -166,12 +166,20 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
     }
 
     async loadMore(): Promise<void> {
-        sendEvent({
+        gtm.emit({
             event: "LoadMoreSearchResults",
             searchQuery: this.context.router.match.params.search,
             searchPage: this.context.router.match.params.page,
             location: storage.getLocation(),
         });
+
+        gtm.emit({
+            event: "Load More Search Results Clicked",
+            eventCat: "Content Expanded",
+            eventAction: "Load More Search Results",
+            eventLabel: location.pathname,
+            sendDirectlyToGA: true,
+        }, "GTM-54BTPQM");
 
         if (!(this.state.meta && this.state.meta.next)) {
             return;

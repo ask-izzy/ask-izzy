@@ -204,8 +204,8 @@ GOOGLE_TAG_MANAGER_ENV: 'env-1'
 
 GTM events are triggered by the `sendEvent` method in `google-tag-manager.js` like so:
 ```javascript
-import sendEvent from "./google-tag-manager";
-sendEvent({
+import * as gtm from "../google-tag-manager";
+gtm.emit({
     event: "categoryPageLoad",
     additionalData: "foo",
     additionalData2: "bar",

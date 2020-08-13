@@ -4,7 +4,7 @@ import React from "react";
 import _ from "underscore";
 
 import fixtures from "../../fixtures/services";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 import ServiceFactory from "../../fixtures/factories/Service";
 
 import Address from "./Address";
@@ -58,7 +58,7 @@ export default class ServicePane extends React.Component<{
     }
 
     recordAlsoAtThisLocation = (): void => {
-        sendEvent({
+        gtm.emit({
             event: "alsoAtThisLocation",
             listingName: this.props.service.name,
             crisis: this.props.service.crisis,
