@@ -220,8 +220,8 @@ GOOGLE_TAG_MANAGER_ENV: 'env-1'
 
 All GA events are sent via GTM by calling the `push` method in `google-tag-manager.js` like so:
 ```javascript
-import sendEvent from "../google-tag-manager";
-sendEvent({
+import * as gtm from "../google-tag-manager";
+gtm.emit({
     event: "categoryPageLoad",
     additionalData: "foo",
     additionalData2: "bar",

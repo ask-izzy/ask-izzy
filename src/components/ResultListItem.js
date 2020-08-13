@@ -16,7 +16,7 @@ import Accessibility from "./Accessibility";
 import OpeningTimes from "./OpeningTimes";
 import Ndis from "./Ndis";
 import TransportTime from "./TransportTime";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import { titleize } from "underscore.string";
@@ -51,7 +51,7 @@ class ResultListItem extends React.Component<{
     }
 
     recordViewDetail(): void {
-        sendEvent({
+        gtm.emit({
             event: "listing",
             listingName: this.props.object.name,
             crisis: this.props.object.crisis,

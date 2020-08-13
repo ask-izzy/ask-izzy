@@ -6,14 +6,11 @@ import ReactDOM from "react-dom";
 import {Router, browserHistory} from "react-router";
 import storage from "./storage";
 import routes from "./routes";
-import sendEvent from "./google-tag-manager";
+import * as gtm from "./google-tag-manager";
 import searchTest from "./search-test";
-import categories from "./constants/categories";
-import covidCategories from "./constants/covidSupportCategories";
 import posthog from "./utils/posthog";
 
 window.searchTest = searchTest;
-window.categories = categories;
 
 // Preventing the Google Maps libary from downloading an extra font
 // http://stackoverflow.com/questions/25523806/google-maps-v3-prevent-api-from-loading-roboto-font
@@ -114,21 +111,36 @@ ReactDOM.hydrate(
         history={History()}
         onUpdate={function() {
             // Gather and set analytics environment variables
-            const routeParams = this.state.params
-            const routes = this.state.routes
-            const pageVars = getPageVars(routes, routeParams)
+            gtm.setPageVars(
+                this.state.routes, this.state.params, "GTM-54BTPQM"
+            )
 
-            sendEvent(Object.assign({}, pageVars), "GTM-54BTPQM");
+            const lastRecordedView = Array.from(gtm.getDataLayer("GTM-54BTPQM"))
+                .reverse()
+                .find(layer => layer.event === "Page Viewed")
 
-            // Don't record page view if redirecting
-            if (location.pathname === this.state.location.pathname) {
+            if (
+                // Don't record page view if redirecting
+                (location.pathname === this.state.location.pathname) &&
+                // Make sure path has actually changed and not just the hash
+                !(
+                    lastRecordedView &&
+                    location.pathname === lastRecordedView.path &&
+                    location.hash !== lastRecordedView.hash
+                )
+            ) {
                 // Since Ask Izzy is a SPA we need to manually register each
                 // new page view
-                sendEvent({
+                gtm.emit({
                     event: "Page Viewed",
                 });
-                sendEvent({
+                let hash = location.href.match(/(#[^#]*)$/)
+
+                hash = hash && hash[1]
+                gtm.emit({
                     event: "Page Viewed",
+                    path: location.pathname,
+                    hash,
                 }, "GTM-54BTPQM");
 
                 if (posthog.posthogShouldBeLoaded) {
@@ -155,44 +167,19 @@ window.pi = function() {
 
 // Report JS errors to google analytics
 window.addEventListener("error", (e) => {
-    sendEvent({
+    gtm.emit({
         event: "exception",
         exDescription: `JavaScript Error: ${e.message} ${e.filename}: ${
             e.lineno
         }`,
     });
+    gtm.emit({
+        event: "JS Error",
+        eventCat: "Error Occurred",
+        eventAction: "Javascript",
+        eventLabel: `${e.message}
+            ${e.filename} [Line ${e.lineno}]
+            From page: ${location.pathname}`.replace(/\n +/g, "\n"),
+        sendDirectlyToGA: true,
+    }, "GTM-54BTPQM");
 });
-
-function getPageVars(routes, routeParams) {
-    const routeState = Object.assign(
-        {},
-        ...routes.map(route => route.state)
-    )
-    const pageVars = {
-        category: undefined,
-        covidCategory: undefined,
-        pageType: routeState.pageType,
-        routes: routes.map(({name}) => ({name})),
-        serviceListingType: undefined,
-    }
-
-    if (routes.find(r => r.name === "Service Listing")) {
-        if (routeParams.page) {
-            pageVars.serviceListingType = "Category"
-            pageVars.category = categories
-                .find(cat => cat.key === routeParams.page) ||
-                null
-        } else {
-            pageVars.serviceListingType = "Search"
-        }
-    }
-
-    if (routes.find(r => r.name === "Covid Support Category")) {
-        pageVars.covidCategory = covidCategories
-            .find(
-                cat => cat.slug === routeParams.supportCategorySlug
-            ) || null
-    }
-
-    return pageVars
-}

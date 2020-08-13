@@ -24,7 +24,8 @@ class GoogleMapsLink extends React.Component<Props, void> {
     googleMapsUrl(): string {
         const toAddr = this.props.to;
         const {travelTime} = toAddr;
-        const mode = travelTime && travelTime.mode === "TRANSIT" ? "r" : "w";
+        const mode = travelTime && travelTime
+            .some(time => time.mode === "TRANSIT") ? "r" : "w";
         let queryFields = [
             toAddr.flat_unit,
             toAddr.street_number,
