@@ -6,7 +6,7 @@ import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import icons from "../icons";
 import storage from "../storage";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 
 import AppBar from "../components/AppBar";
 import ButtonListItem from "../components/ButtonListItem";
@@ -69,7 +69,7 @@ class ResultsPage extends BaseCategoriesPage<State> {
 
         this.setState({ isClient: true });
 
-        sendEvent({
+        gtm.emit({
             event: "searchResults",
             searchQuery: decodeURIComponent(this.props.match.params.search),
             searchPage: this.props.match.params.page,
@@ -126,12 +126,20 @@ class ResultsPage extends BaseCategoriesPage<State> {
     }
 
     async loadMore(): Promise<void> {
-        sendEvent({
+        gtm.emit({
             event: "LoadMoreSearchResults",
             searchQuery: decodeURIComponent(this.props.match.params.search),
             searchPage: this.props.match.params.page,
             location: storage.getLocation(),
         });
+
+        gtm.emit({
+            event: "Load More Search Results Clicked",
+            eventCat: "Content Expanded",
+            eventAction: "Load More Search Results",
+            eventLabel: location.pathname,
+            sendDirectlyToGA: true,
+        }, "GTM-54BTPQM");
 
         if (!(this.state.meta && this.state.meta.next)) {
             return;
