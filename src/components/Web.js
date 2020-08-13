@@ -2,16 +2,31 @@
 import React from "react";
 import URL from "url";
 import icons from "../icons";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
+import type {AnalyticsEvent} from "../google-tag-manager";
 
-export default class Web extends React.Component<{url: string}, void> {
+type Props = {
+    url: string,
+    analyticsEventDetails?: AnalyticsEvent
+}
+export default class Web extends React.Component<Props, void> {
     static sampleProps = {default: {url: "https://ExampleDomain.com/landingPage"}};
 
     recordClick(): void {
-        sendEvent({
+        gtm.emit({
             event: "clickServiceWebsite",
             url: this.props.url,
         });
+
+        const event = Object.assign({}, {
+            event: "Website Address Clicked",
+            eventCat: "Website Address Clicked",
+            eventAction: "",
+            eventLabel: `${location.pathname} - ${this.props.url}`,
+            sendDirectlyToGA: true,
+        }, this.props.analyticsEventDetails)
+
+        gtm.emit(event, "GTM-54BTPQM");
     }
 
     render() {

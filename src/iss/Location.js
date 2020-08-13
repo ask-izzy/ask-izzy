@@ -19,11 +19,12 @@ export default class Location {
     street_type: string;
     suburb: string;
     details: string;
-    travelTime: ?travelTime;
+    travelTime: ?Array<travelTime>; // At some point this should probably be
+    // refactored to travelTime*s*
 
-    constructor(props: issLocation, travelTime: ?travelTime) {
+    constructor(props: issLocation, travelTimes: ?Array<travelTime>) {
         Object.assign(this, props);
-        this.travelTime = travelTime;
+        this.travelTime = travelTimes;
     }
 
     /* If there is no point value,

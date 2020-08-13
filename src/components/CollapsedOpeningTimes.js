@@ -7,7 +7,7 @@ import _ from "underscore";
 import ServiceOpening from "../iss/ServiceOpening";
 import Collapser from "./Collapser";
 import OpeningTimes from "./OpeningTimes";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 
 function formatTime(str: string): string {
     return moment(str, "HH:mm:ss").format("h:mm A");
@@ -106,10 +106,18 @@ export default class CollapsedOpeningTimes extends React.Component<Props, void> 
     };
 
     recordExpandOpeningTimes(): void {
-        sendEvent({
+        gtm.emit({
             event: "expandOpeningTimes",
             service: this.props.serviceId,
         })
+
+        gtm.emit({
+            event: "Opening Times Expanded",
+            eventCat: "Content Expanded",
+            eventAction: "Opening Times",
+            eventLabel: location.pathname,
+            sendDirectlyToGA: true,
+        }, "GTM-54BTPQM")
     }
 
     render() {

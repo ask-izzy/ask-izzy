@@ -7,7 +7,7 @@ import { titleize } from "underscore.string";
 import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import Location from "../iss/Location";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 import Spacer from "./Spacer";
 
 class TransportTime extends React.Component<{
@@ -24,21 +24,21 @@ class TransportTime extends React.Component<{
 
     static sampleProps = {
         compact: {
-            location: new Location(fixtures.ixa.location, {
+            location: new Location(fixtures.ixa.location, [{
                 mode: "WALK",
                 duration: {text: "15 minutes", value: 1},
                 distance: {text: "", value: 1},
                 status: "",
-            }),
+            }]),
             compact: true,
         },
         expanded: {
-            location: new Location(fixtures.ixa.location, {
+            location: new Location(fixtures.ixa.location, [{
                 mode: "TRANSIT",
                 duration: {text: "15 minutes", value: 1},
                 distance: {text: "", value: 1},
                 status: "",
-            }),
+            }]),
             compact: false,
         },
     };
@@ -75,7 +75,6 @@ class TransportTime extends React.Component<{
     }
 
     renderTravelTimes(travelTimes: Object) {
-
         return travelTimes.map((travel, key) => {
             let icon = "";
             let method = "";
@@ -147,13 +146,22 @@ class TransportTime extends React.Component<{
     }
 
     recordClick(): void {
+        console.log("fafasd")
         const {location} = this.props;
 
-        sendEvent({
+        gtm.emit({
             event: "clickGetDirections",
             addressLine1: location.streetAddressLine1(),
             addressLine2: location.streetAddressLine2(),
         });
+
+        gtm.emit({
+            event: "Search On Behalf Of",
+            eventCat: "External Link Clicked",
+            eventAction: "Google Maps Directions",
+            eventLabel: window.location.pathname,
+            sendDirectlyToGA: true,
+        }, "GTM-54BTPQM");
     }
 
     renderDirections() {

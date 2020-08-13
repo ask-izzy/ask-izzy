@@ -5,18 +5,19 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import StaticPage from "./StaticPage";
 import MobileDetect from "../components/higherorder/MobileDetect";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 import Phone from "../components/Phone";
 import icons from "../icons";
 
 class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
     componentDidMount(): void {
-        sendEvent({
+        gtm.emit({
             event: "categoryPageLoad",
             categoryName: "Covid-19",
             isTopical: true,
         });
-        sendEvent({
+        gtm.emit({
+            event: "Flush Vars",
             categoryName: undefined,
             isTopical: undefined,
         });
