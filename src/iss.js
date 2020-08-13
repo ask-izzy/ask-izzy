@@ -12,7 +12,7 @@ import { slugify } from "underscore.string";
 import _ from "underscore";
 import lru from "lru-cache";
 
-import sendEvent from "./google-tag-manager";
+import * as gtm from "./google-tag-manager";
 import ServiceOpening from "./iss/ServiceOpening";
 import Location from "./iss/Location";
 import Cache from "./iss/Cache";
@@ -147,10 +147,18 @@ async function _request(obj: XhrOptions) {
             return xhr(obj);
         }
 
-        sendEvent({
+        gtm.emit({
             event: "xhr_failed",
             error: JSON.stringify({data, status, statusText, headers}),
         });
+
+        gtm.emit({
+            event: "Network Error",
+            eventCat: "Error Occurred",
+            eventAction: "Network",
+            eventLabel: JSON.stringify({data, status, statusText, headers}),
+            sendDirectlyToGA: true,
+        }, "GTM-54BTPQM");
 
         throw error;
     } finally {
@@ -241,7 +249,9 @@ async function attachTransportTimes(
 
     let formatPoint = (point: issPoint) => `${point.lat},${point.lon}`;
 
-    const maps = await TryWithDefault(1000, Maps(), Object());
+    const maps = await TryWithDefault < $ReadOnly < {travelTime: Function} >> (
+        1000, Maps(), {}
+    );
 
     if (typeof maps.travelTime === "function") {
         let service: ?Service; // eslint-disable-line no-unused-vars
@@ -319,9 +329,6 @@ export class Service {
             };
         }
 
-        // until we upgrade past flow 0.22.1 and
-        // get smarter refinements
-        // for missing properties: flow:disable
         Object.assign(this, props);
     }
 
@@ -402,7 +409,8 @@ export class Service {
     last_updated: ymdWithDashesDate;
     lgbtiqa_plus_specific: boolean;
     location: ?issLocation;
-    travelTime: ?travelTime; // From google travel times api
+    travelTime: ?Array<travelTime>; // From google travel times api. At some
+    // point this should probably be refactored to travelTime*s*
     name: string;
     ndis_approved: boolean;
     now_open: issNowOpen;
@@ -558,11 +566,18 @@ async function _search(
     let searchUrl = mungeUrlQuery(searchUrlPath, request_);
 
     if (searchUrl != previousSearchUrl) {
-        sendEvent({
+        gtm.emit({
             event: "newSearch",
             searchQuery: query,
             onBehalfOf: storage.getItem("user_type"),
         });
+        gtm.emit({
+            event: "Search On Behalf Of",
+            eventCat: "Services Searched",
+            eventAction: "Help Seeker Type",
+            eventLabel: String(storage.getItem("user_type")),
+            sendDirectlyToGA: true,
+        }, "GTM-54BTPQM");
     }
     storage.setItem("previous_search_url", searchUrl);
     return await requestObjects(searchUrlPath, request_);
