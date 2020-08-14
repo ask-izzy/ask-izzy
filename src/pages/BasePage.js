@@ -4,17 +4,19 @@ import React from "react";
 import Helmet from "react-helmet";
 import DocumentTitle from "react-document-title";
 import { makeTitle } from "../routes";
-import { withRouter } from "react-router";
+import { Route } from "react-router";
+import history from "../utils/history";
 
 type Props = {
     children: any,
     routes: any,
     params: any,
     location: any,
-    match: any,
+    computedMatch: any,
+    title: string,
 }
 
-class BasePage extends React.Component<Props, void> {
+class BasePage extends Route<Props, {}> {
     static childContextTypes = {};
 
     getChildContext(): Object {
@@ -22,12 +24,11 @@ class BasePage extends React.Component<Props, void> {
     }
 
     render() {
-
+        let match = this.props.match || this.props.computedMatch
         const canonicalUrl = `https://askizzy.org.au${this.props.location.pathname}`;
-
+        console.log(this.props)
         return (
             <div className="BasePage">
-
                 <Helmet>
                     <link
                         rel="canonical"
@@ -37,20 +38,22 @@ class BasePage extends React.Component<Props, void> {
                         property="og:url"
                         content={canonicalUrl}
                     />
+                    <title>
+                        {
+                            makeTitle(
+                                this.props.title,
+                                match.params
+                            )
+                        }
+                    </title>
                 </Helmet>
 
-                <DocumentTitle
-                    title={makeTitle(
-                        this.props.routes,
-                        this.props.match.params
-                    )}
-                />
                 <main>
-                    {this.props.children}
+                    <this.props.component {...this.props} match={match} history={history} />
                 </main>
             </div>
         );
     }
 }
 
-export default withRouter(BasePage)
+export default BasePage
