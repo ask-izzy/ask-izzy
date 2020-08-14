@@ -35,16 +35,11 @@ import ServicePage from "./pages/ServicePage";
 import BushfireReliefPage from "./pages/BushfireReliefPage";
 import Covid19StaticPage from "./pages/Covid19StaticPage";
 
-export function makeTitle(routes: Array<Object>, params: Object): string {
-    const template = _.chain(routes)
-        .pluck("title")
-        .compact()
-        .last()
-        .value();
+export function makeTitle(route: string, params: Object): string {
     let unslug = (str) =>
         str.replace("-", " ").split(" ").map(titleize).join(" ");
 
-    let title = template || "";
+    let title = route || "";
 
     Object.keys(params).forEach((key) => {
         // FIXME This is a hack. Rewrite it when we're not about to launch.
@@ -86,95 +81,94 @@ const removeDoubleSlashOnEnter404 = (
 
 };
 
-export const routeList = (
+export default (
     <Switch>
-        <Route
+        <BasePage
             path="/styleGuide/component/:componentName"
             component={StyleGuideItem}
             title="Styleguide"
         />
-        <Route
+        <BasePage
             path="/styleGuide*"
             component={StyleGuideList}
             title="Styleguide"
         />
-        <Route
+        <BasePage
             path="/"
             component={HomePage}
             exact={true}
         />
-        <Route
+        <BasePage
             path="/about"
             component={AboutPage}
             title="About"
         />
-        <Route
+        <BasePage
             path="/bushfire-support"
             component={BushfireReliefPage}
             title="Bushfire Support"
         />
-        <Route
+        <BasePage
             path="/covid-19-support"
             component={Covid19StaticPage}
             title="COVID 19 Support"
         />
-        <Route
+        <BasePage
             path="/terms"
             component={TermsPage}
             title="Terms of use"
         />
-        <Route
+        <BasePage
             path="/online-safety"
             component={OnlineSafetyStaticPage}
             title="Online Safety"
         />
-        <Route
+        <BasePage
             path="/homeless-shelters"
             component={HomelessSheltersStaticPage}
             title="Homeless shelters"
         />
-        <Route
+        <BasePage
             path="/food-banks"
             component={FoodBanksStaticPage}
             title="Food Banks"
         />
-        <Route
+        <BasePage
             path="/homeless-support"
             component={HomelessSupportStaticPage}
             title="Homeless support"
         />
-        <Route
+        <BasePage
             path="/homeless-legal-services"
             component={HomelessLegalStaticPage}
             title="Homeless Legal Services"
         />
-        <Route
+        <BasePage
             path="/homeless-financial-support"
             component={HomelessFinanceStaticPage}
             title="Homeless financial support"
         />
-        <Route
+        <BasePage
             path="/homeless-health-care"
             component={HomelessHealthStaticPage}
             title="Homeless Health Care"
         />
-        <Route
+        <BasePage
             path="/information"
             component={InformationPage}
             title="Information"
         />
-
-        <Route
+        <BasePage
             path="/not-found"
             component={NotFoundStaticPage}
             title="Page not found"
         />
-        <Route
+        <BasePage
             path="/add-service"
             component={AddServicePage}
             title="Add a service"
         />
-        <Route
+        <BasePage
             path="/service/:slug"
             component={ServicePage}
         />
@@ -204,71 +198,64 @@ export const routeList = (
             "/:page/:suburb-:state",
             "/:page",
         ].map((str) => [
-            <Route
+            <BasePage
                 path={`${str}`}
                 component={ResultsPageListing}
                 title=":page in :suburb, :state"
                 exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/map`}
                 component={ResultsPageMap}
                 title="Map of :page in :suburb, :state"
                 exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/map/personalise`}
                 component={PersonalisationWizardPage}
                 exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/map/personalise/page/:subpage`}
                 component={PersonalisationWizardPage}
                 exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/map/personalise/summary`}
                 component={PersonalisationSummaryPage}
                 exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/map/personalise/summary/:subpage`}
                 component={PersonalisationSummaryPage}
                 exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/personalise`}
                 component={PersonalisationWizardPage}
                 exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/personalise/page/:subpage`}
                 component={PersonalisationWizardPage}
                 exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/personalise/summary`}
                 component={PersonalisationSummaryPage}
                 exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/personalise/summary/:subpage`}
                 component={PersonalisationSummaryPage}
                 exact={true}
             />,
         ])}
-        <Route
+        <BasePage
             path="*"
             component={NotFoundStaticPage}
             onEnter={removeDoubleSlashOnEnter404}
         />
     </Switch>
 
-);
-
-
-export default (
-    <BasePage>
-        {routeList}
-    </BasePage>
 );
