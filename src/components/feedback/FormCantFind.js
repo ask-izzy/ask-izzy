@@ -111,7 +111,7 @@ export default class FormFeedbackCantFind extends React.Component<{}, State> {
                                     <label
                                         htmlFor="FeedbackResultsNotCloseEnough"
                                     >
-                                        Not close enough
+                                        Not near me
                                     </label>
                                 </li>
                                 <li>
