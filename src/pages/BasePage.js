@@ -30,8 +30,6 @@ class BasePage extends Route<Props, {}> {
         let match = this.props.match || this.props.computedMatch
         const canonicalUrl = `https://askizzy.org.au${this.props.location.pathname}`;
         let Component = this.props.component;
-        // console.log('match', match, useHistory(), useLocation(), useParams())
-
 
         return (
             <InjectRouterContext matchedRoute={match}>
