@@ -8,7 +8,7 @@ type State = {
     input: Object,
 }
 
-export default class FormFeedbackCantFint extends React.Component<{}, State> {
+export default class FormFeedbackCantFind extends React.Component<{}, State> {
 
     state = {
         formSubmitted: false,
@@ -81,7 +81,7 @@ export default class FormFeedbackCantFint extends React.Component<{}, State> {
                 <form onSubmit={this.onSubmit}>
                     <h4>
                         Can&apos;t find what you&apos;re looking for?
-                        Results are:
+                        The results above are:
                     </h4>
                     {formError &&
                         <p className="formError">{formError}</p>
