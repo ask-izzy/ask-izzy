@@ -79,10 +79,12 @@ export default class FormFeedbackCantFind extends React.Component<{}, State> {
         return (
             <div className="FormCantFind">
                 <form onSubmit={this.onSubmit}>
-                    <h4>
-                        Can&apos;t find what you&apos;re looking for?
-                        The results above are:
-                    </h4>
+                    {!formSubmitted &&
+                        <h4>
+                            Can&apos;t find what you&apos;re looking for?
+                            The results above are:
+                        </h4>
+                    }
                     {formError &&
                         <p className="formError">{formError}</p>
                     }
