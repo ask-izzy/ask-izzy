@@ -52,4 +52,9 @@
             }
         }
     }
+
+    .ChevronIcon path {
+        fill: #{colours.get-static('raw-colour-rich-purple')};
+        fill: var(--raw-colour-rich-purple);
+    }
 }
