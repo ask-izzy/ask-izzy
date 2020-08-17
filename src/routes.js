@@ -15,26 +15,14 @@ import StyleGuideItem from "./pages/StyleGuideItem";
 
 import BasePage from "./pages/BasePage";
 import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
 import NotFoundStaticPage from "./pages/NotFoundStaticPage";
 import AddServicePage from "./pages/AddServicePage";
-import TermsPage from "./pages/TermsPage";
-
-import HomelessSheltersStaticPage from "./pages/HomelessSheltersStaticPage";
-import FoodStaticPage from "./pages/FoodStaticPage";
-import HomelessSupportStaticPage from "./pages/HomelessSupportStaticPage";
-import HomelessLegalStaticPage from "./pages/HomelessLegalStaticPage";
-import HomelessFinanceStaticPage from "./pages/HomelessFinanceStaticPage";
-import HomelessHealthStaticPage from "./pages/HomelessHealthStaticPage";
-import InformationPage from "./pages/InformationPage";
-import OnlineSafetyStaticPage from "./pages/OnlineSafetyStaticPage";
+import DynamicPage from "./pages/DynamicPage";
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
 import {ResultsPageListing, ResultsPageMap} from "./pages/ResultsPage";
 import ServicePage from "./pages/ServicePage";
-import BushfireReliefPage from "./pages/BushfireReliefPage";
-import Covid19StaticPage from "./pages/Covid19StaticPage";
 import {CovidSupportPageListing} from "./pages/CovidSupportPage";
 
 export function makeTitle(route: string, params: Object): string {
@@ -111,7 +99,7 @@ export default (
         />
         <BasePage
             path="/about"
-            component={AboutPage}
+            component={DynamicPage}
             title="About"
             state={{
                 pageType: vars => [
@@ -122,7 +110,7 @@ export default (
         />
         <BasePage
             path="/bushfire-support"
-            component={BushfireReliefPage}
+            component={DynamicPage}
             title="Bushfire Support"
             state={{
                 pageType: vars => [
@@ -133,7 +121,7 @@ export default (
         />
         <BasePage
             path="/covid-19-support"
-            component={Covid19StaticPage}
+            component={DynamicPage}
             title="COVID 19 Support"
             state={{
                 pageType: vars => [
@@ -161,7 +149,7 @@ export default (
         />
         <BasePage
             path="/terms"
-            component={TermsPage}
+            component={DynamicPage}
             title="Terms of use"
             state={{
                 pageType: vars => [
@@ -172,7 +160,7 @@ export default (
         />
         <BasePage
             path="/online-safety"
-            component={OnlineSafetyStaticPage}
+            component={DynamicPage}
             title="Online Safety"
             state={{
                 pageType: vars => [
@@ -183,7 +171,7 @@ export default (
         />
         <BasePage
             path="/homeless-shelters"
-            component={HomelessSheltersStaticPage}
+            component={DynamicPage}
             title="Homeless shelters"
             state={{
                 pageType: vars => [
@@ -194,7 +182,7 @@ export default (
         />
         <BasePage
             path="/food-info"
-            component={FoodStaticPage}
+            component={DynamicPage}
             title="Food"
             state={{
                 pageType: vars => [
@@ -205,7 +193,7 @@ export default (
         />
         <BasePage
             path="/homeless-support"
-            component={HomelessSupportStaticPage}
+            component={DynamicPage}
             title="Homeless support"
             state={{
                 pageType: vars => [
@@ -216,7 +204,7 @@ export default (
         />
         <BasePage
             path="/homeless-legal-services"
-            component={HomelessLegalStaticPage}
+            component={DynamicPage}
             title="Homeless Legal Services"
             state={{
                 pageType: vars => [
@@ -227,7 +215,7 @@ export default (
         />
         <BasePage
             path="/homeless-financial-support"
-            component={HomelessFinanceStaticPage}
+            component={DynamicPage}
             title="Homeless financial support"
             state={{
                 pageType: vars => [
@@ -238,7 +226,7 @@ export default (
         />
         <BasePage
             path="/homeless-health-care"
-            component={HomelessHealthStaticPage}
+            component={DynamicPage}
             title="Homeless Health Care"
             state={{
                 pageType: vars => [
@@ -249,7 +237,7 @@ export default (
         />
         <BasePage
             path="/information"
-            component={InformationPage}
+            component={DynamicPage}
             title="Information"
             state={{
                 pageType: vars => [
