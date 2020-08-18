@@ -9,16 +9,19 @@
 
     input {
         &[type="checkbox"] {
-            height: 20px;
+            height: 32px;
         }
     }
 
     label {
-        margin-left: 5px;
+        display: inline-block;
+        min-width: 100px;
+        height: 30px;
+        padding: 5px 0 5px 5px;
         font-weight: normal;
-        line-height: 20px;
+        line-height: 30px;
         cursor: pointer;
-        vertical-align: top;
+        vertical-align: bottom;
     }
 
     .moreInformation {
