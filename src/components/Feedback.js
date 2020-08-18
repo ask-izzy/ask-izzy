@@ -37,14 +37,6 @@ export default class Feedback extends React.Component<Props, State> {
         }, "GTM-54BTPQM");
     }
 
-    closeFeedback = (event: SyntheticEvent<>): void => {
-        event.preventDefault();
-        console.log("cancel");
-        this.setState({
-            collapsed: true,
-        });
-    }
-
     toggleFeedback = (event: SyntheticEvent<>): void => {
         event.preventDefault();
         this.setState(prevState => ({
@@ -68,7 +60,7 @@ export default class Feedback extends React.Component<Props, State> {
                     </a>
                     {!collapsed &&
                     <div className="inline">
-                        <FormReportError onCancel={this.closeFeedback} />
+                        <FormReportError />
                     </div>
                     }
                 </div>
