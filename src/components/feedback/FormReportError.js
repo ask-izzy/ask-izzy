@@ -2,9 +2,7 @@
 
 import React from "react";
 
-type Props = {
-    onCancel: Function,
-}
+type Props = {}
 
 type State = {
     formSubmitted: boolean,
@@ -156,11 +154,6 @@ export default class FormReportError extends React.Component<Props, State> {
                     }
 
                     <div className="formControls">
-                        <a href="#"
-                            onClick={this.props.onCancel}
-                        >
-                            Cancel
-                        </a>
                         <button type="submit">Send feedback</button>
                     </div>
                 </form>
