@@ -9,6 +9,10 @@
         padding: 10px 0;
     }
 
+    a {
+        font-weight: normal;
+    }
+
     h4 {
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);

@@ -12,16 +12,19 @@
 
     input {
         &[type='checkbox'] {
-            height: 20px;
+            height: 32px;
         }
     }
 
     label {
-        margin-left: 5px;
+        display: inline-block;
+        min-width: 100px;
+        height: 30px;
+        padding: 5px 0 5px 5px;
         font-weight: normal;
-        line-height: 20px;
+        line-height: 30px;
         cursor: pointer;
-        vertical-align: top;
+        vertical-align: bottom;
     }
 
     .moreInformation {
@@ -34,6 +37,9 @@
         textarea {
             display: block;
             width: 100%;
+            max-width: 100%;
+            padding: 10px;
+            font-weight: normal;
             box-sizing: border-box;
         }
     }
@@ -46,10 +52,7 @@
     }
 
     .formControls {
-        text-align: right;
-
         button {
-            margin-left: 10px;
             padding: 5px 10px;
             border: 1px solid #{colours.get-static('colour-button-standard')};
             border: 1px solid 1px solid var(--colour-button-standard);
