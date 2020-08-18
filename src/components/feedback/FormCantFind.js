@@ -8,7 +8,7 @@ type State = {
     input: Object,
 }
 
-export default class FormFeedbackCantFint extends React.Component<{}, State> {
+export default class FormFeedbackCantFind extends React.Component<{}, State> {
 
     state = {
         formSubmitted: false,
@@ -79,10 +79,12 @@ export default class FormFeedbackCantFint extends React.Component<{}, State> {
         return (
             <div className="FormCantFind">
                 <form onSubmit={this.onSubmit}>
-                    <h4>
-                        Can&apos;t find what you&apos;re looking for?
-                        Results are:
-                    </h4>
+                    {!formSubmitted &&
+                        <h4>
+                            Can&apos;t find what you&apos;re looking for?
+                            The results above are:
+                        </h4>
+                    }
                     {formError &&
                         <p className="formError">{formError}</p>
                     }
@@ -111,7 +113,7 @@ export default class FormFeedbackCantFint extends React.Component<{}, State> {
                                     <label
                                         htmlFor="FeedbackResultsNotCloseEnough"
                                     >
-                                        Not close enough
+                                        Not near me
                                     </label>
                                 </li>
                                 <li>
