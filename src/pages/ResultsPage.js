@@ -302,11 +302,13 @@ class ResultsPage extends BaseCategoriesPage<State> {
     renderLoadMore() {
         if (this.state.meta && this.state.meta.next) {
             return (
-                <ButtonListItem
-                    className="MoreResultsButton"
-                    primaryText="See more results"
-                    onClick={this.loadMore.bind(this)}
-                />
+                <div className="moreResultsContainer">
+                    <ButtonListItem
+                        className="MoreResultsButton"
+                        primaryText="See more results"
+                        onClick={this.loadMore.bind(this)}
+                    />
+                </div>
             );
         }
 
