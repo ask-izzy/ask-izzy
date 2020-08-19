@@ -574,7 +574,7 @@ async function _search(
             onBehalfOf: storage.getItem("user_type"),
         });
         gtm.emit({
-            event: "Search On Behalf Of",
+            event: "New Search On Behalf Of",
             eventCat: "Services Searched",
             eventAction: "Help Seeker Type",
             eventLabel: String(storage.getItem("user_type")),
