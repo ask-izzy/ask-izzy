@@ -156,7 +156,7 @@ class TransportTime extends React.Component<{
         });
 
         gtm.emit({
-            event: "Search On Behalf Of",
+            event: "Google Maps Link Clicked",
             eventCat: "External Link Clicked",
             eventAction: "Google Maps Directions",
             eventLabel: window.location.pathname,
