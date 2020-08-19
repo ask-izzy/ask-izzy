@@ -21,7 +21,7 @@
             width: 96%;
             padding: 10px 2%;
             border: 1px solid $brand-bg-mid;
-            border-radius: 3px;
+            border-radius: $rounded-border;
             -webkit-appearance: none;
         }
     }
