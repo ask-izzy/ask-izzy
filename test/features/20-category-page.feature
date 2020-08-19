@@ -27,7 +27,7 @@ Feature: Category page
         --------------------------------------------------------------------------
 
         # The housing category has 3 results
-        And I should not see "Load more results…"
+        And I should not see "See more results"
 
     Scenario: A service with 5 service provisions only shows 4
        Given A service with:
@@ -55,9 +55,9 @@ Feature: Category page
 
     Scenario: Visit a category with more than 5 services
         When I visit /everyday-things
-        Then I should see "Load more results…"
+        Then I should see "See more results"
 
-        When I click on "Load more results…"
+        When I click on "See more results"
          And I wait for 10 results to load
         Then I should see the results
         --------------------
