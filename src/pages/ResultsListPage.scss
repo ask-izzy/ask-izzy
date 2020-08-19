@@ -3,13 +3,13 @@
 .ResultsListPage {
     .progress {
         width: 100%;
-        padding-top: 40px;
-        padding-bottom: 40px;
+        padding-top: 20px;
+        padding-bottom: 20px;
 
         & > * {
             display: block;
-            width: 60px;
-            height: 60px;
+            width: 57px;
+            height: 57px;
             margin-right: auto;
             margin-left: auto;
         }
@@ -56,15 +56,24 @@
         }
     }
 
+    .moreResultsContainer {
+        padding: 20px 0;
+        background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+        background-color: var(--colour-bg-standard-tint-2);
+    }
+
     .MoreResultsButton {
-        border-right: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
-        border-right: 10px solid var(--colour-bg-standard-tint-2);
-        border-bottom: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
-        border-bottom: 10px solid var(--colour-bg-standard-tint-2);
-        border-left: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
-        border-left: 10px solid var(--colour-bg-standard-tint-2);
+        max-width: 300px;
+        margin: 0 auto;
+        background-color: #{colours.get-static('colour-bg-opposite')};
+        background-color: var(--colour-bg-opposite);
         font-size: 14px;
         text-align: center;
+
+        .primaryText {
+            color: #{colours.get-static('colour-text-very-light')};
+            color: var(--colour-text-very-light);
+        }
     }
 
     .CrisisHeader {
