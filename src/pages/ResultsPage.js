@@ -304,7 +304,7 @@ class ResultsPage extends BaseCategoriesPage<State> {
             return (
                 <ButtonListItem
                     className="MoreResultsButton"
-                    primaryText="Load more results…"
+                    primaryText="See more results"
                     onClick={this.loadMore.bind(this)}
                 />
             );
