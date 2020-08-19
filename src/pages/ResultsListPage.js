@@ -133,7 +133,7 @@ class ResultsListPage extends ResultsPage<> {
             return (
                 <ButtonListItem
                     className="MoreResultsButton"
-                    primaryText="Load more results…"
+                    primaryText="See more results"
                     onClick={this.loadNextSearchPage}
                     analyticsEvent={{
                         event: "Action Triggered - Load More Results",
