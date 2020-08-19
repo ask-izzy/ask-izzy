@@ -267,9 +267,7 @@ $bright-purple: #8a2be2;
                 border: 0;
                 border-radius: 0 5px 5px 0;
 
-                border-top-right-radius: $rounded-border;
-                border-bottom-right-radius: $rounded-border;
-
+                border-radius: 0 $rounded-border $rounded-border 0;
                 font-size: 14px;
             }
         }
