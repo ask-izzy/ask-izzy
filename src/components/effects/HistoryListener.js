@@ -89,22 +89,59 @@ export default (props: Object) => {
 }
 
 function recordAnalytics(routeMatch) {
-    // Gather and set analytics environment variables
-    gtm.setPageVars(routeMatch, "GTM-54BTPQM")
-
     // Since Ask Izzy is a SPA we need to manually register each
     // new page view
-    let hash = location.href.match(/(#[^#]*)$/)
     gtm.emit({
         event: "Page Viewed",
     });
+
+    // Gather and set analytics environment variables
+    const pageVars = getPageVars(routeMatch)
+    gtm.setPersistentVars(Object.keys(pageVars))
+                
+    let hash = location.href.match(/(#[^#]*)$/)
     gtm.emit({
-        event: "Page Viewed",
+        event: "Page Loaded",
         path: location.pathname,
         hash,
+        ...pageVars,
     }, "GTM-54BTPQM");
 
     if (posthog.posthogShouldBeLoaded) {
         posthog.client.capture("$pageview");
     }
+}
+
+export function getPageVars(routeMatch: Object) {
+    const pageVars = {
+        category: undefined,
+        covidCategory: undefined,
+        pageType: undefined,
+        routes: undefined,
+        serviceListingType: undefined,
+    }
+
+    const routeParams = routeMatch.params
+    const routeState = routeMatch.props.state
+    pageVars.pageType = routeState.pageType
+
+    if (routeMatch.props.name === "Service Listing") {
+        if (routeParams.page) {
+            pageVars.serviceListingType = "Category"
+            pageVars.category = categories
+                .find(cat => cat.key === routeParams.page) ||
+                null
+        } else {
+            pageVars.serviceListingType = "Search"
+        }
+    }
+
+    if (routeMatch.props.name === "Covid Support Category") {
+        pageVars.covidCategory = covidCategories
+            .find(
+                cat => cat.slug === routeParams.supportCategorySlug
+            ) || null
+    }
+
+    return pageVars
 }
