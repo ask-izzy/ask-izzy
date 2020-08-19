@@ -300,7 +300,7 @@ class ResultsPage extends BaseCategoriesPage {
             return (
                 <ButtonListItem
                     className="MoreResultsButton"
-                    primaryText="Load more results…"
+                    primaryText="See more results"
                     onClick={this.loadMore.bind(this)}
                 />
             );
