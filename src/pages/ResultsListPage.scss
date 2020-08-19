@@ -1,14 +1,13 @@
 .ResultsListPage {
     .progress {
         width: 100%;
-        padding-top: 40px;
-        padding-bottom: 40px;
+        padding-top: 20px;
+        padding-bottom: 20px;
 
         & > * {
             display: block;
-            width: 60px;
-            height: 60px;
-
+            width: 57px;
+            height: 57px;
             margin-right: auto;
             margin-left: auto;
         }
@@ -58,12 +57,21 @@
         }
     }
 
+    .moreResultsContainer {
+        padding: 20px 0;
+        background-color: $brand-bg-light;
+    }
+
     .MoreResultsButton {
-        border-right: 10px solid $brand-bg-light;
-        border-bottom: 10px solid $brand-bg-light;
-        border-left: 10px solid $brand-bg-light;
+        max-width: 300px;
+        margin: 0 auto;
+        background-color: $brand-bg-dark;
         font-size: 14px;
         text-align: center;
+
+        .primaryText {
+            color: $white;
+        }
     }
 
     .CrisisHeader {
