@@ -9,7 +9,7 @@ import storage from "../storage";
 import * as gtm from "../google-tag-manager";
 
 import AppBar from "../components/AppBar";
-import ButtonListItem from "../components/ButtonListItem";
+import FlatButton from "../components/FlatButton";
 import ResultsMap from "../components/ResultsMap";
 import DebugContainer from "../components/DebugContainer";
 import DebugPersonalisation from "../components/DebugPersonalisation";
@@ -306,9 +306,9 @@ class ResultsPage extends BaseCategoriesPage {
         if (this.state.meta && this.state.meta.next) {
             return (
                 <div className="moreResultsContainer">
-                    <ButtonListItem
+                    <FlatButton
                         className="MoreResultsButton"
-                        primaryText="See more results"
+                        label="See more results"
                         onClick={this.loadMore.bind(this)}
                     />
                 </div>
