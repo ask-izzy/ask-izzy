@@ -2,6 +2,7 @@
 
 .FlatButton {
     border: 0;
+    border-radius: $rounded-border;
     background-color: #{colours.get-static('colour-button-primary')};
     background-color: var(--colour-button-primary);
     color: #{colours.get-static('colour-text-very-light')};
