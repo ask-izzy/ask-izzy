@@ -63,15 +63,15 @@
     }
 
     .MoreResultsButton {
+        display: block;
+        width: 100%;
         max-width: 300px;
         margin: 0 auto;
+        padding: 10px;
         background-color: $brand-bg-dark;
-        font-size: 14px;
+        color: $white;
+        font-size: 16px;
         text-align: center;
-
-        .primaryText {
-            color: $white;
-        }
     }
 
     .CrisisHeader {
