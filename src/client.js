@@ -8,7 +8,6 @@ import storage from "./storage";
 import routes from "./routes";
 import * as gtm from "./google-tag-manager";
 import searchTest from "./search-test";
-import categories from "./constants/categories";
 
 window.searchTest = searchTest;
 
