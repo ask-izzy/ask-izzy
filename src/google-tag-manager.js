@@ -1,6 +1,4 @@
 /* @flow */
-import categories from "./constants/categories";
-import covidCategories from "./constants/covidSupportCategories";
 
 export function emit(event: AnalyticsEvent, gtmId?: string): void {
     getDataLayer(gtmId).push(event)
@@ -9,8 +7,8 @@ export function emit(event: AnalyticsEvent, gtmId?: string): void {
         const varsToFlush = Object.keys(
             Object.assign({}, ...getDataLayer(gtmId))
         ).filter(key => !persistentVars.has(key))
-        // If GTM has loaded then flush directly
 
+        // If GTM has loaded then flush directly
         if (window.google_tag_manager) {
             for (const key of varsToFlush) {
                 window.google_tag_manager[gtmId].dataLayer.set(key, undefined)
@@ -48,46 +46,8 @@ export type AnalyticsEvent = {
     sendDirectlyToGA?: bool,
 };
 
-const pageVars = {
-    category: undefined,
-    covidCategory: undefined,
-    pageType: undefined,
-    routes: undefined,
-    serviceListingType: undefined,
-}
+const persistentVars = new Set(["event"])
 
-const persistentVars = new Set(["event", ...Object.keys(pageVars)])
-
-export function setPageVars(
-    routes: Object, routeParams: Object, gtmId: string
-) {
-    const routeState = Object.assign(
-        {},
-        ...routes.map(route => route.state)
-    )
-
-    pageVars.pageType = routeState.pageType
-    pageVars.routes = routes.map(({name}) => ({name}))
-
-    if (routes.find(route => route.name === "Service Listing")) {
-        if (routeParams.page) {
-            pageVars.serviceListingType = "Category"
-            pageVars.category = categories
-                .find(cat => cat.key === routeParams.page) ||
-                null
-        } else {
-            pageVars.serviceListingType = "Search"
-        }
-    }
-
-    if (routes.find(route => route.name === "Covid Support Category")) {
-        pageVars.covidCategory = covidCategories
-            .find(
-                cat => cat.slug === routeParams.supportCategorySlug
-            ) || null
-    }
-
-    const event = Object.assign({}, {event: "Set Page Vars"}, pageVars)
-
-    getDataLayer(gtmId).push(event)
+export function setPersistentVars(varKeys: Array<String>) {
+    varKeys.forEach(key => persistentVars.add(key))
 }
