@@ -4,6 +4,8 @@ import xhr from "axios";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Router } from "react-router-dom";
+import categories from "./constants/categories";
+import covidCategories from "./constants/covidSupportCategories";
 import storage from "./storage";
 import routes from "./routes";
 import * as gtm from "./google-tag-manager";
@@ -43,14 +45,15 @@ ReactDOM.hydrate(
     <Router 
         history={history}
         onUpdate={() => {
-            // Gather and set analytics environment variables
-            gtm.setPageVars(
-                this.state.routes, this.state.params, "GTM-54BTPQM"
-            )
+            // Since Ask Izzy is a SPA we need to manually register each
+            // new page view
+            gtm.emit({
+                event: "Page Viewed",
+            });
 
             const lastRecordedView = Array.from(gtm.getDataLayer("GTM-54BTPQM"))
                 .reverse()
-                .find(layer => layer.event === "Page Viewed")
+                .find(layer => layer.event === "Page Loaded")
 
             if (
                 // Don't record page view if redirecting
@@ -62,18 +65,21 @@ ReactDOM.hydrate(
                     location.hash !== lastRecordedView.hash
                 )
             ) {
-                // Since Ask Izzy is a SPA we need to manually register each
-                // new page view
-                gtm.emit({
-                    event: "Page Viewed",
-                });
+                // Gather and set analytics environment variables
+                const pageVars = getPageVars(
+                    this.state.routes,
+                    this.state.params
+                )
+
+                gtm.setPersistentVars(Object.keys(pageVars))
                 let hash = location.href.match(/(#[^#]*)$/)
 
                 hash = hash && hash[1]
                 gtm.emit({
-                    event: "Page Viewed",
+                    event: "Page Loaded",
                     path: location.pathname,
                     hash,
+                    ...pageVars,
                 }, "GTM-54BTPQM");
 
                 if (posthog.posthogShouldBeLoaded) {
@@ -119,3 +125,41 @@ window.addEventListener("error", (e) => {
         sendDirectlyToGA: true,
     }, "GTM-54BTPQM");
 });
+
+export function getPageVars(routes: Object, routeParams: Object) {
+    const pageVars = {
+        category: undefined,
+        covidCategory: undefined,
+        pageType: undefined,
+        routes: undefined,
+        serviceListingType: undefined,
+    }
+
+    const routeState = Object.assign(
+        {},
+        ...routes.map(route => route.state)
+    )
+
+    pageVars.pageType = routeState.pageType
+    pageVars.routes = routes.map(({name}) => ({name}))
+
+    if (routes.find(route => route.name === "Service Listing")) {
+        if (routeParams.page) {
+            pageVars.serviceListingType = "Category"
+            pageVars.category = categories
+                .find(cat => cat.key === routeParams.page) ||
+                null
+        } else {
+            pageVars.serviceListingType = "Search"
+        }
+    }
+
+    if (routes.find(route => route.name === "Covid Support Category")) {
+        pageVars.covidCategory = covidCategories
+            .find(
+                cat => cat.slug === routeParams.supportCategorySlug
+            ) || null
+    }
+
+    return pageVars
+}
