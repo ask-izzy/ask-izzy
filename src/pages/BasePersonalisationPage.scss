@@ -27,7 +27,7 @@
             padding: 10px 2%;
             border: 1px solid #{colours.get-static('colour-border-list-item-dark')};
             border: 1px solid var(--colour-border-list-item-dark);
-            border-radius: 3px;
+            border-radius: $rounded-border;
             -webkit-appearance: none;
         }
     }
