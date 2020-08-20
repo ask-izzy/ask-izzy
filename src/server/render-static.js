@@ -9,7 +9,7 @@ import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import mkdirp from "mkdirp";
 
-import routes, { makeTitle, routeList } from "../routes";
+import routes from "../routes";
 
 import HtmlDocument from "./HtmlDocument";
 // flow:disable
@@ -39,12 +39,9 @@ function renderPage(uri: string, path: string, params: Object): void {
         // flow:disable
         next();
     } else {
-        const title = makeTitle(
-            routeList.props.children,
-            params
-        )
+
         const markup = ReactDOMServer.renderToString(
-            <StaticRouter location={{pathname: path}}
+            <StaticRouter location={{pathname: reqUrl.pathname}}
                 context={context}
             >{routes}</StaticRouter>
         );
@@ -55,7 +52,6 @@ function renderPage(uri: string, path: string, params: Object): void {
         // and sent as response.
         const html = ReactDOMServer.renderToString(
             <HtmlDocument
-                title={title}
                 markup={markup}
                 script={webpackStats.script}
                 css={webpackStats.css}
@@ -171,4 +167,4 @@ function renderRoute(route: React.Element<any>, prefix: string): void {
 
 }
 
-renderRoute(routeList, "");
+renderRoute(routes, "");
