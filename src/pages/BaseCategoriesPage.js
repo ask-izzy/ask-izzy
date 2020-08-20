@@ -69,7 +69,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
             return Object.assign({}, this.category.search);
         } else if (this.props.match.params.search) {
             return {
-                q: this.props.match.params.search,
+                q: decodeURIComponent(this.props.match.params.search),
             };
         } else {
             return {
