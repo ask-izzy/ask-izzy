@@ -2,9 +2,8 @@
 /* eslint-disable valid-jsdoc */
 
 import React from "react";
-import {Route, Redirect, Switch} from "react-router-dom";
+import {Redirect, Switch} from "react-router-dom";
 import {titleize} from "underscore.string";
-import _ from "underscore";
 
 // If you import these after the others,
 // babel decides the navbar doesn't really
