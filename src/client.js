@@ -10,6 +10,7 @@ import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
 import history from "./utils/history";
+import ScrollToTop from "./components/ScrollToTop";
 
 window.searchTest = searchTest;
 window.categories = categories;
@@ -49,7 +50,11 @@ ReactDOM.hydrate(
                 event: "Page Viewed",
             });
         }}
-    >{routes}</Router>,
+    >
+        <ScrollToTop>
+            {routes}
+        </ScrollToTop>
+    </Router>,
     document.getElementById("root")
 )
 
