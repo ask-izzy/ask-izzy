@@ -6,7 +6,7 @@ import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import url from "url";
-import routes, { makeTitle } from "../routes";
+import routes from "../routes";
 import HtmlDocument from "./HtmlDocument";
 import Helmet from "react-helmet";
 
@@ -54,14 +54,8 @@ export default function render(req, res, next) {
             >{routes}</StaticRouter>
         );
 
-        const title = makeTitle(
-            routes,
-            {}
-        )
-
         const html = ReactDOMServer.renderToString(
             <HtmlDocument
-                title={title}
                 markup={app}
                 script={webpackStats.script}
                 css={webpackStats.css}
