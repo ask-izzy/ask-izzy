@@ -170,6 +170,7 @@ export default (
         <BasePage
             path="/service/:slug"
             component={ServicePage}
+            exact={true}
         />
         <Redirect
             from="/category/:page"
