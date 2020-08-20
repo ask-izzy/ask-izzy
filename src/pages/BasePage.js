@@ -2,7 +2,6 @@
 
 import React from "react";
 import Helmet from "react-helmet";
-import DocumentTitle from "react-document-title";
 import { makeTitle } from "../routes";
 import { Route } from "react-router";
 import history from "../utils/history";
@@ -26,7 +25,8 @@ class BasePage extends Route<Props, {}> {
     render() {
         let match = this.props.match || this.props.computedMatch
         const canonicalUrl = `https://askizzy.org.au${this.props.location.pathname}`;
-        console.log(this.props)
+        let Component = this.props.component;
+
         return (
             <div className="BasePage">
                 <Helmet>
@@ -49,7 +49,11 @@ class BasePage extends Route<Props, {}> {
                 </Helmet>
 
                 <main>
-                    <this.props.component {...this.props} match={match} history={history} />
+                    <Component
+                        {...this.props}
+                        match={match}
+                        history={history}
+                    />
                 </main>
             </div>
         );
