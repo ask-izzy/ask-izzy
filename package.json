@@ -50,7 +50,6 @@
     "postcss-loader": "2.1.6",
     "proptypes": "1.1.0",
     "react": "16.13.1",
-    "react-document-title": "2.0.3",
     "react-dom": "16.13.1",
     "react-google-maps": "git+https://git@github.com/infoxchange/react-google-maps.git#v9.4.5",
     "react-helmet": "5.2.0",
