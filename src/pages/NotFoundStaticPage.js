@@ -5,14 +5,13 @@ import React from "react";
 import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
-import history from "../utils/history";
+import {onBack} from "../utils/history";
 
 type Props = {}
 
 export default class NotFoundStaticPage extends React.Component<Props, void> {
 
     render() {
-        let back = () => history.back();
 
         return (
             <div
@@ -20,7 +19,7 @@ export default class NotFoundStaticPage extends React.Component<Props, void> {
             >
                 <AppBar
                     title="Page not found"
-                    onBackTouchTap={back}
+                    onBackTouchTap={onBack}
                 />
                 <HeaderBar
                     primaryText={null}

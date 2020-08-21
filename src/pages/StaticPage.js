@@ -6,7 +6,7 @@ import PropTypes from "proptypes";
 import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
-import history from "../utils/history";
+import {onBack} from "../utils/history";
 
 type Props = {
   title: string,
@@ -33,13 +33,12 @@ export default class StaticPage extends React.Component<Props> {
     };
 
     render() {
-        let back = () => history.back();
 
         return (
             <div className={`StaticPage ${this.props.className}`}>
                 <AppBar
                     title={this.props.title}
-                    onBackTouchTap={back}
+                    onBackTouchTap={onBack}
                 />
                 {
                     this.props.bannerName ?

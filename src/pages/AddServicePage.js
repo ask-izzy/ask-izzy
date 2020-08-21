@@ -4,7 +4,7 @@ import url from "url";
 import React from "react";
 
 import components from "../components";
-import history from "../utils/history";
+import {onBack} from "../utils/history";
 
 declare var ISS_URL: string;
 
@@ -78,7 +78,7 @@ class AddServicePage extends React.Component<Props, State> {
             <div className="AddServicePage">
                 <components.AppBar
                     title="Add a service"
-                    onBackTouchTap={history.back}
+                    onBackTouchTap={onBack}
                 />
 
                 <div className="body">

@@ -4,7 +4,7 @@ import PropTypes from "proptypes";
 
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
-import history from "../utils/history";
+import history, {onBack} from "../utils/history";
 
 class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     ExtraState
@@ -18,7 +18,7 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     previousStep(): void {
         // If our subpage has an onPreviousStep hook, call it, otherwise
         // just go back.
-        history.back();
+        onBack();
     }
 
     nextStep(): void {

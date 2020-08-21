@@ -11,7 +11,7 @@ import Maps from "../maps";
 import type {MapsApi} from "../maps";
 import ResultsList from "./ResultsList";
 import storage from "../storage";
-import history from "../utils/history";
+import {onBack} from "../utils/history";
 
 type Props = {
     objects: Array<Object>,
@@ -203,7 +203,7 @@ class ResultsMap extends React.Component<Props, State> {
         if (!_.isEmpty(this.state.selectedServices)) {
             this.clearSelection();
         } else {
-            history.back();
+            onBack();
         }
     }
 
