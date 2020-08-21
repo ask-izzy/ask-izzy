@@ -175,22 +175,27 @@ export default (
         <Redirect
             from="/category/:page"
             to="/:page"
+            exact={true}
         />
         <Redirect
             from="/category/:page/in/:suburb-:state"
             to="/:page/:suburb-:state"
+            exact={true}
         />
         <Redirect
             from="/search/:search/in/:suburb-:state"
             to="/search/:search/:suburb-:state"
+            exact={true}
         />
         <Redirect
             from="/have-your-say"
             to="/advocacy"
+            exact={true}
         />
         <Redirect
             from="/have-your-say/:page"
             to="/advocacy/:page"
+            exact={true}
         />
         {[
             "/search/:search/:suburb-:state",
