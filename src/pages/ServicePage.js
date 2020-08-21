@@ -10,7 +10,7 @@ import type {Service} from "../iss";
 import components from "../components";
 import Loading from "../icons/Loading";
 import config from "../config";
-import history from "../utils/history";
+import {onBack} from "../utils/history";
 
 class ServicePage extends React.Component<{
     params: {
@@ -77,14 +77,13 @@ class ServicePage extends React.Component<{
             object,
             error,
         } = this.state;
-        const back = () => history.back();
 
         if (!object) {
             return (
                 <div className="ServicePage">
                     <components.AppBar
                         title="Loading..."
-                        onBackTouchTap={back}
+                        onBackTouchTap={onBack}
                     />
                     <div className="ServicePane">
                         <main>
@@ -117,7 +116,7 @@ class ServicePage extends React.Component<{
                 <div className="ServicePage">
                     <components.AppBar
                         title={object.site.name}
-                        onBackTouchTap={back}
+                        onBackTouchTap={onBack}
                     />
                     <ServicePane service={object}/>
                 </div>
