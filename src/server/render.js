@@ -51,8 +51,14 @@ export default function render(req, res, next) {
         const app = ReactDOMServer.renderToString(
             <StaticRouter location={req.url}
                 context={context}
+                isRenderingStatic={false}
             >{routes}</StaticRouter>
         );
+
+        if (context.url) {
+            // Somewhere a `<Redirect>` was rendered
+            res.redirect(302, context.url);
+        }
 
         const html = ReactDOMServer.renderToString(
             <HtmlDocument
