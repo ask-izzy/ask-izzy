@@ -1,4 +1,5 @@
 /* @flow */
+// flow:disable
 import React, { useEffect, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import storage from "../storage";
