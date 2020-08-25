@@ -25,10 +25,6 @@ class ServicePage extends React.Component<{
         match: PropTypes.object,
     };
 
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
-
     constructor(props: Object) {
         super(props);
         this.state = {};

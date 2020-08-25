@@ -2,7 +2,6 @@
 /* eslint-disable max-len */
 
 import * as React from "react";
-import PropTypes from "proptypes";
 import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
@@ -26,10 +25,6 @@ export default class StaticPage extends React.Component<Props> {
     static sampleProps = {
         title: "Food Banks",
         bannerName: "food",
-    };
-
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
     };
 
     render() {
