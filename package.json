@@ -52,7 +52,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-google-maps": "git+https://git@github.com/infoxchange/react-google-maps.git#v9.4.5",
-    "react-helmet": "5.2.0",
+    "react-helmet": "6.1.0",
     "react-mixin": "4.0.0",
     "react-router-dom": "5.2.0",
     "saffron-sass": "git+https://github.com/infoxchange/saffron.git",
