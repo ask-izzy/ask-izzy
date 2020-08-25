@@ -29,10 +29,6 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
     Object, State & ExtraState> {
     _category: Category;
 
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
-
     /**
      * category:
      *
@@ -98,7 +94,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         }
 
         return components.filter(component => {
-            if (this.context.router.isRenderingStatic) {
+            if (this.props.isRenderingStatic) {
                 if (typeof component.staticShowPage === "function") {
                     return component.staticShowPage();
                 }
