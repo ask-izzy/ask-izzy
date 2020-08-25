@@ -12,7 +12,7 @@ function ScrollToTop({ history, children }) {
         storage.setHistoryLength(newLength);
     }
 
-    useEffect(() => history.listen(({location, action}) => {
+    useEffect(() => history.listen((location, action) => {
         window.scrollTo(0, 0);
 
         if (action === "POP") {
