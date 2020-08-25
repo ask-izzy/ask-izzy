@@ -58,6 +58,7 @@ export default function render(req, res, next) {
         if (context.url) {
             // Somewhere a `<Redirect>` was rendered
             res.redirect(302, context.url);
+            return;
         }
 
         const html = ReactDOMServer.renderToString(
