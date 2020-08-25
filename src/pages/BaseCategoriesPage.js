@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from "react";
-import PropTypes from "proptypes";
 import _ from "underscore";
 
 import categories, {Category} from "../constants/categories";
