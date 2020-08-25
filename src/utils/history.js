@@ -14,7 +14,7 @@ export const onBack = () => {
     let historyLength = storage.getHistoryLength();
 
     if (historyLength > 0) {
-        history.back();
+        history.goBack();
     } else {
         history.push("/")
     }
