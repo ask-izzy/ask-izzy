@@ -9,9 +9,7 @@
 
 @import "../styles/shared/plain-text";
 @import "../styles/shared/print-only";
-@import "../styles/Bushfire";
-@import "../styles/Covid19";
-@import "../styles/CurrentEmergency";
+@import "../styles/siteBanner";
 @import "../components/Accessibility";
 @import "../components/Address";
 @import "../components/AppBar";
@@ -56,6 +54,8 @@
 @import "../pages/personalisation/AreYouSafe";
 @import "../pages/BasePage";
 @import "../pages/BasePersonalisationPage";
+@import "../pages/BushfireReliefPage";
+@import "../pages/Covid19StaticPage";
 @import "../pages/HomePage";
 @import "../pages/personalisation/ServicePage";
 @import "../pages/ResultsListPage";

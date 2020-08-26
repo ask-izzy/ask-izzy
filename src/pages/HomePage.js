@@ -46,7 +46,7 @@ class HomePage extends React.Component<{}, void> {
         " call 1800 Respect on 1800 737 732 (Helpline).";
 
         return (
-            <div className="HomePage CurrentEmergency">
+            <div className="HomePage containsSiteBanner-notice">
                 <div className="header">
                     <div className="desktop">
                         <span className="quick-exit-right" />
@@ -106,7 +106,7 @@ class HomePage extends React.Component<{}, void> {
                             </div>
                         </form>
                     </HeaderBar>
-                    <div className="CurrentEmergencyNotice">
+                    <div className="siteBanner-notice">
                         <h3>
                             Coronavirus (COVID-19) health information
                         </h3>
