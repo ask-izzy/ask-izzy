@@ -2,6 +2,7 @@
 
 import React from "react";
 
+import ExpandArrow from "../icons/ExpandArrow";
 import HeaderBar from "../components/HeaderBar";
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
@@ -75,36 +76,20 @@ class HomePage extends React.Component<{}, void> {
                         bannerName="homepage"
                         alternateBackgroundColor={false}
                     >
-
-                        <form
-                            className="search"
-                            onSubmit={this.onSearchSubmit.bind(this)}
-                        >
-                            <img
-                                src={logo}
-                                className="homepage-logo"
-                                alt="AskIzzy"
-                            />
-                            <div className="primary">
-                                What do you need?
+                        <img
+                            src={logo}
+                            className="homepage-logo"
+                            alt="AskIzzy"
+                        />
+                        <div className="primary">
+                            Find the help you need, now and nearby
+                        </div>
+                        <a href="#main">
+                            <div className="secondary">
+                                Search over 370,000 support services
                             </div>
-                            <div className="searchWrapper">
-                                <input
-                                    ref={element => {
-                                        this.search = element;
-                                    }}
-                                    type="search"
-                                    placeholder=
-                                        "e.g. housing, food, legal help"
-                                    aria-label="Search"
-                                    defaultValue={storage.getSearch()}
-                                />
-                                <FlatButton
-                                    label="Search"
-                                    onClick={this.onSearchSubmit.bind(this)}
-                                />
-                            </div>
-                        </form>
+                            <ExpandArrow />
+                        </a>
                     </HeaderBar>
                     <div className="siteBanner-notice">
                         <h3>
@@ -121,6 +106,32 @@ class HomePage extends React.Component<{}, void> {
                 </div>
 
                 <div className="body">
+                    <a className="anchor"
+                        id="main"
+                    />
+                    <form
+                        className="search"
+                        onSubmit={this.onSearchSubmit.bind(this)}
+                    >
+                        <div className="searchWrapper">
+                            <input
+                                ref={element => {
+                                    this.search = element;
+                                }}
+                                type="search"
+                                placeholder={
+                                    "Food vouchers, rent assistance, " +
+                                    "emergency relief"
+                                }
+                                aria-label="Search"
+                                defaultValue={storage.getSearch()}
+                            />
+                            <FlatButton
+                                label="Search"
+                                onClick={this.onSearchSubmit.bind(this)}
+                            />
+                        </div>
+                    </form>
                     <NavBar />
                 </div>
 
