@@ -16,6 +16,18 @@ case "$1" in
         exec ./script/typecheck
         ;;
 
+    lint-fix-eslint)
+        shift 1
+
+        exec npx eslint --fix src/ test/ fixtures/ webpack/ config/
+        ;;
+
+    lint-fix-sass)
+        shift 1
+
+        exec npx sass-lint-auto-fix -c .sass-lint.yml
+        ;;
+
     unit-test)
         shift 1
 
