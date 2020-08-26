@@ -50,12 +50,11 @@ export default class HomelessHealthStaticPage extends React.Component<{}> {
                 <p>
                     To receive bulk billing you will need a Medicare card.
                     If you do not have one, you can request one on via the {" "}
-                    <Link
-                        to={"http://www.humanservices.gov.au" +
-                        "/customer/services/medicare/medicare-card"}
+                    <a
+                        href={"https://www.humanservices.gov.au/customer/services/medicare/medicare-card"}
                     >
                         Department of Human Services
-                    </Link>.
+                    </a>.
                 </p>
                 <h2>Where can I find homeless health care?</h2>
                 <p>There are health care services for those experiencing homelessness located in regional and metropolitan areas across Australia. Some are drop in services so you do not need to make an appointment and others are not. Check with your selected service before you travel. </p>
