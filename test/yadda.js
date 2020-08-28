@@ -5,7 +5,7 @@
  * Enable Yadda in Mocha
  */
 
-import "babel-polyfill";
+
 import Webdriver from "selenium-webdriver";
 import Yadda from "yadda";
 import fs from "fs";

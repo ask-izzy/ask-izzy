@@ -3,7 +3,9 @@
  * Enable Yadda in Mocha
  */
 
-import "babel-polyfill";
+require("@babel/register");
+require("core-js");
+require("regenerator-runtime/runtime");
 import Yadda from "yadda";
 import libraries from "./search-steps";
 
