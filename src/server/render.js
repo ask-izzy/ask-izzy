@@ -42,6 +42,10 @@ export default function render(req, res, next) {
 
     const reqUrl = url.parse(req.url);
 
+    // React Router doesn't like location objects with both a path and a
+    // pathname property
+    delete reqUrl.path
+
     if (reqUrl.pathname.startsWith("/static/") |
     reqUrl.pathname.startsWith("/session/")) {
         next();
