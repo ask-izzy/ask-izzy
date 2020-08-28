@@ -193,4 +193,4 @@ Feature: Service details page
         Then I should see "Also at this location"
         And I should see "Transitional Housing Service"
         When I click on "Transitional Housing Service"
-        Then I should be at /service/112
+        Then I should be at /service/112-my-housing-service
