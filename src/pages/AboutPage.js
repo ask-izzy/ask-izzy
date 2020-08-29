@@ -2,15 +2,11 @@
 /* eslint-disable max-len */
 
 import React from "react";
-import PropTypes from "proptypes";
 import { Link } from "react-router-dom";
 import StaticPage from "./StaticPage";
 import config from "../config";
 
 class AboutPage extends React.Component<{}, void> {
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
 
     render() {
 

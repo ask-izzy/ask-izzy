@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from "react";
-import PropTypes from "proptypes";
 import _ from "underscore";
 import { GoogleMap, Marker, withGoogleMap } from "react-google-maps";
 
@@ -25,9 +24,6 @@ type State = {
 }
 
 class ResultsMap extends React.Component<Props, State> {
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
 
     _map: any;
 
