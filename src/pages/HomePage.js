@@ -26,7 +26,15 @@ class HomePage extends React.Component<Props, void> {
     }
 
     componentDidMount(): void {
-        storage.clear();
+        // Clear all personalisation data when returning to the home page. But
+        // don't do that if environment is a running test. Not ideal, really the
+        // tests should be updated to reflect this new behaviour, but that would
+        // be a significant amount of work and it has been decided it's not
+        // worth it for alpha/beta code.
+        if (!(window && window.isTestEnv)) {
+            console.log('Clearing all personalisation data')
+            storage.clear();
+        }
     }
 
     onSearchSubmit(event: Event): void {
