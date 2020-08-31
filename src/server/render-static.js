@@ -1,11 +1,13 @@
 /* @flow */
 
-import fs from "fs";
+import ansiEscapes from "ansi-escapes"
+import fs from "fs-extra";
 import { dirname } from "path";
 import url from "url";
 
 import * as React from "react";
 import ReactDOMServer from "react-dom/server";
+import { Route } from "react-router";
 import { StaticRouter } from "react-router-dom";
 import mkdirp from "mkdirp";
 
@@ -18,162 +20,185 @@ import categories from "../constants/categories";
 import covidSupportCategories from "../constants/covidSupportCategories";
 import Helmet from "react-helmet";
 
-function hasVersionFile(): boolean {
-    try {
-        // Is there a version string?
-        fs.accessSync("public/VERSION", fs.F_OK);
-        return true;
-    } catch (error) {
-        return false;
-    }
-}
-
-const version = hasVersionFile() &&
-    fs.readFileSync("public/VERSION", "utf-8").trim();
+const versionFilePath = "public/VERSION"
+const version = fs.existsSync(versionFilePath) &&
+    fs.readFileSync(versionFilePath, "utf-8").trim();
 
 function renderPage(uri: string, path: string, params: Object): void {
     const reqUrl = url.parse(uri);
-    const context = {};
 
-    if ((reqUrl.pathname && reqUrl.pathname.startsWith("/static/")) ||
-    (reqUrl.pathname && reqUrl.pathname.startsWith("/session/"))) {
-        // flow:disable
-        next();
-    } else {
+    const markup = ReactDOMServer.renderToString(
+        <StaticRouter location={{pathname: reqUrl.pathname}}
+            isRenderingStatic={true}
+        >{routes}</StaticRouter>
+    );
 
-        const markup = ReactDOMServer.renderToString(
-            <StaticRouter
-                location={{pathname: reqUrl.pathname}}
-                context={context}
-                isRenderingStatic={true}
-            >
-                {routes}
-            </StaticRouter>
-        );
+    const helmet = Helmet.renderStatic();
 
-        const helmet = Helmet.renderStatic();
+    // The application component is rendered to static markup
+    // and sent as response.
+    const html = ReactDOMServer.renderToString(
+        <HtmlDocument
+            markup={markup}
+            script={webpackStats.script}
+            css={webpackStats.css}
+            helmet={helmet}
+            currentUrl={reqUrl}
+            envPath={version ?
+                `/static/env-${version}.js` : "/static/env.js"
+            }
+            requestInterceptorPath={version ?
+                `/static/scripts/request-interceptor-${version}.js`
+                : "/static/scripts/request-interceptor.js"
+            }
+            siteName="Ask Izzy"
+            description={
+                `Ask Izzy is a mobile website that connects` +
+                ` people who are in crisis with the services` +
+                ` they need right now and nearby.`
+            }
+            ogTitle={
+                `Ask Izzy: Find the help you need, now and nearby`
+            }
+            ogDescription={
+                `Ask Izzy is a mobile website that connects ` +
+                `people in need with housing, a meal, money ` +
+                `help, health and wellbeing services, family ` +
+                `violence support, counselling and much more.`
+            }
+        />
+    );
+    const doctype = "<!DOCTYPE html>";
 
-        // The application component is rendered to static markup
-        // and sent as response.
-        const html = ReactDOMServer.renderToString(
-            <HtmlDocument
-                markup={markup}
-                script={webpackStats.script}
-                css={webpackStats.css}
-                helmet={helmet}
-                currentUrl={reqUrl}
-                envPath={version ?
-                    `/static/env-${version}.js` : "/static/env.js"
-                }
-                requestInterceptorPath={version ?
-                    `/static/scripts/request-interceptor-${version}.js`
-                    : "/static/scripts/request-interceptor.js"
-                }
-                siteName="Ask Izzy"
-                description={
-                    `Ask Izzy is a mobile website that connects` +
-                    ` people who are in crisis with the services` +
-                    ` they need right now and nearby.`
-                }
-                ogTitle={
-                    `Ask Izzy: Find the help you need, now and nearby`
-                }
-                ogDescription={
-                    `Ask Izzy is a mobile website that connects ` +
-                    `people in need with housing, a meal, money ` +
-                    `help, health and wellbeing services, family ` +
-                    `violence support, counselling and much more.`
-                }
-            />
-        );
-        const doctype = "<!DOCTYPE html>";
-
-        mkdirp.sync(`public/${dirname(path)}`)
-        fs.writeFileSync(
-            `public/${path}`,
-            doctype + html
-        );
-        console.log(uri, path);
-    }
-
+    mkdirp.sync(`public/${dirname(path)}`)
+    fs.writeFileSync(
+        `public/${path}`,
+        doctype + html
+    );
 }
 
-function *expandRoutes(
-    route: string,
-): Iterable<string> {
-    if (route && !route.match(/styleGuide/)) {
-        let cleanedUrl = route
-            .replace("/in/:suburb-:state", "")
-            .replace("/:slug", "/slug")
-            .replace("/:search", "/searchTerm");
+/**
+ * For a given route with a path containing params in the :param format generate
+ * all possible combinations of param values we want to render static pages for.
+ * Each combination is an object containing params in the from of key => value. 
+ * The function returns an iterable list of these param value combinations. 
+ */
+function* generateRouteParamVals(
+    route: Route,
+): Iterable<Object> {
+    const routePath = route.props.path
 
-        if (cleanedUrl.match(/:page/)) {
-            for (const {key, personalisation} of categories) {
-                let categoryUrl = cleanedUrl.replace(/:page/, key);
+    if (!routePath) {
+        return
+    }
 
-                if (categoryUrl.match(/:subpage/)) {
-                    yield categoryUrl.replace(/:subpage/, "intro");
-                    for (const question of personalisation) {
-                        // Break out each personalisation URL
-                        yield categoryUrl.replace(
-                            /:subpage/,
-                            question.defaultProps.name
-                        );
+    const routePathParts = routePath
+        .split("/") // 1-based index due to leading "/"
+    const routeParams = routePathParts
+        .filter(part => part.startsWith(":"))
+        .map(param => param.substring(1))
+    const defaultParamVals = {
+        slug: "slug",
+        search: "searchTerm",
+    }
+
+    if ( routePathParts[1]?.startsWith("styleGuide") ) {
+        return
+    } else if (routePathParts[1] === ":page") {
+        // generate path for each category
+        for (const {key, personalisation} of categories) {
+            if (routeParams.includes("subpage")) {
+                // generate subpage paths for category
+                const subpages = [
+                    "intro",
+                    ...personalisation.map(
+                        question => question.defaultProps.name
+                    )
+                ]
+                for (const subpage of subpages) {
+                    yield {
+                        ...defaultParamVals,
+                        page: key,
+                        subpage,
                     }
-                } else {
-                    // Just the category page
-                    yield categoryUrl;
                 }
+            } else {
+                // Just the root category page
+                yield {
+                    ...defaultParamVals,
+                    page: key,
+                };
             }
-        } else if (cleanedUrl.match(/:supportCategorySlug/)) {
-            for (const {slug} of covidSupportCategories) {
-                yield cleanedUrl.replace(/:supportCategorySlug/, slug);
+        }
+    } else if (routePathParts[1] === "search") {
+        yield {
+            ...defaultParamVals,
+            subpage: "location",
+        };
+    } else if (route.props.name === "Covid Support Category") {
+        for (const cat of covidSupportCategories) {
+            yield {
+                ...defaultParamVals,
+                supportCategorySlug: cat.slug,
             }
-        } else if (cleanedUrl.match(/:subpage/)) { // search personalisation
-            yield cleanedUrl.replace("/:subpage", "/location");
-        } else {
-            yield cleanedUrl;
         }
+    } else {
+        yield defaultParamVals;
     }
 }
 
-function getParamsFromPath(path: string, expandedPath: string): Object {
-    // Given a path, convert params from :param format into a key:value pairs.
-    let params = {}
-    let pathParams = path.split("/")
-    let expandedParams = expandedPath.split("/")
-
-    pathParams.forEach((bit, index) => {
-        if (bit.startsWith(":")) {
-            params[bit.replace(":", "")] = expandedParams[index]
-        }
-    });
-
-    return params
+/** Takes a route path and substitutes in param values */
+function fillInPathParams(path: string, params: Object) {
+    return path
+        .split("/")
+        .map(part => {
+            const paramVal = path.startsWith(":") && params[path.substring(1)]
+            return paramVal ? paramVal : part
+        })
+        .filter(part => part)
+        .join("/")
 }
 
-function renderRoute(route: React.Element<any>, prefix: string): void {
-    // flow:disable
-    if (route.map) {
-        route.map((route) => renderRoute(route, prefix));
-        return;
+/** Get a list of all paths we want to render pages for */
+declare type NestedArray<T> = Array<T | NestedArray<T>>
+declare type PageToRender = {urlPath: string, filePath: string, params: Object}
+function getPagesFromRoutes(route: NestedArray<Route> | Route): Array<PageToRender> {
+    if (route instanceof Array) {
+        // flow:disable .flat() not yet understood by flow
+        return route.map(getPagesFromRoutes).flat();
     }
-    let {path, children} = route.props;
+    const pathsToRender = []
 
-    for (const expandedPath of expandRoutes(path)) {
-        let params = getParamsFromPath(path, expandedPath)
-
-        renderPage(
-            expandedPath,
-            expandedPath.replace("/searchTerm", "") + "/index.html",
-            params
-        );
-    }
-
-    for (const child of (children || [])) {
-        renderRoute(child, prefix + path);
+    for (const paramVals of generateRouteParamVals(route)){
+        pathsToRender.push({
+            urlPath: fillInPathParams(route.props.path, paramVals),
+            filePath: fillInPathParams(route.props.path, {...paramVals, search: undefined}) + "/index.html",
+            params: paramVals,
+        })
     }
 
+    // Add paths from any child routes
+    const children = route.props.children || []
+    for (const child of children) {
+        pathsToRender.push(...getPagesFromRoutes(child))
+    }
+
+    return pathsToRender
 }
 
-renderRoute(routes, "");
+
+const pages = getPagesFromRoutes(routes)
+process.stdout.write('  Rendering pages…')
+for (const [i, page] of pages.entries()) {
+    process.stdout.write(
+        ansiEscapes.eraseStartLine +
+        ansiEscapes.cursorLeft + 
+        `  Rendering pages… ${i+1} of ${pages.length}`
+    );
+    renderPage(page.urlPath, page.filePath, page.params);
+}
+console.log(
+    ansiEscapes.eraseLines(1) +
+    ansiEscapes.cursorLeft +
+    `  Rendered ${pages.length} page${pages.length !== 1 ? 's' : ''}`
+);

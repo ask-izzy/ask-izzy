@@ -1,6 +1,11 @@
 #!/bin/bash
 
-set -eo
+# Enable strict mode
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euo pipefail
+IFS=$'\n\t'
+
+DEBUG=${DEBUG:-}
 
 # Read in environment variables from file
 if [ -f .env ]; then
@@ -31,28 +36,28 @@ case "$1" in
     unit-test)
         shift 1
 
-        echo "ISS server: $ISS_URL"
+        [ -n "$DEBUG" ] && echo "ISS server: $ISS_URL"
         exec ./script/unit-test
         ;;
 
     feature-test)
         shift 1
 
-        echo "ISS server: $ISS_URL"
+        [ -n "$DEBUG" ] && echo "ISS server: $ISS_URL"
         exec ./script/feature-test
         ;;
 
     maps-test)
         shift 1
 
-        echo "ISS server: $ISS_URL"
+        [ -n "$DEBUG" ] && echo "ISS server: $ISS_URL"
         exec ./script/maps-test
         ;;
 
     personalisation-test)
         shift 1
 
-        echo "ISS server: $ISS_URL"
+        [ -n "$DEBUG" ] && echo "ISS server: $ISS_URL"
         exec ./script/personalisation-test
         ;;
 
@@ -60,13 +65,14 @@ case "$1" in
     search-test)
         shift 1
 
-        echo "ISS server: $ISS_URL"
+        [ -n "$DEBUG" ] && echo "ISS server: $ISS_URL"
         exec ./script/search-test
         ;;
 
     deploy)
         shift 1
 
+        PS4='$ $0:$LINENO: '
         set -x # Logs
         ./script/generate-env-vars > /static/env-$(cat public/VERSION).js
         cp ./public/static/scripts/request-interceptor.js ./public/static/scripts/request-interceptor-$(cat public/VERSION).js
