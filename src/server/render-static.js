@@ -14,7 +14,7 @@ import mkdirp from "mkdirp";
 import routes from "../routes";
 
 import HtmlDocument from "./HtmlDocument";
-// flow:disable
+// $FlowIgnore
 import webpackStats from "./webpack-stats";
 import categories from "../constants/categories";
 import covidSupportCategories from "../constants/covidSupportCategories";
@@ -80,11 +80,11 @@ function renderPage(uri: string, path: string, params: Object): void {
 /**
  * For a given route with a path containing params in the :param format generate
  * all possible combinations of param values we want to render static pages for.
- * Each combination is an object containing params in the from of key => value. 
- * The function returns an iterable list of these param value combinations. 
+ * Each combination is an object containing params in the from of key => value.
+ * The function returns an iterable list of these param value combinations.
  */
 function* generateRouteParamVals(
-    route: Route,
+    route: typeof Route,
 ): Iterable<Object> {
     const routePath = route.props.path
 
@@ -102,7 +102,7 @@ function* generateRouteParamVals(
         search: "searchTerm",
     }
 
-    if ( routePathParts[1]?.startsWith("styleGuide") ) {
+    if (routePathParts[1]?.startsWith("styleGuide")) {
         return
     } else if (routePathParts[1] === ":page") {
         // generate path for each category
@@ -113,7 +113,7 @@ function* generateRouteParamVals(
                     "intro",
                     ...personalisation.map(
                         question => question.defaultProps.name
-                    )
+                    ),
                 ]
                 for (const subpage of subpages) {
                     yield {
@@ -159,20 +159,25 @@ function fillInPathParams(path: string, params: Object) {
         .join("/")
 }
 
-/** Get a list of all paths we want to render pages for */
-declare type NestedArray<T> = Array<T | NestedArray<T>>
+declare type NestedRoute = Array<NestedRoute> | typeof Route
 declare type PageToRender = {urlPath: string, filePath: string, params: Object}
-function getPagesFromRoutes(route: NestedArray<Route> | Route): Array<PageToRender> {
+
+/** Get a list of all paths we want to render pages for */
+function getPagesFromRoutes(route: NestedRoute): Array<PageToRender> {
     if (route instanceof Array) {
-        // flow:disable .flat() not yet understood by flow
+        // $FlowIgnore .flat() not yet understood by flow
         return route.map(getPagesFromRoutes).flat();
     }
+
     const pathsToRender = []
 
-    for (const paramVals of generateRouteParamVals(route)){
+    for (const paramVals of generateRouteParamVals(route)) {
         pathsToRender.push({
             urlPath: fillInPathParams(route.props.path, paramVals),
-            filePath: fillInPathParams(route.props.path, {...paramVals, search: undefined}) + "/index.html",
+            filePath: fillInPathParams(
+                route.props.path,
+                {...paramVals, search: undefined}
+            ) + "/index.html",
             params: paramVals,
         })
     }
@@ -188,17 +193,18 @@ function getPagesFromRoutes(route: NestedArray<Route> | Route): Array<PageToRend
 
 
 const pages = getPagesFromRoutes(routes)
-process.stdout.write('  Rendering pages…')
+
+process.stdout.write("  Rendering pages…")
 for (const [i, page] of pages.entries()) {
     process.stdout.write(
         ansiEscapes.eraseStartLine +
-        ansiEscapes.cursorLeft + 
-        `  Rendering pages… ${i+1} of ${pages.length}`
+        ansiEscapes.cursorLeft +
+        `  Rendering pages… ${i + 1} of ${pages.length}`
     );
     renderPage(page.urlPath, page.filePath, page.params);
 }
 console.log(
     ansiEscapes.eraseLines(1) +
     ansiEscapes.cursorLeft +
-    `  Rendered ${pages.length} page${pages.length !== 1 ? 's' : ''}`
+    `  Rendered ${pages.length} page${pages.length !== 1 ? "s" : ""}`
 );

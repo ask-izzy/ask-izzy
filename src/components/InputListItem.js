@@ -45,7 +45,7 @@ export default class InputListItem extends React.Component<Props, void> {
                     <span>
                         {/* TODO: Find why this is throwing an error,
                             checked is collected from the props */}
-                        {/* flow:disable */}
+                        {/* $FlowIgnore */}
                         {rest.checked ? checkedIcon : uncheckedIcon}
                         {/* @flow:enable */}
                         <input
@@ -53,7 +53,7 @@ export default class InputListItem extends React.Component<Props, void> {
                             key="input"
                             // Avoid label of [object Object]
                             // aria-label={primaryText}
-                            {...rest}
+                            {...(rest: any)}
                             tabIndex="-1"
                         />
                     </span>

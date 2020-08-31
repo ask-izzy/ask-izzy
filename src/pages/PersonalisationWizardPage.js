@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 
 import * as React from "react";
 
@@ -160,7 +160,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
                 <components.AppBar
                     // TODO: Find where the types are set for the Subpage line
                     // and resolve the issue.
-                    // flow:disable
+                    // $FlowIgnore
                     title={this.pageTitle}
                     // flow:enable
                     onBackTouchTap={this.previousStep.bind(this)}

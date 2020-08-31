@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 
 export default [
     "domestic violence",

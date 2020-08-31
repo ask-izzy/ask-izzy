@@ -47,8 +47,9 @@ class ResultsPage extends BaseCategoriesPage {
 
         for (let item of this.personalisationComponents) {
             // TODO: This needs to be debugged with the new flow version
-            // flow:disable
+            // $FlowIgnore
             if (typeof item.getSearch === "function") {
+                // $FlowIgnore
                 request = item.getSearch(request);
 
                 if (!request) {
@@ -283,7 +284,7 @@ class ResultsPage extends BaseCategoriesPage {
 
             mapHeight =
                 window.innerHeight -
-                // flow:disable
+                // $FlowIgnore
                 document.querySelector(".AppBar").offsetHeight;
 
             /* resize the map to make room

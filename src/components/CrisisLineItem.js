@@ -15,7 +15,7 @@ import Collapser from "./Collapser";
 /* eslint-disable max-len */
 const crisisDescriptions = {
     // housing VIC
-    // flow:disable numbers not supported as keys
+    // $FlowIgnore numbers not supported as keys
     2721562: (service) => (
         <ul className="bonusCopy">
             <li>If you are homeless or at risk of homelessness, 1800 825 955 will connect you with an Initial Assessment and Planning worker</li>
@@ -24,7 +24,7 @@ const crisisDescriptions = {
         </ul>
     ),
     // NSW Link2home
-    // flow:disable numbers not supported as keys
+    // $FlowIgnore numbers not supported as keys
     1838208: (service) => (
         <ul className="bonusCopy">
             <li>If you are homeless or at risk of being homeless, call Link2home from anywhere in NSW</li>

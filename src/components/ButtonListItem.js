@@ -17,7 +17,7 @@ export default class ButtonListItem extends React.Component<ListItemProps, void>
                 role="button"
                 tabIndex="0"
                 href="#"
-                {...this.props}
+                {...(this.props: any)}
                 onClick={this.onClick.bind(this)}
             />
         );

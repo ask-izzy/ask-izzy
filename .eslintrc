@@ -95,7 +95,6 @@
         // spaced-comment doesn't work with flow-escape comments like /*::`*/
         // "spaced-comment": [2, "always"],
         "strict": [2, "global"],
-        "valid-jsdoc": 2,
 
         "react/jsx-boolean-value": [2, "always"],
         "react/jsx-closing-bracket-location": 2,

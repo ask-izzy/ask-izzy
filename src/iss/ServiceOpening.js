@@ -183,7 +183,7 @@ export default class ServiceOpening {
             return value;
         });
 
-        // flow:disable doesn't know about raw
+        // $FlowIgnore doesn't know about raw
         return String.raw(strings, ...timeValues);
     }
 

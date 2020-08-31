@@ -87,7 +87,7 @@ assertExtended.withRetries = function(other: Function): Function {
 }
 
 assertExtended.isElementPresent = async function(
-    driver: typeof Webdriver.WebDriver, locator: By | Function
+    driver: typeof Webdriver.WebDriver, locator: typeof By | Function
 ): Promise<void> {
     assert(
         await isElementPresent(driver, locator),

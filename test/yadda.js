@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 /* eslint-disable prefer-arrow-callback */
 
 /*
@@ -25,9 +25,8 @@ import serverMockCMS from "./support/mock-cms"; // Start Mock CMS server
 
 /* create the webdriver, we will reuse this promise multiple times */
 const driverPromise = webDriverInstance();
-let driver: Webdriver.WebDriver;
+let driver: Webdriver.WebDriver, currentTestInfoScriptId;
 const currentTestLog = [];
-let currentTestInfoScriptId;
 
 let processFile = (file) => {
     featureFile(file, feature => {
@@ -38,25 +37,28 @@ let processFile = (file) => {
             // (at the time of writing). After the next release this code can be
             // updated to use the command from the library directly.
             driver.getExecutor().defineCommand(
-                'sendAndGetDevToolsCommand',
-                'POST',
-                '/session/:sessionId/chromium/send_command_and_get_result'
+                "sendAndGetDevToolsCommand",
+                "POST",
+                "/session/:sessionId/chromium/send_command_and_get_result"
             );
-      
-            driver.executeScriptBeforeLoad = async (script, ...args) => {
-                if (typeof script === 'function') {
+
+            driver.executeScriptBeforeLoad = async(script, ...args) => {
+                if (typeof script === "function") {
                     script = `(${script}).apply(null, ${JSON.stringify(args)});`
                 }
                 return driver.getExecutor().execute(
-                    new command.Command('sendAndGetDevToolsCommand')
-                        .setParameter('cmd', "Page.addScriptToEvaluateOnNewDocument")
-                        .setParameter('params', {"source": script})
-                        .setParameter('sessionId', 
+                    new command.Command("sendAndGetDevToolsCommand")
+                        .setParameter(
+                            "cmd",
+                            "Page.addScriptToEvaluateOnNewDocument"
+                        )
+                        .setParameter("params", {"source": script})
+                        .setParameter("sessionId",
                             (await driver.getSession()).getId()
                         )
                 )
             }
-            driver.removeScriptBeforeLoad = async scriptId => 
+            driver.removeScriptBeforeLoad = async scriptId =>
                 driver.sendDevToolsCommand(
                     "Page.removeScriptToEvaluateOnNewDocument",
                     {"identifier": scriptId}
@@ -66,6 +68,7 @@ let processFile = (file) => {
 
             // Flush any logs from previous tests
             let logger = driver.manage().logs()
+
             await logger.get("browser")
 
             await driver.executeScriptBeforeLoad(`
@@ -83,19 +86,22 @@ let processFile = (file) => {
 
                 // Flush any logs from previous tests
                 let logger = driver.manage().logs()
+
                 await logger.get("browser")
                 currentTestLog.length = 0
             });
 
-            steps(scenario.steps, async function (step, done) {
+            steps(scenario.steps, async function(step, done) {
 
                 if (currentTestInfoScriptId) {
-                    await driver.removeScriptBeforeLoad(currentTestInfoScriptId.identifier)
+                    await driver.removeScriptBeforeLoad(
+                        currentTestInfoScriptId.identifier
+                    )
                     currentTestInfoScriptId = null
                 }
                 currentTestInfoScriptId = await driver.executeScriptBeforeLoad(
                     step => {
-                        if(location.href !== 'about:blank'){
+                        if (location.href !== "about:blank") {
                             console.log(`Step: ${step}`)
                         }
                     },
@@ -113,10 +119,10 @@ let processFile = (file) => {
         afterEach(async function(): Promise<void> {
             if (this.currentTest.state != "passed") {
                 let title = this.currentTest.title.replace(/\W+/g, "_");
-                const indent = ' '.repeat(10)
+                const indent = " ".repeat(10)
 
                 if (currentTestLog.length) {
-                    console.log(indent + 'Output from failed test or hook:')
+                    console.log(indent + "Output from failed test or hook:")
                     console.log(
                         currentTestLog
                             .map(line => `${indent}  ${line}`)
@@ -133,7 +139,9 @@ let processFile = (file) => {
                             console.log(indent + `Screenshot "${filename}":`);
                             console.log(indent + `  Base64 PNG data: ${data}`);
                         } else {
-                            console.log(indent + `Screenshot saved as "${filename}"`);
+                            console.log(
+                                indent + `Screenshot saved as "${filename}"`
+                            );
                             fs.writeFileSync(
                                 `Test-${title}.png`,
                                 data,
@@ -163,8 +171,13 @@ let processFile = (file) => {
                     } else {
                         format = chalk.blue
                     }
-                    const message = entry.message.split("\n").join("\n    " + indent)
-                    console.log(indent + `  ${format(entry.level.name)}: ${message}`)
+                    const message = entry.message
+                        .split("\n")
+                        .join("\n    " + indent)
+
+                    console.log(
+                        indent + `  ${format(entry.level.name)}: ${message}`
+                    )
                 }
             }
         });
