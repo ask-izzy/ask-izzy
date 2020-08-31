@@ -1,7 +1,7 @@
 /* @flow */
 import React from "react";
 import { withRouter } from "react-router";
-import {Redirect, Switch} from "react-router-dom";
+import { Switch } from "react-router-dom";
 
 const RouterContext = React.createContext<Object>();
 
@@ -16,7 +16,7 @@ export const InjectRouterContext = withRouter(
                 match: {
                     props: getRouteProps(routes, matchedRoute),
                     ...matchedRoute,
-                }
+                },
             },
         }
         return (
@@ -29,7 +29,7 @@ export const InjectRouterContext = withRouter(
 
 function getRouteProps(routes, routeMatch): Object {
     // Routes are nested components so flatten out and extract just the props
-    // for each route 
+    // for each route
     function extractRouteInfo(routes): Array<Object> {
         if (routes instanceof Array) {
             return routes

@@ -12,15 +12,15 @@ function keyPart(object: Object): string {
 }
 
 function cacheKey(
-    path: string, ignoreOffset: boolean
+    urlPath: string, ignoreOffset: boolean
 ): string {
-    let urlObj = url.parse(path, true);
-    let query = urlObj.query;
-
-    delete urlObj.query;
-    delete urlObj.href;
-    delete urlObj.path;
-    delete urlObj.search;
+    let urlObj, query;
+    // create a new object from URL object, extracting a few properties and
+    // throwing them away.
+    {
+        let href, path, search; // eslint-disable-line no-unused-vars
+        ({query, href, path, search, ...urlObj} = url.parse(urlPath, true))
+    }
     if (query) {
         delete query.limit;
 

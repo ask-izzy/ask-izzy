@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 /*
  * List scenarios to STDOUT
  */

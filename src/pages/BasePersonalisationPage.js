@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 
 import PropTypes from "proptypes";
 

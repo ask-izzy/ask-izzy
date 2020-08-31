@@ -53,7 +53,7 @@ function cachedInjectFeatureFlags<Props>(
 
 type InjectedProps = {| siteFeatureFlags: Object |}
 class FeatureFlagSetter<Props> extends React.Component<
-    {...Props, child: React.AbstractComponent<Props>},
+    {...Props, child: React.AbstractComponent<Props>, childProps: any},
     InjectedProps
 > {
     constructor(props) {

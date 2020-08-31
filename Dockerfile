@@ -16,8 +16,6 @@ VOLUME ["/static", "/storage"]
 
 WORKDIR /app
 
-COPY package.json yarn.lock /app/
-
 RUN \
     useradd -d /app -r app && \
     mkdir -p /static /storage /app && \
@@ -32,9 +30,13 @@ RUN \
         python \
         libelf-dev && \
     npm install -g yarn && \
-    yarn config set registry http://apt.office.infoxchange.net.au/npm && \
-    yarn --frozen-lockfile && \
+    yarn config set registry http://apt.office.infoxchange.net.au/npm
+
+COPY package.json yarn.lock /app/
+RUN yarn --frozen-lockfile && \
     yarn cache clean
+
+ENV PATH /app/node_modules/.bin:$PATH
 
 # Install and build the app
 COPY . /app
