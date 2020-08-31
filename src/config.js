@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 
 // Load different configs for production or development
 

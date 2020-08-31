@@ -72,7 +72,7 @@ class Keywords extends RegexpForm {
         this.ignoreReferrals = !forms.includes(referralsRegexp)
     }
 
-    match(input) {
+    match(input: string) {
         input = input
             /* FIXME: This is a hack to handle the fact that word tokenizing
              * regex needs two spaces between consecutive terms */
@@ -108,7 +108,7 @@ class ListForm extends Form {
 }
 
 class AnyOf extends ListForm {
-    match(input) {
+    match(input: string) {
         return _.some(this.forms, form => form.match(input));
     }
 }
@@ -118,7 +118,7 @@ export function anyOf(...forms: Array<Form|string|RegExp>): AnyOf {
 }
 
 class AllOf extends ListForm {
-    match(input) {
+    match(input: string) {
         return _.every(this.forms, form => form.match(input));
     }
 }
@@ -128,7 +128,7 @@ export function allOf(...forms: Array<Form|string|RegExp>): AllOf {
 }
 
 class Not extends AnyOf {
-    match(input) {
+    match(input: string) {
         return !super.match(input);
     }
 }

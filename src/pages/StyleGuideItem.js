@@ -38,7 +38,7 @@ export default class StyleGuideItem extends React.Component<Props, void> {
             );
         }
 
-        // flow:disable
+        // $FlowIgnore
         let variantNames = Object.keys(Component.sampleProps);
         let variants = variantNames.map(key => {
             let heading;
@@ -50,7 +50,7 @@ export default class StyleGuideItem extends React.Component<Props, void> {
             return (
                 <div key={key}>
                     {heading}
-                    {/* flow:disable */}
+                    {/* $FlowIgnore */}
                     <Component {...Component.sampleProps[key]} />
                 </div>
             );

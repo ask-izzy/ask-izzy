@@ -70,7 +70,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
         let bannerName = "";
 
         try {
-            // flow:disable
+            // $FlowIgnore
             bannerName = this.props.match.params.page;
         } catch (err) {
             // continue with no banner

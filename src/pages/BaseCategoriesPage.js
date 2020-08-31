@@ -96,14 +96,14 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         return components.filter(component => {
             if (this.props.isRenderingStatic) {
                 if (typeof component.staticShowPage === "function") {
-                    // flow:disable
+                    // $FlowIgnore
                     return component.staticShowPage();
                 }
             }
 
-            // flow:disable
             return (typeof component.showPage === "function") &&
-            component.showPage()
+                // $FlowIgnore
+                component.showPage()
         });
     }
 

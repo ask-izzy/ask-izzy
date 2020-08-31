@@ -38,7 +38,7 @@ class BaseMultiQuestion extends BaseQuestion {
         )
     }
 
-    // flow:disable we have the liskov substitution principle :(
+    // $FlowIgnore we have the liskov substitution principle :(
     get selected(): Set<string> {
         if (this.state.answers) {
             return this.state.answers;
@@ -69,7 +69,7 @@ class BaseMultiQuestion extends BaseQuestion {
         }
     }
 
-    // flow:disable we have the liskov substitution principle :(
+    // $FlowIgnore we have the liskov substitution principle :(
     static get answer(): ?Array<string> {
         let answers = storage.getJSON(this.defaultProps.name);
 
@@ -154,7 +154,7 @@ class BaseMultiQuestion extends BaseQuestion {
         this.setState({windowHeight: window.innerHeight});
         const thisElement = ReactDOM.findDOMNode(this);
 
-        // flow:disable
+        // $FlowIgnore
         this.setState({rootHeight: thisElement.offsetHeight});
     }
 

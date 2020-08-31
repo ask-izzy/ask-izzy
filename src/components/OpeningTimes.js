@@ -14,7 +14,7 @@ import icons from "../icons";
 function fixture(
     nowOpen: ?boolean,
     openingHours: Array<issOpeningHours>,
-    time: ?moment.Moment
+    time: ?typeof moment.Moment
 ): Object {
     // Moment is fixed to Wednesday 15/9/2015 at 1pm
     time = time || moment("2015-09-09 1pm", "YYYY-MM-DD ha");

@@ -36,6 +36,6 @@ class ObjectStorage {
 export default function NewStorage(): Storage {
     // flow wants `[key: string]: ?string`,
     // but there's no way to implement that
-    // flow:disable
+    // $FlowIgnore
     return new ObjectStorage();
 }

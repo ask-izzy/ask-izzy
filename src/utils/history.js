@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 import { createBrowserHistory, createMemoryHistory } from "history";
 import storage from "../storage";
 

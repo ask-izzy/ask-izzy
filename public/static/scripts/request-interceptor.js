@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 /* The functions below intercepts xmlhttprequests and js loaded via scripts
 * and checks if the requests are being made to an external domain.
 * For the purpose of AskIzzy to be zero-rated for end users,
