@@ -190,6 +190,7 @@ export function getPagesFromRoutes(
             childRoute => getPagesFromRoutes(childRoute, categories)
         ).flat();
     }
+
     const pathsToRender = []
 
     for (const paramVals of generateRouteParamVals(route, categories)) {

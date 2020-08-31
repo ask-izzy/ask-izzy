@@ -1,6 +1,5 @@
 /* @flow */
 import storage from "../../storage";
-import { withRouter, useHistory, useParams } from "react-router";
 // $FlowIgnore flowjs needs to be updated to include useEffect
 import { useState, useEffect, useContext } from "react";
 import * as gtm from "../../google-tag-manager";
@@ -27,15 +26,15 @@ export default (props: Object) => {
                 originalGoBackFunc()
                 : router.history.push("/")
         }
-    
+
         router.history.listen((location, action) => {
-            // Track size of history stack while navigating Ask Izzy so we know if
-            // the previous page is part of ask izzy or not.
-            // NOTE: action isn't a particularly reliable way of tracking changes
-            // to the history stack. Among other issues the value of action is 
-            // "POP" both when the browser back button is used as well as when the
-            // forward button is used. Still there's no reliable way to do this so
-            // until browser APIs change this will have to do.
+            // Track size of history stack while navigating Ask Izzy so we
+            // know if the previous page is part of ask izzy or not.
+            // NOTE: action isn't a particularly reliable way of tracking
+            // changes to the history stack. Among other issues the value of
+            // action is "POP" both when the browser back button is used as well
+            // as when the forward button is used. Still there's no reliable way
+            // to do this so until browser APIs change this will have to do.
             let historyLengthDelta = 0
 
             if (action === "POP") {
@@ -57,8 +56,8 @@ export default (props: Object) => {
     // so we can detect if they triggered a redirect or not. We don't set the
     // second argument here so this is fired every time a re-render occurs.
     // NOTE: history is a mutable object and therefore it's values may change
-    // by time we get around to reading it (for example if a redirect has 
-    // occurred in between). So if we need to access say history.action then 
+    // by time we get around to reading it (for example if a redirect has
+    // occurred in between). So if we need to access say history.action then
     // we should copy it first to preserve it's current value.
     useEffect(() => {
         // Location hasn't change but setting the state on last change
@@ -67,22 +66,24 @@ export default (props: Object) => {
             return undefined
         }
 
-        // Page path hasn't changed, generally occurs when an anchor link is clicked
-        if (previousLocation && previousLocation.pathname === router.location.pathname) {
+        // Page path hasn't changed, generally occurs when an anchor link is
+        // clicked
+        if (previousLocation?.pathname === router.location.pathname) {
             return undefined
         }
-        // If location doesn't match browser location we know a redirect has occurred
+        // If location doesn't match browser location we know a redirect has
+        // occurred
         if (
-            router.location.pathname !== window.location.pathname || 
-            router.location.search !== window.location.search || 
+            router.location.pathname !== window.location.pathname ||
+            router.location.search !== window.location.search ||
             router.location.hash !== window.location.hash
         ) {
             return undefined
         }
 
         window.scrollTo(0, 0);
-        recordAnalytics(router.match); 
-        
+        recordAnalytics(router.match);
+
         setPreviousLocation(router.location)
     });
     return null
@@ -98,7 +99,7 @@ function recordAnalytics(routeMatch) {
     // Gather and set analytics environment variables
     const pageVars = getPageVars(routeMatch)
     gtm.setPersistentVars(Object.keys(pageVars))
-                
+
     let hash = location.href.match(/(#[^#]*)$/)
     gtm.emit({
         event: "Page Loaded",

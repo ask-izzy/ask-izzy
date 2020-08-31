@@ -1,9 +1,9 @@
 /* @flow */
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Helmet from "react-helmet";
 import { makeTitle } from "../routes";
-import { Route, withRouter } from "react-router";
+import { Route } from "react-router";
 import { InjectRouterContext } from "../contexts/router-context"
 import routes from "../routes";
 
@@ -33,7 +33,10 @@ class BasePage extends Route<Props, {}> {
         let Component = this.props.component;
 
         return (
-            <InjectRouterContext matchedRoute={match} routes={routes} >
+            <InjectRouterContext
+                matchedRoute={match}
+                routes={routes}
+            >
                 <HistoryListener />
                 <ApolloProvider client={client}>
                     <div className="BasePage">

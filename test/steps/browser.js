@@ -109,6 +109,7 @@ async function clickLink(link: string): Promise<void> {
     );
 
     let lookingForAttempt = 1;
+
     while (!await isElementPresent(this.driver, locator)) {
         lookingForAttempt++
         if (this.mochaState.test.timedOut) {

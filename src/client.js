@@ -64,7 +64,7 @@ window.pi = function() {
 window.addEventListener("error", (error) => {
     gtm.emit({
         event: "exception",
-        exDescription: `JavaScript Error: ${evt.message} ${evt.filename}: ${
+        exDescription: `JavaScript Error: ${error.message} ${error.filename}: ${
             evt.lineno
         }`,
     });
@@ -73,7 +73,7 @@ window.addEventListener("error", (error) => {
         eventCat: "Error Occurred",
         eventAction: "Javascript",
         eventLabel: `${error.message}
-            ${e.filename} [Line ${error.lineno}]
+            ${error.filename} [Line ${error.lineno}]
             From page: ${location.pathname}`.replace(/\n +/g, "\n"),
         sendDirectlyToGA: true,
     }, "GTM-54BTPQM");

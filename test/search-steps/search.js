@@ -113,7 +113,7 @@ async function setGender(gender: string): Promise<void> {
 function issRequest({search, personalisation, name}: Category) {
     let request = search;
 
-    const items = personalisation.filter( 
+    const items = personalisation.filter(
         item => (typeof item.showPage === "function") && item.showPage()
     )
 

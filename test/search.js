@@ -24,7 +24,8 @@ new Yadda.FeatureFileSearch("./test/search").each(file => {
             });
         });
         afterEach(async function(): Promise<void> {
-            const indent = ' '.repeat(10)
+            const indent = " ".repeat(10)
+
             if (this.currentTest.state != "passed") {
                 console.error(
                     this.currentTest.err.stack
