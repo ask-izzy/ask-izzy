@@ -7,7 +7,7 @@ Feature: Location search
 
     Scenario: Search for a suburb
         When I visit /housing/personalise/page/location
-        Then I should see "Where are you?"
+        Then I should see "Where are you looking for help?"
 
         When I search for "carlt"
         Then I should see the results
@@ -20,7 +20,7 @@ Feature: Location search
 
         When I click on "Carlton"
         Then search box should contain "Carlton, VIC"
-        And the button "Done" should be enabled
+        And the button "Next" should be enabled
 
     Scenario: Suburb search normalises spaces
         When I visit /housing/personalise/page/location

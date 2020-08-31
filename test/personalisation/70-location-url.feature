@@ -12,8 +12,8 @@ Feature: Show location in url
         When I visit /search/housing/in/Richmond-Victoria
         Then I should see 3 search results in "Richmond, Victoria"
         When I click on "Edit Answers"
-        And I click on "Where are you?"
-        Then I should see "This will let me find the services closest to you"
+        And I click on "Where are you looking for help?"
+        Then I should see "This will help find services closest to your chosen location"
         When I search for "carlt"
         And I click on "Carlton"
         And I click on the done button
