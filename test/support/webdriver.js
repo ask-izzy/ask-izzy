@@ -47,11 +47,11 @@ export function baseUrl(): string {
  *
  * @return {Promise} - return value from Selenium Webdriver.get.
  */
-export function gotoUrl(
+export async function gotoUrl(
     driver: typeof Webdriver.WebDriver,
     url: string
 ): Promise<void> {
-    return driver.get(baseUrl() + url);
+    await driver.get(baseUrl() + url);
 }
 
 /**
