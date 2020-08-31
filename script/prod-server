@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
+
+# Enable strict mode
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
 set -euo pipefail
 IFS=$'\n\t'
+
+DEBUG=${DEBUG:-}
+
+# Print commands
+PS4='$ $0:$LINENO: '
+[ -n "$DEBUG" ] && set -x
+
 PATH=`npm bin`:$PATH
 
-
-set -x
 nginx -c "$(pwd)/conf/nginx.conf"

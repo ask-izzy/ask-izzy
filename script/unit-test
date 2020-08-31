@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
-set -euxo pipefail
-IFS=$'\n\t'
-PATH=$(npm bin):$PATH
 
+# Enable strict mode
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euo pipefail
+IFS=$'\n\t'
+
+PATH=$(npm bin):$PATH
 export NODE_ENV=production
 export PORT=8010
 
