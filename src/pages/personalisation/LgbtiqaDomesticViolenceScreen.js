@@ -30,8 +30,10 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
     static summaryLabel = "LGBTIQA+";
 
     static showPage(): boolean {
-        return DfvDemographics.answer &&
-            DfvDemographics.answer.indexOf("LGBTIQA+") > -1;
+        return Boolean(
+            DfvDemographics.answer &&
+            DfvDemographics.answer.indexOf("LGBTIQA+") > -1
+        );
     }
 
     static getSearch(request: searchRequest): ? searchRequest {

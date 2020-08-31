@@ -32,7 +32,7 @@ class HomePage extends React.Component<Props, void> {
         // be a significant amount of work and it has been decided it's not
         // worth it for alpha/beta code.
         if (!(window && window.isTestEnv)) {
-            console.log('Clearing all personalisation data')
+            console.log("Clearing all personalisation data")
             storage.clear();
         }
     }

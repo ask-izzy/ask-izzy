@@ -29,8 +29,8 @@ class AddServicePage extends React.Component<Props, State> {
         this.issUrl = "";
 
         if (ISS_URL) {
-            this.issUrl = url.parse(ISS_URL);
-            delete this.issUrl.auth;
+            let {auth, ...urlObj} = url.parse(ISS_URL);
+            this.issUrl = urlObj;
         }
     }
 

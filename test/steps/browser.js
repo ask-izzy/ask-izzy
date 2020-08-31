@@ -1,11 +1,10 @@
-/* flow:disable */
+/* $FlowIgnore */
 /*
  * Step definitions for Selenium/browser related steps
  */
 
 /* eslint-disable no-use-before-define */
 
-import ansiEscapes from "ansi-escapes"
 import assert from "../support/page-assertions";
 import Yadda from "yadda";
 import Webdriver, { By, Key } from "selenium-webdriver";
@@ -109,9 +108,10 @@ async function clickLink(link: string): Promise<void> {
     );
 
     let lookingForAttempt = 1;
+
     while (!await isElementPresent(this.driver, locator)) {
         lookingForAttempt++
-        if(this.mochaState.test.timedOut) {
+        if (this.mochaState.test.timedOut) {
             return
         }
         this.log.push(

@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 // Sample usage:
 // echo '{"q": "housing", "area": "Carnegie, Victoria"}' | ./index.js script/search-iss.js | jq .
 import {search} from "../src/iss";
