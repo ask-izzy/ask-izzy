@@ -7,6 +7,7 @@
 
 
 import Webdriver from "selenium-webdriver";
+import command from "selenium-webdriver/lib/command";
 import Yadda from "yadda";
 import fs from "fs";
 import webDriverInstance, { cleanDriverSession } from "./support/webdriver";
@@ -24,38 +25,92 @@ import serverMockCMS from "./support/mock-cms"; // Start Mock CMS server
 
 /* create the webdriver, we will reuse this promise multiple times */
 const driverPromise = webDriverInstance();
-let driver: Webdriver.WebDriver;
+let driver: Webdriver.WebDriver, currentTestInfoScriptId;
+const currentTestLog = [];
 
 let processFile = (file) => {
     featureFile(file, feature => {
         before(async function(): Promise<void> {
             driver = await driverPromise;
-            driver.executeScriptBeforeLoad = (async function(script) {
-                return this.sendDevToolsCommand(
-                    "Page.addScriptToEvaluateOnNewDocument",
-                    {"source": script}
-                )
-            }).bind(driver)
 
-            await driver.executeScriptBeforeLoad(`
-                console.log('------------- Loading Page -------------')
-                console.log('URL: ' + location.href)
-            `);
+            // This command is in an unreleased version of "selenium-webdriver"
+            // (at the time of writing). After the next release this code can be
+            // updated to use the command from the library directly.
+            driver.getExecutor().defineCommand(
+                "sendAndGetDevToolsCommand",
+                "POST",
+                "/session/:sessionId/chromium/send_command_and_get_result"
+            );
+
+            driver.executeScriptBeforeLoad = async(script, ...args) => {
+                if (typeof script === "function") {
+                    script = `(${script}).apply(null, ${JSON.stringify(args)});`
+                }
+                return driver.getExecutor().execute(
+                    new command.Command("sendAndGetDevToolsCommand")
+                        .setParameter(
+                            "cmd",
+                            "Page.addScriptToEvaluateOnNewDocument"
+                        )
+                        .setParameter("params", {"source": script})
+                        .setParameter("sessionId",
+                            (await driver.getSession()).getId()
+                        )
+                )
+            }
+            driver.removeScriptBeforeLoad = async scriptId =>
+                driver.sendDevToolsCommand(
+                    "Page.removeScriptToEvaluateOnNewDocument",
+                    {"identifier": scriptId}
+                )
+
+            await cleanDriverSession(driver);
 
             // Flush any logs from previous tests
             let logger = driver.manage().logs()
+            await logger.get("browser")
 
-            await logger.get("browser");
+            await driver.executeScriptBeforeLoad(`
+                if(location.href !== 'about:blank'){
+                    console.log('------------- Loading Page -------------')
+                    console.log('URL: ' + location.href)
+                    window.isTestEnv = true
+                }
+            `);
+
         });
 
         scenarios(feature.scenarios, scenario => {
             before(async function(): Promise<void> {
-                await cleanDriverSession(driver);
+                // Flush any logs from previous tests
+                let logger = driver.manage().logs()
+                await logger.get("browser")
+                currentTestLog.length = 0
+
+                await cleanDriverSession(driver)
             });
 
-            steps(scenario.steps, (step, done) => {
+            steps(scenario.steps, async function(step, done) {
+
+                if (currentTestInfoScriptId) {
+                    await driver.removeScriptBeforeLoad(
+                        currentTestInfoScriptId.identifier
+                    )
+                    currentTestInfoScriptId = null
+                }
+                currentTestInfoScriptId = await driver.executeScriptBeforeLoad(
+                    step => {
+                        if (location.href !== "about:blank") {
+                            console.log(`Step: ${step}`)
+                        }
+                    },
+                    step
+                );
+
                 Yadda.createInstance(libraries, {
                     driver: driver,
+                    mochaState: this,
+                    log: currentTestLog,
                 }).run(step, done);
             });
         });
@@ -63,15 +118,29 @@ let processFile = (file) => {
         afterEach(async function(): Promise<void> {
             if (this.currentTest.state != "passed") {
                 let title = this.currentTest.title.replace(/\W+/g, "_");
+                const indent = " ".repeat(10)
+
+                if (currentTestLog.length) {
+                    console.log(indent + "Output from failed test or hook:")
+                    console.log(
+                        currentTestLog
+                            .map(line => `${indent}  ${line}`)
+                            .join("\n")
+                    )
+                }
 
                 if (process.env.SCREENSHOT_FAILURES) {
                     try {
                         let data = await driver.takeScreenshot();
+                        const filename = `Test-${title}.png`
 
                         if (process.env.SCREENSHOT_FAILURES === "base64") {
-                            console.log(`Test-${title}.png`);
-                            console.log(`Base64 PNG data :${data}`);
+                            console.log(indent + `Screenshot "${filename}":`);
+                            console.log(indent + `  Base64 PNG data: ${data}`);
                         } else {
+                            console.log(
+                                indent + `Screenshot saved as "${filename}"`
+                            );
                             fs.writeFileSync(
                                 `Test-${title}.png`,
                                 data,
@@ -79,20 +148,12 @@ let processFile = (file) => {
                             );
                         }
                     } catch (err) {
-                        console.log("Failed to take screenshot");
-                        console.log(err);
+                        console.log(indent + "Failed to take screenshot");
+                        console.log(indent + err);
                     }
                 }
 
-                // This includes user actions, unhandled errors etc
-                console.log(
-                    "Google Tag Manager events fired:",
-                    await driver.executeScript(() =>
-                        JSON.stringify(window.dataLayer, null, 2)
-                    )
-                );
-
-                console.log("Browser logs:")
+                console.log(indent + "Browser logs:")
 
                 let logger = driver.manage().logs()
 
@@ -109,7 +170,11 @@ let processFile = (file) => {
                     } else {
                         format = chalk.blue
                     }
-                    console.log(`${format(entry.level.name)}: ${entry.message}`)
+                    const message = entry.message.split("\n")
+                        .join("\n    " + indent)
+                    console.log(
+                        indent + `  ${format(entry.level.name)}: ${message}`
+                    )
                 }
             }
         });

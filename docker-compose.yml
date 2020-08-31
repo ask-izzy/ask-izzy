@@ -10,6 +10,7 @@ services:
             # Pallet
             DEVNAME: docker
             ENVIRONMENT: dev
+            SCREENSHOT_FAILURES: 1
         ports:
             - '80:8000'
             - '8000:8000'
