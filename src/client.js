@@ -8,6 +8,8 @@ import storage from "./storage";
 import routes from "./routes";
 import * as gtm from "./google-tag-manager";
 import searchTest from "./search-test";
+import { mapStackTrace } from "sourcemapped-stacktrace"; // Only used for 
+    // debugging failed tests
 
 window.searchTest = searchTest;
 
@@ -61,10 +63,23 @@ window.pi = function() {
 }
 
 // Report JS errors to google analytics
-window.addEventListener("error", (error) => {
+window.addEventListener("error", errEvent => {
+    const error = errEvent.error
+    if (window && window.isTestEnv) {
+        // Selenium/Headless chrome doesn't yet support sourcemaps in error
+        // stack traces. This makes debugging failing tests a bit tricky since
+        // our prod source code is majorly transformed and minified. Until this
+        // is done natively use a third party lib to help apply the source map
+        // before showing the error.
+        mapStackTrace(error.stack, function(mappedStack) {
+            error.stack = [error.message, ...mappedStack].join("\n")
+            console.log('The above error translated:')
+            console.error(error)
+        });
+    }
     gtm.emit({
         event: "exception",
-        exDescription: `JavaScript Error: ${evt.message} ${evt.filename}: ${
+        exDescription: `JavaScript Error: ${error.message} ${error.filename}: ${
             evt.lineno
         }`,
     });
@@ -73,7 +88,7 @@ window.addEventListener("error", (error) => {
         eventCat: "Error Occurred",
         eventAction: "Javascript",
         eventLabel: `${error.message}
-            ${e.filename} [Line ${error.lineno}]
+            ${error.filename} [Line ${error.lineno}]
             From page: ${location.pathname}`.replace(/\n +/g, "\n"),
         sendDirectlyToGA: true,
     }, "GTM-54BTPQM");
