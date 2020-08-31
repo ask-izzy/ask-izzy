@@ -47,7 +47,7 @@ Feature: Personalisation
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
-        Then I should see "Where are you?"
+        Then I should see "Where are you looking for help?"
 
         When I click on "Get your current location"
 
@@ -76,7 +76,7 @@ Feature: Personalisation
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
-        Then I should see "Where are you?"
+        Then I should see "Where are you looking for help?"
 
         When I click on "Get your current location"
 

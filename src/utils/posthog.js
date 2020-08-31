@@ -4,7 +4,7 @@ import posthog from "posthog-js";
 import * as React from "react"
 
 const posthogShouldBeLoaded = typeof window !== "undefined" &&
-    window.LOCAL_FILE_ENCRYPTION_KEY
+    window.LOCAL_FILE_ENCRYPTION_KEY && !window.isTestEnv
 
 // Use existing appvars var LOCAL_FILE_ENCRYPTION_KEY until it is decided that
 // PostHog is worth using. Then commission PostHog specific variable

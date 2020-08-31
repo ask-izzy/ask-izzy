@@ -110,7 +110,7 @@ class Location extends Personalisation<Props, State> {
         return request;
     }
 
-    static summaryLabel = "Where are you?";
+    static summaryLabel = "Where are you looking for help?";
 
     static get summaryValue(): string {
         return storage.getLocation();
