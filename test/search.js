@@ -13,11 +13,7 @@ Yadda.plugins.mocha.StepLevelPlugin.init();
 
 declare var global: Object;
 
-// Pass through environment variables. Note that we should really be
-// using `GLOBAL.ISS_URL = proces.env.ISS_URL;` here, but this would
-// set `ISS_URL` to `https://iss3.docker.dev` in CI, which doesn't
-// have the data that these tests expect.
-global.ISS_URL = "https://UNDFUUWCHWGIJGTGMTBXZJDENAACETNJ:XBKSEBMIGVELOOSTGZFEJHKZWCKAFZUY@api.serviceseeker.com.au";
+global.ISS_URL = process.env.ISS_URL_PROD;
 global.GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 
 new Yadda.FeatureFileSearch("./test/search").each(file => {
@@ -26,6 +22,17 @@ new Yadda.FeatureFileSearch("./test/search").each(file => {
             steps(scenario.steps, (step, done) => {
                 Yadda.createInstance(libraries, {}).run(step, done);
             });
+        });
+        afterEach(async function(): Promise<void> {
+            const indent = ' '.repeat(10)
+            if (this.currentTest.state != "passed") {
+                console.error(
+                    this.currentTest.err.stack
+                        .split("\n")
+                        .map(line => indent + line)
+                        .join("\n")
+                )
+            }
         });
     });
 });
