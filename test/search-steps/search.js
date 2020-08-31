@@ -112,17 +112,20 @@ async function setGender(gender: string): Promise<void> {
 function issRequest({search, personalisation, name}) {
     let request = search;
 
-    for (let item of personalisation) {
+    const items = personalisation.filter( 
+        item => (typeof item.showPage === "function") && item.showPage()
+    )
+
+    for (let item of items) {
 
         if (typeof item.getSearch === "function") {
             request = item.getSearch(request);
 
             if (!request) {
-                throw new Error(`Expected ${
-                    name
-                } to generate a query (missing ${
-                    item.name
-                })`);
+                throw new Error(
+                    `Expected "${name}" to generate a query (missing ` +
+                    `${item.name})`
+                );
             }
         }
     }
