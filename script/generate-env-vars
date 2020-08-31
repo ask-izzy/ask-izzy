@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# Enable strict mode
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
 set -euo pipefail
 IFS=$'\n\t'
 
@@ -14,7 +17,7 @@ fi
 if [ "$ENVIRONMENT" = "test" ]; then
 	STRAPI_URL="https://cms-askizzy-test.docker.dev"
 fi
-if [ "$ENVIRONMENT" = "dev" ]; then
+if [ "$ENVIRONMENT" = "dev" ] || [ "$ENVIRONMENT" = "development" ]; then
 	STRAPI_URL="https://cms-askizzy.docker.dev"
 fi
 

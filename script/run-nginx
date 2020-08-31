@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-set -eo pipefail
+
+# Enable strict mode
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euo pipefail
 IFS=$'\n\t'
 
 conffile=$(mktemp -t nginxconf.XXXXXX)
