@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
-echo "Running pre-commit hook"
+
+# Enable strict mode
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
 set -euo pipefail
+IFS=$'\n\t'
+
+echo "Running pre-commit hook"
 
 if git rev-parse --verify HEAD >/dev/null 2>&1
 then

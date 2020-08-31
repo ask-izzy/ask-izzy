@@ -107,8 +107,15 @@ async function clickLink(link: string): Promise<void> {
             .join("|")
     );
 
+    let lookingForAttempt = 1;
     while (!await isElementPresent(this.driver, locator)) {
-        console.log(`Looking for ${link}`)
+        lookingForAttempt++
+        if (this.mochaState.test.timedOut) {
+            return
+        }
+        this.log.push(
+            `Couldn't find "${link}" link - attempt ${lookingForAttempt}`
+        );
     }
     await this.driver.findElement(locator).click();
     await module.exports.documentReady(this.driver);
