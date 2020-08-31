@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 /*
  * Definitions for Geolocation related steps
  */

@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 /* eslint-env node, mocha */
 /* eslint-disable no-use-before-define, prefer-arrow-callback */
 

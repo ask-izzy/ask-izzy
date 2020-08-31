@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 
 import React from "react";
 

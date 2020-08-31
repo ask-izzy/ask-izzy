@@ -443,7 +443,7 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
 
             mapHeight =
                 window.innerHeight -
-                // flow:disable
+                // $FlowIgnore
                 document.querySelector(".AppBar").offsetHeight;
 
             /* resize the map to make room

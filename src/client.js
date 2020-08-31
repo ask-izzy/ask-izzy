@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 
 import xhr from "axios";
 import React from "react";
@@ -8,14 +8,14 @@ import storage from "./storage";
 import routes from "./routes";
 import * as gtm from "./google-tag-manager";
 import searchTest from "./search-test";
-import { mapStackTrace } from "sourcemapped-stacktrace"; // Only used for 
-    // debugging failed tests
+import { mapStackTrace } from "sourcemapped-stacktrace"; // Only used for
+// debugging failed tests
 
 window.searchTest = searchTest;
 
 // Preventing the Google Maps libary from downloading an extra font
 // http://stackoverflow.com/questions/25523806/google-maps-v3-prevent-api-from-loading-roboto-font
-// flow:disable - I have no idea why Flow doesn't like the following line
+// $FlowIgnore - I have no idea why Flow doesn't like the following line
 let head = document.getElementsByTagName("head")[0];
 let insertBefore = head.insertBefore;
 
@@ -71,9 +71,10 @@ window.addEventListener("error", errEvent => {
         // our prod source code is majorly transformed and minified. Until this
         // is done natively use a third party lib to help apply the source map
         // before showing the error.
-        mapStackTrace(error.stack, function(mappedStack) {
+
+        mapStackTrace(error.stack, (mappedStack) => {
             error.stack = [error.message, ...mappedStack].join("\n")
-            console.log('The above error translated:')
+            console.log("The above error translated:")
             console.error(error)
         });
     }

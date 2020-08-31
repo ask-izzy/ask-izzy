@@ -91,7 +91,7 @@ const Storage = {
     },
 
     setItem(key: string, obj: string|number|boolean): void {
-        // flow:disable
+        // $FlowIgnore
         if (`${obj}`.match(/family violence/i)) {
             switchToPrivateMode();
         }
@@ -111,7 +111,7 @@ const Storage = {
             sendDirectlyToGA: true,
         }, "GTM-54BTPQM")
 
-        // flow:disable
+        // $FlowIgnore
         persistentStore.setItem(key, `${obj}`);
     },
 

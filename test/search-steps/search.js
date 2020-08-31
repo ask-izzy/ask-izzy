@@ -10,7 +10,7 @@ import { titleize } from "underscore.string";
 import unpromisify from "../support/yadda-promise";
 import dictionary from "../support/dictionary";
 import storage from "../../src/storage";
-import Categories from "../../src/constants/categories";
+import Categories, {Category} from "../../src/constants/categories";
 import {search} from "../../src/iss";
 import type {searchResults} from "../../src/iss";
 import Age from "../../src/pages/personalisation/Age";
@@ -109,10 +109,10 @@ async function setGender(gender: string): Promise<void> {
 }
 
 // Shamelessly copied from ResultsPage
-function issRequest({search, personalisation, name}) {
+function issRequest({search, personalisation, name}: Category) {
     let request = search;
 
-    const items = personalisation.filter( 
+    const items = personalisation.filter(
         item => (typeof item.showPage === "function") && item.showPage()
     )
 
@@ -148,7 +148,7 @@ function objectMatches(expectation: any, subject: any): boolean {
 
 async function searchIss(categoryName: string): Promise<searchResults> {
     const category = Categories.find(({key}) => key === categoryName)
-    // flow:disable
+    // $FlowIgnore
     const request = issRequest(category);
 
     return await search(Object.assign(request, {limit: 25}));

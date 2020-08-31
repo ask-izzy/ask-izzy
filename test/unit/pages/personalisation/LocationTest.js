@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 /* eslint-env node, mocha */
 
 import assert from "assert";
