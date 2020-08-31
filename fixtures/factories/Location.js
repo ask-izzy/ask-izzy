@@ -24,13 +24,13 @@ export function Location(props: ?Object): issLocation {
     }, props);
 }
 
-export function TravelTime(props: ?Object): travelTime {
-    return Merge({
+export function TravelTime(props: ?Object): Array<travelTime> {
+    return [Merge({
         mode: "WALKING",
         status: "OK",
         distance: {text: "100 metres", value: "100"},
         duration: {text: "5 minutes", value: "300"},
-    }, props);
+    }, props)];
 }
 
 const siteId = Sequence();
