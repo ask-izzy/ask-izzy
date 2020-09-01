@@ -30,7 +30,7 @@ class Intro extends Personalisation<Props, {}> {
             return category.byline.toLocaleLowerCase() ||
                 `with ${category.name.toLocaleLowerCase()}`;
         } catch (error) {
-            const search = this.context.controller.props.params.search;
+            const search = this.context.controller.props.match.params.search;
 
             return `with ${search.toLocaleLowerCase()}`;
         }
@@ -47,7 +47,7 @@ class Intro extends Personalisation<Props, {}> {
         let bannerName = "";
 
         try {
-            bannerName = this.context.controller.props.params.page;
+            bannerName = this.context.controller.props.match.params.page;
         } catch (err) {
             // continue with no banner
         }

@@ -3,6 +3,7 @@
 import React from "react";
 import icons from "../icons";
 import BaseLogoWithTextBox from "./BaseLogoWithTextBox";
+import history from "../utils/history";
 
 export default class ServiceListIntro extends BaseLogoWithTextBox {
     static defaultProps = {
@@ -16,7 +17,7 @@ export default class ServiceListIntro extends BaseLogoWithTextBox {
     onClickBox(): void {
         const path = "/Information";
 
-        this.context.router.push(
+        history.push(
             path,
         );
     }

@@ -163,7 +163,7 @@ class BaseMultiQuestion extends BaseQuestion {
         let bannerName = "";
 
         try {
-            bannerName = this.context.controller.props.params.page;
+            bannerName = this.context.controller.props.match.params.page;
         } catch (err) {
             // continue with no banner
         }

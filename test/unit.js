@@ -2,8 +2,7 @@
 
 /* eslint-env node, mocha */
 /* eslint-disable prefer-arrow-callback */
-
-import "babel-polyfill";
+require("regenerator-runtime/runtime");
 import Yadda from "yadda";
 
 describe("Unit tests", function() {

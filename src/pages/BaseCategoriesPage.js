@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from "react";
-import PropTypes from "proptypes";
 import _ from "underscore";
 
 import categories, {Category} from "../constants/categories";
@@ -29,10 +28,6 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
     Object, State & ExtraState> {
     _category: Category;
 
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
-
     /**
      * category:
      *
@@ -44,7 +39,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         }
 
         let category = _.findWhere(categories, {
-            key: this.props.params.page,
+            key: this.props.match.params.page,
         });
 
         this._category = category;
@@ -56,7 +51,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
             return this.category.name;
         } else if (this.search.q !== "undefined-search") {
             const quote = new RegExp(`["']`, "g");
-            const search = this.props.params.search;
+            const search = decodeURIComponent(this.props.match.params.search);
 
             return `“${search.replace(quote, "")}”`;
         } else {
@@ -67,9 +62,9 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
     get search(): searchRequest {
         if (this.category) {
             return Object.assign({}, this.category.search);
-        } else if (this.props.params.search) {
+        } else if (this.props.match.params.search) {
             return {
-                q: this.props.params.search,
+                q: decodeURIComponent(this.props.match.params.search),
             };
         } else {
             return {
@@ -88,7 +83,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
 
         if (this.category) {
             components = this.category.personalisation;
-        } else if (this.props.params.search) {
+        } else if (this.props.match.params.search) {
             components = [
                 ...personalisation.OnlineSafetyScreenBundle(
                     personalisation.FreeTextAreYouSafe
@@ -98,7 +93,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         }
 
         return components.filter(component => {
-            if (this.context.router.isRenderingStatic) {
+            if (this.props.isRenderingStatic) {
                 if (typeof component.staticShowPage === "function") {
                     return component.staticShowPage();
                 }
@@ -113,7 +108,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         // Update the URL to include the location, so that links
         // are SEO-friendly. If we dont have a location but the
         // URL does, use the one from the url.
-        const {suburb, state} = this.props.params;
+        const {suburb, state} = this.props.match.params;
 
         if (suburb && state) {
             if (storage.getLocation() != `${suburb}, ${state}`) {

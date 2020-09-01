@@ -1,22 +1,19 @@
 /* flow:disable */
 
 import * as React from "react";
-import PropTypes from "proptypes";
 
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import Intro from "./personalisation/Intro";
 import components from "../components";
 import Chevron from "../icons/Chevron";
 import NotFoundStaticPage from "./NotFoundStaticPage";
+import history from "../utils/history";
 
 type State = {
   showSubpage: boolean,
 }
 
 class PersonalisationWizardPage extends BasePersonalisationPage<State> {
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
 
     constructor(props: Object) {
         super(props);
@@ -32,8 +29,8 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
     }
 
     componentDidMount(): void {
-        if (this.context.router.params.search &&
-            this.context.router.params.search ===
+        if (this.props.match.params.search &&
+            this.props.match.params.search ===
             "bushfires -(closed due to the recent bushfires)") {
             this.setState({ showSubpage: false });
         }
@@ -55,7 +52,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
         if (prevSubPage) {
             this.goToSubPage(prevSubPage);
         } else {
-            this.context.router.push("/");
+            history.push("/");
         }
     }
 

@@ -2,9 +2,10 @@
 /* eslint-disable max-len */
 
 import * as React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import StaticPage from "./StaticPage";
 import MobileDetect from "../components/higherorder/MobileDetect";
+import history from "../utils/history";
 
 class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> {
     render(): React.Node {
@@ -19,6 +20,7 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                 bannerSecondary={
                     "If you are in immediate danger, please call 000"
                 }
+                history={history}
             >
                 <div className="separator" />
                 <p>

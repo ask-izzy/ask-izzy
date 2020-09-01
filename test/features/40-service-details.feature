@@ -187,3 +187,10 @@ Feature: Service details page
         When I visit /service/111
         Then I should see "Also at this location"
          And I should see "Transitional Housing Service"
+
+    Scenario: Visit other services at this location
+        When I visit /service/111
+        Then I should see "Also at this location"
+        And I should see "Transitional Housing Service"
+        When I click on "Transitional Housing Service"
+        Then I should be at /service/112-my-housing-service

@@ -2,19 +2,20 @@
 
 import React from "react";
 import Helmet from "react-helmet";
-import DocumentTitle from "react-document-title";
 import { makeTitle } from "../routes";
+import { Route } from "react-router";
+import history from "../utils/history";
 
 type Props = {
-    main: any,
     children: any,
-    footer: any,
     routes: any,
     params: any,
     location: any,
+    computedMatch: any,
+    title: string,
 }
 
-export default class BasePage extends React.Component<Props, void> {
+class BasePage extends Route<Props, {}> {
     static childContextTypes = {};
 
     getChildContext(): Object {
@@ -22,12 +23,12 @@ export default class BasePage extends React.Component<Props, void> {
     }
 
     render() {
-
+        let match = this.props.match || this.props.computedMatch
         const canonicalUrl = `https://askizzy.org.au${this.props.location.pathname}`;
+        let Component = this.props.component;
 
         return (
             <div className="BasePage">
-
                 <Helmet>
                     <link
                         rel="canonical"
@@ -37,19 +38,26 @@ export default class BasePage extends React.Component<Props, void> {
                         property="og:url"
                         content={canonicalUrl}
                     />
+                    <title>
+                        {
+                            makeTitle(
+                                this.props.title,
+                                match.params
+                            )
+                        }
+                    </title>
                 </Helmet>
 
-                <DocumentTitle
-                    title={makeTitle(
-                        this.props.routes,
-                        this.props.params
-                    )}
-                />
                 <main>
-                    {this.props.main || this.props.children}
+                    <Component
+                        {...this.props}
+                        match={match}
+                        history={history}
+                    />
                 </main>
-                {this.props.footer}
             </div>
         );
     }
 }
+
+export default BasePage

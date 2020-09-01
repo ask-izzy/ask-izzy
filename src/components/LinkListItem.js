@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import classnames from "classnames";
 import ListItem from "./ListItem";
 import type { ListItemProps } from "./ListItem";

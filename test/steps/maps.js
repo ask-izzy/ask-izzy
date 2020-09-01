@@ -161,7 +161,8 @@ async function clickMap() {
 
 async function clickMarker(title) {
     await this.driver.executeScript(title => {
-        for (let marker of google.maps.markers) {
+        for (let index = 0; index < google.maps.markers.length; index++) {
+            let marker = google.maps.markers[index]
             if (title === marker.getTitle()) {
                 google.maps.event.trigger(marker, "click", {
                     latLng: marker.getPosition(),

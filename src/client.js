@@ -3,12 +3,14 @@
 import xhr from "axios";
 import React from "react";
 import ReactDOM from "react-dom";
-import {Router, browserHistory} from "react-router";
+import { Router } from "react-router-dom";
 import storage from "./storage";
 import routes from "./routes";
 import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
+import history from "./utils/history";
+import ScrollToTop from "./components/ScrollToTop";
 
 window.searchTest = searchTest;
 window.categories = categories;
@@ -38,72 +40,9 @@ xhr({
     maxRedirects: 0,
 }).catch(() => null);
 
-/*
- * If at any point there isn't a meaningful 'back',
- * go to the app homepage instead.
- *
- * We use a function instead of subclassing because
- * the builtins of `history` check that you're
- * calling them on the right object and bail
- * otherwise.
- *
- * FIXME: Once react-router has a built-in solution
- * for tracking scroll position, remove window.scrollTo calls
- */
-function History() {
-    let historyLength = storage.getHistoryLength();
-
-    function setHistoryLength(newLength: number): void {
-        historyLength = newLength;
-        storage.setHistoryLength(newLength);
-    }
-
-    function goBack() {
-        if (historyLength > 0) {
-            setHistoryLength(historyLength - 1)
-            browserHistory.goBack();
-        } else {
-            browserHistory.push("/");
-        }
-        window.scrollTo(0, 0);
-    }
-
-    function goForward() {
-        setHistoryLength(historyLength - 1);
-        browserHistory.goForward();
-        window.scrollTo(0, 0);
-    }
-
-    function push() {
-        setHistoryLength(historyLength + 1);
-        browserHistory.push(...arguments);
-        window.scrollTo(0, 0);
-    }
-
-    /* eslint-disable id-length */
-    function go(num: number) {
-        setHistoryLength(historyLength + num);
-        browserHistory.go(num);
-        window.scrollTo(0, 0);
-    }
-
-    window._clear_history_testing = () => {
-        browserHistory.go(-historyLength);
-        window.scrollTo(0, 0);
-    }
-
-    return {
-        ...browserHistory,
-        goBack,
-        goForward,
-        push,
-        go,
-    };
-}
-
 ReactDOM.hydrate(
     <Router
-        history={History()}
+        history={history}
         onUpdate={() => {
             // Since Ask Izzy is a SPA we need to manually register each
             // new page view
@@ -111,7 +50,11 @@ ReactDOM.hydrate(
                 event: "Page Viewed",
             });
         }}
-    >{routes}</Router>,
+    >
+        <ScrollToTop>
+            {routes}
+        </ScrollToTop>
+    </Router>,
     document.getElementById("root")
 )
 
@@ -129,11 +72,11 @@ window.pi = function() {
 }
 
 // Report JS errors to google analytics
-window.addEventListener("error", (e) => {
+window.addEventListener("error", (evt) => {
     sendEvent({
         event: "exception",
-        exDescription: `JavaScript Error: ${e.message} ${e.filename}: ${
-            e.lineno
+        exDescription: `JavaScript Error: ${evt.message} ${evt.filename}: ${
+            evt.lineno
         }`,
     });
 });

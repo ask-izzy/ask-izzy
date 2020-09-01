@@ -1,10 +1,10 @@
 /* flow:disable */
 
 import PropTypes from "proptypes";
-import { browserHistory } from "react-router";
 
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
+import history, {onBack} from "../utils/history";
 
 class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     ExtraState
@@ -18,9 +18,7 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     previousStep(): void {
         // If our subpage has an onPreviousStep hook, call it, otherwise
         // just go back.
-
-
-        browserHistory.goBack();
+        onBack();
     }
 
     nextStep(): void {
@@ -65,7 +63,9 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
 
     urlFor(subpath: string): string {
         // Rewrites the URL based on search location/personalisation
-        const parts = this.props.location.pathname.split("/");
+        const parts = decodeURIComponent(
+            this.props.location.pathname
+        ).split("/");
         const location = storage.getLocation();
 
         if (location) {
@@ -83,7 +83,7 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     }
 
     navigate(subpath: string): void {
-        this.context.router.push(
+        history.push(
             this.urlFor(subpath),
         );
     }
@@ -93,9 +93,10 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     }
 
     get currentComponentIdx(): number {
-        return this.personalisationComponents.findIndex(component =>
-            component.defaultProps.name === this.props.params.subpage
-        );
+        return this.personalisationComponents.findIndex(component => {
+            return component.defaultProps.name ===
+                this.props.match.params.subpage
+        });
     }
 }
 
