@@ -10,8 +10,9 @@ type Props = {
 export default class DebugServiceRecord extends React.Component<Props, void> {
     render() {
         // need to remove _explanation to get ...rest
+        // Remove siblingServices to stop circle ref.
         /* eslint-disable no-unused-vars */
-        const {_explanation, ...rest} = this.props.object;
+        const {_explanation, _siblingServices, ...rest} = this.props.object;
 
         return (
             <DebugContainer message="ISS Object">

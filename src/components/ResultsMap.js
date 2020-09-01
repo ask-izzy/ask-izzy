@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from "react";
-import PropTypes from "proptypes";
 import _ from "underscore";
 import { GoogleMap, Marker, withGoogleMap } from "react-google-maps";
 
@@ -11,6 +10,7 @@ import Maps from "../maps";
 import type {MapsApi} from "../maps";
 import ResultsList from "./ResultsList";
 import storage from "../storage";
+import {onBack} from "../utils/history";
 
 type Props = {
     objects: Array<Object>,
@@ -24,9 +24,6 @@ type State = {
 }
 
 class ResultsMap extends React.Component<Props, State> {
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
 
     _map: any;
 
@@ -202,7 +199,7 @@ class ResultsMap extends React.Component<Props, State> {
         if (!_.isEmpty(this.state.selectedServices)) {
             this.clearSelection();
         } else {
-            this.context.router.goBack();
+            onBack();
         }
     }
 

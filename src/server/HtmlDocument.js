@@ -15,7 +15,6 @@ class HtmlDocument extends React.Component<Object, void> {
         ogTitle: PropTypes.string,
         ogDescription: PropTypes.string,
         siteName: PropTypes.string,
-        title: PropTypes.string,
         envPath: PropTypes.string,
     };
 
@@ -32,7 +31,6 @@ class HtmlDocument extends React.Component<Object, void> {
             markup,
             script,
             css,
-            title,
             description,
             siteName,
             envPath,
@@ -59,8 +57,6 @@ class HtmlDocument extends React.Component<Object, void> {
                         name="viewport"
                         content={viewport}
                     />
-
-                    <title>{title}</title>
 
                     <meta
                         name="description"
@@ -89,6 +85,7 @@ class HtmlDocument extends React.Component<Object, void> {
 
                     {helmet.meta.toComponent()}
                     {helmet.link.toComponent()}
+                    {helmet.title.toComponent()}
 
                     {css.map((href, idx) =>
                         <link

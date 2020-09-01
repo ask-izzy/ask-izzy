@@ -5,6 +5,7 @@ import React from "react";
 import icons from "../icons";
 import BaseLogoWithTextBox from "./BaseLogoWithTextBox";
 import sendEvent from "../google-tag-manager";
+import history from "../utils/history";
 
 export default class OnlineSafetyLink extends BaseLogoWithTextBox {
     static defaultProps = {
@@ -23,7 +24,7 @@ export default class OnlineSafetyLink extends BaseLogoWithTextBox {
             banner: "Online safety - are you safe?",
         });
 
-        this.context.router.push(
+        history.push(
             path,
         );
     }

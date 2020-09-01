@@ -113,6 +113,10 @@ const objects: Object = {
         id: 112,
         name: "Transitional Housing Service",
         description: "Transitional housing service",
+        site: {
+            name: "My Housing Service",
+            id: 111,
+        },
         location: {
             suburb: "Richmond",
         },

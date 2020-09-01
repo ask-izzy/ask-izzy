@@ -2,9 +2,8 @@
 /* eslint-disable valid-jsdoc */
 
 import React from "react";
-import {Route, Redirect} from "react-router";
+import {Redirect, Switch} from "react-router-dom";
 import {titleize} from "underscore.string";
-import _ from "underscore";
 
 // If you import these after the others,
 // babel decides the navbar doesn't really
@@ -13,7 +12,6 @@ import StyleGuideList from "./pages/StyleGuideList";
 import StyleGuideItem from "./pages/StyleGuideItem";
 
 import BasePage from "./pages/BasePage";
-import BrandedFooter from "./components/BrandedFooter";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import NotFoundStaticPage from "./pages/NotFoundStaticPage";
@@ -36,16 +34,11 @@ import ServicePage from "./pages/ServicePage";
 import BushfireReliefPage from "./pages/BushfireReliefPage";
 import Covid19StaticPage from "./pages/Covid19StaticPage";
 
-export function makeTitle(routes: Array<Object>, params: Object): string {
-    const template = _.chain(routes)
-        .pluck("title")
-        .compact()
-        .last()
-        .value();
+export function makeTitle(route: string, params: Object): string {
     let unslug = (str) =>
         str.replace("-", " ").split(" ").map(titleize).join(" ");
 
-    let title = template || "";
+    let title = route || "";
 
     Object.keys(params).forEach((key) => {
         // FIXME This is a hack. Rewrite it when we're not about to launch.
@@ -88,121 +81,121 @@ const removeDoubleSlashOnEnter404 = (
 };
 
 export default (
-    <Route
-        path=""
-        component={BasePage}
-    >
-        <Route
+    <Switch>
+        <BasePage
             path="/styleGuide/component/:componentName"
             component={StyleGuideItem}
             title="Styleguide"
         />
-        <Route
+        <BasePage
             path="/styleGuide*"
             component={StyleGuideList}
             title="Styleguide"
         />
-        <Route
+        <BasePage
             path="/"
-            components={{
-                main: HomePage,
-                footer: BrandedFooter,
-            }}
+            component={HomePage}
+            exact={true}
         />
-        <Route
+        <BasePage
             path="/about"
             component={AboutPage}
             title="About"
         />
-        <Route
+        <BasePage
             path="/bushfire-support"
             component={BushfireReliefPage}
             title="Bushfire Support"
         />
-        <Route
+        <BasePage
             path="/covid-19-support"
             component={Covid19StaticPage}
             title="COVID 19 Support"
         />
-        <Route
+        <BasePage
             path="/terms"
             component={TermsPage}
             title="Terms of use"
         />
-        <Route
+        <BasePage
             path="/online-safety"
             component={OnlineSafetyStaticPage}
             title="Online Safety"
         />
-        <Route
+        <BasePage
             path="/homeless-shelters"
             component={HomelessSheltersStaticPage}
             title="Homeless shelters"
         />
-        <Route
+        <BasePage
             path="/food-banks"
             component={FoodBanksStaticPage}
             title="Food Banks"
         />
-        <Route
+        <BasePage
             path="/homeless-support"
             component={HomelessSupportStaticPage}
             title="Homeless support"
         />
-        <Route
+        <BasePage
             path="/homeless-legal-services"
             component={HomelessLegalStaticPage}
             title="Homeless Legal Services"
         />
-        <Route
+        <BasePage
             path="/homeless-financial-support"
             component={HomelessFinanceStaticPage}
             title="Homeless financial support"
         />
-        <Route
+        <BasePage
             path="/homeless-health-care"
             component={HomelessHealthStaticPage}
             title="Homeless Health Care"
         />
-        <Route
+        <BasePage
             path="/information"
             component={InformationPage}
             title="Information"
         />
-
-        <Route
+        <BasePage
             path="/not-found"
             component={NotFoundStaticPage}
             title="Page not found"
         />
-        <Route
+        <BasePage
             path="/add-service"
             component={AddServicePage}
             title="Add a service"
         />
-        <Route
+        <BasePage
             path="/service/:slug"
             component={ServicePage}
+            exact={true}
         />
         <Redirect
             from="/category/:page"
             to="/:page"
+            exact={true}
         />
         <Redirect
             from="/category/:page/in/:suburb-:state"
             to="/:page/:suburb-:state"
+            exact={true}
         />
         <Redirect
             from="/search/:search/in/:suburb-:state"
             to="/search/:search/:suburb-:state"
+            exact={true}
         />
         <Redirect
             from="/have-your-say"
             to="/advocacy"
+            exact={true}
         />
         <Redirect
             from="/have-your-say/:page"
             to="/advocacy/:page"
+            exact={true}
         />
         {[
             "/search/:search/:suburb-:state",
@@ -210,53 +203,64 @@ export default (
             "/:page/:suburb-:state",
             "/:page",
         ].map((str) => [
-            <Route
+            <BasePage
                 path={`${str}`}
                 component={ResultsPageListing}
                 title=":page in :suburb, :state"
+                exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/map`}
                 component={ResultsPageMap}
                 title="Map of :page in :suburb, :state"
+                exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/map/personalise`}
                 component={PersonalisationWizardPage}
+                exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/map/personalise/page/:subpage`}
                 component={PersonalisationWizardPage}
+                exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/map/personalise/summary`}
                 component={PersonalisationSummaryPage}
+                exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/map/personalise/summary/:subpage`}
                 component={PersonalisationSummaryPage}
+                exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/personalise`}
                 component={PersonalisationWizardPage}
+                exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/personalise/page/:subpage`}
                 component={PersonalisationWizardPage}
+                exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/personalise/summary`}
                 component={PersonalisationSummaryPage}
+                exact={true}
             />,
-            <Route
+            <BasePage
                 path={`${str}/personalise/summary/:subpage`}
                 component={PersonalisationSummaryPage}
+                exact={true}
             />,
         ])}
-        <Route
+        <BasePage
             path="*"
             component={NotFoundStaticPage}
             onEnter={removeDoubleSlashOnEnter404}
         />
-    </Route>
+    </Switch>
+
 );

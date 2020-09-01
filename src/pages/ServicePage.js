@@ -10,21 +10,19 @@ import type {Service} from "../iss";
 import components from "../components";
 import Loading from "../icons/Loading";
 import config from "../config";
+import {onBack} from "../utils/history";
 
 class ServicePage extends React.Component<{
     params: {
         slug: string,
     },
+    match: any,
 }, {
     object?: Service,
     error?: Object,
 }> {
     static propTypes = {
-        params: PropTypes.object,
-    };
-
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
+        match: PropTypes.object,
     };
 
     constructor(props: Object) {
@@ -37,7 +35,7 @@ class ServicePage extends React.Component<{
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object): void {
-        if (prevProps.params.slug != this.props.params.slug) {
+        if (prevProps.match.params.slug != this.props.match.params.slug) {
             this.loadService();
         }
     }
@@ -47,7 +45,7 @@ class ServicePage extends React.Component<{
      */
     get id(): number {
         const leadingDigits = /^\d+/;
-        let slug = this.props.params.slug;
+        let slug = this.props.match.params.slug;
         let match = slug.match(leadingDigits);
 
         if (match) {
@@ -75,14 +73,13 @@ class ServicePage extends React.Component<{
             object,
             error,
         } = this.state;
-        const back = () => this.context.router.goBack();
 
         if (!object) {
             return (
                 <div className="ServicePage">
                     <components.AppBar
                         title="Loading..."
-                        onBackTouchTap={back}
+                        onBackTouchTap={onBack}
                     />
                     <div className="ServicePane">
                         <main>
@@ -115,7 +112,7 @@ class ServicePage extends React.Component<{
                 <div className="ServicePage">
                     <components.AppBar
                         title={object.site.name}
-                        onBackTouchTap={back}
+                        onBackTouchTap={onBack}
                     />
                     <ServicePane service={object}/>
                 </div>

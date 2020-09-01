@@ -15,6 +15,7 @@ import DebugContainer from "../components/DebugContainer";
 import DebugPersonalisation from "../components/DebugPersonalisation";
 import DebugSearch from "../components/DebugSearch";
 import ResultsListPage from "./ResultsListPage";
+import history from "../utils/history";
 
 import type { Service } from "../iss";
 import NotFoundStaticPage from "./NotFoundStaticPage"
@@ -64,8 +65,8 @@ class ResultsPage extends BaseCategoriesPage {
 
         sendEvent({
             event: "searchResults",
-            searchQuery: this.props.params.search,
-            searchPage: this.props.params.page,
+            searchQuery: decodeURIComponent(this.props.match.params.search),
+            searchPage: this.props.match.params.page,
             location: storage.getLocation(),
         });
 
@@ -78,7 +79,7 @@ class ResultsPage extends BaseCategoriesPage {
                 .pathname
                 .endsWith("/") ? "" : "/";
 
-            this.context.router.replace(
+            history.replace(
                 `${this.props.location.pathname}${sep}personalise`
             );
             return;
@@ -121,8 +122,8 @@ class ResultsPage extends BaseCategoriesPage {
     async loadMore(): Promise<void> {
         sendEvent({
             event: "LoadMoreSearchResults",
-            searchQuery: this.props.params.search,
-            searchPage: this.props.params.page,
+            searchQuery: decodeURIComponent(this.props.match.params.search),
+            searchPage: this.props.match.params.page,
             location: storage.getLocation(),
         });
 
@@ -172,7 +173,7 @@ class ResultsPage extends BaseCategoriesPage {
         }
 
         if (!event.defaultPrevented) {
-            this.context.router.push(
+            this.props.history.push(
                 "/",
             );
         }
@@ -220,7 +221,7 @@ class ResultsPage extends BaseCategoriesPage {
                     {...this.state}
                     {...this.props}
                     category={this.category}
-                    search={this.props.params.search}
+                    search={decodeURIComponent(this.props.match.params.search)}
                     loadMore={this.renderLoadMore()}
                     title={this.title}
                     loading={this.loading}

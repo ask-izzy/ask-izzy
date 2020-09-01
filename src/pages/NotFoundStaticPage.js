@@ -2,18 +2,16 @@
 /* eslint-disable max-len */
 
 import React from "react";
-import PropTypes from "proptypes";
 import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
+import {onBack} from "../utils/history";
 
-export default class NotFoundStaticPage extends React.Component<{}> {
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
+type Props = {}
+
+export default class NotFoundStaticPage extends React.Component<Props, void> {
 
     render() {
-        let back = () => this.context.router.goBack();
 
         return (
             <div
@@ -21,7 +19,7 @@ export default class NotFoundStaticPage extends React.Component<{}> {
             >
                 <AppBar
                     title="Page not found"
-                    onBackTouchTap={back}
+                    onBackTouchTap={onBack}
                 />
                 <HeaderBar
                     primaryText={null}

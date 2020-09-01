@@ -1,6 +1,5 @@
 /* flow:disable */
-
-require("babel-core/register");
-require("babel-polyfill");
+require("core-js");
+require("regenerator-runtime/runtime");
 require("./styles/bundle.scss");
 require("./client");

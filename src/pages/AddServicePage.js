@@ -4,14 +4,11 @@ import url from "url";
 import React from "react";
 
 import components from "../components";
+import {onBack} from "../utils/history";
 
 declare var ISS_URL: string;
 
-type Props = {
-    router: {
-        goBack: Function,
-    },
-}
+type Props = {}
 
 type State = {
     isFormDone: boolean,
@@ -74,8 +71,6 @@ class AddServicePage extends React.Component<Props, State> {
     }
 
     render() {
-        const { router } = this.props;
-
         const body = this.state.isFormDone ? this.renderSuccessMessage()
             : this.renderForm();
 
@@ -83,7 +78,7 @@ class AddServicePage extends React.Component<Props, State> {
             <div className="AddServicePage">
                 <components.AppBar
                     title="Add a service"
-                    onBackTouchTap={router.goBack.bind(router)}
+                    onBackTouchTap={onBack}
                 />
 
                 <div className="body">

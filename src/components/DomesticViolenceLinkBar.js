@@ -2,14 +2,10 @@
 
 import React from "react";
 import icons from "../icons";
-import PropTypes from "proptypes";
 import sendEvent from "../google-tag-manager";
+import history from "../utils/history";
 
 export default class DomesticViolenceLinkBar extends React.Component<{}, void> {
-
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
 
     render() {
 
@@ -39,7 +35,7 @@ export default class DomesticViolenceLinkBar extends React.Component<{}, void> {
             banner: "Domestic violence - are you safe?",
         });
 
-        this.context.router.push(
+        history.push(
             path,
         );
     }

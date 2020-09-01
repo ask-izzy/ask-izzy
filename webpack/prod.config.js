@@ -19,17 +19,6 @@ module.exports = {
         main: [
             "./src/client-entry.js",
             "./src/styles/bundle.scss",
-        ],
-        vendor: [
-            "lodash-decorators",
-            "moment",
-            "react",
-            "react-google-maps",
-            "react-router",
-            "underscore",
-            "underscore.string",
-        ],
-        analytics: [
             "./src/analytics.js",
         ],
     },
@@ -53,7 +42,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: ["es3ify-loader", "babel-loader"],
+                use: ["babel-loader"],
             },
         ],
     },

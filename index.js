@@ -8,8 +8,9 @@ if (!process.env.NODE_ENV) {
 }
 
 // Register babel to have ES6 support on the server
-require("babel-core/register");
-require("babel-polyfill");
+require("@babel/register");
+require("core-js");
+require("regenerator-runtime/runtime");
 
 if (process.argv[3]) {
     throw new Error("Too many arguments");
