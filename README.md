@@ -260,6 +260,9 @@ The following environment variables an be set to any string in order to enable d
   - SCREENSHOT_FAILURES
   This will generate screenshots when a test fails.
 
+  - BAIL_ON_TEST_FAIL
+  Setting this flag will halt testing as soon as one test fails.
+
 ## Tests
 All tests live in the `test` top level directory.
 

@@ -12,10 +12,17 @@ PS4='$ $0:$LINENO: '
 [ -n "$DEBUG" ] && set -x
 
 PATH=$(npm bin):$PATH
+CI=${CI:-}
+BAIL_ON_TEST_FAIL=${BAIL_ON_TEST_FAIL:-}
 
 export NODE_ENV=production
 export PORT=8010
 
 # We pause for 4000ms when ISS rate-limits us, so allow a timeout of 9
 # seconds
-PAUSE_ON_ERROR= mocha --require @babel/register --require regenerator-runtime/runtime --timeout 9000 test/search.js $@
+PAUSE_ON_ERROR= mocha \
+    --require @babel/register \
+    --require regenerator-runtime/runtime \
+    $(([ -n "$CI" ] || [ -n "$BAIL_ON_TEST_FAIL" ]) && echo "--bail") \
+    --timeout 9000 \
+    test/search.js $@
