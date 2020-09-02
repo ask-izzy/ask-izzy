@@ -12,6 +12,8 @@ PS4='$ $0:$LINENO: '
 [ -n "$DEBUG" ] && set -x
 
 PATH=$(npm bin):$PATH
+CI=${CI:-}
+BAIL_ON_TEST_FAIL=${BAIL_ON_TEST_FAIL:-}
 
 export NODE_ENV=production
 export PORT=8010
@@ -26,4 +28,10 @@ export STRAPI_URL="http://0.0.0.0:5001"
 
 # we want this quite high as it makes debugging the tests easier.
 INTERACTIVE_TIMEOUT="50000"
-mocha --require @babel/register --require regenerator-runtime/runtime --exit --timeout "$INTERACTIVE_TIMEOUT" test/feature.js $@
+mocha \
+    --require @babel/register \
+    --require regenerator-runtime/runtime \
+    --exit \
+    $(([ -n "$CI" ] || [ -n "$BAIL_ON_TEST_FAIL" ]) && echo "--bail") \
+    --timeout "$INTERACTIVE_TIMEOUT" \
+    test/feature.js $@

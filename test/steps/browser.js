@@ -16,7 +16,7 @@ import _ from "underscore";
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
-import pauseToDebug from "../support/debug";
+import pauseToDebug, * as debug from "../support/debug";
 import {
     elementWithText,
     elementWithChildText,
@@ -46,6 +46,7 @@ module.exports = (function() {
         )
         .when("I reload the page", unpromisify(reloadPage))
         .when("I pause for debugging", unpromisify(pauseToDebug))
+        .when("I take a screenshot", unpromisify(takeScreenshot))
         .then("I should be at $URL", unpromisify(checkURL))
         .then("I should see \"$STRING\"", unpromisify(thenISee))
         .then("I should see\n$STRING", unpromisify(thenISee))
@@ -358,4 +359,13 @@ async function newBrowser(): Promise<void> {
 
 async function cleanSession(): Promise<void> {
     await cleanDriverSession(this.driver);
+}
+
+async function takeScreenshot(): Promise<void> {
+    const filepath = await debug.takeScreenshot(
+        this.driver,
+        this.mochaState.currentTest
+    )
+
+    console.log(`${this.indent}  Screenshot saved to "${filepath}"`);
 }
