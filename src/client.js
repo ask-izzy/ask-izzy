@@ -13,8 +13,6 @@ import searchTest from "./search-test";
 import history from "./utils/history";
 import ScrollToTop from "./components/ScrollToTop";
 import posthog from "./utils/posthog";
-import { mapStackTrace } from "sourcemapped-stacktrace"; // Only used for
-// debugging failed tests
 
 window.searchTest = searchTest;
 
@@ -113,19 +111,6 @@ window.pi = function() {
 // Report JS errors to google analytics
 window.addEventListener("error", errEvent => {
     const error = errEvent.error
-    if (window && window.isTestEnv) {
-        // Selenium/Headless chrome doesn't yet support sourcemaps in error
-        // stack traces. This makes debugging failing tests a bit tricky since
-        // our prod source code is majorly transformed and minified. Until this
-        // is done natively use a third party lib to help apply the source map
-        // before showing the error.
-
-        mapStackTrace(error.stack, (mappedStack) => {
-            error.stack = [error.message, ...mappedStack].join("\n")
-            console.log("The above error translated:")
-            console.error(error)
-        });
-    }
     gtm.emit({
         event: "exception",
         exDescription: `JavaScript Error: ${error.message} ${error.filename}: ${

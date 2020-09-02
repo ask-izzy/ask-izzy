@@ -1,6 +1,6 @@
 .*.sw?
 .env
-/Test-*.png
+/testing-screenshots
 /bower_components
 /node_modules/
 /npm-debug.log*
