@@ -4,7 +4,7 @@ Feature: Service details page
     # I want to view the details of a service
     # So that I know if this service meets my needs
 
-    Scenario: Description is limited to 250 chars + end of the sentence
+    Scenario: Description is limited to at least the first sentence + any extra sentences that fit under a total description length of 250 chars
        Given A service with:
         ----------------------------------------------
         description: There is a service here, and its really quite helpful. You can get all sorts of things - blankets, food, other stuff too. I suggest you drop by and check us out. Our service is the best, its really just the best. Not sure why youre still reading at this point. Also we have penguins.
@@ -14,7 +14,7 @@ Feature: Service details page
         And I should see "You can get all sorts of things - blankets, food, other stuff too."
         And I should see "I suggest you drop by and check us out."
         And I should see "Our service is the best, its really just the best."
-        And I should see "Not sure why youre still reading at this point."
+        And I should not see "Not sure why youre still reading at this point."
         And I should not see "Also we have penguins"
 
     Scenario: The service provisions is limited to a set of dot points
@@ -186,7 +186,7 @@ Feature: Service details page
 
     Scenario: Can view all opening times
         When I visit /service/5551234
-        And I click on "Open Times"
+        And I click on "Show open hours"
 
         Then I should see the results for "All Opening Times"
         ----------------------------

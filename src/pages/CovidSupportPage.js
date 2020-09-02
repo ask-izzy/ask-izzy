@@ -142,7 +142,8 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
 
             .catch(response => {
                 try {
-                    console.error(response, response.stack);
+                    console.error(response)
+                    console.error(response.stack);
 
                     let data = JSON.parse(response.body);
 
