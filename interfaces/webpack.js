@@ -7,6 +7,7 @@ declare class webpackJson {
         runtime: Array<string>,
         vendor: Array<string>,
         hotload: Array<string>,
+        testharness: Array<string>,
         main: Array<string>,
     };
     warnings: Array<string>;

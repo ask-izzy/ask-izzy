@@ -249,7 +249,12 @@ async function attachTransportTimes(
 
     let formatPoint = (point: issPoint) => `${point.lat},${point.lon}`;
 
-    const maps = await TryWithDefault < $ReadOnly < {travelTime: Function} >>(
+    // Flow babel plugin not correctly handling stripping of parameterized
+    // generics which is causing issues with testing. Updating it requires
+    // updating babel to next major version is has now been done in master.
+    // Once merged this can be typed correctly again.
+    // $FlowIgnore
+    const maps = await TryWithDefault(
         1000, Maps(), {}
     );
 
@@ -460,6 +465,9 @@ export class Service {
 
     /**
      * First part of the description.
+     *
+     * Equal to the first sentence + as many remaining sentences as will fit
+     * without pushing the length up to or more than 250 characters.
      */
     get shortDescription(): Array<string> {
         let sentences = this.descriptionSentences();
@@ -500,7 +508,8 @@ export class Service {
                 .filter((provision) => provision.match(this.description))
                 .map(({name}) => name);
         } catch (error) {
-            console.error("Failed to determine service provisions", error);
+            console.error("Failed to determine service provisions")
+            console.error(error);
             this._serviceProvisions = [];
         }
 
@@ -620,7 +629,8 @@ export async function getService(
     try {
         await attachTransportTimes([service]);
     } catch (error) {
-        console.log("Unable to retrieve transport times", error);
+        console.error("Unable to retrieve transport times")
+        console.error(error);
     }
 
     return service;
