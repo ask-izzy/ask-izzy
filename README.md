@@ -313,12 +313,12 @@ Running the tests:
 docker-compose run --rm app unit-test
 docker-compose run --rm app feature-test
 docker-compose run --rm app personalisation-test
-docker-compose run --rm app search-test
+docker-compose run --rm app maps-test
 # or without docker: 
 ./script/unit-test
 ./script/feature-test
 ./script/personalisation-test
-./script/search-test
+./script/maps-test
 ````
 
 Pass `SELENIUM_BROWSER=firefox|phantomjs|chrome` to choose a

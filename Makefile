@@ -81,9 +81,6 @@ maps-test:
 personalisation-test:
 	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) personalisation-test $(CI_TEST_FLAGS)
 
-search-test:
-	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) search-test $(CI_TEST_FLAGS)
-
 deploy:
 	$(FORKLIFT) -- $(REPO):$(TAG) deploy
 
