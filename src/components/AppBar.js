@@ -33,21 +33,19 @@ class AppBar extends React.Component<Props, void> {
                     {this.renderBackButton()}
                     <h1 className="title">{this.props.title}</h1>
                     <div className="button-container">
-                        <a className="desktop"
+                        <a className="quick-exit"
                             href={redirectUri}
                             title={tooltip}
                         >
                             <div className="quick-exit">
-                                Quick Exit X
+                                <span className="longer-text">
+                                    Quick Exit ⨉
+                                </span>
+                                <span className="shorter-text">
+                                    Exit ⨉
+                                </span>
                             </div>
                         </a>
-                        <div className="mobile_device">
-                            <a href={redirectUri}
-                                title={tooltip}
-                            >
-                                <span className="exit_text">Exit X</span>
-                            </a>
-                        </div>
                     </div>
                 </div>
                 <div className="AppBarSpacer" />

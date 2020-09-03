@@ -2,8 +2,9 @@
 
 import React from "react";
 
-import ExpandArrow from "../icons/ExpandArrow";
 import HeaderBar from "../components/HeaderBar";
+import { Link } from "react-router";
+import icons from "../icons"
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
 import storage from "../storage";
@@ -47,29 +48,36 @@ class HomePage extends React.Component<{}, void> {
         " call 1800 Respect on 1800 737 732 (Helpline).";
 
         return (
-            <div className="HomePage containsSiteBanner-notice">
-                <div className="header">
-                    <div className="desktop">
-                        <span className="quick-exit-right" />
-                        <a title={tooltip}
-                            href={redirectUri}
-                        >
-                            <span className="quick-exit-left">
-                                Quick Exit X
+            <div className="HomePage">
+                <div className="notification">
+                    <icons.Info className={"big middle"}/>
+                    <div>
+                        <h3>
+                            Coronavirus (COVID-19) support
+                        </h3>
+                        <span>
+                            Where to get help and information for those affected by
+                            Coronavirus (COVID19).{" "}
+                            <Link to="/covid-19-support">
+                                Learn more
+                            </Link>
+                        </span>
+                    </div>
+                </div>
+                <div className="appbar">
+                    <a className="quick-exit"
+                        href={redirectUri}
+                        title={tooltip}
+                    >
+                        <div className="quick-exit">
+                            <span>
+                                Quick Exit ⨉
                             </span>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
+                </div>
+                <div className="header">
 
-                    <div className="mobile_device">
-                        <div className="qexit-txtleft qexit-heightleft" />
-                        <a href={redirectUri}
-                            title={tooltip}
-                        >
-                            <div className="qexit-txtright qexit-heightright">
-                                Quick Exit
-                            </div>
-                        </a>
-                    </div>
 
                     <HeaderBar
                         primaryText=""
@@ -84,31 +92,13 @@ class HomePage extends React.Component<{}, void> {
                         <div className="primary">
                             Find the help you need, now and nearby
                         </div>
-                        <a href="#main">
-                            <div className="secondary">
-                                Search over 370,000 support services
-                            </div>
-                            <ExpandArrow />
-                        </a>
+                        <div className="secondary">
+                            Search over 370,000 support services
+                        </div>
                     </HeaderBar>
-                    <div className="siteBanner-notice">
-                        <h3>
-                            Coronavirus (COVID-19) health information
-                        </h3>
-                        <p>
-                            If you are feeling unwell or want to know more
-                            about the illness caused by coronavirus (COVID-19),
-                            please visit the <a href="https://www.health.gov.au/news/health-alerts/novel-coronavirus-2019-ncov-health-alert">
-                            Australian Department of Health website</a> for
-                            the latest medical advice, news and information.
-                        </p>
-                    </div>
                 </div>
 
                 <div className="body">
-                    <a className="anchor"
-                        id="main"
-                    />
                     <form
                         className="search"
                         onSubmit={this.onSearchSubmit.bind(this)}

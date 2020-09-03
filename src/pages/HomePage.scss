@@ -3,8 +3,58 @@ $brand-bg-dark: #363e43;
 $colour-grey: #f8f9f9;
 
 .HomePage {
+    .notification {
+        background-color: #f4f4f4;
+        border-left: #FED800 10px solid;
+        padding: 0.6em 0.1em;
+        display: flex;
+        padding-right: 1.5em;   
 
-    margin-top: $appbar-height;
+        div {
+            display: flex;
+            flex-direction: column;
+            padding: 0.4em 0.1em;
+            > * {
+                margin: 0.2em;
+            }
+            h3 {
+                font-size: 1.1em;
+            }
+        }
+
+        a {
+            color: $brand-text-dark;
+            font-weight: bold;
+        }
+    }
+
+    .appbar {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        max-width: 800px;
+        z-index: 99;
+        background-color: $brand-bg-dark;
+        height: $appbar-height;
+
+        // Quick Exit button
+        div.quick-exit {
+            height: $appbar-height;
+            margin-left: 5px;
+            padding: 0 15px;
+            float: right;
+            background-color: $colour-red;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            vertical-align: middle;
+            color: #FFF;
+
+            span {
+                line-height: $appbar-height;
+            }
+        }
+    }
 
     .HeaderBar {
         display: flex;
@@ -48,6 +98,10 @@ $colour-grey: #f8f9f9;
             .primary {
                 font-size: 1.5em;
                 font-weight: bold;
+
+                @media only screen and (max-width: 550px) {
+                    max-width: 300px;
+                }
             }
 
             .secondary {
@@ -63,7 +117,14 @@ $colour-grey: #f8f9f9;
         }
         @media only screen and (max-width: 310px) {
             height: 300px;
-        }            
+        }
+
+        .HeaderBarBanner {
+            &::after,
+            &.homepage::after {
+                border-right: 100vw solid $brand-bg-mid-lighter;
+            }
+        }
 
     }
 
@@ -182,138 +243,5 @@ $colour-grey: #f8f9f9;
             }
         }
 
-    }
-
-    // Quick Exit button
-
-    .desktop,
-    .mobile_device {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        max-width: 800px;
-        height: $appbar-height;
-        z-index: 99;
-    }
-
-    .desktop {
-        display: block;
-    }
-
-    .mobile_device {
-        display: none;
-    }
-
-    .quick-exit-right {
-        position: relative;
-        min-width: 85%;
-        height: $appbar-height;
-        float: left;
-        background-color: $brand-bg-dark;
-    }
-
-    .quick-exit-left {
-        position: relative;
-        min-width: 15%;
-        float: right;
-        background-color: $colour-red;
-        font-weight: bold;
-        line-height: $appbar-height;
-        text-align: center;
-    }
-
-    .qexit-txtleft {
-        position: relative;
-        width: 70%;
-        float: left;
-        background-color: $brand-bg-dark;
-        z-index: 99;
-    }
-
-    .qexit-heightleft {
-        // height: $appbar-height - 10;
-        height: $appbar-height;
-    }
-
-    .qexit-txtright {
-        position: relative;
-        width: 30%;
-        float: right;
-        background-color: $colour-red;
-        font-weight: bold;
-        text-align: center;
-        z-index: 99;
-    }
-
-    .qexit-heightright {
-        // height: $appbar-height - 10;
-        // line-height: $appbar-height - 10;
-        height: $appbar-height;
-        line-height: $appbar-height;
-    }
-
-    .quick-exit-img {
-        position: fixed;
-        width: 100%;
-        max-width: 800px;
-        z-index: 99;
-    }
-
-    /* mobile device (max width is 320px) */
-    @media only screen and (max-width: 320px) {
-        .qexit-heightleft {
-            height: $appbar-height;
-        }
-
-        .qexit-heightright {
-            height: $appbar-height;
-            line-height: $appbar-height;
-        }
-    }
-
-    /* mobile device (max width is 480px) */
-    @media only screen
-    and (min-width: 321px)
-    and (max-width: 480px) {
-        .mobile_device img {
-            width: 30px;
-            height: 30px;
-            float: right;
-            background-color: $colour-red;
-        }
-
-        .qexit-heightleft {
-            height: $appbar-height;
-        }
-
-        .qexit-heightright {
-            height: $appbar-height;
-            line-height: $appbar-height;
-        }
-    }
-
-
-    @media only screen
-    and (min-width: 768px)
-    and (max-width: 1024px) {
-
-        .mobile_device img {
-            width: 35px;
-            height: 35px;
-            float: right;
-            background-color: $colour-red;
-        }
-    }
-
-    @media only screen and (max-width: 767px) {
-        & {
-            .desktop {
-                display: none;
-            }
-
-            .mobile_device {
-                display: block;
-            }
-        }
     }
 }

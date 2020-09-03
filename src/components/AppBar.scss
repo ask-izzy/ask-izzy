@@ -46,7 +46,6 @@ $colour-grey: #f8f9f9;
     }
 
     .title {
-
         max-width: 80%;
         margin: auto;
         padding: 0;
@@ -115,12 +114,11 @@ $colour-grey: #f8f9f9;
     }
 
     // Quick Exit button
-
-    .quick-exit {
-        min-width: 29%;
+    div.quick-exit {
         height: $appbar-height;
+        line-height: $appbar-height;
         margin-left: 5px;
-        padding: 0 5px;
+        padding: 0 15px;
         float: right;
         background-color: $colour-red;
         font-weight: bold;
@@ -130,29 +128,20 @@ $colour-grey: #f8f9f9;
     }
 
     /* if desktop */
-    .mobile_device {
+    .longer-text {
+        display: initial;
+    }
+    .shorter-text {
         display: none;
     }
 
     /* mobile device (max width is 736px) */
-    @media only screen and (max-device-width: 768px) {
-        .mobile_device {
-            display: flex;
-            justify-content: center;
-            width: 95px;
-            height: $appbar-height;
-            float: right;
-            background-color: $colour-red;
-        }
-
-        .exit_text {
-            color: $colour-grey;
-            font-size: 17px;
-            font-weight: bold;
-        }
-
-        .desktop {
+    @media only screen and (max-width: 768px) {
+        .longer-text {
             display: none;
+        }
+        .shorter-text {
+            display: initial;
         }
     }
 }
