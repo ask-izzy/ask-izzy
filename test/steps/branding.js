@@ -49,7 +49,7 @@ async function seeTheBrandingHeader(): Promise<void> {
 
     await assert.textIsVisible(
         this.driver,
-        "What do you need?",
+        "Find the help you need, now and nearby",
         container
     );
 }
