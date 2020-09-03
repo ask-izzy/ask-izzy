@@ -66,8 +66,9 @@ $bright-purple: #8a2be2;
         flex-direction: column;
         justify-content: center;
 
-        height: 230px;
+        height: 210px;
         max-height: unset;
+        padding-bottom: 20px;
 
         text-align: center;
 
@@ -116,15 +117,11 @@ $bright-purple: #8a2be2;
         }
 
         @media only screen and (max-width: 540px) {
-            height: 270px;
-        }
-
-        @media only screen and (max-width: 400px) {
-            height: 270px;
+            height: 250px;
         }
 
         @media only screen and (max-width: 310px) {
-            height: 300px;
+            height: 290px;
         }
 
         .HeaderBarBanner {
