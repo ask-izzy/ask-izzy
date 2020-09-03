@@ -116,12 +116,12 @@ $colour-grey: #f8f9f9;
     // Quick Exit button
     div.quick-exit {
         height: $appbar-height;
-        line-height: $appbar-height;
         margin-left: 5px;
         padding: 0 15px;
         float: right;
         background-color: $colour-red;
         font-weight: bold;
+        line-height: $appbar-height;
         white-space: nowrap;
         overflow: hidden;
         vertical-align: middle;
@@ -131,6 +131,7 @@ $colour-grey: #f8f9f9;
     .longer-text {
         display: initial;
     }
+
     .shorter-text {
         display: none;
     }
@@ -140,6 +141,7 @@ $colour-grey: #f8f9f9;
         .longer-text {
             display: none;
         }
+
         .shorter-text {
             display: initial;
         }

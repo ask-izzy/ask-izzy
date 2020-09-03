@@ -56,10 +56,10 @@ class HomePage extends React.Component<{}, void> {
                             Coronavirus (COVID-19) support
                         </h3>
                         <span>
-                            Where to get help and information for those affected by
-                            Coronavirus (COVID19).{" "}
+                            Where to get help and information for those
+                            affected by Coronavirus (COVID19).{" "}
                             <Link to="/covid-19-support">
-                                Learn more
+                                Learn&nbsp;more
                             </Link>
                         </span>
                     </div>

@@ -1,22 +1,27 @@
 $colour-red: #b30000;
 $brand-bg-dark: #363e43;
 $colour-grey: #f8f9f9;
+$notification-accent: #fed800;
+$notification-background: #f4f4f4;
+$bright-purple: #8a2be2;
 
 .HomePage {
     .notification {
-        background-color: #f4f4f4;
-        border-left: #FED800 10px solid;
-        padding: 0.6em 0.1em;
         display: flex;
-        padding-right: 1.5em;   
+        padding: 0.6em 0.1em;
+        padding-right: 1.5em;
+        border-left: $notification-accent 10px solid;
+        background-color: $notification-background;
 
         div {
             display: flex;
             flex-direction: column;
             padding: 0.4em 0.1em;
+
             > * {
                 margin: 0.2em;
             }
+
             h3 {
                 font-size: 1.1em;
             }
@@ -33,9 +38,9 @@ $colour-grey: #f8f9f9;
         top: 0;
         width: 100%;
         max-width: 800px;
-        z-index: 99;
-        background-color: $brand-bg-dark;
         height: $appbar-height;
+        background-color: $brand-bg-dark;
+        z-index: 99;
 
         // Quick Exit button
         div.quick-exit {
@@ -44,11 +49,11 @@ $colour-grey: #f8f9f9;
             padding: 0 15px;
             float: right;
             background-color: $colour-red;
+            color: $white;
             font-weight: bold;
             white-space: nowrap;
             overflow: hidden;
             vertical-align: middle;
-            color: #FFF;
 
             span {
                 line-height: $appbar-height;
@@ -64,7 +69,6 @@ $colour-grey: #f8f9f9;
         height: 230px;
         max-height: unset;
 
-        text-align: left;
         text-align: center;
 
         .HeaderBarContent {
@@ -74,7 +78,9 @@ $colour-grey: #f8f9f9;
             z-index: 1;
             box-sizing: border-box;
 
-            .homepage-logo, .primary, .secondary, .ExpandArrowIcon {
+            .homepage-logo,
+            .primary,
+            .secondary {
                 margin: 0.4em auto;
                 padding: 0;
             }
@@ -86,11 +92,11 @@ $colour-grey: #f8f9f9;
                 margin-left: auto;
             }
 
-            // Since the home page creates a custom primary element that is 
+            // Since the home page creates a custom primary element that is
             // a child of the header bar rather than letting the header bar
             // create it a ".primary" element from a text prop (because we
             // want to add the site logo before the primary element) we need
-            // to hide the primary element that header bar creates. 
+            // to hide the primary element that header bar creates.
             .primary:first-child {
                 display: none;
             }
@@ -112,9 +118,11 @@ $colour-grey: #f8f9f9;
         @media only screen and (max-width: 540px) {
             height: 270px;
         }
+
         @media only screen and (max-width: 400px) {
             height: 270px;
         }
+
         @media only screen and (max-width: 310px) {
             height: 300px;
         }
@@ -178,12 +186,10 @@ $colour-grey: #f8f9f9;
 
     .search {
         padding: 1em;
-            
+
         background-color: $brand-bg-mid-lighter;
 
         .searchWrapper {
-            display: flex;
-
             display: flex;
 
             align-items: center;
@@ -193,7 +199,6 @@ $colour-grey: #f8f9f9;
             height: 19px;
             margin: auto;
 
-            padding: 1em;
             padding: 9px;
             padding-right: 0;
             padding-left: 0;
@@ -215,8 +220,6 @@ $colour-grey: #f8f9f9;
                 padding-right: 10px;
 
                 padding-left: 10px;
-                border: #8a2be2;
-                border: 0;
                 border: 0;
 
                 border-radius: 5px 0 0 5px;

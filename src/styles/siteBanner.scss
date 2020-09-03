@@ -1,5 +1,7 @@
 .siteBanner {
-    &, &-notice, &-warning {
+    &,
+    &-notice,
+    &-warning {
         padding: 0 15px;
         color: $white;
         overflow: auto;
@@ -13,7 +15,8 @@
         }
     }
 
-    &, &-notice {
+    &,
+    &-notice {
         background-color: $brand-bg-dark;
     }
 
@@ -24,7 +27,8 @@
 
 // Fills in empty space in the header created by non-horizontal bottom
 .containsSiteBanner {
-    &, &-notice .HeaderBar {
+    &,
+    &-notice .HeaderBar {
         .HeaderBarBanner {
             &::after,
             &.homepage::after {
@@ -46,7 +50,9 @@
 // Adds correct spacing when banner is used on a results page
 main > .ResultsPage {
     .siteBanner {
-        &, &-notice, &-warning {
+        &,
+        &-notice,
+        &-warning {
             margin-bottom: 3rem;
         }
     }
@@ -55,7 +61,9 @@ main > .ResultsPage {
 // Fixes banner styling on service page due to css inheritance/cascading
 main > .ServicePage {
     .siteBanner {
-        &, &-notice, &-warning {
+        &,
+        &-notice,
+        &-warning {
             margin: 1.5rem 0;
             font-size: 1rem;
 
