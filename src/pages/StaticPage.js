@@ -12,7 +12,7 @@ type Props = {
   bannerName: string,
   children: React.Node,
   className: string,
-  bannerPrimary?: string,
+  bannerPrimary?: string | React.Node,
   bannerSecondary?: string,
 }
 

@@ -68,26 +68,18 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
     render(): React.Node {
         return (
             <StaticPage
-                title="COVID-19 Support"
+                title=""
                 bannerName="money-help static"
                 className="Covid19Page"
-                bannerPrimary="Coronavirus disease 2019 (COVID-19) support"
+                bannerPrimary={[<span style={{display: "inline-block"}}>Coronavirus (COVID-19) information and services</span>]}
                 bannerSecondary={""}
             >
-                <h2>
-                    Coronavirus (COVID-19) information and services
-                </h2>
-                <p>
-                    You can use Ask Izzy to{" "}
-                    <Link to="/search/coronavirus/personalise">
-                        find nearby clinics
-                    </Link> providing services and testing specific to coronavirus.
-                </p>
-
-                <h2>
-                    COVID-19 National Hotline
-                </h2>
-                <div>
+                <div className="intro">
+                    Enlarged body / paragraph text so we can draw attention and 
+                    introduce a page, if necessary. <a href="www.google.com">This is a link</a>
+                </div>
+                <div className="nationalHotline">
+                    <h2>COVID-19 National Hotline</h2>
                     The Coronavirus Health Information  Line provides general
                     information relating to coronavirus (COVID-19) for the
                     general community. The line operates 24 hours a day, seven
@@ -98,8 +90,6 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                         kind=""
                     />
                 </div>
-
-                <div className="separator" />
 
                 <h2>Federal Government Information</h2>
                 <p>
@@ -115,133 +105,164 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
 
                 <div className="separator" />
                 <h2>State Government Information</h2>
-                <h3>Victoria</h3>
-                <ul>
-                    <li>
-                        {this.contactDetailPhone(
-                            "1800 675 398",
-                            "State coronavirus hotline"
-                        )}
-                    </li>
-                    <li>
-                        {this.contactDetailWeb(
-                            "https://dhhs.vic.gov.au/coronavirus",
-                            "Victorian Department of Health and Human Services – Coronavirus Info"
-                        )}
-                    </li>
-                    <li>
-                        {this.contactDetailWeb(
-                            "https://www.dhhs.vic.gov.au/information-and-supports-public-housing-restrictions-covid-19",
-                            "Victorian Department of Health and Human Services – Public Housing Restrictions"
-                        )}
-                    </li>
-                </ul>
-                <p>
-                    If you live in a public housing estate in Flemington {" "}
-                    or North Melbourne, and are unable to leave your {" "}
-                    home, you can access support from the Department of {" "}
-                    Health and Human Services by calling {" "}
-                    {this.contactDetailPhoneInline("1800 961 054")}. {" "}
-                    If you need a translator call {" "}
-                    {this.contactDetailPhoneInline("131 450")}.
-                </p>
-                <p>
-                    Both services are available 24 hours a day and 7 days a week.
-                </p>
-
-                <h3>New South Wales</h3>
-                <ul>
-                    <li>
-                        {this.contactDetailPhone(
-                            "1800 022 222",
-                            "Healthdirect"
-                        )}
-                    </li>
-                    <li>
-                        {this.contactDetailWeb(
-                            "https://www.nsw.gov.au/covid-19",
-                            "NSW health coronavirus webpage"
-                        )}
-                    </li>
-                </ul>
-
-                <h3>Queensland</h3>
-                <ul>
-                    <li>
-                        {this.contactDetailPhone(
-                            "13 43 25 84",
-                            "13 HEALTH - health advice for Queenslanders over the phone"
-                        )}
-                    </li>
-                    <li>
-                        {this.contactDetailWeb(
-                            "https://www.qld.gov.au/health/conditions/health-alerts/coronavirus-covid-19",
-                            "Queensland Health coronavirus webpage"
-                        )}
-                    </li>
-                </ul>
-
-                <h3>Western Australia</h3>
-                <ul>
-                    <li>
-                        {this.contactDetailWeb(
-                            "https://healthywa.wa.gov.au/coronavirus",
-                            "WA Department of Health coronavirus webpage"
-                        )}
-                    </li>
-                </ul>
-
-                <h3>South Australia</h3>
-                <ul>
-                    <li>
-                        {this.contactDetailWeb(
-                            "https://www.sahealth.sa.gov.au/COVID2019",
-                            "SA Health coronavirus webpage"
-                        )}
-                    </li>
-                </ul>
-
-                <h3>Tasmania</h3>
-                <ul>
-                    <li>
-                        {this.contactDetailPhone(
-                            "1800 671 738",
-                            "Tasmanian Public Health Hotline"
-                        )}
-                    </li>
-                    <li>
-                        {this.contactDetailWeb(
-                            "https://www.coronavirus.tas.gov.au/",
-                            "Tasmanian Department of Health coronavirus webpage"
-                        )}
-                    </li>
-                </ul>
-
-                <h3>Australian Capital Territory</h3>
-                <ul>
-                    <li>
-                        {this.contactDetailWeb(
-                            "https://www.covid19.act.gov.au/",
-                            "ACT Health coronavirus webpage"
-                        )}
-                    </li>
-                </ul>
-
-                <h3>Northern Territory</h3>
-                <ul>
-                    <li>
-                        {this.contactDetailPhone(
-                            "1800 008 002",
-                            <span>NT Hotline <strong>for people who need to arrange testing only</strong></span>
-                        )}
-                    </li>
-                    <li>
-                        {this.contactDetailWeb(
-                            "https://coronavirus.nt.gov.au/",
-                            "NT Department of Health coronavirus webpage"
-                        )}
-                    </li>
-                </ul>
+                <hr />
+                <details>
+                    <summary><h3>Victoria</h3><icons.Chevron /></summary>
+                    <ul>
+                        <li>
+                            {this.contactDetailPhone(
+                                "1800 675 398",
+                                "State coronavirus hotline"
+                            )}
+                        </li>
+                        <li>
+                            {this.contactDetailWeb(
+                                "https://dhhs.vic.gov.au/coronavirus",
+                                "Victorian Department of Health and Human Services – Coronavirus Info"
+                            )}
+                        </li>
+                        <li>
+                            {this.contactDetailWeb(
+                                "https://www.dhhs.vic.gov.au/information-and-supports-public-housing-restrictions-covid-19",
+                                "Victorian Department of Health and Human Services – Public Housing Restrictions"
+                            )}
+                        </li>
+                    </ul>
+                    <p>
+                        If you live in a public housing estate in Flemington {" "}
+                        or North Melbourne, and are unable to leave your {" "}
+                        home, you can access support from the Department of {" "}
+                        Health and Human Services by calling {" "}
+                        {this.contactDetailPhoneInline("1800 961 054")}. {" "}
+                        If you need a translator call {" "}
+                        {this.contactDetailPhoneInline("131 450")}.
+                    </p>
+                    <p>
+                        Both services are available 24 hours a day and 7 days a week.
+                    </p>
+                </details>
+                <hr />
+                <details>
+                    <summary><h3>New South Wales</h3><icons.Chevron /></summary>
+                    <ul>
+                        <li>
+                            {this.contactDetailPhone(
+                                "1800 022 222",
+                                "Healthdirect"
+                            )}
+                        </li>
+                        <li>
+                            {this.contactDetailWeb(
+                                "https://www.nsw.gov.au/covid-19",
+                                "NSW health coronavirus webpage"
+                            )}
+                        </li>
+                    </ul>
+                </details>
+                <hr />
+                <details>
+                    <summary><h3>Queensland</h3><icons.Chevron /></summary>
+                    <ul>
+                        <li>
+                            {this.contactDetailPhone(
+                                "13 43 25 84",
+                                "13 HEALTH - health advice for Queenslanders over the phone"
+                            )}
+                        </li>
+                        <li>
+                            {this.contactDetailWeb(
+                                "https://www.qld.gov.au/health/conditions/health-alerts/coronavirus-covid-19",
+                                "Queensland Health coronavirus webpage"
+                            )}
+                        </li>
+                    </ul>
+                </details>
+                <hr />
+                <details>
+                    <summary><h3>Western Australia</h3><icons.Chevron /></summary>
+                    <ul>
+                        <li>
+                            {this.contactDetailWeb(
+                                "https://healthywa.wa.gov.au/coronavirus",
+                                "WA Department of Health coronavirus webpage"
+                            )}
+                        </li>
+                    </ul>
+                </details>
+                <hr />
+                <details>
+                    <summary><h3>South Australia</h3><icons.Chevron /></summary>
+                    <ul>
+                        <li>
+                            {this.contactDetailWeb(
+                                "https://www.sahealth.sa.gov.au/COVID2019",
+                                "SA Health coronavirus webpage"
+                            )}
+                        </li>
+                    </ul>
+                </details>
+                <hr />
+                <details>
+                    <summary><h3>Tasmania</h3><icons.Chevron /></summary>
+                    <ul>
+                        <li>
+                            {this.contactDetailPhone(
+                                "1800 671 738",
+                                "Tasmanian Public Health Hotline"
+                            )}
+                        </li>
+                        <li>
+                            {this.contactDetailWeb(
+                                "https://www.coronavirus.tas.gov.au/",
+                                "Tasmanian Department of Health coronavirus webpage"
+                            )}
+                        </li>
+                    </ul>
+                </details>
+                <hr />
+                <details>
+                    <summary><h3>Australian Capital Territory</h3><icons.Chevron /></summary>
+                    <ul>
+                        <li>
+                            {this.contactDetailWeb(
+                                "https://www.covid19.act.gov.au/",
+                                "ACT Health coronavirus webpage"
+                            )}
+                        </li>
+                    </ul>
+                </details>
+                <hr />
+                <details>
+                    <summary><h3>Northern Territory</h3><icons.Chevron /></summary>
+                    <ul>
+                        <li>
+                            {this.contactDetailPhone(
+                                "1800 008 002",
+                                <span>NT Hotline <strong>for people who need to arrange testing only</strong></span>
+                            )}
+                        </li>
+                        <li>
+                            {this.contactDetailWeb(
+                                "https://coronavirus.nt.gov.au/",
+                                "NT Department of Health coronavirus webpage"
+                            )}
+                        </li>
+                    </ul>
+                </details>
+                <hr />
+                <div className="izzyCanHelp">
+                    <h2>Ask Izzy can help</h2>
+                    <p>
+                        You can use Ask Izzy to{" "}
+                        <Link to="/search/coronavirus/personalise">
+                            find nearby clinics
+                        </Link> providing services and testing specific to coronavirus.
+                    </p>
+                    <p>
+                        Or why not try <a href="beta.askizzy.org.au">Ask Izzy beta</a>, 
+                        we've made some changes that might be helpful to you.
+                    </p>
+                </div>
             </StaticPage>
         );
     }
