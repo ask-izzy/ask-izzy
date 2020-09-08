@@ -1,21 +1,23 @@
 /* @flow */
 
 import React from "react";
-import PropTypes from "proptypes";
 import ReactMarkdown from "react-markdown";
 import Helmet from "react-helmet";
-
+import { makeTitle } from "../routes";
 import icons from "../icons";
 import Query from "../queries/query";
 import StaticPage from "./StaticPage";
 import pageQuery from "../queries/content/page.js";
 import NotFoundStaticPage from "./NotFoundStaticPage";
+import routerContext from "../contexts/router-context";
 
 type Props = {
     location: any,
 }
 
 class DynamicPage extends React.Component<Props, void> {
+    static contextType = routerContext;
+
     absoluteImageUrl(uri: string): string {
         // Strapi returns a relative image url, we need to change
         // it to point to our content server.
@@ -72,8 +74,8 @@ class DynamicPage extends React.Component<Props, void> {
                                     <title>
                                         {
                                             makeTitle(
-                                                this.props.title,
-                                                match.params
+                                                page.Title,
+                                                this.context.router.match.params
                                             )
                                         }
                                     </title>
