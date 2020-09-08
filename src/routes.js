@@ -354,6 +354,7 @@ export default (
                 component={PersonalisationWizardPage}
                 exact={true}
                 name={resultsType}
+                title=":page Map Questions"
                 state={{
                     pageType: vars => [
                         vars.serviceListingType,
@@ -366,6 +367,7 @@ export default (
                 component={PersonalisationWizardPage}
                 exact={true}
                 name={resultsType}
+                title=":page Map Questions"
                 state={{
                     pageType: vars => [
                         vars.serviceListingType,
@@ -378,6 +380,7 @@ export default (
                 component={PersonalisationSummaryPage}
                 exact={true}
                 name={resultsType}
+                title=":page Map Questions"
                 state={{
                     pageType: vars => [
                         vars.serviceListingType,
@@ -390,6 +393,7 @@ export default (
                 component={PersonalisationSummaryPage}
                 exact={true}
                 name={resultsType}
+                title=":page Map Questions"
                 state={{
                     pageType: vars => [
                         vars.serviceListingType,
@@ -402,6 +406,7 @@ export default (
                 component={PersonalisationWizardPage}
                 exact={true}
                 name={resultsType}
+                title=":page Questions"
                 state={{
                     pageType: vars => [
                         vars.serviceListingType,
@@ -414,6 +419,7 @@ export default (
                 component={PersonalisationWizardPage}
                 exact={true}
                 name={resultsType}
+                title=":page Questions"
                 state={{
                     pageType: vars => [
                         vars.serviceListingType,
@@ -426,6 +432,7 @@ export default (
                 component={PersonalisationSummaryPage}
                 exact={true}
                 name={resultsType}
+                title=":page Questions"
                 state={{
                     pageType: vars => [
                         vars.serviceListingType,
@@ -438,6 +445,7 @@ export default (
                 component={PersonalisationSummaryPage}
                 exact={true}
                 name={resultsType}
+                title=":page Questions"
                 state={{
                     pageType: vars => [
                         vars.serviceListingType,
