@@ -129,12 +129,13 @@ export default (
                     "COVID 19 Support",
                 ],
             }}
+            exact={true}
         />
         <BasePage
             path="/covid-19-support/:supportCategorySlug"
             component={props => (
                 <CovidSupportPageListing
-                    key={props.params.supportCategorySlug}
+                    key={props.match.params.supportCategorySlug}
                     {...props}
                 />
             )}
@@ -146,6 +147,7 @@ export default (
                     vars.covidCategoryDisplayName,
                 ],
             }}
+            exact={true}
         />
         <BasePage
             path="/terms"
