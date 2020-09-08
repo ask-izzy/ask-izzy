@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from "react";
-import {Link} from "react-router";
+import {Link} from "react-router-dom";
 
 import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
@@ -44,7 +44,7 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
     constructor(props: Object) {
         super(props);
         const covidCategory = CovidSupportPage.getCovidCategory(
-            this.props.params.supportCategorySlug
+            this.props.match.params.supportCategorySlug
         )
         const covidContent = CovidSupportPage.getContent(covidCategory)
 
@@ -94,8 +94,8 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
 
         gtm.emit({
             event: "searchResults",
-            searchQuery: this.props.params.search,
-            searchPage: this.props.params.page,
+            searchQuery: this.props.match.params.search,
+            searchPage: this.props.match.params.page,
             location: storage.getLocation(),
         });
 
@@ -151,8 +151,8 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
     async loadMore(): Promise<void> {
         gtm.emit({
             event: "LoadMoreSearchResults",
-            searchQuery: this.props.params.search,
-            searchPage: this.props.params.page,
+            searchQuery: this.props.match.params.search,
+            searchPage: this.props.match.params.page,
             location: storage.getLocation(),
         });
 
