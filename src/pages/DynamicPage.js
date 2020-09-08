@@ -12,6 +12,7 @@ import NotFoundStaticPage from "./NotFoundStaticPage";
 
 type Props = {
     location: any,
+    match: any,
 }
 
 class DynamicPage extends React.Component<Props, void> {
