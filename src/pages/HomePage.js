@@ -2,8 +2,6 @@
 
 import React from "react";
 
-import posthog from "posthog-js";
-
 import HeaderBar from "../components/HeaderBar";
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
