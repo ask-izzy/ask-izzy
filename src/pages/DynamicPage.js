@@ -3,7 +3,7 @@
 import React from "react";
 import PropTypes from "proptypes";
 import ReactMarkdown from "react-markdown";
-import DocumentTitle from "react-document-title";
+import Helmet from "react-helmet";
 
 import icons from "../icons";
 import Query from "../queries/query";
@@ -68,11 +68,16 @@ class DynamicPage extends React.Component<Props, void> {
                                 bannerName={page.Banner}
                             >
 
-                                <DocumentTitle
-                                    title={
-                                        page.Title + " | Ask Izzy"
-                                    }
-                                />
+                                <Helmet>
+                                    <title>
+                                        {
+                                            makeTitle(
+                                                this.props.title,
+                                                match.params
+                                            )
+                                        }
+                                    </title>
+                                </Helmet>
 
                                 <div className="DynamicPage">
                                     <ReactMarkdown
