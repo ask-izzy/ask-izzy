@@ -1,10 +1,9 @@
 /* @flow */
 
 import React from "react";
-import PropTypes from "proptypes";
 import ReactMarkdown from "react-markdown";
 import Helmet from "react-helmet";
-
+import { makeTitle } from "../routes";
 import icons from "../icons";
 import Query from "../queries/query";
 import StaticPage from "./StaticPage";
@@ -73,8 +72,8 @@ class DynamicPage extends React.Component<Props, void> {
                                     <title>
                                         {
                                             makeTitle(
-                                                this.props.title,
-                                                match.params
+                                                page.Title,
+                                                this.props.match.params
                                             )
                                         }
                                     </title>
