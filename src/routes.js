@@ -133,6 +133,7 @@ export default (
                     "COVID 19 Support",
                 ],
             }}
+            exact={true}
         />
         <BasePage
             path="/covid-19-support/:supportCategorySlug"
@@ -145,6 +146,7 @@ export default (
                     vars.covidCategoryDisplayName,
                 ],
             }}
+            exact={true}
         />
         <BasePage
             path="/disability-advocacy-finder"
