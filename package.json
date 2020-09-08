@@ -67,7 +67,6 @@
     "proptypes": "1.1.0",
     "react": "16.13.1",
     "react-apollo": "3.1.5",
-    "react-document-title": "2.0.3",
     "react-dom": "16.13.1",
     "react-google-maps": "git+https://git@github.com/infoxchange/react-google-maps.git#v9.4.5",
     "react-helmet": "6.1.0",
