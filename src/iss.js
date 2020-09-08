@@ -247,7 +247,7 @@ async function attachTransportTimes(
 
     let formatPoint = (point: issPoint) => `${point.lat},${point.lon}`;
 
-    const maps = await TryWithDefault < $ReadOnly < {travelTime: Function} >> (
+    const maps = await TryWithDefault < $ReadOnly < {travelTime: Function} >>(
         1000, Maps(), {}
     );
 
