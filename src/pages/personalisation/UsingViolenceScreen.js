@@ -67,7 +67,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
         // eslint-disable-next-line max-len
         const referralServiceLink = "/service/1190541-no-to-violence-men-s-referral-service";
         const referralServicePhone = "1300 766 491";
-        const referralServiceChat = "http://www.ntv.org.au/get-help/live-chat/";
+        const referralServiceChat = "https://ntv.org.au/get-help/";
 
         return (
             <h3>
