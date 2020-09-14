@@ -23,10 +23,4 @@ export PORT=8010
 
 # Rebuild the assets if we're not in CI, where the assets have been
 # built already.
-${CI:=false} || env ENVIRONMENT=test ./script/build-assets
-webpack \
-    --display-error-details \
-    $([ -z "$DEBUG" ] && echo -e "--display\nerrors-only") \
-    --progress \
-    --bail \
-    --config webpack/test.config.js
+${CI:=false} || ./script/build-assets
