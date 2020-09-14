@@ -114,7 +114,7 @@ window.addEventListener("error", errEvent => {
     gtm.emit({
         event: "exception",
         exDescription: `JavaScript Error: ${error.message} ${error.filename}: ${
-            evt.lineno
+            error.lineno
         }`,
     });
     gtm.emit({
