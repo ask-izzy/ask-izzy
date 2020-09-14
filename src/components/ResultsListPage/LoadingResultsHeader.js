@@ -38,7 +38,7 @@ const PersonalisationLink = ({pathname}: Object) => (
         <Link
             className="change-personalisation"
             to={`${trailingSlash(pathname)}personalise/summary`}
-            onClick={gtm.emit.bind(null, {event: "changeAnswers"})}
+            onClick={() => gtm.emit({event: "changeAnswers"})}
         >
             Edit Answers
         </Link>

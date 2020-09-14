@@ -17,7 +17,7 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                use: ["es3ify-loader", "babel-loader"],
+                use: ["babel-loader"],
             },
         ],
     },
