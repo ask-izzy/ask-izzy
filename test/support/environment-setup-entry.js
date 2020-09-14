@@ -1,5 +1,5 @@
 /* @flow */
-require("core-js");
+require("core-js/stable");
 require("regenerator-runtime/runtime");
 
 require("./environment-setup")

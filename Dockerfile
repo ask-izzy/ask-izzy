@@ -32,18 +32,22 @@ RUN \
     npm install -g yarn && \
     yarn config set registry http://apt.office.infoxchange.net.au/npm
 
-COPY package.json yarn.lock /app/
+USER app
+
+# Install node modules
+COPY --chown=app package.json yarn.lock /app/
 RUN yarn --frozen-lockfile && \
     yarn cache clean
-
 ENV PATH /app/node_modules/.bin:$PATH
 
 # Install and build the app
-COPY . /app
-
+COPY --chown=app . /app
 RUN git describe > public/VERSION && \
-    script/build-assets && \
-    chown -R app .
+    script/build-assets
+
+# Idealy this container should not be started as root.
+# hadolint ignore=DL3002
+USER root
 
 ENTRYPOINT ["./invoke.sh"]
 EXPOSE 8000
