@@ -110,7 +110,7 @@ let processFile = (file) => {
                 }
 
                 console.log(indent + "Browser logs:")
-                if (!logs.some(step => step.browserLog.length)) {
+                if (!testBrowserLog.some(step => step.browserLog.length)) {
                     console.log(
                         indent + `  <nothing logged>`
                     )
