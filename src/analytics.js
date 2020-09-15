@@ -1,8 +1,13 @@
 /* $FlowIgnore */
 /*eslint-disable */
 import 'url-search-params-polyfill';
+import { hotjar } from "react-hotjar";
 
 document.addEventListener("DOMContentLoaded", function(event) {
+
+    if (window.GOOGLE_ANALYTICS_ID) {
+        hotjar.initialize(window.GOOGLE_ANALYTICS_ID);
+    }
 
     if (window.GOOGLE_TAG_MANAGER_ID && window.GOOGLE_TAG_MANAGER_AUTH && window.GOOGLE_TAG_MANAGER_ENV) {
         for (const index of window.GOOGLE_TAG_MANAGER_ID.split("~").keys()) {
