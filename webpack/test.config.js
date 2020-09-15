@@ -1,4 +1,4 @@
-/* flow:disable */
+/* @flow */
 // Webpack config for creating the script to inject during test.
 
 const path = require("path");

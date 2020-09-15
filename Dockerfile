@@ -45,6 +45,8 @@ COPY --chown=app . /app
 RUN git describe > public/VERSION && \
     script/build-assets
 
+# Idealy this container should not be started as root.
+# hadolint ignore=DL3002
 USER root
 
 ENTRYPOINT ["./invoke.sh"]
