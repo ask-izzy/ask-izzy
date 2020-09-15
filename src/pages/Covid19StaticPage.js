@@ -128,7 +128,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                         </li>
                     </ul>
                     <p>
-                        If you live in a public housing estate you can access 
+                        If you live in a public housing estate you can access
                         support from the Department of {" "}
                         Health and Human Services by calling {" "}
                         {this.contactDetailPhoneInline("1800 961 054")}. {" "}
@@ -257,7 +257,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                         </Link> providing services and testing specific to coronavirus.
                     </p>
                     <p>
-                        Or why not try <a href="beta.askizzy.org.au">Ask Izzy beta</a>, 
+                        Or why not try <a href="beta.askizzy.org.au">Ask Izzy beta</a>,
                         we've made some changes that might be helpful to you.
                     </p>
                 </div>

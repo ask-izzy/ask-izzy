@@ -3,6 +3,7 @@
         @media only screen and (max-width: 540px) {
             height: 200px;
         }
+
         .HeaderBarContent .primary {
             font-size: 2em;
         }
@@ -14,26 +15,27 @@
     }
 
     .intro {
-        font-size: 1.2em;
         margin: 1em 0;
+        font-size: 1.2em;
     }
 
     .nationalHotline {
-        background-color: $brand-pane-alt-dark-faint;
-        padding: 0.4em 1.4em 1em;
         margin: 2em 0;
+        padding: 0.4em 1.4em 1em;
+        background-color: $brand-pane-alt-dark-faint;
 
         h2 {
             margin: 0.8em 0 0.5em;
         }
+
         p {
             margin: 0.5em 0;
         }
 
         .Phone .ContactButton {
+            margin: 0.5em 0;
             background-color: $brand-pane-alt-dark;
             color: $brand-text-light;
-            margin: 0.5em 0;
         }
     }
 
@@ -74,12 +76,12 @@
     }
 
     .body > hr {
-        display: block; 
+        display: block;
         height: 1px;
-        border: 0;
-        border-top: 1px solid $brand-bg-mid-lighter;
         margin: 1em -40px;
         padding: 0;
+        border: 0;
+        border-top: 1px solid $brand-bg-mid-lighter;
     }
 
     details {
@@ -88,29 +90,30 @@
             align-items: center;
             justify-content: space-between;
             list-style: none;
+
             > * {
                 margin: 0;
             }
+
             &::-webkit-details-marker {
                 display: none; // # chrome doesn't support styling with list-style
             }
         }
+
         .ChevronIcon {
             transform: rotate(180deg);
             transition: transform 0.1s ease-out;
         }
+
         &[open] .ChevronIcon {
             transform: rotate(90deg);
-        }
-
-        &[open] {
         }
     }
 
     .izzyCanHelp {
-        border: solid $brand-pane-alt-dark 1px;
-        padding: 1em;
         margin: 2em 0;
+        padding: 1em;
+        border: solid $brand-pane-alt-dark 1px;
 
         > *:first-child {
             margin-top: 0.2em;
