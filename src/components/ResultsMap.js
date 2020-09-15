@@ -41,7 +41,7 @@ class ResultsMap extends React.Component<Props, State> {
         Maps().then((maps) => {
             this.setState({maps: maps});
             // disable infowindows
-            // flow:disable blithely monkey-patch the global gmaps api :(
+            // $FlowIgnore blithely monkey-patch the global gmaps api :(
             maps.api.InfoWindow.prototype.set = function() {};
         });
     }

@@ -125,7 +125,8 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
 
             .catch(response => {
                 try {
-                    console.error(response, response.stack);
+                    console.error(response)
+                    console.error(response.stack);
 
                     let data = JSON.parse(response.body);
 
@@ -430,7 +431,7 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
 
             mapHeight =
                 window.innerHeight -
-                // flow:disable
+                // $FlowIgnore
                 document.querySelector(".AppBar").offsetHeight;
 
             /* resize the map to make room

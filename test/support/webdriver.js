@@ -2,11 +2,12 @@
 
 import Webdriver from "selenium-webdriver";
 import ChromeWebDriver from "selenium-webdriver/chrome";
+import command from "selenium-webdriver/lib/command";
 
 declare var IzzyStorage: Object;
 
 export async function seleniumBrowser(
-    driver: Webdriver.WebDriver,
+    driver: typeof Webdriver.WebDriver,
 ): Promise<Object> {
     const wnd = new Webdriver.WebDriver.Window(driver);
     const capabilities = await driver.getCapabilities();
@@ -47,11 +48,11 @@ export function baseUrl(): string {
  *
  * @return {Promise} - return value from Selenium Webdriver.get.
  */
-export function gotoUrl(
-    driver: Webdriver.WebDriver,
+export async function gotoUrl(
+    driver: typeof Webdriver.WebDriver,
     url: string
 ): Promise<void> {
-    return driver.get(baseUrl() + url);
+    await driver.get(baseUrl() + url);
 }
 
 /**
@@ -60,7 +61,7 @@ export function gotoUrl(
  * @return {Promise<Webdriver.Webdriver>} requested webdriver.
  */
 export default async function webDriverInstance(
-): Promise<Webdriver.WebDriver> {
+): Promise<typeof Webdriver.WebDriver> {
     // Remove version from browserName (not supported)
     const browserName = (process.env.SELENIUM_BROWSER || "").split(/:/)[0];
     const preferences = new Webdriver.logging.Preferences();
@@ -94,11 +95,46 @@ export default async function webDriverInstance(
         .manage()
         .setTimeouts({ implicit: 10000 });
 
+    driver.then(driver => {
+        // This command is in an unreleased version of "selenium-webdriver"
+        // (at the time of writing). After the next release this code can be
+        // updated to use the command from the library directly.
+        driver.getExecutor().defineCommand(
+            "sendAndGetDevToolsCommand",
+            "POST",
+            "/session/:sessionId/chromium/send_command_and_get_result"
+        );
+
+        driver.executeScriptBeforeLoad = async(script, ...args) => {
+            if (typeof script === "function") {
+                script = `(${script}).apply(null, ${JSON.stringify(args)});`
+            }
+            return driver.getExecutor().execute(
+                new command.Command("sendAndGetDevToolsCommand")
+                    .setParameter(
+                        "cmd",
+                        "Page.addScriptToEvaluateOnNewDocument"
+                    )
+                    .setParameter("params", {"source": script})
+                    .setParameter("sessionId",
+                        (await driver.getSession()).getId()
+                    )
+            )
+        }
+        driver.removeScriptBeforeLoad = async scriptId =>
+            driver.sendDevToolsCommand(
+                "Page.removeScriptToEvaluateOnNewDocument",
+                {"identifier": scriptId}
+            )
+
+        return driver
+    })
+
     return driver;
 }
 
 async function waitForStorage(
-    driver: Webdriver.WebDriver,
+    driver: typeof Webdriver.WebDriver,
 ): Promise<void> {
     await gotoUrl(driver, "/");
     await driver.wait(
@@ -112,7 +148,7 @@ async function waitForStorage(
 }
 
 export async function setStorage(
-    driver: Webdriver.WebDriver,
+    driver: typeof Webdriver.WebDriver,
     value: string,
 ): Promise<void> {
     await waitForStorage(driver);
@@ -122,8 +158,9 @@ export async function setStorage(
 }
 
 export async function cleanDriverSession(
-    driver: Webdriver.WebDriver
+    driver: typeof Webdriver.WebDriver
 ): Promise<void> {
+    await driver.executeScript(() => console.log("Clearing browsing session"))
     await waitForStorage(driver);
     await driver.executeScript(() => {
         IzzyStorage.clear();
@@ -137,8 +174,8 @@ export async function cleanDriverSession(
 }
 
 export async function isElementPresent(
-    driver: Webdriver.WebDriver,
-    locator: Webdriver.By
+    driver: typeof Webdriver.WebDriver,
+    locator: typeof Webdriver.By
 ): Promise<boolean> {
     const elements = await driver.findElements(locator);
 

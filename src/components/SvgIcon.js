@@ -27,7 +27,7 @@ class SvgIcon extends React.Component<{
             <svg
                 className={classnames("SvgIcon", className)}
                 viewBox={viewBox}
-                {...other}
+                {...(other: any)}
             >
                 {children}
             </svg>

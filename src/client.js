@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 
 import xhr from "axios";
 import React from "react";
@@ -12,13 +12,13 @@ import * as gtm from "./google-tag-manager";
 import searchTest from "./search-test";
 import history from "./utils/history";
 import ScrollToTop from "./components/ScrollToTop";
-import posthog from "./utils/posthog"
+import posthog from "./utils/posthog";
 
 window.searchTest = searchTest;
 
 // Preventing the Google Maps libary from downloading an extra font
 // http://stackoverflow.com/questions/25523806/google-maps-v3-prevent-api-from-loading-roboto-font
-// flow:disable - I have no idea why Flow doesn't like the following line
+// $FlowIgnore - I have no idea why Flow doesn't like the following line
 let head = document.getElementsByTagName("head")[0];
 let insertBefore = head.insertBefore;
 
@@ -109,11 +109,12 @@ window.pi = function() {
 }
 
 // Report JS errors to google analytics
-window.addEventListener("error", (error) => {
+window.addEventListener("error", errEvent => {
+    const error = errEvent.error
     gtm.emit({
         event: "exception",
-        exDescription: `JavaScript Error: ${evt.message} ${evt.filename}: ${
-            evt.lineno
+        exDescription: `JavaScript Error: ${error.message} ${error.filename}: ${
+            error.lineno
         }`,
     });
     gtm.emit({
@@ -121,7 +122,7 @@ window.addEventListener("error", (error) => {
         eventCat: "Error Occurred",
         eventAction: "Javascript",
         eventLabel: `${error.message}
-            ${e.filename} [Line ${error.lineno}]
+            ${error.filename} [Line ${error.lineno}]
             From page: ${location.pathname}`.replace(/\n +/g, "\n"),
         sendDirectlyToGA: true,
     }, "GTM-54BTPQM");

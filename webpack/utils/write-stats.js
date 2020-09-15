@@ -49,7 +49,9 @@ module.exports = function writeStats(stats: webpackStats) {
         return chunks;
     }
 
-    const script = getChunks("js", ["runtime", "hotload", "vendor", "main"]);
+    const script = getChunks("js", [
+        "runtime", "hotload", "vendor", "testharness", "main",
+    ]);
     const css = getChunks("css", []);
     const content = {
         script: script,

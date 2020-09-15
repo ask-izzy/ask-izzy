@@ -58,7 +58,7 @@ export default class ServicePane extends React.Component<{
         this.setState({siblings: response.objects});
     }
 
-    recordAlsoAtThisLocation(): void {
+    recordAlsoAtThisLocation = (): void => {
         gtm.emit({
             event: "alsoAtThisLocation",
             listingName: this.props.service.name,

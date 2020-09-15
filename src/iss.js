@@ -249,7 +249,7 @@ async function attachTransportTimes(
 
     let formatPoint = (point: issPoint) => `${point.lat},${point.lon}`;
 
-    const maps = await TryWithDefault < $ReadOnly < {travelTime: Function} >>(
+    const maps = await TryWithDefault<Object>(
         1000, Maps(), {}
     );
 
@@ -257,7 +257,7 @@ async function attachTransportTimes(
         let service: ?Service; // eslint-disable-line no-unused-vars
         let travelTimes = await Timeout(3000, maps.travelTime(services
             .filter((service) => !service.Location().isConfidential())
-            // flow:disable isConfidential checks location.point
+            // $FlowIgnore isConfidential checks location.point
             .map(({location}) => formatPoint(location.point))
         ));
 
@@ -333,7 +333,7 @@ export class Service {
     }
 
     Location(): Location {
-        // flow:disable
+        // $FlowIgnore
         return new Location(this.location, this.travelTime);
         // @flow:enable
     }
@@ -458,6 +458,9 @@ export class Service {
 
     /**
      * First part of the description.
+     *
+     * Equal to the first sentence + as many remaining sentences as will fit
+     * without pushing the length up to or more than 250 characters.
      */
     get shortDescription(): Array<string> {
         let sentences = this.descriptionSentences();
@@ -498,7 +501,8 @@ export class Service {
                 .filter((provision) => provision.match(this.description))
                 .map(({name}) => name);
         } catch (error) {
-            console.error("Failed to determine service provisions", error);
+            console.error("Failed to determine service provisions")
+            console.error(error);
             this._serviceProvisions = [];
         }
 
@@ -618,7 +622,8 @@ export async function getService(
     try {
         await attachTransportTimes([service]);
     } catch (error) {
-        console.log("Unable to retrieve transport times", error);
+        console.error("Unable to retrieve transport times")
+        console.error(error);
     }
 
     return service;

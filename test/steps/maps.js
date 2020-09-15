@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 
 /*
  * Definitions for Geolocation related steps
@@ -56,7 +56,8 @@ async function assertTravelTimes(method) {
                 new Date(travelTimes[index]) - currentDate
             ) > 0
         } catch (err) {
-            console.error("Error when checking travel times:", err)
+            console.error("Error when checking travel times")
+            console.error(err)
             travelTimes[index] = false
         }
     }

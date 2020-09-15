@@ -37,7 +37,7 @@ const PersonalisationLink = ({pathname}: Object) => (
         <Link
             className="change-personalisation"
             to={`${trailingSlash(pathname)}personalise/summary`}
-            onClick={gtm.emit.bind(null, {event: "changeAnswers"})}
+            onClick={() => gtm.emit({event: "changeAnswers"})}
         >
             Edit Answers
         </Link>
@@ -70,7 +70,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
         let bannerName = "";
 
         try {
-            // flow:disable
+            // $FlowIgnore
             bannerName = this.props.match.params.page;
         } catch (err) {
             // continue with no banner

@@ -9,7 +9,7 @@ import { deepestPossible, escapeXPathString } from "./selectors";
 let assert_: Object = assert;
 
 export async function imageIsVisible(
-    driver: Webdriver.WebDriver,
+    driver: typeof Webdriver.WebDriver,
     altText: string
 ): Promise<void> {
     let visible = await driver.findElement(By.xpath(
@@ -23,7 +23,7 @@ export async function imageIsVisible(
 assert_.imageIsVisible = imageIsVisible;
 
 export async function svgIsVisible(
-    driver: Webdriver.WebDriver,
+    driver: typeof Webdriver.WebDriver,
     altText: string
 ): Promise<void> {
     // svg has a namespace in firefox, which makes xpath queries
@@ -39,7 +39,7 @@ export async function svgIsVisible(
 assert_.svgIsVisible = svgIsVisible;
 
 export async function textIsVisible(
-    driver: Webdriver.WebDriver,
+    driver: typeof Webdriver.WebDriver,
     text: string
 ): Promise<void> {
     text = escapeXPathString(text);
@@ -55,7 +55,7 @@ export async function textIsVisible(
 assert_.textIsVisible = textIsVisible;
 
 export async function linkIsVisible(
-    driver: Webdriver.WebDriver,
+    driver: typeof Webdriver.WebDriver,
     title: string,
     expectedTarget: string
 ): Promise<void> {

@@ -3,8 +3,7 @@
 import React from "react";
 import icons from "../icons";
 import LinkListItem from "./LinkListItem";
-import maps from "../maps";
-import type MapsApi from "../maps";
+import maps, {MapsApi} from "../maps";
 
 type State = {
     maps: ?MapsApi
@@ -17,7 +16,7 @@ export default class ViewOnMapButton extends React.Component<any, State> {
     }
 
     componentDidMount(): void {
-        maps().then((maps) => this.setState({maps}));
+        maps().then(maps => this.setState({maps}));
     }
 
     render() {

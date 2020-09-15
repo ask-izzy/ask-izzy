@@ -1,9 +1,9 @@
-/* flow:disable */
+/* $FlowIgnore */
 /*
  * List scenarios to STDOUT
  */
 
-import "babel-polyfill";
+import "@babel/polyfill";
 import Yadda from "yadda";
 Yadda.plugins.mocha.StepLevelPlugin.init();
 

@@ -51,8 +51,9 @@ class ResultsPage extends BaseCategoriesPage<State> {
 
         for (let item of this.personalisationComponents) {
             // TODO: This needs to be debugged with the new flow version
-            // flow:disable
+            // $FlowIgnore
             if (typeof item.getSearch === "function") {
+                // $FlowIgnore
                 request = item.getSearch(request);
 
                 if (!request) {
@@ -102,7 +103,8 @@ class ResultsPage extends BaseCategoriesPage<State> {
 
             .catch(response => {
                 try {
-                    console.error(response, response.stack);
+                    console.error(response)
+                    console.error(response.stack);
 
                     let data = JSON.parse(response.body);
 
@@ -280,7 +282,7 @@ class ResultsPage extends BaseCategoriesPage<State> {
 
             mapHeight =
                 window.innerHeight -
-                // flow:disable
+                // $FlowIgnore
                 document.querySelector(".AppBar").offsetHeight;
 
             /* resize the map to make room

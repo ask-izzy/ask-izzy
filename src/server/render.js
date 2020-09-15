@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 // Express middleware to render the app server-side and expose its state
 // to the client
 
@@ -41,6 +41,10 @@ export default function render(req, res, next) {
     }
 
     const reqUrl = url.parse(req.url);
+
+    // React Router doesn't like location objects with both a path and a
+    // pathname property
+    delete reqUrl.path
 
     if (reqUrl.pathname.startsWith("/static/") |
     reqUrl.pathname.startsWith("/session/")) {

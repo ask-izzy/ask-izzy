@@ -167,7 +167,7 @@ Flow is configured using the `.flowconfig` file.
 
 All JS files in the repo either start with
 `/* @flow */` if they are typechecked
-or `/* flow:disable */` if they are not.
+or `/* $FlowIgnore */` if they are not.
 
 You can run flow on its own using `./node_modules/.bin/flow`.
 It's also run as part of the precommit hooks and in CI.
@@ -249,8 +249,19 @@ This is fundamentally not really a workable approach but for
 organisational and technical reasons it's very difficult to
 make changes to ISS3 which serves the queries.
 
+## Development debugging
+The following environment variables an be set to any string in order to enable different behaviours to assist debugging:
+  - DEBUG
+  This will increase the verbosity of a number of scripts, usually printing each command before it's executed in shell scripts.
+
+  - SCREENSHOT_FAILURES
+  This will generate screenshots when a test fails.
+
+  - BAIL_ON_TEST_FAIL
+  Setting this flag will halt testing as soon as one test fails.
+
 ## Tests
-All tests live in the `test` toplevel directory.
+All tests live in the `test` top level directory.
 
 Unit tests live in `test/unit` and are invoked from `test/unit.js`. They use `mocha`.
 BDD features live in `test/features` with step definitions in `test/steps` invoked from `test/feature.js`. They use `yadda`.
@@ -299,12 +310,12 @@ Running the tests:
 docker-compose run --rm app unit-test
 docker-compose run --rm app feature-test
 docker-compose run --rm app personalisation-test
-docker-compose run --rm app search-test
+docker-compose run --rm app maps-test
 # or without docker: 
 ./script/unit-test
 ./script/feature-test
 ./script/personalisation-test
-./script/search-test
+./script/maps-test
 ````
 
 Pass `SELENIUM_BROWSER=firefox|phantomjs|chrome` to choose a
