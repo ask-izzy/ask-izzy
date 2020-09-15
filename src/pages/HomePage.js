@@ -3,7 +3,7 @@
 import React from "react";
 
 import HeaderBar from "../components/HeaderBar";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import icons from "../icons"
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
@@ -56,8 +56,7 @@ class HomePage extends React.Component<{}, void> {
                             Coronavirus (COVID-19) support
                         </h3>
                         <span>
-                            Where to get help and information for those
-                            affected by Coronavirus (COVID19).{" "}
+                            Find help and information near you.{" "}
                             <Link to="/covid-19-support">
                                 Learn&nbsp;more
                             </Link>
