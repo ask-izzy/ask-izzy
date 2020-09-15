@@ -249,12 +249,7 @@ async function attachTransportTimes(
 
     let formatPoint = (point: issPoint) => `${point.lat},${point.lon}`;
 
-    // Flow babel plugin not correctly handling stripping of parameterized
-    // generics which is causing issues with testing. Updating it requires
-    // updating babel to next major version is has now been done in master.
-    // Once merged this can be typed correctly again.
-    // $FlowIgnore
-    const maps = await TryWithDefault(
+    const maps = await TryWithDefault<Object>(
         1000, Maps(), {}
     );
 
