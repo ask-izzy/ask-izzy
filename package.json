@@ -72,6 +72,7 @@
     "react-dom": "16.13.1",
     "react-google-maps": "git+https://git@github.com/infoxchange/react-google-maps.git#v9.4.5",
     "react-helmet": "6.1.0",
+    "react-hotjar": "2.2.1",
     "react-markdown": "5.0.2",
     "react-mixin": "4.0.0",
     "react-router-dom": "5.2.0",
