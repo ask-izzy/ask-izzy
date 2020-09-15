@@ -75,8 +75,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 bannerSecondary={""}
             >
                 <div className="intro">
-                    Enlarged body / paragraph text so we can draw attention and 
-                    introduce a page, if necessary. <a href="www.google.com">This is a link</a>
+                    Where do find support for people affected by Coronavirus (COVID-19).
                 </div>
                 <div className="nationalHotline">
                     <h2>COVID-19 National Hotline</h2>
