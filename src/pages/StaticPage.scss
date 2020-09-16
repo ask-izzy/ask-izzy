@@ -21,6 +21,14 @@
         .acknowledgement {
             font-style: italic;
         }
+
+        .separator {
+            height: 2.4rem;
+
+            & + * {
+                margin: 0;
+            }
+        }
     }
 
     /* IE10+ styles */

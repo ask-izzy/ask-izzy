@@ -12,3 +12,11 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+.anchor {
+    display: block;
+    position: relative;
+    top: -$appbar-height;
+    overflow: auto;
+    visibility: hidden;
+}

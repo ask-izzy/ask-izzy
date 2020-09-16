@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const LimitedServicesBanner = (): React.Node => {
     return (
         <div
-            className="CurrentEmergencyNotice CurrentEmergencyResultsBanner"
+            className="siteBanner-warning"
         >
             <h3>
                 Services may be limited due to coronavirus

@@ -11,6 +11,7 @@ import unpromisify from "../support/yadda-promise";
 import dictionary from "../support/dictionary";
 import assert from "../support/page-assertions";
 import { within } from "../support/selectors";
+import { By } from "selenium-webdriver";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
@@ -49,21 +50,22 @@ async function seeTheBrandingHeader(): Promise<void> {
 
     await assert.textIsVisible(
         this.driver,
-        "What do you need?",
+        "Find the help you need, now and nearby",
         container
     );
 }
 
 async function seeTheSearchBar(): Promise<void> {
-    const container = within(
-        "//*[@class='HeaderBar']"
-    );
+    const searchBarXPath = "//*[@class='body']//input[@type='search']"
+    try {
+        await assert.isElementPresent(
+            this.driver,
+            By.xpath(searchBarXPath)
+        );
+    } catch (error) {
+        throw new Error(`Could not find search bar using "${searchBarXPath}"`)
+    }
 
-    await assert.textIsVisible(
-        this.driver,
-        "What do you need?",
-        container
-    );
 }
 
 // The errors from this are really obtuse

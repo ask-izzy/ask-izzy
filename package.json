@@ -60,6 +60,7 @@
     "react-router-dom": "5.2.0",
     "saffron-sass": "git+https://github.com/infoxchange/saffron.git",
     "sass-lint": "1.12.1",
+    "sass-lint-auto-fix": "0.21.0",
     "sass-loader": "7.0.3",
     "selenium-webdriver": "4.0.0-alpha.1",
     "style-loader": "0.21.0",
