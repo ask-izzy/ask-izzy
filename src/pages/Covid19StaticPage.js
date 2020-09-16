@@ -75,7 +75,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 bannerSecondary={""}
             >
                 <div className="intro">
-                    Where do find support for people affected by Coronavirus (COVID-19).
+                    Where to find support for people affected by Coronavirus (COVID-19).
                 </div>
                 <div className="nationalHotline">
                     <h2>COVID-19 National Hotline</h2>
