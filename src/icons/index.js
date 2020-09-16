@@ -34,7 +34,6 @@ import SvgIconDemographicVeteran from "./DemographicVeteran";
 import SvgIconEmail from "./Email";
 import SvgIconEntertainment from "./Entertainment";
 import SvgIconEscapeViolence from "./EscapeViolence";
-import SvgIconExpandArrow from "./ExpandArrow";
 import SvgIconExperiencingViolence from "./ExperiencingViolence";
 import SvgIconExternalLink from "./ExternalLink";
 import SvgIconFacilities from "./Facilities";
@@ -112,7 +111,6 @@ export default {
     Email: SvgIconEmail,
     Entertainment: SvgIconEntertainment,
     EscapeViolence: SvgIconEscapeViolence,
-    ExpandArrow: SvgIconExpandArrow,
     ExperiencingViolence: SvgIconExperiencingViolence,
     ExternalLink: SvgIconExternalLink,
     Facilities: SvgIconFacilities,
