@@ -105,12 +105,12 @@
         }
 
         .ChevronIcon {
-            transform: rotate(-90deg);
+            transform: rotate(90deg);
             transition: transform 0.1s ease-out;
         }
 
         &[open] .ChevronIcon {
-            transform: rotate(90deg);
+            transform: rotate(-90deg);
         }
     }
 
