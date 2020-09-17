@@ -75,7 +75,11 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 bannerSecondary={""}
             >
                 <div className="intro">
-                    Where to find support for people affected by Coronavirus (COVID-19).
+                    You can use Ask Izzy to{" "}
+                    <Link to="/search/coronavirus/personalise">
+                        find nearby clinics
+                    </Link> providing services and testing specific to coronavirus.
+
                 </div>
                 <div className="nationalHotline">
                     <h2>COVID-19 National Hotline</h2>
@@ -106,7 +110,11 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <h2>State Government Information</h2>
                 <hr />
                 <details>
-                    <summary><h3>Victoria</h3><icons.Chevron /></summary>
+                    <summary>
+                        <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
+                            <h3>Victoria</h3><icons.Chevron />
+                        </div>
+                    </summary>
                     <ul>
                         <li>
                             {this.contactDetailPhone(
@@ -141,7 +149,11 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 </details>
                 <hr />
                 <details>
-                    <summary><h3>New South Wales</h3><icons.Chevron /></summary>
+                    <summary>
+                        <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
+                            <h3>New South Wales</h3><icons.Chevron />
+                        </div>
+                    </summary>
                     <ul>
                         <li>
                             {this.contactDetailPhone(
@@ -159,7 +171,11 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 </details>
                 <hr />
                 <details>
-                    <summary><h3>Queensland</h3><icons.Chevron /></summary>
+                    <summary>
+                        <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
+                            <h3>Queensland</h3><icons.Chevron />
+                        </div>
+                    </summary>
                     <ul>
                         <li>
                             {this.contactDetailPhone(
@@ -177,7 +193,11 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 </details>
                 <hr />
                 <details>
-                    <summary><h3>Western Australia</h3><icons.Chevron /></summary>
+                    <summary>
+                        <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
+                            <h3>Western Australia</h3><icons.Chevron />
+                        </div>
+                    </summary>
                     <ul>
                         <li>
                             {this.contactDetailWeb(
@@ -189,7 +209,11 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 </details>
                 <hr />
                 <details>
-                    <summary><h3>South Australia</h3><icons.Chevron /></summary>
+                    <summary>
+                        <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
+                            <h3>South Australia</h3><icons.Chevron />
+                        </div>
+                    </summary>
                     <ul>
                         <li>
                             {this.contactDetailWeb(
@@ -201,7 +225,11 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 </details>
                 <hr />
                 <details>
-                    <summary><h3>Tasmania</h3><icons.Chevron /></summary>
+                    <summary>
+                        <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
+                            <h3>Tasmania</h3><icons.Chevron />
+                        </div>
+                    </summary>
                     <ul>
                         <li>
                             {this.contactDetailPhone(
@@ -219,7 +247,11 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 </details>
                 <hr />
                 <details>
-                    <summary><h3>Australian Capital Territory</h3><icons.Chevron /></summary>
+                    <summary>
+                        <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
+                            <h3>Australian Capital Territory</h3><icons.Chevron />
+                        </div>
+                    </summary>
                     <ul>
                         <li>
                             {this.contactDetailWeb(
@@ -231,7 +263,11 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 </details>
                 <hr />
                 <details>
-                    <summary><h3>Northern Territory</h3><icons.Chevron /></summary>
+                    <summary>
+                        <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
+                            <h3>Northern Territory</h3><icons.Chevron />
+                        </div>
+                    </summary>
                     <ul>
                         <li>
                             {this.contactDetailPhone(
@@ -255,10 +291,6 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                         <Link to="/search/coronavirus/personalise">
                             find nearby clinics
                         </Link> providing services and testing specific to coronavirus.
-                    </p>
-                    <p>
-                        Or why not try <a href="beta.askizzy.org.au">Ask Izzy beta</a>,
-                        we've made some changes that might be helpful to you.
                     </p>
                 </div>
             </StaticPage>

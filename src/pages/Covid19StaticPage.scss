@@ -6,6 +6,7 @@
 
         .HeaderBarContent .primary {
             font-size: 2em;
+            font-weight: bold;
         }
     }
 
@@ -86,22 +87,25 @@
 
     details {
         summary {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             list-style: none;
-
-            > * {
-                margin: 0;
-            }
 
             &::-webkit-details-marker {
                 display: none; // # chrome doesn't support styling with list-style
             }
+
+            div { // wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                > * {
+                    margin: 0;
+                }
+            }
         }
 
         .ChevronIcon {
-            transform: rotate(180deg);
+            transform: rotate(-90deg);
             transition: transform 0.1s ease-out;
         }
 
@@ -112,12 +116,8 @@
 
     .izzyCanHelp {
         margin: 2em 0;
-        padding: 1em;
+        padding: 0 1.3em 0.5em;
         border: solid $brand-pane-alt-dark 1px;
-
-        > *:first-child {
-            margin-top: 0.2em;
-        }
     }
 }
 
