@@ -152,10 +152,13 @@ function fillInPathParams(path: string, params: Object) {
     return path
         .split("/")
         .map(part => {
-            const paramVal = path.startsWith(":") && params[path.substring(1)]
-            return paramVal ? paramVal : part
+            if (part.startsWith(":") && part.substring(1) in params) {
+                return params[part.substring(1)]
+            } else {
+                return part
+            }
         })
-        .filter(part => part)
+        .filter(part => typeof part !== "undefined")
         .join("/")
 }
 
@@ -177,7 +180,7 @@ function getPagesFromRoutes(route: NestedRoute): Array<PageToRender> {
             filePath: fillInPathParams(
                 route.props.path,
                 {...paramVals, search: undefined}
-            ) + "/index.html",
+            ).replace(/\/*$/, "/index.html"),
             params: paramVals,
         })
     }
