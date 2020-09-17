@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 import { Router } from "react-router-dom";
 import categories from "./constants/categories";
 import covidCategories from "./constants/covidSupportCategories";
+import { hotjar } from "react-hotjar";
 import storage from "./storage";
 import routes from "./routes";
 import * as gtm from "./google-tag-manager";
@@ -40,6 +41,10 @@ xhr({
     url: "//" + window.PROXY_TYPOGRAPHY + "/7948374/730248/css/fonts.css",
     maxRedirects: 0,
 }).catch(() => null);
+
+if (window.GOOGLE_ANALYTICS_ID) {
+    hotjar.initialize(window.GOOGLE_ANALYTICS_ID);
+}
 
 ReactDOM.hydrate(
     <Router
