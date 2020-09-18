@@ -74,7 +74,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 title=""
                 bannerName="money-help static"
                 className="Covid19Page"
-                bannerPrimary={[<span style={{display: "inline-block"}}>Coronavirus (COVID-19) information and services</span>]}
+                bannerPrimary="Coronavirus (COVID-19) information and services"
                 bannerSecondary={""}
             >
                 <div className="nationalHotline">
