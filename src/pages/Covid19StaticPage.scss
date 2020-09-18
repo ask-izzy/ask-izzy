@@ -93,6 +93,10 @@
                 display: none; // # chrome doesn't support styling with list-style
             }
 
+            &::before {
+                display: none;
+            }
+
             div { // wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065
                 display: flex;
                 align-items: center;
