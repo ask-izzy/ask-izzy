@@ -77,13 +77,6 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 bannerPrimary={[<span style={{display: "inline-block"}}>Coronavirus (COVID-19) information and services</span>]}
                 bannerSecondary={""}
             >
-                <div className="intro">
-                    You can use Ask Izzy to{" "}
-                    <Link to="/search/coronavirus/personalise">
-                        find nearby clinics
-                    </Link> providing services and testing specific to coronavirus.
-
-                </div>
                 <div className="nationalHotline">
                     <h2>COVID-19 National Hotline</h2>
                     The Coronavirus Health Information  Line provides general
