@@ -27,6 +27,7 @@
     "core-js": "3.6.5",
     "cors": "2.8.4",
     "css-loader": "0.28.11",
+    "details-element-polyfill": "2.4.0",
     "es3ify-loader": "0.2.0",
     "es6-promise": "4.2.4",
     "eslint": "5.1.0",
