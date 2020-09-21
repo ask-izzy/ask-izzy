@@ -1,0 +1,28 @@
+.IntroPage {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+
+    .body {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+
+        #betaPathwayWrapper {
+            display: flex;
+            flex: 1 1 auto;
+            flex-direction: column;
+            justify-content: center;
+
+            #betaPathway {
+                margin: 1em 1em 2em;
+                padding: 0.7em 1em 1em;
+                background-color: $brand-pane-alt-dark-faint;
+
+                * {
+                    margin: 0.5em;
+                }
+            }
+        }
+    }
+}

@@ -53,7 +53,7 @@ class Intro extends Personalisation<Props, {}> {
         }
 
         return (
-            <div>
+            <div className="IntroPage">
                 <components.HeaderBar
                     primaryText={
                         <div>
@@ -73,6 +73,19 @@ class Intro extends Personalisation<Props, {}> {
                         I&#39;m looking for help for
                     </h3>
                     {this.renderDoneButton()}
+                    <div id="betaPathwayWrapper">
+                        <div id="betaPathway">
+                            <h4>Ask Izzy Beta for Pandemic Support</h4>
+                            <p>
+                                If you've been impacted by the pandemic and need
+                                support, we have a new version of Ask Izzy that
+                                might be helpful to you.
+                            </p>
+                            <a href="https://beta.askizzy.org.au">
+                                Go to Ask Izzy Beta
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
