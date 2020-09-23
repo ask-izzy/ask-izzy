@@ -5,6 +5,7 @@ import Helmet from "react-helmet";
 import { makeTitle } from "../routes";
 import { Route } from "react-router";
 import history from "../utils/history";
+import sendEvent from "../google-tag-manager";
 
 type Props = {
     children: any,
@@ -20,6 +21,14 @@ class BasePage extends Route<Props, {}> {
 
     getChildContext(): Object {
         return {};
+    }
+
+    componentDidMount(): void {
+        // Since Ask Izzy is a SPA we need to manually register each
+        // new page view
+        sendEvent({
+            event: "Page Viewed",
+        });
     }
 
     render() {

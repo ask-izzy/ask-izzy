@@ -41,16 +41,7 @@ xhr({
 }).catch(() => null);
 
 ReactDOM.hydrate(
-    <Router
-        history={history}
-        onUpdate={() => {
-            // Since Ask Izzy is a SPA we need to manually register each
-            // new page view
-            sendEvent({
-                event: "Page Viewed",
-            });
-        }}
-    >
+    <Router history={history}>
         <ScrollToTop>
             {routes}
         </ScrollToTop>
