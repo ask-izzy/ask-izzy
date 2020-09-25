@@ -5,7 +5,7 @@ import * as React from "react";
 import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
-import {onBack} from "../utils/history";
+import routerContext from "../contexts/router-context"
 
 type Props = {
   title: string,
@@ -27,13 +27,15 @@ export default class StaticPage extends React.Component<Props> {
         bannerName: "food",
     };
 
+    static contextType = routerContext;
+
     render() {
 
         return (
             <div className={`StaticPage ${this.props.className}`}>
                 <AppBar
                     title={this.props.title}
-                    onBackTouchTap={onBack}
+                    onBackTouchTap={this.context.router.history.goBack}
                 />
                 {
                     this.props.bannerName ?

@@ -7,7 +7,7 @@ import Intro from "./personalisation/Intro";
 import components from "../components";
 import Chevron from "../icons/Chevron";
 import NotFoundStaticPage from "./NotFoundStaticPage";
-import history from "../utils/history";
+import routerContext from "../contexts/router-context";
 
 type State = {
   showSubpage: boolean,
@@ -24,14 +24,17 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
         };
     }
 
+    static contextType = routerContext;
+
     static getDerivedStateFromProps(props, state): void {
         return {nextDisabled: false, showSubpage: true};
     }
 
     componentDidMount(): void {
-        if (this.props.match.params.search &&
-            this.props.match.params.search ===
-            "bushfires -(closed due to the recent bushfires)") {
+        if (
+            this.context.router.match.params.search ===
+                "bushfires -(closed due to the recent bushfires)"
+        ) {
             this.setState({ showSubpage: false });
         }
     }
@@ -52,7 +55,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
         if (prevSubPage) {
             this.goToSubPage(prevSubPage);
         } else {
-            history.push("/");
+            this.context.router.history.push("/");
         }
     }
 

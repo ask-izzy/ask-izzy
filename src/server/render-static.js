@@ -41,10 +41,13 @@ function renderPage(uri: string, path: string, params: Object): void {
     } else {
 
         const markup = ReactDOMServer.renderToString(
-            <StaticRouter location={{pathname: reqUrl.pathname}}
+            <StaticRouter
+                location={{pathname: reqUrl.pathname}}
                 context={context}
                 isRenderingStatic={true}
-            >{routes}</StaticRouter>
+            >
+                {routes}
+            </StaticRouter>
         );
 
         const helmet = Helmet.renderStatic();

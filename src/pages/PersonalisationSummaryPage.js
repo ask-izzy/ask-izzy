@@ -6,7 +6,7 @@ import BasePersonalisationPage from "./BasePersonalisationPage";
 import components from "../components";
 import FloatFromBottom from "../components/FloatFromBottom";
 import storage from "../storage";
-import history from "../utils/history";
+import routerContext from "../contexts/router-context";
 
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
@@ -14,6 +14,8 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         super(props);
         this.state = {floatingContainerHeight: 0};
     }
+
+    static contextType = routerContext;
 
     goBack(): void {
         super.nextStep();
@@ -31,7 +33,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
     clearAll(event: SyntheticInputEvent<>): void {
         event.preventDefault();
         storage.clear();
-        history.push("/");
+        this.context.router.history.push("/");
     }
 
     componentDidMount(): void {

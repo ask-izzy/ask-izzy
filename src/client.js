@@ -3,14 +3,13 @@
 import xhr from "axios";
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router } from "react-router-dom";
+import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import storage from "./storage";
 import routes from "./routes";
 import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
-import history from "./utils/history";
-import ScrollToTop from "./components/ScrollToTop";
+import HistoryListener from "./components/effects/HistoryListener"
 
 window.searchTest = searchTest;
 window.categories = categories;
@@ -40,11 +39,14 @@ xhr({
     maxRedirects: 0,
 }).catch(() => null);
 
+const Router = typeof document !== "undefined" ?
+    BrowserRouter
+    : MemoryRouter
+
 ReactDOM.hydrate(
-    <Router history={history}>
-        <ScrollToTop>
-            {routes}
-        </ScrollToTop>
+    <Router>
+        <HistoryListener/>
+        {routes}
     </Router>,
     document.getElementById("root")
 )

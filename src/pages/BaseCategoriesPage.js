@@ -12,6 +12,7 @@ import type {
 import Location from "./personalisation/Location";
 import storage from "../storage";
 import personalisation from "./personalisation";
+import routerContext from "../contexts/router-context";
 
 type State = {
     meta?: ?searchResultsMeta,
@@ -28,6 +29,8 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
     Object, State & ExtraState> {
     _category: Category;
 
+    static contextType = routerContext;
+
     /**
      * category:
      *
@@ -39,7 +42,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         }
 
         let category = _.findWhere(categories, {
-            key: this.props.match.params.page,
+            key: this.context.router.match.params.page,
         });
 
         this._category = category;
@@ -51,7 +54,9 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
             return this.category.name;
         } else if (this.search.q !== "undefined-search") {
             const quote = new RegExp(`["']`, "g");
-            const search = decodeURIComponent(this.props.match.params.search);
+            const search = decodeURIComponent(
+                this.context.router.match.params.search
+            );
 
             return `“${search.replace(quote, "")}”`;
         } else {
@@ -62,9 +67,9 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
     get search(): searchRequest {
         if (this.category) {
             return Object.assign({}, this.category.search);
-        } else if (this.props.match.params.search) {
+        } else if (this.context.router.match.params.search) {
             return {
-                q: decodeURIComponent(this.props.match.params.search),
+                q: decodeURIComponent(this.context.router.match.params.search),
             };
         } else {
             return {
@@ -83,7 +88,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
 
         if (this.category) {
             components = this.category.personalisation;
-        } else if (this.props.match.params.search) {
+        } else if (this.context.router.match.params.search) {
             components = [
                 ...personalisation.OnlineSafetyScreenBundle(
                     personalisation.FreeTextAreYouSafe
@@ -108,7 +113,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         // Update the URL to include the location, so that links
         // are SEO-friendly. If we dont have a location but the
         // URL does, use the one from the url.
-        const {suburb, state} = this.props.match.params;
+        const {suburb, state} = this.context.router.match.params;
 
         if (suburb && state) {
             if (storage.getLocation() != `${suburb}, ${state}`) {

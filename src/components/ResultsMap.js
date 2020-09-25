@@ -10,7 +10,7 @@ import Maps from "../maps";
 import type {MapsApi} from "../maps";
 import ResultsList from "./ResultsList";
 import storage from "../storage";
-import {onBack} from "../utils/history";
+import routerContext from "../contexts/router-context";
 
 type Props = {
     objects: Array<Object>,
@@ -31,6 +31,8 @@ class ResultsMap extends React.Component<Props, State> {
         super(props);
         this.state = {};
     }
+
+    static contextType = routerContext;
 
     componentDidMount(): void {
         this.setState({coords: storage.getCoordinates()});
@@ -199,7 +201,7 @@ class ResultsMap extends React.Component<Props, State> {
         if (!_.isEmpty(this.state.selectedServices)) {
             this.clearSelection();
         } else {
-            onBack();
+            this.context.router.history.goBack();
         }
     }
 
