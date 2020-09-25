@@ -6,6 +6,7 @@ import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import storage from "../../storage";
 import * as iss from "../../iss";
+import icons from "../../icons";
 
 type Props = {
     onDoneTouchTap: Function,
@@ -75,15 +76,18 @@ class Intro extends Personalisation<Props, {}> {
                     {this.renderDoneButton()}
                     <div id="betaPathwayWrapper">
                         <div id="betaPathway">
-                            <h4>Ask Izzy Beta for Pandemic Support</h4>
+                            <header>
+                                <icons.Lightning />
+                                <h4>Ask Izzy Beta - Pandemic Support</h4>
+                            </header>
                             <p>
                                 If you've been impacted by the pandemic and need
                                 support, we have a new version of Ask Izzy that
-                                might be helpful to you.
+                                might be helpful to you.{" "}
+                                <a href="https://beta.askizzy.org.au">
+                                    Go to Ask Izzy Beta
+                                </a>
                             </p>
-                            <a href="https://beta.askizzy.org.au">
-                                Go to Ask Izzy Beta
-                            </a>
                         </div>
                     </div>
                 </div>

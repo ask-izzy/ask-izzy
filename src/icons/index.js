@@ -45,6 +45,7 @@ import SvgIconInfo from "./Info";
 import SvgIconInstagram from "./Instagram";
 import SvgIconJob from "./Job";
 import SvgIconLegal from "./Legal";
+import SvgIconLightning from "./Lightning";
 import SvgIconLoading from "./Loading";
 import SvgIconLocation from "./Location";
 import SvgIconLogoLight from "./LogoLight";
@@ -122,6 +123,7 @@ export default {
     Instagram: SvgIconInstagram,
     Job: SvgIconJob,
     Legal: SvgIconLegal,
+    Lightning: SvgIconLightning,
     Loading: SvgIconLoading,
     Location: SvgIconLocation,
     LogoLight: SvgIconLogoLight,
