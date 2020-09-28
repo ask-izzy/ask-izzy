@@ -19,6 +19,7 @@ import LinkListItem from "../components/LinkListItem";
 import ResultsListPage from "./ResultsListPage";
 import Eligibility from "../components/Eligibility";
 import Ndis from "../components/Ndis";
+import FormFeedbackCantFind from "../components/feedback/FormCantFind";
 
 import covidSupportCategories, {CovidSupportCategory}
     from "../constants/covidSupportCategories";
@@ -37,7 +38,8 @@ type primaryInfo = {
 type ExtraState = {
     primaryInfo: ?primaryInfo,
     keyInfo: ?Array<Object>,
-    covidCategory: ?CovidSupportCategory
+    covidCategory: ?CovidSupportCategory,
+    loadMoreCount: number,
 }
 
 class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
@@ -54,6 +56,7 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
             covidCategory: covidCategory,
             primaryInfo: covidContent.primaryInfo,
             keyInfo: covidContent.keyInfo,
+            loadMoreCount: 0,
         };
     }
 
@@ -178,11 +181,12 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
         try {
             data = await iss.requestObjects(next);
 
-            this.setState({
+            this.setState(prevState => ({
                 meta: data.meta,
                 objects: data.objects,
                 error: undefined,
-            });
+                loadMoreCount: prevState.loadMoreCount + 1,
+            }));
 
         } catch (response) {
             try {
@@ -367,6 +371,9 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
                             )}
                         </ul>
                         {this.renderLoadMore()}
+                        { !this.loading && this.state.loadMoreCount > 0 &&
+                            <FormFeedbackCantFind />
+                        }
                     </div>
 
                     <div className="otherCovidSupportCategories">
