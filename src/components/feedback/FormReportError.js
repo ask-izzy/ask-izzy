@@ -1,6 +1,8 @@
 /* @flow */
 
 import React from "react";
+import Loading from "../../icons/Loading";
+import API from "axios"
 
 type Props = {}
 
@@ -8,6 +10,15 @@ type State = {
     formSubmitted: boolean,
     formError: string,
     input: Object,
+    loading: boolean,
+}
+
+let NOTIFICATIONS_API_URL = "";
+let NOTIFICATIONS_API_KEY = "";
+
+if (typeof window !== "undefined" && window.NOTIFICATIONS_API_URL) {
+    NOTIFICATIONS_API_URL = window.NOTIFICATIONS_API_URL;
+    NOTIFICATIONS_API_KEY = window.NOTIFICATIONS_API_KEY;
 }
 
 export default class FormReportError extends React.Component<Props, State> {
@@ -22,6 +33,7 @@ export default class FormReportError extends React.Component<Props, State> {
             other: "",
             comments: "",
         },
+        loading: false,
     }
 
     isValid = () => {
@@ -55,8 +67,52 @@ export default class FormReportError extends React.Component<Props, State> {
         event.preventDefault();
         if (this.isValid()) {
             this.setState({
-                formSubmitted: true,
-                formError: "",
+                loading: true,
+            })
+            API.post(`${NOTIFICATIONS_API_URL}message/send/`, {
+                action: "email",
+                environment: "askizzy-test",
+                provider: "smtp",
+                notifications: {
+                    "template": "3",
+                    "id": "feedback-form",
+                    "notifications": [
+                        {
+                            "replacements": this.state.input,
+                        },
+                    ],
+                },
+            }, {
+                headers: {
+                    "Authorization": `Api-Key ${NOTIFICATIONS_API_KEY}`,
+                },
+            })
+                .then((response) => {
+                    this.setState({
+                        formSubmitted: true,
+                        loading: false,
+                        formError: "",
+                    })
+                })
+                .catch((error) => {
+                    let reason = "Something went wrong, please try again."
+                    if (error.response) {
+                        reason = error.response.data.detail ?
+                            error.response.data.detail
+                            : error.response.data.error
+                    }
+
+                    this.setState({
+                        formSubmitted: false,
+                        loading: false,
+                        formError: reason,
+                    })
+                })
+
+        } else {
+            this.setState({
+                formError: "Please give us a little more \
+                information about your feedback.",
             })
         }
     }
@@ -77,15 +133,30 @@ export default class FormReportError extends React.Component<Props, State> {
     }
 
     render() {
-        const {formSubmitted, formError} = this.state;
-
+        const {formSubmitted, formError, loading} = this.state;
+        const submitButton = () => {
+            if (loading) {
+                return (
+                    <button
+                        className="loading"
+                        type="submit"
+                    >
+                        <Loading /> Sending
+                    </button>
+                )
+            }
+            return (<button type="submit">Send feedback</button>)
+        }
         return (
             <div className="FormReportError">
                 {formError &&
                     <p className="formError">{formError}</p>
                 }
                 {!formSubmitted &&
-                <form onSubmit={this.onSubmit}>
+                <form
+                    onSubmit={this.onSubmit}
+                    className={loading ? "loading" : ""}
+                >
                     <span>Please tell us which details are incorrect</span>
 
                     <ul>
@@ -154,7 +225,7 @@ export default class FormReportError extends React.Component<Props, State> {
                     }
 
                     <div className="formControls">
-                        <button type="submit">Send feedback</button>
+                        {submitButton()}
                     </div>
                 </form>
                 }
