@@ -91,6 +91,17 @@
             color: $link-text-color;
             font-size: 16px;
             font-weight: normal;
+            line-height: 24px;
+
+            .Icon {
+                top: 0;
+                vertical-align: bottom;
+            }
+
+            &.loading {
+                cursor: default;
+            }
+
         }
     }
 }
