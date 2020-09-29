@@ -1,6 +1,130 @@
 @use '../styles/mixins/colours';
 
 .HomePage {
+    .notification {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1em;
+        border-top: #{colours.get-static('colour-bg-highlight')} 10px solid;
+        border-top: var(--colour-bg-highlight) 10px solid;
+        background-color: #{colours.get-static('colour-bg-highlight-tone')};
+        background-color: var(--colour-bg-highlight-tone);
+
+        & > * {
+            max-width: 100%; /* Fix for IE11 bug where text does not wrap and flows out of the container */
+        }
+
+        &,
+        a {
+            color: #{colours.get-static('colour-text-very-light')};
+            color: var(--colour-text-very-light);
+        }
+
+        .returnToProd {
+            a {
+                font-weight: unset;
+            }
+
+            a > span {
+                display: inline-block;
+                vertical-align: middle;
+
+                .Icon {
+                    vertical-align: text-bottom;
+                }
+            }
+
+            margin-left: -8px;
+
+            &:hover {
+                a span {
+                    text-decoration: underline;
+                }
+
+                .ChevronBackIcon {
+                    transform: translateX(-2px);
+                }
+            }
+        }
+
+        button {
+            margin: 0;
+            padding: 0.1em 0.3em;
+            border: 3px solid #{colours.get-static('colour-bg-standard')};
+            border: 3px solid var(--colour-bg-standard);
+            border-radius: 8px;
+            background-color: #{colours.get-static('colour-bg-standard')};
+            background-color: var(--colour-bg-standard);
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
+            font-weight: bold;
+
+            path {
+                fill: #{colours.get-static('colour-text-dark')};
+                fill: var(--colour-text-dark);
+            }
+
+            &:hover {
+                .ChevronIcon {
+                    transform: translateX(5px);
+                }
+            }
+
+            &::-moz-focus-inner {
+                padding: 0;
+                border: 0;
+            }
+
+            span {
+                display: inline-block;
+                vertical-align: middle;
+
+                .Icon {
+                    vertical-align: text-bottom;
+                }
+
+                .InfoIcon {
+                    margin-bottom: -3px;
+                }
+
+                .ChevronIcon {
+                    margin-bottom: -2px;
+                }
+            }
+
+            span:nth-child(2) {
+                @media only screen and (max-width: 386px) {
+                    width: 10em;
+                    margin: 0.5em 0.2em;
+                }
+            }
+
+            @media only screen and (max-width: 310px) {
+                display: flex;
+                flex-direction: column;
+
+                span:nth-child(2) {
+                    margin: 0.1em 0.2em;
+                }
+            }
+        }
+    }
+
+    .covid-info-notification {
+        padding: 1em;
+        border-left: #{colours.get-static('raw-colour-sunflower')} 10px solid;
+        border-left: var(--raw-colour-sunflower) 10px solid;
+        background-color: #{colours.get-static('colour-bg-standard-tint-3')};
+        background-color: var(--colour-bg-standard-tint-3);
+
+        &,
+        a {
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
+        }
+    }
+
     .page-header-section {
         padding-bottom: 0.1px; /* stop margin collapse */
         background-color: #{colours.get-static('colour-bg-standard-tint-1')};
@@ -120,7 +244,10 @@
         background-color: var(--colour-bg-highlight);
         color: #{colours.get-static('colour-text-very-light')};
         color: var(--colour-text-very-light);
-        text-align: center;
+
+        h3 {
+            margin-top: 0;
+        }
 
         a {
             color: #{colours.get-static('colour-text-very-light')};
