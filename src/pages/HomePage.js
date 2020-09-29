@@ -8,6 +8,7 @@ import NavBar from "../components/NavBar";
 import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
 import { Link } from "react-router-dom";
+import icons from "../icons"
 
 import { resetDfvOptions } from "../utils";
 import routerContext from "../contexts/router-context";
@@ -66,7 +67,34 @@ class HomePage extends React.Component<Props, void> {
 
 
         return (
-            <div className="HomePage containsSiteBanner-warning">
+            <div className="HomePage">
+                <div className="notification">
+                    <div className="returnToProd">
+                        <a href="https://askizzy.org.au">
+                            <icons.ChevronBack />
+                            <span>Return to AskIzzy.org.au</span>
+                        </a>
+                    </div>
+                    <h3>Welcome to Ask Izzy beta - Pandemic support</h3>
+
+                    <Link to="/beta-info"
+                        className="covid-info-notification"
+                    >
+                        <button>
+                            <icons.Info className={"big middle"}/>
+                            <span>Before using Ask Izzy beta</span>
+                            <icons.Chevron />
+                        </button>
+                    </Link>
+                    <p>
+                        This is where we are trying new features in Ask Izzy,
+                        so at times it may not work as expected. If you've
+                        been affected by the pandemic you'll find {" "}
+                        <Link to="/covid-19-support">information
+                        and support services here</Link>.
+                        We welcome your <Link to="/feedback">feedback</Link>.
+                    </p>
+                </div>
                 <div className="appbar">
                     <a className="quick-exit"
                         href={redirectUri}
@@ -99,26 +127,6 @@ class HomePage extends React.Component<Props, void> {
                             Search over 370,000 support services
                         </div>
                     </HeaderBar>
-                    <div className="siteBanner-warning">
-                        <h3>
-                            Welcome to the Ask Izzy Beta
-                        </h3>
-                        <p>
-                            This is where we are trying new features in Ask
-                            Izzy, so there may be bugs and incomplete areas.
-                            You should{" "}
-                            <Link to="/beta-info">read about our beta</Link>
-                            {" "}before using this version.
-                        </p>
-                        <p>
-                            <a href="https://askizzy.org.au">
-                                You can return to the 'regular' Ask Izzy here.
-                            </a>
-                        </p>
-                        <p>
-                            We welcome your feedback
-                        </p>
-                    </div>
                 </div>
 
                 <div className="body">
@@ -146,7 +154,19 @@ class HomePage extends React.Component<Props, void> {
                         </div>
                     </form>
                     <NavBar />
-                    <div id="cantFindLookingFor">
+                    <Link to="/covid-19-support"
+                        className="covid-info-notification"
+                    >
+                        <div>
+                            <icons.Info className={"big middle"} />
+                            <div>
+                                Official coronavirus (COVID-19) information
+                                from federal and state government.
+                            </div>
+                            <icons.Chevron />
+                        </div>
+                    </Link>
+                    <div className="cantFindLookingFor">
                         Can't find what you're looking for? Return to{" "}
                         <a href="https://askizzy.org.au">AskIzzy.org.au</a>
                     </div>
