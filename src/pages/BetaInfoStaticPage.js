@@ -5,12 +5,9 @@ import React from "react";
 import StaticPage from "./StaticPage";
 import components from "../components";
 import PropTypes from "proptypes";
+import {onBack} from "../utils/history";
 
 export default class BetaInfoStaticPage extends React.Component<{}, void> {
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
-
     render() {
         return (
             <StaticPage
@@ -41,7 +38,7 @@ export default class BetaInfoStaticPage extends React.Component<{}, void> {
                 <div className="buttonsBox">
                     <components.FlatButton
                         label="Continue Using Beta"
-                        onClick={() => this.context.router.goBack()}
+                        onClick={onBack}
                     />
                     <a href="https://askizzy.org.au">
                         <components.FlatButton
