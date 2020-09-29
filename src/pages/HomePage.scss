@@ -193,4 +193,15 @@ $bright-purple: #8a2be2;
         }
 
     }
+
+    #cantFindLookingFor {
+        padding: 1.5em;
+        background-color: $brand-pane-alt-dark;
+        color: $white;
+        text-align: center;
+
+        a {
+            color: $white;
+        }
+    }
 }
