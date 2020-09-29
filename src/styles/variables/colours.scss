@@ -79,6 +79,11 @@ $lightness-button-hover: 10%;
 
     @include colours.define('colour-bg-code', 'global', 'raw-colour-slate-gray');
     @include colours.define('colour-bg-highlight', 'global', 'raw-colour-rich-purple');
+    @include colours.define(
+        'colour-bg-highlight-tone',
+        'global',
+        colours.lighten('colour-bg-highlight', 'global', -34%)
+    );
 
 
     /* Borders */

@@ -59,6 +59,40 @@ function HomePage(): ReactNode {
                 className="page-header-section"
                 aria-labelledby="header"
             >
+                <div className="notification">
+                    <div className="returnToProd">
+                        <a href="https://askizzy.org.au">
+                            <icons.ChevronBack />
+                            <span>Return to AskIzzy.org.au</span>
+                        </a>
+                    </div>
+                    <h3>Welcome to Ask Izzy beta - Pandemic support</h3>
+
+                    <Link to="/beta-info">
+                        <button>
+                            <icons.Info className={"big middle"}/>
+                            <span>Read before using Ask Izzy beta</span>
+                            <icons.Chevron />
+                        </button>
+                    </Link>
+                    <p>
+                        This is where we are trying new features in Ask Izzy,
+                        so at times it may not work as expected. If you've been
+                        affected by the pandemic you might find the information
+                        and support services here helpful. Let us know what you
+                        think, we welcome your {" "}
+                        <a href={"mailto:support@askizzy.org.au?" +
+                            "subject=Ask Izzy Beta - Feedback"}
+                        >
+                            feedback
+                        </a>.
+                    </p>
+                </div>
+                <div className="covid-info-notification">
+                    <Link to="/covid-19-support">Official
+                    coronavirus (COVID-19) information</Link>{" "}
+                    from federal and state government.
+                </div>
                 <ScreenReader>
                     <span id="header">
                         Header.
@@ -78,28 +112,8 @@ function HomePage(): ReactNode {
                     </div>}
                     bannerName="homepage"
                     hideLogoWhenNotABar={true}
-                    taperColour="Purple"
+                    taperColour="LighterGrey"
                 />
-                <div className="siteBanner-warning">
-                    <h3>
-                        Welcome to the Ask Izzy Beta
-                    </h3>
-                    <p>
-                        This is where we are trying new features in Ask
-                        Izzy, so there may be bugs and incomplete areas.
-                        You should{" "}
-                        <Link to="/beta-info">read about our beta</Link>
-                        {" "}before using this version.
-                    </p>
-                    <p>
-                        <a href="https://askizzy.org.au">
-                            You can return to the 'regular' Ask Izzy here.
-                        </a>
-                    </p>
-                    <p>
-                        We welcome your feedback
-                    </p>
-                </div>
                 <AlertBannerList
                     screenLocation="homePage"
                 />
@@ -186,8 +200,10 @@ function HomePage(): ReactNode {
                 </ScreenReader>
                 <CategoriesList />
                 <div className="cantFindLookingFor">
-                    Can't find what you're looking for? Return to{" "}
-                    <Link to="https://askizzy.org.au">AskIzzy.org.au</Link>
+                    <h3>Can’t find what you’re looking for?</h3>
+                    <span>Return to{" "}
+                        <Link to="https://askizzy.org.au">AskIzzy.org.au</Link>
+                    </span>
                 </div>
             </main>
 
