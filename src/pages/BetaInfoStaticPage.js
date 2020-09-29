@@ -7,10 +7,6 @@ import components from "../components";
 import PropTypes from "proptypes";
 
 export default class BetaInfoStaticPage extends React.Component<{}, void> {
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
-
     render() {
         return (
             <StaticPage
