@@ -19,6 +19,7 @@ import NotFoundStaticPage from "./pages/NotFoundStaticPage";
 import AddServicePage from "./pages/AddServicePage";
 import DisabilityAdvocacyFinder from "./pages/DisabilityAdvocacyFinder";
 import DynamicPage from "./pages/DynamicPage";
+import BetaInfoStaticPage from "./pages/BetaInfoStaticPage";
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
@@ -171,6 +172,17 @@ export default (
                 pageType: vars => [
                     "Static Page",
                     "Online Safety",
+                ],
+            }}
+        />
+        <BasePage
+            path="/beta-info"
+            component={BetaInfoStaticPage}
+            title="About the Beta"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Beta Info",
                 ],
             }}
         />
