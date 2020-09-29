@@ -1,0 +1,22 @@
+.StaticPage.BetaInfoPage {
+    .HeaderBar .HeaderBarContent .primary {
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    .body {
+        margin-bottom: 1em;
+    }
+
+    .buttonsBox {
+        margin: 0 -1em;
+
+        button {
+            margin: 1em;
+
+            &.goToStable {
+                background-color: #9f5722;
+            }
+        }
+    }
+}
