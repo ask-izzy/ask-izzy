@@ -8,29 +8,73 @@ $bright-purple: #8a2be2;
 .HomePage {
     .notification {
         display: flex;
-        padding: 0.6em 0.1em;
-        padding-right: 1.5em;
-        border-left: $notification-accent 10px solid;
-        background-color: $notification-background;
-
-        div {
-            display: flex;
-            flex: 1 1; /* for IE */
-            flex-direction: column;
-            padding: 0.4em 0.1em;
-
-            > * {
-                margin: 0.2em;
-            }
-
-            h3 {
-                font-size: 1.1em;
-            }
+        flex-direction: column;
+        align-items: baseline;
+        padding: 1em;
+        border-top: $brand-pane-alt-darker 10px solid;
+        background-color: $brand-pane-alt-dark;
+        &, a {
+            color: $white;
         }
 
         a {
-            color: $brand-text-dark;
             font-weight: bold;
+            text-decoration: none;
+        }
+
+        .returnToProd {
+            a {
+                font-weight: unset;
+            }
+
+            a > span {
+                display: inline-block;
+                vertical-align: middle;
+                
+                .Icon {
+                    vertical-align: text-bottom;
+                }
+            }
+
+
+        }
+
+        button {
+            color: $brand-text-dark;
+            font-weight: normal;
+
+            span {
+                display: inline-block;
+                vertical-align: middle;
+                
+                .Icon {
+                    vertical-align: text-bottom;
+                }
+
+                .InfoIcon {
+                    margin-bottom: -3px;
+                }
+
+                .ChevronIcon {
+                    margin-bottom: -2px;
+                }
+            }
+
+            span:nth-child(2) {
+                @media only screen and (max-width: 372px) {
+                    width: 8em;
+                    margin: 0.5em 0.2em;
+                }
+            }
+
+            @media only screen and (max-width: 310px) {
+                display: flex;
+                flex-direction: column;
+
+                span:nth-child(2) {
+                    margin: 0.1em 0.2em;
+                }
+            }
         }
     }
 
@@ -194,7 +238,41 @@ $bright-purple: #8a2be2;
 
     }
 
-    #cantFindLookingFor {
+    .covid-info-notification {
+        text-decoration: none;
+
+        > div {
+            display: flex;
+            align-items: center;
+            padding: 0.5em 9px 0.5em 4px;
+            border-left: $notification-accent 10px solid;
+            background-color: $notification-background;
+
+            span:nth-child(1) {
+                display: inline-block;
+                vertical-align: middle;
+                .Icon {
+                    margin-bottom: -3px;
+                    vertical-align: text-bottom;
+                }
+            }
+
+            div {
+                flex: 1 1 auto;
+                margin: 0.5em 0;
+                color: $brand-text-dark;
+                font-weight: bold;
+                text-decoration: unset;
+            }
+
+            a {
+                color: $brand-text-dark;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .cantFindLookingFor {
         padding: 1.5em;
         background-color: $brand-pane-alt-dark;
         color: $white;
