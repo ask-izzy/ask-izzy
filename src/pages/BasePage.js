@@ -5,7 +5,7 @@ import Helmet from "react-helmet";
 import { makeTitle } from "../routes";
 import { Route } from "react-router";
 import history from "../utils/history";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 
 import { ApolloProvider } from "react-apollo";
 import client from "../utils/apolloClient";
@@ -29,7 +29,7 @@ class BasePage extends Route<Props, {}> {
     componentDidMount(): void {
         // Since Ask Izzy is a SPA we need to manually register each
         // new page view
-        sendEvent({
+        gtm.emit({
             event: "Page Viewed",
         });
     }

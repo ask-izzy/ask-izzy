@@ -7,6 +7,7 @@ import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
 import { resetDfvOptions } from "../utils";
 import history from "../utils/history";
+import HeaderBar from "../components/HeaderBar";
 
 type Props = {
     siteFeatureFlags: Object

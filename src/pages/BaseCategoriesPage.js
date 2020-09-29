@@ -40,7 +40,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
 
         let category = _.findWhere(categories, {
             key: this.props.match.params.page ||
-                this.props.params.supportCategorySlug,
+                this.props.match.params.supportCategorySlug,
         });
 
         this._category = category;

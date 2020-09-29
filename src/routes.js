@@ -103,7 +103,7 @@ export default (
         />
         <BasePage
             path="/"
-            components={posthog.injectFeatureFlags(HomePage)}
+            component={posthog.injectFeatureFlags(HomePage)}
             exact={true}
             state={{
                 pageType: "Home",
@@ -135,6 +135,7 @@ export default (
             path="/covid-19-support"
             component={Covid19StaticPage}
             title="COVID 19 Support"
+            exact={true}
             state={{
                 pageType: vars => [
                     "Static Page",
@@ -146,7 +147,7 @@ export default (
             path="/covid-19-support/:supportCategorySlug"
             component={props => (
                 <CovidSupportPageListing
-                    key={props.params.supportCategorySlug}
+                    key={props.match.params.supportCategorySlug}
                     {...props}
                 />
             )}
