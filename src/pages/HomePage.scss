@@ -65,8 +65,8 @@ $bright-purple: #8a2be2;
         display: flex;
         flex-direction: column;
         justify-content: center;
-
         height: 210px;
+
         max-height: unset;
         padding-bottom: 20px;
 
@@ -243,5 +243,16 @@ $bright-purple: #8a2be2;
             }
         }
 
+    }
+
+    #cantFindLookingFor {
+        padding: 1.5em;
+        background-color: $brand-pane-alt-dark;
+        color: $white;
+        text-align: center;
+
+        a {
+            color: $white;
+        }
     }
 }

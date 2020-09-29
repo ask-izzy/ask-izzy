@@ -5,6 +5,8 @@ import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
 import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
+import { Link } from "react-router-dom";
+
 import { resetDfvOptions } from "../utils";
 import history from "../utils/history";
 import HeaderBar from "../components/HeaderBar";
@@ -53,13 +55,7 @@ class HomePage extends React.Component<Props, void> {
 
 
         return (
-            <div className={"HomePage" + (
-                this.props
-                    .siteFeatureFlags["site-banner-feature-flag-test"] ?
-                    " CurrentEmergency"
-                    : ""
-            )}
-            >
+            <div className="HomePage containsSiteBanner-warning">
                 <div className="appbar">
                     <a className="quick-exit"
                         href={redirectUri}
@@ -91,22 +87,26 @@ class HomePage extends React.Component<Props, void> {
                             Search over 370,000 support services
                         </div>
                     </HeaderBar>
-                    {this.props.siteFeatureFlags[
-                        "site-banner-feature-flag-test"
-                    ] &&
-                        <div className="CurrentEmergencyNotice">
-                            <h3>
-                                The site banner feature flag test is set
-                            </h3>
-                            <p>
-                                Bikie rort rip snorter my tinny. Brickie as
-                                stands out like stands out like a waggin'
-                                school <a href="https://txtrdr.com/boganipsum/">
-                                billabong</a> his blood's worth bottling
-                                budgie smugglers.
-                            </p>
-                        </div>
-                    }
+                    <div className="siteBanner-warning">
+                        <h3>
+                            Welcome to the Ask Izzy Beta
+                        </h3>
+                        <p>
+                            This is where we are trying new features in Ask
+                            Izzy, so there may be bugs and incomplete areas.
+                            You should{" "}
+                            <Link to="/beta-info">read about our beta</Link>
+                            {" "}before using this version.
+                        </p>
+                        <p>
+                            <a href="https://askizzy.org.au">
+                                You can return to the 'regular' Ask Izzy here.
+                            </a>
+                        </p>
+                        <p>
+                            We welcome your feedback
+                        </p>
+                    </div>
                 </div>
 
                 <div className="body">
@@ -134,6 +134,10 @@ class HomePage extends React.Component<Props, void> {
                         </div>
                     </form>
                     <NavBar />
+                    <div id="cantFindLookingFor">
+                        Can't find what you're looking for? Return to{" "}
+                        <a href="https://askizzy.org.au">AskIzzy.org.au</a>
+                    </div>
                 </div>
 
                 <BrandedFooter />

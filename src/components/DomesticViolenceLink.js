@@ -4,7 +4,6 @@ import React from "react";
 
 import icons from "../icons";
 import BaseLogoWithTextBox from "./BaseLogoWithTextBox";
-import sendEvent from "../google-tag-manager";
 import history from "../utils/history";
 import * as gtm from "../google-tag-manager";
 

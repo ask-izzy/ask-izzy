@@ -42,7 +42,7 @@ xhr({
 }).catch(() => null);
 
 ReactDOM.hydrate(
-    <Router 
+    <Router
         history={history}
         onUpdate={() => {
             // Since Ask Izzy is a SPA we need to manually register each
@@ -86,7 +86,8 @@ ReactDOM.hydrate(
                     posthog.client.capture("$pageview");
                 }
             }
-        }}>
+        }}
+    >
         <ScrollToTop>
             {routes}
         </ScrollToTop>
@@ -108,19 +109,20 @@ window.pi = function() {
 }
 
 // Report JS errors to google analytics
-window.addEventListener("error", (e) => {
+window.addEventListener("error", event => {
+    const err = event.error
     gtm.emit({
         event: "exception",
-        exDescription: `JavaScript Error: ${e.message} ${e.filename}: ${
-            e.lineno
+        exDescription: `JavaScript Error: ${err.message} ${err.filename}: ${
+            err.lineno
         }`,
     });
     gtm.emit({
         event: "JS Error",
         eventCat: "Error Occurred",
         eventAction: "Javascript",
-        eventLabel: `${e.message}
-            ${e.filename} [Line ${e.lineno}]
+        eventLabel: `${err.message}
+            ${err.filename} [Line ${err.lineno}]
             From page: ${location.pathname}`.replace(/\n +/g, "\n"),
         sendDirectlyToGA: true,
     }, "GTM-54BTPQM");
