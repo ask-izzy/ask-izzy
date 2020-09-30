@@ -77,23 +77,30 @@ class HomePage extends React.Component<Props, void> {
                     </div>
                     <h3>Welcome to Ask Izzy beta - Pandemic support</h3>
 
-                    <Link to="/beta-info"
-                        className="covid-info-notification"
-                    >
+                    <Link to="/beta-info">
                         <button>
                             <icons.Info className={"big middle"}/>
-                            <span>Before using Ask Izzy beta</span>
+                            <span>Read before using Ask Izzy beta</span>
                             <icons.Chevron />
                         </button>
                     </Link>
                     <p>
                         This is where we are trying new features in Ask Izzy,
-                        so at times it may not work as expected. If you've
-                        been affected by the pandemic you'll find {" "}
-                        <Link to="/covid-19-support">information
-                        and support services here</Link>.
-                        We welcome your <Link to="/feedback">feedback</Link>.
+                        so at times it may not work as expected. If you've been
+                        affected by the pandemic you might find the information
+                        and support services here helpful. Let us know what you
+                        think, we welcome your {" "}
+                        <a href={"mailto:support@askizzy.org.au?" +
+                            "subject=Ask Izzy Beta - Feedback"}
+                        >
+                            feedback
+                        </a>.
                     </p>
+                </div>
+                <div className="covid-info-notification">
+                    <Link to="/covid-19-support">Official
+                    coronavirus (COVID-19) information</Link>{" "}
+                    from federal and state government.
                 </div>
                 <div className="appbar">
                     <a className="quick-exit"
@@ -150,21 +157,10 @@ class HomePage extends React.Component<Props, void> {
                         </div>
                     </form>
                     <NavBar />
-                    <Link to="/covid-19-support"
-                        className="covid-info-notification"
-                    >
-                        <div>
-                            <icons.Info className={"big middle"} />
-                            <div>
-                                Official coronavirus (COVID-19) information
-                                from federal and state government.
-                            </div>
-                            <icons.Chevron />
-                        </div>
-                    </Link>
                     <div className="cantFindLookingFor">
-                        Can't find what you're looking for? Return to{" "}
-                        <a href="https://askizzy.org.au">AskIzzy.org.au</a>
+                        <h3>Can’t find what you’re looking for?</h3>
+                        <span>Return to{" "}
+                            <a href="https://askizzy.org.au">AskIzzy.org.au</a></span>
                     </div>
                 </div>
 

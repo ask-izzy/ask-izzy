@@ -4,7 +4,6 @@
 import React from "react";
 import StaticPage from "./StaticPage";
 import components from "../components";
-import PropTypes from "proptypes";
 
 export default class BetaInfoStaticPage extends React.Component<{}, void> {
     render() {

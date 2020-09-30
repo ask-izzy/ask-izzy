@@ -11,15 +11,10 @@ $bright-purple: #8a2be2;
         flex-direction: column;
         align-items: baseline;
         padding: 1em;
-        border-top: $brand-pane-alt-darker 10px solid;
-        background-color: $brand-pane-alt-dark;
+        border-top: $brand-pane-alt-dark 10px solid;
+        background-color: $brand-pane-alt-darker;
         &, a {
             color: $white;
-        }
-
-        a {
-            font-weight: bold;
-            text-decoration: none;
         }
 
         .returnToProd {
@@ -36,12 +31,43 @@ $bright-purple: #8a2be2;
                 }
             }
 
+            margin-left: -8px;
 
+            &:hover {
+                a span {
+                    text-decoration: underline;
+                }
+
+                .ChevronBackIcon {
+                    transform: translateX(-2px);
+                }
+            }
         }
 
         button {
+            margin: 0;
+            padding: 0.1em 0.3em;
+            
+            border: 3px solid $white;
+            border-radius: 8px;
+            background-color: $white;
             color: $brand-text-dark;
-            font-weight: normal;
+            font-weight: bold;
+
+            path {
+                fill: $brand-text-dark;
+            }
+
+            &:hover {
+                .ChevronIcon {
+                    transform: translateX(5px);
+                }
+            }
+
+            &::-moz-focus-inner {
+                padding: 0;
+                border: 0
+            }
 
             span {
                 display: inline-block;
@@ -61,8 +87,8 @@ $bright-purple: #8a2be2;
             }
 
             span:nth-child(2) {
-                @media only screen and (max-width: 372px) {
-                    width: 8em;
+                @media only screen and (max-width: 386px) {
+                    width: 10em;
                     margin: 0.5em 0.2em;
                 }
             }
@@ -75,6 +101,16 @@ $bright-purple: #8a2be2;
                     margin: 0.1em 0.2em;
                 }
             }
+        }
+    }
+
+    .covid-info-notification {
+        padding: 1em;
+        border-left: $notification-accent 10px solid;
+        background-color: $notification-background;
+
+        &, a {
+            color: $brand-text-dark;
         }
     }
 
@@ -238,45 +274,14 @@ $bright-purple: #8a2be2;
 
     }
 
-    .covid-info-notification {
-        text-decoration: none;
-
-        > div {
-            display: flex;
-            align-items: center;
-            padding: 0.5em 9px 0.5em 4px;
-            border-left: $notification-accent 10px solid;
-            background-color: $notification-background;
-
-            span:nth-child(1) {
-                display: inline-block;
-                vertical-align: middle;
-                .Icon {
-                    margin-bottom: -3px;
-                    vertical-align: text-bottom;
-                }
-            }
-
-            div {
-                flex: 1 1 auto;
-                margin: 0.5em 0;
-                color: $brand-text-dark;
-                font-weight: bold;
-                text-decoration: unset;
-            }
-
-            a {
-                color: $brand-text-dark;
-                font-weight: bold;
-            }
-        }
-    }
-
     .cantFindLookingFor {
         padding: 1.5em;
         background-color: $brand-pane-alt-dark;
         color: $white;
-        text-align: center;
+
+        h3 {
+            margin-top: 0;
+        }
 
         a {
             color: $white;
