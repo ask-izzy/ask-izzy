@@ -70,7 +70,7 @@ export default class FormFeedbackCantFind extends React.Component<{}, State> {
                 environment: "askizzy-test",
                 provider: "smtp",
                 notifications: {
-                    "template": "2",
+                    "template": 2,
                     "id": "feedback-form",
                     "notifications": [
                         {
