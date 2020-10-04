@@ -7,6 +7,7 @@ IFS=$'\n\t'
 
 VERSION="$(cat public/VERSION)"
 STRAPI_URL=${STRAPI_URL:-}
+NOTIFICATIONS_API_URL=${NOTIFICATIONS_API_URL:-}
 
 # Set Strapi url based on env.
 if [ -z "$STRAPI_URL" ]; then
@@ -26,8 +27,21 @@ if [ -z "$STRAPI_URL" ]; then
 	if [ "$ENVIRONMENT" = "dev" ] || [ "$ENVIRONMENT" = "development" ]; then
 		STRAPI_URL="https://cms-askizzy.docker.dev"
 	fi
-fi
 
+# Set NOTIFICATIONS API URLS based on env.
+if [ -z "$NOTIFICATIONS_API_URL" ]; then
+	if [ "$ENVIRONMENT" = "prod" ]; then
+		NOTIFICATIONS_API_URL="https://notifications.infoxchangeapps.net.au"
+	fi
+	if [ "$ENVIRONMENT" = "staging" ]; then
+		NOTIFICATIONS_API_URL="https://notifications-uat.infoxchangeapps.net.au"
+	fi
+	if [ "$ENVIRONMENT" = "test" ]; then
+		NOTIFICATIONS_API_URL="https://notifications-test.docker.dev"
+	fi
+	if [ "$ENVIRONMENT" = "dev" ] || [ "$ENVIRONMENT" = "development" ]; then
+		NOTIFICATIONS_API_URL="https://notifications.docker.dev"
+	fi
 
 if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging" ]; then
 	PROXY_TYPOGRAPHY="typography-com.askizzy.org.au"
@@ -116,4 +130,6 @@ window.DOMAIN_MAPS = ${DOMAIN_MAPS};
 window.EXCLUDED_DOMAINS = ${EXCLUDED_DOMAINS};
 window.VERSION = "${VERSION}";
 window.STRAPI_URL = "$STRAPI_URL";
+window.NOTIFICATIONS_API_KEY = "$NOTIFICATIONS_API_KEY";
+window.NOTIFICATIONS_API_URL = "$NOTIFICATIONS_API_URL";
 JSON
