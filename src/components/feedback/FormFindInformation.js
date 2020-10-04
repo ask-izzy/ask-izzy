@@ -52,7 +52,7 @@ export default class FormFindInformation extends React.Component<{}, State> {
                 environment: "askizzy-test",
                 provider: "smtp",
                 notifications: {
-                    "template": "1",
+                    "template": 1,
                     "id": "find-information",
                     "notifications": [
                         {
