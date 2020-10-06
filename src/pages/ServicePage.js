@@ -10,7 +10,7 @@ import type {Service} from "../iss";
 import components from "../components";
 import Loading from "../icons/Loading";
 import config from "../config";
-import {onBack} from "../utils/history";
+import routerContext from "../contexts/router-context";
 
 class ServicePage extends React.Component<{
     params: {
@@ -25,6 +25,8 @@ class ServicePage extends React.Component<{
         match: PropTypes.object,
     };
 
+    static contextType = routerContext;
+
     constructor(props: Object) {
         super(props);
         this.state = {};
@@ -35,8 +37,8 @@ class ServicePage extends React.Component<{
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object): void {
-        if (prevProps.match.params.slug != this.props.match.params.slug) {
-            this.loadService();
+        if (this.id !== this.extractId(this.context.router.match.params.slug)) {
+            this.loadService()
         }
     }
 
@@ -44,8 +46,11 @@ class ServicePage extends React.Component<{
      * Pull out the ID (leading digits) from the slug
      */
     get id(): number {
+        return this.extractId(this.context.router.match.params.slug)
+    }
+
+    extractId(slug: string): number {
         const leadingDigits = /^\d+/;
-        let slug = this.props.match.params.slug;
         let match = slug.match(leadingDigits);
 
         if (match) {
@@ -79,7 +84,7 @@ class ServicePage extends React.Component<{
                 <div className="ServicePage">
                     <components.AppBar
                         title="Loading..."
-                        onBackTouchTap={onBack}
+                        onBackTouchTap={this.context.router.history.goBack}
                     />
                     <div className="ServicePane">
                         <main>
@@ -112,7 +117,7 @@ class ServicePage extends React.Component<{
                 <div className="ServicePage">
                     <components.AppBar
                         title={object.site.name}
-                        onBackTouchTap={onBack}
+                        onBackTouchTap={this.context.router.history.goBack}
                     />
                     <ServicePane service={object}/>
                 </div>

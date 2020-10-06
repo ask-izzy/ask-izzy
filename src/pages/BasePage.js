@@ -4,8 +4,7 @@ import React from "react";
 import Helmet from "react-helmet";
 import { makeTitle } from "../routes";
 import { Route } from "react-router";
-import history from "../utils/history";
-import sendEvent from "../google-tag-manager";
+import { InjectRouterContext } from "../contexts/router-context"
 
 type Props = {
     children: any,
@@ -23,48 +22,40 @@ class BasePage extends Route<Props, {}> {
         return {};
     }
 
-    componentDidMount(): void {
-        // Since Ask Izzy is a SPA we need to manually register each
-        // new page view
-        sendEvent({
-            event: "Page Viewed",
-        });
-    }
-
     render() {
         let match = this.props.match || this.props.computedMatch
         const canonicalUrl = `https://askizzy.org.au${this.props.location.pathname}`;
         let Component = this.props.component;
 
         return (
-            <div className="BasePage">
-                <Helmet>
-                    <link
-                        rel="canonical"
-                        content={canonicalUrl}
-                    />
-                    <meta
-                        property="og:url"
-                        content={canonicalUrl}
-                    />
-                    <title>
-                        {
-                            makeTitle(
-                                this.props.title,
-                                match.params
-                            )
-                        }
-                    </title>
-                </Helmet>
+            <InjectRouterContext matchedRoute={match}>
+                <div className="BasePage">
+                    <Helmet>
+                        <link
+                            rel="canonical"
+                            content={canonicalUrl}
+                        />
+                        <meta
+                            property="og:url"
+                            content={canonicalUrl}
+                        />
+                        <title>
+                            {
+                                makeTitle(
+                                    this.props.title,
+                                    match.params
+                                )
+                            }
+                        </title>
+                    </Helmet>
 
-                <main>
-                    <Component
-                        {...this.props}
-                        match={match}
-                        history={history}
-                    />
-                </main>
-            </div>
+                    <main>
+                        <Component
+                            {...this.props}
+                        />
+                    </main>
+                </div>
+            </InjectRouterContext>
         );
     }
 }

@@ -4,11 +4,13 @@ import PropTypes from "proptypes";
 
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
-import history, {onBack} from "../utils/history";
+import routerContext from "../contexts/router-context"
 
 class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     ExtraState
 > {
+    static contextType = routerContext;
+
     getChildContext(): Object {
         return {
             controller: this,
@@ -18,7 +20,7 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     previousStep(): void {
         // If our subpage has an onPreviousStep hook, call it, otherwise
         // just go back.
-        onBack();
+        this.context.router.history.goBack();
     }
 
     nextStep(): void {
@@ -83,7 +85,7 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     }
 
     navigate(subpath: string): void {
-        history.push(
+        this.context.router.history.push(
             this.urlFor(subpath),
         );
     }
@@ -95,7 +97,7 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     get currentComponentIdx(): number {
         return this.personalisationComponents.findIndex(component => {
             return component.defaultProps.name ===
-                this.props.match.params.subpage
+                this.context.router.match.params.subpage
         });
     }
 }

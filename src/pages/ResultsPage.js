@@ -15,7 +15,7 @@ import DebugContainer from "../components/DebugContainer";
 import DebugPersonalisation from "../components/DebugPersonalisation";
 import DebugSearch from "../components/DebugSearch";
 import ResultsListPage from "./ResultsListPage";
-import history from "../utils/history";
+import routerContext from "../contexts/router-context";
 
 import type { Service } from "../iss";
 import NotFoundStaticPage from "./NotFoundStaticPage"
@@ -28,6 +28,8 @@ class ResultsPage extends BaseCategoriesPage {
             childServices: [],
         };
     }
+
+    static contextType = routerContext;
 
     _component: any;
     _childComponent: any;
@@ -65,8 +67,10 @@ class ResultsPage extends BaseCategoriesPage {
 
         sendEvent({
             event: "searchResults",
-            searchQuery: decodeURIComponent(this.props.match.params.search),
-            searchPage: this.props.match.params.page,
+            searchQuery: decodeURIComponent(
+                this.context.router.match.params.search
+            ),
+            searchPage: this.context.router.match.params.page,
             location: storage.getLocation(),
         });
 
@@ -79,7 +83,7 @@ class ResultsPage extends BaseCategoriesPage {
                 .pathname
                 .endsWith("/") ? "" : "/";
 
-            history.replace(
+            this.context.router.history.replace(
                 `${this.props.location.pathname}${sep}personalise`
             );
             return;
@@ -122,8 +126,10 @@ class ResultsPage extends BaseCategoriesPage {
     async loadMore(): Promise<void> {
         sendEvent({
             event: "LoadMoreSearchResults",
-            searchQuery: decodeURIComponent(this.props.match.params.search),
-            searchPage: this.props.match.params.page,
+            searchQuery: decodeURIComponent(
+                this.context.router.match.params.search
+            ),
+            searchPage: this.context.router.match.params.page,
             location: storage.getLocation(),
         });
 
@@ -173,9 +179,7 @@ class ResultsPage extends BaseCategoriesPage {
         }
 
         if (!event.defaultPrevented) {
-            this.props.history.push(
-                "/",
-            );
+            this.context.router.history.push("/");
         }
     }
 
@@ -221,7 +225,9 @@ class ResultsPage extends BaseCategoriesPage {
                     {...this.state}
                     {...this.props}
                     category={this.category}
-                    search={decodeURIComponent(this.props.match.params.search)}
+                    search={decodeURIComponent(
+                        this.context.router.match.params.search
+                    )}
                     loadMore={this.renderLoadMore()}
                     title={this.title}
                     loading={this.loading}

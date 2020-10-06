@@ -10,7 +10,7 @@ import NavBar from "../components/NavBar";
 import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
 import { resetDfvOptions } from "../utils";
-import history from "../utils/history";
+import routerContext from "../contexts/router-context";
 
 class HomePage extends React.Component<{}, void> {
 
@@ -21,6 +21,8 @@ class HomePage extends React.Component<{}, void> {
 
         resetDfvOptions();
     }
+
+    static contextType = routerContext;
 
     onSearchSubmit(event: Event): void {
         event.preventDefault();
@@ -34,7 +36,7 @@ class HomePage extends React.Component<{}, void> {
 
         storage.setSearch(search);
 
-        history.push(
+        this.context.router.history.push(
             `/search/${encodeURIComponent(search)}`
         );
     }

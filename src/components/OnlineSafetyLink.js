@@ -5,7 +5,7 @@ import React from "react";
 import icons from "../icons";
 import BaseLogoWithTextBox from "./BaseLogoWithTextBox";
 import sendEvent from "../google-tag-manager";
-import history from "../utils/history";
+import routerContext from "../contexts/router-context";
 
 export default class OnlineSafetyLink extends BaseLogoWithTextBox {
     static defaultProps = {
@@ -16,6 +16,8 @@ export default class OnlineSafetyLink extends BaseLogoWithTextBox {
         highlightColor: "#70bdae",
     };
 
+    static contextType = routerContext;
+
     onClickBox(): void {
         const path = "/online-safety";
 
@@ -24,7 +26,7 @@ export default class OnlineSafetyLink extends BaseLogoWithTextBox {
             banner: "Online safety - are you safe?",
         });
 
-        history.push(
+        this.context.router.history.push(
             path,
         );
     }

@@ -3,7 +3,7 @@
 import React from "react";
 import icons from "../icons";
 import BaseLogoWithTextBox from "./BaseLogoWithTextBox";
-import history from "../utils/history";
+import routerContext from "../contexts/router-context";
 
 export default class ServiceListIntro extends BaseLogoWithTextBox {
     static defaultProps = {
@@ -14,10 +14,12 @@ export default class ServiceListIntro extends BaseLogoWithTextBox {
         highlightColor: "#887FBB",
     };
 
+    static contextType = routerContext;
+
     onClickBox(): void {
         const path = "/Information";
 
-        history.push(
+        this.context.router.history.push(
             path,
         );
     }

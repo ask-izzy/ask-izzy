@@ -4,7 +4,7 @@ import url from "url";
 import React from "react";
 
 import components from "../components";
-import {onBack} from "../utils/history";
+import routerContext from "../contexts/router-context";
 
 declare var ISS_URL: string;
 
@@ -33,6 +33,8 @@ class AddServicePage extends React.Component<Props, State> {
             delete this.issUrl.auth;
         }
     }
+
+    static contextType = routerContext;
 
     componentDidMount(): void {
         if (typeof window !== "undefined") {
@@ -78,7 +80,7 @@ class AddServicePage extends React.Component<Props, State> {
             <div className="AddServicePage">
                 <components.AppBar
                     title="Add a service"
-                    onBackTouchTap={onBack}
+                    onBackTouchTap={this.context.router.history.goBack}
                 />
 
                 <div className="body">

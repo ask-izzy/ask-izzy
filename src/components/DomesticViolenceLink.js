@@ -5,7 +5,7 @@ import React from "react";
 import icons from "../icons";
 import BaseLogoWithTextBox from "./BaseLogoWithTextBox";
 import sendEvent from "../google-tag-manager";
-import history from "../utils/history";
+import routerContext from "../contexts/router-context";
 
 export default class DomesticViolenceLink extends BaseLogoWithTextBox {
     static defaultProps = {
@@ -16,6 +16,8 @@ export default class DomesticViolenceLink extends BaseLogoWithTextBox {
         highlightColor: "#7E74B3",
     };
 
+    static contextType = routerContext;
+
     onClickBox(): void {
         const path = "/information";
 
@@ -24,7 +26,7 @@ export default class DomesticViolenceLink extends BaseLogoWithTextBox {
             banner: "Domestic violence - hotline",
         });
 
-        history.push(
+        this.context.router.history.push(
             path,
         );
     }
