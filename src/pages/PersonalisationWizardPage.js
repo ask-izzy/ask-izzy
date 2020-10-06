@@ -178,6 +178,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
                     onNextStepCallback={this.forceUpdate.bind(this)}
                     nextStep={this.nextStep}
                     previousStep={this.previousStep}
+                    category={this.category}
                 />
             </div>
         );

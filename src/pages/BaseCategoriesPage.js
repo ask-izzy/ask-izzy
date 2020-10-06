@@ -29,6 +29,11 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
     Object, State & ExtraState> {
     static contextType = routerContext;
 
+    constructor(props: Object, context: Object) {
+        super(props);
+        this.context = context
+    }
+
     /**
      * category:
      *
@@ -43,7 +48,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
 
     get title(): string {
         if (this.category) {
-            return this.category.name;
+            return this.category.title;
         } else if (this.search.q !== "undefined-search") {
             const quote = new RegExp(`["']`, "g");
             const search = decodeURIComponent(

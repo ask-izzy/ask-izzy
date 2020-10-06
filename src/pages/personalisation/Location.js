@@ -12,7 +12,6 @@ import icons from "../../icons";
 import posthog from "../../utils/posthog"
 import storage from "../../storage";
 import * as iss from "../../iss";
-import CovidRelatedIssues from "../../components/CovidRelatedIssues";
 
 type Props = {
         name: string,
@@ -305,17 +304,6 @@ class Location extends Personalisation<Props, State> {
                             <icons.Loading className="big" />
                         </div>
                     )
-                }
-                {
-                    !this.state.nextDisabled &&
-                    Location.locationInVic(this.state.locationName) &&
-                    (
-                        !posthog.posthogShouldBeLoaded ||
-                        this.props.siteFeatureFlags[
-                            "covid-categories-show-for-victoria"
-                        ]
-                    ) &&
-                    <CovidRelatedIssues onClick={this.onNextStep.bind(this)} />
                 }
                 {this.renderDoneButton()}
             </div>

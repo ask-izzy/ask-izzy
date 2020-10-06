@@ -4,8 +4,11 @@
 import React from "react";
 import StaticPage from "./StaticPage";
 import components from "../components";
+import routerContext from "../contexts/router-context";
 
 export default class BetaInfoStaticPage extends React.Component<{}, void> {
+    static contextType = routerContext;
+
     render() {
         return (
             <StaticPage
@@ -36,7 +39,7 @@ export default class BetaInfoStaticPage extends React.Component<{}, void> {
                 <div className="buttonsBox">
                     <components.FlatButton
                         label="Continue Using Beta"
-                        onClick={() => this.context.router.goBack()}
+                        onClick={this.context.router.history.goBack}
                     />
                     <a href="https://askizzy.org.au">
                         <components.FlatButton

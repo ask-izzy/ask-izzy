@@ -3,6 +3,7 @@
 import * as React from "react";
 
 import Personalisation from "../../mixins/Personalisation";
+import {Category} from "../../constants/categories";
 import components from "../../components";
 import storage from "../../storage";
 import * as iss from "../../iss";
@@ -10,6 +11,7 @@ import * as iss from "../../iss";
 type Props = {
     onDoneTouchTap: Function,
     name: string,
+    category: ?Category
 }
 
 class Intro extends Personalisation<Props, {}> {
