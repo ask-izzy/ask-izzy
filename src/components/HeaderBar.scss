@@ -42,6 +42,11 @@
             outline: 1px dashed $brand-bg-dark;
         }
 
+        a,
+        .link-color {
+            color: $white;
+        }
+
         .primary {
             max-width: 780px;
             min-height: 1em;
@@ -121,19 +126,19 @@
                 content: "";
             }
         }
-        $categories: advocacy centrelink drugs-alcohol everyday-things
-        facilities finding-work food health housing legal
-        life-skills-education money-help something-to-do
-        support-counselling technology family-violence
-        domestic-family-violence-help;
-        @each $category in $categories {
-            &.#{$category} {
-                background: url("/static/images/banners/#{$category}.png") center center;
+
+        /**
+         * $bannerImages is injected in at webpack compile time based on the
+         * filenames in the public/images/banners dir
+         */
+        @each $bannerImage in $bannerImages {
+            &.#{$bannerImage} {
+                background: url("/static/images/banners/#{$bannerImage}.png") center center;
                 background-size: cover;
 
                 @media only screen and (max-width: 400px) {
                     &:not(.static) {
-                        background: url("/static/images/banners/#{$category}.png") left top;
+                        background: url("/static/images/banners/#{$bannerImage}.png") left top;
                         background-size: 200%;
                     }
                 }
