@@ -109,20 +109,19 @@ window.pi = function() {
 }
 
 // Report JS errors to google analytics
-window.addEventListener("error", event => {
-    const err = event.error
+window.addEventListener("error", errEvent => {
     gtm.emit({
         event: "exception",
-        exDescription: `JavaScript Error: ${err.message} ${err.filename}: ${
-            err.lineno
+        exDescription: `JavaScript Error: ${errEvent.message} ${errEvent.filename}: ${
+            errEvent.lineno
         }`,
     });
     gtm.emit({
         event: "JS Error",
         eventCat: "Error Occurred",
         eventAction: "Javascript",
-        eventLabel: `${err.message}
-            ${err.filename} [Line ${err.lineno}]
+        eventLabel: `${errEvent.message}
+            ${errEvent.filename} [Line ${errEvent.lineno}]
             From page: ${location.pathname}`.replace(/\n +/g, "\n"),
         sendDirectlyToGA: true,
     }, "GTM-54BTPQM");

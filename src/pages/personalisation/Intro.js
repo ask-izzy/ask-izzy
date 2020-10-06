@@ -3,6 +3,7 @@
 import * as React from "react";
 
 import Personalisation from "../../mixins/Personalisation";
+import {Category} from "../../constants/categories";
 import components from "../../components";
 import storage from "../../storage";
 import * as iss from "../../iss";
@@ -10,6 +11,7 @@ import * as iss from "../../iss";
 type Props = {
     onDoneTouchTap: Function,
     name: string,
+    category: ?Category
 }
 
 class Intro extends Personalisation<Props, {}> {
@@ -44,13 +46,9 @@ class Intro extends Personalisation<Props, {}> {
         }
 
     render() {
-        let bannerName = "";
-
-        try {
-            bannerName = this.context.controller.props.match.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
+        const bannerName = this.props.category && this.props.category.bannerImage ? 
+            this.props.category.bannerImage 
+            : "purple"
 
         return (
             <div>

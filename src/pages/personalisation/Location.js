@@ -7,17 +7,18 @@ import _ from "underscore";
 
 import {geolocationAvailable} from "../../geolocation";
 import Personalisation from "../../mixins/Personalisation";
+import {Category} from "../../constants/categories";
 import components from "../../components";
 import icons from "../../icons";
 import posthog from "../../utils/posthog"
 import storage from "../../storage";
 import * as iss from "../../iss";
-import CovidRelatedIssues from "../../components/CovidRelatedIssues";
 
 type Props = {
         name: string,
         onDoneTouchTap: Function,
         siteFeatureFlags: Object,
+        category: ?Category
 }
 
 type State = {
@@ -228,13 +229,9 @@ class Location extends Personalisation<Props, State> {
     }
 
     render() {
-        let bannerName = "";
-
-        try {
-            bannerName = this.context.controller.props.match.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
+        const bannerName = this.props.category && this.props.category.bannerImage ? 
+            this.props.category.bannerImage 
+            : "purple"
 
         return (
             <div className="Location">
@@ -313,17 +310,6 @@ class Location extends Personalisation<Props, State> {
                             <icons.Loading className="big" />
                         </div>
                     )
-                }
-                {
-                    !this.state.nextDisabled &&
-                    Location.locationInVic(this.state.locationName) &&
-                    (
-                        !posthog.posthogShouldBeLoaded ||
-                        this.props.siteFeatureFlags[
-                            "covid-categories-show-for-victoria"
-                        ]
-                    ) &&
-                    <CovidRelatedIssues onClick={this.onNextStep.bind(this)} />
                 }
                 {this.renderDoneButton()}
             </div>

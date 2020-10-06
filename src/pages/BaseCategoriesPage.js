@@ -25,8 +25,13 @@ type State = {
 }
 
 class BaseCategoriesPage<ExtraState = {}> extends React.Component<
-    Object, State & ExtraState> {
-    _category: Category;
+    Object, State & ExtraState
+> {
+    get slug(): string {
+        return this.props.match.params.page;
+    }
+    
+    #category: Category;
 
     /**
      * category:
@@ -34,22 +39,15 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
      * Return category information.
      */
     get category(): Category {
-        if (this._category) {
-            return this._category;
-        }
+        this.#category = this.#category || categories
+            .find(cat => cat.slug === this.slug);
 
-        let category = _.findWhere(categories, {
-            key: this.props.match.params.page ||
-                this.props.match.params.supportCategorySlug,
-        });
-
-        this._category = category;
-        return category;
+        return this.#category;
     }
 
     get title(): string {
         if (this.category) {
-            return this.category.name;
+            return this.category.title;
         } else if (this.search.q !== "undefined-search") {
             const quote = new RegExp(`["']`, "g");
             const search = decodeURIComponent(this.props.match.params.search);
