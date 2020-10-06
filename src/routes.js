@@ -24,7 +24,6 @@ import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
 import {ResultsPageListing, ResultsPageMap} from "./pages/ResultsPage";
 import ServicePage from "./pages/ServicePage";
-import {CovidSupportPageListing} from "./pages/CovidSupportPage";
 
 export function makeTitle(route: string, params: Object): string {
     let unslug = (str) =>
@@ -131,19 +130,6 @@ export default (
                     "COVID 19 Support",
                 ],
             }}
-        />
-        <BasePage
-            path="/covid-19-support/:supportCategorySlug"
-            component={CovidSupportPageListing}
-            name="Covid Support Category"
-            title="COVID 19 Support"
-            state={{
-                pageType: vars => [
-                    "Covid Support",
-                    vars.covidCategoryDisplayName,
-                ],
-            }}
-            exact={true}
         />
         <BasePage
             path="/terms"
