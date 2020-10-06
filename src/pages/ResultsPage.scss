@@ -3,13 +3,35 @@
 
     .pageBanner {
         padding: 1.5em;
-        background-color: $brand-yellow;
-        color: $brand-bg-dark;
+        background-color: $brand-pane-alt-darker;
+        color: $white;
         font-size: 0.9em;
         overflow: auto;
 
         h3 {
             margin: 0 0 0.3em;
+        }
+
+        path {
+            fill: $white;
+        }
+
+        > span {
+            display: inline-block;
+            vertical-align: middle;
+
+            svg {
+                vertical-align: text-bottom;
+                margin-bottom: -3px;
+            }
+        }
+    }
+
+    .HeaderBar {
+        height: 220px;
+        a,
+        .link-color {
+            color: $white;
         }
     }
 
