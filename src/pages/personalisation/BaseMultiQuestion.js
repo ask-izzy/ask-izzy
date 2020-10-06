@@ -160,13 +160,9 @@ class BaseMultiQuestion extends BaseQuestion {
 
     render() {
         let selected = this.selected;
-        let bannerName = "";
-
-        try {
-            bannerName = this.context.controller.props.match.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
+        const bannerName = this.props.category && this.props.category.bannerImage ? 
+            this.props.category.bannerImage 
+            : "purple"
 
         return (
             <div
