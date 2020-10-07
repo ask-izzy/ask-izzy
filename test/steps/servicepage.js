@@ -17,8 +17,29 @@ module.exports = (function() {
             unpromisify(checkTransportTime))
         .then("I should see a transport time of\n$lines",
             unpromisify(checkTransportTimeLines))
+        .then("I should see ATSI flags",
+            unpromisify(seeAtsiFlags))
+        .then("I should not see ATSI flags",
+            unpromisify(notSeeAtsiFlags))
     ;
 })();
+
+async function seeAtsiFlags(): Promise<void> {
+    let exists = await this.driver.findElement(
+        By.css(".IndigenousServiceIcon")
+    ).isDisplayed();
+
+    assert.equal(exists, true);
+}
+
+async function notSeeAtsiFlags(): Promise<void> {
+
+    let exists = await this.driver.findElements(By.css(
+        ".IndigenousServiceIcon"
+    )).length > 0;
+
+    assert.equal(exists, false);
+}
 
 async function checkTransportTimeLines(time: Array<string>): Promise<void> {
     await checkTransportTime.apply(this, [time.join("\n")]);

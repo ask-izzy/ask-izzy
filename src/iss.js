@@ -356,9 +356,11 @@ export class Service {
         if (this.indigenous_classification) {
             let classification = this.indigenous_classification;
 
-            return (classification ===
-                "Mainstream who cater for Aboriginal (indigenous)") ||
-                   classification === "Aboriginal (indigenous) specific";
+            return (
+                classification.indexOf(
+                    "Mainstream who cater for Aboriginal (indigenous)") > -1 ||
+                classification.indexOf("Aboriginal (indigenous) specific") > -1
+            )
         }
 
         return false;
@@ -391,7 +393,7 @@ export class Service {
     funding_body: string;
     show_in_askizzy_health: boolean;
     id: number;
-    indigenous_classification: string;
+    indigenous_classification: Array<string>;
     ineligibility_info: string;
     intake_info: string;
     intake_point: string;
