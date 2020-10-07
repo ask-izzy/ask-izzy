@@ -57,6 +57,23 @@ Feature: Service details page
         When I navigate to the service page
         Then I should not see "Ineligibility"
 
+    Scenario: ATSI flags appear if there is an indigenous classification
+       Given A service with:
+        ----------------------------------------------
+        indigenous_classification:
+          - "Mainstream who cater for Aboriginal (indigenous)"
+        ----------------------------------------------
+        When I navigate to the service page
+        Then I should see ATSI flags
+    
+    Scenario: ATSI flags are absent if there is no indigenous classification
+       Given A service with:
+        ----------------------------------------------
+        indigenous_classification:
+        ----------------------------------------------
+        When I navigate to the service page
+        Then I should not see ATSI flags
+
     Scenario: The address is a link to google maps
        Given A service with:
         ----------------------------------------------
