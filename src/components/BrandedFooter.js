@@ -6,7 +6,6 @@ import DemographicAboriginal from "../icons/DemographicAboriginal";
 import DemographicTorresStrait from "../icons/DemographicTorresStrait";
 import FacebookIcon from "../icons/Facebook";
 import Instagram from "../icons/Instagram";
-import config from "../config";
 import MobileDetect from "./higherorder/MobileDetect";
 
 class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
@@ -20,9 +19,6 @@ class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
     }
 
     render() {
-        const subject = "Ask Izzy - Feedback";
-        const siteMail = config.default.siteMail;
-        const mailLink = `mailto:${siteMail}?subject=${subject}`;
         // There is an nginx rewrite to go to the correct donation URL,
         // this reduces duplication.
         const donateLink = "/donate";
