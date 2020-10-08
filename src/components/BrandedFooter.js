@@ -14,6 +14,11 @@ class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
         default: {},
     };
 
+    openFeedback(event: SyntheticInputEvent<>): void {
+        event.preventDefault();
+        window.Usersnap.logEvent("display_menu");
+    }
+
     render() {
         const subject = "Ask Izzy - Feedback";
         const siteMail = config.default.siteMail;
@@ -38,7 +43,10 @@ class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
                             </Link>
                         </li>
                         <li>
-                            <a href={mailLink}>
+                            <a
+                                href="#"
+                                onClick={this.openFeedback}
+                            >
                                 Leave feedback
                             </a>
                         </li>
