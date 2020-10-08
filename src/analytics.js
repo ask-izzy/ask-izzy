@@ -5,7 +5,10 @@ import 'url-search-params-polyfill';
 document.addEventListener("DOMContentLoaded", function(event) {
 
     window.onUsersnapCXLoad = function(api) {
-        api.init();
+        api.init({
+            button: {isHidden: true}
+        });
+        window.Usersnap = api;
     }
     var script = document.createElement('script');
     script.defer = 1;
