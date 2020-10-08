@@ -15,6 +15,11 @@ export default class BrandedFooter
         default: {},
     };
 
+    openFeedback(event: SyntheticInputEvent<>): void {
+        event.preventDefault();
+        window.Usersnap.logEvent("display_menu");
+    }
+
     /* Begin hack for dealing with multiple columns
      *
      * Remove when "break-before: always;" is supported by all the browsers
@@ -219,10 +224,8 @@ export default class BrandedFooter
                         </li>
                         <li>
                             <Link
-                                to={
-                                    `mailto:${config.default.siteMail}` +
-                                    `?subject=${"Ask Izzy - Feedback"}`
-                                }
+                                to="#"
+                                onClick={this.openFeedback}
                             >
                                 <icons.Chat
                                     className="small"
