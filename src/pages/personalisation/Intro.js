@@ -19,7 +19,7 @@ class Intro extends Personalisation<Props, {}> {
         name: "intro",
     };
 
-    static title = "Intro";
+    static title = "Help Seeker";
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         return request;

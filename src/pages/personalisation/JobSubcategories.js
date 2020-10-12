@@ -11,9 +11,11 @@ export default class JobSubcategories extends BaseQuestion {
         question: "Where do you want to start?",
         answers: {
             /* eslint-disable max-len */
-            "Employment": remove("employment")
+            "Employment support": remove("employment")
                 .append("job searching"),
-            "Volunteering": remove("employment")
+            "Training and skills": remove("employment")
+                .append("job searching"),
+            "Volunteering opportunities": remove("employment")
                 .remove({service_type: ["employment"]})
                 .append("volunteering"),
         },
