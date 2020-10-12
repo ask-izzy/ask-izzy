@@ -51,6 +51,7 @@
     "history": "4.10.1",
     "js-yaml": "3.13.1",
     "jsonlint": "1.6.3",
+    "klaw": "3.0.0",
     "lodash": "4.17.15",
     "lodash-decorators": "6.0.0",
     "lru-cache": "4.1.3",

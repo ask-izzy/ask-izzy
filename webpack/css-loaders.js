@@ -13,4 +13,7 @@ export default [
             data: `$banner-images: ${bannerImages.join(" ")};`,
         },
     },
+    {
+        loader: './script/find-and-load-styles.js',
+    },
 ];
