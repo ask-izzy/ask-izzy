@@ -4,43 +4,11 @@
     padding-top: 10px;
     padding-bottom: 10px;
 
-    font-size: 14px;
-
-    &.compact {
-
-        margin-bottom: 15px;
-        padding-top: 0;
-        padding-bottom: 0;
-
-        .travel-time {
-            display: block;
-            margin-right: 24px;
-            padding-left: 24px;
-        }
-
-        @media (all) {
-            .travel-time {
-                display: inline-block;
-            }
-        }
-
-        .Icon {
-            top: -1px;
-            left: -3px;
-            width: 20px;
-            height: 20px;
-        }
-
-    }
+    font-size: 16px;
 
     .getDirections {
         padding-top: 3px;
-    }
-
-    .Icon {
-        position: absolute;
-        top: -2px;
-        left: -32px;
+        margin-left: 30px;
     }
 
     .ExternalLinkIcon {
@@ -57,6 +25,21 @@
         padding: 0;
         color: $brand-text-dark;
         font-weight: 500;
+
+        > span {
+            display: inline-block;
+            vertical-align: middle;
+    
+            svg {
+                margin-left: -3px;
+                vertical-align: text-bottom;
+            }
+        }
+
+        span:nth-child(n+2) {
+            margin-right: 1em;
+            margin-left: 0.6em;
+        }
     }
 
     .location {
@@ -68,5 +51,35 @@
         float: left;
         color: $link-text-color;
         text-decoration: underline;
+    }
+
+    &.compact {
+
+        margin-bottom: 15px;
+        padding-top: 0;
+        padding-bottom: 0;
+
+        font-size: 14px;
+
+        .travel-time {
+            display: block;
+
+            span:nth-child(n+2) {
+                margin-right: 1em;
+                margin-left: 0.3em;
+            }
+        }
+
+        @media (all) {
+            .travel-time {
+                display: inline-block;
+            }
+        }
+
+        .Icon {
+            width: 20px;
+            height: 20px;
+        }
+
     }
 }

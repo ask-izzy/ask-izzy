@@ -240,6 +240,7 @@ class Location extends Personalisation<Props, State> {
                             " location"
                     }
                     bannerName={this.bannerName}
+                    taperColour="Grey"
                 />
                 <div className="List">
                     {

@@ -60,13 +60,13 @@ export default class ListItem extends React.Component<ListItemProps, void> {
                     {leftIcon}
                 </div>
                 {!children && (
-                    <div className="primaryText">
-                        {primaryText}
-                    </div>
-                )}
-                {!children && (
-                    <div className="secondaryText">
-                        {secondaryText}
+                    <div className="text">
+                        <div className="primaryText">
+                            {primaryText}
+                        </div>
+                        <div className="secondaryText">
+                            {secondaryText}
+                        </div>
                     </div>
                 )}
                 {children}

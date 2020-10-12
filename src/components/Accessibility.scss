@@ -1,14 +1,21 @@
 .Accessibility {
     position: relative;
-    padding-left: 32px;
     color: $brand-text-dark;
     font-weight: 500;
+    font-size: 16px;
+
+    > span {
+        display: inline-block;
+        vertical-align: middle;
+
+        svg {
+            margin-left: -2px;
+            margin-right: 6px;
+            vertical-align: text-bottom;
+        }
+    }
 
     .ColoredIcon {
-        position: absolute;
-        top: 5px;
-        left: -4px;
-
         width: 30px;
         height: 30px;
     }

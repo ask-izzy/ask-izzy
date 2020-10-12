@@ -5,16 +5,11 @@
 }
 
 .OpeningTimes {
-    position: relative;
-    padding-left: 24px;
+    font-size: 16px;
 
-    .ColoredIcon {
-        position: absolute;
-        top: -17px;
-        left: -16px;
-
-        width: 30px;
-        height: 30px;
+    > span {
+        display: inline-block;
+        vertical-align: middle;
     }
 
     .open {
@@ -22,19 +17,22 @@
         font-weight: 500;
     }
 
+    .Icon {
+        width: 30px;
+        height: 30px;
+        margin-top: 2px;
+        margin-left: -3px;
+        vertical-align: text-bottom;
+    }
+
     .closed {
         font-weight: 500;
     }
 
     .until {
-        display: block;
-
-        @media print {
-            display: none;
-        }
-
         max-height: 19px;
-        padding-right: 1em;
+        margin-right: 1em;
+        margin-left: 6px;
         overflow: hidden;
 
         .open,
@@ -47,4 +45,16 @@
         }
     }
 
+    &.compact {
+        font-size: 14px;
+
+        .Icon {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    @media print {
+        display: none;
+    }
 }
