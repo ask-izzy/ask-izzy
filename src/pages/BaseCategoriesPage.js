@@ -14,6 +14,10 @@ import storage from "../storage";
 import personalisation from "./personalisation";
 import routerContext from "../contexts/router-context";
 
+type Props = {
+    match: Object
+}
+
 type State = {
     meta?: ?searchResultsMeta,
     error?: any,
@@ -21,17 +25,15 @@ type State = {
     objects?: Array<Service>,
     nextDisabled?: boolean,
     floatingContainerHeight?: number,
-    isClient?: boolean,
     childServices?: Array<Service>
 }
 
-class BaseCategoriesPage<ExtraState = {}> extends React.Component<
-    Object, State & ExtraState
-> {
+class BaseCategoriesPage<ChildProps = {...}, ChildState = {...}> 
+extends React.Component<Props & ChildProps, State & ChildState> {
     static contextType = routerContext;
 
     constructor(props: Object, context: Object) {
-        super(props);
+        super(props, context);
         this.context = context
     }
 
@@ -102,7 +104,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         }
 
         return components.filter(component => {
-            if (this.props.isRenderingStatic) {
+            if (typeof window !== "undefined") {
                 if (typeof component.staticShowPage === "function") {
                     // $FlowIgnore
                     return component.staticShowPage();

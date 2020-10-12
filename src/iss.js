@@ -427,14 +427,7 @@ export class Service {
     public_transport_info: string;
     referral_info: string;
     service_type: Array<string>;
-    site: {
-        id: number,
-        name: string,
-        organisation: {
-            id: number,
-            name: string,
-        },
-    };
+    site: Site;
     special_requirements: string;
     target_gender: issGender;
     type: issEntityType;
@@ -453,9 +446,9 @@ export class Service {
     }
 
     descriptionSentences(): Array<string> {
-        return this.description.split(". ")
-            .filter(str => str.trim())
-            .map(str => (str.trim() + ".").replace("..", "."))
+        return this.description.split(/\.(?=\s+|$)/)
+            .filter(str => str) // Remove trailing empty string from last line
+            .map(str => str.match(/\S/) ? str + "." : "")
     }
 
     /**
@@ -541,6 +534,15 @@ export class Service {
     get slug(): string {
         return slugify(`${this.id}-${this.site.name}`);
     }
+}
+
+export type Site = {
+    id: Number,
+    name: String,
+    organisation: {
+        id: Number,
+        name: String,
+    },
 }
 
 /**

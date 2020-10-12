@@ -22,7 +22,8 @@ import BetaInfoStaticPage from "./pages/BetaInfoStaticPage";
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
-import {ResultsPageListing, ResultsPageMap} from "./pages/ResultsPage";
+import ResultsListPage from "./pages/ResultsListPage";
+import ResultsMapPage from "./pages/ResultsMapPage";
 import ServicePage from "./pages/ServicePage";
 
 export function makeTitle(route: string, params: Object): string {
@@ -313,7 +314,7 @@ export default (
         ].map(({resultsType, rootPath: str}) => [
             <BasePage
                 path={`${str}`}
-                component={ResultsPageListing}
+                component={ResultsListPage}
                 title=":page in :suburb, :state"
                 exact={true}
                 name={resultsType}
@@ -326,7 +327,7 @@ export default (
             />,
             <BasePage
                 path={`${str}/map`}
-                component={ResultsPageMap}
+                component={ResultsMapPage}
                 title="Map of :page in :suburb, :state"
                 exact={true}
                 name={resultsType}

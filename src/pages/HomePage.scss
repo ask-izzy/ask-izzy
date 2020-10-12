@@ -210,6 +210,10 @@ $bright-purple: #8a2be2;
             &.homepage::after {
                 border-right: 100vw solid $brand-bg-mid-lighter;
             }
+
+            .BlackBanner {
+                background-color: rgba(0, 0, 0, 0.4);
+            }
         }
 
     }

@@ -51,6 +51,15 @@ class AppBar extends React.Component<Props, void> {
                     </div>
                 </div>
                 <div className="AppBarSpacer" />
+                <div className="betaBanner">
+                    <icons.Info className={"big middle"}/>
+                    You are using the Ask Izzy Beta.{" "}
+                    <a href={"mailto:support@askizzy.org.au?" +
+                        "subject=Ask Izzy Beta - Feedback"}
+                    >
+                        Leave feedback
+                    </a>
+                </div>
             </div>
         );
     }
