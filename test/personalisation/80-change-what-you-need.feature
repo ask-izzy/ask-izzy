@@ -7,6 +7,7 @@ Feature: Change your personalisation settings
 
     Background:
         Given my location is "Melbourne, Vic"
+        And I have somewhere to sleep tonight
         And my gender is female
         And I am 27 years old
         And I am not part of any relevant demographics
@@ -19,6 +20,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        What kind of support do you need?            | Help finding a place to live long term
         Where are you looking for help?                               | Melbourne, Vic
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -42,7 +44,24 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        What kind of support do you need?            | Help finding a place to live long term
         Where are you looking for help?                               | Carlton, VIC
+        How do you identify?                         | Female
+        How old are you?                             | 26 to 64
+        Do any of these apply to you?                | None selected
+        ----------------------------------------------------------------
+
+    Scenario: Edit whether I have somewhere to sleep tonight
+        When I visit /accommodation/personalise/summary
+        And I click on "What kind of support do you need?"
+        And I click on "Somewhere to sleep tonight"
+        Then I should see "Change your answers here"
+        Then I should see the results
+        ----------------------------------------------------------------
+        Question (primaryText)                       | Answer (secondaryText)
+        ================================================================
+        What kind of support do you need?            | Somewhere to sleep tonight
+        Where are you looking for help?                               | Melbourne, Vic
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | None selected
@@ -60,6 +79,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        What kind of support do you need?            | Help finding a place to live long term
         Where are you looking for help?                               | Melbourne, Vic
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -74,6 +94,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        What kind of support do you need?            | Help finding a place to live long term
         Where are you looking for help?                               | Melbourne, Vic
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -89,6 +110,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        What kind of support do you need?            | Help finding a place to live long term
         Where are you looking for help?                               | Melbourne, Vic
         How do you identify?                         | Male
         How old are you?                             | 26 to 64

@@ -9,7 +9,9 @@ export default class Gender extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "gender",
-        question: "Do you identify as…",
+        question: "What gender do you identify most closely with?",
+        byline: "You don't have to answer, but this helps us give you better " +
+            "results",
         answers: {
             "Female": append({
                 client_gender: ["f", "u"],
@@ -17,7 +19,7 @@ export default class Gender extends BaseQuestion {
             "Male": append({
                 client_gender: ["m", "u"],
             }),
-            "Trans and Gender Diverse": append({
+            "Trans and/or Gender Diverse": append({
                 client_gender: ["x", "u"],
             }),
         },

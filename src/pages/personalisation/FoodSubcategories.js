@@ -10,16 +10,62 @@ export default class FoodSubcategories extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-food",
-        question: "What type of food do you need?",
+        question: "What do you need help with?",
+        mandatory: true,
         answers: {
-            "Community meals": remove("-(coordinating bodies)"),
-            "Food packages/parcels/vouchers": remove("meals")
-                .append("(Food Parcels & Food Vouchers)")
-                .append({service_type: ["material aid"]}),
-            "Meals on Wheels": remove("meals")
-                .remove("-(meals on wheels)")
-                .remove("-chsp")
-                .append("meals on wheels"),
+            "Finding a free meal nearby":
+                append(
+                    "meals -(coordinating bodies) -(food safety) -(home care)" +
+                    " -(meals on wheels) -(assistance with meals)" +
+                    " -(hire of facilities) -chsp -(meal preparation)"
+                ).append({catchment: "prefer"}),
+            "Meals on Wheels": append("(meals on wheels)")
+                .append({catchment: "prefer"}),
+            "Food packages/parcels/vouchers":
+                append(
+                    "(Food Parcels & Food Vouchers) -(coordinating bodies) " +
+                    "-(food safety) -(home care) -(meals on wheels) " +
+                    "-(assistance with meals) -(hire of facilities) -chsp " +
+                    "-(meal preparation)"
+                ).append({
+                    service_type: ["material aid"],
+                    catchment: "prefer",
+                }),
+            "Transport":
+                append({catchment: "prefer"})
+                    .append("transport")
+                    .append("travel")
+                    .append("-hacc"),
+            "Swags and blankets":
+                append("swags blankets -(coordinating bodies)")
+                    .append({catchment: "prefer"}),
+            "Clothes": append("clothes -(coordinating bodies)")
+                .append({catchment: "prefer"}),
+            "Showers": append("showers -(coordinating bodies)")
+                .append({catchment: "prefer"}),
+            "Toiletries":
+                append(
+                    "toiletries (sanitary products) tampons " +
+                    "-(coordinating bodies)"
+                ).append({
+                    service_type: ["material aid"],
+                    catchment: "prefer",
+                }),
+            "Laundry": append("laundry washing drying -(coordinating bodies)")
+                .append({
+                    service_type: ["material aid"],
+                    catchment: "prefer",
+                }),
+            "Household goods":
+                append("(household goods) -(coordinating bodies)")
+                    .append({
+                        service_type: ["material aid"],
+                        catchment: "prefer",
+                    }),
+            "Help with pets":
+                append("assistance pets")
+                    .append("-(animal control)")
+                    .append("-effectiveness"),
         },
     };
 

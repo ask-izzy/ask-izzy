@@ -23,17 +23,19 @@ Feature: Question Flow Breadcrumb
     Scenario: Visit a place to stay and have your answers follow you to the last question
         Given a fresh session
         And my location is "Melbourne, VIC"
+        And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
         And I click on "A place to stay"
         Then I should see "I'm looking for help for"
         And I should be at /accommodation/personalise
         When I click on the done button # Intro
-        And I should see "Melbourne, VIC  |  Women  |  18-26"
+        And I should see "Help finding a place to live long term | Melbourne, VIC  |  Women  |  18-26"
 
     Scenario: Visit a place to stay and go back to edit your age
         Given a fresh session
         And my location is "Melbourne, VIC"
+        And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
         And I click on "A place to stay"
@@ -46,6 +48,7 @@ Feature: Question Flow Breadcrumb
     Scenario: Visit a place to stay and select more than one demographic
         Given a fresh session
         And my location is "Melbourne, VIC"
+        And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
         And I am part of the following demographics
@@ -54,11 +57,12 @@ Feature: Question Flow Breadcrumb
         Couples
         --------------------------------------
         When I click on "A place to stay"
-        Then I should see "Melbourne, VIC | Women | 18-26 | Families , Couples"
+        Then I should see "Help finding a place to live long term | Melbourne, VIC | Women | 18-26 | Families , Couples"
 
     Scenario: Visit a place to stay and select more than two demographic
         Given a fresh session
         And my location is "Melbourne, VIC"
+        And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
         And I am part of the following demographics
@@ -68,11 +72,12 @@ Feature: Question Flow Breadcrumb
         Have a disability
         --------------------------------------
         When I click on "A place to stay"
-        Then I should see "Melbourne, VIC | Women | 18-26 | Families , Couples , With disability"
+        Then I should see "Help finding a place to live long term | Melbourne, VIC | Women | 18-26 | Families , Couples ..."
 
     Scenario: Visit housing and select more than two demographic and edit
         Given a fresh session
         And my location is "Melbourne, VIC"
+        And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
         And I am part of the following demographics
@@ -82,14 +87,14 @@ Feature: Question Flow Breadcrumb
         Have a disability
         --------------------------------------
         When I click on "A place to stay"
-        Then I should see "Melbourne, VIC | Women | 18-26 | Families , Couples , With disability"
+        Then I should see "Help finding a place to live long term | Melbourne, VIC | Women | 18-26 | Families , Couples ..."
         When I click on "See all and edit"
         And I click on "Do any of these apply to you?"
-        And I should see "Melbourne, VIC | Women | 18-26 | Families , Couples , With disability (editing)"
+        And I should see "Help finding a place to live long term | Melbourne, VIC | Women | 18-26 | Families , Couples ... (editing)"
         And I click on "Have a disability"
         When I click on the done button # Demographics
         And I click on the done button
-        Then I should see "Melbourne, VIC | Women | 18-26 | Families , Couples"
+        Then I should see "Help finding a place to live long term | Melbourne, VIC | Women | 18-26 | Families , Couples"
 
     Scenario: See saved location on the home page
         Given a fresh session

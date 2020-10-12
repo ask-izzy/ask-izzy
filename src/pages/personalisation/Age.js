@@ -18,6 +18,8 @@ export default class Age extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "age",
         question: "How old are you?",
+        byline: "You don't have to answer, but this helps us give " +
+            "you better results",
         answers: {
             "0 to 17": append(ageGroups(
                 "prenatal",
