@@ -6,12 +6,12 @@ import components from "../components";
 import _s from "underscore.string";
 
 type Props = {
-    params: Object
+    match: Object
 }
 
 export default class StyleGuideItem extends React.Component<Props, void> {
     static propTypes = {
-        params: PropTypes.object,
+        match: PropTypes.object,
     };
 
     constructor(props: Object) {
@@ -19,11 +19,11 @@ export default class StyleGuideItem extends React.Component<Props, void> {
     }
 
     getComponentName(): string {
-        return this.props.params.componentName;
+        return this.props.match.params.componentName;
     }
 
     getComponent(): React.ComponentType<any> {
-        /* TODO: Find why flow doesn't like this func. Mmight be because not all
+        /* TODO: Find why flow doesn't like this func. Might be because not all
            components have `sampleProps` defined. Might be able to narrow down
            what this function returns. */
         return components[this.getComponentName()];
@@ -35,6 +35,13 @@ export default class StyleGuideItem extends React.Component<Props, void> {
         if (!Component) {
             return (
                 <div>No such component {this.getComponentName()}</div>
+            );
+        }
+
+        // flow:disable
+        if (!Component.sampleProps) {
+            return (
+                <div>Component does not have sample props</div>
             );
         }
 
