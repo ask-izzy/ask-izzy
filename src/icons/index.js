@@ -36,6 +36,7 @@ import SvgIconEntertainment from "./Entertainment";
 import SvgIconEscapeViolence from "./EscapeViolence";
 import SvgIconExperiencingViolence from "./ExperiencingViolence";
 import SvgIconExternalLink from "./ExternalLink";
+import SvgIconFacebook from "./Facebook";
 import SvgIconFacilities from "./Facilities";
 import SvgIconFeedback from "./Feedback";
 import SvgIconFood from "./Food";
@@ -76,7 +77,6 @@ import SvgIconUsingViolence from "./UsingViolence";
 import SvgIconWalk from "./Walk";
 import SvgIconWarning from "./Warning";
 import SvgIconWebsite from "./Website";
-import SvgIconFacebook from "./Facebook";
 
 export default {
     OnlineSecurity: SvgIconOnlineSecurity,
@@ -113,6 +113,7 @@ export default {
     EscapeViolence: SvgIconEscapeViolence,
     ExperiencingViolence: SvgIconExperiencingViolence,
     ExternalLink: SvgIconExternalLink,
+    Facebook: SvgIconFacebook,
     Facilities: SvgIconFacilities,
     Feedback: SvgIconFeedback,
     Food: SvgIconFood,
@@ -153,5 +154,4 @@ export default {
     Walk: SvgIconWalk,
     Warning: SvgIconWarning,
     Website: SvgIconWebsite,
-    Facebook: SvgIconFacebook,
 };
