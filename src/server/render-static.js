@@ -29,9 +29,9 @@ function renderPage(uri: string, path: string, params: Object): void {
     const reqUrl = url.parse(uri);
 
     const markup = ReactDOMServer.renderToString(
-        <StaticRouter location={{pathname: reqUrl.pathname}}
-            isRenderingStatic={true}
-        >{routes}</StaticRouter>
+        <StaticRouter location={{pathname: reqUrl.pathname}}>
+            {routes}
+        </StaticRouter>
     );
 
     const helmet = Helmet.renderStatic();

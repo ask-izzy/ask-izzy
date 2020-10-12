@@ -1,0 +1,14 @@
+.ResultsList {
+    margin: 0;
+    padding-left: 0;
+    list-style-type: none;
+
+    > * {
+        padding: 1em 1em 2em;
+        border-top: 10px solid $brand-bg-light;
+
+        &:first-child {
+            border-top: 0;
+        }
+    }
+}

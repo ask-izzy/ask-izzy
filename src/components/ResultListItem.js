@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import {Link} from "react-router-dom";
 import PropTypes from "proptypes";
 import fixtures from "../../fixtures/services";
 
@@ -13,6 +14,7 @@ import DebugServiceRecord from "./DebugServiceRecord";
 
 import LinkListItem from "./LinkListItem";
 import Accessibility from "./Accessibility";
+import Eligibility from "../components/Eligibility";
 import OpeningTimes from "./OpeningTimes";
 import Ndis from "./Ndis";
 import TransportTime from "./TransportTime";
@@ -82,70 +84,44 @@ class ResultListItem extends React.Component<{
         } = this.props;
 
         return (
-            <LinkListItem
-                className="plain-text ResultListItem"
-                to={`/service/${object.slug}`}
-                rightIcon={<icons.Chevron />}
-                onClick={this.recordViewDetail.bind(this)}
+            <div className="result supportService ResultListItem"
+                key={object.id}
             >
-
-                {this.renderLocation(object.Location())}
-
-                <h2 className="name">
-                    {object.name}
-                </h2>
-                <div className="site_name">
+                <Link
+                    className="title"
+                    to={`/service/${object.slug}`}
+                >
+                    <h3 className="name">
+                        {object.name}
+                    </h3>
+                </Link>
+                <h4 className="site_name">
                     {object.site.name}
                     <Ndis
                         className="ndis"
                         compact={true}
                         object={object}
                     />
-                </div>
-
+                </h4>
                 <OpeningTimes
                     className="opening_hours"
                     object={object.open}
-                />
-                <Accessibility object={object} />
-                <TransportTime
                     compact={true}
-                    location={object.Location()}
                 />
-
-                <IndigenousServiceIcon object={object} />
-                <LgbtiqIcon object={object} />
-                {this.props.nServiceProvisions > 0 && (
-                    <div>
-                        <ul className="related">
-                            {object.serviceProvisions
-                                .slice(0, this.props.nServiceProvisions)
-                                .map((service, index) =>
-                                    <li className="provision"
-                                        key={index}
-                                    >
-                                        {service}
-                                    </li>
-                                )
-                            }
-                        </ul>
-
-                        {this.nMoreServiceProvisions > 0 && (
-                            <div>
-                                {this.nMoreServiceProvisions} more…
-                            </div>
-                        )}
-                    </div>
-                )}
-
-                <DebugServiceRecord object={object} />
-                {object._explanation &&
-                    <DebugContainer message="Query score">
-                        <DebugQueryScore expl={object._explanation} />
-                    </DebugContainer>
-                }
-            </LinkListItem>
-
+                <div className="description">
+                    {object.shortDescription.map(
+                        (sentence, idx) =>
+                            <p key={idx}>{sentence}</p>
+                    )}
+                </div>
+                <Eligibility {...object} />
+                <Link
+                    className="learnMore"
+                    to={`/service/${object.slug}`}
+                >
+                    Learn More
+                </Link>
+            </div>
         );
     }
 }

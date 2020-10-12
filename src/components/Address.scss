@@ -1,22 +1,24 @@
 .Address {
     position: relative;
-    padding-left: 24px;
+    font-size: 16px;
+    display: flex;
+
+    > span, > div {
+        display: inline-block;
+        vertical-align: middle;
+    }
 
     .Address-wrapper {
-        display: inline-block;
-        width: 100%;
-
         color: $brand-text-dark;
         font-weight: 500;
     }
 
     .MapIcon {
-        position: absolute;
-        top: -10px;
-        left: -10px;
-
         width: 40px;
         height: 40px;
+        margin-left: -9px;
+        margin-right: 2px;
+        vertical-align: text-bottom;
     }
 
     .details {

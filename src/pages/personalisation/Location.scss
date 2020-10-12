@@ -1,10 +1,6 @@
 .Location {
     background: $brand-bg-light;
 
-    .HeaderBar .HeaderBarBanner::after {
-        border-right-color: $brand-bg-light;
-    }
-
     .done-button {
         position: sticky;
         bottom: -2px;
