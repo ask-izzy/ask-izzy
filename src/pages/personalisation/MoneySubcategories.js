@@ -8,9 +8,10 @@ export default class MoneySubcategories extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
     static defaultProps = {
         name: "sub-money",
-        question: "What do you need?",
+        question: "What kind of support do you need?",
         answers: {
             /* eslint-disable max-len */
+            "Centrelink": append("centrelink"),
             "Emergency aid": append("emergency aid"),
             "Bond or rental assistance": append("(bond assistance)"),
             "Financial assistance e.g. utility bills, petrol, food":
