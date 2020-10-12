@@ -29,6 +29,7 @@ const categories = [
             "q": "Housing",
         },
         personalisation: [
+            personalisation.HousingSubcategories,
             personalisation.Location,
             personalisation.Gender,
             personalisation.Age,
@@ -45,6 +46,7 @@ const categories = [
             "q": "money, hardship",
         },
         personalisation: [
+            personalisation.MoneySubcategories,
             personalisation.Location,
             personalisation.Age,
         ],
@@ -59,6 +61,7 @@ const categories = [
             "q": "(material aid), (food), (clothing), (meals), (toiletries)",
         },
         personalisation: [
+            personalisation.FoodSubcategories,
             personalisation.Location,
             personalisation.Age,
         ],
@@ -73,6 +76,7 @@ const categories = [
             "q": "counselling, mental health",
         },
         personalisation: [
+            personalisation.HealthSubcategories,
             personalisation.Location,
             personalisation.Age,
         ],
@@ -88,6 +92,7 @@ const categories = [
             service_type: ["employment"],
         },
         personalisation: [
+            personalisation.JobSubcategories,
             personalisation.Location,
             personalisation.Age,
         ],

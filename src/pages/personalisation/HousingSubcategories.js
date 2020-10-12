@@ -10,23 +10,12 @@ export default class HousingSubcategories extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
     static defaultProps = {
         name: "sub-housing",
-        question: "Which situation is most like yours?",
+        question: "What kind of support do you need?",
         answers: {
-            "On the street": housingCrisis(
-                () => Location.shouldInjectAccessPoints()
-            ),
-            "Couch surfing": remove("housing")
+            "Somewhere to sleep tonight": remove("housing")
                 .append("homeless accommodation"),
-            "In a rooming house": remove("housing")
+            "Help finding a place to live long term": remove("housing")
                 .append("community housing -(rooming house)"),
-            "Private rental": remove("housing")
-                .append("transitional accommodation"),
-            "Public housing": remove("housing")
-                .append("social housing")
-                .append("-(public rental)")
-                .append("-(public housing)"),
-            "Mortgaged housing": remove("housing")
-                .append("transitional accommodation"),
         },
     };
 
