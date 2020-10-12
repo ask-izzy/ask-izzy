@@ -4,26 +4,17 @@ import * as React from "react";
 import PropTypes from "proptypes";
 import components from "../components";
 import _s from "underscore.string";
+import routerContext from "../contexts/router-context";
 
-type Props = {
-    params: Object
-}
-
-export default class StyleGuideItem extends React.Component<Props, void> {
-    static propTypes = {
-        params: PropTypes.object,
-    };
-
-    constructor(props: Object) {
-        super(props);
-    }
+export default class StyleGuideItem extends React.Component<{}> {
+    static contextType = routerContext;
 
     getComponentName(): string {
-        return this.props.params.componentName;
+        return this.context.router.match.params.componentName;
     }
 
     getComponent(): React.ComponentType<any> {
-        /* TODO: Find why flow doesn't like this func. Mmight be because not all
+        /* TODO: Find why flow doesn't like this func. Might be because not all
            components have `sampleProps` defined. Might be able to narrow down
            what this function returns. */
         return components[this.getComponentName()];
@@ -35,6 +26,13 @@ export default class StyleGuideItem extends React.Component<Props, void> {
         if (!Component) {
             return (
                 <div>No such component {this.getComponentName()}</div>
+            );
+        }
+
+        // $FlowIgnore
+        if (!Component.sampleProps) {
+            return (
+                <div>Component does not have sample props</div>
             );
         }
 
