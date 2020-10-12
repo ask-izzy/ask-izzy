@@ -12,18 +12,24 @@ function ScrollToTop({ history, children }) {
         storage.setHistoryLength(newLength);
     }
 
-    useEffect(() => history.listen((location, action) => {
-        window.scrollTo(0, 0);
+    useEffect(() => {
+        let prevLocation = null
+        history.listen((location, action) => {
+            if (!prevLocation || location.pathname !== prevLocation.pathname) {
+                window.scrollTo(0, 0);
+            }
 
-        if (action === "POP") {
-            setHistoryLength(historyLength - 1);
-        }
+            if (action === "POP") {
+                setHistoryLength(historyLength - 1);
+            }
 
-        if (action === "PUSH") {
-            setHistoryLength(historyLength + 1);
-        }
+            if (action === "PUSH") {
+                setHistoryLength(historyLength + 1);
+            }
 
-    }), [])
+            prevLocation = location
+        })
+    }, [])
 
     return <Fragment>{children}</Fragment>;
 }
