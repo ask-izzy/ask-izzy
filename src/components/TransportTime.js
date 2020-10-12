@@ -12,7 +12,7 @@ import Spacer from "./Spacer";
 
 class TransportTime extends React.Component<{
     location: Location,
-    compact?: true,
+    compact?: Boolean,
 }, void> {
     static defaultProps = {
         compact: false,
@@ -120,14 +120,16 @@ class TransportTime extends React.Component<{
                     key={key}
                 >
                     {icon}
-                    <time dateTime={arrivalTime.toISOString()}>
-                        {
-                            travel &&
-                        travel.duration &&
-                        travel.duration.text
-                        }
-                    </time>
-                    {method}
+                    <span>
+                        <time dateTime={arrivalTime.toISOString()}>
+                            {
+                                travel &&
+                            travel.duration &&
+                            travel.duration.text
+                            }
+                        </time>
+                        {method}
+                    </span>
                 </div>
             );
 
