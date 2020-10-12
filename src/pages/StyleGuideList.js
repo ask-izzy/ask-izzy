@@ -6,20 +6,22 @@ import components from "../components";
 
 export default class StyleGuideList extends React.Component<{}, void> {
     render() {
+        const componentsList = Object
+            .entries(components)
+            .map(item => {return {name: item[0], component: item[1]}})
+            .sort((a, b) => a.name.localeCompare(b.name))
         return (
-            <ul>
-                {Object.keys(components).sort().map(this.renderItem)}
-            </ul>
-        );
-    }
-
-    renderItem(componentName: string) {
-        return (
-            <Link
-                to={`/styleGuide/component/${componentName}`}
-                key={componentName}
-                style={{clear: "both", float: "left"}}
-            >{componentName}</Link>
+            <ul>{componentsList.map(component =>
+                <li key={component.name}>
+                    <Link
+                        to={`/styleGuide/component/${component.name}`}
+                    >
+                        {component.name}
+                    </Link>{" "}
+                    {/* flow:disable */}
+                    {!component.component.sampleProps && "(No sample props)"}
+                </li>
+            )}</ul>
         );
     }
 }

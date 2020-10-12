@@ -38,6 +38,7 @@ import InputListItem from "./components/InputListItem";
 import LgbtiqIcon from "./components/LgbtiqIcon";
 import LimitedServicesBanner from "./components/LimitedServicesBanner";
 import LinkListItem from "./components/LinkListItem";
+import ListAllIcons from "./components/ListAllIcons";
 import ListItem from "./components/ListItem";
 import LogoWithShadow from "./components/LogoWithShadow";
 import NavBar from "./components/NavBar";
@@ -95,6 +96,7 @@ export default {
     LgbtiqIcon,
     LimitedServicesBanner,
     LinkListItem,
+    ListAllIcons,
     ListItem,
     LogoWithShadow,
     NavBar,
