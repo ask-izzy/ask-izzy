@@ -19,7 +19,9 @@ class Accessibility extends React.Component<{object: Service}, void> {
                     <icons.Accessibility
                         className="ColoredIcon brand-text-dark"
                     />
-                    {accessibilityMapping[issAccessibility]}
+                    <span>
+                        {accessibilityMapping[issAccessibility]}
+                    </span>
                 </div>
             );
         }

@@ -14,7 +14,8 @@ import icons from "../icons";
 function fixture(
     nowOpen: ?boolean,
     openingHours: Array<issOpeningHours>,
-    time: ?typeof moment.Moment
+    compact?: Boolean, 
+    time: ?typeof moment.Moment,
 ): Object {
     // Moment is fixed to Wednesday 15/9/2015 at 1pm
     time = time || moment("2015-09-09 1pm", "YYYY-MM-DD ha");
@@ -33,37 +34,48 @@ function fixture(
             }
         ),
         moment: timeFn,
+        compact,
     };
 }
 
 type Props = {
     moment?: Moment,
     object: ServiceOpening,
+    compact?: Boolean,
 }
 
 class OpeningTimes extends React.Component<Props, void> {
     static defaultProps = {
         moment: moment,
+        compact: false,
     };
 
     // Lots of permutations here because this component has
     // lots of complex logic. Should probably be split into
     // CurrentlyOpen/CurrentlyClosed components to simplify.
     static sampleProps = {
+        "Open (compat)": fixture(true, [{
+            day: "Wednesday",
+            open: "10:30:00",
+            close: "15:00:00",
+        }], true),
         open: fixture(true, [{
             day: "Wednesday",
             open: "10:30:00",
             close: "15:00:00",
         }]),
-        "Open for days": fixture(true, [{
-            day: "Wednesday",
-            open: "00:00:00",
-            close: "24:00:00",
-        }, {
-            day: "Thursday",
-            open: "00:00:00",
-            close: "24:00:00",
-        }]),
+        "Open for days": fixture(true, [
+            {
+                day: "Wednesday",
+                open: "00:00:00",
+                close: "24:00:00",
+            },
+            {
+                day: "Thursday",
+                open: "00:00:00",
+                close: "24:00:00",
+            }
+        ]),
         closed: fixture(false, [{
             day: "Thursday",
             open: "14:30:00",
@@ -119,13 +131,13 @@ class OpeningTimes extends React.Component<Props, void> {
         }
 
         return (
-            <div className="OpeningTimes">
+            <div className={
+                "OpeningTimes" + (this.props.compact ? " compact" : "")
+            }>
                 <ScreenReader>
                     <h4>Opening times</h4>
                 </ScreenReader>
                 <icons.Clock className="ColoredIcon brand-text-dark" />
-                {" "}
-                <span className="print-only">Open Times</span>
                 {renderMethod.apply(this)}
             </div>
         );
