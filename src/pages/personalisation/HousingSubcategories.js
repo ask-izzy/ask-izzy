@@ -2,37 +2,27 @@
 import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
-import SleepTonight from "./SleepTonight";
-import Location from "./Location";
-import { remove, housingCrisis } from "../../iss/Search";
+import { append } from "../../iss/Search";
 
 export default class HousingSubcategories extends BaseQuestion {
     static title: string = "Situation";
     static propTypes = BaseQuestion.propTypes;
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-housing",
-        question: "Which situation is most like yours?",
+        question: "What kind of support do you need?",
+        mandatory: true,
         answers: {
-            "On the street": housingCrisis(
-                () => Location.shouldInjectAccessPoints()
-            ),
-            "Couch surfing": remove("housing")
-                .append("homeless accommodation"),
-            "In a rooming house": remove("housing")
-                .append("community housing -(rooming house)"),
-            "Private rental": remove("housing")
-                .append("transitional accommodation"),
-            "Public housing": remove("housing")
-                .append("social housing")
-                .append("-(public rental)")
-                .append("-(public housing)"),
-            "Mortgaged housing": remove("housing")
-                .append("transitional accommodation"),
+            "Somewhere to sleep tonight":
+                append("(Homelessness Access Point) (Crisis accomodation)")
+                    .append({
+                        service_type: ["homeless access point"],
+                        catchment: true,
+                    }),
+            "Help finding a place to live long term":
+                append(
+                    "Housing -(coordinating bodies) -(housing information) " +
+                    "-(respite care) -(holiday accommodation) -hef"
+                ).append({ service_type: ["housing"] }),
         },
     };
-
-    static showPage(): boolean {
-        /* only show this question if the user has someone to sleep tonight */
-        return (SleepTonight.answer != "No");
-    }
 }

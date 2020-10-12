@@ -15,7 +15,8 @@ Feature: Personalisation header
         Then I should see "I'm looking for help for"
 
         When I click on the done button # Intro page
+         And I click on "Help finding a place to live long term" # Somewhere safe to sleep
          And I click on the done button # Gender
          And I click on "27 to 39"
          And I click on the done button # Demographics
-        Then I should see "Melbourne, Vic | 27-39"
+        Then I should see "Help finding a place to live long term | Melbourne, Vic | 27-39"

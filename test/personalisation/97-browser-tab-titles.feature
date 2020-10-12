@@ -16,6 +16,7 @@ Feature: Browser tab titles
     Scenario: Results page - browser tab title
         Given a fresh session
         And my location is "Melbourne, VIC"
+        And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
         And I am part of the following demographics
@@ -30,6 +31,7 @@ Feature: Browser tab titles
     Scenario: Answer summary - browser tab title
         Given a fresh session
         And my location is "Melbourne, VIC"
+        And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
         And I am part of the following demographics
@@ -45,6 +47,7 @@ Feature: Browser tab titles
     Scenario: Answer summary - browser tab title
         Given a fresh session
         And my location is "Melbourne, VIC"
+        And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
         And I am part of the following demographics

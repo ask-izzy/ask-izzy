@@ -24,21 +24,23 @@ Feature: History navigation
         And I should be at /accommodation/personalise
 
         When I click on the done button # Intro
+        Then I should see "What kind of support do you need?"
 
-        Then I should see "Do you identify as…"
+        When I click on "Help finding a place to live long term"
+        Then I should see "What gender do you identify most closely with?"
 
         When I click on "Female"
         Then I should see "How old are you?"
 
         When I click back from the browser UI
-        Then I should see "Do you identify as…"
+        Then I should see "What gender do you identify most closely with?"
 
         When I click on "Male"
         Then I should see "How old are you?"
 
         When I click on "18 to 26"
 
-        Then I should see "Melbourne, VIC | Men | 18-26"
+        Then I should see "Help finding a place to live long term | Melbourne, VIC | Men | 18-26"
         And I should see "Showing a place to stay services"
         And I should be at /accommodation/Melbourne-VIC/
         And I should see the results
@@ -60,7 +62,7 @@ Feature: History navigation
 
         Then I should be at /accommodation/Melbourne-VIC/
 
-        And I should see "Melbourne, VIC | Men | 18-26"
+        And I should see "Help finding a place to live long term | Melbourne, VIC | Men | 18-26"
 
         When I click back from the browser UI
         Then I should see "How old are you?"

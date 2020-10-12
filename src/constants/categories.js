@@ -13,7 +13,7 @@ const categories = [
         icon: icons.Advocacy,
         bannerImage: "housing",
         query: {
-            "q": "Tenancy",
+            "q": "rent landlord lease tenancy -disaster",
         },
         personalisation: [
             personalisation.Location,
@@ -26,9 +26,10 @@ const categories = [
         icon: icons.House,
         bannerImage: "centrelink",
         query: {
-            "q": "Housing",
+            "q": "",
         },
         personalisation: [
+            personalisation.HousingSubcategories,
             personalisation.Location,
             personalisation.Gender,
             personalisation.Age,
@@ -42,9 +43,10 @@ const categories = [
         icon: icons.Money,
         bannerImage: "money-help",
         query: {
-            "q": "money, hardship",
+            "q": "",
         },
         personalisation: [
+            personalisation.MoneySubcategories,
             personalisation.Location,
             personalisation.Age,
         ],
@@ -56,9 +58,10 @@ const categories = [
         icon: icons.Food,
         bannerImage: "food",
         query: {
-            "q": "(material aid), (food), (clothing), (meals), (toiletries)",
+            "q": "",
         },
         personalisation: [
+            personalisation.FoodSubcategories,
             personalisation.Location,
             personalisation.Age,
         ],
@@ -70,9 +73,10 @@ const categories = [
         icon: icons.Health,
         bannerImage: "support-counselling",
         query: {
-            "q": "counselling, mental health",
+            "q": "",
         },
         personalisation: [
+            personalisation.HealthSubcategories,
             personalisation.Location,
             personalisation.Age,
         ],
@@ -84,10 +88,10 @@ const categories = [
         icon: icons.Job,
         bannerImage: "finding-work",
         query: {
-            q: "employment -(coordinating bodies)",
-            service_type: ["employment"],
+            q: "",
         },
         personalisation: [
+            personalisation.JobSubcategories,
             personalisation.Location,
             personalisation.Age,
         ],

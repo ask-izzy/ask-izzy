@@ -7,6 +7,7 @@ Feature: Skip personalisation settings
 
     Background:
         Given my location is "Melbourne, Vic"
+        And I have somewhere to sleep tonight
         And I am not part of any relevant demographics
         And I visit /
 
@@ -14,7 +15,7 @@ Feature: Skip personalisation settings
         When I click on "A place to stay"
         Then I should see "I'm looking for help for"
         When I click on the done button # Intro
-        Then I should see "Do you identify as…"
+        Then I should see "What gender do you identify most closely with?"
 
         # Didn't answer the question
         When I click on the done button # Gender
@@ -26,6 +27,7 @@ Feature: Skip personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        What kind of support do you need?            | Help finding a place to live long term
         Where are you looking for help?              | Melbourne, Vic
         How do you identify?                         | (skipped)
         How old are you?                             | (skipped)

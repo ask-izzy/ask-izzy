@@ -233,7 +233,7 @@ app.get("/api/v3/search/", (req, res) => {
                 },
             ].map(ServiceFactory),
         });
-    } else if (req.query.q.match(/material aid/)) {
+    } else if (req.query.q.match(/^meals/)) {
         const object = {
             name: "Community Lunch",
             description: "A weekly lunch.",
