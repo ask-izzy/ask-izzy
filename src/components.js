@@ -50,7 +50,6 @@ import ResultListItem from "./components/ResultListItem";
 import ResultsList from "./components/ResultsList";
 import ResultsMap from "./components/ResultsMap";
 import ScreenReader from "./components/ScreenReader";
-import ScrollToTop from "./components/ScrollToTop";
 import ServiceListIntro from "./components/ServiceListIntro";
 import ServicePane from "./components/ServicePane";
 import Spacer from "./components/Spacer";
@@ -108,7 +107,6 @@ export default {
     ResultsList,
     ResultsMap,
     ScreenReader,
-    ScrollToTop,
     ServiceListIntro,
     ServicePane,
     Spacer,
