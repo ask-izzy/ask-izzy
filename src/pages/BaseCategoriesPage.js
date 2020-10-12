@@ -25,9 +25,14 @@ type State = {
     childServices?: Array<Service>
 }
 
-class BaseCategoriesPage<ExtraState = {}> extends React.Component<
-    Object, State & ExtraState> {
+class BaseCategoriesPage<ChildProps = {...}, ChildState = {...}>
+    extends React.Component<ChildProps, State & ChildState> {
     static contextType = routerContext;
+
+    constructor(props: Object, context: Object) {
+        super(props, context);
+        this.context = context
+    }
 
     /**
      * category:

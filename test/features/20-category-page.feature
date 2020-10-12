@@ -18,13 +18,14 @@ Feature: Category page
         Then I should see "Housing"
         Then I should see 3 search results for "women aged 26 to 64" in "Melbourne, VIC"
         And I should see the results
-        --------------------------------------------------------------------------
-        Service Name (name) | Site Name (site_name) | Service provisions (related)
-        ==========================================================================
-        Housing Service     | My Housing Service    | (nada)
-        Emergency Accom     | Youth Support Net     | (nada)
-        Womens Refuge       | Susan's House         | Crisis accommodation
-        --------------------------------------------------------------------------
+        ------------------------------------------------------------------------------------------
+        Service Name (name)          | Site Name (site_name) | Service provisions (related)
+        ==========================================================================================
+        Housing Service              | My Housing Service    | (nada)
+        Transitional Housing Service | My Housing Service    | Transitional accommodation
+        Emergency Accom              | Youth Support Net     | (nada)
+        Womens Refuge                | Susan's House         | Crisis accommodation
+        ------------------------------------------------------------------------------------------
 
         # The housing category has 3 results
         And I should not see "Load more results…"

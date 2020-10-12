@@ -417,14 +417,7 @@ export class Service {
     public_transport_info: string;
     referral_info: string;
     service_type: Array<string>;
-    site: {
-        id: number,
-        name: string,
-        organisation: {
-            id: number,
-            name: string,
-        },
-    };
+    site: Site;
     special_requirements: string;
     target_gender: issGender;
     type: issEntityType;
@@ -528,6 +521,15 @@ export class Service {
     get slug(): string {
         return slugify(`${this.id}-${this.site.name}`);
     }
+}
+
+export type Site = {
+    id: number,
+    name: string,
+    organisation: {
+        id: number,
+        name: string,
+    },
 }
 
 /**

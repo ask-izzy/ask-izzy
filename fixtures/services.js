@@ -126,7 +126,7 @@ const objects: Object = {
         name: "Emergency Accom",
         description: "A place to stay if you need it. Open to all u25",
         site: {
-            id: 333,
+            id: 335,
             name: "Youth Support Net",
         },
         service_types: ["Accommodation"],
@@ -148,7 +148,7 @@ const objects: Object = {
         name: "Womens Refuge",
         description: "Provides crisis accommodation for women",
         site: {
-            id: 333,
+            id: 334,
             name: "Susan's House",
         },
         service_types: ["Refuge"],

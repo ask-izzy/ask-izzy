@@ -50,7 +50,7 @@ type Props = {
     error: string,
     statusCode: number,
     loading: boolean,
-    category?: Category,
+    category?: ?Category,
     location: {pathname: string},
     title: string,
     meta: {total_count: number},

@@ -43,7 +43,7 @@
 @import "../components/Phone";
 @import "../components/ResultListItem";
 @import "../components/ResultList";
-@import "../components/ResultsMap";
+@import "../components/ResultsListPage/LoadingResultsHeader";
 @import "../components/ScreenReader";
 @import "../components/ServicePane";
 @import "../components/Spacer";
@@ -64,5 +64,6 @@
 @import "../pages/personalisation/Intro";
 @import "../pages/personalisation/ServicePage";
 @import "../pages/ResultsListPage";
+@import "../pages/ResultsMapPage";
 @import "../pages/StaticPage";
 @import "../pages/InformationPage";

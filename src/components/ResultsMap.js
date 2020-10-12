@@ -4,28 +4,28 @@ import * as React from "react";
 import _ from "underscore";
 import { GoogleMap, Marker, withGoogleMap } from "react-google-maps";
 
-import iss from "../iss";
-import type {Service} from "../iss";
+import type {Service, Site} from "../iss";
 import Maps from "../maps";
 import type {MapsApi} from "../maps";
-import ResultsList from "./ResultsList";
 import storage from "../storage";
 import routerContext from "../contexts/router-context";
 
 type Props = {
-    objects: Array<Object>,
+    services: Array<Service>,
+    sites: Array<Site>,
+    siteLocations: Object,
     onServicesChange?: Function,
+    onSiteSelect?: Function
 }
 
 type State = {
     coords?: ?{latitude: number, longitude: number},
-    selectedServices?: Array<Service>,
     maps?: MapsApi,
 }
 
 class ResultsMap extends React.Component<Props, State> {
 
-    _map: any;
+    #mapElmRef = null;
 
     constructor(props: Object) {
         super(props);
@@ -50,8 +50,8 @@ class ResultsMap extends React.Component<Props, State> {
 
     componentDidUpdate(prevProps: Object, prevState: Object) {
         if ((this.state.maps != prevState.maps) ||
-            (this.props.objects != prevProps.objects)) {
-            if (this.services().length) {
+            (this.props.sites != prevProps.sites)) {
+            if (this.props.sites.length) {
                 // N.B. getMap() returns a different promise each time, so
                 // there's no guarantee that the most recently set bounds
                 // will be the ones applied.
@@ -65,51 +65,23 @@ class ResultsMap extends React.Component<Props, State> {
         }
     }
 
-    clearSelection(): void {
-        if (this.state.selectedServices) {
-            this.setState({selectedServices: []});
-            if (this.props.onServicesChange) {
-                this.props.onServicesChange([]);
-            }
-        }
-    }
-
     /**
      * Get the Google Maps object.
      *
      * @returns {Promise} the Google Maps object.
      */
     getMap(): Promise<Object> { // FIXME: use actual type
-        const map = this._map;
-
         return new Promise((resolve, reject) => {
-            function checkMaps() {
-                if (map) {
-                    resolve(map);
+            let checkMaps = () => {
+                if (this.#mapElmRef) {
+                    resolve(this.#mapElmRef);
                 } else {
-                    setTimeout(checkMaps, 500);
+                    setTimeout(checkMaps, 100);
                 }
             }
 
             checkMaps();
         });
-    }
-
-    services(): Array<iss.Service> {
-        if (!this.props.objects) {
-            return [];
-        }
-
-        return this.props.objects.filter(
-            (service) => !service.Location().isConfidential()
-        );
-    }
-
-    get sites(): Array<Array<iss.Service>> {
-        return _.values(_.groupBy(
-            this.services(),
-            obj => obj.site.id
-        ));
     }
 
     /**
@@ -128,7 +100,7 @@ class ResultsMap extends React.Component<Props, State> {
 
         // Get the location of every service which has a location and is not a
         // crisis line.
-        let points = _.compact(this.services()
+        let points = _.compact(this.props.services
             .map(
                 (service) => service.location && !service.crisis ?
                     service.location.point : null
@@ -186,93 +158,75 @@ class ResultsMap extends React.Component<Props, State> {
     }
 
     onMapClick(): void {
-        this.clearSelection();
+        this.props.onSiteSelect &&
+            this.props.onSiteSelect(null)
     }
 
-    onMarkerClick(services: Array<Object>): void {
-        this.setState({selectedServices: services});
-        if (this.props.onServicesChange) {
-            this.props.onServicesChange(services);
-        }
-    }
-
-    onGoBack(event: SyntheticInputEvent<>): void {
-        event.preventDefault()
-        if (!_.isEmpty(this.state.selectedServices)) {
-            this.clearSelection();
-        } else {
-            this.context.router.history.goBack();
-        }
+    onMarkerClick(site: Site): void {
+        this.props.onSiteSelect &&
+            this.props.onSiteSelect(site)
     }
 
     render() {
-        const selectedServices = this.state.selectedServices || [];
-
         return (
             <div className="ResultsMap">
                 { /* we can't create the map component until the API promise
                      * resolves */
                     this.state.maps && this.renderMap()
                 }
-                <ResultsList
-                    results={selectedServices}
-                />
             </div>
         );
     }
 
-    renderMap() {
+    renderMap = () => (
+        <GoogleMap
+            ref={elm => {
+                this.#mapElmRef = elm
+            }}
+            defaultCenter={{
+                lat: -34.397,
+                lng: 150.644,
+            }}
+            options={{disableDefaultUI: true, zoomControl: true}}
+            defaultZoom={12}
+            onClick={this.onMapClick.bind(this)}
+        >
+            {
+                this.state.coords && (
+                    <Marker
+                        title="You are here"
+                        icon={{
+                            url: "/static/images/you-are-here.png",
+                            scaledSize: {width: 32, height: 32},
+                        }}
+                        position={{
+                            lat: this.state.coords.latitude,
+                            lng: this.state.coords.longitude,
+                        }}
+                    />
+                )
+            }
+            {
+                this.props.sites.map(site => {
+                    /* the site must have a public location */
+                    const point = this.props.siteLocations[site.id].point
 
-        return (
-            <GoogleMap
-                ref={elem => {
-                    this._map = elem
-                }}
-                defaultCenter={{
-                    lat: -34.397,
-                    lng: 150.644,
-                }}
-                options={{disableDefaultUI: true, zoomControl: true}}
-                defaultZoom={12}
-                onClick={this.onMapClick.bind(this)}
-            >
-                {
-                    this.state.coords && (
+
+                    return point && (
                         <Marker
-                            title="You are here"
-                            icon={{
-                                url: "/static/images/you-are-here.png",
-                                scaledSize: {width: 32, height: 32},
-                            }}
+                            key={site.id.toString()}
+                            title={site.name}
                             position={{
-                                lat: this.state.coords.latitude,
-                                lng: this.state.coords.longitude,
+                                lat: point.lat,
+                                lng: point.lon,
                             }}
+                            onClick={this.onMarkerClick.bind(this, site)}
                         />
                     )
-                }
-                {
-                    this.sites.map((objects, index) => {
-                        /* the site must have a public location */
-                        // eslint-disable-next-line max-len
-                        const point = objects[0].location ? objects[0].location.point : null;
-
-                        return point && (
-                            <Marker
-                                key={index}
-                                title={objects[0].site.name}
-                                position={{
-                                    lat: point.lat,
-                                    lng: point.lon,
-                                }}
-                                onClick={this.onMarkerClick.bind(this, objects)}
-                            />
-                        )
-                    })
-                }
-            </GoogleMap>
-        );
-    }
+                })
+            }
+        </GoogleMap>
+    )
 }
 
 export default withGoogleMap(ResultsMap);
