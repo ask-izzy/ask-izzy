@@ -1,149 +1,170 @@
 $appbar-text-line-height: 42px;
 $colour-red: $brand-red;
 $colour-grey: #f8f9f9;
+.AppBarContainer {
+    .AppBar {
+        display: flex;
+        position: fixed;
+        flex-direction: row;
 
-.AppBarSpacer {
-    width: 100%;
-    height: $appbar-height;
-
-    @media print {
-        display: none;
-    }
-}
-
-.AppBar {
-    display: flex;
-    position: fixed;
-    flex-direction: row;
-
-    @media print {
-        display: none;
-    }
-
-    width: 100%;
-    max-width: 800px;
-    height: $appbar-height;
-    min-height: auto;
-
-    background-color: $brand-bg-dark;
-    color: $white;
-
-    text-overflow: ellipsis;
-    z-index: 2;
-
-    & > .button-container {
-        flex: 1;
-        z-index: 2;
-    }
-
-    .button-container a {
-        color: $white;
-        font-size: 14px;
-        line-height: $appbar-height;
-        text-align: center;
-        text-decoration: none;
-        vertical-align: middle;
-    }
-
-    .title {
-        max-width: 80%;
-        margin: auto;
-        padding: 0;
-
-        font-size: 16px;
-        font-weight: 500;
-        line-height: $appbar-text-line-height;
-
-        text-align: center;
-
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
-
-    .BackButton {
-        display: relative;
-
-        min-width: 44px;
-
-        height: $appbar-height;
-        padding: 0;
-
-        color: $white;
-
-        text-align: left;
-        text-decoration: none;
-        overflow: hidden;
-
-        &:focus {
-            background-color: $brand-pane-alt-light-translucent;
-        }
-
-        .Icon {
-            margin: 0;
-            padding: 0;
-
-            path {
-                fill: $white;
-            }
-        }
-
-        .ChevronBackIcon {
-            width: $appbar-height;
-            height: $appbar-height;
-        }
-
-        span {
-            margin-left: -6px;
-            float: left;
-        }
-
-        .back-label {
-
-            height: $appbar-height;
-
-            margin-top: 1px;
-
-            font-size: 14px;
-            line-height: $appbar-text-line-height;
-
-            text-overflow: ellipsis;
-
-        }
-
-    }
-
-    // Quick Exit button
-    div.quick-exit {
-        height: $appbar-height;
-        margin-left: 5px;
-        padding: 0 15px;
-        float: right;
-        background-color: $colour-red;
-        font-weight: bold;
-        line-height: $appbar-height;
-        white-space: nowrap;
-        overflow: hidden;
-        vertical-align: middle;
-    }
-
-    /* if desktop */
-    .longer-text {
-        display: initial;
-    }
-
-    .shorter-text {
-        display: none;
-    }
-
-    /* mobile device (max width is 736px) */
-    @media only screen and (max-width: 768px) {
-        .longer-text {
+        @media print {
             display: none;
         }
 
-        .shorter-text {
+        width: 100%;
+        max-width: 800px;
+        height: $appbar-height;
+        min-height: auto;
+
+        background-color: $brand-bg-dark;
+        color: $white;
+
+        text-overflow: ellipsis;
+        z-index: 2;
+
+        & > .button-container {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .button-container a {
+            color: $white;
+            font-size: 14px;
+            line-height: $appbar-height;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+        }
+
+        .title {
+            max-width: 80%;
+            margin: auto;
+            padding: 0;
+
+            font-size: 16px;
+            font-weight: 500;
+            line-height: $appbar-text-line-height;
+
+            text-align: center;
+
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .BackButton {
+            display: relative;
+
+            min-width: 44px;
+
+            height: $appbar-height;
+            padding: 0;
+
+            color: $white;
+
+            text-align: left;
+            text-decoration: none;
+            overflow: hidden;
+
+            &:focus {
+                background-color: $brand-pane-alt-light-translucent;
+            }
+
+            .Icon {
+                margin: 0;
+                padding: 0;
+
+                path {
+                    fill: $white;
+                }
+            }
+
+            .ChevronBackIcon {
+                width: $appbar-height;
+                height: $appbar-height;
+            }
+
+            span {
+                margin-left: -6px;
+                float: left;
+            }
+
+            .back-label {
+
+                height: $appbar-height;
+
+                margin-top: 1px;
+
+                font-size: 14px;
+                line-height: $appbar-text-line-height;
+
+                text-overflow: ellipsis;
+
+            }
+
+        }
+
+        // Quick Exit button
+        div.quick-exit {
+            height: $appbar-height;
+            margin-left: 5px;
+            padding: 0 15px;
+            float: right;
+            background-color: $colour-red;
+            font-weight: bold;
+            line-height: $appbar-height;
+            white-space: nowrap;
+            overflow: hidden;
+            vertical-align: middle;
+        }
+
+        /* if desktop */
+        .longer-text {
             display: initial;
+        }
+
+        .shorter-text {
+            display: none;
+        }
+
+        /* mobile device (max width is 736px) */
+        @media only screen and (max-width: 768px) {
+            .longer-text {
+                display: none;
+            }
+
+            .shorter-text {
+                display: initial;
+            }
+        }
+    }
+
+    .AppBarSpacer {
+        width: 100%;
+        height: $appbar-height;
+
+        @media print {
+            display: none;
+        }
+    }
+
+    .betaBanner {
+        padding: 0.5em;
+        text-align: center;
+        color: $white;
+        background-color: $brand-pane-alt-darker;
+        a {
+            color: $white;
+        }
+
+        span {
+            display: inline-block;
+            .Icon {
+                vertical-align: middle;
+                path {
+                    fill: $white;
+                }
+            }
         }
     }
 }

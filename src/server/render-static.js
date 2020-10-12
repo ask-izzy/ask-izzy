@@ -44,7 +44,6 @@ function renderPage(uri: string, path: string, params: Object): void {
         const markup = ReactDOMServer.renderToString(
             <StaticRouter location={{pathname: reqUrl.pathname}}
                 context={context}
-                isRenderingStatic={true}
             >{routes}</StaticRouter>
         );
 

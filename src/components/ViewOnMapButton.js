@@ -28,7 +28,7 @@ export default class ViewOnMapButton extends React.Component<any, State> {
         return (
             <LinkListItem
                 className="ViewOnMapButton"
-                primaryText="View on a map"
+                primaryText="View results on map"
                 leftIcon={
                     <icons.Map />
                 }
