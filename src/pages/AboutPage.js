@@ -17,15 +17,18 @@ class AboutPage extends React.Component<{}, void> {
             >
                 <div className="AboutPage">
                     <p>
-                        When you’re looking for support, Ask Izzy can help you to
-                        find the services you need, now and nearby. It is free and
-                        anonymous, and you can search over 360,000 services to find
-                        housing, meals, healthcare, counselling, legal advice,
-                        addiction treatment and a whole lot more.
+                        Ask Izzy is a website that connects people in need with
+                        housing, a meal, money help, family violence support,
+                        counselling and much more.
                     </p>
                     <p>
-                        If you’re on the Telstra mobile network, you can access Ask
-                        Izzy even if you don’t have credit.
+                        It is free and anonymous, with over 370,000 services
+                        listed across Australia.
+                    </p>
+                    <p>
+                        And if you're on the Telstra or Vodafone mobile
+                        networks, you can access Ask Izzy on your phone even if
+                        you don't have credit or access to wifi.
                     </p>
                     <h3>
                         We’re always making improvements.
