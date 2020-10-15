@@ -86,8 +86,8 @@ class ResultsListPage extends ResultsPage<Props, State> {
             <div className="ResultsListPage">
                 <AppBar
                     title={this.title}
-                    backMessage={this.backButtonMessage()}
-                    onBackTouchTap={this.context.router.history.goBack}
+                    backMessage={"Home Page"}
+                    onBackTouchTap={() => this.context.router.history.push("/")}
                 />
                 <DebugContainer message="Debug personalisation">
                     <DebugPersonalisation
