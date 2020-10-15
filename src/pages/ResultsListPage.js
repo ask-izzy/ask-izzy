@@ -14,7 +14,7 @@ import HeaderBar from "../components/HeaderBar";
 import LimitedServicesBanner from "../components/LimitedServicesBanner";
 import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
-import {onBack} from "../utils/history";
+import history, {onBack} from "../utils/history";
 
 import * as gtm from "../google-tag-manager";
 import storage from "../storage";
@@ -86,8 +86,8 @@ class ResultsListPage extends ResultsPage<Props, State> {
             <div className="ResultsListPage">
                 <AppBar
                     title={this.title}
-                    backMessage={this.backButtonMessage()}
-                    onBackTouchTap={onBack}
+                    backMessage={"Home Page"}
+                    onBackTouchTap={() => history.push('/')}
                 />
                 <DebugContainer message="Debug personalisation">
                     <DebugPersonalisation
