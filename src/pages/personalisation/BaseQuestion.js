@@ -30,6 +30,7 @@ export type Props = {
     mobileView?: boolean,
     answersDesc: Object,
     category: ?Category,
+    mandatory?: Boolean,
 }
 
 export type State = {
@@ -251,7 +252,7 @@ class BaseQuestion extends Personalisation<Props, State> {
                         />)}
                 </div>
                 {this.props.showDVLinkBar && this.props.textDVLinkBar}
-                {this.renderDoneButton()}
+                {!this.props.mandatory && this.renderDoneButton()}
                 {
                     this.props.showBaseTextBox &&
                     Boolean(this.props.baseTextBoxComponent) &&
