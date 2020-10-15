@@ -59,7 +59,7 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     urlFor(subpath: string): string {
         // Rewrites the URL based on search location/personalisation
         const parts = decodeURIComponent(
-            this.props.location.pathname
+            this.context.router.location.pathname
         ).split("/");
         const location = storage.getLocation();
 

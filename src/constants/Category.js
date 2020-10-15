@@ -41,11 +41,8 @@ export default class Category {
         this.name = this.title;
         this.byline = this.subtitle;
         this.icon = props.icon;
-        this.key = this.slug || this.slug;
-        this.search = {
-            catchment: "prefer",
-            ...(props.query || props.search),
-        };
+        this.key = this.slug;
+        this.search = props.query;
         this.personalisation = props.personalisation;
     }
 }
