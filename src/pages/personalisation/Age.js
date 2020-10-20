@@ -2,6 +2,7 @@
 
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
+import storage from "../../storage";
 
 function ageGroups(
     ...groups: Array<issAgeGroup>
@@ -45,6 +46,21 @@ export default class Age extends BaseQuestion {
             )).append("aged"),
         },
     };
+
+    componentDidMount() {
+        super.componentDidMount && super.componentDidMount()
+        // Cheep hack to skip if centerlink
+        // If we need to skip more pages in future based on answers
+        // then spend some time writing more comprehensive solution
+        if (
+            this.props.category && this.props.category.slug === 'money' && 
+            storage.getItem('sub-money') === 'Centrelink'
+        ) {
+            this.onNextStep()
+            this.props.onDoneTouchTap()
+        }
+
+    }
 
     static headingValue(): string {
         if (!this.answer || (this.answer === "(skipped)")) {
