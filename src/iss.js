@@ -470,6 +470,11 @@ export class Service {
             description.push(sentences.shift());
         }
 
+        if (sentences.length > 0) {
+            description[description.length - 1] = 
+                description[description.length - 1].replace(/\.?$/, "…")
+        }
+
         return description;
     }
 
