@@ -12,7 +12,8 @@ export default class HousingSubcategories extends BaseQuestion {
         mandatory: true,
         answers: {
             "Somewhere to sleep tonight":
-                append("(Homelessness Access Point) (Crisis accomodation)"),
+                append("(Homelessness Access Point) (Crisis accomodation)")
+                .append({service_type: ["homeless access point"], catchment: true}),
             "Help finding a place to live long term":
                 append("Housing -(coordinating bodies) -(housing information) -(respite care) -(holiday accommodation) -hef")
                 .append({ service_type: ["housing"] }),
