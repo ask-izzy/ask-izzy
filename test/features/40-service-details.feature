@@ -7,15 +7,15 @@ Feature: Service details page
     Scenario: Description is limited to at least the first sentence + any extra sentences that fit under a total description length of 250 chars
        Given A service with:
         ----------------------------------------------
-        description: There is a service here, and its really quite helpful. You can get all sorts of things - blankets, food, other stuff too. I suggest you drop by and check us out. Our service is the best, its really just the best. Not sure why youre still reading at this point. Also we have penguins.
+        description: There is a service here, and its really quite helpful. You can get all sorts of things - blankets, food, other stuff too. I suggest you drop by and check us out. Our service is the best, its really just the best. Not sure why you're still reading at this point. Also we have penguins.
         ----------------------------------------------
         When I navigate to the service page
         Then I should see "There is a service here, and its really quite helpful."
         And I should see "You can get all sorts of things - blankets, food, other stuff too."
         And I should see "I suggest you drop by and check us out."
-        And I should see "Our service is the best, its really just the best."
-        And I should not see "Not sure why youre still reading at this point."
-        And I should not see "Also we have penguins"
+        And I should see "Our service is the best, its really just the best…"
+        And I should not see "Not sure why you're still reading at this point."
+        And I should not see "Also we have penguins."
 
     Scenario: The service provisions is limited to a set of dot points
        Given A service with:
