@@ -7,7 +7,6 @@ import _ from "underscore";
 
 import {geolocationAvailable} from "../../geolocation";
 import Personalisation from "../../mixins/Personalisation";
-import {Category} from "../../constants/categories";
 import components from "../../components";
 import icons from "../../icons";
 import posthog from "../../utils/posthog"
@@ -17,8 +16,6 @@ import * as iss from "../../iss";
 type Props = {
         name: string,
         onDoneTouchTap: Function,
-        siteFeatureFlags: Object,
-        category: ?Category
 }
 
 type State = {
@@ -229,10 +226,6 @@ class Location extends Personalisation<Props, State> {
     }
 
     render() {
-        const bannerName = this.props.category && this.props.category.bannerImage ? 
-            this.props.category.bannerImage 
-            : "purple"
-
         return (
             <div className="Location">
                 <components.HeaderBar
@@ -244,7 +237,7 @@ class Location extends Personalisation<Props, State> {
                     secondaryText={
                         "You don't have to answer, but this helps us give you better results"
                     }
-                    bannerName={bannerName}
+                    bannerName={this.bannerImage}
                 />
                 <div className="List">
                     {
