@@ -566,7 +566,7 @@ async function _search(
     let request_: searchRequest = {
         q: "",
         type: "service",
-        limit: 10,
+        limit: 5,
     };
 
     const searchUrlPath = "/api/v3/search/";
