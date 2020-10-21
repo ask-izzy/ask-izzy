@@ -236,8 +236,7 @@ class Location extends Personalisation<Props, State> {
                         </div>
                     }
                     secondaryText={
-                        "This will help find services closest to your chosen" +
-                            " location"
+                        "You don't have to answer, but this helps us give you better results"
                     }
                     bannerName={this.bannerName}
                     taperColour="Grey"

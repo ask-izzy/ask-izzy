@@ -170,8 +170,6 @@ class ResultsMap extends React.Component<Props, State> {
     }
 
     render() {
-        console.log('sites', this.props.sites)
-
         return (
             <div className="ResultsMap">
                 { /* we can't create the map component until the API promise
@@ -214,7 +212,6 @@ class ResultsMap extends React.Component<Props, State> {
                 }
                 {
                     this.props.sites.map(site => {
-                        console.log('site', site)
                         /* the site must have a public location */
                         const point = this.props.siteLocations[site.id].point
 
