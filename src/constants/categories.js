@@ -82,8 +82,8 @@ const categories = [
         ],
     }),
     new Category({
-        title: "Jobs and training",
-        subtitle: "words go here",
+        title: "Jobs, training and skill development",
+        subtitle: "Finding work, volunteering and training",
         slug: "jobs-and-training",
         icon: icons.Job,
         bannerImage: 'finding-work',
