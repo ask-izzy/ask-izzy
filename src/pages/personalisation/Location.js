@@ -16,7 +16,6 @@ import * as iss from "../../iss";
 type Props = {
         name: string,
         onDoneTouchTap: Function,
-        siteFeatureFlags: Object,
 }
 
 type State = {
