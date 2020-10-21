@@ -158,6 +158,7 @@ class BaseMultiQuestion extends BaseQuestion {
 
     render() {
         let selected = this.selected;
+
         return (
             <div
                 className={
