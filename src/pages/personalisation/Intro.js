@@ -46,10 +46,6 @@ class Intro extends Personalisation<Props, {}> {
         }
 
     render() {
-        const bannerName = this.props.category && this.props.category.bannerImage ? 
-            this.props.category.bannerImage 
-            : "purple"
-
         return (
             <div>
                 <components.HeaderBar
@@ -64,7 +60,7 @@ class Intro extends Personalisation<Props, {}> {
                             All of your answers are private and anonymous.
                         </div>
                     }
-                    bannerName={bannerName}
+                    bannerName={this.bannerImage}
                 />
                 <div className="body">
                     <h3>

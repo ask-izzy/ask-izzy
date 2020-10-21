@@ -57,17 +57,19 @@ class ResultsListPage extends ResultsPage<Props, State> {
 
         // We have to load this after the first render so we match
         // server-rendered markup on hydrate stage
-        const subCategory = this.category.slug === 'money' && 
-            storage.getItem('sub-money')
-        const topicInfo = this.category && getTopicInfo(
-            this.category,
-            subCategory,
-            storage.getLocation()
-        )
-        this.setState({
-            primaryInfo: topicInfo && topicInfo.primaryInfo,
-            keyInfo: topicInfo && topicInfo.keyInfo,
-        })
+        if (this.category) {
+            const subCategory = this.category.slug === 'money' && 
+                storage.getItem('sub-money')
+            const topicInfo = this.category && getTopicInfo(
+                this.category,
+                subCategory,
+                storage.getLocation()
+            )
+            this.setState({
+                primaryInfo: topicInfo && topicInfo.primaryInfo,
+                keyInfo: topicInfo && topicInfo.keyInfo,
+            })
+        }
     }
 
     recordMapClick(): void {
@@ -130,7 +132,7 @@ class ResultsListPage extends ResultsPage<Props, State> {
                             </ul>
                         </div>
                     }
-                    bannerName={this.category && this.category.bannerImage ? this.category.bannerImage : "purple"}
+                    bannerName={this.category && this.category.bannerImage ? this.category.bannerImage : "homepage"}
                 />
 
                 { this.state.primaryInfo && this.renderPrimaryInfo() }
