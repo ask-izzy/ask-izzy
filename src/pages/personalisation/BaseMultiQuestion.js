@@ -158,9 +158,6 @@ class BaseMultiQuestion extends BaseQuestion {
 
     render() {
         let selected = this.selected;
-        const bannerName = this.props.category && this.props.category.bannerImage ? 
-            this.props.category.bannerImage 
-            : "purple"
 
         return (
             <div
@@ -180,7 +177,7 @@ class BaseMultiQuestion extends BaseQuestion {
                     secondaryText={
                         this.props.byline
                     }
-                    bannerName={bannerName}
+                    bannerName={this.bannerImage}
                     alternateBackgroundColor={false}
                 />
                 <div className="List">

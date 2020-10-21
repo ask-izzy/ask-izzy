@@ -8,7 +8,6 @@ import HeaderBar from "../../components/HeaderBar";
 import InputListItem from "../../components/InputListItem";
 import FlatButton from "../../components/FlatButton";
 
-import {Category} from "../../constants/categories";
 import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
@@ -29,7 +28,6 @@ export type Props = {
     onNextStepCallback?: Function,
     mobileView?: boolean,
     answersDesc: Object,
-    category: ?Category,
     mandatory?: Boolean,
 }
 
@@ -263,14 +261,6 @@ class BaseQuestion extends Personalisation<Props, State> {
     }
 
     renderHeaderBar(): React.Element<any> {
-        let bannerName = this.props.category && this.props.category.bannerImage ? 
-            this.props.category.bannerImage 
-            : "purple"
-
-        if (this.props.name === "sub-indigenous") {
-            bannerName = "atsi";
-        }
-
         return (
             <HeaderBar
                 primaryText={
@@ -281,7 +271,7 @@ class BaseQuestion extends Personalisation<Props, State> {
                 secondaryText={
                     this.props.byline
                 }
-                bannerName={bannerName}
+                bannerName={this.bannerImage}
                 alternateBackgroundColor={false}
             />
         );
