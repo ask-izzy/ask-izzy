@@ -2,8 +2,14 @@
 
 import React from "react";
 import PropTypes from "proptypes";
+import {Category} from "../constants/categories";
 
-class Personalisation<Props, State> extends React.Component<Props, State> {
+type Props = {
+    category: ?Category,
+    name?: string
+}
+
+class Personalisation<ChildProps, ChildState> extends React.Component<ChildProps & Props, ChildState> {
     static contextTypes = {
         // Would be nice to specify type here,
         // but we can't have cyclic imports.
@@ -17,6 +23,16 @@ class Personalisation<Props, State> extends React.Component<Props, State> {
 
     previousStep(): void {
         this.context.controller.previousStep();
+    }
+
+    get bannerImage(): string {
+        if (this.props.name === "sub-indigenous") {
+            return "atsi"
+        } else if (this.props.category && this.props.category.bannerImage) {
+            return this.props.category.bannerImage
+        } else {
+            return "homepage"
+        }
     }
 }
 
