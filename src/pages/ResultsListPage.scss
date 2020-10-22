@@ -48,13 +48,24 @@
         visibility: hidden;
     }
 
+    .ContentList {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+
+        .ContentItem {
+            margin-bottom: 32px;
+        }
+    }
+
     .primaryInfo,
-    .keyInfos .keyInfo,
+    .keyInfo,
     .supportServices .supportService {
-        .title {
-            h3 {
-                margin: 0.5em 0 0.2em;
-                font-size: 1.3em;
+        h3 {
+            margin: 10px 0 5px;
+
+            .title {
+                font-size: 20px;
                 font-weight: 500;
             }
         }
@@ -79,18 +90,15 @@
         background-color: var(--colour-bg-standard-tint-2);
     }
 
-    .keyInfos {
+    .keyInfo {
         margin: $padding;
 
         > h3 {
+            margin: 32px 0;
             color: #{colours.get-static('colour-text-mid')};
             color: var(--colour-text-mid);
             font-size: 26px;
             font-weight: 500;
-        }
-
-        .keyInfo {
-            margin: 2em 0;
         }
     }
 
