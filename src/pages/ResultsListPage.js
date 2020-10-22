@@ -158,6 +158,12 @@ class ResultsListPage extends ResultsPage<Props, ExtraState> {
         </div>
     )
 
+    renderLoadingComponent() {
+        return (
+            <div className="progress"><icons.Loading className="big" /></div>
+        )
+    }
+
     renderPrimaryInfo() {
         if (!this.category) {
             return null
