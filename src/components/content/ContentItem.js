@@ -6,11 +6,11 @@ import Link from "../base/Link";
 import ReactMarkdown from "react-markdown";
 
 type Props = {
-    id: number,
+    id: string,
     title : string,
     subtitle?: string,
     link: string,
-    body: ReactNode,
+    body: string,
 };
 
 class ContentItem extends React.Component<Props> {
@@ -20,7 +20,7 @@ class ContentItem extends React.Component<Props> {
             <li className="ContentItem">
                 <h3>
                     <Link
-                        className="learnMore"
+                        className="title"
                         to={this.props.link}
                         rel="noopener noreferer"
                     >
