@@ -5,12 +5,28 @@ import type {Node as ReactNode} from "react";
 
 import ContentItem from "./ContentItem";
 
+type DefaultProps = {|
+    className: string,
+|}
+
+type Content = {
+    Title: string,
+    id: string,
+    Body?: string,
+    Link: string,
+    Author?: string,
+}
+
 type Props = {
-    items? : Array<Object>,
+    ...DefaultProps,
+    items? : Array<Content>,
     category?: boolean,
 };
 
 class ContentList extends React.Component<Props> {
+    static defaultProps: DefaultProps = {
+        className: "",
+    }
 
     render(): ReactNode {
         return (
