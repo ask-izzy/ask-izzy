@@ -82,7 +82,7 @@ const categories = [
         ],
     }),
     new Category({
-        title: "Jobs, training and skill development",
+        title: "Jobs, training and skills development",
         subtitle: "Finding work, volunteering and training",
         slug: "jobs-and-training",
         icon: icons.Job,
