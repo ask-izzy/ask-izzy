@@ -8,9 +8,9 @@ import type { DocumentNode } from "graphql";
 const Query = ({ children, query, args, loadingComponent, errorComponent }: {
   children: any,
   query: DocumentNode,
-  args: Object,
-  loadingComponent: any,
-  errorComponent: any
+  args?: Object,
+  loadingComponent?: any,
+  errorComponent?: any
 }) => {
     /*
       Paramaters:
