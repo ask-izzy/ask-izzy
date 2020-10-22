@@ -67,10 +67,6 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
     static getCovidCategory(slug: string): ?CovidSupportCategory {
         const cat: ?CovidSupportCategory = covidSupportCategories
             .find(cat => cat.slug === slug)
-        // if (!cat) {
-        //     console.error(covidSupportCategories)
-        //     throw new Error(`Covid Category "${slug}" is not defined`)
-        // }
 
         return cat
     }
