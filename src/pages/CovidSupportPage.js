@@ -29,12 +29,18 @@ import externalResourcesQuery from "../queries/content/externalResources.js";
 
 import type { Service } from "../iss";
 import NotFoundStaticPage from "./NotFoundStaticPage"
+import { stateFromLocation } from "../utils";
+import {onBack} from "../utils/history";
 
-class CovidSupportPage extends BaseCategoriesPage {
+type ExtraState = {
+    covidCategory: Object,
+}
+
+class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
     constructor(props: Object) {
         super(props);
         const covidCategory = CovidSupportPage.getCovidCategory(
-            this.props.params.supportCategorySlug
+            this.props.match.params.supportCategorySlug
         )
 
         this.state = {
@@ -85,7 +91,7 @@ class CovidSupportPage extends BaseCategoriesPage {
             return "Rent";
         case "food-and-everyday":
             return "Food";
-        case "mental-health-and-wellbeing":
+        case "mental-health":
             return "Mental health";
         default:
             break;
@@ -207,10 +213,6 @@ class CovidSupportPage extends BaseCategoriesPage {
         }
     }
 
-    onBackClick(event: SyntheticInputEvent<>): void {
-        this.context.router.goBack();
-    }
-
     onServicesChange(services: Array<Service>) {
         this.setState({ childServices: services });
     }
@@ -221,10 +223,11 @@ class CovidSupportPage extends BaseCategoriesPage {
 
     render() {
         const covidCategory = this.state.covidCategory
-        const primaryInfo = this.state.primaryInfo
-        const keyInfo = this.state.keyInfo
+        const loadingComponent = (
+            <div className="progress"><icons.Loading className="big" /></div>
+        )
 
-        if (!covidCategory || !primaryInfo || !keyInfo) {
+        if (!covidCategory) {
             return (
                 <NotFoundStaticPage/>
             )
@@ -234,7 +237,7 @@ class CovidSupportPage extends BaseCategoriesPage {
                     <AppBar
                         title={this.title}
                         backMessage={this.backButtonMessage()}
-                        onBackTouchTap={this.onBackClick.bind(this)}
+                        onBackTouchTap={onBack}
                     />
                     <DebugContainer message="Debug personalisation">
                         <DebugPersonalisation
@@ -272,59 +275,78 @@ class CovidSupportPage extends BaseCategoriesPage {
                         }
                         bannerName={"purple covid_" + covidCategory.slug}
                     />
-                    }
-                    bannerName={"purple covid_" + this.state.covidCategory.slug}
-                />
 
                     <a
                         className="anchor"
                         id="tools"
                     />
-                    <div className="primaryInfo">
-                        <Query
-                            query={externalResourcesQuery}
-                            category={
-                                [
+
+                    <Query
+                        query={externalResourcesQuery}
+                        loadingComponent={loadingComponent}
+                        args={
+                            {
+                                "category": [
                                     this.getContentCat(
                                         this.state.covidCategory.slug
                                     ),
-                                ]
+                                ],
+                                "tag": [
+                                    "Tool",
+                                ],
+                                "state": [
+                                    stateFromLocation(),
+                                ],
                             }
-                            tag={["Tool", "Covid19"]}
-                        >
-                            {data => (
-                                <ContentList
-                                    className="featured"
-                                    items={data.data.externalResources}
-                                />
-                            )}
-                        </Query>
-                    </div>
+                        }
+                    >
+                        {data => (
+                            !data.data.externalResources.length > 0 ? "" : (
+                                <div className="primaryInfo">
+                                    <ContentList
+                                        className="featured"
+                                        items={data.data.externalResources}
+                                    />
+                                </div>
+                            )
+                        )}
+                    </Query>
 
                     <a
                         className="anchor"
                         id="information"
                     />
-                    <div className="keyInfo">
-                        <h3>Key Information</h3>
-                        <Query
-                            query={externalResourcesQuery}
-                            category={
-                                [
+
+                    <Query
+                        query={externalResourcesQuery}
+                        loadingComponent={loadingComponent}
+                        args={
+                            {
+                                "category": [
                                     this.getContentCat(
                                         this.state.covidCategory.slug
                                     ),
-                                ]
+                                ],
+                                "tag": [
+                                    "Information",
+                                ],
+                                "state": [
+                                    stateFromLocation(),
+                                ],
                             }
-                            tag={["Information", "Covid19"]}
-                        >
-                            {data => (
-                                <ContentList
-                                    items={data.data.externalResources}
-                                />
-                            )}
-                        </Query>
-                    </div>
+                        }
+                    >
+                        {data => (
+                            !data.data.externalResources.length > 0 ? "" : (
+                                <div className="keyInfo">
+                                    <h3>Key Information</h3>
+                                    <ContentList
+                                        items={data.data.externalResources}
+                                    />
+                                </div>
+                            )
+                        )}
+                    </Query>
 
                     <a className="anchor"
                         id="services"
@@ -338,14 +360,14 @@ class CovidSupportPage extends BaseCategoriesPage {
                                 <li className="result supportService"
                                     key={object.id}
                                 >
-                                    <Link
-                                        className="title"
-                                        to={`/service/${object.slug}`}
-                                    >
-                                        <h3 className="name">
+                                    <h3 className="name">
+                                        <Link
+                                            className="title"
+                                            to={`/service/${object.slug}`}
+                                        >
                                             {object.name}
-                                        </h3>
-                                    </Link>
+                                        </Link>
+                                    </h3>
                                     <h4 className="site_name">
                                         {object.site.name}
                                         <Ndis
