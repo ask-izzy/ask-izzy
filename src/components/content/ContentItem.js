@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
 type Props = {
-    id: Number,
-    title : String,
-    subtitle?: String,
-    link?: String,
+    id: string,
+    title : string,
+    subtitle?: string,
+    link?: string,
+    body?: string,
 };
 
 class ContentItem extends React.Component<Props> {
@@ -21,7 +22,7 @@ class ContentItem extends React.Component<Props> {
             >
                 <h3>
                     <Link
-                        className="learnMore"
+                        className="title"
                         to={this.props.link}
                         rel="noopener noreferer"
                     >
