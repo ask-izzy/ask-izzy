@@ -22,6 +22,7 @@ import * as gtm from "../google-tag-manager";
 import storage from "../storage";
 import type { Service } from "../iss";
 import type Category from "../constants/Category";
+import { stateFromLocation } from "../utils";
 
 import Query from "../queries/query";
 import externalResourcesQuery from "../queries/content/externalResources.js";
@@ -118,60 +119,90 @@ class ResultsListPage extends ResultsPage<Props> {
 
             { this.renderCrisisLines() }
 
-            { this.state.primaryInfo && this.renderPrimaryInfo() }
+            { this.renderPrimaryInfo() }
 
-            { this.state.keyInfo && this.renderKeyInfo() }
+            { this.renderKeyInfo() }
 
             { this.renderSupportServices() }
         </div>
     )
 
+    renderLoadingComponent = () => (
+        <div className="resultsStatus">
+            <icons.Loading className="big" />
+        </div>
+    )
+
     renderPrimaryInfo() {
         return (
-            <React.Fragment>
-                <a className="anchor"
-                    id="tools"
-                />
-                <div className="primaryInfo">
-                    <Query
-                        query={externalResourcesQuery}
-                        category={[this.category.title]}
-                        tag={["Tool", "Covid19"]}
-                    >
-                        {data => (
-                            <ContentList
-                                items={data.data.externalResources}
+            <Query
+                query={externalResourcesQuery}
+                loadingComponent={this.renderLoadingComponent()}
+                args={
+                    {
+                        "category": [this.category.title],
+                        "tag": [
+                            "Tool",
+                        ],
+                        "state": [
+                            stateFromLocation(),
+                        ],
+                    }
+                }
+            >
+                {data => (
+                    !data.data.externalResources.length > 0 ? "" : (
+                        <React.Fragment>
+                            <a className="anchor"
+                                id="tools"
                             />
-                        )}
-                    </Query>
-                </div>
-            </React.Fragment>
+                            <div className="primaryInfo">
+                                <ContentList
+                                    className="featured"
+                                    items={data.data.externalResources}
+                                />
+                            </div>
+                        </React.Fragment>
+                    )
+                )}
+            </Query>
         )
     }
 
     renderKeyInfo() {
         return (
-            <React.Fragment>
-                <a
-                    className="anchor"
-                    id="information"
-                />
-                <div className="keyInfos">
-                    <h3>Key information</h3>
-                    <Query
-                        query={externalResourcesQuery}
-                        category={[this.category.title]}
-                        tag={["Information", "Covid19"]}
-                    >
-                        {data => (
-                            <ContentList
-                                className="featured"
-                                items={data.data.externalResources}
+            <Query
+                query={externalResourcesQuery}
+                loadingComponent={this.renderLoadingComponent()}
+                args={
+                    {
+                        "category": [this.category.title],
+                        "tag": [
+                            "Information",
+                        ],
+                        "state": [
+                            stateFromLocation(),
+                        ],
+                    }
+                }
+            >
+                {data => (
+                    !data.data.externalResources.length > 0 ? "" : (
+                        <React.Fragment>
+                            <a
+                                className="anchor"
+                                id="information"
                             />
-                        )}
-                    </Query>
-                </div>
-            </React.Fragment>
+                            <div className="keyInfo">
+                                <h3>Key information</h3>
+                                <ContentList
+                                    items={data.data.externalResources}
+                                />
+                            </div>
+                        </React.Fragment>
+                    )
+                )}
+            </Query>
         )
     }
 
