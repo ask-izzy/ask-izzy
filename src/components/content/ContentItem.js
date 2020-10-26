@@ -33,13 +33,13 @@ class ContentItem extends React.Component<Props> {
                 <div className="body">
                     <ReactMarkdown source={this.props.body} />
                 </div>
-                <Link
+                <a
                     className="learnMore"
-                    to={this.props.link}
+                    href={this.props.link}
                     rel="noopener noreferer"
                 >
                     Learn More
-                </Link>
+                </a>
             </li>
         );
     }
