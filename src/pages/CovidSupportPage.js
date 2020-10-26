@@ -81,11 +81,11 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
         switch (slug) {
         case "money":
             return "Money help";
-        case "place-to-stay":
+        case "accommodation":
             return "Housing";
-        case "rent-or-tenancy":
+        case "rent-and-tenancy":
             return "Rent";
-        case "food-and-everyday":
+        case "food-and-everyday-things":
             return "Food";
         case "mental-health":
             return "Mental health";
