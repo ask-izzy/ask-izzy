@@ -34,6 +34,8 @@ import {onBack} from "../utils/history";
 
 type ExtraState = {
     covidCategory: Object,
+    hasInfo: boolean,
+    hasTools: boolean,
 }
 
 class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
@@ -43,15 +45,23 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
             this.props.match.params.supportCategorySlug
         )
 
+        this.primaryInfoEl = null;
+        this.keyInfoEl = null;
+
         this.state = {
             isClient: false,
             childServices: [],
             covidCategory: covidCategory,
+            hasInfo: false,
+            hasTools: false,
         };
+
     }
 
     _component: any;
     _childComponent: any;
+    keyInfoEl: any;
+    primaryInfoEl: any;
 
     issParams(): ?Object {
         let query = Object.assign(
@@ -93,6 +103,15 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
             break;
         }
         return "";
+    }
+
+    componentDidUpdate = (prevProps: Object, prevState: Object) => {
+        if (this.primaryInfoEl && !prevState.hasTools) {
+            this.setState({ hasTools: true })
+        }
+        if (this.keyInfoEl && !prevState.hasInfo) {
+            this.setState({ hasInfo: true })
+        }
     }
 
     componentDidMount(): void {
@@ -264,9 +283,40 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
                         }
                         secondaryText={
                             <div>
-                                Helpful <a href="#tools">tools</a>,
-                                {" "}<a href="#information">information</a> and
-                                {" "}<a href="#services">services</a> nearby.
+                                Helpful&nbsp;
+                                {
+                                    this.state.hasTools &&
+                                    (
+                                        <span>
+                                            <a href="#tools">tools</a>{" "}
+                                        </span>
+                                    )
+                                }
+                                {
+                                    this.state.hasInfo &&
+                                    (
+                                        <span>
+                                            <a href="#information">
+                                                information
+                                            </a>
+                                            {" "}
+                                        </span>
+                                    )
+                                }
+                                {
+                                    (
+                                        this.state.hasInfo ||
+                                        this.state.hasTools
+                                    ) &&
+                                    (
+                                        <span>
+                                            and
+                                            {" "}
+                                        </span>
+                                    )
+                                }
+
+                                <a href="#services">services</a> nearby.
                             </div>
                         }
                         bannerName={"purple covid_" + covidCategory.slug}
@@ -296,16 +346,26 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
                             }
                         }
                     >
-                        {data => (
-                            !data.data.externalResources.length > 0 ? "" : (
-                                <div className="primaryInfo">
-                                    <ContentList
-                                        className="featured"
-                                        items={data.data.externalResources}
-                                    />
-                                </div>
-                            )
-                        )}
+                        {data => {
+                            if (data.data.externalResources.length > 0) {
+                                return (
+                                    <div
+                                        className="primaryInfo"
+                                        ref={
+                                            element => (
+                                                this.primaryInfoEl = element
+                                            )
+                                        }
+                                    >
+                                        <ContentList
+                                            className="featured"
+                                            items={data.data.externalResources}
+                                        />
+                                    </div>
+                                )
+                            }
+                            return null
+                        }}
                     </Query>
 
                     <a
@@ -334,7 +394,10 @@ class CovidSupportPage extends BaseCategoriesPage<ExtraState> {
                     >
                         {data => (
                             !data.data.externalResources.length > 0 ? "" : (
-                                <div className="keyInfo">
+                                <div
+                                    className="keyInfo"
+                                    ref={element => (this.keyInfoEl = element)}
+                                >
                                     <h3>Key Information</h3>
                                     <ContentList
                                         items={data.data.externalResources}
