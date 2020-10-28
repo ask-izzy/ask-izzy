@@ -22,6 +22,7 @@ import Button from "../components/base/Button";
 import Link from "../components/base/Link";
 import UserSnapResults from "../components/feedback/UserSnapResults";
 
+import routerContext from "../contexts/router-context";
 import Query from "../queries/query";
 import externalResourcesQuery from "../queries/content/externalResources.js";
 
@@ -29,7 +30,41 @@ import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
 
 
-class ResultsListPage extends ResultsPage {
+
+type ExtraState = {
+    hasInfo: boolean,
+    hasTools: boolean,
+}
+class ResultsListPage extends ResultsPage<{}, ExtraState> {
+    static contextType: any = routerContext;
+
+    constructor(props: Object, context: Object) {
+        super(props, context);
+
+        this.primaryInfoEl = null;
+        this.keyInfoEl = null;
+
+        this.state = {
+            ...this.state,
+            hasInfo: false,
+            hasTools: false,
+        };
+    }
+
+    keyInfoEl: any;
+    primaryInfoEl: any;
+
+    componentDidUpdate: (
+        prevProps: Object,
+        prevState: Object
+    ) => void = (prevProps, prevState) => {
+        if (this.primaryInfoEl && !prevState.hasTools) {
+            this.setState({ hasTools: true })
+        }
+        if (this.keyInfoEl && !prevState.hasInfo) {
+            this.setState({ hasInfo: true })
+        }
+    }
     render(): ReactElement<"div"> | ReactNode {
         if (this.state.searchType) {
             return this.renderPage()
@@ -74,12 +109,16 @@ class ResultsListPage extends ResultsPage {
                         <div>
                             What you'll find here:
                             <ul>
-                                <li><Link to="#tools">
-                                    <icons.DownArrow />Highlighted resource
-                                </Link></li>
-                                <li><Link to="#information">
-                                    <icons.DownArrow />Key information
-                                </Link></li>
+                                {this.state.hasTools && (
+                                    <li><Link to="#tools">
+                                        <icons.DownArrow />Highlighted resource
+                                    </Link></li>
+                                )}
+                                {this.state.hasInfo && (
+                                    <li><Link to="#information">
+                                        <icons.DownArrow />Key information
+                                    </Link></li>
+                                )}
                                 <li><Link to="#services">
                                     <icons.DownArrow />Support services
                                 </Link></li>
@@ -146,22 +185,30 @@ class ResultsListPage extends ResultsPage {
                     }
                 }
             >
-                {data => (
-                    !data.data.externalResources.length > 0 ? "" : (
-                        <React.Fragment>
+                {data => {
+                    if (data.data.externalResources.length > 0) {
+                        return (<React.Fragment>
                             <span
                                 className="anchor"
                                 id="tools"
                             />
-                            <div className="primaryInfo">
+                            <div
+                                className="primaryInfo"
+                                ref={
+                                    element => (
+                                        this.primaryInfoEl = element
+                                    )
+                                }
+                            >
                                 <ContentList
                                     className="featured"
                                     items={data.data.externalResources}
                                 />
                             </div>
-                        </React.Fragment>
-                    )
-                )}
+                        </React.Fragment>)
+                    }
+                    return null
+                }}
             </Query>
         )
     }
@@ -190,7 +237,10 @@ class ResultsListPage extends ResultsPage {
                                 className="anchor"
                                 id="information"
                             />
-                            <div className="keyInfo">
+                            <div
+                                className="keyInfo"
+                                ref={element => (this.keyInfoEl = element)}
+                            >
                                 <h3>Key information</h3>
                                 <ContentList
                                     items={data.data.externalResources}
