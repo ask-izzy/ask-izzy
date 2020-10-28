@@ -24,6 +24,7 @@ import type { Service } from "../iss";
 import type Category from "../constants/Category";
 import { stateFromLocation } from "../utils";
 
+import routerContext from "../contexts/router-context";
 import Query from "../queries/query";
 import externalResourcesQuery from "../queries/content/externalResources.js";
 
@@ -41,7 +42,39 @@ type Props = {
     search?: {search: string},
 }
 
-class ResultsListPage extends ResultsPage<Props> {
+type ExtraState = {
+    hasInfo: boolean,
+    hasTools: boolean,
+}
+
+class ResultsListPage extends ResultsPage<Props, ExtraState> {
+    static contextType = routerContext;
+
+    constructor(props: Object, context: Object) {
+        super(props, context);
+
+        this.primaryInfoEl = null;
+        this.keyInfoEl = null;
+
+        this.state = {
+            ...this.state,
+            hasInfo: false,
+            hasTools: false,
+        };
+    }
+
+    keyInfoEl: any;
+    primaryInfoEl: any;
+
+    componentDidUpdate = (prevProps: Object, prevState: Object) => {
+        if (this.primaryInfoEl && !prevState.hasTools) {
+            this.setState({ hasTools: true })
+        }
+        if (this.keyInfoEl && !prevState.hasInfo) {
+            this.setState({ hasInfo: true })
+        }
+    }
+
     recordMapClick(): void {
         if (this.props.search) {
             gtm.emit({
@@ -99,12 +132,16 @@ class ResultsListPage extends ResultsPage<Props> {
                     <div>
                     What you'll find here:
                         <ul>
-                            <li><a href="#tools">
-                                <icons.DownArrow />Highlighted resource
-                            </a></li>
-                            <li><a href="#information">
-                                <icons.DownArrow />Key information
-                            </a></li>
+                            {this.state.hasTools && (
+                                <li><a href="#tools">
+                                    <icons.DownArrow />Highlighted resource
+                                </a></li>
+                            )}
+                            {this.state.hasInfo && (
+                                <li><a href="#information">
+                                    <icons.DownArrow />Key information
+                                </a></li>
+                            )}
                             <li><a href="#services">
                                 <icons.DownArrow />Support services
                             </a></li>
@@ -150,21 +187,29 @@ class ResultsListPage extends ResultsPage<Props> {
                     }
                 }
             >
-                {data => (
-                    !data.data.externalResources.length > 0 ? "" : (
-                        <React.Fragment>
+                {data => {
+                    if (data.data.externalResources.length > 0) {
+                        return (<React.Fragment>
                             <a className="anchor"
                                 id="tools"
                             />
-                            <div className="primaryInfo">
+                            <div
+                                className="primaryInfo"
+                                ref={
+                                    element => (
+                                        this.primaryInfoEl = element
+                                    )
+                                }
+                            >
                                 <ContentList
                                     className="featured"
                                     items={data.data.externalResources}
                                 />
                             </div>
-                        </React.Fragment>
-                    )
-                )}
+                        </React.Fragment>)
+                    }
+                    return null
+                }}
             </Query>
         )
     }
@@ -193,7 +238,10 @@ class ResultsListPage extends ResultsPage<Props> {
                                 className="anchor"
                                 id="information"
                             />
-                            <div className="keyInfo">
+                            <div
+                                className="keyInfo"
+                                ref={element => (this.keyInfoEl = element)}
+                            >
                                 <h3>Key information</h3>
                                 <ContentList
                                     items={data.data.externalResources}
