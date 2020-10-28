@@ -194,7 +194,14 @@ class ResultsListPage extends ResultsPage<Props, ExtraState> {
                             <a className="anchor"
                                 id="tools"
                             />
-                            <div className="primaryInfo">
+                            <div
+                                className="primaryInfo"
+                                ref={
+                                    element => (
+                                        this.primaryInfoEl = element
+                                    )
+                                }
+                            >
                                 <ContentList
                                     className="featured"
                                     items={data.externalResources}
@@ -239,7 +246,10 @@ class ResultsListPage extends ResultsPage<Props, ExtraState> {
                                 className="anchor"
                                 id="information"
                             />
-                            <div className="keyInfo">
+                            <div
+                                className="keyInfo"
+                                ref={element => (this.keyInfoEl = element)}
+                            >
                                 <h3>Key information</h3>
                                 <ContentList
                                     items={data.externalResources}
