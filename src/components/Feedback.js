@@ -33,11 +33,9 @@ export default class Feedback extends React.Component<Props, State> {
         });
     }
 
-    toggleFeedback: (event: SyntheticEvent<>) => void = (event) => {
+    openUserSnap(event: SyntheticInputEvent<>): void {
         event.preventDefault();
-        this.setState(prevState => ({
-            collapsed: !prevState.collapsed,
-        }));
+        window.Usersnap.logEvent("display_menu");
     }
 
     render(): ReactElement<"div"> {
@@ -50,7 +48,7 @@ export default class Feedback extends React.Component<Props, State> {
                     <span>Details here incorrect?</span>&nbsp;
                     <a
                         href="#"
-                        onClick={this.toggleFeedback}
+                        onClick={this.openUserSnap}
                     >
                         Report an error
                     </a>
