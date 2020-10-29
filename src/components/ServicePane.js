@@ -130,7 +130,6 @@ export default class ServicePane extends React.Component<{
 
                     {this.renderServiceProvisions()}
                     {this.renderSiblings()}
-                    <FormFindInformation />
                 </div>
 
                 <DebugServiceRecord object={object} />
