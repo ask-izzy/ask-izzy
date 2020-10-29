@@ -16,7 +16,6 @@ import ContactMethods from "./ContactMethods";
 import DebugServiceRecord from "./DebugServiceRecord";
 import Eligibility from "./Eligibility";
 import Feedback from "./Feedback";
-import FormFindInformation from "./feedback/FormFindInformation";
 import HeaderBar from "./HeaderBar";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
@@ -137,7 +136,6 @@ export default class ServicePane extends React.Component<{
                             <Eligibility {...object} />
                             {this.renderServiceProvisions()}
                             {this.renderSiblings()}
-                            <FormFindInformation />
                         </div>
                     </div>
                     <div
