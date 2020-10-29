@@ -325,7 +325,7 @@ class ResultsListPage extends ResultsPage<{}, State> {
     }
 
     renderFeedbackCantFind(): ReactNode | void {
-        if (!this.searchIsLoading && this.state.searchPagesLoaded > 1) {
+        if (!this.searchIsLoading && this.state.searchPagesLoaded > 2) {
             return <UserSnapResults />
         }
     }
