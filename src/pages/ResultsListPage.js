@@ -15,7 +15,8 @@ import HeaderBar from "../components/HeaderBar";
 import LimitedServicesBanner from "../components/LimitedServicesBanner";
 import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
-import FormFeedbackCantFind from "../components/feedback/FormCantFind";
+import UserSnapResults from "../components/feedback/UserSnapResults";
+import ContentList from "../components/content/ContentList";
 
 import * as gtm from "../google-tag-manager";
 import routerContext from "../contexts/router-context";
@@ -158,7 +159,7 @@ class ResultsListPage extends ResultsPage<Props, State> {
                     />
                     {this.renderLoadMore()}
                     { !this.loading && this.state.loadMoreCount > 0 &&
-                        <FormFeedbackCantFind />
+                        <UserSnapResults />
                     }
                 </div>
             </div>
