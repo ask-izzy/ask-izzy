@@ -158,7 +158,7 @@ class ResultsListPage extends ResultsPage<Props, State> {
                         results={this.state.searchResults}
                     />
                     {this.renderLoadMore()}
-                    { !this.loading && this.state.loadMoreCount > 0 &&
+                    { !this.loading && this.state.loadMoreCount > 1 &&
                         <UserSnapResults />
                     }
                 </div>
