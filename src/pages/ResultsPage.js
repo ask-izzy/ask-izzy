@@ -260,7 +260,7 @@ class ResultsPage extends BaseCategoriesPage<State> {
                     }}
                     onServicesChange={this.onServicesChange.bind(this)}
                 />
-                { !this.loading && this.state.loadMoreCount > 0 &&
+                { !this.loading && this.state.loadMoreCount > 1 &&
                     <UserSnapResults />
                 }
             </div>
