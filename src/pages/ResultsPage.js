@@ -16,7 +16,7 @@ import DebugPersonalisation from "../components/DebugPersonalisation";
 import DebugSearch from "../components/DebugSearch";
 import ResultsListPage from "./ResultsListPage";
 import history from "../utils/history";
-import FormFeedbackCantFind from "../components/feedback/FormCantFind";
+import UserSnapResults from "../components/feedback/UserSnapResults"
 
 import type { Service } from "../iss";
 import NotFoundStaticPage from "./NotFoundStaticPage"
@@ -261,7 +261,7 @@ class ResultsPage extends BaseCategoriesPage<State> {
                     onServicesChange={this.onServicesChange.bind(this)}
                 />
                 { !this.loading && this.state.loadMoreCount > 0 &&
-                    <FormFeedbackCantFind />
+                    <UserSnapResults />
                 }
             </div>
         );
