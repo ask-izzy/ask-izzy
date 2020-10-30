@@ -239,7 +239,7 @@
   },
   {
     "Name": "Emergency Relief and Food Access Service",
-    "Display Title": "Help to identify and apply for emergency relief",
+    "Display Title": "Apply for emergency relief",
     "Subtitle": "Provided by the Financial Counselling Network",
     "Body text": "The free-call Emergency Relief and Food Access Service is here to support you in identifying and applying for emergency relief. You call call .... or make an online enquiry here https://www.financialcounsellingnetwork.org.au/emergency-relief-and-food-access-service/",
     "Category": "Money Help",
@@ -379,8 +379,8 @@
   },
   {
     "Name": "Jobs Hub",
-    "Display Title": "DESE Jobs Hub",
-    "Subtitle": "Dept of Education, Skills and Employment",
+    "Display Title": "Jobs Hub",
+    "Subtitle": "Department of Education, Skills and Employment",
     "Body text": "The Australian Government has developed a site to help workers impacted by COVID-19.",
     "Category": "Jobs, Skills, and Training",
     "State": ["VIC","WA","NT","ACT","SA","NSW","TAS","QLD"],
@@ -393,8 +393,8 @@
   },
   {
     "Name": "Job Jumpstart",
-    "Display Title": "Tips and ideas about jobs and careers",
-    "Subtitle": "Job Jumpstart",
+    "Display Title": "Job Jumpstart",
+    "Subtitle": "Department of Education, Skills and Employment",
     "Body text": "Job Jumpstart offers resources and activities to help you work out what jobs might suit you. It also provides tips and guidance on writing a résumé, preparing for interviews, choosing a job that suits you and connecting with employers.",
     "Category": "Jobs, Skills, and Training",
     "State": ["VIC","WA","NT","ACT","SA","NSW","TAS","QLD"],
@@ -408,8 +408,8 @@
   {
     "Name": "Australian Apprenticeships",
     "Display Title": "Explore the chance to learn new skills while getting paid",
-    "Subtitle": "Australian Government",
-    "Body text": "Australian Apprenticeships are available to anyone of working age and offer you opportunities to learn new skills and be paid in over 500 different jobs - learn more a about how this works",
+    "Subtitle": "Department of Education, Skills and Employment",
+    "Body text": "Australian Apprenticeships are available to anyone of working age and offer you opportunities to learn new skills and be paid in over 500 different jobs.",
     "Category": "Jobs, Skills, and Training",
     "State": ["VIC","WA","NT","ACT","SA","NSW","TAS","QLD"],
     "Type": "Secondary Info",
@@ -421,8 +421,8 @@
   },
   {
     "Name": "MySkills",
-    "Display Title": "Explore training options to start or change your career",
-    "Subtitle": "Australian Government",
+    "Display Title": "MySkills",
+    "Subtitle": "National Careers Institute",
     "Body text": "Myskills is a national directory of vocational education and training (VET) organisations and courses. Whether you are starting your career, looking to upskill or change direction, myskills can help you explore the skills you need.",
     "Category": "Jobs, Skills, and Training",
     "State": ["VIC","WA","NT","ACT","SA","NSW","TAS","QLD"],
@@ -463,7 +463,7 @@
   },
   {
     "Name": "Victoria Emergency Housing Support",
-    "Display Title": "Emergency Housing Support",
+    "Display Title": "Emergency Housing Support in Victoria",
     "Subtitle": "Victorian Statewide Homelessness Line",
     "Body text": "1800 825 955 will connect you with someone who can assess your needs. This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back.",
     "Category": "Housing",
@@ -505,7 +505,7 @@
   },
   {
     "Name": "Housing Connect",
-    "Display Title": "Housing assistance and support",
+    "Display Title": "Housing assistance and support Tasmania",
     "Subtitle": "Housing Connect - Dept of Health Tasmania",
     "Body text": "Housing Connect is a one-stop shop for ALL your housing and support needs. One assessment for everything from emergency accommodation to a long-term home. \nHousing Connect can be contacted 24 hours a day, 7 days a week.",
     "Category": "Housing",
@@ -533,7 +533,7 @@
   },
   {
     "Name": "Link2home",
-    "Display Title": "Homelessness information and referral to services",
+    "Display Title": "NSW Homelessness information and referral",
     "Subtitle": "Link2home",
     "Body text": "Link2home is the statewide homelessness information and referral telephone service. It is available 24 hours a day, 7 days a week, every day of the year.",
     "Category": "Housing",
@@ -547,7 +547,7 @@
   },
   {
     "Name": "Homelessness Gateway",
-    "Display Title": "Entry point into help with housing",
+    "Display Title": "Help with housing in SA",
     "Subtitle": "Homelessness Gateway",
     "Body text": "Open 24/7, we will assess your situation and work with you to find the best option to suit your needs.",
     "Category": "Housing",
@@ -555,7 +555,7 @@
     "Type": "Primary Info",
     "Link text": "Call 1800 003 308 (free call from a landline)",
     "Link URL": "https://www.sa.gov.au/topics/housing/emergency-shelter-and-homelessness/accessing-services",
-    "Status": "Potential",
+    "Status": "To Include",
     "Tags": "",
     "Notes": ""
   },
@@ -575,7 +575,7 @@
   },
   {
     "Name": "QLD Gov homeless hotline",
-    "Display Title": "Homelessness hotline",
+    "Display Title": "QLD Homelessness hotline",
     "Subtitle": "Queensland Government",
     "Body text": "Homeless Hotline can help you if you are homeless or at risk of becoming homeless. Calls are free (calls from mobiles are charged at applicable rates) and the service operates 24 hours a day, 7 days a week.",
     "Category": "Housing",
