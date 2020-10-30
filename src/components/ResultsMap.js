@@ -176,10 +176,6 @@ class ResultsMap extends React.Component<Props, State> {
                      * resolves */
                     this.state.maps && this.renderMap()
                 }
-                {/* <pre>{JSON.stringify(selectedServices, null, 2)}</pre> */}
-                {/* <ResultsList
-                    results={selectedServices}
-                /> */}
             </div>
         );
     }
@@ -232,25 +228,7 @@ class ResultsMap extends React.Component<Props, State> {
             </GoogleMap>
         
         return GoogleMapsUninited
-
-        // const GoogleMapInited = withGoogleMap(GoogleMapsUninited)
-
-        // return (
-        //     <GoogleMapInited
-        //         containerElement={
-        //             <div
-        //                 style={
-        //                     { height: `${this.calculateMapHeight()}px` }
-        //                 }
-        //             />
-        //         }
-        //         mapElement={<div style={{ height: `100%` }} />}
-        //     />
-        // );
-
-        // return <GoogleMapsUninited />
     }
 }
 
 export default withGoogleMap(ResultsMap);
-// export default ResultsMap;
