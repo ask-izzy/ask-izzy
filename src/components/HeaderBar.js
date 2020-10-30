@@ -38,7 +38,7 @@ class HeaderBar extends React.Component<Props, void> {
             <div className={headerBarClassName}>
                 <div className={bannerClassName}>
 
-                    <div className="BlackBanner" />
+                    <div className="blackBanner" />
                 </div>
                 <div className="HeaderBarContent">
                     <div className="primary">

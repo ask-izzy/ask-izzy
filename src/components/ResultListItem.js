@@ -87,14 +87,14 @@ class ResultListItem extends React.Component<{
             <div className="result supportService ResultListItem"
                 key={object.id}
             >
-                <Link
-                    className="title"
-                    to={`/service/${object.slug}`}
-                >
-                    <h3 className="name">
+                <h3 className="name">
+                    <Link
+                        className="title"
+                        to={`/service/${object.slug}`}
+                    >
                         {object.name}
-                    </h3>
-                </Link>
+                    </Link>
+                </h3>
                 <h4 className="site_name">
                     {object.site.name}
                     <Ndis

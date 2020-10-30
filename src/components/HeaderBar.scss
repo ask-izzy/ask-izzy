@@ -109,17 +109,6 @@
             border-right: 100vw solid $brand-bg-light;
         }
 
-        // &.homepage {
-        //     &::after {
-        //         position: absolute;
-        //         bottom: 0%;
-        //         left: 0%;
-        //         border-top: 3.5vw solid transparent;
-        //         border-right: 100vw solid $white;
-        //         content: "";
-        //     }
-        // }
-
         /**
          * $bannerImages is injected in at webpack compile time based on the
          * filenames in the public/images/banners dir
@@ -163,7 +152,7 @@
             background-size: cover;
         }
 
-        .BlackBanner {
+        .blackBanner {
             position: absolute;
             top: 0;
             left: 0;
