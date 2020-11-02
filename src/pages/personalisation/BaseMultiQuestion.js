@@ -20,9 +20,7 @@ class BaseMultiQuestion extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
 
     renderDoneButton(): ?React.Element<any> {
-        const label = (this.selected.size) ?
-            "Done"
-            : "None of these";
+        const label = this.selected.size ? "Done" : "Skip";
 
         return (
             <FloatFromBottom
@@ -160,13 +158,6 @@ class BaseMultiQuestion extends BaseQuestion {
 
     render() {
         let selected = this.selected;
-        let bannerName = "";
-
-        try {
-            bannerName = this.context.controller.props.match.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
 
         return (
             <div
@@ -186,7 +177,7 @@ class BaseMultiQuestion extends BaseQuestion {
                     secondaryText={
                         this.props.byline
                     }
-                    bannerName={bannerName}
+                    bannerName={this.bannerImage}
                     alternateBackgroundColor={false}
                 />
                 <div className="List">

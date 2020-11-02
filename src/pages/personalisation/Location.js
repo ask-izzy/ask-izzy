@@ -12,12 +12,10 @@ import icons from "../../icons";
 import posthog from "../../utils/posthog"
 import storage from "../../storage";
 import * as iss from "../../iss";
-import CovidRelatedIssues from "../../components/CovidRelatedIssues";
 
 type Props = {
         name: string,
         onDoneTouchTap: Function,
-        siteFeatureFlags: Object,
 }
 
 type State = {
@@ -228,14 +226,6 @@ class Location extends Personalisation<Props, State> {
     }
 
     render() {
-        let bannerName = "";
-
-        try {
-            bannerName = this.context.controller.props.match.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
-
         return (
             <div className="Location">
                 <components.HeaderBar
@@ -245,10 +235,9 @@ class Location extends Personalisation<Props, State> {
                         </div>
                     }
                     secondaryText={
-                        "This will help find services closest to your chosen" +
-                            " location"
+                        "You don't have to answer, but this helps us give you better results"
                     }
-                    bannerName={bannerName}
+                    bannerName={this.bannerImage}
                 />
                 <div className="List">
                     {
@@ -313,17 +302,6 @@ class Location extends Personalisation<Props, State> {
                             <icons.Loading className="big" />
                         </div>
                     )
-                }
-                {
-                    !this.state.nextDisabled &&
-                    Location.locationInVic(this.state.locationName) &&
-                    (
-                        !posthog.posthogShouldBeLoaded ||
-                        this.props.siteFeatureFlags[
-                            "covid-categories-show-for-victoria"
-                        ]
-                    ) &&
-                    <CovidRelatedIssues onClick={this.onNextStep.bind(this)} />
                 }
                 {this.renderDoneButton()}
             </div>

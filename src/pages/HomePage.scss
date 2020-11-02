@@ -8,28 +8,109 @@ $bright-purple: #8a2be2;
 .HomePage {
     .notification {
         display: flex;
-        padding: 0.6em 0.1em;
-        padding-right: 1.5em;
-        border-left: $notification-accent 10px solid;
-        background-color: $notification-background;
+        flex-direction: column;
+        align-items: baseline;
+        padding: 1em;
+        border-top: $brand-pane-alt-dark 10px solid;
+        background-color: $brand-pane-alt-darker;
+        &, a {
+            color: $white;
+        }
 
-        div {
-            display: flex;
-            flex-direction: column;
-            padding: 0.4em 0.1em;
-
-            > * {
-                margin: 0.2em;
+        .returnToProd {
+            a {
+                font-weight: unset;
             }
 
-            h3 {
-                font-size: 1.1em;
+            a > span {
+                display: inline-block;
+                vertical-align: middle;
+                
+                .Icon {
+                    vertical-align: text-bottom;
+                }
+            }
+
+            margin-left: -8px;
+
+            &:hover {
+                a span {
+                    text-decoration: underline;
+                }
+
+                .ChevronBackIcon {
+                    transform: translateX(-2px);
+                }
             }
         }
 
-        a {
+        button {
+            margin: 0;
+            padding: 0.1em 0.3em;
+            
+            border: 3px solid $white;
+            border-radius: 8px;
+            background-color: $white;
             color: $brand-text-dark;
             font-weight: bold;
+
+            path {
+                fill: $brand-text-dark;
+            }
+
+            &:hover {
+                .ChevronIcon {
+                    transform: translateX(5px);
+                }
+            }
+
+            &::-moz-focus-inner {
+                padding: 0;
+                border: 0
+            }
+
+            span {
+                display: inline-block;
+                vertical-align: middle;
+                
+                .Icon {
+                    vertical-align: text-bottom;
+                }
+
+                .InfoIcon {
+                    margin-bottom: -3px;
+                }
+
+                .ChevronIcon {
+                    margin-bottom: -2px;
+                }
+            }
+
+            span:nth-child(2) {
+                @media only screen and (max-width: 386px) {
+                    width: 10em;
+                    margin: 0.5em 0.2em;
+                }
+            }
+
+            @media only screen and (max-width: 310px) {
+                display: flex;
+                flex-direction: column;
+
+                span:nth-child(2) {
+                    margin: 0.1em 0.2em;
+                }
+            }
+        }
+    }
+
+    .covid-info-notification {
+        padding: 1em;
+        border-left: $notification-accent 10px solid;
+        background-color: $notification-background;
+
+        &, a {
+            color: $brand-text-dark;
         }
     }
 
@@ -65,8 +146,8 @@ $bright-purple: #8a2be2;
         display: flex;
         flex-direction: column;
         justify-content: center;
-
         height: 210px;
+
         max-height: unset;
         padding-bottom: 20px;
 
@@ -128,6 +209,10 @@ $bright-purple: #8a2be2;
             &::after,
             &.homepage::after {
                 border-right: 100vw solid $brand-bg-mid-lighter;
+            }
+
+            .blackBanner {
+                background-color: rgba(0, 0, 0, 0.4);
             }
         }
 
@@ -243,5 +328,19 @@ $bright-purple: #8a2be2;
             }
         }
 
+    }
+
+    .cantFindLookingFor {
+        padding: 1.5em;
+        background-color: $brand-pane-alt-dark;
+        color: $white;
+
+        h3 {
+            margin-top: 0;
+        }
+
+        a {
+            color: $white;
+        }
     }
 }

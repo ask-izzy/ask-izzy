@@ -18,12 +18,13 @@ import HomePage from "./pages/HomePage";
 import NotFoundStaticPage from "./pages/NotFoundStaticPage";
 import AddServicePage from "./pages/AddServicePage";
 import DynamicPage from "./pages/DynamicPage";
+import BetaInfoStaticPage from "./pages/BetaInfoStaticPage";
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
-import {ResultsPageListing, ResultsPageMap} from "./pages/ResultsPage";
+import ResultsListPage from "./pages/ResultsListPage";
+import ResultsMapPage from "./pages/ResultsMapPage";
 import ServicePage from "./pages/ServicePage";
-import {CovidSupportPageListing} from "./pages/CovidSupportPage";
 
 export function makeTitle(route: string, params: Object): string {
     let unslug = (str) =>
@@ -132,19 +133,6 @@ export default (
             }}
         />
         <BasePage
-            path="/covid-19-support/:supportCategorySlug"
-            component={CovidSupportPageListing}
-            name="Covid Support Category"
-            title="COVID 19 Support"
-            state={{
-                pageType: vars => [
-                    "Covid Support",
-                    vars.covidCategoryDisplayName,
-                ],
-            }}
-            exact={true}
-        />
-        <BasePage
             path="/terms"
             component={DynamicPage}
             title="Terms of use"
@@ -163,6 +151,17 @@ export default (
                 pageType: vars => [
                     "Static Page",
                     "Online Safety",
+                ],
+            }}
+        />
+        <BasePage
+            path="/beta-info"
+            component={BetaInfoStaticPage}
+            title="About the Beta"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Beta Info",
                 ],
             }}
         />
@@ -315,7 +314,7 @@ export default (
         ].map(({resultsType, rootPath: str}) => [
             <BasePage
                 path={`${str}`}
-                component={ResultsPageListing}
+                component={ResultsListPage}
                 title=":page in :suburb, :state"
                 exact={true}
                 name={resultsType}
@@ -328,7 +327,7 @@ export default (
             />,
             <BasePage
                 path={`${str}/map`}
-                component={ResultsPageMap}
+                component={ResultsMapPage}
                 title="Map of :page in :suburb, :state"
                 exact={true}
                 name={resultsType}

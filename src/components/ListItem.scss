@@ -5,6 +5,61 @@
     text-decoration: none;
     cursor: pointer;
 
+    > div {
+        display: flex;
+        align-items: center;
+
+        > * { 
+            padding: 0.3em;
+        }
+
+        > .text {
+            flex: 1 1 auto;
+            min-width: 0;
+            > .primaryText,
+            > .secondaryText {
+                margin: 0.2em 0;
+            }
+            > .primaryText {
+                color: $brand-text-dark;
+
+                font-size: 16px;
+                line-height: 150%;
+            }
+
+            > .secondaryText {
+                color: $brand-text-mid;
+
+                font-size: 14px;
+
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+        }
+
+        > .leftIcon,
+        > .rightIcon {
+
+            > span {
+                display: block;
+            }
+
+            input {
+                position: absolute;
+
+                top: 16px;
+                left: 16px;
+
+                z-index: -99;
+            }
+
+            svg.Icon {
+                vertical-align: text-bottom;
+            }
+        }
+    }
+
     &.taller {
         padding-top: 10px;
         padding-bottom: 10px;
@@ -17,73 +72,15 @@
     }
 
     &.hero {
-        & > div {
-            padding-top: 11px;
-            padding-bottom: 11px;
-            padding-left: 58px;
-        }
-
-        .primaryText {
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 18px;
-        }
-    }
-
-    &.has-left-icon > div {
-        padding-left: 58px;
-    }
-
-    &.has-right-icon > div {
-        padding-right: 40px;
-    }
-
-    & > div {
-        padding: 16px;
-
-        & > .primaryText {
-            color: $brand-text-dark;
-
-            font-size: 16px;
-            line-height: 150%;
-        }
-
-        & > .secondaryText {
-            color: $brand-text-mid;
-
-            font-size: 14px;
-            line-height: 150%;
-
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-
-        & > .leftIcon,
-        & > .rightIcon {
-            position: absolute;
-
-            top: 13px;
-
-            height: 44px;
-
-            input {
-                position: absolute;
-
-                top: 16px;
-                left: 16px;
-
-                z-index: -99;
+        > div {
+            padding: 0.3em;
+            > .text {
+                .primaryText {
+                    font-size: 18px;
+                    font-weight: 500;
+                    line-height: 18px;
+                }
             }
-        }
-
-        & > .leftIcon {
-            top: 8px;
-            left: 8px;
-        }
-
-        & > .rightIcon {
-            right: 8px;
         }
     }
 }

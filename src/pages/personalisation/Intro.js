@@ -3,6 +3,7 @@
 import * as React from "react";
 
 import Personalisation from "../../mixins/Personalisation";
+import {Category} from "../../constants/categories";
 import components from "../../components";
 import storage from "../../storage";
 import * as iss from "../../iss";
@@ -10,6 +11,7 @@ import * as iss from "../../iss";
 type Props = {
     onDoneTouchTap: Function,
     name: string,
+    category: ?Category
 }
 
 class Intro extends Personalisation<Props, {}> {
@@ -17,7 +19,7 @@ class Intro extends Personalisation<Props, {}> {
         name: "intro",
     };
 
-    static title = "Intro";
+    static title = "Help Seeker";
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         return request;
@@ -44,14 +46,6 @@ class Intro extends Personalisation<Props, {}> {
         }
 
     render() {
-        let bannerName = "";
-
-        try {
-            bannerName = this.context.controller.props.match.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
-
         return (
             <div>
                 <components.HeaderBar
@@ -66,7 +60,7 @@ class Intro extends Personalisation<Props, {}> {
                             All of your answers are private and anonymous.
                         </div>
                     }
-                    bannerName={bannerName}
+                    bannerName={this.bannerImage}
                 />
                 <div className="body">
                     <h3>

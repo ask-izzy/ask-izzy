@@ -14,6 +14,10 @@ import storage from "../storage";
 import personalisation from "./personalisation";
 import routerContext from "../contexts/router-context";
 
+type Props = {
+    match: Object
+}
+
 type State = {
     meta?: ?searchResultsMeta,
     error?: any,
@@ -21,15 +25,23 @@ type State = {
     objects?: Array<Service>,
     nextDisabled?: boolean,
     floatingContainerHeight?: number,
-    isClient?: boolean,
     childServices?: Array<Service>
 }
 
-class BaseCategoriesPage<ExtraState = {}> extends React.Component<
-    Object, State & ExtraState> {
-    _category: Category;
-
+class BaseCategoriesPage<ChildProps = {...}, ChildState = {...}> 
+extends React.Component<Props & ChildProps, State & ChildState> {
     static contextType = routerContext;
+
+    constructor(props: Object, context: Object) {
+        super(props, context);
+        this.context = context
+    }
+
+    get slug(): string {
+        return this.context.router.match.params.page;
+    }
+    
+    #category: Category;
 
     /**
      * category:
@@ -37,22 +49,15 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
      * Return category information.
      */
     get category(): Category {
-        if (this._category) {
-            return this._category;
-        }
+        this.#category = this.#category || categories
+            .find(cat => cat.slug === this.slug);
 
-        let category = _.findWhere(categories, {
-            key: this.context.router.match.params.page ||
-            this.context.router.match.params.supportCategorySlug,
-        });
-
-        this._category = category;
-        return category;
+        return this.#category;
     }
 
     get title(): string {
         if (this.category) {
-            return this.category.name;
+            return this.category.title;
         } else if (this.search.q !== "undefined-search") {
             const quote = new RegExp(`["']`, "g");
             const search = decodeURIComponent(
@@ -99,7 +104,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         }
 
         return components.filter(component => {
-            if (this.props.isRenderingStatic) {
+            if (typeof window !== "undefined") {
                 if (typeof component.staticShowPage === "function") {
                     // $FlowIgnore
                     return component.staticShowPage();

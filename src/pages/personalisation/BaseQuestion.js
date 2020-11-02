@@ -28,6 +28,7 @@ export type Props = {
     onNextStepCallback?: Function,
     mobileView?: boolean,
     answersDesc: Object,
+    mandatory?: Boolean,
 }
 
 export type State = {
@@ -249,7 +250,7 @@ class BaseQuestion extends Personalisation<Props, State> {
                         />)}
                 </div>
                 {this.props.showDVLinkBar && this.props.textDVLinkBar}
-                {this.renderDoneButton()}
+                {!this.props.mandatory && this.renderDoneButton()}
                 {
                     this.props.showBaseTextBox &&
                     Boolean(this.props.baseTextBoxComponent) &&
@@ -260,18 +261,6 @@ class BaseQuestion extends Personalisation<Props, State> {
     }
 
     renderHeaderBar(): React.Element<any> {
-        let bannerName = "";
-
-        try {
-            bannerName = this.context.controller.props.match.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
-
-        if (this.props.name === "sub-indigenous") {
-            bannerName = "atsi";
-        }
-
         return (
             <HeaderBar
                 primaryText={
@@ -282,7 +271,7 @@ class BaseQuestion extends Personalisation<Props, State> {
                 secondaryText={
                     this.props.byline
                 }
-                bannerName={bannerName}
+                bannerName={this.bannerImage}
                 alternateBackgroundColor={false}
             />
         );

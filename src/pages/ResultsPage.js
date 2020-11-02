@@ -1,6 +1,7 @@
 /* @flow */
 
 import * as React from "react";
+import {Link} from "react-router-dom";
 
 import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
@@ -9,30 +10,45 @@ import storage from "../storage";
 import * as gtm from "../google-tag-manager";
 
 import AppBar from "../components/AppBar";
-import FlatButton from "../components/FlatButton";
-import ResultsMap from "../components/ResultsMap";
 import DebugContainer from "../components/DebugContainer";
 import DebugPersonalisation from "../components/DebugPersonalisation";
 import DebugSearch from "../components/DebugSearch";
+import HeaderBar from "../components/HeaderBar";
 import ResultsListPage from "./ResultsListPage";
 import routerContext from "../contexts/router-context";
+import ViewOnMapButton from "../components/ViewOnMapButton";
+import Eligibility from "../components/Eligibility";
+import OpeningTimes from "../components/OpeningTimes";
+import Ndis from "../components/Ndis";
+import type {searchResultsMeta, Service} from "../iss";
 
-import type { Service } from "../iss";
+
+import {Category} from "../constants/categories";
+import covidSupportCategories, {CovidSupportCategory}
+    from "../constants/covidSupportCategories";
+
 import NotFoundStaticPage from "./NotFoundStaticPage"
 
-class ResultsPage extends BaseCategoriesPage {
-    constructor(props: Object) {
-        super(props);
+type State = {
+    searchResultsMeta?: ?searchResultsMeta,
+    searchResults: Array<Service>,
+}
+
+
+class ResultsPage<ChildProps = {...}, ChildState = {...}>
+extends BaseCategoriesPage<ChildProps, State & ChildState> {
+    constructor(props: Object, context: Object) {
+        super(props, context);
+
         this.state = {
-            isClient: false,
-            childServices: [],
+            searchResultsMeta: undefined,
+            searchResults: [],
         };
     }
 
     static contextType = routerContext;
 
     _component: any;
-    _childComponent: any;
 
     issParams(): ?Object {
         // Build the search request.
@@ -61,16 +77,19 @@ class ResultsPage extends BaseCategoriesPage {
         return request;
     }
 
+    static getCovidCategory(slug: string): ?CovidSupportCategory {
+        const cat: ?CovidSupportCategory = covidSupportCategories
+            .find(cat => cat.slug === slug)
+
+        return cat
+    }
+
     componentDidMount(): void {
         super.componentDidMount();
 
-        this.setState({ isClient: true });
-
         gtm.emit({
             event: "searchResults",
-            searchQuery: decodeURIComponent(
-                this.context.router.match.params.search
-            ),
+            searchQuery: this.context.router.match.params.search,
             searchPage: this.context.router.match.params.page,
             location: storage.getLocation(),
         });
@@ -78,14 +97,13 @@ class ResultsPage extends BaseCategoriesPage {
         const request = this.issParams();
 
         if (!request) {
-            const sep = this
-                .props
-                .location
-                .pathname
+            const sep = this.context.router
+                .match
+                .url
                 .endsWith("/") ? "" : "/";
 
             this.context.router.history.replace(
-                `${this.props.location.pathname}${sep}personalise`
+                `${this.context.router.match.url}${sep}personalise`
             );
             return;
         }
@@ -93,8 +111,8 @@ class ResultsPage extends BaseCategoriesPage {
         iss.search(request)
             .then(data => {
                 this.setState({
-                    meta: data.meta,
-                    objects: data.objects,
+                    searchResultsMeta: data.meta,
+                    searchResults: data.objects,
                     error: undefined,
                 });
             })
@@ -128,9 +146,7 @@ class ResultsPage extends BaseCategoriesPage {
     async loadMore(): Promise<void> {
         gtm.emit({
             event: "LoadMoreSearchResults",
-            searchQuery: decodeURIComponent(
-                this.context.router.match.params.search
-            ),
+            searchQuery: this.context.router.match.params.search,
             searchPage: this.context.router.match.params.page,
             location: storage.getLocation(),
         });
@@ -143,22 +159,22 @@ class ResultsPage extends BaseCategoriesPage {
             sendDirectlyToGA: true,
         }, "GTM-54BTPQM");
 
-        if (!(this.state.meta && this.state.meta.next)) {
+        if (!(this.state.searchResultsMeta && this.state.searchResultsMeta.next)) {
             return;
         }
 
-        let next = this.state.meta.next;
+        let next = this.state.searchResultsMeta.next;
         let data;
 
         /* reenable the search spinner */
-        this.setState({meta: null});
+        this.setState({searchResultsMeta: null});
 
         try {
             data = await iss.requestObjects(next);
 
             this.setState({
-                meta: data.meta,
-                objects: data.objects,
+                searchResultsMeta: data.meta,
+                searchResults: data.objects,
                 error: undefined,
             });
 
@@ -180,21 +196,7 @@ class ResultsPage extends BaseCategoriesPage {
     }
 
     onBackClick(event: SyntheticInputEvent<>): void {
-        if (this._childComponent && this._childComponent.onGoBack) {
-            this._childComponent.onGoBack(event);
-        }
-
-        if (this._component.onGoBack) {
-            this._component.onGoBack(event);
-        }
-
-        if (!event.defaultPrevented) {
-            this.context.router.history.push("/");
-        }
-    }
-
-    onServicesChange(services: Array<Service>) {
-        this.setState({ childServices: services });
+        this.context.router.history.goBack();
     }
 
     component(): React.ComponentType<any> {
@@ -227,94 +229,81 @@ class ResultsPage extends BaseCategoriesPage {
                 <DebugContainer message="ISS Parameters">
                     <DebugSearch search={this.issParams()} />
                 </DebugContainer>
+                <div className="pageBanner">
+                    <icons.Info className={"big middle"}/>
+                    <span>You are using the Ask Izzy Beta.</span>
+                </div>
 
-                <Component
-                    ref={elem => {
-                        this._component = elem
-                    }}
-                    {...this.state}
-                    {...this.props}
-                    category={this.category}
-                    search={decodeURIComponent(
-                        this.context.router.match.params.search
-                    )}
-                    loadMore={this.renderLoadMore()}
-                    title={this.title}
-                    loading={this.loading}
-                    personalisationComponents={this.personalisationComponents}
-                    // The below props are only used for the ResultsMap
-                    // component - this is because react-google-maps >= 6.0.0
-                    // introduced a HOC to initialise the Google Map
-                    loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={
-                        <div
-                            style={
-                                { height: `${this.calculateMapHeight()}px` }
-                            }
-                        />
-                    }
-                    mapElement={<div style={{ height: `100%` }} />}
-                    childRef={elem => {
-                        this._childComponent = elem
-                    }}
-                    onServicesChange={this.onServicesChange.bind(this)}
+                <a className="anchor"
+                    id="services"
                 />
+                <div className="supportServices">
+                    <div className="heading">
+                        <h3>Support services</h3>
+                        <ViewOnMapButton
+                            to={this.context.router.location.pathname.replace(/\/?$/, "/map")}
+                            onClick={this.recordMapClick.bind(this)}
+                        />
+                    </div>
+                    <ul>
+                        {(this.state.objects || []).map(object =>
+                            <li className="result supportService"
+                                key={object.id}
+                            >
+                                <Link
+                                    className="title"
+                                    to={`/service/${object.slug}`}
+                                >
+                                    <h3 className="name">
+                                        {object.name}
+                                    </h3>
+                                </Link>
+                                <h4 className="site_name">
+                                    {object.site.name}
+                                    <Ndis
+                                        className="ndis"
+                                        compact={true}
+                                        object={object}
+                                    />
+                                </h4>
+                                {object.open.now_open === false && (<OpeningTimes
+                                    className="opening_hours"
+                                    object={object.open}
+                                    compact={true}
+                                />)}
+                                <div className="description">
+                                    {object.shortDescription.map(
+                                        (sentence, idx) =>
+                                            <p key={idx}>{sentence}</p>
+                                    )}
+                                </div>
+                                <Eligibility {...object} />
+                                <Link
+                                    className="learnMore"
+                                    to={`/service/${object.slug}`}
+                                >
+                                Learn More
+                                </Link>
+                            </li>
+                        )}
+                    </ul>
+                    {this.renderLoadMore()}
+                </div>
+
+                <div className="exitCovidFlowBox">
+                    <h3>Can’t find what you’re looking for?</h3>
+                    <span>Ask Izzy can help you to find the services{" "}
+                    you need now, and nearby.</span>
+                    <div className="return">
+                        <Link
+                            to="/"
+                        >
+                            Back to Ask Izzy home
+                        </Link>
+                    </div>
+                </div>
             </div>
         );
-    }
-
-    calculateMapHeight(): number {
-        const selectedServices = this.state.childServices || [];
-        let mapHeight = 2000;
-
-        if (!this.state.isClient) {
-            return mapHeight;
-        }
-
-        try {
-            /* calculate the height of the map */
-            /* TODO: Find why flow doesn't like the offsetHeight here
-               Might be because the DOM isn't actually rendered? */
-
-            mapHeight =
-                window.innerHeight -
-                // $FlowIgnore
-                document.querySelector(".AppBar").offsetHeight;
-
-            /* resize the map to make room
-             * for the selected results */
-            mapHeight -= 150 * selectedServices.length;
-
-            /* limit minimum height to 1/2 of the screen realestate */
-            mapHeight = Math.max(mapHeight,
-                window.innerHeight / 2);
-        } catch (error) {
-            //
-        }
-
-        return mapHeight;
-    }
-
-    renderLoadMore() {
-        if (this.state.meta && this.state.meta.next) {
-            return (
-                <div className="moreResultsContainer">
-                    <FlatButton
-                        className="MoreResultsButton"
-                        label="See more results"
-                        onClick={this.loadMore.bind(this)}
-                    />
-                </div>
-            );
-        }
-
-        if (this.loading) {
-            return (
-                <div className="progress">
-                    <icons.Loading className="big" />
-                </div>
-            );
-        }
     }
 
     backButtonMessage(): string {
@@ -322,24 +311,23 @@ class ResultsPage extends BaseCategoriesPage {
         return ""
     }
 
+    recordMapClick(): void {
+        if (this.props.search) {
+            gtm.emit({
+                event: "ViewOnMap",
+                search: this.props.search,
+                location: storage.getLocation(),
+            });
+        } else if (this.props.category) {
+            gtm.emit({
+                event: "ViewOnMap",
+                category: this.props.category,
+                location: storage.getLocation(),
+            });
+        }
+
+    }
+
 }
 
 export default ResultsPage;
-
-export class ResultsPageListing extends ResultsPage {
-
-    component(): React.ComponentType<any> {
-        return ResultsListPage;
-    }
-
-    backButtonMessage(): string {
-        return "Home Page"
-    }
-}
-
-export class ResultsPageMap extends ResultsPage {
-
-    component(): React.ComponentType<any> {
-        return ResultsMap;
-    }
-}

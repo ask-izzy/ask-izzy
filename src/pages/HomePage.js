@@ -7,6 +7,9 @@ import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
 import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
+import { Link } from "react-router-dom";
+import icons from "../icons"
+
 import { resetDfvOptions } from "../utils";
 import routerContext from "../contexts/router-context";
 
@@ -55,7 +58,7 @@ class HomePage extends React.Component<Props, void> {
     }
 
     render() {
-        const logo = "/static/images/askizzy-logo.png";
+        const logo = "/static/images/askizzy-logo.svg";
         const redirectUri = "http://www.bom.gov.au/";
         const tooltip = "To leave this website quickly, click the 'Quick " +
         "Exit' button. If you are in immediate danger call 000 ( " +
@@ -64,13 +67,41 @@ class HomePage extends React.Component<Props, void> {
 
 
         return (
-            <div className={"HomePage" + (
-                this.props
-                    .siteFeatureFlags["site-banner-feature-flag-test"] ?
-                    " CurrentEmergency"
-                    : ""
-            )}
-            >
+            <div className="HomePage">
+                <div className="notification">
+                    <div className="returnToProd">
+                        <a href="https://askizzy.org.au">
+                            <icons.ChevronBack />
+                            <span>Return to AskIzzy.org.au</span>
+                        </a>
+                    </div>
+                    <h3>Welcome to Ask Izzy beta - Pandemic support</h3>
+
+                    <Link to="/beta-info">
+                        <button>
+                            <icons.Info className={"big middle"}/>
+                            <span>Read before using Ask Izzy beta</span>
+                            <icons.Chevron />
+                        </button>
+                    </Link>
+                    <p>
+                        This is where we are trying new features in Ask Izzy,
+                        so at times it may not work as expected. If you've been
+                        affected by the pandemic you might find the information
+                        and support services here helpful. Let us know what you
+                        think, we welcome your {" "}
+                        <a href={"mailto:support@askizzy.org.au?" +
+                            "subject=Ask Izzy Beta - Feedback"}
+                        >
+                            feedback
+                        </a>.
+                    </p>
+                </div>
+                <div className="covid-info-notification">
+                    <Link to="/covid-19-support">Official
+                    coronavirus (COVID-19) information</Link>{" "}
+                    from federal and state government.
+                </div>
                 <div className="appbar">
                     <a className="quick-exit"
                         href={redirectUri}
@@ -103,22 +134,6 @@ class HomePage extends React.Component<Props, void> {
                             Search over 370,000 support services
                         </div>
                     </HeaderBar>
-                    {this.props.siteFeatureFlags[
-                        "site-banner-feature-flag-test"
-                    ] &&
-                        <div className="CurrentEmergencyNotice">
-                            <h3>
-                                The site banner feature flag test is set
-                            </h3>
-                            <p>
-                                Bikie rort rip snorter my tinny. Brickie as
-                                stands out like stands out like a waggin'
-                                school <a href="https://txtrdr.com/boganipsum/">
-                                billabong</a> his blood's worth bottling
-                                budgie smugglers.
-                            </p>
-                        </div>
-                    }
                 </div>
 
                 <div className="body">
@@ -146,6 +161,11 @@ class HomePage extends React.Component<Props, void> {
                         </div>
                     </form>
                     <NavBar />
+                    <div className="cantFindLookingFor">
+                        <h3>Can’t find what you’re looking for?</h3>
+                        <span>Return to{" "}
+                            <a href="https://askizzy.org.au">AskIzzy.org.au</a></span>
+                    </div>
                 </div>
 
                 <BrandedFooter />
