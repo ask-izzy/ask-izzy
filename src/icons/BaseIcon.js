@@ -6,6 +6,7 @@ import classnames from "classnames";
 type Props = {
     iconClass: string,
     className?: string,
+    containerClassName?: string
 }
 
 class BaseIcon extends React.Component<Props, void> {
@@ -22,16 +23,19 @@ class BaseIcon extends React.Component<Props, void> {
     }
 
     render() {
-        const { className, iconClass, ...parentProps } = this.props;
+        let {
+            className,
+            iconClass,
+            containerClassName,
+            ...parentProps
+        } = this.props;
 
-        parentProps.className = "icon" + (
-            parentProps.className ?
-                " " + parentProps.className
-                : ""
-        )
+        containerClassName = "icon" +
+            (containerClassName ? " " + containerClassName : "")
 
         return (
             <span
+                className={containerClassName}
                 {...parentProps}
                 dangerouslySetInnerHTML={{__html: this.svgContent}}
             />

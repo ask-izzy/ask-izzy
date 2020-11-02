@@ -8,14 +8,14 @@
         flex: 1 1 auto;
         flex-direction: column;
 
-        #betaPathwayWrapper {
+        .betaPathwayWrapper {
             display: flex;
             flex: 1 1 auto;
             flex-direction: column;
             align-items: center;
             justify-content: center;
 
-            #betaPathway {
+            .betaPathway {
                 max-width: 400px;
                 padding: 0.7em 1em;
                 border-radius: 8px;
@@ -28,6 +28,7 @@
                 > header {
                     display: flex;
                     align-items: center;
+
                     .icon svg {
                         display: block;
                         margin: 0 3px 0 -5px;
@@ -39,12 +40,13 @@
                     }
                 }
 
-                p, a {
+                p,
+                a {
                     font-size: 13px;
                 }
 
                 a {
-                    color: #000000;
+                    color: $black;
                     font-weight: bold;
                     text-decoration: none;
 
@@ -56,10 +58,10 @@
                         margin-bottom: 1px;
                         margin-left: 2px;
                         transform: rotate(-45deg);
-                        border: 1px solid #000000;
-                        border-top: 0; 
+                        border: 1px solid $black;
+                        border-top: 0;
                         border-left: 0;
-                        content: '';    
+                        content: "";
                     }
                 }
             }
@@ -67,13 +69,13 @@
             &::before {
                 display: block;
                 flex: 1 1 auto;
-                content: '';
+                content: "";
             }
 
             &::after {
                 display: block;
                 flex: 2 1 auto;
-                content: '';
+                content: "";
             }
         }
     }

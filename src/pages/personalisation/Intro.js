@@ -39,7 +39,7 @@ class Intro extends Personalisation<Props, {}> {
         }
     }
 
-    get shouldShowBetaBox(): Boolean {
+    get shouldShowBetaBox(): boolean {
         const allowList = [
             "Housing",
             "Food",
@@ -50,7 +50,7 @@ class Intro extends Personalisation<Props, {}> {
         ]
         return Boolean(
             this.props.category && allowList.some(categoryName =>
-                categoryName === this.props.category.name
+                this.props.category && categoryName === this.props.category.name
             )
         )
     }
@@ -92,17 +92,17 @@ class Intro extends Personalisation<Props, {}> {
                         I&#39;m looking for help for
                     </h3>
                     {this.renderDoneButton()}
-                    {this.shouldShowBetaBox && 
-                        <div id="betaPathwayWrapper">
-                            <div id="betaPathway">
+                    {this.shouldShowBetaBox &&
+                        <div className="betaPathwayWrapper">
+                            <div className="betaPathway">
                                 <header>
                                     <icons.Lightning />
                                     <h4>Ask Izzy Beta - Pandemic Support</h4>
                                 </header>
                                 <p>
-                                    If you've been impacted by the pandemic and need
-                                    support, we have a new version of Ask Izzy that
-                                    might be helpful to you.{" "}
+                                    If you've been impacted by the pandemic and
+                                    need support, we have a new version of Ask
+                                    Izzy that might be helpful to you.{" "}
                                     <a href="https://beta.askizzy.org.au">
                                         Go to Ask Izzy Beta
                                     </a>

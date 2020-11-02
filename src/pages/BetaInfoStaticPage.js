@@ -32,7 +32,7 @@ export default class BetaInfoStaticPage extends React.Component<{}, void> {
                     We don’t recommend you use the Beta if you are in a crisis or emergency situation.
                 </p>
                 <p>
-                    The beta might be a bit more 'rough around the edges', you might find things that don’t work properly 
+                    The beta might be a bit more 'rough around the edges', you might find things that don’t work properly
                     (<a href={"mailto:support@askizzy.org.au?subject=Ask%20Izzy%20Beta%20-%20Feedback"}>please let us know!</a>)
                     and we may monitor and measure it more closely than we do with regular Ask Izzy. Although we will
                     never capture any personally identifiable information about you, we may use tools to measure what pages
@@ -45,12 +45,16 @@ export default class BetaInfoStaticPage extends React.Component<{}, void> {
                     <a href="https://beta.askizzy.org.au">
                         <components.FlatButton
                             label="Take me to the Beta"
+                            onClick={() => {}}
                         />
                     </a>
 
-                    <div className="returnToProd" onClick={this.context.router.history.goBack}>
-                            <icons.ChevronBack />
-                            <span>Not interested in the Beta</span>
+                    <div
+                        className="returnToProd"
+                        onClick={this.context.router.history.goBack}
+                    >
+                        <icons.ChevronBack />
+                        <span>Not interested in the Beta</span>
                     </div>
                 </div>
             </StaticPage>
