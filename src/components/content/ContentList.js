@@ -39,6 +39,7 @@ class ContentList extends React.Component<Props> {
                             body={item.Body}
                             subtitle={item.Author}
                             link={item.Link}
+                            key={item.id}
                         />
                     )}
                 </ul>
