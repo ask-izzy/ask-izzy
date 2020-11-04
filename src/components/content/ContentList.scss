@@ -1,41 +1,9 @@
 .ContentList {
     margin: 0;
-    padding: 0 1em;
-    list-style: none;
+    padding: 0;
+    list-style-type: none;
 
     .ContentItem {
-        margin: 0 0 2em;
-
-        h3 {
-            margin: 0.5em 0 0.2em;
-            font-size: 1.3em;
-            font-weight: 500;
-
-            a {
-                color: $brand-highlight;
-                text-decoration: none;
-            }
-        }
-
-        h4 {
-            margin: 0.2em 0 1em;
-            color: $brand-text-dark;
-            font-size: 14px;
-            font-weight: 300;
-        }
-
-        .body {
-            margin: 1em 0;
-        }
-
-        a.learnMore {
-            color: $brand-highlight;
-        }
-    }
-
-    &.featured .ContentItem {
-        margin: 1em 0;
-        padding: 1em;
-        background-color: $brand-bg-light;
+        margin-bottom: 32px;
     }
 }
