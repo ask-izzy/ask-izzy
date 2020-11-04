@@ -19,6 +19,7 @@ import NotFoundStaticPage from "./pages/NotFoundStaticPage";
 import AddServicePage from "./pages/AddServicePage";
 import DynamicPage from "./pages/DynamicPage";
 import BetaInfoStaticPage from "./pages/BetaInfoStaticPage";
+import Covid19StaticPage from "./pages/Covid19StaticPage";
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
@@ -122,7 +123,7 @@ export default (
         />
         <BasePage
             path="/covid-19-support"
-            component={DynamicPage}
+            component={Covid19StaticPage}
             title="COVID 19 Support"
             exact={true}
             state={{
