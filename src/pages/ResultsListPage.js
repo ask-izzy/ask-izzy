@@ -53,26 +53,11 @@ class ResultsListPage extends ResultsPage<Props, ExtraState> {
     constructor(props: Object, context: Object) {
         super(props, context);
 
-        this.primaryInfoEl = null;
-        this.keyInfoEl = null;
-
         this.state = {
             ...this.state,
             hasInfo: false,
             hasTools: false,
         };
-    }
-
-    keyInfoEl: any;
-    primaryInfoEl: any;
-
-    componentDidUpdate = (prevProps: Object, prevState: Object) => {
-        if (this.primaryInfoEl && !prevState.hasTools) {
-            this.setState({ hasTools: true })
-        }
-        if (this.keyInfoEl && !prevState.hasInfo) {
-            this.setState({ hasInfo: true })
-        }
     }
 
     recordMapClick(): void {
@@ -89,7 +74,22 @@ class ResultsListPage extends ResultsPage<Props, ExtraState> {
                 location: storage.getLocation(),
             });
         }
+    }
 
+    get CMSCategoryName(): ?string {
+        const category = this.category
+        if (!category) {
+            return null
+        }
+        let catName = category.title
+        const subCategory = category.slug === "money" &&
+            storage.getItem("sub-money")
+
+        if (category.slug === "money" && subCategory === "Centrelink") {
+            catName = "Centrelink"
+        }
+
+        return catName
     }
 
     render() {
@@ -171,13 +171,16 @@ class ResultsListPage extends ResultsPage<Props, ExtraState> {
     )
 
     renderPrimaryInfo() {
+        if (!this.category) {
+            return null
+        }
         return (
             <Query
                 query={externalResourcesQuery}
                 loadingComponent={this.renderLoadingComponent()}
                 args={
                     {
-                        "category": [this.category.title],
+                        "category": [this.CMSCategoryName],
                         "tag": [
                             "Tool",
                         ],
@@ -186,24 +189,21 @@ class ResultsListPage extends ResultsPage<Props, ExtraState> {
                         ],
                     }
                 }
+                dataLoadedCallback={data =>
+                    data.externalResources.length > 0 &&
+                        this.setState({ hasTools: true })
+                }
             >
-                {data => {
-                    if (data.data.externalResources.length > 0) {
+                {({data}) => {
+                    if (data.externalResources.length > 0) {
                         return (<React.Fragment>
                             <a className="anchor"
                                 id="tools"
                             />
-                            <div
-                                className="primaryInfo"
-                                ref={
-                                    element => (
-                                        this.primaryInfoEl = element
-                                    )
-                                }
-                            >
+                            <div className="primaryInfo">
                                 <ContentList
                                     className="featured"
-                                    items={data.data.externalResources}
+                                    items={data.externalResources}
                                 />
                             </div>
                         </React.Fragment>)
@@ -215,13 +215,16 @@ class ResultsListPage extends ResultsPage<Props, ExtraState> {
     }
 
     renderKeyInfo() {
+        if (!this.category) {
+            return null
+        }
         return (
             <Query
                 query={externalResourcesQuery}
                 loadingComponent={this.renderLoadingComponent()}
                 args={
                     {
-                        "category": [this.category.title],
+                        "category": [this.CMSCategoryName],
                         "tag": [
                             "Information",
                         ],
@@ -230,21 +233,22 @@ class ResultsListPage extends ResultsPage<Props, ExtraState> {
                         ],
                     }
                 }
+                dataLoadedCallback={data =>
+                    data.externalResources.length > 0 &&
+                        this.setState({ hasInfo: true })
+                }
             >
-                {data => (
-                    !data.data.externalResources.length > 0 ? "" : (
+                {({data}) => (
+                    !data.externalResources.length > 0 ? "" : (
                         <React.Fragment>
                             <a
                                 className="anchor"
                                 id="information"
                             />
-                            <div
-                                className="keyInfo"
-                                ref={element => (this.keyInfoEl = element)}
-                            >
+                            <div className="keyInfo">
                                 <h3>Key information</h3>
                                 <ContentList
-                                    items={data.data.externalResources}
+                                    items={data.externalResources}
                                 />
                             </div>
                         </React.Fragment>
