@@ -4,6 +4,7 @@ import React from "react";
 
 import components from "../components";
 import icons from "../icons";
+import { openUserSnap } from "../utils/usersnap";
 
 type Props = {
     title?: string,
@@ -18,11 +19,6 @@ class AppBar extends React.Component<Props, void> {
             onBackTouchTap: function() {},
         },
     };
-
-    openUserSnap(event: SyntheticInputEvent<>): void {
-        event.preventDefault();
-        window.Usersnap.logEvent("display_menu");
-    }
 
     render() {
         let redirectUri = "http://www.bom.gov.au/";
@@ -60,7 +56,7 @@ class AppBar extends React.Component<Props, void> {
                     You're using Ask Izzy Beta.{" "}
                     <a
                         href="#"
-                        onClick={this.openUserSnap}
+                        onClick={openUserSnap}
                     >
                         Leave feedback
                     </a>
