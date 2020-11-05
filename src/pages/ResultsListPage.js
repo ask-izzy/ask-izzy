@@ -16,7 +16,6 @@ import LimitedServicesBanner from "../components/LimitedServicesBanner";
 import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
 import UserSnapResults from "../components/feedback/UserSnapResults";
-import ContentList from "../components/content/ContentList";
 
 import * as gtm from "../google-tag-manager";
 import routerContext from "../contexts/router-context";
