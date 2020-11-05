@@ -7,6 +7,7 @@ import * as gtm from "../google-tag-manager";
 import iss from "../iss";
 import Spacer from "./Spacer";
 import FormReportError from "./feedback/FormReportError"
+import { openUserSnap } from "../utils/usersnap";
 
 type Props = {
     object: iss.Service,
@@ -33,11 +34,6 @@ export default class Feedback extends React.Component<Props, State> {
         });
     }
 
-    openUserSnap(event: SyntheticInputEvent<>): void {
-        event.preventDefault();
-        window.Usersnap.logEvent("display_menu");
-    }
-
     render(): ReactElement<"div"> {
         const {collapsed} = this.state
 
@@ -48,7 +44,7 @@ export default class Feedback extends React.Component<Props, State> {
                     <span>Details here incorrect?</span>&nbsp;
                     <a
                         href="#"
-                        onClick={this.openUserSnap}
+                        onClick={openUserSnap}
                     >
                         Report an error
                     </a>
