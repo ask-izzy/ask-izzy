@@ -30,6 +30,7 @@ module.exports = {
             "./src/client-entry.js",
             "./src/styles/bundle.scss",
             "./src/analytics.js",
+            "./src/usersnap.js",
         ],
     },
     output: {
