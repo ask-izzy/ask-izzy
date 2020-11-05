@@ -15,7 +15,7 @@ import ResultsMap from "../components/ResultsMap";
 import * as gtm from "../google-tag-manager";
 import storage from "../storage";
 import type { Service, Site } from "../iss";
-import type { Category } from "../constants/categories";
+import type Category from "../constants/Category";
 
 type Props = {
     loadMore: any,

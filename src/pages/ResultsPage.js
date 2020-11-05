@@ -22,7 +22,7 @@ import OpeningTimes from "../components/OpeningTimes";
 import Ndis from "../components/Ndis";
 import type {searchResultsMeta, Service} from "../iss";
 
-import {Category} from "../constants/categories";
+import Category from "../constants/Category";
 import covidSupportCategories, {CovidSupportCategory}
     from "../constants/covidSupportCategories";
 

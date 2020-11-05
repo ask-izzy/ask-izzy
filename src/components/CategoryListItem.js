@@ -3,7 +3,7 @@
 import React from "react";
 import LinkListItem from "./LinkListItem";
 import icons from "../icons";
-import type {Category} from "../constants/categories";
+import type Category from "../constants/Category";
 
 type Props = {
     category: Category,
