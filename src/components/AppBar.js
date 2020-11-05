@@ -12,6 +12,7 @@ import {getScrollPosition} from "../effects/scrollPosition";
 import Storage from "../storage";
 import categories from "../constants/categories";
 import Category from "../constants/Category";
+import Link from "./base/Link";
 
 type Props = {
     transition?: boolean,
@@ -40,6 +41,11 @@ function AppBar(
     const scrollPosY = getScrollPosition();
 
     const {router} = useContext(routerContext);
+
+    function openUserSnap(event: SyntheticInputEvent<>): void {
+        event.preventDefault();
+        window.Usersnap.logEvent("display_menu");
+    }
 
     const removeCategoryAnswers = (category: Category): void => {
         const answers = category.personalisation.filter(personalisation =>
@@ -88,11 +94,12 @@ function AppBar(
                     <div className="betaBanner">
                         <icons.Info className={"big middle"}/>
                         You're using Ask Izzy Beta.{" "}
-                        <a href={"mailto:support@askizzy.org.au?" +
-                            "subject=Ask Izzy Beta - Feedback"}
+                        <Link
+                            to="#"
+                            onClick={openUserSnap}
                         >
                             Leave feedback
-                        </a>
+                        </Link>
                     </div>
                 )}
                 <div className="contents">

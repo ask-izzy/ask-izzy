@@ -45,6 +45,11 @@ function HomePage(): ReactNode {
         resetDfvOptions();
     }, [])
 
+    function openUserSnap(event: SyntheticInputEvent<>): void {
+        event.preventDefault();
+        window.Usersnap.logEvent("display_menu");
+    }
+
     const onSearchSubmit = (): void => {
         storage.setSearch(searchText);
         router.navigate(
@@ -81,11 +86,12 @@ function HomePage(): ReactNode {
                         affected by the pandemic you might find the information
                         and support services here helpful. Let us know what you
                         think, we welcome your {" "}
-                        <a href={"mailto:support@askizzy.org.au?" +
-                            "subject=Ask Izzy Beta - Feedback"}
+                        <Link
+                            to="#"
+                            onClick={openUserSnap}
                         >
                             feedback
-                        </a>.
+                        </Link>.
                     </p>
                 </div>
                 <div className="covid-info-notification">
