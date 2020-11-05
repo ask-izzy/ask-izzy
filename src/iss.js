@@ -435,17 +435,22 @@ export class Service {
         return new ServiceOpening(this);
     }
 
+    /**
+     * Splits a description up into an array of sentences.
+     *
+     * It maintains the text verbatim and doesn't do any cleaning up like
+     * removing extra whitespace or add missing full stops. But if there's
+     * call for it, it may do some cleaning in future.
+     */
     descriptionSentences(): Array<string> {
-        return this.description.split(". ")
-            .filter(str => str.trim())
-            .map(str => (str.trim() + ".").replace("..", "."))
+        return this.description.match(/.+?(?:\.\s+|$)/g) || []
     }
 
     /**
      * First part of the description.
      *
-     * Equal to the first sentence + subsequent sentences until the description
-     * length is equal to or more than 250 characters.
+     * Equal to the first sentence + as many remaining sentences as will fit
+     * without pushing the length up to or more than 250 characters.
      */
     get shortDescription(): Array<string> {
         let sentences = this.descriptionSentences();
@@ -453,7 +458,10 @@ export class Service {
         let descriptionLength = () =>
             description.reduce((memo, elem) => memo + elem.length, 0);
 
-        while (sentences.length && descriptionLength() < 250) {
+        while (
+            sentences.length && 
+            (descriptionLength() + sentences[0].length) < 250
+        ) {
             description.push(sentences.shift());
         }
 
