@@ -59,24 +59,18 @@ describe("iss service", function() {
         it("preserves URLs", test(
             "See our site at www.foo.com. More details are there.",
             [
-                "See our site at www.foo.com.",
+                "See our site at www.foo.com. ",
                 "More details are there.",
             ]
         ));
 
-        it("ends sentences with a full stop", test(
-            "A description",
-            ["A description."]
-        ));
-
-        it("removes trailing whitespace", test(
-            "trailing whitespace    . it happens     .     ",
-            ["trailing whitespace.", "it happens."]
-        ));
-
-        it("removes leading whitespace", test(
-            "  leading whitespace.     also happens",
-            ["leading whitespace.", "also happens."]
+        it("preserves all characters", test(
+            "  leading whitespace.  happens  .   also trailing whitespace    ",
+            [
+                "  leading whitespace.  ",
+                "happens  .   ",
+                "also trailing whitespace    ",
+            ]
         ));
 
     })
