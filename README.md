@@ -101,11 +101,6 @@ Here are the explict paths that AskIzzy supports:
 /search/<search-term>/in/<suburb>-<state>
 /search/<search-term>/in/<suburb>-<state>/
 
-/category/<category-name>
-/category/<category-name>/
-/category/<category-name>/in/<suburb>-<state>
-/category/<category-name>/in/<suburb>-<state>/
-
 /<category-name>
 /<category-name>/
 /<category-name>/<suburb>-<state>

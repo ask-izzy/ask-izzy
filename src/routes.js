@@ -222,14 +222,6 @@ const routes: ReactElement<typeof Routes> = <Routes>
             type={["Service"]}
         />
         <Redirect
-            path="/category/:page"
-            to="/:page"
-        />
-        <Redirect
-            path="/category/:page/in/:suburb-:state"
-            to="/:page/:suburb-:state"
-        />
-        <Redirect
             path="/search/:search/in/:suburb-:state"
             to="/search/:search/:suburb-:state"
         />
