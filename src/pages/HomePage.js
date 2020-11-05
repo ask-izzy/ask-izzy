@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import icons from "../icons"
 
 import { resetDfvOptions } from "../utils";
+import { openUserSnap } from "../utils/usersnap";
 import routerContext from "../contexts/router-context";
 
 type Props = {
@@ -38,11 +39,6 @@ class HomePage extends React.Component<Props, void> {
             console.log("Clearing all personalisation data")
             storage.clear();
         }
-    }
-
-    openUserSnap(event: SyntheticInputEvent<>): void {
-        event.preventDefault();
-        window.Usersnap.logEvent("display_menu");
     }
 
     onSearchSubmit(event: Event): void {
@@ -97,7 +93,7 @@ class HomePage extends React.Component<Props, void> {
                         think, we welcome your {" "}
                         <a
                             href="#"
-                            onClick={this.openUserSnap}
+                            onClick={openUserSnap}
                         >
                             feedback
                         </a>.
