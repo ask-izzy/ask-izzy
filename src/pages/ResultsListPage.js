@@ -21,7 +21,7 @@ import * as gtm from "../google-tag-manager";
 import routerContext from "../contexts/router-context";
 import storage from "../storage";
 import type { Service } from "../iss";
-import type { Category } from "../constants/categories";
+import type Category from "../constants/Category";
 
 
 type primaryInfo = {

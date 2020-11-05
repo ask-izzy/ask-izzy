@@ -4,7 +4,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 import HeaderBar from "../HeaderBar";
-import type {Category} from "../../constants/categories";
+import type Category from "../../constants/Category";
 
 import Gender from "../../pages/personalisation/Gender";
 import Age from "../../pages/personalisation/Age";

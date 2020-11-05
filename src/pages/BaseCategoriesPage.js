@@ -3,7 +3,8 @@
 import * as React from "react";
 import _ from "underscore";
 
-import categories, {Category} from "../constants/categories";
+import Category from "../constants/Category";
+import categories from "../constants/categories";
 import type {
     searchRequest,
     searchResultsMeta,
