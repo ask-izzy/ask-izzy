@@ -40,6 +40,11 @@ class HomePage extends React.Component<Props, void> {
         }
     }
 
+    openUserSnap(event: SyntheticInputEvent<>): void {
+        event.preventDefault();
+        window.Usersnap.logEvent("display_menu");
+    }
+
     onSearchSubmit(event: Event): void {
         event.preventDefault();
 
@@ -90,8 +95,9 @@ class HomePage extends React.Component<Props, void> {
                         affected by the pandemic you might find the information
                         and support services here helpful. Let us know what you
                         think, we welcome your {" "}
-                        <a href={"mailto:support@askizzy.org.au?" +
-                            "subject=Ask Izzy Beta - Feedback"}
+                        <a
+                            href="#"
+                            onClick={this.openUserSnap}
                         >
                             feedback
                         </a>.

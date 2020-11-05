@@ -19,6 +19,10 @@ class AppBar extends React.Component<Props, void> {
         },
     };
 
+    openUserSnap(event: SyntheticInputEvent<>): void {
+        event.preventDefault();
+        window.Usersnap.logEvent("display_menu");
+    }
 
     render() {
         let redirectUri = "http://www.bom.gov.au/";
@@ -54,8 +58,9 @@ class AppBar extends React.Component<Props, void> {
                 <div className="betaBanner">
                     <icons.Info className={"big middle"}/>
                     You're using Ask Izzy Beta.{" "}
-                    <a href={"mailto:support@askizzy.org.au?" +
-                        "subject=Ask Izzy Beta - Feedback"}
+                    <a
+                        href="#"
+                        onClick={this.openUserSnap}
                     >
                         Leave feedback
                     </a>
