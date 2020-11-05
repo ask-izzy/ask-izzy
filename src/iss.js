@@ -443,10 +443,15 @@ export class Service {
         return new ServiceOpening(this);
     }
 
+    /**
+     * Splits a description up into an array of sentences.
+     *
+     * It maintains the text verbatim and doesn't do any cleaning up like
+     * removing extra whitespace or add missing full stops. But if there's
+     * call for it, it may do some cleaning in future.
+     */
     descriptionSentences(): Array<string> {
-        return this.description.split(/\.(?=\s+|$)/)
-            .filter(str => str) // Remove trailing empty string from last line
-            .map(str => str.match(/\S/) ? str + "." : "")
+        return this.description.match(/.+?(?:\.\s+|$)/g) || []
     }
 
     /**
