@@ -280,16 +280,6 @@ export default (
             }}
         />
         <Redirect
-            from="/category/:page"
-            to="/:page"
-            exact={true}
-        />
-        <Redirect
-            from="/category/:page/in/:suburb-:state"
-            to="/:page/:suburb-:state"
-            exact={true}
-        />
-        <Redirect
             from="/search/:search/in/:suburb-:state"
             to="/search/:search/:suburb-:state"
             exact={true}
