@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import Personalisation from "../../mixins/Personalisation";
-import {Category} from "../../constants/categories";
+import Category from "../../constants/Category";
 import components from "../../components";
 import storage from "../../storage";
 import * as iss from "../../iss";
