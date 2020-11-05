@@ -16,7 +16,7 @@ import Storage from "../storage";
 import AlertBannerList from "../components/AlertBannerList";
 import ScreenReader from "../components/ScreenReader";
 import Link from "../components/base/Link";
-
+import { openUserSnap } from "../utils/usersnap";
 
 const LOGO = "/static/images/askizzy-logo.svg";
 
@@ -44,11 +44,6 @@ function HomePage(): ReactNode {
         savedSearchText && setSearchText(savedSearchText)
         resetDfvOptions();
     }, [])
-
-    function openUserSnap(event: SyntheticInputEvent<>): void {
-        event.preventDefault();
-        window.Usersnap.logEvent("display_menu");
-    }
 
     const onSearchSubmit = (): void => {
         storage.setSearch(searchText);

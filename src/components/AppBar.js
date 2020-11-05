@@ -13,6 +13,7 @@ import Storage from "../storage";
 import categories from "../constants/categories";
 import Category from "../constants/Category";
 import Link from "./base/Link";
+import { openUserSnap } from "../utils/usersnap";
 
 type Props = {
     transition?: boolean,
@@ -41,11 +42,6 @@ function AppBar(
     const scrollPosY = getScrollPosition();
 
     const {router} = useContext(routerContext);
-
-    function openUserSnap(event: SyntheticInputEvent<>): void {
-        event.preventDefault();
-        window.Usersnap.logEvent("display_menu");
-    }
 
     const removeCategoryAnswers = (category: Category): void => {
         const answers = category.personalisation.filter(personalisation =>
