@@ -2,14 +2,11 @@
 
 import React from "react";
 
+import { openUserSnap } from "../../utils/usersnap";
+
 type State = {}
 
 export default class UserSnapResults extends React.Component<{}, State> {
-
-    openUserSnap(event: SyntheticInputEvent<>): void {
-        event.preventDefault();
-        window.Usersnap.logEvent("display_menu");
-    }
 
     render() {
         return (
@@ -20,7 +17,7 @@ export default class UserSnapResults extends React.Component<{}, State> {
                     </h4>
                     <button
                         type="submit"
-                        onClick={this.openUserSnap}
+                        onClick={openUserSnap}
                     >
                         Send feedback
                     </button>
