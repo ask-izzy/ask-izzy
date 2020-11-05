@@ -2,7 +2,7 @@
 
 import React from "react";
 import routerContext from "../contexts/router-context";
-import { Category } from "../constants/categories";
+import Category from "../constants/Category";
 
 type Props = {
     nextStep: Function,

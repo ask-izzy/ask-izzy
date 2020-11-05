@@ -13,7 +13,7 @@ import ViewOnMapButton from "../components/ViewOnMapButton";
 import sendEvent from "../google-tag-manager";
 import storage from "../storage";
 import type { Service } from "../iss";
-import type { Category } from "../constants/categories";
+import type Category from "../constants/Category";
 
 type Props = {
     loadMore: any,

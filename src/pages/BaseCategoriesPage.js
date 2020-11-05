@@ -2,7 +2,8 @@
 
 import * as React from "react";
 
-import {Category, getCategory} from "../constants/categories";
+import Category from "../constants/Category";
+import {getCategory} from "../constants/categories";
 import type {
     searchRequest,
     searchResultsMeta,
