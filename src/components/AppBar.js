@@ -4,6 +4,7 @@ import React from "react";
 
 import components from "../components";
 import icons from "../icons";
+import { openUserSnap } from "../utils/usersnap";
 
 type Props = {
     title?: string,
@@ -18,7 +19,6 @@ class AppBar extends React.Component<Props, void> {
             onBackTouchTap: function() {},
         },
     };
-
 
     render() {
         let redirectUri = "http://www.bom.gov.au/";
@@ -54,8 +54,9 @@ class AppBar extends React.Component<Props, void> {
                 <div className="betaBanner">
                     <icons.Info className={"big middle"}/>
                     You're using Ask Izzy Beta.{" "}
-                    <a href={"mailto:support@askizzy.org.au?" +
-                        "subject=Ask Izzy Beta - Feedback"}
+                    <a
+                        href="#"
+                        onClick={openUserSnap}
                     >
                         Leave feedback
                     </a>

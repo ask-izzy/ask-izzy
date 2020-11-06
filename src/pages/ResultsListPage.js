@@ -15,9 +15,10 @@ import HeaderBar from "../components/HeaderBar";
 import LimitedServicesBanner from "../components/LimitedServicesBanner";
 import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
-import routerContext from "../contexts/router-context";
+import UserSnapResults from "../components/feedback/UserSnapResults";
 
 import * as gtm from "../google-tag-manager";
+import routerContext from "../contexts/router-context";
 import storage from "../storage";
 import type { Service } from "../iss";
 import type { Category } from "../constants/categories";
@@ -156,6 +157,9 @@ class ResultsListPage extends ResultsPage<Props, State> {
                         results={this.state.searchResults}
                     />
                     {this.renderLoadMore()}
+                    { !this.loading && this.state.loadMoreCount > 1 &&
+                        <UserSnapResults />
+                    }
                 </div>
             </div>
         );

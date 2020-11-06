@@ -5,12 +5,23 @@ import React from "react";
 import * as gtm from "../google-tag-manager";
 import iss from "../iss";
 import Spacer from "./Spacer";
+import FormReportError from "./feedback/FormReportError"
+import { openUserSnap } from "../utils/usersnap";
 
 type Props = {
     object: iss.Service,
 }
 
-export default class Feedback extends React.Component<Props, void> {
+type State = {
+    collapsed: boolean,
+}
+
+export default class Feedback extends React.Component<Props, State> {
+
+    state = {
+        collapsed: true,
+    }
+
     recordSuggestChange(): void {
         gtm.emit({
             event: "suggestServiceChange",
@@ -27,40 +38,34 @@ export default class Feedback extends React.Component<Props, void> {
         }, "GTM-54BTPQM");
     }
 
+    toggleFeedback = (event: SyntheticEvent<>): void => {
+        event.preventDefault();
+        this.setState(prevState => ({
+            collapsed: !prevState.collapsed,
+        }));
+    }
+
     render() {
+        const {collapsed} = this.state
 
         return (
             <div className="Feedback">
                 <Spacer />
-                <h4>Your feedback</h4>
-                <p>If information needs updating, or if something is not
-                 occurring as expected,&nbsp;
-                <a
-                    className="suggestChange"
-                    onClick={this.recordSuggestChange.bind(this)}
-                    href={
-                        "mailto:support@askizzy.org.au" +
-                            "?subject=" +
-                            encodeURIComponent(
-                                `Your Ask Izzy feedback: ` +
-                            `${this.props.object.id}`) +
-                            "&body=" +
-                            encodeURIComponent(
-                                `Contact name:
-
-                                Contact number:
-
-                                Contact email:
-
-                                Details of change:
-
-                                `.replace(/^ +/gm, "")
-                            )
+                <div className="FeedbackInner">
+                    <span>Details here incorrect?</span>&nbsp;
+                    <a
+                        href="#"
+                        onClick={openUserSnap}
+                    >
+                        Report an error
+                    </a>
+                    {!collapsed &&
+                    <div className="inline">
+                        <FormReportError />
+                    </div>
                     }
-                >
-                    let us know
-                </a>.
-                </p>
+                </div>
+                <Spacer />
             </div>
         );
     }

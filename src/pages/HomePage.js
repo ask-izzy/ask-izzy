@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import icons from "../icons"
 
 import { resetDfvOptions } from "../utils";
+import { openUserSnap } from "../utils/usersnap";
 import routerContext from "../contexts/router-context";
 
 type Props = {
@@ -90,8 +91,9 @@ class HomePage extends React.Component<Props, void> {
                         affected by the pandemic you might find the information
                         and support services here helpful. Let us know what you
                         think, we welcome your {" "}
-                        <a href={"mailto:support@askizzy.org.au?" +
-                            "subject=Ask Izzy Beta - Feedback"}
+                        <a
+                            href="#"
+                            onClick={openUserSnap}
                         >
                             feedback
                         </a>.
