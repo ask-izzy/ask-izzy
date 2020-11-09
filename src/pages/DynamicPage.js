@@ -62,7 +62,7 @@ class DynamicPage extends React.Component<Props, void> {
                     if (
                         res.data.pages !== undefined && res.data.pages.length
                     ) {
-                        const page = res.data.pages.pop();
+                        const page = res.data.pages[0];
 
                         return (
                             <StaticPage

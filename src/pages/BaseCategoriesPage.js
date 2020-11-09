@@ -104,7 +104,7 @@ extends React.Component<Props & ChildProps, State & ChildState> {
         }
 
         return components.filter(component => {
-            if (typeof window !== "undefined") {
+            if (typeof window === "undefined") {
                 if (typeof component.staticShowPage === "function") {
                     // $FlowIgnore
                     return component.staticShowPage();
