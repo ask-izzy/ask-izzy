@@ -210,7 +210,7 @@ class ResultsListPage extends ResultsPage<Props, State> {
                     id="information"
                 />
                 <div className="keyInfos">
-                    <h3>Key Information</h3>
+                    <h3>Key information</h3>
                     {keyInfo.map(info =>
                         <div className="keyInfo"
                             key={info.title}
