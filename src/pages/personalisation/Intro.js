@@ -6,10 +6,13 @@ import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import storage from "../../storage";
 import * as iss from "../../iss";
+import icons from "../../icons";
+import { Category } from "../../constants/categories";
 
 type Props = {
     onDoneTouchTap: Function,
     name: string,
+    category?: Category,
 }
 
 class Intro extends Personalisation<Props, {}> {
@@ -36,6 +39,22 @@ class Intro extends Personalisation<Props, {}> {
         }
     }
 
+    get shouldShowBetaBox(): boolean {
+        const allowList = [
+            "Housing",
+            "Food",
+            "Everyday things",
+            "Centrelink",
+            "Money help",
+            "Finding work",
+        ]
+        return Boolean(
+            this.props.category && allowList.some(categoryName =>
+                this.props.category && categoryName === this.props.category.name
+            )
+        )
+    }
+
     handleButtonClick = (userType: string) =>
         (event: SyntheticEvent<HTMLButtonElement>): void => {
             storage.setItem("user_type", userType);
@@ -53,7 +72,7 @@ class Intro extends Personalisation<Props, {}> {
         }
 
         return (
-            <div>
+            <div className="IntroPage">
                 <components.HeaderBar
                     primaryText={
                         <div>
@@ -73,6 +92,24 @@ class Intro extends Personalisation<Props, {}> {
                         I&#39;m looking for help for
                     </h3>
                     {this.renderDoneButton()}
+                    {this.shouldShowBetaBox &&
+                        <div className="betaPathwayWrapper">
+                            <div className="betaPathway">
+                                <header>
+                                    <icons.Lightning />
+                                    <h4>Ask Izzy Beta - Pandemic Support</h4>
+                                </header>
+                                <p>
+                                    If you've been impacted by the pandemic and
+                                    need support, we have a new version of Ask
+                                    Izzy that might be helpful to you.{" "}
+                                    <a href="https://beta.askizzy.org.au">
+                                        Go to Ask Izzy Beta
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         );

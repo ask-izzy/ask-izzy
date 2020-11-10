@@ -26,6 +26,7 @@ import HomelessFinanceStaticPage from "./pages/HomelessFinanceStaticPage";
 import HomelessHealthStaticPage from "./pages/HomelessHealthStaticPage";
 import InformationPage from "./pages/InformationPage";
 import OnlineSafetyStaticPage from "./pages/OnlineSafetyStaticPage";
+import BetaInfoStaticPage from "./pages/BetaInfoStaticPage"
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
@@ -121,6 +122,11 @@ export default (
             path="/online-safety"
             component={OnlineSafetyStaticPage}
             title="Online Safety"
+        />
+        <BasePage
+            path="/beta-info"
+            component={BetaInfoStaticPage}
+            title="About Ask Izzy Beta"
         />
         <BasePage
             path="/homeless-shelters"

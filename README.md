@@ -268,11 +268,11 @@ There's also a mock ISS server available as `./script/mock-iss`. This will
 start a server on `localhost:5000`.
 
 ### Adding new icons
+Original icons files are stored in a separate repo hosted on GitHub. To add new icons to Ask Izzy they must be added to that repo first then compiled and copied into this repo using the iconify script. 
 
- * Add your icon to https://github.com/ask-izzy/designs
- * Clone the designs repo. e.g. `git clone https://github.com/ask-izzy/designs.git ~/git/designs`
- * The Iconify script requires babel, install by running `sudo npm install -g babel-cli`
- * Run `.script/iconify <path_to_cloned_designs_repo>`. e.g. `./script/iconify ~/git/designs/icons/*.svg`
+1) Clone designs repo: `git clone https://github.com/ask-izzy/designs ../ask-izzy-designs`
+2) Add desired icons to designs repo and commit
+3) Run the iconify script: `./script/iconify ../ask-izzy-designs/icons/*.svg`
 
 The icons/index.js file will be updated, and a new js file for the icon will be generated in /icons.
 
