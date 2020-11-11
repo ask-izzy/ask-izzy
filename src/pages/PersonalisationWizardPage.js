@@ -176,7 +176,6 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
                     ref="subpage"
                     onDoneTouchTap={this.nextStep}
                     onNextStepCallback={this.forceUpdate.bind(this)}
-                    category={this.category}
                     nextStep={this.nextStep}
                     previousStep={this.previousStep}
                 />

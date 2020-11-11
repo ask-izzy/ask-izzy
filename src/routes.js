@@ -15,7 +15,6 @@ import BasePage from "./pages/BasePage";
 import HomePage from "./pages/HomePage";
 import NotFoundStaticPage from "./pages/NotFoundStaticPage";
 import AddServicePage from "./pages/AddServicePage";
-import BetaInfoStaticPage from "./pages/BetaInfoStaticPage";
 import DisabilityAdvocacyFinder from "./pages/DisabilityAdvocacyFinder";
 import DynamicPage from "./pages/DynamicPage";
 
@@ -118,11 +117,6 @@ export default (
             path="/online-safety"
             component={DynamicPage}
             title="Online Safety"
-        />
-        <BasePage
-            path="/beta-info"
-            component={BetaInfoStaticPage}
-            title="About Ask Izzy Beta"
         />
         <BasePage
             path="/homeless-shelters"
