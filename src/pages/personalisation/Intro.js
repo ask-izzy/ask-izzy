@@ -5,10 +5,8 @@ import * as React from "react";
 
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
-import Link from "../../components/base/Link";
 import storage from "../../storage";
 import * as iss from "../../iss";
-import icons from "../../icons";
 import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
@@ -70,22 +68,6 @@ class Intro extends Personalisation<Props, State> {
         }
     }
 
-    get shouldShowBetaBox(): boolean {
-        const allowList = [
-            "Housing",
-            "Food",
-            "Everyday things",
-            "Centrelink",
-            "Money help",
-            "Finding work",
-        ]
-        return Boolean(
-            this.props.category && allowList.some(categoryName =>
-                this.props.category && categoryName === this.props.category.name
-            )
-        )
-    }
-
     handleButtonClick: (
         (userType: string) => (event: SyntheticEvent<HTMLButtonElement>) => void
     ) = (userType: string) =>
@@ -121,31 +103,6 @@ class Intro extends Personalisation<Props, State> {
                                  I&#39;m looking for help for
                             </legend>
                             {this.renderDoneButton()}
-                            {this.shouldShowBetaBox &&
-                                <div className="betaPathwayWrapper">
-                                    <div className="betaPathway">
-                                        <header>
-                                            <icons.Lightning />
-                                            <h2>
-                                                Ask Izzy Beta - Pandemic Support
-                                            </h2>
-                                        </header>
-                                        <p>
-                                            If you've been impacted by the
-                                            pandemic and need support,
-                                            we have a new version of Ask
-                                            Izzy that might be helpful to
-                                            you.{" "}
-                                            <Link
-                                                to="https://beta.askizzy.org.au"
-                                                className="BetaLink"
-                                            >
-                                                Go to Ask Izzy Beta
-                                            </Link>
-                                        </p>
-                                    </div>
-                                </div>
-                            }
                         </fieldset>
                     </div>
                 </main>
