@@ -57,11 +57,6 @@ class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
                                 Online resources
                             </a>
                         </li>
-                        <li>
-                            <Link to="/beta-info">
-                                🆕 Ask Izzy Beta
-                            </Link>
-                        </li>
                     </ul>
                 </div>
                 <hr />

@@ -32,7 +32,7 @@ export default class StaticPage extends React.Component<Props> {
     render() {
 
         return (
-            <div className={`StaticPage ${this.props.className || ""}`}>
+            <div className={`StaticPage ${this.props.className}`}>
                 <AppBar
                     title={this.props.title}
                     onBackTouchTap={this.context.router.history.goBack}
