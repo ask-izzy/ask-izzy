@@ -8,17 +8,13 @@ import LinkButton from "./LinkButton";
 import config from "../config";
 import { donateLink } from "../constants/urls.js"
 import ScreenReader from "./ScreenReader";
+import { openUserSnap } from "../utils/usersnap";
 
 export default class BrandedFooter
     extends React.Component<{}, void> {
     static sampleProps: any = {
         default: {},
     };
-
-    openFeedback(event: SyntheticInputEvent<>): void {
-        event.preventDefault();
-        window.Usersnap.logEvent("display_menu");
-    }
 
     /* Begin hack for dealing with multiple columns
      *
@@ -225,7 +221,7 @@ export default class BrandedFooter
                         <li>
                             <Link
                                 to="#"
-                                onClick={this.openFeedback}
+                                onClick={openUserSnap}
                             >
                                 <icons.Chat
                                     className="small"
