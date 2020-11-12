@@ -6,6 +6,7 @@ import StaticPage from "./StaticPage";
 import components from "../components";
 import icons from "../icons"
 import routerContext from "../contexts/router-context";
+import { openUserSnap } from "../utils/usersnap";
 
 export default class BetaInfoStaticPage extends React.Component<{}, void> {
     static contextType = routerContext;
@@ -33,7 +34,7 @@ export default class BetaInfoStaticPage extends React.Component<{}, void> {
                 </p>
                 <p>
                     The beta might be a bit more 'rough around the edges', you might find things that don’t work properly 
-                    (<a href={"mailto:support@askizzy.org.au?subject=Ask%20Izzy%20Beta%20-%20Feedback"}>please let us know!</a>)
+                    (<a href="#" onClick={openUserSnap}>please let us know!</a>)
                     and we may monitor and measure it more closely than we do with regular Ask Izzy. Although we will
                     never capture any personally identifiable information about you, we may use tools to measure what pages
                     and parts of Ask Izzy people are using, and how people move through Ask Izzy.

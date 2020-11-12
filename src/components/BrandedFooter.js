@@ -5,17 +5,13 @@ import { Link } from "react-router-dom";
 import icons from "../icons"
 import LinkButton from "./LinkButton";
 import config from "../config";
+import { openUserSnap } from "../utils/usersnap";
 
 export default class BrandedFooter
     extends React.Component<{}, void> {
     static sampleProps = {
         default: {},
     };
-
-    openFeedback(event: SyntheticInputEvent<>): void {
-        event.preventDefault();
-        window.Usersnap.logEvent("display_menu");
-    }
 
     /* Begin hack for dealing with multiple columns
      *
@@ -180,7 +176,7 @@ export default class BrandedFooter
                         <li>
                             <a
                                 href="#"
-                                onClick={this.openFeedback}
+                                onClick={openUserSnap}
                             >
                                 <icons.Chat
                                     className="small"
