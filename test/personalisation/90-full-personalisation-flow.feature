@@ -21,7 +21,7 @@ Feature: Personalisation
 
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
-        And search box should contain "Richmond, Victoria"
+        And search box should contain "Richmond, VIC"
 
         When I click on the done button
         Then I should see "Do you have somewhere safe to sleep tonight?"
@@ -36,7 +36,7 @@ Feature: Personalisation
         Then I should see "Do any of these apply to you?"
 
         When I click on the done button
-        Then I should see "Richmond, Victoria | Safe tonight | 18-26"
+        Then I should see "Richmond, VIC | Safe tonight | 18-26"
 
         When I click back from the title bar
         Then I should be at /
@@ -53,7 +53,7 @@ Feature: Personalisation
 
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
-        And search box should contain "Richmond, Victoria"
+        And search box should contain "Richmond, VIC"
 
         When I click on the done button
         Then I should see "Do you have somewhere safe to sleep tonight?"
@@ -82,10 +82,10 @@ Feature: Personalisation
 
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
-        And search box should contain "Richmond, Victoria"
+        And search box should contain "Richmond, VIC"
 
         When I click on the done button
-        Then I should see "Richmond, Victoria"
+        Then I should see "Richmond, VIC"
 
     Scenario: Searching for domestic violence checks that I'm safe
         When I click on "Domestic & family violence help"
