@@ -7,16 +7,12 @@ import DemographicTorresStrait from "../icons/DemographicTorresStrait";
 import FacebookIcon from "../icons/Facebook";
 import Instagram from "../icons/Instagram";
 import MobileDetect from "./higherorder/MobileDetect";
+import { openUserSnap } from "../utils/usersnap";
 
 class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
     static sampleProps = {
         default: {},
     };
-
-    openFeedback(event: SyntheticInputEvent<>): void {
-        event.preventDefault();
-        window.Usersnap.logEvent("display_menu");
-    }
 
     render() {
         // There is an nginx rewrite to go to the correct donation URL,
@@ -41,7 +37,7 @@ class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
                         <li>
                             <a
                                 href="#"
-                                onClick={this.openFeedback}
+                                onClick={openUserSnap}
                             >
                                 Leave feedback
                             </a>
