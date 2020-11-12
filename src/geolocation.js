@@ -74,28 +74,22 @@ export async function guessSuburb(location: Position): Promise<string> {
         },
     });
 
-    /* return true if the types includes one of our interesting
-     * component types */
-    function interestingComponent(types: Array<string>): boolean {
-        return !_.isEmpty(_.intersection(
-            types,
-            ["locality", "administrative_area_level_1"]
-        ));
+    const address = possibleLocations
+        .find(location => location.types.some(type => 'locality'))
+        ?.address_components
+
+    if (!address) {
+        throw "Unable to determine your suburb";
     }
 
-    for (let geocodedLocation of possibleLocations) {
-        if (_.contains(geocodedLocation.types, "locality")) {
-            /* build a location name from the address components specified
-             * in interestingComponent. We do this because we don't want
-             * to show all the parts of Google's formatted_address */
-            let name = geocodedLocation.address_components
-                .filter(({types}) => interestingComponent(types))
-                .map((component) => component.long_name)
-                .join(", ");
+    const suburb = address
+        .find(({types}) => types.some(type => type === "locality"))
+        ?.long_name
+    const state = address
+        .find(({types}) => types.some(
+            type => type === "administrative_area_level_1"
+        ))
+        ?.short_name
 
-            return name;
-        }
-    }
-
-    throw "Unable to determine your suburb";
+    return `${suburb}, ${state}`
 }
