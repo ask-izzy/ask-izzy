@@ -15,8 +15,8 @@ Feature: See results on a map
     Scenario: View results on a map
        Given I am not interested in any subcategory
          And my location is 37.822S 144.99E
-        When I visit /everyday-things
-        And I click on "See more results"
+        When I visit /food-and-everyday-things
+        And I click on "Load more results…"
         And I wait for 10 results to load
         Then I should see the results
         ---------------------
@@ -66,7 +66,7 @@ Feature: See results on a map
 
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
-        When I click on "View on a map"
+        When I click on "View results on map"
         And I click marker titled "Youth Support Net"
         Then I should see the results
         ---------------------
@@ -84,7 +84,7 @@ Feature: See results on a map
 
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
-        When I click on "View on a map"
+        When I click on "View results on map"
         And I click marker titled "My Housing Service"
         Then I should see "Housing Service"
 
