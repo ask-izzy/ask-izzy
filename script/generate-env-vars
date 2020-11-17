@@ -6,19 +6,22 @@ set -euo pipefail
 IFS=$'\n\t'
 
 VERSION="$(cat public/VERSION)"
+STRAPI_URL=${STRAPI_URL:-}
 
 # Set Strapi url based on env.
-if [ "$ENVIRONMENT" = "prod" ]; then
-	STRAPI_URL="https://cms.askizzy.org.au"
-fi
-if [ "$ENVIRONMENT" = "staging" ]; then
-	STRAPI_URL="https://cms-uat.askizzy.org.au"
-fi
-if [ "$ENVIRONMENT" = "test" ]; then
-	STRAPI_URL="https://cms-askizzy-test.docker.dev"
-fi
-if [ "$ENVIRONMENT" = "dev" ] || [ "$ENVIRONMENT" = "development" ]; then
-	STRAPI_URL="https://cms-askizzy.docker.dev"
+if [ -z "$STRAPI_URL" ]; then
+	if [ "$ENVIRONMENT" = "prod" ]; then
+		STRAPI_URL="https://cms.askizzy.org.au"
+	fi
+	if [ "$ENVIRONMENT" = "staging" ]; then
+		STRAPI_URL="https://cms-uat.askizzy.org.au"
+	fi
+	if [ "$ENVIRONMENT" = "test" ]; then
+		STRAPI_URL="https://cms-askizzy-test.docker.dev"
+	fi
+	if [ "$ENVIRONMENT" = "dev" ] || [ "$ENVIRONMENT" = "development" ]; then
+		STRAPI_URL="https://cms-askizzy.docker.dev"
+	fi
 fi
 
 

@@ -13,9 +13,11 @@ import ResultsList from "../components/ResultsList";
 import resultsContent from "../results-content.json"
 import HeaderBar from "../components/HeaderBar";
 import LimitedServicesBanner from "../components/LimitedServicesBanner";
+import Switch from "../components/Switch";
 import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
 import UserSnapResults from "../components/feedback/UserSnapResults";
+import NotFoundStaticPage from "./NotFoundStaticPage"
 
 import * as gtm from "../google-tag-manager";
 import routerContext from "../contexts/router-context";
@@ -91,79 +93,111 @@ class ResultsListPage extends ResultsPage<Props, State> {
     }
 
     render() {
-        const path = this.props.location.pathname.replace(/\/?$/, "/map");
+        if (this.state.searchType) {
+            return this.renderPage()
+        } else {
+            return <NotFoundStaticPage/>
+        }
+    }
 
-        return (
-            <div className="ResultsListPage">
-                <AppBar
-                    title={this.title}
-                    backMessage={"Home Page"}
-                    onBackTouchTap={() => this.context.router.history.push("/")}
+    renderPage() { return (
+        <div className="ResultsListPage">
+            <AppBar
+                title={this.title}
+                backMessage={"Home Page"}
+                onBackTouchTap={() => this.context.router.history.push("/")}
+            />
+            <DebugContainer message="Debug personalisation">
+                <DebugPersonalisation
+                    search={this.search}
+                    items={this.personalisationComponents}
                 />
-                <DebugContainer message="Debug personalisation">
-                    <DebugPersonalisation
-                        search={this.search}
-                        items={this.personalisationComponents}
-                    />
-                </DebugContainer>
-                <DebugContainer message="ISS Parameters">
-                    <DebugSearch search={this.issParams()} />
-                </DebugContainer>
+            </DebugContainer>
+            <DebugContainer message="ISS Parameters">
+                <DebugSearch search={this.issParams()} />
+            </DebugContainer>
 
-                <HeaderBar
-                    className="LoadingResultsHeader"
-                    primaryText={
-                        <div className="LogoHeader">
-                            {this.title}
-                        </div>
-                    }
-                    secondaryText={
-                        <div>
-                            What you'll find here:
-                            <ul>
-                                {this.state.primaryInfo && <li><a href="#tools">
-                                    <icons.DownArrow />{this.state.primaryInfo.title}
-                                </a></li>}
-                                {this.state.keyInfo && <li><a href="#information">
-                                    <icons.DownArrow />Key information
-                                </a></li>}
-                                <li><a href="#services">
-                                    <icons.DownArrow />Support services
-                                </a></li>
-                            </ul>
-                        </div>
-                    }
-                    bannerName={this.category && this.category.bannerImage ? this.category.bannerImage : "homepage"}
-                />
+            <HeaderBar
+                className="LoadingResultsHeader"
+                primaryText={
+                    <div className="LogoHeader">
+                        {this.title}
+                    </div>
+                }
+                secondaryText={
+                    <div>
+                        What you'll find here:
+                        <ul>
+                            {this.state.primaryInfo && <li><a href="#tools">
+                                <icons.DownArrow />{this.state.primaryInfo.title}
+                            </a></li>}
+                            {this.state.keyInfo && <li><a href="#information">
+                                <icons.DownArrow />Key information
+                            </a></li>}
+                            <li><a href="#services">
+                                <icons.DownArrow />Support services
+                            </a></li>
+                        </ul>
+                    </div>
+                }
+                bannerName={this.category && this.category.bannerImage ? this.category.bannerImage : "homepage"}
+            />
 
-                { this.state.primaryInfo && this.renderPrimaryInfo() }
+            { this.state.primaryInfo && this.renderPrimaryInfo() }
 
-                { this.state.keyInfo && this.renderKeyInfo() }
+            { this.state.keyInfo && this.renderKeyInfo() }
 
-                <a className="anchor"
-                    id="services"
-                />
-                <div className="supportServices">
-                    <div className="heading">
-                        <h3>Support services</h3>
+            <a className="anchor"
+                id="services"
+            />
+            <div className="supportServices">
+                <div className="heading">
+                    <h3>Support services</h3>
+                    {!this.state.searchError && this.state.searchResults?.length !== 0 && <>
                         <hr />
                         <ViewOnMapButton
                             to={this.props.location.pathname.replace(/\/?$/, "/map")}
                             onClick={this.recordMapClick.bind(this)}
                         />
-                    </div>
-
-                    <ResultsList
-                        results={this.state.searchResults}
-                    />
-                    {this.renderLoadMore()}
-                    { !this.loading && this.state.loadMoreCount > 1 &&
-                        <UserSnapResults />
-                    }
+                    </>}
                 </div>
+                <Switch>
+                    <div switch-if={this.state.searchResults?.length === 0} className="resultsStatus">
+                        Sorry, I couldn't find any results
+                        for <em>{this.title}</em>. 
+                    </div>
+                    <ResultsList
+                        switch-if={this.state.searchResults}
+                        results={this.state.searchResults || []}
+                    />
+                </Switch>
+                {this.state.searchError &&
+                    <div switch-if={this.state.searchError} className="resultsStatus">
+                        Sorry, an error occurred. Please try again.
+                    </div>
+                }
+                <Switch>
+                    <div 
+                        switch-if={this.searchIsloading}
+                        className="resultsStatus"
+                    >
+                        <icons.Loading className="big" />
+                    </div>
+                    <div 
+                        switch-if={this.searchHasNextPage}
+                        className="loadMore"
+                    >
+                        <button onClick={this.loadNextSearchPage}>
+                            Load more results…
+                        </button>
+                    </div>
+                </Switch>
+                { !this.searchIsloading && this.state.searchPagesLoaded > 2 &&
+                    <UserSnapResults />
+                }
             </div>
-        );
-    }
+        </div>
+    )}
 
     renderPrimaryInfo() {
         const primaryInfo = this.state.primaryInfo
@@ -238,28 +272,6 @@ class ResultsListPage extends ResultsPage<Props, State> {
                 </div>
             </React.Fragment>
         )
-    }
-
-    renderLoadMore() {
-        if (this.state.searchResultsMeta && this.state.searchResultsMeta.next) {
-            return (
-                <div className="loadMore">
-                    <button
-                        onClick={this.loadMore.bind(this)}
-                    >
-                        Load more results…
-                    </button>
-                </div>
-            );
-        }
-
-        if (this.loading) {
-            return (
-                <div className="progress">
-                    <icons.Loading className="big" />
-                </div>
-            );
-        }
     }
 }
 

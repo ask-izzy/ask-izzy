@@ -16,42 +16,40 @@ Feature: History navigation
         Given a fresh session
         And my location is "Melbourne, VIC"
         And I am not part of any relevant demographics
-        And I am not interested in any subcategory
 
         When I visit /
-        And I click on "Housing"
+        And I click on "A place to stay"
 
         Then I should see "To help me find the right services I'll ask you a few questions"
-        And I should be at /housing/personalise
+        And I should be at /accommodation/personalise
 
         When I click on the done button # Intro
 
-        Then I should see "Do you have somewhere safe to sleep tonight?"
-        When I click on "Yes" # somewhere to sleep tonight
+        Then I should see "What kind of support do you need?"
+        When I click on "Help finding a place to live long term"
 
-        Then I should see "Do you identify as…"
+        Then I should see "What gender do you identify most closely with?"
 
         When I click on "Female"
         Then I should see "How old are you?"
 
         When I click back from the title bar
-        Then I should see "Do you identify as…"
+        Then I should see "What gender do you identify most closely with?"
 
         When I click on "Male"
         Then I should see "How old are you?"
 
         When I click on "18 to 26"
 
-        Then I should see 3 search results for "men aged 18 to 26" in "Melbourne, VIC"
-        And I should see "Housing"
-        And I should be at /housing/Melbourne-VIC/
+        Then I should see "A place to stay"
+        And I should be at /accommodation/Melbourne-VIC/
         And I should see the results
         --------------------------------------------------------------------------
-        Service Name (name) | Site Name (site_name) | Service provisions (related)
+        Service Name (name) | Site Name (site_name) | Eligibility (eligibility ul)
         ==========================================================================
-        Housing Service     | My Housing Service    | (nada)
-        Emergency Accom     | Youth Support Net     | (nada)
-        Womens Refuge       | Susan's House         | Crisis accommodation
+        Housing Service     | My Housing Service    | Located in Carlton
+        Emergency Accom     | Youth Support Net     | 
+        Womens Refuge       | Susan's House         |
         --------------------------------------------------------------------------
 
         When I click on "Housing Service"
@@ -61,9 +59,16 @@ Feature: History navigation
         When I reload the page
         And I click back from the browser UI
 
-        Then I should be at /housing/Melbourne-VIC/
+        Then I should be at /accommodation/Melbourne-VIC/
 
-        Then I should see 3 search results for "men aged 18 to 26" in "Melbourne, VIC"
+        Then I should see the results
+        --------------------------------------------------------------------------
+        Service Name (name) | Site Name (site_name) | Eligibility (eligibility ul)
+        ==========================================================================
+        Housing Service     | My Housing Service    | Located in Carlton
+        Emergency Accom     | Youth Support Net     | 
+        Womens Refuge       | Susan's House         |
+        --------------------------------------------------------------------------
 
         When I click back from the browser UI
         And I click back from the browser UI # We have to go back past the hash

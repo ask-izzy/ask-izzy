@@ -40,3 +40,5 @@ server.listen(server.get("port"), "0.0.0.0", () => {
 
     console.info(`Express ${env} server listening on ${port}`);
 });
+
+export default server

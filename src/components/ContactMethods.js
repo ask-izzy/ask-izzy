@@ -103,7 +103,7 @@ class ContactMethods extends React.Component<Props, void> {
         })
         gtm.emit({
             event: "Service Contact Details Expanded",
-            eventCat: "Content Expanded",
+            eventCat: "Content Displayed",
             eventAction: "Service Contact Details",
             eventLabel: location.pathname,
             sendDirectlyToGA: true,
