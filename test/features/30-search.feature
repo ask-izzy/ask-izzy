@@ -38,14 +38,12 @@ Feature: Search
         Then I should see
         ---------------------------------------------------------
         Sorry, I couldn't find any results for “zero results”.
-
         ---------------------------------------------------------
-        And I should not see "View on a map"
+        And I should not see "View results on map"
 
     Scenario: Search returning an error returns a nice sentence
         When I search for "cause error" and press enter
-        Then I should see "Sorry, I couldn't do this search."
-        And I should see "An error occurred. Please try again."
+        Then I should see "Sorry, an error occurred. Please try again."
 
     Scenario: Searching for domestic violence performs the safety check
         When I search for "domestic violence" and press enter

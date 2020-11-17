@@ -13,13 +13,13 @@ PS4='$ $0:$LINENO: '
 
 PATH=$(npm bin):$PATH
 CI=${CI:-}
-BAIL_ON_TEST_FAIL=${BAIL_ON_TEST_FAIL:-}
+FAIL_FAST=${FAIL_FAST:-}
 
 export NODE_ENV=production
 export PORT=8010
 export ENVIRONMENT=development
 
-./script/test-setup
+# ./script/test-setup
 
 # Point the app at our mock ISS instance.
 ISS_URL="http://localhost:5000/"
@@ -32,6 +32,6 @@ mocha \
     --require @babel/register \
     --require regenerator-runtime/runtime \
     --exit \
-    $(([ -n "$CI" ] || [ -n "$BAIL_ON_TEST_FAIL" ]) && echo "--bail") \
+    $(([ -n "$CI" ] || [ -n "$FAIL_FAST" ]) && echo "--bail") \
     --timeout "$INTERACTIVE_TIMEOUT" \
     test/feature.js $@

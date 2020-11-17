@@ -174,7 +174,7 @@ async function checkURL(expected: string): Promise<void> {
     }
 
     await this.driver.wait(
-        urlIs(this.driver, expected),
+        () => urlIs(this.driver, expected),
         10000,
         `URL should be ${
             expected
@@ -200,6 +200,7 @@ async function thenISee(expected: string): Promise<void> {
 }
 
 async function thenIDontSee(expected: string): Promise<void> {
+    this.mochaState.slow(22000)
     try {
         await assert.textIsVisible(this.driver, expected);
     } catch (error) {
