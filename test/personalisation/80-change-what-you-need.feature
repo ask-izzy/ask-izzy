@@ -12,28 +12,10 @@ Feature: Change your personalisation settings
         And I am 27 years old
         And I am not part of any relevant demographics
 
-    Scenario: View personalisation settings and return to search
-        When I click on "Housing"
-        And I click on "Edit Answers"
-        Then I should see "Change your answers here"
-        Then I should see the results
-        ----------------------------------------------------------------
-        Question (primaryText)                       | Answer (secondaryText)
-        ================================================================
-        Where are you looking for help?              | Melbourne, Vic
-        Do you have somewhere safe to sleep tonight? | Yes
-        How do you identify?                         | Female
-        How old are you?                             | 26 to 64
-        Do any of these apply to you?                | None selected
-        ----------------------------------------------------------------
-
-        When I click back from the title bar
-        Then I should be at /housing/Melbourne-Vic/
-
     Scenario: Edit my location setting
-        When I visit /housing/personalise/summary
+        When I visit /accommodation/personalise/summary
         And I click on "Where are you looking for help?"
-        Then I should see "This will help find services closest to your chosen location"
+        Then I should see "Get your current location"
 
         When I search for "carlt"
         And I click on "Carlton"
@@ -44,24 +26,24 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        What kind of support do you need?            | Help finding a place to live long term
         Where are you looking for help?              | Carlton, VIC
-        Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
     Scenario: Edit whether I have somewhere to sleep tonight
-        When I visit /housing/personalise/summary
-        And I click on "Do you have somewhere safe to sleep tonight?"
-        And I click on "No"
+        When I visit /accommodation/personalise/summary
+        And I click on "What kind of support do you need?"
+        And I click on "Somewhere to sleep tonight"
         Then I should see "Change your answers here"
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        What kind of support do you need?            | Somewhere to sleep tonight
         Where are you looking for help?              | Melbourne, Vic
-        Do you have somewhere safe to sleep tonight? | No
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | None selected
@@ -73,14 +55,14 @@ Feature: Change your personalisation settings
         Aboriginal
         --------------------------------------
 
-        When I visit /housing/personalise/summary
+        When I visit /accommodation/personalise/summary
         Then I should see "Change your answers here"
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        What kind of support do you need?            | Help finding a place to live long term
         Where are you looking for help?              | Melbourne, Vic
-        Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | Aboriginal and/or Torres Strait Islander
@@ -94,15 +76,15 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        What kind of support do you need?            | Help finding a place to live long term
         Where are you looking for help?              | Melbourne, Vic
-        Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
     Scenario: Edit gender
-        When I visit /housing/personalise/summary
+        When I visit /accommodation/personalise/summary
         And I click on "How do you identify?"
         And I click on "Male"
         Then I should see "Change your answers here"
@@ -110,19 +92,22 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
+        What kind of support do you need?            | Help finding a place to live long term
         Where are you looking for help?              | Melbourne, Vic
-        Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Male
         How old are you?                             | 26 to 64
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
     Scenario: Clear my personalisation
-        When I visit /housing/personalise/summary
-         And I click on "Delete all answers"
+        When I visit /accommodation/personalise/summary
+        And I click on "Delete all answers"
+
         Then I should see the branding header
-         And I should be at /
-        When I click on "Housing"
+        And I should be at /
+
+        When I click on "A place to stay"
         Then I should see "To help me find the right services I'll ask you a few questions"
-         And I click on the done button
+        And I click on the done button
+
         Then I should not see "Melbourne, Vic"
