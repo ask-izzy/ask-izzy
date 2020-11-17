@@ -11,7 +11,8 @@ services:
             DEVNAME: docker
             ENVIRONMENT: dev
             SCREENSHOT_FAILURES: 1
-            BAIL_ON_TEST_FAIL: 1
+            FAIL_FAST: 1
+            PAUSE_AFTER_FAIL: 1
         ports:
             - '80:8000'
             - '8000:8000'

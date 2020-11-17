@@ -55,6 +55,7 @@ import ServiceListIntro from "./components/ServiceListIntro";
 import ServicePane from "./components/ServicePane";
 import Spacer from "./components/Spacer";
 import SvgIcon from "./components/SvgIcon";
+import Switch from "./components/Switch";
 import TransportTime from "./components/TransportTime";
 import ViewOnMapButton from "./components/ViewOnMapButton";
 import Web from "./components/Web";
@@ -113,6 +114,7 @@ export default {
     ServicePane,
     Spacer,
     SvgIcon,
+    Switch,
     TransportTime,
     ViewOnMapButton,
     Web,

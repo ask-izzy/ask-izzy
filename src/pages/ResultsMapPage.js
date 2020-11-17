@@ -132,7 +132,6 @@ class ResultsMapPage extends ResultsPage<Props, State> {
             <div className="ResultsPage">
                 <AppBar
                     title={this.title}
-                    backMessage={this.backButtonMessage()}
                     onBackTouchTap={this.onBackClick}
                 />
                 <DebugContainer message="Debug personalisation">

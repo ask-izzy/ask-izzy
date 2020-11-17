@@ -18,8 +18,8 @@ Feature: Meta
         Then the canonical meta is /
 
     Scenario: Visit Food banks
-        When I visit /food-banks
-        Then the canonical meta is /food-banks
+        When I visit /food-info
+        Then the canonical meta is /food-info
 
     Scenario: View search results
         When I visit /search/room for the night

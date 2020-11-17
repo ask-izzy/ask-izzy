@@ -4,7 +4,7 @@ Feature: CMS integration
     # When I visit the about page
     # I want to be able to see the Ask Izzy About page
     Scenario: Display about page
-       Given a fresh session
+      Given a fresh session
         When I visit /about
         Then I should see "About Ask Izzy"
         Then I should see "We’re always making improvements."
@@ -22,7 +22,7 @@ Feature: CMS integration
     # I want to be able to see just the first entry
     Scenario: Display only the first page when multiple are returned.
       Given a fresh session
-        When I visit /food-banks
+        When I visit /food-info
         Then I should see "Page 1"
         And I should not see "Page 2"
 

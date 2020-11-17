@@ -255,8 +255,11 @@ The following environment variables an be set to any string in order to enable d
   - SCREENSHOT_FAILURES
   This will generate screenshots when a test fails.
 
-  - BAIL_ON_TEST_FAIL
+  - FAIL_FAST
   Setting this flag will halt testing as soon as one test fails.
+
+  - PAUSE_AFTER_FAIL
+  If true this will wait before exiting after test failure to allow a chance to manual debug the situation while the Ask Izzy and Mock ISS servers are still running.
 
 ## Tests
 All tests live in the `test` top level directory.
@@ -306,9 +309,9 @@ docker-compose run --rm app lint
 Running the tests:
 ````bash
 docker-compose run --rm app unit-test
-docker-compose run --rm app feature-test
-docker-compose run --rm app personalisation-test
-docker-compose run --rm app maps-test
+docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app feature-test
+docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app personalisation-test
+docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app maps-test
 # or without docker: 
 ./script/unit-test
 ./script/feature-test

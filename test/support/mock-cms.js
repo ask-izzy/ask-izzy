@@ -54,7 +54,7 @@ const mocks = {
                 }]
             } else if (path === "/online-safety") {
                 return []
-            } else if (path === "/food-banks") {
+            } else if (path === "/food-info") {
                 return [
                     {Title: "Page 1"},
                     {Title: "Page 2"},
@@ -69,8 +69,8 @@ const mocks = {
 const url = process.env.STRAPI_URL
 let options;
 if (url) {
-    const {port} = new URL(url)
-    options = {port}
+    const {port, hostname: host} = new URL(url)
+    options = {port, host}
 }
 
 const server = new ApolloServer({

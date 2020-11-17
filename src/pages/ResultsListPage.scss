@@ -141,10 +141,6 @@
         }
     }
 
-    .progress {
-        text-align: center;
-    }
-
     .otherCovidSupportCategories {
         h3 {
             padding: 0 $padding;
@@ -158,6 +154,11 @@
             margin-bottom: 0;
             padding-left: 0;
         }
+    }
+
+    .resultsStatus {
+        text-align: center;
+        padding: 2em 1em;
     }
 
     .exitCovidFlowBox {

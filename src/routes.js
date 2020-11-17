@@ -20,7 +20,6 @@ import AddServicePage from "./pages/AddServicePage";
 import DisabilityAdvocacyFinder from "./pages/DisabilityAdvocacyFinder";
 import DynamicPage from "./pages/DynamicPage";
 import BetaInfoStaticPage from "./pages/BetaInfoStaticPage";
-import Covid19StaticPage from "./pages/Covid19StaticPage";
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";

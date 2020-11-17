@@ -99,7 +99,7 @@ export class AppendToSearch extends Search {
     compose(search: iss.searchRequest): iss.searchRequest {
         search = super.compose(search);
         if (this.search.q) {
-            search.q = (search.q || "") + " " + this.search.q;
+            search.q = (search.q ? `${search.q} ` : '') + this.search.q;
         }
 
         if (this.search.age_group) {

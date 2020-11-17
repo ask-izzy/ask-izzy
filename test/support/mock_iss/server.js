@@ -64,6 +64,10 @@ app.get("/api/v3/location/search/", (req, res) => {
     });
 });
 
+app.get("/api/v3/list-all-mocked/", (req, res) => {
+    res.json(mocks);
+});
+
 /* eslint-disable complexity */
 /* FIXME: refactor to use mocks instead of these */
 app.get("/api/v3/search/", (req, res) => {
@@ -143,7 +147,7 @@ app.get("/api/v3/search/", (req, res) => {
             },
             objects: searchMocks[req.query.q],
         });
-    } else if (req.query.q.match(/food/) && !req.query.q.match(/pet/)) {
+    } else if (req.query.q.match(/^food/) && !req.query.q.match(/pet/)) {
         res.json({
             meta: {
                 total_count: 4,
@@ -229,7 +233,7 @@ app.get("/api/v3/search/", (req, res) => {
                 },
             ].map(ServiceFactory),
         });
-    } else if (req.query.q.match(/material aid/)) {
+    } else if (req.query.q.match(/^meals /)) {
         const object = {
             name: "Community Lunch",
             description: "A weekly lunch.",
