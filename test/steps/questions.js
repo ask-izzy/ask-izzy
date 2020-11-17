@@ -56,16 +56,16 @@ async function clickDoneButton(): Promise<void> {
 
 async function setSleepTonight(answer: string): Promise<void> {
     if (answer === "somewhere") {
-        answer = "Yes";
+        answer = "Help finding a place to live long term";
     } else if (answer === "nowhere") {
-        answer = "No";
+        answer = "Somewhere to sleep tonight";
     } else {
-        throw new Error(`Expected ${answer} to be Yes or No`);
+        throw new Error(`Expected ${answer} to be somewhere or nowhere`);
     }
 
     await gotoUrl(this.driver, "/"); // go anywhere to start the session
     await this.driver.executeScript(answer => {
-        IzzyStorage.setItem("sleep-tonight", answer);
+        IzzyStorage.setItem("sub-housing", answer);
     }, answer);
 }
 
