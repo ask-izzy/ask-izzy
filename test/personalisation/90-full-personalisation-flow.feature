@@ -12,10 +12,13 @@ Feature: Personalisation
 
     Scenario: Search for housing with personalised results
         Given control of geolocation
-        When I click on "Housing"
+        When I click on "A place to stay"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
+        Then I should see "What kind of support do you need?"
+
+        When I click on "Help finding a place to live long term"
 
         When I click on "Get your current location"
 
@@ -24,10 +27,7 @@ Feature: Personalisation
         And search box should contain "Richmond, Victoria"
 
         When I click on the done button
-        Then I should see "Do you have somewhere safe to sleep tonight?"
-
-        When I click on "Yes"
-        Then I should see "Do you identify as…"
+        Then I should see "What gender do you identify most closely with?"
 
         When I click on the done button # Didn't answer the question
         Then I should see "How old are you?"
@@ -35,18 +35,33 @@ Feature: Personalisation
         When I click on "18 to 26"
         Then I should see "Do any of these apply to you?"
 
-        When I click on the done button
-        Then I should see 3 search results for "people aged 18 to 26" in "Richmond, Victoria"
+        When I click on the done button        
+        And I visit /accommodation/personalise/summary
+
+        Then I should see "Change your answers here"
+        Then I should see the results
+        ----------------------------------------------------------------
+        Question (primaryText)                       | Answer (secondaryText)
+        ================================================================
+        What kind of support do you need?            | Help finding a place to live long term
+        Where are you looking for help?              | Richmond, Victoria
+        How do you identify?                         | (skipped)
+        How old are you?                             | 18 to 26
+        Do any of these apply to you?                | None selected
+        ----------------------------------------------------------------
 
         When I click back from the title bar
-        Then I should be at /
+        Then I should be at /accommodation/Richmond-Victoria/
 
     Scenario: Search for emergency accommodation
         Given control of geolocation
-        When I click on "Housing"
+        When I click on "A place to stay"
         Then I should see "To help me find the right services I'll ask you a few questions"
 
         When I click on the done button
+        Then I should see "What kind of support do you need?"
+
+        When I click on "Somewhere to sleep tonight"
         Then I should see "Where are you looking for help?"
 
         When I click on "Get your current location"
@@ -56,10 +71,7 @@ Feature: Personalisation
         And search box should contain "Richmond, Victoria"
 
         When I click on the done button
-        Then I should see "Do you have somewhere safe to sleep tonight?"
-
-        When I click on "No"
-        Then I should see "Do you identify as…"
+        Then I should see "What gender do you identify most closely with?"
 
         When I click on "Female"
         Then I should see "How old are you?"
@@ -68,7 +80,7 @@ Feature: Personalisation
         Then I should see "Do any of these apply to you?"
 
         When I click on the done button
-        Then I should see "Housing"
+        Then I should see "A place to stay"
 
     Scenario: Do a search
         Given control of geolocation
@@ -83,19 +95,3 @@ Feature: Personalisation
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, Victoria"
-
-        When I click on the done button
-        Then I should see 3 search results in "Richmond, Victoria"
-
-    Scenario: Searching for domestic violence checks that I'm safe
-        When I click on "Domestic & family violence help"
-        Then I should see "To help me find the right services I'll ask you a few questions"
-
-        When I click on the done button
-        Then I should see "Are you safe right now?"
-
-        When I click on "No"
-        Then I should see "Everyone has the right to be safe"
-
-        When I click back from the title bar
-        Then I should see "Intro"
