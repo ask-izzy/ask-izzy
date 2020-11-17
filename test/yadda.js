@@ -97,6 +97,21 @@ let processFile = (file) => {
                     )
                 }
 
+                console.log(indent + "Browser logs:")
+                if (!testBrowserLog.some(step => step.browserLog.length)) {
+                    console.log(
+                        indent + `  <nothing logged>`
+                    )
+                } else {
+                    let maxLineLength = process.stdout.columns ?
+                        process.stdout.columns
+                        : 100
+
+                    await printLogs(
+                        testBrowserLog, indent + "  ", maxLineLength
+                    )
+                }
+
                 if (process.env.SCREENSHOT_FAILURES) {
                     try {
                         const filepath = await takeScreenshot(
@@ -111,21 +126,6 @@ let processFile = (file) => {
                         console.log(indent + "Failed to take screenshot");
                         console.log(indent + err);
                     }
-                }
-
-                console.log(indent + "Browser logs:")
-                if (!testBrowserLog.some(step => step.browserLog.length)) {
-                    console.log(
-                        indent + `  <nothing logged>`
-                    )
-                } else {
-                    let maxLineLength = process.stdout.columns ?
-                        process.stdout.columns
-                        : 100
-
-                    await printLogs(
-                        testBrowserLog, indent + "  ", maxLineLength
-                    )
                 }
             } else {
                 if (process.env.SCREENSHOT_FAILURES) {
