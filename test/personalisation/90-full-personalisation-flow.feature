@@ -24,7 +24,7 @@ Feature: Personalisation
 
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
-        And search box should contain "Richmond, Victoria"
+        And search box should contain "Richmond, VIC"
 
         When I click on the done button
         Then I should see "What gender do you identify most closely with?"
@@ -44,14 +44,14 @@ Feature: Personalisation
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         What kind of support do you need?            | Help finding a place to live long term
-        Where are you looking for help?              | Richmond, Victoria
+        Where are you looking for help?              | Richmond, VIC
         How do you identify?                         | (skipped)
         How old are you?                             | 18 to 26
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
         When I click back from the title bar
-        Then I should be at /accommodation/Richmond-Victoria/
+        Then I should be at /accommodation/Richmond-VIC/
 
     Scenario: Search for emergency accommodation
         Given control of geolocation
@@ -68,7 +68,7 @@ Feature: Personalisation
 
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
-        And search box should contain "Richmond, Victoria"
+        And search box should contain "Richmond, VIC"
 
         When I click on the done button
         Then I should see "What gender do you identify most closely with?"
@@ -94,4 +94,4 @@ Feature: Personalisation
 
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
-        And search box should contain "Richmond, Victoria"
+        And search box should contain "Richmond, VIC"

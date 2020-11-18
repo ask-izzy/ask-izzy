@@ -69,8 +69,8 @@ const mocks = {
 const url = process.env.STRAPI_URL
 let options;
 if (url) {
-    const {port, hostname: host} = new URL(url)
-    options = {port, host}
+    const {port} = new URL(url)
+    options = {port}
 }
 
 const server = new ApolloServer({
