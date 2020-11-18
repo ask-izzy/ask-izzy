@@ -19,11 +19,11 @@ export NODE_ENV=production
 export PORT=8010
 export ENVIRONMENT=development
 
-# ./script/test-setup
+./script/test-setup
 
 # Point the app at our mock ISS instance.
 ISS_URL="http://localhost:5000/"
-export STRAPI_URL="http://0.0.0.0:5001"
+export STRAPI_URL="http://localhost:5001"
 ./script/recreate-dev-env-file
 
 # we want this quite high as it makes debugging the tests easier.
