@@ -13,8 +13,10 @@ Feature: See results on a map
         And I am not part of any relevant demographics
 
     Scenario: View results on a map
-       Given I am not interested in any subcategory
-         And my location is 37.822S 144.99E
+        Given I am not interested in any subcategory
+        And my location is 37.822S 144.99E
+        And I need the following for food: Finding a free meal nearby
+
         When I visit /food-and-everyday-things
         And I click on "Load more results…"
         And I wait for 10 results to load
@@ -34,7 +36,7 @@ Feature: See results on a map
         Community Lunch
         ---------------------
 
-       Given I'm watching map events
+        Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
         When I click the map link
         Then I should see a map
@@ -64,7 +66,7 @@ Feature: See results on a map
         ---------------------
 
     Scenario: Clicking a marker shows services at that site and clicking on map returns to full map
-        When I visit /housing
+        When I visit /rent-and-tenancy
 
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
@@ -75,19 +77,20 @@ Feature: See results on a map
         ServiceName (name)
         =====================
         Emergency Accom
-        Womens Refuge
         ---------------------
 
         When I click on the map
         Then I should not see "Housing Service"
 
     Scenario: Clicking a marker shows services at that site and clicking back returns to full map
-        When I visit /housing
+        When I visit /rent-and-tenancy
 
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
         When I click on "View results on map"
-        And I click marker titled "My Housing Service"
+        Then I should see a map
+
+        When I click marker titled "My Housing Service"
         Then I should see "Housing Service"
 
         When I click back from the title bar
@@ -95,4 +98,4 @@ Feature: See results on a map
         And I should not see "Housing Service"
 
         When I click back from the title bar
-        Then I should be at /housing
+        Then I should be at /rent-and-tenancy

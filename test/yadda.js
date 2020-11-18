@@ -82,10 +82,15 @@ let processFile = (file) => {
         });
 
         afterEach(async function(): Promise<void> {
-            testBrowserLog.push({
-                step: this.currentTest.title,
-                browserLog: await driver.manage().logs().get("browser"),
-            })
+            try {
+                testBrowserLog.push({
+                    step: this.currentTest.title,
+                    browserLog: await driver.manage().logs().get("browser"),
+                })
+            } catch(err) {
+                console.error('Can not connect to the browser')
+                return
+            }
             if (this.currentTest.state !== "passed") {
                 testFailed = true;
                 if (testHarnessLog.length) {

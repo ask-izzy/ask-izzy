@@ -91,7 +91,7 @@ export default async function webDriverInstance(
                 ])
                 // Increase window size to make it easer to analyse failure
                 // screenshots
-                .windowSize({width: 1000, height: 3000})
+                .windowSize({width: 1000, height: 1000})
         )
         .build();
 
