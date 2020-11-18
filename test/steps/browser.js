@@ -363,9 +363,17 @@ async function cleanSession(): Promise<void> {
 }
 
 async function takeScreenshot(): Promise<void> {
+    const testIndex = this.mochaState.test.parent.tests
+        .findIndex(test => test === this.mochaState.test)
+    let previousTest;
+    if (testIndex > 0) {
+        previousTest = this.mochaState.test.parent.tests[testIndex - 1]
+    } else {
+        previousTest = this.mochaState.test.parent
+    }
     const filepath = await debug.takeScreenshot(
         this.driver,
-        this.mochaState.currentTest
+        previousTest
     )
 
     console.log(`${this.indent}  Screenshot saved to "${filepath}"`);
