@@ -31,8 +31,6 @@ const mocks = {
   Query: () =>({
     pages: (parent, args, context, info) => {
       const path = args?.where?.Path || info?.variableValues?.path
-      // console.log(parent, args, context, info)
-      // console.log(1, path, 1, info.variableValues)
       if (path === '/about') {
         return [{
           Title: "About Ask Izzy",
@@ -60,8 +58,8 @@ const mocks = {
 const url = process.env.STRAPI_URL
 let options;
 if (url) {
-  const {port, hostname: host} = new URL(url)
-  options = {port, host}
+  const {port} = new URL(url)
+  options = {port}
 }
 
 const server = new ApolloServer({
