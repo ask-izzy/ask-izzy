@@ -11,6 +11,19 @@ import React from "react";
  *  If a condition prop is given then the value of switch-if prop for each child
  *  will be companied to the value of the condition prop when evaluating which
  *  child will be rendered.
+ *
+ *  Examples:
+ *  <Switch condition="bar">
+ *      <div switch-if="foo">foo</div>
+ *      <div switch-if="bar">bar</div> <!--only this child will be rendered-->
+ *      <div>default</div>
+ *  </Switch>
+ *
+ *  <Switch>
+ *      <div switch-if={1 === 2}>foo</div>
+ *      <div switch-if={1 === 1}>bar</div> <!--only this child will be rendered-->
+ *      <div>default</div>
+ *  </Switch>
  */
 const Switch = props => {
     let match = React.Children.toArray(props.children).find(child =>
