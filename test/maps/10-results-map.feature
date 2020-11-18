@@ -86,7 +86,9 @@ Feature: See results on a map
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
         When I click on "View results on map"
-        And I click marker titled "My Housing Service"
+        Then I should see a map
+
+        When I click marker titled "My Housing Service"
         Then I should see "Housing Service"
 
         When I click back from the title bar
