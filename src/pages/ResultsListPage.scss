@@ -4,6 +4,7 @@
     .HeaderBar {
         height: 180px;
         max-height: unset;
+
         a,
         .link-color {
             color: $white;
@@ -17,11 +18,12 @@
         .secondary {
             font-size: 1em;
             font-weight: bold;
+
             ul {
-                list-style-type: none;
-                padding: 0;
                 margin: 0;
+                padding: 0;
                 font-weight: normal;
+                list-style-type: none;
 
                 li {
                     margin: 0.2em 0;
@@ -31,9 +33,11 @@
                     text-decoration: none;
                 }
             }
+
             .DownArrowIcon {
                 width: 0.8em;
                 height: 0.8em;
+
                 path {
                     fill: $white;
                 }
@@ -106,10 +110,10 @@
             overflow: auto;
 
             h3 {
+                margin: 0.5em;
                 color: $brand-text-mid;
                 font-size: 26px;
                 font-weight: 500;
-                margin: 0.5em;
             }
 
             hr {
@@ -157,8 +161,8 @@
     }
 
     .resultsStatus {
-        text-align: center;
         padding: 2em 1em;
+        text-align: center;
     }
 
     .exitCovidFlowBox {
