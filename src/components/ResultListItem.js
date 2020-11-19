@@ -8,19 +8,10 @@ import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import iss from "../iss";
 
-import DebugContainer from "./DebugContainer";
-import DebugQueryScore from "./DebugQueryScore";
-import DebugServiceRecord from "./DebugServiceRecord";
-
-import LinkListItem from "./LinkListItem";
-import Accessibility from "./Accessibility";
 import Eligibility from "../components/Eligibility";
 import OpeningTimes from "./OpeningTimes";
 import Ndis from "./Ndis";
-import TransportTime from "./TransportTime";
 import * as gtm from "../google-tag-manager";
-import IndigenousServiceIcon from "./IndigenousServiceIcon";
-import LgbtiqIcon from "./LgbtiqIcon";
 import { titleize } from "underscore.string";
 
 class ResultListItem extends React.Component<{

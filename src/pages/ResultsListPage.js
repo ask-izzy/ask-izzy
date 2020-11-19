@@ -1,8 +1,6 @@
 /* @flow */
 
 import React from "react";
-import PropTypes from "proptypes";
-import _ from "underscore";
 
 import AppBar from "../components/AppBar";
 import DebugContainer from "../components/DebugContainer";
@@ -12,7 +10,6 @@ import ResultsPage from "./ResultsPage";
 import ResultsList from "../components/ResultsList";
 import resultsContent from "../results-content.json"
 import HeaderBar from "../components/HeaderBar";
-import LimitedServicesBanner from "../components/LimitedServicesBanner";
 import Switch from "../components/Switch";
 import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
@@ -20,7 +17,6 @@ import UserSnapResults from "../components/feedback/UserSnapResults";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 
 import * as gtm from "../google-tag-manager";
-import routerContext from "../contexts/router-context";
 import storage from "../storage";
 import type { Service } from "../iss";
 import type Category from "../constants/Category";
@@ -61,8 +57,8 @@ class ResultsListPage extends ResultsPage<Props, State> {
         // We have to load this after the first render so we match
         // server-rendered markup on hydrate stage
         if (this.category) {
-            const subCategory = this.category.slug === 'money' && 
-                storage.getItem('sub-money')
+            const subCategory = this.category.slug === "money" &&
+                storage.getItem("sub-money")
             const topicInfo = this.category && getTopicInfo(
                 this.category,
                 subCategory,
@@ -100,7 +96,7 @@ class ResultsListPage extends ResultsPage<Props, State> {
         }
     }
 
-    renderPage() { return (
+    renderPage = () => (
         <div className="ResultsListPage">
             <AppBar
                 title={this.title}
@@ -126,10 +122,11 @@ class ResultsListPage extends ResultsPage<Props, State> {
                 }
                 secondaryText={
                     <div>
-                        What you'll find here:
+                    What you'll find here:
                         <ul>
                             {this.state.primaryInfo && <li><a href="#tools">
-                                <icons.DownArrow />{this.state.primaryInfo.title}
+                                <icons.DownArrow />
+                                {this.state.primaryInfo.title}
                             </a></li>}
                             {this.state.keyInfo && <li><a href="#information">
                                 <icons.DownArrow />Key information
@@ -140,64 +137,19 @@ class ResultsListPage extends ResultsPage<Props, State> {
                         </ul>
                     </div>
                 }
-                bannerName={this.category && this.category.bannerImage ? this.category.bannerImage : "homepage"}
+                bannerName={this.category && this.category.bannerImage ?
+                    this.category.bannerImage
+                    : "homepage"
+                }
             />
 
             { this.state.primaryInfo && this.renderPrimaryInfo() }
 
             { this.state.keyInfo && this.renderKeyInfo() }
 
-            <a className="anchor"
-                id="services"
-            />
-            <div className="supportServices">
-                <div className="heading">
-                    <h3>Support services</h3>
-                    {!this.state.searchError && this.state.searchResults?.length !== 0 && <>
-                        <hr />
-                        <ViewOnMapButton
-                            to={this.props.location.pathname.replace(/\/?$/, "/map")}
-                            onClick={this.recordMapClick.bind(this)}
-                        />
-                    </>}
-                </div>
-                <Switch>
-                    <div switch-if={this.state.searchResults?.length === 0} className="resultsStatus">
-                        Sorry, I couldn't find any results
-                        for <em>{this.title}</em>. 
-                    </div>
-                    <ResultsList
-                        switch-if={this.state.searchResults}
-                        results={this.state.searchResults || []}
-                    />
-                </Switch>
-                {this.state.searchError &&
-                    <div switch-if={this.state.searchError} className="resultsStatus">
-                        Sorry, an error occurred. Please try again.
-                    </div>
-                }
-                <Switch>
-                    <div 
-                        switch-if={this.searchIsloading}
-                        className="resultsStatus"
-                    >
-                        <icons.Loading className="big" />
-                    </div>
-                    <div 
-                        switch-if={this.searchHasNextPage}
-                        className="loadMore"
-                    >
-                        <button onClick={this.loadNextSearchPage}>
-                            Load more results…
-                        </button>
-                    </div>
-                </Switch>
-                { !this.searchIsloading && this.state.searchPagesLoaded > 2 &&
-                    <UserSnapResults />
-                }
-            </div>
+            { this.renderSupportServices() }
         </div>
-    )}
+    )
 
     renderPrimaryInfo() {
         const primaryInfo = this.state.primaryInfo
@@ -273,6 +225,69 @@ class ResultsListPage extends ResultsPage<Props, State> {
             </React.Fragment>
         )
     }
+
+    renderSupportServices = () => <>
+        <a className="anchor"
+            id="services"
+        />
+        <div className="supportServices">
+            <div className="heading">
+                <h3>Support services</h3>
+                {this.showMapButton && <>
+                    <hr />
+                    <ViewOnMapButton
+                        to={
+                            this.props.location.pathname.replace(/\/?$/, "/map")
+                        }
+                        onClick={this.recordMapClick.bind(this)}
+                    />
+                </>}
+            </div>
+            <Switch>
+                <div switch-if={this.state.searchResults?.length === 0}
+                    className="resultsStatus"
+                >
+                Sorry, I couldn't find any results
+                for <em>{this.title}</em>.
+                </div>
+                <ResultsList
+                    switch-if={this.state.searchResults}
+                    results={this.state.searchResults || []}
+                />
+            </Switch>
+            {this.state.searchError &&
+            <div switch-if={this.state.searchError}
+                className="resultsStatus"
+            >
+                Sorry, an error occurred. Please try again.
+            </div>
+            }
+            <Switch>
+                <div
+                    switch-if={this.searchIsloading}
+                    className="resultsStatus"
+                >
+                    <icons.Loading className="big" />
+                </div>
+                <div
+                    switch-if={this.searchHasNextPage}
+                    className="loadMore"
+                >
+                    <button onClick={this.loadNextSearchPage}>
+                    Load more results…
+                    </button>
+                </div>
+            </Switch>
+            { !this.searchIsloading && this.state.searchPagesLoaded > 2 &&
+            <UserSnapResults />
+            }
+        </div>
+    </>
+
+    get showMapButton(): boolean {
+        return !this.state.searchError &&
+            this.state.searchResults?.length !== 0
+    }
 }
 
 export default ResultsListPage;
@@ -289,7 +304,7 @@ function getTopicInfo(category, subCategory, location) {
         "accommodation": "Housing",
     }
     resultsCategoryKey = slugMap[category.slug]
-    if (category.slug === 'money' && subCategory === 'Centrelink') {
+    if (category.slug === "money" && subCategory === "Centrelink") {
         resultsCategoryKey = "Centrelink"
     }
     const locationMatch = location.match(/,\s*(\w+)$/)
@@ -297,7 +312,7 @@ function getTopicInfo(category, subCategory, location) {
 
     const relevantResultsContent = resultsContent
         .filter(
-            content => content.Category === resultsCategoryKey && 
+            content => content.Category === resultsCategoryKey &&
                 (
                     content.State.length === 0 ||
                     content.State.some(state => state === resultsStateKey)
@@ -305,23 +320,23 @@ function getTopicInfo(category, subCategory, location) {
                 content.Status !== "Potential"
         )
         .map(content => ({
-            name: content['Name'],
-            title: content['Display Title'],
-            subtitle: content['Subtitle'],
-            body: content['Body text'],
-            learnMoreText: content['Link text'],
-            learnMoreLink: content['Link URL'],
-            type: content['Type'],
-            original: content
+            name: content.Name,
+            title: content["Display Title"],
+            subtitle: content.Subtitle,
+            body: content["Body text"],
+            learnMoreText: content["Link text"],
+            learnMoreLink: content["Link URL"],
+            type: content.Type,
+            original: content,
         }))
     const primaryInfo = relevantResultsContent
-            .filter(content => content.type === "Primary Info").shift();
+        .filter(content => content.type === "Primary Info").shift();
     const keyInfo = relevantResultsContent
-            .filter(content => content.type === "Secondary Info");
+        .filter(content => content.type === "Secondary Info");
 
     return {
         primaryInfo,
-        keyInfo: keyInfo.length ? keyInfo : undefined
+        keyInfo: keyInfo.length ? keyInfo : undefined,
     }
 }
 
