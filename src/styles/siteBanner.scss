@@ -26,7 +26,8 @@
 }
 
 // Fills in empty space in the header created by non-horizontal bottom
-.containsSiteBanner, .HomePage.containsSiteBanner {
+.containsSiteBanner,
+.HomePage.containsSiteBanner {
     &,
     &-notice .HeaderBar {
         .HeaderBarBanner {
