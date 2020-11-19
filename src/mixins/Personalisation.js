@@ -2,7 +2,7 @@
 
 import React from "react";
 import PropTypes from "proptypes";
-import {Category} from "../constants/categories";
+import Category from "../constants/Category";
 
 type Props = {
     category: ?Category,

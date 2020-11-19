@@ -8,7 +8,7 @@ Feature: Geolocation
     Scenario: Use geolocation to find the user
         When I visit /
         Given control of geolocation
-        When I visit /housing/personalise/page/location
+        When I visit /rent-and-tenancy/personalise/page/location
         Then I should see "Where are you looking for help?"
         And I should see "Get your current location"
         And the button "Next" should be disabled
@@ -18,13 +18,13 @@ Feature: Geolocation
 
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
-        And search box should contain "Richmond, Victoria"
+        And search box should contain "Richmond, VIC"
         And the button "Next" should be enabled
 
     Scenario: User denies geolocation access
         When I visit /
         Given control of geolocation
-        When I visit /housing/personalise/page/location
+        When I visit /rent-and-tenancy/personalise/page/location
 
         When I click on "Get your current location"
         Then I should see "Locating you..."

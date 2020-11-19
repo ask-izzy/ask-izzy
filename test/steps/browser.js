@@ -174,7 +174,7 @@ async function checkURL(expected: string): Promise<void> {
     }
 
     await this.driver.wait(
-        urlIs(this.driver, expected),
+        () => urlIs(this.driver, expected),
         10000,
         `URL should be ${
             expected
@@ -200,6 +200,7 @@ async function thenISee(expected: string): Promise<void> {
 }
 
 async function thenIDontSee(expected: string): Promise<void> {
+    this.mochaState.slow(22000)
     try {
         await assert.textIsVisible(this.driver, expected);
     } catch (error) {
@@ -362,9 +363,17 @@ async function cleanSession(): Promise<void> {
 }
 
 async function takeScreenshot(): Promise<void> {
+    const testIndex = this.mochaState.test.parent.tests
+        .findIndex(test => test === this.mochaState.test)
+    let previousTest;
+    if (testIndex > 0) {
+        previousTest = this.mochaState.test.parent.tests[testIndex - 1]
+    } else {
+        previousTest = this.mochaState.test.parent
+    }
     const filepath = await debug.takeScreenshot(
         this.driver,
-        this.mochaState.currentTest
+        previousTest
     )
 
     console.log(`${this.indent}  Screenshot saved to "${filepath}"`);

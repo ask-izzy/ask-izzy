@@ -113,7 +113,7 @@ export default class CollapsedOpeningTimes extends React.Component<Props, void> 
 
         gtm.emit({
             event: "Opening Times Expanded",
-            eventCat: "Content Expanded",
+            eventCat: "Content Displayed",
             eventAction: "Opening Times",
             eventLabel: location.pathname,
             sendDirectlyToGA: true,

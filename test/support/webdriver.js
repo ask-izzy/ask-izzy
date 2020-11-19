@@ -82,12 +82,16 @@ export default async function webDriverInstance(
         )
         .forBrowser(browserName || "chrome")
         .setChromeOptions(
-            new ChromeWebDriver.Options().addArguments([
-                "headless",
-                "no-sandbox",
-                "acceptInsecureCerts=true",
-                "ignore-certificate-errors",
-            ])
+            new ChromeWebDriver.Options()
+                .addArguments([
+                    "headless",
+                    "no-sandbox",
+                    "acceptInsecureCerts=true",
+                    "ignore-certificate-errors",
+                ])
+                // Increase window size to make it easer to analyse failure
+                // screenshots
+                .windowSize({width: 1000, height: 1000})
         )
         .build();
 
