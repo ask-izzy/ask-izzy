@@ -1,6 +1,7 @@
 $appbar-text-line-height: 42px;
 $colour-red: $brand-red;
 $colour-grey: #f8f9f9;
+
 .AppBarContainer {
     .AppBar {
         display: flex;
@@ -150,17 +151,20 @@ $colour-grey: #f8f9f9;
 
     .betaBanner {
         padding: 0.5em;
-        text-align: center;
-        color: $white;
         background-color: $brand-pane-alt-darker;
+        color: $white;
+        text-align: center;
+
         a {
             color: $white;
         }
 
         span {
             display: inline-block;
+
             .Icon {
                 vertical-align: middle;
+
                 path {
                     fill: $white;
                 }

@@ -10,7 +10,7 @@ export default [
     {
         loader: "sass-loader",
         options: {
-            data: `$bannerImages: ${bannerImages.join(" ")};`,
+            data: `$banner-images: ${bannerImages.join(" ")};`,
         },
     },
     {

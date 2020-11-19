@@ -1,9 +1,10 @@
 .Address {
+    display: flex;
     position: relative;
     font-size: 16px;
-    display: flex;
 
-    > span, > div {
+    > span,
+    > div {
         display: inline-block;
         vertical-align: middle;
     }
@@ -16,8 +17,8 @@
     .MapIcon {
         width: 40px;
         height: 40px;
-        margin-left: -9px;
         margin-right: 2px;
+        margin-left: -9px;
         vertical-align: text-bottom;
     }
 
