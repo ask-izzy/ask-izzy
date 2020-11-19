@@ -9,7 +9,6 @@ import {geolocationAvailable} from "../../geolocation";
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import icons from "../../icons";
-import posthog from "../../utils/posthog"
 import storage from "../../storage";
 import * as iss from "../../iss";
 
@@ -59,8 +58,8 @@ class Location extends Personalisation<Props, State> {
                 // rendering a static page but will fail because the
                 // IntersectionObserver API is not available in node
                 this.overlapObserver = new IntersectionObserver(
-                    ([e]) => e.target.toggleAttribute(
-                        "stuck", e.intersectionRatio < 1
+                    ([event]) => event.target.toggleAttribute(
+                        "stuck", event.intersectionRatio < 1
                     ),
                     {threshold: [1]}
                 );
@@ -235,7 +234,8 @@ class Location extends Personalisation<Props, State> {
                         </div>
                     }
                     secondaryText={
-                        "You don't have to answer, but this helps us give you better results"
+                        "You don't have to answer, but this helps us give " +
+                        "you better results"
                     }
                     bannerName={this.bannerName}
                     taperColour="Grey"

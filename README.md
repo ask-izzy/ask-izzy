@@ -306,6 +306,11 @@ docker-compose run --rm app lint
 ./script/typecheck
 ````
 
+Auto-fix some linting issues:
+````bash
+docker-compose run --rm app lint-fix-eslint && docker-compose run --rm app lint-fix-sass
+````
+
 Running the tests:
 ````bash
 docker-compose run --rm app unit-test

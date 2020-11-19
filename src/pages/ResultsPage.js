@@ -1,32 +1,12 @@
 /* @flow */
 
-import * as React from "react";
-import {Link} from "react-router-dom";
-
 import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
-import icons from "../icons";
 import storage from "../storage";
 import * as gtm from "../google-tag-manager";
 
-import AppBar from "../components/AppBar";
-import DebugContainer from "../components/DebugContainer";
-import DebugPersonalisation from "../components/DebugPersonalisation";
-import DebugSearch from "../components/DebugSearch";
-import HeaderBar from "../components/HeaderBar";
-import ResultsListPage from "./ResultsListPage";
 import routerContext from "../contexts/router-context";
-import ViewOnMapButton from "../components/ViewOnMapButton";
-import Eligibility from "../components/Eligibility";
-import OpeningTimes from "../components/OpeningTimes";
-import Ndis from "../components/Ndis";
 import type {searchResultsMeta, Service} from "../iss";
-
-import Category from "../constants/Category";
-import covidSupportCategories, {CovidSupportCategory}
-    from "../constants/covidSupportCategories";
-
-import NotFoundStaticPage from "./NotFoundStaticPage"
 
 type State = {
     searchMeta: ?searchResultsMeta,
@@ -38,15 +18,15 @@ type State = {
 
 
 class ResultsPage<ChildProps = {...}, ChildState = {...}>
-extends BaseCategoriesPage<ChildProps, State & ChildState> {
+    extends BaseCategoriesPage<ChildProps, State & ChildState> {
     constructor(props: Object, context: Object) {
         super(props, context);
 
         const textSearchPage = this.context.router.match.path
             .match(/^\/search\/:search/)
-        const searchType = 
-            this.category && 'category' ||
-            textSearchPage && 'text'
+        const searchType =
+            this.category && "category" ||
+            textSearchPage && "text"
 
         this.state = {
             searchMeta: null,
@@ -116,10 +96,10 @@ extends BaseCategoriesPage<ChildProps, State & ChildState> {
 
                 let data = JSON.parse(error.body);
 
-                console.error('Server response body:')
-                console.error(error.body)
+                console.error("Server response body:")
+                console.error(data)
             } catch (parseError) {
-                console.error('Server response body could not be parsed:')
+                console.error("Server response body could not be parsed:")
                 console.error(error?.body)
             }
             return
@@ -138,12 +118,12 @@ extends BaseCategoriesPage<ChildProps, State & ChildState> {
             event: "Load Page of Search Results",
             eventCat: "Content Displayed",
             eventAction: "Page of Search Results",
-            eventLabel: 'Page Number',
+            eventLabel: "Page Number",
             eventValue: this.state.searchPagesLoaded + 1,
             sendDirectlyToGA: true,
         }, "GTM-54BTPQM");
 
-        this.setState(prevState => ({ 
+        this.setState(prevState => ({
             searchMeta: res.meta,
             searchResults: res.objects,
             searchError: undefined,

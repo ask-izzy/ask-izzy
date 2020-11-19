@@ -14,6 +14,6 @@ export default [
         },
     },
     {
-        loader: './script/find-and-load-styles.js',
+        loader: "./script/find-and-load-styles.js",
     },
 ];

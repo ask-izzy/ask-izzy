@@ -11,12 +11,12 @@ const categories = [
         title: "Rent and tenancy help",
         subtitle: "Your rights, rent relief and more",
         icon: icons.Advocacy,
-        bannerImage: 'housing',
+        bannerImage: "housing",
         query: {
             "q": "rent landlord lease tenancy -disaster",
         },
         personalisation: [
-            personalisation.Location
+            personalisation.Location,
         ],
     }),
     new Category({
@@ -24,7 +24,7 @@ const categories = [
         title: "A place to stay",
         subtitle: "Housing and accommodation",
         icon: icons.House,
-        bannerImage: 'centrelink',
+        bannerImage: "centrelink",
         query: {
             "q": "",
         },
@@ -41,7 +41,7 @@ const categories = [
         title: "Money help",
         subtitle: "Debt, bills and mortgage help",
         icon: icons.Money,
-        bannerImage: 'money-help',
+        bannerImage: "money-help",
         query: {
             "q": "",
         },
@@ -56,7 +56,7 @@ const categories = [
         title: "Food and everyday things",
         subtitle: "Meals, clothing, toiletries, etc.",
         icon: icons.Food,
-        bannerImage: 'food',
+        bannerImage: "food",
         query: {
             "q": "",
         },
@@ -71,7 +71,7 @@ const categories = [
         title: "Mental health & wellbeing",
         subtitle: "Counselling and support",
         icon: icons.Health,
-        bannerImage: 'support-counselling',
+        bannerImage: "support-counselling",
         query: {
             "q": "",
         },
@@ -86,9 +86,9 @@ const categories = [
         subtitle: "Finding work, volunteering and training",
         slug: "jobs-and-training",
         icon: icons.Job,
-        bannerImage: 'finding-work',
+        bannerImage: "finding-work",
         query: {
-            q: ""
+            q: "",
         },
         personalisation: [
             personalisation.JobSubcategories,
