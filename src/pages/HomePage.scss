@@ -13,11 +13,15 @@ $bright-purple: #8a2be2;
         padding: 1em;
         border-top: $brand-pane-alt-dark 10px solid;
         background-color: $brand-pane-alt-darker;
-        &, a {
+
+        &,
+        a {
             color: $white;
         }
 
         .returnToProd {
+            margin-left: -8px;
+
             a {
                 font-weight: unset;
             }
@@ -25,13 +29,11 @@ $bright-purple: #8a2be2;
             a > span {
                 display: inline-block;
                 vertical-align: middle;
-                
+
                 .Icon {
                     vertical-align: text-bottom;
                 }
             }
-
-            margin-left: -8px;
 
             &:hover {
                 a span {
@@ -47,7 +49,6 @@ $bright-purple: #8a2be2;
         button {
             margin: 0;
             padding: 0.1em 0.3em;
-            
             border: 3px solid $white;
             border-radius: 8px;
             background-color: $white;
@@ -66,13 +67,13 @@ $bright-purple: #8a2be2;
 
             &::-moz-focus-inner {
                 padding: 0;
-                border: 0
+                border: 0;
             }
 
             span {
                 display: inline-block;
                 vertical-align: middle;
-                
+
                 .Icon {
                     vertical-align: text-bottom;
                 }
@@ -109,7 +110,8 @@ $bright-purple: #8a2be2;
         border-left: $notification-accent 10px solid;
         background-color: $notification-background;
 
-        &, a {
+        &,
+        a {
             color: $brand-text-dark;
         }
     }

@@ -9,28 +9,30 @@
     }
 
     .buttonsBox {
-        text-align: center;
         margin-bottom: 1em;
+        text-align: center;
 
         button {
-            margin: 1em;    
-            border-radius: 7px;
+            margin: 1em;
             padding: 0.2em 1em;
+            border-radius: 7px;
         }
 
         .returnToProd {
             margin-right: 1em;
+
             a {
-                font-weight: bold;
                 color: $brand-text-mid;
+                font-weight: bold;
             }
 
             a > span {
                 display: inline-block;
                 vertical-align: middle;
-                
+
                 .Icon {
                     vertical-align: text-bottom;
+
                     path {
                         fill: $brand-pane-alt-dark;
                     }
