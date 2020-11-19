@@ -13,11 +13,11 @@ class ListAllIcons extends React.Component<void, void> {
         return (
             <ul>{Object.entries(icons).map(
                 ([iconName, Icon]) =>
-                <li key={iconName}>
-                    <Icon className="big" />
-                    <br />
-                    <span>{iconName}</span>
-                </li>
+                    <li key={iconName}>
+                        <Icon className="big" />
+                        <br />
+                        <span>{iconName}</span>
+                    </li>
             )}</ul>
         );
     }

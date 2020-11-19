@@ -9,7 +9,9 @@ export default class Gender extends BaseQuestion {
     static defaultProps = {
         name: "gender",
         question: "What gender do you identify most closely with?",
-        byline: "You don't have to answer, but this helps us give you better results",
+        byline:
+            "You don't have to answer, but this helps us give you better " +
+            "results",
         answers: {
             "Female": append({
                 client_gender: ["f", "u"],

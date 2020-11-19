@@ -14,7 +14,7 @@ import icons from "../icons";
 function fixture(
     nowOpen: ?boolean,
     openingHours: Array<issOpeningHours>,
-    compact?: Boolean, 
+    compact?: Boolean,
     time: ?typeof moment.Moment,
 ): Object {
     // Moment is fixed to Wednesday 15/9/2015 at 1pm
@@ -74,7 +74,7 @@ class OpeningTimes extends React.Component<Props, void> {
                 day: "Thursday",
                 open: "00:00:00",
                 close: "24:00:00",
-            }
+            },
         ]),
         closed: fixture(false, [{
             day: "Thursday",
@@ -133,7 +133,8 @@ class OpeningTimes extends React.Component<Props, void> {
         return (
             <div className={
                 "OpeningTimes" + (this.props.compact ? " compact" : "")
-            }>
+            }
+            >
                 <ScreenReader>
                     <h4>Opening times</h4>
                 </ScreenReader>

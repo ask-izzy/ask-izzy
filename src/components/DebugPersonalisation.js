@@ -65,8 +65,10 @@ function diff(first: Object, second: Object): Object {
     }
 
     for (let key of Object.keys(first).concat(Object.keys(second))) {
-        if (first.hasOwnProperty(key)) {
-            if (second.hasOwnProperty(key)) {
+        const firstHasKey = Object.prototype.hasOwnProperty.call(first, key)
+        const secondHasKey = Object.prototype.hasOwnProperty.call(second, key)
+        if (firstHasKey) {
+            if (secondHasKey) {
                 if (first[key] != second[key]) {
                     changed[key] = {from: first[key], to: second[key]};
                 }

@@ -8,8 +8,10 @@ export default class StyleGuideList extends React.Component<{}, void> {
     render() {
         const componentsList = Object
             .entries(components)
-            .map(item => {return {name: item[0], component: item[1]}})
-            .sort((a, b) => a.name.localeCompare(b.name))
+            .map(item => {
+                return {name: item[0], component: item[1]}
+            })
+            .sort((itemA, itemB) => itemA.name.localeCompare(itemB.name))
         return (
             <ul>{componentsList.map(component =>
                 <li key={component.name}>
