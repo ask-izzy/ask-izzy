@@ -321,6 +321,11 @@ Add the git merge strategies to your `.git/config` file:
 
 Check the Linters section for info on how to lint.
 
+Auto-fix some linting issues:
+````bash
+docker-compose run --rm app lint-fix-eslint && docker-compose run --rm app lint-fix-sass
+````
+
 Running the tests:
 ````bash
 docker-compose run --rm app unit-test

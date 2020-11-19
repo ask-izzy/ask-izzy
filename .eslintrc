@@ -15,6 +15,9 @@
         "react",
     ],
     "extends": "eslint:recommended",
+    // Eslint currently borks at private class fields so we ignore the
+    // following file until fixed. https://github.com/babel/babel/issues/12105
+    "ignorePatterns": ["src/pages/BaseCategoriesPage.js"],
     "rules": {
         "array-bracket-spacing": [2, "never"],
         "arrow-spacing": 2,

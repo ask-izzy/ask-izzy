@@ -87,8 +87,8 @@ let processFile = (file) => {
                     step: this.currentTest.title,
                     browserLog: await driver.manage().logs().get("browser"),
                 })
-            } catch(err) {
-                console.error('Can not connect to the browser')
+            } catch (err) {
+                console.error("Can not connect to the browser")
                 return
             }
             if (this.currentTest.state !== "passed") {
@@ -203,7 +203,7 @@ export default function runTests(directory: string) {
 
     after(async function(): Promise<void> {
         // I can't find a way to directly check if there has been any failed
-        // tests from inside a root afterAll hook. Replace "testFailed" with a 
+        // tests from inside a root afterAll hook. Replace "testFailed" with a
         // cleaner solution if you come across anything.
         if (process.env.PAUSE_AFTER_FAIL && testFailed) {
             this.timeout(0)
@@ -214,7 +214,7 @@ export default function runTests(directory: string) {
             );
             process.stdin.setRawMode(true);
             process.stdin.resume();
-            await new Promise(resolve => process.stdin.on('data', resolve));
+            await new Promise(resolve => process.stdin.on("data", resolve));
         }
         await driver.quit();
     });

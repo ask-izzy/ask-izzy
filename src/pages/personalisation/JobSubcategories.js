@@ -12,9 +12,9 @@ export default class JobSubcategories extends BaseQuestion {
         mandatory: true,
         answers: {
             /* eslint-disable max-len */
-            "Employment support": 
+            "Employment support":
                 append("career work -(coordinating bodies) -(job active) -disability")
-                .append({catchment: "prefer"}),
+                    .append({catchment: "prefer"}),
             "Training and skills": append("training -(coordinating bodies)")
                 .append({catchment: "prefer"}),
             "Volunteering opportunities": append("volunteering -(coordinating bodies)")

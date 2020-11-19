@@ -64,9 +64,9 @@ window.pi = function() {
 window.addEventListener("error", errEvent => {
     gtm.emit({
         event: "exception",
-        exDescription: `JavaScript Error: ${errEvent.message} ${errEvent.filename}: ${
-            errEvent.lineno
-        }`,
+        exDescription:
+            `JavaScript Error: ${errEvent.message} ${errEvent.filename}: ` +
+            `${errEvent.lineno}`,
     });
     gtm.emit({
         event: "JS Error",

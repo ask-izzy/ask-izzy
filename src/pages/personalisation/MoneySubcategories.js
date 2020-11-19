@@ -1,7 +1,7 @@
 /* @flow */
 
 import BaseQuestion from "./BaseQuestion";
-import { append, remove } from "../../iss/Search";
+import { append } from "../../iss/Search";
 
 export default class MoneySubcategories extends BaseQuestion {
     static title = "Money help";
@@ -18,14 +18,14 @@ export default class MoneySubcategories extends BaseQuestion {
                 .append({ catchment: ["prefer"] }),
             "Financial assistance e.g. utility bills, petrol, food":
                 append("(financial aid) -(coordinating bodies) -grants -heritage")
-                .append({ service_type: ["financial aid"] }),
+                    .append({ service_type: ["financial aid"] }),
             "No interest & low interest loans":
                 append("nils low-interest -(coordinating bodies) -grants -heritage"),
             "Gambling counselling":
                 append("Gambling -(coordinating bodies) -grants -heritage"),
             "Financial counselling":
                 append("financial -(coordinating bodies) -grants -heritage")
-                .append({name: "financial counselling"}),
+                    .append({name: "financial counselling"}),
         },
     };
 }

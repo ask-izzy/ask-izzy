@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from "react";
-import PropTypes from "proptypes";
 import components from "../components";
 import _s from "underscore.string";
 import routerContext from "../contexts/router-context";

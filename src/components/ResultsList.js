@@ -7,11 +7,11 @@ import ResultListItem from "../components/ResultListItem";
 import type { Service } from "../iss";
 
 class ResultsList
-extends React.Component<{results: Array<Service>}, void> {
+    extends React.Component<{results: Array<Service>}, void> {
     render() {
         return (
             <ul className="ResultsList">
-                {this.props.results.map(service => 
+                {this.props.results.map(service =>
                     <li
                         key={service.id.toString()}
                     >

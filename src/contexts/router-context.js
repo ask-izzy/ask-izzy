@@ -17,7 +17,7 @@ export const InjectRouterContext = withRouter(
                     props: getRouteProps(routes, matchedRoute),
                     ...matchedRoute,
                 },
-                currentlyRedirecting: () => 
+                currentlyRedirecting: () =>
                     typeof window !== "undefined" &&
                     matchedRoute?.url !== decodeURI(window.location.pathname),
                 staticRender: typeof window === "undefined",

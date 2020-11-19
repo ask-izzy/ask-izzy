@@ -474,7 +474,7 @@ export class Service {
         }
 
         if (sentences.length > 0) {
-            description[description.length - 1] = 
+            description[description.length - 1] =
                 description[description.length - 1].replace(/\.?\s*$/, "…")
         }
 
