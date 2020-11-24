@@ -55,7 +55,7 @@ export default class Feedback extends React.Component<Props, State> {
                     <span>Details here incorrect?</span>&nbsp;
                     <a
                         href="#"
-                        onClick={openUserSnap}
+                        onClick={this.toggleFeedback}
                     >
                         Report an error
                     </a>

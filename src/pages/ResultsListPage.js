@@ -12,8 +12,8 @@ import HeaderBar from "../components/HeaderBar";
 import Switch from "../components/Switch";
 import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
-import UserSnapResults from "../components/feedback/UserSnapResults";
 import NotFoundStaticPage from "./NotFoundStaticPage";
+import FormFeedbackCantFind from "../components/feedback/FormCantFind";
 import ContentList from "../components/content/ContentList";
 
 import * as gtm from "../google-tag-manager";
