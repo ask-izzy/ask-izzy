@@ -32,15 +32,19 @@ if [ -z "$STRAPI_URL" ]; then
 if [ -z "$NOTIFICATIONS_API_URL" ]; then
 	if [ "$ENVIRONMENT" = "prod" ]; then
 		NOTIFICATIONS_API_URL="https://notifications.infoxchangeapps.net.au"
+		NOTIFICATIONS_API_KEY=""
 	fi
 	if [ "$ENVIRONMENT" = "staging" ]; then
 		NOTIFICATIONS_API_URL="https://notifications-uat.infoxchangeapps.net.au"
+		NOTIFICATIONS_API_KEY=""
 	fi
 	if [ "$ENVIRONMENT" = "test" ]; then
 		NOTIFICATIONS_API_URL="https://notifications-test.docker.dev"
+		NOTIFICATIONS_API_KEY=""
 	fi
 	if [ "$ENVIRONMENT" = "dev" ] || [ "$ENVIRONMENT" = "development" ]; then
 		NOTIFICATIONS_API_URL="https://notifications.docker.dev"
+		NOTIFICATIONS_API_KEY="6VXLofFl.1JZuKscnasCoQWOX7qWiCzlmLtx2LVa9"
 	fi
 
 if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging" ]; then
