@@ -3,11 +3,11 @@
 import * as React from "react";
 import classnames from "classnames";
 
-type Props = {
+type Props = {|
     iconClass: string,
     className?: string,
-    containerClassName?: string
-}
+    containerClassName?: string,
+|}
 
 class BaseIcon extends React.Component<Props, void> {
     +svgContent: string;
