@@ -1,10 +1,7 @@
 /* @flow */
-
-import React from "react";
-
 import OnlineSafetyScreen from "./OnlineSafetyScreen";
 
-export default function(initialQuestion: React.ComponentType<any>) {
+export default function<T>(initialQuestion: T): Array<T> {
     return [
         initialQuestion,
         OnlineSafetyScreen,
