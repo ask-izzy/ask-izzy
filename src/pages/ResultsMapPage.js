@@ -107,14 +107,13 @@ class ResultsMapPage extends ResultsPage<Props, State> {
 
             mapHeight =
                 window.innerHeight -
-                // flow:disable
-                document.querySelector(".AppBarContainer").offsetHeight;
+                (document.querySelector(".AppBarContainer")?.offsetHeight || 0);
 
             /* resize the map to make room
              * for the selected results */
             mapHeight -= 150 * this.selectedServices.length;
 
-            /* limit minimum height to 1/2 of the screen realestate */
+            /* limit minimum height to 1/2 of the screen real estate */
             mapHeight = Math.max(mapHeight,
                 window.innerHeight / 2);
         } catch (error) {
@@ -148,7 +147,6 @@ class ResultsMapPage extends ResultsPage<Props, State> {
                         this.context.router.match.params.search
                     )}
                     title={this.title}
-                    loading={this.loading}
                     personalisationComponents={this.personalisationComponents}
                     // The below props are only used for the ResultsMap
                     // component - this is because react-google-maps >= 6.0.0

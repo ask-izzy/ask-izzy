@@ -264,7 +264,7 @@ class ResultsListPage extends ResultsPage<Props, State> {
             }
             <Switch>
                 <div
-                    switch-if={this.searchIsloading}
+                    switch-if={this.searchIsLoading}
                     className="resultsStatus"
                 >
                     <icons.Loading className="big" />
@@ -278,7 +278,7 @@ class ResultsListPage extends ResultsPage<Props, State> {
                     </button>
                 </div>
             </Switch>
-            { !this.searchIsloading && this.state.searchPagesLoaded > 2 &&
+            { !this.searchIsLoading && this.state.searchPagesLoaded > 2 &&
             <UserSnapResults />
             }
         </div>

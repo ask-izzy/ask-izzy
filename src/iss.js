@@ -547,11 +547,11 @@ export class Service {
 }
 
 export type Site = {
-    id: Number,
-    name: String,
+    id: number,
+    name: string,
     organisation: {
-        id: Number,
-        name: String,
+        id: number,
+        name: string,
     },
 }
 
