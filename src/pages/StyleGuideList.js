@@ -1,27 +1,24 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 import { Link } from "react-router-dom";
 import components from "../components";
 
 export default class StyleGuideList extends React.Component<{}, void> {
     render() {
         const componentsList = Object
-            .entries(components)
-            .map(item => {
-                return {name: item[0], component: item[1]}
-            })
+            .keys(components)
+            .map(name => ({name, component: components[name]}))
             .sort((itemA, itemB) => itemA.name.localeCompare(itemB.name))
         return (
-            <ul>{componentsList.map(component =>
-                <li key={component.name}>
+            <ul>{componentsList.map(({name, component}) =>
+                <li key={name}>
                     <Link
-                        to={`/styleGuide/component/${component.name}`}
+                        to={`/styleGuide/component/${name}`}
                     >
-                        {component.name}
+                        {name}
                     </Link>{" "}
-                    {/* flow:disable */}
-                    {!component.component.sampleProps && "(No sample props)"}
+                    {!component.sampleProps && "(No sample props)"}
                 </li>
             )}</ul>
         );

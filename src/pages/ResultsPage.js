@@ -29,6 +29,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             textSearchPage && "text"
 
         this.state = {
+            ...super.state,
             searchMeta: null,
             searchResults: null,
             searchError: null,
@@ -166,7 +167,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         return request;
     }
 
-    get searchIsloading(): boolean {
+    get searchIsLoading(): boolean {
         return !this.state.searchError && !this.state.searchMeta;
     }
 

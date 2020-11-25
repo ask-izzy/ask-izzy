@@ -28,7 +28,7 @@ import React from "react";
  *      <div>default</div>
  *  </Switch>
  */
-const Switch = props => {
+const Switch = (props: {children?: any, condition?: boolean}) => {
     let match = React.Children.toArray(props.children).find(child =>
         // child must be a react element to match
         React.isValidElement(child) && (

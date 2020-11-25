@@ -122,7 +122,7 @@ function formatTestResult(service, location): string {
 
 function addResultsToDom(objects, category, query): void {
     const content = {
-        category: category.name,
+        category: category.title,
         query: query,
         results: objects.map((service) =>
             formatTestResult(service, query.location)),
@@ -170,7 +170,7 @@ async function testCategoryAndLocation(category, location) {
 
         if (!request) {
             throw new Error(`Expected ${
-                category.name
+                category.title
             } to generate a query from ${
                 JSON.stringify(query)
             }`);

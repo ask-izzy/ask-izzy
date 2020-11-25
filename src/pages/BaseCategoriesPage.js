@@ -1,4 +1,4 @@
-/* @flow */
+  /* @flow */
 
 import * as React from "react";
 
@@ -114,7 +114,7 @@ extends React.Component<Props & ChildProps, State & ChildState> {
 
     componentDidMount(): void {
         // Update the URL to include the location, so that links
-        // are SEO-friendly. If we dont have a location but the
+        // are SEO-friendly. If we don't have a location but the
         // URL does, use the one from the url.
         const {suburb, state} = this.context.router.match.params;
 
