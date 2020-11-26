@@ -265,7 +265,6 @@ Unit tests live in `test/unit` and are invoked from `test/unit.js`. They use `mo
 BDD features live in `test/features` with step definitions in `test/steps` invoked from `test/feature.js`. They use `yadda`.
 Maps features live in `test/maps` with step definitions in `test/steps` invoked from `test/maps.js`. They use `yadda`.
 Personalisation features live in `test/personalisation` with step definitions in `test/steps` invoked from `test/personlisation.js`. They use `yadda`.
-Search features live in `test/search` with step definitions in `test/search-steps` invoked from `test/search.js`. They use `yadda`.
 
 ### Docker
 
@@ -301,6 +300,11 @@ Run the linters:
 docker-compose run --rm app lint
 # or without docker: 
 ./script/typecheck
+````
+
+Auto-fix some linting issues:
+````bash
+docker-compose run --rm app lint-fix-eslint && docker-compose run --rm app lint-fix-sass
 ````
 
 Running the tests:

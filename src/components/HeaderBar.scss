@@ -113,14 +113,14 @@
          * $bannerImages is injected in at webpack compile time based on the
          * filenames in the public/images/banners dir
          */
-        @each $bannerImage in $bannerImages {
-            &.#{$bannerImage} {
-                background: url("/static/images/banners/#{$bannerImage}.png") center center;
+        @each $banner-image in $banner-images {
+            &.#{$banner-image} {
+                background: url("/static/images/banners/#{$banner-image}.png") center center;
                 background-size: cover;
 
                 @media only screen and (max-width: 400px) {
                     &:not(.static) {
-                        background: url("/static/images/banners/#{$bannerImage}.png") left top;
+                        background: url("/static/images/banners/#{$banner-image}.png") left top;
                         background-size: 200%;
                     }
                 }

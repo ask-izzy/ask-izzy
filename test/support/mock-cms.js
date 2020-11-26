@@ -1,4 +1,5 @@
-import { ApolloServer, gql } from 'apollo-server';
+/* @flow */
+import { ApolloServer, gql } from "apollo-server";
 
 const typeDefs = gql`
   type Query {
@@ -28,43 +29,43 @@ const typeDefs = gql`
 `;
 
 const mocks = {
-  Query: () =>({
-    pages: (parent, args, context, info) => {
-      const path = args?.where?.Path || info?.variableValues?.path
-      if (path === '/about') {
-        return [{
-          Title: "About Ask Izzy",
-          Body: "We’re always making improvements.",
-        }]
-      } else if (path === '/terms') {
-        return [{
-          Title: "Our Terms",
-          Body: "Try to live a good life",
-        }]
-      } else if (path === '/online-safety') {
-        return []
-      } else if (path === '/food-info') {
-        return [
-          {Title: "Page 1"},
-          {Title: "Page 2"},
-        ]
-      }
-      return [{}]
-    },
-  }),
-  DateTime: () => new Date(),
+    Query: () => ({
+        pages: (parent, args, context, info) => {
+            const path = args?.where?.Path || info?.variableValues?.path
+            if (path === "/about") {
+                return [{
+                    Title: "About Ask Izzy",
+                    Body: "We’re always making improvements.",
+                }]
+            } else if (path === "/terms") {
+                return [{
+                    Title: "Our Terms",
+                    Body: "Try to live a good life",
+                }]
+            } else if (path === "/online-safety") {
+                return []
+            } else if (path === "/food-info") {
+                return [
+                    {Title: "Page 1"},
+                    {Title: "Page 2"},
+                ]
+            }
+            return [{}]
+        },
+    }),
+    DateTime: () => new Date(),
 }
 
 const url = process.env.STRAPI_URL
 let options;
 if (url) {
-  const {port} = new URL(url)
-  options = {port}
+    const {port} = new URL(url)
+    options = {port}
 }
 
 const server = new ApolloServer({
-  typeDefs,
-  mocks,
+    typeDefs,
+    mocks,
 });
 
 options ? server.listen(options) : server.listen()

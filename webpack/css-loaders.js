@@ -1,8 +1,8 @@
 /* @flow */
 import fs from "fs";
 
-const bannerImages = fs.readdirSync('./public/static/images/banners')
-    .map(file => file.replace(/\.\w*$/, ''));
+const bannerImages = fs.readdirSync("./public/static/images/banners")
+    .map(file => file.replace(/\.\w*$/, ""));
 
 export default [
     "css-loader",
@@ -10,10 +10,10 @@ export default [
     {
         loader: "sass-loader",
         options: {
-            data: `$bannerImages: ${bannerImages.join(' ')};`
+            data: `$banner-images: ${bannerImages.join(" ")};`,
         },
     },
     {
-        loader: './script/find-and-load-styles.js',
+        loader: "./script/find-and-load-styles.js",
     },
 ];

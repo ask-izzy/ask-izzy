@@ -7,7 +7,6 @@
 
 import location from "browser-location";
 import storage from "./storage";
-import _ from "underscore";
 import Maps from "./maps";
 
 /**
@@ -66,7 +65,9 @@ export function geolocationAvailable(): boolean {
 }
 
 export async function guessSuburb(location: Position): Promise<string> {
-    const maps = await Maps();
+    // Double await to solve weird flow behaviour:
+    // https://github.com/facebook/flow/issues/7464
+    const maps = await await Maps();
     let possibleLocations = await maps.geocode({
         location: {
             lat: location.coords.latitude,
@@ -75,7 +76,7 @@ export async function guessSuburb(location: Position): Promise<string> {
     });
 
     const address = possibleLocations
-        .find(location => location.types.some(type => 'locality'))
+        .find(location => location.types.some(type => "locality"))
         ?.address_components
 
     if (!address) {

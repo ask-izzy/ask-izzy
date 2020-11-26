@@ -4,11 +4,9 @@ import * as React from "react";
 import _ from "underscore";
 import { GoogleMap, Marker, withGoogleMap } from "react-google-maps";
 
-import iss from "../iss";
 import type {Service, Site} from "../iss";
 import Maps from "../maps";
 import type {MapsApi} from "../maps";
-import ResultsList from "./ResultsList";
 import storage from "../storage";
 import routerContext from "../contexts/router-context";
 
@@ -160,12 +158,12 @@ class ResultsMap extends React.Component<Props, State> {
     }
 
     onMapClick(): void {
-        this.props.onSiteSelect && 
+        this.props.onSiteSelect &&
             this.props.onSiteSelect(null)
     }
 
     onMarkerClick(site: Site): void {
-        this.props.onSiteSelect && 
+        this.props.onSiteSelect &&
             this.props.onSiteSelect(site)
     }
 
@@ -180,55 +178,55 @@ class ResultsMap extends React.Component<Props, State> {
         );
     }
 
-    renderMap() {
-        const GoogleMapsUninited = <GoogleMap
-                ref={elm => this.#mapElmRef = elm}
-                defaultCenter={{
-                    lat: -34.397,
-                    lng: 150.644,
-                }}
-                options={{disableDefaultUI: true, zoomControl: true}}
-                defaultZoom={12}
-                onClick={this.onMapClick.bind(this)}
-            >
-                {
-                    this.state.coords && (
+    renderMap = () => (
+        <GoogleMap
+            ref={elm => {
+                this.#mapElmRef = elm
+            }}
+            defaultCenter={{
+                lat: -34.397,
+                lng: 150.644,
+            }}
+            options={{disableDefaultUI: true, zoomControl: true}}
+            defaultZoom={12}
+            onClick={this.onMapClick.bind(this)}
+        >
+            {
+                this.state.coords && (
+                    <Marker
+                        title="You are here"
+                        icon={{
+                            url: "/static/images/you-are-here.png",
+                            scaledSize: {width: 32, height: 32},
+                        }}
+                        position={{
+                            lat: this.state.coords.latitude,
+                            lng: this.state.coords.longitude,
+                        }}
+                    />
+                )
+            }
+            {
+                this.props.sites.map(site => {
+                    /* the site must have a public location */
+                    const point = this.props.siteLocations[site.id].point
+
+
+                    return point && (
                         <Marker
-                            title="You are here"
-                            icon={{
-                                url: "/static/images/you-are-here.png",
-                                scaledSize: {width: 32, height: 32},
-                            }}
+                            key={site.id.toString()}
+                            title={site.name}
                             position={{
-                                lat: this.state.coords.latitude,
-                                lng: this.state.coords.longitude,
+                                lat: point.lat,
+                                lng: point.lon,
                             }}
+                            onClick={this.onMarkerClick.bind(this, site)}
                         />
                     )
-                }
-                {
-                    this.props.sites.map(site => {
-                        /* the site must have a public location */
-                        const point = this.props.siteLocations[site.id].point
-
-
-                        return point && (
-                            <Marker
-                                key={site.id.toString()}
-                                title={site.name}
-                                position={{
-                                    lat: point.lat,
-                                    lng: point.lon,
-                                }}
-                                onClick={this.onMarkerClick.bind(this, site)}
-                            />
-                        )
-                    })
-                }
-            </GoogleMap>
-        
-        return GoogleMapsUninited
-    }
+                })
+            }
+        </GoogleMap>
+    )
 }
 
 export default withGoogleMap(ResultsMap);

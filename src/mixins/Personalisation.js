@@ -9,7 +9,11 @@ type Props = {
     name?: string
 }
 
-class Personalisation<ChildProps, ChildState> extends React.Component<ChildProps & Props, ChildState> {
+class Personalisation<
+    ChildProps, ChildState
+> extends React.Component<
+    ChildProps & Props, ChildState
+> {
     static contextTypes = {
         // Would be nice to specify type here,
         // but we can't have cyclic imports.

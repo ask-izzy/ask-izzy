@@ -12,7 +12,9 @@ export default class Demographics extends BaseMultiQuestion {
     static defaultProps = {
         name: "demographics",
         question: "Do any of these apply to you?",
-        byline: "You don't have to answer, but this helps us give you better results",
+        byline:
+            "You don't have to answer, but this helps us give you better " +
+            "results",
         answers: {
             "Escaping family violence": append("(family violence)"),
             // n.b. see also storage.getUserIsIndigenous when changing
