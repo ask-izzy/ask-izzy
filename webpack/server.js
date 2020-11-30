@@ -17,6 +17,7 @@ const serverOptions = {
     noInfo: true,
     inline: true,
     publicPath: config.output.publicPath,
+    ...{allowedHosts: process.env.ALLOWED_HOSTS && [process.env.ALLOWED_HOSTS]},
 };
 
 const compiler = webpack(config);
