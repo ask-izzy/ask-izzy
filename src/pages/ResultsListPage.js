@@ -305,7 +305,7 @@ class ResultsListPage extends ResultsPage<Props, ExtraState> {
                 </div>
             </Switch>
             { !this.searchIsLoading && this.state.searchPagesLoaded > 2 &&
-            <UserSnapResults />
+            <FormFeedbackCantFind />
             }
         </div>
     </>
