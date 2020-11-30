@@ -6,7 +6,6 @@ import * as gtm from "../google-tag-manager";
 import iss from "../iss";
 import Spacer from "./Spacer";
 import FormReportError from "./feedback/FormReportError"
-import { openUserSnap } from "../utils/usersnap";
 
 type Props = {
     object: iss.Service,
