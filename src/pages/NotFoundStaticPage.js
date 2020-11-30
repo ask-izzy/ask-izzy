@@ -26,7 +26,6 @@ export default class NotFoundStaticPage extends React.Component<Props, void> {
                     primaryText={null}
                     secondaryText={null}
                     bannerName={"drugs-alcohol"}
-                    alternateBackgroundColor={false}
                 />
                 <div className="body">
                     <p>Sorry, but it looks as though the page you are trying to find does not exist. It might be because you followed an old link, or typed the address incorrectly—but it was most likely our fault for moving something.</p>

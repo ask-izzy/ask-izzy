@@ -62,75 +62,23 @@ $bright-purple: #8a2be2;
     }
 
     .HeaderBar {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        height: 210px;
-        max-height: unset;
-        padding-bottom: 20px;
-
+        padding: 30px 20px calc(2vw + 28px);
         text-align: center;
 
-        .HeaderBarContent {
-            position: unset;
-            padding: 1.3em 1em;
-
-            z-index: 1;
-            box-sizing: border-box;
-
-            .homepage-logo,
-            .primary,
-            .secondary {
-                margin: 0.4em auto;
-                padding: 0;
-            }
-
-            .homepage-logo {
-                display: block;
-                width: 200px;
-                margin-right: auto;
-                margin-left: auto;
-            }
-
-            // Since the home page creates a custom primary element that is
-            // a child of the header bar rather than letting the header bar
-            // create it a ".primary" element from a text prop (because we
-            // want to add the site logo before the primary element) we need
-            // to hide the primary element that header bar creates.
-            .primary:first-child {
-                display: none;
-            }
-
-            .primary {
-                font-size: 1.5em;
-                font-weight: bold;
-
-                @media only screen and (max-width: 550px) {
-                    max-width: 300px;
-                }
-            }
-
-            .secondary {
-                font-weight: 500;
-            }
+        .homepage-logo {
+            display: block;
+            width: 200px;
+            margin: 10px auto;
         }
 
-        @media only screen and (max-width: 540px) {
-            height: 250px;
+        .primary {
+            font-size: 1.5em;
+            font-weight: bold;
         }
 
-        @media only screen and (max-width: 310px) {
-            height: 290px;
+        .secondary {
+            font-weight: 500;
         }
-
-        .HeaderBarBanner {
-            &::after,
-            &.homepage::after {
-                border-right: 100vw solid $brand-bg-mid-lighter;
-            }
-        }
-
     }
 
     .header a {

@@ -220,6 +220,7 @@ class Location extends Personalisation<Props, State> {
                         "This will let me find the services closest to you"
                     }
                     bannerName={bannerName}
+                    taperColour="Grey"
                 />
                 <div className="List">
                     {

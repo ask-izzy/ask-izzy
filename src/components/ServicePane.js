@@ -74,7 +74,6 @@ export default class ServicePane extends React.Component<{
                     primaryText={object.name}
                     secondaryText={null}
                     bannerName="housing"
-                    alternateBackgroundColor={false}
                 />
                 <LimitedServicesBanner />
                 <div className="header">

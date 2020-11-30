@@ -78,25 +78,21 @@ class HomePage extends React.Component<{}, void> {
                     </a>
                 </div>
                 <div className="header">
-
-
                     <HeaderBar
-                        primaryText=""
-                        bannerName="homepage"
-                        alternateBackgroundColor={false}
-                    >
-                        <img
-                            src={logo}
-                            className="homepage-logo"
-                            alt="AskIzzy"
-                        />
-                        <div className="primary">
+                        primaryText={<>
+                            <img
+                                src={logo}
+                                className="homepage-logo"
+                                alt="AskIzzy"
+                            />
                             Find the help you need, now and nearby
-                        </div>
-                        <div className="secondary">
+                        </>}
+                        secondaryText={<div className="secondary">
                             Search over 370,000 support services
-                        </div>
-                    </HeaderBar>
+                        </div>}
+                        bannerName="homepage"
+                        taperColour="LighterGrey"
+                    />
                 </div>
 
                 <div className="body">

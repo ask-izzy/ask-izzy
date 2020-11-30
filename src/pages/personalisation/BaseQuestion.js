@@ -283,7 +283,6 @@ class BaseQuestion extends Personalisation<Props, State> {
                     this.props.byline
                 }
                 bannerName={bannerName}
-                alternateBackgroundColor={false}
             />
         );
     }
