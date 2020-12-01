@@ -62,10 +62,10 @@ lint:
 lint-dockerfile:
 ifdef CI
 	docker run --rm --volumes-from "$(runnerid)" -w "$(CI_PROJECT_DIR)" \
-		hadolint/hadolint:latest-debian hadolint Dockerfile
+		contyard.office.infoxchange.net.au/hadolint:latest hadolint Dockerfile
 else
 	docker run --rm -v $(PWD):/mnt -w /mnt \
-		hadolint/hadolint:latest-debian hadolint Dockerfile
+		contyard.office.infoxchange.net.au/hadolint:latest hadolint Dockerfile
 endif
 
 unit-test:
