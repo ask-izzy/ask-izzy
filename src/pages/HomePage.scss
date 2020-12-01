@@ -50,7 +50,7 @@ $bright-purple: #8a2be2;
             margin: 0;
             padding: 0.1em 0.3em;
             border: 3px solid $white;
-            border-radius: 8px;
+            border-radius: $rounded-border;
             background-color: $white;
             color: $brand-text-dark;
             font-weight: bold;
@@ -263,8 +263,6 @@ $bright-purple: #8a2be2;
 
                 padding: 0 15px;
                 border: 0;
-                border-radius: 0 5px 5px 0;
-
                 border-radius: 0 $rounded-border $rounded-border 0;
                 font-size: 14px;
             }
