@@ -14,7 +14,7 @@
     button {
         padding: 5px 10px;
         border: 1px solid $link-text-color;
-        border-radius: 3px;
+        border-radius: $rounded-border;
         background-color: transparent;
         color: $link-text-color;
         font-size: 16px;
