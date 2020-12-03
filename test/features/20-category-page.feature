@@ -26,14 +26,14 @@ Feature: Category page
         --------------------------------------------------------------------------
 
         # The rent category has 3 results
-        And I should not see "Load more results…"
+        And I should not see "See more results"
 
     Scenario: Visit a category with more than 5 services
         Given I need the following for food: Finding a free meal nearby
         When I visit /food-and-everyday-things
-        Then I should see "Load more results…"
+        Then I should see "See more results"
 
-        When I click on "Load more results…"
+        When I click on "See more results"
         And I wait for 10 results to load
         Then I should see the results
         --------------------

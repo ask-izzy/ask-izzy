@@ -294,7 +294,7 @@ class ResultsListPage extends ResultsPage<Props, ExtraState> {
                     className="loadMore"
                 >
                     <button onClick={this.loadNextSearchPage}>
-                    Load more results…
+                    See more results
                     </button>
                 </div>
             </Switch>
