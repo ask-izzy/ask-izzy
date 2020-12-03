@@ -23,7 +23,7 @@ export default class StaticPage extends React.Component<Props> {
     };
 
     static sampleProps = {
-        title: "Food Banks",
+        title: "Food Info",
         bannerName: "food",
     };
 

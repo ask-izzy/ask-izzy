@@ -22,7 +22,7 @@ Feature: CMS integration
     # I want to be able to see just the first entry
     Scenario: Display only the first page when multiple are returned.
       Given a fresh session
-        When I visit /food-banks
+        When I visit /food-info
         Then I should see "Page 1"
         And I should not see "Page 2"
 
@@ -46,10 +46,10 @@ Feature: CMS integration
         When I visit /about
         Then I should see "We’re always making improvements."
 
-        When I click on "Our terms of use"
+        When I click on "Terms of use"
         Then I should see "Try to live a good life"
 
-        When I click on "Our terms of use"
+        When I click on "Terms of use"
         Then I should see "Try to live a good life"
 
         When I reload the page

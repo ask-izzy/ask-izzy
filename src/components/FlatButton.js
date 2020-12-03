@@ -1,11 +1,10 @@
 /* @flow */
 
 import React from "react";
-import PropTypes from "proptypes";
 import classnames from "classnames";
 
 type Props = {
-    label: string,
+    label?: string,
     className?: string,
     onClick: Function,
     disabled?: boolean,
@@ -13,12 +12,6 @@ type Props = {
 }
 
 export default class FlatButton extends React.Component<Props, void> {
-    static propTypes = {
-        disabled: PropTypes.bool,
-        label: PropTypes.string.isRequired,
-        onClick: PropTypes.func,
-    };
-
     static sampleProps = {
         default: {
             label: "Button Text",

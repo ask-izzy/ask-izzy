@@ -2,50 +2,31 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import DemographicAboriginal from "../icons/DemographicAboriginal";
-import DemographicTorresStrait from "../icons/DemographicTorresStrait";
-import FacebookIcon from "../icons/Facebook";
-import Instagram from "../icons/Instagram";
+import icons from "../icons"
+import LinkButton from "./LinkButton";
 import config from "../config";
-import MobileDetect from "./higherorder/MobileDetect";
 
-class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
+export default class BrandedFooter
+    extends React.Component<{}, void> {
     static sampleProps = {
         default: {},
     };
 
-    render() {
-        const subject = "Ask Izzy - Feedback";
-        const siteMail = config.default.siteMail;
-        const mailLink = `mailto:${siteMail}?subject=${subject}`;
-        // There is an nginx rewrite to go to the correct donation URL,
-        // this reduces duplication.
-        const donateLink = "/donate";
-        const resourcesLink = "https://www.infoxchange.org/au/ask-izzy";
-
-        return (
-            <footer className="branding-footer-container">
-                <div>
-                    <ul className="footer-list about">
+    render = () => (
+        <footer className="branding-footer-container">
+            <div className="top-box">
+                <div className="additional-information">
+                    <h1>Additional Information</h1>
+                    <ul>
                         <li>
-                            <Link to="/about">
-                                About Ask Izzy
+                            <Link to="/using-ask-izzy">
+                                Using Ask Izzy
                             </Link>
                         </li>
                         <li>
-                            <Link to="/terms">
-                                Our terms of use
+                            <Link to="/food-info">
+                                Food Support
                             </Link>
-                        </li>
-                        <li>
-                            <a href={mailLink}>
-                                Leave feedback
-                            </a>
-                        </li>
-                        <li>
-                            <a href={donateLink}>
-                                Donate to us
-                            </a>
                         </li>
                         <li>
                             <Link to="/online-safety">
@@ -53,113 +34,173 @@ class BrandedFooter extends React.Component<{mobileView: boolean}, void> {
                             </Link>
                         </li>
                         <li>
-                            <a href={resourcesLink}>
-                                Online resources
-                            </a>
+                            <Link to="/covid-19-support">
+                                COVID-19
+                            </Link>
                         </li>
                         <li>
                             <Link to="/beta-info">
-                                🆕 Ask Izzy Beta
+                                Ask Izzy Beta
                             </Link>
                         </li>
                     </ul>
                 </div>
-                <hr />
-                <div>
-                    <div>
-                        About the services <br />
-                        <ul className="footer-list information">
-                            <li><Link to="/homeless-shelters">
+                <div className="homelessness-services">
+                    <h1>Homelessness Services</h1>
+                    <ul>
+                        <li>
+                            <Link to="/homeless-shelters">
                                 Shelters
-                            </Link></li>
-                            <li><Link to="/food-banks">
-                                Food banks
-                            </Link></li>
-                            <li><Link to="/homeless-support">
-                                Support
-                            </Link></li>
-                            <li><Link to="/homeless-legal-services">
-                                Legal Services
-                            </Link></li>
-                            <li><Link to="/homeless-financial-support">
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/homeless-legal-services">
+                                Legal Help
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/homeless-financial-support">
                                 Financial support
-                            </Link></li>
-                            <li><Link to="/homeless-health-care">
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/homeless-health-care">
                                 Health Care
-                            </Link></li>
-                        </ul>
-                    </div>
-                    <div>
-                        Supported by <br />
-                        <ul className="footer-list supporters">
-                            <li><a href="https://www.infoxchange.net.au/ask-izzy">Infoxchange</a></li>
-                            <li><a href="https://www.google.org">Google</a></li>
-                            <li><a href="http://www.rea-group.com">REA Group</a></li>
-                            <li><a href="http://www.newscorpaustralia.com">News Corp Australia</a></li>
-                        </ul>
-                    </div>
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
-                <hr />
-                <div>
-                    <div>
-                        <a
-                            href={
-                                "/service/105139-translating" +
-                                "-interpreting-service-tis-national"
-                            }
-                        >
-                            TIS Interpreter Hotline
-                        </a>
-                        <br />
-                        {
-                            this.props.mobileView ? (
-                                <a href="tel:131450">
-                                    13 14 50
-                                </a>
-                            ) : (
-                                "13 14 50"
-                            )
-                        }
-                    </div>
-                    <div>
-                        <div className="full-width">
-                            Find us on
+            </div>
+            <div className="middle-box">
+                <div className="about">
+                    Ask Izzy is powered by <a href="https://www.infoxchange.org/au">Infoxchange</a>, a not-for-profit social enterprise that has been delivering technology for social justice for over 30 years.
+                </div>
+                <div className="about-links">
+                    <Link to="/about">
+                        About Ask Izzy
+                    </Link>
+                    <span className="spacer">|</span>
+                    <Link to="/terms">
+                        Terms of use
+                    </Link>
+                </div>
+                <div className="support-links">
+                    <ul>
+                        <li>
+                            <a href="/donate">
+                                <icons.Heart
+                                    className="small"
+                                />
+                                Donate to us
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href={
+                                    `mailto:${config.default.siteMail}` +
+                                    `?subject=${"Ask Izzy - Feedback"}`
+                                }
+                            >
+                                <icons.Chat
+                                    className="small"
+                                />
+                                Leave feedback
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div className="supporters">
+                    Ask Izzy founding partners:<br />
+                    <ul>
+                        <li>
+                            <a href="https://www.google.org">Google</a>
+                            <span className="comma">,</span>
+                        </li>
+                        <li>
+                            <a href="https://www.rea-group.com">REA Group</a>
+                            <span className="comma">,</span>
+                        </li>
+                        <li>
+                            <a href="https://www.newscorpaustralia.com">
+                                News Corp Australia
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div className="socials">
+                    <span>Find us on:</span>
+                    <ul>
+                        <li>
                             <a
                                 href="https://www.facebook.com/askizzyau"
                                 target="_blank"
                                 className="flex-align"
                             >
-                                <FacebookIcon className="inline-block-icon" />
+                                <icons.Facebook
+                                    className="inline-icon inline-block-icon"
+                                />
                             </a>
+                        </li>
+                        <li>
                             <a
                                 href="https://www.instagram.com/askizzyau/"
                                 target="_blank"
                                 className="flex-align"
                             >
-                                <Instagram className="inline-block-icon" />
+                                <icons.Instagram
+                                    className="inline-icon inline-block-icon"
+                                />
                             </a>
-                        </div>
+                        </li>
+                    </ul>
+                </div>
+                <div className="for-service-providers">
+                    <h1>For Service Providers</h1>
+                    <div className="buttons">
+                        <LinkButton to="/add-service">
+                            <icons.Plus
+                                className="small"
+                            />
+                            <span>Add a service</span>
+                        </LinkButton>
+                        <LinkButton to={encodeURI(
+                            `mailto:${config.default.siteMail}` +
+                            `?subject=Your Ask Izzy feedback` +
+                            `&body=Service name:\n\n` +
+                            `Contact name:\n\n` +
+                            `Contact number:\n\n` +
+                            `Contact email:\n\n` +
+                            `Details of change:\n\n`
+                        )}
+                        >
+                            <icons.Pencil
+                                className="small"
+                            />
+                            <span>Update service details</span>
+                        </LinkButton>
                     </div>
                 </div>
-                <hr />
+            </div>
+            <div className="bottom-box">
                 <div>
-                    <DemographicAboriginal
-                        className="small flag"
-                    />
-                    <DemographicTorresStrait
-                        className="small flag"
-                    />
+                    <div className="flags">
+                        <icons.AboriginalFlag
+                            className="flag"
+                        />
+                        <icons.TorresStraitIslandersFlag
+                            className="flag"
+                        />
+                    </div>
                     <p>
-                        <small>
                         Infoxchange acknowledges the traditional custodians of
                         the land and pays respect to Elders both past and
                         present.
-                        </small>
                     </p>
                 </div>
-            </footer>
-        );
-    }
+                <div>
+                    Ask Izzy is owned and operated by <a href="https://www.infoxchange.org/au">Infoxchange</a>. © {new Date().getFullYear()} Infoxchange
+                </div>
+            </div>
+        </footer>
+    )
 }
-
-export default MobileDetect(BrandedFooter);
