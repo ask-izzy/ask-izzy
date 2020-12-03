@@ -18,7 +18,7 @@ Feature: See results on a map
         And I need the following for food: Finding a free meal nearby
 
         When I visit /food-and-everyday-things
-        And I click on "Load more results…"
+        And I click on "See more results"
         And I wait for 10 results to load
         Then I should see the results
         ---------------------
