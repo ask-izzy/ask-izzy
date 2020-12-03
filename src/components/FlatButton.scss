@@ -1,4 +1,6 @@
 .FlatButton {
+    padding: 0 20px;
+
     border: 0;
     border-radius: $rounded-border;
     background-color: $icon-fg-color;
@@ -23,6 +25,15 @@
         background-color: transparent;
         color: $brand-text-mid;
         text-decoration: underline;
+    }
+
+    &.secondary {
+        background-color: $brand-bg-dark;
+
+        &:hover,
+        &:focus {
+            background-color: lighten($brand-bg-dark, 10%);
+        }
     }
 
 }

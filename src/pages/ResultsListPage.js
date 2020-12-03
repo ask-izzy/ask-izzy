@@ -6,6 +6,7 @@ import AppBar from "../components/AppBar";
 import DebugContainer from "../components/DebugContainer";
 import DebugPersonalisation from "../components/DebugPersonalisation";
 import DebugSearch from "../components/DebugSearch";
+import FlatButton from "../components/FlatButton";
 import ResultsPage from "./ResultsPage";
 import ResultsList from "../components/ResultsList";
 import HeaderBar from "../components/HeaderBar";
@@ -293,9 +294,11 @@ class ResultsListPage extends ResultsPage<Props, ExtraState> {
                     switch-if={this.searchHasNextPage}
                     className="loadMore"
                 >
-                    <button onClick={this.loadNextSearchPage}>
-                    See more results
-                    </button>
+                    <FlatButton
+                        onClick={this.loadNextSearchPage}
+                        label="See more results"
+                        className="secondary"
+                    />
                 </div>
             </Switch>
             { !this.searchIsLoading && this.state.searchPagesLoaded > 2 &&
