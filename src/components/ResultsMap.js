@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import _ from "underscore";
-import { GoogleMap, Marker, withGoogleMap } from "react-google-maps";
+import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
 
 import iss from "../iss";
 import type {Service} from "../iss";
@@ -11,6 +11,20 @@ import type {MapsApi} from "../maps";
 import ResultsList from "./ResultsList";
 import storage from "../storage";
 import routerContext from "../contexts/router-context";
+
+class LoadScriptOnlyIfNeeded extends LoadScript {
+    componentDidMount() {
+        const isAlreadyLoaded =
+        window.google &&
+        window.google.maps
+
+        if (isAlreadyLoaded) {
+            this.setState({ loaded: true });
+            return
+        }
+
+    }
+}
 
 type Props = {
     objects: Array<Object>,
@@ -49,7 +63,7 @@ class ResultsMap extends React.Component<Props, State> {
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object) {
-        if ((this.state.maps != prevState.maps) ||
+        if ((this.state.map) &&
             (this.props.objects != prevProps.objects)) {
             if (this.services().length) {
                 // N.B. getMap() returns a different promise each time, so
@@ -180,9 +194,8 @@ class ResultsMap extends React.Component<Props, State> {
             ));
         }
 
-        this.getMap().then(map => {
-            map.fitBounds(bounds);
-        });
+        this.state.map.fitBounds(bounds);
+
     }
 
     onMapClick(): void {
@@ -194,6 +207,10 @@ class ResultsMap extends React.Component<Props, State> {
         if (this.props.onServicesChange) {
             this.props.onServicesChange(services);
         }
+    }
+
+    onMapLoad(themap): void {
+        this.setState({map: themap, maps: window.google.maps})
     }
 
     onGoBack(event: SyntheticInputEvent<>): void {
@@ -212,7 +229,7 @@ class ResultsMap extends React.Component<Props, State> {
             <div className="ResultsMap">
                 { /* we can't create the map component until the API promise
                      * resolves */
-                    this.state.maps && this.renderMap()
+                    this.renderMap()
                 }
                 <ResultsList
                     results={selectedServices}
@@ -222,57 +239,67 @@ class ResultsMap extends React.Component<Props, State> {
     }
 
     renderMap() {
-
+        const containerStyle = {
+            width: "100%",
+            height: "100%",
+        };
         return (
-            <GoogleMap
-                ref={elem => {
-                    this._map = elem
-                }}
-                defaultCenter={{
-                    lat: -34.397,
-                    lng: 150.644,
-                }}
-                options={{disableDefaultUI: true, zoomControl: true}}
-                defaultZoom={12}
-                onClick={this.onMapClick.bind(this)}
-            >
-                {
-                    this.state.coords && (
-                        <Marker
-                            title="You are here"
-                            icon={{
-                                url: "/static/images/you-are-here.png",
-                                scaledSize: {width: 32, height: 32},
-                            }}
-                            position={{
-                                lat: this.state.coords.latitude,
-                                lng: this.state.coords.longitude,
-                            }}
-                        />
-                    )
-                }
-                {
-                    this.sites.map((objects, index) => {
-                        /* the site must have a public location */
-                        // eslint-disable-next-line max-len
-                        const point = objects[0].location ? objects[0].location.point : null;
-
-                        return point && (
+            <LoadScriptOnlyIfNeeded>
+                <GoogleMap
+                    mapContainerStyle={containerStyle}
+                    center={{
+                        lat: -34.397,
+                        lng: 150.644,
+                    }}
+                    options={{disableDefaultUI: true, zoomControl: true}}
+                    zoom={12}
+                    onLoad={map => {
+                        this.onMapLoad(map)
+                    }}
+                >
+                    {
+                        this.state.coords && (
                             <Marker
-                                key={index}
-                                title={objects[0].site.name}
-                                position={{
-                                    lat: point.lat,
-                                    lng: point.lon,
+                                title="You are here"
+                                icon={{
+                                    url: "/static/images/you-are-here.png",
+                                    scaledSize: {width: 32, height: 32},
                                 }}
-                                onClick={this.onMarkerClick.bind(this, objects)}
+                                position={{
+                                    lat: this.state.coords.latitude,
+                                    lng: this.state.coords.longitude,
+                                }}
                             />
                         )
-                    })
-                }
-            </GoogleMap>
-        );
+                    }
+                    {
+                        this.sites.map((objects, index) => {
+                            /* the site must have a public location */
+                            // eslint-disable-next-line max-len
+                            const point = objects[0].location ? objects[0].location.point : null;
+
+                            return point && (
+                                <Marker
+                                    key={index}
+                                    title={objects[0].site.name}
+                                    position={{
+                                        lat: point.lat,
+                                        lng: point.lon,
+                                    }}
+                                    onClick={
+                                        this.onMarkerClick.bind(
+                                            this,
+                                            objects
+                                        )
+                                    }
+                                />
+                            )
+                        })
+                    }
+                </GoogleMap>
+            </LoadScriptOnlyIfNeeded>
+        )
     }
 }
 
-export default withGoogleMap(ResultsMap);
+export default ResultsMap;
