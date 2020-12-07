@@ -157,7 +157,9 @@ $container-spacing: 20px;
                 text-align: center;
             }
 
-            .buttons {
+            .links {
+                text-align: center;
+
                 button {
                     display: block;
                     width: calc(100% - 20px);

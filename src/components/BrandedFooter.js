@@ -156,7 +156,7 @@ export default class BrandedFooter
                 </div>
                 <div className="for-service-providers">
                     <h1>For Service Providers</h1>
-                    <div className="buttons">
+                    <div className="links">
                         <LinkButton to="/add-service">
                             <icons.Plus
                                 className="small"
@@ -178,6 +178,9 @@ export default class BrandedFooter
                             />
                             <span>Update service details</span>
                         </LinkButton>
+                        <a href="https://www.infoxchange.org/au/ask-izzy">
+                            Ask Izzy resources
+                        </a>
                     </div>
                 </div>
             </div>
