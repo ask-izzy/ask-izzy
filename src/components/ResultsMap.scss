@@ -1,4 +1,6 @@
 .ResultsMap {
+    height: calc(100vh - #{$appbar-height});
+
     .List {
         width: 100%;
         max-width: $max-width;
