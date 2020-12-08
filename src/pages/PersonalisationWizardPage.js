@@ -39,7 +39,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
         }
     }
 
-    previousStep(): void {
+    previousStep = () => {
         if (this.refs.subpage && this.refs.subpage.onPreviousStep) {
             if (!this.refs.subpage.onPreviousStep(
                 this.forceUpdate.bind(this)
@@ -82,7 +82,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
         return this.personalisationComponents[nextSubpageIdx];
     }
 
-    nextStep(): void {
+    nextStep = () => {
         if (this.state.nextDisabled) {
             return
         }
@@ -177,6 +177,8 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
                     onDoneTouchTap={this.nextStep.bind(this)}
                     onNextStepCallback={this.forceUpdate.bind(this)}
                     category={this.category}
+                    nextStep={this.nextStep}
+                    previousStep={this.previousStep}
                 />
             </div>
         );

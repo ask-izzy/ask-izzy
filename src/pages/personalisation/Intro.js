@@ -7,12 +7,10 @@ import components from "../../components";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import icons from "../../icons";
-import { Category } from "../../constants/categories";
 
 type Props = {
     onDoneTouchTap: Function,
     name: string,
-    category?: Category,
 }
 
 class Intro extends Personalisation<Props, {}> {
@@ -28,12 +26,12 @@ class Intro extends Personalisation<Props, {}> {
 
     get seekingHelpWith(): string {
         try {
-            const category = this.context.controller.category;
-
-            return category.byline.toLocaleLowerCase() ||
-                `with ${category.name.toLocaleLowerCase()}`;
+            // flow:disable flowjs needs updating for optional chaining methods
+            return this.props.category?.byline.toLocaleLowerCase() ||
+                // flow:disable
+                `with ${this.props.category?.name?.toLocaleLowerCase() || ""}`;
         } catch (error) {
-            const search = this.context.controller.props.match.params.search;
+            const search = this.context.router.match.params.search;
 
             return `with ${search.toLocaleLowerCase()}`;
         }
@@ -63,14 +61,6 @@ class Intro extends Personalisation<Props, {}> {
         }
 
     render() {
-        let bannerName = "";
-
-        try {
-            bannerName = this.context.controller.props.match.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
-
         return (
             <div className="IntroPage">
                 <components.HeaderBar
@@ -85,7 +75,7 @@ class Intro extends Personalisation<Props, {}> {
                             All of your answers are private and anonymous.
                         </div>
                     }
-                    bannerName={bannerName}
+                    bannerName={this.bannerName}
                 />
                 <div className="body">
                     <h3>

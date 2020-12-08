@@ -1,22 +1,30 @@
 /* @flow */
 
 import React from "react";
-import PropTypes from "proptypes";
+import routerContext from "../contexts/router-context";
+import { Category } from "../constants/categories";
 
-class Personalisation<Props, State> extends React.Component<Props, State> {
-    static contextTypes = {
-        // Would be nice to specify type here,
-        // but we can't have cyclic imports.
-        // controller: PropTypes.instanceOf(BasePersonalisationPage),
-        controller: PropTypes.object.isRequired,
-    };
+type Props = {
+    nextStep: Function,
+    previousStep: Function,
+    category?: Category,
+    name?: string,
+}
 
-    nextStep(): void {
-        this.context.controller.nextStep();
-    }
+class Personalisation<
+    ChildProps, ChildState
+> extends React.Component<
+    ChildProps & Props, ChildState
+> {
+    static contextType = routerContext;
 
-    previousStep(): void {
-        this.context.controller.previousStep();
+    nextStep = () => this.props.nextStep()
+
+    previousStep = () => this.props.previousStep()
+
+    get bannerName(): string {
+        return (this.props.name === "sub-indigenous" && "atsi") ||
+            this.props.category?.key || "homepage";
     }
 }
 

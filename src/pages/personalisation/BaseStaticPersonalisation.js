@@ -106,18 +106,6 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
     }
 
     renderHeaderBar(): React.Node {
-        let bannerName = "";
-
-        try {
-            bannerName = this.context.controller.props.match.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
-
-        if (this.props.name === "sub-indigenous") {
-            bannerName = "atsi";
-        }
-
         return (
             <HeaderBar
                 primaryText={
@@ -128,7 +116,7 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
                 secondaryText={
                     this.props.byline
                 }
-                bannerName={bannerName}
+                bannerName={this.bannerName}
             />
         );
     }

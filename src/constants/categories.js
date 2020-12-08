@@ -284,3 +284,12 @@ const categories: Array<Category> = [
 ];
 
 export default categories;
+
+// flow:disable flowjs needs to be updated to include fromEntries
+const categoryMap = Object.fromEntries(
+    categories.map(category => [category.key, category])
+)
+
+export function getCategory(key: string): ?Category {
+    return categoryMap[key]
+}

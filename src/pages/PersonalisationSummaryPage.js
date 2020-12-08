@@ -26,7 +26,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         }
     }
 
-    nextStep(): void {
+    nextStep = () => {
         this.goBack();
     }
 
@@ -74,6 +74,9 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         <Subpage
                             ref="subpage"
                             onDoneTouchTap={this.nextStep.bind(this)}
+                            category={this.category}
+                            nextStep={this.nextStep}
+                            previousStep={this.previousStep}
                         />
                     </div>
 
