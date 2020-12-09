@@ -9,6 +9,8 @@ query Page($path: String!) {
     Path,
     Title,
     Banner,
+    BannerTextPrimary,
+    BannerTextSecondary,
   }
 }
 `;
