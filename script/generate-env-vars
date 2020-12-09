@@ -11,7 +11,11 @@ STRAPI_URL=${STRAPI_URL:-}
 # Set Strapi url based on env.
 if [ -z "$STRAPI_URL" ]; then
 	if [ "$ENVIRONMENT" = "prod" ]; then
-		STRAPI_URL="https://cms.askizzy.org.au"
+		if [ "$SITE_DOMAIN" = "beta.askizzy.org.au" ]; then
+			STRAPI_URL="https://cms-uat.askizzy.org.au"
+		else
+			STRAPI_URL="https://cms.askizzy.org.au"
+		fi
 	fi
 	if [ "$ENVIRONMENT" = "staging" ]; then
 		STRAPI_URL="https://cms-uat.askizzy.org.au"
