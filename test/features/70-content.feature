@@ -26,6 +26,15 @@ Feature: CMS integration
         Then I should see "Page 1"
         And I should not see "Page 2"
 
+    # As a user
+    # When I visit a page with content
+    # I want to see text in the header bar
+    Scenario: Display page with header text
+      Given a fresh session
+        When I visit /about
+        Then I should see "Some primary text"
+        And I should see "Some secondary text"
+
     Scenario: When navigating between pages the correct content is returned.
       Given a fresh session
         When I visit /about
