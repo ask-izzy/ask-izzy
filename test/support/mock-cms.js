@@ -38,8 +38,8 @@ const mocks = {
                 return [{
                     Title: "About Ask Izzy",
                     Body: "We’re always making improvements.",
-                    HeaderTextPrimary: "Some primary text",
-                    HeaderTextSecondary: "Some secondary text",
+                    BannerTextPrimary: "Some primary text",
+                    BannerTextSecondary: "Some secondary text",
                 }]
             } else if (path === "/terms") {
                 return [{
