@@ -68,6 +68,8 @@ class DynamicPage extends React.Component<Props, void> {
                             <StaticPage
                                 title={page.Title}
                                 bannerName={page.Banner}
+                                bannerPrimary={page.BannerTextPrimary}
+                                bannerSecondary={page.BannerTextSecondary}
                             >
 
                                 <Helmet>
