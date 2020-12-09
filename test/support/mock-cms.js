@@ -19,6 +19,8 @@ const typeDefs = gql`
     Body: String
     Path: String!
     Banner: String
+    BannerPrimaryText: String
+    BannerSecondaryText: String
   }
   scalar DateTime
   scalar JSON
@@ -36,6 +38,8 @@ const mocks = {
                 return [{
                     Title: "About Ask Izzy",
                     Body: "We’re always making improvements.",
+                    HeaderPrimaryText: "Some primary text",
+                    HeaderSecondaryText: "Some secondary text",
                 }]
             } else if (path === "/terms") {
                 return [{
