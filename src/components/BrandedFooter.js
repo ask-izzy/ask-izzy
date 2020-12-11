@@ -12,6 +12,84 @@ export default class BrandedFooter
         default: {},
     };
 
+    /* Begin hack for dealing with multiple columns
+     *
+     * Remove when "break-before: always;" is supported by all the browsers
+     * we care about. We need to set the height of the footer so calculate
+     * the height of each column and set container to the hight of the largest
+     * column.
+     */
+    footerHeightSetter = () => {
+        if (
+            typeof window === "undefined" ||
+            (
+                window.CSS &&
+                window.CSS.supports("break-before", "always")
+            )
+        ) {
+            return
+        }
+        const container = document.querySelector(
+            ".branding-footer-container .middle-box"
+        )
+        if (!container || !document.body) {
+            return
+        }
+        if (window.innerWidth > 800 && container.style.height) {
+            // Window larger than max-footer width so no need to change height
+        } else if (container.clientWidth > 550) {
+            // Footer has 2 columns so set height
+            const getColHeight = (contentsClasses) => {
+                const contents = container.querySelectorAll(contentsClasses)
+                if (!contents) {
+                    return 0
+                }
+                return Array.from(contents)
+                    .map(elm => elm.clientHeight)
+                    .reduce((itemA, itemB) => itemA + itemB, 0)
+            }
+            container.style.height = (
+                Math.max(
+                    getColHeight(
+                        ".about, .about-links, .support-links, .supporters"
+                    ),
+                    getColHeight(".socials, .for-service-providers")
+                ) + 5
+            ) + "px"
+        } else {
+            // Footer has 1 column so remove height
+            container.style.height = ""
+        }
+    }
+
+    componentDidMount(): void {
+        this.footerHeightSetter()
+        // Set footer height on resize
+        if (
+            typeof window != "undefined" &&
+            (
+                !window.CSS ||
+                !window.CSS.supports("break-before", "always")
+            )
+        ) {
+            window.addEventListener("resize", this.footerHeightSetter)
+        }
+    }
+
+    componentWillUnmount(): void {
+        // Remove footer height setter on resize
+        if (
+            typeof window != "undefined" &&
+            (
+                !window.CSS ||
+                !window.CSS.supports("break-before", "always")
+            )
+        ) {
+            window.removeEventListener("resize", this.footerHeightSetter)
+        }
+    }
+    /* end hack */
+
     render = () => (
         <footer className="branding-footer-container">
             <div className="top-box">

@@ -80,6 +80,7 @@ $container-spacing: 20px;
             ul {
                 li {
                     margin: 1em;
+                    margin-left: 0;
 
                     a {
                         font-weight: 500;
@@ -113,8 +114,7 @@ $container-spacing: 20px;
         }
 
         /* second column */
-        .socials,
-        .socials ~ div {
+        .supporters ~ div {
             order: 2;
         }
 
@@ -151,7 +151,7 @@ $container-spacing: 20px;
             background-color: $brand-pane-alt-even-darker;
 
             h1 {
-                margin: 0.3em;
+                margin: 0.3em 0 1em;
                 font-size: 1.2em;
                 font-weight: normal;
                 text-align: center;
@@ -178,6 +178,11 @@ $container-spacing: 20px;
                         vertical-align: middle;
                     }
                 }
+
+                a {
+                    display: inline-block;
+                    margin: 0.3em;
+                }
             }
         }
     }
@@ -191,7 +196,11 @@ $container-spacing: 20px;
         text-align: center;
 
         > div {
+            width: 100%;
+            /* for IE */
             max-width: 550px;
+            box-sizing: border-box;
+            /* end for IE */
         }
 
         .flag {
@@ -202,22 +211,26 @@ $container-spacing: 20px;
         }
     }
 
+    /* update hack too */
     @media only screen and (max-width: 550px) {
         .top-box {
             display: flex;
             flex-direction: column;
 
             & > div {
-                width: unset;
+                width: 100%; /* needed for IE */
+                width: unset; // sass-lint:disable-line no-duplicate-properties
             }
         }
 
         .middle-box {
-            padding-top: unset;
+            padding-top: 0; /* needed for IE */
+            padding-top: unset; // sass-lint:disable-line no-duplicate-properties
             text-align: center;
 
             & > div {
-                width: unset;
+                width: 100%; /* needed for IE */
+                width: unset; // sass-lint:disable-line no-duplicate-properties
             }
 
             div.about {
@@ -235,7 +248,8 @@ $container-spacing: 20px;
             div.for-service-providers {
                 order: -1;
                 width: 100%;
-                max-width: unset;
+                max-width: 100%; /* needed for IE */
+                max-width: unset; // sass-lint:disable-line no-duplicate-properties
                 padding: 1em;
 
                 button {
