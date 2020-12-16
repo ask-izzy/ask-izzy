@@ -18,13 +18,18 @@ const typeDefs = gql`
     Title: String!
     Body: String
     Path: String!
-    Banner: String
+    Banner: Banner
+    BannerTextPrimary: String
+    BannerTextSecondary: String
   }
   scalar DateTime
   scalar JSON
   enum PublicationState {
     LIVE
     PREVIEW
+  }
+  type Banner {
+    Key: String!
   }
 `;
 
@@ -36,6 +41,11 @@ const mocks = {
                 return [{
                     Title: "About Ask Izzy",
                     Body: "We’re always making improvements.",
+                    Banner: {
+                        Key: "food",
+                    },
+                    BannerTextPrimary: "Some primary text",
+                    BannerTextSecondary: "Some secondary text",
                 }]
             } else if (path === "/terms") {
                 return [{

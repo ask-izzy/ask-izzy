@@ -8,7 +8,11 @@ query Page($path: String!) {
     Body,
     Path,
     Title,
-    Banner,
+    Banner {
+      Key
+    }
+    BannerTextPrimary,
+    BannerTextSecondary,
   }
 }
 `;
