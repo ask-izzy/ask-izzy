@@ -15,8 +15,8 @@ import CollapsedOpeningTimes from "./components/CollapsedOpeningTimes";
 import Collapser from "./components/Collapser";
 import ContactMethods from "./components/ContactMethods";
 import CovidRelatedIssues from "./components/CovidRelatedIssues";
-import CrisisHeader from "./components/CrisisHeader";
 import CrisisLineItem from "./components/CrisisLineItem";
+import CrisisResultsList from "./components/CrisisResultsList";
 import DebugContainer from "./components/DebugContainer";
 import DebugPersonalisation from "./components/DebugPersonalisation";
 import DebugQueryScore from "./components/DebugQueryScore";
@@ -74,8 +74,8 @@ export default {
     Collapser,
     ContactMethods,
     CovidRelatedIssues,
-    CrisisHeader,
     CrisisLineItem,
+    CrisisResultsList,
     DebugContainer,
     DebugPersonalisation,
     DebugQueryScore,

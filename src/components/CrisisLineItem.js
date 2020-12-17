@@ -11,6 +11,7 @@ import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
 import Collapser from "./Collapser";
+import OpeningTimes from "./OpeningTimes";
 
 /* eslint-disable max-len */
 const crisisDescriptions = {
@@ -60,33 +61,40 @@ class CrisisLineItem extends React.Component<Props, void> {
         if (phone) {
             return (
                 <div className="CrisisLineItem">
-                    <h3>
-                        <Link
-                            to={`/service/${object.slug}`}
-                        >
-                            {object.site.name}
-                        </Link>
-                    </h3>
+                    <div>
+                        <h3>
+                            <Link
+                                to={`/service/${object.slug}`}
+                            >
+                                {object.site.name}
+                            </Link>
+                        </h3>
+                        <OpeningTimes
+                            className="opening_hours"
+                            object={object.open}
+                            compact={true}
+                        />
+                        {
+                            crisisDescriptions[object.id] &&
+                            <Collapser
+                                message="See information about this call"
+                                closeMessage="Hide information about this call"
+                                expanded={this.props.expanded}
+                            >
+                                {crisisDescriptions[object.id](object)}
+                            </Collapser>
+                        }
+                        <DebugServiceRecord object={object} />
+                        {object._explanation &&
+                            <DebugContainer message="Query score">
+                                <DebugQueryScore expl={object._explanation} />
+                            </DebugContainer>
+                        }
+                    </div>
                     <Phone
                         {...phone}
                         crisis={true}
                     />
-                    {
-                        crisisDescriptions[object.id] &&
-                        <Collapser
-                            message="See information about this call"
-                            closeMessage="Hide information about this call"
-                            expanded={this.props.expanded}
-                        >
-                            {crisisDescriptions[object.id](object)}
-                        </Collapser>
-                    }
-                    <DebugServiceRecord object={object} />
-                    {object._explanation &&
-                        <DebugContainer message="Query score">
-                            <DebugQueryScore expl={object._explanation} />
-                        </DebugContainer>
-                    }
                 </div>
             );
         }

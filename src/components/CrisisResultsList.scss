@@ -1,0 +1,22 @@
+.CrisisResultsList {
+    padding: 1em;
+    background-color: $brand-pane-alt-dark;
+    color: $white;
+    overflow: auto;
+
+    > h3 {
+        font-size: 1.5em;
+    }
+
+    > h4 {
+        font-weight: normal;
+    }
+
+    > ul {
+        padding-left: 0;
+
+        li {
+            list-style-type: none;
+        }
+    }
+}
