@@ -12,6 +12,7 @@ import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
 import Collapser from "./general/Collapser";
+import OpeningTimes from "./OpeningTimes";
 
 /* eslint-disable max-len */
 const crisisDescriptions = {
@@ -61,42 +62,49 @@ class CrisisLineItem extends React.Component<Props, void> {
         if (phone) {
             return (
                 <div className="CrisisLineItem">
-                    <h3>
-                        <Link
-                            to={`/service/${object.slug}`}
-                            analyticsEvent={{
-                                event: `Link Followed - Service Result`,
-                                eventAction: "Service result",
-                                eventLabel: `Crisis line - number ${this.props.resultNumber}`,
-                            }}
-                        >
-                            {object.site.name}
-                        </Link>
-                    </h3>
+                    <div>
+                        <h3>
+                            <Link
+                                to={`/service/${object.slug}`}
+                                analyticsEvent={{
+                                    event: `Link Followed - Service Result`,
+                                    eventAction: "Service result",
+                                    eventLabel: `Crisis line - number ${this.props.resultNumber}`,
+                                }}
+                            >
+                                {object.site.name}
+                            </Link>
+                        </h3>
+                        <OpeningTimes
+                            className="opening_hours"
+                            object={object.open}
+                            compact={true}
+                        />
+                        {
+                            crisisDescriptions[object.id] &&
+                            <Collapser
+                                expandMessage="See information about this call"
+                                collapseMessage="Hide information about this call"
+                                analyticsEvent={{
+                                    event: `Action Triggered - Crisis Line Info`,
+                                    eventAction: "Show crisis line extra info",
+                                    eventLabel: null,
+                                }}
+                            >
+                                {crisisDescriptions[object.id](object)}
+                            </Collapser>
+                        }
+                        <DebugServiceRecord object={object} />
+                        {object._explanation &&
+                            <DebugContainer message="Query score">
+                                <DebugQueryScore expl={object._explanation} />
+                            </DebugContainer>
+                        }
+                    </div>
                     <Phone
                         {...phone}
                         crisis={true}
                     />
-                    {
-                        crisisDescriptions[object.id] &&
-                        <Collapser
-                            expandMessage="See information about this call"
-                            collapseMessage="Hide information about this call"
-                            analyticsEvent={{
-                                event: `Action Triggered - Crisis Line Info`,
-                                eventAction: "Show crisis line extra info",
-                                eventLabel: null,
-                            }}
-                        >
-                            {crisisDescriptions[object.id](object)}
-                        </Collapser>
-                    }
-                    <DebugServiceRecord object={object} />
-                    {object._explanation &&
-                        <DebugContainer message="Query score">
-                            <DebugQueryScore expl={object._explanation} />
-                        </DebugContainer>
-                    }
                 </div>
             );
         }

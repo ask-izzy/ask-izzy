@@ -18,8 +18,8 @@ import CalloutBox from "./components/CalloutBox";
 import CategoryListItem from "./components/CategoryListItem";
 import CollapsedOpeningTimes from "./components/CollapsedOpeningTimes";
 import ContactMethods from "./components/ContactMethods";
-import CrisisHeader from "./components/CrisisHeader";
 import CrisisLineItem from "./components/CrisisLineItem";
+import CrisisResultsList from "./components/CrisisResultsList";
 import DebugColours from "./components/DebugColours";
 import DebugContainer from "./components/DebugContainer";
 import DebugPersonalisation from "./components/DebugPersonalisation";
@@ -81,8 +81,8 @@ export default {
     CategoryListItem,
     CollapsedOpeningTimes,
     ContactMethods,
-    CrisisHeader,
     CrisisLineItem,
+    CrisisResultsList,
     DebugColours,
     DebugContainer,
     DebugPersonalisation,
