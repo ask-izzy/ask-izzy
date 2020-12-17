@@ -54,6 +54,12 @@
         visibility: hidden;
     }
 
+    &.includesCrisisLines {
+        .HeaderBar .HeaderBarBanner::after {
+            border-right-color: $brand-pane-alt-dark;
+        }
+    }
+
     .primaryInfo,
     .keyInfos .keyInfo {
         .title {
