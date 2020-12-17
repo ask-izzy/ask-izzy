@@ -164,6 +164,13 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         return !!this.state.searchMeta?.next
     }
 
+    get crisisResults(): ?Array<Service> {
+        return this.state.searchResults?.filter(service => service.crisis)
+    }
+
+    get nonCrisisResults(): ?Array<Service> {
+        return this.state.searchResults?.filter(service => !service.crisis)
+    }
 }
 
 export default ResultsPage;

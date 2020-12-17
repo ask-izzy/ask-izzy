@@ -1,6 +1,0 @@
-@use '../styles/mixins/colours';
-
-.CrisisHeader {
-    color: colours.get-static('colour-crisis');
-    color: var(--colour-crisis);
-}

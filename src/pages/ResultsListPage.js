@@ -8,6 +8,7 @@ import DebugPersonalisation from "../components/DebugPersonalisation";
 import DebugSearch from "../components/DebugSearch";
 import ResultsPage from "./ResultsPage";
 import ResultsList from "../components/ResultsList";
+import CrisisResultsList from "../components/CrisisResultsList";
 import resultsContent from "../results-content.json"
 import HeaderBar from "../components/HeaderBar";
 import Switch from "../components/Switch";
@@ -149,6 +150,7 @@ class ResultsListPage extends ResultsPage<{}, State> {
                         Search Results.
                     </span>
                 </ScreenReader>
+                { this.renderCrisisLines() }
 
                 { this.renderPrimaryInfo() }
 
@@ -323,6 +325,26 @@ class ResultsListPage extends ResultsPage<{}, State> {
             )
         }
     }
+
+    renderCrisisLines: () => ReactNode = () => <>
+        <a className="anchor"
+            id="crisis-lines"
+        />
+        <div className={this.crisisResults?.length ? "crisisLines" : ""}>
+            <Switch>
+                <div
+                    switch-if={this.searchIsLoading}
+                    className="resultsStatus"
+                >
+                    <icons.Loading className="big" />
+                </div>
+                <CrisisResultsList
+                    switch-if={this.crisisResults?.length}
+                    results={this.crisisResults || []}
+                />
+            </Switch>
+        </div>
+    </>
 
     renderFeedbackCantFind(): ReactNode | void {
         if (!this.searchIsLoading && this.state.searchPagesLoaded > 2) {
