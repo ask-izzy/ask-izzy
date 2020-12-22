@@ -46,7 +46,7 @@ import Ndis from "./components/Ndis";
 import OnlineSafetyContent from "./components/OnlineSafetyContent";
 import OnlineSafetyLink from "./components/OnlineSafetyLink";
 import OpeningTimes from "./components/OpeningTimes";
-import Phone from "./components/Phone";
+import PhoneButton from "./components/PhoneButton";
 import ResultListItem from "./components/ResultListItem";
 import ResultsList from "./components/ResultsList";
 import ResultsMap from "./components/ResultsMap";
@@ -105,7 +105,7 @@ export default {
     OnlineSafetyContent,
     OnlineSafetyLink,
     OpeningTimes,
-    Phone,
+    PhoneButton,
     ResultListItem,
     ResultsList,
     ResultsMap,

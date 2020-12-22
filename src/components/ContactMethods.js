@@ -5,7 +5,7 @@ import React from "react";
 import Collapser from "./Collapser";
 import Spacer from "./Spacer";
 import Email from "./Email";
-import Phone from "./Phone";
+import PhoneButton from "./PhoneButton";
 import Web from "./Web";
 import fixtures from "../../fixtures/services";
 import ServiceFactory from "../../fixtures/factories/Service";
@@ -74,11 +74,11 @@ class ContactMethods extends React.Component<Props, void> {
     get phones(): Array<Object> {
         return this.props.object.Phones().map(details => ({
             type: "Phone",
-            component: Phone,
+            component: PhoneButton,
             details: {
                 ...details,
-                styleType: 'hollow'
-            }
+                styleType: "hollow",
+            },
         }))
     }
 
