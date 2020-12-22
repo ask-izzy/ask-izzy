@@ -16,6 +16,14 @@ export const resetDfvOptions = (): void => {
     }
 }
 
+// Taken from https://stackoverflow.com/a/52551910/847536
+export function toCamelCase(str: string) {
+    return str.toLowerCase().replace(
+        /[^a-zA-Z0-9]+(.)/g,
+        (m, chr) => chr.toUpperCase()
+    );
+}
+
 export default {
     resetDfvOptions,
 }
