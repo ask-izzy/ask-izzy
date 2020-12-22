@@ -3,15 +3,15 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 
-import Phone from "./Phone";
+import PhoneButton from "./PhoneButton";
 
 export default {
-    title: "Service Components/Phone",
-    component: Phone,
+    title: "Service Components/PhoneButton",
+    component: PhoneButton,
 };
 
 const Template = (args: Object): ReactNode => {
-    (Template.args: any); return <Phone {...args} />;
+    (Template.args: any); return <PhoneButton {...args} />;
 };
 
 export const Example: typeof Template = Template.bind({});
