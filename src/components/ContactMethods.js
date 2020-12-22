@@ -43,7 +43,10 @@ class ContactMethods extends React.Component<Props, void> {
         return this.props.object.Phones().map(details => ({
             type: "Phone",
             component: Phone,
-            details,
+            details: {
+                ...details,
+                styleType: "hollow",
+            },
         }))
     }
 
