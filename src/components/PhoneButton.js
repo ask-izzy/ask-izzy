@@ -4,7 +4,6 @@ import { titleize } from "underscore.string";
 
 import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
-import icons from "../icons";
 import {toCamelCase} from "../utils"
 
 type Props = phone & {
@@ -13,7 +12,7 @@ type Props = phone & {
     styleType?: string // currently only "hollow" is supported
 }
 
-class Phone extends React.Component<Props, void> {
+export default class PhoneButton extends React.Component<Props, void> {
     static sampleProps = {default: {
         "comment": "Here is a phone number with a long comment" +
             ", like, a really long comment",
@@ -53,9 +52,9 @@ class Phone extends React.Component<Props, void> {
 
     render() {
         let className = "Contact Phone" + (
-            this.props.styleType ? 
-            ` ${toCamelCase('style ' + this.props.styleType)}`
-            : ""
+            this.props.styleType ?
+                ` ${toCamelCase("style " + this.props.styleType)}`
+                : ""
         )
 
         return (
@@ -80,5 +79,3 @@ class Phone extends React.Component<Props, void> {
         );
     }
 }
-
-export default Phone;

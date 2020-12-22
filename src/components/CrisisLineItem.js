@@ -4,7 +4,7 @@ import React from "react";
 import PropTypes from "proptypes";
 import { Link } from "react-router-dom";
 
-import Phone from "./Phone";
+import PhoneButton from "./PhoneButton";
 import fixtures from "../../fixtures/services";
 import iss from "../iss";
 import DebugContainer from "./DebugContainer";
@@ -90,7 +90,7 @@ class CrisisLineItem extends React.Component<Props, void> {
                             </DebugContainer>
                         }
                     </div>
-                    <Phone
+                    <PhoneButton
                         {...phone}
                         crisis={true}
                     />

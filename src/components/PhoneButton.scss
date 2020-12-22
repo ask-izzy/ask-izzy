@@ -1,12 +1,12 @@
 .Contact {
     .ContactButton {
-        background-color: $brand-pane-alt-dark;
-        color: $white;
-
         max-width: 320px;
         margin-bottom: 5px;
 
         border-radius: 3px;
+        background-color: $brand-pane-alt-dark;
+
+        color: $white;
 
         font-size: 18px;
         text-align: center;
@@ -18,18 +18,18 @@
         }
 
         .Contact-text {
-            padding: 0;
             display: inline;
+            padding: 0;
             font-weight: normal;
         }
     }
 
     &.styleHollow {
         .ContactButton {
-            background-color: transparent;
-            color: $brand-pane-alt-dark;
-
             border: 1px solid $brand-pane-alt-dark;
+            background-color: transparent;
+
+            color: $brand-pane-alt-dark;
             @media print {
                 border: 0;
             }

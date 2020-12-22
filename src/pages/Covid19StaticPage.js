@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import StaticPage from "./StaticPage";
 import MobileDetect from "../components/higherorder/MobileDetect";
 import * as gtm from "../google-tag-manager";
-import Phone from "../components/Phone";
+import PhoneButton from "../components/PhoneButton";
 import icons from "../icons";
 
 class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
@@ -84,7 +84,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                     information relating to coronavirus (COVID-19) for the
                     general community. The line operates 24 hours a day, seven
                     days a week.
-                    <Phone
+                    <PhoneButton
                         number="1800 020 080"
                         comment=""
                         kind=""
