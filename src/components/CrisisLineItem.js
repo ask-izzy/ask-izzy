@@ -90,6 +90,7 @@ class CrisisLineItem extends React.Component<Props, void> {
                                     eventAction: "Show crisis line extra info",
                                     eventLabel: null,
                                 }}
+                                hasIcon={true}
                             >
                                 {crisisDescriptions[object.id](object)}
                             </Collapser>

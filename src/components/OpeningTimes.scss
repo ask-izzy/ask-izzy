@@ -2,10 +2,12 @@
 
 .OpeningTimes {
     font-size: 16px;
+    white-space: nowrap;
 
     > span {
         display: inline-block;
         vertical-align: middle;
+        white-space: initial;
     }
 
     .open {

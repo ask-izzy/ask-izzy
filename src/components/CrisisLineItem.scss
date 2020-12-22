@@ -30,29 +30,6 @@
             width: unset;
             max-width: unset;
         }
-
-        .ContactButton {
-            display: inline-block;
-            border: 0;
-            background-color: #{colours.get-static('colour-button-standard')};
-            background-color: var(--colour-button-standard);
-            color: #{colours.get-static('colour-text-very-light')};
-            color: var(--colour-text-very-light);
-
-            &::before {
-                margin-right: 0.4em;
-                content: 'Call';
-            }
-
-            .Contact-text {
-                display: inline;
-                font-weight: normal;
-
-                .icon {
-                    display: none;
-                }
-            }
-        }
     }
 
     .bonusCopy {
