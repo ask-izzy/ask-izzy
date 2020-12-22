@@ -1,13 +1,10 @@
 .Contact {
     .ContactButton {
+        background-color: $brand-pane-alt-dark;
+        color: $white;
 
         max-width: 320px;
         margin-bottom: 5px;
-
-        border: 1px solid $brand-pane-alt-dark;
-        @media print {
-            border: 0;
-        }
 
         border-radius: 3px;
 
@@ -15,42 +12,27 @@
         text-align: center;
         text-decoration: none;
 
-        .Icon {
-            display: inline-block;
-            position: absolute;
-            top: -2px;
-            left: 50%;
-            margin-left: -110px;
-
-            path {
-                fill: $brand-pane-alt-dark;
-                @media print {
-                    fill: $black;
-                }
-            }
+        &::before {
+            margin-right: 0.4em;
+            content: "Call";
         }
 
         .Contact-text {
             padding: 0;
+            display: inline;
+            font-weight: normal;
         }
-
     }
 
-    .CrisisContactButton {
-        border: 1px solid $brand-highlight;
-        background-color: $brand-highlight;
+    &.styleHollow {
+        .ContactButton {
+            background-color: transparent;
+            color: $brand-pane-alt-dark;
 
-        .Icon {
-            outline: $white;
-
-            path {
-                fill: $white;
+            border: 1px solid $brand-pane-alt-dark;
+            @media print {
+                border: 0;
             }
-        }
-
-        .Contact-text {
-            color: $white;
-            font-weight: bold;
         }
     }
 }

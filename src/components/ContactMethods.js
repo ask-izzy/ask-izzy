@@ -75,7 +75,10 @@ class ContactMethods extends React.Component<Props, void> {
         return this.props.object.Phones().map(details => ({
             type: "Phone",
             component: Phone,
-            details,
+            details: {
+                ...details,
+                styleType: 'hollow'
+            }
         }))
     }
 
@@ -144,7 +147,6 @@ class ContactMethods extends React.Component<Props, void> {
                 eventAction: `${record.type}`,
             },
         }, record.details);
-        //return React.createElement('p', {}, JSON.stringify(props, null, 2));
 
         return React.createElement(record.component, props);
     }

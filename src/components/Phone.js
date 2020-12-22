@@ -5,10 +5,12 @@ import { titleize } from "underscore.string";
 import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
 import icons from "../icons";
+import {toCamelCase} from "../utils"
 
 type Props = phone & {
     crisis?: boolean,
-    analyticsEventDetails?: AnalyticsEvent
+    analyticsEventDetails?: AnalyticsEvent,
+    styleType?: string // currently only "hollow" is supported
 }
 
 class Phone extends React.Component<Props, void> {
@@ -50,29 +52,25 @@ class Phone extends React.Component<Props, void> {
     recordClick = this.recordClick.bind(this)
 
     render() {
-        let contactButtonClassName = "ContactButton";
-        let phonebutton = <icons.Phone />;
-
-        if (this.props.crisis) {
-            // Customise crisis services with style branding
-            contactButtonClassName += " CrisisContactButton"
-            phonebutton = <icons.PhoneSolid />;
-        }
+        let className = "Contact Phone" + (
+            this.props.styleType ? 
+            ` ${toCamelCase('style ' + this.props.styleType)}`
+            : ""
+        )
 
         return (
-            <div className="Contact Phone">
+            <div className={className}>
                 <span className="kind">
                     {this.displayComment}
                 </span>
                 <a
                     href={this.href}
-                    className={contactButtonClassName}
+                    className="ContactButton"
                     onClick={this.recordClick}
                 >
                     <div
                         className="Contact-text"
                     >
-                        {phonebutton}
                         <span className="number value">
                             {this.props.number}
                         </span>

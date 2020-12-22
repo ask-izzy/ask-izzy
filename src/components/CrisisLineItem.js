@@ -38,7 +38,6 @@ const crisisDescriptions = {
 
 type Props = {
     object: iss.Service,
-    expanded ? : boolean,
 }
 
 class CrisisLineItem extends React.Component<Props, void> {
@@ -79,7 +78,7 @@ class CrisisLineItem extends React.Component<Props, void> {
                             <Collapser
                                 message="See information about this call"
                                 closeMessage="Hide information about this call"
-                                expanded={this.props.expanded}
+                                hasIcon={true}
                             >
                                 {crisisDescriptions[object.id](object)}
                             </Collapser>
