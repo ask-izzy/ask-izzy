@@ -1,7 +1,7 @@
 /* @flow */
 import * as React from "react";
 
-import Phone from "./Phone";
+import PhoneButton from "./PhoneButton";
 import StrapiMarkdown from "./StrapiMarkdown";
 import Link from "./base/Link";
 import * as gtm from "../google-tag-manager";
@@ -110,7 +110,7 @@ function CalloutBox(
                 {callout.Body}
             </StrapiMarkdown>
             {callout.Phone &&
-                <Phone
+                <PhoneButton
                     number={`Call ${callout.Phone}`}
                     comment=""
                     kind=""
