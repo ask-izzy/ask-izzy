@@ -28,8 +28,8 @@ Feature: Crisis Line
         When I visit /
         And I search for "get helpline phone number" and press enter
         Then I should be at /search/get helpline phone number
-        And I should see a hotline in position 1 which says "(03) 3333 3333"
-        And I should see a hotline in position 2 which says "03 1111 1111"
+        And I should see a hotline in position 1 which says "Call (03) 3333 3333"
+        And I should see a hotline in position 2 which says "Call 03 1111 1111"
         And I should see "For help and safety call:"
 
     Scenario: Search for helpline phone numbers for domestic violence
@@ -38,7 +38,7 @@ Feature: Crisis Line
         And I click on the search button
         And I click on "Myself"
         And I click on "Skip"
-        Then I should see a hotline in position 1 which says "1800 737 732"
+        Then I should see a hotline in position 1 which says "Call 1800 737 732"
         And I should see "For help and safety call:"
 
     Scenario: Show extra call information

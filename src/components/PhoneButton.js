@@ -4,6 +4,7 @@ import { titleize } from "underscore.string";
 
 import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
+import icons from "../icons";
 import {toCamelCase} from "../utils"
 
 type Props = phone & {
@@ -51,11 +52,14 @@ export default class PhoneButton extends React.Component<Props, void> {
     recordClick = this.recordClick.bind(this)
 
     render() {
-        let className = "Contact Phone" + (
+        const className = "Contact Phone" + (
             this.props.styleType ?
                 ` ${toCamelCase("style " + this.props.styleType)}`
                 : ""
         )
+        const icon = this.props.styleType === "hollow" ?
+            <icons.Phone />
+            : <icons.PhoneSolid />
 
         return (
             <div className={className}>
@@ -70,6 +74,8 @@ export default class PhoneButton extends React.Component<Props, void> {
                     <div
                         className="Contact-text"
                     >
+                        {icon}
+                        <span>Call </span>
                         <span className="number value">
                             {this.props.number}
                         </span>
