@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 import classnames from "classnames";
 import { titleize } from "underscore.string";
 
@@ -74,7 +74,7 @@ class TransportTime extends React.Component<{
         );
     }
 
-    renderTravelTimes(travelTimes: Object) {
+    renderTravelTimes(travelTimes: Array<travelTime>): React.Node {
         return travelTimes.map((travel, key) => {
             let icon = "";
             let method = "";

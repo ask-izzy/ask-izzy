@@ -24,7 +24,7 @@ export function Location(props: ?Object): issLocation {
     }, props);
 }
 
-export function TravelTime(props: ?Object): Array<travelTime> {
+export function TravelTimes(props: ?Object): Array<travelTime> {
     return [Merge({
         mode: "WALKING",
         status: "OK",
