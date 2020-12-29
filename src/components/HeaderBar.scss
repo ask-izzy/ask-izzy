@@ -82,27 +82,10 @@
     * $bannerImages is injected in at webpack compile time based on the
     * filenames in the public/images/banners dir
     */
-    @mixin banner-background($banner-image, $banner-overlay-colour: $black-banner-rgba) {
-        background: linear-gradient($banner-overlay-colour, $banner-overlay-colour), url("/static/images/banners/#{$banner-image}.png") center center;
-    }
     @each $banner-image in $banner-images {
 
         &.#{$banner-image} {
-            @include banner-background($banner-image);
-
-            /* The latest design revision no longer makes use of a custom tinted
-             * background (as of late 2020). But since the design is still 
-             * evolving I'm leaving the infrastructure used for that in place. 
-             * If it's used again then remove this message else if it's not used
-             * then it's safe to remove. 
-             *
-             * Colours are applied with the "backgroundOverlayColour" prop and
-             * and a corresponding css statement like:
-             * &.backgroundOverlayColourLighterGrey {
-             *   @include banner-background($banner-image, $banner-overlay-colour: $brand-bg-mid-lighter);
-             * }
-             */
-
+            background: linear-gradient($black-banner-rgba, $black-banner-rgba), url("/static/images/banners/#{$banner-image}.png") center center;
             background-size: cover;
 
             @media only screen and (max-width: 400px) {

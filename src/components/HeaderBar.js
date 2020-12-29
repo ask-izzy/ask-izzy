@@ -8,7 +8,6 @@ type Props = {
     children?: React.Node,
     bannerName: string,
     taperColour?: string,
-    backgroundOverlayColour?: string,
 }
 
 class HeaderBar extends React.Component<Props, void> {
@@ -30,11 +29,6 @@ class HeaderBar extends React.Component<Props, void> {
 
         if (this.props.taperColour) {
             headerBarClassName += ` taperColour${this.props.taperColour}`;
-        }
-
-        if (this.props.backgroundOverlayColour) {
-            headerBarClassName +=
-                ` backgroundOverlayColour${this.props.backgroundOverlayColour}`;
         }
 
         return (
