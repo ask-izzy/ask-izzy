@@ -24,7 +24,7 @@ export default function locate(options: ?PositionOptions): Promise<Position> {
             const interval = setInterval(() => {
                 const mock = storage.getGeolocationMock();
 
-                if (mock.wait) {
+                if (mock.result?.wait) {
                     return;
                 }
                 clearInterval(interval);
