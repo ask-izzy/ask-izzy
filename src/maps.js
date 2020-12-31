@@ -5,6 +5,7 @@ declare var google: Google;
 import storage from "./storage";
 import _ from "underscore";
 import checkInactive from "./inactiveTimeout";
+import {wait} from "./utils"
 
 export class MapsApi {
     api: GoogleMaps;
@@ -150,22 +151,10 @@ export class MapsApi {
  * @returns {Promise<MapsApi>} a Promise that will resolve to the Google Maps
  * API, when available.
  */
-function maps(): Promise<MapsApi> {
-    return new Promise((resolve, reject) => {
-        function checkLoaded() {
-            try {
-                // Check that google maps has loaded
-                google.maps.DistanceMatrixService.name;
-
-                resolve(new MapsApi(google.maps));
-            } catch (error) {
-                /* try again in 500ms */
-                setTimeout(checkLoaded, 500);
-            }
-        }
-
-        checkLoaded();
-    });
+export default async function(): Promise<MapsApi> {
+    // Wait until google maps has loaded
+    while (!google?.maps?.DistanceMatrixService?.name) {
+        await wait(50)
+    }
+    return new MapsApi(google.maps)
 }
-
-export default maps;

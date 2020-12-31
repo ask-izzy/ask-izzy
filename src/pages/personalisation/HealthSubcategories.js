@@ -2,7 +2,7 @@
 
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
-import { resetDfvOptions } from "../../utils";
+import { resetDfvOptions } from "../../utils/domesticViolence";
 
 export default class HealthSubcategories extends BaseQuestion {
     static title = "Mental Health";
