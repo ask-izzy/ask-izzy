@@ -8,7 +8,7 @@ import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
 import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
-import { resetDfvOptions } from "../utils";
+import { resetDfvOptions } from "../utils/domesticViolence";
 import routerContext from "../contexts/router-context";
 import AppBar from "../components/AppBar";
 import QuestionStepper from "./QuestionStepper";

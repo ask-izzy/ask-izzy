@@ -7,7 +7,6 @@
 
 import location from "browser-location";
 import storage from "./storage";
-import _ from "underscore";
 import Maps from "./maps";
 
 /**
@@ -25,7 +24,7 @@ export default function locate(options: ?PositionOptions): Promise<Position> {
             const interval = setInterval(() => {
                 const mock = storage.getGeolocationMock();
 
-                if (mock.wait) {
+                if (mock.result?.wait) {
                     return;
                 }
                 clearInterval(interval);
@@ -67,15 +66,26 @@ export function geolocationAvailable(): boolean {
 
 export async function guessSuburb(location: Position): Promise<string> {
     const maps = await Maps();
-    let possibleLocations = await maps.geocode({
-        location: {
-            lat: location.coords.latitude,
-            lng: location.coords.longitude,
-        },
-    });
+    let possibleLocations
+    try {
+        possibleLocations = await maps.geocode({
+            location: {
+                lat: location.coords.latitude,
+                lng: location.coords.longitude,
+            },
+        });
+    } catch (error) {
+        // Testing system currently only reads first argument to a console
+        // logging function so we have to call multiple times if we have
+        // multiple values to be logged. I'll be glad when that limitation is
+        // removed 😊
+        console.error("Failed to guess suburb based on this location:")
+        console.error(JSON.stringify(location, null, 2))
+        throw error
+    }
 
     const address = possibleLocations
-        .find(location => location.types.some(type => 'locality'))
+        .find(location => location.types.some(type => "locality"))
         ?.address_components
 
     if (!address) {
@@ -91,5 +101,5 @@ export async function guessSuburb(location: Position): Promise<string> {
         ))
         ?.short_name
 
-    return `${suburb}, ${state}`
+    return `${suburb || ""}, ${state || ""}`
 }

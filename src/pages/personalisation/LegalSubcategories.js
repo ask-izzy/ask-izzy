@@ -2,7 +2,7 @@
 
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
-import { resetDfvOptions } from "../../utils";
+import { resetDfvOptions } from "../../utils/domesticViolence";
 
 export default class LegalSubcategories extends BaseQuestion {
     static title = "Legal";
