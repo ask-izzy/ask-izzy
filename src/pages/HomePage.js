@@ -10,7 +10,7 @@ import BrandedFooter from "../components/BrandedFooter";
 import { Link } from "react-router-dom";
 import icons from "../icons"
 
-import { resetDfvOptions } from "../utils";
+import { resetDfvOptions } from "../utils/domesticViolence";
 import { openUserSnap } from "../utils/usersnap";
 import routerContext from "../contexts/router-context";
 

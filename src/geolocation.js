@@ -65,15 +65,24 @@ export function geolocationAvailable(): boolean {
 }
 
 export async function guessSuburb(location: Position): Promise<string> {
-    // Double await to solve weird flow behaviour:
-    // https://github.com/facebook/flow/issues/7464
-    const maps = await await Maps();
-    let possibleLocations = await maps.geocode({
-        location: {
-            lat: location.coords.latitude,
-            lng: location.coords.longitude,
-        },
-    });
+    const maps = await Maps();
+    let possibleLocations
+    try {
+        possibleLocations = await maps.geocode({
+            location: {
+                lat: location.coords.latitude,
+                lng: location.coords.longitude,
+            },
+        });
+    } catch (error) {
+        // Testing system currently only reads first argument to a console
+        // logging function so we have to call multiple times if we have
+        // multiple values to be logged. I'll be glad when that limitation is
+        // removed 😊
+        console.error("Failed to guess suburb based on this location:")
+        console.error(JSON.stringify(location, null, 2))
+        throw error
+    }
 
     const address = possibleLocations
         .find(location => location.types.some(type => "locality"))
@@ -92,5 +101,5 @@ export async function guessSuburb(location: Position): Promise<string> {
         ))
         ?.short_name
 
-    return `${suburb}, ${state}`
+    return `${suburb || ""}, ${state || ""}`
 }
