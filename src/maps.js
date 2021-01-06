@@ -62,8 +62,7 @@ export class MapsApi {
                 }
 
                 return travelTimes;
-            }
-            )
+            })
     }
 
     batchDirectionsRequest(
@@ -152,9 +151,18 @@ export class MapsApi {
  * API, when available.
  */
 export default async function(): Promise<MapsApi> {
+    const DistanceMatrixServiceMock = window?.mocks?.DistanceMatrixService
+    const mocksInstalled =
+        google?.maps?.DistanceMatrixService === DistanceMatrixServiceMock
     // Wait until google maps has loaded
-    while (!google?.maps?.DistanceMatrixService?.name) {
+    while (!google?.maps?.DistanceMatrixService?.name && !mocksInstalled) {
         await wait(50)
+    }
+    // Load mock if given
+    if (!mocksInstalled && DistanceMatrixServiceMock) {
+        console.log("Loading google maps mocks")
+        // $FlowIgnore
+        google.maps.DistanceMatrixService = DistanceMatrixServiceMock
     }
     return new MapsApi(google.maps)
 }

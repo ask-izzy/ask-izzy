@@ -46,20 +46,24 @@ async function checkTransportTimeLines(time: Array<string>): Promise<void> {
 }
 
 async function checkTransportTime(time: string): Promise<void> {
-    let allTransports = await this.driver.findElements(
+    const allTransports = await this.driver.findElements(
         By.css(".TransportTime")
     );
-    let visibleTransports = await asyncFilter(
+    const visibleTransports = await asyncFilter(
         allTransports,
         elem => elem.isDisplayed()
     );
-    let text = await Promise.all(visibleTransports.map(
-        elem => elem.getText()
-    ))
+    const pageText = await Promise.all(
+        visibleTransports.map(elem => elem.getText())
+    ).then(
+        texts => normalizeWhitespace(texts.join("\n"))
+    )
+    const assertedText = normalizeWhitespace(time)
 
-    text = normalizeWhitespace(text.join("\n"))
-    assert(text.indexOf(normalizeWhitespace(time)) !== -1,
-        `Expected '${text}' to include '${time}'`);
+    assert(
+        pageText.indexOf(assertedText) !== -1,
+        `Expected '${pageText}' to include '${assertedText}'`
+    );
 }
 
 function normalizeWhitespace(text: string, resultingSpace = "\n"): string {

@@ -11,3 +11,13 @@ export function toCamelCase(str: string) {
 export function wait(timeToWait: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, timeToWait))
 }
+
+export function emitPageLoadEvent(): void {
+    if (typeof CustomEvent === "undefined" || typeof document === "undefined") {
+        return
+    }
+
+    const pageLoadEvent = new CustomEvent("pageComponentLoad");
+    document.dispatchEvent(pageLoadEvent);
+    window.pageComponentLoaded = true
+}
