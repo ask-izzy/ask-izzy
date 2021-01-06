@@ -33,8 +33,9 @@ Feature: Transport times
         ----------------------------------------------
 
         When I click on "Transportable"
+        And I wait for page component to load
         Then I should see a transport time of
         ------------------------------------------
-        8 hours 27 mins transport
+        8 hours 27 mins drive
         Get directions
         ------------------------------------------

@@ -45,6 +45,7 @@ module.exports = (function() {
             unpromisify(clickBrowserBack),
         )
         .when("I reload the page", unpromisify(reloadPage))
+        .when("I wait for page component to load", waitTillPageLoaded)
         .when("I pause for debugging", unpromisify(pauseToDebug))
         .when("I take a screenshot", unpromisify(takeScreenshot))
         .then("I should be at $URL", unpromisify(checkURL))
@@ -79,6 +80,23 @@ module.exports.documentReady = function documentReady(
         (window.xhrCount() === 0)
     );
 };
+
+async function waitTillPageLoaded(): Promise<void> {
+    await this.driver.executeAsyncScript((done) => {
+        document.addEventListener("pageComponentLoad", () => {
+            if (done) {
+                console.log("pageComponentLoad event received");
+                done()
+                done = null
+            }
+        })
+        if (window.pageComponentLoaded && done) {
+            console.log("pageComponentLoad event previously fired")
+            done()
+            done = null
+        }
+    });
+}
 
 async function visitUrl(url: string): Promise<void> {
     await module.exports.visitUrl(this.driver, url);
