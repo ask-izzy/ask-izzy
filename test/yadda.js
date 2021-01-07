@@ -19,6 +19,7 @@ import libraries from "./steps";
 /* eslint-disable no-unused-vars */
 import server from "../src/server";
 import mockISS from "./support/mock_iss/server";
+import serverMockCMS from "./support/mock-cms"; // Start Mock CMS server
 /* eslint-enable no-unused-vars */
 
 /* create the webdriver, we will reuse this promise multiple times */

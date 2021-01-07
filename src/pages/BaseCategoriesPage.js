@@ -98,7 +98,7 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
         }
 
         return components.filter(component => {
-            if (this.props.isRenderingStatic) {
+            if (typeof window === "undefined") {
                 if (typeof component.staticShowPage === "function") {
                     return component.staticShowPage();
                 }
