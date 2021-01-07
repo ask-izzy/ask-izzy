@@ -6,6 +6,8 @@
 .*/node_modules/.staging/.*
 .*/node_modules/.*/test/.*
 .*/node_modules/fbjs/.*
+.*/node_modules/graphql/.*
+.*/node_modules/graphql-tag/.*
 .*/bower_components/.*
 
 [include]
@@ -20,6 +22,7 @@ suppress_comment= \\(.\\|\n\\)*\\flow:disable
 esproposal.class_static_fields=ignore
 esproposal.class_instance_fields=enable
 esproposal.decorators=ignore
+esproposal.optional_chaining=enable
 
 [version]
 0.80.0

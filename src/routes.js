@@ -13,20 +13,10 @@ import StyleGuideItem from "./pages/StyleGuideItem";
 
 import BasePage from "./pages/BasePage";
 import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
 import NotFoundStaticPage from "./pages/NotFoundStaticPage";
 import AddServicePage from "./pages/AddServicePage";
-import TermsPage from "./pages/TermsPage";
-
-import HomelessSheltersStaticPage from "./pages/HomelessSheltersStaticPage";
-import FoodBanksStaticPage from "./pages/FoodBanksStaticPage";
-import HomelessSupportStaticPage from "./pages/HomelessSupportStaticPage";
-import HomelessLegalStaticPage from "./pages/HomelessLegalStaticPage";
-import HomelessFinanceStaticPage from "./pages/HomelessFinanceStaticPage";
-import HomelessHealthStaticPage from "./pages/HomelessHealthStaticPage";
-import InformationPage from "./pages/InformationPage";
-import OnlineSafetyStaticPage from "./pages/OnlineSafetyStaticPage";
-import BetaInfoStaticPage from "./pages/BetaInfoStaticPage"
+import BetaInfoStaticPage from "./pages/BetaInfoStaticPage";
+import DynamicPage from "./pages/DynamicPage";
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
@@ -100,7 +90,7 @@ export default (
         />
         <BasePage
             path="/about"
-            component={AboutPage}
+            component={DynamicPage}
             title="About"
         />
         <BasePage
@@ -115,12 +105,12 @@ export default (
         />
         <BasePage
             path="/terms"
-            component={TermsPage}
+            component={DynamicPage}
             title="Terms of use"
         />
         <BasePage
             path="/online-safety"
-            component={OnlineSafetyStaticPage}
+            component={DynamicPage}
             title="Online Safety"
         />
         <BasePage
@@ -130,37 +120,38 @@ export default (
         />
         <BasePage
             path="/homeless-shelters"
-            component={HomelessSheltersStaticPage}
+            component={DynamicPage}
             title="Homeless shelters"
         />
         <BasePage
             path="/food-banks"
-            component={FoodBanksStaticPage}
+            component={DynamicPage}
             title="Food Banks"
+            strict={false}
         />
         <BasePage
             path="/homeless-support"
-            component={HomelessSupportStaticPage}
+            component={DynamicPage}
             title="Homeless support"
         />
         <BasePage
             path="/homeless-legal-services"
-            component={HomelessLegalStaticPage}
+            component={DynamicPage}
             title="Homeless Legal Services"
         />
         <BasePage
             path="/homeless-financial-support"
-            component={HomelessFinanceStaticPage}
+            component={DynamicPage}
             title="Homeless financial support"
         />
         <BasePage
             path="/homeless-health-care"
-            component={HomelessHealthStaticPage}
+            component={DynamicPage}
             title="Homeless Health Care"
         />
         <BasePage
             path="/information"
-            component={InformationPage}
+            component={DynamicPage}
             title="Information"
         />
         <BasePage
