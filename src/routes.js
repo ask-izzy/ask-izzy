@@ -16,6 +16,7 @@ import HomePage from "./pages/HomePage";
 import NotFoundStaticPage from "./pages/NotFoundStaticPage";
 import AddServicePage from "./pages/AddServicePage";
 import BetaInfoStaticPage from "./pages/BetaInfoStaticPage";
+import DisabilityAdvocacyFinder from "./pages/DisabilityAdvocacyFinder";
 import DynamicPage from "./pages/DynamicPage";
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
@@ -102,6 +103,11 @@ export default (
             path="/covid-19-support"
             component={Covid19StaticPage}
             title="COVID 19 Support"
+        />
+        <BasePage
+            path="/disability-advocacy-finder"
+            component={DisabilityAdvocacyFinder}
+            title="Disability Advocacy Finder"
         />
         <BasePage
             path="/terms"

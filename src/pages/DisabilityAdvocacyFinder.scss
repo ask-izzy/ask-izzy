@@ -1,0 +1,17 @@
+.DisabilityAdvocacyFinder {
+    margin-bottom: 50px;
+
+    .findAdvocacyButton {
+        text-decoration: none;
+
+        button {
+            display: block;
+            margin: auto;
+            margin-bottom: 40px;
+            padding: 0 2em;
+            border: $brand-pane-alt-dark 1px solid;
+            background-color: transparent;
+            color: $brand-pane-alt-dark;
+        }
+    }
+}
