@@ -88,6 +88,7 @@
     "url-search-params-polyfill": "8.0.0",
     "webpack": "3.12.0",
     "webpack-dev-server": "2.11.5",
+    "whatwg-fetch": "3.5.0",
     "yadda": "1.5.0"
   },
   "devDependencies": {}

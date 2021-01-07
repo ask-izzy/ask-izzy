@@ -54,7 +54,11 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                // Exceptions to exclusions needed because UglifyJs can't handle
+                // ES6 so modules using ES6 features need to be run though babel
+                // first. When we get around to upgrading our minifier we should
+                // be able to remove these exclusions.
+                exclude: /node_modules\/(?!posthog-js|is-plain-obj)/,
                 use: ["babel-loader?cacheDirectory"],
             },
         ],
