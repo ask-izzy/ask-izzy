@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import classnames from "classnames";
 
 import AppBar from "../components/AppBar";
 import DebugContainer from "../components/DebugContainer";
@@ -98,8 +99,9 @@ class ResultsListPage extends ResultsPage<Props, State> {
     }
 
     renderPage = () => (
-        <div className={"ResultsListPage" + (
-            this.crisisResults?.length ? " includesCrisisLines" : ""
+        <div className={classnames(
+            "ResultsListPage",
+            {"includesCrisisLines": this.crisisResults?.length}
         )}
         >
             <AppBar
