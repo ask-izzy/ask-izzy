@@ -73,7 +73,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                     <div>
                         <Subpage
                             ref="subpage"
-                            onDoneTouchTap={this.nextStep.bind(this)}
+                            onDoneTouchTap={this.nextStep}
                             category={this.category}
                             nextStep={this.nextStep}
                             previousStep={this.previousStep}
