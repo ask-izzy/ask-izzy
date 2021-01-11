@@ -89,6 +89,7 @@ function renderPage(uri: string, path: string, params: Object): void {
  */
 function* generateRouteParamVals(
     route: typeof Route,
+    categories
 ): Iterable<Object> {
     const routePath = route.props.path
 
@@ -168,18 +169,18 @@ function fillInPathParams(path: string, params: Object) {
 /** Get a list of all paths we want to render pages for */
 declare type NestedRoute = Array<NestedRoute> | typeof Route
 declare type PageToRender = {urlPath: string, filePath: string, params: Object}
-function getPagesFromRoutes(route: NestedRoute): Array<PageToRender> {
+export function getPagesFromRoutes(route: NestedRoute, categories): Array<PageToRender> {
     if (route instanceof Array) {
         // $FlowIgnore .flat() not yet understood by flow
-        return route.map(getPagesFromRoutes).flat();
+        return route.map(childRoute => getPagesFromRoutes(childRoute, categories)).flat();
     }
     const pathsToRender = []
 
-    for (const paramVals of generateRouteParamVals(route)) {
+    for (const paramVals of generateRouteParamVals(route, categories)) {
         pathsToRender.push({
             urlPath: fillInPathParams(route.props.path, paramVals),
             filePath: fillInPathParams(
-                route.props.path,
+                route.props.path.replace(/^\/?/, '/'),
                 {...paramVals, search: undefined}
             ).replace(/\/*$/, "/index.html"),
             params: paramVals,
@@ -189,25 +190,36 @@ function getPagesFromRoutes(route: NestedRoute): Array<PageToRender> {
     // Add paths from any child routes
     const children = route.props.children || []
     for (const child of children) {
-        pathsToRender.push(...getPagesFromRoutes(child))
+        pathsToRender.push(...getPagesFromRoutes(child, categories))
     }
 
     return pathsToRender
 }
 
 
-const pages = getPagesFromRoutes(routes)
-process.stdout.write("  Rendering pages…")
-for (const [i, page] of pages.entries()) {
-    process.stdout.write(
-        ansiEscapes.eraseStartLine +
+
+
+export function main() {
+    const pages = getPagesFromRoutes(routes, categories)
+
+    process.stdout.write("  Rendering pages…")
+    for (const [i, page] of pages.entries()) {
+        process.stdout.write(
+            ansiEscapes.eraseStartLine +
+            ansiEscapes.cursorLeft +
+            `  Rendering pages… ${i + 1} of ${pages.length}`
+        );
+        renderPage(page.urlPath, page.filePath, page.params);
+    }
+    console.log(
+        ansiEscapes.eraseLines(1) +
         ansiEscapes.cursorLeft +
-        `  Rendering pages… ${i + 1} of ${pages.length}`
+        `  Rendered ${pages.length} page${pages.length !== 1 ? "s" : ""}`
     );
-    renderPage(page.urlPath, page.filePath, page.params);
 }
-console.log(
-    ansiEscapes.eraseLines(1) +
-    ansiEscapes.cursorLeft +
-    `  Rendered ${pages.length} page${pages.length !== 1 ? "s" : ""}`
-);
+
+// Render pages immediately if executed directly from the command line
+if (require.main === module) {
+    main()
+}
+
