@@ -1,13 +1,13 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 
 type Props = {
-    primaryText: any,
-    secondaryText?: any,
-    children?: any,
-    bannerName: any,
-    alternateBackgroundColor?: bool,
+    primaryText: string | React.Node,
+    secondaryText?: string | React.Node,
+    children?: React.Node,
+    bannerName: string,
+    taperColour?: string,
 }
 
 class HeaderBar extends React.Component<Props, void> {
@@ -16,37 +16,28 @@ class HeaderBar extends React.Component<Props, void> {
             primaryText: "Primary Text",
             secondaryText: "Secondary Text",
             bannerName: "food",
-            alternateBackgroundColor: false,
         },
     };
 
     render() {
         // Search banner is the default
-        let bannerClassName = "HeaderBarBanner search";
-        let headerBarClassName = "HeaderBar search";
+        let headerBarClassName = "HeaderBar";
 
         if (this.props.bannerName) {
-            bannerClassName = "HeaderBarBanner " + this.props.bannerName;
-            headerBarClassName = "HeaderBar " + this.props.bannerName;
+            headerBarClassName += ` ${this.props.bannerName}`;
         }
 
-        if (this.props.alternateBackgroundColor) {
-            bannerClassName += " alternate-fg-color" ;
+        if (this.props.taperColour) {
+            headerBarClassName += ` taperColour${this.props.taperColour}`;
         }
 
         return (
             <div className={headerBarClassName}>
-                <div className={bannerClassName}>
-
-                    <div className="BlackBanner" />
+                <div className="primary">
+                    {this.props.primaryText}
                 </div>
-                <div className="HeaderBarContent">
-                    <div className="primary">
-                        {this.props.primaryText}
-                    </div>
-                    {this.renderSecondaryText()}
-                    {this.props.children}
-                </div>
+                {this.renderSecondaryText()}
+                {this.props.children}
             </div>
         );
     }

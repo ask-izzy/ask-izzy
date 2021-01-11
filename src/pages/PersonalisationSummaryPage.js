@@ -26,7 +26,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         }
     }
 
-    nextStep(): void {
+    nextStep = () => {
         this.goBack();
     }
 
@@ -61,13 +61,6 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         const Subpage = this.currentComponent;
         const backMessage = Subpage ? "Answers" : this.title;
         const title = Subpage ? Subpage.title : "Answers";
-        let bannerName = "";
-
-        try {
-            bannerName = this.category.key;
-        } catch (err) {
-            // continue with no banner
-        }
 
         return (
             <div className="PersonalisationPage">
@@ -80,7 +73,10 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                     <div>
                         <Subpage
                             ref="subpage"
-                            onDoneTouchTap={this.nextStep.bind(this)}
+                            onDoneTouchTap={this.nextStep}
+                            category={this.category}
+                            nextStep={this.nextStep}
+                            previousStep={this.previousStep}
                         />
                     </div>
 
@@ -91,8 +87,10 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                                 Change your answers here
                                 </div>
                             }
-                            bannerName={bannerName}
-                            alternateBackgroundColor={true}
+                            bannerName={
+                                this.category?.bannerImage || "homepage"
+                            }
+                            taperColour="Grey"
                         />
 
                         <div className="List">

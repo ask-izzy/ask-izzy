@@ -1,7 +1,5 @@
 /* flow:disable */
 
-import PropTypes from "proptypes";
-
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
 import routerContext from "../contexts/router-context"
@@ -10,12 +8,6 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     ExtraState
 > {
     static contextType = routerContext;
-
-    getChildContext(): Object {
-        return {
-            controller: this,
-        };
-    }
 
     previousStep(): void {
         // If our subpage has an onPreviousStep hook, call it, otherwise
@@ -101,9 +93,5 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
         });
     }
 }
-
-BasePersonalisationPage.childContextTypes = {
-    controller: PropTypes.instanceOf(BasePersonalisationPage),
-};
 
 export default BasePersonalisationPage;

@@ -4,13 +4,14 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 import HeaderBar from "../HeaderBar";
-import type {Category} from "../../constants/categories";
+import type Category from "../../constants/Category";
 
 import Gender from "../../pages/personalisation/Gender";
 import Age from "../../pages/personalisation/Age";
 import Location from "../../pages/personalisation/Location";
 import storage from "../../storage";
 import sendEvent from "../../google-tag-manager";
+import routerContext from "../../contexts/router-context";
 
 const HomeLink = () =>
     <Link
@@ -56,6 +57,8 @@ type Props = {
 }
 
 class LoadingResultsHeader extends React.Component<Props, void> {
+    static contextType = routerContext;
+
     render() {
         const {
             error,
@@ -66,14 +69,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             title,
             meta,
         } = this.props;
-        let bannerName = "";
-
-        try {
-            // flow:disable
-            bannerName = this.props.match.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
+        let bannerName = this.context.router.match?.params?.page || "homepage";
 
         if (loading) {
             return (

@@ -49,6 +49,9 @@ Alternatively you can run it without docker via:
 ENVIRONMENT="dev_local" NODE_ENV="development" ISS_URL="$ISS_URL" GOOGLE_API_KEY="$G_API_KEY" ./script/dev-server
 ```
 
+## Remote access
+By default the dev server is only accessible via localhost but if you want to access it via a remote machine (say for example to test the site on a phone) you should set the env var ALLOWED_HOSTS to the host name of the machine you're running the site on.
+
 ## Dealing with HTTP and browsers
 
 Ask Izzy is a fully static site in production

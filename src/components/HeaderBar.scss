@@ -1,156 +1,99 @@
 .HeaderBar {
     position: relative;
-    height: 160px;
+    min-height: 160px;
+    padding-bottom: 2vw;
+    color: $white;
+    z-index: 1;
+    overflow-x: hidden; /* used to hide ::after pseudo-element that creates the
+        diagonal taper at the bottom of the header */
+    box-sizing: border-box;
 
-    &.alternate-bg-color {
-        background-color: $brand-bg-light;
+    // The default focus style has an outline
+    // the same color as this background
+    :focus {
+        outline: 1px dashed $brand-bg-dark;
     }
 
-    @media only screen and (max-width: 375px) {
-        max-height: 196px;
-    }
-
-
-    .HeaderBarContent {
-        @include clearfix;
-
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
+    a,
+    .link-color {
         color: $white;
+    }
 
-        // The default focus style has an outline
-        // the same color as this background
-        :focus {
-            outline: 1px dashed $brand-bg-dark;
-        }
+    .primary {
+        min-height: 1em;
+        margin: 15px 20px;
 
-        .primary {
-            max-width: 780px;
-            min-height: 1em;
-            padding-top: 15px;
-            padding-right: 20px;
-            padding-bottom: 15px;
-            padding-left: 20px;
+        font-size: 22px;
+        font-weight: 500;
+        text-shadow: $text-shadow;
 
-            font-size: 22px;
-            font-weight: 500;
-            text-shadow: $text-shadow;
-
-            @media only screen and (max-width: 410px) {
-                padding-top: 10px;
-                padding-bottom: 10px;
-            }
-        }
-
-        .secondary {
-            max-width: 780px;
-            min-height: 1em;
-            padding-right: 20px;
-            padding-bottom: 20px;
-            padding-left: 20px;
-
-            font-size: 18px;
-            font-weight: 400;
-            line-height: 1.4;
-            text-shadow: $text-shadow;
-
-            .clickable {
-                color: $white;
-                font-weight: 400;
-            }
-        }
-
-        p {
-            margin: 0;
-            padding: 0;
-
-            & + p {
-                margin-top: 15px;
-            }
+        @media only screen and (max-width: 410px) {
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
     }
 
-    .HeaderBarBanner {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+    .secondary {
+        min-height: 1em;
+        margin: 15px 20px;
+
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.4;
+        text-shadow: $text-shadow;
+    }
+
+    p {
         margin: 0;
-        opacity: 1;
-        overflow: hidden;
+        padding: 0;
 
-        &::after {
-            position: absolute;
-            bottom: 0%;
-            left: 0%;
-            border-top: 3.5vw solid transparent;
-            border-right: 100vw solid $white;
-            content: "";
+        & + p {
+            margin-top: 15px;
         }
+    }
 
-        &.alternate-fg-color::after {
-            border-right: 100vw solid $brand-bg-light;
-        }
+    /* Diagonal cut-out taper at the bottom of the banner */
+    &::after {
+        position: absolute;
+        bottom: 0%;
+        left: 0%;
+        border-top: 3.5vw solid transparent;
+        border-right: 100vw solid $white;
+        content: "";
+    }
 
-        &.homepage {
-            &::after {
-                position: absolute;
-                bottom: 0%;
-                left: 0%;
-                border-top: 3.5vw solid transparent;
-                border-right: 100vw solid $white;
-                content: "";
-            }
-        }
-        $categories: advocacy centrelink drugs-alcohol everyday-things
-        facilities finding-work food health housing legal
-        life-skills-education money-help something-to-do
-        support-counselling technology family-violence
-        domestic-family-violence-help;
-        @each $category in $categories {
-            &.#{$category} {
-                background: url("/static/images/banners/#{$category}.png") center center;
-                background-size: cover;
+    &.taperColourGrey::after {
+        border-right-color: $brand-bg-light;
+    }
 
-                @media only screen and (max-width: 400px) {
-                    &:not(.static) {
-                        background: url("/static/images/banners/#{$category}.png") left top;
-                        background-size: 200%;
-                    }
-                }
-            }
-        }
+    &.taperColourDarkGrey::after {
+        border-right-color: $brand-bg-dark;
+    }
 
-        &.homepage {
-            background: url("/static/images/banners/homepage.png") center center;
-            background-size: cover;
-        }
+    &.taperColourLighterGrey::after {
+        border-right-color:  $brand-bg-mid-lighter;
+    }
 
-        &.search {
-            background: url("/static/images/banners/homepage.png") center center;
-            background-size: cover;
-        }
+    &.taperColourPurple::after {
+        border-right-color: $brand-pane-alt-dark;
+    }
 
-        &.atsi {
-            background: url("/static/images/banners/atsi.png") center center;
+    /**
+    * $bannerImages is injected in at webpack compile time based on the
+    * filenames in the public/images/banners dir
+    */
+    @each $banner-image in $banner-images {
+
+        &.#{$banner-image} {
+            background: linear-gradient($black-banner-rgba, $black-banner-rgba), url("/static/images/banners/#{$banner-image}.png") center center;
             background-size: cover;
 
             @media only screen and (max-width: 400px) {
-                background: url("/static/images/banners/atsi.png") center center;
-                background-size: cover;
+                &:not(.static) {
+                    background-position: left top;
+                    background-size: auto 200%;
+                }
             }
-        }
-
-        .BlackBanner {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: $black-banner-rgba;
         }
     }
 }

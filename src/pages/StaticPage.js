@@ -43,7 +43,6 @@ export default class StaticPage extends React.Component<Props> {
                             primaryText={this.props.bannerPrimary || null}
                             secondaryText={this.props.bannerSecondary || null}
                             bannerName={this.props.bannerName}
-                            alternateBackgroundColor={false}
                         />
                         : null
                 }

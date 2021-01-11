@@ -200,14 +200,6 @@ class Location extends Personalisation<Props, State> {
     }
 
     render() {
-        let bannerName = "";
-
-        try {
-            bannerName = this.context.controller.props.match.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
-
         return (
             <div className="Location">
                 <components.HeaderBar
@@ -219,7 +211,7 @@ class Location extends Personalisation<Props, State> {
                     secondaryText={
                         "This will let me find the services closest to you"
                     }
-                    bannerName={bannerName}
+                    bannerName={this.bannerName}
                 />
                 <div className="List">
                     {

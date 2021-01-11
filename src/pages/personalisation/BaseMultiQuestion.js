@@ -160,14 +160,6 @@ class BaseMultiQuestion extends BaseQuestion {
 
     render() {
         let selected = this.selected;
-        let bannerName = "";
-
-        try {
-            bannerName = this.context.controller.props.match.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
-
         return (
             <div
                 className={
@@ -186,8 +178,7 @@ class BaseMultiQuestion extends BaseQuestion {
                     secondaryText={
                         this.props.byline
                     }
-                    bannerName={bannerName}
-                    alternateBackgroundColor={false}
+                    bannerName={this.bannerName}
                 />
                 <div className="List">
                     {this.answers.map((answer, index) =>

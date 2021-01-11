@@ -1,9 +1,9 @@
 /* @flow */
 
 import * as React from "react";
-import _ from "underscore";
 
-import categories, {Category} from "../constants/categories";
+import Category from "../constants/Category";
+import {getCategory} from "../constants/categories";
 import type {
     searchRequest,
     searchResultsMeta,
@@ -27,8 +27,6 @@ type State = {
 
 class BaseCategoriesPage<ExtraState = {}> extends React.Component<
     Object, State & ExtraState> {
-    _category: Category;
-
     static contextType = routerContext;
 
     /**
@@ -36,17 +34,10 @@ class BaseCategoriesPage<ExtraState = {}> extends React.Component<
      *
      * Return category information.
      */
-    get category(): Category {
-        if (this._category) {
-            return this._category;
-        }
-
-        let category = _.findWhere(categories, {
-            key: this.context.router.match.params.page,
-        });
-
-        this._category = category;
-        return category;
+    get category(): ?Category {
+        return getCategory(
+            this.context.router.match.params.page
+        )
     }
 
     get title(): string {

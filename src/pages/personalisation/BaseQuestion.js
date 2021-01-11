@@ -260,18 +260,6 @@ class BaseQuestion extends Personalisation<Props, State> {
     }
 
     renderHeaderBar(): React.Element<any> {
-        let bannerName = "";
-
-        try {
-            bannerName = this.context.controller.props.match.params.page;
-        } catch (err) {
-            // continue with no banner
-        }
-
-        if (this.props.name === "sub-indigenous") {
-            bannerName = "atsi";
-        }
-
         return (
             <HeaderBar
                 primaryText={
@@ -282,8 +270,7 @@ class BaseQuestion extends Personalisation<Props, State> {
                 secondaryText={
                     this.props.byline
                 }
-                bannerName={bannerName}
-                alternateBackgroundColor={false}
+                bannerName={this.bannerName}
             />
         );
     }
