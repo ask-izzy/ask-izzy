@@ -260,7 +260,7 @@
     "State": ["VIC","WA","NT","ACT","SA","NSW","TAS","QLD"],
     "Type": "Primary Info",
     "Link text": "Read more",
-    "Link URL": "www.beta.askyizzy.org.au/food",
+    "Link URL": "/food-info",
     "Status": "In Beta",
     "Tags": "",
     "Notes": ""
