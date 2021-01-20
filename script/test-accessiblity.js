@@ -2,10 +2,13 @@
 import pa11y from "pa11y";
 import path from "path";
 import ansiEscapes from "ansi-escapes";
+import fs from "fs-extra";
 
 import * as renderStatic from "../src/server/render-static";
 import routes from "../src/routes";
 import categories from "../src/constants/categories";
+
+const previousIssuesJsonPath = './previous-issues.json';
 
 // Self executing func so await can be used
 ;(async () => {
@@ -20,61 +23,129 @@ import categories from "../src/constants/categories";
 })()
 
 async function checkForIssues(ignoreExistingIssues) {
-    let hasNewIssues = false;
-    const existingIssues = [];
+    let previousIssues;
+    let continuingIssues;
+    let resolvedIssues;
+    const newIssues = {};
+
+    if (ignoreExistingIssues) {
+      if (await fs.pathExists(previousIssuesJsonPath)) {
+        previousIssues = await fs.readJson(previousIssuesJsonPath)
+        continuingIssues = {}
+        resolvedIssues = {}
+      }
+    }
+
     for await (const {results, filePath} of checkNextPage()) {
         if (!Array.isArray(results.issues)) {
             console.error('Testing failed for unknown reason')
             return
         }
-        let newIssues;
-        if (ignoreExistingIssues) {
-            newIssues = [];
-            for (const issue of results.issues) {
-                const isExistingIssue = (getExistingIssues()[filePath] || [])
-                    .some(
-                        (existingIssue) =>
-                            existingIssue.selector === issue.selector &&
-                            existingIssue.message === issue.message
-                    );
+        const {
+            newIssues: currentPageNewIssues,
+            continuingIssues: currentPageContinuingIssues,
+            resolvedIssues: currentPageResolvedIssues
+        } = findContinuingIssues(
+            results.issues,
+            previousIssues?.[filePath] || []
+        );
 
-                if (isExistingIssue) {
-                    existingIssues.push(issue);
-                } else {
-                    newIssues.push(issue);
-                }
-            }
-        } else {
-            newIssues = results.issues;
+        newIssues[filePath] = currentPageNewIssues
+        if (continuingIssues) {
+            continuingIssues[filePath] = currentPageContinuingIssues
+        }
+        if (resolvedIssues) {
+            resolvedIssues[filePath] = currentPageResolvedIssues
         }
 
-        if (newIssues.length > 0){
-            process.stdout.write(
-                ansiEscapes.eraseStartLine +
-                ansiEscapes.cursorLeft
+        if (currentPageNewIssues.length > 0){
+            process.stdout.write("\n");
+            console.error(
+                `${currentPageNewIssues.length} ` +
+                `${previousIssues ? 'new ' : ''}issue(s) found with ${filePath}`
             );
-            console.error(`${newIssues.length} issue(s) found with ${filePath}`);
-            console.error(newIssues);
-            hasNewIssues = true
+            console.error(currentPageNewIssues);
             if (process.env.CI || process.env.FAIL_FAST) {
                 throw new Error()
             }
         }
     }
 
-    if (existingIssues.length > 0) {
-        console.log(`${existingIssues.length} existing issue(s)`);
+    let newPreviousIssues = continuingIssues || newIssues
+    await fs.writeJson(previousIssuesJsonPath, newPreviousIssues, {spaces: 2})
+
+
+    const numOfContinuingIssues = continuingIssues && 
+        Object.values(continuingIssues).flat().length
+    const numOfResolvedIssues = resolvedIssues && 
+        Object.values(resolvedIssues).flat().length
+    const numOfNewIssues = Object.values(newIssues).flat().length
+
+    if (numOfContinuingIssues) {
+        console.log(`${numOfContinuingIssues} existing issue(s)`);
     }
 
-    if (hasNewIssues) {
+    if (numOfResolvedIssues) {
+        console.log(`${numOfResolvedIssues} resolved issue(s)`);
+    }
+
+    if (numOfNewIssues > 0) {
         throw new Error()
     }
 }
 
+/** 
+* For an array of issues found by pa11y sort out which ones have previously
+* been logged and which ones are new.
+*/
+function findContinuingIssues(issues: Array<Object>, previousIssues: Array<Object>) {
+    const newIssues = [];
+    const continuingIssues = [];
+    let resolvedIssues = [...previousIssues];
+
+    for (const issue of issues) {
+        const isContinuingIssue = previousIssues.some(
+            (previousIssue) =>
+                previousIssue.selector === issue.selector &&
+                previousIssue.message === issue.message
+        );
+
+        if (isContinuingIssue) {
+            continuingIssues.push(issue);
+            // Issue not resolved so remove from resolvedIssues
+            resolvedIssues = resolvedIssues.filter(
+                (previousIssue) =>
+                    previousIssue.selector !== issue.selector ||
+                    previousIssue.message !== issue.message
+            );
+        } else {
+            newIssues.push(issue);
+        }
+    }
+
+    return {
+        newIssues,
+        continuingIssues,
+        resolvedIssues
+    }
+}
+
+/** 
+* A generator function which loops over each page, runs pa11y then yield the
+* results.
+*/
 async function* checkNextPage() {
     const sampleCategories = [categories[0]];
     const publicDir = path.join(__dirname, "../public");
     const pages = renderStatic.getPagesFromRoutes(routes, sampleCategories);
+    const chromeLaunchConfig = {
+        "args": [
+            "--headless",
+            "--no-sandbox",
+            "--acceptInsecureCerts=true",
+            "--ignore-certificate-errors",
+        ]
+    }
 
     process.stdout.write("Testing page accessibility")
     for (const [i, page] of pages.entries()) {
@@ -86,861 +157,7 @@ async function* checkNextPage() {
                 `Testing page accessibility (${i + 1} of ${pages.length})`
             );
         }
-        yield {...page, results: await pa11y(uri)};
+        yield {...page, results: await pa11y(uri, {chromeLaunchConfig})};
     }
     process.stdout.write("\n")
-}
-
-function getExistingIssues() {
-  return {
-    "/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector: "#chevron",
-        message:
-          'Duplicate id attribute value "chevron" found on the web page.',
-      },
-      {
-        selector: "#XMLID_674_",
-        message:
-          'Duplicate id attribute value "XMLID_674_" found on the web page.',
-      },
-      {
-        selector: "#Layer_2",
-        message:
-          'Duplicate id attribute value "Layer_2" found on the web page.',
-      },
-      {
-        selector: "#Layer_1-2",
-        message:
-          'Duplicate id attribute value "Layer_1-2" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/about/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/bushfire-support/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/covid-19-support/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector: "#phone",
-        message: 'Duplicate id attribute value "phone" found on the web page.',
-      },
-      {
-        selector: "#website",
-        message:
-          'Duplicate id attribute value "website" found on the web page.',
-      },
-      {
-        selector: "#XMLID_1040_",
-        message:
-          'Duplicate id attribute value "XMLID_1040_" found on the web page.',
-      },
-      {
-        selector: "#XMLID_1079_",
-        message:
-          'Duplicate id attribute value "XMLID_1079_" found on the web page.',
-      },
-      {
-        selector: "#XMLID_1041_",
-        message:
-          'Duplicate id attribute value "XMLID_1041_" found on the web page.',
-      },
-      {
-        selector: "#chevron",
-        message:
-          'Duplicate id attribute value "chevron" found on the web page.',
-      },
-      {
-        selector: "#XMLID_674_",
-        message:
-          'Duplicate id attribute value "XMLID_674_" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/terms/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/online-safety/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/beta-info/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector: "#chevron-back",
-        message:
-          'Duplicate id attribute value "chevron-back" found on the web page.',
-      },
-      {
-        selector: "#XMLID_1_",
-        message:
-          'Duplicate id attribute value "XMLID_1_" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/homeless-shelters/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/food-info/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/homeless-support/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/homeless-legal-services/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/homeless-financial-support/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/homeless-health-care/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/information/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/not-found/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-    "/add-service/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector: "#root > div > main > div > div:nth-child(2) > div > iframe",
-        message:
-          "Iframe element requires a non-empty title attribute that identifies the frame.",
-      },
-    ],
-    "/service/slug/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/search/:suburb-:state/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/search/:suburb-:state/map/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/search/:suburb-:state/map/personalise/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/search/:suburb-:state/map/personalise/page/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/search/:suburb-:state/map/personalise/summary/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/search/:suburb-:state/map/personalise/summary/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/search/:suburb-:state/personalise/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/search/:suburb-:state/personalise/page/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/search/:suburb-:state/personalise/summary/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/search/:suburb-:state/personalise/summary/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/search/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/search/map/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/search/map/personalise/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/search/map/personalise/page/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/search/map/personalise/summary/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/search/map/personalise/summary/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/search/personalise/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/search/personalise/page/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/search/personalise/summary/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/search/personalise/summary/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/map/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/map/personalise/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/map/personalise/page/intro/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/map/personalise/page/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/map/personalise/summary/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/map/personalise/summary/intro/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/map/personalise/summary/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/personalise/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/personalise/page/intro/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/personalise/page/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/personalise/summary/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/personalise/summary/intro/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/:suburb-:state/personalise/summary/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/rent-and-tenancy/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/map/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/map/personalise/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/map/personalise/page/intro/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/map/personalise/page/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/rent-and-tenancy/map/personalise/summary/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/map/personalise/summary/intro/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/map/personalise/summary/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/rent-and-tenancy/personalise/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/personalise/page/intro/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/personalise/page/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/rent-and-tenancy/personalise/summary/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/personalise/summary/intro/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-    ],
-    "/rent-and-tenancy/personalise/summary/location/index.html": [
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(2) > div > div:nth-child(2) > form",
-        message:
-          'This form does not contain a submit button, which creates issues for those who cannot submit the form using the keyboard. Submit buttons are INPUT elements with type attribute "submit" or "image", or BUTTON elements with type "submit" or omitted/invalid.',
-      },
-    ],
-    "/*/index.html": [
-      {
-        selector:
-          "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-        message:
-          "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
-      },
-      {
-        selector: "#Layer_1",
-        message:
-          'Duplicate id attribute value "Layer_1" found on the web page.',
-      },
-      {
-        selector:
-          "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
-        message:
-          "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      },
-    ],
-  };
 }

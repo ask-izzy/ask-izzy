@@ -18,7 +18,7 @@ import HtmlDocument from "./HtmlDocument";
 // $FlowIgnore
 import webpackStats from "./webpack-stats";
 import categories from "../constants/categories";
-import covidSupportCategories from "../constants/covidSupportCategories";
+import Category from "../constants/Category";
 import Helmet from "react-helmet";
 
 const versionFilePath = "public/VERSION"
@@ -161,10 +161,15 @@ declare type NestedRoute = Array<NestedRoute> | typeof Route
 declare type PageToRender = {urlPath: string, filePath: string, params: Object}
 
 /** Get a list of all paths we want to render pages for */
-export function getPagesFromRoutes(route: NestedRoute, categories): Array<PageToRender> {
+export function getPagesFromRoutes(
+    route: NestedRoute,
+    categories: Array<Category>
+): Array<PageToRender> {
     if (route instanceof Array) {
         // $FlowIgnore .flat() not yet understood by flow
-        return route.map(childRoute => getPagesFromRoutes(childRoute, categories)).flat();
+        return route.map(
+            childRoute => getPagesFromRoutes(childRoute, categories)
+        ).flat();
     }
 
     const pathsToRender = []
@@ -173,7 +178,7 @@ export function getPagesFromRoutes(route: NestedRoute, categories): Array<PageTo
         pathsToRender.push({
             urlPath: fillInPathParams(route.props.path, paramVals),
             filePath: fillInPathParams(
-                route.props.path.replace(/^\/?/, '/'),
+                route.props.path.replace(/^\/?/, "/"),
                 {...paramVals, search: undefined}
             ).replace(/\/*$/, "/index.html"),
             params: paramVals,

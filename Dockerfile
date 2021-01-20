@@ -28,7 +28,9 @@ RUN \
         chromium \
         build-essential \
         python \
-        libelf-dev && \
+        libelf-dev \
+        libatk-bridge2.0-0 \
+        libgtk-3-0 && \
     npm install -g yarn && \
     yarn config set registry http://apt.office.infoxchange.net.au/npm
 

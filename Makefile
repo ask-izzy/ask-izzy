@@ -69,6 +69,9 @@ else
 		contyard.office.infoxchange.net.au/hadolint:latest hadolint Dockerfile
 endif
 
+lint-pa11y:
+	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) lint-pa11y --ignore-existing-issues
+
 unit-test:
 	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) unit-test $(CI_TEST_FLAGS)
 
