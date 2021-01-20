@@ -55,7 +55,7 @@ lint-dockerfile-final:
 
 .pa11y:
   stage: lint
-  script: babel-node script/test-accessiblity.js --ignore-existing-issues
+  script: make lint-pa11y
 
 pa11y-dev:
   extends: .pa11y

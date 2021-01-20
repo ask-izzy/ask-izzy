@@ -33,6 +33,12 @@ case "$1" in
         exec npx sass-lint-auto-fix -c .sass-lint.yml
         ;;
 
+    lint-pa11y)
+        shift 1
+
+        exec script/run-node-script script/test-accessiblity.js "$@"
+        ;;
+
     unit-test)
         shift 1
 
