@@ -29,6 +29,7 @@ RUN \
         build-essential \
         python \
         libelf-dev \
+        # Used for pa11y
         libatk-bridge2.0-0 \
         libgtk-3-0 && \
     npm install -g yarn && \

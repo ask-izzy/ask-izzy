@@ -28,12 +28,13 @@ yarn
 
 ## Running the dev server
 
-You will need to create a file in the root directory called `.env` with environment variables for the [ISS](https://api.serviceseeker.com.au/) and Google API keys.
+You will need to create a file in the root directory called `.env` with environment variables for the [ISS](https://api.serviceseeker.com.au/) and Google API keys plus any desired optional env keys like `FAIL_FAST` (see *Development debugging* section for more).
 
 ```bash
 # Contents of .env
 ISS_URL="https://<username>:<token>@<iss domain>"
 GOOGLE_API_KEY="Rlf90...S0fwV"
+FAIL_FAST=true
 ```
 
 You can then start the dev server like so:
@@ -159,20 +160,6 @@ but async and await are not yet standardized (see
 https://github.com/tc39/ecmascript-asyncawait
 for the in-progress standard).
 
-## Type system (flowtype)
-
-Flow is configured using the `.flowconfig` file.
-
-All JS files in the repo either start with
-`/* @flow */` if they are typechecked
-or `/* $FlowIgnore */` if they are not.
-
-You can run flow on its own using `./node_modules/.bin/flow`.
-It's also run as part of the precommit hooks and in CI.
-
-Libraries which aren't part of the code have type definitions
-in the `interfaces` directory.
-
 ## Search query generation
 
 When a `ResultsPage` is added to the page, it builds a query
@@ -256,10 +243,41 @@ The following environment variables an be set to any string in order to enable d
   This will generate screenshots when a test fails.
 
   - FAIL_FAST
-  Setting this flag will halt testing as soon as one test fails.
+  Setting this flag will halt testing as soon as one test fails. This also include the pa11y lint/test.
 
   - PAUSE_AFTER_FAIL
   If true this will wait before exiting after test failure to allow a chance to manual debug the situation while the Ask Izzy and Mock ISS servers are still running.
+
+## Linters
+A number of linters are used for assessing and maintaining code quality. These are useful to run during development but are also used by the CI system and pre-commit git hooks.
+
+All linters except for hadolint and pa11y can be run using `docker-compose run --rm app lint`
+
+### ESLint
+ESLint lints JavaScript code quality and is configured using the `.eslintrc` file.
+
+Issues that can be automatically fixed can be resolved using `docker-compose run --rm app lint-fix-eslint`.
+
+### Flow
+Flow is a static type checker similar to TypeScript. JS files in Ask Izzy include additional non-standard markup which is used by Flow to help assess type correctness. As this markup is not understood by any JavaScript engines babel is used to strip this away before execution.
+
+Flow can be run on it's own using `docker-compose run --rm app shell -c "npx flow-bin"`.
+
+Config is done with the `.flowconfig` file and files starting with `/* @flow */` are checked for type correctness while files starting with `/* $FlowIgnore */` are not. Libraries which aren't part of the code have type definitions in the `interfaces` directory.
+
+### sass-lint
+sass-lint is used for linting sass files.
+
+Issues that can be automatically fixed can be resolved using `docker-compose run --rm app lint-fix-sass`
+
+### hadolint
+hadolint is used for linting the Dockerfile. It can be run using `make lint-dockerfile`.
+
+### JSONLint
+JSONLint is currently only used for linting `package.json`.
+
+### pa11y
+pa11y is used for automated accessibility testing. It can be run using `docker-compose run --rm app lint-pa11y`. To ignore existing issues and only report new ones add the argument `--ignore-existing-issues`. Keep in mind this command is effected by the `FAIL_FAST` environmental variable and if true the command will exit after the first failed page. 
 
 ## Tests
 All tests live in the `test` top level directory.
@@ -268,6 +286,8 @@ Unit tests live in `test/unit` and are invoked from `test/unit.js`. They use `mo
 BDD features live in `test/features` with step definitions in `test/steps` invoked from `test/feature.js`. They use `yadda`.
 Maps features live in `test/maps` with step definitions in `test/steps` invoked from `test/maps.js`. They use `yadda`.
 Personalisation features live in `test/personalisation` with step definitions in `test/steps` invoked from `test/personlisation.js`. They use `yadda`.
+
+See the *Development debugging* section for more info on environmental commands that effect the execution of tests.
 
 ### Docker
 
@@ -298,17 +318,7 @@ Add the git merge strategies to your `.git/config` file:
     [include]
         path = ../.gitmerge/strategies
 
-Run the linters:
-````bash
-docker-compose run --rm app lint
-# or without docker: 
-./script/typecheck
-````
-
-Auto-fix some linting issues:
-````bash
-docker-compose run --rm app lint-fix-eslint && docker-compose run --rm app lint-fix-sass
-````
+Check the Linters section for info on how to lint.
 
 Running the tests:
 ````bash
