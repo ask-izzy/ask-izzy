@@ -84,6 +84,8 @@ function renderPage(uri: string, path: string, params: Object): void {
  * The function returns an iterable list of these param value combinations.
  *
  * @param {Route} route - A React Router Route (or BasePage which extends it)
+ * @param {Array<Category>} categories - An array of categories to use when
+ * generating possible route params.
  *
  * @returns {Iterable<Object>} - Array of objects containing possible
  * combinations of prams for the given route.
