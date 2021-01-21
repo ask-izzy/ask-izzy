@@ -8,7 +8,10 @@ import * as renderStatic from "../src/server/render-static";
 import routes from "../src/routes";
 import categories from "../src/constants/categories";
 
-const previousIssuesJsonPath = './previous-issues.json';
+const previousIssuesJsonPath = path.join(
+    __dirname,
+    "./previous-accessibility-issues.json"
+);
 
 // Self executing func so await can be used
 ;(async () => {

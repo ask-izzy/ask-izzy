@@ -36,7 +36,7 @@ case "$1" in
     lint-pa11y)
         shift 1
 
-        exec script/run-node-script script/test-accessiblity.js "$@"
+        exec script/run-node-script script/test-accessibility.js "$@"
         ;;
 
     unit-test)

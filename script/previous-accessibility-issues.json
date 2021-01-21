@@ -5,16 +5,6 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HouseIcon disallow-override-color Icon SvgIcon ColoredIcon icon-fg-color big\" data-name=\"Layer 1\" id=\"Layer_1\" viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\"><title>house</title><rect heigh...</svg>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
       "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
@@ -25,7 +15,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"FoodIcon disallow-override-color Icon SvgIcon ColoredIcon icon-fg-color big\" data-name=\"Layer 1\" id=\"Layer_1\" viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\"><title>food</title><rect height...</svg>",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -56,6 +46,16 @@
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
       "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"HouseIcon disallow-override-color Icon SvgIcon ColoredIcon icon-fg-color big\" data-name=\"Layer 1\" id=\"Layer_1\" viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\"><title>house</title><rect heigh...</svg>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -95,7 +95,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_2\" found on the web page.",
-      "context": "<g id=\"Layer_2\" data-name=\"Layer 2\"><g id=\"Layer_1-2\" data-name=\"La...</g>",
+      "context": "<g data-name=\"Layer 2\" id=\"Layer_2\"><g data-name=\"Layer 1\" id=\"Laye...</g>",
       "selector": "#Layer_2",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -105,8 +105,48 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1-2\" found on the web page.",
-      "context": "<g id=\"Layer_1-2\" data-name=\"Layer 1\"><path class=\"cls-1\" d=\"M58.19,3...</g>",
+      "context": "<g data-name=\"Layer 1\" id=\"Layer_1-2\"><polyline points=\"61.85 38.75 6...</g>",
       "selector": "#Layer_1-2",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
+      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
+      "selector": "#chevron",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
+      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
+      "selector": "#XMLID_674_",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"FoodIcon disallow-override-color Icon SvgIcon ColoredIcon icon-fg-color big\" data-name=\"Layer 1\" id=\"Layer_1\" viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\"><title>food</title><rect height...</svg>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -231,522 +271,12 @@
       "runnerExtras": {}
     },
     {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_2\" found on the web page.",
-      "context": "<g data-name=\"Layer 2\" id=\"Layer_2\"><g data-name=\"Layer 1\" id=\"Laye...</g>",
-      "selector": "#Layer_2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1-2\" found on the web page.",
-      "context": "<g data-name=\"Layer 1\" id=\"Layer_1-2\"><polyline points=\"61.85 38.75 6...</g>",
-      "selector": "#Layer_1-2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
-      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
-      "selector": "#chevron",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
-      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
-      "selector": "#XMLID_674_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_2\" found on the web page.",
-      "context": "<g data-name=\"Layer 2\" id=\"Layer_2\"><g data-name=\"Layer 1\" id=\"Laye...</g>",
-      "selector": "#Layer_2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1-2\" found on the web page.",
-      "context": "<g data-name=\"Layer 1\" id=\"Layer_1-2\"><rect height=\"64\" fill=\"none\" w...</g>",
-      "selector": "#Layer_1-2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
-      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
-      "selector": "#chevron",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
-      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
-      "selector": "#XMLID_674_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_2\" found on the web page.",
-      "context": "<g id=\"Layer_2\" data-name=\"Layer 2\"><g id=\"Layer_1-2\" data-name=\"La...</g>",
-      "selector": "#Layer_2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1-2\" found on the web page.",
-      "context": "<g id=\"Layer_1-2\" data-name=\"Layer 1\"><rect width=\"64\" height=\"64\" fi...</g>",
-      "selector": "#Layer_1-2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
-      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
-      "selector": "#chevron",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
-      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
-      "selector": "#XMLID_674_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_2\" found on the web page.",
-      "context": "<g data-name=\"Layer 2\" id=\"Layer_2\"><g data-name=\"Layer 1\" id=\"Laye...</g>",
-      "selector": "#Layer_2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1-2\" found on the web page.",
-      "context": "<g data-name=\"Layer 1\" id=\"Layer_1-2\"><rect height=\"64\" fill=\"none\" w...</g>",
-      "selector": "#Layer_1-2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
-      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
-      "selector": "#chevron",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
-      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
-      "selector": "#XMLID_674_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_2\" found on the web page.",
-      "context": "<g data-name=\"Layer 2\" id=\"Layer_2\"><g data-name=\"Layer 1\" id=\"Laye...</g>",
-      "selector": "#Layer_2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1-2\" found on the web page.",
-      "context": "<g data-name=\"Layer 1\" id=\"Layer_1-2\"><rect height=\"64\" fill=\"none\" w...</g>",
-      "selector": "#Layer_1-2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
-      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
-      "selector": "#chevron",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
-      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
-      "selector": "#XMLID_674_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_2\" found on the web page.",
-      "context": "<g data-name=\"Layer 2\" id=\"Layer_2\"><g data-name=\"Layer 1\" id=\"Laye...</g>",
-      "selector": "#Layer_2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1-2\" found on the web page.",
-      "context": "<g data-name=\"Layer 1\" id=\"Layer_1-2\"><rect height=\"64\" fill=\"none\" w...</g>",
-      "selector": "#Layer_1-2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
-      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
-      "selector": "#chevron",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
-      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
-      "selector": "#XMLID_674_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_2\" found on the web page.",
-      "context": "<g data-name=\"Layer 2\" id=\"Layer_2\"><g data-name=\"Layer 1\" id=\"Laye...</g>",
-      "selector": "#Layer_2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1-2\" found on the web page.",
-      "context": "<g data-name=\"Layer 1\" id=\"Layer_1-2\"><rect height=\"64\" fill=\"none\" w...</g>",
-      "selector": "#Layer_1-2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
-      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
-      "selector": "#chevron",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
-      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
-      "selector": "#XMLID_674_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_2\" found on the web page.",
-      "context": "<g data-name=\"Layer 2\" id=\"Layer_2\"><g data-name=\"Layer 1\" id=\"Laye...</g>",
-      "selector": "#Layer_2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1-2\" found on the web page.",
-      "context": "<g data-name=\"Layer 1\" id=\"Layer_1-2\"><rect height=\"64\" fill=\"none\" w...</g>",
-      "selector": "#Layer_1-2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
-      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
-      "selector": "#chevron",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
-      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
-      "selector": "#XMLID_674_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_2\" found on the web page.",
-      "context": "<g data-name=\"Layer 2\" id=\"Layer_2\"><g data-name=\"Layer 1\" id=\"Laye...</g>",
-      "selector": "#Layer_2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1-2\" found on the web page.",
-      "context": "<g data-name=\"Layer 1\" id=\"Layer_1-2\"><rect height=\"64\" fill=\"none\" w...</g>",
-      "selector": "#Layer_1-2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
-      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
-      "selector": "#chevron",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
-      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
-      "selector": "#XMLID_674_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_2\" found on the web page.",
-      "context": "<g data-name=\"Layer 2\" id=\"Layer_2\"><g data-name=\"Layer 1\" id=\"Laye...</g>",
-      "selector": "#Layer_2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1-2\" found on the web page.",
-      "context": "<g data-name=\"Layer 1\" id=\"Layer_1-2\"><rect height=\"64\" fill=\"none\" w...</g>",
-      "selector": "#Layer_1-2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
-      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
-      "selector": "#chevron",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
-      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
-      "selector": "#XMLID_674_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.NoContent",
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -755,7 +285,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -764,9 +294,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -774,9 +304,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -807,7 +337,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -818,7 +348,7 @@
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -827,7 +357,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -836,9 +366,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -846,9 +376,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -869,7 +399,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -880,7 +410,7 @@
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -889,7 +419,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -898,9 +428,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -908,9 +438,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -927,16 +457,6 @@
       "runnerExtras": {}
     },
     {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H42.2",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Heading tag found with no content. Text that is not intended as a heading should not be marked up with heading tags.",
-      "context": "<h1 class=\"title\"></h1>",
-      "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > h1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
@@ -953,106 +473,6 @@
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
       "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"phone\" found on the web page.",
-      "context": "<g id=\"phone\"><path d=\"M40.318,45.212c-6.359,...</g>",
-      "selector": "#phone",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"website\" found on the web page.",
-      "context": "<g id=\"website\"><g id=\"XMLID_1040_\"><path fill=...</g>",
-      "selector": "#website",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_1040_\" found on the web page.",
-      "context": "<g id=\"XMLID_1040_\"><path fill=\"#231F20\" d=\"M25.374...</g>",
-      "selector": "#XMLID_1040_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_1079_\" found on the web page.",
-      "context": "<g id=\"XMLID_1079_\"><path fill=\"#231F20\" d=\"M30.32,...</g>",
-      "selector": "#XMLID_1079_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_1041_\" found on the web page.",
-      "context": "<g id=\"XMLID_1041_\"></g>",
-      "selector": "#XMLID_1041_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
-      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
-      "selector": "#chevron",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
-      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
-      "selector": "#XMLID_674_",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -1073,6 +493,16 @@
       "message": "Duplicate id attribute value \"phone\" found on the web page.",
       "context": "<g id=\"phone\"><path d=\"M40.318,45.212c-6.359,...</g>",
       "selector": "#phone",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -1173,166 +603,6 @@
       "message": "Duplicate id attribute value \"phone\" found on the web page.",
       "context": "<g id=\"phone\"><path d=\"M40.318,45.212c-6.359,...</g>",
       "selector": "#phone",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"website\" found on the web page.",
-      "context": "<g id=\"website\"><g id=\"XMLID_1040_\"><path fill=...</g>",
-      "selector": "#website",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_1040_\" found on the web page.",
-      "context": "<g id=\"XMLID_1040_\"><path fill=\"#231F20\" d=\"M25.374...</g>",
-      "selector": "#XMLID_1040_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_1079_\" found on the web page.",
-      "context": "<g id=\"XMLID_1079_\"><path fill=\"#231F20\" d=\"M30.32,...</g>",
-      "selector": "#XMLID_1079_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_1041_\" found on the web page.",
-      "context": "<g id=\"XMLID_1041_\"></g>",
-      "selector": "#XMLID_1041_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
-      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
-      "selector": "#chevron",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
-      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
-      "selector": "#XMLID_674_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"website\" found on the web page.",
-      "context": "<g id=\"website\"><g id=\"XMLID_1040_\"><path fill=...</g>",
-      "selector": "#website",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_1040_\" found on the web page.",
-      "context": "<g id=\"XMLID_1040_\"><path fill=\"#231F20\" d=\"M25.374...</g>",
-      "selector": "#XMLID_1040_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_1079_\" found on the web page.",
-      "context": "<g id=\"XMLID_1079_\"><path fill=\"#231F20\" d=\"M30.32,...</g>",
-      "selector": "#XMLID_1079_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_1041_\" found on the web page.",
-      "context": "<g id=\"XMLID_1041_\"></g>",
-      "selector": "#XMLID_1041_",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
-      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
-      "selector": "#chevron",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
-      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
-      "selector": "#XMLID_674_",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -1610,6 +880,86 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
+      "message": "Duplicate id attribute value \"website\" found on the web page.",
+      "context": "<g id=\"website\"><g id=\"XMLID_1040_\"><path fill=...</g>",
+      "selector": "#website",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"XMLID_1040_\" found on the web page.",
+      "context": "<g id=\"XMLID_1040_\"><path fill=\"#231F20\" d=\"M25.374...</g>",
+      "selector": "#XMLID_1040_",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"XMLID_1079_\" found on the web page.",
+      "context": "<g id=\"XMLID_1079_\"><path fill=\"#231F20\" d=\"M30.32,...</g>",
+      "selector": "#XMLID_1079_",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"XMLID_1041_\" found on the web page.",
+      "context": "<g id=\"XMLID_1041_\"></g>",
+      "selector": "#XMLID_1041_",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
+      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
+      "selector": "#chevron",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
+      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
+      "selector": "#XMLID_674_",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
       "message": "Duplicate id attribute value \"phone\" found on the web page.",
       "context": "<g id=\"phone\"><path d=\"M40.318,45.212c-6.359,...</g>",
       "selector": "#phone",
@@ -1680,8 +1030,178 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
+      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
+      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
+      "selector": "#chevron",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
+      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
+      "selector": "#XMLID_674_",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"website\" found on the web page.",
+      "context": "<g id=\"website\"><g id=\"XMLID_1040_\"><path fill=...</g>",
+      "selector": "#website",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"XMLID_1040_\" found on the web page.",
+      "context": "<g id=\"XMLID_1040_\"><path fill=\"#231F20\" d=\"M25.374...</g>",
+      "selector": "#XMLID_1040_",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"XMLID_1079_\" found on the web page.",
+      "context": "<g id=\"XMLID_1079_\"><path fill=\"#231F20\" d=\"M30.32,...</g>",
+      "selector": "#XMLID_1079_",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"XMLID_1041_\" found on the web page.",
+      "context": "<g id=\"XMLID_1041_\"></g>",
+      "selector": "#XMLID_1041_",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"chevron\" found on the web page.",
+      "context": "<g id=\"chevron\"><g id=\"XMLID_674_\"><path fill=\"...</g>",
+      "selector": "#chevron",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"XMLID_674_\" found on the web page.",
+      "context": "<g id=\"XMLID_674_\"><path fill=\"#231F20\" d=\"M26.071...</g>",
+      "selector": "#XMLID_674_",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"phone\" found on the web page.",
+      "context": "<g id=\"phone\"><path d=\"M40.318,45.212c-6.359,...</g>",
+      "selector": "#phone",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"website\" found on the web page.",
+      "context": "<g id=\"website\"><g id=\"XMLID_1040_\"><path fill=...</g>",
+      "selector": "#website",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"XMLID_1040_\" found on the web page.",
+      "context": "<g id=\"XMLID_1040_\"><path fill=\"#231F20\" d=\"M25.374...</g>",
+      "selector": "#XMLID_1040_",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"XMLID_1079_\" found on the web page.",
+      "context": "<g id=\"XMLID_1079_\"><path fill=\"#231F20\" d=\"M30.32,...</g>",
+      "selector": "#XMLID_1079_",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"XMLID_1041_\" found on the web page.",
+      "context": "<g id=\"XMLID_1041_\"></g>",
+      "selector": "#XMLID_1041_",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -1692,7 +1212,7 @@
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -1701,7 +1221,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -1710,9 +1230,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -1720,9 +1240,71 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/disability-advocacy-finder/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
+      "context": "<button class=\"IconButton BackButton button-container\"><span class=\"icon\">\n        <sv...</button>",
+      "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.NoContent",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -1753,7 +1335,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -1764,7 +1346,7 @@
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -1773,7 +1355,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -1782,9 +1364,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -1792,9 +1374,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -1825,7 +1407,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -1836,7 +1418,7 @@
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -1845,7 +1427,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -1854,9 +1436,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -1864,9 +1446,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -1883,12 +1465,12 @@
       "runnerExtras": {}
     },
     {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H42.2",
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Heading tag found with no content. Text that is not intended as a heading should not be marked up with heading tags.",
-      "context": "<h1 class=\"title\"></h1>",
-      "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > h1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -1923,22 +1505,12 @@
       "runnerExtras": {}
     },
     {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.NoContent",
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -1947,7 +1519,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -1956,9 +1528,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -1966,9 +1538,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -1999,7 +1571,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2010,7 +1582,7 @@
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2019,7 +1591,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2028,9 +1600,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2038,9 +1610,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -2071,7 +1643,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2082,7 +1654,7 @@
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2091,7 +1663,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2100,9 +1672,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2110,9 +1682,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -2215,7 +1787,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2226,7 +1798,7 @@
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2235,7 +1807,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2244,9 +1816,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2254,9 +1826,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -2287,7 +1859,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2298,7 +1870,7 @@
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2307,7 +1879,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2316,9 +1888,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2326,9 +1898,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -2359,7 +1931,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2370,7 +1942,7 @@
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2379,7 +1951,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2388,9 +1960,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2398,9 +1970,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -2431,7 +2003,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2442,7 +2014,7 @@
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2451,7 +2023,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2460,9 +2032,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2470,9 +2042,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -2493,7 +2065,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2504,7 +2076,7 @@
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2513,7 +2085,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2522,9 +2094,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2532,9 +2104,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -2547,6 +2119,16 @@
       "message": "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
       "context": "<button class=\"IconButton BackButton button-container\"><span class=\"icon\">\n        <sv...</button>",
       "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2581,9 +2163,49 @@
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
     }
   ],
   "/search/:suburb-:state/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
     {
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
@@ -2605,10 +2227,41 @@
       "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
       "runner": "htmlcs",
       "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
     }
   ],
-  "/search/:suburb-:state/map/personalise/index.html": [],
+  "/search/:suburb-:state/map/personalise/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/search/:suburb-:state/map/personalise/page/location/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
     {
       "code": "WCAG2AA.Principle3.Guideline3_2.3_2_2.H32.2",
       "type": "error",
@@ -2620,8 +2273,29 @@
       "runnerExtras": {}
     }
   ],
-  "/search/:suburb-:state/map/personalise/summary/index.html": [],
+  "/search/:suburb-:state/map/personalise/summary/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/search/:suburb-:state/map/personalise/summary/location/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
     {
       "code": "WCAG2AA.Principle3.Guideline3_2.3_2_2.H32.2",
       "type": "error",
@@ -2633,8 +2307,29 @@
       "runnerExtras": {}
     }
   ],
-  "/search/:suburb-:state/personalise/index.html": [],
+  "/search/:suburb-:state/personalise/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/search/:suburb-:state/personalise/page/location/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
     {
       "code": "WCAG2AA.Principle3.Guideline3_2.3_2_2.H32.2",
       "type": "error",
@@ -2646,8 +2341,29 @@
       "runnerExtras": {}
     }
   ],
-  "/search/:suburb-:state/personalise/summary/index.html": [],
+  "/search/:suburb-:state/personalise/summary/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/search/:suburb-:state/personalise/summary/location/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
     {
       "code": "WCAG2AA.Principle3.Guideline3_2.3_2_2.H32.2",
       "type": "error",
@@ -2669,6 +2385,36 @@
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
     }
   ],
   "/search/map/index.html": [
@@ -2681,10 +2427,41 @@
       "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
       "runner": "htmlcs",
       "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
     }
   ],
-  "/search/map/personalise/index.html": [],
+  "/search/map/personalise/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/search/map/personalise/page/location/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
     {
       "code": "WCAG2AA.Principle3.Guideline3_2.3_2_2.H32.2",
       "type": "error",
@@ -2696,8 +2473,29 @@
       "runnerExtras": {}
     }
   ],
-  "/search/map/personalise/summary/index.html": [],
+  "/search/map/personalise/summary/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/search/map/personalise/summary/location/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
     {
       "code": "WCAG2AA.Principle3.Guideline3_2.3_2_2.H32.2",
       "type": "error",
@@ -2709,8 +2507,29 @@
       "runnerExtras": {}
     }
   ],
-  "/search/personalise/index.html": [],
+  "/search/personalise/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/search/personalise/page/location/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
     {
       "code": "WCAG2AA.Principle3.Guideline3_2.3_2_2.H32.2",
       "type": "error",
@@ -2722,8 +2541,29 @@
       "runnerExtras": {}
     }
   ],
-  "/search/personalise/summary/index.html": [],
+  "/search/personalise/summary/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/search/personalise/summary/location/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
     {
       "code": "WCAG2AA.Principle3.Guideline3_2.3_2_2.H32.2",
       "type": "error",
@@ -2763,26 +2603,6 @@
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
       "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"loading\" found on the web page.",
-      "context": "<g id=\"loading\"><g><path fill=\"#231F20\" d=\"M32....</g>",
-      "selector": "#loading",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -3043,26 +2863,6 @@
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"loading\" found on the web page.",
-      "context": "<g id=\"loading\"><g><path fill=\"#231F20\" d=\"M32....</g>",
-      "selector": "#loading",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
     }
   ],
   "/rent-and-tenancy/map/index.html": [
@@ -3287,7 +3087,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
+      "context": "<g id=\"Layer_1\"></g>",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -3298,7 +3098,7 @@
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
       "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
-      "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
+      "selector": "#root > div > main > div > footer > div:nth-child(5) > div:nth-child(2) > div > a:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -3307,7 +3107,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-icon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-backgr...",
+      "context": "<svg class=\"InstagramIcon disallow-override-color Icon SvgIcon inline-block-icon\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 512 512\" enable-background=\"new 0 ...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -3316,9 +3116,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-24.839506,-44.53932)\"><g id=\"g3765\" stroke=\"#000000\" ...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -3326,9 +3126,9 @@
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
-      "message": "Duplicate id attribute value \"layer1\" found on the web page.",
-      "context": "<g id=\"layer1\" transform=\"translate(-54.596989,-114.0091)\"><rect width=\"102.47269\" height=...</g>",
-      "selector": "#layer1",
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
