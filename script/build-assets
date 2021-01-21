@@ -34,7 +34,7 @@ webpack \
 export NODE_ENV=${NODE_ENV:=production}
 
 echo "Build as static site"
-node index.js src/server/render-static
+script/run-node-script src/server/render-static
 
 echo "Build testing helper script"
 webpack \
