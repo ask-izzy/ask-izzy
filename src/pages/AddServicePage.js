@@ -6,8 +6,6 @@ import React from "react";
 import components from "../components";
 import routerContext from "../contexts/router-context";
 
-declare var ISS_URL: string;
-
 type Props = {}
 
 type State = {
@@ -28,8 +26,8 @@ class AddServicePage extends React.Component<Props, State> {
         this.handleMessage = this.handleMessage.bind(this);
         this.issUrl = "";
 
-        if (ISS_URL) {
-            let {auth, ...urlObj} = url.parse(ISS_URL);
+        if (typeof window !== "undefined" && window.ISS_URL) {
+            let {auth, ...urlObj} = url.parse(window.ISS_URL);
             this.issUrl = urlObj;
         }
     }
