@@ -25,8 +25,6 @@ import {
     ReturnAfter,
 } from "./timeout";
 
-declare var ISS_URL: string;
-
 export type searchResultMerger = (
     original: searchResults,
     alternate: searchResults
@@ -222,7 +220,7 @@ export async function request(
     path: string,
     data: ?searchRequest
 ): Promise<Object> {
-    const url_ = mungeUrlQuery(url.resolve(ISS_URL, path), data);
+    const url_ = mungeUrlQuery(url.resolve(window.ISS_URL, path), data);
 
     let response = await _request({
         url: url_,

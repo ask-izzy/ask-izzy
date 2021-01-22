@@ -53,6 +53,23 @@ lint-dockerfile-final:
     - master
     - tags
 
+.pa11y:
+  stage: lint
+  script: make lint-pa11y
+
+pa11y-dev:
+  extends: .pa11y
+  except:
+    - master
+    - tags
+  allow_failure: true
+
+pa11y-final:
+  extends: .pa11y
+  only:
+    - master
+    - tags
+
 unit-test:
   stage: test
   script: make unit-test
