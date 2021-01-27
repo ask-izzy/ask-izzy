@@ -138,7 +138,7 @@ export default class BrandedFooter
                         </li>
                         <li>
                             <Link to="/homeless-financial-support">
-                                Financial support
+                                Financial Support
                             </Link>
                         </li>
                         <li>
@@ -279,7 +279,8 @@ export default class BrandedFooter
                     </p>
                 </div>
                 <div>
-                    Ask Izzy is owned and operated by <a href="https://www.infoxchange.org/au">Infoxchange</a>. © {new Date().getFullYear()} Infoxchange
+                    Ask Izzy is owned and operated by Infoxchange.
+                    © {new Date().getFullYear()} Infoxchange
                 </div>
             </div>
         </footer>
