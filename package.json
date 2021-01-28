@@ -3,7 +3,7 @@
   "description": "Ask Izzy webapp",
   "repository": "github.com/ask-izzy/ask-izzy",
   "main": "src/client.js",
-  "licence": "GPL-3.0",
+  "license": "GPL-3.0",
   "readme": "README.md",
   "dependencies": {
     "@babel/core": "7.11.4",
