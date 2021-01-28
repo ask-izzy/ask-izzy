@@ -106,6 +106,9 @@ function* generateRouteParamVals(
         search: "searchTerm",
     }
 
+    // This version of flow doesn't support optional chaining off
+    // methods.
+    // flow:disable
     if (routePathParts[1]?.startsWith("styleGuide")) {
         return
     } else if (routePathParts[1] === ":page") {
