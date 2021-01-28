@@ -174,6 +174,14 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
     get searchHasNextPage(): boolean {
         return !!this.state.searchMeta?.next
     }
+
+    get crisisResults(): ?Array<Service> {
+        return this.state.searchResults?.filter(service => service.crisis)
+    }
+
+    get nonCrisisResults(): ?Array<Service> {
+        return this.state.searchResults?.filter(service => !service.crisis)
+    }
 }
 
 export default ResultsPage;

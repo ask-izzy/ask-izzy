@@ -277,7 +277,7 @@ hadolint is used for linting the Dockerfile. It can be run using `make lint-dock
 JSONLint is currently only used for linting `package.json`.
 
 ### pa11y
-pa11y is used for automated accessibility testing. It can be run using `docker-compose run --rm app lint-pa11y`. To ignore existing issues and only report new ones add the argument `--ignore-existing-issues`. Keep in mind this command is effected by the `FAIL_FAST` environmental variable and if true the command will exit after the first failed page. 
+pa11y is used for automated accessibility testing. It can be run using `docker-compose run --rm app shell -c "script/run-node-script ./src/server/render-static.js" && docker-compose run --rm app lint-pa11y`. To ignore existing issues and only report new ones add the argument `--ignore-existing-issues`. Keep in mind this command is effected by the `FAIL_FAST` environmental variable and if true the command will exit after the first failed page. 
 
 ## Tests
 All tests live in the `test` top level directory.

@@ -5,6 +5,7 @@ declare var google: Google;
 import storage from "./storage";
 import _ from "underscore";
 import checkInactive from "./inactiveTimeout";
+import {wait} from "./utils"
 
 export class MapsApi {
     api: GoogleMaps;
@@ -61,8 +62,7 @@ export class MapsApi {
                 }
 
                 return travelTimes;
-            }
-            )
+            })
     }
 
     batchDirectionsRequest(
@@ -150,22 +150,19 @@ export class MapsApi {
  * @returns {Promise<MapsApi>} a Promise that will resolve to the Google Maps
  * API, when available.
  */
-function maps(): Promise<MapsApi> {
-    return new Promise((resolve, reject) => {
-        function checkLoaded() {
-            try {
-                // Check that google maps has loaded
-                google.maps.DistanceMatrixService.name;
-
-                resolve(new MapsApi(google.maps));
-            } catch (error) {
-                /* try again in 500ms */
-                setTimeout(checkLoaded, 500);
-            }
-        }
-
-        checkLoaded();
-    });
+export default async function(): Promise<MapsApi> {
+    const DistanceMatrixServiceMock = window?.mocks?.DistanceMatrixService
+    const mocksInstalled =
+        google?.maps?.DistanceMatrixService === DistanceMatrixServiceMock
+    // Wait until google maps has loaded
+    while (!google?.maps?.DistanceMatrixService?.name && !mocksInstalled) {
+        await wait(50)
+    }
+    // Load mock if given
+    if (!mocksInstalled && DistanceMatrixServiceMock) {
+        console.log("Loading google maps mocks")
+        // $FlowIgnore
+        google.maps.DistanceMatrixService = DistanceMatrixServiceMock
+    }
+    return new MapsApi(google.maps)
 }
-
-export default maps;

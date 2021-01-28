@@ -35,6 +35,7 @@
     "classnames": "2.2.6",
     "core-js": "3.6.5",
     "cors": "2.8.4",
+    "cross-fetch": "3.0.6",
     "css-loader": "0.28.11",
     "details-element-polyfill": "2.4.0",
     "es3ify-loader": "0.2.0",
@@ -91,7 +92,6 @@
     "url-search-params-polyfill": "8.0.0",
     "webpack": "3.12.0",
     "webpack-dev-server": "2.11.5",
-    "whatwg-fetch": "2.0.4",
     "yadda": "1.5.0"
   },
   "devDependencies": {}

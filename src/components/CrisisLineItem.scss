@@ -1,20 +1,38 @@
 .CrisisLineItem {
-    margin: 6px 16px;
-    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 16px;
+    border-radius: 15px;
+    background-color: $white;
+    color: $brand-text-dark;
 
-    h3,
-    h3 a {
+    h3 {
         margin-top: 2px;
         margin-bottom: 0;
+        font-size: 1.1em;
 
-        color: $brand-text-dark;
-        font-size: 14px;
+
         font-weight: 500;
-        text-decoration: none;
+
+        a {
+            color: $brand-text-dark;
+        }
     }
 
-    .Contact.Phone {
-        padding-top: 2px;
+
+    .Phone {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: unset;
+        text-align: right;
+
+        .kind {
+            order: 1;
+            width: unset;
+            max-width: unset;
+        }
     }
 
     .bonusCopy {
@@ -33,6 +51,15 @@
 
     .Collapser {
         margin-top: 5px;
+    }
+
+    @media (max-width: 500px) {
+        flex-direction: column;
+
+        .Phone {
+            align-items: flex-start;
+            text-align: left;
+        }
     }
 }
 

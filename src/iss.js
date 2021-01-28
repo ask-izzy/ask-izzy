@@ -19,9 +19,9 @@ import Cache from "./iss/Cache";
 import serviceProvisions from "./constants/service-provisions";
 import storage from "./storage";
 import Maps from "./maps";
+import type {MapsApi} from "./maps";
 import {
     Timeout,
-    TryWithDefault,
     ReturnAfter,
 } from "./timeout";
 
@@ -247,17 +247,25 @@ async function attachTransportTimes(
 
     let formatPoint = (point: issPoint) => `${point.lat},${point.lon}`;
 
-    const maps = await TryWithDefault<Object>(
-        1000, Maps(), {}
-    );
+    let maps = {};
+    try {
+        maps = await Timeout<MapsApi>(1000, Maps())
+    } catch (error) {
+        console.error("Failed to load Maps fast enough")
+        console.error(error)
+    }
 
     if (typeof maps.travelTime === "function") {
         let service: ?Service; // eslint-disable-line no-unused-vars
-        let travelTimes = await Timeout(3000, maps.travelTime(services
-            .filter((service) => !service.Location().isConfidential())
-            // $FlowIgnore isConfidential checks location.point
-            .map(({location}) => formatPoint(location.point))
-        ));
+        let travelTimes = await Timeout<Array<travelTimes>>(
+            3000,
+            maps.travelTime(
+                services
+                    .filter((service) => !service.Location().isConfidential())
+                    // $FlowIgnore isConfidential checks location.point
+                    .map(({location}) => formatPoint(location.point))
+            )
+        );
 
         services.filter((service) => !service.Location().isConfidential())
             // eslint-disable-next-line no-return-assign
@@ -296,11 +304,13 @@ export async function requestObjects(
         (object: issService): Service => new Service(object)
     );
 
-    response.objects = await TryWithDefault(
-        3000,
-        attachTransportTimes(objects),
-        objects
-    )
+    try {
+        response.objects = await Timeout(3000, attachTransportTimes(objects));
+    } catch (error) {
+        console.error("Unable to retrieve transport times within 3 seconds")
+        console.error(error);
+        response.objects = objects
+    }
 
     response.objects.forEach((service) =>
         serviceCache.set(service.id, service)

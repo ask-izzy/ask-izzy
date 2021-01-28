@@ -15,8 +15,8 @@ import CollapsedOpeningTimes from "./components/CollapsedOpeningTimes";
 import Collapser from "./components/Collapser";
 import ContactMethods from "./components/ContactMethods";
 import CovidRelatedIssues from "./components/CovidRelatedIssues";
-import CrisisHeader from "./components/CrisisHeader";
 import CrisisLineItem from "./components/CrisisLineItem";
+import CrisisResultsList from "./components/CrisisResultsList";
 import DebugContainer from "./components/DebugContainer";
 import DebugPersonalisation from "./components/DebugPersonalisation";
 import DebugQueryScore from "./components/DebugQueryScore";
@@ -46,7 +46,7 @@ import Ndis from "./components/Ndis";
 import OnlineSafetyContent from "./components/OnlineSafetyContent";
 import OnlineSafetyLink from "./components/OnlineSafetyLink";
 import OpeningTimes from "./components/OpeningTimes";
-import Phone from "./components/Phone";
+import PhoneButton from "./components/PhoneButton";
 import ResultListItem from "./components/ResultListItem";
 import ResultsList from "./components/ResultsList";
 import ResultsMap from "./components/ResultsMap";
@@ -74,8 +74,8 @@ export default {
     Collapser,
     ContactMethods,
     CovidRelatedIssues,
-    CrisisHeader,
     CrisisLineItem,
+    CrisisResultsList,
     DebugContainer,
     DebugPersonalisation,
     DebugQueryScore,
@@ -105,7 +105,7 @@ export default {
     OnlineSafetyContent,
     OnlineSafetyLink,
     OpeningTimes,
-    Phone,
+    PhoneButton,
     ResultListItem,
     ResultsList,
     ResultsMap,

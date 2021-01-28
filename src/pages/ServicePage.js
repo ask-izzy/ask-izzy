@@ -11,6 +11,7 @@ import components from "../components";
 import Loading from "../icons/Loading";
 import config from "../config";
 import routerContext from "../contexts/router-context";
+import {emitPageLoadEvent} from "../utils";
 
 class ServicePage extends React.Component<{
     params: {
@@ -32,8 +33,9 @@ class ServicePage extends React.Component<{
         this.state = {};
     }
 
-    componentDidMount(): void {
-        this.loadService();
+    async componentDidMount(): Promise<void> {
+        await this.loadService();
+        emitPageLoadEvent();
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object): void {

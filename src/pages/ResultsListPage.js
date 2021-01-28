@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import classnames from "classnames";
 
 import AppBar from "../components/AppBar";
 import DebugContainer from "../components/DebugContainer";
@@ -8,6 +9,7 @@ import DebugPersonalisation from "../components/DebugPersonalisation";
 import DebugSearch from "../components/DebugSearch";
 import ResultsPage from "./ResultsPage";
 import ResultsList from "../components/ResultsList";
+import CrisisResultsList from "../components/CrisisResultsList";
 import resultsContent from "../results-content.json"
 import HeaderBar from "../components/HeaderBar";
 import Switch from "../components/Switch";
@@ -97,7 +99,11 @@ class ResultsListPage extends ResultsPage<Props, State> {
     }
 
     renderPage = () => (
-        <div className="ResultsListPage">
+        <div className={classnames(
+            "ResultsListPage",
+            {"includesCrisisLines": this.crisisResults?.length}
+        )}
+        >
             <AppBar
                 title={this.title}
                 backMessage={"Home Page"}
@@ -142,6 +148,8 @@ class ResultsListPage extends ResultsPage<Props, State> {
                     : "homepage"
                 }
             />
+
+            { this.renderCrisisLines() }
 
             { this.state.primaryInfo && this.renderPrimaryInfo() }
 
@@ -226,6 +234,26 @@ class ResultsListPage extends ResultsPage<Props, State> {
         )
     }
 
+    renderCrisisLines = () => <>
+        <a className="anchor"
+            id="crisis-lines"
+        />
+        <div className={this.crisisResults?.length ? "crisisLines" : ""}>
+            <Switch>
+                <div
+                    switch-if={this.searchIsLoading}
+                    className="resultsStatus"
+                >
+                    <icons.Loading className="big" />
+                </div>
+                <CrisisResultsList
+                    switch-if={this.crisisResults?.length}
+                    results={this.crisisResults || []}
+                />
+            </Switch>
+        </div>
+    </>
+
     renderSupportServices = () => <>
         <a className="anchor"
             id="services"
@@ -244,15 +272,15 @@ class ResultsListPage extends ResultsPage<Props, State> {
                 </>}
             </div>
             <Switch>
-                <div switch-if={this.state.searchResults?.length === 0}
+                <div switch-if={this.nonCrisisResults?.length === 0}
                     className="resultsStatus"
                 >
                 Sorry, I couldn't find any results
                 for <em>{this.title}</em>.
                 </div>
                 <ResultsList
-                    switch-if={this.state.searchResults}
-                    results={this.state.searchResults || []}
+                    switch-if={this.nonCrisisResults}
+                    results={this.nonCrisisResults || []}
                 />
             </Switch>
             {this.state.searchError &&

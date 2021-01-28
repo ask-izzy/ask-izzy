@@ -4,6 +4,15 @@ import { mapStackTrace } from "sourcemapped-stacktrace";
 
 console.log("Modifying env for test")
 
+// Selenium seems to ignore console.count() so convert calls to console.log()
+let countCount = 0;
+// $FlowIgnore
+console.count = function() {
+    console.log(
+        [countCount++, ...arguments].map(String).join(" ")
+    )
+}
+
 window.isTestEnv = true
 
 window.addEventListener("error", async(errorEvent) => {

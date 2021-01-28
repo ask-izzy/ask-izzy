@@ -9,10 +9,14 @@ $bright-purple: #8a2be2;
     .notification {
         display: flex;
         flex-direction: column;
-        align-items: baseline;
+        align-items: flex-start;
         padding: 1em;
         border-top: $brand-pane-alt-dark 10px solid;
         background-color: $brand-pane-alt-darker;
+
+        & > * {
+            max-width: 100%; /* Fix for IE11 bug where text does not wrap and flows out of the container */
+        }
 
         &,
         a {

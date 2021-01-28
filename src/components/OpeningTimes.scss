@@ -6,9 +6,11 @@
 
 .OpeningTimes {
     font-size: 16px;
+    white-space: nowrap;
 
     > span {
         display: inline-block;
+        white-space: initial;
         vertical-align: middle;
     }
 

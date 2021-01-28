@@ -1,5 +1,5 @@
 /* $FlowIgnore */
-require("whatwg-fetch");
+require("cross-fetch");
 require("core-js");
 require("regenerator-runtime/runtime");
 
