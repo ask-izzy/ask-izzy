@@ -10,6 +10,8 @@ import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
 import HistoryListener from "./components/effects/HistoryListener"
+import { mapStackTrace } from "sourcemapped-stacktrace"; // Only used for
+// debugging failed tests
 
 window.searchTest = searchTest;
 window.categories = categories;
@@ -66,6 +68,20 @@ window.pi = function() {
 
 // Report JS errors to google analytics
 window.addEventListener("error", (evt) => {
+    const error = evt.error
+    if (window && window.isTestEnv) {
+        // Selenium/Headless chrome doesn't yet support sourcemaps in error
+        // stack traces. This makes debugging failing tests a bit tricky since
+        // our prod source code is majorly transformed and minified. Until this
+        // is done natively use a third party lib to help apply the source map
+        // before showing the error.
+
+        mapStackTrace(error.stack, (mappedStack) => {
+            error.stack = [error.message, ...mappedStack].join("\n")
+            console.log("The above error translated:")
+            console.error(error)
+        });
+    }
     sendEvent({
         event: "exception",
         exDescription: `JavaScript Error: ${evt.message} ${evt.filename}: ${

@@ -22,7 +22,7 @@ const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
 const webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
 
 module.exports = {
-    devtool: "#source-map",
+    devtool: "source-map",
     entry: {
         hotload: [
             `webpack-dev-server/client?${webpackUrl}`,
