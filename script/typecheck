@@ -20,7 +20,7 @@ HAVE_FLOW=true
 for file in $( git ls-files '**/*.js' ); do
     if [ -e "$file" ] ; then
         read flowtype < "$file"
-        if test "x$flowtype" = 'x/* flow:disable */'; then
+        if test "x$flowtype" = 'x/* $FlowIgnore */'; then
             echo "Skipping disabled file $file" > /dev/null
         elif test "x$flowtype" != 'x/* @flow */'; then
             HAVE_FLOW=false

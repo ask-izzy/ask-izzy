@@ -89,7 +89,7 @@ const Storage = {
     },
 
     setItem(key: string, obj: string|number|boolean): void {
-        // flow:disable
+        // $FlowIgnore
         if (`${obj}`.match(/family violence/i)) {
             switchToPrivateMode();
         }
@@ -99,7 +99,7 @@ const Storage = {
         event.event = `set-${key}`;
         event[`personalize-${key}`] = obj;
         sendEvent(event);
-        // flow:disable
+        // $FlowIgnore
         persistentStore.setItem(key, `${obj}`);
     },
 

@@ -135,7 +135,7 @@ function addResultsToDom(objects, category, query): void {
 
         document
             .getElementById("secretContainer")
-            // flow:disable
+            // $FlowIgnore
             .appendChild(row);
     } else {
         console.log(content)

@@ -170,7 +170,7 @@ Flow is configured using the `.flowconfig` file.
 
 All JS files in the repo either start with
 `/* @flow */` if they are typechecked
-or `/* flow:disable */` if they are not.
+or `/* $FlowIgnore */` if they are not.
 
 You can run flow on its own using `./node_modules/.bin/flow`.
 It's also run as part of the precommit hooks and in CI.

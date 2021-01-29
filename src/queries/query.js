@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useQuery } from "@apollo/react-hooks";
-// flow:disable
+// $FlowIgnore
 import type { DocumentNode } from "graphql";
 
 const Query = ({ children, query, args, loadingComponent, errorComponent }: {

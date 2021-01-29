@@ -53,7 +53,7 @@ export default class ListItem extends React.Component<ListItemProps, void> {
                         "has-right-icon": rightIcon,
                     }
                 ),
-                ...rest,
+                ...(rest: any),
             },
             <div>
                 <div className="leftIcon">

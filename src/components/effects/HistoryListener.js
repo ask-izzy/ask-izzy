@@ -1,7 +1,7 @@
 /* @flow */
 import storage from "../../storage";
 import { withRouter } from "react-router";
-// flow:disable flowjs needs to be updated to include useEffect
+// $FlowIgnore flowjs needs to be updated to include useEffect
 import { useEffect } from "react";
 import sendEvent from "../../google-tag-manager";
 

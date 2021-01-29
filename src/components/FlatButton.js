@@ -36,7 +36,7 @@ export default class FlatButton extends React.Component<Props, void> {
         return (
             <button
                 className={classnames("FlatButton", className)}
-                {...rest}
+                {...(rest: any)}
             >
                 {label}
                 {children}

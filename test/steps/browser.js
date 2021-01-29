@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 /*
  * Step definitions for Selenium/browser related steps
  */

@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 /*eslint-disable */
 import 'url-search-params-polyfill';
 

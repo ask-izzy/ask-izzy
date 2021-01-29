@@ -26,9 +26,9 @@ class Intro extends Personalisation<Props, {}> {
 
     get seekingHelpWith(): string {
         try {
-            // flow:disable flowjs needs updating for optional chaining methods
+            // $FlowIgnore flowjs needs updating for optional chaining methods
             return this.props.category?.byline.toLocaleLowerCase() ||
-                // flow:disable
+                // $FlowIgnore
                 `with ${this.props.category?.name?.toLocaleLowerCase() || ""}`;
         } catch (error) {
             const search = this.context.router.match.params.search;

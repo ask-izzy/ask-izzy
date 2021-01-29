@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 
 import gql from "graphql-tag";
 

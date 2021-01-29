@@ -41,7 +41,7 @@ export default class LinkListItem extends React.Component<Props, void> {
                     "plain-text",
                     className,
                 )}
-                {...rest}
+                {...(rest: any)}
             />
         );
     }

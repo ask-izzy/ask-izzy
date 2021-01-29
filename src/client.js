@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 
 import xhr from "axios";
 import React from "react";
@@ -16,7 +16,7 @@ window.categories = categories;
 
 // Preventing the Google Maps libary from downloading an extra font
 // http://stackoverflow.com/questions/25523806/google-maps-v3-prevent-api-from-loading-roboto-font
-// flow:disable - I have no idea why Flow doesn't like the following line
+// $FlowIgnore - I have no idea why Flow doesn't like the following line
 let head = document.getElementsByTagName("head")[0];
 let insertBefore = head.insertBefore;
 

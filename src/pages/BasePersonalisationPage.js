@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";

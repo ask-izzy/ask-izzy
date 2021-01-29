@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 /**
  * Test search composing
  */
