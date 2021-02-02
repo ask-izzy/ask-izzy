@@ -4,7 +4,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import Helmet from "react-helmet";
 import { makeTitle } from "../routes";
-import icons from "../icons";
+import Loading from "../icons/loading.svg";
 import Query from "../queries/query";
 import StaticPage from "./StaticPage";
 import pageQuery from "../queries/content/page.js";
@@ -36,7 +36,7 @@ class DynamicPage extends React.Component<Props, void> {
                 title="Loading"
                 bannerName="static"
             >
-                <icons.Loading className="big" />
+                <Loading className="big" />
             </StaticPage>
         )
 

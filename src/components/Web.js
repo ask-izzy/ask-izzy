@@ -1,7 +1,7 @@
 /* @flow */
 import React from "react";
 import URL from "url";
-import icons from "../icons";
+import Website from "../icons/website.svg";
 import sendEvent from "../google-tag-manager";
 
 export default class Web extends React.Component<{url: string}, void> {
@@ -23,7 +23,7 @@ export default class Web extends React.Component<{url: string}, void> {
                     href={url.href}
                     onClick={this.recordClick.bind(this)}
                 >
-                    <icons.Website />
+                    <Website />
                     <div className="Contact-text">
                         <span className="kind">
                             {" "}

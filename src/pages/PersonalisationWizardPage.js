@@ -5,7 +5,7 @@ import * as React from "react";
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import Intro from "./personalisation/Intro";
 import components from "../components";
-import Chevron from "../icons/Chevron";
+import Chevron from "../icons/chevron.svg";
 import NotFoundStaticPage from "./NotFoundStaticPage";
 import routerContext from "../contexts/router-context";
 

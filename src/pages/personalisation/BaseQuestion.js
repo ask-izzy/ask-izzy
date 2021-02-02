@@ -8,7 +8,8 @@ import HeaderBar from "../../components/HeaderBar";
 import InputListItem from "../../components/InputListItem";
 import FlatButton from "../../components/FlatButton";
 
-import icons from "../../icons";
+import RadioSelected from "../../icons/radio-selected.svg";
+import RadioUnselected from "../../icons/radio-unselected.svg";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
@@ -241,10 +242,10 @@ class BaseQuestion extends Personalisation<Props, State> {
                             readOnly={true}
 
                             checkedIcon={
-                                <icons.RadioSelected className="big" />
+                                <RadioSelected className="big" />
                             }
                             uncheckedIcon={
-                                <icons.RadioUnselected className="big" />
+                                <RadioUnselected className="big" />
                             }
                         />)}
                 </div>

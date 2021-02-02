@@ -4,7 +4,10 @@ import React from "react";
 import ButtonListItem from "./ButtonListItem";
 import ListItem from "./ListItem";
 import Geolocation, {guessSuburb} from "../geolocation";
-import icons from "../icons";
+import Cross from "../icons/cross.svg";
+import Location from "../icons/location.svg";
+import Loading from "../icons/loading.svg";
+import Tick from "../icons/tick.svg";
 import sendEvent from "../google-tag-manager";
 
 type GeoLocationState = "NOT_STARTED"|"RUNNING"|"COMPLETE"|"FAILED";
@@ -19,7 +22,7 @@ const NotStartedGeolocation = (props) => (
             </span>
         }
         leftIcon={
-            <icons.Location
+            <Location
                 className="ColoredIcon icon-fg-color big"
             />
         }
@@ -31,7 +34,7 @@ const RunningGeolocation = () => (
         primaryText="Locating you..."
         secondaryText="Please permit us to use your GPS"
         leftIcon={
-            <icons.Loading className="big" />
+            <Loading className="big" />
         }
     />
 );
@@ -40,7 +43,7 @@ const FinishedGeolocation = () => (
     <ListItem
         className="taller"
         primaryText="Found your location"
-        leftIcon={<icons.Tick className="big" />}
+        leftIcon={<Tick className="big" />}
     />
 );
 
@@ -55,7 +58,7 @@ class FailedGeolocation extends React.Component<FailedGeolocationProps, void> {
                 primaryText="Unable to get your location"
                 secondaryText={`Please enter your location below
                     (${this.props.error})`}
-                leftIcon={<icons.Cross className="big" />}
+                leftIcon={<Cross className="big" />}
             />
         );
     }

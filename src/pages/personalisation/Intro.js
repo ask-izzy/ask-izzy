@@ -6,7 +6,7 @@ import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import storage from "../../storage";
 import * as iss from "../../iss";
-import icons from "../../icons";
+import Lightning from "../../icons/lightning.svg";
 
 type Props = {
     onDoneTouchTap: Function,
@@ -86,7 +86,7 @@ class Intro extends Personalisation<Props, {}> {
                         <div className="betaPathwayWrapper">
                             <div className="betaPathway">
                                 <header>
-                                    <icons.Lightning />
+                                    <Lightning />
                                     <h4>Ask Izzy Beta - Pandemic Support</h4>
                                 </header>
                                 <p>

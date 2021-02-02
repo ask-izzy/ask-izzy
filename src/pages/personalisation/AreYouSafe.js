@@ -3,7 +3,9 @@
 import React from "react";
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
-import icons from "../../icons";
+import CrossColor from "../../icons/cross-color.svg";
+import TickColor from "../../icons/tick-color.svg";
+import QuestionMarkColor from "../../icons/question-mark-color.svg";
 import DomesticViolenceLinkBar from "../../components/DomesticViolenceLinkBar";
 
 class AreYouSafe extends BaseQuestion {
@@ -28,9 +30,9 @@ class AreYouSafe extends BaseQuestion {
             "Yes": append(""),
         },
         icons: {
-            "No": icons.CrossColor,
-            "I'm not sure": icons.QuestionMarkColor,
-            "Yes": icons.TickColor,
+            "No": CrossColor,
+            "I'm not sure": QuestionMarkColor,
+            "Yes": TickColor,
         },
         showDVLinkBar: true,
         textDVLinkBar: <DomesticViolenceLinkBar/>,

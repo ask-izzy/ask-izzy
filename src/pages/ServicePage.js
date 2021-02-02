@@ -8,7 +8,7 @@ import ServicePane from "../components/ServicePane";
 import iss from "../iss";
 import type {Service} from "../iss";
 import components from "../components";
-import Loading from "../icons/Loading";
+import Loading from "../icons/loading.svg";
 import config from "../config";
 import routerContext from "../contexts/router-context";
 

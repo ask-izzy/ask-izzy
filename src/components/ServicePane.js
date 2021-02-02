@@ -21,7 +21,7 @@ import GoogleMapsLink from "./GoogleMapsLink";
 import Ndis from "./Ndis";
 import LinkListItem from "./LinkListItem";
 import BoxedText from "./BoxedText";
-import Chevron from "../icons/Chevron";
+import Chevron from "../icons/chevron.svg";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import LimitedServicesBanner from "./LimitedServicesBanner";

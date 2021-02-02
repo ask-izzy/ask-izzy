@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
-import icons from "../../icons";
+import PhoneTalk from "../../icons/phone-talk.svg";
 import MobileDetect from "../../components/higherorder/MobileDetect";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 import DfvDemographics from "./DfvDemographics";
@@ -106,7 +106,7 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
         return (
             <div className="AreYouSafe">
                 <div className="safety-message">
-                    <icons.PhoneTalk className="PhoneIcon" />
+                    <PhoneTalk className="PhoneIcon" />
                     <h2>
                         Everyone has the right to be safe and proud.<br />
                         Violence and abuse is never OK.

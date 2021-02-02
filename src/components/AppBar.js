@@ -3,7 +3,7 @@
 import React from "react";
 
 import components from "../components";
-import icons from "../icons";
+import ChevronBack from "../icons/chevron-back.svg";
 
 type Props = {
     title: string,
@@ -59,7 +59,7 @@ class AppBar extends React.Component<Props, void> {
                 className="BackButton button-container"
                 onClick={this.props.onBackTouchTap}
             >
-                <icons.ChevronBack />
+                <ChevronBack />
                 <span className="back-label">
                     {this.props.backMessage}
                 </span>

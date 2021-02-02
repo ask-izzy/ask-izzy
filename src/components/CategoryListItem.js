@@ -2,7 +2,9 @@
 
 import React from "react";
 import LinkListItem from "./LinkListItem";
-import icons from "../icons";
+import Things from "../icons/things.svg";
+import House from "../icons/house.svg";
+import Chevron from "../icons/chevron.svg";
 import type Category from "../constants/Category";
 
 type Props = {
@@ -15,12 +17,12 @@ class CategoryListItem extends React.Component<Props, void> {
             key: "material-aid",
             name: "Material Aid",
             byline: "Clothes and other goods",
-            icon: icons.Things,
+            icon: Things,
         },
     }};
 
     render() {
-        let Icon = this.props.category.icon || icons.House;
+        let Icon = this.props.category.icon || House;
 
         return (
             <LinkListItem
@@ -29,7 +31,7 @@ class CategoryListItem extends React.Component<Props, void> {
                 leftIcon={
                     <Icon className="ColoredIcon icon-fg-color big" />
                 }
-                rightIcon={<icons.Chevron />}
+                rightIcon={<Chevron />}
                 primaryText={this.props.category.name}
                 secondaryText={this.props.category.byline}
             />

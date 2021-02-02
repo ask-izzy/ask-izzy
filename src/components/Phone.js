@@ -3,7 +3,8 @@ import React from "react";
 import { titleize } from "underscore.string";
 
 import sendEvent from "../google-tag-manager";
-import icons from "../icons";
+import PhoneIcon from "../icons/phone.svg";
+import PhoneSolid from "../icons/phone-solid.svg";
 
 type Props = phone & {
     crisis?: boolean
@@ -31,12 +32,12 @@ class Phone extends React.Component<Props, void> {
 
     render() {
         let contactButtonClassName = "ContactButton";
-        let phonebutton = <icons.Phone />;
+        let phonebutton = <PhoneIcon />;
 
         if (this.props.crisis) {
             // Customise crisis services with style branding
             contactButtonClassName += " CrisisContactButton"
-            phonebutton = <icons.PhoneSolid />;
+            phonebutton = <PhoneSolid />;
         }
 
         return (

@@ -1,7 +1,8 @@
 /* @flow */
 
 import React from "react";
-import icons from "../icons";
+import Book from "../icons/book.svg";
+import Chevron from "../icons/chevron.svg";
 import sendEvent from "../google-tag-manager";
 import routerContext from "../contexts/router-context";
 
@@ -16,13 +17,13 @@ export default class DomesticViolenceLinkBar extends React.Component<{}, void> {
                 onClick={this.onClickDVLink.bind(this)}
             >
                 <div className="leftIcon">
-                    <icons.Book />
+                    <Book />
                 </div>
                 <div className="primaryText">
                     Read more about family and domestic violence
                 </div>
                 <div className="rightIcon">
-                    <icons.Chevron />
+                    <Chevron />
                 </div>
             </div>
         );

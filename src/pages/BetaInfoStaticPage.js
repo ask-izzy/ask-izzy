@@ -4,7 +4,7 @@
 import React from "react";
 import StaticPage from "./StaticPage";
 import components from "../components";
-import icons from "../icons"
+import ChevronBack from "../icons/chevron-back.svg";
 import routerContext from "../contexts/router-context";
 
 export default class BetaInfoStaticPage extends React.Component<{}, void> {
@@ -53,7 +53,7 @@ export default class BetaInfoStaticPage extends React.Component<{}, void> {
                         className="returnToProd"
                         onClick={this.context.router.history.goBack}
                     >
-                        <icons.ChevronBack />
+                        <ChevronBack />
                         <span>Not interested in the Beta</span>
                     </div>
                 </div>

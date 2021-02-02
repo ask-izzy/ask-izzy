@@ -2,10 +2,10 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import DemographicAboriginal from "../icons/DemographicAboriginal";
-import DemographicTorresStrait from "../icons/DemographicTorresStrait";
-import FacebookIcon from "../icons/Facebook";
-import Instagram from "../icons/Instagram";
+import DemographicAboriginal from "../icons/demographic-aboriginal.svg";
+import DemographicTorresStrait from "../icons/demographic-torres-strait.svg";
+import FacebookIcon from "../icons/facebook.svg";
+import Instagram from "../icons/instagram.svg";
 import config from "../config";
 import MobileDetect from "./higherorder/MobileDetect";
 

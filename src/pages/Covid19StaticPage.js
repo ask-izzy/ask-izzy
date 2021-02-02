@@ -7,7 +7,9 @@ import StaticPage from "./StaticPage";
 import MobileDetect from "../components/higherorder/MobileDetect";
 import sendEvent from "../google-tag-manager";
 import Phone from "../components/Phone";
-import icons from "../icons";
+import PhoneIcon from "../icons/phone.svg";
+import Chevron from "../icons/chevron.svg";
+import WebsiteIcon from "../icons/website.svg";
 
 class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
     componentDidMount(): void {
@@ -28,7 +30,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
     contactDetailPhone(number: string, comment: string | React.Node): React.Node {
         return (
             <div className="contact-detail phone">
-                <icons.Phone />
+                <PhoneIcon />
                 <span className="main">
                     {
                         this.props.mobileView ? (
@@ -56,7 +58,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
     contactDetailWeb(url: string, linkText: string | React.Node): React.Node {
         return (
             <div className="contact-detail web">
-                <icons.Website className="icon" />
+                <WebsiteIcon className="icon" />
                 <a
                     href={url}
                     rel="noopener noreferer"
@@ -108,7 +110,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <details>
                     <summary>
                         <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
-                            <h3>Victoria</h3><icons.Chevron />
+                            <h3>Victoria</h3><Chevron />
                         </div>
                     </summary>
                     <ul>
@@ -147,7 +149,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <details>
                     <summary>
                         <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
-                            <h3>New South Wales</h3><icons.Chevron />
+                            <h3>New South Wales</h3><Chevron />
                         </div>
                     </summary>
                     <ul>
@@ -169,7 +171,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <details>
                     <summary>
                         <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
-                            <h3>Queensland</h3><icons.Chevron />
+                            <h3>Queensland</h3><Chevron />
                         </div>
                     </summary>
                     <ul>
@@ -191,7 +193,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <details>
                     <summary>
                         <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
-                            <h3>Western Australia</h3><icons.Chevron />
+                            <h3>Western Australia</h3><Chevron />
                         </div>
                     </summary>
                     <ul>
@@ -207,7 +209,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <details>
                     <summary>
                         <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
-                            <h3>South Australia</h3><icons.Chevron />
+                            <h3>South Australia</h3><Chevron />
                         </div>
                     </summary>
                     <ul>
@@ -223,7 +225,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <details>
                     <summary>
                         <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
-                            <h3>Tasmania</h3><icons.Chevron />
+                            <h3>Tasmania</h3><Chevron />
                         </div>
                     </summary>
                     <ul>
@@ -245,7 +247,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <details>
                     <summary>
                         <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
-                            <h3>Australian Capital Territory</h3><icons.Chevron />
+                            <h3>Australian Capital Territory</h3><Chevron />
                         </div>
                     </summary>
                     <ul>
@@ -261,7 +263,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <details>
                     <summary>
                         <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
-                            <h3>Northern Territory</h3><icons.Chevron />
+                            <h3>Northern Territory</h3><Chevron />
                         </div>
                     </summary>
                     <ul>

@@ -4,7 +4,7 @@ import * as React from "react";
 
 import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
-import icons from "../icons";
+import Loading from "../icons/loading.svg";
 import storage from "../storage";
 import sendEvent from "../google-tag-manager";
 
@@ -306,7 +306,7 @@ class ResultsPage extends BaseCategoriesPage {
         if (this.loading) {
             return (
                 <div className="progress">
-                    <icons.Loading className="big" />
+                    <Loading className="big" />
                 </div>
             );
         }

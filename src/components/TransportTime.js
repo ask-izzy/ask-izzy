@@ -5,7 +5,10 @@ import classnames from "classnames";
 import { titleize } from "underscore.string";
 
 import fixtures from "../../fixtures/services";
-import icons from "../icons";
+import Tram from "../icons/tram.svg";
+import Car from "../icons/car.svg";
+import Walk from "../icons/walk.svg";
+import ExternalLink from "../icons/external-link.svg";
 import Location from "../iss/Location";
 import sendEvent from "../google-tag-manager";
 import Spacer from "./Spacer";
@@ -88,7 +91,7 @@ class TransportTime extends React.Component<{
 
             if (travel.mode === "TRANSIT") {
                 icon = (
-                    <icons.Tram
+                    <Tram
                         className="ColoredIcon"
                         aria-label="By public transport"
                     />
@@ -96,7 +99,7 @@ class TransportTime extends React.Component<{
                 method = (" transport");
             } else if (travel.mode === "DRIVING") {
                 icon = (
-                    <icons.Car
+                    <Car
                         className="ColoredIcon"
                         aria-label="By car"
                     />
@@ -104,7 +107,7 @@ class TransportTime extends React.Component<{
                 method = (" drive");
             } else {
                 icon = (
-                    <icons.Walk
+                    <Walk
                         className="ColoredIcon"
                         aria-label="On foot"
                     />
@@ -164,7 +167,7 @@ class TransportTime extends React.Component<{
                         Get directions in Google Maps
                     </span>
                     <span>
-                        <icons.ExternalLink className="ExternalLinkIcon" />
+                        <ExternalLink className="ExternalLinkIcon" />
                     </span>
                 </div>
             );

@@ -1,7 +1,7 @@
 /* @flow */
 import React from "react";
 
-import icons from "../icons";
+import EmailIcon from "../icons/email.svg";
 import fixtures from "../../fixtures/services";
 import sendEvent from "../google-tag-manager";
 
@@ -29,7 +29,7 @@ export default class Email extends React.Component<Props, void> {
                     href={`mailto:${email}`}
                     onClick={this.recordClick.bind(this)}
                 >
-                    <icons.Email />
+                    <EmailIcon />
                     <div className="Contact-text">
                         <span className="kind">
                             {this.props.comment}

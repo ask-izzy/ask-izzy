@@ -1,7 +1,8 @@
 /* @flow */
 
 import React from "react";
-import icons from "../icons";
+import Map from "../icons/map.svg";
+import Chevron from "../icons/chevron.svg";
 import LinkListItem from "./LinkListItem";
 import maps from "../maps";
 import type MapsApi from "../maps";
@@ -30,10 +31,10 @@ export default class ViewOnMapButton extends React.Component<any, State> {
                 className="ViewOnMapButton"
                 primaryText="View on a map"
                 leftIcon={
-                    <icons.Map />
+                    <Map />
                 }
                 rightIcon={
-                    <icons.Chevron />
+                    <Chevron />
                 }
                 {...this.props}
             />

@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import icons from "../icons";
+import Map from "../icons/map.svg";
 import ScreenReader from "./ScreenReader";
 import Location from "../iss/Location";
 
@@ -43,7 +43,7 @@ class Address extends React.Component<Props, void> {
                 <ScreenReader>
                     <h4>Address</h4>
                 </ScreenReader>
-                <icons.Map />
+                <Map />
                 <div className="Address-wrapper">
                     {" "}
                     <div className="street">

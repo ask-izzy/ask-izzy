@@ -3,7 +3,13 @@
 import BaseMultiQuestion from "./BaseMultiQuestion";
 
 import { append } from "../../iss/Search";
-import icons from "../../icons";
+import DemographicAtsi from "../../icons/demographic-atsi.svg";
+import ExperiencingViolence from "../../icons/experiencing-violence.svg";
+import Under18 from "../../icons/under-18.svg";
+import DemographicLgbtiq from "../../icons/demographic-lgbtiq.svg";
+import DemographicNeedInterpreter from "../../icons/demographic-need-interpreter.svg";
+import DemographicRecentlyArrived from "../../icons/demographic-recently-arrived.svg";
+import UsingViolence from "../../icons/using-violence.svg";
 import storage from "../../storage";
 
 import Under18Page from "./Under18DomesticViolenceScreen";
@@ -28,14 +34,14 @@ export default class DfvDemographics extends BaseMultiQuestion {
             "Using violence": append(""),
         },
         icons: {
-            "Aboriginal and/or Torres Strait Islander": icons.DemographicAtsi,
-            "Experiencing violence": icons.ExperiencingViolence,
-            "Under 18": icons.Under18,
-            "LGBTIQA+": icons.DemographicLgbtiq,
+            "Aboriginal and/or Torres Strait Islander": DemographicAtsi,
+            "Experiencing violence": ExperiencingViolence,
+            "Under 18": Under18,
+            "LGBTIQA+": DemographicLgbtiq,
             "Culturally and linguistically diverse":
-                icons.DemographicNeedInterpreter,
-            "Person seeking asylum": icons.DemographicRecentlyArrived,
-            "Using violence": icons.UsingViolence,
+                DemographicNeedInterpreter,
+            "Person seeking asylum": DemographicRecentlyArrived,
+            "Using violence": UsingViolence,
         },
         oldAnswers: {},
     };

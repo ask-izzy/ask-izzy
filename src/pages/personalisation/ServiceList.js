@@ -2,7 +2,15 @@
 
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
-import icons from "../../icons";
+import ExperiencingViolence from "../../icons/experiencing-violence.svg";
+import Support from "../../icons/support.svg";
+import Police from "../../icons/police.svg";
+import Legal from "../../icons/legal.svg";
+import DemographicChildren from "../../icons/demographic-children.svg";
+import SexualViolence from "../../icons/sexual-violence.svg";
+import Money from "../../icons/money.svg";
+import UsingViolence from "../../icons/using-violence.svg";
+import DemographicPets from "../../icons/demographic-pets.svg";
 import Location from "./Location";
 
 export default class ServiceList extends BaseQuestion {
@@ -42,15 +50,15 @@ export default class ServiceList extends BaseQuestion {
                 .append("-(effectiveness training)"),
         },
         icons: {
-            "Family violence support": icons.ExperiencingViolence,
-            "Counselling": icons.Support,
-            "Police": icons.Police,
-            "Legal support": icons.Legal,
-            "Children's support & protection": icons.DemographicChildren,
-            "Sexual assault support": icons.SexualViolence,
-            "Financial help": icons.Money,
-            "Help for people using violence": icons.UsingViolence,
-            "Help for pets": icons.DemographicPets,
+            "Family violence support": ExperiencingViolence,
+            "Counselling": Support,
+            "Police": Police,
+            "Legal support": Legal,
+            "Children's support & protection": DemographicChildren,
+            "Sexual assault support": SexualViolence,
+            "Financial help": Money,
+            "Help for people using violence": UsingViolence,
+            "Help for pets": DemographicPets,
         },
         answersDesc: {
             "Family violence support": "Crisis counselling & accommodation",

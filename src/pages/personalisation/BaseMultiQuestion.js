@@ -12,7 +12,8 @@ import HeaderBar from "../../components/HeaderBar";
 import FlatButton from "../../components/FlatButton";
 import FloatFromBottom from "../../components/FloatFromBottom";
 
-import icons from "../../icons";
+import CheckboxSelected from "../../icons/checkbox-selected.svg";
+import CheckboxUnselected from "../../icons/checkbox-unselected.svg";
 import storage from "../../storage";
 import * as iss from "../../iss";
 
@@ -191,10 +192,10 @@ class BaseMultiQuestion extends BaseQuestion {
                             type="checkbox"
                             checked={selected.has(answer)}
                             checkedIcon={
-                                <icons.CheckboxSelected className="big" />
+                                <CheckboxSelected className="big" />
                             }
                             uncheckedIcon={
-                                <icons.CheckboxUnselected className="big" />
+                                <CheckboxUnselected className="big" />
                             }
                             onClick={this.onAnswerTouchTap.bind(
                                 this, answer, !selected.has(answer)

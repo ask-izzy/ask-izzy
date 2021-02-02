@@ -8,7 +8,9 @@ import _ from "underscore";
 import {geolocationAvailable} from "../../geolocation";
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
-import icons from "../../icons";
+import RadioSelected from "../../icons/radio-selected.svg";
+import RadioUnselected from "../../icons/radio-unselected.svg";
+import Loading from "../../icons/loading.svg";
 import storage from "../../storage";
 import * as iss from "../../iss";
 
@@ -258,10 +260,10 @@ class Location extends Personalisation<Props, State> {
                                 type="radio"
                                 tabIndex={0}
                                 uncheckedIcon={
-                                    <icons.RadioUnselected className="big" />
+                                    <RadioUnselected className="big" />
                                 }
                                 checkedIcon={
-                                    <icons.RadioSelected className="big" />
+                                    <RadioSelected className="big" />
                                 }
                                 onClick={
                                     this.selectAutocomplete.bind(this, result)
@@ -273,7 +275,7 @@ class Location extends Personalisation<Props, State> {
                 {
                     this.state.autocompletionInProgress && (
                         <div className="progress">
-                            <icons.Loading className="big" />
+                            <Loading className="big" />
                         </div>
                     )
                 }

@@ -6,7 +6,7 @@ import moment from "moment-timezone";
 import ScreenReader from "./ScreenReader";
 import ServiceOpening from "../iss/ServiceOpening";
 
-import icons from "../icons";
+import Clock from "../icons/clock.svg";
 
 /*
  * Used to generate sample datum for the Style Guide
@@ -123,7 +123,7 @@ class OpeningTimes extends React.Component<Props, void> {
                 <ScreenReader>
                     <h4>Opening times</h4>
                 </ScreenReader>
-                <icons.Clock className="ColoredIcon brand-text-dark" />
+                <Clock className="ColoredIcon brand-text-dark" />
                 {" "}
                 <span className="print-only">Open Times</span>
                 {renderMethod.apply(this)}

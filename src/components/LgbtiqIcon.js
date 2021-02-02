@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import DemographicLgbtiq from "../icons/DemographicLgbtiq";
+import DemographicLgbtiq from "../icons/demographic-lgbtiq.svg";
 import type { Service } from "../iss";
 
 type Props = {

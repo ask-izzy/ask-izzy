@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
-import icons from "../../icons";
+import PhoneTalk from "../../icons/phone-talk.svg";
 import Gender from "./Gender";
 import MobileDetect from "../../components/higherorder/MobileDetect";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
@@ -115,7 +115,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
         return (
             <div className="AreYouSafe">
                 <div className="safety-message">
-                    <icons.PhoneTalk className="PhoneIcon" />
+                    <PhoneTalk className="PhoneIcon" />
                     <h2>
                         Is your behaviour causing problems for your
                         relationships or family?

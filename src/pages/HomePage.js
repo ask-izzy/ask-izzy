@@ -4,7 +4,7 @@ import React from "react";
 
 import HeaderBar from "../components/HeaderBar";
 import { Link } from "react-router-dom";
-import icons from "../icons"
+import Info from "../icons/info.svg";
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
 import storage from "../storage";
@@ -52,7 +52,7 @@ class HomePage extends React.Component<{}, void> {
         return (
             <div className="HomePage">
                 <div className="notification">
-                    <icons.Info className={"big middle"}/>
+                    <Info className={"big middle"}/>
                     <div>
                         <h3>
                             Coronavirus (COVID-19) support

@@ -4,7 +4,8 @@
 import React from "react";
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
-import icons from "../../icons";
+import Blank from "../../icons/blank.svg";
+import DemographicAtsi from "../../icons/demographic-atsi.svg";
 
 export default class DemographicsIndigenous extends BaseQuestion {
     static title = "Indigenous";
@@ -23,8 +24,8 @@ export default class DemographicsIndigenous extends BaseQuestion {
             "No - show me everything": append(""),
         },
         icons: {
-            "Yes - show these first where possible": icons.DemographicAtsi,
-            "No - show me everything": icons.Blank,
+            "Yes - show these first where possible": DemographicAtsi,
+            "No - show me everything": Blank,
         },
     };
 

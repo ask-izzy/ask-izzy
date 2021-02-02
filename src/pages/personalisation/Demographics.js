@@ -3,7 +3,17 @@
 import BaseMultiQuestion from "./BaseMultiQuestion";
 
 import { append } from "../../iss/Search";
-import icons from "../../icons";
+import DemographicFamilyViolence from "../../icons/demographic-family-violence.svg";
+import DemographicAtsi from "../../icons/demographic-atsi.svg";
+import DemographicChildren from "../../icons/demographic-children.svg";
+import DemographicCouple from "../../icons/demographic-couple.svg";
+import Mental from "../../icons/mental.svg";
+import DemographicParole from "../../icons/demographic-parole.svg";
+import DemographicDisability from "../../icons/demographic-disability.svg";
+import DemographicVeteran from "../../icons/demographic-veteran.svg";
+import DemographicRecentlyArrived from "../../icons/demographic-recently-arrived.svg";
+import DemographicPets from "../../icons/demographic-pets.svg";
+
 import { resetDfvOptions } from "../../utils";
 
 export default class Demographics extends BaseMultiQuestion {
@@ -29,16 +39,16 @@ export default class Demographics extends BaseMultiQuestion {
                 .append("-effectiveness"),
         },
         icons: {
-            "Escaping family violence": icons.DemographicFamilyViolence,
-            "Aboriginal and/or Torres Strait Islander": icons.DemographicAtsi,
-            "Family with children": icons.DemographicChildren,
-            "Couples": icons.DemographicCouple,
-            "Mental or emotional difficulties": icons.Mental,
-            "Parole / recently released": icons.DemographicParole,
-            "Have a disability": icons.DemographicDisability,
-            "Veteran": icons.DemographicVeteran,
-            "Person seeking asylum": icons.DemographicRecentlyArrived,
-            "Have pets": icons.DemographicPets,
+            "Escaping family violence": DemographicFamilyViolence,
+            "Aboriginal and/or Torres Strait Islander": DemographicAtsi,
+            "Family with children": DemographicChildren,
+            "Couples": DemographicCouple,
+            "Mental or emotional difficulties": Mental,
+            "Parole / recently released": DemographicParole,
+            "Have a disability": DemographicDisability,
+            "Veteran": DemographicVeteran,
+            "Person seeking asylum": DemographicRecentlyArrived,
+            "Have pets": DemographicPets,
         },
         oldAnswers: {
             "Indigenous": "Aboriginal and/or Torres Strait Islander",

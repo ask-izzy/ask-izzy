@@ -4,7 +4,8 @@ import React from "react";
 import PropTypes from "proptypes";
 import fixtures from "../../fixtures/services";
 
-import icons from "../icons";
+import Map from "../icons/map.svg";
+import Chevron from "../icons/chevron.svg";
 import iss from "../iss";
 
 import DebugContainer from "./DebugContainer";
@@ -68,7 +69,7 @@ class ResultListItem extends React.Component<{
 
         return (
             <span className="location">
-                <icons.Map
+                <Map
                     aria-label="Location"
                 />
                 {titleize(suburb)}
@@ -85,7 +86,7 @@ class ResultListItem extends React.Component<{
             <LinkListItem
                 className="plain-text ResultListItem"
                 to={`/service/${object.slug}`}
-                rightIcon={<icons.Chevron />}
+                rightIcon={<Chevron />}
                 onClick={this.recordViewDetail.bind(this)}
             >
 

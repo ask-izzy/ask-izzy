@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
-import icons from "../../icons";
+import PhoneTalk from "../../icons/phone-talk.svg";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 import MobileDetect from "../../components/higherorder/MobileDetect";
 import DfvDemographics from "./DfvDemographics";
@@ -70,7 +70,7 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
         return (
             <div className="AreYouSafe">
                 <div className="safety-message">
-                    <icons.PhoneTalk className="PhoneIcon" />
+                    <PhoneTalk className="PhoneIcon" />
                     <h2>
                         Violence is never OK. It may be happening at home
                         with family or with someone you're dating.
