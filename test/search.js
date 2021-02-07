@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 /*
  * Enable Yadda in Mocha
  */

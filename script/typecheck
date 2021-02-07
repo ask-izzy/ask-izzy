@@ -20,7 +20,7 @@ HAVE_FLOW=true
 for file in $( git ls-files '**/*.js' ); do
     if [ -e "$file" ] ; then
         read flowtype < "$file"
-        if test "x$flowtype" = 'x/* flow:disable */'; then
+        if test "x$flowtype" = 'x/* $FlowIgnore */'; then
             echo "Skipping disabled file $file" > /dev/null
         elif test "x$flowtype" != 'x/* @flow */'; then
             HAVE_FLOW=false
@@ -39,14 +39,6 @@ echo "Good"
 
 export -f checkFlowDefs
 
-function checkPackageVersions {
-echo "${BOLD}Checking for '^' or '~' in package.json${END}"
-grep '[\^\~]' package.json && exit 1
-echo "Good"
-}
-
-export -f checkPackageVersions
-
 if which parallel > /dev/null ; then
     PVERSION=$( parallel --version | head -n 1 | cut -d' ' -f 3 )
 
@@ -55,7 +47,6 @@ if which parallel > /dev/null ; then
         export SHELL=/bin/bash
         parallel --halt-on-error now,fail,1 ::: \
             checkFlowDefs \
-            checkPackageVersions \
             'check "jsonlint package.json > /dev/null"' \
             'check "eslint src/ test/ fixtures/ webpack/ config/"' \
             'check "sass-lint -v"' \
@@ -68,7 +59,6 @@ fi
 (./node_modules/.bin/flow start &>/dev/null) & # Pre-start flow server
 
 checkFlowDefs
-checkPackageVersions
 
 check "jsonlint package.json > /dev/null"
 check "eslint src/ test/ fixtures/ webpack/ config/"

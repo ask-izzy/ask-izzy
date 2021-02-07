@@ -6,7 +6,7 @@ import ChromeWebDriver from "selenium-webdriver/chrome";
 declare var IzzyStorage: Object;
 
 export async function seleniumBrowser(
-    driver: Webdriver.WebDriver,
+    driver: typeof Webdriver.WebDriver,
 ): Promise<Object> {
     const wnd = new Webdriver.WebDriver.Window(driver);
     const capabilities = await driver.getCapabilities();
@@ -48,7 +48,7 @@ export function baseUrl(): string {
  * @return {Promise} - return value from Selenium Webdriver.get.
  */
 export function gotoUrl(
-    driver: Webdriver.WebDriver,
+    driver: typeof Webdriver.WebDriver,
     url: string
 ): Promise<void> {
     return driver.get(baseUrl() + url);
@@ -60,7 +60,7 @@ export function gotoUrl(
  * @return {Promise<Webdriver.Webdriver>} requested webdriver.
  */
 export default async function webDriverInstance(
-): Promise<Webdriver.WebDriver> {
+): Promise<typeof Webdriver.WebDriver> {
     // Remove version from browserName (not supported)
     const browserName = (process.env.SELENIUM_BROWSER || "").split(/:/)[0];
     const preferences = new Webdriver.logging.Preferences();
@@ -98,7 +98,7 @@ export default async function webDriverInstance(
 }
 
 async function waitForStorage(
-    driver: Webdriver.WebDriver,
+    driver: typeof Webdriver.WebDriver,
 ): Promise<void> {
     await gotoUrl(driver, "/");
     await driver.wait(
@@ -112,7 +112,7 @@ async function waitForStorage(
 }
 
 export async function setStorage(
-    driver: Webdriver.WebDriver,
+    driver: typeof Webdriver.WebDriver,
     value: string,
 ): Promise<void> {
     await waitForStorage(driver);
@@ -122,7 +122,7 @@ export async function setStorage(
 }
 
 export async function cleanDriverSession(
-    driver: Webdriver.WebDriver
+    driver: typeof Webdriver.WebDriver
 ): Promise<void> {
     await waitForStorage(driver);
     await driver.executeScript(() => {
@@ -132,8 +132,8 @@ export async function cleanDriverSession(
 }
 
 export async function isElementPresent(
-    driver: Webdriver.WebDriver,
-    locator: Webdriver.By
+    driver: typeof Webdriver.WebDriver,
+    locator: typeof Webdriver.By
 ): Promise<boolean> {
     const elements = await driver.findElements(locator);
 

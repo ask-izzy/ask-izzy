@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 
 function pauseToDebug() {
     return new Promise((resolve, reject) => {

@@ -12,7 +12,7 @@ import mkdirp from "mkdirp";
 import routes from "../routes";
 
 import HtmlDocument from "./HtmlDocument";
-// flow:disable
+// $FlowIgnore
 import webpackStats from "./webpack-stats";
 import categories from "../constants/categories";
 import Helmet from "react-helmet";
@@ -36,7 +36,7 @@ function renderPage(uri: string, path: string, params: Object): void {
 
     if ((reqUrl.pathname && reqUrl.pathname.startsWith("/static/")) ||
     (reqUrl.pathname && reqUrl.pathname.startsWith("/session/"))) {
-        // flow:disable
+        // $FlowIgnore
         next();
     } else {
 
@@ -148,7 +148,7 @@ function getParamsFromPath(path: string, expandedPath: string): Object {
 }
 
 function renderRoute(route: React.Element<any>, prefix: string): void {
-    // flow:disable
+    // $FlowIgnore
     if (route.map) {
         route.map((route) => renderRoute(route, prefix));
         return;

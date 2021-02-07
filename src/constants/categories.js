@@ -250,7 +250,7 @@ const categories = [
 
 export default categories;
 
-// flow:disable flowjs needs to be updated to include fromEntries
+// $FlowIgnore flowjs needs to be updated to include fromEntries
 const categoryMap = Object.fromEntries(
     categories.map(category => [category.key, category])
 )

@@ -1,6 +1,11 @@
 .AppleDouble
 *.css.map
+*.js.map
 .*.sw?
-bower_components/
-ghostdriver.log
+.env
+yarn-error.log
 node_modules/
+public/static/*.css
+public/static/*.js
+public/**/*.html
+public/VERSION

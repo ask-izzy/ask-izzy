@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 
 // This file from https://github.com/gpbl/isomorphic500 @ 413c6533ae23
 
@@ -70,6 +70,7 @@ module.exports = {
             compress: {
                 warnings: false,
             },
+            sourceMap: true,
         }),
         commons,
 

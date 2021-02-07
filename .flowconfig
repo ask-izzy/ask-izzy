@@ -18,12 +18,9 @@ interfaces/
 [options]
 module.system=node
 suppress_type=$FlowIssue
-suppress_comment= \\(.\\|\n\\)*\\flow:disable
 esproposal.class_static_fields=ignore
 esproposal.class_instance_fields=enable
 esproposal.decorators=ignore
-# remove when upgrading flow
-esproposal.optional_chaining=enable
 
 [version]
-0.80.0
+0.133.0

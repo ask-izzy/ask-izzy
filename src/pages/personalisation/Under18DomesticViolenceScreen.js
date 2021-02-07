@@ -12,9 +12,13 @@ import type { searchRequest } from "../../iss";
 
 class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
     get doneButtonLabel(): string {
-        if (DfvDemographics.answer && (
-            DfvDemographics.answer.indexOf("LGBTIQA+") > -1 ||
-            DfvDemographics.answer.indexOf("Using violence") > -1)) {
+        const answer = DfvDemographics.answer
+        if (
+            answer && (
+                answer.indexOf("LGBTIQA+") > -1 ||
+                answer.indexOf("Using violence") > -1
+            )
+        ) {
             return "Continue";
         }
 
@@ -37,8 +41,10 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
     static summaryLabel = "Under 18 Domestic Violence Information";
 
     static showPage(): boolean {
-        return DfvDemographics.answer &&
-            DfvDemographics.answer.indexOf("Under 18") > -1;
+        return Boolean(
+            DfvDemographics.answer &&
+            DfvDemographics.answer.indexOf("Under 18") > -1
+        );
     }
 
     static getSearch(request: searchRequest): ?searchRequest {

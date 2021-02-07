@@ -1,4 +1,4 @@
-/* flow:disable */
+/* $FlowIgnore */
 /* eslint-disable prefer-arrow-callback */
 
 /*

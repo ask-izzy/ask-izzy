@@ -1,7 +1,7 @@
 .*.sw?
 .env
+yarn-error.log
 /Test-*.png
-/bower_components
 /node_modules/
 /npm-debug.log*
 /public/static/*.css
@@ -9,7 +9,6 @@
 /public/static/*.js
 /public/static/*.js.map
 /src/server/webpack-stats.json
-phantomjsdriver.log
 /public/*.html
 /public/**/index.html
 /public/VERSION

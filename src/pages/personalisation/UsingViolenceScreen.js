@@ -37,8 +37,10 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
     static summaryLabel = "Worried about your behaviour?";
 
     static showPage(): boolean {
-        return DfvDemographics.answer &&
-            DfvDemographics.answer.indexOf("Using violence") > -1;
+        return Boolean(
+            DfvDemographics.answer &&
+            DfvDemographics.answer.indexOf("Using violence") > -1
+        );
     }
 
     static getSearch(request: searchRequest): ? searchRequest {
