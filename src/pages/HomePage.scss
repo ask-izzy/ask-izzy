@@ -15,6 +15,7 @@ $bright-purple: #8a2be2;
 
         div {
             display: flex;
+            flex: 1 1; /* for IE */
             flex-direction: column;
             padding: 0.4em 0.1em;
 

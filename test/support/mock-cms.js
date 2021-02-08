@@ -54,7 +54,7 @@ const mocks = {
                 }]
             } else if (path === "/online-safety") {
                 return []
-            } else if (path === "/food-banks") {
+            } else if (path === "/food-info") {
                 return [
                     {Title: "Page 1"},
                     {Title: "Page 2"},

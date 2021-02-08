@@ -130,15 +130,15 @@ export default (
             title="Homeless shelters"
         />
         <BasePage
-            path="/food-banks"
+            path="/food-info"
             component={DynamicPage}
-            title="Food Banks"
+            title="Food Info"
             strict={false}
         />
         <BasePage
-            path="/homeless-support"
+            path="/using-ask-izzy"
             component={DynamicPage}
-            title="Homeless support"
+            title="Using Ask Izzy"
         />
         <BasePage
             path="/homeless-legal-services"
