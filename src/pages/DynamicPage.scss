@@ -1,6 +1,11 @@
 .DynamicPage {
     margin-bottom: 5em;
 
+    .loadingStatus {
+        text-align: center;
+        margin-bottom: 100px;
+    }
+
     img {
         display: block;
         margin: 0 auto;

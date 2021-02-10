@@ -37,7 +37,11 @@ class DynamicPage extends React.Component<Props, void> {
                 title="Loading"
                 bannerName="static"
             >
-                <icons.Loading className="big" />
+                <div className="DynamicPage">
+                    <div className="loadingStatus">
+                        <icons.Loading className="big" />
+                    </div>
+                </div>
             </StaticPage>
         )
 
@@ -46,9 +50,11 @@ class DynamicPage extends React.Component<Props, void> {
                 title="Error"
                 bannerName="static"
             >
-                <p className="errorMessage">
-                    Error retrieving content.  Please try again.
-                </p>
+                <div className="DynamicPage">
+                    <div className="loadingStatus">
+                        Error retrieving content.  Please try again.
+                    </div>
+                </div>
             </StaticPage>
         )
 
