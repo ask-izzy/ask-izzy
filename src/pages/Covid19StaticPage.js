@@ -41,13 +41,13 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
         const text = number + (comment ? " (" + comment + ")" : "")
 
         return (
-            <div className="contact-detail phone inline">
+            <span className="contact-detail phone inline">
                 {
                     this.props.mobileView ? (
                         <a href={"tel:" + number}>{text}</a>
                     ) : (<span>{text}</span>)
                 }
-            </div>
+            </span>
         )
     }
     contactDetailWeb(url: string, linkText: string | React.Node): React.Node {
