@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "../components/Link";
 import StaticPage from "./StaticPage";
 
 export default class HomelessSupportStaticPage extends React.Component<{}> {

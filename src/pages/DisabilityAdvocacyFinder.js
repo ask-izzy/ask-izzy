@@ -1,7 +1,8 @@
 /* @flow */
 
 import React from "react";
-import { Link } from "react-router-dom";
+
+import Link from "../components/Link";
 import StaticPage from "./StaticPage";
 import FlatButton from "../components/FlatButton";
 
@@ -37,12 +38,12 @@ class DisabilityAdvocacyFinder extends React.Component<{}, void> {
                         <h3>
                             Want more information about disability advocacy?
                         </h3>
-                        <a
-                            href={"https://disabilityadvocacyfinder.dss.gov." +
+                        <Link
+                            to={"https://disabilityadvocacyfinder.dss.gov." +
                                 "au/disability/ndap/about"}
                         >
                             See the Department of Social Services website
-                        </a>
+                        </Link>
                     </p>
                     <div className="askIzzyInfoBox">
                         <h2>Other support services on Ask Izzy</h2>

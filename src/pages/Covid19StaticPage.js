@@ -2,7 +2,8 @@
 /* eslint-disable max-len */
 
 import * as React from "react";
-import { Link } from "react-router-dom";
+
+import Link from "../components/Link";
 import StaticPage from "./StaticPage";
 import MobileDetect from "../components/higherorder/MobileDetect";
 import sendEvent from "../google-tag-manager";
@@ -29,7 +30,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <span className="main">
                     {
                         this.props.mobileView ? (
-                            <a href={"tel:" + number}>{number}</a>
+                            <Link to={"tel:" + number}>{number}</Link>
                         ) : <span>{number}</span>
                     } ({comment})
                 </span>
@@ -44,7 +45,7 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
             <span className="contact-detail phone inline">
                 {
                     this.props.mobileView ? (
-                        <a href={"tel:" + number}>{text}</a>
+                        <Link to={"tel:" + number}>{text}</Link>
                     ) : (<span>{text}</span>)
                 }
             </span>
@@ -54,14 +55,14 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
         return (
             <div className="contact-detail web">
                 <icons.Website className="icon" />
-                <a
-                    href={url}
+                <Link
+                    to={url}
                     rel="noopener noreferer"
                     target="_blank"
                     className="main"
                 >
                     {linkText}
-                </a>
+                </Link>
             </div>
         )
     }
@@ -91,11 +92,11 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <p>
                     For information from the federal government please visit
                     the{" "}
-                    <a
-                        href="https://www.health.gov.au/news/health-alerts/novel-coronavirus-2019-ncov-health-alert"
+                    <Link
+                        to="https://www.health.gov.au/news/health-alerts/novel-coronavirus-2019-ncov-health-alert"
                         rel="noopener noreferer"
                         target="_blank"
-                    >Australian Department of Health website</a> for the latest
+                    >Australian Department of Health website</Link> for the latest
                     medical advice, news and information.
                 </p>
 

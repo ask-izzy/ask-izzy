@@ -1,6 +1,8 @@
 /* @flow */
 import React from "react";
 import URL from "url";
+
+import Link from "./Link";
 import icons from "../icons";
 import sendEvent from "../google-tag-manager";
 
@@ -19,9 +21,10 @@ export default class Web extends React.Component<{url: string}, void> {
 
         return (
             <div className="Contact Web">
-                <a
-                    href={url.href}
+                <Link
+                    to={url.href}
                     onClick={this.recordClick.bind(this)}
+                    hideExternalLinkIcon={true}
                 >
                     <icons.Website />
                     <div className="Contact-text">
@@ -32,8 +35,11 @@ export default class Web extends React.Component<{url: string}, void> {
                             {url.hostname}
                             {url.path === "/" ? "" : url.path}
                         </span>
+                        <icons.ExternalLink
+                            containerClassName="ExternalLinkIcon"
+                        />
                     </div>
-                </a>
+                </Link>
             </div>
         );
     }

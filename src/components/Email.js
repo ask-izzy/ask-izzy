@@ -2,6 +2,7 @@
 import React from "react";
 
 import icons from "../icons";
+import Link from "./Link";
 import fixtures from "../../fixtures/services";
 import sendEvent from "../google-tag-manager";
 
@@ -25,9 +26,10 @@ export default class Email extends React.Component<Props, void> {
 
         return (
             <div className="Contact Email">
-                <a
-                    href={`mailto:${email}`}
+                <Link
+                    to={`mailto:${email}`}
                     onClick={this.recordClick.bind(this)}
+                    hideExternalLinkIcon={true}
                 >
                     <icons.Email />
                     <div className="Contact-text">
@@ -36,8 +38,11 @@ export default class Email extends React.Component<Props, void> {
                         </span>
                         {this.props.comment && " "}
                         <span className="email value">{email}</span>
+                        <icons.ExternalLink
+                            containerClassName="ExternalLinkIcon"
+                        />
                     </div>
-                </a>
+                </Link>
             </div>
         );
     }

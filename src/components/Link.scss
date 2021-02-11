@@ -1,0 +1,19 @@
+.Link {
+    .ExternalLinkIcon {
+        // Flex to remove annoying white space between inline elements.
+        display: inline-flex;
+        vertical-align: middle;
+
+        .Icon {
+            display: inline;
+            position: unset;
+            width: unset;
+            height: 0.7em;
+            margin-left: 0.25em;
+
+            path {
+                fill: $link-text-color;
+            }
+        }
+    }
+}

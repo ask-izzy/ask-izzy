@@ -3,6 +3,8 @@
 
 import React from "react";
 
+import Link from "./Link";
+
 class OnlineSafetyContent extends React.Component<{}, void> {
     render() {
         const linkEsafetyPage = "https://www.esafety.gov.au/key-issues/domestic-family-violence/help-support/get-help-in-your-language";
@@ -58,9 +60,9 @@ class OnlineSafetyContent extends React.Component<{}, void> {
                 </ul>
                 <p>
                     To learn how go to{" "}
-                    <a href="https://www.esafety.gov.au/">
+                    <Link to="https://www.esafety.gov.au/">
                         E-Commissioners - Australian Government
-                    </a>
+                    </Link>
                 </p>
 
                 <h2>
@@ -85,9 +87,9 @@ class OnlineSafetyContent extends React.Component<{}, void> {
                 </p>
 
                 <h3>
-                    <a href={linkEsafetyPage}>
+                    <Link to={linkEsafetyPage}>
                         eSafety Commissioner - Step-by-Step Guides
-                    </a>
+                    </Link>
                 </h3>
                 <p>
                     The eSafetyWomen resources aim to help women to manage
@@ -102,8 +104,9 @@ class OnlineSafetyContent extends React.Component<{}, void> {
                 <p>
                     If you are worried a partner or family member is monitoring
                     your technology use, or tracking / following you with
-                    technology call <a href={link1800Respect}>1800Respect</a> on
-                    1300 737 732 to get advice and a local service to help.
+                    technology call <Link to={link1800Respect}>1800Respect
+                    </Link> on 1300 737 732 to get advice and a local service to
+                    help.
                 </p>
             </React.Fragment>
         );

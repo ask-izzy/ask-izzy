@@ -3,6 +3,8 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import Helmet from "react-helmet";
+
+import Link from "../components/Link";
 import { makeTitle } from "../routes";
 import icons from "../icons";
 import Query from "../queries/query";
@@ -79,7 +81,6 @@ class DynamicPage extends React.Component<Props, void> {
                                 bannerPrimary={page.BannerTextPrimary}
                                 bannerSecondary={page.BannerTextSecondary}
                             >
-
                                 <Helmet>
                                     <title>
                                         {
@@ -98,6 +99,7 @@ class DynamicPage extends React.Component<Props, void> {
                                         transformImageUri={
                                             this.absoluteImageUrl
                                         }
+                                        renderers={{ "link": this.renderLink }}
                                     />
                                     <Accordion
                                         title={page.AccordionTitle}
@@ -110,6 +112,12 @@ class DynamicPage extends React.Component<Props, void> {
                     return (<NotFoundStaticPage />)
                 }}
             </Query>
+        );
+    }
+
+    renderLink(props: Object) {
+        return (
+            <Link to={props.href}>{props.children}</Link>
         );
     }
 }

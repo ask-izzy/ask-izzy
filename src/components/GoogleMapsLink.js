@@ -1,5 +1,7 @@
 /* @flow */
 import React from "react";
+
+import Link from "./Link";
 import fixtures from "../../fixtures/services";
 import Location from "../iss/Location";
 import classnames from "classnames";
@@ -73,15 +75,16 @@ class GoogleMapsLink extends React.Component<Props, void> {
         }
 
         return (
-            <a
+            <Link
                 className={classnames("GoogleMapsLink", className)}
                 target="_blank"
                 aria-label="Open Google Maps in a new tab"
-                href={this.googleMapsUrl()}
+                hideExternalLinkIcon={true}
+                to={this.googleMapsUrl()}
             >
                 <Spacer />
                 {children}
-            </a>
+            </Link>
         );
     }
 }

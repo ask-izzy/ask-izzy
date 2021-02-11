@@ -8,6 +8,7 @@ import ServicePane from "../components/ServicePane";
 import iss from "../iss";
 import type {Service} from "../iss";
 import components from "../components";
+import Link from "../components/Link";
 import Loading from "../icons/Loading";
 import config from "../config";
 import routerContext from "../contexts/router-context";
@@ -103,7 +104,7 @@ class ServicePage extends React.Component<{
                                         Sorry, I was unable to retrieve the information for this service at this time.
                                         Please try viewing another service or contact us
                                         if the problem persists at&nbsp;
-                                            <a href={"mailto:" + config.default.siteMail}>{config.default.siteMail}</a>.
+                                            <Link to={"mailto:" + config.default.siteMail}>{config.default.siteMail}</Link>.
                                         </p>
                                         <p>
                                             {

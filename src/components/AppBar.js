@@ -3,6 +3,7 @@
 import React from "react";
 
 import components from "../components";
+import Link from "../components/Link";
 import icons from "../icons";
 
 type Props = {
@@ -33,9 +34,10 @@ class AppBar extends React.Component<Props, void> {
                     {this.renderBackButton()}
                     <h1 className="title">{this.props.title}</h1>
                     <div className="button-container">
-                        <a className="quick-exit"
-                            href={redirectUri}
+                        <Link className="quick-exit"
+                            to={redirectUri}
                             title={tooltip}
+                            hideExternalLinkIcon={true}
                         >
                             <div className="quick-exit">
                                 <span className="longer-text">
@@ -45,7 +47,7 @@ class AppBar extends React.Component<Props, void> {
                                     Exit ⨉
                                 </span>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="AppBarSpacer" />

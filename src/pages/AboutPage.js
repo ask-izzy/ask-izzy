@@ -2,7 +2,8 @@
 /* eslint-disable max-len */
 
 import React from "react";
-import { Link } from "react-router-dom";
+
+import Link from "../components/Link";
 import StaticPage from "./StaticPage";
 import config from "../config";
 
@@ -61,12 +62,12 @@ class AboutPage extends React.Component<{}, void> {
                     <p>
                         With the support of Google, Infoxchange developed the
                         {" "}
-                        <a
-                            href="https://opendata.askizzy.org.au"
+                        <Link
+                            to="https://opendata.askizzy.org.au"
                             target="_blank"
                         >
                             Ask Izzy Open Data Platform
-                        </a>. Using anonymous data from Ask Izzy, the Australian
+                        </Link>. Using anonymous data from Ask Izzy, the Australian
                         Bureau of Statistics and Australian Institute of Health and
                         Welfare, the Ask Izzy Open Data Platform provides insights
                         into the supply and demand of services across Australia
@@ -87,21 +88,21 @@ class AboutPage extends React.Component<{}, void> {
                         To keep up-to-date with the latest Ask Izzy news, sign up
                         to our
                         {" "}
-                        <a
-                            href="https://infoxchange.us7.list-manage.com/subscribe?u=a6c9f2847322bb43e66d8e483&id=74aeba2755"
+                        <Link
+                            to="https://infoxchange.us7.list-manage.com/subscribe?u=a6c9f2847322bb43e66d8e483&id=74aeba2755"
                             target="_blank"
                         >
                             Ask Izzy quarterly newsletter
-                        </a>
+                        </Link>
                         {" "}
                         and follow us on
                         {" "}
-                        <a
-                            href="https://www.facebook.com/askizzyau/"
+                        <Link
+                            to="https://www.facebook.com/askizzyau/"
                             target="_blank"
                         >
                             Facebook
-                        </a>.
+                        </Link>.
                     </p>
 
                     <h3>Are you a service provider?</h3>
@@ -109,9 +110,9 @@ class AboutPage extends React.Component<{}, void> {
                         Service information is constantly changing, so if you
                         notice information that is not up to date you can
                         {" "}
-                        <a href={`mailto:${config.default.siteMail}`}>
+                        <Link to={`mailto:${config.default.siteMail}`}>
                             let us know directly
-                        </a>.
+                        </Link>.
                     </p>
                     <p>
                         If your site or service isn’t listed, you can add it
@@ -125,9 +126,9 @@ class AboutPage extends React.Component<{}, void> {
                         The information you provide will be published on Ask Izzy
                         and its sister directory,
                         {" "}
-                        <a href="https://infoxchange.serviceseeker.com.au">
+                        <Link to="https://infoxchange.serviceseeker.com.au">
                             Service Seeker
-                        </a>.
+                        </Link>.
                     </p>
                     <p>
                         Please provide information that you wish to be public and
@@ -153,7 +154,7 @@ class AboutPage extends React.Component<{}, void> {
                             title="Infoxchange, Google, realestate.com.au and News Corp Australia logos"
                         />
                     </p>
-                    <p className="small text-center">Ask Izzy was developed by <a href="https://www.infoxchange.org">Infoxchange</a> in partnership with <a href="https://google.org">Google</a>, <a href="https://www.realestate.com.au">realestate.com.au</a> and <a href="https://www.newscorpaustralia.com">News Corp Australia</a>.</p>
+                    <p className="small text-center">Ask Izzy was developed by <Link to="https://www.infoxchange.org">Infoxchange</Link> in partnership with <Link to="https://google.org">Google</Link>, <Link to="https://www.realestate.com.au">realestate.com.au</Link> and <Link to="https://www.newscorpaustralia.com">News Corp Australia</Link>.</p>
                     <h4 className="h4-ctb-partners text-center">Contributing partners</h4>
                     <p>
                         <img src="/static/images/logo-four-ctb-partners.svg"

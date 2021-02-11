@@ -2,8 +2,8 @@
 
 import React from "react";
 import PropTypes from "proptypes";
-import { Link } from "react-router-dom";
 
+import Link from "./Link";
 import Phone from "./Phone";
 import fixtures from "../../fixtures/services";
 import iss from "../iss";
@@ -30,7 +30,7 @@ const crisisDescriptions = {
             <li>If you are homeless or at risk of being homeless, call Link2home from anywhere in NSW</li>
             <li>You can speak to someone 24 hours a day, 7 days a week</li>
             <li>We will give you information or refer you to a service that can best help you resolve your homelessness issue</li>
-            <li>If you need interpreter assistance, call <a href="tel:1300652488" >1300 652 488</a>.</li>
+            <li>If you need interpreter assistance, call <Link to="tel:1300652488" >1300 652 488</Link>.</li>
         </ul>
     ),
 }

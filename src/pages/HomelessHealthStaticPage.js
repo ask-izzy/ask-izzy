@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "../components/Link";
 import StaticPage from "./StaticPage";
 
 export default class HomelessHealthStaticPage extends React.Component<{}> {
@@ -43,18 +43,18 @@ export default class HomelessHealthStaticPage extends React.Component<{}> {
                 </ul>
                 <p>
                     If you are in immediate need of medical assistance
-                    please <a href="tel:000">call an ambulance on 000</a>
+                    please <Link to="tel:000">call an ambulance on 000</Link>
                 </p>
                 <h2>Are the services free?</h2>
                 <p>Most services bulk bill and do not charge you any initial fees, however this depends on the clinic and if you have a serious condition you may need tests that incur additional costs. To check whether you will be charged, call the clinic on the number listed in Ask Izzy.</p>
                 <p>
                     To receive bulk billing you will need a Medicare card.
                     If you do not have one, you can request one on via the {" "}
-                    <a
-                        href={"https://www.humanservices.gov.au/customer/services/medicare/medicare-card"}
+                    <Link
+                        to={"https://www.humanservices.gov.au/customer/services/medicare/medicare-card"}
                     >
                         Department of Human Services
-                    </a>.
+                    </Link>.
                 </p>
                 <h2>Where can I find homeless health care?</h2>
                 <p>There are health care services for those experiencing homelessness located in regional and metropolitan areas across Australia. Some are drop in services so you do not need to make an appointment and others are not. Check with your selected service before you travel. </p>

@@ -3,7 +3,7 @@
 import React from "react";
 
 import HeaderBar from "../components/HeaderBar";
-import { Link } from "react-router-dom";
+import Link from "../components/Link";
 import icons from "../icons"
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
@@ -68,8 +68,8 @@ class HomePage extends React.Component<{}, void> {
                     </div>
                 </div>
                 <div className="appbar">
-                    <a className="quick-exit"
-                        href={redirectUri}
+                    <Link className="quick-exit"
+                        to={redirectUri}
                         title={tooltip}
                     >
                         <div className="quick-exit">
@@ -77,7 +77,7 @@ class HomePage extends React.Component<{}, void> {
                                 Quick Exit ⨉
                             </span>
                         </div>
-                    </a>
+                    </Link>
                 </div>
                 <div className="header">
                     <HeaderBar

@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "../components/Link";
 import icons from "../icons"
 import LinkButton from "./LinkButton";
 import config from "../config";
@@ -151,7 +151,11 @@ export default class BrandedFooter
             </div>
             <div className="middle-box">
                 <div className="about">
-                    Ask Izzy is powered by <a href="https://www.infoxchange.org/au">Infoxchange</a>, a not-for-profit social enterprise that has been delivering technology for social justice for over 30 years.
+                    Ask Izzy is powered by{" "}
+                    <Link to="https://www.infoxchange.org/au">
+                        Infoxchange
+                    </Link>, a not-for-profit social enterprise that has been
+                    delivering technology for social justice for over 30 years.
                 </div>
                 <div className="about-links">
                     <Link to="/about">
@@ -165,16 +169,16 @@ export default class BrandedFooter
                 <div className="support-links">
                     <ul>
                         <li>
-                            <a href="/donate">
+                            <Link to="/donate">
                                 <icons.Heart
                                     className="small"
                                 />
                                 Donate to us
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href={
+                            <Link
+                                to={
                                     `mailto:${config.default.siteMail}` +
                                     `?subject=${"Ask Izzy - Feedback"}`
                                 }
@@ -183,7 +187,7 @@ export default class BrandedFooter
                                     className="small"
                                 />
                                 Leave feedback
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
@@ -191,17 +195,17 @@ export default class BrandedFooter
                     Ask Izzy founding partners:<br />
                     <ul>
                         <li>
-                            <a href="https://www.google.org">Google</a>
+                            <Link to="https://www.google.org">Google</Link>
                             <span className="comma">,</span>
                         </li>
                         <li>
-                            <a href="https://www.rea-group.com">REA Group</a>
+                            <Link to="https://www.rea-group.com">REA Group</Link>
                             <span className="comma">,</span>
                         </li>
                         <li>
-                            <a href="https://www.newscorpaustralia.com">
+                            <Link to="https://www.newscorpaustralia.com">
                                 News Corp Australia
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
@@ -209,26 +213,28 @@ export default class BrandedFooter
                     <span>Find us on:</span>
                     <ul>
                         <li>
-                            <a
-                                href="https://www.facebook.com/askizzyau"
+                            <Link
+                                to="https://www.facebook.com/askizzyau"
                                 target="_blank"
                                 className="flex-align"
+                                hideExternalLinkIcon={true}
                             >
                                 <icons.Facebook
                                     className="inline-icon inline-block-icon"
                                 />
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="https://www.instagram.com/askizzyau/"
+                            <Link
+                                to="https://www.instagram.com/askizzyau/"
                                 target="_blank"
                                 className="flex-align"
+                                hideExternalLinkIcon={true}
                             >
                                 <icons.Instagram
                                     className="inline-icon inline-block-icon"
                                 />
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
@@ -256,9 +262,9 @@ export default class BrandedFooter
                             />
                             <span>Update service details</span>
                         </LinkButton>
-                        <a href="https://www.infoxchange.org/au/ask-izzy">
+                        <Link to="https://www.infoxchange.org/au/ask-izzy">
                             Ask Izzy resources
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

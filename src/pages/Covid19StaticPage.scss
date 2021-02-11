@@ -47,7 +47,7 @@
         display: flex;
         align-items: center;
 
-        span:first-child {
+        > span:first-child {
             flex: 0 0 auto;
 
             .Icon {
@@ -82,8 +82,8 @@
 
     details {
         summary {
-            cursor: pointer;
             list-style: none;
+            cursor: pointer;
 
             &::-webkit-details-marker {
                 display: none; // # chrome doesn't support styling with list-style

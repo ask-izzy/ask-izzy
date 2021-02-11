@@ -2,7 +2,8 @@
 /* eslint-disable max-len */
 
 import React from "react";
-import { Link } from "react-router-dom";
+
+import Link from "../components/Link";
 import StaticPage from "./StaticPage";
 
 class TermsPage extends React.Component<{}, void> {
@@ -22,7 +23,7 @@ class TermsPage extends React.Component<{}, void> {
                     Infoxchange (ABN 74 457 506 140). Access to, and use of,
                     this Website is provided strictly subject to these terms of
                     use. By using this Website, you accept these terms of use
-                    and our <a href="https://www.infoxchange.net.au/privacy-policy">Privacy Policy</a>
+                    and our <Link to="https://www.infoxchange.net.au/privacy-policy">Privacy Policy</Link>
                     {" "}(collectively the <strong>Website Terms</strong>).
                     Please only use this Website if you have read, understood
                     and agree to these terms of use.

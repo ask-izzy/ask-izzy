@@ -3,6 +3,7 @@
 
 import React from "react";
 import StaticPage from "./StaticPage";
+import Link from "../components/Link";
 
 export default class InformationPage extends React.Component<{}> {
     render() {
@@ -43,7 +44,7 @@ export default class InformationPage extends React.Component<{}> {
                         <li>The person says they will or does hurt you, your children or animals.</li>
                     </ul>
                     <p>Help is available now - Advice, choices and safety.</p>
-                    <p>Call <a href={link1800Respect}>1800Respect</a>.</p>
+                    <p>Call <Link to={link1800Respect}>1800Respect</Link>.</p>
                     <p>Or look at the services and legal help available.</p>
                 </div>
             </StaticPage>
