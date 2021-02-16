@@ -7,6 +7,7 @@
   "readme": "README.md",
   "dependencies": {
     "@babel/core": "7.11.4",
+    "@babel/node": "7.12.10",
     "@babel/plugin-proposal-class-properties": "7.10.4",
     "@babel/plugin-proposal-decorators": "7.10.5",
     "@babel/plugin-transform-flow-strip-types": "7.10.4",
@@ -59,6 +60,7 @@
     "node-sass": "4.14.1",
     "nodemon": "1.18.10",
     "optimist": "0.6.1",
+    "pa11y": "5.3.0",
     "postcss-loader": "2.1.6",
     "proptypes": "1.1.0",
     "react": "16.13.1",
