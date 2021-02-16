@@ -2,6 +2,7 @@
 
 import Webdriver from "selenium-webdriver";
 import ChromeWebDriver from "selenium-webdriver/chrome";
+import command from "selenium-webdriver/lib/command";
 
 declare var IzzyStorage: Object;
 
@@ -47,11 +48,11 @@ export function baseUrl(): string {
  *
  * @return {Promise} - return value from Selenium Webdriver.get.
  */
-export function gotoUrl(
+export async function gotoUrl(
     driver: typeof Webdriver.WebDriver,
     url: string
 ): Promise<void> {
-    return driver.get(baseUrl() + url);
+    await driver.get(baseUrl() + url);
 }
 
 /**
@@ -94,6 +95,41 @@ export default async function webDriverInstance(
         .manage()
         .setTimeouts({ implicit: 10000 });
 
+    driver.then(driver => {
+        // This command is in an unreleased version of "selenium-webdriver"
+        // (at the time of writing). After the next release this code can be
+        // updated to use the command from the library directly.
+        driver.getExecutor().defineCommand(
+            "sendAndGetDevToolsCommand",
+            "POST",
+            "/session/:sessionId/chromium/send_command_and_get_result"
+        );
+
+        driver.executeScriptBeforeLoad = async(script, ...args) => {
+            if (typeof script === "function") {
+                script = `(${script}).apply(null, ${JSON.stringify(args)});`
+            }
+            return driver.getExecutor().execute(
+                new command.Command("sendAndGetDevToolsCommand")
+                    .setParameter(
+                        "cmd",
+                        "Page.addScriptToEvaluateOnNewDocument"
+                    )
+                    .setParameter("params", {"source": script})
+                    .setParameter("sessionId",
+                        (await driver.getSession()).getId()
+                    )
+            )
+        }
+        driver.removeScriptBeforeLoad = async scriptId =>
+            driver.sendDevToolsCommand(
+                "Page.removeScriptToEvaluateOnNewDocument",
+                {"identifier": scriptId}
+            )
+
+        return driver
+    })
+
     return driver;
 }
 
@@ -124,6 +160,7 @@ export async function setStorage(
 export async function cleanDriverSession(
     driver: typeof Webdriver.WebDriver
 ): Promise<void> {
+    await driver.executeScript(() => console.log("Clearing browsing session"))
     await waitForStorage(driver);
     await driver.executeScript(() => {
         IzzyStorage.clear();

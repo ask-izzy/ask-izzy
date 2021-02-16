@@ -122,6 +122,9 @@ const Storage = {
         try {
             return JSON.parse(item);
         } catch (error) {
+            console.error(
+                `Error when parsing JSON while fetching "${key}" from storage`
+            )
             console.error(error);
             return null;
         }

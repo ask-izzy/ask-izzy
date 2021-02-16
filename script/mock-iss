@@ -2,9 +2,12 @@
 #
 # Mock ISS server on port 5000
 #
-set -euo pipefail
 
+# Enable strict mode
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euo pipefail
 IFS=$'\n\t'
+
 PATH=`npm bin`:$PATH
 
 export NODE_ENV=development

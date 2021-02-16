@@ -1,7 +1,7 @@
 .*.sw?
 .env
 yarn-error.log
-/Test-*.png
+/testing-screenshots
 /node_modules/
 /npm-debug.log*
 /public/static/*.css

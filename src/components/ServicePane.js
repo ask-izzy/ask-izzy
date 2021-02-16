@@ -57,7 +57,7 @@ export default class ServicePane extends React.Component<{
         this.setState({siblings: response.objects});
     }
 
-    recordAlsoAtThisLocation = ():void => {
+    recordAlsoAtThisLocation = (): void => {
         sendEvent({
             event: "alsoAtThisLocation",
             listingName: this.props.service.name,
