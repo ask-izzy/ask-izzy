@@ -7,9 +7,9 @@
 // These stats basically contains the path of the script files to
 // <script>-load in the browser.
 
-import fs from "fs";
-import path from "path";
-import _ from "underscore";
+const fs = require("fs");
+const path = require("path");
+const _ = require("underscore");
 
 const filepath = path.resolve(
     __dirname,
