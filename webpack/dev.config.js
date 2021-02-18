@@ -6,23 +6,29 @@
 // It enables the hot module replacement,
 // the source maps and inline CSS styles.
 
-import path from "path";
-import webpack from "webpack";
-import writeStats from "./utils/write-stats";
-import notifyStats from "./utils/notify-stats";
-import commons from "./utils/commons";
-import env from "./env";
-import progress from "./utils/progress";
-import extractText from "./extract-text";
+const path = require("path");
+const webpack = require("webpack");
+const writeStats = require("./utils/write-stats");
+const fs = require("fs");
+const env = require("./env");
+const progress = require("./utils/progress");
 
 const assetsPath = path.resolve(__dirname, "../public/static");
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WEBPACK_HOST = process.env.HOST || "localhost";
 const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
 const webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
+const bannerImages = fs.readdirSync("./public/static/images/banners")
+    .map(file => file.replace(/\.\w*$/, ""));
+
 
 module.exports = {
-    devtool: "source-map",
+    mode: "development",
+    devtool: "#source-map",
+    devServer: {
+        port: 3000,
+        contentBase: path.join(__dirname, "../public"),
+    },
     entry: {
         hotload: [
             `webpack-dev-server/client?${webpackUrl}`,
@@ -47,9 +53,23 @@ module.exports = {
                 use: "file-loader",
             },
             {
-                test: /\.scss$/,
-                exclude: /node_modules/,
-                use: extractText.loader,
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    {
+                        loader: `postcss-loader`,
+                        options: {
+                            options: {},
+                        }
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            data: `$banner-images: ${bannerImages.join(" ")};`,
+                        },
+                    },
+                ],
             },
             {
                 test: /\.js$/,
@@ -75,20 +95,13 @@ module.exports = {
             "es6-promise": "es6-promise",
         }),
 
-        extractText.plugin,
-
-        commons,
-
-        // stats
-        function() {
-            this.plugin("done", notifyStats);
-        },
-
-        function() {
-            this.plugin("done", writeStats);
-        },
+        new MiniCssExtractPlugin(),
 
         progress(),
+
+        // stats
+        writeStats(),
+        
 
     ],
 };
