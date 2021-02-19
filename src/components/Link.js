@@ -107,7 +107,7 @@ export default class Link extends React.Component<Props, State> {
             return (
                 <a
                     href={this.state.uri}
-                    rel="noopener noreferer"
+                    rel="noopener noreferrer"
                     {...(remainingProps: any)}
                     className={classnames(
                         "Link external",
