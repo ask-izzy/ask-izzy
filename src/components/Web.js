@@ -24,7 +24,6 @@ export default class Web extends React.Component<{url: string}, void> {
                 <Link
                     to={url.href}
                     onClick={this.recordClick.bind(this)}
-                    hideExternalLinkIcon={true}
                 >
                     <icons.Website />
                     <div className="Contact-text">
@@ -35,9 +34,6 @@ export default class Web extends React.Component<{url: string}, void> {
                             {url.hostname}
                             {url.path === "/" ? "" : url.path}
                         </span>
-                        <icons.ExternalLink
-                            containerClassName="ExternalLinkIcon"
-                        />
                     </div>
                 </Link>
             </div>

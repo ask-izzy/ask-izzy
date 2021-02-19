@@ -79,7 +79,6 @@ class GoogleMapsLink extends React.Component<Props, void> {
                 className={classnames("GoogleMapsLink", className)}
                 target="_blank"
                 aria-label="Open Google Maps in a new tab"
-                hideExternalLinkIcon={true}
                 to={this.googleMapsUrl()}
             >
                 <Spacer />

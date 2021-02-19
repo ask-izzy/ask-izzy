@@ -50,15 +50,6 @@
                     font-weight: bold;
                     text-decoration: none;
 
-                    .ExternalLinkIcon .Icon {
-                        margin-bottom: 0.05em;
-                        margin-left: 0.4em;
-
-                        path {
-                            fill: $black;
-                        }
-                    }
-
                     /* Add trailing arrow */
                     &::after {
                         display: inline-block;

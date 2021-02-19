@@ -163,7 +163,7 @@ class TransportTime extends React.Component<{
                     <span onClick={this.recordClick.bind(this)}>
                         Get directions in Google Maps
                         <icons.ExternalLink
-                            containerClassName="ExternalLinkIcon"
+                            className="ExternalLinkIcon"
                         />
                     </span>
                 </div>

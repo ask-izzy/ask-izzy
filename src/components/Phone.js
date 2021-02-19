@@ -50,7 +50,6 @@ class Phone extends React.Component<Props, void> {
                     to={this.href}
                     className={contactButtonClassName}
                     onClick={this.recordClick.bind(this)}
-                    hideExternalLinkIcon={true}
                 >
                     <div
                         className="Contact-text"

@@ -216,7 +216,6 @@ export default class BrandedFooter
                             <Link
                                 to="https://www.facebook.com/askizzyau"
                                 className="flex-align"
-                                hideExternalLinkIcon={true}
                             >
                                 <icons.Facebook
                                     className="inline-icon inline-block-icon"
@@ -227,7 +226,6 @@ export default class BrandedFooter
                             <Link
                                 to="https://www.instagram.com/askizzyau/"
                                 className="flex-align"
-                                hideExternalLinkIcon={true}
                             >
                                 <icons.Instagram
                                     className="inline-icon inline-block-icon"

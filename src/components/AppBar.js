@@ -37,7 +37,6 @@ class AppBar extends React.Component<Props, void> {
                         <Link className="quick-exit"
                             to={redirectUri}
                             title={tooltip}
-                            hideExternalLinkIcon={true}
                         >
                             <div className="quick-exit">
                                 <span className="longer-text">

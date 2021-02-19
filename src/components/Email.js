@@ -29,7 +29,6 @@ export default class Email extends React.Component<Props, void> {
                 <Link
                     to={`mailto:${email}`}
                     onClick={this.recordClick.bind(this)}
-                    hideExternalLinkIcon={true}
                 >
                     <icons.Email />
                     <div className="Contact-text">
@@ -38,9 +37,6 @@ export default class Email extends React.Component<Props, void> {
                         </span>
                         {this.props.comment && " "}
                         <span className="email value">{email}</span>
-                        <icons.ExternalLink
-                            containerClassName="ExternalLinkIcon"
-                        />
                     </div>
                 </Link>
             </div>

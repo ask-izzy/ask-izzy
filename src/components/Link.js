@@ -4,13 +4,10 @@ import * as React from "react";
 import { Link as InternalLink } from "react-router-dom";
 import classnames from "classnames";
 
-import icons from "../icons";
-
 import routerContext from "../contexts/router-context";
 
 type Props = {
     to: string,
-    hideExternalLinkIcon?: boolean,
     children?: React.Node,
     className?: string
 }
@@ -85,17 +82,10 @@ export default class Link extends React.Component<Props, State> {
         }
     }
 
-    showExternalLinkIcon() {
-        return Boolean(
-            !this.state.isInternal && !this.props.hideExternalLinkIcon
-        )
-    }
-
     render() {
         let {
             to,
             children,
-            hideExternalLinkIcon,
             className,
             ...remainingProps
         } = this.props;
@@ -125,11 +115,6 @@ export default class Link extends React.Component<Props, State> {
                     )}
                 >
                     {children}
-                    {this.showExternalLinkIcon() &&
-                        <icons.ExternalLink
-                            containerClassName="ExternalLinkIcon"
-                        />
-                    }
                 </a>
             )
         }
