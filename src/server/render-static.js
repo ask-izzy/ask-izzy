@@ -1,5 +1,4 @@
 /* @flow */
-/* eslint id-length: ["error", { "exceptions": ["i"] }] */
 
 import ansiEscapes from "ansi-escapes"
 import fs from "fs-extra";
