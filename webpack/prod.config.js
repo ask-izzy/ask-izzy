@@ -4,16 +4,19 @@
 
 // Webpack config for creating the production bundle.
 
-import path from "path";
-import webpack from "webpack";
-import writeStats from "./utils/write-stats";
-import commons from "./utils/commons";
+const path = require("path");
+const webpack = require("webpack");
+const fs = require("fs");
+
 import env from "./env";
-import extractText from "./extract-text";
 
 const assetsPath = path.join(__dirname, "../public/static");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const bannerImages = fs.readdirSync("./public/static/images/banners")
+    .map(file => file.replace(/\.\w*$/, ""));
 
 module.exports = {
+    mode: "production",
     devtool: "source-map",
     entry: {
         main: [
@@ -22,6 +25,7 @@ module.exports = {
             "./src/analytics.js",
         ],
     },
+    bail: true,
     output: {
         path: assetsPath,
         filename: "[name]-[hash].js",
@@ -35,9 +39,23 @@ module.exports = {
                 use: "file-loader",
             },
             {
-                test: /\.scss$/,
-                exclude: /node_modules/,
-                use: extractText.loader,
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    {
+                        loader: `postcss-loader`,
+                        options: {
+                            options: {},
+                        }
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            data: `$banner-images: ${bannerImages.join(" ")};`,
+                        },
+                    },
+                ],
             },
             {
                 test: /\.js$/,
@@ -63,21 +81,8 @@ module.exports = {
             "es6-promise": "es6-promise",
         }),
 
-        extractText.plugin,
+        new MiniCssExtractPlugin(),
 
-        // optimizations
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-            },
-            sourceMap: true,
-        }),
-        commons,
-
-        // stats
-        function() {
-            this.plugin("done", writeStats);
-        },
     ],
 };
 
