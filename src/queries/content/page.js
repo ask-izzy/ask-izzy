@@ -13,6 +13,11 @@ query Page($path: String!) {
     }
     BannerTextPrimary,
     BannerTextSecondary,
+    AccordionTitle,
+    Accordion {
+      Title,
+      Content,
+    }
   }
 }
 `;

@@ -20,9 +20,6 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
             categoryName: undefined,
             isTopical: undefined,
         });
-        if (typeof window != "undefined") {
-            require("details-element-polyfill");
-        }
     }
 
     contactDetailPhone(number: string, comment: string | React.Node): React.Node {

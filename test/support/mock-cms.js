@@ -21,6 +21,8 @@ const typeDefs = gql`
     Banner: Banner
     BannerTextPrimary: String
     BannerTextSecondary: String
+    AccordionTitle: String
+    Accordion: [Accordion]
   }
   scalar DateTime
   scalar JSON
@@ -30,6 +32,10 @@ const typeDefs = gql`
   }
   type Banner {
     Key: String!
+  }
+  type Accordion {
+    Title: String
+    Content: String
   }
 `;
 
@@ -46,6 +52,16 @@ const mocks = {
                     },
                     BannerTextPrimary: "Some primary text",
                     BannerTextSecondary: "Some secondary text",
+                    Accordion: [
+                        {
+                            Title: "Victoria",
+                            Content: "Accordion content for Victoria.",
+                        },
+                        {
+                            Title: "Tasmania",
+                            Content: "Accordion content for Tasmania.",
+                        },
+                    ],
                 }]
             } else if (path === "/terms") {
                 return [{
