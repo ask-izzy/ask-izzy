@@ -215,7 +215,6 @@ export default class BrandedFooter
                         <li>
                             <Link
                                 to="https://www.facebook.com/askizzyau"
-                                target="_blank"
                                 className="flex-align"
                                 hideExternalLinkIcon={true}
                             >
@@ -227,7 +226,6 @@ export default class BrandedFooter
                         <li>
                             <Link
                                 to="https://www.instagram.com/askizzyau/"
-                                target="_blank"
                                 className="flex-align"
                                 hideExternalLinkIcon={true}
                             >

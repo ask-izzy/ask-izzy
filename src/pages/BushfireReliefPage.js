@@ -51,7 +51,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     <Link
                         to="https://www.rfs.nsw.gov.au"
                         rel="noopener noreferer"
-                        target="_blank"
                     >
                         www.rfs.nsw.gov.au
                     </Link>
@@ -66,7 +65,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     <Link
                         to="https://www.emergency.vic.gov.au"
                         rel="noopener noreferer"
-                        target="_blank"
                     >
                         emergency.vic.gov.au
                     </Link>
@@ -76,7 +74,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     <Link
                         to="https://www.ruralfire.qld.gov.au"
                         rel="noopener noreferer"
-                        target="_blank"
                     >
                         www.ruralfire.qld.gov.au
                     </Link>
@@ -86,7 +83,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     <Link
                         to="https://www.emergency.wa.gov.au"
                         rel="noopener noreferer"
-                        target="_blank"
                     >
                         emergency.wa.gov.au
                     </Link>
@@ -102,7 +98,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     <Link
                         to="https://www.cfs.sa.gov.au"
                         rel="noopener noreferer"
-                        target="_blank"
                     >
                         www.cfs.sa.gov.au
                     </Link>
@@ -112,7 +107,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     <Link
                         to="http://www.fire.tas.gov.au"
                         rel="noopener noreferer"
-                        target="_blank"
                     >
                         www.fire.tas.gov.au
                     </Link>
@@ -122,7 +116,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     <Link
                         to="https://esa.act.gov.au/fire-rescue"
                         rel="noopener noreferer"
-                        target="_blank"
                     >
                         esa.act.gov.au/fire-rescue
                     </Link>
@@ -135,7 +128,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                             "https://www.pfes.nt.gov.au/fire-and-rescue-service"
                         }
                         rel="noopener noreferer"
-                        target="_blank"
                     >
                         www.pfes.nt.gov.au/fire-and-rescue-service
                     </Link>
@@ -149,7 +141,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     by bushfires. See the{" "}
                     <Link
                         to="https://www.humanservices.gov.au/individuals/help-emergency/bushfires"
-                        target="_blank"
                         rel="noreferer noopener"
                     >
                         Department of Human Services
@@ -171,7 +162,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     {" "}
                     <Link
                         to="https://www.surveygizmo.com/s3/5391212/Ask-Izzy-service-update-form"
-                        target="_blank"
                         ref="noopener noreferer"
                     >
                         this form
@@ -184,7 +174,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     For those with money to give, the{" "}
                     <Link
                         to="https://www.redcross.org.au/campaigns/disaster-relief-and-recovery-donate"
-                        target="_blank"
                         rel="noopener noreferer"
                     >
                         Australian Red Cross
