@@ -35,6 +35,28 @@ Feature: CMS integration
         Then I should see "Some primary text"
         And I should see "Some secondary text"
 
+    # As a user
+    # When I visit the about page
+    # I want to see a collapsed accordion
+    Scenario: Display about page with accordion
+       Given a fresh session
+        When I visit /about
+        Then I should see "Victoria"
+        Then I should not see "Accordion content for Victoria."
+
+    # As a user
+    # When I click on an accordion
+    # I want to see it expand and collapse
+    Scenario: Display about page with accordion
+       Given a fresh session
+        When I visit /about
+        Then I should see "Victoria"
+        Then I should not see "Accordion content for Victoria."
+        And I click on an accordion titled "Victoria"
+        Then I should see "Accordion content for Victoria."
+        And I click on an accordion titled "Victoria"
+        Then I should not see "Accordion content for Victoria."
+
     Scenario: When navigating between pages the correct content is returned.
       Given a fresh session
         When I visit /about

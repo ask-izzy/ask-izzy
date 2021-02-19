@@ -5,4 +5,17 @@
         display: block;
         margin: 0 auto;
     }
+
+    code {
+        background-color: $brand-bg-dark;
+        color: $brand-text-light;
+    }
+
+    blockquote {
+        margin-left: 0;
+        padding: 10px 20px;
+        border-left: 5px solid $brand-text-light;
+        font-style: italic;
+    }
+
 }

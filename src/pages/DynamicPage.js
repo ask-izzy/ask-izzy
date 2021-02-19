@@ -11,6 +11,7 @@ import pageQuery from "../queries/content/page.js";
 import NotFoundStaticPage from "./NotFoundStaticPage";
 import routerContext from "../contexts/router-context";
 import gfm from "remark-gfm";
+import Accordion from "../components/Accordion";
 
 type Props = {
     location: any,
@@ -91,6 +92,10 @@ class DynamicPage extends React.Component<Props, void> {
                                         transformImageUri={
                                             this.absoluteImageUrl
                                         }
+                                    />
+                                    <Accordion
+                                        title={page.AccordionTitle}
+                                        items={page.Accordion}
                                     />
                                 </div>
                             </StaticPage>

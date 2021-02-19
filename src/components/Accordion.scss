@@ -1,0 +1,72 @@
+.Accordion {
+    > ul {
+        margin: 0;
+        padding: 0;
+
+        > li {
+            border-bottom: 1px solid $brand-bg-mid-lighter;
+            list-style: none;
+        }
+    }
+}
+
+.AccordionItem {
+    summary {
+        list-style: none;
+
+        &::-webkit-details-marker {
+            display: none; // # chrome doesn't support styling with list-style
+        }
+
+        &::before {
+            display: none;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        div { // wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .title {
+                margin: 0;
+            }
+        }
+    }
+
+    .Icon {
+        margin: 10px; // Eliminates layout shift during rotation.
+        transform: rotate(90deg);
+        transition: transform 0.1s ease-out;
+    }
+
+    .AccordionItemContent {
+        display: none; // Hides for testing.
+
+        ul,
+        ol {
+            margin: 10px 0;
+        }
+
+        > ul {
+            list-style-type: disc;
+
+            li > ul {
+                list-style-type: circle;
+            }
+        }
+    }
+
+    &[open] {
+        .Icon {
+            transform: rotate(-90deg);
+        }
+
+        .AccordionItemContent {
+            display: block;
+        }
+    }
+}

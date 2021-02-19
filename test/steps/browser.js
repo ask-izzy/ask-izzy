@@ -44,6 +44,10 @@ module.exports = (function() {
             "I click back from the browser UI",
             unpromisify(clickBrowserBack),
         )
+        .when(
+            "I click on an accordion titled \"$STRING\"",
+            unpromisify(clickAccordion)
+        )
         .when("I reload the page", unpromisify(reloadPage))
         .when("I pause for debugging", unpromisify(pauseToDebug))
         .when("I take a screenshot", unpromisify(takeScreenshot))
@@ -261,6 +265,16 @@ async function searchContains(expected: string): Promise<void> {
 async function clickSearch(): Promise<void> {
     await this.driver.findElement(By.css(".search button"))
         .click();
+}
+
+async function clickAccordion(title: string): Promise<void> {
+    const locator = By.css(".AccordionItem .title");
+
+    while (!await isElementPresent(this.driver, locator)) {
+        console.log(`Looking for ${title}`)
+    }
+    await this.driver.findElement(locator).click();
+    await module.exports.documentReady(this.driver);
 }
 
 async function getButtonState(
