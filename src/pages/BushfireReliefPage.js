@@ -50,7 +50,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     } or visit{" "}
                     <Link
                         to="https://www.rfs.nsw.gov.au"
-                        rel="noopener noreferer"
                     >
                         www.rfs.nsw.gov.au
                     </Link>
@@ -64,7 +63,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     } or visit{" "}
                     <Link
                         to="https://www.emergency.vic.gov.au"
-                        rel="noopener noreferer"
                     >
                         emergency.vic.gov.au
                     </Link>
@@ -73,7 +71,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     <strong>Queensland:</strong> Rural Fire Service{" "}
                     <Link
                         to="https://www.ruralfire.qld.gov.au"
-                        rel="noopener noreferer"
                     >
                         www.ruralfire.qld.gov.au
                     </Link>
@@ -82,7 +79,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     <strong>Western Australia:</strong> Emergency WA{" "}
                     <Link
                         to="https://www.emergency.wa.gov.au"
-                        rel="noopener noreferer"
                     >
                         emergency.wa.gov.au
                     </Link>
@@ -97,7 +93,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     } or visit South Australian Country Fire Service{" "}
                     <Link
                         to="https://www.cfs.sa.gov.au"
-                        rel="noopener noreferer"
                     >
                         www.cfs.sa.gov.au
                     </Link>
@@ -106,7 +101,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     <strong>Tasmania:</strong> Tasmanian fire service{" "}
                     <Link
                         to="http://www.fire.tas.gov.au"
-                        rel="noopener noreferer"
                     >
                         www.fire.tas.gov.au
                     </Link>
@@ -115,7 +109,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     <strong>ACT:</strong> ACT Emergency Services Agency{" "}
                     <Link
                         to="https://esa.act.gov.au/fire-rescue"
-                        rel="noopener noreferer"
                     >
                         esa.act.gov.au/fire-rescue
                     </Link>
@@ -127,7 +120,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                         to={
                             "https://www.pfes.nt.gov.au/fire-and-rescue-service"
                         }
-                        rel="noopener noreferer"
                     >
                         www.pfes.nt.gov.au/fire-and-rescue-service
                     </Link>
@@ -174,7 +166,6 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     For those with money to give, the{" "}
                     <Link
                         to="https://www.redcross.org.au/campaigns/disaster-relief-and-recovery-donate"
-                        rel="noopener noreferer"
                     >
                         Australian Red Cross
                     </Link> and state-based fire authorities will gratefully accept

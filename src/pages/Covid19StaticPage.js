@@ -57,7 +57,6 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                 <icons.Website className="icon" />
                 <Link
                     to={url}
-                    rel="noopener noreferer"
                     className="main"
                 >
                     {linkText}
@@ -93,7 +92,6 @@ class Covid19StaticPage extends React.Component<{ mobileView: boolean }> {
                     the{" "}
                     <Link
                         to="https://www.health.gov.au/news/health-alerts/novel-coronavirus-2019-ncov-health-alert"
-                        rel="noopener noreferer"
                     >Australian Department of Health website</Link> for the latest
                     medical advice, news and information.
                 </p>
