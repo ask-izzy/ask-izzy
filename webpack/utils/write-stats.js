@@ -20,14 +20,10 @@ const filepath = path.resolve(
 
 module.exports = class WriteStatsPlugin {
 
-    constructor(options) {
-        this.options = options;
-    }
-
     // get chunks by name and extensions
-    getChunks(json, ext, chunkOrdering) {
+    getChunks(json: Object, ext: string, chunkOrdering: Array<string>) {
 
-        let chunks = [];
+        let chunks: Array<string> = [];
         let allChunkNames = Object.keys(json.assetsByChunkName);
         let unorderedChunks = _(allChunkNames).difference(chunkOrdering);
         let sortedChunkNames = chunkOrdering.concat(unorderedChunks);
@@ -43,15 +39,15 @@ module.exports = class WriteStatsPlugin {
                 }
 
                 chunks = chunks.concat(chunk
-                    .filter((name) => path.extname(name) === `.${ext}`)
-                    .map((name) => json.publicPath + name)
+                    .filter((name: string) => path.extname(name) === `.${ext}`)
+                    .map((name: string) => json.publicPath + name)
                 );
             }
         }
         return chunks;
     }
 
-    apply(compiler) {
+    apply(compiler: Object) {
         compiler.hooks.done.tap("WriteStatsPlugin", stats => {
 
             const json = stats.toJson();
