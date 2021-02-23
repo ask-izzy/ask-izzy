@@ -5,6 +5,7 @@
 .*/node_modules/.*/examples/.*
 .*/node_modules/.staging/.*
 .*/node_modules/.*/test/.*
+.*/node_modules/.*/__tests__/.*
 .*/node_modules/fbjs/.*
 .*/node_modules/graphql/.*
 .*/node_modules/graphql-tag/.*
