@@ -7,11 +7,11 @@
 const path = require("path");
 const webpack = require("webpack");
 const fs = require("fs");
-
-import env from "./env";
+const env = require("./env");
 
 const assetsPath = path.join(__dirname, "../public/static");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const WriteStatsPlugin = require("./utils/write-stats.js");
 const bannerImages = fs.readdirSync("./public/static/images/banners")
     .map(file => file.replace(/\.\w*$/, ""));
 
@@ -82,6 +82,9 @@ module.exports = {
         }),
 
         new MiniCssExtractPlugin(),
+
+        // Output bundles to JSON.
+        new WriteStatsPlugin(),
 
     ],
 };

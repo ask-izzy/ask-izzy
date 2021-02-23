@@ -18,13 +18,15 @@ const filepath = path.resolve(
 
 // Write only a relevant subset of the stats and attach the public path to it
 
-module.exports = function writeStats(stats: webpackStats) {
+module.exports = class WriteStatsPlugin {
 
-    const publicPath = this.options.output.publicPath;
-    const json = stats.toJson();
+    constructor(options) {
+        this.options = options;
+    }
 
     // get chunks by name and extensions
-    function getChunks(ext, chunkOrdering) {
+    getChunks(json, ext, chunkOrdering) {
+
         let chunks = [];
         let allChunkNames = Object.keys(json.assetsByChunkName);
         let unorderedChunks = _(allChunkNames).difference(chunkOrdering);
@@ -42,22 +44,30 @@ module.exports = function writeStats(stats: webpackStats) {
 
                 chunks = chunks.concat(chunk
                     .filter((name) => path.extname(name) === `.${ext}`)
-                    .map((name) => publicPath + name)
+                    .map((name) => json.publicPath + name)
                 );
             }
         }
         return chunks;
     }
 
-    const script = getChunks("js", [
-        "runtime", "hotload", "vendor", "testharness", "main",
-    ]);
-    const css = getChunks("css", []);
-    const content = {
-        script: script,
-        css: css,
-    };
+    apply(compiler) {
+        compiler.hooks.done.tap("WriteStatsPlugin", stats => {
 
-    fs.writeFileSync(filepath, JSON.stringify(content, undefined, 4));
+            const json = stats.toJson();
+
+            const script = this.getChunks(json, "js", [
+                "runtime", "hotload", "vendor", "testharness", "main",
+            ]);
+            const css = this.getChunks(json, "css", []);
+            const content = {
+                script: script,
+                css: css,
+            };
+
+            fs.writeFileSync(filepath, JSON.stringify(content, undefined, 4));
+
+        });
+    }
 
 };

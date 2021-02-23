@@ -8,13 +8,13 @@
 
 const path = require("path");
 const webpack = require("webpack");
-const writeStats = require("./utils/write-stats");
 const fs = require("fs");
 const env = require("./env");
 const progress = require("./utils/progress");
 
 const assetsPath = path.resolve(__dirname, "../public/static");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const WriteStatsPlugin = require("./utils/write-stats.js");
 const WEBPACK_HOST = process.env.HOST || "localhost";
 const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
 const webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
@@ -99,9 +99,8 @@ module.exports = {
 
         progress(),
 
-        // stats
-        writeStats(),
-        
+        // Output bundles to JSON.
+        new WriteStatsPlugin(),
 
     ],
 };
