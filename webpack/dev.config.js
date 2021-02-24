@@ -30,10 +30,6 @@ module.exports = {
         contentBase: path.join(__dirname, "../public"),
     },
     entry: {
-        hotload: [
-            `webpack-dev-server/client?${webpackUrl}`,
-            "webpack/hot/only-dev-server",
-        ],
         main: [
             "./src/client-entry.js",
             "./src/styles/bundle.scss",
