@@ -253,6 +253,9 @@ The following environment variables an be set to any string in order to enable d
   - PAUSE_AFTER_FAIL
   If true this will wait before exiting after test failure to allow a chance to manual debug the situation while the Ask Izzy and Mock ISS servers are still running.
 
+  - USE_REMOTE_REACT_DEVTOOLS
+  If true the the client will attempt to connect to a remote instance of React Devtools. `npx react-devtools` can be used to launch an instance.
+
 ## Linters
 A number of linters are used for assessing and maintaining code quality. These are useful to run during development but are also used by the CI system and pre-commit git hooks.
 
