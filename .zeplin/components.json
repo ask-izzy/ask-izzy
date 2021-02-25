@@ -1,0 +1,26 @@
+{
+  "plugins": [
+    {
+      "name": "@zeplin/cli-connect-react-plugin"
+    },
+    {
+      "name": "@zeplin/cli-connect-storybook-plugin",
+      "config": {
+        "url": "https://ask-izzy.github.io/ask-izzy/",
+        "format": "new",
+        "startScript": "storybook"
+      }
+    }
+  ],
+  "projects": [
+    "603770b45ed7b30183b01a07"
+  ],
+  "components": [
+    {
+      "path": "src/components/FlatButton.js",
+      "zeplinIds": [
+        "6037734317b4e8270a6cef9c"
+      ]
+    }
+  ]
+}
