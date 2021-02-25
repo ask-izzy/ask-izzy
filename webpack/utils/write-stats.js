@@ -53,7 +53,7 @@ module.exports = class WriteStatsPlugin {
             const json = stats.toJson();
 
             const script = this.getChunks(json, "js", [
-                "runtime", "hotload", "vendor", "testharness", "main",
+                "runtime", "vendor", "testharness", "main",
             ]);
             const css = this.getChunks(json, "css", []);
             const content = {
