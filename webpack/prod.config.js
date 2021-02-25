@@ -58,12 +58,18 @@ module.exports = {
                 ],
             },
             {
-                test: /\.js$/,
-                // Exceptions to exclusions needed because UglifyJs can't handle
-                // ES6 so modules using ES6 features need to be run though babel
-                // first. When we get around to upgrading our minifier we should
-                // be able to remove these exclusions.
-                exclude: /node_modules\/(?!posthog-js|is-plain-obj)/,
+                test: /\.(js|jsx|ts|tsx)$/,
+                include: [
+                    path.resolve("fixtures"),
+                    path.resolve("src"),
+
+                    // Modules using ES6 features need to be run though babel
+                    // first. When we get around to upgrading our minifier we
+                    // should be able to remove these inclusions.
+                    path.resolve("node_modules/posthog-js"),
+                    path.resolve("node_modules/is-plain-obj"),
+                    path.resolve("node_modules/mdast-util-find-and-replace"),
+                ],
                 use: ["babel-loader"],
             },
         ],

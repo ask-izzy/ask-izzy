@@ -16,7 +16,7 @@ const assetsPath = path.resolve(__dirname, "../public/static");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WriteStatsPlugin = require("./utils/write-stats.js");
 const WEBPACK_HOST = process.env.HOST || "localhost";
-const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
+const WEBPACK_PORT = 5001;
 const webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
 const bannerImages = fs.readdirSync("./public/static/images/banners")
     .map(file => file.replace(/\.\w*$/, ""));
@@ -24,9 +24,8 @@ const bannerImages = fs.readdirSync("./public/static/images/banners")
 
 module.exports = {
     mode: "development",
-    devtool: "#source-map",
+    devtool: "source-map",
     devServer: {
-        port: 3000,
         contentBase: path.join(__dirname, "../public"),
     },
     entry: {
@@ -68,12 +67,18 @@ module.exports = {
                 ],
             },
             {
-                test: /\.js$/,
-                // Exceptions to exclusions needed because UglifyJs can't handle
-                // ES6 so modules using ES6 features need to be run though babel
-                // first. When we get around to upgrading our minifier we should
-                // be able to remove these exclusions.
-                exclude: /node_modules\/(?!posthog-js|is-plain-obj)/,
+                test: /\.(js|jsx|ts|tsx)$/,
+                include: [
+                    path.resolve("fixtures"),
+                    path.resolve("src"),
+
+                    // Modules using ES6 features need to be run though babel
+                    // first. When we get around to upgrading our minifier we
+                    // should be able to remove these inclusions.
+                    path.resolve("node_modules/posthog-js"),
+                    path.resolve("node_modules/is-plain-obj"),
+                    path.resolve("node_modules/mdast-util-find-and-replace"),
+                ],
                 use: ["babel-loader"],
             },
         ],
