@@ -7,7 +7,9 @@
   "readme": "README.md",
   "scripts": {
     "dev": "./script/recreate-dev-env-file && webpack serve --config webpack/dev.config.js --host 0.0.0.0 --hot --mode development",
-    "prod": "webpack serve --config webpack/prod.config.js --host 0.0.0.0 --mode production"
+    "prod": "webpack serve --config webpack/prod.config.js --host 0.0.0.0 --mode production",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@babel/core": "^7.13.0",
@@ -95,5 +97,10 @@
     "whatwg-fetch": "2.0.4",
     "yadda": "1.5.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.1.20",
+    "@storybook/addon-essentials": "^6.1.20",
+    "@storybook/addon-links": "^6.1.20",
+    "@storybook/react": "^6.1.20"
+  }
 }

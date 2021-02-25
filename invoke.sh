@@ -24,7 +24,7 @@ case "$1" in
     lint-fix-eslint)
         shift 1
 
-        exec npx eslint --fix src/ test/ fixtures/ webpack/ config/
+        exec npx eslint --fix src/ test/ fixtures/ webpack/ config/ .storybook/
         ;;
 
     lint-fix-sass)

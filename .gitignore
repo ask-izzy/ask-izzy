@@ -12,3 +12,4 @@ yarn-error.log
 /public/*.html
 /public/**/index.html
 /public/VERSION
+/storybook-static
