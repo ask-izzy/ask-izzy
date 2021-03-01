@@ -4,14 +4,14 @@
 
 // Webpack config for creating the production bundle.
 
-const path = require("path");
-const webpack = require("webpack");
-const fs = require("fs");
-const env = require("./env");
+import path from "path";
+import webpack from "webpack";
+import fs from "fs";
+import env from "./env";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import WriteStatsPlugin from "./utils/write-stats.js";
 
 const assetsPath = path.join(__dirname, "../public/static");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WriteStatsPlugin = require("./utils/write-stats.js");
 const bannerImages = fs.readdirSync("./public/static/images/banners")
     .map(file => file.replace(/\.\w*$/, ""));
 

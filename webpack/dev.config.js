@@ -6,15 +6,15 @@
 // It enables the hot module replacement,
 // the source maps and inline CSS styles.
 
-const path = require("path");
-const webpack = require("webpack");
-const fs = require("fs");
-const env = require("./env");
-const progress = require("./utils/progress");
+import path from "path";
+import webpack from "webpack";
+import fs from "fs";
+import env from "./env";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import WriteStatsPlugin from "./utils/write-stats.js";
+import progress from "./utils/progress";
 
 const assetsPath = path.resolve(__dirname, "../public/static");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WriteStatsPlugin = require("./utils/write-stats.js");
 const WEBPACK_HOST = process.env.HOST || "localhost";
 const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
 const webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
