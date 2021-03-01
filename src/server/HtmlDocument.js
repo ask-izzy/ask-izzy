@@ -6,7 +6,7 @@ import PropTypes from "proptypes";
 class HtmlDocument extends React.Component<Object, void> {
     static propTypes = {
         css: PropTypes.arrayOf(PropTypes.string),
-        markup: PropTypes.string.isRequired,
+        // markup: PropTypes.string.isRequired,
         script: PropTypes.arrayOf(PropTypes.string),
         helmet: PropTypes.object,
         // meta tags, title, etc.
@@ -28,7 +28,7 @@ class HtmlDocument extends React.Component<Object, void> {
 
     render() {
         const {
-            markup,
+            // markup,
             script,
             css,
             description,
@@ -76,9 +76,9 @@ class HtmlDocument extends React.Component<Object, void> {
                         content="https://askizzy.org.au/static/images/askizzy-metatag.jpg"
                     />
 
-                    {helmet.meta.toComponent()}
-                    {helmet.link.toComponent()}
-                    {helmet.title.toComponent()}
+                    {/* {helmet.meta.toComponent()} */}
+                    {/* {helmet.link.toComponent()}
+                    {helmet.title.toComponent()} */}
 
                     {css.map((href, idx) =>
                         <link
@@ -234,10 +234,10 @@ class HtmlDocument extends React.Component<Object, void> {
 
                 <body>
                     <div id="secretContainer" />
-                    <div
+                    {/* <div
                         id="root"
                         dangerouslySetInnerHTML={{__html: markup}}
-                    />
+                    /> */}
 
                     {script.map((src, idx) =>
                         <script
