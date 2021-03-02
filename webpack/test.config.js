@@ -8,6 +8,7 @@ const assetsPath = path.join(__dirname, "../public/static");
 module.exports = {
     devtool: "source-map",
     entry: "./test/support/environment-setup-entry",
+    bail: true,
     output: {
         path: assetsPath,
         filename: "testharness.js",

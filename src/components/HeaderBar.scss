@@ -85,7 +85,7 @@
     @each $banner-image in $banner-images {
 
         &.#{$banner-image} {
-            background: linear-gradient($black-banner-rgba, $black-banner-rgba), url("/static/images/banners/#{$banner-image}.png") center center;
+            background: linear-gradient($black-banner-rgba, $black-banner-rgba), url("/public/static/images/banners/#{$banner-image}.png") center center;
             background-size: cover;
 
             @media only screen and (max-width: 400px) {

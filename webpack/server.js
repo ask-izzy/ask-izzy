@@ -13,9 +13,8 @@ const WEBPACK_PORT = parseInt(process.env.PORT || "") + 1 || 3001;
 
 const serverOptions = {
     contentBase: "./public/",
-    quiet: true,
-    noInfo: true,
     inline: true,
+    public: `http://${WEBPACK_HOST}:${WEBPACK_PORT}`,
     publicPath: config.output.publicPath,
     ...{allowedHosts: process.env.ALLOWED_HOSTS && [process.env.ALLOWED_HOSTS]},
 };

@@ -45,14 +45,7 @@ class HtmlDocument extends React.Component<Object, void> {
         return (
             <html lang="en">
                 <head>
-                    {process.env.NODE_ENV !== "production" && (
-                        /**
-                         * Add standalone react devtools if not in production
-                         * Useful for debugging React components in an iOS
-                         * simulator or Safari
-                         */
-                        <script src="http://localhost:8097" />
-                    )}
+                    {this.renderRemoteReactDevtoolsScript()}
                     <meta
                         name="viewport"
                         content={viewport}
@@ -255,6 +248,32 @@ class HtmlDocument extends React.Component<Object, void> {
                 </body>
             </html>
         );
+    }
+
+    /*
+    * Add standalone react devtools if not in production
+    * Useful for debugging React components in an iOS
+    * simulator or Safari
+    */
+    renderRemoteReactDevtoolsScript() {
+        if (
+            typeof window === "undefined" ||
+            process.env.NODE_ENV === "production" ||
+            !process.env.USE_REMOTE_REACT_DEVTOOLS
+        ) {
+            return
+        }
+        const scriptBody = `
+            document.addEventListener('DOMContentLoaded', () => {
+                const scriptElm = document.createElement('script');
+                scriptElm.setAttribute('src', 
+                    '//' + location.hostname + ':8097'
+                );
+                document.body.appendChild( scriptElm );
+            })
+        `
+        return <script dangerouslySetInnerHTML={{__html: scriptBody}}/>
+
     }
 }
 
