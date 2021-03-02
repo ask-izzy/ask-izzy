@@ -1,7 +1,7 @@
 /* @flow */
-import webpack from "webpack";
+const webpack = require("webpack");
 
-module.exports = function(env: string): Object {
+module.exports = function(env: string) {
 
     // Do not set sensitive stuff here (eg ISS_URL);
     // we deploy the same assets to prod as we do staging

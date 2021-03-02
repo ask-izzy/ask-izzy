@@ -8,26 +8,27 @@
 
 import path from "path";
 import webpack from "webpack";
-import writeStats from "./utils/write-stats";
-import notifyStats from "./utils/notify-stats";
-import commons from "./utils/commons";
+import fs from "fs";
 import env from "./env";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import WriteStatsPlugin from "./utils/write-stats.js";
 import progress from "./utils/progress";
-import extractText from "./extract-text";
 
 const assetsPath = path.resolve(__dirname, "../public/static");
-
 const WEBPACK_HOST = process.env.HOST || "localhost";
 const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
 const webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
+const bannerImages = fs.readdirSync("./public/static/images/banners")
+    .map(file => file.replace(/\.\w*$/, ""));
+
 
 module.exports = {
+    mode: "development",
     devtool: "source-map",
+    devServer: {
+        contentBase: path.join(__dirname, "../public"),
+    },
     entry: {
-        hotload: [
-            `webpack-dev-server/client?${webpackUrl}`,
-            "webpack/hot/only-dev-server",
-        ],
         main: [
             "./src/client-entry.js",
             "./src/styles/bundle.scss",
@@ -47,17 +48,37 @@ module.exports = {
                 use: "file-loader",
             },
             {
-                test: /\.scss$/,
-                exclude: /node_modules/,
-                use: extractText.loader,
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    {
+                        loader: `postcss-loader`,
+                        options: {
+                            options: {},
+                        },
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            data: `$banner-images: ${bannerImages.join(" ")};`,
+                        },
+                    },
+                ],
             },
             {
-                test: /\.js$/,
-                // Exceptions to exclusions needed because UglifyJs can't handle
-                // ES6 so modules using ES6 features need to be run though babel
-                // first. When we get around to upgrading our minifier we should
-                // be able to remove these exclusions.
-                exclude: /node_modules\/(?!posthog-js|is-plain-obj)/,
+                test: /\.(js|jsx|ts|tsx)$/,
+                include: [
+                    path.resolve("fixtures"),
+                    path.resolve("src"),
+
+                    // Modules using ES6 features need to be run though babel
+                    // first. When we get around to upgrading our minifier we
+                    // should be able to remove these inclusions.
+                    path.resolve("node_modules/posthog-js"),
+                    path.resolve("node_modules/is-plain-obj"),
+                    path.resolve("node_modules/mdast-util-find-and-replace"),
+                ],
                 use: ["babel-loader"],
             },
         ],
@@ -75,20 +96,12 @@ module.exports = {
             "es6-promise": "es6-promise",
         }),
 
-        extractText.plugin,
-
-        commons,
-
-        // stats
-        function() {
-            this.plugin("done", notifyStats);
-        },
-
-        function() {
-            this.plugin("done", writeStats);
-        },
+        new MiniCssExtractPlugin(),
 
         progress(),
+
+        // Output bundles to JSON.
+        new WriteStatsPlugin(),
 
     ],
 };

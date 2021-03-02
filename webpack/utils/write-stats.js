@@ -7,9 +7,9 @@
 // These stats basically contains the path of the script files to
 // <script>-load in the browser.
 
-import fs from "fs";
-import path from "path";
-import _ from "underscore";
+const fs = require("fs");
+const path = require("path");
+const _ = require("underscore");
 
 const filepath = path.resolve(
     __dirname,
@@ -18,14 +18,12 @@ const filepath = path.resolve(
 
 // Write only a relevant subset of the stats and attach the public path to it
 
-module.exports = function writeStats(stats: webpackStats) {
-
-    const publicPath = this.options.output.publicPath;
-    const json = stats.toJson();
+module.exports = class WriteStatsPlugin {
 
     // get chunks by name and extensions
-    function getChunks(ext, chunkOrdering) {
-        let chunks = [];
+    getChunks(json: Object, ext: string, chunkOrdering: Array<string>) {
+
+        let chunks: Array<string> = [];
         let allChunkNames = Object.keys(json.assetsByChunkName);
         let unorderedChunks = _(allChunkNames).difference(chunkOrdering);
         let sortedChunkNames = chunkOrdering.concat(unorderedChunks);
@@ -41,23 +39,31 @@ module.exports = function writeStats(stats: webpackStats) {
                 }
 
                 chunks = chunks.concat(chunk
-                    .filter((name) => path.extname(name) === `.${ext}`)
-                    .map((name) => publicPath + name)
+                    .filter((name: string) => path.extname(name) === `.${ext}`)
+                    .map((name: string) => json.publicPath + name)
                 );
             }
         }
         return chunks;
     }
 
-    const script = getChunks("js", [
-        "runtime", "hotload", "vendor", "testharness", "main",
-    ]);
-    const css = getChunks("css", []);
-    const content = {
-        script: script,
-        css: css,
-    };
+    apply(compiler: Object) {
+        compiler.hooks.done.tap("WriteStatsPlugin", stats => {
 
-    fs.writeFileSync(filepath, JSON.stringify(content, undefined, 4));
+            const json = stats.toJson();
+
+            const script = this.getChunks(json, "js", [
+                "runtime", "vendor", "testharness", "main",
+            ]);
+            const css = this.getChunks(json, "css", []);
+            const content = {
+                script: script,
+                css: css,
+            };
+
+            fs.writeFileSync(filepath, JSON.stringify(content, undefined, 4));
+
+        });
+    }
 
 };

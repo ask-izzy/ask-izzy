@@ -25,10 +25,7 @@ fi
 
 echo "Build site with clientside rendering"
 webpack \
-    --display-error-details \
-    $([ -z "$DEBUG" ] && echo -e "--display\nerrors-only") \
     --progress \
-    --bail \
     --config ./webpack/prod.load.js
 
 export NODE_ENV=${NODE_ENV:=production}
@@ -38,8 +35,5 @@ script/run-node-script src/server/render-static
 
 echo "Build testing helper script"
 webpack \
-    --display-error-details \
-    $([ -z "$DEBUG" ] && echo -e "--display\nerrors-only") \
     --progress \
-    --bail \
     --config webpack/test.config.js
