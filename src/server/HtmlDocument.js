@@ -257,6 +257,7 @@ class HtmlDocument extends React.Component<Object, void> {
     */
     renderRemoteReactDevtoolsScript() {
         if (
+            typeof window === "undefined" ||
             process.env.NODE_ENV === "production" ||
             !process.env.USE_REMOTE_REACT_DEVTOOLS
         ) {
