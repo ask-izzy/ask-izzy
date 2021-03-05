@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from "react";
 import Accessibility from "./Accessibility";
 import iss from "../iss";
@@ -7,17 +9,9 @@ export default {
     title: "Service Components/Accessibility",
     component: Accessibility,
     argTypes: {},
-    parameters: {
-        backgrounds: {
-            default: "White",
-            values: [
-                { name: "White", value: "#fff" },
-            ],
-        },
-    },
 };
 
-const Template = (args) => <Accessibility {...args} />;
+const Template = (args: Object) => <Accessibility {...args} />;
 
 export const ServiceWithFullAccess = Template.bind({});
 ServiceWithFullAccess.args = {

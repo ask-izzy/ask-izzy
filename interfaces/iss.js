@@ -75,7 +75,7 @@ type issSite = {
 type issOpeningHours = {
     "close": hmsWithColonsTime,
     "day": dayOfWeek,
-    "note": string,
+    "note"?: string,
     "open": hmsWithColonsTime,
 };
 type phone = {

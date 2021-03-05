@@ -1,8 +1,11 @@
+/* @flow */
+declare var storyBookControlValues: {HeaderBar: {bannerName: Array<string>}};
+
 import React from "react";
 import HeaderBar from "./HeaderBar";
 
 export default {
-    title: "Page Components/HeaderBar",
+    title: "App Components/HeaderBar",
     component: HeaderBar,
     argTypes: {
         bannerName: {
@@ -20,19 +23,19 @@ export default {
     },
     parameters: {
         backgrounds: {
-            default: "White",
+            default: "white",
             values: [
-                { name: "White", value: "#fff" },
-                { name: "Grey", value: "#edece9" },
-                { name: "DarkGrey", value: "#363e43" },
-                { name: "LighterGrey", value: "#dddddd" },
-                { name: "Purple", value: "hsl(262, 80%, 38%)" },
+                { name: "white", value: "#fff" },
+                { name: "grey", value: "#edece9" },
+                { name: "dark grey", value: "#363e43" },
+                { name: "lighter grey", value: "#dddddd" },
+                { name: "purple", value: "hsl(262, 80%, 38%)" },
             ],
         },
     },
 };
 
-const Template = (args) => <HeaderBar {...args} />;
+const Template = (args: Object) => <HeaderBar {...args} />;
 
 export const StandardBackgroundColour = Template.bind({});
 StandardBackgroundColour.args = {
@@ -50,7 +53,7 @@ GreyBackgroundColour.args = {
 };
 GreyBackgroundColour.parameters = {
     backgrounds: {
-        default: "Grey",
+        default: "grey",
     },
 };
 

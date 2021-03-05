@@ -1,3 +1,5 @@
+/* @flow */
+
 import { create } from "@storybook/theming";
 
 import logo from "./askizzy-logo-purple-bg.png";

@@ -1,22 +1,16 @@
+/* @flow */
+
 import React from "react";
 import Address from "./Address";
-import Location from "../iss/Location";
+import Location from "../../fixtures/factories/Location";
 
 export default {
     title: "Service Components/Address",
     component: Address,
     argTypes: {},
-    parameters: {
-        backgrounds: {
-            default: "White",
-            values: [
-                { name: "White", value: "#fff" },
-            ],
-        },
-    },
 };
 
-const Template = (args) => <Address {...args} />;
+const Template = (args: Object) => <Address {...args} />;
 
 export const ComplexLocation = Template.bind({});
 ComplexLocation.args = {
@@ -31,7 +25,6 @@ ComplexLocation.args = {
         "street_suffix": "",
         "street_type": "St",
         "suburb": "RICHMOND",
-        "point": {},
     }),
 };
 

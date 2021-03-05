@@ -1,3 +1,5 @@
+/* @flow */
+
 import { addons } from "@storybook/addons";
 import AskIzzyTheme from "./AskIzzyTheme";
 

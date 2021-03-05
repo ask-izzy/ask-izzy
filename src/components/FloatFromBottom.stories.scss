@@ -1,0 +1,56 @@
+.FloatFromBottomStorybook {
+    $mark-colour: #000000;
+    $text-colour: #333333;
+
+    .ruler {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: space-between;
+        counter-reset: mark -1;
+
+        &::after {
+            position: absolute;
+            top: 2em;
+            right: 2em;
+            color: $text-colour;
+            content: "Height of container is " counter(mark) "vh";
+        }
+
+        .mark {
+            width: 7px;
+            height: 1vh;
+            border-top: 1px solid $mark-colour;
+            counter-increment: mark;
+            box-sizing: border-box;
+
+
+            &:nth-child(10n+6) {
+                width: 13px;
+            }
+
+            &:nth-child(10n+1) {
+                position: relative;
+                width: 20px;
+
+                &::before {
+                    font-size: 0.9em;
+                    content: counter(mark);
+                }
+
+                &::after {
+                    color: $text-colour;
+                    font-size: 0.8em;
+                    content: "vh";
+                }
+
+                &::before,
+                &::after {
+                    position: relative;
+                    top: -12px;
+                    left: 25px;
+                }
+            }
+        }
+    }
+}

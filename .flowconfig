@@ -22,6 +22,7 @@ suppress_type=$FlowIssue
 esproposal.class_static_fields=ignore
 esproposal.class_instance_fields=enable
 esproposal.decorators=ignore
+sharedmemory.hash_table_pow=21
 
 [version]
 0.133.0

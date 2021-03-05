@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from "react";
 import Accordion from "./Accordion";
 
@@ -5,17 +7,9 @@ export default {
     title: "Basic UI Components/Accordion",
     component: Accordion,
     argTypes: {},
-    parameters: {
-        backgrounds: {
-            default: "White",
-            values: [
-                { name: "White", value: "#fff" },
-            ],
-        },
-    },
 };
 
-const Template = (args) => <Accordion {...args} />;
+const Template = (args: Object) => <Accordion {...args} />;
 
 export const BasicText = Template.bind({});
 BasicText.args = {

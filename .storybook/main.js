@@ -1,3 +1,5 @@
+/* $FlowIgnore */
+
 const fs = require("fs");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");

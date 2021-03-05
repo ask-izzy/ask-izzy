@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "./script/recreate-dev-env-file && webpack serve --config webpack/dev.config.js --host 0.0.0.0 --hot --mode development",
     "prod": "webpack serve --config webpack/prod.config.js --host 0.0.0.0 --mode production",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 -s ./public/static",
     "build-storybook": "build-storybook"
   },
   "dependencies": {

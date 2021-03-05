@@ -33,7 +33,7 @@
         "id-length": [2, {
             "min": 3,
             "properties": "never",
-            "exceptions": ["x", "y", "z", "_", "_s", "id", "fs", "q", "Id", "$"]
+            "exceptions": ["x", "y", "z", "_", "_s", "id", "fs", "q", "Id", "$", "i"]
         }],
         "indent": [2, 4],
         "jsx-quotes": 2,

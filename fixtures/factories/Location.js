@@ -1,8 +1,13 @@
 /* @flow */
 
 import { Sequence, Merge } from "./Value";
+import LocationObject from "../../src/iss/Location";
 
 const streetNo = Sequence();
+
+export default function LocationFactory(opts: ?Object): LocationObject {
+    return new LocationObject(Location(opts));
+}
 
 export function Location(props: ?Object): issLocation {
     return Merge({
