@@ -8,8 +8,8 @@
   "scripts": {
     "dev": "./script/recreate-dev-env-file && webpack serve --config webpack/dev.config.js --host 0.0.0.0 --hot --mode development",
     "prod": "webpack serve --config webpack/prod.config.js --host 0.0.0.0 --mode production",
-    "storybook": "start-storybook -p 6006 -s ./public/static",
-    "build-storybook": "build-storybook"
+    "storybook": "start-storybook -p 6006 -s ./public # static serve is used exclusively for fetching env.js",
+    "build-storybook": "build-storybook -o public/components-catalog"
   },
   "dependencies": {
     "@babel/core": "^7.13.0",
@@ -22,6 +22,10 @@
     "@babel/preset-flow": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
     "@babel/register": "^7.13.0",
+    "@storybook/addon-actions": "^6.1.20",
+    "@storybook/addon-essentials": "^6.1.20",
+    "@storybook/addon-links": "^6.1.20",
+    "@storybook/react": "^6.1.20",
     "ansi-escapes": "4.3.1",
     "apollo-cache-inmemory": "1.6.6",
     "apollo-client": "2.6.10",
@@ -96,11 +100,5 @@
     "webpack-dev-server": "3.11.2",
     "whatwg-fetch": "2.0.4",
     "yadda": "1.5.0"
-  },
-  "devDependencies": {
-    "@storybook/addon-actions": "^6.1.20",
-    "@storybook/addon-essentials": "^6.1.20",
-    "@storybook/addon-links": "^6.1.20",
-    "@storybook/react": "^6.1.20"
   }
 }
