@@ -49,7 +49,7 @@ export default class FormFindInformation extends React.Component<{}, State> {
             })
             API.post(`${NOTIFICATIONS_API_URL}message/send/`, {
                 action: "email",
-                environment: "askizzy-test",
+                environment: "askizzy",
                 provider: "smtp",
                 notifications: {
                     "template": 1,
