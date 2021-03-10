@@ -11,6 +11,8 @@ import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
 
+import Eligibility from "./Eligibility";
+import ServiceProvisions from "./service/ServiceProvisions"
 import LinkListItem from "./LinkListItem";
 import Accessibility from "./Accessibility";
 import OpeningTimes from "./OpeningTimes";
@@ -22,39 +24,23 @@ import LgbtiqIcon from "./LgbtiqIcon";
 import { titleize } from "underscore.string";
 
 class ResultListItem extends React.Component<{
-    object: iss.Service,
-    nServiceProvisions: number,
+    service: iss.Service,
 }, void> {
     static displayName = "ResultListItem";
 
     static propTypes = {
-        object: PropTypes.instanceOf(iss.Service).isRequired,
-        nServiceProvisions: PropTypes.number,
-    };
-
-    static defaultProps = {
-        nServiceProvisions: 4,
+        service: PropTypes.instanceOf(iss.Service).isRequired,
     };
 
     static sampleProps = {default: {
-        object: new iss.Service(fixtures.ixa),
+        service: new iss.Service(fixtures.ixa),
     }};
-
-    /**
-     * nMoreServiceProvisions:
-     * The number of related services minus the 4 relatedServices.
-     */
-    get nMoreServiceProvisions(): number {
-        return Math.max(0,
-            this.props.object.serviceProvisions.length -
-                            this.props.nServiceProvisions);
-    }
 
     recordViewDetail(): void {
         sendEvent({
             event: "listing",
-            listingName: this.props.object.name,
-            crisis: this.props.object.crisis,
+            listingName: this.props.service.name,
+            crisis: this.props.service.crisis,
         });
     }
 
@@ -78,72 +64,64 @@ class ResultListItem extends React.Component<{
 
     render() {
         const {
-            object,
+            service,
         } = this.props;
 
         return (
             <LinkListItem
                 className="plain-text ResultListItem"
-                to={`/service/${object.slug}`}
+                to={`/service/${service.slug}`}
                 rightIcon={<icons.Chevron />}
                 onClick={this.recordViewDetail.bind(this)}
             >
 
-                {this.renderLocation(object.Location())}
+                {this.renderLocation(service.Location())}
 
                 <h2 className="name">
-                    {object.name}
+                    {service.name}
                 </h2>
                 <div className="site_name">
-                    {object.site.name}
+                    {service.site.name}
                     <Ndis
                         className="ndis"
                         compact={true}
-                        object={object}
+                        object={service}
                     />
                 </div>
 
                 <OpeningTimes
                     className="opening_hours"
-                    object={object.open}
+                    object={service.open}
                 />
-                <Accessibility object={object} />
+                <ServiceProvisions
+                    service={service}
+                />
+                <div className="description">
+                    {service.shortDescription.map(
+                        (sentence, i) =>
+                            <p key={i}>{sentence}</p>
+                    )}
+                </div>
+                <Eligibility {...service} />
+                <Accessibility object={service} />
                 <TransportTime
                     compact={true}
-                    location={object.Location()}
+                    location={service.Location()}
                 />
 
-                <IndigenousServiceIcon object={object} />
-                <LgbtiqIcon object={object} />
-                {this.props.nServiceProvisions > 0 && (
-                    <div>
-                        <ul className="related">
-                            {object.serviceProvisions
-                                .slice(0, this.props.nServiceProvisions)
-                                .map((service, index) =>
-                                    <li className="provision"
-                                        key={index}
-                                    >
-                                        {service}
-                                    </li>
-                                )
-                            }
-                        </ul>
+                <IndigenousServiceIcon object={service} />
+                <LgbtiqIcon object={service} />
 
-                        {this.nMoreServiceProvisions > 0 && (
-                            <div>
-                                {this.nMoreServiceProvisions} more…
-                            </div>
-                        )}
-                    </div>
-                )}
-
-                <DebugServiceRecord object={object} />
-                {object._explanation &&
+                <DebugServiceRecord object={service} />
+                {service._explanation &&
                     <DebugContainer message="Query score">
-                        <DebugQueryScore expl={object._explanation} />
+                        <DebugQueryScore expl={service._explanation} />
                     </DebugContainer>
                 }
+
+                <span className="learnMore">
+                    Learn More
+                </span>
             </LinkListItem>
 
         );

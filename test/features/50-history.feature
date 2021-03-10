@@ -47,7 +47,7 @@ Feature: History navigation
         And I should be at /housing/Melbourne-VIC/
         And I should see the results
         ------------------------------------------------------------------------------------------
-        Service Name (name)          | Site Name (site_name) | Service provisions (related)
+        Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)
         ==========================================================================================
         Housing Service              | My Housing Service    | (nada)
         Transitional Housing Service | My Housing Service    | Transitional accommodation

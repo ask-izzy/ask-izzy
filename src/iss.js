@@ -441,6 +441,8 @@ export class Service {
      * It maintains the text verbatim and doesn't do any cleaning up like
      * removing extra whitespace or add missing full stops. But if there's
      * call for it, it may do some cleaning in future.
+     *
+     * @returns The description of the service as an array of sentences.
      */
     descriptionSentences(): Array<string> {
         return this.description.match(/.+?(?:\.\s+|$)/g) || []
@@ -459,14 +461,14 @@ export class Service {
             description.reduce((memo, elem) => memo + elem.length, 0);
 
         while (
-            sentences.length && 
+            sentences.length &&
             (descriptionLength() + sentences[0].length) < 250
         ) {
             description.push(sentences.shift());
         }
 
         if (sentences.length > 0) {
-            description[description.length - 1] = 
+            description[description.length - 1] =
                 description[description.length - 1].replace(/\.?\s*$/, "…")
         }
 

@@ -19,7 +19,7 @@ Feature: Category page
         Then I should see 3 search results for "women aged 26 to 64" in "Melbourne, VIC"
         And I should see the results
         ------------------------------------------------------------------------------------------
-        Service Name (name)          | Site Name (site_name) | Service provisions (related)
+        Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)
         ==========================================================================================
         Housing Service              | My Housing Service    | (nada)
         Transitional Housing Service | My Housing Service    | Transitional accommodation
@@ -39,7 +39,7 @@ Feature: Category page
 
         Then I should see the results
         ------------------------------
-        Service Provisions (provision)
+        Service Provisions (provision.aboveFold)
         ==============================
         Lunch
         Advice
