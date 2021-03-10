@@ -2,7 +2,7 @@
 
 import { create } from "@storybook/theming";
 
-import logo from "./askizzy-logo-purple-bg.png";
+import logo from "../public/static/images/ask-izzy-logo-single-line-purple.svg";
 
 export default create({
     base: "light",
