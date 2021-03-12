@@ -41,7 +41,7 @@ import OpeningTimes from "./components/OpeningTimes";
 import Phone from "./components/Phone";
 import ResultListItem from "./components/ResultListItem";
 import ResultsList from "./components/ResultsList";
-import ResultsMap from "./components/ResultsMap";
+import SitesMap from "./components/SitesMap";
 import ScreenReader from "./components/ScreenReader";
 import ServiceListIntro from "./components/ServiceListIntro";
 import ServicePane from "./components/ServicePane";
@@ -93,7 +93,7 @@ export default {
     Phone: Phone,
     ResultListItem: ResultListItem,
     ResultsList: ResultsList,
-    ResultsMap: ResultsMap,
+    SitesMap: SitesMap,
     ScreenReader: ScreenReader,
     ServiceListIntro: ServiceListIntro,
     ServicePane: ServicePane,

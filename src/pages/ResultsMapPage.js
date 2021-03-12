@@ -8,7 +8,7 @@ import DebugPersonalisation from "../components/DebugPersonalisation";
 import DebugSearch from "../components/DebugSearch";
 import ResultsList from "../components/ResultsList";
 import ResultsPage from "./ResultsPage";
-import ResultsMap from "../components/ResultsMap";
+import SitesMap from "../components/SitesMap";
 import NotFoundStaticPage from "./NotFoundStaticPage";
 import icons from "../icons";
 
@@ -152,7 +152,7 @@ class ResultsMapPage extends ResultsPage<Props, State> {
                     className="map"
                     style={{flexBasis: this.calculateMapHeight() || "auto"}}
                 >
-                    <ResultsMap
+                    <SitesMap
                         onSiteSelect={
                             site => this.setState({selectedSite: site})
                         }

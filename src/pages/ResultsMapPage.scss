@@ -16,6 +16,10 @@
         // Must have height assigned else it will fully collapse.
         height: 0;
         transition: flex-basis 0.3s;
+
+        .SitesMap {
+            height: 100%;
+        }
     }
 
     .List {

@@ -27,7 +27,7 @@ type SiteMarker = {
     selected: boolean
 }
 
-export default class ResultsMap extends React.Component<Props, State> {
+export default class SitesMap extends React.Component<Props, State> {
 
     #mapElmRef = null;
 
@@ -207,7 +207,7 @@ export default class ResultsMap extends React.Component<Props, State> {
     render() {
         const WrappedMap = this.WrappedMap
         return (
-            <div className="ResultsMap">
+            <div className="SitesMap">
                 {this.state.mapsApi && // Only render map after API has loaded
                     <WrappedMap
                         loadingElement={<div style={{ height: `100%` }} />}

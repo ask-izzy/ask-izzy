@@ -3,15 +3,15 @@
 import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 
-import ResultsMap from "./ResultsMap";
+import SitesMap from "./SitesMap";
 import fixtures from "../../fixtures/services";
 import ServiceFactory from "../../fixtures/factories/Service";
 import { injectEnvVars } from "../storybook/loaders";
 import { addRouter, addGoogleMapsScript } from "../storybook/decorators";
 
 export default {
-    title: "App Components/ResultsMap",
-    component: ResultsMap,
+    title: "App Components/SitesMap",
+    component: SitesMap,
     loaders: [injectEnvVars],
     decorators: [addRouter, addGoogleMapsScript],
 };
@@ -20,7 +20,7 @@ const Template = (args: Object) => {
     const recordOnSiteSelect = action("onSiteSelect")
     const [selectedSite, setSelectedSite] = useState(null)
     return (
-        <ResultsMap
+        <SitesMap
             {...args}
             selectedSite={selectedSite}
             onSiteSelect={(site) => {
