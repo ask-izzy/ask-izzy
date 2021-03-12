@@ -44,7 +44,7 @@ class HomePage extends React.Component<{}, void> {
     }
 
     render() {
-        const logo = "/static/images/askizzy-logo.png";
+        const logo = "/static/images/ask-izzy-logo-single-line-yellow.svg";
         const redirectUri = "http://www.bom.gov.au/";
         const tooltip = "To leave this website quickly, click the 'Quick " +
         "Exit' button. If you are in immediate danger call 000 ( " +

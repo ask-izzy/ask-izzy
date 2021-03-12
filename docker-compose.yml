@@ -18,3 +18,4 @@ services:
             - '8001:8001'
         volumes:
             - .:/app
+            - ./public/static:/static # Useful for testing prod setup

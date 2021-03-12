@@ -65,6 +65,6 @@ fi
 checkFlowDefs
 
 check "jsonlint package.json > /dev/null"
-check "eslint src/ test/ fixtures/ webpack/ config/"
+check "eslint src/ test/ fixtures/ webpack/ config/ .storybook/"
 check "sass-lint -v"
 check "flow"

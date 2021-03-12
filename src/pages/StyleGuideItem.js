@@ -4,6 +4,7 @@ import * as React from "react";
 import PropTypes from "proptypes";
 import components from "../components";
 import _s from "underscore.string";
+import routerContext from "../contexts/router-context";
 
 type Props = {
     params: Object
@@ -14,12 +15,14 @@ export default class StyleGuideItem extends React.Component<Props, void> {
         params: PropTypes.object,
     };
 
+    static contextType = routerContext;
+
     constructor(props: Object) {
         super(props);
     }
 
     getComponentName(): string {
-        return this.props.params.componentName;
+        return this.context.router.match.params.componentName;
     }
 
     getComponent(): React.ComponentType<any> {
