@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from "react";
+import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 
 import ResultsMap from "./ResultsMap";
@@ -9,36 +9,38 @@ import ServiceFactory from "../../fixtures/factories/Service";
 import { injectEnvVars } from "../storybook/loaders";
 import { addRouter, addGoogleMapsScript } from "../storybook/decorators";
 
-
 export default {
     title: "App Components/ResultsMap",
     component: ResultsMap,
-    args: {
-        onServicesChange: action("servicesChanged"),
-    },
     loaders: [injectEnvVars],
     decorators: [addRouter, addGoogleMapsScript],
 };
 
-const Template = (args: Object) => (
-    <ResultsMap
-        {...args}
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `400px` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-    />
-)
+const Template = (args: Object) => {
+    const recordOnSiteSelect = action("onSiteSelect")
+    const [selectedSite, setSelectedSite] = useState(null)
+    return (
+        <ResultsMap
+            {...args}
+            selectedSite={selectedSite}
+            onSiteSelect={(site) => {
+                setSelectedSite(site)
+                recordOnSiteSelect(site)
+            }}
+        />
+    )
+}
 
-export const SingleService = Template.bind({});
-SingleService.args = {
-    objects: [
+export const OneSite = Template.bind({});
+OneSite.args = {
+    ...calculateSiteProps([
         ServiceFactory(fixtures.ixa),
-    ],
+    ]),
 };
 
-export const ThreeServices = Template.bind({});
-ThreeServices.args = {
-    objects: [
+export const ThreeSites = Template.bind({});
+ThreeSites.args = {
+    ...calculateSiteProps([
         ServiceFactory(fixtures.ixa),
         ServiceFactory(fixtures.housingService),
         ServiceFactory(ServiceFactory({
@@ -50,21 +52,26 @@ ThreeServices.args = {
                 },
             },
         })),
-    ],
+    ]),
 };
 
-export const MultipleServicesWithTheSameSite = Template.bind({});
-MultipleServicesWithTheSameSite.args = {
-    objects: [
-        ServiceFactory(fixtures.housingService),
-        ServiceFactory(fixtures.housingServiceSibling),
-    ],
+export const NoSites = Template.bind({});
+NoSites.args = {
+    ...calculateSiteProps([]),
 };
 
-export const ServicesWithConfidentialLocationIgnored = Template.bind({});
-ServicesWithConfidentialLocationIgnored.args = {
-    objects: [
-        ServiceFactory(fixtures.domesticviolence),
-        ServiceFactory(fixtures.ixa),
-    ],
-};
+function calculateSiteProps(services: Array<issService>) {
+    const sites = []
+    const siteLocations = {}
+    for (const {site, location} of services) {
+        const id = site.id.toString()
+        if (!siteLocations[id]) {
+            sites.push(site)
+            siteLocations[id] = location
+        }
+    }
+    return {
+        sites,
+        siteLocations,
+    }
+}

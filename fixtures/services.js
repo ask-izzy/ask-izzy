@@ -119,6 +119,10 @@ const objects: Object = {
         },
         location: {
             suburb: "Richmond",
+            point: {
+                lat: -37.8228,
+                lon: 144.998,
+            },
         },
     },
     youthSupportNet: {

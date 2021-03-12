@@ -1,35 +1,41 @@
 /* @flow */
 
 import * as React from "react";
-import _ from "underscore";
 import { GoogleMap, Marker, withGoogleMap } from "react-google-maps";
 
-import type {Service, Site} from "../iss";
+import type {Site} from "../iss";
 import Maps from "../maps";
 import type {MapsApi} from "../maps";
 import storage from "../storage";
 import routerContext from "../contexts/router-context";
 
 type Props = {
-    services: Array<Service>,
     sites: Array<Site>,
     siteLocations: Object,
-    onServicesChange?: Function,
-    onSiteSelect?: Function
+    onSiteSelect?: Function,
+    selectedSite?: ?Site
 }
 
 type State = {
     coords?: ?{latitude: number, longitude: number},
-    maps?: MapsApi,
+    mapsApi: ?MapsApi,
 }
 
-class ResultsMap extends React.Component<Props, State> {
+type SiteMarker = {
+    site: Site,
+    point: issPoint,
+    selected: boolean
+}
+
+export default class ResultsMap extends React.Component<Props, State> {
 
     #mapElmRef = null;
 
     constructor(props: Object) {
         super(props);
-        this.state = {};
+        this.state = {
+            mapsApi: null,
+        };
     }
 
     static contextType = routerContext;
@@ -37,32 +43,34 @@ class ResultsMap extends React.Component<Props, State> {
     componentDidMount(): void {
         this.setState({coords: storage.getCoordinates()});
 
-        // TODO: Use the react-google-maps ref-callback
-        // approach, so that
-        /* request the Google Maps API */
-        Maps().then((maps) => {
-            this.setState({maps: maps});
-            // disable infowindows
-            // $FlowIgnore blithely monkey-patch the global gmaps api :(
-            maps.api.InfoWindow.prototype.set = function() {};
-        });
+        Maps().then(
+            mapsApi => this.setState({mapsApi})
+        );
     }
 
-    componentDidUpdate(prevProps: Object, prevState: Object) {
-        if ((this.state.maps != prevState.maps) ||
-            (this.props.sites != prevProps.sites)) {
-            if (this.props.sites.length) {
-                // N.B. getMap() returns a different promise each time, so
-                // there's no guarantee that the most recently set bounds
-                // will be the ones applied.
-                // As a result we need to check whether any services have
-                // loaded before setting bounds (so that only one attempt
-                // is made to set the bounds) - preventing a race condition.
-                // react-google-maps has a callback-based interface now,
-                // which avoids this issue.
-                this.showWholeMap();
-            }
+    async componentDidUpdate(prevProps: Object, prevState: Object) {
+        if (
+            this.state.mapsApi &&
+            !this.sitesListMatch(this.props.sites, prevProps.sites)
+        ) {
+            this.setMapView(this.markersShownOnLoad)
         }
+    }
+
+    /**
+     * Given two arrays of sites, check if both contain the same sites in the
+     * same order
+     * @param sitesA - A list of sites to be compared
+     * @param sitesB - Another list of sites to be compared
+     *
+     * @returns True if they match, false if not
+     */
+    sitesListMatch(sitesA: Array<Site>, sitesB: Array<Site>) {
+        if (sitesA.length !== sitesB.length) {
+            return false
+        }
+
+        return sitesA.every((site, i) => site.id === sitesB[i].id)
     }
 
     /**
@@ -85,41 +93,23 @@ class ResultsMap extends React.Component<Props, State> {
     }
 
     /**
-     * Adjust the bounds to show the whole map
+     * Set the view position and zoom level of the map so the given markers are
+     * shown.
+     * @param markers - A list of markers to included in the map view
      *
      * @returns {void}
      */
-    showWholeMap(): void {
-        /* update the map bounds */
-        if (!this.state.maps) {
+    setMapView(markers: Array<SiteMarker>): void {
+        if (!this.state.mapsApi || markers.length === 0) {
             // We'll call this method after the api is ready.
             return
         }
-        const maps = this.state.maps.api;
-        let bounds = new maps.LatLngBounds();
+        const maps = this.state.mapsApi.api;
+        const bounds = new maps.LatLngBounds();
 
-        // Get the location of every service which has a location and is not a
-        // crisis line.
-        let points = _.compact(this.props.services
-            .map(
-                (service) => service.location && !service.crisis ?
-                    service.location.point : null
-            )
-        )
+        const points = markers.map(marker => marker.point)
 
-        // Select the top result from the list of points to center map around
-        const centerPoint = points[0];
-
-        // Order points by distance from centerPoint and then remove the
-        // furthest 50%
-        points = points.sort((aPoint: issPoint, bPoint: issPoint) => {
-            let aLatDiff = Math.abs(centerPoint.lat - aPoint.lat);
-            let aLonDiff = Math.abs(centerPoint.lon - aPoint.lon);
-            let bLatDiff = Math.abs(centerPoint.lat - bPoint.lat);
-            let bLonDiff = Math.abs(centerPoint.lon - bPoint.lon);
-
-            return (aLatDiff - bLatDiff) + (aLonDiff - bLonDiff);
-        }).splice(0, Math.ceil(points.length / 2));
+        const centerPoint = points[0]
 
         // Add two points to create a maximum possible level of zoom
         let maxZoom = 0.002; // about 0.5km
@@ -136,15 +126,11 @@ class ResultsMap extends React.Component<Props, State> {
         // Loop though points and add to bounding box used for setting initial
         // map view. For each point add another point that's exactly opposite
         // when compared to the center point. This ensures that the center
-        // point remains in the center. Stop adding points if bounding box gets
-        // becomes larger than 100km (approximated by 1 lat/lon degree).
-        for (let point of points) {
-            let latDiff = centerPoint.lat - point.lat;
-            let lonDiff = centerPoint.lon - point.lon;
+        // point remains in the center.
+        for (const point of points) {
+            const latDiff = centerPoint.lat - point.lat;
+            const lonDiff = centerPoint.lon - point.lon;
 
-            if (Math.abs(latDiff) > 0.5 || Math.abs(lonDiff) > 0.5) {
-                break
-            }
             bounds.extend(new maps.LatLng(point.lat, point.lon));
             bounds.extend(new maps.LatLng(
                 centerPoint.lat + latDiff,
@@ -157,76 +143,123 @@ class ResultsMap extends React.Component<Props, State> {
         });
     }
 
-    onMapClick(): void {
-        this.props.onSiteSelect &&
-            this.props.onSiteSelect(null)
+    get markersShownOnLoad(): Array<SiteMarker> {
+        if (this.markers.length === 0) {
+            return []
+        }
+        // Select the first site to center map around
+        const centerPoint = this.markers[0].point;
+
+        return this.markers
+            // Order points by increasing distance from the center point marker
+            .sort((aMarker, bMarker) => {
+                const aPoint = aMarker.point
+                const bPoint = bMarker.point
+                const aLatDiff = Math.abs(centerPoint.lat - aPoint.lat);
+                const aLonDiff = Math.abs(centerPoint.lon - aPoint.lon);
+                const bLatDiff = Math.abs(centerPoint.lat - bPoint.lat);
+                const bLonDiff = Math.abs(centerPoint.lon - bPoint.lon);
+
+                return (aLatDiff - bLatDiff) + (aLonDiff - bLonDiff);
+            })
+            // Limit to the 50% of markers closest to the center point marker
+            .slice(0, Math.ceil(this.markers.length / 2))
+            // Don't include markers further than 100km (approximated here as 1
+            // lat/lon degree) from the center point marker.
+            .filter(marker => {
+                const latDiff = centerPoint.lat - marker.point.lat;
+                const lonDiff = centerPoint.lon - marker.point.lon;
+                return Math.abs(latDiff) <= 0.5 && Math.abs(lonDiff) <= 0.5
+            })
     }
 
-    onMarkerClick(site: Site): void {
-        this.props.onSiteSelect &&
-            this.props.onSiteSelect(site)
+    get markers(): Array<SiteMarker> {
+        return this.props.sites
+            .filter(site => {
+                if (this.props.siteLocations[site.id]?.point) {
+                    return true
+                }
+                console.warn(
+                    "SitesMap given a site without an associated location " +
+                        "or lat/lon in the siteLocations prop:",
+                    site
+                )
+                return false
+            })
+            .map(site => ({
+                site,
+                point: this.props.siteLocations[site.id].point,
+                selected: site.id === this.props.selectedSite?.id,
+            }))
+    }
+
+    onGoogleMapMount(mapElm: Object) {
+        if (!mapElm) {
+            return null
+        }
+        const initalMount = !this.#mapElmRef
+        this.#mapElmRef = mapElm;
+        if (initalMount) {
+            this.setMapView(this.markersShownOnLoad);
+        }
     }
 
     render() {
+        const WrappedMap = this.WrappedMap
         return (
             <div className="ResultsMap">
-                { /* we can't create the map component until the API promise
-                     * resolves */
-                    this.state.maps && this.renderMap()
+                {this.state.mapsApi && // Only render map after API has loaded
+                    <WrappedMap
+                        loadingElement={<div style={{ height: `100%` }} />}
+                        containerElement={<div style={{ height: `100%` }} />}
+                        mapElement={<div style={{ height: "100%" }} />}
+                    />
                 }
             </div>
         );
     }
 
-    renderMap = () => (
+    WrappedMap = withGoogleMap(() => (
         <GoogleMap
-            ref={elm => {
-                this.#mapElmRef = elm
-            }}
+            ref={this.onGoogleMapMount.bind(this)}
             defaultCenter={{
                 lat: -34.397,
                 lng: 150.644,
             }}
             options={{disableDefaultUI: true, zoomControl: true}}
             defaultZoom={12}
-            onClick={this.onMapClick.bind(this)}
+            onClick={() => this.props.onSiteSelect?.(null)}
         >
-            {
-                this.state.coords && (
-                    <Marker
-                        title="You are here"
-                        icon={{
-                            url: "/static/images/you-are-here.png",
-                            scaledSize: {width: 32, height: 32},
-                        }}
-                        position={{
-                            lat: this.state.coords.latitude,
-                            lng: this.state.coords.longitude,
-                        }}
-                    />
-                )
+            {this.state.coords &&
+                <Marker
+                    title="You are here"
+                    icon={{
+                        url: "/static/images/you-are-here.png",
+                        scaledSize: {width: 32, height: 32},
+                    }}
+                    position={{
+                        lat: this.state.coords.latitude,
+                        lng: this.state.coords.longitude,
+                    }}
+                />
             }
-            {
-                this.props.sites.map(site => {
-                    /* the site must have a public location */
-                    const point = this.props.siteLocations[site.id].point
-
-
-                    return point && (
-                        <Marker
-                            key={site.id.toString()}
-                            title={site.name}
-                            position={{
-                                lat: point.lat,
-                                lng: point.lon,
-                            }}
-                            onClick={this.onMarkerClick.bind(this, site)}
-                        />
-                    )
-                })
-            }
+            {this.markers.map(marker =>
+                <Marker
+                    key={marker.site.id.toString()}
+                    title={marker.site.name}
+                    position={{
+                        lat: marker.point.lat,
+                        lng: marker.point.lon,
+                    }}
+                    icon={{
+                        url: marker.selected ?
+                            "/static/images/map-marker-with-dot.png"
+                            : "/static/images/map-marker.png",
+                        scaledSize: {width: 27, height: 43},
+                    }}
+                    onClick={() => this.props.onSiteSelect?.(marker.site)}
+                />
+            )}
         </GoogleMap>
-    )
+    ))
 }
-
-export default withGoogleMap(ResultsMap);
