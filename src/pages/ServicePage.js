@@ -37,7 +37,15 @@ class ServicePage extends React.Component<{
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object): void {
-        if (this.id !== this.extractId(this.context.router.match.params.slug)) {
+        // When a user hits a related service, make sure
+        // we reload the service page details with the new
+        // service details.
+        let currentSlug = this.context.router.match.params.slug;
+        let prevSlug = prevProps.computedMatch.params.slug;
+        if (
+            this.id !== this.extractId(currentSlug) ||
+            this.extractId(prevSlug) !== this.extractId(currentSlug)
+        ) {
             this.loadService()
         }
     }
