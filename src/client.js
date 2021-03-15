@@ -9,7 +9,7 @@ import routes from "./routes";
 import sendEvent from "./google-tag-manager";
 import searchTest from "./search-test";
 import categories from "./constants/categories";
-import HistoryListener from "./components/effects/HistoryListener"
+import HistoryListener from "./effects/HistoryListener"
 
 window.searchTest = searchTest;
 window.categories = categories;

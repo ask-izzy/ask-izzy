@@ -1,9 +1,9 @@
 /* @flow */
-import storage from "../../storage";
 import { withRouter } from "react-router";
-// $FlowIgnore flowjs needs to be updated to include useEffect
 import { useEffect } from "react";
-import sendEvent from "../../google-tag-manager";
+
+import storage from "../storage";
+import sendEvent from "../google-tag-manager";
 
 function historyListener(history) {
     // Override the goBack function for the history object to navigate to

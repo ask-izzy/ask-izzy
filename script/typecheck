@@ -43,6 +43,26 @@ echo "Good"
 
 export -f checkFlowDefs
 
+function storybookCheck {
+    failed=false
+    for file in $(find src/components -iname '*.js'); do
+        if [[ "$file" == *.stories.js ]]; then
+            continue
+        fi
+        parentDir=$(dirname "$file")
+        name=$(basename "$file" ".js")
+        if [ ! -f "$parentDir/$name.stories.js" ]; then
+            failed=true
+            echo 1>&2 "Component does not have storybook stories: $parentDir/$name.js"
+        fi
+    done
+    if [[ "$failed" == "true" ]]; then
+        exit 1
+    fi
+}
+
+export -f storybookCheck
+
 if which parallel > /dev/null ; then
     PVERSION=$( parallel --version | head -n 1 | cut -d' ' -f 3 )
 
@@ -50,6 +70,7 @@ if which parallel > /dev/null ; then
     if [ "$PVERSION" -gt "20160000" ] ; then
         export SHELL=/bin/bash
         parallel --halt-on-error now,fail,1 ::: \
+            storybookCheck \
             checkFlowDefs \
             'check "jsonlint package.json > /dev/null"' \
             'check "eslint src/ test/ fixtures/ webpack/ config/"' \
@@ -62,9 +83,11 @@ fi
 
 (./node_modules/.bin/flow start &>/dev/null) & # Pre-start flow server
 
+storybookCheck
 checkFlowDefs
 
 check "jsonlint package.json > /dev/null"
 check "eslint src/ test/ fixtures/ webpack/ config/ .storybook/"
 check "sass-lint -v"
 check "flow"
+
