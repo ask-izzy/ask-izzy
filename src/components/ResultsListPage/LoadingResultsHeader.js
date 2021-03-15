@@ -33,19 +33,8 @@ const LogoHeader = ({children}: Object) =>
 const trailingSlash = (path: string): string =>
     `${path}${path.endsWith("/") ? "" : "/"}`;
 
-const PersonalisationLink = ({pathname}: Object) => (
-    <div className="change-personalisation-container">
-        <Link
-            className="change-personalisation"
-            to={`${trailingSlash(pathname)}personalise/summary`}
-            onClick={sendEvent.bind(null, {event: "changeAnswers"})}
-        >
-            Edit Answers
-        </Link>
-    </div>
-);
-
 type Props = {
+    disableEditAnswers?: boolean,
     personalisationComponents: Array<Object>,
     error: string,
     statusCode: number,
@@ -70,6 +59,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             meta,
         } = this.props;
         let bannerName = this.context.router.match?.params?.page || "homepage";
+        const PersonalisationLink = this.PersonalisationLink
 
         if (loading) {
             return (
@@ -168,6 +158,23 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             </React.Fragment>
         );
     }
+
+    PersonalisationLink = ({pathname}: Object) => {
+        if (this.props.disableEditAnswers) {
+            return <></>
+        }
+        return (
+            <div className="change-personalisation-container">
+                <Link
+                    className="change-personalisation"
+                    to={`${trailingSlash(pathname)}personalise/summary`}
+                    onClick={sendEvent.bind(null, {event: "changeAnswers"})}
+                >
+                    Edit Answers
+                </Link>
+            </div>
+        )
+    };
 }
 
 export default LoadingResultsHeader;

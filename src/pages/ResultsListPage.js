@@ -43,8 +43,12 @@ class ResultsListPage extends ResultsPage<> {
         <div className="ResultsListPage">
             <AppBar
                 title={this.title}
-                backMessage={"Categories"}
-                onBackTouchTap={() => this.context.router.history.push("/")}
+                backMessage={this.isDisabilityAdvocacy ? "" : "Categories"}
+                onBackTouchTap={() => this.context.router.history.push(
+                    this.isDisabilityAdvocacy ?
+                        "/disability-advocacy-finder"
+                        : "/"
+                )}
             />
             <DebugContainer message="Debug personalisation">
                 <DebugPersonalisation
@@ -68,6 +72,7 @@ class ResultsListPage extends ResultsPage<> {
                     : ""
                 }
                 statusCode={this.state.searchError?.status || 200}
+                disableEditAnswers={this.isDisabilityAdvocacy}
             />
             <div className="List results">
                 {
@@ -109,6 +114,10 @@ class ResultsListPage extends ResultsPage<> {
                 </div>
             );
         }
+    }
+
+    get isDisabilityAdvocacy() {
+        return this.search.q === "Disability Advocacy Providers"
     }
 }
 
