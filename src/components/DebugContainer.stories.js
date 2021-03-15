@@ -4,11 +4,13 @@ import React, {useEffect} from "react";
 
 import DebugContainer from "./DebugContainer";
 import storage from "../storage";
+import { addRouter } from "../storybook/decorators";
 
 export default {
     title: "App Components/Debug/DebugContainer",
     component: DebugContainer,
     decorators: [
+        addRouter,
         (Story: Object, {parameters}: Object) => {
             const debugMode = parameters?.context?.debugMode
             storage.setDebug(debugMode || false)

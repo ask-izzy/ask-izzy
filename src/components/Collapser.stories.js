@@ -4,6 +4,7 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 import Collapser from "./Collapser";
+import { addRouter } from "../storybook/decorators";
 
 export default {
     title: "Basic UI Components/Collapser",
@@ -11,6 +12,7 @@ export default {
     args: {
         onClick: action("clicked"),
     },
+    decorators: [addRouter],
 };
 
 const Template = (args: Object) => <Collapser {...args} />;
