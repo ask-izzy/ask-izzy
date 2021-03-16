@@ -71,6 +71,7 @@ let processFile = (file) => {
             });
 
             steps(scenario.steps, async function(step, done) {
+                this.slow(6000)
                 Yadda.createInstance(libraries, {
                     driver: driver,
                     mochaState: this,

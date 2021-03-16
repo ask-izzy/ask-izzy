@@ -4,6 +4,8 @@ import fs from "fs-extra"
 import Path from "path"
 
 function pauseToDebug() {
+    this.mochaState.timeout(0)
+    this.mochaState.slow(1000 * 60 * 60 * 24)
     return new Promise((resolve, reject) => {
         const stdin = process.stdin;
 
