@@ -28,23 +28,20 @@ module.exports = {
             .readdirSync("./public/static/images/banners")
             .map((file) => file.replace(/\.\w*$/, ""));
 
-        return {
-            ...config,
-            module: {
-                ...webpackConfig.module,
-                rules: webpackConfig.module.rules,
-            },
-            entry: [...config.entry, "./src/styles/bundle.scss"],
-            plugins: [
-                ...config.plugins,
-                new MiniCssExtractPlugin(),
-                new webpack.DefinePlugin({
-                    "storyBookControlValues.HeaderBar.bannerName": JSON
-                        .stringify(bannerImages),
-                    "clientEnvPath": JSON
-                        .stringify(clientEnvPath),
-                }),
-            ],
-        };
+        config.module.rules.push(
+            ...webpackConfig.module.rules
+        )
+
+        config.plugins.push(
+            new MiniCssExtractPlugin(),
+            new webpack.DefinePlugin({
+                "storyBookControlValues.HeaderBar.bannerName": JSON
+                    .stringify(bannerImages),
+                "clientEnvPath": JSON
+                    .stringify(clientEnvPath),
+            }),
+        )
+
+        return config
     },
 };
