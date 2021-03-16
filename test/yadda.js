@@ -19,8 +19,8 @@ Yadda.plugins.mocha.StepLevelPlugin.init();
 import libraries from "./steps";
 
 /* eslint-disable no-unused-vars */
-import server from "../src/server";
-import mockISS from "./support/mock_iss/server";
+import serverAskIzzy from "../src/server"; // Start AskIzzy server
+import serverMockISS from "./support/mock_iss/server"; // Start Mock ISS server
 import serverMockCMS from "./support/mock-cms"; // Start Mock CMS server
 /* eslint-enable no-unused-vars */
 
@@ -30,6 +30,7 @@ let driver: Webdriver.WebDriver;
 const testHarnessLog = [];
 const testBrowserLog = [];
 const indent = " ".repeat(10)
+let testFailed = false;
 
 let processFile = (file) => {
     featureFile(file, feature => {
@@ -80,17 +81,38 @@ let processFile = (file) => {
         });
 
         afterEach(async function(): Promise<void> {
-            testBrowserLog.push({
-                step: this.currentTest.title,
-                browserLog: await driver.manage().logs().get("browser"),
-            })
-            if (this.currentTest.state != "passed") {
+            try {
+                testBrowserLog.push({
+                    step: this.currentTest.title,
+                    browserLog: await driver.manage().logs().get("browser"),
+                })
+            } catch (err) {
+                console.error("Can not connect to the browser")
+                return
+            }
+            if (this.currentTest.state !== "passed") {
+                testFailed = true;
                 if (testHarnessLog.length) {
                     console.log(indent + "Output from failed test or hook:")
                     console.log(
                         testHarnessLog
                             .map(line => `${indent}  ${line}`)
                             .join("\n")
+                    )
+                }
+
+                console.log(indent + "Browser logs:")
+                if (!testBrowserLog.some(step => step.browserLog.length)) {
+                    console.log(
+                        indent + `  <nothing logged>`
+                    )
+                } else {
+                    let maxLineLength = process.stdout.columns ?
+                        process.stdout.columns
+                        : 100
+
+                    await printLogs(
+                        testBrowserLog, indent + "  ", maxLineLength
                     )
                 }
 
@@ -108,21 +130,6 @@ let processFile = (file) => {
                         console.log(indent + "Failed to take screenshot");
                         console.log(indent + err);
                     }
-                }
-
-                console.log(indent + "Browser logs:")
-                if (!testBrowserLog.some(step => step.browserLog.length)) {
-                    console.log(
-                        indent + `  <nothing logged>`
-                    )
-                } else {
-                    let maxLineLength = process.stdout.columns ?
-                        process.stdout.columns
-                        : 100
-
-                    await printLogs(
-                        testBrowserLog, indent + "  ", maxLineLength
-                    )
                 }
             } else {
                 if (process.env.SCREENSHOT_FAILURES) {
@@ -194,6 +201,20 @@ export default function runTests(directory: string) {
     new Yadda.FeatureFileSearch(directory).each(processFile);
 
     after(async function(): Promise<void> {
+        // I can't find a way to directly check if there has been any failed
+        // tests from inside a root afterAll hook. Replace "testFailed" with a
+        // cleaner solution if you come across anything.
+        if (process.env.PAUSE_AFTER_FAIL && testFailed) {
+            this.timeout(0)
+            const port = serverAskIzzy.get("port");
+            console.info(
+                `Press any key to exit. (meanwhile Ask Izzy is accessible ` +
+                `at: http://localhost:${port})`
+            );
+            process.stdin.setRawMode(true);
+            process.stdin.resume();
+            await new Promise(resolve => process.stdin.on("data", resolve));
+        }
         await driver.quit();
     });
 }

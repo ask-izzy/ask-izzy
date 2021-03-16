@@ -336,9 +336,9 @@ Check the Linters section for info on how to lint.
 Running the tests:
 ````bash
 docker-compose run --rm app unit-test
-docker-compose run --rm app feature-test
-docker-compose run --rm app personalisation-test
-docker-compose run --rm app maps-test
+docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app feature-test
+docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app personalisation-test
+docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app maps-test
 # or without docker: 
 ./script/unit-test
 ./script/feature-test
