@@ -14,7 +14,7 @@
     "Notes": ""
   },
   {
-    "Name": "Housing.vic Rent  relief grants",
+    "Name": "Housing.vic Rent relief grants",
     "Display Title": "Rent relief grants",
     "Subtitle": "Housing.vic",
     "Body text": "The Victorian Government has recently announced rent relief grants for Victorians experiencing rental hardship as a result of the coronavirus (COVID-19) crisis.",
@@ -22,7 +22,7 @@
     "State": ["VIC"],
     "Type": "Secondary Info",
     "Link text": "",
-    "Link URL": "https://rentrelief.covid19.dhhs.vic.gov.au/",
+    "Link URL": "https://www.housing.vic.gov.au/help-renting/rentrelief",
     "Status": "In Beta",
     "Tags": "",
     "Notes": ""
