@@ -72,7 +72,6 @@ class ResultsListPage extends ResultsPage<> {
                     : ""
                 }
                 statusCode={this.state.searchError?.status || 200}
-                disableEditAnswers={this.isDisabilityAdvocacy}
             />
             <div className="List results">
                 {

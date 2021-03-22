@@ -33,7 +33,11 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
     clearAll(event: SyntheticInputEvent<>): void {
         event.preventDefault();
         storage.clear();
-        this.context.router.history.push("/");
+        let redirectUrl = "/"
+        if (this.search.q === "Disability Advocacy Providers") {
+            redirectUrl = "/disability-advocacy-finder"
+        }
+        this.context.router.history.push(redirectUrl);
     }
 
     componentDidMount(): void {
