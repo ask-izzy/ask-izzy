@@ -7,7 +7,6 @@ IFS=$'\n\t'
 
 VERSION="$(cat public/VERSION)"
 STRAPI_URL=${STRAPI_URL:-}
-NOTIFICATIONS_API_URL=${NOTIFICATIONS_API_URL:-}
 
 # Set Strapi url based on env.
 if [ -z "$STRAPI_URL" ]; then
@@ -26,22 +25,6 @@ if [ -z "$STRAPI_URL" ]; then
 	fi
 	if [ "$ENVIRONMENT" = "dev" ] || [ "$ENVIRONMENT" = "development" ]; then
 		STRAPI_URL="https://cms-askizzy.docker.dev"
-	fi
-fi
-
-# Set NOTIFICATIONS API URLS based on env.
-if [ -z "$NOTIFICATIONS_API_URL" ]; then
-	if [ "$ENVIRONMENT" = "prod" ]; then
-		NOTIFICATIONS_API_URL="https://notifications-api.infoxchangeapps.net.au/api/v1/"
-	fi
-	if [ "$ENVIRONMENT" = "staging" ]; then
-		NOTIFICATIONS_API_URL="https://notifications-api-uat.infoxchangeapps.net.au/api/v1/"
-	fi
-	if [ "$ENVIRONMENT" = "test" ]; then
-		NOTIFICATIONS_API_URL="https://notifications-api-test.docker.dev/api/v1/"
-	fi
-	if [ "$ENVIRONMENT" = "dev" ] || [ "$ENVIRONMENT" = "development" ]; then
-		NOTIFICATIONS_API_URL="https://notifications-api.docker.dev/api/v1/"
 	fi
 fi
 
