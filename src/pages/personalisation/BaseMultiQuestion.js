@@ -10,7 +10,7 @@ import BaseQuestion from "./BaseQuestion";
 import InputListItem from "../../components/InputListItem";
 import HeaderBar from "../../components/HeaderBar";
 import FlatButton from "../../components/FlatButton";
-import FloatFromBottom from "../../components/FloatFromBottom";
+import WithStickyFooter from "../../components/WithStickyFooter";
 
 import icons from "../../icons";
 import storage from "../../storage";
@@ -27,7 +27,7 @@ class BaseMultiQuestion extends BaseQuestion {
             : "None of these";
 
         return (
-            <FloatFromBottom
+            <WithStickyFooter
                 includeOffsetElement={true}
             >
                 <div className="done-button">
@@ -39,7 +39,7 @@ class BaseMultiQuestion extends BaseQuestion {
                         onClick={this.props.onDoneTouchTap}
                     />
                 </div>
-            </FloatFromBottom>
+            </WithStickyFooter>
         )
     }
 

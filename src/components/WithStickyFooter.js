@@ -2,7 +2,7 @@
 import React from "react";
 import classnames from "classnames";
 
-// See FloatFromBottom.scss
+// See WithStickyFooter.scss
 const floatAnimationDuration = 1000;
 // Pad the container so it's obvious that there's no content past the end.
 const containerHeightPadding = 20;
@@ -18,7 +18,7 @@ type State = {
     elementScrolledOffscreen?: boolean,
 }
 
-class FloatFromBottom extends React.Component<Props, State> {
+class WithStickyFooter extends React.Component<Props, State> {
     constructor(props: Object) {
         super(props);
         this.state = {containerHeight: 0};
@@ -67,7 +67,7 @@ class FloatFromBottom extends React.Component<Props, State> {
         return (
             <div
                 className={classnames(
-                    "FloatFromBottom",
+                    "WithStickyFooter",
                     this.props.className
                 )}
                 ref="root"
@@ -98,4 +98,4 @@ class FloatFromBottom extends React.Component<Props, State> {
     }
 }
 
-export default FloatFromBottom;
+export default WithStickyFooter;

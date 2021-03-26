@@ -4,7 +4,7 @@ import * as React from "react";
 
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import components from "../components";
-import FloatFromBottom from "../components/FloatFromBottom";
+import WithStickyFooter from "../components/WithStickyFooter";
 import storage from "../storage";
 import routerContext from "../contexts/router-context";
 
@@ -126,7 +126,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                                 )
                             }
 
-                            <FloatFromBottom
+                            <WithStickyFooter
                                 ref="floatingDone"
                                 includeOffsetElement={false}
                             >
@@ -138,7 +138,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                                         />
                                     </div>
                                 </div>
-                            </FloatFromBottom>
+                            </WithStickyFooter>
 
                             <div className="ClearResults">
                                 <div>

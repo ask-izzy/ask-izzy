@@ -30,7 +30,6 @@ import Eligibility from "./components/Eligibility";
 import Email from "./components/Email";
 import Feedback from "./components/Feedback";
 import FlatButton from "./components/FlatButton";
-import FloatFromBottom from "./components/FloatFromBottom";
 import GeolocationButton from "./components/GeolocationButton";
 import GoogleMapsLink from "./components/GoogleMapsLink";
 import HeaderBar from "./components/HeaderBar";
@@ -40,6 +39,7 @@ import InputListItem from "./components/InputListItem";
 import LgbtiqIcon from "./components/LgbtiqIcon";
 import LimitedServicesBanner from "./components/LimitedServicesBanner";
 import LinkButton from "./components/LinkButton";
+import Link from "./components/Link";
 import LinkListItem from "./components/LinkListItem";
 import ListItem from "./components/ListItem";
 import LogoWithShadow from "./components/LogoWithShadow";
@@ -49,6 +49,7 @@ import OnlineSafetyContent from "./components/OnlineSafetyContent";
 import OnlineSafetyLink from "./components/OnlineSafetyLink";
 import OpeningTimes from "./components/OpeningTimes";
 import Phone from "./components/Phone";
+import QuickExit from "./components/QuickExit";
 import ResultListItem from "./components/ResultListItem";
 import ResultsList from "./components/ResultsList";
 import ScreenReader from "./components/ScreenReader";
@@ -60,6 +61,7 @@ import SvgIcon from "./components/SvgIcon";
 import TransportTime from "./components/TransportTime";
 import ViewOnMapButton from "./components/ViewOnMapButton";
 import Web from "./components/Web";
+import WithStickyFooter from "./components/WithStickyFooter";
 
 export default {
     Accessibility,
@@ -90,7 +92,6 @@ export default {
     Email,
     Feedback,
     FlatButton,
-    FloatFromBottom,
     GeolocationButton,
     GoogleMapsLink,
     HeaderBar,
@@ -100,6 +101,7 @@ export default {
     LgbtiqIcon,
     LimitedServicesBanner,
     LinkButton,
+    Link,
     LinkListItem,
     ListItem,
     LogoWithShadow,
@@ -109,6 +111,7 @@ export default {
     OnlineSafetyLink,
     OpeningTimes,
     Phone,
+    QuickExit,
     ResultListItem,
     ResultsList,
     ScreenReader,
@@ -120,4 +123,5 @@ export default {
     TransportTime,
     ViewOnMapButton,
     Web,
+    WithStickyFooter,
 };

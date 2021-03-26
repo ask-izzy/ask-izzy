@@ -2,17 +2,17 @@
 
 import React, {useEffect} from "react";
 
-import FloatFromBottom from "./FloatFromBottom";
+import WithStickyFooter from "./WithStickyFooter";
 /* eslint-disable-next-line no-unused-vars */ // $FlowIgnore
-import Style from "./FloatFromBottom.stories.scss";
+import Style from "./WithStickyFooter.stories.scss";
 
 export default {
-    title: "Basic UI Components/FloatFromBottom",
-    component: FloatFromBottom,
+    title: "Basic UI Components/WithStickyFooter",
+    component: WithStickyFooter,
     decorators: [
         (Story: Object, {parameters}: Object) => {
             const containerHeight = parameters?.context?.containerHeight || 150
-            return <div className="FloatFromBottomStorybook">
+            return <div className="WithStickyFooterStorybook">
                 <div className="ruler px">
                     {[...Array(containerHeight + 1)].map((val, i) =>
                         <div className="mark"
@@ -30,7 +30,7 @@ export default {
     ],
 };
 
-const Template = (args: Object) => <FloatFromBottom {...args} />;
+const Template = (args: Object) => <WithStickyFooter {...args} />;
 
 export const WithoutContainerOffset = Template.bind({});
 WithoutContainerOffset.args = {

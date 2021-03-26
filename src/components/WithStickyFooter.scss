@@ -1,4 +1,4 @@
-.FloatFromBottom {
+.WithStickyFooter {
     .floatsFromBottom {
         @include riseIn(1s, 0s, forwards);
         position: fixed;
