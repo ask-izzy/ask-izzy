@@ -69,7 +69,7 @@ export default class FormFeedbackCantFind extends React.Component<{}, State> {
             `${NOTIFICATIONS_API_URL_OBJ.host}/api/v1/message/send/`, {
                 action: "email",
                 environment: "askizzy",
-                provider: "smtp",
+                provider: "sendgrid",
                 notifications: {
                     "template": 2,
                     "id": "feedback-form",

@@ -73,7 +73,7 @@ export default class FormReportError extends React.Component<Props, State> {
             `${NOTIFICATIONS_API_URL_OBJ.host}/api/v1/message/send/`, {
                 action: "email",
                 environment: "askizzy",
-                provider: "smtp",
+                provider: "sendgrid",
                 notifications: {
                     "template": 3,
                     "id": "feedback-form",
