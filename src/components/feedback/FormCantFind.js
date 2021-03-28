@@ -12,11 +12,9 @@ type State = {
 }
 
 let NOTIFICATIONS_API_URL = "";
-let NOTIFICATIONS_API_KEY = "";
 
 if (typeof window !== "undefined" && window.NOTIFICATIONS_API_URL) {
     NOTIFICATIONS_API_URL = window.NOTIFICATIONS_API_URL;
-    NOTIFICATIONS_API_KEY = window.NOTIFICATIONS_API_KEY;
 }
 
 export default class FormFeedbackCantFind extends React.Component<{}, State> {
@@ -61,11 +59,14 @@ export default class FormFeedbackCantFind extends React.Component<{}, State> {
 
     onSubmit = (event: SyntheticInputEvent<>): void => {
         event.preventDefault();
+        const NOTIFICATIONS_API_URL_OBJ = new URL(NOTIFICATIONS_API_URL)
+
         if (this.isValid()) {
             this.setState({
                 loading: true,
             })
-            API.post(`${NOTIFICATIONS_API_URL}message/send/`, {
+            API.post(`${NOTIFICATIONS_API_URL_OBJ.protocol}//` +
+            `${NOTIFICATIONS_API_URL_OBJ.host}/api/v1/message/send/`, {
                 action: "email",
                 environment: "askizzy",
                 provider: "smtp",
@@ -80,7 +81,9 @@ export default class FormFeedbackCantFind extends React.Component<{}, State> {
                 },
             }, {
                 headers: {
-                    "Authorization": `Api-Key ${NOTIFICATIONS_API_KEY}`,
+                    "Authorization": `Api-Key ${decodeURIComponent(
+                        NOTIFICATIONS_API_URL_OBJ.username
+                    )}`,
                 },
             })
                 .then((response) => {
