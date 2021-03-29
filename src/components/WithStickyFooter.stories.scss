@@ -7,6 +7,7 @@
         position: relative;
         flex-direction: column;
         justify-content: space-between;
+        padding-top: 1em;
         counter-reset: mark -1;
 
         &::after {
@@ -14,7 +15,7 @@
             top: 2em;
             right: 2em;
             color: $text-colour;
-            content: "Height of container is " counter(mark) "vh";
+            content: "Height of element is " counter(mark) "vh";
         }
 
         .mark {

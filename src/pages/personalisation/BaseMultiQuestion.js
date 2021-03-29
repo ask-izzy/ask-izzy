@@ -21,25 +21,21 @@ import {getCategory} from "../../constants/categories";
 class BaseMultiQuestion extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
 
-    renderDoneButton(): ?React.Element<any> {
+    renderDoneButton(): React.Element<any> {
         const label = (this.selected.size) ?
             "Done"
             : "None of these";
 
         return (
-            <WithStickyFooter
-                includeOffsetElement={true}
-            >
-                <div className="done-button">
-                    <FlatButton
-                        tabIndex={
-                            (this.state.tabIndex + this.answers.length) + 1
-                        }
-                        label={label}
-                        onClick={this.props.onDoneTouchTap}
-                    />
-                </div>
-            </WithStickyFooter>
+            <div className="done-button">
+                <FlatButton
+                    tabIndex={
+                        (this.state.tabIndex + this.answers.length) + 1
+                    }
+                    label={label}
+                    onClick={this.props.onDoneTouchTap}
+                />
+            </div>
         )
     }
 
@@ -194,42 +190,46 @@ class BaseMultiQuestion extends BaseQuestion {
                     taperColour="LighterGrey"
                     bannerName={this.bannerName}
                 />
-                <div className="List">
-                    <QuestionStepper
-                        category={getCategory(
-                            this.context.router.match.params.page
-                        )}
-                        listFocused={this.state.listFocused}
-                        onTabIndex={(tabIndex) =>
-                            this.setState({tabIndex})
-                        }
-                    />
-                    {this.answers.map((answer, index) =>
-                        <InputListItem
-                            key={index}
-                            leftIcon={this.iconFor(answer)}
-                            primaryText={answer}
-                            value={answer}
-                            tabIndex={this.state.tabIndex + (index + 1)}
-                            aria-label={answer}
-                            type="checkbox"
-                            checked={selected.has(answer)}
-                            checkedIcon={
-                                <icons.CheckboxSelected className="big" />
-                            }
-                            onFocus={() => this.setState(
-                                {listFocused: true}
+
+                <WithStickyFooter
+                    footerContents={this.renderDoneButton()}
+                >
+                    <div className="List">
+                        <QuestionStepper
+                            category={getCategory(
+                                this.context.router.match.params.page
                             )}
-                            uncheckedIcon={
-                                <icons.CheckboxUnselected className="big" />
+                            listFocused={this.state.listFocused}
+                            onTabIndex={(tabIndex) =>
+                                this.setState({tabIndex})
                             }
-                            onClick={this.onAnswerTouchTap.bind(
-                                this, answer, !selected.has(answer)
-                            )}
                         />
-                    )}
-                </div>
-                {this.renderDoneButton()}
+                        {this.answers.map((answer, index) =>
+                            <InputListItem
+                                key={index}
+                                leftIcon={this.iconFor(answer)}
+                                primaryText={answer}
+                                value={answer}
+                                tabIndex={this.state.tabIndex + (index + 1)}
+                                aria-label={answer}
+                                type="checkbox"
+                                checked={selected.has(answer)}
+                                checkedIcon={
+                                    <icons.CheckboxSelected className="big" />
+                                }
+                                onFocus={() => this.setState(
+                                    {listFocused: true}
+                                )}
+                                uncheckedIcon={
+                                    <icons.CheckboxUnselected className="big" />
+                                }
+                                onClick={this.onAnswerTouchTap.bind(
+                                    this, answer, !selected.has(answer)
+                                )}
+                            />
+                        )}
+                    </div>
+                </WithStickyFooter>
             </div>
         );
     }
