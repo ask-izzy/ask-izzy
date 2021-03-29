@@ -61,14 +61,16 @@
     }
 
     .primaryInfo,
-    .keyInfos .keyInfo {
+    .keyInfo {
         .title {
             text-decoration: none;
+        }
 
-            h3 {
-                margin: 0.5em 0 0.2em;
-                color: $brand-highlight-darker;
-                font-size: 1.3em;
+        h3 {
+            margin: 10px 0 5px;
+
+            .title {
+                font-size: 20px;
                 font-weight: 500;
             }
         }
@@ -84,7 +86,7 @@
             margin: 1em 0;
         }
 
-        > .learnMore:link {
+        a:link {
             color: $brand-highlight-darker;
         }
     }
@@ -95,17 +97,14 @@
         background-color: $brand-bg-light;
     }
 
-    .keyInfos {
+    .keyInfo {
         margin: $padding;
 
         > h3 {
+            margin: 32px 0;
             color: $brand-text-mid;
             font-size: 26px;
             font-weight: 500;
-        }
-
-        .keyInfo {
-            margin: 2em 0;
         }
     }
 
@@ -146,6 +145,7 @@
             button {
                 padding: 0.8em 1em;
                 border: 1px solid;
+                border-radius: $rounded-border;
                 background: transparent;
             }
         }

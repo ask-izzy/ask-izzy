@@ -10,28 +10,23 @@ import DebugSearch from "../components/DebugSearch";
 import ResultsPage from "./ResultsPage";
 import ResultsList from "../components/ResultsList";
 import CrisisResultsList from "../components/CrisisResultsList";
-import resultsContent from "../results-content.json"
 import HeaderBar from "../components/HeaderBar";
 import Switch from "../components/Switch";
 import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
 import UserSnapResults from "../components/feedback/UserSnapResults";
-import NotFoundStaticPage from "./NotFoundStaticPage"
+import NotFoundStaticPage from "./NotFoundStaticPage";
+import ContentList from "../components/content/ContentList";
 
 import * as gtm from "../google-tag-manager";
 import storage from "../storage";
 import type { Service } from "../iss";
 import type Category from "../constants/Category";
+import { stateFromLocation } from "../utils";
 
-
-type primaryInfo = {
-    name: String,
-    title: string,
-    subtitle: string,
-    body: string,
-    learnMoreText: ?string,
-    learnMoreLink: string,
-}
+import routerContext from "../contexts/router-context";
+import Query from "../queries/query";
+import externalResourcesQuery from "../queries/content/externalResources.js";
 
 type Props = {
     loadMore: any,
@@ -47,30 +42,22 @@ type Props = {
     search?: {search: string},
 }
 
-type State = {
-    primaryInfo: ?primaryInfo,
-    keyInfo: ?Array<Object>
+type ExtraState = {
+    hasInfo: boolean,
+    hasTools: boolean,
 }
 
-class ResultsListPage extends ResultsPage<Props, State> {
-    componentDidMount() {
-        super.componentDidMount();
+class ResultsListPage extends ResultsPage<Props, ExtraState> {
+    static contextType = routerContext;
 
-        // We have to load this after the first render so we match
-        // server-rendered markup on hydrate stage
-        if (this.category) {
-            const subCategory = this.category.slug === "money" &&
-                storage.getItem("sub-money")
-            const topicInfo = this.category && getTopicInfo(
-                this.category,
-                subCategory,
-                storage.getLocation()
-            )
-            this.setState({
-                primaryInfo: topicInfo && topicInfo.primaryInfo,
-                keyInfo: topicInfo && topicInfo.keyInfo,
-            })
-        }
+    constructor(props: Object, context: Object) {
+        super(props, context);
+
+        this.state = {
+            ...this.state,
+            hasInfo: false,
+            hasTools: false,
+        };
     }
 
     recordMapClick(): void {
@@ -87,7 +74,22 @@ class ResultsListPage extends ResultsPage<Props, State> {
                 location: storage.getLocation(),
             });
         }
+    }
 
+    get CMSCategoryName(): ?string {
+        const category = this.category
+        if (!category) {
+            return null
+        }
+        let catName = category.title
+        const subCategory = category.slug === "money" &&
+            storage.getItem("sub-money")
+
+        if (category.slug === "money" && subCategory === "Centrelink") {
+            catName = "Centrelink"
+        }
+
+        return catName
     }
 
     render() {
@@ -130,13 +132,16 @@ class ResultsListPage extends ResultsPage<Props, State> {
                     <div>
                     What you'll find here:
                         <ul>
-                            {this.state.primaryInfo && <li><a href="#tools">
-                                <icons.DownArrow />
-                                {this.state.primaryInfo.title}
-                            </a></li>}
-                            {this.state.keyInfo && <li><a href="#information">
-                                <icons.DownArrow />Key information
-                            </a></li>}
+                            {this.state.hasTools && (
+                                <li><a href="#tools">
+                                    <icons.DownArrow />Highlighted resource
+                                </a></li>
+                            )}
+                            {this.state.hasInfo && (
+                                <li><a href="#information">
+                                    <icons.DownArrow />Key information
+                                </a></li>
+                            )}
                             <li><a href="#services">
                                 <icons.DownArrow />Support services
                             </a></li>
@@ -151,86 +156,105 @@ class ResultsListPage extends ResultsPage<Props, State> {
 
             { this.renderCrisisLines() }
 
-            { this.state.primaryInfo && this.renderPrimaryInfo() }
+            { this.renderPrimaryInfo() }
 
-            { this.state.keyInfo && this.renderKeyInfo() }
+            { this.renderKeyInfo() }
 
             { this.renderSupportServices() }
         </div>
     )
 
+    renderLoadingComponent = () => (
+        <div className="resultsStatus">
+            <icons.Loading className="big" />
+        </div>
+    )
+
     renderPrimaryInfo() {
-        const primaryInfo = this.state.primaryInfo
-        if (!primaryInfo) {
+        if (!this.category) {
             return null
         }
         return (
-            <React.Fragment>
-                <a className="anchor"
-                    id="tools"
-                />
-                <div className="primaryInfo">
-                    <a
-                        className="title"
-                        href={primaryInfo.learnMoreLink}
-                        rel="noopener noreferer"
-                        target="_blank"
-                    >
-                        <h3>{primaryInfo.title}</h3>
-                    </a>
-                    <h4>{primaryInfo.subtitle}</h4>
-                    <div className="body">{primaryInfo.body}</div>
-                    <a
-                        className="learnMore"
-                        href={primaryInfo.learnMoreLink}
-                        rel="noopener noreferer"
-                        target="_blank"
-                    >
-                        {primaryInfo.learnMoreText || "Learn More"}
-                    </a>
-                </div>
-            </React.Fragment>
+            <Query
+                query={externalResourcesQuery}
+                loadingComponent={this.renderLoadingComponent()}
+                args={
+                    {
+                        "category": [this.CMSCategoryName],
+                        "tag": [
+                            "Tool",
+                        ],
+                        "state": [
+                            stateFromLocation(),
+                        ],
+                    }
+                }
+                dataLoadedCallback={data =>
+                    data.externalResources.length > 0 &&
+                        this.setState({ hasTools: true })
+                }
+            >
+                {({data}) => {
+                    if (data.externalResources.length > 0) {
+                        return (<React.Fragment>
+                            <a className="anchor"
+                                id="tools"
+                            />
+                            <div className="primaryInfo">
+                                <ContentList
+                                    className="featured"
+                                    items={data.externalResources}
+                                />
+                            </div>
+                        </React.Fragment>)
+                    }
+                    return null
+                }}
+            </Query>
         )
     }
 
     renderKeyInfo() {
-        const keyInfo = this.state.keyInfo
-        if (!keyInfo) {
+        if (!this.category) {
             return null
         }
         return (
-            <React.Fragment>
-                <a className="anchor"
-                    id="information"
-                />
-                <div className="keyInfos">
-                    <h3>Key information</h3>
-                    {keyInfo.map(info =>
-                        <div className="keyInfo"
-                            key={info.title}
-                        >
+            <Query
+                query={externalResourcesQuery}
+                loadingComponent={this.renderLoadingComponent()}
+                args={
+                    {
+                        "category": [this.CMSCategoryName],
+                        "tag": [
+                            "Information",
+                        ],
+                        "state": [
+                            stateFromLocation(),
+                        ],
+                    }
+                }
+                dataLoadedCallback={data =>
+                    data.externalResources.length > 0 &&
+                        this.setState({ hasInfo: true })
+                }
+            >
+                {({data}) => (
+                    !data.externalResources.length > 0 ? "" : (
+                        <React.Fragment>
                             <a
-                                className="title"
-                                href={info.learnMoreLink}
-                                rel="noopener noreferer"
-                                target="_blank"
-                            >
-                                <h3>{info.title}</h3>
-                            </a>
-                            <h4>{info.subtitle}</h4>
-                            <div className="body">{info.body}</div>
-                            <a
-                                className="learnMore"
-                                href={info.learnMoreLink}
-                                rel="noopener noreferer"
-                                target="_blank"
-                            >
-                                {info.learnMoreText || "Learn More"}
-                            </a>
-                        </div>
-                    )}
-                </div>
-            </React.Fragment>
+                                className="anchor"
+                                id="information"
+                            />
+                            <div className="keyInfo">
+                                <h3>Key information</h3>
+                                <ContentList
+                                    items={data.externalResources}
+                                />
+                            </div>
+                        </React.Fragment>
+                    )
+                )}
+            </Query>
         )
     }
 
@@ -319,52 +343,3 @@ class ResultsListPage extends ResultsPage<Props, State> {
 }
 
 export default ResultsListPage;
-
-// Soon to be pulled from the CMS
-function getTopicInfo(category, subCategory, location) {
-    let resultsCategoryKey;
-    const slugMap = {
-        "rent-and-tenancy": "Rent and Tenancy Help",
-        "money": "Money Help",
-        "food-and-everyday-things": "Food & Everyday things",
-        "mental-health": "Mental health & Wellbeing",
-        "jobs-and-training": "Jobs, Skills, and Training",
-        "accommodation": "Housing",
-    }
-    resultsCategoryKey = slugMap[category.slug]
-    if (category.slug === "money" && subCategory === "Centrelink") {
-        resultsCategoryKey = "Centrelink"
-    }
-    const locationMatch = location.match(/,\s*(\w+)$/)
-    const resultsStateKey = locationMatch && locationMatch[1]
-
-    const relevantResultsContent = resultsContent
-        .filter(
-            content => content.Category === resultsCategoryKey &&
-                (
-                    content.State.length === 0 ||
-                    content.State.some(state => state === resultsStateKey)
-                ) &&
-                content.Status !== "Potential"
-        )
-        .map(content => ({
-            name: content.Name,
-            title: content["Display Title"],
-            subtitle: content.Subtitle,
-            body: content["Body text"],
-            learnMoreText: content["Link text"],
-            learnMoreLink: content["Link URL"],
-            type: content.Type,
-            original: content,
-        }))
-    const primaryInfo = relevantResultsContent
-        .filter(content => content.type === "Primary Info").shift();
-    const keyInfo = relevantResultsContent
-        .filter(content => content.type === "Secondary Info");
-
-    return {
-        primaryInfo,
-        keyInfo: keyInfo.length ? keyInfo : undefined,
-    }
-}
-

@@ -1,4 +1,5 @@
 /* @flow */
+import storage from "../storage";
 
 // Taken from https://stackoverflow.com/a/52551910/847536
 export function toCamelCase(str: string) {
@@ -20,4 +21,25 @@ export function emitPageLoadEvent(): void {
     const pageLoadEvent = new CustomEvent("pageComponentLoad");
     document.dispatchEvent(pageLoadEvent);
     window.pageComponentLoaded = true
+}
+
+export const stateFromLocation = (): string => {
+    const states = [
+        "ACT",
+        "NSW",
+        "NT",
+        "QLD",
+        "SA",
+        "TAS",
+        "VIC",
+        "WA",
+    ];
+
+    const location = storage.getLocation()
+    const state = location.split(",").pop().trim()
+
+    if (states.indexOf(state) !== -1) {
+        return state;
+    }
+    return ""
 }

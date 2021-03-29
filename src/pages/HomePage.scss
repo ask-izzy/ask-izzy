@@ -54,7 +54,7 @@ $bright-purple: #8a2be2;
             margin: 0;
             padding: 0.1em 0.3em;
             border: 3px solid $white;
-            border-radius: 8px;
+            border-radius: $rounded-border;
             background-color: $white;
             color: $brand-text-dark;
             font-weight: bold;
@@ -227,8 +227,7 @@ $bright-purple: #8a2be2;
             align-items: center;
             justify-content: space-between;
             width: 100%;
-
-            height: 19px;
+            height: 20px;
             margin: auto;
 
             padding: 9px;
@@ -237,7 +236,7 @@ $bright-purple: #8a2be2;
 
             border: 1px $white solid;
             border-right: 0;
-            border-radius: 3px;
+            border-radius: $rounded-border;
             background-color: $white;
 
             input {
@@ -254,9 +253,8 @@ $bright-purple: #8a2be2;
                 padding-left: 10px;
                 border: 0;
 
-                border-radius: 5px 0 0 5px;
+                border-radius: $rounded-border 0 0 $rounded-border;
                 color: $brand-text-dark;
-
                 -webkit-appearance: none;
 
                 &:focus {
@@ -269,11 +267,7 @@ $bright-purple: #8a2be2;
 
                 padding: 0 15px;
                 border: 0;
-                border-radius: 0 5px 5px 0;
-
-                border-top-right-radius: 3px;
-                border-bottom-right-radius: 3px;
-
+                border-radius: 0 $rounded-border $rounded-border 0;
                 font-size: 14px;
             }
         }
