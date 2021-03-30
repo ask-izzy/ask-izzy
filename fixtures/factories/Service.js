@@ -88,4 +88,3 @@ export function ServiceParams(opts: ?Object): issService {
 export default function ServiceFactory(opts: ?Object): Service {
     return new Service(ServiceParams(opts));
 }
-

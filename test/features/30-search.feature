@@ -16,13 +16,14 @@ Feature: Search
         Then I should be at /search/pet food
         # FIXME: make the mock produce more meaningful results
         And I should see the results
-        -------------------------------------------
-        Service Name (name) | Site Name (site_name)
-        ===========================================
-        Housing Service     | My Housing Service
-        Emergency Accom     | Youth Support Net
-        Womens Refuge       | Susan's House
-        -------------------------------------------
+        ----------------------------------------------------
+        Service Name (name)          | Site Name (site_name)
+        ====================================================
+        Housing Service              | My Housing Service
+        Transitional Housing Service | My Housing Service
+        Emergency Accom              | Youth Support Net
+        Womens Refuge                | Susan's House
+        ----------------------------------------------------
 
     Scenario: Search for pets using keyboard and mouse
         When I search for "pet food"

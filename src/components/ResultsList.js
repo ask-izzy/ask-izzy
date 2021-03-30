@@ -60,7 +60,7 @@ class ResultsList extends React.Component<{
     }
 
     renderResult(object: Object, index: number) {
-        const elem = <ResultListItem object={object} />;
+        const elem = <ResultListItem service={object} />;
 
         return (
             <div

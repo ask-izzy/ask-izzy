@@ -67,13 +67,13 @@ Feature: See results on a map
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
         When I click on "View on a map"
-        And I click marker titled "Youth Support Net"
+        And I click marker titled "My Housing Service"
         Then I should see the results
         ---------------------
         ServiceName (name)
         =====================
-        Emergency Accom
-        Womens Refuge
+        Housing Service
+        Transitional Housing Service
         ---------------------
 
         When I click on the map

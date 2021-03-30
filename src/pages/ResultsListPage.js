@@ -1,81 +1,114 @@
 /* @flow */
 
 import React from "react";
-import PropTypes from "proptypes";
-import _ from "underscore";
 
+import AppBar from "../components/AppBar";
+import DebugContainer from "../components/DebugContainer";
+import DebugPersonalisation from "../components/DebugPersonalisation";
+import DebugSearch from "../components/DebugSearch";
+import ResultsPage from "./ResultsPage";
 import ResultsList from "../components/ResultsList";
 import LoadingResultsHeader from
     "../components/ResultsListPage/LoadingResultsHeader";
 import LimitedServicesBanner from "../components/LimitedServicesBanner";
 import ViewOnMapButton from "../components/ViewOnMapButton";
+import icons from "../icons";
+import NotFoundStaticPage from "./NotFoundStaticPage"
+import ButtonListItem from "../components/ButtonListItem";
 
 import sendEvent from "../google-tag-manager";
 import storage from "../storage";
-import type { Service } from "../iss";
-import type Category from "../constants/Category";
 
-type Props = {
-    loadMore: any,
-    objects: Array<Service>,
-    location: any,
-    personalisationComponents: Array<Object>,
-    title: string,
-    statusCode: number,
-    meta: {total_count: number},
-    loading: boolean,
-    error: string,
-    category?: Category,
-    search?: {search: string}
-}
-
-class ResultsListPage extends React.Component<Props, void> {
-    static propTypes = {
-        objects: PropTypes.array,
-    };
+class ResultsListPage extends ResultsPage<> {
 
     recordMapClick(): void {
-        if (this.props.search) {
-            sendEvent({
-                event: "ViewOnMap",
-                search: this.props.search,
-                location: storage.getLocation(),
-            });
-        } else if (this.props.category) {
-            sendEvent({
-                event: "ViewOnMap",
-                category: this.props.category,
-                location: storage.getLocation(),
-            });
-        }
-
+        sendEvent({
+            event: "ViewOnMap",
+            location: storage.getLocation(),
+            search: this.state.searchType === "text" &&
+                this.context.router.match.params.search,
+            category: this.state.searchType === "category" && this.category,
+        });
     }
 
     render() {
-        const path = this.props.location.pathname.replace(/\/?$/, "/map");
+        if (this.state.searchType) {
+            return this.renderPage()
+        }
 
-        return (
-            <div className="ResultsListPage">
-                <LoadingResultsHeader {...this.props} />
-                <div className="List results">
-                    {
-                        _.isEmpty(this.props.objects) || (
-                            <React.Fragment>
-                                <LimitedServicesBanner />
-                                <ViewOnMapButton
-                                    to={path}
-                                    onClick={this.recordMapClick.bind(this)}
-                                />
-                            </React.Fragment>
-                        )
-                    }
-                    <ResultsList
-                        results={this.props.objects || []}
-                    />
-                    {this.props.loadMore}
-                </div>
+        return <NotFoundStaticPage/>
+    }
+
+    renderPage = () => (
+        <div className="ResultsListPage">
+            <AppBar
+                title={this.title}
+                backMessage={"Categories"}
+                onBackTouchTap={() => this.context.router.history.push("/")}
+            />
+            <DebugContainer message="Debug personalisation">
+                <DebugPersonalisation
+                    search={this.search}
+                    items={this.personalisationComponents}
+                />
+            </DebugContainer>
+            <DebugContainer message="ISS Parameters">
+                <DebugSearch search={this.issParams()} />
+            </DebugContainer>
+
+            <LoadingResultsHeader
+                location={this.context.router.location}
+                title={this.title}
+                category={this.category}
+                meta={this.state.searchMeta || {total_count: 0}}
+                personalisationComponents={this.personalisationComponents}
+                loading={this.searchIsLoading}
+                error={this.state.searchError ?
+                    "An error occurred. Please try again."
+                    : ""
+                }
+                statusCode={this.state.searchError?.status || 200}
+            />
+            <div className="List results">
+                {
+                    !this.state.searchResults ||
+                    this.state.searchResults.length === 0 ||
+                    <>
+                        <LimitedServicesBanner />
+                        <ViewOnMapButton
+                            to={this.context.router.location
+                                .pathname.replace(/\/?$/, "/map")
+                            }
+                            onClick={this.recordMapClick.bind(this)}
+                        />
+                    </>
+                }
+                <ResultsList
+                    results={this.state.searchResults || []}
+                />
+                {this.renderLoadMore()}
             </div>
-        );
+        </div>
+    )
+
+    renderLoadMore() {
+        if (this.state.searchMeta?.next) {
+            return (
+                <ButtonListItem
+                    className="MoreResultsButton"
+                    primaryText="Load more results…"
+                    onClick={this.loadNextSearchPage}
+                />
+            );
+        }
+
+        if (this.searchIsLoading) {
+            return (
+                <div className="progress">
+                    <icons.Loading className="big" />
+                </div>
+            );
+        }
     }
 }
 

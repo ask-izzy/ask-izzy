@@ -417,14 +417,7 @@ export class Service {
     public_transport_info: string;
     referral_info: string;
     service_type: Array<string>;
-    site: {
-        id: number,
-        name: string,
-        organisation: {
-            id: number,
-            name: string,
-        },
-    };
+    site: Site;
     special_requirements: string;
     target_gender: issGender;
     type: issEntityType;
@@ -442,17 +435,24 @@ export class Service {
         return new ServiceOpening(this);
     }
 
+    /**
+     * Splits a description up into an array of sentences.
+     *
+     * It maintains the text verbatim and doesn't do any cleaning up like
+     * removing extra whitespace or add missing full stops. But if there's
+     * call for it, it may do some cleaning in future.
+     *
+     * @returns The description of the service as an array of sentences.
+     */
     descriptionSentences(): Array<string> {
-        return this.description.split(". ")
-            .filter(str => str.trim())
-            .map(str => (str.trim() + ".").replace("..", "."))
+        return this.description.match(/.+?(?:\.\s+|$)/g) || []
     }
 
     /**
      * First part of the description.
      *
-     * Equal to the first sentence + subsequent sentences until the description
-     * length is equal to or more than 250 characters.
+     * Equal to the first sentence + as many remaining sentences as will fit
+     * without pushing the length up to or more than 250 characters.
      */
     get shortDescription(): Array<string> {
         let sentences = this.descriptionSentences();
@@ -460,8 +460,16 @@ export class Service {
         let descriptionLength = () =>
             description.reduce((memo, elem) => memo + elem.length, 0);
 
-        while (sentences.length && descriptionLength() < 250) {
+        while (
+            sentences.length &&
+            (descriptionLength() + sentences[0].length) < 250
+        ) {
             description.push(sentences.shift());
+        }
+
+        if (sentences.length > 0) {
+            description[description.length - 1] =
+                description[description.length - 1].replace(/\.?\s*$/, "…")
         }
 
         return description;
@@ -528,6 +536,15 @@ export class Service {
     get slug(): string {
         return slugify(`${this.id}-${this.site.name}`);
     }
+}
+
+export type Site = {
+    id: number,
+    name: string,
+    organisation: {
+        id: number,
+        name: string,
+    },
 }
 
 /**

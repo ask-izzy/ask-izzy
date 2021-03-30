@@ -21,7 +21,8 @@ import DynamicPage from "./pages/DynamicPage";
 
 import PersonalisationWizardPage from "./pages/PersonalisationWizardPage";
 import PersonalisationSummaryPage from "./pages/PersonalisationSummaryPage";
-import {ResultsPageListing, ResultsPageMap} from "./pages/ResultsPage";
+import ResultsListPage from "./pages/ResultsListPage";
+import ResultsMapPage from "./pages/ResultsMapPage";
 import ServicePage from "./pages/ServicePage";
 import BushfireReliefPage from "./pages/BushfireReliefPage";
 import Covid19StaticPage from "./pages/Covid19StaticPage";
@@ -208,13 +209,13 @@ export default (
         ].map((str) => [
             <BasePage
                 path={`${str}`}
-                component={ResultsPageListing}
+                component={ResultsListPage}
                 title=":page in :suburb, :state"
                 exact={true}
             />,
             <BasePage
                 path={`${str}/map`}
-                component={ResultsPageMap}
+                component={ResultsMapPage}
                 title="Map of :page in :suburb, :state"
                 exact={true}
             />,

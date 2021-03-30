@@ -46,13 +46,14 @@ Feature: History navigation
         And I should see "Housing"
         And I should be at /housing/Melbourne-VIC/
         And I should see the results
-        --------------------------------------------------------------------------
-        Service Name (name) | Site Name (site_name) | Service provisions (related)
-        ==========================================================================
-        Housing Service     | My Housing Service    | (nada)
-        Emergency Accom     | Youth Support Net     | (nada)
-        Womens Refuge       | Susan's House         | Crisis accommodation
-        --------------------------------------------------------------------------
+        ------------------------------------------------------------------------------------------
+        Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)
+        ==========================================================================================
+        Housing Service              | My Housing Service    | (nada)
+        Transitional Housing Service | My Housing Service    | Transitional accommodation
+        Emergency Accom              | Youth Support Net     | (nada)
+        Womens Refuge                | Susan's House         | Crisis accommodation
+        ------------------------------------------------------------------------------------------
 
         When I click on "Housing Service"
         Then I should be at /service/111-my-housing-service

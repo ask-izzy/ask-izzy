@@ -320,6 +320,7 @@ app.get("/api/v3/search/", (req, res) => {
             },
             objects: [
                 ServiceFactory(services.housingService),
+                ServiceFactory(services.housingServiceSibling),
                 ServiceFactory(services.youthSupportNet),
                 ServiceFactory(services.susansHouse),
             ],

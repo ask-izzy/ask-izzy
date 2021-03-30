@@ -43,9 +43,11 @@
 @import "../components/Phone";
 @import "../components/ResultListItem";
 @import "../components/ResultList";
-@import "../components/ResultsMap";
+@import "../components/ResultsListPage/LoadingResultsHeader";
+@import "../components/SitesMap";
 @import "../components/ScreenReader";
 @import "../components/ServicePane";
+@import "../components/service/ServiceProvisions";
 @import "../components/Spacer";
 @import "../components/SvgIcon";
 @import "../components/TransportTime";
@@ -64,5 +66,6 @@
 @import "../pages/personalisation/Intro";
 @import "../pages/personalisation/ServicePage";
 @import "../pages/ResultsListPage";
+@import "../pages/ResultsMapPage";
 @import "../pages/StaticPage";
 @import "../pages/InformationPage";

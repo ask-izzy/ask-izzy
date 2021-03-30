@@ -4,7 +4,7 @@ import React from "react";
 import { addRouter } from "../storybook/decorators";
 
 import ResultListItem from "./ResultListItem";
-import iss from "../iss";
+import Service from "../../fixtures/factories/Service";
 import fixtures from "../../fixtures/services";
 
 export default {
@@ -18,20 +18,20 @@ const Template = (args: Object) => <ResultListItem {...args} />;
 
 export const InfoxchangeExample = Template.bind({});
 InfoxchangeExample.args = {
-    object: new iss.Service(fixtures.ixa),
+    service: new Service(fixtures.ixa),
 };
 
 export const SusansHouse = Template.bind({});
 SusansHouse.args = {
-    object: new iss.Service(fixtures.susansHouse),
+    service: new Service(fixtures.susansHouse),
 };
 
 export const HousingService = Template.bind({});
 HousingService.args = {
-    object: new iss.Service(fixtures.housingService),
+    service: new Service(fixtures.housingService),
 };
 
 export const ConfidentialLocation = Template.bind({});
 ConfidentialLocation.args = {
-    object: new iss.Service(fixtures.domesticviolence),
+    service: new Service(fixtures.domesticviolence),
 };

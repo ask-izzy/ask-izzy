@@ -32,7 +32,7 @@ class Eligibility extends React.Component<Props, void> {
         if (!_.isEmpty(eligibleItems)) {
             eligibleMarkup = (
                 <div className="eligibility">
-                    <h3>To use this service you should be</h3>
+                    <h3>Eligibility</h3>
                     <ul>
                         {eligibleItems}
                     </ul>

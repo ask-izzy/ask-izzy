@@ -797,16 +797,6 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
       "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
@@ -1805,16 +1795,6 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
       "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
@@ -1869,16 +1849,6 @@
       "message": "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
       "context": "<button class=\"IconButton BackButton button-container\"><span class=\"icon\">\n        <sv...</button>",
       "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2051,16 +2021,6 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
       "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
@@ -2115,16 +2075,6 @@
       "message": "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
       "context": "<button class=\"IconButton BackButton button-container\"><span class=\"icon\">\n        <sv...</button>",
       "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2195,16 +2145,6 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
       "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
@@ -2259,16 +2199,6 @@
       "message": "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
       "context": "<button class=\"IconButton BackButton button-container\"><span class=\"icon\">\n        <sv...</button>",
       "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2339,16 +2269,6 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
       "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
@@ -2411,16 +2331,6 @@
       "type": "error",
       "typeCode": 1,
       "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
       "context": "<svg class=\"HeartIcon disallow-override-color Icon SvgIcon small\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xml...",
       "selector": "#Layer_1",
       "runner": "htmlcs",
@@ -2475,16 +2385,6 @@
       "message": "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
       "context": "<button class=\"IconButton BackButton button-container\"><span class=\"icon\">\n        <sv...</button>",
       "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },
@@ -2633,30 +2533,9 @@
       "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
       "runner": "htmlcs",
       "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
     }
   ],
-  "/search/:suburb-:state/index.html": [
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/:suburb-:state/index.html": [],
   "/search/:suburb-:state/map/index.html": [
     {
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name",
@@ -2721,18 +2600,7 @@
       "runnerExtras": {}
     }
   ],
-  "/search/index.html": [
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/index.html": [],
   "/search/map/index.html": [
     {
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name",
@@ -2797,18 +2665,7 @@
       "runnerExtras": {}
     }
   ],
-  "/housing/:suburb-:state/index.html": [
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/housing/:suburb-:state/index.html": [],
   "/housing/:suburb-:state/map/index.html": [
     {
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name",
@@ -7601,18 +7458,7 @@
       "runnerExtras": {}
     }
   ],
-  "/housing/index.html": [
-    {
-      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
-      "context": "<g id=\"Layer_1\"></g>",
-      "selector": "#Layer_1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/housing/index.html": [],
   "/housing/map/index.html": [
     {
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name",

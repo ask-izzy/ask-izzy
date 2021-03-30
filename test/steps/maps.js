@@ -161,17 +161,25 @@ async function clickMap() {
 }
 
 async function clickMarker(title) {
-    await this.driver.executeScript(title => {
+    const errorMsg = await this.driver.executeScript(title => {
         for (let index = 0; index < google.maps.markers.length; index++) {
             let marker = google.maps.markers[index]
             if (title === marker.getTitle()) {
                 google.maps.event.trigger(marker, "click", {
                     latLng: marker.getPosition(),
                 });
-                break;
+                return;
             }
         }
+        const titles = JSON.stringify(
+            google.maps.markers.map(marker => marker.getTitle())
+        )
+        return `Could not find marker with title "${title}" out of ${titles}`
     }, title);
+
+    if (errorMsg) {
+        throw new Error(errorMsg)
+    }
 }
 
 async function assertMap() {

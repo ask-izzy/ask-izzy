@@ -33,21 +33,6 @@
         color: $brand-text-mid;
     }
 
-    .related {
-        margin: 0;
-        padding: 0 0 0 22px;
-
-        li {
-            padding: 3px 0;
-        }
-    }
-
-    .related + div {
-        padding: 3px 0;
-        color: $brand-text-mid;
-        text-decoration: underline;
-    }
-
     .Accessibility {
         margin-bottom: 15px;
         padding-left: 24px;
@@ -76,5 +61,10 @@
             width: 20px;
             height: 20px;
         }
+    }
+
+    .learnMore {
+        color: $brand-pane-alt-dark;
+        text-decoration: underline;
     }
 }
