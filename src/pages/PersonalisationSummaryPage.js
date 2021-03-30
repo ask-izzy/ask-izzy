@@ -5,6 +5,7 @@ import * as React from "react";
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import components from "../components";
 import WithStickyFooter from "../components/WithStickyFooter";
+import Spacer from "../components/Spacer";
 import storage from "../storage";
 import routerContext from "../contexts/router-context";
 
@@ -50,18 +51,6 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                 <components.FlatButton
                     label="Done"
                     onClick={this.goBack.bind(this)}
-                />
-            </div>
-        </div>
-
-        <div className="ClearResults">
-            <div>
-            Want me to forget what I know about you?
-            </div>
-            <div className="clear-button">
-                <components.FlatButton
-                    label="Delete all answers"
-                    onClick={this.clearAll.bind(this)}
                 />
             </div>
         </div>
@@ -147,6 +136,22 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         )
                     }
                 </div>
+                <div className="ClearResults">
+                    <div>
+                        Want me to forget what I know about you?
+                    </div>
+                    <div
+                        className="clear-button"
+                    >
+                        <a
+                            href="#"
+                            onClick={this.clearAll.bind(this)}
+                        >
+                            Clear all answers and restart search
+                        </a>
+                    </div>
+                </div>
+                <Spacer/>
             </WithStickyFooter>
         </div>
     )

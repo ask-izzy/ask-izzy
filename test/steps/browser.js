@@ -50,6 +50,7 @@ module.exports = (function() {
         )
         .when("I reload the page", unpromisify(reloadPage))
         .when("I pause for debugging", unpromisify(pauseToDebug))
+        .when("I scroll to element \"$STRING\"", unpromisify(scrollToElement))
         .when("I take a screenshot", unpromisify(takeScreenshot))
         .then("I should be at $URL", unpromisify(checkURL))
         .then("I should see \"$STRING\"", unpromisify(thenISee))
@@ -382,4 +383,16 @@ async function takeScreenshot(): Promise<void> {
     )
 
     console.log(`${this.indent}  Screenshot saved to "${filepath}"`);
+}
+
+/**
+ * Scroll element into view.
+ *
+ * @param {string} elementSelector - selector to find element.
+ * @returns {Promise} a promise that resolves when the link is scrolled to.
+ */
+async function scrollToElement(elementSelector: string): Promise<void> {
+    return driver.executeScript(() =>
+        document.querySelector(elementSelector).scrollIntoView()
+    );
 }
