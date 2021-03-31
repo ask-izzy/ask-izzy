@@ -71,7 +71,7 @@ export default class FormFeedbackCantFind extends React.Component<{}, State> {
                 environment: "askizzy",
                 provider: "sendgrid",
                 notifications: {
-                    "template": 2,
+                    "template": "cant-find",
                     "id": "feedback-form",
                     "notifications": [
                         {

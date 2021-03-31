@@ -75,7 +75,7 @@ export default class FormReportError extends React.Component<Props, State> {
                 environment: "askizzy",
                 provider: "sendgrid",
                 notifications: {
-                    "template": 3,
+                    "template": "error-report",
                     "id": "feedback-form",
                     "notifications": [
                         {

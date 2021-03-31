@@ -53,8 +53,8 @@ export default class FormFindInformation extends React.Component<{}, State> {
                 environment: "askizzy",
                 provider: "sendgrid",
                 notifications: {
-                    "template": 1,
-                    "id": "find-information",
+                    "template": "did-you-find",
+                    "id": "feedback-form",
                     "notifications": [
                         {
                             "replacements": {
