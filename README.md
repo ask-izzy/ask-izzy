@@ -299,7 +299,6 @@ Unit tests live in `test/unit` and are invoked from `test/unit.js`. They use `mo
 BDD features live in `test/features` with step definitions in `test/steps` invoked from `test/feature.js`. They use `yadda`.
 Maps features live in `test/maps` with step definitions in `test/steps` invoked from `test/maps.js`. They use `yadda`.
 Personalisation features live in `test/personalisation` with step definitions in `test/steps` invoked from `test/personlisation.js`. They use `yadda`.
-Search features live in `test/search` with step definitions in `test/search-steps` invoked from `test/search.js`. They use `yadda`.
 
 See the *Development debugging* section for more info on environmental commands that effect the execution of tests.
 
@@ -337,14 +336,14 @@ Check the Linters section for info on how to lint.
 Running the tests:
 ````bash
 docker-compose run --rm app unit-test
-docker-compose run --rm app feature-test
-docker-compose run --rm app personalisation-test
-docker-compose run --rm app search-test
+docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app feature-test
+docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app personalisation-test
+docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app maps-test
 # or without docker: 
 ./script/unit-test
 ./script/feature-test
 ./script/personalisation-test
-./script/search-test
+./script/maps-test
 ````
 
 Pass `SELENIUM_BROWSER=firefox|phantomjs|chrome` to choose a

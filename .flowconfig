@@ -24,6 +24,7 @@ esproposal.class_instance_fields=enable
 esproposal.decorators=ignore
 sharedmemory.hash_table_pow=21
 module.name_mapper='.*\.\(jpe\?g\|png\|gif\|svg\)$' -> '<PROJECT_ROOT>/flow/stubs/image.js'
+module.name_mapper='.*\.\(css\|s[ac]ss\)$' -> '<PROJECT_ROOT>/flow/stubs/css.js'
 
 [version]
 0.133.0

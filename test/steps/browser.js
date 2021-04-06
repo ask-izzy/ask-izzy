@@ -203,6 +203,7 @@ async function thenISee(expected: string): Promise<void> {
 }
 
 async function thenIDontSee(expected: string): Promise<void> {
+    this.mochaState.slow(22000)
     try {
         await assert.textIsVisible(this.driver, expected);
     } catch (error) {

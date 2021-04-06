@@ -67,14 +67,6 @@ case "$1" in
         exec ./script/personalisation-test
         ;;
 
-
-    search-test)
-        shift 1
-
-        [ -n "$DEBUG" ] && echo "ISS server: $ISS_URL"
-        exec ./script/search-test
-        ;;
-
     deploy)
         shift 1
 
