@@ -35,3 +35,32 @@ export const ConfidentialLocation = Template.bind({});
 ConfidentialLocation.args = {
     service: new Service(fixtures.domesticviolence),
 };
+
+export const ServiceWithFlags = Template.bind({});
+ServiceWithFlags.args = {
+    service: new Service({
+        lgbtiqa_plus_specific: true,
+        indigenous_classification: ["Aboriginal (indigenous) specific"],
+        location: {
+            suburb: "Richmond",
+            point: {
+                lat: -37.8228,
+                lon: 144.998,
+            },
+        },
+    }),
+}
+
+export const NDISService = Template.bind({});
+NDISService.args = {
+    service: new Service({
+        ndis_approved: true,
+        location: {
+            suburb: "Richmond",
+            point: {
+                lat: -37.8228,
+                lon: 144.998,
+            },
+        },
+    }),
+}
