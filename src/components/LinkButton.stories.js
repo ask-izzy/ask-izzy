@@ -19,6 +19,6 @@ InternalLink.args = {
 
 export const ExternalLink = Template.bind({});
 ExternalLink.args = {
-    to: "https://google.com",
+    to: "https://example.com",
     children: "Example Button",
 };
