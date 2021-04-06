@@ -98,7 +98,7 @@
     "url-search-params-polyfill": "8.0.0",
     "webpack": "4.46.0",
     "webpack-cli": "^4.5.0",
-    "webpack-dev-server": "3.11.2",
+    "webpack-dev-server": "3.1.11",
     "whatwg-fetch": "2.0.4",
     "yadda": "1.5.0"
   }
