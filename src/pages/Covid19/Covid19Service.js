@@ -1,7 +1,21 @@
+/* @flow */
+
 import React from "react";
 import icons from "../../icons";
 
-export const ContactDetailPhoneInline = ({number, comment, mobileView}) => {
+type web = {
+    url: string,
+    linkText: string
+}
+
+type phone = {
+    number: string,
+    comment: string,
+    mobileView?: boolean
+}
+
+// eslint-disable-next-line max-len
+export const ContactDetailPhoneInline = ({number, comment, mobileView}: phone) => {
     const text = number + (comment ? " (" + comment + ")" : "")
 
     return (
@@ -15,7 +29,7 @@ export const ContactDetailPhoneInline = ({number, comment, mobileView}) => {
     )
 }
 
-export const ContactDetailPhone = ({number, comment, mobileView}) => {
+export const ContactDetailPhone = ({number, comment, mobileView}: phone) => {
     return (
         <div className="contact-detail phone">
             <icons.Phone/>
@@ -30,7 +44,7 @@ export const ContactDetailPhone = ({number, comment, mobileView}) => {
     )
 }
 
-export const ContactDetailWeb = ({url, linkText}) => {
+export const ContactDetailWeb = ({url, linkText}: web) => {
     return (
         <div className="contact-detail web">
             <icons.Website className="icon"/>
