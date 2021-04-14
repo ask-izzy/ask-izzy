@@ -3,14 +3,15 @@
 import React from "react";
 
 import HeaderBar from "../components/HeaderBar";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import icons from "../icons"
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
 import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
-import { resetDfvOptions } from "../utils";
+import {resetDfvOptions} from "../utils";
 import routerContext from "../contexts/router-context";
+import QuickExit from "../components/QuickExit";
 
 class HomePage extends React.Component<{}, void> {
 
@@ -39,7 +40,7 @@ class HomePage extends React.Component<{}, void> {
         storage.setSearch(search);
 
         this.context.router.history.push(
-            `/search/${encodeURIComponent(search)}`
+            `/search/${encodeURIComponent(search)}`,
         );
     }
 
@@ -47,9 +48,9 @@ class HomePage extends React.Component<{}, void> {
         const logo = "/static/images/ask-izzy-logo-single-line-yellow.svg";
         const redirectUri = "http://www.bom.gov.au/";
         const tooltip = "To leave this website quickly, click the 'Quick " +
-        "Exit' button. If you are in immediate danger call 000 ( " +
-        "Australian emergency line), for advice about family violence " +
-        " call 1800 Respect on 1800 737 732 (Helpline).";
+            "Exit' button. If you are in immediate danger call 000 ( " +
+            "Australian emergency line), for advice about family violence " +
+            " call 1800 Respect on 1800 737 732 (Helpline).";
 
         return (
             <div className="HomePage">
@@ -62,23 +63,20 @@ class HomePage extends React.Component<{}, void> {
                         <span>
                             Find help and information near you.{" "}
                             <Link to="/covid-19-support">
-                                Learn&nbsp;more
+                                Learn more
                             </Link>
                         </span>
+                        <Link to="/covid-19-support-trent">
+                            Learn more Trent
+                        </Link>
                     </div>
                 </div>
-                <div className="appbar">
-                    <a className="quick-exit"
-                        href={redirectUri}
-                        title={tooltip}
-                    >
-                        <div className="quick-exit">
-                            <span>
-                                Quick Exit ⨉
-                            </span>
-                        </div>
-                    </a>
-                </div>
+                <QuickExit
+                    tooltip={tooltip}
+                    className="appbar"
+                    home={true}
+                    redirectUri={redirectUri}
+                />
                 <div className="header">
                     <HeaderBar
                         primaryText={<>
@@ -121,10 +119,10 @@ class HomePage extends React.Component<{}, void> {
                             />
                         </div>
                     </form>
-                    <NavBar />
+                    <NavBar/>
                 </div>
 
-                <BrandedFooter />
+                <BrandedFooter/>
             </div>
         );
     }

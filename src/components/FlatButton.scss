@@ -11,7 +11,7 @@
 
     &:hover,
     &:focus {
-        background-color: lighten($icon-fg-color, 10%);
+        background-color: lighten($brand-red, 10%);
     }
 
     &[disabled] {
