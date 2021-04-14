@@ -1,8 +1,19 @@
+/* @flow */
+
 import React from "react";
 import icons from "../../icons";
 import {ContactDetailPhone, ContactDetailWeb} from "./Covid19Service";
 
-function Covid19Card({title, mobileView, number, web, additionalContent}) {
+type Props = {
+  title: string,
+  mobileView?: boolean,
+  number?: string,
+  web?: string,
+  additionalContent?: string | any
+};
+
+// eslint-disable-next-line max-len
+function Covid19Card({title, mobileView, number, web, additionalContent}: Props) {
 
     return (
         <details>

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import StaticPage from "../StaticPage";
 import Covid19Card from "./Covid19Card";
 import Phone from "../../components/Phone";
-import "./Covid19.scss";
 import {Link} from "react-router-dom";
 import {states} from "./Covid19Service";
 import {windowWidth} from "../../components/effects/WindowWidth";
@@ -33,7 +32,7 @@ function Covid19() {
         <StaticPage
             title=""
             bannerName="money-help static"
-            className="Covid19Page"
+            className="Covid19PageTrent"
             bannerPrimary="Coronavirus (COVID-19) information and services"
             bannerSecondary=""
         >
