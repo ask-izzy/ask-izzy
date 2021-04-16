@@ -63,7 +63,7 @@ $colour-grey: #f8f9f9;
 
     .BackButton {
         display: relative;
-
+        flex: 0 1 auto;
         min-width: 44px;
 
         height: $appbar-height;
@@ -114,36 +114,10 @@ $colour-grey: #f8f9f9;
     }
 
     // Quick Exit button
-    div.quick-exit {
-        height: $appbar-height;
+    .QuickExit {
+        flex: 0 1 auto;
         margin-left: 5px;
-        padding: 0 15px;
         float: right;
-        background-color: $colour-red;
-        font-weight: bold;
-        line-height: $appbar-height;
-        white-space: nowrap;
-        overflow: hidden;
-        vertical-align: middle;
     }
 
-    /* if desktop */
-    .longer-text {
-        display: initial;
-    }
-
-    .shorter-text {
-        display: none;
-    }
-
-    /* mobile device (max width is 736px) */
-    @media only screen and (max-width: 768px) {
-        .longer-text {
-            display: none;
-        }
-
-        .shorter-text {
-            display: initial;
-        }
-    }
 }

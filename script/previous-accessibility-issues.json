@@ -917,16 +917,6 @@
       "runnerExtras": {}
     },
     {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H42.2",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Heading tag found with no content. Text that is not intended as a heading should not be marked up with heading tags.",
-      "context": "<h1 class=\"title\"></h1>",
-      "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > h1",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
       "type": "error",
       "typeCode": 1,
@@ -1911,16 +1901,6 @@
       "message": "This button element does not have a name available to an accessibility API. Valid names are: title undefined, element content, aria-label undefined, aria-labelledby undefined.",
       "context": "<button class=\"IconButton BackButton button-container\"><span class=\"icon\">\n        <sv...</button>",
       "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > button",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H42.2",
-      "type": "error",
-      "typeCode": 1,
-      "message": "Heading tag found with no content. Text that is not intended as a heading should not be marked up with heading tags.",
-      "context": "<h1 class=\"title\"></h1>",
-      "selector": "#root > div > main > div > div:nth-child(1) > div:nth-child(1) > h1",
       "runner": "htmlcs",
       "runnerExtras": {}
     },

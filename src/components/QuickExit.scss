@@ -1,0 +1,40 @@
+.QuickExit {
+    display: inline-block;
+    height: $appbar-height;
+    padding: 0 15px;
+    background-color: $colour-red;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+
+    span {
+        line-height: $appbar-height;
+    }
+
+    .link {
+        color: $white;
+        text-decoration: none;
+    }
+
+    /* if desktop */
+    .longer-text {
+        display: initial;
+    }
+
+    .shorter-text {
+        display: none;
+    }
+
+    /* mobile device (max width is 736px) */
+    @media only screen and (max-width: 768px) {
+        .longer-text {
+            display: none;
+        }
+
+        .shorter-text {
+            display: initial;
+        }
+    }
+
+}

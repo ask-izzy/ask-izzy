@@ -34,32 +34,11 @@ $bright-purple: #8a2be2;
         }
     }
 
-    .appbar {
+    .AppBar {
         position: sticky;
         top: 0;
-        width: 100%;
-        max-width: 800px;
-        height: $appbar-height;
-        background-color: $brand-bg-dark;
+        justify-content: flex-end;
         z-index: 99;
-
-        // Quick Exit button
-        div.quick-exit {
-            height: $appbar-height;
-            margin-left: 5px;
-            padding: 0 15px;
-            float: right;
-            background-color: $colour-red;
-            color: $white;
-            font-weight: bold;
-            white-space: nowrap;
-            overflow: hidden;
-            vertical-align: middle;
-
-            span {
-                line-height: $appbar-height;
-            }
-        }
     }
 
     .HeaderBar {

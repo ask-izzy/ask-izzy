@@ -11,7 +11,7 @@ import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
 import { resetDfvOptions } from "../utils";
 import routerContext from "../contexts/router-context";
-import QuickExit from "../components/QuickExit";
+import AppBar from "../components/AppBar";
 
 class HomePage extends React.Component<{}, void> {
 
@@ -24,8 +24,6 @@ class HomePage extends React.Component<{}, void> {
 
         resetDfvOptions();
     }
-
-    static contextType = routerContext;
 
     onSearchSubmit(event: Event): void {
         event.preventDefault();
@@ -62,10 +60,7 @@ class HomePage extends React.Component<{}, void> {
                         </span>
                     </div>
                 </div>
-                <QuickExit
-                    className="appbar"
-                    home={true}
-                />
+                <AppBar fixedSizeQuickExit={true}/>
                 <div className="header">
                     <HeaderBar
                         primaryText={<>

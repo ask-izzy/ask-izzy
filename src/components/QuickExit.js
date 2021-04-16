@@ -2,23 +2,26 @@
 
 import * as React from "react";
 import Link from "./Link";
+import classnames from "classnames";
 
 type Props = {
     redirectUri: string,
     className: string,
     tooltip: string,
-    home: boolean
+    fixedSize: boolean
 }
 
-function QuickExit({redirectUri, tooltip, className, home}: Props): React.Node {
+function QuickExit(
+    {redirectUri, tooltip, className, fixedSize}: Props
+): React.Node {
 
-    return <div className={className}>
-        <Link className="quick-exit"
+    return <div className={classnames("QuickExit", className)} >
+        <Link className="link"
             to={redirectUri}
             title={tooltip}
         >
-            <div className="quick-exit">
-                {home ? <span>
+            <div>
+                {fixedSize ? <span>
                         Quick Exit X
                 </span> : <span>
                     <span className="longer-text">
@@ -40,7 +43,7 @@ QuickExit.defaultProps = {
     className: "button-container",
     // eslint-disable-next-line max-len
     tooltip: "To leave this website quickly, click the 'Quick Exit' button. If you are in immediate danger call 000 ( Australian emergency line), for advice about family violence  call 1800 Respect on 1800 737 732 (Helpline).",
-    home: false,
+    fixedSize: false,
 };
 
 export default QuickExit

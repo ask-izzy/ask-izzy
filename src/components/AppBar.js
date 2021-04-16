@@ -7,9 +7,10 @@ import icons from "../icons";
 import QuickExit from "./QuickExit";
 
 type Props = {
-    title: string,
-    onBackTouchTap: Function,
+    title?: ?string,
+    onBackTouchTap?: ?Function,
     backMessage?: string,
+    fixedSizeQuickExit?: boolean,
 }
 
 class AppBar extends React.Component<Props, void> {
@@ -25,9 +26,11 @@ class AppBar extends React.Component<Props, void> {
         return (
             <div className="AppBarContainer">
                 <div className="AppBar">
-                    {this.renderBackButton()}
-                    <h1 className="title">{this.props.title}</h1>
-                    <QuickExit />
+                    {this.props.onBackTouchTap ? this.renderBackButton() : null}
+                    {this.props.title ?
+                        <h1 className="title">{this.props.title}</h1>
+                        : null}
+                    <QuickExit fixedSize={this.props.fixedSizeQuickExit} />
                 </div>
                 <div className="AppBarSpacer" />
             </div>
