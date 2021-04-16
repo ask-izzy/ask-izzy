@@ -1,19 +1,19 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 import icons from "../../icons";
 import {ContactDetailPhone, ContactDetailWeb} from "./Covid19Service";
 
 type Props = {
   title: string,
   mobileView?: boolean,
-  number?: string,
-  web?: string,
-  additionalContent?: string | any
+  number?: Object,
+  web?: Object,
+  additionalContent?: any
 };
 
 // eslint-disable-next-line max-len
-function Covid19Card({title, mobileView, number, web, additionalContent}: Props) {
+function Covid19Card({title, mobileView, number, web, additionalContent}: Props): React.Node {
 
     return (
         <details>
@@ -27,8 +27,8 @@ function Covid19Card({title, mobileView, number, web, additionalContent}: Props)
                 {number ? <li>
                     <ContactDetailPhone
                         mobileView={mobileView}
-                        number={number.number}
-                        comment={number.comment}
+                        number={number?.number}
+                        comment={number?.comment}
                     />
                 </li> : null}
                 {web && web.length ? web.map(webObj => <li key={webObj.url}>

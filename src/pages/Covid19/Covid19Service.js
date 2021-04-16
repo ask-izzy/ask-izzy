@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 import icons from "../../icons";
 
 type web = {
@@ -10,12 +10,12 @@ type web = {
 
 type phone = {
     number: string,
-    comment: string,
+    comment?: string,
     mobileView?: boolean
 }
 
 // eslint-disable-next-line max-len
-export const ContactDetailPhoneInline = ({number, comment, mobileView}: phone) => {
+export const ContactDetailPhoneInline = ({number, comment, mobileView}: phone): React.Node => {
     const text = number + (comment ? " (" + comment + ")" : "")
 
     return (
@@ -29,7 +29,7 @@ export const ContactDetailPhoneInline = ({number, comment, mobileView}: phone) =
     )
 }
 
-export const ContactDetailPhone = ({number, comment, mobileView}: phone) => {
+export const ContactDetailPhone = ({number, comment, mobileView}: phone): React.Node => {
     return (
         <div className="contact-detail phone">
             <icons.Phone/>
@@ -44,7 +44,7 @@ export const ContactDetailPhone = ({number, comment, mobileView}: phone) => {
     )
 }
 
-export const ContactDetailWeb = ({url, linkText}: web) => {
+export const ContactDetailWeb = ({url, linkText}: web): React.Node => {
     return (
         <div className="contact-detail web">
             <icons.Website className="icon"/>
@@ -80,7 +80,7 @@ export const states = [
                 linkText: "Victorian Department of Health and Human Services – Public Housing Restrictions",
             },
         ],
-        additionalContent: (mobileView) => <li>
+        additionalContent: (mobileView: boolean): React.Node => <li>
             <div>
                 If you live in a public housing estate you can access
                 support from the Department of {" "}

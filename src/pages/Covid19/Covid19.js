@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, {useEffect, useState} from "react";
 import StaticPage from "../StaticPage";
 import Covid19Card from "./Covid19Card";
