@@ -40,18 +40,12 @@ class HomePage extends React.Component<{}, void> {
         storage.setSearch(search);
 
         this.context.router.history.push(
-            `/search/${encodeURIComponent(search)}`,
+            `/search/${encodeURIComponent(search)}`
         );
     }
 
     render() {
         const logo = "/static/images/ask-izzy-logo-single-line-yellow.svg";
-        const redirectUri = "http://www.bom.gov.au/";
-        const tooltip = "To leave this website quickly, click the 'Quick " +
-            "Exit' button. If you are in immediate danger call 000 ( " +
-            "Australian emergency line), for advice about family violence " +
-            " call 1800 Respect on 1800 737 732 (Helpline).";
-
         return (
             <div className="HomePage">
                 <div className="notification">
@@ -72,10 +66,8 @@ class HomePage extends React.Component<{}, void> {
                     </div>
                 </div>
                 <QuickExit
-                    tooltip={tooltip}
                     className="appbar"
                     home={true}
-                    redirectUri={redirectUri}
                 />
                 <div className="header">
                     <HeaderBar
@@ -119,10 +111,10 @@ class HomePage extends React.Component<{}, void> {
                             />
                         </div>
                     </form>
-                    <NavBar/>
+                    <NavBar />
                 </div>
 
-                <BrandedFooter/>
+                <BrandedFooter />
             </div>
         );
     }
