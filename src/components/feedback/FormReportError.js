@@ -30,6 +30,7 @@ export default class FormReportError extends React.Component<Props, State> {
             contactDetails: "",
             other: "",
             comments: "",
+            page: window.location.pathname.replace(/^\/+/g, ""),
         },
         loading: false,
     }
