@@ -155,6 +155,10 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             request.q = "disability"
         }
 
+        if (request?.q && this.context.router.location?.state?.shs) {
+            request.q = "shs  -(coordinating bodies) -(holiday accommodation)"
+        }
+
         return request;
     }
 

@@ -94,7 +94,10 @@ export default class HomelessSheltersStaticPage extends React.Component<{}> {
                 <p>
                 There are homeless shelters across the country,
                 in regional and metropolitan areas. {" "}
-                    <Link to="/housing">
+                    <Link to={{pathname: "/housing", state: {
+                        "shs": true,
+                    }}}
+                    >
                   Find a specialist homeless service
                     </Link> who can help you access shelter near you or browse:
                 </p>
