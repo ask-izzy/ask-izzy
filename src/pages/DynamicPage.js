@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 import ReactMarkdown from "react-markdown";
 import Helmet from "react-helmet";
 
@@ -17,6 +17,11 @@ import Accordion from "../components/Accordion";
 
 type Props = {
     location: any,
+}
+
+type ReactMarkdownLinkProps = {
+    href: string,
+    children: React.Node
 }
 
 class DynamicPage extends React.Component<Props, void> {
@@ -115,7 +120,7 @@ class DynamicPage extends React.Component<Props, void> {
         );
     }
 
-    renderLink(props: Object) {
+    renderLink(props: ReactMarkdownLinkProps) {
         return (
             <Link to={props.href}>{props.children}</Link>
         );

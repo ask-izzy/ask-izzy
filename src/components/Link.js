@@ -103,20 +103,20 @@ export default class Link extends React.Component<Props, State> {
                     {children}
                 </InternalLink>
             )
-        } else {
-            return (
-                <a
-                    href={this.state.uri}
-                    rel="noopener noreferrer"
-                    {...(remainingProps: any)}
-                    className={classnames(
-                        "Link external",
-                        className,
-                    )}
-                >
-                    {children}
-                </a>
-            )
         }
+
+        return (
+            <a
+                href={this.state.uri}
+                rel="noopener noreferrer"
+                {...(remainingProps: any)}
+                className={classnames(
+                    "Link external",
+                    className,
+                )}
+            >
+                {children}
+            </a>
+        )
     }
 }
