@@ -80,6 +80,7 @@ module.exports = {
                     // should be able to remove these inclusions.
                     path.resolve("node_modules/posthog-js"),
                     path.resolve("node_modules/is-plain-obj"),
+                    path.resolve("node_modules/@googlemaps/js-api-loader"),
                     path.resolve("node_modules/mdast-util-find-and-replace"),
                 ],
                 use: ["babel-loader"],

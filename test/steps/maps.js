@@ -119,39 +119,47 @@ async function clickMapLink() {
  * @returns {Promise} promise that resolves when the script executes.
  */
 async function instrumentMap() {
-    await this.driver.executeScript(() => {
-        /* Instrument Map */
-        let RealMap = google.maps.Map;
+    // Wait until the map appears
+    await this.driver.wait(() =>
+        this.driver.executeScript(() => {
+            /* Instrument Map */
+            if (!window.google) {
+                return false
+            }
+            let RealMap = google.maps.Map;
 
-        google.maps.Map = function() {
-            let map = RealMap.apply(this, arguments);
+            google.maps.Map = function() {
+                let map = RealMap.apply(this, arguments);
 
-            this.recordMap();
-            return map;
-        };
+                this.recordMap();
+                return map;
+            };
 
-        google.maps.maps = [];
-        google.maps.Map.prototype = RealMap.prototype;
-        google.maps.Map.prototype.recordMap = function() {
-            google.maps.maps.push(this);
-        };
+            google.maps.maps = [];
+            google.maps.Map.prototype = RealMap.prototype;
+            google.maps.Map.prototype.recordMap = function() {
+                google.maps.maps.push(this);
+            };
 
-        /* Instrument Marker */
-        let RealMarker = google.maps.Marker;
+            /* Instrument Marker */
+            let RealMarker = google.maps.Marker;
 
-        google.maps.markers = [];
-        google.maps.Marker = function() {
-            let marker = RealMarker.apply(this, arguments);
+            google.maps.markers = [];
+            google.maps.Marker = function() {
+                let marker = RealMarker.apply(this, arguments);
 
-            this.recordMarker();
-            return marker;
-        };
+                this.recordMarker();
+                return marker;
+            };
 
-        google.maps.Marker.prototype = RealMarker.prototype;
-        google.maps.Marker.prototype.recordMarker = function() {
-            google.maps.markers.push(this);
-        };
-    });
+            google.maps.Marker.prototype = RealMarker.prototype;
+            google.maps.Marker.prototype.recordMarker = function() {
+                google.maps.markers.push(this);
+            };
+            return true;
+        }), 10000
+    );
+
 }
 
 async function clickMap() {

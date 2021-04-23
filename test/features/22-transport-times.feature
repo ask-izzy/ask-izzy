@@ -22,7 +22,8 @@ Feature: Transport times
                 lon: 144.5192432
         ----------------------------------------------
         When I search for the service
-        Given googles directions matrix will return
+        Given I'm watching map events
+        And googles directions matrix will return
         ----------------------------------------------
         - status: OK
           duration:
