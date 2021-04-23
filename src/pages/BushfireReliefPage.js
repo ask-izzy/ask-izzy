@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 import * as React from "react";
-import { Link } from "react-router-dom";
+import Link from "../components/Link";
 import StaticPage from "./StaticPage";
 import MobileDetect from "../components/higherorder/MobileDetect";
 
@@ -45,100 +45,84 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     <strong>NSW:</strong> Bushfire information line{" "}
                     {
                         mobileView ? (
-                            <a href="tel:1800679737">1800 679 737</a>
+                            <Link to="tel:1800679737">1800 679 737</Link>
                         ) : "1800 679 737"
                     } or visit{" "}
-                    <a
-                        href="https://www.rfs.nsw.gov.au"
-                        rel="noopener noreferer"
-                        target="_blank"
+                    <Link
+                        to="https://www.rfs.nsw.gov.au"
                     >
                         www.rfs.nsw.gov.au
-                    </a>
+                    </Link>
                 </h3>
                 <h3>
                     <strong>Victoria:</strong> VicEmergency hotline{" "}
                     {
                         mobileView ? (
-                            <a href="tel:1800226226">1800 226 226</a>
+                            <Link to="tel:1800226226">1800 226 226</Link>
                         ) : "1800 226 226"
                     } or visit{" "}
-                    <a
-                        href="https://www.emergency.vic.gov.au"
-                        rel="noopener noreferer"
-                        target="_blank"
+                    <Link
+                        to="https://www.emergency.vic.gov.au"
                     >
                         emergency.vic.gov.au
-                    </a>
+                    </Link>
                 </h3>
                 <h3>
                     <strong>Queensland:</strong> Rural Fire Service{" "}
-                    <a
-                        href="https://www.ruralfire.qld.gov.au"
-                        rel="noopener noreferer"
-                        target="_blank"
+                    <Link
+                        to="https://www.ruralfire.qld.gov.au"
                     >
                         www.ruralfire.qld.gov.au
-                    </a>
+                    </Link>
                 </h3>
                 <h3>
                     <strong>Western Australia:</strong> Emergency WA{" "}
-                    <a
-                        href="https://www.emergency.wa.gov.au"
-                        rel="noopener noreferer"
-                        target="_blank"
+                    <Link
+                        to="https://www.emergency.wa.gov.au"
                     >
                         emergency.wa.gov.au
-                    </a>
+                    </Link>
                 </h3>
                 <h3>
                     <strong>South Australia:</strong> Bushfire information
                     hotline{" "}
                     {
                         mobileView ? (
-                            <a href="tel:1800362361">1800 362 361</a>
+                            <Link to="tel:1800362361">1800 362 361</Link>
                         ) : "1800 362 361"
                     } or visit South Australian Country Fire Service{" "}
-                    <a
-                        href="https://www.cfs.sa.gov.au"
-                        rel="noopener noreferer"
-                        target="_blank"
+                    <Link
+                        to="https://www.cfs.sa.gov.au"
                     >
                         www.cfs.sa.gov.au
-                    </a>
+                    </Link>
                 </h3>
                 <h3>
                     <strong>Tasmania:</strong> Tasmanian fire service{" "}
-                    <a
-                        href="http://www.fire.tas.gov.au"
-                        rel="noopener noreferer"
-                        target="_blank"
+                    <Link
+                        to="http://www.fire.tas.gov.au"
                     >
                         www.fire.tas.gov.au
-                    </a>
+                    </Link>
                 </h3>
                 <h3>
                     <strong>ACT:</strong> ACT Emergency Services Agency{" "}
-                    <a
-                        href="https://esa.act.gov.au/fire-rescue"
-                        rel="noopener noreferer"
-                        target="_blank"
+                    <Link
+                        to="https://esa.act.gov.au/fire-rescue"
                     >
                         esa.act.gov.au/fire-rescue
-                    </a>
+                    </Link>
                 </h3>
                 <h3>
                     <strong>Northern Territory:</strong> NT Police, Fire &amp;
                     Emergency services{" "}
-                    <a
-                        href={
+                    <Link
+                        to={
                             "https://www.pfes.nt.gov.au/fire-and-rescue-service"
                         }
-                        rel="noopener noreferer"
-                        target="_blank"
                     >
                         www.pfes.nt.gov.au/fire-and-rescue-service
-                    </a>
+                    </Link>
                 </h3>
                 <div className="separator" />
                 <h2>
@@ -147,13 +131,12 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                 <p>
                     Recovery support is available for people directly affected
                     by bushfires. See the{" "}
-                    <a
-                        href="https://www.humanservices.gov.au/individuals/help-emergency/bushfires"
-                        target="_blank"
+                    <Link
+                        to="https://www.humanservices.gov.au/individuals/help-emergency/bushfires"
                         rel="noreferer noopener"
                     >
                         Department of Human Services
-                    </a>
+                    </Link>
                     {" "}for available support in your state.
                 </p>
                 <div className="separator" />
@@ -169,26 +152,23 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     information about a service in our directory that is closed
                     or has altered information, please let us know by completing
                     {" "}
-                    <a
-                        href="https://www.surveygizmo.com/s3/5391212/Ask-Izzy-service-update-form"
-                        target="_blank"
+                    <Link
+                        to="https://www.surveygizmo.com/s3/5391212/Ask-Izzy-service-update-form"
                         ref="noopener noreferer"
                     >
                         this form
-                    </a>.
+                    </Link>.
                 </p>
                 <p>
                     <strong>Donating money</strong>
                 </p>
                 <p>
                     For those with money to give, the{" "}
-                    <a
-                        href="https://www.redcross.org.au/campaigns/disaster-relief-and-recovery-donate"
-                        target="_blank"
-                        rel="noopener noreferer"
+                    <Link
+                        to="https://www.redcross.org.au/campaigns/disaster-relief-and-recovery-donate"
                     >
                         Australian Red Cross
-                    </a> and state-based fire authorities will gratefully accept
+                    </Link> and state-based fire authorities will gratefully accept
                     your donations.
                 </p>
             </StaticPage>

@@ -2,9 +2,11 @@
 /* eslint-disable max-len */
 
 import React from "react";
+
 import StaticPage from "./StaticPage";
 import components from "../components";
 import icons from "../icons"
+import Link from "../components/Link";
 import routerContext from "../contexts/router-context";
 
 export default class BetaInfoStaticPage extends React.Component<{}, void> {
@@ -33,7 +35,7 @@ export default class BetaInfoStaticPage extends React.Component<{}, void> {
                 </p>
                 <p>
                     The beta might be a bit more 'rough around the edges', you might find things that don’t work properly
-                    (<a href={"mailto:support@askizzy.org.au?subject=Ask%20Izzy%20Beta%20-%20Feedback"}>please let us know!</a>)
+                    (<Link to={"mailto:support@askizzy.org.au?subject=Ask%20Izzy%20Beta%20-%20Feedback"}>please let us know!</Link>)
                     and we may monitor and measure it more closely than we do with regular Ask Izzy. Although we will
                     never capture any personally identifiable information about you, we may use tools to measure what pages
                     and parts of Ask Izzy people are using, and how people move through Ask Izzy.
@@ -42,12 +44,12 @@ export default class BetaInfoStaticPage extends React.Component<{}, void> {
                     Participating in our beta is entirely voluntary, and you can return to regular Ask Izzy whenever you like. By taking part you’ll be helping us to build a better app, and will have the opportunity to see, and give feedback on, features as they emerge.
                 </p>
                 <div className="buttonsBox">
-                    <a href="https://beta.askizzy.org.au">
+                    <Link to="https://beta.askizzy.org.au">
                         <components.FlatButton
                             label="Take me to the Beta"
                             onClick={() => {}}
                         />
-                    </a>
+                    </Link>
 
                     <div
                         className="returnToProd"

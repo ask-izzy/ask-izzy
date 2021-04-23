@@ -745,7 +745,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -807,7 +807,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -869,7 +869,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -1681,7 +1681,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -1743,7 +1743,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -1805,7 +1805,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -1867,7 +1867,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -1969,7 +1969,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2031,7 +2031,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2093,7 +2093,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2155,7 +2155,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2217,7 +2217,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2279,7 +2279,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2341,7 +2341,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2403,7 +2403,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -2465,7 +2465,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -12277,7 +12277,7 @@
       "type": "error",
       "typeCode": 1,
       "message": "Anchor element found with a valid href attribute, but no link content has been supplied.",
-      "context": "<a href=\"https://www.facebook.com/askizzyau\" target=\"_blank\" class=\"flex-align\"><span class=\"icon\">\n        <sv...</a>",
+      "context": "<a href=\"https://www.facebook.com/askizzyau\" rel=\"noopener noreferrer\" class=\"Link external flex-align\"><span class=\"icon\">\n        <sv...</a>",
       "selector": "#root > div > main > div > footer > div:nth-child(2) > div:nth-child(5) > ul > li:nth-child(1) > a",
       "runner": "htmlcs",
       "runnerExtras": {}

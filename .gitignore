@@ -1,9 +1,9 @@
 .*.sw?
 .env
 yarn-error.log
-/testing-screenshots
-/node_modules/
-/npm-debug.log*
+node_modules/
+npm-debug.log*
+package-lock.json
 /public/static/*.css
 /public/static/*.css.map
 /public/static/*.js
@@ -13,3 +13,4 @@ yarn-error.log
 /public/**/index.html
 /public/VERSION
 /public/components-catalog
+/testing-screenshots

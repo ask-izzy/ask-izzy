@@ -2,6 +2,8 @@
 import React from "react";
 import classnames from "classnames";
 
+import Link from "./Link";
+
 type Props = {
     message: string,
     className?: string,
@@ -85,25 +87,25 @@ class Collapser extends React.Component<Props, State> {
     renderMessage() {
         if (this.state.collapsed) {
             return (
-                <a
-                    href="#"
+                <Link
+                    to="#"
                     alt="Show more"
                     className="collapser-message"
                     role="button"
                 >
                     {this.props.message}
-                </a>
+                </Link>
             );
         } else if (this.props.closeMessage) {
             return (
-                <a
-                    href="#"
+                <Link
+                    to="#"
                     alt="Show less"
                     className="collapser-message"
                     role="button"
                 >
                     {this.props.closeMessage}
-                </a>
+                </Link>
             );
         }
     }

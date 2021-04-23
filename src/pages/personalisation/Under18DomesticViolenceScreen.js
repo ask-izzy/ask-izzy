@@ -1,8 +1,10 @@
 /* @flow */
 
 import * as React from "react";
+
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
+import Link from "../../components/Link";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 import MobileDetect from "../../components/higherorder/MobileDetect";
 import DfvDemographics from "./DfvDemographics";
@@ -82,21 +84,21 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
                         with family or with someone you're dating.
                     </h2>
                     <h3>
-                        Call <a href={linkService}>Kids Helpline</a> on{" "}
+                        Call <Link to={linkService}>Kids Helpline</Link> on{" "}
                         {
                             this.props.mobileView ? (
-                                <a href={`tel:${numberService}`}>
+                                <Link to={`tel:${numberService}`}>
                                     {numberService}
-                                </a>
+                                </Link>
                             ) : (
                                 `${ numberService }`
                             )
                         }
-                        {" "} or chat online <a href={chatService}>here</a>.
+                        {" "} or chat online <Link to={chatService}>here</Link>.
                     </h3>
                     <h3>
-                        Visit <a href={linkWoah}>WOAH</a> or{" "}
-                        <a href={linkYoungAndEsafe}>Young & eSafe</a> to
+                        Visit <Link to={linkWoah}>WOAH</Link> or{" "}
+                        <Link to={linkYoungAndEsafe}>Young & eSafe</Link> to
                         learn more.
                     </h3>
                 </div>

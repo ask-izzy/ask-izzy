@@ -4,6 +4,7 @@ import url from "url";
 import React from "react";
 
 import components from "../components";
+import Link from "../components/Link";
 import routerContext from "../contexts/router-context";
 
 type Props = {}
@@ -105,8 +106,8 @@ class AddServicePage extends React.Component<Props, State> {
             <div>
                 <p>
                     The service listings on Ask Izzy come
-                    from <a href="https://www.infoxchange.org">
-                    Infoxchange</a>&apos;s Service Seeker database,
+                    from <Link to="https://www.infoxchange.org">
+                    Infoxchange</Link>&apos;s Service Seeker database,
                     Australia&apos;s largest up-to-date directory of
                     health and welfare services.
                 </p>
@@ -123,8 +124,8 @@ class AddServicePage extends React.Component<Props, State> {
                     We know that service and program information changes all
                     the time. If you think that a listing needs updating or
                     you see an error, please&nbsp;
-                    <a
-                        href={
+                    <Link
+                        to={
                             "mailto:support@askizzy.org.au" +
                                 "?subject=" +
                                 encodeURIComponent(
@@ -146,7 +147,7 @@ class AddServicePage extends React.Component<Props, State> {
                         }
                     >
                         email to let us know
-                    </a>.
+                    </Link>.
                 </p>
                 <p>
                     <strong>
@@ -171,8 +172,8 @@ class AddServicePage extends React.Component<Props, State> {
                     If your service is complex (e.g. the same service is
                     offered at multiple sites or there are complex
                     eligibility criteria) or if you&apos;re having trouble with
-                    the form, <a href="mailto:database@infoxchange.org">email
-                    us</a> some basic information about the service and
+                    the form, <Link to="mailto:database@infoxchange.org">email
+                    us</Link> some basic information about the service and
                     we&apos;ll contact you to find out more.
                 </p>
 

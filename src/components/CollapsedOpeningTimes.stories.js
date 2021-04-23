@@ -4,12 +4,14 @@ import React from "react";
 
 import CollapsedOpeningTimes from "./CollapsedOpeningTimes";
 import { mockedTimeDecorator, addTimesToStory } from "./OpeningTimes.stories";
+import { addRouter } from "../storybook/decorators";
 
 export default {
     title: "Service Components/OpeningTimes/CollapsedOpeningTimes",
     component: CollapsedOpeningTimes,
     decorators: [
         mockedTimeDecorator,
+        addRouter,
     ],
 };
 

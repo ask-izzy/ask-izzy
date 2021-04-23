@@ -1,8 +1,10 @@
 /* @flow */
 
 import * as React from "react";
+
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
+import Link from "../../components/Link";
 import AreYouSafe from "./AreYouSafe";
 import storage from "../../storage";
 import OnlineSafetyLink from "../../components/OnlineSafetyLink";
@@ -60,7 +62,7 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
                         If you or someone else is in danger call{" "}
                         {
                             this.props.mobileView ? (
-                                <a href="tel:000">000</a>
+                                <Link to="tel:000">000</Link>
                             ) : (
                                 "000"
                             )
@@ -68,14 +70,14 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
                     </h2>
                     <h3>
                         If you don't feel safe in your life, call{" "}
-                        <a href={link1800Respect}>1800 Respect</a> on{" "}
+                        <Link to={link1800Respect}>1800 Respect</Link> on{" "}
                         {
                             this.props.mobileView ? (
-                                <a className="phone-number"
-                                    href={`tel:${number1800Respect}`}
+                                <Link className="phone-number"
+                                    to={`tel:${number1800Respect}`}
                                 >
                                     {number1800Respect}
-                                </a>
+                                </Link>
                             ) : (
                                 <span className="phone-number">
                                     {number1800Respect}

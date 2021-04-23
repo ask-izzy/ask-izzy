@@ -49,7 +49,7 @@ RUN git describe > public/VERSION && \
     script/build-assets && \
     yarn build-storybook
 
-# Idealy this container should not be started as root.
+# Ideally this container should not be started as root.
 # hadolint ignore=DL3002
 USER root
 

@@ -1,8 +1,10 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 import ReactMarkdown from "react-markdown";
 import Helmet from "react-helmet";
+
+import Link from "../components/Link";
 import { makeTitle } from "../routes";
 import icons from "../icons";
 import Query from "../queries/query";
@@ -15,6 +17,11 @@ import Accordion from "../components/Accordion";
 
 type Props = {
     location: any,
+}
+
+type ReactMarkdownLinkProps = {
+    href: string,
+    children: React.Node
 }
 
 class DynamicPage extends React.Component<Props, void> {
@@ -37,7 +44,11 @@ class DynamicPage extends React.Component<Props, void> {
                 title="Loading"
                 bannerName="static"
             >
-                <icons.Loading className="big" />
+                <div className="DynamicPage">
+                    <div className="loadingStatus">
+                        <icons.Loading className="big" />
+                    </div>
+                </div>
             </StaticPage>
         )
 
@@ -46,9 +57,11 @@ class DynamicPage extends React.Component<Props, void> {
                 title="Error"
                 bannerName="static"
             >
-                <p className="errorMessage">
-                    Error retrieving content.  Please try again.
-                </p>
+                <div className="DynamicPage">
+                    <div className="loadingStatus">
+                        Error retrieving content.  Please try again.
+                    </div>
+                </div>
             </StaticPage>
         )
 
@@ -73,7 +86,6 @@ class DynamicPage extends React.Component<Props, void> {
                                 bannerPrimary={page.BannerTextPrimary}
                                 bannerSecondary={page.BannerTextSecondary}
                             >
-
                                 <Helmet>
                                     <title>
                                         {
@@ -92,6 +104,7 @@ class DynamicPage extends React.Component<Props, void> {
                                         transformImageUri={
                                             this.absoluteImageUrl
                                         }
+                                        renderers={{ "link": this.renderLink }}
                                     />
                                     <Accordion
                                         title={page.AccordionTitle}
@@ -104,6 +117,12 @@ class DynamicPage extends React.Component<Props, void> {
                     return (<NotFoundStaticPage />)
                 }}
             </Query>
+        );
+    }
+
+    renderLink(props: ReactMarkdownLinkProps) {
+        return (
+            <Link to={props.href}>{props.children}</Link>
         );
     }
 }

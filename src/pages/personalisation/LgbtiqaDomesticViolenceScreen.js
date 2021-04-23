@@ -3,6 +3,7 @@
 import * as React from "react";
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
+import Link from "../../components/Link";
 import MobileDetect from "../../components/higherorder/MobileDetect";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 import DfvDemographics from "./DfvDemographics";
@@ -66,12 +67,12 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
 
         return (
             <h3>
-                Call <a href={linkService}>1800LGBTIQ</a> on{" "}
+                Call <Link to={linkService}>1800LGBTIQ</Link> on{" "}
                 {
                     this.props.mobileView ? (
-                        <a href={`tel:${phoneService}`}>
+                        <Link to={`tel:${phoneService}`}>
                             { phoneService }
-                        </a>
+                        </Link>
                     ) : (
                         `${phoneService}`
                     )
@@ -86,12 +87,12 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
 
         return (
             <h3>
-                Call <a href={linkService}>QLife</a> on{" "}
+                Call <Link to={linkService}>QLife</Link> on{" "}
                 {
                     this.props.mobileView ? (
-                        <a href={`tel:${phoneService}`}>
+                        <Link to={`tel:${phoneService}`}>
                             { phoneService }
-                        </a>
+                        </Link>
                     ) : (
                         `${phoneService}`
                     )
@@ -123,20 +124,21 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
                     }
                     <h3>
                         Learn more about LGBTIQA+ family violence at{" "}
-                        <a href={linkAcon}>
+                        <Link to={linkAcon}>
                             ‘Another Closet’
-                        </a>.
+                        </Link>.
                     </h3>
                     <h3>
                         Everyone has the right to access mainstream services.
                     </h3>
                     <h3>
-                        Call <a href={link1800Respect}>1800Respect</a> on{" "}
+                        Call <Link to={link1800Respect}>1800Respect</Link> on
+                        {" "}
                         {
                             this.props.mobileView ? (
-                                <a href={`tel:${phone1800Respect}`}>
+                                <Link to={`tel:${phone1800Respect}`}>
                                     { phone1800Respect }
-                                </a>
+                                </Link>
                             ) : (
                                 `${phone1800Respect}`
                             )

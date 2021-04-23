@@ -2,14 +2,16 @@
 
 import React from "react";
 
-import LinkButton from "./LinkButton";
+import Link from "./Link";
+import { addRouter } from "../storybook/decorators";
 
 export default {
-    title: "Basic UI Components/LinkButton",
-    component: LinkButton,
+    title: "Basic UI Components/Link",
+    component: Link,
+    decorators: [addRouter],
 };
 
-const Template = (args: Object) => <LinkButton {...args} />;
+const Template = (args: Object) => <Link {...args} />;
 
 export const InternalLink = Template.bind({});
 InternalLink.args = {
@@ -19,6 +21,6 @@ InternalLink.args = {
 
 export const ExternalLink = Template.bind({});
 ExternalLink.args = {
-    to: "https://example.com",
+    to: "https://google.com",
     children: "Example Button",
 };

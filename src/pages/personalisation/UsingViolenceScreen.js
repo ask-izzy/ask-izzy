@@ -1,8 +1,10 @@
 /* @flow */
 
 import * as React from "react";
+
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
+import Link from "../../components/Link";
 import Gender from "./Gender";
 import MobileDetect from "../../components/higherorder/MobileDetect";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
@@ -73,17 +75,18 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
 
         return (
             <h3>
-                <a href={referralServiceLink}>Men's referral service</a> on{" "}
+                <Link to={referralServiceLink}>Men's referral service</Link> on
+                {" "}
                 {
                     this.props.mobileView ? (
-                        <a href={`tel:${referralServicePhone}`}>
+                        <Link to={`tel:${referralServicePhone}`}>
                             { referralServicePhone }
-                        </a>
+                        </Link>
                     ) : (
                         `${ referralServicePhone }`
                     )
                 }
-                {" "}or chat online <a href={referralServiceChat}>here</a>.
+                {" "}or chat online <Link to={referralServiceChat}>here</Link>.
             </h3>
         )
     }
@@ -98,13 +101,13 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
 
         return (
             <h3>
-                <a href={referralServiceLink}>Women's referral service</a> on
-                {" "}
+                <Link to={referralServiceLink}>Women's referral service</Link>
+                on{" "}
                 {
                     this.props.mobileView ? (
-                        <a href={`tel:${referralServicePhone}`}>
+                        <Link to={`tel:${referralServicePhone}`}>
                             { referralServicePhone }
-                        </a>
+                        </Link>
                     ) : (
                         `${ referralServicePhone }`
                     )

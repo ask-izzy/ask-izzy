@@ -2,6 +2,7 @@
 import React from "react";
 import { titleize } from "underscore.string";
 
+import Link from "./Link";
 import sendEvent from "../google-tag-manager";
 import icons from "../icons";
 
@@ -45,8 +46,8 @@ class Phone extends React.Component<Props, void> {
                     {this.props.comment ? this.props.comment
                         : titleize(this.props.kind)}
                 </span>
-                <a
-                    href={this.href}
+                <Link
+                    to={this.href}
                     className={contactButtonClassName}
                     onClick={this.recordClick.bind(this)}
                 >
@@ -58,7 +59,7 @@ class Phone extends React.Component<Props, void> {
                             {this.props.number}
                         </span>
                     </div>
-                </a>
+                </Link>
             </div>
         );
     }

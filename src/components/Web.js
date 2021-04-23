@@ -1,6 +1,8 @@
 /* @flow */
 import React from "react";
 import URL from "url";
+
+import Link from "./Link";
 import icons from "../icons";
 import sendEvent from "../google-tag-manager";
 
@@ -19,8 +21,8 @@ export default class Web extends React.Component<{url: string}, void> {
 
         return (
             <div className="Contact Web">
-                <a
-                    href={url.href}
+                <Link
+                    to={url.href}
                     onClick={this.recordClick.bind(this)}
                 >
                     <icons.Website />
@@ -33,7 +35,7 @@ export default class Web extends React.Component<{url: string}, void> {
                             {url.path === "/" ? "" : url.path}
                         </span>
                     </div>
-                </a>
+                </Link>
             </div>
         );
     }
