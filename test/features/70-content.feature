@@ -27,22 +27,12 @@ Feature: CMS integration
         And I should not see "Page 2"
 
     # As a user
-    # When I visit a page with content
-    # I want to see text in the header bar
-    Scenario: Display page with header text
-      Given a fresh session
-        When I visit /about
-        Then I should see "Some primary text"
-        And I should see "Some secondary text"
-
-    # As a user
-    # When I visit the about page
-    # I want to see a collapsed accordion
-    Scenario: Display about page with accordion
+    # When I visit the homeless shelters page
+    # I want to see a callout
+    Scenario: Display about page with a callout
        Given a fresh session
-        When I visit /about
-        Then I should see "Victoria"
-        Then I should not see "Accordion content for Victoria."
+        When I visit /homeless-shelters
+        Then I should see "Ask Izzy can help"
 
     # As a user
     # When I click on an accordion

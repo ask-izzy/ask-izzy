@@ -4,7 +4,6 @@ import * as React from "react";
 import ReactMarkdown from "react-markdown";
 import Helmet from "react-helmet";
 
-import Link from "../components/Link";
 import { makeTitle } from "../routes";
 import icons from "../icons";
 import Query from "../queries/query";
@@ -14,24 +13,15 @@ import NotFoundStaticPage from "./NotFoundStaticPage";
 import routerContext from "../contexts/router-context";
 import gfm from "remark-gfm";
 import Accordion from "../components/Accordion";
-
+import {absoluteImageUrl, renderLink} from "./DynamicPage.service";
+import CalloutBox from "../components/CalloutBox";
 type Props = {
     location: any,
-}
-
-type ReactMarkdownLinkProps = {
-    href: string,
-    children: React.Node
 }
 
 class DynamicPage extends React.Component<Props, void> {
     static contextType = routerContext;
 
-    absoluteImageUrl(uri: string): string {
-        // Strapi returns a relative image url, we need to change
-        // it to point to our content server.
-        return window.STRAPI_URL + uri;
-    }
 
     render() {
 
@@ -98,17 +88,23 @@ class DynamicPage extends React.Component<Props, void> {
                                 </Helmet>
 
                                 <div className="DynamicPage">
+                                    <CalloutBox
+                                        calloutBoxes={page.CalloutBoxes}
+                                        position="top"
+                                    />
                                     <ReactMarkdown
                                         plugins={[gfm]}
                                         source={page.Body}
-                                        transformImageUri={
-                                            this.absoluteImageUrl
-                                        }
-                                        renderers={{ "link": this.renderLink }}
+                                        transformImageUri={absoluteImageUrl}
+                                        renderers={{ "link": renderLink }}
                                     />
                                     <Accordion
                                         title={page.AccordionTitle}
                                         items={page.Accordion}
+                                    />
+                                    <CalloutBox
+                                        calloutBoxes={page.CalloutBoxes}
+                                        position="bottom"
                                     />
                                 </div>
                             </StaticPage>
@@ -120,11 +116,6 @@ class DynamicPage extends React.Component<Props, void> {
         );
     }
 
-    renderLink(props: ReactMarkdownLinkProps) {
-        return (
-            <Link to={props.href}>{props.children}</Link>
-        );
-    }
 }
 
 export default DynamicPage;

@@ -17,6 +17,22 @@ query Page($path: String!) {
     Accordion {
       Title,
       Content,
+    },
+    CalloutBoxes {
+        Top,
+        Bottom,
+        callout {
+          id,
+          ShowHeading,
+          Link,
+          className {
+           className
+          },
+          Style,
+          Heading,
+          Body,
+          Phone
+        }
     }
   }
 }
