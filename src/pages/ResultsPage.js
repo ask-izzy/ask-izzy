@@ -151,7 +151,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         // A special case for the "Find advocacy" button on the
         // DisabilityAdvocacyFinder page.
         if (request.q === "Disability Advocacy Providers") {
-            request.service_type = ["disability advocacy"]
+            request.service_type_raw = ["disability advocacy"]
             request.q = "disability"
         }
 

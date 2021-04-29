@@ -34,7 +34,7 @@ class DisabilityAdvocacyFinder extends React.Component<{}, void> {
                             onClick={() => {}}
                         />
                     </Link>
-                    <p>
+                    <div>
                         <h3>
                             Want more information about disability advocacy?
                         </h3>
@@ -44,7 +44,7 @@ class DisabilityAdvocacyFinder extends React.Component<{}, void> {
                         >
                             See the Department of Social Services website
                         </Link>
-                    </p>
+                    </div>
                     <div className="askIzzyInfoBox">
                         <h2>Other support services on Ask Izzy</h2>
                         <p>

@@ -33,6 +33,7 @@ export type searchResultMerger = (
 export type searchRequest = {
     q?: string,
     service_type?: Array<string>,
+    service_type_raw?: Array<string>,
     site_id?: number,
 
     minimum_should_match?: string,
