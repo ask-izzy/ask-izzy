@@ -5,12 +5,13 @@ import React from "react";
 import components from "../components";
 import icons from "../icons";
 import QuickExit from "./QuickExit";
-
+import classnames from "classnames";
 type Props = {
     title?: ?string,
     onBackTouchTap?: ?Function,
     backMessage?: string,
     fixedSizeQuickExit?: boolean,
+    containerClassName?: ?string,
 }
 
 class AppBar extends React.Component<Props, void> {
@@ -24,7 +25,11 @@ class AppBar extends React.Component<Props, void> {
 
     render() {
         return (
-            <div className="AppBarContainer">
+            <div
+                className={
+                    classnames(this.props.containerClassName, "AppBarContainer")
+                }
+            >
                 <div className="AppBar">
                     {this.props.onBackTouchTap ? this.renderBackButton() : null}
                     {this.props.title ?
@@ -32,7 +37,9 @@ class AppBar extends React.Component<Props, void> {
                         : null}
                     <QuickExit fixedSize={this.props.fixedSizeQuickExit} />
                 </div>
-                <div className="AppBarSpacer" />
+                {this.props.onBackTouchTap ?
+                    <div className="AppBarSpacer" />
+                    : null}
             </div>
         );
     }

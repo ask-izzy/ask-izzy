@@ -4626,7 +4626,158 @@
       "runnerExtras": {}
     }
   ],
-  "/housing/:suburb-:state/map/personalise/page/are-you-safe/index.html": [],
+  "/housing/:suburb-:state/map/personalise/page/are-you-safe/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"CrossColorIcon disallow-override-color Icon SvgIcon ColoredIcon small icon-fg-color\" id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><title>cross</title><polygon po...</svg>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputRadio.Name",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This radioinput element does not have a name available to an accessibility API. Valid names are: label element, title undefined, aria-label undefined, aria-labelledby undefined.",
+      "context": "<input type=\"radio\" value=\"No\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(1) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.F68",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This form field should be labelled in some way. Use the label element (either with a \"for\" attribute or wrapped around the form field), or \"title\", \"aria-label\" or \"aria-labelledby\" attributes as appropriate.",
+      "context": "<input type=\"radio\" value=\"No\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(1) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"QuestionMarkColorIcon disallow-override-color Icon SvgIcon ColoredIcon small icon-fg-color\" id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><title>question mark</title><pa...</svg>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"radio-unselected\" found on the web page.",
+      "context": "<g id=\"radio-unselected\"><g><path fill=\"#231F20\" d=\"M32,...</g>",
+      "selector": "#radio-unselected",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputRadio.Name",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This radioinput element does not have a name available to an accessibility API. Valid names are: label element, title undefined, aria-label undefined, aria-labelledby undefined.",
+      "context": "<input type=\"radio\" value=\"I'm not sure\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(2) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.F68",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This form field should be labelled in some way. Use the label element (either with a \"for\" attribute or wrapped around the form field), or \"title\", \"aria-label\" or \"aria-labelledby\" attributes as appropriate.",
+      "context": "<input type=\"radio\" value=\"I'm not sure\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(2) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"TickColorIcon disallow-override-color Icon SvgIcon ColoredIcon small icon-fg-color\" id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><title>tick</title><polygon poi...</svg>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"radio-unselected\" found on the web page.",
+      "context": "<g id=\"radio-unselected\"><g><path fill=\"#231F20\" d=\"M32,...</g>",
+      "selector": "#radio-unselected",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputRadio.Name",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This radioinput element does not have a name available to an accessibility API. Valid names are: label element, title undefined, aria-label undefined, aria-labelledby undefined.",
+      "context": "<input type=\"radio\" value=\"Yes\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(3) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.F68",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This form field should be labelled in some way. Use the label element (either with a \"for\" attribute or wrapped around the form field), or \"title\", \"aria-label\" or \"aria-labelledby\" attributes as appropriate.",
+      "context": "<input type=\"radio\" value=\"Yes\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(3) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/housing/:suburb-:state/map/personalise/page/online-safety-screen/index.html": [
     {
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
@@ -7016,7 +7167,158 @@
       "runnerExtras": {}
     }
   ],
-  "/housing/:suburb-:state/personalise/page/are-you-safe/index.html": [],
+  "/housing/:suburb-:state/personalise/page/are-you-safe/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"CrossColorIcon disallow-override-color Icon SvgIcon ColoredIcon small icon-fg-color\" id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><title>cross</title><polygon po...</svg>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputRadio.Name",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This radioinput element does not have a name available to an accessibility API. Valid names are: label element, title undefined, aria-label undefined, aria-labelledby undefined.",
+      "context": "<input type=\"radio\" value=\"No\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(1) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.F68",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This form field should be labelled in some way. Use the label element (either with a \"for\" attribute or wrapped around the form field), or \"title\", \"aria-label\" or \"aria-labelledby\" attributes as appropriate.",
+      "context": "<input type=\"radio\" value=\"No\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(1) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"QuestionMarkColorIcon disallow-override-color Icon SvgIcon ColoredIcon small icon-fg-color\" id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><title>question mark</title><pa...</svg>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"radio-unselected\" found on the web page.",
+      "context": "<g id=\"radio-unselected\"><g><path fill=\"#231F20\" d=\"M32,...</g>",
+      "selector": "#radio-unselected",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputRadio.Name",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This radioinput element does not have a name available to an accessibility API. Valid names are: label element, title undefined, aria-label undefined, aria-labelledby undefined.",
+      "context": "<input type=\"radio\" value=\"I'm not sure\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(2) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.F68",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This form field should be labelled in some way. Use the label element (either with a \"for\" attribute or wrapped around the form field), or \"title\", \"aria-label\" or \"aria-labelledby\" attributes as appropriate.",
+      "context": "<input type=\"radio\" value=\"I'm not sure\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(2) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"TickColorIcon disallow-override-color Icon SvgIcon ColoredIcon small icon-fg-color\" id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><title>tick</title><polygon poi...</svg>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"radio-unselected\" found on the web page.",
+      "context": "<g id=\"radio-unselected\"><g><path fill=\"#231F20\" d=\"M32,...</g>",
+      "selector": "#radio-unselected",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputRadio.Name",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This radioinput element does not have a name available to an accessibility API. Valid names are: label element, title undefined, aria-label undefined, aria-labelledby undefined.",
+      "context": "<input type=\"radio\" value=\"Yes\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(3) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.F68",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This form field should be labelled in some way. Use the label element (either with a \"for\" attribute or wrapped around the form field), or \"title\", \"aria-label\" or \"aria-labelledby\" attributes as appropriate.",
+      "context": "<input type=\"radio\" value=\"Yes\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(3) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/housing/:suburb-:state/personalise/page/online-safety-screen/index.html": [
     {
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
@@ -9419,7 +9721,158 @@
       "runnerExtras": {}
     }
   ],
-  "/housing/map/personalise/page/are-you-safe/index.html": [],
+  "/housing/map/personalise/page/are-you-safe/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"CrossColorIcon disallow-override-color Icon SvgIcon ColoredIcon small icon-fg-color\" id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><title>cross</title><polygon po...</svg>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputRadio.Name",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This radioinput element does not have a name available to an accessibility API. Valid names are: label element, title undefined, aria-label undefined, aria-labelledby undefined.",
+      "context": "<input type=\"radio\" value=\"No\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(1) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.F68",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This form field should be labelled in some way. Use the label element (either with a \"for\" attribute or wrapped around the form field), or \"title\", \"aria-label\" or \"aria-labelledby\" attributes as appropriate.",
+      "context": "<input type=\"radio\" value=\"No\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(1) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"QuestionMarkColorIcon disallow-override-color Icon SvgIcon ColoredIcon small icon-fg-color\" id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><title>question mark</title><pa...</svg>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"radio-unselected\" found on the web page.",
+      "context": "<g id=\"radio-unselected\"><g><path fill=\"#231F20\" d=\"M32,...</g>",
+      "selector": "#radio-unselected",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputRadio.Name",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This radioinput element does not have a name available to an accessibility API. Valid names are: label element, title undefined, aria-label undefined, aria-labelledby undefined.",
+      "context": "<input type=\"radio\" value=\"I'm not sure\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(2) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.F68",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This form field should be labelled in some way. Use the label element (either with a \"for\" attribute or wrapped around the form field), or \"title\", \"aria-label\" or \"aria-labelledby\" attributes as appropriate.",
+      "context": "<input type=\"radio\" value=\"I'm not sure\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(2) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"TickColorIcon disallow-override-color Icon SvgIcon ColoredIcon small icon-fg-color\" id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><title>tick</title><polygon poi...</svg>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"radio-unselected\" found on the web page.",
+      "context": "<g id=\"radio-unselected\"><g><path fill=\"#231F20\" d=\"M32,...</g>",
+      "selector": "#radio-unselected",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputRadio.Name",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This radioinput element does not have a name available to an accessibility API. Valid names are: label element, title undefined, aria-label undefined, aria-labelledby undefined.",
+      "context": "<input type=\"radio\" value=\"Yes\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(3) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.F68",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This form field should be labelled in some way. Use the label element (either with a \"for\" attribute or wrapped around the form field), or \"title\", \"aria-label\" or \"aria-labelledby\" attributes as appropriate.",
+      "context": "<input type=\"radio\" value=\"Yes\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(3) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/housing/map/personalise/page/online-safety-screen/index.html": [
     {
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
@@ -11809,7 +12262,158 @@
       "runnerExtras": {}
     }
   ],
-  "/housing/personalise/page/are-you-safe/index.html": [],
+  "/housing/personalise/page/are-you-safe/index.html": [
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"CrossColorIcon disallow-override-color Icon SvgIcon ColoredIcon small icon-fg-color\" id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><title>cross</title><polygon po...</svg>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputRadio.Name",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This radioinput element does not have a name available to an accessibility API. Valid names are: label element, title undefined, aria-label undefined, aria-labelledby undefined.",
+      "context": "<input type=\"radio\" value=\"No\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(1) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.F68",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This form field should be labelled in some way. Use the label element (either with a \"for\" attribute or wrapped around the form field), or \"title\", \"aria-label\" or \"aria-labelledby\" attributes as appropriate.",
+      "context": "<input type=\"radio\" value=\"No\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(1) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"QuestionMarkColorIcon disallow-override-color Icon SvgIcon ColoredIcon small icon-fg-color\" id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><title>question mark</title><pa...</svg>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"radio-unselected\" found on the web page.",
+      "context": "<g id=\"radio-unselected\"><g><path fill=\"#231F20\" d=\"M32,...</g>",
+      "selector": "#radio-unselected",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputRadio.Name",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This radioinput element does not have a name available to an accessibility API. Valid names are: label element, title undefined, aria-label undefined, aria-labelledby undefined.",
+      "context": "<input type=\"radio\" value=\"I'm not sure\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(2) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.F68",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This form field should be labelled in some way. Use the label element (either with a \"for\" attribute or wrapped around the form field), or \"title\", \"aria-label\" or \"aria-labelledby\" attributes as appropriate.",
+      "context": "<input type=\"radio\" value=\"I'm not sure\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(2) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<svg class=\"TickColorIcon disallow-override-color Icon SvgIcon ColoredIcon small icon-fg-color\" id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\"><title>tick</title><polygon poi...</svg>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"radio-unselected\" found on the web page.",
+      "context": "<g id=\"radio-unselected\"><g><path fill=\"#231F20\" d=\"M32,...</g>",
+      "selector": "#radio-unselected",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputRadio.Name",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This radioinput element does not have a name available to an accessibility API. Valid names are: label element, title undefined, aria-label undefined, aria-labelledby undefined.",
+      "context": "<input type=\"radio\" value=\"Yes\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(3) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.F68",
+      "type": "error",
+      "typeCode": 1,
+      "message": "This form field should be labelled in some way. Use the label element (either with a \"for\" attribute or wrapped around the form field), or \"title\", \"aria-label\" or \"aria-labelledby\" attributes as appropriate.",
+      "context": "<input type=\"radio\" value=\"Yes\" readonly=\"\" tabindex=\"-1\">",
+      "selector": "#root > div > main > div > div:nth-child(2) > div:nth-child(2) > a:nth-child(3) > div > div:nth-child(4) > span > input",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
+      "type": "error",
+      "typeCode": 1,
+      "message": "Duplicate id attribute value \"Layer_1\" found on the web page.",
+      "context": "<g id=\"Layer_1\"></g>",
+      "selector": "#Layer_1",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/housing/personalise/page/online-safety-screen/index.html": [
     {
       "code": "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77",
