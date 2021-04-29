@@ -11,6 +11,7 @@ import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
 import { resetDfvOptions } from "../utils";
 import routerContext from "../contexts/router-context";
+import AppBar from "../components/AppBar";
 
 class HomePage extends React.Component<{}, void> {
 
@@ -23,8 +24,6 @@ class HomePage extends React.Component<{}, void> {
 
         resetDfvOptions();
     }
-
-    static contextType = routerContext;
 
     onSearchSubmit(event: Event): void {
         event.preventDefault();
@@ -45,12 +44,6 @@ class HomePage extends React.Component<{}, void> {
 
     render() {
         const logo = "/static/images/ask-izzy-logo-single-line-yellow.svg";
-        const redirectUri = "http://www.bom.gov.au/";
-        const tooltip = "To leave this website quickly, click the 'Quick " +
-        "Exit' button. If you are in immediate danger call 000 ( " +
-        "Australian emergency line), for advice about family violence " +
-        " call 1800 Respect on 1800 737 732 (Helpline).";
-
         return (
             <div className="HomePage">
                 <div className="notification">
@@ -67,18 +60,7 @@ class HomePage extends React.Component<{}, void> {
                         </span>
                     </div>
                 </div>
-                <div className="appbar">
-                    <Link className="quick-exit"
-                        to={redirectUri}
-                        title={tooltip}
-                    >
-                        <div className="quick-exit">
-                            <span>
-                                Quick Exit ⨉
-                            </span>
-                        </div>
-                    </Link>
-                </div>
+                <AppBar fixedSizeQuickExit={true}/>
                 <div className="header">
                     <HeaderBar
                         primaryText={<>
