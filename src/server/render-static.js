@@ -28,9 +28,9 @@ function renderPage(uri: string, path: string, params: Object): void {
     const reqUrl = url.parse(uri);
 
     const markup = ReactDOMServer.renderToString(
-        <StaticRouter location={{pathname: reqUrl.pathname}}
-            isRenderingStatic={true}
-        >{routes}</StaticRouter>
+        <StaticRouter location={{pathname: reqUrl.pathname }}>
+            {routes}
+        </StaticRouter>
     );
 
     const helmet = Helmet.renderStatic();
@@ -139,9 +139,17 @@ function* generateRouteParamVals(
             }
         }
     } else if (routePathParts[1] === "search") {
-        yield {
-            ...defaultParamVals,
-            subpage: "location",
+        const subpages = [
+            "are-you-safe",
+            "intro",
+            "location",
+            "online-safety-screen",
+        ];
+        for (const subpage of subpages) {
+            yield {
+                ...defaultParamVals,
+                subpage,
+            }
         }
     } else {
         yield defaultParamVals;
