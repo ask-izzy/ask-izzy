@@ -13,7 +13,6 @@ services:
             SCREENSHOT_FAILURES: 1
             PAUSE_AFTER_FAIL: 1
         ports:
-            - '80:8000'
             - '8000:8000'
             - '8001:8001'
         volumes:
