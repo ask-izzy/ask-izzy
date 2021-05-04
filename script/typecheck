@@ -46,7 +46,7 @@ export -f checkFlowDefs
 function storybookCheck {
     failed=false
     for file in $(find src/components -iname '*.js'); do
-        if [[ "$file" == *.stories.js ]]; then
+        if [[ "$file" == *.stories.js || "$file" == *.service.js ]]; then
             continue
         fi
         parentDir=$(dirname "$file")

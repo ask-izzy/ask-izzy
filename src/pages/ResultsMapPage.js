@@ -15,6 +15,7 @@ import icons from "../icons";
 import type { Service, Site } from "../iss";
 import type Category from "../constants/Category";
 
+
 type Props = {
     loadMore: any,
     objects: Array<Service>,

@@ -2,9 +2,9 @@
 
 import React, {useEffect} from "react";
 import { MemoryRouter } from "react-router";
-import { withScriptjs } from "react-google-maps";
 import storage from "../storage";
 import RouterContext from "../contexts/router-context";
+import {LoadScript} from "@react-google-maps/api";
 
 export function addRouter(Story: Object) {
     return <MemoryRouter><Story/></MemoryRouter>
@@ -17,17 +17,14 @@ export function addGoogleMapsScript(
     if (!env?.GOOGLE_API_KEY) {
         throw new Error("Google API key must be loaded")
     }
-    const googleMapURL = `https://maps.googleapis.com/` +
-        `maps/api/js?v=3.25&key=${env.GOOGLE_API_KEY}` +
-        `&libraries=places`
-
-    const StoryWithGoogleMapsScript = withScriptjs(() => <Story/>);
 
     return (
-        <StoryWithGoogleMapsScript
-            googleMapURL={googleMapURL}
-            loadingElement={<div style={{ height: `100%` }} />}
-        />
+        <LoadScript
+            googleMapsApiKey={env.GOOGLE_API_KEY}
+            libraries={["places"]}
+        >
+            <Story/>
+        </LoadScript>
     )
 }
 

@@ -92,9 +92,13 @@ Feature: Service details page
         Then I can get to google maps by clicking "Unit 5, Level 3, Hany Building, 33 Elizabeth Street"
 
     Scenario: There is travel information for non-confidential services
-       Given my location is "Melbourne, VIC"
-       And it is late morning on "Monday"
-       And googles directions matrix will return
+        Given my location is "Melbourne, VIC"
+        And it is late morning on "Monday"
+        # This step is just to ensure the maps api gets loaded.
+        # Because the google direction mock required it.
+        When I visit /search/food
+        Given I'm watching map events
+        And googles directions matrix will return
         ----------------------------------------------
         - status: OK
           duration:

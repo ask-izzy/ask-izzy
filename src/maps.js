@@ -5,6 +5,7 @@ declare var google: Google;
 import storage from "./storage";
 import _ from "underscore";
 import checkInactive from "./inactiveTimeout";
+import {Loader} from "@googlemaps/js-api-loader";
 
 export class MapsApi {
     api: GoogleMaps;
@@ -140,6 +141,8 @@ export class MapsApi {
     }
 }
 
+let mapsAPIPromise;
+
 /**
  * Request the Google Maps API.
  *
@@ -151,21 +154,21 @@ export class MapsApi {
  * API, when available.
  */
 function maps(): Promise<MapsApi> {
-    return new Promise((resolve, reject) => {
-        function checkLoaded() {
-            try {
-                // Check that google maps has loaded
-                google.maps.DistanceMatrixService.name;
-
-                resolve(new MapsApi(google.maps));
-            } catch (error) {
-                /* try again in 500ms */
-                setTimeout(checkLoaded, 500);
+    if (!mapsAPIPromise) {
+        const api = new Loader({
+            url: `https://${window.DOMAIN_MAPS["maps.googleapis.com"]}` +
+                `/maps/api/js`,
+            apiKey: window.GOOGLE_API_KEY,
+            libraries: ["places"],
+        });
+        mapsAPIPromise = api.load().then(() => {
+            if (window && window.isTestEnv) {
+                window.googleMapsApi = google;
             }
-        }
-
-        checkLoaded();
-    });
+            return new MapsApi(google.maps);
+        })
+    }
+    return mapsAPIPromise;
 }
 
 export default maps;

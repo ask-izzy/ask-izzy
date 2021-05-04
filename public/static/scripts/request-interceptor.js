@@ -63,28 +63,6 @@ zeroRatingHelper.getResource = function(url, success_callback, fail_callback){
     xhr.send(null);
 };
 
-zeroRatingHelper.retrieveGoogleMapsAPIJS = function(){
-
-    var googlemaps_url = 'https://maps.googleapis.com/maps/api/js?v=3.25&key='
-        + window.GOOGLE_API_KEY + '&libraries=places';
-
-    // Load xhr script
-    onSuccess = function(responseText){
-        res = zeroRatingHelper.replaceDomainInString(responseText);
-        var gScript = document.createElement("script");
-        var gScriptText = document.createTextNode(res);
-        gScript.appendChild(gScriptText);
-        document.getElementsByTagName('head')[0].appendChild(gScript);
-    };
-
-    // If this is dev, load original script via script tag, zero rating not required
-    onFail = function(status){
-        console.log('Failed to download google maps api.');
-    }
-
-    zeroRatingHelper.getResource(googlemaps_url, onSuccess, onFail);
-};
-
 // 1. Replace domains for all XMLHttpRequests
 (function(open) {
     XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {
@@ -133,6 +111,3 @@ if ( !zeroRatingHelper.isPhantomJS ){
         };
     }(document.createElement);
 }
-
-// Retrieve google maps api file
-zeroRatingHelper.retrieveGoogleMapsAPIJS();
