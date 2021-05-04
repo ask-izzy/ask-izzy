@@ -60,7 +60,10 @@ class HomePage extends React.Component<{}, void> {
                         </span>
                     </div>
                 </div>
-                <AppBar fixedSizeQuickExit={true}/>
+                <AppBar
+                    containerClassName="appbar"
+                    fixedSizeQuickExit={true}
+                />
                 <div className="header">
                     <HeaderBar
                         primaryText={<>

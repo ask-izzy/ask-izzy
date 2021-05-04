@@ -34,12 +34,17 @@ $bright-purple: #8a2be2;
         }
     }
 
-    .AppBar {
+    .appbar {
         position: sticky;
         top: 0;
-        justify-content: flex-end;
         z-index: 99;
+
+        .AppBar {
+            position: inherit;
+            justify-content: flex-end;
+        }
     }
+
 
     .HeaderBar {
         padding: 30px 20px calc(2vw + 28px);
