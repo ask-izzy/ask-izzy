@@ -119,6 +119,14 @@ $bright-purple: #8a2be2;
 
         background-color: $brand-bg-mid-lighter;
 
+        .searchLabel {
+            color: $brand-bg-dark;
+
+            h4 {
+                margin: 10px 0;
+            }
+        }
+
         .searchWrapper {
             display: flex;
 
