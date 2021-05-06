@@ -94,6 +94,15 @@ class HomePage extends React.Component<{}, void> {
                             <h4>What do you need help with?</h4>
                         </label>
                         <div className="searchWrapper">
+                            <label
+                                htmlFor="home-page-search"
+                                aria-label="Search"
+                            >
+                                <icons.Search
+                                    className={"searchIcon medium middle"}
+                                    fill="#8c8c8c"
+                                />
+                            </label>
                             <input
                                 id="home-page-search"
                                 ref={element => {
