@@ -93,7 +93,7 @@
     "style-loader": "0.21.0",
     "supports-color": "5.4.0",
     "svg-inline-loader": "0.8.0",
-    "underscore": "1.9.1",
+    "underscore": "1.12.1",
     "underscore.string": "3.3.5",
     "url-search-params-polyfill": "8.0.0",
     "webpack": "4.46.0",
