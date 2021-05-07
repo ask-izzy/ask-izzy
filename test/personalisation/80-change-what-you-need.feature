@@ -14,7 +14,7 @@ Feature: Change your personalisation settings
 
     Scenario: View personalisation settings and return to search
         When I click on "Housing"
-        And I click on "Edit Answers"
+        And I click on "Edit"
         Then I should see "Change your answers here"
         Then I should see the results
         ----------------------------------------------------------------

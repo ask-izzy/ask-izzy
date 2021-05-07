@@ -16,7 +16,7 @@ Feature: Category page
     Scenario: Visit housing category
         When I visit /housing
         Then I should see "Housing"
-        Then I should see 3 search results for "women aged 26 to 64" in "Melbourne, VIC"
+        Then I should see the following search results "Someone aged 26 to 64 | for women | in Melbourne, VIC | With somewhere safe to sleep"
         And I should see the results
         ------------------------------------------------------------------------------------------
         Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)

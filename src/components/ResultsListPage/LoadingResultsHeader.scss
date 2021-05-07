@@ -2,4 +2,22 @@
     .homeLink {
         margin-right: 20px;
     }
+
+
+}
+
+.breadcrumb {
+    display: flex;
+    flex-direction: column;
+
+    span {
+        padding-top: 0.3em;
+        font-weight: normal;
+    }
+
+    .edit {
+        padding-top: 0.3em;
+        font-weight: normal;
+    }
+
 }

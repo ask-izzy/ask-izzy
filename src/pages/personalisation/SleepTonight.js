@@ -17,4 +17,9 @@ export default class SleepTonight extends BaseQuestion {
             "No": housingCrisis(() => Location.shouldInjectAccessPoints()),
         },
     };
+
+    static headingValue(): string {
+        return this.answer === "Yes" ? "With somewhere safe to sleep"
+            : "Without somewhere safe to sleep";
+    }
 }

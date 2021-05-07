@@ -78,8 +78,8 @@ class BaseQuestion extends Personalisation<Props, State> {
      * How should this answer be represented
      * @returns {string} A description of the question/answer
     */
-    static headingValue(): string {
-        return "";
+    static headingValue(): string | null {
+        return this.answer;
     }
 
     static get answer(): string {

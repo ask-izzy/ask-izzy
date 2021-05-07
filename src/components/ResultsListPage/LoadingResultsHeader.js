@@ -1,17 +1,34 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 import {Link} from "react-router-dom";
 
 import HeaderBar from "../HeaderBar";
 import type Category from "../../constants/Category";
 
-import Gender from "../../pages/personalisation/Gender";
-import Age from "../../pages/personalisation/Age";
-import Location from "../../pages/personalisation/Location";
+import * as PersonalisationComponents from "../../pages/personalisation";
 import storage from "../../storage";
 import * as gtm from "../../google-tag-manager";
 import routerContext from "../../contexts/router-context";
+import _ from "lodash";
+
+type Breadcrumb = {
+    personalisations: Array<?string>,
+    location: Object,
+    count: number,
+    title: string,
+}
+
+// Some modules that in the personalisation folder aren't really questions
+// They need to be excluded from the answer breadcrumb
+const PERSONALISATION_EXCLUSION_LIST = [
+    "Intro",
+    "OnlineSafetyScreenBundle",
+    "OnlineSafetyScreen",
+    "Under18DomesticViolenceScreen",
+    "BaseQuestion",
+    "BaseMultiQuestion",
+]
 
 const HomeLink = () =>
     <Link
@@ -34,16 +51,38 @@ const trailingSlash = (path: string): string =>
     `${path}${path.endsWith("/") ? "" : "/"}`;
 
 const PersonalisationLink = ({pathname}: Object) => (
-    <div className="change-personalisation-container">
+    <div className="edit">
         <Link
-            className="change-personalisation"
             to={`${trailingSlash(pathname)}personalise/summary`}
             onClick={gtm.emit.bind(null, {event: "changeAnswers"})}
         >
-            Edit Answers
+            Edit
         </Link>
     </div>
 );
+
+/**
+ * The Answer breadcrumb component
+ * @param personalisations - list of answers
+ * @param title - Category title
+ * @param location - edit answer url location
+ * @param count - the result count
+ * @returns {JSX.Element} - Returns the Answer breadcrumb with edit link
+ */
+const ResultBreadCrumb = (
+    {personalisations, title, location, count}: Breadcrumb
+): React.Node => (
+    <div className="breadcrumb">
+        {count > 0 ? "Showing Services for:"
+            : `Sorry, I couldn't find any results for ${title}.`}
+        {personalisations.length &&
+            <span>
+                {personalisations.join(" | ")}
+            </span>
+        }
+        <PersonalisationLink {...location}/>
+    </div>
+)
 
 type Props = {
     personalisationComponents: Array<Object>,
@@ -129,33 +168,41 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             );
         }
 
-        const servicesWord = meta.total_count === 1 ?
-            "service"
-            : "services";
-        const personalisations = [
-            Gender,
-            Age,
-            Location,
-        ].filter((component) =>
-            this.props.personalisationComponents.includes(component)
+        // Loops through all personalisations, filters out not
+        // answered questions returns a list of answers.
+        const personalisationList = _.differenceBy(
+            Object.keys(PersonalisationComponents.default),
+            PERSONALISATION_EXCLUSION_LIST,
         )
-            .map((component) => component.headingValue())
-        const count = meta.total_count > 20 ? "lots of" : meta.total_count;
+
+        const personalisations = personalisationList.reduce(
+            (carry, component) => {
+                if (this.props.personalisationComponents.includes(
+                    PersonalisationComponents.default[component]
+                ) && PersonalisationComponents.default[
+                    component
+                ].headingValue()) {
+                    carry.push(PersonalisationComponents.default[
+                        component
+                    ].headingValue())
+                }
+                return carry
+            }, [])
+
 
         return (
             <React.Fragment>
                 <HeaderBar
                     className="LoadingResultsHeader"
                     primaryText={
-                        meta.total_count > 0 ?
-                            <LogoHeader>
-                                I found {count} {servicesWord}{" "}
-                                {personalisations.join(" ")}
-                            </LogoHeader>
-                            : <LogoHeader>
-                             Sorry, I couldn't find any results
-                             for {title.toLocaleLowerCase()}.
-                            </LogoHeader>
+                        <LogoHeader>
+                            <ResultBreadCrumb
+                                count={meta.total_count}
+                                personalisations={personalisations}
+                                location={location}
+                                title={title.toLocaleLowerCase()}
+                            />
+                        </LogoHeader>
                     }
                     secondaryText={
                         <div>
@@ -164,7 +211,6 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                     }
                     bannerName={bannerName}
                 />
-                <PersonalisationLink {...location} />
             </React.Fragment>
         );
     }

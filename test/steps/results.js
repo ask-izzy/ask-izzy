@@ -22,11 +22,12 @@ module.exports = (function() {
             unpromisify(seeTheResultsIn))
         .then("I should see a hotline in position $NUM which says \"$STRING\"",
             unpromisify(hotlinePositionAndText))
-        .then("I should see $NUMBER search results " +
-            "for \"$STRING\" in \"$STRING\"",
-        unpromisify(assertNumSearchResults))
+        .then("I should see the following results \"$STRING\" in \"$STRING\"",
+            unpromisify(assertSearchResultsWithLocation))
+        .then("I should see the following search results \"$STRING\"",
+            unpromisify(assertSearchResults))
         .then("I should see $NUMBER search results in \"$STRING\"",
-            unpromisify(assertNumSearchResults))
+            unpromisify(assertSearchResults))
         .then("I should see \"$STRING\" before first hotline",
             unpromisify(assertHotlineHeading))
         .then("my results should not contain\n$table",
@@ -105,29 +106,32 @@ async function hotlinePositionAndText(
     assert.equal(await phone.getText(), expectedText);
 }
 
-async function assertNumSearchResults(
-    count: number,
+async function assertSearchResults(
     target: string,
-    location: string
 ): Promise<void> {
-    if (typeof location === "string") {
-        // 3 params
-        target = ` for ${target}`;
-    } else {
-        // Only two params - location is the right one
-        location = target;
-        target = "";
-    }
 
     let element = await this.driver.findElement(
         By.css(".LogoHeader")
     );
     let text = await element.getText();
-    let services = count != 1 ? "services" : "service"
 
     assert.equal(
         text,
-        `I found ${count} ${services}${target} in ${location}`
+        `Showing Services for:\n${target}\nEdit`
+    );
+}
+
+async function assertSearchResultsWithLocation(
+    target: string,
+    location: string,
+): Promise<void> {
+    let element = await this.driver.findElement(
+        By.css(".LogoHeader")
+    );
+    let text = await element.getText();
+    assert.equal(
+        text,
+        `${target}\nin ${location}\nEdit`
     );
 }
 

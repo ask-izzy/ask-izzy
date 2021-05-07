@@ -10,8 +10,8 @@ Feature: Show location in url
 
     Scenario: Search via bookmark
         When I visit /search/housing/in/Richmond-Victoria
-        Then I should see 3 search results in "Richmond, Victoria"
-        When I click on "Edit Answers"
+        Then I should see the following search results "in Richmond, Victoria"
+        When I click on "Edit"
         And I click on "Where are you?"
         Then I should see "This will let me find the services closest to you"
         When I search for "carlt"

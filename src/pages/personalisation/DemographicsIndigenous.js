@@ -28,4 +28,10 @@ export default class DemographicsIndigenous extends BaseQuestion {
         },
     };
 
+    static headingValue(): string {
+        return this.answer.includes("Yes") ?
+            "Aboriginal & Torres Strait Islander"
+            : "Show everything";
+    }
+
 }

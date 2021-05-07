@@ -42,7 +42,7 @@ Feature: History navigation
 
         When I click on "18 to 26"
 
-        Then I should see 3 search results for "men aged 18 to 26" in "Melbourne, VIC"
+        Then I should see the following search results "Someone aged 18 to 26 | for men | in Melbourne, VIC | With somewhere safe to sleep"
         And I should see "Housing"
         And I should be at /housing/Melbourne-VIC/
         And I should see the results
@@ -64,7 +64,7 @@ Feature: History navigation
 
         Then I should be at /housing/Melbourne-VIC/
 
-        Then I should see 3 search results for "men aged 18 to 26" in "Melbourne, VIC"
+        Then I should see the following search results "Someone aged 18 to 26 | for men | in Melbourne, VIC | With somewhere safe to sleep"
 
         When I click back from the browser UI
         And I click back from the browser UI # We have to go back past the hash

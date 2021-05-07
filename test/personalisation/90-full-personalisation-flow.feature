@@ -36,7 +36,7 @@ Feature: Personalisation
         Then I should see "Do any of these apply to you?"
 
         When I click on the done button
-        Then I should see 3 search results for "people aged 18 to 26" in "Richmond, Victoria"
+        Then I should see the following search results "Someone aged 18 to 26 | for people | in Richmond, Victoria | With somewhere safe to sleep"
 
         When I click back from the title bar
         Then I should be at /
@@ -85,7 +85,7 @@ Feature: Personalisation
         And search box should contain "Richmond, Victoria"
 
         When I click on the done button
-        Then I should see 3 search results in "Richmond, Victoria"
+        Then I should see the following search results "in Richmond, Victoria"
 
     Scenario: Searching for domestic violence checks that I'm safe
         When I click on "Domestic & family violence help"

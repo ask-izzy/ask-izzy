@@ -158,6 +158,16 @@ class BaseMultiQuestion extends BaseQuestion {
         this.setState({rootHeight: thisElement.offsetHeight});
     }
 
+    /**
+     * Returns the selected answers to the Result list header
+     * @returns {string|null} - returns a concatenated string of multi
+     * box answers
+     */
+    static headingValue(): string | null {
+        return this.answer && this.answer.length ? this.answer.join(" | ")
+            : null;
+    }
+
     render() {
         let selected = this.selected;
         return (
