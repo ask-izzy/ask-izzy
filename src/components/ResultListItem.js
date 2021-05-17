@@ -76,10 +76,15 @@ class ResultListItem extends React.Component<{
             >
 
                 {this.renderLocation(service.Location())}
-
-                <h2 className="name">
-                    {service.name}
-                </h2>
+                <div className="name">
+                    <h2>
+                        {service.name}
+                    </h2>
+                    <div className="flags">
+                        <IndigenousServiceIcon object={service} />
+                        <LgbtiqIcon object={service} />
+                    </div>
+                </div>
                 <div className="site_name">
                     {service.site.name}
                     <Ndis
@@ -108,9 +113,6 @@ class ResultListItem extends React.Component<{
                     compact={true}
                     location={service.Location()}
                 />
-
-                <IndigenousServiceIcon object={service} />
-                <LgbtiqIcon object={service} />
 
                 <DebugServiceRecord object={service} />
                 {service._explanation &&
