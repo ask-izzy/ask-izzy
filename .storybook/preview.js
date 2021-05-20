@@ -11,4 +11,14 @@ export const parameters = {
             { name: "dark", value: "#666" },
         ],
     },
+    options: {
+        storySort: {
+            order: [
+                "App Components",
+                "Service Components",
+                "Basic UI Components",
+                "Icons",
+            ],
+        },
+    },
 }
