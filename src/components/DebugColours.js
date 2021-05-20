@@ -68,6 +68,7 @@ const colourVars = [
             "colour-input-focus-primary",
             "colour-input-focus-overlay",
             "colour-irreversible-action",
+            "colour-element-shadow",
         ],
     },
     {
@@ -86,6 +87,7 @@ const colourVars = [
             "colour-border-list-item",
             "colour-border-list-item-dark",
             "colour-border-standard-callout",
+            "colour-border-alert",
         ],
     },
     {

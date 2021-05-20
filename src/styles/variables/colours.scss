@@ -72,6 +72,11 @@ $lightness-button-hover: 10%;
     @include colours.define('colour-border-list-item', 'global', 'raw-colour-warm-white');
     @include colours.define('colour-border-list-item-dark', 'global', 'raw-colour-slate-gray');
     @include colours.define('colour-border-standard-callout', 'global', 'raw-colour-rich-purple');
+    @include colours.define(
+        'colour-border-alert',
+        'global',
+        colours.lighten('raw-colour-pure-white', 'global', -13%)
+    );
 
 
     /* Elements */
