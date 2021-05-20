@@ -1,7 +1,7 @@
 {
   "name": "ask-izzy",
   "description": "Ask Izzy webapp",
-  "repository": "github.com/ask-izzy/ask-izzy",
+  "repository": "github:ask-izzy/ask-izzy",
   "main": "src/client.js",
   "license": "GPL-3.0",
   "readme": "README.md",
@@ -85,6 +85,7 @@
     "selenium-webdriver": "4.0.0-alpha.1",
     "sourcemapped-stacktrace": "^1.1.11",
     "storybook-addon-apollo-client": "^4.0.8",
+    "storybook-addon-designs": "^6.0.0",
     "style-loader": "0.21.0",
     "stylelint": "^13.13.1",
     "stylelint-config-recommended": "^5.0.0",

@@ -6,8 +6,8 @@ set -euo pipefail
 IFS=$'\n\t'
 
 export PATH=`npm bin`:$PATH
-BOLD=$(tput bold)
-END=$(tput sgr0)
+BOLD=$(tput bold || echo '')
+END=$(tput sgr0 || echo '')
 
 function check {
     set -e

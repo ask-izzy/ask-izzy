@@ -26,6 +26,7 @@ module.exports = {
         "@storybook/addon-links",
         "@storybook/addon-essentials",
         "storybook-addon-apollo-client",
+        "storybook-addon-designs",
     ],
     webpackFinal: (config) => {
         const bannerImages = fs
