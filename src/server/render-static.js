@@ -29,6 +29,7 @@ function renderPage(uri: string, path: string, params: Object): void {
 
     const markup = ReactDOMServer.renderToString(
         <StaticRouter location={{pathname: reqUrl.pathname }}>
+            <Helmet defaultTitle="Ask Izzy" />
             {routes}
         </StaticRouter>
     );

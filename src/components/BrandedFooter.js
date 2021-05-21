@@ -5,6 +5,7 @@ import Link from "../components/Link";
 import icons from "../icons"
 import LinkButton from "./LinkButton";
 import config from "../config";
+import { donateLink } from "../constants/urls.js"
 
 export default class BrandedFooter
     extends React.Component<{}, void> {
@@ -169,7 +170,7 @@ export default class BrandedFooter
                 <div className="support-links">
                     <ul>
                         <li>
-                            <Link to="/donate">
+                            <Link to={donateLink}>
                                 <icons.Heart
                                     className="small"
                                 />

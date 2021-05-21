@@ -4,6 +4,7 @@
 import React from "react";
 import {Redirect, Switch} from "react-router-dom";
 import {titleize} from "underscore.string";
+import {Route} from "react-router";
 
 // If you import these after the others,
 // babel decides the navbar doesn't really
@@ -26,6 +27,7 @@ import ResultsMapPage from "./pages/ResultsMapPage";
 import ServicePage from "./pages/ServicePage";
 import BushfireReliefPage from "./pages/BushfireReliefPage";
 import Covid19StaticPage from "./pages/Covid19StaticPage";
+import { donateLink } from "./constants/urls.js"
 
 export function makeTitle(route: string, params: Object): string {
     let unslug = (str) =>
@@ -109,6 +111,14 @@ export default (
             path="/disability-advocacy-finder"
             component={DisabilityAdvocacyFinder}
             title="Disability Advocacy Finder"
+        />
+        <Route
+            path="/donate"
+            component={() => {
+                typeof window !== "undefined" &&
+                    (window.location.href = donateLink);
+                return null;
+            }}
         />
         <BasePage
             path="/terms"
