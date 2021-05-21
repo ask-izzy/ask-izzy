@@ -51,7 +51,18 @@ ENVIRONMENT="dev_local" NODE_ENV="development" ISS_URL="$ISS_URL" GOOGLE_API_KEY
 ```
 
 ## Remote access
-By default the dev server is only accessible via localhost but if you want to access it via a remote machine (say for example to test the site on a phone) you should set the env var ALLOWED_HOSTS to the host name of the machine you're running the site on.
+To access the site from a different device to the one that the dev server is running on (say for example to test the site on a phone) the server can be started with a proxy. This proxies external resources that would normally require a VPN to access though the machine the dev server is running on:
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.with-proxy.yml up
+```
+
+The first time you run this you'll have to install the required packages first:
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.with-proxy.yml run --rm external-resources-proxy shell -c 'yarn install'
+```
+
+If you have a firewall running on the same machine that's running the dev server you should open ports 8000 to 8099.
+
 
 ## Dealing with HTTP and browsers
 
@@ -312,7 +323,7 @@ There's also a mock ISS server available as `./script/mock-iss`. This will
 start a server on `localhost:5000`.
 
 ### Adding new icons
-Original icons files are stored in a separate repo hosted on GitHub. To add new icons to Ask Izzy they must be added to that repo first then compiled and copied into this repo using the iconify script. 
+Original icons files are stored in a separate repo hosted on GitHub. To add new icons to Ask Izzy they must be added to that repo first then compiled and copied into this repo using the iconify script.
 
 1) Clone designs repo: `git clone https://github.com/ask-izzy/designs ../ask-izzy-designs`
 2) Add desired icons to designs repo and commit
@@ -339,7 +350,7 @@ docker-compose run --rm app unit-test
 docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app feature-test
 docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app personalisation-test
 docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app maps-test
-# or without docker: 
+# or without docker:
 ./script/unit-test
 ./script/feature-test
 ./script/personalisation-test

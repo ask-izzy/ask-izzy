@@ -156,8 +156,6 @@ let mapsAPIPromise;
 function maps(): Promise<MapsApi> {
     if (!mapsAPIPromise) {
         const api = new Loader({
-            url: `https://${window.DOMAIN_MAPS["maps.googleapis.com"]}` +
-                `/maps/api/js`,
             apiKey: window.GOOGLE_API_KEY,
             libraries: ["places"],
         });

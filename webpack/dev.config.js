@@ -15,9 +15,6 @@ import WriteStatsPlugin from "./utils/write-stats.js";
 import progress from "./utils/progress";
 
 const assetsPath = path.resolve(__dirname, "../public/static");
-const WEBPACK_HOST = process.env.HOST || "localhost";
-const WEBPACK_PORT = parseInt(process.env.PORT) + 1 || 3001;
-const webpackUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`;
 const bannerImages = fs.readdirSync("./public/static/images/banners")
     .map(file => file.replace(/\.\w*$/, ""));
 
@@ -39,7 +36,7 @@ module.exports = {
         path: assetsPath,
         filename: "[name]-[hash].js",
         chunkFilename: "[name]-[chunkhash].js",
-        publicPath: webpackUrl + "/static/",
+        publicPath: "/static/",
     },
     module: {
         rules: [

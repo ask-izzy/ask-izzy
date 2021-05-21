@@ -3,8 +3,11 @@
 import path from "path";
 import express from "express";
 import render from "./render";
+import proxy from "express-http-proxy"
 
 import requireVars from "./require-vars";
+
+const WEBPACK_PORT = parseInt(process.env.PORT || "") + 1 || 3001;
 
 requireVars();
 
@@ -18,10 +21,13 @@ server.set("etag", false);
 server.use(render);
 
 // In production, nginx will serve these files so
-// we won't actually recieve requests for them.
+// we won't actually receive requests for them.
 server.use(express.static(path.resolve(__dirname, "../../public"), {
     maxAge: 0,
 }));
+
+// Proxy to webpack server
+server.use("/", proxy(`localhost:${WEBPACK_PORT}`));
 
 // Generic server errors (e.g. not caught by components)
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
