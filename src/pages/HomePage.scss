@@ -119,6 +119,14 @@ $bright-purple: #8a2be2;
 
         background-color: $brand-bg-mid-lighter;
 
+        .searchLabel {
+            color: $brand-bg-dark;
+
+            h4 {
+                margin: 10px 0;
+            }
+        }
+
         .searchWrapper {
             display: flex;
 
@@ -138,18 +146,20 @@ $bright-purple: #8a2be2;
             border-radius: 3px;
             background-color: $white;
 
+            .searchIcon {
+                margin-top: 0.3em;
+            }
+
             input {
                 flex: 1 1 auto;
 
                 width: 2em;
 
-                margin: 0.5em;
+                margin: 0.5em 0.2em;
 
                 padding: 0;
 
                 padding-right: 10px;
-
-                padding-left: 10px;
                 border: 0;
 
                 border-radius: 5px 0 0 5px;

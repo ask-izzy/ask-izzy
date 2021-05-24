@@ -7,6 +7,7 @@ type Props = {|
     iconClass: string,
     className?: string,
     containerClassName?: string,
+    fill: string,
 |}
 
 class BaseIcon extends React.Component<Props, void> {
@@ -21,6 +22,7 @@ class BaseIcon extends React.Component<Props, void> {
             this.props.className
         )
     }
+
 
     render() {
         let {

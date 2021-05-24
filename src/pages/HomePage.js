@@ -87,16 +87,28 @@ class HomePage extends React.Component<{}, void> {
                         className="search"
                         onSubmit={this.onSearchSubmit.bind(this)}
                     >
+                        <label htmlFor="home-page-search"
+                            className="searchLabel"
+                            aria-label="What do you need help with?"
+                        >
+                            <h4>What do you need help with?</h4>
+                        </label>
                         <div className="searchWrapper">
+                            <label
+                                htmlFor="home-page-search"
+                                aria-label="Search"
+                            >
+                                <icons.Search
+                                    className={"searchIcon medium middle"}
+                                    fill="#8c8c8c"
+                                />
+                            </label>
                             <input
+                                id="home-page-search"
                                 ref={element => {
                                     this.search = element;
                                 }}
                                 type="search"
-                                placeholder={
-                                    "Food vouchers, rent assistance, " +
-                                    "emergency relief"
-                                }
                                 aria-label="Search"
                                 defaultValue={storage.getSearch()}
                             />
