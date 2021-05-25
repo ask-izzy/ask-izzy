@@ -1,0 +1,33 @@
+.AlertBannerList {
+    ul {
+        padding-left: 0;
+
+        li {
+            list-style-type: none;
+
+            .AlertBanner {
+                margin: 1em;
+            }
+        }
+    }
+
+    &.inline {
+        .AlertBanner {
+            margin: 0;
+            border-right: 0;
+            border-left: 0;
+        }
+
+        li:not(:last-child) {
+            .AlertBanner {
+                border-bottom: 0;
+            }
+        }
+    }
+
+    &:not(.inline) {
+        .AlertBanner {
+            border: 0;
+        }
+    }
+}

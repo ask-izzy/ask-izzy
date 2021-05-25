@@ -94,33 +94,7 @@ class Intro extends Personalisation<Props, State> {
     render() {
         return (
             <div className="IntroPage">
-                <components.HeaderBar
-                    primaryText={
-                        <div>
-                            To help me find the right services
-                            I'll ask you a few questions
-                        </div>
-                    }
-                    secondaryText={
-                        <div>
-                            All of your answers are private and anonymous.
-                        </div>
-                    }
-                    taperColour={this.state.showStepper ? "LighterGrey"
-                        : "HeaderBar"}
-                    bannerName={this.bannerName}
-                />
-                {
-                    this.state.showStepper ? (
-                        <QuestionStepper
-                            intro={true}
-                            onClear={() => this.setState(
-                                {showStepper: false}
-                            )}
-                            category={this.state.category}
-                        />
-                    ) : null
-                }
+                {this.renderHeaderBar()}
                 <div className="body">
                     <h3>
                         I&#39;m looking for help for
@@ -171,6 +145,43 @@ class Intro extends Personalisation<Props, State> {
                 </div>
             </div>
         )
+    }
+
+    renderHeaderBar(): React.Element<any> {
+        const renderedHeaderBar = (
+            <components.HeaderBar
+                primaryText={
+                    <div>
+                        To help me find the right services
+                        I'll ask you a few questions
+                    </div>
+                }
+                secondaryText={
+                    <div>
+                        All of your answers are private and anonymous.
+                    </div>
+                }
+                taperColour={this.state.showStepper ? "LighterGrey"
+                    : "HeaderBar"}
+                bannerName={this.bannerName}
+            />
+        )
+        if (this.state.showStepper) {
+            return (
+                <section className="page-header-section">
+                    {renderedHeaderBar}
+                    <QuestionStepper
+                        intro={true}
+                        onClear={() => this.setState(
+                            {showStepper: false}
+                        )}
+                        category={this.state.category}
+                    />
+                </section>
+            )
+        } else {
+            return renderedHeaderBar
+        }
     }
 }
 

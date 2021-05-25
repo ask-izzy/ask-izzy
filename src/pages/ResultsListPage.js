@@ -10,13 +10,15 @@ import ResultsPage from "./ResultsPage";
 import ResultsList from "../components/ResultsList";
 import LoadingResultsHeader from
     "../components/ResultsListPage/LoadingResultsHeader";
-import LimitedServicesBanner from "../components/LimitedServicesBanner";
+import AlertBannerList from "../components/AlertBannerList";
 import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 import ButtonListItem from "../components/ButtonListItem";
 import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "./QuestionStepper";
+
+import { stateFromLocation } from "../utils";
 
 class ResultsListPage extends ResultsPage<> {
     render() {
@@ -72,7 +74,11 @@ class ResultsListPage extends ResultsPage<> {
                     !this.state.searchResults ||
                     this.state.searchResults.length === 0 ||
                     <>
-                        <LimitedServicesBanner />
+                        <AlertBannerList
+                            state={stateFromLocation()}
+                            screenLocation="resultsPage"
+                            format="inline"
+                        />
                         <ViewOnMapButton
                             to={this.context.router.location
                                 .pathname.replace(/\/?$/, "/map")

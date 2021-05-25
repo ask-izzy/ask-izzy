@@ -1,12 +1,23 @@
 @use '../styles/mixins/colours';
 
 .AlertBanner {
+    padding: 0.1px; /* force margins not to collapse */
+
     border: #{colours.get-static('colour-border-alert')} solid 1px;
     border: var(--colour-border-alert) solid 1px;
     background-color: #{colours.get-static('colour-bg-standard')};
     background-color: var(--colour-bg-standard);
     color: #{colours.get-static('colour-text-dark')};
     color: var(--colour-text-dark);
+
+    &.hasBody:focus-within {
+        outline: 1px solid #{colours.get-static('colour-input-focus-primary')};
+        outline: 1px solid var(--colour-input-focus-primary);
+
+        summary {
+            outline: 0;
+        }
+    }
 
     a {
         color: #{colours.get-static('colour-text-dark')};
@@ -24,7 +35,7 @@
         align-items: center;
         justify-content: space-between;
         min-height: 40px;
-        margin: 1em;
+        padding: 0 1em;
 
         .title {
             display: flex;
@@ -54,6 +65,10 @@
     }
 
     .body {
-        margin: 1em;
+        margin: 0 1em 1em;
+
+        & > *:first-child {
+            margin-top: 0;
+        }
     }
 }

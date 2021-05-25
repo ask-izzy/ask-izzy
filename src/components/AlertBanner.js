@@ -1,6 +1,7 @@
 /* @flow */
 
 import * as React from "react";
+import classnames from "classnames";
 
 import Chevron from "../icons/Chevron";
 import Warning from "../icons/Warning";
@@ -10,7 +11,7 @@ type Props = {
     title: React.Node,
     body?: React.Node,
     alertLevel: string,
-    defaultToOpen: boolean
+    defaultToOpen?: boolean
 }
 
 export default function AlertBanner(props: Props) {
@@ -29,7 +30,12 @@ export default function AlertBanner(props: Props) {
             <span className="text">{props.title}</span>
         </span>
     </>
-    const containerClasses = `AlertBanner ${props.alertLevel}`
+    const containerClasses = classnames(
+        "AlertBanner",
+        props.alertLevel,
+        {hasBody: props.body},
+        {noBody: !props.body}
+    )
 
     if (props.body) {
         return (

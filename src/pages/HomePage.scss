@@ -1,42 +1,6 @@
 @use '../styles/mixins/colours';
 
 .HomePage {
-    .notification {
-        display: flex;
-        padding: 0.6em 0.1em;
-        padding-right: 1.5em;
-        border-left: #{colours.get-static('raw-colour-sunflower')} 10px solid;
-        border-left: var(--raw-colour-sunflower) 10px solid;
-        background-color: #{colours.get-static('colour-bg-standard-tint-3')};
-        background-color: var(--colour-bg-standard-tint-3);
-
-        div {
-            display: flex;
-            flex: 1 1; /* for IE */
-            flex-direction: column;
-            padding: 0.4em 0.1em;
-
-            > * {
-                margin: 0.2em;
-            }
-
-            h3 {
-                font-size: 1.1em;
-            }
-        }
-
-        a {
-            color: #{colours.get-static('colour-link')};
-            color: var(--colour-link);
-            font-weight: bold;
-
-            &:visited {
-                color: #{colours.get-static('colour-link-visited')};
-                color: var(--colour-link-visited);
-            }
-        }
-    }
-
     .appbar {
         position: sticky;
         top: 0;
@@ -48,31 +12,30 @@
         }
     }
 
-    .HeaderBar {
-        padding: 30px 20px calc(2vw + 28px);
-        text-align: center;
+    .page-header-section {
+        padding-bottom: 0.1px; /* stop margin collapse */
+        background-color: #{colours.get-static('colour-bg-standard-tint-1')};
+        background-color: var(--colour-bg-standard-tint-1);
 
-        .homepage-logo {
-            display: block;
-            width: 200px;
-            margin: 10px auto;
+        .HeaderBar {
+            padding: 30px 20px calc(2vw + 28px);
+            text-align: center;
+
+            .homepage-logo {
+                display: block;
+                width: 200px;
+                margin: 10px auto;
+            }
+
+            .primary {
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+
+            .secondary {
+                font-weight: 500;
+            }
         }
-
-        .primary {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-
-        .secondary {
-            font-weight: 500;
-        }
-    }
-
-    .header a {
-        color: #{colours.get-static('colour-text-very-light')};
-        color: var(--colour-text-very-light);
-        font-size: 15px;
-        text-decoration: none;
     }
 
     .search {
