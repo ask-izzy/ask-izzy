@@ -2,18 +2,12 @@
 import * as React from "react";
 import gfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
-
+import {absoluteImageUrl} from "../pages/DynamicPage.service";
 import AccordionItem from "./AccordionItem";
 
 type Props = {
     title: string,
     items: Array<Object>,
-}
-
-const absoluteImageUrl = (uri: string): string => {
-    // Strapi returns a relative image url, we need to change
-    // it to point to our content server.
-    return window.STRAPI_URL + uri;
 }
 
 const Accordion: React.StatelessFunctionalComponent<Props> = (

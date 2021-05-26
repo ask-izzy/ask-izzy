@@ -1,5 +1,6 @@
 /* @flow */
 import { ApolloServer, gql } from "apollo-server";
+import GraphQLJSON from "graphql-type-json";
 
 const typeDefs = gql`
   type Query {
@@ -23,8 +24,10 @@ const typeDefs = gql`
     BannerTextSecondary: String
     AccordionTitle: String
     Accordion: [Accordion]
+    CalloutBoxes: [CalloutBoxes]
   }
   scalar DateTime
+  scalar Boolean
   scalar JSON
   enum PublicationState {
     LIVE
@@ -37,6 +40,26 @@ const typeDefs = gql`
     Title: String
     Content: String
   }
+  type CalloutBoxes {
+    Top: Boolean
+    Bottom: Boolean
+    callout: Callout
+  }
+  type Callout {
+    id: ID!
+    ShowHeading: Boolean
+    Link: String
+    className: ClassName
+    Heading: String!
+    Body: String
+    Style: JSON
+    Phone: String
+  }
+
+  type ClassName {
+    className: String
+  }
+
 `;
 
 const mocks = {
@@ -69,7 +92,23 @@ const mocks = {
                     Body: "Try to live a good life",
                 }]
             } else if (path === "/online-safety") {
-                return []
+                return [];
+            } else if (path === "/homeless-shelters") {
+                return [
+                    {
+                        Title: "Shelter Services",
+                        CalloutBoxes: [
+                            {
+                                Top: true,
+                                Bottom: false,
+                                callout: {
+                                    ShowHeading: true,
+                                    Heading: "Ask Izzy can help",
+                                },
+                            },
+                        ],
+                    },
+                ];
             } else if (path === "/food-info") {
                 return [
                     {Title: "Page 1"},
@@ -80,6 +119,9 @@ const mocks = {
         },
     }),
     DateTime: () => new Date(),
+    JSON: (parent, args, context, info) => {
+        return GraphQLJSON.serialize(parent[info.fieldName])
+    },
 }
 
 const url = process.env.STRAPI_URL

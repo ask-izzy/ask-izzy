@@ -5,6 +5,7 @@
 import Accessibility from "./components/Accessibility";
 import AccordionItem from "./components/AccordionItem";
 import Accordion from "./components/Accordion";
+import CalloutBox from "./components/CalloutBox";
 import Address from "./components/Address";
 import AppBar from "./components/AppBar";
 import BaseLogoWithTextBox from "./components/BaseLogoWithTextBox";
@@ -64,6 +65,7 @@ export default {
     Accessibility,
     AccordionItem,
     Accordion,
+    CalloutBox,
     Address,
     AppBar,
     BaseLogoWithTextBox,
