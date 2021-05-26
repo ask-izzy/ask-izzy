@@ -81,7 +81,6 @@
         }
 
         a {
-            color: $brand-text-mid;
             font-weight: 500;
         }
     }
@@ -101,6 +100,31 @@
         a {
             color: $white;
             text-decoration: underline;
+        }
+    }
+
+    .calloutPhone {
+        .Contact-text {
+            color: $white;
+        }
+
+        .number {
+            margin-left: 1em;
+        }
+
+        .Icon {
+            display: inline-block;
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            margin-left: -110px;
+
+            path {
+                fill: $white;
+                @media print {
+                    fill: $black;
+                }
+            }
         }
     }
 

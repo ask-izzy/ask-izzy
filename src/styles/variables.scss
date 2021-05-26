@@ -31,7 +31,8 @@ $interactive-icon: $brand-text-mid;
 
 $list-item-hairline: $brand-bg-light;
 
-$link-text-color: $brand-pane-alt-dark;
+$link-text-color: #3c69a7;
+$link-text-color-visited: #884488;
 $text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
 
 $black: #000000;
@@ -40,11 +41,6 @@ $white: #ffffff;
 $online-safety: rgb(112, 189, 174);
 $site-banner-warning: #4c13ae;
 $census-brand-color: #c5d604;
-
-a,
-.link-color {
-    color: $brand-pane-alt-dark;
-}
 
 :focus {
     outline: 1px solid $brand-pane-alt-light;

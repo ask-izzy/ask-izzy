@@ -102,7 +102,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
         return (
             <h3>
                 <Link to={referralServiceLink}>Women's referral service</Link>
-                on{" "}
+                {" "}on{" "}
                 {
                     this.props.mobileView ? (
                         <Link to={`tel:${referralServicePhone}`}>

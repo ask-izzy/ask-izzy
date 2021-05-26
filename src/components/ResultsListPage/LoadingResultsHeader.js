@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from "react";
-import {Link} from "react-router-dom";
+import Link from "../Link"
 
 import HeaderBar from "../HeaderBar";
 import type Category from "../../constants/Category";

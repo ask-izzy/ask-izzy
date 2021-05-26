@@ -9,9 +9,12 @@
         h2 {
             display: inline-block;
             margin: 0 0.5em 0 0;
-            color: $link-text-color;
             font-size: 18px;
             font-weight: 500;
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
 
         .flags {
@@ -25,7 +28,20 @@
         position: relative;
         right: 6px;
         bottom: 2px;
+        color: $brand-text-dark;
         font-weight: 500;
+    }
+
+    p {
+        color: $brand-text-dark;
+    }
+
+    h3 {
+        color: $brand-text-dark;
+    }
+
+    li {
+        color: $brand-text-dark;
     }
 
     .MapIcon {
@@ -73,7 +89,10 @@
     }
 
     .learnMore {
-        color: $brand-pane-alt-dark;
         text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
     }
 }

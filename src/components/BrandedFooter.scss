@@ -34,6 +34,11 @@ $container-spacing: 20px;
         a {
             color: $brand-text-dark;
             text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+
         }
 
         > div {
@@ -82,8 +87,16 @@ $container-spacing: 20px;
                     margin-left: 0;
 
                     a {
+                        display: flex;
+                        flex-direction: row;
                         font-weight: 500;
                         text-decoration: none;
+
+                        &:hover {
+                            div {
+                                text-decoration: underline;
+                            }
+                        }
                     }
 
                     .icon:first-child .Icon {

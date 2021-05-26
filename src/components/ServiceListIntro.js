@@ -12,15 +12,14 @@ export default class ServiceListIntro extends BaseLogoWithTextBox {
         body: `Do you know what domestic violence looks like? Learn
                more about how to spot the signs and what to do.`,
         highlightColor: "#887FBB",
+        path: "/information",
     };
 
     static contextType = routerContext;
 
     onClickBox(): void {
-        const path = "/Information";
-
         this.context.router.history.push(
-            path,
+            this.props.path,
         );
     }
 }

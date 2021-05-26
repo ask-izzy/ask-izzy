@@ -6,10 +6,12 @@ import Link from "./Link";
 import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
 import icons from "../icons";
+import classnames from "classnames"
 
 type Props = phone & {
     crisis?: boolean,
-    analyticsEventDetails?: AnalyticsEvent
+    analyticsEventDetails?: AnalyticsEvent,
+    className?: ?string,
 }
 
 class Phone extends React.Component<Props, void> {
@@ -60,7 +62,10 @@ class Phone extends React.Component<Props, void> {
                 </span>
                 <Link
                     to={this.href}
-                    className={contactButtonClassName}
+                    className={classnames(
+                        contactButtonClassName,
+                        this.props.className,
+                    )}
                     onClick={this.recordClick}
                 >
                     <div

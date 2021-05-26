@@ -1,0 +1,12 @@
+.Link {
+    color: $link-text-color;
+
+    &:visited {
+        color: $link-text-color-visited;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+
+}

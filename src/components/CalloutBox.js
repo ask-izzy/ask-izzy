@@ -93,7 +93,8 @@ function CalloutBox(
             />
             {callout.Phone &&
                 <Phone
-                    number={callout.Phone}
+                    className="calloutPhone"
+                    number={`Call ${callout.Phone}`}
                     comment=""
                     kind=""
                 />}

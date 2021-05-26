@@ -27,6 +27,10 @@
 
     .change-personalisation {
         font-weight: bold;
+
+        &:visited {
+            color: $link-text-color;
+        }
     }
 
     .List {

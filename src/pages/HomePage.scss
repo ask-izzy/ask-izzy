@@ -29,8 +29,13 @@ $bright-purple: #8a2be2;
         }
 
         a {
-            color: $brand-text-dark;
+            color: $link-text-color;
             font-weight: bold;
+
+            &:visited {
+                color: $link-text-color-visited;
+            }
+
         }
     }
 

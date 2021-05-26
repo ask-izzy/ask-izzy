@@ -4,5 +4,9 @@
     .collapser-message {
         display: block;
         padding-top: 10px;
+
+        &:visited {
+            color: $link-text-color;
+        }
     }
 }

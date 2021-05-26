@@ -1,4 +1,11 @@
 .Collapser {
+
+    .collapser-message {
+        &:visited {
+            color: $link-text-color;
+        }
+    }
+
     @media screen {
         .collapsed {
             display: none;

@@ -41,15 +41,14 @@ $colour-icon-background: #70bdae;
             font-size: small;
         }
 
+        .Chevron {
+            display: inline;
+            font-weight: normal;
+        }
+
         .Link {
             display: inline;
-            color: $colour-grey;
             font-weight: 500;
-
-            .Chevron {
-                display: inline;
-                font-weight: normal;
-            }
         }
 
         @media (max-width: 768px) {
