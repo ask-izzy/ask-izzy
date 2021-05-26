@@ -13,14 +13,66 @@ import NotFoundStaticPage from "./NotFoundStaticPage";
 import routerContext from "../contexts/router-context";
 import gfm from "remark-gfm";
 import Accordion from "../components/Accordion";
-import {absoluteImageUrl, renderLink} from "./DynamicPage.service";
+import {
+    absoluteImageUrl,
+    renderLink,
+} from "./DynamicPage.service";
 import CalloutBox from "../components/CalloutBox";
+import CalloutQuery from "../queries/content/callout";
 type Props = {
     location: any,
 }
 
+type ReactMarkdownQuoteProps = {
+    children: React.Node
+}
+
 class DynamicPage extends React.Component<Props, void> {
     static contextType = routerContext;
+
+
+    /**
+     * This is used to render any embedded callouts that are written as
+     * > [callout(code)] - where it uses the blockquote tag
+     * @param props - Thr Markdown props of a blockquote
+     * @returns {JSX.Element} - returns either a callout or blockqupte
+     */
+    renderEmbCallout = (props: ReactMarkdownQuoteProps) => {
+
+        // Get the text content of the children
+        const textContent = React.Children.map(props.children,
+            paragraphElm => (
+                React.Children.map(paragraphElm.props.children,
+                    textElm => textElm.type(textElm.props))
+            )).join("")
+
+        const embeddedCallouts = textContent.match(/\[callout.(.*).]/);
+        if (embeddedCallouts) {
+            return (
+                <Query
+                    query={CalloutQuery}
+                    errorComponent={
+                        <div className="loadingStatus">
+                            Could not load the callout {embeddedCallouts[1]}
+                        </div>
+                    }
+                    args={{
+                        key: embeddedCallouts[1],
+                    }}
+                >
+                    {res => (
+                        <CalloutBox
+                            calloutBoxes={res.data.callouts.map(callout => ({
+                                callout,
+                            }))}
+                            embedded={true}
+                        />
+                    )}
+                </Query>
+            )
+        }
+        return <blockquote>{props.children}</blockquote>
+    }
 
 
     render() {
@@ -96,7 +148,10 @@ class DynamicPage extends React.Component<Props, void> {
                                         plugins={[gfm]}
                                         source={page.Body}
                                         transformImageUri={absoluteImageUrl}
-                                        renderers={{ "link": renderLink }}
+                                        renderers={{
+                                            "link": renderLink,
+                                            "blockquote": this.renderEmbCallout,
+                                        }}
                                     />
                                     <Accordion
                                         title={page.AccordionTitle}

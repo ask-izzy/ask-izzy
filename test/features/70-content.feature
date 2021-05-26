@@ -69,3 +69,15 @@ Feature: CMS integration
 
         When I click on "About Ask Izzy"
         Then I should see "We’re always making improvements."
+
+    Scenario: Display disability organisation page with embedded callout
+        Given a fresh session
+        When I visit /disability-organisations
+        Then I should see "Disability Organisations"
+        And I should see "Ask Izzy can help"
+
+    Scenario: Display Information page with poorly formatted embedded callout
+        Given a fresh session
+        When I visit /information
+        Then I should see "Information"
+        And I should not see "Ask Izzy can help"

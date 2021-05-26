@@ -266,6 +266,11 @@ export default (
             }}
         />
         <BasePage
+            path="/disability-organisations"
+            component={DynamicPage}
+            title="Disability Organisations"
+        />
+        <BasePage
             path="/not-found"
             component={NotFoundStaticPage}
             title="Page not found"

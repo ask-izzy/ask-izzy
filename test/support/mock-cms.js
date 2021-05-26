@@ -11,6 +11,13 @@ const typeDefs = gql`
       where: JSON
       publicationState: PublicationState
     ): [Page]
+    callouts(
+      sort: String
+      limit: Int
+      start: Int
+      where: JSON
+      publicationState: PublicationState
+    ): [Callout]
   }
   type Page {
     id: ID!
@@ -54,6 +61,7 @@ const typeDefs = gql`
     Body: String
     Style: JSON
     Phone: String
+    Key: String
   }
 
   type ClassName {
@@ -64,6 +72,19 @@ const typeDefs = gql`
 
 const mocks = {
     Query: () => ({
+        callouts: (parent, args, context, info) => {
+            const key = args?.where?.Key || info?.variableValues?.key
+            if (key === "test") {
+                return [{
+                    ShowHeading: true,
+                    Heading: "Ask Izzy can help",
+                }]
+            }
+            else if (key === "nothing") {
+                return [{}]
+            }
+            return [{}]
+        },
         pages: (parent, args, context, info) => {
             const path = args?.where?.Path || info?.variableValues?.path
             if (path === "/about") {
@@ -109,6 +130,17 @@ const mocks = {
                         ],
                     },
                 ];
+            } else if (path === "/disability-organisations") {
+                return [{
+                    Title: "Disability Organisations",
+                    Body: "Try to live a good life\n\n> [callout(test)]",
+                }];
+            } else if (path === "/information") {
+                return [{
+                    Title: "Information",
+                    Body: "Try to live a good life\n\n> [callout(test)] " +
+                        "[callout(nothing)]",
+                }];
             } else if (path === "/food-info") {
                 return [
                     {Title: "Page 1"},
