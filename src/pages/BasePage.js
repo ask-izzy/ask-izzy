@@ -5,7 +5,7 @@ import Helmet from "react-helmet";
 import { makeTitle } from "../routes";
 import { Outlet } from "react-router-dom";
 
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider } from "@apollo/client";
 import client from "../utils/apolloClient";
 import HistoryListener from "../effects/HistoryListener";
 import DebugColours from "../components/DebugColours";
