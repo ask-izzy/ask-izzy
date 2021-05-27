@@ -22,7 +22,11 @@ module.exports = {
         "../src/**/*.stories.mdx",
         "../src/**/*.stories.@(js|jsx|ts|tsx)",
     ],
-    addons: ["@storybook/addon-links", "@storybook/addon-essentials"],
+    addons: [
+        "@storybook/addon-links",
+        "@storybook/addon-essentials",
+        "storybook-addon-apollo-client",
+    ],
     webpackFinal: (config) => {
         const bannerImages = fs
             .readdirSync("./public/static/images/banners")

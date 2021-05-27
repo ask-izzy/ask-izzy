@@ -16,18 +16,19 @@ type Props = {
 
 export default function AlertBanner(props: Props) {
     let AlertLevelIcon
+    let title = props.title
     if (props.alertLevel === "warn") {
         AlertLevelIcon = Warning
     } else if (props.alertLevel === "info") {
         AlertLevelIcon = Info
     } else {
         AlertLevelIcon = Warning
-        props.title = <>{props.title} [invalid alert level]</>
+        title = <>{title} [invalid alert level]</>
     }
     const titleContents = <>
         <span className="title">
             <AlertLevelIcon className="inline-icon" />
-            <span className="text">{props.title}</span>
+            <span className="text">{title}</span>
         </span>
     </>
     const containerClasses = classnames(

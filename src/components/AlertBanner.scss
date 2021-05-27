@@ -34,7 +34,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        min-height: 40px;
+        min-height: 60px;
         padding: 0 1em;
 
         .title {
@@ -53,8 +53,13 @@
             }
 
             .text {
+                margin: 1em;
                 font-size: 18px;
                 font-weight: 500;
+
+                p {
+                    display: inline;
+                }
             }
         }
 

@@ -1,4 +1,6 @@
 /* @flow */
+import { MockedProvider } from "@apollo/client/testing";
+
 // eslint-disable-next-line no-unused-vars
 import GlobalStyle from "../src/styles/bundle.scss";
 
@@ -20,5 +22,8 @@ export const parameters = {
                 "Icons",
             ],
         },
+    },
+    apolloClient: {
+        MockedProvider,
     },
 }

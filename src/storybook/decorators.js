@@ -3,10 +3,12 @@
 import React, {useEffect} from "react";
 import { MemoryRouter } from "react-router-dom";
 import {LoadScript} from "@react-google-maps/api";
+import { ApolloProvider } from "@apollo/client";
 
 import storage from "../storage";
 import RouterContext from "../contexts/router-context";
 import { DebugModeProvider } from "../contexts/debug-mode-context";
+import createApolloClient from "../utils/apolloClient";
 
 export function addRouter(Story: Object) {
     return <MemoryRouter><Story/></MemoryRouter>
@@ -72,4 +74,17 @@ export function setDebugModeContext(Story: Object, {parameters}: Object) {
             <Story/>
         </DebugModeProvider>
     );
+}
+
+export function setApolloProvider(Story: Object,
+    { loaded: { env } }: Object) {
+    console.log(env)
+    window.STRAPI_URL = env.STRAPI_URL
+    return (
+        <ApolloProvider
+            client={createApolloClient(env.STRAPI_URL)}
+        >
+            <Story/>
+        </ApolloProvider>
+    )
 }
