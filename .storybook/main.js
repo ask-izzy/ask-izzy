@@ -44,4 +44,7 @@ module.exports = {
 
         return config
     },
+    features: {
+        postcss: false, // hide deprecation warning, won't be needed in future https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#deprecated-implicit-postcss-loader
+    },
 };

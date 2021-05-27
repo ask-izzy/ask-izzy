@@ -171,7 +171,7 @@
     semver "^6.3.0"
     source-map "^0.5.0"
 
-"@babel/core@^7.1.0", "@babel/core@^7.12.10", "@babel/core@^7.13.0", "@babel/core@^7.7.5":
+"@babel/core@^7.1.0", "@babel/core@^7.12.10", "@babel/core@^7.7.5":
   version "7.14.2"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.14.2.tgz#54e45334ffc0172048e5c93ded36461d3ad4c417"
   integrity sha512-OgC1mON+l4U4B4wiohJlQNUU3H73mpTyYY3j/c8U9dr9UagGGSm+WFpzjy/YLdoyjiG++c1kIDgxCo/mLwQJeQ==
@@ -192,10 +192,40 @@
     semver "^6.3.0"
     source-map "^0.5.0"
 
+"@babel/core@^7.14.3":
+  version "7.14.3"
+  resolved "https://registry.npmjs.org/@babel/core/-/core-7.14.3.tgz#5395e30405f0776067fbd9cf0884f15bfb770a38"
+  integrity sha512-jB5AmTKOCSJIZ72sd78ECEhuPiDMKlQdDI/4QRI6lzYATx5SSogS1oQA2AoPecRCknm30gHi2l+QVvNUu3wZAg==
+  dependencies:
+    "@babel/code-frame" "^7.12.13"
+    "@babel/generator" "^7.14.3"
+    "@babel/helper-compilation-targets" "^7.13.16"
+    "@babel/helper-module-transforms" "^7.14.2"
+    "@babel/helpers" "^7.14.0"
+    "@babel/parser" "^7.14.3"
+    "@babel/template" "^7.12.13"
+    "@babel/traverse" "^7.14.2"
+    "@babel/types" "^7.14.2"
+    convert-source-map "^1.7.0"
+    debug "^4.1.0"
+    gensync "^1.0.0-beta.2"
+    json5 "^2.1.2"
+    semver "^6.3.0"
+    source-map "^0.5.0"
+
 "@babel/generator@^7.12.11", "@babel/generator@^7.12.5", "@babel/generator@^7.14.2":
   version "7.14.2"
   resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.14.2.tgz#d5773e8b557d421fd6ce0d5efa5fd7fc22567c30"
   integrity sha512-OnADYbKrffDVai5qcpkMxQ7caomHOoEwjkouqnN2QhydAjowFAZcsdecFIRUBdb+ZcruwYE4ythYmF1UBZU5xQ==
+  dependencies:
+    "@babel/types" "^7.14.2"
+    jsesc "^2.5.1"
+    source-map "^0.5.0"
+
+"@babel/generator@^7.14.3":
+  version "7.14.3"
+  resolved "https://registry.npmjs.org/@babel/generator/-/generator-7.14.3.tgz#0c2652d91f7bddab7cccc6ba8157e4f40dcedb91"
+  integrity sha512-bn0S6flG/j0xtQdz3hsjJ624h3W0r3llttBMfyHX3YrZ/KtLYr15bjA0FXkgW7FpvrDuTuElXeVjiKlYRpnOFA==
   dependencies:
     "@babel/types" "^7.14.2"
     jsesc "^2.5.1"
@@ -557,9 +587,9 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@babel/node@^7.13.0":
+"@babel/node@^7.14.2":
   version "7.14.2"
-  resolved "https://registry.yarnpkg.com/@babel/node/-/node-7.14.2.tgz#d860c10306020d18e3fd0327c63bfaf2dbfc7470"
+  resolved "https://registry.npmjs.org/@babel/node/-/node-7.14.2.tgz#d860c10306020d18e3fd0327c63bfaf2dbfc7470"
   integrity sha512-QB/C+Kl6gIYpTjZ/hcZj+chkiAVGcgSHuR849cdNvNJBz4VztO2775/o2ge8imB94EAsLcgkrdWH/3+UIVv1TA==
   dependencies:
     "@babel/register" "^7.13.16"
@@ -573,6 +603,11 @@
   version "7.14.2"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.14.2.tgz#0c1680aa44ad4605b16cbdcc5c341a61bde9c746"
   integrity sha512-IoVDIHpsgE/fu7eXBeRWt8zLbDrSvD7H1gpomOkPpBoEN8KCruCqSDdqo8dddwQQrui30KSvQBaMUOJiuFu6QQ==
+
+"@babel/parser@^7.14.3":
+  version "7.14.3"
+  resolved "https://registry.npmjs.org/@babel/parser/-/parser-7.14.3.tgz#9b530eecb071fd0c93519df25c5ff9f14759f298"
+  integrity sha512-7MpZDIfI7sUC5zWo2+foJ50CSI5lcqDehZ0lVgIhSi4bFEk94fLAKlF3Q0nzSQQ+ca0lm+O6G9ztKVBeu8PMRQ==
 
 "@babel/parser@^7.14.5", "@babel/parser@^7.14.6", "@babel/parser@^7.14.7":
   version "7.14.7"
@@ -613,9 +648,9 @@
     "@babel/helper-plugin-utils" "^7.13.0"
     "@babel/plugin-syntax-class-static-block" "^7.12.13"
 
-"@babel/plugin-proposal-decorators@^7.12.12", "@babel/plugin-proposal-decorators@^7.13.0":
+"@babel/plugin-proposal-decorators@^7.12.12", "@babel/plugin-proposal-decorators@^7.14.2":
   version "7.14.2"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.14.2.tgz#e68c3c5e4a6a08834456568256fc3e71b93590cf"
+  resolved "https://registry.npmjs.org/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.14.2.tgz#e68c3c5e4a6a08834456568256fc3e71b93590cf"
   integrity sha512-LauAqDd/VjQDtae58QgBcEOE42NNP+jB2OE+XeC3KBI/E+BhhRjtr5viCIrj1hmu1YvrguLipIPRJZmS5yUcFw==
   dependencies:
     "@babel/helper-create-class-features-plugin" "^7.14.2"
@@ -1187,9 +1222,9 @@
     core-js "^2.6.5"
     regenerator-runtime "^0.13.4"
 
-"@babel/preset-env@^7.12.11", "@babel/preset-env@^7.13.0":
+"@babel/preset-env@^7.12.11", "@babel/preset-env@^7.14.2":
   version "7.14.2"
-  resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.14.2.tgz#e80612965da73579c84ad2f963c2359c71524ed5"
+  resolved "https://registry.npmjs.org/@babel/preset-env/-/preset-env-7.14.2.tgz#e80612965da73579c84ad2f963c2359c71524ed5"
   integrity sha512-7dD7lVT8GMrE73v4lvDEb85cgcQhdES91BSD7jS/xjC6QY8PnRhux35ac+GCpbiRhp8crexBvZZqnaL6VrY8TQ==
   dependencies:
     "@babel/compat-data" "^7.14.0"
@@ -1266,9 +1301,9 @@
     core-js-compat "^3.9.0"
     semver "^6.3.0"
 
-"@babel/preset-flow@^7.12.1", "@babel/preset-flow@^7.12.13":
+"@babel/preset-flow@^7.12.1", "@babel/preset-flow@^7.13.13":
   version "7.13.13"
-  resolved "https://registry.yarnpkg.com/@babel/preset-flow/-/preset-flow-7.13.13.tgz#a61a1c149b3f77589d795287744393444d5cdd9e"
+  resolved "https://registry.npmjs.org/@babel/preset-flow/-/preset-flow-7.13.13.tgz#a61a1c149b3f77589d795287744393444d5cdd9e"
   integrity sha512-MDtwtamMifqq3R2mC7l3A3uFalUb3NH5TIBQWjN/epEPlZktcLq4se3J+ivckKrLMGsR7H9LW8+pYuIUN9tsKg==
   dependencies:
     "@babel/helper-plugin-utils" "^7.13.0"
@@ -1286,9 +1321,9 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/preset-react@^7.12.10", "@babel/preset-react@^7.12.13":
+"@babel/preset-react@^7.12.10", "@babel/preset-react@^7.13.13":
   version "7.13.13"
-  resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.13.13.tgz#fa6895a96c50763fe693f9148568458d5a839761"
+  resolved "https://registry.npmjs.org/@babel/preset-react/-/preset-react-7.13.13.tgz#fa6895a96c50763fe693f9148568458d5a839761"
   integrity sha512-gx+tDLIE06sRjKJkVtpZ/t3mzCDOnPG+ggHZG9lffUbX8+wC739x20YQc9V35Do6ZAxaUc/HhVHIiOzz5MvDmA==
   dependencies:
     "@babel/helper-plugin-utils" "^7.13.0"
@@ -1307,7 +1342,7 @@
     "@babel/helper-validator-option" "^7.12.17"
     "@babel/plugin-transform-typescript" "^7.13.0"
 
-"@babel/register@^7.12.1", "@babel/register@^7.13.0", "@babel/register@^7.13.16":
+"@babel/register@^7.12.1", "@babel/register@^7.13.16":
   version "7.13.16"
   resolved "https://registry.yarnpkg.com/@babel/register/-/register-7.13.16.tgz#ae3ab0b55c8ec28763877383c454f01521d9a53d"
   integrity sha512-dh2t11ysujTwByQjXNgJ48QZ2zcXKQVdV8s0TbeMI0flmtGWCdTwK9tJiACHXPLmncm5+ktNn/diojA45JE4jg==
