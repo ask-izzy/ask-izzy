@@ -44,6 +44,7 @@ const typeDefs = gql`
     Key: String!
   }
   type Accordion {
+    id: ID!
     Title: String
     Content: String
   }
@@ -79,8 +80,7 @@ const mocks = {
                     ShowHeading: true,
                     Heading: "Ask Izzy can help",
                 }]
-            }
-            else if (key === "nothing") {
+            } else if (key === "nothing") {
                 return [{}]
             }
             return [{}]
@@ -98,10 +98,12 @@ const mocks = {
                     BannerTextSecondary: "Some secondary text",
                     Accordion: [
                         {
+                            id: 1,
                             Title: "Victoria",
                             Content: "Accordion content for Victoria.",
                         },
                         {
+                            id: 2,
                             Title: "Tasmania",
                             Content: "Accordion content for Tasmania.",
                         },

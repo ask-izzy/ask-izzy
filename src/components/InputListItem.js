@@ -51,8 +51,7 @@ export default class InputListItem extends React.Component<Props, void> {
                         <input
                             ref="input"
                             key="input"
-                            // Avoid label of [object Object]
-                            // aria-label={primaryText}
+                            aria-label={primaryText}
                             {...(rest: any)}
                             tabIndex="-1"
                         />

@@ -177,7 +177,10 @@ class AddServicePage extends React.Component<Props, State> {
                     we&apos;ll contact you to find out more.
                 </p>
 
-                <iframe src={`${issUrl}/add-service-form?form=ask-izzy`} />
+                <iframe
+                    title="Add Service Form"
+                    src={`${issUrl}/add-service-form?form=ask-izzy`}
+                />
             </div>
         );
     }
