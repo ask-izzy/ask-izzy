@@ -13,7 +13,7 @@ import {
     clearPrivateMode,
 } from "./storage/polyfill";
 
-import sendEvent from "./google-tag-manager";
+import * as gtm from "./google-tag-manager";
 
 type Coordinates = {
     latitude: number,
@@ -47,7 +47,9 @@ const Storage = {
     },
 
     getLocation(): string {
-        return this.getItem("location") || "";
+        return (
+            this.getItem("location") && String(this.getItem("location"))
+        ) || "";
     },
 
     setLocation(location: string): void {
@@ -94,11 +96,16 @@ const Storage = {
             switchToPrivateMode();
         }
 
-        let event = {};
+        gtm.emit({
+            event: "Personalisation Response Given",
+            eventCat: this.getItem(key) ?
+                "Change Personalisation Response"
+                : "Set Personalisation Response",
+            eventAction: key,
+            eventLabel: String(obj),
+            sendDirectlyToGA: true,
+        })
 
-        event.event = `set-${key}`;
-        event[`personalize-${key}`] = obj;
-        sendEvent(event);
         // $FlowIgnore
         persistentStore.setItem(key, `${obj}`);
     },
@@ -131,6 +138,21 @@ const Storage = {
     },
 
     setJSON(key: string, obj: mixed): void {
+        if (obj instanceof Array) {
+            for (const val of obj) {
+                gtm.emit({
+                    event: "Personalisation Response",
+                    eventCat: this.getItem(key) ?
+                        "Change Personalisation Response"
+                        : "Set Personalisation Response",
+                    eventAction: `${key} (single value)`,
+                    eventLabel: val,
+                    sendDirectlyToGA: true,
+                })
+            }
+            obj.sort()
+        }
+
         this.setItem(key, JSON.stringify(obj));
     },
 

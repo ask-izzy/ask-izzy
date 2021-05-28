@@ -10,7 +10,7 @@ import Gender from "../../pages/personalisation/Gender";
 import Age from "../../pages/personalisation/Age";
 import Location from "../../pages/personalisation/Location";
 import storage from "../../storage";
-import sendEvent from "../../google-tag-manager";
+import * as gtm from "../../google-tag-manager";
 import routerContext from "../../contexts/router-context";
 
 const HomeLink = () =>
@@ -38,7 +38,7 @@ const PersonalisationLink = ({pathname}: Object) => (
         <Link
             className="change-personalisation"
             to={`${trailingSlash(pathname)}personalise/summary`}
-            onClick={sendEvent.bind(null, {event: "changeAnswers"})}
+            onClick={gtm.emit.bind(null, {event: "changeAnswers"})}
         >
             Edit Answers
         </Link>

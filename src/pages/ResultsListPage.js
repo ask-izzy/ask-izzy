@@ -16,21 +16,7 @@ import icons from "../icons";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 import ButtonListItem from "../components/ButtonListItem";
 
-import sendEvent from "../google-tag-manager";
-import storage from "../storage";
-
 class ResultsListPage extends ResultsPage<> {
-
-    recordMapClick(): void {
-        sendEvent({
-            event: "ViewOnMap",
-            location: storage.getLocation(),
-            search: this.state.searchType === "text" &&
-                this.context.router.match.params.search,
-            category: this.state.searchType === "category" && this.category,
-        });
-    }
-
     render() {
         if (this.state.searchType) {
             return this.renderPage()
@@ -83,7 +69,6 @@ class ResultsListPage extends ResultsPage<> {
                             to={this.context.router.location
                                 .pathname.replace(/\/?$/, "/map")
                             }
-                            onClick={this.recordMapClick.bind(this)}
                         />
                     </>
                 }

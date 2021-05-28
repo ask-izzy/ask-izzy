@@ -7,7 +7,6 @@ import Phone from "../../components/Phone";
 import {Link} from "react-router-dom";
 import {states} from "./Covid19Service";
 import {windowWidth} from "../../effects/WindowWidth";
-import sendEvent from "../../google-tag-manager";
 
 function Covid19StaticPage() {
 
@@ -17,18 +16,6 @@ function Covid19StaticPage() {
     useEffect(() => {
         setMobileView(width <= 768);
     }, [width])
-
-    useEffect(() => {
-        sendEvent({
-            event: "categoryPageLoad",
-            categoryName: "Covid-19",
-            isTopical: true,
-        });
-        sendEvent({
-            categoryName: undefined,
-            isTopical: undefined,
-        });
-    }, [])
 
     return (
 
@@ -88,9 +75,7 @@ function Covid19StaticPage() {
                 </p>
             </div>
         </StaticPage>
-
     )
 }
-
 
 export default Covid19StaticPage

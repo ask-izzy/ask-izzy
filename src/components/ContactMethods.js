@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from "react";
-import _ from "underscore";
 
 import Collapser from "./Collapser";
 import Spacer from "./Spacer";
@@ -10,7 +9,7 @@ import Phone from "./Phone";
 import Web from "./Web";
 import fixtures from "../../fixtures/services";
 import ServiceFactory from "../../fixtures/factories/Service";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 
 import type { Service } from "../iss";
 
@@ -50,76 +49,102 @@ class ContactMethods extends React.Component<Props, void> {
         },
     };
 
+    get contacts(): Array<Service> {
+        return this.foldContacts([0])
+    }
+
+    foldPoint = 1
+
+    get contactsBeforeFold(): Array<Service> {
+        return this.foldContacts([0, this.foldPoint])
+    }
+
+    get contactsAfterFold(): Array<Service> {
+        return this.foldContacts([this.foldPoint])
+    }
+
+    foldContacts(foldIndices: Array<number>): Array<Service> {
+        return [
+            ...this.phones.slice(...foldIndices),
+            ...this.emails.slice(...foldIndices),
+            ...this.websites.slice(...foldIndices),
+        ]
+    }
+
     get phones(): Array<Object> {
-        return this.props.object.Phones()
+        return this.props.object.Phones().map(details => ({
+            type: "Phone",
+            component: Phone,
+            details,
+        }))
     }
 
     get emails(): Array<Object> {
-        return this.props.object.emails || [];
+        return (this.props.object.emails || []).map(details => ({
+            type: "Email",
+            component: Email,
+            details,
+        }));
     }
 
-    recordClick(): void {
-        sendEvent({
-            event: "clickOtherContactOptions",
+    get websites(): Array<Object> {
+        const url = this.props.object.web
+
+        return url && [{
+            type: "Website",
+            component: Web,
+            details: {url},
+        }] || [];
+    }
+
+    foldExpandHandler(): void {
+        gtm.emit({
+            event: "Service Contact Details Expanded",
+            eventCat: "Content Expanded",
+            eventAction: "Service Contact Details",
+            eventLabel: location.pathname,
+            sendDirectlyToGA: true,
         })
     }
 
     render() {
-        let assignComponent = (component) =>
-            (record) =>
-                Object.assign({ component: component }, record);
-        let phones = this.phones.map(assignComponent(Phone));
-        let emails = this.emails.map(assignComponent(Email));
-        let contacts = [].concat(
-            _.rest(phones),
-            _.rest(emails),
-        );
-
-        let beforeFoldContacts = _.compact([].concat(
-            _.first(phones),
-            _.first(emails),
-        ));
-
-        if (this.props.object.web) {
-            beforeFoldContacts = beforeFoldContacts.concat({
-                component: Web,
-                url: this.props.object.web,
-            });
-        }
-
-        if (contacts.length > 0) {
+        if (this.contacts.length > 0) {
             /* render one contact method per type and
              * then put the rest in a collapser */
             return (
                 <div className="ContactMethods">
                     <Spacer />
-                    {beforeFoldContacts.map(this.renderContactMethod)}
-                    <Collapser
-                        message="Other contact options"
-                        expanded={this.props.expanded}
-                        onClick={this.recordClick.bind(this)}
-                    >
-                        {contacts.map(this.renderContactMethod)}
-                    </Collapser>
+                    {this.contactsBeforeFold.map(this.renderContactMethod)}
+                    {this.contactsAfterFold.length > 0 &&
+                        <Collapser
+                            message="Other contact options"
+                            expanded={this.props.expanded}
+                            onClick={this.foldExpandHandler}
+                        >
+                            {this.contactsAfterFold.map(
+                                this.renderContactMethod
+                            )}
+                        </Collapser>
+                    }
                 </div>
             );
 
-        } else if (beforeFoldContacts.length > 0) {
-            /* render 1 contact method of each type */
-            return (
-                <div className="ContactMethods">
-                    <Spacer />
-                    {beforeFoldContacts.map(this.renderContactMethod)}
-                </div>
-            );
         } else {
             return <span />;
         }
     }
 
     renderContactMethod(record: Object, idx: number) {
-        Object.assign(record, {key: idx});
-        return React.createElement(record.component, record);
+        const props = Object.assign({
+            key: idx,
+            analyticsEventDetails: {
+                event: "Service Contact Detail Clicked",
+                eventCat: "Service Contact Detail Clicked",
+                eventAction: `${record.type}`,
+            },
+        }, record.details);
+
+        return React.createElement(record.component, props);
     }
 }
 

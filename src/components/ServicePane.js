@@ -4,7 +4,7 @@ import React from "react";
 import _ from "underscore";
 
 import fixtures from "../../fixtures/services";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 import ServiceFactory from "../../fixtures/factories/Service";
 
 import Address from "./Address";
@@ -57,11 +57,12 @@ export default class ServicePane extends React.Component<{
         this.setState({siblings: response.objects});
     }
 
-    recordAlsoAtThisLocation = (): void => {
-        sendEvent({
-            event: "alsoAtThisLocation",
-            listingName: this.props.service.name,
-            crisis: this.props.service.crisis,
+    recordAlsoAtThisLocation = (service: Service): void => {
+        gtm.emit({
+            event: "Other Services At Location Clicked",
+            eventCat: "Other Services At Location Clicked",
+            eventLabel: `${location.pathname} - ${service.slug}`,
+            sendDirectlyToGA: true,
         });
     }
 
@@ -180,7 +181,9 @@ export default class ServicePane extends React.Component<{
                             className="plain-text"
                             to={`/service/${service.slug}`}
                             key={index}
-                            onClick={this.recordAlsoAtThisLocation}
+                            onClick={
+                                () => this.recordAlsoAtThisLocation(service)
+                            }
                             primaryText={service.name}
                             secondaryText={service.shortDescription[0]}
                             rightIcon={<Chevron />}

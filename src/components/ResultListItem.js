@@ -18,7 +18,6 @@ import Accessibility from "./Accessibility";
 import OpeningTimes from "./OpeningTimes";
 import Ndis from "./Ndis";
 import TransportTime from "./TransportTime";
-import sendEvent from "../google-tag-manager";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import { titleize } from "underscore.string";
@@ -35,14 +34,6 @@ class ResultListItem extends React.Component<{
     static sampleProps = {default: {
         service: new iss.Service(fixtures.ixa),
     }};
-
-    recordViewDetail(): void {
-        sendEvent({
-            event: "listing",
-            listingName: this.props.service.name,
-            crisis: this.props.service.crisis,
-        });
-    }
 
     renderLocation(location: Object) {
 
@@ -72,7 +63,6 @@ class ResultListItem extends React.Component<{
                 className="plain-text ResultListItem"
                 to={`/service/${service.slug}`}
                 rightIcon={<icons.Chevron />}
-                onClick={this.recordViewDetail.bind(this)}
             >
 
                 {this.renderLocation(service.Location())}

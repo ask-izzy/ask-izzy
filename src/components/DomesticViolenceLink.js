@@ -4,7 +4,7 @@ import React from "react";
 
 import icons from "../icons";
 import BaseLogoWithTextBox from "./BaseLogoWithTextBox";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 import routerContext from "../contexts/router-context";
 
 export default class DomesticViolenceLink extends BaseLogoWithTextBox {
@@ -21,9 +21,12 @@ export default class DomesticViolenceLink extends BaseLogoWithTextBox {
     onClickBox(): void {
         const path = "/information";
 
-        sendEvent({
-            event: "clickedInformationBanner",
-            banner: "Domestic violence - hotline",
+        gtm.emit({
+            event: "DV Banner Clicked",
+            eventCat: "Banner Clicked",
+            eventAction: "Domestic Violence Information",
+            eventLabel: location.pathname,
+            sendDirectlyToGA: true,
         });
 
         this.context.router.history.push(
