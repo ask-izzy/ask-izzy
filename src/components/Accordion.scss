@@ -47,8 +47,6 @@
     }
 
     .AccordionItemContent {
-        display: none; // Hides for testing.
-
         ul,
         ol {
             margin: 10px 0;
@@ -66,10 +64,6 @@
     &[open] {
         .Icon {
             transform: rotate(-90deg);
-        }
-
-        .AccordionItemContent {
-            display: block;
         }
     }
 }

@@ -10,6 +10,16 @@
     color: #{colours.get-static('colour-text-dark')};
     color: var(--colour-text-dark);
 
+    list-style: none;
+
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+    summary:hover {
+        cursor: pointer;
+    }
+
     &.hasBody:focus-within {
         outline: 1px solid #{colours.get-static('colour-input-focus-primary')};
         outline: 1px solid var(--colour-input-focus-primary);

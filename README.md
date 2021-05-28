@@ -314,14 +314,16 @@ Personalisation features live in `test/personalisation` with step definitions in
 
 See the *Development debugging* section for more info on environmental commands that effect the execution of tests.
 
+There's a mock ISS server available as `./script/mock-iss`. This will
+start a server on `localhost:5000`.
+
+There is also a mock CMS server that can be run with `docker-compose run -p 5001:5001 --rm app shell -c 'env STRAPI_URL="http://0.0.0.0:5001" script/run-node-script test/support/mock-cms/index.js'` and accessed on `localhost:5001`. The schema for the mock CMS server can be updated by pulling the graphql schema directly from a Ask Izzy CMS instance using `docker-compose run -p 5001:5001 --rm app shell -c "env NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt npx get-graphql-schema $ASK_IZZY_CMS_URL/graphql > test/support/mock-cms/strapi-schema.graphql"`.
+
 ### Docker
 
 The dockerfile can run the tests but there's currently
 no development server in `invoke.sh` (should be an easy
 fix but docker isn't typically run locally).
-
-There's also a mock ISS server available as `./script/mock-iss`. This will
-start a server on `localhost:5000`.
 
 ### Adding new icons
 Original icons files are stored in a separate repo hosted on GitHub. To add new icons to Ask Izzy they must be added to that repo first then compiled and copied into this repo using the iconify script.

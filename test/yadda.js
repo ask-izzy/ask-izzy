@@ -9,7 +9,11 @@
 import Webdriver from "selenium-webdriver";
 import Yadda from "yadda";
 import webDriverInstance, { cleanDriverSession } from "./support/webdriver";
-import { takeScreenshot, deleteSceenshot } from "./support/debug";
+import {
+    takeScreenshot,
+    deleteSceenshot,
+    getSceenshotPath,
+} from "./support/debug";
 import chalk from "chalk";
 import fs from "fs-extra";
 import path from "path";
@@ -121,7 +125,7 @@ let processFile = (file) => {
                     try {
                         const filepath = await takeScreenshot(
                             driver,
-                            this.currentTest
+                            getSceenshotPath(this.currentTest)
                         )
 
                         console.log(
