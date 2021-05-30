@@ -11,6 +11,7 @@ import storage from "../../storage";
 import * as gtm from "../../google-tag-manager";
 import routerContext from "../../contexts/router-context";
 import _ from "lodash";
+import {formatResultsPageHeading} from "./LoadingResultsHeader.service";
 
 type Breadcrumb = {
     personalisations: Array<?string>,
@@ -73,7 +74,7 @@ const ResultBreadCrumb = (
     {personalisations, title, location, count}: Breadcrumb
 ): React.Node => (
     <div className="breadcrumb">
-        {count > 0 ? "Showing Services for:"
+        {count > 0 ? formatResultsPageHeading(title)
             : `Sorry, I couldn't find any results for ${title}.`}
         {personalisations.length &&
             <span>
