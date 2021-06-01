@@ -202,10 +202,10 @@ GOOGLE_TAG_MANAGER_AUTH: 'a1b2c3d5e6f7g8'
 GOOGLE_TAG_MANAGER_ENV: 'env-1'
 ```
 
-GTM events are triggered by the `sendEvent` method in `google-tag-manager.js` like so:
+GTM events are triggered by the `gtm.emit` method in `google-tag-manager.js` like so:
 ```javascript
-import sendEvent from "./google-tag-manager";
-sendEvent({
+import * as gtm from "../google-tag-manager";
+gtm.emit({
     event: "categoryPageLoad",
     additionalData: "foo",
     additionalData2: "bar",
@@ -312,7 +312,7 @@ There's also a mock ISS server available as `./script/mock-iss`. This will
 start a server on `localhost:5000`.
 
 ### Adding new icons
-Original icons files are stored in a separate repo hosted on GitHub. To add new icons to Ask Izzy they must be added to that repo first then compiled and copied into this repo using the iconify script. 
+Original icons files are stored in a separate repo hosted on GitHub. To add new icons to Ask Izzy they must be added to that repo first then compiled and copied into this repo using the iconify script.
 
 1) Clone designs repo: `git clone https://github.com/ask-izzy/designs ../ask-izzy-designs`
 2) Add desired icons to designs repo and commit
@@ -339,7 +339,7 @@ docker-compose run --rm app unit-test
 docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app feature-test
 docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app personalisation-test
 docker-compose run --rm -p 8010:8010 -p 5000:5000 -p 5001:5001 app maps-test
-# or without docker: 
+# or without docker:
 ./script/unit-test
 ./script/feature-test
 ./script/personalisation-test

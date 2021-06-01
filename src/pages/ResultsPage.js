@@ -2,8 +2,7 @@
 
 import iss from "../iss";
 import BaseCategoriesPage from "./BaseCategoriesPage";
-import storage from "../storage";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 
 import routerContext from "../contexts/router-context";
 import type {searchResultsMeta, Service} from "../iss";
@@ -44,13 +43,6 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
 
     componentDidMount(): void {
         super.componentDidMount();
-
-        sendEvent({
-            event: "searchResults",
-            searchQuery: this.context.router.match.params.search,
-            searchPage: this.context.router.match.params.page,
-            location: storage.getLocation(),
-        });
 
         if (!this.issParams()) {
             const sep = this.context.router
@@ -107,11 +99,12 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         }
 
         if (this.state.searchPagesLoaded > 0) {
-            sendEvent({
-                event: "LoadMoreSearchResults",
-                searchQuery: this.context.router.match.params.search,
-                searchPage: this.context.router.match.params.page,
-                location: storage.getLocation(),
+            gtm.emit({
+                event: "Load More Search Results Clicked",
+                eventCat: "Content Expanded",
+                eventAction: "Load More Search Results",
+                eventLabel: location.pathname,
+                sendDirectlyToGA: true,
             });
         }
 

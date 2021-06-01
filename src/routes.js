@@ -81,36 +81,70 @@ export default (
             path="/styleGuide/component/:componentName"
             component={StyleGuideItem}
             title="Styleguide"
+            state={{
+                pageType: "Style Guide",
+            }}
         />
         <BasePage
             path="/styleGuide*"
             component={StyleGuideList}
             title="Styleguide"
+            state={{
+                pageType: "Style Guide",
+            }}
         />
         <BasePage
             path="/"
             component={HomePage}
             exact={true}
+            state={{
+                pageType: "Home",
+            }}
         />
         <BasePage
             path="/about"
             component={DynamicPage}
             title="About"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "About",
+                ],
+            }}
         />
         <BasePage
             path="/bushfire-support"
             component={BushfireReliefPage}
             title="Bushfire Support"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Bushfire Support",
+                ],
+            }}
         />
         <BasePage
             path="/covid-19-support"
             component={Covid19StaticPage}
             title="COVID 19 Support"
+            exact={true}
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "COVID 19 Support",
+                ],
+            }}
         />
         <BasePage
             path="/disability-advocacy-finder"
             component={DisabilityAdvocacyFinder}
             title="Disability Advocacy Finder"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Disability Advocacy Finder",
+                ],
+            }}
         />
         <Route
             path="/donate"
@@ -124,67 +158,139 @@ export default (
             path="/terms"
             component={DynamicPage}
             title="Terms of use"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Terms of Use",
+                ],
+            }}
         />
         <BasePage
             path="/online-safety"
             component={DynamicPage}
             title="Online Safety"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Online Safety",
+                ],
+            }}
         />
         <BasePage
             path="/beta-info"
             component={BetaInfoStaticPage}
             title="About Ask Izzy Beta"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "About Ask Izzy Beta",
+                ],
+            }}
         />
         <BasePage
             path="/homeless-shelters"
             component={DynamicPage}
             title="Homeless shelters"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Homeless Shelters",
+                ],
+            }}
         />
         <BasePage
             path="/food-info"
             component={DynamicPage}
             title="Food Info"
             strict={false}
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Food",
+                ],
+            }}
         />
         <BasePage
             path="/using-ask-izzy"
             component={DynamicPage}
             title="Using Ask Izzy"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Using Ask Izzy",
+                ],
+            }}
         />
         <BasePage
             path="/homeless-legal-services"
             component={DynamicPage}
             title="Homeless Legal Services"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Homeless Legal Services",
+                ],
+            }}
         />
         <BasePage
             path="/homeless-financial-support"
             component={DynamicPage}
             title="Homeless financial support"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Homeless Financial Support",
+                ],
+            }}
         />
         <BasePage
             path="/homeless-health-care"
             component={DynamicPage}
             title="Homeless Health Care"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Homeless Health Care",
+                ],
+            }}
         />
         <BasePage
             path="/information"
             component={DynamicPage}
             title="Information"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Information",
+                ],
+            }}
         />
         <BasePage
             path="/not-found"
             component={NotFoundStaticPage}
             title="Page not found"
+            state={{
+                pageType: "Page Not Found",
+            }}
         />
         <BasePage
             path="/add-service"
             component={AddServicePage}
             title="Add a service"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Add a Service",
+                ],
+            }}
         />
         <BasePage
             path="/service/:slug"
             component={ServicePage}
             exact={true}
+            state={{
+                pageType: "Service",
+            }}
         />
         <Redirect
             from="/category/:page"
@@ -212,68 +318,153 @@ export default (
             exact={true}
         />
         {[
-            "/search/:search/:suburb-:state",
-            "/search/:search",
-            "/:page/:suburb-:state",
-            "/:page",
-        ].map((str) => [
+            {
+                resultsType: "Search",
+                rootPath: "/search/:search/:suburb-:state",
+            },
+            {
+                resultsType: "Search",
+                rootPath: "/search/:search",
+            },
+            {
+                resultsType: "Service Listing",
+                rootPath: "/:page/:suburb-:state",
+            },
+            {
+                resultsType: "Service Listing",
+                rootPath: "/:page",
+            },
+        ].map(({resultsType, rootPath: str}) => [
             <BasePage
                 path={`${str}`}
                 component={ResultsListPage}
                 title=":page in :suburb, :state"
                 exact={true}
+                name={resultsType}
+                state={{
+                    pageType: vars => [
+                        vars.serviceListingType,
+                        "Results List",
+                    ],
+                }}
             />,
             <BasePage
                 path={`${str}/map`}
                 component={ResultsMapPage}
                 title="Map of :page in :suburb, :state"
                 exact={true}
+                name={resultsType}
+                state={{
+                    pageType: vars => [
+                        vars.serviceListingType,
+                        "Results Map",
+                    ],
+                }}
             />,
             <BasePage
                 path={`${str}/map/personalise`}
                 component={PersonalisationWizardPage}
                 exact={true}
+                name={resultsType}
+                state={{
+                    pageType: vars => [
+                        vars.serviceListingType,
+                        "Results Map Personalisation",
+                    ],
+                }}
             />,
             <BasePage
                 path={`${str}/map/personalise/page/:subpage`}
                 component={PersonalisationWizardPage}
                 exact={true}
+                name={resultsType}
+                state={{
+                    pageType: vars => [
+                        vars.serviceListingType,
+                        "Results Map Personalisation",
+                    ],
+                }}
             />,
             <BasePage
                 path={`${str}/map/personalise/summary`}
                 component={PersonalisationSummaryPage}
                 exact={true}
+                name={resultsType}
+                state={{
+                    pageType: vars => [
+                        vars.serviceListingType,
+                        "Edit Map Personalisation",
+                    ],
+                }}
             />,
             <BasePage
                 path={`${str}/map/personalise/summary/:subpage`}
                 component={PersonalisationSummaryPage}
                 exact={true}
+                name={resultsType}
+                state={{
+                    pageType: vars => [
+                        vars.serviceListingType,
+                        "Edit Map Personalisation",
+                    ],
+                }}
             />,
             <BasePage
                 path={`${str}/personalise`}
                 component={PersonalisationWizardPage}
                 exact={true}
+                name={resultsType}
+                state={{
+                    pageType: vars => [
+                        vars.serviceListingType,
+                        "List Personalisation",
+                    ],
+                }}
             />,
             <BasePage
                 path={`${str}/personalise/page/:subpage`}
                 component={PersonalisationWizardPage}
                 exact={true}
+                name={resultsType}
+                state={{
+                    pageType: vars => [
+                        vars.serviceListingType,
+                        "List Personalisation",
+                    ],
+                }}
             />,
             <BasePage
                 path={`${str}/personalise/summary`}
                 component={PersonalisationSummaryPage}
                 exact={true}
+                name={resultsType}
+                state={{
+                    pageType: vars => [
+                        vars.serviceListingType,
+                        "Edit List Personalisation",
+                    ],
+                }}
             />,
             <BasePage
                 path={`${str}/personalise/summary/:subpage`}
                 component={PersonalisationSummaryPage}
                 exact={true}
+                name={resultsType}
+                state={{
+                    pageType: vars => [
+                        vars.serviceListingType,
+                        "Edit List Personalisation",
+                    ],
+                }}
             />,
         ])}
         <BasePage
             path="*"
             component={NotFoundStaticPage}
             onEnter={removeDoubleSlashOnEnter404}
+            state={{
+                pageType: "Page Not Found",
+            }}
         />
     </Switch>
 

@@ -3,11 +3,13 @@ import React from "react";
 import { titleize } from "underscore.string";
 
 import Link from "./Link";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
+import type {AnalyticsEvent} from "../google-tag-manager";
 import icons from "../icons";
 
 type Props = phone & {
-    crisis?: boolean
+    crisis?: boolean,
+    analyticsEventDetails?: AnalyticsEvent
 }
 
 class Phone extends React.Component<Props, void> {
@@ -22,13 +24,24 @@ class Phone extends React.Component<Props, void> {
         return "tel:" + this.props.number.replace(/[^0-9+]/g, "");
     }
 
+    get displayComment(): string {
+        return this.props.comment ?
+            this.props.comment
+            : titleize(this.props.kind)
+    }
+
     recordClick(): void {
-        sendEvent({
-            event: "clickPhoneNumber",
-            number: this.props.number,
-            crisis: this.props.crisis,
+        gtm.emit({
+            event: "Phone Number Clicked",
+            eventCat: "Phone Number Clicked",
+            eventAction: "",
+            eventLabel: `${location.pathname} - ${this.props.number}` +
+                `${this.props.crisis ? " (Crisis Number)" : ""}`,
+            sendDirectlyToGA: true,
+            ...this.props.analyticsEventDetails,
         });
     }
+    recordClick = this.recordClick.bind(this)
 
     render() {
         let contactButtonClassName = "ContactButton";
@@ -43,13 +56,12 @@ class Phone extends React.Component<Props, void> {
         return (
             <div className="Contact Phone">
                 <span className="kind">
-                    {this.props.comment ? this.props.comment
-                        : titleize(this.props.kind)}
+                    {this.displayComment}
                 </span>
                 <Link
                     to={this.href}
                     className={contactButtonClassName}
-                    onClick={this.recordClick.bind(this)}
+                    onClick={this.recordClick}
                 >
                     <div
                         className="Contact-text"

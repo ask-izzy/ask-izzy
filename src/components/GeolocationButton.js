@@ -5,7 +5,7 @@ import ButtonListItem from "./ButtonListItem";
 import ListItem from "./ListItem";
 import Geolocation, {guessSuburb} from "../geolocation";
 import icons from "../icons";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 
 type GeoLocationState = "NOT_STARTED"|"RUNNING"|"COMPLETE"|"FAILED";
 
@@ -102,19 +102,29 @@ class GeolocationButton extends React.Component<GeolocationButtonProps, Geolocat
         this.setState({
             geolocation: "RUNNING",
         });
-        sendEvent({event: "geolocation-requested"});
+
+        gtm.emit({
+            event: "Geolocation Requested",
+            eventCat: "Button Clicked",
+            eventAction: "Geolocation Request",
+            eventLabel: location.pathname,
+            sendDirectlyToGA: true,
+        });
 
         this.locateMe()
             .then((params) => {
                 this.setState({geolocation: "COMPLETE"});
-                sendEvent({event: "geolocation-success"});
+                gtm.emit({event: "geolocation-success"});
 
                 this.props.onSuccess(params);
             })
             .catch(error => {
-                sendEvent({
-                    event: "geolocation-failed",
-                    message: error.message,
+                gtm.emit({
+                    event: "Geolocation Request Failed",
+                    eventCat: "Error Occurred",
+                    eventAction: "Geolocation",
+                    eventLabel: location.pathname,
+                    sendDirectlyToGA: true,
                 });
                 console.error(error);
                 this.setState({

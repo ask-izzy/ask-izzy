@@ -5,13 +5,14 @@ import Helmet from "react-helmet";
 import { makeTitle } from "../routes";
 import { Route } from "react-router";
 import { InjectRouterContext } from "../contexts/router-context"
+import routes from "../routes";
 
 import { ApolloProvider } from "react-apollo";
 import client from "../utils/apolloClient";
+import HistoryListener from "../effects/HistoryListener";
 
 type Props = {
     children: any,
-    routes: any,
     params: any,
     location: any,
     computedMatch: any,
@@ -31,7 +32,10 @@ class BasePage extends Route<Props, {}> {
         let Component = this.props.component;
 
         return (
-            <InjectRouterContext matchedRoute={match}>
+            <InjectRouterContext matchedRoute={match}
+                routes={routes}
+            >
+                <HistoryListener />
                 <ApolloProvider client={client}>
                     <div className="BasePage">
                         <Helmet>

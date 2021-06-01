@@ -6,7 +6,7 @@ import gfm from "remark-gfm";
 import Phone from "./Phone";
 import {absoluteImageUrl, renderLink} from "../pages/DynamicPage.service";
 import {useHistory} from "react-router-dom";
-import sendEvent from "../google-tag-manager";
+import * as gtm from "../google-tag-manager";
 
 type Callout = {
     id: string,
@@ -42,11 +42,16 @@ function CalloutBox({calloutBoxes, position}: Props): React.Node | null {
 
     const history = useHistory();
 
-    const onClickBox = (path: string): void => {
+    const onClickBox = ({Link: path, Heading}: Callout): void => {
+        if (!path) {
+            return;
+        }
 
-        sendEvent({
-            event: "clickedInformationBanner",
-            banner: "Online safety - are you safe?",
+        gtm.emit({
+            event: "Callout Clicked",
+            eventCat: "Callout Clicked",
+            eventLabel: Heading,
+            sendDirectlyToGA: true,
         });
 
         // if the path is local (as defined by prefixed slash)
@@ -70,7 +75,7 @@ function CalloutBox({calloutBoxes, position}: Props): React.Node | null {
      */
     const Box = ({callout}: any): React.Node => (
         <div
-            onClick={callout.Link ? () => onClickBox(callout.Link) : null}
+            onClick={callout.Link ? () => onClickBox(callout) : null}
             style={callout.Style ? callout.Style : {}}
             className={callout.className?.className ?
                 callout.className.className
