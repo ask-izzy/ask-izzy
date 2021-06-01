@@ -1,7 +1,7 @@
 /* @flow */
 
 /* eslint-disable no-unused-vars */
-import React from "react";
+import * as React from "react";
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
 import icons from "../../icons";
@@ -28,4 +28,17 @@ export default class DemographicsIndigenous extends BaseQuestion {
         },
     };
 
+    static breadcrumbAnswer(): any {
+        switch (this.answer) {
+        case "Yes - show these first where possible":
+            return (
+                <span>
+                    <icons.AboriginalFlag/>
+                    <icons.TorresStraitIslandersFlag />
+                </span>
+            );
+        default:
+            return this.answer
+        }
+    }
 }

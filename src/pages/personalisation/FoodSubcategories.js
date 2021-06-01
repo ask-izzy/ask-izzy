@@ -21,4 +21,13 @@ export default class FoodSubcategories extends BaseQuestion {
                 .append("meals on wheels"),
         },
     };
+
+    static breadcrumbAnswer(): string {
+        switch (this.answer) {
+        case "Food packages/parcels/vouchers":
+            return "parcels/vouchers";
+        default:
+            return this.answer
+        }
+    }
 }

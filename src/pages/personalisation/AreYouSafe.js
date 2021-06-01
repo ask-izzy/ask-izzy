@@ -35,6 +35,17 @@ class AreYouSafe extends BaseQuestion {
         showDVLinkBar: true,
         textDVLinkBar: <DomesticViolenceLinkBar/>,
     };
+
+    static breadcrumbAnswer(): string {
+        switch (this.answer) {
+        case "Yes":
+            return "Safe";
+        case "No" :
+            return "Not safe";
+        default:
+            return this.answer
+        }
+    }
 }
 
 export default AreYouSafe;

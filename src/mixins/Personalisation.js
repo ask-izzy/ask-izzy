@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 import routerContext from "../contexts/router-context";
 import Category from "../constants/Category";
 

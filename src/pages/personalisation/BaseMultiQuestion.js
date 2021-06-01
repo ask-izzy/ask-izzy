@@ -15,6 +15,8 @@ import FloatFromBottom from "../../components/FloatFromBottom";
 import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
+import QuestionStepper from "../QuestionStepper";
+import {getCategory} from "../../constants/categories";
 
 class BaseMultiQuestion extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
@@ -51,6 +53,10 @@ class BaseMultiQuestion extends BaseQuestion {
 
     static showPage(): boolean {
         return true;
+    }
+
+    static breadcrumbAnswer(): ?Array<any> {
+        return this.answer
     }
 
     static get summaryValue(): string {
@@ -178,9 +184,14 @@ class BaseMultiQuestion extends BaseQuestion {
                     secondaryText={
                         this.props.byline
                     }
+                    taperColour="LighterGrey"
                     bannerName={this.bannerName}
                 />
                 <div className="List">
+                    <QuestionStepper category={getCategory(
+                        this.context.router.match.params.page
+                    )}
+                    />
                     {this.answers.map((answer, index) =>
                         <InputListItem
                             key={index}
