@@ -8,6 +8,8 @@ import Link from "../../components/Link";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import icons from "../../icons";
+import QuestionStepper from "../QuestionStepper";
+import {getCategory} from "../../constants/categories";
 
 type Props = {
     onDoneTouchTap: Function,
@@ -76,7 +78,15 @@ class Intro extends Personalisation<Props, {}> {
                             All of your answers are private and anonymous.
                         </div>
                     }
+                    taperColour="LighterGrey"
                     bannerName={this.bannerName}
+                />
+
+                <QuestionStepper
+                    intro={true}
+                    category={getCategory(
+                        this.context.router.match.params.page
+                    )}
                 />
                 <div className="body">
                     <h3>

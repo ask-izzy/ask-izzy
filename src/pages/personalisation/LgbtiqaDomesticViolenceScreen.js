@@ -30,6 +30,17 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
 
     static summaryLabel = "LGBTIQA+";
 
+    static breadcrumbAnswer(): ?string {
+        switch (this.answer) {
+        case true:
+            return "Safe";
+        case false:
+            return "Not safe";
+        default:
+            this.answer;
+        }
+    }
+
     static showPage(): boolean {
         return Boolean(
             DfvDemographics.answer &&

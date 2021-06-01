@@ -11,6 +11,8 @@ import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
+import QuestionStepper from "../QuestionStepper";
+import {getCategory} from "../../constants/categories";
 
 type Props = {
         name: string,
@@ -57,6 +59,10 @@ class Location extends Personalisation<Props, State> {
 
     static get answer(): string {
         return storage.getLocation();
+    }
+
+    static breadcrumbAnswer(): ?any {
+        return this.answer;
     }
 
     static shouldInjectAccessPoints(): boolean {
@@ -211,9 +217,15 @@ class Location extends Personalisation<Props, State> {
                     secondaryText={
                         "This will let me find the services closest to you"
                     }
+                    taperColour="LighterGrey"
                     bannerName={this.bannerName}
                 />
                 <div className="List">
+                    <QuestionStepper
+                        category={getCategory(
+                            this.context.router.match.params.page
+                        )}
+                    />
                     {
                         /* if the browser supports geolocation */
                         geolocationAvailable() &&

@@ -5,6 +5,7 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { append } from "../../iss/Search";
 import icons from "../../icons";
 import { resetDfvOptions } from "../../utils";
+import * as React from "react";
 
 export default class Demographics extends BaseMultiQuestion {
     static title = "Personal";
@@ -52,5 +53,26 @@ export default class Demographics extends BaseMultiQuestion {
         }
 
         resetDfvOptions();
+    }
+
+    static breadcrumbAnswer(): ?Array<any> {
+        if (this.answer && this.answer.length) {
+            return this.answer.map((answer, index) => {
+                switch (answer) {
+                case "Aboriginal and/or Torres Strait Islander":
+                    return (
+                        <span>
+                            <icons.AboriginalFlag/>
+                            <icons.TorresStraitIslandersFlag />
+                        </span>
+                    );
+                case "Person seeking asylum":
+                    return "Asylum seeker"
+                default:
+                    return answer
+                }
+            })
+        }
+        return this.answer
     }
 }

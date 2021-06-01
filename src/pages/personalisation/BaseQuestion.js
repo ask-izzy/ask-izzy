@@ -12,6 +12,8 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
+import QuestionStepper from "../QuestionStepper";
+import {getCategory} from "../../constants/categories";
 
 export type Props = {
     name: string,
@@ -90,6 +92,15 @@ class BaseQuestion extends Personalisation<Props, State> {
         }
 
         return answer;
+    }
+
+    /**
+     * A separate Answer return for the the breadcrumbs that can be overwritten
+     * Per question
+     * @returns {string} - returns the selected answer
+     */
+    static breadcrumbAnswer(): ?any {
+        return this.answer;
     }
 
     /**
@@ -226,6 +237,10 @@ class BaseQuestion extends Personalisation<Props, State> {
         return (
             <div>
                 {this.renderHeaderBar()}
+                <QuestionStepper category={getCategory(
+                    this.context.router.match.params.page
+                )}
+                />
                 <div className={listClassName}>
                     {this.answers.map((answer, index) =>
                         <InputListItem
@@ -270,6 +285,7 @@ class BaseQuestion extends Personalisation<Props, State> {
                 secondaryText={
                     this.props.byline
                 }
+                taperColour="LighterGrey"
                 bannerName={this.bannerName}
             />
         );

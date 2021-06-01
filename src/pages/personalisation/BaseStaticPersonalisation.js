@@ -42,6 +42,10 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
         return "";
     }
 
+    static breadcrumbAnswer(): ?any {
+        return this.answer;
+    }
+
     static get answer(): string {
         let answer = storage.getItem(this.defaultProps.name);
 

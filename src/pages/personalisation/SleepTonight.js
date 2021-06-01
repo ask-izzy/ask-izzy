@@ -17,4 +17,15 @@ export default class SleepTonight extends BaseQuestion {
             "No": housingCrisis(() => Location.shouldInjectAccessPoints()),
         },
     };
+
+    static breadcrumbAnswer(): string {
+        switch (this.answer) {
+        case "Yes":
+            return "Safe tonight";
+        case "No" :
+            return "Not safe tonight";
+        default:
+            return this.answer
+        }
+    }
 }

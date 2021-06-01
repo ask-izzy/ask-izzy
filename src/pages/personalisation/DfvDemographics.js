@@ -1,5 +1,6 @@
 /* @flow */
 
+import * as React from "react";
 import BaseMultiQuestion from "./BaseMultiQuestion";
 
 import { append } from "../../iss/Search";
@@ -48,5 +49,28 @@ export default class DfvDemographics extends BaseMultiQuestion {
         storage.removeItem(Under18Page.defaultProps.name);
         storage.removeItem(LgbtiqaPage.defaultProps.name);
         storage.removeItem(UsingViolencePage.defaultProps.name);
+    }
+
+
+    static breadcrumbAnswer(): ?Array<any> {
+
+        if (this.answer && this.answer.length) {
+            return this.answer.map((answer, index) => {
+                switch (answer) {
+                case "Aboriginal and/or Torres Strait Islander":
+                    return (
+                        <span>
+                            <icons.AboriginalFlag/>
+                            <icons.TorresStraitIslandersFlag />
+                        </span>
+                    );
+                case "LGBTIQA+":
+                    return <span><icons.DemographicLgbtiq /></span>
+                default:
+                    return answer;
+                }
+            })
+        }
+        return this.answer
     }
 }
