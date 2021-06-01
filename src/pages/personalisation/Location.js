@@ -12,7 +12,6 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import QuestionStepper from "../QuestionStepper";
-import {getCategory} from "../../constants/categories";
 
 type Props = {
         name: string,
@@ -222,9 +221,7 @@ class Location extends Personalisation<Props, State> {
                 />
                 <div className="List">
                     <QuestionStepper
-                        category={getCategory(
-                            this.context.router.match.params.page
-                        )}
+                        category={this.category}
                     />
                     {
                         /* if the browser supports geolocation */
@@ -233,21 +230,25 @@ class Location extends Personalisation<Props, State> {
                             onSuccess={this.onGeoLocationSuccess.bind(this)}
                         />
                     }
+                    <form
+                        className="search"
+                        onSubmit={this.onDoneTouchTap.bind(this)}
+                    >
+                        <div>
+                            <input
+                                type="search"
+                                ref={element => {
+                                    this._search = element;
+                                }}
+                                onFocus={this.scrollToSearchControl.bind(this)}
+                                aria-label="Search for a suburb or postcode"
+                                placeholder="Search for a suburb or postcode"
+                                value={this.state.locationName}
+                                onChange={this.onSearchChange.bind(this)}
+                            />
+                        </div>
 
-                    <div className="search">
-                        <input
-                            type="search"
-                            ref={element => {
-                                this._search = element;
-                            }}
-                            onFocus={this.scrollToSearchControl.bind(this)}
-                            aria-label="Search for a suburb or postcode"
-                            placeholder="Search for a suburb or postcode"
-                            value={this.state.locationName}
-                            onChange={this.onSearchChange.bind(this)}
-                        />
-                    </div>
-
+                    </form>
                     {
                         /* any autocompletions we currently have */
                         this.state.autocompletions.map((result, index) =>

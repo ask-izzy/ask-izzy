@@ -9,7 +9,6 @@ import storage from "../../storage";
 import * as iss from "../../iss";
 import icons from "../../icons";
 import QuestionStepper from "../QuestionStepper";
-import {getCategory} from "../../constants/categories";
 
 type Props = {
     onDoneTouchTap: Function,
@@ -81,13 +80,12 @@ class Intro extends Personalisation<Props, {}> {
                     taperColour="LighterGrey"
                     bannerName={this.bannerName}
                 />
-
-                <QuestionStepper
-                    intro={true}
-                    category={getCategory(
-                        this.context.router.match.params.page
-                    )}
-                />
+                {this.category && (
+                    <QuestionStepper
+                        intro={true}
+                        category={this.category}
+                    />
+                )}
                 <div className="body">
                     <h3>
                         I&#39;m looking for help for

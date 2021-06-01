@@ -16,7 +16,6 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import QuestionStepper from "../QuestionStepper";
-import {getCategory} from "../../constants/categories";
 
 class BaseMultiQuestion extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
@@ -188,10 +187,7 @@ class BaseMultiQuestion extends BaseQuestion {
                     bannerName={this.bannerName}
                 />
                 <div className="List">
-                    <QuestionStepper category={getCategory(
-                        this.context.router.match.params.page
-                    )}
-                    />
+                    <QuestionStepper category={this.category} />
                     {this.answers.map((answer, index) =>
                         <InputListItem
                             key={index}

@@ -13,7 +13,6 @@ import storage from "../../storage";
 import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
 import QuestionStepper from "../QuestionStepper";
-import {getCategory} from "../../constants/categories";
 
 export type Props = {
     name: string,
@@ -237,10 +236,7 @@ class BaseQuestion extends Personalisation<Props, State> {
         return (
             <div>
                 {this.renderHeaderBar()}
-                <QuestionStepper category={getCategory(
-                    this.context.router.match.params.page
-                )}
-                />
+                <QuestionStepper category={this.category} />
                 <div className={listClassName}>
                     {this.answers.map((answer, index) =>
                         <InputListItem
