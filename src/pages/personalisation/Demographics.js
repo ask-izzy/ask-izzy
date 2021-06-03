@@ -68,6 +68,14 @@ export default class Demographics extends BaseMultiQuestion {
                     );
                 case "Person seeking asylum":
                     return "Asylum seeker"
+                case "Parole / recently released":
+                    return "On Parole"
+                case "Have a disability":
+                    return "With disability"
+                case "Have pets":
+                    return "With pets"
+                case "Escaping family violence":
+                    return "Escaping violence"
                 default:
                     return answer
                 }

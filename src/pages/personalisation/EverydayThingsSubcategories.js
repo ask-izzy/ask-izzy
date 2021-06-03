@@ -40,7 +40,7 @@ export default class EverydayThingsSubcategories extends BaseQuestion {
         case "Keeping warm":
             return "Blankets";
         case "Food packages/parcels/vouchers" :
-            return "parcels/vouchers";
+            return "Food parcels/vouchers";
         default:
             return this.answer
         }

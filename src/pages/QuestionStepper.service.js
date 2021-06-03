@@ -2,6 +2,9 @@
 
 import Category from "../constants/Category";
 import * as React from "react";
+import {Link} from "react-router-dom";
+import * as gtm from "../google-tag-manager";
+import Storage from "../storage";
 
 const PERSONALISATION_EXCLUSION_LIST = [
     "online-safety-bundle",
@@ -12,7 +15,8 @@ const PERSONALISATION_EXCLUSION_LIST = [
 
 export type AnswerType = {
     name: string,
-    answer: ?string | ?React.Node
+    answer: ?string | ?React.Node,
+    multi: boolean
 }
 
 /**
@@ -46,14 +50,79 @@ export const fetchAnswers = (
                 answerList.push({
                     name: answer.defaultProps.name,
                     answer: nestedAnswer,
+                    multi: true,
                 })
             });
         } else {
             answerList.push({
                 name: answer.defaultProps.name,
                 answer: answer.breadcrumbAnswer(),
+                multi: false,
             });
         }
     });
     return answerList;
 }
+
+/**
+ * Because when searching for a result, no category can be specified.
+ * Only the location and Are you safe (if searching for domestic violence)
+ * are required to be answered because the results page. we will need to fetch
+ * then manually.
+ * @return {[]} - an array of answers
+ */
+export const getSearchAnswers = (): Array<AnswerType> => {
+    const answerList = [];
+    const location = Storage.getLocation()
+    const areYouSafe = Storage.getItem("are-you-safe")
+
+    if (location) {
+        answerList.push({
+            name: "location",
+            answer: location,
+            multi: false,
+        })
+    }
+    if (areYouSafe) {
+        let answer;
+        switch (areYouSafe) {
+        case "Yes":
+            answer = "Safe";
+            break;
+        case "No":
+            answer = "Not safe";
+            break;
+        default:
+            answer = areYouSafe;
+            break;
+        }
+        answerList.push({
+            name: "areYouSafe",
+            answer: answer,
+            multi: false,
+        })
+    }
+    return answerList
+}
+
+
+
+const trailingSlash = (path: string): string =>
+    `${path}${path.endsWith("/") ? "" : "/"}`;
+
+export const PersonalisationLink = ({pathname}: Object) => (
+    <div
+        className="edit"
+        style={{
+            fontSize: "large",
+        }}
+    >
+        <Link
+            to={`${trailingSlash(pathname)}personalise/summary`}
+            onClick={gtm.emit.bind(null, {event: "changeAnswers"})}
+        >
+            See all and edit
+        </Link>
+    </div>
+);
+

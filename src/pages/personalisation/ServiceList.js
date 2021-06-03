@@ -66,4 +66,13 @@ export default class ServiceList extends BaseQuestion {
             "Help for pets": "Emergency kennel & support",
         },
     };
+
+    static breadcrumbAnswer(): any {
+        switch (this.answer) {
+        case "Help for people using violence":
+            return "Behavioural help";
+        default:
+            return this.answer
+        }
+    }
 }

@@ -42,8 +42,8 @@ Feature: History navigation
 
         When I click on "18 to 26"
 
-        Then I should see 3 search results for "men aged 18 to 26" in "Melbourne, VIC"
-        And I should see "Housing"
+        Then I should see "Melbourne, VIC | Safe tonight | Men | 18-26"
+        And I should see "Showing housing services"
         And I should be at /housing/Melbourne-VIC/
         And I should see the results
         ------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ Feature: History navigation
 
         Then I should be at /housing/Melbourne-VIC/
 
-        Then I should see 3 search results for "men aged 18 to 26" in "Melbourne, VIC"
+        And I should see "Melbourne, VIC | Safe tonight | Men | 18-26"
 
         When I click back from the browser UI
         Then I should see "How old are you?"

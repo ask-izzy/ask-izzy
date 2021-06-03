@@ -13,6 +13,9 @@ import storage from "../../storage";
 import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
 import QuestionStepper from "../QuestionStepper";
+import {getCategory} from "../../constants/categories";
+import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
+import Category from "../../constants/Category";
 
 export type Props = {
     name: string,
@@ -37,6 +40,8 @@ export type State = {
     windowHeight?: number,
     answers?: Set<string>,
     shouldRenderSafetyDetails?: boolean,
+    showStepper: boolean,
+    category: ?Category,
 }
 
 class BaseQuestion extends Personalisation<Props, State> {
@@ -46,7 +51,21 @@ class BaseQuestion extends Personalisation<Props, State> {
         super(props);
         this.state = {
             selected: null, // set when the user makes a choice
+            showStepper: false,
+            category: undefined,
         };
+    }
+
+    componentDidMount(): void {
+        const category = getCategory(
+            this.context.router.match.params.page
+        )
+        const searchAnswers = getSearchAnswers();
+        this.setState({
+            showStepper: category ? fetchAnswers(category).length > 0
+                : searchAnswers.length > 0,
+            category,
+        })
     }
 
     get selected(): string {
@@ -236,7 +255,11 @@ class BaseQuestion extends Personalisation<Props, State> {
         return (
             <div>
                 {this.renderHeaderBar()}
-                <QuestionStepper category={this.category} />
+                {this.state.showStepper && (
+                    <QuestionStepper
+                        category={this.state.category}
+                    />
+                )}
                 <div className={listClassName}>
                     {this.answers.map((answer, index) =>
                         <InputListItem
@@ -281,7 +304,8 @@ class BaseQuestion extends Personalisation<Props, State> {
                 secondaryText={
                     this.props.byline
                 }
-                taperColour="LighterGrey"
+                taperColour={this.state.showStepper ? "LighterGrey"
+                    : "HeaderBar"}
                 bannerName={this.bannerName}
             />
         );

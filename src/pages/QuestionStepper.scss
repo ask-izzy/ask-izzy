@@ -1,16 +1,12 @@
 
 .QuestionStepper {
-    background-color: $brand-bg-mid-lighter;
-
     .answer-box {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        width: 90%;
-        height: 3em;
+        width: 96%;
         margin: auto;
-        padding: 15px;
 
         .ClearButton {
             color: $link-text-color;
@@ -23,4 +19,41 @@
             height: 1em;
         }
     }
+
+    &.ResultsPage {
+        .answer-box {
+            padding: 10px;
+            line-height: 24px;
+        }
+
+        .EditAnswers {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 96%;
+            margin: auto;
+            padding-bottom: 15px;
+        }
+    }
+
+    &.QuestionFlow {
+        background-color: $brand-bg-mid-lighter;
+
+        .answer-box {
+            height: 3em;
+            padding: 15px;
+            font-size: 14px;
+            line-height: 24px;
+        }
+    }
+
+
+    .editting {
+        color: $brand-bg-dark;
+    }
 }
+
+
+
+

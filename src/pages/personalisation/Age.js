@@ -57,17 +57,17 @@ export default class Age extends BaseQuestion {
     static breadcrumbAnswer(): string {
         switch (this.answer) {
         case "0 to 17":
-            return "Aged 0-17";
+            return "0-17";
         case "18 to 26" :
-            return "Aged 18-26";
+            return "18-26";
         case "27 to 39":
-            return "Aged 27-39";
+            return "27-39";
         case "40 to 54" :
-            return "Aged 40-54";
+            return "40-54";
         case "55 to 64":
-            return "Aged 55-64";
+            return "55-64";
         case "65 or older" :
-            return "Aged 65+";
+            return "65+";
         default:
             return this.answer
         }

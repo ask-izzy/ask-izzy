@@ -12,6 +12,9 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import QuestionStepper from "../QuestionStepper";
+import {getCategory} from "../../constants/categories";
+import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
+import Category from "../../constants/Category";
 
 type Props = {
         name: string,
@@ -22,7 +25,9 @@ type State = {
         autocompletionInProgress: boolean,
         locationName: string,
         autocompletions: Array<issArea>,
-        nextDisabled: boolean
+        nextDisabled: boolean,
+        showStepper: boolean,
+        category: ?Category,
 }
 
 class Location extends Personalisation<Props, State> {
@@ -39,6 +44,8 @@ class Location extends Personalisation<Props, State> {
             locationName: "",
             autocompletions: [],
             nextDisabled: true,
+            showStepper: false,
+            category: undefined,
         };
     }
 
@@ -47,6 +54,15 @@ class Location extends Personalisation<Props, State> {
             storage.getLocation(),
             storage.getLocation() != "" // valid location
         );
+        const category = getCategory(
+            this.context.router.match.params.page
+        )
+        const searchAnswers = getSearchAnswers();
+        this.setState({
+            showStepper: category ? fetchAnswers(category).length > 0
+                : searchAnswers.length > 0,
+            category,
+        })
     }
 
     /* eslint-disable react/sort-comp */
@@ -216,13 +232,16 @@ class Location extends Personalisation<Props, State> {
                     secondaryText={
                         "This will let me find the services closest to you"
                     }
-                    taperColour="LighterGrey"
+                    taperColour={this.state.showStepper ? "LighterGrey"
+                        : "HeaderBar"}
                     bannerName={this.bannerName}
                 />
                 <div className="List">
-                    <QuestionStepper
-                        category={this.category}
-                    />
+                    {this.state.showStepper ? (
+                        <QuestionStepper
+                            category={this.state.category}
+                        />
+                    ) : null}
                     {
                         /* if the browser supports geolocation */
                         geolocationAvailable() &&

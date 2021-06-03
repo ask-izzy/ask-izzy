@@ -30,7 +30,7 @@ Feature: Question Flow Breadcrumb
         Then I should see "To help me find the right services I'll ask you a few questions"
         And I should be at /housing/personalise
         When I click on the done button # Intro
-        And I should see "Melbourne, VIC | Safe tonight | Woman | Aged 18-26"
+        And I should see "Melbourne, VIC  |  Safe tonight  |  Women  |  18-26"
 
     Scenario: Visit Housing and go back to edit your age
         Given a fresh session
@@ -43,5 +43,5 @@ Feature: Question Flow Breadcrumb
         And I should be at /housing/personalise
         When I click on the done button # Intro
         And I click back from the title bar
-        Then I should see "Melbourne, VIC | Safe tonight | Woman | Aged 18-26 (editing)"
+        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 (editing)"
 

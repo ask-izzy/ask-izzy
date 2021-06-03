@@ -15,6 +15,7 @@ import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 import ButtonListItem from "../components/ButtonListItem";
+import QuestionStepper from "./QuestionStepper";
 
 class ResultsListPage extends ResultsPage<> {
     render() {
@@ -28,7 +29,6 @@ class ResultsListPage extends ResultsPage<> {
     renderPage = () => (
         <div className="ResultsListPage">
             <AppBar
-                title={this.title}
                 backMessage={this.isDisabilityAdvocacy ? "" : "Categories"}
                 onBackTouchTap={() => this.context.router.navigate(
                     this.isDisabilityAdvocacy ?
@@ -60,6 +60,13 @@ class ResultsListPage extends ResultsPage<> {
                 statusCode={this.state.searchError?.status || 200}
             />
             <div className="List results">
+                <div>
+                    <QuestionStepper
+                        category={this.category}
+                        results={true}
+                        location={this.context.router.location}
+                    />
+                </div>
                 {
                     !this.state.searchResults ||
                     this.state.searchResults.length === 0 ||

@@ -43,9 +43,11 @@ export default class Gender extends BaseQuestion {
     static breadcrumbAnswer(): string {
         switch (this.answer) {
         case "Male":
-            return "Man";
+            return "Men";
         case "Female":
-            return "Woman";
+            return "Women";
+        case "Trans and Gender Diverse":
+            return "Trans & Gender Diverse";
         default:
             return this.answer;
         }

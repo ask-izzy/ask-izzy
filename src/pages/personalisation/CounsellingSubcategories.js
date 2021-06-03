@@ -37,6 +37,10 @@ export default class CounsellingSubcategories extends BaseQuestion {
         switch (this.answer) {
         case "Sexual identity (LGBTIQA+)":
             return <span><icons.DemographicLgbtiq /></span>;
+        case "Scared in my relationship":
+            return "Family or domestic violence";
+        case "Find online counselling":
+            return "Online counselling";
         default:
             return this.answer
         }

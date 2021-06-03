@@ -24,4 +24,17 @@ export default class AdvocacySubcategories extends BaseQuestion {
                     .append("advocacy"),
         },
     };
+
+    static breadcrumbAnswer(): string {
+        switch (this.answer) {
+        case "Making a complaint" :
+            return "Complaints";
+        case "Get advice on your rights" :
+            return "Your rights";
+        case "Someone to speak for you" :
+            return "Representation";
+        default:
+            return this.answer
+        }
+    }
 }
