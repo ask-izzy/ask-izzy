@@ -269,6 +269,12 @@ export default (
             path="/disability-organisations"
             component={DynamicPage}
             title="Disability Organisations"
+            state={{
+                pageType: vars => [
+                    "Static Page",
+                    "Disability Organisations",
+                ],
+            }}
         />
         <BasePage
             path="/not-found"
