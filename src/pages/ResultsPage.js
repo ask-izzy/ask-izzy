@@ -6,6 +6,10 @@ import * as gtm from "../google-tag-manager";
 
 import routerContext from "../contexts/router-context";
 import type {searchResultsMeta, Service} from "../iss";
+import {
+    addPageLoadDependencies,
+    closePageLoadDependencies,
+} from "../utils/page-loading"
 
 type State = {
     searchMeta: ?searchResultsMeta,
@@ -20,6 +24,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
     extends BaseCategoriesPage<ChildProps, State & ChildState> {
     constructor(props: Object, context: Object) {
         super(props, context);
+        addPageLoadDependencies(context.router.location, "resultsLoad")
 
         const isTextSearchPage = !!this.context.router.match.params.search
         const searchType =
@@ -49,7 +54,12 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
                 "/personalise"
             this.context.router.navigate(newPath, {replace: true});
         } else {
-            this.loadNextSearchPage()
+            this.loadNextSearchPage().then(
+                () => closePageLoadDependencies(
+                    this.context.router.location,
+                    "resultsLoad"
+                )
+            )
         }
 
     }

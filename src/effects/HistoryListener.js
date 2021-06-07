@@ -17,9 +17,13 @@ export default (props: Object) => {
             return
         }
 
-        window.scrollTo(0, 0);
         recordAnalytics(location, match);
     }, [locationPathAndSearch]);
+
+    React.useEffect(
+        () => registerScrollRestoration(location),
+        [locationPathAndSearch]
+    )
 
     return null;
 }
@@ -75,3 +79,31 @@ export function getPageVars(routeMatch: Object) {
     return pageVars
 }
 
+/*
+Keep track of where we scroll to on a page and if we return to that page restore
+the position. Since Izzy is a SPA app the standard browser scroll restoration
+doesn't work but in the future browsers will hopefully do this for us (Chrome
+already). But until then we've got to do it manually.
+*/
+function registerScrollRestoration(location) {
+    if (history.scrollRestoration) {
+        history.scrollRestoration = "manual";
+    }
+
+    const sessionKey = `scrollPosition-${location.key}`
+    const sessionValue = sessionStorage.getItem(sessionKey)
+
+    if (sessionValue !== null) {
+        waitTillPageLoaded().then(
+            () => window.scrollTo(0, Number(sessionValue))
+        ).catch()
+    }
+
+    function handleScroll() {
+        sessionStorage.setItem(sessionKey, window.scrollY)
+    }
+
+    document.addEventListener("scroll", handleScroll)
+
+    return () => document.removeEventListener("scroll", handleScroll);
+}
