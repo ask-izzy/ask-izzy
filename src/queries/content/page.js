@@ -15,6 +15,7 @@ query Page($path: String!) {
     BannerTextSecondary,
     AccordionTitle,
     Accordion {
+      id,
       Title,
       Content,
     },

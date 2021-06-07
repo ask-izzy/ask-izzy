@@ -27,7 +27,8 @@ type CalloutBoxType = {
 
 type Props = {
     calloutBoxes: Array<CalloutBoxType>,
-    position: string,
+    embedded: boolean,
+    position?: ?string,
 }
 
 /**
@@ -35,10 +36,12 @@ type Props = {
  *
  * @param calloutBoxes - A list of Callout boxes from the CMS
  * @param position - the position where they appear
+ * @param embedded - if the callout box is to be embedded in the page content
  * @returns {null|*} - returns the callout box or null
  * @constructor
  */
-function CalloutBox({calloutBoxes, position}: Props): React.Node | null {
+function CalloutBox(
+    {calloutBoxes, position, embedded}: Props): React.Node | null {
 
     const history = useHistory();
 
@@ -112,23 +115,38 @@ function CalloutBox({calloutBoxes, position}: Props): React.Node | null {
                 // if there is no style then set the cursor
                 : {cursor: "pointer"}
         }
-        if (position === "top" && callout.Top) {
+
+        if (embedded) {
             return (
                 <Box
                     callout={calloutObj}
                     key={`${callout.callout.id}_${index}`}
                 />
             )
-        } else if (position === "bottom" && callout.Bottom) {
+        } else if (position && position === "top" && callout.Top) {
             return (
                 <Box
-                    callout={callout.callout}
-                    key={`${callout.callout.id}_${index}`}
+                    callout={calloutObj}
+                    key={`${callout?.callout.id}_${index}`}
+                />
+            )
+        } else if (position && position === "bottom" && callout.Bottom) {
+            return (
+                <Box
+                    callout={calloutObj}
+                    key={`${callout?.callout.id}_${index}`}
                 />
             )
         }
         return null;
     })
+}
+
+CalloutBox.defaultProps = {
+    embedded: false,
+    Top: false,
+    Bottom: false,
+    position: null,
 }
 
 export default CalloutBox

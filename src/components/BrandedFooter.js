@@ -221,6 +221,9 @@ export default class BrandedFooter
                                 <icons.Facebook
                                     className="inline-icon inline-block-icon"
                                 />
+                                <span style={{display: "none"}}>
+                                    Ask Izzy Facebook page
+                                </span>
                             </Link>
                         </li>
                         <li>

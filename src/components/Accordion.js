@@ -16,7 +16,7 @@ const Accordion: React.StatelessFunctionalComponent<Props> = (
 
     const renderItem = (item, index) => {
         return (
-            <li>
+            <li key={item.id}>
                 <AccordionItem
                     title={item.Title}
                     key={index}

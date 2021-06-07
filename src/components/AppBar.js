@@ -47,6 +47,8 @@ class AppBar extends React.Component<Props, void> {
     renderBackButton() {
         return (
             <components.IconButton
+                name={this.props.backMessage ? this.props.backMessage
+                    : "back"}
                 className="BackButton button-container"
                 onClick={this.props.onBackTouchTap}
             >
