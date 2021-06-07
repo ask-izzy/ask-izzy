@@ -39,7 +39,7 @@ export default class DomesticViolenceLinkBar extends React.Component<{}, void> {
             sendDirectlyToGA: true,
         });
 
-        this.context.router.history.push(
+        this.context.router.navigate(
             path,
         );
     }

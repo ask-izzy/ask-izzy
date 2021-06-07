@@ -18,7 +18,7 @@ export default class ServiceListIntro extends BaseLogoWithTextBox {
     static contextType = routerContext;
 
     onClickBox(): void {
-        this.context.router.history.push(
+        this.context.router.navigate(
             this.props.path,
         );
     }

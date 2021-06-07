@@ -21,11 +21,10 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
     constructor(props: Object, context: Object) {
         super(props, context);
 
-        const textSearchPage = this.context.router.match.path
-            .match(/^\/search\/:search/)
+        const isTextSearchPage = !!this.context.router.match.params.search
         const searchType =
             this.category && "category" ||
-            textSearchPage && "text"
+            isTextSearchPage && "text"
 
         this.state = {
             ...super.state,
@@ -45,14 +44,10 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         super.componentDidMount();
 
         if (!this.issParams()) {
-            const sep = this.context.router
-                .match
-                .url
-                .endsWith("/") ? "" : "/";
-
-            this.context.router.history.replace(
-                `${this.context.router.match.url}${sep}personalise`
-            );
+            const newPath =
+                this.context.router.location.pathname.replace(/\/$/, "") +
+                "/personalise"
+            this.context.router.navigate(newPath, {replace: true});
         } else {
             this.loadNextSearchPage()
         }

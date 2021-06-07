@@ -3,69 +3,51 @@
 import React from "react";
 import Helmet from "react-helmet";
 import { makeTitle } from "../routes";
-import { Route } from "react-router";
-import { InjectRouterContext } from "../contexts/router-context"
-import routes from "../routes";
+import { Outlet } from "react-router-dom";
 
 import { ApolloProvider } from "react-apollo";
 import client from "../utils/apolloClient";
 import HistoryListener from "../effects/HistoryListener";
+import routerContext from "../contexts/router-context";
 
-type Props = {
-    children: any,
-    params: any,
-    location: any,
-    computedMatch: any,
-    title: string,
-}
-
-class BasePage extends Route<Props, {}> {
+class BasePage extends React.Component<{}> {
     static childContextTypes = {};
+    static contextType = routerContext;
 
     getChildContext(): Object {
         return {};
     }
 
     render() {
-        let match = this.props.match || this.props.computedMatch
-        const canonicalUrl = `https://askizzy.org.au${this.props.location.pathname}`;
-        let Component = this.props.component;
+        const { location, match } = this.context.router
+        const pageTitle = makeTitle(
+            match.props.title,
+            match.params
+        )
+        const canonicalUrl = `https://askizzy.org.au${location.pathname}`;
 
-        return (
-            <InjectRouterContext matchedRoute={match}
-                routes={routes}
-            >
-                <HistoryListener />
-                <ApolloProvider client={client}>
-                    <div className="BasePage">
-                        <Helmet>
-                            <link
-                                rel="canonical"
-                                content={canonicalUrl}
-                            />
-                            <meta
-                                property="og:url"
-                                content={canonicalUrl}
-                            />
-                            <title>
-                                {
-                                    makeTitle(
-                                        this.props.title,
-                                        match.params
-                                    )
-                                }
-                            </title>
-                        </Helmet>
+        return <>
+            <HistoryListener />
+            <ApolloProvider client={client}>
+                <div className="BasePage">
+                    <Helmet>
+                        <link
+                            rel="canonical"
+                            content={canonicalUrl}
+                        />
+                        <meta
+                            property="og:url"
+                            content={canonicalUrl}
+                        />
+                        <title>{pageTitle}</title>
+                    </Helmet>
 
-                        <main>
-                            <Component
-                                {...this.props}
-                            />
-                        </main>
-                    </div>
-                </ApolloProvider>
-            </InjectRouterContext>
-        );
+                    <main>
+                        <Outlet />
+                    </main>
+                </div>
+            </ApolloProvider>
+        </>
     }
 }
 

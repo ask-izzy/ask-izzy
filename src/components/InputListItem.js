@@ -37,8 +37,7 @@ export default class InputListItem extends React.Component<Props, void> {
         return (
             <ListItem
                 className="InputListItem"
-                rootElement="a"
-                href="#"
+                rootElement="button"
                 tabIndex={tabIndex || 0}
                 {...{primaryText, secondaryText, leftIcon, onClick}}
                 rightIcon={

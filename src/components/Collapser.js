@@ -2,8 +2,6 @@
 import React from "react";
 import classnames from "classnames";
 
-import Link from "./Link";
-
 type Props = {
     message: string,
     className?: string,
@@ -65,49 +63,33 @@ class Collapser extends React.Component<Props, State> {
     }
 
     render() {
+        const collapsed = this.state.collapsed
         return (
             <div
                 className={classnames(
                     "Collapser",
                     this.props.className,
-                    {collapsed: this.state.collapsed}
+                    {collapsed}
                 )}
-                onClick={this.onClick.bind(this)}
             >
-                {this.renderMessage()}
+                {(collapsed || this.props.closeMessage) &&
+                    <button
+                        alt="Show more"
+                        className="collapser-message"
+                        onClick={this.onClick.bind(this)}
+                    >
+                        {collapsed ?
+                            this.props.message
+                            : this.props.closeMessage}
+                    </button>
+                }
                 <div
-                    className={classnames({collapsed: this.state.collapsed})}
+                    className={classnames({collapsed})}
                 >
                     {this.props.children}
                 </div>
             </div>
         );
-    }
-
-    renderMessage() {
-        if (this.state.collapsed) {
-            return (
-                <Link
-                    to="#"
-                    alt="Show more"
-                    className="collapser-message"
-                    role="button"
-                >
-                    {this.props.message}
-                </Link>
-            );
-        } else if (this.props.closeMessage) {
-            return (
-                <Link
-                    to="#"
-                    alt="Show less"
-                    className="collapser-message"
-                    role="button"
-                >
-                    {this.props.closeMessage}
-                </Link>
-            );
-        }
     }
 }
 

@@ -187,7 +187,7 @@ class BaseMultiQuestion extends BaseQuestion {
                             leftIcon={this.iconFor(answer)}
                             primaryText={answer}
                             value={answer}
-
+                            aria-label={answer}
                             type="checkbox"
                             checked={selected.has(answer)}
                             checkedIcon={

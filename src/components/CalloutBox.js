@@ -5,8 +5,8 @@ import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import Phone from "./Phone";
 import {absoluteImageUrl, renderLink} from "../pages/DynamicPage.service";
-import {useHistory} from "react-router-dom";
 import * as gtm from "../google-tag-manager";
+import { useRouterContext } from "../contexts/router-context";
 
 type Callout = {
     id: string,
@@ -43,7 +43,7 @@ type Props = {
 function CalloutBox(
     {calloutBoxes, position, embedded}: Props): React.Node | null {
 
-    const history = useHistory();
+    const {navigate} = useRouterContext();
 
     const onClickBox = ({Link: path, Heading}: Callout): void => {
         if (!path) {
@@ -60,9 +60,7 @@ function CalloutBox(
         // if the path is local (as defined by prefixed slash)
         // go to the internal link, else open it externally
         if (path.charAt(0) === "/") {
-            history.push(
-                path,
-            );
+            navigate(path);
         } else {
             window.location = path;
         }

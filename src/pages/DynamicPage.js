@@ -19,15 +19,12 @@ import {
 } from "./DynamicPage.service";
 import CalloutBox from "../components/CalloutBox";
 import CalloutQuery from "../queries/content/callout";
-type Props = {
-    location: any,
-}
 
 type ReactMarkdownQuoteProps = {
     children: React.Node
 }
 
-class DynamicPage extends React.Component<Props, void> {
+class DynamicPage extends React.Component<{}> {
     static contextType = routerContext;
 
 
@@ -76,9 +73,8 @@ class DynamicPage extends React.Component<Props, void> {
 
 
     render() {
-
         const params = {
-            "path": this.props.location.pathname,
+            "path": this.context.router.location.pathname,
         };
 
         const loading = (

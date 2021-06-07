@@ -9,7 +9,7 @@ export default class LinkButton extends Link {
     onClickHandlerFactory = () => {
         if (this.state.isInternal) {
             return () => {
-                this.context.router.history.push(this.state.path)
+                this.context.router.navigate(this.state.path)
             }
         } else {
             return () => {

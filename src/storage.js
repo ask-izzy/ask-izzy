@@ -38,14 +38,6 @@ const Storage = {
         this.setItem("debug", debug);
     },
 
-    getHistoryLength(): number {
-        return parseInt(sessionStore.getItem("historyLength") || "") || 0;
-    },
-
-    setHistoryLength(length: number): void {
-        sessionStore.setItem("historyLength", `${length}`);
-    },
-
     getLocation(): string {
         return (
             this.getItem("location") && String(this.getItem("location"))

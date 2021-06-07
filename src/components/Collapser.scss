@@ -1,9 +1,17 @@
 .Collapser {
+    /* remove default button styling */
+    button.collapser-message {
+        padding: 0;
+        border: 0;
+        background: none;
+        font-family: inherit;
+        font-size: inherit;
+    }
 
     .collapser-message {
-        &:visited {
-            color: $link-text-color;
-        }
+        margin-left: auto;
+        color: $brand-pane-alt-dark;
+        text-decoration: underline;
     }
 
     @media screen {

@@ -1,20 +1,11 @@
 /* @flow */
 
 import * as React from "react";
-import PropTypes from "proptypes";
 import components from "../components";
 import _s from "underscore.string";
 import routerContext from "../contexts/router-context";
 
-type Props = {
-    params: Object
-}
-
-export default class StyleGuideItem extends React.Component<Props, void> {
-    static propTypes = {
-        params: PropTypes.object,
-    };
-
+export default class StyleGuideItem extends React.Component<{}> {
     static contextType = routerContext;
 
     constructor(props: Object) {

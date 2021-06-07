@@ -53,7 +53,7 @@ export default class BetaInfoStaticPage extends React.Component<{}, void> {
 
                     <div
                         className="returnToProd"
-                        onClick={this.context.router.history.goBack}
+                        onClick={() => this.context.router.navigate(-1)}
                     >
                         <icons.ChevronBack />
                         <span>Not interested in the Beta</span>

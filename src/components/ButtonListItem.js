@@ -13,10 +13,8 @@ export default class ButtonListItem extends React.Component<ListItemProps, void>
     render() {
         return (
             <ListItem
-                rootElement="a"
-                role="button"
+                rootElement="button"
                 tabIndex="0"
-                href="#"
                 {...(this.props: any)}
                 onClick={this.onClick.bind(this)}
             />

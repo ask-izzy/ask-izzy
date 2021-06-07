@@ -13,28 +13,12 @@ import NotFoundStaticPage from "./NotFoundStaticPage";
 import icons from "../icons";
 
 import type { Service, Site } from "../iss";
-import type Category from "../constants/Category";
-
-
-type Props = {
-    loadMore: any,
-    objects: Array<Service>,
-    location: any,
-    personalisationComponents: Array<Object>,
-    title: string,
-    statusCode: number,
-    meta: {total_count: number},
-    loading: boolean,
-    error: string,
-    category?: Category,
-    search?: {search: string},
-}
 
 type State = {
     selectedSite: ?Site,
 }
 
-class ResultsMapPage extends ResultsPage<Props, State> {
+class ResultsMapPage extends ResultsPage<{}, State> {
     services(): Array<Service> {
         if (!this.state.searchResults) {
             return [];
@@ -86,7 +70,7 @@ class ResultsMapPage extends ResultsPage<Props, State> {
         if (this.state.selectedSite) {
             this.setState({selectedSite: null})
         } else {
-            this.context.router.history.goBack();
+            this.context.router.navigate(-1);
         }
     }
 
