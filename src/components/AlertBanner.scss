@@ -2,14 +2,12 @@
 
 .AlertBanner {
     padding: 0.1px; /* force margins not to collapse */
-
     border: #{colours.get-static('colour-border-alert')} solid 1px;
     border: var(--colour-border-alert) solid 1px;
     background-color: #{colours.get-static('colour-bg-standard')};
     background-color: var(--colour-bg-standard);
     color: #{colours.get-static('colour-text-dark')};
     color: var(--colour-text-dark);
-
     list-style: none;
 
     summary::-webkit-details-marker {
@@ -52,7 +50,8 @@
             align-items: center;
 
             .icon {
-                margin: 0 1.3em 0 0.4em;
+                margin-right: 0.4em;
+                margin-left: 0.4em;
 
                 .InfoIcon {
                     /* Counteract margin in SVG */
@@ -63,9 +62,8 @@
             }
 
             .text {
-                margin: 1em;
+                margin: 1em 1em 1em 0.4em;
                 font-size: 18px;
-                font-weight: 500;
 
                 p {
                     display: inline;

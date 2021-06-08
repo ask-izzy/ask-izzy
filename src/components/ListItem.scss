@@ -33,60 +33,81 @@
 
     &.hero {
         & > div {
-            padding-top: 11px;
-            padding-bottom: 11px;
-            padding-left: 58px;
-        }
+            & > .label {
+                padding-top: 11px;
+                padding-bottom: 11px;
+            }
 
-        .primaryText {
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 18px;
+            & > .label > .primaryText {
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 18px;
+            }
         }
     }
 
-    &.has-left-icon > div {
-        padding-left: 58px;
+    &:not(.has-left-icon) {
+        padding-left: 16px;
     }
 
-    &.has-right-icon > div {
-        padding-right: 40px;
+    &:not(.has-right-icon) {
+        padding-right: 16px;
     }
 
     & > div {
-        padding: 16px;
+        display: flex;
+        align-items: center;
+        min-height: 56px;
 
-        & > .primaryText {
-            color: #{colours.get-static('colour-text-dark')};
-            color: var(--colour-text-dark);
-            font-size: 16px;
-            line-height: 150%;
+        & > .leftIcon {
+            display: flex;
+            justify-content: center;
+            min-width: 58px;
 
-            .link-text {
-                color: #{colours.get-static('colour-link')};
-                color: var(--colour-link);
-
-                &:hover {
-                    text-decoration: none;
-                }
+            // Hack until we refactor icons to stop wrapping them in spans
+            svg {
+                vertical-align: text-bottom;
             }
         }
 
-        & > .secondaryText {
-            color: #{colours.get-static('colour-text-mid')};
-            color: var(--colour-text-mid);
-            font-size: 14px;
-            line-height: 150%;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
+        & > .label {
+            flex: 1 1 auto;
+            min-width: 0; /* needed for force flex to collapse this if content is wider than the current space */
+            padding-top: 16px;
+            padding-bottom: 16px;
+
+            & > .primaryText {
+                color: #{colours.get-static('colour-text-dark')};
+                color: var(--colour-text-dark);
+                font-size: 16px;
+                line-height: 150%;
+
+                .link-text {
+                    color: #{colours.get-static('colour-link')};
+                    color: var(--colour-link);
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+
+            & > .secondaryText {
+                color: #{colours.get-static('colour-text-mid')};
+                color: var(--colour-text-mid);
+                font-size: 14px;
+                line-height: 150%;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
         }
 
-        & > .leftIcon,
         & > .rightIcon {
-            position: absolute;
-            top: 13px;
-            height: 44px;
+            display: flex;
+            justify-content: center;
+            min-width: 35px;
+            padding-right: 8px;
 
             input {
                 position: absolute;
@@ -94,15 +115,6 @@
                 left: 16px;
                 z-index: -99;
             }
-        }
-
-        & > .leftIcon {
-            top: 8px;
-            left: 8px;
-        }
-
-        & > .rightIcon {
-            right: 8px;
         }
     }
 }

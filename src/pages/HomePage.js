@@ -79,6 +79,9 @@ class HomePage extends React.Component<{}, State> {
                         bannerName="homepage"
                         taperColour="LighterGrey"
                     />
+                    <AlertBannerList
+                        screenLocation="homePage"
+                    />
                     <form
                         className={`search ${
                             this.state.location ? "locationSet" : ""}`}
@@ -115,9 +118,6 @@ class HomePage extends React.Component<{}, State> {
                             />
                         </div>
                     </form>
-                    <AlertBannerList
-                        screenLocation="homePage"
-                    />
                     <div>
                         {this.state.location &&
                             <div>

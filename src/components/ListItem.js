@@ -56,23 +56,24 @@ export default class ListItem extends React.Component<ListItemProps, void> {
                 ...(rest: any),
             },
             <div>
-                <div className="leftIcon">
+                {leftIcon && <div className="leftIcon">
                     {leftIcon}
+                </div>}
+
+                <div className="label">
+                    {!children && <>
+                        {primaryText && <div className="primaryText">
+                            {primaryText}
+                        </div>}
+                        {secondaryText && <div className="secondaryText">
+                            {secondaryText}
+                        </div>}
+                    </>}
+                    {children}
                 </div>
-                {!children && (
-                    <div className="primaryText">
-                        {primaryText}
-                    </div>
-                )}
-                {!children && (
-                    <div className="secondaryText">
-                        {secondaryText}
-                    </div>
-                )}
-                {children}
-                <div className="rightIcon">
+                {rightIcon && <div className="rightIcon">
                     {rightIcon}
-                </div>
+                </div>}
             </div>
         );
     }
