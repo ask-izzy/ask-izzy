@@ -11,6 +11,16 @@ import Under18Page from "./Under18DomesticViolenceScreen";
 import LgbtiqaPage from "./LgbtiqaDomesticViolenceScreen";
 import UsingViolencePage from "./UsingViolenceScreen";
 
+const ATSI_BREADCRUMB_ICON = (
+    <span>
+        <icons.AboriginalFlag/>
+        <icons.TorresStraitIslandersFlag />
+    </span>
+)
+const LGBT_BREADCRUMB_ICON = (
+    <span><icons.DemographicLgbtiq /></span>
+)
+
 export default class DfvDemographics extends BaseMultiQuestion {
     static title = "Personal";
     static propTypes = BaseMultiQuestion.propTypes;
@@ -52,20 +62,34 @@ export default class DfvDemographics extends BaseMultiQuestion {
     }
 
 
-    static breadcrumbAnswer(): ?Array<any> {
+    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): ?string {
+        if (this.answer && this.answer.length) {
+            for (let index: number = 0; index < this.answer.length; index++) {
+                if (breadcrumbAnswer === ATSI_BREADCRUMB_ICON &&
+                    this.answer[index] ===
+                    "Aboriginal and/or Torres Strait Islander") {
+                    return this.answer[index];
+                } else if (breadcrumbAnswer === LGBT_BREADCRUMB_ICON &&
+                    this.answer[index] === "LGBTIQA+") {
+                    return this.answer[index];
+                } else if (
+                    // $FlowIgnore
+                    this.breadcrumbAnswer()[index] === breadcrumbAnswer) {
+                    // $FlowIgnore
+                    return this.answer[index]
+                }
+            }
+        }
+    }
 
+    static breadcrumbAnswer(): ?Array<any> {
         if (this.answer && this.answer.length) {
             return this.answer.map((answer, index) => {
                 switch (answer) {
                 case "Aboriginal and/or Torres Strait Islander":
-                    return (
-                        <span>
-                            <icons.AboriginalFlag/>
-                            <icons.TorresStraitIslandersFlag />
-                        </span>
-                    );
+                    return ATSI_BREADCRUMB_ICON;
                 case "LGBTIQA+":
-                    return <span><icons.DemographicLgbtiq /></span>
+                    return LGBT_BREADCRUMB_ICON;
                 default:
                     return answer;
                 }

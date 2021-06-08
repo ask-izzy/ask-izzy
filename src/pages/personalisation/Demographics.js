@@ -7,6 +7,14 @@ import icons from "../../icons";
 import { resetDfvOptions } from "../../utils";
 import * as React from "react";
 
+const ATSI_BREADCRUMB_ICON = (
+    <span>
+        <icons.AboriginalFlag/>
+        <icons.TorresStraitIslandersFlag />
+    </span>
+)
+
+
 export default class Demographics extends BaseMultiQuestion {
     static title = "Personal";
     static propTypes = BaseMultiQuestion.propTypes;
@@ -55,17 +63,33 @@ export default class Demographics extends BaseMultiQuestion {
         resetDfvOptions();
     }
 
+
+    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): ?string {
+        if (this.answer && this.answer.length) {
+            for (let index: number = 0; index < this.answer.length; index++) {
+                if (breadcrumbAnswer === ATSI_BREADCRUMB_ICON &&
+                    // $FlowIgnore
+                    this.answer[index] ===
+                    "Aboriginal and/or Torres Strait Islander"
+                ) {
+                    return this.answer[index] ;
+                } else if (
+                    // $FlowIgnore
+                    this.breadcrumbAnswer()[index] === breadcrumbAnswer
+                ) {
+                    // $FlowIgnore
+                    return this.answer[index]
+                }
+            }
+        }
+    }
+
     static breadcrumbAnswer(): ?Array<any> {
         if (this.answer && this.answer.length) {
             return this.answer.map((answer, index) => {
                 switch (answer) {
                 case "Aboriginal and/or Torres Strait Islander":
-                    return (
-                        <span>
-                            <icons.AboriginalFlag/>
-                            <icons.TorresStraitIslandersFlag />
-                        </span>
-                    );
+                    return ATSI_BREADCRUMB_ICON;
                 case "Person seeking asylum":
                     return "Asylum seeker"
                 case "Parole / recently released":

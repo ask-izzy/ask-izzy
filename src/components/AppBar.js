@@ -34,9 +34,7 @@ class AppBar extends React.Component<Props, void> {
                     {this.props.onBackTouchTap ? this.renderBackButton() : null}
                     {this.props.title ?
                         <h1 className="title">{this.props.title}</h1>
-                        : <span style={{
-                            width: "79%",
-                        }}/>}
+                        : null}
                     <QuickExit fixedSize={this.props.fixedSizeQuickExit} />
                 </div>
                 {this.props.onBackTouchTap ?

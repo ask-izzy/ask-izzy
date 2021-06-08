@@ -42,6 +42,14 @@ $online-safety: rgb(112, 189, 174);
 $site-banner-warning: #4c13ae;
 $census-brand-color: #c5d604;
 
+$breadcrumb-comma-pipe-colour: #c5c5c5;
+$breadcrumb-text-colour: #808080;
+
+a,
+.link-color {
+    color: $brand-pane-alt-dark;
+}
+
 :focus {
     outline: 1px solid $brand-pane-alt-light;
 }

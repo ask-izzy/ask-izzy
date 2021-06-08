@@ -42,6 +42,8 @@ export type State = {
     shouldRenderSafetyDetails?: boolean,
     showStepper: boolean,
     category: ?Category,
+    tabIndex: number,
+    listFocused: boolean,
 }
 
 class BaseQuestion extends Personalisation<Props, State> {
@@ -53,6 +55,8 @@ class BaseQuestion extends Personalisation<Props, State> {
             selected: null, // set when the user makes a choice
             showStepper: false,
             category: undefined,
+            tabIndex: 0,
+            listFocused: false,
         };
     }
 
@@ -117,7 +121,7 @@ class BaseQuestion extends Personalisation<Props, State> {
      * Per question
      * @returns {string} - returns the selected answer
      */
-    static breadcrumbAnswer(): ?any {
+    static breadcrumbAnswer(): ?string | ?React.Node {
         return this.answer;
     }
 
@@ -177,6 +181,10 @@ class BaseQuestion extends Personalisation<Props, State> {
         } else {
             return Object.keys(this.props.answers);
         }
+    }
+
+    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?any): ?string {
+        return "";
     }
 
     get question(): string {
@@ -258,6 +266,10 @@ class BaseQuestion extends Personalisation<Props, State> {
                 {this.state.showStepper && (
                     <QuestionStepper
                         category={this.state.category}
+                        listFocused={this.state.listFocused}
+                        onTabIndex={(tabIndex) =>
+                            this.setState({tabIndex})
+                        }
                     />
                 )}
                 <div className={listClassName}>
@@ -267,13 +279,16 @@ class BaseQuestion extends Personalisation<Props, State> {
                             leftIcon={this.iconFor(answer)}
                             primaryText={answer}
                             secondaryText={this.answerDescFor(answer)}
+                            tabIndex={this.state.tabIndex + (index + 1)}
                             aria-label={answer}
                             type="radio"
                             checked={answer === selected}
                             value={answer}
                             onClick={this.onAnswerTouchTap.bind(this, answer)}
                             readOnly={true}
-
+                            onFocus={() => this.setState(
+                                {listFocused: true}
+                            )}
                             checkedIcon={
                                 <icons.RadioSelected className="big" />
                             }
@@ -316,6 +331,9 @@ class BaseQuestion extends Personalisation<Props, State> {
             <div>
                 <div className="done-button">
                     <FlatButton
+                        tabIndex={
+                            (this.state.tabIndex + this.answers.length) + 1
+                        }
                         className="text-link"
                         label="Skip"
                         onClick={this.props.onDoneTouchTap}

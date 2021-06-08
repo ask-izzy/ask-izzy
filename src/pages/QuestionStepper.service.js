@@ -2,9 +2,11 @@
 
 import Category from "../constants/Category";
 import * as React from "react";
-import {Link} from "react-router-dom";
+import Link from "../components/Link";
 import * as gtm from "../google-tag-manager";
 import Storage from "../storage";
+import classnames from "classnames";
+import _ from "underscore";
 
 const PERSONALISATION_EXCLUSION_LIST = [
     "online-safety-bundle",
@@ -13,10 +15,14 @@ const PERSONALISATION_EXCLUSION_LIST = [
     "using-violence",
 ]
 
+export const INITIAL_TAB_INDEX = 4;
+export const BREADCRUMB_LIMIT = 6;
+
 export type AnswerType = {
     name: string,
-    answer: ?string | ?React.Node,
-    multi: boolean
+    answer: ?any,
+    multi: boolean,
+    selection: ?string | ?number | ?boolean,
 }
 
 /**
@@ -42,14 +48,14 @@ export const fetchAnswers = (
 
     const answerList = [];
     answers.forEach(answer => {
-        if (
-            answer.breadcrumbAnswer &&
-            answer.breadcrumbAnswer() instanceof Array
-        ) {
+        if (answer.breadcrumbAnswer() instanceof Array) {
             answer.breadcrumbAnswer().forEach(nestedAnswer => {
                 answerList.push({
                     name: answer.defaultProps.name,
                     answer: nestedAnswer,
+                    selection: answer.breadcrumbToStandardAnswer(
+                        nestedAnswer
+                    ),
                     multi: true,
                 })
             });
@@ -57,6 +63,7 @@ export const fetchAnswers = (
             answerList.push({
                 name: answer.defaultProps.name,
                 answer: answer.breadcrumbAnswer(),
+                selection: answer.breadcrumbToStandardAnswer,
                 multi: false,
             });
         }
@@ -81,6 +88,7 @@ export const getSearchAnswers = (): Array<AnswerType> => {
             name: "location",
             answer: location,
             multi: false,
+            selection: location,
         })
     }
     if (areYouSafe) {
@@ -100,29 +108,122 @@ export const getSearchAnswers = (): Array<AnswerType> => {
             name: "areYouSafe",
             answer: answer,
             multi: false,
+            selection: areYouSafe,
         })
     }
     return answerList
 }
 
-
-
 const trailingSlash = (path: string): string =>
     `${path}${path.endsWith("/") ? "" : "/"}`;
 
-export const PersonalisationLink = ({pathname}: Object) => (
-    <div
-        className="edit"
-        style={{
-            fontSize: "large",
-        }}
+export const PersonalisationLink = ({pathname}: Object): React.Node => (
+    <Link
+        to={`${trailingSlash(pathname)}personalise/summary`}
+        onClick={gtm.emit.bind(null, {event: "changeAnswers"})}
     >
-        <Link
-            to={`${trailingSlash(pathname)}personalise/summary`}
-            onClick={gtm.emit.bind(null, {event: "changeAnswers"})}
-        >
-            See all and edit
-        </Link>
-    </div>
+        See all and edit
+    </Link>
 );
 
+export const renderEditingIndicator = (
+    answer: AnswerType,
+    currentAnswers: Array<AnswerType>,
+    multiSelectedAnswer: Array<AnswerType>,
+    lastMultiSelect: ?number
+): ?string => {
+    if (!multiSelectedAnswer.length &&
+        (!answer.multi || (answer.multi && lastMultiSelect &&
+            currentAnswers[lastMultiSelect].answer === answer.answer))) {
+        return " (editing)"
+    } if (multiSelectedAnswer.length &&
+            multiSelectedAnswer[multiSelectedAnswer.length - 1].answer ===
+            answer.answer) {
+        return " ... (editing)"
+    }
+    return !answer.multi ? " (editing)" : null
+}
+
+
+/**
+ * Used to render the Pipes or commas between the answers
+ * @param editing - the answer is being edited
+ * @param multi - multi
+ * @param lastMultiSelect - if it's the last multi select
+ * @param index - index
+ * @return {JSX.Element} - returns a pipe or commas
+ */
+export const renderPipeOrComma = (
+    editing: boolean,
+    multi: boolean,
+    lastMultiSelect: ?number,
+    index?: ?number,
+): React.Node => (
+    <>
+        <span className={classnames("pipeOrComma", !multi && "nonMultiMargin")}>
+            {multi && lastMultiSelect !== index ?
+                <span className={editing ? "editing" : null}>
+                    {", "}
+                </span>
+                : " | "}
+        </span>
+    </>
+)
+
+
+export const sortAnswers = (
+    category: Category,
+    answers: Array<AnswerType>,
+): Array<AnswerType> => {
+
+    // separate the answers from multi and regular
+    const multiAnswers = answers.filter(answer => answer.multi);
+    const regularAnswers = answers.filter(answer => !answer.multi);
+
+    // group the multi answers by demographic
+    const groupedAnswers = _.groupBy(multiAnswers, "name");
+
+    // separate out the groups
+    const groups = Object.keys(groupedAnswers);
+
+    // get category choices
+    const choices = category.personalisation.filter(
+        cat => cat.defaultProps.answers &&
+            groups.includes(cat.defaultProps.name)).map(cat => (
+        {
+            [cat.defaultProps.name]: Object.keys(cat.defaultProps.answers),
+        }
+    ))
+
+    // loop through the groups and choices, and using the order of the choices
+    // sort the grouped answers based of the choice order
+    for (let group = 0; group < groups.length; group++) {
+        for (let choice = 0; choice < choices.length; choice++) {
+            groupedAnswers[groups[group]] = _.sortBy(
+                groupedAnswers[groups[group]],
+                (selection) => _.indexOf(
+                    choices[choice][groups[group]], selection.selection)
+            )
+            // set the answers with the non multi and new multi answers
+            answers = regularAnswers.concat(groupedAnswers[groups[group]])
+        }
+    }
+    return answers;
+}
+
+/**
+ * returns an Ellipsis ...
+ * @param index - current index
+ * @param multiSelectedAnswerCount - has more than 2 multi multi
+ * answer selections
+ * @param lastMultiSelect - The index of the last multi selection
+ * @return {string|null} - returns the Ellipsis or nothing
+ */
+export const renderEllipsis = (
+    index: number,
+    multiSelectedAnswerCount: number,
+    lastMultiSelect: ?number
+): ?string => {
+    return lastMultiSelect === index && multiSelectedAnswerCount > 0 ? " ..."
+        : null
+}

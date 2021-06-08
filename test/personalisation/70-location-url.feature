@@ -15,7 +15,7 @@ Feature: Show location in url
         And I click on "Where are you?"
         Then I should see "This will let me find the services closest to you"
         When I search for "carlt"
-        And I click on "Carlton"
+        And I click on option "Carlton"
         And I click on the done button
         And I click on the done button
         Then I should be at /search/housing/Carlton-VIC/

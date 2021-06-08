@@ -32,6 +32,9 @@ class BaseMultiQuestion extends BaseQuestion {
             >
                 <div className="done-button">
                     <FlatButton
+                        tabIndex={
+                            (this.state.tabIndex + this.answers.length) + 1
+                        }
                         label={label}
                         onClick={this.props.onDoneTouchTap}
                     />
@@ -55,8 +58,12 @@ class BaseMultiQuestion extends BaseQuestion {
         return true;
     }
 
-    static breadcrumbAnswer(): ?Array<any> {
+    static breadcrumbAnswer(): ?$ReadOnlyArray<string | React.Node> {
         return this.answer
+    }
+
+    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): ?string {
+        return "";
     }
 
     static get summaryValue(): string {
@@ -188,9 +195,14 @@ class BaseMultiQuestion extends BaseQuestion {
                     bannerName={this.bannerName}
                 />
                 <div className="List">
-                    <QuestionStepper category={getCategory(
-                        this.context.router.match.params.page
-                    )}
+                    <QuestionStepper
+                        category={getCategory(
+                            this.context.router.match.params.page
+                        )}
+                        listFocused={this.state.listFocused}
+                        onTabIndex={(tabIndex) =>
+                            this.setState({tabIndex})
+                        }
                     />
                     {this.answers.map((answer, index) =>
                         <InputListItem
@@ -198,12 +210,16 @@ class BaseMultiQuestion extends BaseQuestion {
                             leftIcon={this.iconFor(answer)}
                             primaryText={answer}
                             value={answer}
+                            tabIndex={this.state.tabIndex + (index + 1)}
                             aria-label={answer}
                             type="checkbox"
                             checked={selected.has(answer)}
                             checkedIcon={
                                 <icons.CheckboxSelected className="big" />
                             }
+                            onFocus={() => this.setState(
+                                {listFocused: true}
+                            )}
                             uncheckedIcon={
                                 <icons.CheckboxUnselected className="big" />
                             }

@@ -26,13 +26,13 @@ Feature: Personalisation
         When I click on the done button
         Then I should see "Do you have somewhere safe to sleep tonight?"
 
-        When I click on "Yes"
+        When I click on option "Yes"
         Then I should see "Do you identify as…"
 
         When I click on the done button # Didn't answer the question
         Then I should see "How old are you?"
 
-        When I click on "18 to 26"
+        When I click on option "18 to 26"
         Then I should see "Do any of these apply to you?"
 
         When I click on the done button
@@ -58,13 +58,13 @@ Feature: Personalisation
         When I click on the done button
         Then I should see "Do you have somewhere safe to sleep tonight?"
 
-        When I click on "No"
+        When I click on option "No"
         Then I should see "Do you identify as…"
 
-        When I click on "Female"
+        When I click on option "Female"
         Then I should see "How old are you?"
 
-        When I click on "18 to 26"
+        When I click on option "18 to 26"
         Then I should see "Do any of these apply to you?"
 
         When I click on the done button
@@ -94,7 +94,7 @@ Feature: Personalisation
         When I click on the done button
         Then I should see "Are you safe right now?"
 
-        When I click on "No"
+        When I click on option "No"
         Then I should see "Everyone has the right to be safe"
 
         When I click back from the title bar

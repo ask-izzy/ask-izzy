@@ -1,6 +1,25 @@
 
 .QuestionStepper {
-    .answer-box {
+
+    .skipToSelections {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 96%;
+        margin: auto;
+        padding-top: 5px;
+    }
+
+    .breadCrumbText {
+        color: $breadcrumb-text-colour;
+    }
+
+    .introText {
+        color: $brand-bg-dark;
+    }
+
+    .answerBox {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -9,19 +28,35 @@
         margin: auto;
 
         .ClearButton {
+            margin-right: 1em;
             color: $link-text-color;
-            font-weight: 500;
             text-decoration: underline;
             cursor: pointer;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        .icon {
+            position: relative;
         }
 
         .SvgIcon {
             height: 1em;
+
+            &.DemographicLgbtiqIcon {
+                position: absolute;
+                top: -4px;
+                left: 1px;
+                height: 22px;
+
+             }
         }
     }
 
     &.ResultsPage {
-        .answer-box {
+        .answerBox {
             padding: 10px;
             line-height: 24px;
         }
@@ -34,13 +69,21 @@
             width: 96%;
             margin: auto;
             padding-bottom: 15px;
+            font-size: large;
+
+            a {
+                &:visited {
+                    color: $link-text-color;
+                }
+            }
+
         }
     }
 
     &.QuestionFlow {
         background-color: $brand-bg-mid-lighter;
 
-        .answer-box {
+        .answerBox {
             height: 3em;
             padding: 15px;
             font-size: 14px;
@@ -49,11 +92,16 @@
     }
 
 
-    .editting {
+    .editing {
         color: $brand-bg-dark;
+        font-style: italic;
+    }
+
+    .pipeOrComma {
+        color: $breadcrumb-comma-pipe-colour;
+    }
+
+    .nonMultiMargin {
+        margin: 5px;
     }
 }
-
-
-
-

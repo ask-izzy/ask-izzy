@@ -33,7 +33,9 @@ class HeaderBar extends React.Component<Props, void> {
 
         return (
             <div className={headerBarClassName}>
-                <div className="primary">
+                <div className="primary"
+                    tabIndex="0"
+                >
                     {this.props.primaryText}
                 </div>
                 {this.renderSecondaryText()}
@@ -45,7 +47,9 @@ class HeaderBar extends React.Component<Props, void> {
     renderSecondaryText() {
         if (this.props.secondaryText) {
             return (
-                <div className="secondary">
+                <div className="secondary"
+                    tabIndex="1"
+                >
                     {this.props.secondaryText}
                 </div>
             )

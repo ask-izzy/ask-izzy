@@ -249,25 +249,21 @@ class Location extends Personalisation<Props, State> {
                             onSuccess={this.onGeoLocationSuccess.bind(this)}
                         />
                     }
-                    <form
-                        className="search"
-                        onSubmit={this.onDoneTouchTap.bind(this)}
-                    >
-                        <div>
-                            <input
-                                type="search"
-                                ref={element => {
-                                    this._search = element;
-                                }}
-                                onFocus={this.scrollToSearchControl.bind(this)}
-                                aria-label="Search for a suburb or postcode"
-                                placeholder="Search for a suburb or postcode"
-                                value={this.state.locationName}
-                                onChange={this.onSearchChange.bind(this)}
-                            />
-                        </div>
 
-                    </form>
+                    <div className="search">
+                        <input
+                            type="search"
+                            ref={element => {
+                                this._search = element;
+                            }}
+                            onFocus={this.scrollToSearchControl.bind(this)}
+                            aria-label="Search for a suburb or postcode"
+                            placeholder="Search for a suburb or postcode"
+                            value={this.state.locationName}
+                            onChange={this.onSearchChange.bind(this)}
+                        />
+                    </div>
+
                     {
                         /* any autocompletions we currently have */
                         this.state.autocompletions.map((result, index) =>
