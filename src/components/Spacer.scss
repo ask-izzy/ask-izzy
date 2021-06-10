@@ -6,4 +6,8 @@ hr.Spacer {
 
     border: 0;
     background-color: $brand-spacer;
+
+    &.locationSpacer {
+        margin: 0;
+    }
 }

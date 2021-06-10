@@ -22,7 +22,7 @@ import {Service} from "../iss";
 
 type Props = {
     intro?: ?boolean,
-    category: ?Category,
+    category?: ?Category,
     resultsPage?: ?boolean,
     results?: Array<Service>,
     listFocused?: ?boolean,

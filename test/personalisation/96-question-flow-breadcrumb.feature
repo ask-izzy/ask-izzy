@@ -9,7 +9,7 @@ Feature: Question Flow Breadcrumb
 
         Then I should see "To help me find the right services I'll ask you a few questions"
         And I should be at /housing/personalise
-        And I should not see "Clear Saved Location"
+        And I should not see "Clear saved location"
 
     Scenario: Visit a category page for the first time and have my location visible
         Given a fresh session
@@ -95,3 +95,10 @@ Feature: Question Flow Breadcrumb
         When I click on the done button # Demographics
         And I click on the done button
         Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families , Couples"
+
+    Scenario: See saved location on the home page
+        Given a fresh session
+        And my location is "Melbourne, VIC"
+        When I visit /
+        Then I should see "Melbourne, VIC"
+        And I should see "Clear saved location"

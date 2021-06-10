@@ -12,8 +12,15 @@ import BrandedFooter from "../components/BrandedFooter";
 import { resetDfvOptions } from "../utils";
 import routerContext from "../contexts/router-context";
 import AppBar from "../components/AppBar";
+import QuestionStepper from "./QuestionStepper";
+import Storage from "../storage";
+import Spacer from "../components/Spacer";
 
-class HomePage extends React.Component<{}, void> {
+type State = {
+    location: ?string,
+}
+
+class HomePage extends React.Component<{}, State> {
 
     search: ?HTMLInputElement;
 
@@ -21,8 +28,15 @@ class HomePage extends React.Component<{}, void> {
 
     constructor(props: Object) {
         super(props);
-
+        this.state = {
+            location: null,
+        }
         resetDfvOptions();
+    }
+
+    componentDidMount() {
+        const location = Storage.getLocation();
+        location && this.setState({location})
     }
 
     onSearchSubmit(event: Event): void {
@@ -118,6 +132,17 @@ class HomePage extends React.Component<{}, void> {
                             />
                         </div>
                     </form>
+                    <div>
+                        {this.state.location ?
+                            <div>
+                                <Spacer className="locationSpacer"/>
+                                <QuestionStepper
+                                    intro={true}
+                                    onClear={() =>
+                                        this.setState({location: null})}
+                                />
+                            </div> : null}
+                    </div>
                     <NavBar />
                 </div>
 
