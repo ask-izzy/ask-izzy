@@ -16,6 +16,7 @@ import icons from "../icons";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 import ButtonListItem from "../components/ButtonListItem";
 import QuestionStepper from "./QuestionStepper";
+import SuggestionBox from "./SuggestionBox";
 
 class ResultsListPage extends ResultsPage<> {
     render() {
@@ -83,6 +84,8 @@ class ResultsListPage extends ResultsPage<> {
                     results={this.state.searchResults || []}
                 />
                 {this.renderLoadMore()}
+                {this.state.searchResults && this.state.searchResults.length &&
+                <SuggestionBox location={this.context.router.location} />}
             </div>
         </div>
     )

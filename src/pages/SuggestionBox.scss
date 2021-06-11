@@ -1,0 +1,27 @@
+$suggestion-box-bg: #edecea;
+
+.SuggestionBox {
+    display: flex;
+    justify-content: start;
+    padding: 1em 1em 2em 1em;
+    background-color: $suggestion-box-bg;
+
+    .SuggestionContentBox {
+        h3 {
+            color: $brand-text-dark;
+            font-weight: 550;
+        }
+
+        h4 {
+            margin-bottom: 5px;
+            color: $brand-text-dark;
+            font-weight: normal;
+        }
+
+        a {
+            &:visited {
+                color: $link-text-color;
+            }
+        }
+    }
+}
