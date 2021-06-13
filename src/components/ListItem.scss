@@ -46,6 +46,16 @@
 
             font-size: 16px;
             line-height: 150%;
+
+            .link-text {
+                color: $link-text-color;
+
+                &:hover {
+                    text-decoration: none;
+                }
+
+            }
+
         }
 
         & > .secondaryText {

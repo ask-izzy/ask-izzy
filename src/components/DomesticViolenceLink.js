@@ -14,13 +14,12 @@ export default class DomesticViolenceLink extends BaseLogoWithTextBox {
         body: `Do you know what domestic violence looks like? Learn more about
                how to spot the signs and what to do.`,
         highlightColor: "#7E74B3",
+        path: "/information",
     };
 
     static contextType = routerContext;
 
     onClickBox(): void {
-        const path = "/information";
-
         gtm.emit({
             event: "DV Banner Clicked",
             eventCat: "Banner Clicked",
@@ -30,7 +29,7 @@ export default class DomesticViolenceLink extends BaseLogoWithTextBox {
         });
 
         this.context.router.history.push(
-            path,
+            this.props.path,
         );
     }
 }

@@ -174,7 +174,9 @@ export default class BrandedFooter
                                 <icons.Heart
                                     className="small"
                                 />
-                                Donate to us
+                                <div>
+                                    Donate to us
+                                </div>
                             </Link>
                         </li>
                         <li>
@@ -187,7 +189,9 @@ export default class BrandedFooter
                                 <icons.Chat
                                     className="small"
                                 />
-                                Leave feedback
+                                <div>
+                                    Leave feedback
+                                </div>
                             </Link>
                         </li>
                     </ul>

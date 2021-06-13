@@ -14,13 +14,12 @@ export default class OnlineSafetyLink extends BaseLogoWithTextBox {
         body: `There are some simple steps you can take
                which will make you safer online.`,
         highlightColor: "#70bdae",
+        path: "/online-safety",
     };
 
     static contextType = routerContext;
 
     onClickBox(): void {
-        const path = "/online-safety";
-
         gtm.emit({
             event: "Online Safety Banner Clicked",
             eventCat: "Banner Clicked",
@@ -30,7 +29,7 @@ export default class OnlineSafetyLink extends BaseLogoWithTextBox {
         });
 
         this.context.router.history.push(
-            path,
+            this.props.path,
         );
     }
 }

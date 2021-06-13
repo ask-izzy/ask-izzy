@@ -19,6 +19,10 @@ export const absoluteImageUrl = (uri: string): string => {
 
 export const renderLink = (props: ReactMarkdownLinkProps) => {
     return (
-        <Link to={props.href}>{props.children}</Link>
+        <Link
+            to={props.href}
+        >
+            {props.children}
+        </Link>
     );
 }

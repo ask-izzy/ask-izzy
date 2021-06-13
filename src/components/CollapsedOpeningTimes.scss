@@ -21,6 +21,10 @@
             font-size: 16px;
             text-align: right;
             white-space: nowrap;
+
+            &:visited {
+                color: $link-text-color;
+            }
         }
 
         .AllOpeningTimes {

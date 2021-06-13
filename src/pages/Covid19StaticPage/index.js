@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import StaticPage from "../StaticPage";
 import Covid19Card from "./Covid19Card";
 import Phone from "../../components/Phone";
-import {Link} from "react-router-dom";
+import Link from "../../components/Link";
 import {states} from "./Covid19Service";
 import {windowWidth} from "../../effects/WindowWidth";
 
@@ -43,11 +43,9 @@ function Covid19StaticPage() {
             <p>
                 For information from the federal government please visit
                 the{" "}
-                <a
-                    href="https://www.health.gov.au/news/health-alerts/novel-coronavirus-2019-ncov-health-alert"
-                    rel="noopener noreferer"
-                    target="_blank"
-                >Australian Department of Health website</a> for the latest
+                <Link
+                    to="https://www.health.gov.au/news/health-alerts/novel-coronavirus-2019-ncov-health-alert"
+                >Australian Department of Health website</Link> for the latest
                 medical advice, news and information.
             </p>
 

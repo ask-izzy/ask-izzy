@@ -68,5 +68,14 @@
         float: left;
         color: $link-text-color;
         text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &:visited {
+            color: $link-text-color-visited;
+        }
+
     }
 }

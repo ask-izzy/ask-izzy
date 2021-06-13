@@ -9,6 +9,7 @@ import icons from "../icons";
 import Location from "../iss/Location";
 import * as gtm from "../google-tag-manager";
 import Spacer from "./Spacer";
+import GoogleMapsLink from "./GoogleMapsLink";
 
 class TransportTime extends React.Component<{
     location: Location,
@@ -158,15 +159,21 @@ class TransportTime extends React.Component<{
     renderDirections() {
         if (!this.props.compact) {
             return (
-                <div className="getDirections">
-                    <span onClick={this.recordClick.bind(this)}>
+                <GoogleMapsLink
+                    to={this.props.location}
+                    className="getDirections"
+                    onClick={this.recordClick.bind(this)}
+                    hideSpacer={true}
+                >
+                    <span >
                         Get directions in Google Maps
                         <icons.ExternalLink
                             className="ExternalLinkIcon"
                         />
                     </span>
-                </div>
-            );
+                </GoogleMapsLink>
+            )
+
         }
         return <span />;
     }

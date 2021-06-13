@@ -135,10 +135,15 @@
         .secondaryText {
             display: inline-block;
             float: right;
-            color: $icon-fg-color;
+            color: $link-text-color;
             font-size: 16px;
             text-decoration: underline;
             white-space: initial;
+
+            &:hover {
+                text-decoration: none;
+            }
+
         }
     }
 

@@ -94,7 +94,10 @@ class Intro extends Personalisation<Props, {}> {
                                     If you've been impacted by the pandemic and
                                     need support, we have a new version of Ask
                                     Izzy that might be helpful to you.{" "}
-                                    <Link to="https://beta.askizzy.org.au">
+                                    <Link
+                                        to="https://beta.askizzy.org.au"
+                                        className="BetaLink"
+                                    >
                                         Go to Ask Izzy Beta
                                     </Link>
                                 </p>

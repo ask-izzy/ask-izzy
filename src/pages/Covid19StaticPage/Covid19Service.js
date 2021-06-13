@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import icons from "../../icons";
+import Link from "../../components/Link";
 
 type web = {
     url: string,
@@ -51,14 +52,11 @@ export const ContactDetailWeb = ({url, linkText}: web): React.Node => {
     return (
         <div className="contact-detail web">
             <icons.Website className="icon"/>
-            <a
-                href={url}
-                rel="noopener noreferer"
-                target="_blank"
-                className="main"
+            <Link
+                to={url}
             >
                 {linkText}
-            </a>
+            </Link>
         </div>
     )
 }

@@ -2,12 +2,14 @@
 
 import * as React from "react";
 import PropTypes from "proptypes";
+import Link from "./Link";
 
 type Props = {
     icon: React.Element<any>,
     header: string,
     body: string,
     highlightColor: string,
+    path: string,
 }
 
 export default class BaseLogoWithTextBox extends React.Component<Props, void> {
@@ -42,7 +44,7 @@ export default class BaseLogoWithTextBox extends React.Component<Props, void> {
                     <div className={"Instruction"}>
                         { this.props.body }
                     </div>
-                    <div className={"Link"}>
+                    <Link to={this.props.path}>
                         Learn More
                         <div
                             className={"Chevron"}
@@ -52,7 +54,7 @@ export default class BaseLogoWithTextBox extends React.Component<Props, void> {
                         >
                             &nbsp;&gt;
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
         );

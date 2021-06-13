@@ -11,6 +11,8 @@ type Props = {
     to: Location,
     children?: any,
     className: ?string,
+    onClick?: ?function,
+    hideSpacer?: ?boolean,
 }
 
 class GoogleMapsLink extends React.Component<Props, void> {
@@ -22,6 +24,10 @@ class GoogleMapsLink extends React.Component<Props, void> {
             to: new Location(fixtures.ixa.location),
         },
     };
+
+    static defaultProps = {
+        hideSpacer: false,
+    }
 
     googleMapsUrl(): string {
         const toAddr = this.props.to;
@@ -78,10 +84,11 @@ class GoogleMapsLink extends React.Component<Props, void> {
             <Link
                 className={classnames("GoogleMapsLink", className)}
                 target="_blank"
+                onClick={this.props.onClick}
                 aria-label="Open Google Maps in a new tab"
                 to={this.googleMapsUrl()}
             >
-                <Spacer />
+                {!this.props.hideSpacer && <Spacer />}
                 {children}
             </Link>
         );
