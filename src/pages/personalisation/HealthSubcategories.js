@@ -39,6 +39,28 @@ export default class HealthSubcategories extends BaseQuestion {
                 .append("-pac")
                 .append("-medicare"),
         },
+        answersDesc: {
+            "Doctor": "General medical services in community health centres",
+            "Nurse": "Community nursing & district nursing services",
+            "Social & emotional wellbeing": "Services for those that " +
+                "want to talk about their mental health",
+            "Domestic & family violence": "Counselling and support " +
+                "services for those who have been hurt " +
+                "by a partner or family member",
+            "Sexual assault": "Counselling and support " +
+                "services for those who have been " +
+                "hurt by a partner or family member",
+            "Sexual health": "Services to help with " +
+                "sexually transmitted infections, " +
+                "contraception and pregnancy termination",
+            "Dentist": "Dental Services",
+            "Problems with feet": "Podiatry Services",
+            "Eye care": "Eye testing and care services",
+            "Children": "Health services for children",
+            "Maternal & child health": "Support programs and " +
+                "services for new mothers",
+            "Hospital": "Public hospitals & emergency departments",
+        },
     };
 
     componentDidMount(): void {
