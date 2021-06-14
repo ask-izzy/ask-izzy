@@ -1,0 +1,12 @@
+.FreeLowCostLabel {
+    width: auto;
+    padding: 1px 5px;
+    border-radius: 5px;
+    background-color: $icon-fg-color;
+    color: $white;
+    font-size: 14px;
+
+    @media only screen and (min-width: 410px) {
+        width: 115px;
+    }
+}
