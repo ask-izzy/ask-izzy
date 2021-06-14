@@ -174,8 +174,9 @@ function QuestionStepper(
                         !multiSelectedAnswer &&
                         renderPipeOrComma(
                             false,
-                            false,
-                            lastMultiSelect
+                            null,
+                            _.groupBy(currentAnswers.filter(
+                                ans => ans.multi), "name")
                         )
                     }
                 </span>

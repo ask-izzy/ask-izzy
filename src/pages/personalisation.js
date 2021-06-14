@@ -36,6 +36,7 @@ import ServiceList from "./personalisation/ServiceList";
 import SleepTonight from "./personalisation/SleepTonight";
 import Under18DomesticViolenceScreen from "./personalisation/Under18DomesticViolenceScreen";
 import UsingViolenceScreen from "./personalisation/UsingViolenceScreen";
+import HousingForWho from "./personalisation/HousingForWho";
 
 export default {
     AddictionSubcategories,
@@ -72,4 +73,5 @@ export default {
     SleepTonight,
     Under18DomesticViolenceScreen,
     UsingViolenceScreen,
+    HousingForWho,
 };

@@ -129,11 +129,14 @@
         font-style: italic;
 
         span {
+            margin-right: 2px;
             margin-left: 2px;
         }
     }
 
     .pipeOrComma {
+        margin-right: 2px;
+        margin-left: 2px;
         color: #{colours.get-static('colour-comma-pipe', 'QuestionStepper')};
         color: var(--colour-comma-pipe);
 

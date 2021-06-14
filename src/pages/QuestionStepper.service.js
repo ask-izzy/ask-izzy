@@ -23,7 +23,7 @@ const ICON_ARIALABEL_MAPPING = {
 }
 
 export const INITIAL_TAB_INDEX = 4;
-export const BREADCRUMB_LIMIT = 6;
+export const BREADCRUMB_LIMIT = 7;
 export const MULTI_DEFAULT_ANSWER_LIMIT = 2;
 export const SCREEN_READER_MESSAGE: string = "The following are your " +
     "previously selected answers."
@@ -119,50 +119,59 @@ export const PersonalisationLink = ({pathname}: Object): React.Node => (
 
 export const renderEditingIndicator = (
     answer: AnswerType,
-    currentAnswers: Array<AnswerType>,
-    multiSelectedAnswer: Array<AnswerType>,
-    lastMultiSelect: ?number
+    group: Object,
 ): ?string => {
-    if (!multiSelectedAnswer.length &&
-        (!answer.multi || (answer.multi && lastMultiSelect &&
-            currentAnswers[lastMultiSelect].answer === answer.answer))) {
-        return " (editing)"
-    } if (multiSelectedAnswer.length &&
-            multiSelectedAnswer[multiSelectedAnswer.length - 1].answer ===
-            answer.answer) {
-        return " ... (editing)"
+    let content = " (editing)";
+    if (answer.multi) {
+        const currentGroup = group[answer.name]
+        const groupsSize = currentGroup.length
+        content = currentGroup[groupsSize - 1].answer ===
+            answer.answer ? groupsSize > 1 ?
+                "... (editing)" : " (editing) " : "";
     }
-    return !answer.multi ? " (editing)" : null
+    return content
 }
 
 
 /**
  * Used to render the Pipes or commas between the answers
  * @param editing - the answer is being edited
- * @param multi - multi
- * @param lastMultiSelect - if it's the last multi select
- * @param index - index
+ * @param answer - answer
+ * @param group - the multi answer groups
  * @return {JSX.Element} - returns a pipe or commas
  */
 export const renderPipeOrComma = (
     editing: boolean,
-    multi: boolean,
-    lastMultiSelect: ?number,
-    index?: ?number,
-): React.Node => (
-    <>
-        <span
-            aria-hidden="true"
-            className={classnames("pipeOrComma", !multi && "nonMultiMargin")}
-        >
-            {multi && lastMultiSelect !== index ?
-                <span className={editing ? "editing" : null}>
-                    {", "}
-                </span>
-                : " | "}
-        </span>
+    answer: ?AnswerType,
+    group: Object,
+): React.Node => {
+
+
+    let content = " | ";
+    if (answer && answer.multi) {
+        const currentGroup = group[answer.name]
+        const groupsSize = currentGroup.length
+        if (editing) {
+            content = <span className="editing">
+                {currentGroup[groupsSize - 1].answer ===
+            answer.answer ? " | " : ", "}
+            </span>
+        } else {
+            content = currentGroup[groupsSize - 1].answer ===
+            answer.answer ? " | " : ", ";
+        }
+
+    }
+
+    return <>
+            <span className={classnames(
+                "pipeOrComma",
+                answer && !answer.multi && "nonMultiMargin")}
+            >
+                {content}
+            </span>
     </>
-)
+}
 
 
 export const sortAnswers = (
@@ -189,6 +198,7 @@ export const sortAnswers = (
         }
     ))
 
+    let tempAnswers = [];
     // loop through the groups and choices, and using the order of the choices
     // sort the grouped answers based of the choice order
     for (let group = 0; group < groups.length; group++) {
@@ -198,11 +208,10 @@ export const sortAnswers = (
                 (selection) => _.indexOf(
                     choices[choice][groups[group]], selection.selection)
             )
-            // set the answers with the non multi and new multi answers
-            answers = regularAnswers.concat(groupedAnswers[groups[group]])
         }
+        tempAnswers = tempAnswers.concat(groupedAnswers[groups[group]])
     }
-    return answers;
+    return regularAnswers.concat(tempAnswers);
 }
 
 /**

@@ -33,6 +33,9 @@ Feature: Personalisation
         Then I should see "How old are you?"
 
         When I click on "18 to 26"
+        Then I should see "I'm looking for housing for?"
+
+        When I click on the done button
         Then I should see "Do any of these apply to you?"
 
         When I click on the done button
@@ -65,6 +68,9 @@ Feature: Personalisation
         Then I should see "How old are you?"
 
         When I click on "18 to 26"
+        Then I should see "I'm looking for housing for?"
+
+        When I click on the done button
         Then I should see "Do any of these apply to you?"
 
         When I click on the done button

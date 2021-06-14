@@ -51,13 +51,14 @@ Feature: Question Flow Breadcrumb
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
-        And I am part of the following demographics
+        And I am looking for the following specific housing
         --------------------------------------
-        Family with children
-        Couples
+        Myself only
+        Me and my partner
         --------------------------------------
+        And I am not part of any relevant demographics
         When I click on "Housing"
-        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families , Couples"
+        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Myself , Couples"
 
     Scenario: Visit housing and select more than two demographic
         Given a fresh session
@@ -65,14 +66,17 @@ Feature: Question Flow Breadcrumb
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
+        And I am looking for the following specific housing
+        --------------------------------------
+        Myself only
+        Me and my partner
+        --------------------------------------
         And I am part of the following demographics
         --------------------------------------
-        Family with children
-        Couples
         Have a disability
         --------------------------------------
         When I click on "Housing"
-        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families , Couples ..."
+        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Myself , Couples | With disability"
 
     Scenario: Visit housing and select more than two demographic and edit
         Given a fresh session
@@ -80,21 +84,24 @@ Feature: Question Flow Breadcrumb
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
+        And I am looking for the following specific housing
+        --------------------------------------
+        Myself only
+        Me and my partner
+        --------------------------------------
         And I am part of the following demographics
         --------------------------------------
-        Family with children
-        Couples
         Have a disability
         --------------------------------------
         When I click on "Housing"
-        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families , Couples ..."
+        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Myself , Couples | With disability"
         When I click on "See all and edit"
         And I click on "Do any of these apply to you?"
-        And I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families , Couples ... (editing)"
+        And I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Myself , Couples | With disability (editing)"
         And I click on "Have a disability"
         When I click on the done button # Demographics
         And I click on the done button
-        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families , Couples"
+        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Myself , Couples"
 
     Scenario: See saved location on the home page
         Given a fresh session

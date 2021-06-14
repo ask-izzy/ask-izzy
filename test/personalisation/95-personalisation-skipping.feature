@@ -8,6 +8,7 @@ Feature: Skip personalisation settings
     Background:
         Given my location is "Melbourne, Vic"
         And I have somewhere to sleep tonight
+        And I am not looking for any specific housing
         And I am not part of any relevant demographics
         And I visit /
 
@@ -31,5 +32,6 @@ Feature: Skip personalisation settings
         Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | (skipped)
         How old are you?                             | (skipped)
+        I'm looking for housing for?                 | None selected
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------

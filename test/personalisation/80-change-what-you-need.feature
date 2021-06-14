@@ -10,6 +10,7 @@ Feature: Change your personalisation settings
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 27 years old
+        And I am not looking for any specific housing
         And I am not part of any relevant demographics
 
     Scenario: View personalisation settings and return to search
@@ -24,6 +25,7 @@ Feature: Change your personalisation settings
         Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
+        I'm looking for housing for?                 | None selected
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
@@ -48,6 +50,7 @@ Feature: Change your personalisation settings
         Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
+        I'm looking for housing for?                 | None selected
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
@@ -64,6 +67,42 @@ Feature: Change your personalisation settings
         Do you have somewhere safe to sleep tonight? | No
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
+        I'm looking for housing for?                 | None selected
+        Do any of these apply to you?                | None selected
+        ----------------------------------------------------------------
+
+    Scenario: Edit Housing items
+        Given I am looking for the following specific housing
+        --------------------------------------
+        Me and my pets
+        --------------------------------------
+
+        When I visit /housing/personalise/summary
+        Then I should see "Change your answers here"
+        Then I should see the results
+        ----------------------------------------------------------------
+        Question (primaryText)                       | Answer (secondaryText)
+        ================================================================
+        Where are you?                               | Melbourne, Vic
+        Do you have somewhere safe to sleep tonight? | Yes
+        How do you identify?                         | Female
+        How old are you?                             | 26 to 64
+        I'm looking for housing for?                 | Me and my pets
+        Do any of these apply to you?                | None selected
+        ----------------------------------------------------------------
+        When I click on "I'm looking for housing for?"
+        And I click on "Me and my pets"
+        And I click on the done button
+        Then I should see "Change your answers here"
+        Then I should see the results
+        ----------------------------------------------------------------
+        Question (primaryText)                       | Answer (secondaryText)
+        ================================================================
+        Where are you?                               | Melbourne, Vic
+        Do you have somewhere safe to sleep tonight? | Yes
+        How do you identify?                         | Female
+        How old are you?                             | 26 to 64
+        I'm looking for housing for?                 | None selected
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
@@ -83,6 +122,7 @@ Feature: Change your personalisation settings
         Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
+        I'm looking for housing for?                 | None selected
         Do any of these apply to you?                | Aboriginal and/or Torres Strait Islander
         ----------------------------------------------------------------
 
@@ -98,6 +138,7 @@ Feature: Change your personalisation settings
         Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
+        I'm looking for housing for?                 | None selected
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 
@@ -114,6 +155,7 @@ Feature: Change your personalisation settings
         Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Male
         How old are you?                             | 26 to 64
+        I'm looking for housing for?                 | None selected
         Do any of these apply to you?                | None selected
         ----------------------------------------------------------------
 

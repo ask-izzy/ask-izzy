@@ -9,6 +9,7 @@ Feature: Crisis Line
         Given my location is "Melbourne, VIC"
         And my gender is female
         And I am 27 years old
+        And I am not looking for any specific housing
         And I am not part of any relevant demographics
 
     Scenario: Get helpline phone number

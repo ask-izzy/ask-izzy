@@ -26,12 +26,16 @@ module.exports = (function() {
             unpromisify(setSubcategoryItems))
         .given("I need the following for $STRING: $STRING",
             unpromisify(setSubcategoryItem))
+        .given("I am not looking for any specific housing",
+            unpromisify(setHousingForWhoNone))
         .given("I am not part of any relevant demographics",
             unpromisify(setDemographicsNone))
         .given("I am not interested in any subcategory",
             unpromisify(setSubcategoriesNone))
         .given("I am part of the following demographics\n$lines",
             unpromisify(setDemographics))
+        .given("I am looking for the following specific housing\n$lines",
+            unpromisify(setHousingForWho))
         .given("my gender is $STRING", unpromisify(setGender))
         .given("I am 17 years old",
             unpromisify(_.partial(setAgeTo, "18 to 26")))
@@ -121,8 +125,21 @@ async function setDemographics(
     }, items);
 }
 
+async function setHousingForWho(
+    items: Array<string>,
+): Promise<void> {
+    await gotoUrl(this.driver, "/"); // go anywhere to start the session
+    await this.driver.executeScript(items => {
+        IzzyStorage.setItem("housing-for-who", JSON.stringify(items));
+    }, items);
+}
+
 function setDemographicsNone(): Promise<void> {
     return setDemographics.bind(this)([]);
+}
+
+function setHousingForWhoNone(): Promise<void> {
+    return setHousingForWho.bind(this)([]);
 }
 
 async function setSubcategoriesNone(

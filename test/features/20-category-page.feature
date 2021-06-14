@@ -10,6 +10,7 @@ Feature: Category page
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
+        And I am not looking for any specific housing
         And I am not part of any relevant demographics
         And I am not interested in any subcategory
 

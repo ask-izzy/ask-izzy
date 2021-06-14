@@ -22,6 +22,7 @@ const categories = [
             personalisation.SleepTonight,
             personalisation.Gender,
             personalisation.Age,
+            personalisation.HousingForWho,
             personalisation.Demographics,
             ...personalisation.OnlineSafetyScreenBundle(
                 personalisation.HousingAreYouSafe

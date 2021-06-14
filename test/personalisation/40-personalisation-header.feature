@@ -18,5 +18,6 @@ Feature: Personalisation header
          And I click on the done button # Somewhere safe to sleep
          And I click on the done button # Gender
          And I click on "27 to 39"
+         And I click on the done button # Housing for who
          And I click on the done button # Demographics
         Then I should see "Melbourne, Vic | 27-39"

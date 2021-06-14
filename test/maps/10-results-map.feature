@@ -10,7 +10,9 @@ Feature: See results on a map
         And I need nothing for housing
         And my gender is female
         And I am 27 years old
+        And I am not looking for any specific housing
         And I am not part of any relevant demographics
+
 
     Scenario: View results on a map
        Given I am not interested in any subcategory

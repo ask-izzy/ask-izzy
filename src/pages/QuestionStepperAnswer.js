@@ -11,6 +11,7 @@ import routerContext from "../contexts/router-context";
 import {useContext} from "react";
 import type {AnswerType} from "./QuestionStepper.service";
 import icons from "../icons";
+import _ from "underscore";
 
 type Props = {
     lastMultiSelect: ?number,
@@ -70,17 +71,19 @@ function QuestionStepperAnswer({
                     {editing() &&
                     <span className="editing">
                         {renderEditingIndicator(
-                            answer, currentAnswers, multiSelectedAnswer,
-                            lastMultiSelect
+                            answer,
+                            _.groupBy(currentAnswers.filter(
+                                ans => ans.multi), "name"),
                         )}
                     </span>}
                 </span>
                 {answer.answer && (index + 1) < currentAnswers.length ?
                     renderPipeOrComma(
                         editing(),
-                        answer.multi,
-                        lastMultiSelect,
-                        index)
+                        answer,
+                        _.groupBy(currentAnswers.filter(
+                            ans => ans.multi), "name"),
+                    )
                     : null
                 }
             </span>

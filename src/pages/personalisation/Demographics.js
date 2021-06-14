@@ -28,27 +28,20 @@ export default class Demographics extends BaseMultiQuestion {
             // n.b. see also storage.getUserIsIndigenous when changing
             "Aboriginal and/or Torres Strait Islander":
                 append("(Aboriginals & Torres Strait Islanders)"),
-            "Family with children": append("families -srs"),
-            "Couples": append("couples"),
             "Mental or emotional difficulties": append("(mental health)"),
             "Parole / recently released": append("post-release"),
             "Have a disability": append("disabilities"),
             "Veteran": append("veteran"),
             "Person seeking asylum": append("refugees"),
-            "Have pets": append("pets")
-                .append("-effectiveness"),
         },
         icons: {
             "Escaping family violence": icons.DemographicFamilyViolence,
             "Aboriginal and/or Torres Strait Islander": icons.DemographicAtsi,
-            "Family with children": icons.DemographicChildren,
-            "Couples": icons.DemographicCouple,
             "Mental or emotional difficulties": icons.Mental,
             "Parole / recently released": icons.DemographicParole,
             "Have a disability": icons.DemographicDisability,
             "Veteran": icons.DemographicVeteran,
             "Person seeking asylum": icons.DemographicRecentlyArrived,
-            "Have pets": icons.DemographicPets,
         },
         oldAnswers: {
             "Indigenous": "Aboriginal and/or Torres Strait Islander",
@@ -88,7 +81,7 @@ export default class Demographics extends BaseMultiQuestion {
 
     static breadcrumbAnswer(): ?Array<any> {
         if (this.answer && this.answer.length) {
-            return this.answer.map((answer, index) => {
+            return this.answer.map((answer) => {
                 switch (answer) {
                 case "Aboriginal and/or Torres Strait Islander":
                     return ATSI_BREADCRUMB_ICON;
@@ -98,10 +91,6 @@ export default class Demographics extends BaseMultiQuestion {
                     return "On parole"
                 case "Have a disability":
                     return "With disability"
-                case "Have pets":
-                    return "Help with pets"
-                case "Family with children":
-                    return "Families"
                 case "Escaping family violence":
                     return "Escaping violence"
                 default:

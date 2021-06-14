@@ -692,6 +692,7 @@
   "/housing/:suburb-:state/map/personalise/page/sleep-tonight/index.html": [],
   "/housing/:suburb-:state/map/personalise/page/gender/index.html": [],
   "/housing/:suburb-:state/map/personalise/page/age/index.html": [],
+  "/housing/:suburb-:state/map/personalise/page/housing-for-who/index.html": [],
   "/housing/:suburb-:state/map/personalise/page/demographics/index.html": [],
   "/housing/:suburb-:state/map/personalise/page/are-you-safe/index.html": [],
   "/housing/:suburb-:state/map/personalise/page/online-safety-screen/index.html": [
@@ -724,6 +725,7 @@
   "/housing/:suburb-:state/personalise/page/sleep-tonight/index.html": [],
   "/housing/:suburb-:state/personalise/page/gender/index.html": [],
   "/housing/:suburb-:state/personalise/page/age/index.html": [],
+  "/housing/:suburb-:state/personalise/page/housing-for-who/index.html": [],
   "/housing/:suburb-:state/personalise/page/demographics/index.html": [],
   "/housing/:suburb-:state/personalise/page/are-you-safe/index.html": [],
   "/housing/:suburb-:state/personalise/page/online-safety-screen/index.html": [
@@ -766,6 +768,7 @@
   "/housing/:suburb-:state/personalise/summary/sleep-tonight/index.html": [],
   "/housing/:suburb-:state/personalise/summary/gender/index.html": [],
   "/housing/:suburb-:state/personalise/summary/age/index.html": [],
+  "/housing/:suburb-:state/personalise/summary/housing-for-who/index.html": [],
   "/housing/:suburb-:state/personalise/summary/demographics/index.html": [],
   "/housing/:suburb-:state/personalise/summary/are-you-safe/index.html": [
     {
@@ -799,6 +802,7 @@
   "/housing/map/personalise/page/sleep-tonight/index.html": [],
   "/housing/map/personalise/page/gender/index.html": [],
   "/housing/map/personalise/page/age/index.html": [],
+  "/housing/map/personalise/page/housing-for-who/index.html": [],
   "/housing/map/personalise/page/demographics/index.html": [],
   "/housing/map/personalise/page/are-you-safe/index.html": [],
   "/housing/map/personalise/page/online-safety-screen/index.html": [
@@ -831,6 +835,7 @@
   "/housing/personalise/page/sleep-tonight/index.html": [],
   "/housing/personalise/page/gender/index.html": [],
   "/housing/personalise/page/age/index.html": [],
+  "/housing/personalise/page/housing-for-who/index.html": [],
   "/housing/personalise/page/demographics/index.html": [],
   "/housing/personalise/page/are-you-safe/index.html": [],
   "/housing/personalise/page/online-safety-screen/index.html": [
@@ -873,6 +878,7 @@
   "/housing/personalise/summary/sleep-tonight/index.html": [],
   "/housing/personalise/summary/gender/index.html": [],
   "/housing/personalise/summary/age/index.html": [],
+  "/housing/personalise/summary/housing-for-who/index.html": [],
   "/housing/personalise/summary/demographics/index.html": [],
   "/housing/personalise/summary/are-you-safe/index.html": [
     {
