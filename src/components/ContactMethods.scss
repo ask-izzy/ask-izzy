@@ -1,3 +1,5 @@
+@use "../styles/mixins/colours";
+
 .ContactMethods {
     padding-bottom: 10px;
 
@@ -6,7 +8,8 @@
         padding-top: 10px;
 
         &:visited {
-            color: $link-text-color;
+            color: #{colours.get-static('colour-link')};
+            color: var(--colour-link);
         }
     }
 }

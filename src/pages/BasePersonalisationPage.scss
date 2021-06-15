@@ -1,3 +1,5 @@
+@use "../styles/mixins/colours";
+
 .PersonalisationPage {
     display: flex;
     flex-direction: column;
@@ -15,7 +17,8 @@
         padding-bottom: 20px;
         padding-left: 20px;
 
-        background-color: $brand-bg-light;
+        background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+        background-color: var(--colour-bg-standard-tint-2);
 
         box-sizing: border-box;
 
@@ -23,7 +26,8 @@
             display: block;
             width: 96%;
             padding: 10px 2%;
-            border: 1px solid $brand-bg-mid;
+            border: 1px solid #{colours.get-static('colour-border-list-item-dark')};
+            border: 1px solid var(--colour-border-list-item-dark);
             border-radius: 3px;
             -webkit-appearance: none;
         }
@@ -64,7 +68,8 @@
     .ClearResults {
         margin: 20px;
 
-        color: $brand-text-mid;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
         font-size: 16px;
         line-height: 140%;
         text-align: center;
@@ -74,7 +79,8 @@
         margin: 0.5em 0;
 
         a {
-            color: $brand-text-dark;
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
         }
     }
 
@@ -102,12 +108,30 @@
 
     .SummaryItem {
         @include clearfix;
+        @include colours.define(
+            'colour-primary',
+            'PersonalisationPage',
+            'colour-bg-standard-tint-2'
+        );
+        @include colours.define(
+            'colour-primary-tint-1',
+            'PersonalisationPage',
+            colours.lighten('colour-primary', 'PersonalisationPage', -10%)
+        );
+        @include colours.define(
+            'colour-primary-tint-2',
+            'PersonalisationPage',
+            colours.lighten('colour-primary', 'PersonalisationPage', -15%)
+        );
 
-        border-bottom: 1px solid darken($list-item-hairline, 15%);
-        background-color: $brand-bg-light;
+        border-bottom: 1px solid #{colours.get-static('colour-primary-tint-2', 'PersonalisationPage')};
+        border-bottom: 1px solid var(--colour-primary-tint-2);
+        background-color: #{colours.get-static('colour-primary', 'PersonalisationPage')};
+        background-color: var(--colour-primary);
 
         &:focus {
-            background-color: darken($brand-bg-light, 10%);
+            background-color: #{colours.get-static('colour-primary-tint-1', 'PersonalisationPage')};
+            background-color: var(--colour-primary-tint-1);
         }
 
         .primaryText {
@@ -118,13 +142,15 @@
 
             margin-right: 0.75ex;  /* leave one character spacing */
 
-            color: $brand-text-mid;
+            color: #{colours.get-static('colour-text-mid')};
+            color: var(--colour-text-mid);
         }
 
         .secondaryText {
             display: inline-block;
             float: right;
-            color: $link-text-color;
+            color: #{colours.get-static('colour-link')};
+            color: var(--colour-link);
             font-size: 16px;
             text-decoration: underline;
             white-space: initial;
@@ -139,5 +165,4 @@
     .padded {
         padding: 20px;
     }
-
 }

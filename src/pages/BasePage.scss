@@ -1,3 +1,5 @@
+@use "../styles/mixins/colours";
+
 .BasePage {
     display: flex;
     flex-direction: column;
@@ -5,9 +7,9 @@
 
     & > main {
         flex: 1;
-        background-color: $white;
+        background-color: #{colours.get-static('colour-bg-standard')};
+        background-color: var(--colour-bg-standard);
         /* FIXME: autoprefixer should be taking care of this */
         -ms-flex-preferred-size: auto;  /* Needed for IE10 */
     }
-
 }

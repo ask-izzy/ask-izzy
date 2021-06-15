@@ -1,3 +1,5 @@
+@use "../styles/mixins/colours";
+
 .ResultListItem {
     font-size: 14px;
     font-weight: 400;
@@ -28,20 +30,24 @@
         position: relative;
         right: 6px;
         bottom: 2px;
-        color: $brand-text-dark;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
         font-weight: 500;
     }
 
     p {
-        color: $brand-text-dark;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
     }
 
     h3 {
-        color: $brand-text-dark;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
     }
 
     li {
-        color: $brand-text-dark;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
     }
 
     .MapIcon {
@@ -55,13 +61,15 @@
 
     .site_name {
         margin-bottom: 15px;
-        color: $brand-text-mid;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
     }
 
     .Accessibility {
         margin-bottom: 15px;
         padding-left: 24px;
-        color: $brand-text-mid;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
 
         .ColoredIcon {
             top: 0;
@@ -76,7 +84,8 @@
 
         .until,
         .open {
-            color: $brand-text-mid;
+            color: #{colours.get-static('colour-text-mid')};
+            color: var(--colour-text-mid);
         }
 
         .ColoredIcon {

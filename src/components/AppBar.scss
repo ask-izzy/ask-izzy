@@ -1,6 +1,4 @@
-$appbar-text-line-height: 42px;
-$colour-red: $brand-red;
-$colour-grey: #f8f9f9;
+@use "../styles/mixins/colours";
 
 .AppBarSpacer {
     width: 100%;
@@ -12,6 +10,8 @@ $colour-grey: #f8f9f9;
 }
 
 .AppBar {
+    $appbar-text-line-height: 42px;
+
     display: flex;
     position: fixed;
     flex-direction: row;
@@ -26,8 +26,10 @@ $colour-grey: #f8f9f9;
     height: $appbar-height;
     min-height: auto;
 
-    background-color: $brand-bg-dark;
-    color: $white;
+    background-color: #{colours.get-static('raw-colour-slate-gray')};
+    background-color: var(--raw-colour-slate-gray);
+    color: #{colours.get-static('colour-text-very-light')};
+    color: var(--colour-text-very-light);
 
     text-overflow: ellipsis;
     z-index: 2;
@@ -38,7 +40,8 @@ $colour-grey: #f8f9f9;
     }
 
     .button-container a {
-        color: $white;
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
         font-size: 14px;
         line-height: $appbar-height;
         text-align: center;
@@ -70,14 +73,16 @@ $colour-grey: #f8f9f9;
         height: $appbar-height;
         padding: 0;
 
-        color: $white;
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
 
         text-align: left;
         text-decoration: none;
         overflow: hidden;
 
         &:focus {
-            background-color: $brand-pane-alt-light-translucent;
+            background-color: #{colours.get-static('colour-input-focus-overlay')};
+            background-color: var(--colour-input-focus-overlay);
         }
 
         .Icon {
@@ -85,7 +90,8 @@ $colour-grey: #f8f9f9;
             padding: 0;
 
             path {
-                fill: $white;
+                fill: #{colours.get-static('raw-colour-pure-white')};
+                fill: var(--raw-colour-pure-white);
             }
         }
 

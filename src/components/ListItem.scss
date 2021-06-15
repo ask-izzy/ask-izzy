@@ -1,8 +1,11 @@
+@use "../styles/mixins/colours";
+
 .ListItem {
     display: block;
     position: relative;
     border: 0;
-    border-bottom: 1px solid $list-item-hairline;
+    border-bottom: 1px solid #{colours.get-static('colour-border-list-item')};
+    border-bottom: 1px solid var(--colour-border-list-item);
     text-decoration: none;
     cursor: pointer;
 
@@ -56,13 +59,15 @@
         padding: 16px;
 
         & > .primaryText {
-            color: $brand-text-dark;
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
 
             font-size: 16px;
             line-height: 150%;
 
             .link-text {
-                color: $link-text-color;
+                color: #{colours.get-static('colour-link')};
+                color: var(--colour-link);
 
                 &:hover {
                     text-decoration: none;
@@ -73,7 +78,8 @@
         }
 
         & > .secondaryText {
-            color: $brand-text-mid;
+            color: #{colours.get-static('colour-text-mid')};
+            color: var(--colour-text-mid);
 
             font-size: 14px;
             line-height: 150%;

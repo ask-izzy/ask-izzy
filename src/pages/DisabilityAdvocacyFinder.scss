@@ -1,3 +1,5 @@
+@use "../styles/mixins/colours";
+
 .DisabilityAdvocacyFinder {
     margin-bottom: 50px;
 
@@ -20,6 +22,7 @@
     .askIzzyInfoBox {
         margin-top: 40px;
         padding: 0 1.2em 1em;
-        border: $brand-pane-alt-dark 1px solid;
+        border: #{colours.get-static('colour-border-standard-callout')} 1px solid;
+        border: var(--colour-border-standard-callout) 1px solid;
     }
 }

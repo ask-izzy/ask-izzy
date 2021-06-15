@@ -1,5 +1,8 @@
+@use "../styles/mixins/colours";
+
 .ServicePane {
-    color: $brand-text-dark;
+    color: #{colours.get-static('colour-text-dark')};
+    color: var(--colour-text-dark);
 
     font-size: 14px;
     font-weight: light;
@@ -29,14 +32,16 @@
         margin: 0;
         padding: 15px;
         padding-bottom: 1px;
-        background-color: $white;
+        background-color: #{colours.get-static('raw-colour-pure-white')};
+        background-color: var(--raw-colour-pure-white);
     }
 
     @media ($tablet) {
         .header {
             width: 46%;
             float: left;
-            background-color: $white;
+            background-color: #{colours.get-static('raw-colour-pure-white')};
+            background-color: var(--raw-colour-pure-white);
         }
 
         .provisions {
@@ -70,7 +75,8 @@
 
     .description {
         padding-bottom: 10px;
-        color: $brand-text-mid;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
         font-size: 18px;
         font-weight: 400;
         line-height: 140%;
@@ -140,7 +146,8 @@
         }
 
         .List > :first-child {
-            border-top: 1px solid $list-item-hairline;
+            border-top: 1px solid #{colours.get-static('colour-border-list-item')};
+            border-top: 1px solid var(--colour-border-list-item);
         }
     }
 

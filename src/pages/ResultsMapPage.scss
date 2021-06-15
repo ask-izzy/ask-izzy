@@ -1,3 +1,5 @@
+@use "../styles/mixins/colours";
+
 .ResultsMapPage {
     display: flex;
     flex-direction: column;
@@ -35,11 +37,13 @@
 
     .ResultListItem {
         min-height: 150px;
-        background-color: $white;
+        background-color: #{colours.get-static('raw-colour-pure-white')};
+        background-color: var(--raw-colour-pure-white);
     }
 
     .ResultListItem + .ResultListItem {
-        border-top: 10px solid $brand-bg-light;
+        border-top: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
+        border-top: 10px solid var(--colour-bg-standard-tint-2);
     }
 
 }

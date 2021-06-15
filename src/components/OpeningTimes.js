@@ -123,7 +123,7 @@ class OpeningTimes extends React.Component<Props, void> {
                 <ScreenReader>
                     <h4>Opening times</h4>
                 </ScreenReader>
-                <icons.Clock className="ColoredIcon brand-text-dark" />
+                <icons.Clock className="ColoredIcon" />
                 {" "}
                 <span className="print-only">Open Times</span>
                 {renderMethod.apply(this)}

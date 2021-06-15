@@ -31,7 +31,7 @@ class ResultsList extends React.Component<{
 
     render() {
         return (
-            <div className="ResultList">
+            <div className="ResultsList">
                 {
                     (this.crisisResults().length > 0) &&
                     <CrisisHeader

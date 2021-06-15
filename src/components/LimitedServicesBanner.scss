@@ -1,11 +1,15 @@
+@use "../styles/mixins/colours";
+
 .LimitedServicesBanner {
 
     .links {
         &.Link {
-            color: $white;
+            color: #{colours.get-static('colour-text-very-light')};
+            color: var(--colour-text-very-light);
 
             &:visited {
-                color: $white;
+                color: #{colours.get-static('colour-text-very-light')};
+                color: var(--colour-text-very-light);
             }
         }
     }

@@ -1,8 +1,10 @@
+@use "../styles/mixins/colours";
 
 @media print {
     path,
     circle {
-        fill: $black;
+        fill: #{colours.get-static('raw-colour-pure-black')};
+        fill: var(--raw-colour-pure-black);
     }
 }
 
@@ -14,14 +16,8 @@ svg.ColoredIcon {
     &.allow-override-color.icon-fg-color {
         path,
         circle {
-            fill: $icon-fg-color;
-        }
-    }
-
-    &.allow-override-color.brand-bg-dark {
-        path,
-        circle {
-            fill: $brand-bg-dark;
+            fill: #{colours.get-static('raw-colour-rich-purple')};
+            fill: var(--raw-colour-rich-purple);
         }
     }
 }
@@ -59,14 +55,16 @@ svg.Icon {
 
     path,
     circle {
-        fill: $interactive-icon;
+        fill: #{colours.get-static('colour-interactive-icon')};
+        fill: var(--colour-interactive-icon);
     }
 }
 
 .ChevronBackIcon {
     path,
     circle {
-        fill: $white;
+        fill: #{colours.get-static('raw-colour-pure-white')};
+        fill: var(--raw-colour-pure-white);
     }
 }
 
@@ -78,15 +76,18 @@ svg.Icon {
 
     path,
     circle {
-        fill: $interactive-icon;
+        fill: #{colours.get-static('colour-interactive-icon')};
+        fill: var(--colour-interactive-icon);
     }
 }
 
 .CheckboxSelectedIcon {
     path,
     circle {
-        fill: $white;
-        stroke: $interactive-icon;
+        fill: #{colours.get-static('raw-colour-pure-white')};
+        fill: var(--raw-colour-pure-white);
+        stroke: #{colours.get-static('colour-interactive-icon')};
+        stroke: var(--colour-interactive-icon);;
         stroke-width: 2px;
     }
 }
@@ -99,22 +100,6 @@ svg.Icon {
 .RadioUnselectedIcon,
 .RadioSelectedIcon {
     top: -2px;
-}
-
-.Census2016Icon {
-    .left-path,
-    .right-path {
-        fill: none;
-        stroke: $census-brand-color;
-        stroke-width: 13;
-        stroke-linejoin: round;
-    }
-
-    .outer-circle {
-        fill: none;
-        stroke: $census-brand-color;
-        stroke-width: 8;
-    }
 }
 
 

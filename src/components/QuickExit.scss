@@ -1,8 +1,11 @@
+@use "../styles/mixins/colours";
+
 .QuickExit {
     display: inline-block;
     height: $appbar-height;
     padding: 0 15px;
-    background-color: $colour-red;
+    background-color: #{colours.get-static('colour-irreversible-action', 'CrisisContactButton')};
+    background-color: var(--colour-irreversible-action);
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
@@ -13,11 +16,13 @@
     }
 
     .link {
-        color: $white;
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
         text-decoration: none;
 
         &:visited {
-            color: $white;
+            color: #{colours.get-static('colour-text-very-light')};
+            color: var(--colour-text-very-light);
         }
     }
 

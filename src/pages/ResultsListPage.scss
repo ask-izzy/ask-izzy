@@ -1,3 +1,5 @@
+@use "../styles/mixins/colours";
+
 .ResultsListPage {
     .progress {
         width: 100%;
@@ -29,7 +31,8 @@
         font-weight: bold;
 
         &:visited {
-            color: $link-text-color;
+            color: #{colours.get-static('colour-link')};
+            color: var(--colour-link);
         }
     }
 
@@ -38,8 +41,10 @@
     }
 
     .ViewOnMapButton {
-        background-color: $brand-bg-light;
-        color: $brand-text-mid;
+        background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+        background-color: var(--colour-bg-standard-tint-2);
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
 
         .primaryText {
             font-size: 18px;
@@ -63,9 +68,12 @@
     }
 
     .MoreResultsButton {
-        border-right: 10px solid $brand-bg-light;
-        border-bottom: 10px solid $brand-bg-light;
-        border-left: 10px solid $brand-bg-light;
+        border-right: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
+        border-right: 10px solid var(--colour-bg-standard-tint-2);
+        border-bottom: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
+        border-bottom: 10px solid var(--colour-bg-standard-tint-2);
+        border-left: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
+        border-left: 10px solid var(--colour-bg-standard-tint-2);
         font-size: 14px;
         text-align: center;
     }

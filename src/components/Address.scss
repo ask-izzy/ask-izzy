@@ -1,3 +1,5 @@
+@use "../styles/mixins/colours";
+
 .Address {
     position: relative;
     padding-left: 24px;
@@ -6,7 +8,8 @@
         display: inline-block;
         width: 100%;
 
-        color: $brand-text-dark;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
         font-weight: 500;
     }
 

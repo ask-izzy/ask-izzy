@@ -1,3 +1,5 @@
+@use "../styles/mixins/colours";
+
 .LogoWithShadow {
     position: relative;
 
@@ -26,7 +28,8 @@
 
         path,
         circle {
-            fill: $brand-text-dark;
+            fill: #{colours.get-static('colour-text-dark')};
+            fill: var(--colour-text-dark);
         }
     }
 

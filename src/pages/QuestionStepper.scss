@@ -1,5 +1,11 @@
+@use '../styles/mixins/colours';
 
 .QuestionStepper {
+    @include colours.define(
+        'colour-comma-pipe',
+        'QuestionStepper',
+        colours.lighten('raw-colour-pure-white', 'global', -23%)
+    );
 
     .skipToSelections {
         display: flex;
@@ -12,7 +18,8 @@
 
         a {
             &:visited {
-                color: $link-text-color;
+                color: #{colours.get-static('colour-link')};
+                color: var(--colour-link);
             }
         }
 
@@ -20,11 +27,13 @@
 
     .breadCrumbText {
         display: inline-block;
-        color: $breadcrumb-text-colour;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
     }
 
     .introText {
-        color: $brand-bg-mid;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
     }
 
     .answerBox {
@@ -44,7 +53,8 @@
             margin-right: 1em;
             border: 0;
             background: none;
-            color: $link-text-color;
+            color: #{colours.get-static('colour-link')};
+            color: var(--colour-link);
             text-decoration: underline;
             cursor: pointer;
 
@@ -63,7 +73,8 @@
 
                 /* to override the default fill colour */
                 path {
-                    fill: $brand-bg-mid;
+                    fill: #{colours.get-static('colour-interactive-icon')};
+                    fill: var(--colour-interactive-icon);
                 }
             }
 
@@ -93,7 +104,8 @@
 
             a {
                 &:visited {
-                    color: $link-text-color;
+                    color: #{colours.get-static('colour-link')};
+                    color: var(--colour-link);
                 }
             }
 
@@ -101,8 +113,8 @@
     }
 
     &.QuestionFlow {
-        background-color: $brand-bg-mid-lighter;
-
+        background-color: #{colours.get-static('colour-bg-standard-tint-1')};
+        background-color: var(--colour-bg-standard-tint-1);
         .answerBox {
             height: 3em;
             padding: 15px;
@@ -114,7 +126,9 @@
 
     .editing {
         display: inline-block;
-        color: $brand-bg-dark;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+
         font-style: italic;
 
         span {
@@ -124,7 +138,8 @@
     }
 
     .pipeOrComma {
-        color: $breadcrumb-comma-pipe-colour;
+        color: #{colours.get-static('colour-comma-pipe', 'QuestionStepper')};
+        color: var(--colour-comma-pipe);
 
         .editing {
             margin-right: 2px;

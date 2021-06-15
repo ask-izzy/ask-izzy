@@ -1,11 +1,13 @@
-.ResultList {
+@use "../styles/mixins/colours";
 
+.ResultsList {
     .resultContainer:first-child {
         border-top: 0;
     }
 
     .resultContainer-ResultListItem {
-        border-top: 10px solid $brand-bg-light;
+        border-top: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
+        border-top: 10px solid var(--colour-bg-standard-tint-2);
     }
 
     @media ($tablet) {

@@ -1,3 +1,5 @@
+@use "../styles/mixins/colours";
+
 .TransportTime {
     display: block;
     position: relative;
@@ -49,24 +51,28 @@
         left: 3px;
         width: 12px;
         height: 12px;
-        fill: $link-text-color;
+        fill: #{colours.get-static('colour-link')};
+        fill: var(--colour-link);
     }
 
     .travel-time {
         position: relative;
         padding: 0;
-        color: $brand-text-dark;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
         font-weight: 500;
     }
 
     .location {
         margin-right: 24px;
-        color: $brand-text-mid;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
     }
 
     .getDirections {
         float: left;
-        color: $link-text-color;
+        color: #{colours.get-static('colour-link')};
+        color: var(--colour-link);
         text-decoration: underline;
 
         &:hover {
@@ -74,7 +80,8 @@
         }
 
         &:visited {
-            color: $link-text-color-visited;
+            color: #{colours.get-static('colour-link-visited')};
+            color: var(--colour-link-visited);
         }
 
     }

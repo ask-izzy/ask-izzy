@@ -1,22 +1,22 @@
+@use "../styles/mixins/colours";
+
 .HeaderBar {
+    $text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
+
     position: relative;
     min-height: 160px;
     padding-bottom: 2vw;
-    color: $white;
+    color: #{colours.get-static('colour-text-very-light')};
+    color: var(--colour-text-very-light);
     z-index: 1;
     overflow-x: hidden; /* used to hide ::after pseudo-element that creates the
         diagonal taper at the bottom of the header */
     box-sizing: border-box;
 
-    // The default focus style has an outline
-    // the same color as this background
-    :focus {
-        outline: 1px dashed $brand-bg-dark;
-    }
-
     a,
     .link-color {
-        color: $white;
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
     }
 
     .primary {
@@ -43,10 +43,12 @@
         text-shadow: $text-shadow;
 
         a {
-            color: $white;
+            color: #{colours.get-static('colour-text-very-light')};
+            color: var(--colour-text-very-light);
 
             &:visited {
-                color: $white;
+                color: #{colours.get-static('colour-text-very-light')};
+                color: var(--colour-text-very-light);
             }
         }
 
@@ -67,24 +69,29 @@
         bottom: 0%;
         left: 0%;
         border-top: 3.5vw solid transparent;
-        border-right: 100vw solid $white;
+        border-right: 100vw solid #{colours.get-static('raw-colour-pure-white')};
+        border-right: 100vw solid var(--raw-colour-pure-white);
         content: "";
     }
 
     &.taperColourGrey::after {
-        border-right-color: $brand-bg-light;
+        border-right-color: #{colours.get-static('colour-bg-standard-tint-2')};
+        border-right-color: var(--colour-bg-standard-tint-2);
     }
 
     &.taperColourDarkGrey::after {
-        border-right-color: $brand-bg-dark;
+        border-right-color: #{colours.get-static('raw-colour-slate-gray')};
+        border-right-color: var(--raw-colour-slate-gray);
     }
 
     &.taperColourLighterGrey::after {
-        border-right-color:  $brand-bg-mid-lighter;
+        border-right-color: #{colours.get-static('colour-bg-standard-tint-1')};
+        border-right-color: var(--colour-bg-standard-tint-1);
     }
 
     &.taperColourPurple::after {
-        border-right-color: $brand-pane-alt-dark;
+        border-right-color: #{colours.get-static('raw-colour-rich-purple')};
+        border-right-color: var(--raw-colour-rich-purple);
     }
 
     /**
@@ -92,9 +99,29 @@
     * filenames in the public/images/banners dir
     */
     @each $banner-image in $banner-images {
+        @include colours.define(
+            'colour-banner-bg-overlay',
+            'HeaderBar',
+            colours.set-transparency('raw-colour-pure-black', 'HeaderBar', 0.4),
+        );
 
         &.#{$banner-image} {
-            background: linear-gradient($black-banner-rgba, $black-banner-rgba), url("/public/static/images/banners/#{$banner-image}.png") center center;
+            background:
+                linear-gradient(
+                    #{colours.get-static('colour-banner-bg-overlay', 'HeaderBar')},
+                    #{colours.get-static('colour-banner-bg-overlay', 'HeaderBar')}
+                ),
+                url("/public/static/images/banners/#{$banner-image}.png")
+                center
+                center;
+            background:
+                linear-gradient(
+                    var(--colour-banner-bg-overlay),
+                    var(--colour-banner-bg-overlay)
+                ),
+                url("/public/static/images/banners/#{$banner-image}.png")
+                center
+                center;
             background-size: cover;
 
             @media only screen and (max-width: 400px) {

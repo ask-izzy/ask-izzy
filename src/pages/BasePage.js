@@ -8,6 +8,7 @@ import { Outlet } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
 import client from "../utils/apolloClient";
 import HistoryListener from "../effects/HistoryListener";
+import DebugColours from "../components/DebugColours";
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,
@@ -44,6 +45,7 @@ class BasePage extends React.Component<{}> {
         return <>
             <HistoryListener />
             <ApolloProvider client={client}>
+                <DebugColours />
                 <div className="BasePage">
                     <Helmet>
                         <link
@@ -55,6 +57,7 @@ class BasePage extends React.Component<{}> {
                             content={canonicalUrl}
                         />
                         <title>{pageTitle}</title>
+                        {/* <script`window.MSInputMethodContext && document.documentMode && document.write('<script src="https://cdn.jsdelivr.net/gh/nuxodin/ie11CustomProperties@4.1.0/ie11CustomProperties.min.js"><\/script>');`}</script> */}
                     </Helmet>
 
                     <main>

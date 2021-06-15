@@ -1,21 +1,26 @@
+@use "../styles/mixins/colours";
+
 .BoxedText {
     margin: 0;
     padding: 15px;
     padding-top: 0;
     padding-bottom: 7px;
-    background-color: $white;
+    background-color: #{colours.get-static('raw-colour-pure-white')};
+    background-color: var(--raw-colour-pure-white);
 
     @media ($tablet) {
         width: 46%;
         margin-top: 15px;
         float: right;
-        background-color: $white;
+        background-color: #{colours.get-static('raw-colour-pure-white')};
+        background-color: var(--raw-colour-pure-white);
 
         .BoxedText-container {
             padding: 15px;
             padding-top: 5px;
             padding-bottom: 5px;
-            background-color: $brand-bg-light;
+            background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+            background-color: var(--colour-bg-standard-tint-2);
         }
 
     }

@@ -1,0 +1,197 @@
+// Unfortunately these sass functions/mixins are necessary due to 2 css related
+// limitations:
+//
+// 1) Not all browsers we support can deal with custom properties (css
+//    variables). Looking at you IE11! That should be a self-resolving
+//    issue over time.
+//
+// 2) CSS does not (yet) support colour manipulations operations so we
+//    can't automatically create tones based base colours. That should hopefully
+//    be added in the future. See: https://drafts.csswg.org/css-color-5/
+
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:string';
+
+// Our sass object which we store all our literal colour values in to be used as
+// a fullback for browsers which don't support. The first level contains scope keys
+// and the second level stores our colour variables. For example:
+// {
+//     "global": {
+//         "colour-text": "#000",
+//         "colour-background": "#fff"
+//     },
+//     "widget-x": {
+//         "colour-background": "#ddd"
+//     }
+// }
+$scoped-static-colours: ();
+
+/**
+ * Define a new colour variable. This creates both the necessary css variables
+ * but also stores the colour value in a sass variable (refereed to hence as the
+ * static variable) which is then used in wherever we use these colours as a fall
+ * back for browsers that don't support CSS variables.
+ *
+ * @param {string} name - The name/key to use for our new colour variable.
+ * @param {string} scope-key - CSS variables are automatically scoped in whatever
+ *     block they're defined but we need a way to scoping sass variables. We do
+ *     this by providing a scope-key (usually the name of the block a colour is
+ *     defined in so long as that name is globally unique).
+ * @param {colour value | string | sass object} colour - The value to set our
+ *     new variable too. This can be a raw colour value, the key/variable name
+ *     of a previously defined colour or a sass object with all the components that
+ *     make up a colour (this is returned by some of our custom colour manipulation
+ *     sass functions below).
+ */
+@mixin define($name, $scope-key, $colour) {
+    $whole-colour: null;
+    $hue: null;
+    $saturation: null;
+    $lightness: null;
+    $lightness-decimal: null;
+    $alpha: null;
+    $static: null;
+    @if type_of($colour) == color {
+        $whole-colour: $colour;
+        $hue: color.hue($colour);
+        $saturation: color.saturation($colour);
+        $lightness: color.lightness($colour);
+        $lightness-decimal: math.div(color.lightness($colour), 100%);
+        $alpha: color.alpha($colour);
+        $static: $colour;
+
+    } @else if type_of($colour) == map {
+        $hue: map.get($colour, 'hue');
+        $saturation: map.get($colour, 'saturation');
+        $lightness: map.get($colour, 'lightness');
+        $lightness-decimal: calc(map.get($colour, 'lightness') / 100%);
+        $alpha: map.get($colour, 'alpha');
+        $whole-colour: hsla($hue, $saturation, $lightness, $alpha);
+        $static: map.get($colour, 'static');
+
+    } @else if type_of($colour) == string {
+        $whole-colour: var(--#{$colour});
+        $hue: var(--#{$colour}-hue);
+        $saturation: var(--#{$colour}-saturation);
+        $lightness: var(--#{$colour}-lightness);
+        $lightness-decimal: var(--#{$colour}-lightness-decimal);
+        $alpha: var(--#{$colour}-alpha);
+        $static: get-static($colour, $scope-key);
+    } @else {
+        @error "Trying to define colour of unknown type:", type_of($colour);
+    }
+
+    --#{$name}: #{$whole-colour};
+    --#{$name}-hue: #{$hue};
+    --#{$name}-saturation: #{$saturation};
+    --#{$name}-lightness: #{$lightness};
+    --#{$name}-lightness-decimal: #{$lightness-decimal};
+    --#{$name}-alpha: #{$alpha};
+    --dummy-variable: ""#{set-static(
+        $name,
+        $scope-key,
+        $static
+    )};
+};
+
+/**
+ * Define a new colour variable in our sass object that we use for providing literal
+ * colour values as fullbacks for browsers that don't support css variables. I don't
+ * think we'd ever want to call this directly. Instead just call the define() mixin
+ * and it will worry about setting our static variables.
+ *
+ * @param {string} name - The name/key to use for our new colour variable which is
+ *     used as a key in the second level of our sass $scoped-static-colours object
+ *     (under a key used for scoping our new colour variable).
+ * @param {string} scope-key - CSS variables are automatically scoped in whatever
+ *     block they're defined but we need a way to scoping sass variables. We do
+ *     this by providing a scope-key (usually the name of the block a colour is
+ *     defined in so long as that name is globally unique).
+ * @param {colour value} colour - The value of our newly defined This can be a raw
+ *     colour value, the key/variable name of a previously defined colour or a sass
+ *     object with all the components that make up a colour (this is returned by
+ *     some of our custom colour manipulation sass functions below).
+ */
+@function set-static($name, $scope-key, $colour) {
+    @debug $scoped-static-colours;
+    $scope: map.get($scoped-static-colours, $scope-key);
+    $scope: map.merge($scope or (), ($name: $colour));
+    $scoped-static-colours: map.set($scoped-static-colours, $scope-key, $scope) !global;
+    @debug $scoped-static-colours;
+    @return "";
+};
+
+// See description for "set-static". As the name suggests just does the opposite. If
+// no scope-key is provided it defaults to "global".
+@function get-static($name, $scope-key: 'global'){
+    @debug $scope-key, $name, map.get($scoped-static-colours, $scope-key, $name);
+    $colour: map.get($scoped-static-colours, $scope-key, $name)
+        or map.get($scoped-static-colours, 'global', $name);
+    @if not $colour{
+        @error "Trying to use an undefined colour:", $name, $scope-key;
+    }
+    @return $colour;
+};
+
+// Lightens a given colour and returns an object with the components to
+// make a new (lightened) colour. We do this by getting the components
+// for a colour from their css variables and wrapping the lightness
+// component in a calc statement to calculate our new colour dynamically
+// based on whatever our existing colour is. We also work out the literal value.
+//
+// One thing to note is the amount that a colour is lightened mimics the
+// behaviour of https://sass-lang.com/documentation/modules/color#scale
+// in that amount to lighten a colour is not an absolute value but is instead
+// relative to the existing lightness value of the existing colour. For example
+// if our existing colour has a lightness of 50% an we want to lighten it by 50%
+// our new lightness value will be 75% not 100%.
+@function lighten($colour, $scope-key, $lightenAmount) {
+    $hue: var(#{'--' + $colour + '-hue'});
+    $saturation: var(#{'--' + $colour + '-saturation'});
+    $lightenAmountScale: if(
+        $lightenAmount > 0,
+        "(1 - var(--#{$colour}-lightness-decimal))",
+        var(#{'--' + $colour + '-lightness-decimal'})
+    );
+    $lightness: calc(
+        var(#{'--' + $colour + '-lightness'}) +
+        ( #{$lightenAmount} * #{$lightenAmountScale} )
+    );
+    $alpha: var(#{'--' + $colour + '-alpha'});
+    $static: color.scale(
+        get-static($colour, $scope-key),
+        $lightness: $lightenAmount
+    );
+    @return (
+        hue: $hue,
+        saturation: $saturation,
+        lightness: $lightness,
+        alpha: $alpha,
+        static: $static,
+    );
+};
+
+// Very similar to the lighten() function except for transiency instead of
+// lightness so see the description for that function for further details.
+//
+// The only other key difference is that alpha value you give it is not the
+// amount to modify the alpha value of the existing colour by, it's the literal
+// value that will be used for the new colour.
+@function set-transparency($colour, $scope-key, $alpha) {
+    $hue: var(#{'--' + $colour + '-hue'});
+    $saturation: var(#{'--' + $colour + '-saturation'});
+    $lightness: var(#{'--' + $colour + '-lightness'});
+    $static: color.change(
+        get-static($colour, $scope-key),
+        $alpha: $alpha
+    );
+    @return (
+        hue: $hue,
+        saturation: $saturation,
+        lightness: $lightness,
+        alpha: $alpha,
+        static: $static,
+    );
+};

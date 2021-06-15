@@ -1,8 +1,11 @@
+@use "../styles/mixins/colours";
+
 .FlatButton {
     border: 0;
-    background-color: $icon-fg-color;
-    color: $white;
-
+    background-color: #{colours.get-static('colour-button-standard')};
+    background-color: var(--colour-button-standard);
+    color: #{colours.get-static('colour-text-very-light')};
+    color: var(--colour-text-very-light);
     font-size: 18px;
     font-weight: 400;
     line-height: 36px;
@@ -11,16 +14,19 @@
 
     &:hover,
     &:focus {
-        background-color: lighten($icon-fg-color, 10%);
+        background-color: #{colours.get-static('colour-button-standard-hover')};
+        background-color: var(--colour-button-standard-hover);
     }
 
     &[disabled] {
-        background-color: $brand-bg-mid;
+        background-color: #{colours.get-static('colour-button-disabled')};
+        background-color: var(--colour-button-disabled);
     }
 
     &.text-link {
         background-color: transparent;
-        color: $brand-text-mid;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
         text-decoration: underline;
 
         &:hover {

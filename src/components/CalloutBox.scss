@@ -1,0 +1,105 @@
+@use "../styles/mixins/colours";
+
+.CalloutBox {
+    &.askIzzyInfoBox {
+        margin: 2em 0;
+        padding: 0 1.3em 0.5em;
+        border: solid #{colours.get-static('colour-border-standard-callout')} 1px;
+        border: solid var(--colour-border-standard-callout) 1px;
+    }
+
+    &.nationalHotline {
+        margin: 2em 0;
+        padding: 0.4em 1.4em 1em;
+        background-color: #{colours.get-static('colour-bg-callout-solid')};
+        background-color: var(--colour-bg-callout-solid);
+
+        h2 {
+            margin: 0.8em 0 0.5em;
+        }
+
+        p {
+            margin: 0.5em 0;
+        }
+
+        .Phone .ContactButton {
+            margin: 0.5em 0;
+            background-color: #{colours.get-static('colour-button-standard')};
+            background-color: var(--colour-button-standard);
+            color: #{colours.get-static('colour-text-light')};
+            color: var(--colour-text-light);
+        }
+    }
+
+    &.OnlineSecurity {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+        background-color: #{colours.get-static('colour-text-light')};
+        background-color: var(--colour-text-light);
+        cursor: pointer;
+
+        .h2 {
+            font-size: 1.15em;
+            font-weight: 500;
+        }
+
+        img {
+            width: 64px;
+            height: 64px;
+            padding: 5px;
+            border-radius: 50%;
+            background-color: #{colours.get-static('raw-colour-teal')};
+            background-color: var(--raw-colour-teal);
+        }
+
+        p {
+            width: 50%;
+            font-size: small;
+            text-align: center;
+        }
+
+        .Contact {
+            width: 320px;
+        }
+
+        a {
+            font-weight: 500;
+        }
+    }
+
+    .calloutPhone {
+        .Contact-text {
+            color: #{colours.get-static('colour-text-very-light')};
+            color: var(--colour-text-very-light);
+        }
+
+        .number {
+            margin-left: 1em;
+        }
+
+        .Icon {
+            display: inline-block;
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            margin-left: -110px;
+
+            path {
+                fill: #{colours.get-static('raw-colour-pure-white')};
+                fill: var(--raw-colour-pure-white);
+                @media print {
+                    fill: #{colours.get-static('raw-colour-pure-black')};
+                    fill: var(--raw-colour-pure-black);
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .LogoWithTextBox p {
+            width: 100%;
+        }
+    }
+}

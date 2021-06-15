@@ -78,9 +78,9 @@ function CalloutBox(
         <div
             onClick={callout.Link ? () => onClickBox(callout) : null}
             style={callout.Style ? callout.Style : {}}
-            className={callout.className?.className ?
+            className={"CalloutBox " + (callout.className?.className ?
                 callout.className.className
-                : "askIzzyInfoBox"}
+                : "askIzzyInfoBox")}
         >
             {callout.ShowHeading && <h2>{callout.Heading}</h2>}
             <ReactMarkdown
