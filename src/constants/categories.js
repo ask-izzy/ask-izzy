@@ -9,6 +9,7 @@ const categories = [
     new Category({
         name: "Housing",
         byline: "A place to stay",
+        inlineDescription: "services that provide housing",
         icon: icons.House,
         search: {
             q: "housing -(coordinating bodies) -(respite care) " +
@@ -31,6 +32,8 @@ const categories = [
     new Category({
         name: "Food",
         byline: "Something to eat",
+        inlineDescription: "services that provide " +
+            "something to eat",
         icon: icons.Food,
         search: {
             q: "meals -(coordinating bodies)" +
@@ -46,6 +49,7 @@ const categories = [
     new Category({
         name: "Everyday things",
         byline: "Swags, clothes, food vouchers etc.",
+        inlineDescription: "services that provide everyday things",
         icon: icons.Things,
         search: {
             q: "material aid -(coordinating bodies)",
@@ -59,6 +63,8 @@ const categories = [
     new Category({
         name: "Domestic & family violence help",
         byline: "Scared of partner or family member",
+        inlineDescription: "services that provide help " +
+            "for domestic & family violence",
         icon: icons.EscapeViolence,
         search: {
             q: "(family violence) -(coordinating bodies) -(fire-fighting)",
@@ -78,6 +84,8 @@ const categories = [
     new Category({
         name: "Health",
         byline: "Physical, mental, emotional",
+        inlineDescription: "services for physical, mental and " +
+            "emotional health",
         icon: icons.Health,
         search: {
             q: "(community health) -(coordinating bodies)",
@@ -96,6 +104,7 @@ const categories = [
     new Category({
         name: "Centrelink",
         byline: "Access to services",
+        inlineDescription: "Centrelink services",
         icon: icons.Centrelink,
         search: {
             q: "\"centrelink\"",
@@ -108,6 +117,7 @@ const categories = [
     new Category({
         name: "Money help",
         byline: "Emergency funds, bills etc.",
+        inlineDescription: "services that help with money",
         icon: icons.Money,
         search: {
             q: "financial aid -(coordinating bodies) -grants -heritage",
@@ -120,6 +130,7 @@ const categories = [
     new Category({
         name: "Support & counselling",
         byline: "Relationships, gambling & LGBTIQA+",
+        inlineDescription: "support & counselling services",
         icon: icons.Support,
         search: {
             q: "counselling",
@@ -137,6 +148,7 @@ const categories = [
     new Category({
         name: "Legal",
         byline: "Police, law & fines",
+        inlineDescription: "legal support services",
         icon: icons.Legal,
         search: {
             q: "legal (legal aid) -(coordinating bodies) -permits " +
@@ -155,6 +167,7 @@ const categories = [
     new Category({
         name: "Drugs & alcohol",
         byline: "Support & assistance",
+        inlineDescription: "drugs & alcohol support services",
         icon: icons.Addiction,
         search: {
             q: "substance abuse -(coordinating bodies)" +
@@ -170,6 +183,7 @@ const categories = [
     new Category({
         name: "Life skills & education",
         byline: "Everyday skills & training",
+        inlineDescription: "everyday skills & training services",
         icon: icons.Skills,
         search: {
             q: "life skills education -(coordinating bodies)" +
@@ -184,6 +198,8 @@ const categories = [
     new Category({
         name: "Finding work",
         byline: "Earning & volunteering",
+        inlineDescription: "services that help with " +
+            "finding work",
         icon: icons.Job,
         search: {
             q: "employment -(coordinating bodies)",
@@ -197,6 +213,7 @@ const categories = [
     new Category({
         name: "Facilities",
         byline: "Toilets",
+        inlineDescription: "services to find toilets",
         icon: icons.Facilities,
         search: {
             q: "public facilities" +
@@ -210,6 +227,7 @@ const categories = [
     new Category({
         name: "Something to do",
         byline: "Libraries, Community Hubs etc.",
+        inlineDescription: "services to find something to do",
         icon: icons.Entertainment,
         search: {
             q: "recreation libraries pools -(coordinating bodies) " +
@@ -224,6 +242,7 @@ const categories = [
     new Category({
         name: "Technology",
         byline: "Wifi, charging etc.",
+        inlineDescription: "internet services",
         icon: icons.Tech,
         search: {
             q: "wifi internet computer",
@@ -235,6 +254,7 @@ const categories = [
     new Category({
         name: "Advocacy",
         byline: "Complaints and advice",
+        inlineDescription: "advocacy services",
         icon: icons.Advocacy,
         search: {
             q: "consumer issues mediation discrimination " +

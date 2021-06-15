@@ -34,13 +34,22 @@
     }
 
     .secondary {
-        min-height: 1em;
+        min-height: 4em;
         margin: 15px 20px;
 
         font-size: 18px;
         font-weight: 400;
         line-height: 1.4;
         text-shadow: $text-shadow;
+
+        a {
+            color: $white;
+
+            &:visited {
+                color: $white;
+            }
+        }
+
     }
 
     p {

@@ -84,11 +84,25 @@ class ResultsListPage extends ResultsPage<> {
                     results={this.state.searchResults || []}
                 />
                 {this.renderLoadMore()}
-                {this.state.searchResults && this.state.searchResults.length &&
-                <SuggestionBox location={this.context.router.location} />}
+                {this.renderSuggestionBox()}
             </div>
         </div>
     )
+
+    renderSuggestionBox() {
+        if (
+            !this.state.searchMeta?.next &&
+            !this.searchIsLoading
+        ) {
+            return (
+                <SuggestionBox
+                    category={this.category}
+                    location={this.context.router.location}
+                    results={this.state.searchResults || []}
+                />
+            )
+        }
+    }
 
     renderLoadMore() {
         if (this.state.searchMeta?.next) {

@@ -1,24 +1,10 @@
 /* @flow */
 
-import React from "react";
-import Link from "../Link"
+import * as React from "react";
 
 import HeaderBar from "../HeaderBar";
 import type Category from "../../constants/Category";
-import storage from "../../storage";
 import routerContext from "../../contexts/router-context";
-import {PersonalisationLink} from "../../pages/QuestionStepper.service";
-
-
-const HomeLink = () =>
-    <Link
-        className="homeLink"
-        to="/"
-        onClick={storage.clear}
-    >Go back</Link>;
-
-const ErrorMessage = ({children}: Object) =>
-    <p className="errorMessage">{children}</p>;
 
 const InfoMessage = (category: Object) =>
     <div>{category.info}</div>;
@@ -89,27 +75,26 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                 />
             );
         }
+        const primaryText = category ? (
+            <LogoHeader>
+                Sorry, we weren't able to find any
+                {" "}
+                services for this search.
+            </LogoHeader>
+        ) : (
+            <LogoHeader>
+                Sorry, we weren't able to find any services
+                {" "}
+                matching your search for {title}.
+            </LogoHeader>
+        )
 
         if (error) {
-            const primaryText = (
-                <LogoHeader>
-                    Sorry, I couldn't do this search.
-                </LogoHeader>
-            )
-
             if (statusCode === 402) {
                 return (
                     <HeaderBar
                         className="LoadingResultsHeader"
                         primaryText={primaryText}
-                        secondaryText={
-                            <div>
-                                <ErrorMessage>{error}</ErrorMessage>
-                                <HomeLink />
-                                {" "}
-                                <PersonalisationLink {...location} />
-                            </div>
-                        }
                         bannerName={bannerName}
                         alternateBackgroundColor={false}
                     />
@@ -120,12 +105,6 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                 <HeaderBar
                     className="LoadingResultsHeader"
                     primaryText={primaryText}
-                    secondaryText={
-                        <div>
-                            <ErrorMessage>{error}</ErrorMessage>
-                            <HomeLink />
-                        </div>
-                    }
                     bannerName={bannerName}
                     alternateBackgroundColor={false}
                 />

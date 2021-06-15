@@ -27,20 +27,20 @@ Feature: History navigation
         When I click on the done button # Intro
 
         Then I should see "Do you have somewhere safe to sleep tonight?"
-        When I click on "Yes" # somewhere to sleep tonight
+        When I click on option "Yes" # somewhere to sleep tonight
 
         Then I should see "Do you identify as…"
 
-        When I click on "Female"
+        When I click on option "Female"
         Then I should see "How old are you?"
 
         When I click back from the title bar
         Then I should see "Do you identify as…"
 
-        When I click on "Male"
+        When I click on option "Male"
         Then I should see "How old are you?"
 
-        When I click on "18 to 26"
+        When I click on option "18 to 26"
 
         Then I should see "Melbourne, VIC | Safe tonight | Men | 18-26"
         And I should see "Showing housing services"

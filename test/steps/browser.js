@@ -35,6 +35,7 @@ module.exports = (function() {
         .given("I open a new browser", unpromisify(newBrowser))
         .when("I visit $URL", unpromisify(visitUrl))
         .when("I click on \"$STRING\"", unpromisify(clickLink))
+        .when("I click on option \"$STRING\"", unpromisify(clickOption))
         .when("I search for \"$STRING\"", unpromisify(doSearch))
         .when("I search for \"$STRING\" and press enter",
             unpromisify(doSearchAndEnter))
@@ -111,6 +112,31 @@ async function clickLink(link: string): Promise<void> {
             .map(tag => elementWithChildText(tag, link))
             .join("|")
     );
+
+    let lookingForAttempt = 1;
+    while (!await isElementPresent(this.driver, locator)) {
+        lookingForAttempt++
+        if (this.mochaState.test.timedOut) {
+            return
+        }
+        this.log.push(
+            `Couldn't find "${link}" link - attempt ${lookingForAttempt}`
+        );
+    }
+    await this.driver.findElement(locator).click();
+    await module.exports.documentReady(this.driver);
+}
+
+/**
+ * Used for primarilt answer options, due to having them as
+ * links results page being scrolled to the top
+ * @param link - - link text to click on.
+ * @returns {Promise} a promise that resolves when the link is identified and
+ */
+async function clickOption(link: string): Promise<void> {
+    /* any 'span' element who has a descendent text node
+     * containing the link text */
+    const locator = By.xpath(elementWithChildText("span", link))
 
     let lookingForAttempt = 1;
     while (!await isElementPresent(this.driver, locator)) {

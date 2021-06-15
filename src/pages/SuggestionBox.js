@@ -3,12 +3,16 @@
 import * as React from "react";
 import Link from "../components/Link";
 import Storage from "../storage";
+import Category from "../constants/Category";
+import {Service} from "../iss";
 
 type Props = {
-    location: Object
+    category: ?Category,
+    location: Object,
+    results: Array<Service>
 }
 
-function SuggestionBox({location}: Props): React.Node {
+function SuggestionBox({category, location, results}: Props): React.Node {
 
     const trailingSlash = (path: string): string =>
         `${path}${path.endsWith("/") ? "" : "/"}`;
@@ -22,22 +26,40 @@ function SuggestionBox({location}: Props): React.Node {
         Storage.setLocation(location)
     }
 
+    const navLinks = () => (
+        category ?
+            <>
+                <Link to={editingPath()}>
+                    edit your answers
+                </Link> or a {
+                    <Link
+                        to="/"
+                        onClick={clearAnswers}
+                    >
+                    new search
+                    </Link>
+                }
+            </> : <>
+                a {" "}
+                <Link
+                    to="/"
+                    onClick={clearAnswers}
+                >
+                    new search
+                </Link>
+            </>
+    )
+
     return (
         <>
-            <div className="SuggestionBox">
+            <div className={`SuggestionBox ${
+                results.length ? "withBackground"
+                    : "withoutBackground"}`}
+            >
                 <div className="SuggestionContentBox">
                     <h3>Want to see more services?</h3>
                     <div>
-                        Try <Link to={editingPath()}>
-                            edit you answers
-                        </Link> or a {
-                            <Link
-                                to="/"
-                                onClick={clearAnswers}
-                            >
-                            new search
-                            </Link>
-                        }
+                        Try {navLinks()}
                     </div>
                     <h4>For more information:</h4>
                     <Link to="/search-help">

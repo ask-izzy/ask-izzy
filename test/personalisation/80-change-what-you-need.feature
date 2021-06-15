@@ -36,7 +36,7 @@ Feature: Change your personalisation settings
         Then I should see "This will let me find the services closest to you"
 
         When I search for "carlt"
-        And I click on "Carlton"
+        And I click on option "Carlton"
         And I click on the done button
 
         Then I should see "Change your answers here"
@@ -54,7 +54,7 @@ Feature: Change your personalisation settings
     Scenario: Edit whether I have somewhere to sleep tonight
         When I visit /housing/personalise/summary
         And I click on "Do you have somewhere safe to sleep tonight?"
-        And I click on "No"
+        And I click on option "No"
         Then I should see "Change your answers here"
         Then I should see the results
         ----------------------------------------------------------------
@@ -87,7 +87,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
 
         When I click on "Do any of these apply to you?"
-        And I click on "Aboriginal and/or Torres Strait Islander"
+        And I click on option "Aboriginal and/or Torres Strait Islander"
         And I click on the done button
         Then I should see "Change your answers here"
         Then I should see the results
@@ -104,7 +104,7 @@ Feature: Change your personalisation settings
     Scenario: Edit gender
         When I visit /housing/personalise/summary
         And I click on "How do you identify?"
-        And I click on "Male"
+        And I click on option "Male"
         Then I should see "Change your answers here"
         Then I should see the results
         ----------------------------------------------------------------
