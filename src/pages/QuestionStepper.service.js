@@ -13,6 +13,7 @@ const PERSONALISATION_EXCLUSION_LIST = [
     "online-safety-screen",
     "under-18-dfv",
     "using-violence",
+    "are-you-safe",
 ]
 
 export const INITIAL_TAB_INDEX = 4;
