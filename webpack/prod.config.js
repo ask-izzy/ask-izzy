@@ -56,7 +56,8 @@ module.exports = {
                     {
                         loader: "sass-loader",
                         options: {
-                            data: `$banner-images: ${bannerImages.join(" ")};`,
+                            additionalData:
+                                `$banner-images: ${bannerImages.join(" ")};`,
                         },
                     },
                     {
