@@ -64,7 +64,7 @@ export default class Demographics extends BaseMultiQuestion {
     }
 
 
-    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): ?string {
+    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): string {
         if (this.answer && this.answer.length) {
             for (let index: number = 0; index < this.answer.length; index++) {
                 if (breadcrumbAnswer === ATSI_BREADCRUMB_ICON &&
@@ -82,6 +82,7 @@ export default class Demographics extends BaseMultiQuestion {
                 }
             }
         }
+        return "";
     }
 
     static breadcrumbAnswer(): ?Array<any> {
@@ -91,13 +92,15 @@ export default class Demographics extends BaseMultiQuestion {
                 case "Aboriginal and/or Torres Strait Islander":
                     return ATSI_BREADCRUMB_ICON;
                 case "Person seeking asylum":
-                    return "Asylum seeker"
+                    return "Seeking asylum"
                 case "Parole / recently released":
-                    return "On Parole"
+                    return "On parole"
                 case "Have a disability":
                     return "With disability"
                 case "Have pets":
-                    return "With pets"
+                    return "Help with pets"
+                case "Family with children":
+                    return "Families"
                 case "Escaping family violence":
                     return "Escaping violence"
                 default:

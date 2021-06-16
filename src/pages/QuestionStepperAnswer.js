@@ -4,7 +4,7 @@ import * as React from "react";
 import {
     INITIAL_TAB_INDEX,
     renderEditingIndicator,
-    renderPipeOrComma, renderEllipsis,
+    renderPipeOrComma, renderEllipsis, formatAriaLabelText,
 } from "./QuestionStepper.service";
 import routerContext from "../contexts/router-context";
 import {useContext} from "react";
@@ -12,6 +12,7 @@ import type {AnswerType} from "./QuestionStepper.service";
 
 type Props = {
     onClear: function,
+    onTabIndex: function,
     lastMultiSelect: ?number,
     index: number,
     answer: AnswerType,
@@ -27,6 +28,7 @@ function QuestionStepperAnswer({
     currentAnswers,
     multiSelectedAnswer,
     lastMultiSelect,
+    onTabIndex,
 }: Props): React.Node {
 
     const {router} = useContext(routerContext)
@@ -39,18 +41,16 @@ function QuestionStepperAnswer({
         answer.name === router.match.params.subpage
     )
 
-    const ariaLabelText = () => {
-        const selection = answer.answer || "answer";
-        return editing() ?
-            `You're now editing ${selection} for ${answer.name}`
-            : `You've selected ${selection} for ${answer.name}`
-    }
-
     return (
         <>
-            <span tabIndex={INITIAL_TAB_INDEX + index + 1}>
+            <span
+                tabIndex={INITIAL_TAB_INDEX + index + 1}
+                onFocus={() => {
+                    onTabIndex((INITIAL_TAB_INDEX + index + 1) + 1)
+                }}
+            >
                 <span
-                    aria-label={ariaLabelText()}
+                    aria-label={formatAriaLabelText(answer, editing())}
                     className={
                         editing() ? "editing" : !intro ? "breadCrumbText"
                             : "introText"

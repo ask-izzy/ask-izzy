@@ -47,4 +47,23 @@ export default class HealthSubcategories extends BaseQuestion {
 
         resetDfvOptions();
     }
+
+    static breadcrumbAnswer(): string {
+        switch (this.answer) {
+        case "Social & emotional wellbeing":
+            return "Mental health";
+        case "Problems with feet":
+            return "Podiatry";
+        case "Domestic & family violence":
+            return "Domestic & family violence help";
+        case "Sexual assault":
+            return "Sexual assault support";
+        case "Children":
+            return "For children";
+        case "Hospital":
+            return "Hospitals";
+        default:
+            return this.answer
+        }
+    }
 }

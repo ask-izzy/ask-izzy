@@ -70,7 +70,9 @@ export default class ServiceList extends BaseQuestion {
     static breadcrumbAnswer(): any {
         switch (this.answer) {
         case "Help for people using violence":
-            return "Behavioural help";
+            return "Behavioural support";
+        case "Help for pets":
+            return "Help with pets";
         default:
             return this.answer
         }

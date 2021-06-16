@@ -5,13 +5,16 @@ import Link from "../components/Link";
 
 type Props = {
     setAccessibility: function,
+    tabIndex: number,
 }
 
-function SkipToChoices({ setAccessibility }: Props): React.Node {
+function SkipToChoices({ setAccessibility, tabIndex }: Props): React.Node {
 
     return (
         <div className="skipToSelections">
-            <Link to="#"
+            <Link
+                to="#"
+                tabIndex={tabIndex}
                 onClick={() => {
                     const selection = document.getElementsByClassName(
                         "ListItem"

@@ -62,7 +62,7 @@ class BaseMultiQuestion extends BaseQuestion {
         return this.answer
     }
 
-    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): ?string {
+    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): string {
         return "";
     }
 

@@ -183,7 +183,7 @@ class BaseQuestion extends Personalisation<Props, State> {
         }
     }
 
-    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?any): ?string {
+    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?any): string {
         return "";
     }
 

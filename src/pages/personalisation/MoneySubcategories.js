@@ -25,4 +25,19 @@ export default class MoneySubcategories extends BaseQuestion {
                 .append("name:\"financial counselling\""),
         },
     };
+
+    static breadcrumbAnswer(): string {
+        switch (this.answer) {
+        case "Financial assistance e.g. utility bills, petrol, food":
+            return "Financial assistance";
+        case "No interest & low interest loans":
+            return "Money matters";
+        case "Gambling counselling":
+            return "Gambling";
+        case "Financial counselling":
+            return "Online counselling";
+        default:
+            return this.answer
+        }
+    }
 }

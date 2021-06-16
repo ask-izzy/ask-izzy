@@ -16,8 +16,15 @@ const PERSONALISATION_EXCLUSION_LIST = [
     "are-you-safe",
 ]
 
+const ICON_ARIALABEL_MAPPING = {
+    "AboriginalFlagIcon": "Aboriginal",
+    "TorresStraitIslandersFlagIcon": "TorresStraitIslander",
+    "DemographicLgbtiqIcon": "LGBTIQ+",
+}
+
 export const INITIAL_TAB_INDEX = 4;
 export const BREADCRUMB_LIMIT = 6;
+export const MULTI_DEFAULT_ANSWER_LIMIT = 2;
 
 export type AnswerType = {
     name: string,
@@ -227,4 +234,33 @@ export const renderEllipsis = (
 ): ?string => {
     return lastMultiSelect === index && multiSelectedAnswerCount > 0 ? " ..."
         : null
+}
+
+/**
+ * This will generate the Aria Label and convert
+ * icons to text based on their icon class
+ * @param answer - the current answer
+ * @param editing - is it being edited
+ * @return {string} - The aria label text
+ */
+export const formatAriaLabelText = (
+    answer: AnswerType, editing: boolean): string => {
+    let selection = answer.answer || "answer";
+
+    if (typeof selection === "object" && selection?.props.children) {
+        const nodes = selection.props.children;
+        if (nodes.length) {
+            const nodes = selection.props.children;
+            selection = nodes.map(node =>
+                ICON_ARIALABEL_MAPPING[node.props.iconClass] ||
+                node.props.iconClass).join(" and ")
+        } else if (!nodes.length) {
+            selection = ICON_ARIALABEL_MAPPING[nodes.props.iconClass] ||
+                nodes.props.iconClass
+        }
+    }
+
+    return editing ?
+        `You're now editing ${selection} for ${answer.name}`
+        : `You've selected ${selection} for ${answer.name}`
 }

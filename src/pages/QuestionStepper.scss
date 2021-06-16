@@ -9,9 +9,17 @@
         width: 96%;
         margin: auto;
         padding-top: 5px;
+
+        a {
+            &:visited {
+                color: $link-text-color;
+            }
+        }
+
     }
 
     .breadCrumbText {
+        display: inline-block;
         color: $breadcrumb-text-colour;
     }
 
@@ -87,12 +95,23 @@
 
 
     .editing {
+        display: inline-block;
         color: $brand-bg-dark;
         font-style: italic;
+
+        span {
+            margin-left: 2px;
+        }
+
     }
 
     .pipeOrComma {
         color: $breadcrumb-comma-pipe-colour;
+
+        .editing {
+            margin-right: 2px;
+        }
+
     }
 
     .nonMultiMargin {

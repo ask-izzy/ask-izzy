@@ -62,7 +62,7 @@ export default class DfvDemographics extends BaseMultiQuestion {
     }
 
 
-    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): ?string {
+    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): string {
         if (this.answer && this.answer.length) {
             for (let index: number = 0; index < this.answer.length; index++) {
                 if (breadcrumbAnswer === ATSI_BREADCRUMB_ICON &&
@@ -80,6 +80,7 @@ export default class DfvDemographics extends BaseMultiQuestion {
                 }
             }
         }
+        return "";
     }
 
     static breadcrumbAnswer(): ?Array<any> {
@@ -90,6 +91,10 @@ export default class DfvDemographics extends BaseMultiQuestion {
                     return ATSI_BREADCRUMB_ICON;
                 case "LGBTIQA+":
                     return LGBT_BREADCRUMB_ICON;
+                case "Culturally and linguistically diverse":
+                    return "Culturally & linguistically diverse";
+                case "Person seeking asylum":
+                    return "Seeking asylum";
                 default:
                     return answer;
                 }

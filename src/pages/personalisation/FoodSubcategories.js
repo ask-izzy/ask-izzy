@@ -25,7 +25,7 @@ export default class FoodSubcategories extends BaseQuestion {
     static breadcrumbAnswer(): string {
         switch (this.answer) {
         case "Food packages/parcels/vouchers":
-            return "parcels/vouchers";
+            return "Parcels/vouchers";
         default:
             return this.answer
         }
