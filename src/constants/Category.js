@@ -7,7 +7,6 @@ import * as iss from "../iss";
 type Props = {
     name: string,
     byline: string,
-    inlineDescription: string,
     icon: React$ComponentType<any>,
     search: iss.searchRequest,
     info?: string | React$Element<any>,
@@ -18,7 +17,6 @@ export default class Category {
     key: string;
     name: string;
     byline: string;
-    inlineDescription: string;
     icon: React$ComponentType<any>;
     search: iss.searchRequest;
     info: ?string|React$Element<any>;
@@ -28,7 +26,6 @@ export default class Category {
     constructor(props: Props) {
         this.name = props.name;
         this.byline = props.byline;
-        this.inlineDescription = props.inlineDescription;
         this.icon = props.icon;
         this.key = slugify(this.name);
         this.search = {
