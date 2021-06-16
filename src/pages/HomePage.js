@@ -37,7 +37,7 @@ class HomePage extends React.Component<{}, void> {
 
         storage.setSearch(search);
 
-        this.context.router.history.push(
+        this.context.router.navigate(
             `/search/${encodeURIComponent(search)}`
         );
     }

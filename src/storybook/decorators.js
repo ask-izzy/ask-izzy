@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, {useEffect} from "react";
-import { MemoryRouter } from "react-router";
+import { MemoryRouter } from "react-router-dom";
 import storage from "../storage";
 import RouterContext from "../contexts/router-context";
 import {LoadScript} from "@react-google-maps/api";

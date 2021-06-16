@@ -55,7 +55,7 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
         if (prevSubPage) {
             this.goToSubPage(prevSubPage);
         } else {
-            this.context.router.history.push("/");
+            this.context.router.navigate("/");
         }
     }
 

@@ -79,7 +79,7 @@ class AddServicePage extends React.Component<Props, State> {
             <div className="AddServicePage">
                 <components.AppBar
                     title="Add a service"
-                    onBackTouchTap={this.context.router.history.goBack}
+                    onBackTouchTap={() => this.context.router.navigator(-1)}
                 />
 
                 <div className="body">

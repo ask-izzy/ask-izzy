@@ -7,8 +7,8 @@ import url from "url";
 
 import * as React from "react";
 import ReactDOMServer from "react-dom/server";
-import { Route } from "react-router";
-import { StaticRouter } from "react-router-dom";
+import { StaticRouter } from "react-router-dom/server";
+import { Route } from "react-router-dom";
 import mkdirp from "mkdirp";
 
 import routes from "../routes";
@@ -205,9 +205,10 @@ export function getPagesFromRoutes(
     }
 
     // Add paths from any child routes
-    const children = route.props.children || []
-    for (const child of children) {
-        pathsToRender.push(...getPagesFromRoutes(child, categories))
+    if (route.props.children) {
+        pathsToRender.push(
+            ...getPagesFromRoutes(route.props.children, categories)
+        )
     }
 
     return pathsToRender
@@ -217,7 +218,7 @@ export function getPagesFromRoutes(
 
 
 export function main() {
-    const pages = getPagesFromRoutes(routes, categories)
+    const pages = getPagesFromRoutes(routes.props.children, categories)
 
     process.stdout.write("  Rendering pages…")
     for (const [i, page] of pages.entries()) {

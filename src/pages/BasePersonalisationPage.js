@@ -12,7 +12,7 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     previousStep(): void {
         // If our subpage has an onPreviousStep hook, call it, otherwise
         // just go back.
-        this.context.router.history.goBack();
+        this.context.router.navigate(-1);
     }
 
     nextStep(): void {
@@ -58,7 +58,7 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     urlFor(subpath: string): string {
         // Rewrites the URL based on search location/personalisation
         const parts = decodeURIComponent(
-            this.props.location.pathname
+            this.context.router.location.pathname
         ).split("/");
         const location = storage.getLocation();
 
@@ -77,7 +77,7 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     }
 
     navigate(subpath: string): void {
-        this.context.router.history.push(
+        this.context.router.navigate(
             this.urlFor(subpath),
         );
     }

@@ -37,7 +37,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         if (this.search.q === "Disability Advocacy Providers") {
             redirectUrl = "/disability-advocacy-finder"
         }
-        this.context.router.history.push(redirectUrl);
+        this.context.router.navigate(redirectUrl);
     }
 
     componentDidMount(): void {

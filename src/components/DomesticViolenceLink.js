@@ -28,7 +28,7 @@ export default class DomesticViolenceLink extends BaseLogoWithTextBox {
             sendDirectlyToGA: true,
         });
 
-        this.context.router.history.push(
+        this.context.router.navigate(
             this.props.path,
         );
     }

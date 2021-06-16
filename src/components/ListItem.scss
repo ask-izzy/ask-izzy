@@ -1,9 +1,23 @@
 .ListItem {
     display: block;
     position: relative;
+    border: 0;
     border-bottom: 1px solid $list-item-hairline;
     text-decoration: none;
     cursor: pointer;
+
+
+    /* remove default button styling */
+    @at-root {
+        button#{&} {
+            width: 100%;
+            padding: 0;
+            background: none;
+            font-family: inherit;
+            font-size: inherit;
+            text-align: left;
+        }
+    }
 
     &.taller {
         padding-top: 10px;

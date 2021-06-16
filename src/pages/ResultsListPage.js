@@ -30,7 +30,7 @@ class ResultsListPage extends ResultsPage<> {
             <AppBar
                 title={this.title}
                 backMessage={this.isDisabilityAdvocacy ? "" : "Categories"}
-                onBackTouchTap={() => this.context.router.history.push(
+                onBackTouchTap={() => this.context.router.navigate(
                     this.isDisabilityAdvocacy ?
                         "/disability-advocacy-finder"
                         : "/"

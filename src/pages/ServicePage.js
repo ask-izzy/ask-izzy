@@ -2,7 +2,6 @@
 /* eslint-disable max-len */
 
 import React from "react";
-import PropTypes from "proptypes";
 import ServicePane from "../components/ServicePane";
 
 import iss from "../iss";
@@ -12,42 +11,34 @@ import Link from "../components/Link";
 import Loading from "../icons/Loading";
 import config from "../config";
 import routerContext from "../contexts/router-context";
+import type { RouterContextObject } from "../contexts/router-context";
 
-class ServicePage extends React.Component<{
-    params: {
-        slug: string,
-    },
-    match: any,
-}, {
+class ServicePage extends React.Component<{}, {
     object?: Service,
+    serviceId: number,
     error?: Object,
 }> {
-    static propTypes = {
-        match: PropTypes.object,
-    };
-
     static contextType = routerContext;
 
-    constructor(props: Object) {
+    constructor(props: Object, context: RouterContextObject) {
         super(props);
         this.state = {};
     }
 
     componentDidMount(): void {
-        this.loadService();
+        this.setState({
+            serviceId: this.extractId(this.context.router.match.params.slug),
+        })
+        this.loadService(this.state.serviceId);
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object): void {
+        const serviceId = this.extractId(this.context.router.match.params.slug)
         // When a user hits a related service, make sure
         // we reload the service page details with the new
         // service details.
-        let currentSlug = this.context.router.match.params.slug;
-        let prevSlug = prevProps.computedMatch.params.slug;
-        if (
-            this.id !== this.extractId(currentSlug) ||
-            this.extractId(prevSlug) !== this.extractId(currentSlug)
-        ) {
-            this.loadService()
+        if (this.state.serviceId !== serviceId) {
+            this.loadService(serviceId)
         }
     }
 
@@ -68,9 +59,12 @@ class ServicePage extends React.Component<{
         throw new Error("Bad URL (/service/[service-id must be a number]")
     }
 
-    async loadService(): Promise<void> {
+    async loadService(serviceId: number): Promise<void> {
         // Unload previous service
-        this.setState({object: undefined});
+        this.setState({
+            object: undefined,
+            serviceId,
+        });
 
         try {
             let object = await iss.getService(this.id);
@@ -93,7 +87,7 @@ class ServicePage extends React.Component<{
                 <div className="ServicePage">
                     <components.AppBar
                         title="Loading..."
-                        onBackTouchTap={this.context.router.history.goBack}
+                        onBackTouchTap={() => this.context.router.navigate(-1)}
                     />
                     <div className="ServicePane">
                         <main>
@@ -126,7 +120,7 @@ class ServicePage extends React.Component<{
                 <div className="ServicePage">
                     <components.AppBar
                         title={object.site.name}
-                        onBackTouchTap={this.context.router.history.goBack}
+                        onBackTouchTap={() => this.context.router.navigate(-1)}
                     />
                     <ServicePane service={object}/>
                 </div>

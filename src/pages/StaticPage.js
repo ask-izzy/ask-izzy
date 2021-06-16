@@ -35,7 +35,7 @@ export default class StaticPage extends React.Component<Props> {
             <div className={`StaticPage ${this.props.className || ""}`}>
                 <AppBar
                     title={this.props.title}
-                    onBackTouchTap={this.context.router.history.goBack}
+                    onBackTouchTap={() => this.context.router.navigate(-1)}
                 />
                 {
                     this.props.bannerName ?

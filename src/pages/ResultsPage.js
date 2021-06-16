@@ -6,6 +6,10 @@ import * as gtm from "../google-tag-manager";
 
 import routerContext from "../contexts/router-context";
 import type {searchResultsMeta, Service} from "../iss";
+import {
+    addPageLoadDependencies,
+    closePageLoadDependencies,
+} from "../utils/page-loading"
 
 type State = {
     searchMeta: ?searchResultsMeta,
@@ -20,12 +24,12 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
     extends BaseCategoriesPage<ChildProps, State & ChildState> {
     constructor(props: Object, context: Object) {
         super(props, context);
+        addPageLoadDependencies(context.router.location, "resultsLoad")
 
-        const textSearchPage = this.context.router.match.path
-            .match(/^\/search\/:search/)
+        const isTextSearchPage = !!this.context.router.match.params.search
         const searchType =
             this.category && "category" ||
-            textSearchPage && "text"
+            isTextSearchPage && "text"
 
         this.state = {
             ...super.state,
@@ -45,16 +49,17 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         super.componentDidMount();
 
         if (!this.issParams()) {
-            const sep = this.context.router
-                .match
-                .url
-                .endsWith("/") ? "" : "/";
-
-            this.context.router.history.replace(
-                `${this.context.router.match.url}${sep}personalise`
-            );
+            const newPath =
+                this.context.router.location.pathname.replace(/\/$/, "") +
+                "/personalise"
+            this.context.router.navigate(newPath, {replace: true});
         } else {
-            this.loadNextSearchPage()
+            this.loadNextSearchPage().then(
+                () => closePageLoadDependencies(
+                    this.context.router.location,
+                    "resultsLoad"
+                )
+            )
         }
 
     }

@@ -2,9 +2,16 @@
 /* eslint-disable valid-jsdoc */
 
 import React from "react";
-import {Redirect, Switch} from "react-router-dom";
+import {
+    Routes,
+    Route as ReactRouterRoute,
+    createRoutesFromChildren,
+    matchRoutes,
+    useLocation,
+    useParams,
+    generatePath,
+} from "react-router-dom";
 import {titleize} from "underscore.string";
-import {Route} from "react-router";
 
 // If you import these after the others,
 // babel decides the navbar doesn't really
@@ -28,6 +35,10 @@ import ServicePage from "./pages/ServicePage";
 import BushfireReliefPage from "./pages/BushfireReliefPage";
 import Covid19StaticPage from "./pages/Covid19StaticPage";
 import { donateLink } from "./constants/urls.js"
+import {
+    InjectRouterContext,
+    useRouterContext,
+} from "./contexts/router-context"
 
 export function makeTitle(route: string, params: Object): string {
     let unslug = (str) =>
@@ -75,408 +86,258 @@ const removeDoubleSlashOnEnter404 = (
 
 };
 
-export default (
-    <Switch>
-        <BasePage
-            path="/styleGuide/component/:componentName"
-            component={StyleGuideItem}
-            title="Styleguide"
-            state={{
-                pageType: "Style Guide",
-            }}
-        />
-        <BasePage
-            path="/styleGuide*"
-            component={StyleGuideList}
-            title="Styleguide"
-            state={{
-                pageType: "Style Guide",
-            }}
-        />
-        <BasePage
-            path="/"
-            component={HomePage}
-            exact={true}
-            state={{
-                pageType: "Home",
-            }}
-        />
-        <BasePage
-            path="/about"
-            component={DynamicPage}
-            title="About"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "About",
-                ],
-            }}
-        />
-        <BasePage
-            path="/bushfire-support"
-            component={BushfireReliefPage}
-            title="Bushfire Support"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "Bushfire Support",
-                ],
-            }}
-        />
-        <BasePage
-            path="/covid-19-support"
-            component={Covid19StaticPage}
-            title="COVID 19 Support"
-            exact={true}
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "COVID 19 Support",
-                ],
-            }}
-        />
-        <BasePage
-            path="/disability-advocacy-finder"
-            component={DisabilityAdvocacyFinder}
-            title="Disability Advocacy Finder"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "Disability Advocacy Finder",
-                ],
-            }}
+function Route(props) {
+    const routesConfig = createRoutesFromChildren(routes)
+    const matchedRoutes = matchRoutes(routesConfig, useLocation().pathname)
+
+    return <InjectRouterContext matchedRoutes={matchedRoutes}>
+        <ReactRouterRoute {...props} />
+    </InjectRouterContext>
+}
+
+function Redirect({path, to}) {
+    const { navigate } = useRouterContext()
+    navigate(generatePath(to, useParams()))
+    return null
+}
+
+const routes = <Routes>
+    <Route
+        path="/"
+        element={<BasePage />}
+    >
+        <Route
+            path=""
+            element={<HomePage />}
+            type={["Home"]}
         />
         <Route
+            path="/about"
+            element={<DynamicPage />}
+            title="About"
+            type={["Static Page", "About"]}
+        />
+        <Route
+            path="/styleGuide/component/:componentName"
+            element={<StyleGuideItem />}
+            title="Styleguide"
+            type={["Old Style Guide"]}
+        />
+        <Route
+            path="/styleGuide*"
+            element={<StyleGuideList />}
+            title="Styleguide"
+            type={["Old Style Guide"]}
+        />
+        <Route
+            path="/bushfire-support"
+            element={<BushfireReliefPage />}
+            title="Bushfire Support"
+            type={["Static Page", "Bushfire Support"]}
+        />
+        <Route
+            path="/covid-19-support"
+            element={<Covid19StaticPage />}
+            title="COVID 19 Support"
+            type={["Static Page", "COVID 19 Support"]}
+        />
+        <Route
+            path="/disability-advocacy-finder"
+            element={<DisabilityAdvocacyFinder />}
+            title="Disability Advocacy Finder"
+            type={["Static Page", "Disability Advocacy Finder"]}
+        />
+        <Redirect
             path="/donate"
-            component={() => {
-                typeof window !== "undefined" &&
-                    (window.location.href = donateLink);
-                return null;
-            }}
+            to={donateLink}
         />
-        <BasePage
+        <Route
             path="/terms"
-            component={DynamicPage}
+            element={<DynamicPage />}
             title="Terms of use"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "Terms of Use",
-                ],
-            }}
+            type={["Static Page", "Terms of Use"]}
         />
-        <BasePage
+        <Route
             path="/online-safety"
-            component={DynamicPage}
+            element={<DynamicPage />}
             title="Online Safety"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "Online Safety",
-                ],
-            }}
+            type={["Static Page", "Online Safety"]}
         />
-        <BasePage
+        <Route
             path="/beta-info"
-            component={BetaInfoStaticPage}
+            element={<BetaInfoStaticPage />}
             title="About Ask Izzy Beta"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "About Ask Izzy Beta",
-                ],
-            }}
+            type={["Static Page", "About Ask Izzy Beta"]}
         />
-        <BasePage
+        <Route
             path="/homeless-shelters"
-            component={DynamicPage}
+            element={<DynamicPage />}
             title="Homeless shelters"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "Homeless Shelters",
-                ],
-            }}
+            type={["Static Page", "Homeless Shelters"]}
         />
-        <BasePage
+        <Route
             path="/food-info"
-            component={DynamicPage}
+            element={<DynamicPage />}
             title="Food Info"
             strict={false}
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "Food",
-                ],
-            }}
+            type={["Static Page", "Food"]}
         />
-        <BasePage
+        <Route
             path="/using-ask-izzy"
-            component={DynamicPage}
+            element={<DynamicPage />}
             title="Using Ask Izzy"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "Using Ask Izzy",
-                ],
-            }}
+            type={["Static Page", "Using Ask Izzy"]}
         />
-        <BasePage
+        <Route
             path="/homeless-legal-services"
-            component={DynamicPage}
+            element={<DynamicPage />}
             title="Homeless Legal Services"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "Homeless Legal Services",
-                ],
-            }}
+            type={["Static Page", "Homeless Legal Services"]}
         />
-        <BasePage
+        <Route
             path="/homeless-financial-support"
-            component={DynamicPage}
+            element={<DynamicPage />}
             title="Homeless financial support"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "Homeless Financial Support",
-                ],
-            }}
+            type={["Static Page", "Homeless Financial Support"]}
         />
-        <BasePage
+        <Route
             path="/homeless-health-care"
-            component={DynamicPage}
+            element={<DynamicPage />}
             title="Homeless Health Care"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "Homeless Health Care",
-                ],
-            }}
+            type={["Static Page", "Homeless Health Care"]}
         />
-        <BasePage
+        <Route
             path="/information"
-            component={DynamicPage}
+            element={<DynamicPage />}
             title="Information"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "Information",
-                ],
-            }}
+            type={["Static Page", "Information"]}
         />
-        <BasePage
+        <Route
             path="/disability-organisations"
-            component={DynamicPage}
+            element={<DynamicPage />}
             title="Disability Organisations"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "Disability Organisations",
-                ],
-            }}
+            type={["Static Page", "Disability Organisations"]}
         />
-        <BasePage
+        <Route
             path="/not-found"
-            component={NotFoundStaticPage}
+            element={<NotFoundStaticPage />}
             title="Page not found"
-            state={{
-                pageType: "Page Not Found",
-            }}
+            type={["Page Not Found"]}
         />
-        <BasePage
+        <Route
             path="/add-service"
-            component={AddServicePage}
+            element={<AddServicePage />}
             title="Add a service"
-            state={{
-                pageType: vars => [
-                    "Static Page",
-                    "Add a Service",
-                ],
-            }}
+            type={["Static Page", "Add a Service"]}
         />
-        <BasePage
+        <Route
             path="/service/:slug"
-            component={ServicePage}
-            exact={true}
-            state={{
-                pageType: "Service",
-            }}
+            title="Service Details"
+            element={<ServicePage />}
+            type={["Service"]}
         />
         <Redirect
-            from="/category/:page"
+            path="/category/:page"
             to="/:page"
-            exact={true}
         />
         <Redirect
-            from="/category/:page/in/:suburb-:state"
+            path="/category/:page/in/:suburb-:state"
             to="/:page/:suburb-:state"
-            exact={true}
         />
         <Redirect
-            from="/search/:search/in/:suburb-:state"
+            path="/search/:search/in/:suburb-:state"
             to="/search/:search/:suburb-:state"
-            exact={true}
         />
         <Redirect
-            from="/have-your-say"
+            path="/have-your-say"
             to="/advocacy"
-            exact={true}
         />
         <Redirect
-            from="/have-your-say/:page"
+            path="/have-your-say/:page"
             to="/advocacy/:page"
-            exact={true}
         />
         {[
             {
-                resultsType: "Search",
+
+                baseType: "Search",
                 rootPath: "/search/:search/:suburb-:state",
             },
             {
-                resultsType: "Search",
+                baseType: "Search",
                 rootPath: "/search/:search",
             },
             {
-                resultsType: "Service Listing",
+                baseType: "Category",
                 rootPath: "/:page/:suburb-:state",
             },
             {
-                resultsType: "Service Listing",
+                baseType: "Category",
                 rootPath: "/:page",
             },
-        ].map(({resultsType, rootPath: str}) => [
-            <BasePage
+        ].map(({baseType, rootPath: str}) => [
+            <Route
                 path={`${str}`}
-                component={ResultsListPage}
+                element={<ResultsListPage />}
                 title=":page in :suburb, :state"
-                exact={true}
-                name={resultsType}
-                state={{
-                    pageType: vars => [
-                        vars.serviceListingType,
-                        "Results List",
-                    ],
-                }}
+                type={[baseType, "Results List"]}
             />,
-            <BasePage
+            <Route
                 path={`${str}/map`}
-                component={ResultsMapPage}
+                element={<ResultsMapPage />}
                 title="Map of :page in :suburb, :state"
-                exact={true}
-                name={resultsType}
-                state={{
-                    pageType: vars => [
-                        vars.serviceListingType,
-                        "Results Map",
-                    ],
-                }}
+                type={[baseType, "Results Map"]}
             />,
-            <BasePage
+            <Route
                 path={`${str}/map/personalise`}
-                component={PersonalisationWizardPage}
-                exact={true}
-                name={resultsType}
-                state={{
-                    pageType: vars => [
-                        vars.serviceListingType,
-                        "Results Map Personalisation",
-                    ],
-                }}
+                element={<PersonalisationWizardPage />}
+                title=":page in :suburb, :state"
+                type={[baseType, "Results Map Personalisation"]}
             />,
-            <BasePage
+            <Route
                 path={`${str}/map/personalise/page/:subpage`}
-                component={PersonalisationWizardPage}
-                exact={true}
-                name={resultsType}
-                state={{
-                    pageType: vars => [
-                        vars.serviceListingType,
-                        "Results Map Personalisation",
-                    ],
-                }}
+                element={<PersonalisationWizardPage />}
+                title=":page in :suburb, :state"
+                type={[baseType, "Results Map Personalisation"]}
             />,
-            <BasePage
+            <Route
                 path={`${str}/map/personalise/summary`}
-                component={PersonalisationSummaryPage}
-                exact={true}
-                name={resultsType}
-                state={{
-                    pageType: vars => [
-                        vars.serviceListingType,
-                        "Edit Map Personalisation",
-                    ],
-                }}
+                element={<PersonalisationSummaryPage />}
+                title=":page in :suburb, :state"
+                type={[baseType, "Edit Map Personalisation"]}
             />,
-            <BasePage
-                path={`${str}/map/personalise/summary/:subpage`}
-                component={PersonalisationSummaryPage}
-                exact={true}
-                name={resultsType}
-                state={{
-                    pageType: vars => [
-                        vars.serviceListingType,
-                        "Edit Map Personalisation",
-                    ],
-                }}
-            />,
-            <BasePage
+            <Route
                 path={`${str}/personalise`}
-                component={PersonalisationWizardPage}
-                exact={true}
-                name={resultsType}
-                state={{
-                    pageType: vars => [
-                        vars.serviceListingType,
-                        "List Personalisation",
-                    ],
-                }}
+                element={<PersonalisationWizardPage />}
+                title=":page in :suburb, :state"
+                type={[baseType, "List Personalisation"]}
             />,
-            <BasePage
+            <Route
                 path={`${str}/personalise/page/:subpage`}
-                component={PersonalisationWizardPage}
-                exact={true}
-                name={resultsType}
-                state={{
-                    pageType: vars => [
-                        vars.serviceListingType,
-                        "List Personalisation",
-                    ],
-                }}
+                element={<PersonalisationWizardPage />}
+                title=":page in :suburb, :state"
+                type={[baseType, "List Personalisation"]}
             />,
-            <BasePage
+            <Route
                 path={`${str}/personalise/summary`}
-                component={PersonalisationSummaryPage}
-                exact={true}
-                name={resultsType}
-                state={{
-                    pageType: vars => [
-                        vars.serviceListingType,
-                        "Edit List Personalisation",
-                    ],
-                }}
+                element={<PersonalisationSummaryPage />}
+                title=":page in :suburb, :state"
+                type={[baseType, "Edit List Personalisation"]}
             />,
-            <BasePage
+            <Route
                 path={`${str}/personalise/summary/:subpage`}
-                component={PersonalisationSummaryPage}
-                exact={true}
-                name={resultsType}
-                state={{
-                    pageType: vars => [
-                        vars.serviceListingType,
-                        "Edit List Personalisation",
-                    ],
-                }}
+                element={<PersonalisationSummaryPage />}
+                title=":page in :suburb, :state"
+                type={[baseType, "Edit List Personalisation"]}
             />,
         ])}
-        <BasePage
+        <Route
             path="*"
-            component={NotFoundStaticPage}
+            element={<NotFoundStaticPage />}
             onEnter={removeDoubleSlashOnEnter404}
-            state={{
-                pageType: "Page Not Found",
-            }}
+            title="Page not found"
+            type={["Page Not Found"]}
         />
-    </Switch>
+    </Route>
+</Routes>
 
-);
+export default routes

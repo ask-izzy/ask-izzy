@@ -1,133 +1,109 @@
 /* @flow */
-import { useState, useEffect, useContext } from "react";
+import React from "react";
 
-import storage from "../storage";
 import * as gtm from "../google-tag-manager";
-import categories from "../constants/categories";
-import routerContext from "../contexts/router-context";
+import { useRouterContext } from "../contexts/router-context";
+import { waitTillPageLoaded } from "../utils/page-loading"
+import categories from "../constants/categories"
 
 export default (props: Object) => {
-    const {router} = useContext(routerContext)
+    const {location, match, navigateInProgress} = useRouterContext()
+    const locationPathAndSearch = location.pathname + location.search
 
-    const [previousLocation, setPreviousLocation] = useState(undefined);
-
-    // Use the Effects Hook to modify history and setup listener only once
-    // (by using an empty array as useEffect's second argument).
-    useEffect(() => {
-        // Override the goBack function for the history object to navigate to
-        // the home page if going to the previous page will take the user off
-        // Ask Izzy
-        const originalGoBackFunc = router.history.goBack;
-
-        router.history.goBack = () => {
-            storage.getHistoryLength() > 0 ?
-                originalGoBackFunc()
-                : router.history.push("/")
+    React.useEffect(() => {
+        // A page has requested to redirect as soon as it rendered. Don't count
+        // this as a page view.
+        if (navigateInProgress()) {
+            return
         }
 
-        router.history.listen((location, action) => {
-            // Track size of history stack while navigating Ask Izzy so we know
-            // if the previous page is part of ask izzy or not.
-            // NOTE: action isn't a particularly reliable way of tracking
-            // changes to the history stack. Among other issues the value of
-            // action is "POP" both when the browser back button is used as well
-            // as when the forward button is used. Still there's no reliable way
-            // to do this so until browser APIs change this will have to do.
-            let historyLengthDelta = 0
+        recordAnalytics(location, match);
+    }, [locationPathAndSearch]);
 
-            if (action === "POP") {
-                historyLengthDelta = -1;
-            } else if (action === "PUSH") {
-                historyLengthDelta = 1;
-            }
+    React.useEffect(
+        () => registerScrollRestoration(location),
+        [locationPathAndSearch]
+    )
 
-            if (historyLengthDelta) {
-                storage.setHistoryLength(
-                    storage.getHistoryLength() +
-                    historyLengthDelta
-                )
-            }
-        });
-    }, [])
-
-    // useEffect to fire after neighbouring elements have finished rendering
-    // so we can detect if they triggered a redirect or not. We don't set the
-    // second argument here so this is fired every time a re-render occurs.
-    // NOTE: history is a mutable object and therefore it's values may change
-    // by time we get around to reading it (for example if a redirect has
-    // occurred in between). So if we need to access say history.action then
-    // we should copy it first to preserve it's current value.
-    useEffect(() => {
-        // Location hasn't change but setting the state on last change
-        // has caused this to fire again so we can safely ignore
-        if (previousLocation === router.location) {
-            return undefined
-        }
-
-        // Page path hasn't changed, generally occurs when an anchor link is
-        // clicked
-        if (
-            previousLocation &&
-            previousLocation.pathname === router.location.pathname
-        ) {
-            return undefined
-        }
-        // If location doesn't match browser location we know a redirect has
-        // occurred
-        if (
-            router.location.pathname !== window.location.pathname ||
-            router.location.search !== window.location.search ||
-            router.location.hash !== window.location.hash
-        ) {
-            return undefined
-        }
-
-        window.scrollTo(0, 0);
-        recordAnalytics(router.match);
-
-        setPreviousLocation(router.location)
-    });
-    return null
+    return null;
 }
 
-function recordAnalytics(routeMatch) {
+function recordAnalytics(location, routeMatch) {
     // Gather and set analytics environment variables
     const pageVars = getPageVars(routeMatch)
     gtm.setPersistentVars(Object.keys(pageVars))
 
     // Since Ask Izzy is a SPA we need to manually register each
     // new page view
-    let hash = location.href.match(/(#[^#]*)$/)
     gtm.emit({
         event: "Page Loaded",
-        path: location.pathname,
-        hash,
+        path: location.pathname + location.search,
+        hash: location.hash,
         ...pageVars,
     });
 }
 
 export function getPageVars(routeMatch: Object) {
-    const pageVars = {
-        category: undefined,
-        pageType: undefined,
-        routes: undefined,
-        serviceListingType: undefined,
+    if (!routeMatch.props.type) {
+        const errorMessage = `The current page "${routeMatch.url}" ` +
+            `does not have a page type`
+        console.warn(errorMessage)
+
+        gtm.emit({
+            event: "JS Error",
+            eventCat: "Error Occurred",
+            eventAction: "GTM",
+            eventLabel: errorMessage,
+            sendDirectlyToGA: true,
+        });
     }
 
-    const routeParams = routeMatch.params
-    const routeState = routeMatch.props.state
-    pageVars.pageType = routeState.pageType
+    const pageType = routeMatch.props.type ? [...routeMatch.props.type] : []
 
-    if (routeMatch.props.name === "Service Listing") {
-        if (routeParams.page) {
-            pageVars.serviceListingType = "Category"
-            pageVars.category = categories
-                .find(cat => cat.key === routeParams.page) ||
-                null
-        } else {
-            pageVars.serviceListingType = "Search"
-        }
+    // We declare some vars here even if we define them later
+    // since the keys from pageVars get used to determine what
+    // variables should be considered persistent in GTM (meaning
+    // they last between GTM events until a new page is loaded).
+    const pageVars = {
+        category: undefined,
+        pageType,
+        routes: undefined,
+    }
+
+    if (routeMatch.params.page) {
+        pageVars.category = categories.find(
+            cat => cat.key === routeMatch.params.page
+        )?.name || null
     }
 
     return pageVars
+}
+
+/*
+Keep track of where we scroll to on a page and if we return to that page restore
+the position. Since Izzy is a SPA app the standard browser scroll restoration
+doesn't work but in the future browsers will hopefully do this for us (Chrome
+already). But until then we've got to do it manually.
+*/
+function registerScrollRestoration(location) {
+    if (history.scrollRestoration) {
+        history.scrollRestoration = "manual";
+    }
+
+    const sessionKey = `scrollPosition-${location.key}`
+    const sessionValue = sessionStorage.getItem(sessionKey)
+
+    if (sessionValue !== null) {
+        waitTillPageLoaded().then(
+            () => window.scrollTo(0, Number(sessionValue))
+        ).catch()
+    }
+
+    function handleScroll() {
+        sessionStorage.setItem(sessionKey, window.scrollY)
+    }
+
+    document.addEventListener("scroll", handleScroll)
+
+    return () => document.removeEventListener("scroll", handleScroll);
 }

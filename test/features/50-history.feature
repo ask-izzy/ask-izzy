@@ -67,5 +67,4 @@ Feature: History navigation
         Then I should see 3 search results for "men aged 18 to 26" in "Melbourne, VIC"
 
         When I click back from the browser UI
-        And I click back from the browser UI # We have to go back past the hash
         Then I should see "How old are you?"

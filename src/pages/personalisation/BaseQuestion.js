@@ -233,7 +233,7 @@ class BaseQuestion extends Personalisation<Props, State> {
                             leftIcon={this.iconFor(answer)}
                             primaryText={answer}
                             secondaryText={this.answerDescFor(answer)}
-
+                            aria-label={answer}
                             type="radio"
                             checked={answer === selected}
                             value={answer}

@@ -21,7 +21,7 @@ export default class NotFoundStaticPage extends React.Component<Props, void> {
             >
                 <AppBar
                     title="Page not found"
-                    onBackTouchTap={this.context.router.history.goBack}
+                    onBackTouchTap={() => this.context.router.navigate(-1)}
                 />
                 <HeaderBar
                     primaryText={null}
