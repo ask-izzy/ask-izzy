@@ -11,29 +11,37 @@ zeroRatingHelper.isPhantomJS = window.navigator.userAgent.search('PhantomJS') !=
 
 // Common replace function: Replace knwon external domains to internal proxy
 // Domain lists are generated from generate-env-vars
-zeroRatingHelper.replaceDomain = function(url) {
-    // Parse hostname from URL
-    var parser = document.createElement('a');
+zeroRatingHelper.replaceDomain = function(oldUrl) {
+    let url
+    try {
+        url = new URL(oldUrl)
+    } catch(error) {
+        return oldUrl
+    }
 
-    parser.href = url;
-
-    if (parser.hostname in window.DOMAIN_MAPS) {
-        parser.hostname = window.DOMAIN_MAPS[parser.hostname];
-        return parser.href;
-    } else if (window.EXCLUDED_DOMAINS.indexOf(parser.hostname) !== -1){
+    if (url.host in window.PROXY_DOMAINS) {
+        let newHost = window.PROXY_DOMAINS[url.host]
+        // If hostname is just the port then append the hostname of the current page
+        if (newHost.match(/^:\d+$/)) {
+            newHost = `${location.hostname}${newHost}`
+        }
+        url.host = newHost;
+        url.protocol = window.PROXY_PROTOCOL || url.protocol
+        return url.href;
+    } else if (window.PROXY_EXCLUDED_DOMAINS.indexOf(url.host) !== -1){
         return 'null';
     } else {
-        return url;
+        return oldUrl;
     }
 };
 
 zeroRatingHelper.replaceDomainInString = function(str){
     var result = str;
-    for(domain in window.DOMAIN_MAPS){
-        result = zeroRatingHelper.replaceAll(result, domain, window.DOMAIN_MAPS[domain]);
+    for(domain in window.PROXY_DOMAINS){
+        result = zeroRatingHelper.replaceAll(result, domain, window.PROXY_DOMAINS[domain]);
     }
-    for(i in window.EXCLUDED_DOMAINS){
-        if ( result.indexOf(window.EXCLUDED_DOMAINS[i]) !== -1 ){
+    for(i in window.PROXY_EXCLUDED_DOMAINS){
+        if ( result.indexOf(window.PROXY_EXCLUDED_DOMAINS[i]) !== -1 ){
             result = zeroRatingHelper.replaceAll(result, domain, 'null');
         }
     }

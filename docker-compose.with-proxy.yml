@@ -1,0 +1,55 @@
+version: '3.4'
+
+services:
+    app:
+        environment:
+            PROXY_DOMAINS: "{
+                'fonts.typography.com': ':8051',
+                'www.googletagmanager.com': ':8052',
+                'maps.googleapis.com': ':8053',
+                'csi.gstatic.com': ':8054',
+                'fonts.gstatic.com': ':8055',
+                'tagmanager.google.com': ':8056',
+                'fonts.google.com': ':8057',
+                'www.google-analytics.com': ':8058',
+                'google-analytics.com': ':8058',
+                'maps.gstatic.com': ':8059',
+                'iss3.docker.dev': ':8060',
+                'iss3-test.docker.dev': ':8061',
+            }"
+            PROXY_PROTOCOL: 'http:'
+        links:
+            - "external-resources-proxy"
+
+    external-resources-proxy:
+        build: external-resources-proxy/.
+        command: ['dev']
+        # Used to stop colour being stripped from stdout
+        tty: true
+        environment:
+            PROXY_8051: 'typography-com.docker.dev'
+            PROXY_8052: 'gtagmanager.docker.dev'
+            PROXY_8053: 'gmaps.docker.dev'
+            PROXY_8054: 'gcsi-static.docker.dev'
+            PROXY_8055: 'gfonts-static.docker.dev'
+            PROXY_8056: 'gtagmanager.docker.dev'
+            PROXY_8057: 'gfonts.docker.dev'
+            PROXY_8058: 'google-analytics.docker.dev'
+            PROXY_8059: 'gmaps-static.docker.dev'
+            PROXY_8060: 'iss3.docker.dev'
+            PROXY_8061: 'iss3-test.docker.dev'
+            NODE_EXTRA_CA_CERTS: /etc/ssl/certs/ca-certificates.crt
+        ports:
+            - '8051:8051'
+            - '8052:8052'
+            - '8053:8053'
+            - '8054:8054'
+            - '8055:8055'
+            - '8056:8056'
+            - '8057:8057'
+            - '8058:8058'
+            - '8059:8059'
+            - '8060:8060'
+            - '8061:8061'
+        volumes:
+            - ./external-resources-proxy:/app

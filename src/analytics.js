@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//' + window.PROXY_TAGS + '/gtm.js?id='+i+dl+(gtmIsDebug?'&gtm_debug=x':'')+'&gtm_auth='+
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl+(gtmIsDebug?'&gtm_debug=x':'')+'&gtm_auth='+
         window.GOOGLE_TAG_MANAGER_AUTH+'&gtm_preview='+window.GOOGLE_TAG_MANAGER_ENV;
         f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer',window.GOOGLE_TAG_MANAGER_ID);

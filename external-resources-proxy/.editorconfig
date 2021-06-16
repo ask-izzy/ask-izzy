@@ -1,0 +1,16 @@
+# Infoxchange base editor config
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Since it's most common in our projects set a default of 4 spaces for a tab
+indent_style = space
+indent_size = 2
+
+[Makefile]
+indent_style = tab

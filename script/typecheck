@@ -23,6 +23,9 @@ echo "${BOLD}Checking for missing @flow comments${END}"
 HAVE_FLOW=true
 for file in $( git ls-files '**/*.js' ); do
     if [ -e "$file" ] ; then
+        if [[ "$file" == external-resources-proxy/* ]]; then
+            continue
+        fi
         read flowtype < "$file"
         if test "x$flowtype" = 'x/* $FlowIgnore */'; then
             echo "Skipping disabled file $file" > /dev/null

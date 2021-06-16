@@ -11,7 +11,7 @@ git describe > public/VERSION
 
 ./script/recreate-dev-env-file
 
-if which xdg-open; then
+if which xdg-open >/dev/null; then
     OPEN=xdg-open
 else
     OPEN=open
@@ -21,7 +21,9 @@ export PORT=${PORT-8000}
 export NODE_ENV=development
 export DEBUG=web
 
-(sleep 3; $OPEN http://localhost:$PORT) &
+if [ ! -f /.dockerenv ]; then
+    (sleep 3; $OPEN http://localhost:$PORT) &
+fi
 
 nodemon --ext js --watch webpack/ index.js webpack/server &
 WEBPACK_PID="$!"
