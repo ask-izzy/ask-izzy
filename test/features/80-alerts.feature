@@ -20,6 +20,17 @@ Feature: Alerts
         When I click on a collapsible section titled "COVID19 affecting services"
         Then I should see "Services listed here may not be operating or limited. Contact services directly for up-to-date information."
 
+    Scenario: Alerts defaultToOpen are initially open
+        Given my location is "Melbourne, VIC"
+        And I need nothing for everyday-things
+        When I visit /everyday-things
+        Then I should see "Title is always shown"
+        And I should see "Body is open by default"
+
+        When I click on a collapsible section titled "Title is always shown"
+        Then I should see "Title is always shown"
+        And I should not see "Body is open by default"
+
 
     # Tests both that alerts show up correctly on the results page
     # and they are correctly ordered by importance
@@ -38,6 +49,7 @@ Feature: Alerts
         A vic and qld*      |
         COVID19 affecting*  | Services listed*
         The fox*            |
+        Title is*           | Body is*
         -------------------------------------------
 
 

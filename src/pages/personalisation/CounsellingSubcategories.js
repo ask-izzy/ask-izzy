@@ -2,7 +2,7 @@
 
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
-import { resetDfvOptions } from "../../domesticViolence";
+import { resetDfvOptions } from "../../utils/domesticViolence";
 import icons from "../../icons";
 import * as React from "react";
 

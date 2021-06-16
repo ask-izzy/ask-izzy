@@ -36,6 +36,7 @@ export const resultsPageVicAndQldWarnAlert = {
         { Name: "QLD", __typename: "State" },
     ],
     screenLocation: "resultsPage",
+    defaultToOpen: false,
     __typename: "Alert",
 }
 export const covidServicesAffectedAlert = {
@@ -49,6 +50,7 @@ export const covidServicesAffectedAlert = {
     alertLevel: "warn",
     states: [],
     screenLocation: "resultsPage",
+    defaultToOpen: false,
     __typename: "Alert",
 }
 export const covidInfoAlert = {
@@ -59,6 +61,7 @@ export const covidInfoAlert = {
     alertLevel: "warn",
     states: [],
     screenLocation: "homePage",
+    defaultToOpen: false,
     __typename: "Alert",
 }
 export const nationalServiceAlert = {
@@ -69,6 +72,7 @@ export const nationalServiceAlert = {
     alertLevel: "info",
     states: [],
     screenLocation: "servicePage",
+    defaultToOpen: false,
     __typename: "Alert",
 }
 export const vicServiceAlert = {
@@ -81,6 +85,7 @@ export const vicServiceAlert = {
         { Name: "VIC", __typename: "State" },
     ],
     screenLocation: "servicePage",
+    defaultToOpen: false,
     __typename: "Alert",
 }
 export const waServiceAlert = {
@@ -93,6 +98,7 @@ export const waServiceAlert = {
         { Name: "WA", __typename: "State" },
     ],
     screenLocation: "servicePage",
+    defaultToOpen: false,
     __typename: "Alert",
 }
 export const resultsPageNationalInfoAlert = {
@@ -103,6 +109,7 @@ export const resultsPageNationalInfoAlert = {
     alertLevel: "info",
     states: [],
     screenLocation: "resultsPage",
+    defaultToOpen: false,
     __typename: "Alert",
 }
 export const resultsPageTasInfoAlert = {
@@ -115,6 +122,18 @@ export const resultsPageTasInfoAlert = {
         { Name: "TAS", __typename: "State" },
     ],
     screenLocation: "resultsPage",
+    defaultToOpen: false,
+    __typename: "Alert",
+}
+export const bodyOpenByDefaultResultsPageAlert = {
+    id: "9",
+    title: "Title is always shown",
+    body: "Body is open by default",
+    created_at: "2021-05-25T12:19:33.039Z",
+    alertLevel: "info",
+    states: [],
+    screenLocation: "resultsPage",
+    defaultToOpen: true,
     __typename: "Alert",
 }
 
@@ -122,6 +141,7 @@ export const resultsPageAlerts = [
     resultsPageVicAndQldWarnAlert,
     covidServicesAffectedAlert,
     resultsPageNationalInfoAlert,
+    bodyOpenByDefaultResultsPageAlert,
 ]
 
 export const allAlerts = [
@@ -133,4 +153,5 @@ export const allAlerts = [
     vicServiceAlert,
     waServiceAlert,
     resultsPageTasInfoAlert,
+    bodyOpenByDefaultResultsPageAlert,
 ]

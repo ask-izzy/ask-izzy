@@ -21,6 +21,7 @@ query Alerts(
     body
     created_at
     alertLevel
+    defaultToOpen
     states {
       Name
     }

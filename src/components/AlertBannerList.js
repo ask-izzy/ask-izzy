@@ -59,12 +59,13 @@ export default function({state, screenLocation, format}: Props): React.Node {
         </div>
     )
 
-    function renderAlert({id, title, body, alertLevel}) {
+    function renderAlert({id, title, body, alertLevel, defaultToOpen}) {
         return <li key={id}>
             <AlertBanner
                 title={renderContent(title)}
                 body={renderContent(body)}
                 alertLevel={alertLevel}
+                defaultToOpen={defaultToOpen}
             />
         </li>
     }
