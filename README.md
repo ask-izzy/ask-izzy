@@ -51,7 +51,19 @@ ENVIRONMENT="dev_local" NODE_ENV="development" ISS_URL="$ISS_URL" GOOGLE_API_KEY
 ```
 
 ## Remote access
-By default the dev server is only accessible via localhost but if you want to access it via a remote machine (say for example to test the site on a phone) you should set the env var ALLOWED_HOSTS to the host name of the machine you're running the site on.
+To access the site from a different device to the one that the dev server is running on (say for example to test the site on a phone) the server can be started with a proxy. This proxies external resources that would normally require a VPN to access though the machine the dev server is running on:
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.with-proxy.yml up
+```
+
+The first time you run this you'll have to install the required packages first:
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.with-proxy.yml run --rm external-resources-proxy shell -c 'yarn install'
+```
+
+If you have a firewall running on the same machine that's running the dev server you should open ports 8000 to 8099.
+
+Ask Izzy should now be accessible at `http://<ip address or hostname of host computer>:8000` on other devices connected to the same network.
 
 ## Dealing with HTTP and browsers
 

@@ -7,6 +7,7 @@ IFS=$'\n\t'
 
 VERSION="$(cat public/VERSION)"
 STRAPI_URL=${STRAPI_URL:-}
+PROXY_DOMAINS=${PROXY_DOMAINS:-}
 
 # Set Strapi url based on env.
 if [ -z "$STRAPI_URL" ]; then
@@ -29,41 +30,41 @@ if [ -z "$STRAPI_URL" ]; then
 fi
 
 
-if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging" ]; then
-	PROXY_TYPOGRAPHY="typography-com.askizzy.org.au"
-	PROXY_TAGS="gtagmanager.askizzy.org.au"
-	PROXY_ANALYTICS="google-analytics.askizzy.org.au"
-	DOMAIN_MAPS="{
-	    'maps.googleapis.com':'gmaps.askizzy.org.au',
-        'maps.gstatic.com':'gmaps-static.askizzy.org.au',
-        'csi.gstatic.com':'gcsi-static.askizzy.org.au',
-        'fonts.gstatic.com':'gfonts-static.askizzy.org.au',
-        'tagmanager.google.com':'gtagmanager.askizzy.org.au',
-        'fonts.google.com':'gfonts.askizzy.org.au',
-        'www.google-analytics.com':'google-analytics.askizzy.org.au',
-        'google-analytics.com':'google-analytics.askizzy.org.au',
-        'bam.nr-data.net':'bam-nr-data.askizzy.org.au',
-        'js-agent.newrelic.com':'js-agent-newrelic.askizzy.org.au',
-	}"
-else
-	PROXY_TYPOGRAPHY="typography-com.docker.dev"
-	PROXY_TAGS="gtagmanager.docker.dev"
-	PROXY_ANALYTICS="google-analytics.docker.dev"
-	DOMAIN_MAPS="{
-	    'maps.googleapis.com':'gmaps.docker.dev',
-        'maps.gstatic.com':'gmaps-static.docker.dev',
-        'csi.gstatic.com':'gcsi-static.docker.dev',
-        'fonts.gstatic.com':'gfonts-static.docker.dev',
-        'tagmanager.google.com':'gtagmanager.docker.dev',
-        'fonts.google.com':'gfonts.docker.dev',
-        'www.google-analytics.com':'google-analytics.docker.dev',
-        'google-analytics.com':'google-analytics.docker.dev',
-        'bam.nr-data.net':'bam-nr-data.docker.dev',
-        'js-agent.newrelic.com':'js-agent-newrelic.docker.dev',
-	}"
+if [ -z "$PROXY_DOMAINS" ]; then
+    if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging" ]; then
+	    PROXY_DOMAINS="{
+            'fonts.typography.com':'typography-com.askizzy.org.au',
+            'www.googletagmanager.com':'gtagmanager.askizzy.org.au',
+            'maps.googleapis.com':'gmaps.askizzy.org.au',
+            'maps.gstatic.com':'gmaps-static.askizzy.org.au',
+            'csi.gstatic.com':'gcsi-static.askizzy.org.au',
+            'fonts.gstatic.com':'gfonts-static.askizzy.org.au',
+            'tagmanager.google.com':'gtagmanager.askizzy.org.au',
+            'fonts.google.com':'gfonts.askizzy.org.au',
+            'www.google-analytics.com':'google-analytics.askizzy.org.au',
+            'google-analytics.com':'google-analytics.askizzy.org.au',
+            'bam.nr-data.net':'bam-nr-data.askizzy.org.au',
+            'js-agent.newrelic.com':'js-agent-newrelic.askizzy.org.au',
+        }"
+    else
+        PROXY_DOMAINS="{
+            'fonts.typography.com':'typography-com.docker.dev',
+            'www.googletagmanager.com':'gtagmanager.docker.dev',
+            'maps.googleapis.com':'gmaps.docker.dev',
+            'maps.gstatic.com':'gmaps-static.docker.dev',
+            'csi.gstatic.com':'gcsi-static.docker.dev',
+            'fonts.gstatic.com':'gfonts-static.docker.dev',
+            'tagmanager.google.com':'gtagmanager.docker.dev',
+            'fonts.google.com':'gfonts.docker.dev',
+            'www.google-analytics.com':'google-analytics.docker.dev',
+            'google-analytics.com':'google-analytics.docker.dev',
+            'bam.nr-data.net':'bam-nr-data.docker.dev',
+            'js-agent.newrelic.com':'js-agent-newrelic.docker.dev',
+        }"
+    fi
 fi
 
-EXCLUDED_DOMAINS="[
+PROXY_EXCLUDED_DOMAINS="[
     'cbk0.googleapis.com',
 	'cbk1.googleapis.com',
 	'mt.googleapis.com',
@@ -109,11 +110,9 @@ window.GOOGLE_ANALYTICS_ID = "${GOOGLE_ANALYTICS_ID:=}";
 window.GOOGLE_TAG_MANAGER_ID = "${GOOGLE_TAG_MANAGER_ID:=}";
 window.GOOGLE_TAG_MANAGER_AUTH = "${GOOGLE_TAG_MANAGER_AUTH:=}";
 window.GOOGLE_TAG_MANAGER_ENV = "${GOOGLE_TAG_MANAGER_ENV:=}";
-window.PROXY_TYPOGRAPHY = "${PROXY_TYPOGRAPHY}";
-window.PROXY_TAGS = "${PROXY_TAGS}";
-window.PROXY_ANALYTICS = "${PROXY_ANALYTICS}";
-window.DOMAIN_MAPS = ${DOMAIN_MAPS};
-window.EXCLUDED_DOMAINS = ${EXCLUDED_DOMAINS};
+window.PROXY_DOMAINS = ${PROXY_DOMAINS};
+window.PROXY_EXCLUDED_DOMAINS = ${PROXY_EXCLUDED_DOMAINS};
+window.PROXY_PROTOCOL = "${PROXY_PROTOCOL:-}";
 window.VERSION = "${VERSION}";
 window.STRAPI_URL = "$STRAPI_URL";
 JSON

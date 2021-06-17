@@ -32,7 +32,7 @@ head.insertBefore = function(newElement, referenceElement) {
 // which is not a problem as we don't need to do anything
 // with the response.
 xhr({
-    url: "//" + window.PROXY_TYPOGRAPHY + "/7948374/730248/css/fonts.css",
+    url: "https://fonts.typography.com/7948374/730248/css/fonts.css",
     maxRedirects: 0,
 }).catch(() => null);
 
