@@ -36,11 +36,11 @@ export const sortResults = (results, orderBy): Array<Service> => {
             if (
                 a[orderBy.key] === b[orderBy.key]
             ) {
-                return 1
+                return -1
             } else if (
                 a[orderBy.key] !== b[orderBy.key]
             ) {
-                return -1
+                return 1
             }
         }
         return 0
