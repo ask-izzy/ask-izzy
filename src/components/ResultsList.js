@@ -10,7 +10,11 @@ import {
     nonCrisisResults,
 } from "../iss";
 
-import type { Service } from "../iss";
+import type {Service} from "../iss";
+import SortResult from "./SortResult";
+import Category from "../constants/Category";
+import {sortResults, SortType} from "./SortResult.service";
+import _ from "underscore";
 
 const StaticTextLine = ({object}) => React.cloneElement(object.node);
 
@@ -20,13 +24,24 @@ const className = (elem: React.Element<any>) =>
 
 class ResultsList extends React.Component<{
     results: Array<Service>,
+    category: Category,
 }, void> {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            orderBy: SortType,
+        }
+    }
+
     crisisResults(): Array<Object> {
         return crisisResults(this.props.results);
     }
 
     nonCrisisResults(): Array<Object> {
-        return nonCrisisResults(this.props.results);
+        const res = nonCrisisResults(this.props.results);
+        return this.state.orderBy?.value ?
+            sortResults(res, this.state.orderBy) : res;
     }
 
     render(): React.Element<"div"> {
@@ -39,6 +54,12 @@ class ResultsList extends React.Component<{
                     />
                 }
                 {this.crisisResults().map(this.renderCrisisResult.bind(this))}
+                <SortResult
+                    category={this.props.category}
+                    orderBy={(orderBy) => {
+                        this.setState({orderBy})
+                    }}
+                />
                 {this.nonCrisisResults().map(this.renderResult.bind(this))}
             </div>
         );
@@ -46,8 +67,8 @@ class ResultsList extends React.Component<{
 
     renderCrisisResult(object: Object, index: number): React.Element<"div"> {
         const elem: React.Element<any> = object.staticText ?
-            <StaticTextLine object={object} />
-            : <CrisisLineItem object={object} />;
+            <StaticTextLine object={object}/>
+            : <CrisisLineItem object={object}/>;
 
         return (
             <div
@@ -60,7 +81,7 @@ class ResultsList extends React.Component<{
     }
 
     renderResult(object: Object, index: number): React.Element<"div"> {
-        const elem = <ResultListItem service={object} />;
+        const elem = <ResultListItem service={object}/>;
 
         return (
             <div

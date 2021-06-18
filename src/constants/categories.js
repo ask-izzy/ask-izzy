@@ -17,6 +17,7 @@ const categories = [
             service_type: ["housing"],
             minimum_should_match: "30%",
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
             personalisation.SleepTonight,
@@ -38,6 +39,7 @@ const categories = [
                 " -(meals on wheels) -(assistance with meals)" +
                 " -(hire of facilities) -chsp -(meal preparation)",
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
             personalisation.FoodSubcategories,
@@ -51,6 +53,7 @@ const categories = [
             q: "material aid -(coordinating bodies)",
             service_type: ["material aid"],
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
             personalisation.EverydayThingsSubcategories,
@@ -63,6 +66,7 @@ const categories = [
         search: {
             q: "(family violence) -(coordinating bodies) -(fire-fighting)",
         },
+        sortingOptions: [],
         personalisation: [
             ...personalisation.OnlineSafetyScreenBundle(
                 personalisation.AreYouSafe
@@ -84,6 +88,26 @@ const categories = [
             minimum_should_match: "30%",
             show_in_askizzy_health: true,
         },
+        sortingOptions: [
+            {
+                key: "free_or_low_cost",
+                value: true,
+                name: "Free or low/cost",
+                time: null,
+            },
+            {
+                key: "is_bulk_billing",
+                value: true,
+                name: "Bulk billing",
+                time: null,
+            },
+            {
+                key: "healthcare_card_holders",
+                value: true,
+                name: "Health Care card holders",
+                time: null,
+            },
+        ],
         personalisation: [
             personalisation.Location,
             personalisation.HealthSubcategories,
@@ -101,6 +125,7 @@ const categories = [
             q: "\"centrelink\"",
             name: "\"centrelink\"",
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
         ],
@@ -112,6 +137,7 @@ const categories = [
         search: {
             q: "financial aid -(coordinating bodies) -grants -heritage",
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
             personalisation.MoneySubcategories,
@@ -125,6 +151,7 @@ const categories = [
             q: "counselling",
             minimum_should_match: "1",
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
             personalisation.CounsellingSubcategories,
@@ -143,6 +170,7 @@ const categories = [
                 "-ceremonies -making -checks -electoral -taxation " +
                 "-centrelink -immigration -(hire of facilities)",
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
             personalisation.LegalSubcategories,
@@ -161,6 +189,7 @@ const categories = [
                 " -(registered training)",
             minimum_should_match: "30%",
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
             personalisation.AddictionSubcategories,
@@ -175,6 +204,7 @@ const categories = [
             q: "life skills education -(coordinating bodies)" +
                 " -chsp -hacc",
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
             personalisation.LifeSkillsSubcategories,
@@ -189,6 +219,7 @@ const categories = [
             q: "employment -(coordinating bodies)",
             service_type: ["employment"],
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
             personalisation.JobSubcategories,
@@ -203,6 +234,7 @@ const categories = [
                 " -(coordinating bodies) -(hire of facilities)" +
                 " -maintenance",
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
         ],
@@ -217,6 +249,7 @@ const categories = [
                 "-(sports medicine) -(sports physician) " +
                 "-(sports psychology)",
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
         ],
@@ -228,6 +261,7 @@ const categories = [
         search: {
             q: "wifi internet computer",
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
         ],
@@ -240,6 +274,7 @@ const categories = [
             q: "consumer issues mediation discrimination " +
                 "disputes advocacy -research -(coordinating bodies)",
         },
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
             personalisation.AdvocacySubcategories,

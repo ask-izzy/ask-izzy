@@ -100,6 +100,7 @@ class ResultsListPage extends ResultsPage<> {
                         />
                     }
                     <ResultsList
+                        category={this.category}
                         results={this.state.searchResults || []}
                     />
                     {this.renderLoadMore()}
