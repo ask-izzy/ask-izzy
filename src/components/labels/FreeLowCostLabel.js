@@ -4,8 +4,7 @@ import BaseLabel from "./BaseLabel";
 
 function FreeLowCostLabel(): React.Node {
     const labelText = "Free / Low Cost"
-    const labelDescription = "You may be required to present " +
-        "a Medicare or concession card"
+    const labelDescription = "You may be required pay a small fee"
     return (
         <BaseLabel
             className="FreeLowCostLabel"

@@ -2,6 +2,10 @@
     background-color: $icon-fg-color;
     color: $white;
 
+    .labelDesc {
+        transform: translate(-25%);
+    }
+
     &.hasDescription {
         &:hover {
             background-color: $icon-fg-color-highlight;

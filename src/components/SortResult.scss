@@ -6,6 +6,7 @@
     padding: 1em;
     border-top: 10px solid $brand-bg-light;
 
+
     .orderingSentence {
         align-self: center;
         color: $brand-text-dark;
@@ -18,7 +19,7 @@
         position: relative;
 
         .orderByTitle {
-            color: $brand-pane-alt-dark;
+            color: $link-text-color;
             text-align: right;
             margin: 5px 0;
         }
@@ -29,7 +30,7 @@
             justify-content: space-between;
             cursor: pointer;
             font-size: 18px;
-            color: $brand-pane-alt-dark;
+            color: $link-text-color;
 
             &:hover {
                 background-color: $white;
@@ -61,8 +62,8 @@
 
         .options {
             position: absolute;
-            z-index: 2;
-            color: $brand-pane-alt-dark;
+            z-index: 1;
+            color: $link-text-color;
             width: 100%;
             cursor: pointer;
             margin-top: 1px;
@@ -77,5 +78,12 @@
             }
         }
 
+    }
+
+    &.sticky {
+        position: fixed;
+        top: 2em;
+        z-index: 1;
+        width: 768px;
     }
 }

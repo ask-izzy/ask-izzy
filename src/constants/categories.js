@@ -90,12 +90,6 @@ const categories = [
         },
         sortingOptions: [
             {
-                key: "free_or_low_cost",
-                value: true,
-                name: "Free or low/cost",
-                time: null,
-            },
-            {
                 key: "is_bulk_billing",
                 value: true,
                 name: "Bulk billing",

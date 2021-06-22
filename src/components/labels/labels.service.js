@@ -10,7 +10,7 @@ import React from "react";
 const LABEL_MAPPING = {
     "free_or_low_cost": {
         match: true,
-        label: <FreeLowCostLabel />,
+        label: null,
     },
     "is_bulk_billing": {
         match: true,
@@ -46,7 +46,17 @@ export const fetchLabels = (service: Service) => {
     const labels = [];
     for (let i = 0; i < serviceKeys.length; i++) {
         const label = LABEL_MAPPING[serviceKeys[i]];
-        if (label && service[serviceKeys[i]] && label?.match === "parking") {
+        if (labels && serviceKeys[i] === "free_or_low_cost") {
+            label.label =
+                <BaseLabel
+                    className="FreeLowCostLabel"
+                    labelText="Free / Low Cost"
+                    labelDescription={service.cost}
+                />;
+            labels.push(label);
+        } else if (
+            label && service[serviceKeys[i]] &&
+            label?.match === "parking") {
             label.label =
                 <BaseLabel
                     labelText="Parking"

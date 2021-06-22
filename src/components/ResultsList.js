@@ -14,7 +14,6 @@ import type {Service} from "../iss";
 import SortResult from "./SortResult";
 import Category from "../constants/Category";
 import {sortResults, SortType} from "./SortResult.service";
-import _ from "underscore";
 
 const StaticTextLine = ({object}) => React.cloneElement(object.node);
 
@@ -25,12 +24,15 @@ const className = (elem: React.Element<any>) =>
 class ResultsList extends React.Component<{
     results: Array<Service>,
     category: Category,
-}, void> {
+    hideSortOptions?: ?boolean,
+}, {
+    orderBy: SortType,
+}> {
 
     constructor(props) {
         super(props);
         this.state = {
-            orderBy: SortType,
+            orderBy: null,
         }
     }
 
@@ -54,12 +56,14 @@ class ResultsList extends React.Component<{
                     />
                 }
                 {this.crisisResults().map(this.renderCrisisResult.bind(this))}
-                <SortResult
-                    category={this.props.category}
-                    orderBy={(orderBy) => {
-                        this.setState({orderBy})
-                    }}
-                />
+                {this.props.results && this.props.results.length ?
+                    <SortResult
+                        category={this.props.category}
+                        hideOptions={this.props.hideSortOptions}
+                        orderBy={(orderBy) => {
+                            this.setState({orderBy})
+                        }}
+                    /> : null}
                 {this.nonCrisisResults().map(this.renderResult.bind(this))}
             </div>
         );
