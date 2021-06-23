@@ -1,0 +1,48 @@
+.BaseLabel {
+    position: relative;
+    width: auto;
+    margin: 0 0.3em;
+    padding: 1px 5px;
+    border-radius: 5px;
+    background-color: $brand-bg-dark;
+    color: $white;
+    font-size: 14px;
+
+    &.hasDescription {
+        &:hover {
+            background-color: $brand-bg-mid;
+        }
+    }
+
+    .labelDescContent {
+        width: 200px;
+        max-height: 200px;
+        text-overflow: ellipsis;
+    }
+
+    .labelDesc {
+        position: absolute;
+        bottom: 2em;
+        left: -3em;
+        padding: 5px;
+        border-radius: 3px;
+        background-color: $brand-text-dark;
+        text-align: center;
+        z-index: 30;
+
+        &::after {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            clear: both;
+            border-top: 5px solid $brand-text-dark;
+            border-right: 5px solid transparent;
+            border-left: 5px solid transparent;
+            content: "";
+        }
+    }
+
+
+}

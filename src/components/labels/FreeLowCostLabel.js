@@ -1,29 +1,17 @@
 /* @flow */
 import * as React from "react";
+import BaseLabel from "./BaseLabel";
 
 function FreeLowCostLabel(): React.Node {
-    const [showDescription, setShowDescription] = React.useState(false);
     const labelText = "Free / Low Cost"
     const labelDescription = "You may be required to present " +
         "a Medicare or concession card"
     return (
-        <div
+        <BaseLabel
             className="FreeLowCostLabel"
-            onClick={evt => {
-                evt.stopPropagation();
-                setShowDescription(!showDescription)
-            }}
-            onMouseLeave={() => setShowDescription(false)}
-        >
-            {showDescription && (
-                <div className="labelDesc">
-                    <div className="labelDescContent">
-                        {labelDescription}
-                    </div>
-                </div>
-            )}
-            {labelText}
-        </div>
+            labelText={labelText}
+            labelDescription={labelDescription}
+        />
     )
 }
 
