@@ -22,6 +22,7 @@ import TransportTime from "./TransportTime";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import { titleize } from "underscore.string";
+import {fetchLabels} from "./labels/labels.service";
 import ScreenReader from "./ScreenReader";
 
 class ResultListItem extends React.Component<{
@@ -69,7 +70,16 @@ class ResultListItem extends React.Component<{
                 to={`/service/${service.slug}`}
                 rightIcon={<icons.Chevron />}
             >
-
+                <div className="label">
+                    {fetchLabels(service).map((Label, index) => (
+                        <div key={
+                            // this is to ensure the key is unique
+                            `${Math.random()}_${index}`}
+                        >
+                            {Label?.label}
+                        </div>
+                    ))}
+                </div>
                 {this.renderLocation(service.Location())}
                 <div className="name">
                     <h2 aria-label={`${service.name}.`}>

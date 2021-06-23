@@ -4,7 +4,7 @@ import * as React from "react";
 
 type Props = {
     labelText: string,
-    labelDescription: string,
+    labelDescription?: ?string,
     className?: ?string,
 }
 

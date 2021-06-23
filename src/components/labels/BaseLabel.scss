@@ -1,7 +1,7 @@
 .BaseLabel {
     position: relative;
     width: auto;
-    margin: 0 0.3em;
+    margin-right: 0.3em;
     padding: 1px 5px;
     border-radius: 5px;
     background-color: $brand-bg-dark;
@@ -9,6 +9,7 @@
     font-size: 14px;
 
     &.hasDescription {
+        cursor: pointer;
         &:hover {
             background-color: $brand-bg-mid;
         }
@@ -23,7 +24,7 @@
     .labelDesc {
         position: absolute;
         bottom: 2em;
-        left: -3em;
+        transform: translate(-40%);
         padding: 5px;
         border-radius: 3px;
         background-color: $brand-text-dark;

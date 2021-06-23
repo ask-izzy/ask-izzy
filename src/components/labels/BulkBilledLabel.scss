@@ -1,0 +1,14 @@
+.BulkBilledLabel {
+    background-color: $brand-pane-alt-light;
+    color: $black;
+
+    &.hasDescription {
+        &:hover {
+            background-color: $brand-pane-alt-light;
+        }
+    }
+
+    @media only screen and (min-width: 410px) {
+        width: 115px;
+    }
+}

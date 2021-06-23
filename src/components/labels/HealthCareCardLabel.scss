@@ -1,0 +1,14 @@
+.HealthCareCardLabel {
+    background-color: $label-health-care-card;
+    color: $black;
+
+    &.hasDescription {
+        &:hover {
+            background-color: $label-health-care-card;
+        }
+    }
+
+    @media only screen and (min-width: 410px) {
+        width: 115px;
+    }
+}
