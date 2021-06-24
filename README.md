@@ -285,10 +285,10 @@ Flow can be run on it's own using `docker-compose run --rm app shell -c "npx flo
 
 Config is done with the `.flowconfig` file and files starting with `/* @flow */` are checked for type correctness while files starting with `/* $FlowIgnore */` are not. Libraries which aren't part of the code have type definitions in the `interfaces` directory.
 
-### sass-lint
-sass-lint is used for linting sass files.
+### stylelint
+stylelint is used for linting sass files.
 
-Issues that can be automatically fixed can be resolved using `docker-compose run --rm app lint-fix-sass`
+Issues that can be automatically fixed can be resolved using `docker-compose run --rm app lint-fix-stylelint`
 
 ### hadolint
 hadolint is used for linting the Dockerfile. It can be run using `make lint-dockerfile`.

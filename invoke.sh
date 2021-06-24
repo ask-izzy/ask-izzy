@@ -27,10 +27,10 @@ case "$1" in
         exec npx eslint --fix src/ test/ fixtures/ webpack/ config/ .storybook/
         ;;
 
-    lint-fix-sass)
+    lint-fix-stylelint)
         shift 1
 
-        exec npx sass-lint-auto-fix -c .sass-lint.yml
+        exec npx stylelint --fix "**/*.{css,scss,sass}"
         ;;
 
     lint-pa11y)
