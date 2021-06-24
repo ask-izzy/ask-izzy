@@ -142,7 +142,10 @@ class ResultsMapPage extends ResultsPage<{}, State> {
                         selectedSite={this.state.selectedSite}
                     />
                 </div>
-                <ResultsList results={this.selectedServices} />
+                <ResultsList
+                    category={this.category}
+                    results={this.selectedServices}
+                />
             </>
         }
     }

@@ -10,13 +10,15 @@
 
     &.hasDescription {
         cursor: pointer;
+
         &:hover {
             background-color: $brand-bg-mid;
         }
     }
 
     .labelDescContent {
-        width: 200px;
+        min-width: 100px;
+        max-width: 200px;
         max-height: 200px;
         text-overflow: ellipsis;
     }
@@ -24,8 +26,8 @@
     .labelDesc {
         position: absolute;
         bottom: 2em;
-        transform: translate(-40%);
         padding: 5px;
+        transform: translate(-30%);
         border-radius: 3px;
         background-color: $brand-text-dark;
         text-align: center;

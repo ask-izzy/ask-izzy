@@ -6,46 +6,41 @@ import icons from "../icons";
 import Category from "../constants/Category";
 import type {SortType} from "./SortResult.service";
 
-const DEFAULT_OPTIONS: Array<SortType> = [
+const DEFAULT_OPTIONS:Array<SortType> = [
     {
         key: null,
         value: null,
-        name: "please select option",
-        time: null,
+        name: "No filter",
     },
     {
-        key: "accessibility",
-        value: "fullaccess",
-        name: "Full Wheelchair accessible",
-        time: null,
+        key: "free_or_low_cost",
+        value: true,
+        name: "Free or low/cost",
     },
     {
-        key: "now_open",
-        value: {now_open: true},
-        name: "Open now (closing soon)",
-        time: "close",
+        key: "statewide",
+        value: true,
+        name: "State wide",
     },
     {
-        key: "now_open",
-        value: {now_open: true},
-        name: "Closed or closing late",
-        time: "open",
+        key: "healthcare_card_holders",
+        value: true,
+        name: "Health care card",
     },
     {
-        key: "now_open",
-        value: {now_open: false},
-        name: "Closed now",
-        time: null,
+        key: "ndis_approved",
+        value: true,
+        name: "NDIS approved",
     },
 ]
 
 type Props = {
     callback: function,
     category: ?Category,
-    loading?: ?boolean,
+    loading: ?boolean,
 }
 
-function SortResult(
+function FilterResult(
     {
         callback,
         category,
@@ -67,11 +62,11 @@ function SortResult(
 
 
     return (
-        <div className="SortResult">
+        <div className="FilterResult">
             <div className="sentence">
-                Sorting by:
+                Filtering by:
                 <div style={{fontWeight: "500"}}>
-                    {selection.key ? selection.name : "General sort"}
+                    {selection.key ? selection.name : "No filter"}
                 </div>
             </div>
             <div>
@@ -82,15 +77,16 @@ function SortResult(
                     setSelection(option);
                     callback(option);
                 }}
-                title="Order By"
+                title="Filter By"
                 selection={selection}
                 options={options}
             />
         </div>
     )
 }
-SortResult.defaultProps = {
+
+FilterResult.defaultProps = {
     loading: false,
 }
 
-export default SortResult
+export default FilterResult

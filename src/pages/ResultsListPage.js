@@ -24,7 +24,21 @@ import ScreenReader from "../components/ScreenReader";
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
         if (this.state.searchType) {
-            return this.renderPage()
+            return (
+                <div onClick={(event) => {
+                    if (typeof event.target.className === "string" &&
+                        !event.target.className.includes("optionSelect")) {
+                        this.setState((prevState) => (
+                            {
+                                hideOptions: !prevState.hideOptions,
+                            })
+                        )
+                    }
+                }}
+                >
+                    {this.renderPage()}
+                </div>
+            )
         }
 
         return <NotFoundStaticPage/>
@@ -101,6 +115,9 @@ class ResultsListPage extends ResultsPage<> {
                     }
                     <ResultsList
                         category={this.category}
+                        filterOption={(filterBy) => this.setState({filterBy})}
+                        hideOptions={this.state.hideOptions}
+                        loading={this.state.fetchingNewResults}
                         results={this.state.searchResults || []}
                     />
                     {this.renderLoadMore()}

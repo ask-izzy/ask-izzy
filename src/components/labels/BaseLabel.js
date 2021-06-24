@@ -19,6 +19,7 @@ function BaseLabel({labelText, labelDescription, className }: Props) {
                 evt.stopPropagation();
                 setShowDescription(!showDescription)
             }}
+            onMouseEnter={() => setShowDescription(!showDescription)}
             onMouseLeave={() => setShowDescription(false)}
         >
             {showDescription && labelDescription ? (

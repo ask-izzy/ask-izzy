@@ -2,19 +2,13 @@
 
 import BaseLabel from "./BaseLabel";
 import FreeLowCostLabel from "./FreeLowCostLabel";
-import BulkBilledLabel from "./BulkBilledLabel";
 import HealthCareCardLabel from "./HealthCareCardLabel";
-import {Service} from "../../iss";
 import React from "react";
 
-const LABEL_MAPPING = {
+const LABEL_MAPPING: Object = {
     "free_or_low_cost": {
         match: true,
         label: null,
-    },
-    "is_bulk_billing": {
-        match: true,
-        label: <BulkBilledLabel />,
     },
     "healthcare_card_holders": {
         match: true,
@@ -37,11 +31,10 @@ const LABEL_MAPPING = {
 export default {
     BaseLabel,
     FreeLowCostLabel,
-    BulkBilledLabel,
     HealthCareCardLabel,
 };
 
-export const fetchLabels = (service: Service) => {
+export const fetchLabels = (service: Object): Array<Object> => {
     const serviceKeys = Object.keys(service);
     const labels = [];
     for (let i = 0; i < serviceKeys.length; i++) {

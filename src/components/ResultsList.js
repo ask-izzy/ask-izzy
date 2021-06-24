@@ -11,9 +11,10 @@ import {
 } from "../iss";
 
 import type {Service} from "../iss";
-import SortResult from "./SortResult";
 import Category from "../constants/Category";
-import {sortResults, SortType} from "./SortResult.service";
+import {sortResults} from "./SortResult.service";
+import type {SortType} from "./SortResult.service"
+import SortFilterResult from "./SortFilterResult";
 
 const StaticTextLine = ({object}) => React.cloneElement(object.node);
 
@@ -21,18 +22,26 @@ const className = (elem: React.Element<any>) =>
     `resultContainer resultContainer-${
         elem.type.displayName || "other"}`
 
-class ResultsList extends React.Component<{
-    results: Array<Service>,
-    category: Category,
-    hideSortOptions?: ?boolean,
-}, {
-    orderBy: SortType,
-}> {
+type State = {
+    orderBy: ?SortType,
+    filterBy: ?SortType,
+}
 
-    constructor(props) {
+type Props = {
+    results: Array<Service>,
+    category: ?Category,
+    filterOption?: function,
+    hideOptions?: ?boolean,
+    loading?: ?boolean,
+}
+
+class ResultsList extends React.Component<Props, State> {
+
+    constructor(props: Props) {
         super(props);
         this.state = {
             orderBy: null,
+            filterBy: null,
         }
     }
 
@@ -56,14 +65,24 @@ class ResultsList extends React.Component<{
                     />
                 }
                 {this.crisisResults().map(this.renderCrisisResult.bind(this))}
-                {this.props.results && this.props.results.length ?
-                    <SortResult
-                        category={this.props.category}
-                        hideOptions={this.props.hideSortOptions}
-                        orderBy={(orderBy) => {
-                            this.setState({orderBy})
-                        }}
-                    /> : null}
+                {this.state.filterBy ||
+                this.props.results &&
+                this.props.results.length ?
+                    <div>
+                        <SortFilterResult
+                            category={this.props.category}
+                            hideOptions={this.props.hideOptions}
+                            loading={this.props.loading}
+                            orderByCallback={(orderBy) => {
+                                this.setState({orderBy});
+                            }}
+                            filterByCallback={(filterBy) => {
+                                this.setState({filterBy})
+                                this.props.filterOption &&
+                                this.props.filterOption(filterBy)
+                            }}
+                        />
+                    </div> : null}
                 {this.nonCrisisResults().map(this.renderResult.bind(this))}
             </div>
         );

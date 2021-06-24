@@ -9,4 +9,5 @@ declare class Moment {
     isAfter(other: Moment): boolean;
     startOf(type: string): Moment;
     clone(): Moment;
+    unix(): number;
 }

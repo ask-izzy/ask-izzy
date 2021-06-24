@@ -88,20 +88,7 @@ const categories = [
             minimum_should_match: "30%",
             show_in_askizzy_health: true,
         },
-        sortingOptions: [
-            {
-                key: "is_bulk_billing",
-                value: true,
-                name: "Bulk billing",
-                time: null,
-            },
-            {
-                key: "healthcare_card_holders",
-                value: true,
-                name: "Health Care card holders",
-                time: null,
-            },
-        ],
+        sortingOptions: [],
         personalisation: [
             personalisation.Location,
             personalisation.HealthSubcategories,

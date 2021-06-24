@@ -10,6 +10,7 @@ import {
     addPageLoadDependencies,
     closePageLoadDependencies,
 } from "../utils/page-loading"
+import type {SortType} from "../components/SortResult.service";
 
 type State = {
     searchMeta: ?searchResultsMeta,
@@ -17,7 +18,9 @@ type State = {
     searchError: ?{message: string, status: number},
     searchPagesLoaded: number,
     searchType: ?string,
+    filterBy: ?SortType,
     hideOptions: boolean,
+    fetchingNewResults: boolean,
 }
 
 
@@ -38,7 +41,9 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             searchResults: null,
             searchError: null,
             searchPagesLoaded: 0,
-            hideOptions: true,
+            hideOptions: false,
+            filterBy: null,
+            fetchingNewResults: false,
             searchType,
         };
     }
@@ -64,6 +69,46 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             )
         }
 
+    }
+
+    async filterSearch(): Promise<void> {
+        const params = this.issParams()
+        const filterObj = this.state.filterBy;
+        if (!params) {
+            return
+        }
+        if (!filterObj) {
+            return;
+        }
+        params[filterObj.key] = filterObj.value;
+        this.setState({fetchingNewResults: true})
+
+        const res = await iss.search(params);
+
+        this.setState({fetchingNewResults: false})
+
+        if (this.state.searchPagesLoaded > 0) {
+            gtm.emit({
+                event: "Load More Search Results Clicked",
+                eventCat: "Content Expanded",
+                eventAction: "Load More Search Results",
+                eventLabel: location.pathname,
+                sendDirectlyToGA: true,
+            });
+        }
+
+        this.setState(prevState => ({
+            searchMeta: res.meta,
+            searchResults: res.objects,
+            searchError: undefined,
+            searchPagesLoaded: prevState.searchPagesLoaded + 1,
+        }));
+    }
+
+    componentDidUpdate(prevProps: Object, prevState: Object, Snapshot: any) {
+        if (this.state.filterBy !== prevState.filterBy) {
+            this.filterSearch()
+        }
     }
 
     async loadNextSearchPage(): Promise<void> {

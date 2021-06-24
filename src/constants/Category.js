@@ -3,7 +3,7 @@
 import { slugify } from "underscore.string";
 
 import * as iss from "../iss";
-import {SortType} from "../components/SortResult.service";
+import type {SortType} from "../components/SortResult.service";
 
 type Props = {
     name: string,

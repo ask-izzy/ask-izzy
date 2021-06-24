@@ -54,7 +54,8 @@ class ResultListItem extends React.Component<{
                 <icons.Map
                     aria-label="Location"
                 />
-                {titleize(suburb)}
+                {titleize(suburb)}{!location.isConfidential() &&
+            " | " + location.state}
             </span>
         );
     }
