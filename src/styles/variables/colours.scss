@@ -1,5 +1,7 @@
-@use "sass:color";
-@use "../mixins/colours";
+/* stylelint-disable at-rule-empty-line-before, max-empty-lines -- we use extra lines here to group like colour definitions */
+
+@use 'sass:color';
+@use '../mixins/colours';
 
 /* Element state changes */
 $lightness-button-hover: 10%;

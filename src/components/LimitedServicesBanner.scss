@@ -1,7 +1,6 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .LimitedServicesBanner {
-
     .links {
         &.Link {
             color: #{colours.get-static('colour-text-very-light')};

@@ -1,14 +1,13 @@
-@use "sass:color";
-
-@use "../styles/mixins/colours";
+@use 'sass:color';
+@use '../styles/mixins/colours';
 
 .Contact {
     .ContactButton {
         max-width: 320px;
         margin-bottom: 5px;
-
         border: 1px solid #{colours.get-static('colour-button-standard')};
         border: 1px solid var(--colour-button-standard);
+
         @media print {
             border: 0;
         }
@@ -30,6 +29,7 @@
             path {
                 fill: #{colours.get-static('colour-button-standard')};
                 fill: var(--colour-button-standard);
+
                 @media print {
                     fill: #{colours.get-static('raw-colour-pure-black')};
                     fill: var(--raw-colour-pure-black);
@@ -40,7 +40,6 @@
         .Contact-text {
             padding: 0;
         }
-
     }
 
     .CrisisContactButton {

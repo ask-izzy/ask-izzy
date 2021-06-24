@@ -1,4 +1,4 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .HeaderBar {
     $text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
@@ -22,7 +22,6 @@
     .primary {
         min-height: 1em;
         margin: 15px 20px;
-
         font-size: 22px;
         font-weight: 500;
         text-shadow: $text-shadow;
@@ -36,7 +35,6 @@
     .secondary {
         min-height: 4em;
         margin: 15px 20px;
-
         font-size: 18px;
         font-weight: 400;
         line-height: 1.4;
@@ -51,7 +49,6 @@
                 color: var(--colour-text-very-light);
             }
         }
-
     }
 
     p {
@@ -71,7 +68,7 @@
         border-top: 3.5vw solid transparent;
         border-right: 100vw solid #{colours.get-static('raw-colour-pure-white')};
         border-right: 100vw solid var(--raw-colour-pure-white);
-        content: "";
+        content: '';
     }
 
     &.taperColourGrey::after {
@@ -111,7 +108,7 @@
                     #{colours.get-static('colour-banner-bg-overlay', 'HeaderBar')},
                     #{colours.get-static('colour-banner-bg-overlay', 'HeaderBar')}
                 ),
-                url("/public/static/images/banners/#{$banner-image}.png")
+                url('/public/static/images/banners/#{$banner-image}.png')
                 center
                 center;
             background:
@@ -119,7 +116,7 @@
                     var(--colour-banner-bg-overlay),
                     var(--colour-banner-bg-overlay)
                 ),
-                url("/public/static/images/banners/#{$banner-image}.png")
+                url('/public/static/images/banners/#{$banner-image}.png')
                 center
                 center;
             background-size: cover;

@@ -1,4 +1,4 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .Address {
     position: relative;
@@ -7,7 +7,6 @@
     .Address-wrapper {
         display: inline-block;
         width: 100%;
-
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
         font-weight: 500;
@@ -17,7 +16,6 @@
         position: absolute;
         top: -10px;
         left: -10px;
-
         width: 40px;
         height: 40px;
     }

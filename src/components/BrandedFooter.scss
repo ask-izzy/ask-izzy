@@ -1,4 +1,4 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .branding-footer-container {
     @include colours.define(
@@ -67,7 +67,6 @@
             &:hover {
                 text-decoration: underline;
             }
-
         }
 
         > div {
@@ -235,9 +234,11 @@
 
         > div {
             width: 100%;
+
             /* for IE */
             max-width: 550px;
             box-sizing: border-box;
+
             /* end for IE */
         }
 
@@ -278,10 +279,9 @@
             div.socials {
                 width: 100%;
                 margin: 20px 0;
-
                 border-top: #{colours.get-static('colour-primary-tint-2', 'branding-footer-container')} 1px solid;
-                border-bottom: #{colours.get-static('colour-primary-tint-2', 'branding-footer-container')} 1px solid;
                 border-top: var(--colour-primary-tint-2) 1px solid;
+                border-bottom: #{colours.get-static('colour-primary-tint-2', 'branding-footer-container')} 1px solid;
                 border-bottom: var(--colour-primary-tint-2) 1px solid;
                 break-before: unset;
             }

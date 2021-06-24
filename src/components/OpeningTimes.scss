@@ -1,4 +1,4 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .OpeningTimes {
     position: relative;
@@ -8,7 +8,6 @@
         position: absolute;
         top: -17px;
         left: -16px;
-
         width: 30px;
         height: 30px;
     }
@@ -43,5 +42,4 @@
             white-space: nowrap;
         }
     }
-
 }

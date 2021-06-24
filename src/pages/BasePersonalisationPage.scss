@@ -1,4 +1,4 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .PersonalisationPage {
     display: flex;
@@ -11,15 +11,12 @@
 
     .search {
         width: 100%;
-
         padding-top: 20px;
         padding-right: 20px;
         padding-bottom: 20px;
         padding-left: 20px;
-
         background-color: #{colours.get-static('colour-bg-standard-tint-2')};
         background-color: var(--colour-bg-standard-tint-2);
-
         box-sizing: border-box;
 
         input {
@@ -40,7 +37,6 @@
             display: block;
             width: 60px;
             height: 60px;
-
             margin-right: auto;
             margin-left: auto;
         }
@@ -54,9 +50,7 @@
 
         button {
             display: block;
-
             width: calc(100% - 40px);
-
             margin: 20px auto;
         }
     }
@@ -67,7 +61,6 @@
 
     .ClearResults {
         margin: 20px;
-
         color: #{colours.get-static('colour-text-mid')};
         color: var(--colour-text-mid);
         font-size: 16px;
@@ -136,12 +129,9 @@
 
         .primaryText {
             display: inline-block;
-
             width: auto;
             max-width: 70%;
-
             margin-right: 0.75ex;  /* leave one character spacing */
-
             color: #{colours.get-static('colour-text-mid')};
             color: var(--colour-text-mid);
         }
@@ -158,7 +148,6 @@
             &:hover {
                 text-decoration: none;
             }
-
         }
     }
 

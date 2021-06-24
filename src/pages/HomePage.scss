@@ -1,4 +1,4 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .HomePage {
     .notification {
@@ -34,7 +34,6 @@
                 color: #{colours.get-static('colour-link-visited')};
                 color: var(--colour-link-visited);
             }
-
         }
     }
 
@@ -48,7 +47,6 @@
             justify-content: flex-end;
         }
     }
-
 
     .HeaderBar {
         padding: 30px 20px calc(2vw + 28px);
@@ -97,18 +95,14 @@
 
         .searchWrapper {
             display: flex;
-
             align-items: center;
             justify-content: space-between;
             width: 100%;
-
             height: 19px;
             margin: auto;
-
             padding: 9px;
             padding-right: 0;
             padding-left: 0;
-
             border: 1px solid #{colours.get-static('raw-colour-pure-white')};
             border: 1px solid var(--raw-colour-pure-white);
             border-right: 0;
@@ -122,20 +116,14 @@
 
             input {
                 flex: 1 1 auto;
-
                 width: 2em;
-
                 margin: 0.5em 0.2em;
-
                 padding: 0;
-
                 padding-right: 10px;
                 border: 0;
-
                 border-radius: 5px 0 0 5px;
                 color: #{colours.get-static('colour-text-dark')};
                 color: var(--colour-text-dark);
-
                 -webkit-appearance: none;
 
                 &:focus {
@@ -144,15 +132,12 @@
             }
 
             button {
-                height: 39px;
-
+                height: 40px;
                 padding: 0 15px;
                 border: 0;
                 border-radius: 0 5px 5px 0;
-
                 border-top-right-radius: 3px;
                 border-bottom-right-radius: 3px;
-
                 font-size: 14px;
             }
         }

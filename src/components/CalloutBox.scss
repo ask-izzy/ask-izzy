@@ -1,4 +1,4 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .CalloutBox {
     &.askIzzyInfoBox {
@@ -89,6 +89,7 @@
             path {
                 fill: #{colours.get-static('raw-colour-pure-white')};
                 fill: var(--raw-colour-pure-white);
+
                 @media print {
                     fill: #{colours.get-static('raw-colour-pure-black')};
                     fill: var(--raw-colour-pure-black);

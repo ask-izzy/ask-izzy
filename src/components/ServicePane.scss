@@ -1,9 +1,8 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .ServicePane {
     color: #{colours.get-static('colour-text-dark')};
     color: var(--colour-text-dark);
-
     font-size: 14px;
     font-weight: light;
 
@@ -22,7 +21,6 @@
             display: block;
             width: 60px;
             height: 60px;
-
             margin-right: auto;
             margin-left: auto;
         }
@@ -132,7 +130,6 @@
                     overflow: auto;
                 }
             }
-
         }
     }
 

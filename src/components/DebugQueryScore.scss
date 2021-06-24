@@ -1,14 +1,13 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .DebugQueryScore {
     @include clearfix;
-    padding-left: 8px;
 
+    padding-left: 8px;
     font-size: 12px;
 
     & > .DebugQueryScore {
         margin-top: 5px;
-
         border-top: 1px solid #{colours.get-static('colour-text-mid')};
         border-top: 1px solid var(--colour-text-mid);
         border-left: 5px solid #{colours.get-static('colour-border-list-item')};
@@ -26,7 +25,6 @@
             border-top-color: var(--colour-text-dark);
             border-left-color: #{colours.get-static('colour-text-dark')};
             border-left-color: var(--colour-text-dark);
-
             color: #{colours.get-static('colour-border-list-item')};
             color: var(--raw-colour-rich-purple);
         }

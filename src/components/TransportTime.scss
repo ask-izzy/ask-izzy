@@ -1,15 +1,13 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .TransportTime {
     display: block;
     position: relative;
     padding-top: 10px;
     padding-bottom: 10px;
-
     font-size: 14px;
 
     &.compact {
-
         margin-bottom: 15px;
         padding-top: 0;
         padding-bottom: 0;
@@ -32,11 +30,6 @@
             width: 20px;
             height: 20px;
         }
-
-    }
-
-    .getDirections {
-        padding-top: 3px;
     }
 
     .Icon {
@@ -70,6 +63,7 @@
     }
 
     .getDirections {
+        padding-top: 3px;
         float: left;
         color: #{colours.get-static('colour-link')};
         color: var(--colour-link);
@@ -83,6 +77,5 @@
             color: #{colours.get-static('colour-link-visited')};
             color: var(--colour-link-visited);
         }
-
     }
 }

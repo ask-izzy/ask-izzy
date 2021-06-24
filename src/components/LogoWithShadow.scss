@@ -1,8 +1,7 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .LogoWithShadow {
     position: relative;
-
     width: 55px;
     height: 48px;
 
@@ -19,10 +18,8 @@
     .LogoLightIcon,
     .LogoShadowIcon {
         position: absolute;
-
         top: -4px;
         right: -5px;
-
         width: 48px;
         height: 48px;
 
@@ -35,7 +32,7 @@
 
     &.animate {
         @include teeter(0.6s, 0.1s, forwards);
+
         -webkit-transform-origin: 60% 50%;
     }
-
 }

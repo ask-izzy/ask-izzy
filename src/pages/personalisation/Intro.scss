@@ -1,4 +1,4 @@
-@use "../../styles/mixins/colours";
+@use '../../styles/mixins/colours';
 
 .IntroPage {
     display: flex;
@@ -59,7 +59,6 @@
                 }
 
                 a {
-
                     font-weight: bold;
                     text-decoration: none;
 
@@ -75,7 +74,7 @@
                         border: 1px solid var(--raw-colour-pure-black);
                         border-top: 0;
                         border-left: 0;
-                        content: "";
+                        content: '';
                     }
 
                     &:hover {
@@ -87,13 +86,13 @@
             &::before {
                 display: block;
                 flex: 1 1 auto;
-                content: "";
+                content: '';
             }
 
             &::after {
                 display: block;
                 flex: 2 1 auto;
-                content: "";
+                content: '';
             }
         }
     }

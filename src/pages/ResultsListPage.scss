@@ -1,4 +1,4 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .ResultsListPage {
     .progress {
@@ -10,7 +10,6 @@
             display: block;
             width: 60px;
             height: 60px;
-
             margin-right: auto;
             margin-left: auto;
         }
@@ -82,9 +81,7 @@
         margin-right: 16px;
         margin-bottom: 5px;
         margin-left: 16px;
-
         font-size: 18px;
         font-weight: 500;
     }
-
 }

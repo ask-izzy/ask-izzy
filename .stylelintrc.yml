@@ -4,38 +4,24 @@ extends:
     - stylelint-config-sass-guidelines
 plugins:
     - stylelint-scss
+ignoreFiles:
+    - "**/node_modules/**"
+    - "src/styles/fonts.scss"
+    - "src/styles/normalize.scss"
+    - "public/static/*"
+    - "public/components-catalog/**"
 rules:
-    # Grandfather in all existing style sins
-    # Please re-enable and resolve issues for these rules over time
-    indentation: null
-    string-quotes: null
-    max-empty-lines: null
-    at-rule-empty-line-before: null
-    no-extra-semicolons: null
+    indentation: 4
+    # The following style sins were grandfathered in. Please re-enable and
+    # resolve issues for these rules over time.
     function-parentheses-space-inside: null
-    block-closing-brace-empty-line-before: null
-    block-closing-brace-newline-after: null
     order/order: null
-    at-rule-disallowed-list: null
     max-nesting-depth: null
     order/properties-alphabetical-order: null
     selector-max-compound-selectors: null
-    declaration-empty-line-before: null
-    declaration-colon-newline-after: null
-    scss/dollar-variable-pattern: null
     selector-class-pattern: null
     scss/selector-no-redundant-nesting-selector: null
     selector-no-qualifying-type: null
-    block-opening-brace-space-before: null
-    color-hex-length: null
-    font-family-no-duplicate-names: null
     no-descending-specificity: null
     property-no-vendor-prefix: null
-    declaration-block-semicolon-newline-after: null
-    comment-empty-line-before: null
-    declaration-block-no-duplicate-properties: null
-    rule-empty-line-before: null
-    no-eol-whitespace: null
     media-feature-name-no-unknown: null
-    no-duplicate-selectors: null
-    property-no-unknown: null

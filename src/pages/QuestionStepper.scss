@@ -22,7 +22,6 @@
                 color: var(--colour-link);
             }
         }
-
     }
 
     .breadCrumbText {
@@ -82,7 +81,7 @@
                 left: 1px;
                 height: 22px;
                 margin-bottom: -5px;
-             }
+            }
         }
     }
 
@@ -108,13 +107,13 @@
                     color: var(--colour-link);
                 }
             }
-
         }
     }
 
     &.QuestionFlow {
         background-color: #{colours.get-static('colour-bg-standard-tint-1')};
         background-color: var(--colour-bg-standard-tint-1);
+
         .answerBox {
             height: 3em;
             padding: 15px;
@@ -123,18 +122,15 @@
         }
     }
 
-
     .editing {
         display: inline-block;
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
-
         font-style: italic;
 
         span {
             margin-left: 2px;
         }
-
     }
 
     .pipeOrComma {
@@ -144,7 +140,6 @@
         .editing {
             margin-right: 2px;
         }
-
     }
 
     .nonMultiMargin {

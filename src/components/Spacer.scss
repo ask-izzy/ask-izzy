@@ -1,10 +1,9 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 hr.Spacer {
     height: 1px;
     margin-right: -15px;
     margin-left: -15px;
-
     border: 0;
     background-color: #{colours.get-static('raw-colour-warm-gray')};
     background-color: var(--raw-colour-warm-gray);

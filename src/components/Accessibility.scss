@@ -1,4 +1,4 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .Accessibility {
     position: relative;
@@ -11,7 +11,6 @@
         position: absolute;
         top: 5px;
         left: -4px;
-
         width: 30px;
         height: 30px;
     }

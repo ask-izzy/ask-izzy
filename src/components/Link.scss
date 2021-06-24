@@ -1,4 +1,4 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .Link {
     color: #{colours.get-static('colour-link')};
@@ -12,5 +12,4 @@
     &:hover {
         text-decoration: none;
     }
-
 }

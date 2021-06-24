@@ -53,6 +53,7 @@ $scoped-static-colours: ();
     $lightness-decimal: null;
     $alpha: null;
     $static: null;
+
     @if type_of($colour) == color {
         $whole-colour: $colour;
         $hue: color.hue($colour);
@@ -61,8 +62,9 @@ $scoped-static-colours: ();
         $lightness-decimal: math.div(color.lightness($colour), 100%);
         $alpha: color.alpha($colour);
         $static: $colour;
+    }
 
-    } @else if type_of($colour) == map {
+    @else if type_of($colour) == map {
         $hue: map.get($colour, 'hue');
         $saturation: map.get($colour, 'saturation');
         $lightness: map.get($colour, 'lightness');
@@ -70,8 +72,9 @@ $scoped-static-colours: ();
         $alpha: map.get($colour, 'alpha');
         $whole-colour: hsla($hue, $saturation, $lightness, $alpha);
         $static: map.get($colour, 'static');
+    }
 
-    } @else if type_of($colour) == string {
+    @else if type_of($colour) == string {
         $whole-colour: var(--#{$colour});
         $hue: var(--#{$colour}-hue);
         $saturation: var(--#{$colour}-saturation);
@@ -79,8 +82,10 @@ $scoped-static-colours: ();
         $lightness-decimal: var(--#{$colour}-lightness-decimal);
         $alpha: var(--#{$colour}-alpha);
         $static: get-static($colour, $scope-key);
-    } @else {
-        @error "Trying to define colour of unknown type:", type_of($colour);
+    }
+
+    @else {
+        @error 'Trying to define colour of unknown type:', type_of($colour);
     }
 
     --#{$name}: #{$whole-colour};
@@ -89,12 +94,13 @@ $scoped-static-colours: ();
     --#{$name}-lightness: #{$lightness};
     --#{$name}-lightness-decimal: #{$lightness-decimal};
     --#{$name}-alpha: #{$alpha};
-    --dummy-variable: ""#{set-static(
-        $name,
-        $scope-key,
-        $static
-    )};
-};
+    --dummy-variable:
+        ''#{set-static(
+            $name,
+            $scope-key,
+            $static
+        )};
+}
 
 /**
  * Define a new colour variable in our sass object that we use for providing literal
@@ -115,25 +121,25 @@ $scoped-static-colours: ();
  *     some of our custom colour manipulation sass functions below).
  */
 @function set-static($name, $scope-key, $colour) {
-    @debug $scoped-static-colours;
     $scope: map.get($scoped-static-colours, $scope-key);
     $scope: map.merge($scope or (), ($name: $colour));
     $scoped-static-colours: map.set($scoped-static-colours, $scope-key, $scope) !global;
-    @debug $scoped-static-colours;
-    @return "";
-};
+
+    @return '';
+}
 
 // See description for "set-static". As the name suggests just does the opposite. If
 // no scope-key is provided it defaults to "global".
-@function get-static($name, $scope-key: 'global'){
-    @debug $scope-key, $name, map.get($scoped-static-colours, $scope-key, $name);
+@function get-static($name, $scope-key: 'global') {
     $colour: map.get($scoped-static-colours, $scope-key, $name)
         or map.get($scoped-static-colours, 'global', $name);
-    @if not $colour{
-        @error "Trying to use an undefined colour:", $name, $scope-key;
+
+    @if not $colour {
+        @error 'Trying to use an undefined colour:', $name, $scope-key;
     }
+
     @return $colour;
-};
+}
 
 // Lightens a given colour and returns an object with the components to
 // make a new (lightened) colour. We do this by getting the components
@@ -150,20 +156,21 @@ $scoped-static-colours: ();
 @function lighten($colour, $scope-key, $lightenAmount) {
     $hue: var(#{'--' + $colour + '-hue'});
     $saturation: var(#{'--' + $colour + '-saturation'});
-    $lightenAmountScale: if(
+    $lighten-amount-scale: if(
         $lightenAmount > 0,
-        "(1 - var(--#{$colour}-lightness-decimal))",
+        '(1 - var(--#{$colour}-lightness-decimal))',
         var(#{'--' + $colour + '-lightness-decimal'})
     );
     $lightness: calc(
         var(#{'--' + $colour + '-lightness'}) +
-        ( #{$lightenAmount} * #{$lightenAmountScale} )
+        ( #{$lightenAmount} * #{$lighten-amount-scale} )
     );
     $alpha: var(#{'--' + $colour + '-alpha'});
     $static: color.scale(
         get-static($colour, $scope-key),
         $lightness: $lightenAmount
     );
+
     @return (
         hue: $hue,
         saturation: $saturation,
@@ -171,7 +178,7 @@ $scoped-static-colours: ();
         alpha: $alpha,
         static: $static,
     );
-};
+}
 
 // Very similar to the lighten() function except for transiency instead of
 // lightness so see the description for that function for further details.
@@ -187,6 +194,7 @@ $scoped-static-colours: ();
         get-static($colour, $scope-key),
         $alpha: $alpha
     );
+
     @return (
         hue: $hue,
         saturation: $saturation,
@@ -194,4 +202,4 @@ $scoped-static-colours: ();
         alpha: $alpha,
         static: $static,
     );
-};
+}

@@ -1,4 +1,4 @@
-@use "../styles/mixins/colours";
+@use '../styles/mixins/colours';
 
 .ListItem {
     display: block;
@@ -8,7 +8,6 @@
     border-bottom: 1px solid var(--colour-border-list-item);
     text-decoration: none;
     cursor: pointer;
-
 
     /* remove default button styling */
     @at-root {
@@ -25,7 +24,6 @@
     &.taller {
         padding-top: 10px;
         padding-bottom: 10px;
-
         font-size: 18px;
 
         .leftIcon {
@@ -61,7 +59,6 @@
         & > .primaryText {
             color: #{colours.get-static('colour-text-dark')};
             color: var(--colour-text-dark);
-
             font-size: 16px;
             line-height: 150%;
 
@@ -72,18 +69,14 @@
                 &:hover {
                     text-decoration: none;
                 }
-
             }
-
         }
 
         & > .secondaryText {
             color: #{colours.get-static('colour-text-mid')};
             color: var(--colour-text-mid);
-
             font-size: 14px;
             line-height: 150%;
-
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
@@ -92,17 +85,13 @@
         & > .leftIcon,
         & > .rightIcon {
             position: absolute;
-
             top: 13px;
-
             height: 44px;
 
             input {
                 position: absolute;
-
                 top: 16px;
                 left: 16px;
-
                 z-index: -99;
             }
         }
