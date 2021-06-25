@@ -16,4 +16,13 @@ export default class LifeSkillsSubcategories extends BaseQuestion {
                 .append("supported vocational training"),
         },
     };
+
+    static breadcrumbAnswer(): string {
+        switch (this.answer) {
+        case "School":
+            return "Schools";
+        default:
+            return this.answer
+        }
+    }
 }

@@ -5,6 +5,15 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 import { append } from "../../iss/Search";
 import icons from "../../icons";
 import { resetDfvOptions } from "../../utils";
+import * as React from "react";
+
+const ATSI_BREADCRUMB_ICON = (
+    <span>
+        <icons.AboriginalFlag/>
+        <icons.TorresStraitIslandersFlag />
+    </span>
+)
+
 
 export default class Demographics extends BaseMultiQuestion {
     static title = "Personal";
@@ -52,5 +61,53 @@ export default class Demographics extends BaseMultiQuestion {
         }
 
         resetDfvOptions();
+    }
+
+
+    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): string {
+        if (this.answer && this.answer.length) {
+            for (let index: number = 0; index < this.answer.length; index++) {
+                if (breadcrumbAnswer === ATSI_BREADCRUMB_ICON &&
+                    // $FlowIgnore
+                    this.answer[index] ===
+                    "Aboriginal and/or Torres Strait Islander"
+                ) {
+                    return this.answer[index] ;
+                } else if (
+                    // $FlowIgnore
+                    this.breadcrumbAnswer()[index] === breadcrumbAnswer
+                ) {
+                    // $FlowIgnore
+                    return this.answer[index]
+                }
+            }
+        }
+        return "";
+    }
+
+    static breadcrumbAnswer(): ?Array<any> {
+        if (this.answer && this.answer.length) {
+            return this.answer.map((answer, index) => {
+                switch (answer) {
+                case "Aboriginal and/or Torres Strait Islander":
+                    return ATSI_BREADCRUMB_ICON;
+                case "Person seeking asylum":
+                    return "Seeking asylum"
+                case "Parole / recently released":
+                    return "On parole"
+                case "Have a disability":
+                    return "With disability"
+                case "Have pets":
+                    return "Help with pets"
+                case "Family with children":
+                    return "Families"
+                case "Escaping family violence":
+                    return "Escaping violence"
+                default:
+                    return answer
+                }
+            })
+        }
+        return this.answer
     }
 }

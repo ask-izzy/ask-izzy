@@ -1,5 +1,6 @@
 /* @flow */
 
+import * as React from "react";
 import BaseMultiQuestion from "./BaseMultiQuestion";
 
 import { append } from "../../iss/Search";
@@ -9,6 +10,16 @@ import storage from "../../storage";
 import Under18Page from "./Under18DomesticViolenceScreen";
 import LgbtiqaPage from "./LgbtiqaDomesticViolenceScreen";
 import UsingViolencePage from "./UsingViolenceScreen";
+
+const ATSI_BREADCRUMB_ICON = (
+    <span>
+        <icons.AboriginalFlag/>
+        <icons.TorresStraitIslandersFlag />
+    </span>
+)
+const LGBT_BREADCRUMB_ICON = (
+    <span><icons.DemographicLgbtiq /></span>
+)
 
 export default class DfvDemographics extends BaseMultiQuestion {
     static title = "Personal";
@@ -48,5 +59,47 @@ export default class DfvDemographics extends BaseMultiQuestion {
         storage.removeItem(Under18Page.defaultProps.name);
         storage.removeItem(LgbtiqaPage.defaultProps.name);
         storage.removeItem(UsingViolencePage.defaultProps.name);
+    }
+
+
+    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): string {
+        if (this.answer && this.answer.length) {
+            for (let index: number = 0; index < this.answer.length; index++) {
+                if (breadcrumbAnswer === ATSI_BREADCRUMB_ICON &&
+                    this.answer[index] ===
+                    "Aboriginal and/or Torres Strait Islander") {
+                    return this.answer[index];
+                } else if (breadcrumbAnswer === LGBT_BREADCRUMB_ICON &&
+                    this.answer[index] === "LGBTIQA+") {
+                    return this.answer[index];
+                } else if (
+                    // $FlowIgnore
+                    this.breadcrumbAnswer()[index] === breadcrumbAnswer) {
+                    // $FlowIgnore
+                    return this.answer[index]
+                }
+            }
+        }
+        return "";
+    }
+
+    static breadcrumbAnswer(): ?Array<any> {
+        if (this.answer && this.answer.length) {
+            return this.answer.map((answer, index) => {
+                switch (answer) {
+                case "Aboriginal and/or Torres Strait Islander":
+                    return ATSI_BREADCRUMB_ICON;
+                case "LGBTIQA+":
+                    return LGBT_BREADCRUMB_ICON;
+                case "Culturally and linguistically diverse":
+                    return "Culturally & linguistically diverse";
+                case "Person seeking asylum":
+                    return "Seeking asylum";
+                default:
+                    return answer;
+                }
+            })
+        }
+        return this.answer
     }
 }

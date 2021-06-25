@@ -18,4 +18,13 @@ export default class AddictionSubcategories extends BaseQuestion {
             "Speak to someone": append("counselling"),
         },
     };
+
+    static breadcrumbAnswer(): string {
+        switch (this.answer) {
+        case "Speak to someone":
+            return "Counselling";
+        default:
+            return this.answer
+        }
+    }
 }

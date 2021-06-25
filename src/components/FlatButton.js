@@ -9,6 +9,7 @@ type Props = {
     onClick: Function,
     disabled?: boolean,
     children?: any,
+    tabIndex?: ?number,
 }
 
 export default class FlatButton extends React.Component<Props, void> {
@@ -28,6 +29,7 @@ export default class FlatButton extends React.Component<Props, void> {
 
         return (
             <button
+                tabIndex={this.props.tabIndex || 0}
                 className={classnames("FlatButton", className)}
                 {...(rest: any)}
             >

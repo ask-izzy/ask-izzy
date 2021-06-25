@@ -16,4 +16,4 @@ Feature: Error information
         Then I should see "Sorry, I couldn't do this search."
         And I should see "An error occurred. Please try again."
         And I should see "Go back"
-        And I should not see "Edit Answers"
+        And I should see "See all and edit"

@@ -3,6 +3,7 @@ import React from "react";
 
 class ScreenReader extends React.Component<{
     children?: any,
+    ariaLabel?: ?string,
 }, void> {
     static sampleProps = {default: {
         children: (
@@ -13,6 +14,7 @@ class ScreenReader extends React.Component<{
     render() {
         return (
             <div
+                aria-label={this.props.ariaLabel}
                 className="ScreenReader"
             >
                 {this.props.children}

@@ -8,13 +8,22 @@ import Link from "../../components/Link";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import icons from "../../icons";
+import QuestionStepper from "../QuestionStepper";
+import {getCategory} from "../../constants/categories";
+import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
+import Category from "../../constants/Category";
 
 type Props = {
     onDoneTouchTap: Function,
     name: string,
 }
 
-class Intro extends Personalisation<Props, {}> {
+type State = {
+    showStepper: boolean,
+    category: ?Category,
+}
+
+class Intro extends Personalisation<Props, State> {
     static defaultProps = {
         name: "intro",
     };
@@ -23,6 +32,27 @@ class Intro extends Personalisation<Props, {}> {
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         return request;
+    }
+
+    constructor(props: Object) {
+        super(props);
+        this.state = {
+            showStepper: false,
+            category: undefined,
+        }
+    }
+
+
+    componentDidMount(): void {
+        const category = getCategory(
+            this.context.router.match.params.page
+        )
+        const searchAnswers = getSearchAnswers();
+        this.setState({
+            showStepper: category ? fetchAnswers(category).length > 0
+                : searchAnswers.length > 0,
+            category,
+        })
     }
 
     get seekingHelpWith(): string {
@@ -76,8 +106,21 @@ class Intro extends Personalisation<Props, {}> {
                             All of your answers are private and anonymous.
                         </div>
                     }
+                    taperColour={this.state.showStepper ? "LighterGrey"
+                        : "HeaderBar"}
                     bannerName={this.bannerName}
                 />
+                {
+                    this.state.showStepper ? (
+                        <QuestionStepper
+                            intro={true}
+                            onClear={() => this.setState(
+                                {showStepper: false}
+                            )}
+                            category={this.state.category}
+                        />
+                    ) : null
+                }
                 <div className="body">
                     <h3>
                         I&#39;m looking for help for

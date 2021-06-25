@@ -10,7 +10,7 @@ type Props = ListItemProps & {
     value?: string,
     checkedIcon: any,
     uncheckedIcon: any,
-
+    onFocus?: ?function,
     tabIndex?: number,
 }
 
@@ -39,6 +39,7 @@ export default class InputListItem extends React.Component<Props, void> {
                 className="InputListItem"
                 rootElement="button"
                 tabIndex={tabIndex || 0}
+                onFocus={this.props.onFocus}
                 {...{primaryText, secondaryText, leftIcon, onClick}}
                 rightIcon={
                     <span>

@@ -39,4 +39,17 @@ export default class Gender extends BaseQuestion {
             return "for people";
         }
     }
+
+    static breadcrumbAnswer(): string {
+        switch (this.answer) {
+        case "Male":
+            return "Men";
+        case "Female":
+            return "Women";
+        case "Trans and Gender Diverse":
+            return "Trans & Gender Diverse";
+        default:
+            return this.answer;
+        }
+    }
 }

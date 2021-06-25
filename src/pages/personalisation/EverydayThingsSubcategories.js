@@ -34,4 +34,15 @@ export default class EverydayThingsSubcategories extends BaseQuestion {
                 .append("-effectiveness"),
         },
     };
+
+    static breadcrumbAnswer(): string {
+        switch (this.answer) {
+        case "Keeping warm":
+            return "Blankets";
+        case "Food packages/parcels/vouchers" :
+            return "Food parcels/vouchers";
+        default:
+            return this.answer
+        }
+    }
 }

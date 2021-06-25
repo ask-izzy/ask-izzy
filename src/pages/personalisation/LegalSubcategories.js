@@ -34,4 +34,17 @@ export default class LegalSubcategories extends BaseQuestion {
 
         resetDfvOptions();
     }
+
+    static breadcrumbAnswer(): string {
+        switch (this.answer) {
+        case "Police and liaison officers":
+            return "Police & liaison officers";
+        case "Domestic & family violence issues":
+            return "Domestic & family violence";
+        case "Victims of crime compensation":
+            return "Victims of crime";
+        default:
+            return this.answer
+        }
+    }
 }

@@ -9,7 +9,8 @@ import type { ListItemProps } from "./ListItem";
 
 type Props = ListItemProps & {
     to?: string,
-    href?: string
+    href?: string,
+    onClick?: ?function,
 }
 
 export default class LinkListItem extends React.Component<Props, void> {

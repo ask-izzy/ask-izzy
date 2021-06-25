@@ -1,0 +1,120 @@
+
+.QuestionStepper {
+
+    .skipToSelections {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 96%;
+        margin: auto;
+        padding-top: 5px;
+
+        a {
+            &:visited {
+                color: $link-text-color;
+            }
+        }
+
+    }
+
+    .breadCrumbText {
+        display: inline-block;
+        color: $breadcrumb-text-colour;
+    }
+
+    .introText {
+        color: $brand-bg-dark;
+    }
+
+    .answerBox {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 96%;
+        margin: auto;
+
+        .ClearButton {
+            margin-right: 1em;
+            color: $link-text-color;
+            text-decoration: underline;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        .SvgIcon {
+            height: 1em;
+
+            &.DemographicLgbtiqIcon {
+                left: 1px;
+                height: 22px;
+                margin-bottom: -5px;
+             }
+        }
+    }
+
+    &.ResultsPage {
+        .answerBox {
+            padding: 10px;
+            line-height: 24px;
+        }
+
+        .EditAnswers {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 96%;
+            margin: auto;
+            padding-bottom: 15px;
+            font-size: large;
+
+            a {
+                &:visited {
+                    color: $link-text-color;
+                }
+            }
+
+        }
+    }
+
+    &.QuestionFlow {
+        background-color: $brand-bg-mid-lighter;
+
+        .answerBox {
+            height: 3em;
+            padding: 15px;
+            font-size: 14px;
+            line-height: 24px;
+        }
+    }
+
+
+    .editing {
+        display: inline-block;
+        color: $brand-bg-dark;
+        font-style: italic;
+
+        span {
+            margin-left: 2px;
+        }
+
+    }
+
+    .pipeOrComma {
+        color: $breadcrumb-comma-pipe-colour;
+
+        .editing {
+            margin-right: 2px;
+        }
+
+    }
+
+    .nonMultiMargin {
+        margin: 5px;
+    }
+}

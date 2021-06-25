@@ -15,6 +15,7 @@ $colour-grey: #f8f9f9;
     display: flex;
     position: fixed;
     flex-direction: row;
+    justify-content: space-between;
 
     @media print {
         display: none;

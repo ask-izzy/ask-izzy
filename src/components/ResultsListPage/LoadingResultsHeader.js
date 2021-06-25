@@ -5,13 +5,10 @@ import Link from "../Link"
 
 import HeaderBar from "../HeaderBar";
 import type Category from "../../constants/Category";
-
-import Gender from "../../pages/personalisation/Gender";
-import Age from "../../pages/personalisation/Age";
-import Location from "../../pages/personalisation/Location";
 import storage from "../../storage";
-import * as gtm from "../../google-tag-manager";
 import routerContext from "../../contexts/router-context";
+import {PersonalisationLink} from "../../pages/QuestionStepper.service";
+
 
 const HomeLink = () =>
     <Link
@@ -30,20 +27,26 @@ const LogoHeader = ({children}: Object) =>
     <div className="LogoHeader">
         {children}
     </div>;
-const trailingSlash = (path: string): string =>
-    `${path}${path.endsWith("/") ? "" : "/"}`;
 
-const PersonalisationLink = ({pathname}: Object) => (
-    <div className="change-personalisation-container">
-        <Link
-            className="change-personalisation"
-            to={`${trailingSlash(pathname)}personalise/summary`}
-            onClick={gtm.emit.bind(null, {event: "changeAnswers"})}
-        >
-            Edit Answers
-        </Link>
-    </div>
-);
+const formatResultsPageHeading = (title: string) => {
+    switch (title) {
+    case "finding work":
+        return "Showing services to help";
+    case "facilities":
+        return "Showing places and services with bathrooms";
+    case "something to do":
+        return "Showing community and leisure services";
+    case "technology":
+        return "Showing places to connect to the internet";
+    case "centrelink":
+        return "Showing Centrelink sites";
+    case "everyday things":
+        return "Showing services that provide everyday things";
+    default:
+        return `Showing ${title} services`;
+    }
+}
+
 
 type Props = {
     personalisationComponents: Array<Object>,
@@ -129,33 +132,24 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             );
         }
 
-        const servicesWord = meta.total_count === 1 ?
-            "service"
-            : "services";
-        const personalisations = [
-            Gender,
-            Age,
-            Location,
-        ].filter((component) =>
-            this.props.personalisationComponents.includes(component)
-        )
-            .map((component) => component.headingValue())
-        const count = meta.total_count > 20 ? "lots of" : meta.total_count;
-
         return (
             <React.Fragment>
                 <HeaderBar
                     className="LoadingResultsHeader"
                     primaryText={
-                        meta.total_count > 0 ?
-                            <LogoHeader>
-                                I found {count} {servicesWord}{" "}
-                                {personalisations.join(" ")}
-                            </LogoHeader>
-                            : <LogoHeader>
-                             Sorry, I couldn't find any results
-                             for {title.toLocaleLowerCase()}.
-                            </LogoHeader>
+                        <LogoHeader>
+                            <h1 style={{
+                                fontSize: "24pt",
+                            }}
+                            >
+                                {meta.total_count > 0 ?
+                                    formatResultsPageHeading(
+                                        title.toLocaleLowerCase()
+                                    )
+                                    : `Sorry, I couldn't find any results` +
+                                    ` for ${title.toLocaleLowerCase()}.`}
+                            </h1>
+                        </LogoHeader>
                     }
                     secondaryText={
                         <div>
@@ -164,7 +158,6 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                     }
                     bannerName={bannerName}
                 />
-                <PersonalisationLink {...location} />
             </React.Fragment>
         );
     }

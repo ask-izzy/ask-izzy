@@ -12,6 +12,10 @@ import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
+import QuestionStepper from "../QuestionStepper";
+import {getCategory} from "../../constants/categories";
+import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
+import Category from "../../constants/Category";
 
 export type Props = {
     name: string,
@@ -36,6 +40,10 @@ export type State = {
     windowHeight?: number,
     answers?: Set<string>,
     shouldRenderSafetyDetails?: boolean,
+    showStepper: boolean,
+    category: ?Category,
+    tabIndex: number,
+    listFocused: boolean,
 }
 
 class BaseQuestion extends Personalisation<Props, State> {
@@ -45,7 +53,23 @@ class BaseQuestion extends Personalisation<Props, State> {
         super(props);
         this.state = {
             selected: null, // set when the user makes a choice
+            showStepper: false,
+            category: undefined,
+            tabIndex: 0,
+            listFocused: false,
         };
+    }
+
+    componentDidMount(): void {
+        const category = getCategory(
+            this.context.router.match.params.page
+        )
+        const searchAnswers = getSearchAnswers();
+        this.setState({
+            showStepper: category ? fetchAnswers(category).length > 0
+                : searchAnswers.length > 0,
+            category,
+        })
     }
 
     get selected(): string {
@@ -90,6 +114,15 @@ class BaseQuestion extends Personalisation<Props, State> {
         }
 
         return answer;
+    }
+
+    /**
+     * A separate Answer return for the the breadcrumbs that can be overwritten
+     * Per question
+     * @returns {string} - returns the selected answer
+     */
+    static breadcrumbAnswer(): ?string | ?React.Node {
+        return this.answer;
     }
 
     /**
@@ -148,6 +181,10 @@ class BaseQuestion extends Personalisation<Props, State> {
         } else {
             return Object.keys(this.props.answers);
         }
+    }
+
+    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?any): string {
+        return "";
     }
 
     get question(): string {
@@ -226,6 +263,15 @@ class BaseQuestion extends Personalisation<Props, State> {
         return (
             <div>
                 {this.renderHeaderBar()}
+                {this.state.showStepper && (
+                    <QuestionStepper
+                        category={this.state.category}
+                        listFocused={this.state.listFocused}
+                        onTabIndex={(tabIndex) =>
+                            this.setState({tabIndex})
+                        }
+                    />
+                )}
                 <div className={listClassName}>
                     {this.answers.map((answer, index) =>
                         <InputListItem
@@ -233,13 +279,16 @@ class BaseQuestion extends Personalisation<Props, State> {
                             leftIcon={this.iconFor(answer)}
                             primaryText={answer}
                             secondaryText={this.answerDescFor(answer)}
+                            tabIndex={this.state.tabIndex + (index + 1)}
                             aria-label={answer}
                             type="radio"
                             checked={answer === selected}
                             value={answer}
                             onClick={this.onAnswerTouchTap.bind(this, answer)}
                             readOnly={true}
-
+                            onFocus={() => this.setState(
+                                {listFocused: true}
+                            )}
                             checkedIcon={
                                 <icons.RadioSelected className="big" />
                             }
@@ -270,6 +319,8 @@ class BaseQuestion extends Personalisation<Props, State> {
                 secondaryText={
                     this.props.byline
                 }
+                taperColour={this.state.showStepper ? "LighterGrey"
+                    : "HeaderBar"}
                 bannerName={this.bannerName}
             />
         );
@@ -280,6 +331,9 @@ class BaseQuestion extends Personalisation<Props, State> {
             <div>
                 <div className="done-button">
                     <FlatButton
+                        tabIndex={
+                            (this.state.tabIndex + this.answers.length) + 1
+                        }
                         className="text-link"
                         label="Skip"
                         onClick={this.props.onDoneTouchTap}

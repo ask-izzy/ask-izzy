@@ -3,6 +3,8 @@
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
 import { resetDfvOptions } from "../../utils";
+import icons from "../../icons";
+import * as React from "react";
 
 export default class CounsellingSubcategories extends BaseQuestion {
     static title = "Counselling";
@@ -29,5 +31,18 @@ export default class CounsellingSubcategories extends BaseQuestion {
         }
 
         resetDfvOptions();
+    }
+
+    static breadcrumbAnswer(): any {
+        switch (this.answer) {
+        case "Sexual identity (LGBTIQA+)":
+            return <span><icons.DemographicLgbtiq /></span>;
+        case "Scared in my relationship":
+            return "Family or domestic violence";
+        case "Find online counselling":
+            return "Online counselling";
+        default:
+            return this.answer
+        }
     }
 }
