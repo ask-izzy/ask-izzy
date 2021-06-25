@@ -18,7 +18,7 @@ Feature: Location search
         Carlton North       | VIC
         -------------------------------------------
 
-        When I click on option "Carlton"
+        When I click on "Carlton"
         Then search box should contain "Carlton, VIC"
         And the button "Done" should be enabled
 

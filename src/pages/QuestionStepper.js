@@ -23,6 +23,7 @@ type Props = {
     intro?: ?boolean,
     category: ?Category,
     results?: ?boolean,
+    noResults?: ?boolean,
     listFocused?: ?boolean,
     location?: ?string,
     onClear?: ?function,
@@ -46,6 +47,7 @@ function QuestionStepper(
         onClear,
         onTabIndex,
         listFocused,
+        noResults,
     }: Props): React.Node {
     const [currentAnswers, setCurrentAnswers] =
         React.useState<Array<any>, function>([])
@@ -122,13 +124,17 @@ function QuestionStepper(
         setAccessibility(false)
     }, [listFocused])
 
+    const getClassesNames = () => (
+        classnames(
+            "QuestionStepper",
+            results && "ResultsPage",
+            !results && !noResults && "QuestionFlow"
+        )
+    )
+
     return (
         <div
-            className={classnames(
-                "QuestionStepper",
-                results && "ResultsPage",
-                !results && "QuestionFlow"
-            )}
+            className={getClassesNames()}
             onKeyDown={(evt) => {
                 if (evt.key === "Tab") {
                     if (document.activeElement?.tabIndex &&
@@ -193,6 +199,7 @@ function QuestionStepper(
 QuestionStepper.defaultProps = {
     intro: false,
     results: false,
+    noResults: false,
     location: null,
     onClear: null,
     listFocused: false,

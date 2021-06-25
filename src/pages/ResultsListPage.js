@@ -15,8 +15,8 @@ import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 import ButtonListItem from "../components/ButtonListItem";
-import QuestionStepper from "./QuestionStepper";
 import SuggestionBox from "./SuggestionBox";
+import QuestionStepper from "./QuestionStepper";
 
 class ResultsListPage extends ResultsPage<> {
     render() {
@@ -48,7 +48,6 @@ class ResultsListPage extends ResultsPage<> {
             </DebugContainer>
 
             <LoadingResultsHeader
-                location={this.context.router.location}
                 title={this.title}
                 category={this.category}
                 meta={this.state.searchMeta || {total_count: 0}}
@@ -64,7 +63,8 @@ class ResultsListPage extends ResultsPage<> {
                 <div>
                     <QuestionStepper
                         category={this.category}
-                        results={true}
+                        results={!!this.state.searchResults}
+                        noResults={!this.state.searchResults}
                         location={this.context.router.location}
                     />
                 </div>

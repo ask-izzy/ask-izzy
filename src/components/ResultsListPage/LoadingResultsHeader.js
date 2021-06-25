@@ -40,7 +40,6 @@ type Props = {
     statusCode: number,
     loading: boolean,
     category?: ?Category,
-    location: {pathname: string},
     title: string,
     meta: {total_count: number},
 }
@@ -54,7 +53,6 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             statusCode,
             loading,
             category,
-            location,
             title,
             meta,
         } = this.props;
@@ -77,15 +75,19 @@ class LoadingResultsHeader extends React.Component<Props, void> {
         }
         const primaryText = category ? (
             <LogoHeader>
-                Sorry, we weren't able to find any
-                {" "}
-                services for this search.
+                <h1>
+                    Sorry, we weren't able to find any
+                    {" "}
+                    services for this search.
+                </h1>
             </LogoHeader>
         ) : (
             <LogoHeader>
-                Sorry, we weren't able to find any services
-                {" "}
-                matching your search for {title}.
+                <h1>
+                    Sorry, we weren't able to find any services
+                    {" "}
+                    matching your search for {title}.
+                </h1>
             </LogoHeader>
         )
 
@@ -117,10 +119,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                     className="LoadingResultsHeader"
                     primaryText={
                         <LogoHeader>
-                            <h1 style={{
-                                fontSize: "24pt",
-                            }}
-                            >
+                            <h1>
                                 {meta.total_count > 0 ?
                                     formatResultsPageHeading(
                                         title.toLocaleLowerCase()
