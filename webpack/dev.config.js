@@ -97,7 +97,9 @@ module.exports = {
             "es6-promise": "es6-promise",
         }),
 
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "[name]-[hash].css",
+        }),
 
         progress(),
 

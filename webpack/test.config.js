@@ -7,11 +7,17 @@ const assetsPath = path.join(__dirname, "../public/static");
 
 module.exports = {
     devtool: "source-map",
-    entry: "./test/support/environment-setup-entry",
+    entry: {
+        testharness: [
+            "./test/support/environment-setup-entry",
+        ],
+    },
     bail: true,
     output: {
         path: assetsPath,
-        filename: "testharness.js",
+        // We don't use a hash here since the output
+        // file is referenced directly by the tests
+        filename: "[name].js",
         publicPath: "/static/",
     },
     module: {
