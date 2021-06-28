@@ -112,52 +112,52 @@ class HtmlDocument extends React.Component<Object, void> {
                     <link
                         rel="apple-touch-icon"
                         sizes="114x114"
-                        href="/static/apple-touch-icon-114x114.png"
+                        href="/static/favicons/apple-touch-icon-114x114.png"
                     />
                     <link
                         rel="apple-touch-icon"
                         sizes="120x120"
-                        href="/static/apple-touch-icon-120x120.png"
+                        href="/static/favicons/apple-touch-icon-120x120.png"
                     />
                     <link
                         rel="apple-touch-icon"
                         sizes="144x144"
-                        href="/static/apple-touch-icon-144x144.png"
+                        href="/static/favicons/apple-touch-icon-144x144.png"
                     />
                     <link
                         rel="apple-touch-icon"
                         sizes="152x152"
-                        href="/static/apple-touch-icon-152x152.png"
+                        href="/static/favicons/apple-touch-icon-152x152.png"
                     />
                     <link
                         rel="apple-touch-icon"
                         sizes="180x180"
-                        href="/static/apple-touch-icon-180x180.png"
+                        href="/static/favicons/apple-touch-icon-180x180.png"
                     />
                     <link
                         rel="apple-touch-icon"
                         sizes="114x114"
-                        href="/static/apple-touch-icon-114x114.png"
+                        href="/static/favicons/apple-touch-icon-114x114.png"
                     />
                     <link
                         rel="apple-touch-icon"
                         sizes="120x120"
-                        href="/static/apple-touch-icon-120x120.png"
+                        href="/static/favicons/apple-touch-icon-120x120.png"
                     />
                     <link
                         rel="apple-touch-icon"
                         sizes="144x144"
-                        href="/static/apple-touch-icon-144x144.png"
+                        href="/static/favicons/apple-touch-icon-144x144.png"
                     />
                     <link
                         rel="apple-touch-icon"
                         sizes="152x152"
-                        href="/static/apple-touch-icon-152x152.png"
+                        href="/static/favicons/apple-touch-icon-152x152.png"
                     />
                     <link
                         rel="apple-touch-icon"
                         sizes="180x180"
-                        href="/static/apple-touch-icon-180x180.png"
+                        href="/static/favicons/apple-touch-icon-180x180.png"
                     />
                     <link
                         rel="icon"
