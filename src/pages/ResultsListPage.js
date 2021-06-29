@@ -63,8 +63,8 @@ class ResultsListPage extends ResultsPage<> {
                 <div>
                     <QuestionStepper
                         category={this.category}
-                        results={!!this.state.searchResults}
-                        noResults={!this.state.searchResults}
+                        resultsPage={true}
+                        results={this.state.searchResults || []}
                         location={this.context.router.location}
                     />
                 </div>
@@ -97,6 +97,10 @@ class ResultsListPage extends ResultsPage<> {
             return (
                 <SuggestionBox
                     category={this.category}
+                    searchTerm={this.title
+                        .replace("“", "")
+                        .replace("”", "")
+                    }
                     location={this.context.router.location}
                     results={this.state.searchResults || []}
                 />

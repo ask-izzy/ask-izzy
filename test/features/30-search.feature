@@ -36,7 +36,7 @@ Feature: Search
 
     Scenario: Search with zero results displays a different sentence
         When I search for ""zero results"" and press enter
-        Then I should see "Sorry, I couldn't find any results for “zero results”."
+        Then I should see "Sorry, we weren't able to find any services matching your search for “zero results”."
         And I should not see "View on a map"
 
     Scenario: Search returning an error returns a nice sentence

@@ -73,20 +73,13 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                 />
             );
         }
-        const primaryText = category ? (
+        const primaryText = (category?: ?Category) => (
             <LogoHeader>
                 <h1>
-                    Sorry, we weren't able to find any
-                    {" "}
-                    services for this search.
-                </h1>
-            </LogoHeader>
-        ) : (
-            <LogoHeader>
-                <h1>
-                    Sorry, we weren't able to find any services
-                    {" "}
-                    matching your search for {title}.
+                    {category ? "Sorry, we weren't able to find any " +
+                        "services for this search."
+                        : `Sorry, we weren't able to find any
+                        services matching your search for ${title}.`}
                 </h1>
             </LogoHeader>
         )
@@ -96,7 +89,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                 return (
                     <HeaderBar
                         className="LoadingResultsHeader"
-                        primaryText={primaryText}
+                        primaryText={primaryText(category)}
                         bannerName={bannerName}
                         alternateBackgroundColor={false}
                     />
@@ -106,7 +99,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             return (
                 <HeaderBar
                     className="LoadingResultsHeader"
-                    primaryText={primaryText}
+                    primaryText={primaryText(category)}
                     bannerName={bannerName}
                     alternateBackgroundColor={false}
                 />
@@ -124,8 +117,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                                     formatResultsPageHeading(
                                         title.toLocaleLowerCase()
                                     )
-                                    : `Sorry, I couldn't find any results` +
-                                    ` for ${title.toLocaleLowerCase()}.`}
+                                    : primaryText(category)}
                             </h1>
                         </LogoHeader>
                     }
