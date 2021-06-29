@@ -9,7 +9,8 @@ type Props = {
     setCurrentAnswers: function,
     onClear: function,
     currentAnswers: Array<AnswerType>,
-    intro?: ?boolean
+    intro?: ?boolean,
+    home?: ?boolean,
 }
 
 function QuestionStepperClearLocation(
@@ -18,6 +19,7 @@ function QuestionStepperClearLocation(
         onClear,
         currentAnswers,
         intro,
+        home,
     }: Props): React.Node | null {
 
     const [showClear, setShowClear] = React.useState(false)
@@ -59,7 +61,7 @@ function QuestionStepperClearLocation(
         hasLocation(currentAnswers)
     }, [])
 
-    if (showClear && intro) {
+    if (showClear && (intro || home)) {
         return (
             <span>
                 <ScreenReader

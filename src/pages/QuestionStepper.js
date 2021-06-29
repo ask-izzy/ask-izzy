@@ -22,6 +22,7 @@ import {Service} from "../iss";
 
 type Props = {
     intro?: ?boolean,
+    home?: ?boolean,
     category?: ?Category,
     resultsPage?: ?boolean,
     results?: Array<Service>,
@@ -42,6 +43,7 @@ const ConditionalSkipToChoice = ({show, ...props}) => (
 function QuestionStepper(
     {
         intro,
+        home,
         category,
         resultsPage,
         location,
@@ -164,6 +166,7 @@ function QuestionStepper(
                             key={`${answer.name}_${index}`}
                             answer={answer}
                             intro={intro}
+                            home={home}
                             onClear={onClear}
                             onTabIndex={(index) => setTabIndex(index)}
                             currentAnswers={currentAnswers}
@@ -184,6 +187,7 @@ function QuestionStepper(
                 <QuestionStepperClearLocation
                     onClear={onClear}
                     intro={intro}
+                    home={home}
                     currentAnswers={currentAnswers}
                     setCurrentAnswers={setCurrentAnswers}
                 />
@@ -202,6 +206,7 @@ QuestionStepper.defaultProps = {
     intro: false,
     resultsPage: false,
     results: [],
+    home: false,
     location: null,
     onClear: null,
     listFocused: false,

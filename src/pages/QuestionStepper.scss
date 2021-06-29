@@ -24,7 +24,7 @@
     }
 
     .introText {
-        color: $brand-bg-dark;
+        color: $brand-bg-mid;
     }
 
     .answerBox {
@@ -34,6 +34,11 @@
         justify-content: space-between;
         width: 96%;
         margin: auto;
+
+        .locationIcon {
+            display: flex;
+            align-items: center;
+        }
 
         .ClearButton {
             margin-right: 1em;
@@ -48,6 +53,17 @@
 
         .SvgIcon {
             height: 1em;
+
+            &.MapIcon {
+                width: 2em;
+                height: 25px;
+                margin-top: 5px;
+
+                /* to override the default fill colour */
+                path {
+                    fill: $brand-bg-mid;
+                }
+            }
 
             &.DemographicLgbtiqIcon {
                 left: 1px;

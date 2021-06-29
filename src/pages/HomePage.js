@@ -14,7 +14,6 @@ import routerContext from "../contexts/router-context";
 import AppBar from "../components/AppBar";
 import QuestionStepper from "./QuestionStepper";
 import Storage from "../storage";
-import Spacer from "../components/Spacer";
 
 type State = {
     location: ?string,
@@ -98,7 +97,8 @@ class HomePage extends React.Component<{}, State> {
 
                 <div className="body">
                     <form
-                        className="search"
+                        className={`search ${
+                            this.state.location ? "locationSet" : ""}`}
                         onSubmit={this.onSearchSubmit.bind(this)}
                     >
                         <label htmlFor="home-page-search"
@@ -135,9 +135,8 @@ class HomePage extends React.Component<{}, State> {
                     <div>
                         {this.state.location ?
                             <div>
-                                <Spacer className="locationSpacer"/>
                                 <QuestionStepper
-                                    intro={true}
+                                    home={true}
                                     onClear={() =>
                                         this.setState({location: null})}
                                 />

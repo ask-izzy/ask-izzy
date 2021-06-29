@@ -120,9 +120,12 @@ $bright-purple: #8a2be2;
     }
 
     .search {
-        padding: 1em;
-
+         padding: 1em;
         background-color: $brand-bg-mid-lighter;
+
+        &.locationSet {
+            padding-bottom: 0;
+        }
 
         .searchLabel {
             color: $brand-bg-dark;
@@ -190,7 +193,5 @@ $bright-purple: #8a2be2;
                 font-size: 14px;
             }
         }
-
     }
-
 }
