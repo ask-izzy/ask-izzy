@@ -11,6 +11,10 @@ import env from "./env";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import WriteStatsPlugin from "./utils/write-stats.js";
 
+const versionFilePath = "public/VERSION"
+const askIzzyBuildVersion = fs.existsSync(versionFilePath) &&
+    fs.readFileSync(versionFilePath, "utf-8").trim();
+
 const assetsPath = path.join(__dirname, "../public/static");
 const bannerImages = fs.readdirSync("./public/static/images/banners")
     .map(file => file.replace(/\.\w*$/, ""));
@@ -28,7 +32,7 @@ module.exports = {
     bail: true,
     output: {
         path: assetsPath,
-        filename: "[name]-[hash].js",
+        filename: `[name]-${askIzzyBuildVersion}.js`,
         chunkFilename: "[name]-[chunkhash].js",
         publicPath: "/static/",
     },
@@ -91,7 +95,9 @@ module.exports = {
             "es6-promise": "es6-promise",
         }),
 
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: `[name]-${askIzzyBuildVersion}.css`,
+        }),
 
         // Output bundles to JSON.
         new WriteStatsPlugin(),
