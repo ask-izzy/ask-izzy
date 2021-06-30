@@ -7,8 +7,9 @@ import { waitTillPageLoaded } from "../utils/page-loading"
 import categories from "../constants/categories"
 
 export default (props: Object) => {
-    const {location, match, navigateInProgress} = useRouterContext()
-    const locationPathAndSearch = location.pathname + location.search
+    const {location, match, navigateInProgress} = useRouterContext();
+    const locationPathAndSearch = location.pathname + location.search;
+    const {scrollReset} = match.props;
 
     React.useEffect(() => {
         // A page has requested to redirect as soon as it rendered. Don't count
@@ -21,7 +22,7 @@ export default (props: Object) => {
     }, [locationPathAndSearch]);
 
     React.useEffect(
-        () => registerScrollRestoration(location),
+        () => registerScrollRestoration(location, scrollReset),
         [locationPathAndSearch]
     )
 
@@ -85,9 +86,15 @@ the position. Since Izzy is a SPA app the standard browser scroll restoration
 doesn't work but in the future browsers will hopefully do this for us (Chrome
 already). But until then we've got to do it manually.
 */
-function registerScrollRestoration(location) {
+function registerScrollRestoration(location, scrollReset) {
     if (history.scrollRestoration) {
         history.scrollRestoration = "manual";
+    }
+
+    // When visiting some pages we should reset the scroll
+    // position to the top (Home page/Static pages)
+    if (scrollReset) {
+        window.scrollTo(0, 0)
     }
 
     const sessionKey = `scrollPosition-${location.key}`

@@ -110,12 +110,14 @@ const routes = <Routes>
             path=""
             element={<HomePage />}
             type={["Home"]}
+            scrollReset={true}
         />
         <Route
             path="/about"
             element={<DynamicPage />}
             title="About"
             type={["Static Page", "About"]}
+            scrollReset={true}
         />
         <Route
             path="/styleGuide/component/:componentName"
@@ -134,18 +136,21 @@ const routes = <Routes>
             element={<BushfireReliefPage />}
             title="Bushfire Support"
             type={["Static Page", "Bushfire Support"]}
+            scrollReset={true}
         />
         <Route
             path="/covid-19-support"
             element={<Covid19StaticPage />}
             title="COVID 19 Support"
             type={["Static Page", "COVID 19 Support"]}
+            scrollReset={true}
         />
         <Route
             path="/disability-advocacy-finder"
             element={<DisabilityAdvocacyFinder />}
             title="Disability Advocacy Finder"
             type={["Static Page", "Disability Advocacy Finder"]}
+            scrollReset={true}
         />
         <Redirect
             path="/donate"
@@ -156,24 +161,28 @@ const routes = <Routes>
             element={<DynamicPage />}
             title="Terms of use"
             type={["Static Page", "Terms of Use"]}
+            scrollReset={true}
         />
         <Route
             path="/online-safety"
             element={<DynamicPage />}
             title="Online Safety"
             type={["Static Page", "Online Safety"]}
+            scrollReset={true}
         />
         <Route
             path="/beta-info"
             element={<BetaInfoStaticPage />}
             title="About Ask Izzy Beta"
             type={["Static Page", "About Ask Izzy Beta"]}
+            scrollReset={true}
         />
         <Route
             path="/homeless-shelters"
             element={<DynamicPage />}
             title="Homeless shelters"
             type={["Static Page", "Homeless Shelters"]}
+            scrollReset={true}
         />
         <Route
             path="/food-info"
@@ -181,42 +190,49 @@ const routes = <Routes>
             title="Food Info"
             strict={false}
             type={["Static Page", "Food"]}
+            scrollReset={true}
         />
         <Route
             path="/using-ask-izzy"
             element={<DynamicPage />}
             title="Using Ask Izzy"
             type={["Static Page", "Using Ask Izzy"]}
+            scrollReset={true}
         />
         <Route
             path="/homeless-legal-services"
             element={<DynamicPage />}
             title="Homeless Legal Services"
             type={["Static Page", "Homeless Legal Services"]}
+            scrollReset={true}
         />
         <Route
             path="/homeless-financial-support"
             element={<DynamicPage />}
             title="Homeless financial support"
             type={["Static Page", "Homeless Financial Support"]}
+            scrollReset={true}
         />
         <Route
             path="/homeless-health-care"
             element={<DynamicPage />}
             title="Homeless Health Care"
             type={["Static Page", "Homeless Health Care"]}
+            scrollReset={true}
         />
         <Route
             path="/information"
             element={<DynamicPage />}
             title="Information"
             type={["Static Page", "Information"]}
+            scrollReset={true}
         />
         <Route
             path="/disability-organisations"
             element={<DynamicPage />}
             title="Disability Organisations"
             type={["Static Page", "Disability Organisations"]}
+            scrollReset={true}
         />
         <Route
             path="/search-help"
@@ -235,12 +251,14 @@ const routes = <Routes>
             element={<AddServicePage />}
             title="Add a service"
             type={["Static Page", "Add a Service"]}
+            scrollReset={true}
         />
         <Route
             path="/service/:slug"
             title="Service Details"
             element={<ServicePage />}
             type={["Service"]}
+            scrollReset={true}
         />
         <Redirect
             path="/category/:page"
