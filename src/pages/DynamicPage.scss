@@ -8,8 +8,17 @@
         text-align: center;
     }
 
-    img {
-        display: block;
-        margin: 0 auto;
+    p {
+        img {
+            margin: 0 auto;
+
+            &:only-child {
+                display: block;
+            }
+
+            &:nth-child(2) {
+                display: inline-block;
+            }
+        }
     }
 }
