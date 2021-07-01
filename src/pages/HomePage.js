@@ -133,7 +133,7 @@ class HomePage extends React.Component<{}, State> {
                         </div>
                     </form>
                     <div>
-                        {this.state.location ?
+                        {this.state.location &&
                             <div>
                                 <QuestionStepper
                                     home={true}
@@ -141,7 +141,7 @@ class HomePage extends React.Component<{}, State> {
                                     onClear={() =>
                                         this.setState({location: null})}
                                 />
-                            </div> : null}
+                            </div>}
                     </div>
                     <NavBar />
                 </div>
