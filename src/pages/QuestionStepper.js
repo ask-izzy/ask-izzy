@@ -30,6 +30,7 @@ type Props = {
     location?: ?string,
     onClear?: ?function,
     onTabIndex?: ?function,
+    initialTabIndex?: ?number,
 }
 
 const SCREEN_READER_MESSAGE = "Below are your currently selected answers," +
@@ -51,6 +52,7 @@ function QuestionStepper(
         onTabIndex,
         listFocused,
         results,
+        initialTabIndex,
     }: Props): React.Node {
     const [currentAnswers, setCurrentAnswers] =
         React.useState<Array<any>, function>([])
@@ -122,6 +124,9 @@ function QuestionStepper(
         onTabIndex?.(6 + answers.length)
     }, [])
 
+    const getClearLocationTabIndex = () => (
+        (initialTabIndex || INITIAL_TAB_INDEX) + 1
+    )
 
     React.useEffect(() => {
         setAccessibility(false)
@@ -141,9 +146,11 @@ function QuestionStepper(
             onKeyDown={(evt) => {
                 if (evt.key === "Tab") {
                     if (document.activeElement?.tabIndex &&
-                        document.activeElement.tabIndex > INITIAL_TAB_INDEX &&
+                        document.activeElement.tabIndex >
+                        (initialTabIndex || INITIAL_TAB_INDEX) &&
                         (document.activeElement.tabIndex <
-                            INITIAL_TAB_INDEX + currentAnswers.length
+                            (initialTabIndex || INITIAL_TAB_INDEX) +
+                            currentAnswers.length
                         )) {
                         setAccessibility(true)
                     }
@@ -188,6 +195,7 @@ function QuestionStepper(
                     onClear={onClear}
                     intro={intro}
                     home={home}
+                    tabIndex={getClearLocationTabIndex()}
                     currentAnswers={currentAnswers}
                     setCurrentAnswers={setCurrentAnswers}
                 />
@@ -210,6 +218,7 @@ QuestionStepper.defaultProps = {
     location: null,
     onClear: null,
     listFocused: false,
+    initialTabIndex: INITIAL_TAB_INDEX,
 }
 
 export default QuestionStepper

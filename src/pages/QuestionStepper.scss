@@ -42,6 +42,8 @@
 
         .ClearButton {
             margin-right: 1em;
+            border: 0;
+            background: none;
             color: $link-text-color;
             text-decoration: underline;
             cursor: pointer;

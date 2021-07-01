@@ -9,6 +9,7 @@ type Props = {
     setCurrentAnswers: function,
     onClear: function,
     currentAnswers: Array<AnswerType>,
+    tabIndex: number,
     intro?: ?boolean,
     home?: ?boolean,
 }
@@ -20,6 +21,7 @@ function QuestionStepperClearLocation(
         currentAnswers,
         intro,
         home,
+        tabIndex,
     }: Props): React.Node | null {
 
     const [showClear, setShowClear] = React.useState(false)
@@ -69,13 +71,14 @@ function QuestionStepperClearLocation(
                 >
                     Button to clear your current location
                 </ScreenReader>
-                <a
+                <button
+                    tabIndex={tabIndex}
                     className="ClearButton"
                     aria-label="Button to clear your current location"
                     onClick={clearLocation}
                 >
                     Clear saved location
-                </a>
+                </button>
             </span>
         )
     }

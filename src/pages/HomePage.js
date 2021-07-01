@@ -137,6 +137,7 @@ class HomePage extends React.Component<{}, State> {
                             <div>
                                 <QuestionStepper
                                     home={true}
+                                    initialTabIndex={5}
                                     onClear={() =>
                                         this.setState({location: null})}
                                 />
