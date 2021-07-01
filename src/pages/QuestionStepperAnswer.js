@@ -9,6 +9,7 @@ import {
 import routerContext from "../contexts/router-context";
 import {useContext} from "react";
 import type {AnswerType} from "./QuestionStepper.service";
+import icons from "../icons";
 
 type Props = {
     onClear: function,
@@ -18,11 +19,13 @@ type Props = {
     answer: AnswerType,
     currentAnswers: Array<AnswerType>,
     multiSelectedAnswer: Array<AnswerType>,
-    intro?: ?boolean
+    intro?: ?boolean,
+    home?: ?boolean,
 }
 
 function QuestionStepperAnswer({
     intro,
+    home,
     index,
     answer,
     currentAnswers,
@@ -41,6 +44,8 @@ function QuestionStepperAnswer({
         answer.name === router.match.params.subpage
     )
 
+    const MapIcon = () => home ? <icons.Map /> : null
+
     return (
         <>
             <span
@@ -48,7 +53,9 @@ function QuestionStepperAnswer({
                 onFocus={() => {
                     onTabIndex((INITIAL_TAB_INDEX + index + 1) + 1)
                 }}
+                className={home && "locationIcon"}
             >
+                <MapIcon />
                 <span
                     aria-label={formatAriaLabelText(answer, editing())}
                     className={

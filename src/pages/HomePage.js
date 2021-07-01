@@ -12,8 +12,14 @@ import BrandedFooter from "../components/BrandedFooter";
 import { resetDfvOptions } from "../utils";
 import routerContext from "../contexts/router-context";
 import AppBar from "../components/AppBar";
+import QuestionStepper from "./QuestionStepper";
+import Storage from "../storage";
 
-class HomePage extends React.Component<{}, void> {
+type State = {
+    location: ?string,
+}
+
+class HomePage extends React.Component<{}, State> {
 
     search: ?HTMLInputElement;
 
@@ -21,8 +27,15 @@ class HomePage extends React.Component<{}, void> {
 
     constructor(props: Object) {
         super(props);
-
+        this.state = {
+            location: null,
+        }
         resetDfvOptions();
+    }
+
+    componentDidMount() {
+        const location = Storage.getLocation();
+        location && this.setState({location})
     }
 
     onSearchSubmit(event: Event): void {
@@ -84,7 +97,8 @@ class HomePage extends React.Component<{}, void> {
 
                 <div className="body">
                     <form
-                        className="search"
+                        className={`search ${
+                            this.state.location ? "locationSet" : ""}`}
                         onSubmit={this.onSearchSubmit.bind(this)}
                     >
                         <label htmlFor="home-page-search"
@@ -118,6 +132,17 @@ class HomePage extends React.Component<{}, void> {
                             />
                         </div>
                     </form>
+                    <div>
+                        {this.state.location &&
+                            <div>
+                                <QuestionStepper
+                                    home={true}
+                                    initialTabIndex={5}
+                                    onClear={() =>
+                                        this.setState({location: null})}
+                                />
+                            </div>}
+                    </div>
                     <NavBar />
                 </div>
 

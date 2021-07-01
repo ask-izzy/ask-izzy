@@ -22,13 +22,15 @@ import {Service} from "../iss";
 
 type Props = {
     intro?: ?boolean,
-    category: ?Category,
+    home?: ?boolean,
+    category?: ?Category,
     resultsPage?: ?boolean,
     results?: Array<Service>,
     listFocused?: ?boolean,
     location?: ?string,
     onClear?: ?function,
     onTabIndex?: ?function,
+    initialTabIndex?: ?number,
 }
 
 const SCREEN_READER_MESSAGE = "Below are your currently selected answers," +
@@ -42,6 +44,7 @@ const ConditionalSkipToChoice = ({show, ...props}) => (
 function QuestionStepper(
     {
         intro,
+        home,
         category,
         resultsPage,
         location,
@@ -49,6 +52,7 @@ function QuestionStepper(
         onTabIndex,
         listFocused,
         results,
+        initialTabIndex,
     }: Props): React.Node {
     const [currentAnswers, setCurrentAnswers] =
         React.useState<Array<any>, function>([])
@@ -120,6 +124,9 @@ function QuestionStepper(
         onTabIndex?.(6 + answers.length)
     }, [])
 
+    const getClearLocationTabIndex = () => (
+        (initialTabIndex || INITIAL_TAB_INDEX) + 1
+    )
 
     React.useEffect(() => {
         setAccessibility(false)
@@ -139,9 +146,11 @@ function QuestionStepper(
             onKeyDown={(evt) => {
                 if (evt.key === "Tab") {
                     if (document.activeElement?.tabIndex &&
-                        document.activeElement.tabIndex > INITIAL_TAB_INDEX &&
+                        document.activeElement.tabIndex >
+                        (initialTabIndex || INITIAL_TAB_INDEX) &&
                         (document.activeElement.tabIndex <
-                            INITIAL_TAB_INDEX + currentAnswers.length
+                            (initialTabIndex || INITIAL_TAB_INDEX) +
+                            currentAnswers.length
                         )) {
                         setAccessibility(true)
                     }
@@ -164,6 +173,7 @@ function QuestionStepper(
                             key={`${answer.name}_${index}`}
                             answer={answer}
                             intro={intro}
+                            home={home}
                             onClear={onClear}
                             onTabIndex={(index) => setTabIndex(index)}
                             currentAnswers={currentAnswers}
@@ -184,6 +194,8 @@ function QuestionStepper(
                 <QuestionStepperClearLocation
                     onClear={onClear}
                     intro={intro}
+                    home={home}
+                    tabIndex={getClearLocationTabIndex()}
                     currentAnswers={currentAnswers}
                     setCurrentAnswers={setCurrentAnswers}
                 />
@@ -202,9 +214,11 @@ QuestionStepper.defaultProps = {
     intro: false,
     resultsPage: false,
     results: [],
+    home: false,
     location: null,
     onClear: null,
     listFocused: false,
+    initialTabIndex: INITIAL_TAB_INDEX,
 }
 
 export default QuestionStepper

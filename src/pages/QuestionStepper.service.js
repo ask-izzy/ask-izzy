@@ -89,7 +89,6 @@ export const fetchAnswers = (
 export const getSearchAnswers = (): Array<AnswerType> => {
     const answerList = [];
     const location = Storage.getLocation()
-    const areYouSafe = Storage.getItem("are-you-safe")
 
     if (location) {
         answerList.push({
@@ -97,26 +96,6 @@ export const getSearchAnswers = (): Array<AnswerType> => {
             answer: location,
             multi: false,
             selection: location,
-        })
-    }
-    if (areYouSafe) {
-        let answer;
-        switch (areYouSafe) {
-        case "Yes":
-            answer = "Safe";
-            break;
-        case "No":
-            answer = "Not safe";
-            break;
-        default:
-            answer = areYouSafe;
-            break;
-        }
-        answerList.push({
-            name: "areYouSafe",
-            answer: answer,
-            multi: false,
-            selection: areYouSafe,
         })
     }
     return answerList
