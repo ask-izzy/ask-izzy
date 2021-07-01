@@ -15,6 +15,7 @@ import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 import ButtonListItem from "../components/ButtonListItem";
+import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "./QuestionStepper";
 
 class ResultsListPage extends ResultsPage<> {
@@ -47,7 +48,6 @@ class ResultsListPage extends ResultsPage<> {
             </DebugContainer>
 
             <LoadingResultsHeader
-                location={this.context.router.location}
                 title={this.title}
                 category={this.category}
                 meta={this.state.searchMeta || {total_count: 0}}
@@ -63,7 +63,8 @@ class ResultsListPage extends ResultsPage<> {
                 <div>
                     <QuestionStepper
                         category={this.category}
-                        results={true}
+                        resultsPage={true}
+                        results={this.state.searchResults || []}
                         location={this.context.router.location}
                     />
                 </div>
@@ -83,9 +84,29 @@ class ResultsListPage extends ResultsPage<> {
                     results={this.state.searchResults || []}
                 />
                 {this.renderLoadMore()}
+                {this.renderSuggestionBox()}
             </div>
         </div>
     )
+
+    renderSuggestionBox() {
+        if (
+            !this.state.searchMeta?.next &&
+            !this.searchIsLoading
+        ) {
+            return (
+                <SuggestionBox
+                    category={this.category}
+                    searchTerm={this.title
+                        .replace("“", "")
+                        .replace("”", "")
+                    }
+                    location={this.context.router.location}
+                    results={this.state.searchResults || []}
+                />
+            )
+        }
+    }
 
     renderLoadMore() {
         if (this.state.searchMeta?.next) {

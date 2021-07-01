@@ -13,7 +13,5 @@ Feature: Error information
 
     Scenario: Search error
         When I search for "elasticsearch unavailable" and press enter
-        Then I should see "Sorry, I couldn't do this search."
-        And I should see "An error occurred. Please try again."
-        And I should see "Go back"
-        And I should see "See all and edit"
+        Then I should see "Sorry, we weren't able to find any services matching your search for “elasticsearch unavailable”."
+        And I should not see "See all and edit"

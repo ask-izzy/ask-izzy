@@ -219,6 +219,12 @@ const routes = <Routes>
             type={["Static Page", "Disability Organisations"]}
         />
         <Route
+            path="/search-help"
+            element={<DynamicPage />}
+            title="Ask Izzy search help"
+            type={["Static Page", "Ask Izzy search help"]}
+        />
+        <Route
             path="/not-found"
             element={<NotFoundStaticPage />}
             title="Page not found"

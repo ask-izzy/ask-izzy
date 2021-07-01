@@ -18,11 +18,13 @@ import SkipToChoices from "./SkipToChoices";
 import QuestionStepperAnswer from "./QuestionStepperAnswer";
 import QuestionStepperClearLocation from "./QuestionStepperClearLocation";
 import _ from "underscore";
+import {Service} from "../iss";
 
 type Props = {
     intro?: ?boolean,
     category: ?Category,
-    results?: ?boolean,
+    resultsPage?: ?boolean,
+    results?: Array<Service>,
     listFocused?: ?boolean,
     location?: ?string,
     onClear?: ?function,
@@ -41,11 +43,12 @@ function QuestionStepper(
     {
         intro,
         category,
-        results,
+        resultsPage,
         location,
         onClear,
         onTabIndex,
         listFocused,
+        results,
     }: Props): React.Node {
     const [currentAnswers, setCurrentAnswers] =
         React.useState<Array<any>, function>([])
@@ -122,13 +125,17 @@ function QuestionStepper(
         setAccessibility(false)
     }, [listFocused])
 
+    const getClassesNames = () => (
+        classnames(
+            "QuestionStepper",
+            resultsPage && "ResultsPage",
+            !resultsPage && "QuestionFlow"
+        )
+    )
+
     return (
         <div
-            className={classnames(
-                "QuestionStepper",
-                results && "ResultsPage",
-                !results && "QuestionFlow"
-            )}
+            className={getClassesNames()}
             onKeyDown={(evt) => {
                 if (evt.key === "Tab") {
                     if (document.activeElement?.tabIndex &&
@@ -142,7 +149,7 @@ function QuestionStepper(
             }}
         >
             <ConditionalSkipToChoice
-                show={!results && Accessibility}
+                show={!resultsPage && Accessibility}
                 tabIndex={tabIndex}
                 setAccessibility={setAccessibility}
             />
@@ -181,18 +188,20 @@ function QuestionStepper(
                     setCurrentAnswers={setCurrentAnswers}
                 />
             </div>
-            {results && location && currentAnswers.length ? (
-                <div className="EditAnswers">
-                    <PersonalisationLink {...location}/>
-                </div>
-            ) : null}
+            {(resultsPage && results && results.length) &&
+            location && currentAnswers.length ? (
+                    <div className="EditAnswers">
+                        <PersonalisationLink {...location}/>
+                    </div>
+                ) : null}
         </div>
     )
 }
 
 QuestionStepper.defaultProps = {
     intro: false,
-    results: false,
+    resultsPage: false,
+    results: [],
     location: null,
     onClear: null,
     listFocused: false,

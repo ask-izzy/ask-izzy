@@ -1,24 +1,10 @@
 /* @flow */
 
-import React from "react";
-import Link from "../Link"
+import * as React from "react";
 
 import HeaderBar from "../HeaderBar";
 import type Category from "../../constants/Category";
-import storage from "../../storage";
 import routerContext from "../../contexts/router-context";
-import {PersonalisationLink} from "../../pages/QuestionStepper.service";
-
-
-const HomeLink = () =>
-    <Link
-        className="homeLink"
-        to="/"
-        onClick={storage.clear}
-    >Go back</Link>;
-
-const ErrorMessage = ({children}: Object) =>
-    <p className="errorMessage">{children}</p>;
 
 const InfoMessage = (category: Object) =>
     <div>{category.info}</div>;
@@ -54,7 +40,6 @@ type Props = {
     statusCode: number,
     loading: boolean,
     category?: ?Category,
-    location: {pathname: string},
     title: string,
     meta: {total_count: number},
 }
@@ -68,7 +53,6 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             statusCode,
             loading,
             category,
-            location,
             title,
             meta,
         } = this.props;
@@ -89,27 +73,23 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                 />
             );
         }
+        const primaryText = (category?: ?Category) => (
+            <LogoHeader>
+                <h1>
+                    {category ? "Sorry, we weren't able to find any " +
+                        "services for this search."
+                        : `Sorry, we weren't able to find any
+                        services matching your search for ${title}.`}
+                </h1>
+            </LogoHeader>
+        )
 
         if (error) {
-            const primaryText = (
-                <LogoHeader>
-                    Sorry, I couldn't do this search.
-                </LogoHeader>
-            )
-
             if (statusCode === 402) {
                 return (
                     <HeaderBar
                         className="LoadingResultsHeader"
-                        primaryText={primaryText}
-                        secondaryText={
-                            <div>
-                                <ErrorMessage>{error}</ErrorMessage>
-                                <HomeLink />
-                                {" "}
-                                <PersonalisationLink {...location} />
-                            </div>
-                        }
+                        primaryText={primaryText(category)}
                         bannerName={bannerName}
                         alternateBackgroundColor={false}
                     />
@@ -119,13 +99,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             return (
                 <HeaderBar
                     className="LoadingResultsHeader"
-                    primaryText={primaryText}
-                    secondaryText={
-                        <div>
-                            <ErrorMessage>{error}</ErrorMessage>
-                            <HomeLink />
-                        </div>
-                    }
+                    primaryText={primaryText(category)}
                     bannerName={bannerName}
                     alternateBackgroundColor={false}
                 />
@@ -138,16 +112,12 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                     className="LoadingResultsHeader"
                     primaryText={
                         <LogoHeader>
-                            <h1 style={{
-                                fontSize: "24pt",
-                            }}
-                            >
+                            <h1>
                                 {meta.total_count > 0 ?
                                     formatResultsPageHeading(
                                         title.toLocaleLowerCase()
                                     )
-                                    : `Sorry, I couldn't find any results` +
-                                    ` for ${title.toLocaleLowerCase()}.`}
+                                    : primaryText(category)}
                             </h1>
                         </LogoHeader>
                     }
