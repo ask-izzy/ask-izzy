@@ -44,7 +44,10 @@ export default class BaseLogoWithTextBox extends React.Component<Props, void> {
                     <div className={"Instruction"}>
                         { this.props.body }
                     </div>
-                    <Link to={this.props.path}>
+                    <Link
+                        to={this.props.path}
+                        onClick={(evt) => evt.preventDefault()}
+                    >
                         Learn More
                         <div
                             className={"Chevron"}
