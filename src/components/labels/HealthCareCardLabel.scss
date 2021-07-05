@@ -1,10 +1,13 @@
+@use '../../styles/mixins/colours';
+
 .HealthCareCardLabel {
-    background-color: $label-health-care-card;
-    color: $black;
+    background-color: green;
+    color: #{colours.get-static('raw-colour-pure-white')};
+    color: var(--raw-colour-pure-white);
 
     &.hasDescription {
         &:hover {
-            background-color: $label-health-care-card;
+            background-color: green;
         }
     }
 

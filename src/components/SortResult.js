@@ -4,6 +4,7 @@ import * as React from "react"
 import Dropdown from "./Dropdown";
 import Category from "../constants/Category";
 import type {SortType} from "./SortResult.service";
+import Storage from "../storage";
 
 const DEFAULT_OPTIONS: Array<SortType> = [
     {
@@ -59,8 +60,20 @@ function SortResult(
     );
 
     React.useEffect(() => {
+        const newOptions = [...options]
+        const location = Storage.getLocation();
+        if (location) {
+            const locationArr = location.replace(" ", "").split(",");
+            const state = locationArr[1];
+            newOptions.push({
+                key: "catchment",
+                value: state,
+                name: "Nearest to me",
+                time: null,
+            })
+        }
         category?.sortingOptions && setOptions(
-            options.concat(category.sortingOptions)
+            newOptions.concat(category.sortingOptions)
         );
     }, []);
 

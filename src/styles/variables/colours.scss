@@ -110,6 +110,12 @@ $lightness-button-hover: 10%;
         colours.lighten('raw-colour-pure-white', 'global', -54%),
     );
 
+    @include colours.define(
+        'colour-label-standard-hover',
+        'global',
+        colours.lighten('raw-colour-slate-gray', 'global', -34%)
+    );
+
 
     /* Text */
     @include colours.define('colour-text-dark', 'global', 'raw-colour-slate-gray');

@@ -75,6 +75,7 @@
             min-width: 0; /* needed for force flex to collapse this if content is wider than the current space */
             padding-top: 16px;
             padding-bottom: 16px;
+            flex-direction: column;
 
             & > .primaryText {
                 color: #{colours.get-static('colour-text-dark')};

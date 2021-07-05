@@ -22,6 +22,11 @@ const DEFAULT_OPTIONS:Array<SortType> = [
         name: "State wide",
     },
     {
+        key: "catchment",
+        value: true,
+        name: "In my area",
+    },
+    {
         key: "healthcare_card_holders",
         value: true,
         name: "Health care card",

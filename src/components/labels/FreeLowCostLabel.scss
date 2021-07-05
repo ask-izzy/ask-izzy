@@ -1,6 +1,10 @@
+@use '../../styles/mixins/colours';
+
 .FreeLowCostLabel {
-    background-color: $icon-fg-color;
-    color: $white;
+    background-color: #{colours.get-static('colour-button-standard')};
+    background-color: var(colour-button-standard);
+    color: #{colours.get-static('raw-colour-pure-white')};
+    color: var(--raw-colour-pure-white);
 
     .labelDesc {
         transform: translate(-5%);
@@ -8,7 +12,8 @@
 
     &.hasDescription {
         &:hover {
-            background-color: $icon-fg-color-highlight;
+            background-color: var(--colour-button-standard-hover);
+            background-color: #{colours.get-static('colour-button-standard-hover')};
         }
     }
 }
