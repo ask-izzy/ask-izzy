@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Dropdown from "./Dropdown";
-import icons from "../icons";
 import Category from "../constants/Category";
 import type {SortType} from "./SortResult.service";
 
@@ -42,14 +41,14 @@ const DEFAULT_OPTIONS: Array<SortType> = [
 type Props = {
     callback: function,
     category: ?Category,
-    loading?: ?boolean,
+    titlePosition: string,
 }
 
 function SortResult(
     {
         callback,
         category,
-        loading,
+        titlePosition,
     }: Props): React.Node {
 
     const [selection, setSelection] = React.useState<SortType>(
@@ -68,21 +67,13 @@ function SortResult(
 
     return (
         <div className="SortResult">
-            <div className="sentence">
-                Sorting by:
-                <div style={{fontWeight: "500"}}>
-                    {selection.key ? selection.name : "General sort"}
-                </div>
-            </div>
-            <div>
-                {loading && <icons.Loading className="big" />}
-            </div>
             <Dropdown
                 onChange={(option) => {
                     setSelection(option);
                     callback(option);
                 }}
                 title="Order By"
+                titlePosition={titlePosition}
                 selection={selection}
                 options={options}
             />

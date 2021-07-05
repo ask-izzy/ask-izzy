@@ -9,6 +9,7 @@ type Props = {
     options: Array<SortType>,
     onChange: function,
     title: string,
+    titlePosition: string,
 }
 
 function Dropdown(
@@ -17,6 +18,7 @@ function Dropdown(
         options,
         onChange,
         title,
+        titlePosition,
     }: Props): React.Node {
 
     const [showOptions, setShowOptions] = React.useState<boolean>(false);
@@ -50,7 +52,7 @@ function Dropdown(
 
     return (
         <div className="Dropdown">
-            <div className="title">
+            <div className={`title ${titlePosition}`}>
                 {title}
             </div>
             <div>

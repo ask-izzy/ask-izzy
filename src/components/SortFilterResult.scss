@@ -1,4 +1,11 @@
 .SortFilterResult {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 10px solid $brand-bg-light;
+    background-color: $brand-bg-light;
+
     &.sticky {
         position: fixed;
         top: 2em;

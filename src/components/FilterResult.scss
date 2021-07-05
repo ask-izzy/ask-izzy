@@ -1,15 +1,3 @@
 .FilterResult {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     padding: 1em;
-    border-top: 10px solid $brand-bg-light;
-    background-color: $brand-bg-light;
-
-
-    .sentence {
-        align-self: center;
-        color: $brand-text-dark;
-        font-size: 18px;
-    }
 }

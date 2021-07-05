@@ -4,6 +4,7 @@ import * as React from "react"
 import SortResult from "./SortResult";
 import FilterResult from "./FilterResult";
 import Category from "../constants/Category";
+import icons from "../icons";
 
 
 type Props = {
@@ -48,14 +49,18 @@ function SortFilterResult(
             ref={ref}
         >
             <SortResult
+                titlePosition="left"
                 category={category}
                 callback={(orderBy) => {
                     orderByCallback(orderBy)
                 }}
             />
+            <div>
+                {loading && <icons.Loading className="big" />}
+            </div>
             <FilterResult
+                titlePosition="right"
                 category={category}
-                loading={loading}
                 callback={(filterBy) => {
                     filterByCallback(filterBy)
                 }}

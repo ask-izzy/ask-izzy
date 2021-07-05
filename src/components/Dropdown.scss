@@ -6,7 +6,15 @@
     .title {
         margin: 5px 0;
         color: $link-text-color;
-        text-align: right;
+
+        &.left {
+            text-align: left;
+        }
+
+        &.right {
+            text-align: right;
+        }
+
     }
 
     .optionSelect {
