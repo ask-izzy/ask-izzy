@@ -216,31 +216,22 @@ export default class BrandedFooter
                 </div>
                 <div className="socials">
                     <span>Find us on:</span>
-                    <ul>
-                        <li>
-                            <Link
-                                to="https://www.facebook.com/askizzyau"
-                                className="flex-align"
-                            >
-                                <icons.Facebook
-                                    className="inline-icon inline-block-icon"
-                                />
-                                <span style={{display: "none"}}>
-                                    Ask Izzy Facebook page
-                                </span>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="https://www.instagram.com/askizzyau/"
-                                className="flex-align"
-                            >
-                                <icons.Instagram
-                                    className="inline-icon inline-block-icon"
-                                />
-                            </Link>
-                        </li>
-                    </ul>
+                    <Link
+                        to="https://www.facebook.com/askizzyau"
+                        className="flex-align"
+                    >
+                        <icons.Facebook
+                            className="inline-icon inline-block-icon"
+                        />
+                    </Link>
+                    <Link
+                        to="https://www.instagram.com/askizzyau/"
+                        className="flex-align"
+                    >
+                        <icons.Instagram
+                            className="inline-icon inline-block-icon"
+                        />
+                    </Link>
                 </div>
                 <div className="for-service-providers">
                     <h1>For Service Providers</h1>

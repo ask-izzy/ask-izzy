@@ -144,15 +144,8 @@ $container-spacing: 20px;
                 margin: 5px;
             }
 
-            ul {
-                display: inline-block;
-                margin: 5px;
-
-                li {
-                    display: inline-block;
-                    margin: 5px;
-                    vertical-align: middle;
-                }
+            a {
+                text-decoration: none;
             }
         }
 
