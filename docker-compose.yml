@@ -10,6 +10,9 @@ services:
             # Pallet
             DEVNAME: docker
             ENVIRONMENT: dev
+
+            # Ask Izzy
+            STRAPI_URL: "https://cms-askizzy.docker.dev"
             SCREENSHOT_FAILURES: 1
             PAUSE_AFTER_FAIL: 1
         ports:

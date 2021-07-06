@@ -6,29 +6,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 VERSION="$(cat public/VERSION)"
-STRAPI_URL=${STRAPI_URL:-}
 PROXY_DOMAINS=${PROXY_DOMAINS:-}
-
-# Set Strapi url based on env.
-if [ -z "$STRAPI_URL" ]; then
-	if [ "$ENVIRONMENT" = "prod" ]; then
-		if [ "$SITE_DOMAIN" = "beta.askizzy.org.au" ]; then
-			STRAPI_URL="https://cms-uat.askizzy.org.au"
-		else
-			STRAPI_URL="https://cms.askizzy.org.au"
-		fi
-	fi
-	if [ "$ENVIRONMENT" = "staging" ]; then
-		STRAPI_URL="https://cms-uat.askizzy.org.au"
-	fi
-	if [ "$ENVIRONMENT" = "test" ]; then
-		STRAPI_URL="https://cms-askizzy-test.docker.dev"
-	fi
-	if [ "$ENVIRONMENT" = "dev" ] || [ "$ENVIRONMENT" = "development" ]; then
-		STRAPI_URL="https://cms-askizzy.docker.dev"
-	fi
-fi
-
 
 if [ -z "$PROXY_DOMAINS" ]; then
     if [ "$ENVIRONMENT" = "prod" ] || [ "$ENVIRONMENT" = "staging" ]; then
@@ -106,7 +84,7 @@ PROXY_EXCLUDED_DOMAINS="[
 cat <<JSON
 window.ISS_URL = "$ISS_URL";
 window.GOOGLE_API_KEY = "$GOOGLE_API_KEY";
-window.GOOGLE_ANALYTICS_ID = "${GOOGLE_ANALYTICS_ID:=}";
+window.GOOGLE_ANALYTICS_URL = "${GOOGLE_ANALYTICS_URL:=}";
 window.GOOGLE_TAG_MANAGER_ID = "${GOOGLE_TAG_MANAGER_ID:=}";
 window.GOOGLE_TAG_MANAGER_AUTH = "${GOOGLE_TAG_MANAGER_AUTH:=}";
 window.GOOGLE_TAG_MANAGER_ENV = "${GOOGLE_TAG_MANAGER_ENV:=}";
