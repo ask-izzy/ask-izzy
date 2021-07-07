@@ -169,33 +169,25 @@ export default class BrandedFooter
                     </Link>
                 </div>
                 <div className="support-links">
-                    <ul>
-                        <li>
-                            <Link to={donateLink}>
-                                <icons.Heart
-                                    className="small"
-                                />
-                                <div>
-                                    Donate to us
-                                </div>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to={
-                                    `mailto:${config.default.siteMail}` +
-                                    `?subject=${"Ask Izzy - Feedback"}`
-                                }
-                            >
-                                <icons.Chat
-                                    className="small"
-                                />
-                                <div>
-                                    Leave feedback
-                                </div>
-                            </Link>
-                        </li>
-                    </ul>
+                    <Link to={donateLink}>
+                        <icons.Heart />
+                        <div>
+                            Donate to us
+                        </div>
+                    </Link>
+                    <Link
+                        to={
+                            `mailto:${config.default.siteMail}` +
+                            `?subject=${"Ask Izzy - Feedback"}`
+                        }
+                    >
+                        <icons.Chat
+                            className="small"
+                        />
+                        <div>
+                            Leave feedback
+                        </div>
+                    </Link>
                 </div>
                 <div className="supporters">
                     Ask Izzy founding partners:<br />

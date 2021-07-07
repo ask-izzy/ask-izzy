@@ -90,14 +90,12 @@ class HomePage extends React.Component<{}, State> {
                     >
                         <label htmlFor="home-page-search"
                             className="searchLabel"
-                            aria-label="What do you need help with?"
                         >
                             <h4>What do you need help with?</h4>
                         </label>
                         <div className="searchWrapper">
                             <label
                                 htmlFor="home-page-search"
-                                aria-label="Search"
                             >
                                 <icons.Search
                                     className={"searchIcon medium middle"}
@@ -110,7 +108,6 @@ class HomePage extends React.Component<{}, State> {
                                     this.search = element;
                                 }}
                                 type="search"
-                                aria-label="Search"
                                 defaultValue={storage.getSearch()}
                             />
                             <FlatButton
