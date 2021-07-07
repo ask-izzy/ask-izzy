@@ -11,7 +11,6 @@ import {
     useParams,
     generatePath,
 } from "react-router-dom";
-import {titleize} from "underscore.string";
 
 // If you import these after the others,
 // babel decides the navbar doesn't really
@@ -38,25 +37,6 @@ import {
     InjectRouterContext,
     useRouterContext,
 } from "./contexts/router-context"
-
-export function makeTitle(route: string, params: Object): string {
-    let unslug = (str) =>
-        str.replace("-", " ").split(" ").map(titleize).join(" ");
-
-    let title = route || "";
-
-    Object.keys(params).forEach((key) => {
-        // FIXME This is a hack. Rewrite it when we're not about to launch.
-        if (key === "search") {
-            title = title.replace(":page", unslug(params[key]));
-        }
-        title = title.replace(`:${key}`, unslug(params[key]));
-    });
-
-    title = title.replace(" in :suburb, :state", "").replace(/:[^\s]+/, "");
-
-    return title ? `${title} | Ask Izzy` : "Ask Izzy";
-}
 
 /**
  * While entering the 404 page,

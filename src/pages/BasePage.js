@@ -3,7 +3,7 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 import Helmet from "react-helmet";
-import { makeTitle } from "../routes";
+import { makeTitle } from "../utils";
 import { Outlet } from "react-router-dom";
 
 import { ApolloProvider } from "@apollo/client";
@@ -40,10 +40,10 @@ class BasePage extends React.Component<{}> {
         const { location, match } = this.context.router
         const pageTitle = makeTitle(
             match.props.title,
-            match.params
+            match.params,
+            match.props.element?.type.name,
         )
         const canonicalUrl = `https://askizzy.org.au${location.pathname}`;
-
         return <>
             <HistoryListener />
             <ApolloProvider client={createApolloClient()}>
