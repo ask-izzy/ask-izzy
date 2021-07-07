@@ -1,8 +1,9 @@
 /* @flow */
 
 import React from "react";
-import storage from "../storage";
+
 import Collapser from "./Collapser";
+import debugModeContext from "../contexts/debug-mode-context";
 
 type Props = {
     message: string,
@@ -10,26 +11,12 @@ type Props = {
 }
 
 class DebugContainer extends React.Component<Props, void> {
-    componentDidMount(): void {
-        try {
-            this.window().addEventListener("debug", () => {
-                this.forceUpdate();
-            });
-        } catch (error) {
-            // pass
-        }
-    }
-
-    window(): Object {
-        if (typeof window != "undefined") {
-            return window;
-        }
-        return {addEventListener: () => null};
-    }
+    static contextType = debugModeContext;
 
     render() {
-        if (!storage.getDebug()) {
-            return <span />;
+        const [debugMode] = this.context
+        if (!debugMode) {
+            return null;
         }
 
         return (

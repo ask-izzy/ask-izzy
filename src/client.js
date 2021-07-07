@@ -4,7 +4,6 @@ import xhr from "axios";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
-import storage from "./storage";
 import routes from "./routes";
 import * as gtm from "./google-tag-manager";
 import searchTest from "./search-test";
@@ -46,19 +45,6 @@ ReactDOM.hydrate(
     </Router>,
     document.getElementById("root")
 )
-
-// Can't use 'new Event' in IE
-const debugEvent = document.createEvent("CustomEvent");
-
-if (typeof debugEvent.initCustomEvent === "function") {
-    debugEvent.initCustomEvent("debug", false, false, undefined);
-}
-
-window.pi = function() {
-    storage.setDebug(!storage.getDebug());
-
-    window.dispatchEvent(debugEvent);
-}
 
 // Report JS errors to google analytics
 window.addEventListener("error", (error) => {

@@ -9,6 +9,7 @@ import { ApolloProvider } from "react-apollo";
 import client from "../utils/apolloClient";
 import HistoryListener from "../effects/HistoryListener";
 import DebugColours from "../components/DebugColours";
+import {DebugModeProvider} from "../contexts/debug-mode-context";
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,
@@ -45,25 +46,26 @@ class BasePage extends React.Component<{}> {
         return <>
             <HistoryListener />
             <ApolloProvider client={client}>
-                <DebugColours />
-                <div className="BasePage">
-                    <Helmet>
-                        <link
-                            rel="canonical"
-                            content={canonicalUrl}
-                        />
-                        <meta
-                            property="og:url"
-                            content={canonicalUrl}
-                        />
-                        <title>{pageTitle}</title>
-                        {/* <script`window.MSInputMethodContext && document.documentMode && document.write('<script src="https://cdn.jsdelivr.net/gh/nuxodin/ie11CustomProperties@4.1.0/ie11CustomProperties.min.js"><\/script>');`}</script> */}
-                    </Helmet>
+                <DebugModeProvider>
+                    <DebugColours />
+                    <div className="BasePage">
+                        <Helmet>
+                            <link
+                                rel="canonical"
+                                content={canonicalUrl}
+                            />
+                            <meta
+                                property="og:url"
+                                content={canonicalUrl}
+                            />
+                            <title>{pageTitle}</title>
+                        </Helmet>
 
-                    <main>
-                        <Outlet />
-                    </main>
-                </div>
+                        <main>
+                            <Outlet />
+                        </main>
+                    </div>
+                </DebugModeProvider>
             </ApolloProvider>
         </>
     }
