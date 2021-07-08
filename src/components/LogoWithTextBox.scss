@@ -3,58 +3,75 @@ $colour-grey: #808080;
 $colour-icon-background: #70bdae;
 
 .LogoWithTextBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    background-color: $colour-background;
-    cursor: pointer;
+    // text-decoration: none;
 
-    .Icon {
-        width: 64px;
-        height: 64px;
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+        background-color: $colour-background;
+        cursor: pointer;
 
-        .IconBorder {
+        .Icon {
             width: 64px;
             height: 64px;
-            border-radius: 50%;
 
-            .middle {
-                padding: 11px;
+            .IconBorder {
+                width: 64px;
+                height: 64px;
+                border-radius: 50%;
+
+                .middle {
+                    padding: 11px;
+                }
             }
         }
-    }
 
-    .Content {
-        width: 50%;
-        margin-top: 20px;
-        text-align: center;
+        .Content {
+            width: 50%;
+            margin-top: 20px;
+            text-align: center;
+            color: $brand-text-dark;
 
-        .Header {
-            margin-bottom: 20px;
-            font-size: 1.15em;
-            font-weight: 500;
-        }
-
-        .Instruction {
-            padding-bottom: 10px;
-            font-size: small;
-        }
-
-        .Chevron {
-            display: inline;
-            font-weight: normal;
-        }
-
-        .Link {
-            display: inline;
-            font-weight: 500;
-        }
-
-        @media (max-width: 768px) {
-            & {
-                width: 100%;
+            .Header {
+                margin-bottom: 20px;
+                font-size: 1.15em;
+                font-weight: 500;
             }
+
+            .Instruction {
+                padding-bottom: 10px;
+                font-size: small;
+            }
+
+            // Hack to override parent link's underline text property
+            // since we can't do that directly unfortunately :(
+            .Header,
+            .Instruction {
+                display: inline-block;
+            }
+
+            .Chevron {
+                display: inline;
+                font-weight: normal;
+            }
+
+            @media (max-width: 768px) {
+                & {
+                    width: 100%;
+                }
+            }
+        }
+
+        .linked-text {
+            display: inline;
+            font-weight: 500;
+
+            // text-decoration: underline;
+            // &:hover {
+            //     text-decoration: none;
+            // }
         }
     }
 }

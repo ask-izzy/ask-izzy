@@ -2,7 +2,9 @@
 
 import * as React from "react";
 import PropTypes from "proptypes";
+
 import Link from "./Link";
+import * as gtm from "../google-tag-manager";
 
 type Props = {
     icon: React.Element<any>,
@@ -13,50 +15,55 @@ type Props = {
 }
 
 export default class BaseLogoWithTextBox extends React.Component<Props, void> {
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
-    };
-
-    onClickBox(): void {
-        throw new Error("The onClickBox method should be implemented.");
-    }
-
     render(): React.Node {
         return (
-            <div
+            <Link
+                to={this.props.path}
+                onClick={this.onClickHandler.bind(this)}
                 className={"LogoWithTextBox"}
-                onClick={this.onClickBox.bind(this)}
             >
-                <div className={"Icon"}>
-                    <div
-                        className={"IconBorder"}
-                        style={{
-                            backgroundColor: this.props.highlightColor,
-                        }}
-                    >
-                        { this.props.icon }
-                    </div>
-                </div>
-                <div className={"Content"}>
-                    <div className={"Header"}>
-                        { this.props.header }
-                    </div>
-                    <div className={"Instruction"}>
-                        { this.props.body }
-                    </div>
-                    <Link to={this.props.path}>
-                        Learn More
+                <div className="container">
+                    <div className={"Icon"}>
                         <div
+                            className={"IconBorder"}
+                            style={{
+                                backgroundColor: this.props.highlightColor,
+                            }}
+                        >
+                            { this.props.icon }
+                        </div>
+                    </div>
+                    <div className={"Content"}>
+                        <div className={"Header"}>
+                            { this.props.header }
+                        </div>
+                        <div className={"Instruction"}>
+                            { this.props.body }
+                        </div>
+                    </div>
+                    <div className={"linked-text"}>
+                        Learn More
+                        <span
                             className={"Chevron"}
                             style={{
                                 color: this.props.highlightColor,
                             }}
                         >
                             &nbsp;&gt;
-                        </div>
-                    </Link>
+                        </span>
+                    </div>
                 </div>
-            </div>
+            </Link>
         );
+    }
+
+    onClickHandler() {
+        gtm.emit({
+            event: `Banner Clicked - "${this.props.header}"`,
+            eventCat: "Banner Clicked",
+            eventAction: this.props.header,
+            eventLabel: location.pathname,
+            sendDirectlyToGA: true,
+        });
     }
 }
