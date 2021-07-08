@@ -29,10 +29,4 @@
             fill: var(--colour-text-dark);
         }
     }
-
-    &.animate {
-        @include teeter(0.6s, 0.1s, forwards);
-
-        -webkit-transform-origin: 60% 50%;
-    }
 }
