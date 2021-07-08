@@ -28,3 +28,29 @@
         box-sizing: content-box;
     }
 }
+
+/* Hack for IE11 which doesn't support "position: sticky;" */
+_:-ms-fullscreen,
+:root .WithStickyFooter > footer  {
+    position: fixed;
+    width: 800px;
+    max-width: calc(100vw - 18px);
+
+    animation: riseIn 0.5s 0s forwards;
+    @keyframes riseIn {
+        0% {
+            transform: translateY(10em) translateZ(0);
+            opacity: 0;
+        }
+
+        50% {
+            opacity: 1;
+        }
+    }
+
+}
+
+_:-ms-fullscreen,
+:root .WithStickyFooter > .content  {
+    padding-bottom: 80px;
+}

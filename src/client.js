@@ -67,7 +67,7 @@ window.addEventListener("error", (error) => {
         eventCat: "Error Occurred",
         eventAction: "Javascript",
         eventLabel: `${error.message}
-            ${e.filename} [Line ${error.lineno}]
+            ${error.filename} [Line ${error.lineno}]
             From page: ${location.pathname}`.replace(/\n +/g, "\n"),
         sendDirectlyToGA: true,
     });

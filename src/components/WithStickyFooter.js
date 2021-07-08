@@ -12,19 +12,21 @@ class WithStickyFooter extends React.Component<Props> {
     #overlapObserver = null
 
     componentDidMount(): void {
-        this.#overlapObserver = new IntersectionObserver(
-            ([event]) => this.#footerRef?.current?.toggleAttribute(
-                "floating", event.intersectionRatio < 1
-            ),
-            {
-                threshold: [1],
-            }
-        );
-
-        if (this.#onscreenIndicatorRef.current) {
-            this.#overlapObserver.observe(
-                this.#onscreenIndicatorRef.current
+        if (window.IntersectionObserver) {
+            this.#overlapObserver = new IntersectionObserver(
+                ([event]) => this.#footerRef?.current?.toggleAttribute(
+                    "floating", event.intersectionRatio < 1
+                ),
+                {
+                    threshold: [1],
+                }
             );
+
+            if (this.#onscreenIndicatorRef.current) {
+                this.#overlapObserver.observe(
+                    this.#onscreenIndicatorRef.current
+                );
+            }
         }
     }
 

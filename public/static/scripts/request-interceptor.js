@@ -23,7 +23,7 @@ zeroRatingHelper.replaceDomain = function(oldUrl) {
         let newHost = window.PROXY_DOMAINS[url.host]
         // If hostname is just the port then append the hostname of the current page
         if (newHost.match(/^:\d+$/)) {
-            newHost = `${location.hostname}${newHost}`
+            newHost = location.hostname + newHost
         }
         url.host = newHost;
         url.protocol = window.PROXY_PROTOCOL || url.protocol

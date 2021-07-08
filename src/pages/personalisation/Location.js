@@ -254,7 +254,9 @@ class Location extends Personalisation<Props, State> {
                         />
                     }
 
-                    <div className="search" id="searchBar">
+                    <div className="search"
+                        id="searchBar"
+                    >
                         <input
                             type="search"
                             ref={element => {
