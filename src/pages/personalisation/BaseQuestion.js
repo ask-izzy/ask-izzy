@@ -262,33 +262,52 @@ class BaseQuestion extends Personalisation<Props, State> {
         return (
             <div>
                 {this.renderHeaderBar()}
-                <div className={listClassName}>
-                    {this.answers.map((answer, index) =>
-                        <InputListItem
-                            key={index}
-                            leftIcon={this.iconFor(answer)}
-                            primaryText={answer}
-                            secondaryText={this.answerDescFor(answer)}
-                            tabIndex={this.state.tabIndex + (index + 1)}
-                            aria-label={answer}
-                            type="radio"
-                            checked={answer === selected}
-                            value={answer}
-                            onClick={this.onAnswerTouchTap.bind(this, answer)}
-                            readOnly={true}
-                            onFocus={() => this.setState(
-                                {listFocused: true}
-                            )}
-                            checkedIcon={
-                                <icons.RadioSelected className="big" />
-                            }
-                            uncheckedIcon={
-                                <icons.RadioUnselected className="big" />
-                            }
-                        />)}
-                </div>
-                {this.props.showDVLinkBar && this.props.textDVLinkBar}
-                {this.renderDoneButton()}
+                 <fieldset tabIndex="0">
+                    <legend>
+                        {this.question}
+                    </legend>
+                    <div tabIndex="0">
+                        {this.state.showStepper && (
+                            <QuestionStepper
+                                category={this.state.category}
+                                listFocused={this.state.listFocused}
+                                onTabIndex={(tabIndex) =>
+                                    this.setState({tabIndex})
+                                }
+                            />
+                        )}
+                    </div>
+                    <div className={listClassName}>
+                        {this.answers.map((answer, index) =>
+                            <InputListItem
+                                key={index}
+                                leftIcon={this.iconFor(answer)}
+                                primaryText={answer}
+                                secondaryText={this.answerDescFor(answer)}
+                                tabIndex={this.state.tabIndex + (index + 1)}
+                                aria-label={answer}
+                                type="radio"
+                                checked={answer === selected}
+                                value={answer}
+                                onClick={this.onAnswerTouchTap.bind(
+                                    this,
+                                    answer
+                                )}
+                                readOnly={true}
+                                onFocus={() => this.setState(
+                                    {listFocused: true}
+                                )}
+                                checkedIcon={
+                                    <icons.RadioSelected className="big" />
+                                }
+                                uncheckedIcon={
+                                    <icons.RadioUnselected className="big" />
+                                }
+                            />)}
+                    </div>
+                    {this.props.showDVLinkBar && this.props.textDVLinkBar}
+                    {this.renderDoneButton()}
+                </fieldset>
                 {
                     this.props.showBaseTextBox &&
                     Boolean(this.props.baseTextBoxComponent) &&
@@ -299,7 +318,7 @@ class BaseQuestion extends Personalisation<Props, State> {
     }
 
     renderHeaderBar(): React.Element<any> {
-        const renderedHeaderBar = (
+        return (
             <HeaderBar
                 primaryText={
                     <div>
@@ -314,23 +333,6 @@ class BaseQuestion extends Personalisation<Props, State> {
                 bannerName={this.bannerName}
             />
         );
-        if (this.state.showStepper) {
-            return (
-                <section className="page-header-section">
-                    {renderedHeaderBar}
-                    <QuestionStepper
-                        category={this.state.category}
-                        initialTabIndex={1}
-                        listFocused={this.state.listFocused}
-                        onTabIndex={(tabIndex) =>
-                            this.setState({tabIndex})
-                        }
-                    />
-                </section>
-            )
-        } else {
-            return renderedHeaderBar
-        }
     }
 
     renderDoneButton(): ?React.Element<any> {

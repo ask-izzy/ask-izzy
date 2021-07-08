@@ -230,74 +230,94 @@ class Location extends Personalisation<Props, State> {
             <WithStickyFooter
                 footerContents={this.renderDoneButton()}
             >
-                <div className="List">
-                    {
-                        /* if the browser supports geolocation */
-                        geolocationAvailable() &&
-                        <components.GeolocationButton
-                            onSuccess={this.onGeoLocationSuccess.bind(this)}
-                        />
-                    }
+                <fieldset tabIndex="0">
+                    <legend>
+                        Where are you?
+                    </legend>
+                    <div className="List">
+                        {this.state.showStepper ? (
+                            <QuestionStepper
+                                initialTabIndex={0}
+                                category={this.state.category}
+                            />
+                        ) : null}
+                        {
+                            /* if the browser supports geolocation */
+                            geolocationAvailable() &&
+                            <components.GeolocationButton
+                                onSuccess={this.onGeoLocationSuccess.bind(this)}
+                            />
+                        }
 
-                    <div className="search"
-                        id="searchBar"
-                    >
-                        <input
-                            type="search"
-                            ref={element => {
-                                this._search = element;
-                            }}
-                            onFocus={this.scrollToSearchControl.bind(this)}
-                            placeholder="Search for a suburb or postcode"
-                            aria-label="Search for a suburb or postcode"
-                            value={this.state.locationName}
-                            onChange={this.onSearchChange.bind(this)}
-                        />
+                        <div className="search"
+                            id="searchBar"
+                        >
+                            <input
+                                type="search"
+                                ref={element => {
+                                    this._search = element;
+                                }}
+                                onFocus={this.scrollToSearchControl.bind(this)}
+                                aria-label="Search for a suburb or postcode"
+                                placeholder="Search for a suburb or postcode"
+                                value={this.state.locationName}
+                                onChange={this.onSearchChange.bind(this)}
+                            />
+                        </div>
+
+                        {
+                            /* any autocompletions we currently have */
+                            this.state.autocompletions.map((result, index) =>
+                                <components.InputListItem
+                                    key={index}
+                                    primaryText={
+                                        <div className="suburb">
+                                            {result.name}
+                                        </div>
+                                    }
+                                    secondaryText={
+                                        <div className="state">
+                                            {result.state}
+                                        </div>
+                                    }
+                                    type="radio"
+                                    ariaLabel={`${result.name},
+                                     ${result.state}`}
+                                    tabIndex={0}
+                                    uncheckedIcon={
+                                        <icons.RadioUnselected
+                                            className="big"
+                                        />
+                                    }
+                                    checkedIcon={
+                                        <icons.RadioSelected
+                                            className="big"
+                                        />
+                                    }
+                                    onClick={
+                                        this.selectAutocomplete.bind(
+                                            this,
+                                            result,
+                                        )
+                                    }
+                                />
+                            )
+                        }
                     </div>
                     {
-                        /* any autocompletions we currently have */
-                        this.state.autocompletions.map((result, index) =>
-                            <components.InputListItem
-                                key={index}
-                                primaryText={
-                                    <div className="suburb">
-                                        {result.name}
-                                    </div>
-                                }
-                                secondaryText={
-                                    <div className="state">
-                                        {result.state}
-                                    </div>
-                                }
-                                ariaLabel={`${result.name}, ${result.state}`}
-                                type="radio"
-                                tabIndex={0}
-                                uncheckedIcon={
-                                    <icons.RadioUnselected className="big" />
-                                }
-                                checkedIcon={
-                                    <icons.RadioSelected className="big" />
-                                }
-                                onClick={
-                                    this.selectAutocomplete.bind(this, result)
-                                }
-                            />
+                        this.state.autocompletionInProgress && (
+                            <div
+                                className="progress"
+                                tabIndex="0"
+                            >
+                                <ScreenReader>
+                                    Loading locations
+                                </ScreenReader>
+                                <icons.Loading className="big" />
+                            </div>
                         )
                     }
-                </div>
-                {
-                    this.state.autocompletionInProgress && (
-                        <div
-                            className="progress"
-                            tabIndex="0"
-                        >
-                            <ScreenReader>
-                                Loading locations
-                            </ScreenReader>
-                            <icons.Loading className="big" />
-                        </div>
-                    )
-                }
+                </fieldset>
             </WithStickyFooter>
         </div>
     );
@@ -318,7 +338,7 @@ class Location extends Personalisation<Props, State> {
     }
 
     renderHeaderBar(): React.Element<any> {
-        const renderedHeaderBar = (
+        return (
             <components.HeaderBar
                 primaryText={
                     <div>
@@ -333,18 +353,6 @@ class Location extends Personalisation<Props, State> {
                 bannerName={this.bannerName}
             />
         )
-        if (this.state.showStepper) {
-            return (
-                <section className="page-header-section">
-                    {renderedHeaderBar}
-                    <QuestionStepper
-                        category={this.state.category}
-                    />
-                </section>
-            )
-        } else {
-            return renderedHeaderBar
-        }
     }
 }
 

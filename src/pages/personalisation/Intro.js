@@ -99,31 +99,40 @@ class Intro extends Personalisation<Props, State> {
             <div className="IntroPage">
                 {this.renderHeaderBar()}
                 <div className="body">
-                    <h3>
-                        I&#39;m looking for help for
-                    </h3>
-                    {this.renderDoneButton()}
-                    {this.shouldShowBetaBox &&
-                        <div className="betaPathwayWrapper">
-                            <div className="betaPathway">
-                                <header>
-                                    <icons.Lightning />
-                                    <h4>Ask Izzy Beta - Pandemic Support</h4>
-                                </header>
-                                <p>
-                                    If you've been impacted by the pandemic and
-                                    need support, we have a new version of Ask
-                                    Izzy that might be helpful to you.{" "}
-                                    <Link
-                                        to="https://beta.askizzy.org.au"
-                                        className="BetaLink"
-                                    >
-                                        Go to Ask Izzy Beta
-                                    </Link>
-                                </p>
+                    <fieldset tabIndex="0">
+                        <legend>
+                             I&#39;m looking for help for
+                        </legend>
+                        <h3>
+                             I&#39;m looking for help for
+                        </h3>
+                        {this.renderDoneButton()}
+                        {this.shouldShowBetaBox &&
+                            <div className="betaPathwayWrapper">
+                                <div className="betaPathway">
+                                    <header>
+                                        <icons.Lightning />
+                                        <h4>
+                                            Ask Izzy Beta - Pandemic Support
+                                        </h4>
+                                    </header>
+                                    <p>
+                                        If you've been impacted by the pandemic
+                                        and
+                                        need support, we have a new version of
+                                        Ask
+                                        Izzy that might be helpful to you.{" "}
+                                        <Link
+                                            to="https://beta.askizzy.org.au"
+                                            className="BetaLink"
+                                        >
+                                            Go to Ask Izzy Beta
+                                        </Link>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    }
+                        }
+                    </fieldset>
                 </div>
             </div>
         );

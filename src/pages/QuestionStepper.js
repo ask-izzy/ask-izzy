@@ -5,6 +5,7 @@ import {
     INITIAL_TAB_INDEX,
     BREADCRUMB_LIMIT,
     MULTI_DEFAULT_ANSWER_LIMIT,
+    generateContainerAriaLabel,
     fetchAnswers,
     getSearchAnswers,
     PersonalisationLink,
@@ -20,6 +21,8 @@ import QuestionStepperAnswer from "./QuestionStepperAnswer";
 import QuestionStepperClearLocation from "./QuestionStepperClearLocation";
 import _ from "underscore";
 import {Service} from "../iss";
+import {useContext} from "react";
+import routerContext from "../contexts/router-context";
 
 type Props = {
     intro?: ?boolean,
@@ -33,9 +36,6 @@ type Props = {
     onTabIndex?: ?function,
     initialTabIndex?: number,
 }
-
-const SCREEN_READER_MESSAGE = "Below are your currently selected answers," +
-    " these are used for the search."
 
 const ConditionalSkipToChoice = ({show, ...props}) => (
     show ? <SkipToChoices {...props}/> : null
@@ -65,6 +65,7 @@ function QuestionStepper(
     const [Accessibility, setAccessibility] = React.useState(false)
     const [tabIndex, setTabIndex] = React.useState(INITIAL_TAB_INDEX + 1)
 
+    const {router} = useContext(routerContext)
     /**
      * The UseEffect is to fetch the current answers and set them to the state
      */
@@ -171,7 +172,11 @@ function QuestionStepper(
                 tabIndex={getInitialTabIndex(resultsPage, initialTabIndex)}
                 style={Accessibility ? {paddingTop: 0} : {}}
             >
-                <span aria-label={SCREEN_READER_MESSAGE}>
+                <span aria-label={generateContainerAriaLabel(
+                    currentAnswers,
+                    router
+                )}
+                >
                     {currentAnswers.map((answer, index) =>
                         <QuestionStepperAnswer
                             index={index}

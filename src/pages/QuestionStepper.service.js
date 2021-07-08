@@ -25,6 +25,8 @@ const ICON_ARIALABEL_MAPPING = {
 export const INITIAL_TAB_INDEX = 4;
 export const BREADCRUMB_LIMIT = 6;
 export const MULTI_DEFAULT_ANSWER_LIMIT = 2;
+export const SCREEN_READER_MESSAGE = "The following relate to answers to" +
+    " previous questions "
 
 export type AnswerType = {
     name: string,
@@ -215,15 +217,38 @@ export const renderEllipsis = (
         : null
 }
 
+export const generateContainerAriaLabel = (
+    answers: Array<AnswerType>,
+    router: any
+): string => {
+    let ariaLabel = SCREEN_READER_MESSAGE;
+    answers.forEach((answer, index) => {
+        ariaLabel += `${formatAriaLabelText(
+            answer,
+            editing(answer, router),
+            true)
+        } ${answers.length - 1 === (index + 1) ? "and" : ", "}`
+    })
+    return ariaLabel;
+}
+
+export const editing = (answer: AnswerType, router: any): boolean => (
+    answer.name === router.match.params.subpage
+)
+
 /**
  * This will generate the Aria Label and convert
  * icons to text based on their icon class
  * @param answer - the current answer
  * @param editing - is it being edited
+ * @param container - For Question stepper container
  * @return {string} - The aria label text
  */
 export const formatAriaLabelText = (
-    answer: AnswerType, editing: boolean): string => {
+    answer: AnswerType,
+    editing: boolean,
+    container: ?boolean,
+): string => {
     let selection = answer.answer || "answer";
 
     if (typeof selection === "object" && selection?.props.children) {
@@ -237,6 +262,10 @@ export const formatAriaLabelText = (
             selection = ICON_ARIALABEL_MAPPING[nodes.props.iconClass] ||
                 nodes.props.iconClass
         }
+    }
+
+    if (container) {
+        return `${selection} for ${answer.name}`;
     }
 
     return editing ?

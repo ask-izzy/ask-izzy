@@ -188,46 +188,57 @@ class BaseMultiQuestion extends BaseQuestion {
                         taperColour="LighterGrey"
                         bannerName={this.bannerName}
                     />
-                    <QuestionStepper
-                        category={getCategory(
-                            this.context.router.match.params.page
-                        )}
-                        initialTabIndex={0}
-                        listFocused={this.state.listFocused}
-                        onTabIndex={(tabIndex) =>
-                            this.setState({tabIndex})
-                        }
-                    />
                 </section>
 
                 <WithStickyFooter
                     footerContents={this.renderDoneButton()}
                 >
-                    <div className="List">
-                        {this.answers.map((answer, index) =>
-                            <InputListItem
-                                key={index}
-                                leftIcon={this.iconFor(answer)}
-                                primaryText={answer}
-                                value={answer}
-                                tabIndex={this.state.tabIndex + (index + 1)}
-                                type="checkbox"
-                                checked={selected.has(answer)}
-                                checkedIcon={
-                                    <icons.CheckboxSelected className="big" />
-                                }
-                                onFocus={() => this.setState(
-                                    {listFocused: true}
+                    <fieldset>
+                        <legend>
+                            {this.question}
+                        </legend>
+                        <div tabIndex="0">
+                            <QuestionStepper
+                                category={getCategory(
+                                    this.context.router.match.params.page
                                 )}
-                                uncheckedIcon={
-                                    <icons.CheckboxUnselected className="big" />
+                                listFocused={this.state.listFocused}
+                                onTabIndex={(tabIndex) =>
+                                    this.setState({tabIndex})
                                 }
-                                onClick={this.onAnswerTouchTap.bind(
-                                    this, answer, !selected.has(answer)
-                                )}
                             />
-                        )}
-                    </div>
+                        </div>
+                        <div className="List">
+                            {this.answers.map((answer, index) =>
+                                <InputListItem
+                                    key={index}
+                                    leftIcon={this.iconFor(answer)}
+                                    primaryText={answer}
+                                    value={answer}
+                                    tabIndex={this.state.tabIndex + (index + 1)}
+                                    aria-label={answer}
+                                    type="checkbox"
+                                    checked={selected.has(answer)}
+                                    checkedIcon={
+                                        <icons.CheckboxSelected
+                                            className="big"
+                                        />
+                                    }
+                                    onFocus={() => this.setState(
+                                        {listFocused: true}
+                                    )}
+                                    uncheckedIcon={
+                                        <icons.CheckboxUnselected
+                                            className="big"
+                                        />
+                                    }
+                                    onClick={this.onAnswerTouchTap.bind(
+                                        this, answer, !selected.has(answer)
+                                    )}
+                                />
+                            )}
+                        </div>
+                    </fieldset>
                 </WithStickyFooter>
             </div>
         );
