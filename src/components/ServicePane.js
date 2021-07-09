@@ -122,7 +122,10 @@ export default class ServicePane extends React.Component<{
                             to={object.Location()}
                         >
                             <Address location={object.Location()} />
-                            <TransportTime location={object.Location()}/>
+                            <TransportTime
+                                location={object.Location()}
+                                withoutLink={true}
+                            />
                         </GoogleMapsLink>
                         <ContactMethods object={object} />
                         <Feedback object={object} />

@@ -16,6 +16,8 @@ services:
                 'maps.gstatic.com': ':8059',
                 'iss3.docker.dev': ':8060',
                 'iss3-test.docker.dev': ':8061',
+                'cms-askizzy.docker.dev': ':8062',
+                'cms-askizzy-test.docker.dev': ':8063'
             }"
             PROXY_PROTOCOL: 'http:'
         links:
@@ -38,6 +40,8 @@ services:
             PROXY_8059: 'gmaps-static.docker.dev'
             PROXY_8060: 'iss3.docker.dev'
             PROXY_8061: 'iss3-test.docker.dev'
+            PROXY_8062: 'cms-askizzy.docker.dev'
+            PROXY_8063: 'cms-askizzy-test.docker.dev'
             NODE_EXTRA_CA_CERTS: /etc/ssl/certs/ca-certificates.crt
         ports:
             - '8051:8051'
@@ -51,5 +55,7 @@ services:
             - '8059:8059'
             - '8060:8060'
             - '8061:8061'
+            - '8062:8062'
+            - '8063:8063'
         volumes:
             - ./external-resources-proxy:/app
