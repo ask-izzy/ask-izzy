@@ -16,7 +16,7 @@ import Accordion from "../components/Accordion";
 import {
     absoluteImageUrl,
     renderLink,
-} from "./DynamicPage.service";
+} from "../utils/cmsContent";
 import CalloutBox from "../components/CalloutBox";
 import CalloutQuery from "../queries/content/callout";
 

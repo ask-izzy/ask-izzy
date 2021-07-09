@@ -2,7 +2,7 @@
 import * as React from "react";
 import gfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
-import {absoluteImageUrl} from "../pages/DynamicPage.service";
+import {absoluteImageUrl, renderLink} from "../utils/cmsContent";
 import AccordionItem from "./AccordionItem";
 
 type Props = {
@@ -27,6 +27,7 @@ const Accordion: React.StatelessFunctionalComponent<Props> = (
                         transformImageUri={
                             absoluteImageUrl
                         }
+                        renderers={{"link": renderLink}}
                     />
                 </AccordionItem>
             </li>

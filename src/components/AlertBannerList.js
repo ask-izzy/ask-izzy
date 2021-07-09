@@ -7,6 +7,7 @@ import classnames from "classnames";
 
 import AlertBanner from "./AlertBanner";
 import alertsQuery from "../queries/content/alerts.js";
+import {absoluteImageUrl, renderLink} from "../utils/cmsContent";
 
 type Props = {
     screenLocation: string,
@@ -78,6 +79,8 @@ export default function({state, screenLocation, format}: Props): React.Node {
             <ReactMarkdown
                 plugins={[gfm]}
                 source={content}
+                transformImageUri={absoluteImageUrl}
+                renderers={{"link": renderLink}}
             />
         )
     }

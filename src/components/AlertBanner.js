@@ -43,9 +43,11 @@ export default function AlertBanner(props: Props) {
             <details className={containerClasses}
                 open={props.defaultToOpen}
             >
-                <summary className="title-container">
-                    { titleContents }
-                    <Chevron />
+                <summary>
+                    <div className="title-container"> {/* wrapper for flex bug https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers */}
+                        { titleContents }
+                        <Chevron />
+                    </div>
                 </summary>
                 <div className="body">
                     { props.body }

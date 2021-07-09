@@ -10,7 +10,13 @@
     color: var(--colour-text-dark);
     list-style: none;
 
+    summary::marker,
     summary::-webkit-details-marker {
+        display: none;
+    }
+
+    // this one is to hide the arrow for the IE polyfilled details
+    summary::before {
         display: none;
     }
 

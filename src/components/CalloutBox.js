@@ -4,7 +4,7 @@ import * as React from "react";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import Phone from "./Phone";
-import {absoluteImageUrl, renderLink} from "../pages/DynamicPage.service";
+import {absoluteImageUrl, renderLink} from "../utils/cmsContent";
 import * as gtm from "../google-tag-manager";
 import { useRouterContext } from "../contexts/router-context";
 
