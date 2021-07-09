@@ -64,9 +64,11 @@ function pageLoaded() {
 }
 
 export async function waitTillPageLoaded() {
-    return new Promise(
-        (resolve, reject) => currentSubscribers.push({resolve, reject})
-    )
+    if (currentDependencies.length > 0) {
+        return new Promise(
+            (resolve, reject) => currentSubscribers.push({resolve, reject})
+        )
+    }
 }
 
 function clearPageLoad() {

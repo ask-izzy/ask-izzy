@@ -1,6 +1,4 @@
 /* @flow */
-
-import url from "url";
 import React from "react";
 
 import components from "../components";
@@ -11,10 +9,11 @@ type Props = {}
 
 type State = {
     isFormDone: boolean,
+    issUrl?: URL,
+    issFormUrl?: URL,
 }
 
 class AddServicePage extends React.Component<Props, State> {
-    issUrl: any; // Flowtype core declares url.parse(): any
     handleMessage: Function;
 
     constructor(props: Object): void {
@@ -25,12 +24,6 @@ class AddServicePage extends React.Component<Props, State> {
         };
 
         this.handleMessage = this.handleMessage.bind(this);
-        this.issUrl = "";
-
-        if (typeof window !== "undefined" && window.ISS_URL) {
-            let {auth, ...urlObj} = url.parse(window.ISS_URL);
-            this.issUrl = urlObj;
-        }
     }
 
     static contextType = routerContext;
@@ -38,6 +31,21 @@ class AddServicePage extends React.Component<Props, State> {
     componentDidMount(): void {
         if (typeof window !== "undefined") {
             window.addEventListener("message", this.handleMessage, false);
+
+            if (window.ISS_URL) {
+                const issUrl = new URL(window.ISS_URL)
+                issUrl.username = ""
+                issUrl.password = ""
+
+                this.setState({
+                    ...this.state,
+                    issUrl: issUrl,
+                    issFormUrl: new URL(
+                        "/add-service-form?form=ask-izzy",
+                        issUrl
+                    ),
+                })
+            }
         }
 
     }
@@ -51,7 +59,7 @@ class AddServicePage extends React.Component<Props, State> {
     handleMessage(event: MessageEvent): void {
         const origin = event.origin
 
-        if (origin !== `${this.issUrl.protocol}//${this.issUrl.hostname}`) {
+        if (origin !== this.state.issUrl?.origin) {
             return;
         }
 
@@ -63,7 +71,7 @@ class AddServicePage extends React.Component<Props, State> {
             break;
 
         case "formLoaded":
-            window.scrollTop(0, 0);
+            window.scrollTo(0, 0);
             break;
 
         default:
@@ -79,7 +87,7 @@ class AddServicePage extends React.Component<Props, State> {
             <div className="AddServicePage">
                 <components.AppBar
                     title="Add a service"
-                    onBackTouchTap={() => this.context.router.navigator(-1)}
+                    onBackTouchTap={() => this.context.router.navigate(-1)}
                 />
 
                 <div className="body">
@@ -100,8 +108,6 @@ class AddServicePage extends React.Component<Props, State> {
     }
 
     renderForm() {
-        const issUrl = url.format(this.issUrl);
-
         return (
             <div>
                 <p>
@@ -179,7 +185,7 @@ class AddServicePage extends React.Component<Props, State> {
 
                 <iframe
                     title="Add Service Form"
-                    src={`${issUrl}/add-service-form?form=ask-izzy`}
+                    src={this.state.issFormUrl || ""}
                 />
             </div>
         );
