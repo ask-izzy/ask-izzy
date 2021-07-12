@@ -110,6 +110,7 @@ export const PersonalisationLink = ({pathname}: Object): React.Node => (
     <Link
         to={`${trailingSlash(pathname)}personalise/summary`}
         onClick={gtm.emit.bind(null, {event: "changeAnswers"})}
+        tabIndex="0"
     >
         See all and edit
     </Link>

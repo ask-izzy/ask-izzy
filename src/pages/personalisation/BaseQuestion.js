@@ -262,7 +262,7 @@ class BaseQuestion extends Personalisation<Props, State> {
         return (
             <div>
                 {this.renderHeaderBar()}
-                 <fieldset tabIndex="0">
+                <fieldset tabIndex="0">
                     <legend>
                         {this.question}
                     </legend>
