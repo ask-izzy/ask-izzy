@@ -38,7 +38,6 @@ export default class ListItem extends React.Component<ListItemProps, void> {
             secondaryText,
             ...rest
         } = this.props;
-
         if (!rootElement) {
             rootElement = "div";
         }
@@ -63,10 +62,16 @@ export default class ListItem extends React.Component<ListItemProps, void> {
 
                 <div className="label">
                     {!children && <>
-                        {primaryText && <div className="primaryText">
+                        {primaryText &&
+                        <div
+                            className="primaryText"
+                        >
                             {primaryText}
                         </div>}
-                        {secondaryText && <div className="secondaryText">
+                        {secondaryText &&
+                        <div
+                            className="secondaryText"
+                        >
                             {secondaryText}
                         </div>}
                     </>}

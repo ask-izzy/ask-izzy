@@ -156,7 +156,7 @@ class Intro extends Personalisation<Props, State> {
                 primaryText={
                     <div>
                         To help me find the right services
-                        I'll ask you a few questions
+                        I'll ask you a few questions.
                     </div>
                 }
                 secondaryText={

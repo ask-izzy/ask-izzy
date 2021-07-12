@@ -2,9 +2,11 @@
 
 import * as React from "react";
 import {
-    INITIAL_TAB_INDEX,
     renderEditingIndicator,
-    renderPipeOrComma, renderEllipsis, formatAriaLabelText,
+    renderPipeOrComma,
+    renderEllipsis,
+    formatAriaLabelText,
+    INITIAL_TAB_INDEX,
 } from "./QuestionStepper.service";
 import routerContext from "../contexts/router-context";
 import {useContext} from "react";
@@ -21,6 +23,8 @@ type Props = {
     multiSelectedAnswer: Array<AnswerType>,
     intro?: ?boolean,
     home?: ?boolean,
+    initialTabIndex: number,
+    resultsPage: ?boolean,
 }
 
 function QuestionStepperAnswer({
@@ -32,6 +36,8 @@ function QuestionStepperAnswer({
     multiSelectedAnswer,
     lastMultiSelect,
     onTabIndex,
+    initialTabIndex,
+    resultsPage,
 }: Props): React.Node {
 
     const {router} = useContext(routerContext)
@@ -44,14 +50,32 @@ function QuestionStepperAnswer({
         answer.name === router.match.params.subpage
     )
 
+    const getInitialTabIndex = (
+        resultsPage: ?boolean,
+        initialTabIndex: ?number,
+        additional?: ?number
+    ): number => (
+        resultsPage ? 0
+            : ((initialTabIndex || initialTabIndex === 0 ? initialTabIndex
+                : INITIAL_TAB_INDEX)) + (additional || 0)
+    )
+
     const MapIcon = () => home ? <icons.Map /> : null
 
     return (
         <>
             <span
-                tabIndex={INITIAL_TAB_INDEX + index + 1}
+                tabIndex={getInitialTabIndex(
+                    resultsPage,
+                    initialTabIndex,
+                    index + 1,
+                )}
                 onFocus={() => {
-                    onTabIndex((INITIAL_TAB_INDEX + index + 1) + 1)
+                    onTabIndex(getInitialTabIndex(
+                        resultsPage,
+                        initialTabIndex,
+                        (index + 1) + 1,
+                    ))
                 }}
                 className={home ? "locationIcon" : undefined}
             >

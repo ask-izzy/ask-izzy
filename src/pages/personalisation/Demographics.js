@@ -22,7 +22,7 @@ export default class Demographics extends BaseMultiQuestion {
     static defaultProps: ReactElementConfig<typeof BaseMultiQuestion> = {
         name: "demographics",
         question: "Do any of these apply to you?",
-        byline: "All of your answers are private and anonymous",
+        byline: "All of your answers are private and anonymous.",
         answers: {
             "Escaping family violence": append("(family violence)"),
             // n.b. see also storage.getUserIsIndigenous when changing

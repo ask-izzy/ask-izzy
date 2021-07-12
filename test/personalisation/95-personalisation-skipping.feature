@@ -13,7 +13,7 @@ Feature: Skip personalisation settings
 
     Scenario: Skip personalisation settings which were already answered
         When I click on "Housing"
-        Then I should see "To help me find the right services I'll ask you a few questions"
+        Then I should see "To help me find the right services I'll ask you a few questions."
         When I click on the done button # Intro
         Then I should see "Do you identify as…"
 

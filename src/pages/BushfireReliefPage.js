@@ -17,7 +17,7 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                 className="BushfireReliefPage"
                 bannerPrimary="Bushfire support 2020"
                 bannerSecondary={
-                    "If you are in immediate danger, please call 000"
+                    "If you are in immediate danger, please call 000."
                 }
             >
                 <div className="separator" />

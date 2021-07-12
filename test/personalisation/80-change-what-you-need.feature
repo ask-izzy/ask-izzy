@@ -33,7 +33,7 @@ Feature: Change your personalisation settings
     Scenario: Edit my location setting
         When I visit /housing/personalise/summary
         And I click on "Where are you?"
-        Then I should see "This will let me find the services closest to you"
+        Then I should see "This will let me find the services closest to you."
 
         When I search for "carlt"
         And I click on "Carlton"
@@ -122,8 +122,7 @@ Feature: Change your personalisation settings
         And I click on "Clear all answers and restart search"
         Then I should see the branding header
         And I should be at /
-
         When I click on "Housing"
-        Then I should see "To help me find the right services I'll ask you a few questions"
-        And I click on the done button
-        And I should not see "Melbourne, Vic"
+        Then I should see "To help me find the right services I'll ask you a few questions."
+         And I click on the done button
+        Then I should not see "Melbourne, Vic"
