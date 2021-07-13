@@ -79,6 +79,7 @@ const colourVars = [
             "colour-bg-standard-tint-2",
             "colour-bg-standard-tint-3",
             "colour-bg-callout-solid",
+            "colour-bg-code",
         ],
     },
     {

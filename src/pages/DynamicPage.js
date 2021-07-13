@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from "react";
-import ReactMarkdown from "react-markdown";
 import Helmet from "react-helmet";
 
 import { makeTitle } from "../routes";
@@ -11,13 +10,10 @@ import StaticPage from "./StaticPage";
 import pageQuery from "../queries/content/page.js";
 import NotFoundStaticPage from "./NotFoundStaticPage";
 import routerContext from "../contexts/router-context";
-import gfm from "remark-gfm";
 import Accordion from "../components/Accordion";
-import {
-    absoluteImageUrl,
-    renderLink,
-} from "../utils/cmsContent";
+import StrapiMarkdown from "../components/StrapiMarkdown";
 import CalloutBox from "../components/CalloutBox";
+import BlockQuote from "../components/base/BlockQuote";
 import CalloutQuery from "../queries/content/callout";
 
 type ReactMarkdownQuoteProps = {
@@ -68,7 +64,7 @@ class DynamicPage extends React.Component<{}> {
                 </Query>
             )
         }
-        return <blockquote>{props.children}</blockquote>
+        return <BlockQuote>{props.children}</BlockQuote>
     }
 
 
@@ -140,15 +136,13 @@ class DynamicPage extends React.Component<{}> {
                                         calloutBoxes={page.CalloutBoxes}
                                         position="top"
                                     />
-                                    <ReactMarkdown
-                                        plugins={[gfm]}
-                                        source={page.Body}
-                                        transformImageUri={absoluteImageUrl}
+                                    <StrapiMarkdown
                                         renderers={{
-                                            "link": renderLink,
                                             "blockquote": this.renderEmbCallout,
                                         }}
-                                    />
+                                    >
+                                        {page.Body}
+                                    </StrapiMarkdown>
                                     <Accordion
                                         title={page.AccordionTitle}
                                         items={page.Accordion}

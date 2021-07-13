@@ -3,11 +3,11 @@
 .AlertBannerList {
     margin-top: 0.5em;
 
-    ul {
+    > ul {
         margin: 0;
         padding-left: 0;
 
-        li {
+        > li {
             list-style-type: none;
 
             .AlertBanner {

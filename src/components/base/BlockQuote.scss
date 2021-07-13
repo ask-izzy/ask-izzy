@@ -1,0 +1,9 @@
+@use '../../styles/mixins/colours';
+
+.BlockQuote {
+    margin-left: 0;
+    padding: 10px 20px;
+    border-left: 5px solid #{colours.get-static('colour-text-light')};
+    border-left: 5px solid var(--colour-text-light);
+    font-style: italic;
+}

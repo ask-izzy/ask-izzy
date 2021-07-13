@@ -1,13 +1,11 @@
 /* @flow */
 import * as React from "react";
-import gfm from "remark-gfm";
-import ReactMarkdown from "react-markdown";
 import { useQuery } from "@apollo/client";
 import classnames from "classnames";
 
 import AlertBanner from "./AlertBanner";
+import StrapiMarkdown from "./StrapiMarkdown";
 import alertsQuery from "../queries/content/alerts.js";
-import {absoluteImageUrl, renderLink} from "../utils/cmsContent";
 
 type Props = {
     screenLocation: string,
@@ -76,12 +74,9 @@ export default function({state, screenLocation, format}: Props): React.Node {
             return null
         }
         return (
-            <ReactMarkdown
-                plugins={[gfm]}
-                source={content}
-                transformImageUri={absoluteImageUrl}
-                renderers={{"link": renderLink}}
-            />
+            <StrapiMarkdown>
+                {content}
+            </StrapiMarkdown>
         )
     }
 }

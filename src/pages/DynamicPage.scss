@@ -12,19 +12,4 @@
         display: block;
         margin: 0 auto;
     }
-
-    code {
-        background-color: #{colours.get-static('raw-colour-slate-gray')};
-        background-color: var(--raw-colour-slate-gray);
-        color: #{colours.get-static('colour-text-light')};
-        color: var(--colour-text-light);
-    }
-
-    blockquote {
-        margin-left: 0;
-        padding: 10px 20px;
-        border-left: 5px solid #{colours.get-static('colour-text-light')};
-        border-left: 5px solid var(--colour-text-light);
-        font-style: italic;
-    }
 }

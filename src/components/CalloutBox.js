@@ -1,10 +1,8 @@
 /* @flow */
-
 import * as React from "react";
-import ReactMarkdown from "react-markdown";
-import gfm from "remark-gfm";
+
 import Phone from "./Phone";
-import {absoluteImageUrl, renderLink} from "../utils/cmsContent";
+import StrapiMarkdown from "../components/StrapiMarkdown";
 import * as gtm from "../google-tag-manager";
 import { useRouterContext } from "../contexts/router-context";
 
@@ -83,12 +81,9 @@ function CalloutBox(
                 : "askIzzyInfoBox")}
         >
             {callout.ShowHeading && <h2>{callout.Heading}</h2>}
-            <ReactMarkdown
-                plugins={[gfm]}
-                source={callout.Body}
-                transformImageUri={absoluteImageUrl}
-                renderers={{"link": renderLink}}
-            />
+            <StrapiMarkdown>
+                {callout.Body}
+            </StrapiMarkdown>
             {callout.Phone &&
                 <Phone
                     className="calloutPhone"
