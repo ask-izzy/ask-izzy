@@ -133,14 +133,16 @@
             font-weight: 400;
 
             & > div {
-                & > .primaryText {
-                    font-weight: 500;
-                }
+                & > .label {
+                    & > .primaryText {
+                        font-weight: 500;
+                    }
 
-                & > .secondaryText {
-                    text-overflow: ellipsis;
-                    white-space: normal;
-                    overflow: auto;
+                    & > .secondaryText {
+                        text-overflow: ellipsis;
+                        white-space: normal;
+                        overflow: auto;
+                    }
                 }
             }
         }
@@ -161,7 +163,11 @@
         }
     }
 
-    .DebugServiceRecord {
-        width: 100%;
+    .DebugContainer {
+        float: left;
+
+        pre {
+            white-space: pre-wrap;
+        }
     }
 }

@@ -81,6 +81,9 @@ export default class ServicePane extends React.Component<{
                     screenLocation="servicePage"
                     format="inline"
                 />
+
+                <DebugServiceRecord object={object} />
+
                 <div className="header">
                     <p>
                         <IndigenousServiceIcon object={object} />
@@ -100,9 +103,7 @@ export default class ServicePane extends React.Component<{
                             : null
                         }
                     </h3>
-
                 </div>
-
 
                 <BoxedText>
                     <div className="practicalities-container">
@@ -138,8 +139,6 @@ export default class ServicePane extends React.Component<{
                     {this.renderServiceProvisions()}
                     {this.renderSiblings()}
                 </div>
-
-                <DebugServiceRecord object={object} />
             </div>
         );
     }
