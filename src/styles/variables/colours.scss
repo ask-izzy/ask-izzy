@@ -1,0 +1,117 @@
+/* stylelint-disable at-rule-empty-line-before, max-empty-lines -- we use extra lines here to group like colour definitions */
+
+@use 'sass:color';
+@use '../mixins/colours';
+
+/* Element state changes */
+$lightness-button-hover: 10%;
+
+:root {
+    /* Raw Colours */
+    @include colours.define('raw-colour-rich-purple',   'global', hsl(262, 80%,  38% ));
+    @include colours.define('raw-colour-plum-purple',   'global', hsl(300, 33%,  40% ));
+    @include colours.define('raw-colour-bright-red',    'global', hsl(0,   100%, 35% ));
+    @include colours.define('raw-colour-sunflower',     'global', hsl(51,  100%, 50% ));
+    @include colours.define('raw-colour-steel-blue',    'global', hsl(202, 41%,  55% ));
+    @include colours.define('raw-colour-coral-blue',    'global', hsl(215, 47%,  45% ));
+    @include colours.define('raw-colour-teal',          'global', hsl(168, 37%,  59% ));
+    @include colours.define('raw-colour-cyan-blue',     'global', hsl(181, 63%,  54% )); /* N.B. not enough contrast with white */
+    @include colours.define('raw-colour-slate-gray',    'global', hsl(203, 11%,  24% ));
+    @include colours.define('raw-colour-warm-gray',     'global', hsl(45,  3%,   75% ));
+    @include colours.define('raw-colour-warm-white',    'global', hsl(45,  10%,  92% ));
+    @include colours.define('raw-colour-pure-white',    'global', hsl(0,   0%,   100%));
+    @include colours.define('raw-colour-pure-black',    'global', hsl(0,   0%,   0%  ));
+
+
+    /* Features */
+    @include colours.define('colour-crisis', 'global', 'raw-colour-steel-blue');
+
+    @include colours.define('colour-input-focus-primary', 'global', 'raw-colour-cyan-blue');
+    @include colours.define(
+        'colour-input-focus-overlay',
+        'global',
+        colours.set-transparency('colour-input-focus-primary', 'global', 0.3),
+    );
+
+    @include colours.define('colour-irreversible-action', 'global', 'raw-colour-bright-red');
+
+    @include colours.define(
+        'colour-element-shadow-base',
+        'global',
+        colours.lighten('raw-colour-pure-white', 'global', -54%)
+    );
+    @include colours.define(
+        'colour-element-shadow',
+        'global',
+        colours.set-transparency('colour-element-shadow-base', 'global', 0.44)
+    );
+
+
+    /* Backgrounds */
+    @include colours.define('colour-bg-standard', 'global', 'raw-colour-pure-white');
+    @include colours.define(
+        'colour-bg-standard-tint-1',
+        'global',
+        colours.lighten('colour-bg-standard', 'global', -13%)
+    );
+    @include colours.define('colour-bg-standard-tint-2', 'global', 'raw-colour-warm-white');
+    @include colours.define(
+        'colour-bg-standard-tint-3',
+        'global',
+        colours.lighten('colour-bg-standard', 'global', -4%)
+    );
+
+    @include colours.define(
+        'colour-bg-callout-solid',
+        'global',
+        colours.set-transparency('raw-colour-rich-purple', 'global', 0.15),
+    );
+
+
+    /* Borders */
+    @include colours.define('colour-border-list-item', 'global', 'raw-colour-warm-white');
+    @include colours.define('colour-border-list-item-dark', 'global', 'raw-colour-slate-gray');
+    @include colours.define('colour-border-standard-callout', 'global', 'raw-colour-rich-purple');
+
+
+    /* Elements */
+    @include colours.define('colour-link', 'global', 'raw-colour-coral-blue');
+    @include colours.define('colour-link-visited', 'global', 'raw-colour-plum-purple');
+
+    @include colours.define('colour-button-standard', 'global', 'raw-colour-rich-purple');
+    @include colours.define(
+        'colour-button-standard-hover',
+        'global',
+        colours.lighten('colour-button-standard', 'global', $lightness-button-hover),
+    );
+    @include colours.define(
+        'colour-button-disabled',
+        'global',
+        colours.lighten('raw-colour-pure-white', 'global', -54%),
+    );
+
+    @include colours.define(
+        'colour-interactive-icon',
+        'global',
+        colours.lighten('raw-colour-pure-white', 'global', -54%),
+    );
+
+
+    /* Text */
+    @include colours.define('colour-text-dark', 'global', 'raw-colour-slate-gray');
+    @include colours.define(
+        'colour-text-mid',
+        'global',
+        colours.lighten('raw-colour-pure-white', 'global', -54%)
+    );
+    @include colours.define(
+        'colour-text-light',
+        'global',
+        colours.lighten('raw-colour-pure-white', 'global', -18%)
+    );
+    @include colours.define(
+        'colour-text-very-light',
+        'global',
+        'raw-colour-pure-white'
+    );
+}

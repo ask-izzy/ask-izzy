@@ -1,5 +1,8 @@
+@use '../styles/mixins/colours';
+
 .InputListItem {
     &:focus {
-        outline: 2px dashed $brand-pane-alt-light;
+        outline: 2px dashed #{colours.get-static('colour-input-focus-primary')};
+        outline: 2px dashed var(--colour-input-focus-primary);
     }
 }

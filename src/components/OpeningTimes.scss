@@ -1,3 +1,5 @@
+@use '../styles/mixins/colours';
+
 .OpeningTimes {
     position: relative;
     padding-left: 24px;
@@ -6,13 +8,13 @@
         position: absolute;
         top: -17px;
         left: -16px;
-
         width: 30px;
         height: 30px;
     }
 
     .open {
-        color: $brand-text-dark;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
         font-weight: 500;
     }
 
@@ -40,5 +42,4 @@
             white-space: nowrap;
         }
     }
-
 }

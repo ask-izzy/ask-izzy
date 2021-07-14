@@ -1,13 +1,17 @@
+@use '../styles/mixins/colours';
+
 .siteBanner {
     &,
     &-notice,
     &-warning {
         padding: 0 15px;
-        color: $white;
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
         overflow: auto;
 
         a {
-            color: $white;
+            color: #{colours.get-static('colour-text-very-light')};
+            color: var(--colour-text-very-light);
 
             .HomePage .header & {
                 text-decoration: underline;
@@ -17,11 +21,13 @@
 
     &,
     &-notice {
-        background-color: $brand-bg-dark;
+        background-color: #{colours.get-static('raw-colour-slate-gray')};
+        background-color: var(--raw-colour-slate-gray);
     }
 
     &-warning {
-        background-color: $brand-pane-alt-dark;
+        background-color: #{colours.get-static('raw-colour-rich-purple')};
+        background-color: var(--raw-colour-rich-purple);
     }
 }
 

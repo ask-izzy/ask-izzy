@@ -1,15 +1,17 @@
+@use '../../styles/mixins/colours';
+
 .IntroPage {
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
 
     .BetaLink {
-        color: $link-text-color;
-
-
+        color: #{colours.get-static('colour-link')};
+        color: var(--colour-link);
 
         &:visited {
-            color: $link-text-color-visited;
+            color: #{colours.get-static('colour-link-visited')};
+            color: var(--colour-link-visited);
         }
     }
 
@@ -29,7 +31,8 @@
                 max-width: 400px;
                 padding: 0.7em 1em;
                 border-radius: 8px;
-                background-color: $brand-bg-light;
+                background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+                background-color: var(--colour-bg-standard-tint-2);
 
                 > * {
                     margin: 0.5em;
@@ -56,7 +59,6 @@
                 }
 
                 a {
-
                     font-weight: bold;
                     text-decoration: none;
 
@@ -68,10 +70,11 @@
                         margin-bottom: 1px;
                         margin-left: 2px;
                         transform: rotate(-45deg);
-                        border: 1px solid $black;
+                        border: 1px solid #{colours.get-static('raw-colour-pure-black')};
+                        border: 1px solid var(--raw-colour-pure-black);
                         border-top: 0;
                         border-left: 0;
-                        content: "";
+                        content: '';
                     }
 
                     &:hover {
@@ -83,13 +86,13 @@
             &::before {
                 display: block;
                 flex: 1 1 auto;
-                content: "";
+                content: '';
             }
 
             &::after {
                 display: block;
                 flex: 2 1 auto;
-                content: "";
+                content: '';
             }
         }
     }

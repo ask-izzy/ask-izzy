@@ -1,12 +1,15 @@
+@use '../styles/mixins/colours';
+
 .Link {
-    color: $link-text-color;
+    color: #{colours.get-static('colour-link')};
+    color: var(--colour-link);
 
     &:visited {
-        color: $link-text-color-visited;
+        color: #{colours.get-static('colour-link-visited')};
+        color: var(--colour-link-visited);
     }
 
     &:hover {
         text-decoration: none;
     }
-
 }

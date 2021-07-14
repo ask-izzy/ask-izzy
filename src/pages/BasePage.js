@@ -8,6 +8,8 @@ import { Outlet } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
 import client from "../utils/apolloClient";
 import HistoryListener from "../effects/HistoryListener";
+import DebugColours from "../components/DebugColours";
+import {DebugModeProvider} from "../contexts/debug-mode-context";
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,
@@ -44,23 +46,26 @@ class BasePage extends React.Component<{}> {
         return <>
             <HistoryListener />
             <ApolloProvider client={client}>
-                <div className="BasePage">
-                    <Helmet>
-                        <link
-                            rel="canonical"
-                            content={canonicalUrl}
-                        />
-                        <meta
-                            property="og:url"
-                            content={canonicalUrl}
-                        />
-                        <title>{pageTitle}</title>
-                    </Helmet>
+                <DebugModeProvider>
+                    <DebugColours />
+                    <div className="BasePage">
+                        <Helmet>
+                            <link
+                                rel="canonical"
+                                content={canonicalUrl}
+                            />
+                            <meta
+                                property="og:url"
+                                content={canonicalUrl}
+                            />
+                            <title>{pageTitle}</title>
+                        </Helmet>
 
-                    <main>
-                        <Outlet />
-                    </main>
-                </div>
+                        <main>
+                            <Outlet />
+                        </main>
+                    </div>
+                </DebugModeProvider>
             </ApolloProvider>
         </>
     }

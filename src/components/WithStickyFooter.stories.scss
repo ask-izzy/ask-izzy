@@ -1,6 +1,6 @@
 .WithStickyFooterStorybook {
-    $mark-colour: #000000;
-    $text-colour: #333333;
+    $mark-colour: #000;
+    $text-colour: #333;
 
     .ruler {
         display: flex;
@@ -15,7 +15,7 @@
             top: 2em;
             right: 2em;
             color: $text-colour;
-            content: "Height of element is " counter(mark) "vh";
+            content: 'Height of element is ' counter(mark) 'vh';
         }
 
         .mark {
@@ -24,7 +24,6 @@
             border-top: 1px solid $mark-colour;
             counter-increment: mark;
             box-sizing: border-box;
-
 
             &:nth-child(10n+6) {
                 width: 13px;
@@ -42,7 +41,7 @@
                 &::after {
                     color: $text-colour;
                     font-size: 0.8em;
-                    content: "vh";
+                    content: 'vh';
                 }
 
                 &::before,

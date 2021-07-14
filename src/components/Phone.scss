@@ -1,16 +1,20 @@
+@use 'sass:color';
+@use '../styles/mixins/colours';
+
 .Contact {
     .ContactButton {
-
         max-width: 320px;
         margin-bottom: 5px;
+        border: 1px solid #{colours.get-static('colour-button-standard')};
+        border: 1px solid var(--colour-button-standard);
 
-        border: 1px solid $brand-pane-alt-dark;
         @media print {
             border: 0;
         }
 
         border-radius: 3px;
-        color: $brand-pane-alt-dark;
+        color: #{colours.get-static('colour-button-standard')};
+        color: var(--colour-button-standard);
         font-size: 18px;
         text-align: center;
         text-decoration: none;
@@ -23,9 +27,12 @@
             margin-left: -110px;
 
             path {
-                fill: $brand-pane-alt-dark;
+                fill: #{colours.get-static('colour-button-standard')};
+                fill: var(--colour-button-standard);
+
                 @media print {
-                    fill: $black;
+                    fill: #{colours.get-static('raw-colour-pure-black')};
+                    fill: var(--raw-colour-pure-black);
                 }
             }
         }
@@ -33,23 +40,46 @@
         .Contact-text {
             padding: 0;
         }
-
     }
 
     .CrisisContactButton {
-        border: 1px solid $brand-highlight;
-        background-color: $brand-highlight;
+        @include colours.define(
+            'colour-button',
+            'CrisisContactButton',
+            'colour-crisis'
+        );
+        @include colours.define(
+            'colour-button-hover',
+            'CrisisContactButton',
+            colours.lighten(
+                'colour-button',
+                'CrisisContactButton',
+                $lightness-button-hover
+            )
+        );
+
+        border: 0;
+        background-color: #{colours.get-static('colour-button', 'CrisisContactButton')};
+        background-color: var(--colour-button);
+
+        &:hover {
+            background-color: #{colours.get-static('colour-button-hover', 'CrisisContactButton')};
+            background-color: var(--colour-button-hover);
+        }
 
         .Icon {
-            outline: $white;
+            outline: #{colours.get-static('raw-colour-pure-white')};
+            outline: var(--raw-colour-pure-white);
 
             path {
-                fill: $white;
+                fill: #{colours.get-static('raw-colour-pure-white')};
+                fill: var(--raw-colour-pure-white);
             }
         }
 
         .Contact-text {
-            color: $white;
+            color: #{colours.get-static('colour-text-very-light')};
+            color: var(--colour-text-very-light);
             font-weight: bold;
         }
     }

@@ -1,13 +1,12 @@
-$colour-background: #edece9;
-$colour-grey: #808080;
-$colour-icon-background: #70bdae;
+@use '../styles/mixins/colours';
 
 .LogoWithTextBox {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px;
-    background-color: $colour-background;
+    background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+    background-color: var(--colour-bg-standard-tint-2);
     cursor: pointer;
 
     .Icon {

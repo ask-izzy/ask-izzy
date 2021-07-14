@@ -97,6 +97,8 @@ function registerScrollRestoration(location) {
         waitTillPageLoaded().then(
             () => window.scrollTo(0, Number(sessionValue))
         ).catch()
+    } else {
+        window.scrollTo(0, 0);
     }
 
     function handleScroll() {

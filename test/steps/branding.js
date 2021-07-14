@@ -94,6 +94,7 @@ async function seeTheBrandingFooter(): Promise<void> {
         "//footer"
     );
 
+    // FIXME: textIsVisible doesn't have a 3rd argument
     await assert.textIsVisible(
         this.driver,
         "About Ask Izzy",
@@ -106,6 +107,7 @@ async function seeTextInBrandingFooter(text: string): Promise<void> {
         "//footer"
     );
 
+    // FIXME: textIsVisible doesn't have a 3rd argument
     await assert.textIsVisible(
         this.driver,
         text,

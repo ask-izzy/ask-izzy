@@ -1,14 +1,16 @@
+@use '../styles/mixins/colours';
+
 .Accessibility {
     position: relative;
     padding-left: 32px;
-    color: $brand-text-dark;
+    color: #{colours.get-static('colour-text-dark')};
+    color: var(--colour-text-dark);
     font-weight: 500;
 
     .ColoredIcon {
         position: absolute;
         top: 5px;
         left: -4px;
-
         width: 30px;
         height: 30px;
     }

@@ -1,0 +1,27 @@
+extends:
+    - stylelint-config-standard
+    - stylelint-config-recommended
+    - stylelint-config-sass-guidelines
+plugins:
+    - stylelint-scss
+ignoreFiles:
+    - "**/node_modules/**"
+    - "src/styles/fonts.scss"
+    - "src/styles/normalize.scss"
+    - "public/static/*"
+    - "public/components-catalog/**"
+rules:
+    indentation: 4
+    # The following style sins were grandfathered in. Please re-enable and
+    # resolve issues for these rules over time.
+    function-parentheses-space-inside: null
+    order/order: null
+    max-nesting-depth: null
+    order/properties-alphabetical-order: null
+    selector-max-compound-selectors: null
+    selector-class-pattern: null
+    scss/selector-no-redundant-nesting-selector: null
+    selector-no-qualifying-type: null
+    no-descending-specificity: null
+    property-no-vendor-prefix: null
+    media-feature-name-no-unknown: null

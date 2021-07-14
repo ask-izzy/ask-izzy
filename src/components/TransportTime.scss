@@ -1,13 +1,13 @@
+@use '../styles/mixins/colours';
+
 .TransportTime {
     display: block;
     position: relative;
     padding-top: 10px;
     padding-bottom: 10px;
-
     font-size: 14px;
 
     &.compact {
-
         margin-bottom: 15px;
         padding-top: 0;
         padding-bottom: 0;
@@ -30,11 +30,6 @@
             width: 20px;
             height: 20px;
         }
-
-    }
-
-    .getDirections {
-        padding-top: 3px;
     }
 
     .Icon {
@@ -49,24 +44,29 @@
         left: 3px;
         width: 12px;
         height: 12px;
-        fill: $link-text-color;
+        fill: #{colours.get-static('colour-link')};
+        fill: var(--colour-link);
     }
 
     .travel-time {
         position: relative;
         padding: 0;
-        color: $brand-text-dark;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
         font-weight: 500;
     }
 
     .location {
         margin-right: 24px;
-        color: $brand-text-mid;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
     }
 
     .getDirections {
+        padding-top: 3px;
         float: left;
-        color: $link-text-color;
+        color: #{colours.get-static('colour-link')};
+        color: var(--colour-link);
         text-decoration: underline;
 
         &:hover {
@@ -74,8 +74,8 @@
         }
 
         &:visited {
-            color: $link-text-color-visited;
+            color: #{colours.get-static('colour-link-visited')};
+            color: var(--colour-link-visited);
         }
-
     }
 }

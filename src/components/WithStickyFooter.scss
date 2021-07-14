@@ -1,6 +1,6 @@
-.WithStickyFooter {
-    $shadow-colour: rgba(118, 118, 118, 0.44);
+@use '../styles/mixins/colours';
 
+.WithStickyFooter {
     > .content {
         margin-bottom: -40px;
     }
@@ -10,13 +10,16 @@
         bottom: 0;
         margin-top: 40px;
         transition: 0.1s box-shadow;
-        background-color: $white;
-        box-shadow: 0 0 0 0 $shadow-colour;
+        background-color: #{colours.get-static('colour-text-very-light')};
+        background-color: var(--colour-text-very-light);
+        box-shadow: 0 0 0 0 #{colours.get-static('colour-element-shadow')};
+        box-shadow: 0 0 0 0 var(--colour-element-shadow);
         overflow: auto;
         clip-path: inset(-30px 0 0 0);
 
         &[floating] {
-            box-shadow: 0 0 10px 7px $shadow-colour;
+            box-shadow: 0 0 10px 7px #{colours.get-static('colour-element-shadow')};
+            box-shadow: 0 0 10px 7px var(--colour-element-shadow);
         }
     }
 
@@ -30,27 +33,29 @@
 }
 
 /* Hack for IE11 which doesn't support "position: sticky;" */
-_:-ms-fullscreen,
-:root .WithStickyFooter > footer  {
-    position: fixed;
-    width: 800px;
-    max-width: calc(100vw - 18px);
+@media all and (-ms-high-contrast: none) {
+    *::-ms-backdrop,
+    .WithStickyFooter > footer {
+        position: fixed;
+        width: 800px;
+        max-width: calc(100vw - 18px);
+        animation: riseIn 0.5s 0s forwards;
+        z-index: 1;
 
-    animation: riseIn 0.5s 0s forwards;
-    @keyframes riseIn {
-        0% {
-            transform: translateY(10em) translateZ(0);
-            opacity: 0;
-        }
+        @keyframes riseIn {
+            0% {
+                transform: translateY(10em) translateZ(0);
+                opacity: 0;
+            }
 
-        50% {
-            opacity: 1;
+            50% {
+                opacity: 1;
+            }
         }
     }
 
-}
-
-_:-ms-fullscreen,
-:root .WithStickyFooter > .content  {
-    padding-bottom: 80px;
+    *::-ms-backdrop,
+    :root .WithStickyFooter > .content {
+        padding-bottom: 80px;
+    }
 }

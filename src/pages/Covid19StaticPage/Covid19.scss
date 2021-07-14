@@ -1,3 +1,5 @@
+@use '../../styles/mixins/colours';
+
 .Covid19Page {
     .HeaderBar {
         @media only screen and (max-width: 540px) {
@@ -18,7 +20,8 @@
     .nationalHotline {
         margin: 2em 0;
         padding: 0.4em 1.4em 1em;
-        background-color: $brand-pane-alt-dark-faint;
+        background-color: #{colours.get-static('colour-bg-callout-solid')};
+        background-color: var(--colour-bg-callout-solid);
 
         h2 {
             margin: 0.8em 0 0.5em;
@@ -30,8 +33,10 @@
 
         .Phone .ContactButton {
             margin: 0.5em 0;
-            background-color: $brand-pane-alt-dark;
-            color: $brand-text-light;
+            background-color: #{colours.get-static('colour-button-standard')};
+            background-color: var(--colour-button-standard);
+            color: #{colours.get-static('colour-text-light')};
+            color: var(--colour-text-light);
         }
     }
 
@@ -77,7 +82,8 @@
         margin: 1em -40px;
         padding: 0;
         border: 0;
-        border-top: 1px solid $brand-bg-mid-lighter;
+        border-top: 1px solid #{colours.get-static('colour-bg-standard-tint-1')};
+        border-top: 1px solid var(--colour-bg-standard-tint-1);
     }
 
     details {
@@ -117,7 +123,7 @@
     .izzyCanHelp {
         margin: 2em 0;
         padding: 0 1.3em 0.5em;
-        border: solid $brand-pane-alt-dark 1px;
+        border: solid #{colours.get-static('colour-border-standard-callout')} 1px;
+        border: solid var(--colour-border-standard-callout) 1px;
     }
 }
-

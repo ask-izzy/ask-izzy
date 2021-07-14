@@ -1,17 +1,14 @@
-$colour-red: #b30000;
-$brand-bg-dark: #363e43;
-$colour-grey: #f8f9f9;
-$notification-accent: #fed800;
-$notification-background: #f4f4f4;
-$bright-purple: #8a2be2;
+@use '../styles/mixins/colours';
 
 .HomePage {
     .notification {
         display: flex;
         padding: 0.6em 0.1em;
         padding-right: 1.5em;
-        border-left: $notification-accent 10px solid;
-        background-color: $notification-background;
+        border-left: #{colours.get-static('raw-colour-sunflower')} 10px solid;
+        border-left: var(--raw-colour-sunflower) 10px solid;
+        background-color: #{colours.get-static('colour-bg-standard-tint-3')};
+        background-color: var(--colour-bg-standard-tint-3);
 
         div {
             display: flex;
@@ -29,13 +26,14 @@ $bright-purple: #8a2be2;
         }
 
         a {
-            color: $link-text-color;
+            color: #{colours.get-static('colour-link')};
+            color: var(--colour-link);
             font-weight: bold;
 
             &:visited {
-                color: $link-text-color-visited;
+                color: #{colours.get-static('colour-link-visited')};
+                color: var(--colour-link-visited);
             }
-
         }
     }
 
@@ -49,7 +47,6 @@ $bright-purple: #8a2be2;
             justify-content: flex-end;
         }
     }
-
 
     .HeaderBar {
         padding: 30px 20px calc(2vw + 28px);
@@ -72,63 +69,24 @@ $bright-purple: #8a2be2;
     }
 
     .header a {
-        color: $white;
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
         font-size: 15px;
         text-decoration: none;
     }
 
-    .branding-container {
-        min-height: 82px;
-        background-color: $brand-bg-dark;
-        color: $white;
-        text-align: center;
-
-        .logo {
-            width: auto;
-            padding-top: 2px;
-
-            @media ($tablet) {
-                display: inline-block;
-                padding-left: 20px;
-            }
-        }
-
-        .LogotypeIcon {
-            width: auto;
-            height: 80px;
-            margin: 0;
-            margin-bottom: -7px;
-            padding: 0;
-
-            /* Ask */
-            g > g > path {
-                fill: $white;
-            }
-
-            /* Izzy */
-            g + g path {
-                fill: $brand-pane-alt-light;
-            }
-
-            @media ($tablet) {
-                display: inline-block;
-                margin-bottom: -16px;
-            }
-
-        }
-
-    }
-
     .search {
         padding: 1em;
-        background-color: $brand-bg-mid-lighter;
+        background-color: #{colours.get-static('colour-bg-standard-tint-1')};
+        background-color: var(--colour-bg-standard-tint-1);
 
         &.locationSet {
             padding-bottom: 0;
         }
 
         .searchLabel {
-            color: $brand-bg-dark;
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
 
             h4 {
                 margin: 10px 0;
@@ -137,22 +95,20 @@ $bright-purple: #8a2be2;
 
         .searchWrapper {
             display: flex;
-
             align-items: center;
             justify-content: space-between;
             width: 100%;
-
             height: 19px;
             margin: auto;
-
             padding: 9px;
             padding-right: 0;
             padding-left: 0;
-
-            border: 1px $white solid;
+            border: 1px solid #{colours.get-static('raw-colour-pure-white')};
+            border: 1px solid var(--raw-colour-pure-white);
             border-right: 0;
             border-radius: 3px;
-            background-color: $white;
+            background-color: #{colours.get-static('raw-colour-pure-white')};
+            background-color: var(--raw-colour-pure-white);
 
             .searchIcon {
                 margin-top: 0.3em;
@@ -160,19 +116,14 @@ $bright-purple: #8a2be2;
 
             input {
                 flex: 1 1 auto;
-
                 width: 2em;
-
                 margin: 0.5em 0.2em;
-
                 padding: 0;
-
                 padding-right: 10px;
                 border: 0;
-
                 border-radius: 5px 0 0 5px;
-                color: $brand-text-dark;
-
+                color: #{colours.get-static('colour-text-dark')};
+                color: var(--colour-text-dark);
                 -webkit-appearance: none;
 
                 &:focus {
@@ -181,15 +132,12 @@ $bright-purple: #8a2be2;
             }
 
             button {
-                height: 39px;
-
+                height: 40px;
                 padding: 0 15px;
                 border: 0;
                 border-radius: 0 5px 5px 0;
-
                 border-top-right-radius: 3px;
                 border-bottom-right-radius: 3px;
-
                 font-size: 14px;
             }
         }

@@ -1,12 +1,13 @@
-@import "./normalize";
-@import "./variables";
-@import "./responsive";
-@import "./mixins";
-@import "./fonts";
-@import "./siteBanner";
-@import "~saffron-sass/saffron/saffron";
-@import "./shared/plain-text";
-@import "./shared/print-only";
+@import './normalize';
+@import './variables/colours';
+@import './variables/lengths';
+@import './responsive';
+@import './global-styles';
+@import './mixins';
+@import './fonts';
+@import './siteBanner';
+@import './shared/plain-text';
+@import './shared/print-only';
 
 /**
  * AUTO DETECTED STYLES LOADED HERE

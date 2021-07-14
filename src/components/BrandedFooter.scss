@@ -1,6 +1,32 @@
-$container-spacing: 20px;
+@use '../styles/mixins/colours';
 
 .branding-footer-container {
+    @include colours.define(
+        'colour-primary',
+        'branding-footer-container',
+        'raw-colour-rich-purple'
+    );
+    @include colours.define(
+        'colour-primary-tint-1',
+        'branding-footer-container',
+        colours.lighten(
+            'colour-primary',
+            'branding-footer-container',
+            -34%
+        )
+    );
+    @include colours.define(
+        'colour-primary-tint-2',
+        'branding-footer-container',
+        colours.lighten(
+            'colour-primary',
+            'branding-footer-container',
+            -60%
+        )
+    );
+
+    $container-spacing: 20px;
+
     > div > div {
         padding: $container-spacing;
     }
@@ -17,11 +43,13 @@ $container-spacing: 20px;
 
     .top-box {
         display: flex;
-        background-color: $brand-bg-light;
+        background-color: #{colours.get-static('colour-bg-standard-tint-2', 'branding-footer-container')};
+        background-color: var(--colour-bg-standard-tint-2);
 
         h1 {
             margin-top: 0;
-            color: $brand-pane-alt-dark;
+            color: #{colours.get-static('colour-primary', 'branding-footer-container')};
+            color: var(--colour-primary);
             font-size: 1.4em;
             font-weight: normal;
         }
@@ -32,13 +60,13 @@ $container-spacing: 20px;
         }
 
         a {
-            color: $brand-text-dark;
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
             text-decoration: none;
 
             &:hover {
                 text-decoration: underline;
             }
-
         }
 
         > div {
@@ -49,11 +77,14 @@ $container-spacing: 20px;
 
     .middle-box,
     .bottom-box {
-        background-color: $brand-pane-alt-darker;
-        color: $brand-text-light;
+        background-color: #{colours.get-static('colour-primary-tint-1', 'branding-footer-container')};
+        background-color: var(--colour-primary-tint-1);
+        color: #{colours.get-static('colour-text-light', 'branding-footer-container')};
+        color: var(--colour-text-light);
 
         a {
-            color: $brand-text-light;
+            color: #{colours.get-static('colour-text-light', 'branding-footer-container')};
+            color: var(--colour-text-light);
         }
     }
 
@@ -153,7 +184,8 @@ $container-spacing: 20px;
             align-self: center;
             max-width: 300px;
             border-radius: 8px;
-            background-color: $brand-pane-alt-even-darker;
+            background-color: #{colours.get-static('colour-primary-tint-2', 'branding-footer-container')};
+            background-color: var(--colour-primary-tint-2);
 
             h1 {
                 margin: 0.3em 0 1em;
@@ -202,9 +234,11 @@ $container-spacing: 20px;
 
         > div {
             width: 100%;
+
             /* for IE */
             max-width: 550px;
             box-sizing: border-box;
+
             /* end for IE */
         }
 
@@ -245,8 +279,10 @@ $container-spacing: 20px;
             div.socials {
                 width: 100%;
                 margin: 20px 0;
-                border-top: $brand-pane-alt-even-darker 1px solid;
-                border-bottom: $brand-pane-alt-even-darker 1px solid;
+                border-top: #{colours.get-static('colour-primary-tint-2', 'branding-footer-container')} 1px solid;
+                border-top: var(--colour-primary-tint-2) 1px solid;
+                border-bottom: #{colours.get-static('colour-primary-tint-2', 'branding-footer-container')} 1px solid;
+                border-bottom: var(--colour-primary-tint-2) 1px solid;
                 break-before: unset;
             }
 

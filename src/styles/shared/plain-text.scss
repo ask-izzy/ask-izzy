@@ -1,4 +1,7 @@
+@use '../mixins/colours';
+
 .plain-text {
-    color: $brand-text-dark;
+    color: #{colours.get-static('colour-text-dark')};
+    color: var(--colour-text-dark);
     text-decoration: none;
 }

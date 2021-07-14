@@ -1,0 +1,6 @@
+@use '../styles/mixins/colours';
+
+:focus {
+    outline: 1px solid #{colours.get-static('colour-input-focus-primary')};
+    outline: 1px solid var(--colour-input-focus-primary);
+}

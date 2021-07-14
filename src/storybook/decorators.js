@@ -2,9 +2,11 @@
 
 import React, {useEffect} from "react";
 import { MemoryRouter } from "react-router-dom";
+import {LoadScript} from "@react-google-maps/api";
+
 import storage from "../storage";
 import RouterContext from "../contexts/router-context";
-import {LoadScript} from "@react-google-maps/api";
+import { DebugModeProvider } from "../contexts/debug-mode-context";
 
 export function addRouter(Story: Object) {
     return <MemoryRouter><Story/></MemoryRouter>
@@ -61,4 +63,13 @@ export function setRouterContext(
     return <RouterContext.Provider value={{router}}>
         <Story/>
     </RouterContext.Provider>
+}
+
+export function setDebugModeContext(Story: Object, {parameters}: Object) {
+    const debugMode = parameters?.context?.debugMode
+    return (
+        <DebugModeProvider initialDebugMode={debugMode}>
+            <Story/>
+        </DebugModeProvider>
+    );
 }

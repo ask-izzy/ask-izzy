@@ -1,17 +1,17 @@
+@use '../styles/mixins/colours';
 
 .DebugQueryScore {
     @include clearfix;
+
     padding-left: 8px;
-
-    color: $brand-text-mid;
-
     font-size: 12px;
 
     & > .DebugQueryScore {
         margin-top: 5px;
-
-        border-top: 1px solid $brand-text-mid;
-        border-left: 5px solid $list-item-hairline;
+        border-top: 1px solid #{colours.get-static('colour-text-mid')};
+        border-top: 1px solid var(--colour-text-mid);
+        border-left: 5px solid #{colours.get-static('colour-border-list-item')};
+        border-left: 5px solid var(--colour-border-list-item);
     }
 
     .score {
@@ -21,10 +21,12 @@
     &:hover {
         &,
         & > .DebugQueryScore {
-            border-top-color: $brand-text-dark;
-            border-left-color: $brand-text-dark;
-
-            color: $icon-fg-color;
+            border-top-color: #{colours.get-static('colour-text-dark')};
+            border-top-color: var(--colour-text-dark);
+            border-left-color: #{colours.get-static('colour-text-dark')};
+            border-left-color: var(--colour-text-dark);
+            color: #{colours.get-static('colour-border-list-item')};
+            color: var(--raw-colour-rich-purple);
         }
     }
 }

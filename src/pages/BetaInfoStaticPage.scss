@@ -1,3 +1,5 @@
+@use '../styles/mixins/colours';
+
 .StaticPage.BetaInfoPage {
     .HeaderBar .primary {
         font-size: 2em;
@@ -22,7 +24,8 @@
             margin-right: 0.8em;
 
             span {
-                color: $brand-text-mid;
+                color: #{colours.get-static('colour-text-mid')};
+                color: var(--colour-text-mid);
                 font-weight: bold;
             }
 
@@ -34,7 +37,8 @@
                     vertical-align: text-bottom;
 
                     path {
-                        fill: $brand-pane-alt-dark;
+                        fill: #{colours.get-static('colour-button-standard')};
+                        fill: var(--colour-button-standard);
                     }
                 }
             }

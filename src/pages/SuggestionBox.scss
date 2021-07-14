@@ -1,35 +1,41 @@
-$suggestion-box-bg: #edecea;
+@use '../styles/mixins/colours';
 
 .SuggestionBox {
     display: flex;
     justify-content: start;
     padding: 1em 1em 2em;
-    background-color: $suggestion-box-bg;
+    background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+    background-color: var(--colour-bg-standard-tint-2);
 
     .SuggestionContentBox {
         h3 {
-            color: $brand-text-dark;
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
             font-weight: 550;
         }
 
         h4 {
             margin-bottom: 5px;
-            color: $brand-text-dark;
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
             font-weight: normal;
         }
 
         a {
             &:visited {
-                color: $link-text-color;
+                color: #{colours.get-static('colour-link')};
+                color: var(--colour-link);
             }
         }
     }
 
     &.withBackground {
-        background-color: $suggestion-box-bg;
+        background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+        background-color: var(--colour-bg-standard-tint-2);
     }
 
     &.withoutBackground {
-        background-color: $white;
+        background-color: #{colours.get-static('colour-bg-standard')};
+        background-color: var(--colour-bg-standard);
     }
 }

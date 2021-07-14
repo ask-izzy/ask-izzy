@@ -1,8 +1,10 @@
+@use '../styles/mixins/colours';
 
 .BoxedTextDivider {
     padding-top: 7px;
     padding-bottom: 7px;
-    background-color: $brand-bg-light;
+    background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+    background-color: var(--colour-bg-standard-tint-2);
 
     hr {
         margin-top: 0;

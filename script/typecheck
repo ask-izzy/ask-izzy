@@ -77,7 +77,7 @@ if which parallel > /dev/null ; then
             checkFlowDefs \
             'check "jsonlint package.json > /dev/null"' \
             'check "eslint src/ test/ fixtures/ webpack/ config/"' \
-            'check "sass-lint -v"' \
+            'check "stylelint **/*.{css,scss,sass}"' \
             'check "flow"' \
 
         exit 0
@@ -91,6 +91,6 @@ checkFlowDefs
 
 check "jsonlint package.json > /dev/null"
 check "eslint src/ test/ fixtures/ webpack/ config/ .storybook/"
-check "sass-lint -v"
+check "stylelint **/*.{css,scss,sass}"
 check "flow"
 

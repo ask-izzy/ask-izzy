@@ -3,30 +3,3 @@
         padding: 0;
     }
 }
-
-.FeedbackLink {
-    background: $brand-bg-light;
-}
-
-.CensusLink,
-.FeedbackLink {
-    & > div {
-        padding-top: 11px;
-        padding-bottom: 11px;
-
-        .primaryText {
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 18px;
-        }
-
-        .secondaryText {
-            color: $brand-text-dark;
-        }
-    }
-}
-
-.census-logo {
-    margin-top: 3px;
-    margin-left: 3px;
-}

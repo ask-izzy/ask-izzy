@@ -1,3 +1,5 @@
+@use '../styles/mixins/colours';
+
 .DynamicPage {
     margin-bottom: 5em;
 
@@ -12,126 +14,17 @@
     }
 
     code {
-        background-color: $brand-bg-dark;
-        color: $brand-text-light;
+        background-color: #{colours.get-static('raw-colour-slate-gray')};
+        background-color: var(--raw-colour-slate-gray);
+        color: #{colours.get-static('colour-text-light')};
+        color: var(--colour-text-light);
     }
 
     blockquote {
         margin-left: 0;
         padding: 10px 20px;
-        border-left: 5px solid $brand-text-light;
+        border-left: 5px solid #{colours.get-static('colour-text-light')};
+        border-left: 5px solid var(--colour-text-light);
         font-style: italic;
     }
-
-    .askIzzyInfoBox {
-        margin: 2em 0;
-        padding: 0 1.3em 0.5em;
-        border: solid $brand-pane-alt-dark 1px;
-    }
-
-    .nationalHotline {
-        margin: 2em 0;
-        padding: 0.4em 1.4em 1em;
-        background-color: $brand-pane-alt-dark-faint;
-
-        h2 {
-            margin: 0.8em 0 0.5em;
-        }
-
-        p {
-            margin: 0.5em 0;
-        }
-
-        .Phone .ContactButton {
-            margin: 0.5em 0;
-            background-color: $brand-pane-alt-dark;
-            color: $brand-text-light;
-        }
-    }
-
-    .OnlineSecurity {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 30px;
-        background-color: $brand-text-light;
-        cursor: pointer;
-
-        .h2 {
-            font-size: 1.15em;
-            font-weight: 500;
-        }
-
-        img {
-            width: 64px;
-            height: 64px;
-            padding: 5px;
-            border-radius: 50%;
-            background-color: $online-safety;
-        }
-
-        p {
-            width: 50%;
-            font-size: small;
-            text-align: center;
-        }
-
-        .Contact {
-            width: 320px;
-        }
-
-        a {
-            font-weight: 500;
-        }
-    }
-
-    .siteBanner-warning {
-        margin: 1.5rem 0;
-        padding: 0 15px;
-        background-color: $site-banner-warning;
-        color: $white;
-        font-size: 1rem;
-        overflow: auto;
-
-        h2 {
-            font-weight: revert;
-        }
-
-        a {
-            color: $white;
-            text-decoration: underline;
-        }
-    }
-
-    .calloutPhone {
-        .Contact-text {
-            color: $white;
-        }
-
-        .number {
-            margin-left: 1em;
-        }
-
-        .Icon {
-            display: inline-block;
-            position: absolute;
-            top: -2px;
-            left: 50%;
-            margin-left: -110px;
-
-            path {
-                fill: $white;
-                @media print {
-                    fill: $black;
-                }
-            }
-        }
-    }
-
-    @media (max-width: 768px) {
-        .LogoWithTextBox p {
-            width: 100%;
-        }
-    }
-
 }

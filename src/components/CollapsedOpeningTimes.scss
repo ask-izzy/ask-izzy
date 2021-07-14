@@ -1,3 +1,5 @@
+@use '../styles/mixins/colours';
+
 .CollapsedOpeningTimes {
     display: flex;
     flex-wrap: wrap;
@@ -23,7 +25,8 @@
             white-space: nowrap;
 
             &:visited {
-                color: $link-text-color;
+                color: #{colours.get-static('colour-link')};
+                color: var(--colour-link);
             }
         }
 

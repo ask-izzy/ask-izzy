@@ -1,3 +1,4 @@
+@use '../styles/mixins/colours';
 
 .Contact {
     @include clearfix;
@@ -9,10 +10,12 @@
     .kind {
         width: 100%;
         max-width: 100px;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
 
-        color: $brand-text-mid;
         @media print {
-            color: $black;
+            color: #{colours.get-static('raw-colour-pure-black')};
+            color: var(--raw-colour-pure-black);
         }
 
         font-size: 14px;
@@ -23,11 +26,12 @@
         display: block;
         position: relative;
         width: auto;
-
         margin-top: 5px;
         padding: 6px;
+
         @media print {
-            color: $black;
+            color: #{colours.get-static('raw-colour-pure-black')};
+            color: var(--raw-colour-pure-black);
         }
 
         font-size: 16px;
@@ -43,14 +47,16 @@
             position: absolute;
             top: -5px;
             left: -8px;
-
             width: 40px;
             height: 40px;
 
             path {
-                fill: $brand-text-dark;
+                fill: #{colours.get-static('colour-text-dark')};
+                fill: var(--colour-text-dark);
+
                 @media print {
-                    fill: $black;
+                    fill: #{colours.get-static('raw-colour-pure-black')};
+                    fill: var(--raw-colour-pure-black);
                 }
             }
         }

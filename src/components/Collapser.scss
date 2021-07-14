@@ -1,3 +1,5 @@
+@use '../styles/mixins/colours';
+
 .Collapser {
     /* remove default button styling */
     button.collapser-message {
@@ -10,7 +12,8 @@
 
     .collapser-message {
         margin-left: auto;
-        color: $brand-pane-alt-dark;
+        color: #{colours.get-static('colour-link')};
+        color: var(--colour-link);
         text-decoration: underline;
     }
 
