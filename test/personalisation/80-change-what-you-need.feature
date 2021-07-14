@@ -119,10 +119,11 @@ Feature: Change your personalisation settings
 
     Scenario: Clear my personalisation
         When I visit /housing/personalise/summary
-         And I click on "Delete all answers"
+        And I click on "Clear all answers and restart search"
         Then I should see the branding header
-         And I should be at /
+        And I should be at /
+
         When I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions"
-         And I click on the done button
-        Then I should not see "Melbourne, Vic"
+        And I click on the done button
+        And I should not see "Melbourne, Vic"

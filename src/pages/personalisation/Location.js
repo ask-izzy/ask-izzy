@@ -15,6 +15,7 @@ import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
 import Category from "../../constants/Category";
+import WithStickyFooter from "../../components/WithStickyFooter";
 
 type Props = {
         name: string,
@@ -220,22 +221,25 @@ class Location extends Personalisation<Props, State> {
         });
     }
 
-    render() {
-        return (
-            <div className="Location">
-                <components.HeaderBar
-                    primaryText={
-                        <div>
-                            Where are you?
-                        </div>
-                    }
-                    secondaryText={
-                        "This will let me find the services closest to you"
-                    }
-                    taperColour={this.state.showStepper ? "LighterGrey"
-                        : "HeaderBar"}
-                    bannerName={this.bannerName}
-                />
+    render = () => (
+        <div className="Location">
+            <components.HeaderBar
+                primaryText={
+                    <div>
+                        Where are you?
+                    </div>
+                }
+                secondaryText={
+                    "This will let me find the services closest to you"
+                }
+                taperColour={this.state.showStepper ? "LighterGrey"
+                    : "HeaderBar"}
+                bannerName={this.bannerName}
+            />
+
+            <WithStickyFooter
+                footerContents={this.renderDoneButton()}
+            >
                 <div className="List">
                     {this.state.showStepper ? (
                         <QuestionStepper
@@ -250,7 +254,9 @@ class Location extends Personalisation<Props, State> {
                         />
                     }
 
-                    <div className="search">
+                    <div className="search"
+                        id="searchBar"
+                    >
                         <input
                             type="search"
                             ref={element => {
@@ -301,10 +307,9 @@ class Location extends Personalisation<Props, State> {
                         </div>
                     )
                 }
-                {this.renderDoneButton()}
-            </div>
-        );
-    }
+            </WithStickyFooter>
+        </div>
+    );
 
     renderDoneButton() {
         return (
@@ -314,6 +319,7 @@ class Location extends Personalisation<Props, State> {
                         label="Done"
                         onClick={this.onDoneTouchTap.bind(this)}
                         disabled={this.state.nextDisabled}
+                        form="searchBar"
                     />
                 </div>
             </div>

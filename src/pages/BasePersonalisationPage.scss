@@ -42,17 +42,6 @@
         }
     }
 
-    .floatsFromBottom {
-        .done-button,
-        .okay-button,
-        .clear-button {
-            button {
-                margin-top: 5px;
-                margin-bottom: 5px;
-            }
-        }
-    }
-
     .done-button,
     .okay-button,
     .clear-button,
@@ -73,8 +62,7 @@
     }
 
     .ClearResults {
-        padding: 20px;
-        border-top: 1px solid $list-item-hairline;
+        margin: 20px;
 
         color: $brand-text-mid;
         font-size: 16px;
@@ -83,9 +71,10 @@
     }
 
     .clear-button {
-        button {
-            background-color: $brand-error;
-            color: $white;
+        margin: 0.5em 0;
+
+        a {
+            color: $brand-text-dark;
         }
     }
 
