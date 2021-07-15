@@ -41,7 +41,7 @@ class HtmlDocument extends React.Component<Object, void> {
             ogDescription,
         } = this.props;
         const viewport =
-            "width=device-width, initial-scale=1.0, user-scalable=no";
+            "width=device-width, initial-scale=1.0";
 
         return (
             <html lang="en">

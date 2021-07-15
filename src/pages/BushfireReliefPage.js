@@ -144,7 +144,7 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     If you want to help
                 </h2>
                 <p>
-                    <strong>Updating service information</strong>
+                    <h3>Updating service information</h3>
                 </p>
                 <p>
                     Ask Izzy has over 360,000 services listed, and we’d love
@@ -160,7 +160,7 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                     </Link>.
                 </p>
                 <p>
-                    <strong>Donating money</strong>
+                    <h3>Donating money</h3>
                 </p>
                 <p>
                     For those with money to give, the{" "}

@@ -127,9 +127,9 @@ class AddServicePage extends React.Component<Props, State> {
                     as current as possible.
                 </p>
                 <p>
-                    <strong>
+                    <h2>
                         If you notice that service information is incorrect:
-                    </strong>
+                    </h2>
                 </p>
                 <p>
                     We know that service and program information changes all
@@ -161,9 +161,9 @@ class AddServicePage extends React.Component<Props, State> {
                     </Link>.
                 </p>
                 <p>
-                    <strong>
+                    <h2>
                         If you want to add a new service:
-                    </strong>
+                    </h2>
                 </p>
                 <p>
                     If your service doesn&apos;t appear when you search for

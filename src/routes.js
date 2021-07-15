@@ -77,7 +77,10 @@ function Route(props) {
 function Redirect({path, to}) {
     const { navigate } = useRouterContext()
     navigate(generatePath(to, useParams()))
-    return null
+    // to ensure the pa11y test passes,
+    // it needs to return a heading on the page
+    // when it's navigating
+    return <><h1>{to}</h1></>
 }
 
 const routes: ReactElement<typeof Routes> = <Routes>
