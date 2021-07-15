@@ -4,7 +4,7 @@ import BaseMultiQuestion from "./BaseMultiQuestion";
 
 import { append } from "../../iss/Search";
 import icons from "../../icons";
-import { resetDfvOptions } from "../../utils";
+import { resetDfvOptions } from "../../utils/domesticViolence";
 import * as React from "react";
 
 const ATSI_BREADCRUMB_ICON = (

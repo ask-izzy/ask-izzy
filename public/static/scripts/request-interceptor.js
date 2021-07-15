@@ -1,15 +1,14 @@
 /* $FlowIgnore */
-/* The functions below intercepts xmlhttprequests and js loaded via scripts
-* and checks if the requests are being made to an external domain.
-* For the purpose of AskIzzy to be zero-rated for end users,
-* all known external services are proxied through Infoxchange servers.
-*/
+// The functions below intercepts xmlhttprequests, js loaded via scripts,
+// fetch requests and checks if the requests are being made to an external
+// domain. For the purpose of AskIzzy to be zero-rated for end users,
+// all known external services are proxied through Infoxchange servers.
 
 var zeroRatingHelper = new Object();
 
 zeroRatingHelper.isPhantomJS = window.navigator.userAgent.search('PhantomJS') != -1;
 
-// Common replace function: Replace knwon external domains to internal proxy
+// Common replace function: Replace known external domains to internal proxy
 // Domain lists are generated from generate-env-vars
 zeroRatingHelper.replaceDomain = function(oldUrl) {
     let url
@@ -119,3 +118,13 @@ if ( !zeroRatingHelper.isPhantomJS ){
         };
     }(document.createElement);
 }
+
+// 3. Replace domains for all fetch requests
+window.fetch && (function(originalFetchFunction) {
+    window.fetch = function() {
+        if (arguments[0]) {
+            arguments[0] = zeroRatingHelper.replaceDomain(arguments[0])
+        }
+        return originalFetchFunction.apply(null, arguments)
+    };
+})(window.fetch);

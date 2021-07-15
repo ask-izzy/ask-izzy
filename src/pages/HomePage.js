@@ -3,17 +3,17 @@
 import React from "react";
 
 import HeaderBar from "../components/HeaderBar";
-import Link from "../components/Link";
 import icons from "../icons"
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
 import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
-import { resetDfvOptions } from "../utils";
+import { resetDfvOptions } from "../utils/domesticViolence";
 import routerContext from "../contexts/router-context";
 import AppBar from "../components/AppBar";
 import QuestionStepper from "./QuestionStepper";
 import Storage from "../storage";
+import AlertBannerList from "../components/AlertBannerList";
 
 type State = {
     location: ?string,
@@ -59,25 +59,11 @@ class HomePage extends React.Component<{}, State> {
         const logo = "/static/images/ask-izzy-logo-single-line-yellow.svg";
         return (
             <div className="HomePage">
-                <div className="notification">
-                    <icons.Info className={"big middle"}/>
-                    <div>
-                        <h3>
-                            Coronavirus (COVID-19) support
-                        </h3>
-                        <span>
-                            Find help and information near you.{" "}
-                            <Link to="/covid-19-support">
-                                Learn&nbsp;more
-                            </Link>
-                        </span>
-                    </div>
-                </div>
                 <AppBar
                     containerClassName="appbar"
                     fixedSizeQuickExit={true}
                 />
-                <div className="header">
+                <section className="page-header-section">
                     <HeaderBar
                         primaryText={<>
                             <img
@@ -93,9 +79,9 @@ class HomePage extends React.Component<{}, State> {
                         bannerName="homepage"
                         taperColour="LighterGrey"
                     />
-                </div>
-
-                <div className="body">
+                    <AlertBannerList
+                        screenLocation="homePage"
+                    />
                     <form
                         className={`search ${
                             this.state.location ? "locationSet" : ""}`}
@@ -143,8 +129,8 @@ class HomePage extends React.Component<{}, State> {
                                 />
                             </div>}
                     </div>
-                    <NavBar />
-                </div>
+                </section>
+                <NavBar />
 
                 <BrandedFooter />
             </div>

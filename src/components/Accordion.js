@@ -1,8 +1,6 @@
 /* @flow */
 import * as React from "react";
-import gfm from "remark-gfm";
-import ReactMarkdown from "react-markdown";
-import {absoluteImageUrl} from "../pages/DynamicPage.service";
+import StrapiMarkdown from "../components/StrapiMarkdown";
 import AccordionItem from "./AccordionItem";
 
 type Props = {
@@ -21,13 +19,9 @@ const Accordion: React.StatelessFunctionalComponent<Props> = (
                     title={item.Title}
                     key={index}
                 >
-                    <ReactMarkdown
-                        plugins={[gfm]}
-                        source={item.Content}
-                        transformImageUri={
-                            absoluteImageUrl
-                        }
-                    />
+                    <StrapiMarkdown>
+                        {item.Content}
+                    </StrapiMarkdown>
                 </AccordionItem>
             </li>
         )

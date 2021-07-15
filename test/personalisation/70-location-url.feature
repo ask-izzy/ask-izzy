@@ -9,8 +9,8 @@ Feature: Show location in url
         Given a fresh session
 
     Scenario: Search via bookmark
-        When I visit /search/housing/in/Richmond-Victoria
-        Then I should see "Richmond, Victoria"
+        When I visit /search/housing/in/Richmond-VIC
+        Then I should see "Richmond, VIC"
         When I click on "See all and edit"
         And I click on "Where are you?"
         Then I should see "This will let me find the services closest to you"

@@ -178,32 +178,34 @@ class BaseMultiQuestion extends BaseQuestion {
                     )
                 }
             >
-                <HeaderBar
-                    primaryText={
-                        <div>
-                            {this.props.question}
-                        </div>
-                    }
-                    secondaryText={
-                        this.props.byline
-                    }
-                    taperColour="LighterGrey"
-                    bannerName={this.bannerName}
-                />
+                <section className="page-header-section">
+                    <HeaderBar
+                        primaryText={
+                            <div>
+                                {this.props.question}
+                            </div>
+                        }
+                        secondaryText={
+                            this.props.byline
+                        }
+                        taperColour="LighterGrey"
+                        bannerName={this.bannerName}
+                    />
+                    <QuestionStepper
+                        category={getCategory(
+                            this.context.router.match.params.page
+                        )}
+                        listFocused={this.state.listFocused}
+                        onTabIndex={(tabIndex) =>
+                            this.setState({tabIndex})
+                        }
+                    />
+                </section>
 
                 <WithStickyFooter
                     footerContents={this.renderDoneButton()}
                 >
                     <div className="List">
-                        <QuestionStepper
-                            category={getCategory(
-                                this.context.router.match.params.page
-                            )}
-                            listFocused={this.state.listFocused}
-                            onTabIndex={(tabIndex) =>
-                                this.setState({tabIndex})
-                            }
-                        />
                         {this.answers.map((answer, index) =>
                             <InputListItem
                                 key={index}

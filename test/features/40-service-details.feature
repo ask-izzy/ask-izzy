@@ -65,7 +65,7 @@ Feature: Service details page
         ----------------------------------------------
         When I navigate to the service page
         Then I should see ATSI flags
-    
+
     Scenario: ATSI flags are absent if there is no indigenous classification
        Given A service with:
         ----------------------------------------------

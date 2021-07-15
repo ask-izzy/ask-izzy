@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from "react";
+import * as React from "react";
 import { debounce } from "lodash-decorators";
 import { ltrim } from "underscore.string";
 import _ from "underscore";
@@ -223,29 +223,12 @@ class Location extends Personalisation<Props, State> {
 
     render = () => (
         <div className="Location">
-            <components.HeaderBar
-                primaryText={
-                    <div>
-                        Where are you?
-                    </div>
-                }
-                secondaryText={
-                    "This will let me find the services closest to you"
-                }
-                taperColour={this.state.showStepper ? "LighterGrey"
-                    : "HeaderBar"}
-                bannerName={this.bannerName}
-            />
+            {this.renderHeaderBar()}
 
             <WithStickyFooter
                 footerContents={this.renderDoneButton()}
             >
                 <div className="List">
-                    {this.state.showStepper ? (
-                        <QuestionStepper
-                            category={this.state.category}
-                        />
-                    ) : null}
                     {
                         /* if the browser supports geolocation */
                         geolocationAvailable() &&
@@ -324,6 +307,36 @@ class Location extends Personalisation<Props, State> {
                 </div>
             </div>
         )
+    }
+
+    renderHeaderBar(): React.Element<any> {
+        const renderedHeaderBar = (
+            <components.HeaderBar
+                primaryText={
+                    <div>
+                        Where are you?
+                    </div>
+                }
+                secondaryText={
+                    "This will let me find the services closest to you"
+                }
+                taperColour={this.state.showStepper ? "LighterGrey"
+                    : "HeaderBar"}
+                bannerName={this.bannerName}
+            />
+        )
+        if (this.state.showStepper) {
+            return (
+                <section className="page-header-section">
+                    {renderedHeaderBar}
+                    <QuestionStepper
+                        category={this.state.category}
+                    />
+                </section>
+            )
+        } else {
+            return renderedHeaderBar
+        }
     }
 }
 

@@ -41,10 +41,40 @@ assertExtended.textIsVisible = async function(
 ): Promise<void> {
     text = escapeXPathString(text);
 
-    let visible = await driver.findElement(By.xpath(
+    const element = await driver.findElement(By.xpath(
         deepestPossible(`normalize-space(.) = normalize-space(${text})`)
     ))
-        .isDisplayed();
+
+    let visible = await element.isDisplayed();
+
+    // isDisplayed doesn't currently check if text is in a closed <details>
+    // element so we've got to check for that manually.
+    if (visible) {
+        visible = await driver.executeScript(
+            (element) => {
+                // step up dom tree to check if we're in a closed details elm
+                while (element) {
+                    // even when in a closed details element a summary
+                    // element is always visible. So if we're in a summary
+                    // element skip over that until we're pass it's containing
+                    // details element.
+                    if (element.tagName === "SUMMARY") {
+                        while (element.tagName !== "DETAILS") {
+                            element = element.parentElement
+                        }
+                        element = element.parentElement
+                        continue
+                    }
+                    if (element.tagName === "DETAILS" && !element.open) {
+                        return false
+                    }
+                    element = element.parentElement
+                }
+                return true
+            },
+            element
+        )
+    }
 
     assert(visible, `Text ${text} was present but not visible`);
 }

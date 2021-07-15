@@ -50,19 +50,9 @@
             line-height: 18px;
         }
 
-        .MapIcon {
-            width: 40px;
-            height: 40px;
-            margin-top: -9px;
-            margin-left: -2px;
-        }
-
-        .rightIcon {
-            top: 6px;
-        }
-
-        & > div {
-            padding-left: 58px;
+        & > div > .leftIcon {
+            min-width: 55px;
+            padding-left: 10px;
         }
     }
 

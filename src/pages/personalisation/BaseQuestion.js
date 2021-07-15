@@ -263,15 +263,6 @@ class BaseQuestion extends Personalisation<Props, State> {
         return (
             <div>
                 {this.renderHeaderBar()}
-                {this.state.showStepper && (
-                    <QuestionStepper
-                        category={this.state.category}
-                        listFocused={this.state.listFocused}
-                        onTabIndex={(tabIndex) =>
-                            this.setState({tabIndex})
-                        }
-                    />
-                )}
                 <div className={listClassName}>
                     {this.answers.map((answer, index) =>
                         <InputListItem
@@ -309,7 +300,7 @@ class BaseQuestion extends Personalisation<Props, State> {
     }
 
     renderHeaderBar(): React.Element<any> {
-        return (
+        const renderedHeaderBar = (
             <HeaderBar
                 primaryText={
                     <div>
@@ -324,6 +315,22 @@ class BaseQuestion extends Personalisation<Props, State> {
                 bannerName={this.bannerName}
             />
         );
+        if (this.state.showStepper) {
+            return (
+                <section className="page-header-section">
+                    {renderedHeaderBar}
+                    <QuestionStepper
+                        category={this.state.category}
+                        listFocused={this.state.listFocused}
+                        onTabIndex={(tabIndex) =>
+                            this.setState({tabIndex})
+                        }
+                    />
+                </section>
+            )
+        } else {
+            return renderedHeaderBar
+        }
     }
 
     renderDoneButton(): ?React.Element<any> {

@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from "react";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 // $FlowIgnore
 import type { DocumentNode } from "graphql";
 

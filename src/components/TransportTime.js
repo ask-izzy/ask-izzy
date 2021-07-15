@@ -14,6 +14,11 @@ import GoogleMapsLink from "./GoogleMapsLink";
 class TransportTime extends React.Component<{
     location: Location,
     compact?: true,
+    // If this component is already wrapped in a <GoogleMapsLink /> then
+    // including it again will create invalid HTML. We should probably
+    // rethink the design such that this doesn't happen but for now this
+    // works as an ugly workaround.
+    withoutLink?: boolean,
 }, void> {
     static defaultProps = {
         compact: false,
@@ -158,22 +163,29 @@ class TransportTime extends React.Component<{
 
     renderDirections() {
         if (!this.props.compact) {
-            return (
-                <GoogleMapsLink
-                    to={this.props.location}
-                    className="getDirections"
-                    onClick={this.recordClick.bind(this)}
-                    hideSpacer={true}
-                >
-                    <span >
-                        Get directions in Google Maps
-                        <icons.ExternalLink
-                            className="ExternalLinkIcon"
-                        />
-                    </span>
-                </GoogleMapsLink>
+            const linkText = (
+                <span className="googleMapsLink">
+                    Get directions in Google Maps
+                    <icons.ExternalLink
+                        className="ExternalLinkIcon"
+                    />
+                </span>
             )
 
+            if (this.props.withoutLink) {
+                return linkText
+            } else {
+                return (
+                    <GoogleMapsLink
+                        to={this.props.location}
+                        className="getDirections"
+                        onClick={this.recordClick.bind(this)}
+                        hideSpacer={true}
+                    >
+                        {linkText}
+                    </GoogleMapsLink>
+                )
+            }
         }
         return <span />;
     }

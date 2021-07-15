@@ -5,8 +5,8 @@ import Helmet from "react-helmet";
 import { makeTitle } from "../routes";
 import { Outlet } from "react-router-dom";
 
-import { ApolloProvider } from "react-apollo";
-import client from "../utils/apolloClient";
+import { ApolloProvider } from "@apollo/client";
+import createApolloClient from "../utils/apolloClient";
 import HistoryListener from "../effects/HistoryListener";
 import DebugColours from "../components/DebugColours";
 import {DebugModeProvider} from "../contexts/debug-mode-context";
@@ -45,7 +45,7 @@ class BasePage extends React.Component<{}> {
 
         return <>
             <HistoryListener />
-            <ApolloProvider client={client}>
+            <ApolloProvider client={createApolloClient()}>
                 <DebugModeProvider>
                     <DebugColours />
                     <div className="BasePage">

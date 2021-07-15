@@ -104,6 +104,19 @@
         font-size: 16px;
     }
 
+    // Hack since we wrap the whole address section in a google maps link.
+    // We've disabled link styling for address but we want to re-enable it
+    // for the text that is explicitly a link to Google Maps.
+    .GoogleMapsLink {
+        .googleMapsLink {
+            text-decoration: underline;
+        }
+
+        &:hover .googleMapsLink {
+            text-decoration: none;
+        }
+    }
+
     .TransportTime > .location {
         display: none;
     }
@@ -120,14 +133,16 @@
             font-weight: 400;
 
             & > div {
-                & > .primaryText {
-                    font-weight: 500;
-                }
+                & > .label {
+                    & > .primaryText {
+                        font-weight: 500;
+                    }
 
-                & > .secondaryText {
-                    text-overflow: ellipsis;
-                    white-space: normal;
-                    overflow: auto;
+                    & > .secondaryText {
+                        text-overflow: ellipsis;
+                        white-space: normal;
+                        overflow: auto;
+                    }
                 }
             }
         }
@@ -148,7 +163,11 @@
         }
     }
 
-    .DebugServiceRecord {
-        width: 100%;
+    .DebugContainer {
+        float: left;
+
+        pre {
+            white-space: pre-wrap;
+        }
     }
 }

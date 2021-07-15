@@ -2,13 +2,13 @@
 # See http://doc.gitlab.com/ci/builds_configuration/README.html
 
 variables:
-    ENVIRONMENT: development
+  ENVIRONMENT: development
 
 stages:
- - build
- - lint
- - test
- - deploy
+  - build
+  - lint
+  - test
+  - deploy
 
 before_script:
   - hostname

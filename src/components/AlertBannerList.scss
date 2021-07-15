@@ -1,0 +1,44 @@
+@use '../styles/mixins/colours';
+
+.AlertBannerList {
+    margin-top: 0.5em;
+
+    > ul {
+        margin: 0;
+        padding-left: 0;
+
+        > li {
+            list-style-type: none;
+
+            .AlertBanner {
+                margin: 1em;
+            }
+        }
+    }
+
+    &.inline {
+        .AlertBanner {
+            margin: 0;
+            border-right: 0;
+            border-left: 0;
+        }
+
+        li:not(:last-child) {
+            .AlertBanner {
+                border-bottom: 0;
+            }
+        }
+    }
+
+    &:not(.inline) {
+        .AlertBanner {
+            border: 1px solid #{colours.get-static('colour-border-list-item-dark')};
+            border: 1px solid var(--colour-border-list-item-dark);
+
+            &.hasBody:focus-within {
+                outline: 2px solid #{colours.get-static('colour-input-focus-primary')};
+                outline: 2px solid var(--colour-input-focus-primary);
+            }
+        }
+    }
+}

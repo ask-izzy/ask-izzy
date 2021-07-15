@@ -1,4 +1,6 @@
 /* @flow */
+import { MockedProvider } from "@apollo/client/testing";
+
 // eslint-disable-next-line no-unused-vars
 import GlobalStyle from "../src/styles/bundle.scss";
 
@@ -10,5 +12,18 @@ export const parameters = {
             { name: "light", value: "#f7f7f7" },
             { name: "dark", value: "#666" },
         ],
+    },
+    options: {
+        storySort: {
+            order: [
+                "App Components",
+                "Service Components",
+                "Basic UI Components",
+                "Icons",
+            ],
+        },
+    },
+    apolloClient: {
+        MockedProvider,
     },
 }

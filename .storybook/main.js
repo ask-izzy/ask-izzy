@@ -22,7 +22,12 @@ module.exports = {
         "../src/**/*.stories.mdx",
         "../src/**/*.stories.@(js|jsx|ts|tsx)",
     ],
-    addons: ["@storybook/addon-links", "@storybook/addon-essentials"],
+    addons: [
+        "@storybook/addon-links",
+        "@storybook/addon-essentials",
+        "storybook-addon-apollo-client",
+        "storybook-addon-designs",
+    ],
     webpackFinal: (config) => {
         const bannerImages = fs
             .readdirSync("./public/static/images/banners")
@@ -43,5 +48,8 @@ module.exports = {
         )
 
         return config
+    },
+    features: {
+        postcss: false, // hide deprecation warning, won't be needed in future https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#deprecated-implicit-postcss-loader
     },
 };

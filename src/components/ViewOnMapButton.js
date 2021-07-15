@@ -29,7 +29,7 @@ export default class ViewOnMapButton extends React.Component<any, State> {
                 className="ViewOnMapButton"
                 primaryText="View on a map"
                 leftIcon={
-                    <icons.Map />
+                    <icons.Map className="big" />
                 }
                 rightIcon={
                     <icons.Chevron />

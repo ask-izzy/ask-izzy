@@ -1,0 +1,1638 @@
+"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR
+
+type AdminUser {
+  id: ID!
+  username: String
+  firstname: String!
+  lastname: String!
+}
+
+type Alert {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String!
+  body: String
+  alertLevel: ENUM_ALERT_ALERTLEVEL
+  defaultToOpen: Boolean
+  screenLocation: ENUM_ALERT_SCREENLOCATION
+  states(sort: String, limit: Int, start: Int, where: JSON): [State]
+}
+
+type AlertAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type AlertConnection {
+  values: [Alert]
+  groupBy: AlertGroupBy
+  aggregate: AlertAggregator
+}
+
+type AlertConnectionAlertLevel {
+  key: String
+  connection: AlertConnection
+}
+
+type AlertConnectionBody {
+  key: String
+  connection: AlertConnection
+}
+
+type AlertConnectionCreated_at {
+  key: DateTime
+  connection: AlertConnection
+}
+
+type AlertConnectionDefaultToOpen {
+  key: Boolean
+  connection: AlertConnection
+}
+
+type AlertConnectionId {
+  key: ID
+  connection: AlertConnection
+}
+
+type AlertConnectionScreenLocation {
+  key: String
+  connection: AlertConnection
+}
+
+type AlertConnectionTitle {
+  key: String
+  connection: AlertConnection
+}
+
+type AlertConnectionUpdated_at {
+  key: DateTime
+  connection: AlertConnection
+}
+
+type AlertGroupBy {
+  id: [AlertConnectionId]
+  created_at: [AlertConnectionCreated_at]
+  updated_at: [AlertConnectionUpdated_at]
+  title: [AlertConnectionTitle]
+  body: [AlertConnectionBody]
+  alertLevel: [AlertConnectionAlertLevel]
+  defaultToOpen: [AlertConnectionDefaultToOpen]
+  screenLocation: [AlertConnectionScreenLocation]
+}
+
+input AlertInput {
+  title: String!
+  body: String
+  alertLevel: ENUM_ALERT_ALERTLEVEL
+  states: [ID]
+  defaultToOpen: Boolean
+  screenLocation: ENUM_ALERT_SCREENLOCATION
+  created_by: ID
+  updated_by: ID
+}
+
+type Banner {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Key: String!
+}
+
+type BannerAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type BannerConnection {
+  values: [Banner]
+  groupBy: BannerGroupBy
+  aggregate: BannerAggregator
+}
+
+type BannerConnectionCreated_at {
+  key: DateTime
+  connection: BannerConnection
+}
+
+type BannerConnectionId {
+  key: ID
+  connection: BannerConnection
+}
+
+type BannerConnectionKey {
+  key: String
+  connection: BannerConnection
+}
+
+type BannerConnectionUpdated_at {
+  key: DateTime
+  connection: BannerConnection
+}
+
+type BannerGroupBy {
+  id: [BannerConnectionId]
+  created_at: [BannerConnectionCreated_at]
+  updated_at: [BannerConnectionUpdated_at]
+  Key: [BannerConnectionKey]
+}
+
+input BannerInput {
+  Key: String!
+  created_by: ID
+  updated_by: ID
+}
+
+type Callout {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Heading: String!
+  ShowHeading: Boolean
+  Body: String
+  Style: JSON
+  Phone: String
+  Link: String
+  className: StyleClasses
+  Key: String!
+}
+
+type CalloutAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type CalloutConnection {
+  values: [Callout]
+  groupBy: CalloutGroupBy
+  aggregate: CalloutAggregator
+}
+
+type CalloutConnectionBody {
+  key: String
+  connection: CalloutConnection
+}
+
+type CalloutConnectionClassName {
+  key: ID
+  connection: CalloutConnection
+}
+
+type CalloutConnectionCreated_at {
+  key: DateTime
+  connection: CalloutConnection
+}
+
+type CalloutConnectionHeading {
+  key: String
+  connection: CalloutConnection
+}
+
+type CalloutConnectionId {
+  key: ID
+  connection: CalloutConnection
+}
+
+type CalloutConnectionKey {
+  key: String
+  connection: CalloutConnection
+}
+
+type CalloutConnectionLink {
+  key: String
+  connection: CalloutConnection
+}
+
+type CalloutConnectionPhone {
+  key: String
+  connection: CalloutConnection
+}
+
+type CalloutConnectionShowHeading {
+  key: Boolean
+  connection: CalloutConnection
+}
+
+type CalloutConnectionStyle {
+  key: JSON
+  connection: CalloutConnection
+}
+
+type CalloutConnectionUpdated_at {
+  key: DateTime
+  connection: CalloutConnection
+}
+
+type CalloutGroupBy {
+  id: [CalloutConnectionId]
+  created_at: [CalloutConnectionCreated_at]
+  updated_at: [CalloutConnectionUpdated_at]
+  Heading: [CalloutConnectionHeading]
+  ShowHeading: [CalloutConnectionShowHeading]
+  Body: [CalloutConnectionBody]
+  Style: [CalloutConnectionStyle]
+  Phone: [CalloutConnectionPhone]
+  Link: [CalloutConnectionLink]
+  className: [CalloutConnectionClassName]
+  Key: [CalloutConnectionKey]
+}
+
+input CalloutInput {
+  Heading: String!
+  ShowHeading: Boolean
+  Body: String
+  Style: JSON
+  Phone: String
+  Link: String
+  className: ID
+  Key: String!
+  created_by: ID
+  updated_by: ID
+}
+
+type Category {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Name: String
+}
+
+type CategoryAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type CategoryConnection {
+  values: [Category]
+  groupBy: CategoryGroupBy
+  aggregate: CategoryAggregator
+}
+
+type CategoryConnectionCreated_at {
+  key: DateTime
+  connection: CategoryConnection
+}
+
+type CategoryConnectionId {
+  key: ID
+  connection: CategoryConnection
+}
+
+type CategoryConnectionName {
+  key: String
+  connection: CategoryConnection
+}
+
+type CategoryConnectionUpdated_at {
+  key: DateTime
+  connection: CategoryConnection
+}
+
+type CategoryGroupBy {
+  id: [CategoryConnectionId]
+  created_at: [CategoryConnectionCreated_at]
+  updated_at: [CategoryConnectionUpdated_at]
+  Name: [CategoryConnectionName]
+}
+
+input CategoryInput {
+  Name: String
+  created_by: ID
+  updated_by: ID
+}
+
+type ComponentContentAccordion {
+  id: ID!
+  Title: String!
+  Content: String
+}
+
+input ComponentContentAccordionInput {
+  Title: String!
+  Content: String
+}
+
+input createAlertInput {
+  data: AlertInput
+}
+
+type createAlertPayload {
+  alert: Alert
+}
+
+type ComponentContentCalloutBox {
+  id: ID!
+  callout: Callout
+  Top: Boolean
+  Bottom: Boolean
+}
+
+input ComponentContentCalloutBoxInput {
+  callout: ID
+  Top: Boolean
+  Bottom: Boolean
+}
+
+input createBannerInput {
+  data: BannerInput
+}
+
+type createBannerPayload {
+  banner: Banner
+}
+
+input createCalloutInput {
+  data: CalloutInput
+}
+
+type createCalloutPayload {
+  callout: Callout
+}
+
+input createCategoryInput {
+  data: CategoryInput
+}
+
+type createCategoryPayload {
+  category: Category
+}
+
+input createExternalResourceInput {
+  data: ExternalResourceInput
+}
+
+type createExternalResourcePayload {
+  externalResource: ExternalResources
+}
+
+input createPageInput {
+  data: PageInput
+}
+
+type createPagePayload {
+  page: Page
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input createStateInput {
+  data: StateInput
+}
+
+type createStatePayload {
+  state: State
+}
+
+input createStyleClassInput {
+  data: StyleClassInput
+}
+
+type createStyleClassPayload {
+  styleClass: StyleClasses
+}
+
+input createTagInput {
+  data: TagInput
+}
+
+type createTagPayload {
+  tag: Tag
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format
+outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for
+representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+`date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
+8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+input deleteAlertInput {
+  where: InputID
+}
+
+type deleteAlertPayload {
+  alert: Alert
+}
+
+input deleteBannerInput {
+  where: InputID
+}
+
+type deleteBannerPayload {
+  banner: Banner
+}
+
+input deleteCalloutInput {
+  where: InputID
+}
+
+type deleteCalloutPayload {
+  callout: Callout
+}
+
+input deleteCategoryInput {
+  where: InputID
+}
+
+type deleteCategoryPayload {
+  category: Category
+}
+
+input deleteExternalResourceInput {
+  where: InputID
+}
+
+type deleteExternalResourcePayload {
+  externalResource: ExternalResources
+}
+
+input deleteFileInput {
+  where: InputID
+}
+
+type deleteFilePayload {
+  file: UploadFile
+}
+
+input deletePageInput {
+  where: InputID
+}
+
+type deletePagePayload {
+  page: Page
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteStateInput {
+  where: InputID
+}
+
+type deleteStatePayload {
+  state: State
+}
+
+input deleteStyleClassInput {
+  where: InputID
+}
+
+type deleteStyleClassPayload {
+  styleClass: StyleClasses
+}
+
+input deleteTagInput {
+  where: InputID
+}
+
+type deleteTagPayload {
+  tag: Tag
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+input editAlertInput {
+  title: String
+  body: String
+  alertLevel: ENUM_ALERT_ALERTLEVEL
+  states: [ID]
+  defaultToOpen: Boolean
+  screenLocation: ENUM_ALERT_SCREENLOCATION
+  created_by: ID
+  updated_by: ID
+}
+
+input editBannerInput {
+  Key: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editCalloutInput {
+  Heading: String
+  ShowHeading: Boolean
+  Body: String
+  Style: JSON
+  Phone: String
+  Link: String
+  className: ID
+  Key: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editCategoryInput {
+  Name: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editComponentContentAccordionInput {
+  id: ID
+  Title: String
+  Content: String
+}
+
+input editComponentContentCalloutBoxInput {
+  id: ID
+  callout: ID
+  Top: Boolean
+  Bottom: Boolean
+}
+
+input editExternalResourceInput {
+  Title: String
+  Author: String
+  Body: String
+  Link: String
+  categories: [ID]
+  tags: [ID]
+  states: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editFileInput {
+  name: String
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String
+  ext: String
+  mime: String
+  size: Float
+  url: String
+  previewUrl: String
+  provider: String
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editPageInput {
+  Title: String
+  Body: String
+  Path: String
+  BannerTextPrimary: String
+  BannerTextSecondary: String
+  Banner: ID
+  Accordion: [editComponentContentAccordionInput]
+  AccordionTitle: String
+  CalloutBoxes: [editComponentContentCalloutBoxInput]
+  created_by: ID
+  updated_by: ID
+}
+
+input editRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editStateInput {
+  Name: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editStyleClassInput {
+  className: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editTagInput {
+  Name: String
+  created_by: ID
+  updated_by: ID
+}
+
+input editUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  created_by: ID
+  updated_by: ID
+}
+
+enum ENUM_ALERT_ALERTLEVEL {
+  warn
+  info
+}
+
+enum ENUM_ALERT_SCREENLOCATION {
+  homePage
+  resultsPage
+  servicePage
+}
+
+input ExternalResourceInput {
+  Title: String
+  Author: String
+  Body: String
+  Link: String
+  categories: [ID]
+  tags: [ID]
+  states: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+type ExternalResources {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Title: String
+  Author: String
+  Body: String
+  Link: String
+  categories(sort: String, limit: Int, start: Int, where: JSON): [Category]
+  tags(sort: String, limit: Int, start: Int, where: JSON): [Tag]
+  states(sort: String, limit: Int, start: Int, where: JSON): [State]
+}
+
+type ExternalResourcesAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type ExternalResourcesConnection {
+  values: [ExternalResources]
+  groupBy: ExternalResourcesGroupBy
+  aggregate: ExternalResourcesAggregator
+}
+
+type ExternalResourcesConnectionAuthor {
+  key: String
+  connection: ExternalResourcesConnection
+}
+
+type ExternalResourcesConnectionBody {
+  key: String
+  connection: ExternalResourcesConnection
+}
+
+type ExternalResourcesConnectionCreated_at {
+  key: DateTime
+  connection: ExternalResourcesConnection
+}
+
+type ExternalResourcesConnectionId {
+  key: ID
+  connection: ExternalResourcesConnection
+}
+
+type ExternalResourcesConnectionLink {
+  key: String
+  connection: ExternalResourcesConnection
+}
+
+type ExternalResourcesConnectionTitle {
+  key: String
+  connection: ExternalResourcesConnection
+}
+
+type ExternalResourcesConnectionUpdated_at {
+  key: DateTime
+  connection: ExternalResourcesConnection
+}
+
+type ExternalResourcesGroupBy {
+  id: [ExternalResourcesConnectionId]
+  created_at: [ExternalResourcesConnectionCreated_at]
+  updated_at: [ExternalResourcesConnectionUpdated_at]
+  Title: [ExternalResourcesConnectionTitle]
+  Author: [ExternalResourcesConnectionAuthor]
+  Body: [ExternalResourcesConnectionBody]
+  Link: [ExternalResourcesConnectionLink]
+}
+
+input FileInfoInput {
+  name: String
+  alternativeText: String
+  caption: String
+}
+
+input FileInput {
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input InputID {
+  id: ID!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""The `Long` scalar type represents 52-bit integers"""
+scalar Long
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Alert | AlertConnection | AlertAggregator | AlertGroupBy | AlertConnectionId | AlertConnectionCreated_at | AlertConnectionUpdated_at | AlertConnectionTitle | AlertConnectionBody | AlertConnectionAlertLevel | AlertConnectionDefaultToOpen | AlertConnectionScreenLocation | createAlertPayload | updateAlertPayload | deleteAlertPayload | Banner | BannerConnection | BannerAggregator | BannerGroupBy | BannerConnectionId | BannerConnectionCreated_at | BannerConnectionUpdated_at | BannerConnectionKey | createBannerPayload | updateBannerPayload | deleteBannerPayload | Callout | CalloutConnection | CalloutAggregator | CalloutGroupBy | CalloutConnectionId | CalloutConnectionCreated_at | CalloutConnectionUpdated_at | CalloutConnectionHeading | CalloutConnectionShowHeading | CalloutConnectionBody | CalloutConnectionStyle | CalloutConnectionPhone | CalloutConnectionLink | CalloutConnectionClassName | CalloutConnectionKey | createCalloutPayload | updateCalloutPayload | deleteCalloutPayload | Category | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnectionId | CategoryConnectionCreated_at | CategoryConnectionUpdated_at | CategoryConnectionName | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | ExternalResources | ExternalResourcesConnection | ExternalResourcesAggregator | ExternalResourcesGroupBy | ExternalResourcesConnectionId | ExternalResourcesConnectionCreated_at | ExternalResourcesConnectionUpdated_at | ExternalResourcesConnectionTitle | ExternalResourcesConnectionAuthor | ExternalResourcesConnectionBody | ExternalResourcesConnectionLink | createExternalResourcePayload | updateExternalResourcePayload | deleteExternalResourcePayload | Page | PageConnection | PageAggregator | PageGroupBy | PageConnectionId | PageConnectionCreated_at | PageConnectionUpdated_at | PageConnectionTitle | PageConnectionBody | PageConnectionPath | PageConnectionBannerTextPrimary | PageConnectionBannerTextSecondary | PageConnectionBanner | PageConnectionAccordionTitle | createPagePayload | updatePagePayload | deletePagePayload | State | StateConnection | StateAggregator | StateGroupBy | StateConnectionId | StateConnectionCreated_at | StateConnectionUpdated_at | StateConnectionName | createStatePayload | updateStatePayload | deleteStatePayload | StyleClasses | StyleClassesConnection | StyleClassesAggregator | StyleClassesGroupBy | StyleClassesConnectionId | StyleClassesConnectionCreated_at | StyleClassesConnectionUpdated_at | StyleClassesConnectionClassName | StyleClassesConnectionPublished_at | createStyleClassPayload | updateStyleClassPayload | deleteStyleClassPayload | Tag | TagConnection | TagAggregator | TagGroupBy | TagConnectionId | TagConnectionCreated_at | TagConnectionUpdated_at | TagConnectionName | createTagPayload | updateTagPayload | deleteTagPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentContentAccordion | ComponentContentCalloutBox
+
+type Mutation {
+  createAlert(input: createAlertInput): createAlertPayload
+  updateAlert(input: updateAlertInput): updateAlertPayload
+  deleteAlert(input: deleteAlertInput): deleteAlertPayload
+  createBanner(input: createBannerInput): createBannerPayload
+  updateBanner(input: updateBannerInput): updateBannerPayload
+  deleteBanner(input: deleteBannerInput): deleteBannerPayload
+  createCallout(input: createCalloutInput): createCalloutPayload
+  updateCallout(input: updateCalloutInput): updateCalloutPayload
+  deleteCallout(input: deleteCalloutInput): deleteCalloutPayload
+  createCategory(input: createCategoryInput): createCategoryPayload
+  updateCategory(input: updateCategoryInput): updateCategoryPayload
+  deleteCategory(input: deleteCategoryInput): deleteCategoryPayload
+  createExternalResource(input: createExternalResourceInput): createExternalResourcePayload
+  updateExternalResource(input: updateExternalResourceInput): updateExternalResourcePayload
+  deleteExternalResource(input: deleteExternalResourceInput): deleteExternalResourcePayload
+  createPage(input: createPageInput): createPagePayload
+  updatePage(input: updatePageInput): updatePagePayload
+  deletePage(input: deletePageInput): deletePagePayload
+  createState(input: createStateInput): createStatePayload
+  updateState(input: updateStateInput): updateStatePayload
+  deleteState(input: deleteStateInput): deleteStatePayload
+  createStyleClass(input: createStyleClassInput): createStyleClassPayload
+  updateStyleClass(input: updateStyleClassInput): updateStyleClassPayload
+  deleteStyleClass(input: deleteStyleClassInput): deleteStyleClassPayload
+  createTag(input: createTagInput): createTagPayload
+  updateTag(input: updateTagInput): updateTagPayload
+  deleteTag(input: deleteTagInput): deleteTagPayload
+
+  """Delete one file"""
+  deleteFile(input: deleteFileInput): deleteFilePayload
+
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+
+  """Create a new user"""
+  createUser(input: createUserInput): createUserPayload
+
+  """Update an existing user"""
+  updateUser(input: updateUserInput): updateUserPayload
+
+  """Delete an existing user"""
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  upload(refId: ID, ref: String, field: String, source: String, info: FileInfoInput, file: Upload!): UploadFile!
+  multipleUpload(refId: ID, ref: String, field: String, source: String, files: [Upload]!): [UploadFile]!
+  updateFileInfo(id: ID!, info: FileInfoInput!): UploadFile!
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+  register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+  forgotPassword(email: String!): UserPermissionsPasswordPayload
+  resetPassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+}
+
+type Page {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Title: String!
+  Body: String
+  Path: String!
+  BannerTextPrimary: String
+  BannerTextSecondary: String
+  Banner: Banner
+  Accordion: [ComponentContentAccordion]
+  AccordionTitle: String
+  CalloutBoxes: [ComponentContentCalloutBox]
+}
+
+type PageAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type PageConnection {
+  values: [Page]
+  groupBy: PageGroupBy
+  aggregate: PageAggregator
+}
+
+type PageConnectionAccordionTitle {
+  key: String
+  connection: PageConnection
+}
+
+type PageConnectionBanner {
+  key: ID
+  connection: PageConnection
+}
+
+type PageConnectionBannerTextPrimary {
+  key: String
+  connection: PageConnection
+}
+
+type PageConnectionBannerTextSecondary {
+  key: String
+  connection: PageConnection
+}
+
+type PageConnectionBody {
+  key: String
+  connection: PageConnection
+}
+
+type PageConnectionCreated_at {
+  key: DateTime
+  connection: PageConnection
+}
+
+type PageConnectionId {
+  key: ID
+  connection: PageConnection
+}
+
+type PageConnectionPath {
+  key: String
+  connection: PageConnection
+}
+
+type PageConnectionTitle {
+  key: String
+  connection: PageConnection
+}
+
+type PageConnectionUpdated_at {
+  key: DateTime
+  connection: PageConnection
+}
+
+type PageGroupBy {
+  id: [PageConnectionId]
+  created_at: [PageConnectionCreated_at]
+  updated_at: [PageConnectionUpdated_at]
+  Title: [PageConnectionTitle]
+  Body: [PageConnectionBody]
+  Path: [PageConnectionPath]
+  BannerTextPrimary: [PageConnectionBannerTextPrimary]
+  BannerTextSecondary: [PageConnectionBannerTextSecondary]
+  Banner: [PageConnectionBanner]
+  AccordionTitle: [PageConnectionAccordionTitle]
+}
+
+input PageInput {
+  Title: String!
+  Body: String
+  Path: String!
+  BannerTextPrimary: String
+  BannerTextSecondary: String
+  Banner: ID
+  Accordion: [ComponentContentAccordionInput]
+  AccordionTitle: String
+  CalloutBoxes: [ComponentContentCalloutBoxInput]
+  created_by: ID
+  updated_by: ID
+}
+
+enum PublicationState {
+  LIVE
+  PREVIEW
+}
+
+type Query {
+  alert(id: ID!, publicationState: PublicationState): Alert
+  alerts(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Alert]
+  alertsConnection(sort: String, limit: Int, start: Int, where: JSON): AlertConnection
+  banner(id: ID!, publicationState: PublicationState): Banner
+  banners(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Banner]
+  bannersConnection(sort: String, limit: Int, start: Int, where: JSON): BannerConnection
+  callout(id: ID!, publicationState: PublicationState): Callout
+  callouts(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Callout]
+  calloutsConnection(sort: String, limit: Int, start: Int, where: JSON): CalloutConnection
+  category(id: ID!, publicationState: PublicationState): Category
+  categories(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Category]
+  categoriesConnection(sort: String, limit: Int, start: Int, where: JSON): CategoryConnection
+  externalResource(id: ID!, publicationState: PublicationState): ExternalResources
+  externalResources(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [ExternalResources]
+  externalResourcesConnection(sort: String, limit: Int, start: Int, where: JSON): ExternalResourcesConnection
+  page(id: ID!, publicationState: PublicationState): Page
+  pages(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Page]
+  pagesConnection(sort: String, limit: Int, start: Int, where: JSON): PageConnection
+  state(id: ID!, publicationState: PublicationState): State
+  states(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [State]
+  statesConnection(sort: String, limit: Int, start: Int, where: JSON): StateConnection
+  styleClass(id: ID!, publicationState: PublicationState): StyleClasses
+  styleClasses(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [StyleClasses]
+  styleClassesConnection(sort: String, limit: Int, start: Int, where: JSON): StyleClassesConnection
+  tag(id: ID!, publicationState: PublicationState): Tag
+  tags(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Tag]
+  tagsConnection(sort: String, limit: Int, start: Int, where: JSON): TagConnection
+  files(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UploadFile]
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
+  role(id: ID!, publicationState: PublicationState): UsersPermissionsRole
+
+  """
+  Retrieve all the existing roles. You can't apply filters on this query.
+  """
+  roles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsRole]
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
+  user(id: ID!, publicationState: PublicationState): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsUser]
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+  me: UsersPermissionsMe
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+type State {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Name: String!
+}
+
+type StateAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type StateConnection {
+  values: [State]
+  groupBy: StateGroupBy
+  aggregate: StateAggregator
+}
+
+type StateConnectionCreated_at {
+  key: DateTime
+  connection: StateConnection
+}
+
+type StateConnectionId {
+  key: ID
+  connection: StateConnection
+}
+
+type StateConnectionName {
+  key: String
+  connection: StateConnection
+}
+
+type StateConnectionUpdated_at {
+  key: DateTime
+  connection: StateConnection
+}
+
+type StateGroupBy {
+  id: [StateConnectionId]
+  created_at: [StateConnectionCreated_at]
+  updated_at: [StateConnectionUpdated_at]
+  Name: [StateConnectionName]
+}
+
+input StateInput {
+  Name: String!
+  created_by: ID
+  updated_by: ID
+}
+
+type StyleClasses {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  className: String!
+  published_at: DateTime
+}
+
+type StyleClassesAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type StyleClassesConnection {
+  values: [StyleClasses]
+  groupBy: StyleClassesGroupBy
+  aggregate: StyleClassesAggregator
+}
+
+type StyleClassesConnectionClassName {
+  key: String
+  connection: StyleClassesConnection
+}
+
+type StyleClassesConnectionCreated_at {
+  key: DateTime
+  connection: StyleClassesConnection
+}
+
+type StyleClassesConnectionId {
+  key: ID
+  connection: StyleClassesConnection
+}
+
+type StyleClassesConnectionPublished_at {
+  key: DateTime
+  connection: StyleClassesConnection
+}
+
+type StyleClassesConnectionUpdated_at {
+  key: DateTime
+  connection: StyleClassesConnection
+}
+
+type StyleClassesGroupBy {
+  id: [StyleClassesConnectionId]
+  created_at: [StyleClassesConnectionCreated_at]
+  updated_at: [StyleClassesConnectionUpdated_at]
+  className: [StyleClassesConnectionClassName]
+  published_at: [StyleClassesConnectionPublished_at]
+}
+
+input StyleClassInput {
+  className: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+type Tag {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  Name: String!
+}
+
+type TagAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type TagConnection {
+  values: [Tag]
+  groupBy: TagGroupBy
+  aggregate: TagAggregator
+}
+
+type TagConnectionCreated_at {
+  key: DateTime
+  connection: TagConnection
+}
+
+type TagConnectionId {
+  key: ID
+  connection: TagConnection
+}
+
+type TagConnectionName {
+  key: String
+  connection: TagConnection
+}
+
+type TagConnectionUpdated_at {
+  key: DateTime
+  connection: TagConnection
+}
+
+type TagGroupBy {
+  id: [TagConnectionId]
+  created_at: [TagConnectionCreated_at]
+  updated_at: [TagConnectionUpdated_at]
+  Name: [TagConnectionName]
+}
+
+input TagInput {
+  Name: String!
+  created_by: ID
+  updated_by: ID
+}
+
+"""A time string with format: HH:mm:ss.SSS"""
+scalar Time
+
+input updateAlertInput {
+  where: InputID
+  data: editAlertInput
+}
+
+type updateAlertPayload {
+  alert: Alert
+}
+
+input updateBannerInput {
+  where: InputID
+  data: editBannerInput
+}
+
+type updateBannerPayload {
+  banner: Banner
+}
+
+input updateCalloutInput {
+  where: InputID
+  data: editCalloutInput
+}
+
+type updateCalloutPayload {
+  callout: Callout
+}
+
+input updateCategoryInput {
+  where: InputID
+  data: editCategoryInput
+}
+
+type updateCategoryPayload {
+  category: Category
+}
+
+input updateExternalResourceInput {
+  where: InputID
+  data: editExternalResourceInput
+}
+
+type updateExternalResourcePayload {
+  externalResource: ExternalResources
+}
+
+input updatePageInput {
+  where: InputID
+  data: editPageInput
+}
+
+type updatePagePayload {
+  page: Page
+}
+
+input updateRoleInput {
+  where: InputID
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateStateInput {
+  where: InputID
+  data: editStateInput
+}
+
+type updateStatePayload {
+  state: State
+}
+
+input updateStyleClassInput {
+  where: InputID
+  data: editStyleClassInput
+}
+
+type updateStyleClassPayload {
+  styleClass: StyleClasses
+}
+
+input updateTagInput {
+  where: InputID
+  data: editTagInput
+}
+
+type updateTagPayload {
+  tag: Tag
+}
+
+input updateUserInput {
+  where: InputID
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type UploadFile {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
+}
+
+type UploadFileAggregator {
+  count: Int
+  totalCount: Int
+  sum: UploadFileAggregatorSum
+  avg: UploadFileAggregatorAvg
+  min: UploadFileAggregatorMin
+  max: UploadFileAggregatorMax
+}
+
+type UploadFileAggregatorAvg {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMax {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMin {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorSum {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileConnection {
+  values: [UploadFile]
+  groupBy: UploadFileGroupBy
+  aggregate: UploadFileAggregator
+}
+
+type UploadFileConnectionAlternativeText {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCaption {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCreated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionExt {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionFormats {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHash {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHeight {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionId {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionMime {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionName {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionPreviewUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider_metadata {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSize {
+  key: Float
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUpdated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionWidth {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileGroupBy {
+  id: [UploadFileConnectionId]
+  created_at: [UploadFileConnectionCreated_at]
+  updated_at: [UploadFileConnectionUpdated_at]
+  name: [UploadFileConnectionName]
+  alternativeText: [UploadFileConnectionAlternativeText]
+  caption: [UploadFileConnectionCaption]
+  width: [UploadFileConnectionWidth]
+  height: [UploadFileConnectionHeight]
+  formats: [UploadFileConnectionFormats]
+  hash: [UploadFileConnectionHash]
+  ext: [UploadFileConnectionExt]
+  mime: [UploadFileConnectionMime]
+  size: [UploadFileConnectionSize]
+  url: [UploadFileConnectionUrl]
+  previewUrl: [UploadFileConnectionPreviewUrl]
+  provider: [UploadFileConnectionProvider]
+  provider_metadata: [UploadFileConnectionProvider_metadata]
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  created_by: ID
+  updated_by: ID
+}
+
+type UserPermissionsPasswordPayload {
+  ok: Boolean!
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+  password: String!
+  provider: String = "local"
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String
+  user: UsersPermissionsMe!
+}
+
+type UsersPermissionsMe {
+  id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+type UsersPermissionsPermission {
+  id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+input UsersPermissionsRegisterInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+type UsersPermissionsRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type UsersPermissionsRoleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsRoleConnection {
+  values: [UsersPermissionsRole]
+  groupBy: UsersPermissionsRoleGroupBy
+  aggregate: UsersPermissionsRoleAggregator
+}
+
+type UsersPermissionsRoleConnectionDescription {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionId {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionName {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionType {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleGroupBy {
+  id: [UsersPermissionsRoleConnectionId]
+  name: [UsersPermissionsRoleConnectionName]
+  description: [UsersPermissionsRoleConnectionDescription]
+  type: [UsersPermissionsRoleConnectionType]
+}
+
+type UsersPermissionsUser {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUserAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsUserConnection {
+  values: [UsersPermissionsUser]
+  groupBy: UsersPermissionsUserGroupBy
+  aggregate: UsersPermissionsUserAggregator
+}
+
+type UsersPermissionsUserConnectionBlocked {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionConfirmed {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionCreated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionEmail {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionId {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionProvider {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRole {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUpdated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUsername {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserGroupBy {
+  id: [UsersPermissionsUserConnectionId]
+  created_at: [UsersPermissionsUserConnectionCreated_at]
+  updated_at: [UsersPermissionsUserConnectionUpdated_at]
+  username: [UsersPermissionsUserConnectionUsername]
+  email: [UsersPermissionsUserConnectionEmail]
+  provider: [UsersPermissionsUserConnectionProvider]
+  confirmed: [UsersPermissionsUserConnectionConfirmed]
+  blocked: [UsersPermissionsUserConnectionBlocked]
+  role: [UsersPermissionsUserConnectionRole]
+}
+

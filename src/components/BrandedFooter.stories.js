@@ -1,9 +1,9 @@
 /* @flow */
 
 import React from "react";
-import { addRouter } from "../storybook/decorators";
 
 import BrandedFooter from "./BrandedFooter";
+import { addRouter } from "../storybook/decorators";
 
 export default {
     title: "App Components/BrandedFooter",

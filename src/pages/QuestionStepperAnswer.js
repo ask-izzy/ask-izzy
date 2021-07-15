@@ -53,7 +53,7 @@ function QuestionStepperAnswer({
                 onFocus={() => {
                     onTabIndex((INITIAL_TAB_INDEX + index + 1) + 1)
                 }}
-                className={home && "locationIcon"}
+                className={home ? "locationIcon" : undefined}
             >
                 <MapIcon />
                 <span

@@ -7,7 +7,6 @@
 
 import location from "browser-location";
 import storage from "./storage";
-import _ from "underscore";
 import Maps from "./maps";
 
 /**
@@ -25,7 +24,7 @@ export default function locate(options: ?PositionOptions): Promise<Position> {
             const interval = setInterval(() => {
                 const mock = storage.getGeolocationMock();
 
-                if (mock.wait) {
+                if (mock.result?.wait) {
                     return;
                 }
                 clearInterval(interval);
@@ -67,35 +66,40 @@ export function geolocationAvailable(): boolean {
 
 export async function guessSuburb(location: Position): Promise<string> {
     const maps = await Maps();
-    let possibleLocations = await maps.geocode({
-        location: {
-            lat: location.coords.latitude,
-            lng: location.coords.longitude,
-        },
-    });
-
-    /* return true if the types includes one of our interesting
-     * component types */
-    function interestingComponent(types: Array<string>): boolean {
-        return !_.isEmpty(_.intersection(
-            types,
-            ["locality", "administrative_area_level_1"]
-        ));
+    let possibleLocations
+    try {
+        possibleLocations = await maps.geocode({
+            location: {
+                lat: location.coords.latitude,
+                lng: location.coords.longitude,
+            },
+        });
+    } catch (error) {
+        // Testing system currently only reads first argument to a console
+        // logging function so we have to call multiple times if we have
+        // multiple values to be logged. I'll be glad when that limitation is
+        // removed 😊
+        console.error("Failed to guess suburb based on this location:")
+        console.error(JSON.stringify(location, null, 2))
+        throw error
     }
 
-    for (let geocodedLocation of possibleLocations) {
-        if (_.contains(geocodedLocation.types, "locality")) {
-            /* build a location name from the address components specified
-             * in interestingComponent. We do this because we don't want
-             * to show all the parts of Google's formatted_address */
-            let name = geocodedLocation.address_components
-                .filter(({types}) => interestingComponent(types))
-                .map((component) => component.long_name)
-                .join(", ");
+    const address = possibleLocations
+        .find(location => location.types.some(type => "locality"))
+        ?.address_components
 
-            return name;
-        }
+    if (!address) {
+        throw "Unable to determine your suburb";
     }
 
-    throw "Unable to determine your suburb";
+    const suburb = address
+        .find(({types}) => types.some(type => type === "locality"))
+        ?.long_name
+    const state = address
+        .find(({types}) => types.some(
+            type => type === "administrative_area_level_1"
+        ))
+        ?.short_name
+
+    return `${suburb || ""}, ${state || ""}`
 }

@@ -28,6 +28,7 @@ import {
     cleanDriverSession,
     isElementPresent,
 } from "../support/webdriver";
+import { regexEscape } from "../../src/utils/strings"
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
@@ -45,8 +46,8 @@ module.exports = (function() {
             unpromisify(clickBrowserBack),
         )
         .when(
-            "I click on an accordion titled \"$STRING\"",
-            unpromisify(clickAccordion)
+            "I click on a collapsible section titled \"$STRING\"",
+            unpromisify(clickDetails)
         )
         .when("I reload the page", unpromisify(reloadPage))
         .when("I pause for debugging", unpromisify(pauseToDebug))
@@ -66,6 +67,8 @@ module.exports = (function() {
         .then("\"$STRING\" should not be checked",
             unpromisify(assertItemNotChecked))
         .then("the canonical meta is $URL", unpromisify(checkMetaCanonical))
+        .then("I should see the alerts\n$table",
+            unpromisify(seeTheAlerts))
     ;
 })();
 
@@ -269,14 +272,17 @@ async function clickSearch(): Promise<void> {
         .click();
 }
 
-async function clickAccordion(title: string): Promise<void> {
-    const locator = By.css(".AccordionItem .title");
 
-    while (!await isElementPresent(this.driver, locator)) {
-        console.log(`Looking for ${title}`)
-    }
-    await this.driver.findElement(locator).click();
+async function clickDetails(title: string): Promise<void> {
     await module.exports.documentReady(this.driver);
+
+    const element = await this.driver.findElement(By.xpath(
+        `//details/summary/descendant-or-self::*[
+            normalize-space(.) = normalize-space(${escapeXPathString(title)})
+        ]`
+    ))
+
+    await element.click();
 }
 
 async function getButtonState(
@@ -379,7 +385,7 @@ async function cleanSession(): Promise<void> {
 async function takeScreenshot(): Promise<void> {
     const filepath = await debug.takeScreenshot(
         this.driver,
-        this.mochaState.currentTest
+        debug.getSceenshotPath(this.mochaState.currentTest)
     )
 
     console.log(`${this.indent}  Screenshot saved to "${filepath}"`);
@@ -395,4 +401,53 @@ async function scrollToElement(elementSelector: string): Promise<void> {
     return driver.executeScript(() =>
         document.querySelector(elementSelector).scrollIntoView()
     );
+}
+
+async function seeTheAlerts(
+    table: Array<Object>,
+): Promise<void> {
+    await this.driver.wait(module.exports.documentReady(this.driver), 10000);
+
+    const alertElements = await this.driver.findElements(
+        By.css(`.AlertBannerList .AlertBanner`)
+    )
+    assert.strictEqual(
+        alertElements.length,
+        table.length,
+        "The number of actual alerts and expected alerts differ."
+    )
+    for (const [index, row] of table.entries()) {
+        const alertElement = alertElements[index]
+        const titleElementText = await alertElement.findElement(
+            By.css(`.title-container`)
+        ).getText()
+
+        let bodyElementText = ""
+        const timeouts = await this.driver.manage().getTimeouts()
+        try {
+            await this.driver.manage().setTimeouts({implicit: 0})
+            bodyElementText = await alertElement.findElement(
+                By.css(`.body`)
+            ).getText()
+        } catch (error) {
+            // body is optional in some alerts so might not matter if we
+            // don't find it
+        } finally {
+            await this.driver.manage().setTimeouts(
+                {implicit: timeouts.implicit}
+            )
+        }
+
+        const textMatchesGlob = (text, glob) => {
+            assert.match(
+                text,
+                new RegExp(
+                    "^" + regexEscape(glob).replace("\\*", "[\\s\\S]*") + "$"
+                )
+            )
+        }
+
+        textMatchesGlob(titleElementText, row.Title)
+        textMatchesGlob(bodyElementText, row.Body)
+    }
 }

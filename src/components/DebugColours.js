@@ -68,6 +68,7 @@ const colourVars = [
             "colour-input-focus-primary",
             "colour-input-focus-overlay",
             "colour-irreversible-action",
+            "colour-element-shadow",
         ],
     },
     {
@@ -78,6 +79,7 @@ const colourVars = [
             "colour-bg-standard-tint-2",
             "colour-bg-standard-tint-3",
             "colour-bg-callout-solid",
+            "colour-bg-code",
         ],
     },
     {
@@ -86,6 +88,7 @@ const colourVars = [
             "colour-border-list-item",
             "colour-border-list-item-dark",
             "colour-border-standard-callout",
+            "colour-border-alert",
         ],
     },
     {

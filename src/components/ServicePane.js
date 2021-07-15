@@ -24,7 +24,7 @@ import BoxedText from "./BoxedText";
 import Chevron from "../icons/Chevron";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
-import LimitedServicesBanner from "./LimitedServicesBanner";
+import AlertBannerList from "../components/AlertBannerList";
 import type {Service} from "../iss";
 
 export default class ServicePane extends React.Component<{
@@ -76,7 +76,14 @@ export default class ServicePane extends React.Component<{
                     secondaryText={null}
                     bannerName="housing"
                 />
-                <LimitedServicesBanner />
+                <AlertBannerList
+                    state={object.Location()?.state}
+                    screenLocation="servicePage"
+                    format="inline"
+                />
+
+                <DebugServiceRecord object={object} />
+
                 <div className="header">
                     <p>
                         <IndigenousServiceIcon object={object} />
@@ -96,9 +103,7 @@ export default class ServicePane extends React.Component<{
                             : null
                         }
                     </h3>
-
                 </div>
-
 
                 <BoxedText>
                     <div className="practicalities-container">
@@ -118,7 +123,10 @@ export default class ServicePane extends React.Component<{
                             to={object.Location()}
                         >
                             <Address location={object.Location()} />
-                            <TransportTime location={object.Location()}/>
+                            <TransportTime
+                                location={object.Location()}
+                                withoutLink={true}
+                            />
                         </GoogleMapsLink>
                         <ContactMethods object={object} />
                         <Feedback object={object} />
@@ -131,8 +139,6 @@ export default class ServicePane extends React.Component<{
                     {this.renderServiceProvisions()}
                     {this.renderSiblings()}
                 </div>
-
-                <DebugServiceRecord object={object} />
             </div>
         );
     }

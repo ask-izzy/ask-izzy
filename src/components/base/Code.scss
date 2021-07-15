@@ -1,0 +1,8 @@
+@use '../../styles/mixins/colours';
+
+.Code {
+    background-color: #{colours.get-static('colour-bg-code')};
+    background-color: var(--colour-bg-code);
+    color: #{colours.get-static('colour-text-light')};
+    color: var(--colour-text-light);
+}

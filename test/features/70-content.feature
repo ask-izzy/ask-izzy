@@ -42,9 +42,9 @@ Feature: CMS integration
         When I visit /about
         Then I should see "Victoria"
         Then I should not see "Accordion content for Victoria."
-        And I click on an accordion titled "Victoria"
+        And I click on a collapsible section titled "Victoria"
         Then I should see "Accordion content for Victoria."
-        And I click on an accordion titled "Victoria"
+        And I click on a collapsible section titled "Victoria"
         Then I should not see "Accordion content for Victoria."
 
     Scenario: When navigating between pages the correct content is returned.

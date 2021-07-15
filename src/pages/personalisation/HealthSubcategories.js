@@ -2,7 +2,7 @@
 
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
-import { resetDfvOptions } from "../../utils";
+import { resetDfvOptions } from "../../utils/domesticViolence";
 
 function specialist(query) {
     return remove("(community health)").append(query);

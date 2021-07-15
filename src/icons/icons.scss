@@ -71,8 +71,6 @@ svg.Icon {
 .CheckboxUnselectedIcon,
 .RadioSelectedIcon,
 .RadioUnselectedIcon {
-    margin-top: -8px;
-
     path,
     circle {
         fill: #{colours.get-static('colour-interactive-icon')};

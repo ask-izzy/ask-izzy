@@ -26,10 +26,8 @@ function pauseToDebug() {
     });
 }
 
-export async function takeScreenshot(driver, test): String {
+export async function takeScreenshot(driver, filepath): String {
     let data = await driver.takeScreenshot();
-
-    const filepath = getSceenshotPath(test)
 
     fs.ensureDir(Path.dirname(filepath))
     await fs.writeFile(filepath, data, "base64");
