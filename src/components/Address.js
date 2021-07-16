@@ -42,7 +42,7 @@ class Address extends React.Component<Props, void> {
         return (
             <div className="Address">
                 <ScreenReader>
-                    <h4>Address</h4>
+                    Address
                 </ScreenReader>
                 <icons.Map />
                 <div className="Address-wrapper">

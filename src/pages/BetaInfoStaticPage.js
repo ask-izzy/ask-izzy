@@ -16,7 +16,6 @@ export default class BetaInfoStaticPage extends React.Component<{}, void> {
     render(): ReactNode {
         return (
             <StaticPage
-                title=""
                 bannerPrimary="About Ask Izzy Beta"
                 bannerName="technology static"
                 className="BetaInfoPage"
