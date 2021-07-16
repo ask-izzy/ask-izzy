@@ -1,0 +1,21 @@
+@use '../../styles/mixins/colours';
+
+.Paragraph {
+    img {
+        margin: 0 auto;
+
+        &:only-child {
+            display: block;
+        }
+
+        &:nth-child(2) {
+            display: inline-block;
+        }
+    }
+
+    .inlineIcon {
+        height: 20px;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+}

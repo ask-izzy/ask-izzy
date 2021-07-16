@@ -7,6 +7,7 @@ import gfm from "remark-gfm";
 import Link from "./Link"
 import BlockQuote from "./base/BlockQuote"
 import Code from "./base/Code"
+import Paragraph from "./base/Paragraph";
 
 type Renderers = {[string]: Function}
 
@@ -30,6 +31,11 @@ export default function StrapiMarkdown({
             <Link
                 to={href}
                 children={children}
+            />,
+        paragraph: ({children, node}) =>
+            <Paragraph
+                children={children}
+                node={node}
             />,
         blockquote: ({children}) =>
             <BlockQuote children={children} />,

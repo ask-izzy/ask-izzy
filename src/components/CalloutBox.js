@@ -86,7 +86,6 @@ function CalloutBox(
             </StrapiMarkdown>
             {callout.Phone &&
                 <Phone
-                    className="calloutPhone"
                     number={`Call ${callout.Phone}`}
                     comment=""
                     kind=""
@@ -99,8 +98,8 @@ function CalloutBox(
         return null;
     }
 
-    return calloutBoxes.map((callout, index) => {
-        const calloutObj = callout.callout;
+    return calloutBoxes.map((callout: CalloutBoxType, index: number) => {
+        const calloutObj = Object.assign({}, callout.callout);
 
         if (calloutObj.Link) {
             // if there is a style extend the object with a cursor style
