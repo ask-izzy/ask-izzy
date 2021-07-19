@@ -10,7 +10,7 @@ import ServiceFactory from "../../fixtures/factories/Service";
 import Address from "./Address";
 import Accessibility from "./Accessibility";
 import CollapsedOpeningTimes from "./CollapsedOpeningTimes";
-import Collapser from "./Collapser";
+import Collapser from "./general/Collapser";
 import ContactMethods from "./ContactMethods";
 import DebugServiceRecord from "./DebugServiceRecord";
 import Eligibility from "./Eligibility";
@@ -89,20 +89,20 @@ export default class ServicePane extends React.Component<{
                         <IndigenousServiceIcon object={object} />
                         <LgbtiqIcon object={object} />
                     </p>
-                    <h3 className="description">
-                        {object.shortDescription.map((sentence, idx) =>
-                            <p key={idx}>{sentence}</p>
-                        )}
-                        {object.descriptionRemainder.length ?
-                            <Collapser message="Read more">
-                                {object.descriptionRemainder.map(
-                                    (sentence, idx) =>
-                                        <p key={idx}>{sentence}</p>
-                                )}
-                            </Collapser>
-                            : null
-                        }
-                    </h3>
+                    <div className="description">
+                        <Collapser
+                            contentPreview={object.shortDescription.map((
+                                sentence, idx) =>
+                                <p key={idx}>{sentence}</p>
+                            )}
+                            expandMessage="Read more"
+                        >
+                            {object.descriptionSentences.map(
+                                (sentence, idx) =>
+                                    <p key={idx}>{sentence}</p>
+                            )}
+                        </Collapser>
+                    </div>
                 </div>
 
                 <BoxedText>

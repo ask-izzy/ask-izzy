@@ -5,20 +5,22 @@
 import Accessibility from "./components/Accessibility";
 import AccordionItem from "./components/AccordionItem";
 import Accordion from "./components/Accordion";
-import CalloutBox from "./components/CalloutBox";
 import Address from "./components/Address";
+import AlertBanner from "./components/AlertBanner";
+import AlertBannerList from "./components/AlertBannerList";
 import AppBar from "./components/AppBar";
 import BaseLogoWithTextBox from "./components/BaseLogoWithTextBox";
 import BoxedTextDivider from "./components/BoxedTextDivider";
 import BoxedText from "./components/BoxedText";
 import BrandedFooter from "./components/BrandedFooter";
 import ButtonListItem from "./components/ButtonListItem";
+import CalloutBox from "./components/CalloutBox";
 import CategoryListItem from "./components/CategoryListItem";
 import CollapsedOpeningTimes from "./components/CollapsedOpeningTimes";
-import Collapser from "./components/Collapser";
 import ContactMethods from "./components/ContactMethods";
 import CrisisHeader from "./components/CrisisHeader";
 import CrisisLineItem from "./components/CrisisLineItem";
+import DebugColours from "./components/DebugColours";
 import DebugContainer from "./components/DebugContainer";
 import DebugPersonalisation from "./components/DebugPersonalisation";
 import DebugQueryScore from "./components/DebugQueryScore";
@@ -56,6 +58,7 @@ import ServiceListIntro from "./components/ServiceListIntro";
 import ServicePane from "./components/ServicePane";
 import SitesMap from "./components/SitesMap";
 import Spacer from "./components/Spacer";
+import StrapiMarkdown from "./components/StrapiMarkdown";
 import SvgIcon from "./components/SvgIcon";
 import TransportTime from "./components/TransportTime";
 import ViewOnMapButton from "./components/ViewOnMapButton";
@@ -66,20 +69,22 @@ export default {
     Accessibility,
     AccordionItem,
     Accordion,
-    CalloutBox,
     Address,
+    AlertBanner,
+    AlertBannerList,
     AppBar,
     BaseLogoWithTextBox,
     BoxedTextDivider,
     BoxedText,
     BrandedFooter,
     ButtonListItem,
+    CalloutBox,
     CategoryListItem,
     CollapsedOpeningTimes,
-    Collapser,
     ContactMethods,
     CrisisHeader,
     CrisisLineItem,
+    DebugColours,
     DebugContainer,
     DebugPersonalisation,
     DebugQueryScore,
@@ -117,6 +122,7 @@ export default {
     ServicePane,
     SitesMap,
     Spacer,
+    StrapiMarkdown,
     SvgIcon,
     TransportTime,
     ViewOnMapButton,

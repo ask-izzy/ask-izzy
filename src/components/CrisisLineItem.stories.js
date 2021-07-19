@@ -28,15 +28,6 @@ VicHousingServiceSpecialCase.args = {
     }),
 };
 
-export const VicHousingServiceSpecialCaseExpandedByDefault = Template.bind({});
-VicHousingServiceSpecialCaseExpandedByDefault.args = {
-    object: ServiceFactory({
-        ...fixtures.ixa,
-        id: 2721562,
-    }),
-    expanded: true,
-};
-
 export const NSWLink2HomeServiceSpecialCase = Template.bind({});
 NSWLink2HomeServiceSpecialCase.args = {
     object: ServiceFactory({

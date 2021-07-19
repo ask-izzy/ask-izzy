@@ -20,12 +20,6 @@ BasicService.args = {
     object: ServiceFactory(fixtures.ixa),
 };
 
-export const OtherDetailsExpandedByDefault = Template.bind({});
-OtherDetailsExpandedByDefault.args = {
-    object: ServiceFactory(fixtures.ixa),
-    expanded: true,
-};
-
 export const ServiceWithLotsOfNumbers = Template.bind({});
 ServiceWithLotsOfNumbers.args = {
     object: ServiceFactory(fixtures.phoneableService),

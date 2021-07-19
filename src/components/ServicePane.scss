@@ -38,6 +38,7 @@
         .header {
             width: 46%;
             float: left;
+            clear: both;
             background-color: #{colours.get-static('raw-colour-pure-white')};
             background-color: var(--raw-colour-pure-white);
         }
@@ -165,6 +166,7 @@
 
     .DebugContainer {
         float: left;
+        clear: both;
 
         pre {
             white-space: pre-wrap;
