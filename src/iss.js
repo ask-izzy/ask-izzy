@@ -448,8 +448,49 @@ export class Service {
      *
      * @returns The description of the service as an array of sentences.
      */
-    descriptionSentences(): Array<string> {
-        return this.description.match(/.+?(?:\.\s+|$)/g) || []
+    get descriptionSentences(): Array<string> {
+        // Remove this when regex lookbehinds are supported in all browsers we
+        // support.
+        if (!lookbehindIsSupported()) {
+            let regex = /\.\s+(?=\S)/;
+            let remainingDescription = this.description;
+            const sentences = []
+            let match = regex.exec(remainingDescription)
+            while (match) {
+                const cutIndex = match.index + match?.[0]?.length
+                sentences.push(
+                    remainingDescription.slice(0, cutIndex)
+                )
+                remainingDescription = remainingDescription.slice(cutIndex)
+                match = regex.exec(remainingDescription)
+            }
+            if (remainingDescription) {
+                sentences.push(remainingDescription)
+            }
+            return sentences
+        }
+
+        // RegEx must be created via a string rather than a literal otherwise
+        // it will bork browsers that don't support lookbehinds even if those
+        // browsers never execute this line.
+        return this.description.split(new RegExp("(?<=\\.\\s+)(?=\\S)", "g"))
+
+        function lookbehindIsSupported() {
+            try {
+                return !!(
+                "text-test1-behind-test2-test3"
+                    .match(
+                        new RegExp("(?<=behind)-test\\d", "g")
+                    )?.[0] === "-test2" &&
+                "behind-test1-test2"
+                    .match(
+                        new RegExp("(?<!behind)-test\\d", "g")
+                    )?.[0] === "-test2"
+                );
+            } catch (error) {
+                return false;
+            }
+        }
     }
 
     /**
@@ -459,7 +500,7 @@ export class Service {
      * without pushing the length up to or more than 250 characters.
      */
     get shortDescription(): Array<string> {
-        let sentences = this.descriptionSentences();
+        let sentences = this.descriptionSentences;
         let description = [sentences.shift()];
         let descriptionLength = () =>
             description.reduce((memo, elem) => memo + elem.length, 0);
@@ -483,7 +524,7 @@ export class Service {
      * Rest of the description after the shortDescription.
      */
     get descriptionRemainder(): Array<string> {
-        return this.descriptionSentences().slice(
+        return this.descriptionSentences.slice(
             this.shortDescription.length
         );
     }
