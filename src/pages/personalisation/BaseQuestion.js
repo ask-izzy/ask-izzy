@@ -271,6 +271,7 @@ class BaseQuestion extends Personalisation<Props, State> {
                             <QuestionStepper
                                 category={this.state.category}
                                 listFocused={this.state.listFocused}
+                                initialTabIndex={1}
                                 onTabIndex={(tabIndex) =>
                                     this.setState({tabIndex})
                                 }
