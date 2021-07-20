@@ -7,6 +7,7 @@ import components from "../components";
 import icons from "../icons";
 import QuickExit from "./QuickExit";
 import classnames from "classnames";
+import ScreenReader from "./ScreenReader";
 type Props = {
     title?: ?string,
     onBackTouchTap?: ?Function,
@@ -27,11 +28,18 @@ class AppBar extends React.Component<Props, void> {
     render(): ReactElement<"div"> {
         return (
             <div
+                role="navigation"
                 className={
                     classnames(this.props.containerClassName, "AppBarContainer")
                 }
+                aria-labelledby="appBar"
             >
                 <div className="AppBar">
+                    <ScreenReader>
+                        <span id="appBar">
+                            Banner navigation.
+                        </span>
+                    </ScreenReader>
                     {this.props.onBackTouchTap ? this.renderBackButton() : null}
                     {this.props.title ?
                         <h1 className="title">{this.props.title}</h1>

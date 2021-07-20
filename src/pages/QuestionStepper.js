@@ -19,6 +19,7 @@ import QuestionStepperAnswer from "./QuestionStepperAnswer";
 import QuestionStepperClearLocation from "./QuestionStepperClearLocation";
 import _ from "underscore";
 import {Service} from "../iss";
+import ScreenReader from "../components/ScreenReader";
 
 type Props = {
     intro?: ?boolean,
@@ -128,10 +129,17 @@ function QuestionStepper(
 
     return (
         <div
+            role="navigation"
+            aria-labelledby="breadcrumb"
             className={getClassesNames()}
             aria-label={SCREEN_READER_MESSAGE}
             onBlur={() => clearShowSkipToChoice?.()}
         >
+            <ScreenReader>
+                <span id="breadcrumb">
+                    Previous answer breadcrumb.
+                </span>
+            </ScreenReader>
             <ConditionalSkipToChoice
                 show={!resultsPage && showSkipToChoice}
             />

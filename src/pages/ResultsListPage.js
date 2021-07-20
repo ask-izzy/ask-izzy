@@ -20,6 +20,7 @@ import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "./QuestionStepper";
 
 import { stateFromLocation } from "../utils";
+import ScreenReader from "../components/ScreenReader";
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
@@ -40,59 +41,77 @@ class ResultsListPage extends ResultsPage<> {
                         : "/"
                 )}
             />
-            <DebugContainer message="Debug personalisation">
-                <DebugPersonalisation
-                    search={this.search}
-                    items={this.personalisationComponents}
-                />
-            </DebugContainer>
-            <DebugContainer message="ISS Parameters">
-                <DebugSearch search={this.issParams()} />
-            </DebugContainer>
-
-            <LoadingResultsHeader
-                title={this.title}
-                category={this.category}
-                meta={this.state.searchMeta || {total_count: 0}}
-                personalisationComponents={this.personalisationComponents}
-                loading={this.searchIsLoading}
-                error={this.state.searchError ?
-                    "An error occurred. Please try again."
-                    : ""
-                }
-                statusCode={this.state.searchError?.status || 200}
-            />
-            <div className="List results">
-                <div tabIndex="0">
-                    <QuestionStepper
-                        category={this.category}
-                        resultsPage={true}
-                        results={this.state.searchResults || []}
-                        location={this.context.router.location}
+            <div
+                role="complementary"
+                aria-labelledby="header"
+            >
+                <ScreenReader>
+                    <span id="header">
+                        Header.
+                    </span>
+                </ScreenReader>
+                <DebugContainer message="Debug personalisation">
+                    <DebugPersonalisation
+                        search={this.search}
+                        items={this.personalisationComponents}
                     />
-                </div>
-                {
-                    !this.state.searchResults ||
-                    this.state.searchResults.length === 0 ||
-                    <>
-                        <AlertBannerList
-                            state={stateFromLocation()}
-                            screenLocation="resultsPage"
-                            format="inline"
-                        />
-                        <ViewOnMapButton
-                            to={this.context.router.location
-                                .pathname.replace(/\/?$/, "/map")
-                            }
-                        />
-                    </>
-                }
-                <ResultsList
-                    results={this.state.searchResults || []}
+                </DebugContainer>
+                <DebugContainer message="ISS Parameters">
+                    <DebugSearch search={this.issParams()} />
+                </DebugContainer>
+                <LoadingResultsHeader
+                    title={this.title}
+                    category={this.category}
+                    meta={this.state.searchMeta || {total_count: 0}}
+                    personalisationComponents={this.personalisationComponents}
+                    loading={this.searchIsLoading}
+                    error={this.state.searchError ?
+                        "An error occurred. Please try again."
+                        : ""
+                    }
+                    statusCode={this.state.searchError?.status || 200}
                 />
-                {this.renderLoadMore()}
-                {this.renderSuggestionBox()}
+                <div className="List results">
+                    <div tabIndex="0">
+                        <QuestionStepper
+                            category={this.category}
+                            resultsPage={true}
+                            results={this.state.searchResults || []}
+                            location={this.context.router.location}
+                        />
+                    </div>
+                </div>
             </div>
+            <main aria-labelledby="searchResults">
+                <ScreenReader>
+                    <span id="searchResults">
+                        Search Results.
+                    </span>
+                </ScreenReader>
+                <div className="List results">
+                    {
+                        !this.state.searchResults ||
+                        this.state.searchResults.length === 0 ||
+                        <>
+                            <AlertBannerList
+                                state={stateFromLocation()}
+                                screenLocation="resultsPage"
+                                format="inline"
+                            />
+                            <ViewOnMapButton
+                                to={this.context.router.location
+                                    .pathname.replace(/\/?$/, "/map")
+                                }
+                            />
+                        </>
+                    }
+                    <ResultsList
+                        results={this.state.searchResults || []}
+                    />
+                    {this.renderLoadMore()}
+                    {this.renderSuggestionBox()}
+                </div>
+            </main>
         </div>
     )
 

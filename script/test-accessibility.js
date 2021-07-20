@@ -78,9 +78,9 @@ async function checkForIssues(ignoreExistingIssues) {
     await fs.writeJson(previousIssuesJsonPath, newPreviousIssues, {spaces: 2})
 
 
-    const numOfContinuingIssues = continuingIssues && 
+    const numOfContinuingIssues = continuingIssues &&
         Object.values(continuingIssues).flat().length
-    const numOfResolvedIssues = resolvedIssues && 
+    const numOfResolvedIssues = resolvedIssues &&
         Object.values(resolvedIssues).flat().length
     const numOfNewIssues = Object.values(newIssues).flat().length
 
@@ -97,7 +97,7 @@ async function checkForIssues(ignoreExistingIssues) {
     }
 }
 
-/** 
+/**
 * For an array of issues found by pa11y sort out which ones have previously
 * been logged and which ones are new.
 */
@@ -133,7 +133,7 @@ function findContinuingIssues(issues: Array<Object>, previousIssues: Array<Objec
     }
 }
 
-/** 
+/**
 * A generator function which loops over each page, runs pa11y then yield the
 * results.
 */
@@ -160,7 +160,14 @@ async function* checkNextPage() {
                 `Testing page accessibility (${i + 1} of ${pages.length})`
             );
         }
-        yield {...page, results: await pa11y(uri, {chromeLaunchConfig})};
+        yield {...page, results: await pa11y(uri, {
+            includeWarnings: true,
+            standard: "WCAG2AA",
+            runners: [
+                "htmlcs",
+            ],
+            chromeLaunchConfig,
+        })};
     }
     process.stdout.write("\n")
 }

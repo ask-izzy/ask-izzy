@@ -61,10 +61,7 @@ class BasePage extends React.Component<{}> {
                             />
                             <title>{pageTitle}</title>
                         </Helmet>
-
-                        <main>
-                            <Outlet />
-                        </main>
+                        <Outlet />
                     </div>
                 </DebugModeProvider>
             </ApolloProvider>

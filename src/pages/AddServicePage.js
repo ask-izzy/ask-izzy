@@ -90,10 +90,11 @@ class AddServicePage extends React.Component<Props, State> {
                     title="Add a service"
                     onBackTouchTap={() => this.context.router.navigate(-1)}
                 />
-
-                <div className="body">
-                    {body}
-                </div>
+                <main>
+                    <div className="body">
+                        {body}
+                    </div>
+                </main>
             </div>
         );
     }

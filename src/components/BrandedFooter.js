@@ -7,6 +7,7 @@ import icons from "../icons"
 import LinkButton from "./LinkButton";
 import config from "../config";
 import { donateLink } from "../constants/urls.js"
+import ScreenReader from "./ScreenReader";
 
 export default class BrandedFooter
     extends React.Component<{}, void> {
@@ -93,10 +94,25 @@ export default class BrandedFooter
     /* end hack */
 
     render: (() => ReactElement<"footer">) = () => (
-        <footer className="branding-footer-container">
+        <footer
+            role="contentinfo"
+            className="branding-footer-container"
+            aria-labelledby="helpfulInformation"
+        >
+            <ScreenReader>
+                <span id="helpfulInformation">
+                    Helpful information.
+                </span>
+            </ScreenReader>
             <div className="top-box">
-                <div className="additional-information">
-                    <h1>Additional Information</h1>
+                <div
+                    role="region"
+                    aria-labelledby="addInfo"
+                    className="additional-information"
+                >
+                    <h1 id="addInfo">
+                        Additional Information.
+                    </h1>
                     <ul>
                         <li>
                             <Link to="/using-ask-izzy">
@@ -125,8 +141,14 @@ export default class BrandedFooter
                         </li>
                     </ul>
                 </div>
-                <div className="homelessness-services">
-                    <h1>Homelessness Services</h1>
+                <div
+                    role="region"
+                    aria-labelledby="homelessnessServices"
+                    className="homelessness-services"
+                >
+                    <h1 id="homelessnessServices">
+                        Homelessness Services
+                    </h1>
                     <ul>
                         <li>
                             <Link to="/homeless-shelters">
@@ -151,7 +173,16 @@ export default class BrandedFooter
                     </ul>
                 </div>
             </div>
-            <div className="middle-box">
+            <div
+                role="region"
+                aria-labelledby="links"
+                className="middle-box"
+            >
+                <ScreenReader>
+                    <span id="links">
+                        Links.
+                    </span>
+                </ScreenReader>
                 <div className="about">
                     <p tabIndex="0">
                         Ask Izzy is powered by{" "}
@@ -172,25 +203,33 @@ export default class BrandedFooter
                     </Link>
                 </div>
                 <div className="support-links">
-                    <Link to={donateLink}>
-                        <icons.Heart />
-                        <div>
-                            Donate to us
-                        </div>
-                    </Link>
-                    <Link
-                        to={
-                            `mailto:${config.default.siteMail}` +
-                            `?subject=${"Ask Izzy - Feedback"}`
-                        }
-                    >
-                        <icons.Chat
-                            className="small"
-                        />
-                        <div>
-                            Leave feedback
-                        </div>
-                    </Link>
+                    <ul>
+                        <li>
+                            <Link to={donateLink}>
+                                <icons.Heart
+                                    className="small"
+                                />
+                                <div>
+                                    Donate to us.
+                                </div>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to={
+                                    `mailto:${config.default.siteMail}` +
+                                    `?subject=${"Ask Izzy - Feedback"}`
+                                }
+                            >
+                                <icons.Chat
+                                    className="small"
+                                />
+                                <div>
+                                    Leave feedback.
+                                </div>
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
                 <div className="supporters">
                     Ask Izzy founding partners:<br />
@@ -259,7 +298,16 @@ export default class BrandedFooter
                     </div>
                 </div>
             </div>
-            <div className="bottom-box">
+            <div
+                role="region"
+                className="bottom-box"
+                aria-labelledby="acknowledgements"
+            >
+                <ScreenReader>
+                    <span id="acknowledgements">
+                        Acknowledgements.
+                    </span>
+                </ScreenReader>
                 <div tabIndex="0">
                     <div className="flags">
                         <icons.AboriginalFlag
@@ -270,9 +318,9 @@ export default class BrandedFooter
                         />
                     </div>
                     <p>
-                        Infoxchange acknowledges the traditional custodians of
-                        the land and pays respect to Elders both past and
-                        present.
+                        Infoxchange acknowledges the traditional custodians
+                        of the land and pays respect to Elders both
+                        past and present.
                     </p>
                 </div>
                 <div tabIndex="0">

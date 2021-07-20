@@ -13,6 +13,7 @@ import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
 import Category from "../../constants/Category";
+import ScreenReader from "../../components/ScreenReader";
 
 type Props = {
     onDoneTouchTap: Function,
@@ -97,43 +98,60 @@ class Intro extends Personalisation<Props, State> {
     render(): React.Element<"div"> {
         return (
             <div className="IntroPage">
-                {this.renderHeaderBar()}
-                <div className="body">
-                    <fieldset>
-                        <legend>
-                             I&#39;m looking for help for
-                        </legend>
-                        <h3>
-                             I&#39;m looking for help for
-                        </h3>
-                        {this.renderDoneButton()}
-                        {this.shouldShowBetaBox &&
-                            <div className="betaPathwayWrapper">
-                                <div className="betaPathway">
-                                    <header>
-                                        <icons.Lightning />
-                                        <h4>
-                                            Ask Izzy Beta - Pandemic Support
-                                        </h4>
-                                    </header>
-                                    <p>
-                                        If you've been impacted by the pandemic
-                                        and
-                                        need support, we have a new version of
-                                        Ask
-                                        Izzy that might be helpful to you.{" "}
-                                        <Link
-                                            to="https://beta.askizzy.org.au"
-                                            className="BetaLink"
-                                        >
-                                            Go to Ask Izzy Beta
-                                        </Link>
-                                    </p>
-                                </div>
-                            </div>
-                        }
-                    </fieldset>
+                <div
+                    role="complementary"
+                    aria-labelledby="header"
+                >
+                    <ScreenReader>
+                        <span id="header">
+                            Header.
+                        </span>
+                    </ScreenReader>
+                    {this.renderHeaderBar()}
                 </div>
+                <main aria-labelledby="questions">
+                    <ScreenReader>
+                        <span id="questions">
+                            Questions.
+                        </span>
+                    </ScreenReader>
+                    <div className="body">
+                        <fieldset>
+                            <legend>
+                                 I&#39;m looking for help for
+                            </legend>
+                            <h3>
+                                 I&#39;m looking for help for
+                            </h3>
+                            {this.renderDoneButton()}
+                            {this.shouldShowBetaBox &&
+                                <div className="betaPathwayWrapper">
+                                    <div className="betaPathway">
+                                        <header>
+                                            <icons.Lightning />
+                                            <h4>
+                                                Ask Izzy Beta - Pandemic Support
+                                            </h4>
+                                        </header>
+                                        <p>
+                                            If you've been impacted by the
+                                            pandemic and need support,
+                                            we have a new version of Ask
+                                            Izzy that might be helpful to
+                                            you.{" "}
+                                            <Link
+                                                to="https://beta.askizzy.org.au"
+                                                className="BetaLink"
+                                            >
+                                                Go to Ask Izzy Beta
+                                            </Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                        </fieldset>
+                    </div>
+                </main>
             </div>
         );
     }

@@ -1,0 +1,13 @@
+
+@use '../styles/mixins/colours';
+
+.Eligibility {
+    padding-right: 15px;
+    padding-left: 15px;
+
+    h3 {
+        font-size: 17px;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+    }
+}

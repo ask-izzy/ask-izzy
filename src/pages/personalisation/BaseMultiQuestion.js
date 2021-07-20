@@ -14,6 +14,7 @@ import storage from "../../storage";
 import * as iss from "../../iss";
 import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
+import ScreenReader from "../../components/ScreenReader";
 
 class BaseMultiQuestion extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
@@ -172,71 +173,88 @@ class BaseMultiQuestion extends BaseQuestion {
                     )
                 }
             >
-                <section className="page-header-section">
-                    <HeaderBar
-                        primaryText={
-                            <div>
-                                {this.props.question}
-                            </div>
-                        }
-                        secondaryText={
-                            this.props.byline
-                        }
-                        taperColour="LighterGrey"
-                        bannerName={this.bannerName}
-                    />
-                </section>
                 <div
-                    tabIndex="0"
-                    onFocus={() => {
-                        this.setState({showSkipToChoice: true})
-                    }}
+                    role="complementary"
+                    aria-labelledby="header"
                 >
-                    <QuestionStepper
-                        category={getCategory(
-                            this.context.router.match.params.page
-                        )}
-                        showSkipToChoice={this.state.showSkipToChoice}
-                        clearShowSkipToChoice={() =>
-                            this.setState({showSkipToChoice: false})
-                        }
-                    />
-                </div>
-                <WithStickyFooter
-                    footerContents={this.renderDoneButton()}
-                >
-                    <fieldset>
-                        <legend>
-                            {this.question}
-                        </legend>
-                        <div className="List">
-                            {this.answers.map((answer, index) =>
-                                <InputListItem
-                                    key={index}
-                                    leftIcon={this.iconFor(answer)}
-                                    primaryText={answer}
-                                    value={answer}
-                                    aria-label={answer}
-                                    type="checkbox"
-                                    checked={selected.has(answer)}
-                                    checkedIcon={
-                                        <icons.CheckboxSelected
-                                            className="big"
-                                        />
-                                    }
-                                    uncheckedIcon={
-                                        <icons.CheckboxUnselected
-                                            className="big"
-                                        />
-                                    }
-                                    onClick={this.onAnswerTouchTap.bind(
-                                        this, answer, !selected.has(answer)
-                                    )}
-                                />
+                    <ScreenReader>
+                        <span id="header">
+                            Header.
+                        </span>
+                    </ScreenReader>
+                    <section className="page-header-section">
+                        <HeaderBar
+                            primaryText={
+                                <div>
+                                    {this.props.question}
+                                </div>
+                            }
+                            secondaryText={
+                                this.props.byline
+                            }
+                            taperColour="LighterGrey"
+                            bannerName={this.bannerName}
+                        />
+                    </section>
+                    <div
+                        tabIndex="0"
+                        onFocus={() => {
+                            this.setState({showSkipToChoice: true})
+                        }}
+                    >
+                        <QuestionStepper
+                            category={getCategory(
+                                this.context.router.match.params.page
                             )}
-                        </div>
-                    </fieldset>
-                </WithStickyFooter>
+                            showSkipToChoice={this.state.showSkipToChoice}
+                            clearShowSkipToChoice={() =>
+                                this.setState({showSkipToChoice: false})
+                            }
+                        />
+                    </div>
+                </div>
+                <main aria-labelledby="questions">
+                    <ScreenReader>
+                        <span id="questions">
+                            Questions.
+                        </span>
+                    </ScreenReader>
+                    <WithStickyFooter
+                        footerContents={this.renderDoneButton()}
+                    >
+                        <fieldset>
+                            <legend>
+                                {this.question}
+                            </legend>
+                            <div className="List">
+                                {this.answers.map((answer, index) =>
+                                    <InputListItem
+                                        key={index}
+                                        leftIcon={this.iconFor(answer)}
+                                        primaryText={answer}
+                                        value={answer}
+                                        aria-label={answer}
+                                        type="checkbox"
+                                        checked={selected.has(answer)}
+                                        checkedIcon={
+                                            <icons.CheckboxSelected
+                                                className="big"
+                                            />
+                                        }
+                                        uncheckedIcon={
+                                            <icons.CheckboxUnselected
+                                                className="big"
+                                            />
+                                        }
+                                        onClick={this.onAnswerTouchTap.bind(
+                                            this, answer, !selected.has(answer)
+                                        )}
+                                    />
+                                )}
+                            </div>
+                        </fieldset>
+                    </WithStickyFooter>
+                </main>
             </div>
         );
     }
