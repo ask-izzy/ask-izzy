@@ -7,10 +7,6 @@
         &:only-child {
             display: block;
         }
-
-        &:nth-child(2) {
-            display: inline-block;
-        }
     }
 
     .inlineIcon {
