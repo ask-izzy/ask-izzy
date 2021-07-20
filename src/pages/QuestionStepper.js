@@ -127,6 +127,16 @@ function QuestionStepper(
         )
     )
 
+    const getLandMarkTitle = (): string => {
+        if (home) {
+            return "Saved location."
+        } else if (resultsPage) {
+            return "Selected answer breadcrumb."
+        } else {
+            return "Previous answer breadcrumb."
+        }
+    }
+
     return (
         <div
             role="navigation"
@@ -137,7 +147,7 @@ function QuestionStepper(
         >
             <ScreenReader>
                 <span id="breadcrumb">
-                    Previous answer breadcrumb.
+                    {getLandMarkTitle()}
                 </span>
             </ScreenReader>
             <ConditionalSkipToChoice

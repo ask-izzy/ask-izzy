@@ -234,27 +234,26 @@ class Location extends Personalisation<Props, State> {
                         Header.
                     </span>
                 </ScreenReader>
-                {this.renderHeaderBar()}
-            </div>
-            <components.HeaderBar
-                primaryText={
-                    <div>
-                        Where are you?
-                    </div>
-                }
-                secondaryText={
-                    "This will let me find the services closest to you."
-                }
-                taperColour={this.state.showStepper ? "LighterGrey"
-                    : "HeaderBar"}
-                bannerName={this.bannerName}
-            />
-            {this.state.showStepper ? (
-                <QuestionStepper
-                    initialTabIndex={0}
-                    category={this.state.category}
+                <components.HeaderBar
+                    primaryText={
+                        <div>
+                            Where are you?
+                        </div>
+                    }
+                    secondaryText={
+                        "This will let me find the services closest to you."
+                    }
+                    taperColour={this.state.showStepper ? "LighterGrey"
+                        : "HeaderBar"}
+                    bannerName={this.bannerName}
                 />
-            ) : null}
+                {this.state.showStepper ? (
+                    <QuestionStepper
+                        initialTabIndex={0}
+                        category={this.state.category}
+                    />
+                ) : null}
+            </div>
             <main aria-labelledby="questions">
                 <ScreenReader>
                     <span id="questions">

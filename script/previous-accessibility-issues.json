@@ -25,7 +25,7 @@
       "type": "warning",
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
-      "context": "<div class=\"List categories\"><a class=\"Link internal ListIte...</div>",
+      "context": "<div class=\"List categories\"><a aria-label=\"Housing.\n       ...</div>",
       "selector": "#root > div > div > main > div:nth-child(2) > div",
       "runner": "htmlcs",
       "runnerExtras": {}
@@ -116,26 +116,6 @@
     }
   ],
   "/covid-19-support/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h2 element appears to be the primary document heading, so should be an h1 element.",
-      "context": "<h2>COVID-19 National Hotline</h2>",
-      "selector": "#root > div > div > main > div > div:nth-child(1) > h2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h2 element should be an h1 to be properly nested.",
-      "context": "<h2>COVID-19 National Hotline</h2>",
-      "selector": "#root > div > div > main > div > div:nth-child(1) > h2",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
     {
       "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
       "type": "warning",
@@ -516,31 +496,9 @@
   "/have-your-say/:page/index.html": [],
   "/search/:suburb-:state/index.html": [],
   "/search/:suburb-:state/map/index.html": [],
-  "/search/:suburb-:state/map/personalise/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/:suburb-:state/map/personalise/index.html": [],
   "/search/:suburb-:state/map/personalise/page/are-you-safe/index.html": [],
-  "/search/:suburb-:state/map/personalise/page/intro/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/:suburb-:state/map/personalise/page/intro/index.html": [],
   "/search/:suburb-:state/map/personalise/page/location/index.html": [],
   "/search/:suburb-:state/map/personalise/page/online-safety-screen/index.html": [
     {
@@ -549,7 +507,7 @@
       "typeCode": 2,
       "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
       "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -561,36 +519,14 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
   ],
-  "/search/:suburb-:state/personalise/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/:suburb-:state/personalise/index.html": [],
   "/search/:suburb-:state/personalise/page/are-you-safe/index.html": [],
-  "/search/:suburb-:state/personalise/page/intro/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/:suburb-:state/personalise/page/intro/index.html": [],
   "/search/:suburb-:state/personalise/page/location/index.html": [],
   "/search/:suburb-:state/personalise/page/online-safety-screen/index.html": [
     {
@@ -599,7 +535,7 @@
       "typeCode": 2,
       "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
       "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -611,7 +547,7 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -623,7 +559,7 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -635,7 +571,7 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -648,38 +584,16 @@
       "typeCode": 2,
       "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
       "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "selector": "#root > div > div > main > div:nth-child(2) > div > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
   ],
   "/search/index.html": [],
   "/search/map/index.html": [],
-  "/search/map/personalise/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/map/personalise/index.html": [],
   "/search/map/personalise/page/are-you-safe/index.html": [],
-  "/search/map/personalise/page/intro/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/map/personalise/page/intro/index.html": [],
   "/search/map/personalise/page/location/index.html": [],
   "/search/map/personalise/page/online-safety-screen/index.html": [
     {
@@ -688,7 +602,7 @@
       "typeCode": 2,
       "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
       "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -700,36 +614,14 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
   ],
-  "/search/personalise/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/personalise/index.html": [],
   "/search/personalise/page/are-you-safe/index.html": [],
-  "/search/personalise/page/intro/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/personalise/page/intro/index.html": [],
   "/search/personalise/page/location/index.html": [],
   "/search/personalise/page/online-safety-screen/index.html": [
     {
@@ -738,7 +630,7 @@
       "typeCode": 2,
       "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
       "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -750,7 +642,7 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -762,7 +654,7 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -774,7 +666,7 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -787,37 +679,15 @@
       "typeCode": 2,
       "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
       "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "selector": "#root > div > div > main > div:nth-child(2) > div > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
   ],
   "/housing/:suburb-:state/index.html": [],
   "/housing/:suburb-:state/map/index.html": [],
-  "/housing/:suburb-:state/map/personalise/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
-  "/housing/:suburb-:state/map/personalise/page/intro/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/housing/:suburb-:state/map/personalise/index.html": [],
+  "/housing/:suburb-:state/map/personalise/page/intro/index.html": [],
   "/housing/:suburb-:state/map/personalise/page/location/index.html": [],
   "/housing/:suburb-:state/map/personalise/page/sleep-tonight/index.html": [],
   "/housing/:suburb-:state/map/personalise/page/gender/index.html": [],
@@ -831,7 +701,7 @@
       "typeCode": 2,
       "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
       "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -843,35 +713,13 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
   ],
-  "/housing/:suburb-:state/personalise/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
-  "/housing/:suburb-:state/personalise/page/intro/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/housing/:suburb-:state/personalise/index.html": [],
+  "/housing/:suburb-:state/personalise/page/intro/index.html": [],
   "/housing/:suburb-:state/personalise/page/location/index.html": [],
   "/housing/:suburb-:state/personalise/page/sleep-tonight/index.html": [],
   "/housing/:suburb-:state/personalise/page/gender/index.html": [],
@@ -885,7 +733,7 @@
       "typeCode": 2,
       "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
       "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -897,7 +745,7 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -909,7 +757,7 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -926,7 +774,7 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -938,37 +786,15 @@
       "typeCode": 2,
       "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
       "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "selector": "#root > div > div > main > div:nth-child(2) > div > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
   ],
   "/housing/index.html": [],
   "/housing/map/index.html": [],
-  "/housing/map/personalise/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
-  "/housing/map/personalise/page/intro/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/housing/map/personalise/index.html": [],
+  "/housing/map/personalise/page/intro/index.html": [],
   "/housing/map/personalise/page/location/index.html": [],
   "/housing/map/personalise/page/sleep-tonight/index.html": [],
   "/housing/map/personalise/page/gender/index.html": [],
@@ -982,7 +808,7 @@
       "typeCode": 2,
       "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
       "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -994,35 +820,13 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
   ],
-  "/housing/personalise/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
-  "/housing/personalise/page/intro/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h3 element should be an h2 to be properly nested.",
-      "context": "<h3>I'm looking for help for</h3>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div:nth-child(2) > h3",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/housing/personalise/index.html": [],
+  "/housing/personalise/page/intro/index.html": [],
   "/housing/personalise/page/location/index.html": [],
   "/housing/personalise/page/sleep-tonight/index.html": [],
   "/housing/personalise/page/gender/index.html": [],
@@ -1036,7 +840,7 @@
       "typeCode": 2,
       "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
       "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -1048,7 +852,7 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -1060,7 +864,7 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -1077,7 +881,7 @@
       "typeCode": 2,
       "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
       "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
       "runner": "htmlcs",
       "runnerExtras": {}
     }
@@ -1089,7 +893,7 @@
       "typeCode": 2,
       "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
       "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "selector": "#root > div > div > main > div:nth-child(2) > div > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
       "runner": "htmlcs",
       "runnerExtras": {}
     }

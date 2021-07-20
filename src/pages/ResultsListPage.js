@@ -31,6 +31,11 @@ class ResultsListPage extends ResultsPage<> {
         return <NotFoundStaticPage/>
     }
 
+    hasSearchResults(): boolean {
+        return !this.state.searchResults ||
+            this.state.searchResults.length === 0
+    }
+
     renderPage: (() => ReactElement<"div">) = () => (
         <div className="ResultsListPage">
             <AppBar
@@ -82,6 +87,13 @@ class ResultsListPage extends ResultsPage<> {
                     </div>
                 </div>
             </div>
+            {this.hasSearchResults() ||
+                <AlertBannerList
+                    state={stateFromLocation()}
+                    screenLocation="resultsPage"
+                    format="inline"
+                />
+            }
             <main aria-labelledby="searchResults">
                 <ScreenReader>
                     <span id="searchResults">
@@ -89,21 +101,12 @@ class ResultsListPage extends ResultsPage<> {
                     </span>
                 </ScreenReader>
                 <div className="List results">
-                    {
-                        !this.state.searchResults ||
-                        this.state.searchResults.length === 0 ||
-                        <>
-                            <AlertBannerList
-                                state={stateFromLocation()}
-                                screenLocation="resultsPage"
-                                format="inline"
-                            />
-                            <ViewOnMapButton
-                                to={this.context.router.location
-                                    .pathname.replace(/\/?$/, "/map")
-                                }
-                            />
-                        </>
+                    {this.hasSearchResults() ||
+                        <ViewOnMapButton
+                            to={this.context.router.location
+                                .pathname.replace(/\/?$/, "/map")
+                            }
+                        />
                     }
                     <ResultsList
                         results={this.state.searchResults || []}

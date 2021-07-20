@@ -14,6 +14,7 @@ import NotFoundStaticPage from "./NotFoundStaticPage";
 import icons from "../icons";
 
 import type { Service, Site } from "../iss";
+import ScreenReader from "../components/ScreenReader";
 
 type State = {
     selectedSite: ?Site,
@@ -123,8 +124,14 @@ class ResultsMapPage extends ResultsPage<{}, State> {
             <DebugContainer message="ISS Parameters">
                 <DebugSearch search={this.issParams()} />
             </DebugContainer>
-
-            {this.renderPageBody()}
+            <main aria-labelledby="mapResults">
+                <ScreenReader>
+                    <span id="mapResults">
+                        Map of search results.
+                    </span>
+                </ScreenReader>
+                {this.renderPageBody()}
+            </main>
 
         </div>
     )

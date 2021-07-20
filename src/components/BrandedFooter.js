@@ -180,7 +180,7 @@ export default class BrandedFooter
             >
                 <ScreenReader>
                     <span id="links">
-                        Links.
+                        Footer Links.
                     </span>
                 </ScreenReader>
                 <div className="about">

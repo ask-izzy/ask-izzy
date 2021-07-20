@@ -48,23 +48,25 @@ export default function({state, screenLocation, format}: Props): React.Node {
     )
 
     return (
-        <div
-            className={classnames(
-                "AlertBannerList",
-                format
-            )}
-            role="region"
-            aria-labelledby="alerts"
-        >
-            <ScreenReader>
-                <span id="alerts">
-                    Alerts.
-                </span>
-            </ScreenReader>
-            <ul>
-                {alerts.map(renderAlert)}
-            </ul>
-        </div>
+        alerts.length ? (
+            <div
+                className={classnames(
+                    "AlertBannerList",
+                    format
+                )}
+                role="region"
+                aria-labelledby="alerts"
+            >
+                <ScreenReader>
+                    <span id="alerts">
+                        Alerts.
+                    </span>
+                </ScreenReader>
+                <ul>
+                    {alerts.map(renderAlert)}
+                </ul>
+            </div>
+        ) : null
     )
 
     function renderAlert({id, title, body, alertLevel, defaultToOpen}) {

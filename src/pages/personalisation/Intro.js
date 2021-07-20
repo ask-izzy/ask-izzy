@@ -120,18 +120,18 @@ class Intro extends Personalisation<Props, State> {
                             <legend>
                                  I&#39;m looking for help for
                             </legend>
-                            <h3>
+                            <h2>
                                  I&#39;m looking for help for
-                            </h3>
+                            </h2>
                             {this.renderDoneButton()}
                             {this.shouldShowBetaBox &&
                                 <div className="betaPathwayWrapper">
                                     <div className="betaPathway">
                                         <header>
                                             <icons.Lightning />
-                                            <h4>
+                                            <h3>
                                                 Ask Izzy Beta - Pandemic Support
-                                            </h4>
+                                            </h3>
                                         </header>
                                         <p>
                                             If you've been impacted by the
