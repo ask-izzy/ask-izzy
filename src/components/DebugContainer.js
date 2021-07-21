@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import Collapser from "./Collapser";
+import Collapser from "./general/Collapser";
 import debugModeContext from "../contexts/debug-mode-context";
 
 type Props = {
@@ -21,7 +21,7 @@ class DebugContainer extends React.Component<Props, void> {
 
         return (
             <div className="DebugContainer">
-                <Collapser message={this.props.message}>
+                <Collapser expandMessage={this.props.message}>
                     {this.props.children}
                 </Collapser>
             </div>

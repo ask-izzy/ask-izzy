@@ -5,7 +5,7 @@ import moment from "moment-timezone";
 import _ from "underscore";
 
 import ServiceOpening from "../iss/ServiceOpening";
-import Collapser from "./Collapser";
+import Collapser from "./general/Collapser";
 import OpeningTimes from "./OpeningTimes";
 import * as gtm from "../google-tag-manager";
 
@@ -22,7 +22,6 @@ function fixture(
     nowOpen: ?boolean,
     openingHours: Array<issOpeningHours>,
     time: ?Moment,
-    expanded = true,
 ): Object {
     // Moment is fixed to Wednesday 15/9/2015 at 1pm
     time = time || sampleTime;
@@ -41,7 +40,6 @@ function fixture(
             }
         ),
         moment: timeFn,
-        expanded: expanded,
     };
 }
 
@@ -49,7 +47,6 @@ type Props = {
     object: ServiceOpening,
     serviceId: number,
     moment?: Moment,
-    expanded?: boolean,
 }
 
 // eslint-disable-next-line max-len
@@ -138,8 +135,7 @@ export default class CollapsedOpeningTimes extends React.Component<Props, void> 
                 <OpeningTimes object={this.props.object} />
                 {openingHours.length > 0 && (
                     <Collapser
-                        message="Open Times"
-                        expanded={this.props.expanded}
+                        expandMessage="Open Times"
                         onClick={this.recordExpandOpeningTimes.bind(this)}
                     >
                         <ul className="AllOpeningTimes">

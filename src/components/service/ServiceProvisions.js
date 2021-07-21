@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import Collapser from "../Collapser";
+import Collapser from "../general/Collapser";
 import { Service } from "../../iss";
 
 type Props = {
@@ -37,7 +37,7 @@ export default class ServiceProvisions extends React.Component<Props, void> {
 
             {this.provisionsBelowFold.length > 0 && (
                 <Collapser
-                    message={`${this.provisionsBelowFold.length} more…`}
+                    expandMessage={`${this.provisionsBelowFold.length} more…`}
                 >
                     {this.provisionsBelowFold.map((provision, i) =>
                         <li className="provision"

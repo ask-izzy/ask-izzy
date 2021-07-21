@@ -50,7 +50,7 @@ describe("iss service", function() {
                 const service = Service({description: input});
 
                 assert.deepEqual(
-                    service.descriptionSentences(),
+                    service.descriptionSentences,
                     output
                 );
             }
@@ -70,6 +70,14 @@ describe("iss service", function() {
                 "  leading whitespace.  ",
                 "happens  .   ",
                 "also trailing whitespace    ",
+            ]
+        ));
+
+        it("deals with newlines", test(
+            "First line and\n second line. Second sentence.",
+            [
+                "First line and\n second line. ",
+                "Second sentence.",
             ]
         ));
 

@@ -26,20 +26,6 @@ addTimesToStory(CurrentlyOpen, [
     },
 ]);
 
-export const ExpandedByDefault = Template.bind({});
-addTimesToStory(ExpandedByDefault, [
-    {
-        day: "Thursday",
-        open: "09:00:00",
-        close: "15:00:00",
-    },
-    {
-        day: "Friday",
-        open: "09:00:00",
-        close: "15:00:00",
-    },
-]);
-
 export const BetweenTwiceInOneDay = Template.bind({});
 addTimesToStory(BetweenTwiceInOneDay, [
     {

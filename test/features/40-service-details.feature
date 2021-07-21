@@ -17,6 +17,14 @@ Feature: Service details page
         And I should not see "Not sure why you're still reading at this point."
         And I should not see "Also we have penguins."
 
+        When I click on "Read more"
+        Then I should see "There is a service here, and its really quite helpful."
+        And I should see "You can get all sorts of things - blankets, food, other stuff too."
+        And I should see "I suggest you drop by and check us out."
+        And I should see "Our service is the best, its really just the best."
+        And I should see "Not sure why you're still reading at this point."
+        And I should see "Also we have penguins."
+
     Scenario: The service provisions is limited to a set of dot points
        Given A service with:
         ----------------------------------------------
