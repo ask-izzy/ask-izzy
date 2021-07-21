@@ -26,9 +26,6 @@ class BaseMultiQuestion extends BaseQuestion {
         return (
             <div className="done-button">
                 <FlatButton
-                    tabIndex={
-                        (this.state.tabIndex + this.answers.length) + 1
-                    }
                     label={label}
                     onClick={this.props.onDoneTouchTap}
                 />
@@ -189,7 +186,22 @@ class BaseMultiQuestion extends BaseQuestion {
                         bannerName={this.bannerName}
                     />
                 </section>
-
+                <div
+                    tabIndex="0"
+                    onFocus={() => {
+                        this.setState({showSkipToChoice: true})
+                    }}
+                >
+                    <QuestionStepper
+                        category={getCategory(
+                            this.context.router.match.params.page
+                        )}
+                        showSkipToChoice={this.state.showSkipToChoice}
+                        setShowSkipToChoice={() =>
+                            this.setState({showSkipToChoice: false})
+                        }
+                    />
+                </div>
                 <WithStickyFooter
                     footerContents={this.renderDoneButton()}
                 >
@@ -197,17 +209,6 @@ class BaseMultiQuestion extends BaseQuestion {
                         <legend>
                             {this.question}
                         </legend>
-                        <div tabIndex="0">
-                            <QuestionStepper
-                                category={getCategory(
-                                    this.context.router.match.params.page
-                                )}
-                                listFocused={this.state.listFocused}
-                                onTabIndex={(tabIndex) =>
-                                    this.setState({tabIndex})
-                                }
-                            />
-                        </div>
                         <div className="List">
                             {this.answers.map((answer, index) =>
                                 <InputListItem
@@ -215,7 +216,6 @@ class BaseMultiQuestion extends BaseQuestion {
                                     leftIcon={this.iconFor(answer)}
                                     primaryText={answer}
                                     value={answer}
-                                    tabIndex={this.state.tabIndex + (index + 1)}
                                     aria-label={answer}
                                     type="checkbox"
                                     checked={selected.has(answer)}
@@ -224,9 +224,6 @@ class BaseMultiQuestion extends BaseQuestion {
                                             className="big"
                                         />
                                     }
-                                    onFocus={() => this.setState(
-                                        {listFocused: true}
-                                    )}
                                     uncheckedIcon={
                                         <icons.CheckboxUnselected
                                             className="big"

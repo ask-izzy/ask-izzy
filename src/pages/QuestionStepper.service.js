@@ -150,7 +150,10 @@ export const renderPipeOrComma = (
     index?: ?number,
 ): React.Node => (
     <>
-        <span className={classnames("pipeOrComma", !multi && "nonMultiMargin")}>
+        <span
+            aria-hidden="true"
+            className={classnames("pipeOrComma", !multi && "nonMultiMargin")}
+        >
             {multi && lastMultiSelect !== index ?
                 <span className={editing ? "editing" : null}>
                     {", "}
@@ -228,7 +231,7 @@ export const generateContainerAriaLabel = (
             answer,
             editing(answer, router),
             true)
-        } ${answers.length - 1 === (index + 1) ? "and" : ", "}`
+        } ${answers.length - 1 === (index + 1) ? " and" : ", "}`
     })
     return ariaLabel;
 }

@@ -226,7 +226,12 @@ class Location extends Personalisation<Props, State> {
     render: (() => React.Element<"div">) = () => (
         <div className="Location">
             {this.renderHeaderBar()}
-
+            {this.state.showStepper ? (
+                <QuestionStepper
+                    initialTabIndex={0}
+                    category={this.state.category}
+                />
+            ) : null}
             <WithStickyFooter
                 footerContents={this.renderDoneButton()}
             >
@@ -235,12 +240,6 @@ class Location extends Personalisation<Props, State> {
                         Where are you?
                     </legend>
                     <div className="List">
-                        {this.state.showStepper ? (
-                            <QuestionStepper
-                                initialTabIndex={0}
-                                category={this.state.category}
-                            />
-                        ) : null}
                         {
                             /* if the browser supports geolocation */
                             geolocationAvailable() &&

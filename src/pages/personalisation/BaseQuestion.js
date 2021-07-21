@@ -41,8 +41,7 @@ export type State = {
     shouldRenderSafetyDetails?: boolean,
     showStepper: boolean,
     category: ?Category,
-    tabIndex: number,
-    listFocused: boolean,
+    showSkipToChoice: boolean,
 }
 
 class BaseQuestion extends Personalisation<Props, State> {
@@ -54,8 +53,7 @@ class BaseQuestion extends Personalisation<Props, State> {
             selected: null, // set when the user makes a choice
             showStepper: false,
             category: undefined,
-            tabIndex: 0,
-            listFocused: false,
+            showSkipToChoice: false,
         };
     }
 
@@ -262,22 +260,30 @@ class BaseQuestion extends Personalisation<Props, State> {
         return (
             <div>
                 {this.renderHeaderBar()}
+                {this.state.showStepper && (
+                    <div
+                        tabIndex="0"
+                        onFocus={() => {
+                            this.setState({
+                                showSkipToChoice: true,
+                            })
+                        }}
+                    >
+                        <QuestionStepper
+                            category={this.state.category}
+                            showSkipToChoice={this.state.showSkipToChoice}
+                            setShowSkipToChoice={() => {
+                                this.setState({
+                                    showSkipToChoice: false,
+                                })
+                            }}
+                        />
+                    </div>
+                )}
                 <fieldset tabIndex="0">
                     <legend>
                         {this.question}
                     </legend>
-                    <div tabIndex="0">
-                        {this.state.showStepper && (
-                            <QuestionStepper
-                                category={this.state.category}
-                                listFocused={this.state.listFocused}
-                                initialTabIndex={1}
-                                onTabIndex={(tabIndex) =>
-                                    this.setState({tabIndex})
-                                }
-                            />
-                        )}
-                    </div>
                     <div className={listClassName}>
                         {this.answers.map((answer, index) =>
                             <InputListItem
@@ -285,7 +291,6 @@ class BaseQuestion extends Personalisation<Props, State> {
                                 leftIcon={this.iconFor(answer)}
                                 primaryText={answer}
                                 secondaryText={this.answerDescFor(answer)}
-                                tabIndex={this.state.tabIndex + (index + 1)}
                                 aria-label={answer}
                                 type="radio"
                                 checked={answer === selected}
@@ -295,9 +300,6 @@ class BaseQuestion extends Personalisation<Props, State> {
                                     answer
                                 )}
                                 readOnly={true}
-                                onFocus={() => this.setState(
-                                    {listFocused: true}
-                                )}
                                 checkedIcon={
                                     <icons.RadioSelected className="big" />
                                 }
@@ -341,9 +343,6 @@ class BaseQuestion extends Personalisation<Props, State> {
             <div>
                 <div className="done-button">
                     <FlatButton
-                        tabIndex={
-                            (this.state.tabIndex + this.answers.length) + 1
-                        }
                         className="text-link"
                         label="Skip"
                         onClick={this.props.onDoneTouchTap}

@@ -12,8 +12,6 @@ type Props = ListItemProps & {
     ariaLabel?: string,
     checkedIcon: any,
     uncheckedIcon: any,
-    onFocus?: ?function,
-    tabIndex?: number,
 }
 
 export default class InputListItem extends React.Component<Props, void> {
@@ -31,7 +29,6 @@ export default class InputListItem extends React.Component<Props, void> {
             primaryText,
             secondaryText,
             leftIcon,
-            tabIndex,
             onClick,
             ariaLabel,
             ...rest
@@ -46,9 +43,8 @@ export default class InputListItem extends React.Component<Props, void> {
                 className="InputListItem"
                 rootElement="button"
                 role={this.props.type || "button"}
-                tabIndex={tabIndex || 0}
                 aria-label={label}
-                onFocus={this.props.onFocus}
+                tabIndex="0"
                 {...{primaryText, secondaryText, leftIcon, onClick}}
                 rightIcon={
                     <span>
