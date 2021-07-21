@@ -153,11 +153,14 @@ export default class BrandedFooter
             </div>
             <div className="middle-box">
                 <div className="about">
-                    Ask Izzy is powered by{" "}
-                    <Link to="https://www.infoxchange.org/au">
-                        Infoxchange
-                    </Link>, a not-for-profit social enterprise that has been
-                    delivering technology for social justice for over 30 years.
+                    <p tabIndex="0">
+                        Ask Izzy is powered by{" "}
+                        <Link to="https://www.infoxchange.org/au">
+                            Infoxchange
+                        </Link>, a not-for-profit social enterprise that
+                        has been delivering technology for social justice
+                        for over 30 years.
+                    </p>
                 </div>
                 <div className="about-links">
                     <Link to="/about">
@@ -257,7 +260,7 @@ export default class BrandedFooter
                 </div>
             </div>
             <div className="bottom-box">
-                <div>
+                <div tabIndex="0">
                     <div className="flags">
                         <icons.AboriginalFlag
                             className="flag"
@@ -272,7 +275,7 @@ export default class BrandedFooter
                         present.
                     </p>
                 </div>
-                <div>
+                <div tabIndex="0">
                     Ask Izzy is owned and operated by Infoxchange.
                     © {new Date().getFullYear()} Infoxchange
                 </div>

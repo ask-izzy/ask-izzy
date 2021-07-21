@@ -22,6 +22,7 @@ import TransportTime from "./TransportTime";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import { titleize } from "underscore.string";
+import ScreenReader from "./ScreenReader";
 
 class ResultListItem extends React.Component<{
     service: iss.Service,
@@ -100,6 +101,9 @@ class ResultListItem extends React.Component<{
                 </div>
                 <Eligibility {...service} />
                 <Accessibility object={service} />
+                <ScreenReader>
+                    Travel times.
+                </ScreenReader>
                 <TransportTime
                     compact={true}
                     location={service.Location()}

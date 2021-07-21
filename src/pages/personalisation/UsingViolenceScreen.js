@@ -73,7 +73,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
         const referralServiceChat = "https://ntv.org.au/get-help/";
 
         return (
-            <h3>
+            <p>
                 <Link to={referralServiceLink}>Men's referral service</Link> on
                 {" "}
                 {
@@ -86,7 +86,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
                     )
                 }
                 {" "}or chat online <Link to={referralServiceChat}>here</Link>.
-            </h3>
+            </p>
         )
     }
 
@@ -99,7 +99,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
         const referralServicePhone = "1800 737 732";
 
         return (
-            <h3>
+            <p>
                 <Link to={referralServiceLink}>Women's referral service</Link>
                 {" "}on{" "}
                 {
@@ -111,7 +111,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
                         `${ referralServicePhone }`
                     )
                 }.
-            </h3>
+            </p>
         )
     }
 

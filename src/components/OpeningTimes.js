@@ -4,7 +4,6 @@ import type {Element as ReactElement} from "React";
 import React from "react";
 import moment from "moment-timezone";
 
-import ScreenReader from "./ScreenReader";
 import ServiceOpening from "../iss/ServiceOpening";
 
 import icons from "../icons";
@@ -121,9 +120,6 @@ class OpeningTimes extends React.Component<Props, void> {
 
         return (
             <div className="OpeningTimes">
-                <ScreenReader>
-                    <h4>Opening times</h4>
-                </ScreenReader>
                 <icons.Clock className="ColoredIcon" />
                 {" "}
                 <span className="print-only">Open Times</span>

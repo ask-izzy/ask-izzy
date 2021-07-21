@@ -76,7 +76,7 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
         const phoneService = "1800 542 847";
 
         return (
-            <h3>
+            <p>
                 Call <Link to={linkService}>1800LGBTIQ</Link> on{" "}
                 {
                     this.props.mobileView ? (
@@ -87,7 +87,7 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
                         `${phoneService}`
                     )
                 }.
-            </h3>
+            </p>
         );
     }
 
@@ -96,7 +96,7 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
         const phoneService = "1800 184 527";
 
         return (
-            <h3>
+            <p>
                 Call <Link to={linkService}>QLife</Link> on{" "}
                 {
                     this.props.mobileView ? (
@@ -107,7 +107,7 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
                         `${phoneService}`
                     )
                 } or chat online.
-            </h3>
+            </p>
         );
     }
 
@@ -124,24 +124,24 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
                         Everyone has the right to be safe and proud.<br />
                         Violence and abuse is never OK.
                     </h2>
-                    <h3>
+                    <p>
                         Help and services are available from LGBTIQA+ services.
-                    </h3>
+                    </p>
                     {
                         this.shouldShowVicService() ?
                             this.renderVictoriaService()
                             : this.renderAustraliaWideService()
                     }
-                    <h3>
+                    <p>
                         Learn more about LGBTIQA+ family violence at{" "}
                         <Link to={linkAcon}>
                             ‘Another Closet’
                         </Link>.
-                    </h3>
-                    <h3>
+                    </p>
+                    <p>
                         Everyone has the right to access mainstream services.
-                    </h3>
-                    <h3>
+                    </p>
+                    <p>
                         Call <Link to={link1800Respect}>1800Respect</Link> on
                         {" "}
                         {
@@ -153,7 +153,7 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
                                 `${phone1800Respect}`
                             )
                         }.
-                    </h3>
+                    </p>
                 </div>
             </div>
         );

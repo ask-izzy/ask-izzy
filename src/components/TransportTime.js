@@ -81,6 +81,24 @@ class TransportTime extends React.Component<{
         );
     }
 
+    getTravelText(travel: Object): ?string {
+        return travel &&
+        travel.duration &&
+        travel.duration.text
+    }
+
+    formatAriaLabel(travel: Object): string {
+        const travelText = this.getTravelText(travel)
+        switch (travel.mode) {
+        case "TRANSIT":
+            return `${travelText} travel by public transport.`;
+        case "DRIVING":
+            return `${travelText} drive by car.`;
+        default:
+            return `${travelText} walk.`;
+        }
+    }
+
     renderTravelTimes(travelTimes: Object): any {
         return travelTimes.map((travel, key) => {
             let icon = "";
@@ -96,7 +114,6 @@ class TransportTime extends React.Component<{
                 icon = (
                     <icons.Tram
                         className="ColoredIcon"
-                        aria-label="By public transport"
                     />
                 );
                 method = (" transport");
@@ -104,7 +121,6 @@ class TransportTime extends React.Component<{
                 icon = (
                     <icons.Car
                         className="ColoredIcon"
-                        aria-label="By car"
                     />
                 );
                 method = (" drive");
@@ -112,7 +128,6 @@ class TransportTime extends React.Component<{
                 icon = (
                     <icons.Walk
                         className="ColoredIcon"
-                        aria-label="On foot"
                     />
                 );
                 method = (" walk");
@@ -125,14 +140,11 @@ class TransportTime extends React.Component<{
                         travel.mode.toLocaleLowerCase()
                     }
                     key={key}
+                    aria-label={this.formatAriaLabel(travel)}
                 >
                     {icon}
                     <time dateTime={arrivalTime.toISOString()}>
-                        {
-                            travel &&
-                        travel.duration &&
-                        travel.duration.text
-                        }
+                        {this.getTravelText(travel)}
                     </time>
                     {method}
                 </div>

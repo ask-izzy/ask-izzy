@@ -121,9 +121,9 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                             </h1>
                         </LogoHeader>
                     }
-                    secondaryText={
+                    secondaryText={category?.info &&
                         <div>
-                            {category && <InfoMessage {...category} />}
+                            {<InfoMessage {...category} />}
                         </div>
                     }
                     bannerName={bannerName}
