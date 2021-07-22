@@ -111,6 +111,8 @@ export const PersonalisationLink = ({pathname}: Object): React.Node => (
         to={`${trailingSlash(pathname)}personalise/summary`}
         onClick={gtm.emit.bind(null, {event: "changeAnswers"})}
         tabIndex="0"
+        aria-label="Click to change your currently
+        selected answers."
     >
         See all and edit
     </Link>
