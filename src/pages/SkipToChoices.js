@@ -10,9 +10,8 @@ function SkipToChoices(): React.Node {
             <Link
                 to="#"
                 tabIndex="0"
-                aria-label="To skip your previously selected answers
-                 and go straight to the answers, tab again to focus the
-                 link and click."
+                aria-label="Skip your previously selected answers
+                 and go straight to the options."
                 onClick={() => {
                     const selection = document.getElementsByClassName(
                         "ListItem"

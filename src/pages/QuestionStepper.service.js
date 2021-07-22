@@ -25,8 +25,8 @@ const ICON_ARIALABEL_MAPPING = {
 export const INITIAL_TAB_INDEX = 4;
 export const BREADCRUMB_LIMIT = 6;
 export const MULTI_DEFAULT_ANSWER_LIMIT = 2;
-export const SCREEN_READER_MESSAGE = "The following relate to answers to" +
-    " previous questions "
+export const SCREEN_READER_MESSAGE: string = "The following are your " +
+    "previously selected answers."
 
 export type AnswerType = {
     name: string,
@@ -111,8 +111,7 @@ export const PersonalisationLink = ({pathname}: Object): React.Node => (
         to={`${trailingSlash(pathname)}personalise/summary`}
         onClick={gtm.emit.bind(null, {event: "changeAnswers"})}
         tabIndex="0"
-        aria-label="Click to change your currently
-        selected answers."
+        aria-label="change your currently selected answers."
     >
         See all and edit
     </Link>

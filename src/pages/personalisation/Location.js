@@ -263,45 +263,53 @@ class Location extends Personalisation<Props, State> {
                                 onChange={this.onSearchChange.bind(this)}
                             />
                         </div>
-
-                        {
-                            /* any autocompletions we currently have */
-                            this.state.autocompletions.map((result, index) =>
-                                <components.InputListItem
-                                    key={index}
-                                    primaryText={
-                                        <div className="suburb">
-                                            {result.name}
-                                        </div>
-                                    }
-                                    secondaryText={
-                                        <div className="state">
-                                            {result.state}
-                                        </div>
-                                    }
-                                    type="radio"
-                                    ariaLabel={`${result.name},
-                                     ${result.state}`}
-                                    tabIndex={0}
-                                    uncheckedIcon={
-                                        <icons.RadioUnselected
-                                            className="big"
+                        <fieldset tabIndex="0">
+                            <legend>
+                                {this.state.autocompletions.length ? (
+                                    "The following is a list of locations" +
+                                    " based on your search"
+                                ) : "Search Results"}
+                            </legend>
+                            {
+                                /* any autocompletions we currently have */
+                                this.state.autocompletions.map(
+                                    (result, index) =>
+                                        <components.InputListItem
+                                            key={index}
+                                            primaryText={
+                                                <div className="suburb">
+                                                    {result.name}
+                                                </div>
+                                            }
+                                            secondaryText={
+                                                <div className="state">
+                                                    {result.state}
+                                                </div>
+                                            }
+                                            type="radio"
+                                            ariaLabel={`${result.name},
+                                            ${result.state}`}
+                                            tabIndex={0}
+                                            uncheckedIcon={
+                                                <icons.RadioUnselected
+                                                    className="big"
+                                                />
+                                            }
+                                            checkedIcon={
+                                                <icons.RadioSelected
+                                                    className="big"
+                                                />
+                                            }
+                                            onClick={
+                                                this.selectAutocomplete.bind(
+                                                    this,
+                                                    result,
+                                                )
+                                            }
                                         />
-                                    }
-                                    checkedIcon={
-                                        <icons.RadioSelected
-                                            className="big"
-                                        />
-                                    }
-                                    onClick={
-                                        this.selectAutocomplete.bind(
-                                            this,
-                                            result,
-                                        )
-                                    }
-                                />
-                            )
-                        }
+                                )
+                            }
+                        </fieldset>
                     </div>
                     {
                         this.state.autocompletionInProgress && (
