@@ -15,6 +15,7 @@ class ScreenReader extends React.Component<{
     render(): ReactElement<"div"> {
         return (
             <div
+                tabIndex="-1"
                 aria-label={this.props.ariaLabel}
                 className="ScreenReader"
             >

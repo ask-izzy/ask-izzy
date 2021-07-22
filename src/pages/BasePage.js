@@ -17,10 +17,13 @@ import {
 } from "../utils/page-loading"
 import routerContext from "../contexts/router-context";
 import type { RouterContextObject } from "../contexts/router-context";
+import ScreenReader from "../components/ScreenReader";
 
 class BasePage extends React.Component<{}> {
     static childContextTypes: any = {};
     static contextType: any = routerContext;
+
+    #pageRef: any = React.createRef();
 
     constructor(props: {}, context: RouterContextObject) {
         addPageLoadDependencies(context.router.location, "render")
@@ -34,6 +37,12 @@ class BasePage extends React.Component<{}> {
 
     componentDidMount(): void {
         closePageLoadDependencies(this.context.router.location, "render")
+    }
+
+    componentDidUpdate(): void {
+        if (this.#pageRef.current) {
+            this.#pageRef.current.focus()
+        }
     }
 
     render(): ReactNode {
@@ -50,6 +59,14 @@ class BasePage extends React.Component<{}> {
                 <DebugModeProvider>
                     <DebugColours />
                     <div className="BasePage">
+                        <ScreenReader>
+                            <p
+                                tabIndex={-1}
+                                ref={this.#pageRef}
+                            >
+                                {pageTitle}
+                            </p>
+                        </ScreenReader>
                         <Helmet>
                             <link
                                 rel="canonical"
