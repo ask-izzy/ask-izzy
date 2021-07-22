@@ -6,7 +6,7 @@ import BaseLogoWithTextBox from "./BaseLogoWithTextBox";
 import routerContext from "../contexts/router-context";
 
 export default class ServiceListIntro extends BaseLogoWithTextBox {
-    static defaultProps = {
+    static defaultProps: any = {
         icon: <icons.Book className={"big middle"}/>,
         header: "Information and warning signs",
         body: `Do you know what domestic violence looks like? Learn
@@ -15,7 +15,7 @@ export default class ServiceListIntro extends BaseLogoWithTextBox {
         path: "/information",
     };
 
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
     onClickBox(): void {
         this.context.router.navigate(

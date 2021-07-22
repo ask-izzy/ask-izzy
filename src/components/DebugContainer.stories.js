@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import DebugContainer from "./DebugContainer";
@@ -11,9 +12,11 @@ export default {
     decorators: [addRouter, setDebugModeContext],
 };
 
-const Template = (args: Object) => <DebugContainer {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <DebugContainer {...args} />;
+};
 
-export const DebugModeEnabled = Template.bind({});
+export const DebugModeEnabled: typeof Template = Template.bind({});
 DebugModeEnabled.args = {
     message: "Debug Section Title",
     children: "Body Text",
@@ -24,7 +27,7 @@ DebugModeEnabled.parameters = {
     },
 };
 
-export const DebugModeDisabled = Template.bind({});
+export const DebugModeDisabled: typeof Template = Template.bind({});
 DebugModeDisabled.args = {
     message: "Debug Section Title",
     children: "Body Text",

@@ -6,6 +6,7 @@
 /* eslint-disable no-use-before-define */
 
 import Yadda from "yadda";
+import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
 
 import unpromisify from "../support/yadda-promise";
 import dictionary from "../support/dictionary";
@@ -13,7 +14,7 @@ import assert from "../support/page-assertions";
 import { within } from "../support/selectors";
 import { By } from "selenium-webdriver";
 
-module.exports = (function() {
+module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library(dictionary)
 
         .then(
@@ -41,7 +42,7 @@ module.exports = (function() {
             unpromisify(seeTextInBrandingFooter)
         );
 
-})();
+})(): YaddaLibraryEnglish);
 
 async function seeTheBrandingHeader(): Promise<void> {
     const container = within(

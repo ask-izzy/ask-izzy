@@ -1,5 +1,5 @@
 /* @flow */
-/* eslint-disable max-len */
+import type {Node} from "React";/* eslint-disable max-len */
 
 import React from "react";
 
@@ -10,9 +10,9 @@ import Link from "../components/Link";
 import routerContext from "../contexts/router-context";
 
 export default class BetaInfoStaticPage extends React.Component<{}, void> {
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
-    render() {
+    render(): Node {
         return (
             <StaticPage
                 title=""

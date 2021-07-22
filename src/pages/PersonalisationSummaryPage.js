@@ -11,7 +11,7 @@ import routerContext from "../contexts/router-context";
 
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
     goBack(): void {
         super.nextStep();
@@ -22,7 +22,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         }
     }
 
-    nextStep = () => {
+    nextStep: (() => void) = () => {
         this.goBack();
     }
 
@@ -36,7 +36,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         this.context.router.navigate(redirectUrl);
     }
 
-    get personalisationComponents() {
+    get personalisationComponents(): any {
         const components = super.personalisationComponents;
 
         return components.filter(component =>
@@ -45,7 +45,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         );
     }
 
-    renderFooterComponent = () => <>
+    renderFooterComponent: (() => React.Node) = () => <>
         <div className="Done">
             <div className="done-button">
                 <components.FlatButton
@@ -56,7 +56,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         </div>
     </>
 
-    render() {
+    render(): React.Element<"div"> {
         const Subpage = this.currentComponent;
         const backMessage = Subpage ? "Answers" : this.title;
         const title = Subpage ? Subpage.title : "Answers";
@@ -76,19 +76,30 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         );
     }
 
-    renderSubpage = (Subpage: React$ComponentType<*>) => (
-        <div>
-            <Subpage
-                ref="subpage"
-                onDoneTouchTap={this.nextStep}
-                category={this.category}
-                nextStep={this.nextStep}
-                previousStep={this.previousStep}
-            />
-        </div>
-    )
+    renderSubpage: ((
+  Subpage: React$ComponentType<
 
-    renderSummary = () => (
+      | any
+      | {|
+        category: any,
+        nextStep: () => void,
+        onDoneTouchTap: () => void,
+        previousStep: any,
+      |},
+  >
+) => React.Element<"div">) = (Subpage: React$ComponentType<*>) => (
+    <div>
+        <Subpage
+            ref="subpage"
+            onDoneTouchTap={this.nextStep}
+            category={this.category}
+            nextStep={this.nextStep}
+            previousStep={this.previousStep}
+        />
+    </div>
+)
+
+    renderSummary: (() => React.Element<"div">) = () => (
         <div>
             <components.HeaderBar
                 primaryText={

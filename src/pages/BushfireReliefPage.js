@@ -176,4 +176,4 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
     }
 }
 
-export default MobileDetect(BushfireReliefStaticPage)
+export default (MobileDetect(BushfireReliefStaticPage): any)

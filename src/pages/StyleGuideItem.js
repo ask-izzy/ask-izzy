@@ -6,7 +6,7 @@ import _s from "underscore.string";
 import routerContext from "../contexts/router-context";
 
 export default class StyleGuideItem extends React.Component<{}> {
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
     constructor(props: Object) {
         super(props);
@@ -23,7 +23,7 @@ export default class StyleGuideItem extends React.Component<{}> {
         return components[this.getComponentName()];
     }
 
-    render() {
+    render(): React.Element<"div"> {
         let Component = this.getComponent();
 
         if (!Component) {

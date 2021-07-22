@@ -12,9 +12,9 @@ function ageGroups(
 }
 
 export default class Age extends BaseQuestion {
-    static title = "Age";
+    static title: any = "Age";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: any = {
         name: "age",
         question: "How old are you?",
         answers: {

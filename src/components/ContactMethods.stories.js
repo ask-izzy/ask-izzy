@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import ContactMethods from "./ContactMethods";
@@ -13,14 +14,16 @@ export default {
     decorators: [addRouter],
 };
 
-const Template = (args: Object) => <ContactMethods {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <ContactMethods {...args} />;
+};
 
-export const BasicService = Template.bind({});
+export const BasicService: typeof Template = Template.bind({});
 BasicService.args = {
     object: ServiceFactory(fixtures.ixa),
 };
 
-export const ServiceWithLotsOfNumbers = Template.bind({});
+export const ServiceWithLotsOfNumbers: typeof Template = Template.bind({});
 ServiceWithLotsOfNumbers.args = {
     object: ServiceFactory(fixtures.phoneableService),
 };

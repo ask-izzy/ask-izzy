@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node, Element} from "React";
 import React from "react";
 
 import AppBar from "../components/AppBar";
@@ -65,7 +66,9 @@ class ResultsMapPage extends ResultsPage<{}, State> {
         return []
     }
 
-    onBackClick = (event: SyntheticInputEvent<>): void => {
+    onBackClick: (
+        (event: SyntheticInputEvent<>) => void
+    ) = (event: SyntheticInputEvent<>): void => {
         event.preventDefault()
         if (this.state.selectedSite) {
             this.setState({selectedSite: null})
@@ -97,7 +100,7 @@ class ResultsMapPage extends ResultsPage<{}, State> {
         return `${mapHeight}px`;
     }
 
-    render() {
+    render(): Element<"div"> | Node {
         if (this.state.searchType) {
             return this.renderPage()
         }
@@ -105,7 +108,7 @@ class ResultsMapPage extends ResultsPage<{}, State> {
         return <NotFoundStaticPage/>
     }
 
-    renderPage = () => (
+    renderPage: (() => Element<"div">) = () => (
         <div className="ResultsMapPage">
             <AppBar
                 title={this.title}
@@ -126,7 +129,7 @@ class ResultsMapPage extends ResultsPage<{}, State> {
         </div>
     )
 
-    renderPageBody() {
+    renderPageBody(): Node | Element<"div"> {
         if (this.searchIsLoading) {
             return <div className="progress">
                 <icons.Loading className="big" />

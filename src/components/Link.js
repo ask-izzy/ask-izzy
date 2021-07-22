@@ -21,14 +21,14 @@ type State = {
 }
 
 export default class Link extends React.Component<Props, State> {
-    static sampleProps = {
+    static sampleProps: any = {
         default: {
             to: "/",
             children: "Homepage",
         },
     };
 
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
     constructor(props: Object) {
         super(props);
@@ -66,14 +66,20 @@ export default class Link extends React.Component<Props, State> {
         });
     }
 
-    getUriParts = (uri: string) => {
+    getUriParts: (
+        (uri: string) => {|
+            domain: null | string,
+            path: string,
+            protocol: null | string
+        |}
+    ) = (uri: string) => {
         const [, protocol, domain, path] =
-            // urls
-            this.props.to.match(/^([^/]*)\/\/([^/]+)(.*)/) ||
-            // non-url uri's like mailto
-            (this.props.to.match(/^[^/]+:/) && [this.props.to]) ||
-            // just a path
-            [null, null, null, this.props.to]
+                // urls
+                this.props.to.match(/^([^/]*)\/\/([^/]+)(.*)/) ||
+                // non-url uri's like mailto
+                (this.props.to.match(/^[^/]+:/) && [this.props.to]) ||
+                // just a path
+                [null, null, null, this.props.to]
 
         return {
             protocol,
@@ -82,7 +88,7 @@ export default class Link extends React.Component<Props, State> {
         }
     }
 
-    render() {
+    render(): React.Node | React.Element<"a"> {
         let {
             to,
             children,

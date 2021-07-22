@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 import _ from "underscore";
 
@@ -47,7 +48,7 @@ export default class ServicePane extends React.Component<{
         }
     }
 
-    static sampleProps = {default: {
+    static sampleProps: any = {default: {
         service: ServiceFactory(fixtures.youthSupportNet),
     }};
 
@@ -57,7 +58,9 @@ export default class ServicePane extends React.Component<{
         this.setState({siblings: response.objects});
     }
 
-    recordAlsoAtThisLocation = (service: Service): void => {
+    recordAlsoAtThisLocation: (
+        (service: Service) => void
+    ) = (service: Service): void => {
         gtm.emit({
             event: "Other Services At Location Clicked",
             eventCat: "Other Services At Location Clicked",
@@ -66,7 +69,7 @@ export default class ServicePane extends React.Component<{
         });
     }
 
-    render() {
+    render(): Element<"div"> {
         const object = this.props.service;
 
         return (
@@ -143,7 +146,7 @@ export default class ServicePane extends React.Component<{
         );
     }
 
-    renderServiceProvisions() {
+    renderServiceProvisions(): Element<"div"> {
         let object = this.props.service;
 
         if (_.isEmpty(object.serviceProvisions)) {
@@ -165,7 +168,7 @@ export default class ServicePane extends React.Component<{
         );
     }
 
-    renderSiblings() {
+    renderSiblings(): Element<"div"> | Element<"span"> {
         const siblings = this.state.siblings;
 
         if (!siblings) {

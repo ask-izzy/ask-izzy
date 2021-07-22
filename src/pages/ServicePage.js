@@ -1,5 +1,5 @@
 /* @flow */
-/* eslint-disable max-len */
+import type {Element} from "React";/* eslint-disable max-len */
 
 import React from "react";
 import ServicePane from "../components/ServicePane";
@@ -18,7 +18,7 @@ class ServicePage extends React.Component<{}, {
     serviceId: number,
     error?: Object,
 }> {
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
     constructor(props: Object, context: RouterContextObject) {
         super(props);
@@ -76,7 +76,7 @@ class ServicePage extends React.Component<{}, {
 
     }
 
-    render() {
+    render(): Element<"div"> {
         let {
             object,
             error,

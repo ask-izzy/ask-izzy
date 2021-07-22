@@ -6,19 +6,20 @@
 /* eslint-disable no-use-before-define, no-native-reassign */
 
 import Yadda from "yadda";
+import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
 import fs from "fs";
 import moment from "moment-timezone";
 
 import unpromisify from "../support/yadda-promise";
 
-module.exports = (function() {
+module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library()
         .given(
             "it is late morning on $STRING",
             unpromisify(changeToEarlyMorning)
         )
         .given("it is late on $STRING", unpromisify(changeToLateDay));
-})();
+})(): YaddaLibraryEnglish);
 
 async function changeToEarlyMorning(day: string): Promise<void> {
     return changeDateAndTime.bind(this)(day, 10)

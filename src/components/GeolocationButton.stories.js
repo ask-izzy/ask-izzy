@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -17,12 +18,14 @@ export default {
     title: "App Components/GeolocationButton",
     component: GeolocationButton,
     args: {
-        onSuccess: action("succeeded"),
+        onSuccess: (action("succeeded"): any),
     },
     loaders: [injectEnvVars],
     decorators: [addGoogleMapsScript],
 };
 
-const Template = (args: Object) => <GeolocationButton {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <GeolocationButton {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});

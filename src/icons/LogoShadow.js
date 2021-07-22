@@ -5,11 +5,11 @@
 import BaseIcon from "./BaseIcon";
 
 export default class SvgIconLogoShadow extends BaseIcon {
-    static defaultProps = {
+    static defaultProps: any = {
         iconClass: "LogoShadowIcon",
     }
 
-    svgContent = `
+    svgContent: string = `
         <svg class='${this.classNames}' version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64" enable-background="new 0 0 64 64"  xml:space="preserve"><g><ellipse fill="#231F20"  cx="32" cy="55.125" rx="26.875" ry="4.125"></ellipse></g></svg>
     `;
 }

@@ -1,4 +1,5 @@
 /* @flow */
+import type {Node, Element} from "React";
 import React from "react";
 
 import Link from "./Link";
@@ -16,7 +17,7 @@ type Props = {
 }
 
 class GoogleMapsLink extends React.Component<Props, void> {
-    static sampleProps = {
+    static sampleProps: any = {
         default: {
             children: (
                 <div>Link text</div>
@@ -25,7 +26,7 @@ class GoogleMapsLink extends React.Component<Props, void> {
         },
     };
 
-    static defaultProps = {
+    static defaultProps: any = {
         hideSpacer: false,
     }
 
@@ -63,7 +64,7 @@ class GoogleMapsLink extends React.Component<Props, void> {
         }&daddr=${query}`;
     }
 
-    render() {
+    render(): Element<"span"> | Node {
         const {
             className,
             children,

@@ -4,9 +4,9 @@ import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
 
 export default class EverydayThingsSubcategories extends BaseQuestion {
-    static title = "Everyday things";
+    static title: any = "Everyday things";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: any = {
         name: "sub-everyday-things",
         question: "What do you need?",
         answers: {

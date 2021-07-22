@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 }
 
 class DebugQueryScore extends React.Component<Props, void> {
-    render() {
+    render(): Element<"div"> {
         const {expl} = this.props;
 
         if (!expl) {

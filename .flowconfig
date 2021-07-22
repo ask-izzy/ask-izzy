@@ -9,12 +9,12 @@
 .*/node_modules/fbjs/.*
 .*/node_modules/graphql/.*
 .*/node_modules/graphql-tag/.*
-.*/bower_components/.*
 
 [include]
 
 [libs]
 flow/interfaces/
+flow/flow-typed/
 
 [options]
 module.system=node
@@ -22,6 +22,7 @@ suppress_type=$FlowIssue
 esproposal.class_static_fields=ignore
 esproposal.class_instance_fields=enable
 esproposal.decorators=ignore
+types_first=true
 sharedmemory.hash_table_pow=21
 module.name_mapper='.*\.\(jpe\?g\|png\|gif\|svg\)$' -> '<PROJECT_ROOT>/flow/stubs/image.js'
 module.name_mapper='.*\.\(css\|s[ac]ss\)$' -> '<PROJECT_ROOT>/flow/stubs/css.js'

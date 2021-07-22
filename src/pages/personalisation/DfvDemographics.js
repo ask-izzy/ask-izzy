@@ -22,9 +22,9 @@ const LGBT_BREADCRUMB_ICON = (
 )
 
 export default class DfvDemographics extends BaseMultiQuestion {
-    static title = "Personal";
+    static title: any = "Personal";
     static propTypes = BaseMultiQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: any = {
         name: "dfv-demographics",
         question: "Do any of these apply to you?",
         byline: "All of your answers are private and anonymous",

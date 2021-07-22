@@ -1,4 +1,5 @@
 /* @flow */
+import type {Element} from "React";
 import React from "react";
 import URL from "url";
 
@@ -12,7 +13,7 @@ type Props = {
     analyticsEventDetails?: AnalyticsEvent
 }
 export default class Web extends React.Component<Props, void> {
-    static sampleProps = {default: {url: "https://ExampleDomain.com/landingPage"}};
+    static sampleProps: any = {default: {url: "https://ExampleDomain.com/landingPage"}};
 
     recordClick(): void {
         gtm.emit({
@@ -25,7 +26,7 @@ export default class Web extends React.Component<Props, void> {
         });
     }
 
-    render() {
+    render(): Element<"div"> {
         let url = URL.parse(this.props.url);
 
         return (

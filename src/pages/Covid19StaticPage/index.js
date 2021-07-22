@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React, {useEffect, useState} from "react";
 import StaticPage from "../StaticPage";
 import Covid19Card from "./Covid19Card";
@@ -8,7 +9,7 @@ import Link from "../../components/Link";
 import {states} from "./Covid19Service";
 import {windowWidth} from "../../effects/WindowWidth";
 
-function Covid19StaticPage() {
+function Covid19StaticPage(): Node {
 
     const [mobileView, setMobileView] = useState(false);
     const width = windowWidth();

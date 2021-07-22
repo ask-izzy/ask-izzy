@@ -55,11 +55,11 @@ files.forEach((path) => {
 import BaseIcon from "./BaseIcon";
 
 export default class SvgIcon${className} extends BaseIcon {
-    static defaultProps = {
+    static defaultProps: any = {
         iconClass: "${className}Icon",
     }
 
-    svgContent = \`
+    svgContent: string = \`
         ${svgContent}
     \`;
 }

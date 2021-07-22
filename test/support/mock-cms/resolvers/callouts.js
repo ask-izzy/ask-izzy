@@ -1,8 +1,13 @@
 /* @flow */
 
+type Callout = {
+    ShowHeading: boolean,
+    Heading: string,
+}
+
 export default (
     parent: Object, args: Object, context: Object, info: Object
-) => {
+): Array<Callout> => {
     const key = args?.where?.Key || info?.variableValues?.key
     if (key === "test") {
         return [testCallout]

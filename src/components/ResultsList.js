@@ -29,7 +29,7 @@ class ResultsList extends React.Component<{
         return nonCrisisResults(this.props.results);
     }
 
-    render() {
+    render(): React.Element<"div"> {
         return (
             <div className="ResultsList">
                 {
@@ -44,7 +44,7 @@ class ResultsList extends React.Component<{
         );
     }
 
-    renderCrisisResult(object: Object, index: number) {
+    renderCrisisResult(object: Object, index: number): React.Element<"div"> {
         const elem: React.Element<any> = object.staticText ?
             <StaticTextLine object={object} />
             : <CrisisLineItem object={object} />;
@@ -59,7 +59,7 @@ class ResultsList extends React.Component<{
         );
     }
 
-    renderResult(object: Object, index: number) {
+    renderResult(object: Object, index: number): React.Element<"div"> {
         const elem = <ResultListItem service={object} />;
 
         return (

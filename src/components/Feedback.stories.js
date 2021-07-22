@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import Feedback from "./Feedback";
@@ -10,9 +11,11 @@ export default {
     component: Feedback,
 };
 
-const Template = (args: Object) => <Feedback {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <Feedback {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});
 Example.args = {
     object: fixtures.ixa,
 };

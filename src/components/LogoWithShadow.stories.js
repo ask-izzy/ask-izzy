@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import LogoWithShadow from "./LogoWithShadow";
@@ -9,6 +10,8 @@ export default {
     component: LogoWithShadow,
 };
 
-const Template = (args: Object) => <LogoWithShadow {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <LogoWithShadow {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});

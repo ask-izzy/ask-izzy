@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import DebugSearch from "./DebugSearch";
@@ -11,9 +12,11 @@ export default {
     component: DebugSearch,
 };
 
-const Template = (args: Object) => <DebugSearch {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <DebugSearch {...args} />;
+};
 
-export const HousingSearch = Template.bind({});
+export const HousingSearch: typeof Template = Template.bind({});
 HousingSearch.args = {
     search: getCategorySearchQuery("housing", {
         location: "Richmond, VIC",

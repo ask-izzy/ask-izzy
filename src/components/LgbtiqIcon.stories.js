@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import LgbtiqIcon from "./LgbtiqIcon";
@@ -10,16 +11,18 @@ export default {
     component: LgbtiqIcon,
 };
 
-const Template = (args: Object) => <LgbtiqIcon {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <LgbtiqIcon {...args} />;
+};
 
-export const ServiceFlaggedLGBTIQA = Template.bind({});
+export const ServiceFlaggedLGBTIQA: typeof Template = Template.bind({});
 ServiceFlaggedLGBTIQA.args = {
     object: new ServiceFactory({
         lgbtiqa_plus_specific: true,
     }),
 };
 
-export const ServiceNotFlaggedLGBTIQA = Template.bind({});
+export const ServiceNotFlaggedLGBTIQA: typeof Template = Template.bind({});
 ServiceNotFlaggedLGBTIQA.args = {
     object: new ServiceFactory(),
 };

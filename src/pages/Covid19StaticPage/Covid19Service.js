@@ -179,7 +179,7 @@ export const states = [
         number: {
             number: "1800 008 002",
             // eslint-disable-next-line max-len
-            comment: <span>NT Hotline <strong>for people who need to arrange testing only</strong></span>,
+            comment: (<span>NT Hotline <strong>for people who need to arrange testing only</strong></span>: React.Element<"span">),
         },
         web: [
             {

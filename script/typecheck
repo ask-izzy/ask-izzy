@@ -25,6 +25,8 @@ for file in $( git ls-files '**/*.js' ); do
     if [ -e "$file" ] ; then
         if [[ "$file" == external-resources-proxy/* ]]; then
             continue
+        elif [[ "$file" == flow/flow-typed/* ]]; then
+            continue
         fi
         read flowtype < "$file"
         if test "x$flowtype" = 'x/* $FlowIgnore */'; then

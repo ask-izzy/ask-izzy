@@ -1,14 +1,15 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 
 import categories from "../constants/categories";
 import CategoryListItem from "./CategoryListItem";
 
 class NavBar extends React.Component<{}, void> {
-    static sampleProps = {default: {}};
+    static sampleProps: any = {default: {}};
 
-    render() {
+    render(): Element<"div"> {
 
         return (
             <div className="NavBar">

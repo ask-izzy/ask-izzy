@@ -3,13 +3,14 @@
 
 import assert from "assert";
 import Yadda from "yadda";
+import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
 import { By } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
 import asyncFilter from "../support/async-filter";
 
-module.exports = (function() {
+module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library(dictionary)
         .then("I should see the contacts\n$lines",
             unpromisify(checkPhoneNumbers))
@@ -22,7 +23,7 @@ module.exports = (function() {
         .then("I should not see ATSI flags",
             unpromisify(notSeeAtsiFlags))
     ;
-})();
+})(): YaddaLibraryEnglish);
 
 async function seeAtsiFlags(): Promise<void> {
     let exists = await this.driver.findElement(

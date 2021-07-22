@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import ViewOnMapButton from "./ViewOnMapButton";
@@ -13,9 +14,11 @@ export default {
     decorators: [addRouter, addGoogleMapsScript],
 };
 
-const Template = (args: Object) => <ViewOnMapButton {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <ViewOnMapButton {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});
 Example.args = {
     to: "/",
 };

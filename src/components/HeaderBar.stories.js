@@ -1,8 +1,10 @@
 /* @flow */
-declare var storyBookControlValues: {HeaderBar: {bannerName: Array<string>}};
-
 import React from "react";
+import type {Node} from "React";
+
 import HeaderBar from "./HeaderBar";
+
+declare var storyBookControlValues: {HeaderBar: {bannerName: Array<string>}};
 
 export default {
     title: "App Components/HeaderBar",
@@ -35,16 +37,18 @@ export default {
     },
 };
 
-const Template = (args: Object) => <HeaderBar {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <HeaderBar {...args} />;
+};
 
-export const StandardBackgroundColour = Template.bind({});
+export const StandardBackgroundColour: typeof Template = Template.bind({});
 StandardBackgroundColour.args = {
     primaryText: "Primary Text",
     secondaryText: "Secondary Text",
     bannerName: "food",
 };
 
-export const GreyBackgroundColour = Template.bind({});
+export const GreyBackgroundColour: typeof Template = Template.bind({});
 GreyBackgroundColour.args = {
     primaryText: "Primary Text",
     secondaryText: "Secondary Text",
@@ -57,14 +61,14 @@ GreyBackgroundColour.parameters = {
     },
 };
 
-export const ContainsJSX = Template.bind({});
+export const ContainsJSX: typeof Template = Template.bind({});
 ContainsJSX.args = {
     primaryText: <strong>Bold Text</strong>,
     secondaryText: <em>Italicised text</em>,
     bannerName: "housing",
 };
 
-export const LongText = Template.bind({});
+export const LongText: typeof Template = Template.bind({});
 LongText.args = {
     primaryText: "A Very Long Primary Text Value That Just Keeps Going And " +
       "Going And Going And Going And Going And Going And Going",

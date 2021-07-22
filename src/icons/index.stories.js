@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 import LinkTo from "@storybook/addon-links/react"
 import { storiesOf } from "@storybook/react";
@@ -49,7 +50,7 @@ for (const name of Object.keys(icons)) {
     }
 }
 
-export function ListAllIcons() {
+export function ListAllIcons(): Element<"ul"> {
     const iconList = Object.keys(icons)
         .map(name => ({name, component: icons[name]}))
     return (

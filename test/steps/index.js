@@ -1,10 +1,12 @@
 /* @flow */
 
+import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
+
 /*
  * Step definitions for BDD tests
  */
 
-module.exports = (function() {
+module.exports = ((function(): Array<YaddaLibraryEnglish> {
     // include libraries here
     return [
         require("./browser"),
@@ -17,4 +19,4 @@ module.exports = (function() {
         require("./questions"),
         require("./mocks"),
     ];
-})();
+})(): Array<YaddaLibraryEnglish>);

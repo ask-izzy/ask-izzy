@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import DomesticViolenceLinkBar from "./DomesticViolenceLinkBar";
@@ -9,6 +10,8 @@ export default {
     component: DomesticViolenceLinkBar,
 };
 
-const Template = (args: Object) => <DomesticViolenceLinkBar {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <DomesticViolenceLinkBar {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});

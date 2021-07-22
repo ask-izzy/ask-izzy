@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import ScreenReader from "./ScreenReader";
@@ -9,9 +10,11 @@ export default {
     component: ScreenReader,
 };
 
-const Template = (args: Object) => <ScreenReader {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <ScreenReader {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});
 Example.args = {
     children: (
         <div>Screen reader content</div>

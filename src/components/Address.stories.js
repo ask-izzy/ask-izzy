@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 import Address from "./Address";
 import Location from "../../fixtures/factories/Location";
@@ -7,12 +8,14 @@ import Location from "../../fixtures/factories/Location";
 export default {
     title: "Service Components/Address",
     component: Address,
-    argTypes: {},
+    argTypes: ({}: {...}),
 };
 
-const Template = (args: Object) => <Address {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <Address {...args} />;
+};
 
-export const ComplexLocation = Template.bind({});
+export const ComplexLocation: typeof Template = Template.bind({});
 ComplexLocation.args = {
     location: new Location({
         "building": "Hamy building",
@@ -28,7 +31,7 @@ ComplexLocation.args = {
     }),
 };
 
-export const ConfidentialLocation = Template.bind({});
+export const ConfidentialLocation: typeof Template = Template.bind({});
 ConfidentialLocation.args = {
     location: new Location({
         "postcode": "3121",

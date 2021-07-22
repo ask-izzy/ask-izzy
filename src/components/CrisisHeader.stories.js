@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import CrisisHeader from "./CrisisHeader";
@@ -9,6 +10,8 @@ export default {
     component: CrisisHeader,
 };
 
-const Template = (args: Object) => <CrisisHeader {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <CrisisHeader {...args} />;
+};
 
-export const Header = Template.bind({});
+export const Header: typeof Template = Template.bind({});

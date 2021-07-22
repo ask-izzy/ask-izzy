@@ -6,7 +6,7 @@ import { useRouterContext } from "../contexts/router-context";
 import { waitTillPageLoaded } from "../utils/page-loading"
 import categories from "../constants/categories"
 
-export default (props: Object) => {
+export default (props: Object): null => {
     const {location, match, navigateInProgress} = useRouterContext()
     const locationPathAndSearch = location.pathname + location.search
 
@@ -43,7 +43,11 @@ function recordAnalytics(location, routeMatch) {
     });
 }
 
-export function getPageVars(routeMatch: Object) {
+export function getPageVars(routeMatch: Object): {|
+    category: ?string,
+    pageType: any | Array<any>,
+    routes: void
+|} {
     if (!routeMatch.props.type) {
         const errorMessage = `The current page "${routeMatch.url}" ` +
             `does not have a page type`

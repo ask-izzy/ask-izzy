@@ -8,7 +8,9 @@ type Context = [
     ((boolean => boolean) | boolean) => void
 ]
 
-const DebugModeContext = createContext<Context>([false, () => {}]);
+const DebugModeContext: React$Context<Context> = createContext<Context>(
+    [false, () => {}]
+);
 
 export default DebugModeContext
 
@@ -19,7 +21,7 @@ type ProviderProps = {
 
 export const DebugModeProvider = (
     {children, initialDebugMode}: ProviderProps
-) => {
+): ReactNode => {
     const [debugMode, setDebugMode] = useState(initialDebugMode || false)
 
     function setDebugModePersistently(newDebugModeState) {
@@ -56,4 +58,4 @@ export const DebugModeProvider = (
     )
 }
 
-export const useDebugModeContext = () => useContext(DebugModeContext)
+export const useDebugModeContext = (): Context => useContext(DebugModeContext)

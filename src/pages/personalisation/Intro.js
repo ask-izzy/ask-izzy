@@ -24,11 +24,11 @@ type State = {
 }
 
 class Intro extends Personalisation<Props, State> {
-    static defaultProps = {
+    static defaultProps: any = {
         name: "intro",
     };
 
-    static title = "Intro";
+    static title: any = "Intro";
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         return request;
@@ -84,14 +84,16 @@ class Intro extends Personalisation<Props, State> {
         )
     }
 
-    handleButtonClick = (userType: string) =>
+    handleButtonClick: (
+        (userType: string) => (event: SyntheticEvent<HTMLButtonElement>) => void
+    ) = (userType: string) =>
         (event: SyntheticEvent<HTMLButtonElement>): void => {
             storage.setItem("user_type", userType);
 
             this.props.onDoneTouchTap();
         }
 
-    render() {
+    render(): React.Element<"div"> {
         return (
             <div className="IntroPage">
                 {this.renderHeaderBar()}
@@ -126,7 +128,7 @@ class Intro extends Personalisation<Props, State> {
         );
     }
 
-    renderDoneButton() {
+    renderDoneButton(): React.Element<"div"> {
         return (
             <div>
                 <div className="done-button">

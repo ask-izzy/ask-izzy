@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 import classnames from "classnames";
 
@@ -8,14 +9,14 @@ class SvgIcon extends React.Component<{
     viewBox?: string,
     children?: any,
 }, void> {
-    static defaultProps = {
+    static defaultProps: any = {
         viewBox: "0 0 24 24",
     };
 
-    static sampleProps = {
+    static sampleProps: any = {
     };
 
-    render() {
+    render(): Element<"svg"> {
         const {
             children,
             viewBox,

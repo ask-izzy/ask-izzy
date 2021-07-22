@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 
 import HeaderBar from "../components/HeaderBar";
@@ -23,7 +24,7 @@ class HomePage extends React.Component<{}, State> {
 
     search: ?HTMLInputElement;
 
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
     constructor(props: Object) {
         super(props);
@@ -55,7 +56,7 @@ class HomePage extends React.Component<{}, State> {
         );
     }
 
-    render() {
+    render(): Element<"div"> {
         const logo = "/static/images/ask-izzy-logo-single-line-yellow.svg";
         return (
             <div className="HomePage">

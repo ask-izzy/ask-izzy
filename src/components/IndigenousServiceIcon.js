@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 import DemographicAboriginal from "../icons/DemographicAboriginal";
 import DemographicTorresStrait from "../icons/DemographicTorresStrait";
@@ -10,7 +11,7 @@ type Props = {
 }
 
 class IndigenousServiceIcon extends React.Component<Props, void> {
-    render() {
+    render(): null | Element<"div"> {
         if (!this.props.object.Indigenous()) {
             return null;
         }

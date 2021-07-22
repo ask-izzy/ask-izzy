@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 import ListItem from "./ListItem";
 import type { ListItemProps } from "./ListItem";
@@ -15,14 +16,14 @@ type Props = ListItemProps & {
 }
 
 export default class InputListItem extends React.Component<Props, void> {
-    static sampleProps = {
+    static sampleProps: any = {
         default: {
             type: "radio",
             ...ListItem.sampleProps,
         },
     };
 
-    render() {
+    render(): Node {
         let {
             checkedIcon,
             uncheckedIcon,

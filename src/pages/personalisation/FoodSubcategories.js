@@ -5,9 +5,9 @@ import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
 
 export default class FoodSubcategories extends BaseQuestion {
-    static title = "Food";
+    static title: any = "Food";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: any = {
         name: "sub-food",
         question: "What type of food do you need?",
         answers: {

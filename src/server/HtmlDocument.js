@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 import PropTypes from "proptypes";
 
@@ -18,7 +19,7 @@ class HtmlDocument extends React.Component<Object, void> {
         envPath: PropTypes.string,
     };
 
-    static defaultProps = {
+    static defaultProps: any = {
         script: [],
         css: [],
         meta: {},
@@ -26,7 +27,7 @@ class HtmlDocument extends React.Component<Object, void> {
         requestInterceptorPath: "/static/scripts/request-interceptor.js",
     };
 
-    render() {
+    render(): Element<"html"> {
         const {
             markup,
             script,
@@ -255,7 +256,7 @@ class HtmlDocument extends React.Component<Object, void> {
     * Useful for debugging React components in an iOS
     * simulator or Safari
     */
-    renderRemoteReactDevtoolsScript() {
+    renderRemoteReactDevtoolsScript(): void | Element<"script"> {
         if (
             typeof window === "undefined" ||
             process.env.NODE_ENV === "production" ||
@@ -266,7 +267,7 @@ class HtmlDocument extends React.Component<Object, void> {
         const scriptBody = `
             document.addEventListener('DOMContentLoaded', () => {
                 const scriptElm = document.createElement('script');
-                scriptElm.setAttribute('src', 
+                scriptElm.setAttribute('src',
                     '//' + location.hostname + ':8097'
                 );
                 document.body.appendChild( scriptElm );

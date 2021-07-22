@@ -1,4 +1,4 @@
 /* @flow */
-export function regexEscape(stringToEscape: string) {
+export function regexEscape(stringToEscape: string): string {
     return stringToEscape.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
 }

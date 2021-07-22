@@ -1,3 +1,3 @@
 /* @flow */
 
-export default new Error("badRouteParams");
+export default (new Error("badRouteParams"): Error);

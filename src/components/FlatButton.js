@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 import classnames from "classnames";
 
@@ -13,13 +14,13 @@ type Props = {
 }
 
 export default class FlatButton extends React.Component<Props, void> {
-    static sampleProps = {
+    static sampleProps: any = {
         default: {
             label: "Button Text",
         },
     };
 
-    render() {
+    render(): Element<"button"> {
         let {
             className,
             children,

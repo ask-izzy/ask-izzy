@@ -4,9 +4,9 @@ import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
 
 export default class AddictionSubcategories extends BaseQuestion {
-    static title = "Drugs & Alcohol";
+    static title: any = "Drugs & Alcohol";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: any = {
         name: "sub-addiction",
         question: "What sort of help?",
         answers: {

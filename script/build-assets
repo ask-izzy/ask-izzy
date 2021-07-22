@@ -26,4 +26,4 @@ script/run-node-script src/server/render-static
 echo "Build testing helper script"
 webpack \
     --progress \
-    --config webpack/test.config.js
+    --config webpack/test.load.js

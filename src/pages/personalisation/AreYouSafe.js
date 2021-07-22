@@ -7,7 +7,7 @@ import icons from "../../icons";
 import DomesticViolenceLinkBar from "../../components/DomesticViolenceLinkBar";
 
 class AreYouSafe extends BaseQuestion {
-    static title = "Safety";
+    static title: any = "Safety";
 
     static showPage(): boolean {
         return !this.answer;
@@ -17,7 +17,7 @@ class AreYouSafe extends BaseQuestion {
         return false;
     }
 
-    static defaultProps = {
+    static defaultProps: any = {
         name: "are-you-safe",
         question: "Are you safe right now?",
         byline:

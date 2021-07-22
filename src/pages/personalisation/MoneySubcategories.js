@@ -4,9 +4,9 @@ import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
 
 export default class MoneySubcategories extends BaseQuestion {
-    static title = "Money help";
+    static title: any = "Money help";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: any = {
         name: "sub-money",
         question: "What do you need?",
         answers: {

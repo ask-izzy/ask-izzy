@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import DebugQueryScore from "./DebugQueryScore";
@@ -10,9 +11,11 @@ export default {
     component: DebugQueryScore,
 };
 
-const Template = (args: Object) => <DebugQueryScore {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <DebugQueryScore {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});
 Example.args = {
     expl: searchExplanationFixtures.housing,
 };

@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node, Element} from "React";
 import React from "react";
 
 import AppBar from "../components/AppBar";
@@ -21,7 +22,7 @@ import QuestionStepper from "./QuestionStepper";
 import { stateFromLocation } from "../utils";
 
 class ResultsListPage extends ResultsPage<> {
-    render() {
+    render(): Element<"div"> | Node {
         if (this.state.searchType) {
             return this.renderPage()
         }
@@ -29,7 +30,7 @@ class ResultsListPage extends ResultsPage<> {
         return <NotFoundStaticPage/>
     }
 
-    renderPage = () => (
+    renderPage: (() => Element<"div">) = () => (
         <div className="ResultsListPage">
             <AppBar
                 backMessage={this.isDisabilityAdvocacy ? "" : "Categories"}
@@ -95,7 +96,7 @@ class ResultsListPage extends ResultsPage<> {
         </div>
     )
 
-    renderSuggestionBox() {
+    renderSuggestionBox(): void | Node {
         if (
             !this.state.searchMeta?.next &&
             !this.searchIsLoading
@@ -114,7 +115,7 @@ class ResultsListPage extends ResultsPage<> {
         }
     }
 
-    renderLoadMore() {
+    renderLoadMore(): void | Element<"div"> | Node {
         if (this.state.searchMeta?.next) {
             return (
                 <ButtonListItem
@@ -134,7 +135,7 @@ class ResultsListPage extends ResultsPage<> {
         }
     }
 
-    get isDisabilityAdvocacy() {
+    get isDisabilityAdvocacy(): boolean {
         return this.search.q === "Disability Advocacy Providers"
     }
 }

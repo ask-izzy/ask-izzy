@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 import Link from "../components/Link";
 import icons from "../icons"
@@ -9,7 +10,7 @@ import { donateLink } from "../constants/urls.js"
 
 export default class BrandedFooter
     extends React.Component<{}, void> {
-    static sampleProps = {
+    static sampleProps: any = {
         default: {},
     };
 
@@ -20,7 +21,7 @@ export default class BrandedFooter
      * the height of each column and set container to the hight of the largest
      * column.
      */
-    footerHeightSetter = () => {
+    footerHeightSetter: (() => void) = () => {
         if (
             typeof window === "undefined" ||
             (
@@ -91,7 +92,7 @@ export default class BrandedFooter
     }
     /* end hack */
 
-    render = () => (
+    render: (() => Element<"footer">) = () => (
         <footer className="branding-footer-container">
             <div className="top-box">
                 <div className="additional-information">

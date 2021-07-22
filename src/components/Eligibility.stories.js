@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import Eligibility from "./Eligibility";
@@ -9,14 +10,16 @@ export default {
     component: Eligibility,
 };
 
-const Template = (args: Object) => <Eligibility {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <Eligibility {...args} />;
+};
 
-export const CatchmentIsAustralia = Template.bind({});
+export const CatchmentIsAustralia: typeof Template = Template.bind({});
 CatchmentIsAustralia.args = {
     catchment: "Australia.",
 };
 
-export const ExtensiveRequirements = Template.bind({});
+export const ExtensiveRequirements: typeof Template = Template.bind({});
 ExtensiveRequirements.args = {
     catchment: "City of Darebin and surrounds.",
     "eligibility_info": "Victorian tenants, including people with " +

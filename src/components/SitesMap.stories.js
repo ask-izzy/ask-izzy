@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -16,7 +17,8 @@ export default {
     decorators: [addRouter, addGoogleMapsScript],
 };
 
-const Template = (args: Object) => {
+const Template = (args: Object): Node => {
+    (Template.args: any)
     const recordOnSiteSelect = action("onSiteSelect")
     const [selectedSite, setSelectedSite] = useState(null)
     return (
@@ -31,14 +33,14 @@ const Template = (args: Object) => {
     )
 }
 
-export const OneSite = Template.bind({});
+export const OneSite: typeof Template = Template.bind({});
 OneSite.args = {
     ...calculateSiteProps([
         ServiceFactory(fixtures.ixa),
     ]),
 };
 
-export const ThreeSites = Template.bind({});
+export const ThreeSites: typeof Template = Template.bind({});
 ThreeSites.args = {
     ...calculateSiteProps([
         ServiceFactory(fixtures.ixa),
@@ -55,7 +57,7 @@ ThreeSites.args = {
     ]),
 };
 
-export const NoSites = Template.bind({});
+export const NoSites: typeof Template = Template.bind({});
 NoSites.args = {
     ...calculateSiteProps([]),
 };

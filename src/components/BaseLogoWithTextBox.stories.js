@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import BaseLogoWithTextBox from "./BaseLogoWithTextBox";
@@ -10,16 +11,18 @@ export default {
     component: BaseLogoWithTextBox,
 };
 
-const Template = (args: Object) => <BaseLogoWithTextBox {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <BaseLogoWithTextBox {...args} />;
+};
 
-export const Basic = Template.bind({});
+export const Basic: typeof Template = Template.bind({});
 Basic.args = {
     header: "Example Text",
     body: "Body text",
     icon: <icons.DemographicPets />,
 };
 
-export const RedHighlight = Template.bind({});
+export const RedHighlight: typeof Template = Template.bind({});
 RedHighlight.args = {
     header: "Example Text",
     body: "Body text",

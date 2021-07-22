@@ -6,9 +6,9 @@ import icons from "../../icons";
 import Location from "./Location";
 
 export default class ServiceList extends BaseQuestion {
-    static title = "Service";
+    static title: any = "Service";
 
-    static defaultProps = {
+    static defaultProps: any = {
         name: "service-list",
         question: "What best describes what you need?",
         byline: "All of your answers are private and anonymous",

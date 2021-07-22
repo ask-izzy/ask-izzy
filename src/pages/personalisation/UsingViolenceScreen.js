@@ -143,4 +143,4 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
 }
 
 
-export default MobileDetect(UsingViolenceScreen);
+export default (MobileDetect(UsingViolenceScreen): any);

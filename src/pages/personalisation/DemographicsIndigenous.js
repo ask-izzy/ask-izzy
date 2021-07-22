@@ -7,9 +7,9 @@ import { append } from "../../iss/Search";
 import icons from "../../icons";
 
 export default class DemographicsIndigenous extends BaseQuestion {
-    static title = "Indigenous";
+    static title: any = "Indigenous";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: any = {
         name: "sub-indigenous",
         question:
             "Would you like Aboriginal & Torres Strait Islander " +

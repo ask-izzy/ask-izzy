@@ -1,9 +1,11 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import LoadingResultsHeader from "./LoadingResultsHeader";
 import { getCategory } from "../../constants/categories";
+import Category from "../../constants/Category"
 import {
     addRouter,
     setPersonalisationAnswers,
@@ -19,9 +21,11 @@ export default {
         setRouterContext,
     ],
     args: {
-        category: getCategory("housing"),
+        category: (getCategory("housing"): ?Category),
         title: "Housing",
-        personalisationComponents: getCategory("housing")?.personalisation,
+        personalisationComponents: (
+            getCategory("housing")?.personalisation: void | Array<any>
+        ),
         location: {pathname: "/"},
         meta: {
             total_count: 42,
@@ -40,49 +44,54 @@ export default {
     },
 };
 
-const Template = (args: Object) => <LoadingResultsHeader {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <LoadingResultsHeader {...args} />;
+};
 
-export const HousingCategoryWithASingleResult = Template.bind({});
+export const HousingCategoryWithASingleResult: typeof Template =
+    Template.bind({});
 HousingCategoryWithASingleResult.args = {
     meta: {
         total_count: 1,
     },
 };
 
-export const HousingCategoryWithAFewResults = Template.bind({});
+export const HousingCategoryWithAFewResults: typeof Template =
+    Template.bind({});
 HousingCategoryWithAFewResults.args = {
     meta: {
         total_count: 8,
     },
 };
 
-export const HousingCategoryWithLotsOfResults = Template.bind({});
+export const HousingCategoryWithLotsOfResults: typeof Template =
+    Template.bind({});
 HousingCategoryWithLotsOfResults.args = {
     meta: {
         total_count: 42,
     },
 };
 
-export const HousingCategoryWithNoResults = Template.bind({});
+export const HousingCategoryWithNoResults: typeof Template = Template.bind({});
 HousingCategoryWithNoResults.args = {
     meta: {
         total_count: 0,
     },
 };
 
-export const Loading = Template.bind({});
+export const Loading: typeof Template = Template.bind({});
 Loading.args = {
     loading: true,
 };
 
 
-export const Error = Template.bind({});
+export const Error: typeof Template = Template.bind({});
 Error.args = {
     error: "Helpful error message",
 };
 
 
-export const ErrorWithStatusCode402 = Template.bind({});
+export const ErrorWithStatusCode402: typeof Template = Template.bind({});
 ErrorWithStatusCode402.args = {
     error: "Helpful error message",
     statusCode: 402,

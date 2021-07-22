@@ -6,9 +6,9 @@ import Location from "./Location";
 import { remove, housingCrisis } from "../../iss/Search";
 
 export default class HousingSubcategories extends BaseQuestion {
-    static title = "Situation";
+    static title: any = "Situation";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: any = {
         name: "sub-housing",
         question: "Which situation is most like yours?",
         answers: {

@@ -37,7 +37,7 @@ export default function(
 export function isDuringOpenHours(
     time: Moment,
     openingHours: Array<issOpeningHours>
-) {
+): boolean {
     return openingHours.some(
         openPeriod => {
             const openingTime = convertWeekdayTimeToDate(
@@ -58,7 +58,7 @@ export function isDuringOpenHours(
 /*
  * Convert weekday, expressed as word, to a number (ie "Tuesday" = 2)
  */
-export function getWeekdayNumber(weekdayName: string) {
+export function getWeekdayNumber(weekdayName: string): number {
     return [
         "monday", "tuesday", "wednesday",
         "thursday", "friday", "saturday", "sunday",
@@ -73,7 +73,7 @@ export function convertWeekdayTimeToDate(
     weekday: string,
     time: string,
     currentDateTime: Moment
-) {
+): typeof moment {
     // Get number of weekday
     const currentDay = moment(currentDateTime).day()
     const day = getWeekdayNumber(weekday)

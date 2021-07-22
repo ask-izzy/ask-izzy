@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -9,24 +10,26 @@ export default {
     title: "Basic UI Components/FlatButton",
     component: FlatButton,
     args: {
-        onClick: action("clicked"),
+        onClick: (action("clicked"): any),
     },
 };
 
-const Template = (args: Object) => <FlatButton {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <FlatButton {...args} />;
+};
 
-export const BasicButton = Template.bind({});
+export const BasicButton: typeof Template = Template.bind({});
 BasicButton.args = {
     label: "Example Button",
 };
 
-export const DisabledButton = Template.bind({});
+export const DisabledButton: typeof Template = Template.bind({});
 DisabledButton.args = {
     label: "Example Button",
     disabled: true,
 };
 
-export const ButtonWithJSXChildren = Template.bind({});
+export const ButtonWithJSXChildren: typeof Template = Template.bind({});
 ButtonWithJSXChildren.args = {
     label: "Example Button",
     children: <p>

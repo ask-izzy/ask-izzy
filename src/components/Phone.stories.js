@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import Phone from "./Phone";
@@ -9,22 +10,24 @@ export default {
     component: Phone,
 };
 
-const Template = (args: Object) => <Phone {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <Phone {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});
 Example.args = {
     comment: "Comment about this number",
     kind: "phone",
     number: "(03) 3333 3333",
 };
 
-export const NoComment = Template.bind({});
+export const NoComment: typeof Template = Template.bind({});
 NoComment.args = {
     kind: "kind is displayed instead",
     number: "(03) 3333 3333",
 };
 
-export const LongComment = Template.bind({});
+export const LongComment: typeof Template = Template.bind({});
 LongComment.args = {
     comment: "Here is a phone number with a long comment" +
         ", like, a really long comment",
@@ -32,7 +35,7 @@ LongComment.args = {
     number: "(03) 3333 3333",
 };
 
-export const CrisisNumber = Template.bind({});
+export const CrisisNumber: typeof Template = Template.bind({});
 CrisisNumber.args = {
     comment: "Comment about this number",
     kind: "phone",

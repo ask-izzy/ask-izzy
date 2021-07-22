@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 import DebugContainer from "./DebugContainer";
 
@@ -8,7 +9,7 @@ type Props = {
 }
 
 export default class DebugServiceRecord extends React.Component<Props, void> {
-    render() {
+    render(): Node {
         // need to remove _explanation to get ...rest
         // Remove siblingServices to stop circle ref.
         /* eslint-disable no-unused-vars */

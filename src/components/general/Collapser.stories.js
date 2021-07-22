@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -9,13 +10,15 @@ export default {
     title: "General Components/Collapser",
     component: Collapser,
     args: {
-        onClick: action("clicked"),
+        onClick: (action("clicked"): any),
     },
 };
 
-const Template = (args: Object) => <Collapser {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <Collapser {...args} />;
+};
 
-export const CollapsedByDefault = Template.bind({});
+export const CollapsedByDefault: typeof Template = Template.bind({});
 CollapsedByDefault.args = {
     expandMessage: "Open section",
     closeMessage: "Close section",
@@ -23,7 +26,7 @@ CollapsedByDefault.args = {
 };
 
 
-export const ExpandedByDefault = Template.bind({});
+export const ExpandedByDefault: typeof Template = Template.bind({});
 ExpandedByDefault.args = {
     expandMessage: "Open section",
     collapseMessage: "Close section",
@@ -31,7 +34,7 @@ ExpandedByDefault.args = {
     children: "Body text",
 };
 
-export const BodyWithJSXElements = Template.bind({});
+export const BodyWithJSXElements: typeof Template = Template.bind({});
 BodyWithJSXElements.args = {
     expandMessage: "Open section",
     collapseMessage: "Close section",
@@ -43,7 +46,7 @@ BodyWithJSXElements.args = {
     </div>,
 };
 
-export const HasContentPreview = Template.bind({});
+export const HasContentPreview: typeof Template = Template.bind({});
 HasContentPreview.args = {
     contentPreview: "Excerpt text... ",
     expandMessage: "Read more",

@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import OnlineSafetyContent from "./OnlineSafetyContent";
@@ -9,6 +10,8 @@ export default {
     component: OnlineSafetyContent,
 };
 
-const Template = (args: Object) => <OnlineSafetyContent {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <OnlineSafetyContent {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});

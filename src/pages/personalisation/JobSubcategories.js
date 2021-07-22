@@ -4,9 +4,9 @@ import BaseQuestion from "./BaseQuestion";
 import { remove } from "../../iss/Search";
 
 export default class JobSubcategories extends BaseQuestion {
-    static title = "Jobs";
+    static title: any = "Jobs";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: any = {
         name: "sub-job",
         question: "Where do you want to start?",
         answers: {

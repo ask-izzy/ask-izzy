@@ -13,7 +13,7 @@ type Props = {|
 class BaseIcon extends React.Component<Props, void> {
     +svgContent: string;
 
-    get classNames() {
+    get classNames(): any {
         return classnames(
             this.props.iconClass,
             "disallow-override-color",
@@ -24,7 +24,7 @@ class BaseIcon extends React.Component<Props, void> {
     }
 
 
-    render() {
+    render(): React.Element<"span"> {
         let {
             className,
             iconClass,

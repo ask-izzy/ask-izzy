@@ -11,7 +11,7 @@ const Query = ({ children, query, args, loadingComponent, errorComponent }: {
   args?: Object,
   loadingComponent?: any,
   errorComponent?: any
-}) => {
+}): any | null | React.Element<"p"> => {
     /*
       Paramaters:
           query: A gql query string.

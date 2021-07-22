@@ -1,4 +1,5 @@
 /* @flow */
+import type {Node} from "React";
 import React from "react";
 import { withDesign } from "storybook-addon-designs"
 
@@ -7,13 +8,15 @@ import AlertBanner from "./AlertBanner";
 export default {
     title: "App Components/AlertBanner",
     component: AlertBanner,
-    argTypes: {},
+    argTypes: ({}: {...}),
     decorators: [withDesign],
 };
 
-const Template = (args: Object) => <AlertBanner {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <AlertBanner {...args} />;
+};
 
-export const WarningWithBody = Template.bind({});
+export const WarningWithBody: typeof Template = Template.bind({});
 WarningWithBody.args = {
     alertLevel: "warn",
     title: <p><strong>COVID19 affected services</strong></p>,
@@ -37,7 +40,7 @@ WarningWithBody.parameters = {
     },
 }
 
-export const WarningWithBodyOpenByDefault = Template.bind({});
+export const WarningWithBodyOpenByDefault: typeof Template = Template.bind({});
 WarningWithBodyOpenByDefault.args = {
     alertLevel: "warn",
     defaultToOpen: true,
@@ -62,7 +65,7 @@ WarningWithBodyOpenByDefault.parameters = {
     },
 }
 
-export const InfoWithBody = Template.bind({});
+export const InfoWithBody: typeof Template = Template.bind({});
 InfoWithBody.args = {
     alertLevel: "info",
     title: <p><strong>COVID19 affected services</strong></p>,
@@ -79,7 +82,8 @@ InfoWithBody.args = {
     </>,
 };
 
-export const InfoTitleWithLinkAndWithoutBody = Template.bind({});
+export const InfoTitleWithLinkAndWithoutBody: typeof Template =
+    Template.bind({});
 InfoTitleWithLinkAndWithoutBody.args = {
     alertLevel: "info",
     title: <strong><a href="/covid-19-support">
@@ -94,7 +98,8 @@ InfoTitleWithLinkAndWithoutBody.parameters = {
     },
 }
 
-export const InfoTitleWithoutLinkAndWithoutBody = Template.bind({});
+export const InfoTitleWithoutLinkAndWithoutBody: typeof Template =
+    Template.bind({});
 InfoTitleWithoutLinkAndWithoutBody.args = {
     alertLevel: "info",
     title: <p>
@@ -102,7 +107,7 @@ InfoTitleWithoutLinkAndWithoutBody.args = {
     </p>,
 };
 
-export const InvalidLevel = Template.bind({});
+export const InvalidLevel: typeof Template = Template.bind({});
 InvalidLevel.args = {
     alertLevel: "invalid level",
 };

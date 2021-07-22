@@ -1,16 +1,19 @@
 /* @flow */
+import type {Node} from "React";
 import React from "react";
 import BlockQuote from "./BlockQuote";
 
 export default {
     title: "Base Components/BlockQuote",
     component: BlockQuote,
-    argTypes: {},
+    argTypes: ({}: {...}),
 };
 
-const Template = (args: Object) => <BlockQuote {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <BlockQuote {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});
 Example.args = {
     children: "I say unto you: one must still have chaos in oneself to be " +
         "able to give birth to a dancing star",

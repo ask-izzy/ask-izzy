@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import CollapsedOpeningTimes from "./CollapsedOpeningTimes";
@@ -15,9 +16,11 @@ export default {
     ],
 };
 
-const Template = (args: Object) => <CollapsedOpeningTimes {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <CollapsedOpeningTimes {...args} />;
+};
 
-export const CurrentlyOpen = Template.bind({});
+export const CurrentlyOpen: typeof Template = Template.bind({});
 addTimesToStory(CurrentlyOpen, [
     {
         day: "Wednesday",
@@ -26,7 +29,7 @@ addTimesToStory(CurrentlyOpen, [
     },
 ]);
 
-export const BetweenTwiceInOneDay = Template.bind({});
+export const BetweenTwiceInOneDay: typeof Template = Template.bind({});
 addTimesToStory(BetweenTwiceInOneDay, [
     {
         day: "Wednesday",
@@ -40,7 +43,7 @@ addTimesToStory(BetweenTwiceInOneDay, [
     },
 ]);
 
-export const BeforeTwiceInOneDay = Template.bind({});
+export const BeforeTwiceInOneDay: typeof Template = Template.bind({});
 addTimesToStory(BeforeTwiceInOneDay, [
     {
         day: "Wednesday",
@@ -54,7 +57,7 @@ addTimesToStory(BeforeTwiceInOneDay, [
     },
 ]);
 
-export const AfterTwiceInOneDay = Template.bind({});
+export const AfterTwiceInOneDay: typeof Template = Template.bind({});
 addTimesToStory(AfterTwiceInOneDay, [
     {
         day: "Wednesday",
@@ -68,7 +71,7 @@ addTimesToStory(AfterTwiceInOneDay, [
     },
 ]);
 
-export const WithManyTimes = Template.bind({});
+export const WithManyTimes: typeof Template = Template.bind({});
 addTimesToStory(WithManyTimes, [
     {
         day: "Wednesday",

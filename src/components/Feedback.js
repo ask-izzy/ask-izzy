@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 
 import Link from "./Link";
@@ -23,7 +24,7 @@ export default class Feedback extends React.Component<Props, void> {
         });
     }
 
-    render() {
+    render(): Element<"div"> {
 
         return (
             <div className="Feedback">

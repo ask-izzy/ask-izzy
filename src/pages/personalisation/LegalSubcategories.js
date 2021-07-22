@@ -5,9 +5,9 @@ import { append, remove } from "../../iss/Search";
 import { resetDfvOptions } from "../../utils/domesticViolence";
 
 export default class LegalSubcategories extends BaseQuestion {
-    static title = "Legal";
+    static title: any = "Legal";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: any = {
         name: "sub-legal",
         question: "What's happening?",
         answers: {

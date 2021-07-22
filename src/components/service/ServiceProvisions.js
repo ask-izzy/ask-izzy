@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 
 import Collapser from "../general/Collapser";
@@ -10,7 +11,7 @@ type Props = {
 }
 
 export default class ServiceProvisions extends React.Component<Props, void> {
-    maxAboveFold = 4
+    maxAboveFold: number = 4
     get provisions(): Array<string> {
         return this.props.service?.serviceProvisions || []
     }
@@ -21,11 +22,11 @@ export default class ServiceProvisions extends React.Component<Props, void> {
         return this.provisions.slice(this.maxAboveFold)
     }
 
-    render() {
+    render(): Element<"ul"> {
         return this.renderProvisions()
     }
 
-    renderProvisions = () =>
+    renderProvisions: (() => Element<"ul">) = () =>
         <ul className="ServiceProvisions">
             {this.provisionsAboveFold.map((provision, i) =>
                 <li className="provision aboveFold"

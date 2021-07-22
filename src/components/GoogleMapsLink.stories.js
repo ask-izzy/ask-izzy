@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import GoogleMapsLink from "./GoogleMapsLink";
@@ -11,9 +12,11 @@ export default {
     component: GoogleMapsLink,
 };
 
-const Template = (args: Object) => <GoogleMapsLink {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <GoogleMapsLink {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});
 Example.args = {
     children: (
         <div>Link text</div>

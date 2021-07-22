@@ -1,4 +1,5 @@
 /* @flow */
+import type {Element} from "React";
 import React from "react";
 
 import icons from "../icons";
@@ -14,7 +15,7 @@ type Props = {
 }
 
 export default class Email extends React.Component<Props, void> {
-    static sampleProps = {default: fixtures.ixa.emails[0]};
+    static sampleProps: any = {default: fixtures.ixa.emails[0]};
 
     recordClick(): void {
         gtm.emit({
@@ -27,7 +28,7 @@ export default class Email extends React.Component<Props, void> {
         })
     }
 
-    render() {
+    render(): Element<"div"> {
         const { email } = this.props;
 
         return (

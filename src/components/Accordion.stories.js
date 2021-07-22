@@ -1,17 +1,20 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 import Accordion from "./Accordion";
 
 export default {
     title: "Basic UI Components/Accordion",
     component: Accordion,
-    argTypes: {},
+    argTypes: ({}: {...}),
 };
 
-const Template = (args: Object) => <Accordion {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <Accordion {...args} />;
+};
 
-export const BasicText = Template.bind({});
+export const BasicText: typeof Template = Template.bind({});
 BasicText.args = {
     title: "Accordion Title",
     items: [

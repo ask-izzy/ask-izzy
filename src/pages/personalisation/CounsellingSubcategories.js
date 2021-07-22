@@ -7,9 +7,9 @@ import icons from "../../icons";
 import * as React from "react";
 
 export default class CounsellingSubcategories extends BaseQuestion {
-    static title = "Counselling";
+    static title: any = "Counselling";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: any = {
         name: "sub-counselling",
         question: "What issues are you dealing with?",
         answers: {

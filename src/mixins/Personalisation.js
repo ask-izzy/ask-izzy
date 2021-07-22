@@ -16,11 +16,11 @@ class Personalisation<
 > extends React.Component<
     ChildProps & Props, ChildState
 > {
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
-    nextStep = () => this.props.nextStep()
+    nextStep: (() => any) = () => this.props.nextStep()
 
-    previousStep = () => this.props.previousStep()
+    previousStep: (() => any) = () => this.props.previousStep()
 
     get bannerName(): string {
         return (this.props.name === "sub-indigenous" && "atsi") ||

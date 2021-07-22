@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 import moment from "moment-timezone";
 
@@ -42,14 +43,14 @@ type Props = {
 }
 
 class OpeningTimes extends React.Component<Props, void> {
-    static defaultProps = {
+    static defaultProps: any = {
         moment: moment,
     };
 
     // Lots of permutations here because this component has
     // lots of complex logic. Should probably be split into
     // CurrentlyOpen/CurrentlyClosed components to simplify.
-    static sampleProps = {
+    static sampleProps: any = {
         open: fixture(true, [{
             day: "Wednesday",
             open: "10:30:00",
@@ -106,7 +107,7 @@ class OpeningTimes extends React.Component<Props, void> {
         }]),
     };
 
-    render() {
+    render(): Element<"div"> {
         let open = this.props.object.now_open;
         let renderMethod: ?Function;
 
@@ -135,7 +136,7 @@ class OpeningTimes extends React.Component<Props, void> {
     /*
      * Render the opening hours if ISS says it's open
      */
-    renderOpen() {
+    renderOpen(): Element<"span"> {
         return (
             <span className="until">
                 <span className="open">
@@ -152,7 +153,7 @@ class OpeningTimes extends React.Component<Props, void> {
     /*
      * Render the opening hours if ISS says it's closed
      */
-    renderClosed() {
+    renderClosed(): Element<"span"> {
         return (
             <span className="until">
                 <span className="closed">
@@ -170,7 +171,7 @@ class OpeningTimes extends React.Component<Props, void> {
      * Render the opening hours if ISS isn't sure whether
      * the place is currently open.
      */
-    renderUnsure() {
+    renderUnsure(): Element<"span"> {
         const openTime = this.props.object.nextOpeningTimes;
 
         if (!openTime) {

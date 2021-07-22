@@ -8,7 +8,7 @@ import * as gtm from "../google-tag-manager";
 import routerContext from "../contexts/router-context";
 
 export default class OnlineSafetyLink extends BaseLogoWithTextBox {
-    static defaultProps = {
+    static defaultProps: any = {
         icon: <icons.OnlineSecurity className={"big middle"}/>,
         header: "Online Safety",
         body: `There are some simple steps you can take
@@ -17,7 +17,7 @@ export default class OnlineSafetyLink extends BaseLogoWithTextBox {
         path: "/online-safety",
     };
 
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
     onClickBox(): void {
         gtm.emit({

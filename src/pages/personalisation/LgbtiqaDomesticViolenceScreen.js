@@ -162,4 +162,4 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
 }
 
 
-export default MobileDetect(LgbtiqaDomesticViolenceScreen);
+export default (MobileDetect(LgbtiqaDomesticViolenceScreen): any);

@@ -45,9 +45,9 @@ type Props = {
 }
 
 class LoadingResultsHeader extends React.Component<Props, void> {
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
-    render() {
+    render(): React.Node {
         const {
             error,
             statusCode,

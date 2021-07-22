@@ -167,7 +167,7 @@ class BaseMultiQuestion extends BaseQuestion {
         this.setState({rootHeight: thisElement.offsetHeight});
     }
 
-    render() {
+    render(): React.Element<"div"> {
         let selected = this.selected;
         return (
             <div

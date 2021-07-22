@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 import { addRouter } from "../storybook/decorators";
 
@@ -12,9 +13,11 @@ export default {
     decorators: [addRouter],
 };
 
-const Template = (args: Object) => <CategoryListItem {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <CategoryListItem {...args} />;
+};
 
-export const Housing = Template.bind({});
+export const Housing: typeof Template = Template.bind({});
 Housing.args = {
     category: getCategory("housing"),
 };

@@ -14,7 +14,9 @@ type Props = {
     defaultToOpen?: boolean
 }
 
-export default function AlertBanner(props: Props) {
+export default function AlertBanner(
+    props: Props
+): React.Element<"details"> | React.Element<"div"> {
     let AlertLevelIcon
     let title = props.title
     if (props.alertLevel === "warn") {

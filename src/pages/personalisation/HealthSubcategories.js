@@ -9,9 +9,9 @@ function specialist(query) {
 }
 
 export default class HealthSubcategories extends BaseQuestion {
-    static title = "Health";
+    static title: any = "Health";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: any = {
         name: "sub-health",
         question: "What sort of help do you need?",
         answers: {

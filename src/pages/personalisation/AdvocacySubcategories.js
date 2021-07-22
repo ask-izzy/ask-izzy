@@ -4,9 +4,9 @@ import BaseQuestion from "./BaseQuestion";
 import { remove } from "../../iss/Search";
 
 export default class AdvocacySubcategories extends BaseQuestion {
-    static title = "Advocacy";
+    static title: any = "Advocacy";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: any = {
         name: "sub-advocacy",
         question: "What do you want help with or advice about?",
         answers: {

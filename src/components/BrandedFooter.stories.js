@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import BrandedFooter from "./BrandedFooter";
@@ -11,6 +12,8 @@ export default {
     decorators: [addRouter],
 };
 
-const Template = (args: Object) => <BrandedFooter {...args} />;
+const Template = (args: Object): Node => {
+    (Template.args: any); return <BrandedFooter {...args} />;
+};
 
-export const Basic = Template.bind({});
+export const Basic: typeof Template = Template.bind({});

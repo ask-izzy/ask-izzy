@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node} from "React";
 import React from "react";
 
 import Link from "../components/Link";
@@ -7,7 +8,7 @@ import StaticPage from "./StaticPage";
 import FlatButton from "../components/FlatButton";
 
 class DisabilityAdvocacyFinder extends React.Component<{}, void> {
-    render() {
+    render(): Node {
         return (
             <StaticPage
                 title="Disability Advocacy"

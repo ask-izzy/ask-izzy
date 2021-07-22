@@ -1,8 +1,23 @@
 /* @flow */
 
+type Page = {
+    Title?: string,
+    Body?: string,
+    Banner?: {
+        Key: string,
+    },
+    BannerTextPrimary?: string,
+    BannerTextSecondary?: string,
+    Accordion?: Array<{
+        id: number,
+        Title: string,
+        Content: string
+    }>
+}
+
 export default (
     parent: Object, args: Object, context: Object, info: Object
-) => {
+): Array<Page> => {
     const path = args?.where?.Path || info?.variableValues?.path
     if (path === "/about") {
         return [aboutPage]
@@ -73,6 +88,6 @@ export const disabilityOrganisationsPage = {
 
 export const informationPage = {
     Title: "Information",
-    Body: "Try to live a good life\n\n> [callout(test)] " +
-        "[callout(nothing)]",
+    Body: ("Try to live a good life\n\n> [callout(test)] " +
+        "[callout(nothing)]": string),
 }

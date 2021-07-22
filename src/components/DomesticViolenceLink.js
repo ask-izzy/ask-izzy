@@ -8,7 +8,7 @@ import * as gtm from "../google-tag-manager";
 import routerContext from "../contexts/router-context";
 
 export default class DomesticViolenceLink extends BaseLogoWithTextBox {
-    static defaultProps = {
+    static defaultProps: any = {
         icon: <icons.Book className={"big middle"}/>,
         header: "Read more about domestic violence",
         body: `Do you know what domestic violence looks like? Learn more about
@@ -17,7 +17,7 @@ export default class DomesticViolenceLink extends BaseLogoWithTextBox {
         path: "/information",
     };
 
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
     onClickBox(): void {
         gtm.emit({

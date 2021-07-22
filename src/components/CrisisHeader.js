@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element} from "React";
 import React from "react";
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 }
 
 class CrisisHeader extends React.Component<Props, void> {
-    render() {
+    render(): Element<"h3"> {
         return (
             <h3 className="CrisisHeader">
                 For help and safety call:
