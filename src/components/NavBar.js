@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 
 import categories from "../constants/categories";
@@ -9,7 +9,7 @@ import CategoryListItem from "./CategoryListItem";
 class NavBar extends React.Component<{}, void> {
     static sampleProps: any = {default: {}};
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
 
         return (
             <div className="NavBar">

@@ -1,11 +1,10 @@
 /* @flow */
-
 import * as React from "react";
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import Personalisation from "../../mixins/Personalisation";
 import HeaderBar from "../../components/HeaderBar";
 import components from "../../components";
-
 import storage from "../../storage";
 
 export type Props = {
@@ -29,7 +28,7 @@ export type State = {
 class BaseStaticPersonalisation extends Personalisation<Props, State> {
     +doneButtonLabel: ?string;
 
-    static defaultProps: Object = {
+    static defaultProps: ReactElementConfig<typeof Personalisation> = {
         showBaseTextBox: false,
         showDoneButton: true,
     };

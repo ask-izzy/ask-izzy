@@ -1,5 +1,5 @@
 /* @flow */
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React, { useState } from "react";
 import type {Node as ReactNode} from "react"
 import classnames from "classnames";
@@ -24,7 +24,7 @@ export default function Collapser({
     contentPreview,
     children,
     onClick: onClickProp,
-}: Props): Element<"div"> {
+}: Props): ReactElement<"div"> {
     const [isCollapsed, setIsCollapsed] = useState(!initiallyExpanded)
 
     function onClick(event: SyntheticInputEvent<>) {

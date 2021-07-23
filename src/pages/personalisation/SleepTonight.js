@@ -1,15 +1,16 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
 import Location from "./Location";
 import { append, housingCrisis } from "../../iss/Search";
 
 export default class SleepTonight extends BaseQuestion {
-    static title: any = "Sleeping";
+    static title: string = "Sleeping";
 
     static propTypes = BaseQuestion.propTypes;
 
-    static defaultProps: any = {
+    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sleep-tonight",
         question: "Do you have somewhere safe to sleep tonight?",
         answers: {

@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node, Element} from "React";
+import type {Node as ReactNode, Element as ReactElement} from "React";
 import React, { useEffect } from "react";
 
 import WithStickyFooter from "./WithStickyFooter";
@@ -15,12 +15,12 @@ export default {
     component: WithStickyFooter,
     decorators: [
         // Ensure page scroll is reset to the top when flipping between stories
-        (Story: Object): Node => {
+        (Story: Object): ReactNode => {
             useEffect(() => () => window.scrollTo(0, 0));
             return <Story />;
         },
         // Add ruler for demo purposes if no body content is supplied
-        (Story: Object, { args, parameters }: Object): Node => {
+        (Story: Object, { args, parameters }: Object): ReactNode => {
             const mainContentHeight =
                 parameters?.context?.mainContentHeight || 150;
             args.children = args.children ? (
@@ -43,7 +43,7 @@ export default {
             (<ul>
                 <p>Line 1</p>
                 <p>Line 2</p>
-            </ul>: Element<"ul">)
+            </ul>: ReactElement<"ul">)
         ),
     },
     parameters: {
@@ -51,7 +51,7 @@ export default {
     },
 };
 
-const Template = (args: Object): Element<"div"> => {
+const Template = (args: Object): ReactElement<"div"> => {
     (Template.args: any);
     const { children, ...remainingArgs } = args;
 

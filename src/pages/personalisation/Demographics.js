@@ -1,4 +1,5 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
 
@@ -16,9 +17,9 @@ const ATSI_BREADCRUMB_ICON = (
 
 
 export default class Demographics extends BaseMultiQuestion {
-    static title: any = "Personal";
+    static title: string = "Personal";
     static propTypes = BaseMultiQuestion.propTypes;
-    static defaultProps: any = {
+    static defaultProps: ReactElementConfig<typeof BaseMultiQuestion> = {
         name: "demographics",
         question: "Do any of these apply to you?",
         byline: "All of your answers are private and anonymous",

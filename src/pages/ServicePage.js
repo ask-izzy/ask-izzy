@@ -1,7 +1,8 @@
 /* @flow */
-import type {Element} from "React";/* eslint-disable max-len */
+/* eslint-disable max-len */
 
 import React from "react";
+import type {Element as ReactElement} from "React";
 import ServicePane from "../components/ServicePane";
 
 import iss from "../iss";
@@ -76,7 +77,7 @@ class ServicePage extends React.Component<{}, {
 
     }
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         let {
             object,
             error,

@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 
 import HeaderBar from "./HeaderBar";
 
@@ -37,7 +37,7 @@ export default {
     },
 };
 
-const Template = (args: Object): Node => {
+const Template = (args: Object): ReactNode => {
     (Template.args: any); return <HeaderBar {...args} />;
 };
 

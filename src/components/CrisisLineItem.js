@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import PropTypes from "proptypes";
 
@@ -51,7 +51,7 @@ class CrisisLineItem extends React.Component<Props, void> {
         object: new iss.Service(fixtures.domesticviolence),
     }};
 
-    render(): Element<"div"> | Element<"span"> {
+    render(): ReactElement<"div"> | ReactElement<"span"> {
         const {
             object,
         } = this.props;

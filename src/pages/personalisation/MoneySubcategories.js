@@ -1,12 +1,13 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
 
 export default class MoneySubcategories extends BaseQuestion {
-    static title: any = "Money help";
+    static title: string = "Money help";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps: any = {
+    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-money",
         question: "What do you need?",
         answers: {

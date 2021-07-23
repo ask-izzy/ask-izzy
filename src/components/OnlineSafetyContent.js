@@ -1,12 +1,13 @@
 /* @flow */
-import type {Node} from "React";// eslint-disable max-len
+// eslint-disable max-len
+import type {Node as ReactNode} from "React";
 
 import React from "react";
 
 import Link from "./Link";
 
 class OnlineSafetyContent extends React.Component<{}, void> {
-    render(): Node {
+    render(): ReactNode {
         const linkEsafetyPage = "https://www.esafety.gov.au/key-issues/domestic-family-violence/help-support/get-help-in-your-language";
         const link1800Respect = "https://www.1800respect.org.au";
 

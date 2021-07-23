@@ -77,13 +77,9 @@ export const InjectRouterContext = (
     )
 }
 
-export const useRouterContext = (): {
-  location: any,
-  match: {params: any, props: any, ...},
-  navigate: any,
-  navigateInProgress: any,
-  ...,
-} => useContext(RouterContext).router
+export const useRouterContext =
+    (): $PropertyType<RouterContextObject, 'router'> =>
+        useContext(RouterContext).router
 
 function extractRouteProps(routeConfig) {
     return {...routeConfig.route.element.props}

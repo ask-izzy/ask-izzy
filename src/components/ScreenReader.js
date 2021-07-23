@@ -1,5 +1,5 @@
 /* @flow */
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 
 class ScreenReader extends React.Component<{
@@ -12,7 +12,7 @@ class ScreenReader extends React.Component<{
         ),
     }};
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         return (
             <div
                 aria-label={this.props.ariaLabel}

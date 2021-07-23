@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -15,7 +15,7 @@ export default {
     },
 };
 
-const Template = (args: Object): Node => {
+const Template = (args: Object): ReactNode => {
     (Template.args: any); return <ButtonListItem {...args} />;
 };
 

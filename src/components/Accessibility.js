@@ -1,12 +1,12 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import icons from "../icons";
 import type { Service } from "../iss";
 
 class Accessibility extends React.Component<{object: Service}, void> {
-    render(): null | Element<"div"> {
+    render(): null | ReactElement<"div"> {
         let accessibilityMapping = {
             // "noaccess": "No wheelchair access",
             // "access": "Partial wheelchair access",

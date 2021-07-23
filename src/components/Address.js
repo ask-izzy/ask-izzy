@@ -1,5 +1,5 @@
 /* @flow */
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import icons from "../icons";
 import ScreenReader from "./ScreenReader";
@@ -36,7 +36,7 @@ class Address extends React.Component<Props, void> {
         },
     };
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         let location = this.props.location;
 
         return (

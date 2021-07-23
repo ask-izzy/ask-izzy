@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import iss from "../iss";
 import fixtures from "../../fixtures/services";
@@ -19,7 +19,7 @@ export default class Ndis extends React.Component<Props, void> {
         spacer: false,
     }};
 
-    render(): null | Element<"div"> {
+    render(): null | ReactElement<"div"> {
         let ndisApproved = this.props.object.ndis_approved;
 
         if (ndisApproved) {

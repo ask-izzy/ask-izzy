@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import ListItem from "./ListItem";
 import type {ListItemProps} from "./ListItem";
@@ -11,7 +11,7 @@ export default class ButtonListItem extends React.Component<ListItemProps, void>
 
     static sampleProps: any = ListItem.sampleProps;
 
-    render(): Node {
+    render(): ReactNode {
         return (
             <ListItem
                 rootElement="button"

@@ -1,7 +1,8 @@
 /* @flow */
-import type {Element} from "React";/* eslint-disable max-len */
+/* eslint-disable max-len */
 
 import React from "react";
+import type {Element as ReactElement} from "React";
 import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
@@ -13,7 +14,7 @@ type Props = {}
 export default class NotFoundStaticPage extends React.Component<Props, void> {
     static contextType: any = routerContext;
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
 
         return (
             <div

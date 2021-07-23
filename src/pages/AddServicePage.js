@@ -1,5 +1,5 @@
 /* @flow */
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 
 import components from "../components";
@@ -80,7 +80,7 @@ class AddServicePage extends React.Component<Props, State> {
         }
     }
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         const body = this.state.isFormDone ? this.renderSuccessMessage()
             : this.renderForm();
 
@@ -98,7 +98,7 @@ class AddServicePage extends React.Component<Props, State> {
         );
     }
 
-    renderSuccessMessage(): Element<"div"> {
+    renderSuccessMessage(): ReactElement<"div"> {
         return (
             <div>
                 <p>Thank you. The information you provided may be adjusted for
@@ -108,7 +108,7 @@ class AddServicePage extends React.Component<Props, State> {
         );
     }
 
-    renderForm(): Element<"div"> {
+    renderForm(): ReactElement<"div"> {
         return (
             <div>
                 <p>

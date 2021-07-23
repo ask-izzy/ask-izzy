@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node, Element} from "React";
+import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 import PropTypes from "proptypes";
 import fixtures from "../../fixtures/services";
@@ -36,7 +36,7 @@ class ResultListItem extends React.Component<{
         service: new iss.Service(fixtures.ixa),
     }};
 
-    renderLocation(location: Object): Element<"span"> {
+    renderLocation(location: Object): ReactElement<"span"> {
 
         let suburb = location.suburb;
 
@@ -54,7 +54,7 @@ class ResultListItem extends React.Component<{
         );
     }
 
-    render(): Node {
+    render(): ReactNode {
         const {
             service,
         } = this.props;

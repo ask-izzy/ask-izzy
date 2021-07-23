@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node, Element} from "React";
+import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
 import AppBar from "../components/AppBar";
@@ -100,7 +100,7 @@ class ResultsMapPage extends ResultsPage<{}, State> {
         return `${mapHeight}px`;
     }
 
-    render(): Element<"div"> | Node {
+    render(): ReactElement<"div"> | ReactNode {
         if (this.state.searchType) {
             return this.renderPage()
         }
@@ -108,7 +108,7 @@ class ResultsMapPage extends ResultsPage<{}, State> {
         return <NotFoundStaticPage/>
     }
 
-    renderPage: (() => Element<"div">) = () => (
+    renderPage: (() => ReactElement<"div">) = () => (
         <div className="ResultsMapPage">
             <AppBar
                 title={this.title}
@@ -129,7 +129,7 @@ class ResultsMapPage extends ResultsPage<{}, State> {
         </div>
     )
 
-    renderPageBody(): Node | Element<"div"> {
+    renderPageBody(): ReactNode | ReactElement<"div"> {
         if (this.searchIsLoading) {
             return <div className="progress">
                 <icons.Loading className="big" />

@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React, {useEffect} from "react";
 
 import DebugServiceRecord from "./DebugServiceRecord";
@@ -13,7 +13,7 @@ export default {
     component: DebugServiceRecord,
     decorators: [
         addRouter,
-        (Story: Object): Node => {
+        (Story: Object): ReactNode => {
             storage.setDebug(true)
             useEffect(() => () => storage.setDebug(false))
             return <Story/>
@@ -21,7 +21,7 @@ export default {
     ],
 };
 
-const Template = (args: Object): Node => {
+const Template = (args: Object): ReactNode => {
     (Template.args: any); return <DebugServiceRecord {...args} />;
 };
 

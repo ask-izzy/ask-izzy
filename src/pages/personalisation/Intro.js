@@ -1,4 +1,5 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import * as React from "react";
 
@@ -24,11 +25,11 @@ type State = {
 }
 
 class Intro extends Personalisation<Props, State> {
-    static defaultProps: any = {
+    static defaultProps: ReactElementConfig<typeof Personalisation> = {
         name: "intro",
     };
 
-    static title: any = "Intro";
+    static title: string = "Intro";
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         return request;

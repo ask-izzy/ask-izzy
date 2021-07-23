@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import Address from "./Address";
 import Location from "../../fixtures/factories/Location";
@@ -11,7 +11,7 @@ export default {
     argTypes: ({}: {...}),
 };
 
-const Template = (args: Object): Node => {
+const Template = (args: Object): ReactNode => {
     (Template.args: any); return <Address {...args} />;
 };
 

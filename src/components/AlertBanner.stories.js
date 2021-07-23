@@ -1,5 +1,5 @@
 /* @flow */
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import { withDesign } from "storybook-addon-designs"
 
@@ -12,7 +12,7 @@ export default {
     decorators: [withDesign],
 };
 
-const Template = (args: Object): Node => {
+const Template = (args: Object): ReactNode => {
     (Template.args: any); return <AlertBanner {...args} />;
 };
 

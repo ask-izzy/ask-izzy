@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import DemographicLgbtiq from "../icons/DemographicLgbtiq";
 import type { Service } from "../iss";
@@ -10,7 +10,7 @@ type Props = {
 }
 
 class LgbtiqIcon extends React.Component<Props, void> {
-    render(): null | Element<"div"> {
+    render(): null | ReactElement<"div"> {
         let lgbtiqaPlus = this.props.object.lgbtiqa_plus_specific;
 
         if (!lgbtiqaPlus) {

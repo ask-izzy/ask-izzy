@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 }
 
 export default class BoxedText extends React.Component<Props, {}> {
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         return (
             <div className="BoxedText">
                 <div className="BoxedText-container">

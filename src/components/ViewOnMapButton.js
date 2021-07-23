@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import icons from "../icons";
 import LinkListItem from "./LinkListItem";
@@ -20,7 +20,7 @@ export default class ViewOnMapButton extends React.Component<any, State> {
         maps().then(maps => this.setState({maps}));
     }
 
-    render(): null | Node {
+    render(): null | ReactNode {
         if (!this.state.maps) {
             return null;
         }

@@ -1,5 +1,5 @@
 /* @flow */
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import { titleize } from "underscore.string";
 
@@ -46,7 +46,7 @@ class Phone extends React.Component<Props, void> {
     }
     recordClick: any = this.recordClick.bind(this)
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         let contactButtonClassName = "ContactButton";
         let phonebutton = <icons.Phone />;
 

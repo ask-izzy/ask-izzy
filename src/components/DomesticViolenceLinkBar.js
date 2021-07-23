@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import icons from "../icons";
 import * as gtm from "../google-tag-manager";
@@ -9,7 +9,7 @@ import routerContext from "../contexts/router-context";
 export default class DomesticViolenceLinkBar extends React.Component<{}, void> {
     static contextType: any = routerContext;
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
 
         return (
             <div

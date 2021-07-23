@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import classnames from "classnames";
 
@@ -16,7 +16,7 @@ class SvgIcon extends React.Component<{
     static sampleProps: any = {
     };
 
-    render(): Element<"svg"> {
+    render(): ReactElement<"svg"> {
         const {
             children,
             viewBox,

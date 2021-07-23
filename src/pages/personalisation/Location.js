@@ -1,4 +1,5 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import * as React from "react";
 import { debounce } from "lodash-decorators";
@@ -32,7 +33,7 @@ type State = {
 }
 
 class Location extends Personalisation<Props, State> {
-    static defaultProps: any = {
+    static defaultProps: ReactElementConfig<typeof Personalisation> = {
         name: "location",
     };
 
@@ -67,7 +68,7 @@ class Location extends Personalisation<Props, State> {
     }
 
     /* eslint-disable react/sort-comp */
-    static title: any = "Location";
+    static title: string = "Location";
 
     static headingValue(): ?string {
         return this.answer && `in ${this.answer}`
@@ -110,7 +111,7 @@ class Location extends Personalisation<Props, State> {
         return request;
     }
 
-    static summaryLabel: any = "Where are you?";
+    static summaryLabel: string = "Where are you?";
 
     static get summaryValue(): string {
         return storage.getLocation();

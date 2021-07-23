@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 
 import Collapser from "../general/Collapser";
@@ -22,11 +22,11 @@ export default class ServiceProvisions extends React.Component<Props, void> {
         return this.provisions.slice(this.maxAboveFold)
     }
 
-    render(): Element<"ul"> {
+    render(): ReactElement<"ul"> {
         return this.renderProvisions()
     }
 
-    renderProvisions: (() => Element<"ul">) = () =>
+    renderProvisions: (() => ReactElement<"ul">) = () =>
         <ul className="ServiceProvisions">
             {this.provisionsAboveFold.map((provision, i) =>
                 <li className="provision aboveFold"

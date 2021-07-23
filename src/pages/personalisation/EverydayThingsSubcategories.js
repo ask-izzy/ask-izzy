@@ -1,12 +1,13 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
 
 export default class EverydayThingsSubcategories extends BaseQuestion {
-    static title: any = "Everyday things";
+    static title: string = "Everyday things";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps: any = {
+    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-everyday-things",
         question: "What do you need?",
         answers: {

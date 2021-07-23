@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import Link from "../components/Link";
 import icons from "../icons"
@@ -92,7 +92,7 @@ export default class BrandedFooter
     }
     /* end hack */
 
-    render: (() => Element<"footer">) = () => (
+    render: (() => ReactElement<"footer">) = () => (
         <footer className="branding-footer-container">
             <div className="top-box">
                 <div className="additional-information">

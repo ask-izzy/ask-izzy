@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import moment from "moment-timezone";
 
@@ -107,7 +107,7 @@ class OpeningTimes extends React.Component<Props, void> {
         }]),
     };
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         let open = this.props.object.now_open;
         let renderMethod: ?Function;
 
@@ -136,7 +136,7 @@ class OpeningTimes extends React.Component<Props, void> {
     /*
      * Render the opening hours if ISS says it's open
      */
-    renderOpen(): Element<"span"> {
+    renderOpen(): ReactElement<"span"> {
         return (
             <span className="until">
                 <span className="open">
@@ -153,7 +153,7 @@ class OpeningTimes extends React.Component<Props, void> {
     /*
      * Render the opening hours if ISS says it's closed
      */
-    renderClosed(): Element<"span"> {
+    renderClosed(): ReactElement<"span"> {
         return (
             <span className="until">
                 <span className="closed">
@@ -171,7 +171,7 @@ class OpeningTimes extends React.Component<Props, void> {
      * Render the opening hours if ISS isn't sure whether
      * the place is currently open.
      */
-    renderUnsure(): Element<"span"> {
+    renderUnsure(): ReactElement<"span"> {
         const openTime = this.props.object.nextOpeningTimes;
 
         if (!openTime) {

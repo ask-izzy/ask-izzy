@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import _ from "underscore";
 
@@ -39,7 +39,7 @@ export default class DebugPersonalisation extends React.Component<Props, void> {
         return result;
     }
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         return (
             <div className="DebugPersonalisation">
                 <h5>Personalisation debugging</h5>

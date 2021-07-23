@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node, Element} from "React";
+import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
 import Collapser from "./general/Collapser";
@@ -75,7 +75,7 @@ class ContactMethods extends React.Component<Props, void> {
         })
     }
 
-    render(): Element<"div"> | Element<"span"> {
+    render(): ReactElement<"div"> | ReactElement<"span"> {
         if (this.contacts.length > 0) {
             /* render one contact method per type and
              * then put the rest in a collapser */
@@ -101,7 +101,7 @@ class ContactMethods extends React.Component<Props, void> {
         }
     }
 
-    renderContactMethod(record: Object, idx: number): Node {
+    renderContactMethod(record: Object, idx: number): ReactNode {
         const props = Object.assign({
             key: idx,
             analyticsEventDetails: {

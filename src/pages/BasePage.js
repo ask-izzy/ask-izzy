@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import Helmet from "react-helmet";
 import { makeTitle } from "../routes";
@@ -36,7 +36,7 @@ class BasePage extends React.Component<{}> {
         closePageLoadDependencies(this.context.router.location, "render")
     }
 
-    render(): Node {
+    render(): ReactNode {
         const { location, match } = this.context.router
         const pageTitle = makeTitle(
             match.props.title,

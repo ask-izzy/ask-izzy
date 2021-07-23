@@ -1,5 +1,5 @@
 /* @flow */
-import type {Node, Element} from "React";
+import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
 import Link from "./Link";
@@ -64,7 +64,7 @@ class GoogleMapsLink extends React.Component<Props, void> {
         }&daddr=${query}`;
     }
 
-    render(): Element<"span"> | Node {
+    render(): ReactElement<"span"> | ReactNode {
         const {
             className,
             children,

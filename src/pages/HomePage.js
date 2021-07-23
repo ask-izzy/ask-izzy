@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 
 import HeaderBar from "../components/HeaderBar";
@@ -56,7 +56,7 @@ class HomePage extends React.Component<{}, State> {
         );
     }
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         const logo = "/static/images/ask-izzy-logo-single-line-yellow.svg";
         return (
             <div className="HomePage">

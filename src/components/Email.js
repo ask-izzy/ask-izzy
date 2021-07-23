@@ -1,5 +1,5 @@
 /* @flow */
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 
 import icons from "../icons";
@@ -28,7 +28,7 @@ export default class Email extends React.Component<Props, void> {
         })
     }
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         const { email } = this.props;
 
         return (

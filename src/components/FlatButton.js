@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import classnames from "classnames";
 
@@ -20,7 +20,7 @@ export default class FlatButton extends React.Component<Props, void> {
         },
     };
 
-    render(): Element<"button"> {
+    render(): ReactElement<"button"> {
         let {
             className,
             children,

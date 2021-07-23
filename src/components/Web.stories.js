@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 
 import Web from "./Web";
@@ -10,7 +10,7 @@ export default {
     component: Web,
 };
 
-const Template = (args: Object): Node => {
+const Template = (args: Object): ReactNode => {
     (Template.args: any); return <Web {...args} />;
 };
 

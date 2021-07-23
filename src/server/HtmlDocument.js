@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import PropTypes from "proptypes";
 
@@ -27,7 +27,7 @@ class HtmlDocument extends React.Component<Object, void> {
         requestInterceptorPath: "/static/scripts/request-interceptor.js",
     };
 
-    render(): Element<"html"> {
+    render(): ReactElement<"html"> {
         const {
             markup,
             script,
@@ -256,7 +256,7 @@ class HtmlDocument extends React.Component<Object, void> {
     * Useful for debugging React components in an iOS
     * simulator or Safari
     */
-    renderRemoteReactDevtoolsScript(): void | Element<"script"> {
+    renderRemoteReactDevtoolsScript(): void | ReactElement<"script"> {
         if (
             typeof window === "undefined" ||
             process.env.NODE_ENV === "production" ||

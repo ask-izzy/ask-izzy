@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import classnames from "classnames";
 
@@ -22,7 +22,7 @@ export default class LinkListItem extends React.Component<Props, void> {
         },
     };
 
-    render(): Node {
+    render(): ReactNode {
         const {
             className,
             ...rest

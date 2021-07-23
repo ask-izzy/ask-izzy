@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import moment from "moment-timezone";
 
@@ -17,7 +17,7 @@ export default {
     decorators: [mockedTimeDecorator],
 };
 
-const Template = (args: Object): Node => {
+const Template = (args: Object): ReactNode => {
     (Template.args: any); return <OpeningTimes {...args} />;
 };
 
@@ -121,7 +121,7 @@ addTimesToStory(InvalidTimes, [
 export function mockedTimeDecorator(
     Story: Object,
     {parameters}: Object
-): Node {
+): ReactNode {
     const mockedCurrentTime = parameters?.context?.mockedCurrentTime
     return <>
         <Story/>

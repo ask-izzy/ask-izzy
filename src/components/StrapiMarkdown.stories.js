@@ -1,5 +1,5 @@
 /* @flow */
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import StrapiMarkdown from "./StrapiMarkdown";
 
@@ -9,7 +9,7 @@ export default {
     argTypes: ({}: {...}),
 };
 
-const Template = (args: Object): Node => {
+const Template = (args: Object): ReactNode => {
     (Template.args: any)
     window.STRAPI_URL = "/static/media/public"
     return <StrapiMarkdown {...args} />

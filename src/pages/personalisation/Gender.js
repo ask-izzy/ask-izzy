@@ -1,5 +1,5 @@
 /* @flow */
-import type { ElementProps as ReactElementProps } from "react"
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
@@ -7,7 +7,7 @@ import { append } from "../../iss/Search";
 export default class Gender extends BaseQuestion {
     static title: string = "Gender";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps: ReactElementProps<typeof BaseQuestion> = {
+    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "gender",
         question: "Do you identify as…",
         answers: {

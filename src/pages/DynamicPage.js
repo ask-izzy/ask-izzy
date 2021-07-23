@@ -31,7 +31,7 @@ class DynamicPage extends React.Component<{}> {
      * @param props - Thr Markdown props of a blockquote
      * @returns {JSX.Element} - returns either a callout or blockqupte
      */
-    renderEmbCallout: (props: ReactMarkdownQuoteProps) => React.Node =
+    renderEmbCallout: (props: ReactMarkdownQuoteProps) => ReactNode =
     (props: ReactMarkdownQuoteProps) => {
         // Get the text content of the children
         const textContent = React.Children.map(props.children,

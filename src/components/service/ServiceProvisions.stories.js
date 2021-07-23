@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import ServiceProvisions from "./ServiceProvisions";
 import iss from "../../iss";
@@ -11,7 +11,7 @@ export default {
     component: ServiceProvisions,
 };
 
-const Template = (args: Object): Node => {
+const Template = (args: Object): ReactNode => {
     (Template.args: any); return <ServiceProvisions {...args} />;
 };
 

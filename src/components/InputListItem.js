@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import ListItem from "./ListItem";
 import type { ListItemProps } from "./ListItem";
@@ -23,7 +23,7 @@ export default class InputListItem extends React.Component<Props, void> {
         },
     };
 
-    render(): Node {
+    render(): ReactNode {
         let {
             checkedIcon,
             uncheckedIcon,

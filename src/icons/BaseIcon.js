@@ -3,12 +3,12 @@
 import * as React from "react";
 import classnames from "classnames";
 
-type Props = {|
+type Props = {
     iconClass: string,
     className?: string,
     containerClassName?: string,
     fill: string,
-|}
+}
 
 class BaseIcon extends React.Component<Props, void> {
     +svgContent: string;
@@ -37,8 +37,8 @@ class BaseIcon extends React.Component<Props, void> {
 
         return (
             <span
-                className={containerClassName}
                 {...parentProps}
+                className={containerClassName}
                 dangerouslySetInnerHTML={{__html: this.svgContent}}
             />
         );

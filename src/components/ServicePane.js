@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import _ from "underscore";
 
@@ -69,7 +69,7 @@ export default class ServicePane extends React.Component<{
         });
     }
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         const object = this.props.service;
 
         return (
@@ -146,7 +146,7 @@ export default class ServicePane extends React.Component<{
         );
     }
 
-    renderServiceProvisions(): Element<"div"> {
+    renderServiceProvisions(): ReactElement<"div"> {
         let object = this.props.service;
 
         if (_.isEmpty(object.serviceProvisions)) {
@@ -168,7 +168,7 @@ export default class ServicePane extends React.Component<{
         );
     }
 
-    renderSiblings(): Element<"div"> | Element<"span"> {
+    renderSiblings(): ReactElement<"div"> | ReactElement<"span"> {
         const siblings = this.state.siblings;
 
         if (!siblings) {

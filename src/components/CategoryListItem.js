@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import LinkListItem from "./LinkListItem";
 import icons from "../icons";
@@ -44,7 +44,7 @@ class CategoryListItem extends React.Component<Props, void> {
         })
     }
 
-    render(): Node {
+    render(): ReactNode {
         let Icon = this.props.category.icon || icons.House;
 
         return (

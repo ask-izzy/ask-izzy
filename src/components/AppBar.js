@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node, Element} from "React";
+import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
 import components from "../components";
@@ -24,7 +24,7 @@ class AppBar extends React.Component<Props, void> {
     };
 
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         return (
             <div
                 className={
@@ -45,7 +45,7 @@ class AppBar extends React.Component<Props, void> {
         );
     }
 
-    renderBackButton(): Node {
+    renderBackButton(): ReactNode {
         return (
             <components.IconButton
                 name={this.props.backMessage ? this.props.backMessage

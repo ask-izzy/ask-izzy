@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import moment from "moment-timezone";
 import _ from "underscore";
@@ -113,7 +113,7 @@ export default class CollapsedOpeningTimes extends React.Component<Props, void> 
         })
     }
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         const order = [
             "Monday",
             "Tuesday",

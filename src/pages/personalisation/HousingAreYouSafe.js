@@ -1,5 +1,4 @@
 /* @flow */
-
 import Demographics from "./Demographics";
 import AreYouSafe from "./AreYouSafe";
 

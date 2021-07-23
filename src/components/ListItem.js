@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import classnames from "classnames";
 
@@ -27,7 +27,7 @@ export default class ListItem extends React.Component<ListItemProps, void> {
         },
     };
 
-    render(): Element<string> {
+    render(): ReactElement<string> {
         let {
             rootElement,
             className,

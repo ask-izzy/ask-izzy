@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import PropTypes from "proptypes";
 import classnames from "classnames";
@@ -28,7 +28,7 @@ export default class IconButton extends React.Component<Props, void> {
         },
     };
 
-    render(): Element<"button"> {
+    render(): ReactElement<"button"> {
         const {
             className,
             onClick,

@@ -1,5 +1,5 @@
 /* @flow */
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import URL from "url";
 
@@ -26,7 +26,7 @@ export default class Web extends React.Component<Props, void> {
         });
     }
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         let url = URL.parse(this.props.url);
 
         return (

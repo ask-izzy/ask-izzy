@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Node} from "React";
+import type {Node as ReactNode} from "React";
 import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -17,7 +17,7 @@ export default {
     decorators: [addRouter, addGoogleMapsScript],
 };
 
-const Template = (args: Object): Node => {
+const Template = (args: Object): ReactNode => {
     (Template.args: any)
     const recordOnSiteSelect = action("onSiteSelect")
     const [selectedSite, setSelectedSite] = useState(null)

@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 import _ from "underscore";
 import _string from "underscore.string";
@@ -18,7 +18,7 @@ type Props = {
 class Eligibility extends React.Component<Props, void> {
     static sampleProps: any = {default: fixtures.ixa};
 
-    render(): Element<"div"> {
+    render(): ReactElement<"div"> {
         let eligibleMarkup, ineligibleMarkup;
 
         let eligibleItems = _.compact(_([
@@ -64,7 +64,7 @@ class Eligibility extends React.Component<Props, void> {
         );
     }
 
-    renderCatchment(): void | Element<"li"> {
+    renderCatchment(): void | ReactElement<"li"> {
         const catchment: string = this.props.catchment;
 
         if (catchment && !catchment.match(/^open.?$/i)) {
@@ -72,7 +72,7 @@ class Eligibility extends React.Component<Props, void> {
         }
     }
 
-    renderItem(text: string): void | Element<"li"> {
+    renderItem(text: string): void | ReactElement<"li"> {
         if (text) {
             return (<li key={text}>{text}</li>);
         }
@@ -88,7 +88,7 @@ class Eligibility extends React.Component<Props, void> {
         return _.compact(_(eligibilities).map(this.renderItem));
     }
 
-    renderReferralInfo(): void | Element<"li"> {
+    renderReferralInfo(): void | ReactElement<"li"> {
         const referralInfo = (this.props.referral_info || "").trim();
 
         if (referralInfo && !referralInfo.match(/^self\.?$/i)) {
