@@ -38,7 +38,7 @@ class HeaderBar extends React.Component<Props, void> {
                 >
                     {this.props.primaryText}
                 </div>
-                {this.props.secondaryText && this.renderSecondaryText()}
+                {this.renderSecondaryText()}
                 {this.props.children}
             </div>
         );

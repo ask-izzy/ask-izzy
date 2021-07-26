@@ -81,7 +81,7 @@ class TransportTime extends React.Component<{
         );
     }
 
-    getTravelText(travel: Object): ?string {
+    getTravelText(travel: Object): string {
         return travel &&
         travel.duration &&
         travel.duration.text
