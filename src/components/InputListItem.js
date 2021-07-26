@@ -39,6 +39,8 @@ export default class InputListItem extends React.Component<Props, void> {
             <ListItem
                 className="InputListItem"
                 rootElement="button"
+                role={this.props.type || "button"}
+                aria-label={primaryText}
                 tabIndex={tabIndex || 0}
                 onFocus={this.props.onFocus}
                 {...{primaryText, secondaryText, leftIcon, onClick}}

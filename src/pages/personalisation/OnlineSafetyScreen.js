@@ -67,7 +67,7 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
                             )
                         }
                     </h2>
-                    <h3>
+                    <p>
                         If you don't feel safe in your life, call{" "}
                         <Link to={link1800Respect}>1800 Respect</Link> on{" "}
                         {
@@ -83,7 +83,7 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
                                 </span>
                             )
                         } for confidential counselling, support and services.
-                    </h3>
+                    </p>
                 </div>
             </div>
         );

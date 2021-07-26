@@ -82,7 +82,7 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
                         Violence is never OK. It may be happening at home
                         with family or with someone you're dating.
                     </h2>
-                    <h3>
+                    <p>
                         Call <Link to={linkService}>Kids Helpline</Link> on{" "}
                         {
                             this.props.mobileView ? (
@@ -94,12 +94,12 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
                             )
                         }
                         {" "} or chat online <Link to={chatService}>here</Link>.
-                    </h3>
-                    <h3>
+                    </p>
+                    <p>
                         Visit <Link to={linkWoah}>WOAH</Link> or{" "}
                         <Link to={linkYoungAndEsafe}>Young & eSafe</Link> to
                         learn more.
-                    </h3>
+                    </p>
                 </div>
             </div>
         );

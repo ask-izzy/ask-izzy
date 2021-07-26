@@ -16,7 +16,12 @@ class Accessibility extends React.Component<{object: Service}, void> {
 
         if (issAccessibility === "fullaccess") {
             return (
-                <div className="Accessibility">
+                <div
+                    className="Accessibility"
+                    aria-label={`${
+                        accessibilityMapping[issAccessibility]
+                    }.`}
+                >
                     <icons.Accessibility
                         className="ColoredIcon"
                     />

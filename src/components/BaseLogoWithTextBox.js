@@ -47,6 +47,7 @@ export default class BaseLogoWithTextBox extends React.Component<Props, void> {
                     <Link
                         to={this.props.path}
                         onClick={(evt) => evt.preventDefault()}
+                        aria-label="Learn More"
                     >
                         Learn More
                         <div

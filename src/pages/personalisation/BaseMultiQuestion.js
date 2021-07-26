@@ -210,7 +210,6 @@ class BaseMultiQuestion extends BaseQuestion {
                                 primaryText={answer}
                                 value={answer}
                                 tabIndex={this.state.tabIndex + (index + 1)}
-                                aria-label={answer}
                                 type="checkbox"
                                 checked={selected.has(answer)}
                                 checkedIcon={

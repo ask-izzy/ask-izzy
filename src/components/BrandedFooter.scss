@@ -112,28 +112,24 @@
         div.support-links {
             padding: 0 $container-spacing;
 
-            ul {
-                li {
-                    margin: 1em;
-                    margin-left: 0;
+            a {
+                display: flex;
+                flex-direction: row;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                margin-left: -5px;
+                font-weight: 500;
+                text-decoration: none;
 
-                    a {
-                        display: flex;
-                        flex-direction: row;
-                        font-weight: 500;
-                        text-decoration: none;
+                .SvgIcon {
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 10px;
+                }
 
-                        &:hover {
-                            div {
-                                text-decoration: underline;
-                            }
-                        }
-                    }
-
-                    .icon:first-child .Icon {
-                        width: 20px;
-                        height: 20px;
-                        margin-right: 10px;
+                &:hover {
+                    div {
+                        text-decoration: underline;
                     }
                 }
             }
