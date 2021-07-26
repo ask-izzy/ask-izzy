@@ -33,7 +33,6 @@ import ResultsListPage from "./pages/ResultsListPage";
 import ResultsMapPage from "./pages/ResultsMapPage";
 import ServicePage from "./pages/ServicePage";
 import BushfireReliefPage from "./pages/BushfireReliefPage";
-import Covid19StaticPage from "./pages/Covid19StaticPage";
 import { donateLink } from "./constants/urls.js"
 import {
     InjectRouterContext,
@@ -137,7 +136,7 @@ const routes: ReactElement<typeof Routes> = <Routes>
         />
         <Route
             path="/covid-19-support"
-            element={<Covid19StaticPage />}
+            element={<DynamicPage />}
             title="COVID 19 Support"
             type={["Static Page", "COVID 19 Support"]}
         />
