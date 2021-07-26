@@ -1,13 +1,14 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
 /* eslint-disable no-unused-vars */
 import { append, remove } from "../../iss/Search";
 
 export default class FoodSubcategories extends BaseQuestion {
-    static title = "Food";
+    static title: string = "Food";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-food",
         question: "What type of food do you need?",
         answers: {

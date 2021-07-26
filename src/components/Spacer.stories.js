@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 
 import Spacer from "./Spacer";
@@ -9,6 +10,8 @@ export default {
     component: Spacer,
 };
 
-const Template = (args: Object) => <Spacer {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <Spacer {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});

@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode, Element as ReactElement} from "React";
 import React, { useEffect } from "react";
 
 import WithStickyFooter from "./WithStickyFooter";
@@ -14,12 +15,12 @@ export default {
     component: WithStickyFooter,
     decorators: [
         // Ensure page scroll is reset to the top when flipping between stories
-        (Story: Object) => {
+        (Story: Object): ReactNode => {
             useEffect(() => () => window.scrollTo(0, 0));
             return <Story />;
         },
         // Add ruler for demo purposes if no body content is supplied
-        (Story: Object, { args, parameters }: Object) => {
+        (Story: Object, { args, parameters }: Object): ReactNode => {
             const mainContentHeight =
                 parameters?.context?.mainContentHeight || 150;
             args.children = args.children ? (
@@ -39,10 +40,10 @@ export default {
     ],
     args: {
         footerContents: (
-            <ul>
+            (<ul>
                 <p>Line 1</p>
                 <p>Line 2</p>
-            </ul>
+            </ul>: ReactElement<"ul">)
         ),
     },
     parameters: {
@@ -50,7 +51,8 @@ export default {
     },
 };
 
-const Template = (args: Object) => {
+const Template = (args: Object): ReactElement<"div"> => {
+    (Template.args: any);
     const { children, ...remainingArgs } = args;
 
     return (
@@ -62,21 +64,23 @@ const Template = (args: Object) => {
     );
 };
 
-export const JustTheFooter = Template.bind({});
+export const JustTheFooter: typeof Template = Template.bind({});
 JustTheFooter.args = {
     children: <></>,
 };
 
-export const FooterWithExampleRulerLargerThanViewPort = Template.bind({});
+export const FooterWithExampleRulerLargerThanViewPort: typeof Template =
+    Template.bind({});
 
-export const FooterWithExampleRulerSmallerThanViewPort = Template.bind({});
+export const FooterWithExampleRulerSmallerThanViewPort: typeof Template =
+    Template.bind({});
 FooterWithExampleRulerSmallerThanViewPort.parameters = {
     context: {
         mainContentHeight: 20,
     },
 };
 
-export const FooterWithExampleList = Template.bind({});
+export const FooterWithExampleList: typeof Template = Template.bind({});
 FooterWithExampleList.args = {
     footerContents: (
         <FlatButton

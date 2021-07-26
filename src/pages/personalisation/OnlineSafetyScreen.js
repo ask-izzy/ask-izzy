@@ -1,5 +1,4 @@
 /* @flow */
-
 import * as React from "react";
 
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
@@ -91,4 +90,4 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
     }
 }
 
-export default MobileDetect(OnlineSafetyScreen);
+export default (MobileDetect(OnlineSafetyScreen): any);

@@ -1,12 +1,13 @@
 /* @flow */
 
+import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
 import Link from "../components/Link";
 import components from "../components";
 
 export default class StyleGuideList extends React.Component<{}, void> {
-    render() {
+    render(): ReactElement<"ul"> {
         return (
             <ul>
                 {Object.keys(components).sort().map(this.renderItem)}
@@ -14,7 +15,7 @@ export default class StyleGuideList extends React.Component<{}, void> {
         );
     }
 
-    renderItem(componentName: string) {
+    renderItem(componentName: string): ReactNode {
         return (
             <Link
                 to={`/styleGuide/component/${componentName}`}

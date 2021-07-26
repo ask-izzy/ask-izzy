@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element as ReactElement} from "React";
 import React from "react";
 import PropTypes from "proptypes";
 
@@ -40,17 +41,17 @@ type Props = {
 }
 
 class CrisisLineItem extends React.Component<Props, void> {
-    static displayName = "CrisisLineItem";
+    static displayName: ?string = "CrisisLineItem";
 
     static propTypes = {
         object: PropTypes.object.isRequired,
     };
 
-    static sampleProps = {default: {
+    static sampleProps: any = {default: {
         object: new iss.Service(fixtures.domesticviolence),
     }};
 
-    render() {
+    render(): ReactElement<"div"> | ReactElement<"span"> {
         const {
             object,
         } = this.props;

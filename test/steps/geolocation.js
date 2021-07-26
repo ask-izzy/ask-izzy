@@ -7,6 +7,7 @@
 /* eslint-disable no-use-before-define */
 
 import Yadda from "yadda";
+import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
@@ -14,7 +15,7 @@ import { gotoUrl } from "../support/webdriver";
 
 declare var IzzyStorage: Object;
 
-module.exports = (function() {
+module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library(dictionary)
         .given("control of geolocation", unpromisify(mockGeolocation))
         .given("I'm at $LATITUDE $LONGITUDE", unpromisify(sendCoords))
@@ -22,7 +23,7 @@ module.exports = (function() {
         .given("my location is $LATITUDE $LONGITUDE", unpromisify(setCoords))
         .when("I deny access to geolocation",
             unpromisify(disableGeolocation));
-})();
+})(): YaddaLibraryEnglish);
 
 /**
  * Install geolocation mock.

@@ -21,7 +21,11 @@ const filepath = path.resolve(
 module.exports = class WriteStatsPlugin {
 
     // get chunks by name and extensions
-    getChunks(json: Object, ext: string, chunkOrdering: Array<string>) {
+    getChunks(
+        json: Object,
+        ext: string,
+        chunkOrdering: Array<string>
+    ): Array<string> {
 
         let chunks: Array<string> = [];
         let allChunkNames = Object.keys(json.assetsByChunkName);

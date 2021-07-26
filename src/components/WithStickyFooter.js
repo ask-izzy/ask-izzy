@@ -7,8 +7,12 @@ type Props = {
 }
 
 class WithStickyFooter extends React.Component<Props> {
-    #onscreenIndicatorRef = React.createRef()
-    #footerRef = React.createRef()
+    #onscreenIndicatorRef: {current: null | React.ElementRef<'div'>} =
+        React.createRef()
+    #footerRef: {current: null | React.ElementRef<'footer'>} = React.createRef()
+    // This should be type "IntersectionObserver | null" but for some reason
+    // that causes eslint to bork
+    // $FlowIgnore
     #overlapObserver = null
 
     componentDidMount(): void {
@@ -34,7 +38,7 @@ class WithStickyFooter extends React.Component<Props> {
         this.#overlapObserver?.disconnect()
     }
 
-    render() {
+    render(): React.Element<"div"> {
         return (
             <div
                 className="WithStickyFooter"

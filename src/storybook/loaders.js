@@ -3,7 +3,7 @@ declare var clientEnvPath: string;
 
 let env
 
-export async function injectEnvVars() {
+export async function injectEnvVars(): Promise<{|env: any|}> {
     if (!env) {
         const res = await fetch(clientEnvPath)
         const envFile = await res.text()

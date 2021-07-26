@@ -3,6 +3,7 @@
 
 import assert from "assert";
 import Yadda from "yadda";
+import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
 import _ from "underscore";
 import { By } from "selenium-webdriver";
 
@@ -12,7 +13,7 @@ import { documentReady } from "./browser";
 import { matchClass, escapeXPathString } from "../support/selectors";
 import asyncFilter from "../support/async-filter";
 
-module.exports = (function() {
+module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library(dictionary)
         .when("I wait for $NUMBER results to load",
             unpromisify(waitForResultCount))
@@ -32,7 +33,7 @@ module.exports = (function() {
         .then("my results should not contain\n$table",
             unpromisify(assertNoSuchResults))
     ;
-})();
+})(): YaddaLibraryEnglish);
 
 async function waitForResultCount(
     expected: number,

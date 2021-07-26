@@ -2,7 +2,7 @@
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 import fetch from "node-fetch";
 
-export default function(STRAPI_URL: string = "") {
+export default function(STRAPI_URL: string = ""): any {
     if (typeof global.fetch === "undefined") {
         global.fetch = require("node-fetch");
     }

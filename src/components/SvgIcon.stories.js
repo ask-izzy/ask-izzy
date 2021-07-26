@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -9,13 +10,15 @@ export default {
     title: "Icons/SvgIcon",
     component: SvgIcon,
     args: {
-        onClick: action("clicked"),
+        onClick: (action("clicked"): any),
     },
 };
 
-const Template = (args: Object) => <SvgIcon {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <SvgIcon {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});
 Example.args = {
     viewBox: "0 0 100 100",
     children: (

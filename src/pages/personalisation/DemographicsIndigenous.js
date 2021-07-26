@@ -1,4 +1,5 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 /* eslint-disable no-unused-vars */
 import * as React from "react";
@@ -7,9 +8,9 @@ import { append } from "../../iss/Search";
 import icons from "../../icons";
 
 export default class DemographicsIndigenous extends BaseQuestion {
-    static title = "Indigenous";
+    static title: string = "Indigenous";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-indigenous",
         question:
             "Would you like Aboriginal & Torres Strait Islander " +

@@ -41,7 +41,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         };
     }
 
-    static contextType = routerContext;
+    static contextType: typeof routerContext = routerContext;
 
     _component: any;
 
@@ -120,7 +120,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             searchPagesLoaded: prevState.searchPagesLoaded + 1,
         }));
     }
-    loadNextSearchPage = this.loadNextSearchPage.bind(this)
+    loadNextSearchPage: () => Promise<void> = this.loadNextSearchPage.bind(this)
 
     issParams(): ?Object {
         // Build the search request.

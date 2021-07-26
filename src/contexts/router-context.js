@@ -48,7 +48,7 @@ type InjectRouterContextProps = {
 
 export const InjectRouterContext = (
     {matchedRoutes, children}: InjectRouterContextProps
-) => {
+): React.Node => {
     const {navigate, navigateInProgress} = getNavigateFunctions()
     const matchedRoute = matchedRoutes.pop()
 
@@ -77,7 +77,9 @@ export const InjectRouterContext = (
     )
 }
 
-export const useRouterContext = () => useContext(RouterContext).router
+export const useRouterContext =
+    (): $PropertyType<RouterContextObject, 'router'> =>
+        useContext(RouterContext).router
 
 function extractRouteProps(routeConfig) {
     return {...routeConfig.route.element.props}

@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 
 import Ndis from "./Ndis";
@@ -10,16 +11,18 @@ export default {
     component: Ndis,
 };
 
-const Template = (args: Object) => <Ndis {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <Ndis {...args} />;
+};
 
-export const Standard = Template.bind({});
+export const Standard: typeof Template = Template.bind({});
 Standard.args = {
     object: new ServiceFactory({
         ndis_approved: true,
     }),
 };
 
-export const StandardWithSpacer = Template.bind({});
+export const StandardWithSpacer: typeof Template = Template.bind({});
 StandardWithSpacer.args = {
     object: new ServiceFactory({
         ndis_approved: true,
@@ -27,7 +30,7 @@ StandardWithSpacer.args = {
     spacer: true,
 };
 
-export const Compact = Template.bind({});
+export const Compact: typeof Template = Template.bind({});
 Compact.args = {
     object: new ServiceFactory({
         ndis_approved: true,
@@ -35,7 +38,7 @@ Compact.args = {
     compact: true,
 };
 
-export const ServiceNotNDISApproved = Template.bind({});
+export const ServiceNotNDISApproved: typeof Template = Template.bind({});
 ServiceNotNDISApproved.args = {
     object: new ServiceFactory({
     }),

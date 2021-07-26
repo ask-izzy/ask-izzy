@@ -52,14 +52,16 @@ files.forEach((path) => {
 
     writeFileSync(outFile, `${fileHeader}
 
+import type { ElementProps as ReactElementProps } from "react"
+
 import BaseIcon from "./BaseIcon";
 
 export default class SvgIcon${className} extends BaseIcon {
-    static defaultProps = {
+    static defaultProps: ReactElementProps<typeof BaseIcon> = {
         iconClass: "${className}Icon",
     }
 
-    svgContent = \`
+    svgContent: string = \`
         ${svgContent}
     \`;
 }

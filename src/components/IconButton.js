@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element as ReactElement} from "React";
 import React from "react";
 import PropTypes from "proptypes";
 import classnames from "classnames";
@@ -13,7 +14,7 @@ type Props = {
 
 export default class IconButton extends React.Component<Props, void> {
 
-    static defaultProps = {
+    static defaultProps: any = {
         name: "button",
     }
 
@@ -21,13 +22,13 @@ export default class IconButton extends React.Component<Props, void> {
         onClick: PropTypes.func,
     };
 
-    static sampleProps = {
+    static sampleProps: any = {
         default: {
             children: "Button Text",
         },
     };
 
-    render() {
+    render(): ReactElement<"button"> {
         const {
             className,
             onClick,

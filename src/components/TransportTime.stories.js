@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 
 import TransportTime from "./TransportTime";
@@ -10,7 +11,7 @@ export default {
     title: "Service Components/TransportTime",
     component: TransportTime,
     args: {
-        location: new Location(fixtures.ixa.location, [
+        location: (new Location(fixtures.ixa.location, [
             {
                 mode: "DRIVING",
                 duration: {text: "22 minutes", value: 1},
@@ -29,19 +30,21 @@ export default {
                 distance: {text: "", value: 1},
                 status: "",
             },
-        ]),
+        ]): Location),
 
     },
 };
 
-const Template = (args: Object) => <TransportTime {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <TransportTime {...args} />;
+};
 
-export const Compact = Template.bind({});
+export const Compact: typeof Template = Template.bind({});
 Compact.args = {
     compact: true,
 };
 
-export const Expanded = Template.bind({});
+export const Expanded: typeof Template = Template.bind({});
 Expanded.args = {
     compact: false,
 };

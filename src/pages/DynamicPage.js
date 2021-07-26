@@ -1,6 +1,7 @@
 /* @flow */
 
 import * as React from "react";
+import type {Node as ReactNode} from "React";
 import Helmet from "react-helmet";
 
 import { makeTitle } from "../routes";
@@ -21,7 +22,7 @@ type ReactMarkdownQuoteProps = {
 }
 
 class DynamicPage extends React.Component<{}> {
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
 
     /**
@@ -30,8 +31,8 @@ class DynamicPage extends React.Component<{}> {
      * @param props - Thr Markdown props of a blockquote
      * @returns {JSX.Element} - returns either a callout or blockqupte
      */
-    renderEmbCallout = (props: ReactMarkdownQuoteProps) => {
-
+    renderEmbCallout: (props: ReactMarkdownQuoteProps) => ReactNode =
+    (props: ReactMarkdownQuoteProps) => {
         // Get the text content of the children
         const textContent = React.Children.map(props.children,
             paragraphElm => (
@@ -68,7 +69,7 @@ class DynamicPage extends React.Component<{}> {
     }
 
 
-    render() {
+    render(): ReactNode {
         const params = {
             "path": this.context.router.location.pathname,
         };

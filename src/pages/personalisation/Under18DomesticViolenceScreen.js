@@ -1,5 +1,4 @@
 /* @flow */
-
 import * as React from "react";
 
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
@@ -108,4 +107,4 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
 }
 
 
-export default MobileDetect(Under18DomesticViolenceScreen);
+export default (MobileDetect(Under18DomesticViolenceScreen): any);

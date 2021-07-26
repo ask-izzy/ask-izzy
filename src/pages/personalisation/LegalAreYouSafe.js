@@ -1,5 +1,4 @@
 /* @flow */
-
 import LegalSubcategories from "./LegalSubcategories";
 import AreYouSafe from "./AreYouSafe";
 

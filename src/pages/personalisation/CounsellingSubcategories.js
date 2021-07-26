@@ -1,4 +1,5 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
@@ -7,9 +8,9 @@ import icons from "../../icons";
 import * as React from "react";
 
 export default class CounsellingSubcategories extends BaseQuestion {
-    static title = "Counselling";
+    static title: string = "Counselling";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-counselling",
         question: "What issues are you dealing with?",
         answers: {

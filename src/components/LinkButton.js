@@ -6,7 +6,7 @@ import FlatButton from "./FlatButton";
 import Link from "./Link";
 
 export default class LinkButton extends Link {
-    onClickHandlerFactory = () => {
+    onClickHandlerFactory: (() => () => void) = () => {
         if (this.state.isInternal) {
             return () => {
                 this.context.router.navigate(this.state.path)
@@ -18,7 +18,7 @@ export default class LinkButton extends Link {
         }
     }
 
-    render() {
+    render(): React.Node {
         let {
             to,
             children,

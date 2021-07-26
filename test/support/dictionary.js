@@ -130,7 +130,7 @@ function numberConverter(str: string, done: callback): void {
 }
 
 /* eslint-disable no-control-regex, newline-after-var */
-const dictionary = new Yadda.Dictionary()
+const dictionary: typeof Yadda.types.Dictionary = new Yadda.Dictionary()
     .define("LATITUDE", /(\d+.\d+[NS])/, latitudeConverter)
     .define("LONGITUDE", /(\d+.\d+[EW])/, longitudeConverter)
     .define("lines", /([^\u0000]*)/, linesConverter)

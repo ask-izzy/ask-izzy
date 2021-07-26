@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import { addRouter } from "../storybook/decorators";
 
@@ -13,14 +14,16 @@ export default {
     decorators: [addRouter],
 };
 
-const Template = (args: Object) => <CrisisLineItem {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <CrisisLineItem {...args} />;
+};
 
-export const BasicService = Template.bind({});
+export const BasicService: typeof Template = Template.bind({});
 BasicService.args = {
     object: ServiceFactory(fixtures.ixa),
 };
 
-export const VicHousingServiceSpecialCase = Template.bind({});
+export const VicHousingServiceSpecialCase: typeof Template = Template.bind({});
 VicHousingServiceSpecialCase.args = {
     object: ServiceFactory({
         ...fixtures.ixa,
@@ -28,7 +31,8 @@ VicHousingServiceSpecialCase.args = {
     }),
 };
 
-export const NSWLink2HomeServiceSpecialCase = Template.bind({});
+export const NSWLink2HomeServiceSpecialCase: typeof Template =
+    Template.bind({});
 NSWLink2HomeServiceSpecialCase.args = {
     object: ServiceFactory({
         ...fixtures.ixa,

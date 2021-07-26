@@ -1,19 +1,21 @@
 /* @flow */
+import type {Node as ReactNode} from "React";
 import React from "react";
 import StrapiMarkdown from "./StrapiMarkdown";
 
 export default {
     title: "App Components/StrapiMarkdown",
     component: StrapiMarkdown,
-    argTypes: {},
+    argTypes: ({}: {...}),
 };
 
-const Template = (args: Object) => {
+const Template = (args: Object): ReactNode => {
+    (Template.args: any)
     window.STRAPI_URL = "/static/media/public"
     return <StrapiMarkdown {...args} />
 };
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});
 Example.args = {
     children: `
 # This is a Heading

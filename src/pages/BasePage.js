@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import Helmet from "react-helmet";
 import { makeTitle } from "../routes";
@@ -18,8 +19,8 @@ import routerContext from "../contexts/router-context";
 import type { RouterContextObject } from "../contexts/router-context";
 
 class BasePage extends React.Component<{}> {
-    static childContextTypes = {};
-    static contextType = routerContext;
+    static childContextTypes: any = {};
+    static contextType: any = routerContext;
 
     constructor(props: {}, context: RouterContextObject) {
         addPageLoadDependencies(context.router.location, "render")
@@ -35,7 +36,7 @@ class BasePage extends React.Component<{}> {
         closePageLoadDependencies(this.context.router.location, "render")
     }
 
-    render() {
+    render(): ReactNode {
         const { location, match } = this.context.router
         const pageTitle = makeTitle(
             match.props.title,

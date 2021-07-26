@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import ButtonListItem from "./ButtonListItem";
 import ListItem from "./ListItem";
@@ -76,7 +77,7 @@ type GeolocationButtonState = {
 
 // eslint-disable-next-line max-len
 class GeolocationButton extends React.Component<GeolocationButtonProps, GeolocationButtonState> {
-    static sampleProps = {
+    static sampleProps: any = {
         default: {},
     };
 
@@ -134,7 +135,7 @@ class GeolocationButton extends React.Component<GeolocationButtonProps, Geolocat
             });
     }
 
-    render() {
+    render(): ReactNode {
         if (this.state.geolocation === "RUNNING") {
             return <RunningGeolocation />;
         } else if (this.state.geolocation === "COMPLETE") {

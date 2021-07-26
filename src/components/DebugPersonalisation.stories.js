@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 
 import DebugPersonalisation from "./DebugPersonalisation";
@@ -12,9 +13,11 @@ export default {
     decorators: [setPersonalisationAnswers],
 };
 
-const Template = (args: Object) => <DebugPersonalisation {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <DebugPersonalisation {...args} />;
+};
 
-export const HousingCategory = Template.bind({});
+export const HousingCategory: typeof Template = Template.bind({});
 HousingCategory.args = {
     items: getCategory("housing")?.personalisation,
     search: getCategory("housing")?.search,

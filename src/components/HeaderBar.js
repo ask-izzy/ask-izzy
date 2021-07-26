@@ -11,7 +11,7 @@ type Props = {
 }
 
 class HeaderBar extends React.Component<Props, void> {
-    static sampleProps = {
+    static sampleProps: any = {
         default: {
             primaryText: "Primary Text",
             secondaryText: "Secondary Text",
@@ -19,7 +19,7 @@ class HeaderBar extends React.Component<Props, void> {
         },
     };
 
-    render() {
+    render(): React.Element<"div"> {
         // Search banner is the default
         let headerBarClassName = "HeaderBar";
 
@@ -44,7 +44,7 @@ class HeaderBar extends React.Component<Props, void> {
         );
     }
 
-    renderSecondaryText() {
+    renderSecondaryText(): void | React.Element<"div"> {
         if (this.props.secondaryText) {
             return (
                 <div className="secondary"

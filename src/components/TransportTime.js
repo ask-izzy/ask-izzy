@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 import classnames from "classnames";
 import { titleize } from "underscore.string";
@@ -20,7 +21,7 @@ class TransportTime extends React.Component<{
     // works as an ugly workaround.
     withoutLink?: boolean,
 }, void> {
-    static defaultProps = {
+    static defaultProps: any = {
         compact: false,
     };
 
@@ -28,7 +29,7 @@ class TransportTime extends React.Component<{
         super();
     }
 
-    static sampleProps = {
+    static sampleProps: any = {
         compact: {
             location: new Location(fixtures.ixa.location, [{
                 mode: "WALK",
@@ -49,7 +50,7 @@ class TransportTime extends React.Component<{
         },
     };
 
-    render() {
+    render(): null | ReactElement<"div"> {
         if (!this.props.location.isConfidential()) {
             return this.renderPublic()
         } else {
@@ -57,7 +58,7 @@ class TransportTime extends React.Component<{
         }
     }
 
-    renderPublic() {
+    renderPublic(): ReactElement<"div"> {
         const {travelTime} = this.props.location;
 
         if (!travelTime) {
@@ -80,7 +81,7 @@ class TransportTime extends React.Component<{
         );
     }
 
-    renderTravelTimes(travelTimes: Object) {
+    renderTravelTimes(travelTimes: Object): any {
         return travelTimes.map((travel, key) => {
             let icon = "";
             let method = "";
@@ -141,7 +142,7 @@ class TransportTime extends React.Component<{
 
     }
 
-    renderDivider() {
+    renderDivider(): null | ReactNode {
         if (!this.props.compact) {
             return (
                 <Spacer />
@@ -161,7 +162,7 @@ class TransportTime extends React.Component<{
         });
     }
 
-    renderDirections() {
+    renderDirections(): ReactElement<"span"> | ReactNode {
         if (!this.props.compact) {
             const linkText = (
                 <span className="googleMapsLink">
@@ -190,7 +191,7 @@ class TransportTime extends React.Component<{
         return <span />;
     }
 
-    renderSuburb() {
+    renderSuburb(): ReactElement<"span"> {
         return (
             <span className="location">
                 {titleize(this.props.location.suburb)}

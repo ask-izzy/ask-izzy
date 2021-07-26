@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import { addRouter } from "../storybook/decorators";
 
@@ -11,6 +12,8 @@ export default {
     decorators: [addRouter],
 };
 
-const Template = (args: Object) => <NavBar {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <NavBar {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});

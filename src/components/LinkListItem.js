@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import classnames from "classnames";
 
@@ -14,14 +15,14 @@ type Props = ListItemProps & {
 }
 
 export default class LinkListItem extends React.Component<Props, void> {
-    static sampleProps = {
+    static sampleProps: any = {
         default: {
             to: "example.com",
             ...ListItem.sampleProps,
         },
     };
 
-    render() {
+    render(): ReactNode {
         const {
             className,
             ...rest

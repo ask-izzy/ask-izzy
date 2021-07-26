@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 import PropTypes from "proptypes";
 import fixtures from "../../fixtures/services";
@@ -25,17 +26,17 @@ import { titleize } from "underscore.string";
 class ResultListItem extends React.Component<{
     service: iss.Service,
 }, void> {
-    static displayName = "ResultListItem";
+    static displayName: ?string = "ResultListItem";
 
     static propTypes = {
         service: PropTypes.instanceOf(iss.Service).isRequired,
     };
 
-    static sampleProps = {default: {
+    static sampleProps: any = {default: {
         service: new iss.Service(fixtures.ixa),
     }};
 
-    renderLocation(location: Object) {
+    renderLocation(location: Object): ReactElement<"span"> {
 
         let suburb = location.suburb;
 
@@ -53,7 +54,7 @@ class ResultListItem extends React.Component<{
         );
     }
 
-    render() {
+    render(): ReactNode {
         const {
             service,
         } = this.props;

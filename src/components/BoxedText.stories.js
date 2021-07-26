@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 
 import BoxedText from "./BoxedText";
@@ -9,14 +10,16 @@ export default {
     component: BoxedText,
 };
 
-const Template = (args: Object) => <BoxedText {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <BoxedText {...args} />;
+};
 
-export const BasicText = Template.bind({});
+export const BasicText: typeof Template = Template.bind({});
 BasicText.args = {
     children: "Example Text",
 };
 
-export const JSXBody = Template.bind({});
+export const JSXBody: typeof Template = Template.bind({});
 JSXBody.args = {
     children: <div>
       The BoxedText body takes JSX elements so it can contain content

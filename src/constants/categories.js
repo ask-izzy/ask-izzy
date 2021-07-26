@@ -6,7 +6,7 @@ import Category from "./Category"
 import personalisation from "../pages/personalisation";
 
 const categories = [
-    new Category({
+    (new Category({
         name: "Housing",
         byline: "A place to stay",
         icon: icons.House,
@@ -27,8 +27,8 @@ const categories = [
                 personalisation.HousingAreYouSafe
             ),
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Food",
         byline: "Something to eat",
         icon: icons.Food,
@@ -42,8 +42,8 @@ const categories = [
             personalisation.Location,
             personalisation.FoodSubcategories,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Everyday things",
         byline: "Swags, clothes, food vouchers etc.",
         icon: icons.Things,
@@ -55,8 +55,8 @@ const categories = [
             personalisation.Location,
             personalisation.EverydayThingsSubcategories,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Domestic & family violence help",
         byline: "Scared of partner or family member",
         icon: icons.EscapeViolence,
@@ -74,8 +74,8 @@ const categories = [
             personalisation.LgbtiqaDomesticViolenceScreen,
             personalisation.ServiceList,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Health",
         byline: "Physical, mental, emotional",
         icon: icons.Health,
@@ -92,8 +92,8 @@ const categories = [
             ),
             personalisation.DemographicsIndigenous,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Centrelink",
         byline: "Access to services",
         icon: icons.Centrelink,
@@ -104,8 +104,8 @@ const categories = [
         personalisation: [
             personalisation.Location,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Money help",
         byline: "Emergency funds, bills etc.",
         icon: icons.Money,
@@ -116,8 +116,8 @@ const categories = [
             personalisation.Location,
             personalisation.MoneySubcategories,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Support & counselling",
         byline: "Relationships, gambling & LGBTIQA+",
         icon: icons.Support,
@@ -133,8 +133,8 @@ const categories = [
             ),
             personalisation.DemographicsIndigenous,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Legal",
         byline: "Police, law & fines",
         icon: icons.Legal,
@@ -151,8 +151,8 @@ const categories = [
             ),
             personalisation.DemographicsIndigenous,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Drugs & alcohol",
         byline: "Support & assistance",
         icon: icons.Addiction,
@@ -166,8 +166,8 @@ const categories = [
             personalisation.AddictionSubcategories,
             personalisation.DemographicsIndigenous,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Life skills & education",
         byline: "Everyday skills & training",
         icon: icons.Skills,
@@ -180,8 +180,8 @@ const categories = [
             personalisation.LifeSkillsSubcategories,
             personalisation.DemographicsIndigenous,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Finding work",
         byline: "Earning & volunteering",
         icon: icons.Job,
@@ -193,8 +193,8 @@ const categories = [
             personalisation.Location,
             personalisation.JobSubcategories,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Facilities",
         byline: "Toilets",
         icon: icons.Facilities,
@@ -206,8 +206,8 @@ const categories = [
         personalisation: [
             personalisation.Location,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Something to do",
         byline: "Libraries, Community Hubs etc.",
         icon: icons.Entertainment,
@@ -220,8 +220,8 @@ const categories = [
         personalisation: [
             personalisation.Location,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Technology",
         byline: "Wifi, charging etc.",
         icon: icons.Tech,
@@ -231,8 +231,8 @@ const categories = [
         personalisation: [
             personalisation.Location,
         ],
-    }),
-    new Category({
+    }): Category),
+    (new Category({
         name: "Advocacy",
         byline: "Complaints and advice",
         icon: icons.Advocacy,
@@ -244,7 +244,7 @@ const categories = [
             personalisation.Location,
             personalisation.AdvocacySubcategories,
         ],
-    }),
+    }): Category),
 
 ];
 

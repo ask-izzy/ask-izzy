@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -12,11 +13,12 @@ export default {
     args: {
         primaryText: "Primary Text",
         secondaryText: "Secondary text",
-        onClick: action("clicked"),
+        onClick: (action("clicked"): any),
     },
 };
 
-const Template = (args: Object) => {
+const Template = (args: Object): ReactNode => {
+    (Template.args: any)
     const [checked, setChecked] = useState(args.checked)
 
     return (
@@ -35,17 +37,17 @@ const Template = (args: Object) => {
     )
 };
 
-export const RadioInput = Template.bind({});
+export const RadioInput: typeof Template = Template.bind({});
 RadioInput.args = {
     type: "radio",
 };
 
-export const CheckboxInput = Template.bind({});
+export const CheckboxInput: typeof Template = Template.bind({});
 CheckboxInput.args = {
     type: "checkbox",
 };
 
-export const WithIcons = Template.bind({});
+export const WithIcons: typeof Template = Template.bind({});
 WithIcons.args = {
     type: "checkbox",
     checkedIcon: <icons.DemographicPets />,

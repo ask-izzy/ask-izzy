@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element as ReactElement} from "React";
 import React from "react";
 import moment from "moment-timezone";
 import _ from "underscore";
@@ -51,7 +52,7 @@ type Props = {
 
 // eslint-disable-next-line max-len
 export default class CollapsedOpeningTimes extends React.Component<Props, void> {
-    static sampleProps = {
+    static sampleProps: any = {
         "between Twice in one day (@1pm wed)": fixture(false, [{
             day: "Wednesday",
             open: "09:00:00",
@@ -112,7 +113,7 @@ export default class CollapsedOpeningTimes extends React.Component<Props, void> 
         })
     }
 
-    render() {
+    render(): ReactElement<"div"> {
         const order = [
             "Monday",
             "Tuesday",

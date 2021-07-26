@@ -21,7 +21,7 @@ class RegexpForm extends Form {
         this.form = new RegExp(regex, "i");
     }
 
-    match(input: string) {
+    match(input: string): boolean {
         if (this.ignoreReferrals) {
             // Remove any mention of referrals to other services
             // if we aren't looking for referrals
@@ -72,7 +72,7 @@ class Keywords extends RegexpForm {
         this.ignoreReferrals = !forms.includes(referralsRegexp)
     }
 
-    match(input: string) {
+    match(input: string): boolean {
         input = input
             /* FIXME: This is a hack to handle the fact that word tokenizing
              * regex needs two spaces between consecutive terms */
@@ -108,7 +108,7 @@ class ListForm extends Form {
 }
 
 class AnyOf extends ListForm {
-    match(input: string) {
+    match(input: string): any {
         return _.some(this.forms, form => form.match(input));
     }
 }
@@ -118,7 +118,7 @@ export function anyOf(...forms: Array<Form|string|RegExp>): AnyOf {
 }
 
 class AllOf extends ListForm {
-    match(input: string) {
+    match(input: string): any {
         return _.every(this.forms, form => form.match(input));
     }
 }
@@ -128,7 +128,7 @@ export function allOf(...forms: Array<Form|string|RegExp>): AllOf {
 }
 
 class Not extends AnyOf {
-    match(input: string) {
+    match(input: string): any {
         return !super.match(input);
     }
 }
@@ -177,4 +177,4 @@ export function provides(props: {
     return new ServiceProvision(props);
 }
 
-export const referralsRegexp = /referrals?/gi;
+export const referralsRegexp: RegExp = /referrals?/gi;

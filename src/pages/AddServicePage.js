@@ -1,4 +1,5 @@
 /* @flow */
+import type {Element as ReactElement} from "React";
 import React from "react";
 
 import components from "../components";
@@ -26,7 +27,7 @@ class AddServicePage extends React.Component<Props, State> {
         this.handleMessage = this.handleMessage.bind(this);
     }
 
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
     componentDidMount(): void {
         if (typeof window !== "undefined") {
@@ -79,7 +80,7 @@ class AddServicePage extends React.Component<Props, State> {
         }
     }
 
-    render() {
+    render(): ReactElement<"div"> {
         const body = this.state.isFormDone ? this.renderSuccessMessage()
             : this.renderForm();
 
@@ -97,7 +98,7 @@ class AddServicePage extends React.Component<Props, State> {
         );
     }
 
-    renderSuccessMessage() {
+    renderSuccessMessage(): ReactElement<"div"> {
         return (
             <div>
                 <p>Thank you. The information you provided may be adjusted for
@@ -107,7 +108,7 @@ class AddServicePage extends React.Component<Props, State> {
         );
     }
 
-    renderForm() {
+    renderForm(): ReactElement<"div"> {
         return (
             <div>
                 <p>

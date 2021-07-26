@@ -13,8 +13,8 @@ function canUseStorageImpl(storageImpl: Storage): boolean {
 }
 
 // Start with a sure thing and move on to more reliable stores
-export let persistentStore = ObjectStorage();
-export let sessionStore = ObjectStorage();
+export let persistentStore: any | Storage = ObjectStorage();
+export let sessionStore: Storage = ObjectStorage();
 let privateModeStore: ?Object;
 
 try {

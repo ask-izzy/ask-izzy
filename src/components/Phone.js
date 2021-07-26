@@ -1,4 +1,5 @@
 /* @flow */
+import type {Element as ReactElement} from "React";
 import React from "react";
 import { titleize } from "underscore.string";
 
@@ -15,7 +16,7 @@ type Props = phone & {
 }
 
 class Phone extends React.Component<Props, void> {
-    static sampleProps = {default: {
+    static sampleProps: any = {default: {
         "comment": "Here is a phone number with a long comment" +
             ", like, a really long comment",
         "kind": "phone",
@@ -43,9 +44,9 @@ class Phone extends React.Component<Props, void> {
             ...this.props.analyticsEventDetails,
         });
     }
-    recordClick = this.recordClick.bind(this)
+    recordClick: any = this.recordClick.bind(this)
 
-    render() {
+    render(): ReactElement<"div"> {
         let contactButtonClassName = "ContactButton";
         let phonebutton = <icons.Phone />;
 

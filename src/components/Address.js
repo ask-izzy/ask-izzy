@@ -1,4 +1,5 @@
 /* @flow */
+import type {Element as ReactElement} from "React";
 import React from "react";
 import icons from "../icons";
 import ScreenReader from "./ScreenReader";
@@ -9,7 +10,7 @@ type Props = {
 }
 
 class Address extends React.Component<Props, void> {
-    static sampleProps = {
+    static sampleProps: any = {
         complex: {
             location: new Location({
                 "building": "Hamy building",
@@ -35,7 +36,7 @@ class Address extends React.Component<Props, void> {
         },
     };
 
-    render() {
+    render(): ReactElement<"div"> {
         let location = this.props.location;
 
         return (

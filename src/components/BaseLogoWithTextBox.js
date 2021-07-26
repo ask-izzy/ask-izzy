@@ -13,7 +13,7 @@ type Props = {
 }
 
 export default class BaseLogoWithTextBox extends React.Component<Props, void> {
-    static contextTypes = {
+    static contextTypes: any = {
         router: PropTypes.object.isRequired,
     };
 

@@ -1,17 +1,20 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import CalloutBox from "./CalloutBox";
 
 export default {
     title: "Basic UI Components/CalloutBox",
     component: CalloutBox,
-    argTypes: {},
+    argTypes: ({}: {...}),
 };
 
-const Template = (args: Object) => <CalloutBox {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <CalloutBox {...args} />;
+};
 
-export const BasicText = Template.bind({});
+export const BasicText: typeof Template = Template.bind({});
 BasicText.args = {
     position: "top",
     calloutBoxes: [

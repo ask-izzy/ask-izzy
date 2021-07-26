@@ -1,4 +1,5 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
@@ -12,9 +13,9 @@ function ageGroups(
 }
 
 export default class Age extends BaseQuestion {
-    static title = "Age";
+    static title: string = "Age";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "age",
         question: "How old are you?",
         answers: {

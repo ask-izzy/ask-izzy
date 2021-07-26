@@ -19,7 +19,7 @@ type Props = {
 export default function StrapiMarkdown({
     children,
     renderers: additionalRenderers,
-}: Props) {
+}: Props): ReactNode {
     function absoluteImageUrl(uri: string): string {
         // Strapi returns a relative image url, we need to change
         // it to point to our content server.

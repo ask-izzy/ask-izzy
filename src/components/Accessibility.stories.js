@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import Accessibility from "./Accessibility";
 import iss from "../iss";
@@ -8,33 +9,36 @@ import fixtures from "../../fixtures/services";
 export default {
     title: "Service Components/Accessibility",
     component: Accessibility,
-    argTypes: {},
+    argTypes: ({}: {...}),
 };
 
-const Template = (args: Object) => <Accessibility {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <Accessibility {...args} />
+};
 
-export const ServiceWithFullAccess = Template.bind({});
+export const ServiceWithFullAccess: typeof Template = Template.bind({});
 ServiceWithFullAccess.args = {
     object: new iss.Service(
         {...fixtures.susansHouse, accessibility: "fullaccess"}
     ),
 };
 
-export const ServiceWithAccess = Template.bind({});
+export const ServiceWithAccess: typeof Template = Template.bind({});
 ServiceWithAccess.args = {
     object: new iss.Service(
         {...fixtures.susansHouse, accessibility: "access"}
     ),
 };
 
-export const ServiceWithNoAccess = Template.bind({});
+export const ServiceWithNoAccess: typeof Template = Template.bind({});
 ServiceWithNoAccess.args = {
     object: new iss.Service(
         {...fixtures.susansHouse, accessibility: "nocccess"}
     ),
 };
 
-export const ServiceWithoutAccessibilityInfo = Template.bind({});
+export const ServiceWithoutAccessibilityInfo: typeof Template =
+    Template.bind({});
 ServiceWithoutAccessibilityInfo.args = {
     object: new iss.Service(fixtures.susansHouse),
 };

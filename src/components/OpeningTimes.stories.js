@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import moment from "moment-timezone";
 
@@ -16,9 +17,11 @@ export default {
     decorators: [mockedTimeDecorator],
 };
 
-const Template = (args: Object) => <OpeningTimes {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <OpeningTimes {...args} />;
+};
 
-export const CurrentlyOpen = Template.bind({});
+export const CurrentlyOpen: typeof Template = Template.bind({});
 addTimesToStory(CurrentlyOpen, [
     {
         day: "Wednesday",
@@ -27,7 +30,7 @@ addTimesToStory(CurrentlyOpen, [
     },
 ])
 
-export const OpenForDays = Template.bind({});
+export const OpenForDays: typeof Template = Template.bind({});
 addTimesToStory(OpenForDays, [
     {
         day: "Wednesday",
@@ -41,7 +44,7 @@ addTimesToStory(OpenForDays, [
     },
 ]);
 
-export const CurrentlyClosed = Template.bind({});
+export const CurrentlyClosed: typeof Template = Template.bind({});
 addTimesToStory(CurrentlyClosed, [
     {
         day: "Thursday",
@@ -50,7 +53,7 @@ addTimesToStory(CurrentlyClosed, [
     },
 ]);
 
-export const ClosedForDays = Template.bind({});
+export const ClosedForDays: typeof Template = Template.bind({});
 addTimesToStory(ClosedForDays, [
     {
         day: "Friday",
@@ -59,7 +62,7 @@ addTimesToStory(ClosedForDays, [
     },
 ]);
 
-export const OpenLaterToday = Template.bind({});
+export const OpenLaterToday: typeof Template = Template.bind({});
 addTimesToStory(OpenLaterToday, [
     {
         day: "Wednesday",
@@ -68,7 +71,7 @@ addTimesToStory(OpenLaterToday, [
     },
 ]);
 
-export const OpenTomorrowMorning = Template.bind({});
+export const OpenTomorrowMorning: typeof Template = Template.bind({});
 addTimesToStory(OpenTomorrowMorning, [
     {
         day: "Thursday",
@@ -77,7 +80,7 @@ addTimesToStory(OpenTomorrowMorning, [
     },
 ]);
 
-export const ClosedEarlierToday = Template.bind({});
+export const ClosedEarlierToday: typeof Template = Template.bind({});
 addTimesToStory(ClosedEarlierToday, [
     {
         day: "Wednesday",
@@ -86,7 +89,7 @@ addTimesToStory(ClosedEarlierToday, [
     },
 ]);
 
-export const UnsureIfOpen = Template.bind({});
+export const UnsureIfOpen: typeof Template = Template.bind({});
 addTimesToStory(UnsureIfOpen, [
     {
         day: "Wednesday",
@@ -96,16 +99,16 @@ addTimesToStory(UnsureIfOpen, [
     },
 ], undefined, null);
 
-export const ClosedWithNoData = Template.bind({});
+export const ClosedWithNoData: typeof Template = Template.bind({});
 addTimesToStory(ClosedWithNoData, [], undefined, false);
 
-export const OpenWithNoData = Template.bind({});
+export const OpenWithNoData: typeof Template = Template.bind({});
 addTimesToStory(OpenWithNoData, [], undefined, true);
 
-export const UnsureWithNoData = Template.bind({});
+export const UnsureWithNoData: typeof Template = Template.bind({});
 addTimesToStory(UnsureWithNoData, [], undefined, null);
 
-export const InvalidTimes = Template.bind({});
+export const InvalidTimes: typeof Template = Template.bind({});
 addTimesToStory(InvalidTimes, [
     {
         day: "Wednesday",
@@ -118,7 +121,7 @@ addTimesToStory(InvalidTimes, [
 export function mockedTimeDecorator(
     Story: Object,
     {parameters}: Object
-) {
+): ReactNode {
     const mockedCurrentTime = parameters?.context?.mockedCurrentTime
     return <>
         <Story/>

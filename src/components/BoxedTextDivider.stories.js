@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 
 import BoxedTextDivider from "./BoxedTextDivider";
@@ -9,6 +10,8 @@ export default {
     component: BoxedTextDivider,
 };
 
-const Template = (args: Object) => <BoxedTextDivider {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <BoxedTextDivider {...args} />;
+};
 
-export const Basic = Template.bind({});
+export const Basic: typeof Template = Template.bind({});

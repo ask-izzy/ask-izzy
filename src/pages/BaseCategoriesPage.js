@@ -27,7 +27,7 @@ type State = {
 
 class BaseCategoriesPage<ChildProps = {...}, ChildState = {...}>
     extends React.Component<ChildProps, State & ChildState> {
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
     constructor(props: Object, context: Object) {
         super(props, context);

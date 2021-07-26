@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React, {useEffect} from "react";
 import { MemoryRouter } from "react-router-dom";
 import {LoadScript} from "@react-google-maps/api";
@@ -10,14 +11,14 @@ import RouterContext from "../contexts/router-context";
 import { DebugModeProvider } from "../contexts/debug-mode-context";
 import createApolloClient from "../utils/apolloClient";
 
-export function addRouter(Story: Object) {
+export function addRouter(Story: Object): ReactNode {
     return <MemoryRouter><Story/></MemoryRouter>
 }
 
 export function addGoogleMapsScript(
     Story: Object,
     { loaded: { env } }: Object
-) {
+): ReactNode {
     if (!env?.GOOGLE_API_KEY) {
         throw new Error("Google API key must be loaded")
     }
@@ -35,7 +36,7 @@ export function addGoogleMapsScript(
 export function setPersonalisationAnswers(
     Story: Object,
     {parameters}: Object
-) {
+): ReactNode {
     const answers = parameters?.context?.personalisationAnswers || {}
     setAnswers(answers)
     useEffect(() => () => clearAnswers(answers))
@@ -60,14 +61,17 @@ export function setPersonalisationAnswers(
 export function setRouterContext(
     Story: Object,
     {parameters}: Object
-) {
+): ReactNode {
     const router = parameters?.context?.router || {}
     return <RouterContext.Provider value={{router}}>
         <Story/>
     </RouterContext.Provider>
 }
 
-export function setDebugModeContext(Story: Object, {parameters}: Object) {
+export function setDebugModeContext(
+    Story: Object,
+    {parameters}: Object
+): ReactNode {
     const debugMode = parameters?.context?.debugMode
     return (
         <DebugModeProvider initialDebugMode={debugMode}>
@@ -77,7 +81,7 @@ export function setDebugModeContext(Story: Object, {parameters}: Object) {
 }
 
 export function setApolloProvider(Story: Object,
-    { loaded: { env } }: Object) {
+    { loaded: { env } }: Object): ReactNode {
     console.log(env)
     window.STRAPI_URL = env.STRAPI_URL
     return (

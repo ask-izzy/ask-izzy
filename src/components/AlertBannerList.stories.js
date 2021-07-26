@@ -1,4 +1,5 @@
 /* @flow */
+import type {Node as ReactNode} from "React";
 import React from "react";
 
 import AlertBannerList from "./AlertBannerList";
@@ -27,14 +28,16 @@ const resultsPageApolloClient = {
     ],
 }
 
-const Template = (args: Object) => <AlertBannerList {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <AlertBannerList {...args} />;
+};
 
-export const ThreeBanners = Template.bind({});
+export const ThreeBanners: typeof Template = Template.bind({});
 ThreeBanners.parameters = {
     apolloClient: resultsPageApolloClient,
 };
 
-export const InlineStyle = Template.bind({});
+export const InlineStyle: typeof Template = Template.bind({});
 InlineStyle.args = {
     format: "inline",
 };

@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 
 import QuickExit from "./QuickExit";
@@ -9,18 +10,20 @@ export default {
     component: QuickExit,
 };
 
-const Template = (args: Object) => <QuickExit {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <QuickExit {...args} />;
+};
 
-export const ExampleDefault = Template.bind({});
+export const ExampleDefault: typeof Template = Template.bind({});
 
-export const ExampleCustom = Template.bind({});
+export const ExampleCustom: typeof Template = Template.bind({});
 ExampleCustom.args = {
     redirectUri: "http://google.com",
     tooltip: "Test Tool tip",
     className: "button-container",
 };
 
-export const ExampleCustomFixedSize = Template.bind({});
+export const ExampleCustomFixedSize: typeof Template = Template.bind({});
 ExampleCustomFixedSize.args = {
     redirectUri: "http://google.com",
     tooltip: "Test Tool tip Fixed Size",

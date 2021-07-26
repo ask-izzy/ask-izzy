@@ -3,6 +3,7 @@
 /* eslint-disable max-len */
 
 import React from "react";
+import type {Element as ReactElement} from "React";
 import classnames from "classnames";
 
 type Props = {
@@ -11,7 +12,7 @@ type Props = {
 
 export default class SvgIconQuestionMark extends React.Component<Props, void> {
 
-    render() {
+    render(): ReactElement<"span"> {
         const {className, ...rest} = this.props;
         const classes = classnames(
             "QuestionMarkIcon",

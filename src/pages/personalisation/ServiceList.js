@@ -1,4 +1,5 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
@@ -6,9 +7,9 @@ import icons from "../../icons";
 import Location from "./Location";
 
 export default class ServiceList extends BaseQuestion {
-    static title = "Service";
+    static title: string = "Service";
 
-    static defaultProps = {
+    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "service-list",
         question: "What best describes what you need?",
         byline: "All of your answers are private and anonymous",

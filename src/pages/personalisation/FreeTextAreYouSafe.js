@@ -1,5 +1,4 @@
 /* @flow */
-
 import AreYouSafe from "./AreYouSafe";
 import storage from "../../storage";
 import ViolenceKeywords from "../../constants/free-text-keywords";

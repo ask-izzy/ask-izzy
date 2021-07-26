@@ -213,7 +213,7 @@ function QuestionStepper(
 QuestionStepper.defaultProps = {
     intro: false,
     resultsPage: false,
-    results: [],
+    results: ([]: Array<any>),
     home: false,
     location: null,
     onClear: null,

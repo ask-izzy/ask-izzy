@@ -43,7 +43,7 @@ export default class SitesMap extends React.Component<Props, State> {
         };
     }
 
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
     componentDidMount(): void {
         this.setState({coords: storage.getCoordinates()});
@@ -77,7 +77,7 @@ export default class SitesMap extends React.Component<Props, State> {
      *
      * @returns True if they match, false if not
      */
-    sitesListMatch(sitesA: Array<Site>, sitesB: Array<Site>) {
+    sitesListMatch(sitesA: Array<Site>, sitesB: Array<Site>): boolean {
         if (sitesA.length !== sitesB.length) {
             return false
         }
@@ -107,7 +107,7 @@ export default class SitesMap extends React.Component<Props, State> {
     }
 
 
-    render() {
+    render(): React.Element<"div"> {
         return (
             <div className="SitesMap">
                 {this.state.mapsApi ?

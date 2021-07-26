@@ -2,6 +2,7 @@
 /* eslint-disable max-len */
 
 import React from "react";
+import type {Element as ReactElement} from "React";
 import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
@@ -11,9 +12,9 @@ import routerContext from "../contexts/router-context";
 type Props = {}
 
 export default class NotFoundStaticPage extends React.Component<Props, void> {
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
-    render() {
+    render(): ReactElement<"div"> {
 
         return (
             <div

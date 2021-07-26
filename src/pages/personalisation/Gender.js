@@ -1,12 +1,13 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
 
 export default class Gender extends BaseQuestion {
-    static title = "Gender";
+    static title: string = "Gender";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "gender",
         question: "Do you identify as…",
         answers: {

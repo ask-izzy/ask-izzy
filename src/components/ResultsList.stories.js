@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import { addRouter } from "../storybook/decorators";
 
@@ -13,9 +14,11 @@ export default {
     decorators: [addRouter],
 };
 
-const Template = (args: Object) => <ResultsList {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <ResultsList {...args} />;
+};
 
-export const TwoServices = Template.bind({});
+export const TwoServices: typeof Template = Template.bind({});
 TwoServices.args = {
     results: [
         ServiceFactory(fixtures.ixa),
@@ -23,7 +26,7 @@ TwoServices.args = {
     ],
 };
 
-export const IncludesCrisisLine = Template.bind({});
+export const IncludesCrisisLine: typeof Template = Template.bind({});
 IncludesCrisisLine.args = {
     results: [
         ServiceFactory(fixtures.domesticviolence),

@@ -22,14 +22,14 @@ export default class StaticPage extends React.Component<Props> {
         className: "",
     };
 
-    static sampleProps = {
+    static sampleProps: any = {
         title: "Food Info",
         bannerName: "food",
     };
 
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
-    render() {
+    render(): React.Element<"div"> {
 
         return (
             <div className={`StaticPage ${this.props.className || ""}`}>

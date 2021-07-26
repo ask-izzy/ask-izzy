@@ -12,7 +12,7 @@ const WEBPACK_PORT = parseInt(process.env.PORT || "") + 1 || 3001;
 requireVars();
 
 // Initialize express server
-const server = express();
+const server: any = express();
 
 // React pages aren't etag-friendly
 server.set("etag", false);

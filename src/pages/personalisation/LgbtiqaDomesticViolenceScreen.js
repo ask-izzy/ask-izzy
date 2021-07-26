@@ -1,5 +1,4 @@
 /* @flow */
-
 import * as React from "react";
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
@@ -162,4 +161,4 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
 }
 
 
-export default MobileDetect(LgbtiqaDomesticViolenceScreen);
+export default (MobileDetect(LgbtiqaDomesticViolenceScreen): any);

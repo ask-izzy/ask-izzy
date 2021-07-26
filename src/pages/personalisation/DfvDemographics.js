@@ -1,4 +1,5 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import * as React from "react";
 import BaseMultiQuestion from "./BaseMultiQuestion";
@@ -22,9 +23,9 @@ const LGBT_BREADCRUMB_ICON = (
 )
 
 export default class DfvDemographics extends BaseMultiQuestion {
-    static title = "Personal";
+    static title: string = "Personal";
     static propTypes = BaseMultiQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: ReactElementConfig<typeof BaseMultiQuestion> = {
         name: "dfv-demographics",
         question: "Do any of these apply to you?",
         byline: "All of your answers are private and anonymous",

@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element as ReactElement} from "React";
 import React from "react";
 import classnames from "classnames";
 
@@ -19,14 +20,14 @@ export type ListItemProps = {
 }
 
 export default class ListItem extends React.Component<ListItemProps, void> {
-    static sampleProps = {
+    static sampleProps: any = {
         default: {
             primaryText: "Link Text",
             secondaryText: "Secondary Text",
         },
     };
 
-    render() {
+    render(): ReactElement<string> {
         let {
             rootElement,
             className,

@@ -3,7 +3,7 @@
 
 const path = require("path");
 
-const assetsPath = path.join(__dirname, "../public/static");
+const assetsPath: string = path.join(__dirname, "../public/static");
 
 module.exports = {
     devtool: "source-map",
@@ -23,7 +23,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: (/\.js$/: RegExp),
                 use: ["babel-loader"],
             },
         ],

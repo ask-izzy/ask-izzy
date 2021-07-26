@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element as ReactElement} from "React";
 import React from "react";
 import iss from "../iss";
 import fixtures from "../../fixtures/services";
@@ -12,13 +13,13 @@ type Props = {
 }
 
 export default class Ndis extends React.Component<Props, void> {
-    static sampleProps = {default: {
+    static sampleProps: any = {default: {
         object: new iss.Service(fixtures.ixa),
         compact: true,
         spacer: false,
     }};
 
-    render() {
+    render(): null | ReactElement<"div"> {
         let ndisApproved = this.props.object.ndis_approved;
 
         if (ndisApproved) {

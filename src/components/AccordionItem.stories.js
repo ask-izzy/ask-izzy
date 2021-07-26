@@ -1,22 +1,25 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import AccordionItem from "./AccordionItem";
 
 export default {
     title: "Basic UI Components/Accordion/AccordionItem",
     component: AccordionItem,
-    argTypes: {},
+    argTypes: ({}: {...}),
 };
 
-const Template = (args: Object) => <AccordionItem {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <AccordionItem {...args} />;
+};
 
-export const BasicText = Template.bind({});
+export const BasicText: typeof Template = Template.bind({});
 BasicText.args = {
     title: "Section Title",
     children: "Very boring bog-standard text of no interest whatsoever.",
 };
-export const JSXBodyContent = Template.bind({});
+export const JSXBodyContent: typeof Template = Template.bind({});
 JSXBodyContent.args = {
     title: "Section Title",
     children: <p>

@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element as ReactElement} from "React";
 import React from "react";
 
 import Collapser from "./general/Collapser";
@@ -11,9 +12,9 @@ type Props = {
 }
 
 class DebugContainer extends React.Component<Props, void> {
-    static contextType = debugModeContext;
+    static contextType: any = debugModeContext;
 
-    render() {
+    render(): null | ReactElement<"div"> {
         const [debugMode] = this.context
         if (!debugMode) {
             return null;

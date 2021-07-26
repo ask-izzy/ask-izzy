@@ -1,9 +1,7 @@
 /* @flow */
-
 import * as React from "react";
 import classnames from "classnames";
 import _ from "underscore";
-
 import ReactDOM from "react-dom";
 
 import BaseQuestion from "./BaseQuestion";
@@ -11,7 +9,6 @@ import InputListItem from "../../components/InputListItem";
 import HeaderBar from "../../components/HeaderBar";
 import FlatButton from "../../components/FlatButton";
 import WithStickyFooter from "../../components/WithStickyFooter";
-
 import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
@@ -167,7 +164,7 @@ class BaseMultiQuestion extends BaseQuestion {
         this.setState({rootHeight: thisElement.offsetHeight});
     }
 
-    render() {
+    render(): React.Element<"div"> {
         let selected = this.selected;
         return (
             <div

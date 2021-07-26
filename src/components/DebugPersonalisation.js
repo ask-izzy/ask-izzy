@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Element as ReactElement} from "React";
 import React from "react";
 import _ from "underscore";
 
@@ -9,7 +10,7 @@ type Props = {
 }
 
 export default class DebugPersonalisation extends React.Component<Props, void> {
-    personalisationSteps() {
+    personalisationSteps(): Array<any> {
         let result: Array<Object> = [];
         let request = this.props.search;
 
@@ -38,7 +39,7 @@ export default class DebugPersonalisation extends React.Component<Props, void> {
         return result;
     }
 
-    render() {
+    render(): ReactElement<"div"> {
         return (
             <div className="DebugPersonalisation">
                 <h5>Personalisation debugging</h5>

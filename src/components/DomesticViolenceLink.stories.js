@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 
 import DomesticViolenceLink from "./DomesticViolenceLink";
@@ -9,6 +10,8 @@ export default {
     component: DomesticViolenceLink,
 };
 
-const Template = (args: Object) => <DomesticViolenceLink {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <DomesticViolenceLink {...args} />;
+};
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});

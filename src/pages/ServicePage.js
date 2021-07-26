@@ -2,6 +2,7 @@
 /* eslint-disable max-len */
 
 import React from "react";
+import type {Element as ReactElement} from "React";
 import ServicePane from "../components/ServicePane";
 
 import iss from "../iss";
@@ -18,7 +19,7 @@ class ServicePage extends React.Component<{}, {
     serviceId: number,
     error?: Object,
 }> {
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
     constructor(props: Object, context: RouterContextObject) {
         super(props);
@@ -76,7 +77,7 @@ class ServicePage extends React.Component<{}, {
 
     }
 
-    render() {
+    render(): ReactElement<"div"> {
         let {
             object,
             error,

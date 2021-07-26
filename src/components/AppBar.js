@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
 import components from "../components";
@@ -15,7 +16,7 @@ type Props = {
 }
 
 class AppBar extends React.Component<Props, void> {
-    static sampleProps = {
+    static sampleProps: any = {
         default: {
             title: "App bar",
             onBackTouchTap: function() {},
@@ -23,7 +24,7 @@ class AppBar extends React.Component<Props, void> {
     };
 
 
-    render() {
+    render(): ReactElement<"div"> {
         return (
             <div
                 className={
@@ -44,7 +45,7 @@ class AppBar extends React.Component<Props, void> {
         );
     }
 
-    renderBackButton() {
+    renderBackButton(): ReactNode {
         return (
             <components.IconButton
                 name={this.props.backMessage ? this.props.backMessage

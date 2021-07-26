@@ -5,6 +5,7 @@
 
 
 import Yadda from "yadda";
+import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda";
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
@@ -41,7 +42,7 @@ async function mockSearchForServices(
     mockSearch(search, services);
 }
 
-module.exports = (function() {
+module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library(dictionary)
         .given("A service with:\n$service",
             unpromisify(mockService))
@@ -52,4 +53,4 @@ module.exports = (function() {
         .given("A search for \"$string\" returns:\n$services",
             unpromisify(mockSearchForServices))
     ;
-})();
+})(): YaddaLibraryEnglish);

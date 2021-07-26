@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -9,18 +10,20 @@ export default {
     title: "App Components/AppBar",
     component: AppBar,
     args: {
-        onBackTouchTap: action("clickedBack"),
+        onBackTouchTap: (action("clickedBack"): any),
     },
 };
 
-const Template = (args: Object) => <AppBar {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <AppBar {...args} />;
+};
 
-export const Basic = Template.bind({});
+export const Basic: typeof Template = Template.bind({});
 Basic.args = {
     title: "Page Title",
 };
 
-export const LabeledBack = Template.bind({});
+export const LabeledBack: typeof Template = Template.bind({});
 LabeledBack.args = {
     title: "Page Title",
     backMessage: "Go Back",

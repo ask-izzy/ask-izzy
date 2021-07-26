@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint-disable valid-jsdoc */
-
 import React from "react";
+import type {Element as ReactElement} from "React";
 import {
     Routes,
     Route as ReactRouterRoute,
@@ -101,7 +101,7 @@ function Redirect({path, to}) {
     return null
 }
 
-const routes = <Routes>
+const routes: ReactElement<typeof Routes> = <Routes>
     <Route
         path="/"
         element={<BasePage />}

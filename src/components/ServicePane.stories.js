@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -12,19 +13,21 @@ export default {
     title: "Service Components/ServicePane",
     component: ServicePane,
     args: {
-        onClick: action("clicked"),
+        onClick: (action("clicked"): any),
     },
     decorators: [addRouter],
 };
 
-const Template = (args: Object) => <ServicePane {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <ServicePane {...args} />;
+};
 
-export const ISSService = Template.bind({});
+export const ISSService: typeof Template = Template.bind({});
 ISSService.args = {
     service: ServiceFactory(fixtures.ixa),
 };
 
-export const YouthSupportNetService = Template.bind({});
+export const YouthSupportNetService: typeof Template = Template.bind({});
 YouthSupportNetService.args = {
     service: ServiceFactory(fixtures.youthSupportNet),
 };

@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -10,13 +11,15 @@ export default {
     title: "App Components/ListItem",
     component: ListItem,
     args: {
-        onClick: action("clicked"),
+        onClick: (action("clicked"): any),
     },
 };
 
-const Template = (args: Object) => <ListItem {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <ListItem {...args} />;
+};
 
-export const Basic = Template.bind({});
+export const Basic: typeof Template = Template.bind({});
 Basic.args = {
     primaryText: "Primary Text",
     secondaryText: "Secondary text",
@@ -24,7 +27,7 @@ Basic.args = {
     leftIcon: <icons.DemographicPets />,
 };
 
-export const WithChildren = Template.bind({});
+export const WithChildren: typeof Template = Template.bind({});
 WithChildren.args = {
     primaryText: "Primary Text",
     secondaryText: "Secondary text",

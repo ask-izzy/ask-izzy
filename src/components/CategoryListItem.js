@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import LinkListItem from "./LinkListItem";
 import icons from "../icons";
@@ -17,7 +18,7 @@ const PERSONALISATIONS_TO_CLEAR = [
 ]
 
 class CategoryListItem extends React.Component<Props, void> {
-    static sampleProps = {default: {
+    static sampleProps: any = {default: {
         category: {
             key: "material-aid",
             name: "Material Aid",
@@ -43,7 +44,7 @@ class CategoryListItem extends React.Component<Props, void> {
         })
     }
 
-    render() {
+    render(): ReactNode {
         let Icon = this.props.category.icon || icons.House;
 
         return (

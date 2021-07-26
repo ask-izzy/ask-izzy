@@ -1,5 +1,4 @@
 /* @flow */
-
 import * as React from "react";
 
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
@@ -143,4 +142,4 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
 }
 
 
-export default MobileDetect(UsingViolenceScreen);
+export default (MobileDetect(UsingViolenceScreen): any);

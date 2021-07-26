@@ -1,5 +1,9 @@
 /* @flow */
 
+type State = {
+    Name: string
+}
+
 export default (
     parent: Object, args: Object, context: Object, info: Object
 ): typeof allAlerts => {
@@ -42,13 +46,14 @@ export const resultsPageVicAndQldWarnAlert = {
 export const covidServicesAffectedAlert = {
     id: "2",
     title: "COVID19 affecting services",
-    body:
+    body: (
         "Services listed here may not be operating or limited. Contact " +
         "services directly for up-to-date information.\n\n[Get COVID19 " +
-        "help and information near you.](/covid-19-support)",
+        "help and information near you.](/covid-19-support)"
+    : string),
     created_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "warn",
-    states: [],
+    states: ([]: Array<State>),
     screenLocation: "resultsPage",
     defaultToOpen: false,
     __typename: "Alert",
@@ -59,7 +64,7 @@ export const covidInfoAlert = {
     body: "Hello World",
     created_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "warn",
-    states: [],
+    states: ([]: Array<State>),
     screenLocation: "homePage",
     defaultToOpen: false,
     __typename: "Alert",
@@ -70,7 +75,7 @@ export const nationalServiceAlert = {
     body: null,
     created_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "info",
-    states: [],
+    states: ([]: Array<State>),
     screenLocation: "servicePage",
     defaultToOpen: false,
     __typename: "Alert",
@@ -107,7 +112,7 @@ export const resultsPageNationalInfoAlert = {
     body: null,
     created_at: "2021-05-25T12:19:56.159Z",
     alertLevel: "info",
-    states: [],
+    states: ([]: Array<State>),
     screenLocation: "resultsPage",
     defaultToOpen: false,
     __typename: "Alert",
@@ -131,7 +136,7 @@ export const bodyOpenByDefaultResultsPageAlert = {
     body: "Body is open by default",
     created_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "info",
-    states: [],
+    states: ([]: Array<State>),
     screenLocation: "resultsPage",
     defaultToOpen: true,
     __typename: "Alert",

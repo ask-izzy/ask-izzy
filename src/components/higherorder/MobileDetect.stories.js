@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 
 import MobileDetect from "./MobileDetect";
@@ -25,4 +26,4 @@ const Template = (args: Object) => {
     return <WrappedComponent />
 }
 
-export const Example = Template.bind({});
+export const Example: ((args: any) => ReactNode) = Template.bind({});

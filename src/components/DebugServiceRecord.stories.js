@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React, {useEffect} from "react";
 
 import DebugServiceRecord from "./DebugServiceRecord";
@@ -12,7 +13,7 @@ export default {
     component: DebugServiceRecord,
     decorators: [
         addRouter,
-        (Story: Object) => {
+        (Story: Object): ReactNode => {
             storage.setDebug(true)
             useEffect(() => () => storage.setDebug(false))
             return <Story/>
@@ -20,9 +21,11 @@ export default {
     ],
 };
 
-const Template = (args: Object) => <DebugServiceRecord {...args} />;
+const Template = (args: Object): ReactNode => {
+    (Template.args: any); return <DebugServiceRecord {...args} />;
+};
 
-export const ExampleService = Template.bind({});
+export const ExampleService: typeof Template = Template.bind({});
 ExampleService.args = {
     object: fixtures.ixa,
 };

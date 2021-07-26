@@ -1,4 +1,5 @@
 /* @flow */
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
@@ -9,9 +10,9 @@ function specialist(query) {
 }
 
 export default class HealthSubcategories extends BaseQuestion {
-    static title = "Health";
+    static title: string = "Health";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps = {
+    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-health",
         question: "What sort of help do you need?",
         answers: {
