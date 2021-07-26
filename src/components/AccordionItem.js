@@ -13,7 +13,7 @@ const AccordionItem: React.StatelessFunctionalComponent<Props> = (
     return (
         <details className="AccordionItem">
             <summary>
-                <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
+                <div role="text"> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
                     <h3 className="title">{title}</h3><icons.Chevron />
                 </div>
             </summary>

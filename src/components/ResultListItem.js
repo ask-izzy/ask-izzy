@@ -71,7 +71,10 @@ class ResultListItem extends React.Component<{
             >
 
                 {this.renderLocation(service.Location())}
-                <div className="name">
+                <div
+                    className="name"
+                    role="text"
+                >
                     <h2 aria-label={`${service.name}.`}>
                         {service.name}
                     </h2>

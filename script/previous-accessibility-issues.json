@@ -1,28 +1,7 @@
 {
   "/index.html": [],
   "/about/index.html": [],
-  "/bushfire-support/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H42",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "Heading markup should be used if this content is intended as a heading.",
-      "context": "<p><strong>Updating service inform...</p>",
-      "selector": "#root > div > div:nth-child(2) > main > div > p:nth-child(21)",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H42",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "Heading markup should be used if this content is intended as a heading.",
-      "context": "<p><strong>Donating money</strong></p>",
-      "selector": "#root > div > div:nth-child(2) > main > div > p:nth-child(23)",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/bushfire-support/index.html": [],
   "/covid-19-support/index.html": [],
   "/disability-advocacy-finder/index.html": [],
   "/terms/index.html": [],
@@ -38,28 +17,7 @@
   "/disability-organisations/index.html": [],
   "/search-help/index.html": [],
   "/not-found/index.html": [],
-  "/add-service/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H42",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "Heading markup should be used if this content is intended as a heading.",
-      "context": "<p><strong>If you notice that serv...</p>",
-      "selector": "#root > div > div:nth-child(2) > main > div > div > p:nth-child(3)",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H42",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "Heading markup should be used if this content is intended as a heading.",
-      "context": "<p><strong>If you want to add a ne...</p>",
-      "selector": "#root > div > div:nth-child(2) > main > div > div > p:nth-child(5)",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/add-service/index.html": [],
   "/service/slug/index.html": [],
   "/search/:suburb-:state/index.html": [],
   "/search/:suburb-:state/map/index.html": [],

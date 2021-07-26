@@ -126,9 +126,9 @@ class Intro extends Personalisation<Props, State> {
                                     <div className="betaPathway">
                                         <header>
                                             <icons.Lightning />
-                                            <h3>
+                                            <h2>
                                                 Ask Izzy Beta - Pandemic Support
-                                            </h3>
+                                            </h2>
                                         </header>
                                         <p>
                                             If you've been impacted by the

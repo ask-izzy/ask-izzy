@@ -59,7 +59,10 @@ class CrisisLineItem extends React.Component<Props, void> {
 
         if (phone) {
             return (
-                <div className="CrisisLineItem">
+                <div
+                    className="CrisisLineItem"
+                    role="text"
+                >
                     <h3>
                         <Link
                             to={`/service/${object.slug}`}

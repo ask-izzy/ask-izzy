@@ -11,6 +11,7 @@ class DisabilityAdvocacyFinder extends React.Component<{}, void> {
     render(): ReactNode {
         return (
             <StaticPage
+                title="Disability Advocacy"
                 bannerPrimary="Disability Advocacy"
                 bannerSecondary="Find advocacy services near you"
                 bannerName="advocacy static"
