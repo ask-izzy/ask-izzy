@@ -4,12 +4,12 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import DebugContainer from "./DebugContainer";
-import { addRouter, setDebugModeContext } from "../storybook/decorators";
+import { setDebugModeContext } from "../storybook/decorators";
 
 export default {
     title: "App Components/Debug/DebugContainer",
     component: DebugContainer,
-    decorators: [addRouter, setDebugModeContext],
+    decorators: [setDebugModeContext],
 };
 
 const Template = (args: Object): ReactNode => {

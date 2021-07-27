@@ -7,7 +7,6 @@ import { action } from "@storybook/addon-actions";
 import ServicePane from "./ServicePane";
 import ServiceFactory from "../../fixtures/factories/Service";
 import fixtures from "../../fixtures/services";
-import { addRouter } from "../storybook/decorators";
 
 export default {
     title: "Service Components/ServicePane",
@@ -15,7 +14,6 @@ export default {
     args: {
         onClick: (action("clicked"): any),
     },
-    decorators: [addRouter],
 };
 
 const Template = (args: Object): ReactNode => {

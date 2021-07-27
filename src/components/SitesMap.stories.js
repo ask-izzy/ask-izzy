@@ -8,13 +8,13 @@ import SitesMap from "./SitesMap";
 import fixtures from "../../fixtures/services";
 import ServiceFactory from "../../fixtures/factories/Service";
 import { injectEnvVars } from "../storybook/loaders";
-import { addRouter, addGoogleMapsScript } from "../storybook/decorators";
+import { addGoogleMapsScript } from "../storybook/decorators";
 
 export default {
     title: "App Components/SitesMap",
     component: SitesMap,
     loaders: [injectEnvVars],
-    decorators: [addRouter, addGoogleMapsScript],
+    decorators: [addGoogleMapsScript],
 };
 
 const Template = (args: Object): ReactNode => {

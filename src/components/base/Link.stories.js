@@ -4,17 +4,10 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import Link from "./Link";
-import { addRouter } from "../../storybook/decorators";
 
 export default {
     title: "Base Components/Link",
     component: Link,
-    decorators: [addRouter],
-    parameters: {
-        actions: {
-            handles: ['click a'],
-        },
-    },
 };
 
 const Template = (args: Object): ReactNode => {

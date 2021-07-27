@@ -4,6 +4,7 @@ import React from "react";
 import { withDesign } from "storybook-addon-designs"
 
 import AlertBanner from "./AlertBanner";
+import Link from "./base/Link";
 
 export default {
     title: "App Components/AlertBanner",
@@ -26,9 +27,9 @@ WarningWithBody.args = {
             Contact services directly for up-to-date information.
         </p>
         <p>
-            <a href="/covid-19-support">
+            <Link to="/covid-19-support">
                 Get COVID19 help and information near you.
-            </a>
+            </Link>
         </p>
     </>,
 };
@@ -51,9 +52,9 @@ WarningWithBodyOpenByDefault.args = {
             Contact services directly for up-to-date information.
         </p>
         <p>
-            <a href="/covid-19-support">
+            <Link to="/covid-19-support">
                 Get COVID19 help and information near you.
-            </a>
+            </Link>
         </p>
     </>,
 };
@@ -75,9 +76,9 @@ InfoWithBody.args = {
             Contact services directly for up-to-date information.
         </p>
         <p>
-            <a href="/covid-19-support">
+            <Link to="/covid-19-support">
                 Get COVID19 help and information near you.
-            </a>
+            </Link>
         </p>
     </>,
 };

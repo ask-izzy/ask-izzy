@@ -6,12 +6,10 @@ import React from "react";
 import ContactMethods from "./ContactMethods";
 import fixtures from "../../fixtures/services";
 import ServiceFactory from "../../fixtures/factories/Service";
-import { addRouter } from "../storybook/decorators";
 
 export default {
     title: "Service Components/ContactMethods",
     component: ContactMethods,
-    decorators: [addRouter],
 };
 
 const Template = (args: Object): ReactNode => {
