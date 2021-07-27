@@ -2,10 +2,11 @@
 
 import type {Element as ReactElement} from "React";
 import React from "react";
+import type {ElementType} from "react";
 import classnames from "classnames";
 
 export type ListItemProps = {
-    rootElement?: string,
+    rootElement?: ElementType,
     className?: string,
 
     primaryText?: any,
@@ -27,7 +28,7 @@ export default class ListItem extends React.Component<ListItemProps, void> {
         },
     };
 
-    render(): ReactElement<string> {
+    render(): ReactElement<ElementType> {
         let {
             rootElement,
             className,

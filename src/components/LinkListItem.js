@@ -9,9 +9,8 @@ import ListItem from "./ListItem";
 import type { ListItemProps } from "./ListItem";
 
 type Props = ListItemProps & {
-    to?: string,
-    href?: string,
-    onClick?: ?function,
+    to: string,
+    onClick?: function
 }
 
 export default class LinkListItem extends React.Component<Props, void> {
@@ -27,24 +26,15 @@ export default class LinkListItem extends React.Component<Props, void> {
             className,
             ...rest
         } = this.props;
-        let rootElement = Link;
-
-        if (this.props.href) {
-            // FIXME: react-router's <Link> can't handle the
-            // 'mailto' scheme, because it tries to use pushstate.
-            // To work around this, set 'href' instead of 'to'
-            // to get an <a> instead of a <Link>
-            rootElement = "a"
-        }
 
         return (
             <ListItem
-                rootElement={rootElement}
+                rootElement={Link}
+                {...rest}
                 className={classnames(
                     "plain-text",
                     className,
                 )}
-                {...(rest: any)}
             />
         );
     }
