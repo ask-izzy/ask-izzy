@@ -3,7 +3,7 @@ import type {Element as ReactElement} from "React";
 import React from "react";
 
 import components from "../components";
-import Link from "../components/Link";
+import Link from "../components/base/Link";
 import routerContext from "../contexts/router-context";
 import BrandedFooter from "../components/BrandedFooter";
 

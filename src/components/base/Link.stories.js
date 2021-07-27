@@ -4,10 +4,10 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import Link from "./Link";
-import { addRouter } from "../storybook/decorators";
+import { addRouter } from "../../storybook/decorators";
 
 export default {
-    title: "Basic UI Components/Link",
+    title: "Base Components/Link",
     component: Link,
     decorators: [addRouter],
 };

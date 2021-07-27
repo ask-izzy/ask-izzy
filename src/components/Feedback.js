@@ -3,7 +3,7 @@
 import type {Element as ReactElement} from "React";
 import React from "react";
 
-import Link from "./Link";
+import Link from "./base/Link";
 import * as gtm from "../google-tag-manager";
 import iss from "../iss";
 import Spacer from "./Spacer";

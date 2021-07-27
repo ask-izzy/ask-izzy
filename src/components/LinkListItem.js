@@ -4,7 +4,7 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 import classnames from "classnames";
 
-import Link from "./Link";
+import Link from "./base/Link";
 import ListItem from "./ListItem";
 import type { ListItemProps } from "./ListItem";
 

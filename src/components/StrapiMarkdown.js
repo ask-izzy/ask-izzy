@@ -4,7 +4,7 @@ import type {Node as ReactNode} from "react";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 
-import Link from "./Link"
+import Link from "./base/Link"
 import BlockQuote from "./base/BlockQuote"
 import Code from "./base/Code"
 import Paragraph from "./base/Paragraph";

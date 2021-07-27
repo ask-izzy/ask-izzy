@@ -3,7 +3,7 @@ import type {Element as ReactElement} from "React";
 import React from "react";
 import { titleize } from "underscore.string";
 
-import Link from "./Link";
+import Link from "./base/Link";
 import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
 import icons from "../icons";

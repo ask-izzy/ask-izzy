@@ -4,7 +4,7 @@ import type {Node as ReactNode} from "React";
 
 import React from "react";
 
-import Link from "./Link";
+import Link from "./base/Link";
 
 class OnlineSafetyContent extends React.Component<{}, void> {
     render(): ReactNode {

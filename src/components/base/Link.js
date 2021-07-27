@@ -4,7 +4,7 @@ import * as React from "react";
 import { Link as InternalLink } from "react-router-dom";
 import classnames from "classnames";
 
-import routerContext from "../contexts/router-context";
+import routerContext from "../../contexts/router-context";
 
 type Props = {
     to: string,

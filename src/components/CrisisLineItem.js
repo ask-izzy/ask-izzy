@@ -4,7 +4,7 @@ import type {Element as ReactElement} from "React";
 import React from "react";
 import PropTypes from "proptypes";
 
-import Link from "./Link";
+import Link from "./base/Link";
 import Phone from "./Phone";
 import fixtures from "../../fixtures/services";
 import iss from "../iss";

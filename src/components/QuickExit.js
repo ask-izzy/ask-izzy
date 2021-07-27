@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from "react";
-import Link from "./Link";
+import Link from "./base/Link";
 import classnames from "classnames";
 
 type Props = {

@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from "react";
-import Link from "../components/Link";
+import Link from "../components/base/Link";
 
 function SkipToChoices(): React.Node {
 

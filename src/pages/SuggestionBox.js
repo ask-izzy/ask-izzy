@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from "react";
-import Link from "../components/Link";
+import Link from "../components/base/Link";
 import Storage from "../storage";
 import Category from "../constants/Category";
 import {Service} from "../iss";

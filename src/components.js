@@ -40,7 +40,6 @@ import IndigenousServiceIcon from "./components/IndigenousServiceIcon";
 import InputListItem from "./components/InputListItem";
 import LgbtiqIcon from "./components/LgbtiqIcon";
 import LinkButton from "./components/LinkButton";
-import Link from "./components/Link";
 import LinkListItem from "./components/LinkListItem";
 import ListItem from "./components/ListItem";
 import LogoWithShadow from "./components/LogoWithShadow";
@@ -103,7 +102,6 @@ export default {
     InputListItem,
     LgbtiqIcon,
     LinkButton,
-    Link,
     LinkListItem,
     ListItem,
     LogoWithShadow,

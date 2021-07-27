@@ -7,7 +7,7 @@ import React from "react";
 import StaticPage from "./StaticPage";
 import components from "../components";
 import icons from "../icons"
-import Link from "../components/Link";
+import Link from "../components/base/Link";
 import routerContext from "../contexts/router-context";
 
 export default class BetaInfoStaticPage extends React.Component<{}, void> {

@@ -3,7 +3,7 @@ import type {Element as ReactElement} from "React";
 import React from "react";
 
 import icons from "../icons";
-import Link from "./Link";
+import Link from "./base/Link";
 import fixtures from "../../fixtures/services";
 import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";

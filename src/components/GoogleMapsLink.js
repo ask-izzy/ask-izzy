@@ -2,7 +2,7 @@
 import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
-import Link from "./Link";
+import Link from "./base/Link";
 import fixtures from "../../fixtures/services";
 import Location from "../iss/Location";
 import classnames from "classnames";
