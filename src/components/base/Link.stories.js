@@ -10,6 +10,11 @@ export default {
     title: "Base Components/Link",
     component: Link,
     decorators: [addRouter],
+    parameters: {
+        actions: {
+            handles: ['click a'],
+        },
+    },
 };
 
 const Template = (args: Object): ReactNode => {

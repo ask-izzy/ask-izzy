@@ -17,6 +17,14 @@ export function emit(event: AnalyticsEvent): void {
             }
         }
     }
+
+    // Emit custom browser event for logging/debugging purposes
+    const browserEvent = new CustomEvent(
+        browserEventName,
+        {detail: event}
+    );
+    document.querySelector(":root")?.dispatchEvent(browserEvent);
+
     window.dataLayer.push(event);
 
     // By default GTM will continue using any dataLayer variables added in
@@ -47,6 +55,8 @@ export function emit(event: AnalyticsEvent): void {
     }
 }
 
+export const browserEventName = "googletagmanagerevent"
+
 export type AnalyticsEvent = {
     event: string,
     eventCat?: string,
@@ -55,6 +65,10 @@ export type AnalyticsEvent = {
     eventValue?: number,
     sendDirectlyToGA?: bool,
 };
+
+// $Shape<T> isn't technically equal to T with all property set to optional but
+// we're using it that way.
+export type AnalyticsEventProp = $Shape<AnalyticsEvent>
 
 const persistentVars = new Set(["event"])
 
