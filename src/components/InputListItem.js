@@ -48,6 +48,7 @@ export default class InputListItem extends React.Component<Props, void> {
                 role={this.props.type || "button"}
                 tabIndex={tabIndex || 0}
                 aria-label={label}
+                onFocus={this.props.onFocus}
                 {...{primaryText, secondaryText, leftIcon, onClick}}
                 rightIcon={
                     <span>

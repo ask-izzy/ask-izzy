@@ -38,6 +38,7 @@ export default class ListItem extends React.Component<ListItemProps, void> {
             secondaryText,
             ...rest
         } = this.props;
+
         if (!rootElement) {
             rootElement = "div";
         }

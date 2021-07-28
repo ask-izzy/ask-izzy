@@ -54,11 +54,8 @@ class CategoryListItem extends React.Component<Props, void> {
                 leftIcon={
                     <Icon className="ColoredIcon icon-fg-color big" />
                 }
-                aria-label={`${
-                    this.props.category.name
-                }. ${
-                    this.props.category.byline
-                }`}
+                aria-label={`${this.props.category.name}.
+                ${this.props.category.byline}`}
                 onClick={this.clearAreYouSafe}
                 rightIcon={<icons.Chevron />}
                 primaryText={this.props.category.name}
