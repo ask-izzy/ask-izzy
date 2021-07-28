@@ -9,6 +9,10 @@ import QuickExit from "./QuickExit";
 import classnames from "classnames";
 import routerContext from "../contexts/router-context";
 import {getScrollPosition} from "../effects/scrollPosition";
+import Storage from "../storage";
+import categories from "../constants/categories";
+import Category from "../constants/Category";
+
 import ScreenReader from "./ScreenReader";
 type Props = {
     transition?: boolean,
@@ -38,8 +42,28 @@ function AppBar(
 
     const {router} = useContext(routerContext);
 
+    const removeCategoryAnswers = (category: Category): void => {
+        const answers = category.personalisation.filter(personalisation =>
+            personalisation.title.toString().toLowerCase() !== "location"
+        ).map(cat => cat.defaultProps.name)
+        answers.forEach(answer => {
+            Storage.removeItem(answer)
+        })
+    }
+
     const goHome = (): void => {
-        router.navigate("/");
+        const category = categories.find(category =>
+            category.key === router.match.params.page
+        )
+        if (category && router.match.params?.subpage) {
+            removeCategoryAnswers(category)
+        }
+
+        if (router.location.pathname === "/") {
+            window.scrollTo(0, 0);
+        } else {
+            router.navigate("/");
+        }
     }
 
     const showBar = (): string => (

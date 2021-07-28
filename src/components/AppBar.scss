@@ -40,7 +40,7 @@
 
     &.showBar {
         top: 0;
-        transition: background-color 0.2s ease;
+        transition: background-color 0.05s ease;
         justify-content: space-between;
         background-color: #{colours.get-static('raw-colour-rich-purple')};
         background-color: var(--raw-colour-rich-purple);
@@ -76,6 +76,7 @@
             height: $appbar-height;
             margin-top: 1px;
             font-size: 14px;
+            font-weight: 500;
             line-height: $appbar-text-line-height;
             text-overflow: ellipsis;
         }
