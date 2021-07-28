@@ -59,16 +59,9 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
 
     render(): React.Element<"div"> {
         const Subpage = this.currentComponent;
-        const backMessage = Subpage ? "Answers" : this.title;
-        const title = Subpage ? Subpage.title : "Answers";
 
         return (
             <div className="PersonalisationPage">
-                <components.AppBar
-                    title={title}
-                    onBackTouchTap={this.goBack.bind(this)}
-                    backMessage={backMessage}
-                />
                 <main aria-labelledby="answers">
                     <ScreenReader>
                         <span id="answers">
@@ -102,6 +95,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
             onDoneTouchTap={this.nextStep}
             category={this.category}
             nextStep={this.nextStep}
+            backToAnswers={true}
             previousStep={this.previousStep}
         />
     </div>
@@ -118,6 +112,12 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                 bannerName={
                     this.category?.bannerImage || "homepage"
                 }
+                fixedAppBar={true}
+                goBack={{
+                    backMessage: this.currentComponent ?
+                        "Back to answers" : "Back to results",
+                    onBackTouchTap: this.goBack.bind(this),
+                }}
                 taperColour="Grey"
             />
 

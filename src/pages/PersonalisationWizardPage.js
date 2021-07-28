@@ -4,8 +4,6 @@ import * as React from "react";
 
 import BasePersonalisationPage from "./BasePersonalisationPage";
 import Intro from "./personalisation/Intro";
-import components from "../components";
-import Chevron from "../icons/Chevron";
 import NotFoundStaticPage from "./NotFoundStaticPage";
 import routerContext from "../contexts/router-context";
 
@@ -157,27 +155,13 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
         // FIXME: Tap-up is hitting the new questions on the next page
         return (
             <div className="PersonalisationPage">
-                <components.AppBar
-                    // TODO: Find where the types are set for the Subpage line
-                    // and resolve the issue.
-                    // $FlowIgnore
-                    title={this.pageTitle}
-                    // flow:enable
-                    onBackTouchTap={this.previousStep.bind(this)}
-                    backMessage={this.backMessage}
-                    forwardMessage="Next"
-                    forwardIcon={<Chevron alt="" />}
-                    forwardEnabled={
-                        !this.state.nextDisabled
-                    }
-                    slideForwardIn={true}
-                />
                 <Subpage
                     ref="subpage"
                     onDoneTouchTap={this.nextStep}
                     onNextStepCallback={this.forceUpdate.bind(this)}
                     category={this.category}
                     nextStep={this.nextStep}
+                    backToAnswers={false}
                     previousStep={this.previousStep}
                 />
             </div>

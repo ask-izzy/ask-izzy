@@ -1,73 +1,106 @@
 /* @flow */
 
-import type {Node as ReactNode, Element as ReactElement} from "React";
-import React from "react";
+import type {Node as ReactNode} from "React";
+import React, {useContext} from "react";
 
 import components from "../components";
 import icons from "../icons";
 import QuickExit from "./QuickExit";
 import classnames from "classnames";
+import routerContext from "../contexts/router-context";
+import {getScrollPosition} from "../effects/scrollPosition";
 import ScreenReader from "./ScreenReader";
 type Props = {
-    title?: ?string,
+    transition?: boolean,
+    home?: boolean,
     onBackTouchTap?: ?Function,
     backMessage?: string,
     fixedSizeQuickExit?: boolean,
     containerClassName?: ?string,
+    breakpoint? : number,
 }
 
-class AppBar extends React.Component<Props, void> {
-    static sampleProps: any = {
-        default: {
-            title: "App bar",
-            onBackTouchTap: function() {},
-        },
-    };
+const LOGO = "/static/images/ask-izzy-logo-single-line-yellow.svg";
+const STICKY_HEADER_BREAKPOINT = 50;
+
+function AppBar(
+    {
+        onBackTouchTap,
+        backMessage,
+        fixedSizeQuickExit,
+        containerClassName,
+        transition,
+        home,
+        breakpoint = STICKY_HEADER_BREAKPOINT,
+    }: Props): ReactNode {
+
+    const scrollPosY = getScrollPosition();
+
+    const {router} = useContext(routerContext);
+
+    const goHome = (): void => {
+        router.navigate("/");
+    }
+
+    const showBar = (): string => (
+        !transition || scrollPosY > breakpoint ?
+            "showBar" : ""
+    )
 
 
-    render(): ReactElement<"div"> {
-        return (
-            <div
-                role="navigation"
-                className={
-                    classnames(this.props.containerClassName, "AppBarContainer")
-                }
-                aria-labelledby="appBar"
+    return (
+        <div
+            role="navigation"
+            className={
+                classnames(containerClassName, "AppBarContainer")
+            }
+            aria-labelledby="appBar"
+        >
+            <div className={
+                classnames("AppBar", home ?
+                    "HomPageAppBar" : undefined, showBar())
+            }
             >
-                <div className="AppBar">
-                    <ScreenReader>
-                        <span id="appBar">
-                            Banner navigation.
-                        </span>
-                    </ScreenReader>
-                    {this.props.onBackTouchTap ? this.renderBackButton() : null}
-                    {this.props.title ?
-                        <h1 className="title">{this.props.title}</h1>
-                        : null}
-                    <QuickExit fixedSize={this.props.fixedSizeQuickExit} />
-                </div>
-                {this.props.onBackTouchTap ?
-                    <div className="AppBarSpacer" />
-                    : null}
+                <ScreenReader>
+                    <span id="appBar">
+                        Banner navigation.
+                    </span>
+                </ScreenReader>
+                {!home ||
+                (!transition || scrollPosY > breakpoint) ? (
+                        <components.IconButton
+                            className={
+                                !onBackTouchTap ? "appBarLogo" : undefined
+                            }
+                            onClick={onBackTouchTap || goHome}
+                        >
+                            {onBackTouchTap ? (
+                                <span className="backButton">
+                                    <icons.ChevronBack />
+                                    <span className="back-label">
+                                        {backMessage}
+                                    </span>
+                                </span>
+                            ) : (
+                                <img
+                                    src={LOGO}
+                                    alt="AskIzzy"
+                                />
+                            )}
+                        </components.IconButton>
+                    ) : null}
+                <QuickExit
+                    className={showBar()}
+                    fixedSize={fixedSizeQuickExit}
+                />
             </div>
-        );
-    }
+        </div>
+    )
+}
 
-    renderBackButton(): ReactNode {
-        return (
-            <components.IconButton
-                name={this.props.backMessage ? this.props.backMessage
-                    : "back"}
-                className="BackButton button-container"
-                onClick={this.props.onBackTouchTap}
-            >
-                <icons.ChevronBack />
-                <span className="back-label">
-                    {this.props.backMessage}
-                </span>
-            </components.IconButton>
-        )
-    }
+AppBar.defaultProps = {
+    transition: false,
+    home: false,
 }
 
 export default AppBar;

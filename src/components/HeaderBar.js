@@ -1,6 +1,7 @@
 /* @flow */
 
 import * as React from "react";
+import AppBar from "./AppBar";
 
 type Props = {
     primaryText: string | React.Node,
@@ -8,6 +9,9 @@ type Props = {
     children?: React.Node,
     bannerName: string,
     taperColour?: string,
+    fixedAppBar?: boolean,
+    home?: boolean,
+    goBack?: Object,
 }
 
 class HeaderBar extends React.Component<Props, void> {
@@ -18,6 +22,12 @@ class HeaderBar extends React.Component<Props, void> {
             bannerName: "food",
         },
     };
+
+    static defaultProps: any = {
+        fixedAppBar: false,
+        home: false,
+        goBack: {},
+    }
 
     render(): React.Element<"div"> {
         // Search banner is the default
@@ -33,6 +43,13 @@ class HeaderBar extends React.Component<Props, void> {
 
         return (
             <div className={headerBarClassName}>
+
+                <AppBar
+                    transition={!this.props.fixedAppBar}
+                    home={this.props.home}
+                    breakpoint={this.props.home ? 100 : 30}
+                    {...this.props.goBack}
+                />
                 <div className="primary"
                     tabIndex="0"
                 >

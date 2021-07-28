@@ -193,6 +193,7 @@ class Intro extends Personalisation<Props, State> {
                 }
                 taperColour={this.state.showStepper ? "LighterGrey"
                     : "HeaderBar"}
+                fixedAppBar={true}
                 bannerName={this.bannerName}
             />
         )

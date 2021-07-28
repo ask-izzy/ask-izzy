@@ -32,6 +32,7 @@ export type Props = {
     onNextStepCallback?: Function,
     mobileView?: boolean,
     answersDesc: Object,
+    backToAnswers?: boolean,
 }
 
 export type State = {
@@ -259,7 +260,7 @@ class BaseQuestion extends Personalisation<Props, State> {
         }
 
         return (
-             <>
+            <>
                 <div
                     role="complementary"
                     aria-labelledby="header"
@@ -278,6 +279,11 @@ class BaseQuestion extends Personalisation<Props, State> {
                         secondaryText={
                             this.props.byline
                         }
+                        fixedAppBar={true}
+                        goBack={this.props.backToAnswers && {
+                            backMessage: "Back to answers",
+                            onBackTouchTap: this.nextStep,
+                        }}
                         taperColour={this.state.showStepper ? "LighterGrey"
                             : "HeaderBar"}
                         bannerName={this.bannerName}

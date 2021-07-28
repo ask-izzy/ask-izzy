@@ -1,16 +1,11 @@
 @use '../styles/mixins/colours';
 
-.AppBarSpacer {
-    width: 100%;
-    height: $appbar-height;
-
-    @media print {
-        display: none;
-    }
+.AppBarContainer {
+    margin-bottom: 5em;
 }
 
 .AppBar {
-    $appbar-text-line-height: 42px;
+    $appbar-text-line-height: 52px;
 
     display: flex;
     position: fixed;
@@ -25,67 +20,46 @@
     max-width: 800px;
     height: $appbar-height;
     min-height: auto;
-    background-color: #{colours.get-static('raw-colour-slate-gray')};
-    background-color: var(--raw-colour-slate-gray);
+    background: rgba(0, 0, 0, 0);
     color: #{colours.get-static('colour-text-very-light')};
     color: var(--colour-text-very-light);
     text-overflow: ellipsis;
     z-index: 2;
 
-    & > .button-container {
-        flex: 1;
-        z-index: 2;
-        width: auto;
+    &.HomPageAppBar {
+        justify-content: flex-end;
     }
 
-    .button-container a {
-        color: #{colours.get-static('colour-text-very-light')};
-        color: var(--colour-text-very-light);
-        font-size: 14px;
-        line-height: $appbar-height;
-        text-align: center;
-        text-decoration: none;
-        vertical-align: middle;
+    .appBarLogo {
+        margin: 1em;
     }
 
-    .title {
-        max-width: 80%;
-        margin: auto;
-        padding: 0;
-        font-size: 16px;
-        font-weight: 500;
-        line-height: $appbar-text-line-height;
-        text-align: center;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-    }
-
-    .BackButton {
-        display: relative;
-        flex: 0 1 auto;
-        min-width: 44px;
+    .IconButton {
         height: $appbar-height;
-        padding: 0;
-        color: #{colours.get-static('colour-text-very-light')};
-        color: var(--colour-text-very-light);
-        text-align: left;
-        text-decoration: none;
-        overflow: hidden;
+    }
 
-        &:focus {
-            background-color: #{colours.get-static('colour-input-focus-overlay')};
-            background-color: var(--colour-input-focus-overlay);
-        }
+    &.showBar {
+        top: 0;
+        transition: background-color 0.2s ease;
+        justify-content: space-between;
+        background-color: #{colours.get-static('raw-colour-rich-purple')};
+        background-color: var(--raw-colour-rich-purple);
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 
-        .Icon {
+        .appBarLogo {
             margin: 0;
-            padding: 0;
 
-            path {
-                fill: #{colours.get-static('raw-colour-pure-white')};
-                fill: var(--raw-colour-pure-white);
+            img {
+                padding: 0.6em;
             }
+        }
+    }
+
+    button {
+        width: 10rem;
+
+        .backButton {
+            width: 13rem;
         }
 
         .ChevronBackIcon {
@@ -105,12 +79,5 @@
             line-height: $appbar-text-line-height;
             text-overflow: ellipsis;
         }
-    }
-
-    // Quick Exit button
-    .QuickExit {
-        flex: 0 1 auto;
-        margin-left: 5px;
-        float: right;
     }
 }

@@ -10,6 +10,16 @@
     white-space: nowrap;
     overflow: hidden;
     vertical-align: middle;
+    margin: 1em;
+    border-radius: 4px;
+    box-shadow: 0 0 12px rgb(0 0 0 / 50%);
+
+    &.showBar {
+        transition: margin 0.2s ease;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
 
     span {
         line-height: $appbar-height;

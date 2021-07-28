@@ -86,6 +86,7 @@ export default class ServicePane extends React.Component<{
                     <HeaderBar
                         primaryText={object.name}
                         secondaryText={null}
+                        fixedAppBar={false}
                         bannerName="housing"
                     />
                     <AlertBannerList
@@ -93,6 +94,7 @@ export default class ServicePane extends React.Component<{
                         screenLocation="servicePage"
                         format="inline"
                     />
+
                     <DebugServiceRecord object={object} />
                 </div>
                 <div

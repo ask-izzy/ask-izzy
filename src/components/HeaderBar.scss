@@ -4,7 +4,7 @@
     $text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
 
     position: relative;
-    min-height: 160px;
+    min-height: 220px;
     padding-bottom: 2vw;
     color: #{colours.get-static('colour-text-very-light')};
     color: var(--colour-text-very-light);
@@ -12,6 +12,10 @@
     overflow-x: hidden; /* used to hide ::after pseudo-element that creates the
         diagonal taper at the bottom of the header */
     box-sizing: border-box;
+
+    &.fixed {
+        margin-top: $appbar-height;
+    }
 
     a,
     .link-color {

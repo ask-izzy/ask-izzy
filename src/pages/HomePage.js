@@ -11,7 +11,6 @@ import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
 import { resetDfvOptions } from "../utils/domesticViolence";
 import routerContext from "../contexts/router-context";
-import AppBar from "../components/AppBar";
 import QuestionStepper from "./QuestionStepper";
 import Storage from "../storage";
 import AlertBannerList from "../components/AlertBannerList";
@@ -61,10 +60,6 @@ class HomePage extends React.Component<{}, State> {
         const logo = "/static/images/ask-izzy-logo-single-line-yellow.svg";
         return (
             <div className="HomePage">
-                <AppBar
-                    containerClassName="appbar"
-                    fixedSizeQuickExit={true}
-                />
                 <section
                     role="complementary"
                     className="page-header-section"
@@ -88,6 +83,7 @@ class HomePage extends React.Component<{}, State> {
                             Search over 370,000 support services.
                         </div>}
                         bannerName="homepage"
+                        home={true}
                         taperColour="LighterGrey"
                     />
                     <AlertBannerList

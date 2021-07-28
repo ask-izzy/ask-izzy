@@ -125,10 +125,6 @@ class ServicePage extends React.Component<{}, {
         } else {
             return (
                 <div className="ServicePage">
-                    <components.AppBar
-                        title={object.site.name}
-                        onBackTouchTap={() => this.context.router.navigate(-1)}
-                    />
                     <ServicePane service={object}/>
                 </div>
             );

@@ -3,7 +3,6 @@
 
 import React from "react";
 import type {Element as ReactElement} from "React";
-import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
 import Link from "../components/Link";
@@ -20,10 +19,6 @@ export default class NotFoundStaticPage extends React.Component<Props, void> {
             <div
                 className="StaticPage"
             >
-                <AppBar
-                    title="Page not found"
-                    onBackTouchTap={() => this.context.router.navigate(-1)}
-                />
                 <HeaderBar
                     primaryText={null}
                     secondaryText={null}

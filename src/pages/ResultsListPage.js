@@ -3,7 +3,6 @@
 import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
-import AppBar from "../components/AppBar";
 import DebugContainer from "../components/DebugContainer";
 import DebugPersonalisation from "../components/DebugPersonalisation";
 import DebugSearch from "../components/DebugSearch";
@@ -38,14 +37,6 @@ class ResultsListPage extends ResultsPage<> {
 
     renderPage: (() => ReactElement<"div">) = () => (
         <div className="ResultsListPage">
-            <AppBar
-                backMessage={this.isDisabilityAdvocacy ? "" : "Categories"}
-                onBackTouchTap={() => this.context.router.navigate(
-                    this.isDisabilityAdvocacy ?
-                        "/disability-advocacy-finder"
-                        : "/"
-                )}
-            />
             <div
                 role="complementary"
                 aria-labelledby="header"

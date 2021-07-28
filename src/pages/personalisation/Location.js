@@ -245,6 +245,7 @@ class Location extends Personalisation<Props, State> {
                     }
                     taperColour={this.state.showStepper ? "LighterGrey"
                         : "HeaderBar"}
+                    fixedAppBar={true}
                     bannerName={this.bannerName}
                 />
                 {this.state.showStepper ? (
@@ -277,8 +278,7 @@ class Location extends Personalisation<Props, State> {
                                     }
                                 />
                             }
-                            <div
-                                className="search"
+                            <div className="search"
                                 id="searchBar"
                             >
                                 <input
@@ -287,11 +287,12 @@ class Location extends Personalisation<Props, State> {
                                         this._search = element;
                                     }}
                                     onFocus={
-                                        this.scrollToSearchControl.bind(this)}
-                                    aria-label="Search for a suburb or postcode"
-                                    placeholder={
-                                        "Search for a suburb or postcode"
+                                        this.scrollToSearchControl.bind(this)
                                     }
+                                    aria-label="Search for a suburb
+                                     or postcode"
+                                    placeholder="Search for a suburb
+                                     or postcode"
                                     value={this.state.locationName}
                                     onChange={this.onSearchChange.bind(this)}
                                 />

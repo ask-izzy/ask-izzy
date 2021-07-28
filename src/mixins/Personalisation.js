@@ -7,6 +7,7 @@ import Category from "../constants/Category";
 type Props = {
     nextStep: Function,
     previousStep: Function,
+    backToAnswers: Function,
     category?: Category,
     name?: string,
 }
@@ -21,6 +22,10 @@ class Personalisation<
     nextStep: (() => any) = () => this.props.nextStep()
 
     previousStep: (() => any) = () => this.props.previousStep()
+
+    backToAnswers(): boolean {
+        return this.props.backToAnswers || false
+    }
 
     get bannerName(): string {
         return (this.props.name === "sub-indigenous" && "atsi") ||
