@@ -4,12 +4,11 @@ import * as React from "react";
 import {
     BREADCRUMB_LIMIT,
     MULTI_DEFAULT_ANSWER_LIMIT,
-    generateContainerAriaLabel,
     fetchAnswers,
     getSearchAnswers,
     PersonalisationLink,
     renderPipeOrComma,
-    sortAnswers,
+    sortAnswers, SCREEN_READER_MESSAGE,
 } from "./QuestionStepper.service";
 import Category from "../constants/Category";
 
@@ -19,8 +18,6 @@ import QuestionStepperAnswer from "./QuestionStepperAnswer";
 import QuestionStepperClearLocation from "./QuestionStepperClearLocation";
 import _ from "underscore";
 import {Service} from "../iss";
-import {useContext} from "react";
-import routerContext from "../contexts/router-context";
 
 type Props = {
     intro?: ?boolean,
@@ -60,7 +57,6 @@ function QuestionStepper(
     )
     const [lastMultiSelect, setLastMultiSelect] = React.useState(undefined)
 
-    const {router} = useContext(routerContext)
     /**
      * The UseEffect is to fetch the current answers and set them to the state
      */
@@ -132,6 +128,7 @@ function QuestionStepper(
     return (
         <div
             className={getClassesNames()}
+            aria-label={SCREEN_READER_MESSAGE}
             onBlur={() => {
                 setShowSkipToChoice && setShowSkipToChoice()
             }}
@@ -142,11 +139,7 @@ function QuestionStepper(
             <div className="answerBox"
                 style={showSkipToChoice ? {paddingTop: 0} : {}}
             >
-                <span aria-label={generateContainerAriaLabel(
-                    currentAnswers,
-                    router
-                )}
-                >
+                <span>
                     {currentAnswers.map((answer, index) =>
                         <QuestionStepperAnswer
                             index={index}

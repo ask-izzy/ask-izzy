@@ -99,7 +99,7 @@ class Intro extends Personalisation<Props, State> {
             <div className="IntroPage">
                 {this.renderHeaderBar()}
                 <div className="body">
-                    <fieldset tabIndex="0">
+                    <fieldset>
                         <legend>
                              I&#39;m looking for help for
                         </legend>

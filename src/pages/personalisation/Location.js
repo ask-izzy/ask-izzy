@@ -235,7 +235,7 @@ class Location extends Personalisation<Props, State> {
             <WithStickyFooter
                 footerContents={this.renderDoneButton()}
             >
-                <fieldset tabIndex="0">
+                <fieldset>
                     <legend>
                         Where are you?
                     </legend>
@@ -263,7 +263,7 @@ class Location extends Personalisation<Props, State> {
                                 onChange={this.onSearchChange.bind(this)}
                             />
                         </div>
-                        <fieldset tabIndex="0">
+                        <fieldset>
                             <legend>
                                 {this.state.autocompletions.length ? (
                                     "The following is a list of locations" +

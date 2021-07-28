@@ -280,7 +280,7 @@ class BaseQuestion extends Personalisation<Props, State> {
                         />
                     </div>
                 )}
-                <fieldset tabIndex="0">
+                <fieldset>
                     <legend>
                         {this.question}
                     </legend>

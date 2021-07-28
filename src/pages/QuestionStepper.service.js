@@ -222,21 +222,6 @@ export const renderEllipsis = (
         : null
 }
 
-export const generateContainerAriaLabel = (
-    answers: Array<AnswerType>,
-    router: any
-): string => {
-    let ariaLabel = SCREEN_READER_MESSAGE;
-    answers.forEach((answer, index) => {
-        ariaLabel += `${formatAriaLabelText(
-            answer,
-            editing(answer, router),
-            true)
-        } ${answers.length - 1 === (index + 1) ? " and" : ", "}`
-    })
-    return ariaLabel;
-}
-
 export const editing = (answer: AnswerType, router: any): boolean => (
     answer.name === router.match.params.subpage
 )
@@ -276,19 +261,4 @@ export const formatAriaLabelText = (
     return editing ?
         `You're now editing ${selection} for ${answer.name}`
         : `You've selected ${selection} for ${answer.name}`
-}
-
-export const getInitialTabIndex = (
-    resultsPage: ?boolean,
-    initialTabIndex: ?number,
-    additional?: ?number): number => {
-    let index;
-    if (resultsPage) {
-        index = 0
-    } else if (initialTabIndex || initialTabIndex === 0) {
-        index = initialTabIndex
-    } else {
-        index = INITIAL_TAB_INDEX
-    }
-    return additional ? index + additional : index
 }
