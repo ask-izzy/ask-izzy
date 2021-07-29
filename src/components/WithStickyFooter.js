@@ -46,12 +46,9 @@ class WithStickyFooter extends React.Component<Props> {
                 <div className="content">
                     {this.props.children}
                 </div>
-                <div
-                    className="stickyFooter"
-                    ref={this.#footerRef}
-                >
+                <footer ref={this.#footerRef}>
                     {this.props.footerContents}
-                </div>
+                </footer>
                 <div
                     className="onscreenIndicator"
                     ref={this.#onscreenIndicatorRef}

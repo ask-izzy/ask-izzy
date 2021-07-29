@@ -6,7 +6,7 @@ import {
     renderPipeOrComma,
     renderEllipsis,
     formatAriaLabelText,
-    INITIAL_TAB_INDEX,
+    getInitialTabIndex,
 } from "./QuestionStepper.service";
 import routerContext from "../contexts/router-context";
 import {useContext} from "react";
@@ -48,16 +48,6 @@ function QuestionStepperAnswer({
      */
     const editing = (): boolean => (
         answer.name === router.match.params.subpage
-    )
-
-    const getInitialTabIndex = (
-        resultsPage: ?boolean,
-        initialTabIndex: ?number,
-        additional?: ?number
-    ): number => (
-        resultsPage ? 0
-            : ((initialTabIndex || initialTabIndex === 0 ? initialTabIndex
-                : INITIAL_TAB_INDEX)) + (additional || 0)
     )
 
     const MapIcon = () => home ? <icons.Map /> : null

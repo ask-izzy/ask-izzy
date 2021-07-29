@@ -10,6 +10,7 @@ import {
     PersonalisationLink,
     renderPipeOrComma,
     sortAnswers,
+    getInitialTabIndex,
 } from "./QuestionStepper.service";
 import Category from "../constants/Category";
 
@@ -122,7 +123,8 @@ function QuestionStepper(
 
         setLastMultiSelect(answers.map(ans => ans.multi).lastIndexOf(true))
         setCurrentAnswers(answers);
-        onTabIndex?.(resultsPage ? 0 : getInitialTabIndex() + answers.length)
+        onTabIndex?.(resultsPage ? 0
+            : getInitialTabIndex(resultsPage, initialTabIndex) + answers.length)
     }, [])
 
     const getClearLocationTabIndex = () => (
@@ -141,11 +143,6 @@ function QuestionStepper(
         )
     )
 
-    const getInitialTabIndex = (): number => (
-        resultsPage ? 0 : initialTabIndex || initialTabIndex === 0 ?
-            initialTabIndex : INITIAL_TAB_INDEX
-    )
-
     return (
         <div
             className={getClassesNames()}
@@ -153,9 +150,11 @@ function QuestionStepper(
                 if (evt.key === "Tab") {
                     if (document.activeElement?.tabIndex &&
                         document.activeElement.tabIndex >
-                        getInitialTabIndex() !== 0 &&
+                        getInitialTabIndex(
+                            resultsPage, initialTabIndex
+                        ) !== 0 &&
                         (document.activeElement.tabIndex <
-                            getInitialTabIndex() +
+                            getInitialTabIndex(resultsPage, initialTabIndex) +
                             currentAnswers.length
                         )) {
                         setAccessibility(true)
@@ -169,7 +168,7 @@ function QuestionStepper(
                 setAccessibility={setAccessibility}
             />
             <div className="answerBox"
-                tabIndex={getInitialTabIndex()}
+                tabIndex={getInitialTabIndex(resultsPage, initialTabIndex)}
                 style={Accessibility ? {paddingTop: 0} : {}}
             >
                 <span aria-label={SCREEN_READER_MESSAGE}>
