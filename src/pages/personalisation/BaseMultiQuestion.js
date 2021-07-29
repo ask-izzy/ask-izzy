@@ -197,7 +197,7 @@ class BaseMultiQuestion extends BaseQuestion {
                             this.context.router.match.params.page
                         )}
                         showSkipToChoice={this.state.showSkipToChoice}
-                        setShowSkipToChoice={() =>
+                        clearShowSkipToChoice={() =>
                             this.setState({showSkipToChoice: false})
                         }
                     />

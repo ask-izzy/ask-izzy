@@ -4,11 +4,12 @@ import * as React from "react";
 import {
     BREADCRUMB_LIMIT,
     MULTI_DEFAULT_ANSWER_LIMIT,
+    SCREEN_READER_MESSAGE,
     fetchAnswers,
     getSearchAnswers,
     PersonalisationLink,
     renderPipeOrComma,
-    sortAnswers, SCREEN_READER_MESSAGE,
+    sortAnswers,
 } from "./QuestionStepper.service";
 import Category from "../constants/Category";
 
@@ -29,7 +30,7 @@ type Props = {
     listFocused?: ?boolean,
     location?: ?string,
     onClear?: ?function,
-    setShowSkipToChoice?: ?function,
+    clearShowSkipToChoice?: () => void,
 }
 
 const ConditionalSkipToChoice = ({show, ...props}) => (
@@ -42,7 +43,7 @@ function QuestionStepper(
         intro,
         home,
         showSkipToChoice,
-        setShowSkipToChoice,
+        clearShowSkipToChoice,
         category,
         resultsPage,
         location,
@@ -129,9 +130,7 @@ function QuestionStepper(
         <div
             className={getClassesNames()}
             aria-label={SCREEN_READER_MESSAGE}
-            onBlur={() => {
-                setShowSkipToChoice && setShowSkipToChoice()
-            }}
+            onBlur={() => clearShowSkipToChoice?.()}
         >
             <ConditionalSkipToChoice
                 show={!resultsPage && showSkipToChoice}

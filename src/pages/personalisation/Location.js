@@ -225,7 +225,19 @@ class Location extends Personalisation<Props, State> {
 
     render: (() => React.Element<"div">) = () => (
         <div className="Location">
-            {this.renderHeaderBar()}
+            <components.HeaderBar
+                primaryText={
+                    <div>
+                        Where are you?
+                    </div>
+                }
+                secondaryText={
+                    "This will let me find the services closest to you."
+                }
+                taperColour={this.state.showStepper ? "LighterGrey"
+                    : "HeaderBar"}
+                bannerName={this.bannerName}
+            />
             {this.state.showStepper ? (
                 <QuestionStepper
                     initialTabIndex={0}
@@ -341,24 +353,6 @@ class Location extends Personalisation<Props, State> {
                     />
                 </div>
             </div>
-        )
-    }
-
-    renderHeaderBar(): React.Element<any> {
-        return (
-            <components.HeaderBar
-                primaryText={
-                    <div>
-                        Where are you?
-                    </div>
-                }
-                secondaryText={
-                    "This will let me find the services closest to you."
-                }
-                taperColour={this.state.showStepper ? "LighterGrey"
-                    : "HeaderBar"}
-                bannerName={this.bannerName}
-            />
         )
     }
 }

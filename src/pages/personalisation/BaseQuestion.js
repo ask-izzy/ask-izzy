@@ -259,7 +259,19 @@ class BaseQuestion extends Personalisation<Props, State> {
 
         return (
             <div>
-                {this.renderHeaderBar()}
+                <HeaderBar
+                    primaryText={
+                        <div>
+                            {this.question}
+                        </div>
+                    }
+                    secondaryText={
+                        this.props.byline
+                    }
+                    taperColour={this.state.showStepper ? "LighterGrey"
+                        : "HeaderBar"}
+                    bannerName={this.bannerName}
+                />
                 {this.state.showStepper && (
                     <div
                         tabIndex="0"
@@ -272,10 +284,8 @@ class BaseQuestion extends Personalisation<Props, State> {
                         <QuestionStepper
                             category={this.state.category}
                             showSkipToChoice={this.state.showSkipToChoice}
-                            setShowSkipToChoice={() => {
-                                this.setState({
-                                    showSkipToChoice: false,
-                                })
+                            clearShowSkipToChoice={() => {
+                                this.setState({showSkipToChoice: false})
                             }}
                         />
                     </div>
@@ -317,24 +327,6 @@ class BaseQuestion extends Personalisation<Props, State> {
                     this.props.baseTextBoxComponent
                 }
             </div>
-        );
-    }
-
-    renderHeaderBar(): React.Element<any> {
-        return (
-            <HeaderBar
-                primaryText={
-                    <div>
-                        {this.question}
-                    </div>
-                }
-                secondaryText={
-                    this.props.byline
-                }
-                taperColour={this.state.showStepper ? "LighterGrey"
-                    : "HeaderBar"}
-                bannerName={this.bannerName}
-            />
         );
     }
 
