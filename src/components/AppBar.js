@@ -96,6 +96,7 @@ function AppBar(
                             className={
                                 !onBackTouchTap ? "appBarLogo" : undefined
                             }
+                            alt={onBackTouchTap ? backMessage : "Home page"}
                             onClick={onBackTouchTap || goHome}
                         >
                             {onBackTouchTap ? (
@@ -108,7 +109,7 @@ function AppBar(
                             ) : (
                                 <img
                                     src={LOGO}
-                                    alt="AskIzzy"
+                                    alt="Ask izzy home"
                                 />
                             )}
                         </components.IconButton>

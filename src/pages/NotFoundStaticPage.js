@@ -20,8 +20,9 @@ export default class NotFoundStaticPage extends React.Component<Props, void> {
                 className="StaticPage"
             >
                 <HeaderBar
-                    primaryText={null}
+                    primaryText="Page not found"
                     secondaryText={null}
+                    fixedAppBar={false}
                     bannerName={"drugs-alcohol"}
                 />
                 <div className="body">

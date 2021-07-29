@@ -8,7 +8,7 @@ Feature: History navigation
     Scenario: Bookmark a service page and press back to reach home page
         Given I open a new browser
         When I visit /service/111-my-housing-service
-        And I click back from the title bar
+        And I click home from the title bar
         Then I should be at /
         And I should see the branding header
 
@@ -34,7 +34,7 @@ Feature: History navigation
         When I click on "Female"
         Then I should see "How old are you?"
 
-        When I click back from the title bar
+        When I click back from the browser UI
         Then I should see "Do you identify as…"
 
         When I click on "Male"

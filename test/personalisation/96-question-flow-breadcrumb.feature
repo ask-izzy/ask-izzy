@@ -41,9 +41,9 @@ Feature: Question Flow Breadcrumb
         And I click on "Housing"
         Then I should see "To help me find the right services I'll ask you a few questions."
         And I should be at /housing/personalise
-        When I click on the done button # Intro
-        And I click back from the title bar
-        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 (editing)"
+        When I click on the done button
+        And I click back from the browser UI
+        Then I should see "Melbourne, VIC"
 
     Scenario: Visit housing and select more than one demographic
         Given a fresh session
