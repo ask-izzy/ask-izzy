@@ -87,7 +87,10 @@ export default class ServicePane extends React.Component<{
 
                 <DebugServiceRecord object={object} />
 
-                <div className="header">
+                <div
+                    className="header"
+                    tabIndex="0"
+                >
                     <p>
                         <IndigenousServiceIcon object={object} />
                         <LgbtiqIcon object={object} />
@@ -181,7 +184,11 @@ export default class ServicePane extends React.Component<{
 
         return (
             <div className="siblings-container">
-                <h3 className="siblings-header">
+                <h3
+                    tabIndex="0"
+                    className="siblings-header"
+                    aria-label="Also at this location."
+                >
                     Also at this location
                 </h3>
                 <div className="List">
@@ -193,6 +200,9 @@ export default class ServicePane extends React.Component<{
                             onClick={
                                 () => this.recordAlsoAtThisLocation(service)
                             }
+                            aria-label={`${service.name}. ${
+                                service.shortDescription[0]
+                            }.`}
                             primaryText={service.name}
                             secondaryText={service.shortDescription[0]}
                             rightIcon={<Chevron />}

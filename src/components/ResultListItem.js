@@ -46,7 +46,10 @@ class ResultListItem extends React.Component<{
         }
 
         return (
-            <span className="location">
+            <span
+                className="location"
+                aria-label={`${suburb}.`}
+            >
                 <icons.Map
                     aria-label="Location"
                 />
@@ -69,7 +72,7 @@ class ResultListItem extends React.Component<{
 
                 {this.renderLocation(service.Location())}
                 <div className="name">
-                    <h2>
+                    <h2 aria-label={`${service.name}.`}>
                         {service.name}
                     </h2>
                     <div className="flags">
@@ -77,7 +80,10 @@ class ResultListItem extends React.Component<{
                         <LgbtiqIcon object={service} />
                     </div>
                 </div>
-                <div className="site_name">
+                <div
+                    className="site_name"
+                    aria-label={`${service.site.name}.`}
+                >
                     {service.site.name}
                     <Ndis
                         className="ndis"
@@ -116,9 +122,12 @@ class ResultListItem extends React.Component<{
                     </DebugContainer>
                 }
 
-                <span className="learnMore">
+                <div
+                    className="learnMore"
+                    aria-label="Learn more."
+                >
                     Learn More
-                </span>
+                </div>
             </LinkListItem>
 
         );

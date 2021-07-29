@@ -192,6 +192,7 @@ class BaseMultiQuestion extends BaseQuestion {
                         category={getCategory(
                             this.context.router.match.params.page
                         )}
+                        initialTabIndex={0}
                         listFocused={this.state.listFocused}
                         onTabIndex={(tabIndex) =>
                             this.setState({tabIndex})

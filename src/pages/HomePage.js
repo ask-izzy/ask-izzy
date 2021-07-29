@@ -70,12 +70,12 @@ class HomePage extends React.Component<{}, State> {
                             <img
                                 src={logo}
                                 className="homepage-logo"
-                                alt="AskIzzy"
+                                alt="AskIzzy."
                             />
-                            Find the help you need, now and nearby
+                            Find the help you need, now and nearby.
                         </>}
                         secondaryText={<div className="secondary">
-                            Search over 370,000 support services
+                            Search over 370,000 support services.
                         </div>}
                         bannerName="homepage"
                         taperColour="LighterGrey"

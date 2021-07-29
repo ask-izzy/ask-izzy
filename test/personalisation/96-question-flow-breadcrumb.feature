@@ -7,7 +7,7 @@ Feature: Question Flow Breadcrumb
         When I visit /
         And I click on "Housing"
 
-        Then I should see "To help me find the right services I'll ask you a few questions"
+        Then I should see "To help me find the right services I'll ask you a few questions."
         And I should be at /housing/personalise
         And I should not see "Clear saved location"
 
@@ -16,7 +16,7 @@ Feature: Question Flow Breadcrumb
         And my location is "Melbourne, VIC"
         When I visit /
         And I click on "Housing"
-        Then I should see "To help me find the right services I'll ask you a few questions"
+        Then I should see "To help me find the right services I'll ask you a few questions."
         And I should be at /housing/personalise
         And I should see "Melbourne, VIC"
 
@@ -27,7 +27,7 @@ Feature: Question Flow Breadcrumb
         And my gender is female
         And I am 17 years old
         And I click on "Housing"
-        Then I should see "To help me find the right services I'll ask you a few questions"
+        Then I should see "To help me find the right services I'll ask you a few questions."
         And I should be at /housing/personalise
         When I click on the done button # Intro
         And I should see "Melbourne, VIC  |  Safe tonight  |  Women  |  18-26"
@@ -39,7 +39,7 @@ Feature: Question Flow Breadcrumb
         And my gender is female
         And I am 17 years old
         And I click on "Housing"
-        Then I should see "To help me find the right services I'll ask you a few questions"
+        Then I should see "To help me find the right services I'll ask you a few questions."
         And I should be at /housing/personalise
         When I click on the done button # Intro
         And I click back from the title bar

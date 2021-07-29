@@ -13,7 +13,7 @@ Feature: Personalisation
     Scenario: Search for housing with personalised results
         Given control of geolocation
         When I click on "Housing"
-        Then I should see "To help me find the right services I'll ask you a few questions"
+        Then I should see "To help me find the right services I'll ask you a few questions."
 
         When I click on the done button
 
@@ -44,7 +44,7 @@ Feature: Personalisation
     Scenario: Search for emergency accommodation
         Given control of geolocation
         When I click on "Housing"
-        Then I should see "To help me find the right services I'll ask you a few questions"
+        Then I should see "To help me find the right services I'll ask you a few questions."
 
         When I click on the done button
         Then I should see "Where are you?"
@@ -73,7 +73,7 @@ Feature: Personalisation
     Scenario: Do a search
         Given control of geolocation
         When I search for "find a meal" and press enter
-        Then I should see "To help me find the right services I'll ask you a few questions"
+        Then I should see "To help me find the right services I'll ask you a few questions."
 
         When I click on the done button
         Then I should see "Where are you?"
@@ -89,13 +89,13 @@ Feature: Personalisation
 
     Scenario: Searching for domestic violence checks that I'm safe
         When I click on "Domestic & family violence help"
-        Then I should see "To help me find the right services I'll ask you a few questions"
+        Then I should see "To help me find the right services I'll ask you a few questions."
 
         When I click on the done button
         Then I should see "Are you safe right now?"
 
         When I click on "No"
-        Then I should see "Everyone has the right to be safe"
+        Then I should see "Everyone has the right to be safe."
 
         When I click back from the title bar
         Then I should see "Intro"

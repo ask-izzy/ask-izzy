@@ -12,7 +12,7 @@ Feature: Personalisation header
     Scenario: Search for housing
         When I visit /
         And I click on "Housing"
-        Then I should see "To help me find the right services I'll ask you a few questions"
+        Then I should see "To help me find the right services I'll ask you a few questions."
 
         When I click on the done button # Intro page
          And I click on the done button # Somewhere safe to sleep

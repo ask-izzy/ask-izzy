@@ -9,6 +9,7 @@ type Props = ListItemProps & {
     type: "checkbox"|"radio",
     checked?: boolean,
     value?: string,
+    ariaLabel?: string,
     checkedIcon: any,
     uncheckedIcon: any,
     onFocus?: ?function,
@@ -32,16 +33,21 @@ export default class InputListItem extends React.Component<Props, void> {
             leftIcon,
             tabIndex,
             onClick,
+            ariaLabel,
             ...rest
         } = this.props;
+
+        const label = ariaLabel || `${typeof primaryText === "string" ?
+            `${primaryText}.` : ""} ${typeof secondaryText === "string" ?
+            `${secondaryText}` : ""}`
 
         return (
             <ListItem
                 className="InputListItem"
                 rootElement="button"
                 role={this.props.type || "button"}
-                aria-label={primaryText}
                 tabIndex={tabIndex || 0}
+                aria-label={label}
                 onFocus={this.props.onFocus}
                 {...{primaryText, secondaryText, leftIcon, onClick}}
                 rightIcon={
@@ -54,6 +60,7 @@ export default class InputListItem extends React.Component<Props, void> {
                         <input
                             ref="input"
                             key="input"
+                            aria-hidden="true"
                             aria-label={primaryText}
                             {...(rest: any)}
                             tabIndex="-1"

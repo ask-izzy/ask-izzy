@@ -10,6 +10,7 @@ import {
     PersonalisationLink,
     renderPipeOrComma,
     sortAnswers,
+    getInitialTabIndex,
 } from "./QuestionStepper.service";
 import Category from "../constants/Category";
 
@@ -24,13 +25,13 @@ type Props = {
     intro?: ?boolean,
     home?: ?boolean,
     category?: ?Category,
-    resultsPage?: ?boolean,
+    resultsPage?: boolean,
     results?: Array<Service>,
     listFocused?: ?boolean,
     location?: ?string,
     onClear?: ?function,
     onTabIndex?: ?function,
-    initialTabIndex?: ?number,
+    initialTabIndex?: number,
 }
 
 const SCREEN_READER_MESSAGE = "Below are your currently selected answers," +
@@ -52,8 +53,9 @@ function QuestionStepper(
         onTabIndex,
         listFocused,
         results,
-        initialTabIndex,
+        initialTabIndex = 0,
     }: Props): React.Node {
+
     const [currentAnswers, setCurrentAnswers] =
         React.useState<Array<any>, function>([])
     const [multiSelectedAnswer, setMultiSelectedAnswer] = React.useState(
@@ -121,7 +123,8 @@ function QuestionStepper(
 
         setLastMultiSelect(answers.map(ans => ans.multi).lastIndexOf(true))
         setCurrentAnswers(answers);
-        onTabIndex?.(6 + answers.length)
+        onTabIndex?.(resultsPage ? 0
+            : getInitialTabIndex(resultsPage, initialTabIndex) + answers.length)
     }, [])
 
     const getClearLocationTabIndex = () => (
@@ -147,9 +150,11 @@ function QuestionStepper(
                 if (evt.key === "Tab") {
                     if (document.activeElement?.tabIndex &&
                         document.activeElement.tabIndex >
-                        (initialTabIndex || INITIAL_TAB_INDEX) &&
+                        getInitialTabIndex(
+                            resultsPage, initialTabIndex
+                        ) !== 0 &&
                         (document.activeElement.tabIndex <
-                            (initialTabIndex || INITIAL_TAB_INDEX) +
+                            getInitialTabIndex(resultsPage, initialTabIndex) +
                             currentAnswers.length
                         )) {
                         setAccessibility(true)
@@ -163,7 +168,7 @@ function QuestionStepper(
                 setAccessibility={setAccessibility}
             />
             <div className="answerBox"
-                tabIndex={INITIAL_TAB_INDEX}
+                tabIndex={getInitialTabIndex(resultsPage, initialTabIndex)}
                 style={Accessibility ? {paddingTop: 0} : {}}
             >
                 <span aria-label={SCREEN_READER_MESSAGE}>
@@ -174,6 +179,8 @@ function QuestionStepper(
                             answer={answer}
                             intro={intro}
                             home={home}
+                            resultsPage={resultsPage}
+                            initialTabIndex={initialTabIndex}
                             onClear={onClear}
                             onTabIndex={(index) => setTabIndex(index)}
                             currentAnswers={currentAnswers}

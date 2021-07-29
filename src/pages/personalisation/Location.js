@@ -17,6 +17,7 @@ import {getCategory} from "../../constants/categories";
 import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
 import Category from "../../constants/Category";
 import WithStickyFooter from "../../components/WithStickyFooter";
+import ScreenReader from "../../components/ScreenReader";
 
 type Props = {
         name: string,
@@ -247,13 +248,12 @@ class Location extends Personalisation<Props, State> {
                                 this._search = element;
                             }}
                             onFocus={this.scrollToSearchControl.bind(this)}
-                            aria-label="Search for a suburb or postcode"
                             placeholder="Search for a suburb or postcode"
+                            aria-label="Search for a suburb or postcode"
                             value={this.state.locationName}
                             onChange={this.onSearchChange.bind(this)}
                         />
                     </div>
-
                     {
                         /* any autocompletions we currently have */
                         this.state.autocompletions.map((result, index) =>
@@ -269,6 +269,7 @@ class Location extends Personalisation<Props, State> {
                                         {result.state}
                                     </div>
                                 }
+                                ariaLabel={`${result.name}, ${result.state}`}
                                 type="radio"
                                 tabIndex={0}
                                 uncheckedIcon={
@@ -286,7 +287,13 @@ class Location extends Personalisation<Props, State> {
                 </div>
                 {
                     this.state.autocompletionInProgress && (
-                        <div className="progress">
+                        <div
+                            className="progress"
+                            tabIndex="0"
+                        >
+                            <ScreenReader>
+                                Loading locations
+                            </ScreenReader>
                             <icons.Loading className="big" />
                         </div>
                     )
@@ -319,7 +326,7 @@ class Location extends Personalisation<Props, State> {
                     </div>
                 }
                 secondaryText={
-                    "This will let me find the services closest to you"
+                    "This will let me find the services closest to you."
                 }
                 taperColour={this.state.showStepper ? "LighterGrey"
                     : "HeaderBar"}

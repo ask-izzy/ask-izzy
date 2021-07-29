@@ -12,7 +12,7 @@ export default class ServiceList extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "service-list",
         question: "What best describes what you need?",
-        byline: "All of your answers are private and anonymous",
+        byline: "All of your answers are private and anonymous.",
         answers: {
             "Family violence support": append(""),
             "Counselling": append("counselling"),
@@ -54,17 +54,17 @@ export default class ServiceList extends BaseQuestion {
             "Help for pets": icons.DemographicPets,
         },
         answersDesc: {
-            "Family violence support": "Crisis counselling & accommodation",
-            "Counselling": "Someone to talk to",
-            "Police": "Stations & liaison officers",
-            "Legal support": "Intervention orders, court & separation",
+            "Family violence support": "Crisis counselling & accommodation.",
+            "Counselling": "Someone to talk to.",
+            "Police": "Stations & liaison officers.",
+            "Legal support": "Intervention orders, court & separation.",
             "Children's support & protection":
-                "Support services & child protection",
-            "Sexual assault support": "Counselling, medical care & support",
-            "Financial help": "Money counsellors & support",
+                "Support services & child protection.",
+            "Sexual assault support": "Counselling, medical care & support.",
+            "Financial help": "Money counsellors & support.",
             "Help for people using violence":
                 "Counselling & behaviour change programs",
-            "Help for pets": "Emergency kennel & support",
+            "Help for pets": "Emergency kennel & support.",
         },
     };
 

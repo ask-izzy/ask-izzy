@@ -139,7 +139,10 @@ class OpeningTimes extends React.Component<Props, void> {
                     Open now
                 </span>
                 {" "}
-                <span className="time">
+                <span
+                    className="time"
+                    aria-label={`${this.props.object.until}.`}
+                >
                     {this.props.object.until}
                 </span>
             </span>
@@ -156,7 +159,10 @@ class OpeningTimes extends React.Component<Props, void> {
                     Closed
                 </span>
                 {" "}
-                <span className="time">
+                <span
+                    className="time"
+                    aria-label={`${this.props.object.until}.`}
+                >
                     {this.props.object.until}
                 </span>
             </span>
@@ -173,7 +179,7 @@ class OpeningTimes extends React.Component<Props, void> {
         if (!openTime) {
             return (
                 <span className="until">
-                    Contact for opening hours
+                    Contact for opening hours.
                 </span>
             );
         }

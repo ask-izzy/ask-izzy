@@ -243,3 +243,18 @@ export const formatAriaLabelText = (
         `You're now editing ${selection} for ${answer.name}`
         : `You've selected ${selection} for ${answer.name}`
 }
+
+export const getInitialTabIndex = (
+    resultsPage: ?boolean,
+    initialTabIndex: ?number,
+    additional?: ?number): number => {
+    let index;
+    if (resultsPage) {
+        index = 0
+    } else if (initialTabIndex || initialTabIndex === 0) {
+        index = initialTabIndex
+    } else {
+        index = INITIAL_TAB_INDEX
+    }
+    return additional ? index + additional : index
+}

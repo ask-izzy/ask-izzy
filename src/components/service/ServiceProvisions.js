@@ -30,6 +30,7 @@ export default class ServiceProvisions extends React.Component<Props, void> {
         <ul className="ServiceProvisions">
             {this.provisionsAboveFold.map((provision, i) =>
                 <li className="provision aboveFold"
+                    aria-label={`${provision}.`}
                     key={i}
                 >
                     {provision}
@@ -42,6 +43,7 @@ export default class ServiceProvisions extends React.Component<Props, void> {
                 >
                     {this.provisionsBelowFold.map((provision, i) =>
                         <li className="provision"
+                            aria-label={`${provision}.`}
                             key={i}
                         >
                             {provision}

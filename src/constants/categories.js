@@ -8,7 +8,7 @@ import personalisation from "../pages/personalisation";
 const categories = [
     (new Category({
         name: "Housing",
-        byline: "A place to stay",
+        byline: "A place to stay.",
         icon: icons.House,
         search: {
             q: "housing -(coordinating bodies) -(respite care) " +
@@ -30,7 +30,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Food",
-        byline: "Something to eat",
+        byline: "Something to eat.",
         icon: icons.Food,
         search: {
             q: "meals -(coordinating bodies)" +
@@ -58,7 +58,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Domestic & family violence help",
-        byline: "Scared of partner or family member",
+        byline: "Scared of partner or family member.",
         icon: icons.EscapeViolence,
         search: {
             q: "(family violence) -(coordinating bodies) -(fire-fighting)",
@@ -77,7 +77,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Health",
-        byline: "Physical, mental, emotional",
+        byline: "Physical, mental, emotional.",
         icon: icons.Health,
         search: {
             q: "(community health) -(coordinating bodies)",
@@ -95,7 +95,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Centrelink",
-        byline: "Access to services",
+        byline: "Access to services.",
         icon: icons.Centrelink,
         search: {
             q: "\"centrelink\"",
@@ -119,7 +119,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Support & counselling",
-        byline: "Relationships, gambling & LGBTIQA+",
+        byline: "Relationships, gambling & LGBTIQA+.",
         icon: icons.Support,
         search: {
             q: "counselling",
@@ -136,7 +136,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Legal",
-        byline: "Police, law & fines",
+        byline: "Police, law & fines.",
         icon: icons.Legal,
         search: {
             q: "legal (legal aid) -(coordinating bodies) -permits " +
@@ -154,7 +154,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Drugs & alcohol",
-        byline: "Support & assistance",
+        byline: "Support & assistance.",
         icon: icons.Addiction,
         search: {
             q: "substance abuse -(coordinating bodies)" +
@@ -169,7 +169,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Life skills & education",
-        byline: "Everyday skills & training",
+        byline: "Everyday skills & training.",
         icon: icons.Skills,
         search: {
             q: "life skills education -(coordinating bodies)" +
@@ -183,7 +183,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Finding work",
-        byline: "Earning & volunteering",
+        byline: "Earning & volunteering.",
         icon: icons.Job,
         search: {
             q: "employment -(coordinating bodies)",
@@ -196,7 +196,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Facilities",
-        byline: "Toilets",
+        byline: "Toilets.",
         icon: icons.Facilities,
         search: {
             q: "public facilities" +
@@ -234,7 +234,7 @@ const categories = [
     }): Category),
     (new Category({
         name: "Advocacy",
-        byline: "Complaints and advice",
+        byline: "Complaints and advice.",
         icon: icons.Advocacy,
         search: {
             q: "consumer issues mediation discrimination " +

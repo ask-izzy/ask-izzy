@@ -22,7 +22,7 @@ class AreYouSafe extends BaseQuestion {
         name: "are-you-safe",
         question: "Are you safe right now?",
         byline:
-            "All of your answers are private and anonymous",
+            "All of your answers are private and anonymous.",
         answers: {
             "No": append(""),
             "I'm not sure": append(""),

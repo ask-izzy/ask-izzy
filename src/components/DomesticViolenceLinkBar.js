@@ -20,7 +20,7 @@ export default class DomesticViolenceLinkBar extends React.Component<{}, void> {
                     <icons.Book />
                 </div>
                 <div className="primaryText">
-                    Read more about family and domestic violence
+                    Read more about family and domestic violence.
                 </div>
                 <div className="rightIcon">
                     <icons.Chevron />

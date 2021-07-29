@@ -19,7 +19,7 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
         BaseStaticPersonalisation.defaultProps,
         {
             name: "online-safety-screen",
-            heading: "Everyone has the right to be safe",
+            heading: "Everyone has the right to be safe.",
             showBaseTextBox: true,
             baseTextBoxComponent: <OnlineSafetyLink/>,
         }
@@ -65,7 +65,7 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
                             ) : (
                                 "000"
                             )
-                        }
+                        }.
                     </h2>
                     <p>
                         If you don't feel safe in your life, call{" "}

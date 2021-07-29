@@ -320,6 +320,7 @@ class BaseQuestion extends Personalisation<Props, State> {
                     {renderedHeaderBar}
                     <QuestionStepper
                         category={this.state.category}
+                        initialTabIndex={1}
                         listFocused={this.state.listFocused}
                         onTabIndex={(tabIndex) =>
                             this.setState({tabIndex})
