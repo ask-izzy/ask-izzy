@@ -8,6 +8,7 @@ type Props = {
     secondaryText?: string | React.Node,
     children?: React.Node,
     bannerName: string,
+    className?: string,
     taperColour?: string,
     fixedAppBar?: boolean,
     home?: boolean,
@@ -37,6 +38,10 @@ class HeaderBar extends React.Component<Props, void> {
             headerBarClassName += ` ${this.props.bannerName}`;
         }
 
+        if (this.props.className) {
+            headerBarClassName += ` ${this.props.className}`;
+        }
+
         if (this.props.taperColour) {
             headerBarClassName += ` taperColour${this.props.taperColour}`;
         }
@@ -53,7 +58,7 @@ class HeaderBar extends React.Component<Props, void> {
                 <div className="primary"
                     tabIndex="0"
                 >
-                    {this.props.primaryText}
+                    <h1>{this.props.primaryText}</h1>
                 </div>
                 {this.renderSecondaryText()}
                 {this.props.children}

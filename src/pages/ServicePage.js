@@ -88,8 +88,7 @@ class ServicePage extends React.Component<{}, {
             return (
                 <div className="ServicePage">
                     <components.AppBar
-                        title="Loading..."
-                        onBackTouchTap={() => this.context.router.navigate(-1)}
+                        transition={false}
                     />
                     <div className="ServicePane">
                         <main aria-labelledby="servicePage">

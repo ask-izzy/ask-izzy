@@ -84,9 +84,9 @@ export default class ServicePane extends React.Component<{
                         </span>
                     </ScreenReader>
                     <HeaderBar
+                        className="serviceDetailsHeader"
                         primaryText={object.name}
-                        secondaryText={null}
-                        fixedAppBar={false}
+                        secondaryText={object.site.name}
                         bannerName="housing"
                     />
                     <AlertBannerList
