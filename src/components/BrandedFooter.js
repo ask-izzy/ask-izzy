@@ -111,7 +111,7 @@ export default class BrandedFooter
                     className="additional-information"
                 >
                     <h1 id="addInfo">
-                        Additional Information.
+                        Additional Information
                     </h1>
                     <ul>
                         <li>
