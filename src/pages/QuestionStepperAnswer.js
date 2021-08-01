@@ -6,7 +6,6 @@ import {
     renderPipeOrComma,
     renderEllipsis,
     formatAriaLabelText,
-    getInitialTabIndex,
 } from "./QuestionStepper.service";
 import routerContext from "../contexts/router-context";
 import {useContext} from "react";
@@ -14,8 +13,6 @@ import type {AnswerType} from "./QuestionStepper.service";
 import icons from "../icons";
 
 type Props = {
-    onClear: function,
-    onTabIndex: function,
     lastMultiSelect: ?number,
     index: number,
     answer: AnswerType,
@@ -23,8 +20,6 @@ type Props = {
     multiSelectedAnswer: Array<AnswerType>,
     intro?: ?boolean,
     home?: ?boolean,
-    initialTabIndex: number,
-    resultsPage: ?boolean,
 }
 
 function QuestionStepperAnswer({
@@ -35,9 +30,6 @@ function QuestionStepperAnswer({
     currentAnswers,
     multiSelectedAnswer,
     lastMultiSelect,
-    onTabIndex,
-    initialTabIndex,
-    resultsPage,
 }: Props): React.Node {
 
     const {router} = useContext(routerContext)
@@ -55,18 +47,7 @@ function QuestionStepperAnswer({
     return (
         <>
             <span
-                tabIndex={getInitialTabIndex(
-                    resultsPage,
-                    initialTabIndex,
-                    index + 1,
-                )}
-                onFocus={() => {
-                    onTabIndex(getInitialTabIndex(
-                        resultsPage,
-                        initialTabIndex,
-                        (index + 1) + 1,
-                    ))
-                }}
+                tabIndex="0"
                 className={home ? "locationIcon" : undefined}
             >
                 <MapIcon />

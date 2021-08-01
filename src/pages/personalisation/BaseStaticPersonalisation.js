@@ -108,22 +108,6 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
         return <React.Fragment />;
     }
 
-    renderHeaderBar(): React.Node {
-        return (
-            <HeaderBar
-                primaryText={
-                    <div>
-                        {this.heading}
-                    </div>
-                }
-                secondaryText={
-                    this.props.byline
-                }
-                bannerName={this.bannerName}
-            />
-        );
-    }
-
     renderDoneButton(): ?React.Element<any> {
         return (
             <div>
@@ -145,7 +129,17 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
     render(): React.Node {
         return (
             <div>
-                {this.renderHeaderBar()}
+                <HeaderBar
+                    primaryText={
+                        <div>
+                            {this.heading}
+                        </div>
+                    }
+                    secondaryText={
+                        this.props.byline
+                    }
+                    bannerName={this.bannerName}
+                />
                 <div className="body">
                     {this.renderContent()}
                     {

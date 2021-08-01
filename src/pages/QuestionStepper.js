@@ -2,15 +2,14 @@
 
 import * as React from "react";
 import {
-    INITIAL_TAB_INDEX,
     BREADCRUMB_LIMIT,
     MULTI_DEFAULT_ANSWER_LIMIT,
+    SCREEN_READER_MESSAGE,
     fetchAnswers,
     getSearchAnswers,
     PersonalisationLink,
     renderPipeOrComma,
     sortAnswers,
-    getInitialTabIndex,
 } from "./QuestionStepper.service";
 import Category from "../constants/Category";
 
@@ -24,18 +23,15 @@ import {Service} from "../iss";
 type Props = {
     intro?: ?boolean,
     home?: ?boolean,
+    showSkipToChoice?: ?boolean,
     category?: ?Category,
     resultsPage?: boolean,
     results?: Array<Service>,
     listFocused?: ?boolean,
     location?: ?string,
     onClear?: ?function,
-    onTabIndex?: ?function,
-    initialTabIndex?: number,
+    clearShowSkipToChoice?: () => void,
 }
-
-const SCREEN_READER_MESSAGE = "Below are your currently selected answers," +
-    " these are used for the search."
 
 const ConditionalSkipToChoice = ({show, ...props}) => (
     show ? <SkipToChoices {...props}/> : null
@@ -46,14 +42,13 @@ function QuestionStepper(
     {
         intro,
         home,
+        showSkipToChoice,
+        clearShowSkipToChoice,
         category,
         resultsPage,
         location,
         onClear,
-        onTabIndex,
-        listFocused,
         results,
-        initialTabIndex = 0,
     }: Props): React.Node {
 
     const [currentAnswers, setCurrentAnswers] =
@@ -62,8 +57,6 @@ function QuestionStepper(
         []
     )
     const [lastMultiSelect, setLastMultiSelect] = React.useState(undefined)
-    const [Accessibility, setAccessibility] = React.useState(false)
-    const [tabIndex, setTabIndex] = React.useState(INITIAL_TAB_INDEX + 1)
 
     /**
      * The UseEffect is to fetch the current answers and set them to the state
@@ -123,17 +116,7 @@ function QuestionStepper(
 
         setLastMultiSelect(answers.map(ans => ans.multi).lastIndexOf(true))
         setCurrentAnswers(answers);
-        onTabIndex?.(resultsPage ? 0
-            : getInitialTabIndex(resultsPage, initialTabIndex) + answers.length)
     }, [])
-
-    const getClearLocationTabIndex = () => (
-        (initialTabIndex || INITIAL_TAB_INDEX) + 1
-    )
-
-    React.useEffect(() => {
-        setAccessibility(false)
-    }, [listFocused])
 
     const getClassesNames = () => (
         classnames(
@@ -146,32 +129,16 @@ function QuestionStepper(
     return (
         <div
             className={getClassesNames()}
-            onKeyDown={(evt) => {
-                if (evt.key === "Tab") {
-                    if (document.activeElement?.tabIndex &&
-                        document.activeElement.tabIndex >
-                        getInitialTabIndex(
-                            resultsPage, initialTabIndex
-                        ) !== 0 &&
-                        (document.activeElement.tabIndex <
-                            getInitialTabIndex(resultsPage, initialTabIndex) +
-                            currentAnswers.length
-                        )) {
-                        setAccessibility(true)
-                    }
-                }
-            }}
+            aria-label={SCREEN_READER_MESSAGE}
+            onBlur={() => clearShowSkipToChoice?.()}
         >
             <ConditionalSkipToChoice
-                show={!resultsPage && Accessibility}
-                tabIndex={tabIndex}
-                setAccessibility={setAccessibility}
+                show={!resultsPage && showSkipToChoice}
             />
             <div className="answerBox"
-                tabIndex={getInitialTabIndex(resultsPage, initialTabIndex)}
-                style={Accessibility ? {paddingTop: 0} : {}}
+                style={showSkipToChoice ? {paddingTop: 0} : {}}
             >
-                <span aria-label={SCREEN_READER_MESSAGE}>
+                <span>
                     {currentAnswers.map((answer, index) =>
                         <QuestionStepperAnswer
                             index={index}
@@ -179,10 +146,6 @@ function QuestionStepper(
                             answer={answer}
                             intro={intro}
                             home={home}
-                            resultsPage={resultsPage}
-                            initialTabIndex={initialTabIndex}
-                            onClear={onClear}
-                            onTabIndex={(index) => setTabIndex(index)}
                             currentAnswers={currentAnswers}
                             lastMultiSelect={lastMultiSelect}
                             multiSelectedAnswer={multiSelectedAnswer}
@@ -202,7 +165,7 @@ function QuestionStepper(
                     onClear={onClear}
                     intro={intro}
                     home={home}
-                    tabIndex={getClearLocationTabIndex()}
+                    tabIndex={0}
                     currentAnswers={currentAnswers}
                     setCurrentAnswers={setCurrentAnswers}
                 />
@@ -225,7 +188,6 @@ QuestionStepper.defaultProps = {
     location: null,
     onClear: null,
     listFocused: false,
-    initialTabIndex: INITIAL_TAB_INDEX,
 }
 
 export default QuestionStepper

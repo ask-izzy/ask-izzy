@@ -26,9 +26,6 @@ class BaseMultiQuestion extends BaseQuestion {
         return (
             <div className="done-button">
                 <FlatButton
-                    tabIndex={
-                        (this.state.tabIndex + this.answers.length) + 1
-                    }
                     label={label}
                     onClick={this.props.onDoneTouchTap}
                 />
@@ -188,46 +185,57 @@ class BaseMultiQuestion extends BaseQuestion {
                         taperColour="LighterGrey"
                         bannerName={this.bannerName}
                     />
+                </section>
+                <div
+                    tabIndex="0"
+                    onFocus={() => {
+                        this.setState({showSkipToChoice: true})
+                    }}
+                >
                     <QuestionStepper
                         category={getCategory(
                             this.context.router.match.params.page
                         )}
-                        initialTabIndex={0}
-                        listFocused={this.state.listFocused}
-                        onTabIndex={(tabIndex) =>
-                            this.setState({tabIndex})
+                        showSkipToChoice={this.state.showSkipToChoice}
+                        clearShowSkipToChoice={() =>
+                            this.setState({showSkipToChoice: false})
                         }
                     />
-                </section>
-
+                </div>
                 <WithStickyFooter
                     footerContents={this.renderDoneButton()}
                 >
-                    <div className="List">
-                        {this.answers.map((answer, index) =>
-                            <InputListItem
-                                key={index}
-                                leftIcon={this.iconFor(answer)}
-                                primaryText={answer}
-                                value={answer}
-                                tabIndex={this.state.tabIndex + (index + 1)}
-                                type="checkbox"
-                                checked={selected.has(answer)}
-                                checkedIcon={
-                                    <icons.CheckboxSelected className="big" />
-                                }
-                                onFocus={() => this.setState(
-                                    {listFocused: true}
-                                )}
-                                uncheckedIcon={
-                                    <icons.CheckboxUnselected className="big" />
-                                }
-                                onClick={this.onAnswerTouchTap.bind(
-                                    this, answer, !selected.has(answer)
-                                )}
-                            />
-                        )}
-                    </div>
+                    <fieldset>
+                        <legend>
+                            {this.question}
+                        </legend>
+                        <div className="List">
+                            {this.answers.map((answer, index) =>
+                                <InputListItem
+                                    key={index}
+                                    leftIcon={this.iconFor(answer)}
+                                    primaryText={answer}
+                                    value={answer}
+                                    aria-label={answer}
+                                    type="checkbox"
+                                    checked={selected.has(answer)}
+                                    checkedIcon={
+                                        <icons.CheckboxSelected
+                                            className="big"
+                                        />
+                                    }
+                                    uncheckedIcon={
+                                        <icons.CheckboxUnselected
+                                            className="big"
+                                        />
+                                    }
+                                    onClick={this.onAnswerTouchTap.bind(
+                                        this, answer, !selected.has(answer)
+                                    )}
+                                />
+                            )}
+                        </div>
+                    </fieldset>
                 </WithStickyFooter>
             </div>
         );

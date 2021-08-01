@@ -25,6 +25,8 @@ const ICON_ARIALABEL_MAPPING = {
 export const INITIAL_TAB_INDEX = 4;
 export const BREADCRUMB_LIMIT = 6;
 export const MULTI_DEFAULT_ANSWER_LIMIT = 2;
+export const SCREEN_READER_MESSAGE: string = "The following are your " +
+    "previously selected answers."
 
 export type AnswerType = {
     name: string,
@@ -108,6 +110,8 @@ export const PersonalisationLink = ({pathname}: Object): React.Node => (
     <Link
         to={`${trailingSlash(pathname)}personalise/summary`}
         onClick={gtm.emit.bind(null, {event: "changeAnswers"})}
+        tabIndex="0"
+        aria-label="change your currently selected answers."
     >
         See all and edit
     </Link>
@@ -147,7 +151,10 @@ export const renderPipeOrComma = (
     index?: ?number,
 ): React.Node => (
     <>
-        <span className={classnames("pipeOrComma", !multi && "nonMultiMargin")}>
+        <span
+            aria-hidden="true"
+            className={classnames("pipeOrComma", !multi && "nonMultiMargin")}
+        >
             {multi && lastMultiSelect !== index ?
                 <span className={editing ? "editing" : null}>
                     {", "}
@@ -215,15 +222,23 @@ export const renderEllipsis = (
         : null
 }
 
+export const editing = (answer: AnswerType, router: any): boolean => (
+    answer.name === router.match.params.subpage
+)
+
 /**
  * This will generate the Aria Label and convert
  * icons to text based on their icon class
  * @param answer - the current answer
  * @param editing - is it being edited
+ * @param container - For Question stepper container
  * @return {string} - The aria label text
  */
 export const formatAriaLabelText = (
-    answer: AnswerType, editing: boolean): string => {
+    answer: AnswerType,
+    editing: boolean,
+    container: ?boolean,
+): string => {
     let selection = answer.answer || "answer";
 
     if (typeof selection === "object" && selection?.props.children) {
@@ -239,22 +254,11 @@ export const formatAriaLabelText = (
         }
     }
 
+    if (container) {
+        return `${selection} for ${answer.name}`;
+    }
+
     return editing ?
         `You're now editing ${selection} for ${answer.name}`
         : `You've selected ${selection} for ${answer.name}`
-}
-
-export const getInitialTabIndex = (
-    resultsPage: ?boolean,
-    initialTabIndex: ?number,
-    additional?: ?number): number => {
-    let index;
-    if (resultsPage) {
-        index = 0
-    } else if (initialTabIndex || initialTabIndex === 0) {
-        index = initialTabIndex
-    } else {
-        index = INITIAL_TAB_INDEX
-    }
-    return additional ? index + additional : index
 }
