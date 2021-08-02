@@ -6,6 +6,7 @@ import classnames from "classnames";
 import AlertBanner from "./AlertBanner";
 import StrapiMarkdown from "./StrapiMarkdown";
 import alertsQuery from "../queries/content/alerts.js";
+import ScreenReader from "./ScreenReader";
 
 type Props = {
     screenLocation: string,
@@ -47,15 +48,25 @@ export default function({state, screenLocation, format}: Props): React.Node {
     )
 
     return (
-        <div className={classnames(
-            "AlertBannerList",
-            format
-        )}
-        >
-            <ul>
-                {alerts.map(renderAlert)}
-            </ul>
-        </div>
+        alerts.length ? (
+            <div
+                className={classnames(
+                    "AlertBannerList",
+                    format
+                )}
+                role="region"
+                aria-labelledby="alerts"
+            >
+                <ScreenReader>
+                    <span id="alerts">
+                        Alerts.
+                    </span>
+                </ScreenReader>
+                <ul>
+                    {alerts.map(renderAlert)}
+                </ul>
+            </div>
+        ) : null
     )
 
     function renderAlert({id, title, body, alertLevel, defaultToOpen}) {

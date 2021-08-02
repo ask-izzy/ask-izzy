@@ -6,6 +6,22 @@
     font-size: 14px;
     font-weight: light;
 
+    .row {
+        display: inline-flex;
+
+        .leftColumn {
+            width: 80%;
+        }
+
+        @media (max-width: 768px) {
+            display: block;
+
+            .leftColumn {
+                width: 100%;
+            }
+        }
+    }
+
     .error {
         width: 100%;
         padding-top: 20px;
@@ -36,22 +52,13 @@
 
     @media ($tablet) {
         .header {
-            width: 46%;
-            float: left;
             clear: both;
             background-color: #{colours.get-static('raw-colour-pure-white')};
             background-color: var(--raw-colour-pure-white);
         }
-
-        .provisions {
-            width: 46%;
-            float: left;
-            clear: left;
-        }
     }
 
     // FIXME: Modifying child component styles
-    .Eligibility,
     .serviceProvisions-container {
         padding-right: 15px;
         padding-left: 15px;
@@ -73,6 +80,7 @@
     }
 
     .description {
+        margin-bottom: 0;
         padding-bottom: 10px;
         color: #{colours.get-static('colour-text-mid')};
         color: var(--colour-text-mid);

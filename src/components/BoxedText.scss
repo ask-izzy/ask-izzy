@@ -9,9 +9,7 @@
     background-color: var(--raw-colour-pure-white);
 
     @media ($tablet) {
-        width: 46%;
         margin-top: 15px;
-        float: right;
         background-color: #{colours.get-static('raw-colour-pure-white')};
         background-color: var(--raw-colour-pure-white);
 

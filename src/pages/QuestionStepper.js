@@ -19,6 +19,7 @@ import QuestionStepperAnswer from "./QuestionStepperAnswer";
 import QuestionStepperClearLocation from "./QuestionStepperClearLocation";
 import _ from "underscore";
 import {Service} from "../iss";
+import ScreenReader from "../components/ScreenReader";
 
 type Props = {
     intro?: ?boolean,
@@ -126,12 +127,29 @@ function QuestionStepper(
         )
     )
 
+    const getLandMarkTitle = (): string => {
+        if (home) {
+            return "Saved location."
+        } else if (resultsPage) {
+            return "Selected answer breadcrumb."
+        } else {
+            return "Previous answer breadcrumb."
+        }
+    }
+
     return (
         <div
+            role="navigation"
+            aria-labelledby="breadcrumb"
             className={getClassesNames()}
             aria-label={SCREEN_READER_MESSAGE}
             onBlur={() => clearShowSkipToChoice?.()}
         >
+            <ScreenReader>
+                <span id="breadcrumb">
+                    {getLandMarkTitle()}
+                </span>
+            </ScreenReader>
             <ConditionalSkipToChoice
                 show={!resultsPage && showSkipToChoice}
             />

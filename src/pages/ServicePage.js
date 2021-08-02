@@ -13,6 +13,7 @@ import Loading from "../icons/Loading";
 import config from "../config";
 import routerContext from "../contexts/router-context";
 import type { RouterContextObject } from "../contexts/router-context";
+import ScreenReader from "../components/ScreenReader";
 
 class ServicePage extends React.Component<{}, {
     object?: Service,
@@ -91,7 +92,12 @@ class ServicePage extends React.Component<{}, {
                         onBackTouchTap={() => this.context.router.navigate(-1)}
                     />
                     <div className="ServicePane">
-                        <main>
+                        <main aria-labelledby="servicePage">
+                            <ScreenReader>
+                                <span id="servicePage">
+                                    Loading service details.
+                                </span>
+                            </ScreenReader>
                             {
                                 error ?
                                     <div className="error">

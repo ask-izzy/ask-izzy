@@ -4,13 +4,6 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-
-    & > main {
-        flex: 1;
-        background-color: #{colours.get-static('colour-bg-standard')};
-        background-color: var(--colour-bg-standard);
-
-        /* FIXME: autoprefixer should be taking care of this */
-        -ms-flex-preferred-size: auto;  /* Needed for IE10 */
-    }
+    background-color: #{colours.get-static('colour-bg-standard')};
+    background-color: var(--colour-bg-standard);
 }

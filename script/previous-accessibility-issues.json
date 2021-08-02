@@ -1,24 +1,493 @@
 {
-  "/index.html": [],
-  "/about/index.html": [],
-  "/bushfire-support/index.html": [],
-  "/covid-19-support/index.html": [],
-  "/disability-advocacy-finder/index.html": [],
+  "/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "The heading structure is not logically nested. This h4 element appears to be the primary document heading, so should be an h1 element.",
+      "context": "<h4>What do you need help with?</h4>",
+      "selector": "#root > div > div > section > div:nth-child(3) > form > label > h4",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "The heading structure is not logically nested. This h4 element should be an h1 to be properly nested.",
+      "context": "<h4>What do you need help with?</h4>",
+      "selector": "#root > div > div > section > div:nth-child(3) > form > label > h4",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List categories\"><a aria-label=\"Housing.\n       ...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/about/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/bushfire-support/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H42",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Heading markup should be used if this content is intended as a heading.",
+      "context": "<p><strong>Updating service inform...</p>",
+      "selector": "#root > div > div > main > div > p:nth-child(21)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H42",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Heading markup should be used if this content is intended as a heading.",
+      "context": "<p><strong>Donating money</strong></p>",
+      "selector": "#root > div > div > main > div > p:nth-child(23)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/covid-19-support/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/disability-advocacy-finder/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/donate/index.html": [],
-  "/terms/index.html": [],
-  "/online-safety/index.html": [],
-  "/beta-info/index.html": [],
-  "/homeless-shelters/index.html": [],
-  "/food-info/index.html": [],
-  "/using-ask-izzy/index.html": [],
-  "/homeless-legal-services/index.html": [],
-  "/homeless-financial-support/index.html": [],
-  "/homeless-health-care/index.html": [],
-  "/information/index.html": [],
-  "/disability-organisations/index.html": [],
-  "/search-help/index.html": [],
-  "/not-found/index.html": [],
-  "/add-service/index.html": [],
+  "/terms/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/online-safety/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/beta-info/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "The heading structure is not logically nested. This h2 element appears to be the primary document heading, so should be an h1 element.",
+      "context": "<h2>About “Ask Izzy Beta”</h2>",
+      "selector": "#root > div > div > main > div > h2:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "The heading structure is not logically nested. This h2 element should be an h1 to be properly nested.",
+      "context": "<h2>About “Ask Izzy Beta”</h2>",
+      "selector": "#root > div > div > main > div > h2:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/homeless-shelters/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/food-info/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/using-ask-izzy/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/homeless-legal-services/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/homeless-financial-support/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/homeless-health-care/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/information/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/disability-organisations/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/search-help/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/not-found/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/add-service/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H42",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Heading markup should be used if this content is intended as a heading.",
+      "context": "<p><strong>If you notice that serv...</p>",
+      "selector": "#root > div > div > main > div > div > p:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H42",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Heading markup should be used if this content is intended as a heading.",
+      "context": "<p><strong>If you want to add a ne...</p>",
+      "selector": "#root > div > div > main > div > div > p:nth-child(5)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/service/slug/index.html": [],
   "/category/:page/index.html": [],
   "/category/:page/in/:suburb-:state/index.html": [],
@@ -31,36 +500,190 @@
   "/search/:suburb-:state/map/personalise/page/are-you-safe/index.html": [],
   "/search/:suburb-:state/map/personalise/page/intro/index.html": [],
   "/search/:suburb-:state/map/personalise/page/location/index.html": [],
-  "/search/:suburb-:state/map/personalise/page/online-safety-screen/index.html": [],
-  "/search/:suburb-:state/map/personalise/summary/index.html": [],
+  "/search/:suburb-:state/map/personalise/page/online-safety-screen/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
+      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/search/:suburb-:state/map/personalise/summary/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/search/:suburb-:state/personalise/index.html": [],
   "/search/:suburb-:state/personalise/page/are-you-safe/index.html": [],
   "/search/:suburb-:state/personalise/page/intro/index.html": [],
   "/search/:suburb-:state/personalise/page/location/index.html": [],
-  "/search/:suburb-:state/personalise/page/online-safety-screen/index.html": [],
-  "/search/:suburb-:state/personalise/summary/index.html": [],
-  "/search/:suburb-:state/personalise/summary/are-you-safe/index.html": [],
-  "/search/:suburb-:state/personalise/summary/intro/index.html": [],
+  "/search/:suburb-:state/personalise/page/online-safety-screen/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
+      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/search/:suburb-:state/personalise/summary/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/search/:suburb-:state/personalise/summary/are-you-safe/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/search/:suburb-:state/personalise/summary/intro/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/search/:suburb-:state/personalise/summary/location/index.html": [],
-  "/search/:suburb-:state/personalise/summary/online-safety-screen/index.html": [],
+  "/search/:suburb-:state/personalise/summary/online-safety-screen/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
+      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/search/index.html": [],
   "/search/map/index.html": [],
   "/search/map/personalise/index.html": [],
   "/search/map/personalise/page/are-you-safe/index.html": [],
   "/search/map/personalise/page/intro/index.html": [],
   "/search/map/personalise/page/location/index.html": [],
-  "/search/map/personalise/page/online-safety-screen/index.html": [],
-  "/search/map/personalise/summary/index.html": [],
+  "/search/map/personalise/page/online-safety-screen/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
+      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/search/map/personalise/summary/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/search/personalise/index.html": [],
   "/search/personalise/page/are-you-safe/index.html": [],
   "/search/personalise/page/intro/index.html": [],
   "/search/personalise/page/location/index.html": [],
-  "/search/personalise/page/online-safety-screen/index.html": [],
-  "/search/personalise/summary/index.html": [],
-  "/search/personalise/summary/are-you-safe/index.html": [],
-  "/search/personalise/summary/intro/index.html": [],
+  "/search/personalise/page/online-safety-screen/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
+      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/search/personalise/summary/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/search/personalise/summary/are-you-safe/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/search/personalise/summary/intro/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/search/personalise/summary/location/index.html": [],
-  "/search/personalise/summary/online-safety-screen/index.html": [],
+  "/search/personalise/summary/online-safety-screen/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
+      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/housing/:suburb-:state/index.html": [],
   "/housing/:suburb-:state/map/index.html": [],
   "/housing/:suburb-:state/map/personalise/index.html": [],
@@ -71,8 +694,30 @@
   "/housing/:suburb-:state/map/personalise/page/age/index.html": [],
   "/housing/:suburb-:state/map/personalise/page/demographics/index.html": [],
   "/housing/:suburb-:state/map/personalise/page/are-you-safe/index.html": [],
-  "/housing/:suburb-:state/map/personalise/page/online-safety-screen/index.html": [],
-  "/housing/:suburb-:state/map/personalise/summary/index.html": [],
+  "/housing/:suburb-:state/map/personalise/page/online-safety-screen/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
+      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/housing/:suburb-:state/map/personalise/summary/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/housing/:suburb-:state/personalise/index.html": [],
   "/housing/:suburb-:state/personalise/page/intro/index.html": [],
   "/housing/:suburb-:state/personalise/page/location/index.html": [],
@@ -81,16 +726,71 @@
   "/housing/:suburb-:state/personalise/page/age/index.html": [],
   "/housing/:suburb-:state/personalise/page/demographics/index.html": [],
   "/housing/:suburb-:state/personalise/page/are-you-safe/index.html": [],
-  "/housing/:suburb-:state/personalise/page/online-safety-screen/index.html": [],
-  "/housing/:suburb-:state/personalise/summary/index.html": [],
-  "/housing/:suburb-:state/personalise/summary/intro/index.html": [],
+  "/housing/:suburb-:state/personalise/page/online-safety-screen/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
+      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/housing/:suburb-:state/personalise/summary/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/housing/:suburb-:state/personalise/summary/intro/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/housing/:suburb-:state/personalise/summary/location/index.html": [],
   "/housing/:suburb-:state/personalise/summary/sleep-tonight/index.html": [],
   "/housing/:suburb-:state/personalise/summary/gender/index.html": [],
   "/housing/:suburb-:state/personalise/summary/age/index.html": [],
   "/housing/:suburb-:state/personalise/summary/demographics/index.html": [],
-  "/housing/:suburb-:state/personalise/summary/are-you-safe/index.html": [],
-  "/housing/:suburb-:state/personalise/summary/online-safety-screen/index.html": [],
+  "/housing/:suburb-:state/personalise/summary/are-you-safe/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/housing/:suburb-:state/personalise/summary/online-safety-screen/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
+      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/housing/index.html": [],
   "/housing/map/index.html": [],
   "/housing/map/personalise/index.html": [],
@@ -101,8 +801,30 @@
   "/housing/map/personalise/page/age/index.html": [],
   "/housing/map/personalise/page/demographics/index.html": [],
   "/housing/map/personalise/page/are-you-safe/index.html": [],
-  "/housing/map/personalise/page/online-safety-screen/index.html": [],
-  "/housing/map/personalise/summary/index.html": [],
+  "/housing/map/personalise/page/online-safety-screen/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
+      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/housing/map/personalise/summary/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/housing/personalise/index.html": [],
   "/housing/personalise/page/intro/index.html": [],
   "/housing/personalise/page/location/index.html": [],
@@ -111,15 +833,91 @@
   "/housing/personalise/page/age/index.html": [],
   "/housing/personalise/page/demographics/index.html": [],
   "/housing/personalise/page/are-you-safe/index.html": [],
-  "/housing/personalise/page/online-safety-screen/index.html": [],
-  "/housing/personalise/summary/index.html": [],
-  "/housing/personalise/summary/intro/index.html": [],
+  "/housing/personalise/page/online-safety-screen/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
+      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
+      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/housing/personalise/summary/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/housing/personalise/summary/intro/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
   "/housing/personalise/summary/location/index.html": [],
   "/housing/personalise/summary/sleep-tonight/index.html": [],
   "/housing/personalise/summary/gender/index.html": [],
   "/housing/personalise/summary/age/index.html": [],
   "/housing/personalise/summary/demographics/index.html": [],
-  "/housing/personalise/summary/are-you-safe/index.html": [],
-  "/housing/personalise/summary/online-safety-screen/index.html": [],
-  "/*/index.html": []
+  "/housing/personalise/summary/are-you-safe/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"List\"><a class=\"Link internal ListIte...</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/housing/personalise/summary/online-safety-screen/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
+      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
+      "selector": "#root > div > div > main > div:nth-child(2) > div > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ],
+  "/*/index.html": [
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"about-links\"><a class=\"Link internal\" href=\"...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(3)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    },
+    {
+      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
+      "type": "warning",
+      "typeCode": 2,
+      "message": "If this element contains a navigation section, it is recommended that it be marked up as a list.",
+      "context": "<div class=\"socials\"><span>Find us on:</span><a href...</div>",
+      "selector": "#root > div > div > footer > div:nth-child(3) > div:nth-child(6)",
+      "runner": "htmlcs",
+      "runnerExtras": {}
+    }
+  ]
 }

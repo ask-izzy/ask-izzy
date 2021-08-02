@@ -27,6 +27,7 @@ import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import AlertBannerList from "../components/AlertBannerList";
 import type {Service} from "../iss";
+import ScreenReader from "./ScreenReader";
 
 export default class ServicePane extends React.Component<{
     service: Service,
@@ -71,79 +72,121 @@ export default class ServicePane extends React.Component<{
 
     render(): ReactElement<"div"> {
         const object = this.props.service;
-
         return (
             <div className="ServicePane">
-                <HeaderBar
-                    primaryText={object.name}
-                    secondaryText={null}
-                    bannerName="housing"
-                />
-                <AlertBannerList
-                    state={object.Location()?.state}
-                    screenLocation="servicePage"
-                    format="inline"
-                />
-
-                <DebugServiceRecord object={object} />
-
                 <div
-                    className="header"
-                    tabIndex="0"
+                    role="complementary"
+                    aria-labelledby="header"
                 >
-                    <p>
-                        <IndigenousServiceIcon object={object} />
-                        <LgbtiqIcon object={object} />
-                    </p>
-                    <div className="description">
-                        <Collapser
-                            contentPreview={object.shortDescription.map((
-                                sentence, idx) =>
-                                <p key={idx}>{sentence}</p>
-                            )}
-                            expandMessage="Read more"
-                        >
-                            {object.descriptionSentences.map(
-                                (sentence, idx) =>
-                                    <p key={idx}>{sentence}</p>
-                            )}
-                        </Collapser>
-                    </div>
+                    <ScreenReader>
+                        <span id="header">
+                            Header.
+                        </span>
+                    </ScreenReader>
+                    <HeaderBar
+                        primaryText={object.name}
+                        secondaryText={null}
+                        bannerName="housing"
+                    />
+                    <AlertBannerList
+                        state={object.Location()?.state}
+                        screenLocation="servicePage"
+                        format="inline"
+                    />
+                    <DebugServiceRecord object={object} />
                 </div>
-
-                <BoxedText>
-                    <div className="practicalities-container">
-                        <CollapsedOpeningTimes
-                            object={object.open}
-                            serviceId={object.id}
-                        />
-                        <Accessibility object={object} />
-                        <Ndis
-                            className="ndis"
-                            compact={false}
-                            object={object}
-                            spacer={true}
-                        />
-                        <GoogleMapsLink
-                            className="plain-text"
-                            to={object.Location()}
+                <div
+                    role="main"
+                    aria-labelledby="serviceDetails"
+                    className="row"
+                >
+                    <ScreenReader>
+                        <span id="serviceDetails">
+                            Service details.
+                        </span>
+                    </ScreenReader>
+                    <div
+                        role="region"
+                        className="leftColumn"
+                        aria-labelledby="serviceDesc"
+                    >
+                        <ScreenReader>
+                            <span id="serviceDesc">
+                                Service description.
+                            </span>
+                        </ScreenReader>
+                        <div
+                            className="header"
+                            tabIndex="0"
                         >
-                            <Address location={object.Location()} />
-                            <TransportTime
-                                location={object.Location()}
-                                withoutLink={true}
-                            />
-                        </GoogleMapsLink>
-                        <ContactMethods object={object} />
-                        <Feedback object={object} />
+                            <div>
+                                <IndigenousServiceIcon object={object} />
+                                <LgbtiqIcon object={object} />
+                            </div>
+                            <div className="description">
+                                <Collapser
+                                    contentPreview={object.shortDescription
+                                        .map((
+                                            sentence, idx) =>
+                                            <p key={idx}>{sentence}</p>
+                                        )}
+                                    expandMessage="Read more"
+                                >
+                                    {object.descriptionSentences.map(
+                                        (sentence, idx) =>
+                                            <p key={idx}>{sentence}</p>
+                                    )}
+                                </Collapser>
+                            </div>
+                        </div>
+
+                        <div
+                            className="provisions"
+                            tabIndex="0"
+                        >
+                            <Eligibility {...object} />
+                            {this.renderServiceProvisions()}
+                            {this.renderSiblings()}
+                        </div>
                     </div>
-                </BoxedText>
-
-                <div className="provisions">
-                    <Eligibility {...object} />
-
-                    {this.renderServiceProvisions()}
-                    {this.renderSiblings()}
+                    <div
+                        role="region"
+                        aria-labelledby="serviceInfo"
+                        className="rightColumn"
+                    >
+                        <BoxedText>
+                            <ScreenReader>
+                                <h4 id="serviceInfo">
+                                    Service Info.
+                                </h4>
+                            </ScreenReader>
+                            <div className="practicalities-container">
+                                <CollapsedOpeningTimes
+                                    object={object.open}
+                                    serviceId={object.id}
+                                />
+                                <Accessibility object={object} />
+                                <Ndis
+                                    className="ndis"
+                                    compact={false}
+                                    object={object}
+                                    spacer={true}
+                                />
+                                <GoogleMapsLink
+                                    className="plain-text"
+                                    to={object.Location()}
+                                >
+                                    <Address location={object.Location()} />
+                                    <TransportTime
+                                        location={object.Location()}
+                                        withoutLink={true}
+                                    />
+                                </GoogleMapsLink>
+                                <ContactMethods object={object} />
+                                <Feedback object={object} />
+                            </div>
+                        </BoxedText>
+                    </div>
                 </div>
             </div>
         );

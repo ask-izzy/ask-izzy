@@ -42,7 +42,8 @@ const Router = typeof document !== "undefined" ?
 ReactDOM.hydrate(
     <Router>
         {routes}
-    </Router>,
+    </Router>
+    ,
     document.getElementById("root")
 )
 

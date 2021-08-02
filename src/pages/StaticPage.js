@@ -6,6 +6,7 @@ import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
 import routerContext from "../contexts/router-context"
+import ScreenReader from "../components/ScreenReader";
 
 type Props = {
   title: string,
@@ -33,24 +34,35 @@ export default class StaticPage extends React.Component<Props> {
 
         return (
             <div className={`StaticPage ${this.props.className || ""}`}>
-                <AppBar
-                    title={this.props.title}
-                    onBackTouchTap={() => this.context.router.navigate(-1)}
-                />
-                {
-                    this.props.bannerName ?
-                        <HeaderBar
-                            primaryText={this.props.bannerPrimary || null}
-                            secondaryText={this.props.bannerSecondary || null}
-                            bannerName={this.props.bannerName}
-                        />
-                        : null
-                }
-
-                <div className="body">
-                    {this.props.children}
+                <div
+                    role="complementary"
+                    aria-labelledby="header"
+                >
+                    <ScreenReader>
+                        <span id="header">
+                            Header.
+                        </span>
+                    </ScreenReader>
+                    <AppBar
+                        title={this.props.title}
+                        onBackTouchTap={() => this.context.router.navigate(-1)}
+                    />
+                    {
+                        this.props.bannerName ?
+                            <HeaderBar
+                                primaryText={this.props.bannerPrimary || null}
+                                secondaryText={this.props.bannerSecondary || null}
+                                bannerName={this.props.bannerName}
+                            />
+                            : null
+                    }
                 </div>
-                <br />
+                <main>
+                    <div className="body">
+                        {this.props.children}
+                    </div>
+                    <br />
+                </main>
                 <BrandedFooter />
             </div>
         );

@@ -225,119 +225,142 @@ class Location extends Personalisation<Props, State> {
 
     render: (() => React.Element<"div">) = () => (
         <div className="Location">
-            <components.HeaderBar
-                primaryText={
-                    <div>
-                        Where are you?
-                    </div>
-                }
-                secondaryText={
-                    "This will let me find the services closest to you."
-                }
-                taperColour={this.state.showStepper ? "LighterGrey"
-                    : "HeaderBar"}
-                bannerName={this.bannerName}
-            />
-            {this.state.showStepper ? (
-                <QuestionStepper
-                    initialTabIndex={0}
-                    category={this.state.category}
-                />
-            ) : null}
-            <WithStickyFooter
-                footerContents={this.renderDoneButton()}
+            <div
+                role="complementary"
+                aria-labelledby="header"
             >
-                <fieldset>
-                    <legend>
-                        Where are you?
-                    </legend>
-                    <div className="List">
-                        {
-                            /* if the browser supports geolocation */
-                            geolocationAvailable() &&
-                            <components.GeolocationButton
-                                onSuccess={this.onGeoLocationSuccess.bind(this)}
-                            />
-                        }
-
-                        <div className="search"
-                            id="searchBar"
-                        >
-                            <input
-                                type="search"
-                                ref={element => {
-                                    this._search = element;
-                                }}
-                                onFocus={this.scrollToSearchControl.bind(this)}
-                                aria-label="Search for a suburb or postcode"
-                                placeholder="Search for a suburb or postcode"
-                                value={this.state.locationName}
-                                onChange={this.onSearchChange.bind(this)}
-                            />
+                <ScreenReader>
+                    <span id="header">
+                        Header.
+                    </span>
+                </ScreenReader>
+                <components.HeaderBar
+                    primaryText={
+                        <div>
+                            Where are you?
                         </div>
-                        <fieldset>
-                            <legend>
-                                {this.state.autocompletions.length ? (
-                                    "The following is a list of locations" +
-                                    " based on your search"
-                                ) : "Search Results"}
-                            </legend>
-                            {
-                                /* any autocompletions we currently have */
-                                this.state.autocompletions.map(
-                                    (result, index) =>
-                                        <components.InputListItem
-                                            key={index}
-                                            primaryText={
-                                                <div className="suburb">
-                                                    {result.name}
-                                                </div>
-                                            }
-                                            secondaryText={
-                                                <div className="state">
-                                                    {result.state}
-                                                </div>
-                                            }
-                                            type="radio"
-                                            ariaLabel={`${result.name},
-                                            ${result.state}`}
-                                            tabIndex={0}
-                                            uncheckedIcon={
-                                                <icons.RadioUnselected
-                                                    className="big"
-                                                />
-                                            }
-                                            checkedIcon={
-                                                <icons.RadioSelected
-                                                    className="big"
-                                                />
-                                            }
-                                            onClick={
-                                                this.selectAutocomplete.bind(
-                                                    this,
-                                                    result,
-                                                )
-                                            }
-                                        />
-                                )
-                            }
-                        </fieldset>
-                    </div>
-                    {
-                        this.state.autocompletionInProgress && (
-                            <div
-                                className="progress"
-                                tabIndex="0"
-                            >
-                                <ScreenReader>
-                                    Loading locations
-                                </ScreenReader>
-                                <icons.Loading className="big" />
-                            </div>
-                        )
                     }
-                </fieldset>
-            </WithStickyFooter>
+                    secondaryText={
+                        "This will let me find the services closest to you."
+                    }
+                    taperColour={this.state.showStepper ? "LighterGrey"
+                        : "HeaderBar"}
+                    bannerName={this.bannerName}
+                />
+                {this.state.showStepper ? (
+                    <QuestionStepper
+                        initialTabIndex={0}
+                        category={this.state.category}
+                    />
+                ) : null}
+            </div>
+            <main aria-labelledby="questions">
+                <ScreenReader>
+                    <span id="questions">
+                        Questions.
+                    </span>
+                </ScreenReader>
+                <WithStickyFooter
+                    footerContents={this.renderDoneButton()}
+                >
+                    <fieldset>
+                        <legend>
+                            Where are you?
+                        </legend>
+                        <div className="List">
+                            {
+                                /* if the browser supports geolocation */
+                                geolocationAvailable() &&
+                                <components.GeolocationButton
+                                    onSuccess={
+                                        this.onGeoLocationSuccess.bind(this)
+                                    }
+                                />
+                            }
+                            <div
+                                className="search"
+                                id="searchBar"
+                            >
+                                <input
+                                    type="search"
+                                    ref={element => {
+                                        this._search = element;
+                                    }}
+                                    onFocus={
+                                        this.scrollToSearchControl.bind(this)}
+                                    aria-label="Search for a suburb or postcode"
+                                    placeholder={
+                                        "Search for a suburb or postcode"
+                                    }
+                                    value={this.state.locationName}
+                                    onChange={this.onSearchChange.bind(this)}
+                                />
+                            </div>
+                            <fieldset>
+                                <legend>
+                                    {this.state.autocompletions.length ? (
+                                        "The following is a list of locations" +
+                                        " based on your search"
+                                    ) : "Search Results"}
+                                </legend>
+                                {
+                                    /* any autocompletions we currently have */
+                                    this.state.autocompletions.map(
+                                        (result, index) =>
+                                            <components.InputListItem
+                                                key={index}
+                                                primaryText={
+                                                    <div className="suburb">
+                                                        {result.name}
+                                                    </div>
+                                                }
+                                                secondaryText={
+                                                    <div className="state">
+                                                        {result.state}
+                                                    </div>
+                                                }
+                                                type="radio"
+                                                ariaLabel={`${result.name},
+                                                ${result.state}`}
+                                                tabIndex={0}
+                                                uncheckedIcon={
+                                                    <icons.RadioUnselected
+                                                        className="big"
+                                                    />
+                                                }
+                                                checkedIcon={
+                                                    <icons.RadioSelected
+                                                        className="big"
+                                                    />
+                                                }
+                                                onClick={
+                                                    this.selectAutocomplete
+                                                        .bind(
+                                                            this,
+                                                            result,
+                                                        )
+                                                }
+                                            />
+                                    )
+                                }
+                            </fieldset>
+                        </div>
+                        {
+                            this.state.autocompletionInProgress && (
+                                <div
+                                    className="progress"
+                                    tabIndex="0"
+                                >
+                                    <ScreenReader>
+                                        Loading locations
+                                    </ScreenReader>
+                                    <icons.Loading className="big" />
+                                </div>
+                            )
+                        }
+                    </fieldset>
+                </WithStickyFooter>
+            </main>
         </div>
     );
 

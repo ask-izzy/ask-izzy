@@ -8,6 +8,7 @@ import WithStickyFooter from "../components/WithStickyFooter";
 import Spacer from "../components/Spacer";
 import storage from "../storage";
 import routerContext from "../contexts/router-context";
+import ScreenReader from "../components/ScreenReader";
 
 class PersonalisationSummaryPage extends BasePersonalisationPage {
 
@@ -68,10 +69,17 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                     onBackTouchTap={this.goBack.bind(this)}
                     backMessage={backMessage}
                 />
-                {Subpage ?
-                    this.renderSubpage(Subpage)
-                    : this.renderSummary()
-                }
+                <main aria-labelledby="answers">
+                    <ScreenReader>
+                        <span id="answers">
+                            Selected answers.
+                        </span>
+                    </ScreenReader>
+                    {Subpage ?
+                        this.renderSubpage(Subpage)
+                        : this.renderSummary()
+                    }
+                </main>
             </div>
         );
     }

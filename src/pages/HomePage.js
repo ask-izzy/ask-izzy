@@ -15,6 +15,7 @@ import AppBar from "../components/AppBar";
 import QuestionStepper from "./QuestionStepper";
 import Storage from "../storage";
 import AlertBannerList from "../components/AlertBannerList";
+import ScreenReader from "../components/ScreenReader";
 
 type State = {
     location: ?string,
@@ -64,7 +65,16 @@ class HomePage extends React.Component<{}, State> {
                     containerClassName="appbar"
                     fixedSizeQuickExit={true}
                 />
-                <section className="page-header-section">
+                <section
+                    role="complementary"
+                    className="page-header-section"
+                    aria-labelledby="header"
+                >
+                    <ScreenReader>
+                        <span id="header">
+                            Header.
+                        </span>
+                    </ScreenReader>
                     <HeaderBar
                         primaryText={<>
                             <img
@@ -83,52 +93,70 @@ class HomePage extends React.Component<{}, State> {
                     <AlertBannerList
                         screenLocation="homePage"
                     />
-                    <form
-                        className={`search ${
-                            this.state.location ? "locationSet" : ""}`}
-                        onSubmit={this.onSearchSubmit.bind(this)}
+                    <div
+                        role="search"
+                        aria-labelledby="searchBox"
                     >
-                        <label htmlFor="home-page-search"
-                            className="searchLabel"
+                        <ScreenReader>
+                            <span id="searchBox">
+                                Search Box.
+                            </span>
+                        </ScreenReader>
+                        <form
+                            className={`search ${
+                                this.state.location ? "locationSet" : ""}`}
+                            onSubmit={this.onSearchSubmit.bind(this)}
                         >
-                            <h4>What do you need help with?</h4>
-                        </label>
-                        <div className="searchWrapper">
-                            <label
-                                htmlFor="home-page-search"
+                            <label htmlFor="home-page-search"
+                                className="searchLabel"
                             >
-                                <icons.Search
-                                    className={"searchIcon medium middle"}
-                                    fill="#8c8c8c"
-                                />
+                                <h4>What do you need help with?</h4>
                             </label>
-                            <input
-                                id="home-page-search"
-                                ref={element => {
-                                    this.search = element;
-                                }}
-                                type="search"
-                                defaultValue={storage.getSearch()}
-                            />
-                            <FlatButton
-                                label="Search"
-                                onClick={this.onSearchSubmit.bind(this)}
-                            />
-                        </div>
-                    </form>
+                            <div className="searchWrapper">
+                                <label
+                                    htmlFor="home-page-search"
+                                >
+                                    <icons.Search
+                                        className={"searchIcon medium middle"}
+                                        fill="#8c8c8c"
+                                    />
+                                </label>
+                                <input
+                                    id="home-page-search"
+                                    ref={element => {
+                                        this.search = element;
+                                    }}
+                                    type="search"
+                                    defaultValue={storage.getSearch()}
+                                />
+                                <FlatButton
+                                    label="Search"
+                                    onClick={this.onSearchSubmit.bind(this)}
+                                />
+                            </div>
+                        </form>
+                    </div>
                     <div>
                         {this.state.location &&
                             <div>
                                 <QuestionStepper
                                     home={true}
-                                    initialTabIndex={5}
+                                    initialTabIndex={0}
                                     onClear={() =>
                                         this.setState({location: null})}
                                 />
-                            </div>}
+                            </div>
+                        }
                     </div>
                 </section>
-                <NavBar />
+                <main aria-labelledby="categories">
+                    <ScreenReader>
+                        <span id="categories">
+                            Categories.
+                        </span>
+                    </ScreenReader>
+                    <NavBar />
+                </main>
 
                 <BrandedFooter />
             </div>

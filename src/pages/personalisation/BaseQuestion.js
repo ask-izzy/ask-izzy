@@ -15,6 +15,7 @@ import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
 import Category from "../../constants/Category";
+import ScreenReader from "../../components/ScreenReader";
 
 export type Props = {
     name: string,
@@ -258,75 +259,96 @@ class BaseQuestion extends Personalisation<Props, State> {
         }
 
         return (
-            <div>
-                <HeaderBar
-                    primaryText={
-                        <div>
-                            {this.question}
-                        </div>
-                    }
-                    secondaryText={
-                        this.props.byline
-                    }
-                    taperColour={this.state.showStepper ? "LighterGrey"
-                        : "HeaderBar"}
-                    bannerName={this.bannerName}
-                />
-                {this.state.showStepper && (
-                    <div
-                        tabIndex="0"
-                        onFocus={() => {
-                            this.setState({
-                                showSkipToChoice: true,
-                            })
-                        }}
-                    >
-                        <QuestionStepper
-                            category={this.state.category}
-                            showSkipToChoice={this.state.showSkipToChoice}
-                            clearShowSkipToChoice={() => {
-                                this.setState({showSkipToChoice: false})
+             <>
+                <div
+                    role="complementary"
+                    aria-labelledby="header"
+                >
+                    <ScreenReader>
+                        <span id="header">
+                            Header.
+                        </span>
+                    </ScreenReader>
+                    <HeaderBar
+                        primaryText={
+                            <div>
+                                {this.question}
+                            </div>
+                        }
+                        secondaryText={
+                            this.props.byline
+                        }
+                        taperColour={this.state.showStepper ? "LighterGrey"
+                            : "HeaderBar"}
+                        bannerName={this.bannerName}
+                    />
+                    {this.state.showStepper && (
+                        <div
+                            tabIndex="0"
+                            onFocus={() => {
+                                this.setState({
+                                    showSkipToChoice: true,
+                                })
                             }}
-                        />
-                    </div>
-                )}
-                <fieldset>
-                    <legend>
-                        {this.question}
-                    </legend>
-                    <div className={listClassName}>
-                        {this.answers.map((answer, index) =>
-                            <InputListItem
-                                key={index}
-                                leftIcon={this.iconFor(answer)}
-                                primaryText={answer}
-                                secondaryText={this.answerDescFor(answer)}
-                                aria-label={answer}
-                                type="radio"
-                                checked={answer === selected}
-                                value={answer}
-                                onClick={this.onAnswerTouchTap.bind(
-                                    this,
-                                    answer
-                                )}
-                                readOnly={true}
-                                checkedIcon={
-                                    <icons.RadioSelected className="big" />
-                                }
-                                uncheckedIcon={
-                                    <icons.RadioUnselected className="big" />
-                                }
-                            />)}
-                    </div>
-                    {this.props.showDVLinkBar && this.props.textDVLinkBar}
-                    {this.renderDoneButton()}
-                </fieldset>
-                {
-                    this.props.showBaseTextBox &&
-                    Boolean(this.props.baseTextBoxComponent) &&
-                    this.props.baseTextBoxComponent
-                }
-            </div>
+                        >
+                            <QuestionStepper
+                                category={this.state.category}
+                                showSkipToChoice={this.state.showSkipToChoice}
+                                clearShowSkipToChoice={() => {
+                                    this.setState({showSkipToChoice: false})
+                                }}
+                            />
+                        </div>
+                    )}
+                </div>
+                <main aria-labelledby="questions">
+                    <ScreenReader>
+                        <span id="questions">
+                            Questions.
+                        </span>
+                    </ScreenReader>
+                    <fieldset>
+                        <legend>
+                            {this.question}
+                        </legend>
+                        <div className={listClassName}>
+                            {this.answers.map((answer, index) =>
+                                <InputListItem
+                                    key={index}
+                                    leftIcon={this.iconFor(answer)}
+                                    primaryText={answer}
+                                    secondaryText={this.answerDescFor(answer)}
+                                    aria-label={answer}
+                                    type="radio"
+                                    checked={answer === selected}
+                                    value={answer}
+                                    onClick={this.onAnswerTouchTap.bind(
+                                        this,
+                                        answer
+                                    )}
+                                    readOnly={true}
+                                    checkedIcon={
+                                        <icons.RadioSelected
+                                            className="big"
+                                        />
+                                    }
+                                    uncheckedIcon={
+                                        <icons.RadioUnselected
+                                            className="big"
+                                        />
+                                    }
+                                />)}
+                        </div>
+                        {this.props.showDVLinkBar && this.props.textDVLinkBar}
+                        {this.renderDoneButton()}
+                    </fieldset>
+                    {
+                        this.props.showBaseTextBox &&
+                        Boolean(this.props.baseTextBoxComponent) &&
+                        this.props.baseTextBoxComponent
+                    }
+                </main>
+            </>
         );
     }
 
