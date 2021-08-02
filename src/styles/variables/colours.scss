@@ -24,7 +24,7 @@ $lightness-button-hover: 10%;
 
 
     /* Features */
-    @include colours.define('colour-crisis', 'global', 'raw-colour-steel-blue');
+    @include colours.define('colour-crisis', 'global', 'raw-colour-rich-purple');
 
     @include colours.define('colour-input-focus-primary', 'global', 'raw-colour-cyan-blue');
     @include colours.define(
