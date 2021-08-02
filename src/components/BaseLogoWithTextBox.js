@@ -52,9 +52,6 @@ export default class BaseLogoWithTextBox extends React.Component<Props, void> {
                         Learn More
                         <div
                             className={"Chevron"}
-                            style={{
-                                color: this.props.highlightColor,
-                            }}
                         >
                             &nbsp;&gt;
                         </div>

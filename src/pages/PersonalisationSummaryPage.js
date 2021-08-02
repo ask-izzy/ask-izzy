@@ -127,33 +127,36 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
             >
 
                 <div className="List">
-                    {
-                        this.personalisationComponents.map(
-                            (component, index) => {
-                                const toUrl = this.urlFor(
-                                    `personalise/summary/${
-                                        component.defaultProps.name
-                                    }`
-                                );
-
-                                return (
-                                    <components.LinkListItem
-                                        key={index}
-                                        className="SummaryItem"
-                                        to={toUrl}
-                                        primaryText={
-                                            component.summaryLabel ?
-                                                component.summaryLabel
-                                                : ""
-                                        }
-                                        secondaryText={
-                                            component.summaryValue
-                                        }
-                                    />
-                                )
-                            }
-                        )
-                    }
+                    <ul>
+                        {
+                            this.personalisationComponents.map(
+                                (component, index) => {
+                                    const toUrl = this.urlFor(
+                                        `personalise/summary/${
+                                            component.defaultProps.name
+                                        }`
+                                    );
+                                    return (
+                                        <li>
+                                            <components.LinkListItem
+                                                key={index}
+                                                className="SummaryItem"
+                                                to={toUrl}
+                                                primaryText={
+                                                    component.summaryLabel ?
+                                                        component.summaryLabel
+                                                        : ""
+                                                }
+                                                secondaryText={
+                                                    component.summaryValue
+                                                }
+                                            />
+                                        </li>
+                                    )
+                                }
+                            )
+                        }
+                    </ul>
                 </div>
                 <div className="ClearResults">
                     <div>
