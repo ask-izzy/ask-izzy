@@ -117,6 +117,10 @@
             .spacer {
                 margin: 10px;
             }
+
+            ul {
+                display: inline-flex;
+            }
         }
 
         div.support-links {
@@ -183,6 +187,10 @@
 
             a {
                 text-decoration: none;
+            }
+
+            ul {
+                display: inline-flex;
             }
         }
 

@@ -29,7 +29,7 @@ export default class Feedback extends React.Component<Props, void> {
         return (
             <div className="Feedback">
                 <Spacer />
-                <h4>Your feedback</h4>
+                <h3>Your feedback</h3>
                 <p>
                     If information needs updating, or if something is not
                     occurring as expected,&nbsp;

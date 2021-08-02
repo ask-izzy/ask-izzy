@@ -106,7 +106,7 @@ class HomePage extends React.Component<{}, State> {
                             <label htmlFor="home-page-search"
                                 className="searchLabel"
                             >
-                                <h4>What do you need help with?</h4>
+                                <h2>What do you need help with?</h2>
                             </label>
                             <div className="searchWrapper">
                                 <label

@@ -1,26 +1,6 @@
 {
   "/index.html": [
     {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h4 element appears to be the primary document heading, so should be an h1 element.",
-      "context": "<h4>What do you need help with?</h4>",
-      "selector": "#root > div > div > section > div:nth-child(3) > form > label > h4",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h4 element should be an h1 to be properly nested.",
-      "context": "<h4>What do you need help with?</h4>",
-      "selector": "#root > div > div > section > div:nth-child(3) > form > label > h4",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
       "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
       "type": "warning",
       "typeCode": 2,
@@ -205,26 +185,6 @@
     }
   ],
   "/beta-info/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h2 element appears to be the primary document heading, so should be an h1 element.",
-      "context": "<h2>About “Ask Izzy Beta”</h2>",
-      "selector": "#root > div > div > main > div > h2:nth-child(1)",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1_A.G141",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "The heading structure is not logically nested. This h2 element should be an h1 to be properly nested.",
-      "context": "<h2>About “Ask Izzy Beta”</h2>",
-      "selector": "#root > div > div > main > div > h2:nth-child(1)",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    },
     {
       "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
       "type": "warning",
@@ -500,18 +460,7 @@
   "/search/:suburb-:state/map/personalise/page/are-you-safe/index.html": [],
   "/search/:suburb-:state/map/personalise/page/intro/index.html": [],
   "/search/:suburb-:state/map/personalise/page/location/index.html": [],
-  "/search/:suburb-:state/map/personalise/page/online-safety-screen/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
-      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/:suburb-:state/map/personalise/page/online-safety-screen/index.html": [],
   "/search/:suburb-:state/map/personalise/summary/index.html": [
     {
       "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
@@ -528,18 +477,7 @@
   "/search/:suburb-:state/personalise/page/are-you-safe/index.html": [],
   "/search/:suburb-:state/personalise/page/intro/index.html": [],
   "/search/:suburb-:state/personalise/page/location/index.html": [],
-  "/search/:suburb-:state/personalise/page/online-safety-screen/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
-      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/:suburb-:state/personalise/page/online-safety-screen/index.html": [],
   "/search/:suburb-:state/personalise/summary/index.html": [
     {
       "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
@@ -595,18 +533,7 @@
   "/search/map/personalise/page/are-you-safe/index.html": [],
   "/search/map/personalise/page/intro/index.html": [],
   "/search/map/personalise/page/location/index.html": [],
-  "/search/map/personalise/page/online-safety-screen/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
-      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/map/personalise/page/online-safety-screen/index.html": [],
   "/search/map/personalise/summary/index.html": [
     {
       "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
@@ -623,18 +550,7 @@
   "/search/personalise/page/are-you-safe/index.html": [],
   "/search/personalise/page/intro/index.html": [],
   "/search/personalise/page/location/index.html": [],
-  "/search/personalise/page/online-safety-screen/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
-      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/search/personalise/page/online-safety-screen/index.html": [],
   "/search/personalise/summary/index.html": [
     {
       "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
@@ -694,18 +610,7 @@
   "/housing/:suburb-:state/map/personalise/page/age/index.html": [],
   "/housing/:suburb-:state/map/personalise/page/demographics/index.html": [],
   "/housing/:suburb-:state/map/personalise/page/are-you-safe/index.html": [],
-  "/housing/:suburb-:state/map/personalise/page/online-safety-screen/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
-      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/housing/:suburb-:state/map/personalise/page/online-safety-screen/index.html": [],
   "/housing/:suburb-:state/map/personalise/summary/index.html": [
     {
       "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
@@ -726,18 +631,7 @@
   "/housing/:suburb-:state/personalise/page/age/index.html": [],
   "/housing/:suburb-:state/personalise/page/demographics/index.html": [],
   "/housing/:suburb-:state/personalise/page/are-you-safe/index.html": [],
-  "/housing/:suburb-:state/personalise/page/online-safety-screen/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
-      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/housing/:suburb-:state/personalise/page/online-safety-screen/index.html": [],
   "/housing/:suburb-:state/personalise/summary/index.html": [
     {
       "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
@@ -801,18 +695,7 @@
   "/housing/map/personalise/page/age/index.html": [],
   "/housing/map/personalise/page/demographics/index.html": [],
   "/housing/map/personalise/page/are-you-safe/index.html": [],
-  "/housing/map/personalise/page/online-safety-screen/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
-      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/housing/map/personalise/page/online-safety-screen/index.html": [],
   "/housing/map/personalise/summary/index.html": [
     {
       "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
@@ -833,18 +716,7 @@
   "/housing/personalise/page/age/index.html": [],
   "/housing/personalise/page/demographics/index.html": [],
   "/housing/personalise/page/are-you-safe/index.html": [],
-  "/housing/personalise/page/online-safety-screen/index.html": [
-    {
-      "code": "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
-      "type": "warning",
-      "typeCode": 2,
-      "message": "Check that this element has an inherited background colour or image to complement the corresponding inline foreground colour.",
-      "context": "<div class=\"Chevron\" style=\"color:#70bdae\">&nbsp;&gt;</div>",
-      "selector": "#root > div > div > div:nth-child(2) > main > div > div:nth-child(2) > div > div:nth-child(2) > a > div",
-      "runner": "htmlcs",
-      "runnerExtras": {}
-    }
-  ],
+  "/housing/personalise/page/online-safety-screen/index.html": [],
   "/housing/personalise/summary/index.html": [
     {
       "code": "WCAG2AA.Principle1.Guideline1_3.1_3_1.H48",
