@@ -138,6 +138,7 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
                     secondaryText={
                         this.props.byline
                     }
+                    fixedAppBar={true}
                     bannerName={this.bannerName}
                 />
                 <main>

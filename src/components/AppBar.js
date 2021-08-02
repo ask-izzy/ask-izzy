@@ -96,7 +96,9 @@ function AppBar(
                             className={
                                 !onBackTouchTap ? "appBarLogo" : undefined
                             }
-                            alt={onBackTouchTap ? backMessage : "Home page"}
+                            name={onBackTouchTap ? backMessage
+                                : "Ask Izzy home page button;"
+                            }
                             onClick={onBackTouchTap || goHome}
                         >
                             {onBackTouchTap ? (

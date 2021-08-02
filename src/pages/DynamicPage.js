@@ -77,7 +77,7 @@ class DynamicPage extends React.Component<{}> {
         const loading = (
             <StaticPage
                 title="Loading"
-                bannerName="static"
+                bannerName="homepage"
             >
                 <div className="DynamicPage">
                     <div className="loadingStatus">
@@ -90,7 +90,7 @@ class DynamicPage extends React.Component<{}> {
         const error = (
             <StaticPage
                 title="Error"
-                bannerName="static"
+                bannerName="homepage"
             >
                 <div className="DynamicPage">
                     <div className="loadingStatus">
@@ -117,7 +117,8 @@ class DynamicPage extends React.Component<{}> {
                         return (
                             <StaticPage
                                 title={page.Title}
-                                bannerName={page.Banner ? page.Banner.Key : ""}
+                                bannerName={page.Banner ? page.Banner.Key
+                                    : "homepage"}
                                 bannerPrimary={page.BannerTextPrimary}
                                 bannerSecondary={page.BannerTextSecondary}
                             >
