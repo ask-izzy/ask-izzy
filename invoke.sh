@@ -6,12 +6,24 @@ set -euo pipefail
 IFS=$'\n\t'
 
 DEBUG=${DEBUG:-}
+export VERSION="$(cat public/VERSION)"
 
 # Read in environment variables from file
 if [ -f .env ]; then
     set -a
     source .env
     set +a
+fi
+
+# Hacky that we do this every time even if variables have already been loaded
+# but this is the most foolproof method for now and we should hopefully be able
+# to dramatics improve the whole env vars system Soon™ with changes to our
+# rendering system.
+echo "Injecting env vars"
+script/inject-config-on-deploy.sh public '*.html'
+if [ -f public/components-catalog ]; then
+    cp src/env-vars.js public/components-catalog
+    script/inject-config-on-deploy.sh public/components-catalog env-vars.js
 fi
 
 case "$1" in
@@ -72,20 +84,17 @@ case "$1" in
 
         PS4='$ $0:$LINENO: '
         set -x # Logs
-        ./script/generate-env-vars > /static/env-$(cat public/VERSION).js
-        cp ./public/static/scripts/request-interceptor.js ./public/static/scripts/request-interceptor-$(cat public/VERSION).js
-        cp -r ./public/static/* /static/
+        rsync -a --delete ./public/static/ /static/
         ;;
 
     serve)
         shift 1
-
+        echo "Starting nginx"
         exec ./script/run-nginx
         ;;
 
     dev-serve)
         shift 1
-
         exec ./script/dev-server
         ;;
 

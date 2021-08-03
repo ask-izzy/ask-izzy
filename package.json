@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "./script/recreate-dev-env-file && webpack serve --config webpack/dev.config.js --host 0.0.0.0 --hot --mode development",
     "prod": "webpack serve --config webpack/prod.config.js --host 0.0.0.0 --mode production",
-    "storybook": "start-storybook -p 6006 -s ./public # static serve is used exclusively for fetching env.js",
+    "storybook": "(mkdir .storybook/public || rm .storybook/public/env-vars.js) && cp src/env-vars.js .storybook/public && VERSION=$(cat static/VERSION) script/inject-config-on-deploy.sh .storybook/public env-vars.js && start-storybook -p 6006 -s .storybook/public",
     "build-storybook": "build-storybook -o public/components-catalog"
   },
   "dependencies": {

@@ -1,11 +1,9 @@
 /* @flow */
-declare var clientEnvPath: string;
-
 let env
 
 export async function injectEnvVars(): Promise<{|env: any|}> {
     if (!env) {
-        const res = await fetch(clientEnvPath)
+        const res = await fetch("env-vars.js")
         const envFile = await res.text()
 
         // eslint-disable-next-line no-eval

@@ -28,8 +28,6 @@ function runTest {
     export ENVFILE_PATH="/static/env-test-$1.js"
     export MAPSFILE_PATH="/static/google-maps-api-test-$1.js"
 
-    ./script/generate-env-vars > "public/$ENVFILE_PATH"
-
 
     export PORT
     export ISS_MOCK_PORT

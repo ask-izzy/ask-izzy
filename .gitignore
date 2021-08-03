@@ -1,5 +1,6 @@
 .*.sw?
 .env
+docker-compose.override.yml
 yarn-error.log
 node_modules/
 npm-debug.log*
@@ -14,3 +15,4 @@ package-lock.json
 /public/VERSION
 /public/components-catalog
 /testing-screenshots
+.storybook/public

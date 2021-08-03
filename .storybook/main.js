@@ -9,14 +9,6 @@ require("core-js");
 require("regenerator-runtime/runtime");
 const webpackConfig = require("../webpack/dev.config.js");
 
-const versionFilePath = "public/VERSION"
-const askIzzyBuildVersion = fs.existsSync(versionFilePath) &&
-    fs.readFileSync(versionFilePath, "utf-8").trim();
-
-const clientEnvPath = process.env.NODE_ENV === "development" ?
-    "/static/env.js"
-    : `/static/env-${askIzzyBuildVersion}.js`
-
 module.exports = {
     stories: [
         "../src/**/*.stories.mdx",
@@ -42,8 +34,6 @@ module.exports = {
             new webpack.DefinePlugin({
                 "storyBookControlValues.HeaderBar.bannerName": JSON
                     .stringify(bannerImages),
-                "clientEnvPath": JSON
-                    .stringify(clientEnvPath),
             }),
         )
 
