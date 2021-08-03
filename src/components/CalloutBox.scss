@@ -63,30 +63,9 @@
 
     .Phone .ContactButton {
         margin: 0.5em 0;
-        background-color: #{colours.get-static('colour-button-standard')};
-        background-color: var(--colour-button-standard);
-        color: #{colours.get-static('colour-text-light')};
-        color: var(--colour-text-light);
 
         .Contact-text {
-            color: #{colours.get-static('colour-text-very-light')};
-            color: var(--colour-text-very-light);
-        }
-
-        .number {
-            margin-left: 1em;
-        }
-
-        .Icon {
-            path {
-                fill: #{colours.get-static('colour-text-light')};
-                fill: var(--colour-text-light);
-
-                @media print {
-                    fill: #{colours.get-static('raw-colour-pure-black')};
-                    fill: var(--raw-colour-pure-black);
-                }
-            }
+            padding-left: 30px;
         }
     }
 

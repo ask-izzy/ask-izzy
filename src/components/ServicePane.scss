@@ -10,13 +10,21 @@
         display: inline-flex;
 
         .leftColumn {
-            width: 80%;
+            width: 50%;
+        }
+
+        .rightColumn {
+            width: 50%;
         }
 
         @media (max-width: 768px) {
             display: block;
 
             .leftColumn {
+                width: 100%;
+            }
+
+            .rightColumn {
                 width: 100%;
             }
         }

@@ -89,6 +89,7 @@ function CalloutBox(
                     number={`Call ${callout.Phone}`}
                     comment=""
                     kind=""
+                    crisis={true}
                 />}
         </div>
     )
