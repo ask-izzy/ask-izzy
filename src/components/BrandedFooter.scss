@@ -56,15 +56,25 @@
 
         li {
             margin: 1em 0;
-            font-weight: bold;
         }
 
         a {
             color: #{colours.get-static('colour-text-dark')};
             color: var(--colour-text-dark);
-            text-decoration: none;
+            text-decoration: underline;
 
             &:hover {
+                text-decoration: none;
+            }
+        }
+
+        /*
+         On Android devices the hover status
+         remains on the previously clicked link
+         causing the link to not show the underline
+       */
+        @media (hover: none) {
+            a:hover {
                 text-decoration: underline;
             }
         }
