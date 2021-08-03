@@ -8,11 +8,20 @@
     h3 a {
         margin-top: 2px;
         margin-bottom: 0;
-        color: #{colours.get-static('colour-text-dark')};
-        color: var(--colour-text-dark);
+        color: #{colours.get-static('colour-link')};
+        color: var(--colour-link);
         font-size: 14px;
         font-weight: 500;
-        text-decoration: none;
+        text-decoration: underline;
+
+        &:visited {
+            color: #{colours.get-static('colour-link')};
+            color: var(--colour-link);
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
     }
 
     .Contact.Phone {
