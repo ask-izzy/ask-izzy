@@ -40,8 +40,6 @@ class HtmlDocument extends React.Component<Object, void> {
             ogTitle,
             ogDescription,
         } = this.props;
-        const viewport =
-            "width=device-width, initial-scale=1.0, user-scalable=no";
 
         return (
             <html lang="en">
@@ -49,7 +47,7 @@ class HtmlDocument extends React.Component<Object, void> {
                     {this.renderRemoteReactDevtoolsScript()}
                     <meta
                         name="viewport"
-                        content={viewport}
+                        content="width=device-width, initial-scale=1"
                     />
 
                     <meta
