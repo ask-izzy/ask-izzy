@@ -7,6 +7,7 @@ import type {Site} from "../iss";
 import Maps from "../maps";
 import type {MapsApi} from "../maps";
 import storage from "../storage";
+import * as gtm from "../google-tag-manager";
 import routerContext from "../contexts/router-context";
 import {
     setMapView,
@@ -108,6 +109,17 @@ export default class SitesMap extends React.Component<Props, State> {
 
 
     render(): React.Element<"div"> {
+        const { onSiteSelect } = this.props
+        function markerOnClickHandler(marker: SiteMarker) {
+            gtm.emit({
+                event: `Action Triggered - Map Marker`,
+                eventCat: "Action triggered",
+                eventAction: `Map marker`,
+                eventLabel: marker.site.id.toString(),
+                sendDirectlyToGA: true,
+            });
+            onSiteSelect?.(marker.site)
+        }
         return (
             <div className="SitesMap">
                 {this.state.mapsApi ?
@@ -153,8 +165,7 @@ export default class SitesMap extends React.Component<Props, State> {
                                         : "/static/images/map-marker.png",
                                     scaledSize: {width: 27, height: 43},
                                 }}
-                                onClick={() =>
-                                this.props.onSiteSelect?.(marker.site)}
+                                onClick={() => markerOnClickHandler(marker)}
                             />)}
                     </GoogleMap>
                     : <div style={{

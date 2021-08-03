@@ -43,6 +43,7 @@
     "cors": "2.8.4",
     "css-loader": "^5.2.4",
     "details-element-polyfill": "2.4.0",
+    "element-closest-polyfill": "^1.0.4",
     "es6-promise": "4.2.4",
     "eslint": "5.1.0",
     "eslint-plugin-react": "7.10.0",

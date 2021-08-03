@@ -1,8 +1,10 @@
 /* @flow */
 
-import type {Node as ReactNode} from "React";
+import type {Element as ReactElement} from "React";
 import React, {useState} from "react";
 import classnames from "classnames";
+
+import Button from "./base/Button"
 
 type Props = {
     label?: string,
@@ -22,14 +24,14 @@ function FlatButton(
         disabled,
         children,
         ...rest
-    }: Props): ReactNode {
+    }: Props): ReactElement<typeof Button> {
 
     // Used to display a prompt to the left of the button when focusing
     // Generally used for the clear button in an input box
     const [showPrompt, setShowPrompt] = useState(false)
 
     return (
-        <button
+        <Button
             onFocus={() => setShowPrompt(true)}
             onBlur={() => setShowPrompt(false)}
             onClick={onClick}
@@ -40,7 +42,7 @@ function FlatButton(
             {prompt && showPrompt && <span className="prompt">{prompt}</span>}
             {label}
             {children}
-        </button>
+        </Button>
     )
 
 }

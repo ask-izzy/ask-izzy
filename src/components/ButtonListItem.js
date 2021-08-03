@@ -2,27 +2,33 @@
 
 import type {Node as ReactNode} from "React";
 import React from "react";
+
 import ListItem from "./ListItem";
-import type {ListItemProps} from "./ListItem";
+import type {Props as ListItemProps} from "./ListItem";
+import Button from "./base/Button";
 
-/* eslint-disable-next-line max-len */
-export default class ButtonListItem extends React.Component<ListItemProps, void> {
-    static propTypes = ListItem.propTypes;
+type PropsRest = {onClick: Function}
 
-    static sampleProps: any = ListItem.sampleProps;
+type Props = $Diff<
+    ListItemProps<typeof Button>,
+    $Exact<PropsRest> & {rootElement: any}
+> & PropsRest
 
+
+
+export default class ButtonListItem extends React.Component<Props, void> {
     render(): ReactNode {
-        return (
+        return <>
             <ListItem
-                rootElement="button"
-                tabIndex="0"
-                {...(this.props: any)}
+                {...this.props}
+                rootElement={Button}
+                tabIndex={0}
                 onClick={this.onClick.bind(this)}
             />
-        );
+        </>
     }
 
-    onClick(event: SyntheticInputEvent<>): void {
+    onClick(event: SyntheticEvent<HTMLButtonElement>): void {
         if (this.props.onClick) {
             this.props.onClick();
         }

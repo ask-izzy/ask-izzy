@@ -6,12 +6,14 @@ import classnames from "classnames";
 
 import Link from "./base/Link";
 import ListItem from "./ListItem";
-import type { ListItemProps } from "./ListItem";
+import type {Props as ListItemProps} from "./ListItem";
 
-type Props = ListItemProps & {
-    to: string,
-    onClick?: function
-}
+type PropsRest = {onClick?: Function}
+
+type Props = $Diff<
+    ListItemProps<typeof Link>,
+    $Exact<PropsRest> & {rootElement: any}
+> & PropsRest
 
 export default class LinkListItem extends React.Component<Props, void> {
     static sampleProps: any = {
@@ -29,8 +31,8 @@ export default class LinkListItem extends React.Component<Props, void> {
 
         return (
             <ListItem
-                rootElement={Link}
                 {...rest}
+                rootElement={Link}
                 className={classnames(
                     "plain-text",
                     className,

@@ -18,6 +18,11 @@ function QuickExit(
         <Link className="link"
             to={redirectUri}
             title={tooltip}
+            analyticsEvent={{
+                event: `Link Followed - Quick Exit`,
+                eventAction: "Quick exit",
+                eventLabel: null,
+            }}
         >
             <span>
                 Quick Exit X

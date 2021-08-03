@@ -26,6 +26,10 @@ zeroRatingHelper.replaceDomain = function(oldUrl) {
         }
         url.host = newHost;
         url.protocol = window.PROXY_PROTOCOL || url.protocol
+
+        if (zeroRatingHelper.debugModeActive()) {
+            console.info("URL intercepted and modified\nOld URL: " + oldUrl + "\nNew URL: " + url.href)
+        }
         return url.href;
     } else if (window.PROXY_EXCLUDED_DOMAINS.indexOf(url.host) !== -1){
         return 'null';
@@ -34,18 +38,20 @@ zeroRatingHelper.replaceDomain = function(oldUrl) {
     }
 };
 
-zeroRatingHelper.replaceDomainInString = function(str){
-    var result = str;
-    for(domain in window.PROXY_DOMAINS){
-        result = zeroRatingHelper.replaceAll(result, domain, window.PROXY_DOMAINS[domain]);
-    }
-    for(i in window.PROXY_EXCLUDED_DOMAINS){
-        if ( result.indexOf(window.PROXY_EXCLUDED_DOMAINS[i]) !== -1 ){
-            result = zeroRatingHelper.replaceAll(result, domain, 'null');
+zeroRatingHelper.debugModeActive = function() {
+    if (typeof window !== "undefined" && window.localStorage) {
+        var debugMode = false;
+        try {
+            debugMode = JSON.parse(
+                window.localStorage.getItem('debug')
+            );
+        } catch (error) {
+
         }
+        return debugMode
     }
-    return result;
-};
+    return false
+}
 
 zeroRatingHelper.escapeRegExp = function(str) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");

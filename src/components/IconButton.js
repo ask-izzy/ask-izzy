@@ -1,49 +1,40 @@
 /* @flow */
 
-import type {Element as ReactElement} from "React";
+import type {
+    Node as ReactNode,
+    ElementConfig as ReactElementConfig,
+} from "React";
 import React from "react";
-import PropTypes from "proptypes";
 import classnames from "classnames";
 
-type Props = {
+import Button from "./base/Button"
+
+type Props ={
     onClick: Function,
     className?: string,
     name?: ?string,
-    children?: any,
-}
+    children: ReactNode,
+} & ReactElementConfig<typeof Button>
 
 export default class IconButton extends React.Component<Props, void> {
-
-    static defaultProps: any = {
-        name: "button",
-    }
-
-    static propTypes = {
-        onClick: PropTypes.func,
-    };
-
-    static sampleProps: any = {
-        default: {
-            children: "Button Text",
-        },
-    };
-
-    render(): ReactElement<"button"> {
+    render(): ReactNode {
         const {
             className,
             onClick,
             children,
             name,
+            ...rest
         } = this.props;
 
         return (
-            <button
+            <Button
+                {...rest}
                 aria-label={name}
                 className={classnames("IconButton", className)}
                 onClick={onClick}
             >
                 {children}
-            </button>
+            </Button>
         )
     }
 }

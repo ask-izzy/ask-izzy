@@ -28,6 +28,14 @@ export default class DomesticViolenceLink extends BaseLogoWithTextBox {
             sendDirectlyToGA: true,
         });
 
+        gtm.emit({
+            event: "Link Followed - Callout",
+            eventCat: "Link followed",
+            eventAction: "Callout",
+            eventLabel: "Domestic Violence",
+            sendDirectlyToGA: true,
+        });
+
         this.context.router.navigate(
             this.props.path,
         );

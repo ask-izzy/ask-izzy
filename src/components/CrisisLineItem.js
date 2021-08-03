@@ -38,6 +38,7 @@ const crisisDescriptions = {
 
 type Props = {
     object: iss.Service,
+    resultNumber: number
 }
 
 class CrisisLineItem extends React.Component<Props, void> {
@@ -63,6 +64,11 @@ class CrisisLineItem extends React.Component<Props, void> {
                     <h3>
                         <Link
                             to={`/service/${object.slug}`}
+                            analyticsEvent={{
+                                event: `Link Followed - Service Result`,
+                                eventAction: "Service result",
+                                eventLabel: `Crisis line - number ${this.props.resultNumber}`,
+                            }}
                         >
                             {object.site.name}
                         </Link>
@@ -76,6 +82,11 @@ class CrisisLineItem extends React.Component<Props, void> {
                         <Collapser
                             expandMessage="See information about this call"
                             collapseMessage="Hide information about this call"
+                            analyticsEvent={{
+                                event: `Action Triggered - Crisis Line Info`,
+                                eventAction: "Show crisis line extra info",
+                                eventLabel: null,
+                            }}
                         >
                             {crisisDescriptions[object.id](object)}
                         </Collapser>

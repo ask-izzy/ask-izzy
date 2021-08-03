@@ -65,6 +65,7 @@ export default class ServicePane extends React.Component<{
         gtm.emit({
             event: "Other Services At Location Clicked",
             eventCat: "Other Services At Location Clicked",
+            eventAction: null,
             eventLabel: `${location.pathname} - ${service.slug}`,
             sendDirectlyToGA: true,
         });
@@ -125,21 +126,7 @@ export default class ServicePane extends React.Component<{
                                 <IndigenousServiceIcon object={object} />
                                 <LgbtiqIcon object={object} />
                             </div>
-                            <div className="description">
-                                <Collapser
-                                    contentPreview={object.shortDescription
-                                        .map((
-                                            sentence, idx) =>
-                                            <p key={idx}>{sentence}</p>
-                                        )}
-                                    expandMessage="Read more"
-                                >
-                                    {object.descriptionSentences.map(
-                                        (sentence, idx) =>
-                                            <p key={idx}>{sentence}</p>
-                                    )}
-                                </Collapser>
-                            </div>
+                            {this.renderDescription(object)}
                         </div>
 
                         <div
@@ -216,6 +203,38 @@ export default class ServicePane extends React.Component<{
         );
     }
 
+    renderDescription(service: Service): ReactElement<"div"> {
+        let description = service
+            .descriptionSentences.map(
+                (sentence, idx) =>
+                    <p key={idx}>{sentence}</p>
+            )
+
+        if (service.descriptionRemainder.length > 0) {
+            description = (
+                <Collapser
+                    contentPreview={service.shortDescription.map(
+                        (sentence, idx) => <p key={idx}>{sentence}</p>
+                    )}
+                    expandMessage="Read more"
+                    analyticsEvent={{
+                        event: `Action Triggered - Service Description`,
+                        eventAction: "Show full service description",
+                        eventLabel: null,
+                    }}
+                >
+                    {description}
+                </Collapser>
+            )
+        }
+
+        return (
+            <div className="description">
+                {description}
+            </div>
+        )
+    }
+
     renderSiblings(): ReactElement<"div"> | ReactElement<"span"> {
         const siblings = this.state.siblings;
 
@@ -251,6 +270,11 @@ export default class ServicePane extends React.Component<{
                             primaryText={service.name}
                             secondaryText={service.shortDescription[0]}
                             rightIcon={<Chevron />}
+                            analyticsEvent={{
+                                event: "Link Followed - Other Service",
+                                eventAction: "Other service at location",
+                                eventLabel: `${service.id}`,
+                            }}
                         />
                     )}
                 </div>

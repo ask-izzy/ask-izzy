@@ -6,6 +6,7 @@ import classnames from "classnames";
 import Chevron from "../icons/Chevron";
 import Warning from "../icons/Warning";
 import Info from "../icons/Info";
+import Summary from "./base/Summary";
 
 type Props = {
     title: React.Node,
@@ -45,12 +46,18 @@ export default function AlertBanner(
             <details className={containerClasses}
                 open={props.defaultToOpen}
             >
-                <summary>
+                <Summary
+                    analyticsEvent={{
+                        event: `Action Triggered - Alert`,
+                        eventAction: "Show alert body",
+                        eventLabel: null,
+                    }}
+                >
                     <div className="title-container"> {/* wrapper for flex bug https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers */}
                         { titleContents }
                         <Chevron />
                     </div>
-                </summary>
+                </Summary>
                 <div className="body">
                     { props.body }
                 </div>

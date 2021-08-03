@@ -88,6 +88,11 @@ class GoogleMapsLink extends React.Component<Props, void> {
                 onClick={this.props.onClick}
                 aria-label="Open Google Maps in a new tab"
                 to={this.googleMapsUrl()}
+                analyticsEvent={{
+                    event: `Link Followed - Google Maps`,
+                    eventAction: "Google maps",
+                    eventLabel: null,
+                }}
             >
                 {!this.props.hideSpacer && <Spacer />}
                 {children}

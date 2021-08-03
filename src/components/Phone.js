@@ -68,6 +68,12 @@ class Phone extends React.Component<Props, void> {
                         this.props.className,
                     )}
                     onClick={this.recordClick}
+                    analyticsEvent={{
+                        event: "Link Followed - Phone Contact",
+                        eventAction: `Contact detail - phone` +
+                            `${this.props.crisis ? " - crisis line" : ""}`,
+                        eventLabel: `${this.props.number}`,
+                    }}
                 >
                     <div
                         className="Contact-text"

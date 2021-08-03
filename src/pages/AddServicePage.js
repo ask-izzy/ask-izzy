@@ -6,6 +6,7 @@ import components from "../components";
 import Link from "../components/base/Link";
 import routerContext from "../contexts/router-context";
 import BrandedFooter from "../components/BrandedFooter";
+import * as gtm from "../google-tag-manager";
 
 type Props = {}
 
@@ -69,6 +70,13 @@ class AddServicePage extends React.Component<Props, State> {
         case "formSubmitted":
             this.setState({
                 isFormDone: true,
+            });
+            gtm.emit({
+                event: "Input Submitted - Add Service",
+                eventCat: "Input submitted",
+                eventAction: "Add service",
+                eventLabel: null,
+                sendDirectlyToGA: true,
             });
             break;
 

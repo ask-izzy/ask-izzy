@@ -36,6 +36,11 @@ export default class Email extends React.Component<Props, void> {
                 <Link
                     to={`mailto:${email}`}
                     onClick={this.recordClick.bind(this)}
+                    analyticsEvent={{
+                        event: "Link Followed - Email Contact",
+                        eventAction: "Contact detail - email",
+                        eventLabel: `${email}`,
+                    }}
                 >
                     <icons.Email />
                     <div className="Contact-text">

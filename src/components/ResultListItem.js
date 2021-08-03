@@ -27,6 +27,7 @@ import Link from "./Link";
 
 class ResultListItem extends React.Component<{
     service: iss.Service,
+    resultNumber: number
 }, void> {
     static displayName: ?string = "ResultListItem";
 
@@ -69,7 +70,15 @@ class ResultListItem extends React.Component<{
                 className="plain-text ResultListItem"
             >
                 <div className="name">
-                    <Link to={`/service/${service.slug}`}>
+                    <Link
+                        to={`/service/${service.slug}`}
+                        analyticsEvent={{
+                            event: `Link Followed - Service Result`,
+                            eventAction: "Service result",
+                            eventLabel: `Standard service - number ` +
+                                `${this.props.resultNumber}`,
+                        }}
+                    >
                         <h2 aria-label={`${service.name}.`}>
                             {service.name}
                         </h2>

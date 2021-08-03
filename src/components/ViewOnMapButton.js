@@ -40,6 +40,11 @@ export default class ViewOnMapButton extends React.Component<Props, State> {
                     <icons.Chevron />
                 }
                 to={this.props.to}
+                analyticsEvent={{
+                    event: "Link Followed - Results Map",
+                    eventAction: "View results map",
+                    eventLabel: null,
+                }}
             />
         );
     }

@@ -60,6 +60,11 @@ class CategoryListItem extends React.Component<Props, void> {
                 rightIcon={<icons.Chevron />}
                 primaryText={this.props.category.name}
                 secondaryText={this.props.category.byline}
+                analyticsEvent={{
+                    event: "Link Followed - Category",
+                    eventAction: "Category",
+                    eventLabel: this.props.category.key,
+                }}
             />
         );
     }
