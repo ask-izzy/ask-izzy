@@ -184,7 +184,7 @@ const routes: ReactElement<typeof Routes> = <Routes>
         <Route
             path="/using-ask-izzy"
             element={<DynamicPage />}
-            title="Using Ask Izzy"
+            title="Help using Ask Izzy"
             type={["Static Page", "Using Ask Izzy"]}
         />
         <Route
