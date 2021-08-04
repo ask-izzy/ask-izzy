@@ -40,7 +40,8 @@ type Props = {
  * @constructor
  */
 function CalloutBox(
-    {calloutBoxes, position, embedded}: Props): React.Node | null {
+    {calloutBoxes, position, embedded}: Props
+): React.Node | null {
 
     const {navigate} = useRouterContext();
 
@@ -117,6 +118,9 @@ function CalloutBox(
                 />}
         </div>
     )
+
+    // Remove callout refs that refer to a callout not exist
+    calloutBoxes = calloutBoxes.filter(({callout}) => callout)
 
     // Returns Null if there are no callout boxes
     if (!calloutBoxes && !calloutBoxes.length) {
