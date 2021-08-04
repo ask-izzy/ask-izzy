@@ -3,7 +3,7 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 import ServiceProvisions from "./ServiceProvisions";
-import iss from "../../iss";
+import Service from "../../../fixtures/factories/Service";
 import fixtures from "../../../fixtures/services";
 
 export default {
@@ -19,16 +19,26 @@ const Template = (args: Object): ReactNode => {
 export const ServiceOfferingTransitionalHousing: typeof Template =
     Template.bind({});
 ServiceOfferingTransitionalHousing.args = {
-    service: new iss.Service(fixtures.housingServiceSibling),
+    service: new Service(fixtures.housingServiceSibling),
 };
 
 export const ServiceOfferingCrisisAccommodation: typeof Template =
     Template.bind({});
 ServiceOfferingCrisisAccommodation.args = {
-    service: new iss.Service(fixtures.susansHouse),
+    service: new Service(fixtures.susansHouse),
 };
 
 export const ServiceOfferingLegalHelp: typeof Template = Template.bind({});
 ServiceOfferingLegalHelp.args = {
-    service: new iss.Service(fixtures.legal),
+    service: new Service(fixtures.legal),
+};
+
+export const ServiceOfferingMoreThan4TypesOfHelp: typeof Template = Template
+    .bind({});
+ServiceOfferingMoreThan4TypesOfHelp.args = {
+    service: new Service({
+        description:
+            "accommodation for families crisis accommodation women domestic " +
+            "violence housing crisis public housing short-term housing",
+    }),
 };
