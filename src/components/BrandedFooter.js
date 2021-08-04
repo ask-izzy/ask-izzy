@@ -116,7 +116,7 @@ export default class BrandedFooter
                     <ul>
                         <li>
                             <Link to="/using-ask-izzy">
-                                Using Ask Izzy
+                                Help using Ask Izzy
                             </Link>
                         </li>
                         <li>
