@@ -23,7 +23,6 @@ class BasePage extends React.Component<{}> {
     static childContextTypes: any = {};
     static contextType: any = routerContext;
 
-    #pageRef: any = React.createRef();
 
     constructor(props: {}, context: RouterContextObject) {
         addPageLoadDependencies(context.router.location, "render")
@@ -39,19 +38,17 @@ class BasePage extends React.Component<{}> {
         closePageLoadDependencies(this.context.router.location, "render")
     }
 
-    componentDidUpdate(): void {
-        if (this.#pageRef.current) {
-            this.#pageRef.current.focus()
-        }
-    }
-
     render(): ReactNode {
         const { location, match } = this.context.router
-        const pageTitle = makeTitle(
-            match.props.title,
-            match.params,
-            match.props.element?.type.name,
-        )
+        let pageTitle = "";
+
+        if (!match.params?.slug) {
+            pageTitle = makeTitle(
+                match.props.title,
+                match.params,
+                match.props.type,
+            )
+        }
         const canonicalUrl = `https://askizzy.org.au${location.pathname}`;
         return <>
             <HistoryListener />
@@ -61,8 +58,8 @@ class BasePage extends React.Component<{}> {
                     <div className="BasePage">
                         <ScreenReader>
                             <p
+                                aria-live="polite"
                                 tabIndex={-1}
-                                ref={this.#pageRef}
                             >
                                 {pageTitle}
                             </p>

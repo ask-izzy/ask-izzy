@@ -14,13 +14,23 @@ const QUESTION_TITLE_FORMAT_MAPPING = {
     "sub-food": "Services",
     "sub-advocacy": "Services",
     "sub-everyday-things": "Services",
-    "sub-addiction": "Drugs & Alcohol",
-    "sub-life-skills": "Life Skills",
+    "sub-addiction": "Drugs & alcohol",
+    "sub-money": "Money services",
+    "sub-counselling": "Counselling services",
+    "sub-life-skills": "Life skills",
     "sub-indigenous": "Indigenous",
     "sub-job": "Jobs",
+    "are-you-safe": "Are you safe",
     "online-safety-screen": "Help",
-    "lgbtiqa-domestic-violence": "LGBTIQA+ Help",
-    "under-18-dfv": "Under 18 Help",
+    "lgbtiqa-domestic-violence": "LGBTIQA+ help",
+    "under-18-dfv": "Under 18 help",
+}
+
+const CATEGORY_TITLES_MAPPING = {
+    "life-skills-education": "Life skills & education",
+    "domestic-family-violence-help": "Domestic & family violence help",
+    "support-counselling": "Support & counselling",
+    "drugs-alcohol": "Drugs & alcohol",
 }
 
 export function stateFromLocation(): string {
@@ -54,45 +64,63 @@ export const resetDfvOptions = (): void => {
 export const makeTitle = (
     route: string,
     params: Object,
-    comp: ?string
+    routeType?: Array<string>,
 ): string => {
-    let unslug = (str) =>
-        str.replace("-", " ").split(" ").map(titleize).join(" ");
-
     let title = route || "";
 
     Object.keys(params).forEach((key) => {
         // FIXME This is a hack. Rewrite it when we're not about to launch.
         if (key === "search") {
-            title = title.replace(":page", unslug(params[key]));
+            title = title.replace(":page", pageTitle(params[key]));
         }
-        title = title.replace(`:${key}`, unslug(params[key]));
+        if (key !== "serviceName") {
+            title = title.replace(`:${key}`, pageTitle(params[key]));
+        }
     });
 
-    title = title.replace(" in :suburb, :state", "").replace(/:[^\s]+/, "");
+    title = pageTitle(title
+        .replace(" in :suburb, :state", "")
+        .replace(/:[^\s]+/, ""));
 
-    if (Object.keys(params).length) {
-        if (params.subpage) {
-            title = questionFlowTitle(
-                params.page || params.search,
-                params.subpage,
-            );
-        } else if (!params.subpage && comp === "PersonalisationWizardPage") {
-            title = questionFlowTitle(params.page || params.search,
-                "Intro",
-            );
-        }
+    if (routeType && routeType.length === 2 &&
+        !routeType.join(" ").includes("Results")) {
+        title = getCorrectTitle(title, params, routeType.join(" "))
     }
 
     return title ? `${title} | Ask Izzy` : "Ask Izzy";
 }
 
-const questionFlowTitle = (title: string, subpage: string): string => {
-    const question = QUESTION_TITLE_FORMAT_MAPPING[subpage] ||
-        subpage.replace("-", " ")
-    return titleize(title) + ` (${
-        titleize(question.replace("-", " "))
-    })`
+const pageTitle = (page) => {
+    let title = page.replace(/-/g, " ")
+    return CATEGORY_TITLES_MAPPING[page] ||
+    title.charAt(0).toUpperCase() + title.slice(1)
+};
+
+const getCorrectTitle = (
+    title: string,
+    params: Object,
+    routeType: string
+) => {
+
+    let search = (params) => (
+        params.search && `Search "${titleize(params.search)}"`
+    );
+
+    const page = (params.page && pageTitle(params.page)) || search(params)
+
+    if (routeType.includes("Edit")) {
+        title = questionFlowTitle(page, params?.subpage) +
+            " - [selected answers]"
+    } else {
+        title = questionFlowTitle(page, params?.subpage || "Intro")
+    }
+    return title
+}
+
+const questionFlowTitle = (title: string, subpage?: string): string => {
+    const question = subpage && (QUESTION_TITLE_FORMAT_MAPPING[subpage] ||
+        pageTitle(subpage));
+    return `${title} ${question ? `(${question})` : ""}`
 }
 
 export default {

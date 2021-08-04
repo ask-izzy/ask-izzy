@@ -124,6 +124,14 @@ class ServicePage extends React.Component<{}, {
         } else {
             return (
                 <div className="ServicePage">
+                    <ScreenReader>
+                        <p
+                            aria-live="polite"
+                            tabIndex={-1}
+                        >
+                            {object.name}
+                        </p>
+                    </ScreenReader>
                     <ServicePane service={object}/>
                 </div>
             );
