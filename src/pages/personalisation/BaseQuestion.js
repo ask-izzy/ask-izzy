@@ -24,6 +24,7 @@ export type Props = {
     classNames?: string,
     answers: Object | Array<string>,
     onDoneTouchTap: Function,
+    goBack?: Function,
     showBaseTextBox?: boolean,
     showDVLinkBar?: boolean,
     baseTextBoxComponent?: React.Element<any>,
@@ -282,7 +283,7 @@ class BaseQuestion extends Personalisation<Props, State> {
                         fixedAppBar={true}
                         goBack={this.props.backToAnswers && {
                             backMessage: "Back to answers",
-                            onBackTouchTap: this.nextStep,
+                            onBackTouchTap: this.props.goBack,
                         }}
                         taperColour={this.state.showStepper ? "LighterGrey"
                             : "HeaderBar"}
@@ -365,7 +366,10 @@ class BaseQuestion extends Personalisation<Props, State> {
                     <FlatButton
                         className="text-link"
                         label="Skip"
-                        onClick={this.props.onDoneTouchTap}
+                        onClick={() => {
+                            storage.setItem(this.props.name, "(skipped)");
+                            this.props.onDoneTouchTap()
+                        }}
                     />
                 </div>
             </div>

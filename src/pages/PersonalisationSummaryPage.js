@@ -14,8 +14,8 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
 
     static contextType: any = routerContext;
 
-    goBack(): void {
-        super.nextStep();
+    goBack(nextStep?: boolean): void {
+        nextStep && super.nextStep();
         if (this.currentComponent) {
             this.navigate("personalise/summary");
         } else {
@@ -24,7 +24,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
     }
 
     nextStep: (() => void) = () => {
-        this.goBack();
+        this.goBack(true);
     }
 
     clearAll(event: SyntheticInputEvent<>): void {
@@ -96,6 +96,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
             category={this.category}
             nextStep={this.nextStep}
             backToAnswers={true}
+            goBack={() => this.goBack()}
             previousStep={this.previousStep}
         />
     </div>

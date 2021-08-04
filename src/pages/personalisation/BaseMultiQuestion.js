@@ -196,7 +196,7 @@ class BaseMultiQuestion extends BaseQuestion {
                             fixedAppBar={true}
                             goBack={this.props.backToAnswers && {
                                 backMessage: "Back to answers",
-                                onBackTouchTap: this.nextStep,
+                                onBackTouchTap: this.props.goBack,
                             }}
                             bannerName={this.bannerName}
                         />

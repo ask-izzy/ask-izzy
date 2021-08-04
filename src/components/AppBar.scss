@@ -11,6 +11,7 @@
     position: fixed;
     flex-direction: row;
     justify-content: space-between;
+    -ms-flex-pack: justify;
 
     @media print {
         display: none;
@@ -30,6 +31,10 @@
         justify-content: flex-end;
     }
 
+    img {
+        height: 2.5em;
+    }
+
     .appBarLogo {
         margin: 1em;
     }
@@ -42,6 +47,7 @@
         top: 0;
         transition: background-color 0.05s ease;
         justify-content: space-between;
+        -ms-flex-pack: justify;
         background-color: #{colours.get-static('raw-colour-rich-purple')};
         background-color: var(--raw-colour-rich-purple);
         box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
@@ -51,12 +57,13 @@
 
             img {
                 padding: 0.6em;
+                height: 2.5em;
             }
         }
     }
 
     button {
-        width: 10rem;
+        width: 13rem;
 
         .backButton {
             width: 13rem;

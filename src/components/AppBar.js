@@ -13,7 +13,6 @@ import Storage from "../storage";
 import categories from "../constants/categories";
 import Category from "../constants/Category";
 
-import ScreenReader from "./ScreenReader";
 type Props = {
     transition?: boolean,
     home?: boolean,
@@ -80,16 +79,14 @@ function AppBar(
             }
             aria-labelledby="appBar"
         >
-            <div className={
-                classnames("AppBar", home ?
-                    "HomPageAppBar" : undefined, showBar())
-            }
+            <div
+                id="appBar"
+                aria-label="Banner navigation."
+                className={
+                    classnames("AppBar", home ?
+                        "HomPageAppBar" : undefined, showBar())
+                }
             >
-                <ScreenReader>
-                    <span id="appBar">
-                        Banner navigation.
-                    </span>
-                </ScreenReader>
                 {!home ||
                 (!transition || scrollPosY > breakpoint) ? (
                         <components.IconButton
