@@ -81,7 +81,7 @@ function AppBar(
         >
             <div
                 id="appBar"
-                aria-label="Banner navigation."
+                aria-label="Banner."
                 className={
                     classnames("AppBar", home ?
                         "HomPageAppBar" : undefined, showBar())
@@ -94,7 +94,7 @@ function AppBar(
                                 !onBackTouchTap ? "appBarLogo" : undefined
                             }
                             name={onBackTouchTap ? backMessage
-                                : "Ask Izzy home page button;"
+                                : "Ask Izzy home page;"
                             }
                             onClick={onBackTouchTap || goHome}
                         >
