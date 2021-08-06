@@ -136,7 +136,7 @@ export default class CollapsedOpeningTimes extends React.Component<Props, void> 
                 <OpeningTimes object={this.props.object} />
                 {openingHours.length > 0 && (
                     <Collapser
-                        expandMessage="Open Times"
+                        expandMessage="Show open hours"
                         onClick={this.recordExpandOpeningTimes.bind(this)}
                     >
                         <ul className="AllOpeningTimes">

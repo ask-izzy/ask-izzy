@@ -4,7 +4,6 @@ import * as React from "react";
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
 import Link from "../../components/Link";
-import Gender from "./Gender";
 import MobileDetect from "../../components/higherorder/MobileDetect";
 import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 import DfvDemographics from "./DfvDemographics";
@@ -62,60 +61,12 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
         return true;
     }
 
-    renderMensReferralService(): React.Element<any> {
-        if (Boolean(Gender.answer) && Gender.answer === "Female") {
-            return <React.Fragment/>;
-        }
-
-        // eslint-disable-next-line max-len
-        const referralServiceLink = "/service/1190541-no-to-violence-men-s-referral-service";
-        const referralServicePhone = "1300 766 491";
-        const referralServiceChat = "https://ntv.org.au/get-help/";
-
-        return (
-            <p>
-                <Link to={referralServiceLink}>Men's referral service</Link> on
-                {" "}
-                {
-                    this.props.mobileView ? (
-                        <Link to={`tel:${referralServicePhone}`}>
-                            { referralServicePhone }
-                        </Link>
-                    ) : (
-                        `${ referralServicePhone }`
-                    )
-                }
-                {" "}or chat online <Link to={referralServiceChat}>here</Link>.
-            </p>
-        )
-    }
-
-    renderWomensReferralService(): React.Element<any> {
-        if (Boolean(Gender.answer) && Gender.answer === "Male") {
-            return <React.Fragment/>;
-        }
-
-        const referralServiceLink = "/service/634190-1800respect";
-        const referralServicePhone = "1800 737 732";
-
-        return (
-            <p>
-                <Link to={referralServiceLink}>Women's referral service</Link>
-                {" "}on{" "}
-                {
-                    this.props.mobileView ? (
-                        <Link to={`tel:${referralServicePhone}`}>
-                            { referralServicePhone }
-                        </Link>
-                    ) : (
-                        `${ referralServicePhone }`
-                    )
-                }.
-            </p>
-        )
-    }
-
     renderContent(): React.Element<any> {
+        const referralServicePhone = "1800737732";
+        const referralServiceChat = "https://ntv.org.au/get-help/";
+        const link1800Respect = "/service/634190-1800respect";
+        const onlineChat = "https://chat.1800respect.org.au/"
+
         return (
             <div className="AreYouSafe">
                 <div className="safety-message">
@@ -133,8 +84,26 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
                             Take the first steps to change today.
                         </strong>
                     </h3>
-                    { this.renderMensReferralService() }
-                    { this.renderWomensReferralService() }
+                    <p>
+                        Get anonymous and confidential{" "}
+                        <Link to={referralServiceChat}>
+                            telephone and online counseling information{" "}
+                            and referral for men
+                        </Link>
+                        {" "}with concerns about their anger,
+                        violence and abuse.
+                    </p>
+                    <p>
+                        If you are worried about unhealthy, abusive or
+                        violent behaviour in any of your relationships,{" "}
+                        <Link to={link1800Respect}>1800RESPECT</Link>
+                        {" "}could help. Contact 1800RESPECT on{" "}
+                        <Link to={`tel:${referralServicePhone}`}>
+                            1800 737 732
+                        </Link>
+                        {" "}or through their{" "}
+                        <Link to={onlineChat}>online chat</Link>.
+                    </p>
                 </div>
             </div>
         );

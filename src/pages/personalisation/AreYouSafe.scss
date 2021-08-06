@@ -5,6 +5,15 @@
         font-weight: normal;
     }
 
+    ul {
+        list-style: none;
+    }
+
+    li {
+        margin: 0 2px;
+        display: inline-block;
+    }
+
     .safety-message {
         width: 75%;
         margin: 40px auto;

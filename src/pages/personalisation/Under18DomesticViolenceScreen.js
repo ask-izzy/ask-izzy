@@ -69,7 +69,8 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
     renderContent(): React.Element<any> {
         const linkService = "/service/120917-kids-helpline";
         const numberService = "1800 55 1800";
-        const chatService = "https://kidshelpline.com.au/";
+        const chatService =
+            "https://kidshelpline.com.au/get-help/webchat-counselling";
 
         const linkWoah = "https://woah.org.au/";
         const linkYoungAndEsafe = "https://www.esafety.gov.au/youngandesafe";
@@ -83,22 +84,17 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
                         with family or with someone you're dating.
                     </h2>
                     <p>
-                        Call <Link to={linkService}>Kids Helpline</Link> on{" "}
-                        {
-                            this.props.mobileView ? (
-                                <Link to={`tel:${numberService}`}>
-                                    {numberService}
-                                </Link>
-                            ) : (
-                                `${ numberService }`
-                            )
-                        }
-                        {" "} or chat online <Link to={chatService}>here</Link>.
-                    </p>
-                    <p>
-                        Visit <Link to={linkWoah}>WOAH</Link> or{" "}
-                        <Link to={linkYoungAndEsafe}>Young & eSafe</Link> to
-                        learn more.
+                        <Link to={linkService}>Kids Helpline</Link> can help.
+                        To talk to someone privately{" "}
+                        <Link to={`tel:${numberService}`}>
+                            call {numberService}
+                        </Link>
+                        {" "} or <Link to={chatService}>chat online</Link>.
+                        <br/>
+                        To <Link to={linkWoah}>understand what family{" "}
+                        violence is visit WOAH</Link>, or{" "}
+                        <Link to={linkYoungAndEsafe}>Young & eSafe for
+                            {" "}online safety advice</Link>
                     </p>
                 </div>
             </div>

@@ -10,6 +10,7 @@ type Props = {
     body: string,
     highlightColor: string,
     path: string,
+    learnMoreLink?: string,
 }
 
 export default class BaseLogoWithTextBox extends React.Component<Props, void> {
@@ -47,12 +48,10 @@ export default class BaseLogoWithTextBox extends React.Component<Props, void> {
                     <Link
                         to={this.props.path}
                         onClick={(evt) => evt.preventDefault()}
-                        aria-label="Learn More"
+                        aria-label={this.props.learnMoreLink || "Learn More"}
                     >
-                        Learn More
-                        <div
-                            className={"Chevron"}
-                        >
+                        {this.props.learnMoreLink || "Learn More"}
+                        <div className={"Chevron"}>
                             &nbsp;&gt;
                         </div>
                     </Link>

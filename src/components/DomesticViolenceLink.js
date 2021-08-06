@@ -10,9 +10,9 @@ import routerContext from "../contexts/router-context";
 export default class DomesticViolenceLink extends BaseLogoWithTextBox {
     static defaultProps: any = {
         icon: <icons.Book className={"big middle"}/>,
-        header: "Read more about domestic violence",
-        body: `Do you know what domestic violence looks like? Learn more about
-               how to spot the signs and what to do.`,
+        header: "Domestic and family violence information",
+        body: `Do you know what domestic violence looks like?`,
+        learnMoreLink: "Learn the signs and get help",
         highlightColor: "#7E74B3",
         path: "/information",
     };
