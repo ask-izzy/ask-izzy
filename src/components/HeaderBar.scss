@@ -9,9 +9,27 @@
     color: #{colours.get-static('colour-text-very-light')};
     color: var(--colour-text-very-light);
     z-index: 1;
-    overflow-x: hidden; /* used to hide ::after pseudo-element that creates the
-        diagonal taper at the bottom of the header */
     box-sizing: border-box;
+
+    &.showTaper {
+        min-height: 220px;
+        padding-bottom: 2vw;
+        overflow-x: hidden;
+
+        /* used to hide ::after pseudo-element that creates the
+        diagonal taper at the bottom of the header */
+
+        /* Diagonal cut-out taper at the bottom of the banner */
+        &::after {
+            position: absolute;
+            bottom: 0%;
+            left: 0%;
+            border-top: 3.5vw solid transparent;
+            border-right: 100vw solid #{colours.get-static('raw-colour-pure-white')};
+            border-right: 100vw solid var(--raw-colour-pure-white);
+            content: '';
+        }
+    }
 
     &.fixed {
         margin-top: $appbar-height;
@@ -92,17 +110,6 @@
         & + p {
             margin-top: 15px;
         }
-    }
-
-    /* Diagonal cut-out taper at the bottom of the banner */
-    &::after {
-        position: absolute;
-        bottom: 0%;
-        left: 0%;
-        border-top: 3.5vw solid transparent;
-        border-right: 100vw solid #{colours.get-static('raw-colour-pure-white')};
-        border-right: 100vw solid var(--raw-colour-pure-white);
-        content: '';
     }
 
     &.taperColourGrey::after {

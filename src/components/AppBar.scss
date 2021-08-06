@@ -1,6 +1,9 @@
 @use '../styles/mixins/colours';
 
 .AppBarContainer {
+    // When we don't have the taper it removes the
+    // white space from the top of the header
+    padding: 1px 0;
     margin-bottom: 5em;
 }
 

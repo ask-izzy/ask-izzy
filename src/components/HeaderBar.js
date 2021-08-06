@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import AppBar from "./AppBar";
+import {useEffect, useState} from "react";
 
 type Props = {
     primaryText: string | React.Node,
@@ -15,68 +16,95 @@ type Props = {
     goBack?: Object,
 }
 
-class HeaderBar extends React.Component<Props, void> {
-    static sampleProps: any = {
-        default: {
-            primaryText: "Primary Text",
-            secondaryText: "Secondary Text",
-            bannerName: "food",
-        },
-    };
+function HeaderBar(
+    {
+        bannerName,
+        className,
+        taperColour,
+        primaryText,
+        children,
+        secondaryText,
+        fixedAppBar,
+        home,
+        goBack = {},
+    }: Props): React.Node {
 
-    static defaultProps: any = {
-        fixedAppBar: false,
-        home: false,
-        goBack: {},
+
+    const [headerBarClassName, setHeaderBarClassName] = useState("HeaderBar")
+
+    useEffect(() => {
+        let newHeaderName = headerBarClassName
+        if (bannerName) {
+            newHeaderName += ` ${bannerName}`;
+        }
+
+        if (!getOlderSafari()) {
+            newHeaderName += " showTaper"
+        }
+
+        if (className) {
+            newHeaderName += ` ${className}`;
+        }
+
+        if (taperColour) {
+            newHeaderName += ` taperColour${taperColour}`;
+        }
+
+        setHeaderBarClassName(newHeaderName)
+    }, [])
+
+    // Older Ios Versions have trouble with overflow-x: hidden
+    // which causes the app bar to disappear
+    const getOlderSafari = (): boolean => {
+        if (typeof navigator !== "undefined") {
+            if (navigator.userAgent.match(/(iPod|iPhone|iPad)/) &&
+                navigator.userAgent.match(/AppleWebKit/)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    render(): React.Element<"div"> {
-        // Search banner is the default
-        let headerBarClassName = "HeaderBar";
 
-        if (this.props.bannerName) {
-            headerBarClassName += ` ${this.props.bannerName}`;
-        }
 
-        if (this.props.className) {
-            headerBarClassName += ` ${this.props.className}`;
-        }
 
-        if (this.props.taperColour) {
-            headerBarClassName += ` taperColour${this.props.taperColour}`;
-        }
-
-        return (
-            <div className={headerBarClassName}>
-
-                <AppBar
-                    transition={!this.props.fixedAppBar}
-                    home={this.props.home}
-                    breakpoint={this.props.home ? 100 : 30}
-                    {...this.props.goBack}
-                />
-                <div className="primary"
-                    tabIndex="0"
-                >
-                    <h1>{this.props.primaryText}</h1>
-                </div>
-                {this.renderSecondaryText()}
-                {this.props.children}
-            </div>
-        );
-    }
-
-    renderSecondaryText(): void | React.Element<"div"> {
-        if (this.props.secondaryText) {
+    const renderSecondaryText = (): void | React.Element<"div"> => {
+        if (secondaryText) {
             return (
                 <div className="secondary"
                     tabIndex="0"
                 >
-                    {this.props.secondaryText}
+                    {secondaryText}
                 </div>
             )
         }
     }
+
+
+    return (
+        <div
+            className={`${headerBarClassName}`}
+        >
+            <AppBar
+                transition={!fixedAppBar}
+                home={home}
+                breakpoint={home ? 100 : 30}
+                {...goBack}
+            />
+            <div className="primary"
+                tabIndex="0"
+            >
+                <h1>{primaryText}</h1>
+            </div>
+            {renderSecondaryText()}
+            {children}
+        </div>
+    )
+}
+
+HeaderBar.defaultProps = {
+    fixedAppBar: false,
+    home: false,
 }
 
 export default HeaderBar;
