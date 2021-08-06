@@ -71,8 +71,12 @@
                 margin: 1em 1em 1em 0.4em;
                 font-size: 18px;
 
-                p {
-                    display: inline;
+                > :first-child {
+                    margin-top: 0;
+                }
+
+                > :last-child {
+                    margin-bottom: 0;
                 }
             }
         }
@@ -86,7 +90,7 @@
     .body {
         margin: 0 1em 1em;
 
-        & > *:first-child {
+        > :first-child {
             margin-top: 0;
         }
     }
