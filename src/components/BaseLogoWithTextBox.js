@@ -51,7 +51,10 @@ export default class BaseLogoWithTextBox extends React.Component<Props, void> {
                         aria-label={this.props.learnMoreLink || "Learn More"}
                     >
                         {this.props.learnMoreLink || "Learn More"}
-                        <div className={"Chevron"}>
+                        <div
+                            aria-hidden="true"
+                            className={"Chevron"}
+                        >
                             &nbsp;&gt;
                         </div>
                     </Link>

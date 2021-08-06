@@ -73,7 +73,7 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
             "https://kidshelpline.com.au/get-help/webchat-counselling";
 
         const linkWoah = "https://woah.org.au/";
-        const linkYoungAndEsafe = "https://www.esafety.gov.au/youngandesafe";
+        const linkYoungAndEsafe = "https://www.esafety.gov.au/educators/classroom-resources/young-and-esafe";
 
         return (
             <div className="AreYouSafe">

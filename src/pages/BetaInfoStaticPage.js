@@ -36,13 +36,15 @@ export default class BetaInfoStaticPage extends React.Component<{}, void> {
                 </p>
                 <p>
 
-                    The beta might be a bit more 'rough around the edges' and you might find things that don't work
-                    properly,
-                    (<Link to={"mailto:support@askizzy.org.au?subject=Ask%20Izzy%20Beta%20-%20Feedback"}>please let us know!</Link>)
-                    by email with your feedback. We may monitor and measure it more closely
-                    than we do with regular Ask Izzy. Although we will never capture any personally identifiable
-                    information about you, we may use tools to measure what pages and parts of Ask Izzy people are
-                    using, and how people move through Ask Izzy.
+                    The beta might be a bit more 'rough around the edges' and you might find things that don’t work properly,
+                    please let us know by <Link to={"mailto:support@askizzy.org.au?subject=Ask%20Izzy%20Beta%20-%20Feedback"}>
+                    emailing us with your feedback.</Link>
+                </p>
+                <p>
+                    We may monitor and measure it more closely than we do with regular Ask
+                    Izzy. Although we will never capture any personally identifiable
+                    information about you, we may use tools to measure what pages and
+                    parts of Ask Izzy people are using, and how people move through Ask Izzy.
                 </p>
                 <p>
                     Participating in our beta is entirely voluntary, and you can return to regular Ask Izzy whenever you like. By taking part you’ll be helping us to build a better app, and will have the opportunity to see, and give feedback on, features as they emerge.

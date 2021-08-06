@@ -87,7 +87,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
                     <p>
                         Get anonymous and confidential{" "}
                         <Link to={referralServiceChat}>
-                            telephone and online counseling information{" "}
+                            telephone and online counselling, information{" "}
                             and referral for men
                         </Link>
                         {" "}with concerns about their anger,

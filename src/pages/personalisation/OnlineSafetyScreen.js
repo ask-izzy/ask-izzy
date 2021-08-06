@@ -69,33 +69,24 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
                         }.
                     </h2>
                     <p>
-                        <ul>
-                            <li>
-                                If you are worried about unhealthy,{" "}
-                                abusive or violent behaviour in any{" "}
-                                of your relationships,{" "}
-                            </li>
-                            <li>
-                                <Link to={link1800Respect}>1800RESPECT</Link>
-                            </li>
-                            <li>
-                                could help. Contact 1800RESPECT on
-                            </li>
-                            <li>
-                                <Link className="phone-number"
-                                    to={`tel:${number1800Respect}`}
-                                >
-                                    {number1800Respect}
-                                </Link>
-                            </li>
-                            <li>
-                                or through their
-                            </li>
-                            <li>
-                                <Link to={onlineChat}>online chat.</Link>
-                            </li>
-                        </ul>
+                        If you are worried about unhealthy,{" "}
+                        abusive or violent behaviour in any{" "}
+                        of your relationships,{" "}
+                        <Link to={link1800Respect}>1800RESPECT</Link>
+                        {" "}could help. Contact 1800RESPECT on
                     </p>
+                    <span>
+                        <Link className="phone-number"
+                            to={`tel:${number1800Respect}`}
+                        >
+                            {number1800Respect}
+                        </Link> or through their{" "}
+                    </span>
+                    <span>
+                        <Link to={onlineChat}>
+                            online chat.
+                        </Link>
+                    </span>
                 </div>
             </div>
         );

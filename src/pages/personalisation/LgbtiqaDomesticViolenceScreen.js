@@ -114,6 +114,8 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
     renderContent(): React.Element<any> {
         const link1800Respect = "/service/634190-1800respect";
         const phone1800Respect = "1800 737 732";
+        const wRespectPhone = "1800 542 847";
+        const wRespect = "/service/4000053-with-respect";
         const linkAcon = "http://www.anothercloset.com.au/";
 
         return (
@@ -124,6 +126,27 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
                         Everyone has the right to be safe and proud.<br />
                         Violence and abuse is never OK.
                     </h2>
+                    <p>
+                        If you're LGBTIQA+ and worried about any of your
+                        relationships, <Link to={wRespect}>
+                        W | Respect</Link> can
+                        help. Call W | Respect on{" "}
+                        <Link to={`tel:${wRespectPhone}`}>{wRespectPhone}</Link>
+                        for counselling and support.
+                    </p>
+                    <p>
+                        Get information about
+                        <Link to={linkAcon}>
+                            domestic and family violence in
+                            LGBTIQ relationships.
+                        </Link>
+                    </p>
+                    <h3>
+                        <strong>
+                            You can also get help from non-LGBTIQA+
+                            specific services
+                        </strong>
+                    </h3>
                     <p>
                         Help and services are available from LGBTIQA+ services.
                     </p>

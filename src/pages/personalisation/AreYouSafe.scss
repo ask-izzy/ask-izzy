@@ -7,6 +7,7 @@
 
     ul {
         list-style: none;
+        padding: 0;
     }
 
     li {
@@ -19,9 +20,12 @@
         margin: 40px auto;
         text-align: center;
 
+        span,
         p {
             font-weight: normal;
             font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 0;
         }
 
         .phone-number {
