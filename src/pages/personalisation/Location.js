@@ -22,6 +22,8 @@ import ScreenReader from "../../components/ScreenReader";
 type Props = {
         name: string,
         onDoneTouchTap: Function,
+        backToAnswers?: boolean,
+        goBack?: Function,
 }
 
 type State = {
@@ -246,6 +248,10 @@ class Location extends Personalisation<Props, State> {
                     taperColour={this.state.showStepper ? "LighterGrey"
                         : "HeaderBar"}
                     fixedAppBar={true}
+                    goBack={this.props.backToAnswers && {
+                        backMessage: "Back to answers",
+                        onBackTouchTap: this.props.goBack,
+                    }}
                     bannerName={this.bannerName}
                 />
                 {this.state.showStepper ? (

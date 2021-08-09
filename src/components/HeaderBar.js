@@ -51,7 +51,9 @@ function HeaderBar(
         }
 
         setHeaderBarClassName(newHeaderName)
-    }, [])
+        // Because the taperColour changes as the question stepper
+        // is loaded it is a dependency
+    }, [taperColour])
 
     // Older Ios Versions have trouble with overflow-x: hidden
     // which causes the app bar to disappear

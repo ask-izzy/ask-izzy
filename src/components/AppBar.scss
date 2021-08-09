@@ -8,7 +8,7 @@
 }
 
 .AppBar {
-    $appbar-text-line-height: 52px;
+    $appbar-text-line-height: 42px;
 
     display: flex;
     position: fixed;
@@ -35,7 +35,7 @@
     }
 
     img {
-        height: 2.5em;
+        height: 30px;
     }
 
     .appBarLogo {
@@ -56,17 +56,17 @@
         box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 
         .appBarLogo {
-            margin: 0;
+            margin: 10px;
+            height: 30px;
 
             img {
-                padding: 0.6em;
-                height: 2.5em;
+                height: 25px;
             }
         }
     }
 
     button {
-        width: 13rem;
+        width: auto;
 
         .backButton {
             width: 13rem;

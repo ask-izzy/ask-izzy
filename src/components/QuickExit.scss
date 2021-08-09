@@ -35,24 +35,4 @@
             color: var(--colour-text-very-light);
         }
     }
-
-    /* if desktop */
-    .longer-text {
-        display: initial;
-    }
-
-    .shorter-text {
-        display: none;
-    }
-
-    /* mobile device (max width is 736px) */
-    @media only screen and (max-width: 768px) {
-        .longer-text {
-            display: none;
-        }
-
-        .shorter-text {
-            display: initial;
-        }
-    }
 }

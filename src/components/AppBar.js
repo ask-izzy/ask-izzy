@@ -18,7 +18,6 @@ type Props = {
     home?: boolean,
     onBackTouchTap?: ?Function,
     backMessage?: string,
-    fixedSizeQuickExit?: boolean,
     containerClassName?: ?string,
     breakpoint? : number,
 }
@@ -30,7 +29,6 @@ function AppBar(
     {
         onBackTouchTap,
         backMessage,
-        fixedSizeQuickExit,
         containerClassName,
         transition,
         home,
@@ -115,7 +113,6 @@ function AppBar(
                     ) : null}
                 <QuickExit
                     className={showBar()}
-                    fixedSize={fixedSizeQuickExit}
                 />
             </div>
         </div>
