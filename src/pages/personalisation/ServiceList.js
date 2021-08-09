@@ -12,7 +12,7 @@ export default class ServiceList extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "service-list",
         question: "What best describes what you need?",
-        byline: "All of your answers are private and anonymous.",
+        info: "All of your answers are private and anonymous.",
         answers: {
             "Family violence support": append(""),
             "Counselling": append("counselling"),

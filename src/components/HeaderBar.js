@@ -9,6 +9,7 @@ type AppBarProps = React.ElementProps<typeof AppBar>
 type Props = {
     primaryText: string | React.Node,
     secondaryText?: string | React.Node,
+    infoText?: string | React.Node,
     children?: React.Node,
     bannerName: string,
     className?: string,
@@ -29,6 +30,7 @@ function HeaderBar(
         primaryText,
         children,
         secondaryText,
+        infoText,
         fixedAppBar,
         hideLogoWhenNotABar,
         goBack = {},
@@ -87,6 +89,18 @@ function HeaderBar(
         }
     }
 
+    const renderInfoText = (): void | React.Element<"div"> => {
+        if (infoText) {
+            return (
+                <div className="info"
+                    tabIndex="0"
+                >
+                    {infoText}
+                </div>
+            )
+        }
+    }
+
 
     return (
         <div
@@ -104,6 +118,7 @@ function HeaderBar(
                 <h1>{primaryText}</h1>
             </div>
             {renderSecondaryText()}
+            {renderInfoText()}
             {children}
         </div>
     )

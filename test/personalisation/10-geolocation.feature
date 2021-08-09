@@ -9,7 +9,7 @@ Feature: Geolocation
         When I visit /
         Given control of geolocation
         When I visit /housing/personalise/page/location
-        Then I should see "Where are you?"
+        Then I should see "Where are you looking for help?"
         And I should see "Get your current location"
         And the button "Done" should be disabled
 

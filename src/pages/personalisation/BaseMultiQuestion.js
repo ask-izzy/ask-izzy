@@ -189,6 +189,9 @@ class BaseMultiQuestion extends BaseQuestion {
                                     {this.props.question}
                                 </div>
                             }
+                            infoText={
+                                this.props.info
+                            }
                             secondaryText={
                                 this.props.byline
                             }

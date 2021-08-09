@@ -28,7 +28,8 @@ export default class DfvDemographics extends BaseMultiQuestion {
     static defaultProps: ReactElementConfig<typeof BaseMultiQuestion> = {
         name: "dfv-demographics",
         question: "Do any of these apply to you?",
-        byline: "All of your answers are private and anonymous.",
+        byline: "Select all that apply",
+        info: "All of your answers are private and anonymous.",
         answers: {
             "Aboriginal and/or Torres Strait Islander":
                 append("(Aboriginals & Torres Strait Islanders)"),

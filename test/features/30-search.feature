@@ -45,6 +45,6 @@ Feature: Search
 
     Scenario: Searching for domestic violence performs the safety check
         When I search for "domestic violence" and press enter
-        Then I should see "To help me find the right services I'll ask you a few questions."
+        Then I should see "I'm looking for help for"
         And I click on "Myself"
         Then I should see "Are you safe right now?"

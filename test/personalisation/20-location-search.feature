@@ -7,7 +7,7 @@ Feature: Location search
 
     Scenario: Search for a suburb
         When I visit /housing/personalise/page/location
-        Then I should see "Where are you?"
+        Then I should see "Where are you looking for help?"
 
         When I search for "carlt"
         Then I should see the results

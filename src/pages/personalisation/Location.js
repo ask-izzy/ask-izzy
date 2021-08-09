@@ -243,12 +243,10 @@ class Location extends Personalisation<Props, State> {
                 </ScreenReader>
                 <components.HeaderBar
                     primaryText={
-                        <div>
-                            Where are you?
-                        </div>
+                        "Where are you looking for help?"
                     }
                     secondaryText={
-                        "This will let me find the services closest to you."
+                        "Find services near you"
                     }
                     taperColour={this.state.showStepper ? "LighterGrey"
                         : "HeaderBar"}

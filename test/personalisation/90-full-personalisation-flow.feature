@@ -13,7 +13,7 @@ Feature: Personalisation
     Scenario: Search for housing with personalised results
         Given control of geolocation
         When I click on "Housing"
-        Then I should see "To help me find the right services I'll ask you a few questions."
+        Then I should see "I'm looking for help for"
 
         When I click on the done button
 
@@ -44,10 +44,10 @@ Feature: Personalisation
     Scenario: Search for emergency accommodation
         Given control of geolocation
         When I click on "Housing"
-        Then I should see "To help me find the right services I'll ask you a few questions."
+        Then I should see "I'm looking for help for"
 
         When I click on the done button
-        Then I should see "Where are you?"
+        Then I should see "Where are you looking for help?"
 
         When I click on "Get your current location"
 
@@ -73,10 +73,10 @@ Feature: Personalisation
     Scenario: Do a search
         Given control of geolocation
         When I search for "find a meal" and press enter
-        Then I should see "To help me find the right services I'll ask you a few questions."
+        Then I should see "I'm looking for help for"
 
         When I click on the done button
-        Then I should see "Where are you?"
+        Then I should see "Where are you looking for help?"
 
         When I click on "Get your current location"
 
@@ -89,7 +89,7 @@ Feature: Personalisation
 
     Scenario: Searching for domestic violence checks that I'm safe
         When I click on "Domestic & family violence help"
-        Then I should see "To help me find the right services I'll ask you a few questions."
+        Then I should see "I'm looking for help for"
 
         When I click on the done button
         Then I should see "Are you safe right now?"
@@ -98,4 +98,4 @@ Feature: Personalisation
         Then I should see "Everyone has the right to be safe."
 
         When I click back from the browser UI
-        Then I should see "To help me find the right services I'll ask you a few questions."
+        Then I should see "I'm looking for help for"

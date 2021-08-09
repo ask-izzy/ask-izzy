@@ -87,3 +87,19 @@ LongText.args = {
     </div>,
     bannerName: "health",
 };
+
+export const InfoTextNoSecondary: typeof Template = Template.bind({});
+InfoTextNoSecondary.args = {
+    primaryText: "Primary Text",
+    infoText: "Info Text",
+    bannerName: "food",
+};
+
+export const InfoTextWithSecondary: typeof Template = Template.bind({});
+InfoTextWithSecondary.args = {
+    primaryText: "Primary Text",
+    secondaryText: "Secondary Text",
+    infoText: "Info Text",
+    bannerName: "food",
+};
+
