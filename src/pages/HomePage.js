@@ -85,7 +85,7 @@ class HomePage extends React.Component<{}, State> {
                             Find the help you need, now and nearby.
                         </>}
                         secondaryText={<div className="secondary">
-                            Search over 370,000 support services.
+                            Search over 370,000 support services. + one new category
                         </div>}
                         bannerName="homepage"
                         taperColour="LighterGrey"
