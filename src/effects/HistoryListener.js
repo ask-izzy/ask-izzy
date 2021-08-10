@@ -5,6 +5,7 @@ import * as gtm from "../google-tag-manager";
 import { useRouterContext } from "../contexts/router-context";
 import { waitTillPageLoaded } from "../utils/page-loading"
 import categories from "../constants/categories"
+import posthog, {posthogShouldBeLoaded} from "../utils/posthog";
 
 export default (props: Object): null => {
     const {location, match, navigateInProgress} = useRouterContext()
@@ -41,6 +42,10 @@ function recordAnalytics(location, routeMatch) {
         hash: location.hash,
         ...pageVars,
     });
+
+    if (posthogShouldBeLoaded) {
+        posthog.capture("$pageview");
+    }
 }
 
 export function getPageVars(routeMatch: Object): {|

@@ -17,11 +17,14 @@ import Storage from "../storage";
 import AlertBannerList from "../components/AlertBannerList";
 import ScreenReader from "../components/ScreenReader";
 
+type Props = {
+    siteFeatureFlags: Object
+}
 type State = {
     location: ?string,
 }
 
-class HomePage extends React.Component<{}, State> {
+class HomePage extends React.Component<Props, State> {
 
     search: ?HTMLInputElement;
 
@@ -59,8 +62,15 @@ class HomePage extends React.Component<{}, State> {
 
     render(): ReactElement<"div"> {
         const logo = "/static/images/ask-izzy-logo-single-line-yellow.svg";
+        const showSiteBanner = this.props.siteFeatureFlags[
+            "site-banner-feature-flag-test"
+        ]
         return (
-            <div className="HomePage">
+            <div
+                className={
+                    "HomePage" + (showSiteBanner ? " CurrentEmergency" : "")
+                }
+            >
                 <AppBar
                     containerClassName="appbar"
                     fixedSizeQuickExit={true}
@@ -93,6 +103,22 @@ class HomePage extends React.Component<{}, State> {
                     <AlertBannerList
                         screenLocation="homePage"
                     />
+                    {this.props.siteFeatureFlags[
+                        "site-banner-feature-flag-test"
+                    ] &&
+                        <div className="CurrentEmergencyNotice">
+                            <h3>
+                                The site banner feature flag test is set
+                            </h3>
+                            <p>
+                                Bikie rort rip snorter my tinny. Brickie as
+                                stands out like stands out like a waggin'
+                                school <a href="https://txtrdr.com/boganipsum/">
+                                billabong</a> his blood's worth bottling
+                                budgie smugglers.
+                            </p>
+                        </div>
+                    }
                     <div
                         role="search"
                         aria-labelledby="searchBox"

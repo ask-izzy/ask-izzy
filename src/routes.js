@@ -13,6 +13,8 @@ import {
 } from "react-router-dom";
 import {titleize} from "underscore.string";
 
+import {setFeatureFlags} from "./utils/posthog"
+
 // If you import these after the others,
 // babel decides the navbar doesn't really
 // need to be loaded.
@@ -107,7 +109,10 @@ const routes: ReactElement<typeof Routes> = <Routes>
     >
         <Route
             path=""
-            element={<HomePage />}
+            element={() => {
+                const WrappedHomePage = setFeatureFlags(HomePage)
+                return <WrappedHomePage />
+            }}
             type={["Home"]}
         />
         <Route

@@ -1,12 +1,8 @@
 /* $FlowIgnore */
 /*eslint-disable */
-import posthog from 'posthog-js';
 import 'url-search-params-polyfill';
 
 document.addEventListener("DOMContentLoaded", function(event) {
-    if (window.POSTHOG_URL && window.POSTHOG_KEY) {
-        posthog.init(window.POSTHOG_KEY, {api_host: window.POSTHOG_URL});
-    }
 
     if (window.GOOGLE_TAG_MANAGER_ID && window.GOOGLE_TAG_MANAGER_AUTH && window.GOOGLE_TAG_MANAGER_ENV) {
         const urlParams = new URLSearchParams(window.location.search);

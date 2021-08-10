@@ -4,6 +4,9 @@ import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
 import routerContext from "../contexts/router-context"
 import {replaceUrlLocation} from "../utils/url.service";
+import {setFeatureFlags} from "../utils/posthog";
+
+const cachedRenderComponents = {}
 
 class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     ExtraState
@@ -52,6 +55,14 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
 
     get currentComponent(): ?React$ComponentType<*> {
         return this.personalisationComponents[this.currentComponentIdx];
+    }
+
+    get currentComponentForRender(): ?React$ComponentType<*> {
+        if (!cachedRenderComponents[this.currentComponentIdx]) {
+            cachedRenderComponents[this.currentComponentIdx] =
+                setFeatureFlags(this.currentComponent);
+        }
+        return cachedRenderComponents[this.currentComponentIdx];
     }
 
     get currentComponentIdx(): number {
