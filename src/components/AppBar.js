@@ -15,7 +15,7 @@ import Category from "../constants/Category";
 
 type Props = {
     transition?: boolean,
-    home?: boolean,
+    isHome?: boolean,
     onBackTouchTap?: ?Function,
     backMessage?: string,
     containerClassName?: ?string,
@@ -31,7 +31,7 @@ function AppBar(
         backMessage,
         containerClassName,
         transition,
-        home,
+        isHome,
         breakpoint = STICKY_HEADER_BREAKPOINT,
     }: Props): ReactNode {
 
@@ -80,37 +80,33 @@ function AppBar(
             <div
                 id="appBar"
                 aria-label="Banner."
-                className={
-                    classnames("AppBar", home ?
-                        "HomPageAppBar" : undefined, showBar())
-                }
+                className={classnames("AppBar", showBar())}
             >
-                {!home ||
-                (!transition || scrollPosY > breakpoint) ? (
-                        <components.IconButton
-                            className={
-                                !onBackTouchTap ? "appBarLogo" : undefined
-                            }
-                            name={onBackTouchTap ? backMessage
-                                : "Ask Izzy home page;"
-                            }
-                            onClick={onBackTouchTap || goHome}
-                        >
-                            {onBackTouchTap ? (
-                                <span className="backButton">
-                                    <icons.ChevronBack />
-                                    <span className="back-label">
-                                        {backMessage}
-                                    </span>
+                {(!isHome || !transition || scrollPosY > breakpoint) && (
+                    <components.IconButton
+                        className={
+                            !onBackTouchTap ? "appBarLogo" : undefined
+                        }
+                        name={onBackTouchTap ? backMessage
+                            : "Ask Izzy home page;"
+                        }
+                        onClick={onBackTouchTap || goHome}
+                    >
+                        {onBackTouchTap ? (
+                            <span className="backButton">
+                                <icons.ChevronBack />
+                                <span className="back-label">
+                                    {backMessage}
                                 </span>
-                            ) : (
-                                <img
-                                    src={LOGO}
-                                    alt="Ask izzy home"
-                                />
-                            )}
-                        </components.IconButton>
-                    ) : null}
+                            </span>
+                        ) : (
+                            <img
+                                src={LOGO}
+                                alt="Ask Izzy home"
+                            />
+                        )}
+                    </components.IconButton>
+                )}
                 <QuickExit
                     className={showBar()}
                 />
@@ -121,7 +117,7 @@ function AppBar(
 
 AppBar.defaultProps = {
     transition: false,
-    home: false,
+    isHome: false,
 }
 
 export default AppBar;

@@ -12,7 +12,8 @@
     vertical-align: middle;
     margin: 1em;
     border-radius: 4px;
-    box-shadow: 0 0 12px rgb(0 0 0 / 50%);
+    box-shadow: 0 0 12px 0 #{colours.get-static('app-bar-shadow')};
+    box-shadow: 0 0 12px 0 var(--app-bar-shadow);
 
     &.showBar {
         //transition: margin 0.2s ease;

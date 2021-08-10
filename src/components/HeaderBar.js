@@ -4,6 +4,8 @@ import * as React from "react";
 import AppBar from "./AppBar";
 import {useEffect, useState} from "react";
 
+type AppBarProps = React.ElementProps<typeof AppBar>
+
 type Props = {
     primaryText: string | React.Node,
     secondaryText?: string | React.Node,
@@ -12,8 +14,11 @@ type Props = {
     className?: string,
     taperColour?: string,
     fixedAppBar?: boolean,
-    home?: boolean,
-    goBack?: Object,
+    isHome?: boolean,
+    goBack?: {
+        onBackTouchTap?: $PropertyType<AppBarProps, 'onBackTouchTap'>,
+        backMessage?: $PropertyType<AppBarProps, 'backMessage'>,
+    },
 }
 
 function HeaderBar(
@@ -25,7 +30,7 @@ function HeaderBar(
         children,
         secondaryText,
         fixedAppBar,
-        home,
+        isHome,
         goBack = {},
     }: Props): React.Node {
 
@@ -89,8 +94,8 @@ function HeaderBar(
         >
             <AppBar
                 transition={!fixedAppBar}
-                home={home}
-                breakpoint={home ? 100 : 30}
+                isHome={isHome}
+                breakpoint={isHome ? 100 : 30}
                 {...goBack}
             />
             <div className="primary"
@@ -106,7 +111,7 @@ function HeaderBar(
 
 HeaderBar.defaultProps = {
     fixedAppBar: false,
-    home: false,
+    isHome: false,
 }
 
 export default HeaderBar;

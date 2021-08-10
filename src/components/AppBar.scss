@@ -30,10 +30,6 @@
     text-overflow: ellipsis;
     z-index: 2;
 
-    &.HomPageAppBar {
-        justify-content: flex-end;
-    }
-
     img {
         height: 30px;
     }
@@ -51,9 +47,10 @@
         transition: background-color 0.05s ease;
         justify-content: space-between;
         -ms-flex-pack: justify;
-        background-color: #{colours.get-static('raw-colour-rich-purple')};
-        background-color: var(--raw-colour-rich-purple);
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+        background-color: #{colours.get-static('colour-bg-highlight')};
+        background-color: var(--colour-bg-highlight);
+        box-shadow: 0 0 6px 0 #{colours.get-static('app-bar-shadow')};
+        box-shadow: 0 0 6px 0 var(--app-bar-shadow);
 
         .appBarLogo {
             margin: 10px;

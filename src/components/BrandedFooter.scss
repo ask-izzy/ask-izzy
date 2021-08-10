@@ -121,6 +121,11 @@
             ul {
                 display: inline-flex;
             }
+
+            li:first-child::after {
+                content: '|';
+                margin: 0 0.5em;
+            }
         }
 
         div.support-links {

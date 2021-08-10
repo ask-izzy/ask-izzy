@@ -83,7 +83,7 @@ class HomePage extends React.Component<{}, State> {
                             Search over 370,000 support services.
                         </div>}
                         bannerName="homepage"
-                        home={true}
+                        isHome={true}
                         taperColour="LighterGrey"
                     />
                     <AlertBannerList

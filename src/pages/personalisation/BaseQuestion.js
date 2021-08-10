@@ -24,7 +24,7 @@ export type Props = {
     classNames?: string,
     answers: Object | Array<string>,
     onDoneTouchTap: Function,
-    goBack?: Function,
+    goBack?: () => boolean,
     showBaseTextBox?: boolean,
     showDVLinkBar?: boolean,
     baseTextBoxComponent?: React.Element<any>,
@@ -281,13 +281,15 @@ class BaseQuestion extends Personalisation<Props, State> {
                             this.props.byline
                         }
                         fixedAppBar={true}
-                        goBack={this.props.backToAnswers && {
-                            backMessage: "Back to answers",
-                            onBackTouchTap: this.props.goBack,
-                        }}
                         taperColour={this.state.showStepper ? "LighterGrey"
                             : "HeaderBar"}
                         bannerName={this.bannerName}
+                        {...this.props.backToAnswers && {
+                            goBack: {
+                                backMessage: "Back to answers",
+                                onBackTouchTap: this.props.goBack,
+                            },
+                        }}
                     />
                     {this.state.showStepper && (
                         <div

@@ -18,12 +18,17 @@ import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
 import Category from "../../constants/Category";
 import WithStickyFooter from "../../components/WithStickyFooter";
 import ScreenReader from "../../components/ScreenReader";
+import AppBar from "../../components/AppBar";
+type AppBarProps = React.ElementProps<typeof AppBar>
 
 type Props = {
         name: string,
         onDoneTouchTap: Function,
         backToAnswers?: boolean,
-        goBack?: Function,
+        goBack?: {
+            onBackTouchTap?: $PropertyType<AppBarProps, 'onBackTouchTap'>,
+            backMessage?: $PropertyType<AppBarProps, 'backMessage'>,
+        },
 }
 
 type State = {
@@ -248,11 +253,13 @@ class Location extends Personalisation<Props, State> {
                     taperColour={this.state.showStepper ? "LighterGrey"
                         : "HeaderBar"}
                     fixedAppBar={true}
-                    goBack={this.props.backToAnswers && {
-                        backMessage: "Back to answers",
-                        onBackTouchTap: this.props.goBack,
-                    }}
                     bannerName={this.bannerName}
+                    {...this.props.backToAnswers && {
+                        goBack: {
+                            backMessage: "Back to answers",
+                            onBackTouchTap: this.props.goBack,
+                        },
+                    }}
                 />
                 {this.state.showStepper ? (
                     <QuestionStepper

@@ -7,7 +7,7 @@ import Category from "../constants/Category";
 type Props = {
     nextStep: Function,
     previousStep: Function,
-    backToAnswers: Function,
+    backToAnswers: boolean,
     category?: Category,
     name?: string,
 }

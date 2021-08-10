@@ -200,9 +200,7 @@ export default class BrandedFooter
                                 About Ask Izzy
                             </Link>
                         </li>
-                        <li><span className="spacer">|</span></li>
                         <li>
-                            <span className="spacer">|</span>
                             <Link to="/terms">
                                 Terms of use
                             </Link>

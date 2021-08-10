@@ -9,6 +9,15 @@
         .HeaderBar {
             text-align: center;
 
+            .AppBar {
+                justify-content: flex-end;
+
+                &.showBar {
+                    justify-content: space-between;
+                    -ms-flex-pack: justify;
+                }
+            }
+
             .homepage-logo {
                 display: block;
                 width: 200px;
