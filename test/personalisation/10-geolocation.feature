@@ -11,7 +11,7 @@ Feature: Geolocation
         When I visit /housing/personalise/page/location
         Then I should see "Where are you looking for help?"
         And I should see "Get your current location"
-        And the button "Done" should be disabled
+        And the button "Next" should be disabled
 
         When I click on "Get your current location"
         Then I should see "Locating you..."
@@ -19,7 +19,7 @@ Feature: Geolocation
         Given I'm at 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
-        And the button "Done" should be enabled
+        And the button "Next" should be enabled
 
     Scenario: User denies geolocation access
         When I visit /
@@ -32,4 +32,4 @@ Feature: Geolocation
         When I deny access to geolocation
         Then I should see "Unable to get your location"
         And I should see "Please enter your location below (User denied access)"
-        And the button "Done" should be disabled
+        And the button "Next" should be disabled

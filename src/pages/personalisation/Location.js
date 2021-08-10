@@ -405,7 +405,7 @@ class Location extends Personalisation<Props, State> {
             <div>
                 <div className="done-button">
                     <components.FlatButton
-                        label="Done"
+                        label="Next"
                         onClick={this.onDoneTouchTap.bind(this)}
                         disabled={
                             this.state.nextDisabled ||
