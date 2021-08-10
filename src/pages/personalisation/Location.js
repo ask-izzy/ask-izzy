@@ -250,7 +250,8 @@ class Location extends Personalisation<Props, State> {
                         "Where are you looking for help?"
                     }
                     secondaryText={
-                        "Find services near you"
+                        "This will help find services closest to your chosen " +
+                        "location."
                     }
                     taperColour={this.state.showStepper ? "LighterGrey"
                         : "HeaderBar"}
