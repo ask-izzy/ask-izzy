@@ -7,7 +7,6 @@ import HeaderBar from "../../components/HeaderBar";
 import InputListItem from "../../components/InputListItem";
 import FlatButton from "../../components/FlatButton";
 
-import icons from "../../icons";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import { append, Search } from "../../iss/Search";
@@ -329,7 +328,6 @@ class BaseQuestion extends Personalisation<Props, State> {
                                     primaryText={answer}
                                     secondaryText={this.answerDescFor(answer)}
                                     aria-label={answer}
-                                    type="radio"
                                     checked={answer === selected}
                                     value={answer}
                                     onClick={this.onAnswerTouchTap.bind(
@@ -337,16 +335,6 @@ class BaseQuestion extends Personalisation<Props, State> {
                                         answer
                                     )}
                                     readOnly={true}
-                                    checkedIcon={
-                                        <icons.RadioSelected
-                                            className="big"
-                                        />
-                                    }
-                                    uncheckedIcon={
-                                        <icons.RadioUnselected
-                                            className="big"
-                                        />
-                                    }
                                 />)}
                         </div>
                         {this.props.showDVLinkBar && this.props.textDVLinkBar}
