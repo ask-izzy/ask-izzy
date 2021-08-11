@@ -68,6 +68,36 @@ export const makeTitle = (
 ): string => {
     let title = route || "";
 
+    let search = (params):string => (
+        params.search && `Search "${titleize(params.search)}"`
+    );
+
+    const pageType = (): string => (
+        routeType && routeType.length >= 2 ? routeType.join(" ") : ""
+    )
+
+    const pageTitle = (page) => {
+        let title = page.replace(/-/g, " ")
+        return CATEGORY_TITLES_MAPPING[page] ||
+        title.charAt(0).toUpperCase() + title.slice(1)
+    };
+
+    const formatQuestionFlowTitles = (
+        page: string,
+        subPage: string,
+    ): string => {
+        const question = QUESTION_TITLE_FORMAT_MAPPING[subPage] ||
+            pageTitle(subPage);
+
+        title = `${page} ${question ? `(${question})` : ""}`
+
+        // When viewing your answers or editing an answer
+        if (pageType().includes("Edit")) {
+            title += " - [selected answers]"
+        }
+        return title;
+    }
+
     Object.keys(params).forEach((key) => {
         // FIXME This is a hack. Rewrite it when we're not about to launch.
         if (key === "search") {
@@ -82,45 +112,23 @@ export const makeTitle = (
         .replace(" in :suburb, :state", "")
         .replace(/:[^\s]+/, ""));
 
-    if (routeType && routeType.length === 2 &&
-        !routeType.join(" ").includes("Results")) {
-        title = getCorrectTitle(title, params, routeType.join(" "))
+    if (pageType() !== "" &&
+        !pageType().includes("Static") &&
+        !pageType().includes("Results")
+    ) {
+        const page = (params.page && pageTitle(params.page)) || search(params);
+
+        // If a route has subPage (e.g. question) it will set that
+        // otherwise it will assume it's an Intro Page
+        // There is a case when viewing your answers
+        // when there's no subPage that it should be blank
+        const subPage = params?.subpage ||
+            (!pageType().includes("Edit") ? "Intro" : "");
+
+        title = formatQuestionFlowTitles(page, subPage);
     }
 
     return title ? `${title} | Ask Izzy` : "Ask Izzy";
-}
-
-const pageTitle = (page) => {
-    let title = page.replace(/-/g, " ")
-    return CATEGORY_TITLES_MAPPING[page] ||
-    title.charAt(0).toUpperCase() + title.slice(1)
-};
-
-const getCorrectTitle = (
-    title: string,
-    params: Object,
-    routeType: string
-) => {
-
-    let search = (params) => (
-        params.search && `Search "${titleize(params.search)}"`
-    );
-
-    const page = (params.page && pageTitle(params.page)) || search(params)
-
-    if (routeType.includes("Edit")) {
-        title = questionFlowTitle(page, params?.subpage) +
-            " - [selected answers]"
-    } else {
-        title = questionFlowTitle(page, params?.subpage || "Intro")
-    }
-    return title
-}
-
-const questionFlowTitle = (title: string, subpage?: string): string => {
-    const question = subpage && (QUESTION_TITLE_FORMAT_MAPPING[subpage] ||
-        pageTitle(subpage));
-    return `${title} ${question ? `(${question})` : ""}`
 }
 
 export default {
