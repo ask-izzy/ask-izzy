@@ -15,7 +15,7 @@ import Category from "../constants/Category";
 
 type Props = {
     transition?: boolean,
-    isHome?: boolean,
+    hideLogoWhenNotABar?: boolean,
     onBackTouchTap?: ?Function,
     backMessage?: string,
     containerClassName?: ?string,
@@ -31,7 +31,7 @@ function AppBar(
         backMessage,
         containerClassName,
         transition,
-        isHome,
+        hideLogoWhenNotABar,
         breakpoint = STICKY_HEADER_BREAKPOINT,
     }: Props): ReactNode {
 
@@ -82,7 +82,11 @@ function AppBar(
                 aria-label="Banner."
                 className={classnames("AppBar", showBar())}
             >
-                {(!isHome || !transition || scrollPosY > breakpoint) && (
+                {(
+                    !hideLogoWhenNotABar ||
+                    !transition ||
+                    scrollPosY > breakpoint
+                ) && (
                     <components.IconButton
                         className={
                             !onBackTouchTap ? "appBarLogo" : undefined
@@ -117,7 +121,7 @@ function AppBar(
 
 AppBar.defaultProps = {
     transition: false,
-    isHome: false,
+    hideLogoWhenNotABar: false,
 }
 
 export default AppBar;

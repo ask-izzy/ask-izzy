@@ -24,7 +24,6 @@
     max-width: 800px;
     height: $appbar-height;
     min-height: auto;
-    background: rgba(0, 0, 0, 0);
     color: #{colours.get-static('colour-text-very-light')};
     color: var(--colour-text-very-light);
     text-overflow: ellipsis;

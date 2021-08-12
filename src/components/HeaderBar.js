@@ -14,7 +14,7 @@ type Props = {
     className?: string,
     taperColour?: string,
     fixedAppBar?: boolean,
-    isHome?: boolean,
+    hideLogoWhenNotABar?: boolean,
     goBack?: {
         onBackTouchTap?: $PropertyType<AppBarProps, 'onBackTouchTap'>,
         backMessage?: $PropertyType<AppBarProps, 'backMessage'>,
@@ -30,7 +30,7 @@ function HeaderBar(
         children,
         secondaryText,
         fixedAppBar,
-        isHome,
+        hideLogoWhenNotABar,
         goBack = {},
     }: Props): React.Node {
 
@@ -94,8 +94,8 @@ function HeaderBar(
         >
             <AppBar
                 transition={!fixedAppBar}
-                isHome={isHome}
-                breakpoint={isHome ? 100 : 30}
+                hideLogoWhenNotABar={hideLogoWhenNotABar}
+                breakpoint={hideLogoWhenNotABar ? 100 : 30}
                 {...goBack}
             />
             <div className="primary"
@@ -111,7 +111,7 @@ function HeaderBar(
 
 HeaderBar.defaultProps = {
     fixedAppBar: false,
-    isHome: false,
+    hideLogoWhenNotABar: false,
 }
 
 export default HeaderBar;
