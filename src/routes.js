@@ -88,7 +88,6 @@ const routes: ReactElement<typeof Routes> = <Routes>
         <Route
             path=""
             element={<HomePage />}
-            title="Ask Izzy"
             type={["Home"]}
         />
         <Route
@@ -264,13 +263,13 @@ const routes: ReactElement<typeof Routes> = <Routes>
             <Route
                 path={`${str}`}
                 element={<ResultsListPage />}
-                title=":page in :suburb, :state"
+                title="Results list"
                 type={[baseType, "Results List"]}
             />,
             <Route
                 path={`${str}/map`}
                 element={<ResultsMapPage />}
-                title="Map of :page in :suburb, :state"
+                title="Results map"
                 type={[baseType, "Results Map"]}
             />,
             <Route
@@ -288,7 +287,7 @@ const routes: ReactElement<typeof Routes> = <Routes>
             <Route
                 path={`${str}/map/personalise/summary`}
                 element={<PersonalisationSummaryPage />}
-                title=":page in :suburb, :state"
+                title="Edit questions"
                 type={[baseType, "Edit Map Personalisation"]}
             />,
             <Route
@@ -306,13 +305,13 @@ const routes: ReactElement<typeof Routes> = <Routes>
             <Route
                 path={`${str}/personalise/summary`}
                 element={<PersonalisationSummaryPage />}
-                title=":page in :suburb, :state"
+                title="Edit questions"
                 type={[baseType, "Edit List Personalisation"]}
             />,
             <Route
                 path={`${str}/personalise/summary/:subpage`}
                 element={<PersonalisationSummaryPage />}
-                title=":page in :suburb, :state"
+                title="Edit questions"
                 type={[baseType, "Edit List Personalisation"]}
             />,
         ])}

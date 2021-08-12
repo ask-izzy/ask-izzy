@@ -69,21 +69,15 @@ export const resetDfvOptions = (): void => {
  * @return {string} - Returns the formatted string
  */
 const formatPageTitle = (text) => {
-    let title = text.replace(/-/g, " ")
+    let title = text && text.replace(/-/g, " ") || ""
     return CATEGORY_TITLES_MAPPING[text] ||
-    title.charAt(0).toUpperCase() + title.slice(1)
+    title.charAt(0).toUpperCase() + title.slice(1) || ""
 };
 
 export const makeTitle = (
     title: string,
     params: {[string]: string},
-    pageType?: Array<string>,
 ): string => {
-
-    // Home page
-    if (pageType?.[0] === "Home") {
-        return title
-    }
 
     const getSearchText = (): string => (
         params.search && `Search "${titleize(params.search)}"`
@@ -93,8 +87,7 @@ export const makeTitle = (
     // Checks to see If the page is not in the question summary flow
     // otherwise it will return Intro or fallback to ""
     const getRouteSubPage = () => (
-        params?.subpage ||
-        !pageType?.[1].includes("Edit") && params?.page && "intro" ||
+        params?.subpage || !title.includes("Edit") && params?.page && "intro" ||
         ""
     );
 
@@ -111,17 +104,23 @@ export const makeTitle = (
     }
 
     // Returns the title for the search results page
-    if (pageType?.[1].includes("Results")) {
-        return `${formatPageTitle(pageTitle)} in ${params?.suburb},
+    if (title.includes("Results")) {
+        return `${title === "Results map" ? "Map of" : ""}
+         ${formatPageTitle(pageTitle)} in ${params?.suburb},
          ${params?.state} | Ask Izzy`;
     }
 
     // Append selected answers to the question summary flow
-    if (pageType?.[1].includes("Edit")) {
+    if (title.includes("Edit")) {
         routeSubpage += " - [selected answers]";
     }
 
-    return `${formatPageTitle(pageTitle)} ${routeSubpage} | Ask Izzy`
+    if (!title) {
+        return "Ask Izzy"
+    } else {
+        return `${formatPageTitle(pageTitle)} ${routeSubpage} | Ask Izzy`
+    }
+
 }
 
 export default {
