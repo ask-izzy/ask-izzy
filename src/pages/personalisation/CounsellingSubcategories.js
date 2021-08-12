@@ -8,7 +8,7 @@ import icons from "../../icons";
 import * as React from "react";
 
 export default class CounsellingSubcategories extends BaseQuestion {
-    static title: string = "Counselling";
+    static title: string = "Counselling services";
     static propTypes = BaseQuestion.propTypes;
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-counselling",

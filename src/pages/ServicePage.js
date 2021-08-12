@@ -14,6 +14,8 @@ import config from "../config";
 import routerContext from "../contexts/router-context";
 import type { RouterContextObject } from "../contexts/router-context";
 import ScreenReader from "../components/ScreenReader";
+import {makeTitle} from "../utils";
+import Helmet from "react-helmet";
 
 class ServicePage extends React.Component<{}, {
     object?: Service,
@@ -70,7 +72,6 @@ class ServicePage extends React.Component<{}, {
 
         try {
             let object = await iss.getService(this.id);
-
             this.setState({object});
         } catch (error) {
             this.setState({error});
@@ -132,6 +133,17 @@ class ServicePage extends React.Component<{}, {
                             {object.name}
                         </p>
                     </ScreenReader>
+                    <Helmet>
+                        <title>
+                            {
+                                makeTitle(
+                                    object?.name || "",
+                                    this.context.router.match.params,
+                                    this.context.router.match.props.type
+                                )
+                            }
+                        </title>
+                    </Helmet>
                     <ServicePane service={object}/>
                 </div>
             );

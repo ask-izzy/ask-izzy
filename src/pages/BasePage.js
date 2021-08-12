@@ -41,13 +41,11 @@ class BasePage extends React.Component<{}> {
     render(): ReactNode {
         const { location, match } = this.context.router
         let pageTitle = "";
-
-        if (!match.params?.slug) {
-            pageTitle = makeTitle(
-                match.props.title || "",
-                match.params
-            )
-        }
+        pageTitle = makeTitle(
+            match.props.title || "",
+            match.params,
+            match.props.type
+        )
         const canonicalUrl = `https://askizzy.org.au${location.pathname}`;
         return <>
             <HistoryListener />

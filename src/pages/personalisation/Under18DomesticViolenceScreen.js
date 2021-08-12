@@ -26,7 +26,7 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
         return "Continue to all services";
     }
 
-    static title = "Under 18";
+    static title = "Under 18 help";
 
     static defaultProps = Object.assign(
         {},

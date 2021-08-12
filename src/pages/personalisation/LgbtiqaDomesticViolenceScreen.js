@@ -14,7 +14,7 @@ import type { searchRequest } from "../../iss";
 class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
     doneButtonLabel = "Continue to all services";
 
-    static title = "LGBTIQA+";
+    static title = "LGBTIQA+ help";
 
     static defaultProps = Object.assign(
         {},

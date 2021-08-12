@@ -8,7 +8,7 @@ import icons from "../../icons";
 import DomesticViolenceLinkBar from "../../components/DomesticViolenceLinkBar";
 
 class AreYouSafe extends BaseQuestion {
-    static title: string = "Safety";
+    static title: string = "Are you safe";
 
     static showPage(): boolean {
         return !this.answer;
