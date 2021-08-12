@@ -5,7 +5,7 @@ import AreYouSafe from "../pages/personalisation/AreYouSafe";
 import OnlineSafetyScreen from "../pages/personalisation/OnlineSafetyScreen";
 import {titleize} from "underscore.string";
 
-const QUESTION_TITLE_FORMAT_MAPPING = {
+const QUESTION_TITLE_FORMAT_MAPPING: {[string]: string} = {
     "dfv-demographics": "Personal",
     "demographics": "Personal",
     "service-list": "Services",
@@ -26,7 +26,7 @@ const QUESTION_TITLE_FORMAT_MAPPING = {
     "under-18-dfv": "Under 18 help",
 }
 
-const CATEGORY_TITLES_MAPPING = {
+const CATEGORY_TITLES_MAPPING: {[string]: string} = {
     "life-skills-education": "Life skills & education",
     "domestic-family-violence-help": "Domestic & family violence help",
     "support-counselling": "Support & counselling",
@@ -61,74 +61,67 @@ export const resetDfvOptions = (): void => {
     }
 }
 
-export const makeTitle = (
-    route: string,
-    params: Object,
-    routeType?: Array<string>,
-): string => {
-    let title = route || "";
+/**
+ * Strips the all the '-' and sets the first letter to an upperCase
+ * It will check to see if the text matches any special cases in
+ * CATEGORY_TITLES_MAPPING first before formatting
+ * @param text - The text to be formatted
+ * @return {string} - Returns the formatted string
+ */
+const formatPageTitle = (text) => {
+    let title = text.replace(/-/g, " ")
+    return CATEGORY_TITLES_MAPPING[text] ||
+    title.charAt(0).toUpperCase() + title.slice(1)
+};
 
-    let search = (params):string => (
+export const makeTitle = (
+    title: string,
+    params: {[string]: string},
+    pageType?: Array<string>,
+): string => {
+
+    // Home page
+    if (pageType?.[0] === "Home") {
+        return title
+    }
+
+    const getSearchText = (): string => (
         params.search && `Search "${titleize(params.search)}"`
     );
 
-    const pageType = (): string => (
-        routeType && routeType.length >= 2 ? routeType.join(" ") : ""
-    )
+    // Calculates current route subPage
+    // Checks to see If the page is not in the question summary flow
+    // otherwise it will return Intro or fallback to ""
+    const getRouteSubPage = () => (
+        params?.subpage ||
+        !pageType?.[1].includes("Edit") && params?.page && "intro" ||
+        ""
+    );
 
-    const pageTitle = (page) => {
-        let title = page.replace(/-/g, " ")
-        return CATEGORY_TITLES_MAPPING[page] ||
-        title.charAt(0).toUpperCase() + title.slice(1)
-    };
+    // Sets the pageTitle and the routeSubPage
+    const pageTitle = getSearchText() || params?.page || title;
+    let routeSubpage = getRouteSubPage();
 
-    const formatQuestionFlowTitles = (
-        page: string,
-        subPage: string,
-    ): string => {
-        const question = QUESTION_TITLE_FORMAT_MAPPING[subPage] ||
-            pageTitle(subPage);
-
-        title = `${page} ${question ? `(${question})` : ""}`
-
-        // When viewing your answers or editing an answer
-        if (pageType().includes("Edit")) {
-            title += " - [selected answers]"
-        }
-        return title;
+    // Formats the subpage
+    if (routeSubpage) {
+        routeSubpage = `(${
+            QUESTION_TITLE_FORMAT_MAPPING[routeSubpage] ||
+            formatPageTitle(routeSubpage)
+        })`;
     }
 
-    Object.keys(params).forEach((key) => {
-        // FIXME This is a hack. Rewrite it when we're not about to launch.
-        if (key === "search") {
-            title = title.replace(":page", pageTitle(params[key]));
-        }
-        if (key !== "serviceName") {
-            title = title.replace(`:${key}`, pageTitle(params[key]));
-        }
-    });
-
-    title = pageTitle(title
-        .replace(" in :suburb, :state", "")
-        .replace(/:[^\s]+/, ""));
-
-    if (pageType() !== "" &&
-        !pageType().includes("Static") &&
-        !pageType().includes("Results")
-    ) {
-        const page = (params.page && pageTitle(params.page)) || search(params);
-
-        // If a route has subPage (e.g. question) it will set that
-        // otherwise it will assume it's an Intro Page
-        // There is a case when viewing your answers
-        // when there's no subPage that it should be blank
-        const subPage = params?.subpage ||
-            (!pageType().includes("Edit") ? "Intro" : "");
-
-        title = formatQuestionFlowTitles(page, subPage);
+    // Returns the title for the search results page
+    if (pageType?.[1].includes("Results")) {
+        return `${formatPageTitle(pageTitle)} in ${params?.suburb},
+         ${params?.state} | Ask Izzy`;
     }
 
-    return title ? `${title} | Ask Izzy` : "Ask Izzy";
+    // Append selected answers to the question summary flow
+    if (pageType?.[1].includes("Edit")) {
+        routeSubpage += " - [selected answers]";
+    }
+
+    return `${formatPageTitle(pageTitle)} ${routeSubpage} | Ask Izzy`
 }
 
 export default {

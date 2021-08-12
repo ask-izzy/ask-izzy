@@ -88,6 +88,7 @@ const routes: ReactElement<typeof Routes> = <Routes>
         <Route
             path=""
             element={<HomePage />}
+            title="Ask Izzy"
             type={["Home"]}
         />
         <Route
