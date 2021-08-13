@@ -5,6 +5,7 @@ import React from "react";
 import components from "../components";
 import Link from "../components/Link";
 import routerContext from "../contexts/router-context";
+import BrandedFooter from "../components/BrandedFooter";
 
 type Props = {}
 
@@ -86,15 +87,17 @@ class AddServicePage extends React.Component<Props, State> {
 
         return (
             <div className="AddServicePage">
-                <components.AppBar
-                    title="Add a service"
-                    onBackTouchTap={() => this.context.router.navigate(-1)}
+                <components.HeaderBar
+                    primaryText="Add a service"
+                    transition={true}
+                    bannerName="homepage"
                 />
                 <main>
                     <div className="body">
                         {body}
                     </div>
                 </main>
+                <BrandedFooter />
             </div>
         );
     }

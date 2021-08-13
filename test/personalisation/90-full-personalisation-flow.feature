@@ -97,5 +97,5 @@ Feature: Personalisation
         When I click on "No"
         Then I should see "Everyone has the right to be safe."
 
-        When I click back from the title bar
-        Then I should see "Intro"
+        When I click back from the browser UI
+        Then I should see "To help me find the right services I'll ask you a few questions."

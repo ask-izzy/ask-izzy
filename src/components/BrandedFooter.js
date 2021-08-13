@@ -194,21 +194,24 @@ export default class BrandedFooter
                     </p>
                 </div>
                 <div className="about-links">
-                    <Link to="/about">
-                        About Ask Izzy
-                    </Link>
-                    <span className="spacer">|</span>
-                    <Link to="/terms">
-                        Terms of use
-                    </Link>
+                    <ul>
+                        <li>
+                            <Link to="/about">
+                                About Ask Izzy
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/terms">
+                                Terms of use
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
                 <div className="support-links">
                     <ul>
                         <li>
                             <Link to={donateLink}>
-                                <icons.Heart
-                                    className="small"
-                                />
+                                <icons.Heart />
                                 <div>
                                     Donate to us.
                                 </div>
@@ -251,22 +254,28 @@ export default class BrandedFooter
                 </div>
                 <div className="socials">
                     <span>Find us on:</span>
-                    <Link
-                        to="https://www.facebook.com/askizzyau"
-                        className="flex-align"
-                    >
-                        <icons.Facebook
-                            className="inline-icon inline-block-icon"
-                        />
-                    </Link>
-                    <Link
-                        to="https://www.instagram.com/askizzyau/"
-                        className="flex-align"
-                    >
-                        <icons.Instagram
-                            className="inline-icon inline-block-icon"
-                        />
-                    </Link>
+                    <ul>
+                        <li>
+                            <Link
+                                to="https://www.facebook.com/askizzyau"
+                                className="flex-align"
+                            >
+                                <icons.Facebook
+                                    className="inline-icon inline-block-icon"
+                                />
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="https://www.instagram.com/askizzyau/"
+                                className="flex-align"
+                            >
+                                <icons.Instagram
+                                    className="inline-icon inline-block-icon"
+                                />
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
                 <div className="for-service-providers">
                     <h1>For Service Providers</h1>

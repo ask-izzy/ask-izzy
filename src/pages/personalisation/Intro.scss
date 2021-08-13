@@ -5,6 +5,10 @@
     flex: 1 1 auto;
     flex-direction: column;
 
+    h2 {
+        font-size: 1.17em;
+    }
+
     .BetaLink {
         color: #{colours.get-static('colour-link')};
         color: var(--colour-link);
@@ -48,7 +52,7 @@
                         margin: 0 3px 0 -5px;
                     }
 
-                    h4 {
+                    h3 {
                         margin: 0;
                         font-size: 14px;
                     }

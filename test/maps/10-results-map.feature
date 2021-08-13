@@ -79,7 +79,7 @@ Feature: See results on a map
         When I click on the map
         Then I should not see "Housing Service"
 
-    Scenario: Clicking a marker shows services at that site and clicking back returns to full map
+    Scenario: Clicking a marker shows services at that site and clicking back returns the results page
         When I visit /housing
 
         Given I'm watching map events
@@ -88,9 +88,5 @@ Feature: See results on a map
         And I click marker titled "My Housing Service"
         Then I should see "Housing Service"
 
-        When I click back from the title bar
-        Then I should see a map
-        And I should not see "Housing Service"
-
-        When I click back from the title bar
+        When I click back from the browser UI
         Then I should be at /housing

@@ -1,25 +1,22 @@
 @use '../styles/mixins/colours';
 
 .HomePage {
-    .appbar {
-        position: sticky;
-        top: 0;
-        z-index: 99;
-
-        .AppBar {
-            position: inherit;
-            justify-content: flex-end;
-        }
-    }
-
     .page-header-section {
         padding-bottom: 0.1px; /* stop margin collapse */
         background-color: #{colours.get-static('colour-bg-standard-tint-1')};
         background-color: var(--colour-bg-standard-tint-1);
 
         .HeaderBar {
-            padding: 30px 20px calc(2vw + 28px);
             text-align: center;
+
+            .AppBar {
+                justify-content: flex-end;
+
+                &.showBar {
+                    justify-content: space-between;
+                    -ms-flex-pack: justify;
+                }
+            }
 
             .homepage-logo {
                 display: block;

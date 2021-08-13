@@ -2,7 +2,6 @@
 /* eslint-disable max-len */
 
 import * as React from "react";
-import AppBar from "../components/AppBar";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
 import routerContext from "../contexts/router-context"
@@ -43,19 +42,12 @@ export default class StaticPage extends React.Component<Props> {
                             Header.
                         </span>
                     </ScreenReader>
-                    <AppBar
-                        title={this.props.title}
-                        onBackTouchTap={() => this.context.router.navigate(-1)}
+                    <HeaderBar
+                        className="prominentHeading"
+                        primaryText={this.props.bannerPrimary || this.props.title}
+                        secondaryText={this.props.bannerSecondary || null}
+                        bannerName={this.props.bannerName || "homepage"}
                     />
-                    {
-                        this.props.bannerName ?
-                            <HeaderBar
-                                primaryText={this.props.bannerPrimary || null}
-                                secondaryText={this.props.bannerSecondary || null}
-                                bannerName={this.props.bannerName}
-                            />
-                            : null
-                    }
                 </div>
                 <main>
                     <div className="body">

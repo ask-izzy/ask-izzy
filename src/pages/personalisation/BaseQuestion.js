@@ -24,6 +24,7 @@ export type Props = {
     classNames?: string,
     answers: Object | Array<string>,
     onDoneTouchTap: Function,
+    goBack?: () => boolean,
     showBaseTextBox?: boolean,
     showDVLinkBar?: boolean,
     baseTextBoxComponent?: React.Element<any>,
@@ -32,6 +33,7 @@ export type Props = {
     onNextStepCallback?: Function,
     mobileView?: boolean,
     answersDesc: Object,
+    backToAnswers?: boolean,
 }
 
 export type State = {
@@ -259,7 +261,7 @@ class BaseQuestion extends Personalisation<Props, State> {
         }
 
         return (
-             <>
+            <>
                 <div
                     role="complementary"
                     aria-labelledby="header"
@@ -278,9 +280,16 @@ class BaseQuestion extends Personalisation<Props, State> {
                         secondaryText={
                             this.props.byline
                         }
+                        fixedAppBar={true}
                         taperColour={this.state.showStepper ? "LighterGrey"
                             : "HeaderBar"}
                         bannerName={this.bannerName}
+                        {...this.props.backToAnswers && {
+                            goBack: {
+                                backMessage: "Back to answers",
+                                onBackTouchTap: this.props.goBack,
+                            },
+                        }}
                     />
                     {this.state.showStepper && (
                         <div
@@ -359,7 +368,10 @@ class BaseQuestion extends Personalisation<Props, State> {
                     <FlatButton
                         className="text-link"
                         label="Skip"
-                        onClick={this.props.onDoneTouchTap}
+                        onClick={() => {
+                            storage.setItem(this.props.name, "(skipped)");
+                            this.props.onDoneTouchTap()
+                        }}
                     />
                 </div>
             </div>

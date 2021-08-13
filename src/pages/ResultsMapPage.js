@@ -67,17 +67,6 @@ class ResultsMapPage extends ResultsPage<{}, State> {
         return []
     }
 
-    onBackClick: (
-        (event: SyntheticInputEvent<>) => void
-    ) = (event: SyntheticInputEvent<>): void => {
-        event.preventDefault()
-        if (this.state.selectedSite) {
-            this.setState({selectedSite: null})
-        } else {
-            this.context.router.navigate(-1);
-        }
-    }
-
     calculateMapHeight(): ?string {
 
         if (typeof window === "undefined" || !this.state.selectedSite) {
@@ -111,10 +100,7 @@ class ResultsMapPage extends ResultsPage<{}, State> {
 
     renderPage: (() => ReactElement<"div">) = () => (
         <div className="ResultsMapPage">
-            <AppBar
-                title={this.title}
-                onBackTouchTap={this.onBackClick}
-            />
+            <AppBar transition={false}/>
             <DebugContainer message="Debug personalisation">
                 <DebugPersonalisation
                     search={this.search}

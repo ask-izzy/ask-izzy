@@ -46,6 +46,12 @@ $lightness-button-hover: 10%;
         colours.set-transparency('colour-element-shadow-base', 'global', 0.44)
     );
 
+    @include colours.define(
+        'app-bar-shadow',
+        'global',
+        colours.set-transparency('raw-colour-pure-black', 'global', 0.5)
+    );
+
 
     /* Backgrounds */
     @include colours.define('colour-bg-standard', 'global', 'raw-colour-pure-white');
@@ -68,6 +74,7 @@ $lightness-button-hover: 10%;
     );
 
     @include colours.define('colour-bg-code', 'global', 'raw-colour-slate-gray');
+    @include colours.define('colour-bg-highlight', 'global', 'raw-colour-rich-purple');
 
 
     /* Borders */

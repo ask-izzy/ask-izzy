@@ -4,14 +4,36 @@
     $text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
 
     position: relative;
-    min-height: 160px;
+    min-height: 220px;
     padding-bottom: 2vw;
     color: #{colours.get-static('colour-text-very-light')};
     color: var(--colour-text-very-light);
     z-index: 1;
-    overflow-x: hidden; /* used to hide ::after pseudo-element that creates the
-        diagonal taper at the bottom of the header */
     box-sizing: border-box;
+
+    &.showTaper {
+        min-height: 220px;
+        padding-bottom: 2vw;
+        overflow-x: hidden;
+
+        /* used to hide ::after pseudo-element that creates the
+        diagonal taper at the bottom of the header */
+
+        /* Diagonal cut-out taper at the bottom of the banner */
+        &::after {
+            position: absolute;
+            bottom: 0%;
+            left: 0%;
+            border-top: 3.5vw solid transparent;
+            border-right: 100vw solid #{colours.get-static('raw-colour-pure-white')};
+            border-right: 100vw solid var(--raw-colour-pure-white);
+            content: '';
+        }
+    }
+
+    &.fixed {
+        margin-top: $appbar-height;
+    }
 
     a,
     .link-color {
@@ -19,26 +41,56 @@
         color: var(--colour-text-very-light);
     }
 
-    .primary {
-        min-height: 1em;
-        margin: 15px 20px;
-        font-size: 22px;
-        font-weight: 500;
-        text-shadow: $text-shadow;
+    &.prominentHeading {
+        .primary {
+            h1 {
+                margin: 0.67em 0;
+                font-size: 32px;
+                font-weight: bold;
+            }
 
-        @media only screen and (max-width: 410px) {
-            margin-top: 10px;
-            margin-bottom: 10px;
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 26px;
+                }
+            }
+        }
+    }
+
+    .primary {
+        margin: 15px 20px;
+
+        .LogoHeader {
+            h1 {
+                margin: 0.67em 0;
+                font-size: 32px;
+                font-weight: bold;
+            }
+        }
+
+        h1 {
+            min-height: 1em;
+            font-size: 22px;
+            font-weight: 500;
+            text-shadow: $text-shadow;
+
+            @media only screen and (max-width: 410px) {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
         }
     }
 
     .secondary {
         min-height: 4em;
         margin: 15px 20px;
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 1.4;
-        text-shadow: $text-shadow;
+
+        h2 {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.4;
+            text-shadow: $text-shadow;
+        }
 
         a {
             color: #{colours.get-static('colour-text-very-light')};
@@ -58,17 +110,6 @@
         & + p {
             margin-top: 15px;
         }
-    }
-
-    /* Diagonal cut-out taper at the bottom of the banner */
-    &::after {
-        position: absolute;
-        bottom: 0%;
-        left: 0%;
-        border-top: 3.5vw solid transparent;
-        border-right: 100vw solid #{colours.get-static('raw-colour-pure-white')};
-        border-right: 100vw solid var(--raw-colour-pure-white);
-        content: '';
     }
 
     &.taperColourGrey::after {

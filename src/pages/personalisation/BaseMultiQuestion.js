@@ -193,7 +193,14 @@ class BaseMultiQuestion extends BaseQuestion {
                                 this.props.byline
                             }
                             taperColour="LighterGrey"
+                            fixedAppBar={true}
                             bannerName={this.bannerName}
+                            {...this.props.backToAnswers && {
+                                goBack: {
+                                    backMessage: "Back to answers",
+                                    onBackTouchTap: this.props.goBack,
+                                },
+                            }}
                         />
                     </section>
                     <div

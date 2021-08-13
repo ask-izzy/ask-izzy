@@ -14,8 +14,8 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
 
     static contextType: any = routerContext;
 
-    goBack(): void {
-        super.nextStep();
+    goBack(nextStep?: boolean): void {
+        nextStep && super.nextStep();
         if (this.currentComponent) {
             this.navigate("personalise/summary");
         } else {
@@ -24,7 +24,7 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
     }
 
     nextStep: (() => void) = () => {
-        this.goBack();
+        this.goBack(true);
     }
 
     clearAll(event: SyntheticInputEvent<>): void {
@@ -59,16 +59,9 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
 
     render(): React.Element<"div"> {
         const Subpage = this.currentComponent;
-        const backMessage = Subpage ? "Answers" : this.title;
-        const title = Subpage ? Subpage.title : "Answers";
 
         return (
             <div className="PersonalisationPage">
-                <components.AppBar
-                    title={title}
-                    onBackTouchTap={this.goBack.bind(this)}
-                    backMessage={backMessage}
-                />
                 <main aria-labelledby="answers">
                     <ScreenReader>
                         <span id="answers">
@@ -102,6 +95,8 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
             onDoneTouchTap={this.nextStep}
             category={this.category}
             nextStep={this.nextStep}
+            backToAnswers={true}
+            goBack={() => this.goBack()}
             previousStep={this.previousStep}
         />
     </div>
@@ -118,6 +113,12 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                 bannerName={
                     this.category?.bannerImage || "homepage"
                 }
+                fixedAppBar={true}
+                goBack={{
+                    backMessage: this.currentComponent ?
+                        "Back to answers" : "Back to results",
+                    onBackTouchTap: this.goBack.bind(this),
+                }}
                 taperColour="Grey"
             />
 
@@ -127,33 +128,36 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
             >
 
                 <div className="List">
-                    {
-                        this.personalisationComponents.map(
-                            (component, index) => {
-                                const toUrl = this.urlFor(
-                                    `personalise/summary/${
-                                        component.defaultProps.name
-                                    }`
-                                );
-
-                                return (
-                                    <components.LinkListItem
-                                        key={index}
-                                        className="SummaryItem"
-                                        to={toUrl}
-                                        primaryText={
-                                            component.summaryLabel ?
-                                                component.summaryLabel
-                                                : ""
-                                        }
-                                        secondaryText={
-                                            component.summaryValue
-                                        }
-                                    />
-                                )
-                            }
-                        )
-                    }
+                    <ul>
+                        {
+                            this.personalisationComponents.map(
+                                (component, index) => {
+                                    const toUrl = this.urlFor(
+                                        `personalise/summary/${
+                                            component.defaultProps.name
+                                        }`
+                                    );
+                                    return (
+                                        <li>
+                                            <components.LinkListItem
+                                                key={index}
+                                                className="SummaryItem"
+                                                to={toUrl}
+                                                primaryText={
+                                                    component.summaryLabel ?
+                                                        component.summaryLabel
+                                                        : ""
+                                                }
+                                                secondaryText={
+                                                    component.summaryValue
+                                                }
+                                            />
+                                        </li>
+                                    )
+                                }
+                            )
+                        }
+                    </ul>
                 </div>
                 <div className="ClearResults">
                     <div>

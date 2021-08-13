@@ -33,8 +33,8 @@ export default (
         return [informationPage];
     } else if (path === "/food-info") {
         return [
-            {Title: "Page 1"},
-            {Title: "Page 2"},
+            {Title: "Page 1", BannerTextPrimary: "Page 1"},
+            {Title: "Page 2", BannerTextPrimary: "Page 2"},
         ]
     }
     return [{}]
@@ -46,7 +46,7 @@ export const aboutPage = {
     Banner: {
         Key: "food",
     },
-    BannerTextPrimary: "Some primary text",
+    BannerTextPrimary: "About Ask Izzy",
     BannerTextSecondary: "Some secondary text",
     Accordion: [
         {
@@ -64,11 +64,13 @@ export const aboutPage = {
 
 export const termsPage = {
     Title: "Our Terms",
+    BannerTextPrimary: "Our Terms",
     Body: "Try to live a good life",
 }
 
 export const homelessSheltersPage = {
     Title: "Shelter Services",
+    BannerTextPrimary: "Shelter Services",
     CalloutBoxes: [
         {
             Top: true,
@@ -83,11 +85,13 @@ export const homelessSheltersPage = {
 
 export const disabilityOrganisationsPage = {
     Title: "Disability Organisations",
+    BannerTextPrimary: "Disability Organisations",
     Body: "Try to live a good life\n\n> [callout(test)]",
 }
 
 export const informationPage = {
     Title: "Information",
+    BannerTextPrimary: "Information",
     Body: ("Try to live a good life\n\n> [callout(test)] " +
         "[callout(nothing)]": string),
 }

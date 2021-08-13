@@ -14,16 +14,20 @@ class NavBar extends React.Component<{}, void> {
         return (
             <div className="NavBar">
                 <div className="List categories">
-                    {
-                        categories.map(category => {
-                            return (
-                                <CategoryListItem
-                                    category={category}
-                                    key={category.key}
-                                />
-                            );
-                        })
-                    }
+                    <ul>
+                        {
+                            categories.map(category => {
+                                return (
+                                    <li key={category.key}>
+                                        <CategoryListItem
+                                            category={category}
+                                            key={category.key}
+                                        />
+                                    </li>
+                                );
+                            })
+                        }
+                    </ul>
                 </div>
             </div>
         );

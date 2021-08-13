@@ -18,10 +18,17 @@ import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
 import Category from "../../constants/Category";
 import WithStickyFooter from "../../components/WithStickyFooter";
 import ScreenReader from "../../components/ScreenReader";
+import AppBar from "../../components/AppBar";
+type AppBarProps = React.ElementProps<typeof AppBar>
 
 type Props = {
         name: string,
         onDoneTouchTap: Function,
+        backToAnswers?: boolean,
+        goBack?: {
+            onBackTouchTap?: $PropertyType<AppBarProps, 'onBackTouchTap'>,
+            backMessage?: $PropertyType<AppBarProps, 'backMessage'>,
+        },
 }
 
 type State = {
@@ -245,7 +252,14 @@ class Location extends Personalisation<Props, State> {
                     }
                     taperColour={this.state.showStepper ? "LighterGrey"
                         : "HeaderBar"}
+                    fixedAppBar={true}
                     bannerName={this.bannerName}
+                    {...this.props.backToAnswers && {
+                        goBack: {
+                            backMessage: "Back to answers",
+                            onBackTouchTap: this.props.goBack,
+                        },
+                    }}
                 />
                 {this.state.showStepper ? (
                     <QuestionStepper
@@ -277,8 +291,7 @@ class Location extends Personalisation<Props, State> {
                                     }
                                 />
                             }
-                            <div
-                                className="search"
+                            <div className="search"
                                 id="searchBar"
                             >
                                 <input
@@ -287,11 +300,12 @@ class Location extends Personalisation<Props, State> {
                                         this._search = element;
                                     }}
                                     onFocus={
-                                        this.scrollToSearchControl.bind(this)}
-                                    aria-label="Search for a suburb or postcode"
-                                    placeholder={
-                                        "Search for a suburb or postcode"
+                                        this.scrollToSearchControl.bind(this)
                                     }
+                                    aria-label="Search for a suburb
+                                     or postcode"
+                                    placeholder="Search for a suburb
+                                     or postcode"
                                     value={this.state.locationName}
                                     onChange={this.onSearchChange.bind(this)}
                                 />

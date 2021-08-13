@@ -40,6 +40,7 @@ module.exports = (function() {
         .when("I search for \"$STRING\" and press enter",
             unpromisify(doSearchAndEnter))
         .when("I click on the search button", unpromisify(clickSearch))
+        .when("I click home from the title bar", unpromisify(clickHome))
         .when("I click back from the title bar", unpromisify(clickBack))
         .when(
             "I click back from the browser UI",
@@ -146,9 +147,17 @@ async function clickBrowserBack(): Promise<void> {
     await module.exports.documentReady(this.driver);
 }
 
+async function clickHome(): Promise<void> {
+    await this.driver.findElement(By.css(
+        ".appBarLogo"
+    ))
+        .click();
+    await module.exports.documentReady(this.driver);
+}
+
 async function clickBack(): Promise<void> {
     await this.driver.findElement(By.css(
-        "button.BackButton"
+        "button.IconButton"
     ))
         .click();
     await module.exports.documentReady(this.driver);
