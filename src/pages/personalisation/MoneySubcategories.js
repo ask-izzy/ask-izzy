@@ -5,7 +5,7 @@ import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
 
 export default class MoneySubcategories extends BaseQuestion {
-    static title: string = "Money help";
+    static title: string = "Money services";
     static propTypes = BaseQuestion.propTypes;
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-money",

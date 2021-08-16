@@ -4,7 +4,7 @@ import * as React from "react";
 import type {Node as ReactNode} from "React";
 import Helmet from "react-helmet";
 
-import { makeTitle } from "../routes";
+import { makeTitle } from "../utils";
 import icons from "../icons";
 import Query from "../queries/query";
 import StaticPage from "./StaticPage";
@@ -124,12 +124,11 @@ class DynamicPage extends React.Component<{}> {
                             >
                                 <Helmet>
                                     <title>
-                                        {
-                                            makeTitle(
-                                                page.Title,
-                                                this.context.router.match.params
-                                            )
-                                        }
+                                        {makeTitle(
+                                            page.Title,
+                                            this.context.router.match.params,
+                                            this.context.router.match.props.type
+                                        )}
                                     </title>
                                 </Helmet>
 

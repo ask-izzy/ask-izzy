@@ -6,7 +6,7 @@ import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
 
 export default class FoodSubcategories extends BaseQuestion {
-    static title: string = "Food";
+    static title: string = "Services";
     static propTypes = BaseQuestion.propTypes;
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-food",

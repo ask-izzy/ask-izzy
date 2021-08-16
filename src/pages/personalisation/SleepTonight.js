@@ -6,7 +6,7 @@ import Location from "./Location";
 import { append, housingCrisis } from "../../iss/Search";
 
 export default class SleepTonight extends BaseQuestion {
-    static title: string = "Sleeping";
+    static title: string = "Sleep tonight";
 
     static propTypes = BaseQuestion.propTypes;
 

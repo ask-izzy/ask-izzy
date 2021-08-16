@@ -11,7 +11,6 @@ import {
     useParams,
     generatePath,
 } from "react-router-dom";
-import {titleize} from "underscore.string";
 
 // If you import these after the others,
 // babel decides the navbar doesn't really
@@ -38,25 +37,6 @@ import {
     InjectRouterContext,
     useRouterContext,
 } from "./contexts/router-context"
-
-export function makeTitle(route: string, params: Object): string {
-    let unslug = (str) =>
-        str.replace("-", " ").split(" ").map(titleize).join(" ");
-
-    let title = route || "";
-
-    Object.keys(params).forEach((key) => {
-        // FIXME This is a hack. Rewrite it when we're not about to launch.
-        if (key === "search") {
-            title = title.replace(":page", unslug(params[key]));
-        }
-        title = title.replace(`:${key}`, unslug(params[key]));
-    });
-
-    title = title.replace(" in :suburb, :state", "").replace(/:[^\s]+/, "");
-
-    return title ? `${title} | Ask Izzy` : "Ask Izzy";
-}
 
 /**
  * While entering the 404 page,
@@ -283,13 +263,13 @@ const routes: ReactElement<typeof Routes> = <Routes>
             <Route
                 path={`${str}`}
                 element={<ResultsListPage />}
-                title=":page in :suburb, :state"
+                title="Results list"
                 type={[baseType, "Results List"]}
             />,
             <Route
                 path={`${str}/map`}
                 element={<ResultsMapPage />}
-                title="Map of :page in :suburb, :state"
+                title="Results map"
                 type={[baseType, "Results Map"]}
             />,
             <Route
@@ -307,7 +287,7 @@ const routes: ReactElement<typeof Routes> = <Routes>
             <Route
                 path={`${str}/map/personalise/summary`}
                 element={<PersonalisationSummaryPage />}
-                title=":page in :suburb, :state"
+                title="Edit questions"
                 type={[baseType, "Edit Map Personalisation"]}
             />,
             <Route
@@ -325,14 +305,14 @@ const routes: ReactElement<typeof Routes> = <Routes>
             <Route
                 path={`${str}/personalise/summary`}
                 element={<PersonalisationSummaryPage />}
-                title=":page in :suburb, :state"
+                title="Edit questions"
                 type={[baseType, "Edit List Personalisation"]}
             />,
             <Route
                 path={`${str}/personalise/summary/:subpage`}
                 element={<PersonalisationSummaryPage />}
-                title=":page in :suburb, :state"
-                type={[baseType, "Edit List Personalisation"]}
+                title="Edit questions"
+                type={[baseType, "Edit questions Personalisation"]}
             />,
         ])}
         <Route

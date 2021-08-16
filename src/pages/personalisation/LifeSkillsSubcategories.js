@@ -5,7 +5,7 @@ import BaseQuestion from "./BaseQuestion";
 import { remove } from "../../iss/Search";
 
 export default class LifeSkillsSubcategories extends BaseQuestion {
-    static title: string = "Life Skills";
+    static title: string = "Life skills";
     static propTypes = BaseQuestion.propTypes;
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-life-skills",

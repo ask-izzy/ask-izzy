@@ -7,7 +7,7 @@ import icons from "../../icons";
 import Location from "./Location";
 
 export default class ServiceList extends BaseQuestion {
-    static title: string = "Service";
+    static title: string = "Services";
 
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "service-list",
