@@ -193,15 +193,17 @@ export function getPagesFromRoutes(
     }
     const pathsToRender = []
 
-    for (const paramVals of generateRouteParamVals(route, categories)) {
-        pathsToRender.push({
-            urlPath: fillInPathParams(route.props.path, paramVals),
-            filePath: fillInPathParams(
-                route.props.path.replace(/^\/?/, "/"),
-                {...paramVals, search: undefined}
-            ).replace(/\/*$/, "/index.html"),
-            params: paramVals,
-        })
+    if (route.props.element) {
+        for (const paramVals of generateRouteParamVals(route, categories)) {
+            pathsToRender.push({
+                urlPath: fillInPathParams(route.props.path, paramVals),
+                filePath: fillInPathParams(
+                    route.props.path.replace(/^\/?/, "/"),
+                    {...paramVals, search: undefined}
+                ).replace(/\/*$/, "/index.html"),
+                params: paramVals,
+            })
+        }
     }
 
     // Add paths from any child routes

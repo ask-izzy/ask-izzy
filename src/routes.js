@@ -312,7 +312,7 @@ const routes: ReactElement<typeof Routes> = <Routes>
                 path={`${str}/personalise/summary/:subpage`}
                 element={<PersonalisationSummaryPage />}
                 title="Edit questions"
-                type={[baseType, "List Personalisation"]}
+                type={[baseType, "Edit questions Personalisation"]}
             />,
         ])}
         <Route

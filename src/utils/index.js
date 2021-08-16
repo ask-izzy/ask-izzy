@@ -45,7 +45,7 @@ export const makeTitle = (
 
     const category = getCategory(params.page)
 
-    if (pageType && pageType[1] === "Results Map") {
+    if (pageType?.[1] === "Results Map") {
         pageTitleArr.push("Map of");
     }
 
@@ -58,8 +58,9 @@ export const makeTitle = (
     }
 
     if (
-        pageType && pageType[1]?.includes("Personalisation") &&
-        !pageType[1]?.includes("Edit")
+        pageType?.[1]?.includes("Personalisation") &&
+        (!pageType?.[1]?.includes("Edit") ||
+            pageType?.[1]?.includes("questions"))
     ) {
         const personalisation = category?.personalisation.find(
             cat => cat.defaultProps.name === params.subpage
@@ -77,12 +78,14 @@ export const makeTitle = (
         }
     }
 
-    if (pageType && pageType[1]?.includes("Edit")) {
+    // If the current page is either the question summary page
+    // or part of that navigation flow (editing answers)
+    if (pageType?.[1]?.includes("Edit")) {
         pageTitleArr.push(" - [selected answers]");
     }
 
     // Returns the title for the search results page
-    if (pageType && pageType[1]?.includes("Results")) {
+    if (pageType?.[1]?.includes("Results")) {
         pageTitleArr.push(`in ${params?.suburb}, ${params?.state}`)
     }
 
