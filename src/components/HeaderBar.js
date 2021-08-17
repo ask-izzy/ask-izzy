@@ -81,7 +81,8 @@ function HeaderBar(
         if (secondaryText) {
             return (
                 <div className="secondary">
-                    {secondaryText}
+                    <h2 className={infoText ? "bold" : undefined}>
+                        {secondaryText}</h2>
                 </div>
             )
         }

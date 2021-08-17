@@ -7,6 +7,7 @@ import { action } from "@storybook/addon-actions";
 import AppBar from "./AppBar";
 
 export default {
+    title: "App Components/AppBar",
     component: AppBar,
     args: {
         onBackTouchTap: (action("clickedBack"): any),
