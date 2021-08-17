@@ -21,7 +21,7 @@ class AreYouSafe extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "are-you-safe",
         question: "Are you safe right now?",
-        byline:
+        info:
             "All of your answers are private and anonymous.",
         answers: {
             "No": append(""),

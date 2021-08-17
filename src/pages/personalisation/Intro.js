@@ -120,18 +120,15 @@ class Intro extends Personalisation<Props, State> {
                             <legend>
                                  I&#39;m looking for help for
                             </legend>
-                            <h2>
-                                 I&#39;m looking for help for
-                            </h2>
                             {this.renderDoneButton()}
                             {this.shouldShowBetaBox &&
                                 <div className="betaPathwayWrapper">
                                     <div className="betaPathway">
                                         <header>
                                             <icons.Lightning />
-                                            <h3>
+                                            <h2>
                                                 Ask Izzy Beta - Pandemic Support
-                                            </h3>
+                                            </h2>
                                         </header>
                                         <p>
                                             If you've been impacted by the
@@ -181,15 +178,10 @@ class Intro extends Personalisation<Props, State> {
         const renderedHeaderBar = (
             <components.HeaderBar
                 primaryText={
-                    <div>
-                        To help me find the right services
-                        I'll ask you a few questions.
-                    </div>
+                    "I'm looking for help for"
                 }
-                secondaryText={
-                    <div>
-                        All of your answers are private and anonymous.
-                    </div>
+                infoText={
+                    "All of your answers are private and anonymous."
                 }
                 taperColour={this.state.showStepper ? "LighterGrey"
                     : "HeaderBar"}

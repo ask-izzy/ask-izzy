@@ -21,6 +21,7 @@ export type Props = {
     name: string,
     question: string,
     byline?: string,
+    info?: string,
     classNames?: string,
     answers: Object | Array<string>,
     onDoneTouchTap: Function,
