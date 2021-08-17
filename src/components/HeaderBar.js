@@ -80,9 +80,7 @@ function HeaderBar(
     const renderSecondaryText = (): void | React.Element<"div"> => {
         if (secondaryText) {
             return (
-                <div className="secondary"
-                    tabIndex="0"
-                >
+                <div className="secondary">
                     {secondaryText}
                 </div>
             )
@@ -92,9 +90,7 @@ function HeaderBar(
     const renderInfoText = (): void | React.Element<"div"> => {
         if (infoText) {
             return (
-                <div className="info"
-                    tabIndex="0"
-                >
+                <div className="info">
                     {infoText}
                 </div>
             )
@@ -112,9 +108,7 @@ function HeaderBar(
                 breakpoint={hideLogoWhenNotABar ? 100 : 30}
                 {...goBack}
             />
-            <div className="primary"
-                tabIndex="0"
-            >
+            <div className="primary">
                 <h1>{primaryText}</h1>
             </div>
             {renderSecondaryText()}
