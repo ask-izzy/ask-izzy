@@ -126,11 +126,9 @@ class AddServicePage extends React.Component<Props, State> {
                     We would love your help keeping the service listings
                     as current as possible.
                 </p>
-                <p>
-                    <strong>
-                        If you notice that service information is incorrect:
-                    </strong>
-                </p>
+                <h2>
+                    If you notice that service information is incorrect:
+                </h2>
                 <p>
                     We know that service and program information changes all
                     the time. If you think that a listing needs updating or
@@ -160,11 +158,9 @@ class AddServicePage extends React.Component<Props, State> {
                         email to let us know
                     </Link>.
                 </p>
-                <p>
-                    <strong>
-                        If you want to add a new service:
-                    </strong>
-                </p>
+                <h2>
+                    If you want to add a new service:
+                </h2>
                 <p>
                     If your service doesn&apos;t appear when you search for
                     it on Ask Izzy, we&apos;d love you to submit a new service

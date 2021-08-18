@@ -12,9 +12,9 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
 
         return (
             <StaticPage
-                title="Bushfire support"
                 bannerName="money-help static"
                 className="BushfireReliefPage"
+                title="Bushfire support 2020"
                 bannerPrimary="Bushfire support 2020"
                 bannerSecondary={
                     "If you are in immediate danger, please call 000."
@@ -143,9 +143,9 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                 <h2>
                     If you want to help
                 </h2>
-                <p>
+                <h3>
                     <strong>Updating service information</strong>
-                </p>
+                </h3>
                 <p>
                     Ask Izzy has over 360,000 services listed, and we’d love
                     your help at making sure they’re up to date. If you have
@@ -159,9 +159,9 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                         this form
                     </Link>.
                 </p>
-                <p>
+                <h3>
                     <strong>Donating money</strong>
-                </p>
+                </h3>
                 <p>
                     For those with money to give, the{" "}
                     <Link

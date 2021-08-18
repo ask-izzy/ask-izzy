@@ -9,11 +9,6 @@ import routerContext from "../../contexts/router-context";
 const InfoMessage = (category: Object) =>
     <div>{category.info}</div>;
 
-const LogoHeader = ({children}: Object) =>
-    <div className="LogoHeader">
-        {children}
-    </div>;
-
 const formatResultsPageHeading = (title: string) => {
     switch (title) {
     case "finding work":
@@ -74,14 +69,10 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             );
         }
         const primaryText = (category?: ?Category) => (
-            <LogoHeader>
-                <h1>
-                    {category ? "Sorry, we weren't able to find any " +
-                        "services for this search."
-                        : `Sorry, we weren't able to find any
-                        services matching your search for ${title}.`}
-                </h1>
-            </LogoHeader>
+            category ? "Sorry, we weren't able to find any " +
+                    "services for this search."
+                : `Sorry, we weren't able to find any
+                    services matching your search for ${title}.`
         )
 
         if (error) {
@@ -111,15 +102,11 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                 <HeaderBar
                     className="LoadingResultsHeader"
                     primaryText={
-                        <LogoHeader>
-                            <h1>
-                                {meta.total_count > 0 ?
-                                    formatResultsPageHeading(
-                                        title.toLocaleLowerCase()
-                                    )
-                                    : primaryText(category)}
-                            </h1>
-                        </LogoHeader>
+                        meta.total_count > 0 ?
+                            formatResultsPageHeading(
+                                title.toLocaleLowerCase()
+                            )
+                            : primaryText(category)
                     }
                     secondaryText={category?.info &&
                         <div>

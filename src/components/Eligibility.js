@@ -33,9 +33,9 @@ class Eligibility extends React.Component<Props, void> {
         if (!_.isEmpty(eligibleItems)) {
             eligibleMarkup = (
                 <div className="eligibility">
-                    <h3 aria-label="Eligibility.">
+                    <h2 aria-label="Eligibility.">
                         Eligibility
-                    </h3>
+                    </h2>
                     <ul>
                         {eligibleItems}
                     </ul>
@@ -50,9 +50,9 @@ class Eligibility extends React.Component<Props, void> {
         if (!_.isEmpty(ineligibleItems)) {
             ineligibleMarkup = (
                 <div className="ineligibility">
-                    <h3 aria-label="Ineligibility.">
+                    <h2 aria-label="Ineligibility.">
                         Ineligibility
-                    </h3>
+                    </h2>
                     <ul>
                         {ineligibleItems}
                     </ul>

@@ -26,6 +26,11 @@
         }
     }
 
+    .Eligibility {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
     .location {
         position: relative;
         right: 6px;
@@ -36,11 +41,6 @@
     }
 
     p {
-        color: #{colours.get-static('colour-text-dark')};
-        color: var(--colour-text-dark);
-    }
-
-    h3 {
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
     }

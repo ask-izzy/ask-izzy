@@ -46,7 +46,6 @@ import ListItem from "./components/ListItem";
 import LogoWithShadow from "./components/LogoWithShadow";
 import NavBar from "./components/NavBar";
 import Ndis from "./components/Ndis";
-import OnlineSafetyContent from "./components/OnlineSafetyContent";
 import OnlineSafetyLink from "./components/OnlineSafetyLink";
 import OpeningTimes from "./components/OpeningTimes";
 import Phone from "./components/Phone";
@@ -110,7 +109,6 @@ export default {
     LogoWithShadow,
     NavBar,
     Ndis,
-    OnlineSafetyContent,
     OnlineSafetyLink,
     OpeningTimes,
     Phone,

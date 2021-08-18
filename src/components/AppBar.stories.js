@@ -19,12 +19,8 @@ const Template = (args: Object): ReactNode => {
 };
 
 export const Basic: typeof Template = Template.bind({});
-Basic.args = {
-    title: "Page Title",
-};
 
 export const LabeledBack: typeof Template = Template.bind({});
 LabeledBack.args = {
-    title: "Page Title",
     backMessage: "Go Back",
 };

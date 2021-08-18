@@ -1,6 +1,10 @@
 @use '../styles/mixins/colours';
 
 .LimitedServicesBanner {
+    h2 {
+        font-size: 1.17em;
+    }
+
     .links {
         &.Link {
             color: #{colours.get-static('colour-text-very-light')};
