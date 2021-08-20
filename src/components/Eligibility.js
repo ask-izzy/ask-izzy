@@ -6,6 +6,7 @@ import _ from "underscore";
 import _string from "underscore.string";
 
 import fixtures from "../../fixtures/services";
+import Heading from "../components/base/Heading";
 
 type Props = {
     catchment: string,
@@ -33,9 +34,9 @@ class Eligibility extends React.Component<Props, void> {
         if (!_.isEmpty(eligibleItems)) {
             eligibleMarkup = (
                 <div className="eligibility">
-                    <h2 aria-label="Eligibility.">
+                    <Heading aria-label="Eligibility.">
                         Eligibility
-                    </h2>
+                    </Heading>
                     <ul>
                         {eligibleItems}
                     </ul>

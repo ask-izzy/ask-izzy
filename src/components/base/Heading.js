@@ -15,7 +15,7 @@ import cx from "classnames"
 import LevelContext from '../../contexts/document-level-context.js'
 
 type Props = {
-    className: string,
+    className?: string,
     children?: ReactNode
 }
 

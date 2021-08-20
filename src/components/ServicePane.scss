@@ -3,7 +3,6 @@
 .ServicePane {
     color: #{colours.get-static('colour-text-dark')};
     color: var(--colour-text-dark);
-    font-size: 14px;
     font-weight: light;
 
     .row {
@@ -146,7 +145,6 @@
 
     .List {
         .ListItem {
-            font-size: 14px;
             font-weight: 400;
 
             & > div {

@@ -1,14 +1,31 @@
 :root {
-    --font-size: 100%; /* 16px */
-    --ratio: 1.333;
-    --type-size-base: 16px;
+    --type-size-base: 18px;
+    --type-size-base-alt: 16px;
     --type-size-ratio: 1.26;
+    --type-size-ratio-alt: 1.17;
 
-    /* Calculate values */
+
+    @media (max-width: 500px) {
+        --type-size-ratio: 1.2;
+        --type-size-ratio-alt: 1.15;
+    }
+
+    @media (max-width: 400px) {
+        --type-size-ratio: 1.1;
+        --type-size-ratio-alt: 1.05;
+    }
+
     --type-size-0: var(--type-size-base);
     --type-size-1: calc(var(--type-size-0) * var(--type-size-ratio));
     --type-size-2: calc(var(--type-size-1) * var(--type-size-ratio));
     --type-size-3: calc(var(--type-size-2) * var(--type-size-ratio));
     --type-size-4: calc(var(--type-size-3) * var(--type-size-ratio));
     --type-size-5: calc(var(--type-size-4) * var(--type-size-ratio));
+
+    --type-size-0-alt: var(--type-size-base-alt);
+    --type-size-1-alt: calc(var(--type-size-0-alt) * var(--type-size-ratio-alt));
+    --type-size-2-alt: calc(var(--type-size-1-alt) * var(--type-size-ratio-alt));
+    --type-size-3-alt: calc(var(--type-size-2-alt) * var(--type-size-ratio-alt));
+    --type-size-4-alt: calc(var(--type-size-3-alt) * var(--type-size-ratio-alt));
+    --type-size-5-alt: calc(var(--type-size-4-alt) * var(--type-size-ratio-alt));
 }

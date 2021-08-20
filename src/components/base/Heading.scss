@@ -1,6 +1,11 @@
 .Heading {
     font-weight: bold;
+
     &.level-1 {
         font-size: var(--type-size-3);
+    }
+
+    &.level-2 {
+        font-size: var(--type-size-2);
     }
 }

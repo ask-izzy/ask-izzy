@@ -13,7 +13,7 @@
 
     &.showTaper {
         min-height: 220px;
-        padding-bottom: 2vw;
+        padding-bottom: 4.5vw;
         overflow-x: hidden;
 
         /* used to hide ::after pseudo-element that creates the
@@ -39,6 +39,10 @@
     .link-color {
         color: #{colours.get-static('colour-text-very-light')};
         color: var(--colour-text-very-light);
+    }
+
+    .primary, .secondary {
+        margin: 0 1em;
     }
 
     .info {

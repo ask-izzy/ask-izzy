@@ -18,6 +18,7 @@ import Eligibility from "./Eligibility";
 import Feedback from "./Feedback";
 import HeaderBar from "./HeaderBar";
 import Heading from "../components/base/Heading";
+import DocLevel from "../components/helpers/DocLevel";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
 import Ndis from "./Ndis";
@@ -98,97 +99,99 @@ export default class ServicePane extends React.Component<{
 
                     <DebugServiceRecord object={object} />
                 </div>
-                <div
-                    role="main"
-                    aria-labelledby="serviceDetails"
-                    className="row"
-                >
-                    <ScreenReader>
-                        <span id="serviceDetails">
-                            Service details.
-                        </span>
-                    </ScreenReader>
+                <DocLevel>
                     <div
-                        role="region"
-                        className="leftColumn"
-                        aria-labelledby="serviceDesc"
+                        role="main"
+                        aria-labelledby="serviceDetails"
+                        className="row"
                     >
                         <ScreenReader>
-                            <span id="serviceDesc">
-                                Service description.
+                            <span id="serviceDetails">
+                                Service details.
                             </span>
                         </ScreenReader>
                         <div
-                            className="header"
-                            tabIndex="0"
+                            role="region"
+                            className="leftColumn"
+                            aria-labelledby="serviceDesc"
                         >
-                            <div>
-                                <IndigenousServiceIcon object={object} />
-                                <LgbtiqIcon object={object} />
-                            </div>
-                            <div className="description">
-                                <Collapser
-                                    contentPreview={object.shortDescription
-                                        .map((
-                                            sentence, idx) =>
-                                            <p key={idx}>{sentence}</p>
-                                        )}
-                                    expandMessage="Read more"
-                                >
-                                    {object.descriptionSentences.map(
-                                        (sentence, idx) =>
-                                            <p key={idx}>{sentence}</p>
-                                    )}
-                                </Collapser>
-                            </div>
-                        </div>
-                        <section>
-                            <Eligibility {...object} />
-                        </section>
-                        {this.renderServiceProvisions()}
-                        <section>
-                            {this.renderSiblings()}
-                        </section>
-                    </div>
-                    <div
-                        role="region"
-                        aria-labelledby="serviceInfo"
-                        className="rightColumn"
-                    >
-                        <BoxedText>
                             <ScreenReader>
-                                <h4 id="serviceInfo">
-                                    Service Info.
-                                </h4>
+                                <span id="serviceDesc">
+                                    Service description.
+                                </span>
                             </ScreenReader>
-                            <div className="practicalities-container">
-                                <CollapsedOpeningTimes
-                                    object={object.open}
-                                    serviceId={object.id}
-                                />
-                                <Accessibility object={object} />
-                                <Ndis
-                                    className="ndis"
-                                    compact={false}
-                                    object={object}
-                                    spacer={true}
-                                />
-                                <GoogleMapsLink
-                                    className="plain-text"
-                                    to={object.Location()}
-                                >
-                                    <Address location={object.Location()} />
-                                    <TransportTime
-                                        location={object.Location()}
-                                        withoutLink={true}
-                                    />
-                                </GoogleMapsLink>
-                                <ContactMethods object={object} />
-                                <Feedback object={object} />
+                            <div
+                                className="header"
+                                tabIndex="0"
+                            >
+                                <div>
+                                    <IndigenousServiceIcon object={object} />
+                                    <LgbtiqIcon object={object} />
+                                </div>
+                                <div className="description">
+                                    <Collapser
+                                        contentPreview={object.shortDescription
+                                            .map((
+                                                sentence, idx) =>
+                                                <p key={idx}>{sentence}</p>
+                                            )}
+                                        expandMessage="Read more"
+                                    >
+                                        {object.descriptionSentences.map(
+                                            (sentence, idx) =>
+                                                <p key={idx}>{sentence}</p>
+                                        )}
+                                    </Collapser>
+                                </div>
                             </div>
-                        </BoxedText>
+                            <section>
+                                <Eligibility {...object} />
+                            </section>
+                            {this.renderServiceProvisions()}
+                            <section>
+                                {this.renderSiblings()}
+                            </section>
+                        </div>
+                        <div
+                            role="region"
+                            aria-labelledby="serviceInfo"
+                            className="rightColumn"
+                        >
+                            <BoxedText>
+                                <ScreenReader>
+                                    <h4 id="serviceInfo">
+                                        Service Info.
+                                    </h4>
+                                </ScreenReader>
+                                <div className="practicalities-container">
+                                    <CollapsedOpeningTimes
+                                        object={object.open}
+                                        serviceId={object.id}
+                                    />
+                                    <Accessibility object={object} />
+                                    <Ndis
+                                        className="ndis"
+                                        compact={false}
+                                        object={object}
+                                        spacer={true}
+                                    />
+                                    <GoogleMapsLink
+                                        className="plain-text"
+                                        to={object.Location()}
+                                    >
+                                        <Address location={object.Location()} />
+                                        <TransportTime
+                                            location={object.Location()}
+                                            withoutLink={true}
+                                        />
+                                    </GoogleMapsLink>
+                                    <ContactMethods object={object} />
+                                    <Feedback object={object} />
+                                </div>
+                            </BoxedText>
+                        </div>
                     </div>
-                </div>
+                </DocLevel>
             </div>
         );
     }
@@ -202,9 +205,14 @@ export default class ServicePane extends React.Component<{
 
         return (
             <div className="serviceProvisions-container">
-                <h3 className="serviceProvisions-header">
+                <Heading className="serviceProvisions-header">
                     What you can get here
-                </h3>
+                </Heading>
+                <DocLevel>
+                    <Heading className="serviceProvisions-header">
+                        What you can get here
+                    </Heading>
+                </DocLevel>
                 <ul>
                     {object.serviceProvisions.map(
                         (provision, index) =>
