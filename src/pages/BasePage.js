@@ -10,6 +10,7 @@ import { ApolloProvider } from "@apollo/client";
 import createApolloClient from "../utils/apolloClient";
 import HistoryListener from "../effects/HistoryListener";
 import DebugColours from "../components/DebugColours";
+import DocLevel from "../components/helpers/DocLevel";
 import {DebugModeProvider} from "../contexts/debug-mode-context";
 import {
     addPageLoadDependencies,
@@ -51,29 +52,31 @@ class BasePage extends React.Component<{}> {
             <HistoryListener />
             <ApolloProvider client={createApolloClient()}>
                 <DebugModeProvider>
-                    <DebugColours />
-                    <div className="BasePage">
-                        <ScreenReader>
-                            <p
-                                aria-live="polite"
-                                tabIndex={-1}
-                            >
-                                {pageTitle}
-                            </p>
-                        </ScreenReader>
-                        <Helmet>
-                            <link
-                                rel="canonical"
-                                content={canonicalUrl}
-                            />
-                            <meta
-                                property="og:url"
-                                content={canonicalUrl}
-                            />
-                            <title>{pageTitle}</title>
-                        </Helmet>
-                        <Outlet />
-                    </div>
+                    <DocLevel>
+                        <DebugColours />
+                        <div className="BasePage">
+                            <ScreenReader>
+                                <p
+                                    aria-live="polite"
+                                    tabIndex={-1}
+                                >
+                                    {pageTitle}
+                                </p>
+                            </ScreenReader>
+                            <Helmet>
+                                <link
+                                    rel="canonical"
+                                    content={canonicalUrl}
+                                />
+                                <meta
+                                    property="og:url"
+                                    content={canonicalUrl}
+                                />
+                                <title>{pageTitle}</title>
+                            </Helmet>
+                            <Outlet />
+                        </div>
+                    </DocLevel>
                 </DebugModeProvider>
             </ApolloProvider>
         </>

@@ -1,0 +1,14 @@
+:root {
+    --font-size: 100%; /* 16px */
+    --ratio: 1.333;
+    --type-size-base: 16px;
+    --type-size-ratio: 1.26;
+
+    /* Calculate values */
+    --type-size-0: var(--type-size-base);
+    --type-size-1: calc(var(--type-size-0) * var(--type-size-ratio));
+    --type-size-2: calc(var(--type-size-1) * var(--type-size-ratio));
+    --type-size-3: calc(var(--type-size-2) * var(--type-size-ratio));
+    --type-size-4: calc(var(--type-size-3) * var(--type-size-ratio));
+    --type-size-5: calc(var(--type-size-4) * var(--type-size-ratio));
+}

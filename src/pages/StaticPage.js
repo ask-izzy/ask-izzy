@@ -43,7 +43,6 @@ export default class StaticPage extends React.Component<Props> {
                         </span>
                     </ScreenReader>
                     <HeaderBar
-                        className="prominentHeading"
                         primaryText={this.props.bannerPrimary || this.props.title}
                         secondaryText={this.props.bannerSecondary || null}
                         bannerName={this.props.bannerName || "homepage"}

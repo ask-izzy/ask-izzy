@@ -17,6 +17,7 @@ import DebugServiceRecord from "./DebugServiceRecord";
 import Eligibility from "./Eligibility";
 import Feedback from "./Feedback";
 import HeaderBar from "./HeaderBar";
+import Heading from "../components/base/Heading";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
 import Ndis from "./Ndis";
@@ -141,15 +142,13 @@ export default class ServicePane extends React.Component<{
                                 </Collapser>
                             </div>
                         </div>
-
-                        <div
-                            className="provisions"
-                            tabIndex="0"
-                        >
+                        <section>
                             <Eligibility {...object} />
-                            {this.renderServiceProvisions()}
+                        </section>
+                        {this.renderServiceProvisions()}
+                        <section>
                             {this.renderSiblings()}
-                        </div>
+                        </section>
                     </div>
                     <div
                         role="region"

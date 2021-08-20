@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import AppBar from "./AppBar";
+import Heading from "./base/Heading";
+import Subheading from "./base/Subheading";
 import {useEffect, useState} from "react";
 
 type AppBarProps = React.ElementProps<typeof AppBar>
@@ -81,8 +83,9 @@ function HeaderBar(
         if (secondaryText) {
             return (
                 <div className="secondary">
-                    <h2 className={infoText ? "bold" : undefined}>
-                        {secondaryText}</h2>
+                    <Subheading className={infoText ? "bold" : undefined}>
+                        {secondaryText}
+                    </Subheading>
                 </div>
             )
         }
@@ -110,7 +113,7 @@ function HeaderBar(
                 {...goBack}
             />
             <div className="primary">
-                <h1>{primaryText}</h1>
+                <Heading>{primaryText}</Heading>
             </div>
             {renderSecondaryText()}
             {renderInfoText()}
