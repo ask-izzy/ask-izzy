@@ -1,7 +1,7 @@
 /* @flow */
 
 import type {Node as ReactNode} from "React";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import ButtonListItem from "./ButtonListItem";
 import ListItem from "./ListItem";
 import Geolocation, {guessSuburb} from "../geolocation";
@@ -11,13 +11,13 @@ import * as gtm from "../google-tag-manager";
 type GeoLocationState = "NOT_STARTED"|"RUNNING"|"COMPLETE"|"FAILED";
 
 type NotStartedGeolocationProps = {
-    onClick: () => {}
+    onClick: Function
 }
 
-const NotStartedGeolocation = (props: NotStartedGeolocationProps) => (
+const NotStartedGeolocation = ({onClick}: NotStartedGeolocationProps) => (
     <ButtonListItem
         className="taller LocationButton"
-        onClick={props.onClick}
+        onClick={onClick}
         primaryText={
             <span className="link-color link-text">
                 Get your current location
@@ -53,56 +53,53 @@ type FailedGeolocationProps = {
     error: string
 }
 
-class FailedGeolocation extends React.Component<FailedGeolocationProps, void> {
-    render() {
-        return (
-            <ListItem
-                primaryText="Unable to get your location"
-                secondaryText={`Please enter your location below
-                    (${this.props.error})`}
-                leftIcon={<icons.Cross className="big" />}
-            />
-        );
-    }
-}
+const FailedGeolocation = ({error}: FailedGeolocationProps) => (
+    <ListItem
+        primaryText="Unable to get your location"
+        secondaryText={`Please enter your location below
+            (${error})`}
+        leftIcon={<icons.Cross className="big" />}
+    />
+)
 
 type GeolocationButtonProps = {
     onSuccess: (result: { name: string, coords: Coordinates }) => void,
+    restartSearch: boolean
 }
 
-type GeolocationButtonState = {
-    geolocation: GeoLocationState,
-    error?: string
-}
+function GeolocationButton(
+    {
+        onSuccess,
+        restartSearch,
+    } :GeolocationButtonProps
+): ReactNode {
 
-// eslint-disable-next-line max-len
-class GeolocationButton extends React.Component<GeolocationButtonProps, GeolocationButtonState> {
-    static sampleProps: any = {
-        default: {},
-    };
+    const [geolocation, setGeolocation] = useState<GeoLocationState>(
+        "NOT_STARTED"
+    )
+    const [error, setErrorMessage] = useState<?string>(null)
 
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-            geolocation: "NOT_STARTED",
-        };
-    }
+    // Reset the geoLocation state when
+    // clearing the text box
+    useEffect(() => {
+        restartSearch && setGeolocation("NOT_STARTED")
+    }, [restartSearch])
 
-    async locateMe(): Promise<Object> {
+
+    const locateMe = async(): Promise<Object> => {
         let location = await Geolocation();
         let name = await guessSuburb(location);
 
         return {name, coords: location.coords};
     }
 
-    onGeolocationClick(): void {
-        if (this.state.geolocation != "NOT_STARTED") {
+    const onGeolocationClick = (): void => {
+        if (geolocation !== "NOT_STARTED") {
             return;
         }
 
-        this.setState({
-            geolocation: "RUNNING",
-        });
+        setGeolocation("RUNNING")
+
 
         gtm.emit({
             event: "Geolocation Requested",
@@ -112,12 +109,12 @@ class GeolocationButton extends React.Component<GeolocationButtonProps, Geolocat
             sendDirectlyToGA: true,
         });
 
-        this.locateMe()
+        locateMe()
             .then((params) => {
-                this.setState({geolocation: "COMPLETE"});
+                setGeolocation("COMPLETE")
                 gtm.emit({event: "geolocation-success"});
 
-                this.props.onSuccess(params);
+                onSuccess(params);
             })
             .catch(error => {
                 gtm.emit({
@@ -128,28 +125,25 @@ class GeolocationButton extends React.Component<GeolocationButtonProps, Geolocat
                     sendDirectlyToGA: true,
                 });
                 console.error(error);
-                this.setState({
-                    geolocation: "FAILED",
-                    error: error.message,
-                });
+                setGeolocation("FAILED")
+                setErrorMessage(error.message)
             });
     }
 
-    render(): ReactNode {
-        if (this.state.geolocation === "RUNNING") {
-            return <RunningGeolocation />;
-        } else if (this.state.geolocation === "COMPLETE") {
-            return <FinishedGeolocation />;
-        } else if (this.state.error) {
-            return <FailedGeolocation error={this.state.error}/>;
-        } else {
-            return (
-                <NotStartedGeolocation
-                    onClick={this.onGeolocationClick.bind(this)}
-                />
-            );
-        }
+    if (geolocation === "RUNNING") {
+        return <RunningGeolocation />;
+    } else if (geolocation === "COMPLETE") {
+        return <FinishedGeolocation />;
+    } else if (error) {
+        return <FailedGeolocation error={error}/>;
+    } else {
+        return (
+            <NotStartedGeolocation
+                onClick={onGeolocationClick}
+            />
+        );
     }
+
 }
 
 export default GeolocationButton;

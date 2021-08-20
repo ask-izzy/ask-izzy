@@ -19,6 +19,7 @@ import Category from "../../constants/Category";
 import WithStickyFooter from "../../components/WithStickyFooter";
 import ScreenReader from "../../components/ScreenReader";
 import AppBar from "../../components/AppBar";
+import FlatButton from "../../components/FlatButton";
 type AppBarProps = React.ElementProps<typeof AppBar>
 
 type Props = {
@@ -37,6 +38,7 @@ type State = {
         autocompletions: Array<issArea>,
         nextDisabled: boolean,
         showStepper: boolean,
+        fetchNewLocation: boolean,
         category: ?Category,
 }
 
@@ -54,6 +56,7 @@ class Location extends Personalisation<Props, State> {
             locationName: "",
             autocompletions: [],
             nextDisabled: true,
+            fetchNewLocation: false,
             showStepper: false,
             category: undefined,
         };
@@ -173,8 +176,9 @@ class Location extends Personalisation<Props, State> {
     setLocationName(name: any, validChoice: boolean): void {
         this.setState({
             locationName: `${name || ""}`,
+            fetchNewLocation: false,
+            nextDisabled: !(name && validChoice),
         });
-        this.setState({nextDisabled: !(name && validChoice)});
     }
 
     onNextStep(): void {
@@ -284,6 +288,7 @@ class Location extends Personalisation<Props, State> {
                                 /* if the browser supports geolocation */
                                 geolocationAvailable() &&
                                 <components.GeolocationButton
+                                    restartSearch={this.state.fetchNewLocation}
                                     onSuccess={
                                         this.onGeoLocationSuccess.bind(this)
                                     }
@@ -307,6 +312,24 @@ class Location extends Personalisation<Props, State> {
                                     value={this.state.locationName}
                                     onChange={this.onSearchChange.bind(this)}
                                 />
+                                {
+                                    this.state.locationName &&
+                                    <FlatButton
+                                        className="clear-text"
+                                        label="X"
+                                        aria-label="Clear entered location"
+                                        prompt="Clear"
+                                        onClick={() => {
+                                            this.setState(
+                                                {
+                                                    locationName: "",
+                                                    fetchNewLocation: true,
+                                                    autocompletions: [],
+                                                }
+                                            )
+                                        }}
+                                    />
+                                }
                             </div>
                             <fieldset>
                                 <legend>
@@ -383,7 +406,10 @@ class Location extends Personalisation<Props, State> {
                     <components.FlatButton
                         label="Done"
                         onClick={this.onDoneTouchTap.bind(this)}
-                        disabled={this.state.nextDisabled}
+                        disabled={
+                            this.state.nextDisabled ||
+                            !this.state.locationName
+                        }
                         form="searchBar"
                     />
                 </div>

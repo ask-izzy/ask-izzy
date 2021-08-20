@@ -92,6 +92,16 @@
                 }
             }
 
+            .clear-text {
+                height: 1.5em;
+                margin-right: 1em;
+                padding: 0;
+                line-height: 1.5em;
+                background: none;
+                color: #{colours.get-static('colour-text-dark')};
+                color: var(--colour-text-dark);
+            }
+
             button {
                 height: 40px;
                 padding: 0 15px;

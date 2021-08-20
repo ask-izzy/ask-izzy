@@ -277,7 +277,7 @@ async function searchContains(expected: string): Promise<void> {
 }
 
 async function clickSearch(): Promise<void> {
-    await this.driver.findElement(By.css(".search button"))
+    await this.driver.findElement(By.css(".search .searchButton"))
         .click();
 }
 

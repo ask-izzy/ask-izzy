@@ -13,46 +13,46 @@ type Props = ListItemProps & {
     ariaLabel?: string,
     checkedIcon?: any,
     uncheckedIcon?: any,
+    rightIcon?: ReactNode,
 }
 
-export default class InputListItem extends React.Component<Props, void> {
-    static sampleProps: any = {
-        default: {
-            type: "radio",
-            ...ListItem.sampleProps,
-        },
-    };
+function InputListItem(
+    {
+        checkedIcon,
+        uncheckedIcon,
+        primaryText,
+        secondaryText,
+        leftIcon,
+        onClick,
+        ariaLabel,
+        rightIcon,
+        type,
+        checked,
+    }: Props): ReactNode {
 
-    render(): ReactNode {
-        let {
-            checkedIcon,
-            uncheckedIcon,
-            primaryText,
-            secondaryText,
-            leftIcon,
-            onClick,
-            ariaLabel,
-            ...rest
-        } = this.props;
 
-        const label = ariaLabel || `${typeof primaryText === "string" ?
+    const fetchLabel = (): string => (
+        ariaLabel || `${typeof primaryText === "string" ?
             `${primaryText}.` : ""} ${typeof secondaryText === "string" ?
             `${secondaryText}` : ""}`
+    )
 
-        return (
-            <ListItem
-                className="InputListItem"
-                rootElement="button"
-                role={this.props.type || "button"}
-                aria-label={label}
-                tabIndex="0"
-                {...{primaryText, secondaryText, leftIcon, onClick,
-                    "aria-checked": rest.checked}}
-                rightIcon={!rest?.type ? <icons.Chevron />
-                    : rest?.checked ? checkedIcon : uncheckedIcon
-                }
-            />
-        );
 
-    }
+    return (
+        <ListItem
+            className="InputListItem"
+            rootElement="button"
+            role={type || "button"}
+            aria-label={fetchLabel()}
+            tabIndex="0"
+            {...{primaryText, secondaryText, leftIcon, onClick,
+                "aria-checked": checked}}
+            rightIcon={!type ? rightIcon || <icons.Chevron />
+                : checked ? checkedIcon : uncheckedIcon
+            }
+        />
+    );
+
 }
+
+export default InputListItem
