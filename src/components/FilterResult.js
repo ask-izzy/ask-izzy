@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import * as React from "react"
 import Dropdown from "./Dropdown";
 import Category from "../constants/Category";
@@ -49,7 +50,7 @@ function FilterResult(
         callback,
         category,
         titlePosition,
-    }: Props): React.Node {
+    }: Props): ReactNode {
 
     const [selection, setSelection] = React.useState<SortType>(
         DEFAULT_OPTIONS[0]
@@ -79,10 +80,6 @@ function FilterResult(
             />
         </div>
     )
-}
-
-FilterResult.defaultProps = {
-    loading: false,
 }
 
 export default FilterResult

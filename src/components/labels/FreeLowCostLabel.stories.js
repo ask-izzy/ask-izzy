@@ -1,14 +1,15 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import FreeLowCostLabel from "./FreeLowCostLabel";
 
 export default {
     title: "Basic UI Components/Labels/FreeLowCostLabel",
     component: FreeLowCostLabel,
-    argTypes: {},
+    argTypes: ({}: {...}),
 };
 
-const Template = (args: Object) => <FreeLowCostLabel {...args} />;
+const Template = (args: Object): ReactNode => <FreeLowCostLabel {...args} />;
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});

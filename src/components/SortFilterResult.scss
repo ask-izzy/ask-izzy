@@ -12,7 +12,8 @@
 
     &.sticky {
         position: fixed;
-        top: 2em;
+        top: 2.7em;
+        transition: position 0.5s ease;
         width: 100%;
         z-index: 1;
     }
@@ -20,7 +21,8 @@
     @media only screen and (min-width: 800px) {
         &.sticky {
             position: fixed;
-            top: 2em;
+            top: 2.7em;
+            transition: position 0.5s ease;
             width: 800px;
             z-index: 1;
         }

@@ -132,13 +132,6 @@ class ResultListItem extends React.Component<{
                         <DebugQueryScore expl={service._explanation} />
                     </DebugContainer>
                 }
-
-                <div
-                    className="learnMore"
-                    aria-label="Learn more."
-                >
-                    Learn More
-                </div>
             </LinkListItem>
 
         );

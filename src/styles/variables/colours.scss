@@ -21,6 +21,7 @@ $lightness-button-hover: 10%;
     @include colours.define('raw-colour-warm-white',    'global', hsl(45,  10%,  92% ));
     @include colours.define('raw-colour-pure-white',    'global', hsl(0,   0%,   100%));
     @include colours.define('raw-colour-pure-black',    'global', hsl(0,   0%,   0%  ));
+    @include colours.define('raw-colour-pure-green',    'global', hsl(127, 100%, 32%));
 
 
     /* Features */

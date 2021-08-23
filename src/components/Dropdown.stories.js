@@ -1,14 +1,15 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import Dropdown from "./Dropdown";
 
 export default {
     title: "Basic UI Components/Dropdown",
     component: Dropdown,
-    argTypes: {},
+    argTypes: ({}: {...}),
 };
 
-const Template = (args: Object) => <Dropdown {...args} />;
+const Template = (args: Object): ReactNode => <Dropdown {...args} />;
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});

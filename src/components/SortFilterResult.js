@@ -1,10 +1,12 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import * as React from "react"
 import SortResult from "./SortResult";
 import FilterResult from "./FilterResult";
 import Category from "../constants/Category";
 import icons from "../icons";
+import {getScrollPosition} from "../effects/scrollPosition";
 
 
 type Props = {
@@ -19,33 +21,20 @@ function SortFilterResult(
         orderByCallback,
         filterByCallback,
         category,
-        loading,
-    }: Props): React.Node {
+        loading = false,
+    }: Props): ReactNode {
 
-    const [stickySort, setStickySort] = React.useState(false);
 
     const ref = React.useRef<any>(null)
 
-    const handleScroll = () => {
-        const position = window.pageYOffset;
-        if (position < ref.current.offsetTop) {
-            setStickySort(false)
-        } else if (position >= (ref.current.offsetTop - 24)) {
-            setStickySort(true)
-        }
-    };
-
-    React.useEffect(() => {
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
-
+    const scrollPosition = getScrollPosition()
 
     return (
         <div
-            className={`SortFilterResult ${stickySort ? "sticky" : ""}`}
+            className={`SortFilterResult ${
+                ref.current && scrollPosition >= ref.current.offsetTop ?
+                    "sticky" : ""
+            }`}
             ref={ref}
         >
             <SortResult
@@ -67,10 +56,6 @@ function SortFilterResult(
             />
         </div>
     )
-}
-
-SortFilterResult.defaultProps = {
-    loading: false,
 }
 
 export default SortFilterResult

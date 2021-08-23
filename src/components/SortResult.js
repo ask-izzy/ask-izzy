@@ -1,5 +1,6 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import * as React from "react"
 import Dropdown from "./Dropdown";
 import Category from "../constants/Category";
@@ -31,12 +32,6 @@ const DEFAULT_OPTIONS: Array<SortType> = [
         name: "Closed or closing late",
         time: "open",
     },
-    {
-        key: "now_open",
-        value: {now_open: false},
-        name: "Closed now",
-        time: null,
-    },
 ]
 
 type Props = {
@@ -50,7 +45,7 @@ function SortResult(
         callback,
         category,
         titlePosition,
-    }: Props): React.Node {
+    }: Props): ReactNode {
 
     const [selection, setSelection] = React.useState<SortType>(
         DEFAULT_OPTIONS[0]
@@ -92,9 +87,6 @@ function SortResult(
             />
         </div>
     )
-}
-SortResult.defaultProps = {
-    loading: false,
 }
 
 export default SortResult

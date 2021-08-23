@@ -46,13 +46,11 @@
             width: 0;
             height: 0;
             clear: both;
-            border-top: 5px solid #{colours.get-static('colour-bg-standard-tint-3')};
-            border-top: 5px solid var(--colour-bg-standard-tint-3);
+            border-top: 5px solid #{colours.get-static('raw-colour-slate-gray')};
+            border-top: 5px solid var(--raw-colour-slate-gray);
             border-right: 5px solid transparent;
             border-left: 5px solid transparent;
-            content: "";
+            content: '';
         }
     }
-
-
 }

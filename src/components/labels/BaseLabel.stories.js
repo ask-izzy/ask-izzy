@@ -1,15 +1,16 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import React from "react";
 import BaseLabel from "./BaseLabel";
 
 export default {
     title: "Basic UI Components/Labels/BaseLabel",
     component: BaseLabel,
-    argTypes: {},
+    argTypes: ({}: {...}),
 };
 
-const Template = (args: Object) => <BaseLabel {...args} />;
+const Template = (args: Object): ReactNode => <BaseLabel {...args} />;
 
-export const Example = Template.bind({});
+export const Example: typeof Template = Template.bind({});
 Example.labelText = "Test";
