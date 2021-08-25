@@ -23,6 +23,12 @@ const DEFAULT_OPTIONS: Array<SortType> = [
     {
         key: "now_open",
         value: {now_open: true},
+        name: "Open now",
+        time: null,
+    },
+    {
+        key: "now_open",
+        value: {now_open: true},
         name: "Open now (closing soon)",
         time: "close",
     },
