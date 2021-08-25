@@ -131,7 +131,13 @@ class ResultsMapPage extends ResultsPage<{}, State> {
             return <>
                 <div
                     className="map"
-                    style={{flexBasis: this.calculateMapHeight() || "auto"}}
+                    style={{
+                        flexBasis: this.calculateMapHeight() || "auto",
+                        // On IE11 `display:contents` doesn't work so the map
+                        // doesn't show. This is to set the height of the map
+                        // if a service is selected it's 60vh otherwise 100vh
+                        height: this.state.selectedSite ? "60vh" : "100vh",
+                    }}
                 >
                     <SitesMap
                         onSiteSelect={

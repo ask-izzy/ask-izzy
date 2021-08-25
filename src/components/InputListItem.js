@@ -45,11 +45,10 @@ function InputListItem(
             role={type || "button"}
             aria-label={fetchLabel()}
             tabIndex="0"
-            {...{primaryText, secondaryText, leftIcon, onClick,
-                "aria-checked": checked}}
             rightIcon={!type ? rightIcon || <icons.Chevron />
                 : checked ? checkedIcon : uncheckedIcon
             }
+            {...{primaryText, secondaryText, leftIcon, onClick, checked}}
         />
     );
 

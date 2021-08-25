@@ -111,7 +111,6 @@ function HomePage(): ReactNode {
                                     evt.key === "Enter" && searchText !== "" &&
                                     onSearchSubmit()
                                 }}
-                                defaultValue={storage.getSearch()}
                             />
                             {
                                 searchText &&

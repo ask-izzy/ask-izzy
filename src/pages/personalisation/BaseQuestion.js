@@ -253,7 +253,6 @@ class BaseQuestion extends Personalisation<Props, State> {
     }
 
     render(): React.Node {
-        const selected = this.selected;
         let listClassName = "List";
 
         if (this.props.name) {
@@ -328,7 +327,6 @@ class BaseQuestion extends Personalisation<Props, State> {
                                     primaryText={answer}
                                     secondaryText={this.answerDescFor(answer)}
                                     aria-label={answer}
-                                    checked={answer === selected}
                                     value={answer}
                                     onClick={this.onAnswerTouchTap.bind(
                                         this,
