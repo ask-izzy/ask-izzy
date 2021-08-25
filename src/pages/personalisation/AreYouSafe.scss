@@ -1,8 +1,17 @@
 .AreYouSafe {
     h2,
-    h3,
     h4 {
         font-weight: normal;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        margin: 0 2px;
+        display: inline-block;
     }
 
     .safety-message {
@@ -10,6 +19,7 @@
         margin: 40px auto;
         text-align: center;
 
+        span,
         p {
             font-weight: normal;
             font-size: 18px;

@@ -198,7 +198,7 @@ Feature: Service details page
 
     Scenario: Can view all opening times
         When I visit /service/5551234
-        And I click on "Open Times"
+        And I click on "Show open hours"
 
         Then I should see the results for "All Opening Times"
         ----------------------------

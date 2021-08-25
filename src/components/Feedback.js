@@ -29,10 +29,7 @@ export default class Feedback extends React.Component<Props, void> {
         return (
             <div className="Feedback">
                 <Spacer />
-                <h3>Your feedback</h3>
                 <p>
-                    If information needs updating, or if something is not
-                    occurring as expected,&nbsp;
                     <Link
                         className="suggestChange"
                         onClick={this.recordSuggestChange.bind(this)}
@@ -56,8 +53,9 @@ export default class Feedback extends React.Component<Props, void> {
                                 )
                         }
                     >
-                        let us know
-                    </Link>.
+                        Email us with feedback or changes
+                    </Link> to service information if details here
+                     need updating.
                 </p>
             </div>
         );

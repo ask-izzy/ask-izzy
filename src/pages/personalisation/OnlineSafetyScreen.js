@@ -51,6 +51,7 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
 
     renderContent(): React.Element<any> {
         const link1800Respect = "/service/634190-1800respect";
+        const onlineChat = "https://chat.1800respect.org.au/";
         const number1800Respect = "1800 737 732";
 
         return (
@@ -68,22 +69,24 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
                         }.
                     </h2>
                     <p>
-                        If you don't feel safe in your life, call{" "}
-                        <Link to={link1800Respect}>1800 Respect</Link> on{" "}
-                        {
-                            this.props.mobileView ? (
-                                <Link className="phone-number"
-                                    to={`tel:${number1800Respect}`}
-                                >
-                                    {number1800Respect}
-                                </Link>
-                            ) : (
-                                <span className="phone-number">
-                                    {number1800Respect}
-                                </span>
-                            )
-                        } for confidential counselling, support and services.
+                        If you are worried about unhealthy,{" "}
+                        abusive or violent behaviour in any{" "}
+                        of your relationships,{" "}
+                        <Link to={link1800Respect}>1800RESPECT</Link>
+                        {" "}could help. Contact 1800RESPECT on
                     </p>
+                    <span>
+                        <Link className="phone-number"
+                            to={`tel:${number1800Respect}`}
+                        >
+                            {number1800Respect}
+                        </Link> or through their{" "}
+                    </span>
+                    <span>
+                        <Link to={onlineChat}>
+                            online chat.
+                        </Link>
+                    </span>
                 </div>
             </div>
         );

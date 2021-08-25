@@ -77,16 +77,13 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
 
         return (
             <p>
-                Call <Link to={linkService}>1800LGBTIQ</Link> on{" "}
-                {
-                    this.props.mobileView ? (
-                        <Link to={`tel:${phoneService}`}>
-                            { phoneService }
-                        </Link>
-                    ) : (
-                        `${phoneService}`
-                    )
-                }.
+                If you're LGBTIQA+ and worried about any of your
+                relationships,
+                {" "}<Link to={linkService}>W|Respect</Link>{" "}
+                can help. Call W|Respect on
+                {" "}<Link to={`tel:${phoneService}`}>
+                    {phoneService}
+                </Link> for counselling and support.
             </p>
         );
     }
@@ -94,19 +91,19 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
     renderAustraliaWideService(): React.Element<any> {
         const linkService = "/service/1740955-qlife";
         const phoneService = "1800 184 527";
+        const qLifeChat = "https://www.qlife.org.au/resources/chat";
 
         return (
             <p>
-                Call <Link to={linkService}>QLife</Link> on{" "}
-                {
-                    this.props.mobileView ? (
-                        <Link to={`tel:${phoneService}`}>
-                            { phoneService }
-                        </Link>
-                    ) : (
-                        `${phoneService}`
-                    )
-                } or chat online.
+                If you're LGBTIQA+ and worried about any of your
+                relationships,
+                {" "}<Link to={linkService}>QLife</Link> can
+                help. Call QLife on
+                {" "}<Link to={`tel:${phoneService}`}>
+                    {phoneService}
+                </Link> or
+                {" "}<Link to={qLifeChat}>chat online</Link> for
+                counselling and support, 3pm – midnight every day.
             </p>
         );
     }
@@ -114,6 +111,7 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
     renderContent(): React.Element<any> {
         const link1800Respect = "/service/634190-1800respect";
         const phone1800Respect = "1800 737 732";
+        const chat1800Respect = "https://chat.1800respect.org.au/";
         const linkAcon = "http://www.anothercloset.com.au/";
 
         return (
@@ -124,35 +122,29 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
                         Everyone has the right to be safe and proud.<br />
                         Violence and abuse is never OK.
                     </h2>
+                    {this.shouldShowVicService() ? this.renderVictoriaService()
+                        : this.renderAustraliaWideService()}
                     <p>
-                        Help and services are available from LGBTIQA+ services.
+                        Get information about
+                        {" "}<Link to={linkAcon}>
+                            domestic and family violence in
+                            LGBTIQA+ relationships.
+                        </Link>
                     </p>
-                    {
-                        this.shouldShowVicService() ?
-                            this.renderVictoriaService()
-                            : this.renderAustraliaWideService()
-                    }
+                    <h3>
+                        You can also get 24-hour help from non-LGBTIQA+
+                        specific services
+                    </h3>
                     <p>
-                        Learn more about LGBTIQA+ family violence at{" "}
-                        <Link to={linkAcon}>
-                            ‘Another Closet’
-                        </Link>.
-                    </p>
-                    <p>
-                        Everyone has the right to access mainstream services.
-                    </p>
-                    <p>
-                        Call <Link to={link1800Respect}>1800Respect</Link> on
-                        {" "}
-                        {
-                            this.props.mobileView ? (
-                                <Link to={`tel:${phone1800Respect}`}>
-                                    { phone1800Respect }
-                                </Link>
-                            ) : (
-                                `${phone1800Respect}`
-                            )
-                        }.
+                        Mainstream services like
+                        {" "}<Link to={link1800Respect}>1800RESPECT</Link>
+                        {" "}can also help if you are worried about unhealthy,
+                        abusive or violent behaviour in any of your
+                        relationships. Contact 1800RESPECT on
+                        {" "}<Link to={`tel:${phone1800Respect}`}>
+                            1800 737 732
+                        </Link> or through their
+                        {" "}<Link to={chat1800Respect}>online chat.</Link>
                     </p>
                 </div>
             </div>
