@@ -80,9 +80,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
                         relationships?
                     </h2>
                     <h3>
-                        <strong>
-                            Take the first steps to change today.
-                        </strong>
+                        Take the first steps to change today.
                     </h3>
                     <p>
                         Get anonymous and confidential{" "}

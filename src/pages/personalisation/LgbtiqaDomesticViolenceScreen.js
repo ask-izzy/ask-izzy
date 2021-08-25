@@ -132,10 +132,8 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
                         </Link>
                     </p>
                     <h3>
-                        <strong>
-                            You can also get 24-hour help from non-LGBTIQA+
-                            specific services
-                        </strong>
+                        You can also get 24-hour help from non-LGBTIQA+
+                        specific services
                     </h3>
                     <p>
                         Mainstream services like
