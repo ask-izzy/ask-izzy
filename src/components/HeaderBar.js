@@ -9,7 +9,7 @@ import {useEffect, useState} from "react";
 type AppBarProps = React.ElementProps<typeof AppBar>
 
 type Props = {
-    primaryText: string | React.Node,
+    primaryText?: string | React.Node,
     secondaryText?: string | React.Node,
     infoText?: string | React.Node,
     children?: React.Node,
@@ -78,12 +78,21 @@ function HeaderBar(
 
 
 
+    const renderPrimaryText = (): void | React.Element<"div"> => {
+        if (primaryText) {
+            return (
+                <div className="primary">
+                    <Heading>{primaryText}</Heading>
+                </div>
+            )
+        }
+    }
 
     const renderSecondaryText = (): void | React.Element<"div"> => {
         if (secondaryText) {
             return (
                 <div className="secondary">
-                    <Subheading className={infoText ? "bold" : undefined}>
+                    <Subheading className={infoText ? "bold" : ""}>
                         {secondaryText}
                     </Subheading>
                 </div>
@@ -112,9 +121,7 @@ function HeaderBar(
                 breakpoint={hideLogoWhenNotABar ? 100 : 30}
                 {...goBack}
             />
-            <div className="primary">
-                <Heading>{primaryText}</Heading>
-            </div>
+            {renderPrimaryText()}
             {renderSecondaryText()}
             {renderInfoText()}
             {children}

@@ -28,4 +28,9 @@
     --type-size-3-alt: calc(var(--type-size-2-alt) * var(--type-size-ratio-alt));
     --type-size-4-alt: calc(var(--type-size-3-alt) * var(--type-size-ratio-alt));
     --type-size-5-alt: calc(var(--type-size-4-alt) * var(--type-size-ratio-alt));
+
+    --min-width: 375;
+    --min-ratio: calc((1.2 - (var(--min-width) * 0.01)) * 1rem);
+
+    --type-size-3: calc(1vw + var(--min-ratio));
 }

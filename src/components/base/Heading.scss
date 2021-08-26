@@ -3,6 +3,7 @@
 
     &.level-1 {
         font-size: var(--type-size-3);
+        transition: font-size 0.5s;
     }
 
     &.level-2 {

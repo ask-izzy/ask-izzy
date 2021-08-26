@@ -4,6 +4,8 @@ import type {Element as ReactElement} from "React";
 import React from "react";
 
 import HeaderBar from "../components/HeaderBar";
+import Heading from "../components/base/Heading";
+import Subheading from "../components/base/Subheading";
 import icons from "../icons"
 import FlatButton from "../components/FlatButton";
 import NavBar from "../components/NavBar";
@@ -71,21 +73,23 @@ class HomePage extends React.Component<{}, State> {
                         </span>
                     </ScreenReader>
                     <HeaderBar
-                        primaryText={<>
-                            <img
-                                src={logo}
-                                className="homepage-logo"
-                                alt="AskIzzy."
-                            />
-                            Find the help you need, now and nearby.
-                        </>}
-                        secondaryText={<div className="secondary">
-                            Search over 370,000 support services.
-                        </div>}
                         bannerName="homepage"
                         hideLogoWhenNotABar={true}
                         taperColour="LighterGrey"
-                    />
+                    >
+                        <ScreenReader>
+                            <Heading>
+                                Ask Izzy
+                            </Heading>
+                        </ScreenReader>
+                        <img
+                            src={logo}
+                            className="homepage-logo"
+                            alt="AskIzzy."
+                        />
+                        <Subheading>Find the help you need, now and nearby.</Subheading>
+                        <p>Search over 370,000 support services.</p>
+                    </HeaderBar>
                     <AlertBannerList
                         screenLocation="homePage"
                     />
