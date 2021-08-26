@@ -34,17 +34,6 @@ export default function ListItem<T: React$AbstractComponent<Object, mixed>>({
     secondaryText,
     ...rest
 }: Props<T>): ReactNode {
-    // Does the item have a checked property?
-    // set the aria-checked attribute
-    if (rest.hasOwnProperty("checked")) {
-        // This is ignored because we don't
-        // want this to set to every list-item when it
-        // shouldn't be checkable to prevent it
-        // from being read out by a screen reader
-        /* $FlowIgnore */
-        rest["aria-checked"] = rest.checked;
-    }
-
     if (!rootElement) {
         rootElement = "div";
     }

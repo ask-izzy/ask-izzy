@@ -77,6 +77,9 @@ export default function({state, screenLocation, format}: Props): React.Node {
                 body={renderContent(body, id)}
                 alertLevel={alertLevel}
                 defaultToOpen={defaultToOpen}
+                analyticsEvent={{
+                    eventLabel: id,
+                }}
             />
         </li>
     }

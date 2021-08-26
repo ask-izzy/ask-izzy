@@ -23,7 +23,7 @@ import LgbtiqIcon from "./LgbtiqIcon";
 import { titleize } from "underscore.string";
 import ScreenReader from "./ScreenReader";
 import ListItem from "./ListItem";
-import Link from "./Link";
+import Link from "./base/Link";
 
 class ResultListItem extends React.Component<{
     service: iss.Service,
@@ -130,7 +130,6 @@ class ResultListItem extends React.Component<{
                     </DebugContainer>
                 }
             </ListItem>
-
         );
     }
 }

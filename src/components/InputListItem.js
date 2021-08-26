@@ -9,65 +9,59 @@ import type { Props as ListItemProps } from "./ListItem";
 import type {AnalyticsEvent} from "../google-tag-manager";
 import icons from "../icons";
 
-type Props = ListItemProps<typeof ListItem> & {
-    type?: "checkbox"|"radio",
+type Props = {
+    type?: "checkbox" | "radio",
     checked?: boolean,
     value?: string,
     ariaLabel?: string,
     checkedIcon?: any,
     uncheckedIcon?: any,
-    rightIcon?: ReactNode,
     analyticsEvent?: AnalyticsEvent,
-}
+} & ListItemProps<typeof Button>
 
-function InputListItem(
-    {
-        checkedIcon,
-        uncheckedIcon,
-        primaryText,
-        secondaryText,
-        leftIcon,
-        onClick,
-        ariaLabel,
-        rightIcon,
-        type,
-        checked,
-        analyticsEvent,
-    }: Props): ReactNode {
-
-    const listItemProps = {
-        primaryText,
-        secondaryText,
-        leftIcon,
-        onClick,
-        analyticsEvent: {
-            event: "Action Triggered - Option",
-            eventAction: "Option selected",
-            ...analyticsEvent,
-        },
-    }
+function InputListItem({
+    checkedIcon,
+    uncheckedIcon,
+    primaryText,
+    secondaryText,
+    onClick,
+    ariaLabel,
+    rightIcon,
+    type,
+    checked,
+    analyticsEvent,
+    ...otherProps
+}: Props): ReactNode {
+    const label = ariaLabel || `${typeof primaryText === "string" ?
+        `${primaryText}.` : ""} ${typeof secondaryText === "string" ?
+        `${secondaryText}` : ""}`
 
     return (
         <ListItem
+            {...otherProps}
             className="InputListItem"
             rootElement={Button}
             role={type || "button"}
-            aria-label={ariaLabel || `${typeof primaryText === "string" ?
-                `${primaryText}.` : ""} ${typeof secondaryText === "string" ?
-                `${secondaryText}` : ""}`}
+            aria-label={label}
             tabIndex={0}
-            {...listItemProps}
             rightIcon={!type ? rightIcon || <icons.Chevron />
                 : checked ? checkedIcon : uncheckedIcon
             }
             primaryText={primaryText}
             secondaryText={secondaryText}
-            leftIcon={leftIcon}
             onClick={onClick}
-            checked={checked}
+            {...(typeof checked !== "undefined" ?
+                {
+                    checked,
+                    "aria-checked": checked,
+                }
+                : {}
+            )}
             analyticsEvent={{
                 event: "Action Triggered - Option",
                 eventAction: "Option selected",
+                eventLabel: label,
+                eventValue: checked ? 0 : 1,
                 ...analyticsEvent,
             }}
         />

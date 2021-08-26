@@ -7,12 +7,14 @@ import Chevron from "../icons/Chevron";
 import Warning from "../icons/Warning";
 import Info from "../icons/Info";
 import Summary from "./base/Summary";
+import type {AnalyticsEvent} from "../google-tag-manager";
 
 type Props = {
     title: React.Node,
     body?: React.Node,
     alertLevel: string,
-    defaultToOpen?: boolean
+    defaultToOpen?: boolean,
+    analyticsEvent?: AnalyticsEvent
 }
 
 export default function AlertBanner(
@@ -51,6 +53,7 @@ export default function AlertBanner(
                         event: `Action Triggered - Alert`,
                         eventAction: "Show alert body",
                         eventLabel: null,
+                        ...props.analyticsEvent,
                     }}
                 >
                     <div className="title-container"> {/* wrapper for flex bug https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers */}
