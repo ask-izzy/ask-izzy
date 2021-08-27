@@ -37,19 +37,19 @@
             font-weight: 500;
         }
 
-        img {
-            width: 64px;
-            height: 64px;
-            padding: 5px;
-            border-radius: 50%;
-            background-color: #{colours.get-static('raw-colour-teal')};
-            background-color: var(--raw-colour-teal);
-        }
-
         p {
             width: 50%;
             font-size: small;
             text-align: center;
+
+            img:first-of-type {
+                width: 42px;
+                height: 42px;
+                padding: 11px;
+                border-radius: 50%;
+                background-color: #{colours.get-static('raw-colour-teal')};
+                background-color: var(--raw-colour-teal);
+            }
         }
 
         .Contact {
