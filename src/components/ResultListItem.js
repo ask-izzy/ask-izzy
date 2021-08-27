@@ -23,6 +23,8 @@ import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import { titleize } from "underscore.string";
 import ScreenReader from "./ScreenReader";
+import Heading from "./base/Heading";
+import DocLevel from "./helpers/DocLevel"
 
 class ResultListItem extends React.Component<{
     service: iss.Service,
@@ -72,62 +74,57 @@ class ResultListItem extends React.Component<{
 
                 {this.renderLocation(service.Location())}
                 <div className="name">
-                    <h2 aria-label={`${service.name}.`}>
+                    <Heading aria-label={`${service.name}.`}>
                         {service.name}
-                    </h2>
+                    </Heading>
                     <div className="flags">
                         <IndigenousServiceIcon object={service} />
                         <LgbtiqIcon object={service} />
                     </div>
                 </div>
-                <div
-                    className="site_name"
-                    aria-label={`${service.site.name}.`}
-                >
-                    {service.site.name}
-                    <Ndis
-                        className="ndis"
-                        compact={true}
-                        object={service}
+                <DocLevel>
+                    <div
+                        className="site_name"
+                        aria-label={`${service.site.name}.`}
+                    >
+                        {service.site.name}
+                        <Ndis
+                            className="ndis"
+                            compact={true}
+                            object={service}
+                        />
+                    </div>
+
+                    <OpeningTimes
+                        className="opening_hours"
+                        object={service.open}
                     />
-                </div>
+                    <ServiceProvisions
+                        service={service}
+                    />
+                    <div className="description">
+                        {service.shortDescription.map(
+                            (sentence, i) =>
+                                <p key={i}>{sentence}</p>
+                        )}
+                    </div>
+                    <Eligibility {...service} />
+                    <Accessibility object={service} />
+                    <ScreenReader>
+                        Travel times.
+                    </ScreenReader>
+                    <TransportTime
+                        compact={true}
+                        location={service.Location()}
+                    />
 
-                <OpeningTimes
-                    className="opening_hours"
-                    object={service.open}
-                />
-                <ServiceProvisions
-                    service={service}
-                />
-                <div className="description">
-                    {service.shortDescription.map(
-                        (sentence, i) =>
-                            <p key={i}>{sentence}</p>
-                    )}
-                </div>
-                <Eligibility {...service} />
-                <Accessibility object={service} />
-                <ScreenReader>
-                    Travel times.
-                </ScreenReader>
-                <TransportTime
-                    compact={true}
-                    location={service.Location()}
-                />
-
-                <DebugServiceRecord object={service} />
-                {service._explanation &&
-                    <DebugContainer message="Query score">
-                        <DebugQueryScore expl={service._explanation} />
-                    </DebugContainer>
-                }
-
-                <div
-                    className="learnMore"
-                    aria-label="Learn more."
-                >
-                    Learn More
-                </div>
+                    <DebugServiceRecord object={service} />
+                    {service._explanation &&
+                        <DebugContainer message="Query score">
+                            <DebugQueryScore expl={service._explanation} />
+                        </DebugContainer>
+                    }
+                </DocLevel>
             </LinkListItem>
 
         );

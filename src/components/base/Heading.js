@@ -26,10 +26,13 @@ export default function Heading ({className, children}: Props): ReactNode {
         if (!level) {
           throw new Error('<Heading /> has been used without a <DocLevel /> parent.')
         }
-        const Heading = 'h' + Math.min(level, 6)
+
+        const headingLevel = Math.min(level, 6)
+        const Heading = 'h' + headingLevel
+
         return (
             <Heading
-                className={cx('Heading', `level-${Math.min(level, 6)}`, className)}
+                className={cx('Heading', `level-${headingLevel}`, className)}
             >
                 {children}
             </Heading>

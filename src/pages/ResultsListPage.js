@@ -20,6 +20,7 @@ import QuestionStepper from "./QuestionStepper";
 
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
+import DocLevel from "../components/helpers/DocLevel";
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
@@ -78,34 +79,36 @@ class ResultsListPage extends ResultsPage<> {
                     </div>
                 </div>
             </div>
-            {this.hasSearchResults() ||
-                <AlertBannerList
-                    state={stateFromLocation()}
-                    screenLocation="resultsPage"
-                    format="inline"
-                />
-            }
-            <main aria-labelledby="searchResults">
-                <ScreenReader>
-                    <span id="searchResults">
-                        Search Results.
-                    </span>
-                </ScreenReader>
-                <div className="List results">
-                    {this.hasSearchResults() ||
-                        <ViewOnMapButton
-                            to={this.context.router.location
-                                .pathname.replace(/\/?$/, "/map")
-                            }
-                        />
-                    }
-                    <ResultsList
-                        results={this.state.searchResults || []}
+            <DocLevel>
+                {this.hasSearchResults() ||
+                    <AlertBannerList
+                        state={stateFromLocation()}
+                        screenLocation="resultsPage"
+                        format="inline"
                     />
-                    {this.renderLoadMore()}
-                    {this.renderSuggestionBox()}
-                </div>
-            </main>
+                }
+                <main aria-labelledby="searchResults">
+                    <ScreenReader>
+                        <span id="searchResults">
+                            Search Results.
+                        </span>
+                    </ScreenReader>
+                    <div className="List results">
+                        {this.hasSearchResults() ||
+                            <ViewOnMapButton
+                                to={this.context.router.location
+                                    .pathname.replace(/\/?$/, "/map")
+                                }
+                            />
+                        }
+                        <ResultsList
+                            results={this.state.searchResults || []}
+                        />
+                        {this.renderLoadMore()}
+                        {this.renderSuggestionBox()}
+                    </div>
+                </main>
+            </DocLevel>
         </div>
     )
 

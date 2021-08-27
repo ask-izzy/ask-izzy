@@ -1,36 +1,137 @@
 :root {
-    --type-size-base: 18px;
-    --type-size-base-alt: 16px;
-    --type-size-ratio: 1.26;
-    --type-size-ratio-alt: 1.17;
+    --type-size-ratio: 1.25;
+    --type-base-size-min: 16;
+    --type-base-size-max: 18;
+    --type-size-min-screen-width: 350;
+    --type-size-max-screen-width: 800;
+
+    --type-size-0-ratio: 1;
+    --type-size-0: clamp(
+        var(--type-base-size-min) * var(--type-size-0-ratio) * 1px,
+        (
+            1vw *
+            (
+                (
+                    1 /
+                    ((var(--type-size-max-screen-width) - var(--type-size-min-screen-width))*0.01)
+                ) *
+                (var(--type-base-size-max) - var(--type-base-size-min)) * var(--type-size-0-ratio)
+            )
+            +
+            (var(--type-base-size-min) * 1px) * var(--type-size-0-ratio)
+            -
+            (
+                var(--type-size-min-screen-width) * 0.01 *
+                (
+                    1 /
+                    ((var(--type-size-max-screen-width) - var(--type-size-min-screen-width))*0.01)
+                ) *
+                (var(--type-base-size-max) - var(--type-base-size-min))
+                *
+                1px
+                * var(--type-size-0-ratio)
+            )
+        ),
+        var(--type-base-size-max) * var(--type-size-0-ratio) * 1px
+    );
 
 
-    @media (max-width: 500px) {
-        --type-size-ratio: 1.2;
-        --type-size-ratio-alt: 1.15;
-    }
 
-    @media (max-width: 400px) {
-        --type-size-ratio: 1.1;
-        --type-size-ratio-alt: 1.05;
-    }
 
-    --type-size-0: var(--type-size-base);
-    --type-size-1: calc(var(--type-size-0) * var(--type-size-ratio));
-    --type-size-2: calc(var(--type-size-1) * var(--type-size-ratio));
-    --type-size-3: calc(var(--type-size-2) * var(--type-size-ratio));
-    --type-size-4: calc(var(--type-size-3) * var(--type-size-ratio));
-    --type-size-5: calc(var(--type-size-4) * var(--type-size-ratio));
+    --type-size-1-ratio: var(--type-size-0-ratio) * var(--type-size-ratio);
+    --type-size-1: clamp(
+        var(--type-base-size-min) * var(--type-size-1-ratio) * 1px,
+        (
+            1vw *
+            (
+                (
+                    1 /
+                    ((var(--type-size-max-screen-width) - var(--type-size-min-screen-width))*0.01)
+                ) *
+                (var(--type-base-size-max) - var(--type-base-size-min)) * var(--type-size-1-ratio)
+            )
+            +
+            (var(--type-base-size-min) * 1px) * var(--type-size-1-ratio)
+            -
+            (
+                var(--type-size-min-screen-width) * 0.01 *
+                (
+                    1 /
+                    ((var(--type-size-max-screen-width) - var(--type-size-min-screen-width))*0.01)
+                ) *
+                (var(--type-base-size-max) - var(--type-base-size-min))
+                *
+                1px
+                * var(--type-size-1-ratio)
+            )
+        ),
+        var(--type-base-size-max) * var(--type-size-1-ratio) * 1px
+    );
 
-    --type-size-0-alt: var(--type-size-base-alt);
-    --type-size-1-alt: calc(var(--type-size-0-alt) * var(--type-size-ratio-alt));
-    --type-size-2-alt: calc(var(--type-size-1-alt) * var(--type-size-ratio-alt));
-    --type-size-3-alt: calc(var(--type-size-2-alt) * var(--type-size-ratio-alt));
-    --type-size-4-alt: calc(var(--type-size-3-alt) * var(--type-size-ratio-alt));
-    --type-size-5-alt: calc(var(--type-size-4-alt) * var(--type-size-ratio-alt));
 
-    --min-width: 375;
-    --min-ratio: calc((1.2 - (var(--min-width) * 0.01)) * 1rem);
 
-    --type-size-3: calc(1vw + var(--min-ratio));
+
+    --type-size-2-ratio: var(--type-size-1-ratio) * var(--type-size-ratio);
+    --type-size-2: clamp(
+        var(--type-base-size-min) * var(--type-size-2-ratio) * 1px,
+        (
+            1vw *
+            (
+                (
+                    1 /
+                    ((var(--type-size-max-screen-width) - var(--type-size-min-screen-width))*0.01)
+                ) *
+                (var(--type-base-size-max) - var(--type-base-size-min)) * var(--type-size-2-ratio)
+            )
+            +
+            (var(--type-base-size-min) * 1px) * var(--type-size-2-ratio)
+            -
+            (
+                var(--type-size-min-screen-width) * 0.01 *
+                (
+                    1 /
+                    ((var(--type-size-max-screen-width) - var(--type-size-min-screen-width))*0.01)
+                ) *
+                (var(--type-base-size-max) - var(--type-base-size-min))
+                *
+                1px
+                * var(--type-size-2-ratio)
+            )
+        ),
+        var(--type-base-size-max) * var(--type-size-2-ratio) * 1px
+    );
+
+
+
+
+    --type-size-3-ratio: var(--type-size-2-ratio) * var(--type-size-ratio);
+    --type-size-3: clamp(
+        var(--type-base-size-min) * var(--type-size-3-ratio) * 1px,
+        (
+            1vw *
+            (
+                (
+                    1 /
+                    ((var(--type-size-max-screen-width) - var(--type-size-min-screen-width))*0.01)
+                ) *
+                (var(--type-base-size-max) - var(--type-base-size-min)) * var(--type-size-3-ratio)
+            )
+            +
+            (var(--type-base-size-min) * 1px) * var(--type-size-3-ratio)
+            -
+            (
+                var(--type-size-min-screen-width) * 0.01 *
+                (
+                    1 /
+                    ((var(--type-size-max-screen-width) - var(--type-size-min-screen-width))*0.01)
+                ) *
+                (var(--type-base-size-max) - var(--type-base-size-min))
+                *
+                1px
+                * var(--type-size-3-ratio)
+            )
+        ),
+        var(--type-base-size-max) * var(--type-size-3-ratio) * 1px
+    );
+
 }

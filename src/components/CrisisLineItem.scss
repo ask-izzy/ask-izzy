@@ -10,7 +10,7 @@
         margin-bottom: 0;
         color: #{colours.get-static('colour-link')};
         color: var(--colour-link);
-        font-size: 14px;
+        // font-size: 14px;
         font-weight: 500;
         text-decoration: underline;
 
@@ -30,7 +30,7 @@
 
     .bonusCopy {
         padding: 0;
-        font-size: 14px;
+        // font-size: 14px;
 
         li {
             padding-bottom: 1em;

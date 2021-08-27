@@ -24,12 +24,14 @@
                 margin: 10px auto;
             }
 
-            .primary {
-                font-size: 1.5em;
-                font-weight: bold;
+            .tagline {
+                font-size: var(--type-size-1);
+                font-weight: 500;
+                margin: 0.3em 0.5rem 0.7em;
             }
 
-            .secondary {
+            .description {
+                font-size: var(--type-size-0);
                 font-weight: 500;
             }
         }

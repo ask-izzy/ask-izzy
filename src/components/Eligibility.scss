@@ -5,9 +5,12 @@
     padding-right: 15px;
     padding-left: 15px;
 
-    h2 {
-        font-size: 17px;
+    .Heading {
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
+    }
+
+    ul {
+        margin: 0.5em 0 1em;
     }
 }

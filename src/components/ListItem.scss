@@ -95,7 +95,7 @@
             & > .secondaryText {
                 color: #{colours.get-static('colour-text-mid')};
                 color: var(--colour-text-mid);
-                font-size: 14px;
+                // font-size: 14px;
                 line-height: 150%;
                 text-overflow: ellipsis;
                 white-space: nowrap;

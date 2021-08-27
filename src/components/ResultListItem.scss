@@ -1,17 +1,16 @@
 @use '../styles/mixins/colours';
 
 .ResultListItem {
-    font-size: 14px;
+    // font-size: 14px;
     font-weight: 400;
 
     .name {
         display: block;
         margin-top: 5px;
 
-        h2 {
+        .Heading {
             display: inline-block;
             margin: 0 0.5em 0 0;
-            font-size: 18px;
             font-weight: 500;
 
             &:hover {

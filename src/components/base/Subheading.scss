@@ -1,5 +1,14 @@
 .Subheading {
     &.level-1 {
-        font-size: var(--type-size-3-alt);
+        font-size: var(--type-size-2);
+    }
+    &.level-2 {
+        font-size: var(--type-size-1);
+    }
+    &.level-3,
+    &.level-4,
+    &.level-5,
+    &.level-6 {
+        font-size: var(--type-size-0);
     }
 }

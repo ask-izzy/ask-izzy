@@ -208,11 +208,6 @@ export default class ServicePane extends React.Component<{
                 <Heading className="serviceProvisions-header">
                     What you can get here
                 </Heading>
-                <DocLevel>
-                    <Heading className="serviceProvisions-header">
-                        What you can get here
-                    </Heading>
-                </DocLevel>
                 <ul>
                     {object.serviceProvisions.map(
                         (provision, index) =>

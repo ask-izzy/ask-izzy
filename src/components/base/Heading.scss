@@ -3,10 +3,35 @@
 
     &.level-1 {
         font-size: var(--type-size-3);
-        transition: font-size 0.5s;
+        margin: 0.5em 0 0.1em;
     }
-
     &.level-2 {
         font-size: var(--type-size-2);
     }
+    &.level-3 {
+        font-size: var(--type-size-1);
+        margin: 0.6em 0 0.2em;
+    }
+    &.level-4,
+    &.level-5,
+    &.level-6 {
+        font-size: var(--type-size-0);
+    }
+}
+
+
+.HeaderBar .Heading {
+    // font-size: var(--type-size-1);
+}
+
+.ResultListItem .Heading {
+    font-size: var(--type-size-0);
+}
+
+.Eligibility .Heading {
+    font-size: var(--type-size-0);
+}
+
+.ServicePane .serviceProvisions-container .Heading {
+    font-size: var(--type-size-0);
 }

@@ -85,10 +85,10 @@ class HomePage extends React.Component<{}, State> {
                         <img
                             src={logo}
                             className="homepage-logo"
-                            alt="AskIzzy."
+                            alt="Ask Izzy."
                         />
-                        <Subheading>Find the help you need, now and nearby.</Subheading>
-                        <p>Search over 370,000 support services.</p>
+                        <div className="tagline">Find the help you need, now and nearby.</div>
+                        <div className="description">Search over 370,000 support services.</div>
                     </HeaderBar>
                     <AlertBannerList
                         screenLocation="homePage"

@@ -1,8 +1,6 @@
 @use '../styles/mixins/colours';
 
 .HeaderBar {
-    $text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
-
     position: relative;
     min-height: 220px;
     padding-bottom: 2vw;
@@ -10,6 +8,7 @@
     color: var(--colour-text-very-light);
     z-index: 1;
     box-sizing: border-box;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
 
     &.showTaper {
         min-height: 220px;
@@ -49,7 +48,6 @@
         margin: 15px 20px;
         font-size: 16px;
         font-style: italic;
-        text-shadow: $text-shadow;
     }
 
     p {
