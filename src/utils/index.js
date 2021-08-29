@@ -5,6 +5,7 @@ import AreYouSafe from "../pages/personalisation/AreYouSafe";
 import OnlineSafetyScreen from "../pages/personalisation/OnlineSafetyScreen";
 import {titleize} from "underscore.string";
 import {getCategory} from "../constants/categories";
+import Storage from "../storage";
 
 export function stateFromLocation(): string {
     const states = [
@@ -86,7 +87,20 @@ export const makeTitle = (
 
     // Returns the title for the search results page
     if (pageType?.[1]?.includes("Results")) {
-        pageTitleArr.push(`in ${params?.suburb}, ${params?.state}`)
+        // When going the results back from a previously view category
+        // (without answering the questions again) the params of
+        // the location don't get set. So we need to fetch the location
+        // from storage
+        if (!params.suburb && !params.state) {
+            // If the location isn't set then it will not add
+            // the 'in' location string to the title
+            if (Storage.getLocation()) {
+                const location = Storage.getLocation().split(", ");
+                pageTitleArr.push(`in ${location?.[0]}, ${location?.[1]}`)
+            }
+        } else {
+            pageTitleArr.push(`in ${params?.suburb}, ${params?.state}`)
+        }
     }
 
     if (!pageTitleArr.length) {
