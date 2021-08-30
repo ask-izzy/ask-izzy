@@ -5,6 +5,7 @@ import classnames from "classnames";
 
 import AlertBanner from "./AlertBanner";
 import StrapiMarkdown from "./StrapiMarkdown";
+import Link from "./base/Link";
 import alertsQuery from "../queries/content/alerts.js";
 import ScreenReader from "./ScreenReader";
 
@@ -72,20 +73,36 @@ export default function({state, screenLocation, format}: Props): React.Node {
     function renderAlert({id, title, body, alertLevel, defaultToOpen}) {
         return <li key={id}>
             <AlertBanner
-                title={renderContent(title)}
-                body={renderContent(body)}
+                title={renderContent(title, id)}
+                body={renderContent(body, id)}
                 alertLevel={alertLevel}
                 defaultToOpen={defaultToOpen}
+                analyticsEvent={{
+                    eventLabel: id,
+                }}
             />
         </li>
     }
 
-    function renderContent(content: string) {
+    function renderContent(content: string, id: number) {
         if (!content || !content.trim()) {
             return null
         }
         return (
-            <StrapiMarkdown>
+            <StrapiMarkdown
+                renderers={{
+                    link: ({href, children}) =>
+                        <Link
+                            to={href}
+                            children={children}
+                            analyticsEvent={{
+                                event: `Link Followed - Alert`,
+                                eventAction: "Alert",
+                                eventLabel: `Alert ${id} - ${href}`,
+                            }}
+                        />,
+                }}
+            >
                 {content}
             </StrapiMarkdown>
         )

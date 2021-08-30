@@ -2,7 +2,7 @@
 
 import Category from "../constants/Category";
 import * as React from "react";
-import Link from "../components/Link";
+import Link from "../components/base/Link";
 import * as gtm from "../google-tag-manager";
 import Storage from "../storage";
 import classnames from "classnames";

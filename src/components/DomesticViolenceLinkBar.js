@@ -2,48 +2,38 @@
 
 import type {Element as ReactElement} from "React";
 import React from "react";
+
 import icons from "../icons";
-import * as gtm from "../google-tag-manager";
 import routerContext from "../contexts/router-context";
+import Link from "./base/Link"
 
 export default class DomesticViolenceLinkBar extends React.Component<{}, void> {
     static contextType: any = routerContext;
 
-    render(): ReactElement<"div"> {
+    render(): ReactElement<typeof Link> {
 
         return (
-            <div
-                className="DomesticViolenceLinkBar"
-                onClick={this.onClickDVLink.bind(this)}
-                tabIndex="0"
-            >
-                <div className="leftIcon">
-                    <icons.Book />
+            <Link to="/information">
+                <div
+                    className="DomesticViolenceLinkBar"
+                >
+                    <div
+                        className="leftIcon"
+                        aria-hidden="false"
+                    >
+                        <icons.Book />
+                    </div>
+                    <div className="primaryText">
+                        Read more about family and domestic violence.
+                    </div>
+                    <div
+                        className="rightIcon"
+                        aria-hidden="false"
+                    >
+                        <icons.Chevron />
+                    </div>
                 </div>
-                <div className="primaryText">
-                    Read more about family and domestic violence.
-                </div>
-                <div className="rightIcon">
-                    <icons.Chevron />
-                </div>
-            </div>
+            </Link>
         );
     }
-
-    onClickDVLink(): void {
-        const path = "/information";
-
-        gtm.emit({
-            event: "DV Banner Clicked",
-            eventCat: "Banner Clicked",
-            eventAction: "Domestic Violence Information",
-            eventLabel: location.pathname,
-            sendDirectlyToGA: true,
-        });
-
-        this.context.router.navigate(
-            path,
-        );
-    }
-
 }

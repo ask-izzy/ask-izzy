@@ -29,6 +29,14 @@ export default class OnlineSafetyLink extends BaseLogoWithTextBox {
             sendDirectlyToGA: true,
         });
 
+        gtm.emit({
+            event: "Link Followed - Callout",
+            eventCat: "Link followed",
+            eventAction: "Callout",
+            eventLabel: "Online Safety",
+            sendDirectlyToGA: true,
+        });
+
         this.context.router.navigate(
             this.props.path,
         );

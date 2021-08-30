@@ -3,7 +3,7 @@
 import type {Node as ReactNode} from "React";
 import React, {useContext} from "react";
 
-import components from "../components";
+import IconButton from "./IconButton";
 import icons from "../icons";
 import QuickExit from "./QuickExit";
 import classnames from "classnames";
@@ -87,7 +87,7 @@ function AppBar(
                     !transition ||
                     scrollPosY > breakpoint
                 ) && (
-                    <components.IconButton
+                    <IconButton
                         className={
                             !onBackTouchTap ? "appBarLogo" : undefined
                         }
@@ -95,6 +95,11 @@ function AppBar(
                             : "Ask Izzy home page;"
                         }
                         onClick={onBackTouchTap || goHome}
+                        analyticsEvent={{
+                            event: "Action Triggered - Back",
+                            eventAction: "Navigate back",
+                            eventLabel: null,
+                        }}
                     >
                         {onBackTouchTap ? (
                             <span className="backButton">
@@ -109,7 +114,7 @@ function AppBar(
                                 alt="Ask Izzy home"
                             />
                         )}
-                    </components.IconButton>
+                    </IconButton>
                 )}
                 <QuickExit
                     className={showBar()}

@@ -2,7 +2,6 @@
 
 import type {Node as ReactNode} from "React";
 import React from "react";
-import { addRouter } from "../storybook/decorators";
 import { action } from "@storybook/addon-actions";
 
 import LinkListItem from "./LinkListItem";
@@ -15,7 +14,6 @@ export default {
         secondaryText: "Secondary text",
         onClick: (action("clicked"): any),
     },
-    decorators: [addRouter],
 };
 
 const Template = (args: Object): ReactNode => {

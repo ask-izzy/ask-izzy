@@ -3,7 +3,7 @@
 import type {Node as ReactNode} from "React";
 import React, {useContext} from "react";
 
-import Link from "../components/Link";
+import Link from "../components/base/Link";
 import StaticPage from "./StaticPage";
 import FlatButton from "../components/FlatButton";
 import icons from "../icons";

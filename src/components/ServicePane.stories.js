@@ -2,20 +2,19 @@
 
 import type {Node as ReactNode} from "React";
 import React from "react";
-import { action } from "@storybook/addon-actions";
 
 import ServicePane from "./ServicePane";
 import ServiceFactory from "../../fixtures/factories/Service";
 import fixtures from "../../fixtures/services";
-import { addRouter } from "../storybook/decorators";
+import alertsQuery from "../queries/content/alerts.js";
+import {
+    vicServiceAlert,
+} from "../../test/support/mock-cms/resolvers/alerts.js"
+
 
 export default {
     title: "Service Components/ServicePane",
     component: ServicePane,
-    args: {
-        onClick: (action("clicked"): any),
-    },
-    decorators: [addRouter],
 };
 
 const Template = (args: Object): ReactNode => {
@@ -26,8 +25,58 @@ export const ISSService: typeof Template = Template.bind({});
 ISSService.args = {
     service: ServiceFactory(fixtures.ixa),
 };
+ISSService.parameters = {
+    apolloClient: getApolloConfig(
+        {
+            state: "VIC",
+            screenLocation: "servicePage",
+        },
+        []
+    ),
+}
+
+export const ISSServiceWithAlerts: typeof Template = Template.bind({});
+ISSServiceWithAlerts.args = {
+    service: ServiceFactory(fixtures.ixa),
+};
+ISSServiceWithAlerts.parameters = {
+    apolloClient: getApolloConfig(
+        {
+            state: "VIC",
+            screenLocation: "servicePage",
+        },
+        [vicServiceAlert]
+    ),
+}
 
 export const YouthSupportNetService: typeof Template = Template.bind({});
 YouthSupportNetService.args = {
     service: ServiceFactory(fixtures.youthSupportNet),
 };
+YouthSupportNetService.parameters = {
+    apolloClient: getApolloConfig(
+        {
+            state: "",
+            screenLocation: "servicePage",
+        },
+        []
+    ),
+}
+
+function getApolloConfig(variables: Object, alerts: Array<Object>) {
+    return {
+        mocks: [
+            {
+                request: {
+                    query: alertsQuery,
+                    variables,
+                },
+                result: {
+                    data: {
+                        alerts,
+                    },
+                },
+            },
+        ],
+    }
+}

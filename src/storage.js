@@ -28,6 +28,14 @@ const Storage = {
 
     setSearch(search: string): void {
         sessionStore.setItem("search", search);
+
+        gtm.emit({
+            event: "Input Submitted - Search",
+            eventCat: "Input submitted",
+            eventAction: "Text search",
+            eventLabel: search,
+            sendDirectlyToGA: true,
+        });
     },
 
     getDebug(): boolean {
@@ -83,23 +91,34 @@ const Storage = {
     },
 
     setItem(key: string, obj: string|number|boolean): void {
-        // $FlowIgnore
-        if (`${obj}`.match(/family violence/i)) {
+        if (obj.toString().match(/family violence/i)) {
             switchToPrivateMode();
         }
 
-        gtm.emit({
-            event: "Personalisation Response Given",
-            eventCat: this.getItem(key) ?
-                "Change Personalisation Response"
-                : "Set Personalisation Response",
-            eventAction: key,
-            eventLabel: String(obj),
-            sendDirectlyToGA: true,
-        })
+        const gtmIgnoredKeys = ["previous_search_url"]
 
-        // $FlowIgnore
-        persistentStore.setItem(key, `${obj}`);
+        if (!gtmIgnoredKeys.includes(key)) {
+            gtm.emit({
+                event: "Personalisation Response Given",
+                eventCat: this.getItem(key) ?
+                    "Change Personalisation Response"
+                    : "Set Personalisation Response",
+                eventAction: key,
+                eventLabel: String(obj),
+                sendDirectlyToGA: true,
+            })
+
+            gtm.emit({
+                event: "Input Submitted - Personalisation",
+                eventCat: "Input submitted",
+                eventAction: `Personalisation - ${key}`,
+                eventLabel: String(obj),
+                eventValue: this.getItem(key) ? 1 : 0,
+                sendDirectlyToGA: true,
+            })
+        }
+
+        persistentStore.setItem(key, obj.toString());
     },
 
     getArray(key: string): Array<any> {
@@ -129,8 +148,23 @@ const Storage = {
         }
     },
 
-    setJSON(key: string, obj: mixed): void {
+    // Widen obj types as necessary
+    setJSON(key: string, obj: Array<string> | {}): void {
+        const emitGTMEvent = (value: string) => {
+            gtm.emit({
+                event: "Input Submitted - Personalisation",
+                eventCat: "Input submitted",
+                eventAction: `Personalisation - ${key} (single value)`,
+                eventLabel: value,
+                eventValue: this.getItem(key) ? 1 : 0,
+                sendDirectlyToGA: true,
+            })
+        }
+
         if (obj instanceof Array) {
+            if (obj.length === 0) {
+                emitGTMEvent("<none>")
+            }
             for (const val of obj) {
                 gtm.emit({
                     event: "Personalisation Response",
@@ -141,6 +175,8 @@ const Storage = {
                     eventLabel: val,
                     sendDirectlyToGA: true,
                 })
+
+                emitGTMEvent(val)
             }
             obj.sort()
         }

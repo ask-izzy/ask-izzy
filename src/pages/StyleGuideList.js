@@ -3,7 +3,7 @@
 import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
-import Link from "../components/Link";
+import Link from "../components/base/Link";
 import components from "../components";
 
 export default class StyleGuideList extends React.Component<{}, void> {

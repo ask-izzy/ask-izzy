@@ -5,7 +5,7 @@ import * as React from "react";
 
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
-import Link from "../../components/Link";
+import Link from "../../components/base/Link";
 import storage from "../../storage";
 import * as iss from "../../iss";
 import icons from "../../icons";

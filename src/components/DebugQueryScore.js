@@ -20,7 +20,12 @@ class DebugQueryScore extends React.Component<Props, void> {
                 <span className="description">{expl.description}</span>
                 <span className="score">{expl.value}</span>
                 {(expl.details || []).map(
-                    (child) => <DebugQueryScore expl={child} />
+                    (child, index) => (
+                        <DebugQueryScore
+                            expl={child}
+                            key={index}
+                        />
+                    )
                 )}
             </div>
         );

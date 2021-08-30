@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import type {Node as ReactNode} from "react"
 import classnames from "classnames";
 
+import Button from "../base/Button";
+import type {AnalyticsEvent} from "../../google-tag-manager"
+
 type Props = {
     className?: string,
     expandMessage: string,
@@ -11,7 +14,8 @@ type Props = {
     initiallyExpanded?: boolean,
     contentPreview?: ReactNode,
     children?: ReactNode,
-    onClick?: Function
+    onClick?: Function,
+    analyticsEvent?: AnalyticsEvent
 }
 
 // By default, if 'collapseMessage' is not defined, then the component will not
@@ -24,10 +28,11 @@ export default function Collapser({
     contentPreview,
     children,
     onClick: onClickProp,
+    analyticsEvent,
 }: Props): ReactElement<"div"> {
     const [isCollapsed, setIsCollapsed] = useState(!initiallyExpanded)
 
-    function onClick(event: SyntheticInputEvent<>) {
+    function onClick(event: SyntheticEvent<HTMLButtonElement>) {
         setIsCollapsed(!isCollapsed)
         onClickProp?.()
     }
@@ -44,13 +49,20 @@ export default function Collapser({
         >
             {isCollapsed && contentPreview}
             {message &&
-                <button
+                <Button
                     alt={message}
                     className="collapser-message"
                     onClick={onClick}
+                    analyticsEvent={{
+                        event: `Action Triggered - Show Content`,
+                        eventAction: "Show other content",
+                        eventLabel: message,
+                        eventValue: isCollapsed ? 1 : 0,
+                        ...analyticsEvent,
+                    }}
                 >
                     {message}
-                </button>
+                </Button>
             }
             <div
                 className={classnames({collapsed: isCollapsed})}

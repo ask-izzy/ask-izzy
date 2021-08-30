@@ -68,7 +68,6 @@ class ResultsMapPage extends ResultsPage<{}, State> {
     }
 
     calculateMapHeight(): ?string {
-
         if (typeof window === "undefined" || !this.state.selectedSite) {
             return undefined;
         }

@@ -135,6 +135,11 @@ class ResultsListPage extends ResultsPage<> {
                     className="MoreResultsButton"
                     primaryText="Load more results…"
                     onClick={this.loadNextSearchPage}
+                    analyticsEvent={{
+                        event: "Action Triggered - Load More Results",
+                        eventAction: "Load more results",
+                        eventLabel: null,
+                    }}
                 />
             );
         }

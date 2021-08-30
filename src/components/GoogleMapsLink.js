@@ -2,7 +2,7 @@
 import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
-import Link from "./Link";
+import Link from "./base/Link";
 import fixtures from "../../fixtures/services";
 import Location from "../iss/Location";
 import classnames from "classnames";
@@ -88,6 +88,11 @@ class GoogleMapsLink extends React.Component<Props, void> {
                 onClick={this.props.onClick}
                 aria-label="Open Google Maps in a new tab"
                 to={this.googleMapsUrl()}
+                analyticsEvent={{
+                    event: `Link Followed - Google Maps`,
+                    eventAction: "Google maps",
+                    eventLabel: null,
+                }}
             >
                 {!this.props.hideSpacer && <Spacer />}
                 {children}

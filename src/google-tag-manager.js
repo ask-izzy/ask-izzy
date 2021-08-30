@@ -1,6 +1,8 @@
 /* @flow */
 
-export function emit(event: AnalyticsEvent): void {
+import "./utils/polyfills/custom-events"
+
+export function emit(event: GTMEvent): void {
     if (typeof window === "undefined") {
         return;
     }
@@ -17,6 +19,16 @@ export function emit(event: AnalyticsEvent): void {
             }
         }
     }
+
+    // Emit custom browser event for logging/debugging purposes
+    if (window.CustomEvent) {
+        const browserEvent = new CustomEvent(
+            browserEventName,
+            {detail: event}
+        );
+        document.querySelector(":root")?.dispatchEvent(browserEvent);
+    }
+
     window.dataLayer.push(event);
 
     // By default GTM will continue using any dataLayer variables added in
@@ -38,7 +50,7 @@ export function emit(event: AnalyticsEvent): void {
 
     // Otherwise add event to flush vars
     } else {
-        const eventVarsFlush = {event: "Flush Vars"}
+        const eventVarsFlush = {event: "Clear Previous Variables"}
 
         for (const key of varsToFlush) {
             eventVarsFlush[key] = undefined
@@ -47,14 +59,29 @@ export function emit(event: AnalyticsEvent): void {
     }
 }
 
-export type AnalyticsEvent = {
+export const browserEventName = "googletagmanagerevent"
+
+export type GTMEventDirectToGA = {
     event: string,
-    eventCat?: string,
-    eventAction?: string,
-    eventLabel?: string,
-    eventValue?: number,
-    sendDirectlyToGA?: bool,
+    eventCat: string,
+    eventAction: string | null,
+    eventLabel: string | null,
+    eventValue?: number | null,
+    sendDirectlyToGA: bool,
 };
+export type GTMEventOther = {
+    event: string,
+    eventCat?: empty,
+    eventAction?: empty,
+    eventLabel?: empty,
+    eventValue?: empty,
+    sendDirectlyToGA?: empty,
+};
+export type GTMEvent = GTMEventDirectToGA | GTMEventOther;
+
+// $Shape<T> isn't technically equal to T with all property set to optional but
+// we're using it that way.
+export type AnalyticsEvent = $Shape<GTMEventDirectToGA>
 
 const persistentVars = new Set(["event"])
 

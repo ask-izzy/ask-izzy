@@ -4,12 +4,15 @@ import * as React from "react";
 import { Link as InternalLink } from "react-router-dom";
 import classnames from "classnames";
 
-import routerContext from "../contexts/router-context";
+import routerContext from "../../contexts/router-context";
+import * as gtm from "../../google-tag-manager"
+import type {AnalyticsEvent} from "../../google-tag-manager"
 
 type Props = {
     to: string,
     children?: React.Node,
-    className?: string
+    className?: string,
+    analyticsEvent?: AnalyticsEvent
 }
 
 type State = {
@@ -17,7 +20,7 @@ type State = {
     uri: string,
     protocol: ?string,
     domain: ?string,
-    path: ?string,
+    path: string,
 }
 
 export default class Link extends React.Component<Props, State> {
@@ -93,14 +96,34 @@ export default class Link extends React.Component<Props, State> {
             to,
             children,
             className,
+            analyticsEvent: additionalAnalyticsEventDetails,
             ...remainingProps
         } = this.props;
+
+        function onClickHandler(
+            event: SyntheticEvent<HTMLButtonElement>
+        ): void {
+            const linkType = this.state.isInternal ? "Internal" : "External"
+            const linkText = event.currentTarget.innerText || "<no text>"
+            const linkLocation = this.state.isInternal ?
+                this.state.path
+                : this.state.uri
+            gtm.emit({
+                event: `Link Followed - ${linkType}`,
+                eventCat: "Link followed",
+                eventAction: `Other ${linkType.toLowerCase()}`,
+                eventLabel: `${linkText} - ${linkLocation}`,
+                sendDirectlyToGA: true,
+                ...additionalAnalyticsEventDetails,
+            });
+        }
 
         if (this.state.isInternal) {
             return (
                 <InternalLink
                     to={this.props.to}
                     {...(remainingProps: any)}
+                    onClick={onClickHandler.bind(this)}
                     className={classnames(
                         "Link internal",
                         className,
@@ -116,6 +139,7 @@ export default class Link extends React.Component<Props, State> {
                 href={this.state.uri}
                 rel="noopener noreferrer"
                 {...(remainingProps: any)}
+                onClick={onClickHandler.bind(this)}
                 className={classnames(
                     "Link external",
                     className,

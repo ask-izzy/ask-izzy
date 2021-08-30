@@ -7,7 +7,6 @@ import LoadingResultsHeader from "./LoadingResultsHeader";
 import { getCategory } from "../../constants/categories";
 import Category from "../../constants/Category"
 import {
-    addRouter,
     setPersonalisationAnswers,
     setRouterContext,
 } from "../../storybook/decorators";
@@ -16,7 +15,6 @@ export default {
     title: "App Components/HeaderBar/LoadingResultsHeader",
     component: LoadingResultsHeader,
     decorators: [
-        addRouter,
         setPersonalisationAnswers,
         setRouterContext,
     ],

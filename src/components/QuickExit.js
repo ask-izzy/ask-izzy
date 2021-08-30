@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from "react";
-import Link from "./Link";
+import Link from "./base/Link";
 import classnames from "classnames";
 
 type Props = {
@@ -18,6 +18,11 @@ function QuickExit(
         <Link className="link"
             to={redirectUri}
             title={tooltip}
+            analyticsEvent={{
+                event: `Link Followed - Quick Exit`,
+                eventAction: "Quick exit",
+                eventLabel: null,
+            }}
         >
             <span>
                 Quick Exit X

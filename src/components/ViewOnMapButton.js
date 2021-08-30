@@ -10,7 +10,11 @@ type State = {
     maps: ?MapsApi
 }
 
-export default class ViewOnMapButton extends React.Component<any, State> {
+type Props = {
+    to: string
+}
+
+export default class ViewOnMapButton extends React.Component<Props, State> {
     constructor() {
         super();
         this.state = {maps: null};
@@ -35,7 +39,12 @@ export default class ViewOnMapButton extends React.Component<any, State> {
                 rightIcon={
                     <icons.Chevron />
                 }
-                {...this.props}
+                to={this.props.to}
+                analyticsEvent={{
+                    event: "Link Followed - Results Map",
+                    eventAction: "View results map",
+                    eventLabel: null,
+                }}
             />
         );
     }

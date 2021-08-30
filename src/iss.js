@@ -626,6 +626,16 @@ async function _search(
             eventLabel: String(storage.getItem("user_type")),
             sendDirectlyToGA: true,
         });
+
+        gtm.emit({
+            event: "Action Triggered - New Search",
+            eventCat: "Action triggered",
+            eventAction: "New search request",
+            eventLabel: storage.getItem("user_type") ?
+                String(storage.getItem("user_type"))
+                : "<not answered>",
+            sendDirectlyToGA: true,
+        });
     }
     storage.setItem("previous_search_url", searchUrl);
     return await requestObjects(searchUrlPath, request_);

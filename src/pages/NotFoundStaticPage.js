@@ -5,7 +5,7 @@ import React from "react";
 import type {Element as ReactElement} from "React";
 import HeaderBar from "../components/HeaderBar";
 import BrandedFooter from "../components/BrandedFooter";
-import Link from "../components/Link";
+import Link from "../components/base/Link";
 import routerContext from "../contexts/router-context";
 
 type Props = {}

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import PropTypes from "proptypes";
-import Link from "./Link";
+import Link from "./base/Link";
 
 type Props = {
     icon: React.Element<any>,

@@ -2,7 +2,7 @@
 
 import type {Element as ReactElement} from "React";
 import React from "react";
-import Link from "../components/Link";
+import Link from "../components/base/Link";
 import icons from "../icons"
 import LinkButton from "./LinkButton";
 import config from "../config";

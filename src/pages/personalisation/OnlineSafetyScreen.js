@@ -3,7 +3,7 @@ import * as React from "react";
 
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
 import icons from "../../icons";
-import Link from "../../components/Link";
+import Link from "../../components/base/Link";
 import AreYouSafe from "./AreYouSafe";
 import storage from "../../storage";
 import OnlineSafetyLink from "../../components/OnlineSafetyLink";

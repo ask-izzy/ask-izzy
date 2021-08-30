@@ -138,6 +138,11 @@ export default class CollapsedOpeningTimes extends React.Component<Props, void> 
                     <Collapser
                         expandMessage="Show open hours"
                         onClick={this.recordExpandOpeningTimes.bind(this)}
+                        analyticsEvent={{
+                            event: `Action Triggered - Opening Times`,
+                            eventAction: "Show opening times",
+                            eventLabel: null,
+                        }}
                     >
                         <ul className="AllOpeningTimes">
                             {openingHours.map((record, idx) =>

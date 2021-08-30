@@ -10,9 +10,21 @@ import storage from "../storage";
 import RouterContext from "../contexts/router-context";
 import { DebugModeProvider } from "../contexts/debug-mode-context";
 import createApolloClient from "../utils/apolloClient";
+import {browserEventName as gtmBrowserEventName} from "../google-tag-manager"
 
 export function addRouter(Story: Object): ReactNode {
-    return <MemoryRouter><Story/></MemoryRouter>
+    // Catch link click and stop it firing
+    function onClickHandler(event) {
+        // Check if target is, or is contained in a link
+        if (event.target?.closest("a")) {
+            event.preventDefault()
+        }
+    }
+    return <MemoryRouter>
+        <div onClick={onClickHandler}>
+            <Story/>
+        </div>
+    </MemoryRouter>
 }
 
 export function addGoogleMapsScript(
@@ -82,7 +94,6 @@ export function setDebugModeContext(
 
 export function setApolloProvider(Story: Object,
     { loaded: { env } }: Object): ReactNode {
-    console.log(env)
     window.STRAPI_URL = env.STRAPI_URL
     return (
         <ApolloProvider
@@ -91,4 +102,27 @@ export function setApolloProvider(Story: Object,
             <Story/>
         </ApolloProvider>
     )
+}
+
+// Ideally we'd log to actions but that doesn't seem to deal with CustomEvents
+// yet: https://github.com/storybookjs/storybook/issues/14205
+export function logGTMEvent(Story: Object): ReactNode {
+    function gtmEventHandler(event) {
+        console.log("GTM event emitted:", event.detail)
+    }
+    useEffect(() => {
+        // Typecast needed since flow doesn't deal with custom events yet
+        // https://github.com/facebook/flow/issues/7179
+        (document.querySelector(":root")?.addEventListener: Function)(
+            gtmBrowserEventName,
+            gtmEventHandler
+        )
+        return () => {
+            (document.querySelector(":root")?.removeEventListener: Function)(
+                gtmBrowserEventName,
+                gtmEventHandler
+            )
+        }
+    }, [])
+    return <Story/>
 }

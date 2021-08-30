@@ -6,7 +6,7 @@ import React, {useContext, useEffect, useState} from "react";
 import HeaderBar from "../components/HeaderBar";
 import icons from "../icons"
 import FlatButton from "../components/FlatButton";
-import NavBar from "../components/NavBar";
+import CategoriesList from "../components/CategoriesList";
 import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
 import { resetDfvOptions } from "../utils/domesticViolence";
@@ -153,7 +153,7 @@ function HomePage(): ReactNode {
                         Categories.
                     </span>
                 </ScreenReader>
-                <NavBar />
+                <CategoriesList />
             </main>
 
             <BrandedFooter />

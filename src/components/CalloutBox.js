@@ -2,7 +2,8 @@
 import * as React from "react";
 
 import Phone from "./Phone";
-import StrapiMarkdown from "../components/StrapiMarkdown";
+import StrapiMarkdown from "./StrapiMarkdown";
+import Link from "./base/Link";
 import * as gtm from "../google-tag-manager";
 import { useRouterContext } from "../contexts/router-context";
 
@@ -39,11 +40,23 @@ type Props = {
  * @constructor
  */
 function CalloutBox(
-    {calloutBoxes, position, embedded}: Props): React.Node | null {
+    {calloutBoxes, position, embedded}: Props
+): React.Node | null {
 
     const {navigate} = useRouterContext();
 
-    const onClickBox = ({Link: path, Heading}: Callout): void => {
+    function getAnalyticsEvent(callout: Callout) {
+        return {
+            event: `Link Followed - Callout`,
+            eventCat: "Link followed",
+            eventAction: "Callout",
+            eventLabel: callout.Heading,
+            sendDirectlyToGA: true,
+        }
+    }
+
+    const onClickBox = (callout: Callout): void => {
+        const {Link: path, Heading} = callout
         if (!path) {
             return;
         }
@@ -51,9 +64,12 @@ function CalloutBox(
         gtm.emit({
             event: "Callout Clicked",
             eventCat: "Callout Clicked",
+            eventAction: null,
             eventLabel: Heading,
             sendDirectlyToGA: true,
         });
+
+        gtm.emit(getAnalyticsEvent(callout))
 
         // if the path is local (as defined by prefixed slash)
         // go to the internal link, else open it externally
@@ -81,7 +97,16 @@ function CalloutBox(
                 : "askIzzyInfoBox")}
         >
             {callout.ShowHeading && <h2>{callout.Heading}</h2>}
-            <StrapiMarkdown>
+            <StrapiMarkdown
+                renderers={{
+                    link: ({href, children}) =>
+                        <Link
+                            to={href}
+                            children={children}
+                            analyticsEvent={getAnalyticsEvent(callout)}
+                        />,
+                }}
+            >
                 {callout.Body}
             </StrapiMarkdown>
             {callout.Phone &&
@@ -93,6 +118,9 @@ function CalloutBox(
                 />}
         </div>
     )
+
+    // Remove callout refs that refer to a callout not exist
+    calloutBoxes = calloutBoxes.filter(({callout}) => callout)
 
     // Returns Null if there are no callout boxes
     if (!calloutBoxes && !calloutBoxes.length) {

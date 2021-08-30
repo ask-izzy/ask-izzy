@@ -23,10 +23,11 @@ import LgbtiqIcon from "./LgbtiqIcon";
 import { titleize } from "underscore.string";
 import ScreenReader from "./ScreenReader";
 import ListItem from "./ListItem";
-import Link from "./Link";
+import Link from "./base/Link";
 
 class ResultListItem extends React.Component<{
     service: iss.Service,
+    resultNumber: number
 }, void> {
     static displayName: ?string = "ResultListItem";
 
@@ -69,7 +70,15 @@ class ResultListItem extends React.Component<{
                 className="plain-text ResultListItem"
             >
                 <div className="name">
-                    <Link to={`/service/${service.slug}`}>
+                    <Link
+                        to={`/service/${service.slug}`}
+                        analyticsEvent={{
+                            event: `Link Followed - Service Result`,
+                            eventAction: "Service result",
+                            eventLabel: `Standard service - number ` +
+                                `${this.props.resultNumber}`,
+                        }}
+                    >
                         <h2 aria-label={`${service.name}.`}>
                             {service.name}
                         </h2>
@@ -121,7 +130,6 @@ class ResultListItem extends React.Component<{
                     </DebugContainer>
                 }
             </ListItem>
-
         );
     }
 }

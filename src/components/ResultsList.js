@@ -47,7 +47,12 @@ class ResultsList extends React.Component<{
     renderCrisisResult(object: Object, index: number): React.Element<"div"> {
         const elem: React.Element<any> = object.staticText ?
             <StaticTextLine object={object} />
-            : <CrisisLineItem object={object} />;
+            : (
+                <CrisisLineItem
+                    object={object}
+                    resultNumber={index + 1}
+                />
+            );
 
         return (
             <div
@@ -60,7 +65,12 @@ class ResultsList extends React.Component<{
     }
 
     renderResult(object: Object, index: number): React.Element<"div"> {
-        const elem = <ResultListItem service={object} />;
+        const elem = (
+            <ResultListItem
+                service={object}
+                resultNumber={index + 1}
+            />
+        );
 
         return (
             <div

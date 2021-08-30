@@ -4,15 +4,16 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 import classnames from "classnames";
 
-import Link from "./Link";
+import Link from "./base/Link";
 import ListItem from "./ListItem";
-import type { ListItemProps } from "./ListItem";
+import type {Props as ListItemProps} from "./ListItem";
 
-type Props = ListItemProps & {
-    to?: string,
-    href?: string,
-    onClick?: ?function,
-}
+type PropsRest = {onClick?: Function}
+
+type Props = $Diff<
+    ListItemProps<typeof Link>,
+    $Exact<PropsRest> & {rootElement: any}
+> & PropsRest
 
 export default class LinkListItem extends React.Component<Props, void> {
     static sampleProps: any = {
@@ -27,24 +28,15 @@ export default class LinkListItem extends React.Component<Props, void> {
             className,
             ...rest
         } = this.props;
-        let rootElement = Link;
-
-        if (this.props.href) {
-            // FIXME: react-router's <Link> can't handle the
-            // 'mailto' scheme, because it tries to use pushstate.
-            // To work around this, set 'href' instead of 'to'
-            // to get an <a> instead of a <Link>
-            rootElement = "a"
-        }
 
         return (
             <ListItem
-                rootElement={rootElement}
+                {...rest}
+                rootElement={Link}
                 className={classnames(
                     "plain-text",
                     className,
                 )}
-                {...(rest: any)}
             />
         );
     }

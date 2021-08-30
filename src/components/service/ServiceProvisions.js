@@ -40,6 +40,11 @@ export default class ServiceProvisions extends React.Component<Props, void> {
             {this.provisionsBelowFold.length > 0 && (
                 <Collapser
                     expandMessage={`${this.provisionsBelowFold.length} more…`}
+                    analyticsEvent={{
+                        event: `Action Triggered - Other Service Provisions`,
+                        eventAction: "Show other service provisions",
+                        eventLabel: null,
+                    }}
                 >
                     {this.provisionsBelowFold.map((provision, i) =>
                         <li className="provision"

@@ -40,11 +40,10 @@ import IndigenousServiceIcon from "./components/IndigenousServiceIcon";
 import InputListItem from "./components/InputListItem";
 import LgbtiqIcon from "./components/LgbtiqIcon";
 import LinkButton from "./components/LinkButton";
-import Link from "./components/Link";
 import LinkListItem from "./components/LinkListItem";
 import ListItem from "./components/ListItem";
 import LogoWithShadow from "./components/LogoWithShadow";
-import NavBar from "./components/NavBar";
+import CategoriesList from "./components/CategoriesList";
 import Ndis from "./components/Ndis";
 import OnlineSafetyLink from "./components/OnlineSafetyLink";
 import OpeningTimes from "./components/OpeningTimes";
@@ -103,11 +102,10 @@ export default {
     InputListItem,
     LgbtiqIcon,
     LinkButton,
-    Link,
     LinkListItem,
     ListItem,
     LogoWithShadow,
-    NavBar,
+    CategoriesList,
     Ndis,
     OnlineSafetyLink,
     OpeningTimes,

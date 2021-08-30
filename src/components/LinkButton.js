@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import FlatButton from "./FlatButton";
-import Link from "./Link";
+import Link from "./base/Link";
 
 export default class LinkButton extends Link {
     onClickHandlerFactory: (() => () => void) = () => {

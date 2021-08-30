@@ -3,6 +3,7 @@ import { MockedProvider } from "@apollo/client/testing";
 
 // eslint-disable-next-line no-unused-vars
 import GlobalStyle from "../src/styles/bundle.scss";
+import { logGTMEvent, addRouter } from "../src/storybook/decorators";
 
 export const parameters = {
     actions: { argTypesRegex: "^on[A-Z].*" },
@@ -27,3 +28,5 @@ export const parameters = {
         MockedProvider,
     },
 }
+
+export const decorators = [logGTMEvent, addRouter]

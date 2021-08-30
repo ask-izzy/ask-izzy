@@ -28,6 +28,11 @@ const NotStartedGeolocation = ({onClick}: NotStartedGeolocationProps) => (
                 className="ColoredIcon icon-fg-color big"
             />
         }
+        analyticsEvent={{
+            event: "Action Triggered - Geolocate",
+            eventAction: "Find my location",
+            eventLabel: null,
+        }}
     />
 );
 
