@@ -11,7 +11,7 @@ import * as gtm from "../google-tag-manager";
 type GeoLocationState = "NOT_STARTED"|"RUNNING"|"COMPLETE"|"FAILED";
 
 type NotStartedGeolocationProps = {
-    onClick: Function
+    onClick: () => void
 }
 
 const NotStartedGeolocation = ({onClick}: NotStartedGeolocationProps) => (
