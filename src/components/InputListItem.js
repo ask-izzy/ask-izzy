@@ -4,67 +4,49 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 import ListItem from "./ListItem";
 import type { ListItemProps } from "./ListItem";
+import icons from "../icons";
 
 type Props = ListItemProps & {
-    type: "checkbox"|"radio",
+    type?: "checkbox"|"radio",
     checked?: boolean,
     value?: string,
     ariaLabel?: string,
-    checkedIcon: any,
-    uncheckedIcon: any,
+    checkedIcon?: any,
+    uncheckedIcon?: any,
+    rightIcon?: ReactNode,
 }
 
-export default class InputListItem extends React.Component<Props, void> {
-    static sampleProps: any = {
-        default: {
-            type: "radio",
-            ...ListItem.sampleProps,
-        },
-    };
+function InputListItem(
+    {
+        checkedIcon,
+        uncheckedIcon,
+        primaryText,
+        secondaryText,
+        leftIcon,
+        onClick,
+        ariaLabel,
+        rightIcon,
+        type,
+        checked,
+    }: Props): ReactNode {
 
-    render(): ReactNode {
-        let {
-            checkedIcon,
-            uncheckedIcon,
-            primaryText,
-            secondaryText,
-            leftIcon,
-            onClick,
-            ariaLabel,
-            ...rest
-        } = this.props;
 
-        const label = ariaLabel || `${typeof primaryText === "string" ?
-            `${primaryText}.` : ""} ${typeof secondaryText === "string" ?
-            `${secondaryText}` : ""}`
+    return (
+        <ListItem
+            className="InputListItem"
+            rootElement="button"
+            role={type || "button"}
+            aria-label={ariaLabel || `${typeof primaryText === "string" ?
+                `${primaryText}.` : ""} ${typeof secondaryText === "string" ?
+                `${secondaryText}` : ""}`}
+            tabIndex="0"
+            rightIcon={!type ? rightIcon || <icons.Chevron />
+                : checked ? checkedIcon : uncheckedIcon
+            }
+            {...{primaryText, secondaryText, leftIcon, onClick, checked}}
+        />
+    );
 
-        return (
-            <ListItem
-                className="InputListItem"
-                rootElement="button"
-                role={this.props.type || "button"}
-                aria-label={label}
-                tabIndex="0"
-                {...{primaryText, secondaryText, leftIcon, onClick}}
-                rightIcon={
-                    <span>
-                        {/* TODO: Find why this is throwing an error,
-                            checked is collected from the props */}
-                        {/* $FlowIgnore */}
-                        {rest.checked ? checkedIcon : uncheckedIcon}
-                        {/* @flow:enable */}
-                        <input
-                            ref="input"
-                            key="input"
-                            aria-hidden="true"
-                            aria-label={primaryText}
-                            {...(rest: any)}
-                            tabIndex="-1"
-                        />
-                    </span>
-                }
-            />
-        );
-
-    }
 }
+
+export default InputListItem

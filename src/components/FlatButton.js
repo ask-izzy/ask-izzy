@@ -1,41 +1,48 @@
 /* @flow */
 
-import type {Element as ReactElement} from "React";
-import React from "react";
+import type {Node as ReactNode} from "React";
+import React, {useState} from "react";
 import classnames from "classnames";
 
 type Props = {
     label?: string,
+    prompt?: string,
     className?: string,
     onClick: Function,
     disabled?: boolean,
     children?: any,
 }
 
-export default class FlatButton extends React.Component<Props, void> {
-    static sampleProps: any = {
-        default: {
-            label: "Button Text",
-        },
-    };
+function FlatButton(
+    {
+        label,
+        prompt,
+        className,
+        onClick,
+        disabled,
+        children,
+        ...rest
+    }: Props): ReactNode {
 
-    render(): ReactElement<"button"> {
-        let {
-            className,
-            children,
-            label,
-            ...rest
-        } = this.props;
+    // Used to display a prompt to the left of the button when focusing
+    // Generally used for the clear button in an input box
+    const [showPrompt, setShowPrompt] = useState(false)
 
-        return (
-            <button
-                tabIndex="0"
-                className={classnames("FlatButton", className)}
-                {...(rest: any)}
-            >
-                {label}
-                {children}
-            </button>
-        )
-    }
+    return (
+        <button
+            onFocus={() => setShowPrompt(true)}
+            onBlur={() => setShowPrompt(false)}
+            onClick={onClick}
+            disabled={disabled}
+            className={classnames("FlatButton", className)}
+            {...(rest: any)}
+        >
+            {prompt && showPrompt && <span className="prompt">{prompt}</span>}
+            {label}
+            {children}
+        </button>
+    )
+
 }
+
+export default FlatButton

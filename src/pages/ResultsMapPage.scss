@@ -3,17 +3,8 @@
 .ResultsMapPage {
     display: flex;
     flex-direction: column;
-    // To fix an annoying flexbox bug
-    // https://github.com/philipwalton/flexbugs/issues/197
     height: 0;
     min-height: 100vh;
-
-    // Added to display the Map as
-    // full screen and the results
-    // appear at the bottom
-    main {
-        display: contents;
-    }
 
     .AppBarContainer {
         margin-bottom: 0;
@@ -29,9 +20,6 @@
 
     .map {
         flex: 1 0 200px;
-        // Must have height assigned else it will fully collapse.
-        // https://github.com/philipwalton/flexbugs/issues/197
-        height: 0;
         transition: flex-basis 0.3s;
 
         .SitesMap {

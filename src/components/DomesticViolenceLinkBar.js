@@ -15,6 +15,7 @@ export default class DomesticViolenceLinkBar extends React.Component<{}, void> {
             <div
                 className="DomesticViolenceLinkBar"
                 onClick={this.onClickDVLink.bind(this)}
+                tabIndex="0"
             >
                 <div className="leftIcon">
                     <icons.Book />

@@ -14,7 +14,6 @@ import DebugServiceRecord from "./DebugServiceRecord";
 
 import Eligibility from "./Eligibility";
 import ServiceProvisions from "./service/ServiceProvisions"
-import LinkListItem from "./LinkListItem";
 import Accessibility from "./Accessibility";
 import OpeningTimes from "./OpeningTimes";
 import Ndis from "./Ndis";
@@ -23,6 +22,8 @@ import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import { titleize } from "underscore.string";
 import ScreenReader from "./ScreenReader";
+import ListItem from "./ListItem";
+import Link from "./Link";
 
 class ResultListItem extends React.Component<{
     service: iss.Service,
@@ -64,17 +65,15 @@ class ResultListItem extends React.Component<{
         } = this.props;
 
         return (
-            <LinkListItem
+            <ListItem
                 className="plain-text ResultListItem"
-                to={`/service/${service.slug}`}
-                rightIcon={<icons.Chevron />}
             >
-
-                {this.renderLocation(service.Location())}
                 <div className="name">
-                    <h2 aria-label={`${service.name}.`}>
-                        {service.name}
-                    </h2>
+                    <Link to={`/service/${service.slug}`}>
+                        <h2 aria-label={`${service.name}.`}>
+                            {service.name}
+                        </h2>
+                    </Link>
                     <div className="flags">
                         <IndigenousServiceIcon object={service} />
                         <LgbtiqIcon object={service} />
@@ -91,7 +90,7 @@ class ResultListItem extends React.Component<{
                         object={service}
                     />
                 </div>
-
+                {this.renderLocation(service.Location())}
                 <OpeningTimes
                     className="opening_hours"
                     object={service.open}
@@ -121,7 +120,7 @@ class ResultListItem extends React.Component<{
                         <DebugQueryScore expl={service._explanation} />
                     </DebugContainer>
                 }
-            </LinkListItem>
+            </ListItem>
 
         );
     }

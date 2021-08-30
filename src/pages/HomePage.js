@@ -1,7 +1,7 @@
 /* @flow */
 
-import type {Element as ReactElement} from "React";
-import React from "react";
+import type {Node as ReactNode} from "React";
+import React, {useContext, useEffect, useState} from "react";
 
 import HeaderBar from "../components/HeaderBar";
 import icons from "../icons"
@@ -16,148 +16,150 @@ import Storage from "../storage";
 import AlertBannerList from "../components/AlertBannerList";
 import ScreenReader from "../components/ScreenReader";
 
-type State = {
-    location: ?string,
-}
 
-class HomePage extends React.Component<{}, State> {
+const LOGO = "/static/images/ask-izzy-logo-single-line-yellow.svg";
 
-    search: ?HTMLInputElement;
+function HomePage(): ReactNode {
 
-    static contextType: any = routerContext;
+    const {router} = useContext(routerContext)
+    const [location, setLocation] = useState<?string>(null)
+    const [searchText, setSearchText] = useState<string>("")
 
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-            location: null,
-        }
+
+    useEffect(() => {
+        const savedLocation = Storage.getLocation();
+        const savedSearchText = storage.getSearch();
+        savedLocation && setLocation(savedLocation)
+        savedSearchText && setSearchText(savedSearchText)
         resetDfvOptions();
-    }
+    }, [])
 
-    componentDidMount() {
-        const location = Storage.getLocation();
-        location && this.setState({location})
-    }
-
-    onSearchSubmit(event: Event): void {
-        event.preventDefault();
-
-        const search = this.search ? this.search.value : "";
-
-        if (search === "") {
-            /* FIXME: should this give some user feedback? */
-            return;
-        }
-
-        storage.setSearch(search);
-
-        this.context.router.navigate(
-            `/search/${encodeURIComponent(search)}`
+    const onSearchSubmit = (): void => {
+        storage.setSearch(searchText);
+        router.navigate(
+            `/search/${encodeURIComponent(searchText)}`
         );
     }
 
-    render(): ReactElement<"div"> {
-        const logo = "/static/images/ask-izzy-logo-single-line-yellow.svg";
-        return (
-            <div className="HomePage">
-                <section
-                    role="complementary"
-                    className="page-header-section"
-                    aria-labelledby="header"
+    return (
+        <div className="HomePage">
+            <section
+                role="complementary"
+                className="page-header-section"
+                aria-labelledby="header"
+            >
+                <ScreenReader>
+                    <span id="header">
+                        Header.
+                    </span>
+                </ScreenReader>
+                <HeaderBar
+                    primaryText={<>
+                        <img
+                            src={LOGO}
+                            className="homepage-logo"
+                            alt="AskIzzy."
+                        />
+                        Find the help you need, now and nearby.
+                    </>}
+                    secondaryText={<div className="secondary">
+                        Search over 370,000 support services.
+                    </div>}
+                    bannerName="homepage"
+                    hideLogoWhenNotABar={true}
+                    taperColour="LighterGrey"
+                />
+                <AlertBannerList
+                    screenLocation="homePage"
+                />
+                <div
+                    role="search"
+                    aria-labelledby="searchBox"
                 >
                     <ScreenReader>
-                        <span id="header">
-                            Header.
+                        <span id="searchBox">
+                            Search Box.
                         </span>
                     </ScreenReader>
-                    <HeaderBar
-                        primaryText={<>
-                            <img
-                                src={logo}
-                                className="homepage-logo"
-                                alt="AskIzzy."
-                            />
-                            Find the help you need, now and nearby.
-                        </>}
-                        secondaryText={<div className="secondary">
-                            Search over 370,000 support services.
-                        </div>}
-                        bannerName="homepage"
-                        hideLogoWhenNotABar={true}
-                        taperColour="LighterGrey"
-                    />
-                    <AlertBannerList
-                        screenLocation="homePage"
-                    />
                     <div
-                        role="search"
-                        aria-labelledby="searchBox"
+                        className={`search ${
+                            location ? "locationSet" : ""}`}
                     >
-                        <ScreenReader>
-                            <span id="searchBox">
-                                Search Box.
-                            </span>
-                        </ScreenReader>
-                        <form
-                            className={`search ${
-                                this.state.location ? "locationSet" : ""}`}
-                            onSubmit={this.onSearchSubmit.bind(this)}
+                        <label htmlFor="home-page-search"
+                            className="searchLabel"
                         >
-                            <label htmlFor="home-page-search"
-                                className="searchLabel"
+                            <h2>What do you need help with?</h2>
+                        </label>
+                        <div className="searchWrapper">
+                            <label
+                                htmlFor="home-page-search"
                             >
-                                <h2>What do you need help with?</h2>
+                                <icons.Search
+                                    className={"searchIcon medium middle"}
+                                    fill="#8c8c8c"
+                                />
                             </label>
-                            <div className="searchWrapper">
-                                <label
-                                    htmlFor="home-page-search"
-                                >
-                                    <icons.Search
-                                        className={"searchIcon medium middle"}
-                                        fill="#8c8c8c"
-                                    />
-                                </label>
-                                <input
-                                    id="home-page-search"
-                                    ref={element => {
-                                        this.search = element;
-                                    }}
-                                    type="search"
-                                    defaultValue={storage.getSearch()}
-                                />
+                            <input
+                                id="home-page-search"
+                                type="search"
+                                onChange={(evt) => {
+                                    setSearchText(evt.target.value)
+                                }}
+                                value={searchText}
+                                onKeyDown={(evt) => {
+                                    console.log(searchText !== "")
+                                    evt.key === "Enter" && searchText !== "" &&
+                                    onSearchSubmit()
+                                }}
+                            />
+                            {
+                                searchText &&
                                 <FlatButton
-                                    label="Search"
-                                    onClick={this.onSearchSubmit.bind(this)}
+                                    className="clear-text"
+                                    label="X"
+                                    aria-label="Clear entered search text"
+                                    prompt="Clear"
+                                    onClick={() => {
+                                        setSearchText("")
+                                        storage.setSearch("");
+                                    }}
                                 />
-                            </div>
-                        </form>
+                            }
+                            <FlatButton
+                                label="Search"
+                                className="searchButton"
+                                onClick={searchText && onSearchSubmit}
+                            />
+                        </div>
                     </div>
-                    <div>
-                        {this.state.location &&
-                            <div>
-                                <QuestionStepper
-                                    home={true}
-                                    initialTabIndex={0}
-                                    onClear={() =>
-                                        this.setState({location: null})}
-                                />
-                            </div>
-                        }
-                    </div>
-                </section>
-                <main aria-labelledby="categories">
-                    <ScreenReader>
-                        <span id="categories">
-                            Categories.
-                        </span>
-                    </ScreenReader>
-                    <NavBar />
-                </main>
+                </div>
+                <div>
+                    {location &&
+                        <div>
+                            <QuestionStepper
+                                home={true}
+                                initialTabIndex={0}
+                                onClear={() =>
+                                    setLocation(null)
+                                }
+                            />
+                        </div>
+                    }
+                </div>
+            </section>
+            <main aria-labelledby="categories">
+                <ScreenReader>
+                    <span id="categories">
+                        Categories.
+                    </span>
+                </ScreenReader>
+                <NavBar />
+            </main>
 
-                <BrandedFooter />
-            </div>
-        );
-    }
+            <BrandedFooter />
+        </div>
+    );
+
 }
 
 export default HomePage;

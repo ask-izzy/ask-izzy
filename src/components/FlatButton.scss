@@ -32,4 +32,11 @@
             text-decoration: none;
         }
     }
+
+    .prompt {
+        font-size: 14px;
+        margin-right: 10px;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+    }
 }
