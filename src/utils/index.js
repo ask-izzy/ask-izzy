@@ -95,8 +95,7 @@ export const makeTitle = (
             // If the location isn't set then it will not add
             // the 'in' location string to the title
             if (Storage.getLocation()) {
-                const location = Storage.getLocation().split(", ");
-                pageTitleArr.push(`in ${location?.[0]}, ${location?.[1]}`)
+                pageTitleArr.push(`in ${Storage.getLocation()}`)
             }
         } else {
             pageTitleArr.push(`in ${params?.suburb}, ${params?.state}`)
