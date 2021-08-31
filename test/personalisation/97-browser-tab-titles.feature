@@ -58,5 +58,5 @@ Feature: Browser tab titles
         --------------------------------------
         When I click on "Housing"
         And I click on "See all and edit"
-        And I click on "Where are you?"
+        And I click on "Where are you looking for help?"
         Then I should see the browser tab title of "Housing (Location) - [selected answers] | Ask Izzy"

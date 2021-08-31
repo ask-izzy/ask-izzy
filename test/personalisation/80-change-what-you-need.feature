@@ -20,7 +20,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Melbourne, Vic
+        Where are you looking for help?                               | Melbourne, Vic
         Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -32,7 +32,7 @@ Feature: Change your personalisation settings
 
     Scenario: Edit my location setting
         When I visit /housing/personalise/summary
-        And I click on "Where are you?"
+        And I click on "Where are you looking for help?"
         Then I should see "This will help find services closest to your chosen location."
 
         When I search for "carlt"
@@ -44,7 +44,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Carlton, VIC
+        Where are you looking for help?                               | Carlton, VIC
         Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -60,7 +60,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Melbourne, Vic
+        Where are you looking for help?                               | Melbourne, Vic
         Do you have somewhere safe to sleep tonight? | No
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -79,7 +79,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Melbourne, Vic
+        Where are you looking for help?                               | Melbourne, Vic
         Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -94,7 +94,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Melbourne, Vic
+        Where are you looking for help?                               | Melbourne, Vic
         Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Female
         How old are you?                             | 26 to 64
@@ -110,7 +110,7 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you?                               | Melbourne, Vic
+        Where are you looking for help?                               | Melbourne, Vic
         Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | Male
         How old are you?                             | 26 to 64
