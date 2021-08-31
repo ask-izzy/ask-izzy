@@ -252,6 +252,11 @@ class Location extends Personalisation<Props, State> {
                     secondaryText={
                         "Find services near you"
                     }
+                    infoText={
+                        "Use the \"Get your current location\" to" +
+                        " get estimated travel times otherwise" +
+                        " enter a suburb or postcode"
+                    }
                     taperColour={this.state.showStepper ? "LighterGrey"
                         : "HeaderBar"}
                     fixedAppBar={true}

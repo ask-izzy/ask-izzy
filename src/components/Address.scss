@@ -1,21 +1,38 @@
 @use '../styles/mixins/colours';
 
 .Address {
-    position: relative;
-    padding-left: 24px;
-
     .Address-wrapper {
-        display: inline-block;
-        width: 100%;
+        display: flex;
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
-        font-weight: 500;
+    }
+
+    .expandContainer {
+        position: relative;
+
+        .backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 2;
+        }
+
+        .expandButton {
+            position: absolute;
+            z-index: 3;
+            transform: translate(7em, 2em);
+            padding: 5px;
+            border-radius: 3px;
+            border: solid 3px #{colours.get-static('raw-colour-pure-white')};
+            border: solid 3px var(--raw-colour-pure-white);
+            background: none;
+            color: #{colours.get-static('raw-colour-pure-white')};
+            color: var(--raw-colour-pure-white);
+        }
     }
 
     .MapIcon {
-        position: absolute;
-        top: -10px;
-        left: -10px;
         width: 40px;
         height: 40px;
     }
@@ -23,5 +40,12 @@
     .details {
         display: block;
         padding-top: 1em;
+    }
+
+    .location {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
 }

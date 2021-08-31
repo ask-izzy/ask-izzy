@@ -17,6 +17,7 @@ type State = {
     searchError: ?{message: string, status: number},
     searchPagesLoaded: number,
     searchType: ?string,
+    fetchedLocation: boolean
 }
 
 
@@ -37,6 +38,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             searchResults: null,
             searchError: null,
             searchPagesLoaded: 0,
+            fetchedLocation: false,
             searchType,
         };
     }

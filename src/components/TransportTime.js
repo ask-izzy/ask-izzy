@@ -10,7 +10,6 @@ import icons from "../icons";
 import Location from "../iss/Location";
 import * as gtm from "../google-tag-manager";
 import Spacer from "./Spacer";
-import GoogleMapsLink from "./GoogleMapsLink";
 
 class TransportTime extends React.Component<{
     location: Location,
@@ -75,7 +74,6 @@ class TransportTime extends React.Component<{
                     )}
                 >
                     {this.renderTravelTimes(travelTime)}
-                    {this.renderDirections()}
                 </div>
             </div>
         );
@@ -172,35 +170,6 @@ class TransportTime extends React.Component<{
             eventLabel: window.location.pathname,
             sendDirectlyToGA: true,
         });
-    }
-
-    renderDirections(): ReactElement<"span"> | ReactNode {
-        if (!this.props.compact) {
-            const linkText = (
-                <span className="googleMapsLink">
-                    Get directions in Google Maps
-                    <icons.ExternalLink
-                        className="ExternalLinkIcon"
-                    />
-                </span>
-            )
-
-            if (this.props.withoutLink) {
-                return linkText
-            } else {
-                return (
-                    <GoogleMapsLink
-                        to={this.props.location}
-                        className="getDirections"
-                        onClick={this.recordClick.bind(this)}
-                        hideSpacer={true}
-                    >
-                        {linkText}
-                    </GoogleMapsLink>
-                )
-            }
-        }
-        return <span />;
     }
 
     renderSuburb(): ReactElement<"span"> {

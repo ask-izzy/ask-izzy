@@ -4,6 +4,10 @@
     height: 0;
     min-height: 300px;
 
+    &.mapCollapsed {
+        min-height: 100px;
+    }
+
     /*
      * react-google-maps bizarrely seems to focus on the wrong marker
      * when clicked. No obvious fixes and react-google-maps is very

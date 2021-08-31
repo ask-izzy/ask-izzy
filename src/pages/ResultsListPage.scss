@@ -56,6 +56,29 @@
         }
     }
 
+    .specificLocationBanner {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 1em;
+        font-weight: bold;
+        height: 5em;
+        background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+        background-color: var(--colour-bg-standard-tint-2);
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+
+        .LocationButton {
+            width: auto;
+
+            .primaryText .link-text {
+                color: #{colours.get-static('colour-text-dark')};
+                color: var(--colour-text-dark);
+            }
+        }
+    }
+
     .MoreResultsButton {
         border-right: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
         border-right: 10px solid var(--colour-bg-standard-tint-2);

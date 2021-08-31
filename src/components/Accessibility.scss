@@ -5,7 +5,6 @@
     padding-left: 32px;
     color: #{colours.get-static('colour-text-dark')};
     color: var(--colour-text-dark);
-    font-weight: 500;
 
     .ColoredIcon {
         position: absolute;

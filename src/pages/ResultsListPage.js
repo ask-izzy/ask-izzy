@@ -11,7 +11,6 @@ import ResultsList from "../components/ResultsList";
 import LoadingResultsHeader from
     "../components/ResultsListPage/LoadingResultsHeader";
 import AlertBannerList from "../components/AlertBannerList";
-import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 import ButtonListItem from "../components/ButtonListItem";
@@ -20,6 +19,10 @@ import QuestionStepper from "./QuestionStepper";
 
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
+import SitesMap from "../components/SitesMap";
+import type {Service, Site} from "../iss";
+import GeolocationButton from "../components/GeolocationButton";
+import storage from "../storage";
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
@@ -30,9 +33,78 @@ class ResultsListPage extends ResultsPage<> {
         return <NotFoundStaticPage/>
     }
 
+    services(): Array<Service> {
+        if (!this.state.searchResults) {
+            return [];
+        }
+
+        return this.state.searchResults.filter(
+            service => !service.Location().isConfidential() &&
+                !service.crisis
+        );
+    }
+
+    get sites(): Array<Site> {
+        const sites = []
+        const siteIds = {}
+        for (const {site} of this.services()) {
+            const id = site.id.toString()
+            if (!siteIds[id]) {
+                sites.push(site)
+                siteIds[id] = true
+            }
+
+        }
+        return sites
+    }
+
+    get siteLocations(): Object {
+        const locations = {}
+        for (const service of this.services()) {
+            locations[service.site.id.toString()] = service.location
+        }
+        return locations
+    }
+
     hasSearchResults(): boolean {
         return !this.state.searchResults ||
             this.state.searchResults.length === 0
+    }
+
+    onGeoLocationSuccess(params: {coords: Coordinates, name: string}): void {
+        storage.setCoordinates(params.coords);
+        this.setState({
+            fetchedLocation: true,
+        })
+    }
+
+    getSpecificLocationBanner(): ReactElement<"div"> {
+        return <div className="specificLocationBanner">
+            {!this.state?.fetchedLocation &&
+            <div>
+                Want estimated travel times?
+            </div>
+            }
+            <GeolocationButton
+                onSuccess={
+                    this.onGeoLocationSuccess.bind(this)
+                }
+                restartSearch={
+                    !this.state?.fetchedLocation
+                }
+            />
+            {this.state?.fetchedLocation &&
+            <button onClick={() => {
+                storage.removeItem("coordinates")
+                this.setState({
+                    fetchedLocation: false,
+                })
+            }}
+            >
+                Clear
+            </button>
+            }
+        </div>
     }
 
     renderPage: (() => ReactElement<"div">) = () => (
@@ -93,11 +165,16 @@ class ResultsListPage extends ResultsPage<> {
                 </ScreenReader>
                 <div className="List results">
                     {this.hasSearchResults() ||
-                        <ViewOnMapButton
-                            to={this.context.router.location
-                                .pathname.replace(/\/?$/, "/map")
+                        <div>
+                            <SitesMap
+                                sites={this.sites}
+                                siteLocations={this.siteLocations}
+                            />
+                            {(!storage.getCoordinates() ||
+                                this.state?.fetchedLocation) &&
+                            this.getSpecificLocationBanner()
                             }
-                        />
+                        </div>
                     }
                     <ResultsList
                         results={this.state.searchResults || []}

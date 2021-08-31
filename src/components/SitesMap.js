@@ -1,30 +1,26 @@
 /* @flow */
 
+import type {Node as ReactNode} from "React";
 import * as React from "react";
 import {GoogleMap, Marker} from "@react-google-maps/api"
 
 import type {Site} from "../iss";
 import Maps from "../maps";
-import type {MapsApi} from "../maps";
 import storage from "../storage";
 import * as gtm from "../google-tag-manager";
-import routerContext from "../contexts/router-context";
 import {
     setMapView,
     markersShownOnLoad,
 } from "./SitesMap.service";
+import {useEffect, useState} from "react";
 
 type Props = {
-    sites: Array<Site>,
+    sites?: Array<Site>,
+    site? : Site,
     siteLocations: Object,
     onSiteSelect?: Function,
-    selectedSite?: ?Site
-}
-
-type State = {
-    coords?: ?{ latitude: number, longitude: number },
-    mapsApi: ?MapsApi,
-    map?: ?any,
+    selectedSite?: ?Site,
+    className?: string
 }
 
 type SiteMarker = {
@@ -33,150 +29,147 @@ type SiteMarker = {
     selected: boolean
 }
 
-export default class SitesMap extends React.Component<Props, State> {
+function SitesMap(
+    {
+        sites,
+        site,
+        siteLocations,
+        onSiteSelect,
+        selectedSite,
+        className,
+    }: Props): ReactNode {
 
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-            mapsApi: null,
-            maps: null,
-            map: null,
-        };
-    }
+    const [mapsApi, setMapsApi] = useState(null)
+    const [map, setMap] = useState(null)
 
-    static contextType: any = routerContext;
-
-    componentDidMount(): void {
-        this.setState({coords: storage.getCoordinates()});
-
-        Maps().then(
-            mapsApi => {
-                this.setState({mapsApi})
-            },
-        );
-    }
+    useEffect(() => {
+        Maps().then(mapsApi => setMapsApi(mapsApi))
+    }, [])
 
 
-    async componentDidUpdate(prevProps: Object, prevState: Object) {
-        if (
-            this.state.mapsApi && this.state.map &&
-            !this.sitesListMatch(this.props.sites, prevProps.sites)
-        ) {
-            setMapView(
-                markersShownOnLoad(this.markers),
-                this.state.map,
-                this.state.mapsApi,
-            );
+
+    useEffect(() => {
+        const setMap = async() => {
+            if (
+                mapsApi && map &&
+                !sites?.every((site, i) => site.id === sites?.[i].id)
+            ) {
+                setMapView(
+                    markersShownOnLoad(markers()),
+                    map,
+                    mapsApi,
+                );
+            }
         }
-    }
-
-    /**
-     * Given two arrays of sites, check if both contain the same sites in the
-     * same order
-     * @param sitesA - A list of sites to be compared
-     * @param sitesB - Another list of sites to be compared
-     *
-     * @returns True if they match, false if not
-     */
-    sitesListMatch(sitesA: Array<Site>, sitesB: Array<Site>): boolean {
-        if (sitesA.length !== sitesB.length) {
-            return false
+        if (sites) {
+            setMap()
         }
 
-        return sitesA.every((site, i) => site.id === sitesB[i].id)
-    }
+    }, [sites])
 
-
-    get markers(): Array<SiteMarker> {
-        return this.props.sites
-            .filter(site => {
-                if (this.props.siteLocations[site.id]?.point) {
-                    return true
-                }
-                console.warn(
-                    "SitesMap given a site without an associated location " +
+    const markers = (): Array<SiteMarker> => {
+        if (site) {
+            return [{
+                site: site,
+                point: siteLocations[site.id].point,
+                selected: site.id === selectedSite?.id,
+            }]
+        }
+        if (sites?.length) {
+            return sites?.filter(
+                site => {
+                    if (siteLocations[site.id]?.point) {
+                        return true
+                    }
+                    console.warn(
+                        "SitesMap given a site without an" +
+                        " associated location " +
                         "or lat/lon in the siteLocations prop:",
-                    site
-                )
-                return false
-            })
-            .map(site => ({
-                site,
-                point: this.props.siteLocations[site.id].point,
-                selected: site.id === this.props.selectedSite?.id,
-            }))
-    }
-
-
-    render(): React.Element<"div"> {
-        const { onSiteSelect } = this.props
-        function markerOnClickHandler(marker: SiteMarker) {
-            gtm.emit({
-                event: `Action Triggered - Map Marker`,
-                eventCat: "Action triggered",
-                eventAction: `Map marker`,
-                eventLabel: marker.site.id.toString(),
-                sendDirectlyToGA: true,
-            });
-            onSiteSelect?.(marker.site)
+                        site
+                    )
+                    return false
+                })
+                .map(site => ({
+                    site,
+                    point: siteLocations[site.id].point,
+                    selected: site.id === selectedSite?.id,
+                }))
         }
-        return (
-            <div className="SitesMap">
-                {this.state.mapsApi ?
-                    <GoogleMap
-                        onLoad={(map) => {
-                            this.setState({map})
-                            setMapView(
-                                markersShownOnLoad(this.markers),
-                                map,
-                                this.state.mapsApi,
-                            );
-                        }}
-
-                        mapContainerStyle={{height: "100%"}}
-                        options={{disableDefaultUI: true, zoomControl: true }}
-                        zoom={12}
-                        onClick={() => this.props.onSiteSelect?.(null)}
-                    >
-                        {this.state.coords ?
-                            <Marker
-                                title="You are here"
-                                icon={{
-                                    url: "/static/images/you-are-here.png",
-                                    scaledSize: {width: 32, height: 32},
-                                }}
-                                position={{
-                                    lat: this.state.coords.latitude,
-                                    lng: this.state.coords.longitude,
-                                }}
-                            />
-                            : null}
-                        {this.markers.map(marker =>
-                            <Marker
-                                key={marker.site.id.toString()}
-                                title={marker.site.name}
-                                position={{
-                                    lat: marker.point.lat,
-                                    lng: marker.point.lon,
-                                }}
-                                icon={{
-                                    url: marker.selected ?
-                                        "/static/images/map-marker-with-dot.png"
-                                        : "/static/images/map-marker.png",
-                                    scaledSize: {width: 27, height: 43},
-                                }}
-                                onClick={() => markerOnClickHandler(marker)}
-                            />)}
-                    </GoogleMap>
-                    : <div style={{
-                        textAlign: "center",
-                    }}>
-                        <h3>
-                            The map couldn't be loaded, please refresh the page
-                        </h3>
-                    </div>}
-            </div>
-        );
+        return []
     }
+
+    const markerOnClickHandler = (marker: SiteMarker) => {
+        gtm.emit({
+            event: `Action Triggered - Map Marker`,
+            eventCat: "Action triggered",
+            eventAction: `Map marker`,
+            eventLabel: marker.site.id.toString(),
+            sendDirectlyToGA: true,
+        });
+        onSiteSelect?.(marker.site)
+    }
+
+    return (
+        <div className={`SitesMap ${className || ""}`}>
+            {mapsApi ?
+                <GoogleMap
+                    onLoad={(map) => {
+                        setMap(map)
+                        setMapView(
+                            markersShownOnLoad(markers()),
+                            map,
+                            mapsApi,
+                        );
+                    }}
+
+                    mapContainerStyle={{height: "100%"}}
+                    options={{
+                        disableDefaultUI: true,
+                        zoomControl: true,
+                    }}
+                    zoom={12}
+                    onClick={() => onSiteSelect?.(null)}
+                >
+                    {storage.getCoordinates() ?
+                        <Marker
+                            title="You are here"
+                            icon={{
+                                url: "/static/images/you-are-here.png",
+                                scaledSize: {width: 32, height: 32},
+                            }}
+                            position={{
+                                lat: storage.getCoordinates()?.latitude,
+                                lng: storage.getCoordinates()?.longitude,
+                            }}
+                        />
+                        : null}
+                    {markers().map(marker =>
+                        <Marker
+                            key={marker.site.id.toString()}
+                            title={marker.site.name}
+                            position={{
+                                lat: marker.point.lat,
+                                lng: marker.point.lon,
+                            }}
+                            icon={{
+                                url: marker.selected ?
+                                    "/static/images/map-marker-with-dot.png"
+                                    : "/static/images/map-marker.png",
+                                scaledSize: {width: 27, height: 43},
+                            }}
+                            onClick={() => markerOnClickHandler(marker)}
+                        />)}
+                </GoogleMap>
+                : <div style={{
+                    textAlign: "center",
+                }}>
+                    <h3>
+                        The map couldn't be loaded, please refresh the page
+                    </h3>
+                </div>}
+        </div>
+    );
 }
+
+export default SitesMap
 
