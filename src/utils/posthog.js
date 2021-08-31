@@ -4,7 +4,7 @@ import posthog from "posthog-js";
 import * as React from "react"
 
 export const posthogShouldBeLoaded: boolean = typeof window !== "undefined" &&
-    window.POSTHOG_URL && window.POSTHOG_KEY
+    window.POSTHOG_URL && window.POSTHOG_KEY && !window.isTestEnv
 
 if (posthogShouldBeLoaded) {
     posthog.init(
