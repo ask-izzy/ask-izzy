@@ -70,6 +70,8 @@ module.exports = (function() {
         .then("the canonical meta is $URL", unpromisify(checkMetaCanonical))
         .then("I should see the alerts\n$table",
             unpromisify(seeTheAlerts))
+        .then("I should see the browser tab title of \"$STRING\"",
+            unpromisify(seeBrowserTitle))
     ;
 })();
 
@@ -410,6 +412,16 @@ async function scrollToElement(elementSelector: string): Promise<void> {
     return driver.executeScript(() =>
         document.querySelector(elementSelector).scrollIntoView()
     );
+}
+
+async function seeBrowserTitle(title: string): Promise<void> {
+    const browserTitle = await this.driver.getTitle()
+
+    assert.strictEqual(
+        title,
+        browserTitle,
+        "The actual title differs from the expected title."
+    )
 }
 
 async function seeTheAlerts(
