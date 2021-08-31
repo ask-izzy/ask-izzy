@@ -48,10 +48,6 @@ function renderPage(uri: string, path: string, params: Object): void {
             envPath={version ?
                 `/static/env-${version}.js` : "/static/env.js"
             }
-            requestInterceptorPath={version ?
-                `/static/scripts/request-interceptor-${version}.js`
-                : "/static/scripts/request-interceptor.js"
-            }
             siteName="Ask Izzy"
             description={
                 `Ask Izzy is a mobile website that connects` +

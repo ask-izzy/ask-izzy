@@ -3,7 +3,8 @@ ARG commonPackages='apt-transport-https \
     gettext \
     nginx \
     parallel \
-    wget'
+    wget \
+    rsync'
 
 FROM contyard.office.infoxchange.net.au/stretch-nodejs12:latest as test
 

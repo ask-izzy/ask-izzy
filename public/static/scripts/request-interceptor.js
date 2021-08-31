@@ -1,7 +1,7 @@
 /* $FlowIgnore */
-// The functions below intercepts xmlhttprequests, js loaded via scripts,
-// fetch requests and checks if the requests are being made to an external
-// domain. For the purpose of AskIzzy to be zero-rated for end users,
+// The functions below intercepts xmlhttp/fetch/sendBeacon requests + js
+// loaded via scripts and checks if the request is being made to an external
+// domain. For the purpose of Ask Izzy to be zero-rated for end users,
 // all known external services are proxied through Infoxchange servers.
 
 var zeroRatingHelper = new Object();
@@ -9,7 +9,6 @@ var zeroRatingHelper = new Object();
 zeroRatingHelper.isPhantomJS = window.navigator.userAgent.search('PhantomJS') != -1;
 
 // Common replace function: Replace known external domains to internal proxy
-// Domain lists are generated from generate-env-vars
 zeroRatingHelper.replaceDomain = function(oldUrl) {
     let url
     try {
@@ -134,3 +133,13 @@ window.fetch && (function(originalFetchFunction) {
         return originalFetchFunction.apply(null, arguments)
     };
 })(window.fetch);
+
+// 4. Replace domains for all sendBeacon requests
+window.navigator && window.navigator.sendBeacon && (function(originalSendBeaconFunction) {
+    window.navigator.sendBeacon = function() {
+        if (arguments[0]) {
+            arguments[0] = zeroRatingHelper.replaceDomain(arguments[0])
+        }
+        return originalSendBeaconFunction.apply(window.navigator, arguments)
+    };
+})(window.navigator.sendBeacon);

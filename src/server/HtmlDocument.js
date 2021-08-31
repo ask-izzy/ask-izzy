@@ -3,7 +3,9 @@
 import type {Element as ReactElement} from "React";
 import React from "react";
 import PropTypes from "proptypes";
-
+import fs from "fs-extra"
+import path from "path"
+import * as babel from "@babel/core";
 class HtmlDocument extends React.Component<Object, void> {
     static propTypes = {
         css: PropTypes.arrayOf(PropTypes.string),
@@ -16,15 +18,12 @@ class HtmlDocument extends React.Component<Object, void> {
         ogTitle: PropTypes.string,
         ogDescription: PropTypes.string,
         siteName: PropTypes.string,
-        envPath: PropTypes.string,
     };
 
     static defaultProps: any = {
         script: [],
         css: [],
         meta: {},
-        envPath: "/static/env.js",
-        requestInterceptorPath: "/static/scripts/request-interceptor.js",
     };
 
     render(): ReactElement<"html"> {
@@ -34,8 +33,6 @@ class HtmlDocument extends React.Component<Object, void> {
             css,
             description,
             siteName,
-            envPath,
-            requestInterceptorPath,
             helmet,
             ogTitle,
             ogDescription,
@@ -43,9 +40,47 @@ class HtmlDocument extends React.Component<Object, void> {
         const viewport =
             "width=device-width, initial-scale=1.0";
 
+
+        const envVarsPath = path.join(
+            __dirname,
+            "../env-vars.js"
+        )
+        const requestInterceptorPath = path.join(
+            __dirname,
+            "../../public/static/scripts/request-interceptor.js"
+        )
+        const newRelicPath = path.join(__dirname, "../new-relic.js")
+
+        const envVarsSource = fs.readFileSync(envVarsPath)
+        const requestInterceptorSource = babel
+            .transformFileSync(requestInterceptorPath).code
+        const newRelicSource = fs.readFileSync(newRelicPath)
+
         return (
             <html lang="en">
                 <head>
+                    <script
+                        type="text/javascript"
+                        dangerouslySetInnerHTML={
+                            {__html: envVarsSource}
+                        }
+                    />
+                    <script
+                        type="text/javascript"
+                        dangerouslySetInnerHTML={
+                            {__html: requestInterceptorSource}
+                        }
+                    />
+                    {/*
+                    New Relic script
+                    Config values are injected in at deploy time by
+                    script/inject-config-on-deploy.sh
+                    */}
+                    <script
+                        type="text/javascript"
+                        dangerouslySetInnerHTML={{__html: newRelicSource}}
+                    />
+
                     {this.renderRemoteReactDevtoolsScript()}
                     <meta
                         name="viewport"
@@ -226,10 +261,6 @@ class HtmlDocument extends React.Component<Object, void> {
                         name="msapplication-TileImage"
                         content="/static/favicons/mstile-144x144.png"
                     />
-
-                    <script src={envPath} />
-
-                    <script src={requestInterceptorPath} />
 
                 </head>
 

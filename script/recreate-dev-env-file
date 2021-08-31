@@ -14,4 +14,3 @@ if [ ! -f public/static/env.js ] ; then
     fi
 fi
 
-./script/generate-env-vars > public/static/env.js

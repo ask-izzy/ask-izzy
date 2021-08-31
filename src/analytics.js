@@ -1,5 +1,5 @@
 /* $FlowIgnore */
-/*eslint-disable */
+/* eslint-disable */
 import 'url-search-params-polyfill';
 
 document.addEventListener("DOMContentLoaded", function(event) {

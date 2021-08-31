@@ -47,7 +47,7 @@ export default function render(req, res, next) {
             return;
         }
 
-        const html = ReactDOMServer.renderToString(
+        let html = ReactDOMServer.renderToString(
             <HtmlDocument
                 markup={app}
                 script={webpackStats.script}
@@ -75,6 +75,48 @@ export default function render(req, res, next) {
                 }
             />
         );
+
+        // Note: The following behaviour should match the behaviour in
+        // inject-config-on-deploy.sh
+        const varsToInject = [
+            "VERSION",
+            "ISS_URL",
+            "GOOGLE_API_KEY",
+            "GOOGLE_ANALYTICS_URL",
+            "GOOGLE_TAG_MANAGER_ID",
+            "GOOGLE_TAG_MANAGER_AUTH",
+            "GOOGLE_TAG_MANAGER_ENV",
+            "PROXY_DOMAINS",
+            "PROXY_PROTOCOL",
+            "VERSION",
+            "STRAPI_URL",
+            "NEW_RELIC_CONFIG",
+            "NEW_RELIC_INFO",
+        ]
+
+        const requiredVars = [
+            "VERSION",
+            "ISS_URL",
+            "PROXY_DOMAINS",
+            "NEW_RELIC_CONFIG",
+            "NEW_RELIC_INFO",
+            "STRAPI_URL",
+        ]
+
+        for (const varToInject of varsToInject) {
+            if (
+                !process.env.hasOwnProperty(varToInject) &&
+                requiredVars.includes(varToInject)
+            ) {
+                throw new Error(
+                    `Required environment variable "${varToInject}" is not set`
+                )
+            }
+            html = html.replace(
+                new RegExp("\\${" + varToInject + "}", "g"),
+                process.env[varToInject] || ""
+            )
+        }
 
 
         const doctype = "<!DOCTYPE html>";
