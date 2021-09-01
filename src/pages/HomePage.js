@@ -15,6 +15,7 @@ import QuestionStepper from "./QuestionStepper";
 import Storage from "../storage";
 import AlertBannerList from "../components/AlertBannerList";
 import ScreenReader from "../components/ScreenReader";
+import Link from "../components/base/Link";
 
 
 const LOGO = "/static/images/ask-izzy-logo-single-line-yellow.svg";
@@ -77,8 +78,28 @@ function HomePage(): ReactNode {
                     </div>}
                     bannerName="homepage"
                     hideLogoWhenNotABar={true}
-                    taperColour="LighterGrey"
+                    taperColour="Purple"
                 />
+                <div className="siteBanner-warning">
+                    <h3>
+                        Welcome to the Ask Izzy Beta
+                    </h3>
+                    <p>
+                        This is where we are trying new features in Ask
+                        Izzy, so there may be bugs and incomplete areas.
+                        You should{" "}
+                        <Link to="/beta-info">read about our beta</Link>
+                        {" "}before using this version.
+                    </p>
+                    <p>
+                        <a href="https://askizzy.org.au">
+                            You can return to the 'regular' Ask Izzy here.
+                        </a>
+                    </p>
+                    <p>
+                        We welcome your feedback
+                    </p>
+                </div>
                 <AlertBannerList
                     screenLocation="homePage"
                 />
@@ -164,6 +185,10 @@ function HomePage(): ReactNode {
                     </span>
                 </ScreenReader>
                 <CategoriesList />
+                <div className="cantFindLookingFor">
+                    Can't find what you're looking for? Return to{" "}
+                    <Link to="https://askizzy.org.au">AskIzzy.org.au</Link>
+                </div>
             </main>
 
             <BrandedFooter />
