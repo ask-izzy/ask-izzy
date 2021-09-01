@@ -1,21 +1,17 @@
 @use '../styles/mixins/colours';
 
 .ResultsList {
-    .resultContainer:first-child {
-        border-top: 0;
-    }
+    margin: 0;
+    padding-left: 0;
 
-    .resultContainer-ResultListItem {
+    > * {
+        padding: 1em 1em 2em;
         border-top: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
         border-top: 10px solid var(--colour-bg-standard-tint-2);
-    }
+        list-style-type: none;
 
-    @media ($tablet) {
-        .resultContainer-CrisisLineItem {
-            display: inline-block;
-            width: 48%; // two columns
-            // when next to a taller element, align the tops
-            vertical-align: top;
+        &:first-child {
+            border-top: 0;
         }
     }
 }

@@ -8,21 +8,10 @@ import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import iss from "../iss";
 
-import DebugContainer from "./DebugContainer";
-import DebugQueryScore from "./DebugQueryScore";
-import DebugServiceRecord from "./DebugServiceRecord";
-
 import Eligibility from "./Eligibility";
-import ServiceProvisions from "./service/ServiceProvisions"
-import Accessibility from "./Accessibility";
 import OpeningTimes from "./OpeningTimes";
 import Ndis from "./Ndis";
-import TransportTime from "./TransportTime";
-import IndigenousServiceIcon from "./IndigenousServiceIcon";
-import LgbtiqIcon from "./LgbtiqIcon";
 import { titleize } from "underscore.string";
-import ScreenReader from "./ScreenReader";
-import ListItem from "./ListItem";
 import Link from "./base/Link";
 
 class ResultListItem extends React.Component<{
@@ -66,11 +55,12 @@ class ResultListItem extends React.Component<{
         } = this.props;
 
         return (
-            <ListItem
-                className="plain-text ResultListItem"
+            <div className="result supportService ResultListItem"
+                key={service.id}
             >
-                <div className="name">
+                <h3 className="name">
                     <Link
+                        className="title"
                         to={`/service/${service.slug}`}
                         analyticsEvent={{
                             event: `Link Followed - Service Result`,
@@ -79,57 +69,37 @@ class ResultListItem extends React.Component<{
                                 `${this.props.resultNumber}`,
                         }}
                     >
-                        <h2 aria-label={`${service.name}.`}>
-                            {service.name}
-                        </h2>
+                        {service.name}
                     </Link>
-                    <div className="flags">
-                        <IndigenousServiceIcon object={service} />
-                        <LgbtiqIcon object={service} />
-                    </div>
-                </div>
-                <div
-                    className="site_name"
-                    aria-label={`${service.site.name}.`}
-                >
+                </h3>
+                <h4 className="site_name">
                     {service.site.name}
                     <Ndis
                         className="ndis"
                         compact={true}
                         object={service}
                     />
-                </div>
-                {this.renderLocation(service.Location())}
+                </h4>
                 <OpeningTimes
                     className="opening_hours"
                     object={service.open}
-                />
-                <ServiceProvisions
-                    service={service}
+                    compact={true}
                 />
                 <div className="description">
                     {service.shortDescription.map(
-                        (sentence, i) =>
-                            <p key={i}>{sentence}</p>
+                        (sentence, idx) =>
+                            <p key={idx}>{sentence}</p>
                     )}
                 </div>
                 <Eligibility {...service} />
-                <Accessibility service={service} />
-                <ScreenReader>
-                    Travel times.
-                </ScreenReader>
-                <TransportTime
-                    compact={true}
-                    location={service.Location()}
-                />
+                <Link
+                    className="learnMore"
+                    to={`/service/${service.slug}`}
+                >
+                    Learn More
+                </Link>
+            </div>
 
-                <DebugServiceRecord object={service} />
-                {service._explanation &&
-                    <DebugContainer message="Query score">
-                        <DebugQueryScore expl={service._explanation} />
-                    </DebugContainer>
-                }
-            </ListItem>
         );
     }
 }

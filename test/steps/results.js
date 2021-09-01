@@ -65,6 +65,9 @@ async function seeTheResultsIn(
             ).map(getText)
         );
 
+        // remove actual empty lines
+        expected = expected.filter(text => text);
+
         // replace '(nada)' with an empty string (to represent
         // an empty line)
         expected = expected.map(text => text === "(nada)" ? "" : text);

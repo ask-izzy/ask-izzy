@@ -1,98 +1,36 @@
 @use '../styles/mixins/colours';
 
 .ResultListItem {
-    font-size: 14px;
-    font-weight: 400;
-
-    .name {
-        display: block;
-        margin-top: 5px;
-
-        h2 {
-            display: inline-block;
-            margin: 0 0.5em 0 0;
-            font-size: 18px;
+    .title {
+        h3 {
+            margin: 0.5em 0 0.2em;
+            font-size: 1.3em;
             font-weight: 500;
-            text-decoration: underline;
-
-            &:hover {
-                text-decoration: none;
-            }
         }
+    }
 
-        .flags {
-            display: inline-block;
-            margin-bottom: 2px;
-            vertical-align: middle;
-        }
+    h4 {
+        margin: 0.2em 0 1em;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .body {
+        margin: 1em 0;
     }
 
     .Eligibility {
-        padding-right: 0;
-        padding-left: 0;
-    }
+        margin-bottom: 1em;
 
-    .location {
-        position: relative;
-        right: 6px;
-        bottom: 2px;
-        color: #{colours.get-static('colour-text-dark')};
-        color: var(--colour-text-dark);
-        font-weight: 500;
-    }
-
-    p {
-        color: #{colours.get-static('colour-text-dark')};
-        color: var(--colour-text-dark);
+        h3 {
+            font-size: 1em;
+            font-weight: 500;
+        }
     }
 
     li {
-        color: #{colours.get-static('colour-text-dark')};
-        color: var(--colour-text-dark);
-    }
-
-    .MapIcon {
-        position: relative;
-        top: 7px;
-        left: 0;
-        width: 25px;
-        height: 25px;
-        margin: 0;
-    }
-
-    .site_name {
-        margin-bottom: 15px;
-        color: #{colours.get-static('colour-text-mid')};
-        color: var(--colour-text-mid);
-    }
-
-    .Accessibility {
-        margin-bottom: 15px;
-        color: #{colours.get-static('colour-text-mid')};
-        color: var(--colour-text-mid);
-
-        .ColoredIcon {
-            top: 0;
-            left: 0;
-            width: 20px;
-            height: 20px;
-        }
-    }
-
-    .OpeningTimes {
-        margin-bottom: 15px;
-
-        .until,
-        .open {
-            color: #{colours.get-static('colour-text-mid')};
-            color: var(--colour-text-mid);
-        }
-
-        .ColoredIcon {
-            top: 0;
-            left: -2px;
-            width: 20px;
-            height: 20px;
-        }
+        list-style-type: disc;
     }
 }

@@ -16,7 +16,7 @@ Feature: See results on a map
         Given I need the following for food: Finding a free meal nearby
          And my location is 37.822S 144.99E
         When I visit /food-and-everyday-things
-        And I click on "See more results"
+        And I click on "Load more results…"
         And I wait for 10 results to load
         Then I should see the results
         ---------------------

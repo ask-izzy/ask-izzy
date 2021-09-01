@@ -15,40 +15,20 @@ Feature: Category page
 
     Scenario: Visit the rent category
         When I visit /rent-and-tenancy
-        Then I should see "Showing rent and tenancy help services"
+        Then I should see "Rent and tenancy help"
         And I should see "Melbourne, VIC"
         And I should see the results
         ------------------------------------------------------------------------------------------
-        Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)
+        Service Name (name)          | Site Name (site_name) | Eligibility (eligibility ul)
         ==========================================================================================
-        Housing Service              | My Housing Service    | (nada)
-        Transitional Housing Service | My Housing Service    | Transitional accommodation
-        Emergency Accom              | Youth Support Net     | (nada)
-        Womens Refuge                | Susan's House         | Crisis accommodation
+        Housing Service              | My Housing Service    | Located in Carlton
+        Transitional Housing Service | My Housing Service    |
+        Emergency Accom              | Youth Support Net     |
+        Womens Refuge                | Susan's House         |
         ------------------------------------------------------------------------------------------
 
         # The rent category has 3 results
-        And I should not see "See more results"
-
-    Scenario: A service with 5 service provisions only shows 4
-       Given A service with:
-        ----------------------------------------------
-        description: "Lunch, Advice, Support services, referrals for housing, referrals for mental health"
-        ----------------------------------------------
-        When I search for the service
-
-        Then I should see the results
-        ------------------------------
-        Service Provisions (provision.aboveFold)
-        ==============================
-        Lunch
-        Advice
-        Support services
-        Housing referrals
-        ------------------------------
-
-        And I should not see "Mental health referrals"
-        And I should see "1 more…"
+        And I should not see "Load more results…"
 
     Scenario: I should never see "invalid date"
         When I visit /rent-and-tenancy
@@ -57,9 +37,9 @@ Feature: Category page
     Scenario: Visit a category with more than 5 services
         Given I need the following for food: Finding a free meal nearby
         When I visit /food-and-everyday-things
-        Then I should see "See more results"
+        Then I should see "Load more results…"
 
-        When I click on "See more results"
+        When I click on "Load more results…"
          And I wait for 10 results to load
         Then I should see the results
         --------------------
