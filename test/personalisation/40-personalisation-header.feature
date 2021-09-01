@@ -11,11 +11,10 @@ Feature: Personalisation header
 
     Scenario: Search for housing
         When I visit /
-        And I click on "Housing"
+        And I click on "A place to stay"
         Then I should see "I'm looking for help for"
 
         When I click on the done button # Intro page
-         And I click on the done button # Somewhere safe to sleep
          And I click on the done button # Gender
          And I click on "27 to 39"
          And I click on the done button # Demographics

@@ -16,18 +16,14 @@ Feature: History navigation
         Given a fresh session
         And my location is "Melbourne, VIC"
         And I am not part of any relevant demographics
-        And I am not interested in any subcategory
 
         When I visit /
-        And I click on "Housing"
+        And I click on "A place to stay"
 
         Then I should see "I'm looking for help for"
-        And I should be at /housing/personalise
+        And I should be at /accommodation/personalise
 
         When I click on the done button # Intro
-
-        Then I should see "Do you have somewhere safe to sleep tonight?"
-        When I click on "Yes" # somewhere to sleep tonight
 
         Then I should see "Do you identify as…"
 
@@ -42,9 +38,9 @@ Feature: History navigation
 
         When I click on "18 to 26"
 
-        Then I should see "Melbourne, VIC | Safe tonight | Men | 18-26"
-        And I should see "Showing housing services"
-        And I should be at /housing/Melbourne-VIC/
+        Then I should see "Melbourne, VIC | Men | 18-26"
+        And I should see "Showing a place to stay services"
+        And I should be at /accommodation/Melbourne-VIC/
         And I should see the results
         ------------------------------------------------------------------------------------------
         Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)
@@ -62,9 +58,9 @@ Feature: History navigation
         When I reload the page
         And I click back from the browser UI
 
-        Then I should be at /housing/Melbourne-VIC/
+        Then I should be at /accommodation/Melbourne-VIC/
 
-        And I should see "Melbourne, VIC | Safe tonight | Men | 18-26"
+        And I should see "Melbourne, VIC | Men | 18-26"
 
         When I click back from the browser UI
         Then I should see "How old are you?"

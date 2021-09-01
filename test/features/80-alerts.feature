@@ -12,8 +12,7 @@ Feature: Alerts
 
     Scenario: Alerts with a body can be expanded
         Given my location is "Melbourne, VIC"
-        And I need nothing for everyday-things
-        When I visit /everyday-things
+        When I visit /rent-and-tenancy
         Then I should see "COVID19 affecting services"
         And I should not see "Services listed here may not be operating or limited. Contact services directly for up-to-date information."
 
@@ -22,8 +21,7 @@ Feature: Alerts
 
     Scenario: Alerts defaultToOpen are initially open
         Given my location is "Melbourne, VIC"
-        And I need nothing for everyday-things
-        When I visit /everyday-things
+        When I visit /rent-and-tenancy
         Then I should see "Title is always shown"
         And I should see "Body is open by default"
 
@@ -41,7 +39,7 @@ Feature: Alerts
         And I am 27 years old
         And I am not part of any relevant demographics
         And I am not interested in any subcategory
-        When I visit /housing
+        When I visit /accommodation
         Then I should see the alerts
         -------------------------------------------
         Title               | Body
