@@ -18,7 +18,7 @@ import ScreenReader from "../components/ScreenReader";
 import Link from "../components/base/Link";
 
 
-const LOGO = "/static/images/ask-izzy-logo-single-line-yellow.svg";
+const LOGO = "/static/images/askizzy-logo.png";
 
 function HomePage(): ReactNode {
 
