@@ -113,4 +113,18 @@
             }
         }
     }
+
+    .cantFindLookingFor {
+        padding: 1.5em;
+        background-color: #{colours.get-static('colour-bg-highlight')};
+        background-color: var(--colour-bg-highlight);
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
+        text-align: center;
+
+        a {
+            color: #{colours.get-static('colour-text-very-light')};
+            color: var(--colour-text-very-light);
+        }
+    }
 }
