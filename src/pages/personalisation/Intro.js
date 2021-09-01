@@ -28,7 +28,7 @@ class Intro extends Personalisation<Props, State> {
         name: "intro",
     };
 
-    static title: string = "Intro";
+    static title: string = "Help Seeker";
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         return request;
