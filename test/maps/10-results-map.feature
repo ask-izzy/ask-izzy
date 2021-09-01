@@ -6,7 +6,6 @@ Feature: See results on a map
 
     Background:
         Given my location is "Melbourne, Vic"
-        And I have somewhere to sleep tonight
         And I need nothing for housing
         And my gender is female
         And I am 27 years old
@@ -15,7 +14,7 @@ Feature: See results on a map
     Scenario: View results on a map
        Given I am not interested in any subcategory
          And my location is 37.822S 144.99E
-        When I visit /everyday-things
+        When I visit /food-and-everyday-things
         And I click on "See more results"
         And I wait for 10 results to load
         Then I should see the results
@@ -62,7 +61,7 @@ Feature: See results on a map
         ---------------------
 
     Scenario: Clicking a marker shows services at that site and clicking on map returns to full map
-        When I visit /housing
+        When I visit /rent-and-tenancy
 
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
@@ -80,7 +79,7 @@ Feature: See results on a map
         Then I should not see "Housing Service"
 
     Scenario: Clicking a marker shows services at that site and clicking back returns the results page
-        When I visit /housing
+        When I visit /rent-and-tenancy
 
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
@@ -89,4 +88,4 @@ Feature: See results on a map
         Then I should see "Housing Service"
 
         When I click back from the browser UI
-        Then I should be at /housing
+        Then I should be at /rent-and-tenancy

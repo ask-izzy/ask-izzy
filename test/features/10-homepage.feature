@@ -11,20 +11,11 @@ Feature: Landing page
         And I should see the search bar
         And I should see the list of categories
         ---------------
-        Housing
-        Food
-        Everyday things
-        Health
-        Centrelink
+        Rent and tenancy help
+        A place to stay
         Money help
-        Support & counselling
-        Legal
-        Drugs & alcohol
-        Life skills & education
-        Finding work
-        Facilities
-        Something to do
-        Technology
-        Advocacy
+        Food and everyday things
+        Mental health & wellbeing
+        Jobs, training and skills development
         ---------------
         And I should see the branding footer

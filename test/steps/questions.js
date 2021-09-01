@@ -18,8 +18,6 @@ import { gotoUrl } from "../support/webdriver";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
-        .given("I have (somewhere|nowhere) to sleep tonight",
-            unpromisify(setSleepTonight))
         .given("I need nothing for $STRING",
             unpromisify(setSubcategoryItemsNone))
         .given("I need the following for $STRING\n$lines",
@@ -52,21 +50,6 @@ async function clickDoneButton(): Promise<void> {
     });
 
     await documentReady(this.driver);
-}
-
-async function setSleepTonight(answer: string): Promise<void> {
-    if (answer === "somewhere") {
-        answer = "Yes";
-    } else if (answer === "nowhere") {
-        answer = "No";
-    } else {
-        throw new Error(`Expected ${answer} to be Yes or No`);
-    }
-
-    await gotoUrl(this.driver, "/"); // go anywhere to start the session
-    await this.driver.executeScript(answer => {
-        IzzyStorage.setItem("sleep-tonight", answer);
-    }, answer);
 }
 
 async function setStorageValue(

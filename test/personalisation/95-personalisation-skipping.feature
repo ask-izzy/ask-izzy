@@ -7,12 +7,11 @@ Feature: Skip personalisation settings
 
     Background:
         Given my location is "Melbourne, Vic"
-        And I have somewhere to sleep tonight
         And I am not part of any relevant demographics
         And I visit /
 
     Scenario: Skip personalisation settings which were already answered
-        When I click on "Housing"
+        When I click on "A place to stay"
         Then I should see "I'm looking for help for"
         When I click on the done button # Intro
         Then I should see "Do you identify as…"
@@ -28,7 +27,6 @@ Feature: Skip personalisation settings
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
         Where are you looking for help?              | Melbourne, Vic
-        Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | (skipped)
         How old are you?                             | (skipped)
         Do any of these apply to you?                | None selected

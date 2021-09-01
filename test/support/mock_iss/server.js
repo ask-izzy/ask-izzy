@@ -147,7 +147,7 @@ app.get("/api/v3/search/", (req, res) => {
             },
             objects: searchMocks[req.query.q],
         });
-    } else if (req.query.q.match(/food/) && !req.query.q.match(/pet/)) {
+    } else if (req.query.q.match(/^food$/)) {
         res.json({
             meta: {
                 total_count: 4,

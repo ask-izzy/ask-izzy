@@ -29,7 +29,7 @@ class Personalisation<
 
     get bannerName(): string {
         return (this.props.name === "sub-indigenous" && "atsi") ||
-            this.props.category?.key || "homepage";
+            this.props.category?.bannerImage || "homepage";
     }
 }
 

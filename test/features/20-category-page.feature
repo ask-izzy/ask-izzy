@@ -13,10 +13,10 @@ Feature: Category page
         And I am not part of any relevant demographics
         And I am not interested in any subcategory
 
-    Scenario: Visit housing category
-        When I visit /housing
-        Then I should see "Showing housing services"
-        And I should see "Melbourne, VIC | Safe tonight | Women | 18-26"
+    Scenario: Visit the rent category
+        When I visit /rent-and-tenancy
+        Then I should see "Showing rent and tenancy help services"
+        And I should see "Melbourne, VIC"
         And I should see the results
         ------------------------------------------------------------------------------------------
         Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)
@@ -27,7 +27,7 @@ Feature: Category page
         Womens Refuge                | Susan's House         | Crisis accommodation
         ------------------------------------------------------------------------------------------
 
-        # The housing category has 3 results
+        # The rent category has 3 results
         And I should not see "See more results"
 
     Scenario: A service with 5 service provisions only shows 4
@@ -51,11 +51,12 @@ Feature: Category page
         And I should see "1 more…"
 
     Scenario: I should never see "invalid date"
-        When I visit /housing
+        When I visit /rent-and-tenancy
         Then I should not see "Invalid date"
 
     Scenario: Visit a category with more than 5 services
-        When I visit /everyday-things
+        Given I need the following for food: Finding a free meal nearby
+        When I visit /food-and-everyday-things
         Then I should see "See more results"
 
         When I click on "See more results"

@@ -12,7 +12,7 @@ Feature: Personalisation
 
     Scenario: Search for housing with personalised results
         Given control of geolocation
-        When I click on "Housing"
+        When I click on "A place to stay"
         Then I should see "I'm looking for help for"
 
         When I click on the done button
@@ -24,9 +24,6 @@ Feature: Personalisation
         And search box should contain "Richmond, VIC"
 
         When I click on the done button
-        Then I should see "Do you have somewhere safe to sleep tonight?"
-
-        When I click on "Yes"
         Then I should see "Do you identify as…"
 
         When I click on the done button # Didn't answer the question
@@ -36,14 +33,14 @@ Feature: Personalisation
         Then I should see "Do any of these apply to you?"
 
         When I click on the done button
-        Then I should see "Richmond, VIC | Safe tonight | 18-26"
+        Then I should see "Richmond, VIC | 18-26"
 
         When I click back from the title bar
         Then I should be at /
 
     Scenario: Search for emergency accommodation
         Given control of geolocation
-        When I click on "Housing"
+        When I click on "A place to stay"
         Then I should see "I'm looking for help for"
 
         When I click on the done button
@@ -56,9 +53,6 @@ Feature: Personalisation
         And search box should contain "Richmond, VIC"
 
         When I click on the done button
-        Then I should see "Do you have somewhere safe to sleep tonight?"
-
-        When I click on "No"
         Then I should see "Do you identify as…"
 
         When I click on "Female"
@@ -68,7 +62,7 @@ Feature: Personalisation
         Then I should see "Do any of these apply to you?"
 
         When I click on the done button
-        Then I should see "Showing housing services"
+        Then I should see "Showing a place to stay services"
 
     Scenario: Do a search
         Given control of geolocation
@@ -86,16 +80,3 @@ Feature: Personalisation
 
         When I click on the done button
         Then I should see "Richmond, VIC"
-
-    Scenario: Searching for domestic violence checks that I'm safe
-        When I click on "Domestic & family violence help"
-        Then I should see "I'm looking for help for"
-
-        When I click on the done button
-        Then I should see "Are you safe right now?"
-
-        When I click on "No"
-        Then I should see "Everyone has the right to be safe."
-
-        When I click back from the browser UI
-        Then I should see "I'm looking for help for"
