@@ -95,6 +95,7 @@ $lightness-button-hover: 10%;
         'global',
         colours.lighten('raw-colour-pure-white', 'global', -13%)
     );
+    @include colours.define('colour-spacer', 'global', 'raw-colour-warm-gray');
 
 
     /* Elements */

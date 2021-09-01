@@ -81,7 +81,7 @@ Feature: Personalisation
         Then I should see "Do any of these apply to you?"
 
         When I click on the done button
-        Then I should see "Showing a place to stay services"
+        Then I should see "A place to stay"
 
     Scenario: Do a search
         Given control of geolocation

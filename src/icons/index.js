@@ -32,6 +32,7 @@ import SvgIconDemographicPets from "./DemographicPets";
 import SvgIconDemographicRecentlyArrived from "./DemographicRecentlyArrived";
 import SvgIconDemographicTorresStrait from "./DemographicTorresStrait";
 import SvgIconDemographicVeteran from "./DemographicVeteran";
+import SvgIconDownArrow from "./DownArrow";
 import SvgIconEmail from "./Email";
 import SvgIconEntertainment from "./Entertainment";
 import SvgIconEscapeViolence from "./EscapeViolence";
@@ -116,6 +117,7 @@ export default {
     DemographicRecentlyArrived: SvgIconDemographicRecentlyArrived,
     DemographicTorresStrait: SvgIconDemographicTorresStrait,
     DemographicVeteran: SvgIconDemographicVeteran,
+    DownArrow: SvgIconDownArrow,
     Email: SvgIconEmail,
     Entertainment: SvgIconEntertainment,
     EscapeViolence: SvgIconEscapeViolence,

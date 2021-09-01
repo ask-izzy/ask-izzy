@@ -58,6 +58,7 @@ import SitesMap from "./components/SitesMap";
 import Spacer from "./components/Spacer";
 import StrapiMarkdown from "./components/StrapiMarkdown";
 import SvgIcon from "./components/SvgIcon";
+import Switch from "./components/Switch";
 import TransportTime from "./components/TransportTime";
 import ViewOnMapButton from "./components/ViewOnMapButton";
 import Web from "./components/Web";
@@ -120,6 +121,7 @@ export default {
     Spacer,
     StrapiMarkdown,
     SvgIcon,
+    Switch,
     TransportTime,
     ViewOnMapButton,
     Web,

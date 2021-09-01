@@ -41,16 +41,16 @@ Feature: History navigation
         When I click on "18 to 26"
 
         Then I should see "Help finding a place to live long term | Melbourne, VIC | Men | 18-26"
-        And I should see "Showing a place to stay services"
+        And I should see "A place to stay"
         And I should be at /accommodation/Melbourne-VIC/
         And I should see the results
         ------------------------------------------------------------------------------------------
-        Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)
+        Service Name (name)          | Site Name (site_name) | Eligibility (eligibility ul)
         ==========================================================================================
-        Housing Service              | My Housing Service    | (nada)
-        Transitional Housing Service | My Housing Service    | Transitional accommodation
-        Emergency Accom              | Youth Support Net     | (nada)
-        Womens Refuge                | Susan's House         | Crisis accommodation
+        Housing Service              | My Housing Service    | Located in Carlton
+        Transitional Housing Service | My Housing Service    |
+        Emergency Accom              | Youth Support Net     |
+        Womens Refuge                | Susan's House         |
         ------------------------------------------------------------------------------------------
 
         When I click on "Housing Service"
