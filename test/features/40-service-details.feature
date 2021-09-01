@@ -136,16 +136,6 @@ Feature: Service details page
         Then I should see "Confidential location"
         And I should not see "Get directions"
 
-    Scenario: Walking times are present if the distance is less than 5km
-       Given my location is "Melbourne, VIC"
-        When I visit /service/866464
-        Then I should be able to travel there "39 mins walk."
-
-    Scenario: Walking times is absent if the distance is greater than or equal to 5km
-       Given my location is "Melbourne, VIC"
-        When I visit /service/2371381
-        Then I should not be able to travel there "39 mins walk."
-
     Scenario: The contact methods are available except fax and tty
        Given A service with:
         ----------------------------------------------
