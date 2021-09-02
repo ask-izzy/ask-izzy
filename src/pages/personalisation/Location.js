@@ -250,8 +250,8 @@ class Location extends Personalisation<Props, State> {
                         "Where are you looking for help?"
                     }
                     secondaryText={
-                        "This will help find services closest to your chosen " +
-                        "location."
+                        "You don't have to answer, but this helps us give " +
+                        "you better results"
                     }
                     taperColour={"Grey"}
                     fixedAppBar={true}

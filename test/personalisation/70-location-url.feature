@@ -13,7 +13,7 @@ Feature: Show location in url
         Then I should see "Richmond, VIC"
         When I click on "See all and edit"
         And I click on "Where are you looking for help?"
-        Then I should see "This will help find services closest to your chosen location."
+        Then I should see "You don't have to answer, but this helps us give you better results"
         When I search for "carlt"
         And I click on "Carlton"
         And I click on the done button
