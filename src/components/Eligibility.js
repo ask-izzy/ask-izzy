@@ -34,7 +34,7 @@ class Eligibility extends React.Component<Props, void> {
             eligibleMarkup = (
                 <div className="eligibility">
                     <h2 aria-label="Eligibility.">
-                        Eligibility
+                        To use this service you should be
                     </h2>
                     <ul>
                         {eligibleItems}
