@@ -20,9 +20,7 @@ class BaseMultiQuestion extends BaseQuestion {
     static propTypes = BaseQuestion.propTypes;
 
     renderDoneButton(): React.Element<any> {
-        const label = (this.selected.size) ?
-            "Done"
-            : "None of these";
+        const label = (this.selected.size) ? "Done" : "Skip";
 
         return (
             <div className="done-button">
