@@ -7,6 +7,14 @@
 }
 
 .Location {
+    background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+    background-color: var(--colour-bg-standard-tint-2);
+
+    .QuestionStepper.QuestionFlow {
+        background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+        background-color: var(--colour-bg-standard-tint-2);
+    }
+
     .search {
         position: relative;
 

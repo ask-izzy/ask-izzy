@@ -253,8 +253,7 @@ class Location extends Personalisation<Props, State> {
                         "This will help find services closest to your chosen " +
                         "location."
                     }
-                    taperColour={this.state.showStepper ? "LighterGrey"
-                        : "HeaderBar"}
+                    taperColour={"Grey"}
                     fixedAppBar={true}
                     bannerName={this.bannerName}
                     {...this.props.backToAnswers && {
