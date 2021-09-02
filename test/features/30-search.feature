@@ -40,7 +40,7 @@ Feature: Search
         ---------------------------------------------------------
         Sorry, I couldn't find any results for “zero results”.
         ---------------------------------------------------------
-        And I should not see "View on a map"
+        And I should not see "View results on map"
 
     Scenario: Search returning an error returns a nice sentence
         When I search for "cause error" and press enter
