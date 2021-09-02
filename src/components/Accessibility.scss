@@ -2,16 +2,28 @@
 
 .Accessibility {
     position: relative;
-    padding-left: 32px;
     color: #{colours.get-static('colour-text-dark')};
     color: var(--colour-text-dark);
     font-weight: 500;
+    font-size: 16px;
+
+    > span {
+        display: inline-block;
+        vertical-align: middle;
+
+        svg {
+            margin-left: -2px;
+            margin-right: 6px;
+            vertical-align: text-bottom;
+        }
+    }
 
     .ColoredIcon {
-        position: absolute;
-        top: 5px;
-        left: -4px;
         width: 30px;
         height: 30px;
+    }
+
+    .ResultListItem & {
+        font-size: 14px;
     }
 }

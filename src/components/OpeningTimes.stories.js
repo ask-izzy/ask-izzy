@@ -30,6 +30,15 @@ addTimesToStory(CurrentlyOpen, [
     },
 ])
 
+export const CurrentlyOpenCompact: typeof Template = Template.bind({});
+addTimesToStory(CurrentlyOpenCompact, [
+    {
+        day: "Wednesday",
+        open: "10:30:00",
+        close: "15:00:00",
+    },
+], true)
+
 export const OpenForDays: typeof Template = Template.bind({});
 addTimesToStory(OpenForDays, [
     {
@@ -97,16 +106,16 @@ addTimesToStory(UnsureIfOpen, [
         close: "15:00:00",
         note: "Every second Wednesday",
     },
-], undefined, null);
+], undefined, undefined, null);
 
 export const ClosedWithNoData: typeof Template = Template.bind({});
-addTimesToStory(ClosedWithNoData, [], undefined, false);
+addTimesToStory(ClosedWithNoData, [], undefined, undefined, false);
 
 export const OpenWithNoData: typeof Template = Template.bind({});
-addTimesToStory(OpenWithNoData, [], undefined, true);
+addTimesToStory(OpenWithNoData, [], undefined, undefined, true);
 
 export const UnsureWithNoData: typeof Template = Template.bind({});
-addTimesToStory(UnsureWithNoData, [], undefined, null);
+addTimesToStory(UnsureWithNoData, [], undefined, undefined, null);
 
 export const InvalidTimes: typeof Template = Template.bind({});
 addTimesToStory(InvalidTimes, [
@@ -145,6 +154,7 @@ export function mockedTimeDecorator(
 export function addTimesToStory(
     Story: Object,
     times: Array<issOpeningHours>,
+    compact?: ?boolean,
     currentTime: ?Moment,
     currentlyOpen: ?boolean
 ) {
@@ -157,6 +167,7 @@ export function addTimesToStory(
             mockedCurrentTime,
             currentlyOpen
         ),
+        ...(typeof compact !== "undefined" ? {compact} : {}),
     };
     Story.parameters = {
         context: {

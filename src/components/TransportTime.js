@@ -14,7 +14,7 @@ import GoogleMapsLink from "./GoogleMapsLink";
 
 class TransportTime extends React.Component<{
     location: Location,
-    compact?: true,
+    compact?: Boolean,
     // If this component is already wrapped in a <GoogleMapsLink /> then
     // including it again will create invalid HTML. We should probably
     // rethink the design such that this doesn't happen but for now this
@@ -143,10 +143,12 @@ class TransportTime extends React.Component<{
                     aria-label={this.formatAriaLabel(travel)}
                 >
                     {icon}
-                    <time dateTime={arrivalTime.toISOString()}>
-                        {this.getTravelText(travel)}
-                    </time>
-                    {method}
+                    <span>
+                        <time dateTime={arrivalTime.toISOString()}>
+                            {this.getTravelText(travel)}
+                        </time>
+                        {method}
+                    </span>
                 </div>
             );
 

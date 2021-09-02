@@ -20,31 +20,6 @@
         }
     }
 
-    &.taller {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        font-size: 18px;
-
-        .leftIcon {
-            top: 15px;
-        }
-    }
-
-    &.hero {
-        & > div {
-            & > .label {
-                padding-top: 11px;
-                padding-bottom: 11px;
-            }
-
-            & > .label > .primaryText {
-                font-size: 18px;
-                font-weight: 500;
-                line-height: 18px;
-            }
-        }
-    }
-
     &:not(.has-left-icon) {
         padding-left: 16px;
     }
@@ -53,12 +28,12 @@
         padding-right: 16px;
     }
 
-    & > div {
+    > div {
         display: flex;
         align-items: center;
         min-height: 56px;
 
-        & > .leftIcon {
+        > .leftIcon {
             display: flex;
             justify-content: center;
             min-width: 58px;
@@ -69,13 +44,13 @@
             }
         }
 
-        & > .label {
+        > .label {
             flex: 1;
             min-width: 0; /* needed for force flex to collapse this if content is wider than the current space */
             padding-top: 16px;
             padding-bottom: 16px;
 
-            & > .primaryText {
+            > .primaryText {
                 color: #{colours.get-static('colour-text-dark')};
                 color: var(--colour-text-dark);
                 font-size: 16px;
@@ -91,7 +66,7 @@
                 }
             }
 
-            & > .secondaryText {
+            > .secondaryText {
                 color: #{colours.get-static('colour-text-mid')};
                 color: var(--colour-text-mid);
                 font-size: 14px;
@@ -102,7 +77,7 @@
             }
         }
 
-        & > .rightIcon {
+        > .rightIcon {
             display: flex;
             justify-content: center;
             min-width: 35px;
@@ -113,6 +88,37 @@
                 top: 16px;
                 left: 16px;
                 z-index: -99;
+            }
+
+            svg.Icon {
+                vertical-align: text-bottom;
+            }
+        }
+    }
+
+    &.taller {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 18px;
+
+        .leftIcon {
+            top: 15px;
+        }
+    }
+
+    &.hero {
+        > div {
+            padding: 0.3em;
+
+            > .label {
+                padding-top: 11px;
+                padding-bottom: 11px;
+            }
+
+            > .label > .primaryText {
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 18px;
             }
         }
     }

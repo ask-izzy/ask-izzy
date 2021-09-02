@@ -25,7 +25,9 @@ class Accessibility extends React.Component<{object: Service}, void> {
                     <icons.Accessibility
                         className="ColoredIcon"
                     />
-                    {accessibilityMapping[issAccessibility]}
+                    <span>
+                        {accessibilityMapping[issAccessibility]}
+                    </span>
                 </div>
             );
         }
