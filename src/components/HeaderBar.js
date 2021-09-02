@@ -20,6 +20,7 @@ type Props = {
         onBackTouchTap?: $PropertyType<AppBarProps, 'onBackTouchTap'>,
         backMessage?: $PropertyType<AppBarProps, 'backMessage'>,
     },
+    showBetaBanner?: boolean,
 }
 
 function HeaderBar(
@@ -34,6 +35,7 @@ function HeaderBar(
         fixedAppBar,
         hideLogoWhenNotABar,
         goBack = {},
+        showBetaBanner = true,
     }: Props): React.Node {
 
 
@@ -108,6 +110,7 @@ function HeaderBar(
                 hideLogoWhenNotABar={hideLogoWhenNotABar}
                 breakpoint={hideLogoWhenNotABar ? 100 : 30}
                 {...goBack}
+                showBetaBanner={showBetaBanner}
             />
             <div className="primary">
                 <h1>{primaryText}</h1>

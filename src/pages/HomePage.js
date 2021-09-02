@@ -113,6 +113,7 @@ function HomePage(): ReactNode {
                     bannerName="homepage"
                     hideLogoWhenNotABar={true}
                     taperColour="LighterGrey"
+                    showBetaBanner={false}
                 />
                 <AlertBannerList
                     screenLocation="homePage"

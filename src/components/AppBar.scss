@@ -4,25 +4,58 @@
     // When we don't have the taper it removes the
     // white space from the top of the header
     padding: 1px 0;
-    margin-bottom: 5em;
+    margin-bottom: 130px;
+
+    .betaBanner {
+        padding: 0.5em;
+        text-align: center;
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
+        background-color: #{colours.get-static('colour-bg-highlight-tone')};
+        background-color: var(--colour-bg-highlight-tone);
+
+        a {
+            color: #{colours.get-static('colour-text-very-light')};
+            color: var(--colour-text-very-light);
+        }
+
+        span {
+            display: inline-block;
+
+            .Icon {
+                vertical-align: middle;
+
+                path {
+                    fill: #{colours.get-static('colour-text-very-light')};
+                    fill: var(--colour-text-very-light);
+                }
+            }
+        }
+    }
 }
 
 .AppBar {
     $appbar-text-line-height: 42px;
 
-    display: flex;
-    position: fixed;
-    flex-direction: row;
-    justify-content: space-between;
-    -ms-flex-pack: justify;
+    .contents {
+        display: flex;
+        position: fixed;
+        flex-direction: row;
+        justify-content: space-between;
+        -ms-flex-pack: justify;
+        height: $appbar-height;
+        width: 100%;
+        max-width: 800px;
+        z-index: 2;
 
-    @media print {
-        display: none;
+        @media print {
+            display: none;
+        }
     }
 
+    position: fixed;
     width: 100%;
     max-width: 800px;
-    height: $appbar-height;
     min-height: auto;
     color: #{colours.get-static('colour-text-very-light')};
     color: var(--colour-text-very-light);
@@ -43,20 +76,23 @@
 
     &.showBar {
         top: 0;
-        transition: background-color 0.05s ease;
-        justify-content: space-between;
-        -ms-flex-pack: justify;
-        background-color: #{colours.get-static('colour-brand-primary')};
-        background-color: var(--colour-brand-primary);
-        box-shadow: 0 0 6px 0 #{colours.get-static('app-bar-shadow')};
-        box-shadow: 0 0 6px 0 var(--app-bar-shadow);
 
-        .appBarLogo {
-            margin: 10px;
-            height: 30px;
+        .contents {
+            transition: background-color 0.05s ease;
+            justify-content: space-between;
+            -ms-flex-pack: justify;
+            background-color: #{colours.get-static('colour-brand-primary')};
+            background-color: var(--colour-brand-primary);
+            box-shadow: 0 0 6px 0 #{colours.get-static('app-bar-shadow')};
+            box-shadow: 0 0 6px 0 var(--app-bar-shadow);
 
-            img {
-                height: 25px;
+            .appBarLogo {
+                margin: 10px;
+                height: 30px;
+
+                img {
+                    height: 25px;
+                }
             }
         }
     }
