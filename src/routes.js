@@ -145,8 +145,8 @@ const routes: ReactElement<typeof Routes> = <Routes>
         <Route
             path="/beta-info"
             element={<BetaInfoStaticPage />}
-            title="About Ask Izzy Beta"
-            type={["Static Page", "About Ask Izzy Beta"]}
+            title="About the Beta"
+            type={["Static Page", "Beta Info"]}
         />
         <Route
             path="/homeless-shelters"

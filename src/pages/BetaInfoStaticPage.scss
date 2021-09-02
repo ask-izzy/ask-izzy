@@ -11,25 +11,25 @@
     }
 
     .buttonsBox {
-        margin-bottom: 1em;
         text-align: center;
+        margin-bottom: 1em;
 
         button {
             margin: 1em;
-            padding: 0.2em 1em;
             border-radius: 7px;
+            padding: 0.2em 1em;
         }
 
         .returnToProd {
-            margin-right: 0.8em;
+            margin-right: 1em;
 
-            span {
-                color: #{colours.get-static('colour-text-mid')};
-                color: var(--colour-text-mid);
+            a {
                 font-weight: bold;
+                color: #{colours.get-static('colour-text-mid')};
+                color: 1px solid var(--colour-text-mid);
             }
 
-            .icon {
+            a > span {
                 display: inline-block;
                 vertical-align: middle;
 
@@ -38,13 +38,13 @@
 
                     path {
                         fill: #{colours.get-static('colour-button-standard')};
-                        fill: var(--colour-button-standard);
+                        fill: 1px solid var(--colour-button-standard);
                     }
                 }
             }
 
             &:hover {
-                span {
+                a span {
                     text-decoration: underline;
                 }
 
