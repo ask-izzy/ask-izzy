@@ -12,7 +12,7 @@
 .PersonalisationPage {
     .body {
         flex: 1;
-        width: 90%;
+        max-width: 90%;
         margin: auto;
 
         /* FIXME: autoprefixer should be taking care of this */
