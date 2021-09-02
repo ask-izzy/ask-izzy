@@ -20,6 +20,7 @@ type Props = {
     backMessage?: string,
     containerClassName?: ?string,
     breakpoint? : number,
+    showBetaBanner?: boolean,
 }
 
 const LOGO = "/static/images/ask-izzy-logo-single-line-yellow.svg";
@@ -33,6 +34,7 @@ function AppBar(
         transition,
         hideLogoWhenNotABar,
         breakpoint = STICKY_HEADER_BREAKPOINT,
+        showBetaBanner,
     }: Props): ReactNode {
 
     const scrollPosY = getScrollPosition();
@@ -82,43 +84,56 @@ function AppBar(
                 aria-label="Banner."
                 className={classnames("AppBar", showBar())}
             >
-                {(
-                    !hideLogoWhenNotABar ||
-                    !transition ||
-                    scrollPosY > breakpoint
-                ) && (
-                    <IconButton
-                        className={
-                            !onBackTouchTap ? "appBarLogo" : undefined
-                        }
-                        name={onBackTouchTap ? backMessage
-                            : "Ask Izzy home page;"
-                        }
-                        onClick={onBackTouchTap || goHome}
-                        analyticsEvent={{
-                            event: "Action Triggered - Back",
-                            eventAction: "Navigate back",
-                            eventLabel: null,
-                        }}
-                    >
-                        {onBackTouchTap ? (
-                            <span className="backButton">
-                                <icons.ChevronBack />
-                                <span className="back-label">
-                                    {backMessage}
-                                </span>
-                            </span>
-                        ) : (
-                            <img
-                                src={LOGO}
-                                alt="Ask Izzy home"
-                            />
-                        )}
-                    </IconButton>
+                {showBetaBanner && (
+                    <div className="betaBanner">
+                        <icons.Info className={"big middle"}/>
+                        You're using Ask Izzy Beta.{" "}
+                        <a href={"mailto:support@askizzy.org.au?" +
+                            "subject=Ask Izzy Beta - Feedback"}
+                        >
+                            Leave feedback
+                        </a>
+                    </div>
                 )}
-                <QuickExit
-                    className={showBar()}
-                />
+                <div className="contents">
+                    {(
+                        !hideLogoWhenNotABar ||
+                        !transition ||
+                        scrollPosY > breakpoint
+                    ) && (
+                        <IconButton
+                            className={
+                                !onBackTouchTap ? "appBarLogo" : undefined
+                            }
+                            name={onBackTouchTap ? backMessage
+                                : "Ask Izzy home page;"
+                            }
+                            onClick={onBackTouchTap || goHome}
+                            analyticsEvent={{
+                                event: "Action Triggered - Back",
+                                eventAction: "Navigate back",
+                                eventLabel: null,
+                            }}
+                        >
+                            {onBackTouchTap ? (
+                                <span className="backButton">
+                                    <icons.ChevronBack />
+                                    <span className="back-label">
+                                        {backMessage}
+                                    </span>
+                                </span>
+                            ) : (
+                                <img
+                                    src={LOGO}
+                                    alt="Ask Izzy home"
+                                />
+                            )}
+                        </IconButton>
+                    )}
+                    <QuickExit
+                        className={showBar()}
+                    />
+                </div>
             </div>
         </div>
     )

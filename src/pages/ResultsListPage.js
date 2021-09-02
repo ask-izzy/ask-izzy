@@ -80,10 +80,6 @@ class ResultsListPage extends ResultsPage<{}, State> {
                 <DebugContainer message="ISS Parameters">
                     <DebugSearch search={this.issParams()} />
                 </DebugContainer>
-                <div className="pageBanner">
-                    <icons.Info className={"big middle"}/>
-                    <span>You are using the Ask Izzy Beta.</span>
-                </div>
                 <HeaderBar
                     className="LoadingResultsHeader"
                     primaryText={

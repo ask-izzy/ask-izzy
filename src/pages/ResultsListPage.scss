@@ -3,35 +3,6 @@
 .ResultsListPage {
     $padding: 1em;
 
-    .pageBanner {
-        padding: 1.5em;
-        background-color: #{colours.get-static('colour-bg-highlight-tone')};
-        background-color: var(--colour-bg-highlight-tone);
-        color: #{colours.get-static('colour-text-very-light')};
-        color: var(--colour-text-very-light);
-        font-size: 0.9em;
-        overflow: auto;
-
-        h3 {
-            margin: 0 0 0.3em;
-        }
-
-        path {
-            fill: #{colours.get-static('colour-text-very-light')};
-            fill: var(--colour-text-very-light);
-        }
-
-        > span {
-            display: inline-block;
-            vertical-align: middle;
-
-            svg {
-                vertical-align: text-bottom;
-                margin-bottom: -3px;
-            }
-        }
-    }
-
     .HeaderBar {
         .secondary {
             font-size: 1em;

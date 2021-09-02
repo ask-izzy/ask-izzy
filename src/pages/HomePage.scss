@@ -134,11 +134,15 @@
             text-align: center;
 
             .AppBar {
-                justify-content: flex-end;
+                .contents {
+                    justify-content: flex-end;
+                }
 
                 &.showBar {
-                    justify-content: space-between;
-                    -ms-flex-pack: justify;
+                    .contents {
+                        justify-content: space-between;
+                        -ms-flex-pack: justify;
+                    }
                 }
             }
 
