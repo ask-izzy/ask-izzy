@@ -32,7 +32,7 @@ export default class ViewOnMapButton extends React.Component<Props, State> {
         return (
             <LinkListItem
                 className="ViewOnMapButton"
-                primaryText="View on a map"
+                primaryText="View results on map"
                 leftIcon={
                     <icons.Map className="big" />
                 }
