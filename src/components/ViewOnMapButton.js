@@ -2,33 +2,15 @@
 
 import type {Node as ReactNode} from "React";
 import React from "react";
+
 import icons from "../icons";
 import LinkListItem from "./LinkListItem";
-import maps, {MapsApi} from "../maps";
-
-type State = {
-    maps: ?MapsApi
-}
 
 type Props = {
     to: string
 }
-
-export default class ViewOnMapButton extends React.Component<Props, State> {
-    constructor() {
-        super();
-        this.state = {maps: null};
-    }
-
-    componentDidMount(): void {
-        maps().then(maps => this.setState({maps}));
-    }
-
+export default class ViewOnMapButton extends React.Component<Props> {
     render(): null | ReactNode {
-        if (!this.state.maps) {
-            return null;
-        }
-
         return (
             <LinkListItem
                 className="ViewOnMapButton"
