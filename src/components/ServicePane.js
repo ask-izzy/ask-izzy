@@ -154,12 +154,15 @@ export default class ServicePane extends React.Component<{
                                     object={object.open}
                                     serviceId={object.id}
                                 />
-                                <Accessibility object={object} />
+                                <Accessibility
+                                    service={object}
+                                    withSpacer={true}
+                                />
                                 <Ndis
                                     className="ndis"
                                     compact={false}
                                     object={object}
-                                    spacer={true}
+                                    withSpacer={true}
                                 />
                                 <GoogleMapsLink
                                     className="plain-text"

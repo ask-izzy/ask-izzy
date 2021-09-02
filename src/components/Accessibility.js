@@ -1,21 +1,33 @@
 /* @flow */
 
-import type {Element as ReactElement} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import icons from "../icons";
 import type { Service } from "../iss";
+import Spacer from "./Spacer";
 
-class Accessibility extends React.Component<{object: Service}, void> {
-    render(): null | ReactElement<"div"> {
+type Props = {
+    service: Service,
+    withSpacer?: boolean
+}
+
+class Accessibility extends React.Component<Props, void> {
+    static defaultProps: any = {
+        withSpacer: false,
+    };
+
+    render(): ReactNode | null {
+        const {service, withSpacer} = this.props
         let accessibilityMapping = {
             // "noaccess": "No wheelchair access",
             // "access": "Partial wheelchair access",
             "fullaccess": "Full wheelchair access",
         };
-        let issAccessibility = this.props.object.accessibility;
+        let issAccessibility = service.accessibility;
 
         if (issAccessibility === "fullaccess") {
-            return (
+            return <>
+                {withSpacer && <Spacer />}
                 <div
                     className="Accessibility"
                     aria-label={`${
@@ -29,7 +41,7 @@ class Accessibility extends React.Component<{object: Service}, void> {
                         {accessibilityMapping[issAccessibility]}
                     </span>
                 </div>
-            );
+            </>;
         }
         return null;
     }
