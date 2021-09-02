@@ -164,16 +164,19 @@ export default class ServicePane extends React.Component<{
                                     object={object}
                                     withSpacer={true}
                                 />
-                                <GoogleMapsLink
-                                    className="plain-text"
-                                    to={object.Location()}
-                                >
-                                    <Address location={object.Location()} />
+                                <div className="locationInfo">
+                                    <Address
+                                        location={object.Location()}
+                                        withSpacer={true}
+                                    />
                                     <TransportTime
                                         location={object.Location()}
-                                        withoutLink={true}
+                                        withSpacer={true}
                                     />
-                                </GoogleMapsLink>
+                                    <GoogleMapsLink
+                                        to={object.Location()}
+                                    />
+                                </div>
                                 <ContactMethods object={object} />
                                 <Feedback object={object} />
                             </div>

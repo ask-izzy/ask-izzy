@@ -47,24 +47,28 @@ async function checkTransportTimeLines(time: Array<string>): Promise<void> {
 }
 
 async function checkTransportTime(time: string): Promise<void> {
-    let allTransports = await this.driver.findElements(
+    const allTransports = await this.driver.findElements(
         By.css(".TransportTime")
-    );
-    let visibleTransports = await asyncFilter(
+    )
+
+    // Double await needed because flow is stupid
+    const visibleTransportElements = await await asyncFilter(
         allTransports,
         elem => elem.isDisplayed()
+    )
+
+    const visibleTransportText = await Promise.all(
+        visibleTransportElements.map(
+            elem => elem.getText().then(
+                text => text.split("\n")
+            )
+        )
+    )
+
+    assert(
+        visibleTransportText.flat().includes(time),
+        `Expected '${visibleTransportText.flat()}' to include '${time}'`
     );
-    let text = await Promise.all(visibleTransports.map(
-        elem => elem.getText()
-    ))
-
-    text = normalizeWhitespace(text.join("\n"))
-    assert(text.indexOf(normalizeWhitespace(time)) !== -1,
-        `Expected '${text}' to include '${time}'`);
-}
-
-function normalizeWhitespace(text: string, resultingSpace = "\n"): string {
-    return text.replace(/\s+/g, resultingSpace)
 }
 
 async function checkPhoneNumbers(lines: Array<string>): Promise<void> {

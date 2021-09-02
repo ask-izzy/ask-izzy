@@ -37,5 +37,4 @@ Feature: Transport times
         Then I should see a transport time of
         ------------------------------------------
         8 hours 27 mins transport
-        Get directions
         ------------------------------------------

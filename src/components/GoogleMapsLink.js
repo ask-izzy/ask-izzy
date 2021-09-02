@@ -1,35 +1,19 @@
 /* @flow */
-import type {Node as ReactNode, Element as ReactElement} from "React";
+import type {Element as ReactElement} from "React";
 import React from "react";
 
 import Link from "./base/Link";
-import fixtures from "../../fixtures/services";
 import Location from "../iss/Location";
 import classnames from "classnames";
-import Spacer from "./Spacer";
+import ExternalLinkIcon from "../icons/ExternalLink";
 
 type Props = {
     to: Location,
-    children?: any,
-    className: ?string,
+    className?: string,
     onClick?: ?function,
-    hideSpacer?: ?boolean,
 }
 
 class GoogleMapsLink extends React.Component<Props, void> {
-    static sampleProps: any = {
-        default: {
-            children: (
-                <div>Link text</div>
-            ),
-            to: new Location(fixtures.ixa.location),
-        },
-    };
-
-    static defaultProps: any = {
-        hideSpacer: false,
-    }
-
     googleMapsUrl(): string {
         const toAddr = this.props.to;
         const travelTimes = toAddr?.travelTime || [];
@@ -64,21 +48,13 @@ class GoogleMapsLink extends React.Component<Props, void> {
         }&daddr=${query}`;
     }
 
-    render(): ReactElement<"span"> | ReactNode {
+    render(): ReactElement<typeof Link> | null {
         const {
             className,
-            children,
         } = this.props;
 
         if (this.props.to.isConfidential()) {
-            return (
-                <span
-                    className={classnames("GoogleMapsLink", className)}
-                >
-                    <Spacer />
-                    {children}
-                </span>
-            );
+            return null
         }
 
         return (
@@ -94,8 +70,8 @@ class GoogleMapsLink extends React.Component<Props, void> {
                     eventLabel: null,
                 }}
             >
-                {!this.props.hideSpacer && <Spacer />}
-                {children}
+                Get directions in Google Maps
+                <ExternalLinkIcon />
             </Link>
         );
     }

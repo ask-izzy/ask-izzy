@@ -1,56 +1,22 @@
 /* @flow */
 
-import type {Node as ReactNode, Element as ReactElement} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
-import classnames from "classnames";
 import { titleize } from "underscore.string";
 
-import fixtures from "../../fixtures/services";
 import icons from "../icons";
 import Location from "../iss/Location";
-import * as gtm from "../google-tag-manager";
 import Spacer from "./Spacer";
-import GoogleMapsLink from "./GoogleMapsLink";
 
 class TransportTime extends React.Component<{
     location: Location,
-    compact?: Boolean,
-    // If this component is already wrapped in a <GoogleMapsLink /> then
-    // including it again will create invalid HTML. We should probably
-    // rethink the design such that this doesn't happen but for now this
-    // works as an ugly workaround.
-    withoutLink?: boolean,
+    withSpacer?: Boolean,
 }, void> {
     static defaultProps: any = {
-        compact: false,
+        withSpacer: false,
     };
 
-    constructor() {
-        super();
-    }
-
-    static sampleProps: any = {
-        compact: {
-            location: new Location(fixtures.ixa.location, [{
-                mode: "WALK",
-                duration: {text: "15 minutes", value: 1},
-                distance: {text: "", value: 1},
-                status: "",
-            }]),
-            compact: true,
-        },
-        expanded: {
-            location: new Location(fixtures.ixa.location, [{
-                mode: "TRANSIT",
-                duration: {text: "15 minutes", value: 1},
-                distance: {text: "", value: 1},
-                status: "",
-            }]),
-            compact: false,
-        },
-    };
-
-    render(): null | ReactElement<"div"> {
+    render(): ReactNode | null {
         if (!this.props.location.isConfidential()) {
             return this.renderPublic()
         } else {
@@ -58,7 +24,7 @@ class TransportTime extends React.Component<{
         }
     }
 
-    renderPublic(): ReactElement<"div"> {
+    renderPublic(): ReactNode {
         const {travelTime} = this.props.location;
 
         if (!travelTime) {
@@ -67,15 +33,9 @@ class TransportTime extends React.Component<{
 
         return (
             <div>
-                {this.renderDivider()}
-                <div
-                    className={classnames(
-                        "TransportTime",
-                        {compact: this.props.compact}
-                    )}
-                >
+                {this.props.withSpacer && <Spacer />}
+                <div className={"TransportTime"}>
                     {this.renderTravelTimes(travelTime)}
-                    {this.renderDirections()}
                 </div>
             </div>
         );
@@ -156,56 +116,7 @@ class TransportTime extends React.Component<{
 
     }
 
-    renderDivider(): null | ReactNode {
-        if (!this.props.compact) {
-            return (
-                <Spacer />
-            );
-        } else {
-            return null;
-        }
-    }
-
-    recordClick(): void {
-        gtm.emit({
-            event: "Google Maps Link Clicked",
-            eventCat: "External Link Clicked",
-            eventAction: "Google Maps Directions",
-            eventLabel: window.location.pathname,
-            sendDirectlyToGA: true,
-        });
-    }
-
-    renderDirections(): ReactElement<"span"> | ReactNode {
-        if (!this.props.compact) {
-            const linkText = (
-                <span className="googleMapsLink">
-                    Get directions in Google Maps
-                    <icons.ExternalLink
-                        className="ExternalLinkIcon"
-                    />
-                </span>
-            )
-
-            if (this.props.withoutLink) {
-                return linkText
-            } else {
-                return (
-                    <GoogleMapsLink
-                        to={this.props.location}
-                        className="getDirections"
-                        onClick={this.recordClick.bind(this)}
-                        hideSpacer={true}
-                    >
-                        {linkText}
-                    </GoogleMapsLink>
-                )
-            }
-        }
-        return <span />;
-    }
-
-    renderSuburb(): ReactElement<"span"> {
+    renderSuburb(): ReactNode {
         return (
             <span className="location">
                 {titleize(this.props.location.suburb)}

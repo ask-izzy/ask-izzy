@@ -1,15 +1,21 @@
 /* @flow */
-import type {Element as ReactElement} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import icons from "../icons";
 import ScreenReader from "./ScreenReader";
 import Location from "../iss/Location";
+import Spacer from "./Spacer";
 
 type Props = {
-    location: Location
+    location: Location,
+    withSpacer?: boolean,
 }
 
 class Address extends React.Component<Props, void> {
+    static defaultProps: any = {
+        withSpacer: false,
+    };
+
     static sampleProps: any = {
         complex: {
             location: new Location({
@@ -36,10 +42,11 @@ class Address extends React.Component<Props, void> {
         },
     };
 
-    render(): ReactElement<"div"> {
+    render(): ReactNode {
         let location = this.props.location;
 
-        return (
+        return <>
+            {this.props.withSpacer && <Spacer />}
             <div className="Address">
                 <ScreenReader>
                     Address
@@ -62,7 +69,7 @@ class Address extends React.Component<Props, void> {
                     }
                 </div>
             </div>
-        );
+        </>
     }
 }
 

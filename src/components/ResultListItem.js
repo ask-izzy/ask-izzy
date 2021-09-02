@@ -114,7 +114,7 @@ class ResultListItem extends React.Component<{
                     )}
                 </div>
                 <Eligibility {...service} />
-                <Accessibility object={service} />
+                <Accessibility service={service} />
                 <ScreenReader>
                     Travel times.
                 </ScreenReader>
