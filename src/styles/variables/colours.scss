@@ -22,6 +22,8 @@ $lightness-button-hover: 10%;
     @include colours.define('raw-colour-pure-white',    'global', hsl(0,   0%,   100%));
     @include colours.define('raw-colour-pure-black',    'global', hsl(0,   0%,   0%  ));
 
+    /* Brand Palette */
+    @include colours.define('colour-brand-primary', 'global', 'raw-colour-rich-purple');
 
     /* Features */
     @include colours.define('colour-crisis', 'global', 'raw-colour-rich-purple');
@@ -70,7 +72,7 @@ $lightness-button-hover: 10%;
     @include colours.define(
         'colour-bg-callout-solid',
         'global',
-        colours.set-transparency('raw-colour-rich-purple', 'global', 0.15),
+        colours.set-transparency('colour-brand-primary', 'global', 0.15),
     );
 
     @include colours.define('colour-bg-code', 'global', 'raw-colour-slate-gray');
@@ -80,7 +82,7 @@ $lightness-button-hover: 10%;
     /* Borders */
     @include colours.define('colour-border-list-item', 'global', 'raw-colour-warm-white');
     @include colours.define('colour-border-list-item-dark', 'global', 'raw-colour-slate-gray');
-    @include colours.define('colour-border-standard-callout', 'global', 'raw-colour-rich-purple');
+    @include colours.define('colour-border-standard-callout', 'global', 'colour-brand-primary');
     @include colours.define(
         'colour-border-alert',
         'global',
@@ -92,7 +94,7 @@ $lightness-button-hover: 10%;
     @include colours.define('colour-link', 'global', 'raw-colour-coral-blue');
     @include colours.define('colour-link-visited', 'global', 'raw-colour-plum-purple');
 
-    @include colours.define('colour-button-standard', 'global', 'raw-colour-rich-purple');
+    @include colours.define('colour-button-standard', 'global', 'colour-brand-primary');
     @include colours.define(
         'colour-button-standard-hover',
         'global',
