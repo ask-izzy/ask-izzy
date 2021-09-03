@@ -24,6 +24,7 @@ import { titleize } from "underscore.string";
 import ScreenReader from "./ScreenReader";
 import ListItem from "./ListItem";
 import Link from "./base/Link";
+import Storage from "../storage";
 
 class ResultListItem extends React.Component<{
     service: iss.Service,
@@ -118,10 +119,12 @@ class ResultListItem extends React.Component<{
                 <ScreenReader>
                     Travel times.
                 </ScreenReader>
-                <TransportTime
-                    compact={true}
-                    location={service.Location()}
-                />
+                {Storage.getCoordinates() &&
+                    <TransportTime
+                        location={service.Location()}
+                        compact={true}
+                    />
+                }
 
                 <DebugServiceRecord object={service} />
                 {service._explanation &&

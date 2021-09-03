@@ -18,6 +18,8 @@ const NotStartedGeolocation = ({onClick}: NotStartedGeolocationProps) => (
     <ButtonListItem
         className="taller LocationButton"
         onClick={onClick}
+        aria-label="Set your current location to get
+         estimated travel times."
         primaryText={
             <span className="link-color link-text">
                 Get your current location
@@ -135,19 +137,30 @@ function GeolocationButton(
             });
     }
 
+    let geoLocationElm = (
+        <NotStartedGeolocation
+            onClick={onGeolocationClick}
+        />
+    )
+
     if (geolocation === "RUNNING") {
-        return <RunningGeolocation />;
+        geoLocationElm = <RunningGeolocation />;
     } else if (geolocation === "COMPLETE") {
-        return <FinishedGeolocation />;
+        geoLocationElm = <FinishedGeolocation />;
     } else if (error) {
-        return <FailedGeolocation error={error}/>;
-    } else {
-        return (
-            <NotStartedGeolocation
-                onClick={onGeolocationClick}
-            />
-        );
+        geoLocationElm = <FailedGeolocation error={error}/>;
     }
+
+    return (
+        <p>
+            {geoLocationElm}
+            <em className="explainer">
+                To see estimated travel
+                times please set your
+                current location
+            </em>
+        </p>
+    )
 
 }
 

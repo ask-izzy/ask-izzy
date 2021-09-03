@@ -82,25 +82,10 @@ Feature: Service details page
         When I navigate to the service page
         Then I should not see ATSI flags
 
-    Scenario: The address is a link to google maps
-       Given A service with:
-        ----------------------------------------------
-        location:
-            building: Hany Building
-            flat_unit: Unit 5
-            level: Level 3
-            street_number: 33
-            street_name: Elizabeth
-            street_type: Street
-            suburb: Richmond
-            state: VIC
-            postcode: 3121
-        ----------------------------------------------
-        When I navigate to the service page
-        Then I can get to google maps by clicking "Unit 5, Level 3, Hany Building, 33 Elizabeth Street"
 
     Scenario: There is travel information for non-confidential services
         Given my location is "Melbourne, VIC"
+        And my location is 37.822S 144.99E
         And it is late morning on "Monday"
         # This step is just to ensure the maps api gets loaded.
         # Because the google direction mock required it.
