@@ -15,10 +15,34 @@
     }
 
     .explainer {
+        display: inline-flex;
+        align-items: center;
         font-size: 14px;
         width: 100%;
         margin-left: 1em;
         margin-bottom: 1em;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
+
+        .explainerIcons {
+            display: inline-flex;
+            margin-right: 5px;
+            margin-bottom: -2px;
+
+            .SvgIcon {
+                margin-left: -1px;
+                margin-right: -1px;
+
+                &.WalkIcon {
+                    width: 20px;
+                }
+
+                path {
+                    fill: #{colours.get-static('colour-text-mid')};
+                    fill: var(--colour-text-mid);
+                }
+            }
+        }
     }
 
     .search {

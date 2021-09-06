@@ -40,6 +40,7 @@ const NotStartedGeolocation = ({onClick}: NotStartedGeolocationProps) => (
 
 const RunningGeolocation = () => (
     <ListItem
+        className="LocationButton"
         primaryText="Locating you..."
         secondaryText="Please permit us to use your GPS"
         leftIcon={
@@ -50,7 +51,7 @@ const RunningGeolocation = () => (
 
 const FinishedGeolocation = () => (
     <ListItem
-        className="taller"
+        className="taller LocationButton"
         primaryText="Found your location"
         leftIcon={<icons.Tick className="big" />}
     />
@@ -62,6 +63,7 @@ type FailedGeolocationProps = {
 
 const FailedGeolocation = ({error}: FailedGeolocationProps) => (
     <ListItem
+        className="LocationButton"
         primaryText="Unable to get your location"
         secondaryText={`Please enter your location below
             (${error})`}
@@ -155,9 +157,12 @@ function GeolocationButton(
         <p>
             {geoLocationElm}
             <em className="explainer">
-                To see estimated travel
-                times please set your
-                current location
+                <span className="explainerIcons">
+                    <icons.Walk/>
+                    <icons.Tram/>
+                    <icons.Car/>
+                </span>
+                Set your current location to see estimated travel times.
             </em>
         </p>
     )
