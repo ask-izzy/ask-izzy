@@ -49,10 +49,15 @@ const RunningGeolocation = () => (
     />
 );
 
-const FinishedGeolocation = () => (
+type FinishedGeolocationProps = {
+    travelTimesCatch: boolean,
+}
+
+const FinishedGeolocation = ({travelTimesCatch}: FinishedGeolocationProps) => (
     <ListItem
         className="taller LocationButton"
-        primaryText="Found your location"
+        primaryText={`Found your location ${
+            travelTimesCatch ? "– Travel times added below." : ""}`}
         leftIcon={<icons.Tick className="big" />}
     />
 );
@@ -73,13 +78,15 @@ const FailedGeolocation = ({error}: FailedGeolocationProps) => (
 
 type GeolocationButtonProps = {
     onSuccess: (result: { name: string, coords: Coordinates }) => void,
-    restartSearch: boolean
+    restartSearch: boolean,
+    travelTimesCatch?: boolean
 }
 
 function GeolocationButton(
     {
         onSuccess,
         restartSearch,
+        travelTimesCatch = false,
     } :GeolocationButtonProps
 ): ReactNode {
 
@@ -92,6 +99,7 @@ function GeolocationButton(
     // clearing the text box
     useEffect(() => {
         restartSearch && setGeolocation("NOT_STARTED")
+        // Storage.removeItem("coordinates")
     }, [restartSearch])
 
 
@@ -109,14 +117,25 @@ function GeolocationButton(
 
         setGeolocation("RUNNING")
 
-
-        gtm.emit({
-            event: "Geolocation Requested",
-            eventCat: "Button Clicked",
-            eventAction: "Geolocation Request",
-            eventLabel: location.pathname,
-            sendDirectlyToGA: true,
-        });
+        // If the Geo-locate button is clicked on the results page
+        // send a specific event to GA
+        if (travelTimesCatch) {
+            gtm.emit({
+                event: "Results page - Geolocation Requested",
+                eventCat: "Button Clicked",
+                eventAction: "Results page -Geolocation Request",
+                eventLabel: location.pathname,
+                sendDirectlyToGA: true,
+            });
+        } else {
+            gtm.emit({
+                event: "Geolocation Requested",
+                eventCat: "Button Clicked",
+                eventAction: "Geolocation Request",
+                eventLabel: location.pathname,
+                sendDirectlyToGA: true,
+            });
+        }
 
         locateMe()
             .then((params) => {
@@ -139,33 +158,19 @@ function GeolocationButton(
             });
     }
 
-    let geoLocationElm = (
-        <NotStartedGeolocation
-            onClick={onGeolocationClick}
-        />
-    )
-
     if (geolocation === "RUNNING") {
-        geoLocationElm = <RunningGeolocation />;
+        return <RunningGeolocation />;
     } else if (geolocation === "COMPLETE") {
-        geoLocationElm = <FinishedGeolocation />;
+        return <FinishedGeolocation travelTimesCatch={travelTimesCatch} />;
     } else if (error) {
-        geoLocationElm = <FailedGeolocation error={error}/>;
+        return <FailedGeolocation error={error}/>;
+    } else {
+        return (
+            <NotStartedGeolocation
+                onClick={onGeolocationClick}
+            />
+        );
     }
-
-    return (
-        <p>
-            {geoLocationElm}
-            <em className="explainer">
-                <span className="explainerIcons">
-                    <icons.Walk/>
-                    <icons.Tram/>
-                    <icons.Car/>
-                </span>
-                Set your current location to see estimated travel times.
-            </em>
-        </p>
-    )
 
 }
 

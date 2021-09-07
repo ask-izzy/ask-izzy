@@ -7,18 +7,15 @@
 }
 
 .Location {
-    .LocationButton {
-        &.ListItem {
-            border-bottom: 0;
-            padding: 0;
-        }
+    .done-button {
+        text-align: center;
+        margin: 2em 0;
     }
 
     .explainer {
         display: inline-flex;
         align-items: center;
         font-size: 14px;
-        width: 100%;
         margin-left: 1em;
         margin-bottom: 1em;
         color: #{colours.get-static('colour-text-mid')};
@@ -26,7 +23,7 @@
 
         .explainerIcons {
             display: inline-flex;
-            margin-right: 5px;
+            margin-right: 1em;
             margin-bottom: -2px;
 
             .SvgIcon {

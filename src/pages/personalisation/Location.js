@@ -403,6 +403,15 @@ class Location extends Personalisation<Props, State> {
         return (
             <div>
                 <div className="done-button">
+                    <em className="explainer">
+                        <span className="explainerIcons">
+                            <icons.Walk/>
+                            <icons.Tram/>
+                            <icons.Car/>
+                        </span>
+                        To see estimated travel times set your location
+                        using the "Get your current location" link
+                    </em>
                     <components.FlatButton
                         label="Done"
                         onClick={this.onDoneTouchTap.bind(this)}

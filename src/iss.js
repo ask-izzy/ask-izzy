@@ -24,6 +24,7 @@ import {
     TryWithDefault,
     ReturnAfter,
 } from "./timeout";
+import Storage from "./storage";
 
 export type searchResultMerger = (
     original: searchResults,
@@ -292,11 +293,17 @@ export async function requestObjects(
         (object: issService): Service => new Service(object)
     );
 
-    response.objects = await TryWithDefault(
-        3000,
-        attachTransportTimes(objects),
-        objects
-    )
+    if (Storage.getCoordinates()) {
+        response.objects = await TryWithDefault(
+            3000,
+            attachTransportTimes(objects),
+            objects
+        )
+    } else {
+        response.objects = await Promise.race([
+            ReturnAfter(3000, objects),
+        ])
+    }
 
     response.objects.forEach((service) =>
         serviceCache.set(service.id, service)

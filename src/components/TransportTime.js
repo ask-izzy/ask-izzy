@@ -1,54 +1,44 @@
 /* @flow */
 
-import type {Node as ReactNode} from "React";
+import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 import { titleize } from "underscore.string";
 
 import icons from "../icons";
-import Location from "../iss/Location";
 import Spacer from "./Spacer";
+import Location from "../iss/Location";
 
-class TransportTime extends React.Component<{
+type Props = {
     location: Location,
-    withSpacer?: Boolean,
-}, void> {
-    static defaultProps: any = {
-        withSpacer: false,
-    };
+    withSpacer?: boolean,
+}
 
-    render(): ReactNode | null {
-        if (!this.props.location.isConfidential()) {
-            return this.renderPublic()
-        } else {
-            return null;
-        }
-    }
+function TransportTime({location, withSpacer}: Props): ReactNode {
 
-    renderPublic(): ReactNode {
-        const {travelTime} = this.props.location;
+    const renderPublic = (): ReactElement<"div"> => {
 
-        if (!travelTime) {
+        if (!location) {
             return <div />;
         }
 
         return (
             <div>
-                {this.props.withSpacer && <Spacer />}
+                {withSpacer && <Spacer />}
                 <div className={"TransportTime"}>
-                    {this.renderTravelTimes(travelTime)}
+                    {renderTravelTimes(location)}
                 </div>
             </div>
         );
     }
 
-    getTravelText(travel: Object): string {
+    const getTravelText = (travel: Object): string => {
         return travel &&
         travel.duration &&
         travel.duration.text
     }
 
-    formatAriaLabel(travel: Object): string {
-        const travelText = this.getTravelText(travel)
+    const formatAriaLabel = (travel: Object): string => {
+        const travelText = getTravelText(travel)
         switch (travel.mode) {
         case "TRANSIT":
             return `${travelText} travel by public transport.`;
@@ -59,8 +49,8 @@ class TransportTime extends React.Component<{
         }
     }
 
-    renderTravelTimes(travelTimes: Object): any {
-        return travelTimes.map((travel, key) => {
+    const renderTravelTimes = (): any => {
+        return location.travelTime?.map((travel, key) => {
             let icon = "";
             let method = "";
 
@@ -100,12 +90,12 @@ class TransportTime extends React.Component<{
                         travel.mode.toLocaleLowerCase()
                     }
                     key={key}
-                    aria-label={this.formatAriaLabel(travel)}
+                    aria-label={formatAriaLabel(travel)}
                 >
                     {icon}
                     <span>
                         <time dateTime={arrivalTime.toISOString()}>
-                            {this.getTravelText(travel)}
+                            {getTravelText(travel)}
                         </time>
                         {method}
                     </span>
@@ -116,13 +106,19 @@ class TransportTime extends React.Component<{
 
     }
 
-    renderSuburb(): ReactNode {
+    const renderSuburb = (): ReactNode => {
         return (
             <span className="location">
                 {titleize(this.props.location.suburb)}
             </span>
         );
     }
+
+    if (!location.isConfidential()) {
+        return renderPublic()
+    }
+    return null;
+
 }
 
 export default TransportTime;
