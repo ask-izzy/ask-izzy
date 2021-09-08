@@ -64,6 +64,10 @@ app.get("/api/v3/location/search/", (req, res) => {
     });
 });
 
+app.get("/api/v3/list-all-mocked/", (req, res) => {
+    res.json(mocks);
+});
+
 /* eslint-disable complexity */
 /* FIXME: refactor to use mocks instead of these */
 app.get("/api/v3/search/", (req, res) => {
