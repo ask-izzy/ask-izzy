@@ -61,6 +61,9 @@ async function checkForIssues(ignoreExistingIssues) {
             resolvedIssues[filePath] = currentPageResolvedIssues
         }
 
+        const numOfCurrentPageNewErrors = currentPageNewIssues
+            .filter(issue => issue?.type !== 'warning').length
+
         if (currentPageNewIssues.length > 0){
             process.stdout.write("\n");
             console.error(
@@ -68,7 +71,10 @@ async function checkForIssues(ignoreExistingIssues) {
                 `${previousIssues ? 'new ' : ''}issue(s) found with ${filePath}`
             );
             console.error(currentPageNewIssues);
-            if (process.env.CI || process.env.FAIL_FAST) {
+            if (
+                numOfCurrentPageNewErrors > 0 &&
+                (process.env.CI || process.env.FAIL_FAST)
+            ) {
                 throw new Error()
             }
         }
@@ -83,6 +89,8 @@ async function checkForIssues(ignoreExistingIssues) {
     const numOfResolvedIssues = resolvedIssues &&
         Object.values(resolvedIssues).flat().length
     const numOfNewIssues = Object.values(newIssues).flat().length
+    const numOfNewErrors = (Object.values(newIssues).flat(): Array<any>)
+        .filter(issue => issue?.type !== 'warning').length
 
     if (numOfContinuingIssues) {
         console.log(`${numOfContinuingIssues} existing issue(s)`);
@@ -92,8 +100,19 @@ async function checkForIssues(ignoreExistingIssues) {
         console.log(`${numOfResolvedIssues} resolved issue(s)`);
     }
 
+    if (numOfNewIssues) {
+        console.log(
+            `${numOfNewIssues} new issue(s)` +
+            `${numOfNewErrors ? ` (${numOfNewErrors} of which are errors)` : ''}`
+        )
+    }
+
+    if (numOfNewErrors > 0) {
+        process.exit(1)
+    }
+
     if (numOfNewIssues > 0) {
-        throw new Error()
+        process.exit(2)
     }
 }
 
