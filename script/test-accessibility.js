@@ -100,6 +100,13 @@ async function checkForIssues(ignoreExistingIssues) {
         console.log(`${numOfResolvedIssues} resolved issue(s)`);
     }
 
+    if (numOfNewIssues) {
+        console.log(
+            `${numOfNewIssues} new issue(s)` +
+            `${numOfNewErrors ? ` (${numOfNewErrors} of which are errors)` : ''}`
+        )
+    }
+
     if (numOfNewErrors > 0) {
         process.exit(1)
     }
