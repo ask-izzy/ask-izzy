@@ -2,91 +2,31 @@
 
 import type {Node as ReactNode} from "React";
 import React, {useEffect, useState} from "react";
-import ButtonListItem from "./ButtonListItem";
-import ListItem from "./ListItem";
 import Geolocation, {guessSuburb} from "../geolocation";
 import icons from "../icons";
 import * as gtm from "../google-tag-manager";
+import Storage from "../storage";
+import Button from "./base/Button";
 
 type GeoLocationState = "NOT_STARTED"|"RUNNING"|"COMPLETE"|"FAILED";
-
-type NotStartedGeolocationProps = {
-    onClick: () => void
-}
-
-const NotStartedGeolocation = ({onClick}: NotStartedGeolocationProps) => (
-    <ButtonListItem
-        className="taller LocationButton"
-        onClick={onClick}
-        aria-label="Set your current location to get
-         estimated travel times."
-        primaryText={
-            <span className="link-color link-text">
-                Get your current location
-            </span>
-        }
-        leftIcon={
-            <icons.Location
-                className="ColoredIcon icon-fg-color big"
-            />
-        }
-        analyticsEvent={{
-            event: "Action Triggered - Geolocate",
-            eventAction: "Find my location",
-            eventLabel: null,
-        }}
-    />
-);
-
-const RunningGeolocation = () => (
-    <ListItem
-        className="LocationButton"
-        primaryText="Locating you..."
-        secondaryText="Please permit us to use your GPS"
-        leftIcon={
-            <icons.Loading className="big" />
-        }
-    />
-);
-
-type FinishedGeolocationProps = {
-    travelTimesCatch: boolean,
-}
-
-const FinishedGeolocation = ({travelTimesCatch}: FinishedGeolocationProps) => (
-    <ListItem
-        className="taller LocationButton"
-        primaryText={`Found your location ${
-            travelTimesCatch ? "– Travel times added below." : ""}`}
-        leftIcon={<icons.Tick className="big" />}
-    />
-);
-
-type FailedGeolocationProps = {
-    error: string
-}
-
-const FailedGeolocation = ({error}: FailedGeolocationProps) => (
-    <ListItem
-        className="LocationButton"
-        primaryText="Unable to get your location"
-        secondaryText={`Please enter your location below
-            (${error})`}
-        leftIcon={<icons.Cross className="big" />}
-    />
-)
 
 type GeolocationButtonProps = {
     onSuccess: (result: { name: string, coords: Coordinates }) => void,
     restartSearch: boolean,
-    travelTimesCatch?: boolean
+    travelTimesCatch?: boolean,
+    finishedState?: boolean,
+    showMessage?: boolean,
+    undoButton?: ReactNode
 }
 
 function GeolocationButton(
     {
         onSuccess,
         restartSearch,
+        undoButton = null,
         travelTimesCatch = false,
+        finishedState = false,
+        showMessage = true,
     } :GeolocationButtonProps
 ): ReactNode {
 
@@ -94,6 +34,78 @@ function GeolocationButton(
         "NOT_STARTED"
     )
     const [error, setErrorMessage] = useState<?string>(null)
+
+    const GEO_LOCATION_STATE_TEXT = {
+        NOT_STARTED: {
+            text: () => (
+                <>
+                    <icons.Location/>
+                    <span
+                        className="primary"
+                        aria-live="geoLocate"
+                    >
+                        Get your current location
+                    </span>
+                </>
+            ),
+            "aria-label": "Set your current location to get" +
+             "estimated travel times.",
+            analyticsEvent: {
+                event: "Action Triggered - Geolocate",
+                eventAction: "Find my location",
+                eventLabel: null,
+            },
+        },
+        RUNNING: {
+            text: () => (
+                <>
+                    <icons.Loading />
+                    <div
+                        className="multiLine"
+                        aria-live="geoLocate"
+                    >
+                        <span className="primary">
+                            Locating you...
+                        </span>
+                        <span className="secondary">
+                            Please permit us to use your GPS
+                        </span>
+                    </div>
+                </>
+            ),
+        },
+        COMPLETE: {
+            text: () => (
+                <>
+                    <icons.Tick />
+                    <span
+                        className="primary"
+                        aria-live="geoLocate"
+                    >
+                        Found your location
+                    </span>
+                </>
+            ),
+        },
+        FAILED: {
+            text: () => (
+                <>
+                    <icons.Cross />
+                     <div
+                         className="multiLine"
+                         aria-live="geoLocate"
+                     >
+                         <span className="primary">
+                            Unable to get your location
+                         </span>
+                         <span className="secondary">
+                             {error}
+                         </span>
+                     </div>
+                </>
+            ),
+        },
+    }
 
     // Reset the geoLocation state when
     // clearing the text box
@@ -158,19 +170,49 @@ function GeolocationButton(
             });
     }
 
-    if (geolocation === "RUNNING") {
-        return <RunningGeolocation />;
-    } else if (geolocation === "COMPLETE") {
-        return <FinishedGeolocation travelTimesCatch={travelTimesCatch} />;
-    } else if (error) {
-        return <FailedGeolocation error={error}/>;
-    } else {
-        return (
-            <NotStartedGeolocation
-                onClick={onGeolocationClick}
-            />
-        );
-    }
+    return (
+        <div className="GeoLocationButton">
+            {!finishedState ? (
+                geolocation === "COMPLETE" ? (
+                    <div className="complete">
+                        <div className="buttonLabel">
+                            {GEO_LOCATION_STATE_TEXT[geolocation].text()}
+                        </div>
+                    </div>
+                )
+                    : (
+                        <Button
+                            className="LocationButton"
+                            aria-controls="geoLocate"
+                            onClick={
+                                geolocation === "NOT_STARTED" ?
+                                    onGeolocationClick : () => null
+                            }
+                            {...GEO_LOCATION_STATE_TEXT[geolocation]}
+                        >
+                            <div className="buttonLabel">
+                                {GEO_LOCATION_STATE_TEXT[geolocation]
+                                    .text()}
+                            </div>
+                        </Button>
+                    )
+            ) : (
+                <>
+                    <icons.Tick className="big" />
+                    <span
+                        className="primary"
+                        aria-live="geoLocate"
+                    >
+                        Found your location (in {
+                        Storage.getCoordinates()?.name})
+                        {showMessage && " – Travel times added below."}
+                        {undoButton}
+                    </span>
+                </>
+            )}
+        </div>
+    )
+
 
 }
 

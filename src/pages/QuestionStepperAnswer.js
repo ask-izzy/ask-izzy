@@ -11,8 +11,7 @@ import routerContext from "../contexts/router-context";
 import {useContext} from "react";
 import type {AnswerType} from "./QuestionStepper.service";
 import icons from "../icons";
-import type {Node as ReactNode, Element as ReactElement} from "react";
-import Storage from "../storage";
+import type {Node as ReactNode} from "react";
 
 type Props = {
     lastMultiSelect: ?number,
@@ -44,22 +43,6 @@ function QuestionStepperAnswer({
         answer.name === router.match.params.subpage
     )
 
-    const renderAnswer = (): ReactElement<"span"> | ?string => {
-        if (answer.name === "location" && Storage.getCoordinates()) {
-            return (
-                <span>
-                    <img
-                        className="coordIndicator"
-                        src="/static/images/you-are-here.png"
-                        alt="location"
-                    />
-                    {" "}{answer?.answer}
-                </span>
-            )
-        }
-        return answer?.answer
-    }
-
     const MapIcon = () => home ? <icons.Map /> : null
 
     return (
@@ -77,7 +60,7 @@ function QuestionStepperAnswer({
                     }
                 >
                     <span className={editing() ? "editing" : null}>
-                        {renderAnswer()} {
+                        {answer?.answer} {
                             !editing() && answer.multi && renderEllipsis(
                                 index,
                                 multiSelectedAnswer.length,

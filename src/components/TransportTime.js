@@ -2,7 +2,7 @@
 
 import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
-import { titleize } from "underscore.string";
+import classnames from "classnames";
 
 import icons from "../icons";
 import Spacer from "./Spacer";
@@ -24,8 +24,13 @@ function TransportTime({location, withSpacer}: Props): ReactNode {
         return (
             <div>
                 {withSpacer && <Spacer />}
-                <div className={"TransportTime"}>
-                    {renderTravelTimes(location)}
+                <div
+                    className={classnames(
+                        "TransportTime",
+                        {withSpacer}
+                    )}
+                >
+                    {renderTravelTimes()}
                 </div>
             </div>
         );
@@ -104,14 +109,6 @@ function TransportTime({location, withSpacer}: Props): ReactNode {
 
         });
 
-    }
-
-    const renderSuburb = (): ReactNode => {
-        return (
-            <span className="location">
-                {titleize(this.props.location.suburb)}
-            </span>
-        );
     }
 
     if (!location.isConfidential()) {

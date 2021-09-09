@@ -10,6 +10,7 @@ import {
     addPageLoadDependencies,
     closePageLoadDependencies,
 } from "../utils/page-loading"
+import storage from "../storage";
 
 type State = {
     searchMeta: ?searchResultsMeta,
@@ -64,6 +65,13 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             )
         }
 
+    }
+
+    onGeoLocationSuccess(params: {coords: Coordinates, name: string}): void {
+        storage.setCoordinates(params.coords, params.name);
+        this.setState({
+            fetchedLocation: true,
+        })
     }
 
     async loadNextSearchPage(): Promise<void> {

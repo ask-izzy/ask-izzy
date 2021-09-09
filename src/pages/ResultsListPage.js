@@ -20,8 +20,7 @@ import QuestionStepper from "./QuestionStepper";
 
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
-import GeolocationButton from "../components/GeolocationButton";
-import storage from "../storage";
+import ResultsPageGeolocationButton from "./ResultsPageGeolocationButton";
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
@@ -35,50 +34,6 @@ class ResultsListPage extends ResultsPage<> {
     hasSearchResults(): boolean {
         return !this.state.searchResults ||
             this.state.searchResults.length === 0
-    }
-
-    onGeoLocationSuccess(params: {coords: Coordinates, name: string}): void {
-        storage.setCoordinates(params.coords);
-        this.setState({
-            fetchedLocation: true,
-        })
-    }
-
-    /**
-     * Renders the "Get your current location" catch on the results page,
-     * to allow the user to set their location if they want travel times
-     * @return {JSX.Element} - Returns the travel times catch component
-     */
-    getSpecificLocationBanner(): ReactElement<"div"> {
-        return <div className="specificLocationBanner">
-            {!this.state?.fetchedLocation &&
-            <div>
-                Want estimated travel times?
-            </div>
-            }
-            <GeolocationButton
-                onSuccess={
-                    this.onGeoLocationSuccess.bind(this)
-                }
-                travelTimesCatch={true}
-                restartSearch={
-                    !this.state?.fetchedLocation
-                }
-            />
-            {this.state?.fetchedLocation &&
-            <button
-                className="undo"
-                onClick={() => {
-                    storage.removeItem("coordinates")
-                    this.setState({
-                        fetchedLocation: false,
-                    })
-                }}
-            >
-                Undo
-            </button>
-            }
-        </div>
     }
 
     renderPage: (() => ReactElement<"div">) = () => (
@@ -145,10 +100,17 @@ class ResultsListPage extends ResultsPage<> {
                                     .pathname.replace(/\/?$/, "/map")
                                 }
                             />
-                            {(!storage.getCoordinates() ||
-                                    this.state?.fetchedLocation) &&
-                                this.getSpecificLocationBanner()
-                            }
+                            <ResultsPageGeolocationButton
+                                fetchedLocation={this.state.fetchedLocation}
+                                onGeoLocationSuccess={
+                                    this.onGeoLocationSuccess.bind(this)
+                                }
+                                onfetchNewLocation={(fetchedLocationStatus) => {
+                                    this.setState({
+                                        fetchedLocation: fetchedLocationStatus,
+                                    })
+                                }}
+                            />
                         </div>
                     }
                     <ResultsList

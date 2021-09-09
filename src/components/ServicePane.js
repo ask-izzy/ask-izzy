@@ -255,7 +255,6 @@ function ServicePane({service}: Props): ReactNode {
                                 object={service}
                                 spacer={true}
                             />
-                            <hr className="Spacer"/>
                             <Address
                                 location={service.Location()}
                                 site={service.site}

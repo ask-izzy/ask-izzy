@@ -7,9 +7,57 @@
 }
 
 .Location {
-    .done-button {
+    .done {
         text-align: center;
         margin: 2em 0;
+
+        .doneButton {
+            display: block;
+            width: calc(100% - 40px);
+            margin: 20px auto;
+        }
+
+        h3 {
+            font-weight: normal;
+            margin: 0;
+        }
+    }
+
+    .Spacer {
+        margin: 0 1em;
+    }
+
+    .locationList {
+        z-index: 2;
+        padding: 0;
+        margin: -20px 18px 0 20px;
+        cursor: pointer;
+        border-left: solid 1px #{colours.get-static('raw-colour-pure-black')};
+        border-left: solid 1px var(--raw-colour-pure-black);
+        border-right: solid 1px #{colours.get-static('raw-colour-pure-black')};
+        border-right: solid 1px var(--raw-colour-pure-black);
+        border-bottom: solid 1px #{colours.get-static('raw-colour-pure-black')};
+        border-bottom: solid 1px var(--raw-colour-pure-black);
+        box-shadow: 0 0 12px 0 #{colours.get-static('app-bar-shadow')};
+        box-shadow: 0 0 12px 0 var(--app-bar-shadow);
+
+        .locationItem {
+            display: block;
+            border-bottom: 1px solid #{colours.get-static('colour-border-list-item')};
+            border-bottom: 1px solid var(--colour-border-list-item);
+            padding: 1em;
+
+            &:hover {
+                background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+                background-color: var(--colour-bg-standard-tint-2);
+            }
+
+            .state {
+                font-size: 14px;
+                color: #{colours.get-static('colour-text-mid')};
+                color: var(--colour-text-mid);
+            }
+        }
     }
 
     .explainer {
@@ -42,8 +90,27 @@
         }
     }
 
+    @media (max-width: 556px) {
+        .explainer {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .locationList {
+            border: 0;
+            box-shadow: none;
+            margin: -20px 0 0;
+        }
+    }
+
     .search {
         position: relative;
+        width: 100%;
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        box-sizing: border-box;
 
         .FlatButton {
             display: flex;

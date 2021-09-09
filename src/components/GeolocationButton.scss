@@ -1,6 +1,63 @@
+@use '../styles/mixins/colours';
 
-.LocationButton {
-    &.ListItem {
-        border-bottom: 0;
+.GeoLocationButton {
+    .LocationButton {
+        width: auto;
+        background: none;
+        border-radius: 3px;
+        border: 0;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
+
+        &:hover {
+            background-color: #{colours.get-static('colour-bg-standard-tint-3')};
+            background-color: var(--colour-bg-standard-tint-3);
+        }
+
+        &:focus {
+            border-radius: 3px;
+        }
+    }
+
+    .SvgIcon {
+        height: 42px;
+        width: 42px;
+        margin-bottom: -4px;
+
+        path {
+            fill: #{colours.get-static('colour-text-mid')};
+            fill: var(--colour-text-mid);
+        }
+    }
+
+    .primary {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .secondary {
+        font-size: 14px;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
+    }
+
+    .complete {
+        display: flex;
+        justify-content: center;
+
+        .primary {
+            font-weight: normal;
+        }
+    }
+
+    .buttonLabel {
+        display: flex;
+        align-items: center;
+
+        .multiLine {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
     }
 }
