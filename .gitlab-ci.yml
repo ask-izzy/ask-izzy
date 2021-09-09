@@ -53,25 +53,9 @@ lint-dockerfile-final:
     - master
     - tags
 
-.pa11y:
+pa11y:
   stage: lint
-  script: make lint-pa11y
-  allow_failure:
-    exit_codes: 2
-
-pa11y-dev:
-  extends: .pa11y
-  except:
-    - master
-    - tags
-  allow_failure:
-    exit_codes: 2
-
-pa11y-final:
-  extends: .pa11y
-  only:
-    - master
-    - tags
+  script: bash -c "$(make get-lint-pa11y-docker-cmd)" || exit $? # I have no idea why the exit trick is necessary but without it gitlab ignores exit status
   allow_failure:
     exit_codes: 2
 

@@ -73,8 +73,8 @@ else
 		contyard.office.infoxchange.net.au/hadolint:latest hadolint Dockerfile
 endif
 
-lint-pa11y:
-	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) lint-pa11y --ignore-existing-issues
+get-lint-pa11y-docker-cmd:
+	@echo "$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) shell -c 'rsync -a /app/public/static/ /static && ./invoke.sh lint-pa11y --ignore-existing-issues'"
 
 unit-test:
 	$(FORKLIFT) $(CI_FORKLIFT_FLAGS) -- $(REPO):$(TAG) unit-test $(CI_TEST_FLAGS)
