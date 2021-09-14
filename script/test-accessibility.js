@@ -186,6 +186,22 @@ async function* checkNextPage() {
                 "htmlcs",
             ],
             chromeLaunchConfig,
+            hideElements: '.ScreenReader', // Our ScreenReader component uses
+                // absolute positioning in order to make text visible to a
+                // screen reader but not a sighted user. Pa11y doesn't like
+                // absolute positioning so we need to disable this.
+                // Unfortunately pa11y doesn't allow you to disable a
+                // specific rule for a specific element
+                // (https://github.com/pa11y/pa11y-ci/issues/158) so we just
+                // wholesale ignore the component for now.
+            ignore: [
+                // Ask Izzy's design currently features text over an image
+                // prominently in the Heading. This is something we've talked
+                // about changing for legibility reasons but for now that's
+                // what we've got.
+                'WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.BgImage',
+                'WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.BgImage',
+            ],
         })};
     }
     process.stdout.write("\n")
