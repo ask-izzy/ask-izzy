@@ -1,0 +1,91 @@
+@use '../../styles/mixins/colours';
+
+.FormReportError {
+    margin-top: 10px;
+    color: #{colours.get-static('colour-text-dark')};
+    color: var(--colour-text-dark);
+
+    ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    input {
+        &[type="checkbox"] {
+            height: 32px;
+        }
+    }
+
+    label {
+        display: inline-block;
+        min-width: 100px;
+        height: 30px;
+        padding: 5px 0 5px 5px;
+        font-weight: normal;
+        line-height: 30px;
+        cursor: pointer;
+        vertical-align: bottom;
+    }
+
+    .moreInformation {
+        margin-bottom: 10px;
+
+        label {
+            display: block;
+        }
+
+        textarea {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            padding: 10px;
+            font-weight: normal;
+            box-sizing: border-box;
+        }
+    }
+
+    .moreInformation {
+        margin-bottom: 10px;
+
+        label {
+            display: block;
+        }
+
+        textarea {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    .formError {
+        padding: 0;
+        color: #{colours.get-static('colour-irreversible-action')};
+        color: var(--colour-irreversible-action);
+        text-align: left;
+    }
+
+    .formControls {
+
+        button {
+            padding: 5px 10px;
+            border: 1px solid #{colours.get-static('colour-link')};
+            border: 1px solid var(--colour-link);
+            border-radius: 3px;
+            background-color: transparent;
+            color: #{colours.get-static('colour-link')};
+            color: var(--colour-link);
+            font-size: 16px;
+            line-height: 24px;
+
+            .Icon {
+                top: 0;
+                vertical-align: bottom;
+            }
+
+            &.loading {
+                cursor: default;
+            }
+        }
+    }
+}

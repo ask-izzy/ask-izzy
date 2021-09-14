@@ -28,6 +28,7 @@ import LgbtiqIcon from "./LgbtiqIcon";
 import AlertBannerList from "../components/AlertBannerList";
 import type {Service} from "../iss";
 import ScreenReader from "./ScreenReader";
+import FormFindInformation from "./feedback/FormFindInformation";
 
 export default class ServicePane extends React.Component<{
     service: Service,
@@ -176,6 +177,9 @@ export default class ServicePane extends React.Component<{
                             </div>
                         </BoxedText>
                     </div>
+                </div>
+                <div className="row">
+                    <FormFindInformation />
                 </div>
             </div>
         );

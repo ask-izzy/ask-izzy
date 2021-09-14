@@ -19,10 +19,12 @@ services:
             PROXY_DOMAINS: '{"fonts.typography.com":"typography-com.docker.dev", "www.googletagmanager.com":"gtagmanager.docker.dev", "maps.googleapis.com":"gmaps.docker.dev", "maps.gstatic.com":"gmaps-static.docker.dev", "csi.gstatic.com":"gcsi-static.docker.dev", "fonts.gstatic.com":"gfonts-static.docker.dev", "tagmanager.google.com":"gtagmanager.docker.dev", "fonts.google.com":"gfonts.docker.dev", "www.google-analytics.com":"google-analytics.docker.dev", "google-analytics.com":"google-analytics.docker.dev", "bam.nr-data.net":"bam-nr-data.docker.dev", "js-agent.newrelic.com":"js-agent-newrelic.docker.dev",}'
             NEW_RELIC_CONFIG: '{}'
             NEW_RELIC_INFO: '{}'
+            NOTIFICATIONS_API_URL: 'http://localhost:8000/'
+            NOTIFICATIONS_API_KEY: 'NWsFP9pj.rdA1V47m6a5OVkUd5hMGvH4Eu6XWy6vB'
 
             NODE_ENV: development
         ports:
-            - '8000:8000'
+            - '8003:8000'
             - '8001:8001'
         volumes:
             - .:/app

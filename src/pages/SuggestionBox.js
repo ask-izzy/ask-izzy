@@ -5,6 +5,7 @@ import Link from "../components/base/Link";
 import Storage from "../storage";
 import Category from "../constants/Category";
 import {Service} from "../iss";
+import FormFeedbackCantFind from "../components/feedback/FormCantFind"
 
 type Props = {
     category: ?Category,
@@ -71,6 +72,9 @@ function SuggestionBox(
                     <h3>Want to see more services?</h3>
                     <div>
                         Try {navLinks()}
+                    </div>
+                    <div>
+                        <FormFeedbackCantFind />
                     </div>
                     {/*TODO Commented out for now until we work out*/}
                     {/*TODO the search help wording*/}

@@ -92,6 +92,8 @@ export default function render(req, res, next) {
             "STRAPI_URL",
             "NEW_RELIC_CONFIG",
             "NEW_RELIC_INFO",
+            "NOTIFICATIONS_API_URL",
+            "NOTIFICATIONS_API_KEY",
         ]
 
         const requiredVars = [
@@ -101,6 +103,8 @@ export default function render(req, res, next) {
             "NEW_RELIC_CONFIG",
             "NEW_RELIC_INFO",
             "STRAPI_URL",
+            "NOTIFICATIONS_API_URL",
+            "NOTIFICATIONS_API_KEY",
         ]
 
         for (const varToInject of varsToInject) {

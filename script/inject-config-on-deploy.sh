@@ -28,6 +28,8 @@ vars_to_inject=(
     "NEW_RELIC_INFO"
     "PROXY_PROTOCOL"
     "STRAPI_URL"
+    "NOTIFICATIONS_API_URL"
+    "NOTIFICATIONS_API_KEY"
 )
 
 required_vars=(
@@ -37,6 +39,8 @@ required_vars=(
     "NEW_RELIC_CONFIG"
     "NEW_RELIC_INFO"
     "STRAPI_URL"
+    "NOTIFICATIONS_API_URL"
+    "NOTIFICATIONS_API_KEY"
 )
 
 for var_to_inject in "${vars_to_inject[@]}"; do
