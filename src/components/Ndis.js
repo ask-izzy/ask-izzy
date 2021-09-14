@@ -3,21 +3,18 @@
 import type {Element as ReactElement} from "React";
 import React from "react";
 import iss from "../iss";
-import fixtures from "../../fixtures/services";
 import Spacer from "./Spacer";
 
 type Props = {
     object: iss.Service,
     compact?: boolean,
-    spacer?: boolean,
+    withSpacer?: boolean,
 }
 
 export default class Ndis extends React.Component<Props, void> {
-    static sampleProps: any = {default: {
-        object: new iss.Service(fixtures.ixa),
-        compact: true,
-        spacer: false,
-    }};
+    static defaultProps: any = {
+        withSpacer: false,
+    };
 
     render(): null | ReactElement<"div"> {
         let ndisApproved = this.props.object.ndis_approved;
@@ -32,7 +29,7 @@ export default class Ndis extends React.Component<Props, void> {
             }
             return (
                 <div>
-                    {this.props.spacer && (<Spacer />)}
+                    {this.props.withSpacer && (<Spacer />)}
                     <div className="Ndis">
                         Part of National Disability Insurance Scheme
                     </div>

@@ -192,7 +192,7 @@ async function checkURL(expected: string): Promise<void> {
     }
 
     await this.driver.wait(
-        urlIs(this.driver, expected),
+        () => urlIs(this.driver, expected),
         10000,
         `URL should be ${
             expected

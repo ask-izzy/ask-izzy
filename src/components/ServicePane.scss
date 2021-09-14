@@ -104,6 +104,10 @@
         }
     }
 
+    .locationInfo {
+        position: relative;
+    }
+
     .Address {
         svg {
             top: -2px;
@@ -117,8 +121,6 @@
     .TransportTime {
         padding-top: 10px;
         padding-bottom: 10px;
-        padding-left: 32px;
-        font-size: 16px;
     }
 
     // Hack since we wrap the whole address section in a google maps link.

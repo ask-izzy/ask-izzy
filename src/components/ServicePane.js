@@ -154,23 +154,29 @@ export default class ServicePane extends React.Component<{
                                     object={object.open}
                                     serviceId={object.id}
                                 />
-                                <Accessibility object={object} />
+                                <Accessibility
+                                    service={object}
+                                    withSpacer={true}
+                                />
                                 <Ndis
                                     className="ndis"
                                     compact={false}
                                     object={object}
-                                    spacer={true}
+                                    withSpacer={true}
                                 />
-                                <GoogleMapsLink
-                                    className="plain-text"
-                                    to={object.Location()}
-                                >
-                                    <Address location={object.Location()} />
+                                <div className="locationInfo">
+                                    <Address
+                                        location={object.Location()}
+                                        withSpacer={true}
+                                    />
                                     <TransportTime
                                         location={object.Location()}
-                                        withoutLink={true}
+                                        withSpacer={true}
                                     />
-                                </GoogleMapsLink>
+                                    <GoogleMapsLink
+                                        to={object.Location()}
+                                    />
+                                </div>
                                 <ContactMethods object={object} />
                                 <Feedback object={object} />
                             </div>

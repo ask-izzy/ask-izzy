@@ -18,14 +18,14 @@ const Template = (args: Object): ReactNode => {
 
 export const ServiceWithFullAccess: typeof Template = Template.bind({});
 ServiceWithFullAccess.args = {
-    object: new iss.Service(
+    service: new iss.Service(
         {...fixtures.susansHouse, accessibility: "fullaccess"}
     ),
 };
 
 export const ServiceWithAccess: typeof Template = Template.bind({});
 ServiceWithAccess.args = {
-    object: new iss.Service(
+    service: new iss.Service(
         {...fixtures.susansHouse, accessibility: "access"}
     ),
 };

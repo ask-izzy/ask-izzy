@@ -46,8 +46,8 @@
         transition: background-color 0.05s ease;
         justify-content: space-between;
         -ms-flex-pack: justify;
-        background-color: #{colours.get-static('colour-bg-highlight')};
-        background-color: var(--colour-bg-highlight);
+        background-color: #{colours.get-static('colour-brand-primary')};
+        background-color: var(--colour-brand-primary);
         box-shadow: 0 0 6px 0 #{colours.get-static('app-bar-shadow')};
         box-shadow: 0 0 6px 0 var(--app-bar-shadow);
 

@@ -206,11 +206,22 @@ async function assertMap() {
 }
 
 async function assertGoogleMapsLink(text) {
-    const selector = By.partialLinkText(text);
-    let link = await this.driver.findElement(selector);
-    let visible = await link.isDisplayed();
+    const selector = By.xpath(`//*[ contains (text(), '${text}' ) ]`);
+    let elementWithText = await this.driver.findElement(selector);
 
-    assert(visible, `Link was present but not visible`);
+    assert(
+        await elementWithText.isDisplayed(),
+        `Text was present but not visible`
+    );
+
+    const elementWithTextLocation = await elementWithText.getRect()
+
+    const link = await this.driver.executeScript(
+        ({x, y}) => document
+            .elementFromPoint(x, y)
+        ,
+        elementWithTextLocation
+    );
 
     let href = await link.getAttribute("href");
     let sel = /^https:\/\/maps.google.com\/.*/;
