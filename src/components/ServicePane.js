@@ -267,6 +267,7 @@ function ServicePane({service}: Props): ReactNode {
                                     withSpacer={true}
                                 />
                             }
+                            {!service.Location().isConfidential() &&
                             <GoogleMapsLink
                                 to={service.Location()}
                                 className={Storage.getCoordinates() ?
@@ -281,6 +282,7 @@ function ServicePane({service}: Props): ReactNode {
                                     />
                                 </span>
                             </GoogleMapsLink>
+                            }
                             <ContactMethods object={service} />
                             <Feedback object={service} />
                         </div>

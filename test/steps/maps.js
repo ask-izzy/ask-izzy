@@ -25,8 +25,6 @@ module.exports = (function() {
         .then("I should see a map", unpromisify(assertMap))
         .then("I should see markers?\n$table", unpromisify(assertMarkers))
         .then("I can see travel times", unpromisify(assertTravelTimes))
-        .then("I can get to google maps by clicking \"$STRING\"",
-            unpromisify(assertGoogleMapsLink))
         .then("I should be able to travel there \"$STRING\"",
             unpromisify(assertTransitMethod))
         .then("I should not be able to travel there \"$STRING\"",
@@ -203,30 +201,6 @@ async function assertMap() {
         .isDisplayed();
 
     assert.equal(visible, true);
-}
-
-async function assertGoogleMapsLink(text) {
-    const selector = By.xpath(`//*[ contains (text(), '${text}' ) ]`);
-    let elementWithText = await this.driver.findElement(selector);
-
-    assert(
-        await elementWithText.isDisplayed(),
-        `Text was present but not visible`
-    );
-
-    const elementWithTextLocation = await elementWithText.getRect()
-
-    const link = await this.driver.executeScript(
-        ({x, y}) => document
-            .elementFromPoint(x, y)
-        ,
-        elementWithTextLocation
-    );
-
-    let href = await link.getAttribute("href");
-    let sel = /^https:\/\/maps.google.com\/.*/;
-
-    assert(href.match(sel), "Expected a link to google maps");
 }
 
 async function assertMarkers(table) {

@@ -103,7 +103,7 @@ Feature: Service details page
         ----------------------------------------------
         When I visit /service/866464
         Then I can see travel times
-        Then I can get to google maps by clicking "Get directions"
+        Then I should see "Get directions in Google Maps"
 
     Scenario: There is no travel information for new-style confidential services
         When I visit /service/537512
