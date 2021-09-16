@@ -1,12 +1,10 @@
 /* @flow */
 
-import type {Element as ReactElement} from "React";
-import React from "react";
+import type {Element as ReactElement, Node as ReactNode} from "React";
+import React, {useEffect, useState} from "react";
 import _ from "underscore";
 
-import fixtures from "../../fixtures/services";
 import * as gtm from "../google-tag-manager";
-import ServiceFactory from "../../fixtures/factories/Service";
 
 import Address from "./Address";
 import Accessibility from "./Accessibility";
@@ -28,40 +26,29 @@ import LgbtiqIcon from "./LgbtiqIcon";
 import AlertBannerList from "../components/AlertBannerList";
 import type {Service} from "../iss";
 import ScreenReader from "./ScreenReader";
+import {MobileDetect} from "../effects/MobileDetect";
 
-export default class ServicePane extends React.Component<{
+type Props = {
     service: Service,
-}, {siblings: ?Array<Service>}> {
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-            siblings: null,
-        };
+}
+
+function ServicePane({service}: Props): ReactNode {
+
+    const [siblings, setSiblings] = useState<Array<Service>>([])
+
+    const isMobile = MobileDetect()
+
+    useEffect(() => {
+        getSiblingServices();
+    }, [service])
+
+
+    const getSiblingServices = async(): Promise<void> => {
+        let response = await service.getSiblingServices();
+        setSiblings(response.objects)
     }
 
-    componentDidMount(): void {
-        this.getSiblingServices();
-    }
-
-    componentDidUpdate(prevProps: Object, prevState: Object): void {
-        if (prevProps.service != this.props.service) {
-            this.getSiblingServices();
-        }
-    }
-
-    static sampleProps: any = {default: {
-        service: ServiceFactory(fixtures.youthSupportNet),
-    }};
-
-    async getSiblingServices(): Promise<void> {
-        let response = await this.props.service.getSiblingServices();
-
-        this.setState({siblings: response.objects});
-    }
-
-    recordAlsoAtThisLocation: (
-        (service: Service) => void
-    ) = (service: Service): void => {
+    const recordAlsoAtThisLocation = (service: Service) => {
         gtm.emit({
             event: "Other Services At Location Clicked",
             eventCat: "Other Services At Location Clicked",
@@ -71,126 +58,9 @@ export default class ServicePane extends React.Component<{
         });
     }
 
-    render(): ReactElement<"div"> {
-        const object = this.props.service;
-        return (
-            <div className="ServicePane">
-                <div
-                    role="complementary"
-                    aria-labelledby="header"
-                >
-                    <ScreenReader>
-                        <span id="header">
-                            Header.
-                        </span>
-                    </ScreenReader>
-                    <HeaderBar
-                        className="serviceDetailsHeader"
-                        primaryText={object.name}
-                        secondaryText={object.site.name}
-                        bannerName="housing"
-                    />
-                    <AlertBannerList
-                        state={object.Location()?.state}
-                        screenLocation="servicePage"
-                        format="inline"
-                    />
 
-                    <DebugServiceRecord object={object} />
-                </div>
-                <div
-                    role="main"
-                    aria-labelledby="serviceDetails"
-                    className="row"
-                >
-                    <ScreenReader>
-                        <span id="serviceDetails">
-                            Service details.
-                        </span>
-                    </ScreenReader>
-                    <div
-                        role="region"
-                        className="leftColumn"
-                        aria-labelledby="serviceDesc"
-                    >
-                        <ScreenReader>
-                            <span id="serviceDesc">
-                                Service description.
-                            </span>
-                        </ScreenReader>
-                        <div
-                            className="header"
-                            tabIndex="0"
-                        >
-                            <div>
-                                <IndigenousServiceIcon object={object} />
-                                <LgbtiqIcon object={object} />
-                            </div>
-                            {this.renderDescription(object)}
-                        </div>
-
-                        <div
-                            className="provisions"
-                            tabIndex="0"
-                        >
-                            <Eligibility {...object} />
-                            {this.renderServiceProvisions()}
-                            {this.renderSiblings()}
-                        </div>
-                    </div>
-                    <div
-                        role="region"
-                        aria-labelledby="serviceInfo"
-                        className="rightColumn"
-                    >
-                        <BoxedText>
-                            <ScreenReader>
-                                <h4 id="serviceInfo">
-                                    Service Info.
-                                </h4>
-                            </ScreenReader>
-                            <div className="practicalities-container">
-                                <CollapsedOpeningTimes
-                                    object={object.open}
-                                    serviceId={object.id}
-                                />
-                                <Accessibility
-                                    service={object}
-                                    withSpacer={true}
-                                />
-                                <Ndis
-                                    className="ndis"
-                                    compact={false}
-                                    object={object}
-                                    withSpacer={true}
-                                />
-                                <div className="locationInfo">
-                                    <Address
-                                        location={object.Location()}
-                                        withSpacer={true}
-                                    />
-                                    <TransportTime
-                                        location={object.Location()}
-                                        withSpacer={true}
-                                    />
-                                    <GoogleMapsLink
-                                        to={object.Location()}
-                                    />
-                                </div>
-                                <ContactMethods object={object} />
-                                <Feedback object={object} />
-                            </div>
-                        </BoxedText>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-    renderServiceProvisions(): ReactElement<"div"> {
-        let object = this.props.service;
-
-        if (_.isEmpty(object.serviceProvisions)) {
+    const renderServiceProvisions = (): ReactElement<"div"> => {
+        if (_.isEmpty(service.serviceProvisions)) {
             return <div />;
         }
 
@@ -200,7 +70,7 @@ export default class ServicePane extends React.Component<{
                     What you can get here
                 </h3>
                 <ul>
-                    {object.serviceProvisions.map(
+                    {service.serviceProvisions.map(
                         (provision, index) =>
                             <li key={index}>{provision}</li>
                     )}
@@ -209,7 +79,7 @@ export default class ServicePane extends React.Component<{
         );
     }
 
-    renderDescription(service: Service): ReactElement<"div"> {
+    const renderDescription = (service: Service): ReactElement<"div"> => {
         let description = service
             .descriptionSentences.map(
                 (sentence, idx) =>
@@ -241,8 +111,7 @@ export default class ServicePane extends React.Component<{
         )
     }
 
-    renderSiblings(): ReactElement<"div"> | ReactElement<"span"> {
-        const siblings = this.state.siblings;
+    const renderSiblings = (): ReactElement<"div"> | ReactElement<"span"> => {
 
         if (!siblings) {
             return <span />;
@@ -268,7 +137,7 @@ export default class ServicePane extends React.Component<{
                             to={`/service/${service.slug}`}
                             key={index}
                             onClick={
-                                () => this.recordAlsoAtThisLocation(service)
+                                () => recordAlsoAtThisLocation(service)
                             }
                             aria-label={`${service.name}. ${
                                 service.shortDescription[0]
@@ -287,4 +156,120 @@ export default class ServicePane extends React.Component<{
             </div>
         );
     }
+
+    return (
+        <div className="ServicePane">
+            <div
+                role="complementary"
+                aria-labelledby="header"
+            >
+                <ScreenReader>
+                    <span id="header">
+                        Header.
+                    </span>
+                </ScreenReader>
+                <HeaderBar
+                    className="serviceDetailsHeader"
+                    primaryText={service.name}
+                    secondaryText={service.site.name}
+                    bannerName="housing"
+                />
+                <AlertBannerList
+                    state={service.Location()?.state}
+                    screenLocation="servicePage"
+                    format="inline"
+                />
+
+                <DebugServiceRecord object={service} />
+            </div>
+            <div
+                role="main"
+                aria-labelledby="serviceDetails"
+                className="row"
+            >
+                <ScreenReader>
+                    <span id="serviceDetails">
+                        Service details.
+                    </span>
+                </ScreenReader>
+                <div
+                    role="region"
+                    className="leftColumn"
+                    aria-labelledby="serviceDesc"
+                >
+                    <ScreenReader>
+                        <span id="serviceDesc">
+                            Service description.
+                        </span>
+                    </ScreenReader>
+                    <div
+                        className="header"
+                        tabIndex="0"
+                    >
+                        <div>
+                            <IndigenousServiceIcon object={service} />
+                            <LgbtiqIcon object={service} />
+                        </div>
+                        {renderDescription(service)}
+                    </div>
+
+                    <div
+                        className="provisions"
+                        tabIndex="0"
+                    >
+                        <Eligibility {...service} />
+                        {renderServiceProvisions()}
+                        {!isMobile && renderSiblings()}
+                    </div>
+                </div>
+                <div
+                    role="region"
+                    aria-labelledby="serviceInfo"
+                    className="rightColumn"
+                >
+                    <BoxedText>
+                        <ScreenReader>
+                            <h4 id="serviceInfo">
+                                Service Info.
+                            </h4>
+                        </ScreenReader>
+                        <div className="practicalities-container">
+                            <CollapsedOpeningTimes
+                                object={service.open}
+                                serviceId={service.id}
+                            />
+                            <Accessibility
+                                service={service}
+                                withSpacer={true}
+                            />
+                            <Ndis
+                                className="ndis"
+                                compact={false}
+                                object={service}
+                                withSpacer={true}
+                            />
+                            <div className="locationInfo">
+                                <Address
+                                    location={service.Location()}
+                                    withSpacer={true}
+                                />
+                                <TransportTime
+                                    location={service.Location()}
+                                    withSpacer={true}
+                                />
+                                <GoogleMapsLink
+                                    to={service.Location()}
+                                />
+                            </div>
+                            <ContactMethods object={service} />
+                            <Feedback object={service} />
+                        </div>
+                    </BoxedText>
+                    {isMobile && renderSiblings()}
+                </div>
+            </div>
+        </div>
+    );
 }
+
+export default ServicePane

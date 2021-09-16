@@ -2,7 +2,9 @@
 
 import {useEffect, useState} from "react";
 
-export function windowWidth(): number {
+const MOBILE_BREAKPOINT = 768;
+
+export function MobileDetect(): boolean {
     const [width, setWidth] = useState(0);
     useEffect(() => {
         function handleResize() {
@@ -13,6 +15,6 @@ export function windowWidth(): number {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    return width;
+    return width <= MOBILE_BREAKPOINT;
 }
 
