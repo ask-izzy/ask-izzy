@@ -1,11 +1,30 @@
 /* $FlowIgnore */
 
-import React from "react";
-
+import React, {useState, useEffect} from "react";
+import convert from "color-convert";
 import {useDebugModeContext} from "../contexts/debug-mode-context";
 
 export default function() {
     const [debugMode] = useDebugModeContext()
+
+    const [colourVarsOriginals, setColourVarsOriginals] = useState({})
+    const [colourVarsOverrides, setColourVarsOverrides] = useState({})
+
+    const [fillColour, setFillColour] = useState("#14ff3b")
+
+    useEffect(() => {
+        const newColourVarsOriginals = {}
+        for (const colourGroup of colourVars) {
+            newColourVarsOriginals[colourGroup.groupName] = {}
+            for (const varName of colourGroup.vars) {
+                const colour = getComputedStyle(document.documentElement)
+                    .getPropertyValue(`--${varName}`)
+                newColourVarsOriginals[colourGroup.groupName][varName] = colour
+            }
+        }
+        setColourVarsOriginals(newColourVarsOriginals)
+    }, [])
+
     if (typeof window === "undefined" || !debugMode) {
         return null;
     }
@@ -13,7 +32,53 @@ export default function() {
     // Unselect colours every re-render so we got to sample all the colours
     // to determine what colour the buttons should be we don't accidentally
     // paint it the selection colour.
-    unselectVar()
+    setColourOverrides()
+
+    function overrideColour(varName, groupName, hexColour) {
+        const colourVarsGroupOverrides = colourVarsOverrides[groupName] || {}
+        colourVarsGroupOverrides[varName] = hexColour
+        setColourVarsOverrides({
+            ...colourVarsOverrides,
+            [groupName]: colourVarsGroupOverrides,
+        })
+    }
+    function removeOverrideColour(varName, groupName) {
+        const colourVarsGroupOverrides = colourVarsOverrides[groupName] || {}
+        delete colourVarsGroupOverrides[varName]
+        setColourVarsOverrides({
+            ...colourVarsOverrides,
+            [groupName]: colourVarsGroupOverrides,
+        })
+    }
+
+    function setColourOverrides() {
+        const root = document.documentElement
+        unsetColourOverrides()
+        for (const groupName in colourVarsOverrides) {
+            for (const varName in colourVarsOverrides[groupName]) {
+                const overrideColourHex =
+                    colourVarsOverrides[groupName][varName]
+                const hslColour = convert.hex.hsl(overrideColourHex)
+                root.style.setProperty(
+                    `--${varName}`,
+                    `hsl(${hslColour[0]}, ${hslColour[1]}%, ${hslColour[2]}%)`
+                );
+                root.style.setProperty(`--${varName}-hue`, `${hslColour[0]}`);
+                root.style.setProperty(
+                    `--${varName}-saturation`,
+                    `${hslColour[1]}%`
+                );
+
+            }
+        }
+    }
+
+    function unsetColourOverrides() {
+        const root = document.documentElement
+        while (root.style.length) {
+            root.style.removeProperty(root.style.item(0));
+        }
+    }
 
     const style = {
         position: "fixed",
@@ -24,16 +89,52 @@ export default function() {
     }
     return <details style={style}>
         <summary>See colours</summary>
+        Replacement colour:
+        <input
+            type="color"
+            value={fillColour}
+            onChange={event => setFillColour(event.target.value)}
+        />
         {colourVars.map(({groupName, vars}) => <div key={groupName}>
-            <h3>{groupName}</h3>
+            <h3 style={{marginBottom: "0"}}>{groupName}</h3>
             {vars.map(varName => {
-                const colour = getComputedStyle(document.documentElement)
-                    .getPropertyValue(`--${varName}`)
+                const colourOriginal =
+                    colourVarsOriginals?.[groupName]?.[varName]
+                const colourOverride =
+                    colourVarsOverrides?.[groupName]?.[varName]
                 return (
-                    <button key={varName}
-                        onClick={() => selectVar(varName)}
+                    <button
+                        key={varName}
+                        onClick={
+                            () => overrideColour(varName, groupName, fillColour)
+                        }
                     >
-                        <div style={{backgroundColor: colour, height: "1em"}} />
+                        <div style={{display: "flex"}}>
+                            <div
+                                style={{
+                                    backgroundColor: colourOriginal,
+                                    height: "1em",
+                                    flex: 1,
+                                }}
+                            />
+                            {colourOverride &&
+                            <div
+                                style={{
+                                    backgroundColor: colourOverride,
+                                    height: "1em",
+                                    lineHeight: "1em",
+                                    alignText: "center",
+                                    flex: 1,
+                                }}
+                                onClick={event => {
+                                    removeOverrideColour(varName, groupName)
+                                    event.stopPropagation()
+                                }}
+                            >
+                                x
+                            </div>
+                            }
+                        </div>
                         {varName.replace(/(?:raw-)?colour-/, "")}
                     </button>
                 )
@@ -62,6 +163,12 @@ const colourVars = [
         ],
     },
     {
+        groupName: "Brand Palette",
+        vars: [
+            "colour-brand-primary",
+        ],
+    },
+    {
         groupName: "Features",
         vars: [
             "colour-crisis",
@@ -69,6 +176,7 @@ const colourVars = [
             "colour-input-focus-overlay",
             "colour-irreversible-action",
             "colour-element-shadow",
+            "app-bar-shadow",
         ],
     },
     {
@@ -80,6 +188,7 @@ const colourVars = [
             "colour-bg-standard-tint-3",
             "colour-bg-callout-solid",
             "colour-bg-code",
+            "colour-bg-highlight",
         ],
     },
     {
@@ -112,18 +221,3 @@ const colourVars = [
         ],
     },
 ]
-
-function selectVar(varName) {
-    unselectVar()
-    const root = document.documentElement
-    root.style.setProperty(`--${varName}`, "hsl(130, 100%, 54%)");
-    root.style.setProperty(`--${varName}-hue`, "130");
-    root.style.setProperty(`--${varName}-saturation`, "100%");
-}
-
-function unselectVar() {
-    const root = document.documentElement
-    while (root.style.length) {
-        root.style.removeProperty(root.style.item(0));
-    }
-}
