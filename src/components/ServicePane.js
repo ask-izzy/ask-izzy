@@ -26,19 +26,17 @@ import LgbtiqIcon from "./LgbtiqIcon";
 import AlertBannerList from "../components/AlertBannerList";
 import type {Service} from "../iss";
 import ScreenReader from "./ScreenReader";
-import {windowWidth} from "../effects/WindowWidth";
+import {MobileDetect} from "../effects/MobileDetect";
 
 type Props = {
     service: Service,
 }
 
-const MOBILE_BREAKPOINT = 768;
-
 function ServicePane({service}: Props): ReactNode {
 
     const [siblings, setSiblings] = useState<Array<Service>>([])
 
-    const screenWidth = windowWidth()
+    const isMobile = MobileDetect()
 
     useEffect(() => {
         getSiblingServices();
@@ -221,7 +219,7 @@ function ServicePane({service}: Props): ReactNode {
                     >
                         <Eligibility {...service} />
                         {renderServiceProvisions()}
-                        {screenWidth > MOBILE_BREAKPOINT && renderSiblings()}
+                        {!isMobile && renderSiblings()}
                     </div>
                 </div>
                 <div
@@ -267,7 +265,7 @@ function ServicePane({service}: Props): ReactNode {
                             <Feedback object={service} />
                         </div>
                     </BoxedText>
-                    {screenWidth <= MOBILE_BREAKPOINT && renderSiblings()}
+                    {isMobile && renderSiblings()}
                 </div>
             </div>
         </div>
