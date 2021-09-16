@@ -18,6 +18,9 @@
     }
 
     &[disabled] {
+        font-weight: 500;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
         background-color: #{colours.get-static('colour-button-disabled')};
         background-color: var(--colour-button-disabled);
     }

@@ -7,6 +7,11 @@
 }
 
 .Location {
+    input {
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+    }
+
     .done {
         text-align: center;
         margin: 2em 0;
@@ -16,10 +21,21 @@
             width: calc(100% - 40px);
             margin: 20px auto;
         }
+    }
 
-        h3 {
-            font-weight: normal;
-            margin: 0;
+    .GeoLocationButtonContainer {
+        margin: 0 20px;
+        display: flex;
+        align-items: center;
+
+        .LocationButton {
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
+        }
+
+        .or {
+            color: #{colours.get-static('colour-text-mid')};
+            color: var(--colour-text-mid);
         }
     }
 
@@ -30,16 +46,16 @@
     .locationList {
         z-index: 2;
         padding: 0;
-        margin: -20px 18px 0 20px;
+        margin: 0 18px 0 20px;
         cursor: pointer;
-        border-left: solid 1px #{colours.get-static('raw-colour-pure-black')};
-        border-left: solid 1px var(--raw-colour-pure-black);
-        border-right: solid 1px #{colours.get-static('raw-colour-pure-black')};
-        border-right: solid 1px var(--raw-colour-pure-black);
-        border-bottom: solid 1px #{colours.get-static('raw-colour-pure-black')};
-        border-bottom: solid 1px var(--raw-colour-pure-black);
-        box-shadow: 0 0 12px 0 #{colours.get-static('app-bar-shadow')};
-        box-shadow: 0 0 12px 0 var(--app-bar-shadow);
+        border-left: solid 1px #{colours.get-static('colour-border-list-item-dark')};
+        border-left: solid 1px var(--colour-border-list-item-dark);
+        border-right: solid 1px #{colours.get-static('colour-border-list-item-dark')};
+        border-right: solid 1px var(--colour-border-list-item-dark);
+        border-bottom: solid 1px #{colours.get-static('colour-border-list-item-dark')};
+        border-bottom: solid 1px var(--colour-border-list-item-dark);
+        box-shadow: 0 0 4px 0 #{colours.get-static('app-bar-shadow')};
+        box-shadow: 0 0 4px 0 var(--app-bar-shadow);
 
         .locationItem {
             display: block;
@@ -61,11 +77,13 @@
     }
 
     .explainer {
-        display: inline-flex;
+        display: flex;
         align-items: center;
+        text-align: center;
+        justify-content: center;
+        margin: 3em 20px 0;
         font-size: 14px;
-        margin-left: 1em;
-        margin-bottom: 1em;
+        font-weight: normal;
         color: #{colours.get-static('colour-text-mid')};
         color: var(--colour-text-mid);
 
@@ -86,6 +104,11 @@
                     fill: #{colours.get-static('colour-text-mid')};
                     fill: var(--colour-text-mid);
                 }
+
+                circle {
+                    fill: #{colours.get-static('colour-text-mid')};
+                    fill: var(--colour-text-mid);
+                }
             }
         }
     }
@@ -95,21 +118,11 @@
             display: flex;
             flex-direction: column;
         }
-
-        .locationList {
-            border: 0;
-            box-shadow: none;
-            margin: -20px 0 0;
-        }
     }
 
     .search {
         position: relative;
         width: 100%;
-        padding-top: 20px;
-        padding-right: 20px;
-        padding-bottom: 20px;
-        padding-left: 20px;
         box-sizing: border-box;
 
         .FlatButton {

@@ -30,6 +30,11 @@
                     fill: #{colours.get-static('colour-text-mid')};
                     fill: var(--colour-text-mid);
                 }
+
+                circle {
+                    fill: #{colours.get-static('colour-text-mid')};
+                    fill: var(--colour-text-mid);
+                }
             }
         }
     }
@@ -41,7 +46,6 @@
     }
 
     .GeoLocationButton {
-        width: auto;
         display: flex;
         align-items: center;
 
@@ -53,17 +57,30 @@
 
         .primary {
             font-weight: normal;
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
         }
     }
 
-    @media (max-width: 556px) {
+    @media (max-width: 771px) {
+        .explainer {
+            width: 60%;
+        }
+    }
+
+    @media (max-width: 674px) {
         flex-direction: column;
 
         .explainer {
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+        }
+
+        .GeoLocationButton {
+            width: auto;
         }
 
         .specificLocationBanner {

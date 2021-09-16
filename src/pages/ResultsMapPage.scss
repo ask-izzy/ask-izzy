@@ -49,7 +49,15 @@
         border-top: 10px solid var(--colour-bg-standard-tint-2);
     }
 
-    @media (max-width: 556px) {
+    @media (max-width: 768px) {
+        .ResultsPageGeoLocationButton {
+            .GeoLocationButton {
+                width: auto;
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
         .ResultsPageGeoLocationButton {
             padding: 0.5em;
             align-items: flex-end;

@@ -40,6 +40,7 @@ type State = {
         nextDisabled: boolean,
         showStepper: boolean,
         fetchNewLocation: boolean,
+        foundLocation: boolean,
         category: ?Category,
 }
 
@@ -60,6 +61,7 @@ class Location extends Personalisation<Props, State> {
             fetchNewLocation: false,
             showStepper: false,
             category: undefined,
+            foundLocation: false,
         };
     }
 
@@ -164,6 +166,7 @@ class Location extends Personalisation<Props, State> {
                         ({name, state}) => name + state
                     ),
                     autocompletionInProgress: false,
+                    fetchNewLocation: false,
                 });
             })
 
@@ -177,7 +180,6 @@ class Location extends Personalisation<Props, State> {
     setLocationName(name: any, validChoice: boolean): void {
         this.setState({
             locationName: `${name || ""}`,
-            fetchNewLocation: false,
             nextDisabled: !(name && validChoice),
         });
     }
@@ -208,6 +210,7 @@ class Location extends Personalisation<Props, State> {
             this.setLocationName(ltrim(event.target.value), false);
             this.setState({
                 autocompletionInProgress: true,
+                fetchNewLocation: true,
             });
 
             // Forget the users coordinates if they change
@@ -220,6 +223,11 @@ class Location extends Personalisation<Props, State> {
 
     onGeoLocationSuccess(params: {coords: Coordinates, name: string}): void {
         storage.setCoordinates(params.coords, params.name);
+        this.setState({
+            foundLocation: true,
+            fetchNewLocation: false,
+            autocompletions: [],
+        })
         this.setLocationName(params.name, true);
     }
 
@@ -314,6 +322,7 @@ class Location extends Personalisation<Props, State> {
                                             {
                                                 locationName: "",
                                                 fetchNewLocation: true,
+                                                foundLocation: false,
                                                 autocompletions: [],
                                             }
                                         )
@@ -366,30 +375,37 @@ class Location extends Personalisation<Props, State> {
                             )
                         }
                     </fieldset>
-                    <hr className="Spacer"/>
-                    <div className="done">
+                    <div className="GeoLocationButtonContainer">
                         {
                             /* if the browser supports geolocation */
                             geolocationAvailable() &&
-                            <GeolocationButton
-                                restartSearch={this.state.fetchNewLocation}
-                                onSuccess={
-                                    this.onGeoLocationSuccess.bind(this)
+                                <>
+                                {
+                                    !this.state.foundLocation &&
+                                    <span className="or">Or</span>
                                 }
-                            />
+                                    <GeolocationButton
+                                        restartSearch={
+                                            this.state.fetchNewLocation
+                                        }
+                                        onSuccess={
+                                            this.onGeoLocationSuccess.bind(this)
+                                        }
+                                    />
+                                </>
                         }
-                        <h3>
-                            <em className="explainer">
-                                <span className="explainerIcons">
-                                    <icons.Walk/>
-                                    <icons.Tram/>
-                                    <icons.Car/>
-                                </span>
-                                We can only show estimated travel times to
-                                services by getting your current location.
-                            </em>
-                        </h3>
                     </div>
+                    <h3 className="explainer">
+                        <span className="explainerIcons">
+                            <icons.Walk/>
+                            <icons.Tram/>
+                            <icons.Car/>
+                        </span>
+                        <em>
+                            If you want to see estimated travel times
+                            to services use 'Get your current location' above.
+                        </em>
+                    </h3>
                 </WithStickyFooter>
             </main>
         </div>
