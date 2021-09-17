@@ -1,0 +1,10 @@
+@use '../../styles/mixins/colours';
+
+.Controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: #{colours.get-static('colour-bg-standard-tint-1')};
+    background-color: var(--colour-bg-standard-tint-1);
+}

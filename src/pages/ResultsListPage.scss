@@ -39,23 +39,6 @@
         padding: 0;
     }
 
-    .ViewOnMapButton {
-        background-color: #{colours.get-static('colour-bg-standard-tint-2')};
-        background-color: var(--colour-bg-standard-tint-2);
-        color: #{colours.get-static('colour-text-mid')};
-        color: var(--colour-text-mid);
-
-        .primaryText {
-            font-size: 18px;
-            line-height: 18px;
-        }
-
-        & > div > .leftIcon {
-            min-width: 55px;
-            padding-left: 10px;
-        }
-    }
-
     .MoreResultsButton {
         border-right: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
         border-right: 10px solid var(--colour-bg-standard-tint-2);

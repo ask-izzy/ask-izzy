@@ -11,7 +11,6 @@ import ResultsList from "../components/ResultsList";
 import LoadingResultsHeader from
     "../components/ResultsListPage/LoadingResultsHeader";
 import AlertBannerList from "../components/AlertBannerList";
-import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 import ButtonListItem from "../components/ButtonListItem";
@@ -24,11 +23,26 @@ import ScreenReader from "../components/ScreenReader";
 import ResultsPageGeolocationButton from "./ResultsPageGeolocationButton";
 import IssParamsOverrideControls from
     "../components/debug/IssParamsOverrideControls";
+import Controls from "../components/ResultsListPage/Controls";
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
         if (this.state.searchType) {
-            return this.renderPage()
+            return (
+                <div onClick={(event) => {
+                    if (typeof event.target.className === "string" &&
+                        !event.target.className.includes("optionSelect")) {
+                        this.setState((prevState) => (
+                            {
+                                hideOptions: !prevState.hideOptions,
+                            })
+                        )
+                    }
+                }}
+                >
+                    {this.renderPage()}
+                </div>
+            )
         }
 
         return <NotFoundStaticPage/>
@@ -123,10 +137,11 @@ class ResultsListPage extends ResultsPage<> {
                 <div className="List results">
                     {this.hasSearchResults() ||
                         <div>
-                            <ViewOnMapButton
-                                to={this.context.router.location
-                                    .pathname.replace(/\/?$/, "/map")
-                                }
+                            <Controls
+                                category={this.category}
+                                orderByCallback={(sortOption) => {
+                                    this.setState({sortOption})
+                                }}
                             />
                             <ResultsPageGeolocationButton
                                 fetchedLocation={this.state.fetchedLocation}
@@ -143,6 +158,7 @@ class ResultsListPage extends ResultsPage<> {
                     }
                     <ResultsList
                         reFetchTravelTimes={this.state?.fetchedLocation}
+                        sortOption={this.state.sortOption}
                         results={this.state.searchResults || []}
                     />
                     {this.renderLoadMore()}

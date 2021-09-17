@@ -1,0 +1,14 @@
+@use '../../styles/mixins/colours';
+
+.SortResult {
+    padding: 1em;
+    display: flex;
+    align-items: center;
+
+    .divider {
+        padding: 0 10px;
+        height: 44px;
+        border-left: 2px solid #{colours.get-static('colour-text-mid')};
+        border-left: 2px solid var(--colour-text-mid);
+    }
+}

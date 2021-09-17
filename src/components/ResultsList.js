@@ -12,13 +12,24 @@ import {
 
 import type { Service } from "../iss";
 import {useEffect, useState} from "react";
+import type {Service} from "../iss";
+import {sortResults} from "./ResultsListPage/SortResult.service";
+import type {SortType} from "./ResultsListPage/SortResult.service"
+import {useEffect, useState} from "react";
+import Category from "../constants/Category";
 
 type Props = {
     results: Array<Service>,
+    sortOption?: SortType,
     reFetchTravelTimes?: boolean,
 }
 
-function ResultsList({ results, reFetchTravelTimes = false}: Props): ReactNode {
+function ResultsList(
+    {
+        results,
+        sortOption,
+        reFetchTravelTimes = false,
+    }: Props): ReactNode {
 
     const [crisisResultList, setCrisisResultList] = useState([])
     const [nonCrisisResultList, setNonCrisisResultList] = useState([])
@@ -27,6 +38,13 @@ function ResultsList({ results, reFetchTravelTimes = false}: Props): ReactNode {
         setCrisisResultList(crisisResults(results))
         setNonCrisisResultList(nonCrisisResults(results))
     }, [results])
+
+    useEffect(() => {
+        const res = nonCrisisResults(results)
+        setNonCrisisResultList(
+            sortOption?.value ? sortResults(res, sortOption) : res
+        );
+    }, [sortOption])
 
 
     return (

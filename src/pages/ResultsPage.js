@@ -10,6 +10,7 @@ import {
     addPageLoadDependencies,
     closePageLoadDependencies,
 } from "../utils/page-loading"
+import type {SortType} from "../components/ResultsListPage/SortResult.service";
 import storage from "../storage";
 
 type State = {
@@ -19,6 +20,7 @@ type State = {
     searchPagesLoaded: number,
     searchType: ?string,
     fetchedLocation: boolean,
+    sortOption: ?SortType,
 }
 
 
@@ -39,6 +41,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             searchResults: null,
             searchError: null,
             searchPagesLoaded: 0,
+            sortOption: null,
             fetchedLocation: false,
             searchType,
         };
