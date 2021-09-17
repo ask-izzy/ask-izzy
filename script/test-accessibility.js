@@ -4,7 +4,6 @@ import path from "path";
 import ansiEscapes from "ansi-escapes";
 import fs from "fs-extra";
 
-import * as renderStatic from "../src/server/render-static";
 import routes from "../src/routes";
 import categories from "../src/constants/categories";
 
@@ -159,7 +158,7 @@ function findContinuingIssues(issues: Array<Object>, previousIssues: Array<Objec
 async function* checkNextPage() {
     const sampleCategories = [categories[0]];
     const publicDir = path.join(__dirname, "../public");
-    const pages = renderStatic.getPagesFromRoutes(routes, sampleCategories);
+    const filePaths = await fs.readJson(path.join(__dirname, "./generatedFilePaths.json"))
     const chromeLaunchConfig = {
         "args": [
             "--headless",
@@ -170,16 +169,16 @@ async function* checkNextPage() {
     }
 
     process.stdout.write("Testing page accessibility")
-    for (const [i, page] of pages.entries()) {
-        const uri = `file://${publicDir}${page.filePath}`;
+    for (const [i, filePath] of filePaths.entries()) {
+        const uri = `file://${publicDir}${filePath}`;
         if (!process.env.CI) {
             process.stdout.write(
                 ansiEscapes.eraseStartLine +
                 ansiEscapes.cursorLeft +
-                `Testing page accessibility (${i + 1} of ${pages.length})`
+                `Testing page accessibility (${i + 1} of ${filePaths.length})`
             );
         }
-        yield {...page, results: await pa11y(uri, {
+        yield {filePath, results: await pa11y(uri, {
             includeWarnings: true,
             standard: "WCAG2AA",
             runners: [
