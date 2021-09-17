@@ -36,15 +36,11 @@ function ResultsList(
 
     useEffect(() => {
         setCrisisResultList(crisisResults(results))
-        setNonCrisisResultList(nonCrisisResults(results))
-    }, [results])
-
-    useEffect(() => {
         const res = nonCrisisResults(results)
         setNonCrisisResultList(
             sortOption?.value ? sortResults(res, sortOption) : res
         );
-    }, [sortOption])
+    }, [results, sortOption])
 
 
     return (

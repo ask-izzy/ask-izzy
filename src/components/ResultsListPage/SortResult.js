@@ -24,6 +24,7 @@ type Props = {
     callback: function,
     category: ?Category,
     titlePosition: string,
+    showDivider: boolean,
 }
 
 function SortResult(
@@ -31,6 +32,7 @@ function SortResult(
         callback,
         category,
         titlePosition,
+        showDivider,
     }: Props): ReactNode {
 
     const [selection, setSelection] = React.useState<SortType>(
@@ -61,13 +63,13 @@ function SortResult(
 
     return (
         <div className="SortResult">
-            <div className="divider"/>
+            {showDivider && <div className="divider"/>}
             <Dropdown
                 onChange={(option) => {
                     setSelection(option);
                     callback(option);
                 }}
-                title="Order By"
+                title="Sort By"
                 titlePosition={titlePosition}
                 selection={selection}
                 options={options}

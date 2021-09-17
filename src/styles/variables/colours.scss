@@ -25,6 +25,18 @@ $lightness-button-hover: 10%;
     /* Brand Palette */
     @include colours.define('colour-brand-primary', 'global', 'raw-colour-rich-purple');
 
+    @include colours.define(
+            'colour-brand-primary-mid',
+            'global',
+            colours.lighten('raw-colour-rich-purple', 'global', -5%)
+    );
+
+    @include colours.define(
+            'colour-brand-primary-dark',
+            'global',
+            colours.lighten('raw-colour-rich-purple', 'global', -20%)
+    );
+
     /* Features */
     @include colours.define('colour-crisis', 'global', 'raw-colour-rich-purple');
 

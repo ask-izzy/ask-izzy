@@ -44,6 +44,9 @@ function Dropdown(
                 {options.map((option, index) => (
                     <div
                         key={`${option.key || "key"}_${index}`}
+                        className={
+                            option.name === selection.name ? "selected" : ""
+                        }
                         onClick={() => {
                             setShowOptions(!setShowOptions);
                             onChange(option);

@@ -6,7 +6,7 @@
     align-items: center;
 
     .title {
-        margin: 5px 0;
+        margin: 5px 10px;
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
 
@@ -23,7 +23,6 @@
         display: flex;
         justify-content: space-between;
         padding: 10px;
-        margin: 0 10px;
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
         font-weight: 500;
@@ -66,8 +65,6 @@
 
     .options {
         position: absolute;
-        width: 9.7em;
-        margin: 0 11px;
         background-color: #{colours.get-static('raw-colour-pure-white')};
         background-color: var(--raw-colour-pure-white);
         color: #{colours.get-static('colour-text-mid')};
@@ -80,13 +77,26 @@
         div {
             padding: 10px;
 
-            &:hover {
+            &.selected {
                 background-color: #{colours.get-static('colour-bg-standard-tint-1')};
                 background-color: var(--colour-bg-standard-tint-1);
                 color: #{colours.get-static('colour-text-dark')};
                 color: var(--colour-text-dark);
                 font-weight: 500;
             }
+
+            &:hover {
+                background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+                background-color: var(--colour-bg-standard-tint-2);
+                color: #{colours.get-static('colour-text-dark')};
+                color: var(--colour-text-dark);
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .optionSelect {
+            font-size: 14px;
         }
     }
 }
