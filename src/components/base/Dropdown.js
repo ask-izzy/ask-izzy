@@ -4,7 +4,8 @@ import * as React from "react";
 import type {Node as ReactNode} from "react";
 import SvgIconChevron from "../../icons/Chevron";
 import type {SortType} from "../ResultsListPage/SortResult.service";
-import {useRef} from "react";
+import {useEffect, useRef} from "react";
+import {OutsideComponentClick} from "../../effects/OutsideComponentClick";
 
 
 type Props = {
@@ -28,11 +29,18 @@ function Dropdown(
 
     const [showOptions, setShowOptions] = React.useState<boolean>(false);
 
+    const clickedOutsideComponent = OutsideComponentClick(ref)
+
+    useEffect(() => {
+        if(clickedOutsideComponent !== undefined) {
+            setShowOptions(!clickedOutsideComponent)
+        }
+    }, [clickedOutsideComponent])
 
     const Options = (): ReactNode => (
-        <div >
+        <div ref={ref}>
             <div
-                ref={ref}
+                aria-labelledby="sortOptions"
                 className={`optionSelect ${
                     showOptions ? "activeOptionSelect open" : "closed"}`}
                 onClick={() => setShowOptions(!showOptions)}
@@ -43,12 +51,14 @@ function Dropdown(
             <div className="options">
                 {options.map((option, index) => (
                     <div
+                        id="sortOptions"
+                        aria-live="polite"
                         key={`${option.key || "key"}_${index}`}
                         className={
                             option.name === selection.name ? "selected" : ""
                         }
                         onClick={() => {
-                            setShowOptions(!setShowOptions);
+                            setShowOptions(false);
                             onChange(option);
                         }}
                     >

@@ -8,7 +8,7 @@
     .divider {
         padding: 0 10px;
         height: 44px;
-        border-left: 2px solid #{colours.get-static('colour-text-mid')};
-        border-left: 2px solid var(--colour-text-mid);
+        border-left: 2px solid #{colours.get-static('colour-bg-standard-tint-1')};
+        border-left: 2px solid var(--colour-bg-standard-tint-1);
     }
 }

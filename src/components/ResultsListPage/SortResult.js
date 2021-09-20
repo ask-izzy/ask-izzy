@@ -11,7 +11,7 @@ const DEFAULT_OPTIONS: Array<SortType> = [
     {
         key: null,
         value: null,
-        name: "Best Match",
+        name: "Best match",
     },
     {
         key: "now_open",
@@ -69,7 +69,7 @@ function SortResult(
                     setSelection(option);
                     callback(option);
                 }}
-                title="Sort By"
+                title="Sort by"
                 titlePosition={titlePosition}
                 selection={selection}
                 options={options}

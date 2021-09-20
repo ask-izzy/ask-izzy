@@ -1,7 +1,11 @@
+@use '../styles/mixins/colours';
 
 .ViewOnMapButton {
     border: 0;
     background: none;
+    font-weight: bold;
+    color: #{colours.get-static('colour-text-dark')};
+    color: var(--colour-text-dark);
 
     .buttonLabel {
         display: flex;

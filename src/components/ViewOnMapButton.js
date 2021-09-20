@@ -45,7 +45,7 @@ function ViewOnMapButton({to}: Props): ReactNode {
         >
             <div className="buttonLabel">
                 <icons.Map className="big" />
-                Map View
+                Map view
             </div>
         </Button>
     );
