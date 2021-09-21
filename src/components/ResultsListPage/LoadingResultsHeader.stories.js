@@ -21,9 +21,6 @@ export default {
     args: {
         category: (getCategory("housing"): ?Category),
         title: "Housing",
-        personalisationComponents: (
-            getCategory("housing")?.personalisation: void | Array<any>
-        ),
         location: {pathname: "/"},
         meta: {
             total_count: 42,

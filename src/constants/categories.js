@@ -23,9 +23,8 @@ const categories = [
             personalisation.Gender,
             personalisation.Age,
             personalisation.Demographics,
-            ...personalisation.OnlineSafetyScreenBundle(
-                personalisation.HousingAreYouSafe
-            ),
+            personalisation.HousingAreYouSafe,
+            personalisation.OnlineSafetyScreen,
         ],
     }): Category),
     (new Category({
@@ -64,9 +63,8 @@ const categories = [
             q: "(family violence) -(coordinating bodies) -(fire-fighting)",
         },
         personalisation: [
-            ...personalisation.OnlineSafetyScreenBundle(
-                personalisation.AreYouSafe
-            ),
+            personalisation.AreYouSafe,
+            personalisation.OnlineSafetyScreen,
             personalisation.Location,
             personalisation.DfvDemographics,
             personalisation.Under18DomesticViolenceScreen,
@@ -87,9 +85,8 @@ const categories = [
         personalisation: [
             personalisation.Location,
             personalisation.HealthSubcategories,
-            ...personalisation.OnlineSafetyScreenBundle(
-                personalisation.HealthAreYouSafe
-            ),
+            personalisation.HealthAreYouSafe,
+            personalisation.OnlineSafetyScreen,
             personalisation.DemographicsIndigenous,
         ],
     }): Category),
@@ -128,9 +125,8 @@ const categories = [
         personalisation: [
             personalisation.Location,
             personalisation.CounsellingSubcategories,
-            ...personalisation.OnlineSafetyScreenBundle(
-                personalisation.CounsellingAreYouSafe
-            ),
+            personalisation.CounsellingAreYouSafe,
+            personalisation.OnlineSafetyScreen,
             personalisation.DemographicsIndigenous,
         ],
     }): Category),
@@ -146,9 +142,8 @@ const categories = [
         personalisation: [
             personalisation.Location,
             personalisation.LegalSubcategories,
-            ...personalisation.OnlineSafetyScreenBundle(
-                personalisation.LegalAreYouSafe
-            ),
+            personalisation.LegalAreYouSafe,
+            personalisation.OnlineSafetyScreen,
             personalisation.DemographicsIndigenous,
         ],
     }): Category),

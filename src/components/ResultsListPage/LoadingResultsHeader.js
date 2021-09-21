@@ -30,7 +30,6 @@ const formatResultsPageHeading = (title: string) => {
 
 
 type Props = {
-    personalisationComponents: Array<Object>,
     error: string,
     statusCode: number,
     loading: boolean,

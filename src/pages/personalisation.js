@@ -30,7 +30,6 @@ import LgbtiqaDomesticViolenceScreen from "./personalisation/LgbtiqaDomesticViol
 import LifeSkillsSubcategories from "./personalisation/LifeSkillsSubcategories";
 import Location from "./personalisation/Location";
 import MoneySubcategories from "./personalisation/MoneySubcategories";
-import OnlineSafetyScreenBundle from "./personalisation/OnlineSafetyScreenBundle";
 import OnlineSafetyScreen from "./personalisation/OnlineSafetyScreen";
 import ServiceList from "./personalisation/ServiceList";
 import SleepTonight from "./personalisation/SleepTonight";
@@ -66,7 +65,6 @@ export default {
     LifeSkillsSubcategories,
     Location,
     MoneySubcategories,
-    OnlineSafetyScreenBundle,
     OnlineSafetyScreen,
     ServiceList,
     SleepTonight,

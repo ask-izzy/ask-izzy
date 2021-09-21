@@ -15,8 +15,36 @@ import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import ScreenReader from "../../components/ScreenReader";
 
-class BaseMultiQuestion extends BaseQuestion {
-    static propTypes = BaseQuestion.propTypes;
+export type Props = {
+    name: string,
+    question: string,
+    byline?: string,
+    info?: string,
+    classNames?: string,
+    answers: Object | Array<string>,
+    onDoneTouchTap: Function,
+    goBack?: () => boolean,
+    showBaseTextBox?: boolean,
+    showDVLinkBar?: boolean,
+    baseTextBoxComponent?: React.Element<any>,
+    textDVLinkBar?: React.Element<any>,
+    icons?: Object,
+    mobileView?: boolean,
+    answersDesc: Object,
+    backToAnswers?: boolean,
+}
+
+export type State = {
+    selected: ?string,
+    rootHeight?: number,
+    windowHeight?: number,
+    answers?: Set<string>,
+    shouldRenderSafetyDetails?: boolean,
+    showStepper: boolean,
+    showSkipToChoice: boolean,
+}
+class BaseMultiQuestion extends Personalisation<Props, State> {
+    static defaultProps: Object = {};
 
     renderDoneButton(): React.Element<any> {
         const label = (this.selected.size) ?
@@ -124,6 +152,70 @@ class BaseMultiQuestion extends BaseQuestion {
         }
 
         return search;
+    }
+
+    static getSearchForSingleAnswer(
+        request: iss.searchRequest,
+        answer: string,
+    ): ?iss.searchRequest {
+
+        let answerComposer;
+
+        /* the answers are a map of answers to search terms */
+        if (_.isObject(this.defaultProps.answers) &&
+            this.defaultProps.answers[answer] instanceof Search) {
+
+            answerComposer = this.defaultProps.answers[answer];
+        } else {
+            // Default behaviour for strings is to append
+            answerComposer = append(answer);
+        }
+
+        return answerComposer.compose(request);
+    }
+
+    /**
+     * Return the answers from the answers property element.
+     *
+     * @returns {Array<string>} an array of the valid answers
+     * to this question.
+     */
+    get answers(): Array<string> {
+        if (Array.isArray(this.props.answers)) {
+            return this.props.answers;
+        } else {
+            return Object.keys(this.props.answers);
+        }
+    }
+
+    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): string {
+        return "";
+    }
+
+    get question(): string {
+        return this.props.question;
+    }
+
+    /**
+     * Determines whether or not to show the question.
+     *
+     * @returns {boolean} true if we should show this question.
+     */
+    static showPage(): boolean {
+        return true;
+    }
+
+    /**
+     * Determines whether or not to show the question on the summary page.
+     *
+     * @returns {boolean} true if we should show this on the summary page.
+     */
+    static showInSummary(): boolean {
+        return true;
+    }
+
+    onNextStep(): void {
+        storage.setJSON(this.props.name, Array.from(this.selected));
     }
 
     iconFor(answer: string): ?React.Element<any> {

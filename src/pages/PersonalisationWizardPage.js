@@ -1,20 +1,28 @@
-/* $FlowIgnore */
+/* @flow */
 
 import * as React from "react";
+import type {ElementConfig as ReactElementConfig} from "react";
 
-import BasePersonalisationPage from "./BasePersonalisationPage";
+import BaseCategoriesPage from "./BaseCategoriesPage";
 import Intro from "./personalisation/Intro";
 import NotFoundStaticPage from "./NotFoundStaticPage";
 import routerContext from "../contexts/router-context";
+import {
+    navigateToPersonalisationSubpath,
+    getPersonalisationPages,
+    getCurrentPersonalisationPage,
+    getCurrentPersonalisationPageIndex,
+} from "../utils/personalisation"
 
+import type {PersonalisationPageType} from "../utils/personalisation"
 type State = {
   showSubpage: boolean,
 }
 
-class PersonalisationWizardPage extends BasePersonalisationPage<State> {
+class PersonalisationWizardPage extends BaseCategoriesPage<{}, State> {
 
-    constructor(props: Object) {
-        super(props);
+    constructor(props: Object, state: Object) {
+        super(props, state);
 
         this.state = {
             nextDisabled: false,
@@ -22,9 +30,12 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
         };
     }
 
-    static contextType = routerContext;
+    static contextType: any = routerContext;
 
-    static getDerivedStateFromProps(props, state): void {
+    static getDerivedStateFromProps(
+        props: ReactElementConfig<typeof PersonalisationWizardPage>,
+        state: State
+    ): State {
         return {nextDisabled: false, showSubpage: true};
     }
 
@@ -33,59 +44,44 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
             this.context.router.match.params.search ===
                 "bushfires -(closed due to the recent bushfires)"
         ) {
-            this.setState({ showSubpage: false });
-        }
-    }
-
-    previousStep = () => {
-        if (this.refs.subpage && this.refs.subpage.onPreviousStep) {
-            if (!this.refs.subpage.onPreviousStep(
-                this.forceUpdate.bind(this)
-            )) {
-                return;
-            }
-        }
-
-        this.setState({nextDisabled: false});
-
-        const prevSubPage = this.prevSubPage();
-
-        if (prevSubPage) {
-            this.goToSubPage(prevSubPage);
-        } else {
-            this.context.router.navigate("/");
+            this.setState({showSubpage: false });
         }
     }
 
     goToCategoryPage(): void {
-        this.navigate("");
+        navigateToPersonalisationSubpath(this.context.router, "");
     }
 
-    goToSubPage(subpage: React.ComponentType<any>): void {
+    goToSubPage(
+        subpage: PersonalisationPageType
+    ): void {
         /* TODO: Narrow down which components don't have defaultProps */
 
-        this.navigate(`personalise/page/${subpage.defaultProps.name}`);
+        navigateToPersonalisationSubpath(
+            this.context.router,
+            `personalise/page/${subpage.defaultProps.name}`
+        );
     }
 
-    nextSubPage(): ?React.ComponentType<any> {
+    nextSubPage(): ?PersonalisationPageType {
         return this.personalisationComponents.find((component, idx) =>
             (idx > this.currentComponentIdx) &&
             (component.getSearch ? !component.getSearch({}) : true)
         );
     }
 
-    prevSubPage(): ?React.ComponentType<any> {
+    prevSubPage(): ?PersonalisationPageType {
         const nextSubpageIdx = this.currentComponentIdx - 1;
 
         return this.personalisationComponents[nextSubpageIdx];
     }
 
-    nextStep = () => {
+    nextStep: () => void = () => {
         if (this.state.nextDisabled) {
             return
         }
 
-        super.nextStep();
+        this.refs?.subpage?.onNextStep?.();
         this.setState({nextDisabled: false});
 
         const nextPage = this.nextSubPage()
@@ -102,12 +98,20 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
      *
      * An array of components required to personalise this category.
      */
-    get personalisationComponents(): Array<React.ComponentType<any>> {
-        return [Intro].concat(super.personalisationComponents);
+    get personalisationComponents(): Array<PersonalisationPageType> {
+        return [
+            Intro,
+            ...getPersonalisationPages(
+                this.context.router
+            ),
+        ];
     }
 
     get currentComponentIdx(): number {
-        const sup = super.currentComponentIdx;
+        const sup = getCurrentPersonalisationPageIndex(
+            this.context.router,
+            this.personalisationComponents
+        );
 
         if (sup === -1) {
             return 0;
@@ -131,11 +135,15 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
             return this.refs.subpage.customPageTitle;
         }
 
-        return this.currentComponent.title || this.title;
+        const currentComponent = getCurrentPersonalisationPage(
+            this.context.router
+        )
+
+        return currentComponent?.title || this.title;
     }
 
-    render(): React.Element {
-        const Subpage = this.currentComponent;
+    render(): React.Node {
+        const Subpage = this.personalisationComponents[this.currentComponentIdx]
 
         if (!Subpage) {
             throw new Error("Unexpected");
@@ -158,11 +166,8 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
                 <Subpage
                     ref="subpage"
                     onDoneTouchTap={this.nextStep}
-                    onNextStepCallback={this.forceUpdate.bind(this)}
                     category={this.category}
-                    nextStep={this.nextStep}
                     backToAnswers={false}
-                    previousStep={this.previousStep}
                 />
             </div>
         );

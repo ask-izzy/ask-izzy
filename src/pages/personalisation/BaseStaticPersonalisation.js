@@ -71,23 +71,12 @@ class BaseStaticPersonalisation extends Personalisation<Props, {}> {
         return true;
     }
 
-    /**
-     * Trigger next page after a 500ms debounce.
-     *
-     * @returns {void}
-     */
-    triggerNext(): void {
-        if (typeof this.nextStep === "function") {
-            this.nextStep();
-        }
-    }
-
     onDoneTouchTap(): void {
         this.props.onDoneTouchTap();
     }
 
     onAnswerTouchTap(): void {
-        this.triggerNext();
+        this.props.onDoneTouchTap();
     }
 
     renderContent(): React.Node {

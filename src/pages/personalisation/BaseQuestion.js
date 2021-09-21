@@ -31,7 +31,6 @@ export type Props = {
     baseTextBoxComponent?: ReactNode,
     textDVLinkBar?: ReactNode,
     icons?: Object,
-    onNextStepCallback?: Function,
     mobileView?: boolean,
     descriptionsForAnswers: {[string]: string},
     backToAnswers?: boolean,
@@ -218,17 +217,6 @@ class BaseQuestion extends Personalisation<Props, State> {
         return true;
     }
 
-    /**
-     * Trigger next page after a 500ms debounce.
-     *
-     * @returns {void}
-     */
-    triggerNext(): void {
-        if (typeof this.nextStep === "function") {
-            this.nextStep();
-        }
-    }
-
     onNextStep(): void {
         storage.setItem(
             this.props.name,
@@ -252,7 +240,7 @@ class BaseQuestion extends Personalisation<Props, State> {
         this.setState({
             selectedAnswer: answer,
         }, () => {
-            this.triggerNext()
+            this.props.onDoneTouchTap()
         });
     }
 

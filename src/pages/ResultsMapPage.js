@@ -4,9 +4,6 @@ import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
 import AppBar from "../components/AppBar";
-import DebugContainer from "../components/DebugContainer";
-import DebugPersonalisation from "../components/DebugPersonalisation";
-import DebugSearch from "../components/DebugSearch";
 import ResultsList from "../components/ResultsList";
 import ResultsPage from "./ResultsPage";
 import SitesMap from "../components/SitesMap";
@@ -104,15 +101,6 @@ class ResultsMapPage extends ResultsPage<{}, State> {
     renderPage: (() => ReactElement<"div">) = () => (
         <div className="ResultsMapPage">
             <AppBar transition={false}/>
-            <DebugContainer message="Debug personalisation">
-                <DebugPersonalisation
-                    search={this.search}
-                    items={this.personalisationComponents}
-                />
-            </DebugContainer>
-            <DebugContainer message="ISS Parameters">
-                <DebugSearch search={this.issParams()} />
-            </DebugContainer>
             <main aria-labelledby="mapResults">
                 <ScreenReader>
                     <span id="mapResults">

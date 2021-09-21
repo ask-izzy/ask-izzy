@@ -23,6 +23,9 @@ import IssParamsOverrideControls from
 import ScrollToTop from "../components/ResultsListPage/ScrollToTop";
 import Storage from "../storage";
 import Controls from "../components/ResultsListPage/Controls";
+import {
+    getPersonalisationPages,
+} from "../utils/personalisation"
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
@@ -58,7 +61,9 @@ class ResultsListPage extends ResultsPage<> {
                 <DebugContainer message="Debug personalisation">
                     <DebugPersonalisation
                         search={this.search}
-                        items={this.personalisationComponents}
+                        items={getPersonalisationPages(
+                            this.context.router
+                        )}
                     />
                 </DebugContainer>
                 <DebugContainer
@@ -93,7 +98,6 @@ class ResultsListPage extends ResultsPage<> {
                     title={this.title}
                     category={this.category}
                     meta={this.state.searchMeta || {total_count: 0}}
-                    personalisationComponents={this.personalisationComponents}
                     loading={this.searchIsLoading}
                     error={this.state.searchError ?
                         "An error occurred. Please try again."

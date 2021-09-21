@@ -17,6 +17,10 @@ import {
 import storage from "../storage";
 import type {SortType} from "../components/base/Dropdown"
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
+import {
+    getPersonalisationPages,
+} from "../utils/personalisation"
+
 type State = {
     searchMeta: ?serviceSearchResultsMeta,
     searchResults: ?Array<Service>,
@@ -159,7 +163,10 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         // inspect the session).
         let request = this.search;
 
-        for (let item of this.personalisationComponents) {
+        const personalisationPages = getPersonalisationPages(
+            this.context.router
+        )
+        for (let item of personalisationPages) {
             // TODO: This needs to be debugged with the new flow version
             // $FlowIgnore
             if (typeof item.getSearch === "function") {

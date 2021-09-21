@@ -6,28 +6,26 @@ import Category from "../constants/Category";
 import {getCategory} from "../constants/categories";
 import Service from "../iss/Service";
 import type {
-    searchResultsMeta,
+    // searchResultsMeta,
 } from "../iss/search"
 
 import type {serviceSearchRequest} from "../iss/serviceSearch";
-import Location from "./personalisation/Location";
 import storage from "../storage";
-import personalisation from "./personalisation";
 import routerContext from "../contexts/router-context";
 
 type State = {
-    meta?: ?searchResultsMeta,
-    error?: any,
-    statusCode?: number,
-    objects?: Array<Service>,
+    // meta?: ?searchResultsMeta,
+    // error?: any,
+    // statusCode?: number,
+    // objects?: Array<Service>,
     nextDisabled?: boolean,
-    floatingContainerHeight?: number,
-    isClient?: boolean,
-    childServices?: Array<Service>
+    // floatingContainerHeight?: number,
+    // isClient?: boolean,
+    // childServices?: Array<Service>
 }
 
 class BaseCategoriesPage<ChildProps = {...}, ChildState = {...}>
-    extends React.Component<ChildProps, State & ChildState> {
+    extends React.Component<ChildProps, ChildState & State> {
     static contextType: any = routerContext;
 
     constructor(props: Object, context: Object) {
@@ -73,39 +71,6 @@ class BaseCategoriesPage<ChildProps = {...}, ChildState = {...}>
                 q: "undefined-search",
             };
         }
-    }
-
-    /**
-     * personalisationComponents:
-     *
-     * An array of components required to personalise this category.
-     */
-    get personalisationComponents(): Array<React.ComponentType<any>> {
-        let components = [];
-
-        if (this.category) {
-            components = this.category.personalisation;
-        } else if (this.context.router.match.params.search) {
-            components = [
-                ...personalisation.OnlineSafetyScreenBundle(
-                    personalisation.FreeTextAreYouSafe
-                ),
-                Location,
-            ];
-        }
-
-        return components.filter(component => {
-            if (typeof window === "undefined") {
-                if (typeof component.staticShowPage === "function") {
-                    // $FlowIgnore
-                    return component.staticShowPage();
-                }
-            }
-
-            return (typeof component.showPage === "function") &&
-                // $FlowIgnore
-                component.showPage()
-        });
     }
 
     componentDidMount(): void {
