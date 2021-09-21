@@ -1,11 +1,12 @@
 /* @flow */
 
 import * as React from "react";
-import type {Node as ReactNode} from "react";
+import type {Node as ReactNode, Element as ReactElement} from "react";
 import SvgIconChevron from "../../icons/Chevron";
 import type {SortType} from "../ResultsListPage/SortResult.service";
 import {useEffect, useRef} from "react";
 import {OutsideComponentClick} from "../../effects/OutsideComponentClick";
+import {MobileDetect} from "../../effects/MobileDetect";
 
 
 type Props = {
@@ -31,8 +32,10 @@ function Dropdown(
 
     const clickedOutsideComponent = OutsideComponentClick(ref)
 
+    const isMobile = MobileDetect()
+
     useEffect(() => {
-        if(clickedOutsideComponent !== undefined) {
+        if (clickedOutsideComponent !== undefined && !isMobile) {
             setShowOptions(!clickedOutsideComponent)
         }
     }, [clickedOutsideComponent])
@@ -69,15 +72,36 @@ function Dropdown(
         </div>
     )
 
+    const NativeSelect = (): ReactElement<"select"> => (
+        <select
+            value={selection.key}
+            onChange={(evt) => {
+                const opt = options.find(
+                    item => item.key === evt.target.value
+                )
+                onChange(opt || options[0]);
+            }}
+        >
+            {options.map(opt => (
+                <option value={opt.key}>
+                    {opt.name}
+                </option>
+            ))}
+        </select>
+    )
+
 
     return (
         <div className="Dropdown">
             <div className={`title ${titlePosition}`}>
                 {title}
             </div>
-            <div>
-                <Options />
-            </div>
+            {isMobile ?
+                <NativeSelect />
+                : <div>
+                    <Options />
+                </div>
+            }
         </div>
     )
 }
