@@ -10,28 +10,27 @@ import {
     nonCrisisResults,
 } from "../iss";
 
-import type { Service } from "../iss";
-import {useEffect, useState} from "react";
 import type {Service} from "../iss";
 import {sortResults} from "./ResultsListPage/SortResult.service";
-import type {SortType} from "./ResultsListPage/SortResult.service"
 import {useEffect, useState} from "react";
 import Category from "../constants/Category";
+import Controls from "./ResultsListPage/Controls";
 
 type Props = {
     results: Array<Service>,
-    sortOption?: SortType,
+    category: Category,
     reFetchTravelTimes?: boolean,
 }
 
 function ResultsList(
     {
         results,
-        sortOption,
+        category,
         reFetchTravelTimes = false,
     }: Props): ReactNode {
 
     const [crisisResultList, setCrisisResultList] = useState([])
+    const [sortOption, setSortOption] = useState(null)
     const [nonCrisisResultList, setNonCrisisResultList] = useState([])
 
     useEffect(() => {
@@ -62,6 +61,14 @@ function ResultsList(
                     />
                 </div>
             ))}
+            {results.length > 0 &&
+                <Controls
+                    category={category}
+                    orderByCallback={(option) => {
+                        setSortOption(option)
+                    }}
+                />
+            }
             {nonCrisisResultList.map((result, index) => (
                 <div
                     key={`regular-${index}`}

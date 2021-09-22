@@ -41,9 +41,12 @@ function Dropdown(
     }, [clickedOutsideComponent])
 
     const Options = (): ReactNode => (
-        <div ref={ref}>
+        <div
+            ref={ref}
+            className="optionsContainer"
+        >
             <div
-                aria-labelledby="sortOptions"
+                aria-labelledby="options"
                 className={`optionSelect ${
                     showOptions ? "activeOptionSelect open" : "closed"}`}
                 onClick={() => setShowOptions(!showOptions)}
@@ -54,7 +57,7 @@ function Dropdown(
             <div className="options">
                 {options.map((option, index) => (
                     <div
-                        id="sortOptions"
+                        id="options"
                         aria-live="polite"
                         key={`${option.key || "key"}_${index}`}
                         className={
@@ -74,6 +77,7 @@ function Dropdown(
 
     const NativeSelect = (): ReactElement<"select"> => (
         <select
+            className="nativeSelect"
             value={selection.key}
             onChange={(evt) => {
                 const opt = options.find(
@@ -97,10 +101,23 @@ function Dropdown(
                 {title}
             </div>
             {isMobile ?
-                <NativeSelect />
-                : <div>
-                    <Options />
-                </div>
+                <select
+                    className="nativeSelect"
+                    value={selection.key}
+                    onChange={(evt) => {
+                        const opt = options.find(
+                            item => item.key === evt.target.value
+                        )
+                        onChange(opt || options[0]);
+                    }}
+                >
+                    {options.map(opt => (
+                        <option value={opt.key}>
+                            {opt.name}
+                        </option>
+                    ))}
+                </select>
+                : <Options />
             }
         </div>
     )

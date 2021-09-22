@@ -9,12 +9,6 @@
     background-color: #{colours.get-static('colour-bg-standard-tint-2')};
     background-color: var(--colour-bg-standard-tint-2);
 
-    .Dropdown {
-        .options {
-            width: 70%;
-        }
-    }
-
     &.sticky {
         position: fixed;
         top: 44px;

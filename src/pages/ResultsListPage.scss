@@ -1,6 +1,7 @@
 @use '../styles/mixins/colours';
 
 .ResultsListPage {
+    position: relative;
     .progress {
         width: 100%;
         padding-top: 40px;

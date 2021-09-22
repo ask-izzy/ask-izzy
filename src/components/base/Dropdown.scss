@@ -19,11 +19,33 @@
         }
     }
 
+    .optionsContainer {
+        width: 200px;
+    }
+
+    .nativeSelect {
+        padding: 10px;
+        font-weight: 500;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+
+        option {
+            padding: 10px;
+            font-weight: 500;
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
+
+            &:focus {
+                outline: 1px solid #{colours.get-static('colour-input-focus-primary')};
+                outline: 1px solid var(--colour-input-focus-primary);
+            }
+        }
+    }
+
     .optionSelect {
         display: flex;
         justify-content: space-between;
         padding: 10px;
-        width: 9.7em;
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
         font-weight: 500;
@@ -66,6 +88,7 @@
 
     .options {
         position: absolute;
+        width: inherit;
         background-color: #{colours.get-static('raw-colour-pure-white')};
         background-color: var(--raw-colour-pure-white);
         color: #{colours.get-static('colour-text-mid')};

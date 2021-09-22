@@ -24,6 +24,7 @@ import ResultsPageGeolocationButton from "./ResultsPageGeolocationButton";
 import IssParamsOverrideControls from
     "../components/debug/IssParamsOverrideControls";
 import Controls from "../components/ResultsListPage/Controls";
+import ScrollToTop from "../components/ResultsListPage/ScrollToTop";
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
@@ -135,34 +136,14 @@ class ResultsListPage extends ResultsPage<> {
                     </span>
                 </ScreenReader>
                 <div className="List results">
-                    {this.hasSearchResults() ||
-                        <div>
-                            <Controls
-                                category={this.category}
-                                orderByCallback={(sortOption) => {
-                                    this.setState({sortOption})
-                                }}
-                            />
-                            <ResultsPageGeolocationButton
-                                fetchedLocation={this.state.fetchedLocation}
-                                onGeoLocationSuccess={
-                                    this.onGeoLocationSuccess.bind(this)
-                                }
-                                onfetchNewLocation={(fetchedLocationStatus) => {
-                                    this.setState({
-                                        fetchedLocation: fetchedLocationStatus,
-                                    })
-                                }}
-                            />
-                        </div>
-                    }
                     <ResultsList
                         reFetchTravelTimes={this.state?.fetchedLocation}
-                        sortOption={this.state.sortOption}
+                        category={this.category}
                         results={this.state.searchResults || []}
                     />
                     {this.renderLoadMore()}
                     {this.renderSuggestionBox()}
+                    <ScrollToTop label="To top"/>
                 </div>
             </main>
         </div>
