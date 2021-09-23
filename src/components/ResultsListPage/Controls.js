@@ -8,7 +8,6 @@ import {useRouterContext} from "../../contexts/router-context";
 import SortResult from "./SortResult";
 import {getScrollPosition} from "../../effects/scrollPosition";
 import type {SortType} from "./SortResult.service";
-import LinkButton from "../LinkButton";
 
 type Props = {
     orderByCallback: (SortType) => void,
@@ -31,11 +30,9 @@ function Controls({orderByCallback}: Props): ReactNode {
             ref={ref}
         >
             {!sticky &&
-                <>
-                    <ViewOnMapButton
-                        to={location.pathname.replace(/\/?$/, "/map")}
-                    />
-                </>
+                <ViewOnMapButton
+                    to={location.pathname.replace(/\/?$/, "/map")}
+                />
             }
             <span className="dropDownContainer">
                 <SortResult
