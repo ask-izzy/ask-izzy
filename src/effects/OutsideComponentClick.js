@@ -2,12 +2,13 @@
 
 import {useEffect, useState} from "react";
 
-export function OutsideComponentClick(ref): boolean {
+/* $FlowIgnore */
+export function OutsideComponentClick(ref): ?boolean {
     // We initialise it to undefined to prevent the component
     // related to the click event from being activated
     const [clicked, setClicked] = useState(undefined)
     useEffect(() => {
-        function handleClickOutside(event) {
+        function handleClickOutside(event: Event) {
             setClicked(ref?.current && !ref.current.contains(event.target));
         }
 

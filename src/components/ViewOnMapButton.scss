@@ -1,18 +1,36 @@
 @use '../styles/mixins/colours';
 
 .ViewOnMapButton {
-    border: 0;
+    width: 30%;
+    border: 1px solid #{colours.get-static('colour-button-standard')};
+    border: 1px solid var(--colour-button-standard);
     background: none;
     font-weight: bold;
-    color: #{colours.get-static('colour-text-dark')};
-    color: var(--colour-text-dark);
+    border-radius: 3px;
+    color: #{colours.get-static('colour-button-standard')};
+    color: var(--colour-button-standard);
 
     .buttonLabel {
         display: flex;
         align-items: center;
+        justify-content: space-between;
+
+        .leftSide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        path {
+            fill: #{colours.get-static('colour-button-standard')};
+            fill: var(--colour-button-standard);
+            stroke: #{colours.get-static('colour-button-standard')};
+            stroke: var(--colour-button-standard);
+        }
     }
 
-    @media (max-width: 768px) {
-        padding: 0;
+    @media (max-width: 556px) {
+        width: 90%;
     }
 }

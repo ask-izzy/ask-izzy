@@ -13,19 +13,18 @@ import {
 import type {Service} from "../iss";
 import {sortResults} from "./ResultsListPage/SortResult.service";
 import {useEffect, useState} from "react";
-import Category from "../constants/Category";
 import Controls from "./ResultsListPage/Controls";
 
 type Props = {
     results: Array<Service>,
-    category: Category,
+    showControl?: boolean,
     reFetchTravelTimes?: boolean,
 }
 
 function ResultsList(
     {
         results,
-        category,
+        showControl = false,
         reFetchTravelTimes = false,
     }: Props): ReactNode {
 
@@ -61,9 +60,8 @@ function ResultsList(
                     />
                 </div>
             ))}
-            {results.length > 0 &&
+            {results.length > 0 && showControl &&
                 <Controls
-                    category={category}
                     orderByCallback={(option) => {
                         setSortOption(option)
                     }}

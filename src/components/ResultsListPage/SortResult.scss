@@ -11,4 +11,18 @@
         border-left: 2px solid #{colours.get-static('colour-bg-standard-tint-1')};
         border-left: 2px solid var(--colour-bg-standard-tint-1);
     }
+
+    @media (max-width: 556px) {
+        padding: 0;
+        flex-direction: column;
+
+        .divider {
+            height: 1px;
+            width: 90%;
+            margin: 10px 0;
+            border-bottom: 2px solid #{colours.get-static('colour-bg-standard-tint-1')};
+            border-bottom: 2px solid var(--colour-bg-standard-tint-1);
+            border-left: 0;
+        }
+    }
 }

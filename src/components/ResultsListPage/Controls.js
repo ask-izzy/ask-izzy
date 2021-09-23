@@ -1,19 +1,20 @@
 /* @flow */
 
 
-import React, {useEffect, useRef, useState} from 'react'
+import type {Node as ReactNode} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import ViewOnMapButton from "../ViewOnMapButton";
 import {useRouterContext} from "../../contexts/router-context";
 import SortResult from "./SortResult";
-import Category from "../../constants/Category";
 import {getScrollPosition} from "../../effects/scrollPosition";
+import type {SortType} from "./SortResult.service";
+import LinkButton from "../LinkButton";
 
 type Props = {
-    orderByCallback: () => {},
-    category: Category
+    orderByCallback: (SortType) => void,
 }
 
-function Controls({orderByCallback, category}: Props) {
+function Controls({orderByCallback}: Props): ReactNode {
 
     const [sticky, setSticky] = useState(false);
     const {location} = useRouterContext()
@@ -30,14 +31,15 @@ function Controls({orderByCallback, category}: Props) {
             ref={ref}
         >
             {!sticky &&
-                <ViewOnMapButton
-                    to={location.pathname.replace(/\/?$/, "/map")}
-                />
+                <>
+                    <ViewOnMapButton
+                        to={location.pathname.replace(/\/?$/, "/map")}
+                    />
+                </>
             }
-            <span>
+            <span className="dropDownContainer">
                 <SortResult
                     callback={orderByCallback}
-                    category={category}
                     titlePosition="left"
                     showDivider={!sticky}
                 />

@@ -20,27 +20,15 @@ import storage from "../storage";
 
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
-import ResultsPageGeolocationButton from "./ResultsPageGeolocationButton";
 import IssParamsOverrideControls from
     "../components/debug/IssParamsOverrideControls";
-import Controls from "../components/ResultsListPage/Controls";
 import ScrollToTop from "../components/ResultsListPage/ScrollToTop";
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
         if (this.state.searchType) {
             return (
-                <div onClick={(event) => {
-                    if (typeof event.target.className === "string" &&
-                        !event.target.className.includes("optionSelect")) {
-                        this.setState((prevState) => (
-                            {
-                                hideOptions: !prevState.hideOptions,
-                            })
-                        )
-                    }
-                }}
-                >
+                <div>
                     {this.renderPage()}
                 </div>
             )
@@ -138,8 +126,8 @@ class ResultsListPage extends ResultsPage<> {
                 <div className="List results">
                     <ResultsList
                         reFetchTravelTimes={this.state?.fetchedLocation}
-                        category={this.category}
                         results={this.state.searchResults || []}
+                        showControl={true}
                     />
                     {this.renderLoadMore()}
                     {this.renderSuggestionBox()}

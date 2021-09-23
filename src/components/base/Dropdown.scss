@@ -24,6 +24,7 @@
     }
 
     .nativeSelect {
+        -webkit-appearance: none;
         padding: 10px;
         font-weight: 500;
         color: #{colours.get-static('colour-text-dark')};

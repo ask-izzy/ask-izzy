@@ -5,8 +5,8 @@
     bottom: -1em;
     right: 30%;
     border: 0;
-    background-color: #{colours.get-static('colour-brand-primary')};
-    background-color: var(--colour-brand-primary);
+    background-color: #{colours.get-static('colour-brand-primary-mid')};
+    background-color: var(--colour-brand-primary-mid);
     color: #{colours.get-static('raw-colour-warm-white')};
     color: var(--raw-colour-warm-white);
     padding: 7px;
