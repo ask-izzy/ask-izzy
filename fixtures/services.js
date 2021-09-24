@@ -147,6 +147,28 @@ const objects: Object = {
             },
         },
     },
+    openService: {
+        id: 223,
+        name: "Open service",
+        description: "An Open service",
+        site: {
+            id: 336,
+            name: "Open site",
+        },
+        service_types: ["Accommodation"],
+        now_open: {
+            now_open: true,
+        },
+        emails: [],
+        opening_hours: [],
+        location: {
+            suburb: "Richmond",
+            point: {
+                lat: -37.8237,
+                lon: 144.985,
+            },
+        },
+    },
     susansHouse: {
         id: 333,
         name: "Womens Refuge",
