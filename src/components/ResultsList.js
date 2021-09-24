@@ -14,6 +14,7 @@ import type {Service} from "../iss";
 import {sortResults} from "./ResultsListPage/SortResult.service";
 import {useEffect, useState} from "react";
 import Controls from "./ResultsListPage/Controls";
+import ScreenReader from "./ScreenReader";
 
 type Props = {
     results: Array<Service>,
@@ -72,6 +73,13 @@ function ResultsList(
                     key={`regular-${index}`}
                     className="resultContainer resultContainer-ResultListItem"
                 >
+                    <ScreenReader>
+                        <span aria-live="polite">
+                            Results in order of {
+                            sortOption?.name || "Best match"
+                            }
+                        </span>
+                    </ScreenReader>
                     <ResultListItem
                         reFetchTravelTimes={reFetchTravelTimes}
                         service={result}

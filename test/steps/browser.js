@@ -36,7 +36,7 @@ module.exports = (function() {
         .given("I open a new browser", unpromisify(newBrowser))
         .when("I visit $URL", unpromisify(visitUrl))
         .when("I click on \"$STRING\"", unpromisify(clickLink))
-        .when("I click the \"$STRING\" dropdown",
+        .when("I click the dropdown \"$STRING\"",
             unpromisify(clickDropdown))
         .when("I search for \"$STRING\"", unpromisify(doSearch))
         .when("I search for \"$STRING\" and press enter",

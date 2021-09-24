@@ -326,7 +326,6 @@ app.get("/api/v3/search/", (req, res) => {
                 ServiceFactory(services.housingService),
                 ServiceFactory(services.housingServiceSibling),
                 ServiceFactory(services.youthSupportNet),
-                ServiceFactory(services.openService),
                 ServiceFactory(services.susansHouse),
             ],
         });

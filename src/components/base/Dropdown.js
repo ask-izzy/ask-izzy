@@ -7,6 +7,7 @@ import type {SortType} from "../ResultsListPage/SortResult.service";
 import {useEffect, useRef} from "react";
 import {OutsideComponentClick} from "../../effects/OutsideComponentClick";
 import {MobileDetect} from "../../effects/MobileDetect";
+import * as gtm from "../../google-tag-manager";
 
 
 type Props = {
@@ -46,10 +47,16 @@ function Dropdown(
             className="optionsContainer"
         >
             <div
+                tabIndex="0"
                 aria-labelledby="options"
                 className={`optionSelect ${
                     showOptions ? "activeOptionSelect open" : "closed"}`}
                 onClick={() => setShowOptions(!showOptions)}
+                onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                        setShowOptions(!showOptions)
+                    }
+                }}
             >
                 {selection.name} <SvgIconChevron fill={"black"}/>
             </div>
@@ -58,6 +65,7 @@ function Dropdown(
                 {options.map((option, index) => (
                     <div
                         id="options"
+                        tabIndex="0"
                         aria-live="polite"
                         key={`${option.key || "key"}_${index}`}
                         className={
@@ -66,6 +74,26 @@ function Dropdown(
                         onClick={() => {
                             setShowOptions(false);
                             onChange(option);
+                            gtm.emit({
+                                event: `Action Triggered - Dropdown`,
+                                eventCat: "Action triggered",
+                                eventAction: `Dropdown`,
+                                eventLabel: option.name,
+                                sendDirectlyToGA: true,
+                            });
+                        }}
+                        onKeyDown={(event) => {
+                            if (event.key === "Enter") {
+                                setShowOptions(false);
+                                onChange(option);
+                                gtm.emit({
+                                    event: `Action Triggered - Dropdown`,
+                                    eventCat: "Action triggered",
+                                    eventAction: `Dropdown`,
+                                    eventLabel: option.name,
+                                    sendDirectlyToGA: true,
+                                });
+                            }
                         }}
                     >
                         {option.name}

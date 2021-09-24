@@ -18,18 +18,16 @@ Feature: Sorting drop down on the results page
         Housing Service              | My Housing Service    | (nada)
         Transitional Housing Service | My Housing Service    | Transitional accommodation
         Emergency Accom              | Youth Support Net     | (nada)
-        Open service                 | Open site             | (nada)
         Womens Refuge                | Susan's House         | Crisis accommodation
         ------------------------------------------------------------------------------------------
-        When I click on "Best match"
-        And I click on "Open now"
+        When I click the dropdown "Best match"
+        And I click the dropdown "Open now"
         And I should see the results
         ------------------------------------------------------------------------------------------
         Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)
         ==========================================================================================
         Transitional Housing Service | My Housing Service    | Transitional accommodation
         Emergency Accom              | Youth Support Net     | (nada)
-        Open service                 | Open site             | (nada)
         Womens Refuge                | Susan's House         | Crisis accommodation
         Housing Service              | My Housing Service    | (nada)
         ------------------------------------------------------------------------------------------
