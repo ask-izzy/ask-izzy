@@ -65,16 +65,25 @@ function HeaderBar(
     // Older Ios Versions have trouble with overflow-x: hidden
     // which causes the app bar to disappear
     const getOlderSafari = (): boolean => {
+        // We'll be going as far back as version 10
+        // because as of 2021 the currently supported version is 12
+        // and it's very unlikely someone is still using a version before 10
+        // eslint-disable-next-line max-len
+        const safariVersions = /(Version\/10|Version\/11|Version\/12|Version\/13|Version\/14)/
         if (typeof navigator !== "undefined") {
-            if (navigator.userAgent.match(/(iPod|iPhone|iPad)/) &&
-                navigator.userAgent.match(/AppleWebKit/)) {
+            if (
+                navigator.userAgent.match(/(iPod|iPhone|iPad)/) ||
+                // some versions of safari on desktop also have this issue
+                // which is why we need to check for specific versions
+                // Also some mobile versions will not indicate that it is an
+                // iPad or iPhone
+                navigator.userAgent.match(safariVersions)
+            ) {
                 return true;
             }
         }
         return false;
     }
-
-
 
 
     const renderSecondaryText = (): void | React.Element<"div"> => {
