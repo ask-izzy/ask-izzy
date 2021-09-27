@@ -8,17 +8,33 @@ export type SortType = {
     name: string,
 }
 
-
+/**
+ * This function will receive a list of
+ * search results and a sortObject and based off
+ * the sort param it will return a newly ordered list
+ * @param results - A list of search results
+ * @param orderBy - A search term
+ * @returns - An ordered list of services
+ */
 export const sortResults = (
     results: Array<Service>,
     orderBy: SortType,
 ): Array<Service> => {
     const isObject = typeof orderBy.value === "object";
     let newResults = results;
+
+    // If the param to be sorted is nested
+    // within the service object and not on the top level
     if (isObject) {
         const keys = orderBy.value ? Object.keys(orderBy.value) : [];
+
+        // checks if they type is a boolean
         /* $FlowIgnore */
-        if (keys.map(item => typeof orderBy.value[item] === "boolean").length) {
+        if (keys.map(item => typeof orderBy.value[item] === "boolean")
+            ?.some(val => val)) {
+
+            // Creates two separate lists one that's matched and one
+            // that's not then joins them together with matched list first
             for (let key = 0; key < keys.length; key++) {
                 const matchedResults = results.filter(item =>
                     /* $FlowIgnore */
@@ -32,27 +48,34 @@ export const sortResults = (
                 newResults = matchedResults.concat(unMatchedResults)
             }
         } else {
-            newResults = results.sort((a: Object, b: Object) => {
-                const nestedValue = (val: Object) => {
-                    if (orderBy.value) {
-                        const objKeys = Object.keys(orderBy.value);
-                        const hasVal = Object.keys(val).map(
-                            (key: string) => (objKeys.includes(key) &&
-                                orderBy.value &&
-                                orderBy.value[key] === val[key] && val));
-                        return hasVal.find(item => item);
+            // Sort through the results
+            newResults = results.sort(
+                (serviceA: Object, serviceB: Object) => {
+                    const nestedValue = (service: Object) => {
+                        if (orderBy.value) {
+                            const objKeys = Object.keys(orderBy.value);
+                            const hasVal = Object.keys(service).map(
+                                (key: string) => (objKeys.includes(key) &&
+                                    orderBy.value &&
+                                    orderBy.value[key] === service[key] &&
+                                    service));
+                            return hasVal.find(item => item);
+                        }
                     }
-                }
 
-                const aVal = isObject && nestedValue(a[orderBy.key]);
-                const bVal = isObject && nestedValue(b[orderBy.key]);
-                if (aVal === bVal) {
-                    return 1;
-                } else if (aVal !== bVal) {
-                    return -1;
-                }
-                return 0;
-            })
+                    const aVal = isObject && nestedValue(
+                        serviceA[orderBy.key]
+                    );
+                    const bVal = isObject && nestedValue(
+                        serviceB[orderBy.key]
+                    );
+                    if (aVal === bVal) {
+                        return 1;
+                    } else if (aVal !== bVal) {
+                        return -1;
+                    }
+                    return 0;
+                })
         }
     }
 
