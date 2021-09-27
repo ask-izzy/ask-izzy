@@ -42,7 +42,7 @@ export function elementWithText(element: string, text: string): string {
     text = escapeXPathString(text);
 
     return `//${element}` +
-        `[normalize-space(.//text()) = normalize-space(${text})]`;
+        `[.//text()[normalize-space() = normalize-space(${text})]]`;
 }
 
 /**

@@ -3,7 +3,7 @@ import type {Element as ReactElement} from "React";
 import React, { useState } from "react";
 import type {Node as ReactNode} from "react"
 import classnames from "classnames";
-
+import Chevron from "../../icons/Chevron";
 import Button from "../base/Button";
 import type {AnalyticsEvent} from "../../google-tag-manager"
 
@@ -61,9 +61,13 @@ export default function Collapser({
                         ...analyticsEvent,
                     }}
                 >
-                    {message}
+                    <div className="title-container"> {/* wrapper for flex bug https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers */}
+                        { message }
+                        <Chevron />
+                    </div>
                 </Button>
             }
+
             <div
                 className={classnames({collapsed: isCollapsed})}
             >
