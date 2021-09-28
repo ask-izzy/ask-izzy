@@ -134,11 +134,6 @@ export default class BrandedFooter
                                 COVID-19
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/beta-info">
-                                Ask Izzy Beta
-                            </Link>
-                        </li>
                     </ul>
                 </div>
                 <div
