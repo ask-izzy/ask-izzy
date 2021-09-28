@@ -25,6 +25,7 @@ export default class AddictionSubcategories extends BaseQuestion {
         case "Speak to someone":
             return "Counselling";
         default:
+            // $FlowIgnore
             return this.savedAnswer
         }
     }

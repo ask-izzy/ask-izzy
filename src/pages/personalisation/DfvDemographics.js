@@ -3,7 +3,7 @@ import type { ElementConfig as ReactElementConfig } from "react"
 
 import * as React from "react";
 import type {Node as ReactNode} from "react";
-import BaseMultiQuestion from "./BaseMultiQuestion";
+import BaseQuestion from "./BaseQuestion";
 
 import { append } from "../../iss/ServiceSearchRequest";
 import icons from "../../icons";
@@ -23,14 +23,15 @@ const LGBT_BREADCRUMB_ICON = (
     <span><icons.DemographicLgbtiq /></span>
 )
 
-export default class DfvDemographics extends BaseMultiQuestion {
+export default class DfvDemographics extends BaseQuestion {
     static title: string = "Personal";
-    static propTypes = BaseMultiQuestion.propTypes;
-    static defaultProps: ReactElementConfig<typeof BaseMultiQuestion> = {
+    static propTypes = BaseQuestion.propTypes;
+    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "dfv-demographics",
         question: "Do any of these apply to you?",
         byline: "Select all that apply",
         info: "All of your answers are private and anonymous.",
+        multipleChoice: true,
         possibleAnswers: {
             "Aboriginal and/or Torres Strait Islander":
                 append("(Aboriginals & Torres Strait Islanders)"),
@@ -82,7 +83,6 @@ export default class DfvDemographics extends BaseMultiQuestion {
                     this.prettyPrintSavedAnswer()[index] ===
                         prettyPrintSavedAnswer
                 ) {
-                    // $FlowIgnore
                     return this.savedAnswer[index]
                 }
             }

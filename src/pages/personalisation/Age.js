@@ -52,6 +52,7 @@ export default class Age extends BaseQuestion {
         if (!this.savedAnswer || (this.savedAnswer === "(skipped)")) {
             return "";
         } else {
+            // $FlowIgnore
             return `aged ${this.savedAnswer}`;
         }
     }
@@ -71,6 +72,7 @@ export default class Age extends BaseQuestion {
         case "65 or older" :
             return "65+";
         default:
+            // $FlowIgnore
             return this.savedAnswer
         }
     }

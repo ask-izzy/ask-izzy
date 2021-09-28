@@ -17,9 +17,9 @@ class Personalisation<
 > {
     static contextType: any = routerContext;
 
-    backToAnswers(): boolean {
-        return this.props.backToAnswers || false
-    }
+    // backToAnswers(): boolean {
+    //     return this.props.backToAnswers || false
+    // }
 
     get bannerName(): string {
         return (this.props.name === "sub-indigenous" && "atsi") ||

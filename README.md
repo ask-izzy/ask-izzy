@@ -197,7 +197,7 @@ and inheritance. Changes which fit into the existing model are
 super easy but I would be very careful testing any changes to
 the control code.
 
-The question classes mostly derive from `BaseQuestion` or `BaseMultiQuestion`.
+The question classes mostly derive from `BaseQuestion`.
 
 ## Google services
 

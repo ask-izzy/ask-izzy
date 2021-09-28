@@ -6,7 +6,6 @@ import AddictionSubcategories from "./personalisation/AddictionSubcategories";
 import AdvocacySubcategories from "./personalisation/AdvocacySubcategories";
 import Age from "./personalisation/Age";
 import AreYouSafe from "./personalisation/AreYouSafe";
-import BaseMultiQuestion from "./personalisation/BaseMultiQuestion";
 import BaseQuestion from "./personalisation/BaseQuestion";
 import BaseStaticPersonalisation from "./personalisation/BaseStaticPersonalisation";
 import CounsellingAreYouSafe from "./personalisation/CounsellingAreYouSafe";
@@ -41,7 +40,6 @@ export default {
     AdvocacySubcategories,
     Age,
     AreYouSafe,
-    BaseMultiQuestion,
     BaseQuestion,
     BaseStaticPersonalisation,
     CounsellingAreYouSafe,

@@ -1,7 +1,7 @@
 /* @flow */
 import type { ElementConfig as ReactElementConfig } from "react"
 
-import BaseMultiQuestion from "./BaseMultiQuestion";
+import BaseQuestion from "./BaseQuestion";
 
 import { append } from "../../iss/ServiceSearchRequest";
 import icons from "../../icons";
@@ -17,14 +17,15 @@ const ATSI_BREADCRUMB_ICON = (
 )
 
 
-export default class Demographics extends BaseMultiQuestion {
+export default class Demographics extends BaseQuestion {
     static title: string = "Personal";
-    static propTypes = BaseMultiQuestion.propTypes;
-    static defaultProps: ReactElementConfig<typeof BaseMultiQuestion> = {
+    static propTypes = BaseQuestion.propTypes;
+    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "demographics",
         question: "Do any of these apply to you?",
         byline: "Select all that apply",
         info: "All of your answers are private and anonymous.",
+        multipleChoice: true,
         possibleAnswers: {
             "Escaping family violence": append("(family violence)"),
             // n.b. see also storage.getUserIsIndigenous when changing
@@ -82,7 +83,6 @@ export default class Demographics extends BaseMultiQuestion {
                     this.prettyPrintSavedAnswer()[index] ===
                         prettyPrintSavedAnswer
                 ) {
-                    // $FlowIgnore
                     return this.savedAnswer[index]
                 }
             }
