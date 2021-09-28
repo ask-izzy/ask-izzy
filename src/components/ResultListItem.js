@@ -102,10 +102,8 @@ function ResultListItem(
 
             // sets the new location
             setLocation(new Location({...location}, transportTimes))
-            setLoading(false);
-        } else {
-            setLoading(false);
         }
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -115,7 +113,7 @@ function ResultListItem(
             if (coords && destination) {
                 setLoading(true);
                 travelTimes({
-                    origins: [`${`${coords.latitude},${coords.longitude}`}`],
+                    origins: [`${coords.latitude},${coords.longitude}`],
                     destinations: [`${destination.lat},${destination.lon}`],
                     transitOptions: {departureTime: new Date()},
                 })

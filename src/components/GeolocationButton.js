@@ -48,7 +48,7 @@ function GeolocationButton(
                     </span>
                 </>
             ),
-            "aria-label": "Set your current location to get" +
+            "aria-label": "Set your current location to get " +
              "estimated travel times.",
             analyticsEvent: {
                 event: "Action Triggered - Geolocate",
@@ -57,6 +57,7 @@ function GeolocationButton(
             },
         },
         RUNNING: {
+            "aria-label": "Fetching your location.",
             text: () => (
                 <>
                     <icons.Loading />
@@ -75,6 +76,7 @@ function GeolocationButton(
             ),
         },
         COMPLETE: {
+            "aria-label": "Found your location",
             text: () => (
                 <>
                     <icons.Tick />
@@ -88,6 +90,7 @@ function GeolocationButton(
             ),
         },
         FAILED: {
+            "aria-label": "Unable to get your location.",
             text: () => (
                 <>
                     <icons.Cross />
@@ -111,7 +114,6 @@ function GeolocationButton(
     // clearing the text box
     useEffect(() => {
         restartSearch && setGeolocation("NOT_STARTED")
-        // Storage.removeItem("coordinates")
     }, [restartSearch])
 
 
@@ -188,7 +190,10 @@ function GeolocationButton(
                                 geolocation === "NOT_STARTED" ?
                                     onGeolocationClick : () => null
                             }
-                            {...GEO_LOCATION_STATE_TEXT[geolocation]}
+                            aria-label={GEO_LOCATION_STATE_TEXT[
+                                geolocation]?.["aria-label"] ||
+                                "Fetch your location"
+                            }
                         >
                             <div className="buttonLabel">
                                 {GEO_LOCATION_STATE_TEXT[geolocation]
@@ -203,10 +208,16 @@ function GeolocationButton(
                         className="primary"
                         aria-live="geoLocate"
                     >
-                        Found your location (in {
-                        Storage.getCoordinates()?.name})
-                        {showMessage && " – Travel times added below."}
-                        {undoButton}
+                        {Storage.getCoordinates() ?
+                            <>
+                                Found your location
+                                (in {Storage.getCoordinates()?.name})
+                                {showMessage &&
+                                " – Travel times added below."}
+                                {undoButton}
+                            </>
+                            : "Can't find your location."
+                        }
                     </span>
                 </>
             )}

@@ -48,12 +48,9 @@
         padding: 0;
         margin: 0 18px 0 20px;
         cursor: pointer;
-        border-left: solid 1px #{colours.get-static('colour-border-list-item-dark')};
-        border-left: solid 1px var(--colour-border-list-item-dark);
-        border-right: solid 1px #{colours.get-static('colour-border-list-item-dark')};
-        border-right: solid 1px var(--colour-border-list-item-dark);
-        border-bottom: solid 1px #{colours.get-static('colour-border-list-item-dark')};
-        border-bottom: solid 1px var(--colour-border-list-item-dark);
+        border: 1px solid #{colours.get-static('colour-border-list-item-dark')};
+        border: 1px solid var(--colour-border-list-item-dark);
+        border-top: 0;
         box-shadow: 0 0 4px 0 #{colours.get-static('app-bar-shadow')};
         box-shadow: 0 0 4px 0 var(--app-bar-shadow);
 

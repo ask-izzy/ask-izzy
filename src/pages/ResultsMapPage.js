@@ -146,8 +146,9 @@ class ResultsMapPage extends ResultsPage<{}, State> {
                                 // that the new travel times get loaded
                                 // When switching between sites without
                                 // closing the previous one
-                                this.setState({selectedSite: null})
-                                this.setState({selectedSite: site})
+                                this.setState({selectedSite: null}, () => {
+                                    this.setState({selectedSite: site})
+                                })
                             }
                         }
                         sites={this.sites}

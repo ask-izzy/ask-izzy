@@ -314,7 +314,7 @@ class Location extends Personalisation<Props, State> {
                                 this.state.locationName &&
                                 <FlatButton
                                     className="clear-text"
-                                    label="X"
+                                    label="&times;"
                                     aria-label="Clear entered location"
                                     prompt="Clear"
                                     onClick={() => {

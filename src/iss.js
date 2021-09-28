@@ -300,9 +300,7 @@ export async function requestObjects(
             objects
         )
     } else {
-        response.objects = await Promise.race([
-            ReturnAfter(3000, objects),
-        ])
+        response.objects = objects
     }
 
     response.objects.forEach((service) =>

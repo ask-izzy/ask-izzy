@@ -116,7 +116,7 @@ function HomePage(): ReactNode {
                                 searchText &&
                                 <FlatButton
                                     className="clear-text"
-                                    label="X"
+                                    label="&times;"
                                     aria-label="Clear entered search text"
                                     prompt="Clear"
                                     onClick={() => {
