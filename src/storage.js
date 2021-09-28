@@ -20,6 +20,12 @@ type Coordinates = {
     longitude: number,
 }
 
+type CoordWithLocationName = {
+    latitude: number,
+    longitude: number,
+    name: string,
+}
+
 const Storage = {
 
     getSearch(): string {
@@ -63,7 +69,7 @@ const Storage = {
             .includes("Aboriginal and/or Torres Strait Islander");
     },
 
-    getCoordinates(): ?Coordinates {
+    getCoordinates(): ?CoordWithLocationName {
         const coords = JSON.parse(
             sessionStore.getItem("coordinates") || "null"
         );
@@ -77,13 +83,20 @@ const Storage = {
         return null;
     },
 
-    setCoordinates(coords: ?Coordinates): void {
+    setCoordinates(coords: ?Coordinates, name?: string): void {
         const {longitude, latitude} = coords || {};
 
-        sessionStore.setItem(
-            "coordinates",
-            JSON.stringify({longitude, latitude})
-        );
+        if (name) {
+            sessionStore.setItem(
+                "coordinates",
+                JSON.stringify({longitude, latitude, name})
+            );
+        } else {
+            sessionStore.setItem(
+                "coordinates",
+                JSON.stringify({longitude, latitude})
+            );
+        }
     },
 
     getItem(key: string): ?(string|number|boolean) {

@@ -7,8 +7,120 @@
 }
 
 .Location {
+    input {
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+    }
+
+    .done {
+        text-align: center;
+        margin: 2em 0;
+
+        .doneButton {
+            display: block;
+            width: calc(100% - 40px);
+            margin: 20px auto;
+        }
+    }
+
+    .GeoLocationButtonContainer {
+        margin: 0 20px;
+        display: flex;
+        align-items: center;
+
+        .LocationButton {
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
+        }
+
+        .or {
+            color: #{colours.get-static('colour-text-mid')};
+            color: var(--colour-text-mid);
+        }
+    }
+
+    .Spacer {
+        margin: 0 1em;
+    }
+
+    .locationList {
+        z-index: 2;
+        padding: 0;
+        margin: 0 18px 0 20px;
+        cursor: pointer;
+        border: 1px solid #{colours.get-static('colour-border-list-item-dark')};
+        border: 1px solid var(--colour-border-list-item-dark);
+        border-top: 0;
+        box-shadow: 0 0 4px 0 #{colours.get-static('app-bar-shadow')};
+        box-shadow: 0 0 4px 0 var(--app-bar-shadow);
+
+        .locationItem {
+            display: block;
+            border-bottom: 1px solid #{colours.get-static('colour-border-list-item')};
+            border-bottom: 1px solid var(--colour-border-list-item);
+            padding: 1em;
+
+            &:hover {
+                background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+                background-color: var(--colour-bg-standard-tint-2);
+            }
+
+            .state {
+                font-size: 14px;
+                color: #{colours.get-static('colour-text-mid')};
+                color: var(--colour-text-mid);
+            }
+        }
+    }
+
+    .explainer {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        margin: 3em 20px 0;
+        font-size: 14px;
+        font-weight: normal;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
+
+        .explainerIcons {
+            display: inline-flex;
+            margin-right: 1em;
+            margin-bottom: -2px;
+
+            .SvgIcon {
+                margin-left: -1px;
+                margin-right: -1px;
+
+                &.WalkIcon {
+                    width: 20px;
+                }
+
+                path {
+                    fill: #{colours.get-static('colour-text-mid')};
+                    fill: var(--colour-text-mid);
+                }
+
+                circle {
+                    fill: #{colours.get-static('colour-text-mid')};
+                    fill: var(--colour-text-mid);
+                }
+            }
+        }
+    }
+
+    @media (max-width: 556px) {
+        .explainer {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
     .search {
         position: relative;
+        width: 100%;
+        box-sizing: border-box;
 
         .FlatButton {
             display: flex;

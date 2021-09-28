@@ -20,6 +20,7 @@ import WithStickyFooter from "../../components/WithStickyFooter";
 import ScreenReader from "../../components/ScreenReader";
 import AppBar from "../../components/AppBar";
 import FlatButton from "../../components/FlatButton";
+import GeolocationButton from "../../components/GeolocationButton";
 type AppBarProps = React.ElementProps<typeof AppBar>
 
 type Props = {
@@ -39,6 +40,7 @@ type State = {
         nextDisabled: boolean,
         showStepper: boolean,
         fetchNewLocation: boolean,
+        foundLocation: boolean,
         category: ?Category,
 }
 
@@ -59,6 +61,7 @@ class Location extends Personalisation<Props, State> {
             fetchNewLocation: false,
             showStepper: false,
             category: undefined,
+            foundLocation: false,
         };
     }
 
@@ -163,6 +166,7 @@ class Location extends Personalisation<Props, State> {
                         ({name, state}) => name + state
                     ),
                     autocompletionInProgress: false,
+                    fetchNewLocation: false,
                 });
             })
 
@@ -176,7 +180,6 @@ class Location extends Personalisation<Props, State> {
     setLocationName(name: any, validChoice: boolean): void {
         this.setState({
             locationName: `${name || ""}`,
-            fetchNewLocation: false,
             nextDisabled: !(name && validChoice),
         });
     }
@@ -207,6 +210,7 @@ class Location extends Personalisation<Props, State> {
             this.setLocationName(ltrim(event.target.value), false);
             this.setState({
                 autocompletionInProgress: true,
+                fetchNewLocation: true,
             });
 
             // Forget the users coordinates if they change
@@ -218,7 +222,12 @@ class Location extends Personalisation<Props, State> {
     }
 
     onGeoLocationSuccess(params: {coords: Coordinates, name: string}): void {
-        storage.setCoordinates(params.coords);
+        storage.setCoordinates(params.coords, params.name);
+        this.setState({
+            foundLocation: true,
+            fetchNewLocation: false,
+            autocompletions: [],
+        })
         this.setLocationName(params.name, true);
     }
 
@@ -283,91 +292,56 @@ class Location extends Personalisation<Props, State> {
                         <legend>
                             Where are you?
                         </legend>
-                        <div className="List">
+                        <div className="search"
+                            id="searchBar"
+                        >
+                            <input
+                                type="search"
+                                ref={element => {
+                                    this._search = element;
+                                }}
+                                onFocus={
+                                    this.scrollToSearchControl.bind(this)
+                                }
+                                aria-label="Search for a suburb
+                                 or postcode"
+                                placeholder="Search for a suburb
+                                 or postcode"
+                                value={this.state.locationName}
+                                onChange={this.onSearchChange.bind(this)}
+                            />
                             {
-                                /* if the browser supports geolocation */
-                                geolocationAvailable() &&
-                                <components.GeolocationButton
-                                    restartSearch={this.state.fetchNewLocation}
-                                    onSuccess={
-                                        this.onGeoLocationSuccess.bind(this)
-                                    }
+                                this.state.locationName &&
+                                <FlatButton
+                                    className="clear-text"
+                                    label="&times;"
+                                    aria-label="Clear entered location"
+                                    prompt="Clear"
+                                    onClick={() => {
+                                        this.setState(
+                                            {
+                                                locationName: "",
+                                                fetchNewLocation: true,
+                                                foundLocation: false,
+                                                autocompletions: [],
+                                            }
+                                        )
+                                    }}
                                 />
                             }
-                            <div className="search"
-                                id="searchBar"
-                            >
-                                <input
-                                    type="search"
-                                    ref={element => {
-                                        this._search = element;
-                                    }}
-                                    onFocus={
-                                        this.scrollToSearchControl.bind(this)
-                                    }
-                                    aria-label="Search for a suburb
-                                     or postcode"
-                                    placeholder="Search for a suburb
-                                     or postcode"
-                                    value={this.state.locationName}
-                                    onChange={this.onSearchChange.bind(this)}
-                                />
-                                {
-                                    this.state.locationName &&
-                                    <FlatButton
-                                        className="clear-text"
-                                        label="X"
-                                        aria-label="Clear entered location"
-                                        prompt="Clear"
-                                        onClick={() => {
-                                            this.setState(
-                                                {
-                                                    locationName: "",
-                                                    fetchNewLocation: true,
-                                                    autocompletions: [],
-                                                }
-                                            )
-                                        }}
-                                    />
-                                }
-                            </div>
-                            <fieldset>
-                                <legend>
-                                    {this.state.autocompletions.length ? (
-                                        "The following is a list of locations" +
-                                        " based on your search"
-                                    ) : "Search Results"}
-                                </legend>
+                        </div>
+                        {this.state.autocompletions.length > 0 &&
+                            <ul className="locationList">
                                 {
                                     /* any autocompletions we currently have */
                                     this.state.autocompletions.map(
                                         (result, index) =>
-                                            <components.InputListItem
+                                            <li
+                                                className="locationItem"
                                                 key={index}
-                                                primaryText={
-                                                    <div className="suburb">
-                                                        {result.name}
-                                                    </div>
-                                                }
-                                                secondaryText={
-                                                    <div className="state">
-                                                        {result.state}
-                                                    </div>
-                                                }
-                                                type="radio"
-                                                ariaLabel={`${result.name},
+                                                aria-label={`${result.name},
                                                 ${result.state}`}
                                                 tabIndex={0}
-                                                uncheckedIcon={
-                                                    <icons.RadioUnselected
-                                                        className="big"
-                                                    />
-                                                }
-                                                checkedIcon={
-                                                    <icons.RadioSelected
-                                                        className="big"
-                                                    />
-                                                }
                                                 onClick={
                                                     this.selectAutocomplete
                                                         .bind(
@@ -375,11 +349,18 @@ class Location extends Personalisation<Props, State> {
                                                             result,
                                                         )
                                                 }
-                                            />
+                                            >
+                                                <div className="suburb">
+                                                    {result.name}
+                                                </div>
+                                                <div className="state">
+                                                    {result.state}
+                                                </div>
+                                            </li>
                                     )
                                 }
-                            </fieldset>
-                        </div>
+                            </ul>
+                        }
                         {
                             this.state.autocompletionInProgress && (
                                 <div
@@ -394,6 +375,37 @@ class Location extends Personalisation<Props, State> {
                             )
                         }
                     </fieldset>
+                    <div className="GeoLocationButtonContainer">
+                        {
+                            /* if the browser supports geolocation */
+                            geolocationAvailable() &&
+                                <>
+                                {
+                                    !this.state.foundLocation &&
+                                    <span className="or">Or</span>
+                                }
+                                    <GeolocationButton
+                                        restartSearch={
+                                            this.state.fetchNewLocation
+                                        }
+                                        onSuccess={
+                                            this.onGeoLocationSuccess.bind(this)
+                                        }
+                                    />
+                                </>
+                        }
+                    </div>
+                    <h3 className="explainer">
+                        <span className="explainerIcons">
+                            <icons.Walk/>
+                            <icons.Tram/>
+                            <icons.Car/>
+                        </span>
+                        <em>
+                            If you want to see estimated travel times
+                            to services use 'Get your current location' above.
+                        </em>
+                    </h3>
                 </WithStickyFooter>
             </main>
         </div>
@@ -403,8 +415,9 @@ class Location extends Personalisation<Props, State> {
         return (
             <div>
                 <div className="done-button">
-                    <components.FlatButton
+                    <FlatButton
                         label="Done"
+                        className="doneButton"
                         onClick={this.onDoneTouchTap.bind(this)}
                         disabled={
                             this.state.nextDisabled ||

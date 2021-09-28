@@ -5,7 +5,6 @@ import React, {useEffect, useState} from "react";
 import _ from "underscore";
 
 import * as gtm from "../google-tag-manager";
-
 import Address from "./Address";
 import Accessibility from "./Accessibility";
 import CollapsedOpeningTimes from "./CollapsedOpeningTimes";
@@ -26,6 +25,8 @@ import LgbtiqIcon from "./LgbtiqIcon";
 import AlertBannerList from "../components/AlertBannerList";
 import type {Service} from "../iss";
 import ScreenReader from "./ScreenReader";
+import icons from "../icons";
+import Storage from "../storage";
 import {MobileDetect} from "../effects/MobileDetect";
 
 type Props = {
@@ -47,6 +48,7 @@ function ServicePane({service}: Props): ReactNode {
         let response = await service.getSiblingServices();
         setSiblings(response.objects)
     }
+
 
     const recordAlsoAtThisLocation = (service: Service) => {
         gtm.emit({
@@ -79,36 +81,14 @@ function ServicePane({service}: Props): ReactNode {
         );
     }
 
-    const renderDescription = (service: Service): ReactElement<"div"> => {
-        let description = service
-            .descriptionSentences.map(
-                (sentence, idx) =>
-                    <p key={idx}>{sentence}</p>
-            )
-
-        if (service.descriptionRemainder.length > 0) {
-            description = (
-                <Collapser
-                    contentPreview={service.shortDescription.map(
-                        (sentence, idx) => <p key={idx}>{sentence}</p>
-                    )}
-                    expandMessage="Read more"
-                    analyticsEvent={{
-                        event: `Action Triggered - Service Description`,
-                        eventAction: "Show full service description",
-                        eventLabel: null,
-                    }}
-                >
-                    {description}
-                </Collapser>
-            )
-        }
-
-        return (
-            <div className="description">
-                {description}
-            </div>
-        )
+    const recordClick = (): void => {
+        gtm.emit({
+            event: "Google Maps Link Clicked",
+            eventCat: "External Link Clicked",
+            eventAction: "Google Maps Directions",
+            eventLabel: window.location.pathname,
+            sendDirectlyToGA: true,
+        });
     }
 
     const renderSiblings = (): ReactElement<"div"> | ReactElement<"span"> => {
@@ -145,16 +125,43 @@ function ServicePane({service}: Props): ReactNode {
                             primaryText={service.name}
                             secondaryText={service.shortDescription[0]}
                             rightIcon={<Chevron />}
-                            analyticsEvent={{
-                                event: "Link Followed - Other Service",
-                                eventAction: "Other service at location",
-                                eventLabel: `${service.id}`,
-                            }}
                         />
                     )}
                 </div>
             </div>
         );
+    }
+
+    const renderDescription = (): ReactElement<"div"> => {
+        let description = service
+            .descriptionSentences.map(
+                (sentence, idx) =>
+                    <p key={idx}>{sentence}</p>
+            )
+
+        if (service.descriptionRemainder.length > 0) {
+            description = (
+                <Collapser
+                    contentPreview={service.shortDescription.map(
+                        (sentence, idx) => <p key={idx}>{sentence}</p>
+                    )}
+                    expandMessage="Read more"
+                    analyticsEvent={{
+                        event: `Action Triggered - Service Description`,
+                        eventAction: "Show full service description",
+                        eventLabel: null,
+                    }}
+                >
+                    {description}
+                </Collapser>
+            )
+        }
+
+        return (
+            <div className="description">
+                {description}
+            </div>
+        )
     }
 
     return (
@@ -210,7 +217,7 @@ function ServicePane({service}: Props): ReactNode {
                             <IndigenousServiceIcon object={service} />
                             <LgbtiqIcon object={service} />
                         </div>
-                        {renderDescription(service)}
+                        {renderDescription()}
                     </div>
 
                     <div
@@ -246,21 +253,36 @@ function ServicePane({service}: Props): ReactNode {
                                 className="ndis"
                                 compact={false}
                                 object={service}
+                                spacer={true}
+                            />
+                            <Address
+                                location={service.Location()}
+                                site={service.site}
                                 withSpacer={true}
                             />
-                            <div className="locationInfo">
-                                <Address
-                                    location={service.Location()}
-                                    withSpacer={true}
-                                />
+                            {Storage.getCoordinates() &&
+                            service.Location().travelTime &&
                                 <TransportTime
                                     location={service.Location()}
                                     withSpacer={true}
                                 />
-                                <GoogleMapsLink
-                                    to={service.Location()}
-                                />
-                            </div>
+                            }
+                            {!service.Location().isConfidential() &&
+                            <GoogleMapsLink
+                                to={service.Location()}
+                                className={Storage.getCoordinates() ?
+                                    "withTimes" : "withoutTimes"}
+                                onClick={recordClick}
+                                hideSpacer={true}
+                            >
+                                <span className="googleMapsLink">
+                                    Get directions in Google Maps
+                                    <icons.ExternalLink
+                                        className="ExternalLinkIcon"
+                                    />
+                                </span>
+                            </GoogleMapsLink>
+                            }
                             <ContactMethods object={service} />
                             <Feedback object={service} />
                         </div>

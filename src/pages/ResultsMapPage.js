@@ -15,6 +15,7 @@ import icons from "../icons";
 
 import type { Service, Site } from "../iss";
 import ScreenReader from "../components/ScreenReader";
+import ResultsPageGeolocationButton from "./ResultsPageGeolocationButton";
 
 type State = {
     selectedSite: ?Site,
@@ -135,19 +136,43 @@ class ResultsMapPage extends ResultsPage<{}, State> {
                         // On IE11 `display:contents` doesn't work so the map
                         // doesn't show. This is to set the height of the map
                         // if a service is selected it's 60vh otherwise 100vh
-                        height: this.state.selectedSite ? "60vh" : "100vh",
+                        height: this.state.selectedSite ? "60vh" : "90vh",
                     }}
                 >
                     <SitesMap
                         onSiteSelect={
-                            site => this.setState({selectedSite: site})
+                            site => {
+                                // Setting it null first will ensure
+                                // that the new travel times get loaded
+                                // When switching between sites without
+                                // closing the previous one
+                                this.setState({selectedSite: null}, () => {
+                                    this.setState({selectedSite: site})
+                                })
+                            }
                         }
                         sites={this.sites}
                         siteLocations={this.siteLocations}
                         selectedSite={this.state.selectedSite}
                     />
                 </div>
-                <ResultsList results={this.selectedServices} />
+                <ResultsPageGeolocationButton
+                    fetchedLocation={this.state.fetchedLocation}
+                    onGeoLocationSuccess={
+                        this.onGeoLocationSuccess.bind(this)
+                    }
+                    showMessage={false}
+                    onfetchNewLocation={() => {
+                        this.setState({
+                            fetchedLocation: false,
+                        })
+                    }}
+                />
+                <ResultsList
+                    reFetchTravelTimes={!!(this.state?.fetchedLocation &&
+                    this.state.selectedSite)}
+                    results={this.selectedServices}
+                />
             </>
         }
     }

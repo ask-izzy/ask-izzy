@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from "react";
-
+import type {Node as ReactNode} from "react";
 import ResultListItem from "../components/ResultListItem";
 import CrisisLineItem from "../components/CrisisLineItem";
 import CrisisHeader from "../components/CrisisHeader";
@@ -11,76 +11,58 @@ import {
 } from "../iss";
 
 import type { Service } from "../iss";
+import {useEffect, useState} from "react";
 
-const StaticTextLine = ({object}) => React.cloneElement(object.node);
-
-const className = (elem: React.Element<any>) =>
-    `resultContainer resultContainer-${
-        elem.type.displayName || "other"}`
-
-class ResultsList extends React.Component<{
+type Props = {
     results: Array<Service>,
-}, void> {
-    crisisResults(): Array<Object> {
-        return crisisResults(this.props.results);
-    }
+    reFetchTravelTimes?: boolean,
+}
 
-    nonCrisisResults(): Array<Object> {
-        return nonCrisisResults(this.props.results);
-    }
+function ResultsList({ results, reFetchTravelTimes = false}: Props): ReactNode {
 
-    render(): React.Element<"div"> {
-        return (
-            <div className="ResultsList">
-                {
-                    (this.crisisResults().length > 0) &&
-                    <CrisisHeader
-                        plural={this.crisisResults().length > 1}
-                    />
-                }
-                {this.crisisResults().map(this.renderCrisisResult.bind(this))}
-                {this.nonCrisisResults().map(this.renderResult.bind(this))}
-            </div>
-        );
-    }
+    const [crisisResultList, setCrisisResultList] = useState([])
+    const [nonCrisisResultList, setNonCrisisResultList] = useState([])
 
-    renderCrisisResult(object: Object, index: number): React.Element<"div"> {
-        const elem: React.Element<any> = object.staticText ?
-            <StaticTextLine object={object} />
-            : (
-                <CrisisLineItem
-                    object={object}
-                    resultNumber={index + 1}
+    useEffect(() => {
+        setCrisisResultList(crisisResults(results))
+        setNonCrisisResultList(nonCrisisResults(results))
+    }, [results])
+
+
+    return (
+        <div className="ResultsList">
+            {
+                (crisisResultList.length > 0) &&
+                <CrisisHeader
+                    plural={crisisResultList.length > 1}
                 />
-            );
+            }
+            {crisisResultList.map((crisis, index) => (
+                <div
+                    key={`crisis-${index}`}
+                    className="resultContainer resultContainer-CrisisLineItem"
+                >
+                    <CrisisLineItem
+                        object={crisis}
+                        resultNumber={index + 1}
+                    />
+                </div>
+            ))}
+            {nonCrisisResultList.map((result, index) => (
+                <div
+                    key={`regular-${index}`}
+                    className="resultContainer resultContainer-ResultListItem"
+                >
+                    <ResultListItem
+                        reFetchTravelTimes={reFetchTravelTimes}
+                        service={result}
+                        resultNumber={index + 1}
+                    />
+                </div>
+            ))}
+        </div>
+    );
 
-        return (
-            <div
-                key={`crisis-${index}`}
-                className={className(elem)}
-            >
-                {elem}
-            </div>
-        );
-    }
-
-    renderResult(object: Object, index: number): React.Element<"div"> {
-        const elem = (
-            <ResultListItem
-                service={object}
-                resultNumber={index + 1}
-            />
-        );
-
-        return (
-            <div
-                key={`regular-${index}`}
-                className={className(elem)}
-            >
-                {elem}
-            </div>
-        );
-    }
 }
 
 export default ResultsList;

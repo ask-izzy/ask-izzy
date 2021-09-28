@@ -7,6 +7,7 @@ Feature: Transport times
 
     Background:
         Given my location is "Melbourne, VIC"
+        And my location is 37.822S 144.99E
         And my gender is female
         And I am 27 years old
         And I am not part of any relevant demographics

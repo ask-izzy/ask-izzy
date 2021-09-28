@@ -95,4 +95,15 @@
             height: 20px;
         }
     }
+
+    .TransportTime {
+        display: flex;
+    }
+
+    @media (max-width: 556px) {
+        .TransportTime {
+            display: flex;
+            flex-direction: column;
+        }
+    }
 }

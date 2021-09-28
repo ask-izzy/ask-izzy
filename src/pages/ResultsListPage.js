@@ -20,6 +20,7 @@ import QuestionStepper from "./QuestionStepper";
 
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
+import ResultsPageGeolocationButton from "./ResultsPageGeolocationButton";
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
@@ -93,13 +94,27 @@ class ResultsListPage extends ResultsPage<> {
                 </ScreenReader>
                 <div className="List results">
                     {this.hasSearchResults() ||
-                        <ViewOnMapButton
-                            to={this.context.router.location
-                                .pathname.replace(/\/?$/, "/map")
-                            }
-                        />
+                        <div>
+                            <ViewOnMapButton
+                                to={this.context.router.location
+                                    .pathname.replace(/\/?$/, "/map")
+                                }
+                            />
+                            <ResultsPageGeolocationButton
+                                fetchedLocation={this.state.fetchedLocation}
+                                onGeoLocationSuccess={
+                                    this.onGeoLocationSuccess.bind(this)
+                                }
+                                onfetchNewLocation={(fetchedLocationStatus) => {
+                                    this.setState({
+                                        fetchedLocation: fetchedLocationStatus,
+                                    })
+                                }}
+                            />
+                        </div>
                     }
                     <ResultsList
+                        reFetchTravelTimes={this.state?.fetchedLocation}
                         results={this.state.searchResults || []}
                     />
                     {this.renderLoadMore()}

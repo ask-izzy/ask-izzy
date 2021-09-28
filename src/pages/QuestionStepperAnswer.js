@@ -11,6 +11,7 @@ import routerContext from "../contexts/router-context";
 import {useContext} from "react";
 import type {AnswerType} from "./QuestionStepper.service";
 import icons from "../icons";
+import type {Node as ReactNode} from "react";
 
 type Props = {
     lastMultiSelect: ?number,
@@ -30,7 +31,7 @@ function QuestionStepperAnswer({
     currentAnswers,
     multiSelectedAnswer,
     lastMultiSelect,
-}: Props): React.Node {
+}: Props): ReactNode {
 
     const {router} = useContext(routerContext)
 

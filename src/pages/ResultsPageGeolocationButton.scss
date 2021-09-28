@@ -1,0 +1,99 @@
+@use '../styles/mixins/colours';
+
+.ResultsPageGeoLocationButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1em;
+    color: #{colours.get-static('colour-text-mid')};
+    color: var(--colour-text-mid);
+
+    .explainer {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+
+        .explainerIcons {
+            display: inline-flex;
+            margin-right: 1em;
+            margin-bottom: -4px;
+
+            .SvgIcon {
+                margin-left: -1px;
+                margin-right: -1px;
+
+                &.WalkIcon {
+                    width: 20px;
+                }
+
+                path {
+                    fill: #{colours.get-static('colour-text-mid')};
+                    fill: var(--colour-text-mid);
+                }
+
+                circle {
+                    fill: #{colours.get-static('colour-text-mid')};
+                    fill: var(--colour-text-mid);
+                }
+            }
+        }
+    }
+
+    .undo {
+        border: 0;
+        background: none;
+        font-weight: bold;
+    }
+
+    .GeoLocationButton {
+        display: flex;
+        align-items: center;
+
+        button {
+            .primary {
+                font-weight: bold;
+            }
+        }
+
+        .primary {
+            font-weight: normal;
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
+        }
+    }
+
+    @media (max-width: 771px) {
+        .explainer {
+            width: 60%;
+        }
+    }
+
+    @media (max-width: 674px) {
+        flex-direction: column;
+
+        .explainer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .GeoLocationButton {
+            width: auto;
+        }
+
+        .specificLocationBanner {
+            margin: 1em;
+            display: flex;
+            flex-direction: column;
+
+            .GeoLocationButton {
+                margin: 1em 0;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+    }
+}
