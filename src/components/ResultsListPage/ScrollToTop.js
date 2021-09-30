@@ -41,14 +41,16 @@ function ScrollToTop({label}: Props): ReactNode {
     }
 
     return (
-        <Button
-            className={`ScrollToTop ${showButton ? "showToTop" : ""}`}
-            disabled={!showButton}
-            onClick={scrollToTop}
-        >
-            <icons.Chevron/>
-            <span>{label}</span>
-        </Button>
+        <div className="ScrollToTop">
+            <Button
+                className={`button ${showButton ? "showToTop" : ""}`}
+                disabled={!showButton}
+                onClick={scrollToTop}
+            >
+                <icons.Chevron/>
+                <span>{label}</span>
+            </Button>
+        </div>
     )
 }
 

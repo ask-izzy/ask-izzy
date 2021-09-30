@@ -19,7 +19,6 @@ type State = {
     searchError: ?{message: string, status: number},
     searchPagesLoaded: number,
     searchType: ?string,
-    fetchedLocation: boolean,
     sortOption: ?SortType,
 }
 
@@ -42,7 +41,6 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             searchError: null,
             searchPagesLoaded: 0,
             sortOption: null,
-            fetchedLocation: false,
             searchType,
         };
     }
@@ -72,9 +70,6 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
 
     onGeoLocationSuccess(params: {coords: Coordinates, name: string}): void {
         storage.setCoordinates(params.coords, params.name);
-        this.setState({
-            fetchedLocation: true,
-        })
     }
 
     async loadNextSearchPage(): Promise<void> {

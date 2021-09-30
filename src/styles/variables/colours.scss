@@ -28,13 +28,13 @@ $lightness-button-hover: 10%;
     @include colours.define(
         'colour-brand-primary-mid',
         'global',
-        colours.lighten('raw-colour-rich-purple', 'global', -34%),
+        colours.lighten('colour-brand-primary', 'global', -34%),
     );
 
     @include colours.define(
         'colour-brand-primary-dark',
         'global',
-        colours.lighten('raw-colour-rich-purple', 'global', -60%)
+        colours.lighten('colour-brand-primary', 'global', -60%)
     );
 
     /* Features */
@@ -106,12 +106,24 @@ $lightness-button-hover: 10%;
     @include colours.define('colour-link', 'global', 'raw-colour-coral-blue');
     @include colours.define('colour-link-visited', 'global', 'raw-colour-plum-purple');
 
-    @include colours.define('colour-button-standard', 'global', 'colour-brand-primary');
+    @include colours.define('colour-button-primary', 'global', 'colour-brand-primary');
     @include colours.define(
-        'colour-button-standard-hover',
+        'colour-button-primary-hover',
         'global',
-        colours.lighten('colour-button-standard', 'global', $lightness-button-hover),
+        colours.lighten('colour-button-primary', 'global', $lightness-button-hover),
     );
+
+    @include colours.define(
+        'colour-button-secondary',
+        'global',
+        colours.lighten('colour-button-primary', 'global', 100%)
+    );
+    @include colours.define(
+        'colour-button-secondary-hover',
+        'global',
+        colours.lighten('colour-button-primary', 'global', 95%),
+    );
+
     @include colours.define('colour-button-disabled', 'global','colour-bg-standard-tint-1');
 
     @include colours.define(

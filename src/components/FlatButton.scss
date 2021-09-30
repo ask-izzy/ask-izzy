@@ -2,8 +2,8 @@
 
 .FlatButton {
     border: 0;
-    background-color: #{colours.get-static('colour-button-standard')};
-    background-color: var(--colour-button-standard);
+    background-color: #{colours.get-static('colour-button-primary')};
+    background-color: var(--colour-button-primary);
     color: #{colours.get-static('colour-text-very-light')};
     color: var(--colour-text-very-light);
     font-size: 18px;
@@ -13,8 +13,8 @@
 
     &:hover,
     &:focus {
-        background-color: #{colours.get-static('colour-button-standard-hover')};
-        background-color: var(--colour-button-standard-hover);
+        background-color: #{colours.get-static('colour-button-primary-hover')};
+        background-color: var(--colour-button-primary-hover);
     }
 
     &[disabled] {

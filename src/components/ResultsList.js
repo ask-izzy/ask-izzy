@@ -19,14 +19,14 @@ import ScreenReader from "./ScreenReader";
 type Props = {
     results: Array<Service>,
     showControl?: boolean,
-    reFetchTravelTimes?: boolean,
+    fetchedLocation?: boolean,
 }
 
 function ResultsList(
     {
         results,
         showControl = false,
-        reFetchTravelTimes = false,
+        fetchedLocation = false,
     }: Props): ReactNode {
 
     const [crisisResultList, setCrisisResultList] = useState([])
@@ -81,7 +81,7 @@ function ResultsList(
                         </span>
                     </ScreenReader>
                     <ResultListItem
-                        reFetchTravelTimes={reFetchTravelTimes}
+                        reFetchTravelTimes={fetchedLocation}
                         service={result}
                         resultNumber={index + 1}
                     />

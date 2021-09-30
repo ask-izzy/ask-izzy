@@ -24,7 +24,6 @@
     }
 
     .nativeSelect {
-        -webkit-appearance: none;
         padding: 10px;
         font-weight: 500;
         color: #{colours.get-static('colour-text-dark')};
@@ -50,7 +49,7 @@
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
         font-weight: 500;
-        font-size: 18px;
+        font-size: 16px;
         cursor: pointer;
         border: solid 1px #{colours.get-static('colour-text-dark')};
         border: solid 1px var(--colour-text-dark);
@@ -96,6 +95,8 @@
         color: var(--colour-text-mid);
         box-shadow: #{colours.get-static('raw-colour-pure-black')} 0 0 3px 0;
         box-shadow: var(--raw-colour-pure-black) 0 0 3px 0;
+        outline: 1px solid #{colours.get-static('colour-text-dark')};
+        outline: 1px solid var(--colour-text-dark);
         cursor: pointer;
         z-index: 1;
 

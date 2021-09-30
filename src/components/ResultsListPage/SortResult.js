@@ -7,8 +7,8 @@ import type {SortType} from "./SortResult.service";
 
 const OPTIONS: Array<SortType> = [
     {
-        key: null,
-        value: null,
+        key: "",
+        value: "",
         name: "Best match",
     },
     {
@@ -40,6 +40,13 @@ function SortResult(
             {showDivider && <div className="divider"/>}
             <Dropdown
                 onChange={(option) => {
+                    // When changing the sort option, we will scroll to the
+                    // top of the screen, but only if the option
+                    // is different to what's currently selected
+                    if (typeof window !== "undefined" &&
+                        selection !== option) {
+                        window.scrollTo(0, 0)
+                    }
                     setSelection(option);
                     callback(option);
                 }}

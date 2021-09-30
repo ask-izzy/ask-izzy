@@ -215,7 +215,7 @@ class Location extends Personalisation<Props, State> {
 
             // Forget the users coordinates if they change
             // the location we detected
-            storage.setCoordinates(null);
+            storage.removeItem("coordinates");
 
             this.triggerAutocomplete();
         }

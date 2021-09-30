@@ -4,10 +4,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px 5px;
+    padding: 10px 10px 5px;
     height: 44px;
     background-color: #{colours.get-static('colour-bg-standard-tint-2')};
     background-color: var(--colour-bg-standard-tint-2);
+
+    .Dropdown {
+        .options {
+            width: 198px;
+            margin-left: 1px;
+        }
+    }
 
     &.sticky {
         padding: 5px 20px 8px;
@@ -26,6 +33,22 @@
                 .title {
                     color: #{colours.get-static('raw-colour-pure-white')};
                     color: var(--raw-colour-pure-white);
+                }
+
+                .options {
+                    outline: 1px solid #{colours.get-static('colour-brand-primary')};
+                    outline: 1px solid var(--colour-brand-primary);
+                    width: inherit;
+                    margin-left: 0;
+
+                    .selected {
+                        background: none;
+
+                        &:hover {
+                            background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+                            background-color: var(--colour-bg-standard-tint-2);
+                        }
+                    }
                 }
 
                 .optionSelect,
@@ -55,6 +78,7 @@
 
     @media (max-width: 768px) {
         padding: 10px 0;
+        margin: 0 10px;
         font-size: 14px;
 
         &.sticky {
@@ -65,9 +89,10 @@
     @media (max-width: 556px) {
         flex-direction: column;
         height: 100%;
+        margin: 0;
 
         .SortResult {
-            margin-right: 20px;
+            margin-right: 5%;
             align-items: flex-end;
         }
 

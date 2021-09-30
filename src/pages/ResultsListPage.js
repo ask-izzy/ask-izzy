@@ -16,13 +16,13 @@ import NotFoundStaticPage from "./NotFoundStaticPage"
 import ButtonListItem from "../components/ButtonListItem";
 import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "./QuestionStepper";
-import storage from "../storage";
 
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
 import IssParamsOverrideControls from
     "../components/debug/IssParamsOverrideControls";
 import ScrollToTop from "../components/ResultsListPage/ScrollToTop";
+import Storage from "../storage";
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
@@ -61,13 +61,13 @@ class ResultsListPage extends ResultsPage<> {
                 </DebugContainer>
                 <DebugContainer
                     message="ISS Parameters"
-                    initiallyExpanded={!!storage.getJSON("issParamsOverride")}
+                    initiallyExpanded={!!Storage.getJSON("issParamsOverride")}
                 >
-                    {storage.getJSON("issParamsOverride") ?
+                    {Storage.getJSON("issParamsOverride") ?
                         <IssParamsOverrideControls
                             originalIssParams={this.issParams() || {}}
                             issParamsOverride={
-                                storage.getJSON("issParamsOverride")
+                                Storage.getJSON("issParamsOverride")
                             }
                             setIssParamsOverride={
                                 this.setIssParamsOverride.bind(this)
@@ -125,8 +125,11 @@ class ResultsListPage extends ResultsPage<> {
                 </ScreenReader>
                 <div className="List results">
                     <ResultsList
-                        reFetchTravelTimes={this.state?.fetchedLocation}
+                        fetchedLocation={!!Storage.getCoordinates()}
                         results={this.state.searchResults || []}
+                        onGeoLocationSuccessCallback={
+                            this.onGeoLocationSuccess.bind(this)
+                        }
                         showControl={true}
                     />
                     {this.renderLoadMore()}
@@ -190,9 +193,9 @@ class ResultsListPage extends ResultsPage<> {
         triggerNewSearch: boolean = true
     ): void {
         if (issParamsOverride) {
-            storage.setJSON("issParamsOverride", issParamsOverride)
+            Storage.setJSON("issParamsOverride", issParamsOverride)
         } else {
-            storage.removeItem("issParamsOverride")
+            Storage.removeItem("issParamsOverride")
         }
         if (triggerNewSearch) {
             location.reload();

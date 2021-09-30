@@ -2,13 +2,13 @@
 
 .ViewOnMapButton {
     width: 30%;
-    border: 1px solid #{colours.get-static('colour-button-standard')};
-    border: 1px solid var(--colour-button-standard);
+    border: 1px solid #{colours.get-static('colour-button-primary')};
+    border: 1px solid var(--colour-button-primary);
     background: none;
     font-weight: bold;
     border-radius: 3px;
-    color: #{colours.get-static('colour-button-standard')};
-    color: var(--colour-button-standard);
+    color: #{colours.get-static('colour-button-primary')};
+    color: var(--colour-button-primary);
 
     .buttonLabel {
         display: flex;
@@ -23,11 +23,16 @@
         }
 
         path {
-            fill: #{colours.get-static('colour-button-standard')};
-            fill: var(--colour-button-standard);
-            stroke: #{colours.get-static('colour-button-standard')};
-            stroke: var(--colour-button-standard);
+            fill: #{colours.get-static('colour-button-primary')};
+            fill: var(--colour-button-primary);
+            stroke: #{colours.get-static('colour-button-primary')};
+            stroke: var(--colour-button-primary);
         }
+    }
+
+    &:hover {
+        background-color: #{colours.get-static('colour-button-secondary-hover')};
+        background-color: var(--colour-button-secondary-hover);
     }
 
     @media (max-width: 556px) {

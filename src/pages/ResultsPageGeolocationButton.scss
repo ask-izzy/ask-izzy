@@ -4,7 +4,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 1em;
+    padding: 5px;
+    margin: 10px;
+    background-color: #{colours.get-static('raw-colour-pure-white')};
+    background-color: var(--raw-colour-pure-white);
     color: #{colours.get-static('colour-text-mid')};
     color: var(--colour-text-mid);
 
@@ -39,6 +42,40 @@
         }
     }
 
+    .collapserContainer {
+        position: relative;
+        width: 100%;
+
+        .Button {
+            border: 0;
+            background: none;
+            font-weight: bold;
+            position: absolute;
+            top: -8px;
+            right: 0;
+
+            .plus {
+                transform: rotate(90deg);
+                transition: transform 200ms ease;
+
+                &.close {
+                    transform: rotate(-90deg);
+                    transition: transform 200ms ease;
+                }
+            }
+
+            .SvgIcon {
+                width: 20px;
+                stroke-width: 6px;
+
+                path {
+                    stroke: #{colours.get-static('colour-text-mid')};
+                    stroke: var(--colour-text-mid);
+                }
+            }
+        }
+    }
+
     .undo {
         border: 0;
         background: none;
@@ -66,6 +103,10 @@
         .explainer {
             width: 60%;
         }
+    }
+
+    @media (max-width: 674px) {
+        width: 90%;
     }
 
     @media (max-width: 674px) {
