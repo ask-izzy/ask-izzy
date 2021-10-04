@@ -33,13 +33,15 @@ function ResultsPageGeolocationButton(
 
     const explainerMessage = () => (
         !Storage.getCoordinates() && showMessage &&
-            <div className="explainer">
+            <div className={`explainer ${collapsed ? "collapsed" : ""}`}>
                 <span className="explainerIcons">
                     <icons.Walk/>
                     <icons.Tram/>
                     <icons.Car/>
                 </span>
-                Want to see estimated travel times for the services below?
+                {collapsed ? "See estimated travel times?"
+                    // eslint-disable-next-line max-len
+                    : "Want to see estimated travel times for the services below?"}
             </div>
     )
 

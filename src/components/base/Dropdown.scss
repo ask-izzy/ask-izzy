@@ -24,7 +24,7 @@
     }
 
     .nativeSelect {
-        padding: 10px;
+        padding: 5px;
         font-weight: 500;
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
@@ -104,8 +104,6 @@
             padding: 10px;
 
             &.selected {
-                background-color: #{colours.get-static('colour-bg-standard-tint-1')};
-                background-color: var(--colour-bg-standard-tint-1);
                 color: #{colours.get-static('colour-text-dark')};
                 color: var(--colour-text-dark);
                 font-weight: 500;
