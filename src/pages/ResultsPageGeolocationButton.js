@@ -22,10 +22,11 @@ function ResultsPageGeolocationButton(
         showMessage = true,
     }: Props): ReactElement<"div"> {
 
-    const [collapsed, setCollapsed] = useState(false);
+    const [collapsed, setCollapsed] = useState(true);
     const [foundLocation, setFoundLocation] = useState(false);
 
     const isMobile = MobileDetect(556)
+    const isSmallMobileDevice = MobileDetect(374)
 
     useEffect(() => {
         Storage.getCoordinates() && setFoundLocation(true)
@@ -34,12 +35,14 @@ function ResultsPageGeolocationButton(
     const explainerMessage = () => (
         !Storage.getCoordinates() && showMessage &&
             <div className={`explainer ${collapsed ? "collapsed" : ""}`}>
+                {(!isSmallMobileDevice || !collapsed) &&
                 <span className="explainerIcons">
                     <icons.Walk/>
                     <icons.Tram/>
                     <icons.Car/>
-                </span>
-                {collapsed ? "See estimated travel times?"
+                </span>}
+                {collapsed && (isMobile || isSmallMobileDevice) ?
+                    "See estimated travel times?"
                     // eslint-disable-next-line max-len
                     : "Want to see estimated travel times for the services below?"}
             </div>

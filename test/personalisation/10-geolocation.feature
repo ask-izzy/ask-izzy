@@ -44,7 +44,7 @@ Feature: Geolocation
         When I visit /housing
         Given control of geolocation
         Then I should see "Showing housing services"
-        And I should see "Want to see estimated travel times for the services below?"
+        And I should see "See estimated travel times for the services below?"
         When I click on "Get your current location"
         Then I should see "Locating you..."
 

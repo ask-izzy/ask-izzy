@@ -119,8 +119,11 @@ function Dropdown(
                         onChange(opt || options[0]);
                     }}
                 >
-                    {options.map(opt => (
-                        <option value={opt.key}>
+                    {options.map((opt, index) => (
+                        <option
+                            value={opt.key}
+                            key={`${opt.key || "key"}_${index}`}
+                        >
                             {opt.name}
                         </option>
                     ))}

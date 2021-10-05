@@ -2,6 +2,7 @@
 
 .ViewOnMapButton {
     width: 30%;
+    font-size: 16px;
     border: 1px solid #{colours.get-static('colour-button-primary')};
     border: 1px solid var(--colour-button-primary);
     background: none;

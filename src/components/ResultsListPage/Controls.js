@@ -22,6 +22,7 @@ function Controls(
     }: Props): ReactNode {
 
     const [sticky, setSticky] = useState(false);
+    const [initialOffset, setInitialOffset] = useState(0);
     const {location} = useRouterContext()
     const ref = useRef<any>(null)
     const scrollPosition = getScrollPosition()
@@ -29,7 +30,14 @@ function Controls(
     const isMobile = MobileDetect(556)
 
     useEffect(() => {
-        setSticky(ref.current && scrollPosition >= ref.current.offsetTop)
+
+        // sets the initial offset of the controls
+        // this will also account for alerts
+        if (!initialOffset) {
+            setInitialOffset(ref?.current?.offsetTop)
+        }
+
+        setSticky(initialOffset && scrollPosition >= initialOffset)
     }, [ref, scrollPosition])
 
     const renderResultsPageGeolocationButton = () => (

@@ -15,6 +15,7 @@
         display: flex;
         align-items: center;
         font-size: 14px;
+        font-weight: 400;
 
         .explainerIcons {
             display: inline-flex;
@@ -51,8 +52,8 @@
             background: none;
             font-weight: bold;
             position: absolute;
-            top: -8px;
-            right: -12px;
+            top: -12px;
+            right: 0;
 
             .plus {
                 transform: rotate(90deg);
