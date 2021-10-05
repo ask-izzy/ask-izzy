@@ -4,8 +4,9 @@ import type {Node as ReactNode} from "React";
 import * as React from "react"
 import Dropdown from "./../base/Dropdown";
 import type {SortType} from "./SortResult.service";
+import {useEffect} from "react";
 
-const OPTIONS: Array<SortType> = [
+export const SORT_OPTIONS: Array<SortType> = [
     {
         key: "",
         value: "",
@@ -22,6 +23,7 @@ type Props = {
     callback: function,
     titlePosition: string,
     showDivider: boolean,
+    sortOption: SortType,
 }
 
 function SortResult(
@@ -29,11 +31,18 @@ function SortResult(
         callback,
         titlePosition,
         showDivider,
+        sortOption,
     }: Props): ReactNode {
 
     const [selection, setSelection] = React.useState<SortType>(
-        OPTIONS[0]
+        SORT_OPTIONS[0]
     );
+
+    useEffect(() => {
+        if (sortOption) {
+            setSelection(sortOption)
+        }
+    }, [sortOption])
 
     return (
         <div className="SortResult">
@@ -53,7 +62,7 @@ function SortResult(
                 title="Sort by"
                 titlePosition={titlePosition}
                 selection={selection}
-                options={OPTIONS}
+                options={SORT_OPTIONS}
             />
         </div>
     )

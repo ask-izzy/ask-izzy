@@ -18,6 +18,7 @@
 
     &.sticky {
         padding: 5px 20px 8px;
+        margin-left: -5px;
         position: fixed;
         top: 44px;
         transition: background-color 150ms ease;
