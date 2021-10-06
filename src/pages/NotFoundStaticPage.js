@@ -4,7 +4,6 @@
 import React from "react";
 import type {Element as ReactElement} from "React";
 import HeaderBar from "../components/HeaderBar";
-import BrandedFooter from "../components/BrandedFooter";
 import Link from "../components/base/Link";
 import routerContext from "../contexts/router-context";
 
@@ -20,18 +19,15 @@ export default class NotFoundStaticPage extends React.Component<Props, void> {
                 className="StaticPage"
             >
                 <HeaderBar
-                    primaryText="Page not found"
+                    primaryText="Ask Izzy Beta has ended"
                     secondaryText={null}
                     fixedAppBar={false}
                     bannerName={"drugs-alcohol"}
+                    showBetaBanner={false}
                 />
                 <div className="body">
-                    <p>Sorry, but it looks as though the page you are trying to find does not exist. It might be because you followed an old link, or typed the address incorrectly—but it was most likely our fault for moving something.</p>
-                    <p>Please contact support at 03 9418 7466 or <Link to="mailto:support@askizzy.org.au">support@askizzy.org.au</Link>, and we'll try to resolve the problem as soon as we can.</p>
+                    <p>Thank you for participating in Ask Izzy Beta! The beta program has now ended but you can <Link to={"mailto:support@askizzy.org.au?subject=Ask%20Izzy%20Beta%20-%20Feedback"}>still leave us feedback</Link>. Otherwise please go to <Link to="https://askizzy.org.au">AskIzzy.org.au</Link> to continue using Ask Izzy.</p>
                 </div>
-
-                <br/>
-                <BrandedFooter/>
 
             </div>
         );
