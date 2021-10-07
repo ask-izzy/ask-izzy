@@ -22,7 +22,6 @@ import BasePage from "./pages/BasePage";
 import HomePage from "./pages/HomePage";
 import NotFoundStaticPage from "./pages/NotFoundStaticPage";
 import AddServicePage from "./pages/AddServicePage";
-import BetaInfoStaticPage from "./pages/BetaInfoStaticPage";
 import DisabilityAdvocacyFinder from "./pages/DisabilityAdvocacyFinder";
 import DynamicPage from "./pages/DynamicPage";
 
@@ -141,12 +140,6 @@ const routes: ReactElement<typeof Routes> = <Routes>
             element={<DynamicPage />}
             title="Online Safety"
             type={["Static Page", "Online Safety"]}
-        />
-        <Route
-            path="/beta-info"
-            element={<BetaInfoStaticPage />}
-            title="About Ask Izzy Beta"
-            type={["Static Page", "About Ask Izzy Beta"]}
         />
         <Route
             path="/homeless-shelters"
