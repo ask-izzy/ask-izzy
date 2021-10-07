@@ -13,20 +13,20 @@ export default class SleepTonight extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sleep-tonight",
         question: "Do you have somewhere safe to sleep tonight?",
-        answers: {
+        possibleAnswers: {
             "Yes": append(""),
             "No": housingCrisis(() => Location.shouldInjectAccessPoints()),
         },
     };
 
-    static breadcrumbAnswer(): string {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): string | Array<string> {
+        switch (this.savedAnswer) {
         case "Yes":
             return "Safe tonight";
         case "No" :
             return "Not safe tonight";
         default:
-            return this.answer
+            return this.savedAnswer
         }
     }
 }

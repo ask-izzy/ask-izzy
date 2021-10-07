@@ -65,11 +65,11 @@ function issRequest({search, personalisation}) {
     return request;
 }
 
-// Return all answers this personalisation can result in
+// Return all possible answers this personalisation can result in
 // Currently only selects a single demographic at a time
 // as otherwise there are far too many (even for an automated test).
 function answerPermutations(personalisation: Object): Array<Object> {
-    const {name, answers} = personalisation.defaultProps;
+    const {name, possibleAnswers} = personalisation.defaultProps;
 
     const toObject = (answer) => {
         let result = {};
@@ -87,7 +87,7 @@ function answerPermutations(personalisation: Object): Array<Object> {
         return test.search.demographicPermutations.map(toObject);
     }
 
-    return Object.keys(answers)
+    return Object.keys(possibleAnswers)
         .concat(["(skipped)"])
         .map(toObject);
 }

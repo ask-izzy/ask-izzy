@@ -3,6 +3,7 @@ import type { ElementConfig as ReactElementConfig } from "react"
 
 /* eslint-disable no-unused-vars */
 import * as React from "react";
+import type {Node as ReactNode} from "react";
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/Search";
 import icons from "../../icons";
@@ -17,7 +18,7 @@ export default class DemographicsIndigenous extends BaseQuestion {
             "specific services?",
         byline:
             "",
-        answers: {
+        possibleAnswers: {
             // n.b. see also storage.getUserIsIndigenous when changing
             "Yes - show these first where possible":
                 append("(Aboriginals & Torres Strait Islanders)"),
@@ -29,8 +30,8 @@ export default class DemographicsIndigenous extends BaseQuestion {
         },
     };
 
-    static breadcrumbAnswer(): any {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): ReactNode {
+        switch (this.savedAnswer) {
         case "Yes - show these first where possible":
             return (
                 <span>
@@ -39,7 +40,7 @@ export default class DemographicsIndigenous extends BaseQuestion {
                 </span>
             );
         default:
-            return this.answer
+            return this.savedAnswer
         }
     }
 }

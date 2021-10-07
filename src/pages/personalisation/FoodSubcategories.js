@@ -11,7 +11,7 @@ export default class FoodSubcategories extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-food",
         question: "What type of food do you need?",
-        answers: {
+        possibleAnswers: {
             "Community meals": remove("-(coordinating bodies)"),
             "Food packages/parcels/vouchers": remove("meals")
                 .append("(Food Parcels & Food Vouchers)")
@@ -23,12 +23,12 @@ export default class FoodSubcategories extends BaseQuestion {
         },
     };
 
-    static breadcrumbAnswer(): string {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): string | Array<string> {
+        switch (this.savedAnswer) {
         case "Food packages/parcels/vouchers":
             return "Parcels/vouchers";
         default:
-            return this.answer
+            return this.savedAnswer
         }
     }
 }

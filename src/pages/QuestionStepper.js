@@ -64,59 +64,72 @@ function QuestionStepper(
      */
     React.useEffect(() => {
 
-        let answers = [];
-        let multiAnswerLimit = MULTI_DEFAULT_ANSWER_LIMIT;
+        let savedAnswers = [];
+        let maxDisplayedMultiChoiceAnswers = MULTI_DEFAULT_ANSWER_LIMIT;
         if (!category) {
-            answers = getSearchAnswers()
+            savedAnswers = getSearchAnswers()
         } else if (category) {
-            answers = fetchAnswers(
+            savedAnswers = fetchAnswers(
                 category,
-                intro && "location");
+                intro ? "location" : undefined
+            );
         }
-        // get the order the personalisation questions should be in
-        const personalisationQOrder = _.uniq([...answers].map(ans => ans.name))
 
-        answers = answers.filter((ans) => ans.answer !== "(skipped)");
+        // get the order the personalisation questions should be in
+        const personalisationQOrder = _.uniq(
+            [...savedAnswers].map(ans => ans.name)
+        )
+
+        savedAnswers = savedAnswers.filter((ans) => ans.answer !== "(skipped)");
         if (category) {
-            answers = sortAnswers(category, answers)
+            savedAnswers = sortAnswers(category, savedAnswers)
         }
         // If a multi answer question is being edited
-        let multiAnswer = answers.filter(answer => answer.multi)
+        let multiChoiceSavedAnswers = savedAnswers
+            .filter(answer => answer.multi)
 
-        // changes the amount of multi selected answers it
-        // will be limited to based on the BREADCRUMB_LIMIT
-        if (answers.length < BREADCRUMB_LIMIT) {
-            multiAnswerLimit += BREADCRUMB_LIMIT - answers.length;
-        } else if (answers.length >= BREADCRUMB_LIMIT) {
-            multiAnswerLimit += answers.length - BREADCRUMB_LIMIT;
+        // Changes the number of saved answers to display for multi choice
+        // questions based on the number of questions answered
+        if (savedAnswers.length < BREADCRUMB_LIMIT) {
+            maxDisplayedMultiChoiceAnswers +=
+                BREADCRUMB_LIMIT - savedAnswers.length;
+        } else {
+            maxDisplayedMultiChoiceAnswers +=
+                savedAnswers.length - BREADCRUMB_LIMIT;
         }
 
         // To ensure the amount of multi selected options it's limited
         // to doesn't cause the number of breadcrumbs to exceed the limit
-        multiAnswerLimit -= ((answers.length - multiAnswer.length) +
-            multiAnswerLimit) - BREADCRUMB_LIMIT;
+        maxDisplayedMultiChoiceAnswers -= (
+            (savedAnswers.length - multiChoiceSavedAnswers.length) +
+            maxDisplayedMultiChoiceAnswers
+        ) - BREADCRUMB_LIMIT;
 
         // If there is s a multi answer question and has more than one selected.
         // filter out only non multi questions and append the first multi answer
         // selection found to the answer list,
         // set the multi answer state - to ensure that when editing it will
         // only display one answer with " ... (editing)" trailing
-        if (multiAnswer.length && multiAnswer.length > multiAnswerLimit) {
-            const notMultiAns = answers.filter((answer) => !answer.multi);
-            multiAnswer = multiAnswer.slice(0, multiAnswerLimit)
-            setMultiSelectedAnswer(multiAnswer)
-            answers = notMultiAns.concat(multiAnswer)
+        if (
+            multiChoiceSavedAnswers.length &&
+            multiChoiceSavedAnswers.length > maxDisplayedMultiChoiceAnswers
+        ) {
+            const notMultiAns = savedAnswers.filter((answer) => !answer.multi);
+            multiChoiceSavedAnswers = multiChoiceSavedAnswers
+                .slice(0, maxDisplayedMultiChoiceAnswers)
+            setMultiSelectedAnswer(multiChoiceSavedAnswers)
+            savedAnswers = notMultiAns.concat(multiChoiceSavedAnswers)
         }
 
-        // Sort the answers by the personalisation question order,
-        answers = _.sortBy(
-            answers,
+        // Sort the saved answers by the personalisation question order,
+        savedAnswers = _.sortBy(
+            savedAnswers,
             (answer) => _.indexOf(personalisationQOrder, answer.name)
         )
 
 
-        setLastMultiSelect(answers.map(ans => ans.multi).lastIndexOf(true))
-        setCurrentAnswers(answers);
+        setLastMultiSelect(savedAnswers.map(ans => ans.multi).lastIndexOf(true))
+        setCurrentAnswers(savedAnswers);
     }, [])
 
     const getClassesNames = () => (

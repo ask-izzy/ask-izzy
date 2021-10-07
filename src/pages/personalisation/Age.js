@@ -18,7 +18,7 @@ export default class Age extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "age",
         question: "How old are you?",
-        answers: {
+        possibleAnswers: {
             "0 to 17": append(ageGroups(
                 "prenatal",
                 "baby",
@@ -48,15 +48,15 @@ export default class Age extends BaseQuestion {
     };
 
     static headingValue(): string {
-        if (!this.answer || (this.answer === "(skipped)")) {
+        if (!this.savedAnswer || (this.savedAnswer === "(skipped)")) {
             return "";
         } else {
-            return `aged ${this.answer}`;
+            return `aged ${this.savedAnswer}`;
         }
     }
 
-    static breadcrumbAnswer(): string {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): string {
+        switch (this.savedAnswer) {
         case "0 to 17":
             return "0-17";
         case "18 to 26" :
@@ -70,7 +70,9 @@ export default class Age extends BaseQuestion {
         case "65 or older" :
             return "65+";
         default:
-            return this.answer
+            return typeof this.savedAnswer === "string" ?
+                this.savedAnswer
+                : ""
         }
     }
 }

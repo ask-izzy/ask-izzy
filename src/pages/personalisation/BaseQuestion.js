@@ -1,5 +1,6 @@
 /* @flow */
 import * as React from "react";
+import type {Node as ReactNode} from "react";
 import _ from "underscore";
 
 import Personalisation from "../../mixins/Personalisation";
@@ -22,25 +23,26 @@ export type Props = {
     byline?: string,
     info?: string,
     classNames?: string,
-    answers: Object | Array<string>,
+    possibleAnswers: {[string]: string},
     onDoneTouchTap: Function,
     goBack?: () => boolean,
     showBaseTextBox?: boolean,
     showDVLinkBar?: boolean,
-    baseTextBoxComponent?: React.Element<any>,
-    textDVLinkBar?: React.Element<any>,
+    baseTextBoxComponent?: ReactNode,
+    textDVLinkBar?: ReactNode,
     icons?: Object,
     onNextStepCallback?: Function,
     mobileView?: boolean,
-    answersDesc: Object,
+    descriptionsForAnswers: {[string]: string},
     backToAnswers?: boolean,
+    multipleChoice: boolean
 }
 
 export type State = {
-    selected: ?string,
-    rootHeight?: number,
-    windowHeight?: number,
-    answers?: Set<string>,
+    selectedAnswer: ?string, // The answer to single-choice question that a user
+        // has currently selected but not confirmed
+    selectedAnswers?: Set<string>,
+        // The same as selectedAnswer but used for multi-choice questions
     shouldRenderSafetyDetails?: boolean,
     showStepper: boolean,
     category: ?Category,
@@ -53,7 +55,7 @@ class BaseQuestion extends Personalisation<Props, State> {
     constructor(props: Object) {
         super(props);
         this.state = {
-            selected: null, // set when the user makes a choice
+            selectedAnswer: null,
             showStepper: false,
             category: undefined,
             showSkipToChoice: false,
@@ -84,7 +86,7 @@ class BaseQuestion extends Personalisation<Props, State> {
         }
 
         return `${(
-            this.state.selected ||
+            this.state.selectedAnswer ||
             storageValue ||
             ""
         )}`;
@@ -95,7 +97,7 @@ class BaseQuestion extends Personalisation<Props, State> {
     }
 
     static get summaryValue(): string {
-        return this.answer;
+        return this.savedAnswer;
     }
 
     /*
@@ -106,7 +108,11 @@ class BaseQuestion extends Personalisation<Props, State> {
         return "";
     }
 
-    static get answer(): string {
+    /*
+     * Gets the answer which has been saved into the users SessionStore after
+     * they selected and then confirmed an answer.
+     */
+    static get savedAnswer(): string {
         let answer = storage.getItem(this.defaultProps.name);
 
         if (typeof answer != "string") {
@@ -119,10 +125,11 @@ class BaseQuestion extends Personalisation<Props, State> {
     /**
      * A separate Answer return for the the breadcrumbs that can be overwritten
      * Per question
-     * @returns {string} - returns the selected answer
+     * @returns {ReactNode} - returns the
+     *     selected answer
      */
-    static breadcrumbAnswer(): ?string | ?React.Node {
-        return this.answer;
+    static prettyPrintSavedAnswer(): ReactNode {
+        return this.savedAnswer;
     }
 
     /**
@@ -134,7 +141,7 @@ class BaseQuestion extends Personalisation<Props, State> {
      * @returns {iss.searchRequest} modified ISS search request.
      */
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
-        let value = this.answer;
+        let value = this.savedAnswer;
 
         if (value === "(skipped)") {
             // This question has been skipped.
@@ -157,10 +164,10 @@ class BaseQuestion extends Personalisation<Props, State> {
         let answerComposer;
 
         /* the answers are a map of answers to search terms */
-        if (_.isObject(this.defaultProps.answers) &&
-            this.defaultProps.answers[answer] instanceof Search) {
+        if (_.isObject(this.defaultProps.possibleAnswers) &&
+            this.defaultProps.possibleAnswers[answer] instanceof Search) {
 
-            answerComposer = this.defaultProps.answers[answer];
+            answerComposer = this.defaultProps.possibleAnswers[answer];
         } else {
             // Default behaviour for strings is to append
             answerComposer = append(answer);
@@ -175,11 +182,11 @@ class BaseQuestion extends Personalisation<Props, State> {
      * @returns {Array<string>} an array of the valid answers
      * to this question.
      */
-    get answers(): Array<string> {
-        if (Array.isArray(this.props.answers)) {
-            return this.props.answers;
+    get arrayOfPossibleAnswers(): Array<string> {
+        if (Array.isArray(this.props.possibleAnswers)) {
+            return this.props.possibleAnswers;
         } else {
-            return Object.keys(this.props.answers);
+            return Object.keys(this.props.possibleAnswers);
         }
     }
 
@@ -221,10 +228,13 @@ class BaseQuestion extends Personalisation<Props, State> {
     }
 
     onNextStep(): void {
-        storage.setItem(this.props.name, this.state.selected || "(skipped)");
+        storage.setItem(
+            this.props.name,
+            this.state.selectedAnswer || "(skipped)"
+        );
     }
 
-    iconFor(answer: string): ?React.Element<any> {
+    iconFor(answer: string): ?ReactNode {
         if (this.props.icons && this.props.icons[answer]) {
             const Icon = this.props.icons[answer];
 
@@ -238,18 +248,17 @@ class BaseQuestion extends Personalisation<Props, State> {
 
     onAnswerTouchTap(answer: string, ...rest: any): void {
         this.setState({
-            selected: answer,
+            selectedAnswer: answer,
         }, () => {
             this.triggerNext()
         });
     }
 
-    answerDescFor(answer: string): ?React.Element<any> {
-        if (this.props.answersDesc && this.props.answersDesc[answer]) {
-            const answerDesc = this.props.answersDesc[answer];
-
-            return answerDesc;
-        }
+    /*
+     * If a description exists for a given answer then get that description.
+     */
+    getAnswerDescription(answer: string): ?string {
+        return this.props.descriptionsForAnswers?.[answer] || null
     }
 
     render(): React.Node {
@@ -320,12 +329,14 @@ class BaseQuestion extends Personalisation<Props, State> {
                             {this.question}
                         </legend>
                         <div className={listClassName}>
-                            {this.answers.map((answer, index) =>
+                            {this.arrayOfPossibleAnswers.map((answer, index) =>
                                 <InputListItem
                                     key={index}
                                     leftIcon={this.iconFor(answer)}
                                     primaryText={answer}
-                                    secondaryText={this.answerDescFor(answer)}
+                                    secondaryText={
+                                        this.getAnswerDescription(answer)
+                                    }
                                     aria-label={answer}
                                     value={answer}
                                     onClick={this.onAnswerTouchTap.bind(
@@ -348,7 +359,7 @@ class BaseQuestion extends Personalisation<Props, State> {
         );
     }
 
-    renderDoneButton(): ?React.Element<any> {
+    renderDoneButton(): ReactNode {
         return (
             <div>
                 <div className="done-button">

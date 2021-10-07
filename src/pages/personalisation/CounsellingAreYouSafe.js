@@ -10,6 +10,7 @@ export default class CounsellingAreYouSafe extends AreYouSafe {
 
     static showPage(): boolean {
         return super.showPage() &&
-            CounsellingSubcategories.answer === "Scared in my relationship";
+            CounsellingSubcategories.savedAnswer ===
+                "Scared in my relationship";
     }
 }

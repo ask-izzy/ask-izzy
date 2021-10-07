@@ -27,17 +27,17 @@ HousingSearch.args = {
     }),
 };
 
-function getCategorySearchQuery(categoryKey, answers) {
+function getCategorySearchQuery(categoryKey, questionAnswers) {
     const category = getCategory(categoryKey)
     if (!category) {
         throw new Error(`Category "${categoryKey}" does not exist`)
     }
-    setAnswers(answers)
+    setAnswers(questionAnswers)
     const searchQuery = buildSearchQuery(
         category.search,
         category.personalisation
     )
-    clearAnswers(answers)
+    clearAnswers(questionAnswers)
     return searchQuery
 }
 

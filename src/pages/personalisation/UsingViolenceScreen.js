@@ -13,8 +13,7 @@ import type { searchRequest } from "../../iss";
 
 class UsingViolenceScreen extends BaseStaticPersonalisation {
     get doneButtonLabel(): string {
-        if (DfvDemographics.answer &&
-            DfvDemographics.answer.indexOf("LGBTIQA+") > -1) {
+        if (DfvDemographics.savedAnswer?.includes("LGBTIQA+")) {
             return "Continue";
         }
 
@@ -38,13 +37,12 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
 
     static showPage(): boolean {
         return Boolean(
-            DfvDemographics.answer &&
-            DfvDemographics.answer.indexOf("Using violence") > -1
+            DfvDemographics.savedAnswer?.includes("Using violence")
         );
     }
 
     static getSearch(request: searchRequest): ? searchRequest {
-        return this.answer ? request : null;
+        return this.savedAnswer ? request : null;
     }
 
     onDoneTouchTap(): void {

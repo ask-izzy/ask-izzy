@@ -32,13 +32,10 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
     }
 
     static showPage(): boolean {
-        return !this.answer &&
-            Boolean(AreYouSafe.answer) &&
-            [
-                "",
-                "Yes",
-                "(skipped)",
-            ].indexOf(AreYouSafe.answer) === -1;
+        return !this.savedAnswer &&
+            Boolean(AreYouSafe.savedAnswer) &&
+            !["", "Yes", "(skipped)"]
+                .includes(AreYouSafe.savedAnswer);
     }
 
     onDoneTouchTap(): void {

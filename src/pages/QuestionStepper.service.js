@@ -36,49 +36,54 @@ export type AnswerType = {
 }
 
 /**
- *  Fetches all the current answers
+ * Fetches the saved answers to display in the QuestionStepper
  * @param category - The category being searched
- * @param limitAnswersByQuestion - used to limit the answers returned
+ * @param limitToSingleQuestion - Used to limit the answers returned
  * by a specific question
- * @returns {[]} - Returns an Array of answers
+ * @returns {Array<AnswerType>} - Returns an array of answers
  */
 export const fetchAnswers = (
-    category: Category, limitAnswersByQuestion?: ?string | ?boolean):
+    category: Category, limitToSingleQuestion?: string):
     Array<AnswerType> => {
 
     const components = category.personalisation;
-    const answers = components.filter(component => (
-        !PERSONALISATION_EXCLUSION_LIST.includes(
-            component.defaultProps.name) ? limitAnswersByQuestion ?
-                component.defaultProps.name === limitAnswersByQuestion
-                : component.breadcrumbAnswer &&
-            component.breadcrumbAnswer()
-            : false
-    ));
+    const questionsToInclude = components
+        .filter(component =>
+            !PERSONALISATION_EXCLUSION_LIST.includes(
+                component.defaultProps.name
+            )
+        )
+        .filter(component =>
+            !limitToSingleQuestion ||
+            component.defaultProps.name === limitToSingleQuestion
+        )
+        .filter(component =>
+            component.prettyPrintSavedAnswer?.()
+        )
 
-    const answerList = [];
-    answers.forEach(answer => {
-        if (answer.breadcrumbAnswer() instanceof Array) {
-            answer.breadcrumbAnswer().forEach(nestedAnswer => {
-                answerList.push({
-                    name: answer.defaultProps.name,
+    const savedAnswersToDisplay = [];
+    for (const questionPage of questionsToInclude) {
+        if (questionPage.prettyPrintSavedAnswer() instanceof Array) {
+            questionPage.prettyPrintSavedAnswer().forEach(nestedAnswer => {
+                savedAnswersToDisplay.push({
+                    name: questionPage.defaultProps.name,
                     answer: nestedAnswer,
-                    selection: answer.breadcrumbToStandardAnswer(
+                    selection: questionPage.breadcrumbToStandardAnswer(
                         nestedAnswer
                     ),
                     multi: true,
                 })
             });
         } else {
-            answerList.push({
-                name: answer.defaultProps.name,
-                answer: answer.breadcrumbAnswer(),
-                selection: answer.breadcrumbToStandardAnswer,
+            savedAnswersToDisplay.push({
+                name: questionPage.defaultProps.name,
+                answer: questionPage.prettyPrintSavedAnswer(),
+                selection: questionPage.breadcrumbToStandardAnswer,
                 multi: false,
             });
         }
-    });
-    return answerList;
+    }
+    return savedAnswersToDisplay;
 }
 
 /**
@@ -182,10 +187,12 @@ export const sortAnswers = (
 
     // get category choices
     const choices = category.personalisation.filter(
-        cat => cat.defaultProps.answers &&
+        cat => cat.defaultProps.possibleAnswers &&
             groups.includes(cat.defaultProps.name)).map(cat => (
         {
-            [cat.defaultProps.name]: Object.keys(cat.defaultProps.answers),
+            [cat.defaultProps.name]: Object.keys(
+                cat.defaultProps.possibleAnswers
+            ),
         }
     ))
 

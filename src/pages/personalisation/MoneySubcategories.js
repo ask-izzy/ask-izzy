@@ -10,7 +10,7 @@ export default class MoneySubcategories extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-money",
         question: "What do you need?",
-        answers: {
+        possibleAnswers: {
             /* eslint-disable max-len */
             "Emergency aid": append("emergency aid"),
             "Bond or rental assistance": append("(bond assistance)"),
@@ -27,8 +27,8 @@ export default class MoneySubcategories extends BaseQuestion {
         },
     };
 
-    static breadcrumbAnswer(): string {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): string | Array<string> {
+        switch (this.savedAnswer) {
         case "Financial assistance e.g. utility bills, petrol, food":
             return "Financial assistance";
         case "No interest & low interest loans":
@@ -38,7 +38,7 @@ export default class MoneySubcategories extends BaseQuestion {
         case "Financial counselling":
             return "Online counselling";
         default:
-            return this.answer
+            return this.savedAnswer
         }
     }
 }

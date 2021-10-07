@@ -10,7 +10,7 @@ export default class AdvocacySubcategories extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-advocacy",
         question: "What do you want help with or advice about?",
-        answers: {
+        possibleAnswers: {
             "Making a complaint":
                 remove("consumer issues mediation discrimination")
                     .remove("disputes advocacy")
@@ -26,8 +26,8 @@ export default class AdvocacySubcategories extends BaseQuestion {
         },
     };
 
-    static breadcrumbAnswer(): string {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): string {
+        switch (this.savedAnswer) {
         case "Making a complaint" :
             return "Complaints";
         case "Get advice on your rights" :
@@ -35,7 +35,9 @@ export default class AdvocacySubcategories extends BaseQuestion {
         case "Someone to speak for you" :
             return "Representation";
         default:
-            return this.answer
+            return typeof this.savedAnswer === "string" ?
+                this.savedAnswer
+                : ""
         }
     }
 }

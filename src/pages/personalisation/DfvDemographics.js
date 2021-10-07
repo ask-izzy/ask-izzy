@@ -2,6 +2,7 @@
 import type { ElementConfig as ReactElementConfig } from "react"
 
 import * as React from "react";
+import type {Node as ReactNode} from "react";
 import BaseMultiQuestion from "./BaseMultiQuestion";
 
 import { append } from "../../iss/Search";
@@ -30,7 +31,7 @@ export default class DfvDemographics extends BaseMultiQuestion {
         question: "Do any of these apply to you?",
         byline: "Select all that apply",
         info: "All of your answers are private and anonymous.",
-        answers: {
+        possibleAnswers: {
             "Aboriginal and/or Torres Strait Islander":
                 append("(Aboriginals & Torres Strait Islanders)"),
             "Experiencing violence": append(""),
@@ -64,44 +65,48 @@ export default class DfvDemographics extends BaseMultiQuestion {
     }
 
 
-    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): string {
-        if (this.answer && this.answer.length) {
-            for (let index: number = 0; index < this.answer.length; index++) {
-                if (breadcrumbAnswer === ATSI_BREADCRUMB_ICON &&
-                    this.answer[index] ===
+    static breadcrumbToStandardAnswer(
+        prettyPrintSavedAnswer?: ?Array<any>
+    ): string {
+        if (this.savedAnswer && this.savedAnswer.length) {
+            for (let index = 0; index < this.savedAnswer.length; index++) {
+                if (prettyPrintSavedAnswer === ATSI_BREADCRUMB_ICON &&
+                    this.savedAnswer[index] ===
                     "Aboriginal and/or Torres Strait Islander") {
-                    return this.answer[index];
-                } else if (breadcrumbAnswer === LGBT_BREADCRUMB_ICON &&
-                    this.answer[index] === "LGBTIQA+") {
-                    return this.answer[index];
+                    return this.savedAnswer[index];
+                } else if (prettyPrintSavedAnswer === LGBT_BREADCRUMB_ICON &&
+                    this.savedAnswer[index] === "LGBTIQA+") {
+                    return this.savedAnswer[index];
                 } else if (
                     // $FlowIgnore
-                    this.breadcrumbAnswer()[index] === breadcrumbAnswer) {
+                    this.prettyPrintSavedAnswer()[index] ===
+                        prettyPrintSavedAnswer
+                ) {
                     // $FlowIgnore
-                    return this.answer[index]
+                    return this.savedAnswer[index]
                 }
             }
         }
         return "";
     }
 
-    static breadcrumbAnswer(): ?Array<any> {
-        if (this.answer && this.answer.length) {
-            return this.answer.map((answer, index) => {
-                switch (answer) {
-                case "Aboriginal and/or Torres Strait Islander":
-                    return ATSI_BREADCRUMB_ICON;
-                case "LGBTIQA+":
-                    return LGBT_BREADCRUMB_ICON;
-                case "Culturally and linguistically diverse":
-                    return "Culturally & linguistically diverse";
-                case "Person seeking asylum":
-                    return "Seeking asylum";
-                default:
-                    return answer;
-                }
-            })
-        }
-        return this.answer
+    static prettyPrintSavedAnswer(): ReactNode {
+        const savedAnswer = this.savedAnswer instanceof Array ?
+            this.savedAnswer
+            : []
+        return savedAnswer.map((answer, index) => {
+            switch (answer) {
+            case "Aboriginal and/or Torres Strait Islander":
+                return ATSI_BREADCRUMB_ICON;
+            case "LGBTIQA+":
+                return LGBT_BREADCRUMB_ICON;
+            case "Culturally and linguistically diverse":
+                return "Culturally & linguistically diverse";
+            case "Person seeking asylum":
+                return "Seeking asylum";
+            default:
+                return answer;
+            }
+        })
     }
 }

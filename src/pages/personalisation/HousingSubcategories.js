@@ -12,7 +12,7 @@ export default class HousingSubcategories extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-housing",
         question: "Which situation is most like yours?",
-        answers: {
+        possibleAnswers: {
             "On the street": housingCrisis(
                 () => Location.shouldInjectAccessPoints()
             ),
@@ -33,6 +33,6 @@ export default class HousingSubcategories extends BaseQuestion {
 
     static showPage(): boolean {
         /* only show this question if the user has someone to sleep tonight */
-        return (SleepTonight.answer != "No");
+        return (SleepTonight.savedAnswer !== "No");
     }
 }

@@ -1,11 +1,14 @@
 /* @flow */
-import type { ElementConfig as ReactElementConfig } from "react"
+import React from "react";
+import type {
+    ElementConfig as ReactElementConfig,
+    Node as ReactNode,
+} from "react"
 
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/Search";
 import { resetDfvOptions } from "../../utils/domesticViolence";
 import icons from "../../icons";
-import * as React from "react";
 
 export default class CounsellingSubcategories extends BaseQuestion {
     static title: string = "Counselling services";
@@ -13,7 +16,7 @@ export default class CounsellingSubcategories extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-counselling",
         question: "What issues are you dealing with?",
-        answers: {
+        possibleAnswers: {
             "Homelessness": append("housing"),
             "Scared in my relationship": append("family violence"),
             "Sexual identity (LGBTIQA+)": append("sexuality"),
@@ -34,8 +37,8 @@ export default class CounsellingSubcategories extends BaseQuestion {
         resetDfvOptions();
     }
 
-    static breadcrumbAnswer(): any {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): ReactNode {
+        switch (this.savedAnswer) {
         case "Sexual identity (LGBTIQA+)":
             return <span><icons.DemographicLgbtiq /></span>;
         case "Scared in my relationship":
@@ -43,7 +46,9 @@ export default class CounsellingSubcategories extends BaseQuestion {
         case "Find online counselling":
             return "Online counselling";
         default:
-            return this.answer
+            return typeof this.savedAnswer === "string" ?
+                this.savedAnswer
+                : ""
         }
     }
 }

@@ -11,7 +11,7 @@ export default class LegalSubcategories extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-legal",
         question: "What's happening?",
-        answers: {
+        possibleAnswers: {
             "Police and liaison officers": append("police (police liaison)")
                 .remove("(legal aid)"),
             "Legal advice": remove("legal -permits -ceremonies")
@@ -36,8 +36,8 @@ export default class LegalSubcategories extends BaseQuestion {
         resetDfvOptions();
     }
 
-    static breadcrumbAnswer(): string {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): string | Array<string> {
+        switch (this.savedAnswer) {
         case "Police and liaison officers":
             return "Police & liaison officers";
         case "Domestic & family violence issues":
@@ -45,7 +45,7 @@ export default class LegalSubcategories extends BaseQuestion {
         case "Victims of crime compensation":
             return "Victims of crime";
         default:
-            return this.answer
+            return this.savedAnswer
         }
     }
 }

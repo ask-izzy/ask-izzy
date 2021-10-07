@@ -10,7 +10,7 @@ export default class Gender extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "gender",
         question: "Do you identify as…",
-        answers: {
+        possibleAnswers: {
             "Female": append({
                 client_gender: ["f", "u"],
             }),
@@ -28,7 +28,7 @@ export default class Gender extends BaseQuestion {
     }
 
     static headingValue(): string {
-        switch (this.answer) {
+        switch (this.savedAnswer) {
         case "Male":
             return "for men";
         case "Female":
@@ -41,8 +41,8 @@ export default class Gender extends BaseQuestion {
         }
     }
 
-    static breadcrumbAnswer(): string {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): string | Array<string> {
+        switch (this.savedAnswer) {
         case "Male":
             return "Men";
         case "Female":
@@ -50,7 +50,7 @@ export default class Gender extends BaseQuestion {
         case "Trans and Gender Diverse":
             return "Trans & Gender Diverse";
         default:
-            return this.answer;
+            return this.savedAnswer;
         }
     }
 }
