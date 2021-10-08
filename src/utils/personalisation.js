@@ -10,15 +10,14 @@ import Category from "../constants/Category";
 import personalisation from "../pages/personalisation";
 import storage from "../storage";
 import type { RouterContextObject } from "../contexts/router-context";
+import { ServiceSearchRequest } from "../iss/ServiceSearchRequest";
 import type {serviceSearchRequest} from "../iss/serviceSearch";
 
 export type PersonalisationPageRequiredProps = {
     onDoneTouchTap: () => void,
     goBack?: () => void,
     showBaseTextBox?: boolean,
-    showDVLinkBar?: boolean,
     baseTextBoxComponent?: ReactNode,
-    textDVLinkBar?: ReactNode,
     mobileView?: boolean,
     backToAnswers?: boolean,
     classNames?: string,
@@ -32,10 +31,12 @@ export type PersonalisationPageDefaultProps = {|
     question: string,
     byline?: string,
     info?: string,
-    possibleAnswers: {[string]: string},
-    possibleAnswersDesc: {[string]: string},
+    possibleAnswers: {[string]: ServiceSearchRequest},
+    possibleAnswersDesc?: {[string]: string},
     icons?: Object,
     oldAnswers?: {[string]: string},
+    showDVLinkBar?: boolean,
+    textDVLinkBar?: ReactNode,
 |}
 export type PersonalisationPageProps = {|
     ...PersonalisationPageDefaultProps,
