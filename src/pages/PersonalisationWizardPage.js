@@ -14,7 +14,7 @@ import {
     getCurrentPersonalisationPageIndex,
 } from "../utils/personalisation"
 
-import type {PersonalisationPageType} from "../utils/personalisation"
+import type {PersonalisationPage} from "../utils/personalisation"
 type State = {
   showSubpage: boolean,
 }
@@ -53,7 +53,7 @@ class PersonalisationWizardPage extends BaseCategoriesPage<{}, State> {
     }
 
     goToSubPage(
-        subpage: PersonalisationPageType
+        subpage: PersonalisationPage
     ): void {
         /* TODO: Narrow down which components don't have defaultProps */
 
@@ -63,14 +63,14 @@ class PersonalisationWizardPage extends BaseCategoriesPage<{}, State> {
         );
     }
 
-    nextSubPage(): ?PersonalisationPageType {
+    nextSubPage(): ?PersonalisationPage {
         return this.personalisationComponents.find((component, idx) =>
             (idx > this.currentComponentIdx) &&
             (component.getSearch ? !component.getSearch({}) : true)
         );
     }
 
-    prevSubPage(): ?PersonalisationPageType {
+    prevSubPage(): ?PersonalisationPage {
         const nextSubpageIdx = this.currentComponentIdx - 1;
 
         return this.personalisationComponents[nextSubpageIdx];
@@ -98,7 +98,7 @@ class PersonalisationWizardPage extends BaseCategoriesPage<{}, State> {
      *
      * An array of components required to personalise this category.
      */
-    get personalisationComponents(): Array<PersonalisationPageType> {
+    get personalisationComponents(): Array<PersonalisationPage> {
         return [
             Intro,
             ...getPersonalisationPages(

@@ -5,6 +5,7 @@ import * as React from "react";
 import HeaderBar from "../HeaderBar";
 import type Category from "../../constants/Category";
 import routerContext from "../../contexts/router-context";
+import {getBannerName} from "../../utils/personalisation"
 
 const InfoMessage = (category: Object) =>
     <div>{category.info}</div>;
@@ -50,7 +51,9 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             title,
             meta,
         } = this.props;
-        let bannerName = this.context.router.match?.params?.page || "homepage";
+        const bannerName = getBannerName(
+            this.props.category
+        );
 
         if (loading) {
             return (

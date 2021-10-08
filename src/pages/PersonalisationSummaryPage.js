@@ -1,6 +1,7 @@
 /* @flow */
 
 import * as React from "react";
+import type {Node as ReactNode} from "react";
 
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import components from "../components";
@@ -14,6 +15,10 @@ import {
     navigateToPersonalisationSubpath,
     getCurrentPersonalisationPage,
     getPersonalisationPages,
+    getBannerName
+} from "../utils/personalisation"
+import type {
+    PersonalisationPage,
 } from "../utils/personalisation"
 
 class PersonalisationSummaryPage extends BaseCategoriesPage<{}, {}> {
@@ -103,28 +108,19 @@ class PersonalisationSummaryPage extends BaseCategoriesPage<{}, {}> {
         );
     }
 
-    renderSubpage: ((
-  Subpage: React$ComponentType<
-
-      | any
-      | {|
-        category: any,
-        nextStep: () => void,
-        onDoneTouchTap: () => void,
-      |},
-  >
-) => React.Element<"div">) = (Subpage: React$ComponentType<*>) => (
-    <div>
-        <Subpage
-            ref="subpage"
-            onDoneTouchTap={this.nextStep}
-            category={this.category}
-            nextStep={this.nextStep}
-            backToAnswers={true}
-            goBack={() => this.goBack()}
-        />
-    </div>
-)
+    renderSubpage: ((Subpage: PersonalisationPage) => ReactNode) =
+        (Subpage) => (
+            <div>
+                <Subpage
+                    ref="subpage"
+                    onDoneTouchTap={this.nextStep}
+                    category={this.category}
+                    nextStep={this.nextStep}
+                    backToAnswers={true}
+                    goBack={() => this.goBack()}
+                />
+            </div>
+        )
 
     renderSummary: (() => React.Element<"div">) = () => (
         <div>
@@ -134,9 +130,7 @@ class PersonalisationSummaryPage extends BaseCategoriesPage<{}, {}> {
                     Change your answers here
                     </div>
                 }
-                bannerName={
-                    this.category?.bannerImage || "homepage"
-                }
+                bannerName={getBannerName(this.category)}
                 fixedAppBar={true}
                 goBack={{
                     backMessage: this.currentPersonalisationPage ?

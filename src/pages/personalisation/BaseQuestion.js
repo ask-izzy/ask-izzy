@@ -4,7 +4,6 @@ import type {Node as ReactNode} from "react";
 import classnames from "classnames";
 import _ from "underscore";
 
-import Personalisation from "../../mixins/Personalisation";
 import HeaderBar from "../../components/HeaderBar";
 import InputListItem from "../../components/InputListItem";
 import FlatButton from "../../components/FlatButton";
@@ -16,39 +15,26 @@ import { append, ServiceSearchRequest } from "../../iss/ServiceSearchRequest";
 import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
-import Category from "../../constants/Category";
 import ScreenReader from "../../components/ScreenReader";
-
-export type Props = {
-    name: string,
-    question: string,
-    byline?: string,
-    info?: string,
-    classNames?: string,
-    possibleAnswers: {[string]: string},
-    onDoneTouchTap: Function,
-    goBack?: () => boolean,
-    showBaseTextBox?: boolean,
-    showDVLinkBar?: boolean,
-    baseTextBoxComponent?: ReactNode,
-    textDVLinkBar?: ReactNode,
-    icons?: Object,
-    mobileView?: boolean,
-    descriptionsForAnswers: {[string]: string},
-    backToAnswers?: boolean,
-    multipleChoice: boolean
-}
+import {getBannerName} from "../../utils/personalisation"
+import routerContext from "../../contexts/router-context";
+import type {
+    PersonalisationPageProps,
+    PersonalisationPageState,
+} from "../../utils/personalisation";
 
 export type State = {
+    ...PersonalisationPageState,
     selectedAnswer: ?string | Set<string>, // The answer(s) that a user has
         // currently selected but not confirmed
-    shouldRenderSafetyDetails?: boolean,
-    showStepper: boolean,
-    category: ?Category,
     showSkipToChoice: boolean,
 }
 
-class BaseQuestion extends Personalisation<Props, State> {
+class BaseQuestion extends React.Component<
+    PersonalisationPageProps,
+    State
+> {
+    static contextType: any = routerContext;
     static defaultProps: Object = {};
 
     constructor(props: Object) {
@@ -289,7 +275,7 @@ class BaseQuestion extends Personalisation<Props, State> {
             } else {
                 answers.delete(answer);
             }
-            this.setState({answers: answers});
+            this.setState({selectedAnswer: answers});
         } else {
             this.setState({
                 selectedAnswer: answer,
@@ -346,7 +332,10 @@ class BaseQuestion extends Personalisation<Props, State> {
                             fixedAppBar={true}
                             taperColour={this.state.showStepper ? "LighterGrey"
                                 : "HeaderBar"}
-                            bannerName={this.bannerName}
+                            bannerName={getBannerName(
+                                this.state.category,
+                                this.props.name
+                            )}
                             {...this.props.backToAnswers && {
                                 goBack: {
                                     backMessage: "Back to answers",
