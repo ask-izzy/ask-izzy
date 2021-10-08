@@ -12,9 +12,7 @@ $lightness-button-hover: 10%;
     @include colours.define('raw-colour-plum-purple',   'global', hsl(300, 33%,  40% ));
     @include colours.define('raw-colour-bright-red',    'global', hsl(0,   100%, 35% ));
     @include colours.define('raw-colour-sunflower',     'global', hsl(51,  100%, 50% ));
-    @include colours.define('raw-colour-steel-blue',    'global', hsl(202, 41%,  55% ));
     @include colours.define('raw-colour-coral-blue',    'global', hsl(215, 47%,  45% ));
-    @include colours.define('raw-colour-teal',          'global', hsl(168, 37%,  59% ));
     @include colours.define('raw-colour-cyan-blue',     'global', hsl(181, 63%,  54% )); /* N.B. not enough contrast with white */
     @include colours.define('raw-colour-slate-gray',    'global', hsl(203, 11%,  24% ));
     @include colours.define('raw-colour-warm-gray',     'global', hsl(45,  3%,   75% ));
@@ -63,11 +61,6 @@ $lightness-button-hover: 10%;
         colours.lighten('colour-bg-standard', 'global', -13%)
     );
     @include colours.define('colour-bg-standard-tint-2', 'global', 'raw-colour-warm-white');
-    @include colours.define(
-        'colour-bg-standard-tint-3',
-        'global',
-        colours.lighten('colour-bg-standard', 'global', -4%)
-    );
 
     @include colours.define(
         'colour-bg-callout-solid',

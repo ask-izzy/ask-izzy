@@ -9,11 +9,6 @@
         color: #{colours.get-static('colour-text-mid')};
         color: var(--colour-text-mid);
 
-        &:hover {
-            background-color: #{colours.get-static('colour-bg-standard-tint-3')};
-            background-color: var(--colour-bg-standard-tint-3);
-        }
-
         &:focus {
             border-radius: 3px;
         }
