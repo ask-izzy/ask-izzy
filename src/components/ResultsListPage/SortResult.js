@@ -21,7 +21,6 @@ export const SORT_OPTIONS: Array<SortType> = [
 
 type Props = {
     callback: function,
-    titlePosition: string,
     showDivider: boolean,
     sortOption: SortType,
 }
@@ -29,7 +28,6 @@ type Props = {
 function SortResult(
     {
         callback,
-        titlePosition,
         showDivider,
         sortOption,
     }: Props): ReactNode {
@@ -60,7 +58,6 @@ function SortResult(
                     callback(option);
                 }}
                 title="Sort by"
-                titlePosition={titlePosition}
                 selection={selection}
                 options={SORT_OPTIONS}
             />

@@ -46,6 +46,11 @@ function ScrollToTop({label}: Props): ReactNode {
                 className={`button ${showButton ? "showToTop" : ""}`}
                 disabled={!showButton}
                 onClick={scrollToTop}
+                analyticsEvent={{
+                    event: `Action Triggered - Scroll To Top Button`,
+                    eventAction: `Scroll to top requested`,
+                    eventLabel: null,
+                }}
             >
                 <icons.Chevron/>
                 <span>{label}</span>

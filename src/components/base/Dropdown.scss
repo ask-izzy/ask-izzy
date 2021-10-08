@@ -9,14 +9,7 @@
         margin: 5px 10px;
         color: #{colours.get-static('colour-text-dark')};
         color: var(--colour-text-dark);
-
-        &.left {
-            text-align: left;
-        }
-
-        &.right {
-            text-align: right;
-        }
+        text-align: left;
     }
 
     .optionsContainer {

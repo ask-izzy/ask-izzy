@@ -116,7 +116,7 @@ $lightness-button-hover: 10%;
     @include colours.define(
         'colour-button-secondary',
         'global',
-        colours.lighten('colour-button-primary', 'global', 100%)
+        'raw-colour-pure-white',
     );
     @include colours.define(
         'colour-button-secondary-hover',

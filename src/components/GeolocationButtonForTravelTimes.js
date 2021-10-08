@@ -3,10 +3,10 @@
 import type {Element as ReactElement} from "react"
 import React, {useEffect, useState} from "react";
 import Storage from "../storage";
-import GeolocationButton from "../components/GeolocationButton";
+import GeolocationButton from "./GeolocationButton";
 import icons from "../icons";
 import {MobileDetect} from "../effects/MobileDetect";
-import Button from "../components/base/Button";
+import Button from "./base/Button";
 
 type Props = {
     showMessage?: boolean,
@@ -17,7 +17,7 @@ type Props = {
  * to allow the user to set their location if they want travel times
  * @return {JSX.Element} - Returns the travel times catch component
  */
-function ResultsPageGeolocationButton(
+function GeolocationButtonForTravelTimes(
     {
         showMessage = true,
     }: Props): ReactElement<"div"> {
@@ -75,7 +75,7 @@ function ResultsPageGeolocationButton(
     )
 
     if (isMobile && !Storage.getCoordinates() && showMessage) {
-        return <div className="ResultsPageGeoLocationButton">
+        return <div className="GeolocationButtonForTravelTimes">
             <div className="collapserContainer">
                 <Button
                     onClick={() => setCollapsed(!collapsed)}
@@ -94,11 +94,11 @@ function ResultsPageGeolocationButton(
     }
 
     return (
-        <div className="ResultsPageGeoLocationButton">
+        <div className="GeolocationButtonForTravelTimes">
             {explainerMessage()}
             {renderGeoLocateButton()}
         </div>
     )
 }
 
-export default ResultsPageGeolocationButton
+export default GeolocationButtonForTravelTimes

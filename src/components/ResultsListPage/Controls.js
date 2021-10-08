@@ -8,8 +8,8 @@ import {useRouterContext} from "../../contexts/router-context";
 import SortResult, {SORT_OPTIONS} from "./SortResult";
 import {getScrollPosition} from "../../effects/scrollPosition";
 import type {SortType} from "./SortResult.service";
-import ResultsPageGeolocationButton from
-    "../../pages/ResultsPageGeolocationButton";
+import GeolocationButtonForTravelTimes from
+    "../GeolocationButtonForTravelTimes";
 import {MobileDetect} from "../../effects/MobileDetect";
 
 type Props = {
@@ -52,7 +52,7 @@ function Controls(
     }, [ref, scrollPosition])
 
     const renderResultsPageGeolocationButton = () => (
-        <ResultsPageGeolocationButton
+        <GeolocationButtonForTravelTimes
             showMessage={true}
         />
     )
@@ -65,7 +65,6 @@ function Controls(
                     orderByCallback(option)
                 }}
                 sortOption={sortOption}
-                titlePosition="left"
                 showDivider={!sticky}
             />
         </span>

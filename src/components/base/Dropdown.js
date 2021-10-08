@@ -15,7 +15,6 @@ type Props = {
     options: Array<SortType>,
     onChange: function,
     title: string,
-    titlePosition: string,
 }
 
 function Dropdown(
@@ -24,14 +23,13 @@ function Dropdown(
         options,
         onChange,
         title,
-        titlePosition,
     }: Props): ReactNode {
 
-    const ref = useRef(null)
+    const rootElmRef = useRef(null)
 
     const [showOptions, setShowOptions] = React.useState<boolean>(false);
 
-    const clickedOutsideComponent = OutsideComponentClick(ref)
+    const clickedOutsideComponent = OutsideComponentClick(rootElmRef)
 
     const isMobile = MobileDetect()
 
@@ -41,14 +39,28 @@ function Dropdown(
         }
     }, [clickedOutsideComponent])
 
+    const dropDownEventHandler = (option: SortType): void => {
+        setShowOptions(false);
+        onChange(option);
+        gtm.emit({
+            event: `Action Triggered - Dropdown`,
+            eventCat: "Action triggered",
+            eventAction: `${showOptions ? "Open" : "Close"} dropdown`,
+            eventLabel: option.name,
+            eventValue: showOptions ? 0 : 1,
+            sendDirectlyToGA: true,
+        });
+    }
+
     const Options = (): ReactNode => (
         <div
-            ref={ref}
+            ref={rootElmRef}
             className="optionsContainer"
+            role="listbox"
         >
             <div
                 tabIndex="0"
-                aria-labelledby="options"
+                aria-labelledby="dropdownOptions"
                 className={`optionSelect ${
                     showOptions ? "activeOptionSelect open" : "closed"}`}
                 onClick={() => setShowOptions(!showOptions)}
@@ -57,6 +69,7 @@ function Dropdown(
                         setShowOptions(!showOptions)
                     }
                 }}
+                aria-expanded={showOptions}
             >
                 {selection.name} <SvgIconChevron fill={"black"}/>
             </div>
@@ -64,35 +77,21 @@ function Dropdown(
             <div className="options">
                 {options.map((option, index) => (
                     <div
-                        id="options"
+                        id="dropdownOptions"
+                        role="option"
                         tabIndex="0"
                         aria-live="polite"
                         key={`${option.key || "key"}_${index}`}
                         className={
                             option.name === selection.name ? "selected" : ""
                         }
+                        aria-selected={option.name === selection.name}
                         onClick={() => {
-                            setShowOptions(false);
-                            onChange(option);
-                            gtm.emit({
-                                event: `Action Triggered - Dropdown`,
-                                eventCat: "Action triggered",
-                                eventAction: `Dropdown`,
-                                eventLabel: option.name,
-                                sendDirectlyToGA: true,
-                            });
+                            dropDownEventHandler(option)
                         }}
                         onKeyDown={(event) => {
                             if (event.key === "Enter") {
-                                setShowOptions(false);
-                                onChange(option);
-                                gtm.emit({
-                                    event: `Action Triggered - Dropdown`,
-                                    eventCat: "Action triggered",
-                                    eventAction: `Dropdown`,
-                                    eventLabel: option.name,
-                                    sendDirectlyToGA: true,
-                                });
+                                dropDownEventHandler(option)
                             }
                         }}
                     >
@@ -105,7 +104,7 @@ function Dropdown(
 
     return (
         <div className="Dropdown">
-            <div className={`title ${titlePosition}`}>
+            <div className="title">
                 {title}
             </div>
             {isMobile ?

@@ -3,13 +3,14 @@
 import {useEffect, useState} from "react";
 
 /* $FlowIgnore */
-export function OutsideComponentClick(ref): ?boolean {
+export function OutsideComponentClick(componentRef): ?boolean {
     // We initialise it to undefined to prevent the component
     // related to the click event from being activated
     const [clicked, setClicked] = useState(undefined)
     useEffect(() => {
         function handleClickOutside(event: Event) {
-            setClicked(ref?.current && !ref.current.contains(event.target));
+            setClicked(componentRef?.current &&
+                !componentRef.current.contains(event.target));
         }
 
         // Bind the event listener
@@ -18,7 +19,7 @@ export function OutsideComponentClick(ref): ?boolean {
             // Unbind the event listener on clean up
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [ref]);
+    }, [componentRef]);
 
     return clicked
 }
