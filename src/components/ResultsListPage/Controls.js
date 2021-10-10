@@ -64,6 +64,9 @@ function Controls(
                     setSortOption(option)
                     orderByCallback(option)
                 }}
+                hideOptionsOnScrollBreakpoint={
+                    !sticky ? initialOffset - 100 : 0
+                }
                 sortOption={sortOption}
                 showDivider={!sticky}
             />

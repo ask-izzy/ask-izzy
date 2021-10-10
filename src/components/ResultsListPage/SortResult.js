@@ -23,6 +23,7 @@ type Props = {
     callback: function,
     showDivider: boolean,
     sortOption: SortType,
+    hideOptionsOnScrollBreakpoint?: number
 }
 
 function SortResult(
@@ -30,6 +31,7 @@ function SortResult(
         callback,
         showDivider,
         sortOption,
+        hideOptionsOnScrollBreakpoint = 0,
     }: Props): ReactNode {
 
     const [selection, setSelection] = React.useState<SortType>(
@@ -57,6 +59,9 @@ function SortResult(
                     setSelection(option);
                     callback(option);
                 }}
+                hideOptionsOnScrollBreakpoint={
+                    hideOptionsOnScrollBreakpoint
+                }
                 title="Sort by"
                 selection={selection}
                 options={SORT_OPTIONS}

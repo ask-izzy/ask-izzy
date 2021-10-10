@@ -8,6 +8,7 @@ import {useEffect, useRef, useState} from "react";
 import {OutsideComponentClick} from "../../effects/OutsideComponentClick";
 import {MobileDetect} from "../../effects/MobileDetect";
 import * as gtm from "../../google-tag-manager";
+import {getScrollPosition} from "../../effects/scrollPosition";
 
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
     options: Array<SortType>,
     onChange: function,
     title: string,
+    hideOptionsOnScrollBreakpoint?: number,
 }
 
 function Dropdown(
@@ -23,6 +25,7 @@ function Dropdown(
         options,
         onChange,
         title,
+        hideOptionsOnScrollBreakpoint = 0,
     }: Props): ReactNode {
 
     const rootElmRef = useRef(null)
@@ -31,6 +34,7 @@ function Dropdown(
 
     const clickedOutsideComponent = OutsideComponentClick(rootElmRef)
 
+    const scrollPosition = getScrollPosition()
     const isMobile = MobileDetect()
 
     useEffect(() => {
@@ -38,6 +42,17 @@ function Dropdown(
             setShowOptions(!clickedOutsideComponent)
         }
     }, [clickedOutsideComponent])
+
+    /**
+     * To prevent any strange z-index visual bugs, we will hide the options
+     * when the scroll position goes past a defined breakpoint.
+     */
+    useEffect(() => {
+        if (hideOptionsOnScrollBreakpoint &&
+            scrollPosition > hideOptionsOnScrollBreakpoint) {
+            setShowOptions(false)
+        }
+    }, [scrollPosition])
 
     const dropDownEventHandler = (option: SortType): void => {
         setShowOptions(false);
