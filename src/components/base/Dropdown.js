@@ -4,7 +4,7 @@ import * as React from "react";
 import type {Node as ReactNode} from "react";
 import SvgIconChevron from "../../icons/Chevron";
 import type {SortType} from "../ResultsListPage/SortResult.service";
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {OutsideComponentClick} from "../../effects/OutsideComponentClick";
 import {MobileDetect} from "../../effects/MobileDetect";
 import * as gtm from "../../google-tag-manager";
@@ -27,7 +27,7 @@ function Dropdown(
 
     const rootElmRef = useRef(null)
 
-    const [showOptions, setShowOptions] = React.useState<boolean>(false);
+    const [showOptions, setShowOptions] = useState<boolean>(false);
 
     const clickedOutsideComponent = OutsideComponentClick(rootElmRef)
 
@@ -52,6 +52,58 @@ function Dropdown(
         });
     }
 
+    /**
+     * Sets the focus of the correct option
+     */
+    useEffect(() => {
+        if (showOptions) {
+            // If an option has been selected it will focus that option
+            if (selection.value) {
+                const selectedIndex = options.findIndex(
+                    opt => opt.key === selection.key
+                );
+                const selectedFocus = document.getElementById(
+                    `dropdownOption_${selectedIndex}`)
+                selectedFocus && selectedFocus.focus();
+            } else if (options.length) {
+                const defaultFocus = document.getElementById(
+                    "dropdownOption_0"
+                )
+                defaultFocus && defaultFocus.focus()
+            }
+        }
+    }, [showOptions])
+
+    const keyboardListNavigation = (
+        event: SyntheticKeyboardEvent<HTMLDivElement>,
+        index: number) => {
+        if (event.key === "ArrowDown") {
+            const nextOption = document.getElementById(
+                `dropdownOption_${
+                    index + 1
+                }`)
+            nextOption && nextOption.focus();
+        } else if (event.key === "ArrowUp") {
+            const prevOption = document.getElementById(
+                `dropdownOption_${
+                    index - 1
+                }`)
+            prevOption && prevOption.focus();
+        } else if (event.key === "Escape") {
+            setShowOptions(false)
+        } else if (event.key === "Home") {
+            const firstOption = document.getElementById(
+                "dropdownOption_0"
+            )
+            firstOption && firstOption.focus()
+        } else if (event.key === "End") {
+            const lastOption = document.getElementById(
+                `dropdownOption_${options.length - 1}`
+            )
+            lastOption && lastOption.focus()
+        }
+    }
+
     const Options = (): ReactNode => (
         <div
             ref={rootElmRef}
@@ -65,7 +117,10 @@ function Dropdown(
                     showOptions ? "activeOptionSelect open" : "closed"}`}
                 onClick={() => setShowOptions(!showOptions)}
                 onKeyDown={(event) => {
-                    if (event.key === "Enter") {
+                    event.preventDefault()
+                    if (event.key === "Enter" ||
+                        // The " " is the Space key
+                        event.key === " ") {
                         setShowOptions(!showOptions)
                     }
                 }}
@@ -77,9 +132,9 @@ function Dropdown(
             <div className="options">
                 {options.map((option, index) => (
                     <div
-                        id="dropdownOptions"
+                        id={`dropdownOption_${index}`}
                         role="option"
-                        tabIndex="0"
+                        tabIndex={index === 0 ? 0 : -1}
                         aria-live="polite"
                         key={`${option.key || "key"}_${index}`}
                         className={
@@ -90,8 +145,12 @@ function Dropdown(
                             dropDownEventHandler(option)
                         }}
                         onKeyDown={(event) => {
-                            if (event.key === "Enter") {
+                            if (event.key === "Enter" ||
+                                // The " " is the Space key
+                                event.key === " ") {
                                 dropDownEventHandler(option)
+                            } else {
+                                keyboardListNavigation(event, index)
                             }
                         }}
                     >
