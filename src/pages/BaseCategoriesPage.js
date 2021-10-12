@@ -4,11 +4,12 @@ import * as React from "react";
 
 import Category from "../constants/Category";
 import {getCategory} from "../constants/categories";
+import Service from "../iss/Service";
 import type {
-    searchRequest,
     searchResultsMeta,
-    Service,
-} from "../iss";
+} from "../iss/search"
+
+import type {serviceSearchRequest} from "../iss/serviceSearch";
 import Location from "./personalisation/Location";
 import storage from "../storage";
 import personalisation from "./personalisation";
@@ -60,7 +61,7 @@ class BaseCategoriesPage<ChildProps = {...}, ChildState = {...}>
         }
     }
 
-    get search(): searchRequest {
+    get search(): serviceSearchRequest {
         if (this.category) {
             return Object.assign({}, this.category.search);
         } else if (this.context.router.match.params.search) {

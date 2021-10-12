@@ -2,13 +2,16 @@
 import moment from "moment-timezone";
 import _ from "underscore";
 
+import type {
+    nowOpen,
+    hmsWithColonsTime,
+    openingHours,
+    dayOfWeek,
+} from "./general";
+
 type props = {
-    now_open: {
-        local_time: isoDateAndTime,
-        notes: string,
-        now_open: ?boolean,
-    },
-    opening_hours: Array<issOpeningHours>,
+    now_open: nowOpen,
+    opening_hours: Array<openingHours>
 };
 
 type serviceOpeningHours = {
@@ -18,23 +21,6 @@ type serviceOpeningHours = {
     "end": Moment,
     "open": hmsWithColonsTime,
     "start": Moment,
-}
-
-/*
- * Return a new moment on the same day as `day`, but
- * with the time set to `time` which is formatted 'hh:mm:ss'
- */
-function timeOfDay(day: Moment, time: hmsWithColonsTime): Moment {
-    // Can't just map(parseInt) as parseInt has an optional radix param
-    let [hour, mins, secs] = time.split(":").map(str => parseInt(str));
-
-    let time_ = moment(day);
-
-    time_.set("hour", hour);
-    time_.set("minute", mins);
-    time_.set("second", secs);
-
-    return time_;
 }
 
 /* eslint-disable camelcase */
@@ -187,4 +173,21 @@ export default class ServiceOpening {
         return String.raw(strings, ...timeValues);
     }
 
+}
+
+/*
+ * Return a new moment on the same day as `day`, but
+ * with the time set to `time` which is formatted 'hh:mm:ss'
+ */
+function timeOfDay(day: Moment, time: hmsWithColonsTime): Moment {
+    // Can't just map(parseInt) as parseInt has an optional radix param
+    let [hour, mins, secs] = time.split(":").map(str => parseInt(str));
+
+    let time_ = moment(day);
+
+    time_.set("hour", hour);
+    time_.set("minute", mins);
+    time_.set("second", secs);
+
+    return time_;
 }

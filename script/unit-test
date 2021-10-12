@@ -6,7 +6,11 @@ set -euo pipefail
 IFS=$'\n\t'
 
 PATH=$(npm bin):$PATH
+FAIL_FAST=${FAIL_FAST:-}
 export NODE_ENV=production
 export PORT=8010
 
-PAUSE_ON_ERROR= mocha --require @babel/register test/unit.js $@
+PAUSE_ON_ERROR= mocha \
+    --require @babel/register \
+    $(([ -n "$CI" ] || [ -n "$FAIL_FAST" ]) && echo "--bail") \
+    test/unit.js $@

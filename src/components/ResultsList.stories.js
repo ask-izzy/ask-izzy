@@ -3,9 +3,11 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 
-import ResultsList from "./ResultsList";
-import fixtures from "../../fixtures/services";
-import ServiceFactory from "../../fixtures/factories/Service";
+import ResultsList from "./ResultsList";import {
+    ixaService,
+    susansHouseService,
+    domesticViolenceService,
+} from "../../fixtures/services";
 
 export default {
     title: "App Components/ResultsList",
@@ -19,16 +21,16 @@ const Template = (args: Object): ReactNode => {
 export const TwoServices: typeof Template = Template.bind({});
 TwoServices.args = {
     results: [
-        ServiceFactory(fixtures.ixa),
-        ServiceFactory(fixtures.susansHouse),
+        ixaService,
+        susansHouseService,
     ],
 };
 
 export const IncludesCrisisLine: typeof Template = Template.bind({});
 IncludesCrisisLine.args = {
     results: [
-        ServiceFactory(fixtures.domesticviolence),
-        ServiceFactory(fixtures.ixa),
-        ServiceFactory(fixtures.susansHouse),
+        domesticViolenceService,
+        ixaService,
+        susansHouseService,
     ],
 };

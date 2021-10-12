@@ -4,7 +4,7 @@ import type {Node as ReactNode} from "React";
 import React, {useEffect} from "react";
 
 import DebugServiceRecord from "./DebugServiceRecord";
-import fixtures from "../../fixtures/services";
+import {ixaService} from "../../fixtures/services";
 import storage from "../storage";
 
 export default {
@@ -25,5 +25,5 @@ const Template = (args: Object): ReactNode => {
 
 export const ExampleService: typeof Template = Template.bind({});
 ExampleService.args = {
-    object: fixtures.ixa,
+    object: ixaService,
 };

@@ -3,13 +3,14 @@ import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
 import Link from "./base/Link";
-import fixtures from "../../fixtures/services";
-import Location from "../iss/Location";
+import AddressLocation from "../iss/AddressLocation";
+import type {travelTime} from "../iss/general";
 import classnames from "classnames";
 import Spacer from "./Spacer";
 
 type Props = {
-    to: Location,
+    to: AddressLocation,
+    travelTimes: ?Array<travelTime>,
     children?: any,
     className: ?string,
     onClick?: ?function,
@@ -17,22 +18,13 @@ type Props = {
 }
 
 class GoogleMapsLink extends React.Component<Props, void> {
-    static sampleProps: any = {
-        default: {
-            children: (
-                <div>Link text</div>
-            ),
-            to: new Location(fixtures.ixa.location),
-        },
-    };
-
     static defaultProps: any = {
         hideSpacer: false,
     }
 
     googleMapsUrl(): string {
         const toAddr = this.props.to;
-        const travelTimes = toAddr?.travelTime || [];
+        const travelTimes = this.props.travelTimes || [];
         const mode = travelTimes.some(
             travelTime => travelTime.mode === "TRANSIT"
         ) ? "r" : "w";

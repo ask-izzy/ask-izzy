@@ -2,7 +2,7 @@
 import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
-import { append, remove } from "../../iss/Search";
+import { append, remove } from "../../iss/ServiceSearchRequest";
 
 export default class MoneySubcategories extends BaseQuestion {
     static title: string = "Money services";

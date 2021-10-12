@@ -1,11 +1,11 @@
-/* $FlowIgnore */
+/* @flow */
 /* eslint-env node, mocha */
 
 import assert from "assert";
 import Location, {
     mergeAccessPoints,
 } from "../../../../src/pages/personalisation/Location";
-import Service from "../../../../fixtures/factories/Service";
+import getServiceFixture from "../../../../fixtures/factories/Service";
 import storage from "../../../../src/storage";
 
 describe("location personalisation", () => {
@@ -46,13 +46,13 @@ describe("location personalisation", () => {
                 offset: 0,
                 location: origLocation,
             },
-            objects: [
-                Service({crisis: true, id: 1}),
-                Service({crisis: false, id: 4}),
+            services: [
+                getServiceFixture({crisis: true, id: 1}),
+                getServiceFixture({crisis: false, id: 4}),
                 // id 5 does not count as a crisis line
                 // as it comes after a non-crisis line
-                Service({crisis: true, id: 5}),
-                Service({crisis: false, id: 6}),
+                getServiceFixture({crisis: true, id: 5}),
+                getServiceFixture({crisis: false, id: 6}),
             ],
         };
         const extraResults = {
@@ -65,10 +65,10 @@ describe("location personalisation", () => {
                 offset: 5,
                 location: {...origLocation, name: "extra"},
             },
-            objects: [
-                Service({crisis: true, id: 1}),
-                Service({id: 2}),
-                Service({id: 3}),
+            services: [
+                getServiceFixture({crisis: true, id: 1}),
+                getServiceFixture({id: 2}),
+                getServiceFixture({id: 3}),
             ],
         };
         const merged = mergeAccessPoints(baseResults, extraResults);
@@ -94,7 +94,7 @@ describe("location personalisation", () => {
 
         it("puts the services in the right order", () => {
             assert.deepEqual(
-                merged.objects.map(({id}) => id),
+                merged.services.map(({id}) => id),
                 [1, 2, 3, 4, 5, 6]
             )
         });

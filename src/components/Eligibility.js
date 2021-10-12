@@ -5,8 +5,6 @@ import React from "react";
 import _ from "underscore";
 import _string from "underscore.string";
 
-import fixtures from "../../fixtures/services";
-
 type Props = {
     catchment: string,
     eligibility_info: string,
@@ -16,8 +14,6 @@ type Props = {
 }
 
 class Eligibility extends React.Component<Props, void> {
-    static sampleProps: any = {default: fixtures.ixa};
-
     render(): ReactElement<"div"> {
         let eligibleMarkup, ineligibleMarkup;
 

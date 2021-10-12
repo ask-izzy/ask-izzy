@@ -2,8 +2,23 @@
 /* eslint-disable camelcase */
 import _ from "underscore";
 import { titleize } from "underscore.string";
+import type {geoPoint} from "./general"
 
-export default class Location {
+export type AddressLocationProps = {
+    building: string,
+    details?: string,
+    flat_unit: string,
+    level: string,
+    point?: geoPoint,
+    postcode: string,
+    state: string,
+    street_name: string,
+    street_number: string,
+    street_suffix: string,
+    street_type: string,
+    suburb: string,
+};
+export default class AddressLocation {
     building: string;
     flat_unit: string;
     level: string;
@@ -12,18 +27,16 @@ export default class Location {
         "lon": number
     };
     postcode: string;
-    state: state;
+    state: string;
     street_name: string;
     street_number: string;
     street_suffix: string;
     street_type: string;
     suburb: string;
     details: string;
-    travelTime: ?Array<travelTime>;
 
-    constructor(props: issLocation, travelTimes: ?Array<travelTime>) {
+    constructor(props: AddressLocationProps) {
         Object.assign(this, props);
-        this.travelTime = travelTimes;
     }
 
     /* If there is no point value,

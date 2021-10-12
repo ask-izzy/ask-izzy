@@ -4,7 +4,6 @@ import React from "react";
 
 import icons from "../icons";
 import Link from "./base/Link";
-import fixtures from "../../fixtures/services";
 import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
 
@@ -15,8 +14,6 @@ type Props = {
 }
 
 export default class Email extends React.Component<Props, void> {
-    static sampleProps: any = {default: fixtures.ixa.emails[0]};
-
     recordClick(): void {
         gtm.emit({
             event: "Email Clicked",

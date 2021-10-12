@@ -9,8 +9,8 @@ import InputListItem from "../../components/InputListItem";
 import FlatButton from "../../components/FlatButton";
 
 import storage from "../../storage";
-import * as iss from "../../iss";
-import { append, Search } from "../../iss/Search";
+import type {serviceSearchRequest} from "../../iss/serviceSearch";
+import { append, ServiceSearchRequest } from "../../iss/ServiceSearchRequest";
 import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
@@ -137,10 +137,10 @@ class BaseQuestion extends Personalisation<Props, State> {
      * `null` if we don't have an answer (this will cause the question to
      * be shown).
      *
-     * @param {iss.searchRequest} request - current ISS search request.
-     * @returns {iss.searchRequest} modified ISS search request.
+     * @param {searchRequest} request - current ISS search request.
+     * @returns {searchRequest} modified ISS search request.
      */
-    static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+    static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
         let value = this.savedAnswer;
 
         if (value === "(skipped)") {
@@ -157,16 +157,18 @@ class BaseQuestion extends Personalisation<Props, State> {
     }
 
     static getSearchForAnswer(
-        request: iss.searchRequest,
+        request: serviceSearchRequest,
         answer: string,
-    ): ?iss.searchRequest {
+    ): ?serviceSearchRequest {
 
         let answerComposer;
 
         /* the answers are a map of answers to search terms */
-        if (_.isObject(this.defaultProps.possibleAnswers) &&
-            this.defaultProps.possibleAnswers[answer] instanceof Search) {
-
+        if (
+            _.isObject(this.defaultProps.possibleAnswers) &&
+            this.defaultProps.possibleAnswers[answer] instanceof
+                ServiceSearchRequest
+        ) {
             answerComposer = this.defaultProps.possibleAnswers[answer];
         } else {
             // Default behaviour for strings is to append

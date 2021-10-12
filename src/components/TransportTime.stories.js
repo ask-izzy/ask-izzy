@@ -4,14 +4,15 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import TransportTime from "./TransportTime";
-import fixtures from "../../fixtures/services";
-import Location from "../iss/Location";
+import {
+    ixaService,
+} from "../../fixtures/services";
 
 export default {
     title: "Service Components/TransportTime",
     component: TransportTime,
     args: {
-        location: (new Location(fixtures.ixa.location): Location),
+        location: ixaService.location,
         travelTimes: [
             {
                 mode: "DRIVING",

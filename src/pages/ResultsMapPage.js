@@ -13,13 +13,15 @@ import SitesMap from "../components/SitesMap";
 import NotFoundStaticPage from "./NotFoundStaticPage";
 import icons from "../icons";
 
-import type { Service, Site } from "../iss";
+import type { site } from "../iss/site";
+import Service from "../iss/Service"
+
 import ScreenReader from "../components/ScreenReader";
 import GeolocationButtonForTravelTimes from
     "../components/GeolocationButtonForTravelTimes";
 
 type State = {
-    selectedSite: ?Site,
+    selectedSite: ?site,
 }
 
 class ResultsMapPage extends ResultsPage<{}, State> {
@@ -29,12 +31,12 @@ class ResultsMapPage extends ResultsPage<{}, State> {
         }
 
         return this.state.searchResults.filter(
-            service => !service.Location().isConfidential() &&
+            service => !service.location?.isConfidential() &&
                 !service.crisis
         );
     }
 
-    get sites(): Array<Site> {
+    get sites(): Array<site> {
         const sites = []
         const siteIds = {}
         for (const {site} of this.services()) {
@@ -56,7 +58,7 @@ class ResultsMapPage extends ResultsPage<{}, State> {
         return locations
     }
 
-    getSiteServices(site: Site): Array<Service> {
+    getSiteServices(site: site): Array<Service> {
         return this.services()
             .filter(service => service.site.id === site.id)
     }

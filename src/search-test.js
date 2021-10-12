@@ -4,7 +4,7 @@
  */
 
 import Categories from "../src/constants/categories";
-import {search} from "../src/iss";
+import {initialSearchForServices} from "../src/iss/serviceSearch";
 import _ from "underscore";
 import storage from "../src/storage";
 
@@ -114,7 +114,7 @@ function formatTestResult(service, location): string {
     const {id, name} = service;
     let distance = approxDistanceBetween(
         location,
-        service.Location().point
+        service.location.point
     )
 
     return `${name} (${id}) - approx ${distance} km away`
@@ -175,7 +175,8 @@ async function testCategoryAndLocation(category, location) {
                 JSON.stringify(query)
             }`);
         }
-        let {objects} = await search(request);
+        // $FlowIgnore
+        let {objects} = await initialSearchForServices(request);
 
         storage.clear();
 

@@ -3,7 +3,7 @@
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import storage from "../storage";
 import routerContext from "../contexts/router-context"
-import {replaceUrlLocation} from "../utils/url.service";
+import {replaceUrlLocation} from "../utils/url";
 
 class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
     ExtraState

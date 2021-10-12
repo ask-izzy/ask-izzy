@@ -3,11 +3,11 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 import icons from "../icons";
 import ScreenReader from "./ScreenReader";
-import Location from "../iss/Location";
+import AddressLocation from "../iss/AddressLocation";
 import Spacer from "./Spacer";
 
 type Props = {
-    location: Location,
+    location: AddressLocation,
     withSpacer?: boolean,
 }
 
@@ -18,7 +18,7 @@ class Address extends React.Component<Props, void> {
 
     static sampleProps: any = {
         complex: {
-            location: new Location({
+            location: new AddressLocation({
                 "building": "Hamy building",
                 "flat_unit": "Room 35",
                 "level": "Level 3",
@@ -33,7 +33,7 @@ class Address extends React.Component<Props, void> {
             }),
         },
         hidden: {
-            location: new Location({
+            location: new AddressLocation({
                 "postcode": "3121",
                 "state": "VIC",
                 "suburb": "RICHMOND",

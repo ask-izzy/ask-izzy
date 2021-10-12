@@ -3,8 +3,8 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 import Accessibility from "./Accessibility";
-import iss from "../iss";
-import fixtures from "../../fixtures/services";
+import getServiceFixture from "../../fixtures/factories/Service";
+import {susansHouseServiceProps} from "../../fixtures/servicesProps"
 
 export default {
     title: "Service Components/Accessibility",
@@ -18,27 +18,21 @@ const Template = (args: Object): ReactNode => {
 
 export const ServiceWithFullAccess: typeof Template = Template.bind({});
 ServiceWithFullAccess.args = {
-    service: new iss.Service(
-        {...fixtures.susansHouse, accessibility: "fullaccess"}
+    service: getServiceFixture(
+        {...susansHouseServiceProps, accessibility: "fullaccess"}
     ),
 };
 
 export const ServiceWithAccess: typeof Template = Template.bind({});
 ServiceWithAccess.args = {
-    service: new iss.Service(
-        {...fixtures.susansHouse, accessibility: "access"}
+    service: getServiceFixture(
+        {...susansHouseServiceProps, accessibility: "access"}
     ),
 };
 
 export const ServiceWithNoAccess: typeof Template = Template.bind({});
 ServiceWithNoAccess.args = {
-    object: new iss.Service(
-        {...fixtures.susansHouse, accessibility: "nocccess"}
+    object: getServiceFixture(
+        {...susansHouseServiceProps, accessibility: "noaccess"}
     ),
-};
-
-export const ServiceWithoutAccessibilityInfo: typeof Template =
-    Template.bind({});
-ServiceWithoutAccessibilityInfo.args = {
-    object: new iss.Service(fixtures.susansHouse),
 };

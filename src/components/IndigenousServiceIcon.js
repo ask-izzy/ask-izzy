@@ -4,7 +4,7 @@ import type {Element as ReactElement} from "React";
 import React from "react";
 import DemographicAboriginal from "../icons/DemographicAboriginal";
 import DemographicTorresStrait from "../icons/DemographicTorresStrait";
-import type { Service } from "../iss";
+import Service from "../iss/Service";
 
 type Props = {
     object: Service

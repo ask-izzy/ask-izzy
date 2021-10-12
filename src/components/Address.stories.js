@@ -3,7 +3,7 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 import Address from "./Address";
-import Location from "../../fixtures/factories/Location";
+import AddressLocation from "../../fixtures/factories/AddressLocation";
 
 export default {
     title: "Service Components/Address",
@@ -17,7 +17,7 @@ const Template = (args: Object): ReactNode => {
 
 export const ComplexLocation: typeof Template = Template.bind({});
 ComplexLocation.args = {
-    location: new Location({
+    location: new AddressLocation({
         "building": "Hamy building",
         "flat_unit": "Room 35",
         "level": "Level 3",
@@ -33,7 +33,7 @@ ComplexLocation.args = {
 
 export const ConfidentialLocation: typeof Template = Template.bind({});
 ConfidentialLocation.args = {
-    location: new Location({
+    location: new AddressLocation({
         "postcode": "3121",
         "state": "VIC",
         "suburb": "RICHMOND",

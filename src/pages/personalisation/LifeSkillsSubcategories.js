@@ -2,7 +2,7 @@
 import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
-import { remove } from "../../iss/Search";
+import { remove } from "../../iss/ServiceSearchRequest";
 
 export default class LifeSkillsSubcategories extends BaseQuestion {
     static title: string = "Life skills";

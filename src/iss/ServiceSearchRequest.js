@@ -1,11 +1,30 @@
 /* @flow */
 
-import * as iss from "../iss";
 import _ from "underscore";
+import type {serviceSearchRequest} from "./serviceSearch"
+
+export function append(
+    search: string | serviceSearchRequest
+): ServiceSearchRequest {
+    return new AppendToServiceSearchRequest(search);
+}
+
+export function remove(
+    search: string | serviceSearchRequest
+): ServiceSearchRequest {
+    return new RemoveFromServiceSearchRequest(search);
+}
+
+export function conditionally(
+    other: ServiceSearchRequest,
+    filter: (search: serviceSearchRequest) => boolean
+): ServiceSearchRequest {
+    return new ConditionallyModifyServiceSearchRequest(other, filter);
+}
 
 export function housingCrisis(
-    filter: (search: iss.searchRequest) => boolean
-): Search {
+    filter: (search: serviceSearchRequest) => boolean
+): ServiceSearchRequest {
     return remove("housing")
         .remove("-(respite care)")
         .remove("-(housing information)")
@@ -23,29 +42,14 @@ export function housingCrisis(
         );
 }
 
-export function append(search: string|iss.searchRequest): Search {
-    return new AppendToSearch(search);
-}
-
-export function remove(search: string|iss.searchRequest): Search {
-    return new RemoveFromSearch(search);
-}
-
-export function conditionally(
-    other: Search,
-    filter: (search: iss.searchRequest) => boolean
-): Search {
-    return new ConditionalSearch(other, filter);
-}
-
 /**
  * Base class for composing search terms.
  */
-export class Search {
-    search: iss.searchRequest;
-    chain: Search;
+export class ServiceSearchRequest {
+    search: serviceSearchRequest;
+    chain: ServiceSearchRequest;
 
-    constructor(search: string|iss.searchRequest) {
+    constructor(search: string|serviceSearchRequest) {
         if (typeof search === "string") {
             this.search = { q: search };
         } else {
@@ -53,7 +57,7 @@ export class Search {
         }
     }
 
-    compose(search: iss.searchRequest): iss.searchRequest {
+    compose(search: serviceSearchRequest): serviceSearchRequest {
         // Default behaviour is to do nothing but chain up
         search = Object.assign({}, search);
 
@@ -64,14 +68,14 @@ export class Search {
         return search;
     }
 
-    append(search: string|iss.searchRequest): Search {
+    append(search: string|serviceSearchRequest): ServiceSearchRequest {
         let next = append(search);
 
         next.chain = this;
         return next;
     }
 
-    remove(search: string|iss.searchRequest): Search {
+    remove(search: string|serviceSearchRequest): ServiceSearchRequest {
         let next = remove(search);
 
         next.chain = this;
@@ -79,9 +83,9 @@ export class Search {
     }
 
     conditionally(
-        other: Search,
-        filter: (search: iss.searchRequest) => boolean
-    ): Search {
+        other: ServiceSearchRequest,
+        filter: (search: serviceSearchRequest) => boolean
+    ): ServiceSearchRequest {
         let next = conditionally(other, filter);
 
         next.chain = this;
@@ -93,10 +97,10 @@ export class Search {
 /**
  * Subclass for combining searches together.
  */
-export class AppendToSearch extends Search {
+class AppendToServiceSearchRequest extends ServiceSearchRequest {
 
     /* eslint-disable complexity*/
-    compose(search: iss.searchRequest): iss.searchRequest {
+    compose(search: serviceSearchRequest): serviceSearchRequest {
         search = super.compose(search);
         if (this.search.q) {
             search.q = (search.q ? `${search.q} ` : "") + this.search.q;
@@ -143,9 +147,9 @@ export class AppendToSearch extends Search {
 /**
  * Subclass for removing a search term.
  */
-export class RemoveFromSearch extends Search {
+class RemoveFromServiceSearchRequest extends ServiceSearchRequest {
 
-    compose(search: iss.searchRequest): iss.searchRequest {
+    compose(search: serviceSearchRequest): serviceSearchRequest {
         search = super.compose(search);
 
         if (search.q && this.search.q) {
@@ -173,21 +177,21 @@ export class RemoveFromSearch extends Search {
 /**
  * Subclass for conditionally modifying a search
  */
-export class ConditionalSearch extends Search {
+class ConditionallyModifyServiceSearchRequest extends ServiceSearchRequest {
 
-    other: Search;
-    filter: (search: iss.searchRequest) => boolean;
+    other: ServiceSearchRequest;
+    filter: (search: serviceSearchRequest) => boolean;
 
     constructor(
-        other: Search,
-        filter: (search: iss.searchRequest) => boolean
+        other: ServiceSearchRequest,
+        filter: (search: serviceSearchRequest) => boolean
     ) {
         super("");
         this.other = other;
         this.filter = filter;
     }
 
-    compose(search: iss.searchRequest): iss.searchRequest {
+    compose(search: serviceSearchRequest): serviceSearchRequest {
         search = super.compose(search);
 
         if (this.filter(search)) {

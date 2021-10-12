@@ -1,10 +1,11 @@
-/* $FlowIgnore */
+/* @flow */
 /* eslint-env node, mocha */
 /* eslint-disable no-use-before-define, prefer-arrow-callback */
 
 import assert from "assert";
-import { mungeUrlQuery, countCrisisResults } from "../../src/iss";
-import Service from "../../fixtures/factories/Service";
+import { serialiseUrlQueryParams } from "../../src/utils/url";
+import { countCrisisResults } from "../../src/iss/crisisService";
+import getServiceFixture from "../../fixtures/factories/Service";
 
 describe("iss service", function() {
 
@@ -19,24 +20,24 @@ describe("iss service", function() {
             const aboriginalSpecific = "Aboriginal (indigenous) specific"
 
             it("if type is 'Culturally safe for Aboriginal'", function() {
-                assert(!Service({
-                    indigenous_classification: culturalySafe,
+                assert(!getServiceFixture({
+                    indigenous_classification: [culturalySafe],
                 }).Indigenous());
             });
             it("if type is 'Mainstream who cater Aboriginal'", function() {
-                assert(Service(
+                assert(getServiceFixture(
                     {indigenous_classification:
-                        mainstreamCaterAboriginal,
+                        [mainstreamCaterAboriginal],
                     }).Indigenous());
             });
             it("if type is 'Aboriginal (indigenous) specific'", function() {
-                assert(Service({
-                    indigenous_classification: aboriginalSpecific,
+                assert(getServiceFixture({
+                    indigenous_classification: [aboriginalSpecific],
                 }).Indigenous());
             });
             it("if type is 'Mainstream'", function() {
-                assert(!Service({
-                    indigenous_classification: "Mainstream",
+                assert(!getServiceFixture({
+                    indigenous_classification: ["Mainstream"],
                 }).Indigenous());
             });
         });
@@ -47,7 +48,7 @@ describe("iss service", function() {
     describe("splitting description into sentences", function() {
         function test(input: string, output: Array<string>): Function {
             return function() {
-                const service = Service({description: input});
+                const service = getServiceFixture({description: input});
 
                 assert.deepEqual(
                     service.descriptionSentences,
@@ -88,7 +89,7 @@ describe("iss service", function() {
         it("Preserves unrelated query params", function() {
             assert.equal(
                 "http://example.org/?a=b&c=d",
-                mungeUrlQuery(
+                serialiseUrlQueryParams(
                     "http://example.org/?a=b",
                     {c: "d"},
                 ),
@@ -98,7 +99,7 @@ describe("iss service", function() {
         it("Overrides query params", function() {
             assert.equal(
                 "http://example.org/?a=c",
-                mungeUrlQuery(
+                serialiseUrlQueryParams(
                     "http://example.org/?a=b",
                     {a: "c"},
                 ),
@@ -108,7 +109,7 @@ describe("iss service", function() {
         it("Converts auth params to &key=", function() {
             assert.equal(
                 "http://example.org/?key=bob%3AalICE",
-                mungeUrlQuery(
+                serialiseUrlQueryParams(
                     "http://bob:alICE@example.org/",
                     {},
                 ),
@@ -118,7 +119,7 @@ describe("iss service", function() {
         it("Sends arrays multiple times", function() {
             assert.equal(
                 "http://example.org/?age_group=junior&age_group=senior",
-                mungeUrlQuery(
+                serialiseUrlQueryParams(
                     "http://example.org/",
                     {age_group: ["junior", "senior"]},
                 ),
@@ -128,7 +129,7 @@ describe("iss service", function() {
 
     describe("counting crisis results", function() {
         const result = (crisis: boolean) => {
-            return Service({crisis: crisis})
+            return getServiceFixture({crisis: crisis})
         };
 
         it("returns zero when there are none", function() {

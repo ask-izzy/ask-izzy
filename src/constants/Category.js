@@ -2,13 +2,14 @@
 
 import { slugify } from "underscore.string";
 
-import * as iss from "../iss";
+
+import type {serviceSearchRequest} from "../iss/serviceSearch";
 
 type Props = {
     name: string,
     byline: string,
     icon: React$ComponentType<any>,
-    search: iss.searchRequest,
+    search: serviceSearchRequest,
     info?: string | React$Element<any>,
     personalisation: Array<any>,
 };
@@ -18,7 +19,7 @@ export default class Category {
     name: string;
     byline: string;
     icon: React$ComponentType<any>;
-    search: iss.searchRequest;
+    search: serviceSearchRequest;
     info: ?string|React$Element<any>;
     // I can't get flow to happily check that these are react classes.
     personalisation: Array<any>;

@@ -2,11 +2,12 @@
 import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
-import { append } from "../../iss/Search";
+import { append } from "../../iss/ServiceSearchRequest";
+import type {ageGroup} from "../../iss/Service"
 
 function ageGroups(
-    ...groups: Array<issAgeGroup>
-): {age_group: Array<issAgeGroup>} {
+    ...groups: Array<ageGroup>
+): {age_group: Array<ageGroup>} {
     return {
         age_group: ["unspecified"].concat(groups),
     }
@@ -70,9 +71,7 @@ export default class Age extends BaseQuestion {
         case "65 or older" :
             return "65+";
         default:
-            return typeof this.savedAnswer === "string" ?
-                this.savedAnswer
-                : ""
+            return this.savedAnswer
         }
     }
 }

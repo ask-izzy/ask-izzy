@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "../components/base/Link";
 import Storage from "../storage";
 import Category from "../constants/Category";
-import {Service} from "../iss";
+import Service from "../iss/Service";
 
 type Props = {
     category: ?Category,

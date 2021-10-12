@@ -5,7 +5,7 @@ import * as React from "react";
 import type {Node as ReactNode} from "react";
 import BaseMultiQuestion from "./BaseMultiQuestion";
 
-import { append } from "../../iss/Search";
+import { append } from "../../iss/ServiceSearchRequest";
 import icons from "../../icons";
 import storage from "../../storage";
 

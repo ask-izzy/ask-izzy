@@ -1,4 +1,4 @@
-/* $FlowIgnore */
+/* @flow */
 /**
  * Test search composing
  */
@@ -7,7 +7,7 @@
 /* eslint-disable prefer-arrow-callback */
 
 import assert from "assert";
-import { remove } from "../../src/iss/Search";
+import { remove } from "../../src/iss/ServiceSearchRequest";
 
 describe("Compose personalisation search terms", function() {
 
@@ -40,7 +40,7 @@ describe("Compose personalisation search terms", function() {
         });
     });
 
-    it("Adds age and gender", function() {
+    it("Adds age and gender", function(): void {
         let request = {
             q: "crisis accommodation",
         };
@@ -82,9 +82,9 @@ describe("Compose personalisation search terms", function() {
         const search = remove(
             {service_type: ["addiction help", "missing type"]}
         ).append(
-            {service_type: "other help"}
+            {service_type: ["other help"]}
         ).remove(
-            {service_type: "addiction service"}
+            {service_type: ["addiction service"]}
         );
 
         assert.deepEqual(search.compose(request), {

@@ -4,8 +4,10 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import ServicePane from "./ServicePane";
-import ServiceFactory from "../../fixtures/factories/Service";
-import fixtures from "../../fixtures/services";
+import {
+    ixaService,
+    youthSupportNetService,
+} from "../../fixtures/services";
 import alertsQuery from "../queries/content/alerts.js";
 import {
     vicServiceAlert,
@@ -23,7 +25,7 @@ const Template = (args: Object): ReactNode => {
 
 export const ISSService: typeof Template = Template.bind({});
 ISSService.args = {
-    service: ServiceFactory(fixtures.ixa),
+    service: ixaService,
 };
 ISSService.parameters = {
     apolloClient: getApolloConfig(
@@ -37,7 +39,7 @@ ISSService.parameters = {
 
 export const ISSServiceWithAlerts: typeof Template = Template.bind({});
 ISSServiceWithAlerts.args = {
-    service: ServiceFactory(fixtures.ixa),
+    service: ixaService,
 };
 ISSServiceWithAlerts.parameters = {
     apolloClient: getApolloConfig(
@@ -51,7 +53,7 @@ ISSServiceWithAlerts.parameters = {
 
 export const YouthSupportNetService: typeof Template = Template.bind({});
 YouthSupportNetService.args = {
-    service: ServiceFactory(fixtures.youthSupportNet),
+    service: youthSupportNetService,
 };
 YouthSupportNetService.parameters = {
     apolloClient: getApolloConfig(

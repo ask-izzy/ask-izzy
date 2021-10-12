@@ -6,7 +6,7 @@ import type {
 } from "react"
 
 import BaseQuestion from "./BaseQuestion";
-import { append, remove } from "../../iss/Search";
+import { append, remove } from "../../iss/ServiceSearchRequest";
 import { resetDfvOptions } from "../../utils/domesticViolence";
 import icons from "../../icons";
 
@@ -46,9 +46,7 @@ export default class CounsellingSubcategories extends BaseQuestion {
         case "Find online counselling":
             return "Online counselling";
         default:
-            return typeof this.savedAnswer === "string" ?
-                this.savedAnswer
-                : ""
+            return this.savedAnswer
         }
     }
 }

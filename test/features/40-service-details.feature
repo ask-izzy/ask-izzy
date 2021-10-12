@@ -102,7 +102,7 @@ Feature: Service details page
         Then I should see "Get directions in Google Maps"
 
     Scenario: There is no travel information for new-style confidential services
-        When I visit /service/537512
+        When I visit /service/2721562
         Then I should see "Confidential location"
         And I should not see "Get directions"
 

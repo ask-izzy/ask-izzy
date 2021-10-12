@@ -2,7 +2,7 @@
 import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
-import { append, remove } from "../../iss/Search";
+import { append, remove } from "../../iss/ServiceSearchRequest";
 
 export default class AddictionSubcategories extends BaseQuestion {
     static title: string = "Drugs & alcohol";
@@ -25,9 +25,7 @@ export default class AddictionSubcategories extends BaseQuestion {
         case "Speak to someone":
             return "Counselling";
         default:
-            return typeof this.savedAnswer === "string" ?
-                this.savedAnswer
-                : ""
+            return this.savedAnswer
         }
     }
 }

@@ -9,7 +9,7 @@ import MobileDetect from "../../components/higherorder/MobileDetect";
 import DfvDemographics from "./DfvDemographics";
 import storage from "../../storage";
 
-import type { searchRequest } from "../../iss";
+import type { serviceSearchRequest } from "../../iss/serviceSearch";
 
 class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
     get doneButtonLabel(): string {
@@ -47,7 +47,7 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
         );
     }
 
-    static getSearch(request: searchRequest): ?searchRequest {
+    static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
         return this.savedAnswer ? request : null;
     }
 
