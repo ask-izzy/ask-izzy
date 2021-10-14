@@ -1,0 +1,69 @@
+.IssParamsOverrideControls {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .diff {
+        .added {
+            background-color: rgb(204, 232, 204);
+            color: rgb(0, 55, 0);
+        }
+
+        .removed {
+            background-color: rgb(232, 204, 204);
+            color: rgb(55, 0, 0);
+            text-decoration: line-through;
+        }
+
+        .line {
+            white-space: pre-wrap;
+        }
+    }
+
+    .vertical-layout {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+        grid-column-gap: 2em;
+        grid-row-gap: 1em;
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type='text'] {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .array-table-layout {
+            header {
+                label {
+                    display: unset;
+                }
+                // @jsonforms/react does not make it easy to simply change
+                // the wording of "add item" buttons so rather than adding
+                // a whole custom rendering element to customise it we just
+                // do this ugly css hack. Not okay for something user
+                // facing but this is just shown in debug mode.
+                button {
+                    text-indent: -9999px;
+                    line-height: 0;
+                    margin-left: 1em;
+
+                    &::after {
+                        content: '+';
+                        text-indent: 0;
+                        display: block;
+                        line-height: initial;
+                    }
+                }
+            }
+
+            thead {
+                display: none;
+            }
+        }
+    }
+}

@@ -17,10 +17,13 @@ import NotFoundStaticPage from "./NotFoundStaticPage"
 import ButtonListItem from "../components/ButtonListItem";
 import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "./QuestionStepper";
+import storage from "../storage";
 
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
 import ResultsPageGeolocationButton from "./ResultsPageGeolocationButton";
+import IssParamsOverrideControls from
+    "../components/debug/IssParamsOverrideControls";
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
@@ -53,8 +56,33 @@ class ResultsListPage extends ResultsPage<> {
                         items={this.personalisationComponents}
                     />
                 </DebugContainer>
-                <DebugContainer message="ISS Parameters">
-                    <DebugSearch search={this.issParams()} />
+                <DebugContainer
+                    message="ISS Parameters"
+                    initiallyExpanded={!!storage.getJSON("issParamsOverride")}
+                >
+                    {storage.getJSON("issParamsOverride") ?
+                        <IssParamsOverrideControls
+                            originalIssParams={this.issParams() || {}}
+                            issParamsOverride={
+                                storage.getJSON("issParamsOverride")
+                            }
+                            setIssParamsOverride={
+                                this.setIssParamsOverride.bind(this)
+                            }
+                        />
+                        : <>
+                            <DebugSearch search={this.issParams()} />
+                            <button
+                                onClick={() => this.setIssParamsOverride(
+                                    this.issParams() || {},
+                                    false
+                                )}
+                            >
+                                Override ISS Params
+                            </button>
+                        </>
+                    }
+
                 </DebugContainer>
                 <LoadingResultsHeader
                     title={this.title}
@@ -171,6 +199,23 @@ class ResultsListPage extends ResultsPage<> {
     get isDisabilityAdvocacy(): boolean {
         return this.search.q === "Disability Advocacy Providers"
     }
+
+    setIssParamsOverride(
+        issParamsOverride?: { [string]: any },
+        triggerNewSearch: boolean = true
+    ): void {
+        if (issParamsOverride) {
+            storage.setJSON("issParamsOverride", issParamsOverride)
+        } else {
+            storage.removeItem("issParamsOverride")
+        }
+        if (triggerNewSearch) {
+            location.reload();
+        } else {
+            this.forceUpdate()
+        }
+    }
 }
+
 
 export default ResultsListPage;

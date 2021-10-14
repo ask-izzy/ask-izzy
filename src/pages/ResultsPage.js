@@ -78,7 +78,15 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         let res
         try {
             if (!this.state.searchMeta) {
-                const params = this.issParams()
+                let params = this.issParams()
+
+                if (
+                    storage.getDebug() &&
+                    storage.getJSON("issParamsOverride")
+                ) {
+                    params = storage.getJSON("issParamsOverride")
+                }
+
                 if (!params) {
                     return
                 }

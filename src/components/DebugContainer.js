@@ -9,6 +9,7 @@ import debugModeContext from "../contexts/debug-mode-context";
 type Props = {
     message: string,
     children?: any,
+    initiallyExpanded?: boolean,
 }
 
 class DebugContainer extends React.Component<Props, void> {
@@ -22,7 +23,10 @@ class DebugContainer extends React.Component<Props, void> {
 
         return (
             <div className="DebugContainer">
-                <Collapser expandMessage={this.props.message}>
+                <Collapser
+                    expandMessage={this.props.message}
+                    initiallyExpanded={this.props.initiallyExpanded}
+                >
                     {this.props.children}
                 </Collapser>
             </div>
