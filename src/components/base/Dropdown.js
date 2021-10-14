@@ -8,6 +8,7 @@ import {useEffect, useRef, useState} from "react";
 import {OutsideComponentClick} from "../../effects/OutsideComponentClick";
 import {MobileDetect} from "../../effects/MobileDetect";
 import * as gtm from "../../google-tag-manager";
+import type {AnalyticsEvent} from "../../google-tag-manager"
 import {getScrollPosition} from "../../effects/scrollPosition";
 
 
@@ -16,7 +17,7 @@ type Props = {
     options: Array<SortType>,
     onChange: function,
     title: string,
-    eventAction: string,
+    analyticsEvent?: AnalyticsEvent,
     hideOptionsOnScrollBreakpoint?: number,
 }
 
@@ -26,22 +27,21 @@ type Props = {
  * @param options - A list of options based on the "SortType"
  * @param onChange - An onchange callback
  * @param title - The title/label of the dropdown
- * @param eventAction - The specific event that this dropdown is being
+ * @param analyticsEvent - Override values for the GA event that is created
  * used for so it can be easily identifiable through Google Analytics
  * @param hideOptionsOnScrollBreakpoint - A scroll position
  * breakpoint to close the dropdown
  * @returns {JSX.Element} - The dropdown component
  * @constructor
  */
-function Dropdown(
-    {
-        selection,
-        options,
-        onChange,
-        title,
-        eventAction,
-        hideOptionsOnScrollBreakpoint = 0,
-    }: Props): ReactNode {
+function Dropdown({
+    selection,
+    options,
+    onChange,
+    title,
+    analyticsEvent,
+    hideOptionsOnScrollBreakpoint = 0,
+}: Props): ReactNode {
 
     const rootElmRef = useRef(null)
 
@@ -73,12 +73,13 @@ function Dropdown(
         setShowOptions(false);
         onChange(option);
         gtm.emit({
-            event: `Action Triggered - Dropdown`,
+            event: "Action Triggered - Dropdown",
             eventCat: "Action triggered",
-            eventAction: eventAction,
+            eventAction: "Show dropdown options",
             eventLabel: option.name,
             eventValue: showOptions ? 0 : 1,
             sendDirectlyToGA: true,
+            ...analyticsEvent,
         });
     }
 
