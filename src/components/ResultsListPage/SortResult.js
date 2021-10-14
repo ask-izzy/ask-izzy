@@ -59,6 +59,7 @@ function SortResult(
                     setSelection(option);
                     callback(option);
                 }}
+                eventAction="Show sort options"
                 hideOptionsOnScrollBreakpoint={
                     hideOptionsOnScrollBreakpoint
                 }

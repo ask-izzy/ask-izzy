@@ -16,15 +16,30 @@ type Props = {
     options: Array<SortType>,
     onChange: function,
     title: string,
+    eventAction: string,
     hideOptionsOnScrollBreakpoint?: number,
 }
 
+/**
+ * A custom accessible dropdown component
+ * @param selection - The currently selected option
+ * @param options - A list of options based on the "SortType"
+ * @param onChange - An onchange callback
+ * @param title - The title/label of the dropdown
+ * @param eventAction - The specific event that this dropdown is being
+ * used for so it can be easily identifiable through Google Analytics
+ * @param hideOptionsOnScrollBreakpoint - A scroll position
+ * breakpoint to close the dropdown
+ * @returns {JSX.Element} - The dropdown component
+ * @constructor
+ */
 function Dropdown(
     {
         selection,
         options,
         onChange,
         title,
+        eventAction,
         hideOptionsOnScrollBreakpoint = 0,
     }: Props): ReactNode {
 
@@ -60,7 +75,7 @@ function Dropdown(
         gtm.emit({
             event: `Action Triggered - Dropdown`,
             eventCat: "Action triggered",
-            eventAction: `${showOptions ? "Open" : "Close"} dropdown`,
+            eventAction: eventAction,
             eventLabel: option.name,
             eventValue: showOptions ? 0 : 1,
             sendDirectlyToGA: true,
@@ -160,6 +175,7 @@ function Dropdown(
                             dropDownEventHandler(option)
                         }}
                         onKeyDown={(event) => {
+                            event.preventDefault();
                             if (event.key === "Enter" ||
                                 // The " " is the Space key
                                 event.key === " ") {
