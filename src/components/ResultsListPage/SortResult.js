@@ -59,7 +59,10 @@ function SortResult(
                     setSelection(option);
                     callback(option);
                 }}
-                eventAction="Show sort options"
+                analyticsEvent={{
+                    event: "Action Triggered - Sort Options Dropdown",
+                    eventAction: "Show sort options",
+                }}
                 hideOptionsOnScrollBreakpoint={
                     hideOptionsOnScrollBreakpoint
                 }
