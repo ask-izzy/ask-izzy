@@ -1,14 +1,18 @@
 /* @flow */
+import React from "react"
 
 import {
     initialSearchForServices,
     searchForServices,
 } from "../iss/serviceSearch";
-import BaseCategoriesPage from "./BaseCategoriesPage";
+import type {
+    serviceSearchRequest,
+    serviceSearchResultsMeta,
+} from "../iss/serviceSearch";
+import {getInitialSearchRequest} from "../iss/serviceSearch"
 import * as gtm from "../google-tag-manager";
 
 import routerContext from "../contexts/router-context";
-import type {serviceSearchResultsMeta} from "../iss/serviceSearch";
 import Service from "../iss/Service"
 import {
     addPageLoadDependencies,
@@ -19,7 +23,11 @@ import type {SortType} from "../components/base/Dropdown"
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 import {
     getPersonalisationPages,
+    getCategoryFromRouter,
+    getPageTitleFromRouter,
+    setLocationFromUrl,
 } from "../utils/personalisation"
+import Category from "../constants/Category"
 
 type State = {
     searchMeta: ?serviceSearchResultsMeta,
@@ -29,18 +37,21 @@ type State = {
     searchType: ?string,
     sortBy: ?SortType,
     travelTimesStatus: travelTimesStatus,
+    category: ?Category,
+    pageTitle: string,
 }
 
 
 class ResultsPage<ChildProps = {...}, ChildState = {...}>
-    extends BaseCategoriesPage<ChildProps, State & ChildState> {
+    extends React.Component<ChildProps, State & ChildState> {
     constructor(props: Object, context: Object) {
         super(props, context);
         addPageLoadDependencies(context.router.location, "resultsLoad")
 
-        const isTextSearchPage = !!this.context.router.match.params.search
+        const isTextSearchPage = !!context.router.match.params.search
+        const category = getCategoryFromRouter(context.router)
         const searchType =
-            this.category && "category" ||
+            category && "category" ||
             isTextSearchPage && "text"
 
         this.state = {
@@ -51,6 +62,8 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             searchPagesLoaded: 0,
             sortOption: null,
             searchType,
+            category,
+            pageTitle: getPageTitleFromRouter(context.router),
         };
     }
 
@@ -59,7 +72,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
     _component: any;
 
     componentDidMount(): void {
-        super.componentDidMount();
+        setLocationFromUrl(this.context.router)
 
         if (!this.issParams()) {
             const newPath =
@@ -152,7 +165,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
     }
     loadNextSearchPage: () => Promise<void> = this.loadNextSearchPage.bind(this)
 
-    issParams(): ?Object {
+    issParams(): ?serviceSearchRequest {
         // Build the search request.
         //
         // If we don't have enough information to build the search request
@@ -161,7 +174,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         // We have to do this once the component is mounted (instead of
         // in willTransitionTo because the personalisation components will
         // inspect the session).
-        let request = this.search;
+        let request = getInitialSearchRequest(this.context.router);
 
         const personalisationPages = getPersonalisationPages(
             this.context.router
@@ -177,13 +190,6 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
                     return null;
                 }
             }
-        }
-
-        // A special case for the "Find advocacy" button on the
-        // DisabilityAdvocacyFinder page.
-        if (request.q === "Disability Advocacy Providers") {
-            request.service_type_raw = ["disability advocacy"]
-            request.q = "disability"
         }
 
         return request;

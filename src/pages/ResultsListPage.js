@@ -16,6 +16,7 @@ import NotFoundStaticPage from "./NotFoundStaticPage"
 import ButtonListItem from "../components/ButtonListItem";
 import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "./QuestionStepper";
+import {getInitialSearchRequest} from "../iss/serviceSearch";
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
 import IssParamsOverrideControls from
@@ -60,7 +61,9 @@ class ResultsListPage extends ResultsPage<> {
                 </ScreenReader>
                 <DebugContainer message="Debug personalisation">
                     <DebugPersonalisation
-                        search={this.search}
+                        search={getInitialSearchRequest(
+                            this.context.router
+                        )}
                         items={getPersonalisationPages(
                             this.context.router
                         )}
@@ -95,8 +98,8 @@ class ResultsListPage extends ResultsPage<> {
 
                 </DebugContainer>
                 <LoadingResultsHeader
-                    title={this.title}
-                    category={this.category}
+                    title={this.state.pageTitle}
+                    category={this.state.category}
                     meta={this.state.searchMeta || {total_count: 0}}
                     loading={this.searchIsLoading}
                     error={this.state.searchError ?
@@ -108,7 +111,7 @@ class ResultsListPage extends ResultsPage<> {
                 <div className="List results">
                     <div tabIndex="0">
                         <QuestionStepper
-                            category={this.category}
+                            category={this.state.category}
                             resultsPage={true}
                             results={this.state.searchResults || []}
                             location={this.context.router.location}
@@ -178,8 +181,8 @@ class ResultsListPage extends ResultsPage<> {
         ) {
             return (
                 <SuggestionBox
-                    category={this.category}
-                    searchTerm={this.title
+                    category={this.state.category}
+                    searchTerm={this.state.pageTitle
                         .replace("“", "")
                         .replace("”", "")
                     }
@@ -213,10 +216,6 @@ class ResultsListPage extends ResultsPage<> {
                 </div>
             );
         }
-    }
-
-    get isDisabilityAdvocacy(): boolean {
-        return this.search.q === "Disability Advocacy Providers"
     }
 
     setIssParamsOverride(

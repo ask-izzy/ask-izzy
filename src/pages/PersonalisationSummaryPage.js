@@ -3,27 +3,33 @@
 import * as React from "react";
 import type {Node as ReactNode} from "react";
 
-import BaseCategoriesPage from "./BaseCategoriesPage";
 import components from "../components";
 import WithStickyFooter from "../components/WithStickyFooter";
 import Spacer from "../components/Spacer";
 import storage from "../storage";
 import routerContext from "../contexts/router-context";
 import ScreenReader from "../components/ScreenReader";
+import {isDisabilityAdvocacySearch} from "../iss/serviceSearch"
 import {
     getFullPathForPersonalisationSubpath,
     navigateToPersonalisationSubpath,
     getCurrentPersonalisationPage,
     getPersonalisationPages,
-    getBannerName
+    getBannerName,
+    getCategoryFromRouter,
+    setLocationFromUrl,
 } from "../utils/personalisation"
 import type {
     PersonalisationPage,
 } from "../utils/personalisation"
 
-class PersonalisationSummaryPage extends BaseCategoriesPage<{}, {}> {
+class PersonalisationSummaryPage extends React.Component<{}, {}> {
 
     static contextType: any = routerContext;
+
+    componentDidMount(): void {
+        setLocationFromUrl(this.context.router)
+    }
 
     goBack(): void {
         if (this.currentPersonalisationPage) {
@@ -57,7 +63,7 @@ class PersonalisationSummaryPage extends BaseCategoriesPage<{}, {}> {
         event.preventDefault();
         storage.clear();
         let redirectUrl = "/"
-        if (this.search.q === "Disability Advocacy Providers") {
+        if (isDisabilityAdvocacySearch(this.context.router)) {
             redirectUrl = "/disability-advocacy-finder"
         }
         this.context.router.navigate(redirectUrl);
@@ -114,7 +120,7 @@ class PersonalisationSummaryPage extends BaseCategoriesPage<{}, {}> {
                 <Subpage
                     ref="subpage"
                     onDoneTouchTap={this.nextStep}
-                    category={this.category}
+                    category={getCategoryFromRouter(this.context.router)}
                     nextStep={this.nextStep}
                     backToAnswers={true}
                     goBack={() => this.goBack()}
@@ -130,7 +136,9 @@ class PersonalisationSummaryPage extends BaseCategoriesPage<{}, {}> {
                     Change your answers here
                     </div>
                 }
-                bannerName={getBannerName(this.category)}
+                bannerName={getBannerName(
+                    getCategoryFromRouter(this.context.router)
+                )}
                 fixedAppBar={true}
                 goBack={{
                     backMessage: this.currentPersonalisationPage ?

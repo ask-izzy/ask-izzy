@@ -160,3 +160,44 @@ export function getBannerName(
         category?.key ||
         "homepage"
 }
+
+export function getCategoryFromRouter(
+    router: $PropertyType<RouterContextObject, 'router'>
+): ?Category {
+    return getCategory(
+        router.match.params.page
+    )
+}
+
+export function getPageTitleFromRouter(
+    router: $PropertyType<RouterContextObject, 'router'>
+): string {
+    const category = getCategoryFromRouter(router)
+    if (category) {
+        return category.name;
+    } else if (router.match.params.search) {
+        const search = decodeURIComponent(
+            router.match.params.search
+        );
+        return `“${search.replace(/["']/g, "")}”`;
+    } else {
+        return "undefined-search";
+    }
+}
+
+export function setLocationFromUrl(
+    router: $PropertyType<RouterContextObject, 'router'>
+): void {
+    // Update the URL to include the location, so that links
+    // are SEO-friendly. If we dont have a location but the
+    // URL does, use the one from the url.
+    const {suburb, state} = router.match.params;
+
+    if (suburb && state) {
+        if (storage.getSearchArea() != `${suburb}, ${state}`) {
+            // Use the location from the URL.
+            storage.setSearchArea(`${suburb}, ${state}`);
+            storage.clearUserGeolocation()
+        }
+    }
+}

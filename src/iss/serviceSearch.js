@@ -11,12 +11,15 @@ import {
     TryWithDefault,
 } from "../timeout";
 import * as gtm from "../google-tag-manager";
+import type { RouterContextObject } from "../contexts/router-context";
+import {getCategoryFromRouter} from "../utils/personalisation"
 
-export type serviceSearchRequest = {
+export type serviceSearchRequest = {|
     q?: string,
     service_type?: Array<string>,
     service_type_raw?: Array<string>,
     site_id?: number,
+    name?: string,
 
     minimum_should_match?: string,
 
@@ -32,7 +35,7 @@ export type serviceSearchRequest = {
 
     limit?: number,
     key?: string,
-};
+|};
 
 export type serviceSearchResultsMeta = {
     ...searchResultsMeta,
@@ -161,4 +164,42 @@ export function forEachServiceFromCache(
     callback: (service: Service) => any
 ): void {
     serviceCache.forEach(callback)
+}
+
+export function getInitialSearchRequest(
+    router: $PropertyType<RouterContextObject, 'router'>
+): serviceSearchRequest {
+    let request: serviceSearchRequest
+    const category = getCategoryFromRouter(router)
+
+    if (category) {
+        request = {...category.search};
+    } else if (router.match.params.search) {
+        request = {
+            q: decodeURIComponent(router.match.params.search),
+        };
+    } else {
+        request = {
+            q: "undefined-search",
+        };
+    }
+
+    // A special case for the "Find advocacy" button on the
+    // DisabilityAdvocacyFinder page.
+    if (request.q === "Disability Advocacy Providers") {
+        // $FlowIgnore because flow is acting wack about "decodeURIComponent"
+        // above for some reason
+        // $FlowIgnore
+        request.service_type_raw = ["disability advocacy"]
+        request.q = "disability"
+    }
+
+    return request
+}
+
+export function isDisabilityAdvocacySearch(
+    router: $PropertyType<RouterContextObject, 'router'>
+): boolean {
+    return decodeURIComponent(router.match.params.search) ===
+        "Disability Advocacy Providers"
 }

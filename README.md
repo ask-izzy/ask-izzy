@@ -181,12 +181,8 @@ for the in-progress standard).
 
 When a `ResultsPage` is added to the page, it builds a query
 by calling `issParams` which iterates through
-`personalisationComponents` (inherited from `BaseCategoriesPage`)
-and calls `getSearch` to build up a search object which is
+`personalisationComponents` and calls `getSearch` to build up a search object which is
 passed to `search` in `iss.js`.
-
-For category pages, `BaseCategoriesPage` checks `constants/categories.js`
-to get the list of personalisation components.
 
 If any personalisation component has not been answered, it
 will return `null` from `getSearch`, and the `ResultsPage`

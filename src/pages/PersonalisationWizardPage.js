@@ -3,30 +3,35 @@
 import * as React from "react";
 import type {ElementConfig as ReactElementConfig} from "react";
 
-import BaseCategoriesPage from "./BaseCategoriesPage";
 import Intro from "./personalisation/Intro";
 import NotFoundStaticPage from "./NotFoundStaticPage";
 import routerContext from "../contexts/router-context";
+import Category from "../constants/Category"
 import {
     navigateToPersonalisationSubpath,
     getPersonalisationPages,
     getCurrentPersonalisationPage,
     getCurrentPersonalisationPageIndex,
+    getCategoryFromRouter,
+    getPageTitleFromRouter,
+    setLocationFromUrl,
 } from "../utils/personalisation"
 
 import type {PersonalisationPage} from "../utils/personalisation"
 type State = {
   showSubpage: boolean,
+  category: ?Category,
+  nextDisabled: boolean
 }
 
-class PersonalisationWizardPage extends BaseCategoriesPage<{}, State> {
-
-    constructor(props: Object, state: Object) {
-        super(props, state);
+class PersonalisationWizardPage extends React.Component<{}, State> {
+    constructor(props: Object, context: Object) {
+        super(props, context);
 
         this.state = {
             nextDisabled: false,
             showSubpage: true,
+            category: getCategoryFromRouter(context.router),
         };
     }
 
@@ -36,10 +41,16 @@ class PersonalisationWizardPage extends BaseCategoriesPage<{}, State> {
         props: ReactElementConfig<typeof PersonalisationWizardPage>,
         state: State
     ): State {
-        return {nextDisabled: false, showSubpage: true};
+        return {
+            ...state,
+            nextDisabled: false,
+            showSubpage: true,
+        };
     }
 
     componentDidMount(): void {
+        setLocationFromUrl(this.context.router)
+
         if (
             this.context.router.match.params.search ===
                 "bushfires -(closed due to the recent bushfires)"
@@ -139,7 +150,8 @@ class PersonalisationWizardPage extends BaseCategoriesPage<{}, State> {
             this.context.router
         )
 
-        return currentComponent?.title || this.title;
+        return currentComponent?.title ||
+            getPageTitleFromRouter(this.context.router);
     }
 
     render(): React.Node {
@@ -149,8 +161,10 @@ class PersonalisationWizardPage extends BaseCategoriesPage<{}, State> {
             throw new Error("Unexpected");
         }
 
-        if (!this.category &&
-            (this.search.q === "undefined-search")) {
+        if (
+            !this.state.category &&
+            !this.context.router.match.params.search
+        ) {
             return (
                 <NotFoundStaticPage/>
             )
@@ -166,7 +180,7 @@ class PersonalisationWizardPage extends BaseCategoriesPage<{}, State> {
                 <Subpage
                     ref="subpage"
                     onDoneTouchTap={this.nextStep}
-                    category={this.category}
+                    category={this.state.category}
                     backToAnswers={false}
                 />
             </div>
