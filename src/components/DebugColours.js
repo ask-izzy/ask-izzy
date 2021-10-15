@@ -205,8 +205,8 @@ const colourVars = [
         vars: [
             "colour-link",
             "colour-link-visited",
-            "colour-button-standard",
-            "colour-button-standard-hover",
+            "colour-button-primary",
+            "colour-button-primary-hover",
             "colour-button-disabled",
             "colour-interactive-icon",
         ],

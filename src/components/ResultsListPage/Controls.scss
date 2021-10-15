@@ -1,0 +1,115 @@
+@use '../../styles/mixins/colours';
+
+.Controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px 5px;
+    height: 44px;
+    background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+    background-color: var(--colour-bg-standard-tint-2);
+
+    .Dropdown {
+        .options {
+            width: 198px;
+            margin-left: 1px;
+        }
+    }
+
+    &.sticky {
+        padding: 5px 20px 8px;
+        margin-left: -5px;
+        position: fixed;
+        top: 44px;
+        transition: background-color 150ms ease;
+        width: 760px;
+        z-index: 1;
+        background-color: #{colours.get-static('colour-brand-primary-mid')};
+        background-color: var(--colour-brand-primary-mid);
+
+        .SortResult {
+            padding: 0;
+
+            .Dropdown {
+                .title {
+                    color: #{colours.get-static('raw-colour-pure-white')};
+                    color: var(--raw-colour-pure-white);
+                }
+
+                .options {
+                    outline: 1px solid #{colours.get-static('colour-brand-primary')};
+                    outline: 1px solid var(--colour-brand-primary);
+                    width: inherit;
+                    margin-left: 0;
+
+                    .selected {
+                        background: none;
+
+                        &:hover {
+                            background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+                            background-color: var(--colour-bg-standard-tint-2);
+                        }
+                    }
+                }
+
+                .optionSelect,
+                .nativeSelect {
+                    border: 0;
+                    font-size: 16px;
+                    background-color: #{colours.get-static('colour-brand-primary-dark')};
+                    background-color: var(--colour-brand-primary-dark);
+                    color: #{colours.get-static('raw-colour-pure-white')};
+                    color: var(--raw-colour-pure-white);
+
+                    option {
+                        background-color: #{colours.get-static('raw-colour-pure-white')};
+                        background-color: var(--raw-colour-pure-white);
+                    }
+                }
+
+                .SvgIcon {
+                    path {
+                        fill: #{colours.get-static('raw-colour-pure-white')};
+                        fill: var(--raw-colour-pure-white);
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 10px 0;
+        margin: 0 10px;
+        font-size: 14px;
+
+        &.sticky {
+            padding: 5px 10px;
+        }
+    }
+
+    @media (max-width: 556px) {
+        flex-direction: column;
+        height: 100%;
+        margin: 0;
+
+        .SortResult {
+            margin-right: 10px;
+            align-items: flex-end;
+        }
+
+        &.sticky {
+            height: 44px;
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+
+            .SortResult {
+                align-items: flex-start;
+            }
+        }
+
+        .dropDownContainer {
+            width: 100%;
+        }
+    }
+}

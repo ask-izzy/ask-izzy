@@ -36,6 +36,8 @@ module.exports = (function() {
         .given("I open a new browser", unpromisify(newBrowser))
         .when("I visit $URL", unpromisify(visitUrl))
         .when("I click on \"$STRING\"", unpromisify(clickLink))
+        .when("I click the dropdown \"$STRING\"",
+            unpromisify(clickDropdown))
         .when("I search for \"$STRING\"", unpromisify(doSearch))
         .when("I search for \"$STRING\" and press enter",
             unpromisify(doSearchAndEnter))
@@ -131,6 +133,14 @@ async function clickLink(link: string): Promise<void> {
     }
     await this.driver.findElement(locator).click();
     await module.exports.documentReady(this.driver);
+}
+
+async function clickDropdown(option) {
+    const locator = await this.driver.findElement(By.xpath(
+        `//div[normalize-space(.) = normalize-space(
+        ${escapeXPathString(option)})]`
+    ))
+    locator.click()
 }
 
 function navigator(

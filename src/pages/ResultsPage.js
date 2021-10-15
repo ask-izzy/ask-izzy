@@ -10,6 +10,7 @@ import {
     addPageLoadDependencies,
     closePageLoadDependencies,
 } from "../utils/page-loading"
+import type {SortType} from "../components/ResultsListPage/SortResult.service";
 import storage from "../storage";
 
 type State = {
@@ -18,7 +19,7 @@ type State = {
     searchError: ?{message: string, status: number},
     searchPagesLoaded: number,
     searchType: ?string,
-    fetchedLocation: boolean,
+    sortOption: ?SortType,
 }
 
 
@@ -39,7 +40,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             searchResults: null,
             searchError: null,
             searchPagesLoaded: 0,
-            fetchedLocation: false,
+            sortOption: null,
             searchType,
         };
     }
@@ -69,9 +70,6 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
 
     onGeoLocationSuccess(params: {coords: Coordinates, name: string}): void {
         storage.setCoordinates(params.coords, params.name);
-        this.setState({
-            fetchedLocation: true,
-        })
     }
 
     async loadNextSearchPage(): Promise<void> {

@@ -1,10 +1,13 @@
 @use '../styles/mixins/colours';
 
-.ResultsPageGeoLocationButton {
+.GeolocationButtonForTravelTimes {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 1em;
+    padding: 10px;
+    margin: 10px;
+    background-color: #{colours.get-static('raw-colour-pure-white')};
+    background-color: var(--raw-colour-pure-white);
     color: #{colours.get-static('colour-text-mid')};
     color: var(--colour-text-mid);
 
@@ -12,6 +15,7 @@
         display: flex;
         align-items: center;
         font-size: 14px;
+        font-weight: 400;
 
         .explainerIcons {
             display: inline-flex;
@@ -34,6 +38,40 @@
                 circle {
                     fill: #{colours.get-static('colour-text-mid')};
                     fill: var(--colour-text-mid);
+                }
+            }
+        }
+    }
+
+    .collapserContainer {
+        position: relative;
+        width: 100%;
+
+        .Button {
+            border: 0;
+            background: none;
+            font-weight: bold;
+            position: absolute;
+            top: -12px;
+            right: 0;
+
+            .plus {
+                transform: rotate(90deg);
+                transition: transform 200ms ease;
+
+                &.close {
+                    transform: rotate(-90deg);
+                    transition: transform 200ms ease;
+                }
+            }
+
+            .SvgIcon {
+                width: 20px;
+                stroke-width: 6px;
+
+                path {
+                    stroke: #{colours.get-static('colour-text-mid')};
+                    stroke: var(--colour-text-mid);
                 }
             }
         }
@@ -69,6 +107,10 @@
     }
 
     @media (max-width: 674px) {
+        width: 90%;
+    }
+
+    @media (max-width: 674px) {
         flex-direction: column;
 
         .explainer {
@@ -77,6 +119,10 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
+
+            &.collapsed {
+                flex-direction: row;
+            }
         }
 
         .GeoLocationButton {

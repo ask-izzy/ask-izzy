@@ -1,53 +1,58 @@
 /* @flow */
 
 import type {Node as ReactNode} from "React";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import icons from "../icons";
-import LinkListItem from "./LinkListItem";
 import maps, {MapsApi} from "../maps";
-
-type State = {
-    maps: ?MapsApi
-}
+import Button from "./base/Button";
+import {useRouterContext} from "../contexts/router-context";
 
 type Props = {
     to: string
 }
 
-export default class ViewOnMapButton extends React.Component<Props, State> {
-    constructor() {
-        super();
-        this.state = {maps: null};
-    }
+function ViewOnMapButton({to}: Props): ReactNode {
 
-    componentDidMount(): void {
-        maps().then(maps => this.setState({maps}));
-    }
+    const [mapApi, setMapApi] = useState<?MapsApi>(null);
 
-    render(): null | ReactNode {
-        if (!this.state.maps) {
-            return null;
+    const {navigate} = useRouterContext()
+
+    useEffect(() => {
+        const getMaps = async() => {
+            const api = await maps()
+            setMapApi(api)
         }
+        getMaps()
+    }, [])
 
-        return (
-            <LinkListItem
-                className="ViewOnMapButton"
-                primaryText="View on a map"
-                leftIcon={
-                    <icons.Map className="big" />
-                }
-                rightIcon={
-                    <icons.Chevron />
-                }
-                to={this.props.to}
-                analyticsEvent={{
-                    event: "Link Followed - Results Map",
-                    eventAction: "View results map",
-                    eventLabel: null,
-                }}
-            />
-        );
+    if (!mapApi) {
+        return null
     }
+
+    return (
+        <Button
+            className="ViewOnMapButton"
+            to={to}
+            onClick={() => {
+                navigate(to)
+            }}
+            analyticsEvent={{
+                event: "Link Followed - Results Map",
+                eventAction: "View results map",
+                eventLabel: null,
+            }}
+        >
+            <div className="buttonLabel">
+                <div className="leftSide">
+                    <icons.Map className="big" />
+                    <span>
+                        Map view
+                    </span>
+                </div>
+                <icons.Chevron className="big" />
+            </div>
+        </Button>
+    );
 }
 
-
+export default ViewOnMapButton

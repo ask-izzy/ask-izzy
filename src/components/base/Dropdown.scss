@@ -1,0 +1,126 @@
+@use '../../styles/mixins/colours';
+
+.Dropdown {
+    display: flex;
+    position: relative;
+    align-items: center;
+
+    .title {
+        margin: 5px 10px;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+        text-align: left;
+    }
+
+    .optionsContainer {
+        width: 200px;
+    }
+
+    .nativeSelect {
+        padding: 5px;
+        font-weight: 500;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+
+        option {
+            padding: 10px;
+            font-weight: 500;
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
+
+            &:focus {
+                outline: 1px solid #{colours.get-static('colour-input-focus-primary')};
+                outline: 1px solid var(--colour-input-focus-primary);
+            }
+        }
+    }
+
+    .optionSelect {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+        font-weight: 500;
+        font-size: 16px;
+        cursor: pointer;
+        border: solid 1px #{colours.get-static('colour-text-dark')};
+        border: solid 1px var(--colour-text-dark);
+        background-color: #{colours.get-static('raw-colour-pure-white')};
+        background-color: var(--raw-colour-pure-white);
+
+        &:hover {
+            outline: 1px solid #{colours.get-static('colour-input-focus-primary')};
+            outline: 1px solid var(--colour-input-focus-primary);
+        }
+    }
+
+    .activeOptionSelect {
+        outline: 1px solid #{colours.get-static('colour-input-focus-primary')};
+        outline: 1px solid var(--colour-input-focus-primary);
+        background-color: #{colours.get-static('raw-colour-pure-white')};
+        background-color: var(--raw-colour-pure-white);
+    }
+
+    .open {
+        .SvgIcon {
+            margin-top: -12px;
+            margin-bottom: -12px;
+            transform: rotate(-90deg);
+        }
+    }
+
+    .closed {
+        .SvgIcon {
+            margin-top: -12px;
+            margin-bottom: -12px;
+            transform: rotate(90deg);
+            transition: 0.4s;
+        }
+    }
+
+    .options {
+        position: absolute;
+        width: inherit;
+        background-color: #{colours.get-static('raw-colour-pure-white')};
+        background-color: var(--raw-colour-pure-white);
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
+        box-shadow: #{colours.get-static('raw-colour-pure-black')} 0 0 3px 0;
+        box-shadow: var(--raw-colour-pure-black) 0 0 3px 0;
+        outline: 1px solid #{colours.get-static('colour-text-dark')};
+        outline: 1px solid var(--colour-text-dark);
+        cursor: pointer;
+        z-index: 1;
+
+        div {
+            padding: 10px;
+
+            &.selected {
+                color: #{colours.get-static('colour-text-dark')};
+                color: var(--colour-text-dark);
+                font-weight: 500;
+            }
+
+            &:hover {
+                background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+                background-color: var(--colour-bg-standard-tint-2);
+                color: #{colours.get-static('colour-text-dark')};
+                color: var(--colour-text-dark);
+            }
+
+            &:focus {
+                background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+                background-color: var(--colour-bg-standard-tint-2);
+                color: #{colours.get-static('colour-text-dark')};
+                color: var(--colour-text-dark);
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .optionSelect {
+            font-size: 14px;
+        }
+    }
+}

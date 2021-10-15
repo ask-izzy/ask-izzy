@@ -1,0 +1,48 @@
+@use '../../styles/mixins/colours';
+
+.ScrollToTop {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+
+    .button {
+        position: fixed;
+        bottom: -1em;
+        margin-right: 20px;
+        border: 0;
+        background-color: #{colours.get-static('colour-brand-primary-mid')};
+        background-color: var(--colour-brand-primary-mid);
+        color: #{colours.get-static('raw-colour-warm-white')};
+        color: var(--raw-colour-warm-white);
+        padding: 7px;
+        text-align: center;
+        border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 0 12px 0 #{colours.get-static('app-bar-shadow')};
+        box-shadow: 0 0 12px 0 var(--app-bar-shadow);
+        opacity: 0;
+        transition: opacity 150ms ease, bottom 200ms ease;
+
+        .SvgIcon {
+            transform: rotate(-90deg);
+            width: 3em;
+            height: 2em;
+
+            path {
+                fill: #{colours.get-static('raw-colour-warm-white')};
+                fill: var(--raw-colour-warm-white);
+                stroke: #{colours.get-static('raw-colour-warm-white')};
+                stroke: var(--raw-colour-warm-white);
+                stroke-width: 4px;
+            }
+        }
+
+        &.showToTop {
+            opacity: 1;
+            bottom: 2%;
+            transition: opacity 150ms ease, bottom 200ms ease;
+        }
+    }
+}

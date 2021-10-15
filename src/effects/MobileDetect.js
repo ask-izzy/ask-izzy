@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 
 const MOBILE_BREAKPOINT = 768;
 
-export function MobileDetect(): boolean {
+export function MobileDetect(breakpointOverride: ?number): boolean {
     const [width, setWidth] = useState(0);
     useEffect(() => {
         function handleResize() {
@@ -15,6 +15,6 @@ export function MobileDetect(): boolean {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    return width <= MOBILE_BREAKPOINT;
+    return width <= (breakpointOverride || MOBILE_BREAKPOINT);
 }
 

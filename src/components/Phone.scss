@@ -5,16 +5,16 @@
     .ContactButton {
         max-width: 320px;
         margin-bottom: 5px;
-        border: 1px solid #{colours.get-static('colour-button-standard')};
-        border: 1px solid var(--colour-button-standard);
+        border: 1px solid #{colours.get-static('colour-button-primary')};
+        border: 1px solid var(--colour-button-primary);
 
         @media print {
             border: 0;
         }
 
         border-radius: 3px;
-        color: #{colours.get-static('colour-button-standard')};
-        color: var(--colour-button-standard);
+        color: #{colours.get-static('colour-button-primary')};
+        color: var(--colour-button-primary);
         font-size: 18px;
         text-align: center;
         text-decoration: none;
@@ -27,8 +27,8 @@
             margin-left: -110px;
 
             path {
-                fill: #{colours.get-static('colour-button-standard')};
-                fill: var(--colour-button-standard);
+                fill: #{colours.get-static('colour-button-primary')};
+                fill: var(--colour-button-primary);
 
                 @media print {
                     fill: #{colours.get-static('raw-colour-pure-black')};

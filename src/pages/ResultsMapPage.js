@@ -15,7 +15,9 @@ import icons from "../icons";
 
 import type { Service, Site } from "../iss";
 import ScreenReader from "../components/ScreenReader";
-import ResultsPageGeolocationButton from "./ResultsPageGeolocationButton";
+import GeolocationButtonForTravelTimes from
+    "../components/GeolocationButtonForTravelTimes";
+import Storage from "../storage";
 
 type State = {
     selectedSite: ?Site,
@@ -156,20 +158,15 @@ class ResultsMapPage extends ResultsPage<{}, State> {
                         selectedSite={this.state.selectedSite}
                     />
                 </div>
-                <ResultsPageGeolocationButton
-                    fetchedLocation={this.state.fetchedLocation}
+                <GeolocationButtonForTravelTimes
+                    fetchedLocation={!!Storage.getCoordinates()}
                     onGeoLocationSuccess={
                         this.onGeoLocationSuccess.bind(this)
                     }
                     showMessage={false}
-                    onfetchNewLocation={() => {
-                        this.setState({
-                            fetchedLocation: false,
-                        })
-                    }}
                 />
                 <ResultsList
-                    reFetchTravelTimes={!!(this.state?.fetchedLocation &&
+                    reFetchTravelTimes={!!(!!Storage.getCoordinates() &&
                     this.state.selectedSite)}
                     results={this.selectedServices}
                 />

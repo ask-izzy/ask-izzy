@@ -10,23 +10,35 @@ import {
     nonCrisisResults,
 } from "../iss";
 
-import type { Service } from "../iss";
+import type {Service} from "../iss";
+import {sortResults} from "./ResultsListPage/SortResult.service";
 import {useEffect, useState} from "react";
+import Controls from "./ResultsListPage/Controls";
 
 type Props = {
     results: Array<Service>,
-    reFetchTravelTimes?: boolean,
+    showControl?: boolean,
+    fetchedLocation?: boolean,
 }
 
-function ResultsList({ results, reFetchTravelTimes = false}: Props): ReactNode {
+function ResultsList(
+    {
+        results,
+        showControl = false,
+        fetchedLocation = false,
+    }: Props): ReactNode {
 
     const [crisisResultList, setCrisisResultList] = useState([])
+    const [sortOption, setSortOption] = useState(null)
     const [nonCrisisResultList, setNonCrisisResultList] = useState([])
 
     useEffect(() => {
         setCrisisResultList(crisisResults(results))
-        setNonCrisisResultList(nonCrisisResults(results))
-    }, [results])
+        const res = nonCrisisResults(results)
+        setNonCrisisResultList(
+            sortOption?.value ? sortResults(res, sortOption) : res
+        );
+    }, [results, sortOption])
 
 
     return (
@@ -48,13 +60,20 @@ function ResultsList({ results, reFetchTravelTimes = false}: Props): ReactNode {
                     />
                 </div>
             ))}
+            {results.length > 0 && showControl &&
+                <Controls
+                    orderByCallback={(option) => {
+                        setSortOption(option)
+                    }}
+                />
+            }
             {nonCrisisResultList.map((result, index) => (
                 <div
                     key={`regular-${index}`}
                     className="resultContainer resultContainer-ResultListItem"
                 >
                     <ResultListItem
-                        reFetchTravelTimes={reFetchTravelTimes}
+                        reFetchTravelTimes={fetchedLocation}
                         service={result}
                         resultNumber={index + 1}
                     />

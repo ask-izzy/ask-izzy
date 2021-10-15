@@ -11,24 +11,27 @@ import ResultsList from "../components/ResultsList";
 import LoadingResultsHeader from
     "../components/ResultsListPage/LoadingResultsHeader";
 import AlertBannerList from "../components/AlertBannerList";
-import ViewOnMapButton from "../components/ViewOnMapButton";
 import icons from "../icons";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 import ButtonListItem from "../components/ButtonListItem";
 import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "./QuestionStepper";
-import storage from "../storage";
 
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
-import ResultsPageGeolocationButton from "./ResultsPageGeolocationButton";
 import IssParamsOverrideControls from
     "../components/debug/IssParamsOverrideControls";
+import ScrollToTop from "../components/ResultsListPage/ScrollToTop";
+import Storage from "../storage";
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
         if (this.state.searchType) {
-            return this.renderPage()
+            return (
+                <div>
+                    {this.renderPage()}
+                </div>
+            )
         }
 
         return <NotFoundStaticPage/>
@@ -58,13 +61,13 @@ class ResultsListPage extends ResultsPage<> {
                 </DebugContainer>
                 <DebugContainer
                     message="ISS Parameters"
-                    initiallyExpanded={!!storage.getJSON("issParamsOverride")}
+                    initiallyExpanded={!!Storage.getJSON("issParamsOverride")}
                 >
-                    {storage.getJSON("issParamsOverride") ?
+                    {Storage.getJSON("issParamsOverride") ?
                         <IssParamsOverrideControls
                             originalIssParams={this.issParams() || {}}
                             issParamsOverride={
-                                storage.getJSON("issParamsOverride")
+                                Storage.getJSON("issParamsOverride")
                             }
                             setIssParamsOverride={
                                 this.setIssParamsOverride.bind(this)
@@ -121,32 +124,17 @@ class ResultsListPage extends ResultsPage<> {
                     </span>
                 </ScreenReader>
                 <div className="List results">
-                    {this.hasSearchResults() ||
-                        <div>
-                            <ViewOnMapButton
-                                to={this.context.router.location
-                                    .pathname.replace(/\/?$/, "/map")
-                                }
-                            />
-                            <ResultsPageGeolocationButton
-                                fetchedLocation={this.state.fetchedLocation}
-                                onGeoLocationSuccess={
-                                    this.onGeoLocationSuccess.bind(this)
-                                }
-                                onfetchNewLocation={(fetchedLocationStatus) => {
-                                    this.setState({
-                                        fetchedLocation: fetchedLocationStatus,
-                                    })
-                                }}
-                            />
-                        </div>
-                    }
                     <ResultsList
-                        reFetchTravelTimes={this.state?.fetchedLocation}
+                        fetchedLocation={!!Storage.getCoordinates()}
                         results={this.state.searchResults || []}
+                        onGeoLocationSuccessCallback={
+                            this.onGeoLocationSuccess.bind(this)
+                        }
+                        showControl={true}
                     />
                     {this.renderLoadMore()}
                     {this.renderSuggestionBox()}
+                    <ScrollToTop label="To top"/>
                 </div>
             </main>
         </div>
@@ -205,9 +193,9 @@ class ResultsListPage extends ResultsPage<> {
         triggerNewSearch: boolean = true
     ): void {
         if (issParamsOverride) {
-            storage.setJSON("issParamsOverride", issParamsOverride)
+            Storage.setJSON("issParamsOverride", issParamsOverride)
         } else {
-            storage.removeItem("issParamsOverride")
+            Storage.removeItem("issParamsOverride")
         }
         if (triggerNewSearch) {
             location.reload();
