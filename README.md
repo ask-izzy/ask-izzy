@@ -1,6 +1,7 @@
 # Ask Izzy
 
 ## Dependencies
+Add text in README.
 
 If you're working on this codebase, some understanding of the following will
 help:

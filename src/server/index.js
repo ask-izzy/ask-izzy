@@ -11,6 +11,8 @@ const WEBPACK_PORT = parseInt(process.env.PORT || "") + 1 || 3001;
 
 requireVars();
 
+const newVar = 'add line to index.js';
+
 // Initialize express server
 const server: any = express();
 
