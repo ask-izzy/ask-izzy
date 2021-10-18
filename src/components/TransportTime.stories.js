@@ -11,7 +11,8 @@ export default {
     title: "Service Components/TransportTime",
     component: TransportTime,
     args: {
-        location: (new Location(fixtures.ixa.location, [
+        location: (new Location(fixtures.ixa.location): Location),
+        travelTimes: [
             {
                 mode: "DRIVING",
                 duration: {text: "22 minutes", value: 1},
@@ -30,8 +31,7 @@ export default {
                 distance: {text: "", value: 1},
                 status: "",
             },
-        ]): Location),
-
+        ],
     },
 };
 

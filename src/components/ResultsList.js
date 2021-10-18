@@ -6,78 +6,52 @@ import ResultListItem from "../components/ResultListItem";
 import CrisisLineItem from "../components/CrisisLineItem";
 import CrisisHeader from "../components/CrisisHeader";
 import {
-    crisisResults,
-    nonCrisisResults,
+    crisisResults as onlyCrisisResults,
+    nonCrisisResults as onlyNonCrisisResults,
 } from "../iss";
 
 import type {Service} from "../iss";
-import {sortResults} from "./ResultsListPage/SortResult.service";
-import {useEffect, useState} from "react";
-import Controls from "./ResultsListPage/Controls";
+import type {SortType} from "./base/Dropdown";
+import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 
 type Props = {
     results: Array<Service>,
-    showControl?: boolean,
-    fetchedLocation?: boolean,
+    travelTimesStatus: travelTimesStatus,
+    crisisResults: boolean,
+    sortBy: ?SortType
 }
 
-function ResultsList(
-    {
-        results,
-        showControl = false,
-        fetchedLocation = false,
-    }: Props): ReactNode {
+function ResultsList({
+    results,
+    travelTimesStatus,
+    crisisResults,
+    sortBy,
+}: Props): ReactNode {
+    const filteredResults = crisisResults ?
+        onlyCrisisResults(results)
+        : onlyNonCrisisResults(results, sortBy)
 
-    const [crisisResultList, setCrisisResultList] = useState([])
-    const [sortOption, setSortOption] = useState(null)
-    const [nonCrisisResultList, setNonCrisisResultList] = useState([])
+    const ListItem: typeof CrisisLineItem | typeof ResultListItem =
+        crisisResults ?
+            CrisisLineItem
+            : ResultListItem
 
-    useEffect(() => {
-        setCrisisResultList(crisisResults(results))
-        const res = nonCrisisResults(results)
-        setNonCrisisResultList(
-            sortOption?.value ? sortResults(res, sortOption) : res
-        );
-    }, [results, sortOption])
 
 
     return (
         <div className="ResultsList">
-            {
-                (crisisResultList.length > 0) &&
+            {crisisResults && filteredResults.length > 0 &&
                 <CrisisHeader
-                    plural={crisisResultList.length > 1}
+                    plural={filteredResults.length > 1}
                 />
             }
-            {crisisResultList.map((crisis, index) => (
-                <div
-                    key={`crisis-${index}`}
-                    className="resultContainer resultContainer-CrisisLineItem"
-                >
-                    <CrisisLineItem
-                        object={crisis}
-                        resultNumber={index + 1}
-                    />
-                </div>
-            ))}
-            {results.length > 0 && showControl &&
-                <Controls
-                    orderByCallback={(option) => {
-                        setSortOption(option)
-                    }}
+            {filteredResults.map((result, index) => (
+                <ListItem
+                    travelTimesStatus={travelTimesStatus}
+                    service={result}
+                    resultNumber={index + 1}
+                    key={result.id}
                 />
-            }
-            {nonCrisisResultList.map((result, index) => (
-                <div
-                    key={`regular-${index}`}
-                    className="resultContainer resultContainer-ResultListItem"
-                >
-                    <ResultListItem
-                        reFetchTravelTimes={fetchedLocation}
-                        service={result}
-                        resultNumber={index + 1}
-                    />
-                </div>
             ))}
         </div>
     );

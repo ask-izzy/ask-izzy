@@ -1,34 +1,32 @@
 /* @flow */
 
 import type {Node as ReactNode} from "React";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Geolocation, {guessSuburb} from "../geolocation";
 import icons from "../icons";
 import * as gtm from "../google-tag-manager";
-import Storage from "../storage";
+import storage from "../storage";
 import Button from "./base/Button";
 
 type GeoLocationState = "NOT_STARTED"|"RUNNING"|"COMPLETE"|"FAILED";
 
 type GeolocationButtonProps = {
     onSuccess: (result: { name: string, coords: Coordinates }) => void,
-    restartSearch: boolean,
+    onLocationCleared?: () => void,
     travelTimesCatch?: boolean,
     finishedState?: boolean,
-    showMessage?: boolean,
-    undoButton?: ReactNode
+    successMessage?: ?string,
+    showClearButton?: boolean
 }
 
-function GeolocationButton(
-    {
-        onSuccess,
-        restartSearch,
-        undoButton = null,
-        travelTimesCatch = false,
-        finishedState = false,
-        showMessage = true,
-    } :GeolocationButtonProps
-): ReactNode {
+function GeolocationButton({
+    onSuccess,
+    onLocationCleared,
+    showClearButton = false,
+    travelTimesCatch = false,
+    finishedState = false,
+    successMessage,
+}: GeolocationButtonProps): ReactNode {
 
     const [geolocation, setGeolocation] = useState<GeoLocationState>(
         "NOT_STARTED"
@@ -110,13 +108,6 @@ function GeolocationButton(
         },
     }
 
-    // Reset the geoLocation state when
-    // clearing the text box
-    useEffect(() => {
-        restartSearch && setGeolocation("NOT_STARTED")
-    }, [restartSearch])
-
-
     const locateMe = async(): Promise<Object> => {
         let location = await Geolocation();
         let name = await guessSuburb(location);
@@ -172,6 +163,20 @@ function GeolocationButton(
             });
     }
 
+    const renderClearButton = () => (
+        <button
+            className="undo"
+            onClick={() => {
+                storage.removeItem("coordinates")
+                setGeolocation("NOT_STARTED")
+                onLocationCleared?.()
+            }}
+        >
+            Clear
+        </button>
+
+    )
+
     return (
         <div className="GeoLocationButton">
             {!finishedState ? (
@@ -208,13 +213,14 @@ function GeolocationButton(
                         className="primary"
                         aria-live="geoLocate"
                     >
-                        {Storage.getCoordinates() ?
+                        {storage.getCoordinates() ?
                             <>
                                 Found your location
-                                (in {Storage.getCoordinates()?.name})
-                                {showMessage &&
-                                " – Travel times added below."}
-                                {undoButton}
+                                (in {storage.getCoordinates()?.name})
+                                {successMessage ? ` – ${successMessage}` : ""}
+                                {storage.getCoordinates() && showClearButton &&
+                                    renderClearButton()
+                                }
                             </>
                             : "Can't find your location."
                         }

@@ -1,10 +1,10 @@
 /* @flow */
 
 import type {Node as ReactNode, Element as ReactElement} from "React";
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 import icons from "../icons";
-import iss from "../iss";
+import {Service} from "../iss";
 
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
@@ -22,109 +22,26 @@ import { titleize } from "underscore.string";
 import ScreenReader from "./ScreenReader";
 import ListItem from "./ListItem";
 import Link from "./base/Link";
-import Storage from "../storage";
-import Maps, {MapsApi} from "../maps";
-import storage from "../storage";
-import Location from "../iss/Location";
+import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 
 type Props = {
-    service: iss.Service,
+    service: Service,
     resultNumber: number,
-    reFetchTravelTimes?: boolean,
+    travelTimesStatus: travelTimesStatus,
 }
 
-function ResultListItem(
-    {
-        service,
-        resultNumber,
-        reFetchTravelTimes = false,
-    }: Props): ReactNode {
-
-    // We set the location as an individual state variable because the travel
-    // times can be set on the results page not just on the location question.
-    // if a user sets their coordinates there, this needs to reflect that with
-    // the location travel times
-    const [location, setLocation] = useState<Location>(service.Location())
-    const [loading, setLoading] = useState<boolean>(false)
-
-    /**
-     * This function sets the travel times per service
-     * @param params - Accepts an object of DistanceMatrixRequest params
-     * @return {Promise<void>} - returns nothing
-     */
-    const travelTimes = async(params: Object): Promise<void> => {
-
-        // stores the new travel times
-        const transportTimes = []
-        const maps: MapsApi = await Maps();
-
-        if (!maps) {
-            return;
+function ResultListItem({
+    service,
+    resultNumber,
+    travelTimesStatus,
+}: Props): ReactNode {
+    const renderLocation = (): ?ReactElement<"span"> => {
+        if (!service.location) {
+            return null
         }
+        let suburb = service.location.suburb;
 
-        const distanceMatrixService = new maps.api
-            .DistanceMatrixService()
-
-        const getTimes = async(mode) => {
-            let rows = [];
-            await distanceMatrixService
-                .getDistanceMatrix(
-                    {
-                        unitSystem: maps.api.UnitSystem.METRIC,
-                        travelMode: mode,
-                        ...params,
-                    },
-                    (response) => (rows = response.rows),
-                )
-
-            // We only need the object that houses the distance/duration
-            const time = rows?.[0]?.elements?.[0]
-
-            if (time && time?.status === "OK") {
-                transportTimes.push({...time, mode})
-            }
-        }
-
-        if (distanceMatrixService) {
-            // The order of the modes array set the
-            // order the travel times appear in
-            const transportModes = ["WALKING", "TRANSIT", "DRIVING"];
-            for (let i = 0; i < transportModes.length; i++) {
-                await getTimes(transportModes[i])
-            }
-
-            // Because we are fetching new
-            // travel times we need to remove
-            // this service from the cache
-            // so when you view the service details
-            // it will have the new times
-            window.IzzyServiceCache.del(service.id)
-
-            // sets the new location
-            setLocation(new Location({...location}, transportTimes))
-        }
-        setLoading(false);
-    }
-
-    useEffect(() => {
-        if (reFetchTravelTimes) {
-            const coords = storage.getCoordinates();
-            const destination = service.location?.point;
-            if (coords && destination) {
-                setLoading(true);
-                travelTimes({
-                    origins: [`${coords.latitude},${coords.longitude}`],
-                    destinations: [`${destination.lat},${destination.lon}`],
-                    transitOptions: {departureTime: new Date()},
-                })
-            }
-        }
-    }, [reFetchTravelTimes])
-
-    const renderLocation = (): ReactElement<"span"> => {
-        let suburb = location.suburb;
-
-        if (location.isConfidential()) {
+        if (service.Location().isConfidential()) {
             suburb = "Confidential location";
         }
 
@@ -142,11 +59,12 @@ function ResultListItem(
     }
 
     const renderTravelTimes = (): ReactNode => {
-        if (Storage.getCoordinates()) {
+        if (service.Location() && service.travelTimes) {
             return (
                 <TransportTime
-                    location={location}
+                    location={service.Location()}
                     compact={true}
+                    travelTimes={service.travelTimes}
                 />
             )
         }
@@ -187,7 +105,7 @@ function ResultListItem(
                     object={service}
                 />
             </div>
-            {location && renderLocation()}
+            {service.location && renderLocation()}
             <OpeningTimes
                 className="opening_hours"
                 object={service.open}
@@ -206,9 +124,10 @@ function ResultListItem(
             <ScreenReader>
                 Travel times.
             </ScreenReader>
-            {location?.travelTime && renderTravelTimes()}
-            {!location?.travelTime && loading &&
-            <icons.Loading className="small"/> }
+            {!service.travelTimes && travelTimesStatus === "loading" &&
+                <icons.Loading className="small"/>
+            }
+            {service.travelTimes && renderTravelTimes()}
             <DebugServiceRecord object={service} />
             {service._explanation &&
                 <DebugContainer message="Query score">

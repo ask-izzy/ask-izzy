@@ -6,10 +6,15 @@ import Storage from "../storage";
 import GeolocationButton from "./GeolocationButton";
 import icons from "../icons";
 import {MobileDetect} from "../effects/MobileDetect";
+import useTravelTimesUpdater from "../hooks/useTravelTimesUpdater"
+import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 import Button from "./base/Button";
+import {Service} from "../iss"
 
 type Props = {
     showMessage?: boolean,
+    servicesToUpdateTravelTimes: Array<Service>,
+    onTravelTimesStatusChange: (travelTimesStatus) => void,
 }
 
 /**
@@ -17,20 +22,26 @@ type Props = {
  * to allow the user to set their location if they want travel times
  * @return {JSX.Element} - Returns the travel times catch component
  */
-function GeolocationButtonForTravelTimes(
-    {
-        showMessage = true,
-    }: Props): ReactElement<"div"> {
+function GeolocationButtonForTravelTimes({
+    servicesToUpdateTravelTimes,
+    showMessage = true,
+    onTravelTimesStatusChange,
+}: Props): ReactElement<"div"> {
 
     const [collapsed, setCollapsed] = useState(true);
-    const [foundLocation, setFoundLocation] = useState(false);
+
+    const {
+        travelTimesStatus,
+        loadTravelTimes,
+        clearTravelTimes,
+    } = useTravelTimesUpdater(servicesToUpdateTravelTimes)
 
     const isMobile = MobileDetect(556)
     const isSmallMobileDevice = MobileDetect(374)
 
     useEffect(() => {
-        Storage.getCoordinates() && setFoundLocation(true)
-    }, [Storage.getCoordinates()])
+        onTravelTimesStatusChange(travelTimesStatus)
+    }, [travelTimesStatus])
 
     const explainerMessage = () => (
         !Storage.getCoordinates() && showMessage &&
@@ -52,25 +63,16 @@ function GeolocationButtonForTravelTimes(
         <GeolocationButton
             onSuccess={(params: {coords: Coordinates, name: string}) => {
                 Storage.setCoordinates(params.coords, params.name);
-                setFoundLocation(true)
+                loadTravelTimes()
             }}
             finishedState={!!Storage.getCoordinates()}
             travelTimesCatch={true}
-            showMessage={showMessage}
-            restartSearch={
-                foundLocation
+            successMessage={showMessage ?
+                "Travel times added below."
+                : null
             }
-            undoButton={foundLocation &&
-            <button
-                className="undo"
-                onClick={() => {
-                    Storage.removeItem("coordinates")
-                    setFoundLocation(false)
-                }}
-            >
-                Clear
-            </button>
-            }
+            onLocationCleared={clearTravelTimes}
+            showClearButton={true}
         />
     )
 

@@ -16,13 +16,13 @@ import NotFoundStaticPage from "./NotFoundStaticPage"
 import ButtonListItem from "../components/ButtonListItem";
 import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "./QuestionStepper";
-
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
 import IssParamsOverrideControls from
     "../components/debug/IssParamsOverrideControls";
 import ScrollToTop from "../components/ResultsListPage/ScrollToTop";
 import Storage from "../storage";
+import Controls from "../components/ResultsListPage/Controls";
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
@@ -38,8 +38,10 @@ class ResultsListPage extends ResultsPage<> {
     }
 
     hasSearchResults(): boolean {
-        return !this.state.searchResults ||
-            this.state.searchResults.length === 0
+        return Boolean(
+            this.state.searchResults &&
+                this.state.searchResults.length > 0
+        )
     }
 
     renderPage: (() => ReactElement<"div">) = () => (
@@ -110,7 +112,7 @@ class ResultsListPage extends ResultsPage<> {
                     </div>
                 </div>
             </div>
-            {this.hasSearchResults() ||
+            {this.hasSearchResults() &&
                 <AlertBannerList
                     state={stateFromLocation()}
                     screenLocation="resultsPage"
@@ -123,22 +125,47 @@ class ResultsListPage extends ResultsPage<> {
                         Search Results.
                     </span>
                 </ScreenReader>
-                <div className="List results">
-                    <ResultsList
-                        fetchedLocation={!!Storage.getCoordinates()}
-                        results={this.state.searchResults || []}
-                        onGeoLocationSuccessCallback={
-                            this.onGeoLocationSuccess.bind(this)
-                        }
-                        showControl={true}
-                    />
-                    {this.renderLoadMore()}
-                    {this.renderSuggestionBox()}
-                    <ScrollToTop label="To top"/>
-                </div>
+                {this.renderResults()}
             </main>
         </div>
     )
+
+    renderResults(): ReactNode {
+        return (
+            <div className="List results">
+                <ResultsList
+                    results={this.state.searchResults || []}
+                    crisisResults={true}
+                    travelTimesStatus={this.state.travelTimesStatus}
+                    sortBy={undefined}
+                />
+                {this.hasSearchResults() &&
+                    <Controls
+                        onSortByChange={
+                            sortBy => this.setState({sortBy})
+                        }
+                        onTravelTimesStatusChange={
+                            travelTimesStatus => this.setState({
+                                travelTimesStatus,
+                            })
+                        }
+                        servicesToUpdateTravelTimes={
+                            this.state.searchResults || []
+                        }
+                    />
+                }
+                <ResultsList
+                    results={this.state.searchResults || []}
+                    crisisResults={false}
+                    travelTimesStatus={this.state.travelTimesStatus}
+                    sortBy={this.state.sortBy}
+                />
+                {this.renderLoadMore()}
+                {this.renderSuggestionBox()}
+                <ScrollToTop label="To top"/>
+            </div>
+        )
+    }
 
     renderSuggestionBox(): void | ReactNode {
         if (

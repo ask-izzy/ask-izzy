@@ -261,9 +261,10 @@ function ServicePane({service}: Props): ReactNode {
                                 withSpacer={true}
                             />
                             {Storage.getCoordinates() &&
-                            service.Location().travelTime &&
+                            service.travelTimes &&
                                 <TransportTime
                                     location={service.Location()}
+                                    travelTimes={service.travelTimes}
                                     withSpacer={true}
                                 />
                             }

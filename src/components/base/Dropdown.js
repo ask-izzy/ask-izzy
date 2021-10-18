@@ -3,7 +3,6 @@
 import * as React from "react";
 import type {Node as ReactNode} from "react";
 import SvgIconChevron from "../../icons/Chevron";
-import type {SortType} from "../ResultsListPage/SortResult.service";
 import {useEffect, useRef, useState} from "react";
 import {OutsideComponentClick} from "../../effects/OutsideComponentClick";
 import {MobileDetect} from "../../effects/MobileDetect";
@@ -11,6 +10,11 @@ import * as gtm from "../../google-tag-manager";
 import type {AnalyticsEvent} from "../../google-tag-manager"
 import {getScrollPosition} from "../../effects/scrollPosition";
 
+export type SortType = {
+    key: ?string,
+    value?: any,
+    name: string,
+}
 
 type Props = {
     selection: SortType,
