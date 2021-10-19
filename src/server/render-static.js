@@ -19,6 +19,7 @@ import webpackStats from "./webpack-stats";
 import categories from "../constants/categories";
 import Category from "../constants/Category";
 import Helmet from "react-helmet";
+import {fillInPathParams} from "../utils/url.service"
 
 const versionFilePath = "public/VERSION"
 const version = fs.existsSync(versionFilePath) &&
@@ -151,27 +152,6 @@ function* generateRouteParamVals(
     } else {
         yield defaultParamVals;
     }
-}
-
-/** Takes a route path and substitutes in param values
- *
- * @param {string} path - A path with colon-formatted params.
- * @param {Object} params - Params to insert into the path.
- *
- * @returns {string} - The path with params values inserted.
- */
-function fillInPathParams(path: string, params: Object) {
-    return path
-        .split("/")
-        .map(part => {
-            if (part.startsWith(":") && part.substring(1) in params) {
-                return params[part.substring(1)]
-            } else {
-                return part
-            }
-        })
-        .filter(part => typeof part !== "undefined")
-        .join("/")
 }
 
 /** Get a list of all paths we want to render pages for */

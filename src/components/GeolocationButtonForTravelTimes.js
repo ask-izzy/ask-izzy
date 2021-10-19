@@ -2,7 +2,7 @@
 
 import type {Element as ReactElement} from "react"
 import React, {useEffect, useState} from "react";
-import Storage from "../storage";
+import storage from "../storage";
 import GeolocationButton from "./GeolocationButton";
 import icons from "../icons";
 import {MobileDetect} from "../effects/MobileDetect";
@@ -61,22 +61,26 @@ function GeolocationButtonForTravelTimes({
 
     const renderGeoLocateButton = () => (
         <GeolocationButton
-            onSuccess={(params: {coords: Coordinates, name: string}) => {
-                Storage.setCoordinates(params.coords, params.name);
-                loadTravelTimes()
+            onStatusChange={(status) => {
+                if (status.type === "COMPLETE") {
+                    storage.setCoordinates(status.location);
+                    loadTravelTimes()
+                } else if (status.type === "NOT_STARTED") {
+                    storage.clearCoordinates();
+                    clearTravelTimes()
+                }
             }}
-            finishedState={!!Storage.getCoordinates()}
-            travelTimesCatch={true}
-            successMessage={showMessage ?
+            locationValue={storage.getCoordinates() || undefined}
+            showLocationInSuccessMessage={true}
+            successMessageSuffix={showMessage ?
                 "Travel times added below."
                 : null
             }
-            onLocationCleared={clearTravelTimes}
             showClearButton={true}
         />
     )
 
-    if (isMobile && !Storage.getCoordinates() && showMessage) {
+    if (isMobile && !storage.getCoordinates() && showMessage) {
         return <div className="GeolocationButtonForTravelTimes">
             <div className="collapserContainer">
                 <Button

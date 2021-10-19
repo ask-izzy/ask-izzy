@@ -37,13 +37,16 @@ export default function locate(options: ?PositionOptions): Promise<Position> {
             }, 200);
 
         } else {
-            location.get(options || {}, (err, position) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(position);
+            location.get(
+                options || {},
+                (err: PositionError, position: Position) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(position);
+                    }
                 }
-            });
+            );
         }
     });
 }

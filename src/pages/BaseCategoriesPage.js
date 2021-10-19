@@ -117,7 +117,7 @@ class BaseCategoriesPage<ChildProps = {...}, ChildState = {...}>
             if (storage.getLocation() != `${suburb}, ${state}`) {
                 // Use the location from the URL.
                 storage.setLocation(`${suburb}, ${state}`);
-                storage.setCoordinates(null);
+                storage.clearCoordinates()
             }
         }
 

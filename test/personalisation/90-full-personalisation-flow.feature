@@ -12,6 +12,7 @@ Feature: Personalisation
 
     Scenario: Search for housing with personalised results
         Given control of geolocation
+        And google api geocode will return location name Richmond, VIC
         When I click on "Housing"
         Then I should see "I'm looking for help for"
 
@@ -43,6 +44,7 @@ Feature: Personalisation
 
     Scenario: Search for emergency accommodation
         Given control of geolocation
+        And google api geocode will return location name Richmond, VIC
         When I click on "Housing"
         Then I should see "I'm looking for help for"
 
@@ -72,6 +74,7 @@ Feature: Personalisation
 
     Scenario: Do a search
         Given control of geolocation
+        And google api geocode will return location name Richmond, VIC
         When I search for "find a meal" and press enter
         Then I should see "I'm looking for help for"
 

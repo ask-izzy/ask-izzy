@@ -85,7 +85,8 @@ async function assertTransitMethodNot(method) {
  */
 async function instrumentDistanceMatrix(results) {
     await this.driver.executeScriptBeforeLoad((results) => {
-        window.googleMock = {
+        window.googleMocks = window.googleMocks || []
+        window.googleMocks.push({
             maps: {
                 DistanceMatrixService() {
                     return {
@@ -107,7 +108,7 @@ async function instrumentDistanceMatrix(results) {
                     };
                 },
             },
-        };
+        });
     }, results);
 }
 

@@ -65,6 +65,10 @@ module.exports = (function() {
         .then("I should not see \"$STRING\"", unpromisify(thenIDontSee))
         .then("search box should contain \"$STRING\"",
             unpromisify(searchContains))
+        .then("search box should contain \"\"",
+            unpromisify(function() {
+                searchContains.call(this, "")
+            }))
         .then("the button \"$STRING\" should be disabled",
             unpromisify(checkDisabled))
         .then("the button \"$STRING\" should be enabled",
@@ -397,6 +401,9 @@ async function newBrowser(): Promise<void> {
             }.`
         );
     }
+
+    // Clear list of script ids for script that were queue to run on page load
+    this.driver.scriptIdsOfScriptsRunBeforeLoad.length = 0
 
     await new TargetLocator(this.driver)
         .window(newHandles[0]);

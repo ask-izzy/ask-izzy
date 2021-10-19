@@ -71,7 +71,7 @@ export default async function webDriverInstance(
         Webdriver.logging.Level.ALL
     );
 
-    const driver = new Webdriver.Builder()
+    const driver = await new Webdriver.Builder()
         /**
          * Default to using headless chrome if `SELENIUM_BROWSER` not provided.
          * */
@@ -99,40 +99,49 @@ export default async function webDriverInstance(
         .manage()
         .setTimeouts({ implicit: 10000 });
 
-    driver.then(driver => {
-        // This command is in an unreleased version of "selenium-webdriver"
-        // (at the time of writing). After the next release this code can be
-        // updated to use the command from the library directly.
-        driver.getExecutor().defineCommand(
-            "sendAndGetDevToolsCommand",
-            "POST",
-            "/session/:sessionId/chromium/send_command_and_get_result"
-        );
+    await driver
 
-        driver.executeScriptBeforeLoad = async(script, ...args) => {
-            if (typeof script === "function") {
-                script = `(${script}).apply(null, ${JSON.stringify(args)});`
-            }
-            return driver.getExecutor().execute(
-                new command.Command("sendAndGetDevToolsCommand")
-                    .setParameter(
-                        "cmd",
-                        "Page.addScriptToEvaluateOnNewDocument"
-                    )
-                    .setParameter("params", {"source": script})
-                    .setParameter("sessionId",
-                        (await driver.getSession()).getId()
-                    )
-            )
+    // This command is in an unreleased version of "selenium-webdriver"
+    // (at the time of writing). After the next release this code can be
+    // updated to use the command from the library directly.
+    driver.getExecutor().defineCommand(
+        "sendAndGetDevToolsCommand",
+        "POST",
+        "/session/:sessionId/chromium/send_command_and_get_result"
+    );
+
+    driver.scriptIdsOfScriptsRunBeforeLoad = []
+
+    driver.executeScriptBeforeLoad = async(script, ...args) => {
+        if (typeof script === "function") {
+            script = `(${script}).apply(null, ${JSON.stringify(args)});`
         }
-        driver.removeScriptBeforeLoad = async scriptId =>
-            driver.sendDevToolsCommand(
-                "Page.removeScriptToEvaluateOnNewDocument",
-                {"identifier": scriptId}
-            )
+        const scriptId = await driver.getExecutor().execute(
+            new command.Command("sendAndGetDevToolsCommand")
+                .setParameter(
+                    "cmd",
+                    "Page.addScriptToEvaluateOnNewDocument"
+                )
+                .setParameter("params", {"source": script})
+                .setParameter("sessionId",
+                    (await driver.getSession()).getId()
+                )
+        )
+        driver.scriptIdsOfScriptsRunBeforeLoad.push(scriptId)
+        return scriptId
+    }
+    driver.removeScriptBeforeLoad = async scriptId =>
+        driver.sendDevToolsCommand(
+            "Page.removeScriptToEvaluateOnNewDocument",
+            scriptId
+        )
 
-        return driver
-    })
+    driver.removeAllScriptsBeforeLoad = async() => {
+        while (driver.scriptIdsOfScriptsRunBeforeLoad.length) {
+            const scriptId = driver.scriptIdsOfScriptsRunBeforeLoad.pop();
+            await driver.removeScriptBeforeLoad(scriptId)
+        }
+    }
 
     return driver;
 }
@@ -166,9 +175,11 @@ export async function cleanDriverSession(
 ): Promise<void> {
     await driver.executeScript(() => console.log("Clearing browsing session"))
     await waitForStorage(driver);
+    await driver.removeAllScriptsBeforeLoad()
     await driver.executeScript(() => {
         IzzyStorage.clear();
         window.dataLayer = [];
+        delete window.googleMocks
     });
 }
 

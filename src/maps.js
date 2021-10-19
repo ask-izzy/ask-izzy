@@ -1,13 +1,10 @@
 /* @flow */
-
-declare var google: Google;
+import merge from "deepmerge";
 
 import storage from "./storage";
 import _ from "underscore";
 import checkInactive from "./inactiveTimeout";
 import {Loader} from "@googlemaps/js-api-loader";
-
-import { Merge } from "../fixtures/factories/Value.js";
 
 export class MapsApi {
     api: GoogleMaps;
@@ -161,9 +158,14 @@ function maps(): Promise<MapsApi> {
             apiKey: window.GOOGLE_API_KEY,
             libraries: ["places"],
         });
-        mapsAPIPromise = api.load().then(() => {
-            if (window?.googleMock) {
-                Merge(google, window.googleMock)
+        mapsAPIPromise = api.load().then(google => {
+            if (window?.googleMocks) {
+                for (const googleMock of window.googleMocks) {
+                    // We need to make sure we're not modifying the original
+                    // google api object otherwise it our changes won't be reset
+                    // between test scenarios
+                    google = merge(google, googleMock)
+                }
             }
             return new MapsApi(google.maps);
         })

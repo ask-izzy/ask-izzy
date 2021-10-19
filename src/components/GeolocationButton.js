@@ -1,68 +1,157 @@
 /* @flow */
 
 import type {Node as ReactNode} from "React";
-import React, {useState} from "react";
-import Geolocation, {guessSuburb} from "../geolocation";
+import React, {useState, useEffect} from "react";
+import getPosition, {guessSuburb} from "../geolocation";
 import icons from "../icons";
 import * as gtm from "../google-tag-manager";
-import storage from "../storage";
+import type {Geolocation} from "../storage";
 import Button from "./base/Button";
 
-type GeoLocationState = "NOT_STARTED"|"RUNNING"|"COMPLETE"|"FAILED";
+export type GeolocationStatus = {|
+    type: "COMPLETE",
+    location: Geolocation
+|} | {|
+    type: "FAILED",
+    error: Error
+|} | {|
+    type: "NOT_STARTED" | "RUNNING"
+|}
 
-type GeolocationButtonProps = {
-    onSuccess: (result: { name: string, coords: Coordinates }) => void,
-    onLocationCleared?: () => void,
-    travelTimesCatch?: boolean,
-    finishedState?: boolean,
-    successMessage?: ?string,
+type GeolocationButtonProps = {|
+    onStatusChange?: (GeolocationStatus) => void,
+    locationValue?: Geolocation,
+    showLocationInSuccessMessage?: boolean,
+    successMessageSuffix?: ?string,
     showClearButton?: boolean
-}
+|}
 
 function GeolocationButton({
-    onSuccess,
-    onLocationCleared,
+    onStatusChange,
+    locationValue,
+    showLocationInSuccessMessage = false,
+    successMessageSuffix,
     showClearButton = false,
-    travelTimesCatch = false,
-    finishedState = false,
-    successMessage,
 }: GeolocationButtonProps): ReactNode {
+    const [status, directSetStatus] =
+        useState<GeolocationStatus>({type: "NOT_STARTED"})
+    function setStatus(newStatus: GeolocationStatus) {
+        directSetStatus(newStatus)
+        onStatusChange?.(newStatus)
+    }
 
-    const [geolocation, setGeolocation] = useState<GeoLocationState>(
-        "NOT_STARTED"
+    // Check for stored location after mount so as not to cause a
+    // hydration mismatch
+    useEffect(() => {
+        if (locationValue && status.type !== "COMPLETE") {
+            setStatus({
+                type: "COMPLETE",
+                location: locationValue,
+            })
+        } else if (!locationValue && status.type === "COMPLETE") {
+            setStatus({
+                type: "NOT_STARTED",
+            })
+        }
+    }, [locationValue])
+
+    // Several aria attributes require the use of an id to reference elements
+    // but there can't be multiple elements on a page using the same id. So
+    // in case this component is used in multiple location on a page we generate
+    // a unique id to use for each instance.
+    let [uniqueMessageElementID] = useState<string>(
+        "statusMessage_" + Math.random()
     )
-    const [error, setErrorMessage] = useState<?string>(null)
 
-    const GEO_LOCATION_STATE_TEXT = {
-        NOT_STARTED: {
-            text: () => (
-                <>
+    async function getUsersLocation(): Promise<Geolocation> {
+        const gpsLocation = await getPosition();
+        const name = await guessSuburb(gpsLocation);
+        const location = {
+            name,
+            latitude: gpsLocation.coords.latitude,
+            longitude: gpsLocation.coords.longitude,
+        }
+
+        return location;
+    }
+
+    async function onGeolocationClick(): Promise<void> {
+        if (status.type !== "NOT_STARTED") {
+            return;
+        }
+
+        setStatus({type: "RUNNING"})
+
+        let location: Geolocation
+
+        try {
+            location = await getUsersLocation()
+        } catch (error) {
+            const newGeolocationStatus = {
+                type: "FAILED",
+                error,
+            }
+            setStatus(newGeolocationStatus)
+            console.error(error);
+            return
+        }
+
+        const newGeolocationStatus = {
+            type: "COMPLETE",
+            location,
+        }
+        setStatus(newGeolocationStatus)
+        gtm.emit({
+            event: "Action Triggered - Geolocate",
+            eventCat: "Action Triggered",
+            eventAction: "Find my location",
+            eventLabel: null,
+            sendDirectlyToGA: true,
+        })
+    }
+
+    const renderClearButton = () => (
+        <Button
+            className="undo"
+            onClick={() => {
+                const newGeolocationStatus = {type: "NOT_STARTED"}
+                setStatus(newGeolocationStatus)
+            }}
+        >
+            Clear
+        </Button>
+    )
+
+    const Container = (props) => {
+        if (status.type === "NOT_STARTED") {
+            return (
+                <Button
+                    {...props}
+                    className="LocationButton"
+                    aria-controls={uniqueMessageElementID}
+                    onClick={onGeolocationClick}
+                />
+            )
+        } else {
+            return (
+                <div {...props} />
+            )
+        }
+    }
+
+    function renderLabel() {
+        switch (status.type) {
+        case "NOT_STARTED":
+            return <>
                     <icons.Location/>
-                    <span
-                        className="primary"
-                        aria-live="geoLocate"
-                    >
+                    <span className="primary">
                         Get your current location
                     </span>
                 </>
-            ),
-            "aria-label": "Set your current location to get " +
-             "estimated travel times.",
-            analyticsEvent: {
-                event: "Action Triggered - Geolocate",
-                eventAction: "Find my location",
-                eventLabel: null,
-            },
-        },
-        RUNNING: {
-            "aria-label": "Fetching your location.",
-            text: () => (
-                <>
+        case "RUNNING":
+            return <>
                     <icons.Loading />
-                    <div
-                        className="multiLine"
-                        aria-live="geoLocate"
-                    >
+                    <div className="multiLine">
                         <span className="primary">
                             Locating you...
                         </span>
@@ -71,166 +160,47 @@ function GeolocationButton({
                         </span>
                     </div>
                 </>
-            ),
-        },
-        COMPLETE: {
-            "aria-label": "Found your location",
-            text: () => (
-                <>
+        case "COMPLETE":
+            return <>
                     <icons.Tick />
-                    <span
-                        className="primary"
-                        aria-live="geoLocate"
-                    >
+                    <span className="primary">
                         Found your location
+                        {showLocationInSuccessMessage && status.location &&
+                            ` (in ${status.location.name})`
+                        }
+                        {successMessageSuffix && ` – ${successMessageSuffix}`}
+                        {showClearButton && renderClearButton()}
                     </span>
-                </>
-            ),
-        },
-        FAILED: {
-            "aria-label": "Unable to get your location.",
-            text: () => (
-                <>
+                </>;
+        case "FAILED":
+            return <>
                     <icons.Cross />
-                     <div
-                         className="multiLine"
-                         aria-live="geoLocate"
-                     >
-                         <span className="primary">
+                    <div className="multiLine">
+                        <span className="primary">
                             Unable to get your location
-                         </span>
-                         <span className="secondary">
-                             {error}
-                         </span>
-                     </div>
+                        </span>
+                        <span className="secondary">
+                            {status.error?.message}
+                        </span>
+                    </div>
                 </>
-            ),
-        },
-    }
-
-    const locateMe = async(): Promise<Object> => {
-        let location = await Geolocation();
-        let name = await guessSuburb(location);
-
-        return {name, coords: location.coords};
-    }
-
-    const onGeolocationClick = (): void => {
-        if (geolocation !== "NOT_STARTED") {
-            return;
+        default:
+            return null
         }
-
-        setGeolocation("RUNNING")
-
-        // If the Geo-locate button is clicked on the results page
-        // send a specific event to GA
-        if (travelTimesCatch) {
-            gtm.emit({
-                event: "Results page - Geolocation Requested",
-                eventCat: "Button Clicked",
-                eventAction: "Results page -Geolocation Request",
-                eventLabel: location.pathname,
-                sendDirectlyToGA: true,
-            });
-        } else {
-            gtm.emit({
-                event: "Geolocation Requested",
-                eventCat: "Button Clicked",
-                eventAction: "Geolocation Request",
-                eventLabel: location.pathname,
-                sendDirectlyToGA: true,
-            });
-        }
-
-        locateMe()
-            .then((params) => {
-                setGeolocation("COMPLETE")
-                gtm.emit({event: "geolocation-success"});
-
-                onSuccess(params);
-            })
-            .catch(error => {
-                gtm.emit({
-                    event: "Geolocation Request Failed",
-                    eventCat: "Error Occurred",
-                    eventAction: "Geolocation",
-                    eventLabel: location.pathname,
-                    sendDirectlyToGA: true,
-                });
-                console.error(error);
-                setGeolocation("FAILED")
-                setErrorMessage(error.message)
-            });
     }
-
-    const renderClearButton = () => (
-        <button
-            className="undo"
-            onClick={() => {
-                storage.removeItem("coordinates")
-                setGeolocation("NOT_STARTED")
-                onLocationCleared?.()
-            }}
-        >
-            Clear
-        </button>
-
-    )
 
     return (
         <div className="GeoLocationButton">
-            {!finishedState ? (
-                geolocation === "COMPLETE" ? (
-                    <div className="complete">
-                        <div className="buttonLabel">
-                            {GEO_LOCATION_STATE_TEXT[geolocation].text()}
-                        </div>
-                    </div>
-                )
-                    : (
-                        <Button
-                            className="LocationButton"
-                            aria-controls="geoLocate"
-                            onClick={
-                                geolocation === "NOT_STARTED" ?
-                                    onGeolocationClick : () => null
-                            }
-                            aria-label={GEO_LOCATION_STATE_TEXT[
-                                geolocation]?.["aria-label"] ||
-                                "Fetch your location"
-                            }
-                        >
-                            <div className="buttonLabel">
-                                {GEO_LOCATION_STATE_TEXT[geolocation]
-                                    .text()}
-                            </div>
-                        </Button>
-                    )
-            ) : (
-                <>
-                    <icons.Tick className="big" />
-                    <span
-                        className="primary"
-                        aria-live="geoLocate"
-                    >
-                        {storage.getCoordinates() ?
-                            <>
-                                Found your location
-                                (in {storage.getCoordinates()?.name})
-                                {successMessage ? ` – ${successMessage}` : ""}
-                                {storage.getCoordinates() && showClearButton &&
-                                    renderClearButton()
-                                }
-                            </>
-                            : "Can't find your location."
-                        }
-                    </span>
-                </>
-            )}
+            <Container>
+                <div
+                    className="label"
+                    id={uniqueMessageElementID}
+                >
+                    {renderLabel()}
+                </div>
+            </Container>
         </div>
     )
-
-
 }
 
 export default GeolocationButton;

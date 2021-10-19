@@ -3,7 +3,6 @@ import type { ElementConfig as ReactElementConfig } from "react"
 
 import * as React from "react";
 import { debounce } from "lodash-decorators";
-import { ltrim } from "underscore.string";
 import _ from "underscore";
 
 import {geolocationAvailable} from "../../geolocation";
@@ -11,6 +10,7 @@ import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
+import type {Geolocation} from "../../storage";
 import * as iss from "../../iss";
 import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
@@ -21,6 +21,7 @@ import ScreenReader from "../../components/ScreenReader";
 import AppBar from "../../components/AppBar";
 import FlatButton from "../../components/FlatButton";
 import GeolocationButton from "../../components/GeolocationButton";
+import type {GeolocationStatus} from "../../components/GeolocationButton";
 type AppBarProps = React.ElementProps<typeof AppBar>
 
 type Props = {
@@ -33,15 +34,16 @@ type Props = {
         },
 }
 
+type location = {|name: string|} | Geolocation
+
 type State = {
-        autocompletionInProgress: boolean,
-        locationName: string,
-        autocompletions: Array<issArea>,
-        nextDisabled: boolean,
-        showStepper: boolean,
-        fetchNewLocation: boolean,
-        foundLocation: boolean,
-        category: ?Category,
+    autocompletionInProgress: boolean,
+    locationNameInput: string,
+    selectedLocation: ?location,
+    autocompletions: Array<issArea>,
+    nextDisabled: boolean,
+    showStepper: boolean,
+    category: ?Category,
 }
 
 class Location extends Personalisation<Props, State> {
@@ -55,21 +57,31 @@ class Location extends Personalisation<Props, State> {
         super(props);
         this.state = {
             autocompletionInProgress: false,
-            locationName: "",
+            locationNameInput: "",
+            selectedLocation: null,
             autocompletions: [],
             nextDisabled: true,
-            fetchNewLocation: false,
             showStepper: false,
             category: undefined,
-            foundLocation: false,
         };
     }
 
     componentDidMount(): void {
-        this.setLocationName(
-            storage.getLocation(),
-            storage.getLocation() != "" // valid location
-        );
+        const userLocation = storage.getCoordinates()
+        const searchLocation = storage.getLocation()
+
+        let location: location
+        if (userLocation) {
+            if (!searchLocation || searchLocation === userLocation.name) {
+                location = userLocation
+            }
+        } else if (searchLocation) {
+            location = {name: searchLocation}
+        }
+
+        if (location) {
+            this.setSelectedLocation(location)
+        }
         const category = getCategory(
             this.context.router.match.params.page
         )
@@ -104,23 +116,20 @@ class Location extends Personalisation<Props, State> {
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
-        /* Coordinates are optional */
-        let coords = storage.getCoordinates();
-
-        if (coords && coords.latitude && coords.longitude) {
-            request = Object.assign(request, {
-                location: `${coords.longitude}E${coords.latitude}N`,
-            });
-        }
-
         /* Location/Area is required */
-        let location = storage.getLocation();
-
-        if (!location) {
+        const searchArea = storage.getLocation();
+        if (!searchArea) {
             return null;
         }
+        request = Object.assign(request, {area: searchArea});
 
-        request = Object.assign(request, {area: location});
+        /* Coordinates are optional */
+        const userLocation = storage.getCoordinates();
+        if (userLocation && userLocation.name === searchArea) {
+            request = Object.assign(request, {
+                location: `${userLocation.longitude}E${userLocation.latitude}N`,
+            });
+        }
 
         return request;
     }
@@ -154,38 +163,74 @@ class Location extends Personalisation<Props, State> {
      * Trigger an autocomplete after a 500ms debounce.
      */
     /*::__(){`*/@debounce(500)/*::`}*/
-    triggerAutocomplete(): void {
-        let input = this.state.locationName;
+    async triggerAutocomplete(): Promise<void> {
+        let input = this.state.locationNameInput;
 
-        iss.getLocations(input)
-            .then(results => {
+        if (input.length < 1) {
+            this.setState({
+                autocompletions: [],
+            });
+        } else {
+            try {
+                const results = await iss.getLocations(input)
+                // Check to make sure input hasn't change in the meantime
+                if (input !== this.state.locationNameInput) {
+                    return
+                }
                 this.setState({
                     autocompletions: _.uniq(
                         Array.from(results.objects),
                         false,
                         ({name, state}) => name + state
                     ),
-                    autocompletionInProgress: false,
-                    fetchNewLocation: false,
                 });
-            })
-
-            .catch(() => {
-                this.setState({
-                    autocompletionInProgress: false,
-                });
-            });
+            } catch (error) {
+                console.error(
+                    "Error trying to get location autocomplete",
+                    error
+                )
+            }
+        }
+        this.setState({
+            autocompletionInProgress: false,
+        });
     }
 
-    setLocationName(name: any, validChoice: boolean): void {
+    setSelectedLocation(location: location): void {
         this.setState({
-            locationName: `${name || ""}`,
-            nextDisabled: !(name && validChoice),
+            selectedLocation: location,
+            locationNameInput: location.name,
+            nextDisabled: false,
+            autocompletions: [],
+        });
+    }
+
+    clearSelectedLocation(): void {
+        this.setState({
+            selectedLocation: null,
+            nextDisabled: true,
+        });
+    }
+    clearLocationInput(): void {
+        this.setState({
+            locationNameInput: "",
+            autocompletions: [],
         });
     }
 
     onNextStep(): void {
-        storage.setLocation(this.state.locationName || "");
+        if (this.state.selectedLocation) {
+            storage.setLocation(this.state.selectedLocation.name);
+            if (isGeolocation(this.state.selectedLocation)) {
+                storage.setCoordinates(this.state.selectedLocation);
+            } else {
+                storage.clearCoordinates()
+            }
+        } else {
+            console.error(
+                "We should not be able to progress without selecting a location"
+            )
+        }
     }
 
     componentDidUpdate(prevProps: Object, prevState: Object): void {
@@ -207,37 +252,33 @@ class Location extends Personalisation<Props, State> {
 
     onSearchChange(event: Event): void {
         if (event.target instanceof HTMLInputElement) {
-            this.setLocationName(ltrim(event.target.value), false);
             this.setState({
+                locationNameInput: event.target.value.replace(/^\s+/, ""),
                 autocompletionInProgress: true,
-                fetchNewLocation: true,
             });
 
-            // Forget the users coordinates if they change
-            // the location we detected
-            storage.removeItem("coordinates");
+            this.clearSelectedLocation();
 
             this.triggerAutocomplete();
         }
     }
 
-    onGeoLocationSuccess(params: {coords: Coordinates, name: string}): void {
-        storage.setCoordinates(params.coords, params.name);
-        this.setState({
-            foundLocation: true,
-            fetchNewLocation: false,
-            autocompletions: [],
-        })
-        this.setLocationName(params.name, true);
+    onGeolocationStatusChange(status: GeolocationStatus): void {
+        if (
+            status.type === "COMPLETE" &&
+            status.location
+        ) {
+            this.setSelectedLocation(status.location);
+        }
     }
 
     selectAutocomplete(result: issArea): void {
         /* set the text box to this value
          * and remove the autocompletions */
-        let locationName =
-            `${result.name}, ${result.state}`;
-
-        this.setLocationName(locationName, true);
+        const location: location = {
+            name: `${result.name}, ${result.state}`,
+        };
+        this.setSelectedLocation(location);
         this.setState({
             autocompletions: [],
         });
@@ -307,25 +348,19 @@ class Location extends Personalisation<Props, State> {
                                  or postcode"
                                 placeholder="Search for a suburb
                                  or postcode"
-                                value={this.state.locationName}
+                                value={this.state.locationNameInput}
                                 onChange={this.onSearchChange.bind(this)}
                             />
                             {
-                                this.state.locationName &&
+                                this.state.locationNameInput &&
                                 <FlatButton
                                     className="clear-text"
                                     label="&times;"
                                     aria-label="Clear entered location"
                                     prompt="Clear"
                                     onClick={() => {
-                                        this.setState(
-                                            {
-                                                locationName: "",
-                                                fetchNewLocation: true,
-                                                foundLocation: false,
-                                                autocompletions: [],
-                                            }
-                                        )
+                                        this.clearSelectedLocation()
+                                        this.clearLocationInput()
                                     }}
                                 />
                             }
@@ -376,24 +411,22 @@ class Location extends Personalisation<Props, State> {
                         }
                     </fieldset>
                     <div className="GeoLocationButtonContainer">
-                        {
-                            /* if the browser supports geolocation */
-                            geolocationAvailable() &&
-                                <>
-                                {
-                                    !this.state.foundLocation &&
-                                    <span className="or">Or</span>
+                        {geolocationAvailable() && <>
+                            {isGeolocation(this.state.selectedLocation) ||
+                                <span className="or">Or</span>
+                            }
+                            <GeolocationButton
+                                onStatusChange={
+                                    this.onGeolocationStatusChange
+                                        .bind(this)
                                 }
-                                    <GeolocationButton
-                                        restartSearch={
-                                            this.state.fetchNewLocation
-                                        }
-                                        onSuccess={
-                                            this.onGeoLocationSuccess.bind(this)
-                                        }
-                                    />
-                                </>
-                        }
+                                locationValue={
+                                    isGeolocation(this.state.selectedLocation) ?
+                                        this.state.selectedLocation
+                                        : undefined
+                                }
+                            />
+                        </>}
                     </div>
                     <h3 className="explainer">
                         <span className="explainerIcons">
@@ -419,16 +452,20 @@ class Location extends Personalisation<Props, State> {
                         label="Done"
                         className="doneButton"
                         onClick={this.onDoneTouchTap.bind(this)}
-                        disabled={
-                            this.state.nextDisabled ||
-                            !this.state.locationName
-                        }
+                        disabled={this.state.nextDisabled}
                         form="searchBar"
                     />
                 </div>
             </div>
         )
     }
+}
+
+// Flow doesn't support the use of "%checks" in class methods so we have to
+// move this function out of the class
+// https://github.com/facebook/flow/issues/7920
+function isGeolocation(location: ?location): boolean %checks {
+    return !!(location && location.longitude && location.latitude)
 }
 
 export default Location;

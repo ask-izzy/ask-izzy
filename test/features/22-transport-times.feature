@@ -12,7 +12,7 @@ Feature: Transport times
         And I am not part of any relevant demographics
 
     Scenario: Show transport times
-        Given my location is 37.822S 144.99E
+        Given my location is 37.822S 144.99E in "Richmond, VIC"
         and A service with:
         ----------------------------------------------
         name: "Transportable"
@@ -75,14 +75,13 @@ Feature: Transport times
           distance:
               value: 1000
         ----------------------------------------------
+        And google api geocode will return location name Richmond, VIC
+        And my mocked location is 37.822S 144.99E
+
         When I search for the service
         Then I should not see transport times
 
-        Given control of geolocation
         When I click on "Get your current location"
-        Given my mocked location is 37.822S 144.99E
-
-        When I take a screenshot
         Then I should see "Found your location (in Richmond, VIC) – Travel times added below.Clear"
         And I should see a transport time of
         ------------------------------------------
