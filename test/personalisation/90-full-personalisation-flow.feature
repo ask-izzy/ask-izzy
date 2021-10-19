@@ -19,7 +19,7 @@ Feature: Personalisation
 
         When I click on "Get your current location"
 
-        Given I'm at 37.823S 144.998E
+        Given my mocked location is 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
 
@@ -51,7 +51,7 @@ Feature: Personalisation
 
         When I click on "Get your current location"
 
-        Given I'm at 37.823S 144.998E
+        Given my mocked location is 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
 
@@ -80,7 +80,7 @@ Feature: Personalisation
 
         When I click on "Get your current location"
 
-        Given I'm at 37.823S 144.998E
+        Given my mocked location is 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
 

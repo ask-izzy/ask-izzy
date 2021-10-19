@@ -16,7 +16,7 @@ Feature: Geolocation
         When I click on "Get your current location"
         Then I should see "Locating you..."
 
-        Given I'm at 37.823S 144.998E
+        Given my mocked location is 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
         And the button "Done" should be enabled
@@ -48,5 +48,5 @@ Feature: Geolocation
         When I click on "Get your current location"
         Then I should see "Locating you..."
 
-        Given I'm at 37.823S 144.998E
+        Given my mocked location is 37.823S 144.998E
         Then I should see "Found your location (in Richmond, VIC) – Travel times added below.Clear"

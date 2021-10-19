@@ -7,6 +7,8 @@ import _ from "underscore";
 import checkInactive from "./inactiveTimeout";
 import {Loader} from "@googlemaps/js-api-loader";
 
+import { Merge } from "../fixtures/factories/Value.js";
+
 export class MapsApi {
     api: GoogleMaps;
 
@@ -160,8 +162,8 @@ function maps(): Promise<MapsApi> {
             libraries: ["places"],
         });
         mapsAPIPromise = api.load().then(() => {
-            if (window && window.isTestEnv) {
-                window.googleMapsApi = google;
+            if (window?.googleMock) {
+                Merge(google, window.googleMock)
             }
             return new MapsApi(google.maps);
         })

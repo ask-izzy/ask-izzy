@@ -84,16 +84,29 @@ async function assertTransitMethodNot(method) {
  * @returns {Promise} promise that resolves when the script executes.
  */
 async function instrumentDistanceMatrix(results) {
-    await this.driver.executeScript((results) => {
-        google.maps.DistanceMatrixService = function() {
-            return {
-                getDistanceMatrix: function(params, callback) {
-                    return callback(
-                        {rows: [{elements: results}]},
-                        google.maps.DirectionsStatus.OK,
-                    );
+    await this.driver.executeScriptBeforeLoad((results) => {
+        window.googleMock = {
+            maps: {
+                DistanceMatrixService() {
+                    return {
+                        getDistanceMatrix: function(params, callback) {
+                            const clonedResults = JSON.parse(
+                                JSON.stringify(results)
+                            )
+                            return callback(
+                                {
+                                    rows: [
+                                        {
+                                            elements: clonedResults,
+                                        },
+                                    ],
+                                },
+                                google.maps.DirectionsStatus.OK,
+                            );
+                        },
+                    };
                 },
-            };
+            },
         };
     }, results);
 }

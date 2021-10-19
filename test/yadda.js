@@ -138,7 +138,12 @@ let processFile = (file) => {
                 }
             } else {
                 if (process.env.SCREENSHOT_FAILURES) {
-                    deleteSceenshot(this.currentTest)
+                    if (
+                        !this.currentTest.title
+                            .match(/When I take a screenshot/i)
+                    ) {
+                        await deleteSceenshot(this.currentTest)
+                    }
                 }
             }
         });

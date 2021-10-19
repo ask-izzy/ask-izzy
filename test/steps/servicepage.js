@@ -4,7 +4,7 @@
 import assert from "assert";
 import Yadda from "yadda";
 import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
-import { By } from "selenium-webdriver";
+import Webdriver, { By } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
@@ -18,6 +18,8 @@ module.exports = ((function(): YaddaLibraryEnglish {
             unpromisify(checkTransportTime))
         .then("I should see a transport time of\n$lines",
             unpromisify(checkTransportTimeLines))
+        .then("I should not see transport times",
+            unpromisify(checkTransportTimesDontExist))
         .then("I should see ATSI flags",
             unpromisify(seeAtsiFlags))
         .then("I should not see ATSI flags",
@@ -47,7 +49,27 @@ async function checkTransportTimeLines(time: Array<string>): Promise<void> {
 }
 
 async function checkTransportTime(time: string): Promise<void> {
-    const allTransports = await this.driver.findElements(
+    const times = await await getTransportTimes(this.driver)
+
+    assert(
+        times.includes(time),
+        `Expected '${times}' to include '${time}'`
+    );
+}
+
+async function checkTransportTimesDontExist(): Promise<void> {
+    const times = await await getTransportTimes(this.driver)
+
+    assert(
+        times.length === 0,
+        `Expected there to be no travel times but found '${times}'`
+    );
+}
+
+async function getTransportTimes(
+    driver: typeof Webdriver.WebDriver
+): Promise<Array<string>> {
+    const allTransports = await driver.findElements(
         By.css(".TransportTime")
     )
 
@@ -65,10 +87,7 @@ async function checkTransportTime(time: string): Promise<void> {
         )
     )
 
-    assert(
-        visibleTransportText.flat().includes(time),
-        `Expected '${visibleTransportText.flat()}' to include '${time}'`
-    );
+    return visibleTransportText.flat()
 }
 
 async function checkPhoneNumbers(lines: Array<string>): Promise<void> {

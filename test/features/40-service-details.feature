@@ -87,10 +87,6 @@ Feature: Service details page
         Given my location is "Melbourne, VIC"
         And my location is 37.822S 144.99E
         And it is late morning on "Monday"
-        # This step is just to ensure the maps api gets loaded.
-        # Because the google direction mock required it.
-        When I visit /search/food
-        Given I'm watching map events
         And googles directions matrix will return
         ----------------------------------------------
         - status: OK

@@ -54,6 +54,9 @@ module.exports = (function() {
         )
         .when("I reload the page", unpromisify(reloadPage))
         .when("I pause for debugging", unpromisify(pauseToDebug))
+        .when("I throw an error", () => {
+            throw new Error("Artificial error")
+        })
         .when("I scroll to element \"$STRING\"", unpromisify(scrollToElement))
         .when("I take a screenshot", unpromisify(takeScreenshot))
         .then("I should be at $URL", unpromisify(checkURL))
@@ -406,7 +409,9 @@ async function cleanSession(): Promise<void> {
 async function takeScreenshot(): Promise<void> {
     const filepath = await debug.takeScreenshot(
         this.driver,
-        debug.getSceenshotPath(this.mochaState.currentTest)
+        debug.getSceenshotPath(
+            this.mochaState.currentTest || this.mochaState.test
+        )
     )
 
     console.log(`${this.indent}  Screenshot saved to "${filepath}"`);

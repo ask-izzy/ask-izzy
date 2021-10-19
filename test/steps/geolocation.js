@@ -18,7 +18,10 @@ declare var IzzyStorage: Object;
 module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library(dictionary)
         .given("control of geolocation", unpromisify(mockGeolocation))
-        .given("I'm at $LATITUDE $LONGITUDE", unpromisify(sendCoords))
+        .given(
+            "my mocked location is $LATITUDE $LONGITUDE",
+            unpromisify(sendCoords)
+        )
         .given("my location is \"$STRING\"", unpromisify(setLocation))
         .given("my location is $LATITUDE $LONGITUDE", unpromisify(setCoords))
         .when("I deny access to geolocation",
