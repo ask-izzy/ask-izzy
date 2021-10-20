@@ -48,15 +48,15 @@ const Storage = {
         this.setItem("debug", debug);
     },
 
-    getLocation(): string {
+    getSearchArea(): string {
         return this.getItem("location") || "";
     },
 
-    setLocation(location: string): void {
+    setSearchArea(location: string): void {
         this.setItem("location", location);
     },
 
-    clearLocation(): void {
+    clearSearchArea(): void {
         this.removeItem("location")
     },
 
@@ -67,7 +67,7 @@ const Storage = {
             .includes("Aboriginal and/or Torres Strait Islander");
     },
 
-    getCoordinates(): ?Geolocation {
+    getUserGeolocation(): ?Geolocation {
         const coords = JSON.parse(
             sessionStore.getItem("coordinates") || "null"
         );
@@ -75,14 +75,14 @@ const Storage = {
         return coords;
     },
 
-    setCoordinates(location: Geolocation): void {
+    setUserGeolocation(location: Geolocation): void {
         sessionStore.setItem(
             "coordinates",
             JSON.stringify(location)
         );
     },
 
-    clearCoordinates(): void {
+    clearUserGeolocation(): void {
         this.removeItem("coordinates")
     },
 

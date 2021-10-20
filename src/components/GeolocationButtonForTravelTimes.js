@@ -44,7 +44,7 @@ function GeolocationButtonForTravelTimes({
     }, [travelTimesStatus])
 
     const explainerMessage = () => (
-        !Storage.getCoordinates() && showMessage &&
+        !storage.getUserGeolocation() && showMessage &&
             <div className={`explainer ${collapsed ? "collapsed" : ""}`}>
                 {(!isSmallMobileDevice || !collapsed) &&
                 <span className="explainerIcons">
@@ -63,14 +63,14 @@ function GeolocationButtonForTravelTimes({
         <GeolocationButton
             onStatusChange={(status) => {
                 if (status.type === "COMPLETE") {
-                    storage.setCoordinates(status.location);
+                    storage.setUserGeolocation(status.location);
                     loadTravelTimes()
                 } else if (status.type === "NOT_STARTED") {
-                    storage.clearCoordinates();
+                    storage.clearUserGeolocation();
                     clearTravelTimes()
                 }
             }}
-            locationValue={storage.getCoordinates() || undefined}
+            locationValue={storage.getUserGeolocation() || undefined}
             showLocationInSuccessMessage={true}
             successMessageSuffix={showMessage ?
                 "Travel times added below."
@@ -80,7 +80,7 @@ function GeolocationButtonForTravelTimes({
         />
     )
 
-    if (isMobile && !storage.getCoordinates() && showMessage) {
+    if (isMobile && !storage.getUserGeolocation() && showMessage) {
         return <div className="GeolocationButtonForTravelTimes">
             <div className="collapserContainer">
                 <Button

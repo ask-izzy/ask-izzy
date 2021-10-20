@@ -84,7 +84,7 @@ Feature: Service details page
 
 
     Scenario: There is travel information for non-confidential services
-        Given my location is "Melbourne, VIC"
+        Given the area to search is "Melbourne, VIC"
         And my location is 37.822S 144.99E in "Melbourne, VIC"
         And it is late morning on "Monday"
         And googles directions matrix will return

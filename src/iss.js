@@ -309,7 +309,7 @@ export async function requestObjects(
         (object: issService): Service => new Service(object)
     );
 
-    if (Storage.getCoordinates()) {
+    if (Storage.getUserGeolocation()) {
         response.objects = await TryWithDefault(
             3000,
             attachTransportTimes(objects),

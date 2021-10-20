@@ -6,7 +6,7 @@ Feature: Category page
     # So that I can choose a service
 
     Background:
-        Given my location is "Melbourne, VIC"
+        Given the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old

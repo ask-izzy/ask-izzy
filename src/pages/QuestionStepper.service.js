@@ -90,7 +90,7 @@ export const fetchAnswers = (
  */
 export const getSearchAnswers = (): Array<AnswerType> => {
     const answerList = [];
-    const location = Storage.getLocation()
+    const location = Storage.getSearchArea()
 
     if (location) {
         answerList.push({

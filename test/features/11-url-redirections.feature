@@ -6,7 +6,7 @@ Feature: Landing page
     # So that I can view the contents of my saved URLs
 
     Background:
-        Given my location is "Melbourne, VIC"
+        Given the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 27 years old

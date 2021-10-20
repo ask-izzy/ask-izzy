@@ -5,7 +5,7 @@ Feature: Error information
     # I want to see the error message
 
     Background:
-        Given my location is "Richmond, VIC"
+        Given the area to search is "Richmond, VIC"
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 27 years old

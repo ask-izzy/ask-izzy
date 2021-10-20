@@ -5,7 +5,7 @@ Feature: See results on a map
     # So that I can see where they're located relative to me
 
     Background:
-        Given my location is "Melbourne, Vic"
+        Given the area to search is "Melbourne, Vic"
         And I have somewhere to sleep tonight
         And I need nothing for housing
         And my gender is female

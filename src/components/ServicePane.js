@@ -260,7 +260,7 @@ function ServicePane({service}: Props): ReactNode {
                                 site={service.site}
                                 withSpacer={true}
                             />
-                            {Storage.getCoordinates() &&
+                            {Storage.getUserGeolocation() &&
                             service.travelTimes &&
                                 <TransportTime
                                     location={service.Location()}
@@ -271,7 +271,7 @@ function ServicePane({service}: Props): ReactNode {
                             {!service.Location().isConfidential() &&
                             <GoogleMapsLink
                                 to={service.Location()}
-                                className={Storage.getCoordinates() ?
+                                className={Storage.getUserGeolocation() ?
                                     "withTimes" : "withoutTimes"}
                                 onClick={recordClick}
                                 hideSpacer={true}

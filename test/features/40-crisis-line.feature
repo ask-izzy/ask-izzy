@@ -6,7 +6,7 @@ Feature: Crisis Line
     # So that I can use the number to get help
 
     Background:
-        Given my location is "Melbourne, VIC"
+        Given the area to search is "Melbourne, VIC"
         And my gender is female
         And I am 27 years old
         And I am not part of any relevant demographics

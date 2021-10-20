@@ -28,9 +28,9 @@ function SuggestionBox(
         `${trailingSlash(location.pathname)}personalise/summary`
 
     const clearAnswers = () => {
-        const location = Storage.getLocation();
+        const location = Storage.getSearchArea();
         Storage.clear();
-        Storage.setLocation(location)
+        Storage.setSearchArea(location)
     }
 
     const navLinks = () => (

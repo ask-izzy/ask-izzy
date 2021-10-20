@@ -7,7 +7,7 @@ Feature: Geolocation
 
     Scenario: Use geolocation to find the user
         When I visit /
-        Given control of geolocation
+        Given GPS will hang in the loading state
         And google api geocode will return location name Richmond, VIC
         When I visit /housing/personalise/page/location
         Then I should see "Where are you looking for help?"
@@ -17,14 +17,14 @@ Feature: Geolocation
         When I click on "Get your current location"
         Then I should see "Locating you..."
 
-        Given my mocked location is 37.823S 144.998E
+        Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
         And the button "Done" should be enabled
 
     Scenario: User denies geolocation access
         When I visit /
-        Given control of geolocation
+        Given GPS will hang in the loading state
         When I visit /housing/personalise/page/location
 
         When I click on "Get your current location"
@@ -37,7 +37,7 @@ Feature: Geolocation
 
     Scenario: User switches between using geolocate button and manually entering a location
         When I visit /
-        Given control of geolocation
+        Given GPS will hang in the loading state
         And google api geocode will return location name Richmond, VIC
         When I visit /housing/personalise/page/location
         And I should see "Get your current location"
@@ -46,7 +46,7 @@ Feature: Geolocation
         When I click on "Get your current location"
         Then I should see "Locating you..."
 
-        Given my mocked location is 37.823S 144.998E
+        Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
         And the button "Done" should be enabled
@@ -92,7 +92,7 @@ Feature: Geolocation
         And the button "Done" should be disabled
 
     Scenario: User uses geolocate button on results page after setting their location manually
-        Given my location is "Melbourne, VIC"
+        Given the area to search is "Melbourne, VIC"
         And google api geocode will return location name Richmond, VIC
         And I have somewhere to sleep tonight
         And my gender is female
@@ -104,11 +104,11 @@ Feature: Geolocation
         Then I should see "Showing housing services"
         And I should see "Want to see estimated travel times for the services below?"
 
-        Given control of geolocation
+        Given GPS will hang in the loading state
         When I click on "Get your current location"
         Then I should see "Locating you..."
 
-        Given my mocked location is 37.823S 144.998E
+        Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location (in Richmond, VIC) – Travel times added below.Clear"
 
         And I reload the page

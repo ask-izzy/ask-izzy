@@ -17,12 +17,15 @@ declare var IzzyStorage: Object;
 
 module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library(dictionary)
-        .given("control of geolocation", unpromisify(mockGeolocation))
         .given(
-            "my mocked location is $LATITUDE $LONGITUDE",
+            "GPS will hang in the loading state",
+            unpromisify(mockGeolocation)
+        )
+        .given(
+            "the GPS returns $LATITUDE $LONGITUDE",
             unpromisify(sendCoords)
         )
-        .given("my location is \"$STRING\"", unpromisify(setLocation))
+        .given("the area to search is \"$STRING\"", unpromisify(setLocation))
         .given(
             "my location is $LATITUDE $LONGITUDE in \"$STRING\"",
             unpromisify(setCoords)
@@ -78,7 +81,7 @@ async function setLocation(location: string): Promise<void> {
 
     await gotoUrl(this.driver, "/"); // go anywhere to start the session
     await this.driver.executeScript((location) => {
-        IzzyStorage.setLocation(location);
+        IzzyStorage.setSearchArea(location);
     }, location);
 }
 
@@ -101,7 +104,7 @@ async function setCoords(
         longitude,
     }
     await this.driver.executeScript((location) => {
-        IzzyStorage.setCoordinates(location);
+        IzzyStorage.setUserGeolocation(location);
     }, location);
 }
 

@@ -27,7 +27,7 @@ function HomePage(): ReactNode {
 
 
     useEffect(() => {
-        const savedLocation = Storage.getLocation();
+        const savedLocation = Storage.getSearchArea();
         const savedSearchText = storage.getSearch();
         savedLocation && setLocation(savedLocation)
         savedSearchText && setSearchText(savedSearchText)

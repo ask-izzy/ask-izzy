@@ -6,7 +6,7 @@ Feature: Transport times
     # So that I can choose nearby services
 
     Background:
-        Given my location is "Melbourne, VIC"
+        Given the area to search is "Melbourne, VIC"
         And my gender is female
         And I am 27 years old
         And I am not part of any relevant demographics
@@ -56,7 +56,7 @@ Feature: Transport times
         ------------------------------------------
 
     Scenario: Change location on results page
-        Given control of geolocation
+        Given GPS will hang in the loading state
         And A service with:
         ----------------------------------------------
         name: "Transportable"
@@ -76,7 +76,7 @@ Feature: Transport times
               value: 1000
         ----------------------------------------------
         And google api geocode will return location name Richmond, VIC
-        And my mocked location is 37.822S 144.99E
+        And the GPS returns 37.822S 144.99E
 
         When I search for the service
         Then I should not see transport times

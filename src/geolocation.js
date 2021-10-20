@@ -51,7 +51,7 @@ export default function locate(options: ?PositionOptions): Promise<Position> {
     });
 }
 
-export function geolocationAvailable(): boolean {
+export function browserSupportsGeolocation(): boolean {
     const mock = storage.getGeolocationMock();
 
     if (mock && (typeof mock === "object") && "success" in mock) {

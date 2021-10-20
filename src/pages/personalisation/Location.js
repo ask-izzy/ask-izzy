@@ -5,7 +5,7 @@ import * as React from "react";
 import { debounce } from "lodash-decorators";
 import _ from "underscore";
 
-import {geolocationAvailable} from "../../geolocation";
+import {browserSupportsGeolocation} from "../../geolocation";
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import icons from "../../icons";
@@ -67,8 +67,8 @@ class Location extends Personalisation<Props, State> {
     }
 
     componentDidMount(): void {
-        const userLocation = storage.getCoordinates()
-        const searchLocation = storage.getLocation()
+        const userLocation = storage.getUserGeolocation()
+        const searchLocation = storage.getSearchArea()
 
         let location: location
         if (userLocation) {
@@ -101,7 +101,7 @@ class Location extends Personalisation<Props, State> {
     }
 
     static get answer(): string {
-        return storage.getLocation();
+        return storage.getSearchArea();
     }
 
     static breadcrumbAnswer(): ?any {
@@ -112,19 +112,19 @@ class Location extends Personalisation<Props, State> {
         // Currently only for locations in Victoria.
         let victoriaRegex = /VIC(toria)?$/i;
 
-        return !!victoriaRegex.exec(storage.getLocation());
+        return !!victoriaRegex.exec(storage.getSearchArea());
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
         /* Location/Area is required */
-        const searchArea = storage.getLocation();
+        const searchArea = storage.getSearchArea();
         if (!searchArea) {
             return null;
         }
         request = Object.assign(request, {area: searchArea});
 
         /* Coordinates are optional */
-        const userLocation = storage.getCoordinates();
+        const userLocation = storage.getUserGeolocation();
         if (userLocation && userLocation.name === searchArea) {
             request = Object.assign(request, {
                 location: `${userLocation.longitude}E${userLocation.latitude}N`,
@@ -137,7 +137,7 @@ class Location extends Personalisation<Props, State> {
     static summaryLabel: string = "Where are you?";
 
     static get summaryValue(): string {
-        return storage.getLocation();
+        return storage.getSearchArea();
     }
 
     static showPage(): boolean {
@@ -220,11 +220,11 @@ class Location extends Personalisation<Props, State> {
 
     onNextStep(): void {
         if (this.state.selectedLocation) {
-            storage.setLocation(this.state.selectedLocation.name);
+            storage.setSearchArea(this.state.selectedLocation.name);
             if (isGeolocation(this.state.selectedLocation)) {
-                storage.setCoordinates(this.state.selectedLocation);
+                storage.setUserGeolocation(this.state.selectedLocation);
             } else {
-                storage.clearCoordinates()
+                storage.clearUserGeolocation()
             }
         } else {
             console.error(
@@ -411,7 +411,7 @@ class Location extends Personalisation<Props, State> {
                         }
                     </fieldset>
                     <div className="GeoLocationButtonContainer">
-                        {geolocationAvailable() && <>
+                        {browserSupportsGeolocation() && <>
                             {isGeolocation(this.state.selectedLocation) ||
                                 <span className="or">Or</span>
                             }

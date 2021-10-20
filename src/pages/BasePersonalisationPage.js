@@ -28,7 +28,7 @@ class BasePersonalisationPage<ExtraState = {}> extends BaseCategoriesPage<
         const parts = decodeURIComponent(
             this.context.router.location.pathname
         ).split("/");
-        const location = storage.getLocation();
+        const location = storage.getSearchArea();
 
         if (location) {
             replaceUrlLocation(location, parts)
