@@ -17,12 +17,24 @@ declare var IzzyStorage: Object;
 
 module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library(dictionary)
-        .given("control of geolocation", unpromisify(mockGeolocation))
-        .given("I'm at $LATITUDE $LONGITUDE", unpromisify(sendCoords))
-        .given("my location is \"$STRING\"", unpromisify(setLocation))
-        .given("my location is $LATITUDE $LONGITUDE", unpromisify(setCoords))
+        .given(
+            "GPS will hang in the loading state",
+            unpromisify(mockGeolocation)
+        )
+        .given(
+            "the GPS returns $LATITUDE $LONGITUDE",
+            unpromisify(sendCoords)
+        )
+        .given("the area to search is \"$STRING\"", unpromisify(setLocation))
+        .given(
+            "my location is $LATITUDE $LONGITUDE in \"$STRING\"",
+            unpromisify(setCoords)
+        )
         .when("I deny access to geolocation",
-            unpromisify(disableGeolocation));
+            unpromisify(disableGeolocation))
+        .given("google api geocode will return location name $SUBURB, $STATE",
+            unpromisify(mockGoogleApiGeocodeLocationName)
+        )
 })(): YaddaLibraryEnglish);
 
 /**
@@ -69,7 +81,7 @@ async function setLocation(location: string): Promise<void> {
 
     await gotoUrl(this.driver, "/"); // go anywhere to start the session
     await this.driver.executeScript((location) => {
-        IzzyStorage.setLocation(location);
+        IzzyStorage.setSearchArea(location);
     }, location);
 }
 
@@ -78,12 +90,22 @@ async function setLocation(location: string): Promise<void> {
  *
  * @param {number} latitude - latitude.
  * @param {number} longitude - longitude.
+ * @param {string} locationName $Suburb, $State
  * @returns {Promise} promise that resolves when the value is set.
  */
-async function setCoords(latitude: number, longitude: number): Promise<void> {
-    await this.driver.executeScript((coords) => {
-        IzzyStorage.setCoordinates(coords);
-    }, {latitude, longitude});
+async function setCoords(
+    latitude: number,
+    longitude: number,
+    locationName: string
+): Promise<void> {
+    const location = {
+        name: locationName,
+        latitude,
+        longitude,
+    }
+    await this.driver.executeScript((location) => {
+        IzzyStorage.setUserGeolocation(location);
+    }, location);
 }
 
 async function disableGeolocation(): Promise<void> {
@@ -93,4 +115,47 @@ async function disableGeolocation(): Promise<void> {
             {message: "User denied access"},
         )
     });
+}
+
+/**
+ * Stub google geocode so we can get reliable results
+ *
+ * @param {mockedSuburb} mockedSuburb the suburb to include in results
+ * @param {mockedState} mockedState the state to include in results
+ *
+ * @returns {Promise} promise that resolves when the script executes.
+ */
+async function mockGoogleApiGeocodeLocationName(mockedSuburb, mockedState) {
+    declare var google: Google;
+    await this.driver.executeScriptBeforeLoad((mockedSuburb, mockedState) => {
+        window.googleMocks = window.googleMocks || []
+        window.googleMocks.push({
+            maps: {
+                Geocoder() {
+                    return {
+                        geocode: function(params, callback) {
+                            return callback(
+                                [{
+                                    types: ["locality"],
+                                    address_components: [
+                                        {
+                                            "long_name": mockedSuburb,
+                                            "types": ["locality"],
+                                        },
+                                        {
+                                            "short_name": mockedState,
+                                            "types": [
+                                                "administrative_area_level_1",
+                                            ],
+                                        },
+                                    ],
+                                }],
+                                google.maps.GeocoderStatus.OK,
+                            );
+                        },
+                    };
+                },
+            },
+        });
+    }, mockedSuburb, mockedState);
 }

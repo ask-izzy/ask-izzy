@@ -46,7 +46,7 @@ function QuestionStepperClearLocation(
      * @returns nothing
      */
     const clearLocation = (): void => {
-        Storage.setLocation("");
+        Storage.clearSearchArea();
         setCurrentAnswers([]);
         onClear && onClear();
     }

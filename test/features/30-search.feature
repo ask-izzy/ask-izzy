@@ -6,7 +6,7 @@ Feature: Search
     # So that I can search for things not in the category list
 
     Background:
-        Given my location is "Melbourne, VIC"
+        Given the area to search is "Melbourne, VIC"
         And my gender is female
         And I am 27 years old
         And I am not part of any relevant demographics

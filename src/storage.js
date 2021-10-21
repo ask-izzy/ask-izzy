@@ -15,15 +15,11 @@ import {
 
 import * as gtm from "./google-tag-manager";
 
-type Coordinates = {
-    latitude: number,
-    longitude: number,
-}
 
-type CoordWithLocationName = {
+export type Geolocation = {
+    name: string,
     latitude: number,
     longitude: number,
-    name: string,
 }
 
 const Storage = {
@@ -52,14 +48,16 @@ const Storage = {
         this.setItem("debug", debug);
     },
 
-    getLocation(): string {
-        return (
-            this.getItem("location") && String(this.getItem("location"))
-        ) || "";
+    getSearchArea(): string {
+        return this.getItem("location") || "";
     },
 
-    setLocation(location: string): void {
+    setSearchArea(location: string): void {
         this.setItem("location", location);
+    },
+
+    clearSearchArea(): void {
+        this.removeItem("location")
     },
 
     getUserIsIndigenous(): boolean {
@@ -69,34 +67,23 @@ const Storage = {
             .includes("Aboriginal and/or Torres Strait Islander");
     },
 
-    getCoordinates(): ?CoordWithLocationName {
+    getUserGeolocation(): ?Geolocation {
         const coords = JSON.parse(
             sessionStore.getItem("coordinates") || "null"
         );
 
-        if (coords &&
-            (typeof coords.latitude === "number") &&
-            (typeof coords.longitude === "number")) {
-            return coords;
-        }
-
-        return null;
+        return coords;
     },
 
-    setCoordinates(coords: ?Coordinates, name?: string): void {
-        const {longitude, latitude} = coords || {};
+    setUserGeolocation(location: Geolocation): void {
+        sessionStore.setItem(
+            "coordinates",
+            JSON.stringify(location)
+        );
+    },
 
-        if (name) {
-            sessionStore.setItem(
-                "coordinates",
-                JSON.stringify({longitude, latitude, name})
-            );
-        } else {
-            sessionStore.setItem(
-                "coordinates",
-                JSON.stringify({longitude, latitude})
-            );
-        }
+    clearUserGeolocation(): void {
+        this.removeItem("coordinates")
     },
 
     getItem(key: string): ?(string|number|boolean) {

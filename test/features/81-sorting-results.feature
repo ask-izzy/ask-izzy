@@ -2,7 +2,7 @@ Feature: Sorting drop down on the results page
   To test the sorting feature on the results page
 
     Background:
-        Given my location is "Melbourne, VIC"
+        Given the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old

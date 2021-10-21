@@ -10,6 +10,7 @@ import xhr from "axios";
 import url from "url";
 import { slugify } from "underscore.string";
 import _ from "underscore";
+import lo_ from "lodash";
 import lru from "lru-cache";
 
 import * as gtm from "./google-tag-manager";
@@ -17,6 +18,7 @@ import ServiceOpening from "./iss/ServiceOpening";
 import Location from "./iss/Location";
 import Cache from "./iss/Cache";
 import serviceProvisions from "./constants/service-provisions";
+import type {SortType} from "./components/base/Dropdown";
 import storage from "./storage";
 import Maps from "./maps";
 import {
@@ -234,7 +236,7 @@ export async function request(
  * Loads the transportTime property from google
  * and adds it to the given Service instances
  */
-async function attachTransportTimes(
+export async function attachTransportTimes(
     services: Array<Service>
 ): Promise<Array<Service>> {
     if (typeof window === "undefined") {
@@ -244,24 +246,38 @@ async function attachTransportTimes(
 
     let formatPoint = (point: issPoint) => `${point.lat},${point.lon}`;
 
-    const maps = await TryWithDefault < $ReadOnly < {travelTime: Function} >>(
+    const maps = await TryWithDefault<
+        $ReadOnly<
+            {travelTime: Function}
+        >
+    >(
         1000, Maps(), {}
     );
 
     if (typeof maps.travelTime === "function") {
-        let service: ?Service; // eslint-disable-line no-unused-vars
-        let travelTimes = await Timeout(3000, maps.travelTime(services
-            .filter((service) => !service.Location().isConfidential())
-            // $FlowIgnore isConfidential checks location.point
-            .map(({location}) => formatPoint(location.point))
-        ));
+        const servicesToLoadTravelTimesFor = services.filter(
+            service => !service.Location().isConfidential()
+        )
+        const travelTimesForServices = await Timeout(
+            3000,
+            maps.travelTime(servicesToLoadTravelTimesFor
+                // $FlowIgnore isConfidential checks location.point
+                .map(({location}) => formatPoint(location.point))
+            )
+        );
 
-        services.filter((service) => !service.Location().isConfidential())
-            // eslint-disable-next-line no-return-assign
-            .map((service) => service.travelTime = travelTimes.shift());
+        for (const service of servicesToLoadTravelTimesFor) {
+            service.travelTimes = travelTimesForServices.shift()
+        }
     }
 
     return services;
+}
+
+export async function removeAllTransitTimes() {
+    serviceCache.forEach(service => {
+        service.travelTimes = null
+    })
 }
 
 let requestObjectsCache = new Cache();
@@ -293,7 +309,7 @@ export async function requestObjects(
         (object: issService): Service => new Service(object)
     );
 
-    if (Storage.getCoordinates()) {
+    if (Storage.getUserGeolocation()) {
         response.objects = await TryWithDefault(
             3000,
             attachTransportTimes(objects),
@@ -408,8 +424,7 @@ export class Service {
     last_updated: ymdWithDashesDate;
     lgbtiqa_plus_specific: boolean;
     location: ?issLocation;
-    travelTime: ?Array<travelTime>; // From google travel times api. At some
-    // point this should probably be refactored to travelTime*s*
+    travelTimes: Array<travelTime> = [];
     name: string;
     ndis_approved: boolean;
     now_open: issNowOpen;
@@ -711,12 +726,112 @@ export function crisisResults(results: Array<Service>): Array<Service> {
     );
 }
 
-export function nonCrisisResults(results: Array<Service>): Array<Service> {
-    return results.slice(
+export function nonCrisisResults(
+    results: Array<Service>,
+    sortBy?: ?SortType
+): Array<Service> {
+    let nonCrisisResults = results.slice(
         countCrisisResults(results),
         results.length
     )
+    if (sortBy) {
+        nonCrisisResults = sortResults(nonCrisisResults, sortBy)
+    }
+    return nonCrisisResults
 }
+
+/**
+ * This function will receive a list of
+ * search results and a sortObject and based off
+ * the sort param it will return a newly ordered list
+ * @param results - A list of search results
+ * @param orderBy - A search term
+ * @returns - An ordered list of services
+ */
+export const sortResults = (
+    results: Array<Service>,
+    orderBy: SortType,
+): Array<Service> => {
+    const isObject = typeof orderBy.value === "object";
+    let newResults = results;
+
+    // If the param to be sorted is nested
+    // within the service object and not on the top level
+    if (isObject) {
+        const keys = orderBy.value ? Object.keys(orderBy.value) : [];
+
+        // checks if they type is a boolean
+        /* $FlowIgnore */
+        if (keys.map(item => typeof orderBy.value[item] === "boolean")
+            ?.some(val => val)) {
+
+            // Creates two separate lists one that's matched and one
+            // that's not then joins them together with matched list first
+            for (let key = 0; key < keys.length; key++) {
+                const matchedResults = results.filter(item =>
+                    /* $FlowIgnore */
+                    orderBy.key && item[orderBy.key][keys[key]]
+                )
+                const unMatchedResults = results.filter(item =>
+                    orderBy.key &&
+                    /* $FlowIgnore */
+                    !item[orderBy.key][keys[key]]
+                )
+                newResults = matchedResults.concat(unMatchedResults)
+            }
+        } else {
+            // Sort through the results
+            newResults = results.sort(
+                (serviceA: Object, serviceB: Object) => {
+                    const nestedValue = (service: Object) => {
+                        if (orderBy.value) {
+                            const objKeys = Object.keys(orderBy.value);
+                            const hasVal = Object.keys(service).map(
+                                (key: string) => (objKeys.includes(key) &&
+                                    orderBy.value &&
+                                    orderBy.value[key] === service[key] &&
+                                    service));
+                            return hasVal.find(item => item);
+                        }
+                    }
+
+                    const aVal = isObject && nestedValue(
+                        serviceA[orderBy.key]
+                    );
+                    const bVal = isObject && nestedValue(
+                        serviceB[orderBy.key]
+                    );
+                    if (aVal === bVal) {
+                        return 1;
+                    } else if (aVal !== bVal) {
+                        return -1;
+                    }
+                    return 0;
+                })
+        }
+    }
+
+    if (!isObject) {
+        if (typeof orderBy.value === "boolean") {
+            const matchedResults = results.filter(item =>
+                /* $FlowIgnore */
+                orderBy.key && item[orderBy.key]
+            )
+            const UnMatchedResults = results.filter(item =>
+                /* $FlowIgnore */
+                orderBy.key && !item[orderBy.key]
+            )
+            newResults = matchedResults.concat(UnMatchedResults)
+        } else {
+            newResults = lo_.orderBy(results, (item) => {
+                return orderBy.key && item[orderBy.key] === orderBy.value;
+            }, ["desc"])
+        }
+    }
+
+    return newResults
+}
+
 
 export default {
     search: search,

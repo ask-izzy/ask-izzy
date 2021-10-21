@@ -37,7 +37,7 @@ const crisisDescriptions = {
 }
 
 type Props = {
-    object: iss.Service,
+    service: iss.Service,
     resultNumber: number
 }
 
@@ -45,32 +45,32 @@ class CrisisLineItem extends React.Component<Props, void> {
     static displayName: ?string = "CrisisLineItem";
 
     static propTypes = {
-        object: PropTypes.object.isRequired,
+        service: PropTypes.object.isRequired,
     };
 
     static sampleProps: any = {default: {
-        object: new iss.Service(fixtures.domesticviolence),
+        service: new iss.Service(fixtures.domesticviolence),
     }};
 
     render(): ReactElement<"div"> | ReactElement<"span"> {
         const {
-            object,
+            service,
         } = this.props;
-        const phone = object.Phones()[0];
+        const phone = service.Phones()[0];
 
         if (phone) {
             return (
                 <div className="CrisisLineItem">
                     <h3>
                         <Link
-                            to={`/service/${object.slug}`}
+                            to={`/service/${service.slug}`}
                             analyticsEvent={{
                                 event: `Link Followed - Service Result`,
                                 eventAction: "Service result",
                                 eventLabel: `Crisis line - number ${this.props.resultNumber}`,
                             }}
                         >
-                            {object.site.name}
+                            {service.site.name}
                         </Link>
                     </h3>
                     <Phone
@@ -78,7 +78,7 @@ class CrisisLineItem extends React.Component<Props, void> {
                         crisis={true}
                     />
                     {
-                        crisisDescriptions[object.id] &&
+                        crisisDescriptions[service.id] &&
                         <Collapser
                             expandMessage="See information about this call"
                             collapseMessage="Hide information about this call"
@@ -88,13 +88,13 @@ class CrisisLineItem extends React.Component<Props, void> {
                                 eventLabel: null,
                             }}
                         >
-                            {crisisDescriptions[object.id](object)}
+                            {crisisDescriptions[service.id](service)}
                         </Collapser>
                     }
-                    <DebugServiceRecord object={object} />
-                    {object._explanation &&
+                    <DebugServiceRecord object={service} />
+                    {service._explanation &&
                         <DebugContainer message="Query score">
-                            <DebugQueryScore expl={object._explanation} />
+                            <DebugQueryScore expl={service._explanation} />
                         </DebugContainer>
                     }
                 </div>

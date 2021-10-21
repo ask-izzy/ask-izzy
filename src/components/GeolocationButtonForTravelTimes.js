@@ -2,14 +2,19 @@
 
 import type {Element as ReactElement} from "react"
 import React, {useEffect, useState} from "react";
-import Storage from "../storage";
+import storage from "../storage";
 import GeolocationButton from "./GeolocationButton";
 import icons from "../icons";
 import {MobileDetect} from "../effects/MobileDetect";
+import useTravelTimesUpdater from "../hooks/useTravelTimesUpdater"
+import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 import Button from "./base/Button";
+import {Service} from "../iss"
 
 type Props = {
     showMessage?: boolean,
+    servicesToUpdateTravelTimes: Array<Service>,
+    onTravelTimesStatusChange: (travelTimesStatus) => void,
 }
 
 /**
@@ -17,23 +22,29 @@ type Props = {
  * to allow the user to set their location if they want travel times
  * @return {JSX.Element} - Returns the travel times catch component
  */
-function GeolocationButtonForTravelTimes(
-    {
-        showMessage = true,
-    }: Props): ReactElement<"div"> {
+function GeolocationButtonForTravelTimes({
+    servicesToUpdateTravelTimes,
+    showMessage = true,
+    onTravelTimesStatusChange,
+}: Props): ReactElement<"div"> {
 
     const [collapsed, setCollapsed] = useState(true);
-    const [foundLocation, setFoundLocation] = useState(false);
+
+    const {
+        travelTimesStatus,
+        loadTravelTimes,
+        clearTravelTimes,
+    } = useTravelTimesUpdater(servicesToUpdateTravelTimes)
 
     const isMobile = MobileDetect(556)
     const isSmallMobileDevice = MobileDetect(374)
 
     useEffect(() => {
-        Storage.getCoordinates() && setFoundLocation(true)
-    }, [Storage.getCoordinates()])
+        onTravelTimesStatusChange(travelTimesStatus)
+    }, [travelTimesStatus])
 
     const explainerMessage = () => (
-        !Storage.getCoordinates() && showMessage &&
+        !storage.getUserGeolocation() && showMessage &&
             <div className={`explainer ${collapsed ? "collapsed" : ""}`}>
                 {(!isSmallMobileDevice || !collapsed) &&
                 <span className="explainerIcons">
@@ -50,31 +61,26 @@ function GeolocationButtonForTravelTimes(
 
     const renderGeoLocateButton = () => (
         <GeolocationButton
-            onSuccess={(params: {coords: Coordinates, name: string}) => {
-                Storage.setCoordinates(params.coords, params.name);
-                setFoundLocation(true)
+            onStatusChange={(status) => {
+                if (status.type === "COMPLETE") {
+                    storage.setUserGeolocation(status.location);
+                    loadTravelTimes()
+                } else if (status.type === "NOT_STARTED") {
+                    storage.clearUserGeolocation();
+                    clearTravelTimes()
+                }
             }}
-            finishedState={!!Storage.getCoordinates()}
-            travelTimesCatch={true}
-            showMessage={showMessage}
-            restartSearch={
-                foundLocation
+            locationValue={storage.getUserGeolocation() || undefined}
+            showLocationInSuccessMessage={true}
+            successMessageSuffix={showMessage ?
+                "Travel times added below."
+                : null
             }
-            undoButton={foundLocation &&
-            <button
-                className="undo"
-                onClick={() => {
-                    Storage.removeItem("coordinates")
-                    setFoundLocation(false)
-                }}
-            >
-                Clear
-            </button>
-            }
+            showClearButton={true}
         />
     )
 
-    if (isMobile && !Storage.getCoordinates() && showMessage) {
+    if (isMobile && !storage.getUserGeolocation() && showMessage) {
         return <div className="GeolocationButtonForTravelTimes">
             <div className="collapserContainer">
                 <Button

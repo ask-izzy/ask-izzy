@@ -11,7 +11,8 @@ Feature: Personalisation
         And I visit /
 
     Scenario: Search for housing with personalised results
-        Given control of geolocation
+        Given GPS will hang in the loading state
+        And google api geocode will return location name Richmond, VIC
         When I click on "Housing"
         Then I should see "I'm looking for help for"
 
@@ -19,7 +20,7 @@ Feature: Personalisation
 
         When I click on "Get your current location"
 
-        Given I'm at 37.823S 144.998E
+        Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
 
@@ -42,7 +43,8 @@ Feature: Personalisation
         Then I should be at /
 
     Scenario: Search for emergency accommodation
-        Given control of geolocation
+        Given GPS will hang in the loading state
+        And google api geocode will return location name Richmond, VIC
         When I click on "Housing"
         Then I should see "I'm looking for help for"
 
@@ -51,7 +53,7 @@ Feature: Personalisation
 
         When I click on "Get your current location"
 
-        Given I'm at 37.823S 144.998E
+        Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
 
@@ -71,7 +73,8 @@ Feature: Personalisation
         Then I should see "Showing housing services"
 
     Scenario: Do a search
-        Given control of geolocation
+        Given GPS will hang in the loading state
+        And google api geocode will return location name Richmond, VIC
         When I search for "find a meal" and press enter
         Then I should see "I'm looking for help for"
 
@@ -80,7 +83,7 @@ Feature: Personalisation
 
         When I click on "Get your current location"
 
-        Given I'm at 37.823S 144.998E
+        Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
 

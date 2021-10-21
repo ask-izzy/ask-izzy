@@ -3,7 +3,7 @@
 import type {Node as ReactNode} from "React";
 import * as React from "react"
 import Dropdown from "./../base/Dropdown";
-import type {SortType} from "./SortResult.service";
+import type {SortType} from "../base/Dropdown";
 import {useEffect} from "react";
 
 export const SORT_OPTIONS: Array<SortType> = [

@@ -5,7 +5,7 @@ Feature: See results on a map
     # So that I can see where they're located relative to me
 
     Background:
-        Given my location is "Melbourne, Vic"
+        Given the area to search is "Melbourne, Vic"
         And I have somewhere to sleep tonight
         And I need nothing for housing
         And my gender is female
@@ -14,7 +14,7 @@ Feature: See results on a map
 
     Scenario: View results on a map
        Given I am not interested in any subcategory
-        And my location is 37.822S 144.99E
+        And my location is 37.822S 144.99E in "Melbourne, VIC"
         When I visit /everyday-things
         And I click on "Load more results…"
         And I wait for 10 results to load

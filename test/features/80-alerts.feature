@@ -11,7 +11,7 @@ Feature: Alerts
         -------------------------------------------
 
     Scenario: Alerts with a body can be expanded
-        Given my location is "Melbourne, VIC"
+        Given the area to search is "Melbourne, VIC"
         And I need nothing for everyday-things
         When I visit /everyday-things
         Then I should see "COVID19 affecting services"
@@ -21,7 +21,7 @@ Feature: Alerts
         Then I should see "Services listed here may not be operating or limited. Contact services directly for up-to-date information."
 
     Scenario: Alerts defaultToOpen are initially open
-        Given my location is "Melbourne, VIC"
+        Given the area to search is "Melbourne, VIC"
         And I need nothing for everyday-things
         When I visit /everyday-things
         Then I should see "Title is always shown"
@@ -35,7 +35,7 @@ Feature: Alerts
     # Tests both that alerts show up correctly on the results page
     # and they are correctly ordered by importance
     Scenario: Alerts are displayed on the results page and are ordered correctly
-        Given my location is "Melbourne, VIC"
+        Given the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 27 years old
@@ -58,7 +58,7 @@ Feature: Alerts
     # location, not the user location.
     Scenario: National and alerts in the same state as the service are visible
         Given a fresh session
-        And my location is "Perth, WA"
+        And the area to search is "Perth, WA"
         When I visit /service/866464
         Then I should see the alerts
         -------------------------------------------

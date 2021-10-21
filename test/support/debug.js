@@ -40,7 +40,7 @@ export async function deleteSceenshot(test) {
 
 export function getSceenshotPath(test) {
     function getFullTitle(test) {
-        if (test.parent && test.parent.title) {
+        if (test.parent?.title) {
             return [test.title, ...getFullTitle(test.parent)]
         } else {
             return [test.title]

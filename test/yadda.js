@@ -40,10 +40,6 @@ let processFile = (file) => {
     featureFile(file, feature => {
         before(async function(): Promise<void> {
             driver = await driverPromise;
-            await driver.executeScriptBeforeLoad(() => {
-                console.log("------------- Loading Page -------------")
-                console.log("URL: " + location.href)
-            });
             testBrowserLog.push({
                 hook: "Before feature",
                 browserLog: await driver.manage().logs().get("browser"),
@@ -53,6 +49,11 @@ let processFile = (file) => {
         scenarios(feature.scenarios, scenario => {
             before(async function(): Promise<void> {
                 await cleanDriverSession(driver);
+
+                await driver.executeScriptBeforeLoad(() => {
+                    console.log("------------- Loading Page -------------")
+                    console.log("URL: " + location.href)
+                });
 
                 await driver.executeScriptBeforeLoad(
                     await fs.readFile(
@@ -138,7 +139,12 @@ let processFile = (file) => {
                 }
             } else {
                 if (process.env.SCREENSHOT_FAILURES) {
-                    deleteSceenshot(this.currentTest)
+                    if (
+                        !this.currentTest.title
+                            .match(/When I take a screenshot/i)
+                    ) {
+                        await deleteSceenshot(this.currentTest)
+                    }
                 }
             }
         });

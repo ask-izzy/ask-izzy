@@ -1,6 +1,5 @@
 /* @flow */
-
-declare var google: Google;
+import merge from "deepmerge";
 
 import storage from "./storage";
 import _ from "underscore";
@@ -70,8 +69,8 @@ export class MapsApi {
         destinations: Array<string>, mode: TravelMode = "WALKING"
     ): Promise<Array<travelTime>> {
         const directionsService = new this.api.DistanceMatrixService();
-        const coords = storage.getCoordinates();
-        let origin = storage.getLocation();
+        const coords = storage.getUserGeolocation();
+        let origin = storage.getSearchArea();
 
         if (coords && coords.latitude && coords.longitude) {
             origin = `${coords.latitude},${coords.longitude}`;
@@ -159,9 +158,14 @@ function maps(): Promise<MapsApi> {
             apiKey: window.GOOGLE_API_KEY,
             libraries: ["places"],
         });
-        mapsAPIPromise = api.load().then(() => {
-            if (window && window.isTestEnv) {
-                window.googleMapsApi = google;
+        mapsAPIPromise = api.load().then(google => {
+            if (window?.googleMocks) {
+                for (const googleMock of window.googleMocks) {
+                    // We need to make sure we're not modifying the original
+                    // google api object otherwise it our changes won't be reset
+                    // between test scenarios
+                    google = merge(google, googleMock)
+                }
             }
             return new MapsApi(google.maps);
         })

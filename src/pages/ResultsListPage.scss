@@ -63,4 +63,10 @@
     > div > .DebugContainer {
         margin: 1em;
     }
+
+    .ResultsListControls {
+        background-color: #{colours.get-static('colour-bg-standard-tint-2')};
+        background-color: var(--colour-bg-standard-tint-2);
+        padding: 5px;
+    }
 }

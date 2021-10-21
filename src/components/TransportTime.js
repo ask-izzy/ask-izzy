@@ -10,10 +10,15 @@ import Location from "../iss/Location";
 
 type Props = {
     location: Location,
+    travelTimes: Array<travelTime>,
     withSpacer?: boolean,
 }
 
-function TransportTime({location, withSpacer}: Props): ReactNode {
+function TransportTime({
+    location,
+    withSpacer,
+    travelTimes,
+}: Props): ReactNode {
 
     const renderPublic = (): ReactElement<"div"> => {
 
@@ -55,7 +60,7 @@ function TransportTime({location, withSpacer}: Props): ReactNode {
     }
 
     const renderTravelTimes = (): any => {
-        return location.travelTime?.map((travel, key) => {
+        return travelTimes.map((travel, key) => {
             let icon = "";
             let method = "";
 

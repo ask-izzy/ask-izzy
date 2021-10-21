@@ -7,19 +7,24 @@ import ViewOnMapButton from "../ViewOnMapButton";
 import {useRouterContext} from "../../contexts/router-context";
 import SortResult, {SORT_OPTIONS} from "./SortResult";
 import {getScrollPosition} from "../../effects/scrollPosition";
-import type {SortType} from "./SortResult.service";
+import type {SortType} from "../base/Dropdown";
 import GeolocationButtonForTravelTimes from
     "../GeolocationButtonForTravelTimes";
 import {MobileDetect} from "../../effects/MobileDetect";
+import type {travelTimesStatus} from "../../hooks/useTravelTimesUpdater";
+import {Service} from "../../iss"
 
 type Props = {
-    orderByCallback: (SortType) => void,
+    onSortByChange: (SortType) => void,
+    onTravelTimesStatusChange: (travelTimesStatus) => void,
+    servicesToUpdateTravelTimes: Array<Service>,
 }
 
-function Controls(
-    {
-        orderByCallback,
-    }: Props): ReactNode {
+function Controls({
+    onSortByChange,
+    onTravelTimesStatusChange,
+    servicesToUpdateTravelTimes,
+}: Props): ReactNode {
 
     const [sticky, setSticky] = useState(false);
     const [initialOffset, setInitialOffset] = useState(0);
@@ -54,6 +59,8 @@ function Controls(
     const renderResultsPageGeolocationButton = () => (
         <GeolocationButtonForTravelTimes
             showMessage={true}
+            onTravelTimesStatusChange={onTravelTimesStatusChange}
+            servicesToUpdateTravelTimes={servicesToUpdateTravelTimes}
         />
     )
 
@@ -62,7 +69,7 @@ function Controls(
             <SortResult
                 callback={(option) => {
                     setSortOption(option)
-                    orderByCallback(option)
+                    onSortByChange(option)
                 }}
                 hideOptionsOnScrollBreakpoint={
                     !sticky ? initialOffset - 100 : 0

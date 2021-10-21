@@ -6,7 +6,7 @@ Feature: Skip personalisation settings
     # And have my previous answers saved
 
     Background:
-        Given my location is "Melbourne, Vic"
+        Given the area to search is "Melbourne, Vic"
         And I have somewhere to sleep tonight
         And I am not part of any relevant demographics
         And I visit /

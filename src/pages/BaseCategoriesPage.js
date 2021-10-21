@@ -114,10 +114,10 @@ class BaseCategoriesPage<ChildProps = {...}, ChildState = {...}>
         const {suburb, state} = this.context.router.match.params;
 
         if (suburb && state) {
-            if (storage.getLocation() != `${suburb}, ${state}`) {
+            if (storage.getSearchArea() != `${suburb}, ${state}`) {
                 // Use the location from the URL.
-                storage.setLocation(`${suburb}, ${state}`);
-                storage.setCoordinates(null);
+                storage.setSearchArea(`${suburb}, ${state}`);
+                storage.clearUserGeolocation()
             }
         }
 

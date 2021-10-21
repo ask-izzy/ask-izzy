@@ -7,7 +7,7 @@ Feature: Personalisation header
 
     Background:
         Given a fresh session
-        And my location is "Melbourne, Vic"
+        And the area to search is "Melbourne, Vic"
 
     Scenario: Search for housing
         When I visit /

@@ -6,7 +6,7 @@ Feature: Change your personalisation settings
     # So that I can refine my search
 
     Background:
-        Given my location is "Melbourne, Vic"
+        Given the area to search is "Melbourne, Vic"
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 27 years old

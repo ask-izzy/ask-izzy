@@ -54,6 +54,9 @@ module.exports = (function() {
         )
         .when("I reload the page", unpromisify(reloadPage))
         .when("I pause for debugging", unpromisify(pauseToDebug))
+        .when("I throw an error", () => {
+            throw new Error("Artificial error")
+        })
         .when("I scroll to element \"$STRING\"", unpromisify(scrollToElement))
         .when("I take a screenshot", unpromisify(takeScreenshot))
         .then("I should be at $URL", unpromisify(checkURL))
@@ -62,6 +65,10 @@ module.exports = (function() {
         .then("I should not see \"$STRING\"", unpromisify(thenIDontSee))
         .then("search box should contain \"$STRING\"",
             unpromisify(searchContains))
+        .then("search box should contain \"\"",
+            unpromisify(function() {
+                searchContains.call(this, "")
+            }))
         .then("the button \"$STRING\" should be disabled",
             unpromisify(checkDisabled))
         .then("the button \"$STRING\" should be enabled",
@@ -395,6 +402,9 @@ async function newBrowser(): Promise<void> {
         );
     }
 
+    // Clear list of script ids for script that were queue to run on page load
+    this.driver.scriptIdsOfScriptsRunBeforeLoad.length = 0
+
     await new TargetLocator(this.driver)
         .window(newHandles[0]);
 }
@@ -406,7 +416,9 @@ async function cleanSession(): Promise<void> {
 async function takeScreenshot(): Promise<void> {
     const filepath = await debug.takeScreenshot(
         this.driver,
-        debug.getSceenshotPath(this.mochaState.currentTest)
+        debug.getSceenshotPath(
+            this.mochaState.currentTest || this.mochaState.test
+        )
     )
 
     console.log(`${this.indent}  Screenshot saved to "${filepath}"`);

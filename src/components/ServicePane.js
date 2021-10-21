@@ -260,17 +260,18 @@ function ServicePane({service}: Props): ReactNode {
                                 site={service.site}
                                 withSpacer={true}
                             />
-                            {Storage.getCoordinates() &&
-                            service.Location().travelTime &&
+                            {Storage.getUserGeolocation() &&
+                            service.travelTimes &&
                                 <TransportTime
                                     location={service.Location()}
+                                    travelTimes={service.travelTimes}
                                     withSpacer={true}
                                 />
                             }
                             {!service.Location().isConfidential() &&
                             <GoogleMapsLink
                                 to={service.Location()}
-                                className={Storage.getCoordinates() ?
+                                className={Storage.getUserGeolocation() ?
                                     "withTimes" : "withoutTimes"}
                                 onClick={recordClick}
                                 hideSpacer={true}

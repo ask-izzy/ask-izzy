@@ -10,16 +10,17 @@ import {
     addPageLoadDependencies,
     closePageLoadDependencies,
 } from "../utils/page-loading"
-import type {SortType} from "../components/ResultsListPage/SortResult.service";
 import storage from "../storage";
-
+import type {SortType} from "../components/base/Dropdown"
+import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 type State = {
     searchMeta: ?searchResultsMeta,
     searchResults: ?Array<Service>,
     searchError: ?{message: string, status: number},
     searchPagesLoaded: number,
     searchType: ?string,
-    sortOption: ?SortType,
+    sortBy: ?SortType,
+    travelTimesStatus: travelTimesStatus,
 }
 
 
@@ -66,10 +67,6 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             )
         }
 
-    }
-
-    onGeoLocationSuccess(params: {coords: Coordinates, name: string}): void {
-        storage.setCoordinates(params.coords, params.name);
     }
 
     async loadNextSearchPage(): Promise<void> {
