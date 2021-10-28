@@ -10,6 +10,7 @@ Feature: Location search
         Then I should see "Where are you looking for help?"
 
         When I search for "carlt"
+        And I wait for page to finish loading
         Then I should see the results
         -------------------------------------------
         First line (suburb) | Second line (state)

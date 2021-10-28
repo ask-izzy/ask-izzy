@@ -1,9 +1,12 @@
 /* @flow */
-import type { ElementConfig as ReactElementConfig } from "react"
+import type {
+    ElementConfig as ReactElementConfig,
+    Node as ReactNode,
+} from "react"
 
-import * as React from "react";
-import { debounce } from "lodash-decorators";
+import React, {createRef} from "react";
 import _ from "underscore";
+import debounce from "just-debounce-it";
 
 import {browserSupportsGeolocation} from "../../geolocation";
 import Personalisation from "../../mixins/Personalisation";
@@ -20,9 +23,14 @@ import WithStickyFooter from "../../components/WithStickyFooter";
 import ScreenReader from "../../components/ScreenReader";
 import AppBar from "../../components/AppBar";
 import FlatButton from "../../components/FlatButton";
+import Input from "../../components/base/Input";
 import GeolocationButton from "../../components/GeolocationButton";
 import type {GeolocationStatus} from "../../components/GeolocationButton";
-type AppBarProps = React.ElementProps<typeof AppBar>
+import {
+    addPageLoadDependencies,
+    closePageLoadDependencies,
+} from "../../utils/page-loading"
+type AppBarProps = ReactElementConfig<typeof AppBar>
 
 type Props = {
         name: string,
@@ -37,7 +45,7 @@ type Props = {
 type location = {|name: string|} | Geolocation
 
 type State = {
-    autocompletionInProgress: boolean,
+    gettingAutocompletionsInProgress: boolean,
     locationNameInput: string,
     selectedLocation: ?location,
     autocompletions: Array<issArea>,
@@ -51,12 +59,12 @@ class Location extends Personalisation<Props, State> {
         name: "location",
     };
 
-    _search: ?HTMLInputElement;
+    searchInputRef: { current: null | HTMLInputElement } = createRef()
 
     constructor(props: Object) {
         super(props);
         this.state = {
-            autocompletionInProgress: false,
+            gettingAutocompletionsInProgress: false,
             locationNameInput: "",
             selectedLocation: null,
             autocompletions: [],
@@ -157,26 +165,50 @@ class Location extends Personalisation<Props, State> {
         }
     }
 
-    /**
-     * triggerAutocomplete:
-     *
-     * Trigger an autocomplete after a 500ms debounce.
-     */
-    /*::__(){`*/@debounce(500)/*::`}*/
-    async triggerAutocomplete(): Promise<void> {
-        let input = this.state.locationNameInput;
-
-        if (input.length < 1) {
+    triggerAutocomplete(newLocationNameInput: string) {
+        if (newLocationNameInput.length < 1) {
+            if (this.state.gettingAutocompletionsInProgress) {
+                closePageLoadDependencies(
+                    this.context.router.location,
+                    "autocompleteSuggestionsLoad"
+                )
+            }
             this.setState({
                 autocompletions: [],
+                gettingAutocompletionsInProgress: false,
             });
-        } else {
+            return
+        }
+
+        this.setState({
+            gettingAutocompletionsInProgress: true,
+        });
+
+        addPageLoadDependencies(
+            this.context.router.location,
+            "autocompleteSuggestionsLoad"
+        )
+        this.getAutocompletionSuggestions(newLocationNameInput)
+    }
+
+    getAutocompletionSuggestions: (string) => Promise<void> = debounce(
+        async(input: string) => {
+            let results
             try {
-                const results = await iss.getLocations(input)
-                // Check to make sure input hasn't change in the meantime
-                if (input !== this.state.locationNameInput) {
-                    return
-                }
+                results = await iss.getLocations(input)
+            } catch (error) {
+                console.error(
+                    "Error trying to get location autocomplete",
+                    error
+                )
+            }
+
+            // Check to make sure input hasn't change in the meantime
+            if (input !== this.state.locationNameInput) {
+                return
+            }
+
+            if (results) {
                 this.setState({
                     autocompletions: _.uniq(
                         Array.from(results.objects),
@@ -184,17 +216,19 @@ class Location extends Personalisation<Props, State> {
                         ({name, state}) => name + state
                     ),
                 });
-            } catch (error) {
-                console.error(
-                    "Error trying to get location autocomplete",
-                    error
-                )
             }
-        }
-        this.setState({
-            autocompletionInProgress: false,
-        });
-    }
+
+            this.setState({
+                gettingAutocompletionsInProgress: false,
+            });
+            closePageLoadDependencies(
+                this.context.router.location,
+                "autocompleteSuggestionsLoad"
+            )
+        },
+        500,
+        true
+    )
 
     setSelectedLocation(location: location): void {
         this.setState({
@@ -235,32 +269,42 @@ class Location extends Personalisation<Props, State> {
 
     componentDidUpdate(prevProps: Object, prevState: Object): void {
         // After state updates, make sure you can see the input
-        if (this._search &&
-            this._search === document.activeElement &&
-            prevState.autocompletions != this.state.autocompletions) {
+        if (
+            this.searchInputRef.current &&
+            this.searchInputRef.current === document.activeElement &&
+            prevState.autocompletions !== this.state.autocompletions
+        ) {
             this.scrollToSearchControl();
         }
     }
 
-    /*::__(){`*/@debounce(500)/*::`}*/
     scrollToSearchControl(): void {
-        if (this._search) {
+        if (this.searchInputRef.current) {
             // Scroll the input to just under the appbar
-            window.scrollTo(0, this._search.offsetTop - 40);
+            window.scrollTo(
+                0,
+                this.searchInputRef.current.getBoundingClientRect().top +
+                    window.scrollY - 50
+            );
         }
     }
 
-    onSearchChange(event: Event): void {
-        if (event.target instanceof HTMLInputElement) {
-            this.setState({
-                locationNameInput: event.target.value.replace(/^\s+/, ""),
-                autocompletionInProgress: true,
-            });
-
-            this.clearSelectedLocation();
-
-            this.triggerAutocomplete();
+    onSearchChange(newValue: string): void {
+        const matchingAutocomplete = this.state.autocompletions.find(
+            area => `${area.name}, ${area.state}` === newValue
+        )
+        if (matchingAutocomplete) {
+            return this.selectAutocomplete(matchingAutocomplete)
         }
+        const newLocationNameInput = newValue.replace(/^\s+/, "")
+
+        this.setState({
+            locationNameInput: newLocationNameInput,
+        });
+
+        this.clearSelectedLocation();
+
+        this.triggerAutocomplete(newLocationNameInput);
     }
 
     onGeolocationStatusChange(status: GeolocationStatus): void {
@@ -284,7 +328,7 @@ class Location extends Personalisation<Props, State> {
         });
     }
 
-    render: (() => React.Element<"div">) = () => (
+    render: (() => ReactNode) = () => (
         <div className="Location">
             <div
                 role="complementary"
@@ -333,81 +377,40 @@ class Location extends Personalisation<Props, State> {
                         <legend>
                             Where are you?
                         </legend>
-                        <div className="search"
-                            id="searchBar"
-                        >
-                            <input
+                        <div className="search">
+                            <Input
+                                ref={this.searchInputRef}
                                 type="search"
-                                ref={element => {
-                                    this._search = element;
-                                }}
-                                onFocus={
-                                    this.scrollToSearchControl.bind(this)
-                                }
+                                showClearButton={true}
                                 aria-label="Search for a suburb
                                  or postcode"
                                 placeholder="Search for a suburb
                                  or postcode"
                                 value={this.state.locationNameInput}
                                 onChange={this.onSearchChange.bind(this)}
-                            />
-                            {
-                                this.state.locationNameInput &&
-                                <FlatButton
-                                    className="clear-text"
-                                    label="&times;"
-                                    aria-label="Clear entered location"
-                                    prompt="Clear"
-                                    onClick={() => {
-                                        this.clearSelectedLocation()
-                                        this.clearLocationInput()
-                                    }}
-                                />
-                            }
-                        </div>
-                        {this.state.autocompletions.length > 0 &&
-                            <ul className="locationList">
-                                {
-                                    /* any autocompletions we currently have */
-                                    this.state.autocompletions.map(
-                                        (result, index) =>
-                                            <li
-                                                className="locationItem"
-                                                key={index}
-                                                aria-label={`${result.name},
-                                                ${result.state}`}
-                                                tabIndex={0}
-                                                onClick={
-                                                    this.selectAutocomplete
-                                                        .bind(
-                                                            this,
-                                                            result,
-                                                        )
-                                                }
-                                            >
-                                                <div className="suburb">
-                                                    {result.name}
-                                                </div>
-                                                <div className="state">
-                                                    {result.state}
-                                                </div>
-                                            </li>
-                                    )
+                                autocompleteValues={this.state.autocompletions
+                                    .map(location => ({
+                                        value: `${location.name},` +
+                                            ` ${location.state}`,
+                                        label: <>
+                                            <div className="suburb">
+                                                {location.name}
+                                            </div>
+                                            <div className="state">
+                                                {location.state}
+                                            </div>
+                                        </>,
+                                    }))
                                 }
-                            </ul>
-                        }
-                        {
-                            this.state.autocompletionInProgress && (
-                                <div
-                                    className="progress"
-                                    tabIndex="0"
-                                >
-                                    <ScreenReader>
-                                        Loading locations
-                                    </ScreenReader>
-                                    <icons.Loading className="big" />
-                                </div>
-                            )
+                            />
+                        </div>
+                        {this.state.gettingAutocompletionsInProgress &&
+                            <div className="progress">
+                                <icons.Loading
+                                    aria-label="Loading locations"
+                                    className="big"
+                                />
+                            </div>
                         }
                     </fieldset>
                     <div className="GeoLocationButtonContainer">
@@ -444,7 +447,7 @@ class Location extends Personalisation<Props, State> {
         </div>
     );
 
-    renderDoneButton(): React.Element<"div"> {
+    renderDoneButton(): ReactNode {
         return (
             <div>
                 <div className="done-button">
@@ -453,7 +456,6 @@ class Location extends Personalisation<Props, State> {
                         className="doneButton"
                         onClick={this.onDoneTouchTap.bind(this)}
                         disabled={this.state.nextDisabled}
-                        form="searchBar"
                     />
                 </div>
             </div>

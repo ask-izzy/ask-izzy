@@ -1,0 +1,121 @@
+@use '../../styles/mixins/colours';
+
+// To remove the IE11 built in 'x'
+// at the end of an input box
+::-ms-clear {
+    display: none;
+}
+
+.Input {
+    $bg-colour-static: #{colours.get-static('colour-bg-standard')};
+    $bg-colour-dynamic: var(--colour-bg-standard);
+
+    color: #{colours.get-static('colour-text-dark')};
+    color: var(--colour-text-dark);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+
+    > .icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        max-width: 1.5em;
+        display: flex;
+        pointer-events: none;
+
+        /* Necessary to override the kind of mess way we deal with icon sizes */
+        > .icon,
+        > .icon svg {
+            height: 100%;
+            width: 1.5em;
+            display: inline-flex;
+        }
+    }
+
+    input {
+        border-radius: 5px;
+        -webkit-appearance: none;
+        border: 0;
+        box-sizing: border-box;
+        padding: 0.2em;
+        background-color: $bg-colour-static;
+        background-color: $bg-colour-dynamic;
+        flex: 1 1 auto;
+        height: 100%;
+
+        &.includes-icon {
+            padding-left: 1.5em;
+        }
+
+        &.includes-clear {
+            padding-right: 1.5em;
+        }
+    }
+
+    .clear-text {
+        position: absolute;
+        right: 0;
+        max-height: 100%;
+        margin-right: 0.3em;
+        padding: 0 0.2em;
+        background: none;
+        border: 0;
+        background-color: $bg-colour-static;
+        background-color: $bg-colour-dynamic;
+        border-radius: 3px;
+
+        &:not(:focus) .text {
+            display: none;
+        }
+    }
+
+    .autocompleteList {
+        box-sizing: border-box;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        max-height: 20em;
+        overflow-y: auto;
+        overflow-x: hidden;
+        list-style: none;
+        padding: 0;
+        margin-top: 0;
+        background-color: #{colours.get-static('colour-bg-standard')};
+        background-color: var(--colour-bg-standard);
+        transition: opacity 0.1s ease;
+        border-radius: 0 0 3px 3px;
+        box-shadow: 0 2px 3px 0 #{colours.get-static('colour-element-shadow')};
+        box-shadow: 0 2px 3px 0 var(--colour-element-shadow);
+        opacity: 0;
+
+        li {
+            padding: 0.2em 0.3em;
+
+            &:not(:first-child) {
+                border-top: 1px solid #{colours.get-static('colour-border-list-item')};
+                border-top: 1px solid var(--colour-border-list-item);
+            }
+
+            &[aria-selected='true'] {
+                background-color: #{colours.get-static('colour-input-focus-overlay')};
+                background-color: var(--colour-input-focus-overlay);
+            }
+        }
+    }
+
+    &.isAutocompleteSuggestions {
+        .autocompleteList {
+            outline: 1px solid #{colours.get-static('colour-input-focus-primary')};
+            outline: 1px solid var(--colour-input-focus-primary);
+            opacity: 1;
+        }
+
+        input {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+}

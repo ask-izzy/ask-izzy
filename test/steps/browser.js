@@ -53,6 +53,11 @@ module.exports = (function() {
             unpromisify(clickDetails)
         )
         .when("I reload the page", unpromisify(reloadPage))
+        .when("I wait for page to finish loading",
+            unpromisify(async function() {
+                await module.exports.documentReady(this.driver)
+            })
+        )
         .when("I pause for debugging", unpromisify(pauseToDebug))
         .when("I throw an error", () => {
             throw new Error("Artificial error")
@@ -93,11 +98,25 @@ module.exports = (function() {
 module.exports.documentReady = function documentReady(
     driver: Webdriver.WebDriver
 ): Promise<boolean> {
-    return driver.executeScript(() =>
-        (document.readyState === "complete") &&
-        (window.xhrCount) &&
-        (window.xhrCount() === 0)
-    );
+    return driver.executeAsyncScript((callback) => {
+        const intervalId = setInterval(() => {
+            // Internal page
+            if (window.location.hostname === "localhost") {
+                if (window.waitTillPageLoaded) {
+                    clearInterval(intervalId)
+                    window.waitTillPageLoaded()
+                        .then(() => callback())
+                }
+
+            // External page
+            } else {
+                if (document.readyState === "complete") {
+                    clearInterval(intervalId)
+                    callback()
+                }
+            }
+        }, 10);
+    })
 };
 
 async function visitUrl(url: string): Promise<void> {

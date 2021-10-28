@@ -2,17 +2,27 @@
 
 .DisabilityAdvocacyFinder {
     margin-bottom: 50px;
+    container-type: inline-size; /* stylelint-disable-line property-no-unknown */
 
-    button {
-        display: block;
-        margin: auto;
-        margin-bottom: 40px;
-        padding: 0 2em;
-        border-radius: 4px;
+    .SearchBar {
+        .Input input {
+            border: #{colours.get-static('colour-border-standard-callout')} 1px solid;
+            border: var(--colour-border-standard-callout) 1px solid;
+        }
     }
 
     h3 {
         margin-bottom: 0;
+    }
+
+    .searchSection {
+        margin: 2em 0;
+    }
+
+    .de-emphasised {
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
+        margin: 0.5em 0;
     }
 
     .askIzzyInfoBox {
@@ -20,27 +30,56 @@
         padding: 0 1.2em 1em;
         border: #{colours.get-static('colour-border-standard-callout')} 1px solid;
         border: var(--colour-border-standard-callout) 1px solid;
+        border-radius: 5px;
+
+        .allServicesLink {
+            margin-top: 1em;
+        }
     }
 
     .backToDSS {
-        margin: 2em;
+        margin: 2em 0;
+        display: flex;
+        justify-content: center;
+        font-weight: bold;
+        text-align: center; // keeps second line of text centred if it breaks into multiple lines
 
-        .SvgIcon {
-            width: 33px;
-            height: 33px;
-            margin-bottom: -10px;
+        // For text to break in a more aesthetically pleasing way. Compatibility is sketchy but
+        // this is a progressive enhancement so it doesn't matter.
+        // When container unit's become a thing we can do this nicer with cqw to
+        // break like when it hit's 100% of width:
+        // https://github.com/w3c/csswg-drafts/issues/5888
+        @container (max-width: 370px) { /* stylelint-disable-line scss/at-rule-no-unknown */
+            margin: 2em 10vw;
         }
 
-        @media (max-width: 576px) {
-            margin: 2em 0;
-            text-align: center;
+        .Link {
+            text-decoration: none;
+            color: #{colours.get-static('colour-text-dark')};
+            color: var(--colour-text-dark);
+        }
 
-            button {
-                display: inline-flex;
-                align-items: center;
-                padding: 0 1em;
-                margin-bottom: 0;
-                font-size: 16px;
+        &:hover {
+            .SvgIcon {
+                transform: translateX(0.5em);
+            }
+        }
+
+        .icon {
+            display: inline-block;
+
+            .SvgIcon {
+                width: 33px;
+                height: 33px;
+                margin-bottom: -10px;
+                transition: transform 0.5s;
+
+                path {
+                    fill: #{colours.get-static('colour-brand-primary')};
+                    fill: var(--colour-brand-primary);
+                    stroke: #{colours.get-static('colour-brand-primary')};
+                    stroke: var(--colour-brand-primary);
+                }
             }
         }
     }

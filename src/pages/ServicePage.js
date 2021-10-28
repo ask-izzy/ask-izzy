@@ -16,6 +16,10 @@ import type { RouterContextObject } from "../contexts/router-context";
 import ScreenReader from "../components/ScreenReader";
 import {makeTitle} from "../utils";
 import Helmet from "react-helmet";
+import {
+    addPageLoadDependencies,
+    closePageLoadDependencies,
+} from "../utils/page-loading"
 
 class ServicePage extends React.Component<{}, {
     object?: Service,
@@ -71,11 +75,20 @@ class ServicePage extends React.Component<{}, {
         });
 
         try {
+            addPageLoadDependencies(
+                this.context.router.location,
+                `requestService-${this.id}`
+            )
             let object = await iss.getService(this.id);
             this.setState({object});
         } catch (error) {
             this.setState({error});
         }
+
+        closePageLoadDependencies(
+            this.context.router.location,
+            `requestService-${this.id}`
+        )
 
     }
 

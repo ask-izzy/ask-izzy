@@ -84,6 +84,7 @@ module.exports = {
                     path.resolve("node_modules/color-convert"),
                     path.resolve("node_modules/json-schema-ref-parser"),
                     path.resolve("node_modules/ono"),
+                    path.resolve("node_modules/escape-string-regexp"),
                 ],
                 use: ["babel-loader"],
             },

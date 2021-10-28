@@ -52,6 +52,7 @@ Feature: Geolocation
         And the button "Done" should be enabled
 
         When I search for "carlt"
+        And I wait for page to finish loading
         Then I should see the results
         -------------------------------------------
         First line (suburb) | Second line (state)
@@ -71,7 +72,7 @@ Feature: Geolocation
         And search box should contain "Richmond, VIC"
         And the button "Done" should be enabled
 
-        When I click on "×"
+        When I click on "Clear"
         Then I should see "Get your current location"
         And search box should contain ""
         And the button "Done" should be disabled

@@ -1,16 +1,17 @@
-{  
-  "presets": [
-    ["@babel/preset-env", {
-      "useBuiltIns": "entry",
-      "corejs": "3.0.0",
-     }
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "useBuiltIns": "entry",
+                "corejs": "3.0.0"
+            }
+        ],
+        "@babel/preset-flow",
+        "@babel/preset-react"
     ],
-    "@babel/preset-flow",
-    "@babel/preset-react"
-  ],
-  "plugins": [
-      "@babel/plugin-transform-flow-strip-types",
-      ["@babel/plugin-proposal-decorators", { "legacy": true }],
-      "@babel/plugin-proposal-class-properties",
-  ],
+    "plugins": [
+        "@babel/plugin-transform-flow-strip-types",
+        "@babel/plugin-proposal-class-properties"
+    ]
 }

@@ -99,12 +99,6 @@ type XhrOptions = {
     beforeSend?: Function,
 };
 
-let xhrInProgress = 0;
-
-if (typeof window != "undefined") {
-    window.xhrCount = () => xhrInProgress;
-}
-
 /**
  * Wraps the http request code in a promise.
  *
@@ -113,7 +107,6 @@ if (typeof window != "undefined") {
  * @returns {Promise<Object>} a promise for the request.
  */
 async function _request(obj: XhrOptions) {
-    xhrInProgress++;
     try {
         return await xhr(obj);
     } catch (error) {
@@ -158,8 +151,6 @@ async function _request(obj: XhrOptions) {
         });
 
         throw error;
-    } finally {
-        xhrInProgress--;
     }
 }
 

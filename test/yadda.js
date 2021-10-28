@@ -141,7 +141,7 @@ let processFile = (file) => {
                 if (process.env.SCREENSHOT_FAILURES) {
                     if (
                         !this.currentTest.title
-                            .match(/When I take a screenshot/i)
+                            .match(/I take a screenshot/i)
                     ) {
                         await deleteSceenshot(this.currentTest)
                     }
