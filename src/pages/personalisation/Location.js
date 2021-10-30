@@ -148,7 +148,7 @@ class Location extends React.Component<
         return request;
     }
 
-    static summaryLabel: string = "Where are you?";
+    static summaryLabel: string = "Where are you looking for help?";
 
     static get summaryValue(): string {
         return storage.getSearchArea();
@@ -382,7 +382,7 @@ class Location extends React.Component<
                 >
                     <fieldset>
                         <legend>
-                            Where are you?
+                            Where are you looking for help?
                         </legend>
                         <div className="search">
                             <Input

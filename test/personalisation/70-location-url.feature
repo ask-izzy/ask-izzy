@@ -12,7 +12,7 @@ Feature: Show location in url
         When I visit /search/housing/in/Richmond-VIC
         Then I should see "Richmond, VIC"
         When I click on "See all and edit"
-        And I click on "Where are you?"
+        And I click on "Where are you looking for help?"
         Then I should see "Find services near you"
         When I search for "carlt"
         And I wait for page to finish loading
