@@ -459,7 +459,7 @@ class Location extends React.Component<
             <div>
                 <div className="done-button">
                     <FlatButton
-                        label="Done"
+                        label="Next"
                         className="doneButton"
                         onClick={this.onDoneTouchTap.bind(this)}
                         disabled={this.state.nextDisabled}
