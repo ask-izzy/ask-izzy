@@ -37,7 +37,6 @@ export default function render(req, res, next) {
         const app = ReactDOMServer.renderToString(
             <StaticRouter location={req.url}
                 context={context}
-                isRenderingStatic={false}
             >{routes}</StaticRouter>
         );
 
