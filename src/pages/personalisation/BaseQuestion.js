@@ -460,7 +460,7 @@ class BaseQuestion extends React.Component<
             if (this.state.selectedAnswer.size) {
                 label = "Done"
             } else {
-                label = "None of these"
+                label = "Skip"
             }
         }
         return (
