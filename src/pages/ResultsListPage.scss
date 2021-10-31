@@ -65,17 +65,17 @@
     }
 
     .MoreResultsButton {
+        display: block;
+        width: 100%;
         max-width: 300px;
         margin: 0 auto;
+        padding: 10px;
         background-color: #{colours.get-static('colour-bg-opposite')};
         background-color: var(--colour-bg-opposite);
-        font-size: 14px;
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
+        font-size: 16px;
         text-align: center;
-
-        .primaryText {
-            color: #{colours.get-static('colour-text-very-light')};
-            color: var(--colour-text-very-light);
-        }
     }
 
     .CrisisHeader {
