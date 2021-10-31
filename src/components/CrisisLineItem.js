@@ -5,8 +5,8 @@ import React from "react";
 import PropTypes from "proptypes";
 
 import Link from "./base/Link";
-import Phone from "./Phone";
 import Service from "../iss/Service";
+import PhoneButton from "./PhoneButton";
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
@@ -68,7 +68,7 @@ class CrisisLineItem extends React.Component<Props, void> {
                             {service.site.name}
                         </Link>
                     </h3>
-                    <Phone
+                    <PhoneButton
                         {...phone}
                         crisis={true}
                     />
