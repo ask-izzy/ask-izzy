@@ -150,19 +150,19 @@ Feature: Service details page
         When I navigate to the service page
         Then I should see the contacts
         -------------------------------------------
-        Freecall 1800 111 111
+        Freecall Call 1800 111 111
         Reception reception@service.org
         example.org
         -------------------------------------------
         When I click on "Show other contact options"
         Then I should see the contacts
         -------------------------------------------
-        Freecall 1800 111 111
+        Freecall Call 1800 111 111
         Reception reception@service.org
         example.org
-        Phone (03) 3333 3333
-        (really a mobile) 0477 777 777
-        Phone 1300 111 111
+        Phone Call (03) 3333 3333
+        (really a mobile) Call 0477 777 777
+        Phone Call 1300 111 111
         -------------------------------------------
         When I click on "example.org"
         Then I should be at https://example.org/

@@ -44,11 +44,11 @@
         }
 
         .Icon {
-            position: absolute;
-            top: -5px;
-            left: -8px;
+            display: inline-block;
             width: 40px;
             height: 40px;
+            margin: -10px -5px; /* negative margin to crop svg extra space */
+            vertical-align: bottom;
 
             path {
                 fill: #{colours.get-static('colour-text-dark')};

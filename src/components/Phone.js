@@ -9,11 +9,13 @@ import type {AnalyticsEvent} from "../google-tag-manager";
 import icons from "../icons";
 import classnames from "classnames"
 import type { phone } from "../iss/general";
+import {toCamelCase} from "../utils/strings";
 
 type Props = phone & {
     crisis?: boolean,
     analyticsEventDetails?: AnalyticsEvent,
     className?: ?string,
+    styleType?: string // currently only "hollow" is supported
 }
 
 class Phone extends React.Component<Props, void> {
@@ -48,26 +50,25 @@ class Phone extends React.Component<Props, void> {
     recordClick: any = this.recordClick.bind(this)
 
     render(): ReactElement<"div"> {
-        let contactButtonClassName = "ContactButton";
-        let phonebutton = <icons.Phone />;
-
-        if (this.props.crisis) {
-            // Customise crisis services with style branding
-            contactButtonClassName += " CrisisContactButton"
-            phonebutton = <icons.PhoneSolid />;
-        }
+        const className = classnames(
+            "Contact",
+            "Phone",
+            this.props.styleType ?
+                ` ${toCamelCase("style " + this.props.styleType)}`
+                : ""
+        )
+        const icon = this.props.styleType === "hollow" ?
+            <icons.Phone />
+            : <icons.PhoneSolid />
 
         return (
-            <div className="Contact Phone">
+            <div className={className}>
                 <span className="kind">
                     {this.displayComment}
                 </span>
                 <Link
                     to={this.href}
-                    className={classnames(
-                        contactButtonClassName,
-                        this.props.className,
-                    )}
+                    className="ContactButton"
                     onClick={this.recordClick}
                     analyticsEvent={{
                         event: "Link Followed - Phone Contact",
@@ -79,7 +80,8 @@ class Phone extends React.Component<Props, void> {
                     <div
                         className="Contact-text"
                     >
-                        {phonebutton}
+                        {icon}
+                        <span>Call </span>
                         <span className="number value">
                             {this.props.number}
                         </span>
