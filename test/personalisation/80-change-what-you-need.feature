@@ -33,7 +33,7 @@ Feature: Change your personalisation settings
     Scenario: Edit my location setting
         When I visit /housing/personalise/summary
         And I click on "Where are you looking for help?"
-        Then I should see "Find services near you"
+        Then I should see "You don't have to answer, but this helps us give you better results"
 
         When I search for "carlt"
         And I click on "Carlton"
