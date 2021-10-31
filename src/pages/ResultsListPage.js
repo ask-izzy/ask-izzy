@@ -196,16 +196,18 @@ class ResultsListPage extends ResultsPage<> {
     renderLoadMore(): void | ReactElement<"div"> | ReactNode {
         if (this.state.searchMeta?.next) {
             return (
-                <ButtonListItem
-                    className="MoreResultsButton"
-                    primaryText="See more results"
-                    onClick={this.loadNextSearchPage}
-                    analyticsEvent={{
-                        event: "Action Triggered - Load More Results",
-                        eventAction: "Load more results",
-                        eventLabel: null,
-                    }}
-                />
+                <div className="moreResultsContainer">
+                    <ButtonListItem
+                        className="MoreResultsButton"
+                        primaryText="See more results"
+                        onClick={this.loadNextSearchPage}
+                        analyticsEvent={{
+                            event: "Action Triggered - Load More Results",
+                            eventAction: "Load more results",
+                            eventLabel: null,
+                        }}
+                    />
+                </div>
             );
         }
 
