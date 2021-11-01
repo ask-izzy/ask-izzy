@@ -48,16 +48,20 @@ files.forEach((path) => {
                     )
                 )
                 .join(" ")
+        )
+        .replace(
+            /viewBox="([\d\s]*)"/,
+            (match, originalViewBox) =>
+                'viewBox="${this.props.viewBox || "' + originalViewBox + '"}"'
         );
 
     writeFileSync(outFile, `${fileHeader}
-
-import type { ElementProps as ReactElementProps } from "react"
+import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseIcon from "./BaseIcon";
 
 export default class SvgIcon${className} extends BaseIcon {
-    static defaultProps: ReactElementProps<typeof BaseIcon> = {
+    static defaultProps: ReactElementConfig<typeof BaseIcon> = {
         iconClass: "${className}Icon",
     }
 

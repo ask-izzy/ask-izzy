@@ -30,17 +30,15 @@ export default class DemographicsIndigenous extends BaseQuestion {
         },
     };
 
-    static prettyPrintSavedAnswer(): ReactNode {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): ReactNode {
+        switch (answer) {
         case "Yes - show these first where possible":
-            return (
-                <span>
-                    <icons.AboriginalFlag/>
-                    <icons.TorresStraitIslandersFlag />
-                </span>
-            );
+            return <>
+                <icons.AboriginalFlag/>
+                <icons.TorresStraitIslandersFlag />
+            </>
         default:
-            return this.savedAnswer
+            return answer
         }
     }
 }

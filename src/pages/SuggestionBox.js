@@ -1,10 +1,12 @@
 /* @flow */
 
 import * as React from "react";
+
 import Link from "../components/base/Link";
 import Storage from "../storage";
 import Category from "../constants/Category";
 import Service from "../iss/Service";
+import {ensureURLHasTrailingSlash} from "../utils/url"
 
 type Props = {
     category: ?Category,
@@ -20,12 +22,8 @@ function SuggestionBox(
         results,
         searchTerm,
     }: Props): React.Node {
-
-    const trailingSlash = (path: string): string =>
-        `${path}${path.endsWith("/") ? "" : "/"}`;
-
     const editingPath = () =>
-        `${trailingSlash(location.pathname)}personalise/summary`
+        `${ensureURLHasTrailingSlash(location.pathname)}personalise/summary`
 
     const clearAnswers = () => {
         const location = Storage.getSearchArea();

@@ -44,7 +44,7 @@ export type PersonalisationPageProps = {|
 |}
 
 export type PersonalisationPageState = {
-    showStepper: boolean,
+    showQuestionStepper: boolean,
     category: ?Category,
 }
 

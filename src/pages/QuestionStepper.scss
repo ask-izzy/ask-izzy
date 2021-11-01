@@ -7,142 +7,39 @@
         colours.lighten('raw-colour-pure-white', 'global', -23%)
     );
 
-    .skipToSelections {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        width: 96%;
-        margin: auto;
-        padding-top: 5px;
+    // Remove browser styles for lists
+    ol.breadcrumbs {
+        padding-left: 0;
+        margin: 0;
 
-        a {
-            &:visited {
-                color: #{colours.get-static('colour-link')};
-                color: var(--colour-link);
-            }
+        li {
+            display: inline-block;
+            list-style-type: none;
         }
     }
 
-    .breadCrumbText {
-        display: inline-block;
-        color: #{colours.get-static('colour-text-mid')};
-        color: var(--colour-text-mid);
-    }
+    .clearButton {
+        border: 0;
+        background: none;
+        color: #{colours.get-static('colour-link')};
+        color: var(--colour-link);
+        text-decoration: underline;
+        cursor: pointer;
 
-    .introText {
-        color: #{colours.get-static('colour-text-mid')};
-        color: var(--colour-text-mid);
-    }
-
-    .answerBox {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        width: 96%;
-        margin: auto;
-
-        .locationIcon {
-            display: flex;
-            align-items: center;
-        }
-
-        .ClearButton {
-            margin-right: 1em;
-            border: 0;
-            background: none;
-            color: #{colours.get-static('colour-link')};
-            color: var(--colour-link);
-            text-decoration: underline;
-            cursor: pointer;
-
-            &:hover {
-                text-decoration: none;
-            }
-        }
-
-        .SvgIcon {
-            height: 1em;
-
-            &.MapIcon {
-                width: 2em;
-                height: 25px;
-                margin-top: 5px;
-
-                /* to override the default fill colour */
-                path {
-                    fill: #{colours.get-static('colour-interactive-icon')};
-                    fill: var(--colour-interactive-icon);
-                }
-            }
-
-            &.DemographicLgbtiqIcon {
-                left: 1px;
-                height: 22px;
-                margin-bottom: -5px;
-            }
+        &:hover {
+            text-decoration: none;
         }
     }
 
-    &.ResultsPage {
-        .answerBox {
-            padding: 10px;
-            line-height: 24px;
-        }
-
-        .EditAnswers {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            width: 96%;
-            margin: auto;
-            padding-bottom: 15px;
-            font-size: large;
-
-            a {
-                &:visited {
-                    color: #{colours.get-static('colour-link')};
-                    color: var(--colour-link);
-                }
-            }
-        }
-    }
-
-    &.QuestionFlow {
-        background-color: #{colours.get-static('colour-bg-standard-tint-1')};
-        background-color: var(--colour-bg-standard-tint-1);
-
-        .answerBox {
-            height: 3em;
-            padding: 15px;
-            font-size: 14px;
-            line-height: 24px;
-        }
-    }
-
-    .editing {
-        display: inline-block;
-        color: #{colours.get-static('colour-text-dark')};
-        color: var(--colour-text-dark);
-        font-style: italic;
-
-        span {
-            margin-left: 2px;
-        }
-    }
-
-    .pipeOrComma {
+    .breadcrumbSpacer {
         color: #{colours.get-static('colour-comma-pipe', 'QuestionStepper')};
         color: var(--colour-comma-pipe);
-
-        .editing {
-            margin-right: 2px;
-        }
+        margin: 0 0.4em;
+        white-space: pre;
     }
 
-    .nonMultiMargin {
-        margin: 5px;
+    .breadcrumbAnswerSpacer {
+        color: #{colours.get-static('colour-comma-pipe', 'QuestionStepper')};
+        color: var(--colour-comma-pipe);
     }
 }

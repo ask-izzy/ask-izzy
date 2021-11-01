@@ -18,12 +18,12 @@ export default class LifeSkillsSubcategories extends BaseQuestion {
         },
     };
 
-    static prettyPrintSavedAnswer(): string | Array<string> {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): string {
+        switch (answer) {
         case "School":
             return "Schools";
         default:
-            return this.savedAnswer
+            return answer
         }
     }
 }

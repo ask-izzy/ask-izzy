@@ -17,7 +17,7 @@ import type { serviceSearchRequest } from "../../iss/serviceSearch";
 import {crisisResults, nonCrisisResults} from "../../iss/crisisService"
 import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
-import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
+import {shouldShowQuestionStepper} from "../QuestionStepper";
 import WithStickyFooter from "../../components/WithStickyFooter";
 import ScreenReader from "../../components/ScreenReader";
 import FlatButton from "../../components/FlatButton";
@@ -25,7 +25,6 @@ import Input from "../../components/base/Input";
 import GeolocationButton from "../../components/GeolocationButton";
 import type {GeolocationStatus} from "../../components/GeolocationButton";
 import routerContext from "../../contexts/router-context";
-import Category from "../../constants/Category"
 import type {
     PersonalisationPageProps,
     PersonalisationPageDefaultProps,
@@ -48,8 +47,6 @@ type State = {
     selectedLocation: ?location,
     autocompletions: Array<areaLocation>,
     nextDisabled: boolean,
-    showStepper: boolean,
-    category: ?Category,
 }
 
 // We need to create the defaultProps out of the component first otherwise flow
@@ -75,7 +72,7 @@ class Location extends React.Component<
             selectedLocation: null,
             autocompletions: [],
             nextDisabled: true,
-            showStepper: false,
+            showQuestionStepper: false,
             category: undefined,
         };
     }
@@ -99,10 +96,10 @@ class Location extends React.Component<
         const category = getCategory(
             this.context.router.match.params.page
         )
-        const searchAnswers = getSearchAnswers();
         this.setState({
-            showStepper: category ? fetchAnswers(category).length > 0
-                : searchAnswers.length > 0,
+            showQuestionStepper: shouldShowQuestionStepper(
+                category || undefined
+            ),
             category,
         })
     }
@@ -118,8 +115,8 @@ class Location extends React.Component<
         return storage.getSearchArea();
     }
 
-    static prettyPrintSavedAnswer(): ?string {
-        return this.savedAnswer;
+    static prettyPrintAnswer(answer: string): ?string {
+        return answer;
     }
 
     static shouldInjectAccessPoints(): boolean {
@@ -343,35 +340,54 @@ class Location extends React.Component<
                         Header.
                     </span>
                 </ScreenReader>
-                <components.HeaderBar
-                    primaryText={
-                        "Where are you looking for help?"
-                    }
-                    secondaryText={
-                        "Find services near you"
-                    }
-                    taperColour={this.state.showStepper ? "LighterGrey"
-                        : "HeaderBar"}
-                    fixedAppBar={true}
-                    bannerName={getBannerName(
-                        this.state.category,
-                        this.props.name
-                    )}
-                    {...this.props.backToAnswers && {
-                        goBack: {
-                            backMessage: "Back to answers",
-                            onBackTouchTap: this.props.goBack,
-                        },
-                    }}
-                />
-                {this.state.showStepper ? (
-                    <QuestionStepper
-                        initialTabIndex={0}
-                        category={this.state.category}
+                <section className="page-header-section">
+                    <components.HeaderBar
+                        primaryText={
+                            "Where are you looking for help?"
+                        }
+                        secondaryText={
+                            "Find services near you"
+                        }
+                        taperColour={this.state.showQuestionStepper ?
+                            "LighterGrey"
+                            : "HeaderBar"}
+                        fixedAppBar={true}
+                        bannerName={getBannerName(
+                            this.state.category,
+                            this.props.name
+                        )}
+                        {...this.props.backToAnswers && {
+                            goBack: {
+                                backMessage: "Back to answers",
+                                onBackTouchTap: this.props.goBack,
+                            },
+                        }}
                     />
-                ) : null}
+                    {this.state.showQuestionStepper && (
+                        <div className="questionsBar">
+                            <ScreenReader>
+                                <a
+                                    href="#mainPageContent"
+                                    aria-label={
+                                        "Skip your previously selected " +
+                                        "answers and go straight to the " +
+                                        "options."
+                                    }
+                                >
+                                    Skip to make your selection
+                                </a>
+                            </ScreenReader>
+                            <QuestionStepper
+                                category={this.state.category}
+                            />
+                        </div>
+                    )}
+                </section>
             </div>
-            <main aria-labelledby="questions">
+            <main
+                id="mainPageContent"
+                aria-labelledby="questions"
+            >
                 <ScreenReader>
                     <span id="questions">
                         Questions.

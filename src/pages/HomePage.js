@@ -103,19 +103,15 @@ function HomePage(): ReactNode {
                         />
                     </div>
                 </div>
-                <div>
-                    {location &&
-                        <div>
-                            <QuestionStepper
-                                home={true}
-                                initialTabIndex={0}
-                                onClear={() =>
-                                    setLocation(null)
-                                }
-                            />
-                        </div>
-                    }
-                </div>
+                {location &&
+                    <QuestionStepper
+                        showQuestionIcons={true}
+                        showClearLocation={true}
+                        onClearLocation={() =>
+                            setLocation(null)
+                        }
+                    />
+                }
             </section>
             <main aria-labelledby="categories">
                 <ScreenReader>

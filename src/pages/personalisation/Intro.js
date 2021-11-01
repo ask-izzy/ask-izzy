@@ -6,7 +6,7 @@ import storage from "../../storage";
 import type {serviceSearchRequest} from "../../iss/serviceSearch";
 import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
-import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
+import {shouldShowQuestionStepper} from "../QuestionStepper";
 import ScreenReader from "../../components/ScreenReader";
 import routerContext from "../../contexts/router-context";
 import {
@@ -41,7 +41,7 @@ class Intro extends React.Component<
     constructor(props: Object) {
         super(props);
         this.state = {
-            showStepper: false,
+            showQuestionStepper: false,
             category: undefined,
         }
     }
@@ -51,10 +51,10 @@ class Intro extends React.Component<
         const category = getCategory(
             this.context.router.match.params.page
         )
-        const searchAnswers = getSearchAnswers();
         this.setState({
-            showStepper: category ? fetchAnswers(category).length > 0
-                : searchAnswers.length > 0,
+            showQuestionStepper: shouldShowQuestionStepper(
+                category || undefined
+            ),
             category,
         })
     }
@@ -86,14 +86,12 @@ class Intro extends React.Component<
                     role="complementary"
                     aria-labelledby="header"
                 >
-                    <ScreenReader>
-                        <span id="header">
-                            Header.
-                        </span>
-                    </ScreenReader>
-                    {this.renderHeaderBar()}
+                    {this.renderHeaderSection()}
                 </div>
-                <main aria-labelledby="questions">
+                <main
+                    id="mainPageContent"
+                    aria-labelledby="questions"
+                >
                     <ScreenReader>
                         <span id="questions">
                             Questions.
@@ -133,40 +131,50 @@ class Intro extends React.Component<
         )
     }
 
-    renderHeaderBar(): React.Element<any> {
-        const renderedHeaderBar = (
-            <components.HeaderBar
-                primaryText={
-                    "I'm looking for help for"
-                }
-                infoText={
-                    "All of your answers are private and anonymous."
-                }
-                taperColour={this.state.showStepper ? "LighterGrey"
-                    : "HeaderBar"}
-                fixedAppBar={true}
-                bannerName={getBannerName(
-                    this.state.category,
-                    this.props.name
+    renderHeaderSection(): React.Element<any> {
+        return (
+            <section className="page-header-section">
+                <components.HeaderBar
+                    primaryText={
+                        "I'm looking for help for"
+                    }
+                    infoText={
+                        "All of your answers are private and anonymous."
+                    }
+                    taperColour={this.state.showQuestionStepper ? "LighterGrey"
+                        : "HeaderBar"}
+                    fixedAppBar={true}
+                    bannerName={getBannerName(
+                        this.state.category,
+                        this.props.name
+                    )}
+                />
+                {this.state.showQuestionStepper && (
+                    <div className="questionsBar">
+                        <ScreenReader>
+                            <a
+                                href="#mainPageContent"
+                                aria-label={
+                                    "Skip your previously selected " +
+                                    "answers and go straight to the " +
+                                    "options."
+                                }
+                            >
+                                Skip to make your selection
+                            </a>
+                        </ScreenReader>
+                        <QuestionStepper
+                            limitBreadcrumbsTo={["location"]}
+                            showClearLocation={true}
+                            onClearLocation={() => this.setState(
+                                {showQuestionStepper: false}
+                            )}
+                            category={this.state.category}
+                        />
+                    </div>
                 )}
-            />
+            </section>
         )
-        if (this.state.showStepper) {
-            return (
-                <section className="page-header-section">
-                    {renderedHeaderBar}
-                    <QuestionStepper
-                        intro={true}
-                        onClear={() => this.setState(
-                            {showStepper: false}
-                        )}
-                        category={this.state.category}
-                    />
-                </section>
-            )
-        } else {
-            return renderedHeaderBar
-        }
     }
 }
 

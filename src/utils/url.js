@@ -108,3 +108,7 @@ export function fillInPathParams(
             : part
     ).replace(/\/{2,}/g, "/")
 }
+
+export function ensureURLHasTrailingSlash(url: string): string {
+    return url.replace(/\/*$/, "/")
+}

@@ -37,16 +37,16 @@ export default class CounsellingSubcategories extends BaseQuestion {
         resetDfvOptions();
     }
 
-    static prettyPrintSavedAnswer(): ReactNode {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): ReactNode {
+        switch (answer) {
         case "Sexual identity (LGBTIQA+)":
-            return <span><icons.DemographicLgbtiq /></span>;
+            return <icons.DemographicLgbtiq />;
         case "Scared in my relationship":
             return "Family or domestic violence";
         case "Find online counselling":
             return "Online counselling";
         default:
-            return this.savedAnswer
+            return answer
         }
     }
 }

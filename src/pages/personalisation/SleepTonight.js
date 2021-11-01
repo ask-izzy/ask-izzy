@@ -19,14 +19,14 @@ export default class SleepTonight extends BaseQuestion {
         },
     };
 
-    static prettyPrintSavedAnswer(): string | Array<string> {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): string {
+        switch (answer) {
         case "Yes":
             return "Safe tonight";
         case "No" :
             return "Not safe tonight";
         default:
-            return this.savedAnswer
+            return answer
         }
     }
 }

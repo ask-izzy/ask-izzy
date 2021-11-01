@@ -23,12 +23,12 @@ export default class FoodSubcategories extends BaseQuestion {
         },
     };
 
-    static prettyPrintSavedAnswer(): string | Array<string> {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): string {
+        switch (answer) {
         case "Food packages/parcels/vouchers":
             return "Parcels/vouchers";
         default:
-            return this.savedAnswer
+            return answer
         }
     }
 }

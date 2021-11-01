@@ -26,8 +26,8 @@ export default class AdvocacySubcategories extends BaseQuestion {
         },
     };
 
-    static prettyPrintSavedAnswer(): string {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): string {
+        switch (answer) {
         case "Making a complaint" :
             return "Complaints";
         case "Get advice on your rights" :
@@ -35,8 +35,7 @@ export default class AdvocacySubcategories extends BaseQuestion {
         case "Someone to speak for you" :
             return "Representation";
         default:
-            // $FlowIgnore
-            return this.savedAnswer
+            return answer
         }
     }
 }

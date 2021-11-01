@@ -6,6 +6,7 @@ import classnames from "classnames";
 type Props = {
     iconClass: string,
     className?: string,
+    viewBox?: string,
     containerClassName?: string,
     fill: string,
 }
@@ -28,7 +29,9 @@ class BaseIcon extends React.Component<Props, void> {
         let {
             className,
             iconClass,
+            viewBox,
             containerClassName,
+            fill,
             ...parentProps
         } = this.props;
 

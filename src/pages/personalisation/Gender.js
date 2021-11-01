@@ -41,8 +41,8 @@ export default class Gender extends BaseQuestion {
         }
     }
 
-    static prettyPrintSavedAnswer(): string | Array<string> {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): string {
+        switch (answer) {
         case "Male":
             return "Men";
         case "Female":
@@ -50,7 +50,7 @@ export default class Gender extends BaseQuestion {
         case "Trans and Gender Diverse":
             return "Trans & Gender Diverse";
         default:
-            return this.savedAnswer;
+            return answer;
         }
     }
 }

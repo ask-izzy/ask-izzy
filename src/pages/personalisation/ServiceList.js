@@ -68,14 +68,14 @@ export default class ServiceList extends BaseQuestion {
         },
     };
 
-    static prettyPrintSavedAnswer(): string | Array<string> {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): string {
+        switch (answer) {
         case "Help for people using violence":
             return "Behavioural support";
         case "Help for pets":
             return "Help with pets";
         default:
-            return this.savedAnswer
+            return answer
         }
     }
 }

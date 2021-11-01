@@ -29,14 +29,14 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
 
     static summaryLabel = "LGBTIQA+";
 
-    static prettyPrintSavedAnswer(): string {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): string {
+        switch (answer) {
         case "true":
             return "Safe";
         case "false":
             return "Not safe";
         default:
-            return this.savedAnswer;
+            return answer;
         }
     }
 
