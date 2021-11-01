@@ -12,9 +12,10 @@ import icons from "../../icons";
 import storage from "../../storage";
 import type {serviceSearchRequest} from "../../iss/serviceSearch";
 import { append, ServiceSearchRequest } from "../../iss/ServiceSearchRequest";
-import QuestionStepper from "../QuestionStepper";
+import QuestionStepper, {
+    shouldShowQuestionStepper,
+} from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
-import {shouldShowQuestionStepper} from "../QuestionStepper";
 import ScreenReader from "../../components/ScreenReader";
 import {getBannerName} from "../../utils/personalisation"
 import routerContext from "../../contexts/router-context";

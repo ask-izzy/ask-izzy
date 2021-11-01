@@ -4,9 +4,10 @@ import * as React from "react";
 import components from "../../components";
 import storage from "../../storage";
 import type {serviceSearchRequest} from "../../iss/serviceSearch";
-import QuestionStepper from "../QuestionStepper";
+import QuestionStepper, {
+    shouldShowQuestionStepper,
+} from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
-import {shouldShowQuestionStepper} from "../QuestionStepper";
 import ScreenReader from "../../components/ScreenReader";
 import routerContext from "../../contexts/router-context";
 import {

@@ -15,9 +15,10 @@ import type {areaLocation} from "../../iss/locationSearch";
 import type { serviceSearchResults} from "../../iss/serviceSearch";
 import type { serviceSearchRequest } from "../../iss/serviceSearch";
 import {crisisResults, nonCrisisResults} from "../../iss/crisisService"
-import QuestionStepper from "../QuestionStepper";
+import QuestionStepper, {
+    shouldShowQuestionStepper,
+} from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
-import {shouldShowQuestionStepper} from "../QuestionStepper";
 import WithStickyFooter from "../../components/WithStickyFooter";
 import ScreenReader from "../../components/ScreenReader";
 import FlatButton from "../../components/FlatButton";

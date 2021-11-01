@@ -5,14 +5,14 @@ import type {Node as ReactNode} from "react";
 import cnx from "classnames"
 
 import Category from "../constants/Category";
-import QuestionStepperAnswer from "./QuestionStepperAnswer";
+import QuestionStepperBreadcrumb from "./QuestionStepperBreadcrumb";
 import ScreenReader from "../components/ScreenReader";
 import Link from "../components/base/Link";
 import {ensureURLHasTrailingSlash} from "../utils/url"
 import {useRouterContext} from "../contexts/router-context"
 import Button from "../components/base/Button"
 import storage from "../storage"
-import LocationPage from "./personalisation/Location"
+import LocationPage from "../pages/personalisation/Location"
 import type {PersonalisationPage} from "../utils/personalisation"
 
 const PERSONALISATION_EXCLUSION_LIST = [
@@ -107,7 +107,7 @@ export default function QuestionStepper({
             >
                 {personalisationPages.map((page, index) =>
                     <li key={page.defaultProps.name}>
-                        <QuestionStepperAnswer
+                        <QuestionStepperBreadcrumb
                             personalisationPage={page}
                             personalisationPages={personalisationPages}
                             showQuestionIcons={showQuestionIcons}

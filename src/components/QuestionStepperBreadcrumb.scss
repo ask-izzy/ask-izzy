@@ -1,6 +1,6 @@
 @use '../styles/mixins/colours';
 
-.QuestionStepperAnswer {
+.QuestionStepperBreadcrumb {
     color: #{colours.get-static('colour-text-mid')};
     color: var(--colour-text-mid);
     display: inline-flex;

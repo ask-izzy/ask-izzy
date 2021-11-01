@@ -15,7 +15,7 @@ import icons from "../icons";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 import FlatButton from "../components/FlatButton";
 import SuggestionBox from "./SuggestionBox";
-import QuestionStepper from "./QuestionStepper";
+import QuestionStepper from "../components/QuestionStepper";
 import {getInitialSearchRequest} from "../iss/serviceSearch";
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";

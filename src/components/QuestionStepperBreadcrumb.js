@@ -15,7 +15,7 @@ type Props = {|
     contentToAppend?: ReactNode
 |}
 
-export default function QuestionStepperAnswer({
+export default function QuestionStepperBreadcrumb({
     personalisationPage,
     personalisationPages,
     showQuestionIcons,
@@ -27,13 +27,21 @@ export default function QuestionStepperAnswer({
         personalisationPage.defaultProps.name === router.match.params.subpage
 
     return (
-        <span className={cnx("QuestionStepperAnswer", {currentlyEditing})}>
+        <span className={cnx("QuestionStepperBreadcrumb", {currentlyEditing})}>
             {showQuestionIcons &&
             personalisationPage.defaultProps.name === "location" &&
                 <MapIcon viewBox="19 16 26 34" />
             }
             <span className="answer">
-                {getBreadcrumbText(personalisationPage, personalisationPages)}
+                {getBreadcrumbText(personalisationPage, personalisationPages)
+                    .map(item => (
+                        <React.Fragment
+                            key={Math.random() + Date.now()}
+                        >
+                            {item}
+                        </React.Fragment>
+                    ))
+                }
                 {breadcrumbIsTruncated(
                     personalisationPage,
                     personalisationPages
