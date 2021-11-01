@@ -36,8 +36,7 @@
             border: 1px solid var(--colour-border-list-item-dark);
 
             &.hasBody:focus-within {
-                outline: 2px solid #{colours.get-static('colour-input-focus-primary')};
-                outline: 2px solid var(--colour-input-focus-primary);
+                outline-width: 2px;
             }
         }
     }
