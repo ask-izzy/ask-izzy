@@ -20,6 +20,7 @@ services:
                 'cms-askizzy-test.docker.dev': ':8063'
             }"
             PROXY_PROTOCOL: 'http:'
+            GOOGLE_ANALYTICS_URL: ""
         links:
             - "external-resources-proxy"
 
