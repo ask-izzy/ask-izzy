@@ -24,13 +24,27 @@
         cursor: pointer;
     }
 
-    &.hasBody:focus-within {
+    // The ":focus-within" pseudo class is not recognised by IE11 so we polyfill
+    // it with some JS that'll attach a ".focus-within" class as a substitute.
+    // Since browsers will ignore any block with any CSS selector it doesn't
+    // recognise in the list we need use the polyfill'ed class selector as it's
+    // own block so it doesn't get ignored. We use a Sass mixin to avoid
+    // duplication.
+    @mixin focus-within {
         outline: 1px solid #{colours.get-static('colour-input-focus-primary')};
         outline: 1px solid var(--colour-input-focus-primary);
 
         summary {
             outline: 0;
         }
+    }
+
+    &.hasBody:focus-within {
+        @include focus-within;
+    }
+
+    &.hasBody.focus-within {
+        @include focus-within;
     }
 
     a {

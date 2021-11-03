@@ -76,10 +76,16 @@ module.exports = {
                     // Modules using ES6 features need to be run though babel
                     // first. When we get around to upgrading our minifier we
                     // should be able to remove these inclusions.
-                    path.resolve("node_modules/posthog-js"),
                     path.resolve("node_modules/is-plain-obj"),
                     path.resolve("node_modules/@googlemaps/js-api-loader"),
+                    path.resolve(
+                        "node_modules/@react-google-maps/api/node_modules/" +
+                            "@googlemaps/js-api-loader"
+                    ),
                     path.resolve("node_modules/mdast-util-find-and-replace"),
+                    path.resolve("node_modules/color-convert"),
+                    path.resolve("node_modules/json-schema-ref-parser"),
+                    path.resolve("node_modules/ono"),
                 ],
                 use: ["babel-loader"],
             },

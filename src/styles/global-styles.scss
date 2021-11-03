@@ -4,3 +4,15 @@
     outline: 1px solid #{colours.get-static('colour-input-focus-primary')};
     outline: 1px solid var(--colour-input-focus-primary);
 }
+
+// Stop IE11 showing focus outline on non-focusable elements
+/* stylelint-disable */
+_:-ms-fullscreen,
+div:focus,
+p:focus,
+svg:focus,
+body:focus,
+span:focus {
+    outline: none;
+}
+/* stylelint-enable */

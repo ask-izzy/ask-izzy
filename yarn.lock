@@ -6970,6 +6970,11 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
+focus-within-polyfill@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.npmjs.org/focus-within-polyfill/-/focus-within-polyfill-5.2.1.tgz#bea7ed0689516ef76f3f226a7a66399ce5c45789"
+  integrity sha512-24dSGm2euJ0V+blff5Yj0IXtemjjGIoT6/OjmvICZ80NIgnyXDpthfxdkJAJWCDs0BaUvdB+2RParJ9b7X4EuQ==
+
 follow-redirects@^1.0.0, follow-redirects@^1.10.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.1.tgz#d9114ded0a1cfdd334e164e6662ad02bfd91ff43"
