@@ -5,12 +5,12 @@ import { append } from "../../iss/ServiceSearchRequest";
 import icons from "../../icons";
 import DomesticViolenceLinkBar from "../../components/DomesticViolenceLinkBar";
 import type {
-    PersonalisationPageDefaultProps,
+    PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation";
 
 // We need to create the defaultProps out of the component first otherwise flow
 // doesn't typecheck it
-export const defaultProps: PersonalisationPageDefaultProps = {
+export const defaultProps: PersonalisationQuestionPageDefaultProps = {
     name: "are-you-safe",
     question: "Are you safe right now?",
     info:
@@ -39,7 +39,7 @@ class AreYouSafe extends BaseQuestion {
         return false;
     }
 
-    static defaultProps: PersonalisationPageDefaultProps = defaultProps;
+    static defaultProps: PersonalisationQuestionPageDefaultProps = defaultProps;
 }
 
 export default AreYouSafe;

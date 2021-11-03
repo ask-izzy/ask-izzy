@@ -3,11 +3,11 @@ import LegalSubcategories from "./LegalSubcategories";
 import BaseQuestion from "./BaseQuestion";
 import {defaultProps} from "./AreYouSafe";
 import type {
-    PersonalisationPageDefaultProps,
+    PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation";
 
 export default class LegalAreYouSafe extends BaseQuestion {
-    static defaultProps: PersonalisationPageDefaultProps = defaultProps;
+    static defaultProps: PersonalisationQuestionPageDefaultProps = defaultProps;
 
     static title: string = "Are you safe";
 

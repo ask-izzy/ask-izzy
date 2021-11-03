@@ -21,6 +21,7 @@ import routerContext from "../../contexts/router-context";
 import type {
     PersonalisationPageProps,
     PersonalisationPageState,
+    PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation";
 
 export type State = {
@@ -34,7 +35,7 @@ class BaseQuestion extends React.Component<
     State
 > {
     static contextType: any = routerContext;
-    static defaultProps: Object = {};
+    static defaultProps: PersonalisationQuestionPageDefaultProps;
 
     constructor(props: Object) {
         super(props);
@@ -102,7 +103,7 @@ class BaseQuestion extends React.Component<
             if (Array.isArray(savedAnswer)) {
                 // Update answers if we had stored an old answer
                 savedAnswer = savedAnswer.map((answer) =>
-                    this.defaultProps.oldAnswers[answer] || answer
+                    this.defaultProps.oldAnswers?.[answer] || answer
                 )
                 return _.union(
                     this.defaultProps.possibleAnswers.keys,

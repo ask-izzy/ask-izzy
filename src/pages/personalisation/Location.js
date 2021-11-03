@@ -27,7 +27,7 @@ import type {GeolocationStatus} from "../../components/GeolocationButton";
 import routerContext from "../../contexts/router-context";
 import type {
     PersonalisationPageProps,
-    PersonalisationPageDefaultProps,
+    PersonalisationNonQuestionPageDefaultProps,
     PersonalisationPageState,
 } from "../../utils/personalisation";
 import {
@@ -51,7 +51,7 @@ type State = {
 
 // We need to create the defaultProps out of the component first otherwise flow
 // doesn't typecheck it
-const defaultProps: PersonalisationPageDefaultProps = {
+const defaultProps: PersonalisationNonQuestionPageDefaultProps = {
     name: "location",
 };
 
@@ -59,7 +59,8 @@ class Location extends React.Component<
     PersonalisationPageProps,
     State
 > {
-    static defaultProps: PersonalisationPageDefaultProps = defaultProps
+    static defaultProps: PersonalisationNonQuestionPageDefaultProps =
+        defaultProps
     static contextType: any = routerContext;
 
     searchInputRef: { current: null | HTMLInputElement } = createRef()

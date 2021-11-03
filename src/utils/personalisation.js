@@ -1,7 +1,6 @@
 /* @flow */
 import type {
     Node as ReactNode,
-    ComponentType as ReactComponentType,
 } from "react"
 
 import {replaceUrlLocation} from "./url";
@@ -11,7 +10,6 @@ import personalisation from "../pages/personalisation";
 import storage from "../storage";
 import type { RouterContextObject } from "../contexts/router-context";
 import { ServiceSearchRequest } from "../iss/ServiceSearchRequest";
-import type {serviceSearchRequest} from "../iss/serviceSearch";
 
 export type PersonalisationPageRequiredProps = {
     onDoneTouchTap: () => void,
@@ -22,15 +20,13 @@ export type PersonalisationPageRequiredProps = {
     backToAnswers?: boolean,
     classNames?: string,
 }
-export type PersonalisationPageDefaultProps = {|
-    name: string,
-    byline?: string,
-    info?: string,
-|} | {|
+
+export type PersonalisationQuestionPageDefaultProps = {|
     name: string,
     question: string,
     byline?: string,
     info?: string,
+    multipleChoice?: boolean,
     possibleAnswers: {[string]: ServiceSearchRequest},
     possibleAnswersDesc?: {[string]: string},
     icons?: Object,
@@ -38,6 +34,17 @@ export type PersonalisationPageDefaultProps = {|
     showDVLinkBar?: boolean,
     textDVLinkBar?: ReactNode,
 |}
+
+export type PersonalisationNonQuestionPageDefaultProps = {|
+    name: string,
+    byline?: string,
+    info?: string,
+|}
+
+export type PersonalisationPageDefaultProps =
+    PersonalisationQuestionPageDefaultProps |
+    PersonalisationNonQuestionPageDefaultProps
+
 export type PersonalisationPageProps = {|
     ...PersonalisationPageDefaultProps,
     ...PersonalisationPageRequiredProps
@@ -49,14 +56,7 @@ export type PersonalisationPageState = {
 }
 
 export type PersonalisationPage =
-    ReactComponentType<PersonalisationPageRequiredProps> & $ReadOnly<{
-        title: string,
-        showPage?: () => boolean,
-        staticShowPage?: ?() => boolean,
-        showInSummary?: () => boolean,
-        defaultProps: PersonalisationPageDefaultProps,
-        getSearch?: serviceSearchRequest => ?serviceSearchRequest
-    }> |
+    typeof personalisation.BaseQuestion |
     typeof personalisation.Location |
     typeof personalisation.Intro
 

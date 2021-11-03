@@ -13,6 +13,7 @@ import {useRouterContext} from "../contexts/router-context"
 import Button from "../components/base/Button"
 import storage from "../storage"
 import LocationPage from "./personalisation/Location"
+import type {PersonalisationPage} from "../utils/personalisation"
 
 const PERSONALISATION_EXCLUSION_LIST = [
     "online-safety-screen",
@@ -140,8 +141,8 @@ export default function QuestionStepper({
 
 export const getPersonlisationPagesForQuestionStepper = (
     category?: Category
-): Array<any> => {
-    let pages: Array<any> = []
+): Array<PersonalisationPage> => {
+    let pages: Array<PersonalisationPage> = []
     if (category) {
         pages = category.personalisation
     } else {

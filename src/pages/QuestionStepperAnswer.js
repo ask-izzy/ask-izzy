@@ -6,10 +6,11 @@ import cnx from "classnames";
 
 import routerContext from "../contexts/router-context";
 import MapIcon from "../icons/Map";
+import type {PersonalisationPage} from "../utils/personalisation"
 
 type Props = {|
-    personalisationPage: any,
-    personalisationPages: Array<any>,
+    personalisationPage: PersonalisationPage,
+    personalisationPages: Array<PersonalisationPage>,
     showQuestionIcons?: ?boolean,
     contentToAppend?: ReactNode
 |}
@@ -49,24 +50,28 @@ export default function QuestionStepperAnswer({
 }
 
 export function getMaxNumberOfAnswersToShowInBreadcrumb(
-    personalisationPages: Array<any>
+    personalisationPages: Array<PersonalisationPage>
 ): number {
     const maxBreadcrumbs = 6;
     const numOfSingleChoicePersonalisationPages = personalisationPages.filter(
-        page => !page.defaultProps.multipleChoice
+        // ternary statement required because flow is wack
+        // eslint-disable-next-line no-unneeded-ternary
+        page => page.defaultProps.multipleChoice ? false : true
     ).length
 
     return maxBreadcrumbs - numOfSingleChoicePersonalisationPages;
 }
 
 export function getBreadcrumbText(
-    personalisationPage: any,
-    personalisationPages: Array<any>
-): ReactNode {
-    const possibleAnswers: {[string]: any} =
-        personalisationPage.defaultProps.possibleAnswers
+    personalisationPage: PersonalisationPage,
+    personalisationPages: Array<PersonalisationPage>
+): Array<ReactNode> {
+    const possibleAnswers = personalisationPage.defaultProps.possibleAnswers ||
+        null
 
-    let savedAnswers = [personalisationPage.savedAnswer].flat()
+    let savedAnswers: Array<string> =
+        // $FlowIgnore Flow confused about flat()
+        [personalisationPage.savedAnswer].flat()
     /* If the personalisation question is one with set answers (not the location
        page for example) then make sure the saved answers are ordered in the
        order they're listed in the question */
@@ -91,7 +96,7 @@ export function getBreadcrumbText(
         const possibleAnswersIndexMap = Object.fromEntries(
             Array.from(
                 Object.keys(
-                    personalisationPage.defaultProps.possibleAnswers
+                    possibleAnswers
                 ).entries()
             ).map(([index, answer]) => ([answer, index]))
         )
@@ -103,8 +108,8 @@ export function getBreadcrumbText(
 
     }
     const prettyPrintedAnswers = savedAnswers.map(
-        answer => personalisationPage.prettyPrintAnswer(answer)
-    )
+        answer => personalisationPage.prettyPrintAnswer(answer) || null
+    ).filter(answer => answer)
 
     const maxNumberOfAnswersToShow =
         getMaxNumberOfAnswersToShowInBreadcrumb(personalisationPages)
@@ -122,8 +127,8 @@ export function getBreadcrumbText(
 }
 
 export function breadcrumbIsTruncated(
-    personalisationPage: any,
-    personalisationPages: Array<any>
+    personalisationPage: PersonalisationPage,
+    personalisationPages: Array<PersonalisationPage>
 ): boolean {
     const prettyPrintedAnswers = [personalisationPage.savedAnswer].flat()
     const maxNumberOfAnswersToShow =

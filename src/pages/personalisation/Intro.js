@@ -14,13 +14,13 @@ import {
 } from "../../utils/personalisation"
 import type {
     PersonalisationPageProps,
-    PersonalisationPageDefaultProps,
+    PersonalisationNonQuestionPageDefaultProps,
     PersonalisationPageState,
 } from "../../utils/personalisation";
 
 // We need to create the defaultProps out of the component first otherwise flow
 // doesn't typecheck it
-const defaultProps: PersonalisationPageDefaultProps = {
+const defaultProps: PersonalisationNonQuestionPageDefaultProps = {
     name: "intro",
 }
 
@@ -28,7 +28,8 @@ class Intro extends React.Component<
     PersonalisationPageProps,
     PersonalisationPageState
 > {
-    static defaultProps: PersonalisationPageDefaultProps = defaultProps;
+    static defaultProps: PersonalisationNonQuestionPageDefaultProps =
+        defaultProps;
 
     static contextType: any = routerContext;
 
@@ -78,6 +79,10 @@ class Intro extends React.Component<
 
             this.props.onDoneTouchTap();
         }
+
+    static savedAnswer: empty
+
+    static prettyPrintAnswer: empty
 
     render(): React.Element<"div"> {
         return (
