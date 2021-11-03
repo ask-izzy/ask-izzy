@@ -191,7 +191,7 @@ export default class BrandedFooter
                 <div className="about-links">
                     <ul>
                         <li>
-                            <Link to="/about">
+                            <Link to="https://about.askizzy.org.au/about/">
                                 About Ask Izzy
                             </Link>
                         </li>
@@ -296,7 +296,7 @@ export default class BrandedFooter
                             />
                             <span>Update service details</span>
                         </LinkButton>
-                        <Link to="https://www.infoxchange.org/au/ask-izzy">
+                        <Link to="https://about.askizzy.org.au/downloads/">
                             Ask Izzy resources
                         </Link>
                     </div>
