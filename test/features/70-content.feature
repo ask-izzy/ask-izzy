@@ -1,13 +1,13 @@
 Feature: CMS integration
 
     # As a user
-    # When I visit the about page
-    # I want to be able to see the Ask Izzy About page
-    Scenario: Display about page
+    # When I visit the homeless-shelters page
+    # I want to be able to see the Ask Izzy homeless-shelters page
+    Scenario: Display homeless-shelters page
        Given a fresh session
-        When I visit /about
-        Then I should see "About Ask Izzy"
-        Then I should see "We’re always making improvements."
+        When I visit /homeless-shelters
+        Then I should see "Shelter Services"
+        Then I should see "Information about Homeless Shelters."
 
     # As a user
     # When I visit a page without content
@@ -29,7 +29,7 @@ Feature: CMS integration
     # As a user
     # When I visit the homeless shelters page
     # I want to see a callout
-    Scenario: Display about page with a callout
+    Scenario: Display homeless-shelters page with a callout
        Given a fresh session
         When I visit /homeless-shelters
         Then I should see "Ask Izzy can help"
@@ -37,9 +37,9 @@ Feature: CMS integration
     # As a user
     # When I click on an accordion
     # I want to see it expand and collapse
-    Scenario: Display about page with accordion
+    Scenario: Display info page with accordion
        Given a fresh session
-        When I visit /about
+        When I visit /information
         Then I should see "Victoria"
         Then I should not see "Accordion content for Victoria."
         And I click on a collapsible section titled "Victoria"
@@ -49,17 +49,14 @@ Feature: CMS integration
 
     Scenario: When navigating between pages the correct content is returned.
       Given a fresh session
-        When I visit /about
-        Then I should see "We’re always making improvements."
+        When I visit /homeless-shelters
+        Then I should see "Information about Homeless Shelters."
 
         When I visit /terms
         Then I should see "Try to live a good life"
 
-        When I visit /about
-        Then I should see "We’re always making improvements."
-
-        When I click on "Terms of use"
-        Then I should see "Try to live a good life"
+        When I visit /homeless-shelters
+        Then I should see "Information about Homeless Shelters."
 
         When I click on "Terms of use"
         Then I should see "Try to live a good life"
@@ -67,8 +64,8 @@ Feature: CMS integration
         When I reload the page
         Then I should see "Try to live a good life"
 
-        When I click on "About Ask Izzy"
-        Then I should see "We’re always making improvements."
+        When I click on "Shelters"
+        Then I should see "Information about Homeless Shelters."
 
     Scenario: Display disability organisation page with embedded callout
         Given a fresh session

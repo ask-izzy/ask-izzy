@@ -48,18 +48,7 @@ export const aboutPage = {
     },
     BannerTextPrimary: "About Ask Izzy",
     BannerTextSecondary: "Some secondary text",
-    Accordion: [
-        {
-            id: 1,
-            Title: "Victoria",
-            Content: "Accordion content for Victoria.",
-        },
-        {
-            id: 2,
-            Title: "Tasmania",
-            Content: "Accordion content for Tasmania.",
-        },
-    ],
+    
 }
 
 export const termsPage = {
@@ -70,6 +59,7 @@ export const termsPage = {
 
 export const homelessSheltersPage = {
     Title: "Shelter Services",
+    Body: "Information about Homeless Shelters.",
     BannerTextPrimary: "Shelter Services",
     CalloutBoxes: [
         {
@@ -94,4 +84,16 @@ export const informationPage = {
     BannerTextPrimary: "Information",
     Body: ("Try to live a good life\n\n> [callout(test)] " +
         "[callout(nothing)]": string),
+    Accordion: [
+        {
+            id: 1,
+            Title: "Victoria",
+            Content: "Accordion content for Victoria.",
+        },
+        {
+            id: 2,
+            Title: "Tasmania",
+            Content: "Accordion content for Tasmania.",
+        },
+    ],
 }
