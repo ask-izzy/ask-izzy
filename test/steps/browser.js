@@ -123,7 +123,7 @@ async function clickLink(link: string): Promise<void> {
     /* any 'a' element who has a descendent text node
      * containing the link text */
     const locator = By.xpath(
-        ["a", "button", "label", "li"]
+        ["a", "button", "label", "li[@role='option']"]
             .map(tag => elementWithChildText(tag, link))
             .join("|")
     );

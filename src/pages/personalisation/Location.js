@@ -366,7 +366,10 @@ class Location extends Personalisation<Props, State> {
                             }
                         </div>
                         {this.state.autocompletions.length > 0 &&
-                            <ul className="locationList">
+                            <ul
+                                className="locationList"
+                                role="listbox"
+                            >
                                 {
                                     /* any autocompletions we currently have */
                                     this.state.autocompletions.map(
@@ -374,6 +377,7 @@ class Location extends Personalisation<Props, State> {
                                             <li
                                                 className="locationItem"
                                                 key={index}
+                                                role="option"
                                                 aria-label={`${result.name},
                                                 ${result.state}`}
                                                 tabIndex={0}
