@@ -1,0 +1,44 @@
+@use '../../styles/mixins/colours';
+
+.SearchBar {
+    display: flex;
+    align-items: center;
+
+    .Input {
+        flex: 1 1 auto;
+        height: 40px;
+
+        .icon {
+            width: 45px;
+            max-width: 35px;
+
+            svg {
+                width: 35px;
+
+                path {
+                    fill: #{colours.get-static('colour-interactive-icon')};
+                    fill: var(--colour-interactive-icon);
+                }
+            }
+        }
+
+        input {
+            border-radius: 3px 0 0 3px;
+            padding-left: 35px;
+            width: 5em; /* needed to cause input to collapse down when squished */
+        }
+
+        &.isAutocompleteSuggestions {
+            input {
+                border-bottom-left-radius: 0;
+            }
+        }
+    }
+
+    .searchButton {
+        height: 40px;
+        border-radius: 0 3px 3px 0;
+        padding: 0 1em;
+        font-size: 16px;
+    }
+}

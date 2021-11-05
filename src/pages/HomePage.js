@@ -4,8 +4,7 @@ import type {Node as ReactNode} from "React";
 import React, {useContext, useEffect, useState} from "react";
 
 import HeaderBar from "../components/HeaderBar";
-import icons from "../icons"
-import FlatButton from "../components/FlatButton";
+import SearchBar from "../components/general/SearchBar";
 import CategoriesList from "../components/CategoriesList";
 import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
@@ -23,18 +22,19 @@ function HomePage(): ReactNode {
 
     const {router} = useContext(routerContext)
     const [location, setLocation] = useState<?string>(null)
-    const [searchText, setSearchText] = useState<string>("")
+    const [initialSearchText, setInitialSearchText] = useState<string>("")
 
 
     useEffect(() => {
         const savedLocation = Storage.getSearchArea();
-        const savedSearchText = storage.getSearch();
         savedLocation && setLocation(savedLocation)
-        savedSearchText && setSearchText(savedSearchText)
+
+        const savedSearchText = storage.getSearch();
+        savedSearchText && setInitialSearchText(savedSearchText)
         resetDfvOptions();
     }, [])
 
-    const onSearchSubmit = (): void => {
+    const onSearchSubmit = (searchText): void => {
         storage.setSearch(searchText);
         router.navigate(
             `/search/${encodeURIComponent(searchText)}`
@@ -90,47 +90,17 @@ function HomePage(): ReactNode {
                         >
                             <h2>What do you need help with?</h2>
                         </label>
-                        <div className="searchWrapper">
-                            <label
-                                htmlFor="home-page-search"
-                            >
-                                <icons.Search
-                                    className={"searchIcon medium middle"}
-                                    fill="#8c8c8c"
-                                />
-                            </label>
-                            <input
-                                id="home-page-search"
-                                type="search"
-                                onChange={(evt) => {
-                                    setSearchText(evt.target.value)
-                                }}
-                                value={searchText}
-                                onKeyDown={(evt) => {
-                                    console.log(searchText !== "")
-                                    evt.key === "Enter" && searchText !== "" &&
-                                    onSearchSubmit()
-                                }}
-                            />
-                            {
-                                searchText &&
-                                <FlatButton
-                                    className="clear-text"
-                                    label="&times;"
-                                    aria-label="Clear entered search text"
-                                    prompt="Clear"
-                                    onClick={() => {
-                                        setSearchText("")
-                                        storage.setSearch("");
-                                    }}
-                                />
-                            }
-                            <FlatButton
-                                label="Search"
-                                className="searchButton"
-                                onClick={searchText && onSearchSubmit}
-                            />
-                        </div>
+                        <SearchBar
+                            initialValue={initialSearchText}
+                            onSubmit={searchText => {
+                                searchText && onSearchSubmit(searchText)
+                            }}
+                            onChange={newValue => {
+                                if (!newValue) {
+                                    storage.setSearch("")
+                                }
+                            }}
+                        />
                     </div>
                 </div>
                 <div>

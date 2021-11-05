@@ -25,9 +25,9 @@ export function addPageLoadDependencies(
             console.warn("Tried to add the same page load dependency twice")
             continue
         }
-    }
 
-    currentDependencies.push(...dependencies)
+        currentDependencies.push(dependency)
+    }
 }
 
 export function closePageLoadDependencies(
@@ -69,6 +69,11 @@ export async function waitTillPageLoaded(): Promise<void> {
             (resolve, reject) => currentSubscribers.push({resolve, reject})
         )
     }
+}
+
+// Attach waitTillPageLoaded to window so it is accessible when testing
+if (typeof window !== "undefined") {
+    window.waitTillPageLoaded = waitTillPageLoaded
 }
 
 function clearPageLoad() {

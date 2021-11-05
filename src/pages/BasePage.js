@@ -16,30 +16,22 @@ import {
     closePageLoadDependencies,
 } from "../utils/page-loading"
 import routerContext from "../contexts/router-context";
-import type { RouterContextObject } from "../contexts/router-context";
 import ScreenReader from "../components/ScreenReader";
 
 class BasePage extends React.Component<{}> {
-    static childContextTypes: any = {};
     static contextType: any = routerContext;
-
-
-    constructor(props: {}, context: RouterContextObject) {
-        addPageLoadDependencies(context.router.location, "render")
-        super(props, context)
-    }
-
-    getChildContext(): Object {
-        return {};
-    }
-
 
     componentDidMount(): void {
         closePageLoadDependencies(this.context.router.location, "render")
     }
 
+    componentDidUpdate(): void {
+        closePageLoadDependencies(this.context.router.location, "render")
+    }
+
     render(): ReactNode {
         const { location, match } = this.context.router
+        addPageLoadDependencies(location, "render")
         let pageTitle = "";
         pageTitle = makeTitle(
             match.props.title || "",

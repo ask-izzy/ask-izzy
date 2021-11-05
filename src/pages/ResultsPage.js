@@ -70,6 +70,10 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
     }
 
     async loadNextSearchPage(): Promise<void> {
+        addPageLoadDependencies(
+            this.context.router.location,
+            `requestServices`
+        )
         let res
         try {
             if (!this.state.searchMeta) {
@@ -114,6 +118,11 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
                 console.error(error?.body)
             }
             return
+        } finally {
+            closePageLoadDependencies(
+                this.context.router.location,
+                `requestServices`
+            )
         }
 
         if (this.state.searchPagesLoaded > 0) {

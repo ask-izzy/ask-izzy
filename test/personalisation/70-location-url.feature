@@ -15,6 +15,7 @@ Feature: Show location in url
         And I click on "Where are you?"
         Then I should see "Find services near you"
         When I search for "carlt"
+        And I wait for page to finish loading
         And I click on "Carlton"
         And I click on the done button
         And I click on the done button
