@@ -1,6 +1,9 @@
 /* @flow */
 import React, { useState, useEffect } from "react";
-import type {Node as ReactNode} from "react"
+import type {
+    Node as ReactNode,
+    ElementConfig as ReactElementConfig,
+} from "react"
 import classnames from "classnames";
 
 import Input from "../base/Input";
@@ -15,6 +18,10 @@ type Props = {
     onChange?: (string) => void,
     onSubmit: (string) => void,
     placeholder?: string,
+    iconPosition?: $PropertyType<
+        ReactElementConfig<typeof Input>,
+        'iconPosition'
+    >,
     analyticsEvent?: AnalyticsEvent,
     autocompleteValues?: Array<string>
 }
@@ -25,6 +32,7 @@ export default function SearchBar({
     onChange,
     onSubmit: onSubmitProp,
     placeholder,
+    iconPosition,
     analyticsEvent,
     autocompleteValues,
 }: Props): ReactNode {
@@ -68,6 +76,7 @@ export default function SearchBar({
                 icon={
                     <SearchIcon className="searchIcon" />
                 }
+                iconPosition={iconPosition}
                 showClearButton={true}
                 placeholder={placeholder}
                 autocompleteValues={autocompleteValues}

@@ -18,6 +18,7 @@ export default class AddictionSubcategories extends BaseQuestion {
                 .append("needle exchange"),
             "Speak to someone": append("counselling"),
         },
+        showSupportSearchBar: true,
     };
 
     static prettyPrintAnswer(answer: string): string {

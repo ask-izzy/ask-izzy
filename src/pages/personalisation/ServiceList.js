@@ -66,6 +66,7 @@ export default class ServiceList extends BaseQuestion {
                 "Counselling & behaviour change programs",
             "Help for pets": "Emergency kennel & support.",
         },
+        showSupportSearchBar: true,
     };
 
     static prettyPrintAnswer(answer: string): string {

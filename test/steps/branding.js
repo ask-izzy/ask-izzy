@@ -60,8 +60,9 @@ async function seeTheSearchBar(): Promise<void> {
     // XPath doesn't have a great way of checking for a single class, only a
     // full class string. So we have to do an ugly workaround.
     const searchBarXPath =
-        "//*[contains(concat(' ',normalize-space(@class),' '),' search ')]" +
+        "//*[contains(concat(' ',normalize-space(@class),' '),' SearchBar ')]" +
         "//input[@type='search']"
+
     try {
         await assert.isElementPresent(
             this.driver,

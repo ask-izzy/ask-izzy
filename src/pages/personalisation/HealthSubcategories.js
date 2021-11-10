@@ -39,6 +39,7 @@ export default class HealthSubcategories extends BaseQuestion {
                 .append("-pac")
                 .append("-medicare"),
         },
+        showSupportSearchBar: true,
     };
 
     componentDidMount(): void {

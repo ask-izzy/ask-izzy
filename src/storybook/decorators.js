@@ -11,6 +11,7 @@ import RouterContext from "../contexts/router-context";
 import { DebugModeProvider } from "../contexts/debug-mode-context";
 import createApolloClient from "../utils/apolloClient";
 import {browserEventName as gtmBrowserEventName} from "../google-tag-manager"
+import {InjectRouterContext} from "../contexts/router-context"
 
 export function addRouter(Story: Object): ReactNode {
     // Catch link click and stop it firing
@@ -21,9 +22,19 @@ export function addRouter(Story: Object): ReactNode {
         }
     }
     return <MemoryRouter>
-        <div onClick={onClickHandler}>
-            <Story/>
-        </div>
+        <InjectRouterContext matchedRoutes={[{
+            params: {},
+            route: {
+                element: {
+                    props: {},
+                },
+            },
+        }]}
+        >
+            <div onClick={onClickHandler}>
+                <Story/>
+            </div>
+        </InjectRouterContext>
     </MemoryRouter>
 }
 

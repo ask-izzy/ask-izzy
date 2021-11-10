@@ -24,6 +24,7 @@ export default class AdvocacySubcategories extends BaseQuestion {
                     .remove("disputes advocacy")
                     .append("advocacy"),
         },
+        showSupportSearchBar: true,
     };
 
     static prettyPrintAnswer(answer: string): string {

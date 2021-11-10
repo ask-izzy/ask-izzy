@@ -27,6 +27,7 @@ export type PersonalisationQuestionPageDefaultProps = {|
     byline?: string,
     info?: string,
     multipleChoice?: boolean,
+    showSupportSearchBar?: Boolean,
     possibleAnswers: {[string]: ServiceSearchRequest},
     possibleAnswersDesc?: {[string]: string},
     icons?: Object,

@@ -21,6 +21,7 @@ export default class FoodSubcategories extends BaseQuestion {
                 .remove("-chsp")
                 .append("meals on wheels"),
         },
+        showSupportSearchBar: true,
     };
 
     static prettyPrintAnswer(answer: string): string {

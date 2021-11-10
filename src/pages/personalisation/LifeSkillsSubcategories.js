@@ -16,6 +16,7 @@ export default class LifeSkillsSubcategories extends BaseQuestion {
             "Training with support": remove("life skills education")
                 .append("supported vocational training"),
         },
+        showSupportSearchBar: true,
     };
 
     static prettyPrintAnswer(answer: string): string {
