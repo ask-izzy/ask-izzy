@@ -348,8 +348,7 @@ class Location extends React.Component<
                         "Where are you looking for help?"
                     }
                     secondaryText={
-                        "You don't have to answer, but this helps us give " +
-                        "you better results"
+                        "Find services near you"
                     }
                     taperColour={this.state.showStepper ? "LighterGrey"
                         : "HeaderBar"}
