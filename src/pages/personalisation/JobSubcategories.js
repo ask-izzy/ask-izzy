@@ -10,7 +10,7 @@ export default class JobSubcategories extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-job",
         question: "Where do you want to start?",
-        answers: {
+        possibleAnswers: {
             /* eslint-disable max-len */
             "Employment": remove("employment")
                 .append("job searching"),

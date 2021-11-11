@@ -11,7 +11,7 @@ class AreYouSafe extends BaseQuestion {
     static title: string = "Are you safe";
 
     static showPage(): boolean {
-        return !this.answer;
+        return !this.savedAnswer;
     }
 
     static showInSummary(): boolean {
@@ -23,7 +23,7 @@ class AreYouSafe extends BaseQuestion {
         question: "Are you safe right now?",
         info:
             "All of your answers are private and anonymous.",
-        answers: {
+        possibleAnswers: {
             "No": append(""),
             "I'm not sure": append(""),
             "Yes": append(""),

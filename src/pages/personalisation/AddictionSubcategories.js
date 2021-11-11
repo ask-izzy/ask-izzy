@@ -10,7 +10,7 @@ export default class AddictionSubcategories extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-addiction",
         question: "What sort of help?",
-        answers: {
+        possibleAnswers: {
             "Rehab": append("rehabilitation"),
             "Drugs": remove("substance abuse").append("drugs"),
             "Alcohol": remove("substance abuse").append("alcohol"),
@@ -20,12 +20,14 @@ export default class AddictionSubcategories extends BaseQuestion {
         },
     };
 
-    static breadcrumbAnswer(): string {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): string {
+        switch (this.savedAnswer) {
         case "Speak to someone":
             return "Counselling";
         default:
-            return this.answer
+            return typeof this.savedAnswer === "string" ?
+                this.savedAnswer
+                : ""
         }
     }
 }

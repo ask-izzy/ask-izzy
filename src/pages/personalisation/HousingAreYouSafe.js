@@ -9,7 +9,7 @@ export default class HousingAreYouSafe extends AreYouSafe {
     }
 
     static showPage(): boolean {
-        return Boolean(super.showPage() && Demographics.answer &&
-            Demographics.answer.indexOf("Escaping family violence") > -1);
+        return Boolean(super.showPage() && Demographics.savedAnswer &&
+            Demographics.savedAnswer.indexOf("Escaping family violence") > -1);
     }
 }

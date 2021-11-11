@@ -25,12 +25,12 @@ export function stateFromLocation(): string {
 }
 
 export const resetDfvOptions = (): void => {
-    if (Boolean(AreYouSafe.answer) &&
+    if (Boolean(AreYouSafe.savedAnswer) &&
         [
             "No",
             "I'm not sure",
-        ].indexOf(AreYouSafe.answer) > -1 &&
-        !OnlineSafetyScreen.answer) {
+        ].indexOf(AreYouSafe.savedAnswer) > -1 &&
+        !OnlineSafetyScreen.savedAnswer) {
         storage.removeItem(AreYouSafe.defaultProps.name);
     }
 }

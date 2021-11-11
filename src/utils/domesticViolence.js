@@ -7,12 +7,10 @@ import OnlineSafetyScreen from "../pages/personalisation/OnlineSafetyScreen";
 
 export const resetDfvOptions = (): void => {
     if (
-        Boolean(AreYouSafe.answer) &&
-        [
-            "No",
-            "I'm not sure",
-        ].indexOf(AreYouSafe.answer) > -1 &&
-        !OnlineSafetyScreen.answer
+        ["No", "I'm not sure"].includes(
+            AreYouSafe.savedAnswer
+        ) &&
+        !OnlineSafetyScreen.savedAnswer
     ) {
         storage.removeItem(AreYouSafe.defaultProps.name);
     }

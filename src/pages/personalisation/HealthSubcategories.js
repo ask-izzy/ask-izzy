@@ -15,7 +15,7 @@ export default class HealthSubcategories extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-health",
         question: "What sort of help do you need?",
-        answers: {
+        possibleAnswers: {
             "Doctor": remove("(community health)")
                 .append("(general medical practitioners)"),
             "Nurse": append("nurse"),
@@ -49,8 +49,8 @@ export default class HealthSubcategories extends BaseQuestion {
         resetDfvOptions();
     }
 
-    static breadcrumbAnswer(): string {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): string | Array<string> {
+        switch (this.savedAnswer) {
         case "Social & emotional wellbeing":
             return "Mental health";
         case "Problems with feet":
@@ -64,7 +64,7 @@ export default class HealthSubcategories extends BaseQuestion {
         case "Hospital":
             return "Hospitals";
         default:
-            return this.answer
+            return this.savedAnswer
         }
     }
 }

@@ -13,7 +13,7 @@ export default class ServiceList extends BaseQuestion {
         name: "service-list",
         question: "What best describes what you need?",
         info: "All of your answers are private and anonymous.",
-        answers: {
+        possibleAnswers: {
             "Family violence support": append(""),
             "Counselling": append("counselling"),
             "Police": remove("(family violence)")
@@ -53,7 +53,7 @@ export default class ServiceList extends BaseQuestion {
             "Help for people using violence": icons.UsingViolence,
             "Help for pets": icons.DemographicPets,
         },
-        answersDesc: {
+        descriptionsForAnswers: {
             "Family violence support": "Crisis counselling & accommodation.",
             "Counselling": "Someone to talk to.",
             "Police": "Stations & liaison officers.",
@@ -68,14 +68,14 @@ export default class ServiceList extends BaseQuestion {
         },
     };
 
-    static breadcrumbAnswer(): any {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): string | Array<string> {
+        switch (this.savedAnswer) {
         case "Help for people using violence":
             return "Behavioural support";
         case "Help for pets":
             return "Help with pets";
         default:
-            return this.answer
+            return this.savedAnswer
         }
     }
 }

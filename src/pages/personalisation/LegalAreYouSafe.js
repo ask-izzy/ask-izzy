@@ -9,7 +9,7 @@ export default class LegalAreYouSafe extends AreYouSafe {
     }
 
     static showPage(): boolean {
-        return super.showPage() && LegalSubcategories.answer ===
+        return super.showPage() && LegalSubcategories.savedAnswer ===
             "Domestic & family violence issues";
     }
 }

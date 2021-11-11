@@ -10,7 +10,7 @@ export default class LifeSkillsSubcategories extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-life-skills",
         question: "Want to develop skills?",
-        answers: {
+        possibleAnswers: {
             /* eslint-disable max-len */
             "School": remove("life skills education").append("government schools"),
             "Training with support": remove("life skills education")
@@ -18,12 +18,12 @@ export default class LifeSkillsSubcategories extends BaseQuestion {
         },
     };
 
-    static breadcrumbAnswer(): string {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): string | Array<string> {
+        switch (this.savedAnswer) {
         case "School":
             return "Schools";
         default:
-            return this.answer
+            return this.savedAnswer
         }
     }
 }

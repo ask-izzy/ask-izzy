@@ -2,7 +2,6 @@
 import * as React from "react";
 import classnames from "classnames";
 import _ from "underscore";
-import ReactDOM from "react-dom";
 
 import BaseQuestion from "./BaseQuestion";
 import InputListItem from "../../components/InputListItem";
@@ -36,12 +35,12 @@ class BaseMultiQuestion extends BaseQuestion {
 
     // $FlowIgnore we have the liskov substitution principle :(
     get selected(): Set<string> {
-        if (this.state.answers) {
-            return this.state.answers;
+        if (this.state.selectedAnswers) {
+            return this.state.selectedAnswers;
         }
 
         return new Set(
-            this.constructor.answer || []
+            this.constructor.savedAnswer || []
         );
     }
 
@@ -49,32 +48,28 @@ class BaseMultiQuestion extends BaseQuestion {
         return true;
     }
 
-    static breadcrumbAnswer(): ?$ReadOnlyArray<string | React.Node> {
-        return this.answer
-    }
-
     static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): string {
         return "";
     }
 
     static get summaryValue(): string {
-        if (!this.answer) {
+        if (!this.savedAnswer) {
             return "None selected";
         } else {
-            const nSelected = this.answer.length;
+            const nSelected = this.savedAnswer.length;
 
             if (nSelected === 0) {
                 return "None selected";
             } else if (nSelected > 3) {
                 return `${nSelected} selected`;
             } else {
-                return this.answer.join(", ")
+                return this.savedAnswer.join(", ")
             }
         }
     }
 
     // $FlowIgnore we have the liskov substitution principle :(
-    static get answer(): ?Array<string> {
+    static get savedAnswer(): ?Array<string> {
         let answers = storage.getJSON(this.defaultProps.name);
 
         if (Array.isArray(answers)) {
@@ -82,14 +77,17 @@ class BaseMultiQuestion extends BaseQuestion {
             answers = answers.map((answer) =>
                 this.defaultProps.oldAnswers[answer] || answer
             )
-            return _.union(this.defaultProps.answers.keys, answers);
+            return _.union(
+                this.defaultProps.possibleAnswers.keys,
+                answers
+            );
         }
 
         return answers;
     }
 
     static getSearch(request: iss.searchRequest): ?iss.searchRequest {
-        let value = this.answer;
+        let value = this.savedAnswer;
 
         if (value != null) {
             return this.getSearchForAnswer(request, new Set(value));
@@ -108,7 +106,9 @@ class BaseMultiQuestion extends BaseQuestion {
 
         if (answers instanceof Set) {
             // Take the first two answers offered
-            const allowedAnswers = Object.keys(this.defaultProps.answers);
+            const allowedAnswers = Object.keys(
+                this.defaultProps.possibleAnswers
+            );
             const sortedAnswers = _(Array.from(answers)).sortBy((elem) =>
                 allowedAnswers.indexOf(elem)
             );
@@ -147,19 +147,11 @@ class BaseMultiQuestion extends BaseQuestion {
             answers.delete(answer);
         }
 
-        this.setState({answers: answers});
+        this.setState({selectedAnswers: answers});
     }
 
     onNextStep(): void {
         storage.setJSON(this.props.name, Array.from(this.selected));
-    }
-
-    componentDidMount(): void {
-        this.setState({windowHeight: window.innerHeight});
-        const thisElement = ReactDOM.findDOMNode(this);
-
-        // $FlowIgnore
-        this.setState({rootHeight: thisElement.offsetHeight});
     }
 
     render(): React.Element<"div"> {
@@ -237,30 +229,33 @@ class BaseMultiQuestion extends BaseQuestion {
                                 {this.question}
                             </legend>
                             <div className="List">
-                                {this.answers.map((answer, index) =>
-                                    <InputListItem
-                                        key={index}
-                                        leftIcon={this.iconFor(answer)}
-                                        primaryText={answer}
-                                        value={answer}
-                                        aria-label={answer}
-                                        type="checkbox"
-                                        checked={selected.has(answer)}
-                                        checkedIcon={
-                                            <icons.CheckboxSelected
-                                                className="big"
-                                            />
-                                        }
-                                        uncheckedIcon={
-                                            <icons.CheckboxUnselected
-                                                className="big"
-                                            />
-                                        }
-                                        onClick={this.onAnswerTouchTap.bind(
-                                            this, answer, !selected.has(answer)
-                                        )}
-                                    />
-                                )}
+                                {this.arrayOfPossibleAnswers
+                                    .map((answer, index) =>
+                                        <InputListItem
+                                            key={index}
+                                            leftIcon={this.iconFor(answer)}
+                                            primaryText={answer}
+                                            value={answer}
+                                            aria-label={answer}
+                                            type="checkbox"
+                                            checked={selected.has(answer)}
+                                            checkedIcon={
+                                                <icons.CheckboxSelected
+                                                    className="big"
+                                                />
+                                            }
+                                            uncheckedIcon={
+                                                <icons.CheckboxUnselected
+                                                    className="big"
+                                                />
+                                            }
+                                            onClick={this.onAnswerTouchTap.bind(
+                                                this,
+                                                answer,
+                                                !selected.has(answer)
+                                            )}
+                                        />
+                                    )}
                             </div>
                         </fieldset>
                     </WithStickyFooter>

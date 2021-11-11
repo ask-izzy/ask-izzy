@@ -39,11 +39,11 @@ function AppBar(
 
     const {router} = useContext(routerContext);
 
-    const removeCategoryAnswers = (category: Category): void => {
-        const answers = category.personalisation.filter(personalisation =>
+    const unsetSavedAnswersForCategory = (category: Category): void => {
+        const savedAnswers = category.personalisation.filter(personalisation =>
             personalisation.title.toString().toLowerCase() !== "location"
         ).map(cat => cat.defaultProps.name)
-        answers.forEach(answer => {
+        savedAnswers.forEach(answer => {
             Storage.removeItem(answer)
         })
     }
@@ -53,7 +53,7 @@ function AppBar(
             category.key === router.match.params.page
         )
         if (category && router.match.params?.subpage) {
-            removeCategoryAnswers(category)
+            unsetSavedAnswersForCategory(category)
         }
 
         if (router.location.pathname === "/") {

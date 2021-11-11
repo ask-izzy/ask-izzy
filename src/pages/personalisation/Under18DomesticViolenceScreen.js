@@ -13,7 +13,7 @@ import type { searchRequest } from "../../iss";
 
 class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
     get doneButtonLabel(): string {
-        const answer = DfvDemographics.answer
+        const answer = DfvDemographics.savedAnswer
         if (
             answer && (
                 answer.indexOf("LGBTIQA+") > -1 ||
@@ -43,13 +43,12 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
 
     static showPage(): boolean {
         return Boolean(
-            DfvDemographics.answer &&
-            DfvDemographics.answer.indexOf("Under 18") > -1
+            DfvDemographics.savedAnswer?.includes("Under 18")
         );
     }
 
     static getSearch(request: searchRequest): ?searchRequest {
-        return this.answer ? request : null;
+        return this.savedAnswer ? request : null;
     }
 
     onDoneTouchTap(): void {

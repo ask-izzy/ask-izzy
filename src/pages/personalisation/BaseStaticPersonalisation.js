@@ -19,13 +19,7 @@ export type Props = {
     showDoneButton?: boolean,
 }
 
-export type State = {
-    selected: ?string,
-    rootHeight?: number,
-    windowHeight?: number,
-}
-
-class BaseStaticPersonalisation extends Personalisation<Props, State> {
+class BaseStaticPersonalisation extends Personalisation<Props, {}> {
     +doneButtonLabel: ?string;
 
     static defaultProps: ReactElementConfig<typeof Personalisation> = {
@@ -41,11 +35,11 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
         return "";
     }
 
-    static breadcrumbAnswer(): ?any {
-        return this.answer;
+    static prettyPrintSavedAnswer(): string {
+        return this.savedAnswer;
     }
 
-    static get answer(): string {
+    static get savedAnswer(): string {
         let answer = storage.getItem(this.defaultProps.name);
 
         if (typeof answer !== "string") {
@@ -75,14 +69,6 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
      */
     static showInSummary(): boolean {
         return true;
-    }
-
-    componentDidMount(): void {
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "instant",
-        });
     }
 
     /**
@@ -116,7 +102,7 @@ class BaseStaticPersonalisation extends Personalisation<Props, State> {
                         label={
                             this.doneButtonLabel ?
                                 this.doneButtonLabel
-                                : "CONTINUE"
+                                : "Continue"
                         }
                         autoFocus={true}
                         onClick={this.onDoneTouchTap.bind(this)}

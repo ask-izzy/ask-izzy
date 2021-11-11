@@ -7,6 +7,7 @@ import { append } from "../../iss/Search";
 import icons from "../../icons";
 import { resetDfvOptions } from "../../utils/domesticViolence";
 import * as React from "react";
+import type {Node as ReactNode} from "react";
 
 const ATSI_BREADCRUMB_ICON = (
     <span>
@@ -24,7 +25,7 @@ export default class Demographics extends BaseMultiQuestion {
         question: "Do any of these apply to you?",
         byline: "Select all that apply",
         info: "All of your answers are private and anonymous.",
-        answers: {
+        possibleAnswers: {
             "Escaping family violence": append("(family violence)"),
             // n.b. see also storage.getUserIsIndigenous when changing
             "Aboriginal and/or Torres Strait Islander":
@@ -65,51 +66,53 @@ export default class Demographics extends BaseMultiQuestion {
         resetDfvOptions();
     }
 
-
-    static breadcrumbToStandardAnswer(breadcrumbAnswer?: ?Array<any>): string {
-        if (this.answer && this.answer.length) {
-            for (let index: number = 0; index < this.answer.length; index++) {
-                if (breadcrumbAnswer === ATSI_BREADCRUMB_ICON &&
-                    // $FlowIgnore
-                    this.answer[index] ===
-                    "Aboriginal and/or Torres Strait Islander"
+    static breadcrumbToStandardAnswer(
+        prettyPrintSavedAnswer?: ?Array<any>
+    ): string {
+        if (this.savedAnswer?.length) {
+            for (let index = 0; index < this.savedAnswer.length; index++) {
+                if (
+                    prettyPrintSavedAnswer === ATSI_BREADCRUMB_ICON &&
+                    this.savedAnswer[index] ===
+                        "Aboriginal and/or Torres Strait Islander"
                 ) {
-                    return this.answer[index] ;
+                    return this.savedAnswer[index] ;
                 } else if (
                     // $FlowIgnore
-                    this.breadcrumbAnswer()[index] === breadcrumbAnswer
+                    this.prettyPrintSavedAnswer()[index] ===
+                        prettyPrintSavedAnswer
                 ) {
                     // $FlowIgnore
-                    return this.answer[index]
+                    return this.savedAnswer[index]
                 }
             }
         }
         return "";
     }
 
-    static breadcrumbAnswer(): ?Array<any> {
-        if (this.answer && this.answer.length) {
-            return this.answer.map((answer, index) => {
-                switch (answer) {
-                case "Aboriginal and/or Torres Strait Islander":
-                    return ATSI_BREADCRUMB_ICON;
-                case "Person seeking asylum":
-                    return "Seeking asylum"
-                case "Parole / recently released":
-                    return "On parole"
-                case "Have a disability":
-                    return "With disability"
-                case "Have pets":
-                    return "Help with pets"
-                case "Family with children":
-                    return "Families"
-                case "Escaping family violence":
-                    return "Escaping violence"
-                default:
-                    return answer
-                }
-            })
-        }
-        return this.answer
+    static prettyPrintSavedAnswer(): ReactNode {
+        const savedAnswer = this.savedAnswer instanceof Array ?
+            this.savedAnswer
+            : []
+        return savedAnswer.map((answer, index) => {
+            switch (answer) {
+            case "Aboriginal and/or Torres Strait Islander":
+                return ATSI_BREADCRUMB_ICON;
+            case "Person seeking asylum":
+                return "Seeking asylum"
+            case "Parole / recently released":
+                return "On parole"
+            case "Have a disability":
+                return "With disability"
+            case "Have pets":
+                return "Help with pets"
+            case "Family with children":
+                return "Families"
+            case "Escaping family violence":
+                return "Escaping violence"
+            default:
+                return answer;
+            }
+        })
     }
 }

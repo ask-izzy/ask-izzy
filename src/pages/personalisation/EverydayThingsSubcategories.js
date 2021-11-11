@@ -10,7 +10,7 @@ export default class EverydayThingsSubcategories extends BaseQuestion {
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
         name: "sub-everyday-things",
         question: "What do you need?",
-        answers: {
+        possibleAnswers: {
             /* eslint-disable max-len */
             "Food packages/parcels/vouchers":
                 append("(Food Parcels & Food Vouchers)")
@@ -36,14 +36,14 @@ export default class EverydayThingsSubcategories extends BaseQuestion {
         },
     };
 
-    static breadcrumbAnswer(): string {
-        switch (this.answer) {
+    static prettyPrintSavedAnswer(): string {
+        switch (this.savedAnswer) {
         case "Keeping warm":
             return "Blankets";
         case "Food packages/parcels/vouchers" :
             return "Food parcels/vouchers";
         default:
-            return this.answer
+            return this.savedAnswer
         }
     }
 }

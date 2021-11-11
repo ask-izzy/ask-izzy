@@ -10,7 +10,7 @@ export default class HealthAreYouSafe extends AreYouSafe {
     }
 
     static showPage(): boolean {
-        return super.showPage() && HealthSubcategories.answer ===
+        return super.showPage() && HealthSubcategories.savedAnswer ===
             "Domestic & family violence";
     }
 }

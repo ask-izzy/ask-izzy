@@ -105,15 +105,15 @@ class Location extends Personalisation<Props, State> {
     static title: string = "Location";
 
     static headingValue(): ?string {
-        return this.answer && `in ${this.answer}`
+        return this.savedAnswer && `in ${this.savedAnswer}`
     }
 
-    static get answer(): string {
+    static get savedAnswer(): string {
         return storage.getSearchArea();
     }
 
-    static breadcrumbAnswer(): ?any {
-        return this.answer;
+    static prettyPrintSavedAnswer(): ?string {
+        return this.savedAnswer;
     }
 
     static shouldInjectAccessPoints(): boolean {
@@ -160,8 +160,6 @@ class Location extends Personalisation<Props, State> {
         event.preventDefault();
         if (!this.state.nextDisabled) {
             this.props.onDoneTouchTap();
-        } else if (this.state.autocompletions[0]) {
-            this.selectAutocomplete(this.state.autocompletions[0]);
         }
     }
 

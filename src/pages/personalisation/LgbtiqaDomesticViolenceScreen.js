@@ -29,26 +29,25 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
 
     static summaryLabel = "LGBTIQA+";
 
-    static breadcrumbAnswer(): ?string {
-        switch (this.answer) {
-        case true:
+    static prettyPrintSavedAnswer(): string {
+        switch (this.savedAnswer) {
+        case "true":
             return "Safe";
-        case false:
+        case "false":
             return "Not safe";
         default:
-            this.answer;
+            return this.savedAnswer;
         }
     }
 
     static showPage(): boolean {
         return Boolean(
-            DfvDemographics.answer &&
-            DfvDemographics.answer.indexOf("LGBTIQA+") > -1
+            DfvDemographics.savedAnswer?.includes("LGBTIQA+")
         );
     }
 
     static getSearch(request: searchRequest): ? searchRequest {
-        return this.answer ? request : null;
+        return this.savedAnswer ? request : null;
     }
 
     onDoneTouchTap(): void {
@@ -66,7 +65,7 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
     }
 
     shouldShowVicService(): boolean {
-        const LocationAnswer = Location.answer.split(", ");
+        const LocationAnswer = Location.savedAnswer.split(", ");
 
         return ["Victoria", "VIC"].indexOf(LocationAnswer[1]) > -1;
     }
