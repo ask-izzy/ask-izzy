@@ -27,7 +27,7 @@ Feature: Sorting drop down on the results page
         Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)
         ==========================================================================================
         Transitional Housing Service | My Housing Service    | Transitional accommodation
+        Housing Service              | My Housing Service    | (nada)
         Emergency Accom              | Youth Support Net     | (nada)
         Womens Refuge                | Susan's House         | Crisis accommodation
-        Housing Service              | My Housing Service    | (nada)
         ------------------------------------------------------------------------------------------

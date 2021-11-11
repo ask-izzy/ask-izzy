@@ -3,7 +3,7 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 import icons from "../icons";
-import type { Service } from "../iss";
+import Service from "../iss/Service";
 import Spacer from "./Spacer";
 
 type Props = {

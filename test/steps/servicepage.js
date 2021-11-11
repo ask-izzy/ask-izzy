@@ -73,8 +73,8 @@ async function getTransportTimes(
         By.css(".TransportTime")
     )
 
-    // Double await needed because flow is stupid
-    const visibleTransportElements = await await asyncFilter(
+    // $FlowIgnore needed because WebDriver is not typed
+    const visibleTransportElements = await asyncFilter(
         allTransports,
         elem => elem.isDisplayed()
     )

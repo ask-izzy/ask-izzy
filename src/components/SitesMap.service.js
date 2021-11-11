@@ -1,11 +1,12 @@
 /* @flow */
 
-import type {Site} from "../iss";
+import type {site} from "../iss/site";
 import {MapsApi} from "../maps";
+import type {geoPoint} from "../iss/general"
 
 type SiteMarker = {
-    site: Site,
-    point: issPoint,
+    site: site,
+    point: geoPoint,
     selected: boolean
 }
 

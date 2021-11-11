@@ -5,11 +5,11 @@ import React from "react";
 
 import Link from "./base/Link";
 import * as gtm from "../google-tag-manager";
-import iss from "../iss";
+import Service from "../iss/Service";
 import Spacer from "./Spacer";
 
 type Props = {
-    object: iss.Service,
+    object: Service,
 }
 
 export default class Feedback extends React.Component<Props, void> {

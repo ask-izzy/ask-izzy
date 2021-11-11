@@ -8,9 +8,9 @@ import CrisisHeader from "../components/CrisisHeader";
 import {
     crisisResults as onlyCrisisResults,
     nonCrisisResults as onlyNonCrisisResults,
-} from "../iss";
+} from "../iss/crisisService";
 
-import type {Service} from "../iss";
+import Service, {sortServices} from "../iss/Service";
 import type {SortType} from "./base/Dropdown";
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 
@@ -27,9 +27,13 @@ function ResultsList({
     crisisResults,
     sortBy,
 }: Props): ReactNode {
-    const filteredResults = crisisResults ?
+    let filteredResults = crisisResults ?
         onlyCrisisResults(results)
-        : onlyNonCrisisResults(results, sortBy)
+        : onlyNonCrisisResults(results)
+
+    if (!crisisResults && sortBy) {
+        filteredResults = sortServices(filteredResults, sortBy)
+    }
 
     const ListItem: typeof CrisisLineItem | typeof ResultListItem =
         crisisResults ?

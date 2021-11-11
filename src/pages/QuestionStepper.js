@@ -18,7 +18,7 @@ import SkipToChoices from "./SkipToChoices";
 import QuestionStepperAnswer from "./QuestionStepperAnswer";
 import QuestionStepperClearLocation from "./QuestionStepperClearLocation";
 import _ from "underscore";
-import {Service} from "../iss";
+import Service from "../iss/Service";
 import ScreenReader from "../components/ScreenReader";
 
 type Props = {

@@ -10,7 +10,7 @@ import FlatButton from "../../components/FlatButton";
 import WithStickyFooter from "../../components/WithStickyFooter";
 import icons from "../../icons";
 import storage from "../../storage";
-import * as iss from "../../iss";
+import type {serviceSearchRequest} from "../../iss/serviceSearch";
 import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import ScreenReader from "../../components/ScreenReader";
@@ -86,7 +86,7 @@ class BaseMultiQuestion extends BaseQuestion {
         return answers;
     }
 
-    static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+    static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
         let value = this.savedAnswer;
 
         if (value != null) {
@@ -98,11 +98,11 @@ class BaseMultiQuestion extends BaseQuestion {
     }
 
     static getSearchForAnswer(
-        request: iss.searchRequest,
+        request: serviceSearchRequest,
         answers: Set<string>|string,
-    ): ?iss.searchRequest {
+    ): ?serviceSearchRequest {
 
-        let search: ?iss.searchRequest = request;
+        let search: ?serviceSearchRequest = request;
 
         if (answers instanceof Set) {
             // Take the first two answers offered

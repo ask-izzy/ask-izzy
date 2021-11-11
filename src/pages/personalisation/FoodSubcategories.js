@@ -3,7 +3,7 @@ import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
 /* eslint-disable no-unused-vars */
-import { append, remove } from "../../iss/Search";
+import { append, remove } from "../../iss/ServiceSearchRequest";
 
 export default class FoodSubcategories extends BaseQuestion {
     static title: string = "Services";

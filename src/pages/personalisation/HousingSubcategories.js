@@ -4,7 +4,7 @@ import type { ElementConfig as ReactElementConfig } from "react"
 import BaseQuestion from "./BaseQuestion";
 import SleepTonight from "./SleepTonight";
 import Location from "./Location";
-import { remove, housingCrisis } from "../../iss/Search";
+import { remove, housingCrisis } from "../../iss/ServiceSearchRequest";
 
 export default class HousingSubcategories extends BaseQuestion {
     static title: string = "Situation";

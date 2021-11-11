@@ -4,7 +4,7 @@ import type {Element as ReactElement} from "React";
 import React from "react";
 
 import Collapser from "../general/Collapser";
-import { Service } from "../../iss";
+import Service from "../../iss/Service";
 
 type Props = {
     service: Service

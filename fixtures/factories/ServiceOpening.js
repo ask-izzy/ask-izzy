@@ -3,12 +3,13 @@
 import moment from "moment-timezone";
 
 import ServiceOpening from "../../src/iss/ServiceOpening";
+import type {openingHours as openingHoursType} from "../../src/iss/general";
 
 /*
  * Create ServiceOpening fixture
  */
-export default function(
-    openingHours: Array<issOpeningHours>,
+export default function getServiceOpeningFixture(
+    openingHours: Array<openingHoursType>,
     currentTime: Moment,
     currentlyOpen?: ?boolean
 ): Object {
@@ -36,7 +37,7 @@ export default function(
  */
 export function isDuringOpenHours(
     time: Moment,
-    openingHours: Array<issOpeningHours>
+    openingHours: Array<openingHoursType>
 ): boolean {
     return openingHours.some(
         openPeriod => {

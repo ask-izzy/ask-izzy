@@ -9,6 +9,7 @@ import ServiceOpening from "../iss/ServiceOpening";
 import Collapser from "./general/Collapser";
 import OpeningTimes from "./OpeningTimes";
 import * as gtm from "../google-tag-manager";
+import type {openingHours as openingHoursType} from "../iss/general";
 
 function formatTime(str: string): string {
     return moment(str, "HH:mm:ss").format("h:mm A");
@@ -21,7 +22,7 @@ const sampleTime = moment("2015-09-09 1pm", "YYYY-MM-DD ha");
  */
 function fixture(
     nowOpen: ?boolean,
-    openingHours: Array<issOpeningHours>,
+    openingHours: Array<openingHoursType>,
     time: ?Moment,
 ): Object {
     // Moment is fixed to Wednesday 15/9/2015 at 1pm

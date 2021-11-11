@@ -10,7 +10,7 @@ import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda";
 import dictionary from "../support/dictionary";
 import unpromisify from "../support/yadda-promise";
 import { mock, mockSearch } from "../support/mock_iss/server";
-import { Service } from "../../src/iss";
+import Service from "../../src/iss/Service";
 
 import { visitUrl } from "./browser";
 

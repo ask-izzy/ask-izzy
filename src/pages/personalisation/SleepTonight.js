@@ -3,7 +3,7 @@ import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
 import Location from "./Location";
-import { append, housingCrisis } from "../../iss/Search";
+import { append, housingCrisis } from "../../iss/ServiceSearchRequest";
 
 export default class SleepTonight extends BaseQuestion {
     static title: string = "Sleep tonight";

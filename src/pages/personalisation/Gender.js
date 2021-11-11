@@ -2,7 +2,7 @@
 import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseQuestion from "./BaseQuestion";
-import { append } from "../../iss/Search";
+import { append } from "../../iss/ServiceSearchRequest";
 
 export default class Gender extends BaseQuestion {
     static title: string = "Gender";

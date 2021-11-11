@@ -9,7 +9,7 @@ import DfvDemographics from "./DfvDemographics";
 import Location from "./Location"
 import storage from "../../storage";
 
-import type { searchRequest } from "../../iss";
+import type { serviceSearchRequest } from "../../iss/serviceSearch";
 
 class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
     doneButtonLabel = "Continue to all services";
@@ -46,7 +46,7 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
         );
     }
 
-    static getSearch(request: searchRequest): ? searchRequest {
+    static getSearch(request: serviceSearchRequest): ? serviceSearchRequest {
         return this.savedAnswer ? request : null;
     }
 

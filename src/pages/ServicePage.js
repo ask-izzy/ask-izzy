@@ -5,8 +5,7 @@ import React from "react";
 import type {Element as ReactElement} from "React";
 import ServicePane from "../components/ServicePane";
 
-import iss from "../iss";
-import type {Service} from "../iss";
+import Service, {getService} from "../iss/Service";
 import components from "../components";
 import Link from "../components/base/Link";
 import Loading from "../icons/Loading";
@@ -79,7 +78,7 @@ class ServicePage extends React.Component<{}, {
                 this.context.router.location,
                 `requestService-${this.id}`
             )
-            let object = await iss.getService(this.id);
+            let object = await getService(this.id);
             this.setState({object});
         } catch (error) {
             this.setState({error});

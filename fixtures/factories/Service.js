@@ -1,30 +1,48 @@
 /* @flow */
+import merge from "deepmerge";
 
-import { Service } from "../../src/iss";
-import { Abn, Id, Merge } from "./Value";
-import { Location, Site, TravelTime } from "./Location";
-import { NowOpen } from "./OpeningTime";
+import Service from "../../src/iss/Service";
+import type {ServiceProps} from "../../src/iss/Service";
+import type {AddressLocationProps} from "../../src/iss/AddressLocation";
+import type {site} from "../../src/iss/site";
+import type {nowOpen, phone} from "../../src/iss/general";
+import { Abn, Id } from "./Value";
+import { getAddressLocationPropsFixture } from "./AddressLocation";
+import getSiteFixture from "./site";
+import {getNowOpenFixture, getPhoneFixture} from "./general";
 
-function defaults() {
-    return {
+export type serviceFixtureProps = $Shape<{
+    ...ServiceProps,
+    location: $Shape<AddressLocationProps>,
+    now_open: $Shape<nowOpen>,
+    phones: Array<$Shape<phone>>,
+    site: $Shape<site>
+}>
+
+export default function getServiceFixture(
+    additionalProps?: serviceFixtureProps
+): Service {
+    return new Service(
+        getServiceFixtureProps(additionalProps)
+    );
+}
+
+export function getServiceFixtureProps(
+    additionalProps?: serviceFixtureProps
+): ServiceProps {
+    const defaultProps = {
         abn: Abn(),
         accessibility: "access",
         accessibility_details: "",
         accreditation: [],
-        adhc_eligible: false,
-        adhc_registered: false,
         age_groups: [
             "youngadult",
             "adult",
             "middleagedadult",
         ],
-
-        // FIXME: Can we include the main name in the alias?
-        also_known_as: ["Service Alias"],
         assessment_criteria: "",
         availability: "Some",
         billing_method: "",
-        cald_specific: true,
         capacity: {
             frequency: 1,
             status: "amber",
@@ -33,15 +51,10 @@ function defaults() {
         catchment: "",
         cost: "",
         crisis: false,
-        datasets: {},
         description: "Offers swags and blankets to those sleeping rough.",
-        details: "",
         eligibility_info: "",
         emails: [],
-        endpoints: [],
-        free_or_low_cost: false,
         funding_body: "Department of Human Services (VIC)",
-        healthcare_card_holders: false,
         id: Id(),
         indigenous_classification: [],
         ineligibility_info: "",
@@ -54,37 +67,40 @@ function defaults() {
         ],
         last_updated: "2015-02-03",
         lgbtiqa_plus_specific: false,
-        location: Location(),
-        location_expiry: null,
-        location_type: "",
+        location: getAddressLocationPropsFixture(),
         name: "Bare Needs",
         ndis_approved: false,
-        networks: [],
-        now_open: NowOpen(),
+        now_open: getNowOpenFixture(),
         opening_hours: [],
         parking_info: "",
         phones: [],
         postal_address: [],
-        promoted: false,
         public_transport_info: "Near South Yarra station",
-        publicly_searchable: true,
         referral_info: "",
         service_types: [],
         show_in_askizzy_health: false,
-        site: Site(),
+        site: getSiteFixture(),
         special_requirements: "",
-        statewide: false,
         target_gender: "u",
         type: "service",
         web: "",
-        travelTime: TravelTime(),
     };
-}
-
-export function ServiceParams(opts: ?Object): issService {
-    return Merge(defaults(), opts);
-}
-
-export default function ServiceFactory(opts: ?Object): Service {
-    return new Service(ServiceParams(opts));
+    return merge(
+        defaultProps,
+        {
+            ...additionalProps,
+            location: getAddressLocationPropsFixture(
+                additionalProps?.location
+            ),
+            now_open: getNowOpenFixture(
+                additionalProps?.now_open
+            ),
+            phones: additionalProps?.phones?.map(props =>
+                getPhoneFixture(props)
+            ) || [],
+            site: getSiteFixture(
+                additionalProps?.site
+            ),
+        }
+    )
 }

@@ -19,7 +19,7 @@ import webpackStats from "./webpack-stats";
 import categories from "../constants/categories";
 import Category from "../constants/Category";
 import Helmet from "react-helmet";
-import {fillInPathParams} from "../utils/url.service"
+import {fillInPathParams} from "../utils/url"
 
 const versionFilePath = "public/VERSION"
 const version = fs.existsSync(versionFilePath) &&

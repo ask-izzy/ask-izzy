@@ -5,7 +5,8 @@ import React from "react";
 import moment from "moment-timezone";
 
 import OpeningTimes from "./OpeningTimes";
-import ServiceOpeningFactory from "../../fixtures/factories/ServiceOpening";
+import getServiceOpeningFixture from "../../fixtures/factories/ServiceOpening";
+import type {openingHours} from "../iss/general";
 
 export default {
     title: "Service Components/OpeningTimes",
@@ -153,7 +154,7 @@ export function mockedTimeDecorator(
 
 export function addTimesToStory(
     Story: Object,
-    times: Array<issOpeningHours>,
+    times: Array<openingHours>,
     compact?: ?boolean,
     currentTime: ?Moment,
     currentlyOpen: ?boolean
@@ -162,7 +163,7 @@ export function addTimesToStory(
         moment("2015-09-09 1pm", "YYYY-MM-DD ha");
 
     Story.args = {
-        object: ServiceOpeningFactory(
+        object: getServiceOpeningFixture(
             times,
             mockedCurrentTime,
             currentlyOpen

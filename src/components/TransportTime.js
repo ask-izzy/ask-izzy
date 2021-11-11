@@ -6,10 +6,11 @@ import classnames from "classnames";
 
 import icons from "../icons";
 import Spacer from "./Spacer";
-import Location from "../iss/Location";
+import AddressLocation from "../iss/AddressLocation";
+import type {travelTime} from "../iss/general"
 
 type Props = {
-    location: Location,
+    location: AddressLocation,
     travelTimes: Array<travelTime>,
     withSpacer?: boolean,
 }

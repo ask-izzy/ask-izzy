@@ -4,6 +4,8 @@ import url from "url";
 import lru from "lru-cache";
 import _ from "underscore";
 
+import type {serviceSearchResults} from "./serviceSearch"
+
 function keyPart(object: Object): string {
     // Can't just stringify directly because order matters.
     return JSON.stringify(
@@ -37,7 +39,7 @@ function cacheKey(
 const fuzzyKey = _.memoize(_.partial(cacheKey, _, true));
 const exactKey = _.memoize(_.partial(cacheKey, _, false));
 
-export default class Cache {
+export default class ServiceSearchCache {
     _cache: Object;
     _disposing: boolean;
 
@@ -68,30 +70,45 @@ export default class Cache {
         }
     }
 
-    exactHit(path: string): ?Object {
+    getPageForQuery(path: string): ?serviceSearchResults {
         return this._cache.get(exactKey(path));
     }
 
-    revise(path: string, response: Object): void {
-        let current = this._cache.get(fuzzyKey(path));
+    getAllPagesForQuery(path: string): ?serviceSearchResults {
+        return this._cache.get(fuzzyKey(path));
+    }
 
-        if (!current) {
-            this._cache.set(fuzzyKey(path), response);
-            this._cache.set(exactKey(path), response);
-        } else {
-            // We only paginate forwards at the moment.
-            // this will break if we paginating backwards.
-            current.meta.next = response.meta.next;
-
-            // Requests for this exact url should find these records
-            this._cache.set(exactKey(path), current);
-
-            current.objects = current.objects.concat(response.objects);
-            current.meta.available_count = current.objects.length;
-
-            response.objects = current.objects;
-            response.meta = current.meta;
+    revise(path: string, response: serviceSearchResults): void {
+        let responseWithAllPages: serviceSearchResults = this._cache
+            .get(fuzzyKey(path));
+        const responseForCurrentPage: serviceSearchResults = {
+            meta: response.meta,
+            services: [...response.services],
         }
+
+        if (!responseWithAllPages) {
+            responseWithAllPages = responseForCurrentPage
+        } else {
+            responseWithAllPages = {
+                meta: {
+                    ...responseWithAllPages.meta,
+                    next: responseForCurrentPage.meta.next, // We only paginate
+                    // forwards at the moment. This will break if we
+                    // paginating backwards.
+                    available_count: responseForCurrentPage
+                        .meta.available_count,
+                },
+                services: [
+                    ...responseWithAllPages.services,
+                    ...responseForCurrentPage.services,
+                ],
+            }
+        }
+
+        // Requests for this fuzzy url should find all records
+        this._cache.set(fuzzyKey(path), responseWithAllPages);
+        // Requests for this exact url should find these records
+        this._cache.set(exactKey(path), responseForCurrentPage);
     }
 
 }

@@ -3,7 +3,7 @@ import type { ElementConfig as ReactElementConfig } from "react"
 
 import React from "react";
 import BaseQuestion from "./BaseQuestion";
-import { append } from "../../iss/Search";
+import { append } from "../../iss/ServiceSearchRequest";
 import icons from "../../icons";
 import DomesticViolenceLinkBar from "../../components/DomesticViolenceLinkBar";
 

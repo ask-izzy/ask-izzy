@@ -6,8 +6,7 @@ import PropTypes from "proptypes";
 
 import Link from "./base/Link";
 import Phone from "./Phone";
-import fixtures from "../../fixtures/services";
-import iss from "../iss";
+import Service from "../iss/Service";
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
 import DebugServiceRecord from "./DebugServiceRecord";
@@ -37,7 +36,7 @@ const crisisDescriptions = {
 }
 
 type Props = {
-    service: iss.Service,
+    service: Service,
     resultNumber: number
 }
 
@@ -47,10 +46,6 @@ class CrisisLineItem extends React.Component<Props, void> {
     static propTypes = {
         service: PropTypes.object.isRequired,
     };
-
-    static sampleProps: any = {default: {
-        service: new iss.Service(fixtures.domesticviolence),
-    }};
 
     render(): ReactElement<"div"> | ReactElement<"span"> {
         const {

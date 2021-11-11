@@ -4,7 +4,7 @@ import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
 import icons from "../icons";
-import {Service} from "../iss";
+import Service from "../iss/Service";
 
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
@@ -41,7 +41,7 @@ function ResultListItem({
         }
         let suburb = service.location.suburb;
 
-        if (service.Location().isConfidential()) {
+        if (service.location.isConfidential()) {
             suburb = "Confidential location";
         }
 
@@ -59,10 +59,10 @@ function ResultListItem({
     }
 
     const renderTravelTimes = (): ReactNode => {
-        if (service.Location() && service.travelTimes) {
+        if (service.location && service.travelTimes) {
             return (
                 <TransportTime
-                    location={service.Location()}
+                    location={service.location}
                     compact={true}
                     travelTimes={service.travelTimes}
                 />

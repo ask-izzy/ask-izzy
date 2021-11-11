@@ -3,7 +3,7 @@ import type { ElementConfig as ReactElementConfig } from "react"
 
 import BaseMultiQuestion from "./BaseMultiQuestion";
 
-import { append } from "../../iss/Search";
+import { append } from "../../iss/ServiceSearchRequest";
 import icons from "../../icons";
 import { resetDfvOptions } from "../../utils/domesticViolence";
 import * as React from "react";

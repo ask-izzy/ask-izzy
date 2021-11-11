@@ -1,11 +1,15 @@
 /* @flow */
 
-import iss from "../iss";
+import {
+    initialSearchForServices,
+    searchForServices,
+} from "../iss/serviceSearch";
 import BaseCategoriesPage from "./BaseCategoriesPage";
 import * as gtm from "../google-tag-manager";
 
 import routerContext from "../contexts/router-context";
-import type {searchResultsMeta, Service} from "../iss";
+import type {serviceSearchResultsMeta} from "../iss/serviceSearch";
+import Service from "../iss/Service"
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,
@@ -14,7 +18,7 @@ import storage from "../storage";
 import type {SortType} from "../components/base/Dropdown"
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 type State = {
-    searchMeta: ?searchResultsMeta,
+    searchMeta: ?serviceSearchResultsMeta,
     searchResults: ?Array<Service>,
     searchError: ?{message: string, status: number},
     searchPagesLoaded: number,
@@ -91,13 +95,13 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
                 }
                 // first page
                 this.setState({searchMeta: null});
-                res = await iss.search(params)
+                res = await initialSearchForServices(params)
 
             } else if (this.state.searchMeta.next) {
                 const next = this.state.searchMeta.next
                 // subsequent pages
                 this.setState({searchMeta: null});
-                res = await iss.requestObjects(next);
+                res = await searchForServices(next);
 
             } else {
                 // no more pages
@@ -137,7 +141,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
 
         this.setState(prevState => ({
             searchMeta: res.meta,
-            searchResults: res.objects,
+            searchResults: res.services,
             searchError: undefined,
             searchPagesLoaded: prevState.searchPagesLoaded + 1,
         }));

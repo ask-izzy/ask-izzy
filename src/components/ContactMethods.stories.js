@@ -4,8 +4,10 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import ContactMethods from "./ContactMethods";
-import fixtures from "../../fixtures/services";
-import ServiceFactory from "../../fixtures/factories/Service";
+import {
+    ixaService,
+    phoneableService,
+} from "../../fixtures/services";
 
 export default {
     title: "Service Components/ContactMethods",
@@ -18,10 +20,10 @@ const Template = (args: Object): ReactNode => {
 
 export const BasicService: typeof Template = Template.bind({});
 BasicService.args = {
-    object: ServiceFactory(fixtures.ixa),
+    object: ixaService,
 };
 
 export const ServiceWithLotsOfNumbers: typeof Template = Template.bind({});
 ServiceWithLotsOfNumbers.args = {
-    object: ServiceFactory(fixtures.phoneableService),
+    object: phoneableService,
 };

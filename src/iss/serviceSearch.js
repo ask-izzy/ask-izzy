@@ -1,0 +1,164 @@
+/* @flow */
+import lru from "lru-cache";
+
+import Service, {attachTransportTimes} from "./Service";
+import storage from "../storage";
+import ServiceSearchCache from "./ServiceSearchCache";
+import {searchIss} from "./search";
+import type {searchResultsMeta} from "./search";
+import {serialiseUrlQueryParams} from "../utils/url"
+import {
+    TryWithDefault,
+} from "../timeout";
+import * as gtm from "../google-tag-manager";
+
+export type serviceSearchRequest = {
+    q?: string,
+    service_type?: Array<string>,
+    service_type_raw?: Array<string>,
+    site_id?: number,
+
+    minimum_should_match?: string,
+
+    area?: string,
+    location?: string,
+    type?: string,
+    age_group?: Array<string>,
+    client_gender?: Array<string>,
+
+    catchment?: "prefer"|"true"|"false",
+    is_bulk_billing?: boolean,
+    show_in_askizzy_health?: boolean,
+
+    limit?: number,
+    key?: string,
+};
+
+export type serviceSearchResultsMeta = {
+    ...searchResultsMeta,
+    available_count: number,
+    location: {
+        name: string,
+        suburb: string,
+        state: string,
+        lat: number,
+        lon: number,
+    },
+}
+
+export type serviceSearchResults = {|
+    meta: serviceSearchResultsMeta,
+    services: Array<Service>,
+|};
+
+/**
+ * Execute a search against ISS.
+ *
+ * @param {searchRequest} query - either a query string, or an object of
+ * search parameters.
+ *
+ * @returns {Promise<serviceSearchResults>} search results from ISS.
+ */
+export async function initialSearchForServices(
+    query: serviceSearchRequest,
+): Promise<serviceSearchResults> {
+    let request_: serviceSearchRequest = {
+        q: "",
+        type: "service",
+        limit: 10,
+    };
+
+    const searchUrlPath = "/api/v3/search/";
+    const previousSearchUrl: string =
+        (storage.getItem("previous_search_url"): any);
+
+    Object.assign(request_, query);
+    let searchUrl = serialiseUrlQueryParams(searchUrlPath, request_);
+
+    if (searchUrl != previousSearchUrl) {
+        gtm.emit({
+            event: "New Search On Behalf Of",
+            eventCat: "Services Searched",
+            eventAction: "Help Seeker Type",
+            eventLabel: String(storage.getItem("user_type")),
+            sendDirectlyToGA: true,
+        });
+
+        gtm.emit({
+            event: "Action Triggered - New Search",
+            eventCat: "Action triggered",
+            eventAction: "New search request",
+            eventLabel: storage.getItem("user_type") ?
+                String(storage.getItem("user_type"))
+                : "<not answered>",
+            sendDirectlyToGA: true,
+        });
+    }
+    storage.setItem("previous_search_url", searchUrl);
+    return await searchForServices(searchUrlPath, request_);
+}
+
+export async function searchForServices(
+    path: string,
+    data: ?serviceSearchRequest,
+): Promise<serviceSearchResults> {
+    const url_ = serialiseUrlQueryParams(path, data);
+
+    if (searchResultsCache.getPageForQuery(url_)) {
+        const resultWithAllPages = searchResultsCache
+            .getAllPagesForQuery(url_)
+        if (!resultWithAllPages) {
+            // This should never happen. If we've cached this specific page then
+            // we should have a cache match for all pages relating to this query
+            console.warn("Search cache hit for single page but not all pages")
+        } else {
+            return resultWithAllPages;
+        }
+    }
+
+    const {meta, objects} = await await searchIss(path, data);
+
+    // convert objects to ISS search results
+    let services: Array<Service> = objects.map(
+        (object: Object): Service => new Service(object)
+    );
+
+    if (storage.getUserGeolocation()) {
+        services = await TryWithDefault(
+            3000,
+            attachTransportTimes(services),
+            services
+        )
+    }
+
+    services.forEach((service) =>
+        serviceCache.set(service.id, service)
+    )
+
+    const searchResults = {
+        meta,
+        services,
+    }
+
+    searchResultsCache.revise(url_, searchResults);
+
+    // searchResults should never be returned but we provided it as a fail safe
+    // to keep flow happy.
+    return searchResultsCache.getAllPagesForQuery(url_) || searchResults;
+}
+
+const searchResultsCache = new ServiceSearchCache();
+const serviceCache = lru({
+    max: 150, // Only track 150 keys in the cache
+    maxAge: 1000 * 60 * 60, // Discard anything over 1 hour
+});
+
+export function getServiceFromCache(serviceId: number): ?Service {
+    return serviceCache.get(serviceId)
+}
+
+export function forEachServiceFromCache(
+    callback: (service: Service) => any
+): void {
+    serviceCache.forEach(callback)
+}

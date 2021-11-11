@@ -4,7 +4,7 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import Ndis from "./Ndis";
-import ServiceFactory from "../../fixtures/factories/Service";
+import getServiceFixture from "../../fixtures/factories/Service";
 
 export default {
     title: "Service Components/Ndis",
@@ -17,14 +17,14 @@ const Template = (args: Object): ReactNode => {
 
 export const Standard: typeof Template = Template.bind({});
 Standard.args = {
-    object: new ServiceFactory({
+    object: getServiceFixture({
         ndis_approved: true,
     }),
 };
 
 export const StandardWithSpacer: typeof Template = Template.bind({});
 StandardWithSpacer.args = {
-    object: new ServiceFactory({
+    object: getServiceFixture({
         ndis_approved: true,
     }),
     spacer: true,
@@ -32,7 +32,7 @@ StandardWithSpacer.args = {
 
 export const Compact: typeof Template = Template.bind({});
 Compact.args = {
-    object: new ServiceFactory({
+    object: getServiceFixture({
         ndis_approved: true,
     }),
     compact: true,
@@ -40,6 +40,6 @@ Compact.args = {
 
 export const ServiceNotNDISApproved: typeof Template = Template.bind({});
 ServiceNotNDISApproved.args = {
-    object: new ServiceFactory({
+    object: getServiceFixture({
     }),
 };

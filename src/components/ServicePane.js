@@ -23,7 +23,7 @@ import Chevron from "../icons/Chevron";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import AlertBannerList from "../components/AlertBannerList";
-import type {Service} from "../iss";
+import Service from "../iss/Service";
 import ScreenReader from "./ScreenReader";
 import icons from "../icons";
 import Storage from "../storage";
@@ -46,7 +46,7 @@ function ServicePane({service}: Props): ReactNode {
 
     const getSiblingServices = async(): Promise<void> => {
         let response = await service.getSiblingServices();
-        setSiblings(response.objects)
+        setSiblings(response.services)
     }
 
 
@@ -182,7 +182,7 @@ function ServicePane({service}: Props): ReactNode {
                     bannerName="housing"
                 />
                 <AlertBannerList
-                    state={service.Location()?.state}
+                    state={service.location?.state}
                     screenLocation="servicePage"
                     format="inline"
                 />
@@ -256,21 +256,20 @@ function ServicePane({service}: Props): ReactNode {
                                 spacer={true}
                             />
                             <Address
-                                location={service.Location()}
+                                location={service.location}
                                 site={service.site}
                                 withSpacer={true}
                             />
-                            {Storage.getUserGeolocation() &&
-                            service.travelTimes &&
+                            {service.location && service.travelTimes &&
                                 <TransportTime
-                                    location={service.Location()}
-                                    travelTimes={service.travelTimes}
+                                    location={service.location}
                                     withSpacer={true}
+                                    travelTimes={service.travelTimes}
                                 />
                             }
-                            {!service.Location().isConfidential() &&
+                            {!service.location?.isConfidential() &&
                             <GoogleMapsLink
-                                to={service.Location()}
+                                to={service.location}
                                 className={Storage.getUserGeolocation() ?
                                     "withTimes" : "withoutTimes"}
                                 onClick={recordClick}

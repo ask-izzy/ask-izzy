@@ -4,8 +4,9 @@
 
 import cors from "cors";
 import express from "express";
-import services from "../../../fixtures/services";
-import ServiceFactory from "../../../fixtures/factories/Service";
+import * as servicesProps from "../../../fixtures/servicesProps";
+import {getServiceFixtureProps} from "../../../fixtures/factories/Service";
+import type { serviceFixtureProps } from "../../../fixtures/factories/Service";
 const app = express();
 
 app.use(cors());
@@ -92,8 +93,12 @@ app.get("/api/v3/search/", (req, res) => {
                 total_count: 2,
             },
             objects: [
-                ServiceFactory(services.housingService),
-                ServiceFactory(services.housingServiceSibling),
+                getServiceFixtureProps(
+                    servicesProps.housingServiceProps
+                ),
+                getServiceFixtureProps(
+                    servicesProps.housingServiceSiblingProps
+                ),
             ],
         });
     } else if (req.query.site_id === "444") {
@@ -121,7 +126,7 @@ app.get("/api/v3/search/", (req, res) => {
                     id: 449,
                     name: "Drug & Alcohol Counselling",
                 },
-            ].map(ServiceFactory),
+            ].map(getServiceFixtureProps),
         });
     } else if (req.query.site_id) {
         /* other related services search */
@@ -231,7 +236,7 @@ app.get("/api/v3/search/", (req, res) => {
                         kind: "phone",
                     }],
                 },
-            ].map(ServiceFactory),
+            ].map(getServiceFixtureProps),
         });
     } else if (req.query.q.match(/material aid/)) {
         const object = {
@@ -271,11 +276,11 @@ app.get("/api/v3/search/", (req, res) => {
                 next: req.originalUrl + "&offset=5",
             },
             objects: [
-                ServiceFactory({...object, id: Seq()}),
-                ServiceFactory({...object, id: Seq()}),
-                ServiceFactory({...object, id: Seq()}),
-                ServiceFactory({...object, id: Seq()}),
-                ServiceFactory({...object, id: Seq()}),
+                getServiceFixtureProps({...object, id: Seq()}),
+                getServiceFixtureProps({...object, id: Seq()}),
+                getServiceFixtureProps({...object, id: Seq()}),
+                getServiceFixtureProps({...object, id: Seq()}),
+                getServiceFixtureProps({...object, id: Seq()}),
             ],
         });
     } else if (req.query.q.match(/zero results/)) {
@@ -302,7 +307,9 @@ app.get("/api/v3/search/", (req, res) => {
                 },
             },
             objects: [
-                ServiceFactory(services.domesticviolence),
+                getServiceFixtureProps(
+                    servicesProps.domesticViolenceServiceProps
+                ),
             ],
         });
     } else if (req.query.q.match(/elasticsearch unavailable/)) {
@@ -323,38 +330,30 @@ app.get("/api/v3/search/", (req, res) => {
                 },
             },
             objects: [
-                ServiceFactory(services.housingService),
-                ServiceFactory(services.housingServiceSibling),
-                ServiceFactory(services.youthSupportNet),
-                ServiceFactory(services.susansHouse),
+                getServiceFixtureProps(
+                    servicesProps.housingServiceProps
+                ),
+                getServiceFixtureProps(
+                    servicesProps.housingServiceSiblingProps
+                ),
+                getServiceFixtureProps(
+                    servicesProps.youthSupportNetServiceProps
+                ),
+                getServiceFixtureProps(
+                    servicesProps.susansHouseServiceProps
+                ),
             ],
         });
     }
 });
 
-app.get("/api/v3/service/111/", (req, res) => {
-    res.json(ServiceFactory(services.housingService));
-});
+for (const servicePropsKey in servicesProps) {
+    const serviceProps: serviceFixtureProps = servicesProps[servicePropsKey]
+    app.get(`/api/v3/service/${serviceProps.id}/`, (req, res) => {
+        res.json(getServiceFixtureProps(serviceProps));
+    });
+}
 
-app.get("/api/v3/service/13841/", (req, res) => {
-    res.json(ServiceFactory(services.legal));
-});
-
-app.get("/api/v3/service/866464/", (req, res) => {
-    res.json(ServiceFactory(services.ixa));
-});
-
-app.get("/api/v3/service/537512/", (req, res) => {
-    res.json(services.domesticviolence);
-});
-
-app.get("/api/v3/service/13844/", (req, res) => {
-    res.json(ServiceFactory(services.unhelpful));
-});
-
-app.get("/api/v3/service/5551234/", (req, res) => {
-    res.json(ServiceFactory(services.phoneableService));
-});
 
 function logErrors(err, req, res, next) {
     console.error("err.stack", err, err && err.stack);

@@ -9,7 +9,7 @@ import {MobileDetect} from "../effects/MobileDetect";
 import useTravelTimesUpdater from "../hooks/useTravelTimesUpdater"
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 import Button from "./base/Button";
-import {Service} from "../iss"
+import Service from "../iss/Service"
 
 type Props = {
     showMessage?: boolean,

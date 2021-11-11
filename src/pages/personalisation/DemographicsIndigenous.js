@@ -5,7 +5,7 @@ import type { ElementConfig as ReactElementConfig } from "react"
 import * as React from "react";
 import type {Node as ReactNode} from "react";
 import BaseQuestion from "./BaseQuestion";
-import { append } from "../../iss/Search";
+import { append } from "../../iss/ServiceSearchRequest";
 import icons from "../../icons";
 
 export default class DemographicsIndigenous extends BaseQuestion {

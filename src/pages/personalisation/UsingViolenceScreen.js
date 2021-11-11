@@ -9,7 +9,7 @@ import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 import DfvDemographics from "./DfvDemographics";
 import storage from "../../storage";
 
-import type { searchRequest } from "../../iss";
+import type { serviceSearchRequest } from "../../iss/serviceSearch";
 
 class UsingViolenceScreen extends BaseStaticPersonalisation {
     get doneButtonLabel(): string {
@@ -41,7 +41,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
         );
     }
 
-    static getSearch(request: searchRequest): ? searchRequest {
+    static getSearch(request: serviceSearchRequest): ? serviceSearchRequest {
         return this.savedAnswer ? request : null;
     }
 

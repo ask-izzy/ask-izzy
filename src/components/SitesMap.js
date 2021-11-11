@@ -4,7 +4,8 @@ import type {Node as ReactNode} from "React";
 import * as React from "react";
 import {GoogleMap, Marker} from "@react-google-maps/api"
 
-import type {Site} from "../iss";
+import type {site} from "../iss/site";
+import type {geoPoint} from "../iss/general"
 import Maps from "../maps";
 import storage from "../storage";
 import * as gtm from "../google-tag-manager";
@@ -15,16 +16,16 @@ import {
 import {useEffect, useState} from "react";
 
 type Props = {
-    sites: Array<Site>,
+    sites: Array<site>,
     siteLocations: Object,
     onSiteSelect?: Function,
-    selectedSite?: ?Site
+    selectedSite?: ?site
 }
 
 
 type SiteMarker = {
-    site: Site,
-    point: issPoint,
+    site: site,
+    point: geoPoint,
     selected: boolean
 }
 

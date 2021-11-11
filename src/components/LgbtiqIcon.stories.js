@@ -4,7 +4,7 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import LgbtiqIcon from "./LgbtiqIcon";
-import ServiceFactory from "../../fixtures/factories/Service";
+import getServiceFixture from "../../fixtures/factories/Service";
 
 export default {
     title: "Service Components/LgbtiqIcon",
@@ -17,12 +17,12 @@ const Template = (args: Object): ReactNode => {
 
 export const ServiceFlaggedLGBTIQA: typeof Template = Template.bind({});
 ServiceFlaggedLGBTIQA.args = {
-    object: new ServiceFactory({
+    object: getServiceFixture({
         lgbtiqa_plus_specific: true,
     }),
 };
 
 export const ServiceNotFlaggedLGBTIQA: typeof Template = Template.bind({});
 ServiceNotFlaggedLGBTIQA.args = {
-    object: new ServiceFactory(),
+    object: getServiceFixture(),
 };

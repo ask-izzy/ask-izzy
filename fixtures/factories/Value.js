@@ -47,36 +47,3 @@ export function Sequence(): () => number {
         return idx;
     });
 }
-
-/* eslint-disable complexity */
-export function Merge(defaults: Object, props: ?Object): Object {
-    // Only allow overriding keys on objects if the sample object is empty.
-    if (props && Object.keys(defaults).length) {
-        for (let key of Object.keys(props)) {
-            if (defaults[key] === undefined) {
-                throw new Error(`Supplied unsupported key "${key}"`)
-            }
-        }
-    }
-
-    for (let key of Object.keys(defaults)) {
-        if (props && props[key] != undefined) {
-            if (
-                typeof defaults[key] === "object" &&
-                !Array.isArray(defaults[key])
-            ) {
-                try {
-                    defaults[key] = Merge(defaults[key], props[key]);
-                } catch (error) {
-                    throw new Error(
-                        `Error processing '${key}: ${error.message}.`
-                    )
-                }
-            } else {
-                defaults[key] = props[key];
-            }
-        }
-    }
-
-    return defaults;
-}

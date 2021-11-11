@@ -4,7 +4,7 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import Feedback from "./Feedback";
-import fixtures from "../../fixtures/services";
+import {ixaService} from "../../fixtures/services";
 
 export default {
     title: "App Components/Feedback",
@@ -17,5 +17,5 @@ const Template = (args: Object): ReactNode => {
 
 export const Example: typeof Template = Template.bind({});
 Example.args = {
-    object: fixtures.ixa,
+    object: ixaService,
 };

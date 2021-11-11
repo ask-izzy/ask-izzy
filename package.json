@@ -46,6 +46,7 @@
     "core-js": "3.6.5",
     "cors": "2.8.4",
     "css-loader": "^5.2.4",
+    "deep-freeze-strict": "^1.1.1",
     "deepmerge": "^4.2.2",
     "details-element-polyfill": "2.4.0",
     "diff": "^5.0.0",

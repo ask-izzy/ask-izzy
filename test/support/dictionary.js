@@ -2,7 +2,7 @@
 
 import Yadda from "yadda";
 import _ from "underscore";
-import Service from "../../fixtures/factories/Service";
+import getServiceFixture from "../../fixtures/factories/Service";
 import yaml from "js-yaml";
 
 type callback = (err: ?Error, val: any) => void;
@@ -91,7 +91,7 @@ function tableConverter(str: string, done: callback): void {
  */
 function serviceConverter(str: string, done: callback): void {
     try {
-        done(null, Service(yaml.safeLoad(str)));
+        done(null, getServiceFixture(yaml.safeLoad(str)));
     } catch (error) {
         done(error)
     }
@@ -102,7 +102,7 @@ function serviceConverter(str: string, done: callback): void {
  */
 function servicesConverter(str: string, done: callback): void {
     try {
-        done(null, yaml.safeLoad(str).map(Service));
+        done(null, yaml.safeLoad(str).map(getServiceFixture));
     } catch (error) {
         done(error)
     }

@@ -5,10 +5,14 @@ import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 
 import SitesMap from "./SitesMap";
-import fixtures from "../../fixtures/services";
-import ServiceFactory from "../../fixtures/factories/Service";
+import {
+    ixaService,
+    housingService,
+} from "../../fixtures/services";
+import getServiceFixture from "../../fixtures/factories/Service";
 import { injectEnvVars } from "../storybook/loaders";
 import { addGoogleMapsScript } from "../storybook/decorators";
+import Service from "../iss/Service"
 
 export default {
     title: "App Components/SitesMap",
@@ -36,16 +40,16 @@ const Template = (args: Object): ReactNode => {
 export const OneSite: typeof Template = Template.bind({});
 OneSite.args = {
     ...calculateSiteProps([
-        ServiceFactory(fixtures.ixa),
+        ixaService,
     ]),
 };
 
 export const ThreeSites: typeof Template = Template.bind({});
 ThreeSites.args = {
     ...calculateSiteProps([
-        ServiceFactory(fixtures.ixa),
-        ServiceFactory(fixtures.housingService),
-        ServiceFactory(ServiceFactory({
+        ixaService,
+        housingService,
+        getServiceFixture({
             location: {
                 suburb: "Geelong",
                 point: {
@@ -53,7 +57,7 @@ ThreeSites.args = {
                     lon: 144.3575,
                 },
             },
-        })),
+        }),
     ]),
 };
 
@@ -62,7 +66,7 @@ NoSites.args = {
     ...calculateSiteProps([]),
 };
 
-function calculateSiteProps(services: Array<issService>) {
+function calculateSiteProps(services: Array<Service>) {
     const sites = []
     const siteLocations = {}
     for (const {site, location} of services) {

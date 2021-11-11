@@ -8,6 +8,7 @@ import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
 import icons from "../icons";
 import classnames from "classnames"
+import type { phone } from "../iss/general";
 
 type Props = phone & {
     crisis?: boolean,

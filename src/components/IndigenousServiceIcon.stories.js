@@ -5,7 +5,7 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
-import ServiceFactory from "../../fixtures/factories/Service";
+import getServiceFixture from "../../fixtures/factories/Service";
 
 export default {
     title: "Service Components/IndigenousServiceIcon",
@@ -22,12 +22,12 @@ const Template = (args: Object): ReactNode => {
 export const ServiceWithIndigenousClassification: typeof Template =
     Template.bind({});
 ServiceWithIndigenousClassification.args = {
-    object: new ServiceFactory({
+    object: getServiceFixture({
         indigenous_classification: ["Aboriginal (indigenous) specific"],
     }),
 };
 export const ServiceWithoutIndigenousClassification: typeof Template =
     Template.bind({});
 ServiceWithoutIndigenousClassification.args = {
-    object: new ServiceFactory(),
+    object: getServiceFixture(),
 };

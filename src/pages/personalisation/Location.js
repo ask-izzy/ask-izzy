@@ -14,7 +14,11 @@ import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
 import type {Geolocation} from "../../storage";
-import * as iss from "../../iss";
+import {searchForLocations} from "../../iss/locationSearch"
+import type {areaLocation} from "../../iss/locationSearch";
+import type { serviceSearchResults} from "../../iss/serviceSearch";
+import type { serviceSearchRequest } from "../../iss/serviceSearch";
+import {crisisResults, nonCrisisResults} from "../../iss/crisisService"
 import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
@@ -48,7 +52,7 @@ type State = {
     gettingAutocompletionsInProgress: boolean,
     locationNameInput: string,
     selectedLocation: ?location,
-    autocompletions: Array<issArea>,
+    autocompletions: Array<areaLocation>,
     nextDisabled: boolean,
     showStepper: boolean,
     category: ?Category,
@@ -123,7 +127,7 @@ class Location extends Personalisation<Props, State> {
         return !!victoriaRegex.exec(storage.getSearchArea());
     }
 
-    static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+    static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
         /* Location/Area is required */
         const searchArea = storage.getSearchArea();
         if (!searchArea) {
@@ -193,7 +197,7 @@ class Location extends Personalisation<Props, State> {
         async(input: string) => {
             let results
             try {
-                results = await iss.getLocations(input)
+                results = await searchForLocations(input)
             } catch (error) {
                 console.error(
                     "Error trying to get location autocomplete",
@@ -314,7 +318,7 @@ class Location extends Personalisation<Props, State> {
         }
     }
 
-    selectAutocomplete(result: issArea): void {
+    selectAutocomplete(result: areaLocation): void {
         /* set the text box to this value
          * and remove the autocompletions */
         const location: location = {
@@ -471,12 +475,12 @@ function isGeolocation(location: ?location): boolean %checks {
 export default Location;
 
 export function mergeAccessPoints(
-    original: iss.searchResults,
-    alternate: iss.searchResults
-): iss.searchResults {
-    const objects = iss.crisisResults(original.objects).concat(
-        alternate.objects,
-        iss.nonCrisisResults(original.objects)
+    original: serviceSearchResults,
+    alternate: serviceSearchResults
+): serviceSearchResults {
+    const objects = crisisResults(original.services).concat(
+        alternate.services,
+        nonCrisisResults(original.services)
     )
     const deduped = _.uniq(objects, false, ({id}) => id);
     const removedCount = objects.length - deduped.length;
@@ -491,6 +495,6 @@ export function mergeAccessPoints(
                              alternate.meta.available_count -
                              removedCount,
         },
-        objects: deduped,
+        services: deduped,
     };
 }

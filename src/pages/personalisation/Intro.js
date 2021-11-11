@@ -6,7 +6,7 @@ import * as React from "react";
 import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import storage from "../../storage";
-import * as iss from "../../iss";
+import type {serviceSearchRequest} from "../../iss/serviceSearch";
 import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
@@ -30,7 +30,7 @@ class Intro extends Personalisation<Props, State> {
 
     static title: string = "Intro";
 
-    static getSearch(request: iss.searchRequest): ?iss.searchRequest {
+    static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
         return request;
     }
 

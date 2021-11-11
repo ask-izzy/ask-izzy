@@ -5,6 +5,7 @@ import storage from "./storage";
 import _ from "underscore";
 import checkInactive from "./inactiveTimeout";
 import {Loader} from "@googlemaps/js-api-loader";
+import type {travelTime} from "./iss/general"
 
 export class MapsApi {
     api: GoogleMaps;
@@ -70,16 +71,14 @@ export class MapsApi {
     ): Promise<Array<travelTime>> {
         const directionsService = new this.api.DistanceMatrixService();
         const coords = storage.getUserGeolocation();
-        let origin = storage.getSearchArea();
-
-        if (coords && coords.latitude && coords.longitude) {
-            origin = `${coords.latitude},${coords.longitude}`;
+        if (!coords) {
+            return new Promise(resolve => resolve([]))
         }
 
         const params = {
             travelMode: this.api.TravelMode[mode],
             unitSystem: this.api.UnitSystem.METRIC,
-            origins: [`${origin}`],
+            origins: [`${coords.latitude},${coords.longitude}`],
             destinations: destinations,
             transitOptions: {departureTime: new Date()},
         }
