@@ -18,7 +18,6 @@ import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "../components/QuestionStepper";
 import {getInitialSearchRequest} from "../iss/serviceSearch";
 import { stateFromLocation } from "../utils";
-import ScreenReader from "../components/ScreenReader";
 import IssParamsOverrideControls from
     "../components/debug/IssParamsOverrideControls";
 import ScrollToTop from "../components/ResultsListPage/ScrollToTop";
@@ -50,15 +49,7 @@ class ResultsListPage extends ResultsPage<> {
 
     renderPage: (() => ReactElement<"div">) = () => (
         <div className="ResultsListPage">
-            <div
-                role="complementary"
-                aria-labelledby="header"
-            >
-                <ScreenReader>
-                    <span id="header">
-                        Header.
-                    </span>
-                </ScreenReader>
+            <div>
                 <DebugContainer message="Debug personalisation">
                     <DebugPersonalisation
                         search={getInitialSearchRequest(
@@ -120,12 +111,7 @@ class ResultsListPage extends ResultsPage<> {
                     format="inline"
                 />
             }
-            <main aria-labelledby="searchResults">
-                <ScreenReader>
-                    <span id="searchResults">
-                        Search Results.
-                    </span>
-                </ScreenReader>
+            <main aria-label="Search results">
                 {this.renderResults()}
             </main>
         </div>
@@ -136,6 +122,7 @@ class ResultsListPage extends ResultsPage<> {
             <div className="List results">
                 <ResultsList
                     results={this.state.searchResults || []}
+                    resultsLoading={this.searchIsLoading}
                     crisisResults={true}
                     travelTimesStatus={this.state.travelTimesStatus}
                     sortBy={undefined}
@@ -157,6 +144,7 @@ class ResultsListPage extends ResultsPage<> {
                 }
                 <ResultsList
                     results={this.state.searchResults || []}
+                    resultsLoading={this.searchIsLoading}
                     crisisResults={false}
                     travelTimesStatus={this.state.travelTimesStatus}
                     sortBy={this.state.sortBy}

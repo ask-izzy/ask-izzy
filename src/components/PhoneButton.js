@@ -10,6 +10,7 @@ import icons from "../icons";
 import classnames from "classnames"
 import type { phone } from "../iss/general";
 import {toCamelCase} from "../utils/strings";
+import ScreenReader from "./ScreenReader";
 
 type Props = phone & {
     crisis?: boolean,
@@ -58,6 +59,9 @@ export default class PhoneButton extends React.Component<Props, void> {
         return (
             <div className={className}>
                 <span className="kind">
+                    <ScreenReader>
+                        Phone contact:
+                    </ScreenReader>
                     {this.displayComment}
                 </span>
                 <Link
@@ -71,9 +75,7 @@ export default class PhoneButton extends React.Component<Props, void> {
                         eventLabel: `${this.props.number}`,
                     }}
                 >
-                    <div
-                        className="Contact-text"
-                    >
+                    <div className="Contact-text">
                         {icon}
                         <span>Call </span>
                         <span className="number value">

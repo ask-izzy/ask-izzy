@@ -30,7 +30,10 @@ export default function QuestionStepperBreadcrumb({
         <span className={cnx("QuestionStepperBreadcrumb", {currentlyEditing})}>
             {showQuestionIcons &&
             personalisationPage.defaultProps.name === "location" &&
-                <MapIcon viewBox="19 16 26 34" />
+                <MapIcon
+                    aria-hidden={true}
+                    viewBox="19 16 26 34"
+                />
             }
             <span className="answer">
                 {getBreadcrumbText(personalisationPage, personalisationPages)

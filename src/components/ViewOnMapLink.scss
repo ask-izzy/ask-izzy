@@ -1,0 +1,43 @@
+@use '../styles/mixins/colours';
+
+.ViewOnMapLink {
+    width: 30%;
+    font-size: 16px;
+    border: 1px solid #{colours.get-static('colour-button-primary')};
+    border: 1px solid var(--colour-button-primary);
+    background: none;
+    font-weight: bold;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &.Link {
+        color: #{colours.get-static('colour-button-primary')};
+        color: var(--colour-button-primary);
+        text-decoration: none;
+    }
+
+    > .label {
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    svg path {
+        fill: #{colours.get-static('colour-button-primary')};
+        fill: var(--colour-button-primary);
+        stroke: #{colours.get-static('colour-button-primary')};
+        stroke: var(--colour-button-primary);
+    }
+
+    &:hover {
+        background-color: #{colours.get-static('colour-button-secondary-hover')};
+        background-color: var(--colour-button-secondary-hover);
+    }
+
+    @media (max-width: 556px) {
+        width: 95%;
+    }
+}

@@ -1,16 +1,4 @@
-
-@use '../styles/mixins/colours';
-
-.Eligibility {
-    padding-right: 15px;
-    padding-left: 15px;
-
-    h2 {
-        font-size: 17px;
-        color: #{colours.get-static('colour-text-dark')};
-        color: var(--colour-text-dark);
-    }
-
+.ServiceProvisions {
     ul {
         // Since Eligibility is used in ResultListItem which is a list element
         // that causes this list to be a nested list which effects the style.

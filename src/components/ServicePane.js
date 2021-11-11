@@ -24,7 +24,6 @@ import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import AlertBannerList from "../components/AlertBannerList";
 import Service from "../iss/Service";
-import ScreenReader from "./ScreenReader";
 import icons from "../icons";
 import Storage from "../storage";
 import {MobileDetect} from "../effects/MobileDetect";
@@ -104,7 +103,6 @@ function ServicePane({service}: Props): ReactNode {
         return (
             <div className="siblings-container">
                 <h3
-                    tabIndex="0"
                     className="siblings-header"
                     aria-label="Also at this location."
                 >
@@ -166,15 +164,7 @@ function ServicePane({service}: Props): ReactNode {
 
     return (
         <div className="ServicePane">
-            <div
-                role="complementary"
-                aria-labelledby="header"
-            >
-                <ScreenReader>
-                    <span id="header">
-                        Header.
-                    </span>
-                </ScreenReader>
+            <div>
                 <HeaderBar
                     className="serviceDetailsHeader"
                     primaryText={service.name}
@@ -189,30 +179,16 @@ function ServicePane({service}: Props): ReactNode {
 
                 <DebugServiceRecord object={service} />
             </div>
-            <div
-                role="main"
-                aria-labelledby="serviceDetails"
+            <main
+                aria-label="Service details"
                 className="row"
             >
-                <ScreenReader>
-                    <span id="serviceDetails">
-                        Service details.
-                    </span>
-                </ScreenReader>
                 <div
                     role="region"
                     className="leftColumn"
-                    aria-labelledby="serviceDesc"
+                    aria-label="Service description"
                 >
-                    <ScreenReader>
-                        <span id="serviceDesc">
-                            Service description.
-                        </span>
-                    </ScreenReader>
-                    <div
-                        className="header"
-                        tabIndex="0"
-                    >
+                    <div className="header">
                         <div>
                             <IndigenousServiceIcon object={service} />
                             <LgbtiqIcon object={service} />
@@ -220,10 +196,7 @@ function ServicePane({service}: Props): ReactNode {
                         {renderDescription()}
                     </div>
 
-                    <div
-                        className="provisions"
-                        tabIndex="0"
-                    >
+                    <div className="provisions">
                         <Eligibility {...service} />
                         {renderServiceProvisions()}
                         {!isMobile && renderSiblings()}
@@ -231,15 +204,10 @@ function ServicePane({service}: Props): ReactNode {
                 </div>
                 <div
                     role="region"
-                    aria-labelledby="serviceInfo"
+                    aria-label="Service Info"
                     className="rightColumn"
                 >
                     <BoxedText>
-                        <ScreenReader>
-                            <h4 id="serviceInfo">
-                                Service Info.
-                            </h4>
-                        </ScreenReader>
                         <div className="practicalities-container">
                             <CollapsedOpeningTimes
                                 object={service.open}
@@ -289,7 +257,7 @@ function ServicePane({service}: Props): ReactNode {
                     </BoxedText>
                     {isMobile && renderSiblings()}
                 </div>
-            </div>
+            </main>
         </div>
     );
 }

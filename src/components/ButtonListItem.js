@@ -22,7 +22,6 @@ export default class ButtonListItem extends React.Component<Props, void> {
             <ListItem
                 {...this.props}
                 rootElement={Button}
-                tabIndex={0}
                 onClick={this.onClick.bind(this)}
             />
         </>

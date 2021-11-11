@@ -7,7 +7,7 @@ import type {
 import React from "react";
 import classnames from "classnames";
 
-type ListItemSpecific<T: React$AbstractComponent<Object, mixed>> = {
+type ListItemSpecific<T: React$AbstractComponent<Object, mixed> | string> = {
     rootElement?: T,
     className?: string,
 
@@ -21,10 +21,12 @@ type ListItemSpecific<T: React$AbstractComponent<Object, mixed>> = {
 
     onClick?: (event?: SyntheticEvent<>) => any,
 }
-export type Props<T: React$AbstractComponent<Object, mixed>> =
+export type Props<T: React$AbstractComponent<Object, mixed> | string> =
     ListItemSpecific<T> & $Diff<ReactElementConfig<T>, {children: any | void}>
 
-export default function ListItem<T: React$AbstractComponent<Object, mixed>>({
+export default function ListItem<
+    T: React$AbstractComponent<Object, mixed> | string
+>({
     rootElement,
     className,
     children,

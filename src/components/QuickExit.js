@@ -23,6 +23,7 @@ function QuickExit(
                 eventAction: "Quick exit",
                 eventLabel: null,
             }}
+            aria-label="Quick exit"
         >
             <span>
                 Quick Exit X

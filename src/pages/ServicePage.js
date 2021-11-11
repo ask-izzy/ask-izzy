@@ -104,12 +104,7 @@ class ServicePage extends React.Component<{}, {
                         transition={false}
                     />
                     <div className="ServicePane">
-                        <main aria-labelledby="servicePage">
-                            <ScreenReader>
-                                <span id="servicePage">
-                                    Loading service details.
-                                </span>
-                            </ScreenReader>
+                        <main aria-label="Loading service details">
                             {
                                 error ?
                                     <div className="error">
@@ -138,10 +133,7 @@ class ServicePage extends React.Component<{}, {
             return (
                 <div className="ServicePage">
                     <ScreenReader>
-                        <p
-                            aria-live="polite"
-                            tabIndex={-1}
-                        >
+                        <p aria-live="polite">
                             {object.name}
                         </p>
                     </ScreenReader>

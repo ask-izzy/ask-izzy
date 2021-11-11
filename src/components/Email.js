@@ -6,6 +6,7 @@ import icons from "../icons";
 import Link from "./base/Link";
 import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
+import ScreenReader from "./ScreenReader";
 
 type Props = {
     email: string,
@@ -30,6 +31,9 @@ export default class Email extends React.Component<Props, void> {
 
         return (
             <div className="Contact Email">
+                <ScreenReader>
+                    Email contact:
+                </ScreenReader>
                 <Link
                     to={`mailto:${email}`}
                     onClick={this.recordClick.bind(this)}
@@ -39,7 +43,7 @@ export default class Email extends React.Component<Props, void> {
                         eventLabel: `${email}`,
                     }}
                 >
-                    <icons.Email />
+                    <icons.Email aria-hidden={true}/>
                     <div className="Contact-text">
                         <span className="kind">
                             {this.props.comment}

@@ -75,6 +75,10 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         setLocationFromUrl(this.context.router)
 
         if (!this.issParams()) {
+            closePageLoadDependencies(
+                this.context.router.location,
+                "resultsLoad"
+            )
             const newPath =
                 this.context.router.location.pathname.replace(/\/$/, "") +
                 "/personalise"

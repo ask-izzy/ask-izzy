@@ -9,5 +9,8 @@ type Props = {
 }
 
 export default ({className}: Props): ReactElement<"hr"> =>
-    <hr className={classnames("Spacer", className)}/>
+    <hr
+        className={classnames("Spacer", className)}
+        aria-hidden={true}
+    />
 ;

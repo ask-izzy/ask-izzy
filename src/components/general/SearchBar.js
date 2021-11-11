@@ -23,7 +23,8 @@ type Props = {
         'iconPosition'
     >,
     analyticsEvent?: AnalyticsEvent,
-    autocompleteValues?: Array<string>
+    autocompleteValues?: Array<string>,
+    inputAriaLabel?: string
 }
 
 export default function SearchBar({
@@ -35,6 +36,7 @@ export default function SearchBar({
     iconPosition,
     analyticsEvent,
     autocompleteValues,
+    inputAriaLabel,
 }: Props): ReactNode {
     function onSubmit(value) {
         gtm.emit({
@@ -66,7 +68,6 @@ export default function SearchBar({
             )}
         >
             <Input
-                id="home-page-search"
                 type="search"
                 onChange={setValue}
                 value={value}
@@ -80,6 +81,7 @@ export default function SearchBar({
                 showClearButton={true}
                 placeholder={placeholder}
                 autocompleteValues={autocompleteValues}
+                {...(inputAriaLabel ? {"aria-label": inputAriaLabel} : {})}
             />
             <FlatButton
                 label="Search"

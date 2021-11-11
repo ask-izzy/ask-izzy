@@ -118,12 +118,18 @@ function HeaderBar(
                 breakpoint={hideLogoWhenNotABar ? 100 : 30}
                 {...goBack}
             />
-            <div className="primary">
-                <h1>{primaryText}</h1>
-            </div>
-            {renderSecondaryText()}
-            {renderInfoText()}
-            {children}
+            <header aria-label="Page header">
+                <div className="primary">
+                    {/* We use tabIndex here so we can set the user's focus to
+                    this on page transition */}
+                    <h1 tabIndex={-1}>
+                        {primaryText}
+                    </h1>
+                </div>
+                {renderSecondaryText()}
+                {renderInfoText()}
+                {children}
+            </header>
         </div>
     )
 }

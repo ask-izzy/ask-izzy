@@ -51,7 +51,7 @@ async function seeTheBrandingHeader(): Promise<void> {
 
     await assert.textIsVisible(
         this.driver,
-        "Find the help you need, now and nearby.",
+        "Ask Izzy:\nFind the help you need, now and nearby.",
         container
     );
 }

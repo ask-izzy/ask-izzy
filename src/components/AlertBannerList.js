@@ -7,7 +7,6 @@ import AlertBanner from "./AlertBanner";
 import StrapiMarkdown from "./StrapiMarkdown";
 import Link from "./base/Link";
 import alertsQuery from "../queries/content/alerts.js";
-import ScreenReader from "./ScreenReader";
 
 type Props = {
     screenLocation: string,
@@ -55,15 +54,8 @@ export default function({state, screenLocation, format}: Props): React.Node {
                     "AlertBannerList",
                     format
                 )}
-                role="region"
-                aria-labelledby="alerts"
             >
-                <ScreenReader>
-                    <span id="alerts">
-                        Alerts.
-                    </span>
-                </ScreenReader>
-                <ul>
+                <ul aria-label="Alerts">
                     {alerts.map(renderAlert)}
                 </ul>
             </div>

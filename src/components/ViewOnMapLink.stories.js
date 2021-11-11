@@ -3,19 +3,19 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 
-import ViewOnMapButton from "./ViewOnMapButton";
+import ViewOnMapLink from "./ViewOnMapLink";
 import { injectEnvVars } from "../storybook/loaders";
 import { addGoogleMapsScript } from "../storybook/decorators";
 
 export default {
-    title: "App Components/ViewOnMapButton",
-    component: ViewOnMapButton,
+    title: "App Components/ViewOnMapLink",
+    component: ViewOnMapLink,
     loaders: [injectEnvVars],
     decorators: [addGoogleMapsScript],
 };
 
 const Template = (args: Object): ReactNode => {
-    (Template.args: any); return <ViewOnMapButton {...args} />;
+    (Template.args: any); return <ViewOnMapLink {...args} />;
 };
 
 export const Example: typeof Template = Template.bind({});

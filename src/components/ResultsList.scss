@@ -1,17 +1,28 @@
 @use '../styles/mixins/colours';
 
 .ResultsList {
-    > .ResultListItem ~ .ResultListItem {
+    > ol {
+        padding-left: 0;
+        margin: 0;
+
+        > li {
+            list-style-type: none;
+        }
+    }
+
+    .ResultListItem ~ .ResultListItem {
         border-top: 10px solid #{colours.get-static('colour-bg-standard-tint-2')};
         border-top: 10px solid var(--colour-bg-standard-tint-2);
     }
 
-    @media ($tablet) {
-        .CrisisLineItem {
-            display: inline-block;
-            width: 48%; // two columns
-            // when next to a taller element, align the tops
-            vertical-align: top;
+    &.crisisResults {
+        ol {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            @media (max-width: 500px) {
+                grid-template-columns: repeat(1, 1fr);
+            }
         }
     }
 }

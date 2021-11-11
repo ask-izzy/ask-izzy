@@ -58,4 +58,20 @@ export const DebugModeProvider = (
     )
 }
 
+/* Sometimes we need to find out if we're in debug mode outside
+of react code and thus we don't have access to the debug mode
+react context */
+export function isDebugMode(): boolean {
+    if (typeof window !== "undefined" && window.localStorage) {
+        try {
+            return JSON.parse(
+                window.localStorage.getItem("debug")
+            );
+        } catch (error) {
+            return false
+        }
+    }
+    return false
+}
+
 export const useDebugModeContext = (): Context => useContext(DebugModeContext)

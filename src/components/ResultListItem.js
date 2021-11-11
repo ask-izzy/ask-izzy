@@ -46,13 +46,11 @@ function ResultListItem({
         }
 
         return (
-            <span
-                className="location"
-                aria-label={`${suburb}.`}
-            >
-                <icons.Map
-                    aria-label="Location"
-                />
+            <span className="location">
+                <icons.Map aria-hidden={true} />
+                <ScreenReader>
+                    Service located in
+                </ScreenReader>
                 {titleize(suburb)}
             </span>
         );
@@ -60,19 +58,23 @@ function ResultListItem({
 
     const renderTravelTimes = (): ReactNode => {
         if (service.location && service.travelTimes) {
-            return (
+            return <>
+                <ScreenReader>
+                    Travel times
+                </ScreenReader>
                 <TransportTime
                     location={service.location}
                     compact={true}
                     travelTimes={service.travelTimes}
                 />
-            )
+            </>
         }
         return null
     }
 
     return (
         <ListItem
+            rootElement="li"
             className="plain-text ResultListItem"
         >
             <div className="name">
@@ -84,20 +86,16 @@ function ResultListItem({
                         eventLabel: `Standard service - number ` +
                             `${resultNumber}`,
                     }}
+                    aria-label={`Service: ${service.name}`}
                 >
-                    <h2 aria-label={`${service.name}.`}>
-                        {service.name}
-                    </h2>
+                    <h2>{service.name}</h2>
                 </Link>
                 <div className="flags">
                     <IndigenousServiceIcon object={service} />
                     <LgbtiqIcon object={service} />
                 </div>
             </div>
-            <div
-                className="site_name"
-                aria-label={`${service.site.name}.`}
-            >
+            <div className="site_name">
                 {service.site.name}
                 <Ndis
                     className="ndis"
@@ -121,9 +119,6 @@ function ResultListItem({
             </div>
             <Eligibility {...service} />
             <Accessibility service={service} />
-            <ScreenReader>
-                Travel times.
-            </ScreenReader>
             {!service.travelTimes && travelTimesStatus === "loading" &&
                 <icons.Loading className="small"/>
             }

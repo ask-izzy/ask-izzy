@@ -333,15 +333,7 @@ class Location extends React.Component<
 
     render: (() => ReactNode) = () => (
         <div className="Location">
-            <div
-                role="complementary"
-                aria-labelledby="header"
-            >
-                <ScreenReader>
-                    <span id="header">
-                        Header.
-                    </span>
-                </ScreenReader>
+            <div>
                 <section className="page-header-section">
                     <components.HeaderBar
                         primaryText={
@@ -388,13 +380,8 @@ class Location extends React.Component<
             </div>
             <main
                 id="mainPageContent"
-                aria-labelledby="questions"
+                aria-label="Questions"
             >
-                <ScreenReader>
-                    <span id="questions">
-                        Questions.
-                    </span>
-                </ScreenReader>
                 <WithStickyFooter
                     footerContents={this.renderDoneButton()}
                 >
@@ -421,6 +408,7 @@ class Location extends React.Component<
                                             <div className="suburb">
                                                 {location.name}
                                             </div>
+                                            <ScreenReader>,{" "}</ScreenReader>
                                             <div className="state">
                                                 {location.state}
                                             </div>

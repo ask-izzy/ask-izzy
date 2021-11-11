@@ -74,6 +74,14 @@
             font-weight: 500;
             text-shadow: $text-shadow;
 
+            // Normally a h1 element wouldn't be focusable but we use tabIndex to specificity make it focusable so
+            // we can focus on it after a page transition to assist users using a screen reader. But since it's
+            // not an interactive element the user doesn't need to be told that it's currently in focus so we
+            // disable the default focus style.
+            &:focus {
+                outline: none;
+            }
+
             @media only screen and (max-width: 410px) {
                 margin-top: 10px;
                 margin-bottom: 10px;
