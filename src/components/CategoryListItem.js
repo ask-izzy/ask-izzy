@@ -6,6 +6,7 @@ import LinkListItem from "./LinkListItem";
 import icons from "../icons";
 import type Category from "../constants/Category";
 import Storage from "../storage";
+import ScreenReader from "./ScreenReader"
 
 type Props = {
     category: Category,
@@ -45,11 +46,12 @@ class CategoryListItem extends React.Component<Props, void> {
                 leftIcon={
                     <Icon className="ColoredIcon icon-fg-color big" />
                 }
-                aria-label={`${this.props.category.name}.
-                ${this.props.category.byline}`}
                 onClick={this.clearAreYouSafe}
-                rightIcon={<icons.Chevron />}
-                primaryText={this.props.category.name}
+                rightIcon={<icons.Chevron aria-hidden={true} />}
+                primaryText={<>
+                    {this.props.category.name}
+                    <ScreenReader>,</ScreenReader>
+                </>}
                 secondaryText={this.props.category.byline}
                 analyticsEvent={{
                     event: "Link Followed - Category",

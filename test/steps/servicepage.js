@@ -7,24 +7,20 @@ import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
 import Webdriver, { By } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
-import unpromisify from "../support/yadda-promise";
 import asyncFilter from "../support/async-filter";
 
 module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library(dictionary)
-        .then("I should see the contacts\n$lines",
-            unpromisify(checkPhoneNumbers))
+        .then("I should see the contacts\n$lines", checkPhoneNumbers)
         .then("I should see a transport time of \"$string\"",
-            unpromisify(checkTransportTime))
+            checkTransportTime
+        )
         .then("I should see a transport time of\n$lines",
-            unpromisify(checkTransportTimeLines))
-        .then("I should not see transport times",
-            unpromisify(checkTransportTimesDontExist))
-        .then("I should see ATSI flags",
-            unpromisify(seeAtsiFlags))
-        .then("I should not see ATSI flags",
-            unpromisify(notSeeAtsiFlags))
-    ;
+            checkTransportTimeLines
+        )
+        .then("I should not see transport times", checkTransportTimesDontExist)
+        .then("I should see ATSI flags", seeAtsiFlags)
+        .then("I should not see ATSI flags", notSeeAtsiFlags)
 })(): YaddaLibraryEnglish);
 
 async function seeAtsiFlags(): Promise<void> {
@@ -36,7 +32,6 @@ async function seeAtsiFlags(): Promise<void> {
 }
 
 async function notSeeAtsiFlags(): Promise<void> {
-
     let exists = await this.driver.findElements(By.css(
         ".IndigenousServiceIcon"
     )).length > 0;

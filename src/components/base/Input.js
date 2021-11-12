@@ -127,7 +127,7 @@ function Input({
                         inputRef.current?.focus()
                     }}
                 >
-                    <span className="text">Clear</span> &times;
+                    <span className="text">Clear </span>&times;
                 </Button>
             )
         }

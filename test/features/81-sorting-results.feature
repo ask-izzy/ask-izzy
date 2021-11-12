@@ -20,8 +20,8 @@ Feature: Sorting drop down on the results page
         Emergency Accom              | Youth Support Net     | (nada)
         Womens Refuge                | Susan's House         | Crisis accommodation
         ------------------------------------------------------------------------------------------
-        When I click the dropdown "Best match"
-        And I click the dropdown "Open now"
+        When I click the "Best match" dropdown
+        And I click the "Open now" dropdown option
         And I should see the results
         ------------------------------------------------------------------------------------------
         Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)

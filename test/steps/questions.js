@@ -7,52 +7,36 @@
 
 import Yadda from "yadda";
 import { titleize } from "underscore.string";
-import _ from "underscore";
 import Webdriver from "selenium-webdriver";
-import { documentReady } from "./browser";
 declare var IzzyStorage: Object;
 
 import dictionary from "../support/dictionary";
-import unpromisify from "../support/yadda-promise";
 import { gotoUrl } from "../support/webdriver";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
-        .given("I have (somewhere|nowhere) to sleep tonight",
-            unpromisify(setSleepTonight))
-        .given("I need nothing for $STRING",
-            unpromisify(setSubcategoryItemsNone))
-        .given("I need the following for $STRING\n$lines",
-            unpromisify(setSubcategoryItems))
-        .given("I need the following for $STRING: $STRING",
-            unpromisify(setSubcategoryItem))
+        .given("I have (somewhere|nowhere) to sleep tonight", setSleepTonight)
+        .given("I need nothing for $STRING", setSubcategoryItemsNone)
+        .given("I need the following for $STRING\n$lines", setSubcategoryItems)
+        .given("I need the following for $STRING: $STRING", setSubcategoryItem)
         .given("I am not part of any relevant demographics",
-            unpromisify(setDemographicsNone))
-        .given("I am not interested in any subcategory",
-            unpromisify(setSubcategoriesNone))
+            setDemographicsNone
+        )
+        .given("I am not interested in any subcategory", setSubcategoriesNone)
         .given("I am part of the following demographics\n$lines",
-            unpromisify(setDemographics))
-        .given("my gender is $STRING", unpromisify(setGender))
-        .given("I am 17 years old",
-            unpromisify(_.partial(setAgeTo, "18 to 26")))
-        .given("I am 27 years old",
-            unpromisify(_.partial(setAgeTo, "26 to 64")))
-        .given("I am 77 years old",
-            unpromisify(_.partial(setAgeTo, "65 or older")))
-        .when("I click on the done button",
-            unpromisify(clickDoneButton))
-    ;
+            setDemographics
+        )
+        .given("my gender is $STRING", setGender)
+        .given("I am 17 years old", function() {
+            setAgeTo.call(this, "0 to 17")
+        })
+        .given("I am 27 years old", function() {
+            setAgeTo.call(this, "27 to 39")
+        })
+        .given("I am 77 years old", function() {
+            setAgeTo.call(this, "65 or older")
+        })
 })();
-
-async function clickDoneButton(): Promise<void> {
-    // Use JS for this because the element
-    // is animated and seleniums click events miss
-    await this.driver.executeScript(() => {
-        document.querySelector(".done-button button").click()
-    });
-
-    await documentReady(this.driver);
-}
 
 async function setSleepTonight(answer: string): Promise<void> {
     if (answer === "somewhere") {

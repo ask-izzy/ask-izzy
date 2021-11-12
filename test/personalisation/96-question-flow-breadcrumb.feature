@@ -5,7 +5,7 @@ Feature: Question Flow Breadcrumb
     Scenario: Visit the Intro page for the first time and not show my location
         Given a fresh session
         When I visit /
-        And I click on "Housing"
+        And I click the link with "Housing" substring
 
         Then I should see "I'm looking for help for"
         And I should be at /housing/personalise
@@ -15,7 +15,7 @@ Feature: Question Flow Breadcrumb
         Given a fresh session
         And the area to search is "Melbourne, VIC"
         When I visit /
-        And I click on "Housing"
+        And I click the link with "Housing" substring
         Then I should see "I'm looking for help for"
         And I should be at /housing/personalise
         And I should see "Melbourne, VIC"
@@ -26,11 +26,11 @@ Feature: Question Flow Breadcrumb
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
-        And I click on "Housing"
+        And I click the link with "Housing" substring
         Then I should see "I'm looking for help for"
         And I should be at /housing/personalise
-        When I click on the done button # Intro
-        And I should see "Melbourne, VIC  |  Safe tonight  |  Women  |  18-26"
+        When I click the "Myself" button # Intro
+        And I should see "Melbourne, VIC | Safe tonight | Women | 0-17"
 
     Scenario: Visit Housing and go back to edit your age
         Given a fresh session
@@ -38,10 +38,10 @@ Feature: Question Flow Breadcrumb
         And I have somewhere to sleep tonight
         And my gender is female
         And I am 17 years old
-        And I click on "Housing"
+        And I click the link with "Housing" substring
         Then I should see "I'm looking for help for"
         And I should be at /housing/personalise
-        When I click on the done button
+        When I click the "Myself" button
         And I click back from the browser UI
         Then I should see "Melbourne, VIC"
 
@@ -56,8 +56,8 @@ Feature: Question Flow Breadcrumb
         Family with children
         Couples
         --------------------------------------
-        When I click on "Housing"
-        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families, Couples"
+        When I click the link with "Housing" substring
+        Then I should see "Melbourne, VIC | Safe tonight | Women | 0-17 | Families, Couples"
 
     Scenario: Visit housing and select more than two demographic
         Given a fresh session
@@ -71,8 +71,8 @@ Feature: Question Flow Breadcrumb
         Couples
         Have a disability
         --------------------------------------
-        When I click on "Housing"
-        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families, Couples …"
+        When I click the link with "Housing" substring
+        Then I should see "Melbourne, VIC | Safe tonight | Women | 0-17 | Families, Couples …"
 
     Scenario: Visit housing and select more than two demographic and edit
         Given a fresh session
@@ -86,15 +86,15 @@ Feature: Question Flow Breadcrumb
         Couples
         Have a disability
         --------------------------------------
-        When I click on "Housing"
-        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families, Couples …"
-        When I click on "See all and edit"
-        And I click on "Do any of these apply to you?"
-        And I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families, Couples … (editing)"
-        And I click on "Have a disability"
-        When I click on the done button # Demographics
-        And I click on the done button
-        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families, Couples"
+        When I click the link with "Housing" substring
+        Then I should see "Melbourne, VIC | Safe tonight | Women | 0-17 | Families, Couples …"
+        When I click the "See all and edit" link
+        And I click the link with "Do any of these apply to you?" substring
+        And I should see "Melbourne, VIC | Safe tonight | Women | 0-17 | Families, Couples … (editing)"
+        And I click the "Have a disability" button
+        And I click the "Done" button # Demographics page
+        And I click the "Done" button # Summary page
+        Then I should see "Melbourne, VIC | Safe tonight | Women | 0-17 | Families, Couples"
 
     Scenario: See saved location on the home page
         Given a fresh session

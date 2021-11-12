@@ -10,30 +10,19 @@ import Yadda from "yadda";
 import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
 
 import dictionary from "../support/dictionary";
-import unpromisify from "../support/yadda-promise";
 import { gotoUrl } from "../support/webdriver";
 
 declare var IzzyStorage: Object;
 
 module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library(dictionary)
-        .given(
-            "GPS will hang in the loading state",
-            unpromisify(mockGeolocation)
-        )
-        .given(
-            "the GPS returns $LATITUDE $LONGITUDE",
-            unpromisify(sendCoords)
-        )
-        .given("the area to search is \"$STRING\"", unpromisify(setLocation))
-        .given(
-            "my location is $LATITUDE $LONGITUDE in \"$STRING\"",
-            unpromisify(setCoords)
-        )
-        .when("I deny access to geolocation",
-            unpromisify(disableGeolocation))
+        .given("GPS will hang in the loading state", mockGeolocation)
+        .given("the GPS returns $LATITUDE $LONGITUDE", sendCoords)
+        .given("the area to search is \"$STRING\"", setLocation)
+        .given("my location is $LATITUDE $LONGITUDE in \"$STRING\"", setCoords)
+        .when("I deny access to geolocation", disableGeolocation)
         .given("google api geocode will return location name $SUBURB, $STATE",
-            unpromisify(mockGoogleApiGeocodeLocationName)
+            mockGoogleApiGeocodeLocationName
         )
 })(): YaddaLibraryEnglish);
 

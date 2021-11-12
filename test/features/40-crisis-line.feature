@@ -35,33 +35,33 @@ Feature: Crisis Line
     Scenario: Search for helpline phone numbers for domestic violence
         When I visit /
         And I search for "domestic violence"
-        And I click on the search button
-        And I click on "Myself"
-        And I click on "Skip"
+        And I click the "Search" button
+        And I click the "Myself" button
+        And I click the "Skip" button
         Then I should see a hotline in position 1 which says "Call 1800 737 732"
         And I should see "For help and safety call:" before first hotline
 
     Scenario: Show extra call information
         When I visit /
         And I search for "domestic violence"
-        And I click on the search button
-        And I click on "Myself"
-        And I click on "Skip"
-        And I click on "See information about this call"
+        And I click the "Search" button
+        And I click the "Myself" button
+        And I click the "Skip" button
+        And I click the "See information about this call" button
         Then I should see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"
 
     Scenario: Hide extra call information
         When I visit /
         And I search for "domestic violence"
-        And I click on the search button
-        And I click on "Myself"
-        And I click on "Skip"
-        And I click on "See information about this call"
-        And I click on "Hide information about this call"
+        And I click the "Search" button
+        And I click the "Myself" button
+        And I click the "Skip" button
+        And I click the "See information about this call" button
+        And I click the "Hide information about this call" button
         Then I should not see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"
 
     Scenario: Not see extra call information
         When I visit /
         And I search for "get helpline phone number"
-        And I click on the search button
+        And I click the "Search" button
         Then I should not see "See information about this call"

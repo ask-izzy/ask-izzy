@@ -13,30 +13,30 @@ Feature: Personalisation
     Scenario: Search for housing with personalised results
         Given GPS will hang in the loading state
         And google api geocode will return location name Richmond, VIC
-        When I click on "Housing"
+        When I click the link with "Housing" substring
         Then I should see "I'm looking for help for"
 
-        When I click on the done button
+        When I click the "Myself" button
 
-        When I click on "Get your current location"
+        When I click the "Get your current location" button
 
         Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
 
-        When I click on the done button
+        When I click the "Next" button
         Then I should see "Do you have somewhere safe to sleep tonight?"
 
-        When I click on "Yes"
+        When I click the "Yes" button
         Then I should see "Do you identify as…"
 
-        When I click on the done button # Didn't answer the question
+        When I click the "Skip" button
         Then I should see "How old are you?"
 
-        When I click on "18 to 26"
+        When I click the "18 to 26" button
         Then I should see "Do any of these apply to you?"
 
-        When I click on the done button
+        When I click the "Skip" button
         Then I should see "Richmond, VIC | Safe tonight | 18-26"
 
         When I click back from the title bar
@@ -45,31 +45,31 @@ Feature: Personalisation
     Scenario: Search for emergency accommodation
         Given GPS will hang in the loading state
         And google api geocode will return location name Richmond, VIC
-        When I click on "Housing"
+        When I click the link with "Housing" substring
         Then I should see "I'm looking for help for"
 
-        When I click on the done button
+        When I click the "Myself" button
         Then I should see "Where are you looking for help?"
 
-        When I click on "Get your current location"
+        When I click the "Get your current location" button
 
         Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
 
-        When I click on the done button
+        When I click the "Next" button
         Then I should see "Do you have somewhere safe to sleep tonight?"
 
-        When I click on "No"
+        When I click the "No" button
         Then I should see "Do you identify as…"
 
-        When I click on "Female"
+        When I click the "Female" button
         Then I should see "How old are you?"
 
-        When I click on "18 to 26"
+        When I click the "18 to 26" button
         Then I should see "Do any of these apply to you?"
 
-        When I click on the done button
+        When I click the "Skip" button
         Then I should see "Showing housing services"
 
     Scenario: Do a search
@@ -78,26 +78,26 @@ Feature: Personalisation
         When I search for "find a meal" and press enter
         Then I should see "I'm looking for help for"
 
-        When I click on the done button
+        When I click the "Myself" button
         Then I should see "Where are you looking for help?"
 
-        When I click on "Get your current location"
+        When I click the "Get your current location" button
 
         Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
 
-        When I click on the done button
+        When I click the "Next" button
         Then I should see "Richmond, VIC"
 
     Scenario: Searching for domestic violence checks that I'm safe
-        When I click on "Domestic & family violence help"
+        When I click the link with "Domestic & family violence help" substring
         Then I should see "I'm looking for help for"
 
-        When I click on the done button
+        When I click the "Myself" button
         Then I should see "Are you safe right now?"
 
-        When I click on "No"
+        When I click the "No" button
         Then I should see "Everyone has the right to be safe."
 
         When I click back from the browser UI

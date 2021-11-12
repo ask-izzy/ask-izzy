@@ -15,77 +15,67 @@ import {
 import _ from "underscore";
 
 import dictionary from "../support/dictionary";
-import unpromisify from "../support/yadda-promise";
 import pauseToDebug, * as debug from "../support/debug";
 import {
     elementWithText,
-    elementWithChildText,
     escapeXPathString,
 } from "../support/selectors";
+import {
+    getElementWithText,
+    getElementWithTextSubstring,
+} from "../support/elements"
 import {
     gotoUrl,
     baseUrl,
     cleanDriverSession,
-    isElementPresent,
 } from "../support/webdriver";
 import { regexEscape } from "../../src/utils/strings"
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
-        .given("a fresh session", unpromisify(cleanSession))
-        .given("I open a new browser", unpromisify(newBrowser))
-        .when("I visit $URL", unpromisify(visitUrl))
-        .when("I click on \"$STRING\"", unpromisify(clickLink))
-        .when("I click the dropdown \"$STRING\"",
-            unpromisify(clickDropdown))
-        .when("I search for \"$STRING\"", unpromisify(doSearch))
-        .when("I search for \"$STRING\" and press enter",
-            unpromisify(doSearchAndEnter))
-        .when("I click on the search button", unpromisify(clickSearch))
-        .when("I click home from the title bar", unpromisify(clickHome))
-        .when("I click back from the title bar", unpromisify(clickBack))
-        .when(
-            "I click back from the browser UI",
-            unpromisify(clickBrowserBack),
+        .given("a fresh session", cleanSession)
+        .given("I open a new browser", newBrowser)
+        .when("I visit $URL", visitUrl)
+        .when("I click the \"$STRING\" link", clickLink)
+        .when("I click the link with \"$STRING\" substring",
+            clickLinkWithSubstring
         )
-        .when(
-            "I click on a collapsible section titled \"$STRING\"",
-            unpromisify(clickDetails)
-        )
-        .when("I reload the page", unpromisify(reloadPage))
-        .when("I wait for page to finish loading",
-            unpromisify(async function() {
-                await module.exports.documentReady(this.driver)
-            })
-        )
-        .when("I pause for debugging", unpromisify(pauseToDebug))
+        .when("I click the \"$STRING\" button", clickButton)
+        .when("I click the \"$STRING\" dropdown", clickDropdown)
+        .when("I click the \"$STRING\" dropdown option", clickDropdownOption)
+        .when("I click the \"$STRING\" collapsible section", clickDetails)
+        .when("I search for \"$STRING\"", doSearch)
+        .when("I search for \"$STRING\" and press enter", doSearchAndEnter)
+        .when("I click home from the title bar", clickHome)
+        .when("I click back from the title bar", clickBack)
+        .when("I click back from the browser UI", clickBrowserBack)
+        .when("I reload the page", reloadPage)
+        .when("I wait for page to finish loading", async function() {
+            await module.exports.documentReady(this.driver)
+        })
+        .when("I pause for debugging", pauseToDebug)
         .when("I throw an error", () => {
             throw new Error("Artificial error")
         })
-        .when("I scroll to element \"$STRING\"", unpromisify(scrollToElement))
-        .when("I take a screenshot", unpromisify(takeScreenshot))
-        .then("I should be at $URL", unpromisify(checkURL))
-        .then("I should see \"$STRING\"", unpromisify(thenISee))
-        .then("I should see\n$STRING", unpromisify(thenISee))
-        .then("I should not see \"$STRING\"", unpromisify(thenIDontSee))
-        .then("search box should contain \"$STRING\"",
-            unpromisify(searchContains))
-        .then("search box should contain \"\"",
-            unpromisify(function() {
-                searchContains.call(this, "")
-            }))
-        .then("the button \"$STRING\" should be disabled",
-            unpromisify(checkDisabled))
-        .then("the button \"$STRING\" should be enabled",
-            unpromisify(checkEnabled))
-        .then("\"$STRING\" should be checked", unpromisify(assertItemChecked))
-        .then("\"$STRING\" should not be checked",
-            unpromisify(assertItemNotChecked))
-        .then("the canonical meta is $URL", unpromisify(checkMetaCanonical))
-        .then("I should see the alerts\n$table",
-            unpromisify(seeTheAlerts))
+        .when("I scroll to element \"$STRING\"", scrollToElement)
+        .when("I take a screenshot", takeScreenshot)
+        .then("I should be at $URL", checkURL)
+        .then("I should see \"$STRING\"", thenISee)
+        .then("I should see\n$STRING", thenISee)
+        .then("I should not see \"$STRING\"", thenIDontSee)
+        .then("search box should contain \"$STRING\"", searchContains)
+        .then("search box should contain \"\"", function() {
+            searchContains.call(this, "")
+        })
+        .then("the button \"$STRING\" should be disabled", checkDisabled)
+        .then("the button \"$STRING\" should be enabled", checkEnabled)
+        .then("\"$STRING\" should be checked", assertItemChecked)
+        .then("\"$STRING\" should not be checked", assertItemNotChecked)
+        .then("the canonical meta is $URL", checkMetaCanonical)
+        .then("I should see the alerts\n$table", seeTheAlerts)
         .then("I should see the browser tab title of \"$STRING\"",
-            unpromisify(seeBrowserTitle))
+            seeBrowserTitle
+        )
     ;
 })();
 
@@ -131,42 +121,61 @@ module.exports.visitUrl = async function visitUrl(
     await module.exports.documentReady(driver);
 }
 
-/**
- * Click a link or button with the text @link.
- *
- * @param {string} link - link text to click on.
- * @returns {Promise} a promise that resolves when the link is identified and
- * clicked.
- */
-async function clickLink(link: string): Promise<void> {
-    /* any 'a' element who has a descendent text node
-     * containing the link text */
-    const locator = By.xpath(
-        ["a", "button", "label", "li[@role='option']"]
-            .map(tag => elementWithChildText(tag, link))
-            .join("|")
-    );
-
-    let lookingForAttempt = 1;
-    while (!await isElementPresent(this.driver, locator)) {
-        lookingForAttempt++
-        if (this.mochaState.test.timedOut) {
-            return
-        }
-        this.log.push(
-            `Couldn't find "${link}" link - attempt ${lookingForAttempt}`
-        );
-    }
-    await this.driver.findElement(locator).click();
-    await module.exports.documentReady(this.driver);
+async function clickLink(linkText: string) {
+    await clickElementWithText(this.driver, linkText, "a")
 }
 
-async function clickDropdown(option) {
-    const locator = await this.driver.findElement(By.xpath(
-        `//div[normalize-space(.) = normalize-space(
-        ${escapeXPathString(option)})]`
-    ))
-    locator.click()
+async function clickLinkWithSubstring(linkText: string) {
+    await clickElementWithTextSubstring(this.driver, linkText, "a")
+}
+
+async function clickButton(buttonText: string) {
+    await clickElementWithText(this.driver, buttonText, "button")
+}
+
+async function clickDetails(summaryText: string): Promise<void> {
+    await clickElementWithText(this.driver, summaryText, "details/summary")
+}
+
+async function clickElementWithText(
+    driver: Webdriver.WebDriver,
+    elementText: string,
+    elementType?: string
+) {
+    const element = await getElementWithText(driver, elementText, elementType)
+    await element.click();
+    await module.exports.documentReady(driver);
+}
+
+async function clickElementWithTextSubstring(
+    driver: Webdriver.WebDriver,
+    elementText: string,
+    elementType?: string
+) {
+    const element = await getElementWithTextSubstring(
+        driver,
+        elementText,
+        elementType
+    )
+    await element.click();
+    await module.exports.documentReady(driver);
+}
+
+async function clickDropdown(optionText: string) {
+    await clickElementWithText(
+        this.driver,
+        optionText,
+        "*[self::select or (@role = \"listbox\")]"
+    )
+}
+
+async function clickDropdownOption(optionText: string) {
+    await clickElementWithText(
+        this.driver,
+        optionText,
+        "*[self::select or (@role = \"listbox\")]" +
+            "//*[self::option or (@role = \"option\")]"
+    )
 }
 
 function navigator(
@@ -314,30 +323,12 @@ async function searchContains(expected: string): Promise<void> {
     assert.equal(value, expected);
 }
 
-async function clickSearch(): Promise<void> {
-    await this.driver.findElement(By.css(".SearchBar .searchButton"))
-        .click();
-}
-
-
-async function clickDetails(title: string): Promise<void> {
-    await module.exports.documentReady(this.driver);
-
-    const element = await this.driver.findElement(By.xpath(
-        `//details/summary/descendant-or-self::*[
-            normalize-space(.) = normalize-space(${escapeXPathString(title)})
-        ]`
-    ))
-
-    await element.click();
-}
-
 async function getButtonState(
     driver: Webdriver.WebDriver,
     text: string,
 ): Promise<boolean> {
     return await driver
-        .findElement(By.xpath(elementWithText("button", text)))
+        .findElement(By.xpath(elementWithText(text, "button")))
         .isEnabled();
 }
 
@@ -443,15 +434,26 @@ async function takeScreenshot(): Promise<void> {
     console.log(`${this.indent}  Screenshot saved to "${filepath}"`);
 }
 
-/**
- * Scroll element into view.
- *
- * @param {string} elementSelector - selector to find element.
- * @returns {Promise} a promise that resolves when the link is scrolled to.
- */
-async function scrollToElement(elementSelector: string): Promise<void> {
-    return driver.executeScript(() =>
-        document.querySelector(elementSelector).scrollIntoView()
+async function scrollToElement(elementText: string): Promise<void> {
+    return this.driver.executeScript(
+        (elementXPathSelector, elementText) => {
+            const element = document
+                .evaluate(
+                    elementXPathSelector,
+                    document,
+                    null,
+                    XPathResult.ANY_TYPE
+                )
+                .iterateNext()
+            if (!element) {
+                throw Error(`Can't find element with text "${elementText}"`)
+            }
+            element.scrollIntoView({
+                block: "center",
+            })
+        },
+        elementWithText(elementText),
+        elementText
     );
 }
 

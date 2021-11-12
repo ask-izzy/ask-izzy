@@ -43,7 +43,7 @@ Feature: Transport times
         8 hours 27 mins transport
         ------------------------------------------
 
-        When I click on "Transportable"
+        When I click the "Transportable" link
         Then I should see a transport time of
         ------------------------------------------
         8 hours 27 mins transport
@@ -81,15 +81,15 @@ Feature: Transport times
         When I search for the service
         Then I should not see transport times
 
-        When I click on "Get your current location"
+        When I click the "Get your current location" button
         Then I should see "Found your location (in Richmond, VIC) – Travel times added below.Clear"
         And I should see a transport time of
         ------------------------------------------
         8 hours 27 mins transport
         ------------------------------------------
 
-        When I click on "Clear"
+        When I click the "Clear" button
         Then I should not see transport times
 
-        When I click on "Transportable"
+        When I click the "Transportable" link
         Then I should not see transport times

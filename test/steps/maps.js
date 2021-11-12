@@ -11,25 +11,24 @@ import assert from "assert";
 import { By } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
-import unpromisify from "../support/yadda-promise";
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
-        .given("I'm watching map events", unpromisify(instrumentMap))
+        .given("I'm watching map events", instrumentMap)
         .given("googles directions matrix will return\n$yaml",
-            unpromisify(instrumentDistanceMatrix)
+            instrumentDistanceMatrix
         )
-        .when("I click on the map", unpromisify(clickMap))
-        .when("I click marker titled \"$STRING\"", unpromisify(clickMarker))
-        .when("I click the map link", unpromisify(clickMapLink))
-        .then("I should see a map", unpromisify(assertMap))
-        .then("I should see markers?\n$table", unpromisify(assertMarkers))
-        .then("I can see travel times", unpromisify(assertTravelTimes))
+        .when("I click on the map", clickMap)
+        .when("I click marker titled \"$STRING\"", clickMarker)
+        .then("I should see a map", assertMap)
+        .then("I should see markers?\n$table", assertMarkers)
+        .then("I can see travel times", assertTravelTimes)
         .then("I should be able to travel there \"$STRING\"",
-            unpromisify(assertTransitMethod))
+            assertTransitMethod
+        )
         .then("I should not be able to travel there \"$STRING\"",
-            unpromisify(assertTransitMethodNot))
-    ;
+            assertTransitMethodNot
+        )
 })();
 
 async function assertTravelTimes(method) {
@@ -110,19 +109,6 @@ async function instrumentDistanceMatrix(results) {
             },
         });
     }, results);
-}
-
-/**
- * Scroll to the map link and click it
- *
- * @returns {Promise} a promise that resolves when the link is identified and
- * clicked.
- */
-async function clickMapLink() {
-    await this.driver.executeScript(() => window.scrollTo(0, 0))
-    await this.driver.findElement(
-        By.css(".ViewOnMapLink")
-    ).click();
 }
 
 /**

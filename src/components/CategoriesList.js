@@ -9,7 +9,6 @@ import CategoryListItem from "./CategoryListItem";
 class CategoriesList extends React.Component<{}, void> {
 
     render(): ReactElement<"div"> {
-
         return (
             <div className="CategoriesList">
                 <div className="List categories">
@@ -19,18 +18,11 @@ class CategoriesList extends React.Component<{}, void> {
                         https://bugs.webkit.org/show_bug.cgi?id=170179
                     */}
                     <ul role="list">
-                        {
-                            categories.map(category => {
-                                return (
-                                    <li key={category.key}>
-                                        <CategoryListItem
-                                            category={category}
-                                            key={category.key}
-                                        />
-                                    </li>
-                                );
-                            })
-                        }
+                        {categories.map(category => (
+                            <li key={category.key}>
+                                <CategoryListItem category={category} />
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>

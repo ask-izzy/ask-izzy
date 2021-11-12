@@ -10,7 +10,7 @@ Feature: Browser tab titles
     Scenario: Category intro - browser tab title
         Given a fresh session
         When I visit /
-        And I click on "Housing"
+        And I click the link with "Housing" substring
         Then I should see the browser tab title of "Housing (Intro) | Ask Izzy"
 
     Scenario: Results page - browser tab title
@@ -25,7 +25,7 @@ Feature: Browser tab titles
         Couples
         Have a disability
         --------------------------------------
-        When I click on "Housing"
+        When I click the link with "Housing" substring
         Then I should see the browser tab title of "Housing in Melbourne, VIC | Ask Izzy"
 
     Scenario: Answer summary - browser tab title
@@ -40,8 +40,8 @@ Feature: Browser tab titles
         Couples
         Have a disability
         --------------------------------------
-        When I click on "Housing"
-        And I click on "See all and edit"
+        When I click the link with "Housing" substring
+        And I click the "See all and edit" link
         Then I should see the browser tab title of "Housing - [selected answers] | Ask Izzy"
 
     Scenario: Answer summary - browser tab title
@@ -56,7 +56,7 @@ Feature: Browser tab titles
         Couples
         Have a disability
         --------------------------------------
-        When I click on "Housing"
-        And I click on "See all and edit"
-        And I click on "Where are you looking for help?"
+        When I click the link with "Housing" substring
+        And I click the "See all and edit" link
+        And I click the link with "Where are you looking for help?" substring
         Then I should see the browser tab title of "Housing (Location) - [selected answers] | Ask Izzy"

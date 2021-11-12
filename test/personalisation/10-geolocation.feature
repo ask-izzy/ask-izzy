@@ -14,7 +14,7 @@ Feature: Geolocation
         And I should see "Get your current location"
         And the button "Next" should be disabled
 
-        When I click on "Get your current location"
+        When I click the "Get your current location" button
         Then I should see "Locating you..."
 
         Given the GPS returns 37.823S 144.998E
@@ -27,7 +27,7 @@ Feature: Geolocation
         Given GPS will hang in the loading state
         When I visit /housing/personalise/page/location
 
-        When I click on "Get your current location"
+        When I click the "Get your current location" button
         Then I should see "Locating you..."
 
         When I deny access to geolocation
@@ -43,7 +43,7 @@ Feature: Geolocation
         And I should see "Get your current location"
         And the button "Next" should be disabled
 
-        When I click on "Get your current location"
+        When I click the "Get your current location" button
         Then I should see "Locating you..."
 
         Given the GPS returns 37.823S 144.998E
@@ -63,16 +63,16 @@ Feature: Geolocation
         And I should see "Get your current location"
         And the button "Next" should be disabled
 
-        When I click on "Carlton"
+        When I click the "Carlton, VIC" dropdown option
         Then search box should contain "Carlton, VIC"
         And the button "Next" should be enabled
 
-        When I click on "Get your current location"
+        When I click the "Get your current location" button
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
         And the button "Next" should be enabled
 
-        When I click on "Clear"
+        When I click the "×" button
         Then I should see "Get your current location"
         And search box should contain ""
         And the button "Next" should be disabled
@@ -82,7 +82,7 @@ Feature: Geolocation
         And search box should contain ""
         And the button "Next" should be disabled
 
-        When I click on "Get your current location"
+        When I click the "Get your current location" button
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
         And the button "Next" should be enabled
@@ -106,7 +106,7 @@ Feature: Geolocation
         And I should see "Want to see estimated travel times for the services below?"
 
         Given GPS will hang in the loading state
-        When I click on "Get your current location"
+        When I click the "Get your current location" button
         Then I should see "Locating you..."
 
         Given the GPS returns 37.823S 144.998E
@@ -115,12 +115,12 @@ Feature: Geolocation
         And I reload the page
         Then I should see "Found your location (in Richmond, VIC) – Travel times added below.Clear"
 
-        When I click on "Clear"
+        When I click the "Clear" button
         And I should see "Get your current location"
 
         Given google api geocode will return location name Melbourne, VIC
         And I reload the page
         Then I should see "Get your current location"
 
-        When I click on "Get your current location"
+        When I click the "Get your current location" button
         Then I should see "Found your location (in Melbourne, VIC) – Travel times added below.Clear"

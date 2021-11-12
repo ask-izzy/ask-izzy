@@ -58,10 +58,10 @@ export default class PhoneButton extends React.Component<Props, void> {
 
         return (
             <div className={className}>
+                <ScreenReader>
+                    Phone contact:
+                </ScreenReader>
                 <span className="kind">
-                    <ScreenReader>
-                        Phone contact:
-                    </ScreenReader>
                     {this.displayComment}
                 </span>
                 <Link

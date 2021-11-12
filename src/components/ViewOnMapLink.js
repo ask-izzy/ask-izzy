@@ -41,7 +41,7 @@ function ViewOnMapLink({to}: Props): ReactNode {
                     className="big"
                     aria-hidden={true}
                 />
-                <span>Map view</span>
+                Map view
             </span>
             <icons.Chevron
                 className="big"

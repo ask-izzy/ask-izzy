@@ -6,28 +6,27 @@ Feature: Skip personalisation settings
     # And have my previous answers saved
 
     Background:
-        Given the area to search is "Melbourne, Vic"
+        Given the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
         And I am not part of any relevant demographics
         And I visit /
 
     Scenario: Skip personalisation settings which were already answered
-        When I click on "Housing"
+        When I click the link with "Housing" substring
         Then I should see "I'm looking for help for"
-        When I click on the done button # Intro
+        When I click the "Myself" button # Intro
         Then I should see "Do you identify as…"
 
-        # Didn't answer the question
-        When I click on the done button # Gender
-        And I click on the done button  # Age
+        When I click the "Skip" button # Gender
+        And I click the "Skip" button  # Age
 
-        And I click on "See all and edit"
+        And I click the "See all and edit" link
         Then I should see "Change your answers here"
         Then I should see the results
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you looking for help?              | Melbourne, Vic
+        Where are you looking for help?              | Melbourne, VIC
         Do you have somewhere safe to sleep tonight? | Yes
         How do you identify?                         | (skipped)
         How old are you?                             | (skipped)
