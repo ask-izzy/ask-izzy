@@ -1,31 +1,35 @@
 /* @flow */
 import * as React from "react";
-import type { ElementConfig as ReactElementConfig } from "react"
 
-import Personalisation from "../../mixins/Personalisation";
 import HeaderBar from "../../components/HeaderBar";
 import components from "../../components";
+import {getCategory} from "../../constants/categories"
 import storage from "../../storage";
+import {getBannerName} from "../../utils/personalisation"
+import routerContext from "../../contexts/router-context";
+import type {
+    PersonalisationPageProps,
+} from "../../utils/personalisation";
 
 export type Props = {
-    name: string,
+    ...PersonalisationPageProps,
     heading: string,
-    byline?: string,
-    onDoneTouchTap: Function,
-    showBaseTextBox?: boolean,
-    baseTextBoxComponent?: React.Element<any>,
-    classNames?: string,
-    mobileView?: boolean,
     showDoneButton?: boolean,
 }
 
-class BaseStaticPersonalisation extends Personalisation<Props, {}> {
+// We need to create the defaultProps out of the component first otherwise flow
+// doesn't typecheck it
+const defaultProps: Props = {
+    showBaseTextBox: false,
+    showDoneButton: true,
+};
+
+class BaseStaticPersonalisation extends React.Component<Props, {}> {
+    static contextType: any = routerContext;
+
     +doneButtonLabel: ?string;
 
-    static defaultProps: ReactElementConfig<typeof Personalisation> = {
-        showBaseTextBox: false,
-        showDoneButton: true,
-    };
+    static defaultProps: Props = defaultProps
 
     /*
      * How should this answer be represented
@@ -71,23 +75,12 @@ class BaseStaticPersonalisation extends Personalisation<Props, {}> {
         return true;
     }
 
-    /**
-     * Trigger next page after a 500ms debounce.
-     *
-     * @returns {void}
-     */
-    triggerNext(): void {
-        if (typeof this.nextStep === "function") {
-            this.nextStep();
-        }
-    }
-
     onDoneTouchTap(): void {
         this.props.onDoneTouchTap();
     }
 
     onAnswerTouchTap(): void {
-        this.triggerNext();
+        this.props.onDoneTouchTap();
     }
 
     renderContent(): React.Node {
@@ -113,6 +106,10 @@ class BaseStaticPersonalisation extends Personalisation<Props, {}> {
     }
 
     render(): React.Node {
+        const category = getCategory(
+            this.context.router.match.params.page
+        )
+        const bannerName = getBannerName(category, this.props.name)
         return (
             <div>
                 <HeaderBar
@@ -125,7 +122,7 @@ class BaseStaticPersonalisation extends Personalisation<Props, {}> {
                         this.props.byline
                     }
                     fixedAppBar={true}
-                    bannerName={this.bannerName}
+                    bannerName={bannerName}
                 />
                 <main>
                     <div className="body">

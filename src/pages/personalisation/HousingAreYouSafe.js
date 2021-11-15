@@ -1,8 +1,19 @@
 /* @flow */
 import Demographics from "./Demographics";
-import AreYouSafe from "./AreYouSafe";
+import BaseQuestion from "./BaseQuestion";
+import {defaultProps} from "./AreYouSafe";
+import type {
+    PersonalisationPageDefaultProps,
+} from "../../utils/personalisation";
 
-export default class HousingAreYouSafe extends AreYouSafe {
+export default class HousingAreYouSafe extends BaseQuestion {
+    static defaultProps: PersonalisationPageDefaultProps = defaultProps;
+
+    static title: string = "Are you safe";
+
+    static showInSummary(): boolean {
+        return false;
+    }
 
     static staticShowPage(): boolean {
         return true;

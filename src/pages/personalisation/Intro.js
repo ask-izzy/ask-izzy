@@ -1,32 +1,36 @@
 /* @flow */
-import type { ElementConfig as ReactElementConfig } from "react"
-
 import * as React from "react";
 
-import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import storage from "../../storage";
 import type {serviceSearchRequest} from "../../iss/serviceSearch";
 import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
-import Category from "../../constants/Category";
 import ScreenReader from "../../components/ScreenReader";
+import routerContext from "../../contexts/router-context";
+import {
+    getBannerName,
+} from "../../utils/personalisation"
+import type {
+    PersonalisationPageProps,
+    PersonalisationPageDefaultProps,
+    PersonalisationPageState,
+} from "../../utils/personalisation";
 
-type Props = {
-    onDoneTouchTap: Function,
-    name: string,
+// We need to create the defaultProps out of the component first otherwise flow
+// doesn't typecheck it
+const defaultProps: PersonalisationPageDefaultProps = {
+    name: "intro",
 }
 
-type State = {
-    showStepper: boolean,
-    category: ?Category,
-}
+class Intro extends React.Component<
+    PersonalisationPageProps,
+    PersonalisationPageState
+> {
+    static defaultProps: PersonalisationPageDefaultProps = defaultProps;
 
-class Intro extends Personalisation<Props, State> {
-    static defaultProps: ReactElementConfig<typeof Personalisation> = {
-        name: "intro",
-    };
+    static contextType: any = routerContext;
 
     static title: string = "Intro";
 
@@ -57,10 +61,8 @@ class Intro extends Personalisation<Props, State> {
 
     get seekingHelpWith(): string {
         try {
-            // $FlowIgnore flowjs needs updating for optional chaining methods
-            return this.props.category?.byline.toLocaleLowerCase() ||
-                // $FlowIgnore
-                `with ${this.props.category?.name?.toLocaleLowerCase() || ""}`;
+            return this.state.category?.byline.toLocaleLowerCase() ||
+                `with ${this.state.category?.name?.toLocaleLowerCase() || ""}`;
         } catch (error) {
             const search = this.context.router.match.params.search;
 
@@ -143,7 +145,10 @@ class Intro extends Personalisation<Props, State> {
                 taperColour={this.state.showStepper ? "LighterGrey"
                     : "HeaderBar"}
                 fixedAppBar={true}
-                bannerName={this.bannerName}
+                bannerName={getBannerName(
+                    this.state.category,
+                    this.props.name
+                )}
             />
         )
         if (this.state.showStepper) {

@@ -6,7 +6,6 @@ import AddictionSubcategories from "./personalisation/AddictionSubcategories";
 import AdvocacySubcategories from "./personalisation/AdvocacySubcategories";
 import Age from "./personalisation/Age";
 import AreYouSafe from "./personalisation/AreYouSafe";
-import BaseMultiQuestion from "./personalisation/BaseMultiQuestion";
 import BaseQuestion from "./personalisation/BaseQuestion";
 import BaseStaticPersonalisation from "./personalisation/BaseStaticPersonalisation";
 import CounsellingAreYouSafe from "./personalisation/CounsellingAreYouSafe";
@@ -30,7 +29,6 @@ import LgbtiqaDomesticViolenceScreen from "./personalisation/LgbtiqaDomesticViol
 import LifeSkillsSubcategories from "./personalisation/LifeSkillsSubcategories";
 import Location from "./personalisation/Location";
 import MoneySubcategories from "./personalisation/MoneySubcategories";
-import OnlineSafetyScreenBundle from "./personalisation/OnlineSafetyScreenBundle";
 import OnlineSafetyScreen from "./personalisation/OnlineSafetyScreen";
 import ServiceList from "./personalisation/ServiceList";
 import SleepTonight from "./personalisation/SleepTonight";
@@ -42,7 +40,6 @@ export default {
     AdvocacySubcategories,
     Age,
     AreYouSafe,
-    BaseMultiQuestion,
     BaseQuestion,
     BaseStaticPersonalisation,
     CounsellingAreYouSafe,
@@ -66,7 +63,6 @@ export default {
     LifeSkillsSubcategories,
     Location,
     MoneySubcategories,
-    OnlineSafetyScreenBundle,
     OnlineSafetyScreen,
     ServiceList,
     SleepTonight,

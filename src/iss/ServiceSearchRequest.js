@@ -2,6 +2,46 @@
 
 import _ from "underscore";
 import type {serviceSearchRequest} from "./serviceSearch"
+import type { RouterContextObject } from "../contexts/router-context";
+import {getCategoryFromRouter} from "../utils/personalisation"
+
+export function getInitialSearchRequest(
+    router: $PropertyType<RouterContextObject, 'router'>
+): serviceSearchRequest {
+    let request: serviceSearchRequest
+    const category = getCategoryFromRouter(router)
+
+    if (category) {
+        request = {...category.search};
+    } else if (router.match.params.search) {
+        request = {
+            q: decodeURIComponent(router.match.params.search),
+        };
+    } else {
+        request = {
+            q: "undefined-search",
+        };
+    }
+
+    // A special case for the "Find advocacy" button on the
+    // DisabilityAdvocacyFinder page.
+    if (request.q === "Disability Advocacy Providers") {
+        // $FlowIgnore because flow is acting wack about "decodeURIComponent"
+        // above for some reason
+        // $FlowIgnore
+        request.service_type_raw = ["disability advocacy"]
+        request.q = "disability"
+    }
+
+    return request
+}
+
+export function isDisabilityAdvocacySearch(
+    router: $PropertyType<RouterContextObject, 'router'>
+): boolean {
+    return decodeURIComponent(router.match.params.search) ===
+        "Disability Advocacy Providers"
+}
 
 export function append(
     search: string | serviceSearchRequest
@@ -59,7 +99,7 @@ export class ServiceSearchRequest {
 
     compose(search: serviceSearchRequest): serviceSearchRequest {
         // Default behaviour is to do nothing but chain up
-        search = Object.assign({}, search);
+        search = {...search};
 
         if (this.chain) {
             search = this.chain.compose(search);

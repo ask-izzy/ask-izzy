@@ -35,6 +35,7 @@ export default class AdvocacySubcategories extends BaseQuestion {
         case "Someone to speak for you" :
             return "Representation";
         default:
+            // $FlowIgnore
             return this.savedAnswer
         }
     }

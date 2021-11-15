@@ -43,6 +43,7 @@ export default class EverydayThingsSubcategories extends BaseQuestion {
         case "Food packages/parcels/vouchers" :
             return "Food parcels/vouchers";
         default:
+            // $FlowIgnore
             return this.savedAnswer
         }
     }

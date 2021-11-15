@@ -1,47 +1,82 @@
 /* @flow */
 
 import * as React from "react";
+import type {Node as ReactNode} from "react";
 
-import BasePersonalisationPage from "./BasePersonalisationPage";
 import components from "../components";
 import WithStickyFooter from "../components/WithStickyFooter";
 import Spacer from "../components/Spacer";
 import storage from "../storage";
 import routerContext from "../contexts/router-context";
 import ScreenReader from "../components/ScreenReader";
+import {isDisabilityAdvocacySearch} from "../iss/serviceSearch"
+import {
+    getFullPathForPersonalisationSubpath,
+    navigateToPersonalisationSubpath,
+    getCurrentPersonalisationPage,
+    getPersonalisationPages,
+    getBannerName,
+    getCategoryFromRouter,
+    setLocationFromUrl,
+} from "../utils/personalisation"
+import type {
+    PersonalisationPage,
+} from "../utils/personalisation"
 
-class PersonalisationSummaryPage extends BasePersonalisationPage {
+class PersonalisationSummaryPage extends React.Component<{}, {}> {
 
     static contextType: any = routerContext;
 
-    goBack(nextStep?: boolean): void {
-        nextStep && super.nextStep();
-        if (this.currentComponent) {
-            this.navigate("personalise/summary");
+    componentDidMount(): void {
+        setLocationFromUrl(this.context.router)
+    }
+
+    goBack(): void {
+        if (this.currentPersonalisationPage) {
+            navigateToPersonalisationSubpath(
+                this.context.router,
+                "personalise/summary"
+            );
         } else {
-            this.navigate("");
+            navigateToPersonalisationSubpath(
+                this.context.router,
+                ""
+            );
         }
     }
 
     nextStep: (() => void) = () => {
-        this.goBack(true);
+        this.refs.subpage?.onNextStep?.()
+        this.goBack();
+    }
+
+    get currentPersonalisationPage(): $Call<
+        typeof getCurrentPersonalisationPage,
+        Object
+        > {
+        return getCurrentPersonalisationPage(
+            this.context.router
+        )
     }
 
     clearAll(event: SyntheticInputEvent<>): void {
         event.preventDefault();
         storage.clear();
         let redirectUrl = "/"
-        if (this.search.q === "Disability Advocacy Providers") {
+        if (isDisabilityAdvocacySearch(this.context.router)) {
             redirectUrl = "/disability-advocacy-finder"
         }
         this.context.router.navigate(redirectUrl);
     }
 
     get personalisationComponents(): any {
-        const components = super.personalisationComponents;
+        const personalisationPages = getPersonalisationPages(
+            this.context.router
+        )
 
-        return components.filter(component =>
+        return personalisationPages.filter(component =>
             (typeof component.showInSummary === "function") &&
+            // $FlowIgnore
             component.showInSummary()
         );
     }
@@ -58,7 +93,9 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
     </>
 
     render(): React.Element<"div"> {
-        const Subpage = this.currentComponent;
+        const Subpage = getCurrentPersonalisationPage(
+            this.context.router
+        );
 
         return (
             <div className="PersonalisationPage">
@@ -77,30 +114,19 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
         );
     }
 
-    renderSubpage: ((
-  Subpage: React$ComponentType<
-
-      | any
-      | {|
-        category: any,
-        nextStep: () => void,
-        onDoneTouchTap: () => void,
-        previousStep: any,
-      |},
-  >
-) => React.Element<"div">) = (Subpage: React$ComponentType<*>) => (
-    <div>
-        <Subpage
-            ref="subpage"
-            onDoneTouchTap={this.nextStep}
-            category={this.category}
-            nextStep={this.nextStep}
-            backToAnswers={true}
-            goBack={() => this.goBack()}
-            previousStep={this.previousStep}
-        />
-    </div>
-)
+    renderSubpage: ((Subpage: PersonalisationPage) => ReactNode) =
+        (Subpage) => (
+            <div>
+                <Subpage
+                    ref="subpage"
+                    onDoneTouchTap={this.nextStep}
+                    category={getCategoryFromRouter(this.context.router)}
+                    nextStep={this.nextStep}
+                    backToAnswers={true}
+                    goBack={() => this.goBack()}
+                />
+            </div>
+        )
 
     renderSummary: (() => React.Element<"div">) = () => (
         <div>
@@ -110,12 +136,12 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                     Change your answers here
                     </div>
                 }
-                bannerName={
-                    this.category?.bannerImage || "homepage"
-                }
+                bannerName={getBannerName(
+                    getCategoryFromRouter(this.context.router)
+                )}
                 fixedAppBar={true}
                 goBack={{
-                    backMessage: this.currentComponent ?
+                    backMessage: this.currentPersonalisationPage ?
                         "Back to answers" : "Back to results",
                     onBackTouchTap: this.goBack.bind(this),
                 }}
@@ -132,15 +158,16 @@ class PersonalisationSummaryPage extends BasePersonalisationPage {
                         {
                             this.personalisationComponents.map(
                                 (component, index) => {
-                                    const toUrl = this.urlFor(
-                                        `personalise/summary/${
-                                            component.defaultProps.name
-                                        }`
-                                    );
+                                    const toUrl =
+                                        getFullPathForPersonalisationSubpath(
+                                            this.context.router,
+                                            `personalise/summary/${
+                                                component.defaultProps.name
+                                            }`
+                                        );
                                     return (
-                                        <li>
+                                        <li key={index}>
                                             <components.LinkListItem
-                                                key={index}
                                                 className="SummaryItem"
                                                 to={toUrl}
                                                 primaryText={

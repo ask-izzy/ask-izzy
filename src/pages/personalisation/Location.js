@@ -1,15 +1,11 @@
 /* @flow */
-import type {
-    ElementConfig as ReactElementConfig,
-    Node as ReactNode,
-} from "react"
+import type {Node as ReactNode} from "react"
 
 import React, {createRef} from "react";
 import _ from "underscore";
 import debounce from "just-debounce-it";
 
 import {browserSupportsGeolocation} from "../../geolocation";
-import Personalisation from "../../mixins/Personalisation";
 import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
@@ -22,33 +18,31 @@ import {crisisResults, nonCrisisResults} from "../../iss/crisisService"
 import QuestionStepper from "../QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
-import Category from "../../constants/Category";
 import WithStickyFooter from "../../components/WithStickyFooter";
 import ScreenReader from "../../components/ScreenReader";
-import AppBar from "../../components/AppBar";
 import FlatButton from "../../components/FlatButton";
 import Input from "../../components/base/Input";
 import GeolocationButton from "../../components/GeolocationButton";
 import type {GeolocationStatus} from "../../components/GeolocationButton";
+import routerContext from "../../contexts/router-context";
+import Category from "../../constants/Category"
+import type {
+    PersonalisationPageProps,
+    PersonalisationPageDefaultProps,
+    PersonalisationPageState,
+} from "../../utils/personalisation";
+import {
+    getBannerName,
+} from "../../utils/personalisation";
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,
 } from "../../utils/page-loading"
-type AppBarProps = ReactElementConfig<typeof AppBar>
-
-type Props = {
-        name: string,
-        onDoneTouchTap: Function,
-        backToAnswers?: boolean,
-        goBack?: {
-            onBackTouchTap?: $PropertyType<AppBarProps, 'onBackTouchTap'>,
-            backMessage?: $PropertyType<AppBarProps, 'backMessage'>,
-        },
-}
 
 type location = {|name: string|} | Geolocation
 
 type State = {
+    ...PersonalisationPageState,
     gettingAutocompletionsInProgress: boolean,
     locationNameInput: string,
     selectedLocation: ?location,
@@ -58,10 +52,18 @@ type State = {
     category: ?Category,
 }
 
-class Location extends Personalisation<Props, State> {
-    static defaultProps: ReactElementConfig<typeof Personalisation> = {
-        name: "location",
-    };
+// We need to create the defaultProps out of the component first otherwise flow
+// doesn't typecheck it
+const defaultProps: PersonalisationPageDefaultProps = {
+    name: "location",
+};
+
+class Location extends React.Component<
+    PersonalisationPageProps,
+    State
+> {
+    static defaultProps: PersonalisationPageDefaultProps = defaultProps
+    static contextType: any = routerContext;
 
     searchInputRef: { current: null | HTMLInputElement } = createRef()
 
@@ -351,7 +353,10 @@ class Location extends Personalisation<Props, State> {
                     taperColour={this.state.showStepper ? "LighterGrey"
                         : "HeaderBar"}
                     fixedAppBar={true}
-                    bannerName={this.bannerName}
+                    bannerName={getBannerName(
+                        this.state.category,
+                        this.props.name
+                    )}
                     {...this.props.backToAnswers && {
                         goBack: {
                             backMessage: "Back to answers",

@@ -1,91 +1,98 @@
-/* $FlowIgnore */
+/* @flow */
 
 import * as React from "react";
+import type {ElementConfig as ReactElementConfig} from "react";
 
-import BasePersonalisationPage from "./BasePersonalisationPage";
 import Intro from "./personalisation/Intro";
 import NotFoundStaticPage from "./NotFoundStaticPage";
 import routerContext from "../contexts/router-context";
+import Category from "../constants/Category"
+import {
+    navigateToPersonalisationSubpath,
+    getPersonalisationPages,
+    getCurrentPersonalisationPage,
+    getCurrentPersonalisationPageIndex,
+    getCategoryFromRouter,
+    getPageTitleFromRouter,
+    setLocationFromUrl,
+} from "../utils/personalisation"
 
+import type {PersonalisationPage} from "../utils/personalisation"
 type State = {
   showSubpage: boolean,
+  category: ?Category,
+  nextDisabled: boolean
 }
 
-class PersonalisationWizardPage extends BasePersonalisationPage<State> {
-
-    constructor(props: Object) {
-        super(props);
+class PersonalisationWizardPage extends React.Component<{}, State> {
+    constructor(props: Object, context: Object) {
+        super(props, context);
 
         this.state = {
+            nextDisabled: false,
+            showSubpage: true,
+            category: getCategoryFromRouter(context.router),
+        };
+    }
+
+    static contextType: any = routerContext;
+
+    static getDerivedStateFromProps(
+        props: ReactElementConfig<typeof PersonalisationWizardPage>,
+        state: State
+    ): State {
+        return {
+            ...state,
             nextDisabled: false,
             showSubpage: true,
         };
     }
 
-    static contextType = routerContext;
-
-    static getDerivedStateFromProps(props, state): void {
-        return {nextDisabled: false, showSubpage: true};
-    }
-
     componentDidMount(): void {
+        setLocationFromUrl(this.context.router)
+
         if (
             this.context.router.match.params.search ===
                 "bushfires -(closed due to the recent bushfires)"
         ) {
-            this.setState({ showSubpage: false });
-        }
-    }
-
-    previousStep = () => {
-        if (this.refs.subpage && this.refs.subpage.onPreviousStep) {
-            if (!this.refs.subpage.onPreviousStep(
-                this.forceUpdate.bind(this)
-            )) {
-                return;
-            }
-        }
-
-        this.setState({nextDisabled: false});
-
-        const prevSubPage = this.prevSubPage();
-
-        if (prevSubPage) {
-            this.goToSubPage(prevSubPage);
-        } else {
-            this.context.router.navigate("/");
+            this.setState({showSubpage: false });
         }
     }
 
     goToCategoryPage(): void {
-        this.navigate("");
+        navigateToPersonalisationSubpath(this.context.router, "");
     }
 
-    goToSubPage(subpage: React.ComponentType<any>): void {
+    goToSubPage(
+        subpage: PersonalisationPage
+    ): void {
         /* TODO: Narrow down which components don't have defaultProps */
 
-        this.navigate(`personalise/page/${subpage.defaultProps.name}`);
+        navigateToPersonalisationSubpath(
+            this.context.router,
+            `personalise/page/${subpage.defaultProps.name}`
+        );
     }
 
-    nextSubPage(): ?React.ComponentType<any> {
+    nextSubPage(): ?PersonalisationPage {
         return this.personalisationComponents.find((component, idx) =>
             (idx > this.currentComponentIdx) &&
             (component.getSearch ? !component.getSearch({}) : true)
         );
     }
 
-    prevSubPage(): ?React.ComponentType<any> {
+    prevSubPage(): ?PersonalisationPage {
         const nextSubpageIdx = this.currentComponentIdx - 1;
 
         return this.personalisationComponents[nextSubpageIdx];
     }
 
-    nextStep = () => {
+    nextStep: () => void = () => {
         if (this.state.nextDisabled) {
             return
         }
 
-        super.nextStep();
+        this.refs?.subpage?.onNextStep?.();
         this.setState({nextDisabled: false});
 
         const nextPage = this.nextSubPage()
@@ -102,12 +109,20 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
      *
      * An array of components required to personalise this category.
      */
-    get personalisationComponents(): Array<React.ComponentType<any>> {
-        return [Intro].concat(super.personalisationComponents);
+    get personalisationComponents(): Array<PersonalisationPage> {
+        return [
+            Intro,
+            ...getPersonalisationPages(
+                this.context.router
+            ),
+        ];
     }
 
     get currentComponentIdx(): number {
-        const sup = super.currentComponentIdx;
+        const sup = getCurrentPersonalisationPageIndex(
+            this.context.router,
+            this.personalisationComponents
+        );
 
         if (sup === -1) {
             return 0;
@@ -131,18 +146,25 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
             return this.refs.subpage.customPageTitle;
         }
 
-        return this.currentComponent.title || this.title;
+        const currentComponent = getCurrentPersonalisationPage(
+            this.context.router
+        )
+
+        return currentComponent?.title ||
+            getPageTitleFromRouter(this.context.router);
     }
 
-    render(): React.Element {
-        const Subpage = this.currentComponent;
+    render(): React.Node {
+        const Subpage = this.personalisationComponents[this.currentComponentIdx]
 
         if (!Subpage) {
             throw new Error("Unexpected");
         }
 
-        if (!this.category &&
-            (this.search.q === "undefined-search")) {
+        if (
+            !this.state.category &&
+            !this.context.router.match.params.search
+        ) {
             return (
                 <NotFoundStaticPage/>
             )
@@ -158,11 +180,8 @@ class PersonalisationWizardPage extends BasePersonalisationPage<State> {
                 <Subpage
                     ref="subpage"
                     onDoneTouchTap={this.nextStep}
-                    onNextStepCallback={this.forceUpdate.bind(this)}
-                    category={this.category}
-                    nextStep={this.nextStep}
+                    category={this.state.category}
                     backToAnswers={false}
-                    previousStep={this.previousStep}
                 />
             </div>
         );
