@@ -100,7 +100,7 @@
         margin-bottom: 0;
         padding-bottom: 10px;
         color: #{colours.get-static('colour-text-mid')};
-        color: var(--colour-text-mid);
+        color: var(--colour-text-dark);
         font-size: 18px;
         font-weight: 400;
         line-height: 140%;
@@ -131,14 +131,15 @@
     .CollapsedPhones,
     .TransportTime {
         padding-top: 10px;
-        padding-bottom: 10px;
     }
 
-    // Hack since we wrap the whole address section in a google maps link.
-    // We've disabled link styling for address but we want to re-enable it
-    // for the text that is explicitly a link to Google Maps.
     .GoogleMapsLink {
+        margin-left: 34px;
+
         .googleMapsLink {
+            // Hack since we wrap the whole address section in a google maps link.
+            // We've disabled link styling for address but we want to re-enable it
+            // for the text that is explicitly a link to Google Maps.
             text-decoration: underline;
         }
 

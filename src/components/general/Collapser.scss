@@ -2,23 +2,62 @@
 
 .Collapser {
     /* remove default button styling */
+    &.collapsed {
+        button.collapser-message .title-container .ChevronIcon {
+            transform: rotate(90deg);
+        }
+    }
+
     button.collapser-message {
         padding: 0;
         border: 0;
         background: none;
         font-family: inherit;
         font-size: inherit;
-    }
+        font-weight: bold;
+        margin-right: auto;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
 
-    .collapser-message {
-        margin-left: auto;
-        color: #{colours.get-static('colour-link')};
-        color: var(--colour-link);
-        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
+            color: #{colours.get-static('colour-brand-primary')};
+            color: var(--colour-brand-primary);
+
+            .title-container .ChevronIcon path {
+                stroke: #{colours.get-static('colour-brand-primary')};
+                stroke: var(--colour-brand-primary);
+            }
+        }
+
+        .title-container {
+            display: flex;
+            gap: 2px;
+            align-items: center;
+            justify-content: space-between;
+
+            .icon {
+                line-height: 0px;
+            }
+
+            .ChevronIcon {
+                transform: rotate(-90deg);
+                transition: transform 0.1s ease-out;
+                stroke: #{colours.get-static('colour-text-dark')};
+                stroke: var(--colour-text-dark);
+                stroke-width: 4;
+                width: 1.5em;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
     }
 
     @media screen {
         .collapsed {
+            padding-top: 0;
             display: none;
         }
     }

@@ -154,7 +154,7 @@ Feature: Service details page
         Reception reception@service.org
         example.org
         -------------------------------------------
-        When I click on "Other contact options"
+        When I click on "Show other contact options"
         Then I should see the contacts
         -------------------------------------------
         Freecall 1800 111 111

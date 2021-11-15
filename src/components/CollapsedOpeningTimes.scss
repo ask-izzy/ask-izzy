@@ -2,8 +2,8 @@
 
 .CollapsedOpeningTimes {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    align-content: flex-end;
     justify-content: space-between;
 
     > * {
@@ -15,7 +15,6 @@
 
         &.collapsed {
             width: auto;
-            padding-top: 10px;
         }
 
         & > .collapser-message {

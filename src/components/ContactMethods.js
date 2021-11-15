@@ -85,7 +85,7 @@ class ContactMethods extends React.Component<Props, void> {
                     {this.contactsBeforeFold.map(this.renderContactMethod)}
                     {this.contactsAfterFold.length > 0 &&
                         <Collapser
-                            expandMessage="Other contact options"
+                            expandMessage="Show other contact options"
                             onClick={this.foldExpandHandler}
                             analyticsEvent={{
                                 event: "Action Triggered - " +
