@@ -6,7 +6,7 @@ import Link from "../components/base/Link";
 import icons from "../icons"
 import LinkButton from "./LinkButton";
 import config from "../config";
-import { donateLink } from "../constants/urls.js"
+import { donateLink, aboutLink } from "../constants/urls.js"
 import ScreenReader from "./ScreenReader";
 
 export default class BrandedFooter
@@ -191,7 +191,7 @@ export default class BrandedFooter
                 <div className="about-links">
                     <ul>
                         <li>
-                            <Link to="/about">
+                            <Link to={aboutLink}>
                                 About Ask Izzy
                             </Link>
                         </li>
@@ -296,7 +296,7 @@ export default class BrandedFooter
                             />
                             <span>Update service details</span>
                         </LinkButton>
-                        <Link to="https://www.infoxchange.org/au/ask-izzy">
+                        <Link to="https://about.askizzy.org.au/downloads/">
                             Ask Izzy resources
                         </Link>
                     </div>

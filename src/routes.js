@@ -31,7 +31,7 @@ import ResultsListPage from "./pages/ResultsListPage";
 import ResultsMapPage from "./pages/ResultsMapPage";
 import ServicePage from "./pages/ServicePage";
 import BushfireReliefPage from "./pages/BushfireReliefPage";
-import { donateLink } from "./constants/urls.js"
+import { donateLink, aboutLink } from "./constants/urls.js"
 import {
     InjectRouterContext,
     useRouterContext,
@@ -89,11 +89,9 @@ const routes: ReactElement<typeof Routes> = <Routes>
             element={<HomePage />}
             type={["Home"]}
         />
-        <Route
+        <Redirect
             path="/about"
-            element={<DynamicPage />}
-            title="About"
-            type={["Static Page", "About"]}
+            to={aboutLink}
         />
         <Route
             path="/styleGuide/component/:componentName"
@@ -144,7 +142,7 @@ const routes: ReactElement<typeof Routes> = <Routes>
         <Route
             path="/homeless-shelters"
             element={<DynamicPage />}
-            title="Homeless shelters"
+            title="Homeless Shelters"
             type={["Static Page", "Homeless Shelters"]}
         />
         <Route
