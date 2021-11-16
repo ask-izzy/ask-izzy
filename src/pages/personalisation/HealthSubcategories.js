@@ -49,8 +49,8 @@ export default class HealthSubcategories extends BaseQuestion {
         resetDfvOptions();
     }
 
-    static prettyPrintSavedAnswer(): string | Array<string> {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): string {
+        switch (answer) {
         case "Social & emotional wellbeing":
             return "Mental health";
         case "Problems with feet":
@@ -64,7 +64,7 @@ export default class HealthSubcategories extends BaseQuestion {
         case "Hospital":
             return "Hospitals";
         default:
-            return this.savedAnswer
+            return answer
         }
     }
 }

@@ -1,0 +1,55 @@
+@use '../styles/mixins/colours';
+
+.QuestionStepperBreadcrumb {
+    color: #{colours.get-static('colour-text-mid')};
+    color: var(--colour-text-mid);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+
+    > .icon {
+        line-height: 0;
+
+        .SvgIcon {
+            height: 0.9em;
+            width: unset;
+
+            path {
+                fill: #{colours.get-static('colour-text-mid')};
+                fill: var(--colour-text-mid);
+            }
+        }
+    }
+
+    .answer {
+        .icon {
+            display: inline-block; /* needed to remove annoying space under svg
+                https://stackoverflow.com/questions/7774814/remove-white-space-below-image */
+            margin: 0 0.1em;
+
+            .SvgIcon {
+                height: 0.9em;
+                width: unset;
+                display: block; /* also needed to remove annoying space under svg */
+            }
+        }
+    }
+
+    .appendedContent {
+        flex: 1 1 min-content;
+    }
+
+    &.currentlyEditing {
+        display: inline-block;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+        font-style: italic;
+
+        > .icon {
+            path {
+                fill: #{colours.get-static('colour-text-dark')};
+                fill: var(--colour-text-dark);
+            }
+        }
+    }
+}

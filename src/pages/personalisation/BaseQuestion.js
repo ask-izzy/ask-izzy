@@ -12,22 +12,23 @@ import icons from "../../icons";
 import storage from "../../storage";
 import type {serviceSearchRequest} from "../../iss/serviceSearch";
 import { append, ServiceSearchRequest } from "../../iss/ServiceSearchRequest";
-import QuestionStepper from "../QuestionStepper";
+import QuestionStepper, {
+    shouldShowQuestionStepper,
+} from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
-import {fetchAnswers, getSearchAnswers} from "../QuestionStepper.service";
 import ScreenReader from "../../components/ScreenReader";
 import {getBannerName} from "../../utils/personalisation"
 import routerContext from "../../contexts/router-context";
 import type {
     PersonalisationPageProps,
     PersonalisationPageState,
+    PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation";
 
 export type State = {
     ...PersonalisationPageState,
     selectedAnswer: ?string | Set<string>, // The answer(s) that a user has
         // currently selected but not confirmed
-    showSkipToChoice: boolean,
 }
 
 class BaseQuestion extends React.Component<
@@ -35,13 +36,13 @@ class BaseQuestion extends React.Component<
     State
 > {
     static contextType: any = routerContext;
-    static defaultProps: Object = {};
+    static defaultProps: PersonalisationQuestionPageDefaultProps;
 
     constructor(props: Object) {
         super(props);
         this.state = {
             selectedAnswer: props.multipleChoice ? new Set() : null,
-            showStepper: false,
+            showQuestionStepper: false,
             category: undefined,
             showSkipToChoice: false,
         };
@@ -51,14 +52,13 @@ class BaseQuestion extends React.Component<
         const category = getCategory(
             this.context.router.match.params.page
         )
-        const searchAnswers = getSearchAnswers();
         this.setState({
             selectedAnswer: this.props.multipleChoice ?
                 new Set(this.constructor.savedAnswer)
                 : null,
-            showStepper: category ?
-                fetchAnswers(category).length > 0
-                : searchAnswers.length > 0,
+            showQuestionStepper: shouldShowQuestionStepper(
+                category || undefined
+            ),
             category,
         })
     }
@@ -104,7 +104,7 @@ class BaseQuestion extends React.Component<
             if (Array.isArray(savedAnswer)) {
                 // Update answers if we had stored an old answer
                 savedAnswer = savedAnswer.map((answer) =>
-                    this.defaultProps.oldAnswers[answer] || answer
+                    this.defaultProps.oldAnswers?.[answer] || answer
                 )
                 return _.union(
                     this.defaultProps.possibleAnswers.keys,
@@ -125,14 +125,8 @@ class BaseQuestion extends React.Component<
         }
     }
 
-    /**
-     * A separate Answer return for the the breadcrumbs that can be overwritten
-     * Per question
-     * @returns {ReactNode} - returns the
-     *     selected answer
-     */
-    static prettyPrintSavedAnswer(): ReactNode {
-        return this.savedAnswer;
+    static prettyPrintAnswer(answer: string): ReactNode {
+        return answer;
     }
 
     /**
@@ -219,8 +213,8 @@ class BaseQuestion extends React.Component<
         return Object.keys(this.props.possibleAnswers);
     }
 
-    static breadcrumbToStandardAnswer(prettyPrintSavedAnswer?: ?any): string {
-        return "";
+    get question(): string {
+        return this.props.question;
     }
 
     /**
@@ -330,8 +324,10 @@ class BaseQuestion extends React.Component<
                                 this.props.byline
                             }
                             fixedAppBar={true}
-                            taperColour={this.state.showStepper ? "LighterGrey"
-                                : "HeaderBar"}
+                            taperColour={this.state.showQuestionStepper ?
+                                "LighterGrey"
+                                : "HeaderBar"
+                            }
                             bannerName={getBannerName(
                                 this.state.category,
                                 this.props.name
@@ -343,27 +339,31 @@ class BaseQuestion extends React.Component<
                                 },
                             }}
                         />
+                        {this.state.showQuestionStepper && (
+                            <div className="questionsBar">
+                                <ScreenReader>
+                                    <a
+                                        href="#mainPageContent"
+                                        aria-label={
+                                            "Skip your previously selected " +
+                                            "answers and go straight to the " +
+                                            "options."
+                                        }
+                                    >
+                                        Skip to make your selection
+                                    </a>
+                                </ScreenReader>
+                                <QuestionStepper
+                                    category={this.state.category}
+                                />
+                            </div>
+                        )}
                     </section>
-                    {this.state.showStepper && (
-                        <div
-                            tabIndex="0"
-                            onFocus={() => {
-                                this.setState({
-                                    showSkipToChoice: true,
-                                })
-                            }}
-                        >
-                            <QuestionStepper
-                                category={this.state.category}
-                                showSkipToChoice={this.state.showSkipToChoice}
-                                clearShowSkipToChoice={() => {
-                                    this.setState({showSkipToChoice: false})
-                                }}
-                            />
-                        </div>
-                    )}
                 </div>
-                <main aria-labelledby="questions">
+                <main
+                    id="mainPageContent"
+                    aria-labelledby="questions"
+                >
                     <ScreenReader>
                         <span id="questions">
                             Questions.

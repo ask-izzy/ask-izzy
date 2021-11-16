@@ -1,0 +1,45 @@
+@use '../styles/mixins/colours';
+
+.QuestionStepper {
+    @include colours.define(
+        'colour-comma-pipe',
+        'QuestionStepper',
+        colours.lighten('raw-colour-pure-white', 'global', -23%)
+    );
+
+    // Remove browser styles for lists
+    ol.breadcrumbs {
+        padding-left: 0;
+        margin: 0;
+
+        li {
+            display: inline-block;
+            list-style-type: none;
+        }
+    }
+
+    .clearButton {
+        border: 0;
+        background: none;
+        color: #{colours.get-static('colour-link')};
+        color: var(--colour-link);
+        text-decoration: underline;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .breadcrumbSpacer {
+        color: #{colours.get-static('colour-comma-pipe', 'QuestionStepper')};
+        color: var(--colour-comma-pipe);
+        margin: 0 0.4em;
+        white-space: pre;
+    }
+
+    .breadcrumbAnswerSpacer {
+        color: #{colours.get-static('colour-comma-pipe', 'QuestionStepper')};
+        color: var(--colour-comma-pipe);
+    }
+}

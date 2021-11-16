@@ -20,13 +20,12 @@ export default class AddictionSubcategories extends BaseQuestion {
         },
     };
 
-    static prettyPrintSavedAnswer(): string {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): string {
+        switch (answer) {
         case "Speak to someone":
             return "Counselling";
         default:
-            // $FlowIgnore
-            return this.savedAnswer
+            return answer
         }
     }
 }

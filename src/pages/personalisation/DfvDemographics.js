@@ -20,7 +20,7 @@ const ATSI_BREADCRUMB_ICON = (
     </span>
 )
 const LGBT_BREADCRUMB_ICON = (
-    <span><icons.DemographicLgbtiq /></span>
+    <span><icons.DemographicLgbtiq viewBox="2 9 59 44" /></span>
 )
 
 export default class DfvDemographics extends BaseQuestion {
@@ -65,48 +65,18 @@ export default class DfvDemographics extends BaseQuestion {
         storage.removeItem(UsingViolencePage.defaultProps.name);
     }
 
-
-    static breadcrumbToStandardAnswer(
-        prettyPrintSavedAnswer?: ?Array<any>
-    ): string {
-        if (this.savedAnswer && this.savedAnswer.length) {
-            for (let index = 0; index < this.savedAnswer.length; index++) {
-                if (prettyPrintSavedAnswer === ATSI_BREADCRUMB_ICON &&
-                    this.savedAnswer[index] ===
-                    "Aboriginal and/or Torres Strait Islander") {
-                    return this.savedAnswer[index];
-                } else if (prettyPrintSavedAnswer === LGBT_BREADCRUMB_ICON &&
-                    this.savedAnswer[index] === "LGBTIQA+") {
-                    return this.savedAnswer[index];
-                } else if (
-                    // $FlowIgnore
-                    this.prettyPrintSavedAnswer()[index] ===
-                        prettyPrintSavedAnswer
-                ) {
-                    return this.savedAnswer[index]
-                }
-            }
+    static prettyPrintAnswer(answer: string): ReactNode {
+        switch (answer) {
+        case "Aboriginal and/or Torres Strait Islander":
+            return ATSI_BREADCRUMB_ICON;
+        case "LGBTIQA+":
+            return LGBT_BREADCRUMB_ICON;
+        case "Culturally and linguistically diverse":
+            return "Culturally & linguistically diverse";
+        case "Person seeking asylum":
+            return "Seeking asylum";
+        default:
+            return answer;
         }
-        return "";
-    }
-
-    static prettyPrintSavedAnswer(): ReactNode {
-        const savedAnswer = this.savedAnswer instanceof Array ?
-            this.savedAnswer
-            : []
-        return savedAnswer.map((answer, index) => {
-            switch (answer) {
-            case "Aboriginal and/or Torres Strait Islander":
-                return ATSI_BREADCRUMB_ICON;
-            case "LGBTIQA+":
-                return LGBT_BREADCRUMB_ICON;
-            case "Culturally and linguistically diverse":
-                return "Culturally & linguistically diverse";
-            case "Person seeking asylum":
-                return "Seeking asylum";
-            default:
-                return answer;
-            }
-        })
     }
 }

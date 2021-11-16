@@ -36,15 +36,14 @@ export default class EverydayThingsSubcategories extends BaseQuestion {
         },
     };
 
-    static prettyPrintSavedAnswer(): string {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): string {
+        switch (answer) {
         case "Keeping warm":
             return "Blankets";
         case "Food packages/parcels/vouchers" :
             return "Food parcels/vouchers";
         default:
-            // $FlowIgnore
-            return this.savedAnswer
+            return answer
         }
     }
 }

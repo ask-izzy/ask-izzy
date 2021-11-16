@@ -27,8 +27,8 @@ export default class MoneySubcategories extends BaseQuestion {
         },
     };
 
-    static prettyPrintSavedAnswer(): string | Array<string> {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): string {
+        switch (answer) {
         case "Financial assistance e.g. utility bills, petrol, food":
             return "Financial assistance";
         case "No interest & low interest loans":
@@ -38,7 +38,7 @@ export default class MoneySubcategories extends BaseQuestion {
         case "Financial counselling":
             return "Online counselling";
         default:
-            return this.savedAnswer
+            return answer
         }
     }
 }

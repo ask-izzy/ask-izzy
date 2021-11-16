@@ -67,52 +67,24 @@ export default class Demographics extends BaseQuestion {
         resetDfvOptions();
     }
 
-    static breadcrumbToStandardAnswer(
-        prettyPrintSavedAnswer?: ?Array<any>
-    ): string {
-        if (this.savedAnswer?.length) {
-            for (let index = 0; index < this.savedAnswer.length; index++) {
-                if (
-                    prettyPrintSavedAnswer === ATSI_BREADCRUMB_ICON &&
-                    this.savedAnswer[index] ===
-                        "Aboriginal and/or Torres Strait Islander"
-                ) {
-                    return this.savedAnswer[index] ;
-                } else if (
-                    // $FlowIgnore
-                    this.prettyPrintSavedAnswer()[index] ===
-                        prettyPrintSavedAnswer
-                ) {
-                    return this.savedAnswer[index]
-                }
-            }
+    static prettyPrintAnswer(answer: string): ReactNode {
+        switch (answer) {
+        case "Aboriginal and/or Torres Strait Islander":
+            return ATSI_BREADCRUMB_ICON;
+        case "Person seeking asylum":
+            return "Seeking asylum"
+        case "Parole / recently released":
+            return "On parole"
+        case "Have a disability":
+            return "With disability"
+        case "Have pets":
+            return "Help with pets"
+        case "Family with children":
+            return "Families"
+        case "Escaping family violence":
+            return "Escaping violence"
+        default:
+            return answer;
         }
-        return "";
-    }
-
-    static prettyPrintSavedAnswer(): ReactNode {
-        const savedAnswer = this.savedAnswer instanceof Array ?
-            this.savedAnswer
-            : []
-        return savedAnswer.map((answer, index) => {
-            switch (answer) {
-            case "Aboriginal and/or Torres Strait Islander":
-                return ATSI_BREADCRUMB_ICON;
-            case "Person seeking asylum":
-                return "Seeking asylum"
-            case "Parole / recently released":
-                return "On parole"
-            case "Have a disability":
-                return "With disability"
-            case "Have pets":
-                return "Help with pets"
-            case "Family with children":
-                return "Families"
-            case "Escaping family violence":
-                return "Escaping violence"
-            default:
-                return answer;
-            }
-        })
     }
 }

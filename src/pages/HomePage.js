@@ -10,7 +10,7 @@ import storage from "../storage";
 import BrandedFooter from "../components/BrandedFooter";
 import { resetDfvOptions } from "../utils/domesticViolence";
 import routerContext from "../contexts/router-context";
-import QuestionStepper from "./QuestionStepper";
+import QuestionStepper from "../components/QuestionStepper";
 import Storage from "../storage";
 import AlertBannerList from "../components/AlertBannerList";
 import ScreenReader from "../components/ScreenReader";
@@ -103,19 +103,15 @@ function HomePage(): ReactNode {
                         />
                     </div>
                 </div>
-                <div>
-                    {location &&
-                        <div>
-                            <QuestionStepper
-                                home={true}
-                                initialTabIndex={0}
-                                onClear={() =>
-                                    setLocation(null)
-                                }
-                            />
-                        </div>
-                    }
-                </div>
+                {location &&
+                    <QuestionStepper
+                        showQuestionIcons={true}
+                        showClearLocation={true}
+                        onClearLocation={() =>
+                            setLocation(null)
+                        }
+                    />
+                }
             </section>
             <main aria-labelledby="categories">
                 <ScreenReader>

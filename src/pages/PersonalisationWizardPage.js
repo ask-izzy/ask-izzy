@@ -138,7 +138,9 @@ class PersonalisationWizardPage extends React.Component<{}, State> {
 
         const prevPage = this.prevSubPage();
 
-        return prevPage ? prevPage.title : "Categories";
+        return typeof prevPage?.title === "string" ?
+            prevPage.title
+            : "Categories";
     }
 
     get pageTitle(): string {
@@ -150,8 +152,9 @@ class PersonalisationWizardPage extends React.Component<{}, State> {
             this.context.router
         )
 
-        return currentComponent?.title ||
-            getPageTitleFromRouter(this.context.router);
+        return typeof currentComponent?.title === "string" ?
+            currentComponent.title
+            : getPageTitleFromRouter(this.context.router);
     }
 
     render(): React.Node {

@@ -3,11 +3,11 @@ import Demographics from "./Demographics";
 import BaseQuestion from "./BaseQuestion";
 import {defaultProps} from "./AreYouSafe";
 import type {
-    PersonalisationPageDefaultProps,
+    PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation";
 
 export default class HousingAreYouSafe extends BaseQuestion {
-    static defaultProps: PersonalisationPageDefaultProps = defaultProps;
+    static defaultProps: PersonalisationQuestionPageDefaultProps = defaultProps;
 
     static title: string = "Are you safe";
 

@@ -15,7 +15,7 @@ import icons from "../icons";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 import FlatButton from "../components/FlatButton";
 import SuggestionBox from "./SuggestionBox";
-import QuestionStepper from "./QuestionStepper";
+import QuestionStepper from "../components/QuestionStepper";
 import {getInitialSearchRequest} from "../iss/serviceSearch";
 import { stateFromLocation } from "../utils";
 import ScreenReader from "../components/ScreenReader";
@@ -108,16 +108,10 @@ class ResultsListPage extends ResultsPage<> {
                     }
                     statusCode={this.state.searchError?.status || 200}
                 />
-                <div className="List results">
-                    <div tabIndex="0">
-                        <QuestionStepper
-                            category={this.state.category}
-                            resultsPage={true}
-                            results={this.state.searchResults || []}
-                            location={this.context.router.location}
-                        />
-                    </div>
-                </div>
+                <QuestionStepper
+                    category={this.state.category}
+                    showEditAnswers={true}
+                />
             </div>
             {this.hasSearchResults() &&
                 <AlertBannerList

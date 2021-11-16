@@ -57,8 +57,8 @@ export default class Age extends BaseQuestion {
         }
     }
 
-    static prettyPrintSavedAnswer(): string {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): string {
+        switch (answer) {
         case "0 to 17":
             return "0-17";
         case "18 to 26" :
@@ -72,8 +72,7 @@ export default class Age extends BaseQuestion {
         case "65 or older" :
             return "65+";
         default:
-            // $FlowIgnore
-            return this.savedAnswer
+            return answer
         }
     }
 }

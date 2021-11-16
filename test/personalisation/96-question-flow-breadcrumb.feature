@@ -57,7 +57,7 @@ Feature: Question Flow Breadcrumb
         Couples
         --------------------------------------
         When I click on "Housing"
-        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families , Couples"
+        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families, Couples"
 
     Scenario: Visit housing and select more than two demographic
         Given a fresh session
@@ -72,7 +72,7 @@ Feature: Question Flow Breadcrumb
         Have a disability
         --------------------------------------
         When I click on "Housing"
-        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families , Couples ..."
+        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families, Couples …"
 
     Scenario: Visit housing and select more than two demographic and edit
         Given a fresh session
@@ -87,14 +87,14 @@ Feature: Question Flow Breadcrumb
         Have a disability
         --------------------------------------
         When I click on "Housing"
-        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families , Couples ..."
+        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families, Couples …"
         When I click on "See all and edit"
         And I click on "Do any of these apply to you?"
-        And I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families , Couples ... (editing)"
+        And I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families, Couples … (editing)"
         And I click on "Have a disability"
         When I click on the done button # Demographics
         And I click on the done button
-        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families , Couples"
+        Then I should see "Melbourne, VIC | Safe tonight | Women | 18-26 | Families, Couples"
 
     Scenario: See saved location on the home page
         Given a fresh session

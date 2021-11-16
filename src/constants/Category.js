@@ -4,6 +4,7 @@ import { slugify } from "underscore.string";
 
 
 import type {serviceSearchRequest} from "../iss/serviceSearch";
+import type {PersonalisationPage} from "../utils/personalisation"
 
 type Props = {
     name: string,
@@ -11,7 +12,7 @@ type Props = {
     icon: React$ComponentType<any>,
     search: serviceSearchRequest,
     info?: string | React$Element<any>,
-    personalisation: Array<any>,
+    personalisation: Array<PersonalisationPage>,
 };
 
 export default class Category {

@@ -39,8 +39,8 @@ class BaseStaticPersonalisation extends React.Component<Props, {}> {
         return "";
     }
 
-    static prettyPrintSavedAnswer(): string {
-        return this.savedAnswer;
+    static prettyPrintAnswer(answer: string): string {
+        return answer;
     }
 
     static get savedAnswer(): string {

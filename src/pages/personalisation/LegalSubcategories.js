@@ -36,8 +36,8 @@ export default class LegalSubcategories extends BaseQuestion {
         resetDfvOptions();
     }
 
-    static prettyPrintSavedAnswer(): string | Array<string> {
-        switch (this.savedAnswer) {
+    static prettyPrintAnswer(answer: string): string {
+        switch (answer) {
         case "Police and liaison officers":
             return "Police & liaison officers";
         case "Domestic & family violence issues":
@@ -45,7 +45,7 @@ export default class LegalSubcategories extends BaseQuestion {
         case "Victims of crime compensation":
             return "Victims of crime";
         default:
-            return this.savedAnswer
+            return answer
         }
     }
 }
