@@ -21,6 +21,7 @@ type State = {
     protocol: ?string,
     domain: ?string,
     path: string,
+    useRouterLinkElement: boolean,
 }
 
 export default class Link extends React.Component<Props, State> {
@@ -47,6 +48,9 @@ export default class Link extends React.Component<Props, State> {
             path,
             uri: props.to,
             isInternal: Boolean(!domain && path),
+            useRouterLinkElement: props.to.startsWith("#") ?
+                false
+                : Boolean(!domain && path),
         };
     }
 
@@ -118,14 +122,15 @@ export default class Link extends React.Component<Props, State> {
             });
         }
 
-        if (this.state.isInternal) {
+        if (this.state.useRouterLinkElement) {
             return (
                 <InternalLink
                     to={this.props.to}
                     {...(remainingProps: any)}
                     onClick={onClickHandler.bind(this)}
                     className={classnames(
-                        "Link internal",
+                        "Link",
+                        this.state.isInternal ? "internal" : "external",
                         className,
                     )}
                 >
@@ -141,7 +146,8 @@ export default class Link extends React.Component<Props, State> {
                 {...(remainingProps: any)}
                 onClick={onClickHandler.bind(this)}
                 className={classnames(
-                    "Link external",
+                    "Link",
+                    this.state.isInternal ? "internal" : "external",
                     className,
                 )}
             >

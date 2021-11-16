@@ -12,7 +12,7 @@ Feature: Geolocation
         When I visit /housing/personalise/page/location
         Then I should see "Where are you looking for help?"
         And I should see "Get your current location"
-        And the button "Done" should be disabled
+        And the button "Next" should be disabled
 
         When I click on "Get your current location"
         Then I should see "Locating you..."
@@ -20,7 +20,7 @@ Feature: Geolocation
         Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
-        And the button "Done" should be enabled
+        And the button "Next" should be enabled
 
     Scenario: User denies geolocation access
         When I visit /
@@ -33,7 +33,7 @@ Feature: Geolocation
         When I deny access to geolocation
         Then I should see "Unable to get your location"
         And I should see "User denied access"
-        And the button "Done" should be disabled
+        And the button "Next" should be disabled
 
     Scenario: User switches between using geolocate button and manually entering a location
         When I visit /
@@ -41,7 +41,7 @@ Feature: Geolocation
         And google api geocode will return location name Richmond, VIC
         When I visit /housing/personalise/page/location
         And I should see "Get your current location"
-        And the button "Done" should be disabled
+        And the button "Next" should be disabled
 
         When I click on "Get your current location"
         Then I should see "Locating you..."
@@ -49,7 +49,7 @@ Feature: Geolocation
         Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
-        And the button "Done" should be enabled
+        And the button "Next" should be enabled
 
         When I search for "carlt"
         And I wait for page to finish loading
@@ -61,36 +61,36 @@ Feature: Geolocation
         Carlton North       | VIC
         -------------------------------------------
         And I should see "Get your current location"
-        And the button "Done" should be disabled
+        And the button "Next" should be disabled
 
         When I click on "Carlton"
         Then search box should contain "Carlton, VIC"
-        And the button "Done" should be enabled
+        And the button "Next" should be enabled
 
         When I click on "Get your current location"
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
-        And the button "Done" should be enabled
+        And the button "Next" should be enabled
 
         When I click on "Clear"
         Then I should see "Get your current location"
         And search box should contain ""
-        And the button "Done" should be disabled
+        And the button "Next" should be disabled
 
         When I reload the page
         Then I should see "Get your current location"
         And search box should contain ""
-        And the button "Done" should be disabled
+        And the button "Next" should be disabled
 
         When I click on "Get your current location"
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
-        And the button "Done" should be enabled
+        And the button "Next" should be enabled
 
         When I reload the page
         Then I should see "Get your current location"
         And search box should contain ""
-        And the button "Done" should be disabled
+        And the button "Next" should be disabled
 
     Scenario: User uses geolocate button on results page after setting their location manually
         Given the area to search is "Melbourne, VIC"

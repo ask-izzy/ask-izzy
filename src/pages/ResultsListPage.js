@@ -13,7 +13,7 @@ import LoadingResultsHeader from
 import AlertBannerList from "../components/AlertBannerList";
 import icons from "../icons";
 import NotFoundStaticPage from "./NotFoundStaticPage"
-import ButtonListItem from "../components/ButtonListItem";
+import FlatButton from "../components/FlatButton";
 import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "./QuestionStepper";
 import {getInitialSearchRequest} from "../iss/serviceSearch";
@@ -196,16 +196,18 @@ class ResultsListPage extends ResultsPage<> {
     renderLoadMore(): void | ReactElement<"div"> | ReactNode {
         if (this.state.searchMeta?.next) {
             return (
-                <ButtonListItem
-                    className="MoreResultsButton"
-                    primaryText="Load more results…"
-                    onClick={this.loadNextSearchPage}
-                    analyticsEvent={{
-                        event: "Action Triggered - Load More Results",
-                        eventAction: "Load more results",
-                        eventLabel: null,
-                    }}
-                />
+                <div className="moreResultsContainer">
+                    <FlatButton
+                        className="MoreResultsButton"
+                        label="See more results"
+                        onClick={this.loadNextSearchPage}
+                        analyticsEvent={{
+                            event: "Action Triggered - Load More Results",
+                            eventAction: "Load more results",
+                            eventLabel: null,
+                        }}
+                    />
+                </div>
             );
         }
 

@@ -47,7 +47,7 @@ import CategoriesList from "./components/CategoriesList";
 import Ndis from "./components/Ndis";
 import OnlineSafetyLink from "./components/OnlineSafetyLink";
 import OpeningTimes from "./components/OpeningTimes";
-import Phone from "./components/Phone";
+import PhoneButton from "./components/PhoneButton";
 import QuickExit from "./components/QuickExit";
 import ResultListItem from "./components/ResultListItem";
 import ResultsList from "./components/ResultsList";
@@ -109,7 +109,7 @@ export default {
     Ndis,
     OnlineSafetyLink,
     OpeningTimes,
-    Phone,
+    PhoneButton,
     QuickExit,
     ResultListItem,
     ResultsList,

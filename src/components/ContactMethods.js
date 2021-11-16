@@ -6,7 +6,7 @@ import React from "react";
 import Collapser from "./general/Collapser";
 import Spacer from "./Spacer";
 import Email from "./Email";
-import Phone from "./Phone";
+import PhoneButton from "./PhoneButton";
 import Web from "./Web";
 import * as gtm from "../google-tag-manager";
 
@@ -42,8 +42,11 @@ class ContactMethods extends React.Component<Props, void> {
     get phones(): Array<Object> {
         return this.props.object.Phones().map(details => ({
             type: "Phone",
-            component: Phone,
-            details,
+            component: PhoneButton,
+            details: {
+                ...details,
+                styleType: "hollow",
+            },
         }))
     }
 

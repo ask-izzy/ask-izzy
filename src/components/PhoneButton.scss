@@ -1,0 +1,56 @@
+@use 'sass:color';
+@use '../styles/mixins/colours';
+
+.Contact {
+    .ContactButton {
+        background-color: #{colours.get-static('colour-button-primary')};
+        background-color: var(--colour-button-primary);
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
+        max-width: 320px;
+        margin-bottom: 5px;
+        border-radius: $rounded-border;
+        font-size: 18px;
+        text-align: center;
+        text-decoration: none;
+
+        .Contact-text {
+            padding: 0;
+            display: inline;
+            font-weight: normal;
+        }
+
+        .Icon {
+            path {
+                fill: #{colours.get-static('colour-text-very-light')};
+                fill: var(--colour-text-very-light);
+
+                @media print {
+                    fill: #{colours.get-static('raw-colour-pure-black')};
+                    fill: var(--raw-colour-pure-black);
+                }
+            }
+        }
+    }
+
+    &.styleHollow {
+        .ContactButton {
+            background-color: transparent;
+            color: #{colours.get-static('colour-button-primary')};
+            color: var(--colour-button-primary);
+            border: 1px solid #{colours.get-static('colour-button-primary')};
+            border: 1px solid var(--colour-button-primary);
+
+            @media print {
+                border: 0;
+            }
+
+            .Icon {
+                path {
+                    fill: #{colours.get-static('colour-button-primary')};
+                    fill: var(--colour-button-primary);
+                }
+            }
+        }
+    }
+}
