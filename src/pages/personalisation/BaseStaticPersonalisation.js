@@ -58,21 +58,12 @@ class BaseStaticPersonalisation extends React.Component<Props, {}> {
     }
 
     /**
-     * Determines whether or not to show the question.
-     *
-     * @returns {boolean} true if we should show this question.
-     */
-    static showPage(): boolean {
-        return true;
-    }
-
-    /**
      * Determines whether or not to show the question on the summary page.
      *
      * @returns {boolean} true if we should show this on the summary page.
      */
-    static showInSummary(): boolean {
-        return true;
+    static getShouldShowInSummary(): boolean {
+        return false;
     }
 
     onDoneTouchTap(): void {

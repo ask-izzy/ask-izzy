@@ -9,6 +9,7 @@ Feature: Change your personalisation settings
         Given the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
         And my gender is female
+        And I need help for myself
         And I am 27 years old
         And I am not part of any relevant demographics
 
@@ -20,8 +21,8 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you looking for help?              | Melbourne, VIC
         Do you have somewhere safe to sleep tonight? | Yes
+        Where are you looking for help?              | Melbourne, VIC
         How do you identify?                         | Female
         How old are you?                             | 27 to 39
         Do any of these apply to you?                | None selected
@@ -44,8 +45,8 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you looking for help?                               | Carlton, VIC
         Do you have somewhere safe to sleep tonight? | Yes
+        Where are you looking for help?              | Carlton, VIC
         How do you identify?                         | Female
         How old are you?                             | 27 to 39
         Do any of these apply to you?                | None selected
@@ -60,8 +61,8 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you looking for help?              | Melbourne, VIC
         Do you have somewhere safe to sleep tonight? | No
+        Where are you looking for help?              | Melbourne, VIC
         How do you identify?                         | Female
         How old are you?                             | 27 to 39
         Do any of these apply to you?                | None selected
@@ -79,8 +80,8 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you looking for help?              | Melbourne, VIC
         Do you have somewhere safe to sleep tonight? | Yes
+        Where are you looking for help?              | Melbourne, VIC
         How do you identify?                         | Female
         How old are you?                             | 27 to 39
         Do any of these apply to you?                | Aboriginal and/or Torres Strait Islander
@@ -94,8 +95,8 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you looking for help?              | Melbourne, VIC
         Do you have somewhere safe to sleep tonight? | Yes
+        Where are you looking for help?              | Melbourne, VIC
         How do you identify?                         | Female
         How old are you?                             | 27 to 39
         Do any of these apply to you?                | None selected
@@ -110,8 +111,8 @@ Feature: Change your personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you looking for help?              | Melbourne, VIC
         Do you have somewhere safe to sleep tonight? | Yes
+        Where are you looking for help?              | Melbourne, VIC
         How do you identify?                         | Male
         How old are you?                             | 27 to 39
         Do any of these apply to you?                | None selected
@@ -123,6 +124,11 @@ Feature: Change your personalisation settings
         Then I should see the branding header
         And I should be at /
         When I click the link with "Housing" substring
+
+        Then I should see "Do you have somewhere safe to sleep tonight?"
+        When I click the "Yes" button
+
         Then I should see "I'm looking for help for"
-         And I click the "Myself" button
+        And I click the "Myself" button
+
         Then I should not see "Melbourne, VIC"

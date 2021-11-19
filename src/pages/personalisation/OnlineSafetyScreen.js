@@ -14,28 +14,20 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
 
     static title = "Help";
 
-    static defaultProps = Object.assign(
-        {},
-        BaseStaticPersonalisation.defaultProps,
-        {
-            name: "online-safety-screen",
-            heading: "Everyone has the right to be safe.",
-            showBaseTextBox: true,
-            baseTextBoxComponent: <OnlineSafetyLink/>,
-        }
-    );
+    static defaultProps = {
+        ...BaseStaticPersonalisation.defaultProps,
+        name: "online-safety-screen",
+        heading: "Everyone has the right to be safe.",
+        showBaseTextBox: true,
+        baseTextBoxComponent: <OnlineSafetyLink/>,
+        noQuestionStepperBreadcrumb: true,
+    };
 
     static summaryLabel = "Online safety screen";
 
-    static staticShowPage(): boolean {
-        return true;
-    }
-
-    static showPage(): boolean {
-        return !this.savedAnswer &&
-            Boolean(AreYouSafe.savedAnswer) &&
-            !["", "Yes", "(skipped)"]
-                .includes(AreYouSafe.savedAnswer);
+    static getShouldIncludePage(): boolean {
+        return !["", "Yes", "(skipped)"]
+            .includes(AreYouSafe.savedAnswer || "");
     }
 
     onDoneTouchTap(): void {
@@ -43,8 +35,6 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
 
         super.onDoneTouchTap();
     }
-
-    static summaryLabel = "Online safety screen"
 
     renderContent(): React.Element<any> {
         const link1800Respect = "/service/634190-1800respect";

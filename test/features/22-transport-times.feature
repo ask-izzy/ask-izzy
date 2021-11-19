@@ -8,6 +8,7 @@ Feature: Transport times
     Background:
         Given the area to search is "Melbourne, VIC"
         And my gender is female
+        And I need help for myself
         And I am 27 years old
         And I am not part of any relevant demographics
 

@@ -11,16 +11,12 @@ export default class LegalAreYouSafe extends BaseQuestion {
 
     static title: string = "Are you safe";
 
-    static showInSummary(): boolean {
+    static getShouldShowInSummary(): boolean {
         return false;
     }
 
-    static staticShowPage(): boolean {
-        return true;
-    }
-
-    static showPage(): boolean {
-        return super.showPage() && LegalSubcategories.savedAnswer ===
+    static getShouldIncludePage(): boolean {
+        return LegalSubcategories.savedAnswer ===
             "Domestic & family violence issues";
     }
 }

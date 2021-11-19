@@ -12,18 +12,13 @@ export default class FreeTextAreYouSafe extends BaseQuestion {
 
     static title: string = "Are you safe";
 
-    static showInSummary(): boolean {
+    static getShouldShowInSummary(): boolean {
         return false;
     }
 
-    static staticShowPage(): boolean {
-        return true;
-    }
-
-    static showPage(): boolean {
+    static getShouldIncludePage(): boolean {
         const searchString = storage.getSearch();
 
-        return super.showPage() &&
-            ViolenceKeywords.indexOf(searchString.toLowerCase()) > -1;
+        return ViolenceKeywords.indexOf(searchString.toLowerCase()) > -1;
     }
 }

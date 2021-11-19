@@ -22,20 +22,18 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
 
     static title = "Using violence";
 
-    static defaultProps = Object.assign(
-        {},
-        BaseStaticPersonalisation.defaultProps,
-        {
-            name: "using-violence",
-            heading: "Worried about your behaviour?",
-            showBaseTextBox: true,
-            baseTextBoxComponent: <DomesticViolenceLink/>,
-        }
-    );
+    static defaultProps = {
+        ...BaseStaticPersonalisation.defaultProps,
+        name: "using-violence",
+        heading: "Worried about your behaviour?",
+        showBaseTextBox: true,
+        baseTextBoxComponent: <DomesticViolenceLink/>,
+        noQuestionStepperBreadcrumb: true,
+    };
 
     static summaryLabel = "Worried about your behaviour?";
 
-    static showPage(): boolean {
+    static getShouldIncludePage(): boolean {
         return Boolean(
             DfvDemographics.savedAnswer?.includes("Using violence")
         );
@@ -49,14 +47,6 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
         storage.setItem(this.props.name, true);
 
         super.onDoneTouchTap();
-    }
-
-    static showInSummary(): boolean {
-        return false;
-    }
-
-    static staticShowPage(): boolean {
-        return true;
     }
 
     renderContent(): React.Element<any> {

@@ -34,8 +34,7 @@ class BasePage extends React.Component<{}> {
         let pageTitle = "";
         pageTitle = makeTitle(
             match.props.title || "",
-            match.params,
-            match.props.type
+            this.context.router
         )
         const canonicalUrl = `https://askizzy.org.au${location.pathname}`;
         return <>

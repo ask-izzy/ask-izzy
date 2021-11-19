@@ -11,13 +11,14 @@ Feature: Browser tab titles
         Given a fresh session
         When I visit /
         And I click the link with "Housing" substring
-        Then I should see the browser tab title of "Housing (Intro) | Ask Izzy"
+        Then I should see the browser tab title of "Housing (Sleep tonight) | Ask Izzy"
 
     Scenario: Results page - browser tab title
         Given a fresh session
         And the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
         And my gender is female
+        And I need help for myself
         And I am 17 years old
         And I am part of the following demographics
         --------------------------------------
@@ -33,6 +34,7 @@ Feature: Browser tab titles
         And the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
         And my gender is female
+        And I need help for myself
         And I am 17 years old
         And I am part of the following demographics
         --------------------------------------
@@ -49,6 +51,7 @@ Feature: Browser tab titles
         And the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
         And my gender is female
+        And I need help for myself
         And I am 17 years old
         And I am part of the following demographics
         --------------------------------------

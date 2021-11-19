@@ -14,6 +14,9 @@ Feature: Personalisation
         Given GPS will hang in the loading state
         And google api geocode will return location name Richmond, VIC
         When I click the link with "Housing" substring
+        Then I should see "Do you have somewhere safe to sleep tonight?"
+
+        When I click the "Yes" button
         Then I should see "I'm looking for help for"
 
         When I click the "Myself" button
@@ -25,9 +28,6 @@ Feature: Personalisation
         And search box should contain "Richmond, VIC"
 
         When I click the "Next" button
-        Then I should see "Do you have somewhere safe to sleep tonight?"
-
-        When I click the "Yes" button
         Then I should see "Do you identify as…"
 
         When I click the "Skip" button
@@ -37,7 +37,7 @@ Feature: Personalisation
         Then I should see "Do any of these apply to you?"
 
         When I click the "Skip" button
-        Then I should see "Richmond, VIC | Safe tonight | 18-26"
+        Then I should see "Safe tonight | Richmond, VIC | 18-26"
 
         When I click back from the title bar
         Then I should be at /
@@ -46,6 +46,9 @@ Feature: Personalisation
         Given GPS will hang in the loading state
         And google api geocode will return location name Richmond, VIC
         When I click the link with "Housing" substring
+        Then I should see "Do you have somewhere safe to sleep tonight?"
+
+        When I click the "No" button
         Then I should see "I'm looking for help for"
 
         When I click the "Myself" button
@@ -58,9 +61,6 @@ Feature: Personalisation
         And search box should contain "Richmond, VIC"
 
         When I click the "Next" button
-        Then I should see "Do you have somewhere safe to sleep tonight?"
-
-        When I click the "No" button
         Then I should see "Do you identify as…"
 
         When I click the "Female" button
@@ -92,13 +92,10 @@ Feature: Personalisation
 
     Scenario: Searching for domestic violence checks that I'm safe
         When I click the link with "Domestic & family violence help" substring
-        Then I should see "I'm looking for help for"
-
-        When I click the "Myself" button
         Then I should see "Are you safe right now?"
 
         When I click the "No" button
         Then I should see "Everyone has the right to be safe."
 
         When I click back from the browser UI
-        Then I should see "I'm looking for help for"
+        Then I should see "Are you safe right now?"

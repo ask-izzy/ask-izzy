@@ -8,11 +8,12 @@ Feature: Crisis Line
     Background:
         Given the area to search is "Melbourne, VIC"
         And my gender is female
+        And I need help for myself
         And I am 27 years old
         And I am not part of any relevant demographics
 
     Scenario: Get helpline phone number
-       Given A search for "get helpline phone number" returns:
+        Given A search for "get helpline phone number" returns:
         ----------------------------------------------
         -   crisis: true
             phones:
@@ -36,8 +37,8 @@ Feature: Crisis Line
         When I visit /
         And I search for "domestic violence"
         And I click the "Search" button
-        And I click the "Myself" button
         And I click the "Skip" button
+        And I click the "Myself" button
         Then I should see a hotline in position 1 which says "Call 1800 737 732"
         And I should see "For help and safety call:" before first hotline
 
@@ -45,8 +46,8 @@ Feature: Crisis Line
         When I visit /
         And I search for "domestic violence"
         And I click the "Search" button
-        And I click the "Myself" button
         And I click the "Skip" button
+        And I click the "Myself" button
         And I click the "See information about this call" button
         Then I should see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"
 
@@ -54,8 +55,8 @@ Feature: Crisis Line
         When I visit /
         And I search for "domestic violence"
         And I click the "Search" button
-        And I click the "Myself" button
         And I click the "Skip" button
+        And I click the "Myself" button
         And I click the "See information about this call" button
         And I click the "Hide information about this call" button
         Then I should not see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"

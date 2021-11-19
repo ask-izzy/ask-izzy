@@ -119,7 +119,7 @@ export function getBreadcrumbText(
 
     }
     const prettyPrintedAnswers = savedAnswers.map(
-        answer => personalisationPage.prettyPrintAnswer(answer) || null
+        answer => personalisationPage.prettyPrintAnswer?.(answer) || null
     ).filter(answer => answer)
 
     const maxNumberOfAnswersToShow =

@@ -15,6 +15,7 @@ import BoxedText from "./components/BoxedText";
 import BrandedFooter from "./components/BrandedFooter";
 import ButtonListItem from "./components/ButtonListItem";
 import CalloutBox from "./components/CalloutBox";
+import CategoriesList from "./components/CategoriesList";
 import CategoryListItem from "./components/CategoryListItem";
 import CollapsedOpeningTimes from "./components/CollapsedOpeningTimes";
 import ContactMethods from "./components/ContactMethods";
@@ -32,6 +33,7 @@ import Eligibility from "./components/Eligibility";
 import Email from "./components/Email";
 import Feedback from "./components/Feedback";
 import FlatButton from "./components/FlatButton";
+import GeolocationButtonForTravelTimes from "./components/GeolocationButtonForTravelTimes";
 import GeolocationButton from "./components/GeolocationButton";
 import GoogleMapsLink from "./components/GoogleMapsLink";
 import HeaderBar from "./components/HeaderBar";
@@ -43,11 +45,13 @@ import LinkButton from "./components/LinkButton";
 import LinkListItem from "./components/LinkListItem";
 import ListItem from "./components/ListItem";
 import LogoWithShadow from "./components/LogoWithShadow";
-import CategoriesList from "./components/CategoriesList";
 import Ndis from "./components/Ndis";
+import OnlineSafetyContent from "./components/OnlineSafetyContent";
 import OnlineSafetyLink from "./components/OnlineSafetyLink";
 import OpeningTimes from "./components/OpeningTimes";
 import PhoneButton from "./components/PhoneButton";
+import QuestionStepperBreadcrumb from "./components/QuestionStepperBreadcrumb";
+import QuestionStepper from "./components/QuestionStepper";
 import QuickExit from "./components/QuickExit";
 import ResultListItem from "./components/ResultListItem";
 import ResultsList from "./components/ResultsList";
@@ -77,6 +81,7 @@ export default {
     BrandedFooter,
     ButtonListItem,
     CalloutBox,
+    CategoriesList,
     CategoryListItem,
     CollapsedOpeningTimes,
     ContactMethods,
@@ -94,6 +99,7 @@ export default {
     Email,
     Feedback,
     FlatButton,
+    GeolocationButtonForTravelTimes,
     GeolocationButton,
     GoogleMapsLink,
     HeaderBar,
@@ -105,11 +111,13 @@ export default {
     LinkListItem,
     ListItem,
     LogoWithShadow,
-    CategoriesList,
     Ndis,
+    OnlineSafetyContent,
     OnlineSafetyLink,
     OpeningTimes,
     PhoneButton,
+    QuestionStepperBreadcrumb,
+    QuestionStepper,
     QuickExit,
     ResultListItem,
     ResultsList,

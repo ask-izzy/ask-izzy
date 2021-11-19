@@ -13,6 +13,7 @@ import CounsellingSubcategories from "./personalisation/CounsellingSubcategories
 import DemographicsIndigenous from "./personalisation/DemographicsIndigenous";
 import Demographics from "./personalisation/Demographics";
 import DfvDemographics from "./personalisation/DfvDemographics";
+import DVFSubcategories from "./personalisation/DVFSubcategories";
 import EverydayThingsSubcategories from "./personalisation/EverydayThingsSubcategories";
 import FoodSubcategories from "./personalisation/FoodSubcategories";
 import FreeTextAreYouSafe from "./personalisation/FreeTextAreYouSafe";
@@ -21,7 +22,6 @@ import HealthAreYouSafe from "./personalisation/HealthAreYouSafe";
 import HealthSubcategories from "./personalisation/HealthSubcategories";
 import HousingAreYouSafe from "./personalisation/HousingAreYouSafe";
 import HousingSubcategories from "./personalisation/HousingSubcategories";
-import Intro from "./personalisation/Intro";
 import JobSubcategories from "./personalisation/JobSubcategories";
 import LegalAreYouSafe from "./personalisation/LegalAreYouSafe";
 import LegalSubcategories from "./personalisation/LegalSubcategories";
@@ -30,10 +30,10 @@ import LifeSkillsSubcategories from "./personalisation/LifeSkillsSubcategories";
 import Location from "./personalisation/Location";
 import MoneySubcategories from "./personalisation/MoneySubcategories";
 import OnlineSafetyScreen from "./personalisation/OnlineSafetyScreen";
-import ServiceList from "./personalisation/ServiceList";
 import SleepTonight from "./personalisation/SleepTonight";
 import Under18DomesticViolenceScreen from "./personalisation/Under18DomesticViolenceScreen";
 import UsingViolenceScreen from "./personalisation/UsingViolenceScreen";
+import WhoIsLookingForHelp from "./personalisation/WhoIsLookingForHelp";
 
 export default {
     AddictionSubcategories,
@@ -47,6 +47,7 @@ export default {
     DemographicsIndigenous,
     Demographics,
     DfvDemographics,
+    DVFSubcategories,
     EverydayThingsSubcategories,
     FoodSubcategories,
     FreeTextAreYouSafe,
@@ -55,7 +56,6 @@ export default {
     HealthSubcategories,
     HousingAreYouSafe,
     HousingSubcategories,
-    Intro,
     JobSubcategories,
     LegalAreYouSafe,
     LegalSubcategories,
@@ -64,8 +64,8 @@ export default {
     Location,
     MoneySubcategories,
     OnlineSafetyScreen,
-    ServiceList,
     SleepTonight,
     Under18DomesticViolenceScreen,
     UsingViolenceScreen,
+    WhoIsLookingForHelp,
 };

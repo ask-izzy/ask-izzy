@@ -126,8 +126,7 @@ class DynamicPage extends React.Component<{}> {
                                     <title>
                                         {makeTitle(
                                             page.Title,
-                                            this.context.router.match.params,
-                                            this.context.router.match.props.type
+                                            this.context.router
                                         )}
                                     </title>
                                 </Helmet>

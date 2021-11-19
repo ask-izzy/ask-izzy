@@ -115,12 +115,9 @@ function* generateRouteParamVals(
         for (const {key, personalisation} of categories) {
             if (routeParams.includes("subpage")) {
                 // generate subpage paths for category
-                const subpages = [
-                    "intro",
-                    ...personalisation.map(
-                        question => question.defaultProps.name
-                    ),
-                ]
+                const subpages = personalisation.map(
+                    question => question.defaultProps.name
+                )
                 for (const subpage of subpages) {
                     yield {
                         ...defaultParamVals,
@@ -139,9 +136,9 @@ function* generateRouteParamVals(
     } else if (routePathParts[1] === "search") {
         const subpages = [
             "are-you-safe",
-            "intro",
-            "location",
             "online-safety-screen",
+            "who-is-looking-for-help",
+            "location",
         ];
         for (const subpage of subpages) {
             yield {

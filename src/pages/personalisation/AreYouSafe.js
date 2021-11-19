@@ -27,15 +27,12 @@ export const defaultProps: PersonalisationQuestionPageDefaultProps = {
     },
     showDVLinkBar: true,
     textDVLinkBar: <DomesticViolenceLinkBar/>,
+    noQuestionStepperBreadcrumb: true,
 };
 class AreYouSafe extends BaseQuestion {
     static title: string = "Are you safe";
 
-    static showPage(): boolean {
-        return !this.savedAnswer;
-    }
-
-    static showInSummary(): boolean {
+    static getShouldShowInSummary(): boolean {
         return false;
     }
 

@@ -23,6 +23,7 @@ import type {SortType} from "../components/base/Dropdown"
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 import {
     getPersonalisationPages,
+    getPersonalisationPagesToShow,
     getCategoryFromRouter,
     getPageTitleFromRouter,
     setLocationFromUrl,
@@ -74,7 +75,11 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
     componentDidMount(): void {
         setLocationFromUrl(this.context.router)
 
-        if (!this.issParams()) {
+        const personalisationPagesToShow = getPersonalisationPagesToShow(
+            this.context.router
+        )
+
+        if (personalisationPagesToShow.length > 0) {
             closePageLoadDependencies(
                 this.context.router.location,
                 "resultsLoad"
@@ -184,10 +189,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             this.context.router
         )
         for (let item of personalisationPages) {
-            // TODO: This needs to be debugged with the new flow version
-            // $FlowIgnore
             if (typeof item.getSearch === "function") {
-                // $FlowIgnore
                 request = item.getSearch(request);
 
                 if (!request) {

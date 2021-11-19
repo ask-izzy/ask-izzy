@@ -11,17 +11,12 @@ export default class CounsellingAreYouSafe extends BaseQuestion {
 
     static title: string = "Are you safe";
 
-    static showInSummary(): boolean {
+    static getShouldShowInSummary(): boolean {
         return false;
     }
 
-    static staticShowPage(): boolean {
-        return true;
-    }
-
-    static showPage(): boolean {
-        return super.showPage() &&
-            CounsellingSubcategories.savedAnswer ===
+    static getShouldIncludePage(): boolean {
+        return CounsellingSubcategories.savedAnswer ===
                 "Scared in my relationship";
     }
 }

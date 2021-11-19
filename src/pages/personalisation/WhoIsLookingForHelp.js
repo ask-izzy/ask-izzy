@@ -22,10 +22,11 @@ import type {
 // We need to create the defaultProps out of the component first otherwise flow
 // doesn't typecheck it
 const defaultProps: PersonalisationNonQuestionPageDefaultProps = {
-    name: "intro",
+    name: "who-is-looking-for-help",
+    noQuestionStepperBreadcrumb: true,
 }
 
-class Intro extends React.Component<
+class WhoIsLookingForHelp extends React.Component<
     PersonalisationPageProps,
     PersonalisationPageState
 > {
@@ -34,9 +35,12 @@ class Intro extends React.Component<
 
     static contextType: any = routerContext;
 
-    static title: string = "Intro";
+    static title: string = "Who is looking for help?";
 
     static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
+        if (!WhoIsLookingForHelp.savedAnswer) {
+            return null
+        }
         return request;
     }
 
@@ -47,7 +51,6 @@ class Intro extends React.Component<
             category: undefined,
         }
     }
-
 
     componentDidMount(): void {
         const category = getCategory(
@@ -76,18 +79,26 @@ class Intro extends React.Component<
         (userType: string) => (event: SyntheticEvent<HTMLButtonElement>) => void
     ) = (userType: string) =>
         (event: SyntheticEvent<HTMLButtonElement>): void => {
-            storage.setItem("user_type", userType);
+            storage.setItem(WhoIsLookingForHelp.defaultProps.name, userType);
 
             this.props.onDoneTouchTap();
         }
 
-    static savedAnswer: empty
+    static get savedAnswer(): string {
+        let answer = storage.getItem(this.defaultProps.name);
+
+        if (typeof answer !== "string") {
+            return "";
+        }
+
+        return answer;
+    }
 
     static prettyPrintAnswer: empty
 
     render(): React.Element<"div"> {
         return (
-            <div className="IntroPage">
+            <div className="WhoIsLookingForHelpPage">
                 {this.renderHeaderSection()}
                 <main
                     id="mainPageContent"
@@ -160,11 +171,6 @@ class Intro extends React.Component<
                             </a>
                         </ScreenReader>
                         <QuestionStepper
-                            limitBreadcrumbsTo={["location"]}
-                            showClearLocation={true}
-                            onClearLocation={() => this.setState(
-                                {showQuestionStepper: false}
-                            )}
                             category={this.state.category}
                         />
                     </div>
@@ -174,4 +180,4 @@ class Intro extends React.Component<
     }
 }
 
-export default Intro;
+export default WhoIsLookingForHelp;

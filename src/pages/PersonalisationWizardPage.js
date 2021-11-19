@@ -3,19 +3,18 @@
 import * as React from "react";
 import type {ElementConfig as ReactElementConfig} from "react";
 
-import Intro from "./personalisation/Intro";
 import NotFoundStaticPage from "./NotFoundStaticPage";
 import routerContext from "../contexts/router-context";
 import Category from "../constants/Category"
 import {
     navigateToPersonalisationSubpath,
-    getPersonalisationPages,
     getCurrentPersonalisationPage,
-    getCurrentPersonalisationPageIndex,
     getCategoryFromRouter,
-    getPageTitleFromRouter,
     setLocationFromUrl,
+    getPersonalisationPagesToShow,
 } from "../utils/personalisation"
+import WhoIsLookingForHelpPage from "./personalisation/WhoIsLookingForHelp"
+import storage from "../storage"
 
 import type {PersonalisationPage} from "../utils/personalisation"
 type State = {
@@ -64,27 +63,14 @@ class PersonalisationWizardPage extends React.Component<{}, State> {
     }
 
     goToSubPage(
-        subpage: PersonalisationPage
+        subpage: PersonalisationPage,
+        navigateOptions?: {}
     ): void {
-        /* TODO: Narrow down which components don't have defaultProps */
-
         navigateToPersonalisationSubpath(
             this.context.router,
-            `personalise/page/${subpage.defaultProps.name}`
+            `personalise/page/${subpage.defaultProps.name}`,
+            navigateOptions
         );
-    }
-
-    nextSubPage(): ?PersonalisationPage {
-        return this.personalisationComponents.find((component, idx) =>
-            (idx > this.currentComponentIdx) &&
-            (component.getSearch ? !component.getSearch({}) : true)
-        );
-    }
-
-    prevSubPage(): ?PersonalisationPage {
-        const nextSubpageIdx = this.currentComponentIdx - 1;
-
-        return this.personalisationComponents[nextSubpageIdx];
     }
 
     nextStep: () => void = () => {
@@ -95,7 +81,7 @@ class PersonalisationWizardPage extends React.Component<{}, State> {
         this.refs?.subpage?.onNextStep?.();
         this.setState({nextDisabled: false});
 
-        const nextPage = this.nextSubPage()
+        const nextPage = getPersonalisationPagesToShow(this.context.router)[0]
 
         if (!nextPage) {
             this.goToCategoryPage();
@@ -104,61 +90,27 @@ class PersonalisationWizardPage extends React.Component<{}, State> {
         }
     }
 
-    /**
-     * personalisationComponents:
-     *
-     * An array of components required to personalise this category.
-     */
-    get personalisationComponents(): Array<PersonalisationPage> {
-        return [
-            Intro,
-            ...getPersonalisationPages(
-                this.context.router
-            ),
-        ];
-    }
-
-    get currentComponentIdx(): number {
-        const sup = getCurrentPersonalisationPageIndex(
-            this.context.router,
-            this.personalisationComponents
-        );
-
-        if (sup === -1) {
-            return 0;
-        }
-
-        return sup;
-    }
-
-    get backMessage(): string {
-        if (this.refs.subpage && this.refs.subpage.customBackMessage) {
-            return this.refs.subpage.customBackMessage;
-        }
-
-        const prevPage = this.prevSubPage();
-
-        return typeof prevPage?.title === "string" ?
-            prevPage.title
-            : "Categories";
-    }
-
-    get pageTitle(): string {
-        if (this.refs.subpage && this.refs.subpage.customPageTitle) {
-            return this.refs.subpage.customPageTitle;
-        }
-
-        const currentComponent = getCurrentPersonalisationPage(
-            this.context.router
-        )
-
-        return typeof currentComponent?.title === "string" ?
-            currentComponent.title
-            : getPageTitleFromRouter(this.context.router);
-    }
-
     render(): React.Node {
-        const Subpage = this.personalisationComponents[this.currentComponentIdx]
+        if (this.context.router.match.props.path.match(/\/personalise$/)) {
+            const pagesToShow = getPersonalisationPagesToShow(
+                this.context.router
+            )
+            if (pagesToShow.length > 0) {
+                // Reset WhoIsLookingForHelp page
+                storage.removeItem(WhoIsLookingForHelpPage.defaultProps.name);
+
+                const firstPage = getPersonalisationPagesToShow(
+                    this.context.router
+                )[0]
+                if (firstPage) {
+                    this.goToSubPage(firstPage, { replace: true })
+                    return null
+                }
+
+            }
+        }
+
+        const Subpage = getCurrentPersonalisationPage(this.context.router);
 
         if (!Subpage) {
             throw new Error("Unexpected");

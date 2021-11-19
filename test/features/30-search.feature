@@ -8,6 +8,7 @@ Feature: Search
     Background:
         Given the area to search is "Melbourne, VIC"
         And my gender is female
+        And I need help for myself
         And I am 27 years old
         And I am not part of any relevant demographics
 
@@ -45,6 +46,6 @@ Feature: Search
 
     Scenario: Searching for domestic violence performs the safety check
         When I search for "domestic violence" and press enter
-        Then I should see "I'm looking for help for"
-        And I click the "Myself" button
         Then I should see "Are you safe right now?"
+        And I click the "Yes" button
+        Then I should see "I'm looking for help for"

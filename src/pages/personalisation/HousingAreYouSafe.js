@@ -11,16 +11,12 @@ export default class HousingAreYouSafe extends BaseQuestion {
 
     static title: string = "Are you safe";
 
-    static showInSummary(): boolean {
+    static getShouldShowInSummary(): boolean {
         return false;
     }
 
-    static staticShowPage(): boolean {
-        return true;
-    }
-
-    static showPage(): boolean {
-        return Boolean(super.showPage() && Demographics.savedAnswer &&
-            Demographics.savedAnswer.indexOf("Escaping family violence") > -1);
+    static getShouldIncludePage(): boolean {
+        return Boolean(Demographics.savedAnswer) &&
+            Demographics.savedAnswer.indexOf("Escaping family violence") > -1;
     }
 }

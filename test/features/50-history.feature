@@ -21,13 +21,12 @@ Feature: History navigation
         When I visit /
         And I click the link with "Housing" substring
 
-        Then I should see "I'm looking for help for"
-        And I should be at /housing/personalise
-
-        When I click the "Myself" button
-
         Then I should see "Do you have somewhere safe to sleep tonight?"
+        And I should be at /housing/Melbourne-VIC/personalise/page/sleep-tonight
         When I click the "Yes" button # somewhere to sleep tonight
+
+        Then I should see "I'm looking for help for"
+        When I click the "Myself" button
 
         Then I should see "Do you identify as…"
 
@@ -42,7 +41,7 @@ Feature: History navigation
 
         When I click the "18 to 26" button
 
-        Then I should see "Melbourne, VIC | Safe tonight | Men | 18-26"
+        Then I should see "Safe tonight | Melbourne, VIC | Men | 18-26"
         And I should see "Showing housing services"
         And I should be at /housing/Melbourne-VIC/
         And I should see the results
@@ -64,7 +63,7 @@ Feature: History navigation
 
         Then I should be at /housing/Melbourne-VIC/
 
-        And I should see "Melbourne, VIC | Safe tonight | Men | 18-26"
+        And I should see "Safe tonight | Melbourne, VIC | Men | 18-26"
 
         When I click back from the browser UI
         Then I should see "How old are you?"

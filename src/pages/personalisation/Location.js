@@ -153,11 +153,7 @@ class Location extends React.Component<
         return storage.getSearchArea();
     }
 
-    static showPage(): boolean {
-        return true;
-    }
-
-    static showInSummary(): boolean {
+    static getShouldShowInSummary(): boolean {
         return true;
     }
 

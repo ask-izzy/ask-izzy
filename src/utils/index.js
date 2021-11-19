@@ -6,6 +6,10 @@ import OnlineSafetyScreen from "../pages/personalisation/OnlineSafetyScreen";
 import {titleize} from "underscore.string";
 import {getCategory} from "../constants/categories";
 import Storage from "../storage";
+import {
+    getCurrentPersonalisationPage,
+} from "./personalisation"
+import type { RouterContextObject } from "../contexts/router-context";
 
 export function stateFromLocation(): string {
     const states = [
@@ -37,10 +41,10 @@ export const resetDfvOptions = (): void => {
 
 // eslint-disable-next-line complexity
 export const makeTitle = (
-    title?: string,
-    params: {[string]: string},
-    pageType: Array<string>,
+    title: string,
+    router: $PropertyType<RouterContextObject, 'router'>
 ): string => {
+    const {match: {params, props: {type: pageType}}} = router
 
     const pageTitleArr = [];
 
@@ -58,31 +62,16 @@ export const makeTitle = (
         pageTitleArr.push(title);
     }
 
-    if (
-        pageType?.[1]?.includes("Personalisation") &&
-        (!pageType?.[1]?.includes("Edit") ||
-            pageType?.[1]?.includes("questions"))
-    ) {
-        const personalisation = category?.personalisation.find(
-            cat => cat.defaultProps.name === params.subpage
-        )
-        if (personalisation) {
-            pageTitleArr.push(`(${personalisation.title})`);
-        } else {
-            if (params.subpage === OnlineSafetyScreen.defaultProps.name) {
-                pageTitleArr.push(`(${OnlineSafetyScreen.title})`)
-            } else if (params.subpage === AreYouSafe.defaultProps.name) {
-                pageTitleArr.push(`(${AreYouSafe.title})`)
-            } else {
-                pageTitleArr.push("(Intro)")
-            }
-        }
+    const personalisationPage = getCurrentPersonalisationPage(router);
+
+    if (personalisationPage?.title) {
+        pageTitleArr.push(`(${personalisationPage?.title})`)
     }
 
     // If the current page is either the question summary page
     // or part of that navigation flow (editing answers)
     if (pageType?.[1]?.includes("Edit")) {
-        pageTitleArr.push(" - [selected answers]");
+        pageTitleArr.push("- [selected answers]");
     }
 
     // Returns the title for the search results page
@@ -102,10 +91,10 @@ export const makeTitle = (
         }
     }
 
-    if (!pageTitleArr.length) {
-        return "Ask Izzy"
-    } else {
+    if (pageTitleArr.length) {
         return pageTitleArr.join(" ") + " | Ask Izzy"
+    } else {
+        return "Ask Izzy"
     }
 }
 

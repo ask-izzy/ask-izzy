@@ -64,6 +64,8 @@ class BaseQuestion extends React.Component<
         })
     }
 
+    static title: string
+
     static get summaryLabel(): string {
         return this.defaultProps.question;
     }
@@ -118,7 +120,7 @@ class BaseQuestion extends React.Component<
         } else {
             let answer = storage.getItem(this.defaultProps.name);
 
-            if (typeof answer != "string") {
+            if (typeof answer !== "string") {
                 return "";
             }
 
@@ -219,20 +221,11 @@ class BaseQuestion extends React.Component<
     }
 
     /**
-     * Determines whether or not to show the question.
-     *
-     * @returns {boolean} true if we should show this question.
-     */
-    static showPage(): boolean {
-        return true;
-    }
-
-    /**
      * Determines whether or not to show the question on the summary page.
      *
      * @returns {boolean} true if we should show this on the summary page.
      */
-    static showInSummary(): boolean {
+    static getShouldShowInSummary(): boolean {
         return true;
     }
 
@@ -452,11 +445,7 @@ class BaseQuestion extends React.Component<
                 <FlatButton
                     label={label}
                     className={this.props.multipleChoice ? "" : "text-link"}
-                    onClick={() => {
-                        !this.props.multipleChoice &&
-                            storage.setItem(this.props.name, "(skipped)");
-                        this.props.onDoneTouchTap()
-                    }}
+                    onClick={this.props.onDoneTouchTap.bind(this)}
                 />
             </div>
         )
