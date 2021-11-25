@@ -4,9 +4,7 @@ import * as React from "react";
 import components from "../../components";
 import storage from "../../storage";
 import type {serviceSearchRequest} from "../../iss/serviceSearch";
-import QuestionStepper, {
-    shouldShowQuestionStepper,
-} from "../../components/QuestionStepper";
+import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import ScreenReader from "../../components/ScreenReader";
 import routerContext from "../../contexts/router-context";
@@ -47,7 +45,6 @@ class WhoIsLookingForHelp extends React.Component<
     constructor(props: Object) {
         super(props);
         this.state = {
-            showQuestionStepper: false,
             category: undefined,
         }
     }
@@ -57,9 +54,6 @@ class WhoIsLookingForHelp extends React.Component<
             this.context.router.match.params.page
         )
         this.setState({
-            showQuestionStepper: shouldShowQuestionStepper(
-                category || undefined
-            ),
             category,
         })
     }
@@ -148,33 +142,28 @@ class WhoIsLookingForHelp extends React.Component<
                     infoText={
                         "All of your answers are private and anonymous."
                     }
-                    taperColour={this.state.showQuestionStepper ? "LighterGrey"
-                        : "HeaderBar"}
+                    taperColour={"LighterGrey"}
                     fixedAppBar={true}
                     bannerName={getBannerName(
                         this.state.category,
                         this.props.name
                     )}
                 />
-                {this.state.showQuestionStepper && (
-                    <div className="questionsBar">
-                        <ScreenReader>
-                            <a
-                                href="#mainPageContent"
-                                aria-label={
-                                    "Skip your previously selected " +
-                                    "answers and go straight to the " +
-                                    "options."
-                                }
-                            >
-                                Skip to make your selection
-                            </a>
-                        </ScreenReader>
-                        <QuestionStepper
-                            category={this.state.category}
-                        />
-                    </div>
-                )}
+                <div className="questionsBar">
+                    <ScreenReader>
+                        <a
+                            href="#mainPageContent"
+                            aria-label={
+                                "Skip your previously selected " +
+                                "answers and go straight to the " +
+                                "options."
+                            }
+                        >
+                            Skip to make your selection
+                        </a>
+                    </ScreenReader>
+                    <QuestionStepper />
+                </div>
             </section>
         )
     }

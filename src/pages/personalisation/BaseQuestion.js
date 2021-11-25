@@ -12,9 +12,7 @@ import icons from "../../icons";
 import storage from "../../storage";
 import type {serviceSearchRequest} from "../../iss/serviceSearch";
 import { append, ServiceSearchRequest } from "../../iss/ServiceSearchRequest";
-import QuestionStepper, {
-    shouldShowQuestionStepper,
-} from "../../components/QuestionStepper";
+import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import ScreenReader from "../../components/ScreenReader";
 import {getBannerName} from "../../utils/personalisation"
@@ -43,7 +41,6 @@ class BaseQuestion extends React.Component<
         super(props);
         this.state = {
             selectedAnswer: props.multipleChoice ? new Set() : null,
-            showQuestionStepper: false,
             category: undefined,
             showSkipToChoice: false,
         };
@@ -57,9 +54,6 @@ class BaseQuestion extends React.Component<
             selectedAnswer: this.props.multipleChoice ?
                 new Set(this.constructor.savedAnswer)
                 : null,
-            showQuestionStepper: shouldShowQuestionStepper(
-                category || undefined
-            ),
             category,
         })
     }
@@ -305,10 +299,7 @@ class BaseQuestion extends React.Component<
                                 this.props.byline
                             }
                             fixedAppBar={true}
-                            taperColour={this.state.showQuestionStepper ?
-                                "LighterGrey"
-                                : "HeaderBar"
-                            }
+                            taperColour={"LighterGrey"}
                             bannerName={getBannerName(
                                 this.state.category,
                                 this.props.name
@@ -320,25 +311,21 @@ class BaseQuestion extends React.Component<
                                 },
                             }}
                         />
-                        {this.state.showQuestionStepper && (
-                            <div className="questionsBar">
-                                <ScreenReader>
-                                    <a
-                                        href="#mainPageContent"
-                                        aria-label={
-                                            "Skip your previously selected " +
-                                            "answers and go straight to the " +
-                                            "options."
-                                        }
-                                    >
-                                        Skip to make your selection
-                                    </a>
-                                </ScreenReader>
-                                <QuestionStepper
-                                    category={this.state.category}
-                                />
-                            </div>
-                        )}
+                        <div className="questionsBar">
+                            <ScreenReader>
+                                <a
+                                    href="#mainPageContent"
+                                    aria-label={
+                                        "Skip your previously selected " +
+                                        "answers and go straight to the " +
+                                        "options."
+                                    }
+                                >
+                                    Skip to make your selection
+                                </a>
+                            </ScreenReader>
+                            <QuestionStepper />
+                        </div>
                     </section>
                 </div>
                 <main

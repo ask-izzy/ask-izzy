@@ -28,10 +28,7 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
         heading: "Worried about your behaviour?",
         showBaseTextBox: true,
         baseTextBoxComponent: <DomesticViolenceLink/>,
-        noQuestionStepperBreadcrumb: true,
     };
-
-    static summaryLabel = "Worried about your behaviour?";
 
     static getShouldIncludePage(): boolean {
         return Boolean(

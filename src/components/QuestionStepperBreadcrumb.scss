@@ -35,6 +35,15 @@
         }
     }
 
+    a.answer {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
     .appendedContent {
         flex: 1 1 min-content;
     }

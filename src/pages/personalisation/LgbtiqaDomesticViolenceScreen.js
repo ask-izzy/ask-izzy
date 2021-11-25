@@ -22,21 +22,7 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
         heading: "LGBTIQA+",
         showBaseTextBox: true,
         baseTextBoxComponent: <DomesticViolenceLink/>,
-        noQuestionStepperBreadcrumb: true,
     };
-
-    static summaryLabel = "LGBTIQA+";
-
-    static prettyPrintAnswer(answer: string): string {
-        switch (answer) {
-        case "true":
-            return "Safe";
-        case "false":
-            return "Not safe";
-        default:
-            return answer;
-        }
-    }
 
     static getShouldIncludePage(): boolean {
         return Boolean(

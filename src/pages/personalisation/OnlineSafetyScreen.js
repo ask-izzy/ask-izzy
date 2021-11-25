@@ -20,10 +20,7 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
         heading: "Everyone has the right to be safe.",
         showBaseTextBox: true,
         baseTextBoxComponent: <OnlineSafetyLink/>,
-        noQuestionStepperBreadcrumb: true,
     };
-
-    static summaryLabel = "Online safety screen";
 
     static getShouldIncludePage(): boolean {
         return !["", "Yes", "(skipped)"]

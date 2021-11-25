@@ -88,6 +88,7 @@ function HomePage(): ReactNode {
                 {location &&
                     <QuestionStepper
                         showQuestionIcons={true}
+                        hideStepInfo={true}
                         showClearLocation={true}
                         onClearLocation={() =>
                             setLocation(null)

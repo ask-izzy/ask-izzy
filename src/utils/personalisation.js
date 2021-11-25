@@ -34,14 +34,16 @@ export type PersonalisationQuestionPageDefaultProps = {|
     oldAnswers?: {[string]: string},
     showDVLinkBar?: boolean,
     textDVLinkBar?: ReactNode,
-    noQuestionStepperBreadcrumb?: boolean
+    noQuestionStepperBreadcrumb?: boolean,
+    noQuestionStepperStep?: boolean,
 |}
 
 export type PersonalisationNonQuestionPageDefaultProps = {|
     name: string,
     byline?: string,
     info?: string,
-    noQuestionStepperBreadcrumb?: boolean
+    noQuestionStepperBreadcrumb?: boolean,
+    noQuestionStepperStep?: boolean,
 |}
 
 export type PersonalisationPageDefaultProps =
@@ -54,7 +56,6 @@ export type PersonalisationPageProps = {|
 |}
 
 export type PersonalisationPageState = {
-    showQuestionStepper: boolean,
     category: ?Category,
 }
 

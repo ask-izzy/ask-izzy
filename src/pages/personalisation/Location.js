@@ -15,9 +15,7 @@ import type {areaLocation} from "../../iss/locationSearch";
 import type { serviceSearchResults} from "../../iss/serviceSearch";
 import type { serviceSearchRequest } from "../../iss/serviceSearch";
 import {crisisResults, nonCrisisResults} from "../../iss/crisisService"
-import QuestionStepper, {
-    shouldShowQuestionStepper,
-} from "../../components/QuestionStepper";
+import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import WithStickyFooter from "../../components/WithStickyFooter";
 import ScreenReader from "../../components/ScreenReader";
@@ -74,7 +72,6 @@ class Location extends React.Component<
             selectedLocation: null,
             autocompletions: [],
             nextDisabled: true,
-            showQuestionStepper: false,
             category: undefined,
         };
     }
@@ -99,9 +96,6 @@ class Location extends React.Component<
             this.context.router.match.params.page
         )
         this.setState({
-            showQuestionStepper: shouldShowQuestionStepper(
-                category || undefined
-            ),
             category,
         })
     }
@@ -338,9 +332,7 @@ class Location extends React.Component<
                         secondaryText={
                             "Find services near you"
                         }
-                        taperColour={this.state.showQuestionStepper ?
-                            "LighterGrey"
-                            : "HeaderBar"}
+                        taperColour={"LighterGrey"}
                         fixedAppBar={true}
                         bannerName={getBannerName(
                             this.state.category,
@@ -353,25 +345,21 @@ class Location extends React.Component<
                             },
                         }}
                     />
-                    {this.state.showQuestionStepper && (
-                        <div className="questionsBar">
-                            <ScreenReader>
-                                <a
-                                    href="#mainPageContent"
-                                    aria-label={
-                                        "Skip your previously selected " +
-                                        "answers and go straight to the " +
-                                        "options."
-                                    }
-                                >
-                                    Skip to make your selection
-                                </a>
-                            </ScreenReader>
-                            <QuestionStepper
-                                category={this.state.category}
-                            />
-                        </div>
-                    )}
+                    <div className="questionsBar">
+                        <ScreenReader>
+                            <a
+                                href="#mainPageContent"
+                                aria-label={
+                                    "Skip your previously selected " +
+                                    "answers and go straight to the " +
+                                    "options."
+                                }
+                            >
+                                Skip to make your selection
+                            </a>
+                        </ScreenReader>
+                        <QuestionStepper />
+                    </div>
                 </section>
             </div>
             <main
