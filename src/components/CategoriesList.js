@@ -7,7 +7,6 @@ import categories from "../constants/categories";
 import CategoryListItem from "./CategoryListItem";
 
 class CategoriesList extends React.Component<{}, void> {
-    static sampleProps: any = {default: {}};
 
     render(): ReactElement<"div"> {
 

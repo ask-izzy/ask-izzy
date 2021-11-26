@@ -16,12 +16,6 @@ type Props = $Diff<
 > & PropsRest
 
 export default class LinkListItem extends React.Component<Props, void> {
-    static sampleProps: any = {
-        default: {
-            to: "example.com",
-            ...ListItem.sampleProps,
-        },
-    };
 
     render(): ReactNode {
         const {

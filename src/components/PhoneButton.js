@@ -19,12 +19,6 @@ type Props = phone & {
 }
 
 export default class PhoneButton extends React.Component<Props, void> {
-    static sampleProps: any = {default: {
-        "comment": "Here is a phone number with a long comment" +
-            ", like, a really long comment",
-        "kind": "phone",
-        "number": "(03) 3333 3333",
-    }};
 
     get href(): string {
         return "tel:" + this.props.number.replace(/[^0-9+]/g, "");

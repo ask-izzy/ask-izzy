@@ -13,7 +13,6 @@ type Props = {
     analyticsEventDetails?: AnalyticsEvent
 }
 export default class Web extends React.Component<Props, void> {
-    static sampleProps: any = {default: {url: "https://ExampleDomain.com/landingPage"}};
 
     recordClick(): void {
         gtm.emit({

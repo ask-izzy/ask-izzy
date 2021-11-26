@@ -13,9 +13,6 @@ class SvgIcon extends React.Component<{
         viewBox: "0 0 24 24",
     };
 
-    static sampleProps: any = {
-    };
-
     render(): ReactElement<"svg"> {
         const {
             children,

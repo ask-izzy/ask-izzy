@@ -1,5 +1,6 @@
 /* @flow */
 
+
 import type {Element as ReactElement} from "React";
 import React from "react";
 import moment from "moment-timezone";
@@ -20,6 +21,7 @@ const sampleTime = moment("2015-09-09 1pm", "YYYY-MM-DD ha");
 /*
  * Used to generate sample datum for the Style Guide
  */
+/* eslint-disable no-unused-vars */
 function fixture(
     nowOpen: ?boolean,
     openingHours: Array<openingHoursType>,
@@ -53,56 +55,6 @@ type Props = {
 
 // eslint-disable-next-line max-len
 export default class CollapsedOpeningTimes extends React.Component<Props, void> {
-    static sampleProps: any = {
-        "between Twice in one day (@1pm wed)": fixture(false, [{
-            day: "Wednesday",
-            open: "09:00:00",
-            close: "11:00:00",
-        }, {
-            day: "Wednesday",
-            open: "16:00:00",
-            close: "18:00:00",
-        }]),
-        "before Twice in one day (@1pm wed)": fixture(false, [{
-            day: "Wednesday",
-            open: "13:30:00",
-            close: "14:00:00",
-        }, {
-            day: "Wednesday",
-            open: "16:00:00",
-            close: "18:00:00",
-        }]),
-        "after Twice in one day (@1pm wed)": fixture(false, [{
-            day: "Wednesday",
-            open: "01:00:00",
-            close: "02:00:00",
-        }, {
-            day: "Wednesday",
-            open: "03:00:00",
-            close: "04:00:00",
-        }]),
-        "With many times": fixture(true, [{
-            day: "Wednesday",
-            open: "01:00:00",
-            close: "02:00:00",
-        }, {
-            day: "Thursday",
-            open: "03:00:00",
-            close: "04:00:00",
-        }, {
-            day: "Friday",
-            open: "03:00:00",
-            close: "04:00:00",
-        }, {
-            day: "Monday",
-            open: "03:00:00",
-            close: "04:00:00",
-        }, {
-            day: "Tuesday",
-            open: "03:00:00",
-            close: "04:00:00",
-        }], sampleTime, false),
-    };
 
     recordExpandOpeningTimes(): void {
         gtm.emit({

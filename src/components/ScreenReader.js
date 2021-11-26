@@ -6,11 +6,6 @@ class ScreenReader extends React.Component<{
     children?: any,
     ariaLabel?: ?string,
 }, void> {
-    static sampleProps: any = {default: {
-        children: (
-            <div>Screen reader content</div>
-        ),
-    }};
 
     render(): ReactElement<"div"> {
         return (

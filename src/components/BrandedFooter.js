@@ -11,9 +11,6 @@ import ScreenReader from "./ScreenReader";
 
 export default class BrandedFooter
     extends React.Component<{}, void> {
-    static sampleProps: any = {
-        default: {},
-    };
 
     /* Begin hack for dealing with multiple columns
      *

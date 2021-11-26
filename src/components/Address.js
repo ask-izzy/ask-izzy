@@ -16,32 +16,6 @@ class Address extends React.Component<Props, void> {
         withSpacer: false,
     };
 
-    static sampleProps: any = {
-        complex: {
-            location: new AddressLocation({
-                "building": "Hamy building",
-                "flat_unit": "Room 35",
-                "level": "Level 3",
-                "postcode": "3121",
-                "state": "VIC",
-                "street_name": "Elizabeth",
-                "street_number": "33",
-                "street_suffix": "",
-                "street_type": "St",
-                "suburb": "RICHMOND",
-                "point": {},
-            }),
-        },
-        hidden: {
-            location: new AddressLocation({
-                "postcode": "3121",
-                "state": "VIC",
-                "suburb": "RICHMOND",
-                "point": undefined,
-            }),
-        },
-    };
-
     render(): ReactNode {
         let location = this.props.location;
 

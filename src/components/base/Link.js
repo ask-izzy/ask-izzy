@@ -25,13 +25,6 @@ type State = {
 }
 
 export default class Link extends React.Component<Props, State> {
-    static sampleProps: any = {
-        default: {
-            to: "/",
-            children: "Homepage",
-        },
-    };
-
     static contextType: any = routerContext;
 
     constructor(props: Object) {

@@ -18,15 +18,6 @@ const PERSONALISATIONS_TO_CLEAR = [
 ]
 
 class CategoryListItem extends React.Component<Props, void> {
-    static sampleProps: any = {default: {
-        category: {
-            key: "material-aid",
-            name: "Material Aid",
-            byline: "Clothes and other goods",
-            icon: icons.Things,
-        },
-    }};
-
     /**
      * This is to prevent confusion when going between categories which share,
      * the same questions
