@@ -14,6 +14,7 @@ import {
 } from "./storage/polyfill";
 
 import * as gtm from "./google-tag-manager";
+import type {AnalyticsEvent} from "./google-tag-manager";
 
 
 export type Geolocation = {
@@ -28,7 +29,10 @@ const Storage = {
         return sessionStore.getItem("search") || "";
     },
 
-    setSearch(search: string): void {
+    setSearch(
+        search: string,
+        analyticsEventDetails?: AnalyticsEvent
+    ): void {
         sessionStore.setItem("search", search);
 
         gtm.emit({
@@ -36,7 +40,9 @@ const Storage = {
             eventCat: "Input submitted",
             eventAction: "Text search",
             eventLabel: search,
+            eventValue: 1,
             sendDirectlyToGA: true,
+            ...analyticsEventDetails,
         });
     },
 
