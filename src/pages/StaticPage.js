@@ -22,11 +22,6 @@ export default class StaticPage extends React.Component<Props> {
         className: "",
     };
 
-    static sampleProps: any = {
-        title: "Food Info",
-        bannerName: "food",
-    };
-
     static contextType: any = routerContext;
 
     render(): React.Element<"div"> {
