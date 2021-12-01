@@ -24,6 +24,7 @@ import type {
     PersonalisationPageState,
     PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation";
+import SupportSearchBar from "../../components/SupportSearchBar";
 
 export type State = {
     ...PersonalisationPageState,
@@ -293,12 +294,7 @@ class BaseQuestion extends React.Component<
         return (
             <div
                 className={
-                    classnames(
-                        this.props.multipleChoice ?
-                            "BaseMultiQuestion"
-                            : "BaseQuestion",
-                        this.props.classNames
-                    )
+                    classnames("BaseQuestion", this.props.classNames)
                 }
             >
                 <div
@@ -390,6 +386,7 @@ class BaseQuestion extends React.Component<
                         Boolean(this.props.baseTextBoxComponent) &&
                         this.props.baseTextBoxComponent
                     }
+                    {this.renderSearchBar()}
                 </main>
             </div>
         );
@@ -476,6 +473,13 @@ class BaseQuestion extends React.Component<
                 />
             </div>
         )
+    }
+
+    renderSearchBar(): ReactNode {
+        if (this.props.showSupportSearchBar) {
+            return <SupportSearchBar />
+        }
+        return null
     }
 }
 

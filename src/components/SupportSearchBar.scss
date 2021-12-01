@@ -1,0 +1,73 @@
+@use '../styles/mixins/colours';
+
+.content-container {
+    @include colours.define(
+        'colour-primary',
+        'input-footer-container',
+        'raw-colour-rich-purple'
+    );
+    @include colours.define(
+        'colour-primary-tint-1',
+        'input-footer-container',
+        colours.lighten(
+            'colour-primary',
+            'input-footer-container',
+            -34%
+        )
+    );
+    @include colours.define(
+        'colour-primary-tint-2',
+        'input-footer-container',
+        colours.lighten(
+            'colour-primary',
+            'input-footer-container',
+            -60%
+        )
+    );
+
+    background-color: #{colours.get-static('colour-primary-tint-1', 'input-footer-container')};
+    background-color: var(--colour-primary-tint-1);
+    flex-grow: 1;
+
+    .search-bar-container {
+        flex-grow: 1;
+        padding: 20px;
+        color: #{colours.get-static('colour-text-light', 'input-footer-container')};
+        color: var(--colour-text-light);
+        text-align: center;
+
+        .SearchBar {
+            flex-direction: column;
+            row-gap: 15px;
+
+            input {
+                width: 330px;
+            }
+
+            .searchButton {
+                padding: 0 30px;
+            }
+        }
+
+        .Input input {
+            border: #{colours.get-static('colour-border-standard-callout')} 1px solid;
+            border: var(--colour-border-standard-callout) 1px solid;
+        }
+    }
+
+    /* update hack too */
+    @media only screen and (max-width: 550px) {
+        .search-container {
+            padding-top: 0; /* needed for IE */
+            padding-top: unset; // sass-lint:disable-line no-duplicate-properties
+            text-align: center;
+        }
+    }
+
+    /* hack for IE10+ specific styles go here */
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        .Input {
+            margin-bottom: 15px;
+        }
+    }
+}

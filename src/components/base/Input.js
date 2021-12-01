@@ -19,6 +19,7 @@ type Props = {
     value: string,
     onChange: (string) => void,
     icon?: ReactNode,
+    iconPosition?: "left" | "right",
     showClearButton?: boolean,
     autocompleteValues?: Array<autocompleteObjValue> | Array<string>,
     onKeyDown?: (SyntheticKeyboardEvent<HTMLInputElement>) => void,
@@ -33,6 +34,7 @@ function Input({
     className,
     value,
     icon,
+    iconPosition = "left",
     showClearButton = false,
     autocompleteValues,
     ...otherProps
@@ -107,22 +109,33 @@ function Input({
 
     const isAutocompleteSuggestions = downshiftCombobox?.isOpen &&
         autocompleteValues?.length
-    return (
-        <div
-            className={cnx("Input", className, {isAutocompleteSuggestions})}
-            {...downshiftCombobox?.getComboboxProps()}
-        >
-            {icon && <div className="icon">
-                {icon}
-            </div>}
-            <input
-                {...otherInputProps}
-                className={cnx({
-                    "includes-icon": icon,
-                    "includes-clear": showClearButton,
-                })}
-            />
-            {downshiftCombobox &&
+
+    function renderClearBtn() {
+        if (showClearButton && value) {
+            return (
+                <Button
+                    className={cnx(
+                        "clear-text",
+                        {
+                            "iconLeft": (iconPosition === "left" && icon),
+                            "iconRight": (iconPosition === "right" && icon),
+                        }
+                    )}
+                    aria-label="Clear entered search text"
+                    onClick={() => {
+                        otherProps.onChange("")
+                        inputRef.current?.focus()
+                    }}
+                >
+                    <span className="text">Clear</span> &times;
+                </Button>
+            )
+        }
+    }
+
+    function renderAutoCompleteList() {
+        if (downshiftCombobox) {
+            return (
                 <ul
                     {...downshiftCombobox?.getMenuProps()}
                     className="autocompleteList"
@@ -148,19 +161,42 @@ function Input({
                         </li>
                     ))}
                 </ul>
-            }
-            {showClearButton && value &&
-                <Button
-                    className="clear-text"
-                    aria-label="Clear entered search text"
-                    onClick={() => {
-                        otherProps.onChange("")
-                        inputRef.current?.focus()
-                    }}
+            )
+        }
+    }
+
+    return (
+        <div
+            className={cnx(
+                "Input",
+                className,
+                {isAutocompleteSuggestions},
+            )}
+            {...downshiftCombobox?.getComboboxProps()}
+        >
+            {icon &&
+                <div className={cnx(
+                    "icon",
+                    {
+                        "iconLeft": (iconPosition === "left"),
+                        "iconRight": (iconPosition === "right"),
+                    }
+                )}
                 >
-                    <span className="text">Clear</span> &times;
-                </Button>
+                    {icon}
+                </div>
             }
+            <input
+                {...otherInputProps}
+                className={cnx({
+                    "includes-icon": icon,
+                    "includes-clear": showClearButton,
+                    "iconLeft": (iconPosition === "left" && icon),
+                    "iconRight": (iconPosition === "right" && icon),
+                })}
+            />
+            {renderAutoCompleteList()}
+            {renderClearBtn()}
         </div>
     )
 }

@@ -19,11 +19,18 @@
     > .icon {
         position: absolute;
         top: 0;
-        left: 0;
         height: 100%;
         max-width: 1.5em;
         display: flex;
         pointer-events: none;
+
+        &.iconLeft {
+            left: 0;
+        }
+
+        &.iconRight {
+            right: 0;
+        }
 
         /* Necessary to override the kind of mess way we deal with icon sizes */
         > .icon,
@@ -46,11 +53,22 @@
         height: 100%;
 
         &.includes-icon {
-            padding-left: 1.5em;
+            &.iconLeft {
+                padding-left: 2.2em;
+            }
+
+            &.iconRight {
+                padding-right: 2em;
+                padding-left: 0.8em;
+            }
         }
 
         &.includes-clear {
-            padding-right: 1.5em;
+            padding-right: 2.2em;
+
+            &.iconRight {
+                padding-right: 3em;
+            }
         }
     }
 
@@ -68,6 +86,10 @@
 
         &:not(:focus) .text {
             display: none;
+        }
+
+        &.iconRight {
+            right: 25px;
         }
     }
 

@@ -27,6 +27,7 @@ export default class CounsellingSubcategories extends BaseQuestion {
             "Find online counselling": append("online"),
             "Other": append(""),
         },
+        showSupportSearchBar: true,
     };
 
     componentDidMount(): void {

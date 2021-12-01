@@ -26,6 +26,7 @@ export default class LegalSubcategories extends BaseQuestion {
                 .remove("-centrelink -immigration -(hire of facilities)")
                 .remove("(legal aid)").append("victims of crime -police"),
         },
+        showSupportSearchBar: true,
     };
 
     componentDidMount(): void {

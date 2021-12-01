@@ -25,6 +25,7 @@ export default class MoneySubcategories extends BaseQuestion {
                 .append("financial counselling")
                 .append("name:\"financial counselling\""),
         },
+        showSupportSearchBar: true,
     };
 
     static prettyPrintAnswer(answer: string): string {

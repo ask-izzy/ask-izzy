@@ -18,5 +18,6 @@ export default class JobSubcategories extends BaseQuestion {
                 .remove({service_type: ["employment"]})
                 .append("volunteering"),
         },
+        showSupportSearchBar: true,
     };
 }

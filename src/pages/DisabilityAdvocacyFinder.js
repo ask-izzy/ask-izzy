@@ -83,9 +83,11 @@ function DisabilityAdvocacyFinder(): ReactNode {
                     <SearchBar
                         placeholder="Search advocate type"
                         onSubmit={(searchText) => {
-                            router.navigate(
-                                `/search/${encodeURIComponent(searchText)}`
-                            )
+                            if (searchText) {
+                                router.navigate(
+                                    `/search/${encodeURIComponent(searchText)}`
+                                )
+                            }
                         }}
                         onChange={updateAutocomplete}
                         autocompleteValues={autocompleteValues}

@@ -34,6 +34,7 @@ export default class EverydayThingsSubcategories extends BaseQuestion {
                 .append("-(animal control)")
                 .append("-effectiveness"),
         },
+        showSupportSearchBar: true,
     };
 
     static prettyPrintAnswer(answer: string): string {
