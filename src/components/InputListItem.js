@@ -7,7 +7,7 @@ import ListItem from "./ListItem";
 import Button from "./base/Button";
 import type { Props as ListItemProps } from "./ListItem";
 import type {AnalyticsEvent} from "../google-tag-manager";
-import icons from "../icons";
+import Chevron from "../icons/chevron.svg";
 
 type Props = {
     type?: "checkbox" | "radio",
@@ -44,7 +44,7 @@ function InputListItem({
             role={type || "button"}
             aria-label={label}
             tabIndex={0}
-            rightIcon={!type ? rightIcon || <icons.Chevron />
+            rightIcon={!type ? rightIcon || <Chevron />
                 : checked ? checkedIcon : uncheckedIcon
             }
             primaryText={primaryText}

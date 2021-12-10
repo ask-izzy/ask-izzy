@@ -1,5 +1,20 @@
 /* @flow */
-import icons from "../icons";
+import House from "../icons/house.svg";
+import Food from "../icons/food.svg";
+import Things from "../icons/things.svg";
+import EscapeViolence from "../icons/escape-violence.svg";
+import Health from "../icons/health.svg";
+import Centrelink from "../icons/centrelink.svg";
+import Money from "../icons/money.svg";
+import Support from "../icons/support.svg";
+import Legal from "../icons/legal.svg";
+import Addiction from "../icons/addiction.svg";
+import Skills from "../icons/skills.svg";
+import Job from "../icons/job.svg";
+import Facilities from "../icons/facilities.svg";
+import Entertainment from "../icons/entertainment.svg";
+import Tech from "../icons/tech.svg";
+import Advocacy from "../icons/advocacy.svg";
 
 import Category from "./Category"
 
@@ -9,7 +24,7 @@ const categories = [
     (new Category({
         name: "Housing",
         byline: "A place to stay.",
-        icon: icons.House,
+        icon: House,
         search: {
             q: "housing -(coordinating bodies) -(respite care) " +
                 "-(housing information) -hef " +
@@ -30,7 +45,7 @@ const categories = [
     (new Category({
         name: "Food",
         byline: "Something to eat.",
-        icon: icons.Food,
+        icon: Food,
         search: {
             q: "meals -(coordinating bodies)" +
                 " -(home care) -(food safety)" +
@@ -45,7 +60,7 @@ const categories = [
     (new Category({
         name: "Everyday things",
         byline: "Swags, clothes, food vouchers etc.",
-        icon: icons.Things,
+        icon: Things,
         search: {
             q: "material aid -(coordinating bodies)",
             service_type: ["material aid"],
@@ -58,7 +73,7 @@ const categories = [
     (new Category({
         name: "Domestic & family violence help",
         byline: "Scared of partner or family member.",
-        icon: icons.EscapeViolence,
+        icon: EscapeViolence,
         search: {
             q: "(family violence) -(coordinating bodies) -(fire-fighting)",
         },
@@ -76,7 +91,7 @@ const categories = [
     (new Category({
         name: "Health",
         byline: "Physical, mental, emotional.",
-        icon: icons.Health,
+        icon: Health,
         search: {
             q: "(community health) -(coordinating bodies)",
             minimum_should_match: "30%",
@@ -93,7 +108,7 @@ const categories = [
     (new Category({
         name: "Centrelink",
         byline: "Access to services.",
-        icon: icons.Centrelink,
+        icon: Centrelink,
         search: {
             q: "\"centrelink\"",
             name: "\"centrelink\"",
@@ -105,7 +120,7 @@ const categories = [
     (new Category({
         name: "Money help",
         byline: "Emergency funds, bills etc.",
-        icon: icons.Money,
+        icon: Money,
         search: {
             q: "financial aid -(coordinating bodies) -grants -heritage",
         },
@@ -117,7 +132,7 @@ const categories = [
     (new Category({
         name: "Support & counselling",
         byline: "Relationships, gambling & LGBTIQA+.",
-        icon: icons.Support,
+        icon: Support,
         search: {
             q: "counselling",
             minimum_should_match: "1",
@@ -133,7 +148,7 @@ const categories = [
     (new Category({
         name: "Legal",
         byline: "Police, law & fines.",
-        icon: icons.Legal,
+        icon: Legal,
         search: {
             q: "legal (legal aid) -(coordinating bodies) -permits " +
                 "-ceremonies -making -checks -electoral -taxation " +
@@ -150,7 +165,7 @@ const categories = [
     (new Category({
         name: "Drugs & alcohol",
         byline: "Support & assistance.",
-        icon: icons.Addiction,
+        icon: Addiction,
         search: {
             q: "substance abuse -(coordinating bodies)" +
                 " -(registered training)",
@@ -165,7 +180,7 @@ const categories = [
     (new Category({
         name: "Life skills & education",
         byline: "Everyday skills & training.",
-        icon: icons.Skills,
+        icon: Skills,
         search: {
             q: "life skills education -(coordinating bodies)" +
                 " -chsp -hacc",
@@ -179,7 +194,7 @@ const categories = [
     (new Category({
         name: "Finding work",
         byline: "Earning & volunteering.",
-        icon: icons.Job,
+        icon: Job,
         search: {
             q: "employment -(coordinating bodies)",
             service_type: ["employment"],
@@ -192,7 +207,7 @@ const categories = [
     (new Category({
         name: "Facilities",
         byline: "Toilets.",
-        icon: icons.Facilities,
+        icon: Facilities,
         search: {
             q: "public facilities" +
                 " -(coordinating bodies) -(hire of facilities)" +
@@ -205,7 +220,7 @@ const categories = [
     (new Category({
         name: "Something to do",
         byline: "Libraries, Community Hubs etc.",
-        icon: icons.Entertainment,
+        icon: Entertainment,
         search: {
             q: "recreation libraries pools -(coordinating bodies) " +
                 "-physiology -permit -hire -grants " +
@@ -219,7 +234,7 @@ const categories = [
     (new Category({
         name: "Technology",
         byline: "Wifi, charging etc.",
-        icon: icons.Tech,
+        icon: Tech,
         search: {
             q: "wifi internet computer",
         },
@@ -230,7 +245,7 @@ const categories = [
     (new Category({
         name: "Advocacy",
         byline: "Complaints and advice.",
-        icon: icons.Advocacy,
+        icon: Advocacy,
         search: {
             q: "consumer issues mediation discrimination " +
                 "disputes advocacy -research -(coordinating bodies)",

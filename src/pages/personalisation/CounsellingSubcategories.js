@@ -8,7 +8,7 @@ import type {
 import BaseQuestion from "./BaseQuestion";
 import { append, remove } from "../../iss/ServiceSearchRequest";
 import { resetDfvOptions } from "../../utils/domesticViolence";
-import icons from "../../icons";
+import DemographicLgbtiq from "../../icons/demographic-lgbtiq.svg";
 
 export default class CounsellingSubcategories extends BaseQuestion {
     static title: string = "Counselling services";
@@ -41,7 +41,7 @@ export default class CounsellingSubcategories extends BaseQuestion {
     static prettyPrintAnswer(answer: string): ReactNode {
         switch (answer) {
         case "Sexual identity (LGBTIQA+)":
-            return <icons.DemographicLgbtiq />;
+            return <DemographicLgbtiq />;
         case "Scared in my relationship":
             return "Family or domestic violence";
         case "Find online counselling":

@@ -4,15 +4,26 @@ import type { ElementConfig as ReactElementConfig } from "react"
 import BaseQuestion from "./BaseQuestion";
 
 import { append } from "../../iss/ServiceSearchRequest";
-import icons from "../../icons";
+import DemographicFamilyViolence from "../../icons/demographic-family-violence.svg";
+import DemographicAtsi from "../../icons/demographic-atsi.svg";
+import DemographicChildren from "../../icons/demographic-children.svg";
+import DemographicCouple from "../../icons/demographic-couple.svg";
+import Mental from "../../icons/mental.svg";
+import DemographicParole from "../../icons/demographic-parole.svg";
+import DemographicDisability from "../../icons/demographic-disability.svg";
+import DemographicVeteran from "../../icons/demographic-veteran.svg";
+import DemographicRecentlyArrived from "../../icons/demographic-recently-arrived.svg";
+import DemographicPets from "../../icons/demographic-pets.svg";
+import AboriginalFlag from "../../icons/aboriginal-flag.svg";
+import TorresStraitIslandersFlag from "../../icons/torres-strait-islanders-flag.svg";
 import { resetDfvOptions } from "../../utils/domesticViolence";
 import * as React from "react";
 import type {Node as ReactNode} from "react";
 
 const ATSI_BREADCRUMB_ICON = (
     <span>
-        <icons.AboriginalFlag/>
-        <icons.TorresStraitIslandersFlag />
+        <AboriginalFlag/>
+        <TorresStraitIslandersFlag />
     </span>
 )
 
@@ -42,16 +53,16 @@ export default class Demographics extends BaseQuestion {
                 .append("-effectiveness"),
         },
         icons: {
-            "Escaping family violence": icons.DemographicFamilyViolence,
-            "Aboriginal and/or Torres Strait Islander": icons.DemographicAtsi,
-            "Family with children": icons.DemographicChildren,
-            "Couples": icons.DemographicCouple,
-            "Mental or emotional difficulties": icons.Mental,
-            "Parole / recently released": icons.DemographicParole,
-            "Have a disability": icons.DemographicDisability,
-            "Veteran": icons.DemographicVeteran,
-            "Person seeking asylum": icons.DemographicRecentlyArrived,
-            "Have pets": icons.DemographicPets,
+            "Escaping family violence": DemographicFamilyViolence,
+            "Aboriginal and/or Torres Strait Islander": DemographicAtsi,
+            "Family with children": DemographicChildren,
+            "Couples": DemographicCouple,
+            "Mental or emotional difficulties": Mental,
+            "Parole / recently released": DemographicParole,
+            "Have a disability": DemographicDisability,
+            "Veteran": DemographicVeteran,
+            "Person seeking asylum": DemographicRecentlyArrived,
+            "Have pets": DemographicPets,
         },
         oldAnswers: {
             "Indigenous": "Aboriginal and/or Torres Strait Islander",

@@ -4,7 +4,10 @@ import type {Element as ReactElement} from "react"
 import React, {useEffect, useState} from "react";
 import storage from "../storage";
 import GeolocationButton from "./GeolocationButton";
-import icons from "../icons";
+import Walk from "../icons/walk.svg";
+import Tram from "../icons/tram.svg";
+import Car from "../icons/car.svg";
+import Chevron from "../icons/chevron.svg";
 import {MobileDetect} from "../effects/MobileDetect";
 import useTravelTimesUpdater from "../hooks/useTravelTimesUpdater"
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
@@ -48,9 +51,9 @@ function GeolocationButtonForTravelTimes({
             <div className={`explainer ${collapsed ? "collapsed" : ""}`}>
                 {(!isSmallMobileDevice || !collapsed) &&
                 <span className="explainerIcons">
-                    <icons.Walk/>
-                    <icons.Tram/>
-                    <icons.Car/>
+                    <Walk/>
+                    <Tram/>
+                    <Car/>
                 </span>}
                 {collapsed && (isMobile || isSmallMobileDevice) ?
                     "See estimated travel times?"
@@ -90,7 +93,7 @@ function GeolocationButtonForTravelTimes({
                          `get travel times section`}
                 >
                     <div className={`plus ${!collapsed ? "close" : ""}`}>
-                        <icons.Chevron/>
+                        <Chevron/>
                     </div>
                 </Button>
                 {explainerMessage()}

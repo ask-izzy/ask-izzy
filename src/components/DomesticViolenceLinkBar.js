@@ -3,7 +3,8 @@
 import type {Element as ReactElement} from "React";
 import React from "react";
 
-import icons from "../icons";
+import Book from "../icons/book.svg";
+import Chevron from "../icons/chevron.svg";
 import routerContext from "../contexts/router-context";
 import Link from "./base/Link"
 
@@ -21,7 +22,7 @@ export default class DomesticViolenceLinkBar extends React.Component<{}, void> {
                         className="leftIcon"
                         aria-hidden="false"
                     >
-                        <icons.Book />
+                        <Book />
                     </div>
                     <div className="primaryText">
                         Read more about family and domestic violence.
@@ -30,7 +31,7 @@ export default class DomesticViolenceLinkBar extends React.Component<{}, void> {
                         className="rightIcon"
                         aria-hidden="false"
                     >
-                        <icons.Chevron />
+                        <Chevron />
                     </div>
                 </div>
             </Link>

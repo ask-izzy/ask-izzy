@@ -3,7 +3,8 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 import LinkListItem from "./LinkListItem";
-import icons from "../icons";
+import House from "../icons/house.svg";
+import Chevron from "../icons/chevron.svg";
 import type Category from "../constants/Category";
 import Storage from "../storage";
 
@@ -36,7 +37,7 @@ class CategoryListItem extends React.Component<Props, void> {
     }
 
     render(): ReactNode {
-        let Icon = this.props.category.icon || icons.House;
+        let Icon = this.props.category.icon || House;
 
         return (
             <LinkListItem
@@ -48,7 +49,7 @@ class CategoryListItem extends React.Component<Props, void> {
                 aria-label={`${this.props.category.name}.
                 ${this.props.category.byline}`}
                 onClick={this.clearAreYouSafe}
-                rightIcon={<icons.Chevron />}
+                rightIcon={<Chevron />}
                 primaryText={this.props.category.name}
                 secondaryText={this.props.category.byline}
                 analyticsEvent={{

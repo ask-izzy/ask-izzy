@@ -4,7 +4,10 @@ import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 import classnames from "classnames";
 
-import icons from "../icons";
+import Tram from "../icons/tram.svg";
+import Car from "../icons/car.svg";
+import Walk from "../icons/walk.svg";
+import ExternalLink from "../icons/external-link.svg";
 import Spacer from "./Spacer";
 import AddressLocation from "../iss/AddressLocation";
 import type {travelTime} from "../iss/general"
@@ -73,21 +76,21 @@ function TransportTime({
 
             if (travel.mode === "TRANSIT") {
                 icon = (
-                    <icons.Tram
+                    <Tram
                         className="ColoredIcon"
                     />
                 );
                 method = (" transport");
             } else if (travel.mode === "DRIVING") {
                 icon = (
-                    <icons.Car
+                    <Car
                         className="ColoredIcon"
                     />
                 );
                 method = (" drive");
             } else {
                 icon = (
-                    <icons.Walk
+                    <Walk
                         className="ColoredIcon"
                     />
                 );

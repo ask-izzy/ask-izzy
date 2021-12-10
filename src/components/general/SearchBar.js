@@ -8,9 +8,9 @@ import classnames from "classnames";
 
 import Input from "../base/Input";
 import FlatButton from "../FlatButton";
-import * as gtm from "../../google-tag-manager"
-import type {AnalyticsEvent} from "../../google-tag-manager"
-import SearchIcon from "../../icons/Search"
+import * as gtm from "../../google-tag-manager";
+import type {AnalyticsEvent} from "../../google-tag-manager";
+import SearchIcon from "../../icons/search.svg";
 
 type Props = {
     className?: string,

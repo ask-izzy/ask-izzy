@@ -7,7 +7,10 @@ import debounce from "just-debounce-it";
 
 import {browserSupportsGeolocation} from "../../geolocation";
 import components from "../../components";
-import icons from "../../icons";
+import Walk from "../../icons/walk.svg";
+import Tram from "../../icons/tram.svg";
+import Car from "../../icons/car.svg";
+import Loading from "../../icons/loading.svg";
 import storage from "../../storage";
 import type {Geolocation} from "../../storage";
 import {searchForLocations} from "../../iss/locationSearch"
@@ -431,7 +434,7 @@ class Location extends React.Component<
                         </div>
                         {this.state.gettingAutocompletionsInProgress &&
                             <div className="progress">
-                                <icons.Loading
+                                <Loading
                                     aria-label="Loading locations"
                                     className="big"
                                 />
@@ -458,9 +461,9 @@ class Location extends React.Component<
                     </div>
                     <h3 className="explainer">
                         <span className="explainerIcons">
-                            <icons.Walk/>
-                            <icons.Tram/>
-                            <icons.Car/>
+                            <Walk/>
+                            <Tram/>
+                            <Car/>
                         </span>
                         <em>
                             If you want to see estimated travel times

@@ -4,7 +4,7 @@ import type {Node as ReactNode} from "React";
 import React, {useContext} from "react";
 
 import IconButton from "./IconButton";
-import icons from "../icons";
+import ChevronBack from "../icons/chevron-back.svg";
 import QuickExit from "./QuickExit";
 import classnames from "classnames";
 import routerContext from "../contexts/router-context";
@@ -103,7 +103,7 @@ function AppBar(
                     >
                         {onBackTouchTap ? (
                             <span className="backButton">
-                                <icons.ChevronBack />
+                                <ChevronBack />
                                 <span className="back-label">
                                     {backMessage}
                                 </span>

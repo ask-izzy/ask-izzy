@@ -5,7 +5,9 @@ import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 
 import InputListItem from "./InputListItem";
-import icons from "../icons"
+import DemographicPets from "../icons/demographic-pets.svg";
+import Car from "../icons/car.svg";
+
 
 export default {
     title: "App Components/ListItem/InputListItem",
@@ -50,6 +52,6 @@ CheckboxInput.args = {
 export const WithIcons: typeof Template = Template.bind({});
 WithIcons.args = {
     type: "checkbox",
-    checkedIcon: <icons.DemographicPets />,
-    uncheckedIcon: <icons.Car />,
+    checkedIcon: <DemographicPets />,
+    uncheckedIcon: <Car />,
 };

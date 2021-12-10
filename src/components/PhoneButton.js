@@ -6,7 +6,8 @@ import { titleize } from "underscore.string";
 import Link from "./base/Link";
 import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
-import icons from "../icons";
+import Phone from "../icons/phone.svg";
+import PhoneSolid from "../icons/phone-solid.svg";
 import classnames from "classnames"
 import type { phone } from "../iss/general";
 import {toCamelCase} from "../utils/strings";
@@ -52,8 +53,8 @@ export default class PhoneButton extends React.Component<Props, void> {
                 : ""
         )
         const icon = this.props.styleType === "hollow" ?
-            <icons.Phone />
-            : <icons.PhoneSolid />
+            <Phone />
+            : <PhoneSolid />
 
         return (
             <div className={className}>

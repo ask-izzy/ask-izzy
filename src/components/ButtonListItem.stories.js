@@ -5,7 +5,8 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 import ButtonListItem from "./ButtonListItem";
-import icons from "../icons"
+import Chevron from "../icons/chevron.svg";
+import DemographicPets from "../icons/demographic-pets.svg";
 
 export default {
     title: "App Components/ListItem/ButtonListItem",
@@ -23,16 +24,16 @@ export const Basic: typeof Template = Template.bind({});
 Basic.args = {
     primaryText: "Primary Text",
     secondaryText: "Secondary text",
-    rightIcon: <icons.Chevron />,
-    leftIcon: <icons.DemographicPets />,
+    rightIcon: <Chevron />,
+    leftIcon: <DemographicPets />,
 };
 
 export const WithChildren: typeof Template = Template.bind({});
 WithChildren.args = {
     primaryText: "Primary Text",
     secondaryText: "Secondary text",
-    rightIcon: <icons.Chevron />,
-    leftIcon: <icons.DemographicPets />,
+    rightIcon: <Chevron />,
+    leftIcon: <DemographicPets />,
     children: <div>
       Use children instead of primaryText and secondaryText props. children can
       be JSX elements so it can contain content

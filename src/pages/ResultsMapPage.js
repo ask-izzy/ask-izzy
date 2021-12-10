@@ -8,7 +8,7 @@ import ResultsList from "../components/ResultsList";
 import ResultsPage from "./ResultsPage";
 import SitesMap from "../components/SitesMap";
 import NotFoundStaticPage from "./NotFoundStaticPage";
-import icons from "../icons";
+import Loading from "../icons/loading.svg";
 
 import type { site } from "../iss/site";
 import Service from "../iss/Service"
@@ -116,7 +116,7 @@ class ResultsMapPage extends ResultsPage<{}, State> {
     renderPageBody(): ReactNode | ReactElement<"div"> {
         if (this.searchIsLoading) {
             return <div className="progress">
-                <icons.Loading className="big" />
+                <Loading className="big" />
             </div>
         } else {
             return <>

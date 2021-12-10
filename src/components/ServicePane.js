@@ -19,13 +19,13 @@ import GoogleMapsLink from "./GoogleMapsLink";
 import Ndis from "./Ndis";
 import LinkListItem from "./LinkListItem";
 import BoxedText from "./BoxedText";
-import Chevron from "../icons/Chevron";
+import Chevron from "../icons/chevron.svg";
+import ExternalLink from "../icons/external-link.svg"
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import AlertBannerList from "../components/AlertBannerList";
 import Service from "../iss/Service";
 import ScreenReader from "./ScreenReader";
-import icons from "../icons";
 import Storage from "../storage";
 import {MobileDetect} from "../effects/MobileDetect";
 
@@ -277,7 +277,7 @@ function ServicePane({service}: Props): ReactNode {
                             >
                                 <span className="googleMapsLink">
                                     Get directions in Google Maps
-                                    <icons.ExternalLink
+                                    <ExternalLink
                                         className="ExternalLinkIcon"
                                     />
                                 </span>

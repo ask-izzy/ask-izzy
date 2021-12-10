@@ -3,7 +3,7 @@
 import type {Node as ReactNode} from "react"
 import React, {useEffect, useState} from "react";
 import Button from "../base/Button";
-import icons from "../../icons"
+import Chevron from "../../icons/chevron.svg";
 import {getScrollPosition} from "../../effects/scrollPosition";
 
 type Props = {
@@ -52,7 +52,7 @@ function ScrollToTop({label}: Props): ReactNode {
                     eventLabel: null,
                 }}
             >
-                <icons.Chevron/>
+                <Chevron/>
                 <span>{label}</span>
             </Button>
         </div>

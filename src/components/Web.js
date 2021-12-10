@@ -4,7 +4,7 @@ import React from "react";
 import URL from "url";
 
 import Link from "./base/Link";
-import icons from "../icons";
+import Website from "../icons/website.svg";
 import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
 
@@ -42,7 +42,7 @@ export default class Web extends React.Component<Props, void> {
                         eventLabel: `${displayedAddress}`,
                     }}
                 >
-                    <icons.Website />
+                    <Website />
                     <div className="Contact-text">
                         <span className="kind">
                             {" "}

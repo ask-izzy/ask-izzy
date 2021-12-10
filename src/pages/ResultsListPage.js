@@ -11,7 +11,7 @@ import ResultsList from "../components/ResultsList";
 import LoadingResultsHeader from
     "../components/ResultsListPage/LoadingResultsHeader";
 import AlertBannerList from "../components/AlertBannerList";
-import icons from "../icons";
+import Loading from "../icons/loading.svg";
 import NotFoundStaticPage from "./NotFoundStaticPage"
 import FlatButton from "../components/FlatButton";
 import SuggestionBox from "./SuggestionBox";
@@ -208,7 +208,7 @@ class ResultsListPage extends ResultsPage<> {
         if (this.searchIsLoading) {
             return (
                 <div className="progress">
-                    <icons.Loading className="big" />
+                    <Loading className="big" />
                 </div>
             );
         }

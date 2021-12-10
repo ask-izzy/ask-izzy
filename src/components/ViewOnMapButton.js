@@ -2,7 +2,8 @@
 
 import type {Node as ReactNode} from "React";
 import React, {useEffect, useState} from "react";
-import icons from "../icons";
+import Map from "../icons/map.svg";
+import Chevron from "../icons/chevron.svg";
 import maps, {MapsApi} from "../maps";
 import Button from "./base/Button";
 import {useRouterContext} from "../contexts/router-context";
@@ -44,12 +45,12 @@ function ViewOnMapButton({to}: Props): ReactNode {
         >
             <div className="buttonLabel">
                 <div className="leftSide">
-                    <icons.Map className="big" />
+                    <Map className="big" />
                     <span>
                         Map view
                     </span>
                 </div>
-                <icons.Chevron className="big" />
+                <Chevron className="big" />
             </div>
         </Button>
     );

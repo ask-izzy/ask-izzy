@@ -8,7 +8,8 @@ import HeaderBar from "../../components/HeaderBar";
 import InputListItem from "../../components/InputListItem";
 import FlatButton from "../../components/FlatButton";
 import WithStickyFooter from "../../components/WithStickyFooter";
-import icons from "../../icons";
+import CheckboxSelected from "../../icons/checkbox-selected.svg"
+import CheckboxUnselected from "../../icons/checkbox-unselected.svg"
 import storage from "../../storage";
 import type {serviceSearchRequest} from "../../iss/serviceSearch";
 import { append, ServiceSearchRequest } from "../../iss/ServiceSearchRequest";
@@ -433,12 +434,12 @@ class BaseQuestion extends React.Component<
                 type="checkbox"
                 checked={currentlySelected}
                 checkedIcon={
-                    <icons.CheckboxSelected
+                    <CheckboxSelected
                         className="big"
                     />
                 }
                 uncheckedIcon={
-                    <icons.CheckboxUnselected
+                    <CheckboxUnselected
                         className="big"
                     />
                 }

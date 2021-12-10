@@ -1,7 +1,7 @@
 /* @flow */
 import * as React from "react";
 
-import icons from "../icons";
+import Chevron from "../icons/chevron.svg";
 import Summary from "./base/Summary";
 
 type Props = {
@@ -22,7 +22,7 @@ const AccordionItem: React.StatelessFunctionalComponent<Props> = (
                 }}
             >
                 <div> {/* wrapper needed for safari flex bug https://bugs.webkit.org/show_bug.cgi?id=190065 */}
-                    <h3 className="title">{title}</h3><icons.Chevron />
+                    <h3 className="title">{title}</h3><Chevron />
                 </div>
             </Summary>
             <div className="AccordionItemContent">

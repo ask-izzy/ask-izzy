@@ -2,7 +2,7 @@
 
 import type {Node as ReactNode} from "React";
 import React from "react";
-import icons from "../icons";
+import AccessibilityIcon from "../icons/accessibility.svg";
 import Service from "../iss/Service";
 import Spacer from "./Spacer";
 
@@ -34,7 +34,7 @@ class Accessibility extends React.Component<Props, void> {
                         accessibilityMapping[issAccessibility]
                     }.`}
                 >
-                    <icons.Accessibility
+                    <AccessibilityIcon
                         className="ColoredIcon"
                     />
                     <span>

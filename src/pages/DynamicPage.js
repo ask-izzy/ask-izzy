@@ -5,7 +5,7 @@ import type {Node as ReactNode} from "React";
 import Helmet from "react-helmet";
 
 import { makeTitle } from "../utils";
-import icons from "../icons";
+import Loading from "../icons/loading.svg";
 import Query from "../queries/query";
 import StaticPage from "./StaticPage";
 import pageQuery from "../queries/content/page.js";
@@ -81,7 +81,7 @@ class DynamicPage extends React.Component<{}> {
             >
                 <div className="DynamicPage">
                     <div className="loadingStatus">
-                        <icons.Loading className="big" />
+                        <Loading className="big" />
                     </div>
                 </div>
             </StaticPage>

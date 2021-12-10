@@ -2,7 +2,7 @@
 
 import type {Element as ReactElement} from "React";
 import React from "react";
-import DemographicLgbtiq from "../icons/DemographicLgbtiq";
+import DemographicLgbtiq from "../icons/demographic-lgbtiq.svg";
 import Service from "../iss/Service";
 
 type Props = {

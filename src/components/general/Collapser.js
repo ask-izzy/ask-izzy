@@ -3,7 +3,7 @@ import type {Element as ReactElement} from "React";
 import React, { useState } from "react";
 import type {Node as ReactNode} from "react"
 import classnames from "classnames";
-import Chevron from "../../icons/Chevron";
+import Chevron from "../../icons/chevron.svg";
 import Button from "../base/Button";
 import type {AnalyticsEvent} from "../../google-tag-manager"
 

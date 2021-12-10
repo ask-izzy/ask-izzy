@@ -4,7 +4,7 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import BaseLogoWithTextBox from "./BaseLogoWithTextBox";
-import icons from "../icons"
+import DemographicPets from "../icons/demographic-pets.svg"
 
 export default {
     title: "App Components/BaseLogoWithTextBox",
@@ -19,13 +19,13 @@ export const Basic: typeof Template = Template.bind({});
 Basic.args = {
     header: "Example Text",
     body: "Body text",
-    icon: <icons.DemographicPets />,
+    icon: <DemographicPets />,
 };
 
 export const RedHighlight: typeof Template = Template.bind({});
 RedHighlight.args = {
     header: "Example Text",
     body: "Body text",
-    icon: <icons.DemographicPets />,
+    icon: <DemographicPets />,
     highlightColor: "red",
 };

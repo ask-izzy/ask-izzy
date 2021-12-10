@@ -3,7 +3,14 @@
 import type {Element as ReactElement} from "React";
 import React from "react";
 import Link from "../components/base/Link";
-import icons from "../icons"
+import AboriginalFlag from "../icons/demographic-aboriginal.svg";
+import TorresStraitIslandersFlag from "../icons/demographic-torres-strait.svg";
+import Plus from "../icons/plus.svg"
+import Pencil from "../icons/pencil.svg"
+import Facebook from "../icons/facebook.svg";
+import Instagram from "../icons/instagram.svg";
+import Heart from "../icons/heart.svg"
+import Chat from "../icons/chat.svg"
 import LinkButton from "./LinkButton";
 import config from "../config";
 import { donateLink, aboutLink } from "../constants/urls.js"
@@ -203,7 +210,7 @@ export default class BrandedFooter
                     <ul>
                         <li>
                             <Link to={donateLink}>
-                                <icons.Heart />
+                                <Heart />
                                 <div>
                                     Donate to us.
                                 </div>
@@ -216,7 +223,7 @@ export default class BrandedFooter
                                     `?subject=${"Ask Izzy - Feedback"}`
                                 }
                             >
-                                <icons.Chat
+                                <Chat
                                     className="small"
                                 />
                                 <div>
@@ -252,7 +259,7 @@ export default class BrandedFooter
                                 to="https://www.facebook.com/askizzyau"
                                 className="flex-align"
                             >
-                                <icons.Facebook
+                                <Facebook
                                     className="inline-icon inline-block-icon"
                                 />
                             </Link>
@@ -262,7 +269,7 @@ export default class BrandedFooter
                                 to="https://www.instagram.com/askizzyau/"
                                 className="flex-align"
                             >
-                                <icons.Instagram
+                                <Instagram
                                     className="inline-icon inline-block-icon"
                                 />
                             </Link>
@@ -273,7 +280,7 @@ export default class BrandedFooter
                     <h1>For Service Providers</h1>
                     <div className="links">
                         <LinkButton to="/add-service">
-                            <icons.Plus
+                            <Plus
                                 className="small"
                             />
                             <span>Add a service</span>
@@ -288,7 +295,7 @@ export default class BrandedFooter
                             `Details of change:\n\n`
                         )}
                         >
-                            <icons.Pencil
+                            <Pencil
                                 className="small"
                             />
                             <span>Update service details</span>
@@ -311,10 +318,10 @@ export default class BrandedFooter
                 </ScreenReader>
                 <div tabIndex="0">
                     <div className="flags">
-                        <icons.AboriginalFlag
+                        <AboriginalFlag
                             className="flag"
                         />
-                        <icons.TorresStraitIslandersFlag
+                        <TorresStraitIslandersFlag
                             className="flag"
                         />
                     </div>

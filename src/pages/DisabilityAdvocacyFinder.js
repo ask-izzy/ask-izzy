@@ -7,7 +7,7 @@ import escapeStringRegexp from "escape-string-regexp";
 import Link from "../components/base/Link";
 import StaticPage from "./StaticPage";
 import SearchBar from "../components/general/SearchBar";
-import Chevron from "../icons/Chevron"
+import Chevron from "../icons/chevron.svg"
 import routerContext from "../contexts/router-context";
 
 function DisabilityAdvocacyFinder(): ReactNode {

@@ -3,7 +3,10 @@
 import type {Node as ReactNode} from "React";
 import React, {useState, useEffect} from "react";
 import getPosition, {guessSuburb} from "../geolocation";
-import icons from "../icons";
+import Cross from "../icons/cross.svg";
+import Location from "../icons/location.svg";
+import Loading from "../icons/loading.svg";
+import Tick from "../icons/tick.svg";
 import * as gtm from "../google-tag-manager";
 import type {Geolocation} from "../storage";
 import Button from "./base/Button";
@@ -143,14 +146,14 @@ function GeolocationButton({
         switch (status.type) {
         case "NOT_STARTED":
             return <>
-                    <icons.Location/>
+                    <Location/>
                     <span className="primary">
                         Get your current location
                     </span>
                 </>
         case "RUNNING":
             return <>
-                    <icons.Loading />
+                    <Loading />
                     <div className="multiLine">
                         <span className="primary">
                             Locating you...
@@ -162,7 +165,7 @@ function GeolocationButton({
                 </>
         case "COMPLETE":
             return <>
-                    <icons.Tick />
+                    <Tick />
                     <span className="primary">
                         Found your location
                         {showLocationInSuccessMessage && status.location &&
@@ -174,7 +177,7 @@ function GeolocationButton({
                 </>;
         case "FAILED":
             return <>
-                    <icons.Cross />
+                    <Cross />
                     <div className="multiLine">
                         <span className="primary">
                             Unable to get your location

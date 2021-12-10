@@ -3,7 +3,7 @@
 import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
-import icons from "../icons";
+import Map from "../icons/map.svg";
 import Service from "../iss/Service";
 
 import DebugContainer from "./DebugContainer";
@@ -15,6 +15,7 @@ import ServiceProvisions from "./service/ServiceProvisions"
 import Accessibility from "./Accessibility";
 import OpeningTimes from "./OpeningTimes";
 import Ndis from "./Ndis";
+import Loading from "../icons/loading.svg";
 import TransportTime from "./TransportTime";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
@@ -50,7 +51,7 @@ function ResultListItem({
                 className="location"
                 aria-label={`${suburb}.`}
             >
-                <icons.Map
+                <Map
                     aria-label="Location"
                 />
                 {titleize(suburb)}
@@ -125,7 +126,7 @@ function ResultListItem({
                 Travel times.
             </ScreenReader>
             {!service.travelTimes && travelTimesStatus === "loading" &&
-                <icons.Loading className="small"/>
+                <Loading className="small"/>
             }
             {service.travelTimes && renderTravelTimes()}
             <DebugServiceRecord object={service} />

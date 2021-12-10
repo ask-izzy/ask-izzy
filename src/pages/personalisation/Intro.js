@@ -3,6 +3,7 @@ import * as React from "react";
 
 import components from "../../components";
 import storage from "../../storage";
+import Lightning from "../../icons/lightning.svg";
 import type {serviceSearchRequest} from "../../iss/serviceSearch";
 import QuestionStepper, {
     shouldShowQuestionStepper,

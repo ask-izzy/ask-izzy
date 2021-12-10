@@ -5,7 +5,7 @@ import type {Node as ReactNode} from "react";
 import cnx from "classnames";
 
 import routerContext from "../contexts/router-context";
-import MapIcon from "../icons/Map";
+import MapIcon from "../icons/map.svg";
 import type {PersonalisationPage} from "../utils/personalisation"
 
 type Props = {|

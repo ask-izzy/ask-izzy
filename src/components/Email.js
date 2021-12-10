@@ -2,7 +2,7 @@
 import type {Element as ReactElement} from "React";
 import React from "react";
 
-import icons from "../icons";
+import EmailIcon from "../icons/email.svg";
 import Link from "./base/Link";
 import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
@@ -39,7 +39,7 @@ export default class Email extends React.Component<Props, void> {
                         eventLabel: `${email}`,
                     }}
                 >
-                    <icons.Email />
+                    <EmailIcon />
                     <div className="Contact-text">
                         <span className="kind">
                             {this.props.comment}

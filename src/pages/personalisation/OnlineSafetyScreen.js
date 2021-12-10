@@ -2,7 +2,7 @@
 import * as React from "react";
 
 import BaseStaticPersonalisation from "./BaseStaticPersonalisation";
-import icons from "../../icons";
+import PhoneTalk from "../../icons/phone-talk.svg";
 import Link from "../../components/base/Link";
 import AreYouSafe from "./AreYouSafe";
 import storage from "../../storage";
@@ -54,7 +54,7 @@ class OnlineSafetyScreen extends BaseStaticPersonalisation {
         return (
             <div className="AreYouSafe">
                 <div className="safety-message">
-                    <icons.PhoneTalk className="PhoneIcon" />
+                    <PhoneTalk className="PhoneIcon" />
                     <h2>
                         If you or someone else is in danger call{" "}
                         {

@@ -3,9 +3,9 @@
 import * as React from "react";
 import classnames from "classnames";
 
-import Chevron from "../icons/Chevron";
-import Warning from "../icons/Warning";
-import Info from "../icons/Info";
+import Chevron from "../icons/chevron.svg";
+import Warning from "../icons/warning.svg";
+import Info from "../icons/info.svg";
 import Summary from "./base/Summary";
 import type {AnalyticsEvent} from "../google-tag-manager";
 

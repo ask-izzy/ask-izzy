@@ -6,7 +6,15 @@ import type {Node as ReactNode} from "react";
 import BaseQuestion from "./BaseQuestion";
 
 import { append } from "../../iss/ServiceSearchRequest";
-import icons from "../../icons";
+import DemographicLgbtiq from "../../icons/demographic-lgbtiq.svg";
+import AboriginalFlag from "../../icons/aboriginal-flag.svg";
+import TorresStraitIslandersFlag from "../../icons/torres-strait-islanders-flag.svg";
+import DemographicAtsi from "../../icons/demographic-atsi.svg";
+import ExperiencingViolence from "../../icons/experiencing-violence.svg";
+import Under18 from "../../icons/under-18.svg";
+import DemographicNeedInterpreter from "../../icons/demographic-need-interpreter.svg";
+import DemographicRecentlyArrived from "../../icons/demographic-recently-arrived.svg";
+import UsingViolence from "../../icons/using-violence.svg";
 import storage from "../../storage";
 
 import Under18Page from "./Under18DomesticViolenceScreen";
@@ -15,12 +23,12 @@ import UsingViolencePage from "./UsingViolenceScreen";
 
 const ATSI_BREADCRUMB_ICON = (
     <span>
-        <icons.AboriginalFlag/>
-        <icons.TorresStraitIslandersFlag />
+        <AboriginalFlag/>
+        <TorresStraitIslandersFlag />
     </span>
 )
 const LGBT_BREADCRUMB_ICON = (
-    <span><icons.DemographicLgbtiq viewBox="2 9 59 44" /></span>
+    <span><DemographicLgbtiq viewBox="2 9 59 44" /></span>
 )
 
 export default class DfvDemographics extends BaseQuestion {
@@ -43,14 +51,14 @@ export default class DfvDemographics extends BaseQuestion {
             "Using violence": append(""),
         },
         icons: {
-            "Aboriginal and/or Torres Strait Islander": icons.DemographicAtsi,
-            "Experiencing violence": icons.ExperiencingViolence,
-            "Under 18": icons.Under18,
-            "LGBTIQA+": icons.DemographicLgbtiq,
+            "Aboriginal and/or Torres Strait Islander": DemographicAtsi,
+            "Experiencing violence": ExperiencingViolence,
+            "Under 18": Under18,
+            "LGBTIQA+": DemographicLgbtiq,
             "Culturally and linguistically diverse":
-                icons.DemographicNeedInterpreter,
-            "Person seeking asylum": icons.DemographicRecentlyArrived,
-            "Using violence": icons.UsingViolence,
+                DemographicNeedInterpreter,
+            "Person seeking asylum": DemographicRecentlyArrived,
+            "Using violence": UsingViolence,
         },
         oldAnswers: {},
     };

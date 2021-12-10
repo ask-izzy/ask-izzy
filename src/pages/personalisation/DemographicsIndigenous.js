@@ -6,7 +6,10 @@ import * as React from "react";
 import type {Node as ReactNode} from "react";
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/ServiceSearchRequest";
-import icons from "../../icons";
+import Blank from "../../icons/blank.svg";
+import DemographicAtsi from "../../icons/demographic-atsi.svg";
+import AboriginalFlag from "../../icons/aboriginal-flag.svg";
+import TorresStraitIslandersFlag from "../../icons/torres-strait-islanders-flag.svg";
 
 export default class DemographicsIndigenous extends BaseQuestion {
     static title: string = "Indigenous";
@@ -25,8 +28,8 @@ export default class DemographicsIndigenous extends BaseQuestion {
             "No - show me everything": append(""),
         },
         icons: {
-            "Yes - show these first where possible": icons.DemographicAtsi,
-            "No - show me everything": icons.Blank,
+            "Yes - show these first where possible": DemographicAtsi,
+            "No - show me everything": Blank,
         },
     };
 
@@ -34,8 +37,8 @@ export default class DemographicsIndigenous extends BaseQuestion {
         switch (answer) {
         case "Yes - show these first where possible":
             return <>
-                <icons.AboriginalFlag/>
-                <icons.TorresStraitIslandersFlag />
+                <AboriginalFlag/>
+                <TorresStraitIslandersFlag />
             </>
         default:
             return answer

@@ -6,7 +6,7 @@ import moment from "moment-timezone";
 
 import ServiceOpening from "../iss/ServiceOpening";
 
-import icons from "../icons";
+import Clock from "../icons/clock.svg";
 
 type Props = {
     moment?: Moment,
@@ -32,7 +32,7 @@ class OpeningTimes extends React.Component<Props, void> {
 
         return (
             <div className="OpeningTimes">
-                <icons.Clock className="ColoredIcon" />
+                <Clock className="ColoredIcon" />
                 {renderMethod.apply(this)}
             </div>
         );
