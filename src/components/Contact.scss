@@ -23,7 +23,9 @@
     }
 
     a {
-        display: block;
+        display: block; /* For IE11 */
+        display: grid;
+        grid-template-columns: min-content auto;
         position: relative;
         width: auto;
         margin-top: 5px;
@@ -37,7 +39,6 @@
         font-size: 16px;
 
         .Contact-text {
-            padding-left: 30px;
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
