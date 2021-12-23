@@ -82,7 +82,8 @@ export default function QuestionStepper({
         category.name
         : `Search for “${router.match.params.search}”`
     const stepTotal = getTotalSteps(router)
-    const stepNumber = getCurrentStep(router)
+    const stepsRemaining = getStepsRemaining(router)
+    const stepsAnswered = stepTotal - stepsRemaining
 
     return (
         <div className={cnx("QuestionStepper")}>
@@ -90,12 +91,15 @@ export default function QuestionStepper({
             <div className="content">
                 {!hideStepInfo && postInitialRender && <>
                     <h3>{title}</h3>
-                    <div className="currentProgress">
-                        Step {stepNumber} of {stepTotal}
-                        <ProgressBar current={stepNumber}
-                            total={stepTotal}
-                        />
-                    </div>
+                    {stepsRemaining > 0 &&
+                        <div className="currentProgress">
+                            {stepsRemaining} step{stepsRemaining > 1 && "s"}
+                            {" "}remaining
+                            <ProgressBar current={stepsAnswered + 1}
+                                total={stepTotal}
+                            />
+                        </div>
+                    }
                 </>}
                 <ol
                     className="breadcrumbs"
@@ -166,11 +170,11 @@ export function getTotalSteps(
     return pages.length
 }
 
-export function getCurrentStep(
+export function getStepsRemaining(
     router: $PropertyType<RouterContextObject, 'router'>,
 ): number {
     const pagesToShow = getPersonalisationPagesToShow(router)
         .filter(page => !page.defaultProps.noQuestionStepperStep)
 
-    return getTotalSteps(router) + 1 - Math.max(pagesToShow.length, 1)
+    return pagesToShow.length
 }
