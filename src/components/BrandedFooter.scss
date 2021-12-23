@@ -25,10 +25,8 @@
         )
     );
 
-    $container-spacing: 20px;
-
     > div > div {
-        padding: $container-spacing;
+        padding: 10px 20px;
     }
 
     ul {
@@ -42,6 +40,7 @@
     }
 
     .top-box {
+        padding: 10px 0;
         display: flex;
         background-color: #{colours.get-static('colour-bg-standard-tint-2', 'branding-footer-container')};
         background-color: var(--colour-bg-standard-tint-2);
@@ -114,41 +113,15 @@
         }
 
         div.about-links {
-            .spacer {
-                margin: 10px;
-            }
+            li {
+                display: inline-block;
 
-            ul {
-                display: inline-flex;
-            }
+                &.separator {
+                    width: 15px;
+                    text-align: center;
 
-            li:first-child::after {
-                content: '|';
-                margin: 0 0.5em;
-            }
-        }
-
-        div.support-links {
-            padding: 0 $container-spacing;
-
-            a {
-                display: flex;
-                flex-direction: row;
-                margin-top: 10px;
-                margin-bottom: 10px;
-                margin-left: -5px;
-                font-weight: 500;
-                text-decoration: none;
-
-                .SvgIcon {
-                    width: 20px;
-                    height: 20px;
-                    margin-right: 10px;
-                }
-
-                &:hover {
-                    div {
-                        text-decoration: underline;
+                    &::after {
+                        content: '|';
                     }
                 }
             }

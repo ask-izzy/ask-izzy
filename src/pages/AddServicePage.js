@@ -7,6 +7,7 @@ import Link from "../components/base/Link";
 import routerContext from "../contexts/router-context";
 import BrandedFooter from "../components/BrandedFooter";
 import * as gtm from "../google-tag-manager";
+import config from "../config";
 
 type Props = {}
 
@@ -140,10 +141,10 @@ class AddServicePage extends React.Component<Props, State> {
                 <p>
                     We know that service and program information changes all
                     the time. If you think that a listing needs updating or
-                    you see an error, please&nbsp;
+                    you see an error, please email{" "}
                     <Link
                         to={
-                            "mailto:support@askizzy.org.au" +
+                            `mailto:${config.default.siteMail}` +
                                 "?subject=" +
                                 encodeURIComponent(
                                     `Your Ask Izzy feedback`) +
@@ -163,7 +164,7 @@ class AddServicePage extends React.Component<Props, State> {
                                 )
                         }
                     >
-                        email to let us know
+                        {config.default.siteMail}
                     </Link>.
                 </p>
                 <h2>
@@ -187,9 +188,12 @@ class AddServicePage extends React.Component<Props, State> {
                     If your service is complex (e.g. the same service is
                     offered at multiple sites or there are complex
                     eligibility criteria) or if you&apos;re having trouble with
-                    the form, <Link to="mailto:database@infoxchange.org">email
-                    us</Link> some basic information about the service and
-                    we&apos;ll contact you to find out more.
+                    the form, email us at{" "}
+                    <Link to="mailto:database@infoxchange.org">
+                        database@infoxchange.org
+                    </Link>{" "}
+                    some basic information about the service and we&apos;ll
+                    contact you to find out more.
                 </p>
 
                 <iframe

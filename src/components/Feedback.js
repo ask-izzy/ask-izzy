@@ -7,6 +7,7 @@ import Link from "./base/Link";
 import * as gtm from "../google-tag-manager";
 import Service from "../iss/Service";
 import Spacer from "./Spacer";
+import config from "../config";
 
 type Props = {
     object: Service,
@@ -30,11 +31,12 @@ export default class Feedback extends React.Component<Props, void> {
             <div className="Feedback">
                 <Spacer />
                 <p>
+                    Email us at{" "}
                     <Link
                         className="suggestChange"
                         onClick={this.recordSuggestChange.bind(this)}
                         to={
-                            "mailto:support@askizzy.org.au" +
+                            `mailto:${config.default.siteMail}` +
                                 "?subject=" +
                                 encodeURIComponent(
                                     `Your Ask Izzy feedback: ` +
@@ -53,9 +55,9 @@ export default class Feedback extends React.Component<Props, void> {
                                 )
                         }
                     >
-                        Email us with feedback or changes
-                    </Link> to service information if details here
-                     need updating.
+                        {config.default.siteMail}
+                    </Link> with feedback or changes to service information
+                    if details here need updating.
                 </p>
             </div>
         );

@@ -51,7 +51,7 @@ export default class BrandedFooter
             container.style.height = (
                 Math.max(
                     getColHeight(
-                        ".about, .about-links, .support-links, .supporters"
+                        ".about, .about-links, .contact-info, .supporters"
                     ),
                     getColHeight(".socials, .for-service-providers")
                 ) + 5
@@ -192,39 +192,36 @@ export default class BrandedFooter
                                 About Ask Izzy
                             </Link>
                         </li>
+                        <li className="separator"
+                            aria-hidden="true"
+                            role="presentation"
+                        />
                         <li>
                             <Link to="/terms">
                                 Terms of use
                             </Link>
                         </li>
-                    </ul>
-                </div>
-                <div className="support-links">
-                    <ul>
+                        <li className="separator"
+                            aria-hidden="true"
+                            role="presentation"
+                        />
                         <li>
                             <Link to={donateLink}>
-                                <icons.Heart />
-                                <div>
-                                    Donate to us.
-                                </div>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to={
-                                    `mailto:${config.default.siteMail}` +
-                                    `?subject=${"Ask Izzy - Feedback"}`
-                                }
-                            >
-                                <icons.Chat
-                                    className="small"
-                                />
-                                <div>
-                                    Leave feedback.
-                                </div>
+                                Donate to us
                             </Link>
                         </li>
                     </ul>
+                </div>
+                <div className="contact-info">
+                    If you'd like to give us some feedback please email{" "}
+                    <Link
+                        to={
+                            `mailto:${config.default.siteMail}` +
+                            `?subject=${"Ask Izzy - Feedback"}`
+                        }
+                    >
+                        {config.default.siteMail}
+                    </Link>.
                 </div>
                 <div className="supporters">
                     Ask Izzy founding partners:<br />
