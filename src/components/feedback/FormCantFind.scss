@@ -1,0 +1,107 @@
+.FormCantFind {
+    padding: 10px;
+    // background-color: $brand-bg-light;//replace color
+
+    form {
+        padding: 15px;
+        // background-color: $white;//replace color
+    }
+
+    .radioGroup {
+        margin: 10px 0;
+
+        label {
+            display: inline-block;
+            padding: 5px 10px;
+            // border: 1px solid $brand-bg-light;//replace color
+            border-radius: 3px;
+        }
+
+        input {
+            &[type="radio"] {
+                width: 0;
+                visibility: hidden;
+            }
+
+            &:checked + label {
+                // background-color: $brand-bg-light;//replace color
+            }
+        }
+    }
+
+    .moreInformation {
+        label {
+            display: block;
+        }
+
+        textarea {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    h4 {
+        margin-top: 0;
+    }
+
+    ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    input {
+        &[type="checkbox"] {
+            height: 30px;
+            cursor: pointer;
+        }
+    }
+
+    textarea {
+        max-width: 100%;
+        padding: 10px;
+        font-weight: normal;
+    }
+
+    label {
+        display: inline-block;
+        min-width: 100px;
+        height: 30px;
+        padding: 5px 0 5px 5px;
+        font-weight: normal;
+        line-height: 30px;
+        cursor: pointer;
+        vertical-align: bottom;
+    }
+
+    .formError {
+        padding: 0;
+        // color: $brand-error;//replace color
+        text-align: left;
+    }
+
+    .formControls {
+        margin-top: 15px;
+
+        button {
+            padding: 5px 10px;
+            // border: 1px solid $link-text-color;//replace color
+            border-radius: 3px;
+            background-color: transparent;
+            // color: $link-text-color;//replace color
+            font-size: 16px;
+            font-weight: normal;
+            line-height: 24px;
+
+            .Icon {
+                top: 0;
+                vertical-align: bottom;
+            }
+
+            &.loading {
+                cursor: default;
+            }
+
+        }
+    }
+}

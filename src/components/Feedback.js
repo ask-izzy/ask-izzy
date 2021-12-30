@@ -1,19 +1,28 @@
 /* @flow */
 
-import type {Element as ReactElement} from "React";
-import React from "react";
+import type {Element as ReactElement, Node as ReactNode} from "React";
+import React, {useState} from "react";
+
 
 import Link from "./base/Link";
 import * as gtm from "../google-tag-manager";
 import Service from "../iss/Service";
 import Spacer from "./Spacer";
+import FormReportError from "./feedback/FormReportError"
 
 type Props = {
     object: Service,
 }
 
-export default class Feedback extends React.Component<Props, void> {
-    recordSuggestChange(): void {
+type State = {
+    collapsed: boolean,
+}
+
+export default function Feedback(props: Props): ReactNode{
+
+    const [collapsed, setCollapsed] = useState<boolean>(true);
+
+    function recordSuggestChange(): void {
         gtm.emit({
             event: "Service Change Requested",
             eventCat: "Feedback Given",
@@ -24,40 +33,32 @@ export default class Feedback extends React.Component<Props, void> {
         });
     }
 
-    render(): ReactElement<"div"> {
-
-        return (
-            <div className="Feedback">
-                <Spacer />
-                <p>
-                    <Link
-                        className="suggestChange"
-                        onClick={this.recordSuggestChange.bind(this)}
-                        to={
-                            "mailto:support@askizzy.org.au" +
-                                "?subject=" +
-                                encodeURIComponent(
-                                    `Your Ask Izzy feedback: ` +
-                                `${this.props.object.id}`) +
-                                "&body=" +
-                                encodeURIComponent(
-                                    `Contact name:
-
-                                    Contact number:
-
-                                    Contact email:
-
-                                    Details of change:
-
-                                    `.replace(/^ +/gm, "")
-                                )
-                        }
-                    >
-                        Email us with feedback or changes
-                    </Link> to service information if details here
-                     need updating.
-                </p>
-            </div>
-        );
+    function toggleFeedback(event: SyntheticEvent<>): void {
+        event.preventDefault();
+        // rerender component to reset states to create more intuitive component use, this helps 
+        // reset the form every time the toggleFeedback link is clicked
+        setCollapsed(true);
+        setTimeout(() => {setCollapsed(false)}, 0);
     }
+
+    return (
+        <div className="Feedback">
+                <Spacer />
+                <div className="FeedbackInner">
+                    <span>Details here incorrect?</span>&nbsp;
+                    <a
+                        href="#"
+                        onClick={toggleFeedback}
+                    >
+                        Report an error
+                    </a>
+                    {!collapsed &&
+                    <span>
+                        <FormReportError />
+                    </span>
+                    }
+                </div>
+                <Spacer />
+            </div>
+    );
 }

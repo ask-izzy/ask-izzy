@@ -27,6 +27,7 @@ import Controls from "../components/ResultsListPage/Controls";
 import {
     getPersonalisationPages,
 } from "../utils/personalisation"
+import FormFeedbackCantFind from "../components/feedback/FormCantFind";
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
@@ -201,6 +202,8 @@ class ResultsListPage extends ResultsPage<> {
                             eventLabel: null,
                         }}
                     />
+                    <FormFeedbackCantFind />
+
                 </div>
             );
         }

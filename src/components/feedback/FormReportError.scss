@@ -1,0 +1,85 @@
+.FormReportError {
+    margin-top: 10px;
+    // color: $brand-text-dark;//replace color
+
+    ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    input {
+        &[type="checkbox"] {
+            height: 32px;
+        }
+    }
+
+    label {
+        display: inline-block;
+        min-width: 100px;
+        height: 30px;
+        padding: 5px 0 5px 5px;
+        font-weight: normal;
+        line-height: 30px;
+        cursor: pointer;
+        vertical-align: bottom;
+    }
+
+    .moreInformation {
+        margin-bottom: 10px;
+
+        label {
+            display: block;
+        }
+
+        textarea {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            padding: 10px;
+            font-weight: normal;
+            box-sizing: border-box;
+        }
+    }
+
+    .moreInformation {
+        margin-bottom: 10px;
+
+        label {
+            display: block;
+        }
+
+        textarea {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    .formError {
+        padding: 0;
+        // color: $brand-error;//replace color
+        text-align: left;
+    }
+
+    .formControls {
+
+        button {
+            padding: 5px 10px;
+            // border: 1px solid $brand-pane-alt-dark;//replace color
+            border-radius: 3px;
+            background-color: transparent;
+            // color: $brand-pane-alt-dark;//replace color
+            font-size: 16px;
+            line-height: 24px;
+
+            .Icon {
+                top: 0;
+                vertical-align: bottom;
+            }
+
+            &.loading {
+                cursor: default;
+            }
+        }
+    }
+}

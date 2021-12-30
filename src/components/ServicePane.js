@@ -16,6 +16,7 @@ import Feedback from "./Feedback";
 import HeaderBar from "./HeaderBar";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
+import FormFindInformation from "./feedback/FormFindInformation";
 import Ndis from "./Ndis";
 import LinkListItem from "./LinkListItem";
 import BoxedText from "./BoxedText";
@@ -228,6 +229,7 @@ function ServicePane({service}: Props): ReactNode {
                         {renderServiceProvisions()}
                         {!isMobile && renderSiblings()}
                     </div>
+                    <FormFindInformation />
                 </div>
                 <div
                     role="region"
