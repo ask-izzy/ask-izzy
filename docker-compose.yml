@@ -13,6 +13,7 @@ services:
 
             # Ask Izzy
             STRAPI_URL: "https://cms-askizzy.docker.dev"
+            NOTIFICATIONS_API_URL: "https://6VXLofFl.1JZuKscnasCoQWOX7qWiCzlmLtx2LVa9@notifications-api.docker.dev"
             SCREENSHOT_FAILURES: 1
             PAUSE_AFTER_FAIL: 1
             GOOGLE_ANALYTICS_URL: "https://google-analytics.docker.dev"

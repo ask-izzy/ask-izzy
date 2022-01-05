@@ -89,6 +89,7 @@ export default function render(req, res, next) {
             "PROXY_PROTOCOL",
             "VERSION",
             "STRAPI_URL",
+            "NOTIFICATIONS_API_URL",
             "NEW_RELIC_CONFIG",
             "NEW_RELIC_INFO",
         ]
@@ -100,6 +101,7 @@ export default function render(req, res, next) {
             "NEW_RELIC_CONFIG",
             "NEW_RELIC_INFO",
             "STRAPI_URL",
+            "NOTIFICATIONS_API_URL",
         ]
 
         for (const varToInject of varsToInject) {
