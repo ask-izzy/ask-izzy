@@ -7,7 +7,6 @@ import icons from "../icons"
 import LinkButton from "./LinkButton";
 import config from "../config";
 import { donateLink, aboutLink } from "../constants/urls.js"
-import ScreenReader from "./ScreenReader";
 
 export default class BrandedFooter
     extends React.Component<{}, void> {
@@ -92,16 +91,13 @@ export default class BrandedFooter
 
     render: (() => ReactElement<"footer">) = () => (
         <footer
-            role="contentinfo"
             className="branding-footer-container"
-            aria-labelledby="helpfulInformation"
+            aria-label="Page footer"
         >
-            <ScreenReader>
-                <span id="helpfulInformation">
-                    Helpful information.
-                </span>
-            </ScreenReader>
-            <div className="top-box">
+            <nav
+                className="top-box"
+                aria-label="Helpful information"
+            >
                 <div
                     role="region"
                     aria-labelledby="addInfo"
@@ -164,19 +160,14 @@ export default class BrandedFooter
                         </li>
                     </ul>
                 </div>
-            </div>
+            </nav>
             <div
-                role="region"
-                aria-labelledby="links"
+                role="contentinfo"
+                aria-label="Site info"
                 className="middle-box"
             >
-                <ScreenReader>
-                    <span id="links">
-                        Footer Links.
-                    </span>
-                </ScreenReader>
                 <div className="about">
-                    <p tabIndex="0">
+                    <p>
                         Ask Izzy is powered by{" "}
                         <Link to="https://www.infoxchange.org/au">
                             Infoxchange
@@ -297,22 +288,19 @@ export default class BrandedFooter
                 </div>
             </div>
             <div
-                role="region"
+                role="contentinfo"
+                aria-label="Acknowledgements"
                 className="bottom-box"
-                aria-labelledby="acknowledgements"
             >
-                <ScreenReader>
-                    <span id="acknowledgements">
-                        Acknowledgements.
-                    </span>
-                </ScreenReader>
-                <div tabIndex="0">
+                <div>
                     <div className="flags">
                         <icons.AboriginalFlag
                             className="flag"
+                            alt="Australian Aboriginal flag"
                         />
                         <icons.TorresStraitIslandersFlag
                             className="flag"
+                            alt="Torres Strait Islander flag"
                         />
                     </div>
                     <p>
@@ -321,7 +309,7 @@ export default class BrandedFooter
                         past and present.
                     </p>
                 </div>
-                <div tabIndex="0">
+                <div>
                     Ask Izzy is owned and operated by Infoxchange.
                     © {new Date().getFullYear()} Infoxchange
                 </div>

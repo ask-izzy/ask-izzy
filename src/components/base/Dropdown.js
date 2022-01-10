@@ -147,7 +147,6 @@ function Dropdown({
         >
             <div
                 tabIndex="0"
-                aria-labelledby="dropdownOptions"
                 className={`optionSelect ${
                     showOptions ? "activeOptionSelect open" : "closed"}`}
                 onClick={() => setShowOptions(!showOptions)}

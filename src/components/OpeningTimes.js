@@ -5,6 +5,7 @@ import React from "react";
 import moment from "moment-timezone";
 
 import ServiceOpening from "../iss/ServiceOpening";
+import ScreenReader from "./ScreenReader";
 
 import icons from "../icons";
 
@@ -32,7 +33,13 @@ class OpeningTimes extends React.Component<Props, void> {
 
         return (
             <div className="OpeningTimes">
-                <icons.Clock className="ColoredIcon" />
+                <icons.Clock
+                    className="ColoredIcon"
+                    aria-hidden={true}
+                />
+                <ScreenReader>
+                    Service is currently
+                </ScreenReader>
                 {renderMethod.apply(this)}
             </div>
         );
@@ -49,10 +56,7 @@ class OpeningTimes extends React.Component<Props, void> {
                     Open now
                 </span>
                 {" "}
-                <span
-                    className="time"
-                    aria-label={`${this.props.object.until}.`}
-                >
+                <span className="time">
                     {this.props.object.until}
                 </span>
             </span>
@@ -69,10 +73,7 @@ class OpeningTimes extends React.Component<Props, void> {
                     Closed
                 </span>
                 {" "}
-                <span
-                    className="time"
-                    aria-label={`${this.props.object.until}.`}
-                >
+                <span className="time">
                     {this.props.object.until}
                 </span>
             </span>

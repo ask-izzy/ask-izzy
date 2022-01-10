@@ -1,9 +1,15 @@
 /* @flow */
 
-import * as React from "react";
+import React, {useEffect} from "react";
+import type {Node as ReactNode} from "react";
 import { useQuery } from "@apollo/client";
 // $FlowIgnore
 import type { DocumentNode } from "graphql";
+import {
+    addPageLoadDependencies,
+    closePageLoadDependencies,
+} from "../utils/page-loading"
+import { useRouterContext } from "../contexts/router-context";
 
 const Query = ({ children, query, args, loadingComponent, errorComponent }: {
   children: any,
@@ -11,9 +17,9 @@ const Query = ({ children, query, args, loadingComponent, errorComponent }: {
   args?: Object,
   loadingComponent?: any,
   errorComponent?: any
-}): any | null | React.Element<"p"> => {
+}): ReactNode => {
     /*
-      Paramaters:
+      Parameters:
           query: A gql query string.
           args GQL arguments to be used in the query.
 
@@ -51,7 +57,18 @@ const Query = ({ children, query, args, loadingComponent, errorComponent }: {
         variables: args,
     });
 
+    const {location} = useRouterContext();
+    const pageLoadDependencyKey = "graphql-query"
+
+    useEffect(() => {
+        if (!loading) {
+            closePageLoadDependencies(location, pageLoadDependencyKey)
+        }
+    }, [loading, error, data])
+
     if (loading) {
+        addPageLoadDependencies(location, pageLoadDependencyKey)
+
         if (loadingComponent) {
             return loadingComponent;
         }

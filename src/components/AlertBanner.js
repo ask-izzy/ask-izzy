@@ -31,8 +31,13 @@ export default function AlertBanner(
         title = <>{title} [invalid alert level]</>
     }
     const titleContents = <>
-        <span className="title">
-            <AlertLevelIcon className="inline-icon" />
+        <span
+            className="title"
+            aria-label={`${props.alertLevel} alert`}
+        >
+            <AlertLevelIcon className="inline-icon"
+                aria-hidden="true"
+            />
             <span className="text">{title}</span>
         </span>
     </>

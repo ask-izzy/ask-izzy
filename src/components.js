@@ -59,7 +59,7 @@ import Spacer from "./components/Spacer";
 import StrapiMarkdown from "./components/StrapiMarkdown";
 import SvgIcon from "./components/SvgIcon";
 import TransportTime from "./components/TransportTime";
-import ViewOnMapButton from "./components/ViewOnMapButton";
+import ViewOnMapLink from "./components/ViewOnMapLink";
 import Web from "./components/Web";
 import WithStickyFooter from "./components/WithStickyFooter";
 
@@ -121,7 +121,7 @@ export default {
     StrapiMarkdown,
     SvgIcon,
     TransportTime,
-    ViewOnMapButton,
+    ViewOnMapLink,
     Web,
     WithStickyFooter,
 };

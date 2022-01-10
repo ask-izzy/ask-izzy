@@ -5,6 +5,7 @@ import React from "react";
 import icons from "../icons";
 import Service from "../iss/Service";
 import Spacer from "./Spacer";
+import ScreenReader from "./ScreenReader";
 
 type Props = {
     service: Service,
@@ -28,15 +29,14 @@ class Accessibility extends React.Component<Props, void> {
         if (issAccessibility === "fullaccess") {
             return <>
                 {withSpacer && <Spacer />}
-                <div
-                    className="Accessibility"
-                    aria-label={`${
-                        accessibilityMapping[issAccessibility]
-                    }.`}
-                >
+                <div className="Accessibility">
                     <icons.Accessibility
                         className="ColoredIcon"
+                        aria-hidden={true}
                     />
+                    <ScreenReader>
+                        Service has
+                    </ScreenReader>
                     <span>
                         {accessibilityMapping[issAccessibility]}
                     </span>

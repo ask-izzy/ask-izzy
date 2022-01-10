@@ -7,6 +7,7 @@ import Link from "./base/Link";
 import icons from "../icons";
 import * as gtm from "../google-tag-manager";
 import type {AnalyticsEvent} from "../google-tag-manager";
+import ScreenReader from "./ScreenReader"
 
 type Props = {
     url: string,
@@ -33,6 +34,9 @@ export default class Web extends React.Component<Props, void> {
 
         return (
             <div className="Contact Web">
+                <ScreenReader>
+                    Service website:
+                </ScreenReader>
                 <Link
                     to={url.href}
                     onClick={this.recordClick.bind(this)}

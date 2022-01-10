@@ -121,7 +121,7 @@ async function instrumentDistanceMatrix(results) {
 async function clickMapLink() {
     await this.driver.executeScript(() => window.scrollTo(0, 0))
     await this.driver.findElement(
-        By.css(".ViewOnMapButton")
+        By.css(".ViewOnMapLink")
     ).click();
 }
 

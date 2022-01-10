@@ -8,7 +8,6 @@ import WithStickyFooter from "../components/WithStickyFooter";
 import Spacer from "../components/Spacer";
 import storage from "../storage";
 import routerContext from "../contexts/router-context";
-import ScreenReader from "../components/ScreenReader";
 import {isDisabilityAdvocacySearch} from "../iss/serviceSearch"
 import {
     getFullPathForPersonalisationSubpath,
@@ -99,33 +98,24 @@ class PersonalisationSummaryPage extends React.Component<{}, {}> {
 
         return (
             <div className="PersonalisationPage">
-                <main aria-labelledby="answers">
-                    <ScreenReader>
-                        <span id="answers">
-                            Selected answers.
-                        </span>
-                    </ScreenReader>
-                    {Subpage ?
-                        this.renderSubpage(Subpage)
-                        : this.renderSummary()
-                    }
-                </main>
+                {Subpage ?
+                    this.renderSubpage(Subpage)
+                    : this.renderSummary()
+                }
             </div>
         );
     }
 
     renderSubpage: ((Subpage: PersonalisationPage) => ReactNode) =
-        (Subpage) => (
-            <div>
-                <Subpage
-                    ref="subpage"
-                    onDoneTouchTap={this.nextStep}
-                    category={getCategoryFromRouter(this.context.router)}
-                    nextStep={this.nextStep}
-                    backToAnswers={true}
-                    goBack={() => this.goBack()}
-                />
-            </div>
+        Subpage => (
+            <Subpage
+                ref="subpage"
+                onDoneTouchTap={this.nextStep}
+                category={getCategoryFromRouter(this.context.router)}
+                nextStep={this.nextStep}
+                backToAnswers={true}
+                goBack={() => this.goBack()}
+            />
         )
 
     renderSummary: (() => React.Element<"div">) = () => (

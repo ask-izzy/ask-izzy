@@ -3,7 +3,7 @@
 
 import type {Node as ReactNode} from "react";
 import React, {useEffect, useRef, useState} from "react";
-import ViewOnMapButton from "../ViewOnMapButton";
+import ViewOnMapLink from "../ViewOnMapLink";
 import {useRouterContext} from "../../contexts/router-context";
 import SortResult, {SORT_OPTIONS} from "./SortResult";
 import {getScrollPosition} from "../../effects/scrollPosition";
@@ -99,7 +99,7 @@ function Controls({
             {/*version if applicable*/}
             {sticky && renderStickyControlBar()}
             <div className="Controls">
-                <ViewOnMapButton
+                <ViewOnMapLink
                     to={location.pathname.replace(/\/?$/, "/map")}
                 />
                 {isMobile && renderResultsPageGeolocationButton()}

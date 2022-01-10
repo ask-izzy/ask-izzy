@@ -98,11 +98,17 @@ function registerScrollRestoration(location) {
     const sessionValue = sessionStorage.getItem(sessionKey)
 
     if (sessionValue !== null) {
-        waitTillPageLoaded().then(
-            () => window.scrollTo(0, Number(sessionValue))
-        ).catch()
+        waitTillPageLoaded().then(() => {
+            window.scrollTo(0, Number(sessionValue))
+        }).catch()
     } else {
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 0)
+        waitTillPageLoaded().then(() => {
+            // Don't focus on the page title on first page load
+            if (location.key !== "default") {
+                document.querySelector("h1")?.focus()
+            }
+        }).catch()
     }
 
     function handleScroll() {

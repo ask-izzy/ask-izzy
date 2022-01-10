@@ -4,18 +4,15 @@ import type {Node as ReactNode} from "React";
 import React, {useEffect, useState} from "react";
 import icons from "../icons";
 import maps, {MapsApi} from "../maps";
-import Button from "./base/Button";
-import {useRouterContext} from "../contexts/router-context";
+import Link from "./base/Link";
 
 type Props = {
     to: string
 }
 
-function ViewOnMapButton({to}: Props): ReactNode {
+function ViewOnMapLink({to}: Props): ReactNode {
 
     const [mapApi, setMapApi] = useState<?MapsApi>(null);
-
-    const {navigate} = useRouterContext()
 
     useEffect(() => {
         const getMaps = async() => {
@@ -30,29 +27,28 @@ function ViewOnMapButton({to}: Props): ReactNode {
     }
 
     return (
-        <Button
-            className="ViewOnMapButton"
+        <Link
+            className="ViewOnMapLink"
             to={to}
-            onClick={() => {
-                navigate(to)
-            }}
             analyticsEvent={{
                 event: "Link Followed - Results Map",
                 eventAction: "View results map",
                 eventLabel: null,
             }}
         >
-            <div className="buttonLabel">
-                <div className="leftSide">
-                    <icons.Map className="big" />
-                    <span>
-                        Map view
-                    </span>
-                </div>
-                <icons.Chevron className="big" />
-            </div>
-        </Button>
+            <span className="label">
+                <icons.Map
+                    className="big"
+                    aria-hidden={true}
+                />
+                <span>Map view</span>
+            </span>
+            <icons.Chevron
+                className="big"
+                aria-hidden={true}
+            />
+        </Link>
     );
 }
 
-export default ViewOnMapButton
+export default ViewOnMapLink

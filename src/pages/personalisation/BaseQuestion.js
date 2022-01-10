@@ -297,15 +297,7 @@ class BaseQuestion extends React.Component<
                     classnames("BaseQuestion", this.props.classNames)
                 }
             >
-                <div
-                    role="complementary"
-                    aria-labelledby="header"
-                >
-                    <ScreenReader>
-                        <span id="header">
-                            Header.
-                        </span>
-                    </ScreenReader>
+                <div>
                     <section className="page-header-section">
                         <HeaderBar
                             primaryText={
@@ -358,13 +350,8 @@ class BaseQuestion extends React.Component<
                 </div>
                 <main
                     id="mainPageContent"
-                    aria-labelledby="questions"
+                    aria-label="Questions"
                 >
-                    <ScreenReader>
-                        <span id="questions">
-                            Questions.
-                        </span>
-                    </ScreenReader>
                     <WithStickyFooter
                         footerContents={this.renderDoneButton()}
                     >

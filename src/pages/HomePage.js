@@ -43,23 +43,17 @@ function HomePage(): ReactNode {
 
     return (
         <div className="HomePage">
-            <section
-                role="complementary"
-                className="page-header-section"
-                aria-labelledby="header"
-            >
-                <ScreenReader>
-                    <span id="header">
-                        Header.
-                    </span>
-                </ScreenReader>
+            <section className="page-header-section">
                 <HeaderBar
                     primaryText={<>
                         <img
                             src={LOGO}
                             className="homepage-logo"
-                            alt="AskIzzy."
+                            aria-hidden={true}
                         />
+                        <ScreenReader>
+                            Ask Izzy:{" "}
+                        </ScreenReader>
                         Find the help you need, now and nearby.
                     </>}
                     secondaryText={<div className="secondary">
@@ -73,35 +67,23 @@ function HomePage(): ReactNode {
                     screenLocation="homePage"
                 />
                 <div
-                    role="search"
-                    aria-labelledby="searchBox"
+                    className={`search ${
+                        location ? "locationSet" : ""}`}
                 >
-                    <ScreenReader>
-                        <span id="searchBox">
-                            Search Box.
-                        </span>
-                    </ScreenReader>
-                    <div
-                        className={`search ${
-                            location ? "locationSet" : ""}`}
-                    >
-                        <label htmlFor="home-page-search"
-                            className="searchLabel"
-                        >
-                            <h2>What do you need help with?</h2>
-                        </label>
-                        <SearchBar
-                            initialValue={initialSearchText}
-                            onSubmit={searchText => {
-                                searchText && onSearchSubmit(searchText)
-                            }}
-                            onChange={newValue => {
-                                if (!newValue) {
-                                    storage.setSearch("")
-                                }
-                            }}
-                        />
-                    </div>
+                    <h2>What do you need help with?</h2>
+                    <SearchBar
+                        initialValue={initialSearchText}
+
+                        inputAriaLabel="Search for services"
+                        onSubmit={searchText => {
+                            searchText && onSearchSubmit(searchText)
+                        }}
+                        onChange={newValue => {
+                            if (!newValue) {
+                                storage.setSearch("")
+                            }
+                        }}
+                    />
                 </div>
                 {location &&
                     <QuestionStepper
@@ -113,12 +95,7 @@ function HomePage(): ReactNode {
                     />
                 }
             </section>
-            <main aria-labelledby="categories">
-                <ScreenReader>
-                    <span id="categories">
-                        Categories.
-                    </span>
-                </ScreenReader>
+            <main aria-label="Categories">
                 <CategoriesList />
             </main>
 

@@ -23,9 +23,9 @@ class Address extends React.Component<Props, void> {
             {this.props.withSpacer && <Spacer />}
             <div className="Address">
                 <ScreenReader>
-                    Address
+                    Address of the service is
                 </ScreenReader>
-                <icons.Map />
+                <icons.Map aria-hidden={true} />
                 <div className="Address-wrapper">
                     {" "}
                     <div className="street">

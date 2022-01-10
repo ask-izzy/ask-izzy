@@ -43,7 +43,6 @@ function InputListItem({
             rootElement={Button}
             role={type || "button"}
             aria-label={label}
-            tabIndex={0}
             rightIcon={!type ? rightIcon || <icons.Chevron />
                 : checked ? checkedIcon : uncheckedIcon
             }

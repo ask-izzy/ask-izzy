@@ -88,21 +88,11 @@ class Intro extends React.Component<
     render(): React.Element<"div"> {
         return (
             <div className="IntroPage">
-                <div
-                    role="complementary"
-                    aria-labelledby="header"
-                >
-                    {this.renderHeaderSection()}
-                </div>
+                {this.renderHeaderSection()}
                 <main
                     id="mainPageContent"
-                    aria-labelledby="questions"
+                    aria-label="Questions"
                 >
-                    <ScreenReader>
-                        <span id="questions">
-                            Questions.
-                        </span>
-                    </ScreenReader>
                     <div className="body">
                         <fieldset>
                             <legend>

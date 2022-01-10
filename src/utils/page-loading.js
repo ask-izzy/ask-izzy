@@ -6,6 +6,7 @@
 // including any data fetching need when loading that page. This allows
 // components to registered load dep
 import { Location } from "react-router-dom";
+import {isDebugMode} from "../contexts/debug-mode-context";
 
 let currentLocation = {}
 let currentDependencies = []
@@ -27,6 +28,13 @@ export function addPageLoadDependencies(
         }
 
         currentDependencies.push(dependency)
+
+        if (isDebugMode()) {
+            console.info(
+                `Registering page dependency "${dependency}", there are ` +
+                    `currently ${currentDependencies.length} dependencies`
+            )
+        }
     }
 }
 
@@ -48,6 +56,13 @@ export function closePageLoadDependencies(
         }
 
         currentDependencies.splice(index, 1)
+
+        if (isDebugMode()) {
+            console.info(
+                `Closing page dependency "${dependency}", there are ` +
+                    `currently ${currentDependencies.length} dependencies`
+            )
+        }
     }
 
     if (currentDependencies.length === 0) {

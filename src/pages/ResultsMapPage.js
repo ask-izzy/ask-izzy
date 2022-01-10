@@ -13,7 +13,6 @@ import icons from "../icons";
 import type { site } from "../iss/site";
 import Service from "../iss/Service"
 
-import ScreenReader from "../components/ScreenReader";
 import GeolocationButtonForTravelTimes from
     "../components/GeolocationButtonForTravelTimes";
 
@@ -101,12 +100,7 @@ class ResultsMapPage extends ResultsPage<{}, State> {
     renderPage: (() => ReactElement<"div">) = () => (
         <div className="ResultsMapPage">
             <AppBar transition={false}/>
-            <main aria-labelledby="mapResults">
-                <ScreenReader>
-                    <span id="mapResults">
-                        Map of search results.
-                    </span>
-                </ScreenReader>
+            <main aria-label="Map of search results">
                 {this.renderPageBody()}
             </main>
 
@@ -158,6 +152,7 @@ class ResultsMapPage extends ResultsPage<{}, State> {
                     crisisResults={false}
                     travelTimesStatus={this.state.travelTimesStatus}
                     results={this.selectedServices}
+                    resultsLoading={this.searchIsLoading}
                     sortBy={undefined}
                 />
             </>

@@ -47,7 +47,10 @@ function GeolocationButtonForTravelTimes({
         !storage.getUserGeolocation() && showMessage &&
             <div className={`explainer ${collapsed ? "collapsed" : ""}`}>
                 {(!isSmallMobileDevice || !collapsed) &&
-                <span className="explainerIcons">
+                <span
+                    className="explainerIcons"
+                    aria-hidden={true}
+                >
                     <icons.Walk/>
                     <icons.Tram/>
                     <icons.Car/>

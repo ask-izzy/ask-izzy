@@ -16,7 +16,6 @@ import {
     closePageLoadDependencies,
 } from "../utils/page-loading"
 import routerContext from "../contexts/router-context";
-import ScreenReader from "../components/ScreenReader";
 
 class BasePage extends React.Component<{}> {
     static contextType: any = routerContext;
@@ -45,14 +44,6 @@ class BasePage extends React.Component<{}> {
                 <DebugModeProvider>
                     <DebugColours />
                     <div className="BasePage">
-                        <ScreenReader>
-                            <p
-                                aria-live="polite"
-                                tabIndex={-1}
-                            >
-                                {pageTitle}
-                            </p>
-                        </ScreenReader>
                         <Helmet>
                             <link
                                 rel="canonical"

@@ -101,6 +101,6 @@ async function checkPhoneNumbers(lines: Array<string>): Promise<void> {
     ));
 
     assert.deepEqual(text.map(
-        (string) => string.replace("\n", " ")
+        (string) => string.replace(/\n/g, " ")
     ), lines);
 }

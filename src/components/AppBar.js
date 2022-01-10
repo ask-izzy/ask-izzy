@@ -70,16 +70,14 @@ function AppBar(
 
 
     return (
-        <div
-            role="navigation"
+        <nav
             className={
                 classnames(containerClassName, "AppBarContainer")
             }
-            aria-labelledby="appBar"
+            aria-label="Site"
         >
             <div
                 id="appBar"
-                aria-label="Banner."
                 className={classnames("AppBar", showBar())}
             >
                 {(
@@ -92,7 +90,7 @@ function AppBar(
                             !onBackTouchTap ? "appBarLogo" : undefined
                         }
                         name={onBackTouchTap ? backMessage
-                            : "Ask Izzy home page;"
+                            : "Link to home page"
                         }
                         onClick={onBackTouchTap || goHome}
                         analyticsEvent={{
@@ -102,7 +100,10 @@ function AppBar(
                         }}
                     >
                         {onBackTouchTap ? (
-                            <span className="backButton">
+                            <span
+                                className="backButton"
+                                aria-hidden="true"
+                            >
                                 <icons.ChevronBack />
                                 <span className="back-label">
                                     {backMessage}
@@ -112,6 +113,7 @@ function AppBar(
                             <img
                                 src={LOGO}
                                 alt="Ask Izzy home"
+                                aria-hidden="true"
                             />
                         )}
                     </IconButton>
@@ -120,7 +122,7 @@ function AppBar(
                     className={showBar()}
                 />
             </div>
-        </div>
+        </nav>
     )
 }
 

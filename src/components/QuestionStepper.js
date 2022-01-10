@@ -6,7 +6,6 @@ import cnx from "classnames"
 
 import Category from "../constants/Category";
 import QuestionStepperBreadcrumb from "./QuestionStepperBreadcrumb";
-import ScreenReader from "../components/ScreenReader";
 import Link from "../components/base/Link";
 import {ensureURLHasTrailingSlash} from "../utils/url"
 import {useRouterContext} from "../contexts/router-context"
@@ -77,25 +76,17 @@ export default function QuestionStepper({
             return null
         }
         return (
-            <>
-                <ScreenReader
-                    ariaLabel="Button to clear your current location"
-                >
-                    Button to clear your current location
-                </ScreenReader>
-                <Button
-                    className="clearButton"
-                    aria-label="Button to clear your current location"
-                    onClick={() => {
-                        storage.clearSearchArea()
-                        storage.clearUserGeolocation()
-                        updatePersonalisationPages()
-                        onClearLocation?.()
-                    }}
-                >
-                    Clear saved location
-                </Button>
-            </>
+            <Button
+                className="clearButton"
+                onClick={() => {
+                    storage.clearSearchArea()
+                    storage.clearUserGeolocation()
+                    updatePersonalisationPages()
+                    onClearLocation?.()
+                }}
+            >
+                Clear saved location
+            </Button>
         )
     }
 
@@ -129,7 +120,6 @@ export default function QuestionStepper({
                                 router.location.pathname
                             ) + "personalise/summary"
                         }
-                        aria-label="change your currently selected answers."
                     >
                         See all and edit
                     </Link>

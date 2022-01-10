@@ -1,6 +1,6 @@
 /* @flow */
 
-import type {Element as ReactElement} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 import PropTypes from "proptypes";
 
@@ -47,57 +47,56 @@ class CrisisLineItem extends React.Component<Props, void> {
         service: PropTypes.object.isRequired,
     };
 
-    render(): ReactElement<"div"> | ReactElement<"span"> {
+    render(): ReactNode {
         const {
             service,
         } = this.props;
         const phone = service.Phones()[0];
 
-        if (phone) {
-            return (
-                <div className="CrisisLineItem">
-                    <h3>
-                        <Link
-                            to={`/service/${service.slug}`}
-                            analyticsEvent={{
-                                event: `Link Followed - Service Result`,
-                                eventAction: "Service result",
-                                eventLabel: `Crisis line - number ${this.props.resultNumber}`,
-                            }}
-                        >
-                            {service.site.name}
-                        </Link>
-                    </h3>
-                    <PhoneButton
-                        {...phone}
-                        crisis={true}
-                    />
-                    {
-                        crisisDescriptions[service.id] &&
-                        <Collapser
-                            expandMessage="See information about this call"
-                            collapseMessage="Hide information about this call"
-                            analyticsEvent={{
-                                event: `Action Triggered - Crisis Line Info`,
-                                eventAction: "Show crisis line extra info",
-                                eventLabel: null,
-                            }}
-                            hasIcon={true}
-                        >
-                            {crisisDescriptions[service.id](service)}
-                        </Collapser>
-                    }
-                    <DebugServiceRecord object={service} />
-                    {service._explanation &&
-                        <DebugContainer message="Query score">
-                            <DebugQueryScore expl={service._explanation} />
-                        </DebugContainer>
-                    }
-                </div>
-            );
+        if (!phone) {
+            return null
         }
-
-        return <span />;
+        return (
+            <li className="CrisisLineItem">
+                <h3>
+                    <Link
+                        to={`/service/${service.slug}`}
+                        analyticsEvent={{
+                            event: `Link Followed - Service Result`,
+                            eventAction: "Service result",
+                            eventLabel: `Crisis line - number ${this.props.resultNumber}`,
+                        }}
+                    >
+                        {service.site.name}
+                    </Link>
+                </h3>
+                <PhoneButton
+                    {...phone}
+                    crisis={true}
+                />
+                {
+                    crisisDescriptions[service.id] &&
+                    <Collapser
+                        expandMessage="See information about this call"
+                        collapseMessage="Hide information about this call"
+                        analyticsEvent={{
+                            event: `Action Triggered - Crisis Line Info`,
+                            eventAction: "Show crisis line extra info",
+                            eventLabel: null,
+                        }}
+                        hasIcon={true}
+                    >
+                        {crisisDescriptions[service.id](service)}
+                    </Collapser>
+                }
+                <DebugServiceRecord object={service} />
+                {service._explanation &&
+                    <DebugContainer message="Query score">
+                        <DebugQueryScore expl={service._explanation} />
+                    </DebugContainer>
+                }
+            </li>
+        );
     }
 }
 

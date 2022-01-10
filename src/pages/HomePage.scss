@@ -44,14 +44,11 @@
             padding-bottom: 0;
         }
 
-        .searchLabel {
+        h2 {
             color: #{colours.get-static('colour-text-dark')};
             color: var(--colour-text-dark);
-
-            h2 {
-                margin: 10px 0;
-                font-size: 1.13em;
-            }
+            margin: 10px 0;
+            font-size: 1.13em;
         }
     }
 
