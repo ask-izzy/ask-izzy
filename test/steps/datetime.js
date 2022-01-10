@@ -10,15 +10,10 @@ import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
 import fs from "fs";
 import moment from "moment-timezone";
 
-import unpromisify from "../support/yadda-promise";
-
 module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library()
-        .given(
-            "it is late morning on $STRING",
-            unpromisify(changeToEarlyMorning)
-        )
-        .given("it is late on $STRING", unpromisify(changeToLateDay));
+        .given("it is late morning on $STRING", changeToEarlyMorning)
+        .given("it is late on $STRING", changeToLateDay);
 })(): YaddaLibraryEnglish);
 
 async function changeToEarlyMorning(day: string): Promise<void> {

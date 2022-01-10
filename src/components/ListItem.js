@@ -63,6 +63,7 @@ export default function ListItem<
                     {primaryText && <div className="primaryText">
                         {primaryText}
                     </div>}
+                    {primaryText && secondaryText && " "}
                     {secondaryText && <div className="secondaryText">
                         {secondaryText}
                     </div>}

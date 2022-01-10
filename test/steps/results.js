@@ -8,26 +8,24 @@ import _ from "underscore";
 import { By } from "selenium-webdriver";
 
 import dictionary from "../support/dictionary";
-import unpromisify from "../support/yadda-promise";
 import { documentReady } from "./browser";
 import { matchClass, escapeXPathString } from "../support/selectors";
 import asyncFilter from "../support/async-filter";
 
 module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library(dictionary)
-        .when("I wait for $NUMBER results to load",
-            unpromisify(waitForResultCount))
-        .then("I should see the results\n$table",
-            unpromisify(seeTheResults))
+        .when("I wait for $NUMBER results to load", waitForResultCount)
+        .then("I should see the results\n$table", seeTheResults)
         .then("I should see the results for \"$string\"\n$table",
-            unpromisify(seeTheResultsIn))
+            seeTheResultsIn
+        )
         .then("I should see a hotline in position $NUM which says \"$STRING\"",
-            unpromisify(hotlinePositionAndText))
+            hotlinePositionAndText
+        )
         .then("I should see \"$STRING\" before first hotline",
-            unpromisify(assertHotlineHeading))
-        .then("my results should not contain\n$table",
-            unpromisify(assertNoSuchResults))
-    ;
+            assertHotlineHeading
+        )
+        .then("my results should not contain\n$table", assertNoSuchResults)
 })(): YaddaLibraryEnglish);
 
 async function waitForResultCount(

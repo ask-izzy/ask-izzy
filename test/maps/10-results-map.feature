@@ -5,7 +5,7 @@ Feature: See results on a map
     # So that I can see where they're located relative to me
 
     Background:
-        Given the area to search is "Melbourne, Vic"
+        Given the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
         And I need nothing for housing
         And my gender is female
@@ -16,7 +16,7 @@ Feature: See results on a map
        Given I am not interested in any subcategory
         And my location is 37.822S 144.99E in "Melbourne, VIC"
         When I visit /everyday-things
-        And I click on "See more results"
+        And I click the "See more results" button
         And I wait for 10 results to load
         Then I should see the results
         ---------------------
@@ -34,9 +34,10 @@ Feature: See results on a map
         Community Lunch
         ---------------------
 
-       Given I'm watching map events
+        Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
-        When I click the map link
+        When I scroll to element "Map view"
+        And I click the "Map view" link
         And I should see markers
         ------------------------------------------
         Title              | Latitude | Longitude
@@ -66,7 +67,7 @@ Feature: See results on a map
 
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
-        When I click on "Map view"
+        When I click the "Map view" link
         And I click marker titled "My Housing Service"
         Then I should see the results
         ---------------------
@@ -84,7 +85,7 @@ Feature: See results on a map
 
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
-        When I click on "Map view"
+        When I click the "Map view" link
         And I click marker titled "My Housing Service"
         Then I should see "Housing Service"
 

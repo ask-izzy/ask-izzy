@@ -42,9 +42,9 @@ Feature: CMS integration
         When I visit /information
         Then I should see "Victoria"
         Then I should not see "Accordion content for Victoria."
-        And I click on a collapsible section titled "Victoria"
+        And I click the "Victoria" collapsible section"
         Then I should see "Accordion content for Victoria."
-        And I click on a collapsible section titled "Victoria"
+        And I click the "Victoria" collapsible section"
         Then I should not see "Accordion content for Victoria."
 
     Scenario: When navigating between pages the correct content is returned.
@@ -58,13 +58,13 @@ Feature: CMS integration
         When I visit /homeless-shelters
         Then I should see "Information about Homeless Shelters."
 
-        When I click on "Terms of use"
+        When I click the "Terms of use" link
         Then I should see "Try to live a good life"
 
         When I reload the page
         Then I should see "Try to live a good life"
 
-        When I click on "Shelters"
+        When I click the "Shelters" link
         Then I should see "Information about Homeless Shelters."
 
     Scenario: Display disability organisation page with embedded callout

@@ -19,28 +19,28 @@ Feature: History navigation
         And I am not interested in any subcategory
 
         When I visit /
-        And I click on "Housing"
+        And I click the link with "Housing" substring
 
         Then I should see "I'm looking for help for"
         And I should be at /housing/personalise
 
-        When I click on the done button # Intro
+        When I click the "Myself" button
 
         Then I should see "Do you have somewhere safe to sleep tonight?"
-        When I click on "Yes" # somewhere to sleep tonight
+        When I click the "Yes" button # somewhere to sleep tonight
 
         Then I should see "Do you identify as…"
 
-        When I click on "Female"
+        When I click the "Female" button
         Then I should see "How old are you?"
 
         When I click back from the browser UI
         Then I should see "Do you identify as…"
 
-        When I click on "Male"
+        When I click the "Male" button
         Then I should see "How old are you?"
 
-        When I click on "18 to 26"
+        When I click the "18 to 26" button
 
         Then I should see "Melbourne, VIC | Safe tonight | Men | 18-26"
         And I should see "Showing housing services"
@@ -55,7 +55,7 @@ Feature: History navigation
         Womens Refuge                | Susan's House         | Crisis accommodation
         ------------------------------------------------------------------------------------------
 
-        When I click on "Housing Service"
+        When I click the "Housing Service" link
         Then I should be at /service/111-my-housing-service
         And I should see "A housing service for people."
 

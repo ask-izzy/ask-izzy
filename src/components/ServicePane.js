@@ -26,6 +26,7 @@ import AlertBannerList from "../components/AlertBannerList";
 import Service from "../iss/Service";
 import icons from "../icons";
 import Storage from "../storage";
+import ScreenReader from "./ScreenReader";
 import {MobileDetect} from "../effects/MobileDetect";
 
 type Props = {
@@ -120,7 +121,10 @@ function ServicePane({service}: Props): ReactNode {
                             aria-label={`${service.name}. ${
                                 service.shortDescription[0]
                             }.`}
-                            primaryText={service.name}
+                            primaryText={<>
+                                {service.name}
+                                <ScreenReader>.</ScreenReader>
+                            </>}
                             secondaryText={service.shortDescription[0]}
                             rightIcon={<Chevron />}
                         />

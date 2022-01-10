@@ -16,7 +16,7 @@ Feature: Category page
     Scenario: Visit housing category
         When I visit /housing
         Then I should see "Showing housing services"
-        And I should see "Melbourne, VIC | Safe tonight | Women | 18-26"
+        And I should see "Melbourne, VIC | Safe tonight | Women | 0-17"
         And I should see the results
         ------------------------------------------------------------------------------------------
         Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)
@@ -58,8 +58,8 @@ Feature: Category page
         When I visit /everyday-things
         Then I should see "See more results"
 
-        When I click on "See more results"
-         And I wait for 10 results to load
+        When I click the "See more results" button
+        And I wait for 10 results to load
         Then I should see the results
         --------------------
         Service Name (name)

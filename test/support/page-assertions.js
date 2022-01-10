@@ -2,7 +2,7 @@
 
 import assert from "assert";
 import Webdriver, { By } from "selenium-webdriver";
-import { deepestPossible, escapeXPathString } from "./selectors";
+import { getElementWithText } from "./elements";
 import { isElementPresent } from "./webdriver";
 
 // Flow complains about adding properties directly
@@ -39,13 +39,9 @@ assertExtended.textIsVisible = async function(
     driver: typeof Webdriver.WebDriver,
     text: string
 ): Promise<void> {
-    text = escapeXPathString(text);
+    const element = await getElementWithText(driver, text)
 
-    const element = await driver.findElement(By.xpath(
-        deepestPossible(`normalize-space(.) = normalize-space(${text})`)
-    ))
-
-    let visible = await element.isDisplayed();
+    let visible = element ? await element.isDisplayed() : false;
 
     // isDisplayed doesn't currently check if text is in a closed <details>
     // element so we've got to check for that manually.

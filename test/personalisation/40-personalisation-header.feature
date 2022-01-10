@@ -7,16 +7,16 @@ Feature: Personalisation header
 
     Background:
         Given a fresh session
-        And the area to search is "Melbourne, Vic"
+        And the area to search is "Melbourne, VIC"
 
     Scenario: Search for housing
         When I visit /
-        And I click on "Housing"
+        And I click the link with "Housing" substring
         Then I should see "I'm looking for help for"
 
-        When I click on the done button # Intro page
-         And I click on the done button # Somewhere safe to sleep
-         And I click on the done button # Gender
-         And I click on "27 to 39"
-         And I click on the done button # Demographics
-        Then I should see "Melbourne, Vic | 27-39"
+        When I click the "Myself" button # Intro page
+        And I click the "Skip" button # Somewhere safe to sleep
+        And I click the "Skip" button # Gender
+        And I click the "27 to 39" button
+        And I click the "Skip" button # Demographics
+        Then I should see "Melbourne, VIC | 27-39"

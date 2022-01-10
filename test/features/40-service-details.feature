@@ -17,7 +17,7 @@ Feature: Service details page
         And I should not see "Not sure why you're still reading at this point."
         And I should not see "Also we have penguins."
 
-        When I click on "Read more"
+        When I click the "Read more" button
         Then I should see "There is a service here, and its really quite helpful."
         And I should see "You can get all sorts of things - blankets, food, other stuff too."
         And I should see "I suggest you drop by and check us out."
@@ -154,7 +154,7 @@ Feature: Service details page
         Email contact: Reception reception@service.org
         Service website: example.org
         -------------------------------------------
-        When I click on "Show other contact options"
+        When I click the "Show other contact options" button
         Then I should see the contacts
         -------------------------------------------
         Phone contact: Freecall Call 1800 111 111
@@ -164,12 +164,12 @@ Feature: Service details page
         Phone contact: (really a mobile) Call 0477 777 777
         Phone contact: Phone Call 1300 111 111
         -------------------------------------------
-        When I click on "example.org"
+        When I click the "example.org" link
         Then I should be at https://example.org/
 
     Scenario: Can view all opening times
         When I visit /service/5551234
-        And I click on "Show open hours"
+        And I click the "Show open hours" button
 
         Then I should see the results for "All Opening Times"
         ----------------------------
@@ -186,11 +186,11 @@ Feature: Service details page
     Scenario: Show other services at this location
         When I visit /service/111
         Then I should see "Also at this location"
-         And I should see "Transitional Housing Service"
+        And I should see "Transitional Housing Service"
 
     Scenario: Visit other services at this location
         When I visit /service/111
         Then I should see "Also at this location"
         And I should see "Transitional Housing Service"
-        When I click on "Transitional Housing Service"
+        When I click the link with "Transitional Housing Service" substring
         Then I should be at /service/112-my-housing-service

@@ -27,11 +27,11 @@ Feature: Search
 
     Scenario: Search for pets using keyboard and mouse
         When I search for "pet food"
-        And I click on the search button
+        And I click the "Search" button
         Then I should be at /search/pet food
 
     Scenario: Search on blank does not search
-        When I click on the search button
+        When I click the "Search" button
         Then I should be at /
 
     Scenario: Search with zero results displays a different sentence
@@ -46,5 +46,5 @@ Feature: Search
     Scenario: Searching for domestic violence performs the safety check
         When I search for "domestic violence" and press enter
         Then I should see "I'm looking for help for"
-        And I click on "Myself"
+        And I click the "Myself" button
         Then I should see "Are you safe right now?"

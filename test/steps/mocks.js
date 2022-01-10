@@ -8,7 +8,6 @@ import Yadda from "yadda";
 import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda";
 
 import dictionary from "../support/dictionary";
-import unpromisify from "../support/yadda-promise";
 import { mock, mockSearch } from "../support/mock_iss/server";
 import Service from "../../src/iss/Service";
 
@@ -44,13 +43,11 @@ async function mockSearchForServices(
 
 module.exports = ((function(): YaddaLibraryEnglish {
     return Yadda.localisation.English.library(dictionary)
-        .given("A service with:\n$service",
-            unpromisify(mockService))
-        .when("I navigate to the service page",
-            unpromisify(visitMockedService))
-        .when("I search for the service",
-            unpromisify(searchMockedService))
+        .given("A service with:\n$service", mockService)
+        .when("I navigate to the service page", visitMockedService)
+        .when("I search for the service", searchMockedService)
         .given("A search for \"$string\" returns:\n$services",
-            unpromisify(mockSearchForServices))
+            mockSearchForServices
+        )
     ;
 })(): YaddaLibraryEnglish);

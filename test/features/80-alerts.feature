@@ -17,7 +17,7 @@ Feature: Alerts
         Then I should see "COVID19 affecting services"
         And I should not see "Services listed here may not be operating or limited. Contact services directly for up-to-date information."
 
-        When I click on a collapsible section titled "COVID19 affecting services"
+        When I click the "COVID19 affecting services" collapsible section
         Then I should see "Services listed here may not be operating or limited. Contact services directly for up-to-date information."
 
     Scenario: Alerts defaultToOpen are initially open
@@ -27,7 +27,7 @@ Feature: Alerts
         Then I should see "Title is always shown"
         And I should see "Body is open by default"
 
-        When I click on a collapsible section titled "Title is always shown"
+        When I click the "Title is always shown" collapsible section
         Then I should see "Title is always shown"
         And I should not see "Body is open by default"
 
