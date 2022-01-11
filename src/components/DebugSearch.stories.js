@@ -46,16 +46,13 @@ function buildSearchQuery(initialSearchQuery, personalisations) {
 
     for (let personalisation of personalisations) {
         if (
-            typeof personalisation.showPage === "function" &&
-            !personalisation.showPage()
+            typeof personalisation.getShouldIncludePage === "function" &&
+            !personalisation.getShouldIncludePage()
         ) {
             continue
         }
 
-        // TODO: This needs to be debugged with the new flow version
-        // $FlowIgnore
         if (typeof personalisation.getSearch === "function") {
-            // $FlowIgnore
             searchQuery = personalisation.getSearch(searchQuery);
 
             if (!searchQuery) {

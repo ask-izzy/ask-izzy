@@ -34,12 +34,14 @@ export type PersonalisationQuestionPageDefaultProps = {|
     oldAnswers?: {[string]: string},
     showDVLinkBar?: boolean,
     textDVLinkBar?: ReactNode,
+    noQuestionStepperBreadcrumb?: boolean
 |}
 
 export type PersonalisationNonQuestionPageDefaultProps = {|
     name: string,
     byline?: string,
     info?: string,
+    noQuestionStepperBreadcrumb?: boolean
 |}
 
 export type PersonalisationPageDefaultProps =
@@ -59,7 +61,7 @@ export type PersonalisationPageState = {
 export type PersonalisationPage =
     typeof personalisation.BaseQuestion |
     typeof personalisation.Location |
-    typeof personalisation.Intro
+    typeof personalisation.WhoIsLookingForHelp
 
 export function getFullPathForPersonalisationSubpath(
     router: $PropertyType<RouterContextObject, 'router'>,
@@ -87,70 +89,84 @@ export function getFullPathForPersonalisationSubpath(
 
 export function navigateToPersonalisationSubpath(
     router: $PropertyType<RouterContextObject, 'router'>,
-    subpath: string
+    subpath: string,
+    navigateOptions?: {}
 ): void {
     router.navigate(
         getFullPathForPersonalisationSubpath(router, subpath),
+        navigateOptions
     );
 }
 
 export function getCurrentPersonalisationPage(
     router: $PropertyType<RouterContextObject, 'router'>,
 ): ?PersonalisationPage {
-    const personalisationPages = getPersonalisationPages(router)
+    const pages = getPersonalisationPages(router)
     const index = getCurrentPersonalisationPageIndex(
         router,
-        personalisationPages
+        pages
     )
-    return personalisationPages[index];
+    return typeof index === "number" ? pages[index] : null;
 }
 
 export function getCurrentPersonalisationPageIndex(
     router: $PropertyType<RouterContextObject, 'router'>,
     personalisationPages: Array<PersonalisationPage>
-): number {
-    return personalisationPages.findIndex(component => {
-        return component.defaultProps.name ===
-            router.match.params.subpage
+): ?number {
+    const currentPageName = router.match.params.subpage
+    const index = personalisationPages.findIndex(page => {
+        return page.defaultProps.name === currentPageName
     });
+
+    return index >= 0 ? index : null
 }
 
 /*
-* personalisationComponents:
-*
-* An array of components required to personalise this category.
+* An array of pages used in the process of personalising the current
+* category/search.
 */
 export function getPersonalisationPages(
     router: $PropertyType<RouterContextObject, 'router'>,
 ): Array<PersonalisationPage> {
-    let components = [];
+    let pages = [];
 
     const category = getCategory(
         router.match.params.page
     )
 
     if (category) {
-        components = category.personalisation;
+        pages = category.personalisation;
     } else if (router.match.params.search) {
-        components = [
+        pages = [
             personalisation.FreeTextAreYouSafe,
             personalisation.OnlineSafetyScreen,
+            personalisation.WhoIsLookingForHelp,
             personalisation.Location,
         ];
     }
 
-    return components.filter(component => {
-        if (typeof window === "undefined") {
-            if (typeof component.staticShowPage === "function") {
-                // $FlowIgnore
-                return component.staticShowPage();
-            }
-        }
-
-        return (typeof component.showPage === "function") &&
+    return pages.filter(page => {
+        if (typeof window !== "undefined") {
             // $FlowIgnore
-            component.showPage()
+            return !page.getShouldIncludePage || page.getShouldIncludePage()
+        }
+        return true
     });
+}
+
+/*
+* An array of pages which require input from the user before current
+* category/search results can be shown.
+*/
+export function getPersonalisationPagesToShow(
+    router: $PropertyType<RouterContextObject, 'router'>,
+): Array<PersonalisationPage> {
+    let pages = getPersonalisationPages(router)
+
+    // Only show page if it haven't already been answered
+    return pages.filter(
+        page => !page.savedAnswer
+    );
 }
 
 export function getBannerName(

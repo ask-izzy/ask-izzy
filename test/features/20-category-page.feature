@@ -9,6 +9,7 @@ Feature: Category page
         Given the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
         And my gender is female
+        And I need help for myself
         And I am 17 years old
         And I am not part of any relevant demographics
         And I am not interested in any subcategory
@@ -16,7 +17,7 @@ Feature: Category page
     Scenario: Visit housing category
         When I visit /housing
         Then I should see "Showing housing services"
-        And I should see "Melbourne, VIC | Safe tonight | Women | 0-17"
+        And I should see "Safe tonight | Melbourne, VIC | Women | 0-17"
         And I should see the results
         ------------------------------------------------------------------------------------------
         Service Name (name)          | Site Name (site_name) | Service provisions (ServiceProvisions)

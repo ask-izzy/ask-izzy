@@ -12,11 +12,15 @@ Feature: Personalisation header
     Scenario: Search for housing
         When I visit /
         And I click the link with "Housing" substring
-        Then I should see "I'm looking for help for"
-
-        When I click the "Myself" button # Intro page
         And I click the "Skip" button # Somewhere safe to sleep
+
+        Then I should see "I'm looking for help for"
+        When I click the "Myself" button # Intro page
+
         And I click the "Skip" button # Gender
+
         And I click the "27 to 39" button
+
         And I click the "Skip" button # Demographics
+
         Then I should see "Melbourne, VIC | 27-39"

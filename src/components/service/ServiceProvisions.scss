@@ -1,10 +1,8 @@
-.ServiceProvisions {
-    ul {
-        // Since Eligibility is used in ResultListItem which is a list element
-        // that causes this list to be a nested list which effects the style.
-        // We want this to look like it's a top level list so we can't rely on
-        // all of the default styling that the browsers supply for lists.
-        list-style: initial;
-        margin: 1em 0;
-    }
+ul.ServiceProvisions {
+    // Since Eligibility is used in ResultListItem which is a list element
+    // that causes this list to be a nested list which effects the style.
+    // We want this to look like it's a top level list so we can't rely on
+    // all of the default styling that the browsers supply for lists.
+    list-style: initial;
+    margin: 1em 0;
 }

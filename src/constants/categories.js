@@ -18,8 +18,9 @@ const categories = [
             minimum_should_match: "30%",
         },
         personalisation: [
-            personalisation.Location,
             personalisation.SleepTonight,
+            personalisation.WhoIsLookingForHelp,
+            personalisation.Location,
             personalisation.Gender,
             personalisation.Age,
             personalisation.Demographics,
@@ -38,8 +39,9 @@ const categories = [
                 " -(hire of facilities) -chsp -(meal preparation)",
         },
         personalisation: [
-            personalisation.Location,
             personalisation.FoodSubcategories,
+            personalisation.WhoIsLookingForHelp,
+            personalisation.Location,
         ],
     }): Category),
     (new Category({
@@ -51,8 +53,9 @@ const categories = [
             service_type: ["material aid"],
         },
         personalisation: [
-            personalisation.Location,
             personalisation.EverydayThingsSubcategories,
+            personalisation.WhoIsLookingForHelp,
+            personalisation.Location,
         ],
     }): Category),
     (new Category({
@@ -65,12 +68,13 @@ const categories = [
         personalisation: [
             personalisation.AreYouSafe,
             personalisation.OnlineSafetyScreen,
+            personalisation.DVFSubcategories,
+            personalisation.WhoIsLookingForHelp,
             personalisation.Location,
             personalisation.DfvDemographics,
             personalisation.Under18DomesticViolenceScreen,
             personalisation.UsingViolenceScreen,
             personalisation.LgbtiqaDomesticViolenceScreen,
-            personalisation.ServiceList,
         ],
     }): Category),
     (new Category({
@@ -83,10 +87,11 @@ const categories = [
             show_in_askizzy_health: true,
         },
         personalisation: [
-            personalisation.Location,
             personalisation.HealthSubcategories,
             personalisation.HealthAreYouSafe,
             personalisation.OnlineSafetyScreen,
+            personalisation.WhoIsLookingForHelp,
+            personalisation.Location,
             personalisation.DemographicsIndigenous,
         ],
     }): Category),
@@ -99,6 +104,7 @@ const categories = [
             name: "\"centrelink\"",
         },
         personalisation: [
+            personalisation.WhoIsLookingForHelp,
             personalisation.Location,
         ],
     }): Category),
@@ -110,8 +116,9 @@ const categories = [
             q: "financial aid -(coordinating bodies) -grants -heritage",
         },
         personalisation: [
-            personalisation.Location,
             personalisation.MoneySubcategories,
+            personalisation.WhoIsLookingForHelp,
+            personalisation.Location,
         ],
     }): Category),
     (new Category({
@@ -123,10 +130,11 @@ const categories = [
             minimum_should_match: "1",
         },
         personalisation: [
-            personalisation.Location,
             personalisation.CounsellingSubcategories,
             personalisation.CounsellingAreYouSafe,
             personalisation.OnlineSafetyScreen,
+            personalisation.WhoIsLookingForHelp,
+            personalisation.Location,
             personalisation.DemographicsIndigenous,
         ],
     }): Category),
@@ -140,10 +148,11 @@ const categories = [
                 "-centrelink -immigration -(hire of facilities)",
         },
         personalisation: [
-            personalisation.Location,
             personalisation.LegalSubcategories,
             personalisation.LegalAreYouSafe,
             personalisation.OnlineSafetyScreen,
+            personalisation.WhoIsLookingForHelp,
+            personalisation.Location,
             personalisation.DemographicsIndigenous,
         ],
     }): Category),
@@ -157,8 +166,9 @@ const categories = [
             minimum_should_match: "30%",
         },
         personalisation: [
-            personalisation.Location,
             personalisation.AddictionSubcategories,
+            personalisation.WhoIsLookingForHelp,
+            personalisation.Location,
             personalisation.DemographicsIndigenous,
         ],
     }): Category),
@@ -171,8 +181,9 @@ const categories = [
                 " -chsp -hacc",
         },
         personalisation: [
-            personalisation.Location,
             personalisation.LifeSkillsSubcategories,
+            personalisation.WhoIsLookingForHelp,
+            personalisation.Location,
             personalisation.DemographicsIndigenous,
         ],
     }): Category),
@@ -185,8 +196,9 @@ const categories = [
             service_type: ["employment"],
         },
         personalisation: [
-            personalisation.Location,
             personalisation.JobSubcategories,
+            personalisation.WhoIsLookingForHelp,
+            personalisation.Location,
         ],
     }): Category),
     (new Category({
@@ -199,6 +211,7 @@ const categories = [
                 " -maintenance",
         },
         personalisation: [
+            personalisation.WhoIsLookingForHelp,
             personalisation.Location,
         ],
     }): Category),
@@ -213,6 +226,7 @@ const categories = [
                 "-(sports psychology)",
         },
         personalisation: [
+            personalisation.WhoIsLookingForHelp,
             personalisation.Location,
         ],
     }): Category),
@@ -224,6 +238,7 @@ const categories = [
             q: "wifi internet computer",
         },
         personalisation: [
+            personalisation.WhoIsLookingForHelp,
             personalisation.Location,
         ],
     }): Category),
@@ -236,8 +251,9 @@ const categories = [
                 "disputes advocacy -research -(coordinating bodies)",
         },
         personalisation: [
-            personalisation.Location,
             personalisation.AdvocacySubcategories,
+            personalisation.WhoIsLookingForHelp,
+            personalisation.Location,
         ],
     }): Category),
 

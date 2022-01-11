@@ -31,7 +31,7 @@ export default class HousingSubcategories extends BaseQuestion {
         },
     };
 
-    static showPage(): boolean {
+    static getShouldIncludePage(): boolean {
         /* only show this question if the user has someone to sleep tonight */
         return (SleepTonight.savedAnswer !== "No");
     }

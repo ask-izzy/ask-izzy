@@ -14,18 +14,9 @@ import storage from "../storage"
 import LocationPage from "../pages/personalisation/Location"
 import type {PersonalisationPage} from "../utils/personalisation"
 
-const PERSONALISATION_EXCLUSION_LIST = [
-    "online-safety-screen",
-    "under-18-dfv",
-    "using-violence",
-    "are-you-safe",
-    "lgbtiqa-domestic-violence",
-]
-
 type Props = {|
     showQuestionIcons?: boolean,
     showClearLocation?: boolean,
-    limitBreadcrumbsTo?: Array<string>,
     category?: ?Category,
     showEditAnswers?: boolean,
     onClearLocation?: ?function,
@@ -39,7 +30,6 @@ type Props = {|
 export default function QuestionStepper({
     showQuestionIcons = false,
     showClearLocation = false,
-    limitBreadcrumbsTo,
     category,
     showEditAnswers = false,
     onClearLocation,
@@ -53,11 +43,6 @@ export default function QuestionStepper({
             category || undefined
         );
 
-        if (limitBreadcrumbsTo) {
-            newPersonalisationPages = newPersonalisationPages.filter(
-                page => limitBreadcrumbsTo.includes(page.defaultProps.name)
-            )
-        }
         setPersonalisationPages(newPersonalisationPages)
     }
 
@@ -141,11 +126,7 @@ export const getPersonlisationPagesForQuestionStepper = (
         }
     }
     return pages
-        .filter(page =>
-            !PERSONALISATION_EXCLUSION_LIST.includes(
-                page.defaultProps.name
-            )
-        )
+        .filter(page => !page.defaultProps.noQuestionStepperBreadcrumb)
         .filter(page => {
             const answer = page.savedAnswer
             if (answer instanceof Array) {

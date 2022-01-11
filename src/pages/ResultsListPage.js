@@ -50,44 +50,47 @@ class ResultsListPage extends ResultsPage<> {
     renderPage: (() => ReactElement<"div">) = () => (
         <div className="ResultsListPage">
             <div>
-                <DebugContainer message="Debug personalisation">
-                    <DebugPersonalisation
-                        search={getInitialSearchRequest(
-                            this.context.router
-                        )}
-                        items={getPersonalisationPages(
-                            this.context.router
-                        )}
-                    />
-                </DebugContainer>
-                <DebugContainer
-                    message="ISS Parameters"
-                    initiallyExpanded={!!Storage.getJSON("issParamsOverride")}
-                >
-                    {Storage.getJSON("issParamsOverride") ?
-                        <IssParamsOverrideControls
-                            originalIssParams={this.issParams() || {}}
-                            issParamsOverride={
-                                Storage.getJSON("issParamsOverride")
-                            }
-                            setIssParamsOverride={
-                                this.setIssParamsOverride.bind(this)
-                            }
+                {typeof window !== "undefined" && <>
+                    <DebugContainer message="Debug personalisation">
+                        <DebugPersonalisation
+                            search={getInitialSearchRequest(
+                                this.context.router
+                            )}
+                            items={getPersonalisationPages(
+                                this.context.router
+                            )}
                         />
-                        : <>
-                            <DebugSearch search={this.issParams()} />
-                            <button
-                                onClick={() => this.setIssParamsOverride(
-                                    this.issParams() || {},
-                                    false
-                                )}
-                            >
-                                Override ISS Params
-                            </button>
-                        </>
-                    }
-
-                </DebugContainer>
+                    </DebugContainer>
+                    <DebugContainer
+                        message="ISS Parameters"
+                        initiallyExpanded={
+                            !!Storage.getJSON("issParamsOverride")
+                        }
+                    >
+                        {Storage.getJSON("issParamsOverride") ?
+                            <IssParamsOverrideControls
+                                originalIssParams={this.issParams() || {}}
+                                issParamsOverride={
+                                    Storage.getJSON("issParamsOverride")
+                                }
+                                setIssParamsOverride={
+                                    this.setIssParamsOverride.bind(this)
+                                }
+                            />
+                            : <>
+                                <DebugSearch search={this.issParams()} />
+                                <button
+                                    onClick={() => this.setIssParamsOverride(
+                                        this.issParams() || {},
+                                        false
+                                    )}
+                                >
+                                    Override ISS Params
+                                </button>
+                            </>
+                        }
+                    </DebugContainer>
+                </>}
                 <LoadingResultsHeader
                     title={this.state.pageTitle}
                     category={this.state.category}

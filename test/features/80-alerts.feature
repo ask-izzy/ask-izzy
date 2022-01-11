@@ -12,6 +12,7 @@ Feature: Alerts
 
     Scenario: Alerts with a body can be expanded
         Given the area to search is "Melbourne, VIC"
+        And I need help for myself
         And I need nothing for everyday-things
         When I visit /everyday-things
         Then I should see "COVID19 affecting services"
@@ -22,6 +23,7 @@ Feature: Alerts
 
     Scenario: Alerts defaultToOpen are initially open
         Given the area to search is "Melbourne, VIC"
+        And I need help for myself
         And I need nothing for everyday-things
         When I visit /everyday-things
         Then I should see "Title is always shown"
@@ -38,6 +40,7 @@ Feature: Alerts
         Given the area to search is "Melbourne, VIC"
         And I have somewhere to sleep tonight
         And my gender is female
+        And I need help for myself
         And I am 27 years old
         And I am not part of any relevant demographics
         And I am not interested in any subcategory

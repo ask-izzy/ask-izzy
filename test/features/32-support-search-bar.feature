@@ -11,14 +11,13 @@ Feature: Search bar in subcategories page
         When I visit /
         And I click the link with "Food" substring
 
-        Then I should see "I'm looking for help for"
-        And I should be at /food/personalise
-
-        When I click the "Myself" button # Intro
-
         Then I should see "What type of food do you need?"
         And I should see the search bar
 
         When I search for "pet food"
         And I click the "Search" button
-        Then I should be at /search/pet food
+
+        Then I should see "I'm looking for help for"
+        When I click the "Myself" button
+
+        Then I should be at /search/pet food/Melbourne-VIC/

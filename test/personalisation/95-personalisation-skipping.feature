@@ -26,8 +26,8 @@ Feature: Skip personalisation settings
         ----------------------------------------------------------------
         Question (primaryText)                       | Answer (secondaryText)
         ================================================================
-        Where are you looking for help?              | Melbourne, VIC
         Do you have somewhere safe to sleep tonight? | Yes
+        Where are you looking for help?              | Melbourne, VIC
         How do you identify?                         | (skipped)
         How old are you?                             | (skipped)
         Do any of these apply to you?                | None selected

@@ -16,16 +16,14 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
 
     static title = "LGBTIQA+ help";
 
-    static defaultProps = Object.assign(
-        {},
-        BaseStaticPersonalisation.defaultProps,
-        {
-            name: "lgbtiqa-domestic-violence",
-            heading: "LGBTIQA+",
-            showBaseTextBox: true,
-            baseTextBoxComponent: <DomesticViolenceLink/>,
-        }
-    );
+    static defaultProps = {
+        ...BaseStaticPersonalisation.defaultProps,
+        name: "lgbtiqa-domestic-violence",
+        heading: "LGBTIQA+",
+        showBaseTextBox: true,
+        baseTextBoxComponent: <DomesticViolenceLink/>,
+        noQuestionStepperBreadcrumb: true,
+    };
 
     static summaryLabel = "LGBTIQA+";
 
@@ -40,7 +38,7 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
         }
     }
 
-    static showPage(): boolean {
+    static getShouldIncludePage(): boolean {
         return Boolean(
             DfvDemographics.savedAnswer?.includes("LGBTIQA+")
         );
@@ -54,14 +52,6 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
         storage.setItem(this.props.name, true);
 
         super.onDoneTouchTap();
-    }
-
-    static showInSummary(): boolean {
-        return false;
-    }
-
-    static staticShowPage(): boolean {
-        return true;
     }
 
     shouldShowVicService(): boolean {

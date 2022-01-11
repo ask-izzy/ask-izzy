@@ -13,6 +13,8 @@ import {
 import * as gtm from "../google-tag-manager";
 import type { RouterContextObject } from "../contexts/router-context";
 import {getCategoryFromRouter} from "../utils/personalisation"
+import WhoIsLookingForHelpPage from
+    "../pages/personalisation/WhoIsLookingForHelp"
 
 export type serviceSearchRequest = {|
     q?: string,
@@ -78,12 +80,15 @@ export async function initialSearchForServices(
     Object.assign(request_, query);
     let searchUrl = serialiseUrlQueryParams(searchUrlPath, request_);
 
+    const whoIsLookingForHelp = String(storage.getItem(
+        WhoIsLookingForHelpPage.defaultProps.name
+    ))
     if (searchUrl != previousSearchUrl) {
         gtm.emit({
             event: "New Search On Behalf Of",
             eventCat: "Services Searched",
             eventAction: "Help Seeker Type",
-            eventLabel: String(storage.getItem("user_type")),
+            eventLabel: whoIsLookingForHelp,
             sendDirectlyToGA: true,
         });
 
@@ -91,8 +96,8 @@ export async function initialSearchForServices(
             event: "Action Triggered - New Search",
             eventCat: "Action triggered",
             eventAction: "New search request",
-            eventLabel: storage.getItem("user_type") ?
-                String(storage.getItem("user_type"))
+            eventLabel: whoIsLookingForHelp ?
+                whoIsLookingForHelp
                 : "<not answered>",
             sendDirectlyToGA: true,
         });

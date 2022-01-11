@@ -12,16 +12,12 @@ export default class HealthAreYouSafe extends BaseQuestion {
 
     static title: string = "Are you safe";
 
-    static showInSummary(): boolean {
+    static getShouldShowInSummary(): boolean {
         return false;
     }
 
-    static staticShowPage(): boolean {
-        return true;
-    }
-
-    static showPage(): boolean {
-        return super.showPage() && HealthSubcategories.savedAnswer ===
+    static getShouldIncludePage(): boolean {
+        return HealthSubcategories.savedAnswer ===
             "Domestic & family violence";
     }
 }

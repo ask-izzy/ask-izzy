@@ -5,7 +5,7 @@ Feature: Service details page
     # So that I know if this service meets my needs
 
     Scenario: Description is limited to at least the first sentence + any extra sentences that fit under a total description length of 250 chars
-       Given A service with:
+        Given A service with:
         ----------------------------------------------
         description: There is a service here, and its really quite helpful. You can get all sorts of things - blankets, food, other stuff too. I suggest you drop by and check us out. Our service is the best, its really just the best. Not sure why you're still reading at this point. Also we have penguins.
         ----------------------------------------------
@@ -26,7 +26,7 @@ Feature: Service details page
         And I should see "Also we have penguins."
 
     Scenario: The service provisions is limited to a set of dot points
-       Given A service with:
+        Given A service with:
         ----------------------------------------------
         description: "legal advice"
         ----------------------------------------------
@@ -34,7 +34,7 @@ Feature: Service details page
         Then I should see "Advice on legal matters"
 
     Scenario: Service provisions header is present if there are any
-       Given A service with:
+        Given A service with:
         ----------------------------------------------
         description: "legal advice"
         ----------------------------------------------
@@ -42,7 +42,7 @@ Feature: Service details page
         Then I should see "What you can get here"
 
     Scenario: Service provisions header is absent if there are none
-       Given A service with:
+        Given A service with:
         ----------------------------------------------
         description: a service is here
         ----------------------------------------------
@@ -50,7 +50,7 @@ Feature: Service details page
         Then I should not see "What you can get here"
 
     Scenario: Ineligibility is present if there are criteria
-       Given A service with:
+        Given A service with:
         ----------------------------------------------
         ineligibility_info: no penguins allowed
         ----------------------------------------------
@@ -58,7 +58,7 @@ Feature: Service details page
         Then I should see "Ineligibility"
 
     Scenario: Ineligibility is absent if there are no criteria
-       Given A service with:
+        Given A service with:
         ----------------------------------------------
         ineligibility_info:
         ----------------------------------------------
@@ -66,7 +66,7 @@ Feature: Service details page
         Then I should not see "Ineligibility"
 
     Scenario: ATSI flags appear if there is an indigenous classification
-       Given A service with:
+        Given A service with:
         ----------------------------------------------
         indigenous_classification:
           - "Mainstream who cater for Aboriginal (indigenous)"
@@ -75,7 +75,7 @@ Feature: Service details page
         Then I should see ATSI flags
 
     Scenario: ATSI flags are absent if there is no indigenous classification
-       Given A service with:
+        Given A service with:
         ----------------------------------------------
         indigenous_classification:
         ----------------------------------------------
@@ -84,7 +84,7 @@ Feature: Service details page
 
 
     Scenario: There is travel information for non-confidential services
-        Given the area to search is "Melbourne, VIC"
+         Given the area to search is "Melbourne, VIC"
         And my location is 37.822S 144.99E in "Melbourne, VIC"
         And it is late morning on "Monday"
         And googles directions matrix will return
@@ -107,7 +107,7 @@ Feature: Service details page
         And I should not see "Get directions"
 
     Scenario: There is no travel information for old-style confidential services
-       Given A service with:
+        Given A service with:
         ----------------------------------------------
         location:
             street_number: Confidential
@@ -118,7 +118,7 @@ Feature: Service details page
         And I should not see "Get directions"
 
     Scenario: The contact methods are available except fax and tty
-       Given A service with:
+        Given A service with:
         ----------------------------------------------
         phones:
             - kind        : phone

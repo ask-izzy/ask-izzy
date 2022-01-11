@@ -146,27 +146,3 @@ WithClearLocation.parameters = {
         },
     },
 }
-
-export const OnlyShowSomePages: typeof Template = Template.bind({});
-OnlyShowSomePages.args = {
-    category: getCategory("housing"),
-    limitBreadcrumbsTo: ["gender", "age"],
-}
-OnlyShowSomePages.parameters = {
-    context: {
-        personalisationAnswers: {
-            location: "Richmond, VIC",
-            "sleep-tonight": "Yes",
-            gender: "Female",
-            age: "27 to 39",
-            demographics: ["Couples", "Have pets"],
-        },
-        router: {
-            match: {
-                params: {
-                    subpage: "location",
-                },
-            },
-        },
-    },
-}

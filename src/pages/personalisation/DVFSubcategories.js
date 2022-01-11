@@ -6,7 +6,7 @@ import { append, remove } from "../../iss/ServiceSearchRequest";
 import icons from "../../icons";
 import Location from "./Location";
 
-export default class ServiceList extends BaseQuestion {
+export default class DVFSubcategories extends BaseQuestion {
     static title: string = "Services";
 
     static defaultProps: ReactElementConfig<typeof BaseQuestion> = {

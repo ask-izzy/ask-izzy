@@ -97,6 +97,7 @@ Feature: Geolocation
         And google api geocode will return location name Richmond, VIC
         And I have somewhere to sleep tonight
         And my gender is female
+        And I need help for myself
         And I am 17 years old
         And I am not part of any relevant demographics
         And I am not interested in any subcategory

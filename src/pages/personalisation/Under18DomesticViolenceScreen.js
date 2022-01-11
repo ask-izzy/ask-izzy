@@ -28,20 +28,18 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
 
     static title = "Under 18 help";
 
-    static defaultProps = Object.assign(
-        {},
-        BaseStaticPersonalisation.defaultProps,
-        {
-            name: "under-18-dfv",
-            heading: "Under 18",
-            showBaseTextBox: true,
-            baseTextBoxComponent: <DomesticViolenceLink/>,
-        }
-    );
+    static defaultProps = {
+        ...BaseStaticPersonalisation.defaultProps,
+        name: "under-18-dfv",
+        heading: "Under 18",
+        showBaseTextBox: true,
+        baseTextBoxComponent: <DomesticViolenceLink/>,
+        noQuestionStepperBreadcrumb: true,
+    };
 
     static summaryLabel = "Under 18 Domestic Violence Information";
 
-    static showPage(): boolean {
+    static getShouldIncludePage(): boolean {
         return Boolean(
             DfvDemographics.savedAnswer?.includes("Under 18")
         );
@@ -55,14 +53,6 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
         storage.setItem(this.props.name, true);
 
         super.onDoneTouchTap();
-    }
-
-    static showInSummary(): boolean {
-        return false;
-    }
-
-    static staticShowPage(): boolean {
-        return true;
     }
 
     renderContent(): React.Element<any> {

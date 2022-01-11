@@ -6,19 +6,29 @@
 /* eslint-disable no-use-before-define */
 
 import Yadda from "yadda";
-import { titleize } from "underscore.string";
 import Webdriver from "selenium-webdriver";
 declare var IzzyStorage: Object;
 
 import dictionary from "../support/dictionary";
 import { gotoUrl } from "../support/webdriver";
+import WhoIsLookingForHelpPage from
+    "../../src/pages/personalisation/WhoIsLookingForHelp"
+import SleepTonightPage from "../../src/pages/personalisation/SleepTonight"
+import DemographicsPage from "../../src/pages/personalisation/Demographics"
+import GenderPage from "../../src/pages/personalisation/Gender"
+import AgePage from "../../src/pages/personalisation/Age"
 
 module.exports = (function() {
     return Yadda.localisation.English.library(dictionary)
         .given("I have (somewhere|nowhere) to sleep tonight", setSleepTonight)
         .given("I need nothing for $STRING", setSubcategoryItemsNone)
         .given("I need the following for $STRING\n$lines", setSubcategoryItems)
-        .given("I need the following for $STRING: $STRING", setSubcategoryItem)
+        .given("I need the following for $STRING: $STRING", setSubcategoryItems)
+        .given(
+            "I need help for (myself|a client or customer|a friend or family " +
+                "member)",
+            setHelpForWhom
+        )
         .given("I am not part of any relevant demographics",
             setDemographicsNone
         )
@@ -26,87 +36,65 @@ module.exports = (function() {
         .given("I am part of the following demographics\n$lines",
             setDemographics
         )
-        .given("my gender is $STRING", setGender)
-        .given("I am 17 years old", function() {
-            setAgeTo.call(this, "0 to 17")
-        })
-        .given("I am 27 years old", function() {
-            setAgeTo.call(this, "27 to 39")
-        })
-        .given("I am 77 years old", function() {
-            setAgeTo.call(this, "65 or older")
-        })
+        .given("my gender is (female|male)", setGender)
+        .given("I am (17|27|77) years old", setAgeTo)
 })();
 
-async function setSleepTonight(answer: string): Promise<void> {
-    if (answer === "somewhere") {
-        answer = "Yes";
-    } else if (answer === "nowhere") {
-        answer = "No";
-    } else {
-        throw new Error(`Expected ${answer} to be Yes or No`);
-    }
+// TODO: Question answers should be validated against what the actually answers
+// for question pages are so to avoid ugly code duplication here but that's not
+// really feasible until we refactor question pages so we can more easily pull
+// valid question answers.
 
-    await gotoUrl(this.driver, "/"); // go anywhere to start the session
-    await this.driver.executeScript(answer => {
-        IzzyStorage.setItem("sleep-tonight", answer);
-    }, answer);
+async function setSleepTonight(answer: string): Promise<void> {
+    await setStorageValue(
+        this.driver,
+        SleepTonightPage.defaultProps.name,
+        ({
+            "somewhere": "Yes",
+            "nowhere": "No",
+        })[answer]
+    );
 }
 
-async function setStorageValue(
-    driver: Webdriver.WebDriver,
-    key: string,
-    value: string,
-): Promise<void> {
-    await gotoUrl(driver, "/"); // go anywhere to start the session
-    await driver.executeScript((key, value) => {
-        IzzyStorage.setItem(key, value);
-    }, key, value);
+async function setHelpForWhom(answer: string): Promise<void> {
+    await setStorageValue(
+        this.driver,
+        WhoIsLookingForHelpPage.defaultProps.name,
+        ({
+            "myself": "User Myself",
+            "a client or customer": "User Worker",
+            "a friend or family member": "User Someone Else",
+        })[answer]
+    );
 }
 
 async function setSubcategoryItems(
     category: string,
-    items: Array<string>,
+    items: string | Array<string>,
 ): Promise<void> {
-    await setStorageValue(
-        this.driver,
-        `sub-${category}`,
-        JSON.stringify(items)
-    );
-}
-
-async function setSubcategoryItem(
-    category: string,
-    item: string,
-): Promise<void> {
-    await setStorageValue(
-        this.driver,
-        `sub-${category}`,
-        item
-    );
+    await setStorageValue(this.driver, `sub-${category}`, items);
 }
 
 async function setSubcategoryItemsNone(category: string): Promise<void> {
-    const key = `sub-${category}`;
-
-    await setStorageValue(
-        this.driver,
-        key,
-        (category === "housing") ? "(skipped)" : JSON.stringify([])
-    );
+    await setSubcategoryItems.call(
+        this,
+        category,
+        category === "housing" ? "(skipped)" : []
+    )
 }
 
 async function setDemographics(
     items: Array<string>,
 ): Promise<void> {
-    await gotoUrl(this.driver, "/"); // go anywhere to start the session
-    await this.driver.executeScript(items => {
-        IzzyStorage.setItem("demographics", JSON.stringify(items));
-    }, items);
+    await setStorageValue(
+        this.driver,
+        DemographicsPage.defaultProps.name,
+        JSON.stringify(items)
+    );
 }
 
 function setDemographicsNone(): Promise<void> {
-    return setDemographics.bind(this)([]);
+    return setDemographics.call(this, []);
 }
 
 async function setSubcategoriesNone(
@@ -130,16 +118,44 @@ async function setSubcategoriesNone(
     });
 }
 
-async function setAgeTo(option: string): Promise<void> {
-    await gotoUrl(this.driver, "/"); // go anywhere to start the session
-    await this.driver.executeScript(age => {
-        IzzyStorage.setItem("age", age);
-    }, option);
+async function setAgeTo(age: string): Promise<void> {
+    await setStorageValue(
+        this.driver,
+        AgePage.defaultProps.name,
+        ({
+            "17": "0 to 17",
+            "27": "27 to 39",
+            "77": "65 or older",
+        })[age]
+    );
 }
 
 async function setGender(gender: string): Promise<void> {
-    await gotoUrl(this.driver, "/"); // go anywhere to start the session
-    await this.driver.executeScript(gender => {
-        IzzyStorage.setItem("gender", gender);
-    }, titleize(gender));
+    await setStorageValue(
+        this.driver,
+        GenderPage.defaultProps.name,
+        ({
+            "female": "Female",
+            "male": "Male",
+        })[gender]
+    );
+}
+
+async function setStorageValue(
+    driver: Webdriver.WebDriver,
+    key: string,
+    value: string | Array<string>,
+): Promise<void> {
+    await gotoUrl(driver, "/"); // go anywhere to start the session
+    await driver.executeScript(
+        (key, value) => {
+            if (typeof value === "string") {
+                IzzyStorage.setItem(key, value);
+            } else {
+                IzzyStorage.setJSON(key, value);
+            }
+        },
+        key,
+        value
+    );
 }

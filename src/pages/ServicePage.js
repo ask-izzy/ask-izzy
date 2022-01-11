@@ -142,8 +142,7 @@ class ServicePage extends React.Component<{}, {
                             {
                                 makeTitle(
                                     object?.name || "",
-                                    this.context.router.match.params,
-                                    this.context.router.match.props.type
+                                    this.context.router
                                 )
                             }
                         </title>
