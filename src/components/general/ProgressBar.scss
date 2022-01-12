@@ -1,0 +1,16 @@
+@use '../../styles/mixins/colours';
+
+.ProgressBar {
+    min-height: 0.8em;
+    height: 1px; /* required so 100% height for children work */
+    border-radius: 0.4em;
+    background-color: #{colours.get-static('raw-colour-warm-white')};
+    background-color: var(--raw-colour-warm-white);
+
+    .bar {
+        background-color: #{colours.get-static('colour-brand-primary')};
+        background-color: var(--colour-brand-primary);
+        height: 100%;
+        border-radius: inherit;
+    }
+}

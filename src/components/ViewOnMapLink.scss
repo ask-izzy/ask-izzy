@@ -12,7 +12,8 @@
     align-items: center;
     justify-content: space-between;
 
-    &.Link {
+    &.Link,
+    &.Link:visited {
         color: #{colours.get-static('colour-button-primary')};
         color: var(--colour-button-primary);
         text-decoration: none;

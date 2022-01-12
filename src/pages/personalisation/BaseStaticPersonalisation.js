@@ -22,6 +22,8 @@ export type Props = {
 const defaultProps: Props = {
     showBaseTextBox: false,
     showDoneButton: true,
+    noQuestionStepperStep: true,
+    noQuestionStepperBreadcrumb: true,
 };
 
 class BaseStaticPersonalisation extends React.Component<Props, {}> {

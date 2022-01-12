@@ -1,45 +1,77 @@
 @use '../styles/mixins/colours';
 
 .QuestionStepper {
-    @include colours.define(
-        'colour-comma-pipe',
-        'QuestionStepper',
-        colours.lighten('raw-colour-pure-white', 'global', -23%)
-    );
+    display: flex;
+    align-items: center;
+    gap: 1em;
 
-    // Remove browser styles for lists
-    ol.breadcrumbs {
-        padding-left: 0;
-        margin: 0;
+    > .icon svg {
+        width: 40px;
+        height: 40px;
+        display: block; /* required to remove annoying space under icon */
+    }
 
-        li {
-            display: inline-block;
-            list-style-type: none;
+    > .content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3em;
+        flex-grow: 1;
+
+        > h3 {
+            font-size: 1.3em;
+            margin: 0;
         }
-    }
 
-    .clearButton {
-        border: 0;
-        background: none;
-        color: #{colours.get-static('colour-link')};
-        color: var(--colour-link);
-        text-decoration: underline;
-        cursor: pointer;
+        > .currentProgress {
+            display: flex;
+            gap: 1em;
+            align-items: center;
 
-        &:hover {
-            text-decoration: none;
+            .ProgressBar {
+                flex-grow: 1;
+            }
         }
-    }
 
-    .breadcrumbSpacer {
-        color: #{colours.get-static('colour-comma-pipe', 'QuestionStepper')};
-        color: var(--colour-comma-pipe);
-        margin: 0 0.4em;
-        white-space: pre;
-    }
+        @include colours.define(
+            'colour-comma-pipe',
+            'QuestionStepper',
+            colours.lighten('raw-colour-pure-white', 'global', -40%)
+        );
 
-    .breadcrumbAnswerSpacer {
-        color: #{colours.get-static('colour-comma-pipe', 'QuestionStepper')};
-        color: var(--colour-comma-pipe);
+        // Remove browser styles for lists
+        ol.breadcrumbs {
+            padding-left: 0;
+            margin: 0;
+
+            li {
+                display: inline-block;
+                list-style-type: none;
+            }
+        }
+
+        .clearButton {
+            border: 0;
+            background: none;
+            color: #{colours.get-static('colour-link')};
+            color: var(--colour-link);
+            text-decoration: underline;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        .breadcrumbSpacer {
+            color: #{colours.get-static('colour-comma-pipe', 'QuestionStepper')};
+            color: var(--colour-comma-pipe);
+            margin: 0 0.4em;
+            white-space: pre;
+        }
+
+        .breadcrumbAnswerSpacer {
+            color: #{colours.get-static('colour-comma-pipe', 'QuestionStepper')};
+            color: var(--colour-comma-pipe);
+        }
     }
 }

@@ -8,7 +8,10 @@ import type {
 } from "../../utils/personalisation";
 
 export default class HealthAreYouSafe extends BaseQuestion {
-    static defaultProps: PersonalisationQuestionPageDefaultProps = defaultProps;
+    static defaultProps: PersonalisationQuestionPageDefaultProps = {
+        ...defaultProps,
+        noQuestionStepperStep: true,
+    };
 
     static title: string = "Are you safe";
 

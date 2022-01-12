@@ -34,10 +34,7 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
         heading: "Under 18",
         showBaseTextBox: true,
         baseTextBoxComponent: <DomesticViolenceLink/>,
-        noQuestionStepperBreadcrumb: true,
     };
-
-    static summaryLabel = "Under 18 Domestic Violence Information";
 
     static getShouldIncludePage(): boolean {
         return Boolean(

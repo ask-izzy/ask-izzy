@@ -11,7 +11,6 @@ import {
     setPersonalisationAnswers,
     setRouterContext,
 } from "../storybook/decorators";
-import {getCategory} from "../constants/categories";
 
 export default {
     title: "App Components/QuestionStepper",
@@ -32,9 +31,6 @@ const Template = (args: QuestionStepperProps): ReactNode => {
 };
 
 export const HousingFlow: typeof Template = Template.bind({});
-HousingFlow.args = {
-    category: getCategory("housing"),
-}
 HousingFlow.parameters = {
     context: {
         personalisationAnswers: {
@@ -48,6 +44,7 @@ HousingFlow.parameters = {
             match: {
                 params: {
                     subpage: "other-page",
+                    page: "housing",
                 },
             },
         },
@@ -55,9 +52,6 @@ HousingFlow.parameters = {
 }
 
 export const HousingFlowEditingLocation: typeof Template = Template.bind({});
-HousingFlowEditingLocation.args = {
-    category: getCategory("housing"),
-}
 HousingFlowEditingLocation.parameters = {
     context: {
         personalisationAnswers: {
@@ -70,6 +64,7 @@ HousingFlowEditingLocation.parameters = {
         router: {
             match: {
                 params: {
+                    page: "housing",
                     subpage: "location",
                 },
             },
@@ -79,7 +74,6 @@ HousingFlowEditingLocation.parameters = {
 
 export const ShowEditAnswers: typeof Template = Template.bind({});
 ShowEditAnswers.args = {
-    category: getCategory("housing"),
     showEditAnswers: true,
 }
 ShowEditAnswers.parameters = {
@@ -94,6 +88,7 @@ ShowEditAnswers.parameters = {
         router: {
             match: {
                 params: {
+                    page: "housing",
                     subpage: "other-page",
                 },
             },
@@ -106,7 +101,6 @@ ShowEditAnswers.parameters = {
 
 export const ShowPageIcons: typeof Template = Template.bind({});
 ShowPageIcons.args = {
-    category: getCategory("housing"),
     showQuestionIcons: true,
 }
 ShowPageIcons.parameters = {
@@ -121,6 +115,7 @@ ShowPageIcons.parameters = {
         router: {
             match: {
                 params: {
+                    page: "housing",
                     subpage: "other-page",
                 },
             },

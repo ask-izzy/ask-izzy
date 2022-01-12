@@ -103,8 +103,8 @@ class ResultsListPage extends ResultsPage<> {
                     statusCode={this.state.searchError?.status || 200}
                 />
                 <QuestionStepper
-                    category={this.state.category}
                     showEditAnswers={true}
+                    hideStepInfo={true}
                 />
             </div>
             {this.hasSearchResults() &&

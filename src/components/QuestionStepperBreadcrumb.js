@@ -6,6 +6,8 @@ import cnx from "classnames";
 
 import routerContext from "../contexts/router-context";
 import MapIcon from "../icons/Map";
+import Link from "./base/Link";
+import {getFullPathForPersonalisationSubpath} from "../utils/personalisation"
 import type {PersonalisationPage} from "../utils/personalisation"
 
 type Props = {|
@@ -26,6 +28,24 @@ export default function QuestionStepperBreadcrumb({
     const currentlyEditing =
         personalisationPage.defaultProps.name === router.match.params.subpage
 
+
+    function AnswerContainer(props): ReactNode {
+        if (currentlyEditing) {
+            return <span {...props} />
+        } else {
+            const url = getFullPathForPersonalisationSubpath(
+                router,
+                `personalise/page/${personalisationPage.defaultProps.name}`
+            )
+            return (
+                <Link
+                    to={url}
+                    {...props}
+                />
+            )
+        }
+    }
+
     return (
         <span className={cnx("QuestionStepperBreadcrumb", {currentlyEditing})}>
             {showQuestionIcons &&
@@ -35,7 +55,7 @@ export default function QuestionStepperBreadcrumb({
                     viewBox="19 16 26 34"
                 />
             }
-            <span className="answer">
+            <AnswerContainer className="answer">
                 {getBreadcrumbText(personalisationPage, personalisationPages)
                     .map(item => (
                         <React.Fragment
@@ -52,10 +72,10 @@ export default function QuestionStepperBreadcrumb({
                     " …"
                 }
                 {currentlyEditing && " (editing)"}
-            </span>
-            <span className="appendedContent">
+            </AnswerContainer>
+            {contentToAppend && <span className="appendedContent">
                 {contentToAppend}
-            </span>
+            </span>}
         </span>
     )
 }
