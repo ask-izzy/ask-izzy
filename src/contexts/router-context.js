@@ -22,6 +22,7 @@ import {
 } from "react-router-dom";
 import RouteMatch from "react-router"
 import storage from "../storage"
+import {isDebugMode} from "../contexts/debug-mode-context";
 
 export type RouterContextObject = {
     router: {
@@ -92,9 +93,19 @@ function getNavigateFunctions() {
         navigate
     )
     navigate = wrapNavigateWithSupportExternal(navigateWhenReady)
+    navigate = debugNavigate(navigate)
     return {
         navigate,
         navigateInProgress,
+    }
+}
+
+function debugNavigate(navigate) {
+    return (...args) => {
+        if (isDebugMode()) {
+            console.log("Redirecting to:", ...args)
+        }
+        return navigate(...args)
     }
 }
 
