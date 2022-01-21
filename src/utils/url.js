@@ -62,22 +62,27 @@ export const replaceUrlLocation = (
         .split(", ")
         .map(encodeURIComponent)
         .join("-");
+    const includesHyphen = (index) => {
+        return parts[index].includes("-") &&
+            !parts[index].includes(" -") &&
+            !parts[index].includes("%20-")
+    };
 
     // If URL has suburb, replace the existing suburb.
     // Do not replace if the url looks to include a '-' as
     // part of the ISS search query.
     if (parts.length > 3 &&
-            parts[3].includes("-") &&
-            !parts[3].includes(" -") &&
-            !parts[3].includes("%20-")
+            includesHyphen(3)
     ) {
         parts.splice(3, 1, newUrlLocation)
     } else if (parts.length > 2 &&
-            parts[2].includes("-") &&
-            !parts[2].includes(" -") &&
-            !parts[2].includes("%20-")
+            includesHyphen(2)
     ) {
-        parts.splice(2, 1, newUrlLocation)
+        if (parts[1].includes("search")) {
+            parts.splice(3, 0, newUrlLocation)
+        } else {
+            parts.splice(2, 1, newUrlLocation)
+        }
     } else {
         // We didn't find any suburb
         // just add the new location to the url
