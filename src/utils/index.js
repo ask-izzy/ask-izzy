@@ -23,8 +23,8 @@ export function stateFromLocation(): string {
         "WA",
     ];
 
-    const location = storage.getSearchArea()
-    const state = location.split(",").pop().trim()
+    const location = Storage.getJSON("location")
+    const state = location?.name?.split(",").pop().trim()
     return states.includes(state) ? state : ""
 }
 
@@ -83,8 +83,8 @@ export const makeTitle = (
         if (!params.suburb && !params.state) {
             // If the location isn't set then it will not add
             // the 'in' location string to the title
-            if (Storage.getSearchArea()) {
-                pageTitleArr.push(`in ${Storage.getSearchArea()}`)
+            if (Storage.getJSON("location")?.name) {
+                pageTitleArr.push(`in ${Storage.getJSON("location")?.name}`)
             }
         } else {
             pageTitleArr.push(`in ${params?.suburb}, ${params?.state}`)

@@ -242,7 +242,7 @@ function ServicePane({service}: Props): ReactNode {
                             {!service.location?.isConfidential() &&
                             <GoogleMapsLink
                                 to={service.location}
-                                className={Storage.getUserGeolocation() ?
+                                className={Storage.hasPreciseLocation() ?
                                     "withTimes" : "withoutTimes"}
                                 onClick={recordClick}
                                 hideSpacer={true}

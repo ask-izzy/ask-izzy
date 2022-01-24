@@ -72,7 +72,7 @@ export function getFullPathForPersonalisationSubpath(
     const parts = decodeURIComponent(
         router.location.pathname
     ).split("/");
-    const location = storage.getSearchArea();
+    const location = storage.getJSON("location")?.name;
 
     if (location) {
         replaceUrlLocation(location, parts)
@@ -212,10 +212,12 @@ export function setLocationFromUrl(
     const {suburb, state} = router.match.params;
 
     if (suburb && state) {
-        if (storage.getSearchArea() != `${suburb}, ${state}`) {
+        if (storage.getJSON("location")?.name != `${suburb}, ${state}`) {
             // Use the location from the URL.
-            storage.setSearchArea(`${suburb}, ${state}`);
-            storage.clearUserGeolocation()
+            // storage.setJSON("location", `${suburb}, ${state}`);
+            // storage.clearUserGeolocation()
+            /****************
+            FIX THIS */
         }
     }
 }

@@ -65,8 +65,7 @@ export default function QuestionStepper({
             <Button
                 className="clearButton"
                 onClick={() => {
-                    storage.clearSearchArea()
-                    storage.clearUserGeolocation()
+                    storage.clearLocation()
                     updatePersonalisationPages()
                     onClearLocation?.()
                 }}

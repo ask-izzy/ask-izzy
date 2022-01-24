@@ -10,7 +10,10 @@ import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
 import type {Geolocation} from "../../storage";
-import {searchForLocations} from "../../iss/locationSearch"
+import {
+    getLocationAutocompleteSuggestions,
+    getLocationDetails
+} from "../../locations"
 import type {areaLocation} from "../../iss/locationSearch";
 import type { serviceSearchResults} from "../../iss/serviceSearch";
 import type { serviceSearchRequest } from "../../iss/serviceSearch";
@@ -77,20 +80,10 @@ class Location extends React.Component<
     }
 
     componentDidMount(): void {
-        const userLocation = storage.getUserGeolocation()
-        const searchLocation = storage.getSearchArea()
+        const searchLocation = storage.getJSON(this.props.name)
 
-        let location: location
-        if (userLocation) {
-            if (!searchLocation || searchLocation === userLocation.name) {
-                location = userLocation
-            }
-        } else if (searchLocation) {
-            location = {name: searchLocation}
-        }
-
-        if (location) {
-            this.setSelectedLocation(location)
+        if (searchLocation) {
+            this.setSelectedLocation(searchLocation)
         }
         const category = getCategory(
             this.context.router.match.params.page
@@ -104,47 +97,38 @@ class Location extends React.Component<
     static title: string = "Location";
 
     static headingValue(): ?string {
-        return this.savedAnswer && `in ${this.savedAnswer}`
+        return this.savedAnswer && `in ${this.prettyPrintAnswer(this.savedAnswer)}`
     }
 
-    static get savedAnswer(): string {
-        return storage.getSearchArea();
+    static get savedAnswer(): Geolocation {
+        return storage.getJSON(defaultProps.name);
     }
 
-    static prettyPrintAnswer(answer: string): ?string {
-        return answer;
+    static prettyPrintAnswer(answer: Geolocation): string {
+        return answer.name;
     }
 
     static shouldInjectAccessPoints(): boolean {
         // Currently only for locations in Victoria.
         let victoriaRegex = /VIC(toria)?$/i;
 
-        return !!victoriaRegex.exec(storage.getSearchArea());
+        return !!victoriaRegex.exec(storage.getJSON(defaultProps.name)?.name);
     }
 
     static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
         /* Location/Area is required */
-        const searchArea = storage.getSearchArea();
-        if (!searchArea) {
+        const location = storage.getJSON(defaultProps.name);
+        if (!location) {
             return null;
         }
-        request = Object.assign(request, {area: searchArea});
-
-        /* Coordinates are optional */
-        const userLocation = storage.getUserGeolocation();
-        if (userLocation && userLocation.name === searchArea) {
-            request = Object.assign(request, {
-                location: `${userLocation.longitude}E${userLocation.latitude}N`,
-            });
-        }
-
+        request = Object.assign(request, {area: location});
         return request;
     }
 
     static summaryLabel: string = "Where are you looking for help?";
 
     static get summaryValue(): string {
-        return storage.getSearchArea();
+        return storage.getJSON(defaultProps.name)?.name;
     }
 
     static getShouldShowInSummary(): boolean {
@@ -188,7 +172,7 @@ class Location extends React.Component<
         async(input: string) => {
             let results
             try {
-                results = await searchForLocations(input)
+                results = await getLocationAutocompleteSuggestions(input)
             } catch (error) {
                 console.error(
                     "Error trying to get location autocomplete",
@@ -204,7 +188,7 @@ class Location extends React.Component<
             if (results) {
                 this.setState({
                     autocompletions: _.uniq(
-                        Array.from(results.objects),
+                        Array.from(results),
                         false,
                         ({name, state}) => name + state
                     ),
@@ -247,12 +231,7 @@ class Location extends React.Component<
 
     onNextStep(): void {
         if (this.state.selectedLocation) {
-            storage.setSearchArea(this.state.selectedLocation.name);
-            if (isGeolocation(this.state.selectedLocation)) {
-                storage.setUserGeolocation(this.state.selectedLocation);
-            } else {
-                storage.clearUserGeolocation()
-            }
+            storage.setJSON(this.props.name, this.state.selectedLocation)
         } else {
             console.error(
                 "We should not be able to progress without selecting a location"
@@ -309,11 +288,15 @@ class Location extends React.Component<
         }
     }
 
-    selectAutocomplete(result: areaLocation): void {
+    async selectAutocomplete(result: areaLocation): void {
         /* set the text box to this value
          * and remove the autocompletions */
+        const locationDetails = await getLocationDetails(result.id, result.locationType)
         const location: location = {
             name: `${result.name}, ${result.state}`,
+            latitude: locationDetails.centroid[1],
+            longitude: locationDetails.centroid[0],
+            approximate: true
         };
         this.setSelectedLocation(location);
         this.setState({

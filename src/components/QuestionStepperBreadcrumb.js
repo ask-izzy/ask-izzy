@@ -30,6 +30,7 @@ export default function QuestionStepperBreadcrumb({
 
 
     function AnswerContainer(props): ReactNode {
+        console.trace('props', props)
         if (currentlyEditing) {
             return <span {...props} />
         } else {
@@ -65,13 +66,13 @@ export default function QuestionStepperBreadcrumb({
                         </React.Fragment>
                     ))
                 }
-                {breadcrumbIsTruncated(
+                {/* {breadcrumbIsTruncated(
                     personalisationPage,
                     personalisationPages
                 ) &&
                     " …"
                 }
-                {currentlyEditing && " (editing)"}
+                {currentlyEditing && " (editing)"} */}
             </AnswerContainer>
             {contentToAppend && <span className="appendedContent">
                 {contentToAppend}

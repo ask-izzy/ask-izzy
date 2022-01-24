@@ -120,7 +120,7 @@ function SitesMap(
                     zoom={12}
                     onClick={() => onSiteSelect?.(null)}
                 >
-                    {storage.getUserGeolocation() ?
+                    {storage.hasPreciseLocation() ?
                         <Marker
                             title="You are here"
                             icon={{
@@ -128,8 +128,8 @@ function SitesMap(
                                 scaledSize: {width: 32, height: 32},
                             }}
                             position={{
-                                lat: storage.getUserGeolocation()?.latitude,
-                                lng: storage.getUserGeolocation()?.longitude,
+                                lat: storage.getLocation()?.latitude,
+                                lng: storage.getLocation()?.longitude,
                             }}
                         />
                         : null}

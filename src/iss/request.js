@@ -2,11 +2,15 @@
 import xhr from "axios";
 import url from "url";
 
+import createClient from "../ix-web-js-client/apis/iss"
+
 import {
     ReturnAfter,
 } from "../timeout";
 import * as gtm from "../google-tag-manager";
 import {serialiseUrlQueryParams} from "../utils/url"
+
+import storage from "../storage"
 
 type XhrOptions = {
     url: string,
@@ -86,13 +90,94 @@ export async function jsonRequestFromIss(
         data
     );
 
-    let response = await requestFromIss({
-        url: requestUrl,
-        headers: {
-            "Content-type": "application/json",
-            Accept: "application/json",
-        },
-    });
+    console.log('-', requestUrl, url.resolve(window.ISS_URL, urlPath), data)
 
-    return response.data;
+    // let response = await requestFromIss({
+    //     url: requestUrl,
+    //     headers: {
+    //         "Content-type": "application/json",
+    //         Accept: "application/json",
+    //     },
+    // });
+
+    console.log('fire', storage.getLocation())
+
+    const location = storage.getLocation()
+
+    const geopointString = `${location.latitude},${location.longitude}`
+    console.info({geopointString})
+
+    const query = {
+        "filters": {
+            "all": [
+                { "object_type": "Service" },
+                // {
+                //     "location_approximate_geopoint": {
+                //         "center": "-33.868851412638676,151.20933189349873",
+                //         "distance": 300,
+                //         "unit": "km"
+                //     }
+                // }
+            ]
+        },
+        query: data.q,
+        "page": { "size": 10, "current": 1 },
+        // "result_fields": {
+        //     "entity_id": { "raw": {} },
+        //     "name": { "raw": {} },
+        //     "description": { "raw": {} },
+        //     "target_gender": { "raw": {} },
+        //     "opening_hours": { "raw": {} }
+        // },
+        "boosts": {
+            "location_approximate_geopoint": [
+                {
+                    "type": "proximity",
+                    "function": "exponential",
+                    "center": geopointString,
+                    // "center": "-33.868851412638676,151.20933189349873",
+                    "factor": 20
+                }
+            ]
+        }
+    }
+
+
+
+    const iss4Res = await createClient({
+        token: 'e6e988b62b52d85eaed1db6a22896dcea3eb1a681f541167e904a6a559b8640c'
+    }).search(query)
+
+    console.log('blar', iss4Res)
+
+    const res = {
+        meta: {
+            available_count: iss4Res.meta.page.total_results,
+            limit: iss4Res.meta.page.size,
+            location: {
+                lat: -33.867793,
+                lon: 151.207729,
+                name: "Sydney",
+                state: "NSW",
+                suburb: "Sydney"
+            },
+            next: "/api/v3/search/?area=Sydney%2C+NSW&catchment=prefer&key=UNDFUUWCHWGIJGTGMTBXZJDENAACETNJ%3AXBKSEBMIGVELOOSTGZFEJHKZWCKAFZUY&minimum_should_match=30%25&q=housing+-%28coordinating+bodies%29+-%28respite+care%29+-%28housing+information%29+-hef+-%28holiday+accommodation%29&service_type=housing&type=service&limit=10&offset=10",
+            offset: iss4Res.meta.page.size * (iss4Res.meta.page.current - 1),
+            total_count: iss4Res.meta.page.total_results,
+        },
+        objects: iss4Res.results
+    }
+
+    for (const service of res.objects) {
+        service.now_open = {
+            local_time: "2022-01-18T16:41:00+11:00",
+            notes: "",
+            now_open: true,
+        }
+        service.catchment = service.catchment_description
+    }
+
+    console.log('***', res)
+
+    return res
 }

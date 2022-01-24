@@ -79,6 +79,8 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             this.context.router
         )
 
+        console.log('hii', personalisationPagesToShow)
+
         if (personalisationPagesToShow.length > 0) {
             closePageLoadDependencies(
                 this.context.router.location,
