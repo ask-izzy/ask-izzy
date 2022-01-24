@@ -128,6 +128,7 @@ class Location extends React.Component<
     static summaryLabel: string = "Where are you looking for help?";
 
     static get summaryValue(): string {
+        console.log('hhhhhd', storage.getJSON(defaultProps.name)?.name)
         return storage.getJSON(defaultProps.name)?.name;
     }
 

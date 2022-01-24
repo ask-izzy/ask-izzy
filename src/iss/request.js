@@ -2,7 +2,7 @@
 import xhr from "axios";
 import url from "url";
 
-import createClient from "../ix-web-js-client/apis/iss"
+import {getIssClient} from "./client"
 
 import {
     ReturnAfter,
@@ -100,9 +100,10 @@ export async function jsonRequestFromIss(
     //     },
     // });
 
-    console.log('fire', storage.getLocation())
 
     const location = storage.getLocation()
+
+    console.log('fire', location, location.latitude)
 
     const geopointString = `${location.latitude},${location.longitude}`
     console.info({geopointString})
@@ -143,10 +144,8 @@ export async function jsonRequestFromIss(
     }
 
 
+    const iss4Res = await getIssClient()
 
-    const iss4Res = await createClient({
-        token: 'e6e988b62b52d85eaed1db6a22896dcea3eb1a681f541167e904a6a559b8640c'
-    }).search(query)
 
     console.log('blar', iss4Res)
 

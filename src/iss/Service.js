@@ -34,6 +34,7 @@ import {
     TryWithDefault,
 } from "../timeout";
 import type {SortType} from "../components/base/Dropdown"
+import {getIssClient} from "./client"
 
 export type ServiceProps = {
     ...Service,
@@ -42,12 +43,9 @@ export type ServiceProps = {
 
 export default class Service {
     constructor(props: ServiceProps) {
-        const {location, ...remainingProps} = props
-        if (location) {
-            this.location = new AddressLocation(props.location);
-        }
+        this.location = new AddressLocation(props.site)
 
-        Object.assign(this, remainingProps);
+        Object.assign(this, props);
     }
 
     abn: string;
@@ -332,6 +330,7 @@ export async function attachTransportTimes(
         const servicesToLoadTravelTimesFor = services.filter(
             service => !service.location?.isConfidential()
         )
+        console.log('&&&', servicesToLoadTravelTimesFor)
         const travelTimesForServices = await Timeout(
             3000,
             maps.travelTime(servicesToLoadTravelTimesFor
@@ -360,13 +359,25 @@ export async function getService(
 ): Promise<Service> {
     const cachedService = getServiceFromCache(serviceId);
 
+    console.log('greaed', cachedService)
     if (cachedService) {
         return cachedService;
     }
 
-    const response: ServiceProps = await jsonRequestFromIss(
-        `/api/v3/service/${serviceId}/`
-    );
+     console.log('111')
+
+    const issClient = await getIssClient()
+     console.log('222')
+
+    const response: ServiceProps = await issClient.getService(serviceId)
+    Object.assign(response, {
+        now_open: {
+            local_time: "2022-01-24T17:01:00+11:00",
+            now_open: true,
+            notes: ""
+        }
+    })
+    console.log('ressss', response)
     const service = new Service(response);
 
     try {

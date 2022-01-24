@@ -40,18 +40,23 @@ function GeolocationButton({
         onStatusChange?.(newStatus)
     }
 
+
     // Check for stored location after mount so as not to cause a
     // hydration mismatch
     useEffect(() => {
-        if (locationValue && status.type !== "COMPLETE") {
-            setStatus({
-                type: "COMPLETE",
-                location: locationValue,
-            })
-        } else if (!locationValue && status.type === "COMPLETE") {
-            setStatus({
-                type: "NOT_STARTED",
-            })
+        if (locationValue && !locationValue.approximate) {
+            if (status.type !== "COMPLETE") {
+                setStatus({
+                    type: "COMPLETE",
+                    location: locationValue,
+                })
+            }
+        } else {
+            if (status.type === "COMPLETE") {
+                setStatus({
+                    type: "NOT_STARTED",
+                })
+            }
         }
     }, [locationValue])
 

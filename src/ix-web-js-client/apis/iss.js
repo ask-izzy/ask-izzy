@@ -1,8 +1,12 @@
 /* @flow */
 // import fetch from 'node-fetch';
-import {postRequestWithToken} from '../lib/requests.js'
+import {
+    postRequestWithToken,
+    getRequestWithToken
+} from '../lib/requests.js'
 type Props = {
-    token: string
+    token: string,
+    baseUrl: string
 };
 
 export default function createClient(props: Props): ISS4Client {
@@ -11,19 +15,24 @@ export default function createClient(props: Props): ISS4Client {
 }
 
 
-class ISS4Client {
+export class ISS4Client {
     authString: string;
+    baseUrl: string
 
-    constructor({token}: Props) {
+    constructor({token, baseUrl}: Props) {
         this.authString = `Token ${token}`
+        this.baseUrl = baseUrl
     }
 
     async search(query: Object): Object {
-        const url = 'https://api-v4-uat.serviceseeker.com.au/api/search/?serialiser=detail'
+        const url = new URL('/api/search/?serialiser=detail', this.baseUrl).href
         return postRequestWithToken(url, this.authString, query)
-
     }
 
+    async getService(serviceId: number): Object {
+        const url = new URL(`/api/directory/services/${serviceId}/`, this.baseUrl).href
+        return getRequestWithToken(url, this.authString)
+    }
 }
 
 // const client = createClient({

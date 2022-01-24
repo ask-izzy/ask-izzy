@@ -5,38 +5,49 @@ import { titleize } from "underscore.string";
 import type {geoPoint} from "./general"
 
 export type AddressLocationProps = {
-    building: string,
-    details?: string,
-    flat_unit: string,
-    level: string,
-    point?: geoPoint,
-    postcode: string,
-    state: string,
-    street_name: string,
-    street_number: string,
-    street_suffix: string,
-    street_type: string,
-    suburb: string,
+    location_address_line_1: string,
+    location_postcode: string,
+    location_suburb: string,
+    location_state: string,
+    location_confidential: boolean,
+    location_geo_point?: {
+        latitude: number,
+        longitude: number
+    },
+    location_approximate_geopoint?: {
+        latitude: number,
+        longitude: number
+    },
 };
 export default class AddressLocation {
-    building: string;
-    flat_unit: string;
-    level: string;
-    point: {
-        "lat": number,
-        "lon": number
-    };
-    postcode: string;
-    state: string;
     street_name: string;
-    street_number: string;
-    street_suffix: string;
-    street_type: string;
+    postcode: string;
     suburb: string;
-    details: string;
+    state: string;
+    confidential: boolean;
+    point: {
+        lat: number,
+        lon: number
+    };
 
     constructor(props: AddressLocationProps) {
-        Object.assign(this, props);
+        this.street_name = props.location_address_line_1
+        this.postcode = props.location_postcode
+        this.suburb = props.location_suburb
+        this.state = props.location_state
+        this.confidential = props.location_confidential
+
+        if (props.location_geo_point) {
+            this.point = {
+                lat: props.location_geo_point.latitude,
+                lon: props.location_geo_point.longitude,
+            }
+        } else if (props.location_approximate_geopoint) {
+            this.point = {
+                lat: props.location_approximate_geopoint.latitude,
+                lon: props.location_approximate_geopoint.longitude,
+            }
+        }
     }
 
     /* If there is no point value,

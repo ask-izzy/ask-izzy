@@ -131,7 +131,7 @@ export async function searchForServices(
         (object: Object): Service => new Service(object)
     );
 
-    if (storage.getUserGeolocation()) {
+    if (storage.getLocation()) {
         services = await TryWithDefault(
             3000,
             attachTransportTimes(services),

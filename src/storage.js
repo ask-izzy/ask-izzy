@@ -50,11 +50,11 @@ const Storage = {
     },
 
     getLocation(): ?Geolocation {
-        return this.getItem("location");
+        return this.getJSON("location");
     },
 
     setLocation(location: Geolocation): void {
-        this.setItem("location", location);
+        this.setJSON("location", location);
     },
 
     clearLocation(): void {
