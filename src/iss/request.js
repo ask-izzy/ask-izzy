@@ -105,43 +105,9 @@ export async function jsonRequestFromIss(
 
     console.log('fire', location, location.latitude)
 
-    const geopointString = `${location.latitude},${location.longitude}`
     console.info({geopointString})
 
-    const query = {
-        "filters": {
-            "all": [
-                { "object_type": "Service" },
-                // {
-                //     "location_approximate_geopoint": {
-                //         "center": "-33.868851412638676,151.20933189349873",
-                //         "distance": 300,
-                //         "unit": "km"
-                //     }
-                // }
-            ]
-        },
-        query: data.q,
-        "page": { "size": 10, "current": 1 },
-        // "result_fields": {
-        //     "entity_id": { "raw": {} },
-        //     "name": { "raw": {} },
-        //     "description": { "raw": {} },
-        //     "target_gender": { "raw": {} },
-        //     "opening_hours": { "raw": {} }
-        // },
-        "boosts": {
-            "location_approximate_geopoint": [
-                {
-                    "type": "proximity",
-                    "function": "exponential",
-                    "center": geopointString,
-                    // "center": "-33.868851412638676,151.20933189349873",
-                    "factor": 20
-                }
-            ]
-        }
-    }
+
 
 
     const iss4Res = await getIssClient()

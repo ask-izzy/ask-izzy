@@ -115,14 +115,26 @@ class Location extends React.Component<
         return !!victoriaRegex.exec(storage.getJSON(defaultProps.name)?.name);
     }
 
-    static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
+    static getQueryModifier(): ?serviceSearchRequest {
         /* Location/Area is required */
-        const location = storage.getJSON(defaultProps.name);
+        const location = storage.getLocation();
         if (!location) {
             return null;
         }
-        request = Object.assign(request, {area: location});
-        return request;
+
+        return {
+            boosts: {
+                location_approximate_geopoint: [
+                    {
+                        type: "proximity",
+                        function: "exponential",
+                        center: `${location.latitude},${location.longitude}`,
+                        // "center": "-33.868851412638676,151.20933189349873",
+                        factor: 20
+                    }
+                ]
+            }
+        }
     }
 
     static summaryLabel: string = "Where are you looking for help?";

@@ -16,7 +16,7 @@ import NotFoundStaticPage from "./NotFoundStaticPage"
 import FlatButton from "../components/FlatButton";
 import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "../components/QuestionStepper";
-import {getInitialSearchRequest} from "../iss/serviceSearch";
+import {getSearchQueryModifiers} from "../iss/serviceSearch";
 import { stateFromLocation } from "../utils";
 import IssParamsOverrideControls from
     "../components/debug/IssParamsOverrideControls";
@@ -53,10 +53,7 @@ class ResultsListPage extends ResultsPage<> {
                 {typeof window !== "undefined" && <>
                     <DebugContainer message="Debug personalisation">
                         <DebugPersonalisation
-                            search={getInitialSearchRequest(
-                                this.context.router
-                            )}
-                            items={getPersonalisationPages(
+                            layers={getSearchQueryModifiers(
                                 this.context.router
                             )}
                         />
@@ -94,7 +91,7 @@ class ResultsListPage extends ResultsPage<> {
                 <LoadingResultsHeader
                     title={this.state.pageTitle}
                     category={this.state.category}
-                    meta={this.state.searchMeta || {total_count: 0}}
+                    services={this.state.searchResults || []}
                     loading={this.searchIsLoading}
                     error={this.state.searchError ?
                         "An error occurred. Please try again."
@@ -161,7 +158,7 @@ class ResultsListPage extends ResultsPage<> {
 
     renderSuggestionBox(): void | ReactNode {
         if (
-            !this.state.searchMeta?.next &&
+            !this.searchHasNextPage &&
             !this.searchIsLoading
         ) {
             return (
@@ -179,7 +176,7 @@ class ResultsListPage extends ResultsPage<> {
     }
 
     renderLoadMore(): void | ReactElement<"div"> | ReactNode {
-        if (this.state.searchMeta?.next) {
+        if (this.searchHasNextPage) {
             return (
                 <div className="moreResultsContainer">
                     <FlatButton

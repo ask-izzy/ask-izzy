@@ -4,7 +4,7 @@ import lru from "lru-cache";
 import Service, {attachTransportTimes} from "./Service";
 import storage from "../storage";
 import ServiceSearchCache from "./ServiceSearchCache";
-import {searchIss} from "./search";
+import {getIssClient} from "./client"
 import type {searchResultsMeta} from "./search";
 import {serialiseUrlQueryParams} from "../utils/url"
 import {
@@ -12,31 +12,22 @@ import {
 } from "../timeout";
 import * as gtm from "../google-tag-manager";
 import type { RouterContextObject } from "../contexts/router-context";
-import {getCategoryFromRouter} from "../utils/personalisation"
+import {getPersonalisationPages, getCategoryFromRouter} from "../utils/personalisation"
 import WhoIsLookingForHelpPage from
     "../pages/personalisation/WhoIsLookingForHelp"
 
 export type serviceSearchRequest = {|
-    q?: string,
-    service_type?: Array<string>,
-    service_type_raw?: Array<string>,
-    site_id?: number,
-    name?: string,
-
-    minimum_should_match?: string,
-
-    area?: string,
-    location?: string,
-    type?: string,
-    age_group?: Array<string>,
-    client_gender?: Array<string>,
-
-    catchment?: "prefer"|"true"|"false",
-    is_bulk_billing?: boolean,
-    show_in_askizzy_health?: boolean,
-
-    limit?: number,
-    key?: string,
+    query?: string,
+    page?: {
+        current: number,
+        size: number
+    },
+    filters?: {
+        all?: [
+            Object
+        ]
+    },
+    boosts: {[string]: Object}
 |};
 
 export type serviceSearchResultsMeta = {
@@ -55,6 +46,51 @@ export type serviceSearchResults = {|
     meta: serviceSearchResultsMeta,
     services: Array<Service>,
 |};
+
+
+
+export function createServiceSearch({
+    pageSize,
+    ...query
+}: Object): PaginatedSearch {
+    return new PaginatedSearch(query, pageSize)
+}
+
+class PaginatedSearch {
+    #query;
+    #pagesLoaded = 0;
+    #pageSize: number;
+    #loadedServices: Array<service> = [];
+
+    constructor(query, pageSize: number) {
+        this.#query = query
+        this.#pageSize = pageSize
+    }
+
+    async loadNextPage() {
+        const issClient = await getIssClient()
+        const res = await issClient.search({
+            ...this.#query,
+            page: {
+                current: this.#pagesLoaded + 1,
+                size: this.#pageSize
+            }
+        })
+        this.#pagesLoaded++;
+        const services = res.results.map(
+            serviceData => new Service(serviceData)
+        )
+        this.#loadedServices.push(...services)
+    }
+
+    get loadedServices() {
+        return this.#loadedServices
+    }
+
+    get numOfPagesLoaded(): number {
+        return this.#pagesLoaded
+    }
+}
 
 /**
  * Execute a search against ISS.
@@ -124,6 +160,11 @@ export async function searchForServices(
         }
     }
 
+
+    const issClient = await getIssClient()
+
+    const res = await issClient.search(query)
+
     const {meta, objects} = await await searchIss(path, data);
 
     // convert objects to ISS search results
@@ -171,35 +212,70 @@ export function forEachServiceFromCache(
     serviceCache.forEach(callback)
 }
 
-export function getInitialSearchRequest(
+export type SearchQueryModifier = {
+    name: string,
+    changes: serviceSearchRequest,
+}
+
+export function getSearchQueryModifiers(
     router: $PropertyType<RouterContextObject, 'router'>
-): serviceSearchRequest {
-    let request: serviceSearchRequest
+): Array<SearchQueryModifier> {
+    const layers: Array<SearchQueryModifier | null> = [
+        {
+            name: 'initial',
+            changes: {
+                "filters": {
+                    "all": [
+                        { "object_type": "Service" },
+                    ]
+                }
+            }
+        }
+    ]
     const category = getCategoryFromRouter(router)
 
     if (category) {
-        request = {...category.search};
+        layers.push({
+            name: `category: ${category.key}`,
+            changes: category.search
+        })
     } else if (router.match.params.search) {
-        request = {
-            q: decodeURIComponent(router.match.params.search),
-        };
-    } else {
-        request = {
-            q: "undefined-search",
-        };
+        const searchTerm = decodeURIComponent(router.match.params.search)
+        layers.push({
+            name: `search: ${searchTerm}`,
+            changes: { query: searchTerm, }
+        });
+
+        // A special case for the "Find advocacy" button on the
+        // DisabilityAdvocacyFinder page.
+        if (searchTerm === "Disability Advocacy Providers") {
+            layers.push({
+                name: `DisabilityAdvocacyFinder override`,
+                changes: {
+                    service_type_raw: ["disability advocacy"],
+                    query: "disability"
+                }
+            })
+        }
     }
 
-    // A special case for the "Find advocacy" button on the
-    // DisabilityAdvocacyFinder page.
-    if (request.q === "Disability Advocacy Providers") {
-        // $FlowIgnore because flow is acting wack about "decodeURIComponent"
-        // above for some reason
-        // $FlowIgnore
-        request.service_type_raw = ["disability advocacy"]
-        request.q = "disability"
+    const personalisationPages = getPersonalisationPages(router)
+
+    for (let item of personalisationPages) {
+        if (!item.getQueryModifier) {
+            console.error('noooo', item.name)
+        }
+        const changes = item.getQueryModifier()
+        layers.push(changes
+            ? {
+                name: item.name,
+                changes
+            }
+            : null
+        );
     }
 
-    return request
+    return layers
 }
 
 export function isDisabilityAdvocacySearch(

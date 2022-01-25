@@ -11,7 +11,7 @@ const categories = [
         byline: "A place to stay.",
         icon: icons.House,
         search: {
-            q: "housing -(coordinating bodies) -(respite care) " +
+            query: "housing -(coordinating bodies) -(respite care) " +
                 "-(housing information) -hef " +
                 "-(holiday accommodation)",
             service_type: ["housing"],
@@ -33,7 +33,7 @@ const categories = [
         byline: "Something to eat.",
         icon: icons.Food,
         search: {
-            q: "meals -(coordinating bodies)" +
+            query: "meals -(coordinating bodies)" +
                 " -(home care) -(food safety)" +
                 " -(meals on wheels) -(assistance with meals)" +
                 " -(hire of facilities) -chsp -(meal preparation)",
@@ -49,7 +49,7 @@ const categories = [
         byline: "Swags, clothes, food vouchers etc.",
         icon: icons.Things,
         search: {
-            q: "material aid -(coordinating bodies)",
+            query: "material aid -(coordinating bodies)",
             service_type: ["material aid"],
         },
         personalisation: [
@@ -63,7 +63,7 @@ const categories = [
         byline: "Scared of partner or family member.",
         icon: icons.EscapeViolence,
         search: {
-            q: "(family violence) -(coordinating bodies) -(fire-fighting)",
+            query: "(family violence) -(coordinating bodies) -(fire-fighting)",
         },
         personalisation: [
             personalisation.AreYouSafe,
@@ -82,7 +82,7 @@ const categories = [
         byline: "Physical, mental, emotional.",
         icon: icons.Health,
         search: {
-            q: "(community health) -(coordinating bodies)",
+            query: "(community health) -(coordinating bodies)",
             minimum_should_match: "30%",
             show_in_askizzy_health: true,
         },
@@ -100,7 +100,7 @@ const categories = [
         byline: "Access to services.",
         icon: icons.Centrelink,
         search: {
-            q: "\"centrelink\"",
+            query: "\"centrelink\"",
             name: "\"centrelink\"",
         },
         personalisation: [
@@ -113,7 +113,7 @@ const categories = [
         byline: "Emergency funds, bills etc.",
         icon: icons.Money,
         search: {
-            q: "financial aid -(coordinating bodies) -grants -heritage",
+            query: "financial aid -(coordinating bodies) -grants -heritage",
         },
         personalisation: [
             personalisation.MoneySubcategories,
@@ -126,7 +126,7 @@ const categories = [
         byline: "Relationships, gambling & LGBTIQA+.",
         icon: icons.Support,
         search: {
-            q: "counselling",
+            query: "counselling",
             minimum_should_match: "1",
         },
         personalisation: [
@@ -143,7 +143,7 @@ const categories = [
         byline: "Police, law & fines.",
         icon: icons.Legal,
         search: {
-            q: "legal (legal aid) -(coordinating bodies) -permits " +
+            query: "legal (legal aid) -(coordinating bodies) -permits " +
                 "-ceremonies -making -checks -electoral -taxation " +
                 "-centrelink -immigration -(hire of facilities)",
         },
@@ -161,7 +161,7 @@ const categories = [
         byline: "Support & assistance.",
         icon: icons.Addiction,
         search: {
-            q: "substance abuse -(coordinating bodies)" +
+            query: "substance abuse -(coordinating bodies)" +
                 " -(registered training)",
             minimum_should_match: "30%",
         },
@@ -177,7 +177,7 @@ const categories = [
         byline: "Everyday skills & training.",
         icon: icons.Skills,
         search: {
-            q: "life skills education -(coordinating bodies)" +
+            query: "life skills education -(coordinating bodies)" +
                 " -chsp -hacc",
         },
         personalisation: [
@@ -192,7 +192,7 @@ const categories = [
         byline: "Earning & volunteering.",
         icon: icons.Job,
         search: {
-            q: "employment -(coordinating bodies)",
+            query: "employment -(coordinating bodies)",
             service_type: ["employment"],
         },
         personalisation: [
@@ -206,7 +206,7 @@ const categories = [
         byline: "Toilets.",
         icon: icons.Facilities,
         search: {
-            q: "public facilities" +
+            query: "public facilities" +
                 " -(coordinating bodies) -(hire of facilities)" +
                 " -maintenance",
         },
@@ -220,7 +220,7 @@ const categories = [
         byline: "Libraries, Community Hubs etc.",
         icon: icons.Entertainment,
         search: {
-            q: "recreation libraries pools -(coordinating bodies) " +
+            query: "recreation libraries pools -(coordinating bodies) " +
                 "-physiology -permit -hire -grants " +
                 "-(sports medicine) -(sports physician) " +
                 "-(sports psychology)",
@@ -235,7 +235,7 @@ const categories = [
         byline: "Wifi, charging etc.",
         icon: icons.Tech,
         search: {
-            q: "wifi internet computer",
+            query: "wifi internet computer",
         },
         personalisation: [
             personalisation.WhoIsLookingForHelp,
@@ -247,7 +247,7 @@ const categories = [
         byline: "Complaints and advice.",
         icon: icons.Advocacy,
         search: {
-            q: "consumer issues mediation discrimination " +
+            query: "consumer issues mediation discrimination " +
                 "disputes advocacy -research -(coordinating bodies)",
         },
         personalisation: [

@@ -35,11 +35,11 @@ class WhoIsLookingForHelp extends React.Component<
 
     static title: string = "Who is looking for help?";
 
-    static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
+    static getQueryModifier(): ?serviceSearchRequest {
         if (!WhoIsLookingForHelp.savedAnswer) {
             return null
         }
-        return request;
+        return {};
     }
 
     constructor(props: Object) {

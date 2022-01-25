@@ -2,6 +2,7 @@
 import Service from "./Service"
 
 export function countCrisisResults(results: Array<Service>): number {
+    console.log('***', results.filter(service => !service.site))
     const firstRegularServiceIdx = results.findIndex(
         ({crisis}) => !crisis
     )

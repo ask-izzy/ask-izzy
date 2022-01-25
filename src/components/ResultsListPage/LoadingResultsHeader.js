@@ -36,7 +36,7 @@ type Props = {
     loading: boolean,
     category?: ?Category,
     title: string,
-    meta: {total_count: number},
+    services: Array<Service>,
 }
 
 class LoadingResultsHeader extends React.Component<Props, void> {
@@ -49,7 +49,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             loading,
             category,
             title,
-            meta,
+            services,
         } = this.props;
         const bannerName = getBannerName(
             this.props.category
@@ -78,6 +78,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
         )
 
         if (error) {
+            console.log('error', error)
             if (statusCode === 402) {
                 return (
                     <HeaderBar
@@ -104,7 +105,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                 <HeaderBar
                     className="LoadingResultsHeader"
                     primaryText={
-                        meta.total_count > 0 ?
+                        services.length > 0 ?
                             formatResultsPageHeading(
                                 title.toLocaleLowerCase()
                             )

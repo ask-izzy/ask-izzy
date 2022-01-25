@@ -14,6 +14,13 @@ export default function createClient(props: Props): ISS4Client {
     return client
 }
 
+type SearchProps = {
+    term: string,
+    filters?: {[string]: Object},
+    boosts?: {[string]: Object},
+    serialiser?: string
+}
+
 
 export class ISS4Client {
     authString: string;
@@ -24,9 +31,19 @@ export class ISS4Client {
         this.baseUrl = baseUrl
     }
 
-    async search(query: Object): Object {
-        const url = new URL('/api/search/?serialiser=detail', this.baseUrl).href
-        return postRequestWithToken(url, this.authString, query)
+    async search({
+        serialiser = 'detail',
+        ...query
+    }: SearchProps): Object {
+        const params = {
+            serialiser
+        }
+
+        const url = new URL('/api/search/', this.baseUrl)
+        for (const [key, value] of Object.entries(params)) {
+            url.searchParams.append(key, value)
+        }
+        return postRequestWithToken(url.href, this.authString, query)
     }
 
     async getService(serviceId: number): Object {

@@ -2,14 +2,14 @@
 import React from "react"
 
 import {
-    initialSearchForServices,
-    searchForServices,
+    createServiceSearch
 } from "../iss/serviceSearch";
 import type {
     serviceSearchRequest,
     serviceSearchResultsMeta,
 } from "../iss/serviceSearch";
-import {getInitialSearchRequest} from "../iss/serviceSearch"
+import {getSearchQueryModifiers} from "../iss/serviceSearch"
+import {buildSearchQuery} from "../iss/searchQueryBuilder"
 import * as gtm from "../google-tag-manager";
 
 import routerContext from "../contexts/router-context";
@@ -31,7 +31,8 @@ import {
 import Category from "../constants/Category"
 
 type State = {
-    searchMeta: ?serviceSearchResultsMeta,
+    search: ?serviceSearchResultsMeta,
+    searchStatus: "loading" | "error" | "some loaded" | "all loaded",
     searchResults: ?Array<Service>,
     searchError: ?{message: string, status: number},
     searchPagesLoaded: number,
@@ -57,7 +58,8 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
 
         this.state = {
             ...super.state,
-            searchMeta: null,
+            search: null,
+            searchStatus: "loading",
             searchResults: null,
             searchError: null,
             searchPagesLoaded: 0,
@@ -102,39 +104,37 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
     }
 
     async loadNextSearchPage(): Promise<void> {
+        if (this.state.searchStatus === "all loaded") {
+            return
+        }
         addPageLoadDependencies(
             this.context.router.location,
             `requestServices`
         )
-        let res
-        try {
-            if (!this.state.searchMeta) {
-                let params = this.issParams()
+        let search = this.state.search
+        if (!search) {
+            let query = this.issParams()
 
-                if (
-                    storage.getDebug() &&
-                    storage.getJSON("issParamsOverride")
-                ) {
-                    params = storage.getJSON("issParamsOverride")
-                }
+            if (
+                storage.getDebug() &&
+                storage.getJSON("issParamsOverride")
+            ) {
+                query = storage.getJSON("issParamsOverride")
+            }
 
-                if (!params) {
-                    return
-                }
-                // first page
-                this.setState({searchMeta: null});
-                res = await initialSearchForServices(params)
-
-            } else if (this.state.searchMeta.next) {
-                const next = this.state.searchMeta.next
-                // subsequent pages
-                this.setState({searchMeta: null});
-                res = await searchForServices(next);
-
-            } else {
-                // no more pages
+            if (!query) {
                 return
             }
+            // first page
+            search = createServiceSearch(query)
+            this.setState({search});
+
+        }
+
+        try {
+            console.log(search)
+            this.setState({searchStatus: 'loading'});
+            await search.loadNextPage()
         } catch (error) {
             this.setState({searchError: error});
             try {
@@ -157,7 +157,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             )
         }
 
-        if (this.state.searchPagesLoaded > 0) {
+        if (search.pagesLoaded > 1) {
             gtm.emit({
                 event: "Load More Search Results Clicked",
                 eventCat: "Content Expanded",
@@ -167,12 +167,14 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             });
         }
 
-        this.setState(prevState => ({
-            searchMeta: res.meta,
-            searchResults: res.services,
+        console.log('--hii', search.loadedServices)
+
+        this.setState({
+            searchStatus: "some loaded",
+            searchResults: search.loadedServices,
             searchError: undefined,
-            searchPagesLoaded: prevState.searchPagesLoaded + 1,
-        }));
+            searchPagesLoaded: search.pagesLoaded,
+        });
     }
     loadNextSearchPage: () => Promise<void> = this.loadNextSearchPage.bind(this)
 
@@ -185,30 +187,21 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         // We have to do this once the component is mounted (instead of
         // in willTransitionTo because the personalisation components will
         // inspect the session).
-        let request = getInitialSearchRequest(this.context.router);
+        let layers = getSearchQueryModifiers(this.context.router);
 
-        const personalisationPages = getPersonalisationPages(
-            this.context.router
-        )
-        for (let item of personalisationPages) {
-            if (typeof item.getSearch === "function") {
-                request = item.getSearch(request);
-
-                if (!request) {
-                    return null;
-                }
-            }
+        if (layers.includes(null)) {
+            return null
         }
 
-        return request;
+        return buildSearchQuery(layers);
     }
 
     get searchIsLoading(): boolean {
-        return !this.state.searchError && !this.state.searchMeta;
+        return this.state.searchStatus === 'loading'
     }
 
     get searchHasNextPage(): boolean {
-        return !!this.state.searchMeta?.next
+        return this.state.searchStatus !== 'all loaded'
     }
 
 }

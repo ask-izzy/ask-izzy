@@ -38,30 +38,3 @@ export async function getLocationDetails(id: string, locationType: string) {
     })
     return res
 }
-
-// export function buildLocationFromService(service: Object) {
-//     const location = {
-//         "street_name": service.location_address_line_1,
-//         "street_number": "",
-//         "street_type": "",
-//         "street_suffix": "",
-//         "postcode": service.location_postcode,
-//         "suburb": service.location_suburb,
-//         "state": service.location_state,
-//         "confidential": service.location_confidential,
-//     }
-
-//     if (service.location_geo_point) {
-//         location.point = {
-//             "lat": obj["location_geo_point"]["latitude"],
-//             "lon": obj["location_geo_point"]["longitude"],
-//         }
-//     } else if (service.location_approximate_geopoint) {
-//         location.point = {
-//             lat: service.location_approximate_geopoint.latitude,
-//             lon: service.location_approximate_geopoint.longitude,
-//         }
-//     }
-
-//     return location
-// }

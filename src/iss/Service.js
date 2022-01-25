@@ -23,7 +23,6 @@ import {
     forEachServiceFromCache,
 } from "./serviceSearch"
 import {searchForServices} from "./serviceSearch"
-import {jsonRequestFromIss} from "./request"
 import type {
     serviceSearchResults,
     serviceSearchRequest,
@@ -45,7 +44,14 @@ export default class Service {
     constructor(props: ServiceProps) {
         this.location = new AddressLocation(props.site)
 
-        Object.assign(this, props);
+        Object.assign(this, props, {
+            now_open: {
+                local_time: "2022-01-24T17:01:00+11:00",
+                now_open: true,
+                notes: ""
+            },
+            catchment: "",
+        });
     }
 
     abn: string;
@@ -370,13 +376,6 @@ export async function getService(
      console.log('222')
 
     const response: ServiceProps = await issClient.getService(serviceId)
-    Object.assign(response, {
-        now_open: {
-            local_time: "2022-01-24T17:01:00+11:00",
-            now_open: true,
-            notes: ""
-        }
-    })
     console.log('ressss', response)
     const service = new Service(response);
 
