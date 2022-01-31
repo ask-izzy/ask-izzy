@@ -19,7 +19,6 @@ export default class DemographicsIndigenous extends BaseQuestion {
         byline:
             "",
         possibleAnswers: {
-            // n.b. see also storage.getUserIsIndigenous when changing
             "Yes - show these first where possible":
                 append("(Aboriginals & Torres Strait Islanders)"),
             "No - show me everything": append(""),

@@ -16,7 +16,7 @@ import NotFoundStaticPage from "./NotFoundStaticPage"
 import FlatButton from "../components/FlatButton";
 import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "../components/QuestionStepper";
-import {getSearchQueryModifiers} from "../iss/serviceSearch";
+import {getSearchQueryModifiers} from "../iss/searchQueryBuilder";
 import { stateFromLocation } from "../utils";
 import IssParamsOverrideControls from
     "../components/debug/IssParamsOverrideControls";
@@ -66,7 +66,7 @@ class ResultsListPage extends ResultsPage<> {
                     >
                         {Storage.getJSON("issParamsOverride") ?
                             <IssParamsOverrideControls
-                                originalIssParams={this.issParams() || {}}
+                                originalIssParams={this.getIssSearchQuery() || {}}
                                 issParamsOverride={
                                     Storage.getJSON("issParamsOverride")
                                 }
@@ -75,10 +75,10 @@ class ResultsListPage extends ResultsPage<> {
                                 }
                             />
                             : <>
-                                <DebugSearch search={this.issParams()} />
+                                <DebugSearch search={this.getIssSearchQuery()} />
                                 <button
                                     onClick={() => this.setIssParamsOverride(
-                                        this.issParams() || {},
+                                        this.getIssSearchQuery() || {},
                                         false
                                     )}
                                 >
@@ -120,6 +120,7 @@ class ResultsListPage extends ResultsPage<> {
     renderResults(): ReactNode {
         return (
             <div className="List results">
+                {this.state.searchStatus === "not finished" && <h1>Not finished migrating search queries for this route</h1>}
                 <ResultsList
                     results={this.state.searchResults || []}
                     resultsLoading={this.searchIsLoading}

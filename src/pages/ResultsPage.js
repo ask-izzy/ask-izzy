@@ -5,11 +5,11 @@ import {
     createServiceSearch
 } from "../iss/serviceSearch";
 import type {
-    serviceSearchRequest,
     serviceSearchResultsMeta,
 } from "../iss/serviceSearch";
-import {getSearchQueryModifiers} from "../iss/serviceSearch"
-import {buildSearchQuery} from "../iss/searchQueryBuilder"
+import {getSearchQueryModifiers} from "../iss/searchQueryBuilder"
+import {buildSearchQueryFromModifiers} from "../iss/searchQueryBuilder"
+import type {SearchQuery} from "../iss/searchQueryBuilder"
 import * as gtm from "../google-tag-manager";
 
 import routerContext from "../contexts/router-context";
@@ -32,7 +32,7 @@ import Category from "../constants/Category"
 
 type State = {
     search: ?serviceSearchResultsMeta,
-    searchStatus: "loading" | "error" | "some loaded" | "all loaded",
+    searchStatus: "loading" | "error" | "some loaded" | "all loaded" | "not finished",
     searchResults: ?Array<Service>,
     searchError: ?{message: string, status: number},
     searchPagesLoaded: number,
@@ -113,7 +113,9 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         )
         let search = this.state.search
         if (!search) {
-            let query = this.issParams()
+            let query = this.getIssSearchQuery()
+
+            console.log('hi1', query)
 
             if (
                 storage.getDebug() &&
@@ -121,8 +123,17 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             ) {
                 query = storage.getJSON("issParamsOverride")
             }
+            console.log('hi2', query)
 
             if (!query) {
+                return
+            }
+
+            if (!query.term) {
+                this.setState({
+                    searchStatus: 'not finished',
+                    searchError: query
+                })
                 return
             }
             // first page
@@ -178,7 +189,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
     }
     loadNextSearchPage: () => Promise<void> = this.loadNextSearchPage.bind(this)
 
-    issParams(): ?serviceSearchRequest {
+    getIssSearchQuery(): SearchQuery | null {
         // Build the search request.
         //
         // If we don't have enough information to build the search request
@@ -187,13 +198,15 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         // We have to do this once the component is mounted (instead of
         // in willTransitionTo because the personalisation components will
         // inspect the session).
-        let layers = getSearchQueryModifiers(this.context.router);
+        let modifiers = getSearchQueryModifiers(this.context.router);
 
-        if (layers.includes(null)) {
+        if (modifiers.includes(null)) {
             return null
         }
 
-        return buildSearchQuery(layers);
+        console.log('mods', modifiers, buildSearchQueryFromModifiers(modifiers))
+
+        return buildSearchQueryFromModifiers(modifiers);
     }
 
     get searchIsLoading(): boolean {

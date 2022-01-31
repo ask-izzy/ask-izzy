@@ -30,15 +30,23 @@ export default class DVFSubcategories extends BaseQuestion {
                 .append("(financial counselling)")
                 .append("-grants")
                 .append("name:\"financial counselling\""),
-            "Help for people using violence": remove("(family violence)")
-                .append("(using violence)")
-                .conditionally(
-                    remove("(using violence)")
-                        .append("(men's behaviour change)"),
-                    // Check for injection of access points currently checks
-                    // if a user is in Victoria
-                    () => Location.shouldInjectAccessPoints()
-                ),
+            "Help for people using violence": {
+                $removeElms: {
+                    term: ["(family violence)"],
+                },
+                $push: {
+                    term: "(using violence)",
+                },
+                $applyIfShouldInjectAccessPoints: {
+                    $removeElms: {
+                        term: ["(using violence)"],
+                    },
+                    $push: {
+                        term: "(men's behaviour change)",
+                    },
+
+                }
+            },
             "Help for pets": append("pets -(animal control)")
                 .append("-(effectiveness training)"),
         },

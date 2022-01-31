@@ -16,7 +16,7 @@ import {
 } from "../../locations"
 import type {areaLocation} from "../../iss/locationSearch";
 import type { serviceSearchResults} from "../../iss/serviceSearch";
-import type { serviceSearchRequest } from "../../iss/serviceSearch";
+import type { SearchQueryChanges } from "../../iss/searchQueryBuilder";
 import {crisisResults, nonCrisisResults} from "../../iss/crisisService"
 import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
@@ -108,33 +108,21 @@ class Location extends React.Component<
         return answer.name;
     }
 
-    static shouldInjectAccessPoints(): boolean {
-        // Currently only for locations in Victoria.
-        let victoriaRegex = /VIC(toria)?$/i;
+    // static shouldInjectAccessPoints(): boolean {
+    //     // Currently only for locations in Victoria.
+    //     let victoriaRegex = /VIC(toria)?$/i;
 
-        return !!victoriaRegex.exec(storage.getJSON(defaultProps.name)?.name);
-    }
+    //     return !!victoriaRegex.exec(storage.getJSON(defaultProps.name)?.name);
+    // }
 
-    static getQueryModifier(): ?serviceSearchRequest {
+    static getSearchQueryChanges(): SearchQueryChanges | null {
         /* Location/Area is required */
         const location = storage.getLocation();
         if (!location) {
             return null;
         }
 
-        return {
-            boosts: {
-                location_approximate_geopoint: [
-                    {
-                        type: "proximity",
-                        function: "exponential",
-                        center: `${location.latitude},${location.longitude}`,
-                        // "center": "-33.868851412638676,151.20933189349873",
-                        factor: 20
-                    }
-                ]
-            }
-        }
+        return {location}
     }
 
     static summaryLabel: string = "Where are you looking for help?";

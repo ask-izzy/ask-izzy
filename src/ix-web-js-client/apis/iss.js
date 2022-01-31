@@ -13,12 +13,21 @@ export default function createClient(props: Props): ISS4Client {
     const client = new ISS4Client(props)
     return client
 }
+export type SearchQuery = {|
+    query?: string,
+    page?: {
+        current: number,
+        size: number
+    },
+    filters?: {
+        all?: Array<Object>
+    },
+    boosts?: {[string]: Object}
+|};
 
 type SearchProps = {
-    term: string,
-    filters?: {[string]: Object},
-    boosts?: {[string]: Object},
-    serialiser?: string
+    serialiser?: string,
+    ...SearchQuery
 }
 
 

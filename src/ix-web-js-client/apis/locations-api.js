@@ -157,3 +157,6 @@ class LocationsApiClient {
 //     })
 //     console.log(res)
 // })
+
+
+const oldToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQzMTQ5MDE5LCJpYXQiOjE2NDMxNDg3MTksImp0aSI6IjY3ZDJlYTBmNjNlNjRkYjFiOWQ3ZGM3ZmIwMTJiMzJhIiwidXNlcl9pZCI6MTA4fQ.-jxiOsPygeDegCt_H5Bg_gN5yFpSpFpm1W-L9aVbG2E'

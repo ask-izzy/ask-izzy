@@ -10,7 +10,7 @@ import FlatButton from "../../components/FlatButton";
 import WithStickyFooter from "../../components/WithStickyFooter";
 import icons from "../../icons";
 import storage from "../../storage";
-import type {serviceSearchRequest} from "../../iss/serviceSearch";
+import type {SearchQueryChanges} from "../../iss/searchQueryBuilder";
 import { append, ServiceSearchRequest } from "../../iss/ServiceSearchRequest";
 import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
@@ -18,7 +18,7 @@ import ScreenReader from "../../components/ScreenReader";
 import {getBannerName} from "../../utils/personalisation"
 import routerContext from "../../contexts/router-context";
 import type {
-    PersonalisationPageProps,
+    PersonalisationPageRequiredProps,
     PersonalisationPageState,
     PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation";
@@ -31,7 +31,7 @@ export type State = {
 }
 
 class BaseQuestion extends React.Component<
-    PersonalisationPageProps,
+    PersonalisationPageRequiredProps,
     State
 > {
     static contextType: any = routerContext;
@@ -126,79 +126,83 @@ class BaseQuestion extends React.Component<
         return answer;
     }
 
-    /**
-     * Modify the search query with the answers to the question. Or return
-     * `null` if we don't have an answer (this will cause the question to
-     * be shown).
-     *
-     * @param {searchRequest} request - current ISS search request.
-     * @returns {searchRequest} modified ISS search request.
-     */
-    static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
+    static getSearchQueryChanges(): SearchQueryChanges | Array<SearchQueryChanges> | null {
+        const possibleAnswers = this.defaultProps.possibleAnswers
         if (this.savedAnswer instanceof Array) {
-            return this.getSearchForAnswer(request, new Set(this.savedAnswer));
+            // If there are multiple answers, at most the first 2 as ordered
+            // by the order they appear in the list displayed to the user
+            const searchQueryChanges: Array<SearchQueryChanges> = []
+            for (const [answer, queryChange] of Object.entries(possibleAnswers)) {
+                if (this.savedAnswer.includes(answer)) {
+                    searchQueryChanges.push(queryChange)
+                }
+                if (searchQueryChanges.length >= 2) {
+                    break;
+                }
+            }
+            return searchQueryChanges
         } else if (this.savedAnswer === "(skipped)") {
             // This question has been skipped.
-            return request;
+            return {};
         } else if (this.savedAnswer) {
-            return this.getSearchForAnswer(request, this.savedAnswer);
+            return possibleAnswers[this.savedAnswer] || null
         } else {
             // this question hasn't been answered
             return null;
         }
     }
 
-    static getSearchForAnswer(
-        request: serviceSearchRequest,
-        answer: string | Set<string>,
-    ): ?serviceSearchRequest {
+    // static getSearchForAnswer(
+    //     request: serviceSearchRequest,
+    //     answer: string | Set<string>,
+    // ): ?serviceSearchRequest {
 
-        let newRequest = request;
+    //     let newRequest = request;
 
-        if (answer instanceof Set) {
-            // Take the first two answers offered
-            const allowedAnswers = Object.keys(
-                this.defaultProps.possibleAnswers
-            );
-            const sortedAnswers = _(Array.from(answer))
-                .sortBy(partOfAnswer =>
-                    allowedAnswers.indexOf(partOfAnswer)
-                );
+    //     if (answer instanceof Set) {
+    //         // Take the first two answers offered
+    //         const allowedAnswers = Object.keys(
+    //             this.defaultProps.possibleAnswers
+    //         );
+    //         const sortedAnswers = _(Array.from(answer))
+    //             .sortBy(partOfAnswer =>
+    //                 allowedAnswers.indexOf(partOfAnswer)
+    //             );
 
-            for (let answer of sortedAnswers.slice(0, 2)) {
-                newRequest = this.getSearchForSingleAnswer(
-                    request,
-                    answer
-                );
-            }
-        } else {
-            newRequest = this.getSearchForSingleAnswer(request, answer);
-        }
+    //         for (let answer of sortedAnswers.slice(0, 2)) {
+    //             newRequest = this.getSearchForSingleAnswer(
+    //                 request,
+    //                 answer
+    //             );
+    //         }
+    //     } else {
+    //         newRequest = this.getSearchForSingleAnswer(request, answer);
+    //     }
 
-        return newRequest;
-    }
+    //     return newRequest;
+    // }
 
-    static getSearchForSingleAnswer(
-        request: serviceSearchRequest,
-        answer: string,
-    ): serviceSearchRequest {
+    // static getSearchForSingleAnswer(
+    //     request: serviceSearchRequest,
+    //     answer: string,
+    // ): serviceSearchRequest {
 
-        let answerComposer;
+    //     let answerComposer;
 
-        /* the answers are a map of answers to search terms */
-        if (
-            _.isObject(this.defaultProps.possibleAnswers) &&
-            this.defaultProps.possibleAnswers[answer] instanceof
-                ServiceSearchRequest
-        ) {
-            answerComposer = this.defaultProps.possibleAnswers[answer];
-        } else {
-            // Default behaviour for strings is to append
-            answerComposer = append(answer);
-        }
+    //     /* the answers are a map of answers to search terms */
+    //     if (
+    //         _.isObject(this.defaultProps.possibleAnswers) &&
+    //         this.defaultProps.possibleAnswers[answer] instanceof
+    //             ServiceSearchRequest
+    //     ) {
+    //         answerComposer = this.defaultProps.possibleAnswers[answer];
+    //     } else {
+    //         // Default behaviour for strings is to append
+    //         answerComposer = append(answer);
+    //     }
 
-        return answerComposer.compose(request);
-    }
+    //     return answerComposer.compose(request);
+    // }
 
     /**
      * Return the answers from the answers property element.

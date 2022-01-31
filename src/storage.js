@@ -66,13 +66,6 @@ const Storage = {
             !this.getLocation().approximate
     },
 
-    getUserIsIndigenous(): boolean {
-        return this.getItem("sub-indigenous") ==
-            "Yes - show these first where possible" ||
-        this.getArray("demographics")
-            .includes("Aboriginal and/or Torres Strait Islander");
-    },
-
     getItem(key: string): ?(string|number|boolean) {
         return persistentStore.getItem(key);
     },

@@ -15,20 +15,10 @@ import type { RouterContextObject } from "../contexts/router-context";
 import {getPersonalisationPages, getCategoryFromRouter} from "../utils/personalisation"
 import WhoIsLookingForHelpPage from
     "../pages/personalisation/WhoIsLookingForHelp"
+import type {SearchQuery as IssSearchQuery} from "../ix-web-js-client/apis/iss.js"
+import type {SearchQuery as IzzySearchQuery} from "./searchQueryBuilder"
+import type {Geolocation} from "../storage";
 
-export type serviceSearchRequest = {|
-    query?: string,
-    page?: {
-        current: number,
-        size: number
-    },
-    filters?: {
-        all?: [
-            Object
-        ]
-    },
-    boosts: {[string]: Object}
-|};
 
 export type serviceSearchResultsMeta = {
     ...searchResultsMeta,
@@ -47,23 +37,29 @@ export type serviceSearchResults = {|
     services: Array<Service>,
 |};
 
+convertIzzySearchQueryToIss
+
+export type Props = {
+    ...IzzySearchQuery,
+    pageSize: number
+}
 
 
 export function createServiceSearch({
     pageSize,
     ...query
-}: Object): PaginatedSearch {
+}: Props): PaginatedSearch {
     return new PaginatedSearch(query, pageSize)
 }
 
 class PaginatedSearch {
-    #query;
-    #pagesLoaded = 0;
+    #query: IssSearchQuery;
+    #pagesLoaded: number = 0;
     #pageSize: number;
-    #loadedServices: Array<service> = [];
+    #loadedServices: Array<Service> = [];
 
-    constructor(query, pageSize: number) {
-        this.#query = query
+    constructor(query: IzzySearchQuery, pageSize: number) {
+        this.#query = convertIzzySearchQueryToIss(query)
         this.#pageSize = pageSize
     }
 
@@ -83,7 +79,7 @@ class PaginatedSearch {
         this.#loadedServices.push(...services)
     }
 
-    get loadedServices() {
+    get loadedServices(): Array<Service> {
         return this.#loadedServices
     }
 
@@ -212,75 +208,74 @@ export function forEachServiceFromCache(
     serviceCache.forEach(callback)
 }
 
-export type SearchQueryModifier = {
-    name: string,
-    changes: serviceSearchRequest,
-}
-
-export function getSearchQueryModifiers(
-    router: $PropertyType<RouterContextObject, 'router'>
-): Array<SearchQueryModifier> {
-    const layers: Array<SearchQueryModifier | null> = [
-        {
-            name: 'initial',
-            changes: {
-                "filters": {
-                    "all": [
-                        { "object_type": "Service" },
-                    ]
-                }
-            }
-        }
-    ]
-    const category = getCategoryFromRouter(router)
-
-    if (category) {
-        layers.push({
-            name: `category: ${category.key}`,
-            changes: category.search
-        })
-    } else if (router.match.params.search) {
-        const searchTerm = decodeURIComponent(router.match.params.search)
-        layers.push({
-            name: `search: ${searchTerm}`,
-            changes: { query: searchTerm, }
-        });
-
-        // A special case for the "Find advocacy" button on the
-        // DisabilityAdvocacyFinder page.
-        if (searchTerm === "Disability Advocacy Providers") {
-            layers.push({
-                name: `DisabilityAdvocacyFinder override`,
-                changes: {
-                    service_type_raw: ["disability advocacy"],
-                    query: "disability"
-                }
-            })
-        }
-    }
-
-    const personalisationPages = getPersonalisationPages(router)
-
-    for (let item of personalisationPages) {
-        if (!item.getQueryModifier) {
-            console.error('noooo', item.name)
-        }
-        const changes = item.getQueryModifier()
-        layers.push(changes
-            ? {
-                name: item.name,
-                changes
-            }
-            : null
-        );
-    }
-
-    return layers
-}
 
 export function isDisabilityAdvocacySearch(
     router: $PropertyType<RouterContextObject, 'router'>
 ): boolean {
     return decodeURIComponent(router.match.params.search) ===
         "Disability Advocacy Providers"
+}
+
+
+
+
+function convertIzzySearchQueryToIss(query: IzzySearchQuery): IssSearchQuery {
+    const issQuery: IssSearchQuery = {
+        filters: {
+            all: [
+                {
+                    object_type: "Service"
+                }
+            ]
+        }
+    }
+
+    if (query.term) {
+        issQuery.query = query.term.join(" ")
+    }
+
+    if (query.serviceTypes) {
+        issQuery.filters?.all?.push({
+            service_types: query.serviceTypes
+        })
+    }
+
+    if (query.clientGenders) {
+        const genderBoost = query.clientGenders.map(
+            gender => ({
+                factor: 1.5,
+                operation: "multiply",
+                type: "value",
+                value: gender,
+            })
+        )
+        if (!issQuery.boosts) {
+            issQuery.boosts = {}
+        }
+        issQuery.boosts.target_gender = genderBoost
+    }
+
+    if (query.location) {
+        if (!issQuery.boosts) {
+            issQuery.boosts = {}
+        }
+        issQuery.boosts.location_approximate_geopoint = [
+            {
+                type: "proximity",
+                function: "exponential",
+                center: `${query.location.latitude},${query.location.longitude}`,
+                factor: 20
+            }
+        ]
+        issQuery.filters?.all?.push({
+            location_approximate_geopoint: {
+                center: `${query.location.latitude},${query.location.longitude}`,
+                distance: 300,
+                unit: "km"
+            }
+        })
+    }
+    console.log('converting izzy to iss', query, issQuery)
+
+    return issQuery
 }

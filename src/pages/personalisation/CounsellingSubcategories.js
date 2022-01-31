@@ -22,7 +22,7 @@ export default class CounsellingSubcategories extends BaseQuestion {
             "Sexual identity (LGBTIQA+)": append("sexuality"),
             "Family or relationships": append("family relationship"),
             "Money matters": remove("counselling")
-                .append("(money matters)"),
+                .append('"money matters"'),
             "Gambling": append("gambling"),
             "Find online counselling": append("online"),
             "Other": append(""),

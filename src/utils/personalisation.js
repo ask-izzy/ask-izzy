@@ -9,9 +9,9 @@ import Category from "../constants/Category";
 import personalisation from "../pages/personalisation";
 import storage from "../storage";
 import type { RouterContextObject } from "../contexts/router-context";
-import { ServiceSearchRequest } from "../iss/ServiceSearchRequest";
+import type { SearchQueryChanges } from "../iss/searchQueryBuilder";
 
-export type PersonalisationPageRequiredProps = {
+export type PersonalisationPageRequiredProps = {|
     onDoneTouchTap: () => void,
     goBack?: () => void,
     showBaseTextBox?: boolean,
@@ -19,7 +19,7 @@ export type PersonalisationPageRequiredProps = {
     mobileView?: boolean,
     backToAnswers?: boolean,
     classNames?: string,
-}
+|}
 
 export type PersonalisationQuestionPageDefaultProps = {|
     name: string,
@@ -27,8 +27,8 @@ export type PersonalisationQuestionPageDefaultProps = {|
     byline?: string,
     info?: string,
     multipleChoice?: boolean,
-    showSupportSearchBar?: Boolean,
-    possibleAnswers: {[string]: ServiceSearchRequest},
+    showSupportSearchBar?: boolean,
+    possibleAnswers: {[string]: SearchQueryChanges},
     possibleAnswersDesc?: {[string]: string},
     icons?: Object,
     oldAnswers?: {[string]: string},

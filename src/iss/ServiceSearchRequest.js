@@ -31,25 +31,25 @@ export function conditionally(
     return new ConditionallyModifyServiceSearchRequest(other, filter);
 }
 
-export function housingCrisis(
-    filter: (search: serviceSearchRequest) => boolean
-): ServiceSearchRequest {
-    return remove("housing")
-        .remove("-(respite care)")
-        .remove("-(housing information)")
-        .remove("-hef")
-        .append("(crisis accommodation)")
-        .conditionally(
-            remove("(crisis accommodation)")
-                .remove({service_type: ["housing"]})
-                .append({
-                    service_type: ["Homelessness Access Point"],
-                    catchment: "true",
-                    q: "(Homelessness Access Point)",
-                }),
-            filter
-        );
-}
+// export function housingCrisis(
+//     filter: (search: serviceSearchRequest) => boolean
+// ): ServiceSearchRequest {
+//     return remove("housing")
+//         .remove("-(respite care)")
+//         .remove("-(housing information)")
+//         .remove("-hef")
+//         .append("(crisis accommodation)")
+//         .conditionally(
+//             remove("(crisis accommodation)")
+//                 .remove({service_type: ["housing"]})
+//                 .append({
+//                     service_type: ["Homelessness Access Point"],
+//                     catchment: "true",
+//                     q: "(Homelessness Access Point)",
+//                 }),
+//             filter
+//         );
+// }
 
 /**
  * Base class for composing search terms.

@@ -336,7 +336,6 @@ export async function attachTransportTimes(
         const servicesToLoadTravelTimesFor = services.filter(
             service => !service.location?.isConfidential()
         )
-        console.log('&&&', servicesToLoadTravelTimesFor)
         const travelTimesForServices = await Timeout(
             3000,
             maps.travelTime(servicesToLoadTravelTimesFor
