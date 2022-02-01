@@ -8,8 +8,6 @@ import classnames from "classnames";
 
 import Input from "../base/Input";
 import FlatButton from "../FlatButton";
-import * as gtm from "../../google-tag-manager"
-import type {AnalyticsEvent} from "../../google-tag-manager"
 import SearchIcon from "../../icons/Search"
 
 type Props = {
@@ -22,7 +20,6 @@ type Props = {
         ReactElementConfig<typeof Input>,
         'iconPosition'
     >,
-    analyticsEvent?: AnalyticsEvent,
     autocompleteValues?: Array<string>,
     inputAriaLabel?: string
 }
@@ -31,25 +28,12 @@ export default function SearchBar({
     className,
     initialValue,
     onChange,
-    onSubmit: onSubmitProp,
+    onSubmit,
     placeholder,
     iconPosition,
-    analyticsEvent,
     autocompleteValues,
     inputAriaLabel,
 }: Props): ReactNode {
-    function onSubmit(value) {
-        gtm.emit({
-            event: "Input Submitted - Search",
-            eventCat: "Input submitted",
-            eventAction: "Text search",
-            eventLabel: value,
-            sendDirectlyToGA: true,
-            ...analyticsEvent,
-        });
-        onSubmitProp(value)
-    }
-
     const [value, setValueDirect] = useState<string>(initialValue || "")
     function setValue(newValue) {
         setValueDirect(newValue)
@@ -72,7 +56,7 @@ export default function SearchBar({
                 onChange={setValue}
                 value={value}
                 onKeyDown={event => {
-                    event.key === "Enter" && onSubmit(value)
+                    event.key === "Enter" && value && onSubmit(value)
                 }}
                 icon={
                     <SearchIcon className="searchIcon" />
@@ -86,7 +70,7 @@ export default function SearchBar({
             <FlatButton
                 label="Search"
                 className="searchButton"
-                onClick={() => onSubmit(value)}
+                onClick={() => value && onSubmit(value)}
             />
         </div>
     );

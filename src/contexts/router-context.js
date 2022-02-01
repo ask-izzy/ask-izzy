@@ -55,7 +55,7 @@ export const InjectRouterContext = (
     // if a search value is in the URL but not stored, set the search
     // text in storage.
     if (!storage.getSearch() && matchedRoute.params.search) {
-        storage.setSearch(matchedRoute.params.search)
+        storage.setSearch(matchedRoute.params.search, {eventValue: 0})
     }
 
     const context = {
