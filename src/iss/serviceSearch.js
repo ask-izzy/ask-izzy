@@ -227,6 +227,14 @@ function convertIzzySearchQueryToIss(query: IzzySearchQuery): IssSearchQuery {
                     object_type: "Service"
                 }
             ]
+        },
+        boosts: {
+            is_crisis: {
+                type: "value",
+                value: "true",
+                operation: "multiply",
+                factor: 1.5
+            }
         }
     }
 
@@ -262,18 +270,47 @@ function convertIzzySearchQueryToIss(query: IzzySearchQuery): IssSearchQuery {
         issQuery.boosts.location_approximate_geopoint = [
             {
                 type: "proximity",
-                function: "exponential",
+                function: "linear",
                 center: `${query.location.latitude},${query.location.longitude}`,
-                factor: 20
+                factor: 7
             }
         ]
-        issQuery.filters?.all?.push({
-            location_approximate_geopoint: {
-                center: `${query.location.latitude},${query.location.longitude}`,
-                distance: 300,
-                unit: "km"
+
+        const state = query.location.name.match(/, (\w+)$/)?.[1] //query.location.state
+
+        // issQuery.boosts.location_postcode = {
+        //     type: "value",
+        //     value: [
+        //         "6009",
+        //         "6007",
+        //         "6151",
+        //         "6008",
+        //         "6006",
+        //         "6000",
+        //         "6004",
+        //         "6050",
+        //         "6003",
+        //         "6005"
+        //     ],
+        //     "operation": "multiply",
+        //     "factor": 2
+        // }
+        issQuery.boosts.location_state = {
+            type: "value",
+            value: state,
+            operation: "multiply",
+            factor: 1.5
+        }
+
+        issQuery.filters?.all?.push(
+            {
+                location_approximate_geopoint: {
+                    center: `${query.location.latitude},${query.location.longitude}`,
+                    distance: 300,
+                    unit: "km"
+                }
             }
-        })
+        )
     }
     console.log('converting izzy to iss', query, issQuery)
 
