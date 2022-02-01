@@ -41,6 +41,9 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
     }
 
     shouldShowVicService(): boolean {
+        if (!Location.savedAnswer) {
+            return false
+        }
         const LocationAnswer = Location.savedAnswer.split(", ");
 
         return ["Victoria", "VIC"].indexOf(LocationAnswer[1]) > -1;
