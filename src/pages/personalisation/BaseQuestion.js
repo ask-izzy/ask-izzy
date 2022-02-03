@@ -267,8 +267,8 @@ class BaseQuestion extends React.Component<
         }
     }
 
-    possibleAnswerDescFor(answer: string): ?string {
-        return this.props.possibleAnswersDesc?.[answer] || null
+    getDescriptionForAnswer(answer: string): ?string {
+        return this.props.descriptionsForAnswers?.[answer] || null
     }
 
     render(): React.Node {
@@ -373,7 +373,7 @@ class BaseQuestion extends React.Component<
                 key={index}
                 leftIcon={this.iconFor(answer)}
                 primaryText={answer}
-                secondaryText={this.possibleAnswerDescFor(answer)}
+                secondaryText={this.getDescriptionForAnswer(answer)}
                 aria-label={answer}
                 value={answer}
                 onClick={this.onAnswerTouchTap.bind(
@@ -394,7 +394,7 @@ class BaseQuestion extends React.Component<
                 key={index}
                 leftIcon={this.iconFor(answer)}
                 primaryText={answer}
-                secondaryText={this.possibleAnswerDescFor(answer)}
+                secondaryText={this.getDescriptionForAnswer(answer)}
                 aria-label={answer}
                 value={answer}
                 type="checkbox"

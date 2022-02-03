@@ -29,7 +29,7 @@ export type PersonalisationQuestionPageDefaultProps = {|
     multipleChoice?: boolean,
     showSupportSearchBar?: Boolean,
     possibleAnswers: {[string]: ServiceSearchRequest},
-    possibleAnswersDesc?: {[string]: string},
+    descriptionsForAnswers?: {[string]: string},
     icons?: Object,
     oldAnswers?: {[string]: string},
     showDVLinkBar?: boolean,
