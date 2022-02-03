@@ -22,6 +22,7 @@ import type {
 const defaultProps: PersonalisationNonQuestionPageDefaultProps = {
     name: "who-is-looking-for-help",
     noQuestionStepperBreadcrumb: true,
+    heading: "Who is looking for help?",
 }
 
 class WhoIsLookingForHelp extends React.Component<

@@ -1,27 +1,30 @@
 /* @flow */
-import type { ElementConfig as ReactElementConfig } from "react"
-
 import BaseQuestion from "./BaseQuestion";
 import { append } from "../../iss/ServiceSearchRequest";
+import type {
+    PersonalisationQuestionPageDefaultProps,
+} from "../../utils/personalisation"
 
+// We have to declare this separately for flow to typecheck for some reason
+const defaultProps: PersonalisationQuestionPageDefaultProps = {
+    name: "gender",
+    question: "Do you identify as…",
+    possibleAnswers: {
+        "Female": append({
+            client_gender: ["f", "u"],
+        }),
+        "Male": append({
+            client_gender: ["m", "u"],
+        }),
+        "Trans and Gender Diverse": append({
+            client_gender: ["x", "u"],
+        }),
+    },
+};
 export default class Gender extends BaseQuestion {
     static title: string = "Gender";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
-        name: "gender",
-        question: "Do you identify as…",
-        possibleAnswers: {
-            "Female": append({
-                client_gender: ["f", "u"],
-            }),
-            "Male": append({
-                client_gender: ["m", "u"],
-            }),
-            "Trans and Gender Diverse": append({
-                client_gender: ["x", "u"],
-            }),
-        },
-    };
+    static defaultProps: PersonalisationQuestionPageDefaultProps = defaultProps;
 
     static get summaryLabel(): string {
         return "How do you identify?";

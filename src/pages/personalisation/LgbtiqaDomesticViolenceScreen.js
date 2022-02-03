@@ -10,19 +10,24 @@ import Location from "./Location"
 import storage from "../../storage";
 
 import type { serviceSearchRequest } from "../../iss/serviceSearch";
+import type {
+    PersonalisationNonQuestionPageDefaultProps,
+} from "../../utils/personalisation"
 
+// We have to declare this separately for flow to typecheck for some reason
+const defaultProps: PersonalisationNonQuestionPageDefaultProps = {
+    ...BaseStaticPersonalisation.defaultProps,
+    name: "lgbtiqa-domestic-violence",
+    heading: "LGBTIQA+",
+    baseTextBoxComponent: <DomesticViolenceLink/>,
+};
 class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
     doneButtonLabel = "Continue to all services";
 
     static title = "LGBTIQA+ help";
 
-    static defaultProps = {
-        ...BaseStaticPersonalisation.defaultProps,
-        name: "lgbtiqa-domestic-violence",
-        heading: "LGBTIQA+",
-        showBaseTextBox: true,
-        baseTextBoxComponent: <DomesticViolenceLink/>,
-    };
+    static defaultProps: PersonalisationNonQuestionPageDefaultProps =
+        defaultProps;
 
     static getShouldIncludePage(): boolean {
         return Boolean(

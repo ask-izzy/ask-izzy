@@ -308,7 +308,8 @@ export type ageGroup = "unspecified" |
     "youngadult" |
     "adult" |
     "middleagedadult" |
-    "preretirementage";
+    "preretirementage" |
+    "agedpersons";
 
 /*
 * Loads the transportTime property from google

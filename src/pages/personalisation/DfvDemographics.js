@@ -1,6 +1,4 @@
 /* @flow */
-import type { ElementConfig as ReactElementConfig } from "react"
-
 import * as React from "react";
 import type {Node as ReactNode} from "react";
 import BaseQuestion from "./BaseQuestion";
@@ -12,6 +10,9 @@ import storage from "../../storage";
 import Under18Page from "./Under18DomesticViolenceScreen";
 import LgbtiqaPage from "./LgbtiqaDomesticViolenceScreen";
 import UsingViolencePage from "./UsingViolenceScreen";
+import type {
+    PersonalisationQuestionPageDefaultProps,
+} from "../../utils/personalisation"
 
 const ATSI_BREADCRUMB_ICON = (
     <span>
@@ -23,37 +24,40 @@ const LGBT_BREADCRUMB_ICON = (
     <span><icons.DemographicLgbtiq viewBox="2 9 59 44" /></span>
 )
 
+// We have to declare this separately for flow to typecheck for some reason
+const defaultProps: PersonalisationQuestionPageDefaultProps = {
+    name: "dfv-demographics",
+    question: "Do any of these apply to you?",
+    byline: "Select all that apply",
+    info: "All of your answers are private and anonymous.",
+    multipleChoice: true,
+    possibleAnswers: {
+        "Aboriginal and/or Torres Strait Islander":
+            append("(Aboriginals & Torres Strait Islanders)"),
+        "Experiencing violence": append(""),
+        "Under 18": append(""),
+        "LGBTIQA+": append(""),
+        "Culturally and linguistically diverse": append("ethnic"),
+        "Person seeking asylum": append("refugees"),
+        "Using violence": append(""),
+    },
+    icons: {
+        "Aboriginal and/or Torres Strait Islander": icons.DemographicAtsi,
+        "Experiencing violence": icons.ExperiencingViolence,
+        "Under 18": icons.Under18,
+        "LGBTIQA+": icons.DemographicLgbtiq,
+        "Culturally and linguistically diverse":
+            icons.DemographicNeedInterpreter,
+        "Person seeking asylum": icons.DemographicRecentlyArrived,
+        "Using violence": icons.UsingViolence,
+    },
+    oldAnswers: {},
+}
+
 export default class DfvDemographics extends BaseQuestion {
     static title: string = "Personal";
     static propTypes = BaseQuestion.propTypes;
-    static defaultProps: ReactElementConfig<typeof BaseQuestion> = {
-        name: "dfv-demographics",
-        question: "Do any of these apply to you?",
-        byline: "Select all that apply",
-        info: "All of your answers are private and anonymous.",
-        multipleChoice: true,
-        possibleAnswers: {
-            "Aboriginal and/or Torres Strait Islander":
-                append("(Aboriginals & Torres Strait Islanders)"),
-            "Experiencing violence": append(""),
-            "Under 18": append(""),
-            "LGBTIQA+": append(""),
-            "Culturally and linguistically diverse": append("ethnic"),
-            "Person seeking asylum": append("refugees"),
-            "Using violence": append(""),
-        },
-        icons: {
-            "Aboriginal and/or Torres Strait Islander": icons.DemographicAtsi,
-            "Experiencing violence": icons.ExperiencingViolence,
-            "Under 18": icons.Under18,
-            "LGBTIQA+": icons.DemographicLgbtiq,
-            "Culturally and linguistically diverse":
-                icons.DemographicNeedInterpreter,
-            "Person seeking asylum": icons.DemographicRecentlyArrived,
-            "Using violence": icons.UsingViolence,
-        },
-        oldAnswers: {},
-    };
+    static defaultProps: PersonalisationQuestionPageDefaultProps = defaultProps;
 
     componentDidMount(): void {
         if (super.componentDidMount) {

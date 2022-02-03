@@ -11,23 +11,13 @@ import storage from "../storage";
 import type { RouterContextObject } from "../contexts/router-context";
 import { ServiceSearchRequest } from "../iss/ServiceSearchRequest";
 
-export type PersonalisationPageRequiredProps = {
-    onDoneTouchTap: () => void,
-    goBack?: () => void,
-    showBaseTextBox?: boolean,
-    baseTextBoxComponent?: ReactNode,
-    mobileView?: boolean,
-    backToAnswers?: boolean,
-    classNames?: string,
-}
-
 export type PersonalisationQuestionPageDefaultProps = {|
     name: string,
     question: string,
     byline?: string,
     info?: string,
     multipleChoice?: boolean,
-    showSupportSearchBar?: Boolean,
+    showSupportSearchBar?: boolean,
     possibleAnswers: {[string]: ServiceSearchRequest},
     descriptionsForAnswers?: {[string]: string},
     icons?: Object,
@@ -44,16 +34,33 @@ export type PersonalisationNonQuestionPageDefaultProps = {|
     info?: string,
     noQuestionStepperBreadcrumb?: boolean,
     noQuestionStepperStep?: boolean,
+    baseTextBoxComponent?: ReactNode,
+    heading: string,
+    showDoneButton?: boolean
 |}
 
-export type PersonalisationPageDefaultProps =
-    PersonalisationQuestionPageDefaultProps |
-    PersonalisationNonQuestionPageDefaultProps
+export type PersonalisationQuestionPageOtherProps = {
+    onDoneTouchTap: () => void,
+    goBack?: () => void,
+    mobileView?: boolean,
+    backToAnswers?: boolean,
+    classNames?: string,
+}
+export type PersonalisationNonQuestionPageOtherProps = {
+    ...PersonalisationQuestionPageOtherProps,
+}
 
-export type PersonalisationPageProps = {|
-    ...PersonalisationPageDefaultProps,
-    ...PersonalisationPageRequiredProps
+export type PersonalisationQuestionPageProps = {|
+    ...PersonalisationQuestionPageDefaultProps,
+    ...PersonalisationQuestionPageOtherProps
 |}
+export type PersonalisationNonQuestionPageProps = {|
+    ...PersonalisationNonQuestionPageDefaultProps,
+    ...PersonalisationNonQuestionPageOtherProps
+|}
+export type PersonalisationPageProps =
+    PersonalisationQuestionPageProps |
+    PersonalisationNonQuestionPageProps;
 
 export type PersonalisationPageState = {
     category: ?Category,

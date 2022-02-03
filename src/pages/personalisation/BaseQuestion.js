@@ -18,7 +18,7 @@ import ScreenReader from "../../components/ScreenReader";
 import {getBannerName} from "../../utils/personalisation"
 import routerContext from "../../contexts/router-context";
 import type {
-    PersonalisationPageProps,
+    PersonalisationQuestionPageProps,
     PersonalisationPageState,
     PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation";
@@ -31,7 +31,7 @@ export type State = {
 }
 
 class BaseQuestion extends React.Component<
-    PersonalisationPageProps,
+    PersonalisationQuestionPageProps,
     State
 > {
     static contextType: any = routerContext;
@@ -348,11 +348,7 @@ class BaseQuestion extends React.Component<
                                 this.props.textDVLinkBar}
                         </fieldset>
                     </WithStickyFooter>
-                    {
-                        this.props.showBaseTextBox &&
-                        Boolean(this.props.baseTextBoxComponent) &&
-                        this.props.baseTextBoxComponent
-                    }
+                    {this.props.baseTextBoxComponent}
                     {this.renderSearchBar()}
                 </main>
             </div>

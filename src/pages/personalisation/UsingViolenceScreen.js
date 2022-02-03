@@ -10,8 +10,22 @@ import DfvDemographics from "./DfvDemographics";
 import storage from "../../storage";
 
 import type { serviceSearchRequest } from "../../iss/serviceSearch";
+import type {
+    PersonalisationNonQuestionPageDefaultProps,
+} from "../../utils/personalisation"
+
+// We have to declare this separately for flow to typecheck for some reason
+const defaultProps: PersonalisationNonQuestionPageDefaultProps = {
+    ...BaseStaticPersonalisation.defaultProps,
+    name: "using-violence",
+    heading: "Worried about your behaviour?",
+    baseTextBoxComponent: <DomesticViolenceLink/>,
+};
 
 class UsingViolenceScreen extends BaseStaticPersonalisation {
+    static defaultProps: PersonalisationNonQuestionPageDefaultProps =
+        defaultProps;
+
     get doneButtonLabel(): string {
         if (DfvDemographics.savedAnswer?.includes("LGBTIQA+")) {
             return "Continue";
@@ -21,14 +35,6 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
     }
 
     static title = "Using violence";
-
-    static defaultProps = {
-        ...BaseStaticPersonalisation.defaultProps,
-        name: "using-violence",
-        heading: "Worried about your behaviour?",
-        showBaseTextBox: true,
-        baseTextBoxComponent: <DomesticViolenceLink/>,
-    };
 
     static getShouldIncludePage(): boolean {
         return Boolean(
