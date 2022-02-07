@@ -10,8 +10,20 @@ import DfvDemographics from "./DfvDemographics";
 import storage from "../../storage";
 
 import type { serviceSearchRequest } from "../../iss/serviceSearch";
+import type {
+    PersonalisationNonQuestionPageDefaultProps,
+} from "../../utils/personalisation"
 
+// We have to declare this separately for flow to typecheck for some reason
+const defaultProps: PersonalisationNonQuestionPageDefaultProps = {
+    ...BaseStaticPersonalisation.defaultProps,
+    name: "under-18-dfv",
+    heading: "Under 18",
+    baseTextBoxComponent: <DomesticViolenceLink/>,
+};
 class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
+    static defaultProps: PersonalisationNonQuestionPageDefaultProps =
+        defaultProps;
     get doneButtonLabel(): string {
         const answer = DfvDemographics.savedAnswer
         if (
@@ -27,14 +39,6 @@ class Under18DomesticViolenceScreen extends BaseStaticPersonalisation {
     }
 
     static title = "Under 18 help";
-
-    static defaultProps = {
-        ...BaseStaticPersonalisation.defaultProps,
-        name: "under-18-dfv",
-        heading: "Under 18",
-        showBaseTextBox: true,
-        baseTextBoxComponent: <DomesticViolenceLink/>,
-    };
 
     static getShouldIncludePage(): boolean {
         return Boolean(

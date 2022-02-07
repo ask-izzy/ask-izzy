@@ -18,7 +18,7 @@ import ScreenReader from "../../components/ScreenReader";
 import {getBannerName} from "../../utils/personalisation"
 import routerContext from "../../contexts/router-context";
 import type {
-    PersonalisationPageProps,
+    PersonalisationQuestionPageProps,
     PersonalisationPageState,
     PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation";
@@ -31,7 +31,7 @@ export type State = {
 }
 
 class BaseQuestion extends React.Component<
-    PersonalisationPageProps,
+    PersonalisationQuestionPageProps,
     State
 > {
     static contextType: any = routerContext;
@@ -267,8 +267,8 @@ class BaseQuestion extends React.Component<
         }
     }
 
-    possibleAnswerDescFor(answer: string): ?string {
-        return this.props.possibleAnswersDesc?.[answer] || null
+    getDescriptionForAnswer(answer: string): ?string {
+        return this.props.descriptionsForAnswers?.[answer] || null
     }
 
     render(): React.Node {
@@ -348,11 +348,7 @@ class BaseQuestion extends React.Component<
                                 this.props.textDVLinkBar}
                         </fieldset>
                     </WithStickyFooter>
-                    {
-                        this.props.showBaseTextBox &&
-                        Boolean(this.props.baseTextBoxComponent) &&
-                        this.props.baseTextBoxComponent
-                    }
+                    {this.props.baseTextBoxComponent}
                     {this.renderSearchBar()}
                 </main>
             </div>
@@ -373,7 +369,7 @@ class BaseQuestion extends React.Component<
                 key={index}
                 leftIcon={this.iconFor(answer)}
                 primaryText={answer}
-                secondaryText={this.possibleAnswerDescFor(answer)}
+                secondaryText={this.getDescriptionForAnswer(answer)}
                 aria-label={answer}
                 value={answer}
                 onClick={this.onAnswerTouchTap.bind(
@@ -394,7 +390,7 @@ class BaseQuestion extends React.Component<
                 key={index}
                 leftIcon={this.iconFor(answer)}
                 primaryText={answer}
-                secondaryText={this.possibleAnswerDescFor(answer)}
+                secondaryText={this.getDescriptionForAnswer(answer)}
                 aria-label={answer}
                 value={answer}
                 type="checkbox"

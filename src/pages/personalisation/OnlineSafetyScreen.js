@@ -8,19 +8,25 @@ import AreYouSafe from "./AreYouSafe";
 import storage from "../../storage";
 import OnlineSafetyLink from "../../components/OnlineSafetyLink";
 import MobileDetect from "../../components/higherorder/MobileDetect";
+import type {
+    PersonalisationNonQuestionPageDefaultProps,
+} from "../../utils/personalisation"
+
+// We have to declare this separately for flow to typecheck for some reason
+const defaultProps: PersonalisationNonQuestionPageDefaultProps = {
+    ...BaseStaticPersonalisation.defaultProps,
+    name: "online-safety-screen",
+    heading: "Everyone has the right to be safe.",
+    baseTextBoxComponent: <OnlineSafetyLink/>,
+};
 
 class OnlineSafetyScreen extends BaseStaticPersonalisation {
     doneButtonLabel = "OK - keep searching";
 
     static title = "Help";
 
-    static defaultProps = {
-        ...BaseStaticPersonalisation.defaultProps,
-        name: "online-safety-screen",
-        heading: "Everyone has the right to be safe.",
-        showBaseTextBox: true,
-        baseTextBoxComponent: <OnlineSafetyLink/>,
-    };
+    static defaultProps: PersonalisationNonQuestionPageDefaultProps =
+        defaultProps;
 
     static getShouldIncludePage(): boolean {
         return !["", "Yes", "(skipped)"]

@@ -8,30 +8,28 @@ import storage from "../../storage";
 import {getBannerName} from "../../utils/personalisation"
 import routerContext from "../../contexts/router-context";
 import type {
-    PersonalisationPageProps,
+    PersonalisationNonQuestionPageProps,
+    PersonalisationNonQuestionPageDefaultProps,
 } from "../../utils/personalisation";
-
-export type Props = {
-    ...PersonalisationPageProps,
-    heading: string,
-    showDoneButton?: boolean,
-}
 
 // We need to create the defaultProps out of the component first otherwise flow
 // doesn't typecheck it
-const defaultProps: Props = {
-    showBaseTextBox: false,
+const defaultProps: $Shape<PersonalisationNonQuestionPageDefaultProps> = {
     showDoneButton: true,
     noQuestionStepperStep: true,
     noQuestionStepperBreadcrumb: true,
 };
 
-class BaseStaticPersonalisation extends React.Component<Props, {}> {
+class BaseStaticPersonalisation extends React.Component<
+    PersonalisationNonQuestionPageProps,
+    {}
+> {
     static contextType: any = routerContext;
 
     +doneButtonLabel: ?string;
 
-    static defaultProps: Props = defaultProps
+    static defaultProps: PersonalisationNonQuestionPageDefaultProps =
+        defaultProps
 
     /*
      * How should this answer be represented
@@ -120,14 +118,11 @@ class BaseStaticPersonalisation extends React.Component<Props, {}> {
                 <main>
                     <div className="body">
                         {this.renderContent()}
-                        {
-                            this.props.showBaseTextBox &&
-                            Boolean(this.props.baseTextBoxComponent) && (
-                                <div className="TextBannerContainer">
-                                    {this.props.baseTextBoxComponent}
-                                </div>
-                            )
-                        }
+                        {this.props.baseTextBoxComponent && (
+                            <div className="TextBannerContainer">
+                                {this.props.baseTextBoxComponent}
+                            </div>
+                        )}
                         {this.props.showDoneButton && this.renderDoneButton()}
                     </div>
                 </main>

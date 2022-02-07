@@ -52,6 +52,7 @@ type State = {
 // doesn't typecheck it
 const defaultProps: PersonalisationNonQuestionPageDefaultProps = {
     name: "location",
+    heading: "Location",
 };
 
 class Location extends React.Component<
