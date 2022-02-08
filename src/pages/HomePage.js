@@ -57,7 +57,7 @@ function HomePage(): ReactNode {
                         Find the help you need, now and nearby.
                     </>}
                     secondaryText={<div className="secondary">
-                        Search over 370,000 support services.
+                        Search over 400,000 support services.
                     </div>}
                     bannerName="homepage"
                     hideLogoWhenNotABar={true}
