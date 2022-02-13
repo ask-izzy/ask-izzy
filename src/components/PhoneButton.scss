@@ -2,6 +2,10 @@
 @use '../styles/mixins/colours';
 
 .Contact {
+    .Link {
+        padding: 0;
+    }
+
     .ContactButton {
         background-color: #{colours.get-static('colour-button-primary')};
         background-color: var(--colour-button-primary);
