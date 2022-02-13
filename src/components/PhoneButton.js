@@ -11,6 +11,7 @@ import classnames from "classnames"
 import type { phone } from "../iss/general";
 import {toCamelCase} from "../utils/strings";
 import ScreenReader from "./ScreenReader";
+import UrlsToLinks from "./UrlsToLink"
 
 type Props = phone & {
     crisis?: boolean,
@@ -62,7 +63,7 @@ export default class PhoneButton extends React.Component<Props, void> {
                     Phone contact:
                 </ScreenReader>
                 <span className="kind">
-                    {this.displayComment}
+                    <UrlsToLinks>{this.displayComment}</UrlsToLinks>
                 </span>
                 <Link
                     to={this.href}

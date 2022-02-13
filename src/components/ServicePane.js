@@ -29,6 +29,7 @@ import icons from "../icons";
 import Storage from "../storage";
 import ScreenReader from "./ScreenReader";
 import {MobileDetect} from "../effects/MobileDetect";
+import UrlsToLinks from "./UrlsToLink"
 
 type Props = {
     service: Service,
@@ -139,7 +140,7 @@ function ServicePane({service}: Props): ReactNode {
         let description = service
             .descriptionSentences.map(
                 (sentence, idx) =>
-                    <p key={idx}>{sentence}</p>
+                    <UrlsToLinks key={idx}>{sentence}</UrlsToLinks>
             )
 
         if (service.descriptionRemainder.length > 0) {

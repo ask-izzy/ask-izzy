@@ -6,6 +6,8 @@ import ScreenReader from "./ScreenReader";
 import AddressLocation from "../iss/AddressLocation";
 import Spacer from "./Spacer";
 
+import UrlsToLinks from "./UrlsToLink"
+
 type Props = {
     location: AddressLocation,
     withSpacer?: boolean,
@@ -38,7 +40,9 @@ class Address extends React.Component<Props, void> {
                     {" "}
                     {location.details &&
                         <div className="details">
-                            {location.details}
+                            <UrlsToLinks>
+                                {location.details}
+                            </UrlsToLinks>
                         </div>
                     }
                 </div>

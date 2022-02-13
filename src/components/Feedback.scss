@@ -3,7 +3,7 @@
 .Feedback {
     color: #{colours.get-static('colour-text-mid')};
     color: var(--colour-text-mid);
-    font-weight: 500;
+    font-weight: normal;
 
     h4 {
         color: #{colours.get-static('colour-text-dark')};
