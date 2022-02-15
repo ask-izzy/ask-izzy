@@ -5,6 +5,8 @@ import React from "react";
 import _ from "underscore";
 import _string from "underscore.string";
 
+import UrlsToLinks from "./UrlsToLink"
+
 type Props = {
     catchment: string,
     eligibility_info: string,
@@ -74,7 +76,7 @@ class Eligibility extends React.Component<Props, void> {
 
     renderItem(text: string): void | ReactElement<"li"> {
         if (text) {
-            return (<li key={text}>{text}</li>);
+            return (<li key={text}><UrlsToLinks>{text}</UrlsToLinks></li>);
         }
     }
 

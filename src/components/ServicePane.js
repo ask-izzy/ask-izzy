@@ -13,6 +13,7 @@ import ContactMethods from "./ContactMethods";
 import DebugServiceRecord from "./DebugServiceRecord";
 import Eligibility from "./Eligibility";
 import Feedback from "./Feedback";
+import ImportantInformation from "./ImportantInformation"
 import HeaderBar from "./HeaderBar";
 import TransportTime from "./TransportTime";
 import GoogleMapsLink from "./GoogleMapsLink";
@@ -28,6 +29,7 @@ import icons from "../icons";
 import Storage from "../storage";
 import ScreenReader from "./ScreenReader";
 import {MobileDetect} from "../effects/MobileDetect";
+import UrlsToLinks from "./UrlsToLink"
 
 type Props = {
     service: Service,
@@ -138,7 +140,7 @@ function ServicePane({service}: Props): ReactNode {
         let description = service
             .descriptionSentences.map(
                 (sentence, idx) =>
-                    <p key={idx}>{sentence}</p>
+                    <UrlsToLinks key={idx}>{sentence}</UrlsToLinks>
             )
 
         if (service.descriptionRemainder.length > 0) {
@@ -256,6 +258,7 @@ function ServicePane({service}: Props): ReactNode {
                             </GoogleMapsLink>
                             }
                             <ContactMethods object={service} />
+                            <ImportantInformation object={service}/>
                             <Feedback object={service} />
                         </div>
                     </BoxedText>
