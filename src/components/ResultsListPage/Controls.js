@@ -12,7 +12,7 @@ import GeolocationButtonForTravelTimes from
     "../GeolocationButtonForTravelTimes";
 import {MobileDetect} from "../../effects/MobileDetect";
 import type {travelTimesStatus} from "../../hooks/useTravelTimesUpdater";
-import Service from "../../iss/Service"
+import Service from "../../services/Service"
 
 type Props = {
     onSortByChange: (SortType) => void,

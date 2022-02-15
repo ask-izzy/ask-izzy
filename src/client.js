@@ -6,9 +6,6 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import routes from "./routes";
 import * as gtm from "./google-tag-manager";
-import searchTest from "./search-test";
-
-window.searchTest = searchTest;
 
 // Preventing the Google Maps libary from downloading an extra font
 // http://stackoverflow.com/questions/25523806/google-maps-v3-prevent-api-from-loading-roboto-font

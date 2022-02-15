@@ -5,7 +5,7 @@ import React from "react";
 import PropTypes from "proptypes";
 
 import Link from "./base/Link";
-import Service from "../iss/Service";
+import Service from "../services/Service";
 import PhoneButton from "./PhoneButton";
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";

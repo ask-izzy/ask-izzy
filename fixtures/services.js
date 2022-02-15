@@ -1,6 +1,6 @@
 /* @flow */
 import getServiceFixture from "./factories/Service"
-import Service from "../src/iss/Service"
+import Service from "../src/services/Service"
 import * as serviceProps from "./servicesProps"
 
 /* eslint-disable max-len */

@@ -16,6 +16,9 @@ import {
 import * as gtm from "./google-tag-manager";
 import type {AnalyticsEvent} from "./google-tag-manager";
 
+export const previousSearchHashStorageKey = "previousSearchHash"
+export const previousSearchDateStorageKey = "previousSearchDate"
+
 
 export type Geolocation = {
     name: string,
@@ -24,7 +27,6 @@ export type Geolocation = {
 }
 
 const Storage = {
-
     getSearch(): string {
         return sessionStore.getItem("search") || "";
     },
@@ -92,7 +94,7 @@ const Storage = {
         this.removeItem("coordinates")
     },
 
-    getItem(key: string): ?(string|number|boolean) {
+    getItem(key: string): ?string {
         return persistentStore.getItem(key);
     },
 
@@ -101,7 +103,10 @@ const Storage = {
             switchToPrivateMode();
         }
 
-        const gtmIgnoredKeys = ["previous_search_url"]
+        const gtmIgnoredKeys = [
+            previousSearchHashStorageKey,
+            previousSearchDateStorageKey,
+        ]
 
         if (!gtmIgnoredKeys.includes(key)) {
             gtm.emit({

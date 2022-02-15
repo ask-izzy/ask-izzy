@@ -2,7 +2,7 @@
 
 import moment from "moment-timezone";
 
-import ServiceOpening from "../../src/iss/ServiceOpening";
+import ServiceOpening from "../../src/services/ServiceOpening";
 import type {openingHours as openingHoursType} from "../../src/iss/general";
 
 /*

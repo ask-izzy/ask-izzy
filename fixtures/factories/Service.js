@@ -1,8 +1,8 @@
 /* @flow */
 import merge from "deepmerge";
 
-import Service from "../../src/iss/Service";
-import type {ServiceProps} from "../../src/iss/Service";
+import Service from "../../src/services/Service";
+import type {ServiceProps} from "../../src/services/Service";
 import type {AddressLocationProps} from "../../src/iss/AddressLocation";
 import type {site} from "../../src/iss/site";
 import type {nowOpen, phone} from "../../src/iss/general";

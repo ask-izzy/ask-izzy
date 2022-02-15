@@ -9,9 +9,9 @@ import CrisisHeader from "../components/CrisisHeader";
 import {
     crisisResults as onlyCrisisResults,
     nonCrisisResults as onlyNonCrisisResults,
-} from "../iss/crisisService";
+} from "../services/crisisService";
 
-import Service, {sortServices} from "../iss/Service";
+import Service, {sortServices} from "../services/Service";
 import type {SortType} from "./base/Dropdown";
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 import ScreenReader from "../components/ScreenReader";

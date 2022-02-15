@@ -1,5 +1,5 @@
 /* @flow */
-import Service from "./Service"
+import Service from "../services/Service"
 
 export function countCrisisResults(results: Array<Service>): number {
     const firstRegularServiceIdx = results.findIndex(

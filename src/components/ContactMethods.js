@@ -10,7 +10,7 @@ import PhoneButton from "./PhoneButton";
 import Web from "./Web";
 import * as gtm from "../google-tag-manager";
 
-import Service from "../iss/Service";
+import Service from "../services/Service";
 
 type Props = {
     object: Service,

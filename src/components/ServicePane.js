@@ -23,7 +23,7 @@ import Chevron from "../icons/Chevron";
 import IndigenousServiceIcon from "./IndigenousServiceIcon";
 import LgbtiqIcon from "./LgbtiqIcon";
 import AlertBannerList from "../components/AlertBannerList";
-import Service from "../iss/Service";
+import Service from "../services/Service";
 import icons from "../icons";
 import Storage from "../storage";
 import ScreenReader from "./ScreenReader";
@@ -45,8 +45,9 @@ function ServicePane({service}: Props): ReactNode {
 
 
     const getSiblingServices = async(): Promise<void> => {
-        let response = await service.getSiblingServices();
-        setSiblings(response.services)
+        setSiblings(
+            await service.getSiblingServices()
+        )
     }
 
 

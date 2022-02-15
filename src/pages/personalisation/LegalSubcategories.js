@@ -1,6 +1,5 @@
 /* @flow */
 import BaseQuestion from "./BaseQuestion";
-import { append, remove } from "../../iss/ServiceSearchRequest";
 import { resetDfvOptions } from "../../utils/domesticViolence";
 import type {
     PersonalisationQuestionPageDefaultProps,
@@ -11,19 +10,66 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     name: "sub-legal",
     question: "What's happening?",
     possibleAnswers: {
-        "Police and liaison officers": append("police (police liaison)")
-            .remove("(legal aid)"),
-        "Legal advice": remove("legal -permits -ceremonies")
-            .remove("-making -checks -electoral -taxation")
-            .remove("-centrelink -immigration -(hire of facilities)")
-            .remove("(legal aid)").append("legal advice"),
-        "Domestic & family violence issues":
-            append("(family violence) -police").remove("(legal aid)"),
-        "Victims of crime compensation": remove("legal -permits")
-            .remove("-(coordinating bodies) -ceremonies -making")
-            .remove("-checks -electoral -taxation")
-            .remove("-centrelink -immigration -(hire of facilities)")
-            .remove("(legal aid)").append("victims of crime -police"),
+        "Police and liaison officers": {
+            $concat: {
+                term: ["police", "(police liaison)"],
+            },
+            $removeElms: {
+                term: ["(legal aid)"],
+            },
+        },
+        "Legal advice": {
+            $concat: {
+                term: ["legal", "advice"],
+            },
+            $removeElms: {
+                term: [
+                    "legal",
+                    "(legal aid)",
+                    "-(coordinating bodies)",
+                    "-permits",
+                    "-ceremonies",
+                    "-making",
+                    "-checks",
+                    "-electoral",
+                    "-taxation",
+                    "-centrelink",
+                    "-immigration",
+                    "-(hire of facilities)",
+                ],
+            },
+        },
+        "Domestic & family violence issues": {
+            $concat: {
+                term: ["(family violence)", "-police"],
+            },
+            $removeElms: {
+                term: [
+                    "(legal aid)",
+                ],
+            },
+        },
+        "Victims of crime compensation": {
+            $concat: {
+                term: ["victims", "of", "crime", "-police"],
+            },
+            $removeElms: {
+                term: [
+                    "legal",
+                    "(legal aid)",
+                    "-(coordinating bodies)",
+                    "-permits",
+                    "-ceremonies",
+                    "-making",
+                    "-checks",
+                    "-electoral",
+                    "-taxation",
+                    "-centrelink",
+                    "-immigration",
+                    "-(hire of facilities)",
+                ],
+            },
+        },
     },
     showSupportSearchBar: true,
 };

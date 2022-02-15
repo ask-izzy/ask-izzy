@@ -4,7 +4,7 @@ import type {Element as ReactElement} from "React";
 import React from "react";
 import moment from "moment-timezone";
 
-import ServiceOpening from "../iss/ServiceOpening";
+import ServiceOpening from "../services/ServiceOpening";
 import ScreenReader from "./ScreenReader";
 
 import icons from "../icons";

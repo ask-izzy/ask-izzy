@@ -3,8 +3,7 @@
 /* eslint-disable no-use-before-define, prefer-arrow-callback */
 
 import assert from "assert";
-import { serialiseUrlQueryParams } from "../../src/utils/url";
-import { countCrisisResults } from "../../src/iss/crisisService";
+import { countCrisisResults } from "../../src/services/crisisService";
 import getServiceFixture from "../../fixtures/factories/Service";
 
 describe("iss service", function() {
@@ -83,49 +82,6 @@ describe("iss service", function() {
         ));
 
     })
-
-    describe("Munging URLs", function() {
-
-        it("Preserves unrelated query params", function() {
-            assert.equal(
-                "http://example.org/?a=b&c=d",
-                serialiseUrlQueryParams(
-                    "http://example.org/?a=b",
-                    {c: "d"},
-                ),
-            );
-        });
-
-        it("Overrides query params", function() {
-            assert.equal(
-                "http://example.org/?a=c",
-                serialiseUrlQueryParams(
-                    "http://example.org/?a=b",
-                    {a: "c"},
-                ),
-            );
-        });
-
-        it("Converts auth params to &key=", function() {
-            assert.equal(
-                "http://example.org/?key=bob%3AalICE",
-                serialiseUrlQueryParams(
-                    "http://bob:alICE@example.org/",
-                    {},
-                ),
-            );
-        });
-
-        it("Sends arrays multiple times", function() {
-            assert.equal(
-                "http://example.org/?age_group=junior&age_group=senior",
-                serialiseUrlQueryParams(
-                    "http://example.org/",
-                    {age_group: ["junior", "senior"]},
-                ),
-            );
-        });
-    });
 
     describe("counting crisis results", function() {
         const result = (crisis: boolean) => {

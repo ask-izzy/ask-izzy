@@ -1,6 +1,5 @@
 /* @flow */
 import BaseQuestion from "./BaseQuestion";
-import { append, remove } from "../../iss/ServiceSearchRequest";
 import type {
     PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation"
@@ -12,18 +11,49 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     question: "What do you need?",
     possibleAnswers: {
         /* eslint-disable max-len */
-        "Emergency aid": append("emergency aid"),
-        "Bond or rental assistance": append("(bond assistance)"),
-        "Financial assistance e.g. utility bills, petrol, food":
-            append({ service_type: ["financial aid"] }),
-        "No interest & low interest loans": remove("financial aid")
-            .append("nils")
-            .append("low-interest"),
-        "Gambling counselling": remove("financial aid")
-            .append("gambling counselling"),
-        "Financial counselling": remove("financial aid")
-            .append("financial counselling")
-            .append("name:\"financial counselling\""),
+        "Emergency aid": {
+            $concat: {
+                term: ["emergency", "aid"],
+            },
+        },
+        "Bond or rental assistance": {
+            $concat: {
+                term: ["(bond assistance)"],
+            },
+        },
+        "Financial assistance e.g. utility bills, petrol, food": {
+            $concat: {
+                serviceTypes: ["Financial Aid"],
+            },
+        },
+        "No interest & low interest loans": {
+            $concat: {
+                term: ["nils", "low-interest"],
+            },
+            $removeElms: {
+                term: ["financial", "aid"],
+            },
+        },
+        "Gambling counselling": {
+            $concat: {
+                term: ["gambling", "counselling"],
+            },
+            $removeElms: {
+                term: ["financial", "aid"],
+            },
+        },
+        "Financial counselling": {
+            $concat: {
+                term: [
+                    "financial",
+                    "counselling",
+                    "name:\"financial counselling\"",
+                ],
+            },
+            $removeElms: {
+                term: ["financial", "aid"],
+            },
+        },
     },
     showSupportSearchBar: true,
 };

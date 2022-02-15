@@ -5,7 +5,7 @@ import React from "react";
 
 import Link from "./base/Link";
 import * as gtm from "../google-tag-manager";
-import Service from "../iss/Service";
+import Service from "../services/Service";
 import Spacer from "./Spacer";
 import config from "../config";
 

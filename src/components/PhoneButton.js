@@ -42,7 +42,6 @@ export default class PhoneButton extends React.Component<Props, void> {
             ...this.props.analyticsEventDetails,
         });
     }
-    recordClick: any = this.recordClick.bind(this)
 
     render(): ReactElement<"div"> {
         const className = classnames(
@@ -67,7 +66,7 @@ export default class PhoneButton extends React.Component<Props, void> {
                 <Link
                     to={this.href}
                     className="ContactButton"
-                    onClick={this.recordClick}
+                    onClick={this.recordClick.bind(this)}
                     analyticsEvent={{
                         event: "Link Followed - Phone Contact",
                         eventAction: `Contact detail - phone` +

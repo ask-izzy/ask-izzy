@@ -32,41 +32,43 @@ class DynamicPage extends React.Component<{}> {
      * @returns {JSX.Element} - returns either a callout or blockqupte
      */
     renderEmbCallout: (props: ReactMarkdownQuoteProps) => ReactNode =
-    (props: ReactMarkdownQuoteProps) => {
+        (props: ReactMarkdownQuoteProps) => {
         // Get the text content of the children
-        const textContent = React.Children.map(props.children,
-            paragraphElm => (
-                React.Children.map(paragraphElm.props.children,
-                    textElm => textElm.type(textElm.props))
-            )).join("")
+            const textContent = React.Children.map(props.children,
+                paragraphElm => (
+                    React.Children.map(paragraphElm.props.children,
+                        textElm => textElm.type(textElm.props))
+                )).join("")
 
-        const embeddedCallouts = textContent.match(/\[callout.(.*).]/);
-        if (embeddedCallouts) {
-            return (
-                <Query
-                    query={CalloutQuery}
-                    errorComponent={
-                        <div className="loadingStatus">
+            const embeddedCallouts = textContent.match(/\[callout.(.*).]/);
+            if (embeddedCallouts) {
+                return (
+                    <Query
+                        query={CalloutQuery}
+                        errorComponent={
+                            <div className="loadingStatus">
                             Could not load the callout {embeddedCallouts[1]}
-                        </div>
-                    }
-                    args={{
-                        key: embeddedCallouts[1],
-                    }}
-                >
-                    {res => (
-                        <CalloutBox
-                            calloutBoxes={res.data.callouts.map(callout => ({
-                                callout,
-                            }))}
-                            embedded={true}
-                        />
-                    )}
-                </Query>
-            )
+                            </div>
+                        }
+                        args={{
+                            key: embeddedCallouts[1],
+                        }}
+                    >
+                        {res => (
+                            <CalloutBox
+                                calloutBoxes={res.data.callouts
+                                    .map(callout => ({
+                                        callout,
+                                    }))
+                                }
+                                embedded={true}
+                            />
+                        )}
+                    </Query>
+                )
+            }
+            return <BlockQuote>{props.children}</BlockQuote>
         }
-        return <BlockQuote>{props.children}</BlockQuote>
-    }
 
 
     render(): ReactNode {

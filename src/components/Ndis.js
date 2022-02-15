@@ -2,7 +2,7 @@
 
 import type {Element as ReactElement} from "React";
 import React from "react";
-import Service from "../iss/Service";
+import Service from "../services/Service";
 import Spacer from "./Spacer";
 
 type Props = {

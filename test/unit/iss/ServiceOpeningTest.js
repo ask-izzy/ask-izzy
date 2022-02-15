@@ -5,7 +5,7 @@
 import assert from "assert";
 import moment from "moment-timezone";
 import _ from "underscore";
-import ServiceOpening from "../../../src/iss/ServiceOpening";
+import ServiceOpening from "../../../src/services/ServiceOpening";
 
 function time(now: string): Moment {
     return moment(now, "YYYY-MM-DD ha");

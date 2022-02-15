@@ -18,35 +18,31 @@ type State = {
 }
 
 class AddServicePage extends React.Component<Props, State> {
-    handleMessage: Function;
-
     constructor(props: Object): void {
         super(props);
 
         this.state = {
             isFormDone: false,
         };
-
-        this.handleMessage = this.handleMessage.bind(this);
     }
 
     static contextType: any = routerContext;
 
     componentDidMount(): void {
         if (typeof window !== "undefined") {
-            window.addEventListener("message", this.handleMessage, false);
+            window.addEventListener(
+                "message",
+                this.handleMessage.bind(this),
+                false
+            );
 
-            if (window.ISS_URL) {
-                const issUrl = new URL(window.ISS_URL)
-                issUrl.username = ""
-                issUrl.password = ""
-
+            if (window.ISS3_BASE_URL) {
                 this.setState({
                     ...this.state,
-                    issUrl: issUrl,
+                    issUrl: window.ISS3_BASE_URL,
                     issFormUrl: new URL(
                         "/add-service-form?form=ask-izzy",
-                        issUrl
+                        window.ISS3_BASE_URL
                     ),
                 })
             }
@@ -56,7 +52,10 @@ class AddServicePage extends React.Component<Props, State> {
 
     componentWillUnmount(): void {
         if (typeof window !== "undefined") {
-            window.removeEventListener("message", this.handleMessage);
+            window.removeEventListener(
+                "message",
+                this.handleMessage.bind(this)
+            );
         }
     }
 

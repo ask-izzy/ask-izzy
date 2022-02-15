@@ -9,7 +9,7 @@ import Category from "../constants/Category";
 import personalisation from "../pages/personalisation";
 import storage from "../storage";
 import type { RouterContextObject } from "../contexts/router-context";
-import { ServiceSearchRequest } from "../iss/ServiceSearchRequest";
+import type { SearchQueryChanges } from "../iss/searchQueryBuilder";
 
 export type PersonalisationQuestionPageDefaultProps = {|
     name: string,
@@ -18,7 +18,7 @@ export type PersonalisationQuestionPageDefaultProps = {|
     info?: string,
     multipleChoice?: boolean,
     showSupportSearchBar?: boolean,
-    possibleAnswers: {[string]: ServiceSearchRequest},
+    possibleAnswers: {[string]: SearchQueryChanges},
     descriptionsForAnswers?: {[string]: string},
     icons?: Object,
     oldAnswers?: {[string]: string},

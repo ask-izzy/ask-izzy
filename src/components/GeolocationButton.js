@@ -143,47 +143,47 @@ function GeolocationButton({
         switch (status.type) {
         case "NOT_STARTED":
             return <>
-                    <icons.Location/>
-                    <span className="primary">
+                <icons.Location/>
+                <span className="primary">
                         Get your current location
-                    </span>
-                </>
+                </span>
+            </>
         case "RUNNING":
             return <>
-                    <icons.Loading />
-                    <div className="multiLine">
-                        <span className="primary">
+                <icons.Loading />
+                <div className="multiLine">
+                    <span className="primary">
                             Locating you...
-                        </span>
-                        <span className="secondary">
+                    </span>
+                    <span className="secondary">
                             Please permit us to use your GPS
-                        </span>
-                    </div>
-                </>
+                    </span>
+                </div>
+            </>
         case "COMPLETE":
             return <>
-                    <icons.Tick />
-                    <span className="primary">
+                <icons.Tick />
+                <span className="primary">
                         Found your location
-                        {showLocationInSuccessMessage && status.location &&
+                    {showLocationInSuccessMessage && status.location &&
                             ` (in ${status.location.name})`
-                        }
-                        {successMessageSuffix && ` – ${successMessageSuffix}`}
-                        {showClearButton && renderClearButton()}
-                    </span>
-                </>;
+                    }
+                    {successMessageSuffix && ` – ${successMessageSuffix}`}
+                    {showClearButton && renderClearButton()}
+                </span>
+            </>;
         case "FAILED":
             return <>
-                    <icons.Cross />
-                    <div className="multiLine">
-                        <span className="primary">
+                <icons.Cross />
+                <div className="multiLine">
+                    <span className="primary">
                             Unable to get your location
-                        </span>
-                        <span className="secondary">
-                            {status.error?.message}
-                        </span>
-                    </div>
-                </>
+                    </span>
+                    <span className="secondary">
+                        {status.error?.message}
+                    </span>
+                </div>
+            </>
         default:
             return null
         }

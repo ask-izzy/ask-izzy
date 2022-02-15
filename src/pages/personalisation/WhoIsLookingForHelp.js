@@ -3,7 +3,7 @@ import * as React from "react";
 
 import components from "../../components";
 import storage from "../../storage";
-import type {serviceSearchRequest} from "../../iss/serviceSearch";
+import type {SearchQueryChanges} from "../../iss/searchQueryBuilder";
 import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import ScreenReader from "../../components/ScreenReader";
@@ -36,11 +36,11 @@ class WhoIsLookingForHelp extends React.Component<
 
     static title: string = "Who is looking for help?";
 
-    static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
+    static getSearchQueryChanges(): SearchQueryChanges | null {
         if (!WhoIsLookingForHelp.savedAnswer) {
             return null
         }
-        return request;
+        return {}
     }
 
     constructor(props: Object) {
@@ -73,11 +73,14 @@ class WhoIsLookingForHelp extends React.Component<
     handleButtonClick: (
         (userType: string) => (event: SyntheticEvent<HTMLButtonElement>) => void
     ) = (userType: string) =>
-        (event: SyntheticEvent<HTMLButtonElement>): void => {
-            storage.setItem(WhoIsLookingForHelp.defaultProps.name, userType);
+            (event: SyntheticEvent<HTMLButtonElement>): void => {
+                storage.setItem(
+                    WhoIsLookingForHelp.defaultProps.name,
+                    userType
+                );
 
-            this.props.onDoneTouchTap();
-        }
+                this.props.onDoneTouchTap();
+            }
 
     static get savedAnswer(): string {
         let answer = storage.getItem(this.defaultProps.name);

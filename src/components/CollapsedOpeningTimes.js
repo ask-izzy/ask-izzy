@@ -6,7 +6,7 @@ import React from "react";
 import moment from "moment-timezone";
 import _ from "underscore";
 
-import ServiceOpening from "../iss/ServiceOpening";
+import ServiceOpening from "../services/ServiceOpening";
 import Collapser from "./general/Collapser";
 import OpeningTimes from "./OpeningTimes";
 import * as gtm from "../google-tag-manager";

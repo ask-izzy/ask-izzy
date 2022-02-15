@@ -11,7 +11,7 @@ import NotFoundStaticPage from "./NotFoundStaticPage";
 import icons from "../icons";
 
 import type { site } from "../iss/site";
-import Service from "../iss/Service"
+import Service from "../services/Service"
 
 import GeolocationButtonForTravelTimes from
     "../components/GeolocationButtonForTravelTimes";

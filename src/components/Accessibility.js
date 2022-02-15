@@ -3,7 +3,7 @@
 import type {Node as ReactNode} from "React";
 import React from "react";
 import icons from "../icons";
-import Service from "../iss/Service";
+import Service from "../services/Service";
 import Spacer from "./Spacer";
 import ScreenReader from "./ScreenReader";
 

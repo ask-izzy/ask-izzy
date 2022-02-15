@@ -3,9 +3,7 @@
 import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
-import DebugContainer from "../components/DebugContainer";
 import DebugPersonalisation from "../components/DebugPersonalisation";
-import DebugSearch from "../components/DebugSearch";
 import ResultsPage from "./ResultsPage";
 import ResultsList from "../components/ResultsList";
 import LoadingResultsHeader from
@@ -16,16 +14,10 @@ import NotFoundStaticPage from "./NotFoundStaticPage"
 import FlatButton from "../components/FlatButton";
 import SuggestionBox from "./SuggestionBox";
 import QuestionStepper from "../components/QuestionStepper";
-import {getInitialSearchRequest} from "../iss/serviceSearch";
 import { stateFromLocation } from "../utils";
-import IssParamsOverrideControls from
-    "../components/debug/IssParamsOverrideControls";
 import ScrollToTop from "../components/ResultsListPage/ScrollToTop";
 import Storage from "../storage";
 import Controls from "../components/ResultsListPage/Controls";
-import {
-    getPersonalisationPages,
-} from "../utils/personalisation"
 
 class ResultsListPage extends ResultsPage<> {
     render(): ReactElement<"div"> | ReactNode {
@@ -50,51 +42,14 @@ class ResultsListPage extends ResultsPage<> {
     renderPage: (() => ReactElement<"div">) = () => (
         <div className="ResultsListPage">
             <div>
-                {typeof window !== "undefined" && <>
-                    <DebugContainer message="Debug personalisation">
-                        <DebugPersonalisation
-                            search={getInitialSearchRequest(
-                                this.context.router
-                            )}
-                            items={getPersonalisationPages(
-                                this.context.router
-                            )}
-                        />
-                    </DebugContainer>
-                    <DebugContainer
-                        message="ISS Parameters"
-                        initiallyExpanded={
-                            !!Storage.getJSON("issParamsOverride")
-                        }
-                    >
-                        {Storage.getJSON("issParamsOverride") ?
-                            <IssParamsOverrideControls
-                                originalIssParams={this.issParams() || {}}
-                                issParamsOverride={
-                                    Storage.getJSON("issParamsOverride")
-                                }
-                                setIssParamsOverride={
-                                    this.setIssParamsOverride.bind(this)
-                                }
-                            />
-                            : <>
-                                <DebugSearch search={this.issParams()} />
-                                <button
-                                    onClick={() => this.setIssParamsOverride(
-                                        this.issParams() || {},
-                                        false
-                                    )}
-                                >
-                                    Override ISS Params
-                                </button>
-                            </>
-                        }
-                    </DebugContainer>
-                </>}
+                <DebugPersonalisation
+                    issQuery={this.getIssSearchQuery() || {}}
+                    setIssParamsOverride={this.setIssParamsOverride.bind(this)}
+                />
                 <LoadingResultsHeader
                     title={this.state.pageTitle}
                     category={this.state.category}
-                    meta={this.state.searchMeta || {total_count: 0}}
+                    services={this.state.searchResults || []}
                     loading={this.searchIsLoading}
                     error={this.state.searchError ?
                         "An error occurred. Please try again."
@@ -161,7 +116,7 @@ class ResultsListPage extends ResultsPage<> {
 
     renderSuggestionBox(): void | ReactNode {
         if (
-            !this.state.searchMeta?.next &&
+            !this.searchHasNextPage &&
             !this.searchIsLoading
         ) {
             return (
@@ -179,7 +134,7 @@ class ResultsListPage extends ResultsPage<> {
     }
 
     renderLoadMore(): void | ReactElement<"div"> | ReactNode {
-        if (this.state.searchMeta?.next) {
+        if (this.searchHasNextPage) {
             return (
                 <div className="moreResultsContainer">
                     <FlatButton

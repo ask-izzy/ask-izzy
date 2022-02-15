@@ -17,7 +17,8 @@ fi
 
 vars_to_inject=(
     "VERSION"
-    "ISS_URL"
+    "ISS3_BASE_URL"
+    "ISS3_API_KEY"
     "GOOGLE_API_KEY"
     "GOOGLE_ANALYTICS_URL"
     "GOOGLE_TAG_MANAGER_ID"
@@ -32,7 +33,8 @@ vars_to_inject=(
 
 required_vars=(
     "VERSION"
-    "ISS_URL"
+    "ISS3_BASE_URL"
+    "ISS3_API_KEY"
     "PROXY_DOMAINS"
     "NEW_RELIC_CONFIG"
     "NEW_RELIC_INFO"

@@ -73,7 +73,7 @@ export default class Link extends React.Component<Props, State> {
             protocol: null | string
         |}
     ) = (uri: string) => {
-        const [, protocol, domain, path] =
+            const [, protocol, domain, path] =
                 // urls
                 this.props.to.match(/^([^/]*)\/\/([^/]+)(.*)/) ||
                 // non-url uri's like mailto
@@ -81,12 +81,12 @@ export default class Link extends React.Component<Props, State> {
                 // just a path
                 [null, null, null, this.props.to]
 
-        return {
-            protocol,
-            domain,
-            path,
+            return {
+                protocol,
+                domain,
+                path,
+            }
         }
-    }
 
     render(): React.Node | React.Element<"a"> {
         let {

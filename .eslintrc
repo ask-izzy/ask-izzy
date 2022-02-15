@@ -1,4 +1,5 @@
 {
+    "root": true,
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module",
@@ -10,7 +11,7 @@
         "browser": true,
         "node": true
     },
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "plugins": [
         "react",
     ],

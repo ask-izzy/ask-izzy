@@ -14,7 +14,7 @@ import {
     not,
     provides,
     referralsRegexp,
-} from "../iss/ServiceProvisions";
+} from "../services/provisions";
 
 /* Please keep this grouped and the groups sorted */
 const serviceProvisions: Array<ServiceProvision> = [

@@ -9,7 +9,7 @@ import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda";
 
 import dictionary from "../support/dictionary";
 import { mock, mockSearch } from "../support/mock_iss/server";
-import Service from "../../src/iss/Service";
+import Service from "../../src/services/Service";
 
 import { visitUrl } from "./browser";
 

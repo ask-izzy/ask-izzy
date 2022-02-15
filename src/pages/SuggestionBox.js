@@ -5,7 +5,7 @@ import * as React from "react";
 import Link from "../components/base/Link";
 import Storage from "../storage";
 import Category from "../constants/Category";
-import Service from "../iss/Service";
+import Service from "../services/Service";
 import {ensureURLHasTrailingSlash} from "../utils/url"
 
 type Props = {

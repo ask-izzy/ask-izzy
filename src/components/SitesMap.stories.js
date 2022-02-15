@@ -12,7 +12,7 @@ import {
 import getServiceFixture from "../../fixtures/factories/Service";
 import { injectEnvVars } from "../storybook/loaders";
 import { addGoogleMapsScript } from "../storybook/decorators";
-import Service from "../iss/Service"
+import Service from "../services/Service"
 
 export default {
     title: "App Components/SitesMap",

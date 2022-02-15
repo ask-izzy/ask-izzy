@@ -4,7 +4,7 @@ import type {Node as ReactNode, Element as ReactElement} from "React";
 import React from "react";
 
 import icons from "../icons";
-import Service from "../iss/Service";
+import Service from "../services/Service";
 
 import DebugContainer from "./DebugContainer";
 import DebugQueryScore from "./DebugQueryScore";
