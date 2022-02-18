@@ -473,28 +473,3 @@ function isGeolocation(location: ?location): boolean %checks {
 }
 
 export default Location;
-
-export function mergeAccessPoints(
-    original: serviceSearchResults,
-    alternate: serviceSearchResults
-): serviceSearchResults {
-    const objects = crisisResults(original.services).concat(
-        alternate.services,
-        nonCrisisResults(original.services)
-    )
-    const deduped = _.uniq(objects, false, ({id}) => id);
-    const removedCount = objects.length - deduped.length;
-
-    return {
-        meta: {
-            ...original.meta,
-            total_count: original.meta.total_count +
-                         alternate.meta.total_count -
-                         removedCount,
-            available_count: original.meta.available_count +
-                             alternate.meta.available_count -
-                             removedCount,
-        },
-        services: deduped,
-    };
-}
