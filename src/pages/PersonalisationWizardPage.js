@@ -52,7 +52,7 @@ class PersonalisationWizardPage extends React.Component<{}, State> {
 
         if (
             this.context.router.match.params.search ===
-                "bushfires -(closed due to the recent bushfires)"
+                "bushfires -\"closed due to the recent bushfires\""
         ) {
             this.setState({showSubpage: false });
         }

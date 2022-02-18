@@ -15,6 +15,8 @@ import type { RouterContextObject } from "../contexts/router-context";
 import {getCategoryFromRouter} from "../utils/personalisation"
 import WhoIsLookingForHelpPage from
     "../pages/personalisation/WhoIsLookingForHelp"
+import type {SearchQuery as IzzySearchQuery} from "./searchQueryBuilder"
+
 
 export type serviceSearchRequest = {|
     q?: string,
@@ -207,4 +209,148 @@ export function isDisabilityAdvocacySearch(
 ): boolean {
     return decodeURIComponent(router.match.params.search) ===
         "Disability Advocacy Providers"
+}
+
+
+// eslint-disable-next-line complexity
+export function convertIzzySearchQueryToIss3(
+    query: IzzySearchQuery
+): serviceSearchRequest {
+    const issQuery: $Shape<serviceSearchRequest> = {}
+
+    let q = query.term?.join(" ") || ""
+
+    // These tweaks don't change behaviour of any of the queries, purely the
+    // formatting. They are used replicate some of the legacy formatting
+    // behaviour of the old query system so the output of the queries before
+    // and after the change can be diffed to detect any actual behaviour
+    // changes.
+    if (
+        q === "-\"coordinating bodies\" -\"fire-fighting\" " +
+            "service_type:Child Protection/ Placement"
+    ) {
+        q = " -\"coordinating bodies\" -\"fire-fighting\" " +
+            "service_type:Child Protection/ Placement"
+    } else if (
+        q.startsWith(
+            "-\"coordinating bodies\" -\"holiday accommodation\" " +
+                "\"Homelessness Access Point\""
+        )
+    ) {
+        q = q.replace(
+            "-\"coordinating bodies\" -\"holiday accommodation\" " +
+                "\"Homelessness Access Point\"",
+            " -\"coordinating bodies\"    -\"holiday accommodation\"  " +
+                "\"Homelessness Access Point\""
+        )
+    } else if (q.startsWith("meals -\"home care\"")) {
+        q = q.replace(
+            "meals -\"home care\"",
+            "meals  -\"home care\""
+        )
+    } else if (
+        q.startsWith(
+            "-\"coordinating bodies\" -\"fire-fighting\" " +
+                "\"men's behaviour change\""
+        )
+    ) {
+        q = q.replace(
+            "-\"coordinating bodies\" -\"fire-fighting\" " +
+                "\"men's behaviour change\"",
+            " -\"coordinating bodies\" -\"fire-fighting\"  " +
+                "\"men's behaviour change\""
+        )
+    } else if (q.startsWith("legal -\"coordinating bodies\"")) {
+        q = q.replace(
+            "legal -\"coordinating bodies\"",
+            "legal  -\"coordinating bodies\""
+        )
+    } else if (
+        q.match(
+            "-\"assistance with meals\" -\"hire of facilities\" " +
+                "-\"meal preparation\""
+        )
+    ) {
+        q = " " + q
+        q = q.replace(
+            "-\"assistance with meals\" -\"hire of facilities\" " +
+                "-\"meal preparation\"",
+            " -\"assistance with meals\" -\"hire of facilities\"  " +
+                "-\"meal preparation\""
+        )
+    } else if (q.startsWith("-\"coordinating bodies\"")) {
+        q = " " + q
+    } else if (q.startsWith("-research")) {
+        q = "  " + q
+    }
+
+    q = q.replace(/"(.*?)"/g, "($1)")
+
+    if (q === "(centrelink)") {
+        q = "\"centrelink\""
+    } else if (q.match(/name:\(financial counselling\)/)) {
+        q = q.replace(
+            /name:\(financial counselling\)/,
+            "name:\"financial counselling\""
+        )
+    }
+
+    if (q) {
+        issQuery.q = q
+    }
+
+    if (query.siteId) {
+        issQuery.site_id = query.siteId
+    }
+
+    if (query.serviceTypes) {
+        issQuery.service_type = query.serviceTypes.map(
+            serviceType => serviceType !== "Homelessness Access Point" ?
+                serviceType.toLowerCase()
+                : serviceType
+        )
+    }
+
+    if (query.minimumShouldMatch) {
+        issQuery.minimum_should_match = query.minimumShouldMatch
+    }
+
+    if (query.showInAskIzzyHealth) {
+        issQuery.show_in_askizzy_health = query.showInAskIzzyHealth
+    }
+
+    if (query.clientGenders) {
+        issQuery.client_gender = query.clientGenders.map(
+            gender => ({
+                Female: "f",
+                Male: "m",
+                Diverse: "x",
+                unspecified: "u",
+            }[gender])
+        )
+    }
+
+    if (query.ageGroups) {
+        issQuery.age_group = query.ageGroups.map(
+            ageGroup => ageGroup.toLowerCase().split(/[ -]/).join("")
+        )
+    }
+
+    if (query.catchment) {
+        issQuery.catchment = query.catchment
+    }
+
+    if (query.location) {
+        issQuery.area = query.location.name
+        if (query.location.coordinates) {
+            issQuery.location = `${query.location.coordinates.longitude}E` +
+                `${query.location.coordinates.latitude}N`
+        }
+    }
+
+    if (query.name) {
+        issQuery.name = query.name
+    }
+
+    return issQuery
 }
