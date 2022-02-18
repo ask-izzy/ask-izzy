@@ -10,11 +10,11 @@ import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
 import type {Geolocation} from "../../storage";
-import {searchForLocations} from "../../iss/locationSearch"
-import type {areaLocation} from "../../iss/locationSearch";
 import type { serviceSearchResults} from "../../iss/serviceSearch";
 import type { serviceSearchRequest } from "../../iss/serviceSearch";
 import {crisisResults, nonCrisisResults} from "../../iss/crisisService"
+import {getIss3Client} from "../../iss/client"
+import type {areaLocation} from "../../ix-web-js-client/apis/iss-v3.js";
 import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import WithStickyFooter from "../../components/WithStickyFooter";
@@ -189,7 +189,11 @@ class Location extends React.Component<
         async(input: string) => {
             let results
             try {
-                results = await searchForLocations(input)
+                const iss3Client = await getIss3Client()
+                results = await iss3Client.searchLocations({
+                    name: input,
+                    kind: ["postcode", "suburb", "town"],
+                })
             } catch (error) {
                 console.error(
                     "Error trying to get location autocomplete",
