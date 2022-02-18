@@ -9,7 +9,11 @@ import type {
     serviceSearchRequest,
     serviceSearchResultsMeta,
 } from "../iss/serviceSearch";
-import {getInitialSearchRequest} from "../iss/serviceSearch"
+import {
+    getSearchQueryModifiers,
+    buildSearchQueryFromModifiers,
+} from "../iss/searchQueryBuilder";
+import type {SearchQueryModifier} from "../iss/searchQueryBuilder";
 import * as gtm from "../google-tag-manager";
 
 import routerContext from "../contexts/router-context";
@@ -22,13 +26,15 @@ import storage from "../storage";
 import type {SortType} from "../components/base/Dropdown"
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 import {
-    getPersonalisationPages,
     getPersonalisationPagesToShow,
     getCategoryFromRouter,
     getPageTitleFromRouter,
     setLocationFromUrl,
 } from "../utils/personalisation"
 import Category from "../constants/Category"
+import {
+    convertIzzySearchQueryToIss3,
+} from "../iss/serviceSearch"
 
 type State = {
     searchMeta: ?serviceSearchResultsMeta,
@@ -183,22 +189,19 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         // We have to do this once the component is mounted (instead of
         // in willTransitionTo because the personalisation components will
         // inspect the session).
-        let request = getInitialSearchRequest(this.context.router);
+        let modifiers = getSearchQueryModifiers(this.context.router);
 
-        const personalisationPages = getPersonalisationPages(
-            this.context.router
-        )
-        for (let item of personalisationPages) {
-            if (typeof item.getSearch === "function") {
-                request = item.getSearch(request);
-
-                if (!request) {
-                    return null;
-                }
-            }
+        if (modifiers.includes(null)) {
+            return null
         }
+        // Cast because flow is stupid and doesn't know that
+        // searchQueryModifiers won't contain null at this point.
+        modifiers = ((modifiers: any): SearchQueryModifier[])
 
-        return request;
+
+        return convertIzzySearchQueryToIss3(
+            buildSearchQueryFromModifiers(modifiers)
+        );
     }
 
     get searchIsLoading(): boolean {

@@ -15,6 +15,8 @@ import type { RouterContextObject } from "../contexts/router-context";
 import {getCategoryFromRouter} from "../utils/personalisation"
 import WhoIsLookingForHelpPage from
     "../pages/personalisation/WhoIsLookingForHelp"
+import type {SearchQuery as IzzySearchQuery} from "./searchQueryBuilder"
+
 
 export type serviceSearchRequest = {|
     q?: string,
@@ -207,4 +209,66 @@ export function isDisabilityAdvocacySearch(
 ): boolean {
     return decodeURIComponent(router.match.params.search) ===
         "Disability Advocacy Providers"
+}
+
+
+// eslint-disable-next-line complexity
+export function convertIzzySearchQueryToIss3(
+    query: IzzySearchQuery
+): serviceSearchRequest {
+    const issQuery: $Shape<serviceSearchRequest> = {}
+
+    if (query.term) {
+        issQuery.q = query.term.join(" ")
+    }
+
+    if (query.siteId) {
+        issQuery.site_id = query.siteId
+    }
+
+    if (query.serviceTypes) {
+        issQuery.service_type = query.serviceTypes.map(
+            gender => gender.toLowerCase()
+        )
+    }
+
+    if (query.minimumShouldMatch) {
+        issQuery.minimum_should_match = query.minimumShouldMatch
+    }
+
+    if (query.showInAskIzzyHealth) {
+        issQuery.show_in_askizzy_health = query.showInAskIzzyHealth
+    }
+
+    if (query.clientGenders) {
+        issQuery.client_gender = query.clientGenders.map(
+            gender => ({
+                Female: "f",
+                Male: "m",
+                Diverse: "x",
+                unspecified: "u",
+            }[gender])
+        )
+    }
+
+    if (query.ageGroups) {
+        issQuery.age_group = query.ageGroups.map(
+            gender => gender.toLowerCase().split(/\s/).join("")
+        )
+
+    }
+
+    if (query.catchment) {
+        issQuery.catchment = query.catchment
+    }
+
+    if (query.location) {
+        issQuery.area = query.location.name
+        if (query.location.coordinates) {
+            issQuery.location = `${query.location.coordinates.longitude}E` +
+                `${query.location.coordinates.latitude}N`
+        }
+    }
+
+    return issQuery
 }

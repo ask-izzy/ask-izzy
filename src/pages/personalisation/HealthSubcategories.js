@@ -1,42 +1,110 @@
 /* @flow */
 import BaseQuestion from "./BaseQuestion";
-import { append, remove } from "../../iss/ServiceSearchRequest";
 import { resetDfvOptions } from "../../utils/domesticViolence";
 import type {
     PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation"
-
-function specialist(query) {
-    return remove("(community health)").append(query);
-}
 
 // We have to declare this separately for flow to typecheck for some reason
 const defaultProps: PersonalisationQuestionPageDefaultProps = {
     name: "sub-health",
     question: "What sort of help do you need?",
     possibleAnswers: {
-        "Doctor": remove("(community health)")
-            .append("(general medical practitioners)"),
-        "Nurse": append("nurse"),
-        "Social & emotional wellbeing": specialist("(mental health)"),
-        "Domestic & family violence": append("health (Family violence)")
-            .remove("(community health)"),
-        "Sexual assault": append("(sexual assault)")
-            .remove("(community health)"),
-        "Sexual health": specialist("(sexual health)"),
-        "Dentist": specialist("dentistry"),
-        "Problems with feet": specialist("podiatry"),
-        "Eye care": specialist("optometry"),
-        "Children": remove("(community health)")
-            .append("health children"),
-        "Maternal & child health": remove("(community health)")
-            .remove({show_in_askizzy_health: true})
-            .append("(maternal child health)"),
-        "Hospital": remove("(community health)")
-            .remove({show_in_askizzy_health: true})
-            .append("(public hospital services)")
-            .append("-pac")
-            .append("-medicare"),
+        "Doctor": {
+            $concat: {
+                term: ["(general medical practitioners)"],
+            },
+            $removeElms: {
+                term: ["(community health)"],
+            },
+        },
+        "Nurse": {
+            $concat: {
+                term: ["nurse"],
+            },
+        },
+        "Social & emotional wellbeing": {
+            $concat: {
+                term: ["(mental health)"],
+            },
+            $removeElms: {
+                term: ["(community health)"],
+            },
+        },
+        "Domestic & family violence": {
+            $concat: {
+                term: ["health", "(Family violence)"],
+            },
+            $removeElms: {
+                term: ["(community health)"],
+            },
+        },
+        "Sexual assault": {
+            $concat: {
+                term: ["(sexual assault)"],
+            },
+            $removeElms: {
+                term: ["(community health)"],
+            },
+        },
+        "Sexual health": {
+            $concat: {
+                term: ["(sexual health)"],
+            },
+            $removeElms: {
+                term: ["(community health)"],
+            },
+        },
+        "Dentist": {
+            $concat: {
+                term: ["dentistry"],
+            },
+            $removeElms: {
+                term: ["(community health)"],
+            },
+        },
+        "Problems with feet": {
+            $concat: {
+                term: ["podiatry"],
+            },
+            $removeElms: {
+                term: ["(community health)"],
+            },
+        },
+        "Eye care": {
+            $concat: {
+                term: ["optometry"],
+            },
+            $removeElms: {
+                term: ["(community health)"],
+            },
+        },
+        "Children": {
+            $concat: {
+                term: ["health", "children"],
+            },
+            $removeElms: {
+                term: ["(community health)"],
+            },
+        },
+        "Maternal & child health": {
+            $concat: {
+                term: ["(maternal child health)"],
+            },
+            $removeElms: {
+                term: ["(community health)"],
+            },
+            $unset: ["showInAskIzzyHealth"],
+        },
+        "Hospital": {
+            $concat: {
+                term: ["(public hospital services)", "-pac", "-medicare"],
+            },
+            $removeElms: {
+                term: ["(community health)"],
+            },
+            $unset: ["showInAskIzzyHealth"],
+        },
     },
     showSupportSearchBar: true,
 };

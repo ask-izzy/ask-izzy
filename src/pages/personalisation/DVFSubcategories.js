@@ -1,8 +1,6 @@
 /* @flow */
 import BaseQuestion from "./BaseQuestion";
-import { append, remove } from "../../iss/ServiceSearchRequest";
 import icons from "../../icons";
-import Location from "./Location";
 import type {
     PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation"
@@ -13,33 +11,90 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     question: "What best describes what you need?",
     info: "All of your answers are private and anonymous.",
     possibleAnswers: {
-        "Family violence support": append(""),
-        "Counselling": append("counselling"),
-        "Police": remove("(family violence)")
-            .append("police dvlo"),
-        "Legal support": append("legal -permits -ceremonies")
-            .append("-making -checks -electoral -taxation")
-            .append("-centrelink -immigration -(hire of facilities)")
-            .append("-police"),
-        "Children's support & protection": remove("(family violence)")
-            .append("service_type:Child Protection/ Placement"),
-        "Sexual assault support": remove("(family violence)")
-            .append("(sexual assault)"),
-        "Financial help": remove("(family violence)")
-            .append("(financial counselling)")
-            .append("-grants")
-            .append("name:\"financial counselling\""),
-        "Help for people using violence": remove("(family violence)")
-            .append("(using violence)")
-            .conditionally(
-                remove("(using violence)")
-                    .append("(men's behaviour change)"),
-                // Check for injection of access points currently checks
-                // if a user is in Victoria
-                () => Location.shouldInjectAccessPoints()
-            ),
-        "Help for pets": append("pets -(animal control)")
-            .append("-(effectiveness training)"),
+        "Family violence support": {},
+        "Counselling": {
+            $concat: {
+                term: ["counselling"],
+            },
+        },
+        "Police": {
+            $concat: {
+                term: ["police", "dvlo"],
+            },
+            $removeElms: {
+                term: ["(family violence)"],
+            },
+        },
+        "Legal support": {
+            $concat: {
+                term: [
+                    "legal",
+                    "-permits",
+                    "-ceremonies",
+                    "-making",
+                    "-checks",
+                    "-electoral",
+                    "-taxation",
+                    "-centrelink",
+                    "-immigration",
+                    "-(hire of facilities)",
+                    "-police",
+                ],
+            },
+        },
+        "Children's support & protection": {
+            $concat: {
+                term: ["service_type:Child Protection/ Placement"],
+            },
+            $removeElms: {
+                term: ["(family violence)"],
+            },
+        },
+        "Sexual assault support": {
+            $concat: {
+                term: ["(sexual assault)"],
+            },
+            $removeElms: {
+                term: ["(family violence)"],
+            },
+        },
+        "Financial help": {
+            $concat: {
+                term: [
+                    "(financial counselling)",
+                    "-grants",
+                    "name:\"financial counselling\"",
+                ],
+            },
+            $removeElms: {
+                term: ["(family violence)"],
+            },
+        },
+        "Help for people using violence": {
+            $concat: {
+                term: ["(using violence)"],
+            },
+            $removeElms: {
+                term: ["(family violence)"],
+            },
+            $applyIfShouldInjectAccessPoints: {
+                $concat: {
+                    term: ["(men's behaviour change)"],
+                },
+                $removeElms: {
+                    term: ["(using violence)"],
+                },
+            },
+        },
+        "Help for pets": {
+            $concat: {
+                term: [
+                    "pets",
+                    "-(animal control)",
+                    "-(effectiveness training)",
+                ],
+            },
+        },
     },
     icons: {
         "Family violence support": icons.ExperiencingViolence,

@@ -1,7 +1,6 @@
 /* @flow */
 import BaseQuestion from "./BaseQuestion";
 /* eslint-disable no-unused-vars */
-import { append, remove } from "../../iss/ServiceSearchRequest";
 import type {
     PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation"
@@ -12,14 +11,28 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     name: "sub-food",
     question: "What type of food do you need?",
     possibleAnswers: {
-        "Community meals": remove("-(coordinating bodies)"),
-        "Food packages/parcels/vouchers": remove("meals")
-            .append("(Food Parcels & Food Vouchers)")
-            .append({service_type: ["material aid"]}),
-        "Meals on Wheels": remove("meals")
-            .remove("-(meals on wheels)")
-            .remove("-chsp")
-            .append("meals on wheels"),
+        "Community meals": {
+            $removeElms: {
+                term: ["-(coordinating bodies)"],
+            },
+        },
+        "Food packages/parcels/vouchers": {
+            $concat: {
+                term: ["(Food Parcels & Food Vouchers)"],
+                serviceTypes: ["Material Aid"],
+            },
+            $removeElms: {
+                term: ["meals"],
+            },
+        },
+        "Meals on Wheels": {
+            $concat: {
+                term: ["meals", "on", "wheels"],
+            },
+            $removeElms: {
+                term: ["meals", "-(meals on wheels)", "-chsp"],
+            },
+        },
     },
     showSupportSearchBar: true,
 };

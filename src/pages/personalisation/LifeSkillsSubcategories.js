@@ -1,6 +1,5 @@
 /* @flow */
 import BaseQuestion from "./BaseQuestion";
-import { remove } from "../../iss/ServiceSearchRequest";
 import type {
     PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation"
@@ -11,9 +10,22 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     question: "Want to develop skills?",
     possibleAnswers: {
         /* eslint-disable max-len */
-        "School": remove("life skills education").append("government schools"),
-        "Training with support": remove("life skills education")
-            .append("supported vocational training"),
+        "School": {
+            $concat: {
+                term: ["government", "schools"],
+            },
+            $removeElms: {
+                term: ["life", "skills", "education"],
+            },
+        },
+        "Training with support": {
+            $concat: {
+                term: ["supported", "vocational", "training"],
+            },
+            $removeElms: {
+                term: ["life", "skills", "education"],
+            },
+        },
     },
     showSupportSearchBar: true,
 };
