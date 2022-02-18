@@ -1,7 +1,6 @@
 /* @flow */
 import React from "react";
 import BaseQuestion from "./BaseQuestion";
-import { append } from "../../iss/ServiceSearchRequest";
 import icons from "../../icons";
 import DomesticViolenceLinkBar from "../../components/DomesticViolenceLinkBar";
 import type {
@@ -16,9 +15,9 @@ export const defaultProps: PersonalisationQuestionPageDefaultProps = {
     info:
         "All of your answers are private and anonymous.",
     possibleAnswers: {
-        "No": append(""),
-        "I'm not sure": append(""),
-        "Yes": append(""),
+        "No": {},
+        "I'm not sure": {},
+        "Yes": {},
     },
     icons: {
         "No": icons.CrossColor,

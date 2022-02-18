@@ -10,11 +10,9 @@ import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
 import type {Geolocation} from "../../storage";
-import type { serviceSearchResults} from "../../iss/serviceSearch";
-import type { serviceSearchRequest } from "../../iss/serviceSearch";
-import {crisisResults, nonCrisisResults} from "../../iss/crisisService"
 import {getIss3Client} from "../../iss/client"
 import type {areaLocation} from "../../ix-web-js-client/apis/iss-v3.js";
+import type { SearchQueryChanges } from "../../iss/searchQueryBuilder";
 import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import WithStickyFooter from "../../components/WithStickyFooter";
@@ -123,23 +121,24 @@ class Location extends React.Component<
         return !!victoriaRegex.exec(storage.getSearchArea());
     }
 
-    static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
+    static getSearchQueryChanges(): SearchQueryChanges | null {
+        const searchQuery = {}
         /* Location/Area is required */
         const searchArea = storage.getSearchArea();
         if (!searchArea) {
             return null;
         }
-        request = Object.assign(request, {area: searchArea});
+
+        searchQuery.location = {}
+        searchQuery.location.name = searchArea
 
         /* Coordinates are optional */
         const userLocation = storage.getUserGeolocation();
         if (userLocation && userLocation.name === searchArea) {
-            request = Object.assign(request, {
-                location: `${userLocation.longitude}E${userLocation.latitude}N`,
-            });
+            searchQuery.location.coordinates = userLocation;
         }
 
-        return request;
+        return searchQuery;
     }
 
     static summaryLabel: string = "Where are you looking for help?";

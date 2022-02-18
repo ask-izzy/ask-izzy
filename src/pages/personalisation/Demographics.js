@@ -1,7 +1,6 @@
 /* @flow */
 import BaseQuestion from "./BaseQuestion";
 
-import { append } from "../../iss/ServiceSearchRequest";
 import icons from "../../icons";
 import { resetDfvOptions } from "../../utils/domesticViolence";
 import * as React from "react";
@@ -25,19 +24,59 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     info: "All of your answers are private and anonymous.",
     multipleChoice: true,
     possibleAnswers: {
-        "Escaping family violence": append("(family violence)"),
-        // n.b. see also storage.getUserIsIndigenous when changing
-        "Aboriginal and/or Torres Strait Islander":
-            append("(Aboriginals & Torres Strait Islanders)"),
-        "Family with children": append("families -srs"),
-        "Couples": append("couples"),
-        "Mental or emotional difficulties": append("(mental health)"),
-        "Parole / recently released": append("post-release"),
-        "Have a disability": append("disabilities"),
-        "Veteran": append("veteran"),
-        "Person seeking asylum": append("refugees"),
-        "Have pets": append("pets")
-            .append("-effectiveness"),
+        "Escaping family violence": {
+            $concat: {
+                term: ["\"family violence\""],
+            },
+        },
+        "Aboriginal and/or Torres Strait Islander": {
+            $concat: {
+                term: ["\"Aboriginals & Torres Strait Islanders\""],
+            },
+        },
+        "Family with children": {
+            $concat: {
+                term: ["families", "-srs"],
+            },
+        },
+        "Couples": {
+            $concat: {
+                term: ["couples"],
+            },
+        },
+        "Mental or emotional difficulties": {
+            $concat: {
+                term: ["\"mental health\""],
+            },
+        },
+        "Parole / recently released": {
+            $concat: {
+                term: ["post-release"],
+            },
+        },
+        "Have a disability": {
+            $concat: {
+                term: ["disabilities"],
+            },
+        },
+        "Veteran": {
+            $concat: {
+                term: ["veteran"],
+            },
+        },
+        "Person seeking asylum": {
+            $concat: {
+                term: ["refugees"],
+            },
+        },
+        "Have pets": {
+            $concat: {
+                term: [
+                    "pets",
+                    "-effectiveness",
+                ],
+            },
+        },
     },
     icons: {
         "Escaping family violence": icons.DemographicFamilyViolence,

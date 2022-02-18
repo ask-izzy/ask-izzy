@@ -5,7 +5,6 @@ import type {
 } from "react"
 
 import BaseQuestion from "./BaseQuestion";
-import { append, remove } from "../../iss/ServiceSearchRequest";
 import { resetDfvOptions } from "../../utils/domesticViolence";
 import icons from "../../icons";
 import type {
@@ -16,15 +15,45 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     name: "sub-counselling",
     question: "What issues are you dealing with?",
     possibleAnswers: {
-        "Homelessness": append("housing"),
-        "Scared in my relationship": append("family violence"),
-        "Sexual identity (LGBTIQA+)": append("sexuality"),
-        "Family or relationships": append("family relationship"),
-        "Money matters": remove("counselling")
-            .append("(money matters)"),
-        "Gambling": append("gambling"),
-        "Find online counselling": append("online"),
-        "Other": append(""),
+        "Homelessness": {
+            $concat: {
+                term: ["housing"],
+            },
+        },
+        "Scared in my relationship": {
+            $concat: {
+                term: ["family", "violence"],
+            },
+        },
+        "Sexual identity (LGBTIQA+)": {
+            $concat: {
+                term: ["sexuality"],
+            },
+        },
+        "Family or relationships": {
+            $concat: {
+                term: ["family", "relationship"],
+            },
+        },
+        "Money matters": {
+            $concat: {
+                term: ["\"money matters\""],
+            },
+            $removeElms: {
+                term: ["counselling"],
+            },
+        },
+        "Gambling": {
+            $concat: {
+                term: ["gambling"],
+            },
+        },
+        "Find online counselling": {
+            $concat: {
+                term: ["online"],
+            },
+        },
+        "Other": {},
     },
     showSupportSearchBar: true,
 };

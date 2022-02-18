@@ -9,7 +9,7 @@ import DfvDemographics from "./DfvDemographics";
 import Location from "./Location"
 import storage from "../../storage";
 
-import type { serviceSearchRequest } from "../../iss/serviceSearch";
+import type { SearchQueryChanges } from "../../iss/searchQueryBuilder";
 import type {
     PersonalisationNonQuestionPageDefaultProps,
 } from "../../utils/personalisation"
@@ -35,8 +35,8 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
         );
     }
 
-    static getSearch(request: serviceSearchRequest): ? serviceSearchRequest {
-        return this.savedAnswer ? request : null;
+    static getSearchQueryChanges(): SearchQueryChanges | null {
+        return this.savedAnswer ? {} : null;
     }
 
     onDoneTouchTap(): void {
@@ -46,6 +46,9 @@ class LgbtiqaDomesticViolenceScreen extends BaseStaticPersonalisation {
     }
 
     shouldShowVicService(): boolean {
+        if (!Location.savedAnswer) {
+            return false
+        }
         const LocationAnswer = Location.savedAnswer.split(", ");
 
         return ["Victoria", "VIC"].indexOf(LocationAnswer[1]) > -1;
