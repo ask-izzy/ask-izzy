@@ -79,7 +79,7 @@ async function setSubcategoryItemsNone(category: string): Promise<void> {
     await setSubcategoryItems.call(
         this,
         category,
-        category === "housing" ? "(skipped)" : []
+        "(skipped)"
     )
 }
 
