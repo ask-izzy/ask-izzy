@@ -2,10 +2,10 @@
 
 import React, {useState} from "react";
 import type {Node as ReactNode} from "react";
-import * as Diff from "diff";
-import cnx from "classnames";
+import {diffJson} from "diff";
 import { JsonForms } from "@jsonforms/react";
 import { vanillaCells, vanillaRenderers } from "@jsonforms/vanilla-renderers";
+import Diff from "./Diff"
 
 type Props = {
     originalIssParams: { [string]: any },
@@ -21,7 +21,7 @@ export default function IssParamsOverrideControls({
         issParamsOverride
     )
 
-    const diff = Diff.diffJson(originalIssParams, issParams)
+    const diff = diffJson(originalIssParams, issParams)
 
     const schema = {
         type: "object",
@@ -93,24 +93,7 @@ export default function IssParamsOverrideControls({
             validationMode={"NoValidation"}
             onChange={({ data, _errors }) => setIssParams(data)}
         />
-        <div className="diff">
-            {diff.map((sentence, i) => (
-                <div
-                    className={cnx({
-                        added: sentence.added,
-                        removed: sentence.removed,
-                    })}
-                    key={i + sentence.value}
-                >{
-                        sentence.value.split(/\n/).map(line =>
-                            <div
-                                className="line"
-                                key={i + line}
-                            >{line}</div>
-                        )
-                    }</div>
-            ))}
-        </div>
+        <Diff diff={diff} />
         <div>
             <button onClick={clearIssParamsOverride}>
                 Clear Override

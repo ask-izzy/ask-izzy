@@ -17,11 +17,11 @@ import type {
     phone,
 } from "./general.js"
 import ServiceOpening from "./ServiceOpening";
-// WARNING: This does nothing directly but if it's removed the Jenga tower that
-// is Ask Izzy's circular dependencies comes crashing down
-import "./serviceSearch"
 import type {SortType} from "../components/base/Dropdown"
 import {getIss3Client} from "./client"
+// WARNING: This does nothing directly but if it's removed the Jenga tower that
+// is Ask Izzy's circular dependencies comes crashing down
+import "../utils/personalisation"
 
 export type ServiceProps = {
     ...Service,

@@ -1,207 +1,180 @@
 /* @flow */
-import lru from "lru-cache";
-
+import objectHash from "object-hash"
 import Service from "./Service";
-import {
-    attachTransportTimes,
-} from "./travelTimes"
 import storage from "../storage";
-import ServiceSearchCache from "./ServiceSearchCache";
-import {searchIss} from "./search";
-import type {searchResultsMeta} from "./search";
-import {serialiseUrlQueryParams} from "../utils/url"
-import * as gtm from "../google-tag-manager";
+import {getIssClient, getIss3Client} from "./client"
 import type { RouterContextObject } from "../contexts/router-context";
-import {getCategoryFromRouter} from "../utils/personalisation"
-import WhoIsLookingForHelpPage from
-    "../pages/personalisation/WhoIsLookingForHelp"
+import type {
+    SearchQuery as Iss4SearchQuery,
+    searchResultsMeta as Iss4SearchResultsMeta,
+} from "../ix-web-js-client/apis/iss.js"
+import type {
+    ISS3SearchQuery as Iss3SearchQuery,
+    searchResultsMeta as Iss3SearchResultsMeta,
+} from "../ix-web-js-client/apis/iss-v3.js"
 import type {SearchQuery as IzzySearchQuery} from "./searchQueryBuilder"
 
+export const previousSearchQueryStorageKey = "previousSearchQuery"
 
-export type serviceSearchRequest = {|
-    q?: string,
-    service_type?: Array<string>,
-    service_type_raw?: Array<string>,
-    site_id?: number,
-    name?: string,
+const cachedServiceSearches: {[string]: PaginatedSearch} = {}
 
-    minimum_should_match?: string,
-
-    area?: string,
-    location?: string,
-    type?: string,
-    age_group?: Array<string>,
-    client_gender?: Array<string>,
-
-    catchment?: "prefer"|"true"|"false",
-    is_bulk_billing?: boolean,
-    show_in_askizzy_health?: boolean,
-
-    limit?: number,
-    key?: string,
-|};
-
-export type serviceSearchResultsMeta = {
-    ...searchResultsMeta,
-    available_count: number,
-    location: {
-        name: string,
-        suburb: string,
-        state: string,
-        lat: number,
-        lon: number,
-    },
-}
-
-export type serviceSearchResults = {|
-    meta: serviceSearchResultsMeta,
-    services: Array<Service>,
-|};
-
-/**
- * Execute a search against ISS.
- *
- * @param {searchRequest} query - either a query string, or an object of
- * search parameters.
- *
- * @returns {Promise<serviceSearchResults>} search results from ISS.
- */
-export async function initialSearchForServices(
-    query: serviceSearchRequest,
-): Promise<serviceSearchResults> {
-    let request_: serviceSearchRequest = {
-        q: "",
-        type: "service",
-        limit: 10,
-    };
-
-    const searchUrlPath = "/api/v3/search/";
-    const previousSearchUrl: string =
-        (storage.getItem("previous_search_url"): any);
-
-    Object.assign(request_, query);
-    let searchUrl = serialiseUrlQueryParams(searchUrlPath, request_);
-
-    const whoIsLookingForHelp = String(storage.getItem(
-        WhoIsLookingForHelpPage.defaultProps.name
-    ))
-    if (searchUrl != previousSearchUrl) {
-        gtm.emit({
-            event: "New Search On Behalf Of",
-            eventCat: "Services Searched",
-            eventAction: "Help Seeker Type",
-            eventLabel: whoIsLookingForHelp,
-            sendDirectlyToGA: true,
-        });
-
-        gtm.emit({
-            event: "Action Triggered - New Search",
-            eventCat: "Action triggered",
-            eventAction: "New search request",
-            eventLabel: whoIsLookingForHelp ?
-                whoIsLookingForHelp
-                : "<not answered>",
-            sendDirectlyToGA: true,
-        });
-    }
-    storage.setItem("previous_search_url", searchUrl, false);
-    return await searchForServices(searchUrlPath, request_);
-}
-
-export async function searchForServices(
-    path: string,
-    data: ?serviceSearchRequest,
-): Promise<serviceSearchResults> {
-    const url_ = serialiseUrlQueryParams(path, data);
-
-    if (searchResultsCache.getPageForQuery(url_)) {
-        const resultWithAllPages = searchResultsCache
-            .getAllPagesForQuery(url_)
-        if (!resultWithAllPages) {
-            // This should never happen. If we've cached this specific page then
-            // we should have a cache match for all pages relating to this query
-            console.warn("Search cache hit for single page but not all pages")
-        } else {
-            return resultWithAllPages;
-        }
-    }
-
-    const {meta, objects} = await await searchIss(path, data);
-
-    // convert objects to ISS search results
-    let services: Array<Service> = objects.map(
-        (object: Object): Service => new Service(object)
-    );
-
-    if (storage.getUserGeolocation()) {
-        try {
-            await attachTransportTimes(services)
-        } catch (error) {
-            // currently we don't do anything if transport times fail to load
-        }
-    }
-
-    services.forEach((service) =>
-        serviceCache.set(service.id, service)
-    )
-
-    const searchResults = {
-        meta,
-        services,
-    }
-
-    searchResultsCache.revise(url_, searchResults);
-
-    // searchResults should never be returned but we provided it as a fail safe
-    // to keep flow happy.
-    return searchResultsCache.getAllPagesForQuery(url_) || searchResults;
-}
-
-const searchResultsCache = new ServiceSearchCache();
-const serviceCache = lru({
-    max: 150, // Only track 150 keys in the cache
-    maxAge: 1000 * 60 * 60, // Discard anything over 1 hour
-});
-
-export function getServiceFromCache(serviceId: number): ?Service {
-    return serviceCache.get(serviceId)
-}
-
-export function forEachServiceFromCache(
-    callback: (service: Service) => any
-): void {
-    serviceCache.forEach(callback)
-}
-
-export function getInitialSearchRequest(
-    router: $PropertyType<RouterContextObject, 'router'>
-): serviceSearchRequest {
-    let request: serviceSearchRequest
-    const category = getCategoryFromRouter(router)
-
-    if (category) {
-        request = {...category.search};
-    } else if (router.match.params.search) {
-        request = {
-            q: decodeURIComponent(router.match.params.search),
-        };
+export function createServiceSearch(query: IzzySearchQuery): PaginatedSearch {
+    let search: PaginatedSearch
+    const hash = objectHash(query)
+    if (cachedServiceSearches[hash]) {
+        search = cachedServiceSearches[hash]
     } else {
-        request = {
-            q: "undefined-search",
-        };
+        const {apiVersion = "3", ...remainingQuery} = query
+        if (apiVersion === "3") {
+            search = new PaginatedSearchIss3(remainingQuery)
+        } else if (apiVersion === "4") {
+            search = new PaginatedSearchIss4(remainingQuery)
+        } else {
+            throw new Error(`Api version "${apiVersion}" not recognised`)
+        }
+        cachedServiceSearches[hash] = search
+    }
+    return search
+}
+
+export class PaginatedSearch {
+    +loadNextPage: () => Promise<void>;
+    +loadedServices: Array<Service>;
+    +numOfPagesLoaded: number;
+    +issQuery: Iss4SearchQuery | Iss3SearchQuery
+    +isNext: ?boolean
+}
+
+export class PaginatedSearchIss3 extends PaginatedSearch {
+    #pagesLoaded: number = 0;
+    #maxPageSize: number;
+    #loadedServices: Array<Service> = [];
+
+    #izzyQuery: IzzySearchQuery
+    #issQuery: Iss3SearchQuery;
+    // WARNING: From some wack reason eslint panics if this is a private class
+    // member. I this is fixed in a later version of eslint or one of the eslint
+    // plugins but upgrading it now introduced too much noise into this MR so
+    // leaving that for later.
+    _lastMeta: Iss3SearchResultsMeta;
+
+    constructor(query: IzzySearchQuery) {
+        super()
+        const {maxPageSize = 10, ...remainingQuery} = query
+        this.#maxPageSize = maxPageSize
+        let issQuery
+        if (
+            storage.getDebug() &&
+            storage.getJSON("issParamsOverride")
+        ) {
+            issQuery = storage.getJSON("issParamsOverride")
+        } else {
+            issQuery = convertIzzySearchQueryToIss3(remainingQuery)
+        }
+        this.#izzyQuery = query
+        this.#issQuery = issQuery
     }
 
-    // A special case for the "Find advocacy" button on the
-    // DisabilityAdvocacyFinder page.
-    if (request.q === "Disability Advocacy Providers") {
-        // $FlowIgnore because flow is acting wack about "decodeURIComponent"
-        // above for some reason
-        // $FlowIgnore
-        request.service_type_raw = ["disability advocacy"]
-        request.q = "disability"
+    async loadNextPage() {
+        const iss3Client = await getIss3Client()
+        const offset = this.#pagesLoaded * this.#maxPageSize
+        const res = await iss3Client.search({
+            ...this.#issQuery,
+            ...(offset ? {offset} : undefined),
+            limit: this.#maxPageSize,
+        })
+        if (res) {
+            this._lastMeta = res.meta
+            const services = res.objects.map(
+                serviceData => new Service(serviceData)
+            ) || []
+            this.#loadedServices.push(...services)
+            this.#pagesLoaded++;
+        }
+
     }
 
-    return request
+    get loadedServices(): Array<Service> {
+        return this.#loadedServices
+    }
+
+    get numOfPagesLoaded(): number {
+        return this.#pagesLoaded
+    }
+
+    get issQuery(): Iss3SearchQuery {
+        return this.#issQuery
+    }
+
+    get isNext(): ?boolean {
+        return Boolean(this._lastMeta?.next)
+    }
+}
+
+export class PaginatedSearchIss4 extends PaginatedSearch {
+    #pagesLoaded: number = 0;
+    #maxPageSize: number;
+    #loadedServices: Array<Service> = [];
+
+    #izzyQuery: IzzySearchQuery
+    #issQuery: Iss4SearchQuery;
+    _lastMeta: Iss4SearchResultsMeta;
+
+    constructor(query: IzzySearchQuery) {
+        super()
+        const {maxPageSize = 10, ...remainingQuery} = query
+        this.#maxPageSize = maxPageSize
+
+        let issQuery
+        if (
+            storage.getDebug() &&
+            storage.getJSON("issParamsOverride")
+        ) {
+            issQuery = storage.getJSON("issParamsOverride")
+        } else {
+            issQuery = convertIzzySearchQueryToIss(remainingQuery)
+        }
+        this.#izzyQuery = query,
+        this.#issQuery = issQuery
+    }
+
+    async loadNextPage() {
+        const issClient = await getIssClient()
+        const res = await issClient.search({
+            ...this.#issQuery,
+            page: {
+                current: this.#pagesLoaded + 1,
+                size: this.#maxPageSize,
+            },
+        })
+
+        if (res) {
+            this._lastMeta = res.meta
+            const services = res.objects.map(
+                serviceData => new Service(serviceData)
+            ) || []
+            this.#loadedServices.push(...services)
+            this.#pagesLoaded++;
+        }
+    }
+
+    get loadedServices(): Array<Service> {
+        return this.#loadedServices
+    }
+
+    get numOfPagesLoaded(): number {
+        return this.#pagesLoaded
+    }
+
+    get issQuery(): Iss4SearchQuery {
+        return this.#issQuery
+    }
+
+    get isNext(): ?boolean {
+        return Boolean(
+            this._lastMeta?.page.current < this._lastMeta?.page.total_pages
+        )
+    }
 }
 
 export function isDisabilityAdvocacySearch(
@@ -211,12 +184,97 @@ export function isDisabilityAdvocacySearch(
         "Disability Advocacy Providers"
 }
 
+export function convertIzzySearchQueryToIss(
+    query: IzzySearchQuery
+): Iss4SearchQuery {
+    const issQuery: Iss4SearchQuery = {
+        filters: {
+            all: [
+                {
+                    object_type: "Service",
+                },
+            ],
+        },
+        boosts: {
+            is_crisis: {
+                type: "value",
+                value: "true",
+                operation: "multiply",
+                factor: 1.5,
+            },
+        },
+    }
+
+    if (query.term) {
+        issQuery.query = query.term.join(" ")
+    }
+
+    if (query.serviceTypes) {
+        issQuery.filters?.all?.push({
+            service_types: query.serviceTypes,
+        })
+    }
+
+    if (query.clientGenders) {
+        const genderBoost = query.clientGenders.map(
+            gender => ({
+                factor: 1.5,
+                operation: "multiply",
+                type: "value",
+                value: gender,
+            })
+        )
+        if (!issQuery.boosts) {
+            issQuery.boosts = {}
+        }
+        issQuery.boosts.target_gender = genderBoost
+    }
+
+    if (query.location) {
+        const location = query.location
+        const state = location.name.match(/, (\w+)$/)?.[1]
+
+        if (!issQuery.boosts) {
+            issQuery.boosts = {}
+        }
+        issQuery.boosts.location_state = {
+            type: "value",
+            value: state,
+            operation: "multiply",
+            factor: 1.5,
+        }
+        const coordinates = location.coordinates
+        if (coordinates) {
+            const center = `${coordinates.latitude},${coordinates.longitude}`
+            issQuery.boosts.location_approximate_geopoint = [
+                {
+                    type: "proximity",
+                    function: "linear",
+                    center,
+                    factor: 7,
+                },
+            ]
+
+            issQuery.filters?.all?.push(
+                {
+                    location_approximate_geopoint: {
+                        center,
+                        distance: 300,
+                        unit: "km",
+                    },
+                }
+            )
+        }
+    }
+
+    return issQuery
+}
 
 // eslint-disable-next-line complexity
 export function convertIzzySearchQueryToIss3(
     query: IzzySearchQuery
-): serviceSearchRequest {
-    const issQuery: $Shape<serviceSearchRequest> = {}
+): Iss3SearchQuery {
+    const issQuery: $Shape<Iss3SearchQuery> = {}
 
     let q = query.term?.join(" ") || ""
 
