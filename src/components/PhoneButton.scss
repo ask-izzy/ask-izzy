@@ -2,8 +2,16 @@
 @use '../styles/mixins/colours';
 
 .Contact {
-    .Link {
-        padding: 0;
+    .kind {
+        .Link {
+            padding: 0;
+        }
+    }
+
+    .ResultsList & {
+        .ContactButton {
+            max-width: min-content;
+        }
     }
 
     .ContactButton {
