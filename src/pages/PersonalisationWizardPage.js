@@ -113,7 +113,9 @@ class PersonalisationWizardPage extends React.Component<{}, State> {
         const Subpage = getCurrentPersonalisationPage(this.context.router);
 
         if (!Subpage) {
-            throw new Error("Unexpected");
+            throw new Error(
+                "Expected current personalisation page but none found"
+            );
         }
 
         if (

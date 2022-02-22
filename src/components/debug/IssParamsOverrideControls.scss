@@ -3,23 +3,6 @@
     flex-direction: column;
     gap: 1em;
 
-    .diff {
-        .added {
-            background-color: rgb(204, 232, 204);
-            color: rgb(0, 55, 0);
-        }
-
-        .removed {
-            background-color: rgb(232, 204, 204);
-            color: rgb(55, 0, 0);
-            text-decoration: line-through;
-        }
-
-        .line {
-            white-space: pre-wrap;
-        }
-    }
-
     .vertical-layout {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));

@@ -16,7 +16,6 @@ import {
 import * as gtm from "./google-tag-manager";
 import type {AnalyticsEvent} from "./google-tag-manager";
 
-
 export type Geolocation = {
     name: string,
     latitude: number,
@@ -24,7 +23,6 @@ export type Geolocation = {
 }
 
 const Storage = {
-
     getSearch(): string {
         return sessionStore.getItem("search") || "";
     },
@@ -92,7 +90,7 @@ const Storage = {
         this.removeItem("coordinates")
     },
 
-    getItem(key: string): ?(string|number|boolean) {
+    getItem(key: string): ?string {
         return persistentStore.getItem(key);
     },
 
