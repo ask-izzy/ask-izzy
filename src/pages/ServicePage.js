@@ -5,7 +5,8 @@ import React from "react";
 import type {Element as ReactElement} from "React";
 import ServicePane from "../components/ServicePane";
 
-import Service, {getService} from "../iss/Service";
+import Service from "../iss/Service";
+import {getService} from "../iss/load-services"
 import components from "../components";
 import Link from "../components/base/Link";
 import Loading from "../icons/Loading";
