@@ -15,17 +15,11 @@ import type {
     postalAddress,
     openingHours,
     phone,
-    geoPoint,
 } from "./general.js"
 import ServiceOpening from "./ServiceOpening";
 // WARNING: This does nothing directly but if it's removed the Jenga tower that
 // is Ask Izzy's circular dependencies comes crashing down
 import "./serviceSearch"
-import Maps from "../maps";
-import {
-    Timeout,
-    TryWithDefault,
-} from "../timeout";
 import type {SortType} from "../components/base/Dropdown"
 import {getIss3Client} from "./client"
 
@@ -99,7 +93,6 @@ export default class Service {
     travelTimes: ?Array<travelTime>;
 
     _serviceProvisions: Array<string>;
-    _siblingServices: Service[];
     _explanation: Object;
 
     Phones(): Array<phone> {
@@ -258,16 +251,6 @@ export default class Service {
         return this._serviceProvisions;
     }
 
-    async getSiblingServices(): Promise<Service[]> {
-        if (this._siblingServices) {
-            return this._siblingServices;
-        }
-
-        await getSiblingServices(this)
-
-        return this._siblingServices;
-    }
-
     get slug(): string {
         return slugify(`${this.id}-${this.site.name}`);
     }
@@ -288,73 +271,6 @@ export type ageGroup = "unspecified" |
     "preretirementage" |
     "agedpersons";
 
-const servicesWithTravelTimes: Service[] = []
-
-/*
-* Loads the transportTime property from google
-* and adds it to the given Service instances
-*/
-export async function attachTransportTimes(
-    services: Array<Service>
-): Promise<void> {
-    if (typeof window === "undefined") {
-        // Google maps api doesn't work outside the browser.
-    }
-
-    let formatPoint = (point: geoPoint) => `${point.lat},${point.lon}`;
-
-    const maps = await TryWithDefault < $ReadOnly < {travelTime: Function} >>(
-        1000, Maps(), {}
-    );
-
-    if (typeof maps.travelTime === "function") {
-        const servicesToLoadTravelTimesFor = services.filter(
-            // skip services without publicly known locations
-            service => !service.location?.isConfidential()
-        ).filter(
-            // skip services that already have travel times
-            service => !service.travelTimes
-        )
-
-        const travelTimesForServices = await Timeout(
-            1000 * 10, // wait for 10 secs before giving up
-            maps.travelTime(servicesToLoadTravelTimesFor
-                // $FlowIgnore isConfidential checks location.point
-                .map(({location}) => formatPoint(location.point))
-            )
-        );
-
-        for (const service of servicesToLoadTravelTimesFor) {
-            service.travelTimes = travelTimesForServices.shift()
-        }
-
-        servicesWithTravelTimes.push(...servicesToLoadTravelTimesFor)
-    }
-}
-
-export async function removeAllTransitTimes() {
-    for (const service of servicesWithTravelTimes) {
-        service.travelTimes = null
-    }
-}
-
-export async function getService(
-    serviceId: number
-): Promise<Service> {
-    const issClient = await getIss3Client()
-
-    const response = await issClient.getService(serviceId)
-    const service = new Service(response);
-
-    try {
-        await attachTransportTimes([service]);
-    } catch (error) {
-        console.error("Unable to retrieve transport times")
-        console.error(error);
-    }
-
-    return service;
-}
 
 export async function getSiblingServices(service: Service): Promise<Service[]> {
     const issClient = await getIss3Client()
