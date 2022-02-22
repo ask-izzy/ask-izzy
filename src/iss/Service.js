@@ -20,7 +20,6 @@ import type {
 import ServiceOpening from "./ServiceOpening";
 import {
     getServiceFromCache,
-    forEachServiceFromCache,
 } from "./serviceSearch"
 import {searchForServices} from "./serviceSearch"
 import {jsonRequestFromIss} from "./request"
@@ -311,16 +310,17 @@ export type ageGroup = "unspecified" |
     "preretirementage" |
     "agedpersons";
 
+const servicesWithTravelTimes: Service[] = []
+
 /*
 * Loads the transportTime property from google
 * and adds it to the given Service instances
 */
 export async function attachTransportTimes(
     services: Array<Service>
-): Promise<Array<Service>> {
+): Promise<void> {
     if (typeof window === "undefined") {
         // Google maps api doesn't work outside the browser.
-        return services;
     }
 
     let formatPoint = (point: geoPoint) => `${point.lat},${point.lon}`;
@@ -331,10 +331,15 @@ export async function attachTransportTimes(
 
     if (typeof maps.travelTime === "function") {
         const servicesToLoadTravelTimesFor = services.filter(
+            // skip services without publicly known locations
             service => !service.location?.isConfidential()
+        ).filter(
+            // skip services that already have travel times
+            service => !service.travelTimes
         )
+
         const travelTimesForServices = await Timeout(
-            3000,
+            1000 * 10, // wait for 10 secs before giving up
             maps.travelTime(servicesToLoadTravelTimesFor
                 // $FlowIgnore isConfidential checks location.point
                 .map(({location}) => formatPoint(location.point))
@@ -344,17 +349,16 @@ export async function attachTransportTimes(
         for (const service of servicesToLoadTravelTimesFor) {
             service.travelTimes = travelTimesForServices.shift()
         }
-    }
 
-    return services;
+        servicesWithTravelTimes.push(...servicesToLoadTravelTimesFor)
+    }
 }
 
 export async function removeAllTransitTimes() {
-    forEachServiceFromCache(service => {
+    for (const service of servicesWithTravelTimes) {
         service.travelTimes = null
-    })
+    }
 }
-
 
 export async function getService(
     serviceId: number

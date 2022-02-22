@@ -7,9 +7,6 @@ import ServiceSearchCache from "./ServiceSearchCache";
 import {searchIss} from "./search";
 import type {searchResultsMeta} from "./search";
 import {serialiseUrlQueryParams} from "../utils/url"
-import {
-    TryWithDefault,
-} from "../timeout";
 import * as gtm from "../google-tag-manager";
 import type { RouterContextObject } from "../contexts/router-context";
 import {getCategoryFromRouter} from "../utils/personalisation"
@@ -134,11 +131,11 @@ export async function searchForServices(
     );
 
     if (storage.getUserGeolocation()) {
-        services = await TryWithDefault(
-            3000,
-            attachTransportTimes(services),
-            services
-        )
+        try {
+            await attachTransportTimes(services)
+        } catch (error) {
+            // currently we don't do anything if transport times fail to load
+        }
     }
 
     services.forEach((service) =>
