@@ -1,6 +1,9 @@
 /* $FlowIgnore */
 window.VERSION = "${VERSION}";
-window.ISS_URL = "${ISS_URL}";
+window.ISS3_BASE_URL = "${ISS3_BASE_URL}";
+window.ISS3_API_KEY = "${ISS3_API_KEY}";
+window.ISS_API_TOKEN = "${ISS_API_TOKEN}";
+window.ISS_BASE_URL = "${ISS_BASE_URL}";
 window.GOOGLE_API_KEY = "${GOOGLE_API_KEY}";
 window.GOOGLE_ANALYTICS_URL = "${GOOGLE_ANALYTICS_URL}";
 window.GOOGLE_TAG_MANAGER_ID = "${GOOGLE_TAG_MANAGER_ID}";
