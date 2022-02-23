@@ -36,17 +36,13 @@ class AddServicePage extends React.Component<Props, State> {
         if (typeof window !== "undefined") {
             window.addEventListener("message", this.handleMessage, false);
 
-            if (window.ISS_URL) {
-                const issUrl = new URL(window.ISS_URL)
-                issUrl.username = ""
-                issUrl.password = ""
-
+            if (window.ISS3_BASE_URL) {
                 this.setState({
                     ...this.state,
-                    issUrl: issUrl,
+                    issUrl: window.ISS3_BASE_URL,
                     issFormUrl: new URL(
                         "/add-service-form?form=ask-izzy",
-                        issUrl
+                        window.ISS3_BASE_URL
                     ),
                 })
             }
