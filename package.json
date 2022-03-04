@@ -69,6 +69,7 @@
     "has-geolocation": "1.0.1",
     "history": "^5.0.0",
     "js-yaml": "3.14.1",
+    "json-stable-stringify": "^1.0.1",
     "jsonlint": "1.6.3",
     "just-debounce-it": "^2.0.0",
     "klaw": "3.0.0",
