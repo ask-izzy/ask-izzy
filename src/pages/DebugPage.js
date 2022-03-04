@@ -9,10 +9,8 @@ import StaticPage from "./StaticPage";
 import categories from "../constants/categories";
 import storage from "../storage";
 import stringify from "json-stable-stringify";
-import {getInitialSearchRequest} from "../iss/serviceSearch"
-import {
-    getPersonalisationPages,
-} from "../utils/personalisation"
+import { getSearchQueryModifiers, buildSearchQueryFromModifiers} from "../iss/searchQueryBuilder"
+import {convertIzzySearchQueryToIss3} from "../iss/serviceSearch"
 
 /* eslint-disable complexity */
 
@@ -90,22 +88,6 @@ function DebugPage(): ReactNode {
         return possiblePersonalisationAnswers//.slice(0, 100)
     }
 
-    function getIssQuery(router) {
-        let request = getInitialSearchRequest(router);
-
-        const personalisationPages = getPersonalisationPages(router)
-        for (let item of personalisationPages) {
-            if (typeof item.getSearch === "function") {
-                request = item.getSearch(request);
-
-                if (!request) {
-                    return null;
-                }
-            }
-        }
-
-        return request;
-    }
     async function batchConvertIzzyToIssQuery(possiblePersonalisationAnswers) {
         const possiblePersonalisationQueries = []
         for (const singleSetOfPossiblePersonalisationAnswers of possiblePersonalisationAnswers) {
@@ -118,7 +100,10 @@ function DebugPage(): ReactNode {
                 // $FlowIgnore
                 formattedAnswers.push(`${key}=${value}`)
             }
-            const issSearchQuery = getIssQuery(singleSetOfPossiblePersonalisationAnswers.router)
+            const searchQueryModifiers = getSearchQueryModifiers(singleSetOfPossiblePersonalisationAnswers.router)
+            // $FlowIgnore
+            const searchQuery = buildSearchQueryFromModifiers(searchQueryModifiers)
+            const issSearchQuery = convertIzzySearchQueryToIss3(searchQuery)
             possiblePersonalisationQueries.push({
                 formattedAnswers: formattedAnswers.join(", "),
                 query: issSearchQuery,
