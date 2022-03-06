@@ -17,6 +17,7 @@ type autocompleteObjValue = {
 type Props = {
     className?: string,
     value: string,
+    initialSuggestions?: Array<Object>,
     onChange: (string) => void,
     icon?: ReactNode,
     iconPosition?: "left" | "right",
@@ -36,6 +37,7 @@ function Input({
     icon,
     iconPosition = "left",
     showClearButton = false,
+    initialSuggestions = [],
     autocompleteValues,
     ...otherProps
 }: Props, ref: ?refType): ReactNode {
@@ -108,7 +110,7 @@ function Input({
     }
 
     const isAutocompleteSuggestions = downshiftCombobox?.isOpen &&
-        autocompleteValues?.length
+        (autocompleteValues?.length || initialSuggestions)
 
     function renderClearBtn() {
         if (showClearButton && value) {
@@ -135,10 +137,17 @@ function Input({
 
     function renderAutoCompleteList() {
         if (downshiftCombobox) {
+            const showInitialSuggestions =
+                !(autocompleteValues && autocompleteValues?.length > 0)
+            const valueToMap = showInitialSuggestions ?
+                initialSuggestions
+                : autocompleteObjValues
             return (
                 <ul
                     {...downshiftCombobox?.getMenuProps()}
-                    className="autocompleteList"
+                    className={cnx("autocompleteList", {
+                        "initialSuggestions": showInitialSuggestions,
+                    })}
                     // By default once the list grows long enough that this
                     // element becomes scrollable it also becomes tabbable.
                     // Unfortunately this is unhelpful since tabbing to it
@@ -150,16 +159,22 @@ function Input({
                     tabIndex="-1"
                 >
                     {downshiftCombobox.isOpen &&
-                    autocompleteObjValues?.map((item, index) => (
-                        <li
-                            key={item.value}
-                            {...downshiftCombobox?.getItemProps(
+                    valueToMap?.map((item, index) => {
+
+                        const hasDownshift = !showInitialSuggestions &&
+                            downshiftCombobox?.getItemProps(
                                 { item, index }
-                            )}
-                        >
-                            {item.label}
-                        </li>
-                    ))}
+                            )
+                        console.log()
+                        return (
+                            <li
+                                key={item.value}
+                                {...hasDownshift}
+                            >
+                                {item.label}
+                            </li>
+                        )
+                    })}
                 </ul>
             )
         }

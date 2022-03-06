@@ -45,6 +45,7 @@ module.exports = (function() {
         .when("I click the \"$STRING\" dropdown option", clickDropdownOption)
         .when("I click the \"$STRING\" collapsible section", clickDetails)
         .when("I search for \"$STRING\"", doSearch)
+        .when("I search for blank", doBlankSearch)
         .when("I search for \"$STRING\" and press enter", doSearchAndEnter)
         .when("I click home from the title bar", clickHome)
         .when("I click back from the title bar", clickBack)
@@ -306,6 +307,15 @@ async function doSearch(search: string): Promise<void> {
 
     await element.clear();
     await element.sendKeys(search);
+
+    await module.exports.documentReady(this.driver);
+}
+
+
+async function doBlankSearch(): Promise<void> {
+    let element = await getSearchElement(this.driver);
+    await element.clear();
+
 
     await module.exports.documentReady(this.driver);
 }

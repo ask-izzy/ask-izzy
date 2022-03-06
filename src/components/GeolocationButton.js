@@ -145,7 +145,7 @@ function GeolocationButton({
             return <>
                     <icons.Location/>
                     <span className="primary">
-                        Get your current location
+                        Get your location
                     </span>
                 </>
         case "RUNNING":
