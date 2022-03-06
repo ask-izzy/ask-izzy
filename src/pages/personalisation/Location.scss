@@ -1,9 +1,19 @@
 @use '../../styles/mixins/colours';
 
 .Location {
+    .done-button {
+        margin: 20px auto;
+        width: 65%;
+
+        .doneButton {
+            width: 100%;
+        }
+    }
+
     .search {
         position: relative;
-        width: 100%;
+        width: 65%;
+        margin: 20px auto;
         box-sizing: border-box;
 
         .Input {
@@ -12,21 +22,55 @@
 
             .clear-text {
                 top: 11px;
+
+                &:focus {
+                    outline: 1px solid #{colours.get-static('colour-brand-primary')};
+                    outline: 1px solid var(--colour-brand-primary);
+                }
+            }
+
+            input {
+                border: 1px solid #{colours.get-static('colour-border-alert')};
+                border: 1px solid var(--colour-border-alert);
+
+                &:focus {
+                    outline: none;
+                }
             }
 
             &.isAutocompleteSuggestions input {
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
+                border: 0;
+                outline: 1px solid #{colours.get-static('colour-brand-primary')};
+                outline: 1px solid var(--colour-brand-primary);
+            }
+
+            &.isAutocompleteSuggestions ul {
+                outline: 1px solid #{colours.get-static('colour-brand-primary')};
+                outline: 1px solid var(--colour-brand-primary);
+
+                button:focus {
+                    outline: none;
+                }
             }
         }
 
         .autocompleteList {
             position: relative;
 
+            &.initialSuggestions {
+                li {
+                    padding: 0;
+                    border: 0;
+                    margin: 0.5em 0.7em;
+                }
+            }
+
             li {
                 display: block;
-                border-bottom: 1px solid #{colours.get-static('colour-border-list-item')};
-                border-bottom: 1px solid var(--colour-border-list-item);
+                border-bottom: 1px solid #{colours.get-static('colour-brand-primary')};
+                border-bottom: 1px solid var(--colour-brand-primary);
                 padding: 0.5em 0.7em;
 
                 .state {
@@ -34,6 +78,11 @@
                     color: #{colours.get-static('colour-text-mid')};
                     color: var(--colour-text-mid);
                 }
+            }
+
+            li[aria-selected=true] {
+                background-color: #{colours.get-static('colour-bg-standard-tint-3')};
+                background-color: var(--colour-bg-standard-tint-3);
             }
         }
     }
@@ -50,7 +99,7 @@
     }
 
     .GeoLocationButtonContainer {
-        margin: 0 20px;
+        margin: 0;
         display: flex;
         align-items: center;
 
@@ -72,13 +121,15 @@
     .explainer {
         display: flex;
         align-items: center;
-        text-align: center;
         justify-content: center;
-        margin: 3em 20px 0;
+        padding: 5px 5px 5px 15px;
+        border-radius: 5px;
         font-size: 14px;
         font-weight: normal;
         color: #{colours.get-static('colour-text-mid')};
         color: var(--colour-text-mid);
+        background-color: #{colours.get-static('colour-bg-standard-tint-3')};
+        background-color: var(--colour-bg-standard-tint-3);
 
         .explainerIcons {
             display: inline-flex;
@@ -107,9 +158,11 @@
     }
 
     @media (max-width: 556px) {
-        .explainer {
-            display: flex;
-            flex-direction: column;
+        .search {
+            width: 90%
+        }
+        .done-button {
+            width: 90%;
         }
     }
 }

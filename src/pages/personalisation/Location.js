@@ -210,6 +210,7 @@ class Location extends React.Component<
                         ({name, state}) => name + state
                     ),
                 });
+
             }
 
             this.setState({
@@ -322,6 +323,53 @@ class Location extends React.Component<
         });
     }
 
+    getInitialSuggestions(): Array<ReactNode> {
+        let initialSuggestions = []
+        const geolocationComponent =
+            <div className="GeoLocationButtonContainer">
+                {browserSupportsGeolocation() &&
+                    <>
+                        {isGeolocation(this.state.selectedLocation)}
+                        <GeolocationButton
+                            onStatusChange={
+                                this.onGeolocationStatusChange
+                                    .bind(this)
+                            }
+                            locationValue={
+                                isGeolocation(this.state.selectedLocation) ?
+                                    this.state.selectedLocation
+                                    : undefined
+                            }
+                        />
+                    </>
+                }
+            </div>
+        const explainer =  
+            <h3 className="explainer">
+                <span className="explainerIcons">
+                    <icons.Walk/>
+                    <icons.Tram/>
+                    <icons.Car/>
+                </span>
+                <span>
+                    <em>
+                        {
+                            "Get your location if you want" +
+                            " to see estimated travel times to services"
+                        }
+                    </em>
+                </span>
+            </h3>
+        if (!this.state.gettingAutocompletionsInProgress &&
+                this.state.selectedLocation) {
+            initialSuggestions = [geolocationComponent]
+        } else if (!this.state.gettingAutocompletionsInProgress &&
+            !this.state.selectedLocation) {
+            initialSuggestions = [geolocationComponent, explainer]
+        }
+        return initialSuggestions
+    }
+
     render: (() => ReactNode) = () => (
         <div className="Location">
             <div>
@@ -385,6 +433,9 @@ class Location extends React.Component<
                                  or postcode"
                                 value={this.state.locationNameInput}
                                 onChange={this.onSearchChange.bind(this)}
+                                initialSuggestions={
+                                    this.getInitialSuggestions()
+                                }
                                 autocompleteValues={this.state.autocompletions
                                     .map(location => ({
                                         value: `${location.name},` +
@@ -411,35 +462,7 @@ class Location extends React.Component<
                             </div>
                         }
                     </fieldset>
-                    <div className="GeoLocationButtonContainer">
-                        {browserSupportsGeolocation() && <>
-                            {isGeolocation(this.state.selectedLocation) ||
-                                <span className="or">Or</span>
-                            }
-                            <GeolocationButton
-                                onStatusChange={
-                                    this.onGeolocationStatusChange
-                                        .bind(this)
-                                }
-                                locationValue={
-                                    isGeolocation(this.state.selectedLocation) ?
-                                        this.state.selectedLocation
-                                        : undefined
-                                }
-                            />
-                        </>}
-                    </div>
-                    <h3 className="explainer">
-                        <span className="explainerIcons">
-                            <icons.Walk/>
-                            <icons.Tram/>
-                            <icons.Car/>
-                        </span>
-                        <em>
-                            If you want to see estimated travel times
-                            to services use 'Get your current location' above.
-                        </em>
-                    </h3>
+
                 </WithStickyFooter>
             </main>
         </div>
