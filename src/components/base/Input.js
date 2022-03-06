@@ -215,6 +215,46 @@ function Input({
         }
     }
 
+    function renderInitialSuggestions() {
+        if (downshiftCombobox) {
+            return (
+                <ul
+                    {...downshiftCombobox?.getMenuProps()}
+                    className="autocompleteList initialSuggestions"
+                    // By default once the list grows long enough that this
+                    // element becomes scrollable it also becomes tabbable.
+                    // Unfortunately this is unhelpful since tabbing to it
+                    // will remove focus from the input bar and thus close the
+                    // list and focus will be lost. We don't really want it
+                    // to be accessible via tabbing anyway since you can't tab
+                    // to individual options (autocomplete widgets generally use
+                    // arrow keys to navigate between options not the tab key).
+                    tabIndex="-1"
+                >
+                    {downshiftCombobox.isOpen &&
+                        initialSuggestions?.map((item, index) => (
+                            <li
+                                key={index}
+                            >
+                                {item}
+                            </li>
+                        ))
+                    }
+                </ul>
+            )
+        }
+    }
+
+    function renderList() {
+        let renderedList = false
+        if (autocompleteValues && autocompleteValues?.length > 0) {
+            renderedList = renderAutoCompleteList()
+        } else {
+            renderedList = renderInitialSuggestions()
+        }
+        return (renderedList)
+    }
+
     return (
         <div
             className={cnx(
@@ -245,7 +285,7 @@ function Input({
                     "iconRight": (iconPosition === "right" && icon),
                 })}
             />
-            {renderAutoCompleteList()}
+            {renderList()}
             {renderClearBtn()}
         </div>
     )
