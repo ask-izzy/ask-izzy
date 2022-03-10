@@ -102,7 +102,7 @@ export async function initialSearchForServices(
             sendDirectlyToGA: true,
         });
     }
-    storage.setItem("previous_search_url", searchUrl);
+    storage.setItem("previous_search_url", searchUrl, false);
     return await searchForServices(searchUrlPath, request_);
 }
 
