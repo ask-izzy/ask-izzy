@@ -96,14 +96,16 @@ const Storage = {
         return persistentStore.getItem(key);
     },
 
-    setItem(key: string, obj: string|number|boolean): void {
+    setItem(
+        key: string,
+        obj: string|number|boolean,
+        emitAnalyticsEvent: boolean = true
+    ): void {
         if (obj.toString().match(/family violence/i)) {
             switchToPrivateMode();
         }
 
-        const gtmIgnoredKeys = ["previous_search_url"]
-
-        if (!gtmIgnoredKeys.includes(key)) {
+        if (emitAnalyticsEvent) {
             gtm.emit({
                 event: "Personalisation Response Given",
                 eventCat: this.getItem(key) ?
