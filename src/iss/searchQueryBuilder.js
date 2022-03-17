@@ -88,7 +88,6 @@ objectMerge.addOperation("$removeElms", (source, params) => {
             throw new Error("Elements to remove must be supplied as an array");
         }
         let array = utils.get(source, path, []);
-        // console.log({source, params, path, valuesToRemove, array})
         if (!Array.isArray(array)) {
             throw new Error(
                 "Cannot remove element from something which is not an array"
