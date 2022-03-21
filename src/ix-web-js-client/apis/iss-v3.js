@@ -50,6 +50,7 @@ export type ISS3SearchQuery = {|
     minimum_should_match?: string,
     q?: string,
     service_type?: string | string[],
+    service_type_raw?: string | string[],
     type?: string,
     site_id?: number,
     show_in_askizzy_health?: boolean,

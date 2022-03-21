@@ -22,6 +22,7 @@ export type SearchQueryChanges = {|
     $removeElms?: SearchQueryArrayProps,
     $concat?: SearchQueryArrayProps,
     $applyIfShouldInjectAccessPoints?: SearchQueryChanges,
+    ...SearchQueryArrayProps,
     ...SearchQueryOtherProps
 |} | {||}
 
@@ -49,7 +50,9 @@ type SearchQueryArrayProps = {|
         | "Pre-retirement Age"
         | "Aged Persons"
         | "unspecified"
-    >
+    >,
+    serviceTypesRaw?: Array<string>, // This should be removed after ISS3 is no
+        // longer supported
 |}
 type SearchQueryOtherProps = {|
     catchment?: "prefer"|"true"|"false",
@@ -63,7 +66,6 @@ type SearchQueryOtherProps = {|
     name?: string,
 
     // to figure out
-    service_type_raw?: Array<string>,
     minimumShouldMatch?: string,
     showInAskIzzyHealth?: boolean
 |}
@@ -147,9 +149,9 @@ export function getSearchQueryModifiers(
             layers.push({
                 name: `DisabilityAdvocacyFinder override`,
                 changes: {
-                    service_type_raw: ["disability advocacy"],
+                    term: ["disability"],
                     $push: {
-                        term: "disability",
+                        serviceTypesRaw: "disability advocacy",
                     },
                 },
             })
