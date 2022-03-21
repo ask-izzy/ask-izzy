@@ -270,6 +270,12 @@ export function convertIzzySearchQueryToIss(
     return issQuery
 }
 
+// Since this function is responsible for mapping a whole bunch of properties
+// that may exist in IzzySearchQuery there are lot of if statements used
+// which trip eslint's complexity rule. However due to the nature of these
+// mappings each of these if statements that map a property should be pretty
+// self-contained so this function shouldn't actually be a complex as it appears
+// eslint.
 // eslint-disable-next-line complexity
 export function convertIzzySearchQueryToIss3(
     query: IzzySearchQuery
@@ -367,6 +373,10 @@ export function convertIzzySearchQueryToIss3(
                 serviceType.toLowerCase()
                 : serviceType
         )
+    }
+
+    if (query.serviceTypesRaw) {
+        issQuery.service_type_raw = query.serviceTypesRaw.join(" ")
     }
 
     if (query.minimumShouldMatch) {
