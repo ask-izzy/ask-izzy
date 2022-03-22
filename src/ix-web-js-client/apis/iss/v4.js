@@ -2,21 +2,14 @@
 import {
     postRequestWithToken,
     getRequestWithToken,
-} from "../lib/requests.js"
+} from "../../lib/requests.js"
 
-export {createISS3Client, ISS3Client} from "./iss-v3.js";
-export type {ISS3SearchQuery} from "./iss-v3.js"
-
-type Props = {
+export type ISS4ClientProps = {
     baseUrl: string,
     token: string,
-};
-
-export default function createClient(props: Props): ISS4Client {
-    const client = new ISS4Client(props)
-    return client
 }
-export type SearchQuery = {|
+
+export type ISS4SearchQuery = {|
     query?: string,
     page?: {
         current: number,
@@ -26,14 +19,14 @@ export type SearchQuery = {|
         all?: Array<Object>
     },
     boosts?: {[string]: Object}
-|};
-
-type SearchProps = {|
-    serialiser?: string,
-    ...SearchQuery
 |}
 
-export type searchResultsMeta = {
+export type ISS4SearchProps = {|
+    serialiser?: string,
+    ...ISS4SearchQuery
+|}
+
+export type ISS4SearchResultsMeta = {
     alerts: Array<any>,
     warnings: number,
     precision: number,
@@ -48,8 +41,9 @@ export type searchResultsMeta = {
     },
     request_id: string
 };
-type searchResults = {
-    meta: searchResultsMeta,
+
+export type ISS4SearchResults = {
+    meta: ISS4SearchResultsMeta,
     objects: Array<Object>,
 }
 
@@ -57,7 +51,7 @@ export class ISS4Client {
     baseUrl: string
     authString: string;
 
-    constructor({token, baseUrl}: Props) {
+    constructor({token, baseUrl}: ISS4ClientProps) {
         this.baseUrl = baseUrl
         this.authString = `Token ${token}`
     }
@@ -65,7 +59,7 @@ export class ISS4Client {
     async search({
         serialiser = "detail",
         ...query
-    }: SearchProps): Promise<searchResults> {
+    }: ISS4SearchProps): Promise<ISS4SearchResults> {
         const params = {
             serialiser,
         }
@@ -74,7 +68,7 @@ export class ISS4Client {
         for (const [key, value] of Object.entries(params)) {
             url.searchParams.append(key, String(value))
         }
-        return postRequestWithToken<searchResults>(
+        return postRequestWithToken<ISS4SearchResults>(
             url.href,
             this.authString,
             query

@@ -18,7 +18,7 @@ import type {
 } from "./general.js"
 import ServiceOpening from "./ServiceOpening";
 import type {SortType} from "../components/base/Dropdown"
-import {getIss3Client} from "./client"
+import {getIssClient} from "./client"
 // WARNING: This does nothing directly but if it's removed the Jenga tower that
 // is Ask Izzy's circular dependencies comes crashing down
 import "../utils/personalisation"
@@ -273,7 +273,7 @@ export type ageGroup = "unspecified" |
 
 
 export async function getSiblingServices(service: Service): Promise<Service[]> {
-    const issClient = await getIss3Client()
+    const issClient = await getIssClient("3")
 
     const result = await issClient.search({
         site_id: service.site.id,
