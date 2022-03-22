@@ -17,7 +17,7 @@ cat conf/nginx.conf > "$conffile"
 export X_FRAME_OPTIONS="SAMEORIGIN"
 export CSP_HEADERS="frame-ancestors 'self'"
 
-echo "$(envsubst '${X_FRAME_OPTIONS} ${CSP_HEADERS} ${ISS3_BASE_URL} ${APP_PWD}' < $conffile)" > "$conffile"
+echo "$(envsubst '${X_FRAME_OPTIONS} ${CSP_HEADERS} ${ISS_BASE_URL} ${APP_PWD}' < $conffile)" > "$conffile"
 
 cat $conffile
 

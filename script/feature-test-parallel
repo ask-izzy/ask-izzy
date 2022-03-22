@@ -17,14 +17,14 @@ export NODE_ENV=production
 export PORT=8010
 export INTERACTIVE_TIMEOUT="10000"
 
-ISS3_BASE_URL="http://localhost:5000/" ./script/test-setup
+ISS_BASE_URL="http://localhost:5000/" ./script/test-setup
 
 function runTest {
     JOB_NUM=$1
     let "JOB_SLOT = $JOB_NUM % $CONCURRENCY"
     let PORT=8010+$1*2
     let ISS_MOCK_PORT=8011+$1*2
-    export ISS3_BASE_URL="http://localhost:$ISS_MOCK_PORT"
+    export ISS_BASE_URL="http://localhost:$ISS_MOCK_PORT"
     export ENVFILE_PATH="/static/env-test-$1.js"
     export MAPSFILE_PATH="/static/google-maps-api-test-$1.js"
 

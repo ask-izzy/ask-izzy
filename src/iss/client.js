@@ -17,8 +17,8 @@ async function getIssClient(
         if (!iss3Client) {
             iss3Client = await createClient(
                 {
-                    key: window.ISS3_API_KEY,
-                    baseUrl: window.ISS3_BASE_URL,
+                    baseUrl: window.ISS_BASE_URL,
+                    key: window.ISS_API_KEY,
                 },
                 "3"
             )
@@ -28,8 +28,8 @@ async function getIssClient(
         if (!iss4Client) {
             iss4Client = await createClient(
                 {
-                    token: window.ISS_API_TOKEN,
                     baseUrl: window.ISS_BASE_URL,
+                    token: window.ISS_API_TOKEN,
                 },
                 "4"
             )
