@@ -4,98 +4,19 @@ import type {Element as ReactElement} from "React";
 import React from "react";
 import Link from "../components/base/Link";
 import icons from "../icons"
-import LinkButton from "./LinkButton";
 import config from "../config";
 import { donateLink, aboutLink } from "../constants/urls.js"
 
-export default class BrandedFooter
-    extends React.Component<{}, void> {
+export default function BrandedFooter(): ReactElement<"footer"> {
+    const LOGO = "/static/images/ask-izzy-logo-single-line-yellow.svg";
 
-    /* Begin hack for dealing with multiple columns
-     *
-     * Remove when "break-before: always;" is supported by all the browsers
-     * we care about. We need to set the height of the footer so calculate
-     * the height of each column and set container to the hight of the largest
-     * column.
-     */
-    footerHeightSetter: (() => void) = () => {
-        if (
-            typeof window === "undefined" ||
-            (
-                window.CSS &&
-                window.CSS.supports("break-before", "always")
-            )
-        ) {
-            return
-        }
-        const container = document.querySelector(
-            ".branding-footer-container .middle-box"
-        )
-        if (!container || !document.body) {
-            return
-        }
-        if (window.innerWidth > 800 && container.style.height) {
-            // Window larger than max-footer width so no need to change height
-        } else if (container.clientWidth > 550) {
-            // Footer has 2 columns so set height
-            const getColHeight = (contentsClasses) => {
-                const contents = container.querySelectorAll(contentsClasses)
-                if (!contents) {
-                    return 0
-                }
-                return Array.from(contents)
-                    .map(elm => elm.clientHeight)
-                    .reduce((itemA, itemB) => itemA + itemB, 0)
-            }
-            container.style.height = (
-                Math.max(
-                    getColHeight(
-                        ".about, .about-links, .contact-info, .supporters"
-                    ),
-                    getColHeight(".socials, .for-service-providers")
-                ) + 5
-            ) + "px"
-        } else {
-            // Footer has 1 column so remove height
-            container.style.height = ""
-        }
-    }
-
-    componentDidMount(): void {
-        this.footerHeightSetter()
-        // Set footer height on resize
-        if (
-            typeof window != "undefined" &&
-            (
-                !window.CSS ||
-                !window.CSS.supports("break-before", "always")
-            )
-        ) {
-            window.addEventListener("resize", this.footerHeightSetter)
-        }
-    }
-
-    componentWillUnmount(): void {
-        // Remove footer height setter on resize
-        if (
-            typeof window != "undefined" &&
-            (
-                !window.CSS ||
-                !window.CSS.supports("break-before", "always")
-            )
-        ) {
-            window.removeEventListener("resize", this.footerHeightSetter)
-        }
-    }
-    /* end hack */
-
-    render: (() => ReactElement<"footer">) = () => (
+    return (
         <footer
             className="branding-footer-container"
             aria-label="Page footer"
         >
-            <nav
-                className="top-box"
+            <div
+                className="main-links"
                 aria-label="Helpful information"
             >
                 <div
@@ -104,7 +25,7 @@ export default class BrandedFooter
                     className="additional-information"
                 >
                     <h1 id="addInfo">
-                        Additional Information
+                        Additional information
                     </h1>
                     <ul>
                         <li>
@@ -135,7 +56,7 @@ export default class BrandedFooter
                     className="homelessness-services"
                 >
                     <h1 id="homelessnessServices">
-                        Homelessness Services
+                        Homelessness services
                     </h1>
                     <ul>
                         <li>
@@ -160,70 +81,103 @@ export default class BrandedFooter
                         </li>
                     </ul>
                 </div>
-            </nav>
-            <div
-                role="contentinfo"
-                aria-label="Site info"
-                className="middle-box"
-            >
-                <div className="about">
-                    <p>
-                        Ask Izzy is powered by{" "}
-                        <Link to="https://www.infoxchange.org/au">
-                            Infoxchange
-                        </Link>, a not-for-profit social enterprise that
-                        has been delivering technology for social justice
-                        for over 30 years.
-                    </p>
-                </div>
                 <div className="about-links">
+                    <h1>Ask Izzy</h1>
                     <ul>
                         <li>
                             <Link to={aboutLink}>
                                 About Ask Izzy
                             </Link>
                         </li>
-                        <li className="separator"
-                            aria-hidden="true"
-                            role="presentation"
-                        />
-                        <li>
-                            <Link to="/terms">
-                                Terms of use
-                            </Link>
-                        </li>
-                        <li className="separator"
-                            aria-hidden="true"
-                            role="presentation"
-                        />
                         <li>
                             <Link to={donateLink}>
                                 Donate to us
                             </Link>
                         </li>
+                        <li>
+                            <Link
+                                to={
+                                    `mailto:${config.default.siteMail}` +
+                                        "?subject=" +
+                                        encodeURIComponent(
+                                            `Your Ask Izzy feedback`) +
+                                        "&body=" +
+                                        encodeURIComponent(
+                                            `Service name:
+
+                                            Contact name:
+
+                                            Contact number:
+
+                                            Contact email:
+
+                                            Details of change:
+
+                                            `.replace(/^ +/gm, "")
+                                        )
+                                }
+                            >
+                            Leave feedback
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/terms">
+                                Terms of use
+                            </Link>
+                        </li>
+
+
                     </ul>
                 </div>
-                <div className="contact-info">
-                    If you'd like to give us some feedback please email{" "}
-                    <Link
-                        to={
-                            `mailto:${config.default.siteMail}` +
-                            `?subject=${"Ask Izzy - Feedback"}`
-                        }
-                    >
-                        {config.default.siteMail}
-                    </Link>.
+                <div className="service-providers">
+                    <h1>For service providers</h1>
+                    <ul>
+                        <li>
+                            <Link to="/add-service">
+                                Add a service
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to={
+                                    `mailto:${config.default.siteMail}` +
+                                    "?subject=" +
+                                    encodeURIComponent(
+                                        `Update service details`) +
+                                    "&body=" +
+                                    encodeURIComponent(
+                                        `Service name:
+
+                                        Contact name:
+
+                                        Contact number:
+
+                                        Contact email:
+
+                                        Details of change:
+
+                                        `.replace(/^ +/gm, "")
+                                    )
+                                }
+                            >
+                            Update service details
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="https://about.askizzy.org.au/downloads/">
+                                Ask Izzy resources
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
                 <div className="supporters">
-                    Ask Izzy founding partners:<br />
+                    <h1>Founding partners</h1>
                     <ul>
                         <li>
                             <Link to="https://www.google.org">Google</Link>
-                            <span className="comma">,</span>
                         </li>
                         <li>
                             <Link to="https://www.rea-group.com">REA Group</Link>
-                            <span className="comma">,</span>
                         </li>
                         <li>
                             <Link to="https://www.newscorpaustralia.com">
@@ -233,12 +187,11 @@ export default class BrandedFooter
                     </ul>
                 </div>
                 <div className="socials">
-                    <span>Find us on:</span>
                     <ul>
                         <li>
                             <Link
                                 to="https://www.facebook.com/askizzyau"
-                                className="flex-align"
+                                className="icon-link"
                             >
                                 <icons.Facebook
                                     className="inline-icon inline-block-icon"
@@ -248,72 +201,58 @@ export default class BrandedFooter
                         <li>
                             <Link
                                 to="https://www.instagram.com/askizzyau/"
-                                className="flex-align"
+                                className="icon-link"
                             >
                                 <icons.Instagram
                                     className="inline-icon inline-block-icon"
                                 />
                             </Link>
                         </li>
+
                     </ul>
                 </div>
-                <div className="for-service-providers">
-                    <h1>For Service Providers</h1>
-                    <div className="links">
-                        <LinkButton to="/add-service">
-                            <icons.Plus
-                                className="small"
-                            />
-                            <span>Add a service</span>
-                        </LinkButton>
-                        <LinkButton to={encodeURI(
-                            `mailto:${config.default.siteMail}` +
-                            `?subject=Your Ask Izzy feedback` +
-                            `&body=Service name:\n\n` +
-                            `Contact name:\n\n` +
-                            `Contact number:\n\n` +
-                            `Contact email:\n\n` +
-                            `Details of change:\n\n`
-                        )}
-                        >
-                            <icons.Pencil
-                                className="small"
-                            />
-                            <span>Update service details</span>
-                        </LinkButton>
-                        <Link to="https://about.askizzy.org.au/downloads/">
-                            Ask Izzy resources
-                        </Link>
-                    </div>
-                </div>
             </div>
-            <div
-                role="contentinfo"
-                aria-label="Acknowledgements"
-                className="bottom-box"
-            >
-                <div>
-                    <div className="flags">
-                        <icons.AboriginalFlag
-                            className="flag"
-                            alt="Australian Aboriginal flag"
-                        />
-                        <icons.TorresStraitIslandersFlag
-                            className="flag"
-                            alt="Torres Strait Islander flag"
-                        />
-                    </div>
+            <div className="other-content">
+                <div className="about">
+                    <img
+                        src={LOGO}
+                        className="other-content-icon"
+                        aria-hidden={true}
+                    />
+                    <p>
+                        Ask Izzy is powered by{" "}
+                        <Link to="https://www.infoxchange.org/au">
+                            Infoxchange
+                        </Link>, a not-for-profit social enterprise that
+                        has been delivering technology for social justice
+                        for over 30 years.
+                    </p>
+                </div>
+                <div
+                    role="contentinfo"
+                    aria-label="Acknowledgements"
+                    className="acknowledgements"
+                >
+                    <icons.AboriginalFlag
+                        className="other-content-icon"
+                        alt="Australian Aboriginal flag"
+                    />
+                    <icons.TorresStraitIslandersFlag
+                        className="other-content-icon"
+                        alt="Torres Strait Islander flag"
+                    />
                     <p>
                         Infoxchange acknowledges the traditional custodians
                         of the land and pays respect to Elders both
                         past and present.
                     </p>
                 </div>
-                <div>
-                    Ask Izzy is owned and operated by Infoxchange.
-                    © {new Date().getFullYear()} Infoxchange
+                <div className="other-acknowledgements">
+                Ask Izzy is owned and operated by Infoxchange.
+                © {new Date().getFullYear()} Infoxchange
                 </div>
             </div>
+
         </footer>
     )
 }

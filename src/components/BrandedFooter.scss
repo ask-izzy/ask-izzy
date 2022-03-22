@@ -25,9 +25,20 @@
         )
     );
 
-    > div > div,
-    > nav > div {
-        padding: 10px 20px;
+    background-color: #{colours.get-static('colour-primary-tint-1', 'branding-footer-container')};
+    background-color: var(--colour-primary-tint-1);
+    color: #{colours.get-static('colour-text-light', 'branding-footer-container')};
+    color: var(--colour-text-light);
+    font-size: 0.9em;
+
+    a {
+        color: #{colours.get-static('colour-text-light', 'branding-footer-container')};
+        color: var(--colour-text-light);
+
+        &:visited {
+            color: #{colours.get-static('colour-text-light', 'branding-footer-container')};
+            color: var(--colour-text-light);
+        }
     }
 
     ul {
@@ -37,272 +48,139 @@
         li {
             display: block;
             list-style-type: none;
+            padding-top: 8px;
         }
     }
 
-    .top-box {
-        padding: 10px 0;
-        display: flex;
-        background-color: #{colours.get-static('colour-bg-standard-tint-2', 'branding-footer-container')};
-        background-color: var(--colour-bg-standard-tint-2);
-
-        h1 {
-            margin-top: 0;
-            color: #{colours.get-static('colour-primary', 'branding-footer-container')};
-            color: var(--colour-primary);
-            font-size: 1.4em;
-            font-weight: normal;
-        }
-
-        li {
-            margin: 1em 0;
-        }
-
-        a {
-            color: #{colours.get-static('colour-text-dark')};
-            color: var(--colour-text-dark);
-            text-decoration: underline;
-
-            &:hover {
-                text-decoration: none;
-            }
-        }
-
-        /*
-         On Android devices the hover status
-         remains on the previously clicked link
-         causing the link to not show the underline
-       */
-        @media (hover: none) {
-            a:hover {
-                text-decoration: underline;
-            }
-        }
-
-        > div {
-            width: 50%;
-            box-sizing: border-box;
-        }
+    h1 {
+        font-size: 1em;
+        font-weight: bold;
+        color: #{colours.get-static('raw-colour-pure-white', 'branding-footer-container')};
+        color: var(--raw-colour-pure-white);
     }
 
-    .middle-box,
-    .bottom-box {
-        background-color: #{colours.get-static('colour-primary-tint-1', 'branding-footer-container')};
-        background-color: var(--colour-primary-tint-1);
-        color: #{colours.get-static('colour-text-light', 'branding-footer-container')};
-        color: var(--colour-text-light);
-
-        a {
-            color: #{colours.get-static('colour-text-light', 'branding-footer-container')};
-            color: var(--colour-text-light);
-        }
+    .main-links,
+    .other-content {
+        padding: 0 40px;
     }
 
-    .middle-box {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        padding-top: 20px;
+    .icon-link {
+        margin-right: 10px;
+        text-decoration: none;
+    }
 
-        & > div {
-            width: 50%;
-            box-sizing: border-box;
+    .main-links {
+        padding-top: 60px;
+        display: grid;
+        grid-template-areas:
+            'additional-information homelessness-services about-links'
+            'service-providers supporters socials';
+        column-gap: 140px;
+        row-gap: 20px;
+
+        .additional-information {
+            grid-area: additional-information;
         }
 
-        div.about {
-            font-size: 0.9em;
+        .homelessness-services {
+            grid-area: homelessness-services;
         }
 
-        div.about-links {
-            li {
-                display: inline-block;
+        .about-links {
+            grid-area: about-links;
+        }
 
-                &.separator {
-                    width: 15px;
-                    text-align: center;
-
-                    &::after {
-                        content: '|';
-                    }
-                }
-            }
+        .service-providers {
+            grid-area: service-providers;
         }
 
         .supporters {
-            font-size: 0.9em;
+            grid-area: supporters;
+        }
 
-            ul {
-                display: block;
-                margin-top: 10px;
+        .socials {
+            li {
+                display: inline;
+            }
 
-                li {
-                    display: inline-block;
+            grid-area: socials;
+        }
+    }
 
-                    .comma {
-                        margin-right: 0.5em;
-                    }
-                }
+    .other-content {
+        padding-top: 30px;
+        padding-bottom: 40px;
+        display: grid;
+        grid-template-areas:
+            'about acknowledgements'
+            'other-acknowledgements other-acknowledgements';
+        column-gap: 140px;
+        row-gap: 60px;
+
+        .about {
+            grid-area: about;
+        }
+
+        .acknowledgements {
+            grid-area: acknowledgements;
+
+            .AboriginalFlagIcon,
+            .TorresStraitIslandersFlagIcon {
+                height: 40px;
+                width: auto;
+                margin-right: 10px;
             }
         }
 
-        /* second column */
-        .supporters ~ div {
-            order: 2;
-        }
-
-        div.socials {
-            align-self: center;
-            font-size: 1.2em;
+        .other-acknowledgements {
+            grid-area: other-acknowledgements;
             text-align: center;
-            break-before: always; /* force break for second column */
-
-            > span {
-                vertical-align: middle;
-            }
-
-            .Icon {
-                margin: 5px;
-            }
-
-            a {
-                text-decoration: none;
-            }
-
-            ul {
-                display: inline-flex;
-            }
         }
 
-        div.for-service-providers {
-            align-self: center;
-            max-width: 300px;
-            border-radius: 8px;
-            background-color: #{colours.get-static('colour-primary-tint-2', 'branding-footer-container')};
-            background-color: var(--colour-primary-tint-2);
-
-            h1 {
-                margin: 0.3em 0 1em;
-                font-size: 1.2em;
-                font-weight: normal;
-                text-align: center;
-            }
-
-            .links {
-                text-align: center;
-
-                button {
-                    display: block;
-                    width: calc(100% - 20px);
-                    margin: 10px auto;
-                    border-radius: 8px;
-                    font-size: 1em;
-                    box-sizing: border-box;
-
-                    .Icon {
-                        width: 15px;
-                        height: 15px;
-                        margin-right: 5px;
-                    }
-
-                    > span:not(.icon) {
-                        vertical-align: middle;
-                    }
-                }
-
-                a {
-                    display: inline-block;
-                    margin: 0.3em;
-                }
-            }
+        .other-content-icon {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
         }
     }
 
-    .bottom-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-bottom: 20px;
-        font-size: 0.9em;
-        text-align: center;
-
-        > div {
-            width: 100%;
-
-            /* for IE */
-            max-width: 550px;
-            box-sizing: border-box;
-
-            /* end for IE */
-        }
-
-        .flag {
-            width: 50px;
-            height: 50px;
-            margin: 5px;
-            vertical-align: middle;
-        }
-    }
-
-    /* update hack too */
     @media only screen and (max-width: 550px) {
-        .top-box {
-            display: flex;
-            flex-direction: column;
-
-            & > div {
-                width: 100%; /* needed for IE */
-                width: unset; // sass-lint:disable-line no-duplicate-properties
-            }
+        .main-links {
+            grid-template-areas:
+                'additional-information homelessness-services'
+                'about-links service-providers'
+                'supporters socials';
+            column-gap: 70px;
         }
 
-        .middle-box {
-            padding-top: 0; /* needed for IE */
-            padding-top: unset; // sass-lint:disable-line no-duplicate-properties
-            text-align: center;
+        .other-content {
+            column-gap: 70px;
+        }
+    }
 
-            & > div {
-                width: 100%; /* needed for IE */
-                width: unset; // sass-lint:disable-line no-duplicate-properties
-            }
+    @media only screen and (max-width: 450px) {
+        .main-links {
+            grid-template-areas:
+                'additional-information'
+                'homelessness-services'
+                'about-links'
+                'service-providers'
+                'supporters'
+                'socials';
+        }
 
-            div.about {
-                padding-top: 30px;
-            }
+        .other-content {
+            grid-template-areas:
+                'about'
+                'acknowledgements'
+                'other-acknowledgements';
 
-            div.socials {
-                width: 100%;
-                margin: 20px 0;
-                border-top: #{colours.get-static('colour-primary-tint-2', 'branding-footer-container')} 1px solid;
-                border-top: var(--colour-primary-tint-2) 1px solid;
-                border-bottom: #{colours.get-static('colour-primary-tint-2', 'branding-footer-container')} 1px solid;
-                border-bottom: var(--colour-primary-tint-2) 1px solid;
-                break-before: unset;
-            }
+            .acknowledgements {
+                margin-top: 10px;
+                grid-area: acknowledgements;
 
-            div.for-service-providers {
-                order: -1;
-                width: 100%;
-                max-width: 100%; /* needed for IE */
-                max-width: unset; // sass-lint:disable-line no-duplicate-properties
-                padding: 1em;
-
-                button {
-                    max-width: 300px;
-                }
-            }
-
-            div.supporters {
-                order: 3;
-
-                ul {
-                    li {
-                        display: block;
-                        margin: 1em 0;
-
-                        .comma {
-                            display: none;
-                        }
-                    }
+                p {
+                    margin-top: 25px;
                 }
             }
         }
