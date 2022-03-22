@@ -2,16 +2,16 @@
 import objectHash from "object-hash"
 import Service from "./Service";
 import storage from "../storage";
-import {getIssClient, getIss3Client} from "./client"
+import {getIssClient} from "./client"
 import type { RouterContextObject } from "../contexts/router-context";
 import type {
-    SearchQuery as Iss4SearchQuery,
-    searchResultsMeta as Iss4SearchResultsMeta,
-} from "../ix-web-js-client/apis/iss.js"
+    ISS4SearchQuery,
+    ISS4SearchResultsMeta,
+} from "../ix-web-js-client/apis/iss/v4"
 import type {
-    ISS3SearchQuery as Iss3SearchQuery,
-    searchResultsMeta as Iss3SearchResultsMeta,
-} from "../ix-web-js-client/apis/iss-v3.js"
+    ISS3SearchQuery,
+    ISS3SearchResultsMeta,
+} from "../ix-web-js-client/apis/iss/v3"
 import type {SearchQuery as IzzySearchQuery} from "./searchQueryBuilder"
 
 export const previousSearchQueryStorageKey = "previousSearchQuery"
@@ -41,7 +41,7 @@ export class PaginatedSearch {
     +loadNextPage: () => Promise<void>;
     +loadedServices: Array<Service>;
     +numOfPagesLoaded: number;
-    +issQuery: Iss4SearchQuery | Iss3SearchQuery
+    +issQuery: ISS4SearchQuery | ISS3SearchQuery
     +isNext: ?boolean
 }
 
@@ -51,12 +51,12 @@ export class PaginatedSearchIss3 extends PaginatedSearch {
     #loadedServices: Array<Service> = [];
 
     #izzyQuery: IzzySearchQuery
-    #issQuery: Iss3SearchQuery;
+    #issQuery: ISS3SearchQuery;
     // WARNING: From some wack reason eslint panics if this is a private class
     // member. I this is fixed in a later version of eslint or one of the eslint
     // plugins but upgrading it now introduced too much noise into this MR so
     // leaving that for later.
-    _lastMeta: Iss3SearchResultsMeta;
+    _lastMeta: ISS3SearchResultsMeta;
 
     constructor(query: IzzySearchQuery) {
         super()
@@ -76,7 +76,7 @@ export class PaginatedSearchIss3 extends PaginatedSearch {
     }
 
     async loadNextPage() {
-        const iss3Client = await getIss3Client()
+        const iss3Client = await getIssClient("3")
         const offset = this.#pagesLoaded * this.#maxPageSize
         const res = await iss3Client.search({
             ...this.#issQuery,
@@ -102,7 +102,7 @@ export class PaginatedSearchIss3 extends PaginatedSearch {
         return this.#pagesLoaded
     }
 
-    get issQuery(): Iss3SearchQuery {
+    get issQuery(): ISS3SearchQuery {
         return this.#issQuery
     }
 
@@ -117,8 +117,8 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
     #loadedServices: Array<Service> = [];
 
     #izzyQuery: IzzySearchQuery
-    #issQuery: Iss4SearchQuery;
-    _lastMeta: Iss4SearchResultsMeta;
+    #issQuery: ISS4SearchQuery;
+    _lastMeta: ISS4SearchResultsMeta;
 
     constructor(query: IzzySearchQuery) {
         super()
@@ -139,7 +139,7 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
     }
 
     async loadNextPage() {
-        const issClient = await getIssClient()
+        const issClient = await getIssClient("4")
         const res = await issClient.search({
             ...this.#issQuery,
             page: {
@@ -166,7 +166,7 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
         return this.#pagesLoaded
     }
 
-    get issQuery(): Iss4SearchQuery {
+    get issQuery(): ISS4SearchQuery {
         return this.#issQuery
     }
 
@@ -186,8 +186,8 @@ export function isDisabilityAdvocacySearch(
 
 export function convertIzzySearchQueryToIss(
     query: IzzySearchQuery
-): Iss4SearchQuery {
-    const issQuery: Iss4SearchQuery = {
+): ISS4SearchQuery {
+    const issQuery: ISS4SearchQuery = {
         filters: {
             all: [
                 {
@@ -279,8 +279,8 @@ export function convertIzzySearchQueryToIss(
 // eslint-disable-next-line complexity
 export function convertIzzySearchQueryToIss3(
     query: IzzySearchQuery
-): Iss3SearchQuery {
-    const issQuery: $Shape<Iss3SearchQuery> = {}
+): ISS3SearchQuery {
+    const issQuery: $Shape<ISS3SearchQuery> = {}
 
     let q = query.term?.join(" ") || ""
 

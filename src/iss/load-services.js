@@ -1,5 +1,5 @@
 /* @flow */
-import {getIss3Client} from "../iss/client"
+import {getIssClient} from "../iss/client"
 import {attachTransportTimes} from "./travelTimes"
 import Service from "./Service"
 import {
@@ -9,7 +9,7 @@ import {
 export async function getService(
     serviceId: number
 ): Promise<Service> {
-    const issClient = await getIss3Client()
+    const issClient = await getIssClient("3")
 
     const response = await issClient.getService(serviceId)
     const service = new Service(response);
