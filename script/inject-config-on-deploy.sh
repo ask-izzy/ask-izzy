@@ -27,10 +27,12 @@ vars_to_inject=(
     "GOOGLE_TAG_MANAGER_AUTH"
     "GOOGLE_TAG_MANAGER_ENV"
     "PROXY_DOMAINS"
+    "PROXY_PROTOCOL"
+    "VERSION"
+    "STRAPI_URL"
     "NEW_RELIC_CONFIG"
     "NEW_RELIC_INFO"
-    "PROXY_PROTOCOL"
-    "STRAPI_URL"
+
 )
 
 required_vars=(

@@ -1,14 +1,12 @@
 /* @flow */
 
 import type {Element as ReactElement} from "react"
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import storage from "../storage";
 import GeolocationButton from "./GeolocationButton";
 import icons from "../icons";
-import {MobileDetect} from "../effects/MobileDetect";
 import useTravelTimesUpdater from "../hooks/useTravelTimesUpdater"
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
-import Button from "./base/Button";
 import Service from "../iss/Service"
 
 type Props = {
@@ -28,16 +26,11 @@ function GeolocationButtonForTravelTimes({
     onTravelTimesStatusChange,
 }: Props): ReactElement<"div"> {
 
-    const [collapsed, setCollapsed] = useState(true);
-
     const {
         travelTimesStatus,
         loadTravelTimes,
         clearTravelTimes,
     } = useTravelTimesUpdater(servicesToUpdateTravelTimes)
-
-    const isMobile = MobileDetect(556)
-    const isSmallMobileDevice = MobileDetect(374)
 
     useEffect(() => {
         onTravelTimesStatusChange(travelTimesStatus)
@@ -45,8 +38,7 @@ function GeolocationButtonForTravelTimes({
 
     const explainerMessage = () => (
         !storage.getUserGeolocation() && showMessage &&
-            <div className={`explainer ${collapsed ? "collapsed" : ""}`}>
-                {(!isSmallMobileDevice || !collapsed) &&
+            <div className="explainer">
                 <span
                     className="explainerIcons"
                     aria-hidden={true}
@@ -54,11 +46,8 @@ function GeolocationButtonForTravelTimes({
                     <icons.Walk/>
                     <icons.Tram/>
                     <icons.Car/>
-                </span>}
-                {collapsed && (isMobile || isSmallMobileDevice) ?
-                    "See estimated travel times?"
-                    // eslint-disable-next-line max-len
-                    : "Want to see estimated travel times for the services below?"}
+                </span>
+                Want to see estimated travel times for the services below?
             </div>
     )
 
@@ -82,25 +71,6 @@ function GeolocationButtonForTravelTimes({
             showClearButton={true}
         />
     )
-
-    if (isMobile && !storage.getUserGeolocation() && showMessage) {
-        return <div className="GeolocationButtonForTravelTimes">
-            <div className="collapserContainer">
-                <Button
-                    onClick={() => setCollapsed(!collapsed)}
-                    aria-label={
-                        `${collapsed ? "expand" : "collapse"} ` +
-                         `get travel times section`}
-                >
-                    <div className={`plus ${!collapsed ? "close" : ""}`}>
-                        <icons.Chevron/>
-                    </div>
-                </Button>
-                {explainerMessage()}
-            </div>
-            {!collapsed && renderGeoLocateButton()}
-        </div>
-    }
 
     return (
         <div className="GeolocationButtonForTravelTimes">

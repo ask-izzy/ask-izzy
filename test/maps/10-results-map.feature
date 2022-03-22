@@ -37,8 +37,8 @@ Feature: See results on a map
 
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
-        When I scroll to element "Map view"
-        And I click the "Map view" link
+        When I scroll to element "Map"
+        And I click the "Map" link
         And I should see markers
         ------------------------------------------
         Title              | Latitude | Longitude
@@ -68,7 +68,7 @@ Feature: See results on a map
 
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
-        When I click the "Map view" link
+        When I click the "Map" link
         And I click marker titled "My Housing Service"
         Then I should see the results
         ---------------------
@@ -86,7 +86,7 @@ Feature: See results on a map
 
         Given I'm watching map events
         # We can't change URL else we'll remove the maps instrumentation
-        When I click the "Map view" link
+        When I click the "Map" link
         And I click marker titled "My Housing Service"
         Then I should see "Housing Service"
 

@@ -25,28 +25,28 @@ export default function UrlsToLink({children}: Props): ReactNode {
         return childrenArray
     }
     return (
-        <p>
+        <>
             {findLinks().map((string, index) => {
                 string = string.replace(/(\r\n|\n|\r)/gm, "<br />")
                 if (string.includes("<url>")) {
                     const url = string.replace("<url>", "");
                     return (
-                        <Link to={url}
-                            key={index}
-                        >
-                            {url}
-                        </Link>
+                        <p key={index}>
+                            <Link to={url}>
+                                {url}
+                            </Link>
+                        </p>
                     )
                 }
                 if (string.includes("<br />")) {
-                    return (<br />)
+                    return (<br key={index}/>)
                 }
                 if (string.includes("<a>")) {
-                    return
+                    return null
                 }
-                return (string)
+                return (<p key={index}>{string}</p>)
             })}
 
-        </p>
+        </>
     );
 }

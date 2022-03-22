@@ -48,7 +48,7 @@ Feature: Crisis Line
         And I click the "Search" button
         And I click the "Skip" button
         And I click the "Myself" button
-        And I click the "See information about this call" button
+        And I click the "See details" button
         Then I should see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"
 
     Scenario: Hide extra call information
@@ -57,12 +57,12 @@ Feature: Crisis Line
         And I click the "Search" button
         And I click the "Skip" button
         And I click the "Myself" button
-        And I click the "See information about this call" button
-        And I click the "Hide information about this call" button
+        And I click the "See details" button
+        And I click the "Hide details" button
         Then I should not see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"
 
     Scenario: Not see extra call information
         When I visit /
         And I search for "get helpline phone number"
         And I click the "Search" button
-        Then I should not see "See information about this call"
+        Then I should not see "See details"

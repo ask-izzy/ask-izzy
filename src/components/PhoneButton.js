@@ -1,5 +1,5 @@
 /* @flow */
-import type {Element as ReactElement} from "React";
+import type {Element as ReactElement, Node as ReactNode} from "React";
 import React from "react";
 import { titleize } from "underscore.string";
 
@@ -17,10 +17,14 @@ type Props = phone & {
     crisis?: boolean,
     analyticsEventDetails?: AnalyticsEvent,
     className?: ?string,
+    hasDetails?: ReactNode,
     styleType?: string // currently only "hollow" is supported
 }
 
 export default class PhoneButton extends React.Component<Props, void> {
+    static defaultProps: any = {
+        hasDetails: <></>,
+    }
 
     get href(): string {
         return "tel:" + this.props.number.replace(/[^0-9+]/g, "");
@@ -62,9 +66,6 @@ export default class PhoneButton extends React.Component<Props, void> {
                 <ScreenReader>
                     Phone contact:
                 </ScreenReader>
-                <span className="kind">
-                    <UrlsToLinks>{this.displayComment}</UrlsToLinks>
-                </span>
                 <Link
                     to={this.href}
                     className="ContactButton"
@@ -84,6 +85,11 @@ export default class PhoneButton extends React.Component<Props, void> {
                         </span>
                     </div>
                 </Link>
+                <div className="detailsContainer">
+                    <UrlsToLinks>{this.displayComment}</UrlsToLinks>
+                    {this.props.hasDetails}
+                </div>
+
             </div>
         );
     }

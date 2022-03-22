@@ -1,6 +1,7 @@
 @use '../styles/mixins/colours';
 
 .CrisisHeader {
-    color: colours.get-static('colour-crisis');
-    color: var(--colour-crisis);
+    color: colours.get-static('colour-crisis-white');
+    color: var(--colour-crisis-white);
+    padding-top: 7px;
 }

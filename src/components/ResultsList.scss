@@ -16,9 +16,16 @@
     }
 
     &.crisisResults {
+        background-color: colours.get-static('colour-brand-primary-mid');
+        background-color: var(--colour-brand-primary-mid);
+
         ol {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+
+            @media (max-width: 720px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
             @media (max-width: 500px) {
                 grid-template-columns: repeat(1, 1fr);

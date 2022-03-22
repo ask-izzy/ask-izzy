@@ -6,6 +6,14 @@
     font-size: 14px;
     font-weight: light;
 
+    .AlertBannerList {
+        text-align: right;
+
+        .AlertBannerButton {
+            margin: 15px;
+        }
+    }
+
     .row {
         width: 100%;
         display: inline-flex;

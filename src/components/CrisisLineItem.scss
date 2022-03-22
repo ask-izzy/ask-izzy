@@ -8,15 +8,16 @@
     h3 a {
         margin-top: 2px;
         margin-bottom: 0;
-        color: #{colours.get-static('colour-link')};
-        color: var(--colour-link);
+        color: #{colours.get-static('colour-crisis-white')};
+        color: var(--colour-crisis-white);
         font-size: 14px;
         font-weight: 500;
         text-decoration: underline;
+        min-height: 32px;
 
         &:visited {
-            color: #{colours.get-static('colour-link')};
-            color: var(--colour-link);
+            color: #{colours.get-static('colour-crisis-white')};
+            color: var(--colour-crisis-white);
         }
 
         &:hover {
@@ -43,6 +44,25 @@
     }
 
     .Collapser {
+        .Button {
+            color: #{colours.get-static('colour-crisis-white')};
+            color: var(--colour-crisis-white);
+            font-weight: normal;
+            font-size: 14px;
+
+            .Icon {
+                path {
+                    stroke: #{colours.get-static('colour-crisis-white')};
+                    stroke: var(--colour-crisis-white);
+                }
+            }
+
+            .li {
+                color: #{colours.get-static('colour-crisis-white')};
+                color: var(--colour-crisis-white);
+            }
+        }
+
         margin-top: 5px;
     }
 }

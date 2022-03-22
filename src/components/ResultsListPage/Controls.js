@@ -75,7 +75,7 @@ function Controls({
                     !sticky ? initialOffset - 100 : 0
                 }
                 sortOption={sortOption}
-                showDivider={!sticky}
+                showDivider={false}
             />
         </span>
     )
@@ -102,10 +102,9 @@ function Controls({
                 <ViewOnMapLink
                     to={location.pathname.replace(/\/?$/, "/map")}
                 />
-                {isMobile && renderResultsPageGeolocationButton()}
                 {sortResult()}
             </div>
-            {!isMobile && renderResultsPageGeolocationButton()}
+            {renderResultsPageGeolocationButton()}
         </div>
     )
 }

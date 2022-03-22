@@ -80,7 +80,6 @@
     @media (max-width: 768px) {
         padding: 10px 0;
         margin: 0 10px;
-        font-size: 14px;
 
         &.sticky {
             padding: 5px 10px;
@@ -88,7 +87,6 @@
     }
 
     @media (max-width: 556px) {
-        flex-direction: column;
         height: 100%;
         margin: 0;
 
