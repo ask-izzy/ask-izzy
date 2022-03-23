@@ -2,7 +2,7 @@
 import objectHash from "object-hash"
 import Service from "./Service";
 import storage from "../storage";
-import {getIssClient} from "./client"
+import {getIssClient, getIssVersion} from "./client"
 import type { RouterContextObject } from "../contexts/router-context";
 import type {
     ISS4SearchQuery,
@@ -24,13 +24,13 @@ export function createServiceSearch(query: IzzySearchQuery): PaginatedSearch {
     if (cachedServiceSearches[hash]) {
         search = cachedServiceSearches[hash]
     } else {
-        const {apiVersion = "3", ...remainingQuery} = query
-        if (apiVersion === "3") {
-            search = new PaginatedSearchIss3(remainingQuery)
-        } else if (apiVersion === "4") {
-            search = new PaginatedSearchIss4(remainingQuery)
+        const issVersion = getIssVersion()
+        if (issVersion === "3") {
+            search = new PaginatedSearchIss3(query)
+        } else if (issVersion === "4") {
+            search = new PaginatedSearchIss4(query)
         } else {
-            throw new Error(`Api version "${apiVersion}" not recognised`)
+            throw new Error(`Api version "${issVersion}" not recognised`)
         }
         cachedServiceSearches[hash] = search
     }

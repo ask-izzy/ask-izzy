@@ -10,7 +10,7 @@ import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
 import type {Geolocation} from "../../storage";
-import {getIssClient} from "../../iss/client"
+import {getIssClient, getIssVersion} from "../../iss/client"
 import type {ISS3AreaLocation} from "../../ix-web-js-client/apis/iss/v3";
 import type { SearchQueryChanges } from "../../iss/searchQueryBuilder";
 import QuestionStepper from "../../components/QuestionStepper";
@@ -188,11 +188,16 @@ class Location extends React.Component<
         async(input: string) => {
             let results
             try {
-                const iss3Client = await getIssClient("3")
-                results = await iss3Client.searchLocations({
-                    name: input,
-                    kind: ["postcode", "suburb", "town"],
-                })
+                const issVersion = getIssVersion()
+                if (issVersion === "3") {
+                    const iss3Client = await getIssClient(issVersion)
+                    results = await iss3Client.searchLocations({
+                        name: input,
+                        kind: ["postcode", "suburb", "town"],
+                    })
+                } else if (issVersion === "4") {
+                    throw Error("ISS4 not yet supported")
+                }
             } catch (error) {
                 console.error(
                     "Error trying to get location autocomplete",
