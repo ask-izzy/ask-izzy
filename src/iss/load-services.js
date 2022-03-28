@@ -46,6 +46,10 @@ export async function getService(
 }
 
 export async function getSiblingServices(service: Service): Promise<Service[]> {
+    // TODO get this working
+    if (getIssVersion() === "4") {
+        return []
+    }
     const search = createServiceSearch({
         siteId: service.site.id,
         maxPageSize: 100,
