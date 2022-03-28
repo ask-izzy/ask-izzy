@@ -10,49 +10,33 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     name: "sub-money",
     question: "What do you need?",
     possibleAnswers: {
-        /* eslint-disable max-len */
-        "Emergency aid": {
-            $concat: {
-                term: ["emergency", "aid"],
-            },
+        "Centrelink": {
+            serviceTypes: ["Centrelink"],
         },
-        "Bond or rental assistance": {
-            $concat: {
-                term: ["\"bond assistance\""],
-            },
+        "Financial aid": {
+            serviceTypes: ["Financial Aid"],
         },
-        "Financial assistance e.g. utility bills, petrol, food": {
-            $concat: {
-                serviceTypes: ["Financial Aid"],
-            },
-        },
-        "No interest & low interest loans": {
-            $concat: {
-                term: ["nils", "low-interest"],
-            },
-            $removeElms: {
-                term: ["financial", "aid"],
-            },
-        },
-        "Gambling counselling": {
-            $concat: {
-                term: ["gambling", "counselling"],
-            },
-            $removeElms: {
-                term: ["financial", "aid"],
-            },
+        "No or low interest loans": {
+            serviceTypes: ["Low-interest loans"],
         },
         "Financial counselling": {
-            $concat: {
-                term: [
-                    "financial counselling",
-                    "name:\"financial counselling\"",
-                ],
-            },
-            $removeElms: {
-                term: ["financial", "aid"],
-            },
+            serviceTypes: ["Financial Counselling"],
         },
+        "Bond or rental assistance": {
+            serviceTypes: ["Bond Scheme", "Financial Aid"],
+        },
+        "Gambling counselling": {
+            serviceTypes: ["Gambling Counselling"],
+        },
+    },
+    descriptionsForAnswers: {
+        "Centrelink": "Access to government support payments.",
+        "Financial aid": "Assistance with paying for food, bills, transport.",
+        "No or low interest loans":
+            "Loans for people and families on low incomes.",
+        "Financial counselling": "Help managing money and debt.",
+        "Bond or rental assistance": "Help with rental payments or bond money.",
+        "Gambling counselling": "Someone to talk to about gambling.",
     },
     showSupportSearchBar: true,
 };

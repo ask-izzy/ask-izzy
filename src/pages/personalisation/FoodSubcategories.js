@@ -11,28 +11,20 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     name: "sub-food",
     question: "What type of food do you need?",
     possibleAnswers: {
-        "Community meals": {
-            $removeElms: {
-                term: ["-\"coordinating bodies\""],
-            },
+        "Meals": {
+            serviceTypes: ["Meals"],
         },
-        "Food packages/parcels/vouchers": {
-            $concat: {
-                term: ["\"Food Parcels & Food Vouchers\""],
-                serviceTypes: ["Material Aid"],
-            },
-            $removeElms: {
-                term: ["meals"],
-            },
+        "Food parcels / groceries": {
+            serviceTypes: ["Meals"],
         },
-        "Meals on Wheels": {
-            $concat: {
-                term: ["meals on wheels"],
-            },
-            $removeElms: {
-                term: ["meals", "-\"meals on wheels\"", "-chsp"],
-            },
+        "Food vouchers": {
+            serviceTypes: ["Meals"],
         },
+    },
+    descriptionsForAnswers: {
+        "Meals": "Free warm meals.",
+        "Food parcels / groceries": "Fresh food and pantry items.",
+        "Food vouchers": "To spend at the supermarket.",
     },
     showSupportSearchBar: true,
 };

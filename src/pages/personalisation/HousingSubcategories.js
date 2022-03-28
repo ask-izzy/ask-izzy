@@ -1,7 +1,6 @@
 /* @flow */
 import BaseQuestion from "./BaseQuestion";
 import SleepTonight from "./SleepTonight";
-import {housingCrisisSearchQueryChanges} from "../../utils/housing-crisis";
 import type {
     PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation"
@@ -11,75 +10,45 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     name: "sub-housing",
     question: "Which situation is most like yours?",
     possibleAnswers: {
-        "On the street": housingCrisisSearchQueryChanges,
-        "Couch surfing": {
-            $concat: {
-                term: [
-                    "homeless",
-                    "accommodation",
-                ],
-            },
-            $removeElms: {
-                term: [
-                    "housing",
-                ],
-            },
+        "Emergency accommodation": {
+            serviceTypes: [
+                "Refuge/ Crisis accommodation",
+                "Short-Term Accommodation",
+            ],
         },
-        "In a rooming house": {
-            $concat: {
-                term: [
-                    "community",
-                    "housing",
-                    "-\"rooming house\"",
-                ],
-            },
-            $removeElms: {
-                term: [
-                    "housing",
-                ],
-            },
+        "Homelessness support": {
+            serviceTypes: ["Homelessness Access Point"],
         },
-        "Private rental": {
-            $concat: {
-                term: [
-                    "transitional",
-                    "accommodation",
-                ],
-            },
-            $removeElms: {
-                term: [
-                    "housing",
-                ],
-            },
+        "Affordable housing": {
+            serviceTypes: ["Social Housing"],
         },
-        "Public housing": {
-            $concat: {
-                term: [
-                    "social",
-                    "housing",
-                    "-\"public rental\"",
-                    "-\"public housing\"",
-                ],
-            },
-            $removeElms: {
-                term: [
-                    "housing",
-                ],
-            },
+        "Bond or rent help": {
+            serviceTypes: ["Emergency financial assistance for accommodation"],
         },
-        "Mortgaged housing": {
-            $concat: {
-                term: [
-                    "transitional",
-                    "accommodation",
-                ],
-            },
-            $removeElms: {
-                term: [
-                    "housing",
-                ],
-            },
+        "Rental disputes": {
+            serviceTypes: [],
         },
+        "Support with everyday tasks": {
+            serviceTypes: [],
+        },
+        "Supported accommodation and residential care": {
+            serviceTypes: [
+                "Supported Accommodation",
+                "Supported Residential Accommodation",
+                "Supported Residential Accommodation/Aged Care",
+            ],
+        },
+    },
+    descriptionsForAnswers: {
+        "Emergency accommodation": "Need a place to stay.",
+        "Homelessness support": "Help for people experiencing homelessness.",
+        "Affordable housing": "Rental in government owned houses.",
+        "Bond or rent help": "Help with rental payments.",
+        "Rental disputes": "Deal with issues while renting.",
+        "Support with everyday tasks":
+            "Home help with cleaning, food, personal care.",
+        "Supported accommodation and residential care":
+            "Places to live with people who can help.",
     },
 };
 

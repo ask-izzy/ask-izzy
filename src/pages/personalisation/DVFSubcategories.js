@@ -11,114 +11,63 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     question: "What best describes what you need?",
     info: "All of your answers are private and anonymous.",
     possibleAnswers: {
-        "Family violence support": {},
-        "Counselling": {
-            $concat: {
-                term: ["counselling"],
-            },
+        "Counselling and support": {
+            serviceTypes: ["Counselling"],
         },
         "Police": {
-            $concat: {
-                term: ["police", "dvlo"],
-            },
-            $removeElms: {
-                term: ["\"family violence\""],
-            },
+            serviceTypes: ["Law enforcement/ Police"],
         },
         "Legal support": {
-            $concat: {
-                term: [
-                    "legal",
-                    "-permits",
-                    "-ceremonies",
-                    "-making",
-                    "-checks",
-                    "-electoral",
-                    "-taxation",
-                    "-centrelink",
-                    "-immigration",
-                    "-\"hire of facilities\"",
-                    "-police",
-                ],
-            },
+            serviceTypes: ["Legal Advice"],
         },
-        "Children's support & protection": {
-            $concat: {
-                term: ["service_type:Child Protection/ Placement"],
-            },
-            $removeElms: {
-                term: ["\"family violence\""],
-            },
+        "Children's support and protection": {
+            serviceTypes: [
+                "Child Protection/ Placement",
+                "Child support advice",
+            ],
         },
         "Sexual assault support": {
-            $concat: {
-                term: ["\"sexual assault\""],
-            },
-            $removeElms: {
-                term: ["\"family violence\""],
-            },
-        },
-        "Financial help": {
-            $concat: {
-                term: [
-                    "\"financial counselling\"",
-                    "-grants",
-                    "name:\"financial counselling\"",
-                ],
-            },
-            $removeElms: {
-                term: ["\"family violence\""],
-            },
+            serviceTypes: [
+                "Sexual Assault Services",
+                "Incest/sexual abuse counselling",
+            ],
         },
         "Help for people using violence": {
-            $concat: {
-                term: ["\"using violence\""],
-            },
-            $removeElms: {
-                term: ["\"family violence\""],
-            },
-            $applyIfShouldInjectAccessPoints: {
-                $concat: {
-                    term: ["\"men's behaviour change\""],
-                },
-                $removeElms: {
-                    term: ["\"using violence\""],
-                },
-            },
+            serviceTypes: [
+                "Domestic violence counselling",
+            ],
         },
-        "Help for pets": {
-            $concat: {
-                term: [
-                    "pets",
-                    "-\"animal control\"",
-                    "-\"effectiveness training\"",
-                ],
-            },
+        "Emergency accommodation": {
+            serviceTypes: [
+                "Emergency financial assistance for accommodation",
+                "Refuge/ Crisis accommodation",
+            ],
+        },
+        "Help with pets": {
+            serviceTypes: ["Animal Welfare"],
         },
     },
     icons: {
-        "Family violence support": icons.ExperiencingViolence,
-        "Counselling": icons.Support,
+        "Counselling and support": icons.Support,
         "Police": icons.Police,
         "Legal support": icons.Legal,
-        "Children's support & protection": icons.DemographicChildren,
+        "Children's support and protection": icons.DemographicChildren,
         "Sexual assault support": icons.SexualViolence,
-        "Financial help": icons.Money,
         "Help for people using violence": icons.UsingViolence,
-        "Help for pets": icons.DemographicPets,
+        "Emergency accommodation": icons.House,
+        "Help with pets": icons.DemographicPets,
     },
     descriptionsForAnswers: {
-        "Family violence support": "Crisis counselling & accommodation.",
-        "Counselling": "Someone to talk to.",
-        "Police": "Stations & liaison officers.",
-        "Legal support": "Intervention orders, court & separation.",
-        "Children's support & protection":
-            "Support services & child protection.",
-        "Sexual assault support": "Counselling, medical care & support.",
-        "Financial help": "Money counsellors & support.",
+        "Counselling and support": "Someone to talk to.",
+        "Police": "Stations and liason officers.",
+        "Legal support": "Intervention orders, court and separation.",
+        "Children's support and protection":
+            "Support services and child protection.",
+        "Sexual assault support": "Counselling, medical care and support.",
         "Help for people using violence":
-            "Counselling & behaviour change programs",
-        "Help for pets": "Emergency kennel & support.",
+            "Counselling & behaviour change programs.",
+        "Emergency accommodation": "Need a place to stay.",
+        "Help with pets": "Shelter or assistance for pets.",
     },
     showSupportSearchBar: true,
 }

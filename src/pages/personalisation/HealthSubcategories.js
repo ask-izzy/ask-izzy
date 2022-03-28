@@ -11,100 +11,42 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     question: "What sort of help do you need?",
     possibleAnswers: {
         "Doctor": {
-            $concat: {
-                term: ["\"general medical practitioners\""],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
+            serviceTypes: ["General Practitioners"],
         },
-        "Nurse": {
-            $concat: {
-                term: ["nurse"],
-            },
-        },
-        "Social & emotional wellbeing": {
-            $concat: {
-                term: ["\"mental health\""],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
-        },
-        "Domestic & family violence": {
-            $concat: {
-                term: ["health", "\"Family violence\""],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
-        },
-        "Sexual assault": {
-            $concat: {
-                term: ["\"sexual assault\""],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
-        },
-        "Sexual health": {
-            $concat: {
-                term: ["\"sexual health\""],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
+        "Mental and emotional health": {
+            serviceTypes: ["Mental Health"],
         },
         "Dentist": {
-            $concat: {
-                term: ["dentistry"],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
+            serviceTypes: ["Dentists/Oral Health Professionals"],
+        },
+        "Children's health": {
+            serviceTypes: ["Children's health services"],
         },
         "Problems with feet": {
-            $concat: {
-                term: ["podiatry"],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
-        },
-        "Eye care": {
-            $concat: {
-                term: ["optometry"],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
-        },
-        "Children": {
-            $concat: {
-                term: ["health", "children"],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
-        },
-        "Maternal & child health": {
-            $concat: {
-                term: ["\"maternal child health\""],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
-            $unset: ["showInAskIzzyHealth"],
+            serviceTypes: [
+                "Podiatrists",
+                "Paediatricians & Neonatologists",
+                "Paediatric Dentists",
+            ],
         },
         "Hospital": {
-            $concat: {
-                term: ["\"public hospital services\"", "-pac", "-medicare"],
-            },
-            $removeElms: {
-                term: ["\"community health\""],
-            },
-            $unset: ["showInAskIzzyHealth"],
+            serviceTypes: [
+                "Hospital",
+            ],
         },
+        "Alcohol and other drugs": {
+            serviceTypes: ["Alcohol & Other Drugs"],
+        },
+    },
+    descriptionsForAnswers: {
+        "Doctor": "Someone to talk to about any health problem.",
+        "Mental and emotional health":
+            "Help with anxiety, depression and mental health.",
+        "Dentist": "Help with teeth and mouth health.",
+        "Children's health": "Paediatricians and help for kids.",
+        "Problems with feet": "Podiatrists for help with foot problems.",
+        "Hospital": "Emergency rooms for urgent problems.",
+        "Alcohol and other drugs": "Rehab, detox, managing withdrawals.",
     },
     showSupportSearchBar: true,
 };

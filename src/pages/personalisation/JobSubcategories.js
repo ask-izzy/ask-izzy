@@ -9,23 +9,39 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     name: "sub-job",
     question: "Where do you want to start?",
     possibleAnswers: {
-        "Employment": {
-            $concat: {
-                term: ["job", "searching"],
-            },
-            $removeElms: {
-                term: ["employment"],
-            },
+        "Finding a job": {
+            serviceTypes: [
+                "Employment",
+                "-Support for business",
+                "-Vocational Rehabilitation",
+                "-Workplace Relations",
+            ],
+        },
+        "Supported employment": {
+            serviceTypes: ["Supported Employment"],
+        },
+        "Education": {
+            serviceTypes: ["Education"],
+        },
+        "Community skills training": {
+            serviceTypes: [],
         },
         "Volunteering": {
-            $concat: {
-                term: ["volunteering"],
-            },
-            $removeElms: {
-                term: ["employment"],
-                serviceTypes: ["Employment"],
-            },
+            serviceTypes: [],
         },
+        "Libraries": {
+            serviceTypes: ["Libraries"],
+        },
+    },
+    descriptionsForAnswers: {
+        "Finding a job": "Employment programs and services.",
+        "Supported employment":
+            "Employment services for people with additional needs.",
+        "Education": "Schools and other centers for learning.",
+        "Community skills training":
+            "Local programs such as parenting, computer, or other skills.",
+        "Volunteering": "Places to help and gain experience.",
+        "Libraries": "Access to computers, books and information.",
     },
     showSupportSearchBar: true,
 }
