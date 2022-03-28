@@ -150,9 +150,29 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
 
         if (res) {
             this._lastMeta = res.meta
-            const services = res.results.map(
-                serviceData => new Service(serviceData)
-            ) || []
+            const services = res.results.map(serviceData => {
+                serviceData.now_open = {
+                    local_time: "2022-01-18T16:41:00+11:00",
+                    notes: "",
+                    now_open: true,
+                }
+                serviceData.catchment = serviceData.catchment_description
+                serviceData.location = {
+                    building: "",
+                    flat_unit: "",
+                    level: "",
+                    street_name: "",
+                    street_number: "",
+                    street_suffix: "",
+                    street_type: "",
+                    details: "",
+                    state: serviceData.site.location_state,
+                    postcode: serviceData.site.location_postcode,
+                    suburb: serviceData.site.location_suburb,
+                    point: serviceData.site.location_geo_point,
+                }
+                return new Service(serviceData)
+            }) || []
             this.#loadedServices.push(...services)
             this.#pagesLoaded++;
         }

@@ -11,8 +11,29 @@ export async function getService(
 ): Promise<Service> {
     const issClient = await getIssClient(getIssVersion())
 
-    const response = await issClient.getService(serviceId)
-    const service = new Service(response);
+    const serviceData = await issClient.getService(serviceId)
+
+    serviceData.now_open = {
+        local_time: "2022-01-18T16:41:00+11:00",
+        notes: "",
+        now_open: true,
+    }
+    serviceData.catchment = serviceData.catchment_description
+    serviceData.location = {
+        building: "",
+        flat_unit: "",
+        level: "",
+        street_name: "",
+        street_number: "",
+        street_suffix: "",
+        street_type: "",
+        details: "",
+        state: serviceData.site.location_state,
+        postcode: serviceData.site.location_postcode,
+        suburb: serviceData.site.location_suburb,
+        point: serviceData.site.location_geo_point,
+    }
+    const service = new Service(serviceData);
 
     try {
         await attachTransportTimes([service]);
