@@ -150,8 +150,7 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
 
         if (res) {
             this._lastMeta = res.meta
-            console.log('res', res)
-            const services = res.objects.map(
+            const services = res.results.map(
                 serviceData => new Service(serviceData)
             ) || []
             this.#loadedServices.push(...services)
