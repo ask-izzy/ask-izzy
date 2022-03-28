@@ -21,6 +21,7 @@ vars_to_inject=(
     "ISS_VERSION"
     "ISS_API_KEY"
     "ISS_API_TOKEN"
+    "LOCATIONS_API_BASE_URL"
     "GOOGLE_API_KEY"
     "GOOGLE_ANALYTICS_URL"
     "GOOGLE_TAG_MANAGER_ID"
@@ -37,7 +38,7 @@ required_vars=(
     "VERSION"
     "ISS_BASE_URL"
     "ISS_VERSION"
-    "ISS_API_KEY" # This will no longer be required after ISS3 is no longer supported
+    "LOCATIONS_API_BASE_URL"
     "PROXY_DOMAINS"
     "NEW_RELIC_CONFIG"
     "NEW_RELIC_INFO"

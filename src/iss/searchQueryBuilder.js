@@ -104,8 +104,8 @@ objectMerge.addOperation("$removeElms", (source, params) => {
 objectMerge.addOperation(
     "$applyIfShouldInjectAccessPoints",
     (source, params) => {
-        const location = storage.getSearchArea()
-        if (location?.match(/, VIC$/)) {
+        const location = storage.getLocation()
+        if (location && location.name.match(/, VIC$/)) {
             objectMerge.patch(source, params)
         }
     }

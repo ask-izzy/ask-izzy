@@ -20,7 +20,7 @@ export default function useTravelTimesUpdater(
 ): returnVals {
     const [travelTimesStatus, setTravelTimesStatus] =
         useState<travelTimesStatus>(
-            storage.getUserGeolocation() ?
+            storage.getLocation() ?
                 "loaded"
                 : "not set"
         )

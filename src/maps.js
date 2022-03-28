@@ -70,7 +70,7 @@ export class MapsApi {
         destinations: Array<string>, mode: TravelMode = "WALKING"
     ): Promise<Array<travelTime>> {
         const directionsService = new this.api.DistanceMatrixService();
-        const coords = storage.getUserGeolocation();
+        const coords = storage.getLocation();
         if (!coords) {
             return new Promise(resolve => resolve([]))
         }

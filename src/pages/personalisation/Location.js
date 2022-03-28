@@ -11,7 +11,11 @@ import icons from "../../icons";
 import storage from "../../storage";
 import type {Geolocation} from "../../storage";
 import {getIssClient, getIssVersion} from "../../iss/client"
-import type {ISS3AreaLocation} from "../../ix-web-js-client/apis/iss/v3";
+import type {LocationAutocompleteSuggestions} from "../../locations";
+import {
+    getLocationAutocompleteSuggestions,
+    getLocationDetails
+} from "../../locations"
 import type { SearchQueryChanges } from "../../iss/searchQueryBuilder";
 import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
@@ -42,7 +46,7 @@ type State = {
     gettingAutocompletionsInProgress: boolean,
     locationNameInput: string,
     selectedLocation: ?location,
-    autocompletions: Array<ISS3AreaLocation>,
+    autocompletions: Array<LocationAutocompleteSuggestions>,
     nextDisabled: boolean,
 }
 
@@ -76,20 +80,10 @@ class Location extends React.Component<
     }
 
     componentDidMount(): void {
-        const userLocation = storage.getUserGeolocation()
-        const searchLocation = storage.getSearchArea()
+        const searchLocation = storage.getJSON(this.props.name)
 
-        let location: location
-        if (userLocation) {
-            if (!searchLocation || searchLocation === userLocation.name) {
-                location = userLocation
-            }
-        } else if (searchLocation) {
-            location = {name: searchLocation}
-        }
-
-        if (location) {
-            this.setSelectedLocation(location)
+        if (searchLocation) {
+            this.setSelectedLocation(searchLocation)
         }
         const category = getCategory(
             this.context.router.match.params.page
@@ -103,48 +97,35 @@ class Location extends React.Component<
     static title: string = "Location";
 
     static headingValue(): ?string {
-        return this.savedAnswer && `in ${this.savedAnswer}`
+        return this.savedAnswer && `in ${this.prettyPrintAnswer(this.savedAnswer)}`
     }
 
-    static get savedAnswer(): string {
-        return storage.getSearchArea();
+    static get savedAnswer(): Geolocation {
+        return storage.getJSON(defaultProps.name);
     }
 
-    static prettyPrintAnswer(answer: string): ?string {
-        return answer;
+    static prettyPrintAnswer(answer: Geolocation): string {
+        return answer.name;
     }
 
     static shouldInjectAccessPoints(): boolean {
-        // Currently only for locations in Victoria.
-        let victoriaRegex = /VIC(toria)?$/i;
-
-        return !!victoriaRegex.exec(storage.getSearchArea());
+        return false;
     }
 
     static getSearchQueryChanges(): SearchQueryChanges | null {
-        const searchQuery = {}
         /* Location/Area is required */
-        const searchArea = storage.getSearchArea();
-        if (!searchArea) {
+        const location = storage.getLocation();
+        if (!location) {
             return null;
         }
 
-        searchQuery.location = {}
-        searchQuery.location.name = searchArea
-
-        /* Coordinates are optional */
-        const userLocation = storage.getUserGeolocation();
-        if (userLocation && userLocation.name === searchArea) {
-            searchQuery.location.coordinates = userLocation;
-        }
-
-        return searchQuery;
+        return {location}
     }
 
     static summaryLabel: string = "Where are you looking for help?";
 
     static get summaryValue(): string {
-        return storage.getSearchArea();
+        return storage.getJSON(defaultProps.name)?.name;
     }
 
     static getShouldShowInSummary(): boolean {
@@ -188,16 +169,7 @@ class Location extends React.Component<
         async(input: string) => {
             let results
             try {
-                const issVersion = getIssVersion()
-                if (issVersion === "3") {
-                    const iss3Client = await getIssClient(issVersion)
-                    results = await iss3Client.searchLocations({
-                        name: input,
-                        kind: ["postcode", "suburb", "town"],
-                    })
-                } else if (issVersion === "4") {
-                    throw Error("ISS4 not yet supported")
-                }
+                results = await getLocationAutocompleteSuggestions(input)
             } catch (error) {
                 console.error(
                     "Error trying to get location autocomplete",
@@ -213,7 +185,7 @@ class Location extends React.Component<
             if (results) {
                 this.setState({
                     autocompletions: _.uniq(
-                        Array.from(results.objects),
+                        Array.from(results),
                         false,
                         ({name, state}) => name + state
                     ),
@@ -256,12 +228,7 @@ class Location extends React.Component<
 
     onNextStep(): void {
         if (this.state.selectedLocation) {
-            storage.setSearchArea(this.state.selectedLocation.name);
-            if (isGeolocation(this.state.selectedLocation)) {
-                storage.setUserGeolocation(this.state.selectedLocation);
-            } else {
-                storage.clearUserGeolocation()
-            }
+            storage.setJSON(this.props.name, this.state.selectedLocation)
         } else {
             console.error(
                 "We should not be able to progress without selecting a location"
@@ -318,11 +285,15 @@ class Location extends React.Component<
         }
     }
 
-    selectAutocomplete(result: ISS3AreaLocation): void {
+    async selectAutocomplete(result: LocationAutocompleteSuggestions): void {
         /* set the text box to this value
          * and remove the autocompletions */
+        const locationDetails = await getLocationDetails(result.id, result.locationType)
         const location: location = {
             name: `${result.name}, ${result.state}`,
+            latitude: locationDetails.centroid[1],
+            longitude: locationDetails.centroid[0],
+            approximate: true
         };
         this.setSelectedLocation(location);
         this.setState({

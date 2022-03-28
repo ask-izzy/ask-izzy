@@ -4,7 +4,7 @@ export default function requireVars() {
     const requiredVars = [
         "ISS_BASE_URL",
         "ISS_VERSION",
-        "ISS_API_KEY",
+        "LOCATIONS_API_BASE_URL",
         "GOOGLE_API_KEY",
     ]
 

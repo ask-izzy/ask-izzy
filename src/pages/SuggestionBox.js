@@ -25,10 +25,10 @@ function SuggestionBox(
     const editingPath = () =>
         `${ensureURLHasTrailingSlash(location.pathname)}personalise/summary`
 
-    const clearAnswers = () => {
-        const location = Storage.getSearchArea();
+    const clearAnswersExceptForLocation = () => {
+        const location = Storage.getJSON("location");
         Storage.clear();
-        Storage.setSearchArea(location)
+        location && Storage.getJSON("location")
     }
 
     const navLinks = () => (
@@ -39,7 +39,7 @@ function SuggestionBox(
                 </Link> or a {
                     <Link
                         to="/"
-                        onClick={clearAnswers}
+                        onClick={clearAnswersExceptForLocation}
                     >
                     new search
                     </Link>
@@ -52,7 +52,7 @@ function SuggestionBox(
                 </Link> or a {" "}
                 <Link
                     to="/"
-                    onClick={clearAnswers}
+                    onClick={clearAnswersExceptForLocation}
                 >
                     new search
                 </Link>

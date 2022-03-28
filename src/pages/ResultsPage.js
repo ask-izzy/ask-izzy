@@ -184,7 +184,7 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             searchError: undefined,
         });
 
-        if (storage.getSearchArea()) {
+        if (storage.getJSON("location") && storage.hasPreciseLocation()) {
             try {
                 attachTransportTimes(search.loadedServices)
                 // Update state to force re-render

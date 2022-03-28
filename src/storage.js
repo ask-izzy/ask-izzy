@@ -20,6 +20,7 @@ export type Geolocation = {
     name: string,
     latitude: number,
     longitude: number,
+    approximate?: boolean
 }
 
 const Storage = {
@@ -52,42 +53,21 @@ const Storage = {
         this.setItem("debug", debug);
     },
 
-    getSearchArea(): string {
-        return this.getItem("location") || "";
+    getLocation(): ?Geolocation {
+        return this.getJSON("location");
     },
 
-    setSearchArea(location: string): void {
-        this.setItem("location", location);
+    setLocation(location: Geolocation): void {
+        this.setJSON("location", location);
     },
 
-    clearSearchArea(): void {
+    clearLocation(): void {
         this.removeItem("location")
     },
 
-    getUserIsIndigenous(): boolean {
-        return this.getItem("sub-indigenous") ==
-            "Yes - show these first where possible" ||
-        this.getArray("demographics")
-            .includes("Aboriginal and/or Torres Strait Islander");
-    },
-
-    getUserGeolocation(): ?Geolocation {
-        const coords = JSON.parse(
-            sessionStore.getItem("coordinates") || "null"
-        );
-
-        return coords;
-    },
-
-    setUserGeolocation(location: Geolocation): void {
-        sessionStore.setItem(
-            "coordinates",
-            JSON.stringify(location)
-        );
-    },
-
-    clearUserGeolocation(): void {
-        this.removeItem("coordinates")
+    hasPreciseLocation(): boolean {
+        return this.getLocation() &&
+            !this.getLocation().approximate
     },
 
     getItem(key: string): ?string {
