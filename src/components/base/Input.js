@@ -1,5 +1,5 @@
 /* @flow */
-import React, {useRef} from "react"
+import React, {useRef, useState} from "react"
 import type {
     Node as ReactNode,
     AbstractComponent as ReactAbstractComponent,
@@ -41,6 +41,16 @@ function Input({
     autocompleteValues,
     ...otherProps
 }: Props, ref: ?refType): ReactNode {
+    //previousAutocompleteLength is used to solve regression AI-41 caused by
+    //not proper reloading of the input component. Overriding the function
+    //getA11yStatusMessage to use previousAutocompleteLength was necessary.
+    //previousAutocompleteLength is a list with the last two historical
+    //length values of autocompleteValues.
+    const
+        [
+            previousAutocompleteLength,
+            setPreviousAutocompleteLength,
+        ] = useState([0, 0])
     // Flow.js doesn't look like it has a way to type React.forwardRef() so that
     // it only accepts new style refs. So typechecking won't fail if a old style
     // ref is passed in but we can't use old style refs in this function so
@@ -59,6 +69,11 @@ function Input({
         autocompleteObjValues: Array<autocompleteObjValue>
 
     if (autocompleteValues) {
+        if (autocompleteValues.length !== previousAutocompleteLength[1]) {
+            setPreviousAutocompleteLength(
+                [previousAutocompleteLength[1], autocompleteValues.length]
+            )
+        }
         autocompleteObjValues = autocompleteValues.map(
             value => typeof value === "string" ? {value, label: value} : value
         )
@@ -70,6 +85,7 @@ function Input({
             onInputValueChange: ({inputValue}) => {
                 otherProps.onChange(inputValue)
             },
+            getA11yStatusMessage: getA11yStatusMessage,
         })
         const downshiftInputProps = downshiftCombobox.getInputProps({
             ref: inputRef,
@@ -111,6 +127,25 @@ function Input({
 
     const isAutocompleteSuggestions = downshiftCombobox?.isOpen &&
         (autocompleteValues?.length || initialSuggestions)
+
+    function getA11yStatusMessage({isOpen, resultCount, previousResultCount}) {
+        if (!isOpen) {
+            return ""
+        }
+
+        if (!resultCount) {
+            return "No results are available."
+        }
+
+        if (resultCount !== previousAutocompleteLength[0]) {
+            return `${resultCount} result${
+                resultCount === 1 ? " is" : "s are"
+            } available, use up and down arrow
+            keys to navigate. Press Enter key to select.`
+        }
+
+        return ""
+    }
 
     function renderClearBtn() {
         if (showClearButton && value) {
