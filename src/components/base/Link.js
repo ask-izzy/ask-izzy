@@ -12,7 +12,8 @@ type Props = {
     to: string,
     children?: React.Node,
     className?: string,
-    analyticsEvent?: AnalyticsEvent
+    analyticsEvent?: AnalyticsEvent,
+    onClick?: function
 }
 
 type State = {
@@ -120,6 +121,9 @@ export default class Link extends React.Component<Props, State> {
                 sendDirectlyToGA: true,
                 ...additionalAnalyticsEventDetails,
             });
+            if (typeof remainingProps.onClick === "function") {
+                remainingProps.onClick(event)
+            }
         }
 
         if (this.state.useRouterLinkElement) {

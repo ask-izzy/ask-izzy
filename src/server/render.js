@@ -85,6 +85,7 @@ export default function render(req, res, next) {
             "GOOGLE_TAG_MANAGER_ID",
             "GOOGLE_TAG_MANAGER_AUTH",
             "GOOGLE_TAG_MANAGER_ENV",
+            "USERSNAP_API_KEY",
             "PROXY_DOMAINS",
             "PROXY_PROTOCOL",
             "VERSION",
