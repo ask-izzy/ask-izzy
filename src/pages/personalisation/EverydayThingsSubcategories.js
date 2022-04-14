@@ -13,12 +13,11 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
         "Clothes and household goods": {
             serviceTypes: [
                 "Clothing",
-                "Material aid not elsewhere specified",
+                "Household goods and furniture",
             ],
         },
         "Transport": {
             serviceTypes: [
-                "Social support, escorting, visiting and personal transport",
                 "Community Transport",
             ],
         },
@@ -41,7 +40,6 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
         },
         "Personal products": {
             serviceTypes: [
-                "Provision of personal hygiene facilities",
                 "Toiletries",
             ],
         },

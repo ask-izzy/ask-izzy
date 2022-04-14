@@ -1,6 +1,10 @@
 /* @flow */
 import snakecaseKeys from "snakecase-keys"
-import {request, getRequestWithToken} from "../lib/requests.js"
+import {
+    request,
+    getRequestWithToken,
+    postRequestWithToken,
+} from "../lib/requests.js"
 type Props = {
     baseUrl: string,
     username: string,
@@ -119,6 +123,8 @@ class LocationsApiClient {
 
 
         const url = new URL(pathComponents.join("/") + "/", this.baseUrl)
+
+        console.log(pathComponents.join("/") + "/", this.baseUrl, url.href)
         const otherParamsArray = Object.entries(snakecaseKeys(otherParams))
         for (const [key, value] of otherParamsArray) {
             const arrayOfValues = Array.isArray(value) ? value : [value]
@@ -148,6 +154,84 @@ class LocationsApiClient {
 
         const url = new URL(pathComponents.join("/") + "/", this.baseUrl)
         return getRequestWithToken(url.href, this.authString)
+    }
+
+    async reverseGeocoder({
+        locationTypeToGet,
+        coordinates,
+        ...otherParams
+    }: Object): Promise<ResultsPage<Location>> {
+        const url = new URL(`geocoder/reverse/${locationTypeToGet}/`, this.baseUrl)
+
+        const otherParamsArray = [
+            ...Object.entries(coordinates),
+            ...Object.entries(snakecaseKeys(otherParams)),
+        ]
+        for (const [key, value] of otherParamsArray) {
+            const arrayOfValues = Array.isArray(value) ? value : [value]
+            for (const singleValue of arrayOfValues) {
+                url.searchParams.append(key, String(singleValue))
+            }
+        }
+        return getRequestWithToken(url.href, this.authString)
+    }
+
+    async getUnionList({
+        returnedLocationType,
+        intersectsWith,
+    }: Object): Promise<Location> {
+        let endpointLocationType, endpoint, requestBody
+
+        if (returnedLocationType === "lga") {
+            endpointLocationType = "lgas"
+        } else if (returnedLocationType === "suburb") {
+            endpointLocationType = "suburbs"
+        } else {
+            throw Error(
+                `Unknown location type to return: ${returnedLocationType}`
+            )
+        }
+
+        if (intersectsWith.geojson) {
+            endpoint = `union/lists/${endpointLocationType}_by_geojson/`
+            requestBody = intersectsWith.geojson
+        } else if (intersectsWith.states) {
+            endpoint = `union/lists/${endpointLocationType}_by_state/`
+        } else {
+            endpoint = `union/lists/${endpointLocationType}/`
+        }
+
+
+        const url = new URL(endpoint, this.baseUrl)
+        console.log(endpoint, this.baseUrl, url.href, requestBody)
+        return postRequestWithToken(url.href, this.authString, requestBody)
+    }
+
+}
+
+/*
+ * Create a polygon with a radius around a given point.
+
+ * 1 degree lat ~= 110km
+ * 1 degree lon ~= 111km
+ * Default radius 0.01 ~= 1.1km
+ */
+export function generateGeojsonOfCircle(
+    lat: number,
+    lon: number,
+    radius: number = 0.01
+): Object {
+    return {
+        "type": "Polygon",
+        "coordinates": [
+            [
+                [lon - radius, lat - radius],
+                [lon - radius, lat + radius],
+                [lon + radius, lat + radius],
+                [lon + radius, lat - radius],
+                [lon - radius, lat - radius],
+            ],
+        ],
     }
 
 }

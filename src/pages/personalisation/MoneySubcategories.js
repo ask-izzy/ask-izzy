@@ -17,13 +17,13 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
             serviceTypes: ["Financial Aid"],
         },
         "No or low interest loans": {
-            serviceTypes: ["Low-interest loans"],
+            serviceTypes: ["Low-interest loans", "NILS"],
         },
         "Financial counselling": {
             serviceTypes: ["Financial Counselling"],
         },
         "Bond or rental assistance": {
-            serviceTypes: ["Bond Scheme", "Financial Aid"],
+            serviceTypes: ["Bond Scheme", "Housing Establishment Fund"],
         },
         "Gambling counselling": {
             serviceTypes: ["Gambling Counselling"],

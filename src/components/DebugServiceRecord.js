@@ -15,6 +15,10 @@ export default class DebugServiceRecord extends React.Component<Props, void> {
         /* eslint-disable no-unused-vars */
         const {_explanation, _siblingServices, ...rest} = this.props.object;
 
+        return <>
+            <pre>{JSON.stringify(rest.service_types.map(type => type.name), null, 4)}</pre>
+        </>
+
         return (
             <DebugContainer message="ISS Object">
                 <div className="DebugServiceRecord">

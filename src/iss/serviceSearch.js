@@ -204,6 +204,7 @@ export function isDisabilityAdvocacySearch(
         "Disability Advocacy Providers"
 }
 
+// eslint-disable-next-line complexity
 export function convertIzzySearchQueryToIss(
     query: IzzySearchQuery
 ): ISS4SearchQuery {
@@ -235,6 +236,14 @@ export function convertIzzySearchQueryToIss(
         })
     }
 
+    if (query.not?.serviceTypes) {
+        issQuery.filters?.all?.push({
+            none: {
+                service_types: query.not?.serviceTypes,
+            },
+        })
+    }
+
     if (query.clientGenders) {
         const genderBoost = query.clientGenders.map(
             gender => ({
@@ -263,8 +272,10 @@ export function convertIzzySearchQueryToIss(
             operation: "multiply",
             factor: 1.5,
         }
-        const coordinates = location.coordinates
+        console.log('location', location)
+        const {coordinates, containingAndAdjacentSuburbs, lga} = location
         if (coordinates) {
+
             const center = `${coordinates.latitude},${coordinates.longitude}`
             issQuery.boosts.location_approximate_geopoint = [
                 {
@@ -274,17 +285,55 @@ export function convertIzzySearchQueryToIss(
                     factor: 7,
                 },
             ]
-
-            issQuery.filters?.all?.push(
-                {
-                    location_approximate_geopoint: {
-                        center,
-                        distance: 300,
-                        unit: "km",
-                    },
-                }
-            )
         }
+
+        if (containingAndAdjacentSuburbs) {
+
+            const containingAndAdjacentPostcodes = containingAndAdjacentSuburbs
+                .map(suburb => suburb.match(/\s\d{4}$/)?.[0]?.trim())
+                // Just unique postcodes (only include first occurrence)
+                .filter(
+                    (postcode, index, postcodes) =>
+                        postcodes.indexOf(postcode) === index
+                )
+
+
+            issQuery.boosts.location_postcode = [
+                {
+                    "type": "value",
+                    "value": containingAndAdjacentPostcodes,
+                    "operation": "multiply",
+                    "factor": 2,
+                },
+            ]
+        }
+
+        if (lga) {
+            const containingAndAdjacentLGAs = [
+                lga.name,
+                ...lga.adjacent_lgas.map(lga => lga.name)
+            ]
+            issQuery.boosts.location_lga = [
+                {
+                    "type": "value",
+                    "value": containingAndAdjacentLGAs,
+                    "operation": "multiply",
+                    "factor": 2,
+                },
+            ]
+
+            issQuery.boosts.catchment = [
+                {
+                    "type": "value",
+                    "value": lga.name,
+                    "operation": "multiply",
+                    "factor": 2,
+                },
+            ]
+
+        }
+
+
     }
 
     return issQuery

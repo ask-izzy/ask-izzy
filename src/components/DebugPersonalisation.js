@@ -10,7 +10,10 @@ import {
     buildSearchQueryFromModifiers,
 } from "../iss/searchQueryBuilder"
 import type {SearchQueryModifier, SearchQuery} from "../iss/searchQueryBuilder"
-import {convertIzzySearchQueryToIss3} from "../iss/serviceSearch"
+import {
+    convertIzzySearchQueryToIss3,
+    convertIzzySearchQueryToIss,
+} from "../iss/serviceSearch"
 import Button from "./base/Button"
 import Diff from "./debug/Diff"
 import type { DiffType } from "./debug/Diff"
@@ -19,6 +22,7 @@ import {useRouterContext} from "../contexts/router-context"
 import IssParamsOverrideControls from
     "../components/debug/IssParamsOverrideControls";
 import Storage from "../storage";
+import { getIssVersion } from "../iss/client"
 
 type Props = {|
     issQuery: SearchQuery,
@@ -137,10 +141,11 @@ function getDiffedLayers(
 
 
         if (convertToISSQuery) {
-            mergedUpToPreviousLayer = convertIzzySearchQueryToIss3(
+            const convertToIssQuery = getIssVersion() === "3" ? convertIzzySearchQueryToIss3 : convertIzzySearchQueryToIss
+            mergedUpToPreviousLayer = convertToIssQuery(
                 mergedUpToPreviousLayer
             )
-            mergedUpToIncludingLayer = convertIzzySearchQueryToIss3(
+            mergedUpToIncludingLayer = convertToIssQuery(
                 mergedUpToIncludingLayer
             )
         }

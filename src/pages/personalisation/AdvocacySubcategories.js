@@ -14,6 +14,7 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
                 "Legal Advice",
                 "Legal Aid",
                 "Legal Information",
+                "Legal Representation",
             ],
         },
         "Help with fines": {

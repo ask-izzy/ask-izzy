@@ -16,15 +16,15 @@ export function getIssVersion(): "3" | "4" {
 let iss3Client: ISS3Client,
     iss4Client: ISS4Client;
 
-declare function getIssClient(version: "3"): Promise<ISS3Client>
-declare function getIssClient(version: "4"): Promise<ISS4Client>
+declare function getIssClient(version: "3"): ISS3Client
+declare function getIssClient(version: "4"): ISS4Client
 
-async function getIssClient(
+function getIssClient(
     version: "3" | "4"
-): Promise<ISS3Client | ISS4Client> {
+): ISS3Client | ISS4Client {
     if (version === "3") {
         if (!iss3Client) {
-            iss3Client = await createClient(
+            iss3Client = createClient(
                 {
                     baseUrl: window.ISS_BASE_URL,
                     key: window.ISS_API_KEY,
@@ -35,7 +35,7 @@ async function getIssClient(
         return iss3Client
     } else {
         if (!iss4Client) {
-            iss4Client = await createClient(
+            iss4Client = createClient(
                 {
                     baseUrl: window.ISS_BASE_URL,
                     token: window.ISS_API_TOKEN,

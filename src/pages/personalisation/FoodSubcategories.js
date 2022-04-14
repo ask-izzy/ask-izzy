@@ -15,10 +15,10 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
             serviceTypes: ["Meals"],
         },
         "Food parcels / groceries": {
-            serviceTypes: ["Meals"],
+            serviceTypes: ["Food Parcels"],
         },
         "Food vouchers": {
-            serviceTypes: ["Meals"],
+            serviceTypes: ["Food Vouchers"],
         },
     },
     descriptionsForAnswers: {

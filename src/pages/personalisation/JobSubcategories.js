@@ -12,10 +12,14 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
         "Finding a job": {
             serviceTypes: [
                 "Employment",
-                "-Support for business",
-                "-Vocational Rehabilitation",
-                "-Workplace Relations",
             ],
+            not: {
+                serviceTypes: [
+                    "Support for business",
+                    "Vocational Rehabilitation",
+                    "Workplace Relations",
+                ],
+            },
         },
         "Supported employment": {
             serviceTypes: ["Supported Employment"],

@@ -13,7 +13,6 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
         "Emergency accommodation": {
             serviceTypes: [
                 "Refuge/ Crisis accommodation",
-                "Short-Term Accommodation",
             ],
         },
         "Homelessness support": {
@@ -23,7 +22,7 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
             serviceTypes: ["Social Housing"],
         },
         "Bond or rent help": {
-            serviceTypes: ["Emergency financial assistance for accommodation"],
+            serviceTypes: ["Bond Scheme", "Housing Establishment Fund"],
         },
         "Rental disputes": {
             serviceTypes: [],

@@ -10,7 +10,10 @@ import storage from "../storage";
 
 export type SearchQuery = {|
     ...SearchQueryArrayProps,
-    ...SearchQueryOtherProps
+    ...SearchQueryOtherProps,
+    not?: {
+        ...SearchQueryNotProps
+    }
 |}
 
 export type SearchQueryChanges = {|
@@ -23,7 +26,10 @@ export type SearchQueryChanges = {|
     $concat?: SearchQueryArrayProps,
     $applyIfShouldInjectAccessPoints?: SearchQueryChanges,
     ...SearchQueryArrayProps,
-    ...SearchQueryOtherProps
+    ...SearchQueryOtherProps,
+    not?: {
+        ...SearchQueryNotProps
+    }
 |} | {||}
 
 export type SearchQueryModifier = {
@@ -54,6 +60,11 @@ type SearchQueryArrayProps = {|
     serviceTypesRaw?: Array<string>, // This should be removed after ISS3 is no
         // longer supported
 |}
+
+type SearchQueryNotProps = {|
+    serviceTypes?: $PropertyType<SearchQueryArrayProps, 'serviceTypes'>
+|}
+
 type SearchQueryOtherProps = {|
     catchment?: "prefer"|"true"|"false",
     location?: {

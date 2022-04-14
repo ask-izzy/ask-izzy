@@ -293,7 +293,9 @@ class Location extends React.Component<
             name: `${result.name}, ${result.state}`,
             latitude: locationDetails.centroid[1],
             longitude: locationDetails.centroid[0],
-            approximate: true
+            approximate: true,
+            containingAndAdjacentSuburbs: locationDetails.containingAndAdjacentSuburbs,
+            lga: locationDetails.lga
         };
         this.setSelectedLocation(location);
         this.setState({
