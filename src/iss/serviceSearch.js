@@ -273,19 +273,17 @@ export function convertIzzySearchQueryToIss(
             factor: 1.5,
         }
         console.log('location', location)
-        const {coordinates, containingAndAdjacentSuburbs, lga} = location
-        if (coordinates) {
+        const {containingAndAdjacentSuburbs, lga} = location
 
-            const center = `${coordinates.latitude},${coordinates.longitude}`
-            issQuery.boosts.location_approximate_geopoint = [
-                {
-                    type: "proximity",
-                    function: "linear",
-                    center,
-                    factor: 7,
-                },
-            ]
-        }
+        const center = `${location.latitude},${location.longitude}`
+        issQuery.boosts.location_approximate_geopoint = [
+            {
+                type: "proximity",
+                function: "linear",
+                center,
+                factor: 7,
+            },
+        ]
 
         if (containingAndAdjacentSuburbs) {
 
