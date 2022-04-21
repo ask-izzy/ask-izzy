@@ -9,7 +9,7 @@ import DomesticViolenceLink from "../../components/DomesticViolenceLink";
 import DfvDemographics from "./DfvDemographics";
 import storage from "../../storage";
 
-import type { serviceSearchRequest } from "../../iss/serviceSearch";
+import type { SearchQueryChanges } from "../../iss/searchQueryBuilder";
 import type {
     PersonalisationNonQuestionPageDefaultProps,
 } from "../../utils/personalisation"
@@ -42,8 +42,8 @@ class UsingViolenceScreen extends BaseStaticPersonalisation {
         );
     }
 
-    static getSearch(request: serviceSearchRequest): ? serviceSearchRequest {
-        return this.savedAnswer ? request : null;
+    static getSearchQueryChanges(): SearchQueryChanges | null {
+        return this.savedAnswer ? {} : null;
     }
 
     onDoneTouchTap(): void {

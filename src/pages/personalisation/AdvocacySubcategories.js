@@ -1,6 +1,5 @@
 /* @flow */
 import BaseQuestion from "./BaseQuestion";
-import { remove } from "../../iss/ServiceSearchRequest";
 import type {
     PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation"
@@ -10,18 +9,48 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     name: "sub-advocacy",
     question: "What do you want help with or advice about?",
     possibleAnswers: {
-        "Making a complaint":
-            remove("consumer issues mediation discrimination")
-                .remove("disputes advocacy")
-                .append("ombudsman complaint"),
-        "Get advice on your rights":
-            remove("consumer issues mediation discrimination")
-                .remove("disputes advocacy")
-                .append("rights advice"),
-        "Someone to speak for you":
-            remove("consumer issues mediation discrimination")
-                .remove("disputes advocacy")
-                .append("advocacy"),
+        "Making a complaint": {
+            $concat: {
+                term: ["ombudsman", "complaint"],
+            },
+            $removeElms: {
+                term: [
+                    "consumer",
+                    "issues",
+                    "mediation",
+                    "discrimination",
+                    "disputes advocacy",
+                ],
+            },
+        },
+        "Get advice on your rights": {
+            $concat: {
+                term: ["rights", "advice"],
+            },
+            $removeElms: {
+                term: [
+                    "consumer",
+                    "issues",
+                    "mediation",
+                    "discrimination",
+                    "disputes advocacy",
+                ],
+            },
+        },
+        "Someone to speak for you": {
+            $concat: {
+                term: ["advocacy"],
+            },
+            $removeElms: {
+                term: [
+                    "consumer",
+                    "issues",
+                    "mediation",
+                    "discrimination",
+                    "disputes advocacy",
+                ],
+            },
+        },
     },
     showSupportSearchBar: true,
 };

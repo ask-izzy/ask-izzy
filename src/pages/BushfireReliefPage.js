@@ -31,7 +31,7 @@ class BushfireReliefStaticPage extends React.Component<{ mobileView: boolean }> 
                 </h2>
                 <p>
                     You can use Ask Izzy to{" "}
-                    <Link to="/search/bushfires -(closed due to the recent bushfires)/personalise">
+                    <Link to={"/search/bushfires -\"closed due to the recent bushfires\"/personalise"}>
                         find nearby bushfire support
                     </Link>. This includes information about emergency relief
                     centres, but please note that these may open and close on

@@ -3,7 +3,6 @@ import * as React from "react";
 import type {Node as ReactNode} from "react";
 import BaseQuestion from "./BaseQuestion";
 
-import { append } from "../../iss/ServiceSearchRequest";
 import icons from "../../icons";
 import storage from "../../storage";
 
@@ -32,14 +31,25 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     info: "All of your answers are private and anonymous.",
     multipleChoice: true,
     possibleAnswers: {
-        "Aboriginal and/or Torres Strait Islander":
-            append("(Aboriginals & Torres Strait Islanders)"),
-        "Experiencing violence": append(""),
-        "Under 18": append(""),
-        "LGBTIQA+": append(""),
-        "Culturally and linguistically diverse": append("ethnic"),
-        "Person seeking asylum": append("refugees"),
-        "Using violence": append(""),
+        "Aboriginal and/or Torres Strait Islander": {
+            $concat: {
+                term: ["\"Aboriginals & Torres Strait Islanders\""],
+            },
+        },
+        "Experiencing violence": {},
+        "Under 18": {},
+        "LGBTIQA+": {},
+        "Culturally and linguistically diverse": {
+            $concat: {
+                term: ["ethnic"],
+            },
+        },
+        "Person seeking asylum": {
+            $concat: {
+                term: ["refugees"],
+            },
+        },
+        "Using violence": {},
     },
     icons: {
         "Aboriginal and/or Torres Strait Islander": icons.DemographicAtsi,

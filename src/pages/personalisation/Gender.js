@@ -1,6 +1,5 @@
 /* @flow */
 import BaseQuestion from "./BaseQuestion";
-import { append } from "../../iss/ServiceSearchRequest";
 import type {
     PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation"
@@ -10,15 +9,21 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     name: "gender",
     question: "Do you identify as…",
     possibleAnswers: {
-        "Female": append({
-            client_gender: ["f", "u"],
-        }),
-        "Male": append({
-            client_gender: ["m", "u"],
-        }),
-        "Trans and Gender Diverse": append({
-            client_gender: ["x", "u"],
-        }),
+        "Female": {
+            $concat: {
+                clientGenders: ["Female", "unspecified"],
+            },
+        },
+        "Male": {
+            $concat: {
+                clientGenders: ["Male", "unspecified"],
+            },
+        },
+        "Trans and Gender Diverse": {
+            $concat: {
+                clientGenders: ["Diverse", "unspecified"],
+            },
+        },
     },
 };
 export default class Gender extends BaseQuestion {

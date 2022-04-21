@@ -3,7 +3,7 @@ import * as React from "react";
 
 import components from "../../components";
 import storage from "../../storage";
-import type {serviceSearchRequest} from "../../iss/serviceSearch";
+import type {SearchQueryChanges} from "../../iss/searchQueryBuilder";
 import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import ScreenReader from "../../components/ScreenReader";
@@ -36,11 +36,11 @@ class WhoIsLookingForHelp extends React.Component<
 
     static title: string = "Who is looking for help?";
 
-    static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
+    static getSearchQueryChanges(): SearchQueryChanges | null {
         if (!WhoIsLookingForHelp.savedAnswer) {
             return null
         }
-        return request;
+        return {}
     }
 
     constructor(props: Object) {
