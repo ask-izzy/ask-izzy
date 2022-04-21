@@ -10,15 +10,18 @@ import {ensureURLHasTrailingSlash} from "../utils/url"
 import {useRouterContext} from "../contexts/router-context"
 import Button from "../components/base/Button"
 import storage from "../storage"
-import LocationPage from "../pages/personalisation/Location"
+import LocationPage from "../constants/personalisation-pages/Location"
+import {
+    getSavedPersonalisationAnswer,
+} from "../utils/personalisation"
 import {
     getPersonalisationPages,
     getPersonalisationPagesToShow,
     getCategoryFromRouter,
     currentRouteIsPersonalised,
-} from "../utils/personalisation"
+} from "../utils/routing"
 import usePostInitialRender from "../hooks/usePostInitialRender"
-import type {PersonalisationPage} from "../utils/personalisation"
+import type {PersonalisationPage} from "../../flow/personalisation-page"
 import SearchIcon from "../icons/Search"
 import ProgressBar from "./general/ProgressBar"
 import type { RouterContextObject } from "../contexts/router-context";
@@ -57,7 +60,7 @@ export default function QuestionStepper({
 
     function renderClearLocationButton() {
         const locationIsSet = personalisationPages.some(
-            page => page.defaultProps.name === "location"
+            page => page.name === "location"
         )
         if (!locationIsSet || !showClearLocation) {
             return null
@@ -111,7 +114,7 @@ export default function QuestionStepper({
                     aria-label="Your answers to previous questions"
                 >
                     {personalisationPages.map((page, index) =>
-                        <li key={page.defaultProps.name}>
+                        <li key={page.name}>
                             <QuestionStepperBreadcrumb
                                 personalisationPage={page}
                                 personalisationPages={personalisationPages}
@@ -159,9 +162,9 @@ export const getPersonlisationPagesForQuestionStepper = (
     }
 
     return pages
-        .filter(page => !page.defaultProps.noQuestionStepperBreadcrumb)
+        .filter(page => !page.noQuestionStepperBreadcrumb)
         .filter(page => {
-            const answer = page.savedAnswer
+            const answer = getSavedPersonalisationAnswer(page)
             if (answer instanceof Array) {
                 return answer.length > 0
             } else {
@@ -174,7 +177,7 @@ export function getTotalSteps(
     router: $PropertyType<RouterContextObject, 'router'>,
 ): number {
     const pages = getPersonalisationPages(router)
-        .filter(page => !page.defaultProps.noQuestionStepperStep)
+        .filter(page => !page.noQuestionStepperStep)
 
     return pages.length
 }
@@ -183,7 +186,7 @@ export function getStepsRemaining(
     router: $PropertyType<RouterContextObject, 'router'>,
 ): number {
     const pagesToShow = getPersonalisationPagesToShow(router)
-        .filter(page => !page.defaultProps.noQuestionStepperStep)
+        .filter(page => !page.noQuestionStepperStep)
 
     return pagesToShow.length
 }

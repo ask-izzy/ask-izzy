@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from "react";
-import PropTypes from "proptypes";
 import Link from "./base/Link";
 
 type Props = {
@@ -14,10 +13,6 @@ type Props = {
 }
 
 export default class BaseLogoWithTextBox extends React.Component<Props, void> {
-    static contextTypes: any = {
-        router: PropTypes.object.isRequired,
-    };
-
     onClickBox(): void {
         throw new Error("The onClickBox method should be implemented.");
     }

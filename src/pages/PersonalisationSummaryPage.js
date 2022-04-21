@@ -12,15 +12,20 @@ import {isDisabilityAdvocacySearch} from "../iss/serviceSearch"
 import {
     getFullPathForPersonalisationSubpath,
     navigateToPersonalisationSubpath,
-    getCurrentPersonalisationPage,
-    getPersonalisationPages,
     getBannerName,
-    getCategoryFromRouter,
     setLocationFromUrl,
+    getSavedPersonalisationAnswer,
 } from "../utils/personalisation"
+import {
+    getPersonalisationPages,
+    getCurrentPersonalisationPage,
+    getCategoryFromRouter,
+} from "../utils/routing"
 import type {
     PersonalisationPage,
-} from "../utils/personalisation"
+} from "../../flow/personalisation-page"
+import RenderPersonalisationPage
+    from "./personalisation/RenderPersonalisationPage"
 
 class PersonalisationSummaryPage extends React.Component<{}, {}> {
 
@@ -38,7 +43,6 @@ class PersonalisationSummaryPage extends React.Component<{}, {}> {
     }
 
     nextStep: (() => void) = () => {
-        this.refs.subpage?.onNextStep?.()
         this.goBack();
     }
 
@@ -69,10 +73,8 @@ class PersonalisationSummaryPage extends React.Component<{}, {}> {
             this.context.router
         )
 
-        return personalisationPages.filter(component =>
-            (typeof component.getShouldShowInSummary === "function") &&
-            // $FlowIgnore
-            component.getShouldShowInSummary()
+        return personalisationPages.filter(page =>
+            page.shouldShowInSummary ?? true
         );
     }
 
@@ -88,33 +90,56 @@ class PersonalisationSummaryPage extends React.Component<{}, {}> {
     </>
 
     render(): ReactNode {
-        const Subpage = getCurrentPersonalisationPage(
+        const personalisationPage = getCurrentPersonalisationPage(
             this.context.router
         );
 
         return (
             <div className="PersonalisationPage">
-                {Subpage ?
-                    this.renderSubpage(Subpage)
+                {personalisationPage ?
+                    <RenderPersonalisationPage
+                        personalisationPage={personalisationPage}
+                        onDoneTouchTap={this.nextStep}
+                        backToAnswers={true}
+                        goBack={() => this.goBack()}
+                    />
                     : this.renderSummary()
                 }
             </div>
         );
     }
 
-    renderSubpage: ((Subpage: PersonalisationPage) => ReactNode) =
-        Subpage => (
-            <Subpage
-                ref="subpage"
-                onDoneTouchTap={this.nextStep}
-                category={getCategoryFromRouter(this.context.router)}
-                nextStep={this.nextStep}
-                backToAnswers={true}
-                goBack={() => this.goBack()}
-            />
-        )
-
     renderSummary(): ReactNode {
+        function getFormattedQuestion(
+            personalisationPage: PersonalisationPage
+        ): string | null {
+            return personalisationPage.summaryLabel ||
+                personalisationPage.question || null
+        }
+        function getFormattedAnswers(personalisationPage: PersonalisationPage) {
+            if (personalisationPage.summaryValue) {
+                return personalisationPage.summaryValue
+            }
+            const savedAnswer = getSavedPersonalisationAnswer(
+                personalisationPage
+            )
+            if (!savedAnswer) {
+                return "None selected";
+            } else if (savedAnswer instanceof Array) {
+                const nSelected = savedAnswer.length;
+
+                if (nSelected === 0) {
+                    return "None selected";
+                } else if (nSelected > 3) {
+                    return `${nSelected} selected`;
+                } else {
+                    return savedAnswer.join(", ")
+                }
+            } else {
+                return savedAnswer
+            }
+        }
+
         return (
             <div>
                 <components.HeaderBar
@@ -142,12 +167,12 @@ class PersonalisationSummaryPage extends React.Component<{}, {}> {
                     <div className="List">
                         <ul>
                             {this.personalisationPages.map(
-                                (component, index) => {
+                                (page, index) => {
                                     const toUrl =
                                         getFullPathForPersonalisationSubpath(
                                             this.context.router,
                                             `personalise/summary/${
-                                                component.defaultProps.name
+                                                page.name
                                             }`
                                         );
                                     return (
@@ -156,12 +181,10 @@ class PersonalisationSummaryPage extends React.Component<{}, {}> {
                                                 className="SummaryItem"
                                                 to={toUrl}
                                                 primaryText={
-                                                    component.summaryLabel ?
-                                                        component.summaryLabel
-                                                        : ""
+                                                    getFormattedQuestion(page)
                                                 }
                                                 secondaryText={
-                                                    component.summaryValue || ""
+                                                    getFormattedAnswers(page)
                                                 }
                                             />
                                         </li>

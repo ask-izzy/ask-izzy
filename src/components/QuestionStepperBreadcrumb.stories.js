@@ -11,8 +11,8 @@ import {
     setPersonalisationAnswers,
     setRouterContext,
 } from "../storybook/decorators";
-import LocationPage from "../pages/personalisation/Location"
-import DemographicsPage from "../pages/personalisation/Demographics"
+import LocationPage from "../constants/personalisation-pages/Location"
+import DemographicsPage from "../constants/personalisation-pages/Demographics"
 
 export default {
     title: "App Components/QuestionStepperBreadcrumb",
@@ -157,14 +157,3 @@ DemographicsQuestionWithTruncatedAnswersOnDemographicsPage.parameters = {
         },
     },
 }
-// Example.parameters = {
-//     context: {
-//         personalisationAnswers: {
-//             location: "Richmond, VIC",
-//             "sleep-tonight": "Yes",
-//             gender: "Female",
-//             age: "27 to 39",
-//             demographics: ["Couples", "Have pets"],
-//         },
-//     },
-// }

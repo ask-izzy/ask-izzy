@@ -2,9 +2,12 @@
 import objectMerge, {utils} from "@clevercanyon/js-object-mc";
 import type { RouterContextObject } from "../contexts/router-context";
 import {
-    getPersonalisationPages,
-    getCategoryFromRouter,
+    getSearchQueryChanges,
 } from "../utils/personalisation"
+import {
+    getCategoryFromRouter,
+    getPersonalisationPages,
+} from "../utils/routing"
 import type {Geolocation} from "../storage";
 import storage from "../storage";
 
@@ -160,21 +163,15 @@ export function getSearchQueryModifiers(
 
     const personalisationPages = getPersonalisationPages(router)
 
-    for (let item of personalisationPages) {
-        // Ideally every personalisation page object should
-        // have the getSearchQueryChanges property but some
-        // pages like src/pages/personalisation/OnlineSafetyScreen.js
-        // have a wrapper component around them.
-        if (item.getSearchQueryChanges) {
-            const changes = item.getSearchQueryChanges()
-            layers.push(changes ?
-                {
-                    name: item.name,
-                    changes,
-                }
-                : null
-            );
-        }
+    for (let page of personalisationPages) {
+        const changes = getSearchQueryChanges(page)
+        layers.push(changes ?
+            {
+                name: page.name,
+                changes,
+            }
+            : null
+        );
     }
 
     return layers

@@ -1,4 +1,4 @@
-/* $FlowIgnore */
+/* @flow */
 /*
  * Definitions for Geolocation related steps
  */
@@ -6,39 +6,40 @@
 /* eslint-disable no-use-before-define */
 
 import Yadda from "yadda";
+import type { LibraryEnglish as YaddaLibraryEnglish } from "yadda"
 import Webdriver from "selenium-webdriver";
 declare var IzzyStorage: Object;
 
 import dictionary from "../support/dictionary";
 import { gotoUrl } from "../support/webdriver";
 import WhoIsLookingForHelpPage from
-    "../../src/pages/personalisation/WhoIsLookingForHelp"
-import SleepTonightPage from "../../src/pages/personalisation/SleepTonight"
-import DemographicsPage from "../../src/pages/personalisation/Demographics"
-import GenderPage from "../../src/pages/personalisation/Gender"
-import AgePage from "../../src/pages/personalisation/Age"
+    "../../src/constants/personalisation-pages/WhoIsLookingForHelp"
+import SleepTonightPage from
+    "../../src/constants/personalisation-pages/SleepTonight"
+import DemographicsPage from
+    "../../src/constants/personalisation-pages/Demographics"
+import GenderPage from "../../src/constants/personalisation-pages/Gender"
+import AgePage from "../../src/constants/personalisation-pages/Age"
 
-module.exports = (function() {
-    return Yadda.localisation.English.library(dictionary)
-        .given("I have (somewhere|nowhere) to sleep tonight", setSleepTonight)
-        .given("I need nothing for $STRING", setSubcategoryItemsNone)
-        .given("I need the following for $STRING\n$lines", setSubcategoryItems)
-        .given("I need the following for $STRING: $STRING", setSubcategoryItems)
-        .given(
-            "I need help for (myself|a client or customer|a friend or family " +
-                "member)",
-            setHelpForWhom
-        )
-        .given("I am not part of any relevant demographics",
-            setDemographicsNone
-        )
-        .given("I am not interested in any subcategory", setSubcategoriesNone)
-        .given("I am part of the following demographics\n$lines",
-            setDemographics
-        )
-        .given("my gender is (female|male)", setGender)
-        .given("I am (17|27|77) years old", setAgeTo)
-})();
+module.exports = (Yadda.localisation.English.library(dictionary)
+    .given("I have (somewhere|nowhere) to sleep tonight", setSleepTonight)
+    .given("I need nothing for $STRING", setSubcategoryItemsNone)
+    .given("I need the following for $STRING\n$lines", setSubcategoryItems)
+    .given("I need the following for $STRING: $STRING", setSubcategoryItems)
+    .given(
+        "I need help for (myself|a client or customer|a friend or family " +
+            "member)",
+        setHelpForWhom
+    )
+    .given("I am not part of any relevant demographics",
+        setDemographicsNone
+    )
+    .given("I am not interested in any subcategory", setSubcategoriesNone)
+    .given("I am part of the following demographics\n$lines",
+        setDemographics
+    )
+    .given("my gender is (female|male)", setGender)
+    .given("I am (17|27|77) years old", setAgeTo): YaddaLibraryEnglish);
 
 // TODO: Question answers should be validated against what the actually answers
 // for question pages are so to avoid ugly code duplication here but that's not
@@ -48,7 +49,7 @@ module.exports = (function() {
 async function setSleepTonight(answer: string): Promise<void> {
     await setStorageValue(
         this.driver,
-        SleepTonightPage.defaultProps.name,
+        SleepTonightPage.name,
         ({
             "somewhere": "Yes",
             "nowhere": "No",
@@ -59,7 +60,7 @@ async function setSleepTonight(answer: string): Promise<void> {
 async function setHelpForWhom(answer: string): Promise<void> {
     await setStorageValue(
         this.driver,
-        WhoIsLookingForHelpPage.defaultProps.name,
+        WhoIsLookingForHelpPage.name,
         ({
             "myself": "User Myself",
             "a client or customer": "User Worker",
@@ -88,7 +89,7 @@ async function setDemographics(
 ): Promise<void> {
     await setStorageValue(
         this.driver,
-        DemographicsPage.defaultProps.name,
+        DemographicsPage.name,
         JSON.stringify(items)
     );
 }
@@ -121,7 +122,7 @@ async function setSubcategoriesNone(
 async function setAgeTo(age: string): Promise<void> {
     await setStorageValue(
         this.driver,
-        AgePage.defaultProps.name,
+        AgePage.name,
         ({
             "17": "0 to 17",
             "27": "27 to 39",
@@ -133,7 +134,7 @@ async function setAgeTo(age: string): Promise<void> {
 async function setGender(gender: string): Promise<void> {
     await setStorageValue(
         this.driver,
-        GenderPage.defaultProps.name,
+        GenderPage.name,
         ({
             "female": "Female",
             "male": "Male",
@@ -142,7 +143,7 @@ async function setGender(gender: string): Promise<void> {
 }
 
 async function setStorageValue(
-    driver: Webdriver.WebDriver,
+    driver: typeof Webdriver.WebDriver,
     key: string,
     value: string | Array<string>,
 ): Promise<void> {

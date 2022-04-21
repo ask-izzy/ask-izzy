@@ -1,15 +1,13 @@
 /* @flow */
 import storage from "../storage";
 
-import AreYouSafe from "../pages/personalisation/AreYouSafe";
-import OnlineSafetyScreen from "../pages/personalisation/OnlineSafetyScreen";
 import {titleize} from "underscore.string";
 import {getCategory} from "../constants/categories";
 import Storage from "../storage";
 import {
     getCurrentPersonalisationPage,
     currentRouteIsPersonalised,
-} from "./personalisation"
+} from "../utils/routing"
 import type { RouterContextObject } from "../contexts/router-context";
 
 export function stateFromLocation(): string {
@@ -27,17 +25,6 @@ export function stateFromLocation(): string {
     const location = storage.getSearchArea()
     const state = location.split(",").pop().trim()
     return states.includes(state) ? state : ""
-}
-
-export const resetDfvOptions = (): void => {
-    if (Boolean(AreYouSafe.savedAnswer) &&
-        [
-            "No",
-            "I'm not sure",
-        ].indexOf(AreYouSafe.savedAnswer) > -1 &&
-        !OnlineSafetyScreen.savedAnswer) {
-        storage.removeItem(AreYouSafe.defaultProps.name);
-    }
 }
 
 // eslint-disable-next-line complexity
@@ -102,6 +89,5 @@ export const makeTitle = (
 }
 
 export default {
-    resetDfvOptions,
     makeTitle,
 }
