@@ -11,7 +11,6 @@ type Props = {
     byline: string,
     icon: React$ComponentType<any>,
     searchQueryChanges: SearchQueryChanges,
-    info?: string | React$Element<any>,
     personalisation: Array<PersonalisationPage>,
 };
 
@@ -21,7 +20,6 @@ export default class Category {
     byline: string;
     icon: React$ComponentType<any>;
     searchQueryChanges: SearchQueryChanges;
-    info: ?string|React$Element<any>;
     // I can't get flow to happily check that these are react classes.
     personalisation: Array<any>;
 
@@ -31,7 +29,6 @@ export default class Category {
         this.icon = props.icon;
         this.key = slugify(this.name);
         this.searchQueryChanges = props.searchQueryChanges;
-        this.info = props.info;
         this.personalisation = props.personalisation;
     }
 }

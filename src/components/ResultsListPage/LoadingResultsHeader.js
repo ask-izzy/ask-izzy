@@ -8,9 +8,6 @@ import routerContext from "../../contexts/router-context";
 import {getBannerName} from "../../utils/personalisation"
 import type Service from "../../iss/Service"
 
-const InfoMessage = (category: Object) =>
-    <div>{category.info}</div>;
-
 const formatResultsPageHeading = (title: string) => {
     switch (title) {
     case "finding work":
@@ -110,11 +107,6 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                                 title.toLocaleLowerCase()
                             )
                             : primaryText(category)
-                    }
-                    secondaryText={category?.info &&
-                        <div>
-                            <InfoMessage {...category} />
-                        </div>
                     }
                     bannerName={bannerName}
                 />
