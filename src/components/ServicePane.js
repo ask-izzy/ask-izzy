@@ -47,8 +47,8 @@ function ServicePane({service}: Props): ReactNode {
 
 
     const getSiblingServices = async(): Promise<void> => {
-        let response = await service.getSiblingServices();
-        setSiblings(response.services)
+        const services = await service.getSiblingServices();
+        setSiblings(services)
     }
 
 
