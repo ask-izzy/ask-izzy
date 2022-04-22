@@ -1,7 +1,10 @@
 /* @flow */
 import lru from "lru-cache";
 
-import Service, {attachTransportTimes} from "./Service";
+import Service from "./Service";
+import {
+    attachTransportTimes,
+} from "./travelTimes"
 import storage from "../storage";
 import ServiceSearchCache from "./ServiceSearchCache";
 import {searchIss} from "./search";
