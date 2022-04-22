@@ -3,15 +3,8 @@
 import { slugify } from "underscore.string";
 
 
-import type {serviceSearchRequest} from "../iss/serviceSearch";
 import type {SearchQueryChanges} from "../iss/searchQueryBuilder";
 import type {PersonalisationPage} from "../utils/personalisation"
-import {
-    modifySearchQuery,
-} from "../iss/searchQueryBuilder"
-import {
-    convertIzzySearchQueryToIss3,
-} from "../iss/serviceSearch"
 
 type Props = {
     name: string,
@@ -40,11 +33,5 @@ export default class Category {
         this.searchQueryChanges = props.searchQueryChanges;
         this.info = props.info;
         this.personalisation = props.personalisation;
-    }
-
-    get search(): serviceSearchRequest {
-        return convertIzzySearchQueryToIss3(
-            modifySearchQuery({}, this.searchQueryChanges)
-        );
     }
 }

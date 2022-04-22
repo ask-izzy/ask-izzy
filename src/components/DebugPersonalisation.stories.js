@@ -5,12 +5,20 @@ import React from "react";
 
 import DebugPersonalisation from "./DebugPersonalisation";
 import { getCategory } from "../constants/categories";
-import { setPersonalisationAnswers } from "../storybook/decorators";
+import {
+    setPersonalisationAnswers,
+    setDebugModeContext,
+    setRouterContext,
+} from "../storybook/decorators";
 
 export default {
-    title: "App Components/Debug/DebugPersonalisation",
+    title: "Debug Components/DebugPersonalisation",
     component: DebugPersonalisation,
-    decorators: [setPersonalisationAnswers],
+    decorators: [
+        setPersonalisationAnswers,
+        setDebugModeContext,
+        setRouterContext,
+    ],
 };
 
 const Template = (args: Object): ReactNode => {
@@ -19,17 +27,25 @@ const Template = (args: Object): ReactNode => {
 
 export const HousingCategory: typeof Template = Template.bind({});
 HousingCategory.args = {
-    items: getCategory("housing")?.personalisation,
-    search: getCategory("housing")?.search,
+    issQuery: getCategory("housing")?.searchQueryChanges,
+    setIssParamsOverride: () => {},
 };
 HousingCategory.parameters = {
     context: {
+        debugMode: true,
         personalisationAnswers: {
             location: "Richmond, VIC",
             "sleep-tonight": "Yes",
             gender: "Female",
             age: "27 to 39",
             demographics: ["Couples", "Have pets"],
+        },
+        router: {
+            match: {
+                params: {
+                    page: "housing",
+                },
+            },
         },
     },
 };

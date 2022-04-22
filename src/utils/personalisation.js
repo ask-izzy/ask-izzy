@@ -151,6 +151,8 @@ export function getPersonalisationPages(
             personalisation.WhoIsLookingForHelp,
             personalisation.Location,
         ];
+    } else {
+        console.error("Current route involves no personalisation pages")
     }
 
     return pages.filter(page => {
@@ -160,6 +162,15 @@ export function getPersonalisationPages(
         }
         return true
     });
+}
+
+export function currentRouteIsPersonalised(
+    router: $PropertyType<RouterContextObject, 'router'>
+): boolean {
+    const category = getCategory(
+        router.match.params.page
+    )
+    return Boolean(category || router.match.params.search)
 }
 
 /*

@@ -1,22 +1,16 @@
 /* @flow */
 
 import type {Node as ReactNode} from "React";
-import React, {useEffect} from "react";
+import React from "react";
 
 import DebugServiceRecord from "./DebugServiceRecord";
 import {ixaService} from "../../fixtures/services";
-import storage from "../storage";
+import { setDebugModeContext } from "../storybook/decorators";
 
 export default {
     title: "App Components/Debug/DebugServiceRecord",
     component: DebugServiceRecord,
-    decorators: [
-        (Story: Object): ReactNode => {
-            storage.setDebug(true)
-            useEffect(() => () => storage.setDebug(false))
-            return <Story/>
-        },
-    ],
+    decorators: [setDebugModeContext],
 };
 
 const Template = (args: Object): ReactNode => {
@@ -26,4 +20,9 @@ const Template = (args: Object): ReactNode => {
 export const ExampleService: typeof Template = Template.bind({});
 ExampleService.args = {
     object: ixaService,
+};
+ExampleService.parameters = {
+    context: {
+        debugMode: true,
+    },
 };
