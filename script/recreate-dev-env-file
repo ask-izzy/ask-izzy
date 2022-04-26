@@ -8,8 +8,8 @@ IFS=$'\n\t'
 PATH=`npm bin`:$PATH
 
 if [ ! -f public/static/env.js ] ; then
-    if [ -z "${ISS_URL:=}" ] ; then
-        echo "ISS_URL not set and public/static/env.js not present; cannot run."
+    if [ -z "${ISS3_BASE_URL:=}" ] ; then
+        echo "ISS3_BASE_URL not set and public/static/env.js not present; cannot run."
         exit 1
     fi
 fi

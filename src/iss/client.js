@@ -18,12 +18,9 @@ export async function getIssClient(): Promise<ISS4Client> {
 
 export async function getIss3Client(): Promise<ISS3Client> {
     if (!iss3Client) {
-        const [, protocol, apiKey = "", domain] = window.ISS_URL.match(
-            /^(https?:\/\/)(?:(\w+:\w+)@)?(.*?)$/
-        )
         iss3Client = await createISS3Client({
-            key: apiKey,
-            baseUrl: protocol + domain,
+            key: window.ISS3_API_KEY,
+            baseUrl: window.ISS3_BASE_URL,
         })
     }
     return iss3Client
