@@ -79,10 +79,10 @@ export default function render(req, res, next) {
         // inject-config-on-deploy.sh
         const varsToInject = [
             "VERSION",
-            "ISS3_BASE_URL",
-            "ISS3_API_KEY",
             "ISS_BASE_URL",
+            "ISS_VERSION",
             "ISS_API_KEY",
+            "ISS_API_TOKEN",
             "GOOGLE_API_KEY",
             "GOOGLE_ANALYTICS_URL",
             "GOOGLE_TAG_MANAGER_ID",
@@ -98,8 +98,9 @@ export default function render(req, res, next) {
 
         const requiredVars = [
             "VERSION",
-            "ISS3_BASE_URL",
-            "ISS3_API_KEY",
+            "ISS_BASE_URL",
+            "ISS_VERSION",
+            "ISS_API_KEY",
             "PROXY_DOMAINS",
             "NEW_RELIC_CONFIG",
             "NEW_RELIC_INFO",

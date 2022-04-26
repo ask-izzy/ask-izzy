@@ -54,28 +54,28 @@ case "$1" in
     unit-test)
         shift 1
 
-        [ -n "$DEBUG" ] && echo "ISS server: $ISS3_BASE_URL"
+        [ -n "$DEBUG" ] && echo "ISS server: $ISS_BASE_URL"
         exec ./script/unit-test
         ;;
 
     feature-test)
         shift 1
 
-        [ -n "$DEBUG" ] && echo "ISS server: $ISS3_BASE_URL"
+        [ -n "$DEBUG" ] && echo "ISS server: $ISS_BASE_URL"
         exec ./script/feature-test
         ;;
 
     maps-test)
         shift 1
 
-        [ -n "$DEBUG" ] && echo "ISS server: $ISS3_BASE_URL"
+        [ -n "$DEBUG" ] && echo "ISS server: $ISS_BASE_URL"
         exec ./script/maps-test
         ;;
 
     personalisation-test)
         shift 1
 
-        [ -n "$DEBUG" ] && echo "ISS server: $ISS3_BASE_URL"
+        [ -n "$DEBUG" ] && echo "ISS server: $ISS_BASE_URL"
         exec ./script/personalisation-test
         ;;
 

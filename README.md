@@ -32,8 +32,9 @@ You will need to create a file in the root directory called `.env` with environm
 
 ```bash
 # Contents of .env
-ISS3_BASE_URL="https://<iss domain>"
-ISS3_API_KEY="<username>:<token>"
+ISS_BASE_URL="https://<iss domain>"
+ISS_API_KEY="<username>:<token>"
+ISS_VERSION="3"
 GOOGLE_API_KEY="Rlf90...S0fwV"
 FAIL_FAST=true
 ```
@@ -48,7 +49,7 @@ Once started it should then be accessible at [http://localhost:8000/](http://loc
 
 Alternatively you can run it without docker via:
 ```bash
-ENVIRONMENT="dev_local" NODE_ENV="development" ISS3_BASE_URL="$ISS3_BASE_URL" ISS3_API_KEY="$ISS3_API_KEY" GOOGLE_API_KEY="$G_API_KEY" ./script/dev-server
+ENVIRONMENT="dev_local" NODE_ENV="development" ISS_BASE_URL="$ISS_BASE_URL" ISS_API_KEY="$ISS_API_KEY" ISS_VERSION="3" GOOGLE_API_KEY="$G_API_KEY" ./script/dev-server
 ```
 
 ## Remote access

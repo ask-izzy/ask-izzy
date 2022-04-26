@@ -18,7 +18,7 @@ import type {
 } from "./general.js"
 import ServiceOpening from "./ServiceOpening";
 import type {SortType} from "../components/base/Dropdown"
-import {getIss3Client} from "./client"
+import {getIssClient, getIssVersion} from "./client"
 // WARNING: This does nothing directly but if it's removed the Jenga tower that
 // is Ask Izzy's circular dependencies comes crashing down
 import "../utils/personalisation"
@@ -273,18 +273,25 @@ export type ageGroup = "unspecified" |
 
 
 export async function getSiblingServices(service: Service): Promise<Service[]> {
-    const issClient = await getIss3Client()
+    let servicesAtSite = []
+    const issVersion = getIssVersion()
+    if (issVersion === "3") {
+        const issClient = await getIssClient(issVersion)
 
-    const result = await issClient.search({
-        site_id: service.site.id,
-        limit: 100,
-    });
+        const result = await issClient.search({
+            site_id: service.site.id,
+            limit: 100,
+        });
 
-    if (!result) {
-        // We currently don't worry about if sibling services fail to load
-        return []
+        if (!result) {
+            // We currently don't worry about if sibling services fail to load
+            return []
+        }
+
+        servicesAtSite = result.objects
+    } else if (issVersion === "4") {
+        throw Error("ISS4 not yet supported")
     }
-    const {objects: servicesAtSite} = result
 
     // Exclude self from services at site
     const siblingServices = servicesAtSite.filter(
