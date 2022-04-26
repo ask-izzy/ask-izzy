@@ -22,7 +22,7 @@ export async function attachTransportTimes(
         // Google maps api doesn't work outside the browser.
     }
 
-    let formatPoint = (point: geoPoint) => `${point.lat},${point.lon}`;
+    const formatPoint = (point: geoPoint) => `${point.lat},${point.lon}`;
 
     const maps = await TryWithDefault < $ReadOnly < {travelTime: Function} >>(
         1000, Maps(), {}
