@@ -2,7 +2,6 @@
 import * as React from "react";
 import type {Node as ReactNode} from "react";
 import BaseQuestion from "./BaseQuestion";
-import { append } from "../../iss/ServiceSearchRequest";
 import icons from "../../icons";
 import type {
     PersonalisationQuestionPageDefaultProps,
@@ -17,10 +16,12 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     byline:
         "",
     possibleAnswers: {
-        // n.b. see also storage.getUserIsIndigenous when changing
-        "Yes - show these first where possible":
-            append("(Aboriginals & Torres Strait Islanders)"),
-        "No - show me everything": append(""),
+        "Yes - show these first where possible": {
+            $concat: {
+                term: ["\"Aboriginals & Torres Strait Islanders\""],
+            },
+        },
+        "No - show me everything": {},
     },
     icons: {
         "Yes - show these first where possible": icons.DemographicAtsi,

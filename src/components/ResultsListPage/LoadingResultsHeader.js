@@ -6,6 +6,7 @@ import HeaderBar from "../HeaderBar";
 import type Category from "../../constants/Category";
 import routerContext from "../../contexts/router-context";
 import {getBannerName} from "../../utils/personalisation"
+import type Service from "../../iss/Service"
 
 const InfoMessage = (category: Object) =>
     <div>{category.info}</div>;
@@ -36,7 +37,7 @@ type Props = {
     loading: boolean,
     category?: ?Category,
     title: string,
-    meta: {total_count: number},
+    services: Array<Service>,
 }
 
 class LoadingResultsHeader extends React.Component<Props, void> {
@@ -49,7 +50,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
             loading,
             category,
             title,
-            meta,
+            services,
         } = this.props;
         const bannerName = getBannerName(
             this.props.category
@@ -104,7 +105,7 @@ class LoadingResultsHeader extends React.Component<Props, void> {
                 <HeaderBar
                     className="LoadingResultsHeader"
                     primaryText={
-                        meta.total_count > 0 ?
+                        services.length > 0 ?
                             formatResultsPageHeading(
                                 title.toLocaleLowerCase()
                             )

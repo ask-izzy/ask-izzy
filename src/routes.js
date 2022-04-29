@@ -36,7 +36,6 @@ import {
     InjectRouterContext,
     useRouterContext,
 } from "./contexts/router-context"
-import DebugPage from "./pages/DebugPage";
 
 /**
  * While entering the 404 page,
@@ -123,12 +122,6 @@ const routes: ReactElement<typeof Routes> = <Routes>
             element={<DisabilityAdvocacyFinder />}
             title="Disability Advocacy Finder"
             type={["Static Page", "Disability Advocacy Finder"]}
-        />
-        <Route
-            path="/debug-page"
-            element={<DebugPage />}
-            title="Debug"
-            type={["Static Page", "Debug"]}
         />
         <Redirect
             path="/donate"

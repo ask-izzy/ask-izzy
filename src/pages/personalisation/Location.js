@@ -10,11 +10,9 @@ import components from "../../components";
 import icons from "../../icons";
 import storage from "../../storage";
 import type {Geolocation} from "../../storage";
-import type { serviceSearchResults} from "../../iss/serviceSearch";
-import type { serviceSearchRequest } from "../../iss/serviceSearch";
-import {crisisResults, nonCrisisResults} from "../../iss/crisisService"
-import {getIss3Client} from "../../iss/client"
-import type {areaLocation} from "../../ix-web-js-client/apis/iss-v3.js";
+import {getIssClient, getIssVersion} from "../../iss/client"
+import type {ISS3AreaLocation} from "../../ix-web-js-client/apis/iss/v3";
+import type { SearchQueryChanges } from "../../iss/searchQueryBuilder";
 import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import WithStickyFooter from "../../components/WithStickyFooter";
@@ -44,7 +42,7 @@ type State = {
     gettingAutocompletionsInProgress: boolean,
     locationNameInput: string,
     selectedLocation: ?location,
-    autocompletions: Array<areaLocation>,
+    autocompletions: Array<ISS3AreaLocation>,
     nextDisabled: boolean,
 }
 
@@ -123,23 +121,24 @@ class Location extends React.Component<
         return !!victoriaRegex.exec(storage.getSearchArea());
     }
 
-    static getSearch(request: serviceSearchRequest): ?serviceSearchRequest {
+    static getSearchQueryChanges(): SearchQueryChanges | null {
+        const searchQuery = {}
         /* Location/Area is required */
         const searchArea = storage.getSearchArea();
         if (!searchArea) {
             return null;
         }
-        request = Object.assign(request, {area: searchArea});
+
+        searchQuery.location = {}
+        searchQuery.location.name = searchArea
 
         /* Coordinates are optional */
         const userLocation = storage.getUserGeolocation();
         if (userLocation && userLocation.name === searchArea) {
-            request = Object.assign(request, {
-                location: `${userLocation.longitude}E${userLocation.latitude}N`,
-            });
+            searchQuery.location.coordinates = userLocation;
         }
 
-        return request;
+        return searchQuery;
     }
 
     static summaryLabel: string = "Where are you looking for help?";
@@ -189,11 +188,16 @@ class Location extends React.Component<
         async(input: string) => {
             let results
             try {
-                const iss3Client = await getIss3Client()
-                results = await iss3Client.searchLocations({
-                    name: input,
-                    kind: ["postcode", "suburb", "town"],
-                })
+                const issVersion = getIssVersion()
+                if (issVersion === "3") {
+                    const iss3Client = await getIssClient(issVersion)
+                    results = await iss3Client.searchLocations({
+                        name: input,
+                        kind: ["postcode", "suburb", "town"],
+                    })
+                } else if (issVersion === "4") {
+                    throw Error("ISS4 not yet supported")
+                }
             } catch (error) {
                 console.error(
                     "Error trying to get location autocomplete",
@@ -314,7 +318,7 @@ class Location extends React.Component<
         }
     }
 
-    selectAutocomplete(result: areaLocation): void {
+    selectAutocomplete(result: ISS3AreaLocation): void {
         /* set the text box to this value
          * and remove the autocompletions */
         const location: location = {
@@ -473,28 +477,3 @@ function isGeolocation(location: ?location): boolean %checks {
 }
 
 export default Location;
-
-export function mergeAccessPoints(
-    original: serviceSearchResults,
-    alternate: serviceSearchResults
-): serviceSearchResults {
-    const objects = crisisResults(original.services).concat(
-        alternate.services,
-        nonCrisisResults(original.services)
-    )
-    const deduped = _.uniq(objects, false, ({id}) => id);
-    const removedCount = objects.length - deduped.length;
-
-    return {
-        meta: {
-            ...original.meta,
-            total_count: original.meta.total_count +
-                         alternate.meta.total_count -
-                         removedCount,
-            available_count: original.meta.available_count +
-                             alternate.meta.available_count -
-                             removedCount,
-        },
-        services: deduped,
-    };
-}

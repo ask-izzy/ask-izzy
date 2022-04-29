@@ -17,11 +17,14 @@ NULL=
 FORKLIFT_FLAGS ?=
 TEST_FLAGS ?=
 
-# Flags used by Forklift for CI (N.B. you must pass in ISS_URL)
+# Flags used by Forklift for CI (N.B. you must pass in ISS_BASE_URL)
 CI_FORKLIFT_FLAGS := $(FORKLIFT_FLAGS) \
 	-e CI="$(CI)" \
 	-e GOOGLE_API_KEY="$(GOOGLE_API_KEY)" \
-	-e ISS_URL="$(ISS_URL)" \
+	-e ISS_BASE_URL="$(ISS_BASE_URL)" \
+	-e ISS_VERSION="$(ISS_VERSION)" \
+	-e ISS_API_KEY="$(ISS_API_KEY)" \
+	-e ISS_API_TOKEN="$(ISS_API_TOKEN)" \
 	-e SELENIUM_BROWSER="chrome" \
 	-e STRAPI_URL="$(STRAPI_URL)" \
 	-e VERSION="$(VERSION)" \

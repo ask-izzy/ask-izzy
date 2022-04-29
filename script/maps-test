@@ -22,7 +22,7 @@ export ENVIRONMENT=development
 ./script/test-setup
 
 # Point the app at our mock ISS instance.
-ISS_URL="http://localhost:5000/"
+ISS_BASE_URL="http://localhost:5000/"
 export STRAPI_URL="http://localhost:5001"
 ./script/recreate-dev-env-file
 

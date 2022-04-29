@@ -1,7 +1,7 @@
 /* @flow */
 import BaseQuestion from "./BaseQuestion";
-import Location from "./Location";
-import { append, housingCrisis } from "../../iss/ServiceSearchRequest";
+import {housingCrisisSearchQueryChanges} from "../../utils/housing-crisis";
+
 import type {
     PersonalisationQuestionPageDefaultProps,
 } from "../../utils/personalisation"
@@ -11,10 +11,10 @@ const defaultProps: PersonalisationQuestionPageDefaultProps = {
     name: "sleep-tonight",
     question: "Do you have somewhere safe to sleep tonight?",
     possibleAnswers: {
-        "Yes": append(""),
-        "No": housingCrisis(() => Location.shouldInjectAccessPoints()),
+        "Yes": {},
+        "No": housingCrisisSearchQueryChanges,
     },
-};
+}
 
 export default class SleepTonight extends BaseQuestion {
     static title: string = "Sleep tonight";

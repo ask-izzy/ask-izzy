@@ -15,6 +15,7 @@ import {
     getPersonalisationPages,
     getPersonalisationPagesToShow,
     getCategoryFromRouter,
+    currentRouteIsPersonalised,
 } from "../utils/personalisation"
 import usePostInitialRender from "../hooks/usePostInitialRender"
 import type {PersonalisationPage} from "../utils/personalisation"
@@ -81,26 +82,30 @@ export default function QuestionStepper({
     const title = category ?
         category.name
         : `Search for “${router.match.params.search}”`
-    const stepTotal = getTotalSteps(router)
-    const stepsRemaining = getStepsRemaining(router)
-    const stepsAnswered = stepTotal - stepsRemaining
+
+    function renderProgressBar() {
+        const stepTotal = getTotalSteps(router)
+        const stepsRemaining = getStepsRemaining(router)
+        const stepsAnswered = stepTotal - stepsRemaining
+        return <>
+            <h3>{title}</h3>
+            {stepsRemaining > 0 &&
+                <div className="currentProgress">
+                    {stepsRemaining} step{stepsRemaining > 1 && "s"}
+                    {" "}remaining
+                    <ProgressBar current={stepsAnswered + 1}
+                        total={stepTotal}
+                    />
+                </div>
+            }
+        </>
+    }
 
     return (
         <div className={cnx("QuestionStepper")}>
             {hideStepInfo || <SearchTypeIcon />}
             <div className="content">
-                {!hideStepInfo && postInitialRender && <>
-                    <h3>{title}</h3>
-                    {stepsRemaining > 0 &&
-                        <div className="currentProgress">
-                            {stepsRemaining} step{stepsRemaining > 1 && "s"}
-                            {" "}remaining
-                            <ProgressBar current={stepsAnswered + 1}
-                                total={stepTotal}
-                            />
-                        </div>
-                    }
-                </>}
+                {!hideStepInfo && postInitialRender && renderProgressBar()}
                 <ol
                     className="breadcrumbs"
                     aria-label="Your answers to previous questions"
@@ -142,7 +147,11 @@ export default function QuestionStepper({
 export const getPersonlisationPagesForQuestionStepper = (
     router: $PropertyType<RouterContextObject, 'router'>,
 ): Array<PersonalisationPage> => {
-    let pages: Array<PersonalisationPage> = getPersonalisationPages(router)
+    const pages: Array<PersonalisationPage> = [];
+
+    if (currentRouteIsPersonalised(router)) {
+        pages.push(...getPersonalisationPages(router))
+    }
 
     // We want to show the location page breadcrumb on the homepage if it's set
     if (!pages.length) {

@@ -25,6 +25,7 @@ class DebugContainer extends React.Component<Props, void> {
             <div className="DebugContainer">
                 <Collapser
                     expandMessage={this.props.message}
+                    collapseMessage={this.props.message}
                     initiallyExpanded={this.props.initiallyExpanded}
                 >
                     {this.props.children}

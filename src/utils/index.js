@@ -8,6 +8,7 @@ import {getCategory} from "../constants/categories";
 import Storage from "../storage";
 import {
     getCurrentPersonalisationPage,
+    currentRouteIsPersonalised,
 } from "./personalisation"
 import type { RouterContextObject } from "../contexts/router-context";
 
@@ -62,10 +63,12 @@ export const makeTitle = (
         pageTitleArr.push(title);
     }
 
-    const personalisationPage = getCurrentPersonalisationPage(router);
+    if (currentRouteIsPersonalised(router)) {
+        const personalisationPage = getCurrentPersonalisationPage(router);
 
-    if (personalisationPage?.title) {
-        pageTitleArr.push(`(${personalisationPage?.title})`)
+        if (personalisationPage?.title) {
+            pageTitleArr.push(`(${personalisationPage?.title})`)
+        }
     }
 
     // If the current page is either the question summary page

@@ -151,23 +151,3 @@ class LocationsApiClient {
     }
 
 }
-
-// const client = createClient({
-//     username: 'askizzy_iss4_migration',
-//     password: 'sponsor uneatable exemption dance',
-//     baseUrl: 'https://locations.docker.dev/api/'
-// }).then(async client => {
-//     const res = await client.search({
-//         location_type: ["suburb", "postcode"],
-//         limit: 100,
-//         search: '5152'
-//     })
-//     console.log(res)
-// })
-
-
-// test an expired token
-// const oldToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90e
-// XBlIjoiYWNjZXNzIiwiZXhwIjoxNjQzMTQ5MDE5LCJpYXQiOjE2NDMxNDg3MTksImp0a
-// SI6IjY3ZDJlYTBmNjNlNjRkYjFiOWQ3ZGM3ZmIwMTJiMzJhIiwidXNlcl9pZCI6MTA4f
-// Q.-jxiOsPygeDegCt_H5Bg_gN5yFpSpFpm1W-L9aVbG2E"

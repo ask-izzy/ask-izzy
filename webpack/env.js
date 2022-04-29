@@ -7,7 +7,7 @@ module.exports = function(env: string): $PropertyType<
     'constructor'
 > {
 
-    // Do not set sensitive stuff here (eg ISS_URL);
+    // Do not set sensitive stuff here;
     // we deploy the same assets to prod as we do staging
     // so it can't be baked in.
     return new webpack.DefinePlugin({

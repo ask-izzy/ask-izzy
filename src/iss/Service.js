@@ -15,25 +15,13 @@ import type {
     postalAddress,
     openingHours,
     phone,
-    geoPoint,
 } from "./general.js"
 import ServiceOpening from "./ServiceOpening";
-import {
-    getServiceFromCache,
-    forEachServiceFromCache,
-} from "./serviceSearch"
-import {searchForServices} from "./serviceSearch"
-import {jsonRequestFromIss} from "./request"
-import type {
-    serviceSearchResults,
-    serviceSearchRequest,
-} from "./serviceSearch"
-import Maps from "../maps";
-import {
-    Timeout,
-    TryWithDefault,
-} from "../timeout";
 import type {SortType} from "../components/base/Dropdown"
+import {getIssClient, getIssVersion} from "./client"
+// WARNING: This does nothing directly but if it's removed the Jenga tower that
+// is Ask Izzy's circular dependencies comes crashing down
+import "../utils/personalisation"
 
 export type ServiceProps = {
     ...Service,
@@ -105,7 +93,6 @@ export default class Service {
     travelTimes: ?Array<travelTime>;
 
     _serviceProvisions: Array<string>;
-    _siblingServices: serviceSearchResults;
     _explanation: Object;
 
     Phones(): Array<phone> {
@@ -264,33 +251,6 @@ export default class Service {
         return this._serviceProvisions;
     }
 
-    async getSiblingServices(): Promise<serviceSearchResults> {
-        if (this._siblingServices) {
-            return this._siblingServices;
-        }
-
-        // limit should be 0 - see
-        // https://redmine.office.infoxchange.net.au/issues/112476
-        let request_: serviceSearchRequest = {
-            site_id: this.site.id,
-            type: "service",
-            limit: 100,
-        };
-        let {services, meta} = await searchForServices(
-            "/api/v3/search/",
-            request_
-        );
-
-        // Don't mutate what comes back from
-        // requestObjects - the objects are cached!
-        this._siblingServices = {
-            meta,
-            services: services.filter(service => service.id != this.id),
-        };
-
-        return this._siblingServices;
-    }
-
     get slug(): string {
         return slugify(`${this.id}-${this.site.name}`);
     }
@@ -311,73 +271,34 @@ export type ageGroup = "unspecified" |
     "preretirementage" |
     "agedpersons";
 
-/*
-* Loads the transportTime property from google
-* and adds it to the given Service instances
-*/
-export async function attachTransportTimes(
-    services: Array<Service>
-): Promise<Array<Service>> {
-    if (typeof window === "undefined") {
-        // Google maps api doesn't work outside the browser.
-        return services;
-    }
 
-    let formatPoint = (point: geoPoint) => `${point.lat},${point.lon}`;
+export async function getSiblingServices(service: Service): Promise<Service[]> {
+    let servicesAtSite = []
+    const issVersion = getIssVersion()
+    if (issVersion === "3") {
+        const issClient = await getIssClient(issVersion)
 
-    const maps = await TryWithDefault < $ReadOnly < {travelTime: Function} >>(
-        1000, Maps(), {}
-    );
+        const result = await issClient.search({
+            site_id: service.site.id,
+            limit: 100,
+        });
 
-    if (typeof maps.travelTime === "function") {
-        const servicesToLoadTravelTimesFor = services.filter(
-            service => !service.location?.isConfidential()
-        )
-        const travelTimesForServices = await Timeout(
-            3000,
-            maps.travelTime(servicesToLoadTravelTimesFor
-                // $FlowIgnore isConfidential checks location.point
-                .map(({location}) => formatPoint(location.point))
-            )
-        );
-
-        for (const service of servicesToLoadTravelTimesFor) {
-            service.travelTimes = travelTimesForServices.shift()
+        if (!result) {
+            // We currently don't worry about if sibling services fail to load
+            return []
         }
+
+        servicesAtSite = result.objects
+    } else if (issVersion === "4") {
+        throw Error("ISS4 not yet supported")
     }
 
-    return services;
-}
+    // Exclude self from services at site
+    const siblingServices = servicesAtSite.filter(
+        serviceResult => serviceResult.id != service.id
+    )
 
-export async function removeAllTransitTimes() {
-    forEachServiceFromCache(service => {
-        service.travelTimes = null
-    })
-}
-
-
-export async function getService(
-    serviceId: number
-): Promise<Service> {
-    const cachedService = getServiceFromCache(serviceId);
-
-    if (cachedService) {
-        return cachedService;
-    }
-
-    const response: ServiceProps = await jsonRequestFromIss(
-        `/api/v3/service/${serviceId}/`
-    );
-    const service = new Service(response);
-
-    try {
-        await attachTransportTimes([service]);
-    } catch (error) {
-        console.error("Unable to retrieve transport times")
-        console.error(error);
-    }
-
-    return service;
+    return siblingServices.map(service => new Service(service));
 }
 
 /**

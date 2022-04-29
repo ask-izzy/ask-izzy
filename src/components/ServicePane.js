@@ -30,27 +30,23 @@ import Storage from "../storage";
 import ScreenReader from "./ScreenReader";
 import {MobileDetect} from "../effects/MobileDetect";
 import UrlsToLinks from "./UrlsToLink"
+import {getSiblingServices} from "../iss/load-services"
 
 type Props = {
     service: Service,
 }
 
 function ServicePane({service}: Props): ReactNode {
-
     const [siblings, setSiblings] = useState<Array<Service>>([])
 
     const isMobile = MobileDetect()
 
     useEffect(() => {
-        getSiblingServices();
+        async function loadSiblings(): Promise<void> {
+            setSiblings(await getSiblingServices(service))
+        }
+        loadSiblings();
     }, [service])
-
-
-    const getSiblingServices = async(): Promise<void> => {
-        let response = await service.getSiblingServices();
-        setSiblings(response.services)
-    }
-
 
     const recordAlsoAtThisLocation = (service: Service) => {
         gtm.emit({

@@ -1,19 +1,23 @@
 /* @flow */
 import React from "react"
+import objectHash from "object-hash"
 
 import {
-    initialSearchForServices,
-    searchForServices,
+    createServiceSearch,
 } from "../iss/serviceSearch";
 import type {
-    serviceSearchRequest,
-    serviceSearchResultsMeta,
+    PaginatedSearch,
 } from "../iss/serviceSearch";
-import {getInitialSearchRequest} from "../iss/serviceSearch"
+import {
+    getSearchQueryModifiers,
+    buildSearchQueryFromModifiers,
+} from "../iss/searchQueryBuilder"
+import type {SearchQuery, SearchQueryModifier} from "../iss/searchQueryBuilder"
 import * as gtm from "../google-tag-manager";
 
 import routerContext from "../contexts/router-context";
 import Service from "../iss/Service"
+import {attachTransportTimes} from "../iss/travelTimes"
 import {
     addPageLoadDependencies,
     closePageLoadDependencies,
@@ -22,7 +26,6 @@ import storage from "../storage";
 import type {SortType} from "../components/base/Dropdown"
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 import {
-    getPersonalisationPages,
     getPersonalisationPagesToShow,
     getCategoryFromRouter,
     getPageTitleFromRouter,
@@ -31,10 +34,11 @@ import {
 import Category from "../constants/Category"
 
 type State = {
-    searchMeta: ?serviceSearchResultsMeta,
+    search: ?PaginatedSearch,
+    searchStatus: "loading" | "error" | "some loaded" |
+        "all loaded",
     searchResults: ?Array<Service>,
     searchError: ?{message: string, status: number},
-    searchPagesLoaded: number,
     searchType: ?string,
     sortBy: ?SortType,
     travelTimesStatus: travelTimesStatus,
@@ -42,6 +46,8 @@ type State = {
     pageTitle: string,
 }
 
+const previousSearchHashStorageKey = "previousSearchHash"
+const previousSearchDateStorageKey = "previousSearchDate"
 
 class ResultsPage<ChildProps = {...}, ChildState = {...}>
     extends React.Component<ChildProps, State & ChildState> {
@@ -55,12 +61,20 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             category && "category" ||
             isTextSearchPage && "text"
 
+        let search = null
+        if (typeof window !== "undefined") {
+            const query = this.getIssSearchQuery()
+            if (query) {
+                search = createServiceSearch(query)
+            }
+        }
+
         this.state = {
             ...super.state,
-            searchMeta: null,
+            search,
+            searchStatus: "loading",
             searchResults: null,
             searchError: null,
-            searchPagesLoaded: 0,
             sortOption: null,
             searchType,
             category,
@@ -88,65 +102,58 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
                 this.context.router.location.pathname.replace(/\/$/, "") +
                 "/personalise"
             this.context.router.navigate(newPath, {replace: true});
-        } else {
-            this.loadNextSearchPage().then(
-                () => closePageLoadDependencies(
+        } else if (this.state.search) {
+            const search = this.state.search
+            // If the search already had loaded services that means we're using
+            // a cached search so no need to load the first page of services.
+            if (search.loadedServices.length > 0) {
+                this.setState({
+                    searchStatus: search.isNext ? "some loaded" : "all loaded",
+                    searchResults: search.loadedServices,
+                    searchError: undefined,
+                });
+                closePageLoadDependencies(
                     this.context.router.location,
                     "resultsLoad"
                 )
+            } else {
+                this.loadNextSearchPage.bind(this)().then(
+                    () => closePageLoadDependencies(
+                        this.context.router.location,
+                        "resultsLoad"
+                    )
+                )
+            }
+        } else {
+            closePageLoadDependencies(
+                this.context.router.location,
+                "resultsLoad"
             )
         }
-
     }
 
     async loadNextSearchPage(): Promise<void> {
+        const search = this.state.search
+        if (this.state.searchStatus === "all loaded" || !search) {
+            return
+        }
         addPageLoadDependencies(
             this.context.router.location,
             `requestServices`
         )
-        let res
+
         try {
-            if (!this.state.searchMeta) {
-                let params = this.issParams()
-
-                if (
-                    storage.getDebug() &&
-                    storage.getJSON("issParamsOverride")
-                ) {
-                    params = storage.getJSON("issParamsOverride")
-                }
-
-                if (!params) {
-                    return
-                }
-                // first page
-                this.setState({searchMeta: null});
-                res = await initialSearchForServices(params)
-
-            } else if (this.state.searchMeta.next) {
-                const next = this.state.searchMeta.next
-                // subsequent pages
-                this.setState({searchMeta: null});
-                res = await searchForServices(next);
-
-            } else {
-                // no more pages
-                return
-            }
+            this.setState({searchStatus: "loading"});
+            await search.loadNextPage()
         } catch (error) {
-            this.setState({searchError: error});
-            try {
-                console.error(error)
-                console.error(error.stack);
-
-                let data = JSON.parse(error.body);
-
-                console.error("Server response body:")
-                console.error(data)
-            } catch (parseError) {
-                console.error("Server response body could not be parsed:")
-                console.error(error?.body)
-            }
+            this.setState({
+                searchError: error,
+                searchStatus: "some loaded",
+            });
+            console.error(
+                "The following error occurred when trying to load next page"
+            )
+            console.error(error)
             return
         } finally {
             closePageLoadDependencies(
@@ -155,26 +162,73 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
             )
         }
 
-        if (this.state.searchPagesLoaded > 0) {
+        if (this.queryChangedSinceLastFetch(search)) {
+            const whoIsLookingForHelp = String(storage.getItem(
+                // WhoIsLookingForHelpPage.defaultProps.name
+                "who-is-looking-for-help"
+            ))
             gtm.emit({
-                event: "Load More Search Results Clicked",
-                eventCat: "Content Expanded",
-                eventAction: "Load More Search Results",
-                eventLabel: location.pathname,
+                event: "Action Triggered - New Search",
+                eventCat: "Action triggered",
+                eventAction: "New search request",
+                eventLabel: whoIsLookingForHelp ?
+                    whoIsLookingForHelp
+                    : "<not answered>",
                 sendDirectlyToGA: true,
             });
         }
 
-        this.setState(prevState => ({
-            searchMeta: res.meta,
-            searchResults: res.services,
+        this.setState({
+            searchStatus: search.isNext ? "some loaded" : "all loaded",
+            searchResults: search.loadedServices,
             searchError: undefined,
-            searchPagesLoaded: prevState.searchPagesLoaded + 1,
-        }));
-    }
-    loadNextSearchPage: () => Promise<void> = this.loadNextSearchPage.bind(this)
+        });
 
-    issParams(): ?serviceSearchRequest {
+        if (storage.getSearchArea()) {
+            try {
+                attachTransportTimes(search.loadedServices)
+                // Update state to force re-render
+                this.setState(state => ({
+                    ...state,
+                    searchResults: state.searchResults &&
+                        [...state.searchResults],
+                }))
+            } catch (error) {
+                // We don't currently do anything if fetching travel times fails
+            }
+        }
+    }
+
+    queryChangedSinceLastFetch(search: PaginatedSearch): boolean {
+        let queryChangedSinceLastFetch = true
+
+        const previousSearchHash = storage.getItem(
+            previousSearchHashStorageKey
+        );
+        const previousSearchDateString = storage.getItem(
+            previousSearchDateStorageKey
+        );
+        const previousSearchDate = previousSearchDateString &&
+            new Date(previousSearchDateString)
+
+        const searchHash = objectHash(search.issQuery)
+        const oneDayAgo = Date.now() - 1000 * 60 * 60 * 24;
+
+        if (
+            previousSearchHash === searchHash &&
+            previousSearchDate &&
+            previousSearchDate > oneDayAgo
+        ) {
+            queryChangedSinceLastFetch = false
+        }
+
+        storage.setItem(previousSearchHashStorageKey, searchHash, true);
+        storage.setItem(previousSearchDateStorageKey, Date.now(), true);
+
+        return queryChangedSinceLastFetch
+    }
+
+    getIssSearchQuery(): SearchQuery | null {
         // Build the search request.
         //
         // If we don't have enough information to build the search request
@@ -183,30 +237,24 @@ class ResultsPage<ChildProps = {...}, ChildState = {...}>
         // We have to do this once the component is mounted (instead of
         // in willTransitionTo because the personalisation components will
         // inspect the session).
-        let request = getInitialSearchRequest(this.context.router);
+        let modifiers = getSearchQueryModifiers(this.context.router);
 
-        const personalisationPages = getPersonalisationPages(
-            this.context.router
-        )
-        for (let item of personalisationPages) {
-            if (typeof item.getSearch === "function") {
-                request = item.getSearch(request);
-
-                if (!request) {
-                    return null;
-                }
-            }
+        if (modifiers.includes(null)) {
+            return null
         }
+        // Cast because flow is stupid and doesn't know that
+        // searchQueryModifiers won't contain null at this point.
+        modifiers = ((modifiers: any): SearchQueryModifier[])
 
-        return request;
+        return buildSearchQueryFromModifiers(modifiers);
     }
 
     get searchIsLoading(): boolean {
-        return !this.state.searchError && !this.state.searchMeta;
+        return this.state.searchStatus === "loading"
     }
 
     get searchHasNextPage(): boolean {
-        return !!this.state.searchMeta?.next
+        return this.state.searchStatus === "some loaded"
     }
 
 }

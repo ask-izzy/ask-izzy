@@ -9,7 +9,7 @@ import Category from "../constants/Category";
 import personalisation from "../pages/personalisation";
 import storage from "../storage";
 import type { RouterContextObject } from "../contexts/router-context";
-import { ServiceSearchRequest } from "../iss/ServiceSearchRequest";
+import type { SearchQueryChanges } from "../../src/iss/searchQueryBuilder";
 
 export type PersonalisationQuestionPageDefaultProps = {|
     name: string,
@@ -18,7 +18,7 @@ export type PersonalisationQuestionPageDefaultProps = {|
     info?: string,
     multipleChoice?: boolean,
     showSupportSearchBar?: boolean,
-    possibleAnswers: {[string]: ServiceSearchRequest},
+    possibleAnswers: {[string]: SearchQueryChanges},
     descriptionsForAnswers?: {[string]: string},
     icons?: Object,
     oldAnswers?: {[string]: string},
@@ -151,6 +151,8 @@ export function getPersonalisationPages(
             personalisation.WhoIsLookingForHelp,
             personalisation.Location,
         ];
+    } else {
+        console.error("Current route involves no personalisation pages")
     }
 
     return pages.filter(page => {
@@ -160,6 +162,15 @@ export function getPersonalisationPages(
         }
         return true
     });
+}
+
+export function currentRouteIsPersonalised(
+    router: $PropertyType<RouterContextObject, 'router'>
+): boolean {
+    const category = getCategory(
+        router.match.params.page
+    )
+    return Boolean(category || router.match.params.search)
 }
 
 /*

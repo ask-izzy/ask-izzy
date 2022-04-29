@@ -8,7 +8,7 @@ import storage from "../storage";
 import { getCategory } from "../constants/categories";
 
 export default {
-    title: "App Components/Debug/DebugSearch",
+    title: "Debug Components/DebugSearch",
     component: DebugSearch,
 };
 
@@ -34,7 +34,7 @@ function getCategorySearchQuery(categoryKey, questionAnswers) {
     }
     setAnswers(questionAnswers)
     const searchQuery = buildSearchQuery(
-        category.search,
+        category.searchQueryChanges,
         category.personalisation
     )
     clearAnswers(questionAnswers)

@@ -1,10 +1,11 @@
 /* @flow */
 import {useState} from "react"
 import storage from "../storage";
-import Service, {
+import Service from "../iss/Service"
+import {
     attachTransportTimes,
     removeAllTransitTimes,
-} from "../iss/Service"
+} from "../iss/travelTimes"
 
 type returnVals = {
     travelTimesStatus: travelTimesStatus,

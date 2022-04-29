@@ -1,30 +1,50 @@
 /* @flow */
 
-import createClient, {createISS3Client} from "../ix-web-js-client/apis/iss"
-import type {ISS3Client, ISS4Client} from "../ix-web-js-client/apis/iss"
+import createClient from "../ix-web-js-client/apis/iss"
+import type {ISS3Client} from "../ix-web-js-client/apis/iss/v3"
+import type {ISS4Client} from "../ix-web-js-client/apis/iss/v4"
 
-let issClient: ISS4Client,
-    iss3Client: ISS3Client;
-
-export async function getIssClient(): Promise<ISS4Client> {
-    if (!issClient) {
-        issClient = await createClient({
-            token: window.ISS_API_TOKEN,
-            baseUrl: window.ISS_BASE_URL,
-        })
+export function getIssVersion(): "3" | "4" {
+    const issVersion = window.ISS_VERSION
+    if (["3", "4"].includes(issVersion)) {
+        return issVersion
+    } else {
+        throw Error(`Unknown ISS version: ${issVersion}`)
     }
-    return issClient
 }
 
-export async function getIss3Client(): Promise<ISS3Client> {
-    if (!iss3Client) {
-        const [, protocol, apiKey = "", domain] = window.ISS_URL.match(
-            /^(https?:\/\/)(?:(\w+:\w+)@)?(.*?)$/
-        )
-        iss3Client = await createISS3Client({
-            key: apiKey,
-            baseUrl: protocol + domain,
-        })
+let iss3Client: ISS3Client,
+    iss4Client: ISS4Client;
+
+declare function getIssClient(version: "3"): Promise<ISS3Client>
+declare function getIssClient(version: "4"): Promise<ISS4Client>
+
+async function getIssClient(
+    version: "3" | "4"
+): Promise<ISS3Client | ISS4Client> {
+    if (version === "3") {
+        if (!iss3Client) {
+            iss3Client = await createClient(
+                {
+                    baseUrl: window.ISS_BASE_URL,
+                    key: window.ISS_API_KEY,
+                },
+                "3"
+            )
+        }
+        return iss3Client
+    } else {
+        if (!iss4Client) {
+            iss4Client = await createClient(
+                {
+                    baseUrl: window.ISS_BASE_URL,
+                    token: window.ISS_API_TOKEN,
+                },
+                "4"
+            )
+        }
+        return iss4Client
     }
-    return iss3Client
 }
+
+export {getIssClient}

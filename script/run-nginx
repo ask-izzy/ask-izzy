@@ -10,7 +10,6 @@ conffile=$(mktemp -t nginxconf.XXXXXX)
 echo $(pwd)
 
 export APP_PWD=$(pwd)
-export STRIPPED_ISS_HOST=$(echo $ISS_URL | sed -r "s%//[^0-9]+:[^0-9]+@%//%; s%/$%%")
 
 cat conf/nginx.conf > "$conffile"
 
@@ -18,7 +17,7 @@ cat conf/nginx.conf > "$conffile"
 export X_FRAME_OPTIONS="SAMEORIGIN"
 export CSP_HEADERS="frame-ancestors 'self'"
 
-echo "$(envsubst '${X_FRAME_OPTIONS} ${CSP_HEADERS} ${STRIPPED_ISS_HOST} ${APP_PWD}' < $conffile)" > "$conffile" 
+echo "$(envsubst '${X_FRAME_OPTIONS} ${CSP_HEADERS} ${ISS_BASE_URL} ${APP_PWD}' < $conffile)" > "$conffile"
 
 cat $conffile
 
