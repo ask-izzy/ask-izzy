@@ -3,15 +3,79 @@
 .AlertBannerList {
     margin-top: 0.5em;
 
+    .AlertBannerButton {
+        background-color: #{colours.get-static('colour-bg-alert')};
+        background-color: var(--colour-bg-alert);
+        border-radius: 4px;
+        padding: 6px 13px;
+        border: 0;
+
+        .InfoIcon {
+            width: 40px;
+            height: auto;
+            margin: -8px -7px -13px -13px;
+        }
+
+        .AlertBannerContent {
+            display: flex;
+            align-items: center;
+            column-gap: 12px;
+        }
+    }
+
+    .AlertListTitleContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 60px;
+        padding: 0 1em;
+        background-color: #{colours.get-static('colour-bg-alert')};
+        background-color: var(--colour-bg-alert);
+        border-radius: 10px 10px 0 0;
+
+        .AlertListTitle {
+            display: flex;
+            align-items: center;
+
+            .icon {
+                margin: 0 0.4em;
+
+                .InfoIcon {
+                    width: 47px;
+                    height: 47px;
+                    margin: -8.5px;
+                }
+            }
+
+            .text {
+                margin: 1em 1em 1em 0.4em;
+                font-size: 18px;
+            }
+        }
+
+        .DismissAlertList {
+            margin-right: 7px;
+            border: 0;
+            background-color: transparent;
+        }
+    }
+
     > ul {
-        margin: 0;
         padding-left: 0;
+        margin: 0.8em;
+        border: #{colours.get-static('colour-border-list-item-gray')} solid 1px;
+        border: var(--colour-border-list-item-gray) solid 1px;
+        border-radius: 10px;
 
         > li {
             list-style-type: none;
+            text-align: left;
 
-            .AlertBanner {
-                margin: 1em;
+            &:last-child {
+                .AlertBanner {
+                    border-bottom: 0;
+                    border-radius: 0 0 10px 10px;
+                }
             }
         }
     }
@@ -21,9 +85,10 @@
             margin: 0;
             border-right: 0;
             border-left: 0;
+            border-bottom: 0;
         }
 
-        li:not(:last-child) {
+        li:last-child {
             .AlertBanner {
                 border-bottom: 0;
             }
@@ -32,12 +97,14 @@
 
     &:not(.inline) {
         .AlertBanner {
-            border: 1px solid #{colours.get-static('colour-border-list-item-dark')};
-            border: 1px solid var(--colour-border-list-item-dark);
-
             &.hasBody:focus-within {
                 outline-width: 2px;
             }
         }
+    }
+
+    .warn {
+        background-color: #{colours.get-static('colour-bg-alert')};
+        background-color: var(--colour-bg-alert);
     }
 }

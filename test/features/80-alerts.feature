@@ -63,6 +63,7 @@ Feature: Alerts
         Given a fresh session
         And the area to search is "Perth, WA"
         When I visit /service/866464
+        When I click the alert button with "2" alerts
         Then I should see the alerts
         -------------------------------------------
         Title               | Body

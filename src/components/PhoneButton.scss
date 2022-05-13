@@ -2,23 +2,48 @@
 @use '../styles/mixins/colours';
 
 .Contact {
-    .kind {
-        .Link {
-            padding: 0;
+    p {
+        display: inline;
+        color: #{colours.get-static('colour-crisis-white')};
+        color: var(--colour-crisis-white);
+    }
+
+    .Collapser {
+        .Button {
+            &:hover {
+                color: #{colours.get-static('colour-crisis-white')};
+                color: var(--colour-crisis-white);
+
+                .title-container {
+                    .ChevronIcon {
+                        path {
+                            stroke: #{colours.get-static('colour-crisis-white')};
+                            stroke: var(--colour-crisis-white);
+                        }
+                    }
+                }
+            }
+        }
+
+        li {
+            color: #{colours.get-static('colour-crisis-white')};
+            color: var(--colour-crisis-white);
         }
     }
 
     .ResultsList & {
         .ContactButton {
-            max-width: min-content;
+            display: block;
+            text-align: center;
+            max-width: 230px;
         }
     }
 
     .ContactButton {
-        background-color: #{colours.get-static('colour-button-primary')};
-        background-color: var(--colour-button-primary);
-        color: #{colours.get-static('colour-text-very-light')};
-        color: var(--colour-text-very-light);
+        background-color: #{colours.get-static('colour-crisis-white')};
+        background-color: var(--colour-crisis-white);
+        color: #{colours.get-static('colour-brand-primary-mid')};
+        color: var(--colour-brand-primary-mid);
         max-width: 320px;
         margin-bottom: 5px;
         border-radius: $rounded-border;
@@ -29,13 +54,13 @@
         .Contact-text {
             padding: 0;
             display: inline;
-            font-weight: normal;
+            font-weight: bold;
         }
 
         .Icon {
             path {
-                fill: #{colours.get-static('colour-text-very-light')};
-                fill: var(--colour-text-very-light);
+                fill: #{colours.get-static('colour-brand-primary-mid')};
+                fill: var(--colour-brand-primary-mid);
 
                 @media print {
                     fill: #{colours.get-static('raw-colour-pure-black')};

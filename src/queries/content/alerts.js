@@ -20,6 +20,7 @@ query Alerts(
     title
     body
     created_at
+    updated_at
     alertLevel
     defaultToOpen
     states {

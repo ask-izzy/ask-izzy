@@ -57,18 +57,18 @@ class ResultsListPage extends ResultsPage<> {
                     }
                     statusCode={this.state.searchError?.status || 200}
                 />
-                <QuestionStepper
-                    showEditAnswers={true}
-                    hideStepInfo={true}
-                />
-            </div>
-            {this.hasSearchResults() &&
+                {this.hasSearchResults() &&
                 <AlertBannerList
                     state={stateFromLocation()}
                     screenLocation="resultsPage"
                     format="inline"
                 />
-            }
+                }
+                <QuestionStepper
+                    showEditAnswers={true}
+                    hideStepInfo={true}
+                />
+            </div>
             <main aria-label="Search results">
                 {this.renderResults()}
             </main>

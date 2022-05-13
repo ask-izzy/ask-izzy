@@ -47,6 +47,25 @@ class CrisisLineItem extends React.Component<Props, void> {
         service: PropTypes.object.isRequired,
     };
 
+    PhoneButtonDetails: ReactNode =
+        <div className="detailsCollapser">
+            {
+                crisisDescriptions[this.props.service.id] &&
+            <Collapser
+                expandMessage="See details"
+                collapseMessage="Hide details"
+                analyticsEvent={{
+                    event: `Action Triggered - Crisis Line Info`,
+                    eventAction: "Show crisis line extra info",
+                    eventLabel: null,
+                }}
+                hasIcon={true}
+            >
+                {crisisDescriptions[this.props.service.id](this.props.service)}
+            </Collapser>
+            }
+        </div>
+
     render(): ReactNode {
         const {
             service,
@@ -73,22 +92,8 @@ class CrisisLineItem extends React.Component<Props, void> {
                 <PhoneButton
                     {...phone}
                     crisis={true}
+                    hasDetails={this.PhoneButtonDetails}
                 />
-                {
-                    crisisDescriptions[service.id] &&
-                    <Collapser
-                        expandMessage="See information about this call"
-                        collapseMessage="Hide information about this call"
-                        analyticsEvent={{
-                            event: `Action Triggered - Crisis Line Info`,
-                            eventAction: "Show crisis line extra info",
-                            eventLabel: null,
-                        }}
-                        hasIcon={true}
-                    >
-                        {crisisDescriptions[service.id](service)}
-                    </Collapser>
-                }
                 <DebugServiceRecord object={service} />
                 {service._explanation &&
                     <DebugContainer message="Query score">

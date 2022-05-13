@@ -19,7 +19,9 @@ services:
             PROXY_DOMAINS: '{"fonts.typography.com":"typography-com.docker.dev", "www.googletagmanager.com":"gtagmanager.docker.dev", "maps.googleapis.com":"gmaps.docker.dev", "maps.gstatic.com":"gmaps-static.docker.dev", "csi.gstatic.com":"gcsi-static.docker.dev", "fonts.gstatic.com":"gfonts-static.docker.dev", "tagmanager.google.com":"gtagmanager.docker.dev", "fonts.google.com":"gfonts.docker.dev", "www.google-analytics.com":"google-analytics.docker.dev", "google-analytics.com":"google-analytics.docker.dev", "bam.nr-data.net":"bam-nr-data.docker.dev", "js-agent.newrelic.com":"js-agent-newrelic.docker.dev",}'
             NEW_RELIC_CONFIG: '{}'
             NEW_RELIC_INFO: '{}'
-
+            ISS_VERSION: 3
+            ISS_BASE_URL: "https://iss-uat.infoxchangeapps.net.au"
+            ISS_API_KEY: "ADGOPLUEQNDOJQGVFAPZRNKPYZLORROU:YDTHYCUWMGQDRIBVPWGVMIZUSMSSOXSM"
             NODE_ENV: development
         ports:
             - '8000:8000'

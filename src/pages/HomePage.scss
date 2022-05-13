@@ -35,6 +35,14 @@
         }
     }
 
+    .AlertBannerList {
+        text-align: right;
+
+        .AlertBannerButton {
+            margin: 15px;
+        }
+    }
+
     .search {
         margin: 1em;
         background-color: #{colours.get-static('colour-bg-standard-tint-1')};

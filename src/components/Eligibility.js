@@ -76,7 +76,11 @@ class Eligibility extends React.Component<Props, void> {
 
     renderItem(text: string): void | ReactElement<"li"> {
         if (text) {
-            return (<li key={text}><UrlsToLinks>{text}</UrlsToLinks></li>);
+            return (
+                <li key={text}>
+                    <UrlsToLinks key={text}>{text}</UrlsToLinks>
+                </li>
+            );
         }
     }
 

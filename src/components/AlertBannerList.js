@@ -1,12 +1,16 @@
 /* @flow */
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import classnames from "classnames";
 
 import AlertBanner from "./AlertBanner";
 import StrapiMarkdown from "./StrapiMarkdown";
 import Link from "./base/Link";
+import Info from "./../icons/Info";
+import Button from "./base/Button";
 import alertsQuery from "../queries/content/alerts.js";
+import storage from "../storage";
 
 type Props = {
     screenLocation: string,
@@ -15,12 +19,15 @@ type Props = {
 }
 
 export default function({state, screenLocation, format}: Props): React.Node {
+    const [isCollapsed, setIsCollapsed] = useState(true)
+
     const { loading, error, data } = useQuery(alertsQuery, {
         variables: {
             state,
             screenLocation,
         },
     });
+    useEffect(checkCollapsedStatus, [data]);
 
     if (loading) {
         return null;
@@ -30,13 +37,27 @@ export default function({state, screenLocation, format}: Props): React.Node {
         return null
     }
 
+    //organize alerts
     const alertLevelMap = {
         info: 1,
         warn: 2,
     }
-
+    let containsWarnings = false
+    let alertStorageObj = {}
     const alerts = data.alerts.map(
-        alert => ({...alert, "created_at": new Date(alert.created_at)})
+        (alert) => {
+            //check for warnings
+            if (alert.alertLevel === "warn") {
+                containsWarnings = true
+            }
+            //arrange obj for storage
+            alertStorageObj[alert.id] = alert.updated_at
+            return ({
+                ...alert,
+                "created_at": new Date(alert.created_at),
+                "updated_at": new Date(alert.updated_at),
+            })
+        }
     ).sort(
         (a, b) =>
             // more urgent first
@@ -44,8 +65,32 @@ export default function({state, screenLocation, format}: Props): React.Node {
             // state based alerts over national
             (b.states.length && 1) - (a.states.length && 1) ||
             // newer first
-            b.created_at - a.created_at
+            b.updated_at - a.updated_at
     )
+
+    function checkCollapsedStatus() {
+        const previousAlerts = storage.getJSON("previous-Alerts")
+        let hasNewAlerts = false
+
+        for (let alert in alertStorageObj) {
+            if (!previousAlerts ||
+                !(alert in previousAlerts) ||
+                alertStorageObj[alert].updated_at !==
+                previousAlerts[alert].updated_at) {
+                hasNewAlerts = true
+            }
+        }
+        setIsCollapsed(!(containsWarnings && hasNewAlerts))
+        if (alertStorageObj) {
+            storage.setJSON(
+                "previous-Alerts", {...previousAlerts, ...alertStorageObj}
+            )
+        }
+    }
+
+    function onCollapseButtonClick(event: SyntheticEvent<HTMLButtonElement>) {
+        setIsCollapsed(!isCollapsed)
+    }
 
     return (
         alerts.length ? (
@@ -55,9 +100,24 @@ export default function({state, screenLocation, format}: Props): React.Node {
                     format
                 )}
             >
+                {isCollapsed &&
+                <Button
+                    alt="Alert List"
+                    className="AlertBannerButton"
+                    onClick={onCollapseButtonClick}
+                >
+                    <div className="AlertBannerContent">
+                        <Info/>
+                        {alerts.length}
+                    </div>
+                </Button>
+                }
+                {!isCollapsed &&
                 <ul aria-label="Alerts">
+                    {renderAlertListTitle()}
                     {alerts.map(renderAlert)}
                 </ul>
+                }
             </div>
         ) : null
     )
@@ -74,6 +134,30 @@ export default function({state, screenLocation, format}: Props): React.Node {
                 }}
             />
         </li>
+    }
+
+    function renderAlertListTitle() {
+        return (
+            <li className="AlertListTitleContainer">
+                <span className="AlertListTitle">
+                    <Info />
+                    <span className="text">
+                        {
+                            `${alerts.length} Notification${alerts.length > 1 ?
+                                "s" : ""}`
+                        }
+                    </span>
+
+                </span>
+                <Button
+                    className="DismissAlertList"
+                    alt="Dismiss Alert List"
+                    onClick={onCollapseButtonClick}
+                >
+                    X
+                </Button>
+            </li>
+        )
     }
 
     function renderContent(content: string, id: number) {

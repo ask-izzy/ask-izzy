@@ -41,6 +41,9 @@ module.exports = (function() {
             clickLinkWithSubstring
         )
         .when("I click the \"$STRING\" button", clickButton)
+        .when("I click the alert button with \"$STRING\" alerts",
+            clickAlertButton
+        )
         .when("I click the \"$STRING\" dropdown", clickDropdown)
         .when("I click the \"$STRING\" dropdown option", clickDropdownOption)
         .when("I click the \"$STRING\" collapsible section", clickDetails)
@@ -130,6 +133,10 @@ async function clickLinkWithSubstring(linkText: string) {
 }
 
 async function clickButton(buttonText: string) {
+    await clickElementWithText(this.driver, buttonText, "button")
+}
+
+async function clickAlertButton(buttonText: string) {
     await clickElementWithText(this.driver, buttonText, "button")
 }
 

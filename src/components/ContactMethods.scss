@@ -12,4 +12,11 @@
             color: var(--colour-link);
         }
     }
+
+    .detailsContainer {
+        p {
+            color: #{colours.get-static('colour-text-mid')};
+            color: var(--colour-text-mid);
+        }
+    }
 }
