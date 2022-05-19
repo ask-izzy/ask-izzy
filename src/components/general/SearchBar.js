@@ -24,7 +24,7 @@ type Props = {
     inputAriaLabel?: string
 }
 
-export default function SearchBar({
+function SearchBar({
     className,
     initialValue,
     onChange,
@@ -75,3 +75,5 @@ export default function SearchBar({
         </div>
     );
 }
+
+export default SearchBar
