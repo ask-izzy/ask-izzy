@@ -15,7 +15,7 @@ type Props = {
     className?: string,
 } & HTMLElementProps
 
-export default function Button({
+function Button({
     className,
     onClick: onClickFromParent,
     analyticsEvent,
@@ -42,3 +42,5 @@ export default function Button({
         />
     )
 }
+
+export default Button

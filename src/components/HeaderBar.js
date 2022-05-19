@@ -1,8 +1,8 @@
 /* @flow */
 
 import * as React from "react";
-import AppBar from "./AppBar";
 import {useEffect, useState} from "react";
+import AppBar from "./AppBar";
 
 type AppBarProps = React.ElementProps<typeof AppBar>
 
