@@ -1,22 +1,21 @@
 /* @flow */
-import type {Element as ReactElement} from "React";
+import type {Node as ReactNode} from "React";
 import React from "react";
 
-class ScreenReader extends React.Component<{
+type Props = {
     children?: any,
     ariaLabel?: ?string,
-}, void> {
+}
 
-    render(): ReactElement<"div"> {
-        return (
-            <div
-                aria-label={this.props.ariaLabel}
-                className="ScreenReader"
-            >
-                {this.props.children}
-            </div>
-        );
-    }
+function ScreenReader({children, ariaLabel}: Props): ReactNode {
+    return (
+        <div
+            aria-label={ariaLabel}
+            className="ScreenReader"
+        >
+            {children}
+        </div>
+    );
 }
 
 export default ScreenReader;

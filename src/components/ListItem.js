@@ -24,7 +24,7 @@ type ListItemSpecific<T: React$AbstractComponent<Object, mixed> | string> = {
 export type Props<T: React$AbstractComponent<Object, mixed> | string> =
     ListItemSpecific<T> & $Diff<ReactElementConfig<T>, {children: any | void}>
 
-export default function ListItem<
+function ListItem<
     T: React$AbstractComponent<Object, mixed> | string
 >({
     rootElement,
@@ -76,3 +76,5 @@ export default function ListItem<
         </div>
     );
 }
+
+export default ListItem
