@@ -36,7 +36,7 @@ type Props = {|
  * the answers given for each personalisation question the user has answered.
  */
 
-export default function QuestionStepper({
+function QuestionStepper({
     showQuestionIcons = false,
     showClearLocation = false,
     showEditAnswers = false,
@@ -187,3 +187,5 @@ export function getStepsRemaining(
 
     return pagesToShow.length
 }
+
+export default QuestionStepper
