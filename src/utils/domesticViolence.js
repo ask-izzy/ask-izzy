@@ -2,16 +2,18 @@
 
 import storage from "../storage";
 
-import AreYouSafe from "../pages/personalisation/AreYouSafe";
-import OnlineSafetyScreen from "../pages/personalisation/OnlineSafetyScreen";
+import AreYouSafe from "../constants/personalisation-pages/AreYouSafe";
+import OnlineSafetyScreen from
+    "../constants/personalisation-pages/OnlineSafetyScreen";
+import {getSavedPersonalisationAnswer} from "./personalisation"
 
 export const resetDfvOptions = (): void => {
     if (
         ["No", "I'm not sure"].includes(
-            AreYouSafe.savedAnswer
+            getSavedPersonalisationAnswer(AreYouSafe)
         ) &&
-        !OnlineSafetyScreen.savedAnswer
+        !getSavedPersonalisationAnswer(OnlineSafetyScreen)
     ) {
-        storage.removeItem(AreYouSafe.defaultProps.name);
+        storage.removeItem(AreYouSafe.name);
     }
 }

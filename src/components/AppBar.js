@@ -42,7 +42,7 @@ function AppBar(
     const unsetSavedAnswersForCategory = (category: Category): void => {
         const savedAnswers = category.personalisation.filter(personalisation =>
             personalisation.title.toString().toLowerCase() !== "location"
-        ).map(cat => cat.defaultProps.name)
+        ).map(cat => cat.name)
         savedAnswers.forEach(answer => {
             Storage.removeItem(answer)
         })

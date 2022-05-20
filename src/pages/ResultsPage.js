@@ -26,11 +26,13 @@ import storage from "../storage";
 import type {SortType} from "../components/base/Dropdown"
 import type {travelTimesStatus} from "../hooks/useTravelTimesUpdater";
 import {
+    setLocationFromUrl,
+} from "../utils/personalisation"
+import {
     getPersonalisationPagesToShow,
     getCategoryFromRouter,
     getPageTitleFromRouter,
-    setLocationFromUrl,
-} from "../utils/personalisation"
+} from "../utils/routing"
 import Category from "../constants/Category"
 
 type State = {

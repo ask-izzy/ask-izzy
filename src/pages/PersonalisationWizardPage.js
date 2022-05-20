@@ -8,19 +8,25 @@ import routerContext from "../contexts/router-context";
 import Category from "../constants/Category"
 import {
     navigateToPersonalisationSubpath,
+    setLocationFromUrl,
+} from "../utils/personalisation"
+import {
+    getPersonalisationPagesToShow,
     getCurrentPersonalisationPage,
     getCategoryFromRouter,
-    setLocationFromUrl,
-    getPersonalisationPagesToShow,
-} from "../utils/personalisation"
-import WhoIsLookingForHelpPage from "./personalisation/WhoIsLookingForHelp"
+} from "../utils/routing"
+import WhoIsLookingForHelp from
+    "../constants/personalisation-pages/WhoIsLookingForHelp"
 import storage from "../storage"
 
-import type {PersonalisationPage} from "../utils/personalisation"
+import type {PersonalisationPage} from "../../flow/personalisation-page"
+
+import RenderPersonalisationPage
+    from "./personalisation/RenderPersonalisationPage"
+
 type State = {
   showSubpage: boolean,
   category: ?Category,
-  nextDisabled: boolean
 }
 
 class PersonalisationWizardPage extends React.Component<{}, State> {
@@ -28,7 +34,6 @@ class PersonalisationWizardPage extends React.Component<{}, State> {
         super(props, context);
 
         this.state = {
-            nextDisabled: false,
             showSubpage: true,
             category: getCategoryFromRouter(context.router),
         };
@@ -42,7 +47,6 @@ class PersonalisationWizardPage extends React.Component<{}, State> {
     ): State {
         return {
             ...state,
-            nextDisabled: false,
             showSubpage: true,
         };
     }
@@ -68,19 +72,12 @@ class PersonalisationWizardPage extends React.Component<{}, State> {
     ): void {
         navigateToPersonalisationSubpath(
             this.context.router,
-            `personalise/page/${subpage.defaultProps.name}`,
+            `personalise/page/${subpage.name}`,
             navigateOptions
         );
     }
 
     nextStep: () => void = () => {
-        if (this.state.nextDisabled) {
-            return
-        }
-
-        this.refs?.subpage?.onNextStep?.();
-        this.setState({nextDisabled: false});
-
         const nextPage = getPersonalisationPagesToShow(this.context.router)[0]
 
         if (!nextPage) {
@@ -97,7 +94,7 @@ class PersonalisationWizardPage extends React.Component<{}, State> {
             )
             if (pagesToShow.length > 0) {
                 // Reset WhoIsLookingForHelp page
-                storage.removeItem(WhoIsLookingForHelpPage.defaultProps.name);
+                storage.removeItem(WhoIsLookingForHelp.name);
 
                 const firstPage = getPersonalisationPagesToShow(
                     this.context.router
@@ -110,9 +107,11 @@ class PersonalisationWizardPage extends React.Component<{}, State> {
             }
         }
 
-        const Subpage = getCurrentPersonalisationPage(this.context.router);
+        const personalisationPage = getCurrentPersonalisationPage(
+            this.context.router
+        );
 
-        if (!Subpage) {
+        if (!personalisationPage) {
             throw new Error(
                 "Expected current personalisation page but none found"
             );
@@ -134,10 +133,9 @@ class PersonalisationWizardPage extends React.Component<{}, State> {
         // FIXME: Tap-up is hitting the new questions on the next page
         return (
             <div className="PersonalisationPage">
-                <Subpage
-                    ref="subpage"
+                <RenderPersonalisationPage
+                    personalisationPage={personalisationPage}
                     onDoneTouchTap={this.nextStep}
-                    category={this.state.category}
                     backToAnswers={false}
                 />
             </div>

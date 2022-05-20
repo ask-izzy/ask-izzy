@@ -2,74 +2,18 @@
 import type {
     Node as ReactNode,
 } from "react"
+import _ from "underscore";
 
 import {replaceUrlLocation} from "./url";
-import {getCategory} from "../constants/categories";
 import Category from "../constants/Category";
-import personalisation from "../pages/personalisation";
 import storage from "../storage";
 import type { RouterContextObject } from "../contexts/router-context";
 import type { SearchQueryChanges } from "../../src/iss/searchQueryBuilder";
 
-export type PersonalisationQuestionPageDefaultProps = {|
-    name: string,
-    question: string,
-    byline?: string,
-    info?: string,
-    multipleChoice?: boolean,
-    showSupportSearchBar?: boolean,
-    possibleAnswers: {[string]: SearchQueryChanges},
-    descriptionsForAnswers?: {[string]: string},
-    icons?: Object,
-    oldAnswers?: {[string]: string},
-    showDVLinkBar?: boolean,
-    textDVLinkBar?: ReactNode,
-    noQuestionStepperBreadcrumb?: boolean,
-    noQuestionStepperStep?: boolean,
-|}
+import type {
+    PersonalisationPage,
+} from "../../flow/personalisation-page"
 
-export type PersonalisationNonQuestionPageDefaultProps = {|
-    name: string,
-    byline?: string,
-    info?: string,
-    noQuestionStepperBreadcrumb?: boolean,
-    noQuestionStepperStep?: boolean,
-    baseTextBoxComponent?: ReactNode,
-    heading: string,
-    showDoneButton?: boolean
-|}
-
-export type PersonalisationQuestionPageOtherProps = {
-    onDoneTouchTap: () => void,
-    goBack?: () => void,
-    mobileView?: boolean,
-    backToAnswers?: boolean,
-    classNames?: string,
-}
-export type PersonalisationNonQuestionPageOtherProps = {
-    ...PersonalisationQuestionPageOtherProps,
-}
-
-export type PersonalisationQuestionPageProps = {|
-    ...PersonalisationQuestionPageDefaultProps,
-    ...PersonalisationQuestionPageOtherProps
-|}
-export type PersonalisationNonQuestionPageProps = {|
-    ...PersonalisationNonQuestionPageDefaultProps,
-    ...PersonalisationNonQuestionPageOtherProps
-|}
-export type PersonalisationPageProps =
-    PersonalisationQuestionPageProps |
-    PersonalisationNonQuestionPageProps;
-
-export type PersonalisationPageState = {
-    category: ?Category,
-}
-
-export type PersonalisationPage =
-    typeof personalisation.BaseQuestion |
-    typeof personalisation.Location |
-    typeof personalisation.WhoIsLookingForHelp
 
 export function getFullPathForPersonalisationSubpath(
     router: $PropertyType<RouterContextObject, 'router'>,
@@ -106,87 +50,17 @@ export function navigateToPersonalisationSubpath(
     );
 }
 
-export function getCurrentPersonalisationPage(
-    router: $PropertyType<RouterContextObject, 'router'>,
-): ?PersonalisationPage {
-    const pages = getPersonalisationPages(router)
-    const index = getCurrentPersonalisationPageIndex(
-        router,
-        pages
-    )
-    return typeof index === "number" ? pages[index] : null;
-}
-
-export function getCurrentPersonalisationPageIndex(
-    router: $PropertyType<RouterContextObject, 'router'>,
-    personalisationPages: Array<PersonalisationPage>
-): ?number {
-    const currentPageName = router.match.params.subpage
-    const index = personalisationPages.findIndex(page => {
-        return page.defaultProps.name === currentPageName
-    });
-
-    return index >= 0 ? index : null
-}
-
-/*
-* An array of pages used in the process of personalising the current
-* category/search.
-*/
-export function getPersonalisationPages(
-    router: $PropertyType<RouterContextObject, 'router'>,
-): Array<PersonalisationPage> {
-    let pages = [];
-
-    const category = getCategory(
-        router.match.params.page
-    )
-
-    if (category) {
-        pages = category.personalisation;
-    } else if (router.match.params.search) {
-        pages = [
-            personalisation.FreeTextAreYouSafe,
-            personalisation.OnlineSafetyScreen,
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
-        ];
-    } else {
-        console.error("Current route involves no personalisation pages")
+export function prettyPrintAnswer(
+    personalisationPage: PersonalisationPage,
+    answer: string
+): ReactNode {
+    if (personalisationPage.prettyPrintAnswer) {
+        return personalisationPage.prettyPrintAnswer(answer)
     }
-
-    return pages.filter(page => {
-        if (typeof window !== "undefined") {
-            // $FlowIgnore
-            return !page.getShouldIncludePage || page.getShouldIncludePage()
-        }
-        return true
-    });
+    return answer
 }
 
-export function currentRouteIsPersonalised(
-    router: $PropertyType<RouterContextObject, 'router'>
-): boolean {
-    const category = getCategory(
-        router.match.params.page
-    )
-    return Boolean(category || router.match.params.search)
-}
 
-/*
-* An array of pages which require input from the user before current
-* category/search results can be shown.
-*/
-export function getPersonalisationPagesToShow(
-    router: $PropertyType<RouterContextObject, 'router'>,
-): Array<PersonalisationPage> {
-    let pages = getPersonalisationPages(router)
-
-    // Only show page if it haven't already been answered
-    return pages.filter(
-        page => !page.savedAnswer
-    );
-}
 
 export function getBannerName(
     category: ?Category,
@@ -195,30 +69,6 @@ export function getBannerName(
     return (questionPageName === "sub-indigenous" && "atsi") ||
         category?.key ||
         "homepage"
-}
-
-export function getCategoryFromRouter(
-    router: $PropertyType<RouterContextObject, 'router'>
-): ?Category {
-    return getCategory(
-        router.match.params.page
-    )
-}
-
-export function getPageTitleFromRouter(
-    router: $PropertyType<RouterContextObject, 'router'>
-): string {
-    const category = getCategoryFromRouter(router)
-    if (category) {
-        return category.name;
-    } else if (router.match.params.search) {
-        const search = decodeURIComponent(
-            router.match.params.search
-        );
-        return `“${search.replace(/["']/g, "")}”`;
-    } else {
-        return "undefined-search";
-    }
 }
 
 export function setLocationFromUrl(
@@ -235,5 +85,79 @@ export function setLocationFromUrl(
             storage.setSearchArea(`${suburb}, ${state}`);
             storage.clearUserGeolocation()
         }
+    }
+}
+
+export function getSavedPersonalisationAnswer(
+    personalisationPage: PersonalisationPage
+): string | Array<string> {
+    if (personalisationPage.multipleChoice) {
+        let savedAnswer = storage.getJSON(personalisationPage.name);
+
+        if (Array.isArray(savedAnswer)) {
+            // Update answers if we had stored an old answer
+            savedAnswer = savedAnswer.map((answer) =>
+                personalisationPage.oldAnswers?.[answer] || answer
+            )
+            return _.union(
+                personalisationPage.possibleAnswers.keys,
+                savedAnswer
+            );
+        }
+
+        return savedAnswer;
+
+    } else {
+        let answer = storage.getItem(personalisationPage.name);
+
+        if (typeof answer !== "string") {
+            return "";
+        }
+
+        return answer;
+    }
+}
+
+export function getSearchQueryChanges(
+    personalisationPage: PersonalisationPage
+): SearchQueryChanges | Array<SearchQueryChanges> | null {
+    if (personalisationPage.searchQueryChanges) {
+        return personalisationPage.searchQueryChanges
+    }
+    const savedAnswer = getSavedPersonalisationAnswer(
+        personalisationPage
+    )
+    if (personalisationPage.type !== "question") {
+        return {}
+    }
+    const possibleAnswers = personalisationPage.possibleAnswers
+    if (savedAnswer instanceof Array) {
+        // If there are multiple answers, at most the first 2 as ordered
+        // by the order they appear in the list displayed to the user
+        const searchQueryChanges: Array<SearchQueryChanges> = []
+        for (const [answer, queryChange] of (
+            // We know queryChange must be SearchQueryChanges but because
+            // flow is stupid it Object.entries() outputs [string, mixed]
+            // no matter the input.
+            (Object.entries(possibleAnswers): any): Array<
+                [string, SearchQueryChanges]
+            >
+        )) {
+            if (savedAnswer.includes(answer)) {
+                searchQueryChanges.push(queryChange)
+            }
+            if (searchQueryChanges.length >= 2) {
+                break;
+            }
+        }
+        return searchQueryChanges
+    } else if (savedAnswer === "(skipped)") {
+        // This question has been skipped.
+        return {};
+    } else if (savedAnswer) {
+        return possibleAnswers[savedAnswer] || null
+    } else {
+        // this question hasn't been answered
+        return null;
     }
 }

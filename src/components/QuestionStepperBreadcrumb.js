@@ -7,8 +7,12 @@ import cnx from "classnames";
 import routerContext from "../contexts/router-context";
 import MapIcon from "../icons/Map";
 import Link from "./base/Link";
-import {getFullPathForPersonalisationSubpath} from "../utils/personalisation"
-import type {PersonalisationPage} from "../utils/personalisation"
+import {
+    getFullPathForPersonalisationSubpath,
+    prettyPrintAnswer,
+    getSavedPersonalisationAnswer,
+} from "../utils/personalisation"
+import type {PersonalisationPage} from "../../flow/personalisation-page"
 
 type Props = {|
     personalisationPage: PersonalisationPage,
@@ -26,7 +30,7 @@ export default function QuestionStepperBreadcrumb({
     const {router} = useContext(routerContext)
 
     const currentlyEditing =
-        personalisationPage.defaultProps.name === router.match.params.subpage
+        personalisationPage.name === router.match.params.subpage
 
 
     function AnswerContainer(props): ReactNode {
@@ -35,7 +39,7 @@ export default function QuestionStepperBreadcrumb({
         } else {
             const url = getFullPathForPersonalisationSubpath(
                 router,
-                `personalise/page/${personalisationPage.defaultProps.name}`
+                `personalise/page/${personalisationPage.name}`
             )
             return (
                 <Link
@@ -49,7 +53,7 @@ export default function QuestionStepperBreadcrumb({
     return (
         <span className={cnx("QuestionStepperBreadcrumb", {currentlyEditing})}>
             {showQuestionIcons &&
-            personalisationPage.defaultProps.name === "location" &&
+            personalisationPage.name === "location" &&
                 <MapIcon
                     aria-hidden={true}
                     viewBox="19 16 26 34"
@@ -87,7 +91,7 @@ export function getMaxNumberOfAnswersToShowInBreadcrumb(
     const numOfSingleChoicePersonalisationPages = personalisationPages.filter(
         // ternary statement required because flow is wack
         // eslint-disable-next-line no-unneeded-ternary
-        page => page.defaultProps.multipleChoice ? false : true
+        page => page.multipleChoice ? false : true
     ).length
 
     return maxBreadcrumbs - numOfSingleChoicePersonalisationPages;
@@ -97,12 +101,12 @@ export function getBreadcrumbText(
     personalisationPage: PersonalisationPage,
     personalisationPages: Array<PersonalisationPage>
 ): Array<ReactNode> {
-    const possibleAnswers = personalisationPage.defaultProps.possibleAnswers ||
+    const possibleAnswers = personalisationPage.possibleAnswers ||
         null
 
     let savedAnswers: Array<string> =
         // $FlowIgnore Flow confused about flat()
-        [personalisationPage.savedAnswer].flat()
+        [getSavedPersonalisationAnswer(personalisationPage)].flat()
     /* If the personalisation question is one with set answers (not the location
        page for example) then make sure the saved answers are ordered in the
        order they're listed in the question */
@@ -139,7 +143,7 @@ export function getBreadcrumbText(
 
     }
     const prettyPrintedAnswers = savedAnswers.map(
-        answer => personalisationPage.prettyPrintAnswer?.(answer) || null
+        answer => prettyPrintAnswer(personalisationPage, answer)
     ).filter(answer => answer)
 
     const maxNumberOfAnswersToShow =
@@ -161,7 +165,9 @@ export function breadcrumbIsTruncated(
     personalisationPage: PersonalisationPage,
     personalisationPages: Array<PersonalisationPage>
 ): boolean {
-    const prettyPrintedAnswers = [personalisationPage.savedAnswer].flat()
+    const prettyPrintedAnswers = [
+        getSavedPersonalisationAnswer(personalisationPage),
+    ].flat()
     const maxNumberOfAnswersToShow =
         getMaxNumberOfAnswersToShowInBreadcrumb(personalisationPages)
     return prettyPrintedAnswers.length > maxNumberOfAnswersToShow

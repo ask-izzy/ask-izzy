@@ -8,74 +8,28 @@ import storage from "../../storage";
 import {getBannerName} from "../../utils/personalisation"
 import routerContext from "../../contexts/router-context";
 import type {
-    PersonalisationNonQuestionPageProps,
-    PersonalisationNonQuestionPageDefaultProps,
-} from "../../utils/personalisation";
+    PersonalisationInfoPage,
+} from "../../../flow/personalisation-page"
+import LgbtiqaDomesticViolenceScreen
+    from "./static-page-contents/LgbtiqaDomesticViolenceScreen"
+import Under18DomesticViolenceScreen
+    from "./static-page-contents/Under18DomesticViolenceScreen"
+import UsingViolenceScreen from "./static-page-contents/UsingViolenceScreen"
+import OnlineSafetyScreen from "./static-page-contents/OnlineSafetyScreen"
 
-// We need to create the defaultProps out of the component first otherwise flow
-// doesn't typecheck it
-const defaultProps: $Shape<PersonalisationNonQuestionPageDefaultProps> = {
-    showDoneButton: true,
-    noQuestionStepperStep: true,
-    noQuestionStepperBreadcrumb: true,
-};
+type Props = {|
+    onDoneTouchTap: () => void,
+    backToAnswers?: boolean,
+    details: PersonalisationInfoPage,
+    goBack?: () => void
+|}
 
-class BaseStaticPersonalisation extends React.Component<
-    PersonalisationNonQuestionPageProps,
-    {}
-> {
+class BaseStaticPersonalisation extends React.Component<Props> {
     static contextType: any = routerContext;
 
-    +doneButtonLabel: ?string;
-
-    static defaultProps: PersonalisationNonQuestionPageDefaultProps =
-        defaultProps
-
-    /*
-     * How should this answer be represented
-     * @returns {string} A description of the question/answer
-    */
-    static headingValue(): string {
-        return "";
-    }
-
-    static prettyPrintAnswer(answer: string): string {
-        return answer;
-    }
-
-    static get savedAnswer(): string {
-        let answer = storage.getItem(this.defaultProps.name);
-
-        if (typeof answer !== "string") {
-            return "";
-        }
-
-        return answer;
-    }
-
-    get heading(): string {
-        return this.props.heading;
-    }
-
-    /**
-     * Determines whether or not to show the question on the summary page.
-     *
-     * @returns {boolean} true if we should show this on the summary page.
-     */
-    static getShouldShowInSummary(): boolean {
-        return false;
-    }
-
     onDoneTouchTap(): void {
+        storage.setItem(this.props.details.name, true);
         this.props.onDoneTouchTap();
-    }
-
-    onAnswerTouchTap(): void {
-        this.props.onDoneTouchTap();
-    }
-
-    renderContent(): React.Node {
-        return <React.Fragment />;
     }
 
     renderDoneButton(): ?React.Element<any> {
@@ -83,11 +37,7 @@ class BaseStaticPersonalisation extends React.Component<
             <div>
                 <div className="done-button">
                     <components.FlatButton
-                        label={
-                            this.doneButtonLabel ?
-                                this.doneButtonLabel
-                                : "Continue"
-                        }
+                        label={this.props.details.getDoneButtonLabel()}
                         autoFocus={true}
                         onClick={this.onDoneTouchTap.bind(this)}
                     />
@@ -96,21 +46,34 @@ class BaseStaticPersonalisation extends React.Component<
         );
     }
 
+    renderContent(): React.Node {
+        const contentComponents = {
+            "lgbtiqa-domestic-violence": LgbtiqaDomesticViolenceScreen,
+            "under-18-dfv": Under18DomesticViolenceScreen,
+            "using-violence": UsingViolenceScreen,
+            "online-safety-screen": OnlineSafetyScreen,
+        }
+
+        const ContentComponent = contentComponents[this.props.details.name]
+
+        return <ContentComponent />
+    }
+
     render(): React.Node {
         const category = getCategory(
             this.context.router.match.params.page
         )
-        const bannerName = getBannerName(category, this.props.name)
+        const bannerName = getBannerName(category, this.props.details.name)
         return (
             <div>
                 <HeaderBar
                     primaryText={
                         <div>
-                            {this.heading}
+                            {this.props.details.heading}
                         </div>
                     }
                     secondaryText={
-                        this.props.byline
+                        this.props.details.byline
                     }
                     fixedAppBar={true}
                     bannerName={bannerName}
@@ -118,12 +81,12 @@ class BaseStaticPersonalisation extends React.Component<
                 <main>
                     <div className="body">
                         {this.renderContent()}
-                        {this.props.baseTextBoxComponent && (
+                        {this.props.details.baseTextBoxComponent && (
                             <div className="TextBannerContainer">
-                                {this.props.baseTextBoxComponent}
+                                {this.props.details.baseTextBoxComponent}
                             </div>
                         )}
-                        {this.props.showDoneButton && this.renderDoneButton()}
+                        {this.renderDoneButton()}
                     </div>
                 </main>
             </div>

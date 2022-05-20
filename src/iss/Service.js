@@ -19,9 +19,6 @@ import type {
 import ServiceOpening from "./ServiceOpening";
 import type {SortType} from "../components/base/Dropdown"
 import {getIssClient, getIssVersion} from "./client"
-// WARNING: This does nothing directly but if it's removed the Jenga tower that
-// is Ask Izzy's circular dependencies comes crashing down
-import "../utils/personalisation"
 
 export type ServiceProps = {
     ...Service,

@@ -2,7 +2,6 @@
 import * as React from "react";
 import type {Node as ReactNode} from "react";
 import classnames from "classnames";
-import _ from "underscore";
 
 import HeaderBar from "../../components/HeaderBar";
 import InputListItem from "../../components/InputListItem";
@@ -10,31 +9,36 @@ import FlatButton from "../../components/FlatButton";
 import WithStickyFooter from "../../components/WithStickyFooter";
 import icons from "../../icons";
 import storage from "../../storage";
-import type {SearchQueryChanges} from "../../iss/searchQueryBuilder";
 import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import ScreenReader from "../../components/ScreenReader";
-import {getBannerName} from "../../utils/personalisation"
+import {
+    getBannerName,
+    getSavedPersonalisationAnswer,
+} from "../../utils/personalisation"
 import routerContext from "../../contexts/router-context";
-import type {
-    PersonalisationQuestionPageProps,
-    PersonalisationPageState,
-    PersonalisationQuestionPageDefaultProps,
-} from "../../utils/personalisation";
 import SupportSearchBar from "../../components/SupportSearchBar";
+import type {
+    PersonalisationQuestionPage,
+} from "../../../flow/personalisation-page"
+import Category from "../../constants/Category";
 
+type Props = {|
+    onDoneTouchTap: () => void,
+    mobileView?: boolean,
+    backToAnswers?: boolean,
+    details: PersonalisationQuestionPage,
+    goBack?: () => void,
+    classNames?: Array<string>,
+|}
 export type State = {
-    ...PersonalisationPageState,
+    category: ?Category,
     selectedAnswer: ?string | Set<string>, // The answer(s) that a user has
         // currently selected but not confirmed
 }
 
-class BaseQuestion extends React.Component<
-    PersonalisationQuestionPageProps,
-    State
-> {
+class BaseQuestion extends React.Component<Props, State> {
     static contextType: any = routerContext;
-    static defaultProps: PersonalisationQuestionPageDefaultProps;
 
     constructor(props: Object) {
         super(props);
@@ -49,115 +53,17 @@ class BaseQuestion extends React.Component<
         const category = getCategory(
             this.context.router.match.params.page
         )
+        const savedAnswer = getSavedPersonalisationAnswer(
+            this.props.details
+        )
         this.setState({
-            selectedAnswer: this.props.multipleChoice ?
-                new Set(this.constructor.savedAnswer)
+            selectedAnswer: this.props.details.multipleChoice ?
+                new Set(savedAnswer)
                 : null,
             category,
         })
     }
 
-    static title: string
-
-    static get summaryLabel(): string {
-        return this.defaultProps.question;
-    }
-
-    static get summaryValue(): string {
-        if (!this.savedAnswer) {
-            return "None selected";
-        } else if (this.savedAnswer instanceof Array) {
-            const nSelected = this.savedAnswer.length;
-
-            if (nSelected === 0) {
-                return "None selected";
-            } else if (nSelected > 3) {
-                return `${nSelected} selected`;
-            } else {
-                return this.savedAnswer.join(", ")
-            }
-        } else {
-            return this.savedAnswer
-        }
-    }
-
-    /*
-     * How should this answer be represented
-     * @returns {string} A description of the question/answer
-    */
-    static headingValue(): string {
-        return "";
-    }
-
-    /*
-     * Gets the answer which has been saved into the users SessionStore after
-     * they selected and then confirmed an answer.
-     */
-    static get savedAnswer(): string | Array<string> {
-        if (this.defaultProps.multipleChoice) {
-            let savedAnswer = storage.getJSON(this.defaultProps.name);
-
-            if (Array.isArray(savedAnswer)) {
-                // Update answers if we had stored an old answer
-                savedAnswer = savedAnswer.map((answer) =>
-                    this.defaultProps.oldAnswers?.[answer] || answer
-                )
-                return _.union(
-                    this.defaultProps.possibleAnswers.keys,
-                    savedAnswer
-                );
-            }
-
-            return savedAnswer;
-
-        } else {
-            let answer = storage.getItem(this.defaultProps.name);
-
-            if (typeof answer !== "string") {
-                return "";
-            }
-
-            return answer;
-        }
-    }
-
-    static prettyPrintAnswer(answer: string): ReactNode {
-        return answer;
-    }
-
-    static getSearchQueryChanges(): SearchQueryChanges
-        | Array<SearchQueryChanges> | null {
-        const possibleAnswers = this.defaultProps.possibleAnswers
-        if (this.savedAnswer instanceof Array) {
-            // If there are multiple answers, at most the first 2 as ordered
-            // by the order they appear in the list displayed to the user
-            const searchQueryChanges: Array<SearchQueryChanges> = []
-            for (const [answer, queryChange] of (
-                // We know queryChange must be SearchQueryChanges but because
-                // flow is stupid it Object.entries() outputs [string, mixed]
-                // no matter the input.
-                (Object.entries(possibleAnswers): any): Array<
-                    [string, SearchQueryChanges]
-                >
-            )) {
-                if (this.savedAnswer.includes(answer)) {
-                    searchQueryChanges.push(queryChange)
-                }
-                if (searchQueryChanges.length >= 2) {
-                    break;
-                }
-            }
-            return searchQueryChanges
-        } else if (this.savedAnswer === "(skipped)") {
-            // This question has been skipped.
-            return {};
-        } else if (this.savedAnswer) {
-            return possibleAnswers[this.savedAnswer] || null
-        } else {
-            // this question hasn't been answered
-            return null;
-        }
-    }
 
 
     /**
@@ -167,46 +73,38 @@ class BaseQuestion extends React.Component<
      * to this question.
      */
     get arrayOfPossibleAnswers(): Array<string> {
-        return Object.keys(this.props.possibleAnswers);
+        return Object.keys(this.props.details.possibleAnswers);
     }
 
     get question(): string {
-        return this.props.question;
-    }
-
-    /**
-     * Determines whether or not to show the question on the summary page.
-     *
-     * @returns {boolean} true if we should show this on the summary page.
-     */
-    static getShouldShowInSummary(): boolean {
-        return true;
+        return this.props.details.question;
     }
 
     onNextStep(): void {
         if (this.state.selectedAnswer instanceof Set) {
             storage.setJSON(
-                this.props.name,
+                this.props.details.name,
                 Array.from(this.state.selectedAnswer)
             );
         } else {
             storage.setItem(
-                this.props.name,
+                this.props.details.name,
                 this.state.selectedAnswer || "(skipped)"
             );
         }
+        this.props.onDoneTouchTap()
     }
 
-    iconFor(answer: string): ?ReactNode {
-        if (this.props.icons && this.props.icons[answer]) {
-            const Icon = this.props.icons[answer];
-
+    iconFor(answer: string): ReactNode {
+        const Icon = this.props.details.icons?.[answer];
+        if (Icon) {
             return (
                 <Icon
                     className="ColoredIcon big icon-fg-color"
                 />
             );
         }
+        return null
     }
 
     onAnswerTouchTap(answer: string, selectingAnswer: boolean): void {
@@ -222,20 +120,20 @@ class BaseQuestion extends React.Component<
             this.setState({
                 selectedAnswer: answer,
             }, () => {
-                this.props.onDoneTouchTap()
+                this.onNextStep()
             });
         }
     }
 
     getDescriptionForAnswer(answer: string): ?string {
-        return this.props.descriptionsForAnswers?.[answer] || null
+        return this.props.details.descriptionsForAnswers?.[answer] || null
     }
 
     render(): React.Node {
         let listClassName = "List";
 
-        if (this.props.name) {
-            listClassName = `${listClassName} ${this.props.name}`;
+        if (this.props.details.name) {
+            listClassName = `${listClassName} ${this.props.details.name}`;
         }
 
         return (
@@ -249,20 +147,20 @@ class BaseQuestion extends React.Component<
                         <HeaderBar
                             primaryText={
                                 <div>
-                                    {this.props.question}
+                                    {this.props.details.question}
                                 </div>
                             }
                             infoText={
-                                this.props.info
+                                this.props.details.info
                             }
                             secondaryText={
-                                this.props.byline
+                                this.props.details.byline
                             }
                             fixedAppBar={true}
                             taperColour={"LighterGrey"}
                             bannerName={getBannerName(
                                 this.state.category,
-                                this.props.name
+                                this.props.details.name
                             )}
                             {...this.props.backToAnswers && {
                                 goBack: {
@@ -297,18 +195,16 @@ class BaseQuestion extends React.Component<
                     >
                         <fieldset>
                             <legend>
-                                {this.props.question}
+                                {this.props.details.question}
                             </legend>
                             <div className={listClassName}>
                                 {this.arrayOfPossibleAnswers.map(
                                     this.renderAnswer.bind(this)
                                 )}
                             </div>
-                            {this.props.showDVLinkBar &&
-                                this.props.textDVLinkBar}
+                            {this.props.details.baseTextBoxComponent ?? null}
                         </fieldset>
                     </WithStickyFooter>
-                    {this.props.baseTextBoxComponent}
                     {this.renderSearchBar()}
                 </main>
             </div>
@@ -316,7 +212,7 @@ class BaseQuestion extends React.Component<
     }
 
     renderAnswer(...params: [string, number]): ReactNode {
-        if (this.props.multipleChoice) {
+        if (this.props.details.multipleChoice) {
             return this.renderMultiChoiceAnswer(...params)
         } else {
             return this.renderSingleChoiceAnswer(...params)
@@ -387,15 +283,17 @@ class BaseQuestion extends React.Component<
             <div className="done-button">
                 <FlatButton
                     label={label}
-                    className={this.props.multipleChoice ? "" : "text-link"}
-                    onClick={this.props.onDoneTouchTap.bind(this)}
+                    className={
+                        this.props.details.multipleChoice ? "" : "text-link"
+                    }
+                    onClick={this.onNextStep.bind(this)}
                 />
             </div>
         )
     }
 
     renderSearchBar(): ReactNode {
-        if (this.props.showSupportSearchBar) {
+        if (this.props.details.showSupportSearchBar) {
             return <SupportSearchBar />
         }
         return null

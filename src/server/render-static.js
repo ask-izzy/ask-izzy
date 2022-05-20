@@ -116,7 +116,7 @@ function* generateRouteParamVals(
             if (routeParams.includes("subpage")) {
                 // generate subpage paths for category
                 const subpages = personalisation.map(
-                    question => question.defaultProps.name
+                    question => question.name
                 )
                 for (const subpage of subpages) {
                     yield {

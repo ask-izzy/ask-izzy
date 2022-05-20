@@ -13,8 +13,7 @@ type Props = {}
 
 type State = {
     isFormDone: boolean,
-    issUrl?: URL,
-    issFormUrl?: URL,
+    issFormUrl: string,
 }
 
 class AddServicePage extends React.Component<Props, State> {
@@ -25,6 +24,7 @@ class AddServicePage extends React.Component<Props, State> {
 
         this.state = {
             isFormDone: false,
+            issFormUrl: "",
         };
 
         this.handleMessage = this.handleMessage.bind(this);
@@ -36,18 +36,11 @@ class AddServicePage extends React.Component<Props, State> {
         if (typeof window !== "undefined") {
             window.addEventListener("message", this.handleMessage, false);
 
-            if (window.ISS_BASE_URL) {
-                this.setState({
-                    ...this.state,
-                    issUrl: window.ISS_BASE_URL,
-                    issFormUrl: new URL(
-                        "/add-service-form?form=ask-izzy",
-                        window.ISS_BASE_URL
-                    ),
-                })
-            }
+            this.setState({
+                issFormUrl:
+                    `${window.ISS_BASE_URL}/add-service-form?form=ask-izzy`,
+            });
         }
-
     }
 
     componentWillUnmount(): void {
@@ -57,13 +50,11 @@ class AddServicePage extends React.Component<Props, State> {
     }
 
     handleMessage(event: MessageEvent): void {
-        const origin = event.origin
-
-        if (origin !== this.state.issUrl?.origin) {
+        if (event.origin !== window.ISS_BASE_URL) {
             return;
         }
 
-        switch (typeof event === "object" && event.data) {
+        switch (event.data) {
         case "formSubmitted":
             this.setState({
                 isFormDone: true,
@@ -194,7 +185,7 @@ class AddServicePage extends React.Component<Props, State> {
 
                 <iframe
                     title="Add Service Form"
-                    src={this.state.issFormUrl || ""}
+                    src={this.state.issFormUrl}
                 />
             </div>
         );

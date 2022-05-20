@@ -25,7 +25,6 @@ import DebugColours from "./components/DebugColours";
 import DebugContainer from "./components/DebugContainer";
 import DebugPersonalisation from "./components/DebugPersonalisation";
 import DebugQueryScore from "./components/DebugQueryScore";
-import DebugSearch from "./components/DebugSearch";
 import DebugServiceRecord from "./components/DebugServiceRecord";
 import DomesticViolenceLinkBar from "./components/DomesticViolenceLinkBar";
 import DomesticViolenceLink from "./components/DomesticViolenceLink";
@@ -91,7 +90,6 @@ export default {
     DebugContainer,
     DebugPersonalisation,
     DebugQueryScore,
-    DebugSearch,
     DebugServiceRecord,
     DomesticViolenceLinkBar,
     DomesticViolenceLink,

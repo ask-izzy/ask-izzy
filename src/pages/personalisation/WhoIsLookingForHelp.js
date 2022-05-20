@@ -3,45 +3,29 @@ import * as React from "react";
 
 import components from "../../components";
 import storage from "../../storage";
-import type {SearchQueryChanges} from "../../iss/searchQueryBuilder";
 import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import ScreenReader from "../../components/ScreenReader";
 import routerContext from "../../contexts/router-context";
+import Category from "../../constants/Category"
 import {
     getBannerName,
 } from "../../utils/personalisation"
-import type {
-    PersonalisationPageProps,
-    PersonalisationNonQuestionPageDefaultProps,
-    PersonalisationPageState,
-} from "../../utils/personalisation";
-
-// We need to create the defaultProps out of the component first otherwise flow
-// doesn't typecheck it
-const defaultProps: PersonalisationNonQuestionPageDefaultProps = {
-    name: "who-is-looking-for-help",
-    noQuestionStepperBreadcrumb: true,
-    heading: "Who is looking for help?",
+import type {PersonalisationLookingForHelpPage} from
+    "../../../flow/personalisation-page"
+type Props = {
+    onDoneTouchTap: () => void,
+    backToAnswers?: boolean,
+    details: PersonalisationLookingForHelpPage,
+    goBack?: () => void
 }
 
-class WhoIsLookingForHelp extends React.Component<
-    PersonalisationPageProps,
-    PersonalisationPageState
-> {
-    static defaultProps: PersonalisationNonQuestionPageDefaultProps =
-        defaultProps;
+type State = {
+    category: ?Category,
+}
 
+class WhoIsLookingForHelp extends React.Component<Props, State> {
     static contextType: any = routerContext;
-
-    static title: string = "Who is looking for help?";
-
-    static getSearchQueryChanges(): SearchQueryChanges | null {
-        if (!WhoIsLookingForHelp.savedAnswer) {
-            return null
-        }
-        return {}
-    }
 
     constructor(props: Object) {
         super(props);
@@ -74,20 +58,10 @@ class WhoIsLookingForHelp extends React.Component<
         (userType: string) => (event: SyntheticEvent<HTMLButtonElement>) => void
     ) = (userType: string) =>
         (event: SyntheticEvent<HTMLButtonElement>): void => {
-            storage.setItem(WhoIsLookingForHelp.defaultProps.name, userType);
+            storage.setItem(this.props.details.name, userType);
 
             this.props.onDoneTouchTap();
         }
-
-    static get savedAnswer(): string {
-        let answer = storage.getItem(this.defaultProps.name);
-
-        if (typeof answer !== "string") {
-            return "";
-        }
-
-        return answer;
-    }
 
     static prettyPrintAnswer: empty
 
@@ -147,7 +121,7 @@ class WhoIsLookingForHelp extends React.Component<
                     fixedAppBar={true}
                     bannerName={getBannerName(
                         this.state.category,
-                        this.props.name
+                        this.props.details.name
                     )}
                 />
                 <div className="questionsBar">

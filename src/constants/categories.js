@@ -3,7 +3,7 @@ import icons from "../icons";
 
 import Category from "./Category";
 
-import personalisation from "../pages/personalisation";
+import personalisation from "../constants/personalisation-pages";
 
 const categories = [
     (new Category({

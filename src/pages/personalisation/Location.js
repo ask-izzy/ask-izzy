@@ -12,7 +12,6 @@ import storage from "../../storage";
 import type {Geolocation} from "../../storage";
 import {getIssClient, getIssVersion} from "../../iss/client"
 import type {ISS3AreaLocation} from "../../ix-web-js-client/apis/iss/v3";
-import type { SearchQueryChanges } from "../../iss/searchQueryBuilder";
 import QuestionStepper from "../../components/QuestionStepper";
 import {getCategory} from "../../constants/categories";
 import WithStickyFooter from "../../components/WithStickyFooter";
@@ -23,10 +22,8 @@ import GeolocationButton from "../../components/GeolocationButton";
 import type {GeolocationStatus} from "../../components/GeolocationButton";
 import routerContext from "../../contexts/router-context";
 import type {
-    PersonalisationPageProps,
-    PersonalisationNonQuestionPageDefaultProps,
-    PersonalisationPageState,
-} from "../../utils/personalisation";
+    PersonalisationLocationPage,
+} from "../../../flow/personalisation-page";
 import {
     getBannerName,
 } from "../../utils/personalisation";
@@ -34,11 +31,18 @@ import {
     addPageLoadDependencies,
     closePageLoadDependencies,
 } from "../../utils/page-loading"
+import Category from "../../constants/Category"
 
 type location = {|name: string|} | Geolocation
 
+type Props = {
+    onDoneTouchTap: () => void,
+    backToAnswers?: boolean,
+    details: PersonalisationLocationPage,
+    goBack?: () => void
+}
 type State = {
-    ...PersonalisationPageState,
+    category: ?Category,
     gettingAutocompletionsInProgress: boolean,
     locationNameInput: string,
     selectedLocation: ?location,
@@ -46,19 +50,7 @@ type State = {
     nextDisabled: boolean,
 }
 
-// We need to create the defaultProps out of the component first otherwise flow
-// doesn't typecheck it
-const defaultProps: PersonalisationNonQuestionPageDefaultProps = {
-    name: "location",
-    heading: "Location",
-};
-
-class Location extends React.Component<
-    PersonalisationPageProps,
-    State
-> {
-    static defaultProps: PersonalisationNonQuestionPageDefaultProps =
-        defaultProps
+class Location extends React.Component<Props, State> {
     static contextType: any = routerContext;
 
     searchInputRef: { current: null | HTMLInputElement } = createRef()
@@ -102,10 +94,6 @@ class Location extends React.Component<
     /* eslint-disable react/sort-comp */
     static title: string = "Location";
 
-    static headingValue(): ?string {
-        return this.savedAnswer && `in ${this.savedAnswer}`
-    }
-
     static get savedAnswer(): string {
         return storage.getSearchArea();
     }
@@ -121,39 +109,22 @@ class Location extends React.Component<
         return !!victoriaRegex.exec(storage.getSearchArea());
     }
 
-    static getSearchQueryChanges(): SearchQueryChanges | null {
-        const searchQuery = {}
-        /* Location/Area is required */
-        const searchArea = storage.getSearchArea();
-        if (!searchArea) {
-            return null;
-        }
-
-        searchQuery.location = {}
-        searchQuery.location.name = searchArea
-
-        /* Coordinates are optional */
-        const userLocation = storage.getUserGeolocation();
-        if (userLocation && userLocation.name === searchArea) {
-            searchQuery.location.coordinates = userLocation;
-        }
-
-        return searchQuery;
-    }
-
-    static summaryLabel: string = "Where are you looking for help?";
-
-    static get summaryValue(): string {
-        return storage.getSearchArea();
-    }
-
-    static getShouldShowInSummary(): boolean {
-        return true;
-    }
-
     onDoneTouchTap(event: SyntheticInputEvent<>): void {
         event.preventDefault();
         if (!this.state.nextDisabled) {
+            if (this.state.selectedLocation) {
+                storage.setSearchArea(this.state.selectedLocation.name);
+                if (isGeolocation(this.state.selectedLocation)) {
+                    storage.setUserGeolocation(this.state.selectedLocation);
+                } else {
+                    storage.clearUserGeolocation()
+                }
+            } else {
+                console.error(
+                    "We should not be able to progress without selecting " +
+                        "a location"
+                )
+            }
             this.props.onDoneTouchTap();
         }
     }
@@ -254,21 +225,6 @@ class Location extends React.Component<
         });
     }
 
-    onNextStep(): void {
-        if (this.state.selectedLocation) {
-            storage.setSearchArea(this.state.selectedLocation.name);
-            if (isGeolocation(this.state.selectedLocation)) {
-                storage.setUserGeolocation(this.state.selectedLocation);
-            } else {
-                storage.clearUserGeolocation()
-            }
-        } else {
-            console.error(
-                "We should not be able to progress without selecting a location"
-            )
-        }
-    }
-
     componentDidUpdate(prevProps: Object, prevState: Object): void {
         // After state updates, make sure you can see the input
         if (
@@ -345,7 +301,7 @@ class Location extends React.Component<
                         fixedAppBar={true}
                         bannerName={getBannerName(
                             this.state.category,
-                            this.props.name
+                            this.props.details.name
                         )}
                         {...this.props.backToAnswers && {
                             goBack: {

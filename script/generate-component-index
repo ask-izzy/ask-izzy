@@ -42,8 +42,8 @@ done
 echo "};" >> $target
 
 # Build personalisation index
-target=./src/pages/personalisation.js
-files=$( find src/pages/personalisation -name '*.js' | sort )
+target=./src/constants/personalisation-pages/index.js
+files=$( find src/constants/personalisation-pages -name '*.js' -not -name 'index.js' | sort )
 
 cat << EOF > $target
 /* @flow */
@@ -55,7 +55,7 @@ EOF
 for f in $files
 do
     base=$( basename "${f%.js}" )
-    echo "import $base from \"./personalisation/$base\";" >> $target
+    echo "import $base from \"./$base\";" >> $target
 done
 
 echo "" >> $target

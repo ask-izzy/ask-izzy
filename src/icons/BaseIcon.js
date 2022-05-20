@@ -4,11 +4,11 @@ import * as React from "react";
 import classnames from "classnames";
 
 type Props = {
-    iconClass: string,
+    iconClass?: string,
     className?: string,
     viewBox?: string,
     containerClassName?: string,
-    fill: string,
+    fill?: string,
 }
 
 class BaseIcon extends React.Component<Props, void> {
