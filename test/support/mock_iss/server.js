@@ -152,7 +152,7 @@ app.get("/api/v3/search/", (req, res) => {
             },
             objects: searchMocks[req.query.q],
         });
-    } else if (req.query.q.match(/food/) && !req.query.q.match(/pet/)) {
+    } else if (req.query.q?.match(/food/) && !req.query.q?.match(/pet/)) {
         res.json({
             meta: {
                 total_count: 4,
@@ -238,7 +238,7 @@ app.get("/api/v3/search/", (req, res) => {
                 },
             ].map(getServiceFixtureProps),
         });
-    } else if (req.query.q.match(/material aid/)) {
+    } else if (req.query.q?.match(/material aid/)) {
         const object = {
             name: "Community Lunch",
             description: "A weekly lunch.",
@@ -283,20 +283,20 @@ app.get("/api/v3/search/", (req, res) => {
                 getServiceFixtureProps({...object, id: Seq()}),
             ],
         });
-    } else if (req.query.q.match(/zero results/)) {
+    } else if (req.query.q?.match(/zero results/)) {
         res.json({
             meta: {
                 total_count: 0,
             },
             objects: [],
         });
-    } else if (req.query.q.match(/cause error/)) {
+    } else if (req.query.q?.match(/cause error/)) {
         res
             .status(402)
             .json({
                 error_message: "You have specifically asked for an error.",
             });
-    } else if (req.query.q.match(/domestic violence/)) {
+    } else if (req.query.q?.match(/domestic violence/)) {
         res.json({
             meta: {
                 total_count: 1,
@@ -312,7 +312,7 @@ app.get("/api/v3/search/", (req, res) => {
                 ),
             ],
         });
-    } else if (req.query.q.match(/elasticsearch unavailable/)) {
+    } else if (req.query.q?.match(/elasticsearch unavailable/)) {
         res
             .status(503)
             .json({
