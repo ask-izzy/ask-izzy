@@ -34,6 +34,7 @@ export const resultsPageVicAndQldWarnAlert = {
     title: "A vic and qld specific alert",
     body: "",
     created_at: "2021-05-25T06:30:07.431Z",
+    updated_at: "2021-05-25T06:30:07.431Z",
     alertLevel: "warn",
     states: [
         { Name: "VIC", __typename: "State" },
@@ -52,6 +53,7 @@ export const covidServicesAffectedAlert = {
         "help and information near you.](/covid-19-support)"
     : string),
     created_at: "2021-05-25T12:19:33.039Z",
+    updated_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "warn",
     states: ([]: Array<State>),
     screenLocation: "resultsPage",
@@ -63,6 +65,7 @@ export const covidInfoAlert = {
     title: "COVID19",
     body: "Hello World",
     created_at: "2021-05-25T12:19:33.039Z",
+    updated_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "warn",
     states: ([]: Array<State>),
     screenLocation: "homePage",
@@ -74,6 +77,7 @@ export const nationalServiceAlert = {
     title: "A national service page alert",
     body: null,
     created_at: "2021-05-25T12:19:33.039Z",
+    updated_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "info",
     states: ([]: Array<State>),
     screenLocation: "servicePage",
@@ -85,6 +89,7 @@ export const vicServiceAlert = {
     title: "A vic service page alert",
     body: null,
     created_at: "2021-05-25T12:19:33.039Z",
+    updated_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "info",
     states: [
         { Name: "VIC", __typename: "State" },
@@ -98,6 +103,7 @@ export const waServiceAlert = {
     title: "A wa service page alert",
     body: null,
     created_at: "2021-05-25T12:19:33.039Z",
+    updated_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "info",
     states: [
         { Name: "WA", __typename: "State" },
@@ -111,6 +117,7 @@ export const resultsPageNationalInfoAlert = {
     title: "The fox jumped over the dog",
     body: null,
     created_at: "2021-05-25T12:19:56.159Z",
+    updated_at: "2021-05-25T12:19:56.159Z",
     alertLevel: "info",
     states: ([]: Array<State>),
     screenLocation: "resultsPage",
@@ -122,6 +129,7 @@ export const resultsPageTasInfoAlert = {
     title: "A tas specific alert",
     body: "",
     created_at: "2021-05-25T06:30:07.431Z",
+    updated_at: "2021-05-25T06:30:07.431Z",
     alertLevel: "warn",
     states: [
         { Name: "TAS", __typename: "State" },
@@ -135,6 +143,7 @@ export const bodyOpenByDefaultResultsPageAlert = {
     title: "Title is always shown",
     body: "Body is open by default",
     created_at: "2021-05-25T12:19:33.039Z",
+    updated_at: "2021-05-25T12:19:33.039Z",
     alertLevel: "info",
     states: ([]: Array<State>),
     screenLocation: "resultsPage",
