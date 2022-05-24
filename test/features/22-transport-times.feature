@@ -82,7 +82,7 @@ Feature: Transport times
         When I search for the service
         Then I should not see transport times
 
-        When I click the "Get your current location" button
+        When I click the "Get your location" button
         Then I should see "Found your location (in Richmond, VIC) – Travel times added below.Clear"
         And I should see a transport time of
         ------------------------------------------

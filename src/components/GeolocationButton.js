@@ -17,13 +17,13 @@ export type GeolocationStatus = {|
 |} | {|
     type: "NOT_STARTED" | "RUNNING"
 |}
-
 type GeolocationButtonProps = {|
     onStatusChange?: (GeolocationStatus) => void,
     locationValue?: Geolocation,
     showLocationInSuccessMessage?: boolean,
     successMessageSuffix?: ?string,
-    showClearButton?: boolean
+    showClearButton?: boolean,
+    buttonClickRef?: ?(function) => void,
 |}
 
 function GeolocationButton({
@@ -32,6 +32,7 @@ function GeolocationButton({
     showLocationInSuccessMessage = false,
     successMessageSuffix,
     showClearButton = false,
+    buttonClickRef,
 }: GeolocationButtonProps): ReactNode {
     const [status, directSetStatus] =
         useState<GeolocationStatus>({type: "NOT_STARTED"})
@@ -54,6 +55,12 @@ function GeolocationButton({
             })
         }
     }, [locationValue])
+
+    useEffect(() => {
+        if (buttonClickRef) {
+            buttonClickRef(onGeolocationClick)
+        }
+    })
 
     // Several aria attributes require the use of an id to reference elements
     // but there can't be multiple elements on a page using the same id. So
@@ -145,7 +152,7 @@ function GeolocationButton({
             return <>
                     <icons.Location/>
                     <span className="primary">
-                        Get your current location
+                        Get your location
                     </span>
                 </>
         case "RUNNING":

@@ -2,6 +2,7 @@
 
 .GeoLocationButton {
     .LocationButton {
+        padding: 0;
         width: auto;
         background: none;
         border-radius: 3px;
@@ -33,6 +34,7 @@
     .primary {
         font-size: 16px;
         font-weight: bold;
+        text-align: left;
     }
 
     .secondary {

@@ -21,7 +21,8 @@ Feature: Personalisation
 
         When I click the "Myself" button
 
-        When I click the "Get your current location" button
+        When I search for blank
+        When I click the "Get your location" button
 
         Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location"
@@ -54,7 +55,8 @@ Feature: Personalisation
         When I click the "Myself" button
         Then I should see "Where are you looking for help?"
 
-        When I click the "Get your current location" button
+        When I search for blank
+        When I click the "Get your location" button
 
         Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location"
@@ -81,7 +83,8 @@ Feature: Personalisation
         When I click the "Myself" button
         Then I should see "Where are you looking for help?"
 
-        When I click the "Get your current location" button
+        When I search for blank
+        When I click the "Get your location" button
 
         Given the GPS returns 37.823S 144.998E
         Then I should see "Found your location"

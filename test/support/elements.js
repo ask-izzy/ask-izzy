@@ -15,7 +15,8 @@ export async function getElementWithText(
     const locator = By.xpath(
         elementWithText(elementText, elementType)
     )
-    return driver.findElement(locator)
+    const driverFound = await driver.findElement(locator)
+    return driverFound
 }
 
 export async function getElementWithTextSubstring(
