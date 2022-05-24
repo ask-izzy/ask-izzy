@@ -10,14 +10,12 @@ import {
     housingService,
 } from "../../fixtures/services";
 import getServiceFixture from "../../fixtures/factories/Service";
-import { injectEnvVars } from "../storybook/loaders";
 import { addGoogleMapsScript } from "../storybook/decorators";
 import Service from "../iss/Service"
 
 export default {
     title: "App Components/SitesMap",
     component: SitesMap,
-    loaders: [injectEnvVars],
     decorators: [addGoogleMapsScript],
 };
 

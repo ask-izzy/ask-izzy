@@ -23,7 +23,7 @@ export default function StrapiMarkdown({
     function absoluteImageUrl(uri: string): string {
         // Strapi returns a relative image url, we need to change
         // it to point to our content server.
-        return window.STRAPI_URL + uri;
+        return process.env.NEXT_PUBLIC_STRAPI_URL + uri;
     }
 
     const renderers: Renderers = {

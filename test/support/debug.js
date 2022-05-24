@@ -28,7 +28,10 @@ function pauseToDebug() {
 }
 
 export async function takeScreenshot(driver, filepath): String {
-    let data = await driver.takeScreenshot();
+    let data = await Promise.race([
+        driver.takeScreenshot(),
+        new Promise((resolve, reject) => setTimeout(() => reject("Timed out"), 1000 * 5)),
+    ])
 
     fs.ensureDir(Path.dirname(filepath))
     await fs.writeFile(filepath, data, "base64");

@@ -71,10 +71,10 @@ Feature: CMS integration
         Given a fresh session
         When I visit /disability-organisations
         Then I should see "Disability Organisations"
-        And I should see "Ask Izzy can help"
+        And I should see "This callout was embedded in the page body"
 
     Scenario: Display Information page with poorly formatted embedded callout
         Given a fresh session
         When I visit /information
         Then I should see "Information"
-        And I should not see "Ask Izzy can help"
+        And I should not see "This callout was embedded in the page body"

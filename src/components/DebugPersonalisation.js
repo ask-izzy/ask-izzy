@@ -5,6 +5,7 @@ import type {
 } from "React";
 import React, {useState} from "react";
 import {diffJson} from "diff";
+import { useRouter } from "next/router"
 import {
     getSearchQueryModifiers,
     buildSearchQueryFromModifiers,
@@ -15,9 +16,8 @@ import Button from "./base/Button"
 import Diff from "./debug/Diff"
 import type { DiffType } from "./debug/Diff"
 import DebugContainer from "../components/DebugContainer";
-import {useRouterContext} from "../contexts/router-context"
 import IssParamsOverrideControls from
-    "../components/debug/IssParamsOverrideControls";
+"../components/debug/IssParamsOverrideControls";
 import Storage from "../storage";
 
 type Props = {|
@@ -41,7 +41,7 @@ export default function DebugPersonalisation({
         return null
     }
     const [convertToISSQuery, setConvertToISSQuery] = useState(true)
-    const router = useRouterContext()
+    const router = useRouter()
 
     // Cast because flow is stupid and doesn't know we're filtering out null
     // https://github.com/facebook/flow/issues/5955

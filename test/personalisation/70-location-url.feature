@@ -25,4 +25,4 @@ Feature: Show location in url
 
         And I click the "Done" button # Personalisation summary page
 
-        Then I should be at /search/housing/Carlton-VIC/
+        Then I should be at /search/housing/Carlton-VIC

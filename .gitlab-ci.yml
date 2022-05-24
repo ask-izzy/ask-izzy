@@ -1,83 +1,164 @@
-# Continuous deployment configuration
-# See http://doc.gitlab.com/ci/builds_configuration/README.html
-
 variables:
-  ENVIRONMENT: development
+  DOCKER_REPO: ${IX_REGISTRY}/ask_izzy
 
 stages:
-  - build
-  - lint
-  - test
-  - deploy
+  - Build
+  - Lint
+  - Test
+  - Deploy
 
-before_script:
-  - hostname
-  - docker version
-  - docker info
+default:
+  before_script:
+    - VERSION=$(git describe) && echo $VERSION
+    - TAG_DEVELOPMENT_STAGE=${DOCKER_REPO}:$VERSION-dev && echo $TAG_DEVELOPMENT_STAGE
+    - TAG_DISTRIBUTION_STAGE=${DOCKER_REPO}:$VERSION-dist && echo $TAG_DISTRIBUTION_STAGE
+    - TAG_PRODUCTION=${DOCKER_REPO}:$VERSION && echo $TAG_PRODUCTION
+    - TAG_CACHE_DEV_STAGE=${DOCKER_REPO}:cache-$CI_COMMIT_BRANCH-dev && echo $TAG_CACHE_DEV_STAGE
+    - TAG_CACHE_DIST_STAGE=${DOCKER_REPO}:cache-$CI_COMMIT_BRANCH-dist && echo $TAG_CACHE_DIST_STAGE
+    - export DOCKER_BUILDKIT=1
 
-build:
-  stage: build
-  script: make build
+build-development:
+  stage: Build
+  script:
+    - docker --version
+    - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
+    - time docker build
+      $([ -n "$DISABLE_CACHE" ] && echo --no-cache)
+      --cache-from $TAG_CACHE_DEV_STAGE
+      --build-arg BUILDKIT_INLINE_CACHE=1
+      --build-arg VERSION=$VERSION
+      -t $TAG_DEVELOPMENT_STAGE
+      -t $TAG_CACHE_DEV_STAGE
+      --target development
+      --pull
+      .
+    - docker push $TAG_DEVELOPMENT_STAGE || true
+    - docker push $TAG_CACHE_DEV_STAGE || true
 
-.lint:
-  stage: lint
-  script: make lint
+build-distribution:
+  stage: Build
+  needs: ['build-development']
+  script:
+    - docker --version
+    - 'echo Cache: $([ -n "$DISABLE_CACHE" ] && echo disabled || echo enabled)'
+    - time docker build
+      $([ -n "$DISABLE_CACHE" ] || echo --cache-from $TAG_CACHE_DIST_STAGE)
+      $([ -n "$DISABLE_CACHE" ] || echo --cache-from $TAG_CACHE_DEV_STAGE)
+      --build-arg BUILDKIT_INLINE_CACHE=1
+      --build-arg VERSION=$VERSION
+      -t $TAG_DISTRIBUTION_STAGE
+      -t $TAG_CACHE_DIST_STAGE
+      --target distribution
+      --pull
+      .
+    - docker push $TAG_DISTRIBUTION_STAGE || true
+    - docker push $TAG_CACHE_DIST_STAGE || true
+    - echo "The distributable image tag is ${TAG_DISTRIBUTION_STAGE#*:}"
 
-lint-dev:
-  extends: .lint
-  except:
-    - master
-    - tags
-  allow_failure: true
+build-set-volume-permissions:
+  stage: Build
+  script:
+    - TAG_SET_VOLUME_PERMISSIONS=${DOCKER_REPO}:set-volume-permissions
+    - docker manifest inspect $TAG_SET_VOLUME_PERMISSIONS > /dev/null || docker build
+      -t $TAG_SET_VOLUME_PERMISSIONS
+      --target set-volume-permissions
+      .
+    - docker push $TAG_SET_VOLUME_PERMISSIONS|| true
+    - echo "The set-volume-permissions image tag is ${TAG_SET_VOLUME_PERMISSIONS#*:}"
 
-lint-final:
-  extends: .lint
-  only:
-    - master
-    - tags
+lint-eslint:
+  stage: Lint
+  needs: ['build-development']
+  script:
+    - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-eslint
 
-.lint-dockerfile:
-  stage: lint
-  script: make lint-dockerfile
+lint-flow:
+  stage: Lint
+  needs: ['build-development']
+  script:
+    - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-flow
 
-lint-dockerfile-dev:
-  extends: .lint-dockerfile
-  except:
-    - master
-    - tags
-  allow_failure: true
+lint-stylelint:
+  stage: Lint
+  needs: ['build-development']
+  script:
+    - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-stylelint
 
-lint-dockerfile-final:
-  extends: .lint-dockerfile
-  only:
-    - master
-    - tags
+lint-jsonlint:
+  stage: Lint
+  needs: ['build-development']
+  script:
+    - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-jsonlint
 
-pa11y:
-  stage: lint
-  script: bash -c "$(make get-lint-pa11y-docker-cmd)" || exit $? # I have no idea why the exit trick is necessary but without it gitlab ignores exit status
-  allow_failure:
-    exit_codes: 2
+lint-hadolint:
+  stage: Lint
+  needs: ['build-development']
+  script:
+    - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-hadolint
 
-unit-test:
-  stage: test
-  script: make unit-test
+lint-shellcheck:
+  stage: Lint
+  needs: ['build-development']
+  script:
+    - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-shellcheck
 
-feature-test:
-  stage: test
-  script: make feature-test
+lint-storybook-components:
+  stage: Lint
+  needs: ['build-development']
+  script:
+    - docker run --rm -t $TAG_DEVELOPMENT_STAGE lint-storybook-components
 
-maps-test:
-  stage: test
-  script: make maps-test
+test-mocha-personalisation:
+  stage: Test
+  needs: ['build-development']
+  script:
+    - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-personalisation)
+    - docker start -a "$CONTAINER_ID"; exitCode=$?; true
+    - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
+    - exit $?
+  artifacts:
+    paths:
+      - testing-screenshots
+    expire_in: 1 week
 
-personalisation-test:
-  stage: test
-  script: make personalisation-test
+test-mocha-features:
+  stage: Test
+  needs: ['build-development']
+  script:
+    - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-features)
+    - docker start -a "$CONTAINER_ID"; exitCode=$?; true
+    - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
+    - exit $?
+  artifacts:
+    paths:
+      - testing-screenshots
+    expire_in: 1 week
+
+test-mocha-maps:
+  stage: Test
+  needs: ['build-development']
+  script:
+    - CONTAINER_ID=$(docker create -t $TAG_DEVELOPMENT_STAGE with --test-env --built --mocks test-mocha-maps)
+    - docker start -a "$CONTAINER_ID"; exitCode=$?; true
+    - docker cp "$CONTAINER_ID:/app/testing-screenshots" testing-screenshots || true
+    - exit $?
+  artifacts:
+    paths:
+      - testing-screenshots
+    expire_in: 1 week
+
+test-mocha-unit:
+  stage: Test
+  needs: ['build-development']
+  script:
+    - docker run --rm -t $TAG_DEVELOPMENT_STAGE test-mocha-unit
 
 # Deploy to test environment when tagged
 deploy:
-  stage: deploy
-  script: make build-prod dockerpush
+  stage: Deploy
+  script:
+    - docker tag $TAG_DISTRIBUTION_STAGE $TAG_PRODUCTION
+    - docker push $TAG_PRODUCTION
+    - echo "The production image tag is $TAG_PRODUCTION"
   only:
     - tags

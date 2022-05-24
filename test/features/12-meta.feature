@@ -24,7 +24,7 @@ Feature: Meta
 
     Scenario: View search results
         When I visit /search/room for the night
-        Then the canonical meta is /search/room for the night
+        Then the canonical meta is /search/room for the night/Melbourne-VIC
 
     Scenario: Visit category page
         When I visit /food/Richmond-VIC

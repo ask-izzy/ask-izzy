@@ -116,11 +116,19 @@ async function disableGeolocation(): Promise<void> {
  */
 async function mockGoogleApiGeocodeLocationName(mockedSuburb, mockedState) {
     declare var google: Google;
-    await this.driver.executeScriptBeforeLoad((mockedSuburb, mockedState) => {
+    await this.driver.executeScriptBeforeLoad(createMocks, mockedSuburb, mockedState);
+
+    const url = await this.driver.getCurrentUrl()
+    if (url.includes("localhost")) {
+        await this.driver.executeScript(createMocks, mockedSuburb, mockedState);
+    }
+
+    function createMocks(mockedSuburb, mockedState) {
+        console.log("Registering google maps api geocoder mock")
         window.googleMocks = window.googleMocks || []
         window.googleMocks.push({
             maps: {
-                Geocoder() {
+                Geocoder: function() {
                     return {
                         geocode: function(params, callback) {
                             return callback(
@@ -146,5 +154,5 @@ async function mockGoogleApiGeocodeLocationName(mockedSuburb, mockedState) {
                 },
             },
         });
-    }, mockedSuburb, mockedState);
+    }
 }

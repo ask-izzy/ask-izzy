@@ -2,22 +2,27 @@
 
 type Callout = {
     ShowHeading: boolean,
+    Key: string,
     Heading: string,
 }
 
 export default (
     parent: Object, args: Object, context: Object, info: Object
 ): Array<Callout> => {
-    const key = args?.where?.Key || info?.variableValues?.key
-    if (key === "test") {
-        return [testCallout]
-    } else if (key === "nothing") {
-        return [{}]
+    let keys = args?.where?.Key || info?.variableValues?.keys
+    if (typeof keys === "string") {
+        keys = [keys]
     }
-    return [{}]
+    return callouts
+        .filter(callout => !keys || keys.includes(callout.Key))
 }
 
 export const testCallout = {
     ShowHeading: true,
-    Heading: "Ask Izzy can help",
+    Key: "test",
+    Heading: "This callout was embedded in the page body",
 }
+
+const callouts = [
+    testCallout,
+]

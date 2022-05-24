@@ -28,7 +28,7 @@ Feature: Crisis Line
         ----------------------------------------------
         When I visit /
         And I search for "get helpline phone number" and press enter
-        Then I should be at /search/get helpline phone number
+        Then I should be at /search/get helpline phone number/Melbourne-VIC
         And I should see a hotline in position 1 which says "Call (03) 3333 3333"
         And I should see a hotline in position 2 which says "Call 03 1111 1111"
         And I should see "For help and safety call:" before first hotline
@@ -38,7 +38,6 @@ Feature: Crisis Line
         And I search for "domestic violence"
         And I click the "Search" button
         And I click the "Skip" button
-        And I click the "Myself" button
         Then I should see a hotline in position 1 which says "Call 1800 737 732"
         And I should see "For help and safety call:" before first hotline
 
@@ -47,7 +46,6 @@ Feature: Crisis Line
         And I search for "domestic violence"
         And I click the "Search" button
         And I click the "Skip" button
-        And I click the "Myself" button
         And I click the "See details" button
         Then I should see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"
 
@@ -56,7 +54,6 @@ Feature: Crisis Line
         And I search for "domestic violence"
         And I click the "Search" button
         And I click the "Skip" button
-        And I click the "Myself" button
         And I click the "See details" button
         And I click the "Hide details" button
         Then I should not see "This call may not be free from mobiles. If you are ringing from a mobile you can ask to be called back"

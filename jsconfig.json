@@ -1,0 +1,7 @@
+{
+	"compilerOptions": {
+		"paths": {
+			"@/pages/*": ["/home/callumgare/repos/ask-izzy/pages/*"]
+		}
+	}
+}

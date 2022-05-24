@@ -20,4 +20,4 @@ Feature: Search bar in subcategories page
         Then I should see "I'm looking for help for"
         When I click the "Myself" button
 
-        Then I should be at /search/pet food/Melbourne-VIC/
+        Then I should be at /search/pet food/Melbourne-VIC

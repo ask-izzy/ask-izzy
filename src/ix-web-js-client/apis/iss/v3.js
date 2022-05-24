@@ -94,6 +94,7 @@ export class ISS3Client {
             )
 
         } catch (error) {
+            console.error(error)
             // We don't currently worry if request failed
             return null
         }

@@ -1,9 +1,58 @@
 /* @flow */
+import React from "react"
+import type { NextRouter } from "next/router";
+
 import icons from "../icons";
 
 import Category from "./Category";
 
-import personalisation from "../constants/personalisation-pages";
+/* eslint-disable max-len */
+import AddictionSubcategories from "@/src/constants/personalisation-pages/AddictionSubcategories";
+import AdvocacySubcategories from "@/src/constants/personalisation-pages/AdvocacySubcategories";
+import Age from "@/src/constants/personalisation-pages/Age";
+import AreYouSafe from "@/src/constants/personalisation-pages/AreYouSafe";
+import CounsellingAreYouSafe from "@/src/constants/personalisation-pages/CounsellingAreYouSafe";
+import CounsellingSubcategories from "@/src/constants/personalisation-pages/CounsellingSubcategories";
+import DemographicsIndigenous from "@/src/constants/personalisation-pages/DemographicsIndigenous";
+import Demographics from "@/src/constants/personalisation-pages/Demographics";
+import DfvDemographics from "@/src/constants/personalisation-pages/DfvDemographics";
+import DVFSubcategories from "@/src/constants/personalisation-pages/DVFSubcategories";
+import EverydayThingsSubcategories from "@/src/constants/personalisation-pages/EverydayThingsSubcategories";
+import FoodSubcategories from "@/src/constants/personalisation-pages/FoodSubcategories";
+import FreeTextAreYouSafe from "@/src/constants/personalisation-pages/FreeTextAreYouSafe";
+import Gender from "@/src/constants/personalisation-pages/Gender";
+import HealthAreYouSafe from "@/src/constants/personalisation-pages/HealthAreYouSafe";
+import HealthSubcategories from "@/src/constants/personalisation-pages/HealthSubcategories";
+import HousingAreYouSafe from "@/src/constants/personalisation-pages/HousingAreYouSafe";
+import JobSubcategories from "@/src/constants/personalisation-pages/JobSubcategories";
+import LegalAreYouSafe from "@/src/constants/personalisation-pages/LegalAreYouSafe";
+import LegalSubcategories from "@/src/constants/personalisation-pages/LegalSubcategories";
+import LgbtiqaDomesticViolenceScreen from "@/src/constants/personalisation-pages/LgbtiqaDomesticViolenceScreen";
+import LifeSkillsSubcategories from "@/src/constants/personalisation-pages/LifeSkillsSubcategories";
+import Location from "@/src/constants/personalisation-pages/Location";
+import MoneySubcategories from "@/src/constants/personalisation-pages/MoneySubcategories";
+import OnlineSafetyScreen from "@/src/constants/personalisation-pages/OnlineSafetyScreen";
+import SleepTonight from "@/src/constants/personalisation-pages/SleepTonight";
+import Under18DomesticViolenceScreen from "@/src/constants/personalisation-pages/Under18DomesticViolenceScreen";
+import UsingViolenceScreen from "@/src/constants/personalisation-pages/UsingViolenceScreen";
+import WhoIsLookingForHelpDFV from "@/src/constants/personalisation-pages/WhoIsLookingForHelpDFV";
+import WhoIsLookingForHelpAdvocacy from "@/src/constants/personalisation-pages/WhoIsLookingForHelpAdvocacy";
+import WhoIsLookingForHelpDrugsAndAlcohol from "@/src/constants/personalisation-pages/WhoIsLookingForHelpDrugsAndAlcohol";
+import WhoIsLookingForHelpEverydayThings from "@/src/constants/personalisation-pages/WhoIsLookingForHelpEverydayThings";
+import WhoIsLookingForHelpFindingWork from "@/src/constants/personalisation-pages/WhoIsLookingForHelpFindingWork";
+import WhoIsLookingForHelpFood from "@/src/constants/personalisation-pages/WhoIsLookingForHelpFood";
+import WhoIsLookingForHelpHealth from "@/src/constants/personalisation-pages/WhoIsLookingForHelpHealth";
+import WhoIsLookingForHelpHousing from "@/src/constants/personalisation-pages/WhoIsLookingForHelpHousing";
+import WhoIsLookingForHelpFacilities from "@/src/constants/personalisation-pages/WhoIsLookingForHelpFacilities";
+import WhoIsLookingForHelpCentrelink from "@/src/constants/personalisation-pages/WhoIsLookingForHelpCentrelink";
+import WhoIsLookingForHelpLegal from "@/src/constants/personalisation-pages/WhoIsLookingForHelpLegal";
+import WhoIsLookingForHelpLifeSkills from "@/src/constants/personalisation-pages/WhoIsLookingForHelpLifeSkills";
+import WhoIsLookingForHelpMoney from "@/src/constants/personalisation-pages/WhoIsLookingForHelpMoney";
+import WhoIsLookingForHelpSearch from "@/src/constants/personalisation-pages/WhoIsLookingForHelpSearch";
+import WhoIsLookingForHelpSomethingToDo from "@/src/constants/personalisation-pages/WhoIsLookingForHelpSomethingToDo";
+import WhoIsLookingForHelpSupportAndCounselling from "@/src/constants/personalisation-pages/WhoIsLookingForHelpSupportAndCounselling";
+import WhoIsLookingForHelpTechnology from "@/src/constants/personalisation-pages/WhoIsLookingForHelpTechnology";
+/* eslint-enable max-len */
 
 const categories = [
     (new Category({
@@ -11,6 +60,7 @@ const categories = [
         byline: "A place to stay.",
         icon: icons.House,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "housing",
@@ -25,14 +75,14 @@ const categories = [
             minimumShouldMatch: "30%",
         },
         personalisation: [
-            personalisation.SleepTonight,
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
-            personalisation.Gender,
-            personalisation.Age,
-            personalisation.Demographics,
-            personalisation.HousingAreYouSafe,
-            personalisation.OnlineSafetyScreen,
+            SleepTonight,
+            WhoIsLookingForHelpHousing,
+            Location,
+            Gender,
+            Age,
+            Demographics,
+            HousingAreYouSafe,
+            OnlineSafetyScreen,
         ],
     }): Category),
     (new Category({
@@ -40,6 +90,7 @@ const categories = [
         byline: "Something to eat.",
         icon: icons.Food,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "meals",
@@ -55,9 +106,9 @@ const categories = [
             },
         },
         personalisation: [
-            personalisation.FoodSubcategories,
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
+            FoodSubcategories,
+            WhoIsLookingForHelpFood,
+            Location,
         ],
     }): Category),
     (new Category({
@@ -65,6 +116,7 @@ const categories = [
         byline: "Swags, clothes, food vouchers etc.",
         icon: icons.Things,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "material",
@@ -75,9 +127,9 @@ const categories = [
             },
         },
         personalisation: [
-            personalisation.EverydayThingsSubcategories,
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
+            EverydayThingsSubcategories,
+            WhoIsLookingForHelpEverydayThings,
+            Location,
         ],
     }): Category),
     (new Category({
@@ -85,6 +137,7 @@ const categories = [
         byline: "Scared of partner or family member.",
         icon: icons.EscapeViolence,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "\"family violence\"",
@@ -94,15 +147,15 @@ const categories = [
             },
         },
         personalisation: [
-            personalisation.AreYouSafe,
-            personalisation.OnlineSafetyScreen,
-            personalisation.DVFSubcategories,
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
-            personalisation.DfvDemographics,
-            personalisation.Under18DomesticViolenceScreen,
-            personalisation.UsingViolenceScreen,
-            personalisation.LgbtiqaDomesticViolenceScreen,
+            AreYouSafe,
+            OnlineSafetyScreen,
+            DVFSubcategories,
+            WhoIsLookingForHelpDFV,
+            Location,
+            DfvDemographics,
+            Under18DomesticViolenceScreen,
+            UsingViolenceScreen,
+            LgbtiqaDomesticViolenceScreen,
         ],
     }): Category),
     (new Category({
@@ -110,6 +163,7 @@ const categories = [
         byline: "Physical, mental, emotional.",
         icon: icons.Health,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "\"community health\"",
@@ -120,12 +174,12 @@ const categories = [
             showInAskIzzyHealth: true,
         },
         personalisation: [
-            personalisation.HealthSubcategories,
-            personalisation.HealthAreYouSafe,
-            personalisation.OnlineSafetyScreen,
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
-            personalisation.DemographicsIndigenous,
+            HealthSubcategories,
+            HealthAreYouSafe,
+            OnlineSafetyScreen,
+            WhoIsLookingForHelpHealth,
+            Location,
+            DemographicsIndigenous,
         ],
     }): Category),
     (new Category({
@@ -133,14 +187,15 @@ const categories = [
         byline: "Access to services.",
         icon: icons.Centrelink,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: ["\"centrelink\""],
             },
             name: "\"centrelink\"",
         },
         personalisation: [
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
+            WhoIsLookingForHelpCentrelink,
+            Location,
         ],
     }): Category),
     (new Category({
@@ -148,6 +203,7 @@ const categories = [
         byline: "Emergency funds, bills etc.",
         icon: icons.Money,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "financial",
@@ -159,9 +215,9 @@ const categories = [
             },
         },
         personalisation: [
-            personalisation.MoneySubcategories,
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
+            MoneySubcategories,
+            WhoIsLookingForHelpMoney,
+            Location,
         ],
     }): Category),
     (new Category({
@@ -169,18 +225,19 @@ const categories = [
         byline: "Relationships, gambling & LGBTIQA+.",
         icon: icons.Support,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: ["counselling"],
             },
             minimumShouldMatch: "1",
         },
         personalisation: [
-            personalisation.CounsellingSubcategories,
-            personalisation.CounsellingAreYouSafe,
-            personalisation.OnlineSafetyScreen,
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
-            personalisation.DemographicsIndigenous,
+            CounsellingSubcategories,
+            CounsellingAreYouSafe,
+            OnlineSafetyScreen,
+            WhoIsLookingForHelpSupportAndCounselling,
+            Location,
+            DemographicsIndigenous,
         ],
     }): Category),
     (new Category({
@@ -188,6 +245,7 @@ const categories = [
         byline: "Police, law & fines.",
         icon: icons.Legal,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "legal",
@@ -206,12 +264,12 @@ const categories = [
             },
         },
         personalisation: [
-            personalisation.LegalSubcategories,
-            personalisation.LegalAreYouSafe,
-            personalisation.OnlineSafetyScreen,
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
-            personalisation.DemographicsIndigenous,
+            LegalSubcategories,
+            LegalAreYouSafe,
+            OnlineSafetyScreen,
+            WhoIsLookingForHelpLegal,
+            Location,
+            DemographicsIndigenous,
         ],
     }): Category),
     (new Category({
@@ -219,6 +277,7 @@ const categories = [
         byline: "Support & assistance.",
         icon: icons.Addiction,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "substance",
@@ -230,10 +289,10 @@ const categories = [
             minimumShouldMatch: "30%",
         },
         personalisation: [
-            personalisation.AddictionSubcategories,
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
-            personalisation.DemographicsIndigenous,
+            AddictionSubcategories,
+            WhoIsLookingForHelpDrugsAndAlcohol,
+            Location,
+            DemographicsIndigenous,
         ],
     }): Category),
     (new Category({
@@ -241,6 +300,7 @@ const categories = [
         byline: "Everyday skills & training.",
         icon: icons.Skills,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "life",
@@ -253,10 +313,10 @@ const categories = [
             },
         },
         personalisation: [
-            personalisation.LifeSkillsSubcategories,
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
-            personalisation.DemographicsIndigenous,
+            LifeSkillsSubcategories,
+            WhoIsLookingForHelpLifeSkills,
+            Location,
+            DemographicsIndigenous,
         ],
     }): Category),
     (new Category({
@@ -264,6 +324,7 @@ const categories = [
         byline: "Earning & volunteering.",
         icon: icons.Job,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "employment",
@@ -273,9 +334,9 @@ const categories = [
             },
         },
         personalisation: [
-            personalisation.JobSubcategories,
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
+            JobSubcategories,
+            WhoIsLookingForHelpFindingWork,
+            Location,
         ],
     }): Category),
     (new Category({
@@ -283,6 +344,7 @@ const categories = [
         byline: "Toilets.",
         icon: icons.Facilities,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "public",
@@ -294,8 +356,8 @@ const categories = [
             },
         },
         personalisation: [
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
+            WhoIsLookingForHelpFacilities,
+            Location,
         ],
     }): Category),
     (new Category({
@@ -303,6 +365,7 @@ const categories = [
         byline: "Libraries, Community Hubs etc.",
         icon: icons.Entertainment,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "recreation",
@@ -320,8 +383,8 @@ const categories = [
             },
         },
         personalisation: [
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
+            WhoIsLookingForHelpSomethingToDo,
+            Location,
         ],
     }): Category),
     (new Category({
@@ -329,6 +392,7 @@ const categories = [
         byline: "Wifi, charging etc.",
         icon: icons.Tech,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "wifi",
@@ -338,8 +402,8 @@ const categories = [
             },
         },
         personalisation: [
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
+            WhoIsLookingForHelpTechnology,
+            Location,
         ],
     }): Category),
     (new Category({
@@ -347,6 +411,7 @@ const categories = [
         byline: "Complaints and advice.",
         icon: icons.Advocacy,
         searchQueryChanges: {
+            catchment: "prefer",
             $concat: {
                 term: [
                     "consumer",
@@ -360,12 +425,43 @@ const categories = [
             },
         },
         personalisation: [
-            personalisation.AdvocacySubcategories,
-            personalisation.WhoIsLookingForHelp,
-            personalisation.Location,
+            AdvocacySubcategories,
+            WhoIsLookingForHelpAdvocacy,
+            Location,
         ],
     }): Category),
+    (new Category({
+        name: "Search",
+        byline: "Free text search.",
+        icon: () => <icons.Search viewBox="14 14 35 35" />,
+        searchQueryChanges(router: NextRouter) {
+            const searchTerm = decodeURIComponent(router.query.search)
 
+            // A special case for the "Find advocacy" button on the
+            // DisabilityAdvocacyFinder page.
+            if (searchTerm === "Disability Advocacy Providers") {
+                return {
+                    term: ["disability"],
+                    $push: {
+                        serviceTypesRaw: "disability advocacy",
+                    },
+                }
+            }
+
+            return {
+                $push: {
+                    term: searchTerm,
+                },
+            }
+        },
+        personalisation: [
+            FreeTextAreYouSafe,
+            OnlineSafetyScreen,
+            WhoIsLookingForHelpSearch,
+            Location,
+        ],
+        dontShowInCategoryList: true,
+    }): Category),
 ];
 
 export default categories;

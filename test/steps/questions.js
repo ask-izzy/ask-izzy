@@ -12,12 +12,30 @@ declare var IzzyStorage: Object;
 
 import dictionary from "../support/dictionary";
 import { gotoUrl } from "../support/webdriver";
-import WhoIsLookingForHelpPage from
-    "../../src/constants/personalisation-pages/WhoIsLookingForHelp"
+/* eslint-disable max-len */
+import WhoIsLookingForHelpDFVPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpDFV";
+import WhoIsLookingForHelpAdvocacyPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpAdvocacy";
+import WhoIsLookingForHelpDrugsAndAlcoholPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpDrugsAndAlcohol";
+import WhoIsLookingForHelpEverydayThingsPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpEverydayThings";
+import WhoIsLookingForHelpFindingWorkPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpFindingWork";
+import WhoIsLookingForHelpFoodPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpFood";
+import WhoIsLookingForHelpHealthPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpHealth";
+import WhoIsLookingForHelpHousingPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpHousing";
+import WhoIsLookingForHelpPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelp";
+import WhoIsLookingForHelpFacilitiesPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpFacilities";
+import WhoIsLookingForHelpCentrelinkPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpCentrelink";
+import WhoIsLookingForHelpLegalPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpLegal";
+import WhoIsLookingForHelpLifeSkillsPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpLifeSkills";
+import WhoIsLookingForHelpMoneyPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpMoney";
+import WhoIsLookingForHelpSearchPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpSearch";
+import WhoIsLookingForHelpSomethingToDoPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpSomethingToDo";
+import WhoIsLookingForHelpSupportAndCounsellingPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpSupportAndCounselling";
+import WhoIsLookingForHelpTechnologyPage from "../../src/constants/personalisation-pages/WhoIsLookingForHelpTechnology";
+/* eslint-enable max-len */
 import SleepTonightPage from
-    "../../src/constants/personalisation-pages/SleepTonight"
+"../../src/constants/personalisation-pages/SleepTonight"
 import DemographicsPage from
-    "../../src/constants/personalisation-pages/Demographics"
+"../../src/constants/personalisation-pages/Demographics"
 import GenderPage from "../../src/constants/personalisation-pages/Gender"
 import AgePage from "../../src/constants/personalisation-pages/Age"
 
@@ -58,15 +76,37 @@ async function setSleepTonight(answer: string): Promise<void> {
 }
 
 async function setHelpForWhom(answer: string): Promise<void> {
-    await setStorageValue(
-        this.driver,
-        WhoIsLookingForHelpPage.name,
-        ({
-            "myself": "User Myself",
-            "a client or customer": "User Worker",
-            "a friend or family member": "User Someone Else",
-        })[answer]
-    );
+    const whoIsLookingForHelpPages = [
+        WhoIsLookingForHelpDFVPage,
+        WhoIsLookingForHelpAdvocacyPage,
+        WhoIsLookingForHelpDrugsAndAlcoholPage,
+        WhoIsLookingForHelpEverydayThingsPage,
+        WhoIsLookingForHelpFindingWorkPage,
+        WhoIsLookingForHelpFoodPage,
+        WhoIsLookingForHelpHealthPage,
+        WhoIsLookingForHelpHousingPage,
+        WhoIsLookingForHelpPage,
+        WhoIsLookingForHelpFacilitiesPage,
+        WhoIsLookingForHelpCentrelinkPage,
+        WhoIsLookingForHelpLegalPage,
+        WhoIsLookingForHelpLifeSkillsPage,
+        WhoIsLookingForHelpMoneyPage,
+        WhoIsLookingForHelpSearchPage,
+        WhoIsLookingForHelpSomethingToDoPage,
+        WhoIsLookingForHelpSupportAndCounsellingPage,
+        WhoIsLookingForHelpTechnologyPage,
+    ]
+    for (const page of whoIsLookingForHelpPages) {
+        await setStorageValue(
+            this.driver,
+            page.name,
+            ({
+                "myself": "User Myself",
+                "a client or customer": "User Worker",
+                "a friend or family member": "User Someone Else",
+            })[answer]
+        );
+    }
 }
 
 async function setSubcategoryItems(
@@ -147,7 +187,6 @@ async function setStorageValue(
     key: string,
     value: string | Array<string>,
 ): Promise<void> {
-    await gotoUrl(driver, "/"); // go anywhere to start the session
     await driver.executeScript(
         (key, value) => {
             if (typeof value === "string") {

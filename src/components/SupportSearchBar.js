@@ -1,12 +1,13 @@
 /* @flow */
-import React, {useContext} from "react";
+import React from "react";
 import type {Node as ReactNode} from "React";
+import {useRouter} from "next/router"
+
 import SearchBar from "./general/SearchBar";
 import ScreenReader from "./ScreenReader";
-import routerContext from "../contexts/router-context";
 
 function SupportSearchBar(): ReactNode {
-    const { router } = useContext(routerContext)
+    const router = useRouter();
 
 
     return (
@@ -31,7 +32,7 @@ function SupportSearchBar(): ReactNode {
                     placeholder="Search Ask Izzy for a service"
                     onSubmit={(searchText) => {
                         if (searchText) {
-                            router.navigate(
+                            router.push(
                                 `/search/${encodeURIComponent(searchText)}`
                             )
                         }

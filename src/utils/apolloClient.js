@@ -1,23 +1,28 @@
 /* @flow */
-import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
-import fetch from "node-fetch";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 
-export default function(STRAPI_URL: string = ""): any {
-    if (typeof global.fetch === "undefined") {
-        global.fetch = require("node-fetch");
+// $FlowIgnore Let's not bother trying to type this with flow. I'll be easy to
+// do when we move to typescript.
+const client: any = new ApolloClient({
+    uri: `${process.env.NEXT_PUBLIC_STRAPI_URL}/graphql`,
+    cache: new InMemoryCache(),
+});
+
+export default client;
+
+// We'll type these property when moving to typescript
+export async function queryGraphQlWithErrorLogging(query: any): any {
+    try {
+        return await client.query(query)
+    } catch (error) {
+        console.error(error.message)
+        if (error.graphQLErrors?.length) {
+            console.error(error.graphQLErrors)
+        }
+        if (error.networkError) {
+            console.error(error.networkError.message)
+            console.error(error.networkError.result)
+        }
+        throw error
     }
-
-    if (!STRAPI_URL && typeof window !== "undefined" && window.STRAPI_URL) {
-        STRAPI_URL = window.STRAPI_URL;
-    }
-
-    const cache = new InMemoryCache();
-    const link = new HttpLink({
-        uri: STRAPI_URL + "/graphql",
-    });
-    return new ApolloClient({
-        cache,
-        link,
-        fetch: fetch,
-    });
 }

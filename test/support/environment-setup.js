@@ -13,6 +13,12 @@ window.addEventListener("error", async(errorEvent) => {
     console.error(error)
 })
 
+// Selenium doesn't read in output sent to info or warn
+// $FlowIgnore
+console.info = console.log
+// $FlowIgnore
+console.warn = console.log
+
 // Selenium/Headless chrome doesn't yet support sourcemaps in error
 // stack traces. This makes debugging failing tests a bit tricky since
 // our prod source code is majorly transformed and minified. Until this

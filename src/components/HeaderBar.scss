@@ -167,7 +167,7 @@
                     #{colours.get-static('colour-banner-bg-overlay', 'HeaderBar')},
                     #{colours.get-static('colour-banner-bg-overlay', 'HeaderBar')}
                 ),
-                url('/public/static/images/banners/#{$banner-image}.png')
+                url('/images/banners/#{$banner-image}.png')
                 center
                 center;
             background:
@@ -175,7 +175,7 @@
                     var(--colour-banner-bg-overlay),
                     var(--colour-banner-bg-overlay)
                 ),
-                url('/public/static/images/banners/#{$banner-image}.png')
+                url('/images/banners/#{$banner-image}.png')
                 center
                 center;
             background-size: cover;

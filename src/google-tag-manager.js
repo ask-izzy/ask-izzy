@@ -14,7 +14,7 @@ export function emit(event: GTMEvent): void {
     if (window.google_tag_manager) {
         for (const key in event) {
             if (Array.isArray(event[key])) {
-                window.google_tag_manager[window.GOOGLE_TAG_MANAGER_ID]
+                window.google_tag_manager[process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID]
                     .dataLayer.set(key, undefined)
             }
         }
@@ -44,7 +44,7 @@ export function emit(event: GTMEvent): void {
     // If GTM has loaded then flush directly
     if (window.google_tag_manager) {
         for (const key of varsToFlush) {
-            window.google_tag_manager[window.GOOGLE_TAG_MANAGER_ID]
+            window.google_tag_manager[process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID]
                 .dataLayer.set(key, undefined)
         }
 

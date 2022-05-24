@@ -2,6 +2,7 @@
 
 type Page = {
     Title?: string,
+    Path: string,
     Body?: string,
     Banner?: {
         Key: string,
@@ -18,30 +19,14 @@ type Page = {
 export default (
     parent: Object, args: Object, context: Object, info: Object
 ): Array<Page> => {
-    const path = args?.where?.Path || info?.variableValues?.path
-    if (path === "/about") {
-        return [aboutPage]
-    } else if (path === "/terms") {
-        return [termsPage]
-    } else if (path === "/online-safety") {
-        return []
-    } else if (path === "/homeless-shelters") {
-        return [homelessSheltersPage]
-    } else if (path === "/disability-organisations") {
-        return [disabilityOrganisationsPage]
-    } else if (path === "/information") {
-        return [informationPage];
-    } else if (path === "/food-info") {
-        return [
-            {Title: "Page 1", BannerTextPrimary: "Page 1"},
-            {Title: "Page 2", BannerTextPrimary: "Page 2"},
-        ]
-    }
-    return [{}]
+    const pathToFilterBy = args?.where?.Path || info?.variableValues?.path
+    return pages
+        .filter(page => !pathToFilterBy || (page.Path === pathToFilterBy))
 }
 
 export const aboutPage = {
     Title: "About Ask Izzy",
+    Path: "/about",
     Body: "We’re always making improvements.",
     Banner: {
         Key: "food",
@@ -53,12 +38,14 @@ export const aboutPage = {
 
 export const termsPage = {
     Title: "Our Terms",
+    Path: "/terms",
     BannerTextPrimary: "Our Terms",
     Body: "Try to live a good life",
 }
 
 export const homelessSheltersPage = {
     Title: "Shelter Services",
+    Path: "/homeless-shelters",
     Body: "Information about Homeless Shelters.",
     BannerTextPrimary: "Shelter Services",
     CalloutBoxes: [
@@ -75,12 +62,14 @@ export const homelessSheltersPage = {
 
 export const disabilityOrganisationsPage = {
     Title: "Disability Organisations",
+    Path: "/disability-organisations",
     BannerTextPrimary: "Disability Organisations",
     Body: "Try to live a good life\n\n> [callout(test)]",
 }
 
 export const informationPage = {
     Title: "Information",
+    Path: "/information",
     BannerTextPrimary: "Information",
     Body: ("Try to live a good life\n\n> [callout(test)] " +
         "[callout(nothing)]": string),
@@ -97,3 +86,24 @@ export const informationPage = {
         },
     ],
 }
+
+const foodInfoPage1 = {
+    Title: "Page 1",
+    BannerTextPrimary: "Page 1",
+    Path: "/food-info",
+}
+const foodInfoPage2 = {
+    Title: "Page 2",
+    BannerTextPrimary: "Page 2",
+    Path: "/food-info",
+}
+
+const pages = [
+    aboutPage,
+    termsPage,
+    homelessSheltersPage,
+    disabilityOrganisationsPage,
+    informationPage,
+    foodInfoPage1,
+    foodInfoPage2,
+]

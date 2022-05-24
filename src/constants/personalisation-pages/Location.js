@@ -4,7 +4,7 @@ import type {
 } from "../../../flow/personalisation-page"
 import type { SearchQueryChanges } from "../../iss/searchQueryBuilder";
 import storage from
-    "../../storage"
+"../../storage"
 
 export default ({
     type: "location",

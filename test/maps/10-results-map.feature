@@ -91,4 +91,4 @@ Feature: See results on a map
         Then I should see "Housing Service"
 
         When I click back from the browser UI
-        Then I should be at /housing
+        Then I should be at /housing/Melbourne-VIC

@@ -4,13 +4,11 @@ import type {Node as ReactNode} from "React";
 import React from "react";
 
 import CalloutBox from "./CalloutBox";
-import {setRouterContext} from "../storybook/decorators";
 
 export default {
     title: "Basic UI Components/CalloutBox",
     component: CalloutBox,
     argTypes: ({}: {...}),
-    decorators: [setRouterContext],
 };
 
 const Template = (args: Object): ReactNode => {

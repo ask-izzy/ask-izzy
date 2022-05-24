@@ -11,7 +11,6 @@ export default {
 
 const Template = (args: Object): ReactNode => {
     (Template.args: any)
-    window.STRAPI_URL = "/static/media/public"
     return <StrapiMarkdown {...args} />
 };
 
@@ -33,7 +32,7 @@ Example.args = {
 2. Number 2
 \`\`\`code block\`\`\`
 
-![ask-izzy-logo.png](/static/images/ask-izzy-logo-single-line-purple.svg)
+![ask-izzy-logo.png](/images/ask-izzy-logo-single-line-purple.svg)
 
 [Click here](https://www.google.com.au/)
 > This is Cozzy's quote

@@ -1,0 +1,1 @@
+The plan is to move everything in this dir to the top level to be more in-line with the standard Next.js file hierarchy

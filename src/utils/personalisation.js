@@ -3,52 +3,14 @@ import type {
     Node as ReactNode,
 } from "react"
 import _ from "underscore";
+import type { NextRouter } from "next/router"
 
-import {replaceUrlLocation} from "./url";
 import Category from "../constants/Category";
 import storage from "../storage";
-import type { RouterContextObject } from "../contexts/router-context";
 import type { SearchQueryChanges } from "../../src/iss/searchQueryBuilder";
-
 import type {
     PersonalisationPage,
 } from "../../flow/personalisation-page"
-
-
-export function getFullPathForPersonalisationSubpath(
-    router: $PropertyType<RouterContextObject, 'router'>,
-    subpath: string
-): string {
-    // Rewrites the URL based on search location/personalisation
-    const parts = decodeURIComponent(
-        router.location.pathname
-    ).split("/");
-    const location = storage.getSearchArea();
-
-    if (location) {
-        replaceUrlLocation(location, parts)
-    }
-
-    // Replace everything after and including 'personalise'
-    parts.splice(
-        parts.indexOf("personalise"),
-        parts.length,
-        subpath
-    )
-
-    return parts.join("/");
-}
-
-export function navigateToPersonalisationSubpath(
-    router: $PropertyType<RouterContextObject, 'router'>,
-    subpath: string,
-    navigateOptions?: {}
-): void {
-    router.navigate(
-        getFullPathForPersonalisationSubpath(router, subpath),
-        navigateOptions
-    );
-}
 
 export function prettyPrintAnswer(
     personalisationPage: PersonalisationPage,
@@ -60,29 +22,35 @@ export function prettyPrintAnswer(
     return answer
 }
 
-
-
 export function getBannerName(
     category: ?Category,
     questionPageName?: string
 ): string {
-    return (questionPageName === "sub-indigenous" && "atsi") ||
-        category?.key ||
-        "homepage"
+    if (questionPageName === "sub-indigenous") {
+        return "atsi"
+    } else if (category?.key === "search") {
+        return "homepage"
+    } else if (category) {
+        return category.key
+    }
+    return "homepage"
 }
 
 export function setLocationFromUrl(
-    router: $PropertyType<RouterContextObject, 'router'>
+    router: NextRouter
 ): void {
-    // Update the URL to include the location, so that links
-    // are SEO-friendly. If we dont have a location but the
-    // URL does, use the one from the url.
-    const {suburb, state} = router.match.params;
+    if (!router.isReady) {
+        console.error(
+            "Trying to ready location from the URL before the router is ready"
+        )
+    }
+    const {suburb, state} = router.query
 
     if (suburb && state) {
-        if (storage.getSearchArea() != `${suburb}, ${state}`) {
+        const locationFromUrl = `${decodeURIComponent(suburb)}, ${decodeURIComponent(state)}`
+        if (storage.getSearchArea() !== locationFromUrl) {
             // Use the location from the URL.
-            storage.setSearchArea(`${suburb}, ${state}`);
+            storage.setSearchArea(locationFromUrl);
             storage.clearUserGeolocation()
         }
     }

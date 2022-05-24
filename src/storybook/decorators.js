@@ -2,53 +2,25 @@
 
 import type {Node as ReactNode} from "React";
 import React, {useEffect} from "react";
-import { MemoryRouter } from "react-router-dom";
 import {LoadScript} from "@react-google-maps/api";
 import { ApolloProvider } from "@apollo/client";
 
 import storage from "../storage";
-import RouterContext from "../contexts/router-context";
 import { DebugModeProvider } from "../contexts/debug-mode-context";
 import createApolloClient from "../utils/apolloClient";
 import {browserEventName as gtmBrowserEventName} from "../google-tag-manager"
-import {InjectRouterContext} from "../contexts/router-context"
-
-export function addRouter(Story: Object): ReactNode {
-    // Catch link click and stop it firing
-    function onClickHandler(event) {
-        // Check if target is, or is contained in a link
-        if (event.target?.closest("a")) {
-            event.preventDefault()
-        }
-    }
-    return <MemoryRouter>
-        <InjectRouterContext matchedRoutes={[{
-            params: {},
-            route: {
-                element: {
-                    props: {},
-                },
-            },
-        }]}
-        >
-            <div onClick={onClickHandler}>
-                <Story/>
-            </div>
-        </InjectRouterContext>
-    </MemoryRouter>
-}
 
 export function addGoogleMapsScript(
     Story: Object,
     { loaded: { env } }: Object
 ): ReactNode {
-    if (!env?.GOOGLE_API_KEY) {
+    if (!env?.NEXT_PUBLIC_GOOGLE_API_KEY) {
         throw new Error("Google API key must be loaded")
     }
 
     return (
         <LoadScript
-            googleMapsApiKey={env.GOOGLE_API_KEY}
+            googleMapsApiKey={env.NEXT_PUBLIC_GOOGLE_API_KEY}
             libraries={["places"]}
         >
             <Story/>
@@ -81,16 +53,6 @@ export function setPersonalisationAnswers(
     }
 }
 
-export function setRouterContext(
-    Story: Object,
-    {parameters}: Object
-): ReactNode {
-    const router = parameters?.context?.router || {}
-    return <RouterContext.Provider value={{router}}>
-        <Story/>
-    </RouterContext.Provider>
-}
-
 export function setDebugModeContext(
     Story: Object,
     {parameters}: Object
@@ -105,10 +67,10 @@ export function setDebugModeContext(
 
 export function setApolloProvider(Story: Object,
     { loaded: { env } }: Object): ReactNode {
-    window.STRAPI_URL = env.STRAPI_URL
+    window.NEXT_PUBLIC_STRAPI_URL = env.NEXT_PUBLIC_STRAPI_URL
     return (
         <ApolloProvider
-            client={createApolloClient(env.STRAPI_URL)}
+            client={createApolloClient(env.NEXT_PUBLIC_STRAPI_URL)}
         >
             <Story/>
         </ApolloProvider>

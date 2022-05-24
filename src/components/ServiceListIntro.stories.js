@@ -7,7 +7,7 @@ import { action } from "@storybook/addon-actions";
 import ServiceListIntro from "./ServiceListIntro";
 
 export default {
-    title: "App Components/BaseLogoWithTextBox/ServiceListIntro",
+    title: "App Components/LogoWithTextBox/ServiceListIntro",
     component: ServiceListIntro,
     args: {
         onClick: (action("clicked"): any),

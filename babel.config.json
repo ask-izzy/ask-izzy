@@ -1,17 +1,29 @@
 {
-    "presets": [
-        [
-            "@babel/preset-env",
-            {
-                "useBuiltIns": "entry",
-                "corejs": "3.0.0"
-            }
-        ],
-        "@babel/preset-flow",
-        "@babel/preset-react"
+  "presets": [
+    [
+      "next/babel",
+      {
+        "preset-env": {
+          "targets": {
+            "browsers": "> 0.25%, not dead"
+          },
+          "bugfixes": true,
+          "useBuiltIns": "usage",
+          "corejs": 3.22
+        }
+      }
     ],
-    "plugins": [
-        "@babel/plugin-transform-flow-strip-types",
-        "@babel/plugin-proposal-class-properties"
+    "@babel/preset-flow",
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@": "."
+        }
+      }
     ]
+  ]
 }

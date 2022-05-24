@@ -1,10 +1,9 @@
 /* $FlowIgnore */
 /* eslint-disable */
-import 'url-search-params-polyfill';
+import "core-js/actual/url-search-params";
 
-document.addEventListener("DOMContentLoaded", function(event) {
-
-    if (window.GOOGLE_TAG_MANAGER_ID && window.GOOGLE_TAG_MANAGER_AUTH && window.GOOGLE_TAG_MANAGER_ENV) {
+if (typeof document !== "undefined" && process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID && process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_AUTH && process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ENV) {
+    document.addEventListener("DOMContentLoaded", function(event) {
         const urlParams = new URLSearchParams(window.location.search);
         const gtmIsDebug = !!urlParams.get('gtm_debug');
 
@@ -13,9 +12,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl+(gtmIsDebug?'':'&gtm_auth='+
-        window.GOOGLE_TAG_MANAGER_AUTH+'&gtm_preview='+window.GOOGLE_TAG_MANAGER_ENV+'&gtm_cookies_win=x');
+        process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_AUTH+'&gtm_preview='+process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ENV+'&gtm_cookies_win=x');
         f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer',window.GOOGLE_TAG_MANAGER_ID);
-    }
-
-});
+        })(window,document,'script','dataLayer',process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID);
+    });
+}

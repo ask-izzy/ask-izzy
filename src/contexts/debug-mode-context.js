@@ -43,7 +43,7 @@ export const DebugModeProvider = (
         }
     }, [])
 
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && !window.pi) {
         window.pi = function() {
             setDebugModePersistently(!debugMode)
         }

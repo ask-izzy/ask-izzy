@@ -7,7 +7,7 @@ import { action } from "@storybook/addon-actions";
 import OnlineSafetyLink from "./OnlineSafetyLink";
 
 export default {
-    title: "App Components/BaseLogoWithTextBox/OnlineSafetyLink",
+    title: "App Components/LogoWithTextBox/OnlineSafetyLink",
     component: OnlineSafetyLink,
     args: {
         onClick: (action("clicked"): any),

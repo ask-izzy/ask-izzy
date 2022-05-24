@@ -9,7 +9,6 @@ import type {
 import QuestionStepper from "./QuestionStepper";
 import {
     setPersonalisationAnswers,
-    setRouterContext,
 } from "../storybook/decorators";
 
 export default {
@@ -17,7 +16,6 @@ export default {
     component: QuestionStepper,
     decorators: [
         setPersonalisationAnswers,
-        setRouterContext,
     ],
 };
 

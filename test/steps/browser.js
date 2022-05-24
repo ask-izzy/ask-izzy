@@ -90,7 +90,7 @@ module.exports = (function() {
  * @param {Webdriver.WebDriver} driver - Selenium webdriver.
  * @returns {Promise<boolean>} true if the document is readyState is complete.
  */
-module.exports.documentReady = function documentReady(
+module.exports.documentReady = async function documentReady(
     driver: Webdriver.WebDriver
 ): Promise<boolean> {
     return driver.executeAsyncScript((callback) => {
@@ -251,7 +251,7 @@ async function urlIs(
         expected = baseUrl() + expected;
     }
 
-    return decodeURIComponent(url || "") === expected;
+    return decodeURI(url) === expected;
 }
 
 async function checkURL(expected: string): Promise<void> {
@@ -263,15 +263,18 @@ async function checkURL(expected: string): Promise<void> {
         expected = baseUrl() + expected;
     }
 
-    await this.driver.wait(
-        () => urlIs(this.driver, expected),
-        10000,
-        `URL should be ${
-            expected
-        }, was ${
-            decodeURIComponent(await this.driver.getCurrentUrl())
-        }`,
-    );
+    try {
+        await this.driver.wait(
+            () => urlIs(this.driver, expected),
+            1000
+        );
+    } catch (error) {
+        console.error(error)
+        throw Error(
+            `URL should be ${expected}, was ` +
+                `${decodeURI(await this.driver.getCurrentUrl())}`
+        )
+    }
 
     let url = await this.driver.getCurrentUrl();
 

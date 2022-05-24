@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsupported browser</title>
+    <style>
+        .main {
+            margin: 50px 25px;
+        }
+        .main div {
+            margin: 25px;
+        }
+        .main .logo {
+            width: 200px;
+            margin: 0 25px;
+        }
+        .main .warning {
+            font-size: 2.5em;
+        }
+        .main .continue {
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <img src="/images/ask-izzy-logo-single-line-purple.svg" class="logo" />
+        <div class="warning">
+            Sorry! Your browser is no longer supported. Please upgrade to a <a href="https://browsehappy.com/">modern web browser</a>.
+        </div>
+        <div class="continue">
+            Alternatively you can try continuing but the site may not work correctly or at all:
+            <button onclick="allowUnsupportedBrowser()">Continue anyway</button>
+        </div>
+    </div>
+    <script>
+        function allowUnsupportedBrowser() {
+            document.cookie = "unsupportedBrowser=false; path=/";
+            location.reload()
+        }
+    </script>
+</body>
+</html>

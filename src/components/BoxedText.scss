@@ -10,8 +10,6 @@
 
     @media ($tablet) {
         margin-top: 15px;
-        background-color: #{colours.get-static('raw-colour-pure-white')};
-        background-color: var(--raw-colour-pure-white);
 
         .BoxedText-container {
             padding: 15px;

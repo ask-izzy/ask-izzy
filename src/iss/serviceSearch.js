@@ -1,9 +1,10 @@
 /* @flow */
+import type { NextRouter } from "next/router";
+
 import objectHash from "object-hash"
 import Service from "./Service";
 import storage from "../storage";
 import {getIssClient, getIssVersion} from "./client"
-import type { RouterContextObject } from "../contexts/router-context";
 import type {
     ISS4SearchQuery,
     ISS4SearchResultsMeta,
@@ -178,9 +179,9 @@ export class PaginatedSearchIss4 extends PaginatedSearch {
 }
 
 export function isDisabilityAdvocacySearch(
-    router: $PropertyType<RouterContextObject, 'router'>
+    router: NextRouter
 ): boolean {
-    return decodeURIComponent(router.match.params.search) ===
+    return decodeURIComponent(router.query.search) ===
         "Disability Advocacy Providers"
 }
 

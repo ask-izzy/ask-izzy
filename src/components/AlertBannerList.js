@@ -18,7 +18,11 @@ type Props = {
     format?: string
 }
 
-export default function({state, screenLocation, format}: Props): React.Node {
+export default function AlertBannerList({
+    state,
+    screenLocation,
+    format,
+}: Props): React.Node {
     const [isCollapsed, setIsCollapsed] = useState(true)
 
     const { loading, error, data } = useQuery(alertsQuery, {

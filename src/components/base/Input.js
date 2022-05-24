@@ -5,7 +5,7 @@ import type {
     AbstractComponent as ReactAbstractComponent,
 } from "react"
 import cnx from "classnames"
-import { useCombobox } from "downshift"
+import { useCombobox, resetIdCounter } from "downshift"
 
 import Button from "./Button"
 
@@ -63,6 +63,10 @@ function Input({
 
     const showInitialSuggestions = autocompleteValues.length == 0 &&
         initialSuggestions.length > 0
+
+    // Make sure the id is deterministic over multiple renders so as not to
+    // break hydration.
+    resetIdCounter()
 
     let otherInputProps = {
         ...otherProps,

@@ -154,11 +154,12 @@ let mapsAPIPromise;
 function maps(): Promise<MapsApi> {
     if (!mapsAPIPromise) {
         const api = new Loader({
-            apiKey: window.GOOGLE_API_KEY,
+            apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
             libraries: ["places"],
         });
         mapsAPIPromise = api.load().then(google => {
             if (window?.googleMocks) {
+                console.log(`Loading ${window.googleMocks.length} mocks`)
                 for (const googleMock of window.googleMocks) {
                     // We need to make sure we're not modifying the original
                     // google api object otherwise it our changes won't be reset

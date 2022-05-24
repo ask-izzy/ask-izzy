@@ -15,5 +15,5 @@ indent_size = 4
 [Makefile]
 indent_style = tab
 
-[*.{yaml,php}]
+[*.{yaml,yml}]
 indent_size = 2
