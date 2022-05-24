@@ -50,10 +50,16 @@ type State = {
     nextDisabled: boolean,
 }
 
+type initialSuggestions = {
+    value: string,
+    label: ReactNode
+}
+
 class Location extends React.Component<Props, State> {
     static contextType: any = routerContext;
-
     searchInputRef: { current: null | HTMLInputElement } = createRef()
+    GeolocationButtonClickRef: { current: null | () => void } = createRef()
+
 
     constructor(props: Object) {
         super(props);
@@ -189,6 +195,7 @@ class Location extends React.Component<Props, State> {
                         ({name, state}) => name + state
                     ),
                 });
+
             }
 
             this.setState({
@@ -286,6 +293,69 @@ class Location extends React.Component<Props, State> {
         });
     }
 
+    getInitialSuggestions(): Array<initialSuggestions> {
+        const GeolocationComponent =
+            <div className="GeoLocationButtonContainer" >
+                {browserSupportsGeolocation() &&
+                    <>
+                        {isGeolocation(this.state.selectedLocation)}
+                        <GeolocationButton
+                            onStatusChange={
+                                this.onGeolocationStatusChange
+                                    .bind(this)
+                            }
+                            locationValue={
+                                isGeolocation(this.state.selectedLocation) ?
+                                    this.state.selectedLocation
+                                    : undefined
+                            }
+                            buttonClickRef={(clickRef) => {
+                                this.GeolocationButtonClickRef.current =
+                                clickRef
+                            }}
+                        />
+                    </>
+                }
+            </div>
+        const Explainer =
+            <h3 className="explainer">
+                <span className="explainerIcons">
+                    <icons.Walk/>
+                    <icons.Tram/>
+                    <icons.Car/>
+                </span>
+                <span>
+                    <p>
+                        Get your location if you want
+                         to see estimated travel times to services
+                    </p>
+                </span>
+            </h3>
+
+        let initialSuggestions = [{
+            value: "",
+            label:
+                <div className = "initialSuggestions" >
+                    {GeolocationComponent}
+                    {
+                        !this.state.selectedLocation &&
+                            Explainer
+                    }
+                </div>,
+
+        }]
+
+        if (this.state.gettingAutocompletionsInProgress) {
+            return []
+        }
+        return initialSuggestions
+    }
+    onInitialSuggestionsSelected() {
+        this.GeolocationButtonClickRef.current &&
+        this.GeolocationButtonClickRef.current()
+
+    }
+
     render: (() => ReactNode) = () => (
         <div className="Location">
             <div>
@@ -349,11 +419,23 @@ class Location extends React.Component<Props, State> {
                                  or postcode"
                                 value={this.state.locationNameInput}
                                 onChange={this.onSearchChange.bind(this)}
-                                autocompleteValues={this.state.autocompletions
-                                    .map(location => ({
-                                        value: `${location.name},` +
+                                initialSuggestions={
+                                    this.getInitialSuggestions()
+                                }
+                                onInitialSuggestionsSelected = {
+                                    this.onInitialSuggestionsSelected.bind(this)
+                                }
+                                initialSuggestionsA11yStatusMessage = {
+                                    this.state.selectedLocation ?
+                                        ""
+                                        : "Press enter to get your location."
+                                }
+                                autocompleteValues={
+                                    this.state.autocompletions
+                                        .map(location => ({
+                                            value: `${location.name},` +
                                             ` ${location.state}`,
-                                        label: <>
+                                            label: <>
                                             <div className="suburb">
                                                 {location.name}
                                             </div>
@@ -362,7 +444,7 @@ class Location extends React.Component<Props, State> {
                                                 {location.state}
                                             </div>
                                         </>,
-                                    }))
+                                        }))
                                 }
                             />
                         </div>
@@ -375,35 +457,7 @@ class Location extends React.Component<Props, State> {
                             </div>
                         }
                     </fieldset>
-                    <div className="GeoLocationButtonContainer">
-                        {browserSupportsGeolocation() && <>
-                            {isGeolocation(this.state.selectedLocation) ||
-                                <span className="or">Or</span>
-                            }
-                            <GeolocationButton
-                                onStatusChange={
-                                    this.onGeolocationStatusChange
-                                        .bind(this)
-                                }
-                                locationValue={
-                                    isGeolocation(this.state.selectedLocation) ?
-                                        this.state.selectedLocation
-                                        : undefined
-                                }
-                            />
-                        </>}
-                    </div>
-                    <h3 className="explainer">
-                        <span className="explainerIcons">
-                            <icons.Walk/>
-                            <icons.Tram/>
-                            <icons.Car/>
-                        </span>
-                        <em>
-                            If you want to see estimated travel times
-                            to services use 'Get your current location' above.
-                        </em>
-                    </h3>
+
                 </WithStickyFooter>
             </main>
         </div>

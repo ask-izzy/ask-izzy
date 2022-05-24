@@ -11,10 +11,12 @@ Feature: Geolocation
         And google api geocode will return location name Richmond, VIC
         When I visit /housing/personalise/page/location
         Then I should see "Where are you looking for help?"
-        And I should see "Get your current location"
+        When I search for blank
+        And I should see "Get your location"
         And the button "Next" should be disabled
 
-        When I click the "Get your current location" button
+        When I search for blank
+        When I click the "Get your location" button
         Then I should see "Locating you..."
 
         Given the GPS returns 37.823S 144.998E
@@ -27,7 +29,8 @@ Feature: Geolocation
         Given GPS will hang in the loading state
         When I visit /housing/personalise/page/location
 
-        When I click the "Get your current location" button
+        When I search for blank
+        When I click the "Get your location" button
         Then I should see "Locating you..."
 
         When I deny access to geolocation
@@ -40,10 +43,12 @@ Feature: Geolocation
         Given GPS will hang in the loading state
         And google api geocode will return location name Richmond, VIC
         When I visit /housing/personalise/page/location
-        And I should see "Get your current location"
+        When I search for blank
+        And I should see "Get your location"
         And the button "Next" should be disabled
 
-        When I click the "Get your current location" button
+        When I search for blank
+        When I click the "Get your location" button
         Then I should see "Locating you..."
 
         Given the GPS returns 37.823S 144.998E
@@ -60,35 +65,40 @@ Feature: Geolocation
         Carlton             | VIC
         Carlton North       | VIC
         -------------------------------------------
-        And I should see "Get your current location"
         And the button "Next" should be disabled
 
+        When I show the mouse cursor
         When I click the "Carlton, VIC" dropdown option
         Then search box should contain "Carlton, VIC"
         And the button "Next" should be enabled
 
-        When I click the "Get your current location" button
+        When I click the "×" button
+        When I search for blank
+        When I click the "Get your location" button
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
         And the button "Next" should be enabled
 
         When I click the "×" button
-        Then I should see "Get your current location"
+        Then I should see "Get your location"
         And search box should contain ""
         And the button "Next" should be disabled
 
         When I reload the page
-        Then I should see "Get your current location"
+        When I search for blank
+        Then I should see "Get your location"
         And search box should contain ""
         And the button "Next" should be disabled
 
-        When I click the "Get your current location" button
+        When I search for blank
+        When I click the "Get your location" button
         Then I should see "Found your location"
         And search box should contain "Richmond, VIC"
         And the button "Next" should be enabled
 
         When I reload the page
-        Then I should see "Get your current location"
+        When I search for blank
+        Then I should see "Get your location"
         And search box should contain ""
         And the button "Next" should be disabled
 
@@ -107,7 +117,7 @@ Feature: Geolocation
         And I should see "Want to see estimated travel times for the services below?"
 
         Given GPS will hang in the loading state
-        When I click the "Get your current location" button
+        When I click the "Get your location" button
         Then I should see "Locating you..."
 
         Given the GPS returns 37.823S 144.998E
@@ -117,11 +127,11 @@ Feature: Geolocation
         Then I should see "Found your location (in Richmond, VIC) – Travel times added below.Clear"
 
         When I click the "Clear" button
-        And I should see "Get your current location"
+        And I should see "Get your location"
 
         Given google api geocode will return location name Melbourne, VIC
         And I reload the page
-        Then I should see "Get your current location"
+        Then I should see "Get your location"
 
-        When I click the "Get your current location" button
+        When I click the "Get your location" button
         Then I should see "Found your location (in Melbourne, VIC) – Travel times added below.Clear"

@@ -14,7 +14,8 @@ function pauseToDebug() {
             stdin.setRawMode(true);
             stdin.on("data", (key) => {
                 stdin.setRawMode(false);
-                if (key === "\u0003") { // Ctrl-C
+                if (key === "\u0003") {
+                    // Ctrl-C
                     reject();
                 } else {
                     resolve();
@@ -54,6 +55,59 @@ export function getSceenshotPath(test) {
         .join(" - ");
 
     return `testing-screenshots/${slug}.png`
+}
+
+export async function showCursorPosition(driver) {
+    // based off https://stackoverflow.com/a/67180588
+    await driver.executeScript(() => {
+        const styleElm = document.createElement("style")
+        styleElm.appendChild(
+            document.createTextNode(`
+                .dot {
+                    top: 0;
+                    left: 0;
+                    background: red;
+                    position: absolute;
+                    width: 10px;
+                    height: 10px;
+                    z-index: 10000;
+                    border-radius: 50%;
+                }
+            `)
+        )
+        document.body.appendChild(styleElm)
+
+        const dotElm = document.createElement("div");
+        dotElm.className = "dot";
+        document.body.appendChild(dotElm);
+
+        document.onmousemove = handleMouseMove;
+        // eslint-disable-next-line complexity
+        function handleMouseMove(event) {
+            let eventDoc, doc, body;
+
+            // If pageX/Y aren't available and clientX/Y
+            // are, calculate pageX/Y - logic taken from jQuery
+            // Calculate pageX/Y if missing and clientX/Y available
+            if (event.pageX == null && event.clientX != null) {
+                eventDoc = (event.target && event.target.ownerDocument) ||
+                    document;
+                doc = eventDoc.documentElement;
+                body = eventDoc.body;
+
+                event.pageX = event.clientX +
+                    (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+                    (doc && doc.clientLeft || body && body.clientLeft || 0);
+                event.pageY = event.clientY +
+                    (doc && doc.scrollTop || body && body.scrollTop || 0) -
+                    (doc && doc.clientTop || body && body.clientTop || 0);
+            }
+
+            // Update dot to mouse cursor pos
+            dotElm.style.left = event.pageX + "px";
+            dotElm.style.top = event.pageY + "px";
+        }
+    });
 }
 
 export default pauseToDebug;

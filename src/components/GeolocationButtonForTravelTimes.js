@@ -16,7 +16,7 @@ type Props = {
 }
 
 /**
- * Renders the "Get your current location" catch on the results page,
+ * Renders the "Get your location" catch on the results page,
  * to allow the user to set their location if they want travel times
  * @return {JSX.Element} - Returns the travel times catch component
  */
