@@ -1,0 +1,37 @@
+@use '../styles/mixins/colours';
+
+.AddToCompareButton {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+
+    .main-container {
+        display: flex;
+        align-items: center;
+
+        .text-description {
+            color: #{colours.get-static('colour-brand-primary')};
+            color: var(--colour-brand-primary);
+            font-weight: bolder;
+            padding: 0 10px;
+        }
+
+        .SvgIcon {
+            margin-bottom: -6px;
+        }
+
+        .RemoveFromCompareIcon {
+            &.has-no-text {
+                rect {
+                    stroke: #{colours.get-static('colour-border-list-item-dark')};
+                    stroke: var(--colour-border-list-item-dark);
+                }
+
+                line {
+                    stroke: #{colours.get-static('colour-border-list-item-dark')};
+                    stroke: var(--colour-border-list-item-dark);
+                }
+            }
+        }
+    }
+}

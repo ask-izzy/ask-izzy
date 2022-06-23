@@ -29,6 +29,17 @@
     text-overflow: ellipsis;
     z-index: 2;
 
+    .widget-container {
+        margin-top: 15px;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+
+        &.showBar {
+            margin: 0;
+        }
+    }
+
     img {
         height: 30px;
     }

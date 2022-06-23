@@ -1,8 +1,12 @@
 @use '../styles/mixins/colours';
 
-.ResultListItem {
+.MyListResultItem {
     font-size: 14px;
     font-weight: 400;
+    background-color: #{colours.get-static('colour-bg-standard')};
+    background-color: var(--colour-bg-standard);
+    margin: 5px 10px;
+    border-radius: 10px;
 
     .name {
         display: block;
@@ -19,27 +23,11 @@
                 text-decoration: none;
             }
         }
-
-        .flags {
-            display: inline-block;
-            margin-bottom: 2px;
-            vertical-align: middle;
-        }
     }
 
     .title-container {
         display: flex;
         justify-content: space-between;
-
-        .compare-share-container {
-            display: flex;
-            column-gap: 20px;
-        }
-    }
-
-    .Eligibility {
-        padding-right: 0;
-        padding-left: 0;
     }
 
     .location {
@@ -76,19 +64,6 @@
         color: var(--colour-text-mid);
     }
 
-    .Accessibility {
-        margin-bottom: 15px;
-        color: #{colours.get-static('colour-text-mid')};
-        color: var(--colour-text-mid);
-
-        .ColoredIcon {
-            top: 0;
-            left: 0;
-            width: 20px;
-            height: 20px;
-        }
-    }
-
     .OpeningTimes {
         margin-bottom: 15px;
 
@@ -103,23 +78,6 @@
             left: -2px;
             width: 20px;
             height: 20px;
-        }
-    }
-
-    .TransportTime {
-        display: flex;
-    }
-
-    @media (max-width: 556px) {
-        .TransportTime {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .compare-share-container {
-            .ShareButton {
-                display: none;
-            }
         }
     }
 }

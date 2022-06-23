@@ -1,0 +1,28 @@
+@use '../styles/mixins/colours';
+
+.ShareButton {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+
+    .main-container {
+        display: flex;
+        align-items: center;
+
+        .text-description {
+            color: #{colours.get-static('colour-brand-primary')};
+            color: var(--colour-brand-primary);
+            font-weight: bolder;
+            padding: 0 10px;
+        }
+
+        .SvgIcon {
+            margin-bottom: -6px;
+
+            path {
+                fill: #{colours.get-static('colour-brand-primary')};
+                fill: var(--colour-brand-primary);
+            }
+        }
+    }
+}

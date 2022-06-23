@@ -67,10 +67,12 @@ $lightness-button-hover: 10%;
         colours.set-transparency('raw-colour-pure-black', 'global', 0.5)
     );
 
+    @include colours.define('colour-share-white', 'global', 'raw-colour-pure-white');
 
     /* Backgrounds */
 
     @include colours.define('colour-bg-standard', 'global', 'raw-colour-pure-white');
+    @include colours.define('colour-bg-gray', 'global', 'raw-colour-warm-gray');
     @include colours.define(
         'colour-bg-standard-tint-1',
         'global',
@@ -90,6 +92,7 @@ $lightness-button-hover: 10%;
     );
 
     @include colours.define('colour-bg-opposite', 'global', 'raw-colour-slate-gray');
+    @include colours.define('colour-bg-opposite-light', 'global', colours.lighten('raw-colour-warm-gray', 'global', -60%));
 
     @include colours.define('colour-bg-code', 'global', 'raw-colour-slate-gray');
     @include colours.define('colour-bg-highlight', 'global', 'raw-colour-rich-purple');

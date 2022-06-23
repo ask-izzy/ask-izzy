@@ -14,6 +14,14 @@
         }
     }
 
+    .compare-for-mobile {
+        display: none;
+    }
+
+    .compare-for-web {
+        display: inline-block;
+    }
+
     .row {
         width: 100%;
         display: grid;
@@ -31,10 +39,29 @@
                 grid-column: left-column;
             }
 
-            .BoxedText {
+            .boxed-text-container {
+                padding: 15px;
+                padding-top: 30px;
+                padding-bottom: 5px;
                 grid-column: right-column;
                 grid-row: right-column;
+
+                .BoxedText {
+                    padding: 0;
+                }
             }
+        }
+    }
+
+    .compare-share-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 10px;
+
+        &.mobile {
+            flex-direction: column;
+            row-gap: 10px;
+            margin: 0;
         }
     }
 
@@ -243,6 +270,12 @@
                     font-size: 18px;
                 }
             }
+        }
+    }
+
+    @media (max-width: 800px) {
+        .GoogleMapsLink {
+            margin-left: 0;
         }
     }
 }
