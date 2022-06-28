@@ -6,7 +6,7 @@ ARG commonPackages='apt-transport-https \
     wget \
     rsync'
 
-FROM contyard.office.infoxchange.net.au/stretch-nodejs12:latest as test
+FROM contyard.office.infoxchange.net.au/bullseye-nodejs16:latest as test
 
 ARG commonPackages
 
@@ -58,7 +58,7 @@ ENTRYPOINT ["./invoke.sh"]
 EXPOSE 8000
 
 
-FROM contyard.office.infoxchange.net.au/stretch:latest
+FROM contyard.office.infoxchange.net.au/bullseye:latest
 
 ARG commonPackages
 

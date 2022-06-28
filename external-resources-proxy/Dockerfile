@@ -2,7 +2,7 @@ ARG UID_GID=1000:1000
 ARG HOME="/tmp"
 
 # hadolint ignore=DL3007
-FROM contyard.office.infoxchange.net.au/buster-nodejs14:latest as base
+FROM contyard.office.infoxchange.net.au/bullseye-nodejs16:latest as base
 
 ARG UID_GID
 ARG HOME
