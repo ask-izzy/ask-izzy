@@ -28,6 +28,7 @@ RUN \
         sudo \
         chromium \
         build-essential \
+        libxss1 \
         python \
         libelf-dev \
         # Used for pa11y
