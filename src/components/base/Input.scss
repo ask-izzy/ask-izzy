@@ -84,7 +84,7 @@
         background-color: $bg-colour-dynamic;
         border-radius: 3px;
 
-        &:not(:focus) .text {
+        &:not(:focus) .text, &:active .text {
             display: none;
         }
 

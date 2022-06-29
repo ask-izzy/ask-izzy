@@ -14,7 +14,7 @@ export default function DebugColours() {
 
     useEffect(() => {
         const newColourVarsOriginals = {}
-        for (const colourGroup of colourVars) {
+        for (const colourGroup of getColourVars()) {
             newColourVarsOriginals[colourGroup.groupName] = {}
             for (const varName of colourGroup.vars) {
                 const colour = getComputedStyle(document.documentElement)
@@ -28,6 +28,7 @@ export default function DebugColours() {
     if (typeof window === "undefined" || !debugMode) {
         return null;
     }
+
 
     // Unselect colours every re-render so we got to sample all the colours
     // to determine what colour the buttons should be we don't accidentally
@@ -95,7 +96,7 @@ export default function DebugColours() {
             value={fillColour}
             onChange={event => setFillColour(event.target.value)}
         />
-        {colourVars.map(({groupName, vars}) => <div key={groupName}>
+        {getColourVars().map(({groupName, vars}) => <div key={groupName}>
             <h3 style={{marginBottom: "0"}}>{groupName}</h3>
             {vars.map(varName => {
                 const colourOriginal =
@@ -143,81 +144,55 @@ export default function DebugColours() {
     </details>
 }
 
-const colourVars = [
-    {
-        groupName: "Raw Colours",
-        vars: [
-            "raw-colour-rich-purple",
-            "raw-colour-plum-purple",
-            "raw-colour-bright-red",
-            "raw-colour-sunflower",
-            "raw-colour-steel-blue",
-            "raw-colour-coral-blue",
-            "raw-colour-teal",
-            "raw-colour-cyan-blue",
-            "raw-colour-slate-gray",
-            "raw-colour-warm-gray",
-            "raw-colour-warm-white",
-            "raw-colour-pure-white",
-            "raw-colour-pure-black",
-        ],
-    },
-    {
-        groupName: "Brand Palette",
-        vars: [
-            "colour-brand-primary",
-        ],
-    },
-    {
-        groupName: "Features",
-        vars: [
-            "colour-crisis",
-            "colour-input-focus-primary",
-            "colour-input-focus-overlay",
-            "colour-irreversible-action",
-            "colour-element-shadow",
-            "app-bar-shadow",
-        ],
-    },
-    {
-        groupName: "Backgrounds",
-        vars: [
-            "colour-bg-standard",
-            "colour-bg-standard-tint-1",
-            "colour-bg-standard-tint-2",
-            "colour-bg-standard-tint-3",
-            "colour-bg-callout-solid",
-            "colour-bg-code",
-            "colour-bg-highlight",
-        ],
-    },
-    {
-        groupName: "Borders",
-        vars: [
-            "colour-border-list-item",
-            "colour-border-list-item-dark",
-            "colour-border-standard-callout",
-            "colour-border-alert",
-        ],
-    },
-    {
-        groupName: "Elements",
-        vars: [
-            "colour-link",
-            "colour-link-visited",
-            "colour-button-primary",
-            "colour-button-primary-hover",
-            "colour-button-disabled",
-            "colour-interactive-icon",
-        ],
-    },
-    {
-        groupName: "Text",
-        vars: [
-            "colour-text-dark",
-            "colour-text-mid",
-            "colour-text-light",
-            "colour-text-very-light",
-        ],
-    },
-]
+function getColourVars() {
+
+    const colourVars = Array.from(document.styleSheets)
+        .filter(
+            sheet =>
+                sheet.href === null || sheet.href.startsWith(window.location.origin)
+        )
+        .reduce(
+            (acc, sheet) =>
+                (acc = [
+                    ...acc,
+                    ...Array.from(sheet.cssRules).reduce(
+                        (def, rule) =>
+                            (def =
+                                rule.selectorText === ":root"
+                                ? [
+                                    ...def,
+                                    ...Array.from(rule.style).filter(name =>
+                                        name.match(/^--(?:raw-)?colour-/)
+                                    )
+                                    ]
+                                : def),
+                        []
+                    )
+                ]),
+            []
+        )
+        .filter(
+            colourVar => !colourVar.match(/-(?:hue|saturation|lightness|lightness-decimal|alpha)$/)
+        )
+        .filter(
+            // Only include first instance of variable
+            (colourVar, index, colourVars) => colourVars.indexOf(colourVar) === index
+        );
+
+    return colourVars.reduce((groups, colourVar) => {
+        const [, groupName] = (
+            colourVar.startsWith("--raw-") ?
+                ["", "raw-colours"]
+                : colourVar.match(/^--(?:raw-)?colour-([^-]*)/)
+        ) ?? []
+        if (!groups.some(group => group.groupName === groupName)) {
+            groups.push({
+                groupName,
+                vars: [],
+            })
+        }
+        const group = groups.find(group => group.groupName === groupName)
+        group.vars.push(colourVar.replace("--", ""))
+        return groups
+    }, [])
+}

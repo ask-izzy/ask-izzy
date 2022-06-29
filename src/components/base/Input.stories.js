@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import type {
     Node as ReactNode,
     ElementConfig as ReactElementConfig,
@@ -15,14 +15,19 @@ export default {
     component: Input,
     decorators: [
         /* Set autocomplete value list if using autocomplete */
-        autocompleteDecorator,
+        customInputElementDecorator,
         /* Provide state for input value */
         (Story: Object, {parameters, args}: Object): void => {
             const [value, setValue] = useState(parameters.initialValue || "")
-            return Story({args: {...args, value, onChange: setValue}})
+            return Story({
+                args: {
+                    ...args,
+                    value,
+                    onChange: (event) => setValue(event.target.value),
+                },
+            })
         },
     ],
-    excludeStories: ["autocompleteDecorator"],
 };
 
 type InputProps = ReactElementConfig<typeof Input>
@@ -62,52 +67,46 @@ WithIconAndClearButton.args = {
     icon: <SearchIcon />,
 };
 
-export const WithAutocomplete: typeof Template = Template.bind({});
-WithAutocomplete.args = {
-    placeholder: "Try searching \"apple\"",
-};
-WithAutocomplete.parameters = {
-    autocompleteFullList: ["apple", "berry", "orange"],
+
+export const WithCustomInputElement: typeof Template = Template.bind({});
+WithCustomInputElement.parameters = {
+    useCustomInputElement: true,
 };
 
-export const WithIconAndClearButtonAndAutocomplete: typeof Template =
+export const WithIconAndClearButtonAndCustomInputElement: typeof Template =
     Template.bind({});
-WithIconAndClearButtonAndAutocomplete.args = {
+WithIconAndClearButtonAndCustomInputElement.args = {
     showClearButton: true,
     icon: <SearchIcon />,
     placeholder: "Try searching \"apple\"",
 };
-WithIconAndClearButtonAndAutocomplete.parameters = {
-    autocompleteFullList: ["apple", "berry", "orange"],
+WithIconAndClearButtonAndCustomInputElement.parameters = {
+    useCustomInputElement: true,
 };
 
-export const WithInitialValueAndAutocomplete: typeof Template =
+export const WithInitialValueAndCustomInputElement: typeof Template =
     Template.bind({});
-WithInitialValueAndAutocomplete.args = {
+WithInitialValueAndCustomInputElement.args = {
     placeholder: "Try searching \"apple\"",
 };
-WithInitialValueAndAutocomplete.parameters = {
-    autocompleteFullList: ["apple", "berry", "orange"],
+WithInitialValueAndCustomInputElement.parameters = {
+    useCustomInputElement: true,
     initialValue: "app",
 };
 
-export function autocompleteDecorator(
+
+function customInputElementDecorator(
     Story: Object,
     {parameters, args}: Object
 ): void {
-    const [autocompleteValues, setAutocompleteValues] = useState([])
-    if (!parameters.autocompleteFullList) {
+    if (!parameters.useCustomInputElement) {
         return Story()
     }
-    function onChange(inputValue) {
-        setAutocompleteValues(
-            parameters.autocompleteFullList.filter(
-                value => value.match(
-                    new RegExp(`^${escapeStringRegexp(inputValue.trim())}`, "i")
-                )
-            )
-        )
-        args.onChange?.(inputValue)
-    }
-    return Story({args: {...args, onChange, autocompleteValues}})
+    const ref = useRef(null)
+    const customInputElement = (props) =>
+        <input
+            {...props}
+            ref={ref}
+        />
+    return Story({args: {...args, customInputElement, ref}})
 }

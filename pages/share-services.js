@@ -1,5 +1,6 @@
 /* @flow */
 import * as React from "react";
+import {useState} from "react";
 import type { GetStaticProps } from "next"
 
 import ShareServices from "@/components/ShareServices"
@@ -17,5 +18,10 @@ export const getStaticProps: GetStaticProps<RouteSharedProps> = async({params}) 
 }
 
 export default function ShareServicesPage(props: RouteSharedProps): React.Node {
-    return <ShareServices />
+    const [open, setOpen] = useState(true)
+
+    return <div>
+        <button onClick={() => setOpen(true)}>Share</button>
+        {open && <ShareServices onCloseRequested={() => setOpen(false)} />}
+    </div>
 }

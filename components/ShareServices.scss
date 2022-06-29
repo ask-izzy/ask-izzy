@@ -1,10 +1,133 @@
-.ShareServices {
+@use '../src/styles/mixins/colours';
 
-    fieldset legend {
+.ShareServices {
+    border-radius: 0.5em;
+    background-color: #{colours.get-static('colour-bg-standard')};
+    background-color: var(--colour-bg-standard);
+    max-width: 700px;
+    overflow: auto;
+
+    header {
+        display: flex;
+        align-items: center;
+        margin: 1em;
+
+        h1 {
+            color: #{colours.get-static('colour-text-highlight')};
+            color: var(--colour-text-highlight);
+            flex: 1 1 auto;
+            margin: 0.3em 0;
+        }
+
+        .close {
+            border: none;
+            background-color: unset;
+            font-size: 2em;
+            color: #{colours.get-static('colour-text-mid')};
+            color: var(--colour-text-mid);
+        }
+    }
+
+    main {
+        background-color: #{colours.get-static('colour-bg-highlight')};
+        background-color: var(--colour-bg-highlight);
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
+        border-radius: 1.5em 1.5em 0 0;
+
+        nav.messageType {
+            display: flex;
+            gap: 1em;
+
+            button {
+                display: flex;
+                gap: 0.5em;
+
+                svg {
+                    align-self: center;
+                }
+            }
+        }
+
+        & > * {
+            padding: 1.3em;
+        }
+
+        form {
+            background-color: #{colours.get-static('colour-bg-highlight-tint-1')};
+            background-color: var(--colour-bg-highlight-tint-1);
+            display: grid;
+            gap: 2em;
+
+            @media ($tablet) {
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas:
+                    'left-column right-column'
+                    'left-column right-column';
+
+                .toDetails,
+                .fromDetails {
+                    grid-column: left-column;
+                }
+
+                .submitDetails {
+                    grid-column: right-column;
+                    grid-row: right-column;
+                }
+            }
+
+            .submitDetails {
+                .messagePreview {
+                    .description {
+                        font-weight: bold;
+                        margin: 0em 0 0.5em;
+                    }
+                    .messageText {
+                        background-color: #{colours.get-static('colour-bg-highlight-tint-2')};
+                        background-color: var(--colour-bg-highlight-tint-2);
+                        white-space: pre-wrap;
+                        padding: 1em;
+                        max-height: 13.5em;
+                        overflow: auto;
+                    }
+                }
+
+                .formControls {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 1em 0;
+                }
+            }
+        }
+    }
+}
+
+.FormSection {
+    legend {
+        font-size: 1.4em;
         width: unset;
         height: unset;
         position: unset;
         clip: unset;
-        margin: unset
+        margin: 0.7em 0 0.4em;
+        font-weight: bold;
+    }
+}
+
+.FormTextInput {
+    label {
+        display: inline-block;
+        margin: 0.7em 0 0.4em;
+        .title {
+            font-weight: bold;
+        }
+    }
+
+    .Input {
+        width: 100%;
+
+        input {
+            line-height: 2em;
+        }
     }
 }
