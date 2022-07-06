@@ -50,15 +50,19 @@ $scoped-static-colours: ();
     $hue: null;
     $saturation: null;
     $lightness: null;
+    $lightness-modifier-decimal: null;
     $lightness-decimal: null;
     $alpha: null;
     $static: null;
+
+    $lightness-decimal2: "";
 
     @if type_of($colour) == color {
         $whole-colour: $colour;
         $hue: color.hue($colour);
         $saturation: color.saturation($colour);
         $lightness: color.lightness($colour);
+        $lightness-modifier-decimal: math.div(color.lightness($colour), 100%);
         $lightness-decimal: math.div(color.lightness($colour), 100%);
         $alpha: color.alpha($colour);
         $static: $colour;
@@ -67,10 +71,15 @@ $scoped-static-colours: ();
     @else if type_of($colour) == map {
         $hue: map.get($colour, 'hue');
         $saturation: map.get($colour, 'saturation');
-        $lightness: map.get($colour, 'lightness');
-        $lightness-decimal: calc(map.get($colour, 'lightness') / 100%);
+        // $lightness: map.get($colour, 'lightness');
+
+        $lightness: str-replace(map.get($colour, 'lightness') + '', '--replace-with-new-name--', '--' + $name);
+        // $lightness-decimal: calc( map.get($colour, 'lightness-delta') / 100% );
+        $lightness-modifier-decimal: map.get($colour, 'lightness-modifier-decimal');
+        $lightness-decimal: map.get($colour, 'lightness-decimal');
+        $lightness-decimal2: math.div( map.get($colour, 'lightness-delta') , 100%);
         $alpha: map.get($colour, 'alpha');
-        $whole-colour: hsla($hue, $saturation, $lightness, $alpha);
+        $whole-colour: hsla(var(--#{$name}-hue), var(--#{$name}-saturation), var(--#{$name}-lightness), var(--#{$name}-alpha));
         $static: map.get($colour, 'static');
     }
 
@@ -79,6 +88,7 @@ $scoped-static-colours: ();
         $hue: var(--#{$colour}-hue);
         $saturation: var(--#{$colour}-saturation);
         $lightness: var(--#{$colour}-lightness);
+        $lightness-modifier-decimal: var(--#{$colour}-lightness-modifier-decimal);
         $lightness-decimal: var(--#{$colour}-lightness-decimal);
         $alpha: var(--#{$colour}-alpha);
         $static: get-static($colour, $scope-key);
@@ -92,7 +102,11 @@ $scoped-static-colours: ();
     --#{$name}-hue: #{$hue};
     --#{$name}-saturation: #{$saturation};
     --#{$name}-lightness: #{$lightness};
+    --#{$name}-lightness-modifier-decimal: #{$lightness-modifier-decimal};
     --#{$name}-lightness-decimal: #{$lightness-decimal};
+    --#{$name}-lightness-decimal2: #{$lightness-decimal2};
+    --#{$name}-lightness-blar: calc( 50% / 100% );
+    --#{$name}-lightness-blar2: calc( '50%' / 100% );
     --#{$name}-alpha: #{$alpha};
     --dummy-variable:
         ''#{set-static(
@@ -158,13 +172,33 @@ $scoped-static-colours: ();
     $saturation: var(#{'--' + $colour + '-saturation'});
     $lighten-amount-scale: if(
         $lightenAmount > 0,
-        '(1 - var(--#{$colour}-lightness-decimal))',
-        var(#{'--' + $colour + '-lightness-decimal'})
+        '( 100% - var(--' + $colour + '-lightness) )',
+        var(#{'--' + $colour + '-lightness'})
     );
+    // $lightness: calc(
+    //     var(#{'--' + $colour + '-lightness'}) +
+    //     ( #{$lightenAmount} * #{$lighten-amount-scale} )
+    // );
+    // $lightness: calc(
+    //     var(#{'--' + $colour + '-lightness'}) +
+    //     ( #{$lightenAmount} * 1 )
+    // );
+    $lightnessMultiplierDecimal: math.div( $lightenAmount, 100%) + 1;
+    $lightnessModifierDecimal: math.div( $lightenAmount, 100%);
+    // $lightness: calc(
+    //     var(#{'--' + $colour + '-lightness'}) * $lightnessMultiplierDecimal
+    // );
+    $blar: $lightenAmount + "";
+    // var(#{'--' + $colour + '-lightness'}) + #{$lightenAmount + ""}
+
+    // We want to scale by current lightness percentage value so if we have a colour with a lightness value of 40%
+    // and we darken it by 50% the new value will be 20%. To do that we have to scale our lighten/darken amount by
+    // the current lightness value. Unfortunately CCS doesn't let you multiple 2 percentages together so we have to
+    // convert one of them to decimal so that we can calculate this at render time.
     $lightness: calc(
-        var(#{'--' + $colour + '-lightness'}) +
-        ( #{$lightenAmount} * #{$lighten-amount-scale} )
+        var(#{'--' + $colour + '-lightness'}) + ($lightnessModifierDecimal * (#{$lighten-amount-scale}))
     );
+    // calc(var(--colour-primary-lightness) * (1 + (-0.34)) )
     $alpha: var(#{'--' + $colour + '-alpha'});
     $static: color.scale(
         get-static($colour, $scope-key),
@@ -175,6 +209,9 @@ $scoped-static-colours: ();
         hue: $hue,
         saturation: $saturation,
         lightness: $lightness,
+        lightness-modifier-decimal: $lightnessModifierDecimal,
+        lightness-delta: $lightenAmount,
+        lightness-delta2: type-of($lightenAmount),
         alpha: $alpha,
         static: $static,
     );
@@ -199,7 +236,19 @@ $scoped-static-colours: ();
         hue: $hue,
         saturation: $saturation,
         lightness: $lightness,
+        lightness-delta: 0%,
         alpha: $alpha,
         static: $static,
     );
 }
+
+// Taken from https://css-tricks.com/snippets/sass/str-replace-function/
+@function str-replace($string, $search, $replace: '') {
+    $index: str-index($string, $search);
+
+    @if $index {
+      @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+
+    @return $string;
+  }

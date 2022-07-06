@@ -1,4 +1,4 @@
-@use '../src/styles/mixins/colours';
+@use '../../src/styles/mixins/colours';
 
 .ShareServices {
     border-radius: 0.5em;
@@ -34,6 +34,13 @@
         color: #{colours.get-static('colour-text-very-light')};
         color: var(--colour-text-very-light);
         border-radius: 1.5em 1.5em 0 0;
+
+        .viaAskIzzyInfoBox {
+            --button-border: var(--colour-text-very-light) solid 1px;
+            display: flex;
+            flex-direction: column;
+        }
+
 
         nav.messageType {
             display: flex;
@@ -92,6 +99,10 @@
                     }
                 }
 
+                .recapture > div > div > div{
+                    margin: 1em auto;
+                }
+
                 .formControls {
                     display: flex;
                     justify-content: space-between;
@@ -120,6 +131,7 @@
         margin: 0.7em 0 0.4em;
         .title {
             font-weight: bold;
+            display: inline-block;
         }
     }
 
@@ -129,5 +141,12 @@
         input {
             line-height: 2em;
         }
+    }
+
+    .errorMessage {
+        color: #{colours.get-static('colour-text-error')};
+        color: var(--colour-text-error);
+        font-weight: bold;
+        margin: 0.5em;
     }
 }

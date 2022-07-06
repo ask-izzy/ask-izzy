@@ -1,0 +1,93 @@
+@use '../styles/mixins/colours';
+
+:root {
+    --button-border: ;
+}
+
+.StandardButton {
+    border: var(--button-border, 0);
+    border-radius: $rounded-border;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 36px;
+    padding: 0 0.7em;
+    -webkit-appearance: button;
+
+    &.type-primary {
+        background-color: #{colours.get-static('colour-button-primary')};
+        background-color: var(--colour-button-primary);
+        color: #{colours.get-static('colour-text-very-light')};
+        color: var(--colour-text-very-light);
+    }
+
+    svg {
+        height: 18px;
+        width: unset;
+
+        path {
+            fill: #{colours.get-static('colour-text-very-light')};
+            fill: var(--colour-text-very-light);
+        }
+    }
+
+    &.type-secondary {
+        background-color: #{colours.get-static('colour-bg-highlight-tint-1')};
+        background-color: var(--colour-bg-highlight-tint-1);
+
+        &:hover,
+        &:focus {
+            background-color: #{colours.get-static('colour-button-primary-hover')};
+            background-color: var(--colour-button-primary-hover);
+        }
+    }
+
+    &.tint-2 {
+        background-color: #{colours.get-static('colour-bg-standard')};
+        background-color: var(--colour-bg-standard);
+        color: #{colours.get-static('colour-text-highlight')};
+        color: var(--colour-text-highlight);
+
+        path {
+            fill: #{colours.get-static('colour-brand-primary')};
+            fill: var(--colour-brand-primary);
+        }
+
+        &:hover, &:focus {
+            background-color: #{colours.get-static('colour-bg-standard-tint-3')};
+            background-color: var(--colour-bg-standard-tint-3);
+        }
+
+    }
+
+    &:hover,
+    &:focus {
+        background-color: #{colours.get-static('colour-button-primary-hover')};
+        background-color: var(--colour-button-primary-hover);
+    }
+
+    &[disabled] {
+        font-weight: 500;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
+        background-color: #{colours.get-static('colour-button-disabled')};
+        background-color: var(--colour-button-disabled);
+    }
+
+    &.text-link {
+        background-color: transparent;
+        color: #{colours.get-static('colour-text-mid')};
+        color: var(--colour-text-mid);
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .prompt {
+        font-size: 14px;
+        margin-right: 10px;
+        color: #{colours.get-static('colour-text-dark')};
+        color: var(--colour-text-dark);
+    }
+}

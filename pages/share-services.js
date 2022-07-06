@@ -3,7 +3,7 @@ import * as React from "react";
 import {useState} from "react";
 import type { GetStaticProps } from "next"
 
-import ShareServices from "@/components/ShareServices"
+import ShareServices from "@/components/share/ShareServices"
 import type {RouteSharedProps} from "@/flow/routes"
 
 export const getStaticProps: GetStaticProps<RouteSharedProps> = async({params}) => {
