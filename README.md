@@ -1,6 +1,6 @@
 # Ask Izzy
 
-Ask Izzy is a website where anyone needing help can quickly and easily find relevant health and welfare services near them. It's eventually a [Next.js](https://nextjs.org/) based frontend for [Infoxchange's directory of Australian services](https://www.infoxchange.org/au/products-and-services/service-directory) (the API for this directory is known as ISS).
+Ask Izzy is a website where anyone needing help can quickly and easily find relevant health and welfare services near them. It's built with [Next.js](https://nextjs.org/) and uses [Infoxchange's directory of Australian services](https://www.infoxchange.org/au/products-and-services/service-directory) (commonly referred to as ISS).
 
 ## Getting Started
 
@@ -47,7 +47,7 @@ All linters can be run using `docker compose run --rm app lint`. You can use `li
 - **ESLint**\
   For JavaScript errors and style violations
 - **Flow.js**\
-  For static type checking. Most JavaScript in Ask Izzy is written with [Flow.js](https://flow.org/) types with Babel.js used to compile it into plan JavaScript so it can be executed by browsers. This decision was made before it was clear that TypeScript would win the the JavaScript typing wars. At some point we hope to migrate to TypeScript.
+  For static type checking. Most JavaScript in Ask Izzy is written with [Flow.js](https://flow.org/) types with Babel.js used to compile it into plain JavaScript so it can be executed by browsers. This decision was made before it was clear that TypeScript would win the the JavaScript typing wars. At some point we hope to migrate to TypeScript.
 - **stylelint**\
   Stylelint is used for linting SASS/CSS files.
 - **jsonlint**\

@@ -135,7 +135,7 @@ CMD ["dev"]
 ###############################################################################
 # Distribution                                                                #
 #                                                                             #
-# This stage contains everything necessary to sever the app and nothing more. #
+# This stage contains everything necessary to serve the app and nothing more. #
 ###############################################################################
 
 FROM base as distribution

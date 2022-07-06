@@ -1,7 +1,8 @@
 {
 	"compilerOptions": {
+        "baseUrl": ".",
 		"paths": {
-			"@/pages/*": ["/home/callumgare/repos/ask-izzy/pages/*"]
+			"@/pages/*": ["pages/*"]
 		}
 	}
 }
